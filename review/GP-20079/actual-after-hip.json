@@ -1,0 +1,166 @@
+{
+  "result": [
+    {
+      "kind": "demon",
+      "samples": [
+        {
+          "frame": 6,
+          "parts": 5,
+          "collisions": [],
+          "tune": null
+        },
+        {
+          "frame": 12,
+          "parts": 5,
+          "collisions": [
+            {
+              "pair": "armR/legR",
+              "a": "armR",
+              "b": "legR",
+              "hits": 3,
+              "total": 88,
+              "contact": [
+                -26.929,
+                -199.245,
+                -632.375
+              ],
+              "contactMeta": {
+                "skin": "zombie-skin",
+                "index": 4868,
+                "rgb": [
+                  0.02,
+                  0.02,
+                  0.01
+                ]
+              },
+              "aCenter": [
+                -26.973,
+                -198.263,
+                -632.612
+              ],
+              "bCenter": [
+                -27.045,
+                -199.263,
+                -632.316
+              ],
+              "overlap": [
+                0.659,
+                0.652,
+                0.364
+              ]
+            }
+          ],
+          "tune": null
+        },
+        {
+          "frame": 18,
+          "parts": 5,
+          "collisions": [
+            {
+              "pair": "armR/legR",
+              "a": "armR",
+              "b": "legR",
+              "hits": 3,
+              "total": 85,
+              "contact": [
+                -26.639,
+                -199.264,
+                -632.365
+              ],
+              "contactMeta": {
+                "skin": "zombie-skin",
+                "index": 4868,
+                "rgb": [
+                  0.02,
+                  0.02,
+                  0.01
+                ]
+              },
+              "aCenter": [
+                -26.689,
+                -198.29,
+                -632.631
+              ],
+              "bCenter": [
+                -26.727,
+                -199.251,
+                -632.313
+              ],
+              "overlap": [
+                0.669,
+                0.673,
+                0.363
+              ]
+            }
+          ],
+          "tune": null
+        },
+        {
+          "frame": 24,
+          "parts": 5,
+          "collisions": [],
+          "tune": null
+        }
+      ]
+    },
+    {
+      "kind": "colossus",
+      "samples": [
+        {
+          "frame": 6,
+          "parts": 5,
+          "collisions": [],
+          "tune": null
+        },
+        {
+          "frame": 12,
+          "parts": 5,
+          "collisions": [],
+          "tune": null
+        },
+        {
+          "frame": 18,
+          "parts": 5,
+          "collisions": [],
+          "tune": null
+        },
+        {
+          "frame": 24,
+          "parts": 5,
+          "collisions": [],
+          "tune": null
+        }
+      ]
+    },
+    {
+      "kind": "guardian",
+      "samples": [
+        {
+          "frame": 6,
+          "parts": 5,
+          "collisions": [],
+          "tune": null
+        },
+        {
+          "frame": 12,
+          "parts": 5,
+          "collisions": [],
+          "tune": null
+        },
+        {
+          "frame": 18,
+          "parts": 5,
+          "collisions": [],
+          "tune": null
+        },
+        {
+          "frame": 24,
+          "parts": 5,
+          "collisions": [],
+          "tune": null
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

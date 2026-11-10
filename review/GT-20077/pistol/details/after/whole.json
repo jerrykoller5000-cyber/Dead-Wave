@@ -1,0 +1,790 @@
+{
+  "loose": [],
+  "breaches": [],
+  "intersections": 87,
+  "pairs": [
+    {
+      "a": "root/pistol dust cover[1]",
+      "b": "root/group[0]/BufferGeometry[0]",
+      "at": [
+        -0.01274,
+        0.00762,
+        0.20205
+      ]
+    },
+    {
+      "a": "root/pistol rear tang[2]",
+      "b": "root/pistol dust cover[1]",
+      "at": [
+        -0.01378,
+        0.00136,
+        -0.0416
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[3]",
+      "b": "root/pistol dust cover[1]",
+      "at": [
+        0.00946,
+        -0.01327,
+        0.10727
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[4]",
+      "b": "root/pistol dust cover[1]",
+      "at": [
+        0.01182,
+        -0.01023,
+        0.11445
+      ]
+    },
+    {
+      "a": "root/BoxGeometry[5]",
+      "b": "root/pistol dust cover[1]",
+      "at": [
+        0.01033,
+        -0.0124,
+        0.12606
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[6]",
+      "b": "root/pistol dust cover[1]",
+      "at": [
+        0.01182,
+        -0.01023,
+        0.13236
+      ]
+    },
+    {
+      "a": "root/BoxGeometry[7]",
+      "b": "root/pistol dust cover[1]",
+      "at": [
+        0.01033,
+        -0.0124,
+        0.14397
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[8]",
+      "b": "root/pistol dust cover[1]",
+      "at": [
+        0.01182,
+        -0.01023,
+        0.15027
+      ]
+    },
+    {
+      "a": "root/BoxGeometry[9]",
+      "b": "root/pistol dust cover[1]",
+      "at": [
+        0.01033,
+        -0.0124,
+        0.16188
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[10]",
+      "b": "root/pistol dust cover[1]",
+      "at": [
+        0.01182,
+        -0.01023,
+        0.16818
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[11]",
+      "b": "root/pistol dust cover[1]",
+      "at": [
+        0.00962,
+        -0.01311,
+        0.1715
+      ]
+    },
+    {
+      "a": "root/pistol guard[12]",
+      "b": "root/pistol dust cover[1]",
+      "at": [
+        -0.00592,
+        -0.01169,
+        0.02107
+      ]
+    },
+    {
+      "a": "root/pistol guard root[13]",
+      "b": "root/pistol guard[12]",
+      "at": [
+        -0.00207,
+        -0.03812,
+        0.02939
+      ]
+    },
+    {
+      "a": "root/pistol trigger[14]",
+      "b": "root/pistol dust cover[1]",
+      "at": [
+        -0.00304,
+        -0.01005,
+        0.05261
+      ]
+    },
+    {
+      "a": "root/pistol trigger[14]",
+      "b": "root/pistol guard[12]",
+      "at": [
+        -0.00304,
+        -0.03666,
+        0.05571
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[15]",
+      "b": "root/pistol trigger[14]",
+      "at": [
+        -0.00103,
+        -0.02935,
+        0.04867
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[16]",
+      "b": "root/group[0]/BufferGeometry[0]",
+      "at": [
+        -0.01438,
+        0.00663,
+        0.05347
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[16]",
+      "b": "root/pistol dust cover[1]",
+      "at": [
+        -0.0143,
+        0.00276,
+        0.05355
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[17]",
+      "b": "root/pistol dust cover[1]",
+      "at": [
+        -0.01442,
+        -0.01554,
+        0.01673
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[20]",
+      "b": "root/CylinderGeometry[19]",
+      "at": [
+        -0.01581,
+        -0.01771,
+        -0.01086
+      ]
+    },
+    {
+      "a": "root/BoxGeometry[24]",
+      "b": "root/BufferGeometry[16]",
+      "at": [
+        -0.01509,
+        0.00179,
+        0.0496
+      ]
+    },
+    {
+      "a": "root/BoxGeometry[25]",
+      "b": "root/BufferGeometry[16]",
+      "at": [
+        -0.01509,
+        0.00386,
+        0.0496
+      ]
+    },
+    {
+      "a": "root/BoxGeometry[26]",
+      "b": "root/BufferGeometry[16]",
+      "at": [
+        -0.01509,
+        0.00592,
+        0.0496
+      ]
+    },
+    {
+      "a": "root/pistol grip[27]",
+      "b": "root/pistol dust cover[1]",
+      "at": [
+        -0.01171,
+        0.00304,
+        -0.02553
+      ]
+    },
+    {
+      "a": "root/pistol grip[27]",
+      "b": "root/pistol rear tang[2]",
+      "at": [
+        -0.01274,
+        -0.00149,
+        -0.02539
+      ]
+    },
+    {
+      "a": "root/pistol grip[27]",
+      "b": "root/pistol guard[12]",
+      "at": [
+        -0.0039,
+        -0.03158,
+        0.02204
+      ]
+    },
+    {
+      "a": "root/pistol grip[27]",
+      "b": "root/pistol guard root[13]",
+      "at": [
+        0.0039,
+        -0.03595,
+        0.02219
+      ]
+    },
+    {
+      "a": "root/pistol grip[27]",
+      "b": "root/BufferGeometry[17]",
+      "at": [
+        -0.01726,
+        -0.01554,
+        0.01673
+      ]
+    },
+    {
+      "a": "root/pistol grip[27]",
+      "b": "root/CylinderGeometry[18]",
+      "at": [
+        -0.01612,
+        -0.00276,
+        0.00648
+      ]
+    },
+    {
+      "a": "root/pistol grip[27]",
+      "b": "root/CylinderGeometry[19]",
+      "at": [
+        -0.01633,
+        -0.01653,
+        -0.00923
+      ]
+    },
+    {
+      "a": "root/pistol grip[27]",
+      "b": "root/BufferGeometry[20]",
+      "at": [
+        -0.01591,
+        -0.01748,
+        -0.01891
+      ]
+    },
+    {
+      "a": "root/pistol grip[27]",
+      "b": "root/CylinderGeometry[21]",
+      "at": [
+        0.01502,
+        -0.00276,
+        0.00648
+      ]
+    },
+    {
+      "a": "root/pistol grip[27]",
+      "b": "root/CylinderGeometry[22]",
+      "at": [
+        0.01509,
+        -0.01653,
+        -0.00923
+      ]
+    },
+    {
+      "a": "root/pistol grip[27]",
+      "b": "root/BufferGeometry[23]",
+      "at": [
+        0.01495,
+        -0.01748,
+        -0.01891
+      ]
+    },
+    {
+      "a": "root/group[32]/BufferGeometry[0]",
+      "b": "root/pistol dust cover[1]",
+      "at": [
+        -0.01317,
+        -0.01056,
+        0.00804
+      ]
+    },
+    {
+      "a": "root/group[32]/BufferGeometry[0]",
+      "b": "root/pistol grip[27]",
+      "at": [
+        -0.01378,
+        -0.1093,
+        -0.04134
+      ]
+    },
+    {
+      "a": "root/group[32]/CylinderGeometry[2]",
+      "b": "root/pistol grip[27]",
+      "at": [
+        -0.01447,
+        -0.02422,
+        -0.00403
+      ]
+    },
+    {
+      "a": "root/group[32]/CylinderGeometry[3]",
+      "b": "root/pistol grip[27]",
+      "at": [
+        -0.01447,
+        -0.03869,
+        -0.00851
+      ]
+    },
+    {
+      "a": "root/group[32]/CylinderGeometry[4]",
+      "b": "root/pistol grip[27]",
+      "at": [
+        -0.01447,
+        -0.05317,
+        -0.01298
+      ]
+    },
+    {
+      "a": "root/group[32]/CylinderGeometry[5]",
+      "b": "root/pistol grip[27]",
+      "at": [
+        -0.01447,
+        -0.06765,
+        -0.01746
+      ]
+    },
+    {
+      "a": "root/group[32]/CylinderGeometry[6]",
+      "b": "root/pistol grip[27]",
+      "at": [
+        -0.01447,
+        -0.08213,
+        -0.02194
+      ]
+    },
+    {
+      "a": "root/group[32]/CylinderGeometry[7]",
+      "b": "root/pistol grip[27]",
+      "at": [
+        -0.01447,
+        -0.0966,
+        -0.02642
+      ]
+    },
+    {
+      "a": "root/group[32]/CylinderGeometry[8]",
+      "b": "root/pistol grip[27]",
+      "at": [
+        0.01378,
+        -0.02422,
+        -0.00403
+      ]
+    },
+    {
+      "a": "root/group[32]/CylinderGeometry[9]",
+      "b": "root/pistol grip[27]",
+      "at": [
+        0.01378,
+        -0.03869,
+        -0.00851
+      ]
+    },
+    {
+      "a": "root/group[32]/CylinderGeometry[10]",
+      "b": "root/pistol grip[27]",
+      "at": [
+        0.01378,
+        -0.05317,
+        -0.01298
+      ]
+    },
+    {
+      "a": "root/group[32]/CylinderGeometry[11]",
+      "b": "root/pistol grip[27]",
+      "at": [
+        0.01378,
+        -0.06765,
+        -0.01746
+      ]
+    },
+    {
+      "a": "root/group[32]/CylinderGeometry[12]",
+      "b": "root/pistol grip[27]",
+      "at": [
+        0.01378,
+        -0.08213,
+        -0.02194
+      ]
+    },
+    {
+      "a": "root/group[32]/CylinderGeometry[13]",
+      "b": "root/pistol grip[27]",
+      "at": [
+        0.01378,
+        -0.0966,
+        -0.02642
+      ]
+    },
+    {
+      "a": "root/group[33]/BufferGeometry[0]",
+      "b": "root/group[0]/BufferGeometry[0]",
+      "at": [
+        0.01203,
+        0.0079,
+        0.17735
+      ]
+    },
+    {
+      "a": "root/group[33]/BufferGeometry[0]",
+      "b": "root/pistol dust cover[1]",
+      "at": [
+        0.01257,
+        0.00413,
+        0.17789
+      ]
+    },
+    {
+      "a": "root/group[33]/BufferGeometry[1]",
+      "b": "root/group[0]/BufferGeometry[0]",
+      "at": [
+        0.01055,
+        0.02294,
+        0.11594
+      ]
+    },
+    {
+      "a": "root/group[33]/BufferGeometry[2]",
+      "b": "root/group[0]/BufferGeometry[0]",
+      "at": [
+        0.00641,
+        0.03259,
+        0.0815
+      ]
+    },
+    {
+      "a": "root/group[33]/BufferGeometry[3]",
+      "b": "root/group[0]/BufferGeometry[0]",
+      "at": [
+        0.00835,
+        0.04684,
+        0.06621
+      ]
+    },
+    {
+      "a": "root/group[33]/BufferGeometry[3]",
+      "b": "root/group[0]/BoxGeometry[49]",
+      "at": [
+        0.00024,
+        0.05097,
+        0.0496
+      ]
+    },
+    {
+      "a": "root/group[33]/BufferGeometry[4]",
+      "b": "root/group[0]/BufferGeometry[0]",
+      "at": [
+        0,
+        0.03444,
+        -0.01378
+      ]
+    },
+    {
+      "a": "root/group[33]/BufferGeometry[4]",
+      "b": "root/group[33]/BufferGeometry[2]",
+      "at": [
+        -0.00621,
+        0.02701,
+        0.06222
+      ]
+    },
+    {
+      "a": "root/group[33]/BufferGeometry[4]",
+      "b": "root/group[33]/BufferGeometry[3]",
+      "at": [
+        0.00166,
+        0.04398,
+        0.06222
+      ]
+    },
+    {
+      "a": "root/group[33]/CylinderGeometry[6]",
+      "b": "root/group[0]/BufferGeometry[0]",
+      "at": [
+        0.0062,
+        0.01171,
+        0.21182
+      ]
+    },
+    {
+      "a": "root/group[33]/CylinderGeometry[7]",
+      "b": "root/group[0]/BufferGeometry[0]",
+      "at": [
+        0,
+        0.02604,
+        0.2123
+      ]
+    },
+    {
+      "a": "root/group[33]/CylinderGeometry[7]",
+      "b": "root/group[33]/BufferGeometry[4]",
+      "at": [
+        0,
+        0.02604,
+        0.2123
+      ]
+    },
+    {
+      "a": "root/group[33]/CylinderGeometry[8]",
+      "b": "root/group[33]/BufferGeometry[4]",
+      "at": [
+        0,
+        0.027,
+        0.21357
+      ]
+    },
+    {
+      "a": "root/group[33]/CylinderGeometry[8]",
+      "b": "root/group[33]/CylinderGeometry[7]",
+      "at": [
+        0,
+        0.027,
+        0.21357
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[35]",
+      "b": "root/pistol grip[27]",
+      "at": [
+        0,
+        -0.02642,
+        -0.03099
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[42]",
+      "b": "root/pistol dust cover[1]",
+      "at": [
+        -0.00758,
+        -0.01791,
+        0.01929
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[42]",
+      "b": "root/pistol guard[12]",
+      "at": [
+        -0.00253,
+        -0.02572,
+        0.02618
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[42]",
+      "b": "root/pistol guard root[13]",
+      "at": [
+        -0.00882,
+        -0.02466,
+        0.02623
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[42]",
+      "b": "root/pistol grip[27]",
+      "at": [
+        -0.00895,
+        -0.02359,
+        0.01956
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[43]",
+      "b": "root/pistol dust cover[1]",
+      "at": [
+        -0.0124,
+        -0.02047,
+        0.0132
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[43]",
+      "b": "root/pistol guard[12]",
+      "at": [
+        0.00276,
+        -0.0147,
+        0.0225
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[43]",
+      "b": "root/pistol guard root[13]",
+      "at": [
+        -0.00827,
+        -0.03306,
+        0.02755
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[43]",
+      "b": "root/pistol grip[27]",
+      "at": [
+        -0.0124,
+        -0.02047,
+        0.0132
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[43]",
+      "b": "root/BufferGeometry[42]",
+      "at": [
+        -0.00044,
+        -0.01951,
+        0.03045
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[44]",
+      "b": "root/BufferGeometry[16]",
+      "at": [
+        -0.01625,
+        0.00083,
+        0.05156
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[44]",
+      "b": "root/BoxGeometry[24]",
+      "at": [
+        -0.01573,
+        0.00124,
+        0.03306
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[44]",
+      "b": "root/BoxGeometry[25]",
+      "at": [
+        -0.01573,
+        0.00331,
+        0.03306
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[44]",
+      "b": "root/BoxGeometry[26]",
+      "at": [
+        -0.01573,
+        0.00537,
+        0.03306
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[46]",
+      "b": "root/BufferGeometry[17]",
+      "at": [
+        -0.01616,
+        -0.01471,
+        0.0185
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[46]",
+      "b": "root/pistol grip[27]",
+      "at": [
+        -0.01626,
+        -0.01447,
+        0.00654
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[47]",
+      "b": "root/pistol grip[27]",
+      "at": [
+        0.01515,
+        -0.01447,
+        0.00654
+      ]
+    },
+    {
+      "a": "root/group[48]/CylinderGeometry[0]",
+      "b": "root/pistol grip[27]",
+      "at": [
+        -0.01681,
+        -0.0124,
+        0.01329
+      ]
+    },
+    {
+      "a": "root/group[48]/CylinderGeometry[1]",
+      "b": "root/pistol grip[27]",
+      "at": [
+        0.01584,
+        -0.0124,
+        0.01329
+      ]
+    },
+    {
+      "a": "root/BoxGeometry[49]",
+      "b": "root/group[0]/BufferGeometry[0]",
+      "at": [
+        0.00024,
+        0.00861,
+        0.14466
+      ]
+    },
+    {
+      "a": "root/BoxGeometry[49]",
+      "b": "root/group[33]/BufferGeometry[0]",
+      "at": [
+        0.00024,
+        0.00827,
+        0.14466
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[50]",
+      "b": "root/pistol guard root[13]",
+      "at": [
+        0.00699,
+        -0.03342,
+        0.02044
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[50]",
+      "b": "root/pistol grip[27]",
+      "at": [
+        0.00699,
+        -0.03342,
+        0.02044
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[51]",
+      "b": "root/pistol grip[27]",
+      "at": [
+        0.00717,
+        -0.05156,
+        0.01256
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[52]",
+      "b": "root/pistol grip[27]",
+      "at": [
+        0.00699,
+        -0.07133,
+        0.00872
+      ]
+    }
+  ]
+}

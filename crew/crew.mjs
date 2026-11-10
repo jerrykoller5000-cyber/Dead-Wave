@@ -61,6 +61,7 @@
 //   crew/QUESTIONS.md        questions for Jerry. Append only; Claude or Jerry closes them.
 import fs from 'node:fs';
 import path from 'node:path';
+import os from 'node:os';
 import { fileURLToPath } from 'node:url';
 import { parseNotes, reviewState, notesStub } from './notes.mjs';
 
@@ -672,6 +673,52 @@ function checkReport(rep) {
 }
 
 const [cmd, agent, ...rest] = process.argv.slice(2);
+
+// CL-355 (Jerry, 10 Nov: "they are probably not checking the board like I asked regularly"): the board comes to the agent.
+// Whatever command it runs, it is told what waits for it: open requests (oldest first, with their age from the log) and
+// what is new for it since it last looked (FYIs too; counted per agent in the OS temp folder). URGENT titles first.
+// (Printed on stderr: scripts that read a command's output, like `newid | tail -1`, stay clean.)
+function waitingFor(who, { quietIfNone = true } = {}) {
+  if (!AGENTS[who]) return;
+  let all = [];
+  try { all = parseRequests(read(requestsPath)).filter((r) => r.to.includes(who) || r.to.includes('all')); } catch { return; }
+  const today = new Date(Date.now() - 864e5).toISOString().slice(0, 10);
+  const open = all.filter((r) => r.status === 'OPEN' && r.date >= today);
+  const memoPath = path.join(os.tmpdir(), `grave-shift-seen-${who}.json`);
+  let seen = null; try { seen = JSON.parse(fs.readFileSync(memoPath, 'utf8')).count; } catch { seen = null; }
+  const fresh = (seen === null ? all.filter((r) => r.date >= today).slice(-4) : all.slice(seen)).filter((r) => !open.includes(r));
+  try { fs.writeFileSync(memoPath, JSON.stringify({ count: all.length, at: Date.now() })); } catch { /* best effort */ }
+  if (!open.length && !fresh.length) { if (!quietIfNone) console.error(`Nothing waiting for ${AGENTS[who]}.`); return; }
+  let logText = ''; try { logText = read(logPath); } catch { logText = ''; }
+  const ageOf = (r) => {
+    const i = logText.lastIndexOf(r.title.slice(0, 60)); if (i < 0) return '';
+    const m = /- (\d{4}-\d\d-\d\dT\d\d:\d\dZ)[^\n]*$/.exec(logText.slice(Math.max(0, logText.lastIndexOf('\n', i)), i));
+    const t = m ? Date.parse(m[1].replace('Z', ':00Z')) : NaN; if (!Number.isFinite(t)) return '';
+    const min = Math.round((Date.now() - t) / 60000); return min >= 0 ? ` (${min} min)` : '';
+  };
+  const urgentFirst = (a, b) => (/URGENT/i.test(b.title) ? 1 : 0) - (/URGENT/i.test(a.title) ? 1 : 0);
+  const line = (r) => `   ${/URGENT/i.test(r.title) ? '!!' : ' -'} from ${r.from}${ageOf(r)}: ${r.title}`;
+  console.error('\n' + '─'.repeat(78));
+  if (open.length) {
+    console.error(`WAITING FOR YOU, ${AGENTS[who]}: ${open.length} request${open.length > 1 ? 's' : ''} unanswered`);
+    for (const r of [...open].sort(urgentFirst)) console.error(line(r));
+    console.error(`   Answer now: node crew/crew.mjs reply ${who} "<words from its title>" DONE|WONT|LATER|NOTE "<one line>"`);
+  }
+  if (fresh.length) {
+    console.error(`NEW FOR YOU since you last looked (${fresh.length}; read them in handoffs/requests.md, newest at the bottom):`);
+    for (const r of fresh.slice(-8).sort(urgentFirst)) console.error(line(r));
+  }
+  console.error('─'.repeat(78));
+}
+{
+  const who = cmd === 'slot' ? process.argv[4] : cmd === 'review' ? process.argv[5] : agent;
+  const shows = ['in', 'out', 'note', 'wait', 'newid', 'request', 'reply', 'reviewed', 'next', 'slot'];
+  if (cmd === 'slot' && ['run', 'request', 'wait'].includes(process.argv[3]) && AGENTS[who]) waitingFor(who);       // before the wait for its turn
+  else if (shows.includes(cmd) && cmd !== 'slot' && AGENTS[who]) process.on('exit', () => { try { waitingFor(who); } catch { /* never break a command */ } });
+  else if (['me', 'standby', 'requests'].includes(cmd) && AGENTS[who]) {   // these show the requests themselves: just mark them seen
+    try { const n = parseRequests(read(requestsPath)).filter((r) => r.to.includes(who) || r.to.includes('all')).length; fs.writeFileSync(path.join(os.tmpdir(), `grave-shift-seen-${who}.json`), JSON.stringify({ count: n, at: Date.now() })); } catch { /* best effort */ }
+  }
+}
 const VALUE_FLAGS = ['--touch', '--report', '--next', '--blocked', '--model', '--review', '--body-file', '--version', '--before', '--days'];
 const positional = rest.filter((x, i) => !x.startsWith('--') && !(i > 0 && VALUE_FLAGS.includes(rest[i - 1])));
 

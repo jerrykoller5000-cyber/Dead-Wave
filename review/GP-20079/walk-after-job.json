@@ -1,0 +1,109 @@
+{
+  "shots": [
+    {
+      "target": "zombie.shambler:walk",
+      "view": "side",
+      "margin": 1.6,
+      "size": "960x960",
+      "wait": 350
+    },
+    {
+      "target": "zombie.feral:walk",
+      "view": "side",
+      "margin": 1.6,
+      "size": "960x960",
+      "wait": 350
+    },
+    {
+      "target": "zombie.leaper:walk",
+      "view": "side",
+      "margin": 1.6,
+      "size": "960x960",
+      "wait": 350
+    },
+    {
+      "target": "zombie.spider:walk",
+      "view": "side",
+      "margin": 1.6,
+      "size": "960x960",
+      "wait": 350
+    },
+    {
+      "target": "zombie.drowned:walk",
+      "view": "side",
+      "margin": 1.6,
+      "size": "960x960",
+      "wait": 350
+    },
+    {
+      "target": "zombie.military:walk",
+      "view": "side",
+      "margin": 1.6,
+      "size": "960x960",
+      "wait": 350
+    },
+    {
+      "target": "zombie.brute:walk",
+      "view": "side",
+      "margin": 1.6,
+      "size": "960x960",
+      "wait": 350
+    },
+    {
+      "target": "zombie.spitter:walk",
+      "view": "side",
+      "margin": 1.6,
+      "size": "960x960",
+      "wait": 350
+    },
+    {
+      "target": "zombie.screamer:walk",
+      "view": "side",
+      "margin": 1.6,
+      "size": "960x960",
+      "wait": 350
+    },
+    {
+      "target": "zombie.bomber:walk",
+      "view": "side",
+      "margin": 1.6,
+      "size": "960x960",
+      "wait": 350
+    },
+    {
+      "target": "zombie.demon:walk",
+      "view": "side",
+      "margin": 1.6,
+      "size": "960x960",
+      "wait": 350
+    },
+    {
+      "target": "zombie.colossus:walk",
+      "view": "side",
+      "margin": 1.6,
+      "size": "960x960",
+      "wait": 350
+    },
+    {
+      "target": "zombie.guardian:walk",
+      "view": "side",
+      "margin": 1.6,
+      "size": "960x960",
+      "wait": 350
+    },
+    {
+      "target": "zombie.caveguard:walk",
+      "view": "side",
+      "margin": 1.6,
+      "size": "960x960",
+      "wait": 350
+    }
+  ],
+  "view": "side",
+  "margin": 1.6,
+  "wait": 350,
+  "size": "960x960",
+  "time": "noon",
+  "out": "review/GP-20079/walk-after/",
+  "cols": 7
+}

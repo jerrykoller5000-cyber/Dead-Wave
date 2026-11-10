@@ -112,7 +112,7 @@ export function makeM4Model(ctx) {
   K.slab([[-0.172, 0.0], [0.13, 0.0], [0.13, -0.028], [0.118, -0.042], [0.117, -0.112], [0.132, -0.13], [-0.016, -0.13], [-0.004, -0.112],
           [-0.006, -0.064], [-0.03, -0.058], [-0.1, -0.058], [-0.16, -0.05], [-0.172, -0.03]], LW, gunBody, { bevel: 0.005, segs: 2 });
   for (const sx of [-1, 1]) D.groove(gun, { x: sx * LW / 2, y: -0.03, z: 0.0, axis: 'x', side: sx, along: 'z', len: 0.1, w: 0.0008 });   // the housing's machined step
-  for (const z of [-0.15, 0.115]) D.pin(gun, 0, -0.012, z, { axis: 'x', len: LW, r: 0.0045, proud: 0.0015 });                          // the takedown and pivot pins
+  for (const z of [-0.15, 0.115]) D.pin(gun, 0, -0.012, z, { axis: 'x', len: LW, r: 0.0045, proud: 0.0015, caps: true });                          // the takedown and pivot pins
   K.slab(gunBand([[-0.11, -0.012], [-0.08, -0.03]], 0.004), 0.004, gunDark, { x: -LW / 2 - 0.001, bevel: 0.001 });                    // the selector lever
   K.cyl(0.0075, 0.0075, 0.004, gunDark, -LW / 2 - 0.001, -0.012, -0.11, null, 10, 'x');                                                // its axle's boss
   for (const [ry, rz] of [[-0.003, -0.126], [0.0, -0.11], [-0.003, -0.094]]) D.screw(gun, -LW / 2 + 0.0012, ry + 0.005, rz, { axis: 'x', side: -1, r: 0.0015, kind: 'button', mat: gunMid });   // the safe/semi/auto marks
@@ -279,8 +279,8 @@ export function makeAkModel(ctx) {
     D.groove(gun, { x: sx * HW, y: 0.004, z: 0.2, axis: 'x', side: sx, along: 'y', len: 0.05, w: 0.0007 });   // the front trunnion's seam
     K.box(0.003, 0.016, 0.07, gunBody, sx * (HW + 0.0005), 0.0, 0.07, 0, 0, 0, null, 0.0012);                 // the dimple over the magazine well, as a pressed boss
   }
-  D.pin(gun, 0, 0.0, -0.12, { axis: 'x', len: 2 * HW, r: 0.003, mat: gunDark });   // the hammer pin
-  D.pin(gun, 0, -0.006, -0.06, { axis: 'x', len: 2 * HW, r: 0.003, mat: gunDark });  // the trigger pin
+  D.pin(gun, 0, 0.0, -0.12, { axis: 'x', len: 2 * HW, r: 0.003, mat: gunDark, caps: true });   // the hammer pin
+  D.pin(gun, 0, -0.006, -0.06, { axis: 'x', len: 2 * HW, r: 0.003, mat: gunDark, caps: true });  // the trigger pin
   // Removable side bracket. Its shelf supports the short optic rail at y=.085.
   const opticSeat = K.group(0, 0, 0);
   opticSeat.name = 'side optic bracket'; opticSeat.visible = false;
@@ -362,7 +362,10 @@ export function makeAkModel(ctx) {
   K.slab([[-0.252, 0.029], [-0.218, 0.029], [-0.218, -0.029], [-0.252, -0.029]], 2 * HW + 0.001, gunBody, { bevel: 0.0025, parent: stock });   // the rear trunnion's sleeve
   for (const sx of [-1, 1]) for (const ry of [0.014, -0.014]) D.rivet(stock, sx * (HW + 0.0005), ry, -0.236, { axis: 'x', side: sx, r: 0.0032 });
   K.slab([[-0.592, 0.0], [-0.573, -0.004], [-0.579, -0.152], [-0.597, -0.156]], 0.056, gunDark, { bevel: 0.003, parent: stock });   // the buttplate
-  D.screw(stock, 0, -0.03, -0.593, { axis: 'z', side: -1, r: 0.003, kind: 'slot' }); D.screw(stock, 0, -0.125, -0.593, { axis: 'z', side: -1, r: 0.003, kind: 'slot' });   // its screws
+  for (const y of [-0.03, -0.125]) {
+    const surfaceZ = -0.592 + (y - 0.003) * (0.005 / 0.156);
+    D.screw(stock, 0, y, surfaceZ, { axis: 'z', side: -1, r: 0.003, kind: 'slot' });
+  }
   K.box(0.022, 0.03, 0.016, gunDark, 0, -0.06, -0.593, 0, 0, 0, stock, 0.002);                     // the trapdoor
   for (const sx of [-1, 1]) {
     K.slab(gunBand([[-0.32, -0.035], [-0.386, -0.049], [-0.472, -0.056], [-0.535, -0.049]], 0.0015), 0.002, woodDark, { x: sx * 0.023, bevel: 0, parent: stock });
@@ -392,7 +395,7 @@ export function makeAkModel(ctx) {
   K.slab(gunBand([[0.235, 0.047], [0.258, 0.052], [0.276, 0.061]], 0.0025), 0.003, gunMid, { x: 0.022, bevel: 0.0007 });
   K.box(0.007, 0.005, 0.006, gunDark, 0.023, 0.061, 0.276, 0, 0, 0, null, 0.001);
   K.slab([[0.595, 0.04], [0.645, 0.036], [0.645, -0.02], [0.595, -0.022]], 0.03, gunMid, { bevel: 0.003 });   // the gas block
-  D.pin(gun, 0, 0.012, 0.62, { axis: 'x', len: 0.03, r: 0.002 });
+  D.pin(gun, 0, 0.012, 0.62, { axis: 'x', len: 0.03, r: 0.002, caps: true });
   // Barrel and cleaning rod; the front sight tower with its hood; the bayonet lug; the slant brake. (GB-259: the post's tip at the sight line.)
   K.lathe([[0, 0.5], [0.0125, 0.5], [0.0125, 0.6], [0.011, 0.608], [0.011, 0.755], [0, 0.755]], gunAccent, { y: -0.005, seg: 12 });
   K.lathe([[0, 0.53], [0.003, 0.53], [0.003, 0.715], [0.005, 0.719], [0.005, 0.729], [0, 0.729]], gunDark, { y: -0.026, seg: 6 });
@@ -459,7 +462,7 @@ export function makeAa12Model(ctx) {
   // The carry handle: one uninterrupted top and a clear opening under it; the rear sight's aperture ring at 0.168, the
   // sight line (GB-259/J20); two sling loops.
   K.slab(gunBand([[-0.17, 0.09], [-0.153, 0.143], [-0.138, 0.151], [0.188, 0.151], [0.217, 0.13], [0.225, 0.09]], 0.009), 0.04, gunDark, { bevel: 0.003 });
-  for (const z of [-0.158, 0.211]) D.pin(gun, 0, 0.108, z, { axis: 'x', len: 0.04, r: 0.0035, proud: 0.001 });
+  for (const z of [-0.158, 0.211]) D.pin(gun, 0, 0.108, z, { axis: 'x', len: 0.04, r: 0.0035, proud: 0.001, caps: z === -0.158 });
   K.box(0.025, 0.007, 0.025, gunDark, 0, 0.156, -0.12, 0, 0, 0, null, 0.002);
   K.tor(0.009, 0.003, gunMid, 0, 0.168, -0.12, 0, 0, 0, null, Math.PI * 2, 12);
   for (const sx of [-1, 1]) D.screw(gun, sx * 0.02, 0.142, 0.06, { axis: 'x', side: sx, r: 0.003, kind: 'slot' });   // the handle's clamp screws
@@ -649,7 +652,7 @@ export function makeShotgunModel(ctx) {
   K.box(0.022, 0.003, 0.062, gunMetal, 0, -0.0265, 0.12, 0, 0, 0, null, 0.001);   // the carrier
   K.box(0.004, 0.004, 0.02, gunDark, 0.012, -0.027, 0.1);                           // the shell latch
   // The receiver's cross pins (two trigger-plate pins), the stamped lines, the serial band, the safety's cross bolt.
-  for (const z of [-0.012, 0.05]) D.pin(gun, 0, -0.012, z, { axis: 'x', len: 2 * HW, r: 0.0035, mat: gunDark });
+  for (const z of [-0.012, 0.05]) D.pin(gun, 0, -0.012, z, { axis: 'x', len: 2 * HW, r: 0.0035, mat: gunDark, caps: true });
   for (const sx of [-1, 1]) {
     D.groove(gun, { x: sx * HW, y: 0.023, z: 0.1, axis: 'x', side: sx, along: 'z', len: 0.24, w: 0.0007 });     // the top edge's stamping line
     D.groove(gun, { x: sx * HW, y: -0.018, z: 0.1, axis: 'x', side: sx, along: 'z', len: 0.24, w: 0.0007 });   // the lower line
@@ -877,7 +880,10 @@ export function makeSniperModel(ctx) {
   for (const sx of [-1, 1]) K.box(0.005, 0.14, 0.009, gunMid, sx * 0.028, -0.022, -0.593, 0, 0, 0, stock, 0.002);   // pad-height slider tracks
   K.box(0.006, 0.015, 0.018, gunDark, 0.033, -0.032, -0.6, 0, 0, 0, stock, 0.002);   // right-side pad latch
   for (const sx of [-1, 1]) {
-    for (const [z, y] of [[-0.29, 0.025], [-0.29, -0.025], [-0.584, 0.052], [-0.588, -0.081]]) D.screw(stock, sx * 0.028, y, z, { axis: 'x', side: sx, r: 0.004, kind: 'hex' });
+    for (const [z, y] of [[-0.29, 0.025], [-0.29, -0.025], [-0.584, 0.052], [-0.588, -0.081]]) {
+      const diagonal = z === -0.29 && y < 0;
+      D.screw(stock, sx * (diagonal ? 0.0285 : 0.028), y, z, { axis: 'x', side: sx, r: 0.004, head: diagonal ? 0.0011 : 0.0016, kind: 'hex' });
+    }
     K.slab(gunBand([[-0.309, -0.05], [-0.444, -0.076], [-0.564, -0.098]], 0.002), 0.003, gunBody, { x: sx * 0.025, bevel: 0.001, parent: stock });
   }
   stock.position.z = -0.26;
@@ -908,7 +914,7 @@ export function makeSniperModel(ctx) {
   K.box(0.031, 0.014, 0.34, gunDark, 0, 0.074, -0.02, 0, 0, 0, null, 0.002);   // the rail's base on the action's flat
   K.box(0.054, 0.054, 0.104, gunBody, 0, 0.045, -0.184, 0, 0, 0, null, 0.005);   // the rear bridge, the action's width
   K.box(0.004, 0.026, 0.1, gunRubber, 0.0265, 0.055, -0.18, 0, 0, 0, null, 0.001);   // the handle notch
-  for (const z of [-0.225, -0.144]) D.screw(gun, 0.0255, 0.035, z, { axis: 'x', side: 1, r: 0.0028, kind: 'hex' });   // the bridge's bedding screws
+  for (const z of [-0.225, -0.144]) D.screw(gun, 0.0259, 0.035, z, { axis: 'x', side: 1, r: 0.0028, head: 0.0012, kind: 'hex' });   // the bridge's bedding screws
   K.lathe([[0, -0.3], [0.014, -0.3], [0.02, -0.29], [0.022, -0.27], [0, -0.27]], gunDark, { y: 0.045, seg: 14 });
   K.box(0.05, 0.03, 0.03, gunDark, 0, 0.012, 0.12, 0, 0, 0, null, 0.004);
   K.rail(0.34, 0, 0.085, -0.02, null, 0.031);

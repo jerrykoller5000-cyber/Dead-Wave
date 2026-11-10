@@ -1,0 +1,828 @@
+{
+  "result": [
+    {
+      "kind": "colossus",
+      "samples": [
+        {
+          "frame": 6,
+          "parts": 5,
+          "collisions": [
+            {
+              "pair": "armL/head",
+              "a": "armL",
+              "b": "head",
+              "hits": 6,
+              "total": 39,
+              "contact": [
+                -26.87,
+                -196.109,
+                -631.839
+              ],
+              "contactMeta": {
+                "skin": "zombie-skin",
+                "index": 10088,
+                "rgb": [
+                  0.07,
+                  0.07,
+                  0.06
+                ]
+              },
+              "aCenter": [
+                -27.139,
+                -197.131,
+                -631.065
+              ],
+              "bCenter": [
+                -27.197,
+                -196.165,
+                -632.085
+              ],
+              "overlap": [
+                0.822,
+                0.958,
+                0.334
+              ]
+            }
+          ],
+          "tune": {
+            "zero": [
+              {
+                "position": 0.45,
+                "roll": 0.5,
+                "pitch": 0,
+                "elbow": 0,
+                "n": 0
+              },
+              {
+                "position": 0.45,
+                "roll": 0.5,
+                "pitch": 0,
+                "elbow": 0.3,
+                "n": 0
+              },
+              {
+                "position": 0.45,
+                "roll": 0.5,
+                "pitch": 0,
+                "elbow": 0.6,
+                "n": 0
+              },
+              {
+                "position": 0.45,
+                "roll": 0.5,
+                "pitch": 0.3,
+                "elbow": 0,
+                "n": 0
+              },
+              {
+                "position": 0.45,
+                "roll": 0.5,
+                "pitch": 0.3,
+                "elbow": 0.3,
+                "n": 0
+              },
+              {
+                "position": 0.45,
+                "roll": 0.5,
+                "pitch": 0.3,
+                "elbow": 0.6,
+                "n": 0
+              }
+            ],
+            "best": [
+              {
+                "position": 0.45,
+                "roll": 0.5,
+                "pitch": 0,
+                "elbow": 0,
+                "n": 0
+              },
+              {
+                "position": 0.45,
+                "roll": 0.5,
+                "pitch": 0,
+                "elbow": 0.3,
+                "n": 0
+              },
+              {
+                "position": 0.45,
+                "roll": 0.5,
+                "pitch": 0,
+                "elbow": 0.6,
+                "n": 0
+              },
+              {
+                "position": 0.45,
+                "roll": 0.5,
+                "pitch": 0.3,
+                "elbow": 0,
+                "n": 0
+              },
+              {
+                "position": 0.45,
+                "roll": 0.5,
+                "pitch": 0.3,
+                "elbow": 0.3,
+                "n": 0
+              },
+              {
+                "position": 0.45,
+                "roll": 0.5,
+                "pitch": 0.3,
+                "elbow": 0.6,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.1,
+                "pitch": -0.3,
+                "elbow": 0,
+                "n": 1
+              },
+              {
+                "position": 0.15,
+                "roll": 0.1,
+                "pitch": -0.3,
+                "elbow": 0.3,
+                "n": 1
+              }
+            ]
+          }
+        },
+        {
+          "frame": 12,
+          "parts": 5,
+          "collisions": [
+            {
+              "pair": "armL/head",
+              "a": "armL",
+              "b": "head",
+              "hits": 2,
+              "total": 37,
+              "contact": [
+                -26.808,
+                -196.341,
+                -631.627
+              ],
+              "contactMeta": {
+                "skin": "zombie-skin",
+                "index": 8060,
+                "rgb": [
+                  0.11,
+                  0.04,
+                  0.03
+                ]
+              },
+              "aCenter": [
+                -26.722,
+                -197.225,
+                -631.029
+              ],
+              "bCenter": [
+                -26.753,
+                -196.183,
+                -632.064
+              ],
+              "overlap": [
+                0.808,
+                0.938,
+                0.316
+              ]
+            },
+            {
+              "pair": "armL/legL",
+              "a": "armL",
+              "b": "legL",
+              "hits": 3,
+              "total": 47,
+              "contact": [
+                -26.81,
+                -198.12,
+                -631.489
+              ],
+              "contactMeta": {
+                "skin": "zombie-skin",
+                "index": 15428,
+                "rgb": [
+                  0.23,
+                  0.08,
+                  0.06
+                ]
+              },
+              "aCenter": [
+                -26.722,
+                -197.225,
+                -631.029
+              ],
+              "bCenter": [
+                -26.614,
+                -198.971,
+                -631.647
+              ],
+              "overlap": [
+                1.328,
+                0.774,
+                0.629
+              ]
+            }
+          ],
+          "tune": {
+            "zero": [
+              {
+                "position": 0.15,
+                "roll": 0.3,
+                "pitch": 0,
+                "elbow": 0,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.3,
+                "pitch": 0,
+                "elbow": 0.3,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.3,
+                "pitch": 0,
+                "elbow": 0.6,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.3,
+                "pitch": 0.3,
+                "elbow": 0,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.3,
+                "pitch": 0.3,
+                "elbow": 0.3,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.3,
+                "pitch": 0.3,
+                "elbow": 0.6,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.5,
+                "pitch": -0.3,
+                "elbow": 0,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.5,
+                "pitch": -0.3,
+                "elbow": 0.3,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.5,
+                "pitch": -0.3,
+                "elbow": 0.6,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.5,
+                "pitch": 0,
+                "elbow": 0,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.5,
+                "pitch": 0,
+                "elbow": 0.3,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.5,
+                "pitch": 0,
+                "elbow": 0.6,
+                "n": 0
+              }
+            ],
+            "best": [
+              {
+                "position": 0.15,
+                "roll": 0.3,
+                "pitch": 0,
+                "elbow": 0,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.3,
+                "pitch": 0,
+                "elbow": 0.3,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.3,
+                "pitch": 0,
+                "elbow": 0.6,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.3,
+                "pitch": 0.3,
+                "elbow": 0,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.3,
+                "pitch": 0.3,
+                "elbow": 0.3,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.3,
+                "pitch": 0.3,
+                "elbow": 0.6,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.5,
+                "pitch": -0.3,
+                "elbow": 0,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.5,
+                "pitch": -0.3,
+                "elbow": 0.3,
+                "n": 0
+              }
+            ]
+          }
+        },
+        {
+          "frame": 18,
+          "parts": 5,
+          "collisions": [
+            {
+              "pair": "armL/legL",
+              "a": "armL",
+              "b": "legL",
+              "hits": 8,
+              "total": 43,
+              "contact": [
+                -26.786,
+                -198.374,
+                -631.459
+              ],
+              "contactMeta": {
+                "skin": "zombie-skin",
+                "index": 15409,
+                "rgb": [
+                  0.23,
+                  0.08,
+                  0.06
+                ]
+              },
+              "aCenter": [
+                -26.298,
+                -197.281,
+                -630.96
+              ],
+              "bCenter": [
+                -26.209,
+                -198.952,
+                -631.657
+              ],
+              "overlap": [
+                1.325,
+                0.828,
+                0.521
+              ]
+            },
+            {
+              "pair": "armR/head",
+              "a": "armR",
+              "b": "head",
+              "hits": 4,
+              "total": 17,
+              "contact": [
+                -26.369,
+                -196.225,
+                -632.437
+              ],
+              "contactMeta": {
+                "skin": "zombie-skin",
+                "index": 8502,
+                "rgb": [
+                  0.11,
+                  0.04,
+                  0.03
+                ]
+              },
+              "aCenter": [
+                -25.809,
+                -196.723,
+                -632.779
+              ],
+              "bCenter": [
+                -26.335,
+                -196.175,
+                -631.99
+              ],
+              "overlap": [
+                0.804,
+                0.807,
+                0.216
+              ]
+            }
+          ],
+          "tune": {
+            "zero": [
+              {
+                "position": 0.15,
+                "roll": 0.1,
+                "pitch": 0,
+                "elbow": 0,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.1,
+                "pitch": 0,
+                "elbow": 0.3,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.1,
+                "pitch": 0,
+                "elbow": 0.6,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.1,
+                "pitch": 0.3,
+                "elbow": 0,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.1,
+                "pitch": 0.3,
+                "elbow": 0.3,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.1,
+                "pitch": 0.3,
+                "elbow": 0.6,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.3,
+                "pitch": -0.3,
+                "elbow": 0,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.3,
+                "pitch": -0.3,
+                "elbow": 0.3,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.3,
+                "pitch": -0.3,
+                "elbow": 0.6,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.3,
+                "pitch": 0,
+                "elbow": 0,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.3,
+                "pitch": 0,
+                "elbow": 0.3,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.3,
+                "pitch": 0,
+                "elbow": 0.6,
+                "n": 0
+              }
+            ],
+            "best": [
+              {
+                "position": 0.15,
+                "roll": 0.1,
+                "pitch": 0,
+                "elbow": 0,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.1,
+                "pitch": 0,
+                "elbow": 0.3,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.1,
+                "pitch": 0,
+                "elbow": 0.6,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.1,
+                "pitch": 0.3,
+                "elbow": 0,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.1,
+                "pitch": 0.3,
+                "elbow": 0.3,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.1,
+                "pitch": 0.3,
+                "elbow": 0.6,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.3,
+                "pitch": -0.3,
+                "elbow": 0,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.3,
+                "pitch": -0.3,
+                "elbow": 0.3,
+                "n": 0
+              }
+            ]
+          }
+        },
+        {
+          "frame": 24,
+          "parts": 5,
+          "collisions": [
+            {
+              "pair": "armL/head",
+              "a": "armL",
+              "b": "head",
+              "hits": 1,
+              "total": 32,
+              "contact": [
+                -26.046,
+                -196.299,
+                -631.404
+              ],
+              "contactMeta": {
+                "skin": "zombie-skin",
+                "index": 8060,
+                "rgb": [
+                  0.11,
+                  0.04,
+                  0.03
+                ]
+              },
+              "aCenter": [
+                -26.084,
+                -197.239,
+                -630.783
+              ],
+              "bCenter": [
+                -25.94,
+                -196.179,
+                -631.842
+              ],
+              "overlap": [
+                0.848,
+                0.981,
+                0.27
+              ]
+            },
+            {
+              "pair": "armR/head",
+              "a": "armR",
+              "b": "head",
+              "hits": 4,
+              "total": 27,
+              "contact": [
+                -25.927,
+                -196.195,
+                -632.287
+              ],
+              "contactMeta": {
+                "skin": "zombie-skin",
+                "index": 8502,
+                "rgb": [
+                  0.11,
+                  0.04,
+                  0.03
+                ]
+              },
+              "aCenter": [
+                -25.554,
+                -197.042,
+                -632.643
+              ],
+              "bCenter": [
+                -25.94,
+                -196.179,
+                -631.842
+              ],
+              "overlap": [
+                0.848,
+                0.981,
+                0.286
+              ]
+            }
+          ],
+          "tune": {
+            "zero": [
+              {
+                "position": 0.15,
+                "roll": 0.1,
+                "pitch": 0,
+                "elbow": 0,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.1,
+                "pitch": 0,
+                "elbow": 0.3,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.1,
+                "pitch": 0,
+                "elbow": 0.6,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.1,
+                "pitch": 0.3,
+                "elbow": 0,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.1,
+                "pitch": 0.3,
+                "elbow": 0.3,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.1,
+                "pitch": 0.3,
+                "elbow": 0.6,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.3,
+                "pitch": 0,
+                "elbow": 0,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.3,
+                "pitch": 0,
+                "elbow": 0.3,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.3,
+                "pitch": 0,
+                "elbow": 0.6,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.3,
+                "pitch": 0.3,
+                "elbow": 0,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.3,
+                "pitch": 0.3,
+                "elbow": 0.3,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.3,
+                "pitch": 0.3,
+                "elbow": 0.6,
+                "n": 0
+              }
+            ],
+            "best": [
+              {
+                "position": 0.15,
+                "roll": 0.1,
+                "pitch": 0,
+                "elbow": 0,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.1,
+                "pitch": 0,
+                "elbow": 0.3,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.1,
+                "pitch": 0,
+                "elbow": 0.6,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.1,
+                "pitch": 0.3,
+                "elbow": 0,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.1,
+                "pitch": 0.3,
+                "elbow": 0.3,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.1,
+                "pitch": 0.3,
+                "elbow": 0.6,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.3,
+                "pitch": 0,
+                "elbow": 0,
+                "n": 0
+              },
+              {
+                "position": 0.15,
+                "roll": 0.3,
+                "pitch": 0,
+                "elbow": 0.3,
+                "n": 0
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

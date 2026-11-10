@@ -530,17 +530,34 @@ export function dressTrainingWear(T, { R, B, bedAt, add, box, std, texture, lamp
 
   // ---------- the infirmary bay: an old sagging cot in front of the cabinet (clear of the wake bed and his stand)
   {
-    const cx = bedAt.x + 3.25, cz = B.minZ + 3.25, L = 1.9, Wd = 0.72;
+    const cx = bedAt.x + 3.25, cz = B.minZ + 3.25, L = 1.9, Wd = 0.72, yMat = 0.02;
+    const cylOrBox = (r, h, mat, x, y, z) => add(T.CylinderGeometry ? new T.CylinderGeometry(r, r, h, 10) : new T.BoxGeometry(r * 2, h, r * 2), mat, x, y, z);
     for (const dz of [-Wd / 2, Wd / 2]) box(L, 0.035, 0.035, steel, cx, 0.42, cz + dz);
-    for (const dx of [-L / 2 + 0.05, L / 2 - 0.05]) for (const s of [-1, 1]) { const leg = box(0.03, 0.5, 0.03, steel, cx + dx, 0.21, cz); leg.rotation.x = s * 0.62; }
+    for (const sx of [-1, 1]) box(0.035, 0.035, Wd + 0.035, steel, cx + sx * (L / 2 - 0.025), 0.385, cz);
+    const yFootTop = yMat + 0.014, yBrkBot = 0.4025 - 0.016, yMid = (yFootTop + yBrkBot) / 2;
+    const legAng = Math.atan2(Wd + 0.042, yBrkBot - yFootTop);
+    const legLen = ((yBrkBot - yFootTop) / 2 - 0.0002 - 0.013 * Math.sin(legAng)) / (0.5 * Math.cos(legAng));
+    for (const dx of [-L / 2 + 0.14, L / 2 - 0.14]) {
+      const washer = cylOrBox(0.014, 0.006, steel, cx + dx, yMid, cz); washer.rotation.z = Math.PI / 2;
+      for (const s of [-1, 1]) {
+        const lx = cx + dx + s * 0.016;
+        box(0.038, 0.014, 0.056, steel, lx, yMat + 0.007, cz - s * (Wd / 2));
+        box(0.038, 0.016, 0.035, steel, lx, 0.4025 - 0.008, cz + s * (Wd / 2));
+        const leg = box(0.026, legLen, 0.026, steel, lx, yMid, cz); leg.rotation.x = s * legAng;
+        const cap = cylOrBox(0.012, 0.008, steel, cx + dx + s * 0.033, yMid, cz); cap.rotation.z = Math.PI / 2;
+      }
+    }
     const canvas = std({ color: 0x6f6a4e, roughness: 0.95 });
     const mattress = std({ color: 0xffffff, map: sheet, roughness: 0.9 });
-    const seg = 5, sl = L / seg;
+    const cLen = L - 0.12, seg = 5, sl = cLen / seg;
     for (let i = 0; i < seg; i++) {   // it sags in the middle: a parabola, each piece tilted to follow it
-      const t = (i + 0.5) / seg - 0.5, y = 0.43 - 0.09 * (1 - 4 * t * t), slope = 0.09 * 8 * t / L;
-      const f = box(sl + 0.01, 0.015, Wd - 0.04, canvas, cx - L / 2 + sl * (i + 0.5), y, cz); f.rotation.z = Math.atan(slope);
-      const m = add(cell(new T.BoxGeometry(sl + 0.01, 0.1, Wd - 0.1), i * 102, 640, 102, 256), mattress, cx - L / 2 + sl * (i + 0.5), y + 0.06, cz);
-      m.rotation.z = Math.atan(slope); m.castShadow = true; m.receiveShadow = true;
+      const t = (i + 0.5) / seg - 0.5, y = 0.415 - 0.08 * (1 - 4 * t * t), slope = 0.08 * 8 * t / cLen;
+      const ang = Math.atan(slope), sx = cx + t * cLen, dn = 0.0575;
+      const f = box(sl - 0.006, 0.015, Wd - 0.071, canvas, sx, y, cz); f.rotation.z = ang;
+      const strapH = 0.4375 - y;
+      for (const sz of [-1, 1]) box(0.06, strapH, 0.018, canvas, sx, y + strapH / 2, cz + sz * 0.3335);
+      const m = add(cell(new T.BoxGeometry(sl - 0.022, 0.1, Wd - 0.11), i * 102, 640, 102, 256), mattress, sx - Math.sin(ang) * dn, y + Math.cos(ang) * dn, cz);
+      m.rotation.z = ang; m.castShadow = true; m.receiveShadow = true;
     }
     parts.push('wear-cot-sagging', 'wear-mattress-stained');
   }

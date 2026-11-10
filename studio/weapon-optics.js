@@ -1,6 +1,7 @@
 // GP-20025 and GP-20065: standalone studies and the armory's fitted optics.
 // Gun-local convention: +Z muzzle, +Y up. Origin: centre of the mounting foot.
 import * as THREE from 'three';
+import { markPaintSurface } from './weapon-finish.js';
 
 // CL-329 (J92): black optics (paint was 0x303633; alloy 0x4b5354 at 0.83 metal: a light grey-green; edge 0x858b83 at 0.9)
 const paint = new THREE.MeshStandardMaterial({ color: 0x24282a, metalness: 0.05, roughness: 0.74 });
@@ -200,6 +201,9 @@ function rmr(root) {
   glass(root, 0.024, 0.016, 0.024, 0.012);
   cylinder(root, 'coin elevation adjuster', edge, 0.0033, 0.002, [0, 0.016, -0.017], 'y', 12);
   cylinder(root, 'coin windage adjuster', edge, 0.0033, 0.002, [0.015, 0.0125, -0.003], 'x', 12);
+  for (const mesh of root.children) {
+    if (mesh.material === paint || mesh.material === alloy) markPaintSurface(mesh, 'optic shell');
+  }
   return { eye: [0, 0.024, -0.034], dot: [0, 0.024, 0.012] };
 }
 

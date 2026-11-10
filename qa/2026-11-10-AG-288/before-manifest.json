@@ -1,0 +1,86 @@
+[
+  {
+    "name": "before-area-06-overexposed-noon.png",
+    "bytes": 862338,
+    "sha256": "d05cd614b3b15a9c7c1244ddd4edc65a2db96fb513a271391a87274db712c46b",
+    "meanRgb": [
+      127.4,
+      132.2,
+      134.7
+    ],
+    "meanLuma": 131.33,
+    "stdLuma": 54.85,
+    "whitePct": 9.47,
+    "attempt": 1
+  },
+  {
+    "name": "before-area-08-overexposed-noon.png",
+    "bytes": 665495,
+    "sha256": "9d161fc403c6b17df4718e029330f5c1ac4da46681218d05812e4950c87ecac4",
+    "meanRgb": [
+      171.8,
+      173.8,
+      169.2
+    ],
+    "meanLuma": 173.06,
+    "stdLuma": 53.97,
+    "whitePct": 25.58,
+    "attempt": 1
+  },
+  {
+    "name": "before-area-09-overexposed-noon.png",
+    "bytes": 693964,
+    "sha256": "4c55b0e561217ea5afe02abf8f789d11fd8ab154dba60d794d494ea432941a7c",
+    "meanRgb": [
+      139.8,
+      144.4,
+      147.3
+    ],
+    "meanLuma": 143.65,
+    "stdLuma": 51.32,
+    "whitePct": 11.78,
+    "attempt": 1
+  },
+  {
+    "name": "before-prop-01-kiosk-braces.png",
+    "bytes": 275890,
+    "sha256": "03c4734a32706b7eb02e3b5d6f50d838eaf7012742b1c10cce815c6a3a7d3030",
+    "meanRgb": [
+      64.9,
+      60.3,
+      53.7
+    ],
+    "meanLuma": 60.8,
+    "stdLuma": 41.5,
+    "whitePct": 0.11,
+    "attempt": 1
+  },
+  {
+    "name": "before-prop-02-skull-tray-braces.png",
+    "bytes": 454436,
+    "sha256": "0c5093d9edf77a34dd01b9429207ec488ac4a9b1892ee92964421eb5427e1cdb",
+    "meanRgb": [
+      67.1,
+      68.7,
+      63.8
+    ],
+    "meanLuma": 68.01,
+    "stdLuma": 41,
+    "whitePct": 0,
+    "attempt": 1
+  },
+  {
+    "name": "before-prop-03-hqpanel-conduit.png",
+    "bytes": 322747,
+    "sha256": "66b8db4faafc84e1e3c0144085813a43a27cc03c9397166f63006236cae05a06",
+    "meanRgb": [
+      75.9,
+      75.9,
+      64.7
+    ],
+    "meanLuma": 75.09,
+    "stdLuma": 37.18,
+    "whitePct": 0,
+    "attempt": 1
+  }
+]

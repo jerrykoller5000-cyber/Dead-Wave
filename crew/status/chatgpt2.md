@@ -2,19 +2,20 @@
 
 state: active
 model: GPT-6 Astra (High)
-task: GT-20076 Seat the minigun sling clips first, then the carried catalog and shared drawn rail joins; test and render each in Training Ground
-touching: ui/weapon-sling.js, index.html (gunKit.rail), tools/marine-inspector.js (gunKit.rail), studio/gun-detail.js, tools/tests/weapon-seating.js, tools/tests/tgt20076.js, review/GT-20076
-since: 2026-11-10T20:23Z
-next: GT-20076 J128 (Jerry, 10 Nov, standing, D-140): no part through anoth
+task: GT-20077 Pistol visual control and heat anchors; GW-4 approved exterior. Capture before and after in the Training Ground.
+touching: studio/weapon-sidearms.js, studio/weapon-longarms.js, studio/weapon-model-hooks.js, review/GT-20077
+since: 2026-11-10T22:23Z
+next: GT-20075 (Reviewed by CLAUDE DIRECTOR 20:45Z: accepted, two back: the
 blocked-on: —
-last-report: handoffs/2026-11-10-chatgpt2-GT-20078.md
+last-report: handoffs/2026-11-10-chatgpt2-GT-20079.md
 
 ## Notes
 
-Jerry wants a progress note on the crew board every 20 minutes during active work. Use `node crew/crew.mjs note chatgpt2 "<what changed or what is waiting>"`.
+D-147: use chatgpt2; 20-minute board notes and 15-minute request checks. If nothing can start, run standby again until STANDBY OFF. Director is claude; the hands belong to claude4. Only the crew slot can start the game.
 
-D-147: check `crew.mjs requests chatgpt2` every 15 minutes during a long task. If every card waits, run `crew.mjs standby chatgpt2` repeatedly until it hands out work or reports STANDBY OFF. CLAUDE DIRECTOR is `claude`. Claude 1 (`claude4`) owns the hands.
-GT-20076: the Director lent the sling, both gunKit.rail sections and studio/gun-detail.js. Start with the minigun's sling clips. The 56 model builds had zero detached groups; six models also cleared intersections. Training Ground had 52 detached clips out of 72. See the GT-20076 and GT-20078 handoffs for current numbers and hand-fit deltas.
+22:27Z GT-20077 active. Director accepted the pistol and cleared GW-4. review/GT-20077/m4/before has all 12 Training Ground frames. Next: surface and model-anchor work, render comparisons, send contact deltas to claude4. GT-20079 pistol proof and its remaining VM identity diagnostic are in handoffs/2026-11-10-chatgpt2-GT-20079.md. Board check 22:37Z. context nearly full, needs a new session
+
+GT-20075 accepted with GW-4 window and KR-7 optic support for their GT-20077 turns. GT-20078 reviewed. GT-20076 handed off pending catalog-wide raw intersections; see handoffs/2026-11-10-chatgpt2-GT-20076.md. All 56 GT-20076 builds had zero unseated or loose groups and all 36 slings passed. The Director told us to prioritize what the player can see.
 
 ### Who you are (D-142, Jerry 10 Nov 2026)
 You are **ChatGPT 2**, the crew's second ChatGPT, on GPT-6 Astra (High) in Codex. You take the weapons from ChatGPT (who

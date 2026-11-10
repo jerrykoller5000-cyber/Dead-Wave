@@ -190,6 +190,50 @@ function stripMeshes(root, keep = new Set()) {
 
 export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox,audit=null}) {
   if(!CONCEPT_TYPES.includes(k))return false;
+  // Small lateral rests keep the swinging hands outside the thighs, while a
+  // little more hip spacing prevents opposite knees crossing in fast poses.
+  if(['shambler','feral','brute','military','spitter','bomber'].includes(k)){
+    const roll=['shambler','military','spitter','bomber'].includes(k)?.2:.1;
+    g.userData.armLG.rotation.z=-roll;
+    g.userData.armRG.rotation.z=roll;
+  }
+  if(['feral','brute','military','screamer','leaper'].includes(k)){
+    g.userData.legLG.position.x-=.04;
+    g.userData.legRG.position.x+=.04;
+  }
+  if(k==='military'){
+    g.userData.armLG.position.x-=.04;
+    g.userData.armRG.position.x+=.04;
+  }
+  if(k==='drowned'){
+    // The dragging arms hang outside both knees through the shuffle.
+    g.userData.armLG.rotation.z=-.2;
+    g.userData.armRG.rotation.z=.2;
+  }
+  // Keep the demon's thighs and forearms clear through the walking stride.
+  // Apply these pivots before both the cached and uncached concept paths.
+  if(k==='demon'){
+    g.userData.legLG.position.x=-.185*s;
+    g.userData.legRG.position.x=.185*s;
+    for(const arm of [g.userData.armLG,g.userData.armRG]){
+      arm.rotation.x=-.9;
+      arm.userData.baseRotX=-.9;
+    }
+    g.userData.armLG.rotation.z=-.3;
+    g.userData.armRG.rotation.z=.3;
+  }
+  if(k==='colossus'){
+    // Give the shoulder shield and hanging hand room for the skull and thigh.
+    const u=g.userData,shoulder=.2*s/2.3,hip=.08*s/2.3;
+    u.armLG.position.x-=shoulder;
+    u.armRG.position.x+=shoulder;
+    for(const arm of [u.armLG,u.armRG])arm.scale.set(.8,.9,1);
+    u.armLG.rotation.z=-.2;
+    u.armRG.rotation.z=.2;
+    u.head.position.y+=.15*s/2.3;
+    u.legLG.position.x-=hip;
+    u.legRG.position.x+=hip;
+  }
   const cacheKey=k+':'+s;if(!audit&&restore(T,g,cacheKey,k)){mergeEyes(T,g);return true;}
   const u=g.userData, {hips,torso,head,armLG,armRG,legLG,legRG}=u;
   const A=sculpt(T,s,rbox),{mat,egg,rock,box,rod,path,spike,rag,loft,plate,ribbon}=A;
@@ -458,6 +502,10 @@ export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox,audit=null}
       }
       for(let j=0;j<7;j++)rag(hips,leather,(j-3)*.067,.11,.245,.075,.18+(j%2)*.05);
     }
+  }
+  if(k==='military'){
+    g.userData.armLG.position.x-=.04;
+    g.userData.armRG.position.x+=.04;
   }
   if(k==='drowned'){
     egg(torso,cloth,0,.24,0,.46,.46,.32);

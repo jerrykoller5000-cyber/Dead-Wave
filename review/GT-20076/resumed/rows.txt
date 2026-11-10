@@ -1,0 +1,1 @@
+{"ribs":{"parts":6,"open":0,"loose":0,"intersections":0,"seated":5,"breaches":0},"groove":{"parts":2,"open":0,"loose":0,"intersections":0,"seated":0,"breaches":0}}

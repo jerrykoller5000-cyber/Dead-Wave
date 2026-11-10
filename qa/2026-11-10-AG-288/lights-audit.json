@@ -1,0 +1,418 @@
+[
+  {
+    "type": "HemisphereLight",
+    "name": "(unnamed)",
+    "visible": true,
+    "intensity": 0.68,
+    "distance": null,
+    "color": "#dbeaff",
+    "localToTraining": [
+      0,
+      201,
+      640
+    ]
+  },
+  {
+    "type": "DirectionalLight",
+    "name": "(unnamed)",
+    "visible": true,
+    "intensity": 1.73,
+    "distance": null,
+    "color": "#fff2d6",
+    "localToTraining": [
+      28,
+      82,
+      35.39
+    ]
+  },
+  {
+    "type": "DirectionalLight",
+    "name": "(unnamed)",
+    "visible": true,
+    "intensity": 0.02,
+    "distance": null,
+    "color": "#8899cc",
+    "localToTraining": [
+      -12,
+      220,
+      632
+    ]
+  },
+  {
+    "type": "AmbientLight",
+    "name": "(unnamed)",
+    "visible": true,
+    "intensity": 0.04,
+    "distance": null,
+    "color": "#ffffff",
+    "localToTraining": [
+      0,
+      200,
+      640
+    ]
+  },
+  {
+    "type": "PointLight",
+    "name": "(unnamed)",
+    "visible": true,
+    "intensity": 0,
+    "distance": 3.5,
+    "color": "#ff3344",
+    "localToTraining": [
+      0,
+      200,
+      640
+    ]
+  },
+  {
+    "type": "SpotLight",
+    "name": "(unnamed)",
+    "visible": true,
+    "intensity": 0,
+    "distance": 26,
+    "color": "#fff2d0",
+    "localToTraining": [
+      0,
+      201,
+      640
+    ]
+  },
+  {
+    "type": "PointLight",
+    "name": "(unnamed)",
+    "visible": true,
+    "intensity": 0,
+    "distance": 4.5,
+    "color": "#ffaa44",
+    "localToTraining": [
+      0.07,
+      197.79,
+      641.23
+    ]
+  },
+  {
+    "type": "PointLight",
+    "name": "chapel-light",
+    "visible": true,
+    "intensity": 0,
+    "distance": 5.5,
+    "color": "#ffd36a",
+    "localToTraining": [
+      0,
+      1.15,
+      -0.51
+    ]
+  },
+  {
+    "type": "PointLight",
+    "name": "(unnamed)",
+    "visible": true,
+    "intensity": 0,
+    "distance": 15,
+    "color": "#ffb858",
+    "localToTraining": [
+      0,
+      200.23,
+      633.6
+    ]
+  },
+  {
+    "type": "PointLight",
+    "name": "(unnamed)",
+    "visible": true,
+    "intensity": 0,
+    "distance": 14,
+    "color": "#ff6a24",
+    "localToTraining": [
+      128,
+      196.96,
+      640
+    ]
+  },
+  {
+    "type": "PointLight",
+    "name": "(unnamed)",
+    "visible": true,
+    "intensity": 0,
+    "distance": 14,
+    "color": "#ff6a24",
+    "localToTraining": [
+      22,
+      210.64,
+      514
+    ]
+  },
+  {
+    "type": "PointLight",
+    "name": "(unnamed)",
+    "visible": true,
+    "intensity": 0,
+    "distance": 14,
+    "color": "#ff6a24",
+    "localToTraining": [
+      -12,
+      204.91,
+      780
+    ]
+  },
+  {
+    "type": "PointLight",
+    "name": "(unnamed)",
+    "visible": true,
+    "intensity": 0,
+    "distance": 16,
+    "color": "#ffb066",
+    "localToTraining": [
+      -26.08,
+      217.41,
+      516.08
+    ]
+  },
+  {
+    "type": "PointLight",
+    "name": "(unnamed)",
+    "visible": true,
+    "intensity": 0,
+    "distance": 28,
+    "color": "#ff2211",
+    "localToTraining": [
+      -153.37,
+      215.12,
+      635.85
+    ]
+  },
+  {
+    "type": "PointLight",
+    "name": "trapper-path",
+    "visible": true,
+    "intensity": 1.35,
+    "distance": 6.5,
+    "color": "#ffa84a",
+    "localToTraining": [
+      -5.86,
+      202.37,
+      779.68
+    ]
+  },
+  {
+    "type": "PointLight",
+    "name": "(unnamed)",
+    "visible": true,
+    "intensity": 0.9,
+    "distance": 6,
+    "color": "#5cff9a",
+    "localToTraining": [
+      -5.84,
+      198.63,
+      642.2
+    ]
+  },
+  {
+    "type": "PointLight",
+    "name": "(unnamed)",
+    "visible": true,
+    "intensity": 0,
+    "distance": 8,
+    "color": "#ff7a2a",
+    "localToTraining": [
+      2,
+      197.63,
+      642
+    ]
+  },
+  {
+    "type": "PointLight",
+    "name": "(unnamed)",
+    "visible": true,
+    "intensity": 0,
+    "distance": 8,
+    "color": "#ff7a2a",
+    "localToTraining": [
+      0,
+      200,
+      640
+    ]
+  },
+  {
+    "type": "PointLight",
+    "name": "(unnamed)",
+    "visible": true,
+    "intensity": 0,
+    "distance": 8,
+    "color": "#ff7a2a",
+    "localToTraining": [
+      0,
+      200,
+      640
+    ]
+  },
+  {
+    "type": "PointLight",
+    "name": "(unnamed)",
+    "visible": true,
+    "intensity": 0,
+    "distance": 8,
+    "color": "#ff7a2a",
+    "localToTraining": [
+      0,
+      200,
+      640
+    ]
+  },
+  {
+    "type": "PointLight",
+    "name": "light-pool-0",
+    "visible": true,
+    "intensity": 0.9,
+    "distance": 6,
+    "color": "#ffa04a",
+    "localToTraining": [
+      7.18,
+      1.8,
+      -6.6
+    ]
+  },
+  {
+    "type": "PointLight",
+    "name": "light-pool-1",
+    "visible": true,
+    "intensity": 0,
+    "distance": 6,
+    "color": "#ffa04a",
+    "localToTraining": [
+      -5.84,
+      198.63,
+      642.2
+    ]
+  },
+  {
+    "type": "PointLight",
+    "name": "light-pool-2",
+    "visible": true,
+    "intensity": 0,
+    "distance": 1,
+    "color": "#ffffff",
+    "localToTraining": [
+      0,
+      200,
+      640
+    ]
+  },
+  {
+    "type": "PointLight",
+    "name": "light-pool-3",
+    "visible": true,
+    "intensity": 0,
+    "distance": 1,
+    "color": "#ffffff",
+    "localToTraining": [
+      0,
+      200,
+      640
+    ]
+  },
+  {
+    "type": "PointLight",
+    "name": "training-kiosk",
+    "visible": true,
+    "intensity": 0.9,
+    "distance": 6,
+    "color": "#ffa04a",
+    "localToTraining": [
+      7.18,
+      1.8,
+      -6.6
+    ]
+  },
+  {
+    "type": "SpotLight",
+    "name": "training-danger-lighting",
+    "visible": true,
+    "intensity": 0,
+    "distance": 35,
+    "color": "#f4fbff",
+    "localToTraining": [
+      0,
+      22,
+      8
+    ]
+  },
+  {
+    "type": "SpotLight",
+    "name": "training-danger-lighting",
+    "visible": true,
+    "intensity": 0,
+    "distance": 42,
+    "color": "#ff9a32",
+    "localToTraining": [
+      0,
+      1,
+      0
+    ]
+  },
+  {
+    "type": "PointLight",
+    "name": "training-danger-lighting",
+    "visible": true,
+    "intensity": 0,
+    "distance": 6.5,
+    "color": "#ff9a32",
+    "localToTraining": [
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "type": "SpotLight",
+    "name": "training-danger-lighting",
+    "visible": true,
+    "intensity": 0,
+    "distance": 42,
+    "color": "#ff9a32",
+    "localToTraining": [
+      0,
+      1,
+      0
+    ]
+  },
+  {
+    "type": "PointLight",
+    "name": "training-danger-lighting",
+    "visible": true,
+    "intensity": 0,
+    "distance": 6.5,
+    "color": "#ff9a32",
+    "localToTraining": [
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "type": "SpotLight",
+    "name": "training-danger-lighting",
+    "visible": true,
+    "intensity": 0,
+    "distance": 42,
+    "color": "#ff9a32",
+    "localToTraining": [
+      0,
+      1,
+      0
+    ]
+  },
+  {
+    "type": "PointLight",
+    "name": "training-danger-lighting",
+    "visible": true,
+    "intensity": 0,
+    "distance": 6.5,
+    "color": "#ff9a32",
+    "localToTraining": [
+      0,
+      0,
+      0
+    ]
+  }
+]

@@ -1,11 +1,12 @@
 import assert from 'node:assert/strict';
-import {mkdir,readFile,writeFile} from 'node:fs/promises';
+import {mkdir,readFile} from 'node:fs/promises';
+import {save as writeFile} from './save.mjs';
 import {fileURLToPath} from 'node:url';
 import {launch} from '../../tools/cdp.mjs';
 import {serve} from '../../tools/serve.mjs';
 
 const [phase,...selection]=process.argv.slice(2);
-assert(process.env.DW_GAME_TEST_TOKEN && ['before','after','trial','calibrate'].includes(phase));
+assert(process.env.DW_GAME_TEST_TOKEN && ['before','after','trial','calibrate','seats'].includes(phase));
 const folder=new URL('./sling/'+phase+'/',import.meta.url);
 await mkdir(folder,{recursive:true});
 const baseline=phase==='before'?{}:JSON.parse(await readFile(new URL('./sling/before/results.json',import.meta.url),'utf8'));
@@ -23,10 +24,18 @@ try {
     window.slingMarine=TT.makeMarine();
     slingMarine.position.set(30,80,-60);TT.scene.add(slingMarine);
     const style=document.createElement('style');style.textContent='body > :not(canvas):not(script):not(style):not(#view){visibility:hidden!important}';document.head.append(style);`);
+  if(phase==='seats')await p.evaluate(`(async()=>{
+    const original=await(await fetch('/ui/weapon-sling.js')).text();
+    const line='const anchors=faces.map';
+    if(original.split(line).length!==2)throw Error('Missing sling seat selection');
+    const code=original.replace(line,'if(window.candidateSeat)faces[window.candidateSeat.end]=window.candidateSeat.face; '+line);
+    const url=URL.createObjectURL(new Blob([code],{type:'text/javascript'}));
+    window.refitSeat=(await import(url)).fitWeaponSling;URL.revokeObjectURL(url);
+  })()`);
   if(phase==='calibrate')await p.evaluate(`(async()=>{
     let source=await (await fetch('/ui/weapon-sling.js')).text();
     for(const [find,to] of [
-      ['const lower=at(.222,.89,-.19), shoulder=at(.205,1.155,-.135);','const lower=at(...window.routeFit.lower), shoulder=at(.205,1.155,-.135);'],
+      ['const lower=guide?at(...guide):at(.222,.89,-.19), shoulder=at(.205,1.155,-.135);','const lower=at(...window.routeFit.lower), shoulder=at(.205,1.155,-.135);'],
       ['f.out,.045','f.out,window.routeFit.lead'],
       ['    tangent.normalize();','    tangent.normalize().applyAxisAngle(out,(window.routeFit.roll?.[i]??0)*Math.PI/180);'],
       ['at(.235,.98,.115)','at(...window.routeFit.turn)']
@@ -48,12 +57,17 @@ try {
       const rigs=await p.evaluate(`(async()=>{
         const {auditSling,makeSlingAudit}=await import('/tools/tests/weapon-seating.js');
         const m=slingMarine,spec={loadout:{primary:['${id}','${id}'],secondary:[null,null]},inHand:null,akimbo:false,vest:${vest},grenades:0};
+        for(const [key,meshes] of Object.entries(m.userData.gearParts??{})){
+          if(key==='vest' || key==='bareTorso')for(const mesh of meshes)mesh.visible=key==='vest'?spec.vest:!spec.vest;
+        }
         const rig=TT.carryPreview(m,spec);window.currentSlingRig=rig;m.updateMatrixWorld(true);
         return rig.slings.map(spot=>{
           if('${phase}'==='calibrate'){
-            const evaluate=makeSlingAudit(spot,1.8/1.655);
+            const evaluate=makeSlingAudit(spot,1.8/1.655,.002);
             const original={lower:[.222,.89,-.19],turn:[.235,.98,.115],lead:.045};
-            const score=r=>r.overlaps.filter(p=>p.sling==='web').length+100*r.ends.filter(e=>!e.webContact||!e.gunContact).length;
+            window.routeFit=original;spot.sling.userData.signature=null;
+            refitSling(TT.THREE,spot,${vest},spot.sling.userData.clips[0].material);
+            const score=r=>Number(r.nearWeb)+r.overlaps.filter(p=>p.sling==='web').length+100*r.ends.filter(e=>!e.webContact||!e.gunContact).length;
             let best={score:score(evaluate()),parameters:original},tried=0;
             const candidates=[];
             for(const dx of [0,-.03,-.06,.03])for(const dy of [0,-.07,.07])for(const dz of [0,-.05,.05])
@@ -106,6 +120,36 @@ try {
               }
             }
           }
+          if('${phase}'==='seats'){
+            const examine=makeSlingAudit(spot,1.8/1.655);
+            const end=spot.kind==='ak'?0:1;
+            const metric=r=>r.overlaps.length+100*r.ends.filter(e=>!e.webContact||!e.gunContact).length;
+            let best=metric(examine()),chosen=null,attempts=0;
+            const [x,y,z]=fit.anchors[end],side=Math.sign(x);
+            const offsets=[];
+            for(const dy of [0,.005,-.005,.01,-.01,.02,-.02])for(const dz of [0,.006,-.006,.012,-.012,.024,-.024,.04,-.04])
+              offsets.push([dy,dz]);
+            offsets.sort((a,b)=>Math.hypot(...a)-Math.hypot(...b));
+            for(const [dy,dz] of offsets){
+              if(!best)break;
+              const ray=new T.Ray(new T.Vector3(side*1.3,y+dy,z+dz),new T.Vector3(-side,0,0)),v=new T.Vector3();
+              let hit=null,n=null;
+              for(const t of all)if(ray.intersectTriangle(t.a,t.b,t.c,false,v) && (!hit || side*v.x>side*hit.x)){
+                hit=v.clone();n=t.getNormal(new T.Vector3());
+              }
+              if(!hit || Math.abs(n.x)<.3 || Math.abs(hit.x-x)>.04)continue;
+              if(side*n.x<0)n.negate();
+              const face=[hit.x*side,hit.y,hit.z,n.x*side,n.y,n.z].map(x=>+x.toFixed(6));
+              window.candidateSeat={end,face};spot.sling.userData.signature=null;
+              refitSeat(T,spot,${vest},spot.sling.userData.clips[0].material);
+              const s=metric(examine());attempts++;
+              if(s<best){best=s;chosen=face;}
+            }
+            window.candidateSeat=chosen?{end,face:chosen}:null;spot.sling.userData.signature=null;
+            refitSeat(T,spot,${vest},spot.sling.userData.clips[0].material);
+            window.candidateSeat=null;
+            return {...examine(),end,chosen,best,attempts};
+          }
           const nearest=query.map(([x,y,z])=>{
             const side=Math.sign(x),goal=new T.Vector3(x,y,z),axis=new T.Vector3(-side,0,0),vertex=new T.Vector3();
             for(const [dy,dz] of [[0,0],[0,-.012],[0,.012],[-.015,0],[.015,0]]) {
@@ -132,7 +176,14 @@ try {
         });
       })()`,90000);
       for(const [i,rig] of rigs.entries())result[id+'-slot'+(i+1)+(vest?'-vest':'')]=rig;
-      if(phase==='calibrate' || !vest || !(id==='minigun'||id==='m4'))continue;
+      if(phase==='calibrate' || phase==='seats')continue;
+      if(phase==='after' && (vest || id==='minigun')){
+        const framing={x:30.82,y:81.24,z:-61.65,tx:30,ty:81.01,tz:-60.12,fov:37};
+        await p.evaluate('TT.setShotView('+JSON.stringify(framing)+');new Promise(r=>setTimeout(r,180))');
+        const shot=await p.send('Page.captureScreenshot',{format:'jpeg',quality:92});
+        await writeFile(new URL(id+(vest?'-vest':'-shirt')+'-carry.jpg',folder),Buffer.from(shot.data,'base64'));
+      }
+      if(!vest || !(id==='minigun'||id==='m4'))continue;
       for(const [i,tag] of [[0,'rear'],[1,'front']]) {
         // Aim at the same authored mount each time, in the frame of the carried gun.
         // On the body-facing side the torso hides the junction, so isolate its actual carry assembly.

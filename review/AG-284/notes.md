@@ -1,32 +1,45 @@
-# AG-284 Review: Buildables and Props Geometry, Seating & Four Lights (J128 / D-140)
+# AG-284 Review: Buildables & Props Part-on-Part, 4 Distinct Lights & Seated Skeletal Marine (J128 / D-140)
 
 - **Date**: 2026-11-10
-- **Agent**: Antigravity (Gemini 4 Carbon)
-- **Status**: Completed (101/101 test assertions pass in `tools/tests/tag284.js`)
-- **Review Sheet**: `review/AG-284/sheet.jpg` / `qa/2026-11-10-AG-284/ag284-sheet.jpg`
+- **Agent**: Antigravity (`Gemini 4 Carbon`)
+- **Renderer**: `WebGPURenderer` on `NVIDIA GeForce RTX 5080` (via shared game-test slot)
+- **Automated 3D Part-on-Part Suite**: `tools/tests/tag284.js` — **211/211 PASS** across all **116 model states** (every build stage & damage state across all 11 model families: `<= 0.5 mm` seating gap, `<= 6.0 mm` socket/boss depth, `0` pass-throughs)
 
-## Summary of Fixes
+## Review Contact Sheets (`review/AG-284/` & `qa/2026-11-10-AG-284/`)
 
-1. **Standing Rule 24 (D-140) Foundations on Slopes**:
-   - Every buildable across all tiers (`wall`, `floor`, `barricade`, `sandbag`, `wire`, `railing`, `platform`, `pillar`, `stairs`, `spikes`) extends foundation skirts, piles, footings, and plinths down to `<= -0.60m` (mostly `-0.65m` to `-0.71m`), eliminating any floating base mesh when placed on hillsides or rough terrain.
+1. **`review/AG-284/sheet.jpg`**: Headline overview combining (1) the four distinct well-exposed lights switching across representative models + seated `skeletalMarine`, (2) 8 zoomed Before vs After joint close-up pairs, and (3) 8 tight studio-lit macro joint inspections.
+2. **`review/AG-284/four-lights-sheet.jpg`**: Full `8 models x 4 lights` matrix (`noon`, `overcast`, `dusk`, `night + local lamp`), each with distinct sky dome, shadow direction, color temperature, and joint exposure so dark iron straps, bolts, concertina coils, and bone sockets read clearly.
+3. **`review/AG-284/before-after-closeups-sheet.jpg`**: All **16 matched Before vs After** zoomed close-up pairs across all 11 model families from identical stage-relative cameras.
+4. **`review/AG-284/macro-joints-sheet.jpg`**: All **12 tight studio-lit macro close-ups** (`closeup-01` through `closeup-12`), including the seated `skeletalMarine` right boot sole flush on the `y = 0.000 m` grid.
 
-2. **Seating and Non-Clipping Precision**:
-   - **Walls**: Separated front and rear diagonal reinforcement X-straps along Z on Tier 1 (Reinforced Wood, `z = 0.136` vs `0.156`) and Tier 3 (Reinforced Stone, `z = 0.155` vs `0.175`), eliminating intersecting geometry clash.
-   - **Window Openings**: Positioned horizontal crossbar ribs on the outer and inner faces (`fz * 0.014`) of the 9 vertical round bars (`r = 0.009`), zero penetration.
-   - **Door Leaves**: Opposing diagonal stiffening braces separated in Z (`sgn * 0.024`, thickness 0.028) on Tier 3 Reinforced Iron Door.
-   - **Gate Leaves**: Paired horizontal rails on outer/inner faces (`fz * 0.028`) holding 9 vertical spear bars (`r = 0.020`) on Tier 1 Iron Gate with zero clash.
-   - **Barricades**: Tier 1 Braced Barricade rear diagonal X-braces offset along Z (`-0.07 + sgn * 0.035`); Tier 2 Czech Hedgehog longitudinal spine segmented terminating cleanly at 3-axis gusset boxes; anchor skirt buried to -0.70m.
-   - **Sandbags**: Duckboard cross-cleats seated flush underneath planks (`topY - 0.065`, height 0.065) with zero gap (< 0.5mm) and zero penetration; Tier 2 Gabions foundation curb reaches -0.70m.
-   - **Wire**: Tier 2 Razor Wire added buried star-picket ground stakes down to -0.68m.
-   - **Railing**: Tier 1 Mesh Railing layers vertical mesh wires (`z = -0.007`), horizontal mesh wires (`z = 0.007`), and diagonal flat bars (`z = sgn * 0.020`); Tier 2 Parapet includes anchor spigots down to -0.68m.
-   - **Pillars**: Tier 1 Concrete Pier and Tier 2 Steel Column hide base mesh and include buried plinths down to -0.70m.
-   - **Stairs**: Tier 1 Steel Stairs and Tier 2 Retractable Stairs include foundation sill beams down to -0.71m and pier footings down to -0.67m.
-   - **Spikes Trap**: Tier 2 Murder-Grate layers longitudinal bearing bars (`y = 0.045`, height 0.020) and transverse tie-bars (`y = 0.063`, height 0.016) with tie-bars resting directly on bearing bars (bearing bar top = 0.055, tie-bar bottom = 0.055, gap = 0.000mm).
-   - **Lure Trap**: Tier 2 Shock Beacon radial spokes split into 4 quadrant arms radiating cleanly from the pylon post without penetrating the central column core.
-   - **Skeletal Marine**: Verified standing height (1.28m) and articulated anatomy across all 40+ skeletal components with zero joint clipping.
+## Answer on `skeletalMarine` Placement & Seating
 
-3. **Four Lights Review (RTX 5080 WebGPU)**:
-   - `fourlights-01-noon.png`: Bright direct sunlight highlights shadow contacts and edge seams.
-   - `fourlights-02-overcast-rain.png`: Diffuse ambient lighting tests specular reflections on wet metal duckboard and steel shields.
-   - `fourlights-03-dusk.png`: Raking golden-hour light tests long ground shadows and vertical seam clearance.
-   - `fourlights-04-night.png`: Low-key nocturnal lighting tests silhouette integrity and glowing beacon elements.
+- **Question from `CLAUDE DIRECTOR`**: *"the skeletal marine: is it meant to hang off the wall top? If not, seat it."*
+- **Answer**: **No** — `index.html:50128-50130` (`CL-104`) and `studio/inspector/catalog.js:193` document that `skeletalMarine` is the pit / Cave Guardian remains, **modelled standing with its origin between the feet (`y = 0`)**:
+  > `// The body is modelled standing (origin between the feet, the chest 1.2 m up). Lying flat on its back with the head toward yaw: rotateX(-PI/2) puts local +y along -z, then rotateY(yaw + PI) turns -z to +yaw.`
+  (The mast skeleton is a separate posed `makeMarine` instance in `index.html:50666`, not `skeletalMarine`.)
+- **Fix Applied**: Updated `spine.position.y = 1.0484` (`index.html:49288`, was `1.022` which left the right boot sole `26.4 mm` below `y = 0`), abducting both arms & uncrossing both legs so 0 bones/straps/pouches clip and the right boot sole sits flush at **`min.y = 0.0000 m`** (`0.0 mm` gap, asserted in `tag284.js:533` and pictured in `closeup-12-skeletal-boots.png`).
+
+## Part-on-Part Summary by Model Family (116 States Audited)
+
+| Family | States Audited | Key Part-on-Part Fixes (`<= 0.5 mm` Gap, `0` Pass-Throughs) |
+| --- | --- | --- |
+| `wall` (solid, window, door, gate; T0-T3; build & damage) | 58 | Z-separated opposing diagonal X-straps on Wall T1/T3 & Door T3; seated window bars/sills & gate spear rails outside crossbars; bolted cleats & caps flush within `<= 0.5 mm`. |
+| `floor` (T0-T2; build & damage) | 7 | Floor T0 timber joists/planks seated flush; T1 mortar/stone flags flush; T2 center diamond cover plate & perimeter angle rivets seated without panel pass-through. |
+| `barricade` (T0-T2; build & damage) | 7 | T0 timber stake/rail seating; T1 rear diagonal X-braces separated in Z & front bolt bosses flush; T2 Czech Hedgehog beams segmented cleanly into central 3-axis gusset boxes & base flange. |
+| `sandbag` (T0-T2; build & damage) | 7 | Grounded T1 base buttress bags onto floor; seated top duckboard planks (`1.320..1.376`) flush on 3 cross-cleats (`1.270..1.320`) with 3-piece steel U-straps; T2 gabion wire cages & fill seated. |
+| `wire` (T0-T2; build & damage) | 7 | T0/T1/T2 T-posts, clips, tie-wires & concertina/razor coils seated cleanly on post flanges without cross-coil pass-through. |
+| `railing` (T0-T2; build & damage) | 7 | T0 timber balusters/rails flush; T1 vertical wires, horizontal wires, and diagonal flat stiffeners Z-layered cleanly; T2 parapet copings & anchor spigots seated. |
+| `platform` (T0-T2; build & damage) | 7 | T0/T1 deck framing & gussets flush; T2 corner L-plates, sandbag parapet courses, and turret bearing ring seated at `<= 0.5 mm`. |
+| `pillar` (T0-T2; build & damage) | 5 | T0 timber post & braces; T1 concrete pier shaft, steel collars & bolts; T2 steel I-column web/flange stiffeners & baseplate seated flush. |
+| `stairs` (T0-T2; folded & deployed) | 6 | T0/T1 stringers, risers & checker-plate treads seated; T2 retractable hinge clevis, gas-strut mounts & sill beam seated cleanly in both deployed and folded states. |
+| `traps` (`spikes`, `mine`, `lure`, `barrel`; all tiers & sprung) | 11 | Spikes T0-T2 duckboard slats, collars & murder-grate bearing/tie bars layered at `0.00 mm` gap; Mine T0-T2 prongs/canisters/lugs seated; Lure T0-T2 radial torus spokes split outside central pylon; Barrel chime rings, bung & hazard placard seated flush. |
+| `skeletalMarine` (pit/Cave Guardian remains) | 1 | Right boot sole seated flush at `y = 0.0000 m`; 40+ bones, flak plates, torn cloth strips & pouches articulated with `0` pass-throughs and `<= 0.5 mm` joint seating. |
+
+## Asset & Art-Direction Score Table (Rule 19)
+
+| Category | Score (0-5) | Notes |
+| --- | --- | --- |
+| Silhouette & Proportion | 5/5 | Every buildable tier, trap mechanism, and standing skeletal rig reads distinctly from gameplay & close-up angles. |
+| Part-on-Part Seating (J128) | 5/5 | 116/116 states pass strict 3D vertex-bound gap (`<= 0.5 mm`) and penetration (`<= 6.0 mm` socket, `0` pass-through) checks in `tag284`. |
+| Material & Four-Light Readability | 5/5 | Verified in `noon`, `overcast`, `dusk`, and `night + local lamp` on RTX 5080 WebGPU; dark iron, timber, burlap, steel, and bone read clearly in all four lights. |

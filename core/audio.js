@@ -1278,7 +1278,10 @@ export const AudioSys = (() => {
   // CL-275: the Training Ground's motifs (music.json score.motifs): a type -> its kit, played while it practises.
   const SCORE_MOTIFS = {};
   let motif = null;   // { track, kind, quietT } while a type is out in the Training Ground
-  const motifTrackFor = (kind) => SCORE_MOTIFS[kind] || ((kind === 'guardian' || kind === 'caveguard') ? SCORE_MOTIFS.guardians : null) || null;
+  // GP-20078 (ChatGPT's sweep: the military's Training alarm had no motif): a type with no motif of its own plays another's.
+  // The military is a shambler in a uniform; a dedicated track replaces this the day music.json score.motifs names one.
+  const MOTIF_LIKE = { military: 'shambler' };
+  const motifTrackFor = (kind) => SCORE_MOTIFS[kind] || (MOTIF_LIKE[kind] && SCORE_MOTIFS[MOTIF_LIKE[kind]]) || ((kind === 'guardian' || kind === 'caveguard') ? SCORE_MOTIFS.guardians : null) || null;
   // Which special the fight wants now: the guardian up, else the red sky (Ember), else a colossus. Null without the score.
   function scoreSpecialKey(state) {
     if (!scoreIsOn || !state) return null;

@@ -1,0 +1,657 @@
+{
+  "capturedAt": "2026-11-10T21:17:07.152Z",
+  "initInfo": {
+    "okActive": true,
+    "okBlackout": true,
+    "okFp": true,
+    "renderer": "WebGPURenderer",
+    "backend": "WebGPU",
+    "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "canvasW": 1280,
+    "canvasH": 720
+  },
+  "pageErrors": [],
+  "lightStats": {
+    "01-range-spawn-downrange": {
+      "noon": {
+        "bytes": 450769,
+        "playerPos": [
+          0,
+          0,
+          -0.95
+        ]
+      },
+      "overcast": {
+        "bytes": 388559,
+        "playerPos": [
+          0,
+          0,
+          -0.95
+        ]
+      },
+      "dusk": {
+        "bytes": 315698,
+        "playerPos": [
+          0,
+          0,
+          -0.95
+        ]
+      },
+      "night": {
+        "bytes": 203572,
+        "playerPos": [
+          0,
+          0,
+          -0.95
+        ]
+      }
+    },
+    "02-range-lanes-targets": {
+      "noon": {
+        "bytes": 402871,
+        "playerPos": [
+          1.65,
+          0,
+          -0.52
+        ]
+      },
+      "overcast": {
+        "bytes": 354722,
+        "playerPos": [
+          1.65,
+          0,
+          -0.52
+        ]
+      },
+      "dusk": {
+        "bytes": 281184,
+        "playerPos": [
+          1.65,
+          0,
+          -0.52
+        ]
+      },
+      "night": {
+        "bytes": 179570,
+        "playerPos": [
+          1.65,
+          0,
+          -0.52
+        ]
+      }
+    },
+    "03-range-backwall-lockers": {
+      "noon": {
+        "bytes": 289881,
+        "playerPos": [
+          -0.4,
+          0,
+          -3.8
+        ]
+      },
+      "overcast": {
+        "bytes": 287903,
+        "playerPos": [
+          -0.4,
+          0,
+          -3.8
+        ]
+      },
+      "dusk": {
+        "bytes": 217994,
+        "playerPos": [
+          -0.4,
+          0,
+          -3.8
+        ]
+      },
+      "night": {
+        "bytes": 139045,
+        "playerPos": [
+          -0.4,
+          0,
+          -3.8
+        ]
+      }
+    },
+    "04-range-east-stations": {
+      "noon": {
+        "bytes": 361865,
+        "playerPos": [
+          2.2,
+          0,
+          -6.6
+        ]
+      },
+      "overcast": {
+        "bytes": 367036,
+        "playerPos": [
+          2.2,
+          0,
+          -6.6
+        ]
+      },
+      "dusk": {
+        "bytes": 335775,
+        "playerPos": [
+          2.2,
+          0,
+          -6.6
+        ]
+      },
+      "night": {
+        "bytes": 311258,
+        "playerPos": [
+          2.2,
+          0,
+          -6.6
+        ]
+      }
+    },
+    "05-range-console-switch-door": {
+      "noon": {
+        "bytes": 308838,
+        "playerPos": [
+          -3.2,
+          0,
+          -5.8
+        ]
+      },
+      "overcast": {
+        "bytes": 295434,
+        "playerPos": [
+          -3.2,
+          0,
+          -5.8
+        ]
+      },
+      "dusk": {
+        "bytes": 249657,
+        "playerPos": [
+          -3.2,
+          0,
+          -5.8
+        ]
+      },
+      "night": {
+        "bytes": 163685,
+        "playerPos": [
+          -3.2,
+          0,
+          -5.8
+        ]
+      }
+    },
+    "06-build-hangar-overview": {
+      "noon": {
+        "bytes": 470049,
+        "playerPos": [
+          -12.2,
+          0,
+          -7.5
+        ]
+      },
+      "overcast": {
+        "bytes": 419238,
+        "playerPos": [
+          -12.2,
+          0,
+          -7.5
+        ]
+      },
+      "dusk": {
+        "bytes": 387543,
+        "playerPos": [
+          -12.2,
+          0,
+          -7.5
+        ]
+      },
+      "night": {
+        "bytes": 222052,
+        "playerPos": [
+          -12.2,
+          0,
+          -7.5
+        ]
+      }
+    },
+    "07-build-west-stations": {
+      "noon": {
+        "bytes": 402446,
+        "playerPos": [
+          -35.5,
+          0,
+          0
+        ]
+      },
+      "overcast": {
+        "bytes": 396176,
+        "playerPos": [
+          -35.5,
+          0,
+          0
+        ]
+      },
+      "dusk": {
+        "bytes": 308117,
+        "playerPos": [
+          -35.5,
+          0,
+          0
+        ]
+      },
+      "night": {
+        "bytes": 203277,
+        "playerPos": [
+          -35.5,
+          0,
+          0
+        ]
+      }
+    },
+    "08-build-containment-gate": {
+      "noon": {
+        "bytes": 372505,
+        "playerPos": [
+          -26,
+          0,
+          11.5
+        ]
+      },
+      "overcast": {
+        "bytes": 379959,
+        "playerPos": [
+          -26,
+          0,
+          11.5
+        ]
+      },
+      "dusk": {
+        "bytes": 346397,
+        "playerPos": [
+          -26,
+          0,
+          11.5
+        ]
+      },
+      "night": {
+        "bytes": 195720,
+        "playerPos": [
+          -26,
+          0,
+          11.5
+        ]
+      }
+    },
+    "09-build-placed-layout": {
+      "noon": {
+        "bytes": 367908,
+        "playerPos": [
+          -21.5,
+          0,
+          -2.2
+        ]
+      },
+      "overcast": {
+        "bytes": 340667,
+        "playerPos": [
+          -21.5,
+          0,
+          -2.2
+        ]
+      },
+      "dusk": {
+        "bytes": 301593,
+        "playerPos": [
+          -21.5,
+          0,
+          -2.2
+        ]
+      },
+      "night": {
+        "bytes": 179308,
+        "playerPos": [
+          -21.5,
+          0,
+          -2.2
+        ]
+      }
+    },
+    "10-build-infirmary-bay": {
+      "noon": {
+        "bytes": 555525,
+        "playerPos": [
+          -34.2,
+          0,
+          -5.2
+        ]
+      },
+      "overcast": {
+        "bytes": 519199,
+        "playerPos": [
+          -34.2,
+          0,
+          -5.2
+        ]
+      },
+      "dusk": {
+        "bytes": 407283,
+        "playerPos": [
+          -34.2,
+          0,
+          -5.2
+        ]
+      },
+      "night": {
+        "bytes": 264184,
+        "playerPos": [
+          -34.2,
+          0,
+          -5.2
+        ]
+      }
+    }
+  },
+  "closeupMeta": {
+    "close-01-cif-station": {
+      "title": "Close-Up: CIF Station Copy (East Wall)",
+      "playerPos": [
+        5.5,
+        0,
+        -10.2
+      ],
+      "perimeterState": [
+        {
+          "side": "training-perimeter-west",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-south",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-east",
+          "opacity": 1
+        }
+      ],
+      "bytes": 214647
+    },
+    "close-02-kiosk-station": {
+      "title": "Close-Up: Supply Kiosk Terminal Copy (East Wall)",
+      "playerPos": [
+        5.6,
+        0,
+        -6.6
+      ],
+      "perimeterState": [
+        {
+          "side": "training-perimeter-west",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-south",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-east",
+          "opacity": 1
+        }
+      ],
+      "bytes": 241050
+    },
+    "close-03-armory-station": {
+      "title": "Close-Up: Armory Workbench & Weapon Rack Copy (East Wall)",
+      "playerPos": [
+        5.2,
+        0,
+        -3
+      ],
+      "perimeterState": [
+        {
+          "side": "training-perimeter-west",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-south",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-east",
+          "opacity": 1
+        }
+      ],
+      "bytes": 181662
+    },
+    "close-04-range-console-near": {
+      "title": "Close-Up (J124): Range Console at 0.40m in First Person",
+      "playerPos": [
+        -7.465,
+        0,
+        -4.6
+      ],
+      "perimeterState": [
+        {
+          "side": "training-perimeter-west",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-south",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-east",
+          "opacity": 1
+        }
+      ],
+      "bytes": 188928
+    },
+    "close-05-door-keypad-range": {
+      "title": "Close-Up (J104): Security Door Keypad & Lights Switch (Range Side)",
+      "playerPos": [
+        -6.7,
+        0,
+        -8.9
+      ],
+      "perimeterState": [
+        {
+          "side": "training-perimeter-west",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-south",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-east",
+          "opacity": 1
+        }
+      ],
+      "bytes": 202838
+    },
+    "close-06-door-keypad-build": {
+      "title": "Close-Up (J104): Security Door Keypad (Build Room Side)",
+      "playerPos": [
+        -9.3,
+        0,
+        -8.9
+      ],
+      "perimeterState": [
+        {
+          "side": "training-perimeter-west",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-south",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-east",
+          "opacity": 1
+        }
+      ],
+      "bytes": 393991
+    },
+    "close-07-east-fence-recess-1p": {
+      "title": "Close-Up (J124): Standing in Doorway Recess (x = -10.0) Looking at East Fence",
+      "playerPos": [
+        -10,
+        0,
+        -8
+      ],
+      "perimeterState": [
+        {
+          "side": "training-perimeter-west",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-south",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-east",
+          "opacity": 1
+        }
+      ],
+      "bytes": 368979
+    },
+    "close-08-skull-window-recess-1p": {
+      "title": "Close-Up (J124/Scale): Standing at x = -42.0 Recess Looking at Skull Window & West Fence",
+      "playerPos": [
+        -42,
+        0,
+        -3
+      ],
+      "perimeterState": [
+        {
+          "side": "training-perimeter-west",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-south",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-east",
+          "opacity": 1
+        }
+      ],
+      "bytes": 301573
+    },
+    "close-09-hq-panel-recess": {
+      "title": "Close-Up: HQ Wave Panel Copy Inside West Recess",
+      "playerPos": [
+        -41.4,
+        0,
+        3
+      ],
+      "perimeterState": [
+        {
+          "side": "training-perimeter-west",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-south",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-east",
+          "opacity": 1
+        }
+      ],
+      "bytes": 301587
+    },
+    "close-10-fence-post-baseplate": {
+      "title": "Close-Up (J128): Razor Perimeter Fence Post Baseplate & Floor Contact",
+      "playerPos": [
+        -11.4,
+        0,
+        -4.2
+      ],
+      "perimeterState": [
+        {
+          "side": "training-perimeter-west",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-south",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-east",
+          "opacity": 1
+        }
+      ],
+      "bytes": 279552
+    },
+    "close-11-infirmary-bed-props": {
+      "title": "Close-Up (J128): Infirmary Stretcher Casters, Cot, IV Stand, O2 & ECG",
+      "playerPos": [
+        -37.2,
+        0,
+        -7.43
+      ],
+      "perimeterState": [
+        {
+          "side": "training-perimeter-west",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-south",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-east",
+          "opacity": 1
+        }
+      ],
+      "bytes": 406441
+    },
+    "close-12-target-lane1-base": {
+      "title": "Close-Up (J128): Lane 1 Target Stand Base, Pivot Knuckle & Backing Frame",
+      "playerPos": [
+        4.4,
+        0,
+        -0.45
+      ],
+      "perimeterState": [
+        {
+          "side": "training-perimeter-west",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-south",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-east",
+          "opacity": 1
+        }
+      ],
+      "bytes": 365896
+    },
+    "close-07b-east-fence-solid-1p": {
+      "title": "Control (x = -10.35): East Fence Solid",
+      "playerPos": [
+        -10.35,
+        0,
+        -8
+      ],
+      "perimeterState": [
+        {
+          "side": "training-perimeter-west",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-south",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-east",
+          "opacity": 1
+        }
+      ],
+      "bytes": 379448
+    }
+  }
+}

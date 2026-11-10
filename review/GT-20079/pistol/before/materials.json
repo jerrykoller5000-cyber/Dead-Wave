@@ -1,0 +1,1748 @@
+{
+  "factory": {
+    "assembled": [
+      {
+        "part": "",
+        "material": "ccb213f0-4735-4605-bc14-d3eab49cdbfb",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 4344920,
+        "roughness": 0.36,
+        "metalness": 0.61
+      },
+      {
+        "part": "",
+        "material": "5cd90fc7-05e2-4036-9279-771e4eaec111",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3028028,
+        "roughness": 0.58,
+        "metalness": 0.29
+      },
+      {
+        "part": "",
+        "material": "0be75986-80d7-4457-a6e1-f25a27fff87f",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16724770,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "80522441-9b5c-4931-9bf8-aecb1019b03e",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 9015963,
+        "roughness": 0.34,
+        "metalness": 0.58
+      },
+      {
+        "part": "",
+        "material": "d77a835e-d155-487c-848f-b8bbf499a043",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 6053992,
+        "roughness": 0.68,
+        "metalness": 0.06
+      },
+      {
+        "part": "",
+        "material": "069dd785-59f4-401f-9f16-0e989c098808",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 15262936,
+        "roughness": 0.5,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "7726d614-2ee9-4803-8efa-05f000e2f288",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1513498,
+        "roughness": 0.95,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "21608299-79fb-4253-8a8f-01d1f7020909",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "material": "f2294d37-53bc-4ad3-b630-fd853806f1df",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "material": "fb4a98de-f45d-43e1-92c2-ba80fa16fb9a",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      },
+      {
+        "part": "",
+        "material": "3860e8c5-e765-49b2-a4e2-6a67ca211ea3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "1d561b94-084d-4019-b2b6-b44a8c41beab",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3619131,
+        "roughness": 0.74,
+        "metalness": 0.03
+      },
+      {
+        "part": "",
+        "material": "b6f3cd7e-9b8b-48ee-b5fc-041483c0b0e1",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3290167,
+        "roughness": 0.76,
+        "metalness": 0.03
+      },
+      {
+        "part": "",
+        "material": "cd9811dc-8bc4-4682-bcc6-7b64d4493393",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "material": "c13f15ce-a86e-45d8-9c27-d574af136352",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777113
+      },
+      {
+        "part": "",
+        "material": "c3f22f0d-6bf3-4cff-90d2-35f5e659e4b4",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16732497
+      },
+      {
+        "part": "",
+        "material": "31e2461a-4982-40f4-8ff4-b6531f7ae40d",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3817288,
+        "roughness": 0.42,
+        "metalness": 0.85
+      },
+      {
+        "part": "",
+        "material": "88e0eaff-f1aa-4fd5-9c34-babc263e2346",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      }
+    ],
+    "firstPerson": [
+      {
+        "part": "",
+        "material": "d47b4766-4f2a-4331-8da5-f8b2b7e2ea69",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 4344920,
+        "roughness": 0.36,
+        "metalness": 0.61
+      },
+      {
+        "part": "",
+        "material": "9dd7145c-cdc9-41e4-98b7-78cfe80837db",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3028028,
+        "roughness": 0.58,
+        "metalness": 0.29
+      },
+      {
+        "part": "",
+        "material": "003b0c00-e2c0-42e6-af5f-e59fe7aac83e",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16724770,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "1cfcb766-3c0c-47d7-bafe-8f0ca7bb6897",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 9015963,
+        "roughness": 0.34,
+        "metalness": 0.58
+      },
+      {
+        "part": "",
+        "material": "4ad8a4c7-29c2-47b6-9554-e82099bb7624",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 8751504,
+        "roughness": 0.61,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "material": "c4e393fb-dc9b-4fcf-bc9f-9f9eb214f093",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 15262936,
+        "roughness": 0.5,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "4e844ee7-1fd8-4962-a159-855f572d5308",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2303271,
+        "roughness": 0.92,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "1ba73d6d-62d4-4cc1-8bb8-b27968c75653",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685184,
+        "roughness": 0.69,
+        "metalness": 0.08
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "material": "60c682bc-7563-4e8e-a867-0ccf496d5974",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "material": "7077cb61-4a38-4223-9aab-be35417dffb2",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      },
+      {
+        "part": "",
+        "material": "7e2313cc-f781-4bac-8a72-fdc318b113fd",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "b1043e42-8115-4fbe-afa7-159e81f41bf0",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3619131,
+        "roughness": 0.74,
+        "metalness": 0.03
+      },
+      {
+        "part": "",
+        "material": "0b7b250b-28ac-478e-a5a6-7f00fd12cf76",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5264465,
+        "roughness": 0.84,
+        "metalness": 0.02
+      },
+      {
+        "part": "",
+        "material": "efbbe135-cd46-4d3a-a64b-488e8b394860",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5659490,
+        "roughness": 0.58,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "material": "9890bed6-392d-4b53-a72f-72ea5322cf60",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777113
+      },
+      {
+        "part": "",
+        "material": "81aa8bef-cc9f-4284-a231-a4dcde371256",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 8094347,
+        "roughness": 0.42,
+        "metalness": 0.85
+      },
+      {
+        "part": "",
+        "material": "ad1ef73a-9a43-4bd9-8545-fa017947cb80",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      }
+    ],
+    "slide": [
+      {
+        "part": "",
+        "material": "ccb213f0-4735-4605-bc14-d3eab49cdbfb",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 4344920,
+        "roughness": 0.36,
+        "metalness": 0.61
+      },
+      {
+        "part": "",
+        "material": "5cd90fc7-05e2-4036-9279-771e4eaec111",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3028028,
+        "roughness": 0.58,
+        "metalness": 0.29
+      },
+      {
+        "part": "",
+        "material": "0be75986-80d7-4457-a6e1-f25a27fff87f",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16724770,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "80522441-9b5c-4931-9bf8-aecb1019b03e",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 9015963,
+        "roughness": 0.34,
+        "metalness": 0.58
+      },
+      {
+        "part": "",
+        "material": "d77a835e-d155-487c-848f-b8bbf499a043",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 6053992,
+        "roughness": 0.68,
+        "metalness": 0.06
+      },
+      {
+        "part": "",
+        "material": "069dd785-59f4-401f-9f16-0e989c098808",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 15262936,
+        "roughness": 0.5,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "7726d614-2ee9-4803-8efa-05f000e2f288",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1513498,
+        "roughness": 0.95,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "21608299-79fb-4253-8a8f-01d1f7020909",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "material": "f2294d37-53bc-4ad3-b630-fd853806f1df",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "material": "fb4a98de-f45d-43e1-92c2-ba80fa16fb9a",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      },
+      {
+        "part": "",
+        "material": "3860e8c5-e765-49b2-a4e2-6a67ca211ea3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "magazine": [
+      {
+        "part": "",
+        "material": "1d561b94-084d-4019-b2b6-b44a8c41beab",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3619131,
+        "roughness": 0.74,
+        "metalness": 0.03
+      },
+      {
+        "part": "",
+        "material": "5cd90fc7-05e2-4036-9279-771e4eaec111",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3028028,
+        "roughness": 0.58,
+        "metalness": 0.29
+      },
+      {
+        "part": "",
+        "material": "7726d614-2ee9-4803-8efa-05f000e2f288",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1513498,
+        "roughness": 0.95,
+        "metalness": 0
+      }
+    ],
+    "light": [
+      {
+        "part": "",
+        "material": "88e0eaff-f1aa-4fd5-9c34-babc263e2346",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "material": "3860e8c5-e765-49b2-a4e2-6a67ca211ea3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "suppressor": [
+      {
+        "part": "",
+        "material": "21608299-79fb-4253-8a8f-01d1f7020909",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "material": "31e2461a-4982-40f4-8ff4-b6531f7ae40d",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3817288,
+        "roughness": 0.42,
+        "metalness": 0.85
+      },
+      {
+        "part": "",
+        "material": "7726d614-2ee9-4803-8efa-05f000e2f288",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1513498,
+        "roughness": 0.95,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "cd9811dc-8bc4-4682-bcc6-7b64d4493393",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      }
+    ],
+    "optic": [
+      {
+        "part": "faint blue-gray optical glass",
+        "material": "f2294d37-53bc-4ad3-b630-fd853806f1df",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "material": "fb4a98de-f45d-43e1-92c2-ba80fa16fb9a",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      },
+      {
+        "part": "",
+        "material": "3860e8c5-e765-49b2-a4e2-6a67ca211ea3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ]
+  },
+  "camo": {
+    "assembled": [
+      {
+        "part": "",
+        "material": "ccb213f0-4735-4605-bc14-d3eab49cdbfb",
+        "role": null,
+        "registered": true,
+        "map": "463190ae-9535-426f-9d65-e613aa567b25",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "5cd90fc7-05e2-4036-9279-771e4eaec111",
+        "role": null,
+        "registered": true,
+        "map": "463190ae-9535-426f-9d65-e613aa567b25",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "0be75986-80d7-4457-a6e1-f25a27fff87f",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16724770,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "80522441-9b5c-4931-9bf8-aecb1019b03e",
+        "role": null,
+        "registered": true,
+        "map": "463190ae-9535-426f-9d65-e613aa567b25",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "d77a835e-d155-487c-848f-b8bbf499a043",
+        "role": null,
+        "registered": true,
+        "map": "463190ae-9535-426f-9d65-e613aa567b25",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "069dd785-59f4-401f-9f16-0e989c098808",
+        "role": null,
+        "registered": true,
+        "map": "463190ae-9535-426f-9d65-e613aa567b25",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "7726d614-2ee9-4803-8efa-05f000e2f288",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1513498,
+        "roughness": 0.95,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "21608299-79fb-4253-8a8f-01d1f7020909",
+        "role": null,
+        "registered": true,
+        "map": "463190ae-9535-426f-9d65-e613aa567b25",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "material": "f2294d37-53bc-4ad3-b630-fd853806f1df",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "material": "fb4a98de-f45d-43e1-92c2-ba80fa16fb9a",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      },
+      {
+        "part": "",
+        "material": "3860e8c5-e765-49b2-a4e2-6a67ca211ea3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "1d561b94-084d-4019-b2b6-b44a8c41beab",
+        "role": null,
+        "registered": true,
+        "map": "463190ae-9535-426f-9d65-e613aa567b25",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "b6f3cd7e-9b8b-48ee-b5fc-041483c0b0e1",
+        "role": null,
+        "registered": true,
+        "map": "463190ae-9535-426f-9d65-e613aa567b25",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "cd9811dc-8bc4-4682-bcc6-7b64d4493393",
+        "role": null,
+        "registered": true,
+        "map": "463190ae-9535-426f-9d65-e613aa567b25",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "c13f15ce-a86e-45d8-9c27-d574af136352",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777113
+      },
+      {
+        "part": "",
+        "material": "c3f22f0d-6bf3-4cff-90d2-35f5e659e4b4",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16732497
+      },
+      {
+        "part": "",
+        "material": "31e2461a-4982-40f4-8ff4-b6531f7ae40d",
+        "role": null,
+        "registered": true,
+        "map": "463190ae-9535-426f-9d65-e613aa567b25",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "88e0eaff-f1aa-4fd5-9c34-babc263e2346",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      }
+    ],
+    "firstPerson": [
+      {
+        "part": "",
+        "material": "9cf59233-761b-44b6-8926-454e5aef9703",
+        "role": null,
+        "registered": false,
+        "map": "463190ae-9535-426f-9d65-e613aa567b25",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "b040e821-49a5-45d0-a563-a8dbdd5a1fb7",
+        "role": null,
+        "registered": false,
+        "map": "463190ae-9535-426f-9d65-e613aa567b25",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "003b0c00-e2c0-42e6-af5f-e59fe7aac83e",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16724770,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "4095547c-a491-4676-8e73-be242f5e103e",
+        "role": null,
+        "registered": false,
+        "map": "463190ae-9535-426f-9d65-e613aa567b25",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "a1d17c83-8af5-4119-a39f-346770696720",
+        "role": null,
+        "registered": false,
+        "map": "463190ae-9535-426f-9d65-e613aa567b25",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "f822a9c2-af41-42b9-b289-c267ffbbe464",
+        "role": null,
+        "registered": false,
+        "map": "463190ae-9535-426f-9d65-e613aa567b25",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "4e844ee7-1fd8-4962-a159-855f572d5308",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2303271,
+        "roughness": 0.92,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "369930f7-9c8f-4b0c-9756-3ba9ef8f7447",
+        "role": null,
+        "registered": false,
+        "map": "463190ae-9535-426f-9d65-e613aa567b25",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "material": "60c682bc-7563-4e8e-a867-0ccf496d5974",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "material": "7077cb61-4a38-4223-9aab-be35417dffb2",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      },
+      {
+        "part": "",
+        "material": "7e2313cc-f781-4bac-8a72-fdc318b113fd",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "802c5656-4eb1-4b8e-99f0-81540a43a147",
+        "role": null,
+        "registered": false,
+        "map": "463190ae-9535-426f-9d65-e613aa567b25",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "9c07e39c-dff1-44a3-ae7d-33df845bdb24",
+        "role": null,
+        "registered": false,
+        "map": "463190ae-9535-426f-9d65-e613aa567b25",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "02686162-9b44-4375-a44d-1234794d5309",
+        "role": null,
+        "registered": false,
+        "map": "463190ae-9535-426f-9d65-e613aa567b25",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "9890bed6-392d-4b53-a72f-72ea5322cf60",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777113
+      },
+      {
+        "part": "",
+        "material": "a1cf8d1a-1b19-428e-8116-4687ad03919c",
+        "role": null,
+        "registered": false,
+        "map": "463190ae-9535-426f-9d65-e613aa567b25",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "ad1ef73a-9a43-4bd9-8545-fa017947cb80",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      }
+    ],
+    "slide": [
+      {
+        "part": "",
+        "material": "ccb213f0-4735-4605-bc14-d3eab49cdbfb",
+        "role": null,
+        "registered": true,
+        "map": "463190ae-9535-426f-9d65-e613aa567b25",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "5cd90fc7-05e2-4036-9279-771e4eaec111",
+        "role": null,
+        "registered": true,
+        "map": "463190ae-9535-426f-9d65-e613aa567b25",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "0be75986-80d7-4457-a6e1-f25a27fff87f",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16724770,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "80522441-9b5c-4931-9bf8-aecb1019b03e",
+        "role": null,
+        "registered": true,
+        "map": "463190ae-9535-426f-9d65-e613aa567b25",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "d77a835e-d155-487c-848f-b8bbf499a043",
+        "role": null,
+        "registered": true,
+        "map": "463190ae-9535-426f-9d65-e613aa567b25",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "069dd785-59f4-401f-9f16-0e989c098808",
+        "role": null,
+        "registered": true,
+        "map": "463190ae-9535-426f-9d65-e613aa567b25",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "7726d614-2ee9-4803-8efa-05f000e2f288",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1513498,
+        "roughness": 0.95,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "21608299-79fb-4253-8a8f-01d1f7020909",
+        "role": null,
+        "registered": true,
+        "map": "463190ae-9535-426f-9d65-e613aa567b25",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "material": "f2294d37-53bc-4ad3-b630-fd853806f1df",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "material": "fb4a98de-f45d-43e1-92c2-ba80fa16fb9a",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      },
+      {
+        "part": "",
+        "material": "3860e8c5-e765-49b2-a4e2-6a67ca211ea3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "magazine": [
+      {
+        "part": "",
+        "material": "1d561b94-084d-4019-b2b6-b44a8c41beab",
+        "role": null,
+        "registered": true,
+        "map": "463190ae-9535-426f-9d65-e613aa567b25",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "5cd90fc7-05e2-4036-9279-771e4eaec111",
+        "role": null,
+        "registered": true,
+        "map": "463190ae-9535-426f-9d65-e613aa567b25",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "7726d614-2ee9-4803-8efa-05f000e2f288",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1513498,
+        "roughness": 0.95,
+        "metalness": 0
+      }
+    ],
+    "light": [
+      {
+        "part": "",
+        "material": "88e0eaff-f1aa-4fd5-9c34-babc263e2346",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "material": "3860e8c5-e765-49b2-a4e2-6a67ca211ea3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "suppressor": [
+      {
+        "part": "",
+        "material": "21608299-79fb-4253-8a8f-01d1f7020909",
+        "role": null,
+        "registered": true,
+        "map": "463190ae-9535-426f-9d65-e613aa567b25",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "31e2461a-4982-40f4-8ff4-b6531f7ae40d",
+        "role": null,
+        "registered": true,
+        "map": "463190ae-9535-426f-9d65-e613aa567b25",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "7726d614-2ee9-4803-8efa-05f000e2f288",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1513498,
+        "roughness": 0.95,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "cd9811dc-8bc4-4682-bcc6-7b64d4493393",
+        "role": null,
+        "registered": true,
+        "map": "463190ae-9535-426f-9d65-e613aa567b25",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      }
+    ],
+    "optic": [
+      {
+        "part": "faint blue-gray optical glass",
+        "material": "f2294d37-53bc-4ad3-b630-fd853806f1df",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "material": "fb4a98de-f45d-43e1-92c2-ba80fa16fb9a",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      },
+      {
+        "part": "",
+        "material": "3860e8c5-e765-49b2-a4e2-6a67ca211ea3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ]
+  },
+  "restored": {
+    "assembled": [
+      {
+        "part": "",
+        "material": "ccb213f0-4735-4605-bc14-d3eab49cdbfb",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 4344920,
+        "roughness": 0.36,
+        "metalness": 0.61
+      },
+      {
+        "part": "",
+        "material": "5cd90fc7-05e2-4036-9279-771e4eaec111",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3028028,
+        "roughness": 0.58,
+        "metalness": 0.29
+      },
+      {
+        "part": "",
+        "material": "0be75986-80d7-4457-a6e1-f25a27fff87f",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16724770,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "80522441-9b5c-4931-9bf8-aecb1019b03e",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 9015963,
+        "roughness": 0.34,
+        "metalness": 0.58
+      },
+      {
+        "part": "",
+        "material": "d77a835e-d155-487c-848f-b8bbf499a043",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 6053992,
+        "roughness": 0.68,
+        "metalness": 0.06
+      },
+      {
+        "part": "",
+        "material": "069dd785-59f4-401f-9f16-0e989c098808",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 15262936,
+        "roughness": 0.5,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "7726d614-2ee9-4803-8efa-05f000e2f288",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1513498,
+        "roughness": 0.95,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "21608299-79fb-4253-8a8f-01d1f7020909",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "material": "f2294d37-53bc-4ad3-b630-fd853806f1df",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "material": "fb4a98de-f45d-43e1-92c2-ba80fa16fb9a",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      },
+      {
+        "part": "",
+        "material": "3860e8c5-e765-49b2-a4e2-6a67ca211ea3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "1d561b94-084d-4019-b2b6-b44a8c41beab",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3619131,
+        "roughness": 0.74,
+        "metalness": 0.03
+      },
+      {
+        "part": "",
+        "material": "b6f3cd7e-9b8b-48ee-b5fc-041483c0b0e1",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3290167,
+        "roughness": 0.76,
+        "metalness": 0.03
+      },
+      {
+        "part": "",
+        "material": "cd9811dc-8bc4-4682-bcc6-7b64d4493393",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "material": "c13f15ce-a86e-45d8-9c27-d574af136352",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777113
+      },
+      {
+        "part": "",
+        "material": "c3f22f0d-6bf3-4cff-90d2-35f5e659e4b4",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16732497
+      },
+      {
+        "part": "",
+        "material": "31e2461a-4982-40f4-8ff4-b6531f7ae40d",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3817288,
+        "roughness": 0.42,
+        "metalness": 0.85
+      },
+      {
+        "part": "",
+        "material": "88e0eaff-f1aa-4fd5-9c34-babc263e2346",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      }
+    ],
+    "firstPerson": [
+      {
+        "part": "",
+        "material": "898ebed6-5aa0-40ed-8d7f-ca68dd0d876d",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 4344920,
+        "roughness": 0.36,
+        "metalness": 0.61
+      },
+      {
+        "part": "",
+        "material": "a004ecf4-a0e2-4088-9556-dae5c7e88022",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3028028,
+        "roughness": 0.58,
+        "metalness": 0.29
+      },
+      {
+        "part": "",
+        "material": "003b0c00-e2c0-42e6-af5f-e59fe7aac83e",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16724770,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "f9d96172-3ef7-4a50-bbb7-194c469debd4",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 9015963,
+        "roughness": 0.34,
+        "metalness": 0.58
+      },
+      {
+        "part": "",
+        "material": "70cc8ed4-a0c0-41e3-9762-cbe32c4aa74e",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 8751504,
+        "roughness": 0.61,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "material": "d201c184-a039-4cb1-9afb-8f53c89ec9a3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 15262936,
+        "roughness": 0.5,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "4e844ee7-1fd8-4962-a159-855f572d5308",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2303271,
+        "roughness": 0.92,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "4a08dad1-b282-402f-84f5-f0499bbf2ed7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685184,
+        "roughness": 0.69,
+        "metalness": 0.08
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "material": "60c682bc-7563-4e8e-a867-0ccf496d5974",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "material": "7077cb61-4a38-4223-9aab-be35417dffb2",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      },
+      {
+        "part": "",
+        "material": "7e2313cc-f781-4bac-8a72-fdc318b113fd",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "340a6779-9543-4089-ac98-a4c0a4038f28",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3619131,
+        "roughness": 0.74,
+        "metalness": 0.03
+      },
+      {
+        "part": "",
+        "material": "a17163b4-dd0c-4a9c-beae-0a30f871904c",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5264465,
+        "roughness": 0.84,
+        "metalness": 0.02
+      },
+      {
+        "part": "",
+        "material": "1fb3bfb2-d8b3-4841-b7fb-534fd5487c96",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5659490,
+        "roughness": 0.58,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "material": "9890bed6-392d-4b53-a72f-72ea5322cf60",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777113
+      },
+      {
+        "part": "",
+        "material": "4238edcf-b003-42d1-ac9c-dc103e689b47",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 8094347,
+        "roughness": 0.42,
+        "metalness": 0.85
+      },
+      {
+        "part": "",
+        "material": "ad1ef73a-9a43-4bd9-8545-fa017947cb80",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      }
+    ],
+    "slide": [
+      {
+        "part": "",
+        "material": "ccb213f0-4735-4605-bc14-d3eab49cdbfb",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 4344920,
+        "roughness": 0.36,
+        "metalness": 0.61
+      },
+      {
+        "part": "",
+        "material": "5cd90fc7-05e2-4036-9279-771e4eaec111",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3028028,
+        "roughness": 0.58,
+        "metalness": 0.29
+      },
+      {
+        "part": "",
+        "material": "0be75986-80d7-4457-a6e1-f25a27fff87f",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16724770,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "80522441-9b5c-4931-9bf8-aecb1019b03e",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 9015963,
+        "roughness": 0.34,
+        "metalness": 0.58
+      },
+      {
+        "part": "",
+        "material": "d77a835e-d155-487c-848f-b8bbf499a043",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 6053992,
+        "roughness": 0.68,
+        "metalness": 0.06
+      },
+      {
+        "part": "",
+        "material": "069dd785-59f4-401f-9f16-0e989c098808",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 15262936,
+        "roughness": 0.5,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "7726d614-2ee9-4803-8efa-05f000e2f288",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1513498,
+        "roughness": 0.95,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "21608299-79fb-4253-8a8f-01d1f7020909",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "material": "f2294d37-53bc-4ad3-b630-fd853806f1df",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "material": "fb4a98de-f45d-43e1-92c2-ba80fa16fb9a",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      },
+      {
+        "part": "",
+        "material": "3860e8c5-e765-49b2-a4e2-6a67ca211ea3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "magazine": [
+      {
+        "part": "",
+        "material": "1d561b94-084d-4019-b2b6-b44a8c41beab",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3619131,
+        "roughness": 0.74,
+        "metalness": 0.03
+      },
+      {
+        "part": "",
+        "material": "5cd90fc7-05e2-4036-9279-771e4eaec111",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3028028,
+        "roughness": 0.58,
+        "metalness": 0.29
+      },
+      {
+        "part": "",
+        "material": "7726d614-2ee9-4803-8efa-05f000e2f288",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1513498,
+        "roughness": 0.95,
+        "metalness": 0
+      }
+    ],
+    "light": [
+      {
+        "part": "",
+        "material": "88e0eaff-f1aa-4fd5-9c34-babc263e2346",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "material": "3860e8c5-e765-49b2-a4e2-6a67ca211ea3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "suppressor": [
+      {
+        "part": "",
+        "material": "21608299-79fb-4253-8a8f-01d1f7020909",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "material": "31e2461a-4982-40f4-8ff4-b6531f7ae40d",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3817288,
+        "roughness": 0.42,
+        "metalness": 0.85
+      },
+      {
+        "part": "",
+        "material": "7726d614-2ee9-4803-8efa-05f000e2f288",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1513498,
+        "roughness": 0.95,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "cd9811dc-8bc4-4682-bcc6-7b64d4493393",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      }
+    ],
+    "optic": [
+      {
+        "part": "faint blue-gray optical glass",
+        "material": "f2294d37-53bc-4ad3-b630-fd853806f1df",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "material": "fb4a98de-f45d-43e1-92c2-ba80fa16fb9a",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      },
+      {
+        "part": "",
+        "material": "3860e8c5-e765-49b2-a4e2-6a67ca211ea3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ]
+  }
+}

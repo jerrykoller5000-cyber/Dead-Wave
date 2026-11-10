@@ -62,11 +62,14 @@
 
     // The joints the studio, the idle and the reactions hold on to.
     const u = a.userData, near = (v, x, y, z) => Math.abs(v.x - x) < 1e-6 && Math.abs(v.y - y) < 1e-6 && Math.abs(v.z - z) < 1e-6;
+    // CC-340 (J125, Claude's go 10 Nov): a man's proportions at the same eye height. The hips up 0.165 m (0.62 -> 0.785),
+    // the thigh 0.355 and the shin 0.33 (were 0.27, 0.25), the torso turning at 0.865 (0.7), the shoulders up and in
+    // (0.34, 0.38 -> 0.235, 0.335 above the torso's pivot); the head's pivot stays at 1.22 m (0.355 above the torso).
     const joints = [
-      ['armLG', u.armLG.position, -0.34, 0.38, 0.02], ['armRG', u.armRG.position, 0.34, 0.38, 0.02],
-      ['legLG', u.legLG.position, -0.13, 0.62, 0], ['legRG', u.legRG.position, 0.13, 0.62, 0],
-      ['kneeLG', u.kneeLG.position, 0, -0.27, 0], ['ankleLG', u.ankleLG.position, 0, -0.25, 0.01],
-      ['torsoG', u.torsoG.position, 0, 0.7, 0], ['headG', u.headG.position, 0, 0.52, 0], ['elbowLG', u.elbowLG.position, 0, -0.28, 0]
+      ['armLG', u.armLG.position, -0.235, 0.335, 0.02], ['armRG', u.armRG.position, 0.235, 0.335, 0.02],
+      ['legLG', u.legLG.position, -0.13, 0.785, 0], ['legRG', u.legRG.position, 0.13, 0.785, 0],
+      ['kneeLG', u.kneeLG.position, 0, -0.355, 0], ['ankleLG', u.ankleLG.position, 0, -0.33, 0.01],
+      ['torsoG', u.torsoG.position, 0, 0.865, 0], ['headG', u.headG.position, 0, 0.355, 0], ['elbowLG', u.elbowLG.position, 0, -0.28, 0]
     ];
     const moved = joints.filter(([, v, x, y, z]) => !near(v, x, y, z)).map(([n]) => n);
     ok(!moved.length, 'every joint where it was' + (moved.length ? ': moved ' + moved.join(', ') : ''));

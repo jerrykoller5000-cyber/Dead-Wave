@@ -733,3 +733,42 @@ Claude's old first-person and weapon cards: what is left of them is carried by t
 - [~] **CL-305** (folded, D-145) **(7 Nov ~04:50Z: J7 in (FP_ADS_TIME); J8 found and fixed (the hand's twist flipped side mid-sprint: game/viewmodel.js twistToward keeps its side and is rate-limited; the worst frame 1.08 -> 0.08 rad); handoffs/2026-11-07-claude-CL-304-305.md. Next: the pistol's wrists at the clamp, then every gun's run/walk/sway/land.) First-person motion (D-118, J7, J8). Now.** The ADS transition quicker (J7); the pistol's run with no elbow popping up and down (J8); then the viewmodel's run, walk, sway and land for every gun, watched frame by frame (CL-281 is mine).
 - [~] **CL-293** (folded, D-145) **The first-person pass (D-111 order 1; J54, J55, J59, J62; docs/specs/fps-pass.md). Now.** Round 0: AG-202's sheet from Jerry's seat and MU-31's numbers, scored. Round 1, mine: the vibration found and gone (J55), sway, bob, sprint, landing, the recoil springs and the camera's share (the flamer's steady pushback, J59), the pistol's support grip and the wrists flared out (J54), then every gun's support pose by the same rules. tcl293 (the jitter bound, the sway's settle) and the hull check. ChatGPT's GP-20016 is the weapons' half.
 - [~] **CL-299** (folded, D-145) **The camo's scale everywhere else (AG-201, after J63's sleeve fix).** The guns' furniture camo is projected before weaponSizeFactor scales them (3.0-4.5 repeats a metre in his hands, 2.4 on the armory's rack); the uniform's lone child parts and the rig skin's shadow parts at 6-40. One tile size for all. Later.
+<!-- crew.mjs tidy, 2026-11-10T21:09Z: 17 finished -->
+
+## CLAUDE DIRECTOR
+
+### (no phase)
+
+- [x] **CL-353** The director's checks: old names find their agent (crew.mjs aliases); the queue confirmed on the PC; reviews
+- [x] **CL-352** Every agent checks the board every 15 minutes: crew.mjs standby (D-147)
+- [x] **CL-351** Names: CLAUDE DIRECTOR and Claude 1; the director checks every 10 minutes (D-146)
+- [x] **CL-350** Claude becomes the game director; Claude 1 takes the hands and the first person (D-145)
+- [x] **CL-349** The Training Ground only (D-144): 1.2 parked, the weapons passes gun by gun
+- [x] **CL-347** More game tests at once on the PC, with the room (D-143): the queue grants up to the PC's slots
+- [x] **CL-346** The board shows the crew of six (ChatGPT 2)
+- [x] **CL-345** ChatGPT 2 joins (GPT-6 Astra High): the weapons; Antigravity on Gemini 4 Carbon; D-142
+- [x] **CL-344** the board without the retired agents
+- [x] **CL-276** **(Done by CL-347, D-143: several leases at once, timed ones alone with --exclusive.)** **The slot's second lane, for checks that don't measure time (Jerry, 2026-10-29: "Slate that for implementation at your convenience").** Today's one slot stays the only lane for anything timed: the benches, the full suite and every test that samples game time or fps. A second lane runs only untimed jobs alongside it: the inspector's and the camera's pictures, the draw and triangle counts, the sweeps' shots. `slot run` takes `--untimed` to ask for it; the lane pauses (holds new grants, lets a running picture job finish its shot) whenever a timed job holds the main lane, and a timed job's start waits for the untimed lane to be quiet, so a bench never shares the PC with a second game. Jerry's own game or inspector still comes first in both. In tools/game-test-slot.mjs and crew.mjs (rule 16's text and the panel's slot box to match). When the waits pile up again (the 48 h before 2026-10-29: the slot held 25 % of the time, the median wait 0, the 90th percentile 14 min). After 1.1's blockers.
+
+## ChatGPT
+
+### (no phase)
+
+- [x] **GP-20078** **The Training Ground, every system once (D-144). Now, after GP-20074's three tests.** First: t103, t214, t328 to the current Armory flow (--review, what each expected and why it changed). Then play through every system of the Training Ground on the PC through the slot, real renderer, as Jerry would: the kiosk; the Armory and the workbench (buy every gun, every attachment, akimbo, every laser colour, ammo and then a reload of each gun); the range computer and each drill; the targets (hits, the flamer's burn, the launcher's blow-apart); the alarm and each zombie type in the arena, with its music (J102); the mortar; the tunnel and the trail. One line per bug with its owner and a picture or clip (review/GP-20078/); fix the ones in your lane (UI, words, the Armory, the zombies) as you go; request the rest from their owners. A short report to CLAUDE DIRECTOR: what works, what doesn't, who has each.
+- [x] **GP-20074** **J105, J113, J108: the Armory. Now.** Akimbo bought on the workbench like an attachment; no text cut off on the right; whatever is left in Stock and Supplies into the one Armory menu; the shelf shows what is stored (a gun he equips leaves the shelf, put back it returns); the primary slots' and the akimbo slots' depopulating bugs (J113: Secondary 1 or 2 can't be emptied for the Uzi pair; Y shows them anyway); every laser colour buyable in training; 'color', not 'colour'.
+- [x] **GP-20076** **J128 (Jerry, 10 Nov, standing, D-140): no part through another, nothing floating: the zombies (the weapons' half is ChatGPT 2's GT-20076).** Every zombie (clothes, gear and wounds on the body): each part seated on what holds it (no gap over 0.5 mm) and none through another (past the depth it is seated at). A check over each model's parts that fails on either; the list per model in the handoff.
+
+## ChatGPT 2
+
+### (no phase)
+
+- [x] **GT-20078** **J126 rule 2 (D-138): room for the hands. Now (Claude's numbers below, 10 Nov 20:00Z).** Where a hand fitted to the gun's shape still goes into it (the minigun's rear grip and the launcher's pistol grip: the firing palm 14-18 mm inside the housing in every fit tried; the uzi's laser-light module under the support hand, 7.5 mm), give the room a real gun gives a hand, from its manual; Claude refits and tests (tcl334b/c/d).
+
+## Antigravity
+
+### (no phase)
+
+- [x] **AG-285** commit job: ChatGPT 2 joins + Gemini 4 Carbon
+- [x] **AG-283** commit job: Claude 3 joins + the board tidy
+- [x] **AG-284** **(Back from review, CLAUDE DIRECTOR 20:20Z: the four lights are the same dark frame four times: noon, overcast, dusk and night must look different; too dark to see a single seat. Redo the sheet with the lights switching, exposed so the joints read, a close-up of each fix before and after, and the skeletal marine: is it meant to hang off the wall top? If not, seat it.)** **J128 (Jerry, 10 Nov, standing, D-140): the buildables and props, part on part. Now, after the commit job.** Every model in your lane (walls, floors, barricades, sandbags, wire, railing, platform, pillar, stairs, traps, the skeletal marine), at every build stage and damage state: each part seated on what holds it (no gap over 0.5 mm) and none through another past the depth it is seated at. A check over each model's parts that fails on either (tools/tests/tag284.js); the list per model in the handoff; the fixes pictured in the four lights on your GPU. Where they sit in the world is Claude 2's CB-292.
+

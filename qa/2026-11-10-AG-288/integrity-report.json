@@ -1,0 +1,946 @@
+{
+  "verifiedAt": "2026-11-10T21:40:17.975Z",
+  "initInfo": {
+    "okActive": true,
+    "okBlackout": true,
+    "okFp": true,
+    "renderer": "WebGPURenderer",
+    "backend": "WebGPU",
+    "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "canvasW": 1280,
+    "canvasH": 720
+  },
+  "totalCapturedInAfterPass": 64,
+  "ag287PngCount": 53,
+  "fixedBounds": {
+    "training-kiosk": {
+      "minYRel": 0.65,
+      "maxYRel": 3.17,
+      "minXRel": 7.472,
+      "maxXRel": 8.27,
+      "minZRel": -7.4,
+      "maxZRel": -5.8
+    },
+    "training-skullWindow": {
+      "minYRel": 0.5609,
+      "maxYRel": 2.9673,
+      "minXRel": -44.0539,
+      "maxXRel": -43.2282,
+      "minZRel": -4.3929,
+      "maxZRel": -1.6098
+    },
+    "training-hqPanel": {
+      "minYRel": 0,
+      "maxYRel": 2.965,
+      "minXRel": -44.05,
+      "maxXRel": -43.4275,
+      "minZRel": 2.37,
+      "maxZRel": 3.63
+    }
+  },
+  "skeletalMarineCheck": {
+    "meshCount": 569,
+    "minYRel": 0,
+    "maxYRel": 1.7569
+  },
+  "pageErrors": [],
+  "failures": [],
+  "records": [
+    {
+      "name": "area-01-range-spawn-downrange-noon.png",
+      "bytes": 631187,
+      "sha256": "15b84ab13b47826d9c56dc7244dc8c3ef8c16c564c68985a5d2e39a0f7edb4b7",
+      "meanRgb": [
+        67.4,
+        69.8,
+        67.4
+      ],
+      "meanLuma": 69.11,
+      "stdLuma": 39.38,
+      "whitePct": 0.25,
+      "attempt": 1
+    },
+    {
+      "name": "area-01-range-spawn-downrange-overcast.png",
+      "bytes": 536139,
+      "sha256": "e280d0994bc8f25ee11e858a98653af330e54150b62900f451897acfa1c25643",
+      "meanRgb": [
+        60.2,
+        71.3,
+        80.6
+      ],
+      "meanLuma": 69.63,
+      "stdLuma": 37.71,
+      "whitePct": 0.17,
+      "attempt": 1
+    },
+    {
+      "name": "area-01-range-spawn-downrange-dusk.png",
+      "bytes": 397797,
+      "sha256": "dd61dcaa4aac38051ba78a433e57e773e41e47122fcce27d3a5cdf8555ad1637",
+      "meanRgb": [
+        57.9,
+        26.9,
+        15.4
+      ],
+      "meanLuma": 32.66,
+      "stdLuma": 22.17,
+      "whitePct": 0,
+      "attempt": 1
+    },
+    {
+      "name": "area-01-range-spawn-downrange-night.png",
+      "bytes": 393446,
+      "sha256": "fdc33be6e69f4373d21f71aede4953a459de83c21d450934b259b9a20a908ac5",
+      "meanRgb": [
+        16.5,
+        21.9,
+        32.2
+      ],
+      "meanLuma": 21.47,
+      "stdLuma": 24.2,
+      "whitePct": 0.08,
+      "attempt": 1
+    },
+    {
+      "name": "area-02-range-lanes-targets-noon.png",
+      "bytes": 583264,
+      "sha256": "134990a08df87df6c3d50b15fec0125751f585f81db63a101c0e826d8184f454",
+      "meanRgb": [
+        67.8,
+        71.9,
+        75.1
+      ],
+      "meanLuma": 71.22,
+      "stdLuma": 41.39,
+      "whitePct": 0.36,
+      "attempt": 1
+    },
+    {
+      "name": "area-02-range-lanes-targets-overcast.png",
+      "bytes": 533921,
+      "sha256": "57b44031a27886df8e30002a4b3159613284c17deba5816d9f41dc74713aac2f",
+      "meanRgb": [
+        67.1,
+        80,
+        94.9
+      ],
+      "meanLuma": 78.36,
+      "stdLuma": 37.3,
+      "whitePct": 0.25,
+      "attempt": 1
+    },
+    {
+      "name": "area-02-range-lanes-targets-dusk.png",
+      "bytes": 373780,
+      "sha256": "46bf5d7a9f9787c10b5052ce17fad2a545f6c5e58161caae075313c8cbaca8cb",
+      "meanRgb": [
+        59.7,
+        29.5,
+        19.1
+      ],
+      "meanLuma": 35.16,
+      "stdLuma": 22.57,
+      "whitePct": 0,
+      "attempt": 1
+    },
+    {
+      "name": "area-02-range-lanes-targets-night.png",
+      "bytes": 410728,
+      "sha256": "532bb95070cf9306cea276786d051e60fe4a25721fcfb71c71791d1c84be790a",
+      "meanRgb": [
+        16.4,
+        22.1,
+        33.2
+      ],
+      "meanLuma": 21.7,
+      "stdLuma": 22.26,
+      "whitePct": 0,
+      "attempt": 1
+    },
+    {
+      "name": "area-03-range-backwall-lockers-noon.png",
+      "bytes": 436135,
+      "sha256": "a192c4c38e08839c12eae4b7e1d5be01b07c3fcad49c565a1e7575e668b69e95",
+      "meanRgb": [
+        86.2,
+        91.9,
+        97.8
+      ],
+      "meanLuma": 91.14,
+      "stdLuma": 25.98,
+      "whitePct": 0.92,
+      "attempt": 1
+    },
+    {
+      "name": "area-03-range-backwall-lockers-overcast.png",
+      "bytes": 448105,
+      "sha256": "ef3474c7551e6ef9376104dd394cc81d79537599c348f9a854d411d07327d69a",
+      "meanRgb": [
+        77.1,
+        91.1,
+        107.8
+      ],
+      "meanLuma": 89.3,
+      "stdLuma": 25.2,
+      "whitePct": 0.94,
+      "attempt": 1
+    },
+    {
+      "name": "area-03-range-backwall-lockers-dusk.png",
+      "bytes": 297108,
+      "sha256": "ce25298ae09753eae2595c7a7a426db4f380cf2c8bc3e2590b6896259fcec34d",
+      "meanRgb": [
+        62.3,
+        31.5,
+        21.4
+      ],
+      "meanLuma": 37.28,
+      "stdLuma": 22.24,
+      "whitePct": 0,
+      "attempt": 1
+    },
+    {
+      "name": "area-03-range-backwall-lockers-night.png",
+      "bytes": 507918,
+      "sha256": "668e273c62565aa125aefba15a62336baa9f15f98923c706886657ee614cab21",
+      "meanRgb": [
+        59.8,
+        61.7,
+        64.3
+      ],
+      "meanLuma": 61.5,
+      "stdLuma": 69.11,
+      "whitePct": 6.14,
+      "attempt": 1
+    },
+    {
+      "name": "area-04-range-east-stations-noon.png",
+      "bytes": 483678,
+      "sha256": "00bb3709526d9f9a1fffb5254da8d5a8f583bd1a478b88b9a36cca08b364b104",
+      "meanRgb": [
+        71.1,
+        72.5,
+        74.2
+      ],
+      "meanLuma": 72.32,
+      "stdLuma": 34.09,
+      "whitePct": 0,
+      "attempt": 1
+    },
+    {
+      "name": "area-04-range-east-stations-overcast.png",
+      "bytes": 491927,
+      "sha256": "b0008f7b9d2a63318dddca39d9b42261e18558d0f905941475bf4fa46a422e44",
+      "meanRgb": [
+        64.6,
+        72,
+        82.1
+      ],
+      "meanLuma": 71.13,
+      "stdLuma": 35.09,
+      "whitePct": 0,
+      "attempt": 1
+    },
+    {
+      "name": "area-04-range-east-stations-dusk.png",
+      "bytes": 475522,
+      "sha256": "1a647252d7c61d025cef77a8a0c494513550b7cdea0b73b640b18f2d84872f71",
+      "meanRgb": [
+        58.7,
+        32.1,
+        18.3
+      ],
+      "meanLuma": 36.75,
+      "stdLuma": 22.63,
+      "whitePct": 0,
+      "attempt": 1
+    },
+    {
+      "name": "area-04-range-east-stations-night.png",
+      "bytes": 673664,
+      "sha256": "69048affcc249b2975eaa38785deaf9c4dbb21398309f6f1575e7b7fc9485ddb",
+      "meanRgb": [
+        73.8,
+        73.3,
+        71.3
+      ],
+      "meanLuma": 73.28,
+      "stdLuma": 72.96,
+      "whitePct": 6.36,
+      "attempt": 1
+    },
+    {
+      "name": "area-05-range-console-switch-door-noon.png",
+      "bytes": 450448,
+      "sha256": "4e3901a8ab34692536dff9e2bf7288afb9eddea338f952a2e5ff5609d5dd0558",
+      "meanRgb": [
+        81.6,
+        84.9,
+        83.7
+      ],
+      "meanLuma": 84.13,
+      "stdLuma": 31.11,
+      "whitePct": 0,
+      "attempt": 1
+    },
+    {
+      "name": "area-05-range-console-switch-door-overcast.png",
+      "bytes": 404728,
+      "sha256": "d99aebc8e2eb4cd62a4b47e2d23543be87ccaef51b6d688b357f719b7fd23936",
+      "meanRgb": [
+        60.4,
+        72.9,
+        84.4
+      ],
+      "meanLuma": 71.04,
+      "stdLuma": 28.72,
+      "whitePct": 0,
+      "attempt": 1
+    },
+    {
+      "name": "area-05-range-console-switch-door-dusk.png",
+      "bytes": 345441,
+      "sha256": "9393aae5d3d5c76d4132e9cd12894749e63ad86d605dbbec7a13fb614e3d0bb4",
+      "meanRgb": [
+        51.8,
+        24.9,
+        15.2
+      ],
+      "meanLuma": 29.9,
+      "stdLuma": 13.83,
+      "whitePct": 0,
+      "attempt": 1
+    },
+    {
+      "name": "area-05-range-console-switch-door-night.png",
+      "bytes": 497729,
+      "sha256": "f43565b40c6fb1094202e3a13b2ca00c7e4cd38e3a5e4dff5d01ec6b12cba141",
+      "meanRgb": [
+        39.8,
+        42,
+        43.3
+      ],
+      "meanLuma": 41.61,
+      "stdLuma": 54.41,
+      "whitePct": 0.97,
+      "attempt": 1
+    },
+    {
+      "name": "area-06-build-hangar-overview-noon.png",
+      "bytes": 834890,
+      "sha256": "6d403bd2dc295f379f74be79d6bfe56d6b59f15cbf6dd5f7b6f4c2bb5598f599",
+      "meanRgb": [
+        80.2,
+        83.5,
+        84.2
+      ],
+      "meanLuma": 82.88,
+      "stdLuma": 40.78,
+      "whitePct": 0.28,
+      "attempt": 1
+    },
+    {
+      "name": "area-06-build-hangar-overview-overcast.png",
+      "bytes": 739221,
+      "sha256": "f8ab17c0f3f3f4c1cee8c32347cb196f2b5968f006017776ce8e15d373605013",
+      "meanRgb": [
+        57.8,
+        69.7,
+        83.4
+      ],
+      "meanLuma": 68.19,
+      "stdLuma": 26.53,
+      "whitePct": 0,
+      "attempt": 1
+    },
+    {
+      "name": "area-06-build-hangar-overview-dusk.png",
+      "bytes": 607265,
+      "sha256": "04047cc55680fc485d84e926a2aa79a4852f7554c74d9a166d9644473b147439",
+      "meanRgb": [
+        67.6,
+        31.1,
+        16.6
+      ],
+      "meanLuma": 37.82,
+      "stdLuma": 23.74,
+      "whitePct": 0,
+      "attempt": 1
+    },
+    {
+      "name": "area-06-build-hangar-overview-night.png",
+      "bytes": 472961,
+      "sha256": "4137aa739fb30888b8dc8f8dd1b57854ab7c6aa4b59f859c4dff670a8cce8f66",
+      "meanRgb": [
+        9.1,
+        14.5,
+        25.7
+      ],
+      "meanLuma": 14.2,
+      "stdLuma": 12.23,
+      "whitePct": 0,
+      "attempt": 1
+    },
+    {
+      "name": "area-07-build-west-stations-noon.png",
+      "bytes": 605019,
+      "sha256": "4629de258f46877440bf44ea65132c4ead6cab27d0dac21016ca58f48e2737cc",
+      "meanRgb": [
+        80.8,
+        84.5,
+        85.6
+      ],
+      "meanLuma": 83.78,
+      "stdLuma": 33.65,
+      "whitePct": 0.78,
+      "attempt": 1
+    },
+    {
+      "name": "area-07-build-west-stations-overcast.png",
+      "bytes": 597591,
+      "sha256": "8f74787c2786d1b4e4f6a0d702afd70db5f55a7b3b61e601a044790d305daba3",
+      "meanRgb": [
+        63.9,
+        75.4,
+        87.2
+      ],
+      "meanLuma": 73.83,
+      "stdLuma": 31.58,
+      "whitePct": 0.78,
+      "attempt": 1
+    },
+    {
+      "name": "area-07-build-west-stations-dusk.png",
+      "bytes": 431840,
+      "sha256": "241b75202d7545a1f6dba1322cde8e55ca1e8100bcf338f8be6f2fc8e2d08e62",
+      "meanRgb": [
+        50.9,
+        25.2,
+        16.4
+      ],
+      "meanLuma": 30.04,
+      "stdLuma": 22.6,
+      "whitePct": 0,
+      "attempt": 1
+    },
+    {
+      "name": "area-07-build-west-stations-night.png",
+      "bytes": 643450,
+      "sha256": "34101e854d2bd83ad4a381570895f80dd76687349915b4538c4745e8a6edd045",
+      "meanRgb": [
+        45.4,
+        47.2,
+        48.8
+      ],
+      "meanLuma": 46.96,
+      "stdLuma": 63.88,
+      "whitePct": 2.64,
+      "attempt": 1
+    },
+    {
+      "name": "area-08-build-containment-gate-noon.png",
+      "bytes": 678191,
+      "sha256": "5c31dc58db3903aab8648874096cb05db5cd7cc20df914e8d531e40653ac2784",
+      "meanRgb": [
+        106.6,
+        107.8,
+        99
+      ],
+      "meanLuma": 106.87,
+      "stdLuma": 48.35,
+      "whitePct": 0.06,
+      "attempt": 1
+    },
+    {
+      "name": "area-08-build-containment-gate-overcast.png",
+      "bytes": 606750,
+      "sha256": "74db41ccd32a8479a938f44efa737c209788d53659ec398c52888f4d4ca6ec01",
+      "meanRgb": [
+        63.4,
+        74.6,
+        81.5
+      ],
+      "meanLuma": 72.69,
+      "stdLuma": 27.58,
+      "whitePct": 0,
+      "attempt": 1
+    },
+    {
+      "name": "area-08-build-containment-gate-dusk.png",
+      "bytes": 548773,
+      "sha256": "0ba4323721d5dda39be5876eff8708f078955b7caa5f792143a951ba915881fb",
+      "meanRgb": [
+        95.2,
+        42.9,
+        19.9
+      ],
+      "meanLuma": 52.33,
+      "stdLuma": 27.57,
+      "whitePct": 0,
+      "attempt": 1
+    },
+    {
+      "name": "area-08-build-containment-gate-night.png",
+      "bytes": 554989,
+      "sha256": "dea3bd5302f4cd40722d0ef0c21a4a2bb42bccd8b634e3fbddad02eb4c1d186c",
+      "meanRgb": [
+        23.7,
+        29.2,
+        37
+      ],
+      "meanLuma": 28.56,
+      "stdLuma": 26.94,
+      "whitePct": 0.03,
+      "attempt": 1
+    },
+    {
+      "name": "area-09-build-placed-layout-noon.png",
+      "bytes": 659390,
+      "sha256": "97759982783855a3ce42fde54758d3aaaa4782933f25e8624545abaa60b11e14",
+      "meanRgb": [
+        87.8,
+        91,
+        91.6
+      ],
+      "meanLuma": 90.36,
+      "stdLuma": 39.47,
+      "whitePct": 0.22,
+      "attempt": 1
+    },
+    {
+      "name": "area-09-build-placed-layout-overcast.png",
+      "bytes": 582876,
+      "sha256": "41fc4a48fd505d39ce234dae98794655fc61485f996d7aa4923bfd98ae27cc10",
+      "meanRgb": [
+        59.4,
+        71.5,
+        85.3
+      ],
+      "meanLuma": 69.9,
+      "stdLuma": 26.58,
+      "whitePct": 0,
+      "attempt": 1
+    },
+    {
+      "name": "area-09-build-placed-layout-dusk.png",
+      "bytes": 511210,
+      "sha256": "eef5063cb49e90b0282ab24c945c7f7e6636647b587543ba3f3ccd2a909508ee",
+      "meanRgb": [
+        73.2,
+        33.1,
+        17.2
+      ],
+      "meanLuma": 40.48,
+      "stdLuma": 23.71,
+      "whitePct": 0,
+      "attempt": 1
+    },
+    {
+      "name": "area-09-build-placed-layout-night.png",
+      "bytes": 452032,
+      "sha256": "7095c9fecf14a5944241dcac6c75698cd51933093c5f3fc15b316906c4a58a94",
+      "meanRgb": [
+        15.5,
+        20.9,
+        31.9
+      ],
+      "meanLuma": 20.55,
+      "stdLuma": 21.44,
+      "whitePct": 0,
+      "attempt": 1
+    },
+    {
+      "name": "area-10-build-infirmary-bay-noon.png",
+      "bytes": 804735,
+      "sha256": "bda6ee87e4f9655a94816f610f0f05fa6f6da5d9e99e493f08c2162da2a542fb",
+      "meanRgb": [
+        69.4,
+        73.7,
+        74.5
+      ],
+      "meanLuma": 72.82,
+      "stdLuma": 32.12,
+      "whitePct": 0.47,
+      "attempt": 1
+    },
+    {
+      "name": "area-10-build-infirmary-bay-overcast.png",
+      "bytes": 769460,
+      "sha256": "05a84498235343a7d358f12d8d846ecc78d732748c6b5f3de1401eb874f5bc72",
+      "meanRgb": [
+        55.7,
+        66.9,
+        76.9
+      ],
+      "meanLuma": 65.25,
+      "stdLuma": 31.7,
+      "whitePct": 0.28,
+      "attempt": 1
+    },
+    {
+      "name": "area-10-build-infirmary-bay-dusk.png",
+      "bytes": 566017,
+      "sha256": "b6c4b42fbd62c59b865df27e1118f067347c5030d6b4db304b4f762ed5d16fed",
+      "meanRgb": [
+        44.9,
+        21.9,
+        13.6
+      ],
+      "meanLuma": 26.15,
+      "stdLuma": 21.63,
+      "whitePct": 0,
+      "attempt": 1
+    },
+    {
+      "name": "area-10-build-infirmary-bay-night.png",
+      "bytes": 707665,
+      "sha256": "baa8f1ddd286c75046722af63d536293d7fe48a5a2ad32d7ea9c5047b5f30ab3",
+      "meanRgb": [
+        22.3,
+        26.2,
+        29.3
+      ],
+      "meanLuma": 25.56,
+      "stdLuma": 37.01,
+      "whitePct": 0,
+      "attempt": 1
+    },
+    {
+      "name": "after-prop-01-kiosk-braces.png",
+      "bytes": 277414,
+      "sha256": "87e1426331a0ea50bd60ac5754d584ab3211e79924b21519a8951b07ad777498",
+      "meanRgb": [
+        65,
+        60.1,
+        53.6
+      ],
+      "meanLuma": 60.68,
+      "stdLuma": 40.49,
+      "whitePct": 0.11,
+      "attempt": 1
+    },
+    {
+      "name": "after-prop-02-skull-tray-braces.png",
+      "bytes": 457211,
+      "sha256": "e772bfe3717158231ea3252b92ba8361ecdb3f49980f21e8b0f98dc74e975b60",
+      "meanRgb": [
+        66.9,
+        68.5,
+        63.5
+      ],
+      "meanLuma": 67.8,
+      "stdLuma": 40.99,
+      "whitePct": 0,
+      "attempt": 1
+    },
+    {
+      "name": "after-prop-03-hqpanel-conduit.png",
+      "bytes": 322242,
+      "sha256": "bda0d2d2dcc50e56940ebf3a12dc27c0748008bab7c02e0d26440cee0fe0870a",
+      "meanRgb": [
+        75.7,
+        75.8,
+        64.6
+      ],
+      "meanLuma": 74.95,
+      "stdLuma": 37.23,
+      "whitePct": 0,
+      "attempt": 1
+    },
+    {
+      "name": "close-01-cif-station.png",
+      "bytes": 241623,
+      "sha256": "992a6dfc5784c4efe15da4bfedf3635e3b7c3cbaf9c1ce6c34134d86c3222755",
+      "meanRgb": [
+        63.4,
+        66.1,
+        67.9
+      ],
+      "meanLuma": 65.66,
+      "stdLuma": 31.63,
+      "whitePct": 0,
+      "attempt": 1
+    },
+    {
+      "name": "close-02-kiosk-station.png",
+      "bytes": 278413,
+      "sha256": "0573c878bbcc31df95ff670536238c9640595f68c301a09997cbf2edf159440a",
+      "meanRgb": [
+        79.1,
+        80.7,
+        76.3
+      ],
+      "meanLuma": 80.04,
+      "stdLuma": 35.59,
+      "whitePct": 0,
+      "attempt": 1
+    },
+    {
+      "name": "close-03-armory-station.png",
+      "bytes": 229003,
+      "sha256": "7cc9005f11b730d367ee18f6d8d44451fd8f3ddb289306199258a17f4c45a900",
+      "meanRgb": [
+        37.7,
+        41.2,
+        43.5
+      ],
+      "meanLuma": 40.63,
+      "stdLuma": 32.82,
+      "whitePct": 0,
+      "attempt": 1
+    },
+    {
+      "name": "close-04-range-console-near.png",
+      "bytes": 285889,
+      "sha256": "e8378f9425f7a63b3888f9e59fa8bd48d7c053de960d5d1668757f6094789be4",
+      "meanRgb": [
+        22,
+        30.7,
+        22.1
+      ],
+      "meanLuma": 28.22,
+      "stdLuma": 22.4,
+      "whitePct": 0,
+      "attempt": 1
+    },
+    {
+      "name": "close-05-door-keypad-range.png",
+      "bytes": 282116,
+      "sha256": "f4e652e12cfb201dab4bd8eccad9f1d603f6f6f8a21fbaca7d220f40693f7051",
+      "meanRgb": [
+        68.9,
+        69.9,
+        65.8
+      ],
+      "meanLuma": 69.4,
+      "stdLuma": 40.93,
+      "whitePct": 0,
+      "attempt": 1
+    },
+    {
+      "name": "close-06-door-keypad-build.png",
+      "bytes": 551956,
+      "sha256": "fa41358e75f4741d8dc4a54964cde0426e42f5d35ae5817378f6bb93d2c58133",
+      "meanRgb": [
+        69.3,
+        73.3,
+        72.5
+      ],
+      "meanLuma": 72.38,
+      "stdLuma": 30.31,
+      "whitePct": 0.11,
+      "attempt": 1
+    },
+    {
+      "name": "close-07-east-fence-recess-1p.png",
+      "bytes": 512644,
+      "sha256": "d18d2a1869e777233cfe7c4bbd2ff12c98c23ecc8fe35d1ec838c476ffeaf810",
+      "meanRgb": [
+        72.7,
+        75.2,
+        72.2
+      ],
+      "meanLuma": 74.46,
+      "stdLuma": 45.85,
+      "whitePct": 0.11,
+      "attempt": 1
+    },
+    {
+      "name": "close-07b-east-fence-solid-1p.png",
+      "bytes": 545256,
+      "sha256": "adcfcf5d4311e970dea2274815f881382f3ca7128f5576143426b73900e2d206",
+      "meanRgb": [
+        72.6,
+        75.3,
+        72.7
+      ],
+      "meanLuma": 74.55,
+      "stdLuma": 46.57,
+      "whitePct": 0.53,
+      "attempt": 1
+    },
+    {
+      "name": "close-08-skull-window-recess-1p.png",
+      "bytes": 387200,
+      "sha256": "daadee14183b82c642caefaa38ae7838b3618b486a94a36a8b882bd0cdf77e9b",
+      "meanRgb": [
+        52.8,
+        54.4,
+        48.3
+      ],
+      "meanLuma": 53.59,
+      "stdLuma": 36.31,
+      "whitePct": 0,
+      "attempt": 1
+    },
+    {
+      "name": "close-09-hq-panel-recess.png",
+      "bytes": 364955,
+      "sha256": "11df546b08fe6cbdbc3cdd770b543832167635a95e41f7f6287be5fe47fde7a1",
+      "meanRgb": [
+        76.1,
+        77.9,
+        72
+      ],
+      "meanLuma": 77.11,
+      "stdLuma": 35.75,
+      "whitePct": 0,
+      "attempt": 1
+    },
+    {
+      "name": "close-10-fence-post-baseplate.png",
+      "bytes": 215453,
+      "sha256": "908c4dbc5a016a9997261d7f71896542b2cdba3a62a594c5dd4fd2202b15f3b8",
+      "meanRgb": [
+        62.8,
+        66.7,
+        66.1
+      ],
+      "meanLuma": 65.84,
+      "stdLuma": 29.53,
+      "whitePct": 0,
+      "attempt": 1
+    },
+    {
+      "name": "close-11-infirmary-bed-props.png",
+      "bytes": 471948,
+      "sha256": "de84c8d526d1d59d6285f60a812068070bd367b52c81e68284c09dc42eea8250",
+      "meanRgb": [
+        53.4,
+        58,
+        54.6
+      ],
+      "meanLuma": 56.78,
+      "stdLuma": 32.54,
+      "whitePct": 0.39,
+      "attempt": 1
+    },
+    {
+      "name": "close-12-target-lane1-base.png",
+      "bytes": 507235,
+      "sha256": "d4a34f202fb7b94d509a220c5bebd42223556a7400aacb6269b80a43a3abc41a",
+      "meanRgb": [
+        64.3,
+        68.8,
+        72.4
+      ],
+      "meanLuma": 68.08,
+      "stdLuma": 40.15,
+      "whitePct": 0.25,
+      "attempt": 1
+    },
+    {
+      "name": "find-01-boonie-hat-1p-clip.png",
+      "bytes": 298230,
+      "sha256": "fdecb3c1d2a6b519c59d98baa91fc3537478af6471da47531df94fe131210db0",
+      "meanRgb": [
+        22.3,
+        31.2,
+        22.7
+      ],
+      "meanLuma": 28.69,
+      "stdLuma": 24.01,
+      "whitePct": 0,
+      "attempt": 1
+    },
+    {
+      "name": "find-02-gate-header-white-tile.png",
+      "bytes": 869515,
+      "sha256": "68b1d715e7f9cd40e3d92e3c15a65bb865c5120908c1f17f2ba5fbc964b50350",
+      "meanRgb": [
+        92.5,
+        94.2,
+        89.7
+      ],
+      "meanLuma": 93.52,
+      "stdLuma": 57.73,
+      "whitePct": 0.19,
+      "attempt": 1
+    },
+    {
+      "name": "find-03-infirmary-o2-iv-floating.png",
+      "bytes": 235871,
+      "sha256": "ca147033f78e2f045b44dd18b53f2dca683900bf39fe097f7cfb2b4c32224681",
+      "meanRgb": [
+        36.3,
+        39.3,
+        36.4
+      ],
+      "meanLuma": 38.47,
+      "stdLuma": 27.69,
+      "whitePct": 0,
+      "attempt": 1
+    },
+    {
+      "name": "find-04-infirmary-casters-cabinet-clip.png",
+      "bytes": 143388,
+      "sha256": "cf2a164aa34ed81e067fb234e0918ded7a308cc9bd9df56d5b424717fd50a187",
+      "meanRgb": [
+        38.7,
+        44.7,
+        39.9
+      ],
+      "meanLuma": 43.09,
+      "stdLuma": 24.43,
+      "whitePct": 0,
+      "attempt": 1
+    },
+    {
+      "name": "find-05-gate-threshold-floating.png",
+      "bytes": 237189,
+      "sha256": "c57e28d31f72bef13941d0b2fe3a74cd88a90ee68394b96b5145417e7f2f28b1",
+      "meanRgb": [
+        62.7,
+        60.3,
+        29.3
+      ],
+      "meanLuma": 58.56,
+      "stdLuma": 32.36,
+      "whitePct": 0,
+      "attempt": 1
+    },
+    {
+      "name": "find-06-cot-scissor-legs-passthrough.png",
+      "bytes": 183951,
+      "sha256": "edff9031644f547fd6f588cde307fe8137b067beedc2e812cf4da08006d16c90",
+      "meanRgb": [
+        34.9,
+        41.4,
+        35.8
+      ],
+      "meanLuma": 39.59,
+      "stdLuma": 22.82,
+      "whitePct": 0,
+      "attempt": 1
+    },
+    {
+      "name": "find-07-build-wall-blurry-smudge.png",
+      "bytes": 245012,
+      "sha256": "24dc7a358c28a393cbf61be725329d4d4e4ddf0b4d8a1dbf78b0eec6e40cbfb8",
+      "meanRgb": [
+        61.5,
+        64.6,
+        63.8
+      ],
+      "meanLuma": 63.86,
+      "stdLuma": 39.87,
+      "whitePct": 0,
+      "attempt": 1
+    },
+    {
+      "name": "skeletal-marine-kit-check.png",
+      "bytes": 641633,
+      "sha256": "f8308c322377bf877a501ba8e560925cbbbedd14311fb8b254b7b08b33e61d4a",
+      "meanRgb": [
+        89.3,
+        93.8,
+        97.2
+      ],
+      "meanLuma": 93.06,
+      "stdLuma": 31.43,
+      "whitePct": 0,
+      "attempt": 1
+    }
+  ]
+}

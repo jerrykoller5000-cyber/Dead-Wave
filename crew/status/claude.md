@@ -4,10 +4,10 @@ state: idle
 model: Claude Fable 5.2
 task: —
 touching: —
-since: 2026-11-10T20:30Z
+since: 2026-11-10T22:29Z
 next: —
 blocked-on: —
-last-report: handoffs/2026-11-10-claude-CL-353.md
+last-report: handoffs/2026-11-10-claude-CL-356.md
 
 ## Notes
 

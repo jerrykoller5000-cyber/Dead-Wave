@@ -2,37 +2,24 @@
 
 state: active
 model: Claude Opus 5.5 (High)
-task: CC-340 Rounds 1+2 live (the head, a man's proportions), then the retunes
-touching: index.html (makeMarine head, survivors' mouth boxes, CROUCH, marine leg/arm pose constants: UNARMED_ARMS, SHOULDER_HOLD, cheek weld), studio/marine-body.js, studio/marine-cloth.js, studio/marine-hats.js, studio/marine-skull.js, studio/marine-lab/*, tools/marine-lab.mjs, ui/marine-face.js, studio/marine-waist.js, studio/marine-headgear.js, studio/marine-idle.js
-since: 2026-11-10T19:36Z
-next: CC-340 J125: go live with rounds 1+2 (Claude said go, see Notes), then the retunes and CC-341
+task: CC-341 The marine's fabric layer on layer: the layers test (tcc341), then the fixes
+touching: tools/tests/tcc341.js (new), studio/marine-body.js, studio/marine-cloth.js, studio/marine-hats.js, ui/marine-face.js, studio/marine-skull.js, studio/marine-headgear.js
+since: 2026-11-10T22:03Z
+next: CC-341 J128 (Jerry, 10 Nov, standing, D-140; was CL-341): the marin
 blocked-on: —
 last-report: handoffs/2026-11-10-claude3-CC-340.md
 
 ## Notes
 
-### Claude's answers to your five CC-340 requests (10 Nov ~19:40Z; read these first in a new session)
-- Go live with rounds 1+2: the head and a man's proportions at the same 1.40 m eye. His height and the first-person eye stay.
-- You apply them: index.html (makeMarine head, the survivors' mouth boxes out, CROUCH and the marine's leg/arm pose
-  constants; by hand, CRLF, md5 against candidate/base-md5.txt first), studio/marine-waist.js's diff (FYI ChatGPT),
-  studio/marine-headgear.js (chin cup and straps), studio/marine-idle.js (MOUTH). Name each in --touch.
-- The retunes are yours: UNARMED_ARMS (t183), SHOULDER_HOLD pocket and cheek weld (t187), MOUTH (t255); t134's joint
-  list with --review. Soften the balaclava's dark mouth smudge (front view). If survivors build this head, give them a
-  lighter one (about 3k triangles).
-- Then ask Antigravity for the four lights and the frame time on the RTX 5080; then CC-341.
-- Game tests on the PC: the slot now runs several at once when the PC has room (D-143); yours stay in your cloud copy.
-
-### Where CC-340 stands (10 Nov, end of session 1)
-- Rounds 1 (the head) and 2 (a man's proportions) are done in my cloud copy, NOT live: Claude outputs/CC-340/candidate
-  (my files + patches/index.html.diff + patches/marine-waist.js.diff), handoff handoffs/2026-11-10-claude3-CC-340.md,
-  sheet Claude outputs/CC-340/sheet/. Waiting on Claude: go for 1+2, who applies index.html, who retunes UNARMED_ARMS,
-  SHOULDER_HOLD/cheek weld, marine-idle MOUTH (t183, t187, t255 red on round 2; t134 joint list = expectation change).
-- Before copying a candidate over a live file: md5 the live one against candidate/base-md5.txt; merge if it moved.
-  index.html on the PC has moved since (apply the diff by hand, CRLF).
-- The new head: studio/marine-skull.js (rings in metres, carve() features, HEAD_GROUP_SCALE [.64,.88,.73]); the face
-  module builds from it. The body: HIP_Y/THIGH/SHIN/TORSO_Y/SHOULDER_Y/SHOULDER_X at the top of buildMarineBody,
-  torsoY() maps the old torso's heights onto the new torso.
-- Then CC-341 (the layers test, tcc341): reuse the ray/point-to-triangle helpers from tools/tests/clip-check.js.
+### Where things stand (10 Nov, end of session 2)
+- CC-340 is live on the PC and checked out (handoff handoffs/2026-11-10-claude3-CC-340.md, sheet Claude outputs/CC-340/round3/).
+  Waiting on Antigravity's four lights and frame time (request sent). Live copies before it: Claude outputs/CC-340/before-live/.
+- Next: CC-341 (J128, the fabric layer on layer, with its test tcc341: reuse the ray/point-to-triangle helpers in
+  tools/tests/clip-check.js), then CC-342.
+- The cloud copy: make it from the PC's tree (tar on the PC into Claude outputs/CC-340/cloud/, stage, untar; the file list
+  needs assets/intro and the ui/studio images, or the game hangs on load). Raise the inspector's timer in
+  studio/inspector/api.js line ~185 (the setTimeout's 15000, not the message) in the cloud copy only.
+- Probes: a throwaway tools/tests/t99xx.js in the cloud copy runs through run-all (names must be tNNN); delete after.
 
 ### Tools that work (cloud)
 - The lab: `node tools/marine-lab.mjs <outdir> <spec.json>` (studio/marine-lab): the body and head outside the game in

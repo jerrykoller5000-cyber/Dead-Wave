@@ -1,4 +1,6 @@
 // GP-74, Jerry's direct request. Active simulation seconds, never wall-clock time.
+import { mouthPoint } from '../ui/marine-face.js';   // CC-340: where his lips are on the new head
+const CIG_AT = mouthPoint(.015);
 export const BORED_AFTER = 5, SMOKE_AFTER = 25, PACK_SECONDS = 4, CIGARETTE_SECONDS = 60;
 export function createIdleClock() {
   const s = { quiet: 0, phase: 'ready', time: 0, lit: false, number: 0 };
@@ -62,6 +64,9 @@ export function createMarineIdle({ THREE, marine, scene, solveArm, smoke, ground
   const twistQ=new THREE.Quaternion(),correctQ=new THREE.Quaternion(),axis=new THREE.Vector3();
   const smokePose={f:[[.46,.58,.26,.08],[.5,.64,.3,-.08],[.96,1.08,.72,-.04],[1.08,1.16,.82,-.08]],t:[.7,-.08,.42]};
   const PINCH_FROM_LIP=.018;
+  // CC-340: the hand under the mouth, the forearm up from an elbow low in front of the chest (a scan of roll, pitch and
+  // yaw against t255 and the shots, Claude outputs/CC-340/smoke); was roll -2.3 only, for the old wide, low shoulders
+  const SMOKE_ROLL=-3, SMOKE_PITCH=-1, SMOKE_YAW=-.45;
   function pointOnHand(wrist,name,out){wrist.userData.hand.point(name,out);out.sub(wrist.position);return wrist.localToWorld(out);}
   function holdPinch(target,draw){
     const wr=u.elbowRG.userData.wrist,hand=wr?.userData.hand;if(!hand){solveArm('R',target);return;}
@@ -74,10 +79,14 @@ export function createMarineIdle({ THREE, marine, scene, solveArm, smoke, ground
     // wrist had to sit above the fingertips, which raised the elbow and spread
     // the palm across his eye like a facepalm. This roll puts the wrist below
     // and to the right of the pinch instead.
-    const handRoll = Number.isFinite(cig.userData.smokeRoll) ? cig.userData.smokeRoll : -2.3;
+    const handRoll = Number.isFinite(cig.userData.smokeRoll) ? cig.userData.smokeRoll : SMOKE_ROLL;
     cig.userData.smokeRollApplied = handRoll;
-    handQ.setFromAxisAngle(local.set(0,0,1),handRoll).premultiply(headQ);
-    cigQ.copy(handQ);
+    // CC-340: and tip the hand about the head's left-right axis (smokePitch), so on a man's narrower shoulders the
+    // wrist sits out in front of the chin instead of folding back against the shoulder.
+    const handPitch = Number.isFinite(cig.userData.smokePitch) ? cig.userData.smokePitch : SMOKE_PITCH;
+    const handYaw = Number.isFinite(cig.userData.smokeYaw) ? cig.userData.smokeYaw : SMOKE_YAW;
+    cigQ.setFromAxisAngle(local.set(0,0,1),handRoll).premultiply(headQ);   // the cigarette straight out from the lips, as before
+    handQ.setFromAxisAngle(local.set(0,0,1),handRoll).premultiply(twistQ.setFromAxisAngle(axis.set(1,0,0),handPitch)).premultiply(twistQ.setFromAxisAngle(axis.set(0,1,0),handYaw)).premultiply(headQ);
     offset.copy(pinch).multiply(wr.scale).applyQuaternion(handQ);
     // `target` is the filter's lip end. Keep the fingertips outside the face,
     // 1.8 cm down the cigarette, instead of solving the glove onto the lips.
@@ -217,7 +226,7 @@ export function createMarineIdle({ THREE, marine, scene, solveArm, smoke, ground
     right.set(.28, .82, .2);
     if (packing) right.lerp(local.set(-.13, 1.11, .35), smooth((t - 1.0) / .5));
     marine.updateWorldMatrix(true, true);
-    u.headG.localToWorld(mouth.set(.025, .125, .171));
+    u.headG.localToWorld(mouth.set(CIG_AT.x, CIG_AT.y, CIG_AT.z));   // CC-340: the corner of the new head's lips
     marine.worldToLocal(mouth);
     right.lerp(mouth, draw);
     if (packing && t > 2.9) left.lerp(local.set(mouth.x - .06, mouth.y - .06, mouth.z + .08), smooth((t - 2.9) / .35));

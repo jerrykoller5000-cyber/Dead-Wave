@@ -134,9 +134,9 @@ export function beginSpiderDeath(T,c){
   c.spiderCurl={hips:u.hips.quaternion.clone(),torso:u.torso.quaternion.clone(),head:u.head.quaternion.clone(),hipTo:new T.Quaternion(),torsoTo:new T.Quaternion().setFromAxisAngle(new T.Vector3(1,0,0),.07),headTo:new T.Quaternion().setFromAxisAngle(new T.Vector3(1,0,0),.20),y:u.hips.position.y,limbs:[]};
   const up=new T.Vector3(0,1,0);
   for(const [i,l] of (u.crawlLimbs||[]).entries()){
-    const pair=Math.floor(i/2),forward=[-.22,0,.26][pair],dU=new T.Vector3(l.side*.65,-.62,forward).normalize();
+    const pair=Math.floor(i/2),forward=[-.22,0,.26][pair],dU=new T.Vector3(l.side*.78,-.62,forward).normalize();
     const rootQ=new T.Quaternion().setFromUnitVectors(up,dU);
-    const dL=new T.Vector3(-l.side*.83,.54,-forward*.4).normalize().applyQuaternion(rootQ.clone().invert());
+    const dL=new T.Vector3(-l.side*.54,.54,-forward*.4).normalize().applyQuaternion(rootQ.clone().invert());
     c.spiderCurl.limbs.push({limb:l,from:l.root.quaternion.clone(),kneeFrom:l.knee.quaternion.clone(),to:rootQ,kneeTo:new T.Quaternion().setFromUnitVectors(up,dL)});
   }
 }

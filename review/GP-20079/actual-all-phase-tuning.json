@@ -1,0 +1,6687 @@
+{
+  "result": [
+    {
+      "kind": "shambler",
+      "phases": {
+        "walk": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 5,
+            "collisions": [
+              {
+                "pair": "armR/legR",
+                "a": "armR",
+                "b": "legR",
+                "hits": 3,
+                "total": 45,
+                "contact": [
+                  -26.589,
+                  -199.274,
+                  -631.164
+                ],
+                "contactMeta": {
+                  "skin": "zombie-skin",
+                  "index": 2696,
+                  "rgb": [
+                    0.58,
+                    0.51,
+                    0.35
+                  ]
+                },
+                "aCenter": [
+                  -26.692,
+                  -198.873,
+                  -631.278
+                ],
+                "bCenter": [
+                  -26.696,
+                  -199.459,
+                  -631.131
+                ],
+                "overlap": [
+                  0.267,
+                  0.249,
+                  0.075
+                ]
+              }
+            ],
+            "tune": {
+              "zero": [
+                {
+                  "roll": 0.1,
+                  "hip": 0,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.1,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                }
+              ],
+              "best": [
+                {
+                  "roll": 0.1,
+                  "hip": 0,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.1,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                }
+              ]
+            }
+          }
+        ],
+        "charge": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "attack": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 21,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "hit": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "death": [
+          {
+            "frame": 6,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 3,
+            "collisions": []
+          }
+        ]
+      }
+    },
+    {
+      "kind": "feral",
+      "phases": {
+        "walk": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "charge": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": [
+              {
+                "pair": "legL/legR",
+                "a": "legL",
+                "b": "legR",
+                "hits": 1,
+                "total": 32,
+                "contact": [
+                  -21.271,
+                  -199.769,
+                  -632.458
+                ],
+                "contactMeta": {
+                  "skin": "zombie-skin",
+                  "index": 13136,
+                  "rgb": [
+                    0.37,
+                    0.39,
+                    0.25
+                  ]
+                },
+                "aCenter": [
+                  -21.073,
+                  -199.533,
+                  -632.588
+                ],
+                "bCenter": [
+                  -21.37,
+                  -199.552,
+                  -632.491
+                ],
+                "overlap": [
+                  0.151,
+                  0.677,
+                  0.262
+                ]
+              }
+            ],
+            "tune": {
+              "zero": [
+                {
+                  "roll": 0,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.1,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.1,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.1,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                }
+              ],
+              "best": [
+                {
+                  "roll": 0,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.1,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                }
+              ]
+            }
+          }
+        ],
+        "attack": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 21,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "hit": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "death": [
+          {
+            "frame": 6,
+            "parts": 4,
+            "collisions": [
+              {
+                "pair": "legL/legR",
+                "a": "legL",
+                "b": "legR",
+                "hits": 2,
+                "total": 8,
+                "contact": [
+                  -28.053,
+                  -199.808,
+                  -632.194
+                ],
+                "contactMeta": {
+                  "skin": "zombie-skin",
+                  "index": 11895,
+                  "rgb": [
+                    0.02,
+                    0.02,
+                    0.01
+                  ]
+                },
+                "aCenter": [
+                  -28.153,
+                  -199.57,
+                  -631.926
+                ],
+                "bCenter": [
+                  -27.939,
+                  -199.533,
+                  -631.878
+                ],
+                "overlap": [
+                  0.039,
+                  0.592,
+                  0.623
+                ]
+              }
+            ],
+            "tune": {
+              "zero": [
+                {
+                  "roll": 0,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.1,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.1,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.1,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                }
+              ],
+              "best": [
+                {
+                  "roll": 0,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.1,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                }
+              ]
+            }
+          },
+          {
+            "frame": 12,
+            "parts": 4,
+            "collisions": [
+              {
+                "pair": "legL/legR",
+                "a": "legL",
+                "b": "legR",
+                "hits": 2,
+                "total": 25,
+                "contact": [
+                  -28.108,
+                  -199.648,
+                  -632.09
+                ],
+                "contactMeta": {
+                  "skin": "zombie-skin",
+                  "index": 11752,
+                  "rgb": [
+                    0.37,
+                    0.39,
+                    0.25
+                  ]
+                },
+                "aCenter": [
+                  -28.179,
+                  -199.585,
+                  -631.777
+                ],
+                "bCenter": [
+                  -27.969,
+                  -199.548,
+                  -631.733
+                ],
+                "overlap": [
+                  0.087,
+                  0.307,
+                  0.741
+                ]
+              }
+            ],
+            "tune": {
+              "zero": [
+                {
+                  "roll": 0,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.1,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.1,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.1,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                }
+              ],
+              "best": [
+                {
+                  "roll": 0,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.1,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                }
+              ]
+            }
+          },
+          {
+            "frame": 18,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 4,
+            "collisions": [
+              {
+                "pair": "legL/legR",
+                "a": "legL",
+                "b": "legR",
+                "hits": 1,
+                "total": 43,
+                "contact": [
+                  -28.094,
+                  -199.519,
+                  -631.855
+                ],
+                "contactMeta": {
+                  "skin": "zombie-skin",
+                  "index": 11763,
+                  "rgb": [
+                    0.37,
+                    0.39,
+                    0.25
+                  ]
+                },
+                "aCenter": [
+                  -28.199,
+                  -199.669,
+                  -631.658
+                ],
+                "bCenter": [
+                  -27.993,
+                  -199.672,
+                  -631.568
+                ],
+                "overlap": [
+                  0.113,
+                  0.419,
+                  0.702
+                ]
+              }
+            ],
+            "tune": {
+              "zero": [
+                {
+                  "roll": 0,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.1,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.1,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.1,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                }
+              ],
+              "best": [
+                {
+                  "roll": 0,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.1,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                }
+              ]
+            }
+          },
+          {
+            "frame": 36,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 4,
+            "collisions": []
+          }
+        ]
+      }
+    },
+    {
+      "kind": "brute",
+      "phases": {
+        "walk": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "charge": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "attack": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": [
+              {
+                "pair": "legL/legR",
+                "a": "legL",
+                "b": "legR",
+                "hits": 2,
+                "total": 6,
+                "contact": [
+                  -28.009,
+                  -199.029,
+                  -631.986
+                ],
+                "contactMeta": {
+                  "skin": "zombie-skin",
+                  "index": 16740,
+                  "rgb": [
+                    0.24,
+                    0.1,
+                    0.07
+                  ]
+                },
+                "aCenter": [
+                  -28.168,
+                  -199.451,
+                  -632.08
+                ],
+                "bCenter": [
+                  -27.823,
+                  -199.431,
+                  -631.88
+                ],
+                "overlap": [
+                  0.027,
+                  1.102,
+                  0.352
+                ]
+              }
+            ],
+            "tune": {
+              "zero": [
+                {
+                  "roll": 0,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.1,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.1,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.1,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                }
+              ],
+              "best": [
+                {
+                  "roll": 0,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.1,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                }
+              ]
+            }
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": [
+              {
+                "pair": "legL/legR",
+                "a": "legL",
+                "b": "legR",
+                "hits": 2,
+                "total": 6,
+                "contact": [
+                  -28.009,
+                  -199.032,
+                  -631.977
+                ],
+                "contactMeta": {
+                  "skin": "zombie-skin",
+                  "index": 16740,
+                  "rgb": [
+                    0.24,
+                    0.1,
+                    0.07
+                  ]
+                },
+                "aCenter": [
+                  -28.168,
+                  -199.455,
+                  -632.073
+                ],
+                "bCenter": [
+                  -27.823,
+                  -199.435,
+                  -631.864
+                ],
+                "overlap": [
+                  0.026,
+                  1.102,
+                  0.354
+                ]
+              }
+            ],
+            "tune": {
+              "zero": [
+                {
+                  "roll": 0,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.1,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.1,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.1,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                }
+              ],
+              "best": [
+                {
+                  "roll": 0,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.1,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                }
+              ]
+            }
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": [
+              {
+                "pair": "legL/legR",
+                "a": "legL",
+                "b": "legR",
+                "hits": 1,
+                "total": 4,
+                "contact": [
+                  -28.009,
+                  -199.036,
+                  -631.968
+                ],
+                "contactMeta": {
+                  "skin": "zombie-skin",
+                  "index": 16740,
+                  "rgb": [
+                    0.24,
+                    0.1,
+                    0.07
+                  ]
+                },
+                "aCenter": [
+                  -28.17,
+                  -199.459,
+                  -632.065
+                ],
+                "bCenter": [
+                  -27.82,
+                  -199.438,
+                  -631.85
+                ],
+                "overlap": [
+                  0.025,
+                  1.102,
+                  0.36
+                ]
+              }
+            ],
+            "tune": {
+              "zero": [
+                {
+                  "roll": 0,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.1,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.1,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.1,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                }
+              ],
+              "best": [
+                {
+                  "roll": 0,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.1,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                }
+              ]
+            }
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": [
+              {
+                "pair": "legL/legR",
+                "a": "legL",
+                "b": "legR",
+                "hits": 1,
+                "total": 4,
+                "contact": [
+                  -28.011,
+                  -199.04,
+                  -631.958
+                ],
+                "contactMeta": {
+                  "skin": "zombie-skin",
+                  "index": 16740,
+                  "rgb": [
+                    0.24,
+                    0.1,
+                    0.07
+                  ]
+                },
+                "aCenter": [
+                  -28.173,
+                  -199.462,
+                  -632.054
+                ],
+                "bCenter": [
+                  -27.814,
+                  -199.442,
+                  -631.838
+                ],
+                "overlap": [
+                  0.023,
+                  1.102,
+                  0.369
+                ]
+              }
+            ],
+            "tune": {
+              "zero": [
+                {
+                  "roll": 0,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.1,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.1,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.1,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                }
+              ],
+              "best": [
+                {
+                  "roll": 0,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.1,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                }
+              ]
+            }
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 21,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "hit": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": [
+              {
+                "pair": "armR/legR",
+                "a": "armR",
+                "b": "legR",
+                "hits": 4,
+                "total": 17,
+                "contact": [
+                  -27.675,
+                  -199.008,
+                  -631.914
+                ],
+                "contactMeta": {
+                  "skin": "zombie-skin",
+                  "index": 16468,
+                  "rgb": [
+                    0.24,
+                    0.1,
+                    0.07
+                  ]
+                },
+                "aCenter": [
+                  -27.479,
+                  -198.514,
+                  -631.965
+                ],
+                "bCenter": [
+                  -27.823,
+                  -199.432,
+                  -631.81
+                ],
+                "overlap": [
+                  0.103,
+                  0.348,
+                  0.421
+                ]
+              },
+              {
+                "pair": "legL/legR",
+                "a": "legL",
+                "b": "legR",
+                "hits": 2,
+                "total": 6,
+                "contact": [
+                  -28.009,
+                  -199.029,
+                  -631.916
+                ],
+                "contactMeta": {
+                  "skin": "zombie-skin",
+                  "index": 16740,
+                  "rgb": [
+                    0.24,
+                    0.1,
+                    0.07
+                  ]
+                },
+                "aCenter": [
+                  -28.168,
+                  -199.452,
+                  -632.01
+                ],
+                "bCenter": [
+                  -27.823,
+                  -199.432,
+                  -631.81
+                ],
+                "overlap": [
+                  0.027,
+                  1.102,
+                  0.352
+                ]
+              }
+            ],
+            "tune": {
+              "zero": [
+                {
+                  "roll": 0.1,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.1,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                }
+              ],
+              "best": [
+                {
+                  "roll": 0.1,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.1,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                }
+              ]
+            }
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": [
+              {
+                "pair": "armR/legR",
+                "a": "armR",
+                "b": "legR",
+                "hits": 5,
+                "total": 14,
+                "contact": [
+                  -27.675,
+                  -199.013,
+                  -631.857
+                ],
+                "contactMeta": {
+                  "skin": "zombie-skin",
+                  "index": 16468,
+                  "rgb": [
+                    0.24,
+                    0.1,
+                    0.07
+                  ]
+                },
+                "aCenter": [
+                  -27.488,
+                  -198.516,
+                  -631.936
+                ],
+                "bCenter": [
+                  -27.823,
+                  -199.437,
+                  -631.742
+                ],
+                "overlap": [
+                  0.108,
+                  0.349,
+                  0.376
+                ]
+              },
+              {
+                "pair": "legL/legR",
+                "a": "legL",
+                "b": "legR",
+                "hits": 2,
+                "total": 5,
+                "contact": [
+                  -28.008,
+                  -199.034,
+                  -631.856
+                ],
+                "contactMeta": {
+                  "skin": "zombie-skin",
+                  "index": 16740,
+                  "rgb": [
+                    0.24,
+                    0.1,
+                    0.07
+                  ]
+                },
+                "aCenter": [
+                  -28.168,
+                  -199.456,
+                  -631.952
+                ],
+                "bCenter": [
+                  -27.823,
+                  -199.437,
+                  -631.742
+                ],
+                "overlap": [
+                  0.026,
+                  1.103,
+                  0.354
+                ]
+              }
+            ],
+            "tune": {
+              "zero": [
+                {
+                  "roll": 0.1,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                }
+              ],
+              "best": [
+                {
+                  "roll": 0.1,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                }
+              ]
+            }
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": [
+              {
+                "pair": "armR/legR",
+                "a": "armR",
+                "b": "legR",
+                "hits": 3,
+                "total": 18,
+                "contact": [
+                  -27.674,
+                  -199.016,
+                  -631.816
+                ],
+                "contactMeta": {
+                  "skin": "zombie-skin",
+                  "index": 16468,
+                  "rgb": [
+                    0.24,
+                    0.1,
+                    0.07
+                  ]
+                },
+                "aCenter": [
+                  -27.471,
+                  -198.533,
+                  -631.891
+                ],
+                "bCenter": [
+                  -27.819,
+                  -199.44,
+                  -631.69
+                ],
+                "overlap": [
+                  0.099,
+                  0.361,
+                  0.387
+                ]
+              },
+              {
+                "pair": "legL/legR",
+                "a": "legL",
+                "b": "legR",
+                "hits": 1,
+                "total": 4,
+                "contact": [
+                  -28.007,
+                  -199.037,
+                  -631.807
+                ],
+                "contactMeta": {
+                  "skin": "zombie-skin",
+                  "index": 16740,
+                  "rgb": [
+                    0.24,
+                    0.1,
+                    0.07
+                  ]
+                },
+                "aCenter": [
+                  -28.168,
+                  -199.459,
+                  -631.904
+                ],
+                "bCenter": [
+                  -27.819,
+                  -199.44,
+                  -631.69
+                ],
+                "overlap": [
+                  0.025,
+                  1.103,
+                  0.36
+                ]
+              }
+            ],
+            "tune": {
+              "zero": [
+                {
+                  "roll": 0.1,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                }
+              ],
+              "best": [
+                {
+                  "roll": 0.1,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                }
+              ]
+            }
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": [
+              {
+                "pair": "armR/legR",
+                "a": "armR",
+                "b": "legR",
+                "hits": 3,
+                "total": 18,
+                "contact": [
+                  -27.673,
+                  -199.019,
+                  -631.786
+                ],
+                "contactMeta": {
+                  "skin": "zombie-skin",
+                  "index": 16468,
+                  "rgb": [
+                    0.24,
+                    0.1,
+                    0.07
+                  ]
+                },
+                "aCenter": [
+                  -27.467,
+                  -198.538,
+                  -631.853
+                ],
+                "bCenter": [
+                  -27.811,
+                  -199.443,
+                  -631.648
+                ],
+                "overlap": [
+                  0.11,
+                  0.363,
+                  0.394
+                ]
+              },
+              {
+                "pair": "legL/legR",
+                "a": "legL",
+                "b": "legR",
+                "hits": 1,
+                "total": 4,
+                "contact": [
+                  -28.006,
+                  -199.04,
+                  -631.768
+                ],
+                "contactMeta": {
+                  "skin": "zombie-skin",
+                  "index": 16740,
+                  "rgb": [
+                    0.24,
+                    0.1,
+                    0.07
+                  ]
+                },
+                "aCenter": [
+                  -28.168,
+                  -199.462,
+                  -631.864
+                ],
+                "bCenter": [
+                  -27.811,
+                  -199.443,
+                  -631.648
+                ],
+                "overlap": [
+                  0.023,
+                  1.103,
+                  0.369
+                ]
+              }
+            ],
+            "tune": {
+              "zero": [
+                {
+                  "roll": 0.1,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                }
+              ],
+              "best": [
+                {
+                  "roll": 0.1,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                }
+              ]
+            }
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": [
+              {
+                "pair": "armR/legR",
+                "a": "armR",
+                "b": "legR",
+                "hits": 4,
+                "total": 20,
+                "contact": [
+                  -27.706,
+                  -199.008,
+                  -631.668
+                ],
+                "contactMeta": {
+                  "skin": "zombie-skin",
+                  "index": 16500,
+                  "rgb": [
+                    0.24,
+                    0.1,
+                    0.07
+                  ]
+                },
+                "aCenter": [
+                  -27.463,
+                  -198.543,
+                  -631.819
+                ],
+                "bCenter": [
+                  -27.8,
+                  -199.446,
+                  -631.613
+                ],
+                "overlap": [
+                  0.128,
+                  0.365,
+                  0.4
+                ]
+              },
+              {
+                "pair": "legL/legR",
+                "a": "legL",
+                "b": "legR",
+                "hits": 1,
+                "total": 4,
+                "contact": [
+                  -28.003,
+                  -199.043,
+                  -631.733
+                ],
+                "contactMeta": {
+                  "skin": "zombie-skin",
+                  "index": 16740,
+                  "rgb": [
+                    0.24,
+                    0.1,
+                    0.07
+                  ]
+                },
+                "aCenter": [
+                  -28.167,
+                  -199.465,
+                  -631.826
+                ],
+                "bCenter": [
+                  -27.8,
+                  -199.446,
+                  -631.613
+                ],
+                "overlap": [
+                  0.021,
+                  1.103,
+                  0.381
+                ]
+              }
+            ],
+            "tune": {
+              "zero": [
+                {
+                  "roll": 0.1,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                }
+              ],
+              "best": [
+                {
+                  "roll": 0.1,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                }
+              ]
+            }
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": [
+              {
+                "pair": "armR/legR",
+                "a": "armR",
+                "b": "legR",
+                "hits": 5,
+                "total": 24,
+                "contact": [
+                  -27.671,
+                  -199.009,
+                  -631.619
+                ],
+                "contactMeta": {
+                  "skin": "zombie-skin",
+                  "index": 16660,
+                  "rgb": [
+                    0.24,
+                    0.1,
+                    0.07
+                  ]
+                },
+                "aCenter": [
+                  -27.459,
+                  -198.542,
+                  -631.788
+                ],
+                "bCenter": [
+                  -27.786,
+                  -199.442,
+                  -631.588
+                ],
+                "overlap": [
+                  0.147,
+                  0.368,
+                  0.405
+                ]
+              },
+              {
+                "pair": "legL/legR",
+                "a": "legL",
+                "b": "legR",
+                "hits": 1,
+                "total": 4,
+                "contact": [
+                  -27.999,
+                  -199.039,
+                  -631.701
+                ],
+                "contactMeta": {
+                  "skin": "zombie-skin",
+                  "index": 16740,
+                  "rgb": [
+                    0.24,
+                    0.1,
+                    0.07
+                  ]
+                },
+                "aCenter": [
+                  -28.165,
+                  -199.462,
+                  -631.793
+                ],
+                "bCenter": [
+                  -27.786,
+                  -199.442,
+                  -631.588
+                ],
+                "overlap": [
+                  0.018,
+                  1.103,
+                  0.395
+                ]
+              }
+            ],
+            "tune": {
+              "zero": [
+                {
+                  "roll": 0.1,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                }
+              ],
+              "best": [
+                {
+                  "roll": 0.1,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                }
+              ]
+            }
+          }
+        ],
+        "death": [
+          {
+            "frame": 6,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 4,
+            "collisions": []
+          }
+        ]
+      }
+    },
+    {
+      "kind": "military",
+      "phases": {
+        "walk": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": [
+              {
+                "pair": "armR/legR",
+                "a": "armR",
+                "b": "legR",
+                "hits": 1,
+                "total": 4,
+                "contact": [
+                  -26.322,
+                  -199.088,
+                  -632.104
+                ],
+                "contactMeta": {
+                  "skin": "zombie-skin",
+                  "index": 13295,
+                  "rgb": [
+                    0.07,
+                    0.06,
+                    0.05
+                  ]
+                },
+                "aCenter": [
+                  -26.156,
+                  -198.729,
+                  -632.188
+                ],
+                "bCenter": [
+                  -26.371,
+                  -199.519,
+                  -632.039
+                ],
+                "overlap": [
+                  0.179,
+                  0.134,
+                  0.207
+                ]
+              }
+            ],
+            "tune": {
+              "zero": [
+                {
+                  "roll": 0,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.1,
+                  "hip": 0,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.1,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.1,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                }
+              ],
+              "best": [
+                {
+                  "roll": 0,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.1,
+                  "hip": 0,
+                  "n": 0,
+                  "pairs": []
+                }
+              ]
+            }
+          },
+          {
+            "frame": 42,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "charge": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "attack": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 21,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "hit": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "death": [
+          {
+            "frame": 6,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 4,
+            "collisions": []
+          }
+        ]
+      }
+    },
+    {
+      "kind": "spitter",
+      "phases": {
+        "walk": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "charge": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "attack": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 21,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "hit": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "death": [
+          {
+            "frame": 6,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 4,
+            "collisions": []
+          }
+        ]
+      }
+    },
+    {
+      "kind": "bomber",
+      "phases": {
+        "walk": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "charge": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "attack": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 21,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "hit": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "death": [
+          {
+            "frame": 6,
+            "parts": 0,
+            "collisions": [],
+            "gone": true
+          },
+          {
+            "frame": 12,
+            "parts": 0,
+            "collisions": [],
+            "gone": true
+          },
+          {
+            "frame": 18,
+            "parts": 0,
+            "collisions": [],
+            "gone": true
+          },
+          {
+            "frame": 24,
+            "parts": 0,
+            "collisions": [],
+            "gone": true
+          },
+          {
+            "frame": 30,
+            "parts": 0,
+            "collisions": [],
+            "gone": true
+          },
+          {
+            "frame": 36,
+            "parts": 0,
+            "collisions": [],
+            "gone": true
+          },
+          {
+            "frame": 42,
+            "parts": 0,
+            "collisions": [],
+            "gone": true
+          },
+          {
+            "frame": 48,
+            "parts": 0,
+            "collisions": [],
+            "gone": true
+          }
+        ]
+      }
+    },
+    {
+      "kind": "screamer",
+      "phases": {
+        "walk": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "charge": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": [
+              {
+                "pair": "legL/legR",
+                "a": "legL",
+                "b": "legR",
+                "hits": 1,
+                "total": 11,
+                "contact": [
+                  -27.55,
+                  -199.849,
+                  -631.403
+                ],
+                "contactMeta": {
+                  "skin": "zombie-skin",
+                  "index": 13060,
+                  "rgb": [
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "aCenter": [
+                  -27.676,
+                  -199.473,
+                  -631.369
+                ],
+                "bCenter": [
+                  -27.403,
+                  -199.478,
+                  -631.473
+                ],
+                "overlap": [
+                  0.05,
+                  0.763,
+                  0.183
+                ]
+              }
+            ],
+            "tune": {
+              "zero": [
+                {
+                  "roll": 0,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.1,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.1,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.1,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                }
+              ],
+              "best": [
+                {
+                  "roll": 0,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.1,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                }
+              ]
+            }
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "attack": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 21,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "hit": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "death": [
+          {
+            "frame": 6,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 3,
+            "collisions": []
+          }
+        ]
+      }
+    },
+    {
+      "kind": "drowned",
+      "phases": {
+        "walk": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "charge": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "attack": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 21,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "hit": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "death": [
+          {
+            "frame": 6,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 4,
+            "collisions": []
+          }
+        ]
+      }
+    },
+    {
+      "kind": "leaper",
+      "phases": {
+        "walk": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "charge": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": [
+              {
+                "pair": "legL/legR",
+                "a": "legL",
+                "b": "legR",
+                "hits": 2,
+                "total": 15,
+                "contact": [
+                  -21.434,
+                  -198.043,
+                  -631.928
+                ],
+                "contactMeta": {
+                  "skin": "zombie-skin",
+                  "index": 10797,
+                  "rgb": [
+                    0.54,
+                    0.52,
+                    0.48
+                  ]
+                },
+                "aCenter": [
+                  -21.574,
+                  -198.146,
+                  -631.809
+                ],
+                "bCenter": [
+                  -21.578,
+                  -198.146,
+                  -632.02
+                ],
+                "overlap": [
+                  0.368,
+                  0.509,
+                  0.024
+                ]
+              }
+            ],
+            "tune": {
+              "zero": [
+                {
+                  "roll": 0,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.1,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.1,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.1,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.2,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.3,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.4,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.5,
+                  "hip": 0.12,
+                  "n": 0,
+                  "pairs": []
+                }
+              ],
+              "best": [
+                {
+                  "roll": 0,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.1,
+                  "hip": 0.04,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "roll": 0.1,
+                  "hip": 0.08,
+                  "n": 0,
+                  "pairs": []
+                }
+              ]
+            }
+          }
+        ],
+        "attack": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 21,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "hit": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "death": [
+          {
+            "frame": 6,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 4,
+            "collisions": []
+          }
+        ]
+      }
+    },
+    {
+      "kind": "spider",
+      "phases": {
+        "walk": [
+          {
+            "frame": 6,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 1,
+            "collisions": []
+          }
+        ],
+        "charge": [
+          {
+            "frame": 6,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 1,
+            "collisions": []
+          }
+        ],
+        "attack": [
+          {
+            "frame": 3,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 21,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 1,
+            "collisions": []
+          }
+        ],
+        "hit": [
+          {
+            "frame": 3,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 1,
+            "collisions": []
+          }
+        ],
+        "death": [
+          {
+            "frame": 6,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 1,
+            "collisions": []
+          }
+        ]
+      }
+    },
+    {
+      "kind": "colossus",
+      "phases": {
+        "walk": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "charge": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "attack": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 21,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "hit": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "death": [
+          {
+            "frame": 6,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 4,
+            "collisions": []
+          }
+        ]
+      }
+    },
+    {
+      "kind": "demon",
+      "phases": {
+        "walk": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "charge": [
+          {
+            "frame": 6,
+            "parts": 0,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 0,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 0,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 0,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 0,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 0,
+            "collisions": []
+          }
+        ],
+        "attack": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 21,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "hit": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "death": [
+          {
+            "frame": 6,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 3,
+            "collisions": []
+          }
+        ]
+      }
+    },
+    {
+      "kind": "guardian",
+      "phases": {
+        "walk": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": [
+              {
+                "pair": "armL/legL",
+                "a": "armL",
+                "b": "legL",
+                "hits": 1,
+                "total": 17,
+                "contact": [
+                  -26.342,
+                  -199.565,
+                  -631.075
+                ],
+                "contactMeta": {
+                  "skin": "guardian-skin",
+                  "index": 24466,
+                  "rgb": [
+                    0.39,
+                    0.41,
+                    0.29
+                  ]
+                },
+                "aCenter": [
+                  -26.027,
+                  -198.594,
+                  -631.11
+                ],
+                "bCenter": [
+                  -26.722,
+                  -199.396,
+                  -631.4
+                ],
+                "overlap": [
+                  0.216,
+                  1.342,
+                  0.524
+                ]
+              }
+            ],
+            "tune": {
+              "zero": [],
+              "best": [
+                {
+                  "roll": 0,
+                  "hip": 0,
+                  "n": 1,
+                  "pairs": [
+                    "armL/legL"
+                  ]
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.04,
+                  "n": 1,
+                  "pairs": [
+                    "armL/legL"
+                  ]
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.08,
+                  "n": 1,
+                  "pairs": [
+                    "armL/legL"
+                  ]
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.12,
+                  "n": 1,
+                  "pairs": [
+                    "armL/legL"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "charge": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "attack": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": [
+              {
+                "pair": "armR/legR",
+                "a": "armR",
+                "b": "legR",
+                "hits": 1,
+                "total": 4,
+                "contact": [
+                  -28.236,
+                  -198.6,
+                  -631.553
+                ],
+                "contactMeta": {
+                  "skin": "guardian-skin",
+                  "index": 26226,
+                  "rgb": [
+                    0.75,
+                    0.74,
+                    0.56
+                  ]
+                },
+                "aCenter": [
+                  -27.326,
+                  -197.789,
+                  -631.132
+                ],
+                "bCenter": [
+                  -27.956,
+                  -199.266,
+                  -631.568
+                ],
+                "overlap": [
+                  1.01,
+                  0.226,
+                  0.336
+                ]
+              }
+            ],
+            "tune": {
+              "zero": [],
+              "best": [
+                {
+                  "roll": 0,
+                  "hip": 0,
+                  "n": 1,
+                  "pairs": [
+                    "armR/legR"
+                  ]
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.04,
+                  "n": 1,
+                  "pairs": [
+                    "armR/legR"
+                  ]
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.08,
+                  "n": 1,
+                  "pairs": [
+                    "armR/legR"
+                  ]
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.12,
+                  "n": 1,
+                  "pairs": [
+                    "armR/legR"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": [
+              {
+                "pair": "armR/legR",
+                "a": "armR",
+                "b": "legR",
+                "hits": 2,
+                "total": 53,
+                "contact": [
+                  -30.277,
+                  -199.738,
+                  -632.439
+                ],
+                "contactMeta": {
+                  "skin": "guardian-skin",
+                  "index": 26434,
+                  "rgb": [
+                    0.39,
+                    0.41,
+                    0.29
+                  ]
+                },
+                "aCenter": [
+                  -29.922,
+                  -198.623,
+                  -632.475
+                ],
+                "bCenter": [
+                  -30.577,
+                  -199.516,
+                  -632.183
+                ],
+                "overlap": [
+                  0.719,
+                  1.385,
+                  0.374
+                ]
+              }
+            ],
+            "tune": {
+              "zero": [],
+              "best": [
+                {
+                  "roll": 0,
+                  "hip": 0,
+                  "n": 1,
+                  "pairs": [
+                    "armR/legR"
+                  ]
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.04,
+                  "n": 1,
+                  "pairs": [
+                    "armR/legR"
+                  ]
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.08,
+                  "n": 1,
+                  "pairs": [
+                    "armR/legR"
+                  ]
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.12,
+                  "n": 1,
+                  "pairs": [
+                    "armR/legR"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "frame": 21,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": [
+              {
+                "pair": "armR/legR",
+                "a": "armR",
+                "b": "legR",
+                "hits": 1,
+                "total": 35,
+                "contact": [
+                  -29.14,
+                  -199.604,
+                  -632.513
+                ],
+                "contactMeta": {
+                  "skin": "guardian-skin",
+                  "index": 26434,
+                  "rgb": [
+                    0.39,
+                    0.41,
+                    0.29
+                  ]
+                },
+                "aCenter": [
+                  -28.984,
+                  -198.591,
+                  -632.491
+                ],
+                "bCenter": [
+                  -29.544,
+                  -199.45,
+                  -632.214
+                ],
+                "overlap": [
+                  0.348,
+                  1.388,
+                  0.459
+                ]
+              }
+            ],
+            "tune": {
+              "zero": [],
+              "best": [
+                {
+                  "roll": 0,
+                  "hip": 0,
+                  "n": 1,
+                  "pairs": [
+                    "armR/legR"
+                  ]
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.04,
+                  "n": 1,
+                  "pairs": [
+                    "armR/legR"
+                  ]
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.08,
+                  "n": 1,
+                  "pairs": [
+                    "armR/legR"
+                  ]
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.12,
+                  "n": 1,
+                  "pairs": [
+                    "armR/legR"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "hit": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": [
+              {
+                "pair": "armL/legL",
+                "a": "armL",
+                "b": "legL",
+                "hits": 1,
+                "total": 19,
+                "contact": [
+                  -26.273,
+                  -199.554,
+                  -631.007
+                ],
+                "contactMeta": {
+                  "skin": "guardian-skin",
+                  "index": 24466,
+                  "rgb": [
+                    0.39,
+                    0.41,
+                    0.29
+                  ]
+                },
+                "aCenter": [
+                  -25.994,
+                  -198.591,
+                  -631.053
+                ],
+                "bCenter": [
+                  -26.68,
+                  -199.397,
+                  -631.321
+                ],
+                "overlap": [
+                  0.208,
+                  1.354,
+                  0.538
+                ]
+              }
+            ],
+            "tune": {
+              "zero": [],
+              "best": [
+                {
+                  "roll": 0,
+                  "hip": 0,
+                  "n": 1,
+                  "pairs": [
+                    "armL/legL"
+                  ]
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.04,
+                  "n": 1,
+                  "pairs": [
+                    "armL/legL"
+                  ]
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.08,
+                  "n": 1,
+                  "pairs": [
+                    "armL/legL"
+                  ]
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.12,
+                  "n": 1,
+                  "pairs": [
+                    "armL/legL"
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "death": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 5,
+            "collisions": []
+          }
+        ]
+      }
+    },
+    {
+      "kind": "caveguard",
+      "phases": {
+        "walk": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "charge": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "attack": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": [
+              {
+                "pair": "armR/legR",
+                "a": "armR",
+                "b": "legR",
+                "hits": 16,
+                "total": 83,
+                "contact": [
+                  -31.994,
+                  -199.507,
+                  -631.36
+                ],
+                "contactMeta": {
+                  "skin": "guardian-skin",
+                  "index": 35046,
+                  "rgb": [
+                    0.07,
+                    0.11,
+                    0.03
+                  ]
+                },
+                "aCenter": [
+                  -32.119,
+                  -198.596,
+                  -631.173
+                ],
+                "bCenter": [
+                  -31.789,
+                  -199.611,
+                  -631.492
+                ],
+                "overlap": [
+                  0.94,
+                  1.085,
+                  0.205
+                ]
+              }
+            ],
+            "tune": {
+              "zero": [],
+              "best": [
+                {
+                  "roll": 0,
+                  "hip": 0,
+                  "n": 1,
+                  "pairs": [
+                    "armR/legR"
+                  ]
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.04,
+                  "n": 1,
+                  "pairs": [
+                    "armR/legR"
+                  ]
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.08,
+                  "n": 1,
+                  "pairs": [
+                    "armR/legR"
+                  ]
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.12,
+                  "n": 1,
+                  "pairs": [
+                    "armR/legR"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "frame": 21,
+            "parts": 5,
+            "collisions": [
+              {
+                "pair": "armR/legR",
+                "a": "armR",
+                "b": "legR",
+                "hits": 8,
+                "total": 74,
+                "contact": [
+                  -33.222,
+                  -199.51,
+                  -631.37
+                ],
+                "contactMeta": {
+                  "skin": "guardian-skin",
+                  "index": 34206,
+                  "rgb": [
+                    0.2,
+                    0.22,
+                    0.17
+                  ]
+                },
+                "aCenter": [
+                  -33.006,
+                  -198.493,
+                  -631.202
+                ],
+                "bCenter": [
+                  -32.965,
+                  -199.517,
+                  -631.516
+                ],
+                "overlap": [
+                  0.915,
+                  1.152,
+                  0.216
+                ]
+              }
+            ],
+            "tune": {
+              "zero": [],
+              "best": [
+                {
+                  "roll": 0,
+                  "hip": 0,
+                  "n": 1,
+                  "pairs": [
+                    "armR/legR"
+                  ]
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.04,
+                  "n": 1,
+                  "pairs": [
+                    "armR/legR"
+                  ]
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.08,
+                  "n": 1,
+                  "pairs": [
+                    "armR/legR"
+                  ]
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.12,
+                  "n": 1,
+                  "pairs": [
+                    "armR/legR"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "hit": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": [
+              {
+                "pair": "armL/legL",
+                "a": "armL",
+                "b": "legL",
+                "hits": 1,
+                "total": 38,
+                "contact": [
+                  -24.473,
+                  -199.585,
+                  -631.211
+                ],
+                "contactMeta": {
+                  "skin": "guardian-skin",
+                  "index": 29316,
+                  "rgb": [
+                    0.44,
+                    0.43,
+                    0.36
+                  ]
+                },
+                "aCenter": [
+                  -24.284,
+                  -198.545,
+                  -631.095
+                ],
+                "bCenter": [
+                  -24.617,
+                  -199.498,
+                  -631.424
+                ],
+                "overlap": [
+                  0.436,
+                  1.206,
+                  0.273
+                ]
+              }
+            ],
+            "tune": {
+              "zero": [],
+              "best": [
+                {
+                  "roll": 0,
+                  "hip": 0,
+                  "n": 1,
+                  "pairs": [
+                    "armL/legL"
+                  ]
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.04,
+                  "n": 1,
+                  "pairs": [
+                    "armL/legL"
+                  ]
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.08,
+                  "n": 1,
+                  "pairs": [
+                    "armL/legL"
+                  ]
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.12,
+                  "n": 1,
+                  "pairs": [
+                    "armL/legL"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "death": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": [
+              {
+                "pair": "armR/legR",
+                "a": "armR",
+                "b": "legR",
+                "hits": 2,
+                "total": 15,
+                "contact": [
+                  -27.683,
+                  -200.317,
+                  -632.622
+                ],
+                "contactMeta": {
+                  "skin": "guardian-skin",
+                  "index": 34116,
+                  "rgb": [
+                    0.44,
+                    0.43,
+                    0.36
+                  ]
+                },
+                "aCenter": [
+                  -26.942,
+                  -199.831,
+                  -632.281
+                ],
+                "bCenter": [
+                  -27.796,
+                  -200.135,
+                  -632.747
+                ],
+                "overlap": [
+                  0.34,
+                  0.756,
+                  0.566
+                ]
+              }
+            ],
+            "tune": {
+              "zero": [],
+              "best": [
+                {
+                  "roll": 0,
+                  "hip": 0,
+                  "n": 1,
+                  "pairs": [
+                    "armR/legR"
+                  ]
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.04,
+                  "n": 1,
+                  "pairs": [
+                    "armR/legR"
+                  ]
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.08,
+                  "n": 1,
+                  "pairs": [
+                    "armR/legR"
+                  ]
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.12,
+                  "n": 1,
+                  "pairs": [
+                    "armR/legR"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "frame": 42,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 5,
+            "collisions": [
+              {
+                "pair": "armR/legR",
+                "a": "armR",
+                "b": "legR",
+                "hits": 1,
+                "total": 24,
+                "contact": [
+                  -27.847,
+                  -200.408,
+                  -632.567
+                ],
+                "contactMeta": {
+                  "skin": "guardian-skin",
+                  "index": 33846,
+                  "rgb": [
+                    0.02,
+                    0.02,
+                    0.01
+                  ]
+                },
+                "aCenter": [
+                  -26.889,
+                  -200.271,
+                  -632.239
+                ],
+                "bCenter": [
+                  -27.848,
+                  -200.322,
+                  -632.718
+                ],
+                "overlap": [
+                  0.459,
+                  0.608,
+                  0.574
+                ]
+              }
+            ],
+            "tune": {
+              "zero": [],
+              "best": [
+                {
+                  "roll": 0,
+                  "hip": 0,
+                  "n": 1,
+                  "pairs": [
+                    "armR/legR"
+                  ]
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.04,
+                  "n": 1,
+                  "pairs": [
+                    "armR/legR"
+                  ]
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.08,
+                  "n": 1,
+                  "pairs": [
+                    "armR/legR"
+                  ]
+                },
+                {
+                  "roll": 0,
+                  "hip": 0.12,
+                  "n": 1,
+                  "pairs": [
+                    "armR/legR"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "errors": []
+}

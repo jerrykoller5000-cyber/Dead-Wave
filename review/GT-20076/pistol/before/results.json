@@ -1,0 +1,250 @@
+{
+  "mag": {
+    "pieces": 14,
+    "open": 0,
+    "loose": [],
+    "intersections": [
+      {
+        "a": "root/CylinderGeometry[2]",
+        "b": "root/BufferGeometry[0]",
+        "at": [
+          -0.01226,
+          0.03619,
+          0.01354
+        ]
+      },
+      {
+        "a": "root/CylinderGeometry[3]",
+        "b": "root/BufferGeometry[0]",
+        "at": [
+          -0.01226,
+          0.02172,
+          0.00906
+        ]
+      },
+      {
+        "a": "root/CylinderGeometry[4]",
+        "b": "root/BufferGeometry[0]",
+        "at": [
+          -0.01226,
+          0.00724,
+          0.00458
+        ]
+      },
+      {
+        "a": "root/CylinderGeometry[5]",
+        "b": "root/BufferGeometry[0]",
+        "at": [
+          -0.01226,
+          -0.00724,
+          0.0001
+        ]
+      },
+      {
+        "a": "root/CylinderGeometry[6]",
+        "b": "root/BufferGeometry[0]",
+        "at": [
+          -0.01226,
+          -0.02172,
+          -0.00438
+        ]
+      },
+      {
+        "a": "root/CylinderGeometry[7]",
+        "b": "root/BufferGeometry[0]",
+        "at": [
+          -0.01226,
+          -0.03619,
+          -0.00885
+        ]
+      },
+      {
+        "a": "root/CylinderGeometry[8]",
+        "b": "root/BufferGeometry[0]",
+        "at": [
+          0.01226,
+          0.03619,
+          0.01354
+        ]
+      },
+      {
+        "a": "root/CylinderGeometry[9]",
+        "b": "root/BufferGeometry[0]",
+        "at": [
+          0.01226,
+          0.02172,
+          0.00906
+        ]
+      },
+      {
+        "a": "root/CylinderGeometry[10]",
+        "b": "root/BufferGeometry[0]",
+        "at": [
+          0.01226,
+          0.00724,
+          0.00458
+        ]
+      },
+      {
+        "a": "root/CylinderGeometry[11]",
+        "b": "root/BufferGeometry[0]",
+        "at": [
+          0.01226,
+          -0.00724,
+          0.0001
+        ]
+      },
+      {
+        "a": "root/CylinderGeometry[12]",
+        "b": "root/BufferGeometry[0]",
+        "at": [
+          0.01226,
+          -0.02172,
+          -0.00438
+        ]
+      },
+      {
+        "a": "root/CylinderGeometry[13]",
+        "b": "root/BufferGeometry[0]",
+        "at": [
+          0.01226,
+          -0.03619,
+          -0.00885
+        ]
+      }
+    ]
+  },
+  "slide": {
+    "pieces": 72,
+    "open": 0,
+    "loose": [],
+    "intersections": [
+      {
+        "a": "root/BufferGeometry[29]",
+        "b": "root/BufferGeometry[0]",
+        "at": [
+          -0.01033,
+          0.01205,
+          -0.08885
+        ]
+      },
+      {
+        "a": "root/BufferGeometry[30]",
+        "b": "root/BufferGeometry[29]",
+        "at": [
+          -0.00796,
+          0.01683,
+          -0.06858
+        ]
+      },
+      {
+        "a": "root/BufferGeometry[31]",
+        "b": "root/BufferGeometry[30]",
+        "at": [
+          -0.00771,
+          0.02091,
+          -0.07192
+        ]
+      },
+      {
+        "a": "root/BufferGeometry[32]",
+        "b": "root/BufferGeometry[30]",
+        "at": [
+          0.00303,
+          0.02091,
+          -0.07192
+        ]
+      },
+      {
+        "a": "root/BufferGeometry[35]",
+        "b": "root/BufferGeometry[0]",
+        "at": [
+          -0.00758,
+          0.01205,
+          0.15087
+        ]
+      },
+      {
+        "a": "root/BufferGeometry[36]",
+        "b": "root/BufferGeometry[35]",
+        "at": [
+          -0.00245,
+          0.01683,
+          0.16563
+        ]
+      },
+      {
+        "a": "root/BufferGeometry[37]",
+        "b": "root/BufferGeometry[36]",
+        "at": [
+          0.0011,
+          0.02389,
+          0.15488
+        ]
+      },
+      {
+        "a": "root/BufferGeometry[40]",
+        "b": "root/BufferGeometry[0]",
+        "at": [
+          0.01533,
+          0.00276,
+          -0.03433
+        ]
+      },
+      {
+        "a": "root/BufferGeometry[40]",
+        "b": "root/BufferGeometry[38]",
+        "at": [
+          0.016,
+          0.00138,
+          -0.00758
+        ]
+      },
+      {
+        "a": "root/BufferGeometry[41]",
+        "b": "root/BufferGeometry[0]",
+        "at": [
+          -0.00911,
+          0.01531,
+          0.0336
+        ]
+      },
+      {
+        "a": "root/BufferGeometry[42]",
+        "b": "root/BufferGeometry[0]",
+        "at": [
+          0.01086,
+          0.01531,
+          0.0336
+        ]
+      },
+      {
+        "a": "root/BufferGeometry[43]",
+        "b": "root/BufferGeometry[0]",
+        "at": [
+          0.01086,
+          0.01531,
+          -0.00326
+        ]
+      },
+      {
+        "a": "root/BufferGeometry[44]",
+        "b": "root/BufferGeometry[0]",
+        "at": [
+          0.01505,
+          0.00516,
+          -0.00244
+        ]
+      },
+      {
+        "a": "root/BoxGeometry[45]",
+        "b": "root/BufferGeometry[43]",
+        "at": [
+          0.00024,
+          0.01653,
+          -0.00413
+        ]
+      }
+    ]
+  }
+}

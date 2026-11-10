@@ -1,0 +1,11 @@
+bench: ready 10684 ms
+bench: graphics high
+bench: training light on entry {"time":0.5,"lightsOff":false,"room":true,"active":true,"wake":false,"hidden":577,"blackout":true,"fogNear":190,"fogFar":640,"background":"87b7ff","sun":1.73,"hemi":0.68,"ambient":0.04,"pointOn":3,"pointAll":23,"pool":0,"standIns":19,"brightness":1,"exposure":1,"graded":false,"danger":0}
+bench: training light {"time":0.5,"lightsOff":false,"room":true,"active":true,"wake":false,"hidden":577,"blackout":false,"fogNear":190,"fogFar":640,"background":"87b7ff","sun":1.73,"hemi":0.68,"ambient":0.04,"pointOn":4,"pointAll":23,"pool":1,"standIns":19,"brightness":1,"exposure":1,"graded":false,"danger":0}
+fps    57.2   (mean of last 10 s)
+low    51.2   (1% low, same windows)
+worst  17.1 ms
+hitch  1   (frames over 50 ms, whole run)
+draws  266
+tris   145275
+{"scenario":"training","seconds":12,"fps":57.2,"low":51.2,"worst":17.1,"hitches":1,"draws":266,"triangles":145275,"zombies":0,"gfx":"high","windows":10,"light":{"time":0.5,"lightsOff":false,"room":true,"active":true,"wake":false,"hidden":577,"blackout":false,"fogNear":190,"fogFar":640,"background":"87b7ff","sun":1.73,"hemi":0.68,"ambient":0.04,"pointOn":4,"pointAll":23,"pool":1,"standIns":19,"brightness":1,"exposure":1,"graded":false,"danger":0}}

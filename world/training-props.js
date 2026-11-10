@@ -41,71 +41,91 @@ export function dressTrainingProps(T, { B, gate, bedAt, box: roomBox, add: roomA
     m.quaternion.setFromUnitVectors(new T.Vector3(0, 1, 0), dir.normalize()); return m;
   };
   const rounded = (w, h, d, mat, x, y, z, radius = .045) => {
-    const r = Math.min(radius, w/4, h/4), X = w/2, Y = h/2, s = new T.Shape();
+    const bevel = Math.min(.012, d / 4, w / 6, h / 6);
+    const X = w / 2 - bevel, Y = h / 2 - bevel, r = Math.min(radius, X / 2, Y / 2), s = new T.Shape();
     s.moveTo(-X+r,-Y); s.lineTo(X-r,-Y); s.quadraticCurveTo(X,-Y,X,-Y+r);
     s.lineTo(X,Y-r); s.quadraticCurveTo(X,Y,X-r,Y); s.lineTo(-X+r,Y);
     s.quadraticCurveTo(-X,Y,-X,Y-r); s.lineTo(-X,-Y+r); s.quadraticCurveTo(-X,-Y,-X+r,-Y);
-    const bevel = Math.min(.012,d/4);
     const geo = new T.ExtrudeGeometry(s,{depth:d-2*bevel,bevelEnabled:true,bevelThickness:bevel,bevelSize:bevel,bevelSegments:1,steps:1,curveSegments:3});
     geo.translate(0,0,-d/2+bevel); const m=add(geo,mat,x,y,z);m.castShadow=true;m.receiveShadow=true;return m;
   };
-  const bolt = (x,y,z,r=.035) => { const b=cyl(r,.025,steelLight,x,y,z,6); b.rotation.x=Math.PI/2; };
-  const cross = (x,y,z,size=.35) => {
-    box(size,size*.24,.025,red,x,y,z); box(size*.24,size,.025,red,x,y,z);
+  const bolt = (x,y,z,r=.035,depth=.024) => { const b=cyl(r,depth,steelLight,x,y,z,6); b.rotation.x=Math.PI/2; return b; };
+  const cross = (x,y,z,size=.35,depth=.022) => {
+    const w = size * .24, arm = (size - w) / 2;
+    box(size,w,depth,red,x,y,z);
+    for (const sy of [-1, 1]) box(w,arm,depth,red,x,y + sy * (w + arm) / 2,z);
+  };
+  const bandRing = (rIn, rOut, h, mat, x, y, z, seg = 16) => {
+    const m = add(new T.LatheGeometry([
+      new T.Vector2(rIn, 0), new T.Vector2(rOut, 0),
+      new T.Vector2(rOut, h), new T.Vector2(rIn, h), new T.Vector2(rIn, 0)
+    ], seg), mat, x, y, z);
+    m.castShadow = true; return m;
   };
 
   // A broad sealed containment gate: twin ribbed leaves, central latch, guides,
   // hydraulic gear and a grated approach. Front faces point into the room (-z).
   staticGate = gateFrame; gateFrame.scale.y = 1.4;
   const gx=gate.x, gz=B.maxZ-.02;
-  // A real opening: the room supplies the passage behind these moving leaves.
-  box(8.0,.8,.13,dark,gx,4.96,gz-.08);
+  // Threshold plate & hazard nosing seated flush on y = 0.000 m, with approach traction ribs.
+  box(8.2,.032,1.0,steel,gx,.016,gz-.51);
+  box(8.2,.032,.14,hazard,gx,.016,gz-1.08);
+  for(let i=-15;i<=15;i++)box(.055,.012,.5,rubber,gx+i*.195,.038,gz-.74);
+  // Lintel beam, under-lintel hazard valance, and upper header backing.
+  box(7.58,.32,.56,steel,gx,4.68,gz-.36);
+  box(5.92,.1,.16,hazard,gx,4.47,gz-.54);
+  box(7.9,.52,.14,dark,gx,5.1,gz-.15);
   for (const side of [-1,1]) {
-    const px=gx+side*1.65;
+    const px = gx + side * 1.6, rx = gx + side * 1.535;
     moving = gateLeaves[side < 0 ? 0 : 1];
-    rounded(3.22,4.3,.18,olive,px,2.24,gz-.34,.12);
-    box(.13,4.34,.08,steel,px+side*1.48,2.24,gz-.47);
+    rounded(3.18,4.3,.18,olive,px,2.24,gz-.26,.08);
+    box(3.12,.058,.14,rubber,px,.061,gz-.26);
+    box(.12,4.3,.06,steel,gx+side*3.04,2.24,gz-.38);
     for (const y of [.55,1.55,2.55,3.55]) {
-      box(2.96,.16,.12,steel,px,y,gz-.5);
-      for (const dx of [-1.33,1.33]) bolt(px+dx,y,gz-.575);
+      box(2.89,.16,.08,steel,rx,y,gz-.39);
+      for (const dx of [-1.25,1.25]) bolt(rx+dx,y,gz-.442,.035,.024);
     }
-    const brace=box(.14,3.4,.07,dark,px,2.2,gz-.53); brace.rotation.z=side*.63;
+    const brace=box(.14,3.1,.05,dark,rx,2.05,gz-.455); brace.rotation.z=side*.58;
+    for(let i=0;i<7;i++)box(.92,.036,.05,rubber,rx,3.88+i*.052,gz-.375);
     moving = null;
-    box(.43,4.72,.48,steel,gx+side*3.53,2.36,gz-.32);
-    box(.18,4.37,.2,steelLight,gx+side*3.28,2.24,gz-.59);
-    box(.13,4.64,.1,hazard,gx+side*3.54,2.36,gz-.61);
-    for (const y of [.4,1.4,2.4,3.4,4.4]) bolt(gx+side*3.67,y,gz-.59,.046);
-    // Guide roller, actuator rod and motor housing.
-    cyl(.09,1.42,steelLight,gx+side*3.87,2.15,gz-.3);
-    cyl(.18,.82,dark,gx+side*3.87,1.17,gz-.3);
-    box(.58,.42,.65,olive,gx+side*3.68,4.88,gz-.34);
-    const roller=cyl(.18,.25,rubber,gx+side*3.1,4.6,gz-.49);roller.rotation.x=Math.PI/2;
-    // Caged warning beacons. Named so they stay their own meshes (bakeStatic
+    // Side pilasters, guide channels, hazard stripes and anchor bolts on the threshold.
+    box(.44,4.488,.48,steel,gx+side*3.53,2.276,gz-.32);
+    box(.18,4.488,.2,steelLight,gx+side*3.22,2.276,gz-.46);
+    box(.13,4.4,.04,hazard,gx+side*3.46,2.276,gz-.58);
+    for (const y of [.4,1.4,2.4,3.4,4.35]) bolt(gx+side*3.66,y,gz-.572,.044,.024);
+    // Hydraulic cylinder & piston rod on threshold, collared flush to pilaster.
+    cyl(.13,1.3,dark,gx+side*3.91,.682,gz-.32,12);
+    cyl(.08,1.8,steelLight,gx+side*3.91,2.232,gz-.32,12);
+    box(.32,.1,.18,steel,gx+side*3.91,3.182,gz-.32);
+    box(.03,.12,.16,steel,gx+side*3.765,.68,gz-.32);
+    // Motor housing and upper guide roller under lintel.
+    box(.58,.42,.4,olive,gx+side*3.56,5.05,gz-.42);
+    box(.16,.1,.1,steel,gx+side*3.04,4.47,gz-.47);
+    const roller=cyl(.06,.12,rubber,gx+side*3.04,4.36,gz-.47);roller.rotation.z=Math.PI/2;
+    // Caged warning beacons seated on lintel. Named so they stay their own meshes (bakeStatic
     // merges unnamed ones): the encounter lights sit on this glass.
-    box(.5,.56,.22,dark,gx+side*3.07,5.03,gz-.28);
-    const lens = rounded(.3,.32,.13,amber,gx+side*3.07,5.03,gz-.45,.06);
+    const bxBeacon = gx + side * 2.8;
+    box(.5,.56,.22,dark,bxBeacon,5.12,gz-.36);
+    const lens = rounded(.3,.32,.12,amber,bxBeacon,5.12,gz-.53,.06);
     lens.name = 'training-gate-beacon';
-    for (const dx of [-.13,0,.13]) box(.025,.4,.055,steel,gx+side*3.07+dx,5.03,gz-.55);
-    for (const y of [4.85,5.21]) box(.4,.025,.055,steel,gx+side*3.07,y,gz-.55);
-    moving = gateLeaves[side < 0 ? 0 : 1];
-    for(let i=0;i<7;i++)box(.92,.045,.055,rubber,px,3.92+i*.046,gz-.46);
-    moving = null;
+    for (const y of [4.92,5.32]) box(.4,.025,.16,steel,bxBeacon,y,gz-.55);
+    for (const dx of [-.13,0,.13]) box(.025,.375,.03,steel,bxBeacon+dx,5.12,gz-.615);
   }
-  box(7.58,.32,.57,steel,gx,4.68,gz-.3);
-  box(6.7,.1,.62,hazard,gx,4.51,gz-.39);
   moving = gateLeaves[0];
-  box(.17,4.28,.16,dark,gx,2.24,gz-.56);
-  box(.5,.54,.18,steel,gx,2.1,gz-.6);
-  for(const y of [1.87,2.33])box(1.12,.07,.13,steelLight,gx,y,gz-.66);
-  bolt(gx,2.1,gz-.72,.09);
+  box(.18,4.3,.08,dark,gx,2.24,gz-.39);
+  box(.5,.54,.1,steel,gx,2.05,gz-.48);
+  for(const y of [1.86,2.24])box(1.12,.07,.06,steelLight,gx,y,gz-.56);
+  bolt(gx,2.05,gz-.555,.09,.05);
   moving = null;
-  box(7.9,.045,1.14,steel,gx,.028,gz-.58);
-  for(let i=-19;i<=19;i++)box(.055,.018,1.02,rubber,gx+i*.195,.06,gz-.58);
-  box(7.9,.05,.16,hazard,gx,.065,gz-1.06);
-  rod([gx-3.87,.6,gz-.28],[gx-3.87,.6,gz-.78],.025,dark);
-  if(labels.gate)gateFrame.add(sign(labels.gate,4.1,.54,gx,5.02,gz-.66,Math.PI,{bg:'#1e2923',color:'#ddd6b1',size:150}));
+  if(labels.gate) {
+    box(4.18,.56,.06,dark,gx,5.12,gz-.61);
+    gateFrame.add(sign(labels.gate,4.1,.54,gx,5.12,gz-.6403,Math.PI,{bg:'#1e2923',color:'#ddd6b1',size:150}));
+  }
   if(labels.containment) {
-    const label = sign(labels.containment,3.1,.21,gx-1.65,3.62,gz-.78,Math.PI,{bg:'#27352b',color:'#c7c9ae',size:115});
+    moving = gateLeaves[0];
+    box(2.79,.2,.02,dark,gx-1.535,3.74,gz-.36);
+    moving = null;
+    const label = sign(labels.containment,2.75,.18,gx-1.535,3.74,gz-.3703,Math.PI,{bg:'#27352b',color:'#c7c9ae',size:115});
     gateLeaves[0].add(label);
   }
 
@@ -114,62 +134,83 @@ export function dressTrainingProps(T, { B, gate, bedAt, box: roomBox, add: roomA
   // A fitted field medical bay along the back wall. Olive, charcoal and canvas
   // echo the FOB's equipment; a pale floor inset keeps its working area readable.
   const bx=bedAt.x,bz=bedAt.z,back=B.minZ+.08;
-  box(7.5,.012,4.1,dark,bx+.8,.016,back+2.05);
-  box(7.25,.008,3.87,std({color:0x929a85,roughness:.96}),bx+.8,.026,back+2.05);
-  box(7.5,2.75,.075,dark,bx+.8,1.39,back+.02);
-  for(let i=0;i<4;i++)box(1.8,2.44,.035,olive,bx-1.95+i*1.83,1.43,back+.075);
-  for(const x of [bx-2.96,bx+4.56])box(.08,2.8,.08,steel,x,1.4,back+.1);
-  box(7.5,.17,.26,steel,bx+.8,2.85,back+.17);
-  box(6.8,.045,.12,lampMat,bx+.8,2.76,back+.27);
+  // Floor mat seated flat on y = 0.000 m, trimmed flush against the bay walls (top y = 0.020 m).
+  box(7.4,.012,4.04,dark,bx+.82,.006,back+2.0775);
+  box(7.2,.008,3.84,std({color:0x929a85,roughness:.96}),bx+.82,.016,back+2.0775);
+  box(7.56,2.76,.075,dark,bx+.82,1.38,back+.02);
+  for(let i=0;i<4;i++)box(1.76,2.44,.035,olive,bx-1.945+i*1.83,1.43,back+.075);
+  for(const x of [-43.77,-36.29])box(.08,2.76,.08,steel,x,1.38,back+.0975);
+  box(7.56,.17,.26,steel,bx+.82,2.845,back+.1125);
+  box(6.8,.045,.1,lampMat,bx+.82,2.7375,back+.19);
   // Short return panel closes the corner visually without enclosing the bay.
-  box(.09,2.76,3.75,dark,B.minX+.23,1.38,back+1.9);
-  box(.025,2.45,3.4,olive,B.minX+.29,1.43,back+1.9);
-  if(labels.infirmary)sign(labels.infirmary,3.6,.48,bx-.2,2.34,back+.11,0,{bg:'#25312b',color:'#ddd6b1',size:140});
-  cross(bx-2.58,2.3,back+.13,.49);
+  box(.08,2.76,3.74,dark,-43.77,1.38,-9.9125);
+  box(.025,2.45,3.4,olive,-43.7175,1.43,-9.9125);
+  if(labels.infirmary) {
+    box(3.64,.5,.02,dark,bx-.2,2.34,back+.1025);
+    sign(labels.infirmary,3.6,.48,bx-.2,2.34,back+.1128,0,{bg:'#25312b',color:'#ddd6b1',size:140});
+  }
+  cross(bx-2.58,2.3,back+.1035,.49,.022);
   // GP-19893: furniture near a wall must not become part of its architectural fade.
   medicalFurniture = true;
-  // Reinforced wheeled stretcher, segmented pad, canvas blanket and stitched hem.
-  rounded(2.48,.14,1.04,dark,bx,.49,bz,.055);
-  for(const dz of [-.48,.48])rod([bx-1.18,.47,bz+dz],[bx+1.18,.47,bz+dz],.046,steelLight);
+  // Reinforced wheeled stretcher, segmented pad, canvas blanket and stitched hem (seated on y = 0.020 m mat).
+  rounded(2.48,.1,1.0,dark,bx,.47,bz,.045);
+  for(const dz of [-.535,.535])rod([bx-1.18,.47,bz+dz],[bx+1.18,.47,bz+dz],.035,steelLight);
   for(const dx of [-.93,.93])for(const dz of [-.39,.39]) {
-    rod([bx+dx,.16,bz+dz],[bx+dx,.45,bz+dz],.042,steel);
-    const wheel=cyl(.095,.055,rubber,bx+dx,.105,bz+dz);wheel.rotation.x=Math.PI/2;
-    const hub=cyl(.033,.06,steelLight,bx+dx,.105,bz+dz);hub.rotation.x=Math.PI/2;
-    box(.13,.09,.06,steel,bx+dx,.23,bz+dz);
+    const wheel=cyl(.095,.052,rubber,bx+dx,.115,bz+dz);wheel.rotation.x=Math.PI/2;
+    for(const sz of [-1,1]) {
+      const hub=cyl(.034,.008,steelLight,bx+dx,.115,bz+dz+sz*.03);hub.rotation.x=Math.PI/2;
+      box(.05,.125,.012,steel,bx+dx,.1625,bz+dz+sz*.04);
+    }
+    box(.11,.025,.092,steel,bx+dx,.2375,bz+dz);
+    cyl(.036,.17,steel,bx+dx,.335,bz+dz);
   }
-  for(const dx of [-.75,.75])box(.05,.07,.78,steel,bx+dx,.28,bz);
-  rod([bx-.93,.18,bz-.36],[bx+.93,.43,bz-.36],.026,steelLight);
-  rod([bx+.93,.18,bz+.36],[bx-.93,.43,bz+.36],.026,steelLight);
-  rounded(2.36,.16,.94,canvas,bx,.6,bz,.055);
-  for(const dx of [-.58,.26])box(.014,.012,.89,dark,bx+dx,.686,bz);
-  rounded(.48,.08,.65,bone,bx-.88,.716,bz,.035);
-  rounded(1.31,.025,.92,canvas,bx+.34,.703,bz,.012);
-  for(const dz of [-.454,.454])box(1.22,.075,.016,canvas,bx+.34,.678,bz+dz);
-  for(let i=0;i<9;i++)box(.85,.006,.006,bone,bx+.33,.72,bz-.36+i*.09);
+  for(const dx of [-.93,.93])box(.045,.045,.708,steel,bx+dx,.285,bz);
+  for(const dz of [-.18,.18])box(1.815,.03,.035,steel,bx,.285,bz+dz);
+  for(const dz of [-.39,.39]) {
+    box(1.788,.028,.028,steelLight,bx,.335,bz+dz);
+    box(.028,.071,.028,steelLight,bx,.3845,bz+dz);
+  }
+  rounded(2.36,.16,.94,canvas,bx,.6,bz,.045);
+  box(.014,.006,.86,dark,bx-.52,.683,bz);
+  rounded(.46,.076,.65,bone,bx-.88,.718,bz,.03);
+  rounded(1.3,.024,.94,canvas,bx+.34,.692,bz,.008);
+  for(const sz of [-1,1])box(1.24,.075,.014,canvas,bx+.34,.6665,bz+sz*.477);
+  for(let i=0;i<9;i++)box(.85,.004,.006,bone,bx+.33,.706,bz-.36+i*.09);
   // Tubular ends and a low side rail; the wake-up side remains clear.
-  for(const dx of [-1.18,1.18]) {
-    for(const dz of [-.44,.44])rod([bx+dx,.47,bz+dz],[bx+dx,.88,bz+dz],.029,steelLight);
-    rod([bx+dx,.88,bz-.44],[bx+dx,.88,bz+.44],.029,steelLight);
+  for(const dx of [-1.21,1.21]) {
+    for(const dz of [-.42,.42]) {
+      cyl(.024,.336,steelLight,bx+dx,.688,bz+dz);
+      box(.052,.048,.052,steelLight,bx+dx,.88,bz+dz);
+    }
+    box(.036,.036,.788,steelLight,bx+dx,.88,bz);
   }
-  for(const dx of [-.83,.83])rod([bx+dx,.48,bz-.5],[bx+dx,.79,bz-.5],.025,steel);
-  rod([bx-.83,.79,bz-.5],[bx+.83,.79,bz-.5],.03,steelLight);
-  // Under-bed supplies, fastening straps and folded dressings.
-  rounded(.74,.21,.47,olive,bx+.2,.23,bz,.035);
-  for(const dx of [-.05,.4])box(.055,.012,.49,dark,bx+dx,.343,bz);
-  cross(bx+.18,.236,bz+.247,.13);
+  for(const dx of [-.83,.83]) {
+    box(.048,.025,.048,steel,bx+dx,.5175,bz-.535);
+    cyl(.02,.26,steel,bx+dx,.66,bz-.535);
+    box(.048,.048,.048,steelLight,bx+dx,.814,bz-.535);
+  }
+  box(1.612,.036,.036,steelLight,bx,.814,bz-.535);
+  // Under-bed supplies, fastening straps and folded dressings on the shelf rails.
+  rounded(.74,.11,.47,olive,bx+.2,.355,bz,.028);
+  for(const dx of [-.05,.4]) {
+    box(.05,.008,.47,dark,bx+dx,.414,bz);
+    for(const sz of [-1,1])box(.05,.118,.008,dark,bx+dx,.359,bz+sz*.239);
+  }
+  cross(bx+.18,.355,bz+.242,.09,.014);
 
-  // Lockable medical cabinet and worktop to the foot of the bed.
+  // Lockable medical cabinet and worktop on four steel legs seated on y = 0.020 m mat.
   const cx=bx+2.72,cz=back+.64;
-  rounded(1.65,1.08,.83,olive,cx,.56,cz,.035);
+  for(const dx of [-.68,.68])for(const dz of [-.31,.31])box(.08,.09,.08,steel,cx+dx,.065,cz+dz);
+  rounded(1.65,.9825,.83,olive,cx,.60125,cz,.035);
   box(1.78,.075,.94,steelLight,cx,1.13,cz);
-  for(const y of [.24,.56,.87]) {
-    box(1.52,.25,.024,dark,cx,y,cz+.428);
-    box(1.43,.19,.025,olive,cx,y,cz+.451);
-    rod([cx-.25,y+.02,cz+.48],[cx+.25,y+.02,cz+.48],.018,steelLight);
+  for(const y of [.25,.53,.81]) {
+    box(1.5,.22,.016,dark,cx,y,cz+.423);
+    box(1.42,.17,.018,olive,cx,y,cz+.44);
+    for(const hx of [-.22,.22])box(.022,.022,.026,steelLight,cx+hx,y+.015,cz+.462);
+    rod([cx-.25,y+.015,cz+.489],[cx+.25,y+.015,cz+.489],.014,steelLight);
   }
-  for(const dx of [-.66,.66])box(.07,.12,.07,steel,cx+dx,.06,cz+.3);
-  rounded(.49,.24,.35,bone,cx-.43,1.3,cz+.05,.025);cross(cx-.43,1.3,cz+.238,.15);
-  for(let i=0;i<3;i++)rounded(.26,.07,.23,bone,cx-.1,1.21+i*.078,cz-.18,.016);
+  rounded(.48,.24,.35,bone,cx-.5,1.2875,cz+.05,.025);cross(cx-.5,1.2875,cz+.233,.15,.016);
+  for(let i=0;i<3;i++)rounded(.26,.068,.23,bone,cx-.04,1.2015+i*.068,cz-.16,.014);
   // Portable monitor with a baked waveform display (no animated extra draw).
   const screen=texture(384,256,c=>{
     c.fillStyle='#081a14';c.fillRect(0,0,384,256);c.strokeStyle='#a8d2ad';c.lineWidth=4;
@@ -177,33 +218,59 @@ export function dressTrainingProps(T, { B, gate, bedAt, box: roomBox, add: roomA
     c.fillStyle='#709c7d';for(let i=0;i<12;i++)c.fillRect(18+i*29,192,19,10);
   });
   const screenMat=std({map:screen,color:0xffffff,emissiveMap:screen,emissive:0xffffff,emissiveIntensity:.35,roughness:.48});
-  rounded(.59,.47,.25,dark,cx+.48,1.42,cz-.08,.04);
-  box(.47,.3,.013,screenMat,cx+.48,1.46,cz+.052);
-  for(const dx of [-.17,0,.17])cyl(.026,.024,bone,cx+.48+dx,1.25,cz+.047).rotation.x=Math.PI/2;
-  box(.38,.055,.25,steel,cx+.48,1.18,cz-.08);
-  // Wall supply case, visible hinges and an olive medical bag.
-  rounded(1.55,.7,.3,olive,cx,2.16,back+.23,.03);
-  for(const dx of [-.35,.35])box(.62,.57,.025,dark,cx+dx,2.16,back+.394);
-  cross(cx-.35,2.16,back+.414,.28);
-  for(const dx of [-.59,.59])for(const y of [1.96,2.36])box(.05,.1,.05,steelLight,cx+dx,y,back+.424);
-  // IV stand, hooked top, bag seams and an opaque fluid insert; tube is segmented.
+  box(.38,.0525,.25,steel,cx+.48,1.19375,cz-.08);
+  rounded(.58,.44,.24,dark,cx+.48,1.44,cz-.08,.035);
+  box(.46,.28,.012,screenMat,cx+.48,1.48,cz+.046);
+  for(const dx of [-.17,0,.17])cyl(.024,.02,bone,cx+.48+dx,1.28,cz+.05).rotation.x=Math.PI/2;
+  // Wall supply case, visible hinges and red cross seated flush on wall panels.
+  rounded(1.55,.7,.3,olive,cx,2.08,back+.2425,.03);
+  for(const dx of [-.36,.36])box(.62,.57,.02,dark,cx+dx,2.08,back+.4025);
+  cross(cx-.36,2.08,back+.4205,.28,.016);
+  for(const dx of [-.69,.69])for(const y of [1.9,2.26])box(.04,.09,.02,steelLight,cx+dx,y,back+.4025);
+  // IV stand, hooked top, bag seams and an opaque fluid insert; tube is segmented (on y = 0.020 m mat).
   const ix=bx-1.42,iz=bz-.66;
-  cyl(.021,1.82,steelLight,ix,.99,iz);
-  for(let k=0;k<4;k++){const a=k*Math.PI/2;rod([ix,.12,iz],[ix+Math.cos(a)*.27,.055,iz+Math.sin(a)*.27],.018,steel);}
-  rod([ix-.26,1.91,iz],[ix+.26,1.91,iz],.021,steelLight);
-  rod([ix-.23,1.91,iz],[ix-.23,1.84,iz],.015,steelLight);
-  rounded(.17,.27,.075,bone,ix-.23,1.67,iz,.02);
-  box(.13,.16,.012,std({color:0x91aaa0,roughness:.5}),ix-.23,1.63,iz+.044);
-  rod([ix-.23,1.52,iz],[ix-.25,.92,iz+.12],.008,rubber);
-  rod([ix-.25,.92,iz+.12],[bx-.87,.74,bz-.37],.008,rubber);
-  // Oxygen bottle with straps, valve and pressure gauge, tucked at the head.
+  box(.068,.055,.068,steel,ix,.095,iz);
+  for(const [sx,sz] of [[1,0],[-1,0],[0,1],[0,-1]]){
+    const fx=ix+sx*.26, fz=iz+sz*.26;
+    cyl(.032,.024,rubber,fx,.032,fz,12);
+    box(.036,.036,.036,steel,fx,.062,fz);
+    box(sx?0.208:0.018,.012,sz?0.208:0.018,steel,ix+sx*.138,.074,iz+sz*.138);
+  }
+  cyl(.02,1.7875,steelLight,ix,1.01625,iz);
+  box(.044,.028,.044,steelLight,ix,1.924,iz);
+  for(const sx of [-1,1])box(.218,.018,.018,steelLight,ix+sx*.131,1.924,iz);
+  const bagX=ix+.22, tubeW=(bx-1.0-bagX)-.022;
+  cyl(.01,.11,steelLight,bagX,1.86,iz,8);
+  rounded(.17,.27,.075,bone,bagX,1.67,iz,.02);
+  box(.13,.16,.01,std({color:0x91aaa0,roughness:.5}),bagX,1.64,iz+.0425);
+  box(.028,.04,.028,bone,bagX,1.515,iz);
+  cyl(.008,.585,rubber,bagX,1.2025,iz,8);
+  box(.022,.022,.022,rubber,bagX,.899,iz);
+  box(tubeW,.014,.014,rubber,(bagX+bx-1.0)/2,.899,iz);
+  box(.022,.022,.022,rubber,bx-1.0,.899,iz);
+  box(.014,.014,.258,rubber,bx-1.0,.899,(iz+bz-.38)/2);
+  box(.022,.022,.022,rubber,bx-1.0,.899,bz-.38);
+  cyl(.008,.196,rubber,bx-1.0,.79,bz-.38,8);
+  box(.04,.012,.04,bone,bx-1.0,.686,bz-.38);
+  // Closed flat-bottom oxygen bottle with hollow bands, valve, gauge and supply hose (on y = 0.020 m mat).
   const ox=bx-1.49,oz=bz+.8;
-  const bottle=add(new T.LatheGeometry([new T.Vector2(.05,0),new T.Vector2(.13,.05),new T.Vector2(.14,.62),new T.Vector2(.11,.73),new T.Vector2(.04,.79)],16),olive,ox,.07,oz);
+  const bottle=add(new T.LatheGeometry([
+    new T.Vector2(0,0),new T.Vector2(.115,0),new T.Vector2(.14,.035),
+    new T.Vector2(.14,.6),new T.Vector2(.11,.72),new T.Vector2(.038,.79),new T.Vector2(0,.79)
+  ],16),olive,ox,.02,oz);
   bottle.castShadow=true;
-  cyl(.035,.1,steelLight,ox,.91,oz);box(.18,.026,.07,steel,ox,.975,oz);
-  for(const y of [.25,.66])cyl(.15,.045,dark,ox,y,oz);
-  const gauge=cyl(.06,.028,bone,ox+.1,.89,oz+.02);gauge.rotation.x=Math.PI/2;
-  rod([ox,.92,oz],[ox+.28,.88,oz],.012,rubber);
-  if(labels.medical)sign(labels.medical,.74,.18,cx,1.02,cz+.477,0,{bg:'#25312b',color:'#d2cfb2',size:110});
+  for(const y of [.18,.54])bandRing(.14,.148,.045,dark,ox,y,oz,16);
+  cyl(.035,.03,steelLight,ox,.825,oz);
+  box(.056,.05,.056,steelLight,ox,.865,oz);
+  cyl(.03,.02,steelLight,ox,.9,oz);
+  box(.18,.026,.07,steel,ox,.923,oz);
+  const gStem=cyl(.014,.039,steel,ox+.0475,.865,oz,8);gStem.rotation.z=Math.PI/2;
+  const gauge=cyl(.048,.028,bone,ox+.115,.865,oz);gauge.rotation.x=Math.PI/2;
+  box(.024,.02,.362,rubber,ox,.865,oz-.209);
+  box(.242,.02,.02,rubber,ox+.133,.865,bz+.42);
+  if(labels.medical) {
+    box(.76,.14,.014,dark,cx,1.0,cz+.422);
+    sign(labels.medical,.74,.13,cx,1.0,cz+.4293,0,{bg:'#25312b',color:'#d2cfb2',size:110});
+  }
   return { gateLeaves, gateFrame, gateLamp: amber };
 }

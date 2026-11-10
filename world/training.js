@@ -307,9 +307,11 @@ export function buildTrainingGround(T, opts = {}) {
   const gateX = (B.minX + B.maxX) / 2, gateHalfWidth = 3.3, gateHeight = 6.3;
   wall(B.minX, B.maxZ, gateX - gateHalfWidth, B.maxZ, 0, -1, HB);
   wall(gateX + gateHalfWidth, B.maxZ, B.maxX, B.maxZ, 0, -1, HB);
-  const gateHeader = add(tileUv(new T.PlaneGeometry(6.6, HB - gateHeight), 6.6, HB - gateHeight), wallMatOne,
-    gateX, gateHeight + (HB - gateHeight) / 2, B.maxZ);
+  const gateHeader = add(sidingUv(new T.PlaneGeometry(6.6, HB - gateHeight), 6.6, HB - gateHeight), siding,
+    gateX, gateHeight + (HB - gateHeight) / 2, B.maxZ - 0.025);
+  gateHeader.name = 'training-gate-header';
   gateHeader.rotation.y = Math.PI;
+  gateHeader.receiveShadow = true;
   solids.push({ minX: O.x + gateX - 3.3, maxX: O.x + gateX + 3.3, minY: O.y + gateHeight, maxY: O.y + HB,
     minZ: O.z + B.maxZ, maxZ: O.z + B.maxZ + .3, wall: true });
   wall(gateX - 3.3, B.maxZ, gateX - 3.3, B.maxZ + 7, 1, 0, gateHeight);

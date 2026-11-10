@@ -5,6 +5,7 @@
 // and the bill on the band. Ring rows are [y, half-width, front, back], bottom to top; head-local space like the rest
 // of the head (the caller's hatG sits at the origin of the head group, y in marine space).
 import { headRadiusAt } from '../ui/marine-face.js';
+import { offSkin, toLocal, PIVOT_Y } from './marine-skull.js';   // CC-340: the new skull, for what hangs below the hat
 
 const SEG = 40;
 // One point of a ring: the same plan as the head's rings (blunt in front, rounder behind).
@@ -102,7 +103,17 @@ export function buildMarineHats(T, { hatG, part, dress, mats, addCast, rmesh, cy
     const x = w * Math.sqrt(Math.max(0, 1 - c * c));
     at(boonie, cyl(.009, .009, .006, patchInk, 8), sx * (x + .0008), 1.552, z, 0, 0, Math.PI / 2);
   }
-  for (const sx of [-1, 1]) at(boonie, rmesh(.006, .12, .006, strapMat, .002), sx * .144, 1.43, .03, 0, 0, sx * -.12);   // chin cord
+  {   // the chin cord (CC-340: it was a straight bar beside the old, wider head, through the new one's cheek): from the
+      // band in front of each ear, down over the cheek and the balaclava to under the chin, 6 mm off the cloth
+    const pts = [];
+    for (let k = 0; k <= 24; k++) {
+      const t = k / 24, sx = t < .5 ? -1 : 1, q = t < .5 ? 1 - t * 2 : t * 2 - 1;   // q: 1 at the band, 0 under the chin
+      const a = sx * (.02 + 1.32 * q ** .8), y = .058 + (.2 - .058) * q ** 1.3;
+      const w = offSkin(a, y, .0062 + .004 * (1 - q), 0, y < .15), l = toLocal(w);
+      pts.push(new T.Vector3(l[0], l[1] + PIVOT_Y, l[2]));
+    }
+    boonie.add(addCast(new T.Mesh(new T.TubeGeometry(new T.CatmullRomCurve3(pts), 48, .0021, 5, false), strapMat)));
+  }
 
   // The ballcap, worn forwards or backwards: a rounded dome with six panel seams, a button and a bill.
   const ballRings = [R(1.495, .0105), R(1.52, .0105, 1.502), R(1.55, .006, 1.502), [1.575, .1085, .1245, .1055], [1.592, .083, .095, .079], [1.6, .04, .046, .038], [1.6025, 0, 0, 0]];

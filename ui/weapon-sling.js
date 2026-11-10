@@ -5,20 +5,30 @@
 // Positive-X fixtures override only the seats on asymmetric model surfaces.
 const mounts = {
   m4: [[.031, .032, -.52], [.05149, .02, .45, .9997, .0227, .0045]],
-  ak: [[.02169, -.065, -.49, .9445, .0149, -.3281], [.02729, -.012, .532, .7071, -.1162, .6975]],
+  ak: [[.023, -.065, -.484], [.02729, -.012, .532, .7071, -.1162, .6975]],
   aa12: [[.035, .025, -.51], [.045, -.015, .45]],
   shotgun: [[.02384, -.025, -.42, .5556, .8264, -.092], [.01451, .035, .63, .9808, .1951, 0]],
   sniper: [[.029, .045, -.56], [.0315, .023, .42]],
-  launcher: [[.063, .015, -.25, .3827, 0, -.9239], [.07422, .04, .3, .9971, .0754, -.0049]],
+  launcher: [[.063, .015, -.25, .3827, 0, -.9239], [.075, .04, .3]],
   minigun: [[.112, .04, -.15], [.12274, 0, .14, .9999, -.009, .0128]],
   flamer: [[.055, .065, -.13], [.055, .065, .3]],
   chainsaw: [[.1435, .08, -.23], [.1435, .065, .02]]
 };
 const positiveSide = {
   m4: {1: [.05112, .02, .45, .9987, .0498, .0063]},
-  launcher: {1: [.07422, .04, .3, .9994, .0348, -.0049]},
   minigun: {1: [.09612, 0, .14, .9659, 0, .2588]},
-  flamer: {0: [.08081, .065, -.13, .7706, .5835, -.2564]}
+  flamer: {0: [.08081, .065, -.13, .7706, .5835, -.2564]},
+  chainsaw: {1: [.160483, .06, .02, .995732, .084361, -.037433]}
+};
+// The lower turn of the web goes around the stock, drum or pump before
+// returning to the shoulder. The vest changes that bend on the bulkier models.
+const lowerTurns={
+  minigun: {right:[.222,.96,-.14],rightVest:[.252,.89,-.24]},
+  launcher: {right:[.222,.89,-.14],left:[.222,.82,-.14]},
+  aa12: {both:[.222,.82,-.19],leftVest:[.222,.82,-.14]},
+  shotgun: {right:[.192,.96,-.14],left:[.192,.96,-.19]},
+  sniper: {right:[.192,.89,-.19]},
+  flamer: {right:[.222,.89,-.14],rightVest:[.222,.82,-.115]}
 };
 const slingMaterials=new WeakMap();
 
@@ -78,7 +88,9 @@ export function fitWeaponSling(T, spot, vest, clipMaterial) {
   const [a,b]=anchors.map(p=>new T.Vector3(...p).applyMatrix4(matrix));
   const tp=strap.userData.torsoPivotY;
   const at=(x,y,z)=>new T.Vector3(side*x,y-tp,z);
-  const lower=at(.222,.89,-.19), shoulder=at(.205,1.155,-.135);
+  const lane=side>0?'right':'left',guides=lowerTurns[spot.kind];
+  const guide=(vest?guides?.[lane+'Vest']:null)??guides?.[lane]??guides?.both;
+  const lower=guide?at(...guide):at(.222,.89,-.19), shoulder=at(.205,1.155,-.135);
   const inverse=spot.g.matrix.clone().invert();
   const modelToSpot=spot.gun.matrix.clone().multiply(model.matrix);
   const major=.015, minor=.0035;
@@ -89,6 +101,9 @@ export function fitWeaponSling(T, spot, vest, clipMaterial) {
     const tangent=toward.addScaledVector(out,-out.dot(toward));
     if(tangent.lengthSq()<1e-8)tangent.set(0,1,0).addScaledVector(out,-out.y);
     tangent.normalize();
+    // Rotate the clip in its own seat to clear the adjacent raised details.
+    if(side>0 && spot.kind==='minigun' && i===1)tangent.applyAxisAngle(out,-Math.PI/12);
+    if(side>0 && spot.kind==='flamer' && i===0)tangent.applyAxisAngle(out,vest?Math.PI/2:5*Math.PI/12);
     const normal=new T.Vector3().crossVectors(out,tangent).normalize();
     return {out,tangent,normal,center:seat.clone().addScaledVector(out,major+minor),
       web:seat.clone().addScaledVector(out,2*(major+minor)-.0002)};

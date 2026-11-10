@@ -2,12 +2,12 @@
 
 state: active
 model: Claude Sonnet 5.5 (Extra)
-task: CB-243 the full suite on the current tree, reds by owner (cloud copy, one worker)
-touching: none (a run; fixes only in my own files)
-since: 2026-11-10T13:07Z
+task: CB-243 the full suite on the current tree, reds by owner: final re-run of every cloud red and PC red on a fresh copy
+touching: none (cloud copy only)
+since: 2026-11-10T21:50Z
 next: CB-243 The full suite on the current tree, reds by owner (in your c
 blocked-on: —
-last-report: handoffs/2026-11-10-claude2-CB-288.md
+last-report: handoffs/2026-11-10-claude2-CB-293.md
 
 ## Notes
 

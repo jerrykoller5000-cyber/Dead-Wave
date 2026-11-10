@@ -1,0 +1,200 @@
+{
+  "result": [
+    {
+      "kind": "spider",
+      "phases": {
+        "walk": [
+          {
+            "frame": 6,
+            "parts": 7,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 7,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 7,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 7,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 7,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 7,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 7,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 7,
+            "collisions": []
+          }
+        ],
+        "charge": [
+          {
+            "frame": 6,
+            "parts": 7,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 7,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 7,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 7,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 7,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 7,
+            "collisions": []
+          }
+        ],
+        "attack": [
+          {
+            "frame": 3,
+            "parts": 7,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 7,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 7,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 7,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 7,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 7,
+            "collisions": []
+          },
+          {
+            "frame": 21,
+            "parts": 7,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 7,
+            "collisions": []
+          }
+        ],
+        "hit": [
+          {
+            "frame": 3,
+            "parts": 7,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 7,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 7,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 7,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 7,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 7,
+            "collisions": []
+          }
+        ],
+        "death": [
+          {
+            "frame": 6,
+            "parts": 7,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 7,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 7,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 7,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 7,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 7,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 7,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 7,
+            "collisions": []
+          }
+        ]
+      }
+    }
+  ],
+  "errors": []
+}

@@ -91,7 +91,8 @@ export function buildMarineBody(T, {root, put, rmesh: roundedMesh, cyl, part, dr
     const mesh=new T.Mesh(geo,mat);mesh.name='fitted-carrier-shell';mesh.castShadow=mesh.receiveShadow=true;return mesh;
   }
   const seam=(parent,points,mat,r=.0016)=>{const curve=new T.CatmullRomCurve3(points.map(p=>new T.Vector3(...p)));const m=new T.Mesh(new T.TubeGeometry(curve,Math.max(6,points.length*3),r,4,false),mat);parent.add(m);return m;};
-  const strap=(points,width,mat,thickness=.008)=>{const m=new T.Mesh(webbingGeometry(T,points,width,thickness,{segments:32}),mat);m.castShadow=m.receiveShadow=true;return m;};
+  let strapMap=(p)=>p;   // CC-340: the torso's straps are mapped onto the new torso (torsoY), once it is defined
+  const strap=(points,width,mat,thickness=.008)=>{const m=new T.Mesh(webbingGeometry(T,strapMap(points),width,thickness,{segments:32}),mat);m.castShadow=m.receiveShadow=true;m.userData.absPts=!!strapMap.mapped;return m;};
   // CU-98 (Jerry: "ankles become detached from boots during crouch ... sliding out of boot while standing"): a boot's
   // shaft is worn on the shin, and only its lower part bends with the foot. The pieces are built in `holder`, a group
   // posed like the ankle at rest, then baked into one mesh per material in the shin's space, each vertex weighted by its
@@ -171,61 +172,75 @@ export function buildMarineBody(T, {root, put, rmesh: roundedMesh, cyl, part, dr
     for(let j=0;j<n;j++){const a=j+1,b=(j+1)%n+1,q=n+1;ix.push(0,b,a,q,q+a,q+b,a,b,q+a,b,q+b,q+a);}
     const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(v,3));geo.setAttribute('uv',new T.Float32BufferAttribute(new Float32Array(v.length/3*2),2));geo.setIndex(ix);geo.computeVertexNormals();return new T.Mesh(geo,mat);
   }
+  // CC-340 (Jerry, J125: "refine the anatomical fidelity of our player model"): his proportions a man's. At his eye
+  // height (1.40 m, the first-person eye, unchanged) a man has his hip joints at 0.785 m, his knees at 0.43 and his
+  // shoulder joints at 1.20; he had 0.62, 0.35 and 1.08 (legs 17 cm short, a torso 15 cm long, shoulders 12 cm low).
+  // The legs are longer (thigh 35.5 cm, shin 33), the pelvis and belt ride up with the hips, and the chest and
+  // everything on it is mapped onto the shorter torso by torsoY (heights below the shoulders scale by 0.88; above
+  // them, where the old torso had 13 cm of shoulder, they close up onto the new 6).
+  const HIP_Y=.785, THIGH=.355, SHIN=.33, TORSO_Y=.865, SHOULDER_Y=1.2, LB=HIP_Y-.62, K1=THIGH/.27, K2=SHIN/.25;
+  const torsoY=(y)=>y<=1?TORSO_Y+(y-.7)*.88:y<=1.08?1.129+(y-1)*(1.2-1.129)/.08:1.2+(y-1.08)*.353;
+  const putL=(mesh,x,y,z,...a)=>put(lowerBody,mesh,x,y+LB,z,...a);
   const lowerBody=new T.Group();root.add(lowerBody);
   // CL-197 (Jerry, 2026-10-15: "fixing the crotch area"). The pelvis ended in a flat disc between the thighs, a shelf with
   // the sky showing under it. It now narrows through a seat to a rounded crotch that the two thighs close round, as a
   // pair of trousers does, and is smoothed (more rings and sides) like the rest of the body.
-  const pelvisR=[[-.138,.014,.014,0,-.004],[-.116,.052,.048,0,-.002],[-.085,.118,.088,0,.006],[-.035,.165,.12,0,-.008],[.025,.183,.124,0,-.006],[.1,.172,.111]];
+  // CC-340: the crotch 7.5 cm under the hip joints, where a man's is (it hung 14 cm under them), the hips a little narrower
+  const pelvisR=[[-.088,.014,.014,0,-.004],[-.074,.05,.046,0,-.002],[-.054,.112,.086,0,.006],[-.022,.158,.118,0,-.008],[.025,.176,.122,0,-.006],[.1,.172,.111]];
   // CL-198: `hip` stays the pelvis joint the game and the survivors' kit hang things on, but what shows is the live seat
   // (after the legs, below); hip itself is only the waistband under the belt, a hair inside it.
   const hip=form(subdiv([[.02,.181,.122,0,-.006],[.1,.17,.109]],1),trouserW,'fitted-pelvis',28);
-  hip.position.y=.62;lowerBody.add(hip);
-  put(lowerBody,form([[-.025,.185,.124],[.025,.18,.12]],beltW),0,.721,0);
-  for(const y of[.698,.744])put(lowerBody,form([[-.003,.187,.126],[.003,.187,.126]],beltW),0,y,0);
-  put(lowerBody,rmesh(.064,.037,.012,buckleMat,.005),0,.721,.134);
-  put(lowerBody,rmesh(.043,.022,.014,beltW,.003),0,.721,.141);
-  put(lowerBody,rmesh(.006,.03,.009,buckleMat,.002),.007,.721,.151);
-  for(let j=0;j<10;j++){const a=j/10*Math.PI*2,s=Math.sin(a),c=Math.cos(a);put(lowerBody,rmesh(.018,.054,.012,strapMat,.004),Math.sign(s)*Math.abs(s)**.7*.191,.721,Math.sign(c)*Math.abs(c)**.7*.132,0,a,0);}
+  hip.position.y=HIP_Y;lowerBody.add(hip);
+  putL(form([[-.025,.185,.124],[.025,.18,.12]],beltW),0,.721,0);
+  for(const y of[.698,.744])putL(form([[-.003,.187,.126],[.003,.187,.126]],beltW),0,y,0);
+  putL(rmesh(.064,.037,.012,buckleMat,.005),0,.721,.134);
+  putL(rmesh(.043,.022,.014,beltW,.003),0,.721,.141);
+  putL(rmesh(.006,.03,.009,buckleMat,.002),.007,.721,.151);
+  for(let j=0;j<10;j++){const a=j/10*Math.PI*2,s=Math.sin(a),c=Math.cos(a);putL(rmesh(.018,.054,.012,strapMat,.004),Math.sign(s)*Math.abs(s)**.7*.191,.721,Math.sign(c)*Math.abs(c)**.7*.132,0,a,0);}
   for(const side of [-1,1]) {
-    put(lowerBody,rmesh(.082,.112,.038,beltW,.012),side*.125,.647,.135);
-    put(lowerBody,plate(.079,.041,.008,beltW),side*.125,.684,.157);
-    put(lowerBody,rmesh(.014,.028,.007,strapMat,.002),side*.125,.665,.164);
-    put(lowerBody,rmesh(.021,.014,.008,buckleMat,.002),side*.125,.654,.164);
-    put(lowerBody,rmesh(.026,.055,.018,strapMat,.005),side*.161,.717,.082);
+    putL(rmesh(.082,.112,.038,beltW,.012),side*.125,.647,.135);
+    putL(plate(.079,.041,.008,beltW),side*.125,.684,.157);
+    putL(rmesh(.014,.028,.007,strapMat,.002),side*.125,.665,.164);
+    putL(rmesh(.021,.014,.008,buckleMat,.002),side*.125,.654,.164);
+    putL(rmesh(.026,.055,.018,strapMat,.005),side*.161,.717,.082);
   }
-  put(lowerBody,rmesh(.125,.1,.047,beltW,.018),.08,.64,-.137);
-  put(lowerBody,rmesh(.035,.026,.155,strapMat,.008),-.185,.63,0);
+  putL(rmesh(.125,.1,.047,beltW,.018),.08,.64,-.137);
+  putL(rmesh(.035,.026,.155,strapMat,.008),-.185,.63,0);
   // GP-19920: the carry rig supplies the hollow holster on the thigh joint.
   // The drop-leg shell hangs from the belt instead of floating beside the thigh.
-  put(lowerBody,rmesh(.022,.16,.018,strapMat,.005),-.204,.622,.018,0,0,.08);
-  put(lowerBody,rmesh(.055,.025,.018,buckleMat,.004),-.208,.666,.03);
-  const hipGrip=put(lowerBody,rmesh(.032,.043,.038,leatherMat,.01),-.218,.602,.037);
+  putL(rmesh(.022,.16,.018,strapMat,.005),-.204,.622,.018,0,0,.08);
+  putL(rmesh(.055,.025,.018,buckleMat,.004),-.208,.666,.03);
+  const hipGrip=putL(rmesh(.032,.043,.038,leatherMat,.01),-.218,.602,.037);
   const gearParts={helmet:[],vest:[],pads:[],nvg:[],bareHead:[],bareTorso:[]};
   const addGear=(key,parent,mesh,...args)=>{put(parent,mesh,...args);gearParts[key].push(mesh);return mesh;};
   function leg(side) {
-    const legG=new T.Group();legG.position.set(side*.13,.62,0);lowerBody.add(legG);
+    const legG=new T.Group();legG.position.set(side*.13,HIP_Y,0);lowerBody.add(legG);
+    const tY=(y)=>y<0?y*K1:y, sY=(y)=>y<0?y*K2:y;   // heights down the thigh and the shin, stretched to their new lengths
+    const putT=(mesh,x,y,z,...a)=>put(legG,mesh,x,tY(y),z,...a), putS=(key,mesh,x,y,z,...a)=>addGear(key,knee,mesh,x,sY(y),z,...a);
+    const tP=(pts)=>pts.map(([x,y,z])=>[x,tY(y),z]);
     // A thigh mount and retention band support the hollow carry holster.
-    put(legG,rmesh(.012,.105,.082,holsterW,.004),side*.108,-.083,.035);
-    put(legG,form([[-.008,.101,.113],[.008,.101,.113]],strapMat,'holster-thigh-band',16,'high'),0,-.11,.012);
+    putT(rmesh(.012,.105,.082,holsterW,.004),side*.108,-.083,.035);
+    putT(form([[-.008,.101,.113],[.008,.101,.113]],strapMat,'holster-thigh-band',16,'high'),0,-.11,.012);
     // CL-198: the trouser leg itself is worn live (after the boot, below), from inside the seat to the boot.
-    put(legG,rmesh(.021,.126,.112,trouserW,.009),side*.094,-.145,.004);
-    put(legG,plate(.111,.04,.009,trouserW),side*.108,-.097,.004,0,side*Math.PI/2,0);
-    for(const z of[-.032,.038])put(legG,cyl(.004,.004,.004,beltW,6),side*.114,-.105,z,0,0,Math.PI/2);
-    seam(legG,[[side*.09,-.055,.047],[side*.098,-.145,.061],[side*.084,-.205,.051]],trouserW);
-    seam(legG,[[side*.011,.014,.114],[side*.044,-.033,.114],[side*.074,-.069,.098]],trouserW);
+    putT(rmesh(.021,.126,.112,trouserW,.009),side*.094,-.145,.004);
+    putT(plate(.111,.04,.009,trouserW),side*.108,-.097,.004,0,side*Math.PI/2,0);
+    for(const z of[-.032,.038])putT(cyl(.004,.004,.004,beltW,6),side*.114,-.105,z,0,0,Math.PI/2);
+    seam(legG,tP([[side*.09,-.055,.047],[side*.098,-.145,.061],[side*.084,-.205,.051]]),trouserW);
+    seam(legG,tP([[side*.011,.014,.114],[side*.044,-.033,.114],[side*.074,-.069,.098]]),trouserW);
     // One restrained fold at the pocket and knee, not a separate thigh block.
-    const knee=new T.Group();knee.position.set(0,-.27,0);legG.add(knee);
-    addGear('pads',knee,plate(.151,.176,.028,padW),0,-.014,.093);
-    addGear('pads',knee,plate(.126,.149,.026,plateW),0,-.012,.111);
+    let knee;
+    knee=new T.Group();knee.position.set(0,-THIGH,0);legG.add(knee);
+    putS('pads',plate(.151,.176,.028,padW),0,-.014,.093);
+    putS('pads',plate(.126,.149,.026,plateW),0,-.012,.111);
     for(const sx of[-1,1]){
-      addGear('pads',knee,rmesh(.01,.051,.01,padW,.003),sx*.054,-.014,.128,0,0,-sx*.08);
-      for(const y of[-.05,.03])addGear('pads',knee,cyl(.0035,.0035,.003,buckleMat,6),sx*.05,y,.127,Math.PI/2);
-      addGear('pads',knee,rmesh(.021,.037,.022,plateW,.005),sx*.076,-.063,.018);
+      putS('pads',rmesh(.01,.051,.01,padW,.003),sx*.054,-.014,.128,0,0,-sx*.08);
+      for(const y of[-.05,.03])putS('pads',cyl(.0035,.0035,.003,buckleMat,6),sx*.05,y,.127,Math.PI/2);
+      putS('pads',rmesh(.021,.037,.022,plateW,.005),sx*.076,-.063,.018);
     }
     // Each strap belongs to the limb it encircles; the upper one must not rotate into the thigh with the shin.
-    addGear('pads',knee,form([[-.011,.084,.094],[.011,.083,.093]],strapMat,'calf-pad-strap',16,'high'),0,-.065,.006);
-    addGear('pads',legG,form([[-.011,.084,.09],[.011,.087,.096]],strapMat,'thigh-pad-strap',16,'high'),side*.001,-.224,.018);
-    const ankle=new T.Group();ankle.position.set(0,-.25,.01);knee.add(ankle);
+    putS('pads',form([[-.011,.084,.094],[.011,.083,.093]],strapMat,'calf-pad-strap',16,'high'),0,-.065,.006);
+    addGear('pads',legG,form([[-.011,.084,.09],[.011,.087,.096]],strapMat,'thigh-pad-strap',16,'high'),side*.001,tY(-.224),.018);
+    const ankle=new T.Group();ankle.position.set(0,-SHIN,.01);knee.add(ankle);
     // CU-98: the shaft and what is sewn to it go on the shin (shinShaft, below); the foot keeps the upper and the sole.
     const shaft=new T.Group();shaft.position.copy(ankle.position);knee.add(shaft);
     put(shaft,form([[-.055,.067,.086],[-.021,.067,.079],[.022,.06,.067],[.064,.064,.067],[.082,.063,.067]],bootW,'boot-ankle',16),0,0,-.006);
@@ -266,25 +281,25 @@ export function buildMarineBody(T, {root, put, rmesh: roundedMesh, cyl, part, dr
       const seatW=(y)=>smooth01(-.1,.045,y), kneeW=(y)=>smooth01(.05,-.05,y), shinW=(y)=>smooth01(-.04,.05,y);
       // [lowerBody, thigh, shin, foot] from a vertex's height in the thigh's, the knee's and the ankle's frames
       const w4=(L)=>{const p=seatW(L[1][1]),k=kneeW(L[2][1]),s=shinW(L[3][1]);return [p*(1-k),(1-p)*(1-k),k*s,k*(1-s)];};
-      const thighR=[[.06,.088,.098,0,.007],[0,.097,.106,0,.007],[-.05,.099,.108,0,.008],[-.1,.095,.104,side*.004,.011],[-.16,.088,.097,side*.003,.014],[-.21,.081,.089,0,.016],[-.25,.077,.086,0,.018],[-.27,.076,.085,0,.02]];
-      const calfR=[[-.03,.075,.084,0,.018],[-.07,.075,.086,side*.002,.006],[-.11,.077,.089,side*.003,-.002],[-.15,.073,.085,side*.002,-.002],[-.18,.075,.088,0,.004],[-.205,.081,.094,0,.009],[-.228,.079,.092,0,.01]];
+      const thighR=[[.06,.088,.098,0,.007],[0,.097,.106,0,.007],[-.0657,.099,.108,0,.008],[-.1315,.095,.104,side*.004,.011],[-.2104,.088,.097,side*.003,.014],[-.2761,.081,.089,0,.016],[-.3287,.077,.086,0,.018],[-.355,.076,.085,0,.02]];
+      const calfR=[[-.0396,.075,.084,0,.018],[-.0924,.075,.086,side*.002,.006],[-.1452,.077,.089,side*.003,-.002],[-.198,.073,.085,side*.002,-.002],[-.2376,.075,.088,0,.004],[-.2706,.081,.094,0,.009],[-.301,.079,.092,0,.01]];
       const longRings=[...ringsIn(T,root,legG,subdiv(thighR,1),{e:.82}),...ringsIn(T,root,knee,subdiv(calfR,1),{e:.82})];
       const long=loftRings(T,longRings,30,{caps:'first'});
       const trousers=liveCloth(T,{space:root,bones,geo:long.geo,weights:weigh(T,root,bones,long.geo,w4),material:trouserW,name:'live-trouser-leg'});
       dress.legLong.push(trousers.parent);
       // Shorts (CU-145: not rolled): the same leg cut 6 cm above the knee, with a stitched hem, over a bare knee and shin
       // and a sock, all worn the same way so the knee bends in skin.
-      const shortR=[...thighR.slice(0,5),[-.19,.084,.093,0,.015],[-.205,.085,.094,0,.016]];
+      const shortR=[...thighR.slice(0,5),[tY(-.19),.084,.093,0,.015],[tY(-.205),.085,.094,0,.016]];
       const shorts=loftRings(T,ringsIn(T,root,legG,subdiv(shortR,1),{e:.82}),30,{caps:'first'});
-      const stitch=[];for(let j=0;j<16;j++){const a=j/16*Math.PI*2,sn=Math.sin(a),c=Math.cos(a);stitch.push(new T.Vector3(.085*Math.sign(sn)*Math.abs(sn)**.82,-.2,.016+.094*Math.sign(c)*Math.abs(c)**.82));}
+      const stitch=[];for(let j=0;j<16;j++){const a=j/16*Math.PI*2,sn=Math.sin(a),c=Math.cos(a);stitch.push(new T.Vector3(.085*Math.sign(sn)*Math.abs(sn)**.82,tY(-.2),.016+.094*Math.sign(c)*Math.abs(c)**.82));}
       const hemG=geoIn(T,root,legG,new T.TubeGeometry(new T.CatmullRomCurve3(stitch,true),32,.0024,5,true));
       const shortGeo=joinGeos(T,[shorts.geo,hemG]);
       const short=liveCloth(T,{space:root,bones,geo:shortGeo,weights:weigh(T,root,bones,shortGeo,w4),material:trouserW,name:'live-shorts-leg'});
-      const skinR=[[-.17,.064,.07,0,.01],[-.205,.06,.066,0,.012],[-.24,.056,.062,0,.013],[-.27,.052,.058,0,.014]];
-      const shinR=[[-.035,.05,.057,0,.01],[-.075,.058,.072,side*.003,-.006],[-.11,.06,.077,side*.004,-.012],[-.15,.05,.063,0,-.005],[-.19,.044,.051,0,.003],[-.205,.043,.049,0,.004]];
+      const skinR=[[-.2235,.064,.07,0,.01],[-.2695,.06,.066,0,.012],[-.3156,.056,.062,0,.013],[-.355,.052,.058,0,.014]];
+      const shinR=[[-.0462,.05,.057,0,.01],[-.099,.058,.072,side*.003,-.006],[-.1452,.06,.077,side*.004,-.012],[-.198,.05,.063,0,-.005],[-.2508,.044,.051,0,.003],[-.2706,.043,.049,0,.004]];
       const skin=loftRings(T,[...ringsIn(T,root,legG,subdiv(skinR,1),{e:.9}),...ringsIn(T,root,knee,subdiv(shinR,1),{e:.9})],26,{caps:'first'});
       const bareLeg=liveCloth(T,{space:root,bones,geo:skin.geo,weights:weigh(T,root,bones,skin.geo,w4),material:skinW,name:'live-bare-leg'});
-      const sockGeo=geoIn(T,root,knee,rmesh(.115,.055,.127,sockMat,.02).geometry.clone(),0,-.188,.007);
+      const sockGeo=geoIn(T,root,knee,rmesh(.115,.055,.127,sockMat,.02).geometry.clone(),0,-SHIN+.062,.007);
       liveCloth(T,{space:root,bones,geo:sockGeo,weights:weigh(T,root,bones,sockGeo,w4),material:sockMat,name:'live-sock',holder:bareLeg.parent});
       dress.legShort.push(short.parent,bareLeg.parent);
     }
@@ -297,36 +312,50 @@ export function buildMarineBody(T, {root, put, rmesh: roundedMesh, cyl, part, dr
     // worn partly by each thigh (its own side more, the middle seam by both equally), so the seat and crotch go with the
     // legs as trousers do, and the waist stays on the pelvis.
     const bones=[lowerBody,legLG,legRG];
-    const g=geoIn(T,root,lowerBody,form(subdiv(pelvisR,1),trouserW,'',28).geometry,0,.62,0);
-    const w=(L)=>{const y=L[0][1]-.62,x=L[0][0],f=.78*smooth01(-.005,-.115,y),r=smooth01(-.06,.06,x);return [1-f,f*(1-r),f*r];};
+    const g=geoIn(T,root,lowerBody,form(subdiv(pelvisR,1),trouserW,'',28).geometry,0,HIP_Y,0);
+    const w=(L)=>{const y=L[0][1]-HIP_Y,x=L[0][0],f=.78*smooth01(-.005,-.115,y),r=smooth01(-.06,.06,x);return [1-f,f*(1-r),f*r];};
     const seat=liveCloth(T,{space:root,bones,geo:g,weights:weigh(T,root,bones,g,w),material:trouserW,name:'live-seat'});
     seat.userData.aoOwners=[lowerBody,legLG,legRG];
   }
-  const torsoG=new T.Group();torsoG.position.y=.7;root.add(torsoG);
-  const at=(mesh,x,y,z,...angles)=>put(torsoG,mesh,x,y-.7,z,...angles);
-  at(form(subdiv([[.015,.168,.109],[.12,.178,.115],[.24,.207,.128,0,.003],[.345,.246,.135,0,.002],[.405,.257,.124],[.46,.198,.098],[.51,.092,.079]],2),uniformW,'fitted-uniform',32),0,.7,0);
+  const torsoG=new T.Group();torsoG.position.y=TORSO_Y;root.add(torsoG);
+  // A piece placed at height y (the old torso's marine heights) lands at torsoY(y), its height scaled to fit what it
+  // spans there (a cylinder lying across keeps its length). Straps and seams map each point (mapPts).
+  const mapPts=(pts)=>pts.map(([x,y,z])=>[x,torsoY(y),z]);
+  const fitY=(mesh,y)=>{
+    const g=mesh.geometry;
+    if(!g||mesh.userData.absPts||g.type==='CylinderGeometry'){mesh.position.y=mesh.userData.absPts?0:torsoY(y)-TORSO_Y;return mesh;}
+    if(!g.boundingBox)g.computeBoundingBox();
+    const h0=g.boundingBox.min.y,h1=g.boundingBox.max.y;
+    if(h1-h0<1e-4){mesh.position.y=torsoY(y)-TORSO_Y;return mesh;}
+    const k=(torsoY(y+h1)-torsoY(y+h0))/(h1-h0);mesh.scale.y*=k;mesh.position.y=torsoY(y+h0)-TORSO_Y-h0*k;return mesh;
+  };
+  const at=(mesh,x,y,z,...angles)=>fitY(put(torsoG,mesh,x,y,z,...angles),y);
+  strapMap=(pts)=>mapPts(pts).map(([x,y,z])=>[x,y-TORSO_Y,z]);strapMap.mapped=true;
+  // CC-340 (Jerry, J125: the anatomy): the chest and shoulders a man's width. The chest was 51 cm across under arms set
+  // 68 cm apart (a man's are about 36); now 42 cm at the top of the chest, falling to the shoulders as a trapezius does.
+  put(torsoG,form(subdiv([[.013,.15,.106],[.106,.156,.11],[.211,.176,.121,0,.003],[.304,.188,.126,0,.002],[.344,.178,.117],[.367,.142,.098],[.387,.076,.072]],2),uniformW,'fitted-uniform',32),0,0,0);
   // GP-124: the shirt's shoulder stays with the chest and overlaps the moving
   // sleeve. This closes the notch beside the neck without enlarging the arm cap.
   for(const side of [-1,1]) {
-    at(form(subdiv([[-.07,.055,.075,side*.005],[-.02,.076,.089,side*.01],
-      [.025,.062,.071,-side*.015],[.055,.029,.047,-side*.05]],2),uniformW,'shirt-shoulder',24),side*.225,1.125,.012);
+    at(form(subdiv([[-.07,.048,.068,side*.004],[-.02,.064,.08,side*.008],
+      [.025,.053,.064,-side*.013],[.055,.025,.042,-side*.043]],2),uniformW,'shirt-shoulder',24),side*.165,1.11,.012);
   }
   // CL-197 (Jerry, 2026-10-15: "fixing the blouse's collar"). There was no collar: a plain cylinder under the neck wrap, and
   // two loose boxes, with the ragged top of the shirt showing round them. This is a folded-down blouse collar, one
   // lofted band: a flat spread over the shoulders, a rounded fold, a stand that hugs the neck, higher at the back with a
   // V-notch at the front, closed underneath so nothing shows through. Built in torso space (y is marine height).
   {
-    const prof=[[1.150,.166,.134],[1.172,.146,.122],[1.202,.126,.111],[1.228,.116,.104],[1.2435,.109,.1],[1.2495,.1045,.0975],[1.244,.099,.0945],[1.226,.095,.0935],[1.205,.0925,.0925],[1.178,.092,.0925]];
+    const prof=[[1.236,.148,.116],[1.249,.127,.104],[1.264,.104,.091],[1.279,.089,.083],[1.2885,.081,.0795],[1.2925,.0775,.077],[1.2885,.074,.0748],[1.276,.0718,.0735],[1.261,.0712,.073],[1.243,.0712,.073]];   // CC-340: round the new neck, at its new height
     const n=40,cz=.004,p=[],uv=[],ix=[],pts=subdiv(prof,1);
     for(let r=0;r<pts.length;r++){
       const [y,rx,rz]=pts[r];
       for(let j=0;j<=n;j++){
         const a=-Math.PI+j/n*Math.PI*2,c=Math.cos(a),sn=Math.sin(a),af=Math.abs(a);
         // notch at the front (a = 0), a little lift at the back; the fold and the stand move, the spread over the shoulders does not
-        const move=Math.max(0,Math.min(1,(y-1.18)/.065));
+        const move=Math.max(0,Math.min(1,(y-1.255)/.04));
         const dip=-.033*Math.max(0,1-af/.62)**1.6*move+.008*Math.max(0,(af-2.2)/(Math.PI-2.2))*move;
         const spread=1+.05*Math.max(0,1-af/.62)**2*move;   // the notch's lapels open outward
-        p.push(rx*sn*spread,y+dip-.7,cz+rz*c*spread-(c>0?0:0));uv.push(j/n,y*3);
+        p.push(rx*sn*spread,y+dip-TORSO_Y,cz+rz*c*spread-(c>0?0:0));uv.push(j/n,y*3);
       }
     }
     const cols=n+1,rowsN=pts.length;
@@ -341,26 +370,26 @@ export function buildMarineBody(T, {root, put, rmesh: roundedMesh, cyl, part, dr
   at(rmesh(.009,.33,.006,strapMat,.002),0,.945,.128);
   at(rmesh(.13,.025,.009,patchMat,.003),.116,1.105,.13);
   at(rmesh(.081,.009,.006,patchInk,.002),.116,1.105,.136);
-  const b=(mesh,x,y,z)=>addGear('bareTorso',torsoG,mesh,x,y-.7,z);
+  const b=(mesh,x,y,z)=>fitY(addGear('bareTorso',torsoG,mesh,x,y,z),y);
   for(const side of [-1,1]) {
-    b(strap([[0,.86,.135],[0,1.01,.145],[0,1.115,.136],[0,1.17,.096],[0,1.19,.015],[0,1.176,-.083],[0,1.105,-.138],[0,.88,-.138]],.036,strapMat),side*.139,0,0);
+    b(strap([[0,.86,.135],[0,1.01,.145],[0,1.115,.136],[0,1.168,.096],[0,1.187,.015],[0,1.174,-.083],[0,1.105,-.138],[0,.88,-.138]],.036,strapMat),side*.123,0,0);   // CC-340: on the narrower shoulder
     b(rmesh(.091,.094,.04,pouchMat,.012),side*.108,.882,.16);
     b(rmesh(.094,.023,.042,strapMat,.007),side*.108,.921,.161);
   }
   b(rmesh(.28,.031,.019,strapMat,.007),0,.852,.138);
   b(rmesh(.033,.029,.016,buckleMat,.005),0,.852,.153);
   b(rmesh(.277,.03,.02,strapMat,.006),0,1.11,-.139);
-  const v=(mesh,x,y,z,...angles)=>addGear('vest',torsoG,mesh,x,y-.7,z,...angles);
+  const v=(mesh,x,y,z,...angles)=>fitY(addGear('vest',torsoG,mesh,x,y,z,...angles),y);
   const radioPart=(mesh)=>{mesh.userData.vmEyeRadio=true;return mesh;};
-  const torsoSeam=(points,mat,key,r=.0016)=>{const mesh=seam(torsoG,points.map(([x,y,z])=>[x,y-.7,z]),mat,r);if(key)gearParts[key].push(mesh);return mesh;};
+  const torsoSeam=(points,mat,key,r=.0016)=>{const mesh=seam(torsoG,mapPts(points).map(([x,y,z])=>[x,y-TORSO_Y,z]),mat,r);if(key)gearParts[key].push(mesh);return mesh;};
   v(carrierPlate(.35,.335,.034,carrierW),0,.973,.151);
   v(carrierPlate(.35,.345,.032,carrierW),0,.98,-.149);
   for(const side of [-1,1]) {
-    v(rmesh(.026,.135,.239,carrierW,.01),side*.191,.88,0);
-    v(strap([[0,1.075,.183],[0,1.13,.17],[0,1.174,.119],[0,1.2,.02],[0,1.178,-.101],[0,1.12,-.177]],.052,carrierW,.012),side*.132,0,0);
-    v(rmesh(.036,.026,.017,buckleMat,.005),side*.132,1.123,.181);
-    v(rmesh(.018,.013,.02,strapMat,.002),side*.132,1.123,.183);
-    for(let row=0;row<3;row++)v(rmesh(.008,.015,.22,webMat,.002),side*.207,.844+row*.04,0);
+    v(rmesh(.026,.135,.22,carrierW,.01),side*.169,.88,0);   // CC-340: against the narrower waist
+    v(strap([[0,1.075,.183],[0,1.13,.17],[0,1.172,.119],[0,1.195,.02],[0,1.176,-.101],[0,1.12,-.177]],.052,carrierW,.012),side*.12,0,0);   // CC-340: on the narrower shoulder
+    v(rmesh(.036,.026,.017,buckleMat,.005),side*.12,1.123,.181);
+    v(rmesh(.018,.013,.02,strapMat,.002),side*.12,1.123,.183);
+    for(let row=0;row<3;row++)v(rmesh(.008,.015,.2,webMat,.002),side*.185,.844+row*.04,0);
   }
   torsoSeam([[-.151,.876,.171],[-.154,1.055,.171],[-.10,1.126,.171],[.10,1.126,.171],[.154,1.055,.171],[.151,.876,.171]],carrierW,'vest',.002);
   for(let row=0;row<4;row++){
@@ -402,7 +431,7 @@ export function buildMarineBody(T, {root, put, rmesh: roundedMesh, cyl, part, dr
   at(rmesh(.021,.027,.008,strapMat,.002),0,1.087,-.304);
   at(rmesh(.031,.017,.009,buckleMat,.002),0,1.074,-.307);
   torsoSeam([[-.081,.92,-.313],[-.083,.975,-.313],[-.064,1.003,-.31],[.064,1.003,-.31],[.083,.975,-.313],[.081,.92,-.313]],packW,null,.0017);
-  const zipPoints=[[-.111,.87,-.279],[-.119,1.06,-.276],[-.096,1.117,-.275],[0,1.143,-.26],[.096,1.117,-.275],[.119,1.06,-.276],[.111,.87,-.279]].map(([x,y,z])=>new T.Vector3(x,y-.7,z));
+  const zipPoints=[[-.111,.87,-.279],[-.119,1.06,-.276],[-.096,1.117,-.275],[0,1.143,-.26],[.096,1.117,-.275],[.119,1.06,-.276],[.111,.87,-.279]].map(([x,y,z])=>new T.Vector3(x,torsoY(y)-TORSO_Y,z));
   torsoG.add(new T.Mesh(new T.TubeGeometry(new T.CatmullRomCurve3(zipPoints),24,.0022,4,false),packTrimW));
   for(const side of[-1,1]){
     at(rmesh(.009,.016,.005,buckleMat,.002),side*.055,1.135,-.272);
@@ -418,12 +447,14 @@ export function buildMarineBody(T, {root, put, rmesh: roundedMesh, cyl, part, dr
     // the shirt and loaded carrier each get their own surface fit.
     for(const [attach,armored] of [[b,false],[v,true]]) {
       const p=(x,y,z)=>[side*x,y,z];
-      const join=p(.148,.995,armored?.233:.15);
-      attach(strap([p(.105,1.11,-.263),p(.145,1.158,-.13),p(.149,1.19,-.03),
-        p(.147,1.188,.043),p(.142,1.153,.119),p(.14,1.112,armored?.18:.139),
+      const join=p(armored?.148:.14,.995,armored?.233:.15);
+      attach(strap([p(.1,1.11,-.263),p(.128,1.158,-.13),p(.13,1.19,-.03),
+        p(.129,1.188,.043),p(.131,1.153,.119),p(.136,1.112,armored?.18:.139),
         p(.144,1.055,armored?.224:.149),join],.033,packW,.008),0,0,0);
-      attach(strap([join,p(.174,.936,armored?.228:.15),p(.204,.891,armored?.13:.107),
-        p(.213,.868,.015),p(.185,.868,-.154),p(.116,.89,-.268)],.019,strapMat,.006),0,0,0);
+      // CC-340: round the narrower ribs (bare: the shirt; armoured: just outside the side plates)
+      const rx=armored?[.168,.19,.192,.17]:[.152,.162,.162,.15];
+      attach(strap([join,p(rx[0],.936,armored?.228:.15),p(rx[1],.891,armored?.13:.107),
+        p(rx[2],.868,.015),p(rx[3],.868,-.154),p(.112,.89,-.268)],.019,strapMat,.006),0,0,0);
       attach(rmesh(.041,.024,.013,buckleMat,.004),join[0],join[1],join[2]+.006);
     }
     at(rmesh(.021,.272,.009,strapMat,.003),side*.105,.998,-.292);
@@ -440,29 +471,34 @@ export function buildMarineBody(T, {root, put, rmesh: roundedMesh, cyl, part, dr
     at(cyl(.021,.021,.004,packTrimW,12),side*.13,.811,-.221).rotation.z=Math.PI/2;
   }
   const HAND_SCALE=1.18;   // GB-169
+  // CC-340 (J125): the shoulder joints 47 cm apart (were 68: a man's are about 36, his kit and build add the rest) and
+  // the arm a man's girth in his blouse: the sleeve's rings at ARM_GIRTH of what they were above the forearm's end, the
+  // wrist (where the hand and its glove, Claude's, take over) as it was.
+  const SHOULDER_X=.235, ARM_GIRTH=.84, FORE_GIRTH=.87;   // (and SHOULDER_Y, above)
+  const girth=(rings,k,keepBelow=-1)=>rings.map(([y,rx,rz,cx=0,cz=0])=>y<keepBelow?[y,rx,rz,cx,cz]:[y,rx*k,rz*k,cx*k,cz*k]);
   function arm(side) {
-    const armG=new T.Group();armG.position.set(side*.34,1.08-.7,.02);torsoG.add(armG);
+    const armG=new T.Group();armG.position.set(side*SHOULDER_X,SHOULDER_Y-TORSO_Y,.02);torsoG.add(armG);
     // Smaller, inward-sloping deltoid around the unchanged animation pivot.
     // CL-197 (Jerry, 2026-10-15: "smooth out the chopped shoulders"): the same sleeve through a smooth ring curve (the old
     // table had a bump at the elbow pad and 16 sides). Sleeves rolled get a short cap that ends in a thick roll above the
     // elbow, with the bare arm, a skin elbow and the forearm below, so nothing has to bend through cloth.
     const capRings=[[-.286,.054,.057],[-.27,.0565,.0595],[-.25,.0585,.062],[-.23,.0605,.0645],[-.207,.0625,.067,-side*.005,.002],[-.175,.0645,.0685,-side*.008,.002],[-.09,.068,.073,-side*.022],[-.01,.075,.078,-side*.027,-.003],[.045,.069,.07,-side*.042,-.004],[.071,.043,.05,-side*.061]];
-    put(armG,rmesh(.016,.088,.077,uniformW,.006),side*.053,-.1,0);
-    put(armG,plate(.077,.029,.008,uniformW),side*.064,-.056,0,0,side*Math.PI/2,0);
+    put(armG,rmesh(.016,.08,.068,uniformW,.006),side*.042,-.1,0);
+    put(armG,plate(.068,.027,.008,uniformW),side*.052,-.056,0,0,side*Math.PI/2,0);
     // Follow the sleeve's changing center as it slopes into the shoulder.
-    seam(armG,[[side*.0395,-.09,-.045],[side*.0481,-.175,-.0399],[side*.0556,-.207,-.043]],uniformW,.0012);
+    seam(armG,[[side*.0335,-.09,-.0385],[side*.0405,-.175,-.0338],[side*.0467,-.207,-.0365]],uniformW,.0012);
     // GB-123 (Jerry): the PGB unit patch on his own left shoulder (+x: he faces +z), 1 mm off the raised block,
     // facing out and reading the right way round. The right shoulder keeps its placeholder.
-    if(side>0&&pgbPatch)patches.push(put(armG,pgbPatch(.062,.072),side*.062,-.1,0,0,Math.PI/2,0));
-    else put(armG,rmesh(.007,.041,.051,side>0?patchMat:patchInk,.002),side*.064,-.1,0);
-    addGear('pads',armG,plate(.122,.111,.023,padW),0,-.261,-.067,0,Math.PI,0);
-    addGear('pads',armG,plate(.099,.088,.019,plateW),0,-.261,-.087,0,Math.PI,0);
+    if(side>0&&pgbPatch)patches.push(put(armG,pgbPatch(.058,.066),side*.051,-.1,0,0,Math.PI/2,0));
+    else put(armG,rmesh(.007,.041,.051,side>0?patchMat:patchInk,.002),side*.053,-.1,0);
+    addGear('pads',armG,plate(.11,.104,.023,padW),0,-.261,-.057,0,Math.PI,0);
+    addGear('pads',armG,plate(.09,.082,.019,plateW),0,-.261,-.076,0,Math.PI,0);
     const elbowG=new T.Group();elbowG.position.set(0,-.28,0);elbowG.rotation.set(side<0?-.35:-.2,0,0);armG.add(elbowG);
     const ox=side<0?.02:-.01,oz=side<0?.04:.03;
     const sleeve=part(elbowG,dress.sleeveDown),bare=part(elbowG,dress.sleeveRolled);
     const joint=(mat,r)=>{const m=new T.Mesh(new T.SphereGeometry(1,22,16),mat);m.scale.set(r,r,r*1.02);m.castShadow=m.receiveShadow=true;return m;};
-    put(part(armG,dress.sleeveDown),joint(uniformW,.0565),0,-.28,0);
-    put(bare,joint(skinW,.0478),0,0,0);   // the skin elbow, on the elbow pivot
+    put(part(armG,dress.sleeveDown),joint(uniformW,.0565*ARM_GIRTH),0,-.28,0);
+    put(bare,joint(skinW,.0478*ARM_GIRTH),0,0,0);   // the skin elbow, on the elbow pivot
     // CL-198 (Jerry, 2026-10-15: the blouse "natural in all ... movements"). The sleeve was a cap on the shoulder and a
     // separate forearm tube on the elbow, with a ball between: bending the arm showed the joins. It is now one sleeve from
     // the top of the shoulder to the cuff, worn by the chest (at the top of the shoulder, as CL-188's live cap was), the
@@ -477,23 +513,23 @@ export function buildMarineBody(T, {root, put, rmesh: roundedMesh, cyl, part, dr
         const a=Math.min(1,t*t*(3-2*t)+out*(1-t)),e=smooth01(.045,-.045,L[2][1]);
         return [(1-a)*(1-e),a*(1-e),e];
       };
-      const upper=[[.071,.043,.05,-side*.061],[.045,.069,.07,-side*.042,-.004],[-.01,.075,.078,-side*.027,-.003],[-.09,.068,.073,-side*.022],[-.175,.0635,.0675,-side*.008,.002],[-.215,.061,.065,-side*.004,.002],[-.25,.0585,.0625],[-.28,.0575,.0615]];
-      const fore=[[-.025,.059,.062,ox*.15,oz*.1],[-.05,.066,.07,ox*.35,oz*.3],[-.105,.063,.069,ox*.8,oz*.7],[-.135,.0575,.0615,ox*.92,oz*.86],[-.165,.05,.052,ox,oz],[-.2,.043,.038,ox,oz],[-.226,.041,.034,ox,oz]];
+      const upper=girth([[.036,.043,.05,-side*.061],[.022,.069,.07,-side*.042,-.004],[-.018,.075,.078,-side*.027,-.003],[-.09,.068,.073,-side*.022],[-.175,.0635,.0675,-side*.008,.002],[-.215,.061,.065,-side*.004,.002],[-.25,.0585,.0625],[-.28,.0575,.0615]],ARM_GIRTH);
+      const fore=girth([[-.025,.059,.062,ox*.15,oz*.1],[-.05,.066,.07,ox*.35,oz*.3],[-.105,.063,.069,ox*.8,oz*.7],[-.135,.0575,.0615,ox*.92,oz*.86]],FORE_GIRTH).map(([y,rx,rz,,],i)=>[y,rx,rz,[ox*.15,ox*.35,ox*.8,ox*.92][i],[oz*.1,oz*.3,oz*.7,oz*.86][i]]).concat([[-.165,.047,.049,ox,oz],[-.2,.043,.038,ox,oz],[-.226,.041,.034,ox,oz]]);
       const down=loftRings(T,[...ringsIn(T,root,armG,subdiv(upper,1),{e:.72}),...ringsIn(T,root,elbowG,subdiv(fore,1),{e:.72})],30,{caps:'first'});
       const seamGeo=(pts)=>geoIn(T,root,armG,new T.TubeGeometry(new T.CatmullRomCurve3(pts.map(q=>new T.Vector3(...q))),12,.0012,4,false));
-      const capSeamG=seamGeo([[side*.0205,.045,.0391],[side*.0409,-.01,.0451],[side*.0395,-.09,.045]]);
+      const capSeamG=seamGeo([[side*.0172,.022,.0328],[side*.0344,-.018,.0379],[side*.0332,-.09,.0378]]);
       const downGeo=joinGeos(T,[down.geo,capSeamG]);
       const sleeveLive=liveCloth(T,{space:root,bones,geo:downGeo,weights:weigh(T,root,bones,downGeo,w3),material:uniformW,name:'live-sleeve'});
       dress.sleeveDown.push(sleeveLive.parent);
       // rolled: the sleeve to 7.5 cm above the elbow, the roll (a thick fold), then skin
-      const shortR=[...upper.slice(0,5),[-.195,.0625,.0665,-side*.005,.002]];
+      const shortR=[...upper.slice(0,5),[-.195,.0625*ARM_GIRTH,.0665*ARM_GIRTH,-side*.005*ARM_GIRTH,.002*ARM_GIRTH]];
       const shortL=loftRings(T,ringsIn(T,root,armG,subdiv(shortR,1),{e:.72}),30,{caps:'first'});
-      const roll=geoIn(T,root,armG,new T.TorusGeometry(.0665,.0145,10,36),-side*.005,-.203,.002,Math.PI/2,0,0,1,1,1.07);
-      const rollSeam=seamGeo([[side*.0205,.045,.0391],[side*.0409,-.01,.0451],[side*.0395,-.09,.045]]);
+      const roll=geoIn(T,root,armG,new T.TorusGeometry(.0665*ARM_GIRTH,.0135,10,36),-side*.004,-.203,.002,Math.PI/2,0,0,1,1,1.07);
+      const rollSeam=seamGeo([[side*.0172,.022,.0328],[side*.0344,-.018,.0379],[side*.0332,-.09,.0378]]);
       const rolledGeo=joinGeos(T,[shortL.geo,roll,rollSeam]);
       const rolled=liveCloth(T,{space:root,bones,geo:rolledGeo,weights:weigh(T,root,bones,rolledGeo,w3),material:uniformW,name:'live-sleeve-rolled'});
-      const armSkin=[[-.19,.0505,.0525,-side*.005,.002],[-.235,.0495,.0505,-side*.002,.001],[-.28,.0478,.0482]];
-      const foreSkin=[[-.03,.0505,.0515,ox*.05,oz*.04],[-.065,.0555,.0555,ox*.3,oz*.25],[-.105,.051,.0525,ox*.8,oz*.7],[-.145,.0425,.0445,ox*.95,oz*.93],[-.18,.037,.036,ox,oz]];
+      const armSkin=girth([[-.19,.0505,.0525,-side*.005,.002],[-.235,.0495,.0505,-side*.002,.001],[-.28,.0478,.0482]],ARM_GIRTH);
+      const foreSkin=[[-.03,.0505*FORE_GIRTH,.0515*FORE_GIRTH,ox*.05,oz*.04],[-.065,.0555*FORE_GIRTH,.0555*FORE_GIRTH,ox*.3,oz*.25],[-.105,.051*FORE_GIRTH,.0525*FORE_GIRTH,ox*.8,oz*.7],[-.145,.0425*.95,.0445*.95,ox*.95,oz*.93],[-.18,.037,.036,ox,oz]];
       const skinRings=[...ringsIn(T,root,armG,subdiv(armSkin,1),{e:.88}),...ringsIn(T,root,elbowG,subdiv(foreSkin,1),{e:.88})];
       const skinL=loftRings(T,skinRings,24,{caps:'first'});
       liveCloth(T,{space:root,bones,geo:skinL.geo,weights:weigh(T,root,bones,skinL.geo,w3),material:skinW,name:'live-bare-arm',holder:rolled.parent});
@@ -502,7 +538,7 @@ export function buildMarineBody(T, {root, put, rmesh: roundedMesh, cyl, part, dr
     put(sleeve,rmesh(.088,.022,.076,uniformW,.008),ox,-.211,oz);   // GB-169: the cuff closes round the slimmer wrist
     put(sleeve,rmesh(.04,.016,.007,uniformW,.003),ox+side*.02,-.211,oz+.04);
     put(sleeve,cyl(.004,.004,.003,beltW,6),ox+side*.031,-.211,oz+.045,Math.PI/2);
-    seam(sleeve,[[ox+side*.0471,-.17,oz+.0351],[ox*.8+side*.057,-.105,oz*.7+.0425],[ox*.55+side*.0606,-.075,oz*.5+.0437]],uniformW,.0012);
+    seam(sleeve,[[ox+side*.0445,-.17,oz+.0332],[ox*.8+side*.0497,-.105,oz*.7+.037],[ox*.55+side*.0528,-.075,oz*.5+.038]],uniformW,.0012);
     const gz=side<0?.08:.07;
     // CU-100: the hand turns at the wrist (the top of the palm, on the forearm), so a grip can lie in the fist's channel
     // whichever way the forearm comes to it. At rest the wrist is identity: the hand is exactly where it was built.
@@ -533,5 +569,5 @@ export function buildMarineBody(T, {root, put, rmesh: roundedMesh, cyl, part, dr
   const gripL=new T.Group();gripL.position.set(.02,-.27,.13);gripL.rotation.set(1.23359,-.24103,-.08361);elbowLG.add(gripL);
   const gripR=new T.Group();gripR.position.set(-.01,-.26,.12);elbowRG.add(gripR);
   const weaponMount=new T.Group();weaponMount.position.set(.12826,.15981,-.10022);weaponMount.rotation.set(1.23359,.24103,.08361);gripR.add(weaponMount);
-  return {lowerBody,hip,hipGrip,gearParts,legLG,legRG,torsoG,armLG,armRG,elbowLG,elbowRG,wristLG,wristRG,gripL,gripR,weaponMount,patches};
+  return {torsoPivotY:TORSO_Y,hipY:HIP_Y,lowerBody,hip,hipGrip,gearParts,legLG,legRG,torsoG,armLG,armRG,elbowLG,elbowRG,wristLG,wristRG,gripL,gripR,weaponMount,patches};
 }

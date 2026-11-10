@@ -219,16 +219,16 @@ export function visibleSurfaceGap(left,right,metresPerUnit=1) {
 }
 
 // Check only the joints crossing the actual posed sling and its weapon. The catalog covers the gun itself.
-export function makeSlingAudit(spot,metresPerUnit) {
+export function makeSlingAudit(spot,metresPerUnit,webClearance=0) {
   const gun=visiblePieces(spot.gun,metresPerUnit);
-  return ()=>checkSling(spot,metresPerUnit,gun);
+  return ()=>checkSling(spot,metresPerUnit,gun,webClearance);
 }
 
 export function auditSling(spot,metresPerUnit) {
   return makeSlingAudit(spot,metresPerUnit)();
 }
 
-function checkSling(spot,metresPerUnit,gun) {
+function checkSling(spot,metresPerUnit,gun,webClearance) {
   const clipMeshes=spot.sling.userData.clips||[];
   const webParts=visiblePieces(spot.sling,metresPerUnit,clipMeshes);
   const clipParts=clipMeshes.map(m=>visiblePieces(m,metresPerUnit));
@@ -268,7 +268,78 @@ function checkSling(spot,metresPerUnit,gun) {
       overlaps.push(row);
     }
   }
-  return {ends,overlaps};
+  const nearWeb=webClearance>0 && webParts.some(w=>gun.some(p=>
+    boxDistance(w.box,p.box)<=webClearance**2 && surfacesTouch(w.tree,p.tree,webClearance**2)));
+  return {ends,overlaps,nearWeb};
+}
+
+// Detail seats are one-sided. Trace the actual entry and exit faces below the
+// centre and outline of a drawn detail; a shallow host can be pierced even
+// when no point sits half a millimetre inside it.
+function detailFrame(part, metresPerUnit) {
+  const spec = part.mesh.userData.detailSeat;
+  if (!spec || !axes.includes(spec.axis) || ![1,-1].includes(spec.side) || !(spec.depth > 0)) return null;
+  const parent = part.mesh.parent, axis = new Vector3();
+  axis[spec.axis] = spec.side;
+  const local = part.mesh.position.clone().addScaledVector(axis,spec.surface);
+  const origin = parent.localToWorld(local.clone()).multiplyScalar(metresPerUnit);
+  const direction = parent.localToWorld(local.add(axis)).multiplyScalar(metresPerUnit).sub(origin);
+  const depth = spec.depth * direction.length();
+  direction.normalize();
+  const sampleMap = new Map();
+  let bottom = Infinity, top = -Infinity;
+  for (const vertex of part.vertices) {
+    const relative = vertex.clone().sub(origin), level = relative.dot(direction);
+    bottom = Math.min(bottom,level); top = Math.max(top,level);
+    relative.addScaledVector(direction,-level);
+    const key = relative.toArray().map(x=>Math.round(x*1e7)).join(',');
+    const sample = sampleMap.get(key);
+    if (!sample || level < sample.level) sampleMap.set(key,{offset:relative,level});
+  }
+  const samples = [{offset:new Vector3(),level:bottom}, ...sampleMap.values()];
+  return {origin,direction,depth,top,samples,spec,host:spec.hostIndex===undefined?null:parent.children[spec.hostIndex]};
+}
+
+function crossingLevels(start,direction,host,reach) {
+  const scan = new Ray(start.clone().addScaledVector(direction,reach),direction.clone().negate());
+  const hits = [], at = new Vector3();
+  function visit(node) {
+    if (!scan.intersectsBox(node.box)) return;
+    if (!node.faces) { visit(node.left); visit(node.right); return; }
+    for (const {tri} of node.faces) {
+      if (scan.intersectTriangle(tri.a,tri.b,tri.c,false,at)) hits.push(reach-scan.origin.distanceTo(at));
+    }
+  }
+  visit(host.tree);
+  hits.sort((a,b)=>b-a);
+  return hits.filter((x,i)=>!i || hits[i-1]-x>1e-8);
+}
+
+function inspectDetailSeat(frame,host) {
+  if (!host.closed || (frame.host && frame.host!==host.mesh)) return null;
+  const {origin,direction,depth,top,samples} = frame, precision=0.00002;
+  if (host.box.distanceToPoint(origin)>EPS) return null;
+  // Start beyond the host's bounds even when it is tilted relative to this seat.
+  const reach=origin.distanceTo(host.box.getCenter(new Vector3()))+host.box.getSize(new Vector3()).length()+EPS;
+  let nearest=Infinity, deepest=0;
+  for (let i=0;i<samples.length;i++) {
+    const {offset,level}=samples[i], start=origin.clone().addScaledVector(offset,.999);
+    const hits=crossingLevels(start,direction,host,reach);
+    let entry,exit;
+    for(let j=0;j+1<hits.length;j+=2) {
+      if(Math.abs(hits[j])<=EPS && (entry===undefined || Math.abs(hits[j])<Math.abs(entry))) {
+        entry=hits[j];exit=hits[j+1];
+      }
+    }
+    if(entry===undefined) { if(i===0)return null; continue; }
+    if(i===0)nearest=Math.abs(entry);
+    deepest=Math.max(deepest,entry-level);
+    if(level<exit-precision)return {nearest,reason:'through far face',amount:exit-level,at:start.clone().addScaledVector(direction,exit)};
+    if(entry-level>depth+precision || (i===0 && entry>top+precision)) {
+      return {nearest,reason:'past detail seat',amount:Math.max(entry-level-depth,entry-top),at:start.clone().addScaledVector(direction,entry)};
+    }
+  }
+  return Number.isFinite(nearest)?{nearest,depth:deepest}:null;
 }
 
 export function auditWeapon(root, {metresPerUnit=1, ignore=[], seats=[], sources}={}) {
@@ -287,13 +358,36 @@ export function auditWeapon(root, {metresPerUnit=1, ignore=[], seats=[], sources
       if (!supports.some(b=>surfacesTouch(a.tree,b.tree,EPS*EPS))) unseated.push({part:a.label,host:supports[0].label});
     }
   }
+  const detailSeats=[], detailBreaches=[], approvedDetails=new Map();
+  for(const part of parts) {
+    const frame=detailFrame(part,metresPerUnit);
+    if(!frame)continue;
+    let best;
+    for(const host of parts) {
+      if(host===part || boxDistance(host.box,part.box)>EPS*EPS)continue;
+      if(!frame.host && host.mesh.userData.detailSeat)continue;
+      const seat=inspectDetailSeat(frame,host);
+      if(seat && (!best || seat.nearest<best.seat.nearest))best={host,seat};
+    }
+    if(!best)continue;
+    const {host,seat}=best;
+    const row={part:part.label,host:host.label,kind:frame.spec.kind};
+    if(seat.reason)detailBreaches.push({...row,reason:seat.reason,excessMm:+(seat.amount*1000).toFixed(3),
+      at:seat.at.toArray().map(x=>+x.toFixed(6)),localPart:part.mesh.position.toArray(),localGroup:part.mesh.parent.position.toArray(),
+      hostSource:sources?.get(host.mesh)});
+    else {
+      detailSeats.push({...row,depthMm:+(seat.depth*1000).toFixed(3)});
+      approvedDetails.set(part.label+'|'+host.label,frame.depth);
+    }
+  }
   const parents=parts.map((_,i)=>i);
   const find=i=>{while(parents[i]!==i){parents[i]=parents[parents[i]];i=parents[i];}return i;};
   const overlaps=[];
   for(let i=0;i<parts.length;i++) for(let j=0;j<i;j++) {
     const a=parts[i], b=parts[j];
     if(boxDistance(a.box,b.box)>EPS*EPS) continue;
-    const permitted=allowances.get(a.label+'|'+b.label) ?? allowances.get(b.label+'|'+a.label) ?? 0;
+    const ab=a.label+'|'+b.label,ba=b.label+'|'+a.label;
+    const permitted=allowances.get(ab) ?? allowances.get(ba) ?? approvedDetails.get(ab) ?? approvedDetails.get(ba) ?? 0;
     let host=b, witness=penetration(a,b,permitted+EPS);
     if (!witness) { host=a; witness=penetration(b,a,permitted+EPS); }
     if(witness) {
@@ -342,5 +436,5 @@ export function auditWeapon(root, {metresPerUnit=1, ignore=[], seats=[], sources
   }
   return {parts:parts.length, openSurfaces:parts.filter(p=>!p.closed).length,
     loose:components.slice(1).map(looseGroup),
-    overlaps,unseated};
+    overlaps,unseated,detailSeats,detailBreaches};
 }

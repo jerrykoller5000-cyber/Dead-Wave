@@ -1,0 +1,877 @@
+{
+  "result": [
+    {
+      "kind": "shambler",
+      "samples": [
+        {
+          "frame": 6,
+          "parts": 5,
+          "collisions": []
+        },
+        {
+          "frame": 12,
+          "parts": 5,
+          "collisions": []
+        },
+        {
+          "frame": 18,
+          "parts": 5,
+          "collisions": []
+        },
+        {
+          "frame": 24,
+          "parts": 5,
+          "collisions": []
+        }
+      ]
+    },
+    {
+      "kind": "feral",
+      "samples": [
+        {
+          "frame": 6,
+          "parts": 5,
+          "collisions": []
+        },
+        {
+          "frame": 12,
+          "parts": 5,
+          "collisions": []
+        },
+        {
+          "frame": 18,
+          "parts": 5,
+          "collisions": []
+        },
+        {
+          "frame": 24,
+          "parts": 5,
+          "collisions": []
+        }
+      ]
+    },
+    {
+      "kind": "leaper",
+      "samples": [
+        {
+          "frame": 6,
+          "parts": 5,
+          "collisions": []
+        },
+        {
+          "frame": 12,
+          "parts": 5,
+          "collisions": []
+        },
+        {
+          "frame": 18,
+          "parts": 5,
+          "collisions": []
+        },
+        {
+          "frame": 24,
+          "parts": 5,
+          "collisions": []
+        }
+      ]
+    },
+    {
+      "kind": "spider",
+      "samples": [
+        {
+          "frame": 6,
+          "parts": 1,
+          "collisions": []
+        },
+        {
+          "frame": 12,
+          "parts": 1,
+          "collisions": []
+        },
+        {
+          "frame": 18,
+          "parts": 1,
+          "collisions": []
+        },
+        {
+          "frame": 24,
+          "parts": 1,
+          "collisions": []
+        }
+      ]
+    },
+    {
+      "kind": "drowned",
+      "samples": [
+        {
+          "frame": 6,
+          "parts": 5,
+          "collisions": []
+        },
+        {
+          "frame": 12,
+          "parts": 5,
+          "collisions": []
+        },
+        {
+          "frame": 18,
+          "parts": 5,
+          "collisions": []
+        },
+        {
+          "frame": 24,
+          "parts": 5,
+          "collisions": []
+        }
+      ]
+    },
+    {
+      "kind": "military",
+      "samples": [
+        {
+          "frame": 6,
+          "parts": 5,
+          "collisions": []
+        },
+        {
+          "frame": 12,
+          "parts": 5,
+          "collisions": []
+        },
+        {
+          "frame": 18,
+          "parts": 5,
+          "collisions": []
+        },
+        {
+          "frame": 24,
+          "parts": 5,
+          "collisions": []
+        }
+      ]
+    },
+    {
+      "kind": "brute",
+      "samples": [
+        {
+          "frame": 6,
+          "parts": 5,
+          "collisions": []
+        },
+        {
+          "frame": 12,
+          "parts": 5,
+          "collisions": []
+        },
+        {
+          "frame": 18,
+          "parts": 5,
+          "collisions": []
+        },
+        {
+          "frame": 24,
+          "parts": 5,
+          "collisions": []
+        }
+      ]
+    },
+    {
+      "kind": "spitter",
+      "samples": [
+        {
+          "frame": 6,
+          "parts": 5,
+          "collisions": []
+        },
+        {
+          "frame": 12,
+          "parts": 5,
+          "collisions": []
+        },
+        {
+          "frame": 18,
+          "parts": 5,
+          "collisions": []
+        },
+        {
+          "frame": 24,
+          "parts": 5,
+          "collisions": []
+        }
+      ]
+    },
+    {
+      "kind": "screamer",
+      "samples": [
+        {
+          "frame": 6,
+          "parts": 5,
+          "collisions": []
+        },
+        {
+          "frame": 12,
+          "parts": 5,
+          "collisions": []
+        },
+        {
+          "frame": 18,
+          "parts": 5,
+          "collisions": []
+        },
+        {
+          "frame": 24,
+          "parts": 5,
+          "collisions": []
+        }
+      ]
+    },
+    {
+      "kind": "bomber",
+      "samples": [
+        {
+          "frame": 6,
+          "parts": 5,
+          "collisions": []
+        },
+        {
+          "frame": 12,
+          "parts": 5,
+          "collisions": []
+        },
+        {
+          "frame": 18,
+          "parts": 5,
+          "collisions": []
+        },
+        {
+          "frame": 24,
+          "parts": 5,
+          "collisions": []
+        }
+      ]
+    },
+    {
+      "kind": "demon",
+      "samples": [
+        {
+          "frame": 6,
+          "parts": 5,
+          "collisions": [
+            {
+              "pair": "armL/legL",
+              "a": "armL",
+              "b": "legL",
+              "hits": 4,
+              "total": 19,
+              "contact": [
+                -27.707,
+                -199.199,
+                -631.6
+              ],
+              "aCenter": [
+                -27.549,
+                -198.277,
+                -631.317
+              ],
+              "bCenter": [
+                -27.744,
+                -199.323,
+                -631.76
+              ],
+              "overlap": [
+                0.421,
+                0.588,
+                0.115
+              ]
+            },
+            {
+              "pair": "legL/legR",
+              "a": "legL",
+              "b": "legR",
+              "hits": 3,
+              "total": 5,
+              "contact": [
+                -27.727,
+                -198.831,
+                -631.944
+              ],
+              "aCenter": [
+                -27.744,
+                -199.323,
+                -631.76
+              ],
+              "bCenter": [
+                -27.912,
+                -199.314,
+                -632.156
+              ],
+              "overlap": [
+                0.517,
+                1.212,
+                0.049
+              ]
+            }
+          ]
+        },
+        {
+          "frame": 12,
+          "parts": 5,
+          "collisions": [
+            {
+              "pair": "armL/legL",
+              "a": "armL",
+              "b": "legL",
+              "hits": 4,
+              "total": 31,
+              "contact": [
+                -27.465,
+                -198.814,
+                -631.526
+              ],
+              "aCenter": [
+                -27.372,
+                -198.274,
+                -631.281
+              ],
+              "bCenter": [
+                -27.253,
+                -199.314,
+                -631.696
+              ],
+              "overlap": [
+                0.722,
+                0.555,
+                0.184
+              ]
+            },
+            {
+              "pair": "legL/legR",
+              "a": "legL",
+              "b": "legR",
+              "hits": 2,
+              "total": 7,
+              "contact": [
+                -27.442,
+                -198.845,
+                -631.911
+              ],
+              "aCenter": [
+                -27.253,
+                -199.314,
+                -631.696
+              ],
+              "bCenter": [
+                -27.709,
+                -199.309,
+                -632.12
+              ],
+              "overlap": [
+                0.424,
+                1.168,
+                0.055
+              ]
+            }
+          ]
+        },
+        {
+          "frame": 18,
+          "parts": 5,
+          "collisions": [
+            {
+              "pair": "armL/legL",
+              "a": "armL",
+              "b": "legL",
+              "hits": 4,
+              "total": 33,
+              "contact": [
+                -27.159,
+                -198.818,
+                -631.505
+              ],
+              "aCenter": [
+                -27.09,
+                -198.296,
+                -631.263
+              ],
+              "bCenter": [
+                -26.87,
+                -199.283,
+                -631.679
+              ],
+              "overlap": [
+                0.731,
+                0.559,
+                0.197
+              ]
+            },
+            {
+              "pair": "legL/legR",
+              "a": "legL",
+              "b": "legR",
+              "hits": 2,
+              "total": 5,
+              "contact": [
+                -27.157,
+                -198.849,
+                -631.891
+              ],
+              "aCenter": [
+                -26.87,
+                -199.283,
+                -631.679
+              ],
+              "bCenter": [
+                -27.467,
+                -199.318,
+                -632.091
+              ],
+              "overlap": [
+                0.391,
+                1.137,
+                0.072
+              ]
+            }
+          ]
+        },
+        {
+          "frame": 24,
+          "parts": 5,
+          "collisions": [
+            {
+              "pair": "armL/legL",
+              "a": "armL",
+              "b": "legL",
+              "hits": 11,
+              "total": 41,
+              "contact": [
+                -26.867,
+                -198.81,
+                -631.493
+              ],
+              "aCenter": [
+                -26.729,
+                -198.328,
+                -631.24
+              ],
+              "bCenter": [
+                -26.653,
+                -199.308,
+                -631.681
+              ],
+              "overlap": [
+                0.748,
+                0.607,
+                0.182
+              ]
+            },
+            {
+              "pair": "legL/legR",
+              "a": "legL",
+              "b": "legR",
+              "hits": 2,
+              "total": 6,
+              "contact": [
+                -26.868,
+                -198.835,
+                -631.88
+              ],
+              "aCenter": [
+                -26.653,
+                -199.308,
+                -631.681
+              ],
+              "bCenter": [
+                -27.198,
+                -199.257,
+                -632.087
+              ],
+              "overlap": [
+                0.398,
+                1.085,
+                0.06
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "colossus",
+      "samples": [
+        {
+          "frame": 6,
+          "parts": 5,
+          "collisions": [
+            {
+              "pair": "armL/head",
+              "a": "armL",
+              "b": "head",
+              "hits": 5,
+              "total": 26,
+              "contact": [
+                -27.281,
+                -196.087,
+                -631.564
+              ],
+              "aCenter": [
+                -27.027,
+                -196.594,
+                -630.896
+              ],
+              "bCenter": [
+                -27.424,
+                -196.15,
+                -631.965
+              ],
+              "overlap": [
+                0.788,
+                0.917,
+                0.241
+              ]
+            },
+            {
+              "pair": "armR/legR",
+              "a": "armR",
+              "b": "legR",
+              "hits": 19,
+              "total": 56,
+              "contact": [
+                -27.245,
+                -198.305,
+                -632.341
+              ],
+              "aCenter": [
+                -27.397,
+                -197.336,
+                -632.75
+              ],
+              "bCenter": [
+                -27.274,
+                -198.994,
+                -632.265
+              ],
+              "overlap": [
+                0.949,
+                0.826,
+                0.41
+              ]
+            }
+          ]
+        },
+        {
+          "frame": 12,
+          "parts": 5,
+          "collisions": [
+            {
+              "pair": "armL/head",
+              "a": "armL",
+              "b": "head",
+              "hits": 6,
+              "total": 23,
+              "contact": [
+                -27.09,
+                -196.327,
+                -631.572
+              ],
+              "aCenter": [
+                -26.986,
+                -197.017,
+                -630.912
+              ],
+              "bCenter": [
+                -27.041,
+                -196.142,
+                -632.004
+              ],
+              "overlap": [
+                0.789,
+                0.911,
+                0.219
+              ]
+            },
+            {
+              "pair": "armR/legR",
+              "a": "armR",
+              "b": "legR",
+              "hits": 1,
+              "total": 9,
+              "contact": [
+                -27.168,
+                -198.312,
+                -632.477
+              ],
+              "aCenter": [
+                -26.774,
+                -197.168,
+                -632.762
+              ],
+              "bCenter": [
+                -27.211,
+                -199.055,
+                -632.217
+              ],
+              "overlap": [
+                0.753,
+                0.477,
+                0.329
+              ]
+            }
+          ]
+        },
+        {
+          "frame": 18,
+          "parts": 5,
+          "collisions": [
+            {
+              "pair": "armL/head",
+              "a": "armL",
+              "b": "head",
+              "hits": 2,
+              "total": 16,
+              "contact": [
+                -26.635,
+                -196.246,
+                -631.538
+              ],
+              "aCenter": [
+                -26.538,
+                -197.239,
+                -630.9
+              ],
+              "bCenter": [
+                -26.592,
+                -196.16,
+                -631.991
+              ],
+              "overlap": [
+                0.803,
+                0.924,
+                0.219
+              ]
+            },
+            {
+              "pair": "armL/legL",
+              "a": "armL",
+              "b": "legL",
+              "hits": 18,
+              "total": 50,
+              "contact": [
+                -26.538,
+                -198.387,
+                -631.348
+              ],
+              "aCenter": [
+                -26.538,
+                -197.239,
+                -630.9
+              ],
+              "bCenter": [
+                -26.661,
+                -199.019,
+                -631.549
+              ],
+              "overlap": [
+                0.886,
+                0.767,
+                0.557
+              ]
+            },
+            {
+              "pair": "armR/head",
+              "a": "armR",
+              "b": "head",
+              "hits": 3,
+              "total": 20,
+              "contact": [
+                -26.624,
+                -196.249,
+                -632.45
+              ],
+              "aCenter": [
+                -26.067,
+                -196.792,
+                -632.732
+              ],
+              "bCenter": [
+                -26.592,
+                -196.16,
+                -631.991
+              ],
+              "overlap": [
+                0.803,
+                0.744,
+                0.248
+              ]
+            }
+          ]
+        },
+        {
+          "frame": 24,
+          "parts": 5,
+          "collisions": [
+            {
+              "pair": "armL/head",
+              "a": "armL",
+              "b": "head",
+              "hits": 1,
+              "total": 19,
+              "contact": [
+                -26.195,
+                -196.288,
+                -631.48
+              ],
+              "aCenter": [
+                -26.148,
+                -197.269,
+                -630.857
+              ],
+              "bCenter": [
+                -26.14,
+                -196.192,
+                -631.931
+              ],
+              "overlap": [
+                0.824,
+                0.957,
+                0.236
+              ]
+            },
+            {
+              "pair": "armL/legL",
+              "a": "armL",
+              "b": "legL",
+              "hits": 13,
+              "total": 54,
+              "contact": [
+                -26.592,
+                -198.391,
+                -631.347
+              ],
+              "aCenter": [
+                -26.148,
+                -197.269,
+                -630.857
+              ],
+              "bCenter": [
+                -25.945,
+                -198.938,
+                -631.523
+              ],
+              "overlap": [
+                1.357,
+                0.778,
+                0.55
+              ]
+            },
+            {
+              "pair": "armR/head",
+              "a": "armR",
+              "b": "head",
+              "hits": 4,
+              "total": 17,
+              "contact": [
+                -26.195,
+                -196.255,
+                -632.377
+              ],
+              "aCenter": [
+                -25.592,
+                -196.716,
+                -632.683
+              ],
+              "bCenter": [
+                -26.14,
+                -196.192,
+                -631.931
+              ],
+              "overlap": [
+                0.824,
+                0.764,
+                0.229
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "guardian",
+      "samples": [
+        {
+          "frame": 6,
+          "parts": 5,
+          "collisions": []
+        },
+        {
+          "frame": 12,
+          "parts": 5,
+          "collisions": []
+        },
+        {
+          "frame": 18,
+          "parts": 5,
+          "collisions": [
+            {
+              "pair": "armL/legL",
+              "a": "armL",
+              "b": "legL",
+              "hits": 1,
+              "total": 18,
+              "contact": [
+                -26.326,
+                -199.575,
+                -631.101
+              ],
+              "aCenter": [
+                -26.028,
+                -198.627,
+                -631.131
+              ],
+              "bCenter": [
+                -26.695,
+                -199.408,
+                -631.415
+              ],
+              "overlap": [
+                0.211,
+                1.309,
+                0.507
+              ]
+            }
+          ]
+        },
+        {
+          "frame": 24,
+          "parts": 5,
+          "collisions": []
+        }
+      ]
+    },
+    {
+      "kind": "caveguard",
+      "samples": [
+        {
+          "frame": 6,
+          "parts": 5,
+          "collisions": []
+        },
+        {
+          "frame": 12,
+          "parts": 5,
+          "collisions": []
+        },
+        {
+          "frame": 18,
+          "parts": 5,
+          "collisions": []
+        },
+        {
+          "frame": 24,
+          "parts": 5,
+          "collisions": []
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

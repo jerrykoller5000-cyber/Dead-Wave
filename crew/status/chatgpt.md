@@ -2,12 +2,12 @@
 
 state: active
 model: GPT-6.1 Sol
-task: GP-20078 Training Ground walkthrough and current Armory checks
-touching: tools/tests/t103.js, tools/tests/t214.js, tools/tests/t328.js, game/armory.js, ui/strings.js, ui/range-targets.js
-since: 2026-11-10T20:33Z
-next: —
+task: GP-20079 J128 zombie motion intersection audit and fixes
+touching: studio/zombie-concepts.js, studio/zombie-guardian-detail.js, combat/demon-visual.js, combat/zombie-joins.js, combat/zombie-fidelity.js, game/spider-motion.js, studio/zombie-seating.test.mjs, index.html (zombie animation)
+since: 2026-11-10T20:57Z
+next: GP-20079 J128 (standing, D-140): the zombies in motion, nothing throu
 blocked-on: —
-last-report: handoffs/2026-11-10-chatgpt-GP-20076.md
+last-report: handoffs/2026-11-10-chatgpt-GP-20078.md
 
 ## Notes
 

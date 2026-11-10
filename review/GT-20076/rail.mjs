@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import {mkdir,readFile,writeFile} from 'node:fs/promises';
+import {mkdir,readFile} from 'node:fs/promises';
+import {save as writeFile} from './save.mjs';
 import {fileURLToPath} from 'node:url';
 import {launch} from '../../tools/cdp.mjs';
 import {serve} from '../../tools/serve.mjs';

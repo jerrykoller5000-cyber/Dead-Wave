@@ -79,7 +79,7 @@ export function createTrainingPerimeter(T,tg) {
       const dx=s.x1-s.x0,dz=s.z1-s.z0,len=Math.hypot(dx,dz),ux=dx/len,uz=dz/len;
       const at=(u,y,v=0)=>[s.x0+ux*u-uz*v-tg.origin.x,y,s.z0+uz*u+ux*v-tg.origin.z];
       const box=(u,y,w,h,d)=>{const geo=new T.BoxGeometry(w,h,d);owned.push(geo);const m=new T.Mesh(geo,frame);m.position.fromArray(at(u,y));m.rotation.y=-Math.atan2(uz,ux);group.add(m);};
-      const n=Math.ceil(len/2.5);for(let i=0;i<=n;i++){box(len*i/n,height/2,.075,height,.075);box(len*i/n,.025,.22,.04,.22);}
+      const n=Math.ceil(len/2.5);for(let i=0;i<=n;i++){box(len*i/n,height/2,.075,height,.075);box(len*i/n,.02,.22,.04,.22);}
       for(const y of [.15,height-.08])box(len/2,y,len,.06,.06);
       const low=.22,high=height-.17;
       for(const slope of [-1,1])for(let c=-len-high;c<len+high;c+=.32){
@@ -114,7 +114,7 @@ export function createTrainingPerimeter(T,tg) {
     group:root,layout,solids,renderSpans,constrain:blocker.constrain,
     reset(){previous=new WeakMap();},
     keepZombie(z){const p=z.mesh?.position;if(!p)return;const from=previous.get(z)||p;const v=blocker.constrain(p,from,(z.radius||.42)+.06);p.x=v.x;p.z=v.z;previous.set(z,{x:p.x,y:p.y,z:p.z});},
-    update(camera,focus,dt){for(const e of entries){const hide=viewCrossesPlane(camera,focus,e.axis,e.at,e.bounds,.12),want=hide?.08:1;e.opacity+=Math.sign(want-e.opacity)*Math.min(Math.abs(want-e.opacity),Math.max(0,dt)*6);for(const m of [e.frame,e.wire]){const transparent=e.opacity<.995;if(m.transparent!==transparent){m.transparent=transparent;m.needsUpdate=true;}m.opacity=e.opacity;m.depthWrite=!transparent;}}},
+    update(camera,focus,dt){for(const e of entries){const hide=!focus?.noCutaway&&viewCrossesPlane(camera,focus,e.axis,e.at,e.bounds,.12),want=hide?.08:1;e.opacity+=Math.sign(want-e.opacity)*Math.min(Math.abs(want-e.opacity),Math.max(0,dt)*6);for(const m of [e.frame,e.wire]){const transparent=e.opacity<.995;if(m.transparent!==transparent){m.transparent=transparent;m.needsUpdate=true;}m.opacity=e.opacity;m.depthWrite=!transparent;}}},
     state:()=>entries.map(e=>({side:e.group.name,opacity:e.opacity})),
     dispose(){root.removeFromParent();if(tg.cutaway?.ignoreSolid===ignore)tg.cutaway.ignoreSolid=oldIgnore;for(const s of solids){const i=tg.solids.indexOf(s);if(i>=0)tg.solids.splice(i,1);}new Set(owned).forEach(o=>o.dispose());}
   };

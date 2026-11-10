@@ -1,0 +1,916 @@
+{
+  "capturedAt": "2026-11-10T21:18:27.332Z",
+  "initInfo": {
+    "okActive": true,
+    "okBlackout": true,
+    "okFp": true,
+    "renderer": "WebGPURenderer",
+    "backend": "WebGPU",
+    "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "canvasW": 1280,
+    "canvasH": 720
+  },
+  "pageErrors": [],
+  "lightStats": {
+    "01-range-spawn-downrange": {
+      "noon": {
+        "meanRgb": [
+          0,
+          0,
+          0
+        ],
+        "bytes": 20861,
+        "playerPos": [
+          0,
+          0,
+          -0.95
+        ]
+      },
+      "overcast": {
+        "meanRgb": [
+          0,
+          0,
+          0
+        ],
+        "bytes": 20861,
+        "playerPos": [
+          0,
+          0,
+          -0.95
+        ]
+      },
+      "dusk": {
+        "meanRgb": [
+          77,
+          40.8,
+          26.1
+        ],
+        "bytes": 448245,
+        "playerPos": [
+          0,
+          0,
+          -0.95
+        ]
+      },
+      "night": {
+        "meanRgb": [
+          0,
+          0,
+          0
+        ],
+        "bytes": 20861,
+        "playerPos": [
+          0,
+          0,
+          -0.95
+        ]
+      }
+    },
+    "02-range-lanes-targets": {
+      "noon": {
+        "meanRgb": [
+          108.5,
+          114,
+          118.3
+        ],
+        "bytes": 685528,
+        "playerPos": [
+          1.65,
+          0,
+          -0.52
+        ]
+      },
+      "overcast": {
+        "meanRgb": [
+          0,
+          0,
+          0
+        ],
+        "bytes": 20861,
+        "playerPos": [
+          1.65,
+          0,
+          -0.52
+        ]
+      },
+      "dusk": {
+        "meanRgb": [
+          0,
+          0,
+          0
+        ],
+        "bytes": 20861,
+        "playerPos": [
+          1.65,
+          0,
+          -0.52
+        ]
+      },
+      "night": {
+        "meanRgb": [
+          0,
+          0,
+          0
+        ],
+        "bytes": 20861,
+        "playerPos": [
+          1.65,
+          0,
+          -0.52
+        ]
+      }
+    },
+    "03-range-backwall-lockers": {
+      "noon": {
+        "meanRgb": [
+          0,
+          0,
+          0
+        ],
+        "bytes": 20861,
+        "playerPos": [
+          -0.4,
+          0,
+          -3.8
+        ]
+      },
+      "overcast": {
+        "meanRgb": [
+          113.5,
+          128.4,
+          145.3
+        ],
+        "bytes": 492186,
+        "playerPos": [
+          -0.4,
+          0,
+          -3.8
+        ]
+      },
+      "dusk": {
+        "meanRgb": [
+          0,
+          0,
+          0
+        ],
+        "bytes": 20861,
+        "playerPos": [
+          -0.4,
+          0,
+          -3.8
+        ]
+      },
+      "night": {
+        "meanRgb": [
+          0,
+          0,
+          0
+        ],
+        "bytes": 20861,
+        "playerPos": [
+          -0.4,
+          0,
+          -3.8
+        ]
+      }
+    },
+    "04-range-east-stations": {
+      "noon": {
+        "meanRgb": [
+          104.1,
+          111,
+          112.9
+        ],
+        "bytes": 518865,
+        "playerPos": [
+          2.2,
+          0,
+          -6.6
+        ]
+      },
+      "overcast": {
+        "meanRgb": [
+          93.4,
+          105.7,
+          114.7
+        ],
+        "bytes": 531332,
+        "playerPos": [
+          2.2,
+          0,
+          -6.6
+        ]
+      },
+      "dusk": {
+        "meanRgb": [
+          0,
+          0,
+          0
+        ],
+        "bytes": 20861,
+        "playerPos": [
+          2.2,
+          0,
+          -6.6
+        ]
+      },
+      "night": {
+        "meanRgb": [
+          0,
+          0,
+          0
+        ],
+        "bytes": 20861,
+        "playerPos": [
+          2.2,
+          0,
+          -6.6
+        ]
+      }
+    },
+    "05-range-console-switch-door": {
+      "noon": {
+        "meanRgb": [
+          0,
+          0,
+          0
+        ],
+        "bytes": 20861,
+        "playerPos": [
+          -3.2,
+          0,
+          -5.8
+        ]
+      },
+      "overcast": {
+        "meanRgb": [
+          0,
+          0,
+          0
+        ],
+        "bytes": 20861,
+        "playerPos": [
+          -3.2,
+          0,
+          -5.8
+        ]
+      },
+      "dusk": {
+        "meanRgb": [
+          0,
+          0,
+          0
+        ],
+        "bytes": 20861,
+        "playerPos": [
+          -3.2,
+          0,
+          -5.8
+        ]
+      },
+      "night": {
+        "meanRgb": [
+          0,
+          0,
+          0
+        ],
+        "bytes": 20861,
+        "playerPos": [
+          -3.2,
+          0,
+          -5.8
+        ]
+      }
+    },
+    "06-build-hangar-overview": {
+      "noon": {
+        "meanRgb": [
+          0,
+          0,
+          0
+        ],
+        "bytes": 20861,
+        "playerPos": [
+          -12.2,
+          0,
+          -7.5
+        ]
+      },
+      "overcast": {
+        "meanRgb": [
+          0,
+          0,
+          0
+        ],
+        "bytes": 20861,
+        "playerPos": [
+          -12.2,
+          0,
+          -7.5
+        ]
+      },
+      "dusk": {
+        "meanRgb": [
+          89.8,
+          47.7,
+          30
+        ],
+        "bytes": 672129,
+        "playerPos": [
+          -12.2,
+          0,
+          -7.5
+        ]
+      },
+      "night": {
+        "meanRgb": [
+          0,
+          0,
+          0
+        ],
+        "bytes": 20861,
+        "playerPos": [
+          -12.2,
+          0,
+          -7.5
+        ]
+      }
+    },
+    "07-build-west-stations": {
+      "noon": {
+        "meanRgb": [
+          116.6,
+          122.5,
+          125.7
+        ],
+        "bytes": 668510,
+        "playerPos": [
+          -35.5,
+          0,
+          0
+        ]
+      },
+      "overcast": {
+        "meanRgb": [
+          0,
+          0,
+          0
+        ],
+        "bytes": 20861,
+        "playerPos": [
+          -35.5,
+          0,
+          0
+        ]
+      },
+      "dusk": {
+        "meanRgb": [
+          68.2,
+          38.2,
+          27.6
+        ],
+        "bytes": 454182,
+        "playerPos": [
+          -35.5,
+          0,
+          0
+        ]
+      },
+      "night": {
+        "meanRgb": [
+          2.9,
+          5.6,
+          14.3
+        ],
+        "bytes": 300413,
+        "playerPos": [
+          -35.5,
+          0,
+          0
+        ]
+      }
+    },
+    "08-build-containment-gate": {
+      "noon": {
+        "meanRgb": [
+          172,
+          174,
+          169.8
+        ],
+        "bytes": 664916,
+        "playerPos": [
+          -26,
+          0,
+          11.5
+        ]
+      },
+      "overcast": {
+        "meanRgb": [
+          0,
+          0,
+          0
+        ],
+        "bytes": 20861,
+        "playerPos": [
+          -26,
+          0,
+          11.5
+        ]
+      },
+      "dusk": {
+        "meanRgb": [
+          0,
+          0,
+          0
+        ],
+        "bytes": 20861,
+        "playerPos": [
+          -26,
+          0,
+          11.5
+        ]
+      },
+      "night": {
+        "meanRgb": [
+          0,
+          0,
+          0
+        ],
+        "bytes": 20861,
+        "playerPos": [
+          -26,
+          0,
+          11.5
+        ]
+      }
+    },
+    "09-build-placed-layout": {
+      "noon": {
+        "meanRgb": [
+          139.7,
+          144.5,
+          147.7
+        ],
+        "bytes": 695212,
+        "playerPos": [
+          -21.5,
+          0,
+          -2.2
+        ]
+      },
+      "overcast": {
+        "meanRgb": [
+          0,
+          0,
+          0
+        ],
+        "bytes": 20861,
+        "playerPos": [
+          -21.5,
+          0,
+          -2.2
+        ]
+      },
+      "dusk": {
+        "meanRgb": [
+          97.3,
+          51,
+          31.2
+        ],
+        "bytes": 551669,
+        "playerPos": [
+          -21.5,
+          0,
+          -2.2
+        ]
+      },
+      "night": {
+        "meanRgb": [
+          4.6,
+          8.4,
+          20.4
+        ],
+        "bytes": 287414,
+        "playerPos": [
+          -21.5,
+          0,
+          -2.2
+        ]
+      }
+    },
+    "10-build-infirmary-bay": {
+      "noon": {
+        "meanRgb": [
+          0,
+          0,
+          0
+        ],
+        "bytes": 20861,
+        "playerPos": [
+          -34.2,
+          0,
+          -5.2
+        ]
+      },
+      "overcast": {
+        "meanRgb": [
+          0,
+          0,
+          0
+        ],
+        "bytes": 20861,
+        "playerPos": [
+          -34.2,
+          0,
+          -5.2
+        ]
+      },
+      "dusk": {
+        "meanRgb": [
+          0,
+          0,
+          0
+        ],
+        "bytes": 20861,
+        "playerPos": [
+          -34.2,
+          0,
+          -5.2
+        ]
+      },
+      "night": {
+        "meanRgb": [
+          2.3,
+          4.5,
+          11.8
+        ],
+        "bytes": 423150,
+        "playerPos": [
+          -34.2,
+          0,
+          -5.2
+        ]
+      }
+    }
+  },
+  "closeupMeta": {
+    "close-01-cif-station": {
+      "title": "Close-Up: CIF Station Copy (East Wall)",
+      "meanRgb": [
+        97.3,
+        102.5,
+        104.8
+      ],
+      "playerPos": [
+        5.5,
+        0,
+        -10.2
+      ],
+      "perimeterState": [
+        {
+          "side": "training-perimeter-west",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-south",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-east",
+          "opacity": 1
+        }
+      ],
+      "bytes": 246723
+    },
+    "close-02-kiosk-station": {
+      "title": "Close-Up: Supply Kiosk Terminal Copy (East Wall)",
+      "meanRgb": [
+        114.2,
+        128.5,
+        121.5
+      ],
+      "playerPos": [
+        5.6,
+        0,
+        -6.6
+      ],
+      "perimeterState": [
+        {
+          "side": "training-perimeter-west",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-south",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-east",
+          "opacity": 1
+        }
+      ],
+      "bytes": 321719
+    },
+    "close-03-armory-station": {
+      "title": "Close-Up: Armory Workbench & Weapon Rack Copy (East Wall)",
+      "meanRgb": [
+        57,
+        62.4,
+        65.5
+      ],
+      "playerPos": [
+        5.2,
+        0,
+        -3
+      ],
+      "perimeterState": [
+        {
+          "side": "training-perimeter-west",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-south",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-east",
+          "opacity": 1
+        }
+      ],
+      "bytes": 220624
+    },
+    "close-04-range-console-near": {
+      "title": "Close-Up (J124): Range Console at 0.40m in First Person",
+      "meanRgb": [
+        36.2,
+        46,
+        35.5
+      ],
+      "playerPos": [
+        -7.465,
+        0,
+        -4.6
+      ],
+      "perimeterState": [
+        {
+          "side": "training-perimeter-west",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-south",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-east",
+          "opacity": 1
+        }
+      ],
+      "bytes": 268932
+    },
+    "close-05-door-keypad-range": {
+      "title": "Close-Up (J104): Security Door Keypad & Lights Switch (Range Side)",
+      "meanRgb": [
+        102.8,
+        104.7,
+        100.6
+      ],
+      "playerPos": [
+        -6.7,
+        0,
+        -8.9
+      ],
+      "perimeterState": [
+        {
+          "side": "training-perimeter-west",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-south",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-east",
+          "opacity": 1
+        }
+      ],
+      "bytes": 319165
+    },
+    "close-06-door-keypad-build": {
+      "title": "Close-Up (J104): Security Door Keypad (Build Room Side)",
+      "meanRgb": [
+        107.7,
+        112.6,
+        109.4
+      ],
+      "playerPos": [
+        -9.3,
+        0,
+        -8.9
+      ],
+      "perimeterState": [
+        {
+          "side": "training-perimeter-west",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-south",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-east",
+          "opacity": 1
+        }
+      ],
+      "bytes": 600755
+    },
+    "close-07-east-fence-recess-1p": {
+      "title": "Close-Up (J124): Standing in Doorway Recess (x = -10.0) Looking at East Fence",
+      "meanRgb": [
+        0,
+        0,
+        0
+      ],
+      "playerPos": [
+        -10,
+        0,
+        -8
+      ],
+      "perimeterState": [
+        {
+          "side": "training-perimeter-west",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-south",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-east",
+          "opacity": 1
+        }
+      ],
+      "bytes": 20861
+    },
+    "close-08-skull-window-recess-1p": {
+      "title": "Close-Up (J124/Scale): Standing at x = -42.0 Recess Looking at Skull Window & West Fence",
+      "meanRgb": [
+        77.1,
+        79.3,
+        72.7
+      ],
+      "playerPos": [
+        -42,
+        0,
+        -3
+      ],
+      "perimeterState": [
+        {
+          "side": "training-perimeter-west",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-south",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-east",
+          "opacity": 1
+        }
+      ],
+      "bytes": 416362
+    },
+    "close-09-hq-panel-recess": {
+      "title": "Close-Up: HQ Wave Panel Copy Inside West Recess",
+      "meanRgb": [
+        114.2,
+        116.6,
+        109.5
+      ],
+      "playerPos": [
+        -41.4,
+        0,
+        3
+      ],
+      "perimeterState": [
+        {
+          "side": "training-perimeter-west",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-south",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-east",
+          "opacity": 1
+        }
+      ],
+      "bytes": 403128
+    },
+    "close-10-fence-post-baseplate": {
+      "title": "Close-Up (J128): Razor Perimeter Fence Post Baseplate & Floor Contact",
+      "meanRgb": [
+        0,
+        0,
+        0
+      ],
+      "playerPos": [
+        -11.4,
+        0,
+        -4.2
+      ],
+      "perimeterState": [
+        {
+          "side": "training-perimeter-west",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-south",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-east",
+          "opacity": 1
+        }
+      ],
+      "bytes": 20861
+    },
+    "close-11-infirmary-bed-props": {
+      "title": "Close-Up (J128): Infirmary Stretcher Casters, Cot, IV Stand, O2 & ECG",
+      "meanRgb": [
+        0,
+        0,
+        0
+      ],
+      "playerPos": [
+        -37.2,
+        0,
+        -7.8
+      ],
+      "perimeterState": [
+        {
+          "side": "training-perimeter-west",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-south",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-east",
+          "opacity": 1
+        }
+      ],
+      "bytes": 20861
+    },
+    "close-12-target-lane1-base": {
+      "title": "Close-Up (J128): Lane 1 Target Stand Base, Pivot Knuckle & Backing Frame",
+      "meanRgb": [
+        105,
+        110.9,
+        115.6
+      ],
+      "playerPos": [
+        4.4,
+        0,
+        -0.45
+      ],
+      "perimeterState": [
+        {
+          "side": "training-perimeter-west",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-south",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-east",
+          "opacity": 1
+        }
+      ],
+      "bytes": 587819
+    },
+    "close-07b-east-fence-solid-1p": {
+      "title": "Control (x = -10.35): East Fence Solid",
+      "playerPos": [
+        -10.35,
+        0,
+        -8
+      ],
+      "perimeterState": [
+        {
+          "side": "training-perimeter-west",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-south",
+          "opacity": 1
+        },
+        {
+          "side": "training-perimeter-east",
+          "opacity": 1
+        }
+      ]
+    }
+  }
+}

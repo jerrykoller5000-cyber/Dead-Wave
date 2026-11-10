@@ -9,11 +9,13 @@ export function followMarineWaist(T,ud){
 export function createMarineWaist(T,root,{lower,torso,projectUV}={}){
  const shirt=torso?.getObjectByName('fitted-uniform');if(!shirt?.geometry||!lower)return null;
  root.updateWorldMatrix(true,true);shirt.updateMatrix();torso.updateMatrix();lower.updateMatrix();
- const bind=new T.Matrix4().multiplyMatrices(torso.matrix,shirt.matrix),lo=.735,hi=.93;
+ // CC-340 (cloud test): the band follows the torso's pivot (0.7 before; a man's body has it at 0.865, its chest 0.88 as tall)
+ const piv=torso.position.y,k=Math.abs(piv-.7)<1e-6?1:.88,Y=(y)=>piv+(y-.7)*k;
+ const bind=new T.Matrix4().multiplyMatrices(torso.matrix,shirt.matrix),lo=Y(.735),hi=Y(.93);
  const src=shirt.geometry.index?shirt.geometry.toNonIndexed():shirt.geometry.clone();src.applyMatrix4(bind);
  const P=src.attributes.position,N=src.attributes.normal,U=src.attributes.uv;
  // Clip the existing triangles into thin height bands through the abdomen; preserve the original surface.
- const cuts=[-Infinity,.755,.78,.805,.83,.855,.88,.905,.93,Infinity],verts=[],normals=[],uv=[];
+ const cuts=[-Infinity,...[.755,.78,.805,.83,.855,.88,.905,.93].map(Y),Infinity],verts=[],normals=[],uv=[];
  const clip=(poly,y,above)=>{
   const out=[];for(let i=0;i<poly.length;i++){
    const a=poly[i],b=poly[(i+1)%poly.length],ain=above?a[1]>=y:a[1]<=y,bin=above?b[1]>=y:b[1]<=y;

@@ -17,7 +17,7 @@
     "loose": 0,
     "overlaps": 0,
     "open": 0,
-    "triangles": 720
+    "triangles": 504
   },
   {
     "side": 1,
@@ -37,7 +37,7 @@
     "loose": 0,
     "overlaps": 0,
     "open": 0,
-    "triangles": 720
+    "triangles": 504
   },
   {
     "side": -1,
@@ -57,7 +57,7 @@
     "loose": 0,
     "overlaps": 0,
     "open": 0,
-    "triangles": 720
+    "triangles": 504
   },
   {
     "side": 2,
@@ -77,6 +77,6 @@
     "loose": 0,
     "overlaps": 0,
     "open": 0,
-    "triangles": 720
+    "triangles": 504
   }
 ]

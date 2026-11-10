@@ -68,6 +68,18 @@
     block([.2,.006,.006],0);
     block([.006,.15,.006],.04,.034,.001);
     check(auditWeapon(scene).overlaps.length===1,'crossing edges with no corner inside');
+    scene.clear();
+    const hostPlate=block([.024,.008,.024],0,-.004);
+    const cap=block([.004,.0016,.004],0,.0002);
+    cap.userData.detailSeat={kind:'screw',axis:'y',side:1,surface:-.0002,depth:.0006};
+    const seated=auditWeapon(scene);
+    check(seated.detailSeats.length===1 && !seated.detailBreaches.length && !seated.overlaps.length,'decorative base seated in its own panel');
+    cap.position.y-=.0002;
+    check(auditWeapon(scene).detailBreaches.some(b=>b.reason==='past detail seat'),'decorative base past its shoulder');
+    cap.position.y+=.0002;
+    hostPlate.scale.y=.05;hostPlate.position.y=-.0002;
+    check(auditWeapon(scene).detailBreaches.some(b=>b.reason==='through far face'),'decorative base through a thin far face');
+    scene.clear();
     const batched=new THREE.BufferGeometry();
     batched.setAttribute('position',new THREE.Float32BufferAttribute([0,0,0, .01,0,0, 0,.01,0, .02,0,0, .03,0,0, .02,.01,0],3));
     check(auditWeapon(new THREE.Mesh(batched)).loose.length===1,'disconnected islands in one draw mesh');
@@ -122,7 +134,8 @@
     r.metresPerLocalUnit=g.scale.toArray().map(s=>s*1.8/1.655);
     results[id]=r;
     const loose=r.loose.length, overlaps=r.overlaps.length;
-    lines.push((r.parts>0 && !loose && !overlaps && !r.unseated.length?'PASS ':'FAIL ')+id+' ('+r.parts+' pieces, '+loose+' unsupported groups, '+r.unseated.length+' missing host contacts, '+overlaps+' pairs beyond their seating depth)');
+    lines.push((r.parts>0 && !loose && !overlaps && !r.unseated.length && !r.detailBreaches.length?'PASS ':'FAIL ')+id+' ('+r.parts+' pieces, '+loose+' unsupported groups, '+r.unseated.length+' missing host contacts, '+overlaps+' other intersection pairs, '+r.detailSeats.length+' bounded detail seats, '+r.detailBreaches.length+' detail seat breaches)');
+    if(r.detailBreaches.length) lines.push('INFO '+id+' detail breaches: '+JSON.stringify(r.detailBreaches.slice(0,4)));
     if(loose) lines.push('INFO '+id+' loose: '+JSON.stringify(r.loose.slice(0,2)));
     if(overlaps) lines.push('INFO '+id+' penetration: '+JSON.stringify(r.overlaps.slice(0,2)));
     window.weaponSeatProgress=id;
@@ -191,10 +204,11 @@
   document.getElementById('playerName').value='WeaponSeating';
   document.getElementById('modeTraining').click();
   const deadline=performance.now()+30000;
-  while(!T.trainingDbg.state().active && performance.now()<deadline) {
+  const settled=()=>T.trainingDbg.state().active && !document.getElementById('trainingBlackout')?.classList.contains('on') && Math.abs(T.getWorldTime()-.5)<.02;
+  while(!settled() && performance.now()<deadline) {
     await new Promise(resolve=>setTimeout(resolve,100));
   }
-  if(!T.trainingDbg.state().active) throw Error('Training Ground did not open');
+  if(!settled()) throw Error('Training Ground carry scene did not settle');
   T.grantAllWeapons();
   T.setViewFirstDbg(false);
   const marine=T.makeMarine(), slings={};
@@ -205,7 +219,8 @@
       T.setWeapon(T.WEAPON_ORDER.indexOf(kind));
       await new Promise(resolve=>setTimeout(resolve,150));
     }
-    for(let n=0;n<30;n++) T.stepFrame(1/30);
+    if(T.getCurrentWeapon()!==kind) throw Error('Carry model was never equipped: '+kind);
+    for(let n=0;n<45;n++) T.stepFrame(1/30);
     for (const vest of [false,true]) {
       const rig=T.carryPreview(marine,{loadout:{primary:[kind,kind],secondary:[null,null]},
         inHand:null,akimbo:false,vest,grenades:0});

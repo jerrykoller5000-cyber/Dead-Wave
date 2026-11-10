@@ -1,0 +1,16 @@
+{
+  "mag": {
+    "pieces": 14,
+    "open": 0,
+    "loose": [],
+    "intersections": [],
+    "breaches": []
+  },
+  "slide": {
+    "pieces": 76,
+    "open": 0,
+    "loose": [],
+    "intersections": [],
+    "breaches": []
+  }
+}

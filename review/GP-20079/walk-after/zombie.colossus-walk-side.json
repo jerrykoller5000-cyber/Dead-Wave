@@ -1,0 +1,218 @@
+{
+ "schema": "dw-camera-shot",
+ "schemaVersion": 2,
+ "target": "zombie.colossus:walk",
+ "label": "Colossus (walk)",
+ "view": "side",
+ "cam": {
+  "x": -26.028943983752303,
+  "y": -196.83806835449317,
+  "z": -647.1049765601107,
+  "tx": -27.35969647595728,
+  "ty": -197.36997958445926,
+  "tz": -631.9312743977874,
+  "fov": 35
+ },
+ "time": 0.5,
+ "size": [
+  960,
+  960
+ ],
+ "center": {
+  "x": -27.35969647595728,
+  "y": -197.36997958445926,
+  "z": -631.9312743977874
+ },
+ "boxSize": {
+  "x": 3.072692738501985,
+  "y": 5.157872885682565,
+  "z": 3.2668120247706156
+ },
+ "mode": "inspect",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "at": "2026-11-10T22:25:14.306Z",
+ "inspect": {
+  "schema": "dw-inspector-session",
+  "schemaVersion": 1,
+  "inspectorVersion": "1.2.0",
+  "view": {
+   "follow": false,
+   "bookmark": null,
+   "offset": {
+    "dx": 0,
+    "dy": 0,
+    "dz": 0
+   }
+  },
+  "subject": {
+   "id": "zombie.colossus",
+   "variant": null,
+   "mode": "walk"
+  },
+  "camera": {
+   "x": -26.0289439837523,
+   "y": -196.83806835449317,
+   "z": -647.1049765601107,
+   "tx": -27.35969647595728,
+   "ty": -197.36997958445926,
+   "tz": -631.9312743977874,
+   "fov": 35
+  },
+  "display": {
+   "backdrop": "studio",
+   "light": "studio",
+   "overlays": {
+    "bounds": false,
+    "axes": false,
+    "stick": false,
+    "joints": false,
+    "wire": false,
+    "grid": true,
+    "labels": true
+   }
+  },
+  "clock": {
+   "speed": 1,
+   "paused": false
+  },
+  "marine": {
+   "weapon": "none",
+   "akimbo": false,
+   "blade": "machete",
+   "camo": "m81",
+   "gear": {
+    "helmet": true,
+    "vest": true,
+    "pads": true,
+    "nvg": true,
+    "laser": false,
+    "flashlight": false
+   },
+   "wardrobe": {
+    "version": 1,
+    "items": {
+     "cap": {
+      "camo": "m81",
+      "style": "cover"
+     },
+     "helmet": {
+      "camo": "m81"
+     },
+     "mask": {
+      "camo": "coyoteBrown"
+     },
+     "shirt": {
+      "camo": "m81",
+      "sleeves": "down"
+     },
+     "trousers": {
+      "camo": "m81",
+      "cut": "trousers"
+     },
+     "gloves": {
+      "camo": "m81",
+      "worn": true
+     },
+     "carrier": {},
+     "pads": {},
+     "holster": {},
+     "belt": {},
+     "pack": {},
+     "eyewear": {
+      "style": "none"
+     },
+     "boots": {
+      "colour": "black",
+      "rubber": "yellow"
+     }
+    },
+    "guns": {},
+    "body": {
+     "hair": "darkBrown",
+     "eyes": "brown",
+     "skin": 3
+    }
+   },
+   "mods": {
+    "minigun": {
+     "ext": false,
+     "heavy": false,
+     "optic:rmr": false,
+     "laserLight": true
+    },
+    "m4": {
+     "ext": false,
+     "heavy": false,
+     "suppressor": false,
+     "optic:acog": false,
+     "optic:prism": false,
+     "optic:rmr": false,
+     "laserLight": true
+    },
+    "ak": {
+     "ext": false,
+     "heavy": false,
+     "suppressor": false,
+     "optic:acog": false,
+     "optic:prism": false,
+     "optic:rmr": false,
+     "laserLight": true
+    },
+    "pistol": {
+     "ext": false,
+     "suppressor": false,
+     "optic:rmr": false,
+     "laserLight": true,
+     "auto": false,
+     "pair": false
+    },
+    "uzi": {
+     "ext": false,
+     "heavy": false,
+     "suppressor": false,
+     "optic:rmr": false,
+     "laserLight": true,
+     "pair": false
+    },
+    "shotgun": {
+     "ext": false,
+     "suppressor": false,
+     "optic:prism": false,
+     "optic:rmr": false,
+     "laserLight": true,
+     "load:buck": false,
+     "load:slug": false
+    },
+    "aa12": {
+     "ext": false,
+     "optic:rmr": false,
+     "laserLight": true
+    },
+    "revolver": {
+     "optic:prism": false,
+     "optic:rmr": false,
+     "laserLight": true,
+     "pair": false
+    },
+    "sniper": {
+     "ext": false,
+     "suppressor": false,
+     "laserLight": true
+    },
+    "launcher": {
+     "optic:rmr": false,
+     "laserLight": true
+    },
+    "flamer": {
+     "ext": false
+    },
+    "chainsaw": {
+     "tank": false
+    }
+   },
+   "move": null,
+   "loop": true,
+   "holds": {}
+  }
+ }
+}

@@ -1,5 +1,7 @@
 // GP-163: fitted high-cut helmet surfaces. Coordinates match makeMarine's head.
 // Caller supplies its own wardrobe materials and registers every helmet mesh via add.
+import { offSkin, toLocal, PIVOT_Y, HEAD_GROUP_SCALE } from './marine-skull.js';   // CC-340: the harness is laid on the skull
+import { balaclavaHemY } from '../ui/marine-face.js';
 const geometryCaches=new WeakMap();
 function geometryTools(T){
   let cache=geometryCaches.get(T);if(!cache){cache=new Map();geometryCaches.set(T,cache);}
@@ -142,15 +144,12 @@ export function buildMarineHelmet(T,{add,mesh=(geo,mat)=>new T.Mesh(geo,mat),mat
     at(patchGeo,pouchMat,0,anchorY,0);
     // End washers seat the two existing yoke rods against each curved ear cup.
     for(const z of [-.033,.028])at(cylinder(.0085,.0085,.008,10),nvgMat,side*.201,1.410,z,0,0,Math.PI/2);
-    // Retention strap follows the cheek beside the existing mask and headset.
-    part(.016,.091,.023,strapMat,side*.148,1.388,.049,0,0,side*.03,.003);
-    const a=new T.Vector3(side*.15,1.343,.05),b=new T.Vector3(side*.060,1.252,.132);
-    const center=a.clone().add(b).multiplyScalar(.5);
-    const chin=part(.016,a.distanceTo(b),.021,strapMat,center.x,center.y,center.z);
-    chin.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),b.sub(a).normalize());
-    part(.024,.021,.029,helmetMat,side*.146,1.353,.054,0,0,-side*.18,.003);
   }
-  part(.131,.019,.022,strapMat,0,1.252,.132,0,0,0,.004);
+  // CC-340: the retention harness on the new head (it was three boxes beside the old, wider head: the chin bar stood
+  // off the jaw and the chin cup sat inside the neck). Each side: a front and a rear leg from inside the shell's rim,
+  // in front of and behind the ear cup, meet at a buckle under it; the chin strap runs from there along the jaw to a
+  // cup under the chin. Webbing laid on the skin (over the balaclava where it is), built in metres on the skull.
+  for(const piece of retentionHarness(T,cached))at(piece.geo,piece.buckle?buckleMat:strapMat,0,PIVOT_Y,0).userData.onSkin=true;
 
   const shroudGeo=cached('fitted-nvg-shroud',()=>{
     const outline=[[-.033,-.037],[.033,-.037],[.043,.008],[.026,.039],[-.026,.039],[-.043,.008]],v=[],ix=[];
@@ -215,7 +214,7 @@ export function detailMarineNvg(T,{pivot,put,mesh=(geo,mat)=>new T.Mesh(geo,mat)
 // geometries are cloned; the face, eyewear, and deployed NVG eye line stay put.
 export function fitMarineHelmetParts(T,parts,pivotY=1.22){
   for(const o of parts){
-    if(!o.isMesh||!o.geometry?.attributes?.position)continue;
+    if(!o.isMesh||!o.geometry?.attributes?.position||o.userData.onSkin)continue;   // CC-340: already laid on the skull
     o.updateMatrix();const g=o.geometry.clone();g.applyMatrix4(o.matrix);
     const p=g.attributes.position;
     for(let i=0;i<p.count;i++){
@@ -225,4 +224,52 @@ export function fitMarineHelmetParts(T,parts,pivotY=1.22){
     g.computeVertexNormals();g.computeBoundingSphere();o.geometry=g;
     o.position.set(0,0,0);o.rotation.set(0,0,0);o.scale.set(1,1,1);
   }
+}
+
+// CC-340: the helmet's retention harness, laid on the skull (studio/marine-skull.js) in metres and handed over in the
+// head group's space. Paths are (a, y): a the angle round the head (0 in front, + his left), y metres above the pivot.
+// The shell's rim (after fitMarineHelmetParts) at angle a, metres: where the legs tuck in.
+function shellRim(a){
+  const front=Math.cos(a),side=Math.abs(Math.sin(a)),y=1.473+.009*Math.max(front,0)+.051*side**6-.014*Math.max(-front,0);
+  const yf=y-.006-Math.max(0,y-1.48)*.37,S=HEAD_GROUP_SCALE;
+  return [Math.sin(a)*.171*.84*S[0]*.94,(yf-PIVOT_Y)*S[1]-.004,Math.cos(a)*(front>=0?.193:.184)*.86*S[2]*.94];
+}
+function retentionHarness(T,cached){
+  return cached('helmet-retention-harness-cc340',()=>{
+    const out=[],W=.017,TH=.0018,LIFT=.0026;
+    const onHead=(a,y,d=0)=>{const cloth=y<balaclavaHemY(a)-.002;return offSkin(a,y,LIFT+d,0,cloth);};
+    const normalAt=(a,y)=>{const p=onHead(a,y),q=onHead(a,y,.01);const n=[q[0]-p[0],q[1]-p[1],q[2]-p[2]],l=Math.hypot(...n)||1;return n.map(v=>v/l);};
+    // a ribbon of webbing along metre points pts with outward normals ns; w(t) its width along it, th(t) its thickness
+    const ribbon=(pts,ns,w=()=>W,th=()=>TH)=>{
+      const v=[],ix=[],n=pts.length;
+      for(let i=0;i<n;i++){
+        const a=pts[Math.max(0,i-1)],b=pts[Math.min(n-1,i+1)],t=[b[0]-a[0],b[1]-a[1],b[2]-a[2]],N=ns[i];
+        let B=[N[1]*t[2]-N[2]*t[1],N[2]*t[0]-N[0]*t[2],N[0]*t[1]-N[1]*t[0]];const l=Math.hypot(...B)||1;B=B.map(x=>x/l);
+        const u=i/(n-1),hw=w(u)/2,h=th(u),p=pts[i];
+        for(const [s,o] of [[-1,0],[1,0],[1,h],[-1,h]])v.push(...toLocal([p[0]+B[0]*s*hw+N[0]*o,p[1]+B[1]*s*hw+N[1]*o,p[2]+B[2]*s*hw+N[2]*o]));
+      }
+      for(let i=0;i<n-1;i++)for(let k=0;k<4;k++){const a=i*4+k,b=i*4+(k+1)%4,c=a+4,d=b+4;ix.push(a,b,d,a,d,c);}
+      const e=(n-1)*4;ix.push(0,2,1,0,3,2,e,e+1,e+2,e,e+2,e+3);
+      const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(v,3));g.setIndex(ix);
+      const ng=g.toNonIndexed();ng.computeVertexNormals();return ng;
+    };
+    const lay=(path,steps)=>{const pts=[],ns=[];for(let k=0;k<=steps;k++){const [a,y]=path(k/steps);pts.push(onHead(a,y));ns.push(normalAt(a,y));}return {pts,ns};};
+    const JY=.1;   // the buckle, on the jaw just ahead of the ear cup's foot (the cup spans 0.10-0.20 m up, z -0.03..0.03)
+    for(const sx of [-1,1]){
+      const J=sx*1.25;
+      // the front leg, ahead of the cup, nearly straight down to the buckle
+      { const {pts,ns}=lay((t)=>[sx*1.32+(J-sx*1.32)*t,.205+(JY-.205)*t],12);pts.unshift(shellRim(sx*1.32));ns.unshift(normalAt(sx*1.32,.205));out.push({geo:ribbon(pts,ns)}); }
+      // the rear leg: behind the cup, down, then forward under its foot to the buckle
+      { const {pts,ns}=lay((t)=>t<.5?[sx*(1.98-.14*t/.5),.2+(.091-.2)*Math.sin(t/.5*Math.PI/2)]:[sx*(1.84+(1.25-1.84)*(t-.5)/.5),.091+(JY-.091)*((t-.5)/.5)**2],22);
+        pts.unshift(shellRim(sx*1.98));ns.unshift(normalAt(sx*1.98,.2));out.push({geo:ribbon(pts,ns)}); }
+      // the chin strap: from the buckle along the jaw's lower edge to the middle, under the chin; a padded cup there
+      const {pts,ns}=lay((t)=>{const q=1-t;return [J*q,.056+(JY-.056)*q**1.6];},24);
+      out.push({geo:ribbon(pts,ns,(u)=>W+.012*Math.max(0,(u-.68)/.32)**1.5,(u)=>TH+.0024*Math.max(0,(u-.68)/.32))});
+      // the buckle: a flat frame on the webbing where the three meet
+      const b=lay(()=>[J,JY],0),bn=normalAt(J,JY),bp=b.pts[0];
+      const bpts=[-.011,.011].map(d=>[bp[0],bp[1]+d,bp[2]]),bns=[bn,bn];
+      out.push({geo:ribbon(bpts,bns,()=>.021,()=>TH+.0032),buckle:true});
+    }
+    return out;
+  });
 }

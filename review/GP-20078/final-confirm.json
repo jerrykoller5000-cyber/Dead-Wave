@@ -1,0 +1,53 @@
+{
+  "at": "2026-11-10T20:55:14.349Z",
+  "errors": [],
+  "console": {
+    "action": "rangeConsole",
+    "mesh": true,
+    "front": {
+      "x": -6.515000000000001,
+      "y": -200,
+      "z": -644.6
+    }
+  },
+  "shotgun": {
+    "ownedShotgun": true,
+    "ownedSaw": true,
+    "before": {
+      "buck": "3.5\" magnum buckshotTen pellets of 10 a shell, a wider pattern, 26 m. Fit one load at a time.$85 CashBuy",
+      "slug": "3.5\" magnum slugOne 70-damage slug, tight and long: 44 m. A slower pump. Fit one load at a time.$95 CashBuy"
+    },
+    "buck": "buck",
+    "slug": "slug",
+    "after": {
+      "buck": "3.5\" magnum buckshotTen pellets of 10 a shell, a wider pattern, 26 m. Fit one load at a time.Owned · not fittedFit",
+      "slug": "3.5\" magnum slugOne 70-damage slug, tight and long: 44 m. A slower pump. Fit one load at a time.FittedRemove"
+    }
+  },
+  "saw": {
+    "carried": true,
+    "weapon": "chainsaw",
+    "saw": true
+  },
+  "sawSetup": {
+    "blade": {
+      "ax": -13.645755060841358,
+      "ay": -199.42548746310888,
+      "az": -648.0708721767487,
+      "bx": -13.391019074937265,
+      "by": -199.7412212062644,
+      "bz": -647.8630684986955,
+      "r": 0.04413630136452164
+    },
+    "placed": {
+      "x": -13.51838706788931,
+      "z": -647.9669703377222
+    },
+    "before": 1000
+  },
+  "sawCut": {
+    "before": 1000,
+    "after": 1000,
+    "damage": 0
+  }
+}

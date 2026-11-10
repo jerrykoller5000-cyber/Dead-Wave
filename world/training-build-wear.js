@@ -22,7 +22,7 @@
 import { containmentMounts } from '../game/training-containment.js';
 
 export const BUILD_WEAR = Object.freeze({
-  FLOOR_PX: 40, WALL_PX: 24, WALL_H: 5.9, FLOOR_Y: 0.003,
+  FLOOR_PX: 40, WALL_PX: 64, WALL_H: 5.9, FLOOR_Y: 0.003,
   KILL: Object.freeze([                                   // where they fall: [x, z, spread, weight] (room local, metres)
     Object.freeze([-26, 16.5, 3.4, 1.0]),                 // just past the gate's hazard paint, where they come through
     Object.freeze([-26, 13, 5.0, 0.8]),                   // the middle of the room
@@ -181,23 +181,16 @@ export function dressBuildWear(T, { B, D, gate, add, std, texture }) {
   ];
   for (const [name, fixed, axis, a0, a1, yaw, ns, seed] of WALLS) {
     const len = a1 - a0;
+    const tw = Math.min(2048, Math.ceil(len * WS)), th = Math.min(2048, Math.ceil(WH * WS));
+    const ux = tw / len, uy = th / WH, ws = Math.min(ux, uy);
     // canvas u along the plane's local +x: west (yaw +90) runs -z, east +z, south +x, north -x
-    const U = (a) => ((yaw === Math.PI / 2 || yaw === Math.PI) ? a1 - a : a - a0) * WS, V = (y) => (WH - y) * WS;
-    const map = tex(Math.ceil(len * WS), Math.ceil(WH * WS), (c, w, h) => {
+    const U = (a) => ((yaw === Math.PI / 2 || yaw === Math.PI) ? a1 - a : a - a0) * ux, V = (y) => (WH - y) * uy;
+    const map = tex(tw, th, (c) => {
       const r = rng(seed * 97), K = kit(c, r);
-      for (let n = 0; n < len * 2; n++) K.soft(U(a0 + r() * len), V(r() * 0.4), (0.3 + r() * 0.6) * WS, '50,46,40', 0.08 + r() * 0.08, 0.5);   // grime at the base
-      // char streaks up from where fire burned against it
-      for (let n = 0; n < Math.round(len / 26); n++) { const a = a0 + r() * len, u = U(a), h0 = (1.5 + r() * 2.5) * WS; for (let k = 0; k < 8; k++) { const g = c.createLinearGradient(0, V(0), 0, V(0) - h0 * (0.5 + r() * 0.5)); g.addColorStop(0, 'rgba(18,16,14,0.55)'); g.addColorStop(1, 'rgba(18,16,14,0)'); c.fillStyle = g; const x = u + (r() - 0.5) * 0.9 * WS; c.beginPath(); c.moveTo(x - 0.25 * WS, V(0)); c.quadraticCurveTo(x + (r() - 0.5) * 0.4 * WS, V(0) - h0 * 0.5, x + (r() - 0.5) * 0.3 * WS, V(0) - h0); c.quadraticCurveTo(x + 0.1 * WS, V(0) - h0 * 0.4, x + 0.25 * WS, V(0)); c.fill(); } }
-      // acid drip runs, low
-      for (let n = 0; n < Math.round(len / 16); n++) { const u = U(a0 + r() * len), y0 = 0.4 + r() * 1.1; K.acid(u, V(y0), (0.08 + r() * 0.16) * WS); for (let k = 0; k < 3; k++) { const x = u + (r() - 0.5) * 0.2 * WS, g = c.createLinearGradient(0, V(y0), 0, V(y0) + (0.2 + r() * 0.6) * WS); g.addColorStop(0, 'rgba(150,170,70,0.4)'); g.addColorStop(1, 'rgba(150,170,70,0)'); c.fillStyle = g; c.fillRect(x, V(y0), 1.5 + r() * 2, (0.2 + r() * 0.6) * WS); } }
-      // blood: spatter and runs at body height
-      for (let n = 0; n < Math.round(len / 20); n++) { const u = U(a0 + r() * len), y = 0.4 + r() * 1.3; K.pool(u, V(y), (0.06 + r() * 0.18) * WS); for (let k = 0; k < 4; k++) { const x = u + (r() - 0.5) * 0.25 * WS, l = (0.15 + r() * 0.7) * WS, g = c.createLinearGradient(0, V(y), 0, V(y) + l); g.addColorStop(0, 'rgba(80,26,20,0.55)'); g.addColorStop(1, 'rgba(80,26,20,0)'); c.fillStyle = g; c.fillRect(x, V(y), 1 + r() * 1.5, l); } }
-      if (r() < 0.35) { const u = U(a0 + r() * len); K.print(u, V(1.1 + r() * 0.4), (r() - 0.5) * 0.6, true); }
-      // the miniguns' misses: holes low on the walls, stretched sideways
-      for (let n = 0; n < len * 0.9; n++) { const a = a0 + r() * len, y = Math.abs(gauss(r)) * 0.9 + 0.1; if (y > 3) continue; K.hole(U(a), V(y), (0.012 + r() * 0.01) * WS, (r() - 0.5) * 0.4 + (r() < 0.5 ? 0 : Math.PI), 1 + r()); }
-      for (let n = 0; n < len / 10; n++) K.claws(U(a0 + r() * len), V(0.4 + r() * 1.6), Math.PI / 2 + (r() - 0.5) * 0.6, (0.2 + r() * 0.3) * WS);
-      // soot fan round this wall's gun mount
-      for (const g of mounts) { const a = axis === 'z' ? g.z : g.x, near = axis === 'z' ? Math.abs(g.x - fixed) < 1.2 : Math.abs(g.z - fixed) < 1.2; if (!near || a < a0 || a > a1) continue; K.soft(U(a), V(5.5), 1.1 * WS, '24,22,20', 0.5, 0.8); for (let k = 0; k < 10; k++) { const x = U(a) + (r() - 0.5) * 1.6 * WS, y = V(5.5) + r() * 1.4 * WS; c.fillStyle = `rgba(${150 + (r() * 40 | 0)},${120 + (r() * 30 | 0)},50,0.35)`; c.fillRect(x, y, 2, 2); } }
+      // AG-289 Find 8: blurry stretched wall smudges removed; crisp wall-texel bullet pocks, fine claw scratches & high mount brass/soot kept.
+      for (let n = 0; n < len * 0.9; n++) { const a = a0 + r() * len, y = Math.abs(gauss(r)) * 0.9 + 0.1; if (y > 3) continue; K.hole(U(a), V(y), (0.011 + r() * 0.009) * ws, (r() - 0.5) * 0.4 + (r() < 0.5 ? 0 : Math.PI), 1 + r() * 0.6); }
+      for (let n = 0; n < len / 12; n++) K.claws(U(a0 + r() * len), V(0.4 + r() * 1.6), Math.PI / 2 + (r() - 0.5) * 0.6, (0.16 + r() * 0.22) * ws);
+      for (const g of mounts) { const a = axis === 'z' ? g.z : g.x, near = axis === 'z' ? Math.abs(g.x - fixed) < 1.2 : Math.abs(g.z - fixed) < 1.2; if (!near || a < a0 || a > a1) continue; K.soft(U(a), V(5.5), 0.55 * ws, '24,22,20', 0.35, 0.8); for (let k = 0; k < 10; k++) { const x = U(a) + (r() - 0.5) * 1.2 * ux, y = V(5.5) + r() * 1.0 * uy; c.fillStyle = `rgba(${150 + (r() * 40 | 0)},${120 + (r() * 30 | 0)},50,0.35)`; c.fillRect(x, y, 2, 2); } }
     });
     const cx = axis === 'z' ? fixed : (a0 + a1) / 2, cz = axis === 'z' ? (a0 + a1) / 2 : fixed;
     const m = add(new T.PlaneGeometry(len, WH), mat(map), cx, WH / 2, cz); m.rotation.y = yaw; decals.push(m); parts.push('build-wall-' + name);

@@ -1,0 +1,11 @@
+{
+  "trigger": "factory",
+  "grip": "frame",
+  "slide": "slide",
+  "rearPlate": "factory",
+  "magazine": "factory",
+  "module": "light shell",
+  "rubber": "factory",
+  "glass": "factory",
+  "cavity": "factory"
+}

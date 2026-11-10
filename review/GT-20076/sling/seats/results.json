@@ -1,0 +1,110 @@
+{
+  "launcher-slot1": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false,
+    "end": 1,
+    "chosen": [
+      0.075,
+      0.04,
+      0.3,
+      1,
+      0,
+      0
+    ],
+    "best": 0,
+    "attempts": 1
+  },
+  "launcher-slot2": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false,
+    "end": 1,
+    "chosen": [
+      0.075,
+      0.04,
+      0.3,
+      1,
+      0,
+      0
+    ],
+    "best": 0,
+    "attempts": 1
+  },
+  "launcher-slot1-vest": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false,
+    "end": 1,
+    "chosen": [
+      0.075,
+      0.04,
+      0.3,
+      1,
+      0,
+      0
+    ],
+    "best": 0,
+    "attempts": 1
+  },
+  "launcher-slot2-vest": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false,
+    "end": 1,
+    "chosen": [
+      0.075,
+      0.04,
+      0.3,
+      1,
+      0,
+      0
+    ],
+    "best": 0,
+    "attempts": 1
+  }
+}

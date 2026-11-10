@@ -1,0 +1,32 @@
+{
+  "slot": {
+    "parts": 3,
+    "open": 0,
+    "loose": 0,
+    "intersections": 2
+  },
+  "hex": {
+    "parts": 3,
+    "open": 0,
+    "loose": 0,
+    "intersections": 2
+  },
+  "torx": {
+    "parts": 3,
+    "open": 0,
+    "loose": 0,
+    "intersections": 2
+  },
+  "button": {
+    "parts": 3,
+    "open": 0,
+    "loose": 0,
+    "intersections": 3
+  },
+  "rivet": {
+    "parts": 2,
+    "open": 0,
+    "loose": 0,
+    "intersections": 1
+  }
+}

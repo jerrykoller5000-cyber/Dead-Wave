@@ -1,0 +1,42 @@
+{
+  "slot": {
+    "parts": 3,
+    "open": 0,
+    "loose": 0,
+    "intersections": 0,
+    "seated": 2,
+    "breaches": 0
+  },
+  "hex": {
+    "parts": 3,
+    "open": 0,
+    "loose": 0,
+    "intersections": 0,
+    "seated": 2,
+    "breaches": 0
+  },
+  "torx": {
+    "parts": 3,
+    "open": 0,
+    "loose": 0,
+    "intersections": 0,
+    "seated": 2,
+    "breaches": 0
+  },
+  "button": {
+    "parts": 3,
+    "open": 0,
+    "loose": 0,
+    "intersections": 0,
+    "seated": 2,
+    "breaches": 0
+  },
+  "rivet": {
+    "parts": 2,
+    "open": 0,
+    "loose": 0,
+    "intersections": 0,
+    "seated": 1,
+    "breaches": 0
+  }
+}

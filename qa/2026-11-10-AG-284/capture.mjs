@@ -171,12 +171,21 @@ const SHOTS = [
 
 // Representative models shown side-by-side across all four distinct lights (noon, overcast, dusk, night)
 const FOUR_LIGHT_SHOTS = [
-  SHOTS[0],  // 01 Wall T1 (Reinforced Plank)
+  {
+    ...SHOTS[0], // 01 Wall T1 (Reinforced Plank) - full height & base framed
+    cam: { dx: 1.75, dy: 1.48, dz: 3.85, tdx: 0, tdy: 1.05, tdz: 0.88, fov: 38 }
+  },
   SHOTS[3],  // 04 Barricade T2 (Czech Hedgehog)
-  SHOTS[4],  // 05 Sandbag T1 (Double-Stacked)
+  {
+    ...SHOTS[4], // 05 Sandbag T1 (Double-Stacked) - full base-to-duckboard cap framed
+    cam: { dx: 1.45, dy: 1.26, dz: 3.45, tdx: 0, tdy: 0.68, tdz: 0.82, fov: 36 }
+  },
   SHOTS[5],  // 06 Wire T1 (Concertina)
   SHOTS[7],  // 08 Platform T2 (Gun Emplacement)
-  SHOTS[11], // 12 Lure T2 (Tesla Beacon)
+  {
+    ...SHOTS[11], // 12 Lure T2 (Tesla Beacon) - full base-to-top-torus framed
+    cam: { dx: 1.38, dy: 1.36, dz: 2.62, tdx: 0, tdy: 0.96, tdz: 0, fov: 37 }
+  },
   SHOTS[12], // 13 Barrel (Fuel Drum)
   {
     slug: '16-skeletal-marine-full',
@@ -228,7 +237,7 @@ const CLOSEUP_SHOTS = [
     id: 'build.sandbag',
     variant: '1',
     groundAtZero: true,
-    cam: { dx: 0.72, dy: 0.78, dz: 1.82, tdx: 0.12, tdy: 0.55, tdz: 0.88, fov: 26 }
+    cam: { dx: 0.76, dy: 1.58, dz: 1.88, tdx: 0.08, tdy: 1.26, tdz: 0.86, fov: 26 }
   },
   {
     slug: 'closeup-06-wire-t1-coils',
@@ -348,6 +357,7 @@ async function renderLit(page, spec, lightKey) {
     const I = window.DWInspect;
     const ix = I._ix;
     const T = window.TT;
+    const THREE = ix.THREE;
     await I.still(false);
 
     // Set world clock & stage backdrop to reinforce distinct sky/floor bounce per time-of-day
@@ -357,6 +367,29 @@ async function renderLit(page, spec, lightKey) {
     const bd = lightKey === 'noon' || lightKey === 'studio' ? 'light' : (lightKey === 'night' ? 'dark' : 'studio');
     I.backdrop(bd);
     I.light(lightKey);
+
+    // Tint the inspector sky dome with distinct sky palettes so noon, overcast, dusk, and night read unmistakably
+    const dome = ix.stage.group.getObjectByName('inspector-backdrop');
+    const domePalettes = {
+      noon:     { top: 0x6ea6dc, mid: 0xcbe0f5, low: 0xb8bcc2 },
+      overcast: { top: 0x77808b, mid: 0x9fa7b0, low: 0x80858c },
+      dusk:     { top: 0x2e2b4a, mid: 0xc97444, low: 0x614436 },
+      night:    { top: 0x070b14, mid: 0x131d33, low: 0x161a24 },
+      studio:   { top: 0x9aa2ab, mid: 0xcbd0d6, low: 0xb4b8bc }
+    };
+    const dpal = domePalettes[lightKey];
+    if (dome && dpal && dome.geometry?.attributes?.position && dome.geometry?.attributes?.color) {
+      const P = dome.geometry.attributes.position, col = dome.geometry.attributes.color.array;
+      const top = new THREE.Color(dpal.top), mid = new THREE.Color(dpal.mid), low = new THREE.Color(dpal.low), c = new THREE.Color();
+      for (let i = 0; i < P.count; i++) {
+        const h = P.getY(i) / 46;
+        if (h >= 0) c.copy(mid).lerp(top, Math.pow(Math.min(1, h), 0.68));
+        else c.copy(mid).lerp(low, Math.min(1, -h * 6));
+        col[i * 3] = c.r; col[i * 3 + 1] = c.g; col[i * 3 + 2] = c.b;
+      }
+      dome.geometry.attributes.color.needsUpdate = true;
+    }
+
     I.overlay('grid', true);
     I.overlay('bounds', false);
     I.overlay('axes', false);
@@ -382,45 +415,58 @@ async function renderLit(page, spec, lightKey) {
         const res = origStageFrame(dt, focus);
         const { sun, hemi, ambientFill, moon } = ix.host;
         if (lightKey === 'noon') {
-          // Bright warm overhead-forward sun + crisp shadow + clean sky bounce so vertical joints read clearly
-          sun.position.set(C.x + 28, C.y + 78, C.z + 42);
+          // Bright warm high front-right sun + crisp rear ground shadow + bright blue-sky bounce
+          sun.position.set(C.x + 36, C.y + 70, C.z + 54);
           sun.target.position.set(C.x, C.y, C.z);
           sun.target.updateMatrixWorld();
-          sun.intensity = 3.4;
+          sun.intensity = 3.7;
           sun.color.setHex(0xfff5dc);
-          if (hemi) { hemi.intensity = 1.45; hemi.color.setHex(0xd8e8ff); hemi.groundColor.setHex(0x9a8c76); }
-          if (ambientFill) ambientFill.intensity = 0.34;
+          if (hemi) { hemi.intensity = 1.65; hemi.color.setHex(0xd8ebff); hemi.groundColor.setHex(0x9e907a); }
+          if (ambientFill) ambientFill.intensity = 0.40;
         } else if (lightKey === 'overcast') {
           // Cool neutral diffuse overcast cloud layer: soft shadows, high sky wrap-around fill
-          sun.intensity = 0.55;
-          sun.color.setHex(0xdce2ee);
-          if (hemi) { hemi.intensity = 2.15; hemi.color.setHex(0xcfd8e6); hemi.groundColor.setHex(0x767b82); }
-          if (ambientFill) ambientFill.intensity = 0.52;
-        } else if (lightKey === 'dusk') {
-          // Low warm orange-amber sunset grazing across joints + soft twilight sky fill so dark steel doesn't crush
-          sun.position.set(C.x + 76, C.y + 21, C.z + 26);
+          sun.position.set(C.x - 16, C.y + 78, C.z + 44);
           sun.target.position.set(C.x, C.y, C.z);
           sun.target.updateMatrixWorld();
-          sun.intensity = 2.45;
-          sun.color.setHex(0xff9654);
-          if (hemi) { hemi.intensity = 0.88; hemi.color.setHex(0xdca08c); hemi.groundColor.setHex(0x4e362a); }
-          if (ambientFill) ambientFill.intensity = 0.24;
+          sun.intensity = 0.65;
+          sun.color.setHex(0xdce4f2);
+          if (hemi) { hemi.intensity = 2.35; hemi.color.setHex(0xd4deec); hemi.groundColor.setHex(0x80868e); }
+          if (ambientFill) ambientFill.intensity = 0.56;
+        } else if (lightKey === 'dusk') {
+          // Low warm orange-amber sunset grazing from front-left across joints + twilight fill
+          sun.position.set(C.x - 68, C.y + 22, C.z + 48);
+          sun.target.position.set(C.x, C.y, C.z);
+          sun.target.updateMatrixWorld();
+          sun.intensity = 2.85;
+          sun.color.setHex(0xff8c42);
+          if (hemi) { hemi.intensity = 1.05; hemi.color.setHex(0xdc9a88); hemi.groundColor.setHex(0x52382c); }
+          if (ambientFill) ambientFill.intensity = 0.30;
         } else if (lightKey === 'night') {
-          // Cool blue moonlight + warm local inspection lamp aimed at the subject's joints
-          sun.intensity = 0.45;
-          sun.color.setHex(0x7fa0e0);
-          if (hemi) { hemi.intensity = 0.38; hemi.color.setHex(0x4b629e); hemi.groundColor.setHex(0x181c24); }
-          if (ambientFill) ambientFill.intensity = 0.16;
+          // Cool blue moonlight rim + warm local inspection lamp beside camera aimed straight at the joints
+          sun.position.set(C.x - 42, C.y + 62, C.z - 22);
+          sun.target.position.set(C.x, C.y, C.z);
+          sun.target.updateMatrixWorld();
+          sun.intensity = 0.68;
+          sun.color.setHex(0x7aa2f0);
+          if (hemi) { hemi.intensity = 0.56; hemi.color.setHex(0x506cb0); hemi.groundColor.setHex(0x1c222e); }
+          if (ambientFill) ambientFill.intensity = 0.22;
           if (moon) {
-            moon.color.setHex(0xffcf92);
-            moon.position.set(C.x + spec.cam.dx * 0.75 + 1.0, C.y + spec.cam.tdy + 1.25, C.z + spec.cam.dz * 0.75 + 0.85);
+            moon.color.setHex(0xffd296);
+            moon.position.set(C.x + spec.cam.dx * 0.85 + 0.9, C.y + spec.cam.dy + 0.65, C.z + spec.cam.dz * 0.85 + 0.65);
             moon.target.position.set(C.x + spec.cam.tdx, C.y + spec.cam.tdy, C.z + spec.cam.tdz);
             moon.target.updateMatrixWorld();
-            moon.intensity = 2.35;
+            moon.intensity = 2.75;
           }
         } else if (lightKey === 'studio') {
-          // Macro close-up key + fill so every sub-millimeter joint seam reads sharply
-          if (ambientFill) ambientFill.intensity = 0.38;
+          // Macro close-up key aligned with camera quadrant (front or rear) + strong fill so every seam reads sharply
+          const cdx = spec.cam.dx - spec.cam.tdx, cdz = spec.cam.dz - spec.cam.tdz;
+          sun.position.set(C.x + cdx * 22 + 10, C.y + 52, C.z + cdz * 22 + 8);
+          sun.target.position.set(C.x + spec.cam.tdx, C.y + spec.cam.tdy, C.z + spec.cam.tdz);
+          sun.target.updateMatrixWorld();
+          sun.intensity = 3.35;
+          sun.color.setHex(0xfff6e5);
+          if (hemi) { hemi.intensity = 1.75; hemi.color.setHex(0xe4eeff); hemi.groundColor.setHex(0x8c8e92); }
+          if (ambientFill) ambientFill.intensity = 0.44;
         }
         return res;
       };
@@ -439,6 +485,7 @@ async function renderLit(page, spec, lightKey) {
     } finally {
       ix.stage.frame = origStageFrame;
       if (ix.host && ix.host.moon) ix.host.moon.intensity = 0;
+      I.backdrop('studio');
     }
   })()`);
 }

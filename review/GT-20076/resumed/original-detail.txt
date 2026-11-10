@@ -1,0 +1,12 @@
+✔ a screw on each face sinks its base into the parent and stands its head proud (6.7592ms)
+✔ ribs, vents, a groove, a rivet and a pin all touch their parent (1.9672ms)
+✔ floatingParts catches a screw 2 mm off the face (0.7932ms)
+✔ a row places count parts pitch apart along the axis (0.6219ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 132.6253

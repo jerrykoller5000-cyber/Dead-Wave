@@ -386,9 +386,9 @@ class LightBase extends Object3D {
     this.shadow = { mapSize: { width: 512, height: 512, set() {} }, camera: permissive({ left: 0, right: 0, top: 0, bottom: 0, near: 0, far: 0, updateProjectionMatrix() {} }), bias: 0, normalBias: 0, radius: 1, needsUpdate: false, map: null };
   }
 }
-export class PointLight extends LightBase {}
-export class SpotLight extends LightBase {}
-export class DirectionalLight extends LightBase {}
+export class PointLight extends LightBase { constructor(...args) { super(...args); this.isPointLight = true; this.type = 'PointLight'; } }
+export class SpotLight extends LightBase { constructor(...args) { super(...args); this.isSpotLight = true; this.type = 'SpotLight'; } }
+export class DirectionalLight extends LightBase { constructor(...args) { super(...args); this.isDirectionalLight = true; this.type = 'DirectionalLight'; } }
 export class HemisphereLight extends LightBase { constructor(a, b, i) { super(a, i); this.groundColor = new Color(b); } }
 export class AmbientLight extends LightBase {}
 export class PerspectiveCamera extends Object3D {
@@ -612,6 +612,18 @@ export class Ray {
   set(o, d) { this.origin.copy(o); this.direction.copy(d); return this; }
 }
 export class Plane { constructor(n = new Vector3(0, 1, 0), c = 0) { this.normal = n; this.constant = c; } setFromNormalAndCoplanarPoint(n, p) { this.normal.copy(n); this.constant = -p.dot(n); return this; } }
+export class Triangle {
+  constructor(a = new Vector3(), b = new Vector3(), c = new Vector3()) { this.a = a; this.b = b; this.c = c; }
+  static getNormal(a, b, c, target) {
+    target.subVectors(c, b);
+    const _v0 = new Vector3().subVectors(a, b);
+    target.cross(_v0);
+    const lenSq = target.lengthSq();
+    if (lenSq > 0) return target.multiplyScalar(1 / Math.sqrt(lenSq));
+    return target.set(0, 0, 0);
+  }
+  getNormal(target) { return Triangle.getNormal(this.a, this.b, this.c, target); }
+}
 // GB-185: ray against the triangles of a mesh's position attribute, in world space.
 function meshRaycast(mesh, rc, out) {
   const P = mesh.geometry && mesh.geometry.attributes && mesh.geometry.attributes.position;

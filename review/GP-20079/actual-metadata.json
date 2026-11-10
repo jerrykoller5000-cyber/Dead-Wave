@@ -1,0 +1,255 @@
+{
+  "result": [
+    {
+      "kind": "demon",
+      "samples": [
+        {
+          "frame": 6,
+          "parts": 5,
+          "collisions": [
+            {
+              "pair": "legL/legR",
+              "a": "legL",
+              "b": "legR",
+              "hits": 3,
+              "total": 3,
+              "contact": [
+                -27.576,
+                -198.818,
+                -631.979
+              ],
+              "contactMeta": {
+                "skin": "zombie-skin",
+                "index": 14505,
+                "rgb": [
+                  0.19,
+                  0.07,
+                  0.06
+                ]
+              },
+              "aCenter": [
+                -27.581,
+                -199.328,
+                -631.816
+              ],
+              "bCenter": [
+                -27.792,
+                -199.267,
+                -632.18
+              ],
+              "overlap": [
+                0.447,
+                1.166,
+                0.048
+              ]
+            }
+          ]
+        },
+        {
+          "frame": 12,
+          "parts": 5,
+          "collisions": [
+            {
+              "pair": "armR/legR",
+              "a": "armR",
+              "b": "legR",
+              "hits": 8,
+              "total": 25,
+              "contact": [
+                -27.335,
+                -199.172,
+                -632.326
+              ],
+              "contactMeta": {
+                "skin": "zombie-skin",
+                "index": 4192,
+                "rgb": [
+                  0.02,
+                  0.02,
+                  0.01
+                ]
+              },
+              "aCenter": [
+                -27.035,
+                -198.29,
+                -632.579
+              ],
+              "bCenter": [
+                -27.322,
+                -199.33,
+                -632.194
+              ],
+              "overlap": [
+                0.306,
+                0.598,
+                0.138
+              ]
+            },
+            {
+              "pair": "legL/legR",
+              "a": "legL",
+              "b": "legR",
+              "hits": 3,
+              "total": 11,
+              "contact": [
+                -27.285,
+                -198.84,
+                -631.982
+              ],
+              "contactMeta": {
+                "skin": "zombie-skin",
+                "index": 14505,
+                "rgb": [
+                  0.19,
+                  0.07,
+                  0.06
+                ]
+              },
+              "aCenter": [
+                -27.411,
+                -199.346,
+                -631.832
+              ],
+              "bCenter": [
+                -27.322,
+                -199.33,
+                -632.194
+              ],
+              "overlap": [
+                0.513,
+                1.253,
+                0.063
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "colossus",
+      "samples": [
+        {
+          "frame": 6,
+          "parts": 5,
+          "collisions": [
+            {
+              "pair": "armL/head",
+              "a": "armL",
+              "b": "head",
+              "hits": 6,
+              "total": 37,
+              "contact": [
+                -27.398,
+                -196.43,
+                -631.682
+              ],
+              "contactMeta": {
+                "skin": "zombie-skin",
+                "index": 8060,
+                "rgb": [
+                  0.11,
+                  0.04,
+                  0.03
+                ]
+              },
+              "aCenter": [
+                -27.277,
+                -197.203,
+                -631.05
+              ],
+              "bCenter": [
+                -27.306,
+                -196.197,
+                -632.066
+              ],
+              "overlap": [
+                0.836,
+                0.976,
+                0.344
+              ]
+            }
+          ]
+        },
+        {
+          "frame": 12,
+          "parts": 5,
+          "collisions": [
+            {
+              "pair": "armL/head",
+              "a": "armL",
+              "b": "head",
+              "hits": 4,
+              "total": 29,
+              "contact": [
+                -26.992,
+                -196.414,
+                -631.568
+              ],
+              "contactMeta": {
+                "skin": "zombie-skin",
+                "index": 8060,
+                "rgb": [
+                  0.11,
+                  0.04,
+                  0.03
+                ]
+              },
+              "aCenter": [
+                -26.956,
+                -197.252,
+                -630.924
+              ],
+              "bCenter": [
+                -26.914,
+                -196.193,
+                -631.967
+              ],
+              "overlap": [
+                0.811,
+                0.942,
+                0.294
+              ]
+            },
+            {
+              "pair": "armL/legL",
+              "a": "armL",
+              "b": "legL",
+              "hits": 3,
+              "total": 44,
+              "contact": [
+                -27.415,
+                -198.384,
+                -631.456
+              ],
+              "contactMeta": {
+                "skin": "zombie-skin",
+                "index": 15409,
+                "rgb": [
+                  0.23,
+                  0.08,
+                  0.06
+                ]
+              },
+              "aCenter": [
+                -26.956,
+                -197.252,
+                -630.924
+              ],
+              "bCenter": [
+                -26.777,
+                -198.94,
+                -631.598
+              ],
+              "overlap": [
+                1.375,
+                0.796,
+                0.594
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": []
+}
