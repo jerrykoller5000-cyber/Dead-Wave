@@ -1,0 +1,193 @@
+{
+  "auditTimestamp": "2026-11-10T01:13:14.966Z",
+  "gpuRenderer": "Three.js WebGPU (RTX 5080)",
+  "revolver": [
+    {
+      "beat": 0.12,
+      "desc": "Cylinder swung open on crane",
+      "u": 0.12,
+      "craneLen": null,
+      "craneVisible": null,
+      "emptiesVisible": null,
+      "palmRoundsVisible": null,
+      "loaderVisible": null,
+      "reloading": true
+    },
+    {
+      "beat": 0.2,
+      "desc": "4 spent cases ejecting from cylinder",
+      "u": 0.2,
+      "craneLen": null,
+      "craneVisible": null,
+      "emptiesVisible": null,
+      "palmRoundsVisible": null,
+      "loaderVisible": null,
+      "reloading": true
+    },
+    {
+      "beat": 0.28,
+      "desc": "2 live unfired rounds sliding into cupped palm",
+      "u": 0.28,
+      "craneLen": null,
+      "craneVisible": null,
+      "emptiesVisible": null,
+      "palmRoundsVisible": null,
+      "loaderVisible": null,
+      "reloading": true
+    },
+    {
+      "beat": 0.36,
+      "desc": "Palm carrying live rounds to pouch",
+      "u": 0.36,
+      "craneLen": null,
+      "craneVisible": null,
+      "emptiesVisible": null,
+      "palmRoundsVisible": null,
+      "loaderVisible": null,
+      "reloading": true
+    },
+    {
+      "beat": 0.5,
+      "desc": "Speedloader in palm approaching open cylinder",
+      "u": 0.5,
+      "craneLen": null,
+      "craneVisible": null,
+      "emptiesVisible": null,
+      "palmRoundsVisible": null,
+      "loaderVisible": null,
+      "reloading": true
+    },
+    {
+      "beat": 0.65,
+      "desc": "Speedloader seating 6 fresh rounds into chambers",
+      "u": 0.65,
+      "craneLen": null,
+      "craneVisible": null,
+      "emptiesVisible": null,
+      "palmRoundsVisible": null,
+      "loaderVisible": null,
+      "reloading": true
+    },
+    {
+      "beat": 0.74,
+      "desc": "Speedloader clearing after rounds seated",
+      "u": 0.74,
+      "craneLen": null,
+      "craneVisible": null,
+      "emptiesVisible": null,
+      "palmRoundsVisible": null,
+      "loaderVisible": null,
+      "reloading": true
+    },
+    {
+      "beat": 0.88,
+      "desc": "Cylinder swinging closed on crane",
+      "u": 0.88,
+      "craneLen": null,
+      "craneVisible": null,
+      "emptiesVisible": null,
+      "palmRoundsVisible": null,
+      "loaderVisible": null,
+      "reloading": true
+    },
+    {
+      "beat": 1,
+      "desc": "Cylinder locked shut, revolver ready at hip",
+      "u": 1,
+      "craneLen": null,
+      "craneVisible": null,
+      "emptiesVisible": null,
+      "palmRoundsVisible": null,
+      "loaderVisible": null,
+      "reloading": true
+    }
+  ],
+  "launcher": {},
+  "breacher": [
+    {
+      "beat": 0.2,
+      "desc": "Spent drum dropped",
+      "u": 0.2,
+      "workZ": null
+    },
+    {
+      "beat": 0.4,
+      "desc": "Fresh drum from pouch",
+      "u": 0.4,
+      "workZ": null
+    },
+    {
+      "beat": 0.62,
+      "desc": "Fresh drum seated into well",
+      "u": 0.62,
+      "workZ": null
+    },
+    {
+      "beat": 0.72,
+      "desc": "Support hand reaching to charging handle",
+      "u": 0.72,
+      "workZ": null
+    },
+    {
+      "beat": 0.77,
+      "desc": "Fingers hooked on charging handle knob",
+      "u": 0.77,
+      "workZ": null
+    },
+    {
+      "beat": 0.8,
+      "desc": "Handle pulled fully rearward along receiver slot",
+      "u": 0.8,
+      "workZ": null
+    },
+    {
+      "beat": 0.83,
+      "desc": "Handle released, flying forward into battery",
+      "u": 0.83,
+      "workZ": null
+    },
+    {
+      "beat": 0.9,
+      "desc": "Support hand returning to forend",
+      "u": 0.9,
+      "workZ": null
+    },
+    {
+      "beat": 1,
+      "desc": "Breacher locked & ready at hip",
+      "u": 1,
+      "workZ": null
+    }
+  ],
+  "flamer": {},
+  "rotary": {},
+  "chainsaw": {},
+  "viewSwap": {},
+  "lasersLights": {},
+  "brassBurst": [
+    {
+      "shot": 1,
+      "viewFirst": true
+    },
+    {
+      "shot": 2,
+      "viewFirst": true
+    },
+    {
+      "shot": 3,
+      "viewFirst": true
+    },
+    {
+      "shot": 4,
+      "viewFirst": true
+    },
+    {
+      "shot": 5,
+      "viewFirst": true
+    },
+    {
+      "shot": 6,
+      "viewFirst": true
+    }
+  ]
+}

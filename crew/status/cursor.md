@@ -4,10 +4,10 @@ state: idle
 model: Grok 4.7
 task: —
 touching: —
-since: 2026-11-03T22:10Z
-next: —
+since: 2026-11-09T22:47Z
+next: CU-243 The full suite on the current tree, reds by owner. Now (when
 blocked-on: —
-last-report: handoffs/2026-11-03-cursor-CU-239.md
+last-report: handoffs/2026-11-09-cursor-CU-243.md
 
 ## Notes
 

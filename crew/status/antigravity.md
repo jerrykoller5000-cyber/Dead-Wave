@@ -4,10 +4,10 @@ state: idle
 model: Gemini 4 Argon (High)
 task: —
 touching: —
-since: 2026-11-09T01:14Z
+since: 2026-11-10T01:16Z
 next: waits on CL-303
 blocked-on: —
-last-report: handoffs/2026-11-08-antigravity-AG-267.md
+last-report: handoffs/2026-11-10-antigravity-AG-273.md
 
 ## Notes
 

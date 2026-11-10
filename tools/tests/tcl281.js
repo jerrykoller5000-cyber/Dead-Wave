@@ -28,11 +28,13 @@
     await wait(600);
     const ud = T.marine.userData, src = T.weaponMeshes.pistol;
     // His body's arms and gun: out of the eye's pass, every mesh; the laser's beam is not.
-    const beams = new Set(Object.values(T.weaponMeshes).map((g) => g && g.userData && g.userData.laser).filter(Boolean));
+    const beams = new Set([...Object.values(T.weaponMeshes), ...Object.values(T.offhandMeshes || {})].map((g) => g && g.userData && g.userData.laser).filter(Boolean));   // CL-327 (J73): a pair's left gun's beam too
     let armN = 0, armHid = 0; for (const a of [ud.armLG, ud.armRG]) a.traverse((o) => { if (o.isMesh && !beams.has(o)) { armN++; if (vm.isEyeHidden(o)) armHid++; } });
     let gunN = 0, gunHid = 0; src.traverse((o) => { if (o.isMesh && o !== src.userData.laser) { gunN++; if (vm.isEyeHidden(o)) gunHid++; } });
     ok(armN > 0 && armHid === armN && gunN > 0 && gunHid === gunN, 'his own arms (' + armHid + '/' + armN + ') and pistol (' + gunHid + '/' + gunN + ') are out of the eye\'s pass');
     ok(!src.userData.laser || !vm.isEyeHidden(src.userData.laser), 'the laser\'s beam is still drawn');
+    { const offs = Object.values(T.offhandMeshes || {}).map((g) => g && g.userData && g.userData.laser).filter(Boolean);   // CL-327 (J73)
+      ok(offs.length > 0 && offs.every((b) => !vm.isEyeHidden(b)), 'and a pair\'s left gun\'s beam (' + offs.length + ' of them)'); }
     const skins = ud.rigSkin ? ud.rigSkin.skins : [];
     const split = skins.filter((s) => s.userData.rigSplit);
     if (ud.rigSkin) ok(split.length > 0 && split.every((s) => vm.isEyeHidden(s)) && skins.filter((s) => !s.userData.rigSplit).every((s) => !vm.isEyeHidden(s)), 'his baked arms are skins of their own, out of the eye\'s pass; the rest of him is in it (' + split.length + ' of ' + skins.length + ')');

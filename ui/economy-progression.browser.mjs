@@ -25,7 +25,7 @@ try{
   const check=async(action,price,id)=>{const cash=await page.evaluate(()=>TT.getBank());await page.evaluate(action);assert.equal(await page.evaluate(()=>TT.getBank()),cash-price);const receipt=await page.evaluate(()=>economyReceipts.at(-1));assert.equal(receipt.cashSpent,price);assert.equal(receipt.itemId,id);};
   await check(()=>TT.buyWeapon('chainsaw'),190,'weapon:chainsaw');await check(()=>econProbe.buyTank(),85,'saw-tank');
   await check(()=>econProbe.buyMed(),35,'medpen');await check(()=>econProbe.buyMag(),45,'magazine:pistol');await check(()=>econProbe.buyPair(),120,'dual:pistol');await check(()=>econProbe.buyMachete(),85,'machete');
-  await check(()=>TT.buyGear(TT.GEAR.find(g=>g.key==='helmet')),70,'gear:helmet');
+  await check(()=>{TT.closeShop();TT.openCIF();document.querySelector('#cifIssue [data-cif-buy="helmet"] button').click();},70,'gear:helmet');
   await page.evaluate(()=>{econProbe.reset();TT.openShop(true,'armory');});assert.equal(await page.evaluate(()=>econProbe.quotes().weapons.m4),180,'new run keeps fixed price');
   for(const [completed,expected]of [[1,'New at the Armory: Wasp SMG, Shotgun.'],[3,'New at the Armory: GW-4 Carbine, Chainsaw.'],[9,'New at the Armory: Breacher-12.'],[10,''],[19,'']]){
    await page.evaluate(n=>econProbe.dawn(n),completed);assert.equal(await page.locator('#dawnCard .dawn-stock').textContent(),expected);assert.equal(await page.locator('#dawnCard .dawn-stock').isHidden(),!expected);

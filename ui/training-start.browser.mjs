@@ -18,7 +18,9 @@ try{
   assert(await p.locator('[data-weapon="minigun"]').count(),'late-stock gun offered in Training');
   await p.locator('[data-weapon="m4"] .weapon-actions > button').first().click();
   assert(await p.evaluate(()=>TT.getWeaponOwned().m4));assert.equal(await p.evaluate(()=>TT.getBank()),initial.cash);
-  await p.evaluate(()=>TT.buyGear(TT.GEAR.find(g=>g.key==='helmet')));assert(await p.evaluate(()=>TT.getGearOwned().helmet));assert.equal(await p.evaluate(()=>TT.getBank()),initial.cash);
+  await p.evaluate(()=>{TT.closeShop();TT.armoryDbg.ui().close();TT.openCIF();});
+  await p.locator('#cifIssue [data-cif-buy="helmet"] button').click();
+  assert(await p.evaluate(()=>TT.getGearOwned().helmet));assert.equal(await p.evaluate(()=>TT.getBank()),initial.cash);
   await p.evaluate(()=>{TT.closeShop();TT.armoryDbg.ui().close();TT.closeCIF();TT.trainingDbg.start();});
   await p.waitForFunction(()=>!document.getElementById('trainingBlackout')?.classList.contains('on'));
   assert.deepEqual(await p.evaluate(()=>Object.keys(TT.getWeaponOwned()).filter(k=>TT.getWeaponOwned()[k])),['pistol']);assert(await p.evaluate(()=>Object.values(TT.getGearOwned()).every(v=>!v)));

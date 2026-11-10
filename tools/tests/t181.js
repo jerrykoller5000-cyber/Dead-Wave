@@ -1,4 +1,4 @@
-// t181 - CL-114 (Jerry): a gun's camo is chosen in the Armory, not the CIF; the supply terminal sells only guns in stock
+// t181 - CL-114 (Jerry): a gun's camo is chosen in the Armory, not the CIF. D-124: the Armory store sells only guns in stock
 // tonight, and on the night one arrives a short card says it's new at the supply terminal.
 (async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
@@ -14,25 +14,33 @@
     const tabs = [...document.querySelectorAll('#cifTabs [data-cif-tab]')].map((b) => b.dataset.cifTab);
     ok(tabs.length > 0 && !tabs.includes('guns'), 'the CIF has no Guns tab (' + tabs.join(',') + ')');
     T.closeCIF();
-    // --- the supply terminal on night 1: only the guns in stock
+    // --- the Armory store on night 1: only the guns in stock (D-124; the kiosk no longer sells guns)
     const night = T.getDay ? T.getDay() : 1;
-    T.openShop(true); T.setShopTabDbg && T.setShopTabDbg('weapons');
+    const openGunStore = () => {
+      T.closeMenuDbg && T.closeMenuDbg('shop');
+      T.closeMenuDbg && T.closeMenuDbg('armory');
+      T.openMenuDbg('armory');
+      T.setShopTabDbg && T.setShopTabDbg('weapons');
+    };
+    openGunStore();
     let rows = [...document.querySelectorAll('#shopList [data-weapon]')].map((r) => r.dataset.weapon);
-    ok(rows.length > 0 && rows.every((w) => T.getWeaponOwned()[w] || T.stockNoticeDbg.NIGHT[w] <= night), 'night ' + night + ': only stocked guns on the supply terminal (' + rows.join(',') + ')');
+    ok(rows.length > 0 && rows.every((w) => T.getWeaponOwned()[w] || T.stockNoticeDbg.NIGHT[w] <= night), 'night ' + night + ': only stocked guns in the Armory store (' + rows.join(',') + ')');
     ok(!/Arrives night/i.test(document.getElementById('shopList').textContent), 'no "Arrives night" rows');
-    ok(!rows.includes('minigun'), 'the minigun (night 14) is not on the supply terminal');
-    T.closeShop && T.closeShop();
+    ok(!rows.includes('minigun'), 'the minigun (night 14) is not in the Armory store');
+    T.closeMenuDbg && T.closeMenuDbg('shop');
+    T.closeMenuDbg && T.closeMenuDbg('armory');
     // --- the night the Uzi and shotgun arrive
     const D = T.stockNoticeDbg;
     ok(JSON.stringify(D.arrivals(2)) === JSON.stringify(D.arrivals(2).filter((w) => T.stockNoticeDbg.NIGHT[w] === 2)) && D.arrivals(2).length >= 1, 'night 2 brings ' + D.arrivals(2).join(','));
     ok(D.arrivals(1).length === 0, 'nothing is announced on the first night');
     D.setDay(2);
-    T.openShop(true); T.setShopTabDbg && T.setShopTabDbg('weapons');
+    openGunStore();
     rows = [...document.querySelectorAll('#shopList [data-weapon]')].map((r) => r.dataset.weapon);
-    ok(D.arrivals(2).every((w) => rows.includes(w)), 'night 2: they are on the supply terminal now (' + rows.join(',') + ')');
+    ok(D.arrivals(2).every((w) => rows.includes(w)), 'night 2: they are in the Armory store now (' + rows.join(',') + ')');
     const uziRow = document.querySelector('#shopList [data-weapon="uzi"] .name');
     ok(!!uziRow && /new/i.test(uziRow.textContent), 'and marked new tonight (' + (uziRow && uziRow.textContent) + ')');
-    T.closeShop && T.closeShop();
+    T.closeMenuDbg && T.closeMenuDbg('shop');
+    T.closeMenuDbg && T.closeMenuDbg('armory');
     D.queue(2);
     let st = D.state();
     ok(st.t > 0 && !st.visible, 'the notice waits for the dawn banner');

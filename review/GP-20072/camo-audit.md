@@ -1,0 +1,5 @@
+# GP-20072 live camo audit — 2026-11-09
+
+At the Training Ground range on RTX 5080, both current `wear:shirt` elbow-joint singleton meshes remained visible on the player's marine. Each uses scale `(0.0565, 0.0565, 0.05763)` and has 1,980 vertices. A sampled rendered edge measured `0.46450` UV repeats across `0.01108` m in world space, or `41.94` repeats/m. The rest of the projected body cloth is about `2.38` repeats/m (AG-201's measurement). These are the two `joint(uniformW,.0565)` parts in `studio/marine-body.js:464`.
+
+The mismatch comes from the single-mesh branch of `mergeRigidMeshes` in `index.html`: it calls `boxProjectUV(P.array, uvA)` before applying the mesh scale, while the merged branch transforms vertices with `c.matrix` first. The two small parts can therefore present a much finer camo pattern when visible. This is a live data finding, not yet proof that these are the surfaces Jerry saw popping near the range. Claude owns the marine-body section; I sent him a narrow fix request. Antigravity was asked for consecutive RTX 5080 frames at Jerry's exact view to identify the changing mesh.

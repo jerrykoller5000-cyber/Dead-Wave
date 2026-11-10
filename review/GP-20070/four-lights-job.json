@@ -1,0 +1,231 @@
+{
+  "shots": [
+    {
+      "target": "weapon.pistol",
+      "view": "three",
+      "out": "review/GP-20070/four-lights/pistol-noon.png",
+      "caption": "pistol / noon",
+      "pre": "DWInspect.light(\"noon\")",
+      "wait": 350
+    },
+    {
+      "target": "weapon.pistol",
+      "view": "three",
+      "out": "review/GP-20070/four-lights/pistol-overcast.png",
+      "caption": "pistol / overcast",
+      "pre": "DWInspect.light(\"overcast\")",
+      "wait": 350
+    },
+    {
+      "target": "weapon.pistol",
+      "view": "three",
+      "out": "review/GP-20070/four-lights/pistol-dusk.png",
+      "caption": "pistol / dusk",
+      "pre": "DWInspect.light(\"dusk\")",
+      "wait": 350
+    },
+    {
+      "target": "weapon.pistol",
+      "view": "three",
+      "out": "review/GP-20070/four-lights/pistol-night.png",
+      "caption": "pistol / night",
+      "pre": "DWInspect.light(\"night\")",
+      "wait": 350
+    },
+    {
+      "target": "weapon.revolver",
+      "view": "three",
+      "out": "review/GP-20070/four-lights/revolver-noon.png",
+      "caption": "revolver / noon",
+      "pre": "DWInspect.light(\"noon\")",
+      "wait": 350
+    },
+    {
+      "target": "weapon.revolver",
+      "view": "three",
+      "out": "review/GP-20070/four-lights/revolver-overcast.png",
+      "caption": "revolver / overcast",
+      "pre": "DWInspect.light(\"overcast\")",
+      "wait": 350
+    },
+    {
+      "target": "weapon.revolver",
+      "view": "three",
+      "out": "review/GP-20070/four-lights/revolver-dusk.png",
+      "caption": "revolver / dusk",
+      "pre": "DWInspect.light(\"dusk\")",
+      "wait": 350
+    },
+    {
+      "target": "weapon.revolver",
+      "view": "three",
+      "out": "review/GP-20070/four-lights/revolver-night.png",
+      "caption": "revolver / night",
+      "pre": "DWInspect.light(\"night\")",
+      "wait": 350
+    },
+    {
+      "target": "weapon.ak",
+      "view": "three",
+      "out": "review/GP-20070/four-lights/ak-noon.png",
+      "caption": "ak / noon",
+      "pre": "DWInspect.light(\"noon\")",
+      "wait": 350
+    },
+    {
+      "target": "weapon.ak",
+      "view": "three",
+      "out": "review/GP-20070/four-lights/ak-overcast.png",
+      "caption": "ak / overcast",
+      "pre": "DWInspect.light(\"overcast\")",
+      "wait": 350
+    },
+    {
+      "target": "weapon.ak",
+      "view": "three",
+      "out": "review/GP-20070/four-lights/ak-dusk.png",
+      "caption": "ak / dusk",
+      "pre": "DWInspect.light(\"dusk\")",
+      "wait": 350
+    },
+    {
+      "target": "weapon.ak",
+      "view": "three",
+      "out": "review/GP-20070/four-lights/ak-night.png",
+      "caption": "ak / night",
+      "pre": "DWInspect.light(\"night\")",
+      "wait": 350
+    },
+    {
+      "target": "weapon.m4",
+      "view": "three",
+      "out": "review/GP-20070/four-lights/m4-noon.png",
+      "caption": "m4 / noon",
+      "pre": "DWInspect.light(\"noon\")",
+      "wait": 350
+    },
+    {
+      "target": "weapon.m4",
+      "view": "three",
+      "out": "review/GP-20070/four-lights/m4-overcast.png",
+      "caption": "m4 / overcast",
+      "pre": "DWInspect.light(\"overcast\")",
+      "wait": 350
+    },
+    {
+      "target": "weapon.m4",
+      "view": "three",
+      "out": "review/GP-20070/four-lights/m4-dusk.png",
+      "caption": "m4 / dusk",
+      "pre": "DWInspect.light(\"dusk\")",
+      "wait": 350
+    },
+    {
+      "target": "weapon.m4",
+      "view": "three",
+      "out": "review/GP-20070/four-lights/m4-night.png",
+      "caption": "m4 / night",
+      "pre": "DWInspect.light(\"night\")",
+      "wait": 350
+    },
+    {
+      "target": "weapon.sniper",
+      "view": "three",
+      "out": "review/GP-20070/four-lights/sniper-noon.png",
+      "caption": "sniper / noon",
+      "pre": "DWInspect.light(\"noon\")",
+      "wait": 350
+    },
+    {
+      "target": "weapon.sniper",
+      "view": "three",
+      "out": "review/GP-20070/four-lights/sniper-overcast.png",
+      "caption": "sniper / overcast",
+      "pre": "DWInspect.light(\"overcast\")",
+      "wait": 350
+    },
+    {
+      "target": "weapon.sniper",
+      "view": "three",
+      "out": "review/GP-20070/four-lights/sniper-dusk.png",
+      "caption": "sniper / dusk",
+      "pre": "DWInspect.light(\"dusk\")",
+      "wait": 350
+    },
+    {
+      "target": "weapon.sniper",
+      "view": "three",
+      "out": "review/GP-20070/four-lights/sniper-night.png",
+      "caption": "sniper / night",
+      "pre": "DWInspect.light(\"night\")",
+      "wait": 350
+    },
+    {
+      "target": "weapon.launcher",
+      "view": "three",
+      "out": "review/GP-20070/four-lights/launcher-noon.png",
+      "caption": "launcher / noon",
+      "pre": "DWInspect.light(\"noon\")",
+      "wait": 350
+    },
+    {
+      "target": "weapon.launcher",
+      "view": "three",
+      "out": "review/GP-20070/four-lights/launcher-overcast.png",
+      "caption": "launcher / overcast",
+      "pre": "DWInspect.light(\"overcast\")",
+      "wait": 350
+    },
+    {
+      "target": "weapon.launcher",
+      "view": "three",
+      "out": "review/GP-20070/four-lights/launcher-dusk.png",
+      "caption": "launcher / dusk",
+      "pre": "DWInspect.light(\"dusk\")",
+      "wait": 350
+    },
+    {
+      "target": "weapon.launcher",
+      "view": "three",
+      "out": "review/GP-20070/four-lights/launcher-night.png",
+      "caption": "launcher / night",
+      "pre": "DWInspect.light(\"night\")",
+      "wait": 350
+    },
+    {
+      "target": "weapon.m240",
+      "view": "three",
+      "out": "review/GP-20070/four-lights/m240-noon.png",
+      "caption": "m240 / noon",
+      "pre": "DWInspect.light(\"noon\")",
+      "wait": 350
+    },
+    {
+      "target": "weapon.m240",
+      "view": "three",
+      "out": "review/GP-20070/four-lights/m240-overcast.png",
+      "caption": "m240 / overcast",
+      "pre": "DWInspect.light(\"overcast\")",
+      "wait": 350
+    },
+    {
+      "target": "weapon.m240",
+      "view": "three",
+      "out": "review/GP-20070/four-lights/m240-dusk.png",
+      "caption": "m240 / dusk",
+      "pre": "DWInspect.light(\"dusk\")",
+      "wait": 350
+    },
+    {
+      "target": "weapon.m240",
+      "view": "three",
+      "out": "review/GP-20070/four-lights/m240-night.png",
+      "caption": "m240 / night",
+      "pre": "DWInspect.light(\"night\")",
+      "wait": 350
+    }
+  ],
+  "out": "review/GP-20070/four-lights",
+  "cols": 4,
+  "tile": 400
+}

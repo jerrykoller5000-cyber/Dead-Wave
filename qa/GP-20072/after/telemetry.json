@@ -1,0 +1,588 @@
+{
+  "auditTimestamp": "2026-11-09T21:33:53.252Z",
+  "gpuRenderer": "Three.js WebGPU (NVIDIA GeForce RTX 5080)",
+  "jointAuditAfter": [
+    {
+      "name": "",
+      "uuid": "f576c6c2-dd59-403f-af5c-35a4afad2f6a",
+      "visible": false,
+      "parentName": "",
+      "parentParentName": "",
+      "vmEyeHide": false,
+      "matUuid": "d4b491f2-5243-4322-85cf-b9b263978f7b",
+      "matName": "",
+      "matMap": false,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "posCount": 49,
+      "worldEdgeLen": 0,
+      "uvDeltaLen": 0.1666666641831398,
+      "repeatsPerMetre": 0
+    },
+    {
+      "name": "",
+      "uuid": "f274c2ce-836b-4e03-9e85-1911b5326872",
+      "visible": false,
+      "parentName": "",
+      "parentParentName": "",
+      "vmEyeHide": false,
+      "matUuid": "d4b491f2-5243-4322-85cf-b9b263978f7b",
+      "matName": "",
+      "matMap": false,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "posCount": 49,
+      "worldEdgeLen": 0,
+      "uvDeltaLen": 0.1666666641831398,
+      "repeatsPerMetre": 0
+    },
+    {
+      "name": "",
+      "uuid": "a965f395-db7f-4568-a5df-e8d503a920c8",
+      "visible": false,
+      "parentName": "",
+      "parentParentName": "",
+      "vmEyeHide": false,
+      "matUuid": "8e751325-a12f-48ee-9e02-fcc9cfe69f59",
+      "matName": "",
+      "matMap": false,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "posCount": 99,
+      "worldEdgeLen": 0,
+      "uvDeltaLen": 0.10000000521540642,
+      "repeatsPerMetre": 0
+    },
+    {
+      "name": "",
+      "uuid": "555a989c-c923-4599-a586-a242c0f7e163",
+      "visible": true,
+      "parentName": "",
+      "parentParentName": "",
+      "vmEyeHide": false,
+      "matUuid": "9220fc00-a520-44a0-9c16-9822ecfeb36a",
+      "matName": "",
+      "matMap": false,
+      "scale": {
+        "x": 0.0478,
+        "y": 0.0478,
+        "z": 0.048756
+      },
+      "posCount": 391,
+      "worldEdgeLen": 0,
+      "uvDeltaLen": 0.04545454680919647,
+      "repeatsPerMetre": 0
+    },
+    {
+      "name": "",
+      "uuid": "f21f2def-8970-43fd-9498-a30bf0ae24a4",
+      "visible": true,
+      "parentName": "",
+      "parentParentName": "",
+      "vmEyeHide": false,
+      "matUuid": "7efc0c76-2acf-40b0-a2d7-3d67a1b8231d",
+      "matName": "",
+      "matMap": false,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "posCount": 49,
+      "worldEdgeLen": 0,
+      "uvDeltaLen": 0.1666666641831398,
+      "repeatsPerMetre": 0
+    },
+    {
+      "name": "",
+      "uuid": "4cdb7602-22d0-4958-96a7-04ba45c03205",
+      "visible": true,
+      "parentName": "",
+      "parentParentName": "",
+      "vmEyeHide": false,
+      "matUuid": "5a3504f8-b693-4b8b-88e2-79df523e245c",
+      "matName": "",
+      "matMap": false,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "posCount": 49,
+      "worldEdgeLen": 0,
+      "uvDeltaLen": 0.1666666641831398,
+      "repeatsPerMetre": 0
+    },
+    {
+      "name": "",
+      "uuid": "18a1fc7b-164b-4931-98bc-0776ed2e980c",
+      "visible": true,
+      "parentName": "",
+      "parentParentName": "",
+      "vmEyeHide": false,
+      "matUuid": "110dae09-f710-4308-8315-1127baadd6ef",
+      "matName": "",
+      "matMap": false,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "posCount": 49,
+      "worldEdgeLen": 0,
+      "uvDeltaLen": 0.1666666641831398,
+      "repeatsPerMetre": 0
+    },
+    {
+      "name": "",
+      "uuid": "878706c1-28aa-4b7a-a81d-f6d58cd3fbd5",
+      "visible": true,
+      "parentName": "",
+      "parentParentName": "",
+      "vmEyeHide": false,
+      "matUuid": "9220fc00-a520-44a0-9c16-9822ecfeb36a",
+      "matName": "",
+      "matMap": false,
+      "scale": {
+        "x": 0.0478,
+        "y": 0.0478,
+        "z": 0.048756
+      },
+      "posCount": 391,
+      "worldEdgeLen": 0,
+      "uvDeltaLen": 0.04545454680919647,
+      "repeatsPerMetre": 0
+    },
+    {
+      "name": "",
+      "uuid": "e65741a0-71ed-4e74-94da-72a1df7a9e6d",
+      "visible": true,
+      "parentName": "",
+      "parentParentName": "",
+      "vmEyeHide": false,
+      "matUuid": "a1b03e9c-bb38-42bc-a625-62ef9937bf2c",
+      "matName": "",
+      "matMap": false,
+      "scale": {
+        "x": 1.6042398913297802,
+        "y": 1.6042398913297802,
+        "z": 1.6042398913297802
+      },
+      "posCount": 49,
+      "worldEdgeLen": 0,
+      "uvDeltaLen": 0.1666666641831398,
+      "repeatsPerMetre": 0
+    },
+    {
+      "name": "",
+      "uuid": "54b4ecef-407e-4bd2-84cf-93f69135b9db",
+      "visible": true,
+      "parentName": "",
+      "parentParentName": "",
+      "vmEyeHide": false,
+      "matUuid": "c813da10-4fc7-47b3-8606-cfee5e6f373f",
+      "matName": "",
+      "matMap": false,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "posCount": 49,
+      "worldEdgeLen": 0,
+      "uvDeltaLen": 0.1666666641831398,
+      "repeatsPerMetre": 0
+    },
+    {
+      "name": "",
+      "uuid": "8f999896-b5aa-457f-8e95-bdcb6247b348",
+      "visible": true,
+      "parentName": "",
+      "parentParentName": "",
+      "vmEyeHide": false,
+      "matUuid": "3a625353-291a-4213-9295-b8bebb8dea95",
+      "matName": "",
+      "matMap": false,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "posCount": 49,
+      "worldEdgeLen": 0,
+      "uvDeltaLen": 0.1666666641831398,
+      "repeatsPerMetre": 0
+    },
+    {
+      "name": "",
+      "uuid": "b4448676-31b4-4ed1-bf9c-e823e7fd93ba",
+      "visible": true,
+      "parentName": "",
+      "parentParentName": "",
+      "vmEyeHide": false,
+      "matUuid": "e01ee455-176d-40c2-ae80-c9669797b4c9",
+      "matName": "",
+      "matMap": false,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "posCount": 49,
+      "worldEdgeLen": 0,
+      "uvDeltaLen": 0.1666666641831398,
+      "repeatsPerMetre": 0
+    },
+    {
+      "name": "",
+      "uuid": "d693ae0c-8d46-43a8-bd50-aabbce6bb10e",
+      "visible": true,
+      "parentName": "",
+      "parentParentName": "",
+      "vmEyeHide": false,
+      "matUuid": "d4b491f2-5243-4322-85cf-b9b263978f7b",
+      "matName": "",
+      "matMap": false,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "posCount": 49,
+      "worldEdgeLen": 0,
+      "uvDeltaLen": 0.1666666641831398,
+      "repeatsPerMetre": 0
+    },
+    {
+      "name": "",
+      "uuid": "aa44ea55-9564-48ac-af22-c15a1b82cd00",
+      "visible": true,
+      "parentName": "",
+      "parentParentName": "",
+      "vmEyeHide": false,
+      "matUuid": "72a0409f-b83b-4136-b6d7-55f26e9fa4f2",
+      "matName": "",
+      "matMap": false,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "posCount": 49,
+      "worldEdgeLen": 0,
+      "uvDeltaLen": 0.1666666641831398,
+      "repeatsPerMetre": 0
+    },
+    {
+      "name": "",
+      "uuid": "63130638-8777-4d28-9c74-b2edd715c06d",
+      "visible": true,
+      "parentName": "",
+      "parentParentName": "",
+      "vmEyeHide": false,
+      "matUuid": "5aeaddda-957d-4f11-90ed-5fda86bc672a",
+      "matName": "",
+      "matMap": false,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "posCount": 66,
+      "worldEdgeLen": 0,
+      "uvDeltaLen": 0.10000000521540642,
+      "repeatsPerMetre": 0
+    },
+    {
+      "name": "",
+      "uuid": "18d11067-1c6c-49dc-9c48-81c42057117d",
+      "visible": true,
+      "parentName": "",
+      "parentParentName": "",
+      "vmEyeHide": false,
+      "matUuid": "507fb6f0-fe59-497c-91e9-392636ec2d2a",
+      "matName": "",
+      "matMap": false,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "posCount": 49,
+      "worldEdgeLen": 0,
+      "uvDeltaLen": 0.1666666641831398,
+      "repeatsPerMetre": 0
+    },
+    {
+      "name": "",
+      "uuid": "47782197-c20d-4baf-912a-219c6b5f751a",
+      "visible": true,
+      "parentName": "",
+      "parentParentName": "",
+      "vmEyeHide": false,
+      "matUuid": "d761eb9c-cfdb-4cb2-9c07-cd380cef6e9f",
+      "matName": "",
+      "matMap": false,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "posCount": 49,
+      "worldEdgeLen": 0,
+      "uvDeltaLen": 0.1666666641831398,
+      "repeatsPerMetre": 0
+    },
+    {
+      "name": "",
+      "uuid": "9ca85c2a-300d-496b-97c5-e022a17e080f",
+      "visible": true,
+      "parentName": "",
+      "parentParentName": "",
+      "vmEyeHide": false,
+      "matUuid": "ee2d191f-4cb8-4c89-8349-0ee3bdde6568",
+      "matName": "",
+      "matMap": false,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "posCount": 49,
+      "worldEdgeLen": 0,
+      "uvDeltaLen": 0.1666666641831398,
+      "repeatsPerMetre": 0
+    },
+    {
+      "name": "",
+      "uuid": "2833ee3f-5bd0-46f1-af44-63b939c8545e",
+      "visible": true,
+      "parentName": "",
+      "parentParentName": "",
+      "vmEyeHide": false,
+      "matUuid": "a7e90fe9-3cf1-45bd-a5fd-6ae44cc20b8a",
+      "matName": "",
+      "matMap": false,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "posCount": 49,
+      "worldEdgeLen": 0,
+      "uvDeltaLen": 0.1666666641831398,
+      "repeatsPerMetre": 0
+    },
+    {
+      "name": "",
+      "uuid": "cf6d75c9-b29e-480b-b492-cf9061b5ccdb",
+      "visible": true,
+      "parentName": "",
+      "parentParentName": "",
+      "vmEyeHide": false,
+      "matUuid": "2a89526e-5ec5-46b7-b7ef-50c7217ad83d",
+      "matName": "",
+      "matMap": false,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "posCount": 63,
+      "worldEdgeLen": 0,
+      "uvDeltaLen": 0.125,
+      "repeatsPerMetre": 0
+    },
+    {
+      "name": "",
+      "uuid": "b0e48969-58c8-4a93-8a48-b3c6ed13ffbc",
+      "visible": false,
+      "parentName": "",
+      "parentParentName": "",
+      "vmEyeHide": false,
+      "matUuid": "a1b03e9c-bb38-42bc-a625-62ef9937bf2c",
+      "matName": "",
+      "matMap": false,
+      "scale": {
+        "x": 1.6042398913297802,
+        "y": 1.6042398913297802,
+        "z": 1.6042398913297802
+      },
+      "posCount": 49,
+      "worldEdgeLen": 0,
+      "uvDeltaLen": 0.1666666641831398,
+      "repeatsPerMetre": 0
+    },
+    {
+      "name": "",
+      "uuid": "23194b16-7f38-4084-8e29-fdf4ebe88eaf",
+      "visible": false,
+      "parentName": "",
+      "parentParentName": "",
+      "vmEyeHide": false,
+      "matUuid": "c813da10-4fc7-47b3-8606-cfee5e6f373f",
+      "matName": "",
+      "matMap": false,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "posCount": 49,
+      "worldEdgeLen": 0,
+      "uvDeltaLen": 0.1666666641831398,
+      "repeatsPerMetre": 0
+    },
+    {
+      "name": "",
+      "uuid": "c0ebd5dd-606c-41fc-9f4d-ac420798d09a",
+      "visible": false,
+      "parentName": "",
+      "parentParentName": "",
+      "vmEyeHide": false,
+      "matUuid": "72a0409f-b83b-4136-b6d7-55f26e9fa4f2",
+      "matName": "",
+      "matMap": false,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "posCount": 49,
+      "worldEdgeLen": 0,
+      "uvDeltaLen": 0.1666666641831398,
+      "repeatsPerMetre": 0
+    },
+    {
+      "name": "",
+      "uuid": "8954fed6-75ce-4506-b64d-e52a242e74f6",
+      "visible": false,
+      "parentName": "",
+      "parentParentName": "",
+      "vmEyeHide": false,
+      "matUuid": "72a0409f-b83b-4136-b6d7-55f26e9fa4f2",
+      "matName": "",
+      "matMap": false,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "posCount": 49,
+      "worldEdgeLen": 0,
+      "uvDeltaLen": 0.1666666641831398,
+      "repeatsPerMetre": 0
+    },
+    {
+      "name": "",
+      "uuid": "c545146a-502a-4e8e-bff3-f08f7fbeb430",
+      "visible": false,
+      "parentName": "",
+      "parentParentName": "",
+      "vmEyeHide": false,
+      "matUuid": "d761eb9c-cfdb-4cb2-9c07-cd380cef6e9f",
+      "matName": "",
+      "matMap": false,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "posCount": 49,
+      "worldEdgeLen": 0,
+      "uvDeltaLen": 0.1666666641831398,
+      "repeatsPerMetre": 0
+    },
+    {
+      "name": "",
+      "uuid": "62309452-d059-42b4-bd1a-146433d6a769",
+      "visible": false,
+      "parentName": "",
+      "parentParentName": "",
+      "vmEyeHide": false,
+      "matUuid": "d761eb9c-cfdb-4cb2-9c07-cd380cef6e9f",
+      "matName": "",
+      "matMap": false,
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "posCount": 49,
+      "worldEdgeLen": 0,
+      "uvDeltaLen": 0.1666666641831398,
+      "repeatsPerMetre": 0
+    },
+    {
+      "name": "chapel-glow",
+      "uuid": "9feacc12-d032-4bc5-8cd8-e75aec7b0c3a",
+      "visible": false,
+      "parentName": "",
+      "parentParentName": "",
+      "vmEyeHide": false,
+      "matUuid": "31b614b1-a868-40ff-96a1-6d33fb91bc87",
+      "matName": "",
+      "matMap": false,
+      "scale": {
+        "x": 0.72,
+        "y": 1.2,
+        "z": 0.48
+      },
+      "posCount": 165,
+      "worldEdgeLen": 0,
+      "uvDeltaLen": 0.0714285708963871,
+      "repeatsPerMetre": 0
+    },
+    {
+      "name": "",
+      "uuid": "f556a70f-fa3d-4551-9593-cfe4ea4c3304",
+      "visible": false,
+      "parentName": "marine-idle-props",
+      "parentParentName": "",
+      "vmEyeHide": false,
+      "matUuid": "5952c698-484d-4344-9bee-c0197c514759",
+      "matName": "",
+      "matMap": false,
+      "scale": {
+        "x": 1,
+        "y": 1.8,
+        "z": 1
+      },
+      "posCount": 30,
+      "worldEdgeLen": 0,
+      "uvDeltaLen": 0.20000001043081284,
+      "repeatsPerMetre": 0
+    }
+  ],
+  "weaponsComparison": [
+    {
+      "weapon": "launcher",
+      "equippedShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\review\\GP-20072\\ag-after\\ag-after-launcher-equipped.png",
+      "holsteredShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\review\\GP-20072\\ag-after\\ag-after-launcher-holstered.png"
+    },
+    {
+      "weapon": "m4",
+      "equippedShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\review\\GP-20072\\ag-after\\ag-after-m4-equipped.png",
+      "holsteredShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\review\\GP-20072\\ag-after\\ag-after-m4-holstered.png"
+    },
+    {
+      "weapon": "pistol",
+      "equippedShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\review\\GP-20072\\ag-after\\ag-after-pistol-equipped.png",
+      "holsteredShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\review\\GP-20072\\ag-after\\ag-after-pistol-holstered.png"
+    },
+    {
+      "weapon": "shotgun",
+      "equippedShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\review\\GP-20072\\ag-after\\ag-after-shotgun-equipped.png",
+      "holsteredShot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\review\\GP-20072\\ag-after\\ag-after-shotgun-holstered.png"
+    }
+  ]
+}

@@ -197,3 +197,18 @@
   #cif.armory-only .armory-preview-stage { height:120px; }
   #cif.armory-only .armory-preview-actions button { min-height:26px; }
 }
+
+/* GP-20071: purchasing is part of the Armory panel, sharing its one scroll and Done action. */
+#cif #armoryPanel .armory-catalogue { margin:14px 14px 0; }
+#cif #armoryPanel #shop.armory-inline { display:block; position:static; inset:auto; background:none; z-index:auto; }
+#cif #armoryPanel #shop.armory-inline .card { box-sizing:border-box; width:100%; max-height:none; overflow:visible;
+  padding:14px; clip-path:none; box-shadow:none; background:#1d231a; border:1px solid #cbdcb744; }
+#cif #armoryPanel #shop.armory-inline h2 { font-size:17px; }
+#cif #armoryPanel #shop.armory-inline #shopTabs,
+#cif #armoryPanel #shop.armory-inline #shopSubtabs,
+#cif #armoryPanel #shop.armory-inline .modes { display:none; }
+#cif #armoryPanel #shop.armory-inline #shopList { max-height:none; overflow:visible; padding-right:0; }
+@media(max-width:640px) {
+  #cif #armoryPanel .armory-catalogue { margin:10px 8px 0; }
+  #cif #armoryPanel #shop.armory-inline .card { padding:10px; }
+}

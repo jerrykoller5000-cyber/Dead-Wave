@@ -46,14 +46,23 @@
     const restY = G.p.y, restYaw = yawOf(G.q), restQ = G.q.clone();
     // a gait: speed, cadence (index.html: 9.5 walking, 14 running, rad/s of walkPhase), run weight, sprint, with or without the phase
     const gait = (speed, cad, runW, sprint, withPhase) => { let ph = 0; return (i) => { ph = (ph + dt * cad) % (Math.PI * 2); return { vx: fwd.x * speed, vz: fwd.z * speed, phase: withPhase ? ph : null, run: withPhase ? runW : null, sprint: withPhase ? sprint : null }; }; };
+    // CL-325 (J73: the run "a slightly exaggerated walk motion"): a gun with its own jog (VM_POSES[key].sprint / runBob,
+    // the handguns) runs with the walk's bob runBob times over and the gun up, not lowered and turned down (AG-202 r1's carry,
+    // which the long guns keep)
+    const VPm = await import('/game/viewmodel-poses.js'), PP = VPm.VM_POSES.pistol, JOG = !!PP.sprint, RB = PP.runBob || 1;
+    let walkSpan = null;
     for (const [name, speed, cad, rw, spr, wp] of [['walk', 7.4, 9.5, 0, false, true], ['sprint', 11.8, 14, 1, true, true], ['walk, own clock', 7.4, 9.5, 0, false, false], ['sprint, own clock', 11.8, 14, 1, true, false]]) {
       const g = gait(speed, cad, rw, spr, wp); run(60, g);   // into it
       const r = run(360, g);
       const hx = highShare(r.xs, 6), hy = highShare(r.ys, 6);
       info(name + ': across ' + (span(r.xs) * 100).toFixed(2) + ' cm at ' + peakHz(r.xs).toFixed(2) + ' Hz, up/down ' + (span(r.ys) * 100).toFixed(2) + ' cm at ' + peakHz(r.ys).toFixed(2) + ' Hz; above 6 Hz ' + (hx * 100).toFixed(1) + ' % / ' + (hy * 100).toFixed(1) + ' %');
       ok(hx < 0.05 && hy < 0.05, name + ': no vibration, the bob is the stride\'s (above 6 Hz: ' + (hx * 100).toFixed(1) + ' % across, ' + (hy * 100).toFixed(1) + ' % up/down)');
-      ok(span(r.xs) > 0.008 && span(r.xs) < 0.06, name + ': it moves, side to side ' + (span(r.xs) * 100).toFixed(1) + ' cm (0.8-6)');
-      if (spr && wp) { const dq = new THREE.Quaternion().copy(restQ).invert().multiply(G.q), ang = 2 * Math.acos(Math.min(1, Math.abs(dq.w)));   // AG-202 r1: lowered and canted down, not turned into the middle
+      const cap = spr && JOG ? 0.06 * RB : 0.06;
+      ok(span(r.xs) > 0.008 && span(r.xs) < cap, name + ': it moves, side to side ' + (span(r.xs) * 100).toFixed(1) + ' cm (0.8-' + (cap * 100).toFixed(1) + ')');
+      if (name === 'walk') walkSpan = span(r.xs);
+      if (spr && wp && JOG) { const dq = new THREE.Quaternion().copy(restQ).invert().multiply(G.q), ang = 2 * Math.acos(Math.min(1, Math.abs(dq.w)));
+        ok(G.p.y > restY - 0.04 && G.p.y < restY && ang < 0.25 && Math.abs(wrapA(yawOf(G.q) - restYaw)) < 0.2 && walkSpan && span(r.xs) > 1.3 * walkSpan, 'the run is a jog: the gun a little lower, up and level, not into the middle, its bob bigger than the walk\'s (' + ((G.p.y - restY) * 100).toFixed(1) + ' cm, turned ' + ang.toFixed(2) + ' rad, yaw ' + wrapA(yawOf(G.q) - restYaw).toFixed(2) + ', across ' + (span(r.xs) / (walkSpan || 1)).toFixed(2) + 'x the walk)'); }
+      else if (spr && wp) { const dq = new THREE.Quaternion().copy(restQ).invert().multiply(G.q), ang = 2 * Math.acos(Math.min(1, Math.abs(dq.w)));   // AG-202 r1: lowered and canted down, not turned into the middle
         ok(G.p.y < restY - 0.025 && ang > 0.4 && Math.abs(wrapA(yawOf(G.q) - restYaw)) < 0.2, 'the sprint lowers the gun and tips it down, not into the middle (' + ((G.p.y - restY) * 100).toFixed(1) + ' cm, turned ' + ang.toFixed(2) + ' rad, yaw ' + wrapA(yawOf(G.q) - restYaw).toFixed(2) + ')'); }
       run(60, () => ({ vx: 0, vz: 0 }));
     }

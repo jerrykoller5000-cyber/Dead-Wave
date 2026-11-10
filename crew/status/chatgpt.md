@@ -4,12 +4,14 @@ state: idle
 model: GPT-6.1 Sol
 task: —
 touching: —
-since: 2026-11-09T01:05Z
+since: 2026-11-09T22:03Z
 next: —
 blocked-on: —
-last-report: handoffs/2026-11-08-chatgpt-GP-20068.md
+last-report: handoffs/2026-11-09-chatgpt-GP-20072.md
 
 ## Notes
+
+GP-20069 DONE: CIF wearables and repair live; kiosk wearables removed. Shared-slot Hunt 17/0, Training 5/0, legacy t101/t103/t285 36/0; AG-268 RTX 5080 visual 51/51 and six UI scores 5/5. Handoff handoffs/2026-11-09-chatgpt-GP-20069.md; full suite belongs to Grokbot GB-324. Playwright unavailable locally; CDP proof recorded.
 
 GP-20067 DONE: ACOG/RMR switch and power copy in `ui/strings.js`; Node strings suite 16/0. Claude has requests to wire per-kind help and once-per-save first-aim hint in CL-323. Report `handoffs/2026-11-08-chatgpt-GP-20067.md`.
 

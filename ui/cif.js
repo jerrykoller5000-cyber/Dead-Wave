@@ -31,7 +31,7 @@ export function createCifMenu({root, text, freeCamos, getGear=()=>null}) {
   return {
     prepare() {
       const active = document.activeElement;
-      focus = root.contains(active) ? {camo:active.dataset.camo, option:options.contains(active) ? active.textContent : null} : null;
+      focus = active?.nodeType && root.contains(active) ? {camo:active.dataset.camo, option:options.contains(active) ? active.textContent : null} : null;
       options.replaceChildren();
     },
     refresh({tab, item, current}) {

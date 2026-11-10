@@ -25,6 +25,11 @@ test('an Armory gun purchase teaches the paid purchase step', () => {
   c.handle({ type:'purchase-delivered', cashSpent:180, source:'armory', itemId:'weapon:m4' });
   assert.equal(c.tick(frame({ skulls:0 })).id, 'purchase');
 });
+test('a paid CIF helmet purchase teaches the purchase step', () => {
+  const c = start();
+  c.handle({ type:'purchase-delivered', cashSpent:70, source:'cif', itemId:'gear:helmet' });
+  assert.equal(c.tick(frame({ skulls:0 })).id, 'purchase');
+});
 test('duplicate events never replay a shown prompt; hidden gameplay pauses expiry', () => {
   const c = start(); pickup(c); assert.equal(c.tick(frame()).id, 'pickup');
   for(let i=0;i<20;i++) assert.equal(c.tick(frame({ active:false,dt:1 })),null);

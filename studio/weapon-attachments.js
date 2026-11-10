@@ -41,8 +41,13 @@ export function attachLaserLight(gun, kind, ctx) {
     o.rotation.x = Math.PI / 2; return o;
   };
   const window = (x, y, z, r, which) => {
-    cyl(r * 1.37, 0.005, metal, x, y, z - 0.003, which + 'Bezel');
-    cyl(r, 0.001, lens, x, y, z - 0.0004, which + 'Lens');
+    // A hollow bezel, dark cavity and inset glass. A solid cylinder behind the
+    // glass used to make the front look like a painted-on circle at oblique angles.
+    const wall = put(new THREE.CylinderGeometry(r * 1.37, r * 1.37, 0.004, 20, 1, true), metal, x, y, z - 0.0025, which + 'BezelWall');
+    wall.rotation.x = Math.PI / 2;
+    put(new THREE.RingGeometry(r * 0.98, r * 1.37, 20), metal, x, y, z - 0.0004, which + 'Bezel');
+    cyl(r, 0.0008, gunDark, x, y, z - 0.0024, which + 'Cavity');
+    cyl(r * 0.91, 0.0006, lens, x, y, z - 0.0016, which + 'Lens');
     return new THREE.Vector3(spec.x + x, spec.y + y, spec.z + z + 0.002);
   };
   const L = spec.length;

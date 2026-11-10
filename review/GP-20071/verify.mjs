@@ -1,0 +1,55 @@
+import assert from 'node:assert/strict';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { serve } from '../../tools/serve.mjs';
+import { launch } from '../../tools/cdp.mjs';
+
+if (!process.env.DW_GAME_TEST_TOKEN) throw new Error('use the shared game-test slot');
+const root = path.resolve(fileURLToPath(new URL('../..', import.meta.url)));
+const server = await serve(root, 0);
+const browser = await launch({ headless: false, args: ['--disable-features=CalculateNativeWinOcclusion', '--window-size=1280,720'] });
+try {
+  const page = await browser.newPage({ width: 1280, height: 720 });
+  await page.goto(`${server.origin}/index.html?debug=1`);
+  assert(await page.waitFor('!!window.TT && window.DWLoad?.snapshot().state === "ready"', { timeout: 60000 }), 'game loaded');
+  await page.evaluate('DWOpening.dismissForTesting()');
+  assert(await page.waitFor('document.getElementById("opening").hidden', { timeout: 15000 }), 'opening dismissed');
+  await page.evaluate(`(() => { document.querySelector('#playerName').value = 'Armory J91'; document.querySelector('#modeHunt').click(); })()`);
+  assert(await page.waitFor('TT.getPhase() === "prep" && !document.body.classList.contains("deploying")', { timeout: 60000 }), 'prep started');
+  await page.evaluate(`TT.addCash(200); TT.setMagazinesDbg('pistol', 0, []); TT.openMenuDbg('armory')`);
+  assert(await page.waitFor('document.querySelector("#armoryPanel #shop.armory-inline #shopList [data-ammo=pistol]")', { timeout: 15000 }), 'catalogue shares Armory menu');
+  const before = await page.evaluate(`({ prompt: document.querySelector('#reloadPrompt').textContent, tabs: document.querySelector('#armoryPanel #shopTabs').children.length, headings: [...document.querySelectorAll('#armoryPanel #shopList .shop-section')].map(e => e.textContent), row: !!document.querySelector('#armoryPanel #shopList [data-ammo="pistol"]'), card: document.querySelector('#armoryPanel').scrollWidth <= document.querySelector('#armoryPanel').clientWidth + 1 })`);
+  assert.match(before.prompt, /No ammo/i);
+  assert.equal(before.tabs, 0, 'no separate category tab');
+  assert(before.headings.length >= 4, 'guns, ammo, attachments and builds are on one page');
+  assert.match(before.headings[0], /ammo/i, 'ammo is first for a dry gun');
+  assert(before.card, 'desktop menu has no horizontal overflow');
+  await page.screenshot(path.join(root, 'review/GP-20071/before-1280.png'));
+  await page.evaluate(`document.querySelector('#armoryPanel #shopList [data-ammo="pistol"] button').click()`);
+  const bought = await page.evaluate(`({ prompt: document.querySelector('#reloadPrompt').textContent, spare: TT.magazinesDbg('pistol').spare.map(m => m.rounds), cash: TT.getBank() })`);
+  assert.match(bought.prompt, /Reload/i, 'NO AMMO clears immediately');
+  assert(bought.spare.length > 0, 'magazine is available');
+  await page.screenshot(path.join(root, 'review/GP-20071/bought-1280.png'));
+  await page.evaluate(`document.querySelector('#armoryPanel .armory-actions button:last-child').click()`);
+  assert(await page.waitFor('!document.getElementById("cif").classList.contains("show")', { timeout: 10000 }), 'Done closes Armory');
+  await page.evaluate(`document.body.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyR', key: 'r', bubbles: true }))`);
+  const reload = await page.evaluate('TT.getReloadDbg()');
+  assert(reload.timer > 0 && reload.weapon === 'pistol', 'R reloads after Done');
+  await page.evaluate('TT.openShop(true)');
+  assert(await page.waitFor('document.getElementById("shop").classList.contains("show")', { timeout: 10000 }), 'kiosk still opens');
+  const kiosk = await page.evaluate(`({ parent: document.querySelector('#shop').parentElement.id, tabs: document.querySelector('#shopTabs').children.length })`);
+  assert.notEqual(kiosk.parent, 'armoryPanel');
+  assert(kiosk.tabs > 0);
+  await page.evaluate('TT.closeShop()');
+  await page.setViewport(390, 844);
+  await page.evaluate('TT.openMenuDbg("armory")');
+  assert(await page.waitFor('document.querySelector("#armoryPanel #shop.armory-inline")', { timeout: 10000 }), 'mobile Armory opens');
+  const mobile = await page.evaluate(`({ panel: document.querySelector('#armoryPanel').scrollWidth <= document.querySelector('#armoryPanel').clientWidth + 1, viewport: document.documentElement.scrollWidth <= innerWidth + 1 })`);
+  assert(mobile.panel && mobile.viewport, 'mobile menu has no horizontal overflow');
+  await page.screenshot(path.join(root, 'review/GP-20071/mobile-390.png'));
+  assert.equal(page.errors.length, 0, page.errors.join('\n'));
+  console.log('PASS GP-20071: one Armory menu, gun/ammo/attachment/build stock, immediate reload prompt, Done then reload, kiosk unchanged, 1280/390 layout, no page errors');
+} finally {
+  await browser.close();
+  await server.close();
+}

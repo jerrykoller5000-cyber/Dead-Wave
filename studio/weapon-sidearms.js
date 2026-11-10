@@ -132,7 +132,7 @@ export function makePistolModel(ctx) {
   K.slab([[-0.14, -0.044], [0.252, -0.044], [0.26, -0.034], [0.26, 0.012], [0.254, 0.020], [0.242, 0.024], [-0.126, 0.024], [-0.134, 0.018], [-0.14, 0.010]], 0.046, gunBody, { bevel: 0.005, segs: 3, parent: slide });
   // GP-20057 (G17 manual): the removable rear slide cover plate and its recessed firing-pin channel.
   K.box(0.040, 0.044, 0.002, gunMid, 0, -0.010, -0.1405, 0, 0, 0, slide, 0.001);
-  K.box(0.012, 0.008, 0.001, gunDark, 0, -0.016, -0.142, 0, 0, 0, slide, 0);
+  K.box(0.012, 0.008, 0.001, gunDark, 0, -0.016, -0.1418, 0, 0, 0, slide, 0);   // J72: sink into the rear cover; touching faces flickered
   for (let i = 0; i < 8; i++) for (const sx of [-1, 1]) K.slab([[-.128 + i * .009, -.024], [-.123 + i * .009, -.024], [-.123 + i * .009, .016], [-.128 + i * .009, .016]], .0014, gunDark, { x: sx * .0232, bevel: .0005, parent: slide });
   for (let i = 0; i < 5; i++) for (const sx of [-1, 1]) K.slab([[.2 + i * .009, -.022], [.205 + i * .009, -.022], [.205 + i * .009, .014], [.2 + i * .009, .014]], .0014, gunDark, { x: sx * .0232, bevel: .0005, parent: slide });
   // GB-180: dovetailed sights. Rear: a dovetail base across the slide and a U notch (two ears), not a bare block.
@@ -275,10 +275,11 @@ export function makePistolModel(ctx) {
     D.screw(gun, sx * 0.0268, -0.052, -0.018, { axis: 'x', side: sx, r: 0.0025, head: 0.0012, kind: 'slot' });
     D.screw(gun, sx * 0.0268, -0.108, -0.026, { axis: 'x', side: sx, r: 0.0025, head: 0.0012, kind: 'slot' });
   }
-  // Deeper cut under the existing slide serrations so they read machined, not painted on.
+  // J72: the extra ribs sit in the gaps between the existing serrations; their old
+  // centre was almost coplanar with every dark strip and shimmered at the rear.
   for (const sx of [-1, 1]) {
-    D.ribs(slide, { x: sx * 0.0228, y: -0.004, z: -0.095, axis: 'x', side: sx, along: 'z', count: 8, pitch: 0.009, w: 0.017, h: 0.0008, t: 0.0011, mat: D.mats.dark });
-    D.ribs(slide, { x: sx * 0.0228, y: -0.004, z: 0.220, axis: 'x', side: sx, along: 'z', count: 5, pitch: 0.009, w: 0.015, h: 0.0008, t: 0.0011, mat: D.mats.dark });
+    D.ribs(slide, { x: sx * 0.0228, y: -0.004, z: -0.0905, axis: 'x', side: sx, along: 'z', count: 8, pitch: 0.009, w: 0.017, h: 0.0008, t: 0.0011, mat: D.mats.dark });
+    D.ribs(slide, { x: sx * 0.0228, y: -0.004, z: 0.2245, axis: 'x', side: sx, along: 'z', count: 5, pitch: 0.009, w: 0.015, h: 0.0008, t: 0.0011, mat: D.mats.dark });
   }
 
   gunEffects(gun, new THREE.Vector3(0, 0.05, 0.32), 0.045, 2.5, 6, 0.005);
@@ -329,16 +330,16 @@ export function makeRevolverModel(ctx) {
   // (the camo paints over all of them as over any gun; these are the issue colours).
   const blued = new THREE.MeshStandardMaterial({ color: 0x2c323c, metalness: 0.8, roughness: 0.27 });
   const caseCol = new THREE.MeshStandardMaterial({ color: 0x4a4744, metalness: 0.82, roughness: 0.32 });
-  const walnut = new THREE.MeshStandardMaterial({ color: 0x6f3a1d, metalness: 0.02, roughness: 0.32 });
-  const walnutDark = new THREE.MeshStandardMaterial({ color: 0x3e1e0d, metalness: 0.02, roughness: 0.5 });
+  const walnut = new THREE.MeshStandardMaterial({ color: 0x6f3a1d, metalness: 0.02, roughness: 0.72 });
+  const walnutDark = new THREE.MeshStandardMaterial({ color: 0x3e1e0d, metalness: 0.02, roughness: 0.82 });
   const nickel = new THREE.MeshStandardMaterial({ color: 0xc9c6bd, metalness: 0.9, roughness: 0.22 });
   const BY = 0.083, MZ = 0.332;                      // the bore's height and the muzzle
-  const CY = 0.057, CZ = 0.02, CR = 0.039, CH = 0.037, RC = 0.026;   // the cylinder: its axis, radius, half length, the chambers' circle
+  const CY = 0.057, CZ = 0.02, CR = 0.044, CH = 0.039, RC = 0.026;   // larger J78 cylinder; the chamber circle still meets the bore
 
   // --- Frame (blued). The rear: the recoil-shield block and the hammer's housing, its back running down into the grip.
   K.slab([[-.021, .100], [-.050, .109], [-.064, .104], [-.074, .093], [-.080, .076], [-.082, .054], [-.080, .032], [-.075, .014], [-.066, .001],
     [-.046, -.005], [-.021, -.004]], .064, blued, { bevel: .011, segs: 4 });
-  K.lathe([[0, -.028], [.040, -.028], [.0415, -.025], [.040, -.0205], [0, -.0205]], blued, { y: CY, z: 0, seg: 32 });   // the recoil shield behind the cylinder
+  K.lathe([[0, -.028], [.044, -.028], [.046, -.025], [.044, -.0205], [0, -.0205]], blued, { y: CY, z: 0, seg: 32 });   // the recoil shield behind the cylinder
   // the top strap over the cylinder, from the rear sight to the barrel's frame
   K.slab([[-.056, .1095], [-.044, .1145], [.064, .1145], [.074, .112], [.074, .0975], [-.044, .0975]], .036, blued, { bevel: .003, segs: 3 });
   // the frame's front, round the barrel's shank, and its lug down to the crane's seat
@@ -349,6 +350,25 @@ export function makeRevolverModel(ctx) {
   // the crane on the gun's left (-x), at the window's front, and its screw
   K.slab([[.058, .040], [.072, .040], [.072, .012], [.058, .016]], .006, blued, { x: -.0305, bevel: .0015 });
   D.screw(gun, -0.0335, 0.026, 0.065, { axis: 'x', side: -1, r: 0.0028, head: 0.0014, kind: 'slot' });
+  // J78: an articulated yoke from the fixed front-left pivot to the cylinder's
+  // front hub. At rest the arm folds inside the frame; CL-326 can rotate this
+  // group +2.13 rad about Y as the cylinder swings to gun-local -X.
+  // CL-326 (J78): the arm lies along the group's own +y (from the pin to the hub), so the game can aim the group at the
+  // cylinder's front hub as it swings and stretch it to reach (scale.y); crane.userData.len is its length at rest.
+  const crane = K.group(-0.043, 0.026, 0.090); crane.name = 'revolver-crane';
+  const craneEnd = new THREE.Vector3(0.043, 0.031, -0.031), craneLen = craneEnd.length();
+  crane.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), craneEnd.clone().normalize());
+  const craneArm = new THREE.Mesh(new THREE.BoxGeometry(0.010, craneLen, 0.013), blued);
+  craneArm.name = 'swinging yoke arm'; craneArm.position.set(0, craneLen / 2, 0);
+  craneArm.castShadow = craneArm.receiveShadow = true; crane.add(craneArm);
+  { const hub = new THREE.Mesh(new THREE.SphereGeometry(0.0085, 10, 8), blued); hub.position.set(0, craneLen, 0); hub.castShadow = true; crane.add(hub); }
+  crane.userData.len = craneLen; crane.userData.baseQuat = crane.quaternion.clone();
+  // CL-326 (J78): the hinge on the frame: the pin through two ears on the frame's front left, the arm's eye between them
+  // (the pin stood 7 mm off the frame's side with nothing to it: "no obvious way that it is attached")
+  K.cyl(0.0068, 0.0068, 0.032, caseCol, -0.043, 0.026, 0.090, null, 12, 'y');
+  for (const ey of [0.0135, 0.0385]) K.box(0.019, 0.007, 0.018, blued, -0.0375, ey, 0.090, 0, 0, 0, null, 0.002);
+  gun.userData.crane = crane;
+  gun.userData.baseCraneRot = crane.rotation.clone();
   // the side plate's outline and its screws on the gun's right (+x); the thumbpiece latch on its left (-x)
   for (const [y, z, x] of [[0.088, -0.061, 0.032], [0.028, -0.064, 0.032], [0.006, -0.034, 0.032], [0.006, 0.07, 0.030]]) D.screw(gun, x, y, z, { axis: 'x', side: 1, r: 0.0027, head: 0.0014, kind: 'slot' });
   D.groove(gun, { x: 0.032, y: 0.093, z: -0.044, axis: 'x', side: 1, along: 'z', len: 0.036, w: 0.0007 });
@@ -379,12 +399,34 @@ export function makeRevolverModel(ctx) {
   // with its knurled head on the cylinder's axis (it swings out with it).
   const cylinder = K.group(0, CY, CZ);
   revolverCylinder(THREE, cylinder, blued, CR, -CH, CH, 0.0058);
+  const chamberRounds = [], chamberNoses = [];
   for (let i = 0; i < 6; i++) {
     const a = Math.PI / 6 + i * Math.PI / 3;   // a chamber at the top, on the bore (y 0.083)
-    K.disc(0.0088, gunDark, Math.cos(a) * RC, Math.sin(a) * RC, -CH - 0.0005, Math.PI, cylinder, 16);
-    K.disc(0.0092, gunDark, Math.cos(a) * RC, Math.sin(a) * RC, CH + 0.0005, 0, cylinder, 16);
+    const rx = Math.cos(a) * RC, ry = Math.sin(a) * RC;
+    K.disc(0.0088, gunDark, rx, ry, -CH - 0.0005, Math.PI, cylinder, 16);
+    K.disc(0.0092, gunDark, rx, ry, CH + 0.0005, 0, cylinder, 16);
+    const round = new THREE.Group(); round.name = `chamber-round-${i}`;
+    round.position.set(rx, ry, 0);
+    K.cyl(0.0076, 0.0076, 0.048, brassMat, 0, 0, -0.008, round, 12);
+    K.disc(0.0077, brassMat, 0, 0, -CH - 0.0015, Math.PI, round, 16);
+    K.disc(0.0023, gunDark, 0, 0, -CH - 0.0018, Math.PI, round, 10);
+    chamberNoses.push(K.cyl(0.0068, 0.001, 0.012, nickel, 0, 0, 0.024, round, 12));   // CL-326: the bullet, gone from a fired chamber
+    cylinder.add(round); chamberRounds.push(round);
     K.box(0.0012, 0.0045, 0.006, gunDark, Math.cos(a) * (CR - 0.0002), Math.sin(a) * (CR - 0.0002), -CH + 0.012, 0, 0, a, cylinder, 0.0003);   // the stop notch
   }
+  gun.userData.chamberRounds = chamberRounds; // CL-326 can hide each live round as its chamber fires.
+  gun.userData.chamberNoses = chamberNoses;
+  // CL-326 (J78): the unfired rounds he tips out into his palm on a reload (first person places them; hidden otherwise)
+  const palmRounds = new THREE.Group(); palmRounds.name = 'palm-rounds'; palmRounds.visible = false;
+  // one mesh a round (the rim, the case and the jacketed bullet in one lathe along z; t38's draw budget)
+  const palmGeo = new THREE.LatheGeometry([[0, -0.025], [0.0092, -0.025], [0.0092, -0.021], [0.0077, -0.021], [0.0077, 0.021], [0.0068, 0.023], [0.004, 0.031], [0.0012, 0.035], [0, 0.035]].map(([r, y]) => new THREE.Vector2(r, y)), 10);
+  palmGeo.rotateX(Math.PI / 2);
+  for (let i = 0; i < 6; i++) {   // a group a round: the model's finishing merges one material's meshes inside a group
+    const r = new THREE.Group(); r.name = `palm-round-${i}`; r.add(new THREE.Mesh(palmGeo, brassMat));
+    r.visible = false; palmRounds.add(r);
+  }
+  gun.add(palmRounds);
+  gun.userData.palmRounds = palmRounds;
   K.cyl(0.0042, 0.0042, 0.182, blued, 0, 0, 0.121, cylinder, 12);   // the ejector rod (local 0.030 to 0.212)
   K.cyl(0.0058, 0.0058, 0.014, blued, 0, 0, 0.219, cylinder, 14);   // its head: the front at gun z 0.246, two inches short of the muzzle
   for (const z of [0.215, 0.219, 0.223]) K.cyl(0.0060, 0.0060, 0.0012, gunDark, 0, 0, z, cylinder, 14);   // the knurl
@@ -428,8 +470,10 @@ export function makeRevolverModel(ctx) {
   speedloader.add(loaderRing);
   for (let i = 0; i < 6; i++) {
     const a = Math.PI / 6 + i * Math.PI / 3;
-    const rnd = new THREE.Mesh(new THREE.CylinderGeometry(0.0074, 0.0078, 0.034, 8), brassMat);
-    rnd.rotation.x = Math.PI / 2;
+    // CL-326: a group a round (they were merged into one mesh, so a part-full loader could not show its count)
+    const rnd = new THREE.Group(); rnd.name = `loader-round-${i}`;
+    const rm = new THREE.Mesh(new THREE.CylinderGeometry(0.0074, 0.0078, 0.034, 8), brassMat);
+    rm.rotation.x = Math.PI / 2; rnd.add(rm);
     rnd.position.set(Math.cos(a) * RC, Math.sin(a) * RC, 0);
     speedloader.add(rnd);
   }
@@ -441,7 +485,8 @@ export function makeRevolverModel(ctx) {
   gun.userData.reloadParts = Object.assign(gun.userData.reloadParts || {}, {
     empties: { restPos: [0, 0, 0], restRot: [0, 0, 0], visibleAtRest: false, chamberR: RC, chamberY0: CY, chamberZ0: CZ, note: 'six casings; show on eject, then fall' },
     speedloader: { restPos: [-0.02, CY, CZ], restRot: [0, 0, 0], visibleAtRest: false, note: 'into the open cylinder; hide at rest' },
-    cylinder: { restPos: [0, CY, CZ], swing: gun.userData.cylinderSwing, pairReload: gun.userData.pairReload }
+    cylinder: { restPos: [0, CY, CZ], swing: gun.userData.cylinderSwing, pairReload: gun.userData.pairReload },
+    crane: { restPos: [-0.043, 0.026, 0.090], hub: [0, 0, CH], note: 'CL-326: aimed from its pin at the cylinder\'s front hub (cylinder-local hub) every frame, scale.y to reach' }
   });
 
   // --- Hammer (case-coloured, cocks and falls about the same pivot): the body in the frame's slot, the wide target spur
@@ -462,7 +507,9 @@ export function makeRevolverModel(ctx) {
   // and the toe's flare; raked back like the picture's (its front strap ~115 degrees to the bore: every point below the
   // frame's bottom slides back 0.27 of its depth, so the palm is at (0, -0.07, -0.059), VM_SOCKETS/WEAPON_HOLD follow);
   // a smooth border round a checkered panel on each side, the plain medallion high at the back and the grip screw.
-  const RK = 0.27, sh = ([z, y]) => [z + Math.min(0, y) * RK, y];
+  // J78: keep the upper palm and trigger reach where the hands meet it, but shorten the
+  // oversized lower target stock. The cylinder/frame now read as the dominant mass.
+  const RK = 0.27, sh = ([z, y]) => [z + Math.min(0, y) * RK, y < -0.07 ? -0.07 + (y + 0.07) * 0.72 : y];
   K.slab([[.014, -.006], [.010, -.030], [.004, -.060], [-.002, -.090], [-.006, -.118], [-.006, -.140], [-.002, -.158], [-.006, -.172], [-.018, -.180],
     [-.045, -.183], [-.075, -.181], [-.094, -.174], [-.102, -.160], [-.100, -.135], [-.094, -.105], [-.088, -.075], [-.084, -.045], [-.084, -.015],
     [-.086, .010], [-.082, .026], [-.072, .032], [-.060, .020], [-.042, .005], [-.017, -.002]].map(sh), .066, walnut, { bevel: .010, segs: 4 });

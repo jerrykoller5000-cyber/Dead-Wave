@@ -163,7 +163,7 @@ export function makeM4Model(ctx) {
   ventedSleeve(THREE, gun, gunMid, { z0: 0.21, z1: 0.70, radius: 0.03, wall: 0.004, y: 0.02, faces: 12,
     slots: [[0.238, 0.286], [0.309, 0.357], [0.38, 0.428], [0.451, 0.499], [0.522, 0.57], [0.593, 0.641], [0.652, 0.68]], ventFaces: [1, 4, 7, 10] });
   K.lathe([[0.022, 0.692], [0.03, 0.692], [0.03, 0.70], [0.027, 0.706], [0.022, 0.706]], gunBody, { y: 0.02, seg: 12, phase: Math.PI / 12 });   // the front cap
-  K.box(0.024, 0.012, 0.49, gunMid, 0, 0.051, 0.455, 0, 0, 0, null, 0.003);   // the rail's riser
+  K.box(0.024, 0.035, 0.49, gunMid, 0, 0.0625, 0.455, 0, 0, 0, null, 0.003); // continuous web from sleeve to top rail
   K.rail(0.49, 0, 0.085, 0.455, null, 0.031);
   for (const sx of [-1, 1]) K.rail(0.49, sx * 0.033, 0.02, 0.455, null, 0.034, sx);
   K.rail(0.49, 0, -0.013, 0.455, null, 0.031, 2);
@@ -257,14 +257,17 @@ export function makeAkModel(ctx) {
   const K = gunKit(gun);
   const D = gunDetail(ctx);
   // CL-311 (D-121, the fidelity upgrade; AG-229: ours 58 % wider than the reference): an AKM at an AKM's proportions.
-  // Builder's units (x 0.78 to metres): the stamped receiver 36 mm wide and 44 mm tall on its sides, the dust cover's
+  // Builder's units (x 0.78 to metres): the stamped receiver 36 mm wide and 44 mm tall on its sides before the deeper J85 lower, the dust cover's
   // round top 23 mm over it, the magazine 27 mm, the lower handguard 44 mm, the grip 33 mm, the butt 41 mm; the bore at
-  // y -0.005 as before, the gas tube 20 mm over it. The grip's centre line, the support point under the lower handguard
-  // and the stock's butt stay where the hold has them. Real-right controls (the selector, the charging handle) are on +x:
+  // y -0.005 as before, the gas tube 20 mm over it. The grip's centre line and support point under the lower handguard
+  // stay where the hold has them; J85 shortens the butt. Real-right controls (the selector, the charging handle) are on +x:
   // the mirrored first-person view shows +x on the right (docs/fps/fidelity.md).
   const HW = 0.023;
   // Receiver: flat stamped sides, the rear tang falling to the stock, the front trunnion's seam and its rivets.
   K.slab([[-0.225, 0.028], [-0.225, -0.018], [-0.2, -0.028], [0.252, -0.028], [0.252, 0.028]], 2 * HW, gunBody, { bevel: 0.0025, segs: 2 });
+  // J85: the lower stamping has real depth around the magazine well instead of
+  // reading as a pencil-thin line above a full-size magazine and pistol grip.
+  K.slab([[-0.11, -0.026], [0.252, -0.026], [0.252, -0.039], [0.18, -0.047], [0.07, -0.047], [-0.065, -0.039], [-0.11, -0.031]], 2 * HW, gunBody, { bevel: 0.0025, segs: 2 });
   for (const sx of [-1, 1]) {
     for (const [ry, rz] of [[0.012, 0.19], [-0.012, 0.19], [0.0, 0.232], [-0.012, -0.165], [0.012, -0.205]]) D.rivet(gun, sx * HW, ry, rz, { axis: 'x', side: sx, r: 0.0032 });   // the trunnions' rivets
     for (const rz of [-0.04, 0.02]) D.rivet(gun, sx * HW, -0.02, rz, { axis: 'x', side: sx, r: 0.0028 });   // the trigger guard's
@@ -351,6 +354,9 @@ export function makeAkModel(ctx) {
     K.slab(gunBand([[-0.396, -0.066], [-0.451, -0.079], [-0.536, -0.096]], 0.0011), 0.002, woodDark, { x: sx * 0.023, bevel: 0, parent: stock });
   }
   K.tor(0.012, 0.0035, gunDark, 0, -0.122, -0.45, 0, Math.PI / 2, 0, stock);
+  // J85: shorten only the butt behind the receiver joint; the grip and reload datums stay put.
+  stock.scale.z = 0.77;
+  stock.position.z = -0.225 * (1 - stock.scale.z);
   gun.userData.fpStock = stock;
   // Handguards: the lower with its palm swell and finger grooves, the upper over the gas tube, the steel bands and their latches.
   K.slab([[0.244, 0.012], [0.53, 0.012], [0.535, -0.01], [0.53, -0.04], [0.45, -0.052], [0.33, -0.053], [0.262, -0.047], [0.244, -0.034]], 0.056, woodMat, { bevel: 0.01, segs: 3 });
@@ -362,7 +368,7 @@ export function makeAkModel(ctx) {
   for (const sx of [-1, 1]) for (const z of [0.3, 0.36, 0.42]) D.vents(gun, { x: sx * 0.02, y: 0.028, z, axis: 'x', side: sx, along: 'y', count: 1, w: 0.014, len: 0.006, deep: 0.002 });   // its vents
   for (const z of [0.236, 0.512]) { K.box(0.064, 0.064, 0.014, gunDark, 0, -0.004, z, 0, 0, 0, null, 0.003); D.screw(gun, 0.032, -0.004, z, { axis: 'x', side: 1, r: 0.0025, kind: 'slot' }); }   // the bands
   K.box(0.012, 0.008, 0.014, gunDark, 0.03, 0.014, 0.512, 0, 0, 0, null, 0.001);   // the front band's latch
-  K.lathe([[0, 0.42], [0.0095, 0.42], [0.0095, 0.66], [0, 0.66]], gunDark, { y: 0.021, seg: 10 });   // the gas tube on to the gas block
+  K.lathe([[0, 0.42], [0.0095, 0.42], [0.0095, 0.61], [0, 0.61]], gunDark, { y: 0.021, seg: 10 });   // the gas tube on to the gas block
   K.lathe([[0, 0.24], [0.0095, 0.24], [0.0095, 0.43], [0, 0.43]], gunAccent, { y: 0.021, seg: 10 });
   for (const sx of [-1, 1]) for (const z of [0.275, 0.325, 0.375, 0.425]) K.box(0.003, 0.006, 0.014, gunDark, sx * 0.0095, 0.021, z, 0, 0, 0, null, 0.001);   // the tube's vent holes' lips
   K.cyl(0.0035, 0.0035, 0.034, gunAccent, 0, 0.027, 0.47, null, 8, 'x');   // the upper handguard's retainer
@@ -370,23 +376,23 @@ export function makeAkModel(ctx) {
   K.cyl(0.005, 0.005, 0.004, gunDark, 0.02, 0.047, 0.236, null, 10, 'x');
   K.slab(gunBand([[0.235, 0.047], [0.258, 0.052], [0.276, 0.061]], 0.0025), 0.003, gunMid, { x: 0.022, bevel: 0.0007 });
   K.box(0.007, 0.005, 0.006, gunDark, 0.023, 0.061, 0.276, 0, 0, 0, null, 0.001);
-  K.slab([[0.655, 0.04], [0.705, 0.036], [0.705, -0.02], [0.655, -0.022]], 0.03, gunMid, { bevel: 0.003 });   // the gas block
-  D.pin(gun, 0, 0.012, 0.68, { axis: 'x', len: 0.03, r: 0.002 });
+  K.slab([[0.595, 0.04], [0.645, 0.036], [0.645, -0.02], [0.595, -0.022]], 0.03, gunMid, { bevel: 0.003 });   // the gas block
+  D.pin(gun, 0, 0.012, 0.62, { axis: 'x', len: 0.03, r: 0.002 });
   // Barrel and cleaning rod; the front sight tower with its hood; the bayonet lug; the slant brake. (GB-259: the post's tip at the sight line.)
-  K.lathe([[0, 0.5], [0.0125, 0.5], [0.0125, 0.6], [0.011, 0.608], [0.011, 0.92], [0, 0.92]], gunAccent, { y: -0.005, seg: 12 });
-  K.lathe([[0, 0.53], [0.003, 0.53], [0.003, 0.832], [0.005, 0.836], [0.005, 0.846], [0, 0.846]], gunDark, { y: -0.026, seg: 6 });
-  K.slab([[0.818, -0.024], [0.862, -0.024], [0.858, 0.036], [0.826, 0.036]], 0.026, gunDark, { bevel: 0.003 });
-  K.tor(0.018, 0.0045, gunDark, 0, 0.062, 0.84, 0, 0, 0, null, Math.PI, 10);                          // the hood
-  for (const sx of [-1, 1]) K.box(0.005, 0.028, 0.01, gunDark, sx * 0.018, 0.048, 0.84);           // its ears
-  K.box(0.005, 0.038, 0.005, gunDark, 0, 0.0555, 0.84);                                                  // the post: its tip at 0.0745
+  K.lathe([[0, 0.5], [0.0125, 0.5], [0.0125, 0.6], [0.011, 0.608], [0.011, 0.755], [0, 0.755]], gunAccent, { y: -0.005, seg: 12 });
+  K.lathe([[0, 0.53], [0.003, 0.53], [0.003, 0.715], [0.005, 0.719], [0.005, 0.729], [0, 0.729]], gunDark, { y: -0.026, seg: 6 });
+  K.slab([[0.701, -0.024], [0.745, -0.024], [0.741, 0.036], [0.709, 0.036]], 0.026, gunDark, { bevel: 0.003 });
+  K.tor(0.018, 0.0045, gunDark, 0, 0.062, 0.723, 0, 0, 0, null, Math.PI, 10);                          // the hood
+  for (const sx of [-1, 1]) K.box(0.005, 0.028, 0.01, gunDark, sx * 0.018, 0.048, 0.723);           // its ears
+  K.box(0.005, 0.038, 0.005, gunDark, 0, 0.0555, 0.723);                                                  // the post: its tip at 0.0745
   // Windage drum through the block, and a threaded post base below the existing sight tip.
-  K.cyl(0.009, 0.009, 0.032, gunMid, 0, 0.038, 0.84, null, 12, 'x');
-  K.cyl(0.004, 0.004, 0.008, gunAccent, 0, 0.043, 0.84, null, 10, 'y');
-  K.box(0.018, 0.016, 0.044, gunDark, 0, -0.024, 0.82);                                                  // the bayonet lug
-  K.lathe([[0, 0.918], [0.014, 0.918], [0.014, 0.988], [0.012, 0.994], [0.0065, 0.994], [0.0065, 0.985], [0, 0.985]], gunDark, { y: -0.005, seg: 12 });
-  K.box(0.019, 0.008, 0.036, gunRubber, 0, 0.009, 0.965, -0.35);   // the slant brake's cut
-  K.cyl(0.0035, 0.0035, 0.019, gunMid, 0, 0.009, 0.916, null, 8, 'z');   // spring detent under the brake's rear edge
-  K.box(0.008, 0.004, 0.007, gunAccent, 0, 0.01, 0.924, 0, 0, 0, null, 0.001);   // the detent nose
+  K.cyl(0.009, 0.009, 0.032, gunMid, 0, 0.038, 0.723, null, 12, 'x');
+  K.cyl(0.004, 0.004, 0.008, gunAccent, 0, 0.043, 0.723, null, 10, 'y');
+  K.box(0.018, 0.016, 0.044, gunDark, 0, -0.024, 0.703);                                                  // the bayonet lug
+  K.lathe([[0, 0.753], [0.014, 0.753], [0.014, 0.823], [0.012, 0.829], [0.0065, 0.829], [0.0065, 0.820], [0, 0.820]], gunDark, { y: -0.005, seg: 12 });
+  K.box(0.019, 0.008, 0.036, gunRubber, 0, 0.009, 0.800, -0.35);   // the slant brake's cut
+  K.cyl(0.0035, 0.0035, 0.019, gunMid, 0, 0.009, 0.751, null, 8, 'z');   // spring detent under the brake's rear edge
+  K.box(0.008, 0.004, 0.007, gunAccent, 0, 0.01, 0.759, 0, 0, 0, null, 0.001);   // the detent nose
   // Banana mag: the deep curve, three pressed ribs down each side, the floorplate; 27 mm across now, its top at the well.
   const mag = K.group(0, -0.04, 0.04);
   const magB = profileCurve([-0.046, 0.012], [-0.04, -0.13], [0.052, -0.258], 7), magF = profileCurve([0.056, 0.012], [0.066, -0.11], [0.156, -0.232], 7);
@@ -402,9 +408,9 @@ export function makeAkModel(ctx) {
   gun.userData.mag = mag;
   gun.userData.baseMagPos = mag.position.clone();
   gun.userData.baseMagRot = mag.rotation.clone();
-  gunEffects(gun, new THREE.Vector3(0, -0.005, 1.02), 0.065, 3.5, 8);
+  gunEffects(gun, new THREE.Vector3(0, -0.005, 0.855), 0.065, 3.5, 8);
   gun.userData.laser.position.set(0, -0.005, 5);
-  gun.userData.laserBaseZ = 1;
+  gun.userData.laserBaseZ = 0.835;
   gun.userData.barrelAssembly = null;
   gun.userData.slide = null;
   gunSuppressor(gun, K, 'ak');   // CL-95
@@ -467,8 +473,12 @@ export function makeAa12Model(ctx) {
     face.position.z = zf - 0.008; claw.position.z = zf - 0.002;
   };
   K.box(0.004, 0.014, 0.26, gunRubber, -PX - 0.0003, 0.055, 0.025, 0, 0, 0, null, 0.002);
-  K.box(0.022, 0.022, 0.035, gunDark, -PX - 0.008, 0.05, 0.18, 0, 0, 0, null, 0.004);
-  D.ribs(gun, { x: -PX - 0.019, y: 0.05, z: 0.18, axis: 'x', side: -1, along: 'z', count: 4, pitch: 0.006, w: 0.016, h: 0.001, t: 0.0018, mat: gunMid });
+  // CL-326 (J77): the charging handle is its own group (gun.userData.work, as the GW-4's and KR-7's), at rest where it
+  // was at its slot's front, so the reload's hand can pull it back along the slot
+  { const work = K.group(-PX - 0.008, 0.05, 0.18); work.name = 'work';
+    K.box(0.022, 0.022, 0.035, gunDark, 0, 0, 0, 0, 0, 0, work, 0.004);
+    D.ribs(work, { x: -0.011, y: 0, z: 0, axis: 'x', side: -1, along: 'z', count: 4, pitch: 0.006, w: 0.016, h: 0.001, t: 0.0018, mat: gunMid });
+    gun.userData.work = work; }
   K.slab(gunBand([[-0.13, -0.045], [-0.095, -0.062]], 0.004), 0.004, gunDark, { x: -PX - 0.0015, bevel: 0.001 });
   K.cyl(0.007, 0.007, 0.004, gunDark, -PX - 0.0015, -0.045, -0.13, null, 10, 'x');
   // GP-20063 AA-12 manual pass: a positive thumb selector above the firing

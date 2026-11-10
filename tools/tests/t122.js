@@ -1,4 +1,4 @@
-// t122 - CU-68 (P-127): a suppressor in the kiosk for each gun that has a can.
+// t122 - CU-68 (P-127): a suppressor for each gun that has a can. D-124: bought in the Armory store, not the kiosk.
 // Buying it shows the can and moves the muzzle. The AA-12 has no row. A fresh run takes it off.
 // The shot itself does not change (that is P-129).
 (async () => {
@@ -31,11 +31,11 @@
     const spent = T.SUPPRESSOR_PRICE.m4 + T.SUPPRESSOR_PRICE.pistol;
     T.buySuppressor('m4');
     ok(T.getBank() === bank - spent, 'buying it again does not charge');
-    T.openShop(true);
-    const loadout = document.querySelector('#shopTabs [data-shop-page="loadout"]');
-    if (loadout) loadout.click();
+    T.closeMenuDbg && T.closeMenuDbg('shop');
+    T.openMenuDbg('armory');
+    T.setShopTabDbg && T.setShopTabDbg('upgrades');
     const text = (document.getElementById('shopList') || {}).innerText || '';
-    ok(/suppressor/i.test(text), 'the upgrades tab lists a suppressor');
+    ok(/suppressor/i.test(text), 'the Armory store lists a suppressor (D-124)');
     ok(!/AA-?12[^\n]*suppressor/i.test(text), 'the AA-12 has no suppressor row');
     T.resetGame();
     ok(gun.userData.suppressed !== true && gun.userData.suppressor.visible !== true, 'a fresh run takes the can off');

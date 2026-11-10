@@ -2,12 +2,12 @@
 
 state: active
 model: Grok Bot
-task: GB-322 checkpoint commit
+task: GB-324 D-131 checkpoint commit via Claude Commit.bat (git only, no suite)
 touching: git
-since: 2026-11-09T01:53Z
-next: GB-322 checkpoint commit
+since: 2026-11-10T01:37Z
+next: GB-324 Full integration suite overnight, reds by owner, D-124 check
 blocked-on: —
-last-report: handoffs/2026-11-08-grokbot-GB-321.md
+last-report: handoffs/2026-11-08-grokbot-GB-323.md
 
 ## Notes
 

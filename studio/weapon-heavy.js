@@ -291,7 +291,7 @@ export function makeMinigunModel(ctx) {
 }
 
 export function makeLauncherModel(ctx) {
-  const { THREE, gunKit, gunBand, gripOutline, gunEffects, finishGun, gunBody, gunDark, gunMid, gunAccent, gunPoly, gunRubber, gunOlive, hazardYellow, steelMat, glassMat, sightDotMat } = ctx;
+  const { THREE, gunKit, gunBand, gripOutline, gunEffects, finishGun, gunBody, gunDark, gunMid, gunAccent, gunPoly, gunRubber, gunOlive, hazardYellow, steelMat, brassMat, glassMat, sightDotMat } = ctx;
   const gun = new THREE.Group();
   const K = gunKit(gun);
   const receiverSteel = steelMat.clone(); receiverSteel.color.setHex(0x858a8d); receiverSteel.roughness = 0.53;   // matte stainless, not mirror-bright
@@ -339,14 +339,12 @@ export function makeLauncherModel(ctx) {
     K.cyl(0.009, 0.009, 0.004, gunDark, sx * 0.078, -0.027, -0.054, null, 12, 'x');   // ambidextrous safety selector
     K.box(0.004, 0.01, 0.025, gunDark, sx * 0.08, -0.032, -0.041, 0, 0, 0, null, 0.002);
   }
-  // Side-mounted quadrant backs the existing open leaf without crossing its sight line.
-  K.box(0.012, 0.012, 0.108, gunMid, 0.084, 0.104, -0.174, 0, 0, 0, null, 0.003);
-  const quadrant = [[0.09, 0.109, -0.225], [0.09, 0.141, -0.211], [0.09, 0.164, -0.187], [0.09, 0.181, -0.159], [0.09, 0.187, -0.129]];
-  for (let i = 0; i < quadrant.length - 1; i++) rod(THREE, K, quadrant[i], quadrant[i + 1], 0.0035, gunDark);
-  for (const [z, top] of [[-0.211, 0.141], [-0.187, 0.164], [-0.159, 0.181]])
-    rod(THREE, K, [0.09, 0.109, z], [0.09, top, z], 0.0025, gunMid);
-  for (const [y, z] of [[0.143, -0.211], [0.166, -0.187], [0.183, -0.159]])
-    K.box(0.006, 0.003, 0.012, gunAccent, 0.092, y, z, 0, 0, 0, null, 0.001);
+  // J80: the tall wire quadrant looked like an unattached arch beside the rear sight.
+  // The reflex hold-over dots and folding leaf remain; a low marked range plate carries
+  // the side adjustment without rising over either sight picture.
+  K.box(0.012, 0.022, 0.108, gunMid, 0.084, 0.111, -0.174, 0, 0, 0, null, 0.003);
+  for (const z of [-0.211, -0.187, -0.159])
+    K.box(0.0015, 0.004, 0.009, gunAccent, 0.0905, 0.123, z, 0, 0, 0, null, 0.0004);
   K.slab([[0.265, -0.05], [0.315, -0.05], [0.315, 0.09], [0.265, 0.09]], 0.12, receiverSteel, { bevel: 0.014 });
   // J62: the front post on the front frame, its tip at the first notch's height (y 0.137), between two low guard ears.
   K.box(0.024, 0.012, 0.03, gunDark, 0, 0.096, 0.64);
@@ -403,9 +401,12 @@ export function makeLauncherModel(ctx) {
   // chambers parallel to the barrel, circular faces front/rear — not sideways.
   const drumHinge = new THREE.Group();
   drumHinge.position.set(-0.14, -0.02, 0.12);
+  // J80: a fixed bracket reaches from the receiver's left wall to the hinge pin.
+  // The long swinging arm below stays parented to drumHinge, so the open cylinder
+  // remains visibly attached instead of hovering off the frame.
+  K.box(0.084, 0.026, 0.052, gunDark, -0.107, -0.02, 0.12, 0, 0, 0, null, 0.005);
   K.cyl(0.016, 0.016, 0.15, gunDark, -0.14, -0.02, 0.12, null, 12);
-  for (const y of [-0.08, 0.04]) K.cyl(0.022, 0.022, 0.031, gunMid, -0.14, y, 0.12, null, 12, 'y');   // frame hinge knuckles
-  K.box(0.14, 0.018, 0.026, gunMid, 0.07, 0, 0, 0, 0, 0, drumHinge, 0.004);
+  K.box(0.14, 0.024, 0.038, gunMid, 0.07, 0, 0, 0, 0, 0, drumHinge, 0.004);
   const drumLatch = new THREE.Group();
   drumLatch.position.set(-0.076, 0.057, 0.043);
   K.box(0.031, 0.011, 0.064, gunDark, 0, 0, 0, 0, 0, 0, drumLatch, 0.003);
@@ -429,8 +430,13 @@ export function makeLauncherModel(ctx) {
     const ang = (i / 6) * Math.PI * 2;
     const cx = Math.sin(ang) * 0.065, cy = Math.cos(ang) * 0.065;
     const round = new THREE.Group();
+    // J80: each chamber carries a complete round. Its brass base is recessed just
+    // inside the rear mouth, visible in battery and still an individual reload part.
+    K.cyl(0.0265, 0.0265, 0.004, brassMat, cx, cy, -0.061, round, 16);
+    K.cyl(0.004, 0.004, 0.001, gunDark, cx, cy, -0.0632, round, 10);
+    K.cyl(0.025, 0.025, 0.086, gunOlive, cx, cy, -0.004, round, 16);
     K.cyl(0.029, 0.029, 0.006, gunDark, cx, cy, 0.026, round, 16);
-    K.lathe([[0, 0.032], [0.025, 0.032], [0.025, 0.044], [0.024, 0.048], [0.020, 0.053], [0.012, 0.057], [0, 0.058]], gunOlive, { x: cx, y: cy, parent: round, seg: 16 });
+    K.lathe([[0, 0.032], [0.025, 0.032], [0.025, 0.044], [0.024, 0.048], [0.020, 0.055], [0.012, 0.061], [0, 0.062]], gunOlive, { x: cx, y: cy, parent: round, seg: 16 });
     K.cyl(0.0255, 0.0255, 0.003, hazardYellow, cx, cy, 0.044, round, 16);
     drum.add(round);
     drumRounds.push(round);

@@ -113,3 +113,15 @@ body:has(#cif.show:not(.armory-only)) #enemyCounterCard { visibility:hidden; }
  #cif:not(.armory-only) #cifSelection { font-size:20px; }
  #cif:not(.armory-only) #cifList { grid-template-columns:repeat(2,minmax(0,1fr)); }
 }
+
+/* D-124: paid field kit at the dressing room's issue counter. */
+#cifIssue { display:grid; gap:7px; padding:0 0 16px; margin:0 0 16px; border-bottom:1px solid #617356; }
+#cifIssue h4 { margin:0 0 2px; color:#dec68b; font:11px var(--font-hud); text-transform:uppercase; letter-spacing:.12em; }
+#cifIssue .cif-issue-row { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:12px; align-items:center; padding:11px 12px; background:#1d2c22; border:1px solid #4d6554; border-radius:3px; }
+#cifIssue .cif-issue-info { min-width:0; display:flex; flex-direction:column; gap:4px; }
+#cifIssue strong { color:#eee6cd; font:12px var(--font-hud); }
+#cifIssue small { color:#bdc9b8; font:11px var(--font-hud); line-height:1.4; }
+#cifIssue .cif-issue-state { color:#dec68b; font:11px var(--font-hud); }
+#cifIssue button { min-width:70px; min-height:36px; padding:8px 12px; color:#182116; background:#dec68b; border:0; font:11px var(--font-hud); cursor:pointer; }
+#cifIssue button:disabled { color:#a9b59f; background:#2b362d; cursor:default; }
+@media(max-width:720px) { #cifIssue .cif-issue-row { gap:7px; padding:9px; } #cifIssue button { min-width:56px; padding:7px; } }

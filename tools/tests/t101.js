@@ -4,6 +4,7 @@
 // until the helmet is bought.
 (async () => {
   const T = window.TT; const out = [];
+  const wait = (ms) => new Promise((r) => setTimeout(r, ms));
   const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const names = () => [...document.querySelectorAll('#shopList .perk .name')].map((n) => n.firstChild ? n.firstChild.textContent.trim() : '');
   const has = (n) => names().includes(n);
@@ -28,9 +29,17 @@
       'tier 1 owned: tier 2 shows, tier 3 does not');
 
     T.setShopTabDbg('gear');
-    ok(!gear.helmet && has('Combat helmet') && !has('Night vision'), 'night vision hidden without the helmet');
-    gear.helmet = true; T.setShopTabDbg('gear');
-    ok(has('Night vision'), 'helmet owned: night vision shows');
+    ok(!has('Combat helmet') && !has('Night vision'), 'the kiosk gear list no longer sells the helmet or night vision (D-124)');
+    const openCif = async () => { T.closeMenuDbg('shop'); T.closeMenuDbg('cif'); T.openMenuDbg('cif'); const tab = document.querySelector('#cifTabs [data-cif-tab="head"]'); if (tab) tab.click(); await wait(80); };
+    const buyRow = (k) => document.querySelector('#cif [data-cif-buy="' + k + '"]');
+    gear.helmet = false; gear.nvg = false;
+    await openCif();
+    ok(!!buyRow('helmet') && !!buyRow('nvg'), 'the CIF Head tab lists the helmet and night vision');
+    ok(!!buyRow('nvg') && buyRow('nvg').querySelector('button').disabled && /helmet/i.test(buyRow('nvg').textContent), 'no helmet: night vision at the CIF shows its helmet prerequisite and cannot be bought');
+    gear.helmet = true; await openCif();
+    ok(!!buyRow('nvg') && !buyRow('nvg').querySelector('button').disabled, 'helmet owned: night vision at the CIF can be bought');
+    T.closeMenuDbg('cif');
+    T.setShopTabDbg('gear');
     ok(!document.querySelector('#shopList').textContent.includes('LOCKED'), 'no LOCKED rows left on the gear list');
   } catch (e) { ok(false, 'threw ' + (e && e.stack || e)); }
   return out.join('\n');

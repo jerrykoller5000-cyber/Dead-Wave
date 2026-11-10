@@ -9,7 +9,7 @@ import { text, hasText } from './strings.js';
 //   getMods(kind)        -> [{ id, name, desc, slot, owned, fitted, price, affordable }]
 //   onFit(kind, id, on)  -> boolean                                     put one on or take it off
 //   onBuyMod(kind, id)   -> boolean                                     buy an attachment for this gun
-//   onStore()            -> void                                        open the Armory catalogue
+//   onOpenCatalogue(panel) / onCloseCatalogue() -> void                 show the catalogue in this menu
 //   picture(kind)        -> Promise<dataURL | null>                     the real gun as it looks now
 //   icon(kind)           -> svg markup (24x24 paths)                    a stand-in until the picture comes
 //   describe(kind)       -> string                                      its ammo as it stands
@@ -20,7 +20,7 @@ import { text, hasText } from './strings.js';
 // Called only for a visible workbench and an interaction/refresh; angles are radians.
 export function mountArmory({ doc = document, bus = window, cif = doc.getElementById('cif'),
   getPhase = () => 'prep', getOwned = () => [], onApply = () => {}, onReset = null, armory: shared = null,
-  getMods = () => [], onFit = () => false, onBuyMod = () => false, onStore = () => {}, picture = async () => null, icon = () => '', describe = () => '',
+  getMods = () => [], onFit = () => false, onBuyMod = () => false, onOpenCatalogue = () => {}, onCloseCatalogue = () => {}, picture = async () => null, icon = () => '', describe = () => '',
   getFinishes = () => null, onFinish = () => false, preview = null,
   getLaser = () => null, onLaser = () => false } = {}) {
   if (!cif?.querySelector('.card > .modes')) throw new Error('CIF window is missing');
@@ -60,9 +60,9 @@ export function mountArmory({ doc = document, bus = window, cif = doc.getElement
   body.append(left, benchEl);
   const actions = el('div', 'armory-actions');
   const stow = el('button', null, text('armory.stow')); stow.type = 'button';
-  const store = el('button', null, text('armory.store.open')); store.type = 'button';
   const done = el('button', null, text('armory.done')); done.type = 'button';
-  actions.append(stow, store, done); panel.append(head, body, actions); cif.append(panel);
+  const catalogue = el('section', 'armory-catalogue'); catalogue.setAttribute('aria-label', text('armory.store.title'));
+  actions.append(stow, done); panel.append(head, body, catalogue, actions); cif.append(panel);
 
   // The second of an akimbo pair is its own gun in the Armory (GP-78); say so.
   const labelGun = gun => /:second$/.test(gun.id) ? t('armory.pair', { gun: text(`weapon.${gun.kind}.name`) }, '{gun} · pair') : text(`weapon.${gun.kind}.name`);
@@ -261,16 +261,16 @@ export function mountArmory({ doc = document, bus = window, cif = doc.getElement
     if (!open) return;
     previewer?.hide();
     open = false; panel.hidden = true; cif.classList.remove('armory-show');
+    onCloseCatalogue();
     onApply(armory.loadout(), armory.read());
     button.focus({ preventScroll: true });
   }
   button.addEventListener('click', () => {
     if (getPhase() !== 'prep' || !cif.classList.contains('show')) return;
-    syncOwned(); open = true; panel.hidden = false; cif.classList.add('armory-show'); render();
+    syncOwned(); open = true; panel.hidden = false; cif.classList.add('armory-show'); render(); onOpenCatalogue(catalogue);
     panel.querySelector('button')?.focus({ preventScroll: true });
   });
   stow.addEventListener('click', () => { armory.stow(selected.type, selected.index); render(); });
-  store.addEventListener('click', () => { if (open) onStore(); });
   done.addEventListener('click', close);
   const observer = new MutationObserver(() => {
     if (!cif.classList.contains('show')) close();

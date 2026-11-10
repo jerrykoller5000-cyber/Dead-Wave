@@ -1,0 +1,284 @@
+{
+  "timestamp": "2026-11-09T04:15:36.724Z",
+  "gpu": "NVIDIA GeForce RTX 5080 (WebGPU)",
+  "task": "AG-268",
+  "target": "GP-20069",
+  "viewports": [
+    "1280x720",
+    "390x844"
+  ],
+  "uiPrinciples": {
+    "readability": 5,
+    "hierarchy": 5,
+    "consistency": 5,
+    "placement": 5,
+    "safety": 5,
+    "bothViews": 5
+  },
+  "checks": [
+    {
+      "name": "1280 Kiosk Tabs are Supplies and Builds",
+      "pass": true,
+      "detail": "Supplies|Builds"
+    },
+    {
+      "name": "1280 Kiosk retains MedPens & Field Intel",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 Kiosk excludes Combat helmet",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 Kiosk excludes Plate carrier",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 Kiosk excludes Knee & elbow pads",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 Kiosk excludes Night vision",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 Kiosk excludes Armor repair",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 Kiosk excludes Guns & Ammo",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 Kiosk close button visible inside viewport",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 CIF Head shows Helmet purchase row with Cash shortfall",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 CIF Head blocks Helmet buy when short of cash",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 CIF Head shows NVG requiring Combat helmet prerequisite",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 CIF Head blocks NVG buy before helmet ownership",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 CIF Preview wears bare head/cap before purchase",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 CIF Helmet purchase charges $70 Cash",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 CIF Helmet grants 25 armor",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 CIF Helmet marked Owned and button disabled",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 CIF Helmet camo choices appear in wardrobe",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 CIF NVG prerequisite unlocked after helmet purchase",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 CIF Preview wears Combat helmet",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 CIF NVG purchase charges $130 Cash",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 CIF NVG marked Owned and button disabled",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 CIF Preview wears NVG on helmet",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 CIF Kit offers Plate carrier for $120",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 CIF Kit offers Knee & elbow pads for $50",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 CIF Preview torso/limbs unequipped before kit buy",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 CIF Plate carrier purchase charges $120 Cash",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 CIF Plate carrier raises armor to 75 (25 + 50)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 CIF Carrier dressing choice appears in wardrobe",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 CIF Preview wears Plate carrier",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 CIF Pads purchase charges $50 Cash",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 CIF Pads raises armor to 90 (75 + 15)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 CIF Pads dressing choice appears in wardrobe",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 CIF Preview wears Knee & elbow pads",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 CIF Armor Repair row appears when damaged (80 lost -> $40 cost)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 CIF Armor repair restores armor to 90",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 CIF Armor repair charges $40 Cash",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 CIF Armor repair button disabled after full repair",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 In-Game 3P: World marine wears Combat helmet",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 In-Game 3P: World marine wears Plate carrier",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 In-Game 3P: World marine wears Knee & elbow pads",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 In-Game 3P: Armor meter reflects full 90 armor",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 In-Game 1P: First person view activated cleanly",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 In-Game 1P: Player head culled to prevent camera clipping",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "1280 In-Game 1P: Armor stays intact at 90 in first person",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "390 Mobile CIF Head: Issue rows fit within 390px card",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "390 Mobile CIF Head: Purchase buttons have safe touch targets (>= 32px)",
+      "pass": true,
+      "detail": "min: 36px"
+    },
+    {
+      "name": "390 Mobile CIF Head: Footer controls visible inside viewport bounds",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "390 Mobile CIF Kit: Equipment issue rows fit within 390px card",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "390 Mobile Kiosk excludes all wearables and armor repair",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "390 Mobile Kiosk close button visible inside 844px viewport",
+      "pass": true,
+      "detail": ""
+    }
+  ],
+  "kioskAudit": {},
+  "cifHead": {},
+  "cifKit": {},
+  "armorRepair": {},
+  "previewWear": {},
+  "inGameViews": {},
+  "mobileResponsiveness": {},
+  "trainingStock": {},
+  "screenshots": {}
+}

@@ -46,9 +46,16 @@
     for (const g of ['m4', 'pistol']) {
       if (!(await arm(g))) { ok(false, 'a ' + g + ' in hand'); continue; }
       await wait(1200);
-      const d = await lift();
       if (g === 'm4') ok(T.getShoulderDbg().rawAds > 0.6, 'the m4 at the ready: its aim weight ' + T.getShoulderDbg().rawAds.toFixed(2) + ' (FP_READY ' + def.ready + ')');
-      ok(d > 0.04, 'at the hip in first person the ' + g + ' is up at the ready (muzzle ' + d.toFixed(3) + ' m higher)');
+      // CL-325: the eye sees the view gun (CL-281, its hip in VM_POSES on the crosshair since CL-324), not his body's, so the
+      // ready's lift of the body's gun no longer reaches the eye (it measured 0.002 m and -0.07 m). CL-250's point stands, on
+      // the gun the eye sees: at the hip it is up in the view, its muzzle well clear of the bottom edge, not a tip there.
+      { const V = T.viewmodelDbg && T.viewmodelDbg(), THREE = T.THREE || window.THREE, cam = T.camera;
+        await until(() => V && V.info.active && V.info.key === g && V.info.raise > 0.99, 8000);
+        const m = new THREE.Vector3(), got = V && V.muzzleWorld(m); cam.updateMatrixWorld();
+        const l = got ? m.clone().applyMatrix4(cam.matrixWorld.clone().invert()) : new THREE.Vector3(0, -9, 1), t = Math.tan((cam.fov || 60) * Math.PI / 360);
+        const nx = l.x / (Math.max(1e-6, -l.z) * t * (cam.aspect || 1)), ny = l.y / (Math.max(1e-6, -l.z) * t);
+        ok(!!got && l.z < 0 && ny > -0.6 && Math.abs(nx) < 0.9, 'at the hip in first person the ' + g + ' is up in the view (its muzzle at ndc ' + nx.toFixed(2) + ', ' + ny.toFixed(2) + '; the bottom edge -1)'); }
     }
 
     if (await arm('uzi')) {

@@ -11,7 +11,9 @@ try{
  const setup=await p.evaluate(async()=>{
   window.TH=await import('./vendor/three/three.webgpu.js');
   TT.buyWeapon('shotgun');TT.buyWeapon('m4');TT.takeOutGun('shotgun');TT.takeOutGun('m4');
-  for(const key of ['vest','helmet'])TT.buyGear(TT.GEAR.find(g=>g.key===key));
+  TT.openCIF();document.querySelector('#cifIssue [data-cif-buy="helmet"] button').click();
+  document.querySelector('#cifTabs [data-cif-tab="kit"]').click();
+  document.querySelector('#cifIssue [data-cif-buy="vest"] button').click();TT.closeCIF();
   const tg=TT.trainingDbg.tg();TT.player.position.set(tg.origin.x,tg.floorY,tg.origin.z-2);
   const cv=[...document.querySelectorAll('canvas')].sort((a,b)=>b.clientWidth*b.clientHeight-a.clientWidth*a.clientHeight)[0],keep=new Set();
   for(let e=cv;e&&e!==document.body;e=e.parentElement)keep.add(e);for(const e of document.body.children)if(!keep.has(e))e.style.setProperty('display','none','important');

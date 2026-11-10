@@ -2,9 +2,10 @@
 // Gun-local convention: +Z muzzle, +Y up. Origin: centre of the mounting foot.
 import * as THREE from 'three';
 
-const paint = new THREE.MeshStandardMaterial({ color: 0x303633, metalness: 0.08, roughness: 0.67 });
-const alloy = new THREE.MeshStandardMaterial({ color: 0x4b5354, metalness: 0.83, roughness: 0.43 });
-const edge = new THREE.MeshStandardMaterial({ color: 0x858b83, metalness: 0.9, roughness: 0.42 });
+// CL-329 (J92): black optics (paint was 0x303633; alloy 0x4b5354 at 0.83 metal: a light grey-green; edge 0x858b83 at 0.9)
+const paint = new THREE.MeshStandardMaterial({ color: 0x24282a, metalness: 0.05, roughness: 0.74 });
+const alloy = new THREE.MeshStandardMaterial({ color: 0x2e3234, metalness: 0.55, roughness: 0.5 });
+const edge = new THREE.MeshStandardMaterial({ color: 0x70767a, metalness: 0.7, roughness: 0.45 });
 const rimMetal = edge.clone(); rimMetal.side = THREE.DoubleSide;
 const rubber = new THREE.MeshStandardMaterial({ color: 0x171c1c, metalness: 0, roughness: 0.9 });
 const lens = new THREE.MeshPhysicalMaterial({ color: 0x77989a, metalness: 0, roughness: 0.14, transparent: true, opacity: 0.28, depthWrite: false, side: THREE.DoubleSide });
@@ -97,15 +98,21 @@ function tube(root) {
 function holo(root) {
   foot(root, 0.052, 0.105);
   // Keep the emitter in the low chassis; the glass above it occupies nearly the whole face.
-  beveledBox(root, 'polymer battery and emitter chassis', paint, [0.054, 0.017, 0.082], [0, 0.018, -0.010], 0.0025);
+  // CL-329 (J92): a closed hood round the window (it was a roof plate on four thin posts, open at the sides): a solid
+  // wall each side of the window, the roof over them, a sloped brace back to the chassis each side; the battery cap on
+  // the chassis' front, two buttons on its rear. The window, the eye and the dot are where they were.
+  beveledBox(root, 'polymer battery and emitter chassis', paint, [0.054, 0.019, 0.090], [0, 0.019, -0.008], 0.0025);
   for (const side of [-1, 1]) {
-    box(root, 'hood side wall', alloy, [0.003, 0.015, 0.068], [side * 0.027, 0.069, 0.005]);
-    box(root, 'front window upright', edge, [0.003, 0.042, 0.005], [side * 0.025, 0.055, 0.034]);
-    box(root, 'rear hood support', alloy, [0.003, 0.050, 0.005], [side * 0.025, 0.0515, -0.026]);
+    beveledBox(root, 'hood side wall', alloy, [0.0045, 0.050, 0.034], [side * 0.0262, 0.053, 0.026], 0.001);
+    box(root, 'hood rear brace', alloy, [0.0045, 0.056, 0.005], [side * 0.0262, 0.0535, -0.006], 0.52);
+    box(root, 'front window upright', edge, [0.002, 0.042, 0.003], [side * 0.0235, 0.055, 0.0335]);
   }
-  beveledBox(root, 'hood eave', alloy, [0.056, 0.006, 0.070], [0, 0.079, 0.007]);
-  box(root, 'window lower sill', alloy, [0.049, 0.004, 0.009], [0, 0.033, 0.032]);
+  beveledBox(root, 'hood roof', alloy, [0.057, 0.0055, 0.040], [0, 0.0805, 0.024], 0.0015);
+  box(root, 'window lower sill', alloy, [0.049, 0.004, 0.009], [0, 0.031, 0.032]);
   glass(root, 0.046, 0.043, 0.055, 0.032);
+  cylinder(root, 'battery cap', alloy, 0.0085, 0.006, [0, 0.019, 0.0385], 'z', 16);
+  cylinder(root, 'battery cap slot', rubber, 0.006, 0.0012, [0, 0.019, 0.0418], 'z', 12);
+  for (const sx of [-0.012, 0.012]) beveledBox(root, 'rear button', rubber, [0.010, 0.006, 0.003], [sx, 0.021, -0.0535], 0.0008);
   cylinder(root, 'brightness dial', rubber, 0.007, 0.005, [0.0295, 0.026, -0.027], 'x', 12);   // GB-297: seated on the chassis side (half-width 0.027)
   return { eye: [0, 0.055, -0.061], dot: [0, 0.055, 0.032] };
 }
@@ -152,11 +159,16 @@ function prism(root) {
   openTube(root, 'sealed prism housing', paint, 0.022, 0.105, 0.055, 0, 24);
   openTube(root, 'objective bell', alloy, 0.027, 0.024, 0.055, 0.059, 24);
   openTube(root, 'ocular and focus ring', rubber, 0.028, 0.026, 0.055, -0.061, 24);
-  objective(root, 'objective lens', 0.022, 0.055, 0.071);
+  // J79: the glass sits behind the bell's machined front rim, inside its wall.
+  objective(root, 'objective lens', 0.022, 0.055, 0.065);
   objective(root, 'ocular lens', 0.022, 0.055, -0.075);
   cylinder(root, 'capped elevation adjustment', alloy, 0.010, 0.012, [0, 0.086, -0.008], 'y', 18);
   cylinder(root, 'capped right windage adjustment', alloy, 0.009, 0.011, [0.029, 0.055, -0.008], 'x', 18);
   cylinder(root, 'left illumination and battery dial', rubber, 0.012, 0.012, [-0.029, 0.055, -0.008], 'x', 18);
+  box(root, 'elevation cap coin slot', rubber, [0.012, 0.0008, 0.002], [0, 0.0925, -0.008]);
+  const focusBand = new THREE.Mesh(new THREE.TorusGeometry(0.028, 0.0012, 5, 24), edge);
+  focusBand.name = 'ocular focus index ring'; focusBand.position.set(0, 0.055, -0.072);
+  focusBand.castShadow = true; root.add(focusBand);
   for (const z of [-0.070, 0.070]) box(root, 'flip-cap hinge', alloy, [0.010, 0.006, 0.006], [0, 0.083, z]);
   return { eye: [0, 0.055, -0.087], dot: [0, 0.055, 0.071] };
 }
@@ -190,13 +202,24 @@ function nx8(root) {
   openTube(root, '30 mm main tube', paint, 0.015, 0.265, 0.054, 0, 24);
   openTube(root, '59 mm objective bell', alloy, 0.0295, 0.067, 0.054, 0.137, 28);
   openTube(root, '43 mm eyepiece', rubber, 0.0215, 0.054, 0.054, -0.143, 24);
-  objective(root, '50 mm objective lens', 0.025, 0.054, 0.170);
+  // J79: 6 mm of objective bell encloses the glass rather than ending flush with it.
+  objective(root, '50 mm objective lens', 0.025, 0.054, 0.164);
   objective(root, 'ocular lens', 0.017, 0.054, -0.170);
   cylinder(root, 'exposed ZeroStop elevation turret', alloy, 0.013, 0.027, [0, 0.083, -0.006], 'y', 22);
   cylinder(root, 'right capped windage turret', alloy, 0.011, 0.018, [0.027, 0.054, -0.006], 'x', 18);
   cylinder(root, 'left parallax and illumination dial', rubber, 0.014, 0.018, [-0.027, 0.054, -0.006], 'x', 18);
   cylinder(root, 'knurled zoom ring', rubber, 0.022, 0.019, [0, 0.054, -0.117], 'z', 24);
-  cylinder(root, 'power throw lever', alloy, 0.0035, 0.029, [0.025, 0.072, -0.117], 'x', 10);
+  // J92: tactile zoom grip and marked ZeroStop read in the hand without a texture.
+  for (let i = 0; i < 12; i++) {
+    const a = i * Math.PI / 6;
+    const rib = box(root, 'zoom ring knurl', edge, [0.002, 0.002, 0.014], [Math.cos(a) * 0.022, 0.054 + Math.sin(a) * 0.022, -0.117]);
+    rib.rotation.z = a;
+  }
+  for (let i = 0; i < 8; i++) {
+    const a = i * Math.PI / 4;
+    box(root, 'ZeroStop witness tick', rubber, [0.0015, 0.003, 0.0015], [Math.cos(a) * 0.0133, 0.095, -0.006 + Math.sin(a) * 0.0133]);
+  }
+  cylinder(root, 'low zoom index tab', alloy, 0.0035, 0.007, [0, 0.077, -0.117], 'y', 10);
   cylinder(root, 'eyepiece lock ring', alloy, 0.022, 0.006, [0, 0.054, -0.166], 'z', 24);
   return { eye: [0, 0.054, -0.177], dot: [0, 0.054, 0.170] };
 }

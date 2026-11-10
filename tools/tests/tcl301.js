@@ -47,7 +47,9 @@
     const fore = (a) => new THREE.Vector3(0, 1, 0).applyQuaternion(a.root.quaternion);
     const fr = fore(vm.arms.r), fl = fore(vm.arms.l);
     info('forearm r ' + [fr.x, fr.y, fr.z].map((v) => v.toFixed(2)) + ' l ' + [fl.x, fl.y, fl.z].map((v) => v.toFixed(2)) + ', elbows z ' + vm.arms.r.root.position.z.toFixed(3) + ', ' + vm.arms.l.root.position.z.toFixed(3));
-    ok(fr.y < -0.35 && fl.y < -0.35, 'the forearms come up from below (down from the wrists: ' + fr.y.toFixed(2) + ', ' + fl.y.toFixed(2) + ')');
+    // CL-325 (J73: the palms "parallel with arms"): the forearms run back toward him in line with the hands, a little below
+    // them (was: up steeply from below, y < -0.35, the 3 Nov answer to "out flat to the sides", which the next check keeps)
+    ok(fr.z > 0.75 && fl.z > 0.75 && fr.y < -0.1 && fl.y < -0.1, 'the forearms run back toward him, below the hands (back ' + fr.z.toFixed(2) + ', ' + fl.z.toFixed(2) + '; down ' + fr.y.toFixed(2) + ', ' + fl.y.toFixed(2) + ')');
     ok(Math.abs(fr.x) < 0.75 && Math.abs(fl.x) < 0.75, 'not out flat to the sides (across ' + fr.x.toFixed(2) + ', ' + fl.x.toFixed(2) + ')');
     // each gun its own kick
     const kickOf = (src) => { const a1 = G.p.clone(), a2 = G2.p.clone(); src.userData.shots = (src.userData.shots | 0) + 1; step(4); return [G.p.distanceTo(a1), G2.p.distanceTo(a2)]; };
@@ -58,15 +60,19 @@
     ok(kR[0] > 0.004 && kR[1] < 0.0015, 'a right shot kicks the right gun only (' + kR.map((v) => (v * 100).toFixed(2)).join(', ') + ' cm)');
     { vm.gun2.src.userData.shots = (vm.gun2.src.userData.shots | 0) + 1; step(4); const pu = vm.cameraPunch(); ok(pu.p > 0, 'a left shot turns the drawn view up too (' + pu.p.toFixed(4) + ' rad)'); step(60); }
     // the reload: both dip and come back, the forearms never at the eye
-    const y0 = G.p.y; let low = 0, elbowZ = -9, mir = 0;
+    // CL-306: the pair reloads one gun at a time (the right first, then the left); CL-325 checks that in place of CL-301's
+    // both-together mirror (each gun dips in its own half while the other holds still)
+    const y0 = G.p.y, y20 = G2.p.y; let low = 0, elbowZ = -9, rA = 0, lA = 0, rB = 0, lB = 0;
     for (let i = 0; i <= 60; i++) {
       vm.update(dt, Object.assign({}, base, { reloadU: i / 60 }));
-      low = Math.max(low, y0 - G.p.y); mir = Math.max(mir, Math.abs(G.p.x + G2.p.x));
+      low = Math.max(low, y0 - G.p.y);
+      if (i <= 27) { rA = Math.max(rA, y0 - G.p.y); lA = Math.max(lA, Math.abs(y20 - G2.p.y)); }
+      if (i >= 31) { lB = Math.max(lB, y20 - G2.p.y); rB = Math.max(rB, Math.abs(y0 - G.p.y)); }
       elbowZ = Math.max(elbowZ, vm.arms.r.root.position.z, vm.arms.l.root.position.z);
     }
     step(60);
     ok(low > 0.08 && Math.abs(G.p.y - y0) < 0.01, 'the reload dips both guns ' + (low * 100).toFixed(1) + ' cm and brings them back (' + ((G.p.y - y0) * 100).toFixed(2) + ' cm off)');
-    ok(mir < 0.003, 'both together through it (' + (mir * 100).toFixed(2) + ' cm apart from mirrored)');
+    ok(rA > 0.08 && lA < 0.01 && lB > 0.08 && rB < 0.01, 'one gun at a time: the right dips ' + (rA * 100).toFixed(1) + ' cm while the left holds (' + (lA * 100).toFixed(2) + '), then the left ' + (lB * 100).toFixed(1) + ' cm while the right holds (' + (rB * 100).toFixed(2) + ')');
     ok(elbowZ < -0.06, 'the elbows stay well ahead of the eye through the reload (nearest ' + elbowZ.toFixed(3) + ' m)');
     // the left gun's muzzle in the world: left of the eye
     { const m = new THREE.Vector3(); const got = vm.muzzleWorld(m, 2); const cam = T.camera; cam.updateMatrixWorld(); const local = got ? m.clone().applyMatrix4(cam.matrixWorld.clone().invert()) : null;
@@ -80,8 +86,9 @@
     ok(await until(() => VM().info.active && VM().info.key === 'minigun' && VM().info.raise > 0.99, 20000), 'its view gun is up');
     { const v = VM(), s = v.sockets.r, L = v.arms.r.layout;
       const c = new THREE.Vector3(L.grip[0] - L.wrist[0], L.grip[1] - L.wrist[1], L.grip[2] - L.wrist[2]).multiplyScalar(s.s).applyQuaternion(s.q).add(s.p);
-      // GP-20022 rebuilt the gun to Jerry's refs: the firing hand on the rear grip behind the housing (ChatGPT's centre (0, -0.017, -0.52))
-      ok(Math.abs(c.x) < 0.02 && Math.abs(c.y + 0.017) < 0.02 && Math.abs(c.z + 0.52) < 0.02, 'the minigun\'s right hand grips its rear grip (' + [c.x, c.y, c.z].map((x) => x.toFixed(3)) + '; the grip\'s centre 0, -0.017, -0.520)'); }
+      // GP-20022 rebuilt the gun to Jerry's refs: the firing hand on the rear grip behind the housing (ChatGPT's centre (0, -0.017, -0.52));
+      // GP-20063 scaled the gun 0.70 and CL-322 the grip with it: (0, -0.0119, -0.364)
+      ok(Math.abs(c.x) < 0.02 && Math.abs(c.y + 0.0119) < 0.02 && Math.abs(c.z + 0.364) < 0.02, 'the minigun\'s right hand grips its rear grip (' + [c.x, c.y, c.z].map((x) => x.toFixed(3)) + '; the grip\'s centre 0, -0.012, -0.364)'); }
     ok(errs.length === 0, 'no page errors (' + errs.slice(0, 2).join(' | ') + ')');
   } catch (e) { out.push('FAIL threw: ' + (e && e.stack || e)); }
   return out.join('\n');

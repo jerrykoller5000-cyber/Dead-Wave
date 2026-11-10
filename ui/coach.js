@@ -48,7 +48,7 @@ export function createCoach({ load = () => null, save = () => {} } = {}) {
       processing = false; profile.banked = true; persist();
       if (card === 'pickup' || card === 'bank') card = null;
     } else if (event.type === 'purchase-delivered' && event.cashSpent > 0 &&
-        ['kiosk', 'armory', 'build', 'upgrade', 'repair'].includes(event.source)) {
+        ['kiosk', 'armory', 'cif', 'build', 'upgrade', 'repair'].includes(event.source)) {
       profile.purchased = true; purchasePending = !profile.purchaseShown; persist();
     }
   }
