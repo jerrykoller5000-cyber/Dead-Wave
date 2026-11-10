@@ -49,7 +49,8 @@
 //   node crew/crew.mjs reviewed <report path> "<verdict>"
 //   node crew/crew.mjs reviewed --before <YYYY-MM-DD> "<verdict>"   every review older than that, at once
 //
-// Agents: claude, cursor, chatgpt, grokbot, antigravity, muse. Task ids: CL-, CU-, GP-, GB-, AG-, MU-.
+// Agents: claude, claude2, cursor, chatgpt, grokbot, antigravity, muse. Task ids: CL-, CB- (the second Claude), CU-, GP-, GB-, AG-, MU-.
+// (D-137, 10 Nov 2026: Claude 2 took Cursor's lane; Cursor, Grokbot and Muse are retired but stay readable.)
 // The files are the truth; this only reads and writes them (always as UTF-8). By hand is fine:
 //   crew/status/<agent>.md   your own check-in card. Only you write yours.
 //   crew/LOG.md              one line per event. Append only.
@@ -63,8 +64,8 @@ import { parseNotes, reviewState, notesStub } from './notes.mjs';
 
 const CREW = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(CREW, '..');
-const AGENTS = { claude: 'Claude', cursor: 'Cursor', chatgpt: 'ChatGPT', grokbot: 'Grokbot', antigravity: 'Antigravity', muse: 'Muse' };
-const PREFIX = { claude: 'CL', cursor: 'CU', chatgpt: 'GP', grokbot: 'GB', antigravity: 'AG', muse: 'MU' };
+const AGENTS = { claude: 'Claude', claude2: 'Claude 2', cursor: 'Cursor', chatgpt: 'ChatGPT', grokbot: 'Grokbot', antigravity: 'Antigravity', muse: 'Muse' };
+const PREFIX = { claude: 'CL', claude2: 'CB', cursor: 'CU', chatgpt: 'GP', grokbot: 'GB', antigravity: 'AG', muse: 'MU' };
 const FIELDS = ['state', 'model', 'task', 'touching', 'since', 'next', 'blocked-on', 'last-report'];
 const STATES = ['active', 'idle', 'blocked', 'away'];
 // Append-only files everyone shares. Checking in on them never clashes with anyone.

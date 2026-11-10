@@ -26,7 +26,8 @@
     const tris = (o) => { const g = o.geometry; return g ? (g.index ? g.index.count : g.attributes.position.count) / 3 : 0; };
     for (const [side, e] of [[1, ud.elbowRG], [-1, ud.elbowLG]]) {
       const wr = e.userData.wrist, rig = wr && wr.userData.hand, tag = side > 0 ? 'right hand' : 'left hand';
-      ok(!!rig && rig.joints.length === 15 && rig.layout.fingers.length === 4 && rig.layout.thumb.len.length === 2, tag + ': a fingered rig (palm, 4 x 3 finger segments, 2 thumb segments: ' + (rig ? rig.joints.length : 0) + ' joints)');
+      // CL-334 (J101, Jerry 10 Nov: "a much better and more detailed hand model"): the thumb has its metacarpal now (three bones)
+      ok(!!rig && rig.joints.length === 16 && rig.layout.fingers.length === 4 && rig.layout.thumb.len.length === 3, tag + ': a fingered rig (palm, 4 x 3 finger segments, 3 thumb bones: ' + (rig ? rig.joints.length : 0) + ' joints)');
       if (!rig) continue;
       const L = rig.layout;
       ok(Math.sign(L.fingers[0].x - L.ox) === side && Math.sign(L.thumb.x - L.ox) === side && Math.sign(L.fingers[3].x - L.ox) === -side, tag + ': index finger and thumb on the +x*side edge, little finger on the other');
@@ -48,7 +49,8 @@
     }
     let hm = 0, ht = 0;
     for (const e of [ud.elbowRG, ud.elbowLG]) e.userData.wrist.traverse((o) => { if (o.isMesh && vis(o)) { hm++; ht += tris(o); } });
-    ok(hm <= 4 && ht < 2000, 'cost: ' + hm + ' visible meshes, ' + Math.round(ht) + ' triangles for both hands (the mitt: 4 meshes, 1472)');
+    // CL-334: the body's hands (third person) are the light build of the new hand: about 1,600 triangles a gloved hand
+    ok(hm <= 4 && ht < 3400, 'cost: ' + hm + ' visible meshes, ' + Math.round(ht) + ' triangles for both hands (CL-334\'s light build: under 3,400; the mitt: 4 meshes, 1472)');
     // Holding and holstered.
     const rigR = ud.elbowRG.userData.wrist.userData.hand, rigL = ud.elbowLG.userData.wrist.userData.hand;
     await take('m4'); await simWait(0.8);

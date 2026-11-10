@@ -1,11 +1,11 @@
 # Grokbot
 
-state: idle
+state: away
 model: Grok Bot
 task: —
 touching: —
 since: 2026-11-10T01:38Z
-next: GB-288 The machete's chop on the mast gate's vines (D-116). After t
+next: — (retired, D-134; GB-288 is CB-288)
 blocked-on: —
 last-report: handoffs/2026-11-09-grokbot-GB-324-checkpoint.md
 

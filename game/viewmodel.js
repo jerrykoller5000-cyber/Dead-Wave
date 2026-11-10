@@ -20,6 +20,8 @@ import { SIGHT } from './sight-points.js';
 import { buildViewArm, wristSpacePoint, HAND_SCALE } from '../studio/fp-arms.js';
 import { copyPose, lerpPose, HAND_POSES } from '../studio/marine-hand.js';
 import { ITEM_POSES, gripPose } from '../studio/hand-grips.js';
+import { handContact } from '../studio/hand-contacts.js';   // CL-334 h
+import { VM_FIT } from './viewmodel-fit.js';   // CL-334 h: each gun's hands fitted to its shape (generated)
 import { flippedTwin, needsFlip } from './vm-flip.js';
 
 const smooth = (t) => { t = t < 0 ? 0 : t > 1 ? 1 : t; return t * t * (3 - 2 * t); };
@@ -439,19 +441,20 @@ export function createViewmodel(ctx) {
       _sm.multiplyMatrices(inv, w.matrixWorld); fromMatrix(_sm, _sf);
       // CL-293 (J54): a hand's turn on the gun can be set per gun (VM_SOCKETS gripRot / supportRot: x, y, z radians, YXZ, in
       // the gun's space, on top of the hold's own turn) and tried live (info.tune[key][side] = { p, r }, then retune()).
-      { const A = VM_SOCKETS[key], tn = info.tune[key] && info.tune[key][side], rr = (tn && tn.r) || (A && (side === 'r' ? A.gripRot : A.supportRot));
+      { const A = VM_SOCKETS[key], tn = info.tune[key] && info.tune[key][side], fit = VM_FIT[key] && VM_FIT[key][side], rr = (tn && tn.r) || (!fit && A && (side === 'r' ? A.gripRot : A.supportRot));
         if (rr) _sf.q.premultiply(_tq2.setFromEuler(_te.set(rr[0], rr[1], rr[2], 'YXZ')));
         // CL-301 (Jerry, 4 Nov: "Left hand should have a motorcycle grip on chainsaw palm facing down"): or the hand's own axes
         // set outright in the gun's space (VM_SOCKETS gripBasis / supportBasis { x: the grip channel, y: toward the elbow }),
         // live as info.tune[key][side].basis; the position still comes from the authored grip point.
-        const B = (tn && tn.basis) || (A && (side === 'r' ? A.gripBasis : A.supportBasis));
+        const B = (tn && tn.basis) || (fit && fit.basis) || (A && (side === 'r' ? A.gripBasis : A.supportBasis));   // CL-334 h: the fit's turn first
         if (B) { _bx.set(B.x[0], B.x[1], B.x[2]).normalize(); _by.set(B.y[0], B.y[1], B.y[2]); _by.addScaledVector(_bx, -_by.dot(_bx)).normalize(); _bz.crossVectors(_bx, _by); basisQ(_bx, _by, _bz, _sf.q); } }
       if (first || !sockets[side]) sockets[side] = { p: _sf.p.clone(), q: _sf.q.clone(), s: _sf.s };
       else lerpF(sockets[side], _sf, k, sockets[side]);
       const authored = VM_SOCKETS[key], tnp = info.tune[key] && info.tune[key][side] && info.tune[key][side].p;
       // A pistol grip can keep its gun-frame anchor while the glove closes on its
       // visible side. The launcher uses this to show the trigger hand below the receiver.
-      const tgt = tnp || (authored && (side === 'r' ? (authored.gripContact || authored.grip) : authored.support));
+      const fitp = VM_FIT[key] && VM_FIT[key][side] && VM_FIT[key][side].p;   // CL-334 h: the fit's place (the gun's frame keeps its grip anchor)
+      const tgt = tnp || fitp || (authored && (side === 'r' ? (authored.gripContact || authored.grip) : authored.support));
       if (tgt && arms) {
         _target.set(tgt[0], tgt[1], tgt[2]);
         wristSpacePoint(arms[side], 'grip', _contact).multiplyScalar(sockets[side].s).applyQuaternion(sockets[side].q);
@@ -656,10 +659,29 @@ export function createViewmodel(ctx) {
     return ang;
   }
   // Put an arm's wrist on frame W (view space) and point its forearm at the elbow hint, the wrist bending at most max.
-  const _y = V3(), _d = V3(), _ax = V3(), _qs = Q(), _qe = Q(), _wp = V3(), _qa = Q();
+  // CL-334 e (Jerry, 10 Nov: "Setting limits for extension in the arms would prevent impossible movements as well"): the
+  // wrist bends as a wrist does, by direction: toward the palm (flexion) and back (extension) as far as max (and 75 / 70
+  // degrees), but sideways only 20 degrees toward the thumb and 35 toward the little finger; between them on an ellipse.
+  // Seen from the hand (+y toward the elbow, +z the palm's side, +x*side the thumb's edge), the forearm leans toward the
+  // palm when the wrist flexes, and toward the little finger's edge when the hand turns toward the thumb.
+  const WRIST_LIMITS = { flex: 1.31, ext: 1.22, radial: 0.35, ulnar: 0.61 };
+  const _y = V3(), _d = V3(), _ax = V3(), _qs = Q(), _qe = Q(), _wp = V3(), _qa = Q(), _hx = V3(), _hz = V3();
   function poseArm(arm, W, hint, max) {
     _y.set(0, 1, 0).applyQuaternion(W.q);
     _d.set(hint[0], hint[1], hint[2]).sub(W.p).normalize();
+    {
+      const side = arm.side || 1;
+      _hx.set(1, 0, 0).applyQuaternion(W.q); _hz.set(0, 0, 1).applyQuaternion(W.q);
+      let aF = Math.atan2(_d.dot(_hz), _d.dot(_y)), aD = Math.atan2(-_d.dot(_hx) * side, _d.dot(_y));   // aF > 0 flexion; aD > 0 radial
+      const lf = aF >= 0 ? Math.min(WRIST_LIMITS.flex, max) : Math.min(WRIST_LIMITS.ext, max), ld = aD >= 0 ? WRIST_LIMITS.radial : WRIST_LIMITS.ulnar;
+      const e = (aF / lf) * (aF / lf) + (aD / ld) * (aD / ld);
+      arm.wristBend = { flex: +aF.toFixed(3), dev: +aD.toFixed(3), over: +e.toFixed(2) };   // for the checks (radians, before the limit)
+      if (e > 1) {
+        const k = 1 / Math.sqrt(e); aF *= k; aD *= k;
+        const tx = -Math.tan(aD) * side, tz = Math.tan(aF);
+        _d.copy(_y).addScaledVector(_hx, tx).addScaledVector(_hz, tz).normalize();
+      }
+    }
     let ang = Math.acos(clamp(_y.dot(_d), -1, 1));
     if (ang > max) {
       _ax.crossVectors(_y, _d); if (_ax.lengthSq() < 1e-10) _ax.set(1, 0, 0); _ax.normalize();
@@ -1037,7 +1059,7 @@ export function createViewmodel(ctx) {
     // GB-301 (J18): the firing hand leaves the grip onto the sniper's bolt knob (after each shot and on reload work).
     // Gun frame stays put (unlike 3P where the gun is parented to the hand). Support stays on the forend.
     // CL-325 (J72/J88): a gun's own firing-hand pose in the view (VM_SOCKETS gripPose, fitted to the view gun), or tried live
-    const gripP = (info.tune[gun.key] && info.tune[gun.key].poseR) || (VM_SOCKETS[gun.key] && VM_SOCKETS[gun.key].gripPose) || sockets.poseR;
+    const gripP = (info.tune[gun.key] && info.tune[gun.key].poseR) || (VM_FIT[gun.key] && VM_FIT[gun.key].r && VM_FIT[gun.key].r.pose) || (VM_SOCKETS[gun.key] && VM_SOCKETS[gun.key].gripPose) || sockets.poseR;
     let poseR = gripP;
     const boltW = (!AK && gun.bolt && (st.boltHand || 0) > 0.001) ? clamp(st.boltHand, 0, 1) : 0;
     if (boltW > 0) {
@@ -1094,7 +1116,7 @@ export function createViewmodel(ctx) {
     let poseL = sockets.poseL;
     // CL-293 (J54): a support hand's own fingers and thumb for a gun (VM_SOCKETS supportPose, a HAND_POSES-shaped pose: the
     // pistol's thumbs forward), or tried live (info.tune[key].poseL); the body's hold gives the rest.
-    { const tp = (info.tune[gun.key] && info.tune[gun.key].poseL) || (VM_SOCKETS[gun.key] && VM_SOCKETS[gun.key].supportPose); if (tp) poseL = tp; }
+    { const tp = (info.tune[gun.key] && info.tune[gun.key].poseL) || (VM_FIT[gun.key] && VM_FIT[gun.key].l && VM_FIT[gun.key].l.pose) || (VM_SOCKETS[gun.key] && VM_SOCKETS[gun.key].supportPose); if (tp) poseL = tp; }
     if (AK) {   // CL-301: the left hand on the left gun, the right hand's hold mirrored, the right hand's fingers
       mul(G2, mirrorSocket(SR, _localF), WL);
       if (AKB) { _akh[0] = WL.p.x - AKB[0] * MX; _akh[1] = WL.p.y + AKB[1]; _akh[2] = WL.p.z + AKB[2]; twistToward(arms.l, WL, _akh, VM.akimbo.twistMax, 'behind'); }
@@ -1136,6 +1158,7 @@ export function createViewmodel(ctx) {
     mirrorWorn(arms.r, 1); mirrorWorn(arms.l, -1);
     info.wrist.r = poseArm(arms.r, WR, eR, VM.wristMax);
     info.wrist.l = poseArm(arms.l, WL, eL, VM.wristMax);
+    for (const a of [arms.r, arms.l]) if (a.bendSleeve && a.parts.sleeve.visible) a.bendSleeve(a.wrist.quaternion);   // CL-334 h (J128): the sleeve's end gives with the wrist
     // CL-293 (Jerry, 3 Nov: "the arms looking weird and skinny", "elbow flared in the wrong direction"): the upper arm turns
     // at the elbow toward his shoulder (view space, as the eye sees it: 0.19 m out, 0.24 m down, a little behind the eye).
     for (const [a, sx] of [[arms.r, 1], [arms.l, -1]]) {
@@ -1145,6 +1168,9 @@ export function createViewmodel(ctx) {
       const len = _sh.length();
       if (len > 1e-4) { a.upper.quaternion.setFromUnitVectors(AX_Y, _sh.multiplyScalar(1 / len)); a.upper.scale.set(1, Math.max(1, len / 0.34), 1); }
     }
+    // CL-334 h (J126 rule 2: "No part of the hand may clip through any part of a weapon"): where this gun's hold presses the
+    // hand into its grip, the hand gives (studio/hand-contacts.js); it fades as the hand's pose leaves the hold's
+    if (arms.r.rig.setContact) { arms.r.rig.setContact(handContact(gun.key, 'r')); arms.l.rig.setContact(AK ? null : handContact(gun.key, 'l')); }
     arms.r.rig.set(poseR).update(); arms.l.rig.set(poseL).update();
     for (const a of [arms.r, arms.l]) if (a.bridge && a.parts.rolled.visible && a.bridge.userData.bend) a.bridge.userData.bend();
     // the magazine: seated, in the support palm, or away in the pouch

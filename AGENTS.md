@@ -1,7 +1,8 @@
 # AGENTS.md — how the Grave Shift crew works
 
-Every agent reads this first, every session: Cursor, ChatGPT, Claude and Antigravity
-(Grokbot and Muse were retired by Jerry on 10 Nov 2026, D-134). Jerry has the final say. Claude leads.
+Every agent reads this first, every session: Claude, Claude 2, ChatGPT and Antigravity
+(Grokbot and Muse were retired by Jerry on 10 Nov 2026, D-134; Cursor the same day, D-137: Claude 2 took its lane).
+Jerry has the final say. Claude leads.
 
 Jerry moves agents between models, so no model is written into this file. The model each
 agent runs on is on its card (`crew/status/<you>.md`) and on the panel, and every check-in
@@ -78,13 +79,13 @@ appends to `handoffs/requests.md` in UTF-8. Don't use PowerShell's `Add-Content`
 - tick your own task's box on the board.
 Claude works that way.
 
-**If you can't run `npm test`,** write "not run" and why under Tests:, and Cursor runs it
-before committing (or Claude, when he commits). ChatGPT's runner does not get past Chrome: `CDP timeout: Page.enable`
+**If you can't run `npm test`,** write "not run" and why under Tests:, and Claude 2 runs it in its cloud
+before the commit (or Claude). ChatGPT's runner does not get past Chrome: `CDP timeout: Page.enable`
 in `tools/cdp.mjs`, even with one worker. That is his environment, not a failing check.
 He writes "not run" and whoever commits runs the suite for him at commit time.
 
-Agent names for the commands: `claude`, `cursor`, `chatgpt`, `antigravity`.
-Task ids: `CL-`, `CU-`, `GP-`, `AG-` (`GB-` and `MU-` are retired, D-134).
+Agent names for the commands: `claude`, `claude2`, `chatgpt`, `antigravity`.
+Task ids: `CL-`, `CB-`, `GP-`, `AG-` (`CU-`, `GB-` and `MU-` are retired, D-134, D-137).
 
 ## Who owns what
 
@@ -93,7 +94,8 @@ The current split (Jerry, 2026-10-15) is on the board under **Who owns what**; i
 | Agent | Owns | Files |
 | --- | --- | --- |
 | Claude (lead) | The board and reviews; the marine's body and fabric (blouse, trousers, hats, gloves), his ears; the inspector; the world, the studio and reactions; story | `crew/BOARD.md`, `studio/marine-body.js`, `studio/marine-cloth.js`, `studio/marine-hats.js`, `studio/inspector/*`, `world/*`, `life/*`, `docs/*` |
-| Cursor | Integration, git (with Claude, rule 6), tools and the game-test queue, the full suite, engine core; direct fixes from Jerry | the `index.html` shell, `core/*`, `tools/*`, `vendor/*`, `package.json` |
+| Claude 2 | Cursor's lane (D-137): integration, tools and the game-test queue, the full suite (in its cloud), engine core, combat; direct fixes from Jerry that Claude routes to it. No git (rule 6) | the `index.html` shell, `core/*`, `tools/*`, `vendor/*`, `package.json`, `combat/*` (not the zombie looks) |
+| (Cursor, retired 10 Nov, D-137) | Its lane moved to Claude 2; its commit runs to Antigravity | — |
 | ChatGPT | Every zombie's look; the marine's fitted helpers, waist and balaclava; what the player reads and decides | `studio/zombie-*.js`, `combat/demon-visual.js`, `combat/zombie-joins.js`, `ui/*`, `game/*` |
 | (Grokbot, retired 10 Nov, D-134) | Its areas moved: the weapon models to ChatGPT (D-122's first round, Claude's polish); combat (the director, builds' behaviour, scripted deaths) to Cursor | `studio/weapon-*.js`: ChatGPT; `combat/*` (not the zombie looks): Cursor |
 | Antigravity | The look of buildables and props; eyes on Jerry's GPU (screenshots and reports) | `index.html` (build meshes), `qa/*` |
@@ -131,8 +133,10 @@ card in `crew/status/`, appends to `crew/LOG.md`, and writes their own handoff n
      (for example `--touch "git"`). The check-in refuses if the other is already in it; wait
      until they check out.
    - `git pull --rebase` before you push, and never force-push.
-   - **Commit jobs (D-131, D-134):** Cursor runs Claude's commit jobs (`cmd /c "Claude Commit.bat" < nul`, after
-     `--touch "git"`) as well as its own. **Small and often (D-135):** each item Claude has reviewed goes into the next
+   - **Commit jobs (D-131, D-134, D-137):** Claude writes every commit job; **Antigravity** runs it on Jerry's PC
+     (`cmd /c "Claude Commit.bat" < nul`, after `--touch "git"`, and nothing else in git). When Antigravity isn't
+     open, Jerry double-clicks `Claude Commit.bat`. Claude and Claude 2 reach the PC through a Linux sandbox with no
+     Windows git: they never run git there. (Cursor ran them until it was retired, D-137.) **Small and often (D-135):** each item Claude has reviewed goes into the next
      commit; landed work never waits more than a day, so a bad change is easy to find and undo.
 7. **Done means all of these:**
    - `npm test` passes, or fails only where it already failed.
@@ -224,13 +228,24 @@ card in `crew/status/`, appends to `crew/LOG.md`, and writes their own handoff n
     something from someone else's files.
 23. **Jerry's notes come to Claude first** (D-135). Claude turns them into named jobs, each with one owner, within the
     hour. Nobody starts a note's item that the board hasn't given them.
+24. **The clipping rules** (Jerry, 10 Nov 2026, J126, D-138, standing). No part of the hand may clip through another part
+    of the hand; no part of the hand may clip through any part of a weapon; no part of the player's arms or legs may clip
+    through any game object. They hold for every pose, hold and animation, first and third person. Each has a test that
+    fails on a breach; a change that makes one fail is not done.
+    The whole game too (J128, D-140): no fabric or material through another, no part of anything through another,
+    nothing floating in the air or sunk into the ground. The exceptions make sense on sight (what flies, a bullet through
+    what it hits, effects) or are named with their reason in `core/clip-exceptions.js`.
+25. **The anatomy rule** (Jerry, 10 Nov 2026, J127, D-139, standing). No part of the player's body bends or turns in a way a
+    body can't, unless he is dead or it looks right for that one case (named, with its reason, in the limits table). Every
+    joint has its range and every pose, hold, clip and IK solve is clamped to it; never widen a range to make a pose fit.
+    Each side (first person, third person) has a test that fails on any angle out of range.
 
 ## Playing to strengths
 
 Four agents, each good at something different. The board gives each one tasks that fit.
 The roadmap to 1.0 (`crew/BOARD.md` and `docs/roadmap.md`, D-43) is laid out that way: the board's "Who
 does what" says what to give each agent and what to keep away from it.
-- **Claude, Cursor and ChatGPT** take the big, cross-cutting work inside
+- **Claude, Claude 2 and ChatGPT** take the big, cross-cutting work inside
   `index.html` and their modules.
 - **Antigravity** can see: it runs the game in a real browser on a real GPU. Every visible
   change goes through it: the pit, the cave warnings, the loading screen, the build aiming.
@@ -240,7 +255,7 @@ does what" says what to give each agent and what to keep away from it.
 - **Owners, ask for help:**
   - `node crew/crew.mjs request <you> antigravity "shots: <what>" "<how to set it up>"`
     when you need eyes on something.
-  - If you can't run the tests, write "Tests: not run" and whoever commits (Cursor or Claude) runs them.
+  - If you can't run the tests, write "Tests: not run" and Claude 2 (or Claude) runs them before the commit.
 
 ## Handoff note template (`handoffs/YYYY-MM-DD-<agent>-<task>.md`)
 

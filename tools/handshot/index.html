@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Hand shot (CL-334)</title>
+<style>html,body{margin:0;background:#2a2d33;height:100%;overflow:hidden}</style>
+<script type="importmap">{ "imports": { "three": "../../vendor/three/three.webgpu.js", "three/webgpu": "../../vendor/three/three.webgpu.js", "three/tsl": "../../vendor/three/three.tsl.js" } }</script>
+</head><body><script type="module">
+// CL-334: the hand on its own. ?which=new|old&W=&H=. window.HS.shot({ pose, view, side, glove, bar }) draws one frame.
+import * as THREE from 'three';
+const q = new URLSearchParams(location.search);
+const W = +q.get('w') || 640, H = +q.get('h') || 480;
+const mod = await import(q.get('which') === 'old' ? '../../studio/marine-hand-old.js' : '../../studio/marine-hand' + (q.get('which') === 'v1' ? '-v1' : '') + '.js');
+const renderer = new THREE.WebGPURenderer({ antialias: true, forceWebGL: true });
+await renderer.init(); renderer.setPixelRatio(1); renderer.setSize(W, H, false);
+document.body.appendChild(renderer.domElement);
+const scene = new THREE.Scene(); scene.background = new THREE.Color(0x2a2d33);
+scene.add(new THREE.HemisphereLight(0xdde2ea, 0x3a3732, 1.6));
+const sun = new THREE.DirectionalLight(0xfff4e0, 2.4); sun.position.set(1.5, 3, 2.5); scene.add(sun);
+const fill = new THREE.DirectionalLight(0xc8d0e0, 0.6); fill.position.set(-2, -1, -2); scene.add(fill);
+const glove = new THREE.MeshStandardMaterial({ color: 0x2b2e2a, roughness: 0.82, metalness: 0.02 });
+const pads = new THREE.MeshStandardMaterial({ color: 0x1a1c1b, roughness: 0.6, metalness: 0.05 });
+const skin = new THREE.MeshStandardMaterial({ color: 0xc89a78, roughness: 0.62, metalness: 0 });
+// CL-334 g: the detail maps (second UV channel)
+const TL = new THREE.TextureLoader(), tex = async (n, srgb) => { const t = await TL.loadAsync('../../assets/hand/' + n + '.png'); t.channel = 1; t.anisotropy = 8; if (srgb) t.colorSpace = THREE.SRGBColorSpace; return t; };
+if (q.get('detail') !== '0') {
+  skin.map = await tex('hand-skin-colour', true); skin.normalMap = await tex('hand-skin-normal'); skin.normalScale = new THREE.Vector2(1, 1);
+  glove.map = await tex('hand-glove-colour', true); glove.normalMap = await tex('hand-glove-normal'); glove.normalScale = new THREE.Vector2(1, 1);
+  skin.needsUpdate = glove.needsUpdate = true;
+}
+const nailM = new THREE.MeshStandardMaterial({ color: new THREE.Color(0xc89a78).lerp(new THREE.Color(0.94, 0.8, 0.76), 0.14), roughness: 0.5, metalness: 0 });
+const OX = 0, GZ = 0.07;
+const hands = {};
+for (const side of [1, -1]) for (const gl of [true, false]) {
+  const b = mod.buildHandMeshes({ T: THREE, s: side, ox: OX, gz: GZ, mat: gl ? glove : skin, padMat: gl ? pads : null, nailMat: gl ? null : nailM, detail: 'high' });
+  const g = new THREE.Group(); g.add(b.meshes.main); if (b.meshes.pads) g.add(b.meshes.pads); if (b.meshes.nails) g.add(b.meshes.nails);
+  const rig = mod.makeHandRig(side, [b], mod.HAND_POSES.open);
+  g.visible = false; scene.add(g);
+  let tris = 0; g.traverse((o) => { if (o.isMesh) tris += (o.geometry.index ? o.geometry.index.count : o.geometry.attributes.position.count) / 3; });
+  hands[side + (gl ? 'g' : 'b')] = { g, rig, tris };
+}
+const bar = new THREE.Mesh(new THREE.CylinderGeometry(0.013, 0.013, 0.14, 24), new THREE.MeshStandardMaterial({ color: 0x5a6a7a, roughness: 0.5 }));
+// CL-334 h: where HAND_POSES.fist's bar settled in the solve (2.4 mm toward the knuckles from the grip channel)
+bar.rotation.z = Math.PI / 2; bar.position.set(OX, -0.2734, GZ + 0.0079); bar.visible = false; scene.add(bar);
+// CL-334 h: a gun's triangles in the hand's canonical space (cloud checks only: o.gun is a JSON { tris: base64 Float32 })
+const gunMat = new THREE.MeshStandardMaterial({ color: 0x7d8a99, roughness: 0.5, metalness: 0.1, transparent: true, opacity: +(q.get("gunop") || 0.55), side: THREE.DoubleSide, depthWrite: +(q.get("gunop") || 0.55) >= 1 });
+const gunCache = {}; let gunMesh = null;
+async function gunOf(url) {
+  if (gunCache[url]) return gunCache[url];
+  const j = await (await fetch(url)).json(), bin = atob(j.tris), u = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i);
+  const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(u.buffer), 3)); g.computeVertexNormals();
+  return (gunCache[url] = new THREE.Mesh(g, gunMat));
+}
+const cam = new THREE.PerspectiveCamera(30, W / H, 0.005, 10);
+const target = new THREE.Vector3(OX, -0.27, GZ - 0.01);
+const VIEWS = { back: [0, 0.02, -0.38], palm: [0, 0.02, 0.38], radial: [0.38, 0.02, 0.0], ulnar: [-0.38, 0.02, 0], tip: [0, -0.38, 0.05], q1: [0.25, 0.12, 0.28], q2: [-0.22, 0.14, -0.28], top: [0.0, 0.38, 0.05] };
+window.HS = { tris: Object.fromEntries(Object.entries(hands).map(([k, v]) => [k, v.tris])),
+  async shot(o = {}) {
+    for (const k in hands) hands[k].g.visible = false;
+    if (gunMesh) { scene.remove(gunMesh); gunMesh = null; }
+    if (o.gun) { gunMesh = await gunOf(o.gun); gunMesh.position.set(OX, 0, GZ); gunMesh.scale.set(o.side === -1 ? -1 : 1, 1, 1); scene.add(gunMesh); }
+    const h = hands[(o.side || 1) + (o.glove === false ? 'b' : 'g')]; h.g.visible = true;
+    h.rig.set(o.pose || mod.HAND_POSES.open).update(true);
+    bar.visible = !!o.bar;
+    const v = VIEWS[o.view || 'back'] || o.view; const k = o.d || 1;
+    cam.position.set(target.x + v[0] * k * (o.side === -1 && !o.nomirror ? -1 : 1), target.y + v[1] * k, target.z + v[2] * k);
+    cam.up.set(0, 1, 0); cam.lookAt(target); cam.updateMatrixWorld(true);
+    renderer.render(scene, cam);
+    return renderer.domElement.toDataURL('image/jpeg', 0.9);
+  } };
+window.HS_READY = true;
+</script></body></html>

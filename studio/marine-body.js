@@ -508,7 +508,7 @@ export function buildMarineBody(T, {root, put, rmesh: roundedMesh, cyl, part, dr
     // whichever way the forearm comes to it. At rest the wrist is identity: the hand is exactly where it was built.
     // userData.grip is that channel's middle (elbow space, wrist at rest): where a gun's grip or forend goes through.
     const wrist=new T.Group();wrist.name='wrist';wrist.position.set(ox,-.214,(oz+gz)/2);elbowG.add(wrist);
-    wrist.userData.grip=new T.Vector3(ox,-.262,gz+.008);
+    wrist.userData.grip=new T.Vector3(ox,-.271,gz+.008);   // CL-334 e: the grip channel 22 mm short of the knuckles, as the longer palm has it (was -.262)
     // GB-152 (Jerry: "Make hands that have real finger."): a palm, a two-segment thumb and four three-segment fingers
     // (studio/marine-hand.js) in place of the mitt, same size and materials, the index finger and the thumb now on the
     // correct edge. One rig per hand moves the glove and the bare hand alike: wrist.userData.hand.set(pose).update().

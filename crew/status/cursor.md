@@ -1,15 +1,17 @@
 # Cursor
 
-state: active
+state: away
 model: Grok 4.7
-task: CU-252 10 Nov checkpoint commit
-touching: git
-since: 2026-11-10T07:31Z
-next: CU-243 The full suite on the current tree, reds by owner. Now (when
+task: —
+touching: —
+since: 2026-11-10T07:32Z
+next: — (retired, D-137)
 blocked-on: —
-last-report: handoffs/2026-11-10-cursor-CU-246.md
+last-report: handoffs/2026-11-10-cursor-CU-252.md
 
 ## Notes
+
+**Retired 10 Nov (D-137): Jerry cancelled Cursor after its 10 Nov checkpoint (af7d792d). Its lane and open cards are Claude 2's (CU-243, CU-247..251 -> CB-243, CB-247..251); the commit runs are Antigravity's.**
 
 ### Your model (Jerry, 2026-10-31)
 You run on **Grok 4.7** again (Claude Sonnet 5.5 was eating through usage): check in with `--model "Grok 4.7"`.
