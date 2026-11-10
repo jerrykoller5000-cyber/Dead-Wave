@@ -1,0 +1,144 @@
+{
+  "timestamp": "2026-11-10T03:27:01.111Z",
+  "gpu": "NVIDIA GeForce RTX 5080 (WebGPU)",
+  "task": "AG-276",
+  "target": "GP-20073",
+  "checks": [
+    {
+      "name": "Locked gun (minigun) displays icon",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Locked gun (minigun) Buy button is disabled",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Emplacements shelf contains M240 and Mortar",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Emplacements have distinct vector icons",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Armory catalogue sections Ammo & Upgrades",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Armory shelves stack cleanly without large gap",
+      "pass": true,
+      "detail": "gap: 31px"
+    },
+    {
+      "name": "Armory has no horizontal overflow at 1280x720",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Pistol auto mod starts buyable",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "One click buys and immediately fits attachment",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Workbench ammo button enabled when empty",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Workbench ammo purchase adds reserve magazines",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "NO AMMO banner clears upon purchase",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Watchman MG plan unlocked",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Mortar plan unlocked",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Watchman MG dedicated 7.62 belt ammo button present",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Mortar dedicated 60mm/81mm ammo button present",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Kiosk builds lists light turret",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Kiosk builds lists flame turret",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Kiosk builds lists heavy turret",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Kiosk builds lists land mines",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Kiosk builds excludes Watchman MG (moved to Armory)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Kiosk builds excludes Mortar (moved to Armory)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Mobile Armory panel has zero horizontal overflow",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Mobile viewport document has zero horizontal overflow",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Mobile Pistol Workbench has zero horizontal overflow",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Mobile Workbench mod buttons render with readable tap width",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Mobile Kiosk panel has zero horizontal overflow",
+      "pass": true,
+      "detail": ""
+    }
+  ],
+  "layout": {}
+}

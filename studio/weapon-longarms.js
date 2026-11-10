@@ -206,7 +206,7 @@ export function makeM4Model(ctx) {
   // glass with the dot and its ring on the same line (0, 0.134, 0.0455).
   K.box(0.05, 0.018, 0.112, gunDark, 0, 0.099, 0.0, 0, 0, 0, null, 0.004);                   // the base
   K.slab([[-0.052, 0.108], [0.054, 0.108], [0.054, 0.118], [-0.052, 0.118]], 0.05, gunDark, { bevel: 0.003 });   // the housing's floor
-  K.box(0.046, 0.02, 0.04, gunDark, 0, 0.126, -0.03, 0, 0, 0, null, 0.003);                   // the rear housing (the emitter)
+  K.box(0.046, 0.016, 0.04, gunDark, 0, 0.118, -0.03, 0, 0, 0, null, 0.003);                  // the rear housing (the emitter); CL-332 d: under the dot's line (was 0.02 tall at 0.126: it hid the dot)
   for (const sx of [-1, 1]) K.box(0.007, 0.05, 0.03, gunDark, sx * 0.0235, 0.14, 0.046, 0, 0, 0, null, 0.0025);   // the hood's uprights
   K.box(0.054, 0.007, 0.03, gunDark, 0, 0.1665, 0.046, 0, 0, 0, null, 0.0025);                                  // the hood's top bar
   K.box(0.054, 0.006, 0.03, gunDark, 0, 0.1125, 0.046, 0, 0, 0, null, 0.002);                                   // its bottom bar
@@ -217,8 +217,8 @@ export function makeM4Model(ctx) {
   // GB-259 (J10): a 3.5 mm dot inside a thin ring, EOTech-style.
   K.box(0.0035, 0.0035, 0.002, sightDotMat, 0, 0.134, 0.0455);
   K.tor(0.0075, 0.0006, sightDotMat, 0, 0.134, 0.0455, 0, 0, 0, null, Math.PI * 2, 24);
-  for (const z of [-0.036, -0.022]) K.box(0.006, 0.008, 0.01, gunRubber, 0.0255, 0.126, z);        // the brightness buttons on the emitter's side
-  K.cyl(0.008, 0.008, 0.012, gunMid, -0.028, 0.126, -0.03, null, 10, 'x');                        // the battery cap
+  for (const z of [-0.036, -0.022]) K.box(0.006, 0.008, 0.01, gunRubber, 0.0255, 0.118, z);        // the brightness buttons on the emitter's side
+  K.cyl(0.007, 0.007, 0.012, gunMid, -0.028, 0.118, -0.03, null, 10, 'x');                        // the battery cap
   K.slab([[-0.046, 0.092], [-0.02, 0.092], [-0.02, 0.098], [-0.046, 0.098]], 0.008, gunDark, { x: 0.03, bevel: 0.0015 });   // the clamp's lever
   for (const sx of [-1, 1]) D.screw(gun, sx * 0.025, 0.1, 0.033, { axis: 'x', side: sx, r: 0.0025, kind: 'hex' });
   const defaultSight = K.group(0, 0, 0);

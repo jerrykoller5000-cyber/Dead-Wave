@@ -1,0 +1,61 @@
+{
+  "timestamp": "2026-11-10T05:14:48.680Z",
+  "gpu": "NVIDIA GeForce RTX 5080",
+  "renderer": "WebGPU",
+  "pistol": {
+    "poseInspection": {
+      "hasGun": true,
+      "gunKey": "pistol"
+    },
+    "reloadCompleted": true
+  },
+  "wasp": {},
+  "risers": {
+    "kr7": {
+      "hasOptic": true,
+      "opticPos": [
+        0,
+        0.101,
+        0.065
+      ],
+      "sightLine": {
+        "kind": "rmr",
+        "eye": [
+          0,
+          0.12499999999988634,
+          0.031000000000062762
+        ],
+        "dot": [
+          0,
+          0.12499999999988634,
+          0.07700000000011188
+        ],
+        "topEye": null,
+        "topDot": null
+      }
+    },
+    "m4": {
+      "hasOptic": true,
+      "opticPos": [
+        0,
+        0.128,
+        0.005
+      ],
+      "sightLine": {
+        "kind": "rmr",
+        "eye": [
+          -2.8421709430404014e-14,
+          0.15200000000004368,
+          -0.02899999999999637
+        ],
+        "dot": [
+          -5.684341886080803e-14,
+          0.15199999999993,
+          0.017000000000052754
+        ],
+        "topEye": null,
+        "topDot": null
+      }
+    }
+  }
+}

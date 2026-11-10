@@ -1,13 +1,13 @@
 # Cursor
 
-state: idle
+state: active
 model: Grok 4.7
-task: —
-touching: —
-since: 2026-11-09T22:47Z
+task: CU-252 10 Nov checkpoint commit
+touching: git
+since: 2026-11-10T07:31Z
 next: CU-243 The full suite on the current tree, reds by owner. Now (when
 blocked-on: —
-last-report: handoffs/2026-11-09-cursor-CU-243.md
+last-report: handoffs/2026-11-10-cursor-CU-246.md
 
 ## Notes
 

@@ -20,7 +20,9 @@ import { text, hasText } from './strings.js';
 // Called only for a visible workbench and an interaction/refresh; angles are radians.
 export function mountArmory({ doc = document, bus = window, cif = doc.getElementById('cif'),
   getPhase = () => 'prep', getOwned = () => [], onApply = () => {}, onReset = null, armory: shared = null,
-  getMods = () => [], onFit = () => false, onBuyMod = () => false, onOpenCatalogue = () => {}, onCloseCatalogue = () => {}, picture = async () => null, icon = () => '', describe = () => '',
+  getMods = () => [], onFit = () => false, onBuyMod = () => false, getAmmoOffer = () => null, onBuyAmmo = () => false,
+  getGunOffers = () => [], onBuyGun = () => false, getBuildOffers = () => [], onBuyBuild = () => false,
+  onOpenCatalogue = () => {}, onCloseCatalogue = () => {}, picture = async () => null, icon = () => '', describe = () => '',
   getFinishes = () => null, onFinish = () => false, preview = null,
   getLaser = () => null, onLaser = () => false } = {}) {
   if (!cif?.querySelector('.card > .modes')) throw new Error('CIF window is missing');
@@ -48,7 +50,15 @@ export function mountArmory({ doc = document, bus = window, cif = doc.getElement
   const hip = el('div', 'armory-hip');
   const shelfTitle = el('h3', null, text('armory.shelf'));
   const shelf = el('div', 'armory-shelf');
-  left.append(carryTitle, slotGrid, hip, shelfTitle, shelf);
+  const gunOffersTitle = el('h3', null, text('armory.gunOffers'));
+  const gunOffers = el('div', 'armory-shelf armory-offers');
+  const buildOffersTitle = el('h3', null, text('armory.buildOffers'));
+  const buildOffers = el('div', 'armory-shelf armory-offers armory-build-offers');
+  const carried = el('div', 'armory-carried');
+  const locker = el('div', 'armory-locker');
+  carried.append(carryTitle, slotGrid, hip);
+  locker.append(shelfTitle, shelf, gunOffersTitle, gunOffers, buildOffersTitle, buildOffers);
+  left.append(carried, locker);
   const benchEl = el('aside', 'armory-bench'); benchEl.setAttribute('aria-live', 'polite');
   // GP-141 stays on the still picture until its owner supplies the renderer and catalogue copy.
   const previewKeys = ['label','hint','left','right','unavailable'];
@@ -76,10 +86,14 @@ export function mountArmory({ doc = document, bus = window, cif = doc.getElement
   const modsOf = kind => { try { return getMods(kind) || []; } catch (_) { return []; } };
   // The gun's picture: the stand-in icon at once, the real gun when it's drawn (and again when its look changes).
   const pics = new Map();
-  function gunPicture(kind, cls = 'armory-pic') {
-    const box = el('span', cls); box.dataset.pic = kind;
+  function gunIcon(kind, cls = 'armory-pic') {
+    const box = el('span', cls);
     const svg = icon(kind);
     if (svg) box.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true">' + svg + '</svg>';
+    return box;
+  }
+  function gunPicture(kind, cls = 'armory-pic') {
+    const box = gunIcon(kind, cls); box.dataset.pic = kind;
     const want = pics.get(kind);
     if (want) setPic(box, want);
     Promise.resolve().then(() => picture(kind)).then(url => {
@@ -128,6 +142,17 @@ export function mountArmory({ doc = document, bus = window, cif = doc.getElement
     const name = el('p', 'armory-bench-name', text(`weapon.${kind}.name`));
     const ammo = el('p', 'armory-bench-ammo', describe(kind) || '');
     benchEl.append(pic, name, ammo);
+    const offer = getAmmoOffer(kind);
+    if (offer) {
+      const refill = el('div', 'armory-ammo-offer');
+      refill.append(el('span', null, offer.full ? t('armory.ammoFull', {}, 'Ammo full') : offer.affordable
+        ? t('armory.ammoPrice', { price: offer.price }, 'Restock ammo · ${price} Cash')
+        : t('armory.store.shortfall', { price: offer.price, amount: offer.shortfall }, '${price} Cash · Need {amount} more')));
+      const buy = el('button', null, t('armory.ammoBuy', {}, 'Buy ammo')); buy.type = 'button'; buy.dataset.buyAmmo = kind;
+      buy.disabled = offer.full || !offer.affordable;
+      buy.addEventListener('click', () => { if (onBuyAmmo(kind)) render(); });
+      refill.append(buy); benchEl.append(refill);
+    }
     const mods = modsOf(kind);
     if (!mods.length) { benchEl.append(el('p', 'armory-bench-empty', t('armory.noMods', {}, 'This gun takes no attachments.'))); renderFinishes(kind); renderLaser(benchGun()); return; }
     const list = el('ul', 'armory-mods');
@@ -139,7 +164,10 @@ export function mountArmory({ doc = document, bus = window, cif = doc.getElement
       const state = el('span', 'armory-mod-state', m.fitted ? t('armory.fitted', {}, 'Fitted') : m.owned ? t('armory.inStore', {}, 'Owned · not fitted') : m.shortfall ? t('armory.store.shortfall', { price: m.price, amount: m.shortfall }, '${price} · Need {amount} more Cash') : t('armory.store.price', { price: m.price }, '${price} Cash'));
       const b = el('button', null, !m.owned ? t('armory.store.buy', {}, 'Buy') : m.fitted ? t('armory.remove', {}, 'Take off') : t('armory.fit', {}, 'Put on')); b.type = 'button';
       b.disabled = !m.owned && !m.affordable;
-      b.addEventListener('click', () => { if (m.owned ? onFit(kind, m.id, !m.fitted) : onBuyMod(kind, m.id)) render(); });
+      b.addEventListener('click', () => {
+        const changed = m.owned ? onFit(kind, m.id, !m.fitted) : onBuyMod(kind, m.id) && onFit(kind, m.id, true);
+        if (changed) render();
+      });
       li.append(txt, state, b);
       list.append(li);
     }
@@ -209,7 +237,7 @@ export function mountArmory({ doc = document, bus = window, cif = doc.getElement
     button.disabled = getPhase() !== 'prep';
     if (!open) return;
     const state = armory.read();
-    slotGrid.replaceChildren(); shelf.replaceChildren(); hip.replaceChildren();
+    slotGrid.replaceChildren(); shelf.replaceChildren(); hip.replaceChildren(); gunOffers.replaceChildren(); buildOffers.replaceChildren();
     for (const type of ['primary', 'secondary']) for (let index = 0; index < 2; index++) {
       const gun = state.slots[type][index];
       const on = selected.type === type && selected.index === index;
@@ -254,6 +282,40 @@ export function mountArmory({ doc = document, bus = window, cif = doc.getElement
       shelf.append(item);
     }
     if (!state.shelf.length) shelf.append(el('p', null, text('armory.shelfEmpty')));
+    for (const gun of getGunOffers()) {
+      const item = el('div', 'armory-item armory-offer'); item.dataset.offerGun = gun.kind;
+      const gunCost = gun.available && !gun.affordable
+        ? t('armory.store.shortfall', { price: gun.price, amount: gun.shortfall }, '${price} Cash · Need {amount} more')
+        : t('armory.store.price', { price: gun.price }, '${price} Cash') + (gun.available ? '' : ' · ' + t('armory.unlockNight', { night: gun.night }, 'Night {night}'));
+      item.append(gunIcon(gun.kind), el('strong', 'armory-name', gun.name), el('small', null, gunCost));
+      const buy = el('button', 'armory-offer-buy', t('armory.store.buy', {}, 'Buy')); buy.type = 'button'; buy.dataset.buyGun = gun.kind;
+      buy.disabled = !gun.available || !gun.affordable;
+      buy.addEventListener('click', () => { if (onBuyGun(gun.kind)) { syncOwned(); bench = gun.kind; render(); } });
+      item.append(buy); gunOffers.append(item);
+    }
+    gunOffersTitle.hidden = gunOffers.hidden = !gunOffers.childElementCount;
+    for (const plan of getBuildOffers()) {
+      const item = el('div', 'armory-item armory-offer'); item.dataset.offerBuild = plan.kind;
+      const graphic = el('span', 'armory-pic');
+      if (plan.icon) graphic.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true">' + plan.icon + '</svg>';
+      const planCost = plan.owned ? t('armory.buildOwned', {}, 'Blueprint owned') : plan.affordable
+        ? t('armory.store.price', { price: plan.price }, '${price} Cash')
+        : t('armory.store.shortfall', { price: plan.price, amount: plan.shortfall }, '${price} Cash · Need {amount} more');
+      item.append(graphic, el('strong', 'armory-name', plan.name), el('small', null, planCost));
+      const buy = el('button', 'armory-offer-buy', plan.owned ? t('armory.buildOwned', {}, 'Owned') : t('armory.store.buy', {}, 'Buy'));
+      buy.type = 'button'; buy.dataset.buyBuild = plan.kind; buy.disabled = plan.owned || !plan.affordable;
+      buy.addEventListener('click', () => { if (onBuyBuild(plan.kind)) render(); });
+      item.append(buy);
+      if (plan.owned && plan.ammo) {
+        if (!plan.ammo.full && !plan.ammo.affordable) item.append(el('small', null,
+          t('armory.store.shortfall', { price: plan.ammo.price, amount: plan.ammo.shortfall }, '${price} Cash · Need {amount} more')));
+        const refill = el('button', 'armory-offer-ammo', t('armory.ammoPack', { price: plan.ammo.price }, 'Ammo · ${price}'));
+        refill.type = 'button'; refill.dataset.buyBuildAmmo = plan.kind; refill.disabled = plan.ammo.full || !plan.ammo.affordable;
+        refill.addEventListener('click', () => { if (onBuyAmmo(plan.kind)) render(); });
+        item.append(refill);
+      }
+      buildOffers.append(item);
+    }
     stow.disabled = !state.slots[selected.type][selected.index];
     renderBench();
   }

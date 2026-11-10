@@ -56,10 +56,12 @@ export function createCifMenu({root, text, freeCamos, getGear=()=>null}) {
       $('cifPreviewNote').textContent = text('cif.menu.' + (tab === 'guns' ? 'gunNote' : 'drag'));
       $('cifReset').textContent = text('cif.menu.reset',{category:text('cif.tab.' + tab)});
       for (const button of root.querySelectorAll('#cifTabs button, #cifItems button, #cifOptions button, #cifList button')) button.setAttribute('aria-pressed',String(button.classList.contains('on')));
+      for (const old of [...list.querySelectorAll('.cif-group[data-cif-patterns]')]) old.remove();
       if (camos.length) {
-        const heading = document.createElement('div');heading.className = 'cif-group';heading.textContent = text('cif.menu.patterns');list.prepend(heading);
+        const heading = document.createElement('div');heading.className = 'cif-group';heading.dataset.cifPatterns = '';heading.textContent = text('cif.menu.patterns');list.prepend(heading);
         for (const button of camos) {
           const mark = button.querySelector('b');
+          button.querySelector('.cif-lock')?.remove();
           if (!button.disabled) mark.textContent = text('cif.menu.' + (button.classList.contains('on') ? 'equipped' : freeCamos.includes(button.dataset.camo) ? 'issued' : 'earned'));
           else {
             const lock = document.createElement('span');lock.className = 'cif-lock';lock.textContent = text('cif.menu.locked');button.insertBefore(lock,mark);

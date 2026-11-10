@@ -1,7 +1,7 @@
 # AGENTS.md — how the Grave Shift crew works
 
-Every agent reads this first, every session: Cursor, ChatGPT, Grokbot, Claude,
-Antigravity and Muse. Jerry has the final say. Claude leads.
+Every agent reads this first, every session: Cursor, ChatGPT, Claude and Antigravity
+(Grokbot and Muse were retired by Jerry on 10 Nov 2026, D-134). Jerry has the final say. Claude leads.
 
 Jerry moves agents between models, so no model is written into this file. The model each
 agent runs on is on its card (`crew/status/<you>.md`) and on the panel, and every check-in
@@ -83,8 +83,8 @@ before committing (or Claude, when he commits). ChatGPT's runner does not get pa
 in `tools/cdp.mjs`, even with one worker. That is his environment, not a failing check.
 He writes "not run" and whoever commits runs the suite for him at commit time.
 
-Agent names for the commands: `claude`, `cursor`, `chatgpt`, `grokbot`,
-`antigravity`, `muse`. Task ids: `CL-`, `CU-`, `GP-`, `GB-`, `AG-`, `MU-`.
+Agent names for the commands: `claude`, `cursor`, `chatgpt`, `antigravity`.
+Task ids: `CL-`, `CU-`, `GP-`, `AG-` (`GB-` and `MU-` are retired, D-134).
 
 ## Who owns what
 
@@ -95,9 +95,8 @@ The current split (Jerry, 2026-10-15) is on the board under **Who owns what**; i
 | Claude (lead) | The board and reviews; the marine's body and fabric (blouse, trousers, hats, gloves), his ears; the inspector; the world, the studio and reactions; story | `crew/BOARD.md`, `studio/marine-body.js`, `studio/marine-cloth.js`, `studio/marine-hats.js`, `studio/inspector/*`, `world/*`, `life/*`, `docs/*` |
 | Cursor | Integration, git (with Claude, rule 6), tools and the game-test queue, the full suite, engine core; direct fixes from Jerry | the `index.html` shell, `core/*`, `tools/*`, `vendor/*`, `package.json` |
 | ChatGPT | Every zombie's look; the marine's fitted helpers, waist and balaclava; what the player reads and decides | `studio/zombie-*.js`, `combat/demon-visual.js`, `combat/zombie-joins.js`, `ui/*`, `game/*` |
-| Grokbot | Every weapon (sole owner); combat: the director, builds' behaviour, scripted deaths | `studio/weapon-*.js`, `combat/*` (not the zombie looks) |
+| (Grokbot, retired 10 Nov, D-134) | Its areas moved: the weapon models to ChatGPT (D-122's first round, Claude's polish); combat (the director, builds' behaviour, scripted deaths) to Cursor | `studio/weapon-*.js`: ChatGPT; `combat/*` (not the zombie looks): Cursor |
 | Antigravity | The look of buildables and props; eyes on Jerry's GPU (screenshots and reports) | `index.html` (build meshes), `qa/*` |
-| Muse | Claude's assistant (Jerry, 2026-10-29): the MU-n tasks Claude writes, in Claude's areas; Node-only checks; never starts the game, never uses git | only the files its task names |
 
 A file not in this table: ask Claude before you start. Until the split lands, "files" means the matching sections of `index.html`. Several agents
 can work in it at once, one per part: name your part in `--touch`, for example
@@ -132,7 +131,9 @@ card in `crew/status/`, appends to `crew/LOG.md`, and writes their own handoff n
      (for example `--touch "git"`). The check-in refuses if the other is already in it; wait
      until they check out.
    - `git pull --rebase` before you push, and never force-push.
-   - **This week (D-113, Jerry 5 Nov):** while Cursor's loop is down, Grokbot runs Claude's commit jobs: `cmd /c "Claude Commit.bat" < nul` only, after `--touch "git"` and `npm test`; no other git.
+   - **Commit jobs (D-131, D-134):** Cursor runs Claude's commit jobs (`cmd /c "Claude Commit.bat" < nul`, after
+     `--touch "git"`) as well as its own. **Small and often (D-135):** each item Claude has reviewed goes into the next
+     commit; landed work never waits more than a day, so a bad change is easy to find and undo.
 7. **Done means all of these:**
    - `npm test` passes, or fails only where it already failed.
    - Anything visible has before-and-after shots from `tools/shoot.mjs`
@@ -183,7 +184,9 @@ card in `crew/status/`, appends to `crew/LOG.md`, and writes their own handoff n
     - The slot is only for running the game, never for coding: make your changes and prepare your checks, queue them, keep
       working while you wait. If your session ends before your turn, say so plainly on your card and in the log:
       "Changes ready; waiting for testing slot". Never stop silently or call the task done before its checks have run.
-    - The full suite is one coordinated integration job (Cursor, or Claude when he commits), not a check after each edit.
+    - The full suite is one coordinated integration job, not a check after each edit. **D-135:** Claude runs full suites
+      and broad batches in his cloud workspace; the PC's slot is for Antigravity's looks on Jerry's GPU, for Jerry, and
+      for each owner's targeted tests of the item in hand.
     - Claude's cloud workspace is a separate computer (the queue keeps a separate state there); Claude keeps it to one
       instance at a time and logs those runs. Every test on Jerry's PC, Claude's included, goes through the queue.
     - Record the rule in your handoff notes.
@@ -210,12 +213,24 @@ card in `crew/status/`, appends to `crew/LOG.md`, and writes their own handoff n
     `docs/sound-principles.md` and `docs/ui-principles.md` (approved, D-92; a sound plays only if it's immersive or
     impactful).
 
+20. **One owner per job, start to finish** (Jerry, 10 Nov, D-135). Every job has one owner who takes it from the first
+    look to the handoff; Claude reviews it. Ask another agent only for what is truly in their files; never split a job
+    to hand half of it on. Each handoff loses detail and time.
+21. **Pictures as proof** (D-135). Nothing visible is done without before-and-after pictures from the same spot, in
+    `review/<task>/` or `Claude outputs/<task>/`, named in the handoff. Antigravity's looks report what the pictures
+    and the numbers show; "verified" alone counts as not verified.
+22. **Less paperwork** (D-135). A board card is one line; the log gets your start and your done, nothing in between
+    (no check-in pings, no duplicate replies); a handoff is the template below, short. Requests only when you need
+    something from someone else's files.
+23. **Jerry's notes come to Claude first** (D-135). Claude turns them into named jobs, each with one owner, within the
+    hour. Nobody starts a note's item that the board hasn't given them.
+
 ## Playing to strengths
 
-Five agents, each good at something different. The board gives each one tasks that fit.
+Four agents, each good at something different. The board gives each one tasks that fit.
 The roadmap to 1.0 (`crew/BOARD.md` and `docs/roadmap.md`, D-43) is laid out that way: the board's "Who
 does what" says what to give each agent and what to keep away from it.
-- **Claude, Cursor, ChatGPT and Grokbot** take the big, cross-cutting work inside
+- **Claude, Cursor and ChatGPT** take the big, cross-cutting work inside
   `index.html` and their modules.
 - **Antigravity** can see: it runs the game in a real browser on a real GPU. Every visible
   change goes through it: the pit, the cave warnings, the loading screen, the build aiming.

@@ -24695,6 +24695,17 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       pistol: [0, 0.026, -0.061], revolver: [0, 0.122, -0.018],
       uzi: [0, 0.155, 0.035], shotgun: [0, 0.065, 0.065],
       aa12: [0, 0.166, -0.045], minigun: [0, 0.195, 0.006], launcher: [0, 0.146, -0.049] };
+    // CL-332 (J96): risers (gun units) where the line through the optic ran into the gun: the shotgun's RMR (bead and
+    // suppressor top at 0.100, its line was 0.089) and the KR-7's RMR (front post top 0.138, line 0.131).
+    const OPTIC_RISER = { shotgun: { rmr: 0.026 }, m4: { rmr: 0.021 } };
+    function opticRiser(K, rise, len) {
+      K.box(0.030, rise, len, gunDark, 0, -rise / 2, 0, 0, 0, 0, null, 0.002);                // the block
+      K.box(0.036, 0.006, len * 0.86, gunDark, 0, -rise + 0.003, 0, 0, 0, 0, null, 0.0015);    // the clamp foot on the rail
+      for (const s of [-1, 1]) {
+        K.box(0.0015, rise * 0.5, len * 0.42, gunAccent, s * 0.0152, -rise * 0.5, 0, 0, 0, 0, null, 0.0005);   // a lightening cut
+        K.cyl(0.0032, 0.0032, 0.004, gunAccent, s * 0.0195, -rise + 0.004, len * 0.22, null, 10, 'x');           // the clamp knob
+      }
+    }
     function syncOpticLooks() {
       for (const w of Object.keys(OPTIC_OPTIONS)) for (const gun of [weaponMeshes[w], offhandMeshes && offhandMeshes[w]]) {
         if (!gun) continue;
@@ -24709,12 +24720,14 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         const mount = new THREE.Group(); mount.name = `fitted-optic-${kind}`;
         mount.userData.kind = kind;
         mount.position.set(...OPTIC_MOUNT[w]);
+        const rise = (OPTIC_RISER[w] && OPTIC_RISER[w][kind]) || 0;   // CL-332 (J96)
+        if (rise) { mount.position.y += rise; opticRiser(gunKit(mount), rise, 0.05); }
         parent.add(mount);
         // Removable short rails also bridge the rotary arch and the launcher's receiver
         // after their larger stock reflex units come off.
         if (['ak', 'shotgun', 'aa12', 'minigun', 'launcher'].includes(w)) {
           const railY = w === 'minigun' ? -0.014 : w === 'launcher' ? -0.017 : -0.009;
-          gunKit(mount).rail(kind === 'acog' ? 0.11 : 0.075, 0, railY, 0, null, 0.034);
+          gunKit(mount).rail(kind === 'acog' ? 0.11 : 0.075, 0, railY - rise, 0, null, 0.034);   // CL-332: under the riser
         }
         const optic = makeOptic(kind); mount.add(optic);
         foldStatic(THREE, TSL, optic, { enter: (o) => o.isMesh });   // CL-329: a fitted optic is one mesh and its glass (it was 20-47 named pieces, fitted after foldGun had run)
@@ -28823,7 +28836,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       ['loadout', ['weapons', 'upgrades']], ['supplies', ['ammo']], ['builds', ['build', 'fortify']]
     ];
     const SHOP_TABS_KIOSK = [ ['supplies', ['gear']], ['builds', ['build', 'fortify']] ];
-    const WEAPON_BUILD_PLANS = new Set(['m240', 'mortar', 'light', 'flame', 'heavy', 'mine']);
+    const WEAPON_BUILD_PLANS = new Set(['m240', 'mortar']);
     const SHOP_ICONS = { weapons: '⌖', upgrades: '◇', ammo: '▥', gear: '+', build: '▤', fortify: '⬡' };
     const SHOP_GROUP_HINT = {
       loadout: dwText('shop.groupHint.loadout'), supplies: dwText('shop.groupHint.supplies'), builds: dwText('shop.groupHint.builds')
@@ -28874,7 +28887,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const unifiedArmory = shopMode === 'armory' && shopTab === 'all';
       const tabs = shopMode === 'armory' ? SHOP_TABS_ARMORY : SHOP_TABS_KIOSK;
       const group = tabs.find(([key, pages]) => key === shopTab || pages.includes(shopTab)) || tabs[0];
-      const pages = unifiedArmory ? ['ammo', 'weapons', 'upgrades', 'build', 'fortify']
+      const pages = unifiedArmory ? ['ammo', 'upgrades']
         : shopTab === group[0] || !group[1].includes(shopTab) ? group[1] : [shopTab];
       if (shopTabsEl) {
         const sub = document.getElementById('shopSubtabs');
@@ -28932,69 +28945,18 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           actions.append(row.querySelector('button'), restock); row.append(actions);
         }
       } else if (category === 'ammo') {
-        const cals = stockedLooseCalibers().sort((a,b) => Number(b === caliberOf(currentWeapon)) - Number(a === caliberOf(currentWeapon)));
-        const sawShort = weaponOwned.chainsaw && sawFuel < sawFuelMax() - 0.01;
         renderRestockAll();
-        for (const w of MAGAZINE_WEAPONS.filter(w => weaponOwned[w]).sort((a,b) => Number(b === currentWeapon) - Number(a === currentWeapon))) {
-          const entry = magazineStore[w], full = entry.spare.length >= entry.maxSpare;
-          const noun = w === 'revolver' ? 'speed loader' : w === 'aa12' ? 'drum' : w === 'minigun' ? 'belt box' : w === 'flamer' ? 'tank' : 'magazine';
-          const row = shopRow(WEAPON_STATS[w].name + ' ' + noun,
-            dwText('shop.ammo.magCount', { count: entry.spare.length, capacity: entry.maxSpare }),
-            dwText('shop.ammo.magPack', { count: entry.size, unit: caliberUnit(caliberOf(w)) }),
-            full ? 'FULL' : '$' + magazinePrice(w), !full && bank >= magazinePrice(w), () => buyAmmo(w));
-          row.dataset.ammo = w;
-        }
-        for (const c of cals) {
-          const pk = AMMO_PACK[c];
-          const res = reserveAmmo[c] | 0, cap = reserveCap(c);
-          const full = res >= cap;
-          const guns = gunsUsing(c).map((w) => WEAPON_STATS[w].name);
-          const feeds = c === '60mm' ? 'Feeds the mortar.'
-            : c === '7.62 belt' ? sayText('shop.ammo.feedsM240', {}, 'Feeds the Watchman MG.')   // GB-138 (the minigun takes belt boxes)
-            : (guns.length ? 'Feeds ' + guns.join(' and ') + '.' : '');
-          const row = shopRow(c === '60mm' ? sayText('calibre.60mm', {}, '81mm') : c, res + ' / ' + cap + ' spare',
-            '+' + pk.n + ' ' + caliberUnit(c) + ' to the reserve. ' + feeds + (full ? ' Reserve is full.' : ''),
-            full ? 'FULL' : '$' + pk.cost, !full && bank >= pk.cost, () => buyAmmo(c));
-          row.dataset.ammo = c;
-        }
-        if (weaponOwned.chainsaw) {
-          const pk = AMMO_PACK.chainsaw;
-          shopRow('Chainsaw gas', Math.round(sawFuel) + 's / ' + Math.round(sawFuelMax()) + 's',
-            '+' + pk.n + ' seconds of cutting. Tops off at the tank cap.',
-            sawShort ? '$' + pk.cost : 'FULL', sawShort && bank >= pk.cost, () => buyAmmo('chainsaw'));
-        }
-        if (!cals.length && !MAGAZINE_WEAPONS.some(w => weaponOwned[w]) && !weaponOwned.chainsaw) shopRow('Nothing to feed', '', 'Buy a gun first.', '\u2014', false, null);
       } else if (category === 'gear') {
         shopRow('MedPen', medkits + ' / ' + MAX_MEDKITS + ' carried', 'Auto-injector. H to jab one: heals 60% of max health. Natural regen only ever climbs back to 40%.',
           medkits >= MAX_MEDKITS ? 'FULL' : '$' + MEDKIT_PRICE, medkits < MAX_MEDKITS && bank >= MEDKIT_PRICE, () => buyMedkit());
       } else if (category === 'upgrades') {
          let any = false;
-        const laserLight = GEAR.find(gr => gr.key === 'laserLight');
-        if (laserLight) {
-          const owned = !!gearOwned.laserLight, price = equipmentPrice(laserLight.cost, day);
-          shopRow(laserLight.name, owned ? dwText('shop.owned') : '', laserLight.desc,
-            owned ? dwText('shop.ownedButton') : '$' + price, !owned && bank >= price,
-            owned ? null : () => buyGear(laserLight), owned ? 'owned' : '');
-          any = true;
-        }
         if (!STORY_GATES_ON) {
            shopRow(dwText('shop.upgrade.machete'), macheteOwned ? dwText('shop.owned') : dwText('shop.upgrade.replacesKnife'), dwText('shop.upgrade.macheteHelp', { reach: BLADE_STATS.machete.reach, damage: BLADE_STATS.machete.dmg, knifeReach: BLADE_STATS.knife.reach, knifeDamage: BLADE_STATS.knife.dmg, maxHits: BLADE_STATS.machete.maxHits }),
             macheteOwned ? 'OWNED' : '$' + equipmentPrice(MACHETE_PRICE, day), !macheteOwned && bank >= equipmentPrice(MACHETE_PRICE, day), macheteOwned ? null : () => buyMachete(), macheteOwned ? 'owned' : '');
         }
-        // CL-113 (Jerry): an attachment is bought here and put on in the Armory. Owned, the row says where it is.
-        const modRow = (name, owned, fitted, help, price, buy) => {
-          const tag = fitted ? sayText('armory.kioskFitted', {}, 'fitted') : owned ? sayText('armory.kioskOwned', {}, 'owned · fit it at the Armory') : '';
-          // CU-229 (J58): bought, not fitted. Using it says where it goes.
-          const use = owned && !fitted ? () => boughtForArmory(name) : (owned ? null : buy);
-          shopRow(name, tag, help, owned ? dwText('shop.ownedButton') : '$' + price, (!owned && bank >= price) || !!(owned && !fitted), use, owned ? 'owned' : '');
-        };
         for (const w of WEAPON_ORDER) {
           if (!weaponOwned[w]) continue;
-          if (w === 'chainsaw') {
-            any = true;
-             modRow(dwText('shop.upgrade.tank'), sawTankUpgraded, sawTankFitted, dwText('shop.upgrade.tankHelp', { seconds: Math.round(SAW_FUEL_BASE * 1.5) }), SAW_TANK_PRICE, () => buySawTank());
-            continue;
-          }
           if (DUAL_CAPABLE[w]) {
             any = true;
             const got = !!dualOwned[w];
@@ -29002,36 +28964,6 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
              shopRow(dwText('shop.upgrade.pair', { weapon: WEAPON_STATS[w].name }), got ? dwText('shop.owned') : dwText('shop.upgrade.akimbo'),
                dwText('shop.upgrade.pairHelp', { weapon: WEAPON_STATS[w].name }),
               got ? 'OWNED' : '$' + price, !got && bank >= price, got ? null : () => buyDualWield(w), got ? 'owned' : '');
-          }
-          const mods = weaponMods(w);
-          if (mods.canExt) {
-            any = true;
-            const nameKey = w === 'flamer' ? 'shop.upgrade.biggerTank' : 'shop.upgrade.extendedMag';
-            const helpKey = w === 'flamer' ? 'shop.upgrade.fuelHelp' : 'shop.upgrade.magHelp';
-            modRow(dwText(nameKey, { weapon: WEAPON_STATS[w].name }), mods.ext, mods.fitted === 'ext',
-              dwText(helpKey, { before: WEAPON_STATS[w].maxAmmo, after: Math.round(WEAPON_STATS[w].maxAmmo * 1.5) }),
-              equipmentPrice(EXT_MAG_PRICE[w], day), () => buyExtMag(w));
-          }
-          if (mods.canHeavy) {
-            any = true;
-            modRow(dwText('shop.upgrade.heavyBarrel', { weapon: WEAPON_STATS[w].name }), mods.heavy, mods.fitted === 'heavy',
-              dwText('shop.upgrade.heavyBarrelHelp'), equipmentPrice(HEAVY_BARREL_PRICE[w], day), () => buyHeavyBarrel(w));
-          }
-          if (SUPPRESSOR_PRICE[w]) {
-            any = true;
-             modRow(dwText('shop.upgrade.suppressor', { weapon: WEAPON_STATS[w].name }), !!suppressorOwned[w], !!suppressor[w], dwText('shop.upgrade.suppressorHelp'),
-              equipmentPrice(SUPPRESSOR_PRICE[w], day), () => buySuppressor(w));
-          }
-          for (const kind of OPTIC_OPTIONS[w] || []) {
-            any = true;
-            modRow(dwText('shop.upgrade.optic', { weapon: WEAPON_STATS[w].name, optic: dwText(`armory.mod.optic.${kind}`) }),
-              !!opticOwned[w]?.[kind], opticFitted[w] === kind, dwText('shop.upgrade.opticHelp.' + kind),
-              equipmentPrice(OPTIC_PRICE[kind], day), () => buyOptic(w, kind));
-          }
-          if (w === 'pistol') {
-            any = true;
-            modRow(dwText('shop.upgrade.auto'), pistolAutoOwned, pistolAutoFitted, dwText('shop.upgrade.autoHelp'),
-              equipmentPrice(PISTOL_AUTO_PRICE, day), () => buyPistolAuto());
           }
         }
          if (!any) shopRow(dwText('shop.upgrade.nothing'), '', dwText('shop.upgrade.buyFirst'), '-', false, null);
@@ -29041,7 +28973,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         // that is bought.
         for (const track of Object.keys(UPGRADE_TRACKS)) {
           const base = track === 'bars' ? 'window' : track;
-          if (WEAPON_BUILD_PLANS.has(base) !== (shopMode === 'armory')) continue;
+          if (shopMode === 'armory') continue;
           const baseOwned = !!buildUnlocked[base];
           if (!baseOwned && shopTab !== 'builds') continue;
           const tr = UPGRADE_TRACKS[track], have = upgradeOwned[track] | 0;
@@ -29065,7 +28997,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         }
       } else if (category === 'build') {
         for (const k of BUILD_ORDER) {
-          if (WEAPON_BUILD_PLANS.has(k) !== (shopMode === 'armory')) continue;
+          if (shopMode === 'armory' || WEAPON_BUILD_PLANS.has(k)) continue;
           const owned = !!buildUnlocked[k];
           const price = BUILD_UNLOCK_PRICE[k];
           shopRow(BUILD_NAMES[k] + ' blueprint', owned ? 'owned' : '', BUILD_BLURB[k] + ' Places for $' + COST[k] + '.',
@@ -29949,6 +29881,43 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         else if (id === 'auto') buyPistolAuto();
         else if (id === 'tank') buySawTank();
         return !!armoryMods(kind).find(m => m.id === id)?.owned;
+      },
+      getAmmoOffer: (kind) => {
+        if (!weaponOwned[kind]) return null;
+        const quote = ammoRestockPlan(kind);
+        return { price: quote.cost, full: !quote.cost, affordable: bank >= quote.cost,
+          shortfall: Math.max(0, quote.cost - bank) };
+      },
+      onBuyAmmo: (kind) => {
+        if (phase !== 'prep' || nightLockdown()) return false;
+        if (kind === 'm240' || kind === 'mortar') return buyAmmo(kind === 'm240' ? '7.62 belt' : '60mm');
+        return buyWeaponAmmo(kind).bought > 0;
+      },
+      getGunOffers: () => WEAPON_ORDER.filter(w => !weaponOwned[w])
+        .sort((a, b) => Number(training.active || equipmentStocked(b, day)) - Number(training.active || equipmentStocked(a, day)) || weaponPrice(a) - weaponPrice(b))
+        .map(w => {
+        const price = weaponPrice(w), available = training.active || equipmentStocked(w, day);
+        return { kind: w, name: WEAPON_STATS[w].name, price, available, affordable: bank >= price,
+          shortfall: Math.max(0, price - bank),
+          night: GUN_STOCK_NIGHT[w] };
+      }),
+      onBuyGun: (kind) => {
+        if (phase !== 'prep' || nightLockdown()) return false;
+        buyWeapon(kind);
+        return !!weaponOwned[kind];
+      },
+      getBuildOffers: () => ['m240', 'mortar'].map(kind => {
+        const owned = !!buildUnlocked[kind], price = BUILD_UNLOCK_PRICE[kind];
+        const calibre = kind === 'm240' ? '7.62 belt' : '60mm';
+        return { kind, name: BUILD_NAMES[kind], icon: WHEEL_ICONS[kind], owned, price, affordable: bank >= price,
+          shortfall: Math.max(0, price - bank),
+          ammo: { price: AMMO_PACK[calibre].cost, full: (reserveAmmo[calibre] | 0) >= reserveCap(calibre),
+            affordable: bank >= AMMO_PACK[calibre].cost, shortfall: Math.max(0, AMMO_PACK[calibre].cost - bank) } };
+      }),
+      onBuyBuild: (kind) => {
+        if (phase !== 'prep' || nightLockdown() || !['m240', 'mortar'].includes(kind)) return false;
+        buyBuild(kind);
+        return !!buildUnlocked[kind];
       },
       onOpenCatalogue: openArmoryCatalogue,
       onCloseCatalogue: closeArmoryCatalogue,
@@ -63258,10 +63227,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       training.security?.sync(training.deployment?.read(), trainingAlive());
       training.security?.tick(dt);
       training.danger?.update(paused || shopOpen || cifOpen ? 0 : dt, !!training.deployment?.read() || trainingAlive() > 0 || !!training.wake, !!training.wake);
-      // GP-193: preload during the alarm; release/deaths keep each type's music current.
-      const musicPending = training.deployment?.read();
-      if (musicPending) AudioSys.trainingCue('encounter-prepare:' + musicPending.kind);
-      AudioSys.trainingCue('encounters:' + trainingIntroKinds(zombies).join(','));
+      // CL-333 (J97): GP-193's recorded encounter loops are out; the Hellshot motif (CL-275) is the practice's music.
       const rising = tg.targets.some(t=>t.state==='rising');
       const falling = tg.targets.map(t=>t.state==='falling');   // CL-161
       tg.update(rangeFeature?.owns()&&(paused||shopOpen||cifOpen)?0:dt);
@@ -65416,7 +65382,7 @@ live++;
           wallCullDbg: () => (wallCull ? { cells: wallCull.stats.cells, hidden: wallCull.stats.hidden, tested: wallCull.stats.tested, segments: wallCull.stats.segments, ms: cullStats.wallMs, cull: wallCull } : null),   /* GB-273 */ launcherBrassDbg: () => ({ thrown: launcherBrassThrown, spent: launcherSpent }),   /* GB-133 */ dismemberDbg: (z, part) => detachZombiePart(z, part, 0, 1), MAIMED_HOP_MUL, cloneLean,   /* CL-136 */ slowMoDbg, triggerSlowMo, diveDbg: () => ({ phase: dive.phase, w: dive.w, k: diveTimeScale(dive), meter: dive.meter, cd: dive.cd, slowT: dive.slowT, slowing: slowmoOn(dive), vx: dive.vx, vz: dive.vz, dirX: dive.dirX, dirZ: dive.dirZ, dives: dive.dives, flat: diveFlatW,pose:divePoseFrame,contact:dive.contact }), setDiveMeterDbg: (v) => { dive.meter = Math.max(0, Math.min(1, +v || 0)); }, DIVE,   /* CL-193 */ selectorFlick,   /* GB-167 */   /* CL-137 */ trainingHideWorld, getHidWorld: () => training.hidWorld,   /* CL-138 */ profDbg: PROF, rotateCamera, cullDbg: cullStats, cullShowAll, zombiePoolDbg: () => Object.fromEntries([...zombiePool].map(([k, v]) => [k, v.length])), shadowPruneDbg: () => ({ on: SHADOW_PRUNE, ...shadowPrune }),   /* CL-288 */ sunShadowDbg: () => ({ ...sunShadowStats, deep: sunShadowDeep, tick: sunShadowTick, every: SUN_SHADOW_DEEP_EVERY, move: SUN_SHADOW_DEEP_MOVE }),   /* CL-237 */ zombieHitNightMul,   /* CL-244 */ marineShadowDbg: (full) => ({ builds: marineShadowBuilds, lastDiff: marineShadowDiff, proxy: marineShadowProxy, ms: marineShadowMs, sig: marineShadowSig, bones: marineShadowProxy ? marineShadowProxy.skeleton.bones.length : 0, verts: marineShadowProxy ? marineShadowProxy.geometry.attributes.position.count : 0, warm: marineShadowWarm, retired: marineShadowRetired.length, drawnAt: marineShadowProxy ? marineShadowProxy.userData.drawnAt : null, seen: marineShadowSeen, seenAt: marineShadowSeenAt, builtAt: marineShadowBuiltAt, frame: perfFrame, now: full ? marineShadowNow() : undefined }),   /* CL-241: warm..frame, now */ skinMergeGroup, skinUnmerge,   /* CL-140 */   /* GB-136 */ grenadeArcDbg: () => ({ charging: grenadeCharging, t: grenadeChargeT, visible: grenadeArc.visible, hit: grenadeArc.userData.hit, dots: grenadeArc.userData.dots, launcher: launcherArc.visible, lhit: launcherArc.userData.hit, lstate: launcherArc.userData.state, last: lastGrenadeThrow, n: grenades, cd: grenadeCd }), startGrenadeCharge, releaseGrenadeCharge, GRENADE_THROW, grenadeThrowSpeed, flyArc,   /* GB-134 */ grenadeAnimDbg: () => ({ phase: grenadeAnim.phase, t: grenadeAnim.t, inHand: grenadeAnim.inHand, queued: grenadeAnim.queued, hand: grenadeHand, carriedShown: grenadeInHandN, simple: !!grenadeArc.userData.simple, segs: grenadeArc.userData.segs, release: grenadeReleasePoint().clone(), anim: GRENADE_ANIM, keys: GR_KEY }), holdGrenadeAnim: (phase, t) => { grenadeAnimHold = phase ? { phase, t: t || 0 } : null; if (!phase) { grenadeAnim.phase = ''; setGrenadeInHand(false); } }, setGrenadesDbg: (n) => { grenades = n | 0; updateAmmoHud(); updateCarriedGear(0, true); },   /* CU-97 */ m240Dbg: () => { const b = mortarMounted && mortarMounted.type === 'm240' ? mortarMounted : null; return { belt: b ? b.belt : null, feedT: b ? (b.feedT || 0) : 0, reserve: reserveAmmo['7.62 belt'] | 0, flash: !!(b && b.mesh.userData.flash && b.mesh.userData.flash.visible), hud: ammoDetailEl ? ammoDetailEl.textContent : '', hudName: ammoWeaponEl ? ammoWeaponEl.textContent : '' }; }, watchmanDbg: () => ({state:mortarMounted?.watchman || null,weight:_watchman.weight,ghost:ghostGroup}), crewDbg: () => ({ mortar: { w: _mcrew.w, phase: _mcrew.load.phase, roundIn: _mcrew.load.round, dropping: _mcrew.load.dropping, dropT: _mcrew.load.dropT, fired: _mcrew.load.fired, round: _mcrew.round, muzzle: _mcrew.muzzle, axis: _mcrew.axis, feet: _mcrew.plant.feet, steps: _mcrew.plant.steps }, m240: { feet: _watchman.plant.feet, steps: _watchman.plant.steps } }),   /* GB-156 */ feedM240, m240MuzzleWorld, M240_FEED_S, stockedLooseCalibers, aimPointDbg: (x, y, z) => { aimTarget.set(x, y, z); }, upgradeAvailableHint, getUpgradeAvailHint: () => upgradeAvailHint, tipOnce, tipsDbg: () => ({ seen: Object.assign({}, tipsSeen || {}), reset: () => { tipsSeen = {}; try { localStorage.removeItem(TIP_STORE); } catch (e) {} } }), placeBannerText: () => placeBannerEl.textContent, bigBannerText: () => bigBannerT.textContent + ' | ' + bigBannerS.textContent,   /* GB-139 */ m240VisDbg: () => ({ carried: carriedM240Mesh.visible, carriedMortar: carriedMortarMesh.visible, carriedGun: carriedM240Mesh, spent: { ...m240Spent }, casings: casings.length, pitchTo: m240PitchTo, muzzle: m240MuzzleWorld, CARRY_M240, CARRY_ARM, ELEV: [M240_ELEV_MIN, M240_ELEV_MAX], setDown: setDownMortar, casingsList: casings }),   /* CL-131 */ brandtGunDbg: () => { const r = roofCrew.find((c) => c.who === 'brandt'); return r && r.gun ? { gun: r.gun, flashed: !!r.gun.userData.flash, shots: r.shots } : null; },   /* GB-138 */ getSimTime: () => simTime,   /* GB-131 */ getDebugTouched: () => debugTouched, resetGame, ensureCrew,   /* CL-105 */ makeMarine,   /* CL-94 */ carryDbg, carryPreview, updateCarriedGear, CARRY_SLOTS, drawDbg, updateMarineDraw, drawPreview,   /* CL-90 */ dressMarine, DRESS, getMarine: () => marine, dressGuns, getGunFurniture: () => gunFurniture,   /* CL-97 */ buildWarren, layoutWarren, WARREN_THEMES, HOLLOW, enterHollow, leaveHollow, warrenDbg: () => ({ safe: warrenSafe, lastY: warrenLastY, open: (x, y, z) => belowCamOpen(x, y, z), roof: (x, z) => belowRoofAt(x, z) }), hollowState: () => hollow.state(), belowDbg, applyVaultReward,   /* CL-259 */   /* GB-107 */ stirDbg,   /* GB-108 */ heartDbg,   /* GB-92 */ runePistolDbg,   /* GB-119 */ hordeDbg,   /* GB-94 */ getMedDropCount: () => medDrops.length,   /* GB-94 */ grantHaul, claimHollowHere, markHollowPassage: (b) => { markHollowPassage(b); return passageMark; },   /* CU-80, CU-72 */ hqLadderAt, stepHqLadder, onHqRoof: () => onHqRoof, mapRevealDbg: () => ({ seen: (x, z) => mapReveal.seen(x, z), count: () => mapReveal.count(), found: () => mapReveal.found(), step: () => stepMapReveal() }),   /* CU-198 */   /* CL-99 */ pitSignal, setPitWord, setPitSilenced, updatePitSignal, setOnTowerDeckDbg: (v) => { onTowerDeck = !!v; }, /* CL-107 */ firstPeople, updateFirstPeople, caveSealSolids, /* CL-112 */ buildHeart, HEART, /* CL-81 */ letGoDbg, /* CL-116 */ lightPoolDbg: { pool: () => ensureLightPool(), update: () => updateLightPool() }, /* CL-115 */ trainingDbg: { round: (p) => trainingRound(p),   /* GB-163: a round by hand (shots, tests) */ start: () => startTraining(), enter: () => enterTraining(), leave: () => leaveTraining(), state: () => training, tg: () => training.tg,
             action: () => trainingActionTarget(), spawn: (k, n) => trainingSpawn(k, n), clear: () => trainingClear(), layout: () => trainingLayout(), clearLayout: () => trainingLayoutClear(), layoutPieces: () => training.layout || [], layoutRefused: () => training.layoutRefused || [], alive: () => trainingAlive(), blackout: () => trainingBlackout(), hitTarget: (i, pt) => trainingHitTarget(i, pt, !!pt), deployNow: (k, n) => trainingDeployNow(k, n), tunnel: () => training.tunnel, pops: () => training.pops, clearSkulls: () => trainingClearSkulls(),   /* CL-171 */
             update: (dt) => updateTraining(dt), panel: () => (ensureTrainingUi(), training.panel), openPanel: () => openTrainingPanel(), round: (p) => trainingRound(p), TRAINING,
-            lights: () => ({ on: !training.lightsOff, night: isNight, room: training.tg ? training.tg.lightsOn() : null }), toggleLights: () => toggleTrainingLights() /* CU-94 */ }, /* CL-114 */ stockNoticeDbg: { arrivals: (n) => stockArrivals(n), queue: (n) => queueStockNotice(n), state: () => ({ t: stockNotice.t, hold: stockNotice.hold, guns: stockNotice.guns.slice(), shown: stockNotice.shown.slice(), visible: !!(stockNotice.el && stockNotice.el.classList.contains('show')) }), tick: (dt) => updateStockNotice(dt), show: (guns) => showStockNotice(guns), setDay: (n) => { day = n; }, NIGHT: GUN_STOCK_NIGHT }, armoryFinishDbg: { list: (k) => armoryFinishes(k), paint: (k, key) => paintArmoryGun(k, key) }, /* CL-113 */ armoryDbg: { mods: (w) => armoryMods(w), fit: (w, id, on) => fitArmoryMod(w, id, on), inReach: () => weaponsInReach(), picture: (k) => armoryPicture(k), pics: () => ({ drawn: armoryPics.drawn, cached: armoryPics.cache.size, ok: !!armoryPics.r }), rack: () => (house.armoryRack ? house.armoryRack.children.map((g) => g.userData.rackKind).filter(Boolean) : null), refreshRack: () => refreshArmoryRack(true), stored: () => armoryStoredKinds(), bigtex: () => bigtexWheel, ui: () => armoryUI, owned: () => ({ suppressor: { ...suppressorOwned }, auto: pistolAutoOwned, tank: sawTankUpgraded }) }, /* CL-83 */ nightRimDbg, /* CL-108, CL-109 */ historyProps, storyPropInReach, /* CL-111 */ runeFinishDbg: { unlocked: () => runeFinishUnlocked(), unlock: () => unlockRuneFinish(), lock: () => { runeFinish.unlocked = false; try { localStorage.removeItem(RUNE_FINISH_STORE); } catch (_) {} }, isGunFinishKey: (k) => isGunFinishKey(k), tex: () => runeFinish.tex, glow: (l) => updateRuneFinishGlow(l), state: () => runeFinish, furniture: () => gunFurniture, readWardrobe: () => readWardrobe(), KEY: RUNE_FINISH_KEY }, /* CL-78 */ guardianBossDbg: { rigOf: (z) => (z && z.mesh && z.mesh.userData.bossRig) || null, update: (dt) => updateGuardianBossRigs(dt), BOSS_RIG }, /* CL-93 */ rabbitDbg: { ensure: () => ensureRabbitMound(), state: () => rabbitMound, update: (dt) => updateRabbitMound(dt), wake: () => wakeKillerRabbit(), hit: (a, b) => rabbitMoundHit(a.x, a.y, a.z, b.x, b.y, b.z), give: () => { ensureRabbitMound(); rabbitMound.holy = true; rabbitMound.reliquary.userData.grenade.visible = false; }, ready: () => holyGrenadeReady(), throwG: () => { grenadeCd = 0; throwGrenade(); }, reset: () => resetRabbitMound(), distToPath: (x, z) => distToPath(x, z), RABBIT }, /* CL-92 */ lightningDbg: { yank: () => bootsYankPress(), yankState: () => ({ ...bootsYank, inReach: bootsYankInReach() }), skeleton: () => POI.mast && POI.mast.skeleton, strike: (k) => strikeLightning(k || null), update: (dt) => updateLightning(dt), state: () => lightning, odds: (o) => { lightning.odds = o || null; }, boots: () => ensureInsulatedBoots(), wear: (p) => wearInsulatedBoots(p || localPlayer), /* CL-178 */ mast: () => ({ ladder: mastLadder(), climb: mastClimb, high: onMastHigh(), perch: POI.mast ? POI.mast.perch : null, PERCH: MAST_PERCH }), climbMast: (y) => { const L = mastLadder(); if (!L) return false; mastClimb.on = true; climbingTower = true; player.position.set(L.x, Math.min(L.top, L.foot + (y || 0)), L.z); velX = 0; velZ = 0; vy = 0; return true; }, leaveMast: () => letGoOfMast(), /* CL-179 */ fall: () => mastFall, smoke: () => zapSmoke, ladderNow: () => ladderNow(), holster: () => ({ ...ladderHolster, unarmed }), /* CL-180 */ limbs: () => _lad.st, handTargets: () => _lad.hand, LADDER_GRIP, worn: (p) => insulatedBootsOn(p || localPlayer), reset: () => resetLightning(), marine: () => worldMarine, bolt: (x, z, hold) => { showBolt({ x, y: sampleHeight(x, z), z }); if (hold) { lightning.boltT = 1e9; lightning.flashT = 0; lightning.flashEl.style.opacity = '0'; } }, LIGHTNING, BOOTS_HEX }, /* CL-76 */ fogNightDbg: { active: () => fogNightActive(), k: () => fogNightK, force: (v) => { fogNightForce = v; }, step: (dt) => updateDayNight(dt), apply: (dt) => applyFogNight(dt), FOG_NIGHT }, /* CL-75 */ makeSurvivorFigure, SURVIVOR_LOOK, resolveTreeCollisionsDbg: (dt) => resolveTreeCollisions(dt),   /* CL-80 */ boatRig, getExtractionBoat: () => extractionBoat, /* CL-143 */ trainingBuildDbg: { refusal: (x, z, gx, gz, kind) => { const was = placeMode; if (kind) placeMode = kind; try { return placeRefusal(x, z, gx, gz); } finally { placeMode = was; } }, area: () => training.tg && training.tg.build, gridIndex }, /* CL-142 */ makeCargoPlane, insertionDbg: { begin: () => beginMarineInsertion(), rig: () => marineInsertion, ordersEl: () => ordersCardEl }, BOARD_HOLD_S, boardingDbg: () => ({ holdT: boardHoldT, pending: !!boardPending, reach: boardingReach(), won, gameOver, hot: !!matchStats.hotExtraction, state: extractionState }),   /* CL-73 */ setGunSuppressor, SUPPRESSOR,   /* CL-95 */
+            lights: () => ({ on: !training.lightsOff, night: isNight, room: training.tg ? training.tg.lightsOn() : null }), toggleLights: () => toggleTrainingLights() /* CU-94 */ }, /* CL-114 */ stockNoticeDbg: { arrivals: (n) => stockArrivals(n), queue: (n) => queueStockNotice(n), state: () => ({ t: stockNotice.t, hold: stockNotice.hold, guns: stockNotice.guns.slice(), shown: stockNotice.shown.slice(), visible: !!(stockNotice.el && stockNotice.el.classList.contains('show')) }), tick: (dt) => updateStockNotice(dt), show: (guns) => showStockNotice(guns), setDay: (n) => { day = n; }, NIGHT: GUN_STOCK_NIGHT }, modsOwnAllDbg: () => { for (const w in OPTIC_OPTIONS) { opticOwned[w] = opticOwned[w] || {}; for (const k of OPTIC_OPTIONS[w]) opticOwned[w][k] = true; } for (const w in SUPPRESSOR_PRICE) suppressorOwned[w] = true; return true; }, /* CL-332 */ armoryFinishDbg: { list: (k) => armoryFinishes(k), paint: (k, key) => paintArmoryGun(k, key) }, /* CL-113 */ armoryDbg: { mods: (w) => armoryMods(w), fit: (w, id, on) => fitArmoryMod(w, id, on), inReach: () => weaponsInReach(), picture: (k) => armoryPicture(k), pics: () => ({ drawn: armoryPics.drawn, cached: armoryPics.cache.size, ok: !!armoryPics.r }), rack: () => (house.armoryRack ? house.armoryRack.children.map((g) => g.userData.rackKind).filter(Boolean) : null), refreshRack: () => refreshArmoryRack(true), stored: () => armoryStoredKinds(), bigtex: () => bigtexWheel, ui: () => armoryUI, owned: () => ({ suppressor: { ...suppressorOwned }, auto: pistolAutoOwned, tank: sawTankUpgraded }) }, /* CL-83 */ nightRimDbg, /* CL-108, CL-109 */ historyProps, storyPropInReach, /* CL-111 */ runeFinishDbg: { unlocked: () => runeFinishUnlocked(), unlock: () => unlockRuneFinish(), lock: () => { runeFinish.unlocked = false; try { localStorage.removeItem(RUNE_FINISH_STORE); } catch (_) {} }, isGunFinishKey: (k) => isGunFinishKey(k), tex: () => runeFinish.tex, glow: (l) => updateRuneFinishGlow(l), state: () => runeFinish, furniture: () => gunFurniture, readWardrobe: () => readWardrobe(), KEY: RUNE_FINISH_KEY }, /* CL-78 */ guardianBossDbg: { rigOf: (z) => (z && z.mesh && z.mesh.userData.bossRig) || null, update: (dt) => updateGuardianBossRigs(dt), BOSS_RIG }, /* CL-93 */ rabbitDbg: { ensure: () => ensureRabbitMound(), state: () => rabbitMound, update: (dt) => updateRabbitMound(dt), wake: () => wakeKillerRabbit(), hit: (a, b) => rabbitMoundHit(a.x, a.y, a.z, b.x, b.y, b.z), give: () => { ensureRabbitMound(); rabbitMound.holy = true; rabbitMound.reliquary.userData.grenade.visible = false; }, ready: () => holyGrenadeReady(), throwG: () => { grenadeCd = 0; throwGrenade(); }, reset: () => resetRabbitMound(), distToPath: (x, z) => distToPath(x, z), RABBIT }, /* CL-92 */ lightningDbg: { yank: () => bootsYankPress(), yankState: () => ({ ...bootsYank, inReach: bootsYankInReach() }), skeleton: () => POI.mast && POI.mast.skeleton, strike: (k) => strikeLightning(k || null), update: (dt) => updateLightning(dt), state: () => lightning, odds: (o) => { lightning.odds = o || null; }, boots: () => ensureInsulatedBoots(), wear: (p) => wearInsulatedBoots(p || localPlayer), /* CL-178 */ mast: () => ({ ladder: mastLadder(), climb: mastClimb, high: onMastHigh(), perch: POI.mast ? POI.mast.perch : null, PERCH: MAST_PERCH }), climbMast: (y) => { const L = mastLadder(); if (!L) return false; mastClimb.on = true; climbingTower = true; player.position.set(L.x, Math.min(L.top, L.foot + (y || 0)), L.z); velX = 0; velZ = 0; vy = 0; return true; }, leaveMast: () => letGoOfMast(), /* CL-179 */ fall: () => mastFall, smoke: () => zapSmoke, ladderNow: () => ladderNow(), holster: () => ({ ...ladderHolster, unarmed }), /* CL-180 */ limbs: () => _lad.st, handTargets: () => _lad.hand, LADDER_GRIP, worn: (p) => insulatedBootsOn(p || localPlayer), reset: () => resetLightning(), marine: () => worldMarine, bolt: (x, z, hold) => { showBolt({ x, y: sampleHeight(x, z), z }); if (hold) { lightning.boltT = 1e9; lightning.flashT = 0; lightning.flashEl.style.opacity = '0'; } }, LIGHTNING, BOOTS_HEX }, /* CL-76 */ fogNightDbg: { active: () => fogNightActive(), k: () => fogNightK, force: (v) => { fogNightForce = v; }, step: (dt) => updateDayNight(dt), apply: (dt) => applyFogNight(dt), FOG_NIGHT }, /* CL-75 */ makeSurvivorFigure, SURVIVOR_LOOK, resolveTreeCollisionsDbg: (dt) => resolveTreeCollisions(dt),   /* CL-80 */ boatRig, getExtractionBoat: () => extractionBoat, /* CL-143 */ trainingBuildDbg: { refusal: (x, z, gx, gz, kind) => { const was = placeMode; if (kind) placeMode = kind; try { return placeRefusal(x, z, gx, gz); } finally { placeMode = was; } }, area: () => training.tg && training.tg.build, gridIndex }, /* CL-142 */ makeCargoPlane, insertionDbg: { begin: () => beginMarineInsertion(), rig: () => marineInsertion, ordersEl: () => ordersCardEl }, BOARD_HOLD_S, boardingDbg: () => ({ holdT: boardHoldT, pending: !!boardPending, reach: boardingReach(), won, gameOver, hot: !!matchStats.hotExtraction, state: extractionState }),   /* CL-73 */ setGunSuppressor, SUPPRESSOR,   /* CL-95 */
           addDummyPlayer, removeDummyPlayer, nearestPlayer, playersNear, playerById, players, getPlayers: () => players, nightKindForDay: (d) => nightKindOf(d, nightPlanFor(d), isGuardianNight(d)),   /* CU-77 */
         });
         window.TT.opticDbg = { options: OPTIC_OPTIONS, mount: OPTIC_MOUNT,

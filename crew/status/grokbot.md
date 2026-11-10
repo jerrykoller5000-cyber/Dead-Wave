@@ -1,13 +1,13 @@
 # Grokbot
 
-state: active
+state: idle
 model: Grok Bot
-task: GB-324 D-131 checkpoint commit via Claude Commit.bat (git only, no suite)
-touching: git
-since: 2026-11-10T01:37Z
-next: GB-324 Full integration suite overnight, reds by owner, D-124 check
+task: —
+touching: —
+since: 2026-11-10T01:38Z
+next: GB-288 The machete's chop on the mast gate's vines (D-116). After t
 blocked-on: —
-last-report: handoffs/2026-11-08-grokbot-GB-323.md
+last-report: handoffs/2026-11-09-grokbot-GB-324-checkpoint.md
 
 ## Notes
 

@@ -1,5 +1,5 @@
-// t181 - CL-114 (Jerry): a gun's camo is chosen in the Armory, not the CIF. D-124: the Armory store sells only guns in stock
-// tonight, and on the night one arrives a short card says it's new at the supply terminal.
+// t181 - CL-114 (Jerry): a gun's camo is chosen in the Armory, not the CIF. D-132: unowned guns stay on the
+// gun shelf, later nights show a disabled Buy, and the night one arrives a short card says it's new.
 (async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -14,19 +14,26 @@
     const tabs = [...document.querySelectorAll('#cifTabs [data-cif-tab]')].map((b) => b.dataset.cifTab);
     ok(tabs.length > 0 && !tabs.includes('guns'), 'the CIF has no Guns tab (' + tabs.join(',') + ')');
     T.closeCIF();
-    // --- the Armory store on night 1: only the guns in stock (D-124; the kiosk no longer sells guns)
+    // --- the gun shelf: every unowned gun stays visible (D-132). A later night keeps Buy off.
     const night = T.getDay ? T.getDay() : 1;
+    const offers = () => [...document.querySelectorAll('#armoryPanel [data-offer-gun]')];
     const openGunStore = () => {
       T.closeMenuDbg && T.closeMenuDbg('shop');
       T.closeMenuDbg && T.closeMenuDbg('armory');
+      T.setPhase && T.setPhase('prep');
+      T.addCash(5000);
       T.openMenuDbg('armory');
-      T.setShopTabDbg && T.setShopTabDbg('weapons');
     };
     openGunStore();
-    let rows = [...document.querySelectorAll('#shopList [data-weapon]')].map((r) => r.dataset.weapon);
-    ok(rows.length > 0 && rows.every((w) => T.getWeaponOwned()[w] || T.stockNoticeDbg.NIGHT[w] <= night), 'night ' + night + ': only stocked guns in the Armory store (' + rows.join(',') + ')');
-    ok(!/Arrives night/i.test(document.getElementById('shopList').textContent), 'no "Arrives night" rows');
-    ok(!rows.includes('minigun'), 'the minigun (night 14) is not in the Armory store');
+    let rows = offers().map((r) => r.dataset.offerGun);
+    ok(rows.length > 0 && rows.every((w) => !T.getWeaponOwned()[w]), 'night ' + night + ': the shelf lists guns he does not own (' + rows.join(',') + ')');
+    ok(!/Arrives night/i.test(document.getElementById('armoryPanel').textContent), 'no "Arrives night" rows');
+    const mini = document.querySelector('#armoryPanel [data-offer-gun="minigun"]');
+    ok(!!mini && mini.querySelector('[data-buy-gun]').disabled && /night 14/i.test(mini.textContent), 'the minigun stays visible, and Buy waits for night 14');
+    ok(offers().every((el) => {
+      const due = T.stockNoticeDbg.NIGHT[el.dataset.offerGun], buy = el.querySelector('[data-buy-gun]');
+      return due <= night ? !!buy && !buy.disabled : !!buy && buy.disabled && new RegExp('night ' + due, 'i').test(el.textContent);
+    }), 'stocked guns can be bought; later guns show their night');
     T.closeMenuDbg && T.closeMenuDbg('shop');
     T.closeMenuDbg && T.closeMenuDbg('armory');
     // --- the night the Uzi and shotgun arrive
@@ -35,10 +42,13 @@
     ok(D.arrivals(1).length === 0, 'nothing is announced on the first night');
     D.setDay(2);
     openGunStore();
-    rows = [...document.querySelectorAll('#shopList [data-weapon]')].map((r) => r.dataset.weapon);
-    ok(D.arrivals(2).every((w) => rows.includes(w)), 'night 2: they are in the Armory store now (' + rows.join(',') + ')');
-    const uziRow = document.querySelector('#shopList [data-weapon="uzi"] .name');
-    ok(!!uziRow && /new/i.test(uziRow.textContent), 'and marked new tonight (' + (uziRow && uziRow.textContent) + ')');
+    rows = offers().map((r) => r.dataset.offerGun);
+    ok(D.arrivals(2).every((w) => rows.includes(w)), 'night 2: they are on the gun shelf (' + rows.join(',') + ')');
+    ok(D.arrivals(2).every((w) => {
+      const row = document.querySelector('#armoryPanel [data-offer-gun="' + w + '"]');
+      const buy = row && row.querySelector('[data-buy-gun]');
+      return !!buy && !buy.disabled && !/Available night/i.test(row.textContent);
+    }), 'and they can be bought tonight');
     T.closeMenuDbg && T.closeMenuDbg('shop');
     T.closeMenuDbg && T.closeMenuDbg('armory');
     D.queue(2);

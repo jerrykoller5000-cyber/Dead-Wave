@@ -1,13 +1,13 @@
 # Claude
 
-state: active
+state: idle
 model: Claude Opus 5.5
-task: CL-331 J95: the pistol in first person: fingers through the grip, the firing thumb round the back, the sleeve camo switching size, the slide's rear flicker
-touching: game/viewmodel.js game/viewmodel-poses.js studio/weapon-sidearms.js studio/fp-arms.js
-since: 2026-11-10T01:34Z
-next: CL-325 J72-J85, J88: the hands and wrists on every gun. After CL-32
+task: —
+touching: —
+since: 2026-11-10T07:27Z
+next: CL-334 J101: a new, detailed hand (first and third person). Now, fi
 blocked-on: —
-last-report: handoffs/2026-11-09-claude-CL-324.md
+last-report: handoffs/2026-11-10-claude-CL-331.md
 
 ## Notes
 - 2026-10-31: device_commit_files can resend an earlier upload when a stagedPath is reused (twice a commit 'written' left the old file): give each commit a fresh file name and check the md5 on the PC after.

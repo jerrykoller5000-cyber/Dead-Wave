@@ -62,6 +62,14 @@
   font:10px var(--font-hud); letter-spacing:.06em; text-transform:uppercase; cursor:pointer; border-radius:2px; }
 #cif .armory-tune:hover { border-color:#9fd36a; color:#9fd36a; }
 #cif .armory-shelf p { grid-column:1 / -1; font-size:12px; opacity:.7; margin:14px 4px; }
+#cif .armory-offers { grid-template-columns:repeat(auto-fill, minmax(125px, 1fr)); }
+#cif .armory-offer { min-width:0; padding:4px 6px 8px; gap:3px; border:1px solid #cbdcb72a; background:#ffffff08; }
+#cif .armory-offer .armory-pic { height:56px; margin:0; }
+#cif .armory-offer small { min-height:22px; }
+#cif .armory-offer-buy, #cif .armory-offer-ammo { min-width:0; padding:7px 6px; border:0; border-radius:2px;
+  background:var(--accent-2); color:var(--accent-2-ink); font:700 11px var(--font-hud); text-transform:uppercase; cursor:pointer; }
+#cif .armory-offer-ammo { background:#3a4230; color:#e8e2c8; }
+#cif .armory-offer button:disabled { opacity:.4; cursor:default; }
 
 /* Fitted attachments, as small tags under the gun. */
 #cif .armory-chips { display:flex; flex-wrap:wrap; gap:3px; min-height:0; }
@@ -72,6 +80,11 @@
   background:linear-gradient(180deg, #252b1f, #1a1e16); box-shadow:inset 0 1px 0 #ffffff10; }
 #cif .armory-bench-name { margin:0; font:800 18px var(--font-hud); color:#e8e2c8; }
 #cif .armory-bench-ammo { margin:2px 0 10px; font-size:12px; opacity:.72; }
+#cif .armory-ammo-offer { display:flex; align-items:center; justify-content:space-between; gap:8px; padding:6px 8px; margin-bottom:10px;
+  border:1px solid #cbdcb73a; background:#0c110a; font:11px var(--font-hud); }
+#cif .armory-ammo-offer button { flex:0 0 auto; padding:7px 9px; border:0; border-radius:2px; background:var(--accent-2);
+  color:var(--accent-2-ink); font:700 11px var(--font-hud); text-transform:uppercase; cursor:pointer; }
+#cif .armory-ammo-offer button:disabled { opacity:.4; cursor:default; }
 #cif .armory-bench-empty { font-size:12px; opacity:.7; }
 #cif .armory-mods { list-style:none; margin:0; padding:0; display:grid; gap:7px; }
 #cif .armory-mods li { display:grid; grid-template-columns:minmax(0,1fr) auto; grid-template-areas:"text btn" "state btn"; gap:2px 10px; align-items:center;
@@ -120,12 +133,10 @@
 #cif.armory-only #armoryPanel h2 { font-size:24px; }
 #cif.armory-only .armory-head .hint { max-width:none; margin-top:5px; }
 #cif.armory-only .armory-body { grid-template-columns:minmax(0, 1.85fr) minmax(290px, 1fr); gap:14px; padding:0 14px; }
-#cif.armory-only .armory-left { display:grid; grid-template-columns:minmax(150px, .8fr) minmax(0, 1.35fr); grid-template-rows:auto auto 1fr; column-gap:12px; align-items:start; }
-#cif.armory-only .armory-left > h3:first-child { grid-area:1 / 1; }
-#cif.armory-only .armory-slots { grid-area:2 / 1; grid-template-columns:1fr; gap:6px; }
-#cif.armory-only .armory-hip { grid-area:3 / 1; }
-#cif.armory-only .armory-left > h3:nth-of-type(2) { grid-area:1 / 2; }
-#cif.armory-only .armory-shelf { grid-area:2 / 2 / 4; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px 6px; padding:4px 6px 12px; }
+#cif.armory-only .armory-left { display:grid; grid-template-columns:minmax(150px, .8fr) minmax(0, 1.35fr); column-gap:12px; align-items:start; }
+#cif.armory-only .armory-slots { grid-template-columns:1fr; gap:6px; }
+#cif.armory-only .armory-shelf { grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px 6px; padding:4px 6px 12px; }
+#cif .armory-offers[hidden], #cif .armory-locker > h3[hidden] { display:none; }
 #cif.armory-only #armoryPanel h3 { margin:10px 0 7px; }
 #cif.armory-only .armory-slots button { grid-template-columns:48px minmax(0,1fr); padding:7px; gap:2px 6px; min-height:73px; }
 #cif.armory-only .armory-slots button > strong { grid-column:1 / -1; }

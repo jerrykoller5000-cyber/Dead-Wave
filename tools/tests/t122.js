@@ -1,4 +1,4 @@
-// t122 - CU-68 (P-127): a suppressor for each gun that has a can. D-124: bought in the Armory store, not the kiosk.
+// t122 - CU-68 (P-127): a suppressor for each gun that has a can. D-132: bought on that gun's workbench, not the kiosk.
 // Buying it shows the can and moves the muzzle. The AA-12 has no row. A fresh run takes it off.
 // The shot itself does not change (that is P-129).
 (async () => {
@@ -32,11 +32,14 @@
     T.buySuppressor('m4');
     ok(T.getBank() === bank - spent, 'buying it again does not charge');
     T.closeMenuDbg && T.closeMenuDbg('shop');
+    T.setPhase && T.setPhase('prep');
     T.openMenuDbg('armory');
-    T.setShopTabDbg && T.setShopTabDbg('upgrades');
-    const text = (document.getElementById('shopList') || {}).innerText || '';
-    ok(/suppressor/i.test(text), 'the Armory store lists a suppressor (D-124)');
-    ok(!/AA-?12[^\n]*suppressor/i.test(text), 'the AA-12 has no suppressor row');
+    const ui = T.armoryDbg.ui();
+    ui.bench('m4');
+    const m4can = document.querySelector('#armoryPanel [data-mod="suppressor"]');
+    ok(!!m4can && /suppressor/i.test(m4can.textContent), 'the M4 workbench lists its suppressor (D-132)');
+    ui.bench('aa12');
+    ok(!document.querySelector('#armoryPanel [data-mod="suppressor"]'), 'the AA-12 workbench has no suppressor');
     T.resetGame();
     ok(gun.userData.suppressed !== true && gun.userData.suppressor.visible !== true, 'a fresh run takes the can off');
     ok(pair.userData.suppressed !== true, 'and off the off-hand');

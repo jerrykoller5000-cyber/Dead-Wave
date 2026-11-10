@@ -15,9 +15,13 @@
     const cash = T.getBank();
     T.buyMachete();
     ok(T.getBank() === cash && !T.isMacheteOwned(), 'direct kiosk purchase cannot grant the gated machete');
-    T.setShopTabDbg('weapons');
-    ok(!!document.querySelector('#shopList [data-weapon="chainsaw"]'), 'chainsaw remains for sale');
     T.closeShop();
+    T.setPhase && T.setPhase('prep');
+    T.openMenuDbg('armory');
+    const saw = document.querySelector('#armoryPanel [data-offer-gun="chainsaw"]');
+    const sawBuy = saw && saw.querySelector('[data-buy-gun="chainsaw"]');
+    ok(!!saw && !!sawBuy && !sawBuy.disabled, 'chainsaw remains for sale on the gun shelf');
+    T.closeMenuDbg('armory');
 
     let vaultOfferedBlade = false, draws = 0;
     for (let i = 0; i < 60; i++) {

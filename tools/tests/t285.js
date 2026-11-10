@@ -26,21 +26,24 @@
     T.closeMenuDbg('cif');
 
     T.openMenuDbg('armory'); await wait(80);
-    T.setShopTabDbg('loadout'); await wait(80);
-    ok(tabNames() === 'Guns|Ammo|Weapon builds', 'the Armory store has three top views, Guns, Ammo and Weapon builds');
-    ok(names().join('|') === 'Guns|Upgrades', 'the Armory guns view shows guns and upgrades together');
-    const future = document.querySelector('#shopList [data-future-weapon="minigun"]');
-    ok(!!future && /Unlocks night 14/.test(future.textContent) && /^\$\d+/.test(future.querySelector('button')?.textContent) && future.querySelector('button').disabled,
-      'future gun shows both its price and unlock night without allowing purchase');
-    page('supplies').click();
-    ok([...document.querySelectorAll('#shopList .perk')].some(row => /Restock all/.test(row.textContent)), 'the Armory ammo view lists the ammo supplies');
-    page('builds').click();
-    ok(names().join('|') === 'Blueprints|Fortify', 'the Armory weapon builds view shows plans and fortification together');
+    ok(tabNames() === '', 'the Armory catalogue has no gun or build tabs (D-132)');
+    ok(names().join('|') === 'Ammo|Upgrades', 'the Armory catalogue keeps ammo and the remaining upgrades');
+    ok(!document.querySelector('#shopList [data-weapon], #shopList [data-future-weapon]'), 'guns are not catalogue rows');
+    ok([...document.querySelectorAll('#shopList .perk')].some(row => /Restock all/.test(row.textContent)), 'the Armory catalogue lists the ammo supplies');
+    const future = document.querySelector('#armoryPanel [data-offer-gun="minigun"]');
+    ok(!!future && /night 14/i.test(future.textContent) && future.querySelector('[data-buy-gun]').disabled,
+      'the minigun stays on the gun shelf with its night and a disabled Buy');
+    ok(!!document.querySelector('#armoryPanel [data-offer-build="m240"]') && !!document.querySelector('#armoryPanel [data-offer-build="mortar"]'),
+      'the Watchman MG and the mortar have their own shelf');
     T.closeMenuDbg('shop'); T.closeMenuDbg('armory');
 
     T.openShop(true);
     page('builds').click();
     ok(names().join('|') === 'Blueprints|Fortify', 'kiosk builds show plans and fortification together');
+    const buildText = document.getElementById('shopList').textContent;
+    ok(/Light turret/.test(buildText) && /Flame turret/.test(buildText) && /Heavy turret/.test(buildText) && /Land mine/.test(buildText),
+      'the turret and mine plans are back at the kiosk');
+    ok(!/Watchman MG/.test(buildText) && !/Mortar blueprint/.test(buildText), 'the Watchman MG and the mortar are not kiosk plans');
     const locked = [...document.querySelectorAll('#shopList .perk')].find(row => /Requires .* blueprint/.test(row.textContent));
     ok(!!locked && /^\$\d+/.test(locked.querySelector('button')?.textContent) && locked.querySelector('button').disabled,
       'locked fortification shows its cost and required base blueprint');

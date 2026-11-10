@@ -156,7 +156,8 @@ export function makePistolModel(ctx) {
   // GB-154: the dust cover runs on under the longer slide to 40 mm short of its front (was 0.17).
   // GB-180: frame and slide line up. The frame's rear is flush with the slide's rear (gun z -0.09) and its dust cover
   // runs to 14 mm short of the slide's front (a real pistol's proportion), its top 0.012 tucked up inside the slide.
-  K.slab([[-0.09, 0.012], [0.294, 0.012], [0.298, 0.000], [0.294, -0.020], [0.112, -0.020], [0.104, -0.016], [0.04, -0.016], [0.026, -0.030], [-0.004, -0.036], [-0.022, -0.020], [-0.07, -0.012], [-0.09, -0.004]], 0.044, gunPoly, { bevel: 0.006, segs: 3 });
+  // CL-331 (J95): the frame's back 2.5 mm inside the slide's (they were one plane at z -0.09: the flicker on the back)
+  K.slab([[-0.0875, 0.012], [0.294, 0.012], [0.298, 0.000], [0.294, -0.020], [0.112, -0.020], [0.104, -0.016], [0.04, -0.016], [0.026, -0.030], [-0.004, -0.036], [-0.022, -0.020], [-0.07, -0.012], [-0.0875, -0.004]], 0.044, gunPoly, { bevel: 0.006, segs: 3 });
   // GB-180: a beavertail / tang that sweeps back under the slide's rear and blends down into the grip's back strap.
   K.slab([[-0.060, 0.008], [-0.084, 0.007], [-0.094, 0.004], [-0.099, -0.001], [-0.100, -0.008], [-0.096, -0.016], [-0.088, -0.022], [-0.076, -0.024], [-0.062, -0.020], [-0.048, -0.014], [-0.036, -0.008], [-0.026, -0.002]], 0.044, gunPoly, { bevel: 0.012, segs: 5 });   // GB-316b: short rounded shelf into the backstrap, not a fin
   K.rail(0.1, 0, -0.025, 0.2, null, 0.03);   // GB-180: the accessory rail along the dust cover, its top in the frame

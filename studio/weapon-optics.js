@@ -10,6 +10,8 @@ const rimMetal = edge.clone(); rimMetal.side = THREE.DoubleSide;
 const rubber = new THREE.MeshStandardMaterial({ color: 0x171c1c, metalness: 0, roughness: 0.9 });
 const lens = new THREE.MeshPhysicalMaterial({ color: 0x77989a, metalness: 0, roughness: 0.14, transparent: true, opacity: 0.28, depthWrite: false, side: THREE.DoubleSide });
 const reticle = new THREE.MeshBasicMaterial({ color: 0xb1392c, transparent: true, opacity: 0.86, depthWrite: false, side: THREE.DoubleSide });
+// CL-332 c: the inside of every open tube (seen through the lenses), dark and matte
+const bore = new THREE.MeshStandardMaterial({ color: 0x0f1414, metalness: 0.08, roughness: 0.88, side: THREE.BackSide });
 
 function box(root, name, mat, size, at, tilt = 0) {
   const mesh = new THREE.Mesh(new THREE.BoxGeometry(...size), mat);
@@ -121,6 +123,9 @@ function openTube(root, name, mat, radius, length, y, z, sides = 20) {
   const shell = new THREE.Mesh(new THREE.CylinderGeometry(radius, radius, length, sides, 1, true), mat);
   shell.name = name; shell.rotation.x = Math.PI / 2; shell.position.set(0, y, z);
   shell.castShadow = true; root.add(shell);
+  // CL-332 c (Jerry: "the transparent glitch in the prism"): the bore, so the tube has an inside through the lens
+  const inner = new THREE.Mesh(new THREE.CylinderGeometry(radius * 0.83, radius * 0.83, length, sides, 1, true), bore);
+  inner.name = `${name} anti-glare bore`; inner.rotation.x = Math.PI / 2; inner.position.set(0, y, z); root.add(inner);
   for (const end of [-1, 1]) {
     const rim = new THREE.Mesh(new THREE.RingGeometry(radius * 0.83, radius, sides), rimMetal);
     rim.name = `${name} machined rim`; rim.position.set(0, y, z + end * length / 2); root.add(rim);

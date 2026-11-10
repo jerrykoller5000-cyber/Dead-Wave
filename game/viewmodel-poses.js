@@ -475,9 +475,13 @@ export const VM_SOCKETS = Object.freeze({
   // CL-293 (J54: "the left hand should grip the pistol the way a real shooter would"): the support hand comes in off the body's
   // hold (its fist sat 16 cm out from the grip, beside it) onto the grip's front, its fingers over the strong hand's (the
   // cloud look, 2026-11-02: in from -0.03 to -0.012 the fingers wrap without coming through the far side).
-  pistol: { support: [-0.0284, -0.0702, 0.0008], supportBasis: { x: [0, -0.97, -0.243], y: [-0.684, 0.177, -0.708] }, grip: [0.0022, -0.0663, -0.0147],   // CL-325 j (J72): the palms' heels together (support was [-0.012, -0.10, -0.02])
-    supportPose: { f: [[0.666, 0.766, 0.633, 0], [0.666, 0.766, 0.633, 0], [0.666, 0.766, 0.633, 0], [0.632, 0.727, 0.6, 0]], t: [0, -0.4, 0] },   // CL-325 i: the firing hand fitted to the grip (fingers 3 mm, the thumb along the frame)
-    gripPose: { f: [[1.115, 1.282, 1.059, 0], [1.115, 1.282, 1.059, 0], [1.115, 1.282, 1.059, 0], [1.053, 1.211, 1, 0]], t: [0.05, -0.5, 0.03] } },
+  // CL-331 c (J95/J96 and Jerry's grip references): the thumb round the back, the index on the trigger, the support palm
+  // over the firing fingers, its index under the guard and its thumb forward on the frame (was support [-0.0284, -0.0702,
+  // 0.0008] y [-0.684, 0.177, -0.708], grip [0.0022, -0.0663, -0.0147]; fitted on the view gun, p91: every part within
+  // 2 mm of the gun, the hands' gloves overlapping a few mm where they meet).
+  pistol: { support: [-0.0469, -0.0861, -0.0076], supportBasis: { x: [0, -0.97, -0.243], y: [-0.4377, 0.2182, -0.8723] }, grip: [0.0026, -0.0703, -0.0146],
+    supportPose: { f: [[0.5, 0.575, 0.475, 0], [0.6, 0.69, 0.57, 0], [0.6, 0.69, 0.57, 0], [0.58, 0.667, 0.551, 0]], t: [0.2, 0.3, 0.12] },
+    gripPose: { f: [[0.3, 1.2, 0.72, -0.3], [1.1, 1.265, 1.045, 0], [1.1, 1.265, 1.045, 0], [0.9, 1.035, 0.855, 0]], t: [1, -0.5, 0] } },   // CL-331 e (J98): the thumb straight (was t [0.7, -1.6, 0.98], hooked)
   // GB-312 (CL-310, GB-153 fit qa/2026-11-07-GB-312/fit/fit-fp.json): support fingers curled to the 40 mm handguard until each touches.
   m4: { grip: [0.0014, -0.1062, -0.1152], gripPose: { f: [[1, 1.15, 0.95, 0], [1, 1.15, 0.95, 0], [1, 1.15, 0.95, 0], [1, 1.15, 0.95, 0]], t: [0, 1.4, 0] },   // CL-325 m: the firing hand fitted (grip was [0, -0.106, -0.116])
     support: [-0.0087, -0.0201, 0.4219], supportBasis: { x: [0.679, 0, -0.734], y: [-0.734, 0, -0.679] }, magFoot: [0, -0.278, 0.04], work: [-0.03, -0.03, 0.105],   // CL-310: the 40 mm handguard (its bottom -0.01, was -0.027) and the bolt catch on the 32 mm lower; CL-322: the support on GP-20055's quad rail (was [0, .004, .36])
@@ -488,9 +492,12 @@ export const VM_SOCKETS = Object.freeze({
   ak: { grip: [0, -0.123, -0.126], gripPose: { f: [[1.104, 1.27, 1.049, 0], [1.122, 1.29, 1.066, 0], [1.104, 1.27, 1.049, 0], [1.014, 1.166, 0.963, 0]], t: [1.45, 1.4, 0.87] },   // CL-325 k (J88): the fingers fitted, the thumb round the grip's far side
     support: [-0.0085, -0.0426, 0.35], supportBasis: { x: [0.683, 0, -0.731], y: [-0.731, 0, -0.683] }, magFoot: [0, -0.311, 0.14], work: [0.041, 0.02, 0.13],   // CL-311: the slim receiver's charging knob (x 0.041, was 0.083) and the mag 2 cm higher
     supportPose: { f: [[0.687, 0.79, 0.653, 0], [0.28, 0.322, 0.266, 0], [0.687, 0.79, 0.653, 0], [0.876, 1.007, 0.832, 0]], t: [0.5, 0.1, 0.3] } },   // CL-325 c: the cradle (palm up, the thumb on the left side, the fingers up the right), fitted
-  uzi: { grip: [0.0129, -0.1071, -0.0149], gripPose: { f: [[1.036, 1.191, 0.984, 0], [1.07, 1.23, 1.016, 0], [1.036, 1.191, 0.984, 0], [0.913, 1.05, 0.867, 0]], t: [0.05, -0.1, 0.03] },   // CL-325 k (J74): the thumb round the grip (was grip [0, -.088, -.027], the thumb in the receiver)
-    support: [-0.0088, -0.0797, 0.1715], supportBasis: { x: [0.695, 0, -0.719], y: [-0.719, 0, -0.695] }, magFoot: [0, -0.324, -0.043], work: [0, 0.115, 0.11],
-    supportPose: { f: [[1.202, 1.382, 1.142, 0], [0.574, 0.66, 0.545, 0], [0.467, 0.537, 0.444, 0], [1.45, 1.667, 1.377, 0]], t: [0.1, 0.4, 0.06] } },   // CL-325 c: the cradle (palm up, the thumb on the left side, the fingers up the right), fitted
+  // CL-331 d (J96): the firing thumb round the back of the grip (was t [0.05, -0.1, 0.03]); the cradle 16 mm lower, its
+  // fingers up the right side (they went up to 33 mm through the receiver; support was [-0.0088, -0.0797, 0.1715],
+  // f [[1.202, 1.382, 1.142], [0.574, 0.66, 0.545], [0.467, 0.537, 0.444], [1.45, 1.667, 1.377]]).
+  uzi: { grip: [0.0129, -0.1071, -0.0149], gripPose: { f: [[0.8, 0.92, 0.76, 0], [1.05, 1.207, 0.997, 0], [1, 1.15, 0.95, 0], [0.9, 1.035, 0.855, 0]], t: [0.8, -1.6, 1.12] },
+    support: [-0.0088, -0.0957, 0.1715], supportBasis: { x: [0.695, 0, -0.719], y: [-0.719, 0, -0.695] }, magFoot: [0, -0.324, -0.043], work: [0, 0.115, 0.11],
+    supportPose: { f: [[0, 0, 0, 0], [0.25, 0.287, 0.237, 0], [0.45, 0.517, 0.427, 0], [1.5, 1.725, 1.425, 0]], t: [0.2, 0.3, 0.12] } },
   // GB-312 (re-fit): index closes to a full curl (1.45; was 1.181); little finger free past the forend keeps the fist.
   // GB-311 (CL-312, the same fit): the fingers close further round the 44 mm forend (the fist's middle finger sat 10 mm in
   // at its root, so it curls round instead; the little finger meets nothing past the forend and keeps the fist's curl).
