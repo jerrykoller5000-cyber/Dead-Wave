@@ -1,10 +1,10 @@
 # CLAUDE DIRECTOR
 
-state: idle
+state: active
 model: Claude Opus 5.5
-task: —
-touching: —
-since: 2026-11-10T20:05Z
+task: CL-352 Every agent checks the board every 15 minutes: crew.mjs standby (D-147)
+touching: crew/crew.mjs, AGENTS.md, docs/decisions.md, crew/BOARD.md
+since: 2026-11-10T20:12Z
 next: —
 blocked-on: —
 last-report: handoffs/2026-11-10-claude-CL-351.md
@@ -12,6 +12,7 @@ last-report: handoffs/2026-11-10-claude-CL-351.md
 ## Notes
 
 ### The director (D-145, D-146)
+- Jerry, 10 Nov ~20:10Z: "When checking in make sure that everyone has a job and is doing it proficiently... When checking in distributing jobs is going to be a focus." Each check: every agent's card (state, task, since, last log line). Idle or done: give it the next card now (make one from the Training Ground's needs if its queue is empty). Silent for over an hour on one task: ask for a progress line. Stopped: give Jerry its paste. Doing it well: look at its latest sheet or handoff, not just its claims.
 - Jerry, 10 Nov: CLAUDE DIRECTOR; no heavy lifting; check the crew every 10 minutes (send_later, chained: each check schedules the next): `node crew/crew.mjs requests claude` first, then who is stopped or blocked, new sheets, the commit job.
 - 2026-10-31: device_commit_files can resend an earlier upload when a stagedPath is reused (twice a commit 'written' left the old file): give each commit a fresh file name and check the md5 on the PC after.
 

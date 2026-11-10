@@ -15,6 +15,8 @@
 //   node crew/crew.mjs in   <agent> <task-id> "<what>" --model "<the model you run on>" --touch "index.html (part), tools/x.mjs"
 //                                               (a task Jerry gave you in chat that isn't on the board yet is added
 //                                               under your Now on the board: the board stays current by itself)
+//   node crew/crew.mjs standby <agent> [--minutes 15]   nothing you can do right now? waits up to 15 minutes and returns
+//                                               the moment there is work for you (a request, a ready card); D-147
 //   node crew/crew.mjs note <agent> "<progress: what you found or finished, one line>"
 //   node crew/crew.mjs wait <agent> "<what is ready>"   changes ready, waiting for the game-test slot (card + log)
 //   node crew/crew.mjs out  <agent> --report handoffs/<note>.md [--done] [--next "<id> <what>"]
@@ -498,7 +500,9 @@ async function panel() {
 // A request is its "## <date> · <from> → <to> · <title>" heading and the lines under it. It is
 // settled once its body says DONE, WONT or LATER, or one of the people it was sent to replied under
 // it ("**Claude 2, 2026-11-10: …**"). Same rules as the panel's.
-const NAME_TO = Object.fromEntries(Object.entries(AGENTS).map(([a, n]) => [n.toLowerCase(), a]));
+// CL-353: the names before D-146 still find their agent (old requests to "Claude" or "Claude 4", and the replies signed with them).
+const ALIASES = { claude: ['Claude'], claude4: ['Claude 4'] };
+const NAME_TO = Object.fromEntries([...Object.entries(AGENTS).map(([a, n]) => [n.toLowerCase(), a]), ...Object.entries(ALIASES).flatMap(([a, ns]) => ns.map((n) => [n.toLowerCase(), a]))]);
 // "<!-- crew: settled above -->" (crew.mjs settle, lead only): every request above it counts as settled.
 const SETTLED = '<!-- crew: settled above -->';
 const FYI_TITLE = /^(FYI|GRANT|RELEASE|ACK|Record)\b|\bFYI\b/i;
@@ -513,7 +517,7 @@ function parseRequests(text) {
     if (!h) return;
     const to = h[3].split(/,|\band\b/).map((s) => s.trim().toLowerCase().replace(/\s*\(.*\)/, '')).map((s) => (s === 'all' || s === 'everyone' || s === 'crew') ? 'all' : NAME_TO[s] || s).filter(Boolean);
     const st = [...body.matchAll(/\b(DONE|WONT|LATER)\b/g)].map((x) => x[1]);
-    const replied = to.some((a) => a !== 'all' && new RegExp('\\*\\*' + (AGENTS[a] || a) + '[ ,]', 'i').test(body));
+    const replied = to.some((a) => a !== 'all' && [AGENTS[a] || a, ...(ALIASES[a] || [])].some((n) => new RegExp('\\*\\*' + n + '[ ,*]', 'i').test(body)));
     out.push({ start: i, end, date: h[1], from: h[2].replace(/\s*\(.*\)/, '').trim(), to, title: h[4].trim(),
       status: i < settledAt ? 'SETTLED' : st.length ? st[st.length - 1] : replied ? 'ANSWERED' : (to.includes('all') || FYI_TITLE.test(h[4])) ? 'FYI' : 'OPEN' });
   });
@@ -869,6 +873,45 @@ if (!cmd || cmd === 'panel') {
 } else if (cmd === 'me') {
   need(agent);
   await briefing(agent);
+} else if (cmd === 'standby') {
+  // CL-352 (D-147, Jerry 10 Nov): "make them all autonomous to check the board in 15 minute increments ... stay running and never
+  // idle until we reach the end of our workload". Returns with the agent's work (open requests to it, its next ready card, its own
+  // in-progress one included); otherwise waits, looking every 20 s, up to --minutes (15 at most; fractions for shells that can't
+  // wait that long). The same work it already reported in the last 15 minutes doesn't return it again (a card that waits on
+  // someone in words, not by id, would spin): it waits for anything new instead. crew/STANDBY-OFF ends it for everyone.
+  need(agent);
+  const minutes = Math.min(15, Math.max(0.05, Number(arg('minutes')) || 15));
+  const offPath = path.join(path.dirname(boardPath), 'STANDBY-OFF');
+  const memoPath = path.join((await import('node:os')).tmpdir(), `grave-shift-standby-${agent}.json`);
+  let memo = {}; try { memo = JSON.parse(fs.readFileSync(memoPath, 'utf8')) || {}; } catch { memo = {}; }
+  const look = () => {
+    if (fs.existsSync(offPath)) return { off: read(offPath).trim() || 'the workload is done' };
+    const reqs = requestsFor(agent); const nt = nextTask(agent);
+    return reqs.length || nt ? { reqs, nt } : null;
+  };
+  const keyOf = (w) => [...w.reqs.map((r) => r.date + ' ' + r.title), w.nt ? w.nt.id : ''].join(' | ');
+  const fresh = (w) => w && (w.off || keyOf(w) !== memo.key || Date.now() - (memo.at || 0) > 15 * 60_000);
+  const say = (w) => {
+    if (w.off) { console.log(`STANDBY OFF: ${w.off}. Finish what you hold, check out, write your card's notes, and stop.`); return; }
+    try { fs.writeFileSync(memoPath, JSON.stringify({ key: keyOf(w), at: Date.now() })); } catch { /* best effort */ }
+    console.log(`WORK for ${AGENTS[agent]}:`);
+    w.reqs.forEach((r, i) => console.log(reqLine(r, i + 1)));
+    if (w.reqs.length) console.log(`  Answer each: node crew/crew.mjs reply ${agent} "<words from its title>" DONE|WONT|LATER|NOTE "<one line>"`);
+    if (w.nt) console.log(`  next card: ${w.nt.id} ${w.nt.text.replace(/\*\*/g, '').slice(0, 160)}`);
+    console.log(`Do it now (rule 15b). Can't start it yet? Say why on your card (crew.mjs note) and run standby again: it then waits for something new.`);
+  };
+  let w = look();
+  if (fresh(w)) { say(w); process.exit(0); }
+  const st = readStatus(agent);
+  if (!st.fields.state || st.fields.state === 'idle' || st.fields.state === DASH) { st.fields.state = 'idle'; st.fields.since = now(); writeStatus(st); }
+  const until = Date.now() + minutes * 60_000;
+  console.log(`STANDBY ${AGENTS[agent]}: ${w ? 'your work is as reported before (' + keyOf(w).slice(0, 120) + '); waiting for anything new' : 'nothing for you right now'}; looking every 20 s until ${new Date(until).toISOString().slice(11, 16)}Z.`);
+  while (Date.now() < until) {
+    await new Promise((r) => setTimeout(r, Math.min(20_000, Math.max(1000, until - Date.now()))));
+    w = look();
+    if (fresh(w)) { say(w); process.exit(0); }
+  }
+  console.log(`Nothing new after ${minutes} min. Run it again: node crew/crew.mjs standby ${agent}${minutes < 15 ? ' --minutes ' + minutes : ''}`);
 } else if (cmd === 'requests') {
   need(agent);
   const list = requestsFor(agent, { all: process.argv.includes('--all') });

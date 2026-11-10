@@ -175,7 +175,7 @@ card in `crew/status/`, appends to `crew/LOG.md`, and writes their own handoff n
 15. **Show your proof.** "Done" and "it works" need evidence in the handoff: the command you
     ran with the lines of output that show it passed, or a screenshot path. A claim with no
     proof counts as not verified.
-15b. **Keep going** (D-144, Jerry 10 Nov). When a card is done, check out and take the next one on your queue without waiting to be told; end a session only when your queue is empty or you are blocked (then say which on your card). Questions to Claude don't stop you: ask, give your pick, and carry on with it or with the next card until he answers.
+15b. **Keep going** (D-144, Jerry 10 Nov). When a card is done, check out and take the next one on your queue without waiting to be told; end a session only when your queue is empty or you are blocked (then say which on your card). Questions to Claude don't stop you: ask, give your pick, and carry on with it or with the next card until he answers. Nothing you can do right now (queue empty, everything waiting on someone)? `node crew/crew.mjs standby <you>` (D-147): it waits up to 15 minutes and returns the moment there is work for you; run it again when it returns empty. While on a long task, look at `node crew/crew.mjs requests <you>` every 15 minutes. Stay running until standby says the workload is done (crew/STANDBY-OFF) or Jerry says stop.
 
 16. **Game tests on Jerry's PC go through the slots** (Jerry, 2026-10-15: one at a time; 2026-11-10, D-143: "open as many
     as you think is feasible without cooking the machine"; the queue is `tools/game-test-slot.mjs`, CL-347). Anything that
