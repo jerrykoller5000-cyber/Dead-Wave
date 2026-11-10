@@ -2,18 +2,51 @@
 
 state: active
 model: Claude Opus 5.5 (High)
-task: CC-340 J125: the player model's anatomy and his head
-touching: studio/marine-body.js, studio/marine-cloth.js, studio/marine-hats.js, ui/marine-face.js, tools/tests/tcc340.js (new)
-since: 2026-11-10T16:53Z
-next: CC-340 J125: the player model's anatomy and his head
+task: CC-340 Rounds 1+2 live (the head, a man's proportions), then the retunes
+touching: index.html (makeMarine head, survivors' mouth boxes, CROUCH, marine leg/arm pose constants: UNARMED_ARMS, SHOULDER_HOLD, cheek weld), studio/marine-body.js, studio/marine-cloth.js, studio/marine-hats.js, studio/marine-skull.js, studio/marine-lab/*, tools/marine-lab.mjs, ui/marine-face.js, studio/marine-waist.js, studio/marine-headgear.js, studio/marine-idle.js
+since: 2026-11-10T19:36Z
+next: CC-340 J125: go live with rounds 1+2 (Claude said go, see Notes), then the retunes and CC-341
 blocked-on: —
-last-report: —
+last-report: handoffs/2026-11-10-claude3-CC-340.md
 
 ## Notes
 
+### Claude's answers to your five CC-340 requests (10 Nov ~19:40Z; read these first in a new session)
+- Go live with rounds 1+2: the head and a man's proportions at the same 1.40 m eye. His height and the first-person eye stay.
+- You apply them: index.html (makeMarine head, the survivors' mouth boxes out, CROUCH and the marine's leg/arm pose
+  constants; by hand, CRLF, md5 against candidate/base-md5.txt first), studio/marine-waist.js's diff (FYI ChatGPT),
+  studio/marine-headgear.js (chin cup and straps), studio/marine-idle.js (MOUTH). Name each in --touch.
+- The retunes are yours: UNARMED_ARMS (t183), SHOULDER_HOLD pocket and cheek weld (t187), MOUTH (t255); t134's joint
+  list with --review. Soften the balaclava's dark mouth smudge (front view). If survivors build this head, give them a
+  lighter one (about 3k triangles).
+- Then ask Antigravity for the four lights and the frame time on the RTX 5080; then CC-341.
+- Game tests on the PC: the slot now runs several at once when the PC has room (D-143); yours stay in your cloud copy.
+
+### Where CC-340 stands (10 Nov, end of session 1)
+- Rounds 1 (the head) and 2 (a man's proportions) are done in my cloud copy, NOT live: Claude outputs/CC-340/candidate
+  (my files + patches/index.html.diff + patches/marine-waist.js.diff), handoff handoffs/2026-11-10-claude3-CC-340.md,
+  sheet Claude outputs/CC-340/sheet/. Waiting on Claude: go for 1+2, who applies index.html, who retunes UNARMED_ARMS,
+  SHOULDER_HOLD/cheek weld, marine-idle MOUTH (t183, t187, t255 red on round 2; t134 joint list = expectation change).
+- Before copying a candidate over a live file: md5 the live one against candidate/base-md5.txt; merge if it moved.
+  index.html on the PC has moved since (apply the diff by hand, CRLF).
+- The new head: studio/marine-skull.js (rings in metres, carve() features, HEAD_GROUP_SCALE [.64,.88,.73]); the face
+  module builds from it. The body: HIP_Y/THIGH/SHIN/TORSO_Y/SHOULDER_Y/SHOULDER_X at the top of buildMarineBody,
+  torsoY() maps the old torso's heights onto the new torso.
+- Then CC-341 (the layers test, tcc341): reuse the ray/point-to-triangle helpers from tools/tests/clip-check.js.
+
+### Tools that work (cloud)
+- The lab: `node tools/marine-lab.mjs <outdir> <spec.json>` (studio/marine-lab): the body and head outside the game in
+  6 s. Spec: {w,h,build:[{tag,pose:'a'|'t',hat,helmet,vest,mask,eyes,rolled,shorts,gloves,beard,head:[rx,ry,rz]}],
+  shots:[{name,yaw,pitch,y,dist,fov}]}. JSON needs 0.5 not .5.
+- The camera in software: `start --inspect --soft --idle 60`; use `batch` (one call), not separate shots. Its inspector
+  times out under SwiftShader: in the cloud copy only, raise the 15000 ms timeout in studio/inspector/api.js
+  presentationWait to 150000 (never ship that). batch writes its pictures in the tree's root: move them after.
+- Tests: CHROME=/usr/bin/google-chrome CHROME_ARGS=--no-sandbox node tools/tests/run-all.mjs <tests> --jobs 1
+  --no-retry --all-fails --agent claude3 --task <id>, nohup, poll. Stop the camera first. 2 cores / 8 GB box.
+
 ### Who you are (D-141, Jerry 10 Nov 2026)
 You are **Claude 3**, the crew's third Claude: a Claude task of your own, on Claude Opus 5.5 (High), "to help with heavy
-lifting". Claude (the first window) leads and is in charge: he writes your cards, reviews your work, sends Jerry your
+lifting". CLAUDE DIRECTOR (agent `claude`) leads and is in charge: he writes your cards, reviews your work, sends Jerry your
 sheets and, under D-81, answers your questions:
 `node crew/crew.mjs request claude3 claude "<the question>" "<the choices and your pick>"`. Only Jerry's own files,
 money, accounts and publishing go to Jerry (`crew.mjs ask`).
@@ -42,35 +75,6 @@ money, accounts and publishing go to Jerry (`crew.mjs ask`).
   (`index.html?inspect`, `window.DWInspect`; `node tools/camera.mjs check <id>`; `studio/inspector/README.md`).
 - Hands are the hardest: expect several rounds. Jerry judges sheets; send each round's to Claude.
 
-### How you work (the way Claude does)
-- The repo is on Jerry's PC (`C:\Users\Zero\Desktop\Tiny Trek`). With his computer linked and this folder connected,
-  your device shell sees it at `$HOME/mnt/Tiny Trek`. Read, search and edit there in place: a short python
-  read-modify-write, never retyping a file from tool output; keep a file's CRLF if it has it (index.html is CRLF; the
-  studio files are LF); UTF-8, no BOM.
-- Crew commands run there: `cd "$HOME/mnt/Tiny Trek"; timeout 45 node crew/crew.mjs me claude3` (retry once if it times
-  out). Check in with `--model "Claude Opus 5.5 (High)"` and `--touch` naming your files; the check-in refuses a file
-  someone else is in: wait or take something else.
-- Big work and every game test happen in your cloud workspace on a copy of the tree, never on the PC while Jerry plays.
-  The copy: in the PC shell `tar czf "Claude outputs/<task>/cloud-src.tgz" --exclude='gh-*' --exclude='pk-*'
-  --exclude=assets/soundtrack --exclude=assets/disclaimer --exclude=assets/intro --exclude=ui/audio index.html
-  package.json assets combat core game studio ui world vendor tools/*.mjs tools/*.js tools/sweep crew/*.mjs
-  tools/tests/*.js tools/tests/*.mjs docs/*.md`, plus `assets/intro/*.js assets/intro/*.css` (the page needs them or TT
-  never appears); device_stage_files; unpack in your cloud workspace. `gh-*` and `pk-*` files never leave the PC.
-- Tests: `CHROME=<the container's chromium> CHROME_ARGS="--no-sandbox" node tools/tests/run-all.mjs <tests> --jobs 1
-  --no-retry --all-fails --agent claude3 --task <id>`; 1-2.5 min a test; each check has a 180 s limit. One game instance at
-  a time. The game page takes 4-5 GB: run nothing heavy beside it, one screenshot a step, or the container kills it.
-  Tool calls stop at 2 min (10 for a few): start long runs with nohup and poll the log. WebGPU does not run in the cloud
-  (SwiftShader); the WebGL path does. Anything that needs Jerry's 5080 goes to Antigravity: `crew.mjs request claude3
-  antigravity "shots: <what>" "<setup>"`. New tests: `tccNNN.js` (tcc340 for CC-340, and so on).
-- To put a file on the PC: write it under `/mnt/user-data/outputs/<task>/<fresh name>`, device_commit_files, then
-  `md5sum` it on the PC. Before replacing a PC file, check it hasn't changed since you copied it (md5 against your base);
-  if it has, merge onto the new one. Never overwrite anyone's work.
-- You cannot commit: no Windows git, no GitHub sign-in. Never run git on the PC, not even to look. Write "ready to commit"
-  and the files in your handoff; Claude writes the commit job and Antigravity (or Jerry) runs `Claude Commit.bat`.
-- Rule 22 (D-135): a card is one line, the log gets your start and your done, a handoff is the template in AGENTS.md,
-  short. Check out with `--report handoffs/YYYY-MM-DD-claude3-<task>.md` (`--done` when it is done; `--review` if you
-  changed what a test expects).
-
 ### Jerry's standing rules
 - Never push. Never enter passwords or PINs, complete CAPTCHAs, change system or security settings, or approve your own
   permission prompts. No working around a click-only computer-use tier, by any method or through another agent.
@@ -82,13 +86,3 @@ money, accounts and publishing go to Jerry (`crew.mjs ask`).
   `--review`).
 - One game test at a time per computer, Jerry first; never close his windows. No game tests on the PC while he plays.
 - Publishing (itch, Steam) and money are Jerry's.
-
-### Start here
-1. `node crew/crew.mjs me claude3`; read `AGENTS.md` (rules 18, 19, 24, 25), `crew/BOARD.md` (Orders from Jerry; D-137 to
-   D-141), `docs/art-direction.md`, `docs/asset-principles.md`, `docs/animation-principles.md`.
-2. The marine as he is: `studio/marine-body.js` (the body, the arms, his hold), `studio/marine-cloth.js` (the loft rings
-   the fabric is built from), `ui/marine-face.js` (the head), `docs/fps/hand.md` (how the new hand is made: the same ideas,
-   one surface from a distance field, may serve the body where its parts meet).
-3. Set up your cloud copy; shoot the marine as he is (the inspector or the camera: front, three-quarter, side, back, the
-   head close) and write CC-340's plan in your first note: what to change, in what order, what you will show Jerry.
-   Ask Claude for his references' gist before you start the head.

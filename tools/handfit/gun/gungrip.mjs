@@ -1,0 +1,72 @@
+// CL-334 h: a hand's pose (and a small move of the hand on the gun) solved against the gun's surface (sdf.py's grid, in
+// the hand's canonical space), gloved: no part of the hand into the gun deeper than 0.2 mm (J126 rule 2), none into
+// another part of the hand (rule 1), the bones named in TOUCH touching the gun (closest within 0.3 mm), the end joints
+// following the middle ones, near the start pose and the start place.
+// node gungrip.mjs <grid base> '<start pose>' '<touch bones json>' [maxMove mm]
+import { loadGrid } from './grid.mjs';
+import * as M from '../hand/mh-tool.mjs';
+const [base, poseArg, touchArg, mvArg] = process.argv.slice(2);
+const G = loadGrid(base), J = M._J, GL = M.GLOVE_INFLATE;
+const start = JSON.parse(poseArg); while (start.t.length < 6) start.t.push(0);
+const TOUCH = JSON.parse(touchArg || '[0,4,5,6,7,8,9,10,11,12]'), MV = (+mvArg || 4) / 1000;
+const FREE = process.env.FREE ? JSON.parse(process.env.FREE) : null;   // which x indices may move (default all)
+const L = M.handLayout(1, 0, 0), C = [0, L.gripY, 0.008];   // the grip channel: the move's and the turn's centre
+const pack = (p) => [...p.f.flatMap((q) => q.slice(0, 3)), ...p.t.slice(0, 6), 0, 0, 0, 0, 0, ...p.f.map((q) => q[3] || 0)];   // + dx dy dz (m), turns about y and z, the spreads
+const unpack = (x) => ({ f: [0, 1, 2, 3].map((i) => [x[i * 3], x[i * 3 + 1], x[i * 3 + 2], x[23 + i]]), t: x.slice(12, 18) });
+const LIM = [...[0, 1, 2, 3].flatMap(() => [J.mcp, J.pip, J.dip]), [-0.2, 1.6], [-1.6, 1.4], [-0.2, 1.4], J.cmcRoll, J.tMcp, J.cmcAbd, [-MV, MV], [-MV, MV], [-MV, MV], [-0.3, 0.3], [-0.3, 0.3], J.spread, J.spread, J.spread, J.spread];
+const clampX = (x) => x.map((v, k) => Math.max(LIM[k][0], Math.min(LIM[k][1], v)));
+const x0 = clampX(pack(start));
+const NAMES = ['palm', 'i1', 'i2', 'i3', 'm1', 'm2', 'm3', 'r1', 'r2', 'r3', 'l1', 'l2', 'l3', 't0', 't1', 't2'];
+function cost(x, full) {
+  const pose = unpack(x), P = M.handPosed(pose, GL), byB = new Float64Array(16).fill(1);
+  const [dx, dy, dz, a, b2] = x.slice(18), ca = Math.cos(a), sa = Math.sin(a), cb = Math.cos(b2), sb = Math.sin(b2);
+  for (let v = 0; v < P.n; v++) {
+    // the hand moved by (dx, dy, dz) and turned (a about its length, b2 about the palm's normal) at the grip channel = the gun the other way
+    let px = P.p[v * 3] - dx - C[0], py = P.p[v * 3 + 1] - dy - C[1], pz = P.p[v * 3 + 2] - dz - C[2];
+    const qx = ca * px + sa * pz, qz = -sa * px + ca * pz;
+    const rx = cb * qx + sb * py, ry = -sb * qx + cb * py;
+    const d = G.d(rx + C[0], ry + C[1], qz + C[2]); if (d < byB[P.b0[v]]) byB[P.b0[v]] = d;
+  }
+  const mm = (d) => d * 1000;
+  let gun = 0, gap = 0;
+  for (let b = 0; b < 16; b++) { const d = mm(byB[b]); if (d < -0.2) gun += (d + 0.2) ** 2; }
+  for (const b of TOUCH) gap += Math.max(0, mm(byB[b]) - 0.3) ** 2;
+  const R = M.handClipReport(pose, 0.0005, true, GL);
+  let self = 0; for (const k in R.nearBone) { const d = R.nearBone[k]; if (d < -0.35) self += (d + 0.35) ** 2; }
+  let coup = 0; for (let i = 0; i < 4; i++) { const b = x[i * 3 + 1], c = x[i * 3 + 2]; if (TOUCH.includes(1 + i * 3 + 1)) coup += Math.max(0, 0.5 * b - c) ** 2 + Math.max(0, c - 0.95 * b) ** 2; }
+  let dev = 0; for (let k = 0; k < 18; k++) dev += (x[k] - x0[k]) ** 2; for (let k = 23; k < 27; k++) dev += 2 * (x[k] - x0[k]) ** 2;
+  const move = (x[18] ** 2 + x[19] ** 2 + x[20] ** 2) * 1e6 * 0.05 + (x[21] ** 2 + x[22] ** 2) * 20;
+  const c = gun * 10 + gap + self * 6 + coup * 30 + dev * 0.15 + move;
+  return full ? { c, gun, gap, self, coup, dev, move, byB: Array.from(byB, (d) => +mm(d).toFixed(1)), R } : { c };
+}
+let x = x0.slice(), best = cost(x, true);
+if (process.env.SCAN) {   // the place first: a grid over the move and the turns with the start pose
+  let bs = best;
+  for (const dx of [-10, -6, -3, 0, 3]) for (const dz of [-2, 0, 2, 4]) for (const dy of [-3, 0, 3]) for (const a of [-0.2, -0.1, 0, 0.1, 0.2]) for (const b2 of [-0.25, -0.12, 0, 0.12]) {
+    const q = x0.slice(); q[18] = dx / 1000; q[19] = dy / 1000; q[20] = dz / 1000; q[21] = a; q[22] = b2; const qc = clampX(q); const e = cost(qc); if (e.c < bs.c) { bs = e; x = qc; }
+  }
+  best = cost(x, true);
+}
+const show = (tag, e) => console.log(tag, e.c.toFixed(2), 'gun', e.gun.toFixed(2), 'gap', e.gap.toFixed(2), 'self', e.self.toFixed(2), 'move', JSON.stringify(x.slice(18, 21).map((v) => +(v * 1000).toFixed(1))), 'turn', x[21].toFixed(3), x[22].toFixed(3), '|', e.byB.map((d, k) => NAMES[k] + ' ' + d).join(' '));
+show('start', best);
+const free = (k) => !FREE || FREE.includes(k);
+const pairs = [];
+for (let i = 0; i < 4; i++) pairs.push([i * 3, i * 3 + 1], [i * 3 + 1, i * 3 + 2], [i * 3, i * 3 + 2]);
+pairs.push([12, 17], [16, 17], [12, 16], [14, 16], [13, 17], [12, 13], [15, 17], [18, 19], [18, 20], [19, 20], [18, 22], [20, 21], [23, 24], [24, 25], [25, 26]);
+const sc = (k) => (k >= 18 && k < 21 ? 0.01 : 1);
+for (const step of [0.1, 0.05, 0.025, 0.0125]) {
+  let improved = true, n = 0;
+  while (improved && n++ < 25) {
+    improved = false;
+    for (let k = 0; k < 27; k++) { if (!free(k)) continue; for (const sg of [-1, 1]) {
+      const q = x.slice(); q[k] += sg * step * sc(k); const qc = clampX(q); const e = cost(qc); if (e.c < best.c - 1e-6) { x = qc; best = cost(x, true); improved = true; }
+    } }
+    for (const [a, b] of pairs) { if (!free(a) || !free(b)) continue; for (const sa of [-1, 1]) for (const sb of [-1, 1]) {
+      const q = x.slice(); q[a] += sa * step * sc(a); q[b] += sb * step * sc(b); const qc = clampX(q); const e = cost(qc); if (e.c < best.c - 1e-6) { x = qc; best = cost(x, true); improved = true; }
+    } }
+  }
+  show('step ' + step, best);
+}
+const pose = unpack(x);
+console.log('SELF', best.R.max, JSON.stringify(best.R.pairs));
+console.log('RESULT ' + JSON.stringify({ pose: { f: pose.f.map((q) => q.map((v) => +v.toFixed(3))), t: pose.t.map((v) => +v.toFixed(3)) }, move: x.slice(18, 21).map((v) => +(v * 1000).toFixed(2)), turn: [+x[21].toFixed(4), +x[22].toFixed(4)], byB: best.byB, self: best.R.max }));

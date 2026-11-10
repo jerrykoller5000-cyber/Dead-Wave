@@ -49,7 +49,7 @@
 //   node crew/crew.mjs reviewed <report path> "<verdict>"
 //   node crew/crew.mjs reviewed --before <YYYY-MM-DD> "<verdict>"   every review older than that, at once
 //
-// Agents: claude, claude2, claude3, chatgpt, chatgpt2, antigravity. Task ids: CL-, CB- (the second Claude), CC- (the third), GP-, GT- (the second ChatGPT), AG-.
+// Agents: claude, claude2, claude3, claude4, chatgpt, chatgpt2, antigravity. Task ids: CL-, CB- (the second Claude), CC- (the third), CD- (Claude 1, the hands), GP-, GT- (the second ChatGPT), AG-.
 // (CU-, GB- and MU- ids in the log and the archive are the retired Cursor's, Grokbot's and Muse's: D-134, D-137.)
 // The files are the truth; this only reads and writes them (always as UTF-8). By hand is fine:
 //   crew/status/<agent>.md   your own check-in card. Only you write yours.
@@ -64,8 +64,8 @@ import { parseNotes, reviewState, notesStub } from './notes.mjs';
 
 const CREW = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(CREW, '..');
-const AGENTS = { claude: 'Claude', claude2: 'Claude 2', claude3: 'Claude 3', chatgpt: 'ChatGPT', chatgpt2: 'ChatGPT 2', antigravity: 'Antigravity' };
-const PREFIX = { claude: 'CL', claude2: 'CB', claude3: 'CC', chatgpt: 'GP', chatgpt2: 'GT', antigravity: 'AG' };
+const AGENTS = { claude: 'CLAUDE DIRECTOR', claude2: 'Claude 2', claude3: 'Claude 3', claude4: 'Claude 1', chatgpt: 'ChatGPT', chatgpt2: 'ChatGPT 2', antigravity: 'Antigravity' };
+const PREFIX = { claude: 'CL', claude2: 'CB', claude3: 'CC', claude4: 'CD', chatgpt: 'GP', chatgpt2: 'GT', antigravity: 'AG' };
 const FIELDS = ['state', 'model', 'task', 'touching', 'since', 'next', 'blocked-on', 'last-report'];
 const STATES = ['active', 'idle', 'blocked', 'away'];
 // Append-only files everyone shares. Checking in on them never clashes with anyone.

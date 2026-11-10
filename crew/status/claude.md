@@ -1,15 +1,18 @@
-# Claude
+# CLAUDE DIRECTOR
 
 state: idle
 model: Claude Opus 5.5
 task: —
 touching: —
-since: 2026-11-10T18:17Z
-next: CL-334 the hands on the guns: attachments on, two hands, the support wraps
+since: 2026-11-10T20:05Z
+next: —
 blocked-on: —
-last-report: handoffs/2026-11-10-claude-CL-347.md
+last-report: handoffs/2026-11-10-claude-CL-351.md
 
 ## Notes
+
+### The director (D-145, D-146)
+- Jerry, 10 Nov: CLAUDE DIRECTOR; no heavy lifting; check the crew every 10 minutes (send_later, chained: each check schedules the next): `node crew/crew.mjs requests claude` first, then who is stopped or blocked, new sheets, the commit job.
 - 2026-10-31: device_commit_files can resend an earlier upload when a stagedPath is reused (twice a commit 'written' left the old file): give each commit a fresh file name and check the md5 on the PC after.
 
 - 2026-10-25: headless Blender is installed in the cloud box (`pip install bpy`, 5.2 LTS): studio/import-cmu.py reads the CMU FBX clips (huggingface gbionics/cmu-fbx; credit mocap.cs.cmu.edu). The 2-core box's software renderer is slow with the gun in view in first person: give first-person eases 14-20 s in tests.

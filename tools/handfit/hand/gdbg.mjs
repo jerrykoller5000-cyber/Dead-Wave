@@ -1,0 +1,12 @@
+import * as M from './mh-tool.mjs';
+const L = M.handLayout(1, 0, 0.07);
+const pose = JSON.parse(process.argv[2]);
+const Mx = M._bf(L, pose);
+const fr = (k, x, y, z) => { const m = Mx[k]; return [m[0] * x + m[1] * y + m[2] * z + m[3], m[4] * x + m[5] * y + m[6] * z + m[7], m[8] * x + m[9] * y + m[10] * z + m[11]].map((q) => +q.toFixed(4)); };
+const dr = (k, x, y, z) => { const m = Mx[k]; return [m[0] * x + m[1] * y + m[2] * z, m[4] * x + m[5] * y + m[6] * z, m[8] * x + m[9] * y + m[10] * z].map((q) => +q.toFixed(3)); };
+const f = L.fingers[0];
+console.log('bar', [0, L.gripY, 0.078]);
+console.log('index MCP', fr(1, 0, 0, 0), 'PIP', fr(2, 0, 0, 0), 'DIP', fr(3, 0, 0, 0), 'tip', fr(3, 0, -f.len[2], 0));
+console.log('index middle back normal', dr(2, 0, 0, -1), 'axis', dr(2, 0, -1, 0));
+console.log('thumb CMC', fr(13, 0, 0, 0), 'MCP', fr(14, 0, 0, 0), 'IP', fr(15, 0, 0, 0), 'tip', fr(15, 0, -L.thumb.len[2], 0));
+console.log('thumb end axis', dr(15, 0, -1, 0), 'pad normal', dr(15, 0, 0, 1));

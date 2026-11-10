@@ -1,0 +1,13 @@
+import { readFileSync } from 'node:fs';
+const src = readFileSync('/home/claude/gs306/studio/marine-hand.js', 'utf8') + '\nexport { handLayout as _hl, boneFrames as _bf, handField as _hf, surfaceNets as _sn, palmField as _pf, BUILD as _B, toSurface as _ts, fieldGrad as _fg, handSkinAt as _sk };';
+const url = 'data:text/javascript;base64,' + Buffer.from(src).toString('base64');
+const M = await import(url);
+const L = M._hl(1, 0, 0), Rb = M._bf(L, M._B);
+let t = performance.now(); const pf = M._pf(L); console.log('palm table', (performance.now() - t).toFixed(0));
+t = performance.now(); const H = M._hf(L, Rb); console.log('field', (performance.now() - t).toFixed(0));
+let n = 0; const f = (x, y, z) => { n++; return H.d(x, y, z); };
+t = performance.now(); for (let i = 0; i < 100000; i++) f(Math.random() * 0.1 - 0.05, -0.2 - Math.random() * 0.15, Math.random() * 0.06 - 0.03); console.log('100k evals', (performance.now() - t).toFixed(0));
+const h = 0.0026, lo = [-0.08, -0.4, -0.06], hi = [0.08, -0.2, 0.06];
+n = 0; t = performance.now(); const { P, Q } = M._sn(f, lo, hi, h); console.log('nets', (performance.now() - t).toFixed(0), 'evals', n, 'verts', P.length / 3);
+n = 0; t = performance.now(); for (let v = 0; v < P.length / 3; v++) M._ts(f, [P[v*3], P[v*3+1], P[v*3+2]], 0, 3); console.log('project', (performance.now() - t).toFixed(0), 'evals', n);
+n = 0; t = performance.now(); for (let v = 0; v < P.length / 3; v++) M._sk(H, L, Rb, P[v*3], P[v*3+1], P[v*3+2]); console.log('skin', (performance.now() - t).toFixed(0));

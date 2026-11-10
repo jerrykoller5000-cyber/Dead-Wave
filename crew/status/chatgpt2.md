@@ -1,13 +1,13 @@
 # ChatGPT 2
 
-state: blocked
+state: active
 model: GPT-6 Astra (High)
-task: GT-20075 Weapon models and caliber-specific casing geometry
-touching: —
-since: 2026-11-10T18:00Z
+task: GT-20078 Measure the fitted light and grip clearance against actual glove triangles, fix the model contacts and send Claude 4 the deltas
+touching: studio/weapon-heavy.js, studio/weapon-attachments.js, studio/weapon-sidearms.js, tools/tests/weapon-seating.js, review/GT-20078
+since: 2026-11-10T20:05Z
 next: GT-20076 J128 (Jerry, 10 Nov, standing, D-140): no part through anoth
-blocked-on: Awaiting Claude on firing poses and KR-7 hand refit, and Claude 2 on shell/inspector wiring for rifle suppressors, loose cases and fuel gauge.
-last-report: handoffs/2026-11-10-chatgpt2-GT-20075.md
+blocked-on: —
+last-report: handoffs/2026-11-10-chatgpt2-GT-20076.md
 
 ## Notes
 
