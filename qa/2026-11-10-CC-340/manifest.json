@@ -1,0 +1,730 @@
+{
+  "inspectorMeta": {
+    "version": "1.2.0",
+    "renderer": "WebGPURenderer",
+    "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "current": {
+      "id": "marine",
+      "name": "The marine (live)",
+      "kind": "marine",
+      "variant": null,
+      "mode": null,
+      "center": {
+        "x": -25.954303197297307,
+        "y": -199.15436834503993,
+        "z": -632.064664639784
+      },
+      "size": {
+        "x": 0.8518881805392304,
+        "y": 1.618542077295018,
+        "z": 0.7258891093532611
+      },
+      "yaw": 0,
+      "info": {
+        "meshes": 184,
+        "drawables": 184,
+        "tris": 151478,
+        "points": 0,
+        "segments": 0,
+        "materials": 63
+      }
+    }
+  },
+  "shots": [
+    {
+      "name": "marine-issue-head-front-noon.png",
+      "bytes": 515195,
+      "sha256": "9cdbf2f1864fcf2172e1ebedf565254d57a78274477e584a7bb5e96defb9452a",
+      "meanRgb": [
+        81,
+        84.8,
+        88.2
+      ],
+      "meanLuma": 84.25,
+      "stdLuma": 42.23
+    },
+    {
+      "name": "marine-issue-head-front-overcast.png",
+      "bytes": 524188,
+      "sha256": "336b57d1752c8c4c63ef570c35ce6ef1457c358362445c0a26daceb3b80f1029",
+      "meanRgb": [
+        86.6,
+        89,
+        89.8
+      ],
+      "meanLuma": 88.52,
+      "stdLuma": 39.41
+    },
+    {
+      "name": "marine-issue-head-front-dusk.png",
+      "bytes": 446204,
+      "sha256": "ce0470de63616a9380f2bf52ee9767c954e559566751b13d047aedc24d0a1177",
+      "meanRgb": [
+        75.6,
+        70.1,
+        66.9
+      ],
+      "meanLuma": 71.03,
+      "stdLuma": 49.47
+    },
+    {
+      "name": "marine-issue-head-front-night.png",
+      "bytes": 301961,
+      "sha256": "a3dd21ba4247ef1b7e37052a1a22179f98b0b91d9879ccf1fac7894facb07e7d",
+      "meanRgb": [
+        51.4,
+        54.6,
+        60.4
+      ],
+      "meanLuma": 54.31,
+      "stdLuma": 61.13
+    },
+    {
+      "name": "marine-issue-head-threeQ-noon.png",
+      "bytes": 594950,
+      "sha256": "ed81cb3fbbce6ce14b45aca6783195ffd126d50d99167400318ba2731e5bc397",
+      "meanRgb": [
+        82.2,
+        85.9,
+        89.1
+      ],
+      "meanLuma": 85.31,
+      "stdLuma": 40.75
+    },
+    {
+      "name": "marine-issue-head-threeQ-overcast.png",
+      "bytes": 603572,
+      "sha256": "81b818d331a709416fa268e8bee1c658f8a1dd4e9ec8bf0035f5ac2658906033",
+      "meanRgb": [
+        87.2,
+        89.5,
+        90.2
+      ],
+      "meanLuma": 89.08,
+      "stdLuma": 38.88
+    },
+    {
+      "name": "marine-issue-head-threeQ-dusk.png",
+      "bytes": 507254,
+      "sha256": "fe88b1da2c4a3ccd59c78ff151d3d72064965362cc052b6ece979fa39f2f3946",
+      "meanRgb": [
+        76.8,
+        70.7,
+        67.1
+      ],
+      "meanLuma": 71.71,
+      "stdLuma": 48.52
+    },
+    {
+      "name": "marine-issue-head-threeQ-night.png",
+      "bytes": 364222,
+      "sha256": "a06e3bf3f260a99d9171b25892abf87da27f37ae3ba2e0368a25a9cfb897e566",
+      "meanRgb": [
+        51.1,
+        54.3,
+        60.3
+      ],
+      "meanLuma": 54.02,
+      "stdLuma": 60.88
+    },
+    {
+      "name": "marine-issue-head-side-noon.png",
+      "bytes": 509120,
+      "sha256": "4ad42750965be92abf66add94e290c7638918014a71318daba73fad2465c92de",
+      "meanRgb": [
+        84.9,
+        87.6,
+        89.4
+      ],
+      "meanLuma": 87.17,
+      "stdLuma": 39.11
+    },
+    {
+      "name": "marine-issue-head-side-overcast.png",
+      "bytes": 488762,
+      "sha256": "0a973c3b983c57ab9b455a5b55dea8a1e5c7c4df6e9b8bf67ce94f5c93ab2657",
+      "meanRgb": [
+        87.2,
+        89.2,
+        89.5
+      ],
+      "meanLuma": 88.83,
+      "stdLuma": 38.01
+    },
+    {
+      "name": "marine-issue-head-side-dusk.png",
+      "bytes": 432587,
+      "sha256": "1f3f982955517b44d99a0556ea6f3b312fe4ca99ffef627596bab3835d715ed8",
+      "meanRgb": [
+        78.7,
+        70.8,
+        66
+      ],
+      "meanLuma": 72.15,
+      "stdLuma": 46.86
+    },
+    {
+      "name": "marine-issue-head-side-night.png",
+      "bytes": 305851,
+      "sha256": "e350bbebc220100776b41a802495aeb56add48ba84bac99b3e4c02fc8a75d574",
+      "meanRgb": [
+        49.9,
+        53,
+        58.8
+      ],
+      "meanLuma": 52.79,
+      "stdLuma": 60.01
+    },
+    {
+      "name": "marine-issue-gameplay-front-noon.png",
+      "bytes": 416170,
+      "sha256": "6f63fd339a40e0d4e39303f4fad6f10bbc4b32c35ebbf59770124159d174151d",
+      "meanRgb": [
+        84.9,
+        91.4,
+        100.3
+      ],
+      "meanLuma": 90.69,
+      "stdLuma": 31.57
+    },
+    {
+      "name": "marine-issue-gameplay-front-overcast.png",
+      "bytes": 406079,
+      "sha256": "3e28deda19955cd94b3cf94767580e5cd9f5ebffffa4ca39b6b7859ba67076f2",
+      "meanRgb": [
+        93.2,
+        97.5,
+        102.7
+      ],
+      "meanLuma": 96.98,
+      "stdLuma": 27.38
+    },
+    {
+      "name": "marine-issue-gameplay-front-dusk.png",
+      "bytes": 363747,
+      "sha256": "3f5b5449d3e1273227411b432e478db5757c27617c05e31d863491f56ff55b21",
+      "meanRgb": [
+        79.9,
+        73.6,
+        70.6
+      ],
+      "meanLuma": 74.71,
+      "stdLuma": 42.8
+    },
+    {
+      "name": "marine-issue-gameplay-front-night.png",
+      "bytes": 305234,
+      "sha256": "50b2bfb1129f37fc3382176c749e8a6d420a045692d5e0d3cd90c582fe746203",
+      "meanRgb": [
+        48.7,
+        52.4,
+        60.8
+      ],
+      "meanLuma": 52.23,
+      "stdLuma": 59.31
+    },
+    {
+      "name": "marine-issue-gameplay-threeQ-noon.png",
+      "bytes": 597018,
+      "sha256": "e77c1a3f14cea15f6c64be92ffe1b89862234e1ffd63e738e557a9c0fe690913",
+      "meanRgb": [
+        85.1,
+        91.5,
+        100.3
+      ],
+      "meanLuma": 90.76,
+      "stdLuma": 31.51
+    },
+    {
+      "name": "marine-issue-gameplay-threeQ-overcast.png",
+      "bytes": 591458,
+      "sha256": "27d1ae845b2464a9ef17430ba4a96fdeac13c13a15dc83ddb774599e777419ce",
+      "meanRgb": [
+        93.2,
+        97.4,
+        102.5
+      ],
+      "meanLuma": 96.9,
+      "stdLuma": 27.58
+    },
+    {
+      "name": "marine-issue-gameplay-threeQ-dusk.png",
+      "bytes": 528443,
+      "sha256": "1a0d31055d16d1c03ccf641883bbf40d50ad443207bbbe2819d1a17bfda9f248",
+      "meanRgb": [
+        80.1,
+        73.6,
+        70.6
+      ],
+      "meanLuma": 74.78,
+      "stdLuma": 42.77
+    },
+    {
+      "name": "marine-issue-gameplay-threeQ-night.png",
+      "bytes": 452568,
+      "sha256": "86017db8e9591bd049c9594a9978c6c74b2862fa497cf7eb84e16da495a0adc0",
+      "meanRgb": [
+        48.7,
+        52.5,
+        60.8
+      ],
+      "meanLuma": 52.28,
+      "stdLuma": 59.32
+    },
+    {
+      "name": "marine-issue-gameplay-side-noon.png",
+      "bytes": 413984,
+      "sha256": "a841d1c3812b12495d6c5b4cad4405b1f1524345bc969f0c445d23d1a1404faa",
+      "meanRgb": [
+        85.7,
+        92.2,
+        101
+      ],
+      "meanLuma": 91.42,
+      "stdLuma": 30.54
+    },
+    {
+      "name": "marine-issue-gameplay-side-overcast.png",
+      "bytes": 397126,
+      "sha256": "5757a65144ce5ad2929e64ca77af6c500ddc9181f5b4fd81d13656f5d3fa6dd4",
+      "meanRgb": [
+        93.6,
+        97.9,
+        103.1
+      ],
+      "meanLuma": 97.36,
+      "stdLuma": 26.72
+    },
+    {
+      "name": "marine-issue-gameplay-side-dusk.png",
+      "bytes": 361662,
+      "sha256": "d57cd59287e59761837896143aff2d8c467a3c1fe95d41e1a124166d4ebecf9b",
+      "meanRgb": [
+        80.6,
+        74,
+        70.8
+      ],
+      "meanLuma": 75.19,
+      "stdLuma": 42.25
+    },
+    {
+      "name": "marine-issue-gameplay-side-night.png",
+      "bytes": 310893,
+      "sha256": "9f094c6d85236ab91aaac5d1fb08ce47b740140d73fd488ec4251d9834c7da2a",
+      "meanRgb": [
+        48.8,
+        52.5,
+        61
+      ],
+      "meanLuma": 52.34,
+      "stdLuma": 59.22
+    },
+    {
+      "name": "marine-full-head-front-noon.png",
+      "bytes": 518171,
+      "sha256": "2370106608e9da8e39448667e7c3d122984c1bd81ff3c19330e263d7cfde0fcd",
+      "meanRgb": [
+        74.8,
+        78.4,
+        81.8
+      ],
+      "meanLuma": 77.88,
+      "stdLuma": 44.69
+    },
+    {
+      "name": "marine-full-head-front-overcast.png",
+      "bytes": 513444,
+      "sha256": "5663b54e8acc82a4c0c64bb707d074016981dcf0e99b9fa81c4e9107f985eb5b",
+      "meanRgb": [
+        79.9,
+        82.3,
+        83.2
+      ],
+      "meanLuma": 81.86,
+      "stdLuma": 42.93
+    },
+    {
+      "name": "marine-full-head-front-dusk.png",
+      "bytes": 448000,
+      "sha256": "043b914ba4f740cdc82530fc1d5820df970eeb176d2162b0418edea4e5a57028",
+      "meanRgb": [
+        69.6,
+        63.9,
+        60.5
+      ],
+      "meanLuma": 64.85,
+      "stdLuma": 50.25
+    },
+    {
+      "name": "marine-full-head-front-night.png",
+      "bytes": 298969,
+      "sha256": "d9b0c554490274d669f92dd8e7d4d3babed4f2a5cf9777d04e761a01765474be",
+      "meanRgb": [
+        45.7,
+        48.6,
+        54.1
+      ],
+      "meanLuma": 48.42,
+      "stdLuma": 60.01
+    },
+    {
+      "name": "marine-full-head-threeQ-noon.png",
+      "bytes": 640087,
+      "sha256": "5f3b56c40f1c4d5d8ad1d526f242c485c673f7805424f0b52af4dce052118b8d",
+      "meanRgb": [
+        75.3,
+        78.9,
+        82
+      ],
+      "meanLuma": 78.32,
+      "stdLuma": 43.59
+    },
+    {
+      "name": "marine-full-head-threeQ-overcast.png",
+      "bytes": 630070,
+      "sha256": "97d4cb347884af263661c6d4aecadebc23974faa50f07174f35e8632c5a137e4",
+      "meanRgb": [
+        79,
+        81.4,
+        82.2
+      ],
+      "meanLuma": 80.95,
+      "stdLuma": 42.52
+    },
+    {
+      "name": "marine-full-head-threeQ-dusk.png",
+      "bytes": 536992,
+      "sha256": "4b4cc0696add1a495425a2d2342d1090a4d794eeca3bbfeb8e90cd440adf85a9",
+      "meanRgb": [
+        69.1,
+        62.8,
+        59
+      ],
+      "meanLuma": 63.87,
+      "stdLuma": 49.16
+    },
+    {
+      "name": "marine-full-head-threeQ-night.png",
+      "bytes": 384601,
+      "sha256": "6d96ab82467b5caf1777037822e01d7aee0d7c0d0992a5057cb0a148c33e3f9a",
+      "meanRgb": [
+        43.8,
+        46.7,
+        52.4
+      ],
+      "meanLuma": 46.52,
+      "stdLuma": 59.1
+    },
+    {
+      "name": "marine-full-head-side-noon.png",
+      "bytes": 562184,
+      "sha256": "a65909f6d9746bb98de13e8d68afa4f423b3ed97b73964e4f9e82356a4a64293",
+      "meanRgb": [
+        76,
+        79.3,
+        81.4
+      ],
+      "meanLuma": 78.73,
+      "stdLuma": 42.27
+    },
+    {
+      "name": "marine-full-head-side-overcast.png",
+      "bytes": 533049,
+      "sha256": "ebdf2916b814a5b8396fb0e436ef0516fdc76301330685308ebb0d4bafb203af",
+      "meanRgb": [
+        78.1,
+        80.6,
+        81.2
+      ],
+      "meanLuma": 80.12,
+      "stdLuma": 42.49
+    },
+    {
+      "name": "marine-full-head-side-dusk.png",
+      "bytes": 476080,
+      "sha256": "c63fecf9491040395f494e0b489f6c833dfcdaf63fcfa8a2c9d38bcf1afccaad",
+      "meanRgb": [
+        70,
+        63.1,
+        58.6
+      ],
+      "meanLuma": 64.22,
+      "stdLuma": 48.31
+    },
+    {
+      "name": "marine-full-head-side-night.png",
+      "bytes": 329762,
+      "sha256": "7ac909f9567ee17d706e62fa0eb7c29d5b44ffc8c60344b847f9fb9bc22cb723",
+      "meanRgb": [
+        43.6,
+        46.5,
+        52
+      ],
+      "meanLuma": 46.28,
+      "stdLuma": 58.67
+    },
+    {
+      "name": "marine-full-gameplay-front-noon.png",
+      "bytes": 417744,
+      "sha256": "968cba298e6c89a1a418e31bdb0e3d8a9dd55be0d936215eb58881645fdef176",
+      "meanRgb": [
+        85,
+        91.5,
+        100.4
+      ],
+      "meanLuma": 90.79,
+      "stdLuma": 31.9
+    },
+    {
+      "name": "marine-full-gameplay-front-overcast.png",
+      "bytes": 411557,
+      "sha256": "fee69c32d79f8cc54495f03eeedb09b1d3c32d03d2ceaa0066a17cdecca0372e",
+      "meanRgb": [
+        93.2,
+        97.6,
+        102.8
+      ],
+      "meanLuma": 97.03,
+      "stdLuma": 27.84
+    },
+    {
+      "name": "marine-full-gameplay-front-dusk.png",
+      "bytes": 364916,
+      "sha256": "492cd450977fbe42e15b7ad23344151f8e97e33f2f0d2c5cadbe705823e6947e",
+      "meanRgb": [
+        80,
+        73.8,
+        70.8
+      ],
+      "meanLuma": 74.89,
+      "stdLuma": 42.94
+    },
+    {
+      "name": "marine-full-gameplay-front-night.png",
+      "bytes": 305532,
+      "sha256": "f77c7aeb683f081288b75d754a1fecd20348d2d787ef0fa36ddbc19a59173a49",
+      "meanRgb": [
+        49,
+        52.7,
+        61.1
+      ],
+      "meanLuma": 52.51,
+      "stdLuma": 59.38
+    },
+    {
+      "name": "marine-full-gameplay-threeQ-noon.png",
+      "bytes": 603181,
+      "sha256": "0e7b85222b46f397bf608c320b176d285c2ad25a04dc9fd60a996fb1507df454",
+      "meanRgb": [
+        85.1,
+        91.5,
+        100.3
+      ],
+      "meanLuma": 90.78,
+      "stdLuma": 31.73
+    },
+    {
+      "name": "marine-full-gameplay-threeQ-overcast.png",
+      "bytes": 596604,
+      "sha256": "1ed6b32535676103d8f49efd5723c29d271a832fe69664858a4108c06dcbc4ba",
+      "meanRgb": [
+        93.1,
+        97.4,
+        102.6
+      ],
+      "meanLuma": 96.85,
+      "stdLuma": 27.98
+    },
+    {
+      "name": "marine-full-gameplay-threeQ-dusk.png",
+      "bytes": 534200,
+      "sha256": "4094d62fa2f0d6534e49c94d4ec8128ff006ab7c26d869027854c7147941417e",
+      "meanRgb": [
+        80.1,
+        73.7,
+        70.8
+      ],
+      "meanLuma": 74.87,
+      "stdLuma": 42.88
+    },
+    {
+      "name": "marine-full-gameplay-threeQ-night.png",
+      "bytes": 457356,
+      "sha256": "4242392ed9600396905b69d951aa12007b2dfd5c272f1c6ab69691e305dc614f",
+      "meanRgb": [
+        48.9,
+        52.7,
+        61
+      ],
+      "meanLuma": 52.47,
+      "stdLuma": 59.37
+    },
+    {
+      "name": "marine-full-gameplay-side-noon.png",
+      "bytes": 417929,
+      "sha256": "e39c6af6cd30649335ba53e350e27738a04cb58f09fed232b69d1776a2dccea0",
+      "meanRgb": [
+        85.9,
+        92.4,
+        101.2
+      ],
+      "meanLuma": 91.63,
+      "stdLuma": 30.55
+    },
+    {
+      "name": "marine-full-gameplay-side-overcast.png",
+      "bytes": 405290,
+      "sha256": "f6ef9846ed6f612bcf871f0b70e7af08d49870fb4fe1a0367660c55d78e94fa4",
+      "meanRgb": [
+        93.7,
+        98.1,
+        103.3
+      ],
+      "meanLuma": 97.51,
+      "stdLuma": 26.77
+    },
+    {
+      "name": "marine-full-gameplay-side-dusk.png",
+      "bytes": 368437,
+      "sha256": "08c7bdced744ecdc830da6947dc074b70d04e340208ea224c3a82e2e3e1b6b1d",
+      "meanRgb": [
+        80.8,
+        74.2,
+        71.1
+      ],
+      "meanLuma": 75.39,
+      "stdLuma": 42.26
+    },
+    {
+      "name": "marine-full-gameplay-side-night.png",
+      "bytes": 312375,
+      "sha256": "6c3d7f85fd1e9221dd5143f9de7818afc46f6aca85c64592b9042a5a0c4f12a9",
+      "meanRgb": [
+        49,
+        52.7,
+        61.2
+      ],
+      "meanLuma": 52.56,
+      "stdLuma": 59.26
+    },
+    {
+      "name": "roof-all-three-noon.png",
+      "bytes": 1229575,
+      "sha256": "d51d317743bb904078c258138aae6802926bc0c8c8e074093f4676cc282585a6",
+      "meanRgb": [
+        89.4,
+        95.5,
+        70.8
+      ],
+      "meanLuma": 92.42,
+      "stdLuma": 37.06
+    },
+    {
+      "name": "roof-all-three-overcast.png",
+      "bytes": 1091164,
+      "sha256": "acf5770ef0c5e5f080e66cce767bf9d47c7d77e2a8ea22435ee2fc9a91b69a09",
+      "meanRgb": [
+        82.4,
+        90.7,
+        72.1
+      ],
+      "meanLuma": 87.58,
+      "stdLuma": 38.13
+    },
+    {
+      "name": "roof-all-three-dusk.png",
+      "bytes": 1057903,
+      "sha256": "a39302db2fa4d385224ae71c80027e0b55a559c48a2d13f1b2cd6bad6e6e8ad7",
+      "meanRgb": [
+        76.1,
+        56.1,
+        31.4
+      ],
+      "meanLuma": 58.53,
+      "stdLuma": 32.17
+    },
+    {
+      "name": "roof-all-three-night.png",
+      "bytes": 806876,
+      "sha256": "bf2d6712c887493ac7fa66e5f73eb7b9eaa543f0152dd391c879b8bb4c3f7217",
+      "meanRgb": [
+        17.6,
+        22.4,
+        26.6
+      ],
+      "meanLuma": 21.69,
+      "stdLuma": 12.4
+    },
+    {
+      "name": "roof-okafor-gameplay-noon.png",
+      "bytes": 639291,
+      "sha256": "4e5b8342118e72f83adf5cc1050d9bcecf0eef43e8a97548e385756b410affc1",
+      "meanRgb": [
+        74.3,
+        75.7,
+        64.9
+      ],
+      "meanLuma": 74.64,
+      "stdLuma": 41.27
+    },
+    {
+      "name": "roof-brandt-m240-gameplay-noon.png",
+      "bytes": 645989,
+      "sha256": "480fc8fe65462e3d24cb5f30429013306f60e904fa93b59d4ffc081de1a57738",
+      "meanRgb": [
+        77.2,
+        76.4,
+        65.7
+      ],
+      "meanLuma": 75.8,
+      "stdLuma": 36.76
+    },
+    {
+      "name": "roof-pike-gameplay-noon.png",
+      "bytes": 649100,
+      "sha256": "afb0bdb219248c09b4a8ce236b7f25c9e375a941339225f4593009c35cb14074",
+      "meanRgb": [
+        69,
+        71.5,
+        61.3
+      ],
+      "meanLuma": 70.21,
+      "stdLuma": 41.33
+    }
+  ],
+  "roofCrew": [
+    {
+      "who": "okafor",
+      "style": "trapper",
+      "awake": true,
+      "shown": true,
+      "x": -4.1,
+      "y": 2.231323862075806,
+      "z": 4.1,
+      "shots": 0,
+      "gun": false
+    },
+    {
+      "who": "brandt",
+      "style": "ranger",
+      "awake": true,
+      "shown": true,
+      "x": 4.1,
+      "y": 2.231323862075806,
+      "z": 4.1,
+      "shots": 0,
+      "gun": true
+    },
+    {
+      "who": "pike",
+      "style": "hikers",
+      "awake": true,
+      "shown": true,
+      "x": 4.1,
+      "y": 2.231323862075806,
+      "z": -4.1,
+      "shots": 0,
+      "gun": false
+    }
+  ]
+}

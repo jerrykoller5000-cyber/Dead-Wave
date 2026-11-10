@@ -1,0 +1,128 @@
+{
+  "weapon": "shotgun",
+  "readyMs": 11206,
+  "fps": 59.8,
+  "low": 48.4,
+  "samples": [
+    {
+      "weapon": "shotgun",
+      "eye": "shotgun",
+      "high": "high",
+      "fps": 52.04684215825265,
+      "low": 34.01360543528106,
+      "worst": 29.400000005960464,
+      "hitches": 18,
+      "frames": 52
+    },
+    {
+      "weapon": "shotgun",
+      "eye": "shotgun",
+      "high": "high",
+      "fps": 56.25879043566874,
+      "low": 38.91050585462449,
+      "worst": 25.69999998807907,
+      "hitches": 18,
+      "frames": 56
+    },
+    {
+      "weapon": "shotgun",
+      "eye": "shotgun",
+      "high": "high",
+      "fps": 60.00600059970231,
+      "low": 45.66210044419327,
+      "worst": 21.900000005960464,
+      "hitches": 18,
+      "frames": 60
+    },
+    {
+      "weapon": "shotgun",
+      "eye": "shotgun",
+      "high": "high",
+      "fps": 59.994000598509786,
+      "low": 45.8715596079435,
+      "worst": 21.80000001192093,
+      "hitches": 18,
+      "frames": 60
+    },
+    {
+      "weapon": "shotgun",
+      "eye": "shotgun",
+      "high": "high",
+      "fps": 58.9941005902926,
+      "low": 44.44444444444444,
+      "worst": 22.5,
+      "hitches": 18,
+      "frames": 59
+    },
+    {
+      "weapon": "shotgun",
+      "eye": "shotgun",
+      "high": "high",
+      "fps": 58.99999999999999,
+      "low": 38.46153846153846,
+      "worst": 26,
+      "hitches": 18,
+      "frames": 59
+    },
+    {
+      "weapon": "shotgun",
+      "eye": "shotgun",
+      "high": "high",
+      "fps": 60.00600059970231,
+      "low": 55.86592176910688,
+      "worst": 17.900000005960464,
+      "hitches": 18,
+      "frames": 60
+    },
+    {
+      "weapon": "shotgun",
+      "eye": "shotgun",
+      "high": "high",
+      "fps": 59.94604855594234,
+      "low": 40.322580625778926,
+      "worst": 24.80000001192093,
+      "hitches": 18,
+      "frames": 60
+    },
+    {
+      "weapon": "shotgun",
+      "eye": "shotgun",
+      "high": "high",
+      "fps": 60.012002399764555,
+      "low": 44.64285713097803,
+      "worst": 22.400000005960464,
+      "hitches": 18,
+      "frames": 60
+    },
+    {
+      "weapon": "shotgun",
+      "eye": "shotgun",
+      "high": "high",
+      "fps": 60.012002399764555,
+      "low": 55.55555555555556,
+      "worst": 18,
+      "hitches": 18,
+      "frames": 60
+    },
+    {
+      "weapon": "shotgun",
+      "eye": "shotgun",
+      "high": "high",
+      "fps": 60.006000601490804,
+      "low": 54.34782615737789,
+      "worst": 18.399999976158142,
+      "hitches": 18,
+      "frames": 60
+    },
+    {
+      "weapon": "shotgun",
+      "eye": "shotgun",
+      "high": "high",
+      "fps": 59.99999999999999,
+      "low": 59.17159761226685,
+      "worst": 16.900000005960464,
+      "hitches": 18,
+      "frames": 60
+    }
+  ]
+}

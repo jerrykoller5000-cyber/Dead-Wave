@@ -293,12 +293,26 @@ function nx8(root) {
   return { eye: [0, 0.054, -0.177], dot: [0, 0.054, 0.170] };
 }
 
+// Components shared by the two issued GW-4 sights. Their lenses, inner bores,
+// eyecups, exposed rims and adjustment controls retain their factory materials.
+const coatedSightParts = new Set([
+  'chamfered alloy clamp foot', 'painted riser', 'removable high riser',
+  'prism cradle', 'sealed prism housing', 'objective bell',
+  'TA51 clamp and interface studs', 'forged lower saddle', 'forged four-power optical body',
+  'squared front objective', 'piggyback sight saddle', 'top RMR mounting plate'
+]);
+
 export function makeOptic(kind) {
   const optic = new THREE.Group();
   optic.name = `optic.${kind}`;
   const sight = kind === 'mini-reflex' ? mini(optic) : kind === 'reflex' ? tube(optic) : kind === 'holo' ? holo(optic)
     : kind === 'rmr' ? rmr(optic) : kind === 'prism' ? prism(optic) : kind === 'acog' ? acog(optic) : kind === 'nx8' ? nx8(optic) : null;
   if (!sight) throw new RangeError(`Unknown optic kind: ${kind}`);
+  if (kind === 'acog' || kind === 'prism') {
+    for (const mesh of optic.children) {
+      if (mesh.isMesh && coatedSightParts.has(mesh.name)) markPaintSurface(mesh, 'optic shell');
+    }
+  }
   optic.userData.sight = sight;
   if (kind === 'acog') optic.userData.sightModes = { magnified: { eye: sight.eye, dot: sight.dot }, topRmr: { eye: sight.topEye, dot: sight.topDot } };
   optic.userData.mount = [0, 0, 0];

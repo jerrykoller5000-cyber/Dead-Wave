@@ -193,17 +193,18 @@ export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox,audit=null}
   // Small lateral rests keep the swinging hands outside the thighs, while a
   // little more hip spacing prevents opposite knees crossing in fast poses.
   if(['shambler','feral','brute','military','spitter','bomber'].includes(k)){
-    const roll=['shambler','military','spitter','bomber'].includes(k)?.2:.1;
+    const roll=['shambler','brute','military','spitter','bomber'].includes(k)?.2:.1;
     g.userData.armLG.rotation.z=-roll;
     g.userData.armRG.rotation.z=roll;
   }
   if(['feral','brute','military','screamer','leaper'].includes(k)){
-    g.userData.legLG.position.x-=.04;
-    g.userData.legRG.position.x+=.04;
+    g.userData.legLG.position.x-=k==='feral'?.08:.04;
+    g.userData.legRG.position.x+=k==='feral'?.08:.04;
   }
-  if(k==='military'){
-    g.userData.armLG.position.x-=.04;
-    g.userData.armRG.position.x+=.04;
+  if(['shambler','feral','brute','military','leaper'].includes(k)){
+    const shoulder=k==='feral'?.08:.04;
+    g.userData.armLG.position.x-=shoulder;
+    g.userData.armRG.position.x+=shoulder;
   }
   if(k==='drowned'){
     // The dragging arms hang outside both knees through the shuffle.
@@ -213,14 +214,16 @@ export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox,audit=null}
   // Keep the demon's thighs and forearms clear through the walking stride.
   // Apply these pivots before both the cached and uncached concept paths.
   if(k==='demon'){
-    g.userData.legLG.position.x=-.185*s;
-    g.userData.legRG.position.x=.185*s;
+    g.userData.legLG.position.x=-.185*s-.04;
+    g.userData.legRG.position.x=.185*s+.04;
     for(const arm of [g.userData.armLG,g.userData.armRG]){
       arm.rotation.x=-.9;
       arm.userData.baseRotX=-.9;
     }
     g.userData.armLG.rotation.z=-.3;
     g.userData.armRG.rotation.z=.3;
+    g.userData.armLG.position.x-=.12;
+    g.userData.armRG.position.x+=.12;
   }
   if(k==='colossus'){
     // Give the shoulder shield and hanging hand room for the skull and thigh.

@@ -5,14 +5,15 @@ import {save} from '../GT-20076/save.mjs';
 
 const id = process.argv[2];
 assert(/^[a-z0-9-]+$/.test(id));
-const folder = new URL('./' + id + '/', import.meta.url);
+const gw4 = id === 'm4';
+const folder = new URL('./' + id + (gw4 || id === 'shotgun' ? '/details/' : '/'), import.meta.url);
 const read = async phase => {
   const get = file => readFile(new URL(phase + '/' + file, folder), 'utf8').then(JSON.parse);
   const base = await get('contact-surfaces.json');
   try { return Object.assign(base, await get('contact-extra.json')); }
   catch (err) { if (err.code !== 'ENOENT') throw err; return base; }
 };
-const [before, after] = await Promise.all([read('before'), read('after')]);
+const [before, after] = await Promise.all(gw4 ? [read('reviewed'), read('revised')] : [read('before'), read('after')]);
 assert.deepEqual(Object.keys(before), Object.keys(after));
 
 function triangles(coords) {

@@ -1,0 +1,71 @@
+{
+  "rmr": {
+    "counts": {
+      "coated": 6,
+      "factory": 9
+    },
+    "leaks": [],
+    "roles": {
+      "magazine": 0,
+      "barrel": 0,
+      "handle": 0,
+      "sideInlay": 0,
+      "lightLens": 0,
+      "selectors": 0,
+      "dial": 0,
+      "laserCavity": 0
+    },
+    "framing": {
+      "width": 0.02898610975561411,
+      "height": 0.038423447727439,
+      "length": 0.03370477913892955,
+      "distance": 0.5200000000000001
+    }
+  },
+  "prism": {
+    "counts": {
+      "coated": 7,
+      "factory": 6
+    },
+    "leaks": [],
+    "roles": {
+      "magazine": 0,
+      "barrel": 0,
+      "handle": 0,
+      "sideInlay": 0,
+      "lightLens": 0,
+      "selectors": 0,
+      "dial": 0,
+      "laserCavity": 0
+    },
+    "framing": {
+      "width": 0.049208976086330125,
+      "height": 0.06363462234192241,
+      "length": 0.09909204911149061,
+      "distance": 0.5200000000000001
+    }
+  },
+  "acog": {
+    "counts": {
+      "coated": 14,
+      "factory": 19
+    },
+    "leaks": [],
+    "roles": {
+      "magazine": 0,
+      "barrel": 0,
+      "handle": 0,
+      "sideInlay": 0,
+      "lightLens": 0,
+      "selectors": 0,
+      "dial": 0,
+      "laserCavity": 0
+    },
+    "framing": {
+      "width": 0.04449030630374651,
+      "height": 0.09268814124523317,
+      "length": 0.1095405315736997,
+      "distance": 0.5200000000000001
+    }
+  }
+}

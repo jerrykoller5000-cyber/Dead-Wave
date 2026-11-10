@@ -1,0 +1,281 @@
+{
+  "bootMeta": {
+    "renderer": "WebGPURenderer",
+    "backend": "WebGPU",
+    "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "w": 1280,
+    "h": 720
+  },
+  "shots": [
+    {
+      "name": "after-find-02-gate-header-siding.png",
+      "beforeRef": "review/AG-288/find-02-gate-header-white-tile.png",
+      "bytes": 859415,
+      "sha256": "d7b8774dbbb3187e81dfc9e498ff7328361f17da6e77ca70ee3375f610c605a2",
+      "flIntensity": 0,
+      "meanRgb": [
+        86.5,
+        88.5,
+        84.5
+      ],
+      "meanLuma": 87.81,
+      "stdLuma": 52.8,
+      "whitePct": 0.19,
+      "centerWhitePct": 0,
+      "centerPeakLuma": 176.7,
+      "attempt": 1
+    },
+    {
+      "name": "after-find-04-infirmary-o2-iv-mat.png",
+      "beforeRef": "review/AG-288/find-03-infirmary-o2-iv-floating.png",
+      "bytes": 145490,
+      "sha256": "b710f06ee21f14656a2ab0945cbee9deeccf4027d868bf384605ea3a0100a57e",
+      "flIntensity": 0,
+      "meanRgb": [
+        43.6,
+        49.9,
+        43.7
+      ],
+      "meanLuma": 48.15,
+      "stdLuma": 21.59,
+      "whitePct": 0,
+      "centerWhitePct": 0,
+      "centerPeakLuma": 76.8,
+      "attempt": 1
+    },
+    {
+      "name": "after-find-05-casters-cabinet-4legs.png",
+      "beforeRef": "review/AG-288/find-04-infirmary-casters-cabinet-clip.png",
+      "bytes": 163131,
+      "sha256": "5787f97f22e22fd7b7ca95f4cbfa7b9b3b81be9d503111b9d75526d213e09aab",
+      "flIntensity": 0,
+      "meanRgb": [
+        40.3,
+        46.3,
+        41.4
+      ],
+      "meanLuma": 44.67,
+      "stdLuma": 24.53,
+      "whitePct": 0,
+      "centerWhitePct": 0,
+      "centerPeakLuma": 69.7,
+      "attempt": 1
+    },
+    {
+      "name": "after-find-06-gate-threshold.png",
+      "beforeRef": "review/AG-288/find-05-gate-threshold-floating.png",
+      "bytes": 262509,
+      "sha256": "d8713062a73cca08b7ca32c4436885f7754223b5ac12a49599ebfe0c760fd422",
+      "flIntensity": 0,
+      "meanRgb": [
+        55.2,
+        54.2,
+        34.8
+      ],
+      "meanLuma": 53.04,
+      "stdLuma": 48.01,
+      "whitePct": 0,
+      "centerWhitePct": 0,
+      "centerPeakLuma": 159.3,
+      "attempt": 1
+    },
+    {
+      "name": "after-find-07-cot-scissor-pin.png",
+      "beforeRef": "review/AG-288/find-06-cot-scissor-legs-passthrough.png",
+      "bytes": 342240,
+      "sha256": "8c0c3cffc65243c1031fd7f5259fa6e4d55b42f218377a888e1640a130806574",
+      "flIntensity": 0,
+      "meanRgb": [
+        53.9,
+        58.6,
+        55.9
+      ],
+      "meanLuma": 57.43,
+      "stdLuma": 27.31,
+      "whitePct": 0,
+      "centerWhitePct": 0,
+      "centerPeakLuma": 90.2,
+      "attempt": 1
+    },
+    {
+      "name": "after-find-08-build-wall-clean.png",
+      "beforeRef": "review/AG-288/find-07-build-wall-blurry-smudge.png",
+      "bytes": 228444,
+      "sha256": "eb4ef7ab9f619f16eb75bc4f210a0532fc4732c51b178de6f5e0a72b66018adb",
+      "flIntensity": 0,
+      "meanRgb": [
+        62.1,
+        65.3,
+        64.5
+      ],
+      "meanLuma": 64.57,
+      "stdLuma": 40.26,
+      "whitePct": 0,
+      "centerWhitePct": 0,
+      "centerPeakLuma": 113.7,
+      "attempt": 1
+    },
+    {
+      "name": "before-flashlight-1m-wall.png",
+      "beforeRef": "uncapped intensity=42, penumbra=0.55 at 1.0 m",
+      "bytes": 414884,
+      "sha256": "a246d535ac14e5600f43a096b84b05cb02a876c00fc7b583d2ea211dbfd74117",
+      "flIntensity": 42,
+      "meanRgb": [
+        91.4,
+        92.2,
+        88.7
+      ],
+      "meanLuma": 91.77,
+      "stdLuma": 73.35,
+      "whitePct": 6.44,
+      "centerWhitePct": 27.96,
+      "centerPeakLuma": 255,
+      "attempt": 1
+    },
+    {
+      "name": "after-flashlight-1m-wall.png",
+      "beforeRef": "before-flashlight-1m-wall.png",
+      "bytes": 174559,
+      "sha256": "df91cdfa53dddbaee2f9d0c9cf38aee9febfac42a61487a1af854a60d07a77cc",
+      "flIntensity": 0.45,
+      "meanRgb": [
+        8.2,
+        15.4,
+        25.3
+      ],
+      "meanLuma": 14.59,
+      "stdLuma": 17.41,
+      "whitePct": 0,
+      "centerWhitePct": 0,
+      "centerPeakLuma": 234.4,
+      "attempt": 1
+    },
+    {
+      "name": "before-flashlight-3m-wall.png",
+      "beforeRef": "uncapped intensity=42, penumbra=0.55 at 3.0 m",
+      "bytes": 475411,
+      "sha256": "c56bbf9a432ac0b347413962657cf7b21fb75409b9f2f3a31012caaad2f4b27e",
+      "flIntensity": 42,
+      "meanRgb": [
+        95.5,
+        95.5,
+        92
+      ],
+      "meanLuma": 95.26,
+      "stdLuma": 76.7,
+      "whitePct": 12.67,
+      "centerWhitePct": 60.61,
+      "centerPeakLuma": 255,
+      "attempt": 1
+    },
+    {
+      "name": "after-flashlight-3m-wall.png",
+      "beforeRef": "before-flashlight-3m-wall.png",
+      "bytes": 295303,
+      "sha256": "6f1fd25a42222d463bc49f0d67539f69a0c121c22b69ad0b39ff88ac363708f5",
+      "flIntensity": 4.95,
+      "meanRgb": [
+        23,
+        29.3,
+        35.3
+      ],
+      "meanLuma": 28.41,
+      "stdLuma": 43.49,
+      "whitePct": 0,
+      "centerWhitePct": 0,
+      "centerPeakLuma": 245.7,
+      "attempt": 1
+    },
+    {
+      "name": "before-flashlight-8m-wall.png",
+      "beforeRef": "uncapped intensity=42, penumbra=0.55 at 8.0 m",
+      "bytes": 495419,
+      "sha256": "0600c3a434493773bd38423e8cbacb49c45905062dca90497aa0c002c18d3a8d",
+      "flIntensity": 42,
+      "meanRgb": [
+        61.8,
+        63.8,
+        65.6
+      ],
+      "meanLuma": 63.53,
+      "stdLuma": 70.03,
+      "whitePct": 6.31,
+      "centerWhitePct": 31.27,
+      "centerPeakLuma": 255,
+      "attempt": 1
+    },
+    {
+      "name": "after-flashlight-8m-wall.png",
+      "beforeRef": "before-flashlight-8m-wall.png",
+      "bytes": 407101,
+      "sha256": "ae2cd9b2e9b9f7c10f687d133cf2ef840d35dad61d39191d461a0d0900a42b81",
+      "flIntensity": 19.85,
+      "meanRgb": [
+        28.3,
+        34,
+        40.1
+      ],
+      "meanLuma": 33.23,
+      "stdLuma": 47.31,
+      "whitePct": 0,
+      "centerWhitePct": 0,
+      "centerPeakLuma": 247.2,
+      "attempt": 1
+    },
+    {
+      "name": "after-area-03-night.png",
+      "beforeRef": "review/AG-288/area-03-range-backwall-lockers-night.png",
+      "bytes": 432728,
+      "sha256": "df8f1e0056ec0e32e5e023ad59ea85b7e8acd780511532d800b5dd74acc79fae",
+      "flIntensity": 20.52,
+      "meanRgb": [
+        29.5,
+        35,
+        41
+      ],
+      "meanLuma": 34.24,
+      "stdLuma": 48.59,
+      "whitePct": 0,
+      "centerWhitePct": 0,
+      "centerPeakLuma": 246,
+      "attempt": 1
+    },
+    {
+      "name": "after-area-04-night.png",
+      "beforeRef": "review/AG-288/area-04-range-east-stations-night.png",
+      "bytes": 634738,
+      "sha256": "1a63b2d57cc6bfaa2c073a12fb39144c4c1be17b46040af1a3b312288a3d4ad7",
+      "flIntensity": 12.79,
+      "meanRgb": [
+        36.9,
+        40.6,
+        41.7
+      ],
+      "meanLuma": 39.9,
+      "stdLuma": 46.77,
+      "whitePct": 0,
+      "centerWhitePct": 0,
+      "centerPeakLuma": 246.1,
+      "attempt": 1
+    },
+    {
+      "name": "after-area-05-night.png",
+      "beforeRef": "review/AG-288/area-05-range-console-switch-door-night.png",
+      "bytes": 422160,
+      "sha256": "3c67f6ec2a880dfe84b5294d49feb82f7f7de85629116002aac1756d03dab7ae",
+      "flIntensity": 11.39,
+      "meanRgb": [
+        18.1,
+        24.3,
+        28.9
+      ],
+      "meanLuma": 23.34,
+      "stdLuma": 29.18,
+      "whitePct": 0,
+      "centerWhitePct": 0,
+      "centerPeakLuma": 218.9,
+      "attempt": 1
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "pistol": {
+    "dust cover": {
+      "vertices": 564,
+      "displacementMm": 0
+    },
+    "rear tang": {
+      "vertices": 564,
+      "displacementMm": 0
+    },
+    "guard": {
+      "vertices": 1332,
+      "displacementMm": 0
+    },
+    "trigger": {
+      "vertices": 312,
+      "displacementMm": 0
+    },
+    "guard root": {
+      "vertices": 168,
+      "displacementMm": 0
+    },
+    "grip": {
+      "vertices": 804,
+      "displacementMm": 0
+    },
+    "light module": {
+      "vertices": 1932,
+      "displacementMm": 0
+    },
+    "magazine including top": {
+      "vertices": 2208,
+      "displacementMm": 0
+    },
+    "magazine floor": {
+      "vertices": 276,
+      "displacementMm": 0
+    },
+    "slide housing": {
+      "vertices": 420,
+      "displacementMm": 0
+    },
+    "rear plate": {
+      "vertices": 276,
+      "displacementMm": 0
+    },
+    "magazine release": {
+      "vertices": 204,
+      "displacementMm": 0
+    }
+  },
+  "gw4": {
+    "before": 417,
+    "after": 417,
+    "unchanged": 412,
+    "changed": 5,
+    "changedParts": [
+      "inset rim",
+      "inset backing",
+      "side inlay",
+      "inlay accent",
+      "lower trim edge"
+    ]
+  }
+}

@@ -44,3 +44,25 @@ Make those (copies or symlinks), or change the three prefixes.
   (d) the minigun's and launcher's firing palms in the housings (ChatGPT 2 is making room, GT-20078, then refit);
   (e) small ones: pistol 2.8 mm, sniper 2.7, m4 1.3, flamer 1.1, shotgun 0.7.
 - `gun/res5`, `gun/best5`: the last fits, for reference. `gun/fitposes.txt`: the poses written.
+
+## Claude 4's pass (CD-1, 10 Nov ~21-23Z): `c4/` and `look/`
+- **Exports from the suite's page** (`c4/mkpage.mjs` writes `tools/tests/test-4444.html` in the cloud copy, as run-all builds it;
+  `c4/fptune4.mjs` drives it): the same geometry the gate tests see, the laser-light modules on (the real page's export had the
+  uzi's module hidden), no GPU, under 2 minutes. `c4/g7-steps.json` adds each glove's index and the camera.
+- **The fields** (`c4/sdf_c4.py`): a part made of several closed bodies is split into them (trimesh's sign read the uzi's
+  fingers outside its grip, which clip-check.js reads inside) and the corners are keyed to 10 um as clip-check.js keys them
+  (a part it calls closed was open here: the revolver's support hand read 0 where the test read 25 mm). `BAND=0.015` for a wrap.
+- **The check** (`c4/depth2.py <export> [r|l]`): rule 2 and the hands into each other exactly as clip-check.js measures them, in
+  a second. `c4/where.py`: which parts a hand is in, in the hand's frame.
+- **Wraps**: `c4/wrap.js` sets a support hand round the handguard (the channel on the bore, the palm kept on its side);
+  `c4/wrap2.js` round one part (a grip or a handle, its axis from the part's vertices near the hand). Then `c4/fit8.sh <name>
+  wrap <export>` (all the fingers' pads and the palm to touch) and `c4/apply7.js` (the apply with the wrap start, `%INIT%`).
+- **Two hands**: `c4/augment.py` adds the firing hand (the wrist capped) to the gun as a part, for the support hand's field.
+- **Apply**: `c4/apply6.js` (apply2 with `invert()` for `transpose()`, a no-op in fakethree; and the glove's index); merge into
+  VM_FIT with `c4/mergefit.py` (keeps every other hand); contacts `c4/cont9.sh` + `c4/encode9.mjs` (keeps the others').
+- **Looking** (`look/`): `node look/shoot.mjs <export.json> <out.png> left,right,below,front [part to show red]` with
+  `FOCUS=r|l ZOOM=1.5`: the gun and both gloves from any side, three.js on swiftshader, no game. For finding what is wrong;
+  the judgment is in the game (Antigravity's pictures).
+- Left after this pass: the launcher's firing hand (17.7 mm: its back inside the receiver; the wrap start put the palm the
+  wrong side), the pistol's and revolver's two-hand holds (23.8 and 9.1 mm), the chainsaw's rear hand (clean in the test,
+  20.9 in the export: check why).

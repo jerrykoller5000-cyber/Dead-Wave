@@ -1,0 +1,280 @@
+{
+  "stockVisible": false,
+  "origin": [
+    0,
+    0.07294888333937875,
+    -0.577653704375418
+  ],
+  "rays": {
+    "625,445": {
+      "point": [
+        -0.01016966388305211,
+        0.010389570766068904,
+        -0.029999999329447635
+      ],
+      "node": "",
+      "line": "at makeShotgunModel (http://127.0.0.1:20613/studio/weapon-longarms.js:689:5)"
+    },
+    "640,445": {
+      "point": [
+        0,
+        0.010389570766068904,
+        -0.029999999329447746
+      ],
+      "node": "",
+      "line": "at makeShotgunModel (http://127.0.0.1:20613/studio/weapon-longarms.js:689:5)"
+    },
+    "655,445": {
+      "point": [
+        0.01016966388305211,
+        0.010389570766068904,
+        -0.029999999329447635
+      ],
+      "node": "",
+      "line": "at makeShotgunModel (http://127.0.0.1:20613/studio/weapon-longarms.js:689:5)"
+    },
+    "625,475": {
+      "point": [
+        -0.00956980456699719,
+        -0.005059191800798904,
+        -0.062475693740225324
+      ],
+      "node": "shotgun grip",
+      "line": "at makeShotgunModel (http://127.0.0.1:20613/studio/weapon-longarms.js:780:5)"
+    },
+    "640,475": {
+      "point": [
+        0,
+        -0.00505919180079889,
+        -0.062475693740225435
+      ],
+      "node": "shotgun grip",
+      "line": "at makeShotgunModel (http://127.0.0.1:20613/studio/weapon-longarms.js:780:5)"
+    },
+    "655,475": {
+      "point": [
+        0.00956980456699719,
+        -0.005059191800798904,
+        -0.062475693740225324
+      ],
+      "node": "shotgun grip",
+      "line": "at makeShotgunModel (http://127.0.0.1:20613/studio/weapon-longarms.js:780:5)"
+    },
+    "625,505": {
+      "point": [
+        -0.009457674253646258,
+        -0.023059746222341734,
+        -0.06868231489623722
+      ],
+      "node": "shotgun grip",
+      "line": "at makeShotgunModel (http://127.0.0.1:20613/studio/weapon-longarms.js:780:5)"
+    },
+    "640,505": {
+      "point": [
+        0,
+        -0.023059746222341734,
+        -0.06868231489623722
+      ],
+      "node": "shotgun grip",
+      "line": "at makeShotgunModel (http://127.0.0.1:20613/studio/weapon-longarms.js:780:5)"
+    },
+    "655,505": {
+      "point": [
+        0.009457674253646258,
+        -0.023059746222341734,
+        -0.06868231489623722
+      ],
+      "node": "shotgun grip",
+      "line": "at makeShotgunModel (http://127.0.0.1:20613/studio/weapon-longarms.js:780:5)"
+    },
+    "625,535": {
+      "point": [
+        -0.009346046902877592,
+        -0.040617909213014586,
+        -0.07485784129241602
+      ],
+      "node": "shotgun grip",
+      "line": "at makeShotgunModel (http://127.0.0.1:20613/studio/weapon-longarms.js:780:5)"
+    },
+    "640,535": {
+      "point": [
+        0,
+        -0.04061790921301457,
+        -0.07485784129241613
+      ],
+      "node": "shotgun grip",
+      "line": "at makeShotgunModel (http://127.0.0.1:20613/studio/weapon-longarms.js:780:5)"
+    },
+    "655,535": {
+      "point": [
+        0.009346046902877592,
+        -0.040617909213014586,
+        -0.07485784129241602
+      ],
+      "node": "shotgun grip",
+      "line": "at makeShotgunModel (http://127.0.0.1:20613/studio/weapon-longarms.js:780:5)"
+    },
+    "625,565": {
+      "point": [
+        -0.009235641306517849,
+        -0.05774687021994786,
+        -0.08096364367557762
+      ],
+      "node": "shotgun grip",
+      "line": "at makeShotgunModel (http://127.0.0.1:20613/studio/weapon-longarms.js:780:5)"
+    },
+    "640,565": {
+      "point": [
+        0,
+        -0.05774687021994791,
+        -0.08096364367557757
+      ],
+      "node": "shotgun grip",
+      "line": "at makeShotgunModel (http://127.0.0.1:20613/studio/weapon-longarms.js:780:5)"
+    },
+    "655,565": {
+      "point": [
+        0.009235641306517849,
+        -0.05774687021994786,
+        -0.08096364367557762
+      ],
+      "node": "shotgun grip",
+      "line": "at makeShotgunModel (http://127.0.0.1:20613/studio/weapon-longarms.js:780:5)"
+    },
+    "625,595": {
+      "point": [
+        -0.00911123520069277,
+        -0.07420810230659063,
+        -0.0878181628817194
+      ],
+      "node": "shotgun grip",
+      "line": "at makeShotgunModel (http://127.0.0.1:20613/studio/weapon-longarms.js:780:5)"
+    },
+    "640,595": {
+      "point": [
+        0,
+        -0.07420810230659063,
+        -0.08781816288171945
+      ],
+      "node": "shotgun grip",
+      "line": "at makeShotgunModel (http://127.0.0.1:20613/studio/weapon-longarms.js:780:5)"
+    },
+    "655,595": {
+      "point": [
+        0.00911123520069277,
+        -0.07420810230659063,
+        -0.0878181628817194
+      ],
+      "node": "shotgun grip",
+      "line": "at makeShotgunModel (http://127.0.0.1:20613/studio/weapon-longarms.js:780:5)"
+    },
+    "625,625": {
+      "point": [
+        -0.008987295172484444,
+        -0.09018018993251138,
+        -0.09464315491101782
+      ],
+      "node": "shotgun grip",
+      "line": "at makeShotgunModel (http://127.0.0.1:20613/studio/weapon-longarms.js:780:5)"
+    },
+    "640,625": {
+      "point": [
+        0,
+        -0.09018018993251141,
+        -0.09464315491101777
+      ],
+      "node": "shotgun grip",
+      "line": "at makeShotgunModel (http://127.0.0.1:20613/studio/weapon-longarms.js:780:5)"
+    },
+    "655,625": {
+      "point": [
+        0.008987295172484444,
+        -0.09018018993251138,
+        -0.09464315491101782
+      ],
+      "node": "shotgun grip",
+      "line": "at makeShotgunModel (http://127.0.0.1:20613/studio/weapon-longarms.js:780:5)"
+    },
+    "625,655": {
+      "point": [
+        -0.008886427984750055,
+        -0.10612147820440902,
+        -0.1002240806193409
+      ],
+      "node": "shotgun grip",
+      "line": "at makeShotgunModel (http://127.0.0.1:20613/studio/weapon-longarms.js:780:5)"
+    },
+    "640,655": {
+      "point": [
+        0,
+        -0.106121478204409,
+        -0.1002240806193409
+      ],
+      "node": "shotgun grip",
+      "line": "at makeShotgunModel (http://127.0.0.1:20613/studio/weapon-longarms.js:780:5)"
+    },
+    "655,655": {
+      "point": [
+        0.008886427984750055,
+        -0.10612147820440902,
+        -0.1002240806193409
+      ],
+      "node": "shotgun grip",
+      "line": "at makeShotgunModel (http://127.0.0.1:20613/studio/weapon-longarms.js:780:5)"
+    },
+    "625,685": {
+      "point": [
+        -0.008787799795210941,
+        -0.12170890992024684,
+        -0.10568112379589562
+      ],
+      "node": "shotgun grip",
+      "line": "at makeShotgunModel (http://127.0.0.1:20613/studio/weapon-longarms.js:780:5)"
+    },
+    "640,685": {
+      "point": [
+        0,
+        -0.12170890992024684,
+        -0.10568112379589567
+      ],
+      "node": "shotgun grip",
+      "line": "at makeShotgunModel (http://127.0.0.1:20613/studio/weapon-longarms.js:780:5)"
+    },
+    "655,685": {
+      "point": [
+        0.008787799795210941,
+        -0.12170890992024684,
+        -0.10568112379589562
+      ],
+      "node": "shotgun grip",
+      "line": "at makeShotgunModel (http://127.0.0.1:20613/studio/weapon-longarms.js:780:5)"
+    },
+    "625,715": {
+      "point": [
+        -0.008705391236528151,
+        -0.13729356244308666,
+        -0.11026378925388092
+      ],
+      "node": "shotgun grip",
+      "line": "at makeShotgunModel (http://127.0.0.1:20613/studio/weapon-longarms.js:780:5)"
+    },
+    "640,715": {
+      "point": [
+        0,
+        -0.1372935624430866,
+        -0.11026378925388092
+      ],
+      "node": "shotgun grip",
+      "line": "at makeShotgunModel (http://127.0.0.1:20613/studio/weapon-longarms.js:780:5)"
+    },
+    "655,715": {
+      "point": [
+        0.008705391236528151,
+        -0.13729356244308666,
+        -0.11026378925388092
+      ],
+      "node": "shotgun grip",
+      "line": "at makeShotgunModel (http://127.0.0.1:20613/studio/weapon-longarms.js:780:5)"
+    }
+  }
+}

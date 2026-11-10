@@ -14,7 +14,7 @@ try {
   if (!await page.waitFor('(window.DWInspect && window.DWInspect.ready) || !!window.DWInspectError', { timeout: 180000 })) throw Error('inspector not ready');
   const result = await page.evaluate(`(async () => {
     const T = TT.THREE, results = [];
-    const kinds = ['shambler','military','spitter','bomber','demon'];
+    const kinds = ['shambler','brute','demon'];
     const ray = new T.Raycaster(), dir = new T.Vector3(1,.137,.071).normalize(), point = new T.Vector3();
     function component(o, u) {
       for (let p=o;p;p=p.parent) {
@@ -90,14 +90,15 @@ try {
       if(!base.collisions.length||!z?.mesh)return base;
       const u=z.mesh.userData,arms=[u.armLG,u.armRG],legs=[u.legLG,u.legRG];
       if(arms.some(x=>!x)||legs.some(x=>!x))return base;
-      const orig={az:arms.map(a=>a.rotation.z),lx:legs.map(l=>l.position.x)},choices=[];
-      for(const roll of [0,.1,.2,.3,.4,.5])for(const hip of [0,.04,.08,.12]){
+      const head=u.head,orig={az:arms.map(a=>a.rotation.z),px:arms.map(a=>a.position.x),hy:head.position.y},choices=[];
+      for(const roll of [0,.1,.2,.3])for(const shift of [0,.04,.08,.12])for(const headUp of [0,.05,.1]){
         arms[0].rotation.z=orig.az[0]-roll;arms[1].rotation.z=orig.az[1]+roll;
-        legs[0].position.x=orig.lx[0]-hip;legs[1].position.x=orig.lx[1]+hip;
+        arms[0].position.x=orig.px[0]-shift;arms[1].position.x=orig.px[1]+shift;
+        head.position.y=orig.hy+headUp;
         const hits=scan(z).collisions;
-        choices.push({roll,hip,n:hits.length,pairs:hits.map(c=>c.pair)});
+        choices.push({roll,shift,headUp,n:hits.length,pairs:hits.map(c=>c.pair)});
       }
-      arms.forEach((a,i)=>a.rotation.z=orig.az[i]);legs.forEach((l,i)=>l.position.x=orig.lx[i]);z.mesh.updateMatrixWorld(true);
+      arms.forEach((a,i)=>{a.rotation.z=orig.az[i];a.position.x=orig.px[i];});head.position.y=orig.hy;z.mesh.updateMatrixWorld(true);
       return {...base,tune:{zero:choices.filter(x=>x.n===0),best:choices.sort((a,b)=>a.n-b.n).slice(0,4)}};
     }
     for(const kind of kinds){
@@ -122,7 +123,7 @@ try {
       results.push({kind,phases});
     }    return results;
   })()`);
-  fs.writeFileSync(path.join(out, 'actual-remnant-tuning.json'), JSON.stringify({ result, errors: page.errors }, null, 2));
+  fs.writeFileSync(path.join(out, 'actual-head-clearance.json'), JSON.stringify({ result, errors: page.errors }, null, 2));
   console.log('ACTUAL SKIN INTERSECTIONS', JSON.stringify(result.map(r => ({ kind: r.kind, phases: Object.fromEntries(Object.entries(r.phases).map(([k,v])=>[k,v.map(s=>s.collisions.length)])) }))));
   console.log('PAGE ERRORS', page.errors.length);
 } finally { await browser.close(); await server.close(); }

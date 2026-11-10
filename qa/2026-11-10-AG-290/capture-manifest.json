@@ -1,0 +1,107 @@
+[
+  {
+    "name": "before-fp-m4-cold-noon.png",
+    "bytes": 800262,
+    "title": "FP M4 Cold (Heat 0.0) · Noon",
+    "heat": 0,
+    "light": "noon"
+  },
+  {
+    "name": "after-fp-m4-hot-noon.png",
+    "bytes": 800248,
+    "title": "FP M4 Hot (Heat 0.88, Glowing Barrel + Smoke Wisp) · Noon",
+    "heat": 0.88,
+    "light": "noon"
+  },
+  {
+    "name": "before-fp-m4-cold-overcast.png",
+    "bytes": 793919,
+    "title": "FP M4 Cold (Heat 0.0) · Overcast",
+    "heat": 0,
+    "light": "overcast"
+  },
+  {
+    "name": "after-fp-m4-hot-overcast.png",
+    "bytes": 793153,
+    "title": "FP M4 Hot (Heat 0.88, Glowing Barrel + Smoke Wisp) · Overcast",
+    "heat": 0.88,
+    "light": "overcast"
+  },
+  {
+    "name": "before-fp-m4-cold-dusk.png",
+    "bytes": 641659,
+    "title": "FP M4 Cold (Heat 0.0) · Dusk",
+    "heat": 0,
+    "light": "dusk"
+  },
+  {
+    "name": "after-fp-m4-hot-dusk.png",
+    "bytes": 637340,
+    "title": "FP M4 Hot (Heat 0.88, Glowing Barrel + Smoke Wisp) · Dusk",
+    "heat": 0.88,
+    "light": "dusk"
+  },
+  {
+    "name": "before-fp-m4-cold-night.png",
+    "bytes": 629440,
+    "title": "FP M4 Cold (Heat 0.0) · Night",
+    "heat": 0,
+    "light": "night"
+  },
+  {
+    "name": "after-fp-m4-hot-night.png",
+    "bytes": 361970,
+    "title": "FP M4 Hot (Heat 0.88, Glowing Red-Orange Barrel + Smoke Wisp) · Night",
+    "heat": 0.88,
+    "light": "night"
+  },
+  {
+    "name": "before-fp-m4-suppressed-cold-night.png",
+    "bytes": 745940,
+    "title": "FP M4 Suppressed Cold (Heat 0.0) · Night",
+    "heat": 0,
+    "light": "night"
+  },
+  {
+    "name": "after-fp-m4-suppressed-hot-night.png",
+    "bytes": 895050,
+    "title": "FP M4 Suppressed Hot (Heat 0.88, Suppressor Glows & Smokes, Barrel Cool) · Night",
+    "heat": 0.88,
+    "light": "night"
+  },
+  {
+    "name": "before-fp-minigun-cold-noon.png",
+    "bytes": 1040946,
+    "title": "FP Minigun Cold (Heat 0.0) · Noon",
+    "heat": 0,
+    "light": "noon"
+  },
+  {
+    "name": "after-fp-minigun-hot-noon.png",
+    "bytes": 1041944,
+    "title": "FP Minigun Hot (Heat 0.92, 6-Barrel Cluster Glow + Smoke) · Noon",
+    "heat": 0.92,
+    "light": "noon"
+  },
+  {
+    "name": "before-tp-marine-m4-cold-noon.png",
+    "bytes": 1042549,
+    "title": "TP Marine M4 Cold (Heat 0.0) · Noon",
+    "heat": 0,
+    "light": "noon"
+  },
+  {
+    "name": "after-tp-marine-m4-hot-noon.png",
+    "bytes": 1043228,
+    "title": "TP Marine M4 Hot (Heat 0.88, Barrel Glow + Smoke) · Noon",
+    "heat": 0.88,
+    "light": "noon"
+  },
+  {
+    "name": "after-tp-marine-m4-suppressed-hot-night.png",
+    "bytes": 900968,
+    "title": "TP Marine M4 Suppressed Hot (Heat 0.88, Suppressor Glow + Smoke) · Night",
+    "heat": 0.88,
+    "light": "night"
+  }
+]

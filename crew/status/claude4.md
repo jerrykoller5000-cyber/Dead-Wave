@@ -1,13 +1,13 @@
-# Claude 1 (agent claude4)
+# Claude 1
 
-state: active
+state: idle
 model: Claude Opus 5.5 (High)
-task: CD-1 Hands on the guns: re-export with attachments on, two-hand holds, support wraps, minigun/launcher palms
-touching: game/viewmodel-fit.js, studio/hand-contacts.js, tools/handfit/
-since: 2026-11-10T20:03Z
-next: CD-1 J101/J126: the hands on the guns (was CL-334): attachments on, the two-hand holds, the support wraps
+task: —
+touching: —
+since: 2026-11-10T23:19Z
+next: CD-1 (was CL-334) J101: a new, detailed hand (first and third per
 blocked-on: —
-last-report: —
+last-report: handoffs/2026-11-10-claude4-CD-1.md
 
 ## Notes
 
@@ -31,6 +31,9 @@ and, under D-81, answers your questions: `node crew/crew.mjs request claude4 cla
 - Not yours: the guns' models (ChatGPT 2: tell it when a hand needs room, as GT-20078 does), the body and head (Claude 3),
   index.html's shell, core/* and tools/* except yours (Claude 2), props (Antigravity), zombies and UI (ChatGPT).
 
+### Since D-151 (10 Nov ~23:00Z)
+Claude 5 (agent `claude5`) takes the motion: CD-2 is CE-1, CD-3 is CE-2, CD-5 is CE-3, CD-6 is CE-4, CD-7 is CE-5. You keep the fits (CD-1) and the eye pass (CD-4), the hand and its contacts. Your fits are its start pose: tell it when one lands.
+
 ### Your queue (the board, under Claude 1)
 CD-1 (the hands on the guns, now), CD-2 (ChatGPT 2's actions in the shots, the KR-7 and Breacher refits),
 CD-3 (the hands at work: the trigger finger pulling each shot), CD-4 (the eye pass, gun by gun after GT-20077),
@@ -39,15 +42,17 @@ CD-7 (no gun: unarmed, the ladder). Guns in this order unless Jerry says: the pi
 KR-7, then the rest. For each gun: fit, test (tcl334b/c/d), then ask Antigravity (AG-286) for the four lights on the RTX
 5080, then a sheet to Claude.
 
-### Where the hands stand (from Claude, 10 Nov ~20:00Z)
-- Read: `tools/handfit/README.md`, `handoffs/2026-11-10-claude-CL-334.md`, `docs/fps/hand.md`.
-- Rule 1 passes (tcl334). The sleeve passes at rest and at most bends. Revolver, AK, AA-12, chainsaw pass rule 2.
-- Left: re-export with the attachments on (the uzi's laser module was off in Claude's export); the two-hand holds
-  (pistol 32.5 mm, revolver 11.7 into the firing hand); the long guns' support hands are flat cradles (give them a real
-  wrap); the minigun and launcher palms in the housings (ChatGPT 2 makes room, GT-20078, then refit); small ones:
-  pistol 2.8 mm, sniper 2.7, m4 1.3, flamer 1.1, shotgun 0.7.
-- Claude's grids and exports were in his cloud only: make yours again (README steps 2-3). Never run the distance fields
-  beside the game page (the page takes 4-5 GB in software: out of memory).
+### Where the hands stand (Claude 4, 10 Nov ~23Z, CD-1 pass 1: handoffs/2026-11-10-claude4-CD-1.md)
+- Rule 2 passes for every gun but the launcher (17.7 mm: the firing hand's back is in the receiver; my wrap start, c4/wrap2.js
+  on part 43, put the palm the wrong side). Support hands wrap the handguards now. Two-hand holds still overlap: pistol 23.8,
+  revolver 9.1 mm (tcl334b). Chainsaw: the test is clean but my export reads 20.9 mm (find why). tcl301 fails before and after.
+- Tools: tools/handfit/README.md, section "Claude 4's pass": export from the suite page (c4/mkpage.mjs + c4/fptune4.mjs, fast),
+  fields c4/sdf_c4.py (fixed: multi-body parts, 10 um corners), check c4/depth2.py (= clip-check.js), wraps, apply7, merge.
+  Looking: tools/handfit/look/shoot.mjs. The cloud copy has to be made again each session (tar from the PC, ~50 MB).
+- Launcher tried again (23Z): the hand has to move ~32 mm back off the grip before the palm is clear, and then the fingers
+  close on nothing (30+ mm from any part): the hand is turned wrong for that grip, not just placed wrong. Start from the
+  grip's own axis and side (studio/weapon-heavy.js ~366, 36 x 48 mm) or ask ChatGPT 2 (GT-20078) where the grip sits now.
+- Next: the launcher's firing hand; the two-hand holds (c4/augment.py: the firing hand as a part); then CD-2.
 
 ### Jerry's rules for this work
 - J126 (D-138): no part of the hand through another, no part of the hand through any part of a weapon, no part of the

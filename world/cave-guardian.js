@@ -359,9 +359,9 @@ export function guardianGallop(g, R, ph, run, t, look) {
     const air = Math.max(0, -sw);                      // swinging forward through the air
     const z = (1.0 + 1.15 * cw) * r + 1.05 * (1 - r);
     const y = air * 0.95 * r;
-    const x = side * (0.66 + 0.08 * r);
+    const x = side * (0.82 + 0.12 * r);
     _tgt.set(x, y, z).applyMatrix4(g.matrixWorld);
-    _pole.set(side * 0.7, 0.35, -1).transformDirection(g.matrixWorld);   // elbows back and out
+    _pole.set(side * 1.0, 0.35, -1).transformDirection(g.matrixWorld);   // elbows back and outside the hind legs
     guardianHandTo(g, R, S, _tgt, _pole);
     levelHand(g, R, S, 1 - air);
     R['wrist' + S].rotation.x += air * -0.6;
@@ -392,15 +392,16 @@ export function guardianStand(g, R, t, look, { open = 0.3, crouch = 0 } = {}) {
   g.updateWorldMatrix(true, false);
   for (const S of ['L', 'R']) {
     const side = S === 'L' ? -1 : 1;
-    _tgt.set(side * 0.7, 0, 1.05).applyMatrix4(g.matrixWorld);
-    _pole.set(side * 0.6, 0.3, -1).transformDirection(g.matrixWorld);
+    const spread = 0.75 * crouch;
+    _tgt.set(side * (1.05 + spread), 0, 1.05 + 0.55 * crouch).applyMatrix4(g.matrixWorld);
+    _pole.set(side * (1.4 + 0.9 * crouch), 0.3, -1).transformDirection(g.matrixWorld);
     guardianHandTo(g, R, S, _tgt, _pole);
     levelHand(g, R, S);
     guardianGrip(R, S, 1, 'walk');
   }
   for (const S of ['L', 'R']) {
     const side = S === 'L' ? -1 : 1;
-    _tgt.set(side * 0.34, 0, -0.25).applyMatrix4(g.matrixWorld);
+    _tgt.set(side * (0.42 - 0.17 * crouch), 0, -0.25).applyMatrix4(g.matrixWorld);
     _pole.set(0, 0.2, 1).transformDirection(g.matrixWorld);
     ikLimb(R['hip' + S], R['knee' + S], R.leg.thigh, R.leg.shin, _tgt, _pole);
     levelFoot(g, R, S);
@@ -418,25 +419,28 @@ export function guardianRearGrab(g, R, t, S, ankle, reach, hold, look) {
   const free = S === 'L' ? 'R' : 'L';
   // The grabbing arm goes to the ankle. Elbow out to the side and up.
   const side = S === 'L' ? -1 : 1;
-  _pole.set(side * 1, 0.6, -0.2).transformDirection(g.matrixWorld);
+  _pole.set(side * 2.4, 0.6, -0.2).transformDirection(g.matrixWorld);
   // Before the reach it is planted like the other one.
-  _v3.set(side * 0.7, 0, 1.0).applyMatrix4(g.matrixWorld);
+  _v3.set(side * 1.1, 0, 1.0).applyMatrix4(g.matrixWorld);
   _tgt.copy(_v3).lerp(ankle, rr);
+  // Swing around the same-side thigh, then take the outer edge of the ankle.
+  _v3.set(side, 0, 0).transformDirection(g.matrixWorld);
+  _tgt.addScaledVector(_v3, 0.7 * Math.sin(Math.PI * rr) + 0.18 * rr);
   guardianHandTo(g, R, S, _tgt, _pole);
   R['wrist' + S].rotation.set(-0.4 * rr, 0, 0);
   guardianGrip(R, S, hold, 'grab');
   if (rr < 1) { guardianGrip(R, S, Math.max(hold, (1 - rr) * 0.8), hold > 0.5 ? 'grab' : 'walk'); }
   // The free arm braces on the ground, wide.
   const fs = -side;
-  _tgt.set(fs * 0.85, 0, 0.9 - 0.3 * rr).applyMatrix4(g.matrixWorld);
-  _pole.set(fs * 0.7, 0.3, -1).transformDirection(g.matrixWorld);
+  _tgt.set(fs * 1.15, 0, 0.9 - 0.3 * rr).applyMatrix4(g.matrixWorld);
+  _pole.set(fs * 1.0, 0.3, -1).transformDirection(g.matrixWorld);
   guardianHandTo(g, R, free, _tgt, _pole);
   levelHand(g, R, free);
   guardianGrip(R, free, 1, 'walk');
   // Legs planted wide, knees bent.
   for (const L of ['L', 'R']) {
     const ls = L === 'L' ? -1 : 1;
-    _tgt.set(ls * 0.42, 0, -0.3 + 0.2 * rr).applyMatrix4(g.matrixWorld);
+    _tgt.set(ls * 0.62, 0, -0.3 + 0.2 * rr).applyMatrix4(g.matrixWorld);
     _pole.set(0, 0.2, 1).transformDirection(g.matrixWorld);
     ikLimb(R['hip' + L], R['knee' + L], R.leg.thigh, R.leg.shin, _tgt, _pole);
     levelFoot(g, R, L);

@@ -1,25 +1,30 @@
 # Claude 3
 
 state: active
-model: Claude Opus 5.5 (High)
-task: CC-341 The marine's fabric layer on layer: the layers test (tcc341), then the fixes
-touching: tools/tests/tcc341.js (new), studio/marine-body.js, studio/marine-cloth.js, studio/marine-hats.js, ui/marine-face.js, studio/marine-skull.js, studio/marine-headgear.js
-since: 2026-11-10T22:03Z
+model: Claude Opus 5.5
+task: CC-343 First person: his body turns with the view (AG-288 find 1): find what stops the turn at the range console, make FP hold; a test at the console and a wall, pitched -37/-60
+touching: index.html (player turning), index.html (first-person body), tools/tests/tcc343.js (new)
+since: 2026-11-10T23:17Z
 next: CC-341 J128 (Jerry, 10 Nov, standing, D-140; was CL-341): the marin
 blocked-on: —
-last-report: handoffs/2026-11-10-claude3-CC-340.md
+last-report: handoffs/2026-11-10-claude3-CC-341.md
 
 ## Notes
 
-### Where things stand (10 Nov, end of session 2)
-- CC-340 is live on the PC and checked out (handoff handoffs/2026-11-10-claude3-CC-340.md, sheet Claude outputs/CC-340/round3/).
-  Waiting on Antigravity's four lights and frame time (request sent). Live copies before it: Claude outputs/CC-340/before-live/.
-- Next: CC-341 (J128, the fabric layer on layer, with its test tcc341: reuse the ray/point-to-triangle helpers in
-  tools/tests/clip-check.js), then CC-342.
-- The cloud copy: make it from the PC's tree (tar on the PC into Claude outputs/CC-340/cloud/, stage, untar; the file list
-  needs assets/intro and the ui/studio images, or the game hangs on load). Raise the inspector's timer in
-  studio/inspector/api.js line ~185 (the setTimeout's 15000, not the message) in the cloud copy only.
-- Probes: a throwaway tools/tests/t99xx.js in the cloud copy runs through run-all (names must be tNNN); delete after.
+### Where things stand (10 Nov ~22:45Z, end of session 2: context nearly full, needs a new session)
+- CC-340: live on the PC, checked out --done --review. Antigravity owes the four lights and the frame time (said LATER).
+- AG-288 find 1 (the Director's URGENT): checked, not from CC-340 (same on the pre-CC-340 tree): 0.4 m from the range console
+  his body won't turn to face it (player.rotation.y stays put) while the first-person view turns, so the eye looks back over
+  his pack. Sent to the Director for Claude 1 / Claude 2 (shot: Claude outputs/CC-340/AG288-find1-check.jpg). On the way I
+  applied FP_EYE in metres (index.html firstPersonEye: the new head's scale had moved the FP eye 2.5 cm back): LIVE, my pick,
+  the Director may still say Claude 1 should own it. The file before it: Claude outputs/CC-340/before-live/index.before-fpeye.html.
+- CC-341 (checked in, just started): nothing changed yet but FP_EYE. Plan: tools/tests/tcc341.js poses him (stand armed and
+  unarmed, walk, run, crouch, crouch-walk, aim, reload, jump) and checks each layer pair (skin < shirt < vest/carrier, shirt <
+  belt/pouches, glove cuff < sleeve, head < balaclava < helmet, trousers < boots) for any vertex > 0.5 mm through, reusing
+  rayHits/distTri from tools/tests/clip-check.js. Most of the body is one baked 'rig-skin' SkinnedMesh per material group
+  (RIG_SKIN, bakeRigSkin): read posed vertices with mesh.getVertexPosition(i, v) then localToWorld; open shells need the
+  nearest-face signed distance, not the ray parity. The in-game mesh list and its probe: Claude outputs/CC-341/.
+- Then CC-342 (after CC-341).
 
 ### Tools that work (cloud)
 - The lab: `node tools/marine-lab.mjs <outdir> <spec.json>` (studio/marine-lab): the body and head outside the game in

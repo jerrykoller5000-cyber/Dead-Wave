@@ -6,9 +6,10 @@ import {serve} from '../../tools/serve.mjs';
 import {launch} from '../../tools/cdp.mjs';
 import {save} from '../GT-20076/save.mjs';
 
-const phase = process.argv[2];
-assert(process.env.DW_GAME_TEST_TOKEN && ['before','after'].includes(phase));
-const dir = new URL('./m4/details/' + phase + '/', import.meta.url);
+const [phase,id='m4']=process.argv.slice(2);
+assert(['m4','shotgun'].includes(id));
+assert(process.env.DW_GAME_TEST_TOKEN && ['before','after','reviewed','revised'].includes(phase));
+const dir = new URL('./'+id+'/details/' + phase + '/', import.meta.url);
 await mkdir(dir,{recursive:true});
 const server = await serve(fileURLToPath(new URL('../../',import.meta.url)),0);
 const browser = await launch({headless:false});
@@ -20,9 +21,13 @@ try {
   assert(await page.waitFor('!DWOpening.active'));
   await page.evaluate("document.getElementById('playerName').value='Artwork';document.getElementById('modeTraining').click()");
   assert(await page.waitFor('TT.trainingDbg.state().active && !document.getElementById("trainingBlackout")?.classList.contains("on") && Math.abs(TT.getWorldTime()-.5)<.02',{timeout:45000}));
-  const geometry = await page.evaluate(`(async()=>{
-    const {makeM4Model}=await import('/studio/weapon-longarms.js');
-    const T=TT.THREE, raw=makeM4Model({...TT.inspectHost().builders.weaponContext(),finishGun:g=>g});
+  await page.evaluate('window.modelId='+JSON.stringify(id));
+  await page.evaluate(`(async()=>{
+    const lib=await import('/studio/weapon-longarms.js');
+    window.buildRaw=()=>lib[modelId==='m4'?'makeM4Model':'makeShotgunModel']({...TT.inspectHost().builders.weaponContext(),finishGun:g=>g});
+  })()`);
+  const snapshot = await page.evaluate(`(async()=>{
+    const T=TT.THREE, raw=buildRaw();
     const u=raw.userData;
     const skip=[u.flash,u.flashLight,u.flare,u.laser].filter(Boolean);
     const vertices=[],point=new T.Vector3();
@@ -48,20 +53,65 @@ try {
       const eye=center.clone().addScaledVector(new T.Vector3(...view).normalize(),distance*5);
       TT.setShotView({x:eye.x,y:eye.y,z:eye.z,tx:center.x,ty:center.y,tz:center.z,fov:34});
     };
-    return vertices;
+    const contacts={};
+    const metric=TT.weaponMeshes[modelId].scale.x*1.8/1.655;
+    // Stage translation and the presentation scale must not enter the fit measurements.
+    const inverse=new T.Matrix4().copy(stage.matrixWorld).invert();
+    stage.updateWorldMatrix(true,true);inverse.copy(stage.matrixWorld).invert();
+    const parts = modelId==='shotgun' ? [['pump and fore-end',u.pump],['grip',raw.getObjectByName('shotgun grip')],
+      ['stock body',raw.getObjectByName('shotgun stock body')],['light module',u.laserLightUnit],
+      ['slide artwork',u.slideLock],['rear sight',raw.getObjectByName('shotgun rear sight')]] : [['rear handle',u.work],['comb',raw.getObjectByName('GW-4 comb')],
+      ['tube',raw.getObjectByName('GW-4 tube')],['rear face',raw.getObjectByName('GW-4 rear face')],
+      ['rear end plate',raw.getObjectByName('GW-4 rear end plate')],['rear collar',raw.getObjectByName('GW-4 rear collar')]];
+    for(const [name,obj] of parts){
+      if(!obj)continue;
+      const coords=contacts[name]=[];
+      obj.traverse(mesh=>{
+        if(!mesh.isMesh)return;
+        const attr=mesh.geometry.attributes.position,index=mesh.geometry.index;
+        const local=new T.Matrix4().multiplyMatrices(inverse,mesh.matrixWorld);
+        for(let i=0;i<(index?index.count:attr.count);i++){
+          point.fromBufferAttribute(attr,index?index.getX(i):i).applyMatrix4(local).multiplyScalar(metric);
+          coords.push(...point.toArray().map(x=>+x.toFixed(7)));
+        }
+      });
+    }
+    return {vertices,contacts};
   })()`);
-  const hashes = geometry.map(coords=>createHash('sha256').update(coords).digest('hex')).sort();
+  if(id==='shotgun'||['reviewed','revised'].includes(phase)){
+    assert.equal(Object.keys(snapshot.contacts).length,6);
+    await save(new URL('contact-surfaces.json',dir),JSON.stringify(snapshot.contacts));
+  }
+  if(id==='shotgun'||['after','revised'].includes(phase)){
+    const audit=await page.evaluate(`(async()=>{
+      const {auditWeapon}=await import('/tools/tests/weapon-seating.js');
+      const raw=buildRaw();
+      raw.scale.copy(TT.weaponMeshes[modelId].scale);
+      const u=raw.userData;
+      const r=auditWeapon(raw,{metresPerUnit:1.8/1.655,ignore:[u.flash,u.flashLight,u.laser,u.flare].filter(Boolean)});
+      return {parts:r.parts,open:r.openSurfaces,intersections:r.overlaps.length,loose:r.loose,details:r.detailSeats.length,breaches:r.detailBreaches};
+    })()`,90000);
+    await save(new URL('audit.json',dir),JSON.stringify(audit,null,2));
+    assert.deepEqual(audit.loose,[]); assert.deepEqual(audit.breaches,[]);
+    console.log(id+' artwork audit',JSON.stringify(audit));
+  }
+  const hashes = snapshot.vertices.map(coords=>createHash('sha256').update(coords).digest('hex')).sort();
   await save(new URL('mesh-shapes.json',dir),JSON.stringify(hashes,null,2));
-  for (const [name,view,target,distance] of [
+  const views=id==='shotgun'?[
+    ['side',[1,.16,-.10],[0,.005,.09],.43],['underside',[.18,-1,-.16],[0,-.015,.105],.37],
+    ['rear',[-.8,.45,-1],[0,.0,-.14],.7],['foreend',[.85,-.16,.48],[0,.0,.48],.62],
+    ['front',[.8,.12,.7],[0,.015,.84],.42],['whole',[1,.24,-.26],[0,0,.23],1.50]
+  ]:[
     ['side',[1,.07,-.05],[0,.015,.045],.43],
     ['rear',[-.95,.38,-.9],[0,.018,-.20],.72],
     ['mag',[-1,.04,.28],[0,-.14,.049],.43],
     ['whole',[1,.24,-.26],[0,0,.16],1.56]
-  ]) {
+  ];
+  for (const [name,view,target,distance] of views) {
     await page.evaluate('frameGW('+[name,view,target,distance].map(x=>JSON.stringify(x)).join(',')+');new Promise(r=>setTimeout(r,250))');
     const shot=await page.send('Page.captureScreenshot',{format:'jpeg',quality:94});
     await save(new URL(name+'.jpg',dir),Buffer.from(shot.data,'base64'));
   }
   assert.deepEqual(page.errors,[]);
-  console.log('PASS '+phase+' GW-4: '+hashes.length+' mesh fingerprints and four model views');
+  console.log('PASS '+phase+' '+id+': '+hashes.length+' mesh fingerprints and '+views.length+' model views');
 } finally {await browser.close();await server.close()}

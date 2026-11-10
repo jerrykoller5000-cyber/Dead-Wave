@@ -1,0 +1,259 @@
+FAIL  tag289   27 pass   1 fail  26.3s  (real renderer)
+    PASS Containment Gate built with 135 parts
+    PASS Containment Gate part-on-part seating (<= 0.5 mm): 0 floating parts
+    PASS Containment Gate non-penetration & floor check: 0 pass-throughs / below-ground
+    PASS Field Infirmary + Cot built with 227 parts
+    PASS Field Infirmary + Cot part-on-part seating (<= 0.5 mm): 0 floating parts
+    PASS Field Infirmary + Cot non-penetration & floor check: 0 pass-throughs / below-ground
+    PASS Find 6: containment gate threshold seated flush on floor y = 0.0000 m
+    PASS Find 4: infirmary dark base mat seated flush on floor y = 0.0000 m
+    PASS Find 4: infirmary pale inset mat seated at y = 0.012..0.020 m
+    PASS Find 4: oxygen bottle seated flush on mat at y = 0.0200 m (minY=0.0200)
+    PASS Find 4: IV stand 4 rubber feet seated flush on mat at y = 0.0200 m (n=4)
+    PASS Find 5: stretcher 4 rubber casters seated flush on mat at y = 0.0200 m (n=4)
+    PASS Find 5: medical cabinet has 2 front + 2 rear steel legs seated flush on mat at y = 0.0200 m
+    PASS Find 7: cot has 2 head-end and 2 foot-end angled X-scissor legs
+    PASS Find 7: cot scissor legs offset along X by 32.0 mm with 0 AABB/triangle intersections
+    PASS Find 7: cot horizontal X-pivot washers (2) & outer pin caps (4) installed (n=6)
+    PASS Find 8: BUILD_WEAR.WALL_PX === 64 px/m
+    PASS Find 8: Build Room wall/floor wear canvases clamped <= 2048 px (max=2048)
+    PASS Training Ground inspectHost and trainingDbg reachable
+    PASS Training Ground booted cleanly
+    PASS Find 2: training-gate-header mesh present in live Training Ground
+    PASS Find 2: training-gate-header uses corrugated steel siding (roughness=0.7)
+    PASS Find 2: training-gate-header aligned at B.maxZ - 0.025 with corrugated neighbours
+    PASS Flashlight: scene SpotLight (distance=26) present
+    PASS Flashlight: softened penumbra >= 0.70 (got 0.74)
+    FAIL Flashlight: 3 m night wall caps intensity to prevent white burnout (got 0.00)
+    PASS Flashlight: >= 16 m open downrange preserves full 42 intensity (got 42.00)
+    PASS no page errors
+ok    t103     11 pass   0 fail  40.3s  (real renderer)
+    PASS a fresh run does not own the laser/light
+    PASS a fresh run does not own a separate flashlight or laser
+    PASS the light starts dark
+    PASS 2 does nothing until the laser/light is bought
+    PASS the kiosk no longer sells the laser/light (D-124)
+    PASS the kiosk no longer sells the Combat helmet (D-124)
+    PASS the CIF Head tab sells the Combat helmet (D-124)
+    PASS the pistol workbench sells the laser/light (D-124)
+    PASS out of Cash: the pistol workbench row shows the shortfall and the buy is off (SuppressorQuieter shots, slightly less damage.$40 Cash · Need 40 moreB)
+    PASS 2 turns a bought laser/light on (6)
+    PASS 2 turns it off again
+ok    t215      4 pass   0 fail  37.6s  (real renderer)
+    PASS read index.html and the scripts and styles the game loaded (223 files)
+    PASS no broken characters in them
+    PASS the HUD reads clean: timeLine "Daylight · 08:17 · Grace", tacticalLine "NVG - · Laser - · Light -", grenadeChips "G×3H×0", ammoDetail "12 / 12  ·  50 Bullets  ·  SEMI", hpNum "100 / 100"
+    PASS and shows its dots and times signs (NVG - · Laser - · Light - / G×3H×0)
+ok    tag284  211 pass   0 fail  67.6s  (real renderer)
+    PASS makeBuildMesh wall tier 0 exists
+    PASS wall tier 0 foundation reaches slope depth (min.y -0.700 <= -0.64)
+    PASS makeBuildMesh wall tier 1 exists
+    PASS wall tier 1 foundation reaches slope depth (min.y -0.700 <= -0.64)
+    PASS makeBuildMesh wall tier 2 exists
+    PASS wall tier 2 foundation reaches slope depth (min.y -0.700 <= -0.64)
+    PASS makeBuildMesh wall tier 3 exists
+    PASS wall tier 3 foundation reaches slope depth (min.y -0.700 <= -0.64)
+    PASS makeBuildMesh wall tier 4 exists
+    PASS wall tier 4 foundation reaches slope depth (min.y -0.700 <= -0.64)
+    PASS makeBuildMesh floor tier 0 exists
+    PASS floor tier 0 foundation reaches slope depth (min.y -0.700 <= -0.64)
+    PASS makeBuildMesh floor tier 1 exists
+    PASS floor tier 1 foundation reaches slope depth (min.y -0.700 <= -0.64)
+    PASS makeBuildMesh floor tier 2 exists
+    PASS floor tier 2 foundation reaches slope depth (min.y -0.700 <= -0.64)
+    PASS makeBuildMesh barricade tier 0 exists
+    PASS barricade tier 0 foundation reaches slope depth (min.y -0.700 <= -0.64)
+    PASS makeBuildMesh barricade tier 1 exists
+    PASS barricade tier 1 foundation reaches slope depth (min.y -0.700 <= -0.64)
+    PASS makeBuildMesh barricade tier 2 exists
+    PASS barricade tier 2 foundation reaches slope depth (min.y -0.700 <= -0.64)
+    PASS makeBuildMesh sandbag tier 0 exists
+    PASS sandbag tier 0 foundation reaches slope depth (min.y -0.691 <= -0.64)
+    PASS makeBuildMesh sandbag tier 1 exists
+    PASS sandbag tier 1 foundation reaches slope depth (min.y -0.691 <= -0.64)
+    PASS makeBuildMesh sandbag tier 2 exists
+    PASS sandbag tier 2 foundation reaches slope depth (min.y -0.700 <= -0.64)
+    PASS makeBuildMesh wire tier 0 exists
+    PASS wire tier 0 foundation reaches slope depth (min.y -0.680 <= -0.64)
+    PASS makeBuildMesh wire tier 1 exists
+    PASS wire tier 1 foundation reaches slope depth (min.y -0.680 <= -0.64)
+    PASS makeBuildMesh wire tier 2 exists
+    PASS wire tier 2 foundation reaches slope depth (min.y -0.680 <= -0.64)
+    PASS makeBuildMesh railing tier 0 exists
+    PASS railing tier 0 foundation reaches slope depth (min.y -0.680 <= -0.64)
+    PASS makeBuildMesh railing tier 1 exists
+    PASS railing tier 1 foundation reaches slope depth (min.y -0.680 <= -0.64)
+    PASS makeBuildMesh railing tier 2 exists
+    PASS railing tier 2 foundation reaches slope depth (min.y -0.680 <= -0.64)
+    PASS makeBuildMesh platform tier 0 exists
+    PASS platform tier 0 foundation reaches slope depth (min.y -0.700 <= -0.64)
+    PASS makeBuildMesh platform tier 1 exists
+    PASS platform tier 1 foundation reaches slope depth (min.y -0.700 <= -0.64)
+    PASS makeBuildMesh platform tier 2 exists
+    PASS platform tier 2 foundation reaches slope depth (min.y -0.700 <= -0.64)
+    PASS makeBuildMesh pillar tier 0 exists
+    PASS pillar tier 0 foundation reaches slope depth (min.y -0.700 <= -0.64)
+    PASS makeBuildMesh pillar tier 1 exists
+    PASS pillar tier 1 foundation reaches slope depth (min.y -0.700 <= -0.64)
+    PASS makeBuildMesh pillar tier 2 exists
+    PASS pillar tier 2 foundation reaches slope depth (min.y -0.700 <= -0.64)
+    PASS makeBuildMesh stairs tier 0 exists
+    PASS stairs tier 0 foundation reaches slope depth (min.y -0.710 <= -0.64)
+    PASS makeBuildMesh stairs tier 1 exists
+    PASS stairs tier 1 foundation reaches slope depth (min.y -0.710 <= -0.64)
+    PASS makeBuildMesh stairs tier 2 exists
+    PASS stairs tier 2 foundation reaches slope depth (min.y -0.710 <= -0.64)
+    PASS makeBuildMesh spikes tier 0 exists
+    PASS spikes tier 0 foundation reaches slope depth (min.y -0.630 <= -0.58)
+    PASS makeBuildMesh spikes tier 1 exists
+    PASS spikes tier 1 foundation reaches slope depth (min.y -0.630 <= -0.58)
+    PASS makeBuildMesh spikes tier 2 exists
+    PASS spikes tier 2 foundation reaches slope depth (min.y -0.630 <= -0.58)
+    PASS skeletal marine mesh exists
+    PASS skeletal marine right boot sole seated flush on ground y=0 (min.y -0.0000)
+    PASS skeletal marine standing height reaches anatomical scale (max.y 1.757 >= 1.2m)
+    PASS skeletal marine has detailed articulated anatomy (baked mesh count 57 >= 40)
+    PASS 3D part-on-part wall:ghost (74 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part wall:t0:plain (74 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part wall:t0:window (64 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part wall:t0:window-barred (87 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part wall:t1:plain (139 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part wall:t1:window (126 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part wall:t1:window-barred (149 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part wall:t2:plain (138 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part wall:t2:window (114 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part wall:t2:window-barred (137 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part wall:t3:plain (196 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part wall:t3:window (170 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part wall:t3:window-barred (193 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part wall:t4:plain (239 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part wall:t4:window (193 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part wall:t4:window-barred (216 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part wall:t0:door-t0:shut (70 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part wall:t0:door-t0:open+ (70 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part wall:t0:door-t0:open- (70 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part wall:t1:door-t1:shut (161 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part wall:t1:door-t1:open+ (161 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part wall:t1:door-t1:open- (161 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part wall:t2:door-t2:shut (123 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part wall:t2:door-t2:open+ (123 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part wall:t2:door-t2:open- (123 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part wall:t3:door-t3:shut (141 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part wall:t3:door-t3:open+ (141 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part wall:t3:door-t3:open- (141 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part wall:t4:door-t4:shut (134 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part wall:t4:door-t4:open+ (134 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part wall:t4:door-t4:open- (134 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part wall:t2:door-t4:open- (85 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part floor:ghost (126 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part floor:t0 (126 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part floor:t1 (44 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part floor:t2 (110 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part barricade:ghost (58 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part barricade:t0 (58 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part barricade:t1 (106 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part barricade:t2 (113 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part barricade:gate-t0:shut (32 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part barricade:gate-t0:open+ (32 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part barricade:gate-t0:open- (32 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part barricade:gate-t1:shut (60 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part barricade:gate-t1:open+ (60 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part barricade:gate-t1:open- (60 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part barricade:gate-t2:shut (54 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part barricade:gate-t2:open+ (54 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part barricade:gate-t2:open- (54 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part sandbag:ghost (94 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part sandbag:t0 (94 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part sandbag:t1 (132 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part sandbag:t2 (2 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part wire:ghost (243 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part wire:t0 (243 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part wire:t1 (321 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part wire:t2 (179 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part wire:gate-t0:shut (32 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part wire:gate-t0:open+ (32 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part wire:gate-t0:open- (32 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part wire:gate-t1:shut (60 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part wire:gate-t1:open+ (60 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part wire:gate-t1:open- (60 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part wire:gate-t2:shut (54 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part wire:gate-t2:open+ (54 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part wire:gate-t2:open- (54 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part railing:ghost (54 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part railing:t0 (54 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part railing:t1 (77 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part railing:t2 (35 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part railing:gate-t0:shut (32 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part railing:gate-t0:open+ (32 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part railing:gate-t0:open- (32 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part railing:gate-t1:shut (60 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part railing:gate-t1:open+ (60 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part railing:gate-t1:open- (60 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part railing:gate-t2:shut (54 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part railing:gate-t2:open+ (54 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part railing:gate-t2:open- (54 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part platform:ghost (56 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part platform:t0 (56 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part platform:t1 (84 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part platform:t2 (115 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part pillar:ghost (58 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part pillar:t0 (58 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part pillar:t1 (45 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part pillar:t2 (64 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part stairs:ghost (74 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part stairs:t0 (74 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part stairs:t1 (79 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part stairs:t2 (94 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part stairs:t2:folded (94 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part spikes:ghost (131 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part spikes:t0:unsprung (99 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part spikes:t0:sprung (131 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part spikes:t1:unsprung (108 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part spikes:t1:sprung (130 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part spikes:t2:unsprung (143 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part spikes:t2:sprung (175 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part mine:ghost (19 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part mine:t0 (19 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part mine:t1 (35 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part mine:t2 (32 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part lure:ghost (36 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part lure:t0 (36 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part lure:t1 (47 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part lure:t2 (57 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part barrel:ghost (3 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part barrel:t0:fuel (27 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part barrel:t1:napalm (40 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part skeletalMarine:default (569 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part skeletalMarine:sway0 (569 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part skeletalMarine:sway1 (569 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part skeletalMarine:throw-start (569 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part skeletalMarine:throw-mid (569 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS 3D part-on-part skeletalMarine:landed (569 parts, 0 gaps > 0.5mm, 0 penetrations/pass-throughs)
+    PASS live spawnBuild wall succeeds
+    PASS live damage states (100%/50%/10% HP) keep wall seated on ground without drift
+    PASS live spawnBuild floor succeeds
+    PASS live damage states (100%/50%/10% HP) keep floor seated on ground without drift
+    PASS live spawnBuild barricade succeeds
+    PASS live damage states (100%/50%/10% HP) keep barricade seated on ground without drift
+    PASS live spawnBuild sandbag succeeds
+    PASS live damage states (100%/50%/10% HP) keep sandbag seated on ground without drift
+    PASS live spawnBuild wire succeeds
+    PASS live damage states (100%/50%/10% HP) keep wire seated on ground without drift
+    PASS live spawnBuild railing succeeds
+    PASS live damage states (100%/50%/10% HP) keep railing seated on ground without drift
+    PASS live spawnBuild platform succeeds
+    PASS live damage states (100%/50%/10% HP) keep platform seated on ground without drift
+    PASS live spawnBuild pillar succeeds
+    PASS live damage states (100%/50%/10% HP) keep pillar seated on ground without drift
+    PASS live spawnBuild stairs succeeds
+    PASS live damage states (100%/50%/10% HP) keep stairs seated on ground without drift
+    PASS live spawnBuild spikes succeeds
+    PASS live damage states (100%/50%/10% HP) keep spikes seated on ground without drift
+    PASS live spawnBuild mine succeeds
+    PASS live damage states (100%/50%/10% HP) keep mine seated on ground without drift
+    PASS live spawnBuild lure succeeds
+    PASS live damage states (100%/50%/10% HP) keep lure seated on ground without drift
+    PASS live spawnBuild barrel succeeds
+    PASS live damage states (100%/50%/10% HP) keep barrel seated on ground without drift
+    PASS no page errors
+4 checks: 253 pass, 1 fail (real renderer)

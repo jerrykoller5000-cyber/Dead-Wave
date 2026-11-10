@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {mkdir} from 'node:fs/promises';
+import {mkdir,readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {launch} from '../../tools/cdp.mjs';
@@ -7,7 +7,7 @@ import {serve} from '../../tools/serve.mjs';
 import {save} from '../GT-20076/save.mjs';
 
 const [id,phase] = process.argv.slice(2);
-assert(process.env.DW_GAME_TEST_TOKEN && /^[a-z0-9-]+$/.test(id) && ['before','after','paint'].includes(phase));
+assert(process.env.DW_GAME_TEST_TOKEN && /^[a-z0-9-]+$/.test(id) && ['before','after','paint','rig','rear','revised'].includes(phase));
 const folder = new URL('./'+id+'/'+phase+'/',import.meta.url);
 await mkdir(folder,{recursive:true});
 const server=await serve(fileURLToPath(new URL('../../',import.meta.url)),0);
@@ -65,7 +65,78 @@ try {
       return {pose,light,key:info.key,raised:info.raise,ads:T.fpDbg().ads,reloading:T.isReloading(),time:T.getWorldTime(),sun:H.sun.intensity};
     };
   })()`);
-  if(id==='pistol' && (phase==='after' || process.argv.includes('--contact-reference'))){
+  if(phase==='rear' || (phase==='revised' && id==='m4') || (phase==='after' && id==='shotgun')){
+    await page.evaluate("prepareEye('aimed','noon')");
+    const result=await page.evaluate(`(async()=>{
+      const T=TT.THREE, vm=TT.viewmodelDbg(), g=vm.frame, cameraToGun=g.q.clone().invert();
+      const {makeM4Model,makeShotgunModel}=await import('/studio/weapon-longarms.js');
+      const ctx={...TT.inspectHost().builders.weaponContext(),finishGun:g=>g};
+      const kit=ctx.gunKit, source=new WeakMap();
+      ctx.gunKit=(...args)=>Object.fromEntries(Object.entries(kit(...args)).map(([key,fn])=>[key,(...values)=>{
+        const result=fn(...values);
+        const line=new Error().stack.split('\\n').find(s=>s.includes('/studio/weapon-longarms.js:'));
+        if(result?.isObject3D && line)source.set(result,line.trim());
+        return result;
+      }]));
+      const raw=proofId==='shotgun'?makeShotgunModel(ctx):makeM4Model(ctx);
+      const origin=g.p.clone().negate().applyQuaternion(cameraToGun).divideScalar(g.s);
+      raw.userData.fpStock.visible=vm.gun.stock.visible;
+      raw.updateMatrixWorld(true);
+      const surfaces=[];raw.traverseVisible(o=>{if(o.isMesh && o.material?.opacity!==0)surfaces.push(o)});
+      const ux=vm.ndc(new T.Vector3(1,0,-1)).x,uy=vm.ndc(new T.Vector3(0,1,-1)).y;
+      const rays={};
+      for(const y of [445,475,505,535,565,595,625,655,685,715])for(const x of [595,625,640,655,685]){
+        const dir=new T.Vector3((x/640-1)/ux,(1-y/360)/uy,-1).applyQuaternion(cameraToGun).normalize();
+        const hit=new T.Raycaster(origin,dir).intersectObjects(surfaces,false)[0];
+        if(hit)rays[x+','+y]={point:hit.point.toArray(),node:hit.object.name,line:source.get(hit.object)||source.get(hit.object.parent)};
+      }
+      return {stockVisible:vm.gun.stock.visible,origin:origin.toArray(),rays};
+    })()`);
+    await save(new URL('rays.json',folder),JSON.stringify(result,null,2));
+    if(phase==='revised'){
+      const hits=Object.values(result.rays);
+      for(const part of ['GW-4 rear face','GW-4 tube','GW-4 comb'])assert(hits.some(hit=>hit.node===part),'Aimed lower-frame sample misses '+part);
+    }
+    console.log('Sampled '+Object.keys(result.rays).length+' occupied aimed pixels; stock visible: '+result.stockVisible);
+  }
+  if(phase==='rig' || (['after','revised'].includes(phase) && ['m4','shotgun'].includes(id))){
+    const maps=await page.evaluate(`(()=>{
+      const expected={pistol:['trigger','magRelease','slideStop'],m4:['selector','boltCatch','magRelease','chargingHandle'],shotgun:['safety','slideRelease','pump']}[proofId];
+      const src=TT.weaponMeshes[proofId],eye=TT.viewmodelDbg().gun.root;
+      const copies={world:src,eye};
+      if(proofId==='pistol')copies.offhand=TT.offhandMeshes.pistol;
+      const result={};
+      for(const [kind,keys] of [['controls',expected],['heatParts',['barrel','suppressor']]]){
+        const entries=result[kind]={};
+        for(const key of keys){
+          const name=src.userData[kind]?.[key];
+          if(!name)throw Error('Missing '+kind+'.'+key);
+          const found=new Set(),counts={};
+          for(const [view,root] of Object.entries(copies)){
+            const nodes=[];root.traverse(o=>{if(o.name===name)nodes.push(o)});
+            if(nodes.length!==1 || found.has(nodes[0]))throw Error(view+' duplicate or missing '+name);
+            const node=nodes[0];found.add(node);
+            let count=0;node.traverse(o=>{if(o.isMesh)count++});
+            if(!count)throw Error(view+' artwork flattened away: '+name);
+            if(view!=='eye' && !src.userData.artworkNodes.includes(src.getObjectByName(name)))throw Error('Missing source binding '+name);
+            counts[view]=count;
+          }
+          const original=src.getObjectByName(name);
+          if(original.userData.restPosition.length!==3 || original.userData.restQuaternion.length!==4)throw Error('Missing rest pose '+name);
+          entries[key]={name,meshes:counts};
+        }
+      }
+      return result;
+    })()`);
+    await save(new URL('artwork-nodes.json',folder),JSON.stringify(maps,null,2));
+    if(id==='pistol'){
+      const test=await readFile(new URL('../../tools/tests/t242.js',import.meta.url),'utf8');
+      const result=await page.evaluate(test,120000);
+      await save(new URL('t242.txt',folder),result+'\n');
+      assert(!/^FAIL/m.test(result),result);
+    }
+  }
+  if(id==='pistol' && (['after','rig'].includes(phase) || process.argv.includes('--contact-reference'))){
     const refArgument=process.argv.indexOf('--contact-reference');
     const url=refArgument<0?null:process.argv[refArgument+1];
     if(refArgument>=0)assert(url?.startsWith('/review/GT-20077/pistol/') && url.endsWith('.js'));
@@ -73,7 +144,7 @@ try {
     const sets=await page.evaluate(`(async()=>{
       const T=TT.THREE, ctx={...TT.inspectHost().builders.weaponContext(),finishGun:g=>g};
       const out={};
-      const models=[['after','/studio/weapon-sidearms.js']];
+      const models=[['${phase==='rig'?'rig':'after'}','/studio/weapon-sidearms.js']];
       if(contactReference)models.unshift(['before',contactReference]);
       for(const [label,url] of models){
         const {makePistolModel}=await import(url);
@@ -81,7 +152,8 @@ try {
         gun.scale.copy(TT.weaponMeshes.pistol.scale).multiplyScalar(1.8/1.655);
         gun.updateMatrixWorld(true);
         const parts={'magazine including top':mag,'magazine floor':mag.children[1],
-          'slide housing':slide.children[0],'rear plate':slide.children[1],'magazine release':gun.children[17]};
+          'slide housing':slide.children[0],'rear plate':slide.children[1],
+          'magazine release':gun.getObjectByName('controls-magRelease')||gun.children[17]};
         const sample=out[label]={};
         for(const [name,root] of Object.entries(parts)){
           const coords=sample[name]=[],v=new T.Vector3();

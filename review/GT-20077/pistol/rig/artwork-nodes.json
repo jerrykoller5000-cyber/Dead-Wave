@@ -1,0 +1,46 @@
+{
+  "controls": {
+    "trigger": {
+      "name": "controls-trigger",
+      "meshes": {
+        "world": 1,
+        "eye": 1,
+        "offhand": 1
+      }
+    },
+    "magRelease": {
+      "name": "controls-magRelease",
+      "meshes": {
+        "world": 1,
+        "eye": 1,
+        "offhand": 1
+      }
+    },
+    "slideStop": {
+      "name": "controls-slideStop",
+      "meshes": {
+        "world": 1,
+        "eye": 1,
+        "offhand": 1
+      }
+    }
+  },
+  "heatParts": {
+    "barrel": {
+      "name": "heatParts-barrel",
+      "meshes": {
+        "world": 1,
+        "eye": 1,
+        "offhand": 1
+      }
+    },
+    "suppressor": {
+      "name": "suppressor",
+      "meshes": {
+        "world": 3,
+        "eye": 3,
+        "offhand": 3
+      }
+    }
+  }
+}

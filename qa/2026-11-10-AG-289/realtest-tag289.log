@@ -1,0 +1,32 @@
+ok    tag289   30 pass   0 fail  41.3s  (real renderer)
+    PASS Containment Gate built with 135 parts
+    PASS Containment Gate part-on-part seating (<= 0.5 mm): 0 floating parts
+    PASS Containment Gate non-penetration & floor check: 0 pass-throughs / below-ground
+    PASS Field Infirmary + Cot built with 227 parts
+    PASS Field Infirmary + Cot part-on-part seating (<= 0.5 mm): 0 floating parts
+    PASS Field Infirmary + Cot non-penetration & floor check: 0 pass-throughs / below-ground
+    PASS Find 6: containment gate threshold seated flush on floor y = 0.0000 m
+    PASS Find 4: infirmary dark base mat seated flush on floor y = 0.0000 m
+    PASS Find 4: infirmary pale inset mat seated at y = 0.012..0.020 m
+    PASS Find 4: oxygen bottle seated flush on mat at y = 0.0200 m (minY=0.0200)
+    PASS Find 4: IV stand 4 rubber feet seated flush on mat at y = 0.0200 m (n=4)
+    PASS Find 5: stretcher 4 rubber casters seated flush on mat at y = 0.0200 m (n=4)
+    PASS Find 5: medical cabinet has 2 front + 2 rear steel legs seated flush on mat at y = 0.0200 m
+    PASS Find 7: cot has 2 head-end and 2 foot-end angled X-scissor legs
+    PASS Find 7: cot scissor legs offset along X by 32.0 mm with 0 AABB/triangle intersections
+    PASS Find 7: cot horizontal X-pivot washers (2) & outer pin caps (4) installed (n=6)
+    PASS Find 8: BUILD_WEAR.WALL_PX === 64 px/m
+    PASS Find 8: Build Room wall/floor wear canvases clamped <= 2048 px (max=2048)
+    PASS Training Ground inspectHost and trainingDbg reachable
+    PASS Training Ground booted cleanly
+    PASS Find 2: training-gate-header mesh present in live Training Ground
+    PASS Find 2: training-gate-header uses corrugated steel siding (roughness=0.7)
+    PASS Find 2: training-gate-header aligned at B.maxZ - 0.025 with corrugated neighbours
+    PASS Flashlight: scene SpotLight (distance=26) present
+    PASS Flashlight: softened penumbra >= 0.70 (got 0.74)
+    PASS Flashlight: 1 m night wall caps intensity for readable pool (got 0.45)
+    PASS Flashlight: 3 m night wall scales up cleanly without white burnout (got 4.73)
+    PASS Flashlight: 8 m night wall scales up cleanly (got 19.72)
+    PASS Flashlight: >= 16 m open downrange preserves full 42 intensity (got 42.00)
+    PASS no page errors
+1 checks: 30 pass, 0 fail (real renderer)

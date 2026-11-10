@@ -1,13 +1,13 @@
 # CLAUDE DIRECTOR
 
 state: idle
-model: Claude Fable 5.2
+model: Claude Opus 5.5
 task: —
 touching: —
-since: 2026-11-10T22:29Z
+since: 2026-11-10T23:01Z
 next: —
 blocked-on: —
-last-report: handoffs/2026-11-10-claude-CL-356.md
+last-report: handoffs/2026-11-10-claude-CL-359.md
 
 ## Notes
 

@@ -1405,6 +1405,7 @@
     import { makeM4Model, makeAkModel, makeAa12Model, makeShotgunModel, makeSniperModel } from './studio/weapon-longarms.js';
     import { makeMinigunModel, makeLauncherModel, makeFlamerModel, makeChainsawModel, makeMortarModel, makeM240Model } from './studio/weapon-heavy.js';
     import { makeOptic } from './studio/weapon-optics.js';
+    import { markPaintSurface } from './studio/weapon-finish.js';
     import { buildMarineHelmet, detailMarineNvg, fitMarineHelmetParts } from './studio/marine-headgear.js';
     import { buildMarineHats } from './studio/marine-hats.js';
     import { webbingGeometry, bandolierFit } from './ui/marine-webbing.js';
@@ -1543,6 +1544,7 @@ import { fetchBruteGetUp, createBruteGetUp } from './combat/brute-getup.js'; // 
     import { rotateDiveAimOffset, clearDiveGrip, frontDiveDirection, diveBladePose } from './studio/marine-dive-aim.js';
     import { constrainDiveBody, stopDiveIntoContact } from './studio/marine-dive-contact.js';
     import { rollTravel } from './studio/marine-roll.js';
+    import { createBarrelHeat } from './game/barrel-heat.js';   // AG-290 (Jerry, J131, J132: barrel heat, smoke wisp & red glow)
     import { DIVE, createDive, startDive, stepDive, endDive, resetDive, diveKill, diveTimeScale, diveLie, diveBasis, diveBusy, diveAirborne, canDive, startSlowmo, slowmoOn, smooth as diveSmooth } from './studio/marine-dive.js';   // CL-193: the shootdodge
     import * as Studio from './studio/index.js';   // CL-64: scenes (the cave drag)
     import * as PitArms from './world/pit-tentacles.js';
@@ -21873,10 +21875,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const baseIntensity = dark ? 42 : 6;
       let targetIntensity = baseIntensity;
       if (dark) {
-        // AG-289: cap close-range hotspot irradiance along the beam ray so lit walls at 3-10 m never clip to pure white
+        // AG-289: cap close-range hotspot irradiance along the beam ray (matching SpotLight decay=1.1)
+        // so lit walls at 1 m, 3 m, and 8 m show a clear, readable pool of light without white burnout
         const stop = laserStop(flashlight.position, _flashDir, 16, true);
         if (stop && stop.surface) {
-          targetIntensity = Math.max(1.8, Math.min(baseIntensity, 1.95 * Math.pow(Math.max(0.5, stop.len), 1.1)));
+          targetIntensity = Math.max(0.45, Math.min(baseIntensity, 2.35 * Math.pow(Math.max(0.20, stop.len), 1.1)));
         }
       }
       flashlight.intensity = targetIntensity;
@@ -23700,6 +23703,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
 
     const weaponMeshes = { minigun, m4, ak, aa12, pistol, uzi, shotgun, revolver, sniper, launcher, flamer, chainsaw };
+    const barrelHeat = createBarrelHeat({ THREE, scene, camera, weaponMeshes });   // AG-290: barrel heat & smoke wisp
     // GP-20065: the rifle's NX8 is standard equipment, on its existing action rail.
     // Its eye axis stays at y .14, as the previous scope's did.
     const oldSniperScope = sniper.getObjectByName('scope');
@@ -25013,12 +25017,18 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // CL-332 (J96): risers (gun units) where the line through the optic ran into the gun: the shotgun's RMR (bead and
     // suppressor top at 0.100, its line was 0.089) and the KR-7's RMR (front post top 0.138, line 0.131).
     const OPTIC_RISER = { shotgun: { rmr: 0.026 }, m4: { rmr: 0.021 } };
-    function opticRiser(K, rise, len) {
-      K.box(0.030, rise, len, gunDark, 0, -rise / 2, 0, 0, 0, 0, null, 0.002);                // the block
-      K.box(0.036, 0.006, len * 0.86, gunDark, 0, -rise + 0.003, 0, 0, 0, 0, null, 0.0015);    // the clamp foot on the rail
+    function opticRiser(K, rise, len, partFinish) {
+      const block = K.box(0.030, rise, len, gunDark, 0, -rise / 2, 0, 0, 0, 0, null, 0.002);
+      const foot = K.box(0.036, 0.006, len * 0.86, gunDark, 0, -rise + 0.003, 0, 0, 0, 0, null, 0.0015);
+      block.name = 'optic riser block';
+      foot.name = 'optic riser foot';
+      if (partFinish) {
+        markPaintSurface(block, 'optic shell');
+        markPaintSurface(foot, 'optic shell');
+      }
       for (const s of [-1, 1]) {
         K.box(0.0015, rise * 0.5, len * 0.42, gunAccent, s * 0.0152, -rise * 0.5, 0, 0, 0, 0, null, 0.0005);   // a lightening cut
-        K.cyl(0.0032, 0.0032, 0.004, gunAccent, s * 0.0195, -rise + 0.004, len * 0.22, null, 10, 'x');           // the clamp knob
+        K.cyl(0.0032, 0.0032, 0.004, gunAccent, s * 0.0195, -rise + 0.004, len * 0.22, null, 10, 'x').name = 'optic riser fastener ' + s;
       }
     }
     function syncOpticLooks() {
@@ -25036,7 +25046,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         mount.userData.kind = kind;
         mount.position.set(...OPTIC_MOUNT[w]);
         const rise = (OPTIC_RISER[w] && OPTIC_RISER[w][kind]) || 0;   // CL-332 (J96)
-        if (rise) { mount.position.y += rise; opticRiser(gunKit(mount), rise, 0.05); }
+        if (rise) { mount.position.y += rise; opticRiser(gunKit(mount), rise, 0.05, gun.userData.partFinish); }
         parent.add(mount);
         // Removable short rails also bridge the rotary arch and the launcher's receiver
         // after their larger stock reflex units come off.
@@ -41577,6 +41587,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       spawnM240Spent(b.mesh);   // CL-131: the case and the link
       requestEffectLight(_m240O.x, _m240O.y, _m240O.z, 0xffc070, 2.4, 7);
       AudioSys.fireWeapon('m240');   // CL-131: its own report (was the AK's)
+      if (barrelHeat) barrelHeat.addShot('m240', false);   // AG-290
       heardShot('minigun');   // GB-105: heard like the belt gun it is
       addShake(0.012);
       updateAmmoHud();
@@ -45367,10 +45378,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         const flail = Math.sin(Math.min(1, u) * Math.PI) * (1 - fall);
         const p = c.parts, j = c.jitter || 0;
         const A = pose.arms, L = pose.legs, H = pose.head, Tor = pose.torso;
-        if (ud.armLG && !p.armL) { ud.armLG.rotation.x = -1.1 * flail + A[0] * fall; ud.armLG.rotation.z = -0.35 * flail - (A[1] + j) * fall; }
+        if (ud.armLG && !p.armL) { ud.armLG.rotation.x = -1.1 * flail + A[0] * fall; ud.armLG.rotation.z = -0.35 * flail - (A[1] + j + (c.typeKey === 'drowned' ? 0.25 : 0)) * fall; }
         if (ud.armRG && !p.armR) { ud.armRG.rotation.x = -0.95 * flail + A[2] * fall; ud.armRG.rotation.z = 0.35 * flail - (A[3] - j) * fall; }
-        if (ud.legLG && !p.legL) { ud.legLG.rotation.x = 0.2 * flail + (L[0] + j) * fall; if (ud.legLG.userData.shinG) ud.legLG.userData.shinG.rotation.x = L[1] * fall; }
-        if (ud.legRG && !p.legR) { ud.legRG.rotation.x = -0.15 * flail + L[2] * fall; if (ud.legRG.userData.shinG) ud.legRG.userData.shinG.rotation.x = L[3] * fall; }
+        if (ud.legLG && !p.legL) { ud.legLG.rotation.x = 0.2 * flail + (L[0] + j) * fall; ud.legLG.rotation.z = c.typeKey === 'demon' ? -(.1 + .14 * fall) : -(0.1 + 0.15 * fall); if (ud.legLG.userData.shinG) ud.legLG.userData.shinG.rotation.x = L[1] * fall; }
+        if (ud.legRG && !p.legR) { ud.legRG.rotation.x = -0.15 * flail + L[2] * fall; ud.legRG.rotation.z = c.typeKey === 'demon' ? .1 + .14 * fall : 0.1 + 0.15 * fall; if (ud.legRG.userData.shinG) ud.legRG.userData.shinG.rotation.x = L[3] * fall; }
         if (ud.head && !p.head) { ud.head.rotation.x = -0.35 * flail + H[0] * fall; ud.head.rotation.z = H[1] * fall; }
         if (ud.torso) { ud.torso.rotation.x = 0.08 * flail + Tor[0] * fall; ud.torso.rotation.y = Tor[1] * fall; ud.torso.rotation.z = Tor[2] * fall; }
         if (c.style === 'crumple') {   // CL-137: the knees fold and the body drops onto them first, then into the pose
@@ -52768,7 +52779,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // hidden (it would fill the view; its shadow goes with it). The eye follows his head with the walk's nod and sway
     // eased out. Right-click: the eye moves onto the held gun's sight line (game/sight-points.js, GB-222) and the view
     // narrows to the Aim FOV, the sniper's to its scope (and the scope's glass). fpAdsW is that 0..1, on the zoom's ease.
-    const FP_EYE = new THREE.Vector3(0, 0.205, 0.12);   // between his eyes, in his head's space
+    // CC-340 (AG-288 find 1 check): in metres from his head's pivot, not in its space. It was (0, 0.205, 0.12) in head space, which
+    // the old head's scale (0.94, 0.97, 0.94) made these metres; the new head's (0.64, 0.88, 0.73) took the eye 2.5 cm back and
+    // 2 cm down. Divided by the head's scale in firstPersonEye, so the eye stays where it was.
+    const FP_EYE = new THREE.Vector3(0, 0.205 * 0.97, 0.12 * 0.94), _fpEyeHead = new THREE.Vector3();   // between his eyes
     const FP_BOB_RATE = 14;
     // Eye relief behind each long gun's sight point (GB-222's points sit 0.12-0.25 m behind the rear sight; from there the
     // m4's carry handle filled the bottom of the view in the first shots): metres further back along the sight line.
@@ -52781,7 +52795,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     function firstPersonEye(dt) {
       const h = marine.userData.headG; if (!h) return null;
       h.updateWorldMatrix(true, false);
-      _fpEye.copy(FP_EYE); h.localToWorld(_fpEye);
+      _fpEye.copy(_fpEyeHead.copy(FP_EYE).divide(h.scale)); h.localToWorld(_fpEye);
       const P = localPlayer.position, ox = _fpEye.x - P.x, oy = _fpEye.y - P.y, oz = _fpEye.z - P.z;
       if (!fpOffSet || hypot(ox - _fpOff.x, oz - _fpOff.z) > 1 || Math.abs(oy - _fpOff.y) > 1) { _fpOff.set(ox, oy, oz); fpOffSet = true; }
       // CL-293 (ChatGPT's t291 on the real renderer: 1.16 cm of the run's bounce down the sights): aimed, the eye eases at a quarter of the rate
@@ -55807,6 +55821,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           syncMagazine('flamer');
           rangeShotPacket=rangeFeature?.attack('flamer',{units:.5,seconds:st.interval})||null;
           flamerTick(st);
+          if (barrelHeat) barrelHeat.addShot('flamer', false, 1.0);   // AG-290
         }
         updateAmmoHud();
         return;
@@ -55837,6 +55852,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           kickMinigunRecoil();
           triggerMuzzleFlash();
           AudioSys.fireWeapon('minigun');
+          if (barrelHeat) barrelHeat.addShot('minigun', false);   // AG-290
           updateAmmoHud();
           if (ammoByWeapon.minigun <= 0) { fireHeld = false; updateAmmoHud(); break; }
         }
@@ -55904,6 +55920,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           triggerMuzzleFlash();
           if (akimboOn()) akimboHand ^= 1;
           AudioSys.fireWeapon(currentWeapon, { suppressed: !!suppressor[currentWeapon], hand: akimboOn() ? akimboHand : -1 });   // CL-134: the can, and a pair each to its side
+          if (barrelHeat) barrelHeat.addShot(currentWeapon, !!suppressor[currentWeapon]);   // AG-290
           if (currentWeapon === 'pistol') kickPistolRecoil();
           if (currentWeapon === 'sniper') kickSniperRecoil();
           if (currentWeapon === 'uzi') kickUziRecoil();
@@ -62934,7 +62951,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           if (ud.head && !parts.head) ud.head.rotation.x = (rest.headRX || 0) - lean * 0.25;
         }
         // CL-137: the hit lands somewhere. On top of the lean: a head hit snaps the head back and to the side; an arm
-        // hit jerks that arm up and in; a leg hit buckles that knee and the body dips, with a hitch in the stride;
+        // hit jerks that arm up and outward, clear of the jaw; a leg hit buckles that knee and the body dips, with a hitch in the stride;
         // a body hit twists the torso away from the side it came in on. z.hitPart and z.hitSide are set in
         // damageZombie from the hit height and the round's direction; a fast rise, a slower settle.
         if (z.hitPartT > 0 && !z.farLod) {
@@ -62943,7 +62960,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           if (part === 'head') { if (ud.head && !parts.head) { ud.head.rotation.x -= 0.8 * k; ud.head.rotation.z += side * 0.55 * k; ud.head.rotation.y = (ud.head.rotation.y || 0) + side * 0.45 * k; } if (ud.torso) ud.torso.rotation.x -= 0.15 * k; }
           else if (part === 'armL' || part === 'armR') {
             const arm = part === 'armL' ? ud.armLG : ud.armRG, lost = part === 'armL' ? parts.armL : parts.armR;
-            if (arm && !lost) { arm.rotation.x -= 1.3 * k; arm.rotation.z += (part === 'armL' ? 1 : -1) * 0.6 * k; if (arm.userData.elbowG) arm.userData.elbowG.rotation.x -= 0.9 * k; }
+            if (arm && !lost) { arm.rotation.x -= 1.3 * k; arm.rotation.z += (part === 'armL' ? -1 : 1) * 0.6 * k; if (arm.userData.elbowG) arm.userData.elbowG.rotation.x -= 0.9 * k; }
             if (ud.torso) ud.torso.rotation.y += (part === 'armL' ? 1 : -1) * 0.3 * k;
           } else if (part === 'legL' || part === 'legR') {
             const leg = part === 'legL' ? ud.legLG : ud.legRG, lost = part === 'legL' ? parts.legL : parts.legR;
@@ -66318,6 +66335,15 @@ live++;
       PROF.mark('camera');
       flightRecord(dt);   // CU-160
       updateViewmodel(realDt);   // CL-281
+      if (barrelHeat) {   // AG-290 (J131, J132: barrel heat, smoke wisp & barrel/suppressor red glow)
+        barrelHeat.update(realDt, {
+          currentWeapon,
+          isSuppressed: !!suppressor[currentWeapon],
+          viewmodel: viewmodel || null,
+          weaponMesh: weaponMeshes[currentWeapon] || null,
+          camera
+        });
+      }
       // CL-327 (J86): the beams and the light again, now that this frame's view gun is placed (they lagged it a frame)
       if (viewmodel && viewmodel.info && viewmodel.info.active) { updateLasers(); updateFlashlight(); }
       // GB-300: the view gun clones mirror the world guns' parts, but the akimbo reload path
@@ -66342,7 +66368,7 @@ live++;
       if ((showPerf || INSPECT) && !window.TT) {
         window.TT = stampDebugHooks({
       graceActiveDbg: () => zombieGraceActive(), restartGraceDbg: () => { hoursSinceMatchStart = 0; },   // GB-51 (t76)
-      getSawHeat: () => ({ heat: sawHeat, overheat: sawOverheat, biteT: sawBiteT }), setSawHeatDbg: (v) => { sawHeat = v; sawOverheat = false; }, setMouseFireDbg: (v) => { mouseFireHeld = !!v; }, MELEE_SIZE_MUL, meleeSizeMul, WEAPON_STATS,   // GB-52
+      getSawHeat: () => ({ heat: sawHeat, overheat: sawOverheat, biteT: sawBiteT }), setSawHeatDbg: (v) => { sawHeat = v; sawOverheat = false; }, setMouseFireDbg: (v) => { mouseFireHeld = !!v; }, barrelHeat, getBarrelHeat: (k) => (barrelHeat ? barrelHeat.getHeat(k) : 0), setBarrelHeatDbg: (k, v) => { if (barrelHeat) barrelHeat.setHeat(k, v); }, MELEE_SIZE_MUL, meleeSizeMul, WEAPON_STATS,   // GB-52, AG-290
       getHitStumble: () => ({ ...hitStumble, speedK: hitStumbleSpeedK(), react: hitReaction.strength * Math.pow(hitReaction.time / hitReaction.duration, 2) }), HIT_KNEE_S, HIT_AIM_S,   // GB-50
           otsDbg: () => ({ on: OTS.on, w: OTS.w, yaw: OTS.yaw, pitch: OTS.pitch, locked: document.pointerLockElement === renderer.domElement, fov: aimFov, tilt: aimTiltDeg }),
           aimZoomDbg: () => ({ on: AIMZ.on, w: AIMZ.w, relX: AIMZ.relX, relZ: AIMZ.relZ, ndcX: AIMZ.ndcX, ndcY: AIMZ.ndcY, panX: AIMZ.appliedX, panZ: AIMZ.appliedZ, fov: camera.fov, baseFov: camFovCurrent, first: viewFirst }),   /* CL-247 */

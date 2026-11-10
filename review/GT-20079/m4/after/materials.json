@@ -1,0 +1,2468 @@
+{
+  "factory": {
+    "assembled": [
+      {
+        "part": "",
+        "material": "7fd31f4f-f105-454e-860b-ce704e01a0f3",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "material": "5c0bdb25-3ee3-4b9a-990c-9170de5ba1ca",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7634565,
+        "roughness": 0.52,
+        "metalness": 0.4
+      },
+      {
+        "part": "",
+        "material": "5c5c7a6b-8b8f-4a1f-9c38-d49233096ed9",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5263957,
+        "roughness": 0.41,
+        "metalness": 0.54
+      },
+      {
+        "part": "",
+        "material": "66032973-488b-4668-8646-d1160790a0a8",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "6c62622e-5330-4feb-a85e-b73e95aad008",
+        "role": "furniture",
+        "registered": true,
+        "map": null,
+        "color": 3618874,
+        "roughness": 0.83,
+        "metalness": 0.02
+      },
+      {
+        "part": "GW-4 rear collar",
+        "material": "02def1e3-85fb-4028-b783-e3a0514d4c20",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3093817,
+        "roughness": 0.61,
+        "metalness": 0.28
+      },
+      {
+        "part": "",
+        "material": "0b246e19-66a1-45e3-8be0-99d219ebe34b",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 4737873,
+        "roughness": 0.66,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "material": "3b20bc10-55b1-4a1e-903e-0981800dca30",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 6053992,
+        "roughness": 0.68,
+        "metalness": 0.06
+      },
+      {
+        "part": "",
+        "material": "052525b8-99f0-4804-b636-6e18e17d918e",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "material": "862e171a-9792-44ba-86c4-64b908d1aff2",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16724770,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "2d2f1c10-38b3-4f6c-915e-321969c70a22",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777113
+      },
+      {
+        "part": "",
+        "material": "7fc8a565-a2b3-4e97-94ba-5a858b699ae6",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16732497
+      },
+      {
+        "part": "",
+        "material": "31291f2e-6a93-4830-a19d-841eb408c18e",
+        "role": "suppressor shell",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "material": "c58d34be-3080-4924-9b9b-a9a30c3059e3",
+        "role": "suppressor shell",
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "moduleShell",
+        "material": "5f9e11dc-065e-4d63-bd81-1119595938a7",
+        "role": "light shell",
+        "registered": true,
+        "map": null,
+        "color": 3290167,
+        "roughness": 0.76,
+        "metalness": 0.03
+      },
+      {
+        "part": "topPlate",
+        "material": "4357332c-b674-46b1-a5cb-d431498072cb",
+        "role": "light shell",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "material": "557b0669-992e-4f97-99e4-001303477e93",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "material": "24f5bb41-4b0d-422d-8ddc-a4c26001a01b",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "material": "6c67710e-3c17-43f6-a599-62306faa1498",
+        "role": "receiver",
+        "registered": true,
+        "map": null,
+        "color": 4211271,
+        "roughness": 0.44,
+        "metalness": 0.5
+      },
+      {
+        "part": "",
+        "material": "fcdd55c2-7e4c-4dc3-a024-fac928d0b8fc",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "material": "7c4b02ff-e654-41ab-abd0-8ed84999626e",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "material": "f06dbc0d-73a6-400a-ab2a-86e9ecfdf3c6",
+        "role": "receiver",
+        "registered": true,
+        "map": null,
+        "color": 3158582,
+        "roughness": 0.53,
+        "metalness": 0.36
+      },
+      {
+        "part": "",
+        "material": "88103bd5-4bc3-4757-864c-ad3548eef9ed",
+        "role": "receiver",
+        "registered": true,
+        "map": null,
+        "color": 3093817,
+        "roughness": 0.61,
+        "metalness": 0.28
+      },
+      {
+        "part": "",
+        "material": "2e4e148f-d99f-489d-bc46-76f4557d52f0",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2829873,
+        "roughness": 0.42,
+        "metalness": 0.62
+      },
+      {
+        "part": "",
+        "material": "5ad31b7a-b743-44d4-8a72-60b9aab6333f",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 4869714,
+        "roughness": 0.35,
+        "metalness": 0.7
+      },
+      {
+        "part": "chamfered alloy clamp foot",
+        "material": "660d6fb6-fc3a-4a8e-b93c-1126b0e06105",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 3027508,
+        "roughness": 0.5,
+        "metalness": 0.55
+      },
+      {
+        "part": "painted riser",
+        "material": "b0d679dc-8016-4c04-a81d-8e95ac2f2800",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 2369578,
+        "roughness": 0.74,
+        "metalness": 0.05
+      },
+      {
+        "part": "rubber eyepiece",
+        "material": "a38c5ad5-e843-495b-bbad-91dcdaa1ecb4",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1514524,
+        "roughness": 0.9,
+        "metalness": 0
+      },
+      {
+        "part": "32 mm objective lens",
+        "material": "40cdf1c5-c58c-442b-8070-be05a2bb147c",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "rail clamp lip",
+        "material": "d736038a-0c2f-4b0f-8990-521118c2a09b",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7370362,
+        "roughness": 0.45,
+        "metalness": 0.7
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "material": "37852d76-ab46-492c-9cd5-2611c2be343b",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      },
+      {
+        "part": "",
+        "material": "1950219b-320b-4e24-845e-492ac57889b3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "7cd5609c-c383-4b6e-9483-f86153cb2091",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "firstPerson": [
+      {
+        "part": "",
+        "material": "87e7a7d0-a876-48b5-8241-f410b608a493",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685184,
+        "roughness": 0.69,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "material": "18fd750f-1d12-4a63-9659-16bd9814b7f7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7634565,
+        "roughness": 0.52,
+        "metalness": 0.4
+      },
+      {
+        "part": "",
+        "material": "6c427232-ebbb-499f-b8a8-c157674b2f4d",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5263957,
+        "roughness": 0.41,
+        "metalness": 0.54
+      },
+      {
+        "part": "",
+        "material": "dfab56cf-01e2-45d6-a0b7-2c06673f04ba",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "c0dae8c9-2306-4de2-bef8-a0f21fa04048",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3618874,
+        "roughness": 0.83,
+        "metalness": 0.02
+      },
+      {
+        "part": "GW-4 rear collar",
+        "material": "9ba70a58-47ba-4dd4-8a7c-83ddbf4e7543",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3093817,
+        "roughness": 0.61,
+        "metalness": 0.28
+      },
+      {
+        "part": "",
+        "material": "f6c28c8e-9469-462b-ae20-c127bbd16d3d",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7172472,
+        "roughness": 0.63,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "material": "e23abc7a-fca4-4242-992e-49bd18398db6",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 8751504,
+        "roughness": 0.61,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "material": "7925e4ed-525d-4034-9b4f-a87d454f522f",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "material": "1fe123cb-cd85-4b0b-8e07-bc7df263436e",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16724770,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "f9136ca2-336e-4337-8821-6278d695f920",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777113
+      },
+      {
+        "part": "",
+        "material": "9ce47a1c-f49d-4840-83bd-370502204e14",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685184,
+        "roughness": 0.69,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "material": "7f322159-5bdf-4dea-bd12-85c250461c10",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5659490,
+        "roughness": 0.58,
+        "metalness": 0.1
+      },
+      {
+        "part": "moduleShell",
+        "material": "d713cb7f-c477-4db4-b342-0f0e726c66a3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5264465,
+        "roughness": 0.84,
+        "metalness": 0.02
+      },
+      {
+        "part": "topPlate",
+        "material": "ae58e611-3f96-4e70-bbaf-d6473180a86c",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685184,
+        "roughness": 0.69,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "material": "df4fd163-66ea-4396-afe1-e9e9fe2f4251",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "material": "cd3f1d18-60f8-4837-92ba-f98e06cdd0cb",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685184,
+        "roughness": 0.69,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "material": "444935a0-8674-445a-98c3-fa6e48f5c632",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 4211271,
+        "roughness": 0.44,
+        "metalness": 0.5
+      },
+      {
+        "part": "",
+        "material": "caa39f39-918e-427f-a579-851f74ef73aa",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685184,
+        "roughness": 0.69,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "material": "bc7ee692-a1d3-4957-8f8d-47e2ddd7ea1f",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5659490,
+        "roughness": 0.58,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "material": "877a3e52-6d9c-4d1c-9351-ce4acd197806",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3158582,
+        "roughness": 0.53,
+        "metalness": 0.36
+      },
+      {
+        "part": "",
+        "material": "fda84a0c-1560-4992-9d98-870f8a0b3bc4",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3093817,
+        "roughness": 0.61,
+        "metalness": 0.28
+      },
+      {
+        "part": "",
+        "material": "c039081e-eef0-4a60-9d91-b7698d69c203",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2829873,
+        "roughness": 0.42,
+        "metalness": 0.62
+      },
+      {
+        "part": "",
+        "material": "fe11f6dd-3f37-4014-bdc3-9f30b8302079",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 4869714,
+        "roughness": 0.35,
+        "metalness": 0.7
+      },
+      {
+        "part": "chamfered alloy clamp foot",
+        "material": "c1844422-2d22-479c-9fe0-dc4707e20d51",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3027508,
+        "roughness": 0.5,
+        "metalness": 0.55
+      },
+      {
+        "part": "painted riser",
+        "material": "8e283c6c-869e-4fb4-a053-e72ed4a36ebe",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2369578,
+        "roughness": 0.74,
+        "metalness": 0.05
+      },
+      {
+        "part": "rubber eyepiece",
+        "material": "766bd56f-36cc-4eda-80f6-756efa83efff",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1514524,
+        "roughness": 0.9,
+        "metalness": 0
+      },
+      {
+        "part": "32 mm objective lens",
+        "material": "7f406b8d-72be-4dda-8634-8ca75657edb7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "rail clamp lip",
+        "material": "977fe12f-be1f-4b97-9bda-508bef260262",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7370362,
+        "roughness": 0.45,
+        "metalness": 0.7
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "material": "2c5c3e3a-a1a4-41a6-a261-89e92c383214",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      },
+      {
+        "part": "",
+        "material": "d1582d44-ee5e-4a6d-90a0-78e988265691",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "885fa1ee-2ce6-4443-9261-30df42ceb2d7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "magazine": [
+      {
+        "part": "",
+        "material": "66032973-488b-4668-8646-d1160790a0a8",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "light": [
+      {
+        "part": "moduleShell",
+        "material": "5f9e11dc-065e-4d63-bd81-1119595938a7",
+        "role": "light shell",
+        "registered": true,
+        "map": null,
+        "color": 3290167,
+        "roughness": 0.76,
+        "metalness": 0.03
+      },
+      {
+        "part": "topPlate",
+        "material": "4357332c-b674-46b1-a5cb-d431498072cb",
+        "role": "light shell",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "material": "557b0669-992e-4f97-99e4-001303477e93",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "material": "66032973-488b-4668-8646-d1160790a0a8",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "suppressor": [
+      {
+        "part": "",
+        "material": "31291f2e-6a93-4830-a19d-841eb408c18e",
+        "role": "suppressor shell",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "material": "c58d34be-3080-4924-9b9b-a9a30c3059e3",
+        "role": "suppressor shell",
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "material": "66032973-488b-4668-8646-d1160790a0a8",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "optic": [
+      {
+        "part": "chamfered alloy clamp foot",
+        "material": "660d6fb6-fc3a-4a8e-b93c-1126b0e06105",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 3027508,
+        "roughness": 0.5,
+        "metalness": 0.55
+      },
+      {
+        "part": "painted riser",
+        "material": "b0d679dc-8016-4c04-a81d-8e95ac2f2800",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 2369578,
+        "roughness": 0.74,
+        "metalness": 0.05
+      },
+      {
+        "part": "rubber eyepiece",
+        "material": "a38c5ad5-e843-495b-bbad-91dcdaa1ecb4",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1514524,
+        "roughness": 0.9,
+        "metalness": 0
+      },
+      {
+        "part": "32 mm objective lens",
+        "material": "40cdf1c5-c58c-442b-8070-be05a2bb147c",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "rail clamp lip",
+        "material": "d736038a-0c2f-4b0f-8990-521118c2a09b",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7370362,
+        "roughness": 0.45,
+        "metalness": 0.7
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "material": "37852d76-ab46-492c-9cd5-2611c2be343b",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      },
+      {
+        "part": "",
+        "material": "66032973-488b-4668-8646-d1160790a0a8",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "1950219b-320b-4e24-845e-492ac57889b3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "7cd5609c-c383-4b6e-9483-f86153cb2091",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ]
+  },
+  "camo": {
+    "assembled": [
+      {
+        "part": "",
+        "material": "7fd31f4f-f105-454e-860b-ce704e01a0f3",
+        "role": "optic shell",
+        "registered": true,
+        "map": "722fc3a7-a445-41ed-a02b-d4d4112e9403",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "5c0bdb25-3ee3-4b9a-990c-9170de5ba1ca",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7634565,
+        "roughness": 0.52,
+        "metalness": 0.4
+      },
+      {
+        "part": "",
+        "material": "5c5c7a6b-8b8f-4a1f-9c38-d49233096ed9",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5263957,
+        "roughness": 0.41,
+        "metalness": 0.54
+      },
+      {
+        "part": "",
+        "material": "66032973-488b-4668-8646-d1160790a0a8",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "6c62622e-5330-4feb-a85e-b73e95aad008",
+        "role": "furniture",
+        "registered": true,
+        "map": "722fc3a7-a445-41ed-a02b-d4d4112e9403",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "GW-4 rear collar",
+        "material": "02def1e3-85fb-4028-b783-e3a0514d4c20",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3093817,
+        "roughness": 0.61,
+        "metalness": 0.28
+      },
+      {
+        "part": "",
+        "material": "0b246e19-66a1-45e3-8be0-99d219ebe34b",
+        "role": "rail",
+        "registered": true,
+        "map": "722fc3a7-a445-41ed-a02b-d4d4112e9403",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "3b20bc10-55b1-4a1e-903e-0981800dca30",
+        "role": "rail",
+        "registered": true,
+        "map": "722fc3a7-a445-41ed-a02b-d4d4112e9403",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "052525b8-99f0-4804-b636-6e18e17d918e",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "material": "862e171a-9792-44ba-86c4-64b908d1aff2",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16724770,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "2d2f1c10-38b3-4f6c-915e-321969c70a22",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777113
+      },
+      {
+        "part": "",
+        "material": "7fc8a565-a2b3-4e97-94ba-5a858b699ae6",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16732497
+      },
+      {
+        "part": "",
+        "material": "31291f2e-6a93-4830-a19d-841eb408c18e",
+        "role": "suppressor shell",
+        "registered": true,
+        "map": "722fc3a7-a445-41ed-a02b-d4d4112e9403",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "c58d34be-3080-4924-9b9b-a9a30c3059e3",
+        "role": "suppressor shell",
+        "registered": true,
+        "map": "722fc3a7-a445-41ed-a02b-d4d4112e9403",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "moduleShell",
+        "material": "5f9e11dc-065e-4d63-bd81-1119595938a7",
+        "role": "light shell",
+        "registered": true,
+        "map": "722fc3a7-a445-41ed-a02b-d4d4112e9403",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "topPlate",
+        "material": "4357332c-b674-46b1-a5cb-d431498072cb",
+        "role": "light shell",
+        "registered": true,
+        "map": "722fc3a7-a445-41ed-a02b-d4d4112e9403",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "557b0669-992e-4f97-99e4-001303477e93",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "material": "24f5bb41-4b0d-422d-8ddc-a4c26001a01b",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "material": "6c67710e-3c17-43f6-a599-62306faa1498",
+        "role": "receiver",
+        "registered": true,
+        "map": "722fc3a7-a445-41ed-a02b-d4d4112e9403",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "fcdd55c2-7e4c-4dc3-a024-fac928d0b8fc",
+        "role": "rail",
+        "registered": true,
+        "map": "722fc3a7-a445-41ed-a02b-d4d4112e9403",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "7c4b02ff-e654-41ab-abd0-8ed84999626e",
+        "role": "rail",
+        "registered": true,
+        "map": "722fc3a7-a445-41ed-a02b-d4d4112e9403",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "f06dbc0d-73a6-400a-ab2a-86e9ecfdf3c6",
+        "role": "receiver",
+        "registered": true,
+        "map": "722fc3a7-a445-41ed-a02b-d4d4112e9403",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "88103bd5-4bc3-4757-864c-ad3548eef9ed",
+        "role": "receiver",
+        "registered": true,
+        "map": "722fc3a7-a445-41ed-a02b-d4d4112e9403",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "2e4e148f-d99f-489d-bc46-76f4557d52f0",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2829873,
+        "roughness": 0.42,
+        "metalness": 0.62
+      },
+      {
+        "part": "",
+        "material": "5ad31b7a-b743-44d4-8a72-60b9aab6333f",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 4869714,
+        "roughness": 0.35,
+        "metalness": 0.7
+      },
+      {
+        "part": "chamfered alloy clamp foot",
+        "material": "660d6fb6-fc3a-4a8e-b93c-1126b0e06105",
+        "role": "optic shell",
+        "registered": true,
+        "map": "722fc3a7-a445-41ed-a02b-d4d4112e9403",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "painted riser",
+        "material": "b0d679dc-8016-4c04-a81d-8e95ac2f2800",
+        "role": "optic shell",
+        "registered": true,
+        "map": "722fc3a7-a445-41ed-a02b-d4d4112e9403",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "rubber eyepiece",
+        "material": "a38c5ad5-e843-495b-bbad-91dcdaa1ecb4",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1514524,
+        "roughness": 0.9,
+        "metalness": 0
+      },
+      {
+        "part": "32 mm objective lens",
+        "material": "40cdf1c5-c58c-442b-8070-be05a2bb147c",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "rail clamp lip",
+        "material": "d736038a-0c2f-4b0f-8990-521118c2a09b",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7370362,
+        "roughness": 0.45,
+        "metalness": 0.7
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "material": "37852d76-ab46-492c-9cd5-2611c2be343b",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      },
+      {
+        "part": "",
+        "material": "1950219b-320b-4e24-845e-492ac57889b3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "7cd5609c-c383-4b6e-9483-f86153cb2091",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "firstPerson": [
+      {
+        "part": "",
+        "material": "47115c53-8234-490e-89e1-81cf747b6e85",
+        "role": null,
+        "registered": false,
+        "map": "722fc3a7-a445-41ed-a02b-d4d4112e9403",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "18fd750f-1d12-4a63-9659-16bd9814b7f7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7634565,
+        "roughness": 0.52,
+        "metalness": 0.4
+      },
+      {
+        "part": "",
+        "material": "6c427232-ebbb-499f-b8a8-c157674b2f4d",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5263957,
+        "roughness": 0.41,
+        "metalness": 0.54
+      },
+      {
+        "part": "",
+        "material": "dfab56cf-01e2-45d6-a0b7-2c06673f04ba",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "4cb18f21-25b7-414f-919c-f7e57aa43bfd",
+        "role": null,
+        "registered": false,
+        "map": "722fc3a7-a445-41ed-a02b-d4d4112e9403",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "GW-4 rear collar",
+        "material": "9ba70a58-47ba-4dd4-8a7c-83ddbf4e7543",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3093817,
+        "roughness": 0.61,
+        "metalness": 0.28
+      },
+      {
+        "part": "",
+        "material": "0283210d-f31d-4737-953c-5a0f18b27c4d",
+        "role": null,
+        "registered": false,
+        "map": "722fc3a7-a445-41ed-a02b-d4d4112e9403",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "20dd7bfe-3b45-4abe-86b4-0121cf8600b1",
+        "role": null,
+        "registered": false,
+        "map": "722fc3a7-a445-41ed-a02b-d4d4112e9403",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "7925e4ed-525d-4034-9b4f-a87d454f522f",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "material": "1fe123cb-cd85-4b0b-8e07-bc7df263436e",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16724770,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "f9136ca2-336e-4337-8821-6278d695f920",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777113
+      },
+      {
+        "part": "",
+        "material": "f23687b9-f68e-4ce8-88dc-4d06db1c5135",
+        "role": null,
+        "registered": false,
+        "map": "722fc3a7-a445-41ed-a02b-d4d4112e9403",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "866149c9-18b1-4489-addd-82d12dd2ab42",
+        "role": null,
+        "registered": false,
+        "map": "722fc3a7-a445-41ed-a02b-d4d4112e9403",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "moduleShell",
+        "material": "8a0b6751-dab5-4ed4-8766-baf8c9e17a87",
+        "role": null,
+        "registered": false,
+        "map": "722fc3a7-a445-41ed-a02b-d4d4112e9403",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "topPlate",
+        "material": "c46dc0a2-4743-499f-80ce-ebd088ec82bf",
+        "role": null,
+        "registered": false,
+        "map": "722fc3a7-a445-41ed-a02b-d4d4112e9403",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "df4fd163-66ea-4396-afe1-e9e9fe2f4251",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "material": "cd3f1d18-60f8-4837-92ba-f98e06cdd0cb",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685184,
+        "roughness": 0.69,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "material": "d87e6268-1a60-4c73-a953-93516e577d85",
+        "role": null,
+        "registered": false,
+        "map": "722fc3a7-a445-41ed-a02b-d4d4112e9403",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "ddf14e15-5339-417d-8f03-8a698dee7037",
+        "role": null,
+        "registered": false,
+        "map": "722fc3a7-a445-41ed-a02b-d4d4112e9403",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "810324b1-a431-4166-ae31-51c03fdffca9",
+        "role": null,
+        "registered": false,
+        "map": "722fc3a7-a445-41ed-a02b-d4d4112e9403",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "37e74677-7c37-4041-9072-bec01947bf53",
+        "role": null,
+        "registered": false,
+        "map": "722fc3a7-a445-41ed-a02b-d4d4112e9403",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "b2201382-cc27-41cf-80fd-ab7cda3057d9",
+        "role": null,
+        "registered": false,
+        "map": "722fc3a7-a445-41ed-a02b-d4d4112e9403",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "c039081e-eef0-4a60-9d91-b7698d69c203",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2829873,
+        "roughness": 0.42,
+        "metalness": 0.62
+      },
+      {
+        "part": "",
+        "material": "fe11f6dd-3f37-4014-bdc3-9f30b8302079",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 4869714,
+        "roughness": 0.35,
+        "metalness": 0.7
+      },
+      {
+        "part": "chamfered alloy clamp foot",
+        "material": "a8eca0a8-a06b-47e5-83ad-a311326c4ae6",
+        "role": null,
+        "registered": false,
+        "map": "722fc3a7-a445-41ed-a02b-d4d4112e9403",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "painted riser",
+        "material": "661d0cf6-7ce4-4c6f-9444-6d7cf41d7fd0",
+        "role": null,
+        "registered": false,
+        "map": "722fc3a7-a445-41ed-a02b-d4d4112e9403",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "rubber eyepiece",
+        "material": "766bd56f-36cc-4eda-80f6-756efa83efff",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1514524,
+        "roughness": 0.9,
+        "metalness": 0
+      },
+      {
+        "part": "32 mm objective lens",
+        "material": "7f406b8d-72be-4dda-8634-8ca75657edb7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "rail clamp lip",
+        "material": "977fe12f-be1f-4b97-9bda-508bef260262",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7370362,
+        "roughness": 0.45,
+        "metalness": 0.7
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "material": "2c5c3e3a-a1a4-41a6-a261-89e92c383214",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      },
+      {
+        "part": "",
+        "material": "d1582d44-ee5e-4a6d-90a0-78e988265691",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "885fa1ee-2ce6-4443-9261-30df42ceb2d7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "magazine": [
+      {
+        "part": "",
+        "material": "66032973-488b-4668-8646-d1160790a0a8",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "light": [
+      {
+        "part": "moduleShell",
+        "material": "5f9e11dc-065e-4d63-bd81-1119595938a7",
+        "role": "light shell",
+        "registered": true,
+        "map": "722fc3a7-a445-41ed-a02b-d4d4112e9403",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "topPlate",
+        "material": "4357332c-b674-46b1-a5cb-d431498072cb",
+        "role": "light shell",
+        "registered": true,
+        "map": "722fc3a7-a445-41ed-a02b-d4d4112e9403",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "557b0669-992e-4f97-99e4-001303477e93",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "material": "66032973-488b-4668-8646-d1160790a0a8",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "suppressor": [
+      {
+        "part": "",
+        "material": "31291f2e-6a93-4830-a19d-841eb408c18e",
+        "role": "suppressor shell",
+        "registered": true,
+        "map": "722fc3a7-a445-41ed-a02b-d4d4112e9403",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "c58d34be-3080-4924-9b9b-a9a30c3059e3",
+        "role": "suppressor shell",
+        "registered": true,
+        "map": "722fc3a7-a445-41ed-a02b-d4d4112e9403",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "66032973-488b-4668-8646-d1160790a0a8",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "optic": [
+      {
+        "part": "chamfered alloy clamp foot",
+        "material": "660d6fb6-fc3a-4a8e-b93c-1126b0e06105",
+        "role": "optic shell",
+        "registered": true,
+        "map": "722fc3a7-a445-41ed-a02b-d4d4112e9403",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "painted riser",
+        "material": "b0d679dc-8016-4c04-a81d-8e95ac2f2800",
+        "role": "optic shell",
+        "registered": true,
+        "map": "722fc3a7-a445-41ed-a02b-d4d4112e9403",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "rubber eyepiece",
+        "material": "a38c5ad5-e843-495b-bbad-91dcdaa1ecb4",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1514524,
+        "roughness": 0.9,
+        "metalness": 0
+      },
+      {
+        "part": "32 mm objective lens",
+        "material": "40cdf1c5-c58c-442b-8070-be05a2bb147c",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "rail clamp lip",
+        "material": "d736038a-0c2f-4b0f-8990-521118c2a09b",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7370362,
+        "roughness": 0.45,
+        "metalness": 0.7
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "material": "37852d76-ab46-492c-9cd5-2611c2be343b",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      },
+      {
+        "part": "",
+        "material": "66032973-488b-4668-8646-d1160790a0a8",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "1950219b-320b-4e24-845e-492ac57889b3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "7cd5609c-c383-4b6e-9483-f86153cb2091",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ]
+  },
+  "restored": {
+    "assembled": [
+      {
+        "part": "",
+        "material": "7fd31f4f-f105-454e-860b-ce704e01a0f3",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "material": "5c0bdb25-3ee3-4b9a-990c-9170de5ba1ca",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7634565,
+        "roughness": 0.52,
+        "metalness": 0.4
+      },
+      {
+        "part": "",
+        "material": "5c5c7a6b-8b8f-4a1f-9c38-d49233096ed9",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5263957,
+        "roughness": 0.41,
+        "metalness": 0.54
+      },
+      {
+        "part": "",
+        "material": "66032973-488b-4668-8646-d1160790a0a8",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "6c62622e-5330-4feb-a85e-b73e95aad008",
+        "role": "furniture",
+        "registered": true,
+        "map": null,
+        "color": 3618874,
+        "roughness": 0.83,
+        "metalness": 0.02
+      },
+      {
+        "part": "GW-4 rear collar",
+        "material": "02def1e3-85fb-4028-b783-e3a0514d4c20",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3093817,
+        "roughness": 0.61,
+        "metalness": 0.28
+      },
+      {
+        "part": "",
+        "material": "0b246e19-66a1-45e3-8be0-99d219ebe34b",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 4737873,
+        "roughness": 0.66,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "material": "3b20bc10-55b1-4a1e-903e-0981800dca30",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 6053992,
+        "roughness": 0.68,
+        "metalness": 0.06
+      },
+      {
+        "part": "",
+        "material": "052525b8-99f0-4804-b636-6e18e17d918e",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "material": "862e171a-9792-44ba-86c4-64b908d1aff2",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16724770,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "2d2f1c10-38b3-4f6c-915e-321969c70a22",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777113
+      },
+      {
+        "part": "",
+        "material": "7fc8a565-a2b3-4e97-94ba-5a858b699ae6",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16732497
+      },
+      {
+        "part": "",
+        "material": "31291f2e-6a93-4830-a19d-841eb408c18e",
+        "role": "suppressor shell",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "material": "c58d34be-3080-4924-9b9b-a9a30c3059e3",
+        "role": "suppressor shell",
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "moduleShell",
+        "material": "5f9e11dc-065e-4d63-bd81-1119595938a7",
+        "role": "light shell",
+        "registered": true,
+        "map": null,
+        "color": 3290167,
+        "roughness": 0.76,
+        "metalness": 0.03
+      },
+      {
+        "part": "topPlate",
+        "material": "4357332c-b674-46b1-a5cb-d431498072cb",
+        "role": "light shell",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "material": "557b0669-992e-4f97-99e4-001303477e93",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "material": "24f5bb41-4b0d-422d-8ddc-a4c26001a01b",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "material": "6c67710e-3c17-43f6-a599-62306faa1498",
+        "role": "receiver",
+        "registered": true,
+        "map": null,
+        "color": 4211271,
+        "roughness": 0.44,
+        "metalness": 0.5
+      },
+      {
+        "part": "",
+        "material": "fcdd55c2-7e4c-4dc3-a024-fac928d0b8fc",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "material": "7c4b02ff-e654-41ab-abd0-8ed84999626e",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "material": "f06dbc0d-73a6-400a-ab2a-86e9ecfdf3c6",
+        "role": "receiver",
+        "registered": true,
+        "map": null,
+        "color": 3158582,
+        "roughness": 0.53,
+        "metalness": 0.36
+      },
+      {
+        "part": "",
+        "material": "88103bd5-4bc3-4757-864c-ad3548eef9ed",
+        "role": "receiver",
+        "registered": true,
+        "map": null,
+        "color": 3093817,
+        "roughness": 0.61,
+        "metalness": 0.28
+      },
+      {
+        "part": "",
+        "material": "2e4e148f-d99f-489d-bc46-76f4557d52f0",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2829873,
+        "roughness": 0.42,
+        "metalness": 0.62
+      },
+      {
+        "part": "",
+        "material": "5ad31b7a-b743-44d4-8a72-60b9aab6333f",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 4869714,
+        "roughness": 0.35,
+        "metalness": 0.7
+      },
+      {
+        "part": "chamfered alloy clamp foot",
+        "material": "660d6fb6-fc3a-4a8e-b93c-1126b0e06105",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 3027508,
+        "roughness": 0.5,
+        "metalness": 0.55
+      },
+      {
+        "part": "painted riser",
+        "material": "b0d679dc-8016-4c04-a81d-8e95ac2f2800",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 2369578,
+        "roughness": 0.74,
+        "metalness": 0.05
+      },
+      {
+        "part": "rubber eyepiece",
+        "material": "a38c5ad5-e843-495b-bbad-91dcdaa1ecb4",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1514524,
+        "roughness": 0.9,
+        "metalness": 0
+      },
+      {
+        "part": "32 mm objective lens",
+        "material": "40cdf1c5-c58c-442b-8070-be05a2bb147c",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "rail clamp lip",
+        "material": "d736038a-0c2f-4b0f-8990-521118c2a09b",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7370362,
+        "roughness": 0.45,
+        "metalness": 0.7
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "material": "37852d76-ab46-492c-9cd5-2611c2be343b",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      },
+      {
+        "part": "",
+        "material": "1950219b-320b-4e24-845e-492ac57889b3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "7cd5609c-c383-4b6e-9483-f86153cb2091",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "firstPerson": [
+      {
+        "part": "",
+        "material": "00ac058e-a43c-47ff-9074-d17d1aa35798",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685184,
+        "roughness": 0.69,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "material": "18fd750f-1d12-4a63-9659-16bd9814b7f7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7634565,
+        "roughness": 0.52,
+        "metalness": 0.4
+      },
+      {
+        "part": "",
+        "material": "6c427232-ebbb-499f-b8a8-c157674b2f4d",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5263957,
+        "roughness": 0.41,
+        "metalness": 0.54
+      },
+      {
+        "part": "",
+        "material": "dfab56cf-01e2-45d6-a0b7-2c06673f04ba",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "186029f0-449c-49ab-a40c-637d26df5934",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3618874,
+        "roughness": 0.83,
+        "metalness": 0.02
+      },
+      {
+        "part": "GW-4 rear collar",
+        "material": "9ba70a58-47ba-4dd4-8a7c-83ddbf4e7543",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3093817,
+        "roughness": 0.61,
+        "metalness": 0.28
+      },
+      {
+        "part": "",
+        "material": "266c8a7d-d548-49fa-aa0c-a4831fadd36a",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7172472,
+        "roughness": 0.63,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "material": "b50d50de-cde5-4463-aabd-33da5bcedf51",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 8751504,
+        "roughness": 0.61,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "material": "7925e4ed-525d-4034-9b4f-a87d454f522f",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "material": "1fe123cb-cd85-4b0b-8e07-bc7df263436e",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16724770,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "f9136ca2-336e-4337-8821-6278d695f920",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777113
+      },
+      {
+        "part": "",
+        "material": "2ca870ff-3308-43c6-b164-9d650832b2e5",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685184,
+        "roughness": 0.69,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "material": "cc80e08f-5500-4907-ad4c-af3d03af16d7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5659490,
+        "roughness": 0.58,
+        "metalness": 0.1
+      },
+      {
+        "part": "moduleShell",
+        "material": "38e245b8-3a44-4f8e-9df8-bb0699e523bf",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5264465,
+        "roughness": 0.84,
+        "metalness": 0.02
+      },
+      {
+        "part": "topPlate",
+        "material": "5bdb7fb5-9060-4f5d-8921-fc9ec0ca574c",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685184,
+        "roughness": 0.69,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "material": "df4fd163-66ea-4396-afe1-e9e9fe2f4251",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "material": "cd3f1d18-60f8-4837-92ba-f98e06cdd0cb",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685184,
+        "roughness": 0.69,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "material": "a2ecc384-5f9f-4c66-ad79-fbbe89d5c0c8",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 4211271,
+        "roughness": 0.44,
+        "metalness": 0.5
+      },
+      {
+        "part": "",
+        "material": "809e3bb9-16cb-4a9c-85c5-8eba50c444fe",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685184,
+        "roughness": 0.69,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "material": "40296684-78cf-4d3a-b10d-56123974dc23",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5659490,
+        "roughness": 0.58,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "material": "f1b0af99-9449-48ce-8503-18b0b0b03267",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3158582,
+        "roughness": 0.53,
+        "metalness": 0.36
+      },
+      {
+        "part": "",
+        "material": "ba5b29d5-bf5a-4f86-8ba6-7fbedcd9de0b",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3093817,
+        "roughness": 0.61,
+        "metalness": 0.28
+      },
+      {
+        "part": "",
+        "material": "c039081e-eef0-4a60-9d91-b7698d69c203",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2829873,
+        "roughness": 0.42,
+        "metalness": 0.62
+      },
+      {
+        "part": "",
+        "material": "fe11f6dd-3f37-4014-bdc3-9f30b8302079",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 4869714,
+        "roughness": 0.35,
+        "metalness": 0.7
+      },
+      {
+        "part": "chamfered alloy clamp foot",
+        "material": "b05b7fa3-0814-4839-96c9-c02d220ccb13",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3027508,
+        "roughness": 0.5,
+        "metalness": 0.55
+      },
+      {
+        "part": "painted riser",
+        "material": "f4ccb970-3f94-4e2f-b26e-3131cf337f27",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2369578,
+        "roughness": 0.74,
+        "metalness": 0.05
+      },
+      {
+        "part": "rubber eyepiece",
+        "material": "766bd56f-36cc-4eda-80f6-756efa83efff",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1514524,
+        "roughness": 0.9,
+        "metalness": 0
+      },
+      {
+        "part": "32 mm objective lens",
+        "material": "7f406b8d-72be-4dda-8634-8ca75657edb7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "rail clamp lip",
+        "material": "977fe12f-be1f-4b97-9bda-508bef260262",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7370362,
+        "roughness": 0.45,
+        "metalness": 0.7
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "material": "2c5c3e3a-a1a4-41a6-a261-89e92c383214",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      },
+      {
+        "part": "",
+        "material": "d1582d44-ee5e-4a6d-90a0-78e988265691",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "885fa1ee-2ce6-4443-9261-30df42ceb2d7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "magazine": [
+      {
+        "part": "",
+        "material": "66032973-488b-4668-8646-d1160790a0a8",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "light": [
+      {
+        "part": "moduleShell",
+        "material": "5f9e11dc-065e-4d63-bd81-1119595938a7",
+        "role": "light shell",
+        "registered": true,
+        "map": null,
+        "color": 3290167,
+        "roughness": 0.76,
+        "metalness": 0.03
+      },
+      {
+        "part": "topPlate",
+        "material": "4357332c-b674-46b1-a5cb-d431498072cb",
+        "role": "light shell",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "material": "557b0669-992e-4f97-99e4-001303477e93",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "material": "66032973-488b-4668-8646-d1160790a0a8",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "suppressor": [
+      {
+        "part": "",
+        "material": "31291f2e-6a93-4830-a19d-841eb408c18e",
+        "role": "suppressor shell",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "material": "c58d34be-3080-4924-9b9b-a9a30c3059e3",
+        "role": "suppressor shell",
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "material": "66032973-488b-4668-8646-d1160790a0a8",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "optic": [
+      {
+        "part": "chamfered alloy clamp foot",
+        "material": "660d6fb6-fc3a-4a8e-b93c-1126b0e06105",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 3027508,
+        "roughness": 0.5,
+        "metalness": 0.55
+      },
+      {
+        "part": "painted riser",
+        "material": "b0d679dc-8016-4c04-a81d-8e95ac2f2800",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 2369578,
+        "roughness": 0.74,
+        "metalness": 0.05
+      },
+      {
+        "part": "rubber eyepiece",
+        "material": "a38c5ad5-e843-495b-bbad-91dcdaa1ecb4",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1514524,
+        "roughness": 0.9,
+        "metalness": 0
+      },
+      {
+        "part": "32 mm objective lens",
+        "material": "40cdf1c5-c58c-442b-8070-be05a2bb147c",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "rail clamp lip",
+        "material": "d736038a-0c2f-4b0f-8990-521118c2a09b",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7370362,
+        "roughness": 0.45,
+        "metalness": 0.7
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "material": "37852d76-ab46-492c-9cd5-2611c2be343b",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      },
+      {
+        "part": "",
+        "material": "66032973-488b-4668-8646-d1160790a0a8",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "1950219b-320b-4e24-845e-492ac57889b3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "7cd5609c-c383-4b6e-9483-f86153cb2091",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ]
+  }
+}

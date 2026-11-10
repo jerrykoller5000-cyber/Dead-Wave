@@ -1,6 +1,6 @@
 # AGENTS.md — how the Grave Shift crew works
 
-Every agent reads this first, every session: CLAUDE DIRECTOR (agent `claude`), Claude 2, Claude 3, Claude 1, ChatGPT, ChatGPT 2 and Antigravity
+Every agent reads this first, every session: CLAUDE DIRECTOR (agent `claude`), Claude 2, Claude 3, Claude 1, Claude 5, ChatGPT, ChatGPT 2 and Antigravity
 (Grokbot and Muse were retired by Jerry on 10 Nov 2026, D-134; Cursor the same day, D-137: Claude 2 took its lane).
 Jerry has the final say. Claude leads.
 
@@ -84,8 +84,8 @@ before the commit (or Claude). ChatGPT's runner does not get past Chrome: `CDP t
 in `tools/cdp.mjs`, even with one worker. That is his environment, not a failing check.
 He writes "not run" and whoever commits runs the suite for him at commit time.
 
-Agent names for the commands: `claude`, `claude2`, `claude3`, `claude4`, `chatgpt`, `chatgpt2`, `antigravity`.
-Task ids: `CL-`, `CB-`, `CC-`, `CD-`, `GP-`, `GT-`, `AG-` (`CU-`, `GB-` and `MU-` are retired, D-134, D-137).
+Agent names for the commands: `claude`, `claude2`, `claude3`, `claude4`, `claude5`, `chatgpt`, `chatgpt2`, `antigravity`.
+Task ids: `CL-`, `CB-`, `CC-`, `CD-`, `CE-`, `GP-`, `GT-`, `AG-` (`CU-`, `GB-` and `MU-` are retired, D-134, D-137).
 
 ## Who owns what
 
@@ -97,6 +97,7 @@ The current split (Jerry, 2026-10-15) is on the board under **Who owns what**; i
 | Claude 2 | Cursor's lane (D-137): integration, tools and the game-test queue, the full suite (in its cloud), engine core, combat; direct fixes from Jerry that Claude routes to it. No git (rule 6) | the `index.html` shell, `core/*`, `tools/*`, `vendor/*`, `package.json`, `combat/*` (not the zombie looks) |
 | Claude 3 | The heavy model work in Claude's lane (D-141): the marine's third-person body and fabric, his head and face. No git (rule 6) | `studio/marine-body.js`, `studio/marine-cloth.js`, `studio/marine-hats.js`, `ui/marine-face.js` |
 | Claude 1 (agent `claude4`) | The hands and the first person (D-145): the hand, its contacts and grips, the arms in first person, the viewmodel and its fits. No git (rule 6) | `studio/marine-hand.js`, `studio/hand-contacts.js`, `studio/fp-arms.js`, `game/viewmodel*.js`, `tools/handfit/` |
+| Claude 5 (agent `claude5`) | The first person's motion (D-151): the trigger, the controls, the actions, the reloads and the ammo change, unarmed and the other actions. No git (rule 6) | `game/viewmodel.js` (its motion sections), `game/viewmodel-poses.js` |
 | ChatGPT | Every zombie's look; the marine's fitted helpers and waist (the head and balaclava: Claude 3, D-141); what the player reads and decides | `studio/zombie-*.js`, `combat/demon-visual.js`, `combat/zombie-joins.js`, `ui/*`, `game/*` |
 | ChatGPT 2 | Every weapon (D-142): the models from their manuals, the optics and attachments; WEAPON_HOLD/VM_SOCKETS when a grip or sight moves. No git (rule 6) | `studio/weapon-*.js`, `studio/frag-grenade.js`, `studio/weapon-optics.js` |
 | Antigravity | The look of buildables and props; eyes on Jerry's GPU (screenshots and reports) | `index.html` (build meshes), `qa/*` |
@@ -211,6 +212,8 @@ card in `crew/status/`, appends to `crew/LOG.md`, and writes their own handoff n
       instance at a time and logs those runs. Every test on Jerry's PC, Claude's included, goes through the queue.
     - Record the rule in your handoff notes.
 
+16b. **No ammo types on full-auto weapons** (Jerry, 10 Nov 2026, J134, standing, D-150). A gun that can fire full-auto (the pistol with its auto sear included) has one ammo and X is its fire selector; ammo types go only on guns that never fire full-auto, where X changes the ammo.
+
 17. **The world and quest rules** (Jerry, 2026-10-24, D-88). Before you place, move, scale or build anything in the
     world, read `docs/world-design.md` (the placement and transition sweeps, the 15 rules of spatial world design, the
     look). Before you design or change a quest, a day mission or a story beat, read `docs/quest-design.md` and answer
@@ -261,7 +264,7 @@ card in `crew/status/`, appends to `crew/LOG.md`, and writes their own handoff n
 Four agents, each good at something different. The board gives each one tasks that fit.
 The roadmap to 1.0 (`crew/BOARD.md` and `docs/roadmap.md`, D-43) is laid out that way: the board's "Who
 does what" says what to give each agent and what to keep away from it.
-- **Claude 2, Claude 3, Claude 1, ChatGPT and ChatGPT 2** take the big, cross-cutting work inside
+- **Claude 2, Claude 3, Claude 1, Claude 5, ChatGPT and ChatGPT 2** take the big, cross-cutting work inside
   `index.html` and their modules.
 - **Antigravity** can see: it runs the game in a real browser on a real GPU. Every visible
   change goes through it: the pit, the cave warnings, the loading screen, the build aiming.

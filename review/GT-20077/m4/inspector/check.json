@@ -1,0 +1,20 @@
+{
+ "at": "2026-11-10T22:42:07.038Z",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "results": [
+  {
+   "id": "weapon.m4",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 151,
+   "tris": 17512,
+   "size": [
+    0.071,
+    0.302,
+    1.043
+   ],
+   "error": null
+  }
+ ]
+}

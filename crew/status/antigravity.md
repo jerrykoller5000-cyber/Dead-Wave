@@ -1,13 +1,13 @@
 # Antigravity
 
-state: active
+state: idle
 model: Gemini 4 Carbon
-task: AG-289 Fix Training Ground props (Finds 2,4-8), flashlight hotspot cap, tag289 part-on-part check & RTX 5080 before/after sheet
-touching: world/training.js, world/training-props.js, world/training-wear.js, world/training-build-wear.js, index.html (flashlight), tools/tests/tag289.js (new), review/AG-289/
-since: 2026-11-10T21:52Z
+task: —
+touching: —
+since: 2026-11-10T23:25Z
 next: AG-286 J126 rule 2: the hands on the guns, at the eye, on the RTX 5
 blocked-on: —
-last-report: handoffs/2026-11-10-antigravity-AG-288.md
+last-report: handoffs/2026-11-10-antigravity-AG-290.md
 
 ## Notes
 

@@ -1,0 +1,8 @@
+{
+  "id": "m4",
+  "phase": "riser",
+  "swatch": "m81",
+  "failures": [
+    "firstPerson did not restore the exact material instances and properties"
+  ]
+}
