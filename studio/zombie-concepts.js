@@ -188,9 +188,9 @@ function stripMeshes(root, keep = new Set()) {
   for(const o of dead)o.removeFromParent();
 }
 
-export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox}) {
+export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox,audit=null}) {
   if(!CONCEPT_TYPES.includes(k))return false;
-  const cacheKey=k+':'+s;if(restore(T,g,cacheKey,k)){mergeEyes(T,g);return true;}
+  const cacheKey=k+':'+s;if(!audit&&restore(T,g,cacheKey,k)){mergeEyes(T,g);return true;}
   const u=g.userData, {hips,torso,head,armLG,armRG,legLG,legRG}=u;
   const A=sculpt(T,s,rbox),{mat,egg,rock,box,rod,path,spike,rag,loft,plate,ribbon}=A;
   stripMeshes(g,new Set(u.eyes));
@@ -264,7 +264,7 @@ export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox}) {
     else for(let f=0;f<3;f++)spike(shin,hair,[(f-1)*.055,-.37,.15],[(f-1)*.065,-.395,.245],.021);
     if(legcloth)for(let j=0;j<3;j++){
       const fittedHem=k==='shambler'||k==='feral';
-      rag(leg,cloth,(j-1)*.052,-.23,fittedHem?.074:.104,fittedHem?.056:.064,fittedHem?.08+(j%2)*.025:.1+(j%2)*.05,(j-1)*.15);
+      rag(leg,cloth,(j-1)*.052,-.23,fittedHem?.11:.104,fittedHem?.056:.064,fittedHem?.08+(j%2)*.025:.1+(j%2)*.05,(j-1)*.15);
     }
     // Torn muscle and mottling: surface chips, not floating decals.
     egg(arm,shadow,side*.042,-.16,.069*muscle,.05,.14,.018,-side*.35);
@@ -400,17 +400,17 @@ export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox}) {
       box(torso,camDark,side*.206,.08,.139,.081,.16,.075,side*.13);
       box(torso,steel,side*.185,.34,vestFront(.185,.34)+.02,.063,.048,.02);
       box(leg,olive,side*.105,-.135,.005,.06,.14,.14);
-      const el=arm.userData.elbowG;egg(el,leather,0,-.365,.025,.12,.11,.075);box(el,camDark,0,-.33,.035,.12,.025,.07);
+      const el=arm.userData.elbowG;egg(el,leather,0,-.365,.085,.12,.11,.075);box(el,camDark,0,-.33,.107,.12,.025,.07);
       for(let j=0;j<2;j++)path(shin,camLight,[[-.052,-.24-j*.037,.09],[.050,-.25-j*.037,.093]],.005);
     }
     box(torso,olive,0,.3,.177,.36,.21,.06);
     // Seat the radio pack into the rounded back instead of leaving a side-view gap.
     box(torso,olive,0,.25,-.185,.36,.4,.14);
     box(torso,camDark,.14,.44,-.18,.1,.12,.075);rod(torso,hair,[.14,.48,-.18],[.14,.82,-.19],.01,.006);
-    for(let i=0;i<3;i++)box(torso,camLight,0,.235+i*.027,.216,.30,.009,.009);
+    for(let i=0;i<3;i++)box(torso,camLight,0,.235+i*.027,.211,.30,.009,.009);
     for(let i=0;i<3;i++){const x=(i-1)*.12,y=.10;rock(torso,i%2?camDark:camLight,x,y,-.26,.13,.073,.012,i*.5);}
     box(torso,camLight,-.076,.357,.221,.10,.046,.013);box(torso,wound,-.059,.349,.230,.041,.014,.006);
-    box(torso,hair,.123,.382,.220,.067,.104,.030);for(let j=0;j<3;j++)box(torso,steel,.123,.406-j*.019,.240,.04,.005,.008);
+    box(torso,hair,.123,.382,.220,.067,.104,.030);for(let j=0;j<3;j++)box(torso,steel,.123,.406-j*.019,.239,.04,.005,.008);
     path(torso,hair,[[.123,.43,.215],[.21,.455,.14],[.22,.37,.0],[.15,.46,-.21]],.009);
   }
   if(acid){
@@ -436,7 +436,7 @@ export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox}) {
     }
     if(k==='spitter'){
       for(const side of [-1,1])ribbon(torso,cloth,[[side*.22,.46,.11],[side*.26,.35,.15],[side*.27,.24,.18],[side*.27,.11,.17],[side*.25,.04,.15]],.047);
-      const vestBack=A.plate(torso,cloth,[[.10,.15,.16,.04],[.25,.235,.20,.085],[.42,.21,.17,.07]],.014);
+      const vestBack=A.plate(torso,cloth,[[.10,.15,.29,.04],[.25,.235,.32,.085],[.42,.21,.29,.07]],.014);
       vestBack.rotation.y=Math.PI;
       for(const side of [-1,1])path(torso,wound,[[side*.06,.43,.13],[side*.16,.39,.19],[side*.24,.27,.18]],.025);
       // End the chin drips against the upper chest rather than spanning its throat hollow.
@@ -446,7 +446,7 @@ export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox}) {
       // The existing fuse animation drives a belly material and a separate vein material.
       acidMat.emissive.setHex(0x758c21);acidMat.emissiveIntensity=.3;u.pulseMats=[acidMat,ooze];
       for(let i=0;i<8;i++){
-        const side=i%2?1:-1,sz=.15+(i%3)*.065;egg(torso,shadow,side*(.13+(i%3)*.09),.35+Math.floor(i/2)*.055,-.20,sz+.027,sz+.04,sz+.03);egg(torso,sac,side*(.13+(i%3)*.09),.37+Math.floor(i/2)*.055,-.22,sz,sz*1.08,sz);egg(torso,acidMat,side*(.13+(i%3)*.09),.42+Math.floor(i/2)*.055,-.26,sz*.58,sz*.45,sz*.58);
+        const side=i%2?1:-1,sz=.15+(i%3)*.065;egg(torso,shadow,side*(.13+(i%3)*.09),.35+Math.floor(i/2)*.055,-.20,sz+.027,sz+.04,sz+.03);egg(torso,sac,side*(.13+(i%3)*.09),.37+Math.floor(i/2)*.055,-.22,sz,sz*1.08,sz);egg(torso,acidMat,side*(.13+(i%3)*.09),.42+Math.floor(i/2)*.055,-.31,sz*.58,sz*.45,sz*.58);
       }
       for(const side of [-1,1]){
         const fissure=[[side*.08,.39],[side*.13,.27],[side*.08,.15],[side*.2,.03],[side*.16,-.12]].map(([x,y])=>[x,y,bellyZ(x,y)+.01]);path(torso,wound,fissure,.020);path(torso,ooze,fissure.map(([x,y,z])=>[x,y,z+.009]),.008);
@@ -470,7 +470,7 @@ export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox}) {
       path(p,moss,[[x,y,z],[x+side*.025,y-.16,z-.025],[x-side*.028,y-.34-(i%3)*.08,z-.035]],.017);
     }
     for(let i=0;i<8;i++){
-      const p=i<4?armLG:head,x=i<4?-.07:(i-5)*.045,y=i<4?-.05-(i%4)*.047:.09,z=i<4?.08:-.14;
+      const p=i<4?armLG:head,x=i<4?-.07:(i-5)*.045,y=i<4?-.05-(i%4)*.047:.09,z=i<4?.08:(i===5?-.19:-.17);
       const b=A.put(p,new T.CylinderGeometry(.018*s,.027*s,.023*s,6),pale,x,y,z,Math.PI/2);
       egg(p,hair,x,y,z+.015,.017,.017,.009);
     }
@@ -587,6 +587,7 @@ export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox}) {
     const belly=u.pulseMats[0];Object.assign(belly,detailMaterial(T));
     g.traverse(o=>{if(o.isMesh&&o.material===belly)o.geometry.setAttribute('uv',new T.Float32BufferAttribute(detailUV(T,o.geometry,'wet'),2));});
   }
+  if(audit) audit({type:k,root:g}); // Inspect separate parts before draw-call batching hides their seams.
   batchGlow(T,g);
   const keep=new Set([...u.eyes.map(e=>e.material),...A.mats.filter(m=>m.emissive.getHex()!==0)]);
   batchSurfaces(T,g,keep);u.bodyMats=g.userData.mats.filter(m=>!keep.has(m));
@@ -673,7 +674,7 @@ function buildSpider(A,T,g,s){
   path(head,edge,[[-.14,.075,.09],[-.07,.10,.136],[.07,.10,.136],[.14,.075,.09]],.017);
   egg(head,joint,0,-.075,.139,.19,.065,.043);
   for(const side of [-1,1]){
-    egg(head,pink,side*.041,-.014,.174,.034,.027,.014);
+    egg(head,pink,side*.041,-.014,.170,.034,.027,.014);
     rock(head,edge,side*.137,-.025,.065,.14,.16,.17,side*.3);
     path(head,shell,[[side*.10,-.064,.155],[side*.15,-.14,.196],[side*.11,-.205,.24]],.037);
     A.sweep(head,claw,[[side*.11,-.205,.24],[side*.055,-.19,.29],[side*.037,-.12,.28]],.024,0);
@@ -701,10 +702,11 @@ function buildSpider(A,T,g,s){
 }
 
 // Same pose/IK skeleton; two deliberately different surface designs.
-export function applyGuardianConcept({THREE:T,g,rbox,kind='caveguard'}){
+export function applyGuardianConcept({THREE:T,g,rbox,kind='caveguard',audit=null}){
   const A=sculpt(T,1,rbox);stripMeshes(g);
   const eye=sculptGuardian(A,T,g,kind);
   g.userData.mats=A.mats;g.userData.concept={version:2,type:kind};
+  if(audit) audit({type:kind,root:g});
   batchSurfaces(T,g,new Set([eye]));
   // Same articulated skeleton, with shared deformation at shoulders, wrists and fingers.
   const merged=skinMergeGroup(T,g,{keep:new Set([eye]),name:'guardian-skin'});

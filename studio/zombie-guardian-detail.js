@@ -109,7 +109,7 @@ export function sculptGuardian(A,T,g,kind){
       }
     }
     const peak=(cave?.36:.29)+i*.085;
-    rock(p,plate,0,y+.025,.07,.22,.17,.29,-.06);
+    rock(p,plate,0,y+(i===2?.09:.025),.07,.22,.17,.29,-.06);
     rod(p,plate,[0,y,.05],[.025,y+peak*.59,-.06],cave?.112:.090,cave?.071:.048,7);
     spike(p,cave?edge:plate,[.025,y+peak*.55,-.05],[.035,y+peak,-.19],cave?.076:.052);
     if(cave&&i>1)spike(p,plate,[.17,y,.04],[.20,y+peak*.69,-.01],.076);
@@ -146,7 +146,7 @@ export function sculptGuardian(A,T,g,kind){
       path(R.head,skin,[[side*.20,-.015,.31],[side*.21,-.09,.54],[side*.175,-.09,.82]],.035);
       path(R.head,tendon,[[side*.26,.08,.15],[side*.25,-.07,.34],[side*.18,-.14,.50]],.034);
       rock(R.head,plate,side*.24,.185,.10,.23,.12,.34,-side*.3);
-      weed(R.head,side*.26,.11,.20,.26,side);
+      weed(R.head,side*.32,.11,.20,.26,side);
     }
     // Dark inset panel beneath the four sensor lights, framed by an ivory brow.
     box(R.head,shadow,0,.09,.427,.39,.10,.034);
@@ -184,7 +184,7 @@ export function sculptGuardian(A,T,g,kind){
   for(const side of [-1,1]){
     const x=side*(cave?.148:.18),z=cave?.42:.448,y=cave?.067:.160;
     egg(R.head,shadow,x,y,z-.012,.146,.113,.045);
-    const e=egg(R.head,eye,x,y,z+.022,cave?.081:.075,.063,.038);
+    const e=egg(R.head,eye,x,y,z+(cave?.022:.019),cave?.081:.075,.063,.038);
     e.castShadow=false;R.eyes.push(e);
     if(!cave){
       egg(R.head,shadow,side*.080,.222,.439,.076,.069,.035);
@@ -296,14 +296,14 @@ export function sculptGuardian(A,T,g,kind){
         wrapPlate(kn,plate,-.28,a,.114,.12,.19,.34,.082,side*.12);
       }
       cords(hip,0,-.10,-.15,.61,3,.030,side);
-      cords(kn,0,-.04,-.10,.57,3,.024,-side);
+      cords(kn,0,-.04,-.18,.57,3,.024,-side);
       weed(hip,side*.11,-.15,-.085,.43,side);
     }else{
-      egg(hip,plate,side*.02,-.24,.15,.235,.42,.105,-side*.18);
+      egg(hip,plate,side*.02,-.24,.27,.235,.42,.105,-side*.18);
       rock(hip,edge,-side*.11,-.28,-.13,.20,.39,.12,side*.15);
-      path(kn,plate,[[side*.095,-.09,-.07],[side*.10,-.33,-.09],[side*.05,-.58,-.04]],.027);
+      path(kn,plate,[[side*.095,-.09,-.135],[side*.10,-.33,-.155],[side*.05,-.58,-.105]],.027);
       path(kn,edge,[[0,-.10,.11],[.02,-.32,.13],[0,-.61,.071]],.031);
-      path(hip,tendon,[[side*.12,-.10,.105],[side*.13,-.41,.11],[side*.06,-.70,.07]],.024);
+      path(hip,tendon,[[side*.205,-.10,.105],[side*.22,-.41,.11],[side*.18,-.70,.07]],.024);
     }
     // Ankle socket tapers into the broad planted foot and embedded talon roots.
     loft(ank,skin,[[.10,.094,.095],[.015,.112,.14,.06],[-.055,.14,.21,.13],[-.115,.10,.16,.13]],12);

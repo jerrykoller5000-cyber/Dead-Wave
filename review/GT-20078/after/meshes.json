@@ -1,0 +1,271 @@
+{
+  "minigun": {
+    "intersections": {
+      "r glove": [
+        {
+          "name": "BufferGeometry",
+          "source": "studio/weapon-heavy.js:173",
+          "depthLocal": 0.01642658815450857
+        }
+      ],
+      "r glovePads": [
+        {
+          "name": "BufferGeometry",
+          "source": "studio/weapon-heavy.js:210",
+          "depthLocal": 0.003305036686535997
+        }
+      ]
+    },
+    "light": [
+      0.1295,
+      0.0462,
+      0.1176
+    ],
+    "rootScale": 0.88,
+    "assembly": {
+      "pieces": 182,
+      "loose": [],
+      "overlaps": 217
+    }
+  },
+  "launcher": {
+    "intersections": {
+      "r glove": [
+        {
+          "name": "BufferGeometry",
+          "source": "studio/weapon-heavy.js:372",
+          "depthLocal": 0.025411061866449813
+        }
+      ],
+      "r glovePads": [
+        {
+          "name": "BufferGeometry",
+          "source": "studio/weapon-heavy.js:372",
+          "depthLocal": 0.02022625877653554
+        }
+      ],
+      "l glove": [
+        {
+          "name": "BufferGeometry",
+          "source": "studio/weapon-heavy.js:483",
+          "depthLocal": 0.0006538172719638794
+        }
+      ]
+    },
+    "light": [
+      0.112,
+      0.04,
+      0.55
+    ],
+    "rootScale": 0.6978001833180568,
+    "assembly": {
+      "pieces": 239,
+      "loose": [],
+      "overlaps": 241
+    }
+  },
+  "uzi": {
+    "intersections": {
+      "r glove": [
+        {
+          "name": "BufferGeometry",
+          "source": "studio/weapon-sidearms.js:644",
+          "depthLocal": 0.009423389397266387
+        }
+      ]
+    },
+    "light": [
+      0,
+      -0.036,
+      0.277
+    ],
+    "rootScale": 0.6547558922558921,
+    "assembly": {
+      "pieces": 198,
+      "loose": [],
+      "overlaps": 207
+    },
+    "lightToForeEnd": {
+      "lowerMm": 0,
+      "upperMm": 0.0078125
+    },
+    "foreEndFloor": [
+      [
+        0.23,
+        -0.013977273014674219
+      ],
+      [
+        0.25,
+        -0.014431818546188357
+      ],
+      [
+        0.27,
+        -0.014886364077702607
+      ],
+      [
+        0.29,
+        -0.01534090960921708
+      ],
+      [
+        0.31,
+        -0.015795455140731218
+      ],
+      [
+        0.33,
+        -0.010866664359964417
+      ],
+      [
+        0.345,
+        null
+      ]
+    ],
+    "support": [
+      [
+        "railClamp",
+        -0.014088181849300859,
+        {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        }
+      ],
+      [
+        "moduleShell",
+        -0.019080000579357145,
+        {
+          "lowerMm": 2.015625,
+          "upperMm": 2.0234375
+        }
+      ],
+      [
+        "coverSeam",
+        -0.020433600005525347,
+        {
+          "lowerMm": 2.953125,
+          "upperMm": 2.9609375
+        }
+      ],
+      [
+        "lightBezelWall",
+        -0.023018976062536237,
+        {
+          "lowerMm": 5.187499999999999,
+          "upperMm": 5.195312499999999
+        }
+      ],
+      [
+        "lightBezel",
+        -0.023018976062536237,
+        {
+          "lowerMm": 6.0078125,
+          "upperMm": 6.015625
+        }
+      ],
+      [
+        "lightBezelSeat",
+        -0.023018976062536237,
+        {
+          "lowerMm": 5.609375,
+          "upperMm": 5.6171875
+        }
+      ],
+      [
+        "lightCavity",
+        -0.026524800270795817,
+        {
+          "lowerMm": 7.609375,
+          "upperMm": 7.6171875
+        }
+      ],
+      [
+        "lightLens",
+        -0.027377567723393437,
+        {
+          "lowerMm": 8.296875,
+          "upperMm": 8.304687500000002
+        }
+      ],
+      [
+        "laserBezelWall",
+        -0.02997309578955173,
+        {
+          "lowerMm": 9.460937500000002,
+          "upperMm": 9.468750000000002
+        }
+      ],
+      [
+        "laserBezel",
+        -0.02997309578955173,
+        {
+          "lowerMm": 10.132812499999998,
+          "upperMm": 10.140624999999998
+        }
+      ],
+      [
+        "laserBezelSeat",
+        -0.02997309578955173,
+        {
+          "lowerMm": 9.765625000000002,
+          "upperMm": 9.773437500000002
+        }
+      ],
+      [
+        "laserCavity",
+        -0.03160080002993345,
+        {
+          "lowerMm": 10.7109375,
+          "upperMm": 10.71875
+        }
+      ],
+      [
+        "laserLens",
+        -0.03199672794342041,
+        {
+          "lowerMm": 11.09375,
+          "upperMm": 11.101562499999998
+        }
+      ],
+      [
+        "BufferGeometry",
+        -0.01601999984443187,
+        {
+          "lowerMm": 0.14843750000000003,
+          "upperMm": 0.15625
+        }
+      ],
+      [
+        "BufferGeometry",
+        -0.016020000278949734,
+        {
+          "lowerMm": 0.6640624999999999,
+          "upperMm": 0.671875
+        }
+      ],
+      [
+        "BufferGeometry",
+        -0.016020000278949734,
+        {
+          "lowerMm": 0.390625,
+          "upperMm": 0.39843750000000006
+        }
+      ],
+      [
+        "BufferGeometry",
+        -0.016020000278949734,
+        {
+          "lowerMm": 0.109375,
+          "upperMm": 0.1171875
+        }
+      ],
+      [
+        "BufferGeometry",
+        -0.016020000278949734,
+        {
+          "lowerMm": 2.703125,
+          "upperMm": 2.7109375
+        }
+      ]
+    ],
+    "lightLensError": 0,
+    "laserLensError": 0
+  }
+}

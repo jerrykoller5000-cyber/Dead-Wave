@@ -1,0 +1,18 @@
+minigun
+PASS guns checked up in first person: 1 of 1
+FAIL no part of either hand inside any part of a gun (deepest per gun, mm: minigun 14.5); through: minigun: 14.5 mm (r glove in ?)
+PASS neither hand through the other (D-140)
+PASS the gloved wrists stay inside the sleeves at every gun's hip hold
+
+launcher
+PASS guns checked up in first person: 1 of 1
+FAIL no part of either hand inside any part of a gun (deepest per gun, mm: launcher 17.7); through: launcher: 17.7 mm (r glove in ?)
+PASS neither hand through the other (D-140)
+PASS the gloved wrists stay inside the sleeves at every gun's hip hold
+
+uzi
+INFO uzi the hands into each other: 0.0 mm
+PASS guns checked up in first person: 1 of 1
+FAIL no part of either hand inside any part of a gun (deepest per gun, mm: uzi 6.0); through: uzi: 6.0 mm (r glove in ?)
+PASS neither hand through the other (D-140)
+PASS the gloved wrists stay inside the sleeves at every gun's hip hold

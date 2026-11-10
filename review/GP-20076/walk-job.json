@@ -1,0 +1,76 @@
+{
+  "shots": [
+    {
+      "target": "zombie.shambler:walk",
+      "view": "side",
+      "time": "noon"
+    },
+    {
+      "target": "zombie.feral:walk",
+      "view": "side",
+      "time": "noon"
+    },
+    {
+      "target": "zombie.leaper:walk",
+      "view": "side",
+      "time": "noon"
+    },
+    {
+      "target": "zombie.spider:walk",
+      "view": "side",
+      "time": "noon"
+    },
+    {
+      "target": "zombie.drowned:walk",
+      "view": "side",
+      "time": "noon"
+    },
+    {
+      "target": "zombie.military:walk",
+      "view": "side",
+      "time": "noon"
+    },
+    {
+      "target": "zombie.brute:walk",
+      "view": "side",
+      "time": "noon"
+    },
+    {
+      "target": "zombie.spitter:walk",
+      "view": "side",
+      "time": "noon"
+    },
+    {
+      "target": "zombie.screamer:walk",
+      "view": "side",
+      "time": "noon"
+    },
+    {
+      "target": "zombie.bomber:walk",
+      "view": "side",
+      "time": "noon"
+    },
+    {
+      "target": "zombie.demon:walk",
+      "view": "side",
+      "time": "noon"
+    },
+    {
+      "target": "zombie.colossus:walk",
+      "view": "side",
+      "time": "noon"
+    },
+    {
+      "target": "zombie.guardian:walk",
+      "view": "side",
+      "time": "noon"
+    },
+    {
+      "target": "zombie.caveguard:walk",
+      "view": "side",
+      "time": "noon"
+    }
+  ],
+  "out": "review/GP-20076/walk/",
+  "cols": 7
+}

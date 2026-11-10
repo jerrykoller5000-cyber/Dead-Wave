@@ -119,18 +119,29 @@ function launcherDrum(T) {
 }
 
 export function makeMinigunModel(ctx) {
-  const { THREE, gunKit, gunArc, gunBand, gunEffects, finishGun, gunBody, gunDark, gunMid, gunAccent, gunPoly, gunRubber, brassMat, gunOlive, fuelRedMat, glassMat, sightDotMat } = ctx;
+  const { THREE, gunKit, gunArc, gunBand, gunEffects, finishGun, gunBody, gunDark, gunMid, gunAccent, gunPoly, gunRubber, gunOlive, fuelRedMat, glassMat, sightDotMat } = ctx;
   const gun = new THREE.Group();
   const K = gunKit(gun);
   // Housing: one moulded body with a round back end, bolted side plates, cooling slots, the hub showing.
-  K.slab([[0.225, -0.13], [0.225, 0.13], ...gunArc(-0.32, 0, 0.13, Math.PI / 2, Math.PI * 1.5, 10)], 0.28, gunBody, { bevel: 0.035, segs: 3 });
+  // Ease the rear shell between its original top and bottom attachment points.
+  // The posed glove pad reaches this face; the separate rear handle stays in its socket.
+  const rearShell=gunArc(-.32,0,.13,Math.PI/2,Math.PI*1.5,10).map(([z,y])=>[
+    z+.012*(1-(y/.13)**2),y
+  ]);
+  K.slab([[.225,-.13],[.225,.13],...rearShell],.28,gunBody,{bevel:.035,segs:3});
   for (const sx of [-1, 1]) {
-    K.slab([[-0.255, -0.092], [0.152, -0.092], [0.161, -0.08], [0.161, 0.087], [0.148, 0.098], [-0.247, 0.098]], 0.008, gunMid, { x: sx * 0.156, bevel: 0.003 });
+    K.slab([[-0.255, -0.092], [0.152, -0.092], [0.161, -0.08], [0.161, 0.087], [0.148, 0.098], [-0.247, 0.098]], 0.020, gunMid, { x: sx * 0.150, bevel: 0.003 });
     for (let i = 0; i < 4; i++) K.box(0.012, 0.009, 0.26, gunDark, sx * 0.158, 0.065 - i * 0.039, -0.064, 0, 0, 0, null, 0.003);
     for (const [by, bz] of [[0.085, 0.13], [0.085, -0.24], [-0.085, 0.13], [-0.085, -0.24]]) K.cyl(0.011, 0.011, 0.012, gunAccent, sx * 0.157, by, bz, null, 6, 'x');
   }
   // Two removable top service panels break up the broad receiver shell without
   // crossing the centre sight line or shifting either hand's support point.
+  // Spent cases leave the rotor housing ahead of the feed drum. The lips surround
+  // the opening and the chute angles outboard beneath it.
+  K.box(0.005, 0.032, 0.068, gunDark, 0.162, 0.035, 0.122, 0, 0, 0, null, 0.002);
+  for (const y of [0.018, 0.052]) K.box(0.013, 0.005, 0.072, gunAccent, 0.164, y, 0.122, 0, 0, 0, null, 0.001);
+  for (const z of [0.086, 0.158]) K.box(0.013, 0.031, 0.005, gunAccent, 0.164, 0.035, z, 0, 0, 0, null, 0.001);
+  K.box(0.017, 0.005, 0.064, gunMid, 0.174, 0.014, 0.122, 0, 0, -0.37, null, 0.001);
   for (const sx of [-1, 1]) {
     K.box(0.061, 0.007, 0.19, gunDark, sx * 0.079, 0.129, -0.075, 0, 0, 0, null, 0.004);
     K.box(0.055, 0.008, 0.184, gunMid, sx * 0.079, 0.134, -0.075, 0, 0, 0, null, 0.004);
@@ -153,7 +164,7 @@ export function makeMinigunModel(ctx) {
     rod(THREE, K, [x * 0.42, -0.18 + (y + 0.18) * 0.42, -0.201], [x, y, -0.201], 0.003, gunMid);
   }
   for (const sx of [-1, 1]) for (const z of [-0.13, 0.055]) {
-    K.box(0.008, 0.026, 0.012, gunAccent, sx * 0.086, -0.18, z, 0, 0, 0, null, 0.002);
+    K.box(0.008, 0.026, 0.012, gunAccent, sx * 0.075, -0.18, z, 0, 0, 0, null, 0.002);
   }
   // GB-172: the power lead was a black bar floating out past the housing. The motor stays.
   // The rear firing hand grips behind the motor. A left-side peg keeps the support forearm clear of the housing.
@@ -170,12 +181,12 @@ export function makeMinigunModel(ctx) {
   for (const y of [-0.043, 0.066]) K.cyl(0.024, 0.024, 0.01, gunMid, -0.304, y, 0.16, null, 12, 'y');
   for (const y of [-0.026, -0.007, 0.012, 0.031, 0.05]) K.cyl(0.0188, 0.0188, 0.003, gunDark, -0.304, y, 0.16, null, 12, 'y');
   for (const z of [-0.12, 0.12]) K.box(0.03, 0.12, 0.03, gunDark, 0, 0.18, z);
-  K.box(0.03, 0.03, 0.27, gunDark, 0, 0.24, 0);
-  K.box(0.05, 0.035, 0.18, gunRubber, 0, 0.26, 0);
+  K.box(0.03, 0.021, 0.27, gunDark, 0, 0.238, 0);
   for (const z of [-0.12, 0.12]) { K.cyl(0.018, 0.018, 0.047, gunMid, 0, 0.155, z, null, 10, 'x'); bolt(K, gunDark, gunAccent, -0.025, 0.155, z); }
+  const reflexStart = gun.children.length;
+  K.box(0.05, 0.029, 0.18, gunRubber, 0, 0.263, 0);
   for (let i = 0; i < 8; i++) K.box(0.051, 0.003, 0.007, gunPoly, 0, 0.278, -0.072 + i * 0.020, 0, 0, 0, null, 0.001);
   // GP-20051/J22: protective chamfered reflex hood, lens, elevation/windage dials
-  const reflexStart = gun.children.length;
   // and emitter housing. The red aiming datum stays at (0, .330, .0355).
   K.box(0.045, 0.013, 0.083, gunDark, 0, 0.284, 0.006, 0, 0, 0, null, 0.003);
   K.box(0.052, 0.017, 0.025, gunMid, 0, 0.298, -0.022, 0, 0, 0, null, 0.003);
@@ -187,7 +198,7 @@ export function makeMinigunModel(ctx) {
   K.cyl(0.011, 0.011, 0.013, gunMid, 0.03, 0.329, -0.016, null, 12, 'x');
   const reflexGlass = Object.assign(glassMat.clone(), { transparent: true, opacity: 0.18, depthWrite: false, side: THREE.DoubleSide });
   reflexGlass.color.setHex(0x78919b);
-  K.box(0.043, 0.064, 0.003, reflexGlass, 0, 0.325, 0.035);
+  K.box(0.045, 0.064, 0.003, reflexGlass, 0, 0.325, 0.035);
   K.box(0.0035, 0.0035, 0.002, sightDotMat, 0, 0.330, 0.0355);
   K.tor(0.0075, 0.0006, sightDotMat, 0, 0.330, 0.0355, 0, 0, 0, null, Math.PI * 2, 24);
   const defaultSight = K.group(0, 0, 0);
@@ -225,36 +236,21 @@ export function makeMinigunModel(ctx) {
     }
   }
   gun.add(barrelAssembly);
-  // Box feed and linked chute. Keep the animated reload group and its origin intact.
+  // Enclosed side drum. The existing reload pivots about the feed socket.
   const ammoBox = new THREE.Group();
   ammoBox.position.set(0.2, -0.08, -0.02);
   ammoBox.rotation.z = 0.12;
-  K.box(0.17, 0.21, 0.27, gunOlive, -0.015, -0.06, -0.005, 0, 0, 0, ammoBox, 0.02);
-  K.box(0.183, 0.026, 0.284, gunMid, -0.015, 0.052, -0.005, 0, 0, 0, ammoBox, 0.006);
-  // Folded lid lip, rear hinge pin and two over-centre clasps remain attached
-  // to the animated ammo box during reload.
-  K.box(0.178, 0.006, 0.011, gunDark, -0.015, 0.037, 0.137, 0, 0, 0, ammoBox, 0.002);
-  K.cyl(0.005, 0.005, 0.166, gunDark, -0.015, 0.051, -0.149, ammoBox, 10, 'x');
-  for (const x of [-0.065, 0.035]) {
-    K.box(0.017, 0.032, 0.009, gunDark, x, 0.017, 0.137, 0, 0, 0, ammoBox, 0.003);
-    K.box(0.012, 0.006, 0.011, gunAccent, x, 0.031, 0.14, 0, 0, 0, ammoBox, 0.002);
+  K.cyl(0.125, 0.125, 0.155, gunOlive, 0, -0.045, 0, ammoBox, 32, 'x');
+  K.cyl(0.128, 0.124, 0.009, gunMid, 0.082, -0.045, 0, ammoBox, 32, 'x');
+  K.cyl(0.050, 0.056, 0.009, gunOlive, 0.091, -0.045, 0, ammoBox, 24, 'x');
+  for (let i = 0; i < 6; i++) {
+    const a = i * Math.PI / 3;
+    K.cyl(0.004, 0.004, 0.003, gunDark, 0.088, -0.045 + 0.108 * Math.cos(a), 0.108 * Math.sin(a), ammoBox, 8, 'x');
   }
-  for (const sx of [-1, 1]) {
-    K.box(0.008, 0.11, 0.2, gunDark, -0.015 + sx * 0.089, -0.07, -0.005, 0, 0, 0, ammoBox, 0.003);
-    for (const z of [-0.105, 0.095]) bolt(K, gunDark, gunAccent, -0.015 + sx * 0.094, -0.047, z, 0.004, ammoBox);
-  }
-  for (let i = 0; i < 5; i++) K.box(0.008, 0.11, 0.006, gunMid, 0.078, -0.065, -0.09 + i * 0.043, 0, 0, 0, ammoBox, 0.002);
+  K.box(0.048, 0.072, 0.062, gunOlive, -0.018, 0.110, 0.028, 0, 0, 0, ammoBox, 0.004);
   gun.add(ammoBox);
-  // GP-20051/J21: the visible linked rounds have a slim case and a short
-  // steel feed clip each, spaced along the chute rather than buried in slabs.
-  for (let i = 0; i < 9; i++) {
-    const u = i / 8, x = 0.20 - u * 0.046, y = 0.022 + u * 0.074, z = 0.027 - u * 0.035;
-    K.cyl(0.0046, 0.0046, 0.052, brassMat, x, y, z, null, 8);
-    K.cyl(0.0012, 0.0046, 0.011, gunAccent, x, y, z + 0.031, null, 8);
-    K.box(0.016, 0.010, 0.012, gunMid, x, y - 0.003, z - 0.015, 0, 0, -0.4, null, 0.002);
-  }
-  // The feed throat is enclosed by a removable delinker cover. The dark seam
-  // below its raised steel lid distinguishes it from the moving ammunition.
+  // Fixed socket above the detachable drum neck.
+  K.box(0.054, 0.030, 0.068, gunDark, 0.167, 0.071, 0.028, 0, 0, -0.12, null, 0.004);
   K.box(0.064, 0.055, 0.103, gunDark, 0.172, 0.111, 0.034, 0, 0, -0.12, null, 0.006);
   K.box(0.068, 0.008, 0.108, gunMid, 0.172, 0.141, 0.034, 0, 0, -0.12, null, 0.003);
   for (const z of [-0.011, 0.079]) K.cyl(0.005, 0.005, 0.004, gunAccent, 0.172, 0.147, z, null, 8, 'y');
@@ -275,6 +271,7 @@ export function makeMinigunModel(ctx) {
   // GP-20063: scale the held rotary assembly toward one metre. The view gun
   // resets its source root transform, so scale the parts instead.
   const heldScale = 0.70;
+  gun.userData.ejectPort = [0.177, 0.035, 0.122].map(v => v * heldScale);
   for (const child of gun.children) {
     child.position.multiplyScalar(heldScale);
     child.scale.multiplyScalar(heldScale);
@@ -284,6 +281,12 @@ export function makeMinigunModel(ctx) {
   gun.userData.laserLensLocal?.multiplyScalar(heldScale);
   gun.userData.lightLensLocal?.multiplyScalar(heldScale);
   gun.userData.baseAmmoPos.copy(ammoBox.position);
+  // The fitted short rail replaces the stock reflex pad on the same arch.
+  const opticSeat = K.group(0, 0, 0);
+  opticSeat.name = 'rotary-optic-seat';
+  K.box(0.030, 0.003, 0.054, gunMid, 0, 0.1935, 0.006, 0, 0, 0, opticSeat, 0.0006);
+  opticSeat.visible = false;
+  gun.userData.opticPlate = opticSeat;
   gun.userData.reloadParts.ammoBox.restPos = ammoBox.position.toArray();
   // A full-diameter side peg still accepts the support glove.
   K.cyl(0.018, 0.018, 0.081, gunRubber, -0.304 * heldScale, 0.012 * heldScale, 0.16 * heldScale, null, 12, 'y');
@@ -291,7 +294,7 @@ export function makeMinigunModel(ctx) {
 }
 
 export function makeLauncherModel(ctx) {
-  const { THREE, gunKit, gunBand, gripOutline, gunEffects, finishGun, gunBody, gunDark, gunMid, gunAccent, gunPoly, gunRubber, gunOlive, hazardYellow, steelMat, brassMat, glassMat, sightDotMat } = ctx;
+  const { THREE, gunKit, gunBand, gripOutline, gunEffects, finishGun, gunBody, gunDark, gunMid, gunAccent, gunPoly, gunRubber, gunOlive, hazardYellow, steelMat, brassMat } = ctx;
   const gun = new THREE.Group();
   const K = gunKit(gun);
   const receiverSteel = steelMat.clone(); receiverSteel.color.setHex(0x858a8d); receiverSteel.roughness = 0.53;   // matte stainless, not mirror-bright
@@ -302,54 +305,42 @@ export function makeLauncherModel(ctx) {
   K.box(0.104, 0.036, 0.002, gunDark, 0, 0.057, -0.251, 0, 0, 0, null, 0.003);
   K.box(0.084, 0.024, 0.001, gunMid, 0, 0.057, -0.253, 0, 0, 0, null, 0.002);
   for (const x of [-0.047, 0.047]) K.cyl(0.0025, 0.0025, 0.002, gunAccent, x, 0.057, -0.254, null, 8);
-  // V3 had a smooth top and a tiny fixed datum, with no rail, lettering or raised ladder sight; the datum stays as the leaf's hinge block.
-  K.slab([[-0.215, 0.109], [-0.184, 0.109], [-0.192, 0.12], [-0.208, 0.12]], 0.022, gunDark, { bevel: 0.002 });
-  // GP-20060, Milkor M32A1: the M2A1 reflex sight sits on the stainless receiver's Picatinny rail.
-  const reflexStart = gun.children.length;
-  K.rail(0.16, 0, 0.112, -0.059, null, 0.052);
-  K.box(0.066, 0.012, 0.072, gunDark, 0, 0.132, -0.049, 0, 0, 0, null, 0.004);   // M2A1 elevation base
-  for (const sx of [-1, 1]) K.box(0.008, 0.066, 0.072, gunDark, sx * 0.035, 0.17, -0.049, 0, 0, 0, null, 0.003);
-  K.box(0.078, 0.008, 0.072, gunDark, 0, 0.204, -0.049, 0, 0, 0, null, 0.003);   // open reflex hood
-  const sightGlass = glassMat.clone(); sightGlass.transparent = true; sightGlass.opacity = 0.32; sightGlass.depthWrite = false;
-  K.box(0.061, 0.057, 0.002, sightGlass, 0, 0.17, -0.015);
-  K.cyl(0.008, 0.008, 0.012, gunMid, 0.045, 0.158, -0.06, null, 12, 'x');   // sight range dial
-  // CL-322: the M2A1's reticle, just behind its glass and aimed through (SIGHT.launcher, y 0.170): the dot and its ring,
-  // and two hold-over dots under it, 5 and 10 mm (J62's leaf rungs did this: a lower dot on the target lifts the muzzle
-  // for a longer lob). sightDotMat: lit, and the camo leaves it alone.
-  K.box(0.003, 0.003, 0.0015, sightDotMat, 0, 0.17, -0.0145);
-  K.tor(0.009, 0.0006, sightDotMat, 0, 0.17, -0.0145, 0, 0, 0, null, Math.PI * 2, 24);
-  for (const dy of [0.005, 0.01]) K.box(0.002, 0.002, 0.0015, sightDotMat, 0, 0.17 - dy, -0.0145);
-  const defaultSight = K.group(0, 0, 0);
-  defaultSight.name = 'launcher-default-reflex';
-  for (const part of gun.children.slice(reflexStart, -1)) defaultSight.add(part);
-  gun.userData.defaultSight = defaultSight;
-  // J62 (Claude, 2026-11-02, from Jerry's J16: "the ability to arc rounds a little, maybe a leaf sight"): the drum's rim (y 0.123)
-  // stood above the only sight, so nothing could be aimed over it. A folding rear leaf on the datum, its three notched rungs
-  // (tops y 0.137, 0.144, 0.151: the higher ones lift the muzzle to arc a round further), and a front post on the front frame
-  // with its tip level with the first notch (y 0.137), both above the drum line. Small and dark, so third person reads as before.
-  K.cyl(0.0035, 0.0035, 0.03, gunDark, 0, 0.1225, -0.2, null, 8, 'x');   // the leaf's hinge pin on the datum
-  for (const sx of [-1, 1]) {
-    K.box(0.004, 0.034, 0.003, gunDark, sx * 0.011, 0.14, -0.2);   // the leaf's side rails (to y 0.157)
-    for (const y of [0.137, 0.144, 0.151]) K.box(0.0055, 0.002, 0.003, gunDark, sx * 0.00625, y - 0.001, -0.2);   // open 7 mm notch: upper rungs stay clear of the lower sight line
+  // J122: a three-notch leaf and protected front post on the original ADS axis.
+  const leafZ = -0.085;
+  const irons = K.group(0, 0, 0);
+  irons.name = 'launcher-iron-leaf';
+  gun.userData.defaultSight = irons;
+  K.box(0.028, 0.034, 0.028, gunDark, 0, 0.123, leafZ, 0, 0, 0, irons, 0.003);
+  K.cyl(0.004, 0.004, 0.033, gunMid, 0, 0.140, leafZ, irons, 12, 'x');
+  for (const side of [-1, 1]) {
+    K.box(0.004, 0.052, 0.006, gunDark, side * 0.010, 0.166, leafZ, 0, 0, 0, irons);
+    for (const y of [0.170, 0.178, 0.186]) {
+      K.box(0.005, 0.002, 0.005, gunMid, side * 0.006, y - 0.001, leafZ, 0, 0, 0, irons);
+    }
   }
-  // Open above the highest rung too: a bridge across the centre masks every notch below it.
+  const opticPlate = K.group(0, 0, 0);
+  opticPlate.name = 'launcher-optic-seat';
+  K.box(0.035, 0.016, 0.067, gunDark, 0, 0.114, -0.049, 0, 0, 0, opticPlate, 0.002);
+  K.box(0.030, 0.006, 0.053, gunMid, 0, 0.143, -0.049, 0, 0, 0, opticPlate, 0.001);
+  opticPlate.visible = false;
+  gun.userData.opticPlate = opticPlate;
   for (const sx of [-1, 1]) {
-    K.slab([[-0.245, -0.017], [-0.112, -0.017], [-0.103, -0.024], [-0.103, -0.051], [-0.233, -0.051], [-0.245, -0.04]], 0.004, gunMid, { x: sx * 0.082, bevel: 0.002 });
-    for (const [z, y, ox] of [[-0.229, 0.084, 0.0775], [0.023, 0.081, 0.0775], [-0.226, -0.035, 0.087], [-0.12, -0.035, 0.087]]) bolt(K, gunDark, gunAccent, sx * ox, y, z, 0.005);   // GB-297: upper bolts on the frame face, lower on the side panel
-    K.cyl(0.009, 0.009, 0.004, gunDark, sx * 0.078, -0.027, -0.054, null, 12, 'x');   // ambidextrous safety selector
+    K.slab([[-0.245, -0.017], [-0.112, -0.017], [-0.103, -0.024], [-0.103, -0.051], [-0.233, -0.051], [-0.245, -0.04]], 0.004, gunMid, { x: sx * 0.077, bevel: 0.002 });
+    for (const [z, y, ox] of [[-0.229, 0.084, 0.0775], [0.023, 0.081, 0.0775], [-0.226, -0.035, 0.081], [-0.12, -0.035, 0.081]]) bolt(K, gunDark, gunAccent, sx * ox, y, z, 0.005);   // GB-297: upper bolts on the frame face, lower on the side panel
+    K.cyl(0.009, 0.009, 0.004, gunDark, sx * 0.077, -0.027, -0.054, null, 12, 'x');   // ambidextrous safety selector
     K.box(0.004, 0.01, 0.025, gunDark, sx * 0.08, -0.032, -0.041, 0, 0, 0, null, 0.002);
   }
   // J80: the tall wire quadrant looked like an unattached arch beside the rear sight.
-  // The reflex hold-over dots and folding leaf remain; a low marked range plate carries
+  // A low marked range plate carries
   // the side adjustment without rising over either sight picture.
-  K.box(0.012, 0.022, 0.108, gunMid, 0.084, 0.111, -0.174, 0, 0, 0, null, 0.003);
+  K.box(0.012, 0.022, 0.108, gunMid, 0.081, 0.073, -0.174, 0, 0, 0, null, 0.003);
   for (const z of [-0.211, -0.187, -0.159])
-    K.box(0.0015, 0.004, 0.009, gunAccent, 0.0905, 0.123, z, 0, 0, 0, null, 0.0004);
+    K.box(0.0015, 0.004, 0.009, gunAccent, 0.0875, 0.077, z, 0, 0, 0, null, 0.0004);
   K.slab([[0.265, -0.05], [0.315, -0.05], [0.315, 0.09], [0.265, 0.09]], 0.12, receiverSteel, { bevel: 0.014 });
-  // J62: the front post on the front frame, its tip at the first notch's height (y 0.137), between two low guard ears.
-  K.box(0.024, 0.012, 0.03, gunDark, 0, 0.096, 0.64);
-  K.box(0.004, 0.035, 0.004, gunDark, 0, 0.1195, 0.64);
-  for (const sx of [-1, 1]) K.box(0.003, 0.03, 0.012, gunDark, sx * 0.012, 0.117, 0.64);
+  // Front post above the rail, level with the lowest notch at y=.170.
+  K.box(0.032, 0.018, 0.030, gunDark, 0, 0.111, 0.638, 0, 0, 0, null, 0.002);
+  K.box(0.004, 0.050, 0.005, gunDark, 0, 0.145, 0.638);
+  for (const sx of [-1, 1]) K.box(0.003, 0.054, 0.014, gunDark, sx * 0.013, 0.147, 0.638);
   // Collapsible stock on its tube, with a pad; pistol grip, trigger guard, trigger.
   // J62 (GP-20016): the stock tube, olive body, rubber pad and stock-side slabs (with their bolts) are one group,
   // gun.userData.fpStock ('fp-stock'), for the view gun to leave out of the eye; third person and the shadow keep it.
@@ -361,8 +352,8 @@ export function makeLauncherModel(ctx) {
   K.slab([[-0.33, 0.08], [-0.47, 0.084], [-0.48, 0.08], [-0.48, -0.06], [-0.44, -0.065], [-0.37, -0.02], [-0.33, -0.01]], 0.08, gunOlive, { bevel: 0.016, segs: 3 });
   K.slab([[-0.504, 0.088], [-0.48, 0.088], [-0.48, -0.066], [-0.5, -0.072]], 0.086, gunRubber, { bevel: 0.008 });
   for (const sx of [-1, 1]) {
-    K.slab([[-0.462, 0.06], [-0.359, 0.056], [-0.37, -0.009], [-0.45, -0.042]], 0.002, gunOlive, { x: sx * 0.048, bevel: 0.003 });
-    bolt(K, gunDark, gunMid, sx * 0.05, 0.036, -0.452, 0.006);
+    K.slab([[-0.462, 0.06], [-0.359, 0.056], [-0.37, -0.009], [-0.45, -0.042]], 0.002, gunOlive, { x: sx * 0.041, bevel: 0.001 });
+    bolt(K, gunDark, gunMid, sx * 0.044, 0.036, -0.452, 0.006);
   }
   for (const p of gun.children.slice(stockStart)) stock.add(p);
   stock.position.set(0, 0.04, -0.25);
@@ -430,14 +421,14 @@ export function makeLauncherModel(ctx) {
     const ang = (i / 6) * Math.PI * 2;
     const cx = Math.sin(ang) * 0.065, cy = Math.cos(ang) * 0.065;
     const round = new THREE.Group();
-    // J80: each chamber carries a complete round. Its brass base is recessed just
-    // inside the rear mouth, visible in battery and still an individual reload part.
-    K.cyl(0.0265, 0.0265, 0.004, brassMat, cx, cy, -0.061, round, 16);
-    K.cyl(0.004, 0.004, 0.001, gunDark, cx, cy, -0.0632, round, 10);
-    K.cyl(0.025, 0.025, 0.086, gunOlive, cx, cy, -0.004, round, 16);
-    K.cyl(0.029, 0.029, 0.006, gunDark, cx, cy, 0.026, round, 16);
-    K.lathe([[0, 0.032], [0.025, 0.032], [0.025, 0.044], [0.024, 0.048], [0.020, 0.055], [0.012, 0.061], [0, 0.062]], gunOlive, { x: cx, y: cy, parent: round, seg: 16 });
-    K.cyl(0.0255, 0.0255, 0.003, hazardYellow, cx, cy, 0.044, round, 16);
+    // Each coloured section meets the next at its end face. The animation moves them as one insert.
+    K.cyl(0.0315, 0.0315, 0.003, brassMat, cx, cy, -0.0665, round, 16);
+    K.cyl(0.004, 0.004, 0.001, gunDark, cx, cy, -0.0685, round, 10);
+    K.cyl(0.025, 0.025, 0.088, gunOlive, cx, cy, -0.021, round, 16);
+    K.cyl(0.029, 0.029, 0.009, gunDark, cx, cy, 0.0275, round, 16);
+    K.lathe([[0, 0.032], [0.025, 0.032], [0.025, 0.0425], [0, 0.0425]], gunOlive, { x: cx, y: cy, parent: round, seg: 16 });
+    K.cyl(0.025, 0.025, 0.003, hazardYellow, cx, cy, 0.044, round, 16);
+    K.lathe([[0, 0.0455], [0.025, 0.0455], [0.024, 0.048], [0.020, 0.055], [0.012, 0.061], [0, 0.062]], gunOlive, { x: cx, y: cy, parent: round, seg: 16 });
     drum.add(round);
     drumRounds.push(round);
     const fa = ang + Math.PI / 6;
@@ -484,11 +475,12 @@ export function makeLauncherModel(ctx) {
   K.lathe([[0, 0.2], [0.052, 0.2], [0.052, 0.66], [0, 0.66]], gunAccent, { y: 0.04, seg: 16 });
   for (const x of [0.058, -0.058]) K.box(0.012, 0.03, 0.3, gunDark, x, 0.04, 0.42);
   K.box(0.03, 0.012, 0.3, gunDark, 0, -0.018, 0.42);
+  K.box(0.037, 0.006, 0.37, gunDark, 0, 0.091, 0.46, 0, 0, 0, null, 0.001);
   K.rail(0.37, 0, 0.101, 0.46, null, 0.049);   // 12-o'clock rail, behind the front post
   for (const sx of [-1, 1]) K.rail(0.36, sx * 0.068, 0.04, 0.46, null, 0.025, sx);   // 3 and 9
   K.rail(0.34, 0, -0.018, 0.46, null, 0.03, 2);   // 6-o'clock rail under the foregrip mount
   K.slab([[0.395, -0.02], [0.445, -0.02], [0.44, -0.148], [0.43, -0.156], [0.405, -0.156], [0.398, -0.148]], 0.048, gunPoly, { bevel: 0.014, segs: 3 });
-  for (const sx of [-1, 1]) for (let i = 0; i < 7; i++) K.box(0.002, 0.006, 0.033, gunDark, sx * 0.033, -0.05 - i * 0.014, 0.419, 0, 0, 0, null, 0.001);
+  for (const sx of [-1, 1]) for (let i = 0; i < 7; i++) K.box(0.002, 0.006, 0.033, gunDark, sx * 0.025, -0.05 - i * 0.014, 0.419, 0, 0, 0, null, 0.001);
   K.lathe([[0, 0.65], [0.062, 0.65], [0.062, 0.68], [0.042, 0.682], [0.042, 0.672], [0, 0.672]], gunDark, { y: 0.04, seg: 16 });
   gunEffects(gun, new THREE.Vector3(0, 0.04, 0.72), 0.07, 3, 6, 0.006, 0xff9966, 0xff8844);
   gun.userData.laser.position.set(0, 0.04, 3.7);
@@ -508,8 +500,8 @@ export function makeFlamerModel(ctx) {
   // Transverse pressed seams catch the light without changing the case silhouette.
   for (const z of [-0.112, 0.268]) K.box(0.083, 0.0018, 0.003, gunMid, 0, 0.096, z, 0, 0, 0, null, 0.001);
   for (const sx of [-1, 1]) {
-    K.slab([[-0.133, -0.022], [0.272, -0.022], [0.284, -0.01], [0.284, 0.055], [0.266, 0.072], [-0.115, 0.072], [-0.133, 0.058]], 0.004, gunDark, { x: sx * 0.06, bevel: 0.003 });
-    K.slab([[-0.12, -0.013], [0.27, -0.013], [0.273, -0.004], [0.273, 0.052], [0.26, 0.062], [-0.105, 0.062], [-0.12, 0.05]], 0.003, gunMid, { x: sx * 0.064, bevel: 0.002 });
+    K.slab([[-0.133, -0.022], [0.272, -0.022], [0.284, -0.01], [0.284, 0.055], [0.266, 0.072], [-0.115, 0.072], [-0.133, 0.058]], 0.007, gunDark, { x: sx * 0.0585, bevel: 0.002 });
+    K.slab([[-0.12, -0.013], [0.27, -0.013], [0.273, -0.004], [0.273, 0.052], [0.26, 0.062], [-0.105, 0.062], [-0.12, 0.05]], 0.003, gunMid, { x: sx * 0.0635, bevel: 0.001 });
     for (const [z, y] of [[-0.120, 0.050], [0.260, 0.050], [-0.120, -0.010], [0.260, -0.010], [-0.106, 0.047], [0.256, 0.047]]) bolt(K, gunDark, gunAccent, sx * 0.066, y, z, 0.0038);   // GB-297: corner bolts seated on the side panel face
   }
   // GP-20063: the compact tank/trigger body stays at its fitted hand points;
@@ -548,85 +540,52 @@ export function makeFlamerModel(ctx) {
   gun.userData.pilot = pilot.material;
   // Fuel tanks with domed ends shifted forward of the rear pistol grip/trigger so the grip is fully exposed:
   // straps, mounting brackets, manifold valves, connected front/rear hoses, and a pressure gauge.
-  const tanks = K.group(0, 0, 0), tankStart = gun.children.length;
+  const tanks = K.group(0, 0, 0);
+  const tankKit = gunKit(tanks);
   const dome = (r, z0, z1) => [[0, z0], [r * 0.55, z0 + r * 0.06], [r * 0.85, z0 + r * 0.2], [r, z0 + r * 0.45], [r, z1 - r * 0.45], [r * 0.85, z1 - r * 0.2], [r * 0.55, z1 - r * 0.06], [0, z1]];
-  K.lathe(dome(0.075, -0.048, 0.205), fuelRedMat, { y: -0.09, seg: 16 });
-  K.lathe(dome(0.056, -0.038, 0.175), fuelRedMat, { x: 0.11, y: -0.05, seg: 14 });
+  tankKit.lathe(dome(0.075, -0.048, 0.205), fuelRedMat, { y: -0.09, seg: 16 });
+  tankKit.lathe(dome(0.056, -0.038, 0.175), fuelRedMat, { x: 0.11, y: -0.05, seg: 14 });
   for (const z of [0.005, 0.14]) {
     // Upper saddle bracket bolting the tanks into the underside of the receiver housing.
-    K.box(0.064, 0.032, 0.024, gunDark, 0.035, -0.036, z, 0, 0, 0, null, 0.003);
+    tankKit.box(0.064, 0.032, 0.024, gunDark, 0.035, -0.036, z, 0, 0, 0, null, 0.003);
     for (const [x, y, r] of [[0, -0.09, 0.077], [0.11, -0.05, 0.058]]) {
       const outer = r + (x === 0 ? 0.008 : 0.007); // retain the old rounded strap's support envelope
-      K.lathe([[r - 0.004, z - 0.012], [outer, z - 0.012], [outer, z + 0.012], [r - 0.004, z + 0.012], [r - 0.004, z - 0.012]], gunPoly, { x, y, seg: 24 });
-      K.box(0.011, 0.03, 0.031, gunMid, x + r + 0.002, y, z, 0, 0, 0, null, 0.002);
-      K.box(0.012, 0.018, 0.016, gunDark, x + r + 0.004, y, z, 0, 0, 0, null, 0.001);
-      K.cyl(0.0032, 0.0032, 0.002, steelMat, x + r + 0.006, y, z, null, 8, 'x');
+      tankKit.lathe([[r - 0.004, z - 0.012], [outer, z - 0.012], [outer, z + 0.012], [r - 0.004, z + 0.012], [r - 0.004, z - 0.012]], gunPoly, { x, y, seg: 24 });
+      tankKit.box(0.011, 0.03, 0.031, gunMid, x + r + 0.002, y, z, 0, 0, 0, null, 0.002);
+      tankKit.box(0.012, 0.018, 0.016, gunDark, x + r + 0.004, y, z, 0, 0, 0, null, 0.001);
+      tankKit.cyl(0.0032, 0.0032, 0.002, steelMat, x + r + 0.006, y, z, null, 8, 'x');
     }
   }
-  // Front tank valves and receiver feed manifold block (connecting both front tank outlets into the receiver body).
-  K.box(0.058, 0.028, 0.044, gunDark, 0.02, -0.034, 0.215, 0, 0, 0, null, 0.004);
-  K.cyl(0.028, 0.028, 0.026, gunDark, 0, -0.09, 0.212, null, 10);
-  K.cyl(0.013, 0.013, 0.018, brassMat, 0, -0.09, 0.228, null, 8);
-  K.cyl(0.013, 0.013, 0.016, brassMat, 0, -0.044, 0.218, null, 8, 'y');
-  for (let i = 0; i < 8; i++) {
-    const u0 = i / 8, u1 = (i + 1) / 8;
-    const pt = (u) => [0, -0.09 + 0.046 * Math.pow(u, 1.2), 0.228 + Math.sin(u * Math.PI) * 0.016 - 0.01 * u];
-    rod(THREE, K, pt(u0), pt(u1), 0.0095, gunRubber);
+  // The detachable pack carries the valves. Its two outlets plug upward into a
+  // manifold bolted to the receiver; all flexible plumbing stays above that joint.
+  for (const [x,y,z] of [[0,-0.09,0.21],[0.11,-0.05,0.184]]) {
+    tankKit.cyl(0.021, 0.021, 0.030, gunDark, x, y, z, null, 12);
+    tankKit.cyl(0.012, 0.012, -y - 0.003, brassMat, x, (y - 0.003) / 2, z, null, 8, 'y');
   }
-  // Side tank front valve, yellow regulator handwheel, and connected high-pressure feed hose into the receiver manifold.
-  K.cyl(0.022, 0.022, 0.028, gunDark, 0.11, -0.05, 0.184, null, 10);
-  K.cyl(0.01, 0.01, 0.034, steelMat, 0.11, -0.05, 0.206, null, 6);
-  K.cyl(0.028, 0.012, 0.012, hazardYellow, 0.11, -0.05, 0.224, null, 10);          // valve wheel
-  K.cyl(0.008, 0.008, 0.014, gunDark, 0.11, -0.05, 0.232, null, 8);
-  for (const a of [0, Math.PI / 2, Math.PI, 3 * Math.PI / 2])
-    rod(THREE, K, [0.11 + 0.009 * Math.cos(a), -0.05 + 0.009 * Math.sin(a), 0.231],
-      [0.11 + 0.022 * Math.cos(a), -0.05 + 0.022 * Math.sin(a), 0.231], 0.0025, gunDark);
-  K.cyl(0.012, 0.012, 0.016, brassMat, 0.098, -0.042, 0.196, null, 8, 'x');
-  K.cyl(0.012, 0.012, 0.016, brassMat, 0.048, -0.034, 0.215, null, 8, 'x');
-  for (let i = 0; i < 8; i++) {
-    const u0 = i / 8, u1 = (i + 1) / 8;
-    const pt = (u) => [
-      0.098 - 0.05 * u + Math.sin(u * Math.PI) * 0.008,
-      -0.042 + 0.008 * u + Math.sin(u * Math.PI) * 0.01,
-      0.196 + 0.019 * u + Math.sin(u * Math.PI) * 0.014
-    ];
-    rod(THREE, K, pt(u0), pt(u1), 0.0085, gunRubber);
+  tankKit.cyl(0.022, 0.012, 0.010, hazardYellow, 0.11, -0.05, 0.204, null, 12);
+  K.box(0.137, 0.020, 0.054, gunMid, 0.055, 0.007, 0.198, 0, 0, 0, null, 0.004);
+  // A formed hose hugs the near shoulder of the casing, above the firing wrist.
+  const route = new THREE.CatmullRomCurve3([
+    [0.102,0.017,0.197], [0.107,0.046,0.179], [0.085,0.062,0.135],
+    [0.077,0.064,-0.098], [0.073,0.061,-0.138], [0.055,0.052,-0.146]
+  ].map(p => new THREE.Vector3(...p)));
+  part(THREE, new THREE.TubeGeometry(route, 18, 0.008, 8, false), gunRubber, gun);
+  K.cyl(0.013, 0.013, 0.012, brassMat, 0.102, 0.023, 0.197, null, 8, 'y');
+  K.cyl(0.013, 0.013, 0.014, brassMat, 0.062, 0.052, -0.146, null, 8, 'x');
+  // Rear-facing gauge. Its dial sits on the flat rear bulkhead.
+  K.cyl(0.027, 0.027, 0.014, steelMat, 0, 0.044, -0.176, null, 24);
+  K.disc(0.022, gaugeFace, 0, 0.044, -0.1832, Math.PI, null, 24);
+  for (let i = 0; i < 7; i++) {
+    const a = (i - 3) * Math.PI / 4;
+    rod(THREE, K, [0.016 * Math.sin(a), 0.044 + 0.016 * Math.cos(a), -0.1835],
+      [0.020 * Math.sin(a), 0.044 + 0.020 * Math.cos(a), -0.1835], 0.0008, gunDark);
   }
-  // Tank-mounted gauge on the exposed left flank, clear of the receiver panel.
-  K.box(0.027, 0.018, 0.018, gunDark, -0.075, -0.065, 0.076, 0, 0, 0, null, 0.003);
-  K.cyl(0.027, 0.027, 0.014, steelMat, -0.088, -0.065, 0.076, null, 12, 'x');
-  K.disc(0.022, gaugeFace, -0.096, -0.065, 0.076, -Math.PI / 2, null, 12);
-  for (const a of [-2.3, -1.75, -1.2, -0.65, -0.1])
-    rod(THREE, K, [-0.097, -0.065 + 0.015 * Math.cos(a), 0.076 + 0.015 * Math.sin(a)],
-      [-0.097, -0.065 + 0.019 * Math.cos(a), 0.076 + 0.019 * Math.sin(a)], 0.0012, gunDark);
-  rod(THREE, K, [-0.098, -0.065, 0.076], [-0.098, -0.057, 0.088], 0.0017, sightDotMat);
-  K.cyl(0.0023, 0.0023, 0.001, gunDark, -0.0965, -0.065, 0.076, null, 8, 'x');
-  // Rear hose loop from the rear receiver bulkhead Fitting (z = -0.17) out to z = -0.262 and forward into the side tank rear dome (z = -0.038).
-  K.cyl(0.02, 0.02, 0.018, gunDark, 0, 0.044, -0.168, null, 8);
-  K.cyl(0.015, 0.015, 0.024, brassMat, 0, 0.044, -0.178, null, 8);
-  K.cyl(0.022, 0.022, 0.026, gunDark, 0.11, -0.05, -0.042, null, 10);
-  K.cyl(0.015, 0.015, 0.024, brassMat, 0.11, -0.05, -0.056, null, 8);
-  for (const [x, y, z] of [[0, 0.044, -0.188], [0.11, -0.05, -0.066]]) {
-    K.cyl(0.016, 0.016, 0.008, gunMid, x, y, z, null, 10);
-    K.cyl(0.013, 0.013, 0.004, brassMat, x, y, z - 0.005, null, 10);
-  }
-  for (let i = 0; i < 18; i++) {
-    const point = (u) => [
-      0.11 * Math.pow(u, 0.85),
-      -0.003 + Math.cos(u * Math.PI) * 0.047,
-      -0.177 * (1 - u) - 0.056 * u - Math.sin(u * Math.PI) * 0.145
-    ];
-    rod(THREE, K, point(i / 18), point((i + 1) / 18), 0.011, gunRubber);
-  }
-  // Crossover manifold line connecting the side tank rear boss to the main tank rear dome.
-  K.cyl(0.022, 0.022, 0.024, gunDark, 0.018, -0.09, -0.05, null, 10);
-  K.cyl(0.013, 0.013, 0.02, brassMat, 0.018, -0.09, -0.062, null, 8);
-  for (let i = 0; i < 8; i++) {
-    const u0 = i / 8, u1 = (i + 1) / 8;
-    const pt = (u) => [0.018 + 0.092 * u, -0.09 + 0.04 * u, -0.062 + 0.006 * u - Math.sin(u * Math.PI) * 0.022];
-    rod(THREE, K, pt(u0), pt(u1), 0.0085, gunRubber);
-  }
-  for (const part of gun.children.slice(tankStart)) tanks.add(part);
+  const needle = K.group(0, 0.044, -0.184);
+  rod(THREE, K, [0,0,0], [0,0.015,0], 0.0013, sightDotMat, needle);
+  K.cyl(0.0024, 0.0024, 0.002, gunDark, 0, 0, -0.001, needle, 10);
+  needle.rotation.z = 3 * Math.PI / 4;
+  needle.name = 'fuel-gauge-needle';
+  gun.userData.fuelNeedle = needle;
   gun.userData.mag = tanks;
   gun.userData.baseMagPos = tanks.position.clone();
   gun.userData.baseMagRot = tanks.rotation.clone();
@@ -720,7 +679,7 @@ export function makeChainsawModel(ctx) {
   K.cyl(0.016, 0.016, 0.016, gunDark, 0.169, 0.047, -0.085, null, 12, 'x');
   for (let i = 0; i < 8; i++) {
     const a = i * Math.PI / 4;
-    K.box(0.003, 0.004, 0.018, gunDark, 0.169, 0.047 + Math.sin(a) * 0.034, -0.085 + Math.cos(a) * 0.034, a, 0, 0, null, 0.001);
+    K.box(0.003, 0.004, 0.018, gunDark, 0.1675, 0.047 + Math.sin(a) * 0.034, -0.085 + Math.cos(a) * 0.034, a, 0, 0, null, 0.001);
   }
   // Removable filter cover and thumb knob on the opposite side of the engine.
   K.box(0.012, 0.082, 0.082, gunMid, -0.151, 0.053, -0.09, 0, 0, 0, null, 0.009);
@@ -743,10 +702,10 @@ export function makeChainsawModel(ctx) {
   K.slab(gunBand([[-0.245, 0.08], [-0.445, 0.08], [-0.49, 0.025], [-0.49, -0.095], [-0.27, -0.095]], 0.014), 0.07, gunPoly, { bevel: 0.007 });
   K.box(0.074, 0.13, 0.055, gunRubber, 0, -0.014, -0.46, 0, 0, 0, null, 0.012);
   for (let i = 0; i < 5; i++) K.box(0.076, 0.007, 0.058, gunPoly, 0, -0.064 + i * 0.024, -0.46, 0, 0, 0, null, 0.002);
-  K.slab(gunBand([[-0.393, 0.045], [-0.375, 0.01], [-0.365, -0.03]], 0.006), 0.022, hazardYellow, { bevel: 0.002 });
+  K.slab(gunBand([[-0.395, 0.062], [-0.393, 0.045], [-0.375, 0.01], [-0.365, -0.03]], 0.006), 0.022, hazardYellow, { bevel: 0.002 });
   K.slab(gunBand([[-0.395, 0.062], [-0.34, 0.06], [-0.326, -0.065], [-0.42, -0.069]], 0.006), 0.033, gunDark, { bevel: 0.003 });
   K.box(0.072, 0.02, 0.04, gunAccent, 0, 0.085, -0.445, 0, 0, 0, null, 0.004);
-  K.box(0.05, 0.009, 0.027, gunDark, 0, 0.101, -0.444, 0, 0, 0, null, 0.003); // throttle lock paddle
+  K.box(0.05, 0.009, 0.027, gunDark, 0, 0.0995, -0.444, 0, 0, 0, null, 0.003); // throttle lock paddle
   // The front hoop crosses the top grip and descends on the left side of the body.
   const hoop = [[-0.15, 0.018, -0.14], [-0.15, 0.115, -0.13], [-0.14, 0.218, -0.085], [-0.08, 0.246, -0.035], [0.06, 0.246, -0.035], [0.13, 0.216, 0.018], [0.13, 0.027, 0.055]];
   for (let i = 0; i < hoop.length - 1; i++) rod(THREE, K, hoop[i], hoop[i + 1], 0.014, gunDark);
@@ -764,9 +723,9 @@ export function makeChainsawModel(ctx) {
   // GB-180 pass 7 (the pass-6 spikes read as a dark clump under the bar): steel spike plates flat on the housing face,
   // either side of the bar, three big forward teeth each.
   for (const sx of [-1, 1]) K.slab([[0.104, -0.034], [0.13, -0.034], [0.165, -0.012], [0.13, 0.004], [0.165, 0.026], [0.13, 0.042], [0.165, 0.064], [0.13, 0.08], [0.104, 0.09]], 0.01, steelMat, { x: sx * 0.1, bevel: 0.002 });
-  K.slab([[0.09, -0.06], [0.13, -0.06], [0.135, -0.075], [0.09, -0.078]], 0.04, gunDark, { bevel: 0.004 });   // chain catcher
+  K.slab([[0.089, -0.055], [0.13, -0.06], [0.135, -0.075], [0.09, -0.078]], 0.04, gunDark, { bevel: 0.004 });   // chain catcher
   // Pull cord and its T-handle.
-  K.cyl(0.012, 0.012, 0.06, gunDark, 0.14, 0.12, -0.22, null, 6, 'x');
+  K.cyl(0.012, 0.012, 0.0675, gunDark, 0.14375, 0.12, -0.22, null, 6, 'x');
   const starter = new THREE.Group();
   starter.position.set(0.19, 0.12, -0.22);
   const SK = gunKit(starter);
@@ -871,15 +830,15 @@ export function makeMortarModel(ctx, matOverride = null, collapsed = false) {
   K.tor(0.421, 0.009, steel, 0, 0.029, 0, Math.PI / 2, 0, 0, plateDetail, Math.PI * 2, 32);
   for (const sx of [-1, 1]) {
     const z = sx * 0.285;
-    rod(THREE, K, [-0.074, 0.042, z], [-0.067, 0.087, z], 0.009, steel, plateDetail);
-    rod(THREE, K, [0.074, 0.042, z], [0.067, 0.087, z], 0.009, steel, plateDetail);
+    rod(THREE, K, [-0.074, 0.040, z], [-0.067, 0.087, z], 0.009, steel, plateDetail);
+    rod(THREE, K, [0.074, 0.040, z], [0.067, 0.087, z], 0.009, steel, plateDetail);
     rod(THREE, K, [-0.067, 0.087, z], [0.067, 0.087, z], 0.009, steel, plateDetail);
   }
   const tube = new THREE.Mesh(new THREE.CylinderGeometry(0.11, 0.13, 1.25, 12, 1, true), matOverride || gunOlive);   // GB-233: matte olive phosphate
   const boreMat = (matOverride || gunDark).clone(); boreMat.side = THREE.BackSide;
   const bore = new THREE.Mesh(new THREE.CylinderGeometry(0.083, 0.102, 1.22, 12, 1, true), boreMat);
   const lip = new THREE.Mesh(new THREE.RingGeometry(0.083, 0.11, 12), matOverride || gunMetal);
-  lip.rotation.x = -Math.PI / 2; lip.position.y = 0.626; tube.add(bore, lip);
+  lip.rotation.x = -Math.PI / 2; lip.position.y = 0.625; tube.add(bore, lip);
   const breech = new THREE.Mesh(new THREE.CircleGeometry(0.102, 12), matOverride || gunDark);
   breech.rotation.x = -Math.PI / 2; breech.position.y = -0.59; tube.add(breech);
   if (collapsed) { tube.position.set(0, 0.62, 0); tube.rotation.x = 0; }
@@ -900,17 +859,17 @@ export function makeMortarModel(ctx, matOverride = null, collapsed = false) {
   // Hollow lip is preserved above; collars stop short of it and never cap the bore.
   K.tor(0.1115, 0.0035, material(gunMid), 0, 0.613, 0, Math.PI / 2, 0, 0, tubeDetail, Math.PI * 2, 24);
   // GB-180 pass 6 (vs a real 81 mm tube: a heavy muzzle band and finned breech): five cooling fins round the breech end.
-  if (!collapsed) for (let i = 0; i < 5; i++) { const y = -0.47 + i * 0.045; K.lathe([[0.126, y - 0.008], [0.155, y - 0.008], [0.155, y + 0.008], [0.126, y + 0.008], [0.126, y - 0.008]], material(gunMetal), { rx: -Math.PI / 2, parent: tubeDetail, seg: 24 }); }
+  if (!collapsed) for (let i = 0; i < 5; i++) { const y = -0.47 + i * 0.045, inner = 0.12 - 0.016 * y; K.lathe([[inner, y - 0.008], [0.155, y - 0.008], [0.155, y + 0.008], [inner, y + 0.008], [inner, y - 0.008]], material(gunMetal), { rx: -Math.PI / 2, parent: tubeDetail, seg: 24 }); }
   const clampR = collapsed ? 0.128 : 0.139;
   K.lathe([[0.117, 0.104], [clampR - 0.005, 0.104], [clampR, 0.11], [clampR, 0.15], [clampR - 0.005, 0.156], [0.117, 0.156], [0.117, 0.104]], steel, { rx: -Math.PI / 2, parent: tubeDetail, seg: 24 });
   for (const sx of [-1, 1]) {
     K.box(0.034, 0.1, 0.088, steel, sx * 0.137, 0.13, 0, 0, 0, 0, tubeDetail, 0.01);
-    bolt(K, material(gunDark), material(steelMat), sx * 0.16, 0.13, 0, 0.016, tubeDetail);
+    bolt(K, material(gunDark), material(steelMat), sx * 0.1555, 0.13, 0, 0.016, tubeDetail);
   }
   // Optical level and elevation wheel are mounted on the tube clamp, so they follow its aim.
   K.box(0.038, 0.105, 0.034, steel, -0.135, 0.246, 0, 0, 0, 0, tubeDetail, 0.006);
   K.cyl(0.012, 0.012, 0.043, material(gunDark), -0.135, 0.269, 0, tubeDetail, 10, 'x');
-  K.disc(0.0085, material(gaugeFace), -0.159, 0.269, 0, -Math.PI / 2, tubeDetail, 12);
+  K.disc(0.0085, material(gaugeFace), -0.1566, 0.269, 0, -Math.PI / 2, tubeDetail, 12);
   K.cyl(0.018, 0.018, 0.103, steel, 0.177, 0.102, 0, tubeDetail, 12, 'x');
   K.tor(0.059, 0.007, steel, 0.232, 0.102, 0, 0, Math.PI / 2, 0, tubeDetail, Math.PI * 2, 20);
   for (let i = 0; i < 3; i++) {
@@ -953,15 +912,15 @@ export function makeMortarModel(ctx, matOverride = null, collapsed = false) {
     K.box(0.15, 0.054, 0.060, steel, 0, 0.73, 0.09, 0, 0, 0, null, 0.007);
     for (const sx of [-1, 1]) {
       bolt(K, material(gunDark), material(steelMat), sx * 0.088, 0.75, 0.09, 0.014);
-      rod(THREE, K, [sx * 0.12, 0.44, -0.14], [0, 0.42, -0.17], 0.010, steel);
+      rod(THREE, K, [sx * 0.108, 0.44, -0.088], [0, 0.42, -0.17], 0.010, steel);
     }
     // M53 sight in its dovetail socket beside the traversing crank. Its elbow
     // telescope and two covered level vials are larger than decorative screws.
-    K.box(0.030, 0.045, 0.066, material(gunDark), -0.115, 0.775, 0.09, 0, 0, 0, null, 0.004);
+    K.box(0.046, 0.045, 0.066, material(gunDark), -0.107, 0.775, 0.09, 0, 0, 0, null, 0.004);
     K.box(0.048, 0.046, 0.057, steel, -0.139, 0.808, 0.09, 0, 0, 0, null, 0.005);
     K.cyl(0.018, 0.018, 0.052, material(gunDark), -0.145, 0.823, 0.055, null, 12, 'z');
     K.cyl(0.021, 0.021, 0.014, material(gunRubber), -0.145, 0.823, 0.022, null, 12, 'z');
-    for (const z of [0.072, 0.110]) K.box(0.032, 0.010, 0.012, material(gunMid), -0.14, 0.838, z, 0, 0, 0, null, 0.002);
+    for (const z of [0.072, 0.110]) K.box(0.032, 0.010, 0.012, material(gunMid), -0.14, 0.834, z, 0, 0, 0, null, 0.002);
     for (const [x, z] of [[-0.168, 0.112], [-0.108, 0.066]]) K.cyl(0.018, 0.018, 0.015, material(gunMid), x, 0.795, z, null, 12, 'x');
   } else {
     // Two closed webbing wraps bind the folded bipod and baseplate to the upright tube.
@@ -1020,7 +979,7 @@ export function makeM240Model(ctx, folded = false) {
     rod(THREE, K, [-0.34, 0.19, -0.31], [0.34, 0.19, -0.31], 0.012, gunMid);
     K.cyl(0.027, 0.027, 0.07, gunBody, 0, 0.19, -0.31, null, 12, 'x');
     K.box(0.075, 0.035, 0.05, gunDark, 0, 0.2, -0.31, 0, 0, 0, null, 0.005);
-    rod(THREE, K, [0, 0.22, -0.29], [0, 0.745, -0.21], 0.012, gunMid);
+    rod(THREE, K, [0, 0.215, -0.292], [0, 0.745, -0.21], 0.012, gunMid);
     K.cyl(0.027, 0.027, 0.012, gunDark, 0, 0.43, -0.258, null, 16, 'y');
     K.cyl(0.027, 0.027, 0.012, gunDark, -0.049, 0.2, -0.31, null, 16, 'x');
     K.box(0.055, 0.011, 0.011, gunAccent, -0.071, 0.2, -0.31, 0, 0, 0, null, 0.002);
@@ -1036,9 +995,9 @@ export function makeM240Model(ctx, folded = false) {
   K.box(0.096, 0.026, 0.25, gunDark, 0, 0.805, 0.077, 0, 0, 0, null, 0.005);
   K.slab([[-0.22, 0.82], [0.2, 0.82], [0.2, 0.9], [0.18, 0.915], [-0.2, 0.915], [-0.22, 0.9]], 0.11, gunBody, { bevel: 0.01 });
   for (const sx of [-1, 1]) {
-    K.slab([[-0.204, 0.831], [0.176, 0.831], [0.182, 0.846], [0.182, 0.893], [-0.204, 0.899]], 0.004, gunMid, { x: sx * 0.064, bevel: 0.002 });
+    K.slab([[-0.204, 0.831], [0.176, 0.831], [0.182, 0.846], [0.182, 0.893], [-0.204, 0.899]], 0.011, gunMid, { x: sx * 0.0605, bevel: 0.002 });
     K.box(0.006, 0.007, 0.161, gunDark, sx * 0.067, 0.861, 0.034, 0, 0, 0, null, 0.002);
-    for (const [z, y] of [[-0.185, 0.883], [0.158, 0.883], [-0.183, 0.844], [0.154, 0.844], [-0.049, 0.882]]) bolt(K, gunDark, gunAccent, sx * 0.069, y, z, 0.003);
+    for (const [z, y] of [[-0.185, 0.883], [0.158, 0.883], [-0.183, 0.844], [0.154, 0.844], [-0.049, 0.882]]) bolt(K, gunDark, gunAccent, sx * 0.068, y, z, 0.003);
     for (const z of [-0.146, 0.128]) K.box(0.008, 0.052, 0.008, gunAccent, sx * 0.068, 0.864, z, 0, 0, 0, null, 0.001);
   }
   K.box(0.01, 0.023, 0.095, gunDark, 0.068, 0.875, 0.052, 0, 0, 0, null, 0.002); // right link-ejection window
@@ -1060,6 +1019,7 @@ export function makeM240Model(ctx, folded = false) {
   g.userData.feedTray = feedTray;
   g.userData.baseFeedCoverRot = feedCover.rotation.clone();
   g.userData.baseFeedTrayRot = feedTray.rotation.clone();
+  K.box(0.032, 0.025, 0.029, gunMid, 0, 0.9275, -0.16, 0, 0, 0, null, 0.003);
   const rearSightLeaf = K.group(0, 0.94, -0.16); rearSightLeaf.name = 'm240-rear-sight-leaf';
   K.box(0.03, 0.004, 0.07, gunDark, 0, 0.006, 0.036, 0, 0, 0, rearSightLeaf, 0.002);
   K.tor(0.008, 0.002, gunAccent, 0, 0.012, 0.066, 0, 0, 0, rearSightLeaf, Math.PI * 2, 12);
@@ -1069,7 +1029,7 @@ export function makeM240Model(ctx, folded = false) {
   // 0.19 m buttstock brings the complete M240B to its 48.5-inch handout length
   // without moving the receiver, rear grip, muzzle or elevation pivot.
   K.slab([[-0.22, 0.9], [-0.4, 0.89], [-0.42, 0.9], [-0.425, 0.78], [-0.4, 0.77], [-0.3, 0.81], [-0.22, 0.83]], 0.07, gunPoly, { bevel: 0.016, segs: 3 });
-  K.slab([[-0.44, 0.904], [-0.422, 0.904], [-0.426, 0.776], [-0.442, 0.772]], 0.076, gunRubber, { bevel: 0.006 });
+  K.slab([[-0.44, 0.904], [-0.420, 0.904], [-0.424, 0.776], [-0.442, 0.772]], 0.076, gunRubber, { bevel: 0.006 });
   K.slab(gripOutline(-0.166, 0.76, 0.14, 0.066, 0.28), 0.056, gunPoly, { bevel: 0.013, segs: 3 });
   K.slab([[-0.246, 0.829], [-0.068, 0.829], [-0.068, 0.807], [-0.124, 0.803], [-0.224, 0.795]], 0.071, gunMid, { bevel: 0.005 }); // pinned trigger housing
   K.cyl(0.008, 0.008, 0.077, gunAccent, 0, 0.813, -0.219, null, 12, 'x');
@@ -1079,7 +1039,7 @@ export function makeM240Model(ctx, folded = false) {
     K.cyl(0.005, 0.005, 0.004, gunAccent, sx * 0.033, 0.783, -0.151, null, 10, 'x');
   }
   const chargingHandle = K.group(0.077, 0.852, 0.06); chargingHandle.name = 'm240-charging-handle';
-  K.box(0.011, 0.018, 0.25, gunDark, 0, 0, -0.08, 0, 0, 0, chargingHandle, 0.003);
+  K.box(0.017, 0.018, 0.25, gunDark, -0.003, 0, -0.08, 0, 0, 0, chargingHandle, 0.003);
   K.cyl(0.008, 0.008, 0.055, gunAccent, 0.024, 0, 0, chargingHandle, 12, 'x');
   K.cyl(0.013, 0.013, 0.029, gunRubber, 0.057, 0, 0, chargingHandle, 12, 'x');
   g.userData.chargingHandle = chargingHandle;
@@ -1122,8 +1082,8 @@ export function makeM240Model(ctx, folded = false) {
   if (!folded) {
     K.box(0.09, 0.145, 0.2, gunOlive, -0.12, 0.7875, 0, 0, 0, 0, null, 0.008);
     K.box(0.096, 0.013, 0.206, gunMid, -0.12, 0.866, 0, 0, 0, 0, null, 0.003);
-    for (const z of [-0.087, 0.087]) K.box(0.006, 0.126, 0.006, gunMid, -0.168, 0.79, z, 0, 0, 0, null, 0.001);
-    K.box(0.009, 0.059, 0.043, gunDark, -0.171, 0.809, -0.003, 0, 0, 0, null, 0.002);
+    for (const z of [-0.087, 0.087]) K.box(0.006, 0.126, 0.006, gunMid, -0.166, 0.79, z, 0, 0, 0, null, 0.001);
+    K.box(0.009, 0.059, 0.043, gunDark, -0.169, 0.809, -0.003, 0, 0, 0, null, 0.002);
     K.box(0.011, 0.029, 0.034, gunMid, -0.176, 0.818, -0.003, 0, 0, 0, null, 0.003);
     // Linked cartridges turn continuously from the can's mouth into the feed port.
     for (let i = 0; i < 10; i++) {

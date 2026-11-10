@@ -1,13 +1,13 @@
 # CLAUDE DIRECTOR
 
-state: active
-model: Claude Opus 5.5
-task: CL-352 Every agent checks the board every 15 minutes: crew.mjs standby (D-147)
-touching: crew/crew.mjs, AGENTS.md, docs/decisions.md, crew/BOARD.md
-since: 2026-11-10T20:12Z
+state: idle
+model: Claude Fable 5.2
+task: —
+touching: —
+since: 2026-11-10T20:30Z
 next: —
 blocked-on: —
-last-report: handoffs/2026-11-10-claude-CL-351.md
+last-report: handoffs/2026-11-10-claude-CL-353.md
 
 ## Notes
 

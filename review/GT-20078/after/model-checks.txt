@@ -1,0 +1,9 @@
+PASS Minigun minimum clearance across the 12 sampled grip-to-housing rays 27.07 -> 34.46 mm
+PASS Launcher grip-to-housing/stock rays with a full 20 mm pocket: 12/12
+PASS Bought Uzi module and support glove: intersection before, 9.13–9.13 mm apart after
+PASS Visible Uzi attachment reaches the fore-end: gap at most 0.01 mm
+PASS No fitted Wasp component enters the visible fore-end
+PASS Uzi light and laser origins coincide with their drawn windows
+PASS minigun assembly: 182 pieces, 0 detached groups
+PASS launcher assembly: 239 pieces, 0 detached groups
+PASS uzi assembly: 198 pieces, 0 detached groups

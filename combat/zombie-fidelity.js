@@ -162,7 +162,7 @@ export function refineHeavyArmor(A,T,g,s,k,M) {
   const back=A.plate(u.torso,steel,[[.115,.19,.232],[.20,.265,.245],[.34,.27,.232],[.43,.20,.185]],.026);back.rotation.y=Math.PI;
   for(const side of [-1,1]){
     A.path(u.torso,rust,[[side*.19,.118,.21],[side*.26,.18,.223],[side*.277,.29,.225],[side*.244,.38,.212],[side*.175,.42,.173]],.008);
-    for(let j=0;j<3;j++)A.egg(u.torso,rust,side*.245,.18+j*.085,.237,.018,.02,.009);
+    for(let j=0;j<3;j++)A.egg(u.torso,rust,side*.245,.18+j*.085,k==='colossus'?.265:.246,.018,.02,.009);
     const arm=side<0?u.armLG:u.armRG,el=arm.userData.elbowG,shin=(side<0?u.legLG:u.legRG).userData.shinG;
     A.loft(arm,steel,[[.008,.169,.165],[.06,.172,.16],[.11,.136,.13],[.14,.06,.065]],12);
     A.plate(el,steel,[[-.29,.06,.075],[-.24,.091,.106],[-.12,.113,.125],[-.065,.105,.118]],.018);

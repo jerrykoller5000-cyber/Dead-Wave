@@ -107,7 +107,7 @@ export function sculptDemon(A, T, g, s, materials) {
     body(shin, hair, [[-.415,.10,.13,.055],[-.39,.13,.175,.075],[-.34,.115,.145,.055],[-.29,.071,.065,.005]]);
     for (let f = 0; f < 3; f++) sweep(shin, edge, [[(f-1)*.069,-.37,.15],[(f-1)*.075,-.39,.215],[(f-1)*.08,-.40,.26]], .026, 7);
     for (let j = 0; j < 3; j++) sweep(u.torso, armor, [[side*.18,.20+j*.10,-.15],[side*.23,.27+j*.10,-.24],[side*.24,.36+j*.10,-.29]], .043, 8);
-    A.rag(u.hips, cloth, side*.09,.13,.18,.15,.24,side*.08);
+    A.rag(u.hips, cloth, side*.09,.13,.17,.15,.24,side*.08);
   }
   // One skull and jaw silhouette; brow and cheek ridges grow out of that surface.
   body(u.head, skin, [[-.18,.055,.055,.035],[-.15,.10,.09,.025],[-.09,.135,.12],[0,.175,.14,-.012],[.08,.181,.145,-.02],[.15,.16,.125,-.025],[.205,.115,.095,-.03],[.23,.04,.045,-.03]]);

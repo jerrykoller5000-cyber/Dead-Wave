@@ -1,0 +1,74 @@
+{
+  "minigun": {
+    "intersections": {
+      "r glove": [
+        {
+          "name": "BufferGeometry",
+          "source": "studio/weapon-heavy.js:168",
+          "depthLocal": 0.016426588154731064
+        }
+      ],
+      "r glovePads": [
+        {
+          "name": "BufferGeometry",
+          "source": "studio/weapon-heavy.js:126",
+          "depthLocal": 0.003972731706607996
+        }
+      ]
+    },
+    "light": [
+      0.1295,
+      0.0462,
+      0.1176
+    ],
+    "rootScale": 0.88
+  },
+  "launcher": {
+    "intersections": {
+      "r glove": [
+        {
+          "name": "BufferGeometry",
+          "source": "studio/weapon-heavy.js:367",
+          "depthLocal": 0.025411352140395138
+        }
+      ],
+      "r glovePads": [
+        {
+          "name": "BufferGeometry",
+          "source": "studio/weapon-heavy.js:367",
+          "depthLocal": 0.020225763623714536
+        }
+      ],
+      "l glove": [
+        {
+          "name": "BufferGeometry",
+          "source": "studio/weapon-heavy.js:478",
+          "depthLocal": 0.0006538172719278302
+        }
+      ]
+    },
+    "light": [
+      0.112,
+      0.04,
+      0.55
+    ],
+    "rootScale": 0.6978001833180568
+  },
+  "uzi": {
+    "intersections": {
+      "r glove": [
+        {
+          "name": "BufferGeometry",
+          "source": "studio/weapon-sidearms.js:644",
+          "depthLocal": 0.009423389397266394
+        }
+      ]
+    },
+    "light": [
+      0,
+      -0.067,
+      0.217
+    ],
+    "rootScale": 0.6547558922558921
+  }
+}

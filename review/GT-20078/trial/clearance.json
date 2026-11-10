@@ -1,0 +1,139 @@
+{
+  "uzi": {
+    "scale": 0.6547558922558858,
+    "candidates": [
+      {
+        "dz": 0,
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      {
+        "dz": 0.01,
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      {
+        "dz": 0.02,
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      {
+        "dz": 0.03,
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      {
+        "dz": 0.04,
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      {
+        "dz": 0.05,
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      {
+        "dz": 0.06,
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      {
+        "dz": 0.08,
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      {
+        "dz": 0.1,
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      {
+        "dz": 0.12,
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      {
+        "dz": 0.15,
+        "lowerMm": 3.5624999999999996,
+        "upperMm": 3.5703124999999996
+      }
+    ],
+    "compact": [
+      {
+        "size": 0.72,
+        "dx": 0,
+        "dy": 0.031,
+        "dz": 0.06,
+        "lowerMm": 9.125000000000002,
+        "upperMm": 9.1328125
+      },
+      {
+        "size": 0.72,
+        "dx": 0.02,
+        "dy": 0.031,
+        "dz": 0.06,
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      {
+        "size": 0.72,
+        "dx": 0.02,
+        "dy": 0.031,
+        "dz": 0.075,
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      {
+        "size": 0.72,
+        "dx": 0.02,
+        "dy": 0.031,
+        "dz": 0.09,
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      {
+        "size": 0.72,
+        "dx": 0.02,
+        "dy": 0.031,
+        "dz": 0.105,
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      {
+        "size": 0.72,
+        "dx": 0.02,
+        "dy": 0.031,
+        "dz": 0.12,
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      {
+        "size": 0.72,
+        "dx": -0.02,
+        "dy": 0.031,
+        "dz": 0.06,
+        "lowerMm": 17.9765625,
+        "upperMm": 17.984375000000004
+      }
+    ],
+    "moduleRear": 0.152000002384284,
+    "handFront": 0.2974851921661735,
+    "clearanceMm": -95.25728524565793,
+    "clearAcrossXY": false
+  }
+}
