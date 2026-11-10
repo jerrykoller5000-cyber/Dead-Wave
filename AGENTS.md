@@ -1,6 +1,6 @@
 # AGENTS.md — how the Grave Shift crew works
 
-Every agent reads this first, every session: Claude, Claude 2, ChatGPT and Antigravity
+Every agent reads this first, every session: Claude, Claude 2, Claude 3, ChatGPT and Antigravity
 (Grokbot and Muse were retired by Jerry on 10 Nov 2026, D-134; Cursor the same day, D-137: Claude 2 took its lane).
 Jerry has the final say. Claude leads.
 
@@ -84,8 +84,8 @@ before the commit (or Claude). ChatGPT's runner does not get past Chrome: `CDP t
 in `tools/cdp.mjs`, even with one worker. That is his environment, not a failing check.
 He writes "not run" and whoever commits runs the suite for him at commit time.
 
-Agent names for the commands: `claude`, `claude2`, `chatgpt`, `antigravity`.
-Task ids: `CL-`, `CB-`, `GP-`, `AG-` (`CU-`, `GB-` and `MU-` are retired, D-134, D-137).
+Agent names for the commands: `claude`, `claude2`, `claude3`, `chatgpt`, `antigravity`.
+Task ids: `CL-`, `CB-`, `CC-`, `GP-`, `AG-` (`CU-`, `GB-` and `MU-` are retired, D-134, D-137).
 
 ## Who owns what
 
@@ -95,9 +95,8 @@ The current split (Jerry, 2026-10-15) is on the board under **Who owns what**; i
 | --- | --- | --- |
 | Claude (lead) | The board and reviews; the marine's body and fabric (blouse, trousers, hats, gloves), his ears; the inspector; the world, the studio and reactions; story | `crew/BOARD.md`, `studio/marine-body.js`, `studio/marine-cloth.js`, `studio/marine-hats.js`, `studio/inspector/*`, `world/*`, `life/*`, `docs/*` |
 | Claude 2 | Cursor's lane (D-137): integration, tools and the game-test queue, the full suite (in its cloud), engine core, combat; direct fixes from Jerry that Claude routes to it. No git (rule 6) | the `index.html` shell, `core/*`, `tools/*`, `vendor/*`, `package.json`, `combat/*` (not the zombie looks) |
-| (Cursor, retired 10 Nov, D-137) | Its lane moved to Claude 2; its commit runs to Antigravity | — |
-| ChatGPT | Every zombie's look; the marine's fitted helpers, waist and balaclava; what the player reads and decides | `studio/zombie-*.js`, `combat/demon-visual.js`, `combat/zombie-joins.js`, `ui/*`, `game/*` |
-| (Grokbot, retired 10 Nov, D-134) | Its areas moved: the weapon models to ChatGPT (D-122's first round, Claude's polish); combat (the director, builds' behaviour, scripted deaths) to Cursor | `studio/weapon-*.js`: ChatGPT; `combat/*` (not the zombie looks): Cursor |
+| Claude 3 | The heavy model work in Claude's lane (D-141): the marine's third-person body and fabric, his head and face. No git (rule 6) | `studio/marine-body.js`, `studio/marine-cloth.js`, `studio/marine-hats.js`, `ui/marine-face.js` |
+| ChatGPT | Every zombie's look; the marine's fitted helpers and waist (the head and balaclava: Claude 3, D-141); what the player reads and decides | `studio/zombie-*.js`, `combat/demon-visual.js`, `combat/zombie-joins.js`, `ui/*`, `game/*` |
 | Antigravity | The look of buildables and props; eyes on Jerry's GPU (screenshots and reports) | `index.html` (build meshes), `qa/*` |
 
 A file not in this table: ask Claude before you start. Until the split lands, "files" means the matching sections of `index.html`. Several agents
@@ -135,7 +134,7 @@ card in `crew/status/`, appends to `crew/LOG.md`, and writes their own handoff n
    - `git pull --rebase` before you push, and never force-push.
    - **Commit jobs (D-131, D-134, D-137):** Claude writes every commit job; **Antigravity** runs it on Jerry's PC
      (`cmd /c "Claude Commit.bat" < nul`, after `--touch "git"`, and nothing else in git). When Antigravity isn't
-     open, Jerry double-clicks `Claude Commit.bat`. Claude and Claude 2 reach the PC through a Linux sandbox with no
+     open, Jerry double-clicks `Claude Commit.bat`. Claude, Claude 2 and Claude 3 reach the PC through a Linux sandbox with no
      Windows git: they never run git there. (Cursor ran them until it was retired, D-137.) **Small and often (D-135):** each item Claude has reviewed goes into the next
      commit; landed work never waits more than a day, so a bad change is easy to find and undo.
 7. **Done means all of these:**
@@ -245,7 +244,7 @@ card in `crew/status/`, appends to `crew/LOG.md`, and writes their own handoff n
 Four agents, each good at something different. The board gives each one tasks that fit.
 The roadmap to 1.0 (`crew/BOARD.md` and `docs/roadmap.md`, D-43) is laid out that way: the board's "Who
 does what" says what to give each agent and what to keep away from it.
-- **Claude, Claude 2 and ChatGPT** take the big, cross-cutting work inside
+- **Claude, Claude 2, Claude 3 and ChatGPT** take the big, cross-cutting work inside
   `index.html` and their modules.
 - **Antigravity** can see: it runs the game in a real browser on a real GPU. Every visible
   change goes through it: the pit, the cave warnings, the loading screen, the build aiming.
