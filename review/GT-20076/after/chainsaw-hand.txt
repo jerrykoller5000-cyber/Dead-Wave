@@ -1,0 +1,4 @@
+PASS guns checked up in first person: 1 of 1
+FAIL no part of either hand inside any part of a gun (deepest per gun, mm: chainsaw 20.9); through: chainsaw: 20.9 mm (r glove in ? at gun-local 0.0092,-0.0167,-0.4602)
+PASS neither hand through the other (D-140)
+PASS the gloved wrists stay inside the sleeves at every gun's hip hold

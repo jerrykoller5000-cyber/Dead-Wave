@@ -1,0 +1,11 @@
+[
+  { "target": "build:barricade", "out": "qa/2026-11-10-AG-281/barricade-after.png" },
+  { "target": "build:railing", "out": "qa/2026-11-10-AG-281/railing-after.png" },
+  { "target": "build:platform", "out": "qa/2026-11-10-AG-281/platform-after.png" },
+  { "target": "build:stairs", "out": "qa/2026-11-10-AG-281/stairs-after.png" },
+  { "target": "build:spikes", "out": "qa/2026-11-10-AG-281/spikes-after.png" },
+  { "target": "build:sandbag", "out": "qa/2026-11-10-AG-281/sandbag-after.png" },
+  { "target": "build:wire", "out": "qa/2026-11-10-AG-281/wire-after.png" },
+  { "target": "build:pillar", "out": "qa/2026-11-10-AG-281/pillar-after.png" },
+  { "target": "build:floor", "out": "qa/2026-11-10-AG-281/floor-after.png" }
+]

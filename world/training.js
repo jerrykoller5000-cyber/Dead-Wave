@@ -355,13 +355,13 @@ export function buildTrainingGround(T, opts = {}) {
   const keypadFace = std({ color: 0xffffff, map: keypadTex, roughness: .5 });
   const keypads = [];
   for (const side of [-1, 1]) {
-    const kz = D.minZ - .32;
-    box(.15, .46, .32, steel, D.x + side * .10, 1.4, kz); // back flush with the wall face
-    box(.025, .12, .16, doorLamp, D.x + side * .19, 1.48, kz);
-    box(.05, .16, .14, steelLight, D.x + side * .19, 1.28, kz);
-    const face = add(new T.PlaneGeometry(.13, .15), keypadFace, D.x + side * .2155, 1.28, kz);
+    // AG-278 (Jerry's J104): keypad mounted flush on the yellow-and-black striped door trim post (z = D.minZ, face at D.x + side * .25)
+    const kz = D.minZ;
+    box(.025, .08, .14, doorLamp, D.x + side * (.25 + .0125), 1.42, kz);
+    box(.04, .16, .14, steelLight, D.x + side * (.25 + .02), 1.28, kz);
+    const face = add(new T.PlaneGeometry(.13, .15), keypadFace, D.x + side * (.25 + .04 + .001), 1.28, kz);
     face.rotation.y = side * Math.PI / 2;
-    keypads.push({ side, x: O.x + D.x + side * .19, y: O.y + 1.3, z: O.z + kz, front: W(D.x + side * 1.0, kz) });
+    keypads.push({ side, x: O.x + D.x + side * (.25 + .04), y: O.y + 1.28, z: O.z + kz, front: W(D.x + side * 1.0, kz) });
   }
   box(.55, .14, D.maxZ - D.minZ + .22, steel, D.x, 3.2, doorZ);
   const doorSolid = { minX: O.x+D.x-.18, maxX: O.x+D.x+.18, minY: O.y, maxY: O.y+3,
@@ -450,10 +450,15 @@ export function buildTrainingGround(T, opts = {}) {
     const z = TRAINING.LINE_Z + TRAINING.RANGES[i];
     const root = new T.Group(); root.position.set(lx, 0, z); g.add(root);
     box(0.62 * 1.5, 0.2, 0.46 * 1.5, steel, 0, 0.1, 0, root);     // a wider stand for the bigger plate
-    box(0.7 * 1.5, 0.04, 0.54 * 1.5, hazard, 0, 0.21, 0, root);
+    box(0.7 * 1.5, 0.04, 0.54 * 1.5, hazard, 0, 0.22, 0, root);
+    box(0.24, 0.04, 0.14, steel, 0, 0.24, 0, root);                // hinge axle pillow block
     const pivot = new T.Group(); pivot.position.set(0, PIVOT_Y, 0); root.add(pivot);
-    box(0.09, 0.5, 0.09, steelLight, 0, 0.25, 0, pivot);
-    for (const s of [-1, 1]) box(0.05, 0.5, 0.05, steelLight, s * 0.35, 0.25, 0, pivot);   // two more uprights under its shoulders
+    box(0.18, 0.04, 0.10, steelLight, 0, 0.02, 0, pivot);          // pivot axle knuckle
+    // Backing uprights and crossbar support the silhouette plate from behind (z = -0.028) with no clipping.
+    box(0.06, 1.45, 0.04, steelLight, 0, 0.765, -0.028, pivot);
+    for (const s of [-1, 1]) box(0.045, 1.45, 0.04, steelLight, s * 0.35, 0.765, -0.028, pivot);
+    box(0.78, 0.04, 0.035, steelLight, 0, 1.10, -0.028, pivot);
+    box(0.78, 0.04, 0.035, steelLight, 0, 0.45, -0.028, pivot);
     const plate = add(new T.PlaneGeometry(PLATE.w, PLATE.h), plateMat, 0, PLATE.y, 0, pivot);
     plate.rotation.y = Math.PI; plate.castShadow = true; plate.name = 'target-plate';
     const t = { lane: i + 1, range: TRAINING.RANGES[i], state: 'up', t: 0, hits: 0, fall: 1, pivot, plate, x: lx, z };

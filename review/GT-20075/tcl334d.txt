@@ -1,0 +1,5 @@
+PASS guns checked up in first person: 4 of 4
+FAIL no part of either hand inside any part of a gun (deepest per gun, mm: minigun 14.5, launcher 17.7, flamer 0.0, chainsaw 18.6); through: minigun: 14.5 mm (r glove in ?); launcher: 17.7 mm (r glove in ?); chainsaw: 18.6 mm (r glove in ?)
+PASS neither hand through the other (D-140)
+PASS the gloved wrists stay inside the sleeves at every gun's hip hold
+PASS no page errors

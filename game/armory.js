@@ -40,11 +40,11 @@ export function createArmory({ guns = [] } = {}) {
       [type, entries.map(gun => gun ? copyGun(gun) : null)])),
     shelf: shelf.map(copyGun)
   });
-  function buy(input) {
+  function buy(input, { store = false } = {}) {
     const gun = normalizeGun(input);
     if (!gun) return { ok: false, reason: 'invalid' };
     if (allGuns().some(owned => owned.id === gun.id)) return { ok: false, reason: 'owned' };
-    const type = slotType(gun.kind), index = slots[type].findIndex(entry => !entry);
+    const type = slotType(gun.kind), index = store ? -1 : slots[type].findIndex(entry => !entry);
     if (index >= 0) slots[type][index] = gun;
     else shelf.push(gun);
     return { ok: true, location: index >= 0 ? type : 'shelf', index: index >= 0 ? index : shelf.length - 1,

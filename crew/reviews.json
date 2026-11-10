@@ -122,7 +122,7 @@
     },
     {
       "asset": "guns",
-      "owner": "cursor",
+      "owner": "claude",
       "rig": null,
       "clip": null,
       "reference": null
@@ -206,7 +206,7 @@
     },
     {
       "asset": "marine-knocked",
-      "owner": "grokbot",
+      "owner": "claude",
       "rig": "marine",
       "clip": null,
       "reference": null
@@ -234,28 +234,28 @@
     },
     {
       "asset": "motion-marine-marine",
-      "owner": "grokbot",
+      "owner": "claude",
       "rig": "marine",
       "clip": null,
       "reference": null
     },
     {
       "asset": "motion-zombie-shambler",
-      "owner": "grokbot",
+      "owner": "claude",
       "rig": "zombie",
       "clip": null,
       "reference": null
     },
     {
       "asset": "night-lockdown",
-      "owner": "cursor",
+      "owner": "claude",
       "rig": null,
       "clip": null,
       "reference": null
     },
     {
       "asset": "passages",
-      "owner": "cursor",
+      "owner": "claude",
       "rig": null,
       "clip": null,
       "reference": null
@@ -325,7 +325,7 @@
     },
     {
       "asset": "zombie-reactions",
-      "owner": "grokbot",
+      "owner": "claude",
       "rig": "zombie",
       "clip": null,
       "reference": null

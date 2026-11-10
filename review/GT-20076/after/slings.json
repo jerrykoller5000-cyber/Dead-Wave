@@ -1,0 +1,2694 @@
+{
+  "m4-slot1": {
+    "ends": [
+      {
+        "gunGapMm": null,
+        "gunContact": false,
+        "webContact": true
+      },
+      {
+        "gunGapMm": null,
+        "gunContact": false,
+        "webContact": true
+      }
+    ],
+    "overlaps": []
+  },
+  "m4-slot2": {
+    "ends": [
+      {
+        "gunGapMm": null,
+        "gunContact": false,
+        "webContact": true
+      },
+      {
+        "gunGapMm": null,
+        "gunContact": false,
+        "webContact": true
+      }
+    ],
+    "overlaps": []
+  },
+  "m4-slot1-vest": {
+    "ends": [
+      {
+        "gunGapMm": null,
+        "gunContact": false,
+        "webContact": true
+      },
+      {
+        "gunGapMm": null,
+        "gunContact": false,
+        "webContact": true
+      }
+    ],
+    "overlaps": []
+  },
+  "m4-slot2-vest": {
+    "ends": [
+      {
+        "gunGapMm": null,
+        "gunContact": false,
+        "webContact": true
+      },
+      {
+        "gunGapMm": null,
+        "gunContact": false,
+        "webContact": true
+      }
+    ],
+    "overlaps": []
+  },
+  "ak-slot1": {
+    "ends": [
+      {
+        "gunGapMm": 2,
+        "gunContact": false,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 7.46,
+        "gunContact": false,
+        "webContact": true
+      }
+    ],
+    "overlaps": [
+      {
+        "sling": "root",
+        "gun": "root/group[0]/fp-stock[6]/BufferGeometry[0]",
+        "at": [
+          0.22775,
+          0.65505,
+          -0.32449
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[22]~0",
+        "at": [
+          0.25406,
+          0.90455,
+          -0.24952
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[22]~1",
+        "at": [
+          0.30721,
+          1.40599,
+          -0.34453
+        ]
+      }
+    ]
+  },
+  "ak-slot2": {
+    "ends": [
+      {
+        "gunGapMm": 2,
+        "gunContact": false,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 6.11,
+        "gunContact": false,
+        "webContact": true
+      }
+    ],
+    "overlaps": [
+      {
+        "sling": "root",
+        "gun": "root/group[0]/fp-stock[6]/BufferGeometry[0]",
+        "at": [
+          -0.23442,
+          0.65298,
+          -0.31603
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[22]~0",
+        "at": [
+          -0.25526,
+          0.90369,
+          -0.24805
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[22]~1",
+        "at": [
+          -0.31388,
+          1.40754,
+          -0.33816
+        ]
+      }
+    ]
+  },
+  "ak-slot1-vest": {
+    "ends": [
+      {
+        "gunGapMm": 2,
+        "gunContact": false,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 7.46,
+        "gunContact": false,
+        "webContact": true
+      }
+    ],
+    "overlaps": [
+      {
+        "sling": "root",
+        "gun": "root/group[0]/fp-stock[6]/BufferGeometry[0]",
+        "at": [
+          0.22775,
+          0.65505,
+          -0.32449
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[22]~0",
+        "at": [
+          0.25296,
+          0.8942,
+          -0.25327
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[22]~1",
+        "at": [
+          0.30688,
+          1.40579,
+          -0.34346
+        ]
+      }
+    ]
+  },
+  "ak-slot2-vest": {
+    "ends": [
+      {
+        "gunGapMm": 2,
+        "gunContact": false,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 6.11,
+        "gunContact": false,
+        "webContact": true
+      }
+    ],
+    "overlaps": [
+      {
+        "sling": "root",
+        "gun": "root/group[0]/fp-stock[6]/BufferGeometry[0]",
+        "at": [
+          -0.23442,
+          0.65298,
+          -0.31603
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[22]~0",
+        "at": [
+          -0.25438,
+          0.89335,
+          -0.25147
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[22]~1",
+        "at": [
+          -0.31356,
+          1.40772,
+          -0.3374
+        ]
+      }
+    ]
+  },
+  "aa12-slot1": {
+    "ends": [
+      {
+        "gunGapMm": 6.07,
+        "gunContact": false,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 3.32,
+        "gunContact": false,
+        "webContact": true
+      }
+    ],
+    "overlaps": [
+      {
+        "sling": "root",
+        "gun": "root/group[0]/fp-stock[17]/BufferGeometry[0]~1",
+        "at": [
+          0.28237,
+          0.6153,
+          -0.40149
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/fp-stock[17]/BufferGeometry[0]~3",
+        "at": [
+          0.2795,
+          0.6631,
+          -0.37559
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/group[18]/magazineBody[0]/BufferGeometry[0]",
+        "at": [
+          0.26145,
+          0.98613,
+          -0.18508
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/group[18]/magazineBody[0]/BufferGeometry[17]~0",
+        "at": [
+          0.25218,
+          0.98616,
+          -0.1847
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[38]~0",
+        "at": [
+          0.36212,
+          1.32235,
+          -0.3599
+        ]
+      }
+    ]
+  },
+  "aa12-slot2": {
+    "ends": [
+      {
+        "gunGapMm": 6.07,
+        "gunContact": false,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 3.32,
+        "gunContact": false,
+        "webContact": true
+      }
+    ],
+    "overlaps": [
+      {
+        "sling": "root",
+        "gun": "root/group[0]/fp-stock[17]/BufferGeometry[0]~1",
+        "at": [
+          -0.25216,
+          0.61401,
+          -0.40219
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/fp-stock[17]/BufferGeometry[0]~4",
+        "at": [
+          -0.25453,
+          0.70888,
+          -0.35078
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/group[18]/magazineBody[0]/BufferGeometry[0]",
+        "at": [
+          -0.26224,
+          0.98376,
+          -0.18819
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/group[18]/magazineBody[0]/BufferGeometry[17]~0",
+        "at": [
+          -0.22316,
+          0.98542,
+          -0.18645
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[38]~0",
+        "at": [
+          -0.32285,
+          1.31591,
+          -0.33763
+        ]
+      }
+    ]
+  },
+  "aa12-slot1-vest": {
+    "ends": [
+      {
+        "gunGapMm": 6.07,
+        "gunContact": false,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 3.32,
+        "gunContact": false,
+        "webContact": true
+      }
+    ],
+    "overlaps": [
+      {
+        "sling": "root",
+        "gun": "root/group[0]/fp-stock[17]/BufferGeometry[0]~1",
+        "at": [
+          0.28237,
+          0.6153,
+          -0.40149
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/fp-stock[17]/BufferGeometry[0]~3",
+        "at": [
+          0.27932,
+          0.66608,
+          -0.37397
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/group[18]/magazineBody[0]/BufferGeometry[0]",
+        "at": [
+          0.26134,
+          0.98556,
+          -0.18676
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/group[18]/magazineBody[0]/BufferGeometry[17]~0",
+        "at": [
+          0.25213,
+          0.98557,
+          -0.18643
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[38]~0",
+        "at": [
+          0.36191,
+          1.32378,
+          -0.35958
+        ]
+      }
+    ]
+  },
+  "aa12-slot2-vest": {
+    "ends": [
+      {
+        "gunGapMm": 6.07,
+        "gunContact": false,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 3.32,
+        "gunContact": false,
+        "webContact": true
+      }
+    ],
+    "overlaps": [
+      {
+        "sling": "root",
+        "gun": "root/group[0]/fp-stock[17]/BufferGeometry[0]~1",
+        "at": [
+          -0.25216,
+          0.61401,
+          -0.40219
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/fp-stock[17]/BufferGeometry[0]~4",
+        "at": [
+          -0.25447,
+          0.70541,
+          -0.35018
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/group[18]/magazineBody[0]/BufferGeometry[0]",
+        "at": [
+          -0.26213,
+          0.98323,
+          -0.18963
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/group[18]/magazineBody[0]/BufferGeometry[17]~0",
+        "at": [
+          -0.22304,
+          0.98484,
+          -0.18802
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/group[18]/magazineBody[0]/BufferGeometry[19]~2",
+        "at": [
+          -0.22301,
+          0.98307,
+          -0.187
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[38]~0",
+        "at": [
+          -0.32207,
+          1.31647,
+          -0.33588
+        ]
+      }
+    ]
+  },
+  "shotgun-slot1": {
+    "ends": [
+      {
+        "gunGapMm": 8.85,
+        "gunContact": false,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 7.48,
+        "gunContact": false,
+        "webContact": true
+      }
+    ],
+    "overlaps": [
+      {
+        "sling": "root",
+        "gun": "root/group[0]/fp-stock[4]/BufferGeometry[0]~0",
+        "at": [
+          0.16591,
+          0.60438,
+          -0.27934
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[2]~13",
+        "at": [
+          0.19618,
+          0.87058,
+          -0.24797
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[6]~28",
+        "at": [
+          0.21096,
+          0.92704,
+          -0.23536
+        ]
+      }
+    ]
+  },
+  "shotgun-slot2": {
+    "ends": [
+      {
+        "gunGapMm": 8.85,
+        "gunContact": false,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 7.48,
+        "gunContact": false,
+        "webContact": true
+      }
+    ],
+    "overlaps": [
+      {
+        "sling": "root",
+        "gun": "root/group[0]/fp-stock[4]/BufferGeometry[0]~0",
+        "at": [
+          -0.17237,
+          0.60506,
+          -0.28273
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[2]~13",
+        "at": [
+          -0.20515,
+          0.90019,
+          -0.24338
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[6]~28",
+        "at": [
+          -0.21194,
+          0.92817,
+          -0.23522
+        ]
+      }
+    ]
+  },
+  "shotgun-slot1-vest": {
+    "ends": [
+      {
+        "gunGapMm": 8.85,
+        "gunContact": false,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 7.48,
+        "gunContact": false,
+        "webContact": true
+      }
+    ],
+    "overlaps": [
+      {
+        "sling": "root",
+        "gun": "root/group[0]/fp-stock[4]/BufferGeometry[0]~0",
+        "at": [
+          0.16633,
+          0.60599,
+          -0.27903
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[2]~13",
+        "at": [
+          0.2005,
+          0.8869,
+          -0.24545
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[6]~28",
+        "at": [
+          0.2083,
+          0.91673,
+          -0.23864
+        ]
+      }
+    ]
+  },
+  "shotgun-slot2-vest": {
+    "ends": [
+      {
+        "gunGapMm": 8.85,
+        "gunContact": false,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 7.48,
+        "gunContact": false,
+        "webContact": true
+      }
+    ],
+    "overlaps": [
+      {
+        "sling": "root",
+        "gun": "root/group[0]/fp-stock[4]/BufferGeometry[0]~0",
+        "at": [
+          -0.17276,
+          0.60668,
+          -0.2824
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[2]~13",
+        "at": [
+          -0.20217,
+          0.88675,
+          -0.23953
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[6]~28",
+        "at": [
+          -0.21635,
+          0.94669,
+          -0.22725
+        ]
+      }
+    ]
+  },
+  "sniper-slot1": {
+    "ends": [
+      {
+        "gunGapMm": 1.49,
+        "gunContact": false,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 5.82,
+        "gunContact": false,
+        "webContact": true
+      }
+    ],
+    "overlaps": [
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[13]",
+        "at": [
+          0.22675,
+          0.8403,
+          -0.25721
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/group[16]/magazineBody[0]/BufferGeometry[0]",
+        "at": [
+          0.25168,
+          0.91106,
+          -0.24412
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/fp-stock[21]/BufferGeometry[8]~0",
+        "at": [
+          0.17821,
+          0.47814,
+          -0.33068
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/fp-stock[21]/BufferGeometry[8]~1",
+        "at": [
+          0.21468,
+          0.69325,
+          -0.28348
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/fp-stock[21]/BufferGeometry[10]~0",
+        "at": [
+          0.21935,
+          0.72062,
+          -0.28041
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[32]~0",
+        "at": [
+          0.25168,
+          0.91106,
+          -0.24412
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[32]~1",
+        "at": [
+          0.21468,
+          0.69325,
+          -0.28348
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[32]~2",
+        "at": [
+          0.23348,
+          0.80205,
+          -0.26401
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[32]~6",
+        "at": [
+          0.27563,
+          1.36769,
+          -0.26275
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[32]~8",
+        "at": [
+          0.27502,
+          1.36656,
+          -0.26078
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[32]~24",
+        "at": [
+          0.21949,
+          0.71989,
+          -0.27393
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[32]~25",
+        "at": [
+          0.22403,
+          0.74808,
+          -0.27741
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[1]~21",
+        "at": [
+          0.2341,
+          0.8766,
+          -0.24871
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[3]~14",
+        "at": [
+          0.23574,
+          0.89343,
+          -0.24356
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[3]~20",
+        "at": [
+          0.20262,
+          0.83498,
+          -0.25816
+        ]
+      }
+    ]
+  },
+  "sniper-slot2": {
+    "ends": [
+      {
+        "gunGapMm": 1.49,
+        "gunContact": false,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 5.82,
+        "gunContact": false,
+        "webContact": true
+      }
+    ],
+    "overlaps": [
+      {
+        "sling": "root",
+        "gun": "root/group[0]/fp-stock[21]/BufferGeometry[8]~0",
+        "at": [
+          -0.22466,
+          0.47181,
+          -0.31359
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/fp-stock[21]/BufferGeometry[8]~1",
+        "at": [
+          -0.24057,
+          0.69064,
+          -0.27376
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[32]~1",
+        "at": [
+          -0.24057,
+          0.69064,
+          -0.27376
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[32]~16",
+        "at": [
+          -0.32351,
+          1.3811,
+          -0.25837
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[32]~25",
+        "at": [
+          -0.24447,
+          0.74623,
+          -0.26964
+        ]
+      }
+    ]
+  },
+  "sniper-slot1-vest": {
+    "ends": [
+      {
+        "gunGapMm": 1.49,
+        "gunContact": false,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 5.82,
+        "gunContact": false,
+        "webContact": true
+      }
+    ],
+    "overlaps": [
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[13]",
+        "at": [
+          0.24172,
+          0.85055,
+          -0.25531
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/group[16]/magazineBody[0]/BufferGeometry[0]",
+        "at": [
+          0.2513,
+          0.90877,
+          -0.24503
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/fp-stock[21]/BufferGeometry[8]~0",
+        "at": [
+          0.17821,
+          0.47814,
+          -0.33068
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/fp-stock[21]/BufferGeometry[8]~1",
+        "at": [
+          0.21695,
+          0.70654,
+          -0.28196
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/fp-stock[21]/BufferGeometry[10]~0",
+        "at": [
+          0.21695,
+          0.70654,
+          -0.28196
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[32]~0",
+        "at": [
+          0.2513,
+          0.90877,
+          -0.24503
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[32]~1",
+        "at": [
+          0.21695,
+          0.70654,
+          -0.28196
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[32]~2",
+        "at": [
+          0.23686,
+          0.82189,
+          -0.26086
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[32]~6",
+        "at": [
+          0.27618,
+          1.36983,
+          -0.2647
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[32]~8",
+        "at": [
+          0.27463,
+          1.3683,
+          -0.26009
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[32]~24",
+        "at": [
+          0.22205,
+          0.73489,
+          -0.2723
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[32]~25",
+        "at": [
+          0.22191,
+          0.73562,
+          -0.27878
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[34]~4",
+        "at": [
+          0.18776,
+          0.71138,
+          -0.28078
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[1]~21",
+        "at": [
+          0.2341,
+          0.8725,
+          -0.24981
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[3]~14",
+        "at": [
+          0.23517,
+          0.89004,
+          -0.24463
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[3]~15",
+        "at": [
+          0.23517,
+          0.89004,
+          -0.24463
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[3]~18",
+        "at": [
+          0.20151,
+          0.82579,
+          -0.26635
+        ]
+      }
+    ]
+  },
+  "sniper-slot2-vest": {
+    "ends": [
+      {
+        "gunGapMm": 1.49,
+        "gunContact": false,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 5.82,
+        "gunContact": false,
+        "webContact": true
+      }
+    ],
+    "overlaps": [
+      {
+        "sling": "root",
+        "gun": "root/group[0]/fp-stock[21]/BufferGeometry[8]~0",
+        "at": [
+          -0.22466,
+          0.47181,
+          -0.31359
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/fp-stock[21]/BufferGeometry[8]~1",
+        "at": [
+          -0.24152,
+          0.70415,
+          -0.27271
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/fp-stock[21]/BufferGeometry[10]~3",
+        "at": [
+          -0.23743,
+          0.7015,
+          -0.2729
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[32]~1",
+        "at": [
+          -0.24152,
+          0.70415,
+          -0.27271
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[32]~16",
+        "at": [
+          -0.32322,
+          1.38159,
+          -0.25809
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[32]~25",
+        "at": [
+          -0.24359,
+          0.73363,
+          -0.27057
+        ]
+      }
+    ]
+  },
+  "launcher-slot1": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [
+      {
+        "sling": "root",
+        "gun": "root/group[0]/fp-stock[2]/BufferGeometry[2]~0",
+        "at": [
+          0.26108,
+          0.72835,
+          -0.29066
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/fp-stock[2]/BufferGeometry[2]~1",
+        "at": [
+          0.24802,
+          0.76519,
+          -0.27827
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[9]~0",
+        "at": [
+          0.26057,
+          0.86312,
+          -0.25537
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[9]~1",
+        "at": [
+          0.30198,
+          1.26541,
+          -0.27313
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[1]~47",
+        "at": [
+          0.297,
+          1.26277,
+          -0.29263
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[1]~50",
+        "at": [
+          0.28391,
+          1.26566,
+          -0.29841
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[2]~35",
+        "at": [
+          0.31161,
+          1.26655,
+          -0.29434
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[2]~50",
+        "at": [
+          0.28455,
+          1.25898,
+          -0.29956
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[3]~5",
+        "at": [
+          0.23438,
+          0.87682,
+          -0.24577
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[6]~0",
+        "at": [
+          0.26108,
+          0.7196,
+          -0.28901
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[6]~0",
+        "at": [
+          0.24355,
+          0.72218,
+          -0.295
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[9]~1",
+        "at": [
+          0.29739,
+          1.26846,
+          -0.31578
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[1]~47",
+        "at": [
+          0.29571,
+          1.28157,
+          -0.30259
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[1]~50",
+        "at": [
+          0.29211,
+          1.27875,
+          -0.30259
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[2]~50",
+        "at": [
+          0.29056,
+          1.25687,
+          -0.31178
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[2]~51",
+        "at": [
+          0.29211,
+          1.27875,
+          -0.30259
+        ]
+      }
+    ]
+  },
+  "launcher-slot2": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [
+      {
+        "sling": "root",
+        "gun": "root/group[0]/fp-stock[2]/BufferGeometry[2]~0",
+        "at": [
+          -0.23581,
+          0.72989,
+          -0.28279
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[9]~0",
+        "at": [
+          -0.24971,
+          0.86233,
+          -0.25227
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[9]~1",
+        "at": [
+          -0.27197,
+          1.26736,
+          -0.24351
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[10]~0",
+        "at": [
+          -0.26309,
+          0.98227,
+          -0.19121
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[1]~42",
+        "at": [
+          -0.26885,
+          0.99954,
+          -0.12499
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[1]~46",
+        "at": [
+          -0.26898,
+          1.27283,
+          -0.28417
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[1]~51",
+        "at": [
+          -0.25909,
+          1.26278,
+          -0.28792
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[2]~35",
+        "at": [
+          -0.28499,
+          1.27105,
+          -0.28758
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[2]~64",
+        "at": [
+          -0.25909,
+          1.26278,
+          -0.28792
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[6]~0",
+        "at": [
+          -0.23581,
+          0.72798,
+          -0.27655
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[6]~8",
+        "at": [
+          -0.25958,
+          0.9915,
+          -0.17306
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[6]~0",
+        "at": [
+          -0.21568,
+          0.72276,
+          -0.29581
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[9]~1",
+        "at": [
+          -0.26774,
+          1.25426,
+          -0.29334
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[1]~46",
+        "at": [
+          -0.26414,
+          1.25144,
+          -0.29334
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[1]~51",
+        "at": [
+          -0.26131,
+          1.25503,
+          -0.29334
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[2]~64",
+        "at": [
+          -0.26308,
+          1.2607,
+          -0.28415
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[2]~65",
+        "at": [
+          -0.26432,
+          1.27994,
+          -0.30149
+        ]
+      }
+    ]
+  },
+  "launcher-slot1-vest": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [
+      {
+        "sling": "root",
+        "gun": "root/group[0]/fp-stock[2]/BufferGeometry[2]~0",
+        "at": [
+          0.26107,
+          0.72996,
+          -0.29012
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/fp-stock[2]/BufferGeometry[2]~1",
+        "at": [
+          0.2478,
+          0.76171,
+          -0.27944
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[9]~0",
+        "at": [
+          0.26067,
+          0.85018,
+          -0.25777
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[9]~1",
+        "at": [
+          0.30111,
+          1.26655,
+          -0.2716
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[1]~47",
+        "at": [
+          0.29918,
+          1.27074,
+          -0.29334
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[1]~50",
+        "at": [
+          0.28362,
+          1.26518,
+          -0.29795
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[2]~35",
+        "at": [
+          0.31144,
+          1.26778,
+          -0.29435
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[2]~50",
+        "at": [
+          0.28426,
+          1.25833,
+          -0.29967
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[3]~5",
+        "at": [
+          0.23436,
+          0.88287,
+          -0.25103
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[6]~0",
+        "at": [
+          0.26108,
+          0.72067,
+          -0.28865
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[6]~0",
+        "at": [
+          0.24355,
+          0.72218,
+          -0.295
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[9]~1",
+        "at": [
+          0.29739,
+          1.26846,
+          -0.31578
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[1]~47",
+        "at": [
+          0.29571,
+          1.28157,
+          -0.30259
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[1]~50",
+        "at": [
+          0.29211,
+          1.27875,
+          -0.30259
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[2]~50",
+        "at": [
+          0.29056,
+          1.25687,
+          -0.31178
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[2]~51",
+        "at": [
+          0.29211,
+          1.27875,
+          -0.30259
+        ]
+      }
+    ]
+  },
+  "launcher-slot2-vest": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [
+      {
+        "sling": "root",
+        "gun": "root/group[0]/fp-stock[2]/BufferGeometry[2]~0",
+        "at": [
+          -0.23598,
+          0.7315,
+          -0.2823
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/fp-stock[2]/BufferGeometry[2]~2",
+        "at": [
+          -0.22032,
+          0.76855,
+          -0.27098
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[9]~0",
+        "at": [
+          -0.25094,
+          0.87408,
+          -0.25027
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[9]~1",
+        "at": [
+          -0.27073,
+          1.26774,
+          -0.23999
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[10]~0",
+        "at": [
+          -0.26284,
+          0.98116,
+          -0.19347
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[1]~46",
+        "at": [
+          -0.26863,
+          1.27298,
+          -0.28366
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[1]~51",
+        "at": [
+          -0.25911,
+          1.26254,
+          -0.28734
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[2]~35",
+        "at": [
+          -0.28487,
+          1.27179,
+          -0.28755
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[2]~64",
+        "at": [
+          -0.25911,
+          1.26254,
+          -0.28734
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[6]~0",
+        "at": [
+          -0.22217,
+          0.72305,
+          -0.27806
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[6]~8",
+        "at": [
+          -0.25958,
+          0.99168,
+          -0.17428
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[6]~0",
+        "at": [
+          -0.21568,
+          0.72276,
+          -0.29581
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[9]~1",
+        "at": [
+          -0.26774,
+          1.25426,
+          -0.29334
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[1]~46",
+        "at": [
+          -0.26414,
+          1.25144,
+          -0.29334
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[1]~51",
+        "at": [
+          -0.26131,
+          1.25503,
+          -0.29334
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[2]~64",
+        "at": [
+          -0.26308,
+          1.2607,
+          -0.28415
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[2]~65",
+        "at": [
+          -0.26432,
+          1.27994,
+          -0.30149
+        ]
+      }
+    ]
+  },
+  "minigun-slot1": {
+    "ends": [
+      {
+        "gunGapMm": 23.11,
+        "gunContact": false,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 20.95,
+        "gunContact": false,
+        "webContact": true
+      }
+    ],
+    "overlaps": []
+  },
+  "minigun-slot2": {
+    "ends": [
+      {
+        "gunGapMm": 23.11,
+        "gunContact": false,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 20.95,
+        "gunContact": false,
+        "webContact": true
+      }
+    ],
+    "overlaps": []
+  },
+  "minigun-slot1-vest": {
+    "ends": [
+      {
+        "gunGapMm": 23.11,
+        "gunContact": false,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 20.95,
+        "gunContact": false,
+        "webContact": true
+      }
+    ],
+    "overlaps": []
+  },
+  "minigun-slot2-vest": {
+    "ends": [
+      {
+        "gunGapMm": 23.11,
+        "gunContact": false,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 20.95,
+        "gunContact": false,
+        "webContact": true
+      }
+    ],
+    "overlaps": []
+  },
+  "flamer-slot1": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [
+      {
+        "sling": "root",
+        "gun": "root/group[0]/group[1]/magazineBody[0]/BufferGeometry[1]~0",
+        "at": [
+          0.24409,
+          0.75655,
+          -0.32598
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/group[1]/magazineBody[0]/BufferGeometry[2]~0",
+        "at": [
+          0.24199,
+          0.72963,
+          -0.3382
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/group[1]/magazineBody[0]/BufferGeometry[2]~2",
+        "at": [
+          0.225,
+          0.85098,
+          -0.29205
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[5]~9",
+        "at": [
+          0.20477,
+          0.62831,
+          -0.39446
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[7]~7",
+        "at": [
+          0.23164,
+          0.6041,
+          -0.41561
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[7]~11",
+        "at": [
+          0.20698,
+          0.61959,
+          -0.39939
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[7]~14",
+        "at": [
+          0.222,
+          0.69304,
+          -0.36545
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[7]~7",
+        "at": [
+          0.21698,
+          0.61707,
+          -0.4121
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[7]~14",
+        "at": [
+          0.21056,
+          0.61784,
+          -0.4121
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[7]~7",
+        "at": [
+          0.26392,
+          1.00632,
+          -0.4121
+        ]
+      }
+    ]
+  },
+  "flamer-slot2": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [
+      {
+        "sling": "root",
+        "gun": "root/group[0]/group[1]/magazineBody[0]/BufferGeometry[1]~1",
+        "at": [
+          -0.31379,
+          0.76113,
+          -0.29748
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/group[1]/magazineBody[0]/BufferGeometry[2]~1",
+        "at": [
+          -0.28315,
+          0.72262,
+          -0.3027
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/group[1]/magazineBody[0]/BufferGeometry[2]~3",
+        "at": [
+          -0.26338,
+          0.84522,
+          -0.26896
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/group[1]/magazineBody[0]/BufferGeometry[5]~11",
+        "at": [
+          -0.26068,
+          0.86385,
+          -0.26309
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[7]~7",
+        "at": [
+          -0.3553,
+          0.5998,
+          -0.35799
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[7]~12",
+        "at": [
+          -0.33356,
+          0.6326,
+          -0.34481
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[7]~21",
+        "at": [
+          -0.34175,
+          0.65317,
+          -0.33656
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[7]~7",
+        "at": [
+          -0.33779,
+          0.58026,
+          -0.35663
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[7]~21",
+        "at": [
+          -0.33469,
+          0.60857,
+          -0.35663
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[8]~4",
+        "at": [
+          -0.33441,
+          0.57964,
+          -0.35276
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[8]~10",
+        "at": [
+          -0.33252,
+          0.59055,
+          -0.34344
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[7]~7",
+        "at": [
+          -0.38473,
+          0.96951,
+          -0.35663
+        ]
+      }
+    ]
+  },
+  "flamer-slot1-vest": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [
+      {
+        "sling": "root",
+        "gun": "root/group[0]/group[1]/magazineBody[0]/BufferGeometry[1]~0",
+        "at": [
+          0.24482,
+          0.76591,
+          -0.32197
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/group[1]/magazineBody[0]/BufferGeometry[2]~2",
+        "at": [
+          0.22469,
+          0.84374,
+          -0.28822
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[7]~7",
+        "at": [
+          0.23164,
+          0.6041,
+          -0.41561
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[7]~11",
+        "at": [
+          0.20706,
+          0.62057,
+          -0.39883
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[7]~14",
+        "at": [
+          0.22218,
+          0.69821,
+          -0.36254
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[7]~7",
+        "at": [
+          0.21698,
+          0.61707,
+          -0.4121
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[7]~14",
+        "at": [
+          0.21056,
+          0.61784,
+          -0.4121
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[7]~7",
+        "at": [
+          0.26392,
+          1.00632,
+          -0.4121
+        ]
+      }
+    ]
+  },
+  "flamer-slot2-vest": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [
+      {
+        "sling": "root",
+        "gun": "root/group[0]/group[1]/magazineBody[0]/BufferGeometry[1]~1",
+        "at": [
+          -0.31895,
+          0.73962,
+          -0.29671
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/group[1]/magazineBody[0]/BufferGeometry[2]~1",
+        "at": [
+          -0.28104,
+          0.73052,
+          -0.30029
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/group[1]/magazineBody[0]/BufferGeometry[2]~3",
+        "at": [
+          -0.26476,
+          0.84246,
+          -0.27661
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/group[1]/magazineBody[0]/BufferGeometry[5]~11",
+        "at": [
+          -0.25952,
+          0.85984,
+          -0.26426
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[7]~7",
+        "at": [
+          -0.3553,
+          0.5998,
+          -0.35799
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[7]~12",
+        "at": [
+          -0.33305,
+          0.63465,
+          -0.34399
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[7]~21",
+        "at": [
+          -0.34098,
+          0.65624,
+          -0.33532
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[7]~7",
+        "at": [
+          -0.33779,
+          0.58026,
+          -0.35663
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[7]~21",
+        "at": [
+          -0.33469,
+          0.60857,
+          -0.35663
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[8]~4",
+        "at": [
+          -0.33441,
+          0.57964,
+          -0.35276
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[8]~10",
+        "at": [
+          -0.33252,
+          0.59055,
+          -0.34344
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[7]~7",
+        "at": [
+          -0.38473,
+          0.96951,
+          -0.35663
+        ]
+      }
+    ]
+  },
+  "chainsaw-slot1": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 5.49,
+        "gunContact": false,
+        "webContact": true
+      }
+    ],
+    "overlaps": [
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[4]~0",
+        "at": [
+          0.29867,
+          0.86684,
+          -0.28117
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[4]~1",
+        "at": [
+          0.26109,
+          0.8578,
+          -0.28747
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[2]~2",
+        "at": [
+          0.279,
+          0.9203,
+          -0.24697
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[2]~15",
+        "at": [
+          0.26575,
+          0.95542,
+          -0.22634
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[3]~12",
+        "at": [
+          0.27188,
+          0.9385,
+          -0.23757
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[4]~51",
+        "at": [
+          0.27188,
+          0.9385,
+          -0.23757
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[4]~0",
+        "at": [
+          0.28475,
+          0.87383,
+          -0.28164
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[4]~0",
+        "at": [
+          0.31311,
+          1.09019,
+          -0.26855
+        ]
+      }
+    ]
+  },
+  "chainsaw-slot2": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 4.53,
+        "gunContact": false,
+        "webContact": true
+      }
+    ],
+    "overlaps": [
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[4]~0",
+        "at": [
+          -0.2957,
+          0.86131,
+          -0.29155
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[4]~2",
+        "at": [
+          -0.25771,
+          0.85374,
+          -0.29728
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[6]~89",
+        "at": [
+          -0.26405,
+          1.12407,
+          -0.23603
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[2]~8",
+        "at": [
+          -0.27861,
+          0.91439,
+          -0.25397
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[2]~14",
+        "at": [
+          -0.2623,
+          0.96541,
+          -0.2173
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[3]~13",
+        "at": [
+          -0.30431,
+          1.09964,
+          -0.25497
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[4]~33",
+        "at": [
+          -0.25437,
+          0.90519,
+          -0.25261
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[4]~34",
+        "at": [
+          -0.30568,
+          1.12652,
+          -0.23693
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[4]~52",
+        "at": [
+          -0.30658,
+          1.09765,
+          -0.26438
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[5]~3",
+        "at": [
+          -0.26886,
+          1.11703,
+          -0.24832
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[4]~0",
+        "at": [
+          -0.27826,
+          0.8414,
+          -0.29181
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[4]~0",
+        "at": [
+          -0.30662,
+          1.05775,
+          -0.27872
+        ]
+      }
+    ]
+  },
+  "chainsaw-slot1-vest": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 5.49,
+        "gunContact": false,
+        "webContact": true
+      }
+    ],
+    "overlaps": [
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[4]~0",
+        "at": [
+          0.29867,
+          0.86684,
+          -0.28117
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[4]~1",
+        "at": [
+          0.26109,
+          0.8578,
+          -0.28747
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[2]~2",
+        "at": [
+          0.2773,
+          0.92459,
+          -0.24484
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[2]~15",
+        "at": [
+          0.26614,
+          0.95464,
+          -0.2263
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[3]~12",
+        "at": [
+          0.26985,
+          0.9439,
+          -0.23437
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[4]~51",
+        "at": [
+          0.26985,
+          0.9439,
+          -0.23437
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[4]~0",
+        "at": [
+          0.28475,
+          0.87383,
+          -0.28164
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[4]~0",
+        "at": [
+          0.31311,
+          1.09019,
+          -0.26855
+        ]
+      }
+    ]
+  },
+  "chainsaw-slot2-vest": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 4.53,
+        "gunContact": false,
+        "webContact": true
+      }
+    ],
+    "overlaps": [
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[4]~0",
+        "at": [
+          -0.2957,
+          0.86131,
+          -0.29155
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[4]~2",
+        "at": [
+          -0.25771,
+          0.85374,
+          -0.29728
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[6]~89",
+        "at": [
+          -0.26432,
+          1.12452,
+          -0.23855
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[2]~8",
+        "at": [
+          -0.27713,
+          0.91864,
+          -0.25158
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[2]~14",
+        "at": [
+          -0.26478,
+          0.9562,
+          -0.22653
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[3]~13",
+        "at": [
+          -0.30351,
+          1.10225,
+          -0.25395
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[4]~33",
+        "at": [
+          -0.25437,
+          0.90981,
+          -0.24998
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[4]~34",
+        "at": [
+          -0.30389,
+          1.13159,
+          -0.23579
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[4]~52",
+        "at": [
+          -0.30538,
+          1.0996,
+          -0.26373
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/BufferGeometry[5]~3",
+        "at": [
+          -0.26801,
+          1.11618,
+          -0.23864
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[4]~0",
+        "at": [
+          -0.27826,
+          0.8414,
+          -0.29181
+        ]
+      },
+      {
+        "sling": "root",
+        "gun": "root/group[0]/BufferGeometry[4]~0",
+        "at": [
+          -0.30662,
+          1.05775,
+          -0.27872
+        ]
+      }
+    ]
+  }
+}

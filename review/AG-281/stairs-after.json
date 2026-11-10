@@ -1,0 +1,34 @@
+{
+ "schema": "dw-camera-shot",
+ "schemaVersion": 2,
+ "target": "build:stairs",
+ "label": "build stairs",
+ "view": null,
+ "cam": {
+  "x": -34.88598844269737,
+  "y": 33.574296648595706,
+  "z": -63.90535835401628,
+  "tx": -40,
+  "ty": 30.032061845064163,
+  "tz": -70,
+  "fov": 35
+ },
+ "time": 0.4078680399999853,
+ "size": [
+  1600,
+  900
+ ],
+ "center": {
+  "x": -40,
+  "y": 30.032061845064163,
+  "z": -70
+ },
+ "boxSize": {
+  "x": 2.005000114440918,
+  "y": 2.7807106375694275,
+  "z": 2.141421318054199
+ },
+ "mode": "title",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "at": "2026-11-10T11:37:22.015Z"
+}

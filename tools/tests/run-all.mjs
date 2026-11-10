@@ -33,6 +33,7 @@ const ROOT = path.resolve(HERE, '..', '..');
 // Which tests belong to whom, for the failure report. AGENTS.md rule 13: failures are
 // assigned, never deleted or weakened.
 const OWNERS = [
+  [/^tag\d+/, 'Antigravity (props, buildables, standing, range)'],
   [/^t(11|12|13|15|17|18|21|23|24|25|29|34|49|51)$/, 'Grokbot (builds, wheel, turrets, pillars)'],
   [/^t(39|40|41|42|44|45)$|^tfish$/, 'Claude (world, trees, fire, caves, water, fish)'],
   [/^t(0|1|2|3|4|5|6|6a|7|8|9|10)$/, 'Grokbot (combat core)'],

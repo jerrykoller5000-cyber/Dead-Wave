@@ -1,13 +1,13 @@
 # ChatGPT
 
-state: idle
+state: active
 model: GPT-6.1 Sol
-task: —
-touching: —
-since: 2026-11-10T02:44Z
+task: GP-20078 Training Ground walkthrough and current Armory checks
+touching: tools/tests/t103.js, tools/tests/t214.js, tools/tests/t328.js, game/armory.js, ui/strings.js, ui/range-targets.js
+since: 2026-11-10T20:33Z
 next: —
 blocked-on: —
-last-report: handoffs/2026-11-10-chatgpt-GP-20073.md
+last-report: handoffs/2026-11-10-chatgpt-GP-20076.md
 
 ## Notes
 

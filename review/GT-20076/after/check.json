@@ -1,0 +1,370 @@
+{
+ "at": "2026-11-10T19:49:00.241Z",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "results": [
+  {
+   "id": "weapon.minigun",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 150,
+   "tris": 11704,
+   "size": [
+    0.397,
+    0.395,
+    1.04
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.m4",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 138,
+   "tris": 16296,
+   "size": [
+    0.071,
+    0.302,
+    1.043
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.ak",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 135,
+   "tris": 9592,
+   "size": [
+    0.062,
+    0.271,
+    0.922
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.pistol",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 133,
+   "tris": 7366,
+   "size": [
+    0.036,
+    0.174,
+    0.261
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.uzi",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 132,
+   "tris": 9320,
+   "size": [
+    0.078,
+    0.317,
+    0.416
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.shotgun",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 131,
+   "tris": 7008,
+   "size": [
+    0.047,
+    0.205,
+    1.15
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.aa12",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 131,
+   "tris": 13584,
+   "size": [
+    0.212,
+    0.407,
+    1.065
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.revolver",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 136,
+   "tris": 10786,
+   "size": [
+    0.075,
+    0.212,
+    0.37
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.sniper",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 204,
+   "tris": 13570,
+   "size": [
+    0.152,
+    0.295,
+    1.335
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.launcher",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 132,
+   "tris": 15364,
+   "size": [
+    0.187,
+    0.265,
+    0.774
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.flamer",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 139,
+   "tris": 11128,
+   "size": [
+    0.22,
+    0.241,
+    1.012
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.chainsaw",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 227,
+   "tris": 10068,
+   "size": [
+    0.315,
+    0.301,
+    0.971
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.knife",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 127,
+   "tris": 3320,
+   "size": [
+    0.071,
+    0.129,
+    0.616
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.machete",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 130,
+   "tris": 2632,
+   "size": [
+    0.062,
+    0.151,
+    0.981
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.katana",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 153,
+   "tris": 8046,
+   "size": [
+    0.078,
+    0.095,
+    0.929
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.katana-sheathed",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 141,
+   "tris": 10050,
+   "size": [
+    0.078,
+    0.096,
+    0.95
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.m240",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 300,
+   "tris": 15686,
+   "size": [
+    0.953,
+    1.094,
+    1.234
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.m240-folded",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 141,
+   "tris": 13878,
+   "size": [
+    0.231,
+    0.501,
+    1.234
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.mortar",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 130,
+   "tris": 6168,
+   "size": [
+    0.545,
+    1.123,
+    1.113
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.mortar-collapsed",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 128,
+   "tris": 4768,
+   "size": [
+    0.534,
+    1.352,
+    0.269
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.mortar-round",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 118,
+   "tris": 732,
+   "size": [
+    0.08,
+    0.082,
+    0.532
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.frag-grenade",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 193,
+   "tris": 2552,
+   "size": [
+    0.104,
+    0.138,
+    0.1
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.holy-grenade",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 142,
+   "tris": 1864,
+   "size": [
+    0.242,
+    0.29,
+    0.224
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.med-pen",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 160,
+   "tris": 388,
+   "size": [
+    0.06,
+    0.32,
+    0.06
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.rune-pistol",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 242,
+   "tris": 7366,
+   "size": [
+    0.036,
+    0.174,
+    0.261
+   ],
+   "error": null
+  },
+  {
+   "id": "weapon.shovel",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 146,
+   "tris": 456,
+   "size": [
+    0.233,
+    1.558,
+    0.06
+   ],
+   "error": null
+  }
+ ]
+}

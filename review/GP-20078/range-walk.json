@@ -1,0 +1,552 @@
+{
+  "at": "2026-11-10T20:34:01.820Z",
+  "errors": [],
+  "console": {
+    "action": "rangeConsole",
+    "open": true,
+    "text": "l before firing.LearnFirst FiveStart drillBriefingPersonal bestsFive close plates, one at a time. Any scoring zone counts; take your time and learn the range.Take your place behind the firing bench with the listed weapon ready.Wait for the overhead countdown and start beep. Then shoot the raised plates.Use Pistol. Aim for any scoring zone. Hits to clear each plate: 1.Follow each new target wave. A plate drops when its required hits are complete.Plates to clear: 5Time limit: 45sLane order: 1 → 2 → 3 → 4 → 5Weapons required: PistolHow points and penalties workHead / bull: 10 · chest ring: 5 · plate: 2, multiplied by lane 1–5 (1× to 3×).Missed plate −3 · wrong called zone / priority −2.A real hit outside the called zone or priority shows a red explanation and earns no target points.Select a drill at the range console. Watch the overhead board for the countdown, instructions and final score."
+  },
+  "drills": [
+    {
+      "weapon": "pistol",
+      "id": "bullseye",
+      "started": true,
+      "reason": null,
+      "state": "PREPARING",
+      "expected": "pistol"
+    },
+    {
+      "weapon": "pistol",
+      "id": "call-sign",
+      "started": true,
+      "reason": null,
+      "state": "PREPARING",
+      "expected": "pistol"
+    },
+    {
+      "weapon": "pistol",
+      "id": "pop-patrol",
+      "started": true,
+      "reason": null,
+      "state": "PREPARING",
+      "expected": "pistol"
+    },
+    {
+      "weapon": "pistol",
+      "id": "twelve-clean",
+      "started": true,
+      "reason": null,
+      "state": "PREPARING",
+      "expected": "pistol"
+    },
+    {
+      "weapon": "pistol",
+      "id": "quickdraw",
+      "started": true,
+      "reason": null,
+      "state": "PREPARING",
+      "expected": "pistol"
+    },
+    {
+      "weapon": "uzi",
+      "id": "three-taps",
+      "started": true,
+      "reason": null,
+      "state": "PREPARING",
+      "expected": "uzi"
+    },
+    {
+      "weapon": "uzi",
+      "id": "crossfire",
+      "started": true,
+      "reason": null,
+      "state": "PREPARING",
+      "expected": "uzi"
+    },
+    {
+      "weapon": "uzi",
+      "id": "one-mag",
+      "started": true,
+      "reason": null,
+      "state": "PREPARING",
+      "expected": "uzi"
+    },
+    {
+      "weapon": "uzi",
+      "id": "blink",
+      "started": true,
+      "reason": null,
+      "state": "PREPARING",
+      "expected": "uzi"
+    },
+    {
+      "weapon": "uzi",
+      "id": "swarm",
+      "started": true,
+      "reason": null,
+      "state": "PREPARING",
+      "expected": "uzi"
+    },
+    {
+      "weapon": "m4",
+      "id": "near-far",
+      "started": true,
+      "reason": null,
+      "state": "PREPARING",
+      "expected": "m4"
+    },
+    {
+      "weapon": "m4",
+      "id": "identify",
+      "started": true,
+      "reason": null,
+      "state": "PREPARING",
+      "expected": "m4"
+    },
+    {
+      "weapon": "m4",
+      "id": "priority",
+      "started": true,
+      "reason": null,
+      "state": "PREPARING",
+      "expected": "m4"
+    },
+    {
+      "weapon": "m4",
+      "id": "controlled-pairs",
+      "started": true,
+      "reason": null,
+      "state": "PREPARING",
+      "expected": "m4"
+    },
+    {
+      "weapon": "m4",
+      "id": "five-wide",
+      "started": true,
+      "reason": null,
+      "state": "PREPARING",
+      "expected": "m4"
+    },
+    {
+      "weapon": "ak",
+      "id": "four-count",
+      "started": true,
+      "reason": null,
+      "state": "PREPARING",
+      "expected": "ak"
+    },
+    {
+      "weapon": "ak",
+      "id": "heavy-beat",
+      "started": true,
+      "reason": null,
+      "state": "PREPARING",
+      "expected": "ak"
+    },
+    {
+      "weapon": "ak",
+      "id": "torso-ladder",
+      "started": true,
+      "reason": null,
+      "state": "PREPARING",
+      "expected": "ak"
+    },
+    {
+      "weapon": "ak",
+      "id": "two-mags",
+      "started": true,
+      "reason": null,
+      "state": "PREPARING",
+      "expected": "ak"
+    },
+    {
+      "weapon": "ak",
+      "id": "reset-and-read",
+      "started": true,
+      "reason": null,
+      "state": "PREPARING",
+      "expected": "ak"
+    },
+    {
+      "weapon": "shotgun",
+      "id": "seven-on-steel",
+      "started": true,
+      "reason": null,
+      "state": "PREPARING",
+      "expected": "shotgun"
+    },
+    {
+      "weapon": "shotgun",
+      "id": "pump-rhythm",
+      "started": true,
+      "reason": null,
+      "state": "PREPARING",
+      "expected": "shotgun"
+    },
+    {
+      "weapon": "shotgun",
+      "id": "double-door",
+      "started": true,
+      "reason": null,
+      "state": "PREPARING",
+      "expected": "shotgun"
+    },
+    {
+      "weapon": "shotgun",
+      "id": "eight-shells",
+      "started": true,
+      "reason": null,
+      "state": "PREPARING",
+      "expected": "shotgun"
+    },
+    {
+      "weapon": "shotgun",
+      "id": "center-mass",
+      "started": true,
+      "reason": null,
+      "state": "PREPARING",
+      "expected": "shotgun"
+    },
+    {
+      "weapon": "aa12",
+      "id": "breach-wave",
+      "started": true,
+      "reason": null,
+      "state": "PREPARING",
+      "expected": "aa12"
+    },
+    {
+      "weapon": "aa12",
+      "id": "five-pellet-focus",
+      "started": true,
+      "reason": null,
+      "state": "PREPARING",
+      "expected": "aa12"
+    },
+    {
+      "weapon": "aa12",
+      "id": "drum-discipline",
+      "started": true,
+      "reason": null,
+      "state": "PREPARING",
+      "expected": "aa12"
+    },
+    {
+      "weapon": "aa12",
+      "id": "switchback",
+      "started": true,
+      "reason": null,
+      "state": "PREPARING",
+      "expected": "aa12"
+    },
+    {
+      "weapon": "aa12",
+      "id": "stairwell",
+      "started": true,
+      "reason": null,
+      "state": "PREPARING",
+      "expected": "aa12"
+    },
+    {
+      "weapon": "revolver",
+      "id": "six-certainties",
+      "started": true,
+      "reason": null,
+      "state": "PREPARING",
+      "expected": "revolver"
+    },
+    {
+      "weapon": "revolver",
+      "id": "triple-stack",
+      "started": true,
+      "reason": null,
+      "state": "PREPARING",
+      "expected": "revolver"
+    },
+    {
+      "weapon": "revolver",
+      "id": "keyhole",
+      "started": true,
+      "reason": null,
+      "state": "PREPARING",
+      "expected": "revolver"
+    },
+    {
+      "weapon": "revolver",
+      "id": "duel",
+      "started": true,
+      "reason": null,
+      "state": "PREPARING",
+      "expected": "revolver"
+    },
+    {
+      "weapon": "revolver",
+      "id": "ring-reader",
+      "started": true,
+      "reason": null,
+      "state": "PREPARING",
+      "expected": "revolver"
+    },
+    {
+      "weapon": "sniper",
+      "id": "long-glass",
+      "started": true,
+      "reason": null,
+      "state": "PREPARING",
+      "expected": "sniper"
+    },
+    {
+      "weapon": "sniper",
+      "id": "four-deep",
+      "started": true,
+      "reason": null,
+      "state": "PREPARING",
+      "expected": "sniper"
+    },
+    {
+      "weapon": "sniper",
+      "id": "hold-your-breath",
+      "started": true,
+      "reason": null,
+      "state": "PREPARING",
+      "expected": "sniper"
+    },
+    {
+      "weapon": "sniper",
+      "id": "head-body-echo",
+      "started": true,
+      "reason": null,
+      "state": "PREPARING",
+      "expected": "sniper"
+    },
+    {
+      "weapon": "sniper",
+      "id": "five-round-test",
+      "started": true,
+      "reason": null,
+      "state": "PREPARING",
+      "expected": "sniper"
+    },
+    {
+      "weapon": "pistol",
+      "id": "first-steps",
+      "started": true,
+      "reason": null,
+      "state": "PREPARING",
+      "expected": "pistol"
+    },
+    {
+      "weapon": "pistol",
+      "id": "draw-ready",
+      "started": true,
+      "reason": null,
+      "state": "PREPARING",
+      "expected": "pistol"
+    },
+    {
+      "weapon": "m4",
+      "id": "reload-ready",
+      "started": true,
+      "reason": null,
+      "state": "PREPARING",
+      "expected": "m4"
+    },
+    {
+      "weapon": "pistol",
+      "id": "pistol-rifle",
+      "started": true,
+      "reason": null,
+      "state": "PREPARING",
+      "expected": "pistol"
+    },
+    {
+      "weapon": "shotgun",
+      "id": "three-gun",
+      "started": true,
+      "reason": null,
+      "state": "PREPARING",
+      "expected": "pistol"
+    }
+  ],
+  "active": {
+    "start": {
+      "ok": true,
+      "id": "1794342869514-46"
+    },
+    "state": {
+      "state": "PREPARING",
+      "drill": {
+        "weapon": "pistol",
+        "id": "first-steps",
+        "mode": "sequence",
+        "duration": 45,
+        "waves": 5,
+        "exposure": 6,
+        "gap": 1,
+        "group": 1,
+        "minHits": 1,
+        "maxEvents": 1,
+        "clearBonus": 10,
+        "missPenalty": 3,
+        "wrongZonePenalty": 2,
+        "contact": 0.6,
+        "layout": "close"
+      },
+      "id": "1794342869514-46",
+      "loadout": "{\"mode\":\"semi\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+      "elapsed": 0,
+      "countdown": 8,
+      "wave": 0,
+      "activation": 0,
+      "plan": null,
+      "phase": "gap",
+      "expectedWeapon": "pistol",
+      "action": "shoot",
+      "firstShot": null,
+      "score": 0,
+      "efficiency": 0,
+      "stats": {
+        "base": 0,
+        "bonuses": 0,
+        "deductions": 0,
+        "shots": 0,
+        "units": 0,
+        "attackSeconds": 0,
+        "contactSeconds": 0,
+        "cleared": 0,
+        "missed": 0,
+        "draws": 0,
+        "reloads": 0
+      },
+      "result": null,
+      "targets": []
+    }
+  },
+  "activeAfterCountdown": {
+    "state": "ACTIVE",
+    "drill": {
+      "weapon": "pistol",
+      "id": "first-steps",
+      "mode": "sequence",
+      "duration": 45,
+      "waves": 5,
+      "exposure": 6,
+      "gap": 1,
+      "group": 1,
+      "minHits": 1,
+      "maxEvents": 1,
+      "clearBonus": 10,
+      "missPenalty": 3,
+      "wrongZonePenalty": 2,
+      "contact": 0.6,
+      "layout": "close"
+    },
+    "id": "1794342869514-46",
+    "loadout": "{\"mode\":\"semi\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+    "elapsed": 2.3499999999999988,
+    "countdown": 0,
+    "wave": 1,
+    "activation": 1,
+    "plan": {
+      "ids": [
+        0
+      ],
+      "zone": null,
+      "priority": null,
+      "weapon": "pistol",
+      "exposure": 6
+    },
+    "phase": "exposed",
+    "expectedWeapon": "pistol",
+    "action": "shoot",
+    "firstShot": null,
+    "score": 0,
+    "efficiency": 0,
+    "stats": {
+      "base": 0,
+      "bonuses": 0,
+      "deductions": 0,
+      "shots": 0,
+      "units": 0,
+      "attackSeconds": 0,
+      "contactSeconds": 0,
+      "cleared": 0,
+      "missed": 0,
+      "draws": 0,
+      "reloads": 0
+    },
+    "result": null,
+    "targets": [
+      {
+        "index": 0,
+        "hits": 0,
+        "contact": 0,
+        "done": false,
+        "clearAt": null,
+        "bonus": false
+      }
+    ]
+  },
+  "targets": {
+    "five": 5,
+    "states": [
+      "up",
+      "up",
+      "up",
+      "up",
+      "up"
+    ],
+    "hits": 0
+  },
+  "targetHit": {
+    "worked": true,
+    "hit": true,
+    "state": "falling",
+    "hits": 1
+  },
+  "burn": {
+    "worked": true,
+    "state": "wrecked"
+  },
+  "blow": {
+    "worked": true,
+    "state": "wrecked"
+  },
+  "wreck": {
+    "wreck": [
+      {
+        "index": 0,
+        "kind": "burn",
+        "t": 5.449799999982112,
+        "ash": true,
+        "ashSize": 1,
+        "flames": 0,
+        "pieces": 0,
+        "resting": 0,
+        "p0": null,
+        "plateVisible": false,
+        "plateColor": 0.07999999999999996
+      },
+      {
+        "index": 4,
+        "kind": "blow",
+        "t": 2.2162999999821174,
+        "ash": false,
+        "ashSize": 0,
+        "flames": 0,
+        "pieces": 9,
+        "resting": 9,
+        "p0": {
+          "y": 0.05,
+          "x": -0.32,
+          "z": 0.7,
+          "vy": -0.66,
+          "rest": true
+        },
+        "plateVisible": false,
+        "plateColor": null
+      }
+    ],
+    "consoleOpen": false
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "mode": "before",
+  "sceneReport": {
+    "doorPos": {
+      "x": -8,
+      "z": -648,
+      "minZ": -649.5,
+      "maxZ": -646.5
+    },
+    "keypads": [
+      {
+        "side": -1,
+        "x": -8.19,
+        "y": -198.7,
+        "z": -649.82,
+        "front": {
+          "x": -9,
+          "z": -649.82
+        }
+      },
+      {
+        "side": 1,
+        "x": -7.81,
+        "y": -198.7,
+        "z": -649.82,
+        "front": {
+          "x": -7,
+          "z": -649.82
+        }
+      }
+    ]
+  },
+  "interactRes": {
+    "initialAmount": 3.12,
+    "toggled": true,
+    "newAmount": 3.12
+  }
+}

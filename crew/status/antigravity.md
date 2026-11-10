@@ -2,10 +2,10 @@
 
 state: active
 model: Gemini 4 Carbon
-task: AG-284 J128: the buildables and props, part on part
-touching: index.html (build meshes, makeSkeletalMarine), tools/tests/tag284.js, qa/2026-11-10-AG-284/, review/AG-284/
-since: 2026-11-10T18:35Z
-next: waits on CL-303
+task: AG-284 J128 buildables & props part-on-part 3D audit, seated skeletal marine, 4 distinct well-exposed lights & before/after close-up sheet
+touching: index.html (buildables & skeletalMarine), tools/tests/tag284.js, qa/2026-11-10-AG-284, review/AG-284
+since: 2026-11-10T20:19Z
+next: AG-286 J126 rule 2: the hands on the guns, at the eye, on the RTX 5
 blocked-on: —
 last-report: handoffs/2026-11-10-antigravity-AG-284.md
 

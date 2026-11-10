@@ -119,15 +119,15 @@ function holo(root) {
   return { eye: [0, 0.055, -0.061], dot: [0, 0.055, 0.032] };
 }
 
-function openTube(root, name, mat, radius, length, y, z, sides = 20) {
+function openTube(root, name, mat, radius, length, y, z, sides = 20, innerRadius = radius * 0.83) {
   const shell = new THREE.Mesh(new THREE.CylinderGeometry(radius, radius, length, sides, 1, true), mat);
   shell.name = name; shell.rotation.x = Math.PI / 2; shell.position.set(0, y, z);
   shell.castShadow = true; root.add(shell);
   // CL-332 c (Jerry: "the transparent glitch in the prism"): the bore, so the tube has an inside through the lens
-  const inner = new THREE.Mesh(new THREE.CylinderGeometry(radius * 0.83, radius * 0.83, length, sides, 1, true), bore);
+  const inner = new THREE.Mesh(new THREE.CylinderGeometry(innerRadius, innerRadius, length, sides, 1, true), bore);
   inner.name = `${name} anti-glare bore`; inner.rotation.x = Math.PI / 2; inner.position.set(0, y, z); root.add(inner);
   for (const end of [-1, 1]) {
-    const rim = new THREE.Mesh(new THREE.RingGeometry(radius * 0.83, radius, sides), rimMetal);
+    const rim = new THREE.Mesh(new THREE.RingGeometry(innerRadius, radius, sides), rimMetal);
     rim.name = `${name} machined rim`; rim.position.set(0, y, z + end * length / 2); root.add(rim);
   }
   return shell;
@@ -138,6 +138,53 @@ function objective(root, name, radius, y, z) {
   pane.name = name; pane.position.set(0, y, z); root.add(pane);
 }
 
+// The cradle is cut to the tube, so its bearing surface follows the cylinder.
+// A plate above the tube uses the same cut upside down.
+function cradle(root, name, radius, axisY, plateY, z, depth) {
+  const shape = new THREE.Shape();
+  const side = Math.sign(plateY - axisY);
+  const halfWidth = radius * Math.sin(Math.PI / 3);
+  shape.moveTo(-halfWidth, plateY);
+  shape.lineTo(halfWidth, plateY);
+  for (let i = 0; i <= 8; i++) {
+    const angle = (4 - i) * Math.PI / 12;
+    shape.lineTo(radius * Math.sin(angle), axisY + side * radius * Math.cos(angle));
+  }
+  shape.closePath();
+  const mesh = new THREE.Mesh(new THREE.ExtrudeGeometry(shape, { depth, bevelEnabled: false }), alloy);
+  mesh.name = name;
+  mesh.position.z = z - depth / 2;
+  mesh.castShadow = mesh.receiveShadow = true;
+  root.add(mesh);
+}
+
+function boredHousing(root, name, radius, outside, axisY, z, depth, round = false) {
+  // Connect the bore, outer surface and both end faces with matching vertices.
+  // Extruding two tangent arc paths can silently omit the annular ends.
+  const sides=24, faces=[], uvs=[];
+  const rim=(i,inner,front)=>{
+    const a=(i%sides)*2*Math.PI/sides, x=Math.cos(a), y=Math.sin(a);
+    const r=inner?radius:round?outside:outside/Math.max(Math.abs(x),Math.abs(y));
+    return [x*r,y*r,front?depth:0];
+  };
+  const quad=(a,b,c,d)=>{
+    faces.push(...a,...b,...c,...a,...c,...d);
+    uvs.push(0,0,1,0,1,1,0,0,1,1,0,1);
+  };
+  for(let i=0;i<sides;i++){
+    const j=i+1, a=rim(i,false,false), b=rim(j,false,false), c=rim(j,false,true), d=rim(i,false,true);
+    const e=rim(i,true,false), f=rim(j,true,false), g=rim(j,true,true), h=rim(i,true,true);
+    quad(a,b,c,d); quad(e,h,g,f); quad(e,f,b,a); quad(h,d,c,g);
+  }
+  const geo=new THREE.BufferGeometry();
+  geo.setAttribute('position',new THREE.Float32BufferAttribute(faces,3));
+  geo.setAttribute('uv',new THREE.Float32BufferAttribute(uvs,2));
+  geo.computeVertexNormals();
+  const mesh = new THREE.Mesh(geo, alloy);
+  mesh.name = name; mesh.position.set(0, axisY, z - depth / 2);
+  mesh.castShadow = mesh.receiveShadow = true; root.add(mesh);
+}
+
 // 46 x 28 x 25 mm forged reflex sight, with the RMR's raised sloping ears and bottom battery cover.
 function rmr(root) {
   foot(root, 0.028, 0.046);
@@ -146,13 +193,13 @@ function rmr(root) {
   for (const side of [-1, 1]) {
     const ear = beveledBox(root, 'sloped protective ear', alloy, [0.004, 0.019, 0.013], [side * 0.014, 0.023, 0.011], 0.0012);
     ear.rotation.x = -0.16;
-    box(root, 'side brightness key', rubber, [0.0018, 0.004, 0.006], [side * 0.0168, 0.015, -0.010]);
+    box(root, 'side brightness key', rubber, [0.0018, 0.004, 0.006], [side * 0.0149, 0.0125, -0.010]);
     cylinder(root, 'mounting screw', edge, 0.0024, 0.0016, [side * 0.009, 0.016, -0.015], 'y', 10);
   }
   beveledBox(root, 'thick front hood bridge', alloy, [0.031, 0.004, 0.009], [0, 0.034, 0.014]);
-  glass(root, 0.022, 0.016, 0.024, 0.012);
-  cylinder(root, 'coin elevation adjuster', edge, 0.0033, 0.002, [0, 0.017, -0.017], 'y', 12);
-  cylinder(root, 'coin windage adjuster', edge, 0.0033, 0.002, [0.0155, 0.015, -0.003], 'x', 12);
+  glass(root, 0.024, 0.016, 0.024, 0.012);
+  cylinder(root, 'coin elevation adjuster', edge, 0.0033, 0.002, [0, 0.016, -0.017], 'y', 12);
+  cylinder(root, 'coin windage adjuster', edge, 0.0033, 0.002, [0.015, 0.0125, -0.003], 'x', 12);
   return { eye: [0, 0.024, -0.034], dot: [0, 0.024, 0.012] };
 }
 
@@ -160,16 +207,17 @@ function rmr(root) {
 function prism(root) {
   foot(root, 0.041, 0.075);
   beveledBox(root, 'removable high riser', paint, [0.038, 0.014, 0.060], [0, 0.014, 0]);
-  for (const z of [-0.024, 0.024]) beveledBox(root, 'prism cradle', alloy, [0.041, 0.012, 0.013], [0, 0.026, z]);
+  for (const z of [-0.024, 0.024]) cradle(root, 'prism cradle', 0.022, 0.055, 0.021, z, 0.013);
   openTube(root, 'sealed prism housing', paint, 0.022, 0.105, 0.055, 0, 24);
   openTube(root, 'objective bell', alloy, 0.027, 0.024, 0.055, 0.059, 24);
-  openTube(root, 'ocular and focus ring', rubber, 0.028, 0.026, 0.055, -0.061, 24);
+  openTube(root, 'ocular and focus ring', rubber, 0.028, 0.0215, 0.055, -0.06325, 24, 0.0219);
   // J79: the glass sits behind the bell's machined front rim, inside its wall.
   objective(root, 'objective lens', 0.022, 0.055, 0.065);
-  objective(root, 'ocular lens', 0.022, 0.055, -0.075);
+  objective(root, 'ocular lens', 0.0219, 0.055, -0.071);
+  boredHousing(root, 'prism adjustment saddle', 0.022, 0.025, 0.055, -0.008, 0.025);
   cylinder(root, 'capped elevation adjustment', alloy, 0.010, 0.012, [0, 0.086, -0.008], 'y', 18);
-  cylinder(root, 'capped right windage adjustment', alloy, 0.009, 0.011, [0.029, 0.055, -0.008], 'x', 18);
-  cylinder(root, 'left illumination and battery dial', rubber, 0.012, 0.012, [-0.029, 0.055, -0.008], 'x', 18);
+  cylinder(root, 'capped right windage adjustment', alloy, 0.009, 0.011, [0.0305, 0.055, -0.008], 'x', 18);
+  cylinder(root, 'left illumination and battery dial', rubber, 0.012, 0.012, [-0.031, 0.055, -0.008], 'x', 18);
   box(root, 'elevation cap coin slot', rubber, [0.012, 0.0008, 0.002], [0, 0.0925, -0.008]);
   const focusBand = new THREE.Mesh(new THREE.TorusGeometry(0.028, 0.0012, 5, 24), edge);
   focusBand.name = 'ocular focus index ring'; focusBand.position.set(0, 0.055, -0.072);
@@ -182,15 +230,18 @@ function prism(root) {
 function acog(root) {
   foot(root, 0.047, 0.090);
   beveledBox(root, 'TA51 clamp and interface studs', alloy, [0.042, 0.017, 0.075], [0, 0.017, 0]);
-  for (const z of [-0.025, 0.025]) cylinder(root, 'left clamp thumbscrew', edge, 0.007, 0.004, [-0.025, 0.014, z], 'x', 14);
+  cradle(root, 'forged lower saddle', 0.025, 0.057, 0.0255, 0, 0.066);
+  for (const z of [-0.025, 0.025]) cylinder(root, 'left clamp thumbscrew', edge, 0.007, 0.004, [-0.023, 0.014, z], 'x', 14);
   openTube(root, 'forged four-power optical body', paint, 0.025, 0.126, 0.057, 0, 24);
   openTube(root, 'squared front objective', alloy, 0.030, 0.023, 0.057, 0.070, 24);
   openTube(root, 'rubber eyepiece', rubber, 0.026, 0.020, 0.057, -0.071, 24);
-  objective(root, '32 mm objective lens', 0.023, 0.057, 0.082);
-  objective(root, 'ocular lens', 0.020, 0.057, -0.082);
-  cylinder(root, 'fibre-optic light collector', rubber, 0.005, 0.081, [0, 0.086, 0.012], 'z', 10);
-  cylinder(root, 'capped elevation adjuster', alloy, 0.009, 0.010, [0, 0.087, -0.018], 'y', 16);
-  cylinder(root, 'capped right windage adjuster', alloy, 0.009, 0.010, [0.030, 0.057, -0.018], 'x', 16);
+  objective(root, '32 mm objective lens', 0.030 * 0.83, 0.057, 0.078);
+  objective(root, 'ocular lens', 0.026 * 0.83, 0.057, -0.078);
+  cylinder(root, 'fibre-optic light collector', rubber, 0.004, 0.047, [0, 0.0855, 0.033], 'z', 10);
+  boredHousing(root, 'adjustment housing', 0.025, 0.026, 0.057, -0.002, 0.020);
+  cylinder(root, 'capped elevation adjuster', alloy, 0.009, 0.010, [0, 0.088, -0.002], 'y', 16);
+  cylinder(root, 'capped right windage adjuster', alloy, 0.009, 0.010, [0.031, 0.057, -0.002], 'x', 16);
+  cradle(root, 'piggyback sight saddle', 0.025, 0.057, 0.096, -0.033, 0.038);
   beveledBox(root, 'top RMR mounting plate', alloy, [0.030, 0.004, 0.047], [0, 0.098, -0.033]);
   const top = new THREE.Group(); top.name = 'top RMR'; top.position.set(0, 0.100, -0.033); root.add(top);
   const topSight = rmr(top);
@@ -199,33 +250,42 @@ function acog(root) {
 
 // 4-32x50 NX8: 340 mm, 30 mm tube, 59 mm objective, exposed ZeroStop and side parallax control.
 function nx8(root) {
-  foot(root, 0.042, 0.145);
-  for (const z of [-0.052, 0.052]) {
-    beveledBox(root, 'scope ring saddle', alloy, [0.042, 0.024, 0.018], [0, 0.025, z]);
-    cylinder(root, '30 mm scope ring', alloy, 0.019, 0.012, [0, 0.054, z], 'z', 20);
+  // On the issued rifle the root is the rail centre. The teeth rise 11 mm above it.
+  beveledBox(root, 'scope rail bridge', paint, [0.042, 0.006, 0.132], [0, 0.014, 0]);
+  for (const side of [-1,1]) {
+    box(root, 'rail clamp jaw', alloy, [0.003, 0.012, 0.121], [side * 0.020, 0.007, 0]);
   }
-  openTube(root, '30 mm main tube', paint, 0.015, 0.265, 0.054, 0, 24);
-  openTube(root, '59 mm objective bell', alloy, 0.0295, 0.067, 0.054, 0.137, 28);
-  openTube(root, '43 mm eyepiece', rubber, 0.0215, 0.054, 0.054, -0.143, 24);
+  for (const z of [-0.052, 0.052]) {
+    cradle(root, 'scope ring saddle', 0.019, 0.054, 0.017, z, 0.012);
+    boredHousing(root, '30 mm scope ring', 0.015, 0.019, 0.054, z, 0.012, true);
+  }
+  // Turn the body, shoulders and bores as one shell. The collars seat around it.
+  const outside = [[0.0215,-0.171],[0.0215,-0.117],[0.015,-0.099],[0.015,0.084],[0.0295,0.122],[0.0295,0.171]];
+  const inside = outside.slice().reverse().map(([r,z]) => [r-0.0045,z]);
+  const section = [...outside,...inside,outside[0]].map(([r,z]) => new THREE.Vector2(r,z));
+  const tube = new THREE.Mesh(new THREE.LatheGeometry(section,32), paint);
+  tube.name = 'NX8 tapered optical housing'; tube.rotation.x = Math.PI/2; tube.position.y = 0.054;
+  tube.castShadow = tube.receiveShadow = true; root.add(tube);
   // J79: 6 mm of objective bell encloses the glass rather than ending flush with it.
   objective(root, '50 mm objective lens', 0.025, 0.054, 0.164);
   objective(root, 'ocular lens', 0.017, 0.054, -0.170);
-  cylinder(root, 'exposed ZeroStop elevation turret', alloy, 0.013, 0.027, [0, 0.083, -0.006], 'y', 22);
+  boredHousing(root, 'machined turret saddle', 0.015, 0.018, 0.054, -0.006, 0.030);
+  cylinder(root, 'exposed ZeroStop elevation turret', alloy, 0.013, 0.024, [0, 0.084, -0.006], 'y', 22);
   cylinder(root, 'right capped windage turret', alloy, 0.011, 0.018, [0.027, 0.054, -0.006], 'x', 18);
   cylinder(root, 'left parallax and illumination dial', rubber, 0.014, 0.018, [-0.027, 0.054, -0.006], 'x', 18);
-  cylinder(root, 'knurled zoom ring', rubber, 0.022, 0.019, [0, 0.054, -0.117], 'z', 24);
+  boredHousing(root, 'knurled zoom ring', 0.0215, 0.0225, 0.054, -0.131, 0.019, true);
   // J92: tactile zoom grip and marked ZeroStop read in the hand without a texture.
   for (let i = 0; i < 12; i++) {
     const a = i * Math.PI / 6;
-    const rib = box(root, 'zoom ring knurl', edge, [0.002, 0.002, 0.014], [Math.cos(a) * 0.022, 0.054 + Math.sin(a) * 0.022, -0.117]);
+    const rib = box(root, 'zoom ring knurl', edge, [0.002, 0.002, 0.014], [Math.cos(a) * 0.023, 0.054 + Math.sin(a) * 0.023, -0.131]);
     rib.rotation.z = a;
   }
   for (let i = 0; i < 8; i++) {
     const a = i * Math.PI / 4;
     box(root, 'ZeroStop witness tick', rubber, [0.0015, 0.003, 0.0015], [Math.cos(a) * 0.0133, 0.095, -0.006 + Math.sin(a) * 0.0133]);
   }
-  cylinder(root, 'low zoom index tab', alloy, 0.0035, 0.007, [0, 0.077, -0.117], 'y', 10);
-  cylinder(root, 'eyepiece lock ring', alloy, 0.022, 0.006, [0, 0.054, -0.166], 'z', 24);
+  cylinder(root, 'low zoom index tab', alloy, 0.0035, 0.007, [0, 0.080, -0.131], 'y', 10);
+  boredHousing(root, 'eyepiece lock ring', 0.0215, 0.0225, 0.054, -0.166, 0.006, true);
   return { eye: [0, 0.054, -0.177], dot: [0, 0.054, 0.170] };
 }
 

@@ -1,0 +1,55 @@
+PASS m4: the can is on the bore axis (off by 0.9 mm)
+PASS m4: no gap between the muzzle (978.0 mm) and the can's back face (915.0 mm)
+PASS m4: nothing pokes through the can (widest part in it 17.8 mm, can radius 27.6 mm)
+PASS m4: the sleeve holds only the muzzle device, round about the bore (lopsided by 0.9 mm)
+PASS m4: the can is in proportion to the barrel (1.60x its radius)
+PASS m4: it reaches well past the muzzle (127.7 mm) and is longer than it is wide
+PASS m4: on, the muzzle point is the can's front end (-0.0 mm)
+PASS m4: and the flash is there
+PASS m4: off, both go back
+FAIL ak: the can is on the bore axis (off by 5.0 mm)
+PASS ak: no gap between the muzzle (829.0 mm) and the can's back face (819.0 mm)
+PASS ak: nothing pokes through the can (widest part in it 14.0 mm, can radius 27.1 mm)
+PASS ak: the sleeve holds only the muzzle device, round about the bore (lopsided by 0.0 mm)
+FAIL ak: the can is in proportion to the barrel (-0.00x its radius)
+PASS ak: it reaches well past the muzzle (190.9 mm) and is longer than it is wide
+PASS ak: on, the muzzle point is the can's front end (0.0 mm)
+PASS ak: and the flash is there
+PASS ak: off, both go back
+PASS pistol: the can is on the bore axis (off by 0.0 mm)
+PASS pistol: no gap between the muzzle (311.5 mm) and the can's back face (312.0 mm)
+PASS pistol: nothing pokes through the can (widest part in it 0.0 mm, can radius 27.5 mm)
+PASS pistol: the sleeve holds only the muzzle device, round about the bore (lopsided by 0.0 mm)
+PASS pistol: the can is in proportion to the barrel (1.90x its radius)
+PASS pistol: the can is the fatter GB-154 one (55.0 mm across, 1.90x the barrel)
+PASS pistol: it reaches well past the muzzle (247.5 mm) and is longer than it is wide
+PASS pistol: on, the muzzle point is the can's front end (0.0 mm)
+PASS pistol: and the flash is there
+PASS pistol: off, both go back
+PASS uzi: the can is on the bore axis (off by 0.0 mm)
+PASS uzi: no gap between the muzzle (479.0 mm) and the can's back face (340.0 mm)
+FAIL uzi: nothing pokes through the can (widest part in it 37.1 mm, can radius 27.0 mm)
+PASS uzi: the sleeve holds only the muzzle device, round about the bore (lopsided by 0.0 mm)
+PASS uzi: the can is in proportion to the barrel (1.59x its radius)
+FAIL uzi: it reaches well past the muzzle (60.7 mm) and is longer than it is wide
+FAIL uzi: on, the muzzle point is the can's front end (120.0 mm)
+PASS uzi: and the flash is there
+PASS uzi: off, both go back
+PASS sniper: the can is on the bore axis (off by 0.0 mm)
+PASS sniper: no gap between the muzzle (1205.0 mm) and the can's back face (1096.0 mm)
+PASS sniper: nothing pokes through the can (widest part in it 33.9 mm, can radius 40.0 mm)
+PASS sniper: the sleeve holds only the muzzle device, round about the bore (lopsided by 1.5 mm)
+PASS sniper: the can is in proportion to the barrel (2.13x its radius)
+PASS sniper: it reaches well past the muzzle (201.0 mm) and is longer than it is wide
+PASS sniper: on, the muzzle point is the can's front end (-0.0 mm)
+PASS sniper: and the flash is there
+PASS sniper: off, both go back
+PASS shotgun: the can is on the bore axis (off by 0.0 mm)
+PASS shotgun: no gap between the muzzle (952.0 mm) and the can's back face (925.0 mm)
+PASS shotgun: nothing pokes through the can (widest part in it 17.5 mm, can radius 60.0 mm)
+PASS shotgun: the sleeve holds only the muzzle device, round about the bore (lopsided by 0.0 mm)
+FAIL shotgun: the can is in proportion to the barrel (3.43x its radius)
+PASS shotgun: it reaches well past the muzzle (333.0 mm) and is longer than it is wide
+PASS shotgun: on, the muzzle point is the can's front end (0.0 mm)
+PASS shotgun: and the flash is there
+PASS shotgun: off, both go back

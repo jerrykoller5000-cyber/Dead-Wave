@@ -2,16 +2,19 @@
 
 state: active
 model: GPT-6 Astra (High)
-task: GT-20078 Measure the fitted light and grip clearance against actual glove triangles, fix the model contacts and send Claude 4 the deltas
-touching: studio/weapon-heavy.js, studio/weapon-attachments.js, studio/weapon-sidearms.js, tools/tests/weapon-seating.js, review/GT-20078
-since: 2026-11-10T20:05Z
+task: GT-20076 Seat the minigun sling clips first, then the carried catalog and shared drawn rail joins; test and render each in Training Ground
+touching: ui/weapon-sling.js, index.html (gunKit.rail), tools/marine-inspector.js (gunKit.rail), studio/gun-detail.js, tools/tests/weapon-seating.js, tools/tests/tgt20076.js, review/GT-20076
+since: 2026-11-10T20:23Z
 next: GT-20076 J128 (Jerry, 10 Nov, standing, D-140): no part through anoth
 blocked-on: —
-last-report: handoffs/2026-11-10-chatgpt2-GT-20076.md
+last-report: handoffs/2026-11-10-chatgpt2-GT-20078.md
 
 ## Notes
 
 Jerry wants a progress note on the crew board every 20 minutes during active work. Use `node crew/crew.mjs note chatgpt2 "<what changed or what is waiting>"`.
+
+D-147: check `crew.mjs requests chatgpt2` every 15 minutes during a long task. If every card waits, run `crew.mjs standby chatgpt2` repeatedly until it hands out work or reports STANDBY OFF. CLAUDE DIRECTOR is `claude`. Claude 1 (`claude4`) owns the hands.
+GT-20076: the Director lent the sling, both gunKit.rail sections and studio/gun-detail.js. Start with the minigun's sling clips. The 56 model builds had zero detached groups; six models also cleared intersections. Training Ground had 52 detached clips out of 72. See the GT-20076 and GT-20078 handoffs for current numbers and hand-fit deltas.
 
 ### Who you are (D-142, Jerry 10 Nov 2026)
 You are **ChatGPT 2**, the crew's second ChatGPT, on GPT-6 Astra (High) in Codex. You take the weapons from ChatGPT (who

@@ -1448,6 +1448,7 @@ export const AudioSys = (() => {
   const SECTIONED = {};      // track -> { file, barS, list: { name: { t0, dur } }, flow }
   const secBuf = {};         // file -> AudioBuffer (or 'loading' / 'failed')
   let secOut = null;         // the section player's gain, straight to the speakers like the deck
+  let secLastStop = null;    // CL-335: the last stop's fade, for the tests ({ fade, track })
   let secLp = null;          // CL-101: its low-pass (the music heard through the rock while he's below)
   // CL-101 (P-144): the music below. In the calm, the day's song is far off through the rock (BELOW_MUSIC of its level,
   // low-passed to BELOW_LP Hz on the section player); a fight below plays as a day fight does; while the rock screams
@@ -1584,6 +1585,7 @@ export const AudioSys = (() => {
     if (sec && sec.src && ctx) {
       const t = ctx.currentTime;
       try { sec.g.gain.cancelScheduledValues(t); sec.g.gain.setValueAtTime(sec.g.gain.value, t); sec.g.gain.linearRampToValueAtTime(0, t + (fade || 0.03)); for (const s of sec.srcs || [sec.src]) s.stop(t + (fade || 0.03) + 0.02); } catch (_) {}
+      secLastStop = { fade: fade || 0.03, track: sec.track };
     }
     sec = null; secPending = null;
   }
@@ -1682,6 +1684,7 @@ export const AudioSys = (() => {
     if (motif && motif.track === t && sec && sec.track === t) { motif.quietT = 0; return true; }
     if (sec) secStop(0.6);
     motif = { track: t, kind, quietT: 0, started: false };
+    if (secOut) { try { secOut.gain.cancelScheduledValues(ctx.currentTime); secOut.gain.setTargetAtTime(0, ctx.currentTime, 0.06); } catch (_) { secOut.gain.value = 0; } }   // CL-335: from silence (a last tail out quickly), up with the door
     loadSections(t);
     return true;
   }
@@ -1699,8 +1702,12 @@ export const AudioSys = (() => {
     }
     const live = state.threat || 0;
     motif.quietT = live > 0 ? 0 : motif.quietT + dt;
-    if (motif.quietT > 3) { secStop(1.5); motif = null; return; }
-    const out = Math.max(0, Math.min(1, MUSIC_VOL * gainOf(motif.track) * (state.paused ? 0.45 : 1)));
+    // CL-335 (J102): in the Training Ground it fades in with the door (state.musicIn, 0 at the alarm, 1 with the door all
+    // the way open) and fades out from the last kill (0.3 s to be sure it was the last, then 3 s down)
+    if (motif.quietT > (state.training ? 0.3 : 3)) { secStop(state.training ? 3 : 1.5); motif = null; return; }
+    motif.inT = (motif.inT || 0) + dt;   // late off the disk (the door already open): up over 1.5 s, not at once
+    const ramp = state.training && state.musicIn != null ? Math.max(0, Math.min(1, state.musicIn, motif.inT / 1.5)) : 1;
+    const out = Math.max(0, Math.min(1, MUSIC_VOL * gainOf(motif.track) * ramp * (state.paused ? 0.45 : 1)));
     if (secOut) { try { secOut.gain.setTargetAtTime(out, ctx.currentTime, 0.05); } catch (_) { secOut.gain.value = out; } }
     if (sec) secLayersUpdate(state);
   }
@@ -2188,7 +2195,7 @@ export const AudioSys = (() => {
       heartFalls,   // CL-85
       sectioned: Object.keys(SECTIONED), sectionsReady: Object.fromEntries(Object.keys(SECTIONED).map((k) => [k, sectionsReady(k)])),
       sectionLoop: sec && sec.src ? { start: sec.src.loopStart, end: sec.src.loopEnd, loop: sec.src.loop } : null,
-      sting: stingName, overlapFrames, playing: musicPlaying, alarmPending, solo: soloOn,
+      sting: stingName, overlapFrames, playing: musicPlaying, alarmPending, solo: soloOn, lastStop: secLastStop,   // CL-335
       lastCue: lastCue ? Object.assign({}, lastCue) : null,
       pools: JSON.parse(JSON.stringify(MUSIC_POOLS)), hits: Object.assign({}, MUSIC_HITS),
       stings: Object.assign({}, MUSIC_STINGS), gains: Object.assign({}, MUSIC_GAIN)

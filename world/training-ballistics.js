@@ -55,14 +55,17 @@ export function traceTraining(tg, a, b, opts) {
 // Fixed-size pools: one static batch and one small batch per moving target.
 // Marks inherit the target hinge, so they fall/rise with its plate.
 export function createTrainingImpacts(T,tg) {
-  const cv=document.createElement('canvas');cv.width=cv.height=64;
-  const c=cv.getContext('2d');
-  const rim=c.createRadialGradient(32,32,3,32,32,30);
-  rim.addColorStop(0,'#080a0b');rim.addColorStop(.23,'#111416');rim.addColorStop(.31,'#a0a09a');rim.addColorStop(.48,'#666962');rim.addColorStop(1,'rgba(70,72,66,0)');
-  c.fillStyle=rim;c.fillRect(0,0,64,64);
-  c.strokeStyle='#444843';c.lineWidth=1.5;
-  for(let i=0;i<7;i++){const a=i*2.4;c.beginPath();c.moveTo(32+Math.cos(a)*8,32+Math.sin(a)*8);c.lineTo(32+Math.cos(a)*21,32+Math.sin(a)*21);c.stroke();}
-  const map=new T.CanvasTexture(cv);map.colorSpace=T.SRGBColorSpace;
+  let map=null;
+  if(typeof document!=='undefined'){
+    const cv=document.createElement('canvas');cv.width=cv.height=64;
+    const c=cv.getContext('2d');
+    const rim=c.createRadialGradient(32,32,3,32,32,30);
+    rim.addColorStop(0,'#080a0b');rim.addColorStop(.23,'#111416');rim.addColorStop(.31,'#a0a09a');rim.addColorStop(.48,'#666962');rim.addColorStop(1,'rgba(70,72,66,0)');
+    c.fillStyle=rim;c.fillRect(0,0,64,64);
+    c.strokeStyle='#444843';c.lineWidth=1.5;
+    for(let i=0;i<7;i++){const a=i*2.4;c.beginPath();c.moveTo(32+Math.cos(a)*8,32+Math.sin(a)*8);c.lineTo(32+Math.cos(a)*21,32+Math.sin(a)*21);c.stroke();}
+    map=new T.CanvasTexture(cv);map.colorSpace=T.SRGBColorSpace;
+  }
   const mat=new T.MeshBasicMaterial({map,transparent:true,vertexColors:true,depthWrite:false,side:T.DoubleSide});
   mat.name='training-impact-mark';
   const corners=[[-.5,-.5],[.5,-.5],[-.5,.5],[.5,-.5],[.5,.5],[-.5,.5]];
@@ -121,6 +124,116 @@ export function createTrainingImpacts(T,tg) {
     },
     clear(){for(const b of batches){b.mesh.geometry.setDrawRange(0,0);b.count=0;b.next=0;b.life.fill(0);}},
     count:()=>batches.reduce((n,b)=>n+b.life.reduce((a,t)=>a+(t>0?1:0),0),0),
-    dispose(){for(const b of batches){b.mesh.removeFromParent();b.mesh.geometry.dispose();}mat.dispose();map.dispose();}
+    dispose(){for(const b of batches){b.mesh.removeFromParent();b.mesh.geometry.dispose();}mat.dispose();map?.dispose();}
+  };
+}
+
+export const CHAR_LIFE = 30, CHAR_FADE = 6;
+
+// J120 (Jerry, 2026-11-09): flames leave black char marks on walls, floor and target plates in the Training Ground.
+// Batches are renderOrder 1 so flames (renderOrder 3) always render over them.
+export function createTrainingChar(T, tg) {
+  let map = null;
+  if (typeof document !== 'undefined') {
+    const cv = document.createElement('canvas'); cv.width = cv.height = 64;
+    const c = cv.getContext('2d');
+    const g = c.createRadialGradient(32, 32, 2, 32, 32, 30);
+    g.addColorStop(0, 'rgba(10, 8, 7, 0.96)');
+    g.addColorStop(0.25, 'rgba(18, 14, 12, 0.90)');
+    g.addColorStop(0.55, 'rgba(38, 26, 18, 0.65)');
+    g.addColorStop(0.8, 'rgba(25, 18, 15, 0.28)');
+    g.addColorStop(1, 'rgba(15, 10, 8, 0)');
+    c.fillStyle = g;
+    c.fillRect(0, 0, 64, 64);
+    c.fillStyle = 'rgba(8, 6, 5, 0.7)';
+    for (let i = 0; i < 18; i++) {
+      const a = (i / 18) * Math.PI * 2 + (i % 3) * 0.4;
+      const r = 14 + ((i * 7) % 13);
+      const rad = 2 + (i % 4) * 1.2;
+      c.beginPath();
+      c.arc(32 + Math.cos(a) * r, 32 + Math.sin(a) * r, rad, 0, Math.PI * 2);
+      c.fill();
+    }
+    map = new T.CanvasTexture(cv); map.colorSpace = T.SRGBColorSpace;
+  }
+  const mat = new T.MeshBasicMaterial({ map, transparent: true, vertexColors: true, depthWrite: false, side: T.DoubleSide, polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -1 });
+  mat.name = 'training-char-mark';
+  const corners = [[-.5, -.5], [.5, -.5], [-.5, .5], [.5, -.5], [.5, .5], [-.5, .5]];
+  const make = (parent, capacity) => {
+    const geo = new T.BufferGeometry(), positions = new T.Float32BufferAttribute(new Float32Array(capacity * 18), 3), uv = [];
+    positions.setUsage(T.DynamicDrawUsage);
+    for (let i = 0; i < capacity; i++) for (const [x, y] of corners) uv.push(x + .5, y + .5);
+    geo.setAttribute('position', positions); geo.setAttribute('uv', new T.Float32BufferAttribute(uv, 2)); geo.setDrawRange(0, 0);
+    const colors = new T.Float32BufferAttribute(new Float32Array(capacity * 24).fill(1), 4); colors.setUsage(T.DynamicDrawUsage); geo.setAttribute('color', colors);
+    const mesh = new T.Mesh(geo, mat); mesh.name = 'training-char-marks'; mesh.renderOrder = 1; mesh.frustumCulled = false; mesh.raycast = () => {}; parent.add(mesh);
+    return { mesh, parent, capacity, next: 0, count: 0, positions, colors, life: new Float32Array(capacity), lastPos: new Float32Array(capacity * 3), lastTime: 0 };
+  };
+  const batches = [make(tg.group, 128), ...tg.targets.map(t => make(t.pivot, 16))];
+  const pos = new T.Vector3(), normal = new T.Vector3(), q = new T.Quaternion(), rotZ = new T.Quaternion(), parentQ = new T.Quaternion(), vertex = new T.Vector3(), front = new T.Vector3(0, 0, 1);
+  return {
+    prepareWarmup() {
+      const ranges = batches.map(b => b.mesh.geometry.drawRange.count);
+      for (const b of batches) {
+        if (b.count) continue;
+        corners.forEach(([x, y], i) => b.positions.setXYZ(i, x * .2, y * .2, 0));
+        b.positions.needsUpdate = true; b.mesh.geometry.setDrawRange(0, 6);
+      }
+      return () => batches.forEach((b, i) => b.mesh.geometry.setDrawRange(0, ranges[i]));
+    },
+    add(hit) {
+      const target = hit.solid?.target, batch = batches[target == null ? 0 : target + 1];
+      const now = (typeof performance !== 'undefined' ? performance.now() : Date.now()) * 0.001;
+      const lastIdx = (batch.next - 1 + batch.capacity) % batch.capacity;
+      if (batch.count > 0 && (now - batch.lastTime) < 0.12) {
+        const lx = batch.lastPos[lastIdx * 3], ly = batch.lastPos[lastIdx * 3 + 1], lz = batch.lastPos[lastIdx * 3 + 2];
+        const dx = hit.point.x - lx, dy = hit.point.y - ly, dz = hit.point.z - lz;
+        if (dx * dx + dy * dy + dz * dz < 0.035) {
+          batch.life[lastIdx] = CHAR_LIFE;
+          for (let i = 0; i < 6; i++) batch.colors.setW(lastIdx * 6 + i, 1);
+          batch.colors.needsUpdate = true;
+          batch.lastTime = now;
+          return;
+        }
+      }
+      pos.set(hit.point.x, hit.point.y, hit.point.z); normal.set(hit.normal.x, hit.normal.y, hit.normal.z);
+      const s = hit.solid?.surface;
+      if (s) { if (s.nx) pos.x = s.x; if (s.nz) pos.z = s.z; normal.set(s.nx, 0, s.nz); }
+      if (target != null) pos.z = tg.origin.z + tg.targets[target].z;
+      pos.addScaledVector(normal, .018);
+      batch.parent.updateWorldMatrix(true, false); batch.parent.worldToLocal(pos);
+      q.setFromUnitVectors(front, normal);
+      rotZ.setFromAxisAngle(front, Math.random() * 6.283);
+      q.multiply(rotZ);
+      batch.parent.getWorldQuaternion(parentQ); q.premultiply(parentQ.invert());
+      const size = target == null ? (.34 + Math.random() * .14) : (.18 + Math.random() * .08);
+      corners.forEach(([x, y], i) => { vertex.set(x * size, y * size, 0).applyQuaternion(q).add(pos); batch.positions.setXYZ(batch.next * 6 + i, vertex.x, vertex.y, vertex.z); });
+      batch.life[batch.next] = CHAR_LIFE;
+      batch.lastPos[batch.next * 3] = hit.point.x;
+      batch.lastPos[batch.next * 3 + 1] = hit.point.y;
+      batch.lastPos[batch.next * 3 + 2] = hit.point.z;
+      batch.lastTime = now;
+      for (let i = 0; i < 6; i++) batch.colors.setW(batch.next * 6 + i, 1);
+      batch.colors.needsUpdate = true;
+      batch.next = (batch.next + 1) % batch.capacity; batch.count = Math.min(batch.capacity, batch.count + 1);
+      batch.positions.needsUpdate = true; batch.mesh.geometry.setDrawRange(0, batch.count * 6);
+    },
+    update(dt) {
+      if (!(dt > 0)) return;
+      for (const b of batches) {
+        let dirty = false, alive = 0;
+        for (let j = 0; j < b.capacity; j++) if (b.life[j] > 0) {
+          b.life[j] = Math.max(0, b.life[j] - dt); if (b.life[j] > 0) alive++;
+          if (b.life[j] < CHAR_FADE) {
+            for (let i = 0; i < 6; i++) b.colors.setW(j * 6 + i, b.life[j] / CHAR_FADE);
+            dirty = true;
+          }
+        }
+        if (dirty) b.colors.needsUpdate = true;
+        if (!alive && b.count > 0) { b.mesh.geometry.setDrawRange(0, 0); b.count = 0; b.next = 0; }
+      }
+    },
+    clear() { for (const b of batches) { b.mesh.geometry.setDrawRange(0, 0); b.count = 0; b.next = 0; b.life.fill(0); } },
+    count: () => batches.reduce((n, b) => n + b.life.reduce((a, t) => a + (t > 0 ? 1 : 0), 0), 0),
+    dispose() { for (const b of batches) { b.mesh.removeFromParent(); b.mesh.geometry.dispose(); } mat.dispose(); map?.dispose(); }
   };
 }

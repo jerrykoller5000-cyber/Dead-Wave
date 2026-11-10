@@ -34,6 +34,7 @@ import { webbingGeometry, bandolierFit } from '../ui/marine-webbing.js';
 import { fitWeaponSling } from '../ui/weapon-sling.js';
 import { BOOTS_HEX, buildInsulatedBoots, buildWornBoots } from '../world/lightning.js';
 import { makePistolModel, makeRevolverModel, makeUziModel, makeKnifeModel } from '../studio/weapon-sidearms.js';
+import { drawWeaponRail } from '../studio/gun-detail.js';
 import { makeM4Model, makeAkModel, makeAa12Model, makeShotgunModel, makeSniperModel } from '../studio/weapon-longarms.js';
 import { makeMinigunModel, makeLauncherModel, makeFlamerModel, makeChainsawModel, makeMortarModel, makeM240Model } from '../studio/weapon-heavy.js';
 import { makeKatanaModel, makeSheathedKatana } from '../studio/katana.js';
@@ -559,17 +560,11 @@ function gunKit(gun) {
     slab: (pts, w, mat, o = {}) => place(new THREE.Mesh(profileSlab(pts, w, o.bevel == null ? 0.004 : o.bevel, o.segs || 2), mat), o.x || 0, o.y || 0, o.z || 0, o.rx, o.ry, o.rz, o.parent),
     lathe: (prof, mat, o = {}) => place(new THREE.Mesh(profileLathe(prof, o.seg || 14, o.phase || 0), mat), o.x || 0, o.y || 0, o.z || 0, o.rx, o.ry, o.rz, o.parent),
     rail: (len, x, y, z, parent, w = 0.042, side = 0) => {
-      const p = parent || gun;
-      if (side === 2) {
-        place(new THREE.Mesh(rbox(w, 0.014, len, 0.003), gunDark), x, y, z, 0, 0, 0, p);
-        for (let s = -len / 2 + 0.012; s < len / 2 - 0.006; s += 0.026) place(new THREE.Mesh(rbox(w + 0.006, 0.018, 0.01, 0.002), gunAccent), x, y - 0.002, z + s, 0, 0, 0, p);
-      } else if (side) {
-        place(new THREE.Mesh(rbox(0.014, w, len, 0.003), gunDark), x, y, z, 0, 0, 0, p);
-        for (let s = -len / 2 + 0.012; s < len / 2 - 0.006; s += 0.026) place(new THREE.Mesh(rbox(0.018, w + 0.006, 0.01, 0.002), gunAccent), x + side * 0.002, y, z + s, 0, 0, 0, p);
-      } else {
-        place(new THREE.Mesh(rbox(w, 0.014, len, 0.003), gunDark), x, y, z, 0, 0, 0, p);
-        for (let s = -len / 2 + 0.012; s < len / 2 - 0.006; s += 0.026) place(new THREE.Mesh(rbox(w + 0.006, 0.018, 0.01, 0.002), gunAccent), x, y + 0.002, z + s, 0, 0, 0, p);
-      }
+      drawWeaponRail(len, w, side, (width, height, depth, bevel, raised, dx, dy, dz) => {
+        const geometry = bevel ? rbox(width, height, depth, bevel) : new THREE.BoxGeometry(width, height, depth);
+        const mesh = new THREE.Mesh(geometry, raised ? gunAccent : gunDark);
+        return place(mesh, x + dx, y + dy, z + dz, 0, 0, 0, parent || gun);
+      });
     }
   };
 }

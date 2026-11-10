@@ -114,7 +114,7 @@ export function mountArmory({ doc = document, bus = window, cif = doc.getElement
     return wrap;
   }
   function syncOwned() {
-    for (const gun of getOwned() || []) if (!armory.has(gun.id)) armory.buy(gun);
+    for (const gun of getOwned() || []) if (!armory.has(gun.id)) armory.buy(gun, { store: true });
   }
   function gunKindOf(id) { return String(id || '').replace(/:second$/, ''); }
   // bench holds a gun id ('m4', 'pistol', 'pistol:second') so an akimbo pair can
@@ -165,8 +165,8 @@ export function mountArmory({ doc = document, bus = window, cif = doc.getElement
       const b = el('button', null, !m.owned ? t('armory.store.buy', {}, 'Buy') : m.fitted ? t('armory.remove', {}, 'Take off') : t('armory.fit', {}, 'Put on')); b.type = 'button';
       b.disabled = !m.owned && !m.affordable;
       b.addEventListener('click', () => {
-        const changed = m.owned ? onFit(kind, m.id, !m.fitted) : onBuyMod(kind, m.id) && onFit(kind, m.id, true);
-        if (changed) render();
+        if (m.owned) { if (onFit(kind, m.id, !m.fitted)) render(); }
+        else if (onBuyMod(kind, m.id)) { onFit(kind, m.id, true); syncOwned(); render(); }
       });
       li.append(txt, state, b);
       list.append(li);
@@ -184,7 +184,7 @@ export function mountArmory({ doc = document, bus = window, cif = doc.getElement
     const wrap = el('section', 'armory-finish armory-laser');
     const cur = data.list.find((f) => f.id === data.current) || data.list[0];
     const head = el('div', 'armory-finish-head');
-    head.append(el('h4', null, t('armory.laser', {}, 'Laser colour')), el('span', 'armory-finish-current', cur ? cur.name : ''));
+    head.append(el('h4', null, t('armory.laser', {}, 'Laser color')), el('span', 'armory-finish-current', cur ? cur.name : ''));
     wrap.append(head);
     const grid = el('div', 'armory-finish-grid');
     for (const f of data.list) {
@@ -268,12 +268,14 @@ export function mountArmory({ doc = document, bus = window, cif = doc.getElement
       tile.title = here ? t('armory.carryThis', {}, 'Carry this one') : t('armory.carryOther', { slot: fitsName }, 'Carry this in a {slot} slot');
       tile.append(gunPicture(gun.kind), el('strong', 'armory-name', labelGun(gun)), el('small', null, detailGun(gun)), chips(gun.kind), el('em', 'armory-fits', fitsName));
       tile.addEventListener('click', () => {
-        if (fits === selected.type) armory.take(gun.id, selected.type, selected.index);
+        let moved;
+        if (fits === selected.type) moved = armory.take(gun.id, selected.type, selected.index).ok;
         else {
           const free = state.slots[fits].findIndex((g) => !g);
-          if (free >= 0) armory.take(gun.id, fits, free);
+          if (free >= 0) moved = armory.take(gun.id, fits, free).ok;
           selected = { type: fits, index: free >= 0 ? free : 0 };
         }
+        if (moved) onApply(armory.loadout(), armory.read());
         bench = null; render();
       });
       const tune = el('button', 'armory-tune', t('armory.tune', {}, 'Workbench')); tune.type = 'button'; tune.dataset.bench = gun.id;
@@ -332,7 +334,10 @@ export function mountArmory({ doc = document, bus = window, cif = doc.getElement
     syncOwned(); open = true; panel.hidden = false; cif.classList.add('armory-show'); render(); onOpenCatalogue(catalogue);
     panel.querySelector('button')?.focus({ preventScroll: true });
   });
-  stow.addEventListener('click', () => { armory.stow(selected.type, selected.index); render(); });
+  stow.addEventListener('click', () => {
+    if (armory.stow(selected.type, selected.index).ok) onApply(armory.loadout(), armory.read());
+    render();
+  });
   done.addEventListener('click', close);
   const observer = new MutationObserver(() => {
     if (!cif.classList.contains('show')) close();

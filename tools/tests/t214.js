@@ -84,7 +84,13 @@
 
     // (8) Akimbo: both magazines swap together, each hand gets the fullest left.
     ok(await toGun('uzi'), 'the Uzi in hand');
+    const armory = T.armoryDbg.ui().armory;
+    if (!armory.has('uzi')) armory.buy({ id: 'uzi', kind: 'uzi' }, { store: true });
+    if (!armory.loadout().secondary.includes('uzi')) armory.take('uzi', 'secondary', 0);
+    ok(T.armoryDbg.fit('uzi', 'pair', true) && armory.loadout().secondary.includes('uzi:second'),
+      'the owned second Uzi is carried from the Armory before Y');
     T.toggleDualWieldDbg(); await wait(100);
+    ok(T.vaultDbg.flags().akimbo, 'Y draws both carried Uzis');
     T.setMagazinesDbg('uzi', 5, [32, 32, 10], 0);
     s = snap('uzi');
     const uziTotal = sum(s.loaded) + sum(s.spare);

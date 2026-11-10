@@ -1,0 +1,5 @@
+sheet: review/GT-20076/after/sheet.jpg
+check: 26 subjects, 0 broken
+review/GT-20076/after/check.json
+(4.3 s)
+camera: no camera running, loading the game for this one call (`node tools/camera.mjs start` keeps it loaded)

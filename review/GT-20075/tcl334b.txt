@@ -1,0 +1,8 @@
+INFO pistol the hands into each other: 32.5 mm
+INFO revolver the hands into each other: 11.7 mm
+INFO uzi the hands into each other: 0.0 mm
+PASS guns checked up in first person: 3 of 3
+FAIL no part of either hand inside any part of a gun (deepest per gun, mm: pistol 2.8, revolver 0.0, uzi 6.0); through: pistol: 2.8 mm (r glove in ?); uzi: 6.0 mm (r glove in ?)
+FAIL neither hand through the other (D-140): pistol: 32.5 mm; revolver: 11.7 mm
+PASS the gloved wrists stay inside the sleeves at every gun's hip hold
+PASS no page errors

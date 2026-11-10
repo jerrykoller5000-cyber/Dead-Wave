@@ -1,0 +1,1358 @@
+{
+  "minigun-slot1": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "fit": {
+      "score": 0,
+      "parameters": {
+        "lower": [
+          0.222,
+          0.96,
+          -0.14
+        ],
+        "turn": [
+          0.235,
+          0.98,
+          0.115
+        ],
+        "lead": 0.045
+      }
+    },
+    "roll": [
+      0,
+      -15
+    ],
+    "tried": 9
+  },
+  "minigun-slot2": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "fit": {
+      "score": 0,
+      "parameters": {
+        "lower": [
+          0.222,
+          0.89,
+          -0.19
+        ],
+        "turn": [
+          0.235,
+          0.98,
+          0.115
+        ],
+        "lead": 0.045
+      }
+    },
+    "roll": [
+      0,
+      0
+    ],
+    "tried": 0
+  },
+  "minigun-slot1-vest": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "fit": {
+      "score": 0,
+      "parameters": {
+        "lower": [
+          0.252,
+          0.89,
+          -0.24
+        ],
+        "turn": [
+          0.235,
+          0.98,
+          0.115
+        ],
+        "lead": 0.045
+      }
+    },
+    "roll": [
+      0,
+      -15
+    ],
+    "tried": 29
+  },
+  "minigun-slot2-vest": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "fit": {
+      "score": 0,
+      "parameters": {
+        "lower": [
+          0.222,
+          0.89,
+          -0.19
+        ],
+        "turn": [
+          0.235,
+          0.98,
+          0.115
+        ],
+        "lead": 0.045
+      }
+    },
+    "roll": [
+      0,
+      0
+    ],
+    "tried": 0
+  },
+  "launcher-slot1": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "fit": {
+      "score": 0,
+      "parameters": {
+        "lower": [
+          0.222,
+          0.89,
+          -0.14
+        ],
+        "turn": [
+          0.235,
+          0.98,
+          0.115
+        ],
+        "lead": 0.045
+      }
+    },
+    "roll": [
+      0,
+      0
+    ],
+    "tried": 3
+  },
+  "launcher-slot2": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "fit": {
+      "score": 0,
+      "parameters": {
+        "lower": [
+          0.222,
+          0.8200000000000001,
+          -0.14
+        ],
+        "turn": [
+          0.235,
+          0.98,
+          0.115
+        ],
+        "lead": 0.045
+      }
+    },
+    "roll": [
+      0,
+      0
+    ],
+    "tried": 6
+  },
+  "launcher-slot1-vest": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "fit": {
+      "score": 0,
+      "parameters": {
+        "lower": [
+          0.222,
+          0.89,
+          -0.14
+        ],
+        "turn": [
+          0.235,
+          0.98,
+          0.115
+        ],
+        "lead": 0.045
+      }
+    },
+    "roll": [
+      0,
+      0
+    ],
+    "tried": 3
+  },
+  "launcher-slot2-vest": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "fit": {
+      "score": 0,
+      "parameters": {
+        "lower": [
+          0.222,
+          0.8200000000000001,
+          -0.14
+        ],
+        "turn": [
+          0.235,
+          0.98,
+          0.115
+        ],
+        "lead": 0.045
+      }
+    },
+    "roll": [
+      0,
+      0
+    ],
+    "tried": 6
+  },
+  "m4-slot1": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "fit": {
+      "score": 0,
+      "parameters": {
+        "lower": [
+          0.222,
+          0.89,
+          -0.19
+        ],
+        "turn": [
+          0.235,
+          0.98,
+          0.115
+        ],
+        "lead": 0.045
+      }
+    },
+    "roll": [
+      0,
+      0
+    ],
+    "tried": 0
+  },
+  "m4-slot2": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "fit": {
+      "score": 0,
+      "parameters": {
+        "lower": [
+          0.222,
+          0.89,
+          -0.19
+        ],
+        "turn": [
+          0.235,
+          0.98,
+          0.115
+        ],
+        "lead": 0.045
+      }
+    },
+    "roll": [
+      0,
+      0
+    ],
+    "tried": 0
+  },
+  "m4-slot1-vest": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "fit": {
+      "score": 0,
+      "parameters": {
+        "lower": [
+          0.222,
+          0.89,
+          -0.19
+        ],
+        "turn": [
+          0.235,
+          0.98,
+          0.115
+        ],
+        "lead": 0.045
+      }
+    },
+    "roll": [
+      0,
+      0
+    ],
+    "tried": 0
+  },
+  "m4-slot2-vest": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "fit": {
+      "score": 0,
+      "parameters": {
+        "lower": [
+          0.222,
+          0.89,
+          -0.19
+        ],
+        "turn": [
+          0.235,
+          0.98,
+          0.115
+        ],
+        "lead": 0.045
+      }
+    },
+    "roll": [
+      0,
+      0
+    ],
+    "tried": 0
+  },
+  "ak-slot1": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [
+      {
+        "sling": "clip1",
+        "gun": "root/group[0]/fp-stock[6]/BufferGeometry[5]~6",
+        "at": [
+          32.84225,
+          87.65605,
+          -65.58353
+        ]
+      }
+    ],
+    "fit": {
+      "score": 0,
+      "parameters": {
+        "lower": [
+          0.222,
+          0.89,
+          -0.19
+        ],
+        "turn": [
+          0.235,
+          0.98,
+          0.115
+        ],
+        "lead": 0.045
+      }
+    },
+    "roll": [
+      0,
+      0
+    ],
+    "tried": 0
+  },
+  "ak-slot2": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [
+      {
+        "sling": "clip1",
+        "gun": "root/group[0]/fp-stock[6]/BufferGeometry[5]~6",
+        "at": [
+          32.40752,
+          87.65148,
+          -65.56891
+        ]
+      }
+    ],
+    "fit": {
+      "score": 0,
+      "parameters": {
+        "lower": [
+          0.222,
+          0.89,
+          -0.19
+        ],
+        "turn": [
+          0.235,
+          0.98,
+          0.115
+        ],
+        "lead": 0.045
+      }
+    },
+    "roll": [
+      0,
+      0
+    ],
+    "tried": 0
+  },
+  "ak-slot1-vest": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [
+      {
+        "sling": "clip1",
+        "gun": "root/group[0]/fp-stock[6]/BufferGeometry[5]~6",
+        "at": [
+          32.84225,
+          87.65605,
+          -65.58353
+        ]
+      }
+    ],
+    "fit": {
+      "score": 0,
+      "parameters": {
+        "lower": [
+          0.222,
+          0.89,
+          -0.19
+        ],
+        "turn": [
+          0.235,
+          0.98,
+          0.115
+        ],
+        "lead": 0.045
+      }
+    },
+    "roll": [
+      0,
+      0
+    ],
+    "tried": 0
+  },
+  "ak-slot2-vest": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [
+      {
+        "sling": "clip1",
+        "gun": "root/group[0]/fp-stock[6]/BufferGeometry[5]~6",
+        "at": [
+          32.40752,
+          87.65148,
+          -65.56891
+        ]
+      }
+    ],
+    "fit": {
+      "score": 0,
+      "parameters": {
+        "lower": [
+          0.222,
+          0.89,
+          -0.19
+        ],
+        "turn": [
+          0.235,
+          0.98,
+          0.115
+        ],
+        "lead": 0.045
+      }
+    },
+    "roll": [
+      0,
+      0
+    ],
+    "tried": 0
+  },
+  "aa12-slot1": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "fit": {
+      "score": 0,
+      "parameters": {
+        "lower": [
+          0.222,
+          0.8200000000000001,
+          -0.19
+        ],
+        "turn": [
+          0.235,
+          0.98,
+          0.115
+        ],
+        "lead": 0.045
+      }
+    },
+    "roll": [
+      0,
+      0
+    ],
+    "tried": 4
+  },
+  "aa12-slot2": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "fit": {
+      "score": 0,
+      "parameters": {
+        "lower": [
+          0.222,
+          0.8200000000000001,
+          -0.19
+        ],
+        "turn": [
+          0.235,
+          0.98,
+          0.115
+        ],
+        "lead": 0.045
+      }
+    },
+    "roll": [
+      0,
+      0
+    ],
+    "tried": 4
+  },
+  "aa12-slot1-vest": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "fit": {
+      "score": 0,
+      "parameters": {
+        "lower": [
+          0.222,
+          0.8200000000000001,
+          -0.19
+        ],
+        "turn": [
+          0.235,
+          0.98,
+          0.115
+        ],
+        "lead": 0.045
+      }
+    },
+    "roll": [
+      0,
+      0
+    ],
+    "tried": 4
+  },
+  "aa12-slot2-vest": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "fit": {
+      "score": 0,
+      "parameters": {
+        "lower": [
+          0.222,
+          0.8200000000000001,
+          -0.14
+        ],
+        "turn": [
+          0.235,
+          0.98,
+          0.115
+        ],
+        "lead": 0.045
+      }
+    },
+    "roll": [
+      0,
+      0
+    ],
+    "tried": 6
+  },
+  "shotgun-slot1": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "fit": {
+      "score": 0,
+      "parameters": {
+        "lower": [
+          0.192,
+          0.96,
+          -0.14
+        ],
+        "turn": [
+          0.235,
+          0.98,
+          0.115
+        ],
+        "lead": 0.045
+      }
+    },
+    "roll": [
+      0,
+      0
+    ],
+    "tried": 18
+  },
+  "shotgun-slot2": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "fit": {
+      "score": 0,
+      "parameters": {
+        "lower": [
+          0.192,
+          0.96,
+          -0.19
+        ],
+        "turn": [
+          0.235,
+          0.98,
+          0.115
+        ],
+        "lead": 0.045
+      }
+    },
+    "roll": [
+      0,
+      0
+    ],
+    "tried": 16
+  },
+  "shotgun-slot1-vest": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "fit": {
+      "score": 0,
+      "parameters": {
+        "lower": [
+          0.192,
+          0.96,
+          -0.14
+        ],
+        "turn": [
+          0.235,
+          0.98,
+          0.115
+        ],
+        "lead": 0.045
+      }
+    },
+    "roll": [
+      0,
+      0
+    ],
+    "tried": 18
+  },
+  "shotgun-slot2-vest": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "fit": {
+      "score": 0,
+      "parameters": {
+        "lower": [
+          0.192,
+          0.96,
+          -0.19
+        ],
+        "turn": [
+          0.235,
+          0.98,
+          0.115
+        ],
+        "lead": 0.045
+      }
+    },
+    "roll": [
+      0,
+      0
+    ],
+    "tried": 16
+  },
+  "sniper-slot1": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "fit": {
+      "score": 0,
+      "parameters": {
+        "lower": [
+          0.192,
+          0.89,
+          -0.19
+        ],
+        "turn": [
+          0.235,
+          0.98,
+          0.115
+        ],
+        "lead": 0.045
+      }
+    },
+    "roll": [
+      0,
+      0
+    ],
+    "tried": 10
+  },
+  "sniper-slot2": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "fit": {
+      "score": 0,
+      "parameters": {
+        "lower": [
+          0.222,
+          0.89,
+          -0.19
+        ],
+        "turn": [
+          0.235,
+          0.98,
+          0.115
+        ],
+        "lead": 0.045
+      }
+    },
+    "roll": [
+      0,
+      0
+    ],
+    "tried": 0
+  },
+  "sniper-slot1-vest": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "fit": {
+      "score": 0,
+      "parameters": {
+        "lower": [
+          0.192,
+          0.89,
+          -0.19
+        ],
+        "turn": [
+          0.235,
+          0.98,
+          0.115
+        ],
+        "lead": 0.045
+      }
+    },
+    "roll": [
+      0,
+      0
+    ],
+    "tried": 10
+  },
+  "sniper-slot2-vest": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "fit": {
+      "score": 0,
+      "parameters": {
+        "lower": [
+          0.222,
+          0.89,
+          -0.19
+        ],
+        "turn": [
+          0.235,
+          0.98,
+          0.115
+        ],
+        "lead": 0.045
+      }
+    },
+    "roll": [
+      0,
+      0
+    ],
+    "tried": 0
+  },
+  "flamer-slot1": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "fit": {
+      "score": 0,
+      "parameters": {
+        "lower": [
+          0.222,
+          0.89,
+          -0.14
+        ],
+        "turn": [
+          0.235,
+          0.98,
+          0.115
+        ],
+        "lead": 0.045
+      }
+    },
+    "roll": [
+      75,
+      0
+    ],
+    "tried": 3
+  },
+  "flamer-slot2": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "fit": {
+      "score": 0,
+      "parameters": {
+        "lower": [
+          0.222,
+          0.89,
+          -0.19
+        ],
+        "turn": [
+          0.235,
+          0.98,
+          0.115
+        ],
+        "lead": 0.045
+      }
+    },
+    "roll": [
+      0,
+      0
+    ],
+    "tried": 0
+  },
+  "flamer-slot1-vest": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "fit": {
+      "score": 0,
+      "parameters": {
+        "lower": [
+          0.222,
+          0.8200000000000001,
+          -0.14
+        ],
+        "turn": [
+          0.235,
+          0.98,
+          0.115
+        ],
+        "lead": 0.045
+      }
+    },
+    "roll": [
+      90,
+      0
+    ],
+    "tried": 6
+  },
+  "flamer-slot2-vest": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "fit": {
+      "score": 0,
+      "parameters": {
+        "lower": [
+          0.222,
+          0.89,
+          -0.19
+        ],
+        "turn": [
+          0.235,
+          0.98,
+          0.115
+        ],
+        "lead": 0.045
+      }
+    },
+    "roll": [
+      0,
+      0
+    ],
+    "tried": 0
+  },
+  "chainsaw-slot1": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "fit": {
+      "score": 0,
+      "parameters": {
+        "lower": [
+          0.222,
+          0.89,
+          -0.19
+        ],
+        "turn": [
+          0.235,
+          0.98,
+          0.115
+        ],
+        "lead": 0.045
+      }
+    },
+    "roll": [
+      0,
+      0
+    ],
+    "tried": 0
+  },
+  "chainsaw-slot2": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [
+      {
+        "sling": "clip2",
+        "gun": "root/group[0]/BufferGeometry[7]~33",
+        "at": [
+          32.35764,
+          88.0937,
+          -65.52495
+        ]
+      }
+    ],
+    "fit": {
+      "score": 0,
+      "parameters": {
+        "lower": [
+          0.222,
+          0.89,
+          -0.19
+        ],
+        "turn": [
+          0.235,
+          0.98,
+          0.115
+        ],
+        "lead": 0.045
+      }
+    },
+    "roll": [
+      0,
+      0
+    ],
+    "tried": 0
+  },
+  "chainsaw-slot1-vest": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "fit": {
+      "score": 0,
+      "parameters": {
+        "lower": [
+          0.222,
+          0.89,
+          -0.19
+        ],
+        "turn": [
+          0.235,
+          0.98,
+          0.115
+        ],
+        "lead": 0.045
+      }
+    },
+    "roll": [
+      0,
+      0
+    ],
+    "tried": 0
+  },
+  "chainsaw-slot2-vest": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [
+      {
+        "sling": "clip2",
+        "gun": "root/group[0]/BufferGeometry[7]~33",
+        "at": [
+          32.35764,
+          88.0937,
+          -65.52495
+        ]
+      }
+    ],
+    "fit": {
+      "score": 0,
+      "parameters": {
+        "lower": [
+          0.222,
+          0.89,
+          -0.19
+        ],
+        "turn": [
+          0.235,
+          0.98,
+          0.115
+        ],
+        "lead": 0.045
+      }
+    },
+    "roll": [
+      0,
+      0
+    ],
+    "tried": 0
+  }
+}

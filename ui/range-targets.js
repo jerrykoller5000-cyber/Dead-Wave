@@ -14,7 +14,9 @@ export function createRangeTargets(T,tg){
   const geo=new T.BoxGeometry(1.05,.2,.8);owned.push(geo);
   const stands=new T.InstancedMesh(geo,steel,5),dummy=new T.Object3D();group.add(stands);
   let standCount=0;bank=targetLayout(d).map((at,i)=>{
-   const pivot=original[i].pivot.clone(true);pivot.traverse(o=>{if(o.name==='training-impact-marks')o.parent?.remove(o);});
+   const pivot=original[i].pivot.clone(true),marks=[];
+   pivot.traverse(o=>{if(o.name==='training-impact-marks')marks.push(o);});
+   for(const mark of marks)mark.parent?.remove(mark);
    const root=new T.Group();root.position.set(at.x,0,at.z);root.add(pivot);group.add(root);
    const plate=pivot.getObjectByName('target-plate');
    if(!original.some(t=>Math.abs(t.x-at.x)<.01&&Math.abs(t.z-at.z)<.01)){dummy.position.set(at.x,.1,at.z);dummy.updateMatrix();stands.setMatrixAt(standCount++,dummy.matrix);}

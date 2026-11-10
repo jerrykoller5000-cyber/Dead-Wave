@@ -23,9 +23,10 @@
     ok(!!document.querySelector('#cif [data-cif-buy="helmet"]'), 'the CIF Head tab sells the Combat helmet (D-124)');
     T.closeMenuDbg('cif');
     T.closeMenuDbg('shop'); T.openMenuDbg('armory');
-    T.setShopTabDbg('upgrades');
-    ok(/laser\/light/i.test(document.getElementById('shopList').textContent), 'the Armory store sells the laser/light (D-124)');
-    T.closeMenuDbg('shop'); T.closeMenuDbg('armory');
+    T.armoryDbg.ui().bench('pistol'); await wait(80);
+    const lightRowEl = document.querySelector('#armoryPanel [data-mod="laserLight"]');
+    ok(!!lightRowEl && /laser\/light/i.test(lightRowEl.textContent), 'the pistol workbench sells the laser/light (D-124)');
+    T.closeMenuDbg('armory');
     T.addCash(-T.getBank());
     T.openMenuDbg('armory'); await wait(80);
     T.armoryDbg.ui().bench('pistol'); await wait(80);

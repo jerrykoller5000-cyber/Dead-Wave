@@ -1,0 +1,5 @@
+PASS guns checked up in first person: 5 of 5
+FAIL no part of either hand inside any part of a gun (deepest per gun, mm: m4 1.3, ak 1.7, shotgun 0.7, aa12 0.0, sniper 3.2); through: m4: 1.3 mm (l glove in ?); ak: 1.7 mm (l glove in ?); shotgun: 0.7 mm (l glove in ?); sniper: 3.2 mm (l glove in ?)
+PASS neither hand through the other (D-140)
+PASS the gloved wrists stay inside the sleeves at every gun's hip hold
+PASS no page errors

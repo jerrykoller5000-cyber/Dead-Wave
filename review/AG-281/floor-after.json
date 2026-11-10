@@ -1,0 +1,34 @@
+{
+ "schema": "dw-camera-shot",
+ "schemaVersion": 2,
+ "target": "build:floor",
+ "label": "build floor",
+ "view": null,
+ "cam": {
+  "x": -36.9565473008972,
+  "y": 31.242762771424754,
+  "z": -66.37295431195369,
+  "tx": -40,
+  "ty": 29.134706512093544,
+  "tz": -70,
+  "fov": 35
+ },
+ "time": 0.4121687199999563,
+ "size": [
+  1600,
+  900
+ ],
+ "center": {
+  "x": -40,
+  "y": 29.134706512093544,
+  "z": -70
+ },
+ "boxSize": {
+  "x": 2,
+  "y": 0.9659999907016754,
+  "z": 2
+ },
+ "mode": "title",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "at": "2026-11-10T11:37:25.563Z"
+}

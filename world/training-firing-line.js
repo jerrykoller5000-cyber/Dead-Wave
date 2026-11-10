@@ -13,8 +13,8 @@ export function buildFiringLine(T,{root,origin,range,height,box,std,keep,steel,s
  addBox(w,.07,F.back-F.front,rubber,cx,F.top-.035,z);
  addBox(w,.72,.09,panel,cx,.405,F.front+.06);
  addBox(w,.075,.075,steel,cx,.055,F.front+.06);
- addBox(w,.05,.07,steelLight,cx,F.top-.025,F.front+.025);
- addBox(w,.025,.05,hazard,cx,F.top-.01,F.front+.055);
+ addBox(w,.07,.025,steelLight,cx,F.top-.035,F.front-.0125);
+ addBox(w,.012,.035,hazard,cx,F.top+.005,F.front+.015);
  const solids=[],solid=(x0,x1,y0,y1,z0,z1,flags={})=>solids.push({minX:origin.x+x0,maxX:origin.x+x1,minY:origin.y+y0,maxY:origin.y+y1,minZ:origin.z+z0,maxZ:origin.z+z1,metal:true,firingLine:true,...flags});
  solid(range.minX,range.maxX,0,F.top,F.front,F.back);
  // Ceiling-hung posts stay above the slot; only the wall-end anchors run full height.

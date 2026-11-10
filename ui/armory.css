@@ -133,6 +133,10 @@
 #cif.armory-only #armoryPanel h2 { font-size:24px; }
 #cif.armory-only .armory-head .hint { max-width:none; margin-top:5px; }
 #cif.armory-only .armory-body { grid-template-columns:minmax(0, 1.85fr) minmax(290px, 1fr); gap:14px; padding:0 14px; }
+#cif.armory-only .armory-left, #cif.armory-only .armory-locker, #cif.armory-only .armory-bench,
+#cif.armory-only .armory-item, #cif.armory-only .armory-mod-text { min-width:0; }
+#cif.armory-only .armory-name, #cif.armory-only .armory-mod-text,
+#cif.armory-only .armory-ammo-offer span { overflow-wrap:anywhere; }
 #cif.armory-only .armory-left { display:grid; grid-template-columns:minmax(150px, .8fr) minmax(0, 1.35fr); column-gap:12px; align-items:start; }
 #cif.armory-only .armory-slots { grid-template-columns:1fr; gap:6px; }
 #cif.armory-only .armory-shelf { grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px 6px; padding:4px 6px 12px; }
@@ -210,16 +214,20 @@
 }
 
 /* GP-20071: purchasing is part of the Armory panel, sharing its one scroll and Done action. */
-#cif #armoryPanel .armory-catalogue { margin:14px 14px 0; }
+#cif #armoryPanel .armory-catalogue { margin:14px 14px 0; padding-top:10px; border-top:1px solid #cbdcb744; }
 #cif #armoryPanel #shop.armory-inline { display:block; position:static; inset:auto; background:none; z-index:auto; }
 #cif #armoryPanel #shop.armory-inline .card { box-sizing:border-box; width:100%; max-height:none; overflow:visible;
-  padding:14px; clip-path:none; box-shadow:none; background:#1d231a; border:1px solid #cbdcb744; }
-#cif #armoryPanel #shop.armory-inline h2 { font-size:17px; }
+  padding:0; clip-path:none; box-shadow:none; background:transparent; border:0; }
+#cif #armoryPanel #shop.armory-inline .card::before { display:none; }
+#cif #armoryPanel #shop.armory-inline h2 { font-size:17px; flex-wrap:wrap; gap:4px 12px; }
+#cif #armoryPanel #shop.armory-inline .perk .desc { display:block; overflow:visible; -webkit-line-clamp:unset; overflow-wrap:anywhere; }
+#cif #armoryPanel #shop.armory-inline .perk .name { min-width:0; overflow-wrap:anywhere; }
+#cif #armoryPanel #shop.armory-inline p.hint { display:block; overflow:visible; -webkit-line-clamp:unset; }
 #cif #armoryPanel #shop.armory-inline #shopTabs,
 #cif #armoryPanel #shop.armory-inline #shopSubtabs,
 #cif #armoryPanel #shop.armory-inline .modes { display:none; }
 #cif #armoryPanel #shop.armory-inline #shopList { max-height:none; overflow:visible; padding-right:0; }
 @media(max-width:640px) {
   #cif #armoryPanel .armory-catalogue { margin:10px 8px 0; }
-  #cif #armoryPanel #shop.armory-inline .card { padding:10px; }
+  #cif #armoryPanel #shop.armory-inline .card { padding:0; }
 }

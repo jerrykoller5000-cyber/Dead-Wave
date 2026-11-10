@@ -328,15 +328,36 @@ export function buildHolyGrenade(T) {
   const gold = new T.MeshStandardMaterial({ color: 0xd9a92b, roughness: 0.3, metalness: 0.85 });
   const red = new T.MeshStandardMaterial({ color: 0xb3122a, roughness: 0.25, metalness: 0.3 });
   const blue = new T.MeshStandardMaterial({ color: 0x1d4fb8, roughness: 0.25, metalness: 0.3 });
-  const orb = new T.Mesh(new T.SphereGeometry(0.1, 14, 10), gold); orb.position.y = 0.1; orb.castShadow = true; g.add(orb);
-  const band = new T.Mesh(new T.TorusGeometry(0.1, 0.012, 6, 18), gold); band.rotation.x = Math.PI / 2; band.position.y = 0.1; g.add(band);
-  for (let i = 0; i < 6; i++) {
-    const a = i * Math.PI / 3, j = new T.Mesh(new T.SphereGeometry(0.016, 6, 5), i % 2 ? blue : red);
-    j.position.set(Math.cos(a) * 0.105, 0.1, Math.sin(a) * 0.105); g.add(j);
+  // One gold skin carries the raised equator and the six coloured facets. The
+  // jewels follow the outer profile, so their hidden backs cannot cut into it.
+  const pos=[], indices=[[],[],[]], sides=48;
+  const ys=[0,.005,.019,.041,.069,.083,.088,.092,.096,.10,.104,.108,.112,.117,.131,.159,.181,.195,.20];
+  function surface(a,y) {
+    const dy=y-.1, turn=Math.PI/3, sector=Math.round(a/turn);
+    const arc=.105*(a-sector*turn);
+    const radius=Math.sqrt(Math.max(0,.01-dy*dy));
+    const band=Math.abs(dy)<=.0121?.1+Math.sqrt(Math.max(0,.012**2-dy*dy)):0;
+    const gem=.016**2-dy*dy-arc*arc;
+    const jewel=gem>0?.105+Math.sqrt(gem):0;
+    return {r:Math.max(radius,band,jewel),mat:jewel>Math.max(radius,band)?1+Math.abs(sector%2):0};
   }
-  box(T, g, 0.02, 0.1, 0.02, gold, 0, 0.24, 0);
-  box(T, g, 0.07, 0.02, 0.02, gold, 0, 0.26, 0);
-  const ring = new T.Mesh(new T.TorusGeometry(0.022, 0.005, 5, 10), gold); ring.position.set(0.06, 0.2, 0); ring.name = 'holy-grenade-pin'; g.add(ring);
+  for(let row=0;row<ys.length;row++) for(let k=0;k<sides;k++) {
+    const a=k*2*Math.PI/sides,y=ys[row],r=surface(a,y).r;
+    pos.push(r*Math.cos(a),y,r*Math.sin(a));
+    if(row===ys.length-1) continue;
+    const v=row*sides+k,w=row*sides+(k+1)%sides;
+    const m=surface(a+Math.PI/sides,(y+ys[row+1])/2).mat;
+    indices[m].push(v,v+sides,w,w,v+sides,w+sides);
+  }
+  const geometry=new T.BufferGeometry();
+  geometry.setAttribute('position',new T.Float32BufferAttribute(pos,3));
+  let first=0;
+  for(let i=0;i<indices.length;i++) {geometry.addGroup(first,indices[i].length,i); first+=indices[i].length;}
+  geometry.setIndex(indices.flat()); geometry.computeVertexNormals();
+  const orb=new T.Mesh(geometry,[gold,red,blue]); orb.name='jewelled orb'; orb.castShadow=true; g.add(orb);
+  box(T,g,.02,.09,.02,gold,0,.245,0);
+  for(const side of [-1,1]) box(T,g,.025,.02,.02,gold,side*.0225,.26,0);
+  const ring = new T.Mesh(new T.TorusGeometry(0.022, 0.005, 5, 10), gold); ring.position.set(0.06, 0.2104, 0); ring.name = 'holy-grenade-pin'; g.add(ring);
   return g;
 }
 

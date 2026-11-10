@@ -60,9 +60,22 @@
     await gUntil(() => !T.sawStartDbg || T.sawStartDbg().phase === 'ready', 3000);   // GP-188: the starter pull (1.02 s) before it runs
     ok(T.getCurrentWeapon() === 'chainsaw' && T.getSawFuel() > 50, 'saw in hand, ' + T.getSawFuel().toFixed(0) + ' s of gas');
     T.runDevCommand('godmode');   // no knockback: the marine stays in the ring
+    // CB-251 (J121): the saw cuts where its chain is, not in a cone out to 3.1 m. The fixtures are held ON the chain (a body
+    // pinned along the bar, as many as a ring would give it) while the gas and heat are measured; tcb251 has the geometry.
+    let pinned = [];
+    const pin = () => {
+      if (!pinned.length) return;
+      const bl = T.sawDbg.blade();
+      pinned.forEach((z, k) => {
+        if (!z.mesh) return;
+        const t = 0.25 + 0.5 * ((k % 4) / 3), x = bl.ax + (bl.bx - bl.ax) * t, zz = bl.az + (bl.bz - bl.az) * t;
+        z.mesh.position.set(x, T.sampleHeight(x, zz), zz);
+      });
+    };
+    const pinnedUntil = async (cond, ms) => { const s0 = T.getSimTime(), w0 = Date.now(); while (T.getSimTime() - s0 < ms / 1000 && Date.now() - w0 < ms * 40) { pin(); if (cond()) return true; await wait(20); } return cond(); };
     const run = async (ms) => {
       const f0 = T.getSawFuel(), h0 = T.getSawHeat().heat;
-      T.setMouseFireDbg(true); await gWait(ms); T.setMouseFireDbg(false);
+      T.setMouseFireDbg(true); await pinnedUntil(() => false, ms); T.setMouseFireDbg(false);
       return { fuel: f0 - T.getSawFuel(), heat: T.getSawHeat().heat - h0 };
     };
     // Running free (nothing to cut): 1 s of gas a second, heat creeps.
@@ -72,16 +85,17 @@
     for (let i = 0; i < 8; i++) {
       const a = i / 8 * Math.PI * 2, x = px + Math.sin(a) * 1.6, z = pz + Math.cos(a) * 1.6;
       const b = T.spawnZombie(x, z, 'brute', true, true);
-      b.mesh.position.set(x, T.sampleHeight(x, z), z); b.hp = 1e6; b.maxHp = T.ZOMBIE_TYPES.brute.hp; // durable fixture; sheet damage uses a brute's normal max HP
+      b.mesh.position.set(x, T.sampleHeight(x, z), z); b.riseT = 0; b.speed = b.baseSpeed = 0; b.hp = 1e6; b.maxHp = T.ZOMBIE_TYPES.brute.hp; // durable fixture; sheet damage uses a brute's normal max HP
       ring.push(b);
     }
+    pinned = ring;   // CB-251: eight on the one bar, so the cap of three a tick is what limits it
     await gWait(150);
     // One tick: at most 3 bodies bitten.
     const hp0 = ring.map((b) => b.hp);
     T.setSawHeatDbg(0);
     T.setMouseFireDbg(true);
-    await gUntil(() => ring.some((b, k) => b.hp < hp0[k]), 1500);
-    await gWait(40);
+    await pinnedUntil(() => ring.some((b, k) => b.hp < hp0[k]), 1500);
+    pin(); await gWait(40);
     T.setMouseFireDbg(false);
     const bitten = ring.filter((b, k) => b.hp < hp0[k]).length;
     ok(bitten >= 1 && bitten <= 3, 'one tick bites at most 3 of 8 (' + bitten + ')');
@@ -112,7 +126,8 @@
     });
     const restartHp = restartTargets.map((b) => b.hp);
     const fR = T.getSawFuel(), hR = T.getSawHeat().heat;
-    await gWait(700);
+    pinned = restartTargets;   // CB-251: fresh bodies on the chain
+    await pinnedUntil(() => false, 700);
     const dist = restartTargets.map((b) => b.mesh ? Math.hypot(b.mesh.position.x - T.player.position.x, b.mesh.position.z - T.player.position.z).toFixed(1) : (b.alive ? 'nomesh' : 'dead')).join(',') + ' phase ' + T.getPhase() + ' zl ' + T.zombies.length;
     ok(restartTargets.some((b, k) => b.hp < restartHp[k]), 'and it cuts again once restarted (fuel -' + (fR - T.getSawFuel()).toFixed(2) + ', heat ' + hR.toFixed(2) + '->' + T.getSawHeat().heat.toFixed(2) + ', w ' + T.getCurrentWeapon() + ', paused ' + (T.isPaused ? T.isPaused() : '?') + ', d ' + dist + ')');
     T.setMouseFireDbg(false);

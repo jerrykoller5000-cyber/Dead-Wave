@@ -15,16 +15,56 @@ export const KATANA = Object.freeze({
   SORI: 0.026                         // the curve: how far the tip rises above a straight blade
 });
 
+// The two diagonals of the braid share one contoured skin. At a crossover the
+// top strand supplies the colour and height, leaving no buried strap faces.
+const gripSurfaces = new WeakMap();
+function wrappedGrip(THREE) {
+  if (gripSurfaces.has(THREE)) return gripSurfaces.get(THREE);
+  const pos=[], colors=[], indices=[];
+  const rows=72, sides=16, back=KATANA.HANDLE_FROM+0.006, front=-0.024;
+  const dark=new THREE.Color(0x221218), red=new THREE.Color(0x911321), tint=new THREE.Color();
+  const ridge=t=>Math.max(0,Math.min(1,(0.23-Math.abs(t-Math.round(t)))*11));
+  for (let j=0;j<=rows;j++) {
+    const t=j/rows, z=back+(front-back)*t;
+    for (let k=0;k<sides;k++) {
+      const angle=k*2*Math.PI/sides, x=Math.cos(angle), y=Math.sin(angle);
+      const u=9*t, a=ridge(u+0.48*y), b=ridge(u-0.48*y);
+      const relief=Math.max(a,b)*Math.min(1,j/2,(rows-j)/2);
+      const sx=Math.sign(x)*Math.pow(Math.abs(x),0.72);
+      const sy=Math.sign(y)*Math.pow(Math.abs(y),0.72);
+      pos.push(sx*(0.0120+0.0009*relief),sy*(0.0152+0.0011*relief),z);
+      tint.copy(dark).lerp(red,relief*(a>=b?1:0.74));
+      colors.push(tint.r,tint.g,tint.b);
+      if (j<rows) {
+        const l=j*sides+k,r=j*sides+(k+1)%sides;
+        indices.push(l,r,l+sides,r,r+sides,l+sides);
+      }
+    }
+  }
+  for(const [row,z,reverse] of [[0,back,true],[rows,front,false]]) {
+    const center=pos.length/3;
+    pos.push(0,0,z); colors.push(dark.r,dark.g,dark.b);
+    for(let k=0;k<sides;k++) {
+      const a=row*sides+k,b=row*sides+(k+1)%sides;
+      indices.push(center,reverse?b:a,reverse?a:b);
+    }
+  }
+  const geometry=new THREE.BufferGeometry();
+  geometry.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));
+  geometry.setAttribute('color',new THREE.Float32BufferAttribute(colors,3));
+  geometry.setIndex(indices); geometry.computeVertexNormals(); gripSurfaces.set(THREE,geometry);
+  return geometry;
+}
+
 export function makeKatanaModel({ THREE }) {
   const g = new THREE.Group();
   g.name = 'katana';
   const red = new THREE.MeshStandardMaterial({ color: 0xffffff, vertexColors: true, metalness: 0.86, roughness: 0.18, emissive: 0x420408, emissiveIntensity: 0.58, side: THREE.DoubleSide });
   const gold = new THREE.MeshStandardMaterial({ color: 0xd4ad52, metalness: 0.92, roughness: 0.24 });
   const darkGold = new THREE.MeshStandardMaterial({ color: 0x9a7428, metalness: 0.88, roughness: 0.34 });
-  const black = new THREE.MeshStandardMaterial({ color: 0x141215, metalness: 0.22, roughness: 0.68 });
+  const skin = new THREE.MeshStandardMaterial({ vertexColors: true, metalness: 0.18, roughness: 0.68 });
   const iron = new THREE.MeshStandardMaterial({ color: 0x221c20, metalness: 0.78, roughness: 0.36 });
   const wrap = new THREE.MeshStandardMaterial({ color: 0x7c0d15, metalness: 0.12, roughness: 0.72 });
-  const sameMat = new THREE.MeshStandardMaterial({ color: 0x38080c, metalness: 0.18, roughness: 0.55 });
   const crimsonGlow = new THREE.MeshStandardMaterial({ color: 0xd81824, emissive: 0x58040a, emissiveIntensity: 0.65, metalness: 0.6, roughness: 0.25 });
 
   g.add(bladeMesh(THREE, red));
@@ -49,7 +89,7 @@ export function makeKatanaModel({ THREE }) {
   }
 
   // Ornate openwork tsuba (guard): recessed iron web, sculpted gold rim, four spokes, and crimson-gold accents.
-  const tsubaCore = new THREE.Mesh(new THREE.CylinderGeometry(0.041, 0.041, 0.006, 28), iron);
+  const tsubaCore = new THREE.Mesh(new THREE.CylinderGeometry(0.041, 0.041, 0.010, 28), iron);
   tsubaCore.rotation.x = Math.PI / 2; tsubaCore.scale.set(0.82, 1, 1); tsubaCore.position.set(0, 0, 0.0025); g.add(tsubaCore);
   const tsubaRim = new THREE.Mesh(new THREE.TorusGeometry(0.0425, 0.0048, 12, 32), gold);
   tsubaRim.scale.set(0.82, 1, 1.15); tsubaRim.position.set(0, 0, 0.0025); g.add(tsubaRim);
@@ -70,12 +110,9 @@ export function makeKatanaModel({ THREE }) {
     ring.scale.set(0.8, 1, 1); ring.position.set(0, 0, -0.015 + dz); g.add(ring);
   }
 
-  // Tsuka (handle): crimson samegawa (ray-skin) under-core, dark inner core, gold menuki, and braided tsuka-ito wrap.
-  const len = KATANA.HANDLE_TO - KATANA.HANDLE_FROM, mid = (KATANA.HANDLE_TO + KATANA.HANDLE_FROM) / 2;
-  const core = new THREE.Mesh(new THREE.CylinderGeometry(0.015, 0.0162, len + 0.006, 18), black);
-  core.rotation.x = Math.PI / 2; core.scale.set(0.78, 1, 1); core.position.set(0, 0, mid); g.add(core);
-  const sameStrip = new THREE.Mesh(new THREE.BoxGeometry(0.0258, 0.014, len - 0.012), sameMat);
-  sameStrip.position.set(0, 0, mid); g.add(sameStrip);
+  const mid = (KATANA.HANDLE_TO + KATANA.HANDLE_FROM) / 2;
+  const grip=new THREE.Mesh(wrappedGrip(THREE),skin);
+  grip.name='katana-wrapped-grip'; g.add(grip);
 
   // Gold dragon menuki ornaments under the cord wrap on left and right sides.
   for (const s of [-1, 1]) {
@@ -88,24 +125,6 @@ export function makeKatanaModel({ THREE }) {
     }
   }
 
-  // Tightly woven diamond tsuka-ito wrap (9 stations of crossed X-straps on the handle flats + flush oval edge collars).
-  const turns = 9;
-  for (let i = 0; i < turns; i++) {
-    const z = KATANA.HANDLE_FROM + 0.022 + (i + 0.5) * (len - 0.044) / turns;
-    const t = i / (turns - 1);
-    const rTap = 0.0158 + (0.0166 - 0.0158) * t;
-    for (const s of [-1, 1]) {
-      const band = new THREE.Mesh(new THREE.BoxGeometry(0.0258, 0.025, 0.0068), wrap);
-      band.position.set(0, 0, z);
-      band.rotation.x = s * 0.58;
-      g.add(band);
-    }
-    const collar = new THREE.Mesh(new THREE.CylinderGeometry(rTap, rTap, 0.0075, 18), wrap);
-    collar.rotation.x = Math.PI / 2;
-    collar.scale.set(0.76, 1.03, 1);
-    collar.position.set(0, 0, z);
-    g.add(collar);
-  }
 
   // Kashira (ornate pommel cap with gold shitodome eyelets and crimson end-knot).
   const kashira = new THREE.Mesh(new THREE.CylinderGeometry(0.0164, 0.0152, 0.018, 18), iron);
@@ -325,11 +344,13 @@ export function makeSheathedKatana({ THREE }) {
   // Decorative sageo bow knot and twin hanging tassels on the side of the scabbard.
   const knot = new THREE.Mesh(new THREE.TorusGeometry(0.007, 0.0028, 8, 14), redCord);
   knot.rotation.y = Math.PI / 2; knot.position.set(0.0125, 0.002, z0 + 0.095); g.add(knot);
-  for (const [dz, dy, rot] of [[0.018, -0.016, 0.28], [0.034, -0.014, 0.42]]) {
+  for (const rot of [0.28, 0.71]) {
+    const start = new THREE.Vector3(0.0125, -0.005, z0 + 0.095);
+    const along = new THREE.Vector3(0, -Math.sin(rot), Math.cos(rot));
     const tail = new THREE.Mesh(new THREE.CylinderGeometry(0.0022, 0.0032, 0.038, 8), redCord);
-    tail.position.set(0.012, dy, z0 + 0.095 + dz); tail.rotation.x = Math.PI / 2 - rot; g.add(tail);
+    tail.position.copy(start).addScaledVector(along, 0.019); tail.rotation.x = Math.PI / 2 + rot; g.add(tail);
     const aglet = new THREE.Mesh(new THREE.CylinderGeometry(0.0034, 0.0026, 0.006, 8), gold);
-    aglet.position.set(0.012, dy - 0.006, z0 + 0.111 + dz); aglet.rotation.x = Math.PI / 2 - rot; g.add(aglet);
+    aglet.position.copy(start).addScaledVector(along, 0.041); aglet.rotation.copy(tail.rotation); g.add(aglet);
   }
 
   // Ornate gold seme-gane (scabbard reinforcement rings) with crimson lacquer bands.
@@ -358,3 +379,4 @@ export function makeSheathedKatana({ THREE }) {
   g.userData.hilt = hilt;
   return g;
 }
+

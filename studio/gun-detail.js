@@ -19,6 +19,32 @@
 
 const SINK = 0.0006;   // how far a part's base sits inside its parent (never 0: that is a float at any rounding)
 
+// Adjacent dark valleys and raised accent bands retain their original width,
+// pitch and overall span. Each band replaces that interval of the base.
+export function drawWeaponRail(length, width, side, addBox) {
+  const sideways = side === 1 || side === -1;
+  function segment(start, end, raised) {
+    if (end <= start) return;
+    const across = width + (raised ? .006 : 0);
+    const height = raised ? .018 : .014;
+    const lift = raised ? .002 : 0;
+    // Only the exposed tips have rounded end faces. A flat valley meets the
+    // adjacent band across its face and keeps the dark strip continuous.
+    const tip = start === -length / 2 || end === length / 2;
+    const bevel = raised ? .002 : tip ? .003 : 0;
+    addBox(sideways ? height : across, sideways ? across : height, end - start,
+      bevel, raised, sideways ? side * lift : 0,
+      sideways ? 0 : side === 2 ? -lift : lift, (start + end) / 2);
+  }
+  let start = -length / 2;
+  for (let z = start + .012; z < length / 2 - .006; z += .026) {
+    segment(start, z - .005, false);
+    segment(z - .005, z + .005, true);
+    start = z + .005;
+  }
+  segment(start, length / 2, false);
+}
+
 export function gunDetail(ctx) {
   const { THREE } = ctx;
   const T = THREE;

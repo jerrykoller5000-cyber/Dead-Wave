@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as T from '../tools/tests/fakethree.mjs';
 import {buildTrainingGround,TRAINING} from './training.js';
-import {traceTraining,trainingFloorHit} from './training-ballistics.js';
+import {traceTraining,trainingFloorHit,createTrainingImpacts,createTrainingChar,CHAR_LIFE,IMPACT_LIFE} from './training-ballistics.js';
 test('all five target centres are hittable from firing line and targets down let shots through',()=>{
   const tg=buildTrainingGround(T),o=tg.origin;
   for(let i=0;i<5;i++){
@@ -58,4 +58,52 @@ test('GP-19910: a round meets a target on its drawn plate, not the front of its 
     assert.ok(Math.abs(back.point.z-plane)<1e-9,'from behind, also on the plate');
     assert.equal(back.normal.z,1,'and faces downrange, the way the round came');
   }
+});
+test('createTrainingChar and createTrainingImpacts create renderOrder 1 batches on group and targets and record hits',()=>{
+  const tg=buildTrainingGround(T);
+  const char=createTrainingChar(T,tg);
+  const impacts=createTrainingImpacts(T,tg);
+  assert.equal(char.count(),0);
+  assert.equal(impacts.count(),0);
+
+  // Group child mesh for char marks has renderOrder === 1
+  const charMesh = tg.group.children.find(c => c.name === 'training-char-marks');
+  assert.ok(charMesh, 'char mesh added to tg.group');
+  assert.equal(charMesh.renderOrder, 1, 'char mesh renderOrder is 1 (flames at 3 draw over decals)');
+
+  // Warmup primes and restores
+  const restoreChar = char.prepareWarmup();
+  assert.equal(charMesh.geometry.drawRange.count, 6);
+  restoreChar();
+  assert.equal(charMesh.geometry.drawRange.count, 0);
+
+  // Trace a shot hitting the back wall
+  const wallHit = traceTraining(tg, {x:0, y:-198, z:-641}, {x:20, y:-198, z:-641});
+  assert.ok(wallHit);
+  char.add(wallHit);
+  assert.equal(char.count(), 1, 'wall hit added char mark');
+  assert.equal(charMesh.geometry.drawRange.count, 6);
+
+  // Trace a shot hitting target 0
+  const o = tg.origin, target0 = tg.targets[0];
+  const targetHit = traceTraining(tg, {x:o.x+target0.x, y:o.y+1.35, z:o.z-1}, {x:o.x+target0.x, y:o.y+1.22, z:o.z+target0.z+1});
+  assert.ok(targetHit);
+  assert.equal(targetHit.solid.target, 0);
+  char.add(targetHit);
+  assert.equal(char.count(), 2, 'target hit added to target pivot batch');
+
+  // Update decays and removes after lifetime
+  char.update(CHAR_LIFE - 1);
+  assert.equal(char.count(), 2, 'still alive before expiration');
+  char.update(2);
+  assert.equal(char.count(), 0, 'expired marks cleared');
+
+  // Clear works
+  char.add(wallHit);
+  assert.equal(char.count(), 1);
+  char.clear();
+  assert.equal(char.count(), 0);
+
+  char.dispose();
+  impacts.dispose();
 });
