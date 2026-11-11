@@ -1,0 +1,20 @@
+{
+ "at": "2026-11-11T05:32:49.149Z",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "results": [
+  {
+   "id": "weapon.minigun",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 163,
+   "tris": 11704,
+   "size": [
+    0.393,
+    0.395,
+    1.04
+   ],
+   "error": null
+  }
+ ]
+}

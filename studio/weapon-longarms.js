@@ -1113,7 +1113,7 @@ export function makeShotgunModel(ctx) {
 }
 
 export function makeSniperModel(ctx) {
-  const { THREE, gunKit, gunBand, gripOutline, gunEffects, gunSuppressor, finishGun, gunBody, gunMid, gunDark, gunAccent, gunPoly, gunRubber, gunMetal, gunTan, brassMat, steelMat, glassMat } = ctx;
+  const { THREE, gunKit, gunBand, gripOutline, gunEffects, gunSuppressor, finishGun, gunBody, gunMid, gunDark, gunAccent, gunPoly, gunRubber, gunMetal, gunTan, steelMat, glassMat } = ctx;
   const gun = new THREE.Group();
   const K = gunKit(gun);
   const D = gunDetail(ctx);
@@ -1208,10 +1208,12 @@ export function makeSniperModel(ctx) {
   displayArt.computeBoundingSphere();
   const displayBounds = displayArt.boundingBox;
   const shelfTop = .070 - (displayBounds.max.z - displayBounds.min.z) * displayScale;
-  K.slab([[-.04,shelfTop],[.04,shelfTop],[.04,-.07],[-.04,-.07]], .05, gunAccent, {bevel:.003, parent:mag});
+  K.slab([[-.04,shelfTop],[.04,shelfTop],[.04,-.07],[-.04,-.07]], .05, gunAccent, {bevel:.005, parent:mag});
   for (const side of [-1, 1]) {
     K.box(.004, .070 - shelfTop, .073, gunDark, side * .019, (shelfTop + .070) / 2, 0, 0, 0, 0, mag, .001);
   }
+  // The back edge of the window covers the cropped end in the close view.
+  K.box(.034, .070 - shelfTop, .004, gunDark, 0, (shelfTop + .070) / 2, -.0365, 0, 0, 0, mag, 0);
   const topRound = new THREE.Mesh(displayArt, issueFinish);
   topRound.name = 'magazine top round';
   topRound.rotation.x = Math.PI / 2;

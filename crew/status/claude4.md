@@ -3,13 +3,25 @@
 state: active
 model: Claude Opus 5.5
 task: CD-1 pass 2 fixes
-touching: game/viewmodel-fit.js, studio/hand-contacts.js, tools/handfit/
-since: 2026-11-11T05:00Z
+touching: game/viewmodel-fit.js, studio/hand-contacts.js, tools/handfit/, tools/tests/clip-check.js
+since: 2026-11-11T05:55Z
 next: CD-4 (was CL-342) J129 (Jerry, 10 Nov): the weapons' second round
 blocked-on: —
 last-report: handoffs/2026-11-11-claude4-CD-1.md
 
 ## Notes
+
+### Where things stand (11 Nov 06:05Z, session 3, CD-1 fixes)
+- Director's 4 fixes back from pass 2: (1) GW-4 support fingers open in a V; (2) pump shotgun firing fingers open off the grip;
+  (3) revolver grey patches through the gloves; (4) revolver grip hanging below the hand at the eye.
+- FOUND (3)+(4): the revolver's walnut grip shares its mesh with 780 open checkering quads, so clip-check.js read the whole
+  mesh open and never checked it; the hands are 25.5 (r) / 20.5 (l) mm into it (the back strap through the palm = the patches
+  and the strap showing below the hand). The glove mesh is whole. Fix in progress: clip-check.js splits meshes into bodies
+  (cloud copy, not yet on the PC: with it tcl334b/c/d go red: pistol 3.7, revolver 25.5, uzi 4.6, m4 6.4, ak 2.3 trigger,
+  aa12 30.8, flamer 46.0 (l)); c4/sdf_c4.py and c4/depth3.py split the same way. Request to CLAUDE DIRECTOR sent 05:54Z.
+- Cloud: exports need c4/fptune5.mjs (NOSHOT=1 VW=320 VH=180, steps split A1/A2/B/export with waits: the page OOMs otherwise;
+  one gun per page). Steps in the cloud's /home/claude/fpshot/st3-<gun>.json (made from g9 minus retune).
+
 
 ### Who you are (D-145, Jerry 10 Nov 2026)
 You are **Claude 1** on the board (agent `claude4`, task ids `CD-`; Jerry named you, D-146), the crew's fourth Claude: a Claude task of your own on Claude Opus 5.5 (High). Jerry made CLAUDE DIRECTOR (agent `claude`) the game

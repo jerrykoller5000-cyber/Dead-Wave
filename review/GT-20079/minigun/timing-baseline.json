@@ -1,0 +1,421 @@
+{
+  "id": "minigun",
+  "optic": "rmr",
+  "readyMs": 11985,
+  "states": {
+    "factory": {
+      "fps": 60,
+      "low": 56.7,
+      "samples": [
+        {
+          "eye": "minigun",
+          "optic": "rmr",
+          "finish": "",
+          "gfx": "high",
+          "fps": 60.00705965365611,
+          "low": 44.44444444444444,
+          "worst": 22.5,
+          "hitches": 17,
+          "frames": 51
+        },
+        {
+          "eye": "minigun",
+          "optic": "rmr",
+          "finish": "",
+          "gfx": "high",
+          "fps": 60.28938906644086,
+          "low": 40.160642560667625,
+          "worst": 24.900000005960464,
+          "hitches": 18,
+          "frames": 60
+        },
+        {
+          "eye": "minigun",
+          "optic": "rmr",
+          "finish": "",
+          "gfx": "high",
+          "fps": 59.99999999999999,
+          "low": 59.17159761226685,
+          "worst": 16.900000005960464,
+          "hitches": 18,
+          "frames": 60
+        },
+        {
+          "eye": "minigun",
+          "optic": "rmr",
+          "finish": "",
+          "gfx": "high",
+          "fps": 60.00600059970231,
+          "low": 59.17159761226685,
+          "worst": 16.900000005960464,
+          "hitches": 18,
+          "frames": 60
+        },
+        {
+          "eye": "minigun",
+          "optic": "rmr",
+          "finish": "",
+          "gfx": "high",
+          "fps": 59.99400060029756,
+          "low": 59.52380948157267,
+          "worst": 16.80000001192093,
+          "hitches": 18,
+          "frames": 60
+        },
+        {
+          "eye": "minigun",
+          "optic": "rmr",
+          "finish": "",
+          "gfx": "high",
+          "fps": 59.99999999999999,
+          "low": 59.52380948157267,
+          "worst": 16.80000001192093,
+          "hitches": 18,
+          "frames": 60
+        },
+        {
+          "eye": "minigun",
+          "optic": "rmr",
+          "finish": "",
+          "gfx": "high",
+          "fps": 59.99400060029756,
+          "low": 59.52380948157267,
+          "worst": 16.80000001192093,
+          "hitches": 18,
+          "frames": 60
+        },
+        {
+          "eye": "minigun",
+          "optic": "rmr",
+          "finish": "",
+          "gfx": "high",
+          "fps": 59.988002400235075,
+          "low": 34.12969281887858,
+          "worst": 29.30000001192093,
+          "hitches": 18,
+          "frames": 60
+        },
+        {
+          "eye": "minigun",
+          "optic": "rmr",
+          "finish": "",
+          "gfx": "high",
+          "fps": 60.00600059970231,
+          "low": 58.8235294117647,
+          "worst": 17,
+          "hitches": 18,
+          "frames": 60
+        },
+        {
+          "eye": "minigun",
+          "optic": "rmr",
+          "finish": "",
+          "gfx": "high",
+          "fps": 59.99999999999999,
+          "low": 59.17159761226685,
+          "worst": 16.900000005960464,
+          "hitches": 18,
+          "frames": 60
+        },
+        {
+          "eye": "minigun",
+          "optic": "rmr",
+          "finish": "",
+          "gfx": "high",
+          "fps": 59.9760095958042,
+          "low": 58.8235294117647,
+          "worst": 17,
+          "hitches": 18,
+          "frames": 60
+        },
+        {
+          "eye": "minigun",
+          "optic": "rmr",
+          "finish": "",
+          "gfx": "high",
+          "fps": 59.99999999999999,
+          "low": 59.17159761226685,
+          "worst": 16.900000005960464,
+          "hitches": 18,
+          "frames": 60
+        }
+      ]
+    },
+    "m81": {
+      "fps": 59.9,
+      "low": 53.8,
+      "samples": [
+        {
+          "eye": "minigun",
+          "optic": "rmr",
+          "finish": "m81",
+          "gfx": "high",
+          "fps": 59.99999999999999,
+          "low": 45.04504500876269,
+          "worst": 22.200000017881393,
+          "hitches": 20,
+          "frames": 60
+        },
+        {
+          "eye": "minigun",
+          "optic": "rmr",
+          "finish": "m81",
+          "gfx": "high",
+          "fps": 59.994000598509786,
+          "low": 54.34782615737789,
+          "worst": 18.399999976158142,
+          "hitches": 20,
+          "frames": 60
+        },
+        {
+          "eye": "minigun",
+          "optic": "rmr",
+          "finish": "m81",
+          "gfx": "high",
+          "fps": 59.922811294289225,
+          "low": 40.160642560667625,
+          "worst": 24.900000005960464,
+          "hitches": 20,
+          "frames": 59
+        },
+        {
+          "eye": "minigun",
+          "optic": "rmr",
+          "finish": "m81",
+          "gfx": "high",
+          "fps": 59.21316740229532,
+          "low": 29.41176470588235,
+          "worst": 34,
+          "hitches": 20,
+          "frames": 59
+        },
+        {
+          "eye": "minigun",
+          "optic": "rmr",
+          "finish": "m81",
+          "gfx": "high",
+          "fps": 60.00600059970231,
+          "low": 53.76344087744382,
+          "worst": 18.599999994039536,
+          "hitches": 20,
+          "frames": 60
+        },
+        {
+          "eye": "minigun",
+          "optic": "rmr",
+          "finish": "m81",
+          "gfx": "high",
+          "fps": 59.99999999999999,
+          "low": 59.17159761226685,
+          "worst": 16.900000005960464,
+          "hitches": 20,
+          "frames": 60
+        },
+        {
+          "eye": "minigun",
+          "optic": "rmr",
+          "finish": "m81",
+          "gfx": "high",
+          "fps": 60.012002399764555,
+          "low": 59.17159761226685,
+          "worst": 16.900000005960464,
+          "hitches": 20,
+          "frames": 60
+        },
+        {
+          "eye": "minigun",
+          "optic": "rmr",
+          "finish": "m81",
+          "gfx": "high",
+          "fps": 59.99999999999999,
+          "low": 59.52380948157267,
+          "worst": 16.80000001192093,
+          "hitches": 20,
+          "frames": 60
+        },
+        {
+          "eye": "minigun",
+          "optic": "rmr",
+          "finish": "m81",
+          "gfx": "high",
+          "fps": 59.99999999999999,
+          "low": 59.17159761226685,
+          "worst": 16.900000005960464,
+          "hitches": 20,
+          "frames": 60
+        },
+        {
+          "eye": "minigun",
+          "optic": "rmr",
+          "finish": "m81",
+          "gfx": "high",
+          "fps": 59.994000598509786,
+          "low": 59.52380948157267,
+          "worst": 16.80000001192093,
+          "hitches": 20,
+          "frames": 60
+        },
+        {
+          "eye": "minigun",
+          "optic": "rmr",
+          "finish": "m81",
+          "gfx": "high",
+          "fps": 59.99400060029756,
+          "low": 58.47953218412662,
+          "worst": 17.099999994039536,
+          "hitches": 20,
+          "frames": 60
+        },
+        {
+          "eye": "minigun",
+          "optic": "rmr",
+          "finish": "m81",
+          "gfx": "high",
+          "fps": 60.00600059970231,
+          "low": 59.52380948157267,
+          "worst": 16.80000001192093,
+          "hitches": 20,
+          "frames": 60
+        }
+      ]
+    },
+    "restored": {
+      "fps": 60,
+      "low": 59.3,
+      "samples": [
+        {
+          "eye": "minigun",
+          "optic": "rmr",
+          "finish": "",
+          "gfx": "high",
+          "fps": 59.99999999999999,
+          "low": 59.52380948157267,
+          "worst": 16.80000001192093,
+          "hitches": 21,
+          "frames": 60
+        },
+        {
+          "eye": "minigun",
+          "optic": "rmr",
+          "finish": "",
+          "gfx": "high",
+          "fps": 59.994000598509786,
+          "low": 59.52380948157267,
+          "worst": 16.80000001192093,
+          "hitches": 21,
+          "frames": 60
+        },
+        {
+          "eye": "minigun",
+          "optic": "rmr",
+          "finish": "",
+          "gfx": "high",
+          "fps": 59.99999999999999,
+          "low": 59.17159761226685,
+          "worst": 16.900000005960464,
+          "hitches": 21,
+          "frames": 60
+        },
+        {
+          "eye": "minigun",
+          "optic": "rmr",
+          "finish": "",
+          "gfx": "high",
+          "fps": 60.00600059970231,
+          "low": 59.52380948157267,
+          "worst": 16.80000001192093,
+          "hitches": 21,
+          "frames": 60
+        },
+        {
+          "eye": "minigun",
+          "optic": "rmr",
+          "finish": "",
+          "gfx": "high",
+          "fps": 59.99999999999999,
+          "low": 59.17159761226685,
+          "worst": 16.900000005960464,
+          "hitches": 21,
+          "frames": 60
+        },
+        {
+          "eye": "minigun",
+          "optic": "rmr",
+          "finish": "",
+          "gfx": "high",
+          "fps": 60.0120024015534,
+          "low": 59.171597716613064,
+          "worst": 16.899999976158142,
+          "hitches": 21,
+          "frames": 60
+        },
+        {
+          "eye": "minigun",
+          "optic": "rmr",
+          "finish": "",
+          "gfx": "high",
+          "fps": 60.00600059970231,
+          "low": 59.52380948157267,
+          "worst": 16.80000001192093,
+          "hitches": 21,
+          "frames": 60
+        },
+        {
+          "eye": "minigun",
+          "optic": "rmr",
+          "finish": "",
+          "gfx": "high",
+          "fps": 59.99400060029756,
+          "low": 59.52380948157267,
+          "worst": 16.80000001192093,
+          "hitches": 21,
+          "frames": 60
+        },
+        {
+          "eye": "minigun",
+          "optic": "rmr",
+          "finish": "",
+          "gfx": "high",
+          "fps": 59.99999999999999,
+          "low": 59.17159761226685,
+          "worst": 16.900000005960464,
+          "hitches": 21,
+          "frames": 60
+        },
+        {
+          "eye": "minigun",
+          "optic": "rmr",
+          "finish": "",
+          "gfx": "high",
+          "fps": 59.99999999999999,
+          "low": 59.17159761226685,
+          "worst": 16.900000005960464,
+          "hitches": 21,
+          "frames": 60
+        },
+        {
+          "eye": "minigun",
+          "optic": "rmr",
+          "finish": "",
+          "gfx": "high",
+          "fps": 59.99400060029756,
+          "low": 59.17159761226685,
+          "worst": 16.900000005960464,
+          "hitches": 21,
+          "frames": 60
+        },
+        {
+          "eye": "minigun",
+          "optic": "rmr",
+          "finish": "",
+          "gfx": "high",
+          "fps": 59.99999999999999,
+          "low": 59.17159761226685,
+          "worst": 16.900000005960464,
+          "hitches": 21,
+          "frames": 60
+        }
+      ]
+    }
+  }
+}

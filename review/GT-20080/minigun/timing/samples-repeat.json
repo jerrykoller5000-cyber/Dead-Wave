@@ -1,0 +1,113 @@
+{
+  "readyMs": 11691,
+  "samples": [
+    {
+      "gun": "minigun",
+      "high": "high",
+      "fps": 48.68638618302336,
+      "low": 6.0204695957643635,
+      "worst": 166.10000002384186,
+      "hitches": 20,
+      "frames": 53
+    },
+    {
+      "gun": "minigun",
+      "high": "high",
+      "fps": 57.98840232022723,
+      "low": 35.84229393743895,
+      "worst": 27.899999976158142,
+      "hitches": 20,
+      "frames": 58
+    },
+    {
+      "gun": "minigun",
+      "high": "high",
+      "fps": 58.01160231977241,
+      "low": 37.735849056603776,
+      "worst": 26.5,
+      "hitches": 20,
+      "frames": 58
+    },
+    {
+      "gun": "minigun",
+      "high": "high",
+      "fps": 60.00600059970231,
+      "low": 50.761421273721574,
+      "worst": 19.700000017881393,
+      "hitches": 20,
+      "frames": 60
+    },
+    {
+      "gun": "minigun",
+      "high": "high",
+      "fps": 58.98820235847351,
+      "low": 24.93765586405586,
+      "worst": 40.099999994039536,
+      "hitches": 20,
+      "frames": 59
+    },
+    {
+      "gun": "minigun",
+      "high": "high",
+      "fps": 60.012002399764555,
+      "low": 50.761421273721574,
+      "worst": 19.700000017881393,
+      "hitches": 20,
+      "frames": 60
+    },
+    {
+      "gun": "minigun",
+      "high": "high",
+      "fps": 59.00590058970727,
+      "low": 30.21148036797808,
+      "worst": 33.099999994039536,
+      "hitches": 20,
+      "frames": 59
+    },
+    {
+      "gun": "minigun",
+      "high": "high",
+      "fps": 59.99999999999999,
+      "low": 55.86592176910688,
+      "worst": 17.900000005960464,
+      "hitches": 20,
+      "frames": 60
+    },
+    {
+      "gun": "minigun",
+      "high": "high",
+      "fps": 60.00600059970231,
+      "low": 56.17977533733554,
+      "worst": 17.799999982118607,
+      "hitches": 20,
+      "frames": 60
+    },
+    {
+      "gun": "minigun",
+      "high": "high",
+      "fps": 59.99999999999999,
+      "low": 56.17977533733554,
+      "worst": 17.799999982118607,
+      "hitches": 20,
+      "frames": 60
+    },
+    {
+      "gun": "minigun",
+      "high": "high",
+      "fps": 60.012002399764555,
+      "low": 58.8235294117647,
+      "worst": 17,
+      "hitches": 20,
+      "frames": 60
+    },
+    {
+      "gun": "minigun",
+      "high": "high",
+      "fps": 59.99999999999999,
+      "low": 59.52380948157267,
+      "worst": 16.80000001192093,
+      "hitches": 20,
+      "frames": 60
+    }
+  ]
+}

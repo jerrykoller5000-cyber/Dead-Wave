@@ -1,0 +1,2290 @@
+{
+  "factory": {
+    "assembled": [
+      {
+        "part": "",
+        "materialName": "gunPaint:minigun",
+        "material": "b2aa5ddd-3453-46c5-9d58-362e670e1562",
+        "role": "receiver",
+        "registered": true,
+        "map": null,
+        "color": 4737873,
+        "roughness": 0.66,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:minigun",
+        "material": "c4b015f1-d9b4-465b-86a6-adb492968d1e",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 6053992,
+        "roughness": 0.68,
+        "metalness": 0.06
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "1cf5ec05-942b-4a12-971b-dcdb122c0861",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7901595,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:minigun",
+        "material": "7f0b647c-7cc4-4f29-ab49-d4ce45f37c09",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "9ddd0f90-777c-47a8-a73c-1ba490339e3a",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16724770,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "6a5ce220-e320-41e8-9e4a-e10271e96855",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "7199aaca-cef4-410e-8b85-d4be6ebe3565",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11019804,
+        "roughness": 0.5,
+        "metalness": 0.3
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "d437d858-d2b5-4538-9f9f-18ca3774b5a3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "187a4153-df89-42ea-8d32-6312340e0a39",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 0.66,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "2483aabc-51a3-4a5b-b7ba-b8d17e23fb15",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777113
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "007559bd-2202-4a2d-acd3-bba37180c0cd",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16732497
+      },
+      {
+        "part": "sideRailClamp",
+        "materialName": "gunPaint:minigun",
+        "material": "db3d29e5-065f-4d4d-a798-a5a72b1dd933",
+        "role": "light shell",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "moduleShell",
+        "materialName": "gunPaint:minigun",
+        "material": "ec8d47e8-fc95-4139-b634-5770ca6f0f65",
+        "role": "light shell",
+        "registered": true,
+        "map": null,
+        "color": 3290167,
+        "roughness": 0.76,
+        "metalness": 0.03
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "7dfb72ac-013d-46b6-b5ad-e8f504def449",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:minigun",
+        "material": "e595f8b9-b63d-431c-84a7-02f530530d9a",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 6053992,
+        "roughness": 0.68,
+        "metalness": 0.06
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:minigun",
+        "material": "16124aad-4165-4952-a161-85ff2278ee6d",
+        "role": "receiver",
+        "registered": true,
+        "map": null,
+        "color": 6053992,
+        "roughness": 0.68,
+        "metalness": 0.06
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:minigun",
+        "material": "aa8b0529-d6c4-49fa-94c1-e870aa4b7736",
+        "role": "receiver",
+        "registered": true,
+        "map": null,
+        "color": 3883589,
+        "roughness": 0.72,
+        "metalness": 0.17
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:minigun",
+        "material": "40848254-c32b-4125-9a8b-48f4affa3ba4",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "cbb32b74-4dae-4e48-b1b2-cc5894d5f035",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2829873,
+        "roughness": 0.42,
+        "metalness": 0.62
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "a9ae3246-b4b6-4cbd-9575-cb18f122dc8d",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 4869714,
+        "roughness": 0.35,
+        "metalness": 0.7
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:minigun",
+        "material": "cf0d400c-5e0c-4ca5-afea-3ace06a0667a",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "chamfered alloy clamp foot",
+        "materialName": "gunPaint:minigun",
+        "material": "a4fb7101-1e55-40d3-8cd7-3a78c654b220",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 3027508,
+        "roughness": 0.5,
+        "metalness": 0.55
+      },
+      {
+        "part": "painted riser",
+        "materialName": "gunPaint:minigun",
+        "material": "8f22d9ed-de13-423c-b77c-3578e4a3547a",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 2369578,
+        "roughness": 0.74,
+        "metalness": 0.05
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "materialName": "",
+        "material": "550691b9-80ea-47a3-b776-324780aeeee3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "materialName": "",
+        "material": "857e58a8-8f37-4104-8321-2fa7e7c9812a",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      }
+    ],
+    "firstPerson": [
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:minigun",
+        "material": "3906c7b9-1773-48f5-bc3f-bd3eefa78c48",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7172472,
+        "roughness": 0.63,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:minigun",
+        "material": "ba76ed81-bb33-444e-816e-6ebbe0153260",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 8751504,
+        "roughness": 0.61,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "a74e45f2-3c49-48ba-8fa1-1cd5be4abf41",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7901595,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:minigun",
+        "material": "d45ef874-f2c7-40bd-8f43-dfd8968b905d",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685184,
+        "roughness": 0.69,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "5153949d-b4e7-4579-9d39-27a2e9cf31d2",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16724770,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "vm:fold-static",
+        "material": "f9a57fd5-e199-4c0c-9802-fedb8375ce21",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "0201905e-21a9-42a3-be4d-9d5ae28e5fa7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11019804,
+        "roughness": 0.5,
+        "metalness": 0.3
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "ea988d8b-4b43-40f4-8aa0-3da0af4a443f",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5659490,
+        "roughness": 0.58,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "c8fe863c-30ee-4e1f-aff0-94708620a28b",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 0.66,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshBasicMaterial",
+        "material": "cc7a0065-122e-44dd-a373-01ea665d428e",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777113
+      },
+      {
+        "part": "sideRailClamp",
+        "materialName": "vm:gunPaint:minigun",
+        "material": "de02cdc9-8b06-40a0-a6a6-495a9c52e39b",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685184,
+        "roughness": 0.69,
+        "metalness": 0.08
+      },
+      {
+        "part": "moduleShell",
+        "materialName": "vm:gunPaint:minigun",
+        "material": "9f5d3503-f0d8-4516-8b40-206c9b994c16",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5264465,
+        "roughness": 0.84,
+        "metalness": 0.02
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "86f986ee-c764-4b50-a93b-a91111e2130b",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:minigun",
+        "material": "ca0db0b4-e7ab-4875-840c-f2025198324f",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 8751504,
+        "roughness": 0.61,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:minigun",
+        "material": "0efb73e2-810b-4537-b980-a10a7b0126f3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 8751504,
+        "roughness": 0.61,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:minigun",
+        "material": "fd0c312f-64a5-4ad4-9870-cdf4d0399787",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3883589,
+        "roughness": 0.72,
+        "metalness": 0.17
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:minigun",
+        "material": "2a5ec26d-3da6-4ab6-8274-1be6534546f0",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685184,
+        "roughness": 0.69,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "4ddac5fe-6ce3-441a-a7c3-8c8be96ec56b",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2829873,
+        "roughness": 0.42,
+        "metalness": 0.62
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "884967e6-3bb6-4df6-8ba1-de87cbb752e5",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 4869714,
+        "roughness": 0.35,
+        "metalness": 0.7
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:minigun",
+        "material": "b28fe21f-4aa3-49a9-b12d-d6a77432b3aa",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5659490,
+        "roughness": 0.58,
+        "metalness": 0.1
+      },
+      {
+        "part": "chamfered alloy clamp foot",
+        "materialName": "vm:gunPaint:minigun",
+        "material": "1b72d2ab-d2fe-4146-acb8-f09c9279c240",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3027508,
+        "roughness": 0.5,
+        "metalness": 0.55
+      },
+      {
+        "part": "painted riser",
+        "materialName": "vm:gunPaint:minigun",
+        "material": "9854b2ef-09c5-4651-a4e4-ddb79e87f122",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2369578,
+        "roughness": 0.74,
+        "metalness": 0.05
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "materialName": "vm:MeshPhysicalMaterial",
+        "material": "c6f5fb28-28ac-47e2-803f-3c8506d98b68",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "materialName": "vm:MeshBasicMaterial",
+        "material": "90694330-fb3d-4bc9-8fa3-fcbbc8d71825",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      }
+    ],
+    "magazine": [
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "6a5ce220-e320-41e8-9e4a-e10271e96855",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "light": [
+      {
+        "part": "sideRailClamp",
+        "materialName": "gunPaint:minigun",
+        "material": "db3d29e5-065f-4d4d-a798-a5a72b1dd933",
+        "role": "light shell",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "moduleShell",
+        "materialName": "gunPaint:minigun",
+        "material": "ec8d47e8-fc95-4139-b634-5770ca6f0f65",
+        "role": "light shell",
+        "registered": true,
+        "map": null,
+        "color": 3290167,
+        "roughness": 0.76,
+        "metalness": 0.03
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "7dfb72ac-013d-46b6-b5ad-e8f504def449",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "187a4153-df89-42ea-8d32-6312340e0a39",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 0.66,
+        "metalness": 0.08
+      }
+    ],
+    "optic": [
+      {
+        "part": "",
+        "materialName": "gunPaint:minigun",
+        "material": "40848254-c32b-4125-9a8b-48f4affa3ba4",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:minigun",
+        "material": "cf0d400c-5e0c-4ca5-afea-3ace06a0667a",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "chamfered alloy clamp foot",
+        "materialName": "gunPaint:minigun",
+        "material": "a4fb7101-1e55-40d3-8cd7-3a78c654b220",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 3027508,
+        "roughness": 0.5,
+        "metalness": 0.55
+      },
+      {
+        "part": "painted riser",
+        "materialName": "gunPaint:minigun",
+        "material": "8f22d9ed-de13-423c-b77c-3578e4a3547a",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 2369578,
+        "roughness": 0.74,
+        "metalness": 0.05
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "materialName": "",
+        "material": "550691b9-80ea-47a3-b776-324780aeeee3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "materialName": "",
+        "material": "857e58a8-8f37-4104-8321-2fa7e7c9812a",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "6a5ce220-e320-41e8-9e4a-e10271e96855",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "rack": [
+      {
+        "part": "",
+        "materialName": "",
+        "material": "187a4153-df89-42ea-8d32-6312340e0a39",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 0.66,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "6a5ce220-e320-41e8-9e4a-e10271e96855",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "7dfb72ac-013d-46b6-b5ad-e8f504def449",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "550691b9-80ea-47a3-b776-324780aeeee3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "857e58a8-8f37-4104-8321-2fa7e7c9812a",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      }
+    ]
+  },
+  "camo": {
+    "assembled": [
+      {
+        "part": "",
+        "materialName": "gunPaint:minigun",
+        "material": "b2aa5ddd-3453-46c5-9d58-362e670e1562",
+        "role": "receiver",
+        "registered": true,
+        "map": "656fbe4f-d153-40a3-961f-6a0d0520bb2a",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:minigun",
+        "material": "c4b015f1-d9b4-465b-86a6-adb492968d1e",
+        "role": "optic shell",
+        "registered": true,
+        "map": "656fbe4f-d153-40a3-961f-6a0d0520bb2a",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "1cf5ec05-942b-4a12-971b-dcdb122c0861",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7901595,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:minigun",
+        "material": "7f0b647c-7cc4-4f29-ab49-d4ce45f37c09",
+        "role": "optic shell",
+        "registered": true,
+        "map": "656fbe4f-d153-40a3-961f-6a0d0520bb2a",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "9ddd0f90-777c-47a8-a73c-1ba490339e3a",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16724770,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "6a5ce220-e320-41e8-9e4a-e10271e96855",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "7199aaca-cef4-410e-8b85-d4be6ebe3565",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11019804,
+        "roughness": 0.5,
+        "metalness": 0.3
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "d437d858-d2b5-4538-9f9f-18ca3774b5a3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "187a4153-df89-42ea-8d32-6312340e0a39",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 0.66,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "2483aabc-51a3-4a5b-b7ba-b8d17e23fb15",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777113
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "007559bd-2202-4a2d-acd3-bba37180c0cd",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16732497
+      },
+      {
+        "part": "sideRailClamp",
+        "materialName": "gunPaint:minigun",
+        "material": "db3d29e5-065f-4d4d-a798-a5a72b1dd933",
+        "role": "light shell",
+        "registered": true,
+        "map": "656fbe4f-d153-40a3-961f-6a0d0520bb2a",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "moduleShell",
+        "materialName": "gunPaint:minigun",
+        "material": "ec8d47e8-fc95-4139-b634-5770ca6f0f65",
+        "role": "light shell",
+        "registered": true,
+        "map": "656fbe4f-d153-40a3-961f-6a0d0520bb2a",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "7dfb72ac-013d-46b6-b5ad-e8f504def449",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:minigun",
+        "material": "e595f8b9-b63d-431c-84a7-02f530530d9a",
+        "role": "rail",
+        "registered": true,
+        "map": "656fbe4f-d153-40a3-961f-6a0d0520bb2a",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:minigun",
+        "material": "16124aad-4165-4952-a161-85ff2278ee6d",
+        "role": "receiver",
+        "registered": true,
+        "map": "656fbe4f-d153-40a3-961f-6a0d0520bb2a",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:minigun",
+        "material": "aa8b0529-d6c4-49fa-94c1-e870aa4b7736",
+        "role": "receiver",
+        "registered": true,
+        "map": "656fbe4f-d153-40a3-961f-6a0d0520bb2a",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:minigun",
+        "material": "40848254-c32b-4125-9a8b-48f4affa3ba4",
+        "role": "rail",
+        "registered": true,
+        "map": "656fbe4f-d153-40a3-961f-6a0d0520bb2a",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "cbb32b74-4dae-4e48-b1b2-cc5894d5f035",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2829873,
+        "roughness": 0.42,
+        "metalness": 0.62
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "a9ae3246-b4b6-4cbd-9575-cb18f122dc8d",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 4869714,
+        "roughness": 0.35,
+        "metalness": 0.7
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:minigun",
+        "material": "cf0d400c-5e0c-4ca5-afea-3ace06a0667a",
+        "role": "rail",
+        "registered": true,
+        "map": "656fbe4f-d153-40a3-961f-6a0d0520bb2a",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "chamfered alloy clamp foot",
+        "materialName": "gunPaint:minigun",
+        "material": "a4fb7101-1e55-40d3-8cd7-3a78c654b220",
+        "role": "optic shell",
+        "registered": true,
+        "map": "656fbe4f-d153-40a3-961f-6a0d0520bb2a",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "painted riser",
+        "materialName": "gunPaint:minigun",
+        "material": "8f22d9ed-de13-423c-b77c-3578e4a3547a",
+        "role": "optic shell",
+        "registered": true,
+        "map": "656fbe4f-d153-40a3-961f-6a0d0520bb2a",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "materialName": "",
+        "material": "550691b9-80ea-47a3-b776-324780aeeee3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "materialName": "",
+        "material": "857e58a8-8f37-4104-8321-2fa7e7c9812a",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      }
+    ],
+    "firstPerson": [
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:minigun",
+        "material": "aa0a9b68-2aed-4f6d-b1b5-7cb44f5e2749",
+        "role": null,
+        "registered": false,
+        "map": "656fbe4f-d153-40a3-961f-6a0d0520bb2a",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:minigun",
+        "material": "4261f2c2-68d9-4801-a003-da276dc364bf",
+        "role": null,
+        "registered": false,
+        "map": "656fbe4f-d153-40a3-961f-6a0d0520bb2a",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "a74e45f2-3c49-48ba-8fa1-1cd5be4abf41",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7901595,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:minigun",
+        "material": "005695e9-9fb9-43b1-966e-3a084dcdb81b",
+        "role": null,
+        "registered": false,
+        "map": "656fbe4f-d153-40a3-961f-6a0d0520bb2a",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "5153949d-b4e7-4579-9d39-27a2e9cf31d2",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16724770,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "vm:fold-static",
+        "material": "f9a57fd5-e199-4c0c-9802-fedb8375ce21",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "0201905e-21a9-42a3-be4d-9d5ae28e5fa7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11019804,
+        "roughness": 0.5,
+        "metalness": 0.3
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "ea988d8b-4b43-40f4-8aa0-3da0af4a443f",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5659490,
+        "roughness": 0.58,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "c8fe863c-30ee-4e1f-aff0-94708620a28b",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 0.66,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshBasicMaterial",
+        "material": "cc7a0065-122e-44dd-a373-01ea665d428e",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777113
+      },
+      {
+        "part": "sideRailClamp",
+        "materialName": "vm:gunPaint:minigun",
+        "material": "7ad865da-161a-494a-b89b-5330fc831db1",
+        "role": null,
+        "registered": false,
+        "map": "656fbe4f-d153-40a3-961f-6a0d0520bb2a",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "moduleShell",
+        "materialName": "vm:gunPaint:minigun",
+        "material": "7299d9c6-7fc7-4edc-a699-a11e045ef770",
+        "role": null,
+        "registered": false,
+        "map": "656fbe4f-d153-40a3-961f-6a0d0520bb2a",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "86f986ee-c764-4b50-a93b-a91111e2130b",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:minigun",
+        "material": "3af467c5-2904-4136-b0dc-85d3547541a0",
+        "role": null,
+        "registered": false,
+        "map": "656fbe4f-d153-40a3-961f-6a0d0520bb2a",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:minigun",
+        "material": "f9716dc0-ea91-45d4-8ada-5865b0ccdbd9",
+        "role": null,
+        "registered": false,
+        "map": "656fbe4f-d153-40a3-961f-6a0d0520bb2a",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:minigun",
+        "material": "8f45a7ea-6700-4331-baa0-a4435b12e15c",
+        "role": null,
+        "registered": false,
+        "map": "656fbe4f-d153-40a3-961f-6a0d0520bb2a",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:minigun",
+        "material": "92356d7b-05b8-444f-89ef-26def06bc36f",
+        "role": null,
+        "registered": false,
+        "map": "656fbe4f-d153-40a3-961f-6a0d0520bb2a",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "4ddac5fe-6ce3-441a-a7c3-8c8be96ec56b",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2829873,
+        "roughness": 0.42,
+        "metalness": 0.62
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "884967e6-3bb6-4df6-8ba1-de87cbb752e5",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 4869714,
+        "roughness": 0.35,
+        "metalness": 0.7
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:minigun",
+        "material": "c419e183-c3fa-4546-8953-e02ea28be3c1",
+        "role": null,
+        "registered": false,
+        "map": "656fbe4f-d153-40a3-961f-6a0d0520bb2a",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "chamfered alloy clamp foot",
+        "materialName": "vm:gunPaint:minigun",
+        "material": "aa27257f-d1e3-4e48-a704-3041f0f28ac7",
+        "role": null,
+        "registered": false,
+        "map": "656fbe4f-d153-40a3-961f-6a0d0520bb2a",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "painted riser",
+        "materialName": "vm:gunPaint:minigun",
+        "material": "51fbae13-5f9e-43b8-bfb0-eae629a45e2e",
+        "role": null,
+        "registered": false,
+        "map": "656fbe4f-d153-40a3-961f-6a0d0520bb2a",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "materialName": "vm:MeshPhysicalMaterial",
+        "material": "c6f5fb28-28ac-47e2-803f-3c8506d98b68",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "materialName": "vm:MeshBasicMaterial",
+        "material": "90694330-fb3d-4bc9-8fa3-fcbbc8d71825",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      }
+    ],
+    "magazine": [
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "6a5ce220-e320-41e8-9e4a-e10271e96855",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "light": [
+      {
+        "part": "sideRailClamp",
+        "materialName": "gunPaint:minigun",
+        "material": "db3d29e5-065f-4d4d-a798-a5a72b1dd933",
+        "role": "light shell",
+        "registered": true,
+        "map": "656fbe4f-d153-40a3-961f-6a0d0520bb2a",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "moduleShell",
+        "materialName": "gunPaint:minigun",
+        "material": "ec8d47e8-fc95-4139-b634-5770ca6f0f65",
+        "role": "light shell",
+        "registered": true,
+        "map": "656fbe4f-d153-40a3-961f-6a0d0520bb2a",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "7dfb72ac-013d-46b6-b5ad-e8f504def449",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "187a4153-df89-42ea-8d32-6312340e0a39",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 0.66,
+        "metalness": 0.08
+      }
+    ],
+    "optic": [
+      {
+        "part": "",
+        "materialName": "gunPaint:minigun",
+        "material": "40848254-c32b-4125-9a8b-48f4affa3ba4",
+        "role": "rail",
+        "registered": true,
+        "map": "656fbe4f-d153-40a3-961f-6a0d0520bb2a",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:minigun",
+        "material": "cf0d400c-5e0c-4ca5-afea-3ace06a0667a",
+        "role": "rail",
+        "registered": true,
+        "map": "656fbe4f-d153-40a3-961f-6a0d0520bb2a",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "chamfered alloy clamp foot",
+        "materialName": "gunPaint:minigun",
+        "material": "a4fb7101-1e55-40d3-8cd7-3a78c654b220",
+        "role": "optic shell",
+        "registered": true,
+        "map": "656fbe4f-d153-40a3-961f-6a0d0520bb2a",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "painted riser",
+        "materialName": "gunPaint:minigun",
+        "material": "8f22d9ed-de13-423c-b77c-3578e4a3547a",
+        "role": "optic shell",
+        "registered": true,
+        "map": "656fbe4f-d153-40a3-961f-6a0d0520bb2a",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "materialName": "",
+        "material": "550691b9-80ea-47a3-b776-324780aeeee3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "materialName": "",
+        "material": "857e58a8-8f37-4104-8321-2fa7e7c9812a",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "6a5ce220-e320-41e8-9e4a-e10271e96855",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "rack": [
+      {
+        "part": "",
+        "materialName": "gunPaint:minigun",
+        "material": "b2aa5ddd-3453-46c5-9d58-362e670e1562",
+        "role": "receiver",
+        "registered": true,
+        "map": "656fbe4f-d153-40a3-961f-6a0d0520bb2a",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "187a4153-df89-42ea-8d32-6312340e0a39",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 0.66,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "6a5ce220-e320-41e8-9e4a-e10271e96855",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:minigun",
+        "material": "db3d29e5-065f-4d4d-a798-a5a72b1dd933",
+        "role": "light shell",
+        "registered": true,
+        "map": "656fbe4f-d153-40a3-961f-6a0d0520bb2a",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:minigun",
+        "material": "ec8d47e8-fc95-4139-b634-5770ca6f0f65",
+        "role": "light shell",
+        "registered": true,
+        "map": "656fbe4f-d153-40a3-961f-6a0d0520bb2a",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "7dfb72ac-013d-46b6-b5ad-e8f504def449",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:minigun",
+        "material": "e595f8b9-b63d-431c-84a7-02f530530d9a",
+        "role": "rail",
+        "registered": true,
+        "map": "656fbe4f-d153-40a3-961f-6a0d0520bb2a",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:minigun",
+        "material": "16124aad-4165-4952-a161-85ff2278ee6d",
+        "role": "receiver",
+        "registered": true,
+        "map": "656fbe4f-d153-40a3-961f-6a0d0520bb2a",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:minigun",
+        "material": "aa8b0529-d6c4-49fa-94c1-e870aa4b7736",
+        "role": "receiver",
+        "registered": true,
+        "map": "656fbe4f-d153-40a3-961f-6a0d0520bb2a",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:minigun",
+        "material": "40848254-c32b-4125-9a8b-48f4affa3ba4",
+        "role": "rail",
+        "registered": true,
+        "map": "656fbe4f-d153-40a3-961f-6a0d0520bb2a",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:minigun",
+        "material": "cf0d400c-5e0c-4ca5-afea-3ace06a0667a",
+        "role": "rail",
+        "registered": true,
+        "map": "656fbe4f-d153-40a3-961f-6a0d0520bb2a",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:minigun",
+        "material": "a4fb7101-1e55-40d3-8cd7-3a78c654b220",
+        "role": "optic shell",
+        "registered": true,
+        "map": "656fbe4f-d153-40a3-961f-6a0d0520bb2a",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:minigun",
+        "material": "8f22d9ed-de13-423c-b77c-3578e4a3547a",
+        "role": "optic shell",
+        "registered": true,
+        "map": "656fbe4f-d153-40a3-961f-6a0d0520bb2a",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "550691b9-80ea-47a3-b776-324780aeeee3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "857e58a8-8f37-4104-8321-2fa7e7c9812a",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      }
+    ]
+  },
+  "restored": {
+    "assembled": [
+      {
+        "part": "",
+        "materialName": "gunPaint:minigun",
+        "material": "b2aa5ddd-3453-46c5-9d58-362e670e1562",
+        "role": "receiver",
+        "registered": true,
+        "map": null,
+        "color": 4737873,
+        "roughness": 0.66,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:minigun",
+        "material": "c4b015f1-d9b4-465b-86a6-adb492968d1e",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 6053992,
+        "roughness": 0.68,
+        "metalness": 0.06
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "1cf5ec05-942b-4a12-971b-dcdb122c0861",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7901595,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:minigun",
+        "material": "7f0b647c-7cc4-4f29-ab49-d4ce45f37c09",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "9ddd0f90-777c-47a8-a73c-1ba490339e3a",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16724770,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "6a5ce220-e320-41e8-9e4a-e10271e96855",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "7199aaca-cef4-410e-8b85-d4be6ebe3565",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11019804,
+        "roughness": 0.5,
+        "metalness": 0.3
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "d437d858-d2b5-4538-9f9f-18ca3774b5a3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "187a4153-df89-42ea-8d32-6312340e0a39",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 0.66,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "2483aabc-51a3-4a5b-b7ba-b8d17e23fb15",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777113
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "007559bd-2202-4a2d-acd3-bba37180c0cd",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16732497
+      },
+      {
+        "part": "sideRailClamp",
+        "materialName": "gunPaint:minigun",
+        "material": "db3d29e5-065f-4d4d-a798-a5a72b1dd933",
+        "role": "light shell",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "moduleShell",
+        "materialName": "gunPaint:minigun",
+        "material": "ec8d47e8-fc95-4139-b634-5770ca6f0f65",
+        "role": "light shell",
+        "registered": true,
+        "map": null,
+        "color": 3290167,
+        "roughness": 0.76,
+        "metalness": 0.03
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "7dfb72ac-013d-46b6-b5ad-e8f504def449",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:minigun",
+        "material": "e595f8b9-b63d-431c-84a7-02f530530d9a",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 6053992,
+        "roughness": 0.68,
+        "metalness": 0.06
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:minigun",
+        "material": "16124aad-4165-4952-a161-85ff2278ee6d",
+        "role": "receiver",
+        "registered": true,
+        "map": null,
+        "color": 6053992,
+        "roughness": 0.68,
+        "metalness": 0.06
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:minigun",
+        "material": "aa8b0529-d6c4-49fa-94c1-e870aa4b7736",
+        "role": "receiver",
+        "registered": true,
+        "map": null,
+        "color": 3883589,
+        "roughness": 0.72,
+        "metalness": 0.17
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:minigun",
+        "material": "40848254-c32b-4125-9a8b-48f4affa3ba4",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "cbb32b74-4dae-4e48-b1b2-cc5894d5f035",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2829873,
+        "roughness": 0.42,
+        "metalness": 0.62
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "a9ae3246-b4b6-4cbd-9575-cb18f122dc8d",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 4869714,
+        "roughness": 0.35,
+        "metalness": 0.7
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:minigun",
+        "material": "cf0d400c-5e0c-4ca5-afea-3ace06a0667a",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "chamfered alloy clamp foot",
+        "materialName": "gunPaint:minigun",
+        "material": "a4fb7101-1e55-40d3-8cd7-3a78c654b220",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 3027508,
+        "roughness": 0.5,
+        "metalness": 0.55
+      },
+      {
+        "part": "painted riser",
+        "materialName": "gunPaint:minigun",
+        "material": "8f22d9ed-de13-423c-b77c-3578e4a3547a",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 2369578,
+        "roughness": 0.74,
+        "metalness": 0.05
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "materialName": "",
+        "material": "550691b9-80ea-47a3-b776-324780aeeee3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "materialName": "",
+        "material": "857e58a8-8f37-4104-8321-2fa7e7c9812a",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      }
+    ],
+    "firstPerson": [
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:minigun",
+        "material": "5003cee1-668d-4a8a-a601-9c01689e740f",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7172472,
+        "roughness": 0.63,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:minigun",
+        "material": "bd5507bd-0023-4314-85fb-37a1df9c809a",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 8751504,
+        "roughness": 0.61,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "a74e45f2-3c49-48ba-8fa1-1cd5be4abf41",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7901595,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:minigun",
+        "material": "24b11e4a-e402-41b8-8361-084c46143e8c",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685184,
+        "roughness": 0.69,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "5153949d-b4e7-4579-9d39-27a2e9cf31d2",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16724770,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "vm:fold-static",
+        "material": "f9a57fd5-e199-4c0c-9802-fedb8375ce21",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "0201905e-21a9-42a3-be4d-9d5ae28e5fa7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11019804,
+        "roughness": 0.5,
+        "metalness": 0.3
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "ea988d8b-4b43-40f4-8aa0-3da0af4a443f",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5659490,
+        "roughness": 0.58,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "c8fe863c-30ee-4e1f-aff0-94708620a28b",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 0.66,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshBasicMaterial",
+        "material": "cc7a0065-122e-44dd-a373-01ea665d428e",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777113
+      },
+      {
+        "part": "sideRailClamp",
+        "materialName": "vm:gunPaint:minigun",
+        "material": "584186f8-fdf8-440e-b95b-0cf25a4aa392",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685184,
+        "roughness": 0.69,
+        "metalness": 0.08
+      },
+      {
+        "part": "moduleShell",
+        "materialName": "vm:gunPaint:minigun",
+        "material": "c0dd0c4b-439b-4e05-9975-bf9976adf90b",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5264465,
+        "roughness": 0.84,
+        "metalness": 0.02
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "86f986ee-c764-4b50-a93b-a91111e2130b",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:minigun",
+        "material": "af5f906a-4fb5-4b05-b1ed-97a3bdd1efc8",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 8751504,
+        "roughness": 0.61,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:minigun",
+        "material": "402722cd-0edd-4622-b8da-cf113b2a4887",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 8751504,
+        "roughness": 0.61,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:minigun",
+        "material": "82362db2-fc95-4ccf-9d38-d32d1bc4d527",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3883589,
+        "roughness": 0.72,
+        "metalness": 0.17
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:minigun",
+        "material": "afe239ed-d403-41fa-a810-416555ea7f1b",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685184,
+        "roughness": 0.69,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "4ddac5fe-6ce3-441a-a7c3-8c8be96ec56b",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2829873,
+        "roughness": 0.42,
+        "metalness": 0.62
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "884967e6-3bb6-4df6-8ba1-de87cbb752e5",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 4869714,
+        "roughness": 0.35,
+        "metalness": 0.7
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:minigun",
+        "material": "e0b4413d-70e1-4891-a659-02302c34f266",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5659490,
+        "roughness": 0.58,
+        "metalness": 0.1
+      },
+      {
+        "part": "chamfered alloy clamp foot",
+        "materialName": "vm:gunPaint:minigun",
+        "material": "1f8b62ad-ef0c-4b5a-83f8-adfca0223fb3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3027508,
+        "roughness": 0.5,
+        "metalness": 0.55
+      },
+      {
+        "part": "painted riser",
+        "materialName": "vm:gunPaint:minigun",
+        "material": "b291af0a-8542-44a8-bfc5-38fc0ab06800",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2369578,
+        "roughness": 0.74,
+        "metalness": 0.05
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "materialName": "vm:MeshPhysicalMaterial",
+        "material": "c6f5fb28-28ac-47e2-803f-3c8506d98b68",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "materialName": "vm:MeshBasicMaterial",
+        "material": "90694330-fb3d-4bc9-8fa3-fcbbc8d71825",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      }
+    ],
+    "magazine": [
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "6a5ce220-e320-41e8-9e4a-e10271e96855",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "light": [
+      {
+        "part": "sideRailClamp",
+        "materialName": "gunPaint:minigun",
+        "material": "db3d29e5-065f-4d4d-a798-a5a72b1dd933",
+        "role": "light shell",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "moduleShell",
+        "materialName": "gunPaint:minigun",
+        "material": "ec8d47e8-fc95-4139-b634-5770ca6f0f65",
+        "role": "light shell",
+        "registered": true,
+        "map": null,
+        "color": 3290167,
+        "roughness": 0.76,
+        "metalness": 0.03
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "7dfb72ac-013d-46b6-b5ad-e8f504def449",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "187a4153-df89-42ea-8d32-6312340e0a39",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 0.66,
+        "metalness": 0.08
+      }
+    ],
+    "optic": [
+      {
+        "part": "",
+        "materialName": "gunPaint:minigun",
+        "material": "40848254-c32b-4125-9a8b-48f4affa3ba4",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:minigun",
+        "material": "cf0d400c-5e0c-4ca5-afea-3ace06a0667a",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "chamfered alloy clamp foot",
+        "materialName": "gunPaint:minigun",
+        "material": "a4fb7101-1e55-40d3-8cd7-3a78c654b220",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 3027508,
+        "roughness": 0.5,
+        "metalness": 0.55
+      },
+      {
+        "part": "painted riser",
+        "materialName": "gunPaint:minigun",
+        "material": "8f22d9ed-de13-423c-b77c-3578e4a3547a",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 2369578,
+        "roughness": 0.74,
+        "metalness": 0.05
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "materialName": "",
+        "material": "550691b9-80ea-47a3-b776-324780aeeee3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "materialName": "",
+        "material": "857e58a8-8f37-4104-8321-2fa7e7c9812a",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "6a5ce220-e320-41e8-9e4a-e10271e96855",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "rack": [
+      {
+        "part": "",
+        "materialName": "",
+        "material": "187a4153-df89-42ea-8d32-6312340e0a39",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 0.66,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "6a5ce220-e320-41e8-9e4a-e10271e96855",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "7dfb72ac-013d-46b6-b5ad-e8f504def449",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "550691b9-80ea-47a3-b776-324780aeeee3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "857e58a8-8f37-4104-8321-2fa7e7c9812a",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      }
+    ]
+  }
+}

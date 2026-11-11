@@ -1,0 +1,29 @@
+{
+  "held": {
+    "coated": 20,
+    "factory": 13
+  },
+  "eye": {
+    "coated": 20,
+    "factory": 13
+  },
+  "defaultOptic": {
+    "coated": 5,
+    "bare": 15
+  },
+  "barrel": {
+    "bare": 6
+  },
+  "lampGlass": {
+    "bare": 1
+  },
+  "trigger": {
+    "bare": 1
+  },
+  "drum": {
+    "bare": 10
+  },
+  "rotor": {
+    "bare": 58
+  }
+}

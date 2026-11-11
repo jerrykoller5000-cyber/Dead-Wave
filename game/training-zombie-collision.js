@@ -142,9 +142,8 @@ export function createTrainingZombieCollision(tg,stations,THREE,infirmaryFence){
     keepCorpse(c){
       if(!c.training)return;
       const mesh=c.mesh;
-      if(c.frozen&&c.trainingFitted){if(c.typeKey==='guardian')settleGuardian(c);mesh.position.y+=c.trainingLift||0;return;}
+      if(c.frozen&&c.trainingFitted){mesh.position.y+=c.trainingLift||0;if(c.typeKey==='guardian')settleGuardian(c);return;}
       if(!c.trainingSettled&&c.t-c.fallT>.4){settleLimbs(c);c.trainingSettled=true;}
-      if(c.trainingSettled&&c.typeKey==='guardian')settleGuardian(c);
       const oldX=mesh.position.x,oldZ=mesh.position.z;
       // The visible skin is skinned; Three does not refresh its bounds as it
       // animates. Hidden source meshes have different bounds and can make a
@@ -179,6 +178,12 @@ export function createTrainingZombieCollision(tg,stations,THREE,infirmaryFence){
         ?floor+.015-bodyBox.min.y-c.trainingExactGap
         :Math.max(0,floor+.015-bodyBox.min.y);
       mesh.position.y+=c.trainingLift;
+      if(c.trainingSettled&&c.typeKey==='guardian'){
+        settleGuardian(c);
+        const correction=floor+.015-exactVisibleMinY(mesh);
+        mesh.position.y+=correction;
+        c.trainingLift+=correction;
+      }
       c.pool.position.x+=mesh.position.x-oldX;
       c.pool.position.z+=mesh.position.z-oldZ;
       if(c.frozen)c.trainingFitted=true;

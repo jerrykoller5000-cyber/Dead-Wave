@@ -6,7 +6,7 @@ import {createTrainingBlockers} from '../game/training-infirmary.js';
 // Reuse the actual plates, silhouette, scoring zones and hinge update. Own only the temporary bank.
 export function createRangeTargets(T,tg){
  const baseCount=tg.targets.length,original=tg.targets.slice(),owned=[];let bank=[],group=null,priorVisible=null;
- function lowerTarget(t){if(t.state==='down'||t.state==='falling')return;t.fall=1;t.drillFrom=t.pivot.rotation.x;t.state='falling';t.t=0;}
+ function lowerTarget(t){if(t.burned||t.state==='wrecked'||t.state==='down'||t.state==='falling')return;t.fall=1;t.drillFrom=t.pivot.rotation.x;t.state='falling';t.t=0;}
  function lower(ids){for(const i of ids)if(bank[i])lowerTarget(bank[i]);}
  function lowerAll(){for(const t of [...original,...bank]){t.drillControlled=true;lowerTarget(t);}}
  function prepare(d){
@@ -16,10 +16,12 @@ export function createRangeTargets(T,tg){
   const stands=new T.InstancedMesh(geo,steel,5),dummy=new T.Object3D();group.add(stands);
   let standCount=0;bank=targetLayout(d).map((at,i)=>{
    const pivot=original[i].pivot.clone(true),marks=[];
-   pivot.traverse(o=>{if(o.name==='training-impact-marks')marks.push(o);});
+   pivot.traverse(o=>{if(o.name==='training-impact-marks'||o.name==='training-char-marks')marks.push(o);});
    for(const mark of marks)mark.parent?.remove(mark);
+   pivot.visible=true;pivot.scale.set(1,1,1);
    const root=new T.Group();root.position.set(at.x,0,at.z);root.add(pivot);group.add(root);
    const plate=pivot.getObjectByName('target-plate');
+   if(plate){plate.visible=true;plate.scale.set(1,1,1);}
    if(!original.some(t=>Math.abs(t.x-at.x)<.01&&Math.abs(t.z-at.z)<.01)){dummy.position.set(at.x,.1,at.z);dummy.updateMatrix();stands.setMatrixAt(standCount++,dummy.matrix);}
    const t={lane:i+1,range:at.z,state:'up',t:0,hits:0,fall:1,pivot,plate,x:at.x,z:at.z,drillControlled:true};
    t.box={...original[i].box,minX:tg.origin.x+at.x-.64,maxX:tg.origin.x+at.x+.64,minZ:tg.origin.z+at.z-.07,maxZ:tg.origin.z+at.z+.07};
@@ -38,11 +40,24 @@ export function createRangeTargets(T,tg){
   if(group){tg.group.remove(group);group=null;}
   for(const t of bank){const i=tg.solids.indexOf(t.solid);if(i>=0)tg.solids.splice(i,1);}
   tg.targets.splice(baseCount,bank.length);bank=[];for(const x of owned)x.dispose?.();owned.length=0;
-  original.forEach((t,i)=>{delete t.drillControlled;delete t.drillFrom;if(priorVisible)t.pivot.visible=priorVisible[i];});priorVisible=null;tg.resetTargets();
+  original.forEach((t,i)=>{
+   delete t.drillControlled;delete t.drillFrom;
+   if(t.burned||t.state==='wrecked')return;
+   if(priorVisible)t.pivot.visible=priorVisible[i];
+   t.state='up';t.t=0;t.pivot.rotation.x=0;
+  });priorVisible=null;
  }
- function raise(ids){for(const i of ids){const t=bank[i];if(!t||t.state==='up'||t.state==='rising')continue;t.state='rising';t.t=0;t.drillFrom=t.pivot.rotation.x;}}
- const ready=i=>bank[i]?.state==='up';
- const allDown=()=>{const down=[...original,...bank].every(t=>t.state==='down');if(down&&group)for(const t of original)t.pivot.visible=false;return down;};
+ function raise(ids){for(const i of ids){const t=bank[i];if(!t||t.burned||t.state==='wrecked'||t.state==='up'||t.state==='rising')continue;t.state='rising';t.t=0;t.drillFrom=t.pivot.rotation.x;}}
+ const ready=i=>bank[i]?.state==='up'&&!bank[i].burned;
+ const allDown=()=>{const down=[...original,...bank].every(t=>t.burned||t.state==='wrecked'||t.state==='down');if(down&&group)for(const t of original)if(!t.burned&&t.state!=='wrecked')t.pivot.visible=false;return down;};
+ function burn(index){
+  const t=tg.targets[index];if(!t)return false;
+  t.burned=true;t.state='wrecked';t.t=0;
+  if(t.solid){const i=tg.solids.indexOf(t.solid);if(i>=0)tg.solids.splice(i,1);}
+  else for(let i=tg.solids.length-1;i>=0;i--)if(tg.solids[i].target===index)tg.solids.splice(i,1);
+  return true;
+ }
+ const anyBurned=()=>original.some(t=>t.burned||t.state==='wrecked');
  function blast(origin,radius){
   const hits=[],ignoreTargets=new Set(tg.targets.map((_,i)=>i));
   bank.forEach((t,i)=>{if(!ready(i))return;const b=t.box,point={x:Math.max(b.minX,Math.min(b.maxX,origin.x)),y:Math.max(b.minY,Math.min(b.maxY,origin.y)),z:Math.max(b.minZ,Math.min(b.maxZ,origin.z))};
@@ -52,14 +67,14 @@ export function createRangeTargets(T,tg){
  }
  function flame(a,b,r=.16){
   // Sweep the fuel blob through the same silhouettes as bullets. Walls still occlude it.
-  const hit=traceTraining(tg,a,b);if(hit?.solid.target>=baseCount)return hit.solid.target-baseCount;
+  const hit=traceTraining(tg,a,b);if(hit?.solid.target>=baseCount){const i=hit.solid.target-baseCount;return ready(i)?i:null;}
   for(let i=0;i<bank.length;i++){const t=bank[i];if(!ready(i))continue;const box=t.box;
    if(b.x>=box.minX-r&&b.x<=box.maxX+r&&b.y>=box.minY-r&&b.y<=box.maxY+r&&Math.abs(b.z-(tg.origin.z+t.z))<=r+.07){
     const point={x:b.x,y:b.y,z:tg.origin.z+t.z};if(tg.onPlate(baseCount+i,point)&&(!hit||hit.t>=.995))return i;
    }
   }return null;
  }
- return {prepare,lower,lowerAll,raise,ready,allDown,release,blast,flame,localIndex:i=>i-baseCount,absoluteIndex:i=>baseCount+i,bank:()=>bank};
+ return {prepare,lower,lowerAll,raise,ready,allDown,burn,anyBurned,release,blast,flame,localIndex:i=>i-baseCount,absoluteIndex:i=>baseCount+i,bank:()=>bank};
 }
 
 export function rangeConsolePlacement(tg){

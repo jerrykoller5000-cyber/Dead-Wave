@@ -577,7 +577,7 @@ export function createBarrelHeat(ctx = {}) {
       const mesh = new T.Mesh(wispGeo, mat);
       mesh.visible = false;
       mesh.frustumCulled = false;
-      mesh.renderOrder = 4;
+      mesh.renderOrder = 2; // Over decals/char (1), strictly behind flame stream (3)
       wispGroup.add(mesh);
 
       wisps.push({
@@ -750,8 +750,8 @@ export function createBarrelHeat(ctx = {}) {
       }
     }
 
-    // 4. Spawn rising thin smoke wisps off the muzzle
-    if (T && wispGroup && curHeat > SMOKE_HEAT_THRESHOLD) {
+    // 4. Spawn rising thin smoke wisps off the muzzle (suppressed while flamer stream is actively roaring)
+    if (T && wispGroup && curHeat > SMOKE_HEAT_THRESHOLD && !state.suppressWisp) {
       wispSpawnTimer -= stepDt;
       if (wispSpawnTimer <= 0) {
         const hNorm = clamp01((curHeat - SMOKE_HEAT_THRESHOLD) / (1.0 - SMOKE_HEAT_THRESHOLD));

@@ -136,7 +136,9 @@
       for (const k of Object.keys(gp)) { const on = k === 'bareHead' ? false : k === 'bareTorso' ? false : ['helmet', 'vest', 'pads', 'nvg'].includes(k); for (const m of gp[k]) m.visible = on; }
       press([]); step(30);
     };
-    const worst = {}, fails = [];
+    const worst = {}, fails = [], excused = [];
+    // AGENTS rule 24: the named exceptions (core/clip-exceptions.js); every one used is printed
+    let CX = null; try { CX = await import('/core/clip-exceptions.js'); } catch (e) { out.push('INFO no clip exceptions: ' + e.message); }
     for (const [pose, set] of [...POSES, ['kit on', kitOn], ...KIT]) {
       T.player.position.copy(home); await set();
       const L = layers(), row = [];
@@ -144,7 +146,10 @@
         if (!L[a] || !L[b]) continue;
         const r = depth(L[a], L[b]), key = a + '<' + b, mm = r.worst * 1000;
         row.push(key + ' ' + mm.toFixed(1));
-        if (!worst[key] || mm > worst[key].mm) worst[key] = { mm, pose };
+        const ex = r.worst > TOL && CX ? CX.clipException(a, b, pose, r.worst) : null;
+        if (!worst[key]) worst[key] = { mm: 0, pose };
+        if (ex) { excused.push(pose + ': ' + key + ' ' + mm.toFixed(1) + ' mm (' + ex.id + ')'); continue; }
+        if (mm > worst[key].mm) worst[key] = { mm, pose };
         let local = '';
         if (r.at && a === 'gloves') { let bw = null, bd = 1; M.traverse((o) => { if (o.name === 'wrist') { const w = o.getWorldPosition(new THREE.Vector3()); const d = w.distanceTo(r.at); if (d < bd) { bd = d; bw = o; } } });
           if (bw) { const q = r.at.clone().applyMatrix4(new THREE.Matrix4().copy(bw.parent.matrixWorld).invert()); local = ' [elbow ' + [q.x, q.y, q.z].map((x) => x.toFixed(3)).join(',') + ' wrist rot ' + [bw.rotation.x, bw.rotation.y, bw.rotation.z].map((x) => x.toFixed(2)).join(',') + ']'; } }
@@ -153,6 +158,7 @@
       out.push('INFO ' + pose + ' (mm under): ' + row.join(', '));
     }
     press([]); T.flightHold(false);
+    out.push('INFO excused (core/clip-exceptions.js): ' + (excused.join('; ') || 'none'));
     out.push('INFO not measured (the test page\'s stand-in tubes): ' + ([...tubes].join(', ') || 'none'));
     for (const [k, w] of Object.entries(worst)) ok(w.mm <= TOL * 1000, 'the ' + k.split('<')[1] + ' stays over the ' + k.split('<')[0] + ' in every stance (worst ' + w.mm.toFixed(1) + ' mm, ' + w.pose + ')');
     if (fails.length) out.push('INFO through: ' + fails.slice(0, 30).join('; '));

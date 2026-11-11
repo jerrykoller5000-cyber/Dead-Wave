@@ -64,7 +64,14 @@ try {
         const screen=vm.ndc(vm.viewPoint(new H.THREE.Vector3(0,.092,-.064)));
         if(Math.abs(screen.x)>.008 || Math.abs(screen.y)>.008)throw Error('Aimed model off centre '+screen.x+','+screen.y);
       }
-      return {pose,light,key:info.key,raised:info.raise,ads:T.fpDbg().ads,reloading:T.isReloading(),time:T.getWorldTime(),sun:H.sun.intensity};
+      let ironSight;
+      if(proofId==='launcher' && pose==='aimed'){
+        const source=T.weaponMeshes.launcher,leaf=vm.gun.root.getObjectByName(source.userData.defaultSight.name);
+        const overlay=document.getElementById('scopeOverlay');
+        ironSight={leaf:!!leaf?.visible,rmr:!!source.userData.fittedOptic?.visible,overlay:Number(overlay?.style.opacity||0)};
+        if(!ironSight.leaf || ironSight.rmr || ironSight.overlay>.01)throw Error('Unexpected default launcher sight display');
+      }
+      return {pose,light,key:info.key,raised:info.raise,ads:T.fpDbg().ads,reloading:T.isReloading(),time:T.getWorldTime(),sun:H.sun.intensity,ironSight};
     };
   })()`);
   if(phase==='rear' || (phase==='revised' && ['m4','shotgun'].includes(id)) || (phase==='after' && id==='shotgun')){
@@ -136,14 +143,14 @@ try {
     }
     console.log('Sampled '+Object.keys(result.rays).length+' occupied aimed pixels; rear stock group visible: '+result.stockVisible);
   }
-  if(phase==='rig' || (['after','revised'].includes(phase) && ['m4','ak','shotgun','uzi','aa12','sniper'].includes(id))){
+  if(phase==='rig' || (['after','revised'].includes(phase) && ['m4','ak','shotgun','uzi','aa12','sniper','minigun','launcher'].includes(id))){
     const maps=await page.evaluate(`(()=>{
-      const expected={pistol:['trigger','magRelease','slideStop'],aa12:['trigger','selector','chargingHandle'],sniper:['trigger','magRelease'],uzi:['trigger','magRelease','safety','selector','chargingHandle'],m4:['selector','boltCatch','magRelease','chargingHandle'],ak:['selector','magRelease','trigger','chargingHandle'],shotgun:['safety','slideRelease','pump']}[proofId];
+      const expected={pistol:['trigger','magRelease','slideStop'],aa12:['trigger','selector','chargingHandle'],minigun:['trigger'],launcher:['trigger'],sniper:['trigger','magRelease'],uzi:['trigger','magRelease','safety','selector','chargingHandle'],m4:['selector','boltCatch','magRelease','chargingHandle'],ak:['selector','magRelease','trigger','chargingHandle'],shotgun:['safety','slideRelease','pump']}[proofId];
       const src=TT.weaponMeshes[proofId],eye=TT.viewmodelDbg().gun.root;
       const copies={world:src,eye};
       if(['pistol','uzi'].includes(proofId))copies.offhand=TT.offhandMeshes[proofId];
       const result={};
-      for(const [kind,keys] of [['controls',expected],['heatParts',proofId==='aa12'?['barrel']:['barrel','suppressor']]]){
+      for(const [kind,keys] of [['controls',expected],['heatParts',['aa12','minigun','launcher'].includes(proofId)?['barrel']:['barrel','suppressor']]]){
         const entries=result[kind]={};
         for(const key of keys){
           const name=src.userData[kind]?.[key];
@@ -160,7 +167,7 @@ try {
           }
           const original=src.getObjectByName(name);
           if(original.userData.restPosition.length!==3 || original.userData.restQuaternion.length!==4)throw Error('Missing rest pose '+name);
-          if(['uzi','aa12','sniper'].includes(proofId) && key==='trigger'){
+          if(['uzi','aa12','sniper','minigun','launcher'].includes(proofId) && key==='trigger'){
             const pin=src.userData.triggerPin;
             if(!pin || pin.some((v,i)=>Math.abs(v-original.position.toArray()[i])>1e-8))throw Error('Missing blade pivot');
             for(const root of Object.values(copies)){
@@ -247,6 +254,12 @@ try {
     await save(new URL('contact-surfaces.json',folder),JSON.stringify(geometry));
   }
   if(process.argv.includes('--surfaces-only')){console.log('Saved contact surfaces',phase);await browser.close();await server.close();process.exit(0)}
+  if(process.argv.includes('--fittings-only')){
+    assert(['minigun','launcher'].includes(id));
+    const {heavyFittings}=await import('./minigun/fittings.mjs');
+    await heavyFittings(page,folder,id);
+    assert.deepEqual(page.errors,[]);console.log('PASS fitted sight and drum pictures');
+  }else{
   const records=[],hashes=new Set();
   for(const pose of ['hip','aimed','reload']) for(const light of ['noon','overcast','dusk','night']){
     const data=await page.evaluate('prepareEye('+JSON.stringify(pose)+','+JSON.stringify(light)+')');
@@ -279,6 +292,10 @@ try {
       await save(new URL('third-person-'+light+'.jpg',folder),Buffer.from(shot.data,'base64'));
     }
   }
+  if(['minigun','launcher'].includes(id)){
+    const {heavyFittings}=await import('./minigun/fittings.mjs');
+    await heavyFittings(page,folder,id);
+  }
   if(id==='sniper'){
     const {captureScope}=await import('./sniper/scope.mjs');
     await captureScope(page,folder);
@@ -289,4 +306,5 @@ try {
   }
   assert.deepEqual(page.errors,[]);
   console.log('PASS',id,phase,records.length,'distinct frames of the actual first-person model');
+  }
 }finally{await browser.close();await server.close()}

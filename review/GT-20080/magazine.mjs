@@ -7,7 +7,7 @@ import {serve} from '../../tools/serve.mjs';
 import {save} from '../GT-20076/save.mjs';
 
 const [id,phase]=process.argv.slice(2);
-assert(['ak','uzi','aa12','sniper'].includes(id) && ['before','after','revised','timing','inventory'].includes(phase) && process.env.DW_GAME_TEST_TOKEN);
+assert(['ak','uzi','aa12','sniper','minigun'].includes(id) && ['before','after','revised','timing','inventory'].includes(phase) && process.env.DW_GAME_TEST_TOKEN);
 const dir=new URL('./'+id+'/'+phase+'/',import.meta.url);
 await mkdir(dir,{recursive:true});
 const server=await serve(fileURLToPath(new URL('../../',import.meta.url)),0);
@@ -60,6 +60,26 @@ try {
     await save(new URL('counts.json',dir),JSON.stringify(counts,null,2));
     assert.deepEqual(page.errors,[]);
     console.log('PASS live standard/extended drum seat and finished inventory; observed unforced empty-reload frames',JSON.stringify(counts));
+  } else if(phase==='timing' && id==='minigun'){
+    await page.evaluate(`(async()=>{
+      TT.applyGraphicsPreset('high');TT.grantAllWeapons();TT.setViewFirstDbg(true);
+      if(TT.isUnarmed())TT.toggleHolster();
+      for(let i=0;i<30&&TT.getCurrentWeapon()!==proofMagId;i++){TT.setWeapon(TT.WEAPON_ORDER.indexOf(proofMagId));await new Promise(r=>setTimeout(r,120))}
+    })()`);
+    assert(await page.waitFor('TT.viewmodelDbg()?.info.key===proofMagId && TT.viewmodelDbg().info.raise>.98'));
+    await page.evaluate('TT.setAmmoDbg(proofMagId,TT.WEAPON_STATS[proofMagId].maxAmmo);TT.setMouseFireDbg(true)');
+    assert(await page.waitFor('TT.casings.some(c=>c.mesh.userData.caseOf===proofMagId)'));
+    await page.evaluate('TT.setMouseFireDbg(false)');
+    const samples=[];
+    for(let i=0;i<12;i++){
+      await wait(1000);const s=await page.evaluate('({gun:TT.getCurrentWeapon(),high:TT.getGfx(),...TT.perfSnapshot()})');
+      assert.equal(s.gun,id);assert.equal(s.high,'high');samples.push(s);
+    }
+    const avg=k=>samples.slice(-10).reduce((sum,s)=>sum+s[k],0)/10;
+    const file=process.argv.includes('--repeat')?'samples-repeat.json':'samples.json';
+    await save(new URL(file,dir),JSON.stringify({readyMs,samples},null,2));
+    assert.deepEqual(page.errors,[]);
+    console.log('PASS High minigun after real ejection',readyMs,'ms to ready',avg('fps').toFixed(1),'fps',avg('low').toFixed(1),'low');
   } else if(phase==='timing'){
     await page.evaluate(`(async()=>{
       TT.applyGraphicsPreset('high');TT.grantAllWeapons();TT.setViewFirstDbg(true);
@@ -82,7 +102,8 @@ try {
         samples.push({count,fps:s.fps,low:s.low});
       }
     }
-    await save(new URL('samples.json',dir),JSON.stringify({readyMs,samples},null,2));
+    const timingFile=process.argv.includes('--repeat')?'samples-repeat.json':'samples.json';
+    await save(new URL(timingFile,dir),JSON.stringify({readyMs,samples},null,2));
     const avg=k=>samples.reduce((sum,s)=>sum+s[k],0)/samples.length;
     console.log('PASS loaded and empty, 12 High samples: ready',readyMs,'ms,',avg('fps').toFixed(1),'fps,',avg('low').toFixed(1),'low');
   } else {
@@ -97,11 +118,12 @@ try {
     const gun=TT.weaponMeshes[id],ud=gun.userData,live=lib.roundGeometry(T,id),spent=lib.spentCaseGeometry(T,id);
     if(Boolean(live)!==${id==='aa12'||phase!=='before'})throw Error('Unexpected live artwork for this phase');
     let ejection=null;
-    if(id==='aa12' || id==='sniper'){
-      if(id==='aa12')for(const label of ['issued','buckshot','slug']){
+    if(['aa12','sniper','minigun'].includes(id)){
+      if(id==='aa12' || id==='minigun')for(const label of ['issued','buckshot','slug']){
         if(lib.roundGeometry(T,id,label)!==live || lib.spentCaseGeometry(T,id,label)!==spent)
-          throw Error('The Breacher must keep one issued shell');
+          throw Error('This model must keep one issued round');
       }
+      if(id==='minigun' && (ud.setMagazineRounds || ud.mag!==ud.ammoBox || gun.getObjectByName('magazine top round')))throw Error('Exposed ammunition on sealed drum');
       const startCount=TT.casings.length;
       TT.setMouseFireDbg(true);
       let roundWasVisible=false;
@@ -201,10 +223,12 @@ try {
         if(raw.userData.boltRound.children[0].geometry!==live || !ejection.roundWasVisible)
           throw Error('The normal action did not display the shared prop');
         TT.setMagazinesDbg(id,1,[]);
+        TT.setMouseFireDbg(false);
+        for(let i=0;i<140;i++)TT.stepFrame(1/30);
         TT.setMouseFireDbg(true);
         for(let i=0;i<220 && TT.magazinesDbg(id).loaded[0]>0;i++)TT.stepFrame(1/120);
         TT.setMouseFireDbg(false);
-        if(TT.magazinesDbg(id).loaded[0]!==0)throw Error('Did not reach last-round state');
+        if(TT.magazinesDbg(id).loaded[0]!==0)throw Error('Did not reach last-round state: '+JSON.stringify({inventory:TT.magazinesDbg(id),reload:TT.getReloadDbg(),weapon:TT.getCurrentWeapon()}));
         for(let i=0;i<145;i++){
           TT.stepFrame(1/80);
           if(TT.magazinesDbg(id).loaded[0]===0 && ud.boltRound.visible)throw Error('Round artwork on an empty action');
@@ -241,7 +265,7 @@ try {
     };
     H.attach({held:()=>false,scale:dt=>dt,frame:illuminate});
     window.magImage=async(mode,light,count,fraction=.74)=>{
-      lightName=light;stage.visible=mode!=='eye';sample.visible=mode==='pair';magStage.visible=mode==='mag';
+      lightName=light;stage.visible=mode!=='eye';sample.visible=mode==='pair' || mode==='mouth';magStage.visible=mode==='mag';
       if(ud.setMagazineRounds)ud.setMagazineRounds(count);
       let result={mode,light,count};
       if(mode==='eye'){
@@ -259,17 +283,23 @@ try {
         TT.setViewFirstDbg(false);
         const examining=mode==='mag';
         if(examining){
+          if(id==='minigun'){
+            TT.setAmmoDbg(id,count);
+            for(let i=0;i<3;i++)TT.stepFrame(1/30);
+            result.inventory=TT.getAmmo()[id];
+            if(result.inventory!==count)throw Error('Minigun inventory mismatch');
+          }
           if(magazine)magStage.remove(magazine);
           magazine=TT.cloneLean(ud.mag);magazine.visible=true;
           magazine.position.set(0,0,0);magazine.rotation.set(0,0,0);
-          magazine.scale.setScalar(gun.scale.x/TT.getWeaponSizeDbg().upm);magStage.add(magazine);
+          magazine.scale.copy(ud.mag.scale).multiplyScalar(gun.scale.x/TT.getWeaponSizeDbg().upm);magStage.add(magazine);
           const top=magazine.getObjectByName('magazine top round');
           result.topRoundVisible=!!top?.visible;
           if(top && top.visible!==(count>0))throw Error('Loaded/empty magazine artwork mismatch');
         }
-        const focus=id==='sniper'?new T.Vector3(0,examining?.051:.044,0):examining && id==='aa12'?new T.Vector3(0,.13,0):examining && id==='uzi'?new T.Vector3(0,.081,.013):new T.Vector3(0,examining?0:.026,0);
+        const focus=mode==='mouth'?new T.Vector3(.006,.051,0):id==='minigun'?new T.Vector3(0,examining?-.024:.036,0):id==='sniper'?new T.Vector3(0,examining?.051:.044,0):examining && id==='aa12'?new T.Vector3(0,.13,0):examining && id==='uzi'?new T.Vector3(0,.081,.013):new T.Vector3(0,examining?0:.026,0);
         target.copy(stage.localToWorld(focus));
-        const offset=id==='sniper'?(examining?new T.Vector3(.12,.17,-.18):new T.Vector3(.06,.19,.50)):examining && id==='aa12'?new T.Vector3(.20,.21,-.27):id==='aa12'?new T.Vector3(.055,.14,.39):examining && id==='uzi'?new T.Vector3(.095,.123,-.108):
+        const offset=mode==='mouth'?new T.Vector3(.03,.129,.128):id==='minigun'?(examining?new T.Vector3(.38,.16,-.30):new T.Vector3(.045,.12,.37)):id==='sniper'?(examining?new T.Vector3(.12,.17,-.18):new T.Vector3(.06,.19,.50)):examining && id==='aa12'?new T.Vector3(.20,.21,-.27):id==='aa12'?new T.Vector3(.055,.14,.39):examining && id==='uzi'?new T.Vector3(.095,.123,-.108):
           examining?new T.Vector3(.20,.20,-.10):new T.Vector3(.025,.076,.18);
         const eye=target.clone().addScaledVector(offset,12);
         TT.setShotView({x:eye.x,y:eye.y,z:eye.z,tx:target.x,ty:target.y,tz:target.z,fov:examining?32:25});
@@ -279,7 +309,8 @@ try {
     };
     return {live:live?size(live):null,spent:size(spent),independentCounts,inventoryCounts,mouth,ejection,hook:typeof ud.setMagazineRounds==='function'};
   })()`);
-  if(phase!=='before')assert(info.hook,'Missing approved count hook');
+  if(id==='minigun')assert.equal(info.hook,false,'Minigun drum is closed');
+  else if(phase!=='before')assert(info.hook,'Missing approved count hook');
   if(id==='uzi' && phase==='revised')assert(Math.abs(info.live[1]-.0297)<.00001,'Revised Wasp art length');
   const frames=[];
   const shot=async(mode,light,count,name,fraction=.74)=>{
@@ -292,7 +323,7 @@ try {
     for(const fraction of [.10,.18,.28,.38,.48,.58,.68,.78,.88,.96])
       await shot('eye','noon',capacity,'reload-'+Math.round(fraction*100),fraction);
   }
-  if(phase==='revised' || id==='aa12' || id==='sniper') {
+  if(phase==='revised' || ['aa12','sniper','minigun'].includes(id)) {
     for(const light of ['overcast','dusk','night'])await shot('eye',light,capacity,'eye-reload-'+light);
   }
   if(id==='sniper' && phase==='after'){
@@ -305,6 +336,9 @@ try {
     }
   }
   for(const light of ['noon','overcast','dusk','night'])await shot('pair',light,capacity,light);
+  if(id==='minigun' && phase==='after'){
+    for(const light of ['noon','overcast','dusk','night'])await shot('mouth',light,capacity,'mouth-'+light);
+  }
   await shot('mag','noon',0,'mag-empty');await shot('mag','noon',capacity,'mag-loaded');
   assert.deepEqual(page.errors,[]);
   await save(new URL('proof.json',dir),JSON.stringify({info,frames},null,2));

@@ -15,14 +15,21 @@ export function createTrainingInfirmaryFence(T,tg,{onMotion=()=>{}}={}) {
     const geo=new T.BoxGeometry(w,h,d);geometries.push(geo);
     const m=new T.Mesh(geo,frame);m.position.set(px-x,py,pz-z);parent.add(m);return m;
   };
-  const sides=[{axis:'x',at:bay.maxX,lo:bay.minZ+.18,hi:bay.maxZ},{axis:'z',at:bay.maxZ,lo:bay.minX+.24,hi:bay.maxX}];
+  // The south run seats against the existing steel corner post's front face;
+  // that post is its anchor, so it needs no overlapping second post or plate.
+  const sides=[{axis:'x',at:bay.maxX,lo:bay.minZ+.2175,hi:bay.maxZ},{axis:'z',at:bay.maxZ,lo:bay.minX+.24,hi:bay.maxX}];
+  const plated=new Set();
   for(const s of sides) {
     const length=s.hi-s.lo,mid=(s.lo+s.hi)/2;
-    const at=(u,v)=>s.axis==='x'?[s.at-x,v,u+s.lo-z]:[u+s.lo-x,v,s.at-z];
+    const at=(u,v)=>s.axis==='x'?[s.at-x,v,Math.max(u+s.lo,s.lo)-z]:[u+s.lo-x,v,s.at-z];
     for(const u of [s.lo,s.hi]) {
+      if(s.axis==='x'&&u===s.lo)continue;
       const px=s.axis==='x'?s.at:u,pz=s.axis==='x'?u:s.at;
+      const key=`${px.toFixed(4)},${pz.toFixed(4)}`;
+      if(plated.has(key))continue;
+      plated.add(key);
       box(.09,INFIRMARY_FENCE.height,.09,px,INFIRMARY_FENCE.height/2,pz);
-      box(.24,.035,.24,px,.026,pz,root);
+      box(.24,.035,.24,px,.0175,pz,root);
     }
     for(const y of [.16,INFIRMARY_FENCE.height-.12]) box(s.axis==='x'?.065:length,.075,s.axis==='x'?length:.065,s.axis==='x'?s.at:mid,y,s.axis==='x'?mid:s.at);
     // Thin diamond strips are real geometry: no alpha texture or distant mip popping.

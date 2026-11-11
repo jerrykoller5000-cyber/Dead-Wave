@@ -1,13 +1,13 @@
 # Claude 2
 
-state: active
+state: idle
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: CB-303 fakethree: TubeGeometry follows its path (Frenet frames) for Claude 3's tcc341
-touching: tools/tests/fakethree.mjs (TubeGeometry)
-since: 2026-11-11T04:06Z
-next: CB-243 The full suite on the current tree, reds by owner (in your c
+task: —
+touching: —
+since: 2026-11-11T06:02Z
+next: CB-290 J126 rule 3 (Jerry, 10 Nov, standing, D-138): "No part of th
 blocked-on: —
-last-report: handoffs/2026-11-11-claude2-CB-299.md
+last-report: handoffs/2026-11-11-claude2-CB-302.md
 
 ## Notes
 

@@ -1,15 +1,19 @@
 # ChatGPT
 
-state: active
+state: idle
 model: GPT-6.1 Sol
-task: GP-20086 Director follow-up: settle Training guardian corpse arm and leg
-touching: game/training-zombie-collision.js (Training corpse settle), review/GP-20086/, handoffs/2026-11-11-chatgpt-GP-20086-followup.md
-since: 2026-11-11T04:44Z
-next: GP-20087 GP-20085's other half: the third-person camera and the dive
+task: —
+touching: —
+since: 2026-11-11T06:09Z
+next: —
 blocked-on: —
-last-report: handoffs/2026-11-11-chatgpt-GP-20087-paused.md
+last-report: handoffs/2026-11-11-chatgpt-GP-20090.md
 
 ## Notes
+
+GP-20090 DONE: current-tree CB-243 batch 82/12; only my copy red t212 fixed and retested 18/0. t138 and t262/tcl301 are Claude 2 test-fixture requests; t180 is Claude 2 index rack, t318/t320 routed to Director world/core. `handoffs/2026-11-11-chatgpt-GP-20090.md`. Full suite stays coordinated in Claude cloud.
+
+GP-20088 DONE/REVIEW: four Training props seated/cleared, targeted 20/0 and RTX 5080 views. Exact AG-292 camera retakes requested from Antigravity; current world-grid change had already removed original perimeter wall bleed. `handoffs/2026-11-11-chatgpt-GP-20088.md`.
 
 GP-20069 DONE: CIF wearables and repair live; kiosk wearables removed. Shared-slot Hunt 17/0, Training 5/0, legacy t101/t103/t285 36/0; AG-268 RTX 5080 visual 51/51 and six UI scores 5/5. Handoff handoffs/2026-11-09-chatgpt-GP-20069.md; full suite belongs to Grokbot GB-324. Playwright unavailable locally; CDP proof recorded.
 

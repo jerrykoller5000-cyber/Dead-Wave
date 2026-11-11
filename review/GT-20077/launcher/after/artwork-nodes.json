@@ -1,0 +1,25 @@
+{
+  "controls": {
+    "trigger": {
+      "name": "controls-trigger",
+      "meshes": {
+        "world": 1,
+        "eye": 1
+      }
+    }
+  },
+  "triggerPin": [
+    0,
+    -0.06,
+    0.016
+  ],
+  "heatParts": {
+    "barrel": {
+      "name": "heatParts-barrel",
+      "meshes": {
+        "world": 1,
+        "eye": 1
+      }
+    }
+  }
+}

@@ -107,7 +107,7 @@ function shotgunShell(THREE, load, spent) {
 export function roundGeometry(THREE, weapon, load) {
   if (weapon === 'shotgun') return shotgunShell(THREE, load, false);
   if (weapon === 'aa12') return shotgunShell(THREE, 'birdshot', false);
-  if (weapon === 'ak' || weapon === 'revolver' || weapon === 'uzi' || weapon === 'sniper') return metallicCartridge(THREE, weapon, true);
+  if (weapon === 'ak' || weapon === 'revolver' || weapon === 'uzi' || weapon === 'sniper' || weapon === 'minigun') return metallicCartridge(THREE, weapon, true);
   return null;
 }
 

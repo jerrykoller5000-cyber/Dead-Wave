@@ -1468,6 +1468,7 @@
     import { createTrainingInfirmary } from './game/training-infirmary.js'; // GP-19882
     import { createTrainingArmoryCollision } from './game/training-armory-collision.js'; // GP-19895
     import { createTrainingStationCollision } from './game/training-station-collision.js'; // GP-20085
+    import { createTrainingCameraCollision } from './game/training-camera-collision.js'; // GP-20087
     import { createTrainingZombieCollision, trainingZombieClearance } from './game/training-zombie-collision.js'; // GP-20086
     import { createTrainingInfirmaryFence } from './game/training-infirmary-fence.js'; // GP-19893
     import { createTrainingRelease } from './ui/training-release.js';   // GP-191
@@ -15856,6 +15857,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     for (const mat of [dustMat, splashMat, emberMat]) {
       const mesh = new THREE.InstancedMesh(moteGeo, mat, MAX_MOTES);
       mesh.name = 'motes-instanced'; mesh.frustumCulled = false; mesh.userData.noCull = true; mesh.visible = false;
+      if (mat === emberMat) mesh.renderOrder = 4;   // AG-296 (J120): flying embers sort cleanly over decals (1), wisps (2), and flame body (3)
       for (let i = 0; i < MAX_MOTES; i++) mesh.setMatrixAt(i, _moZero);
       scene.add(mesh);
       _moteInst.set(mat, { mesh, n: 0, drawn: 0 });
@@ -29657,10 +29659,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
     // Each frame: the rounds that moved, into and out of the counts; stopped by a shot, R, a weapon change or the hands' leaving.
     function updateAmmoSwitch(dt) {
-      if (!ammoSwitch.active()) return;
+      if (!ammoSwitch.active()) { if (unloadPumpPosed) poseUnloadPump('shotgun'); return; }   // CB-302: a change stopped elsewhere (R) puts the forend back
       const g = ammoSwitchGun;
       if (g !== currentWeapon || unarmed || reloading || vault || mortarMounted || gameOver || (fireHeld && (ammoByWeapon[g] | 0) > 0)) {
-        ammoSwitch.cancel(); ammoSwitchGun = null; syncReloadShell(g); updateAmmoHud(); return;
+        ammoSwitch.cancel(); ammoSwitchGun = null; syncReloadShell(g); poseUnloadPump(g); updateAmmoHud(); return;
       }
       const st0 = ammoSwitch.state();
       const r = ammoSwitch.step(dt);
@@ -29681,7 +29683,26 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         AudioSys.reloadDone();
       }
       syncReloadShell(g);
+      poseUnloadPump(g);   // CB-302
       if (r.unload || r.load || r.done) updateAmmoHud();
+    }
+    // CB-302 (Claude 5's CE-3): each shell out of the tube is worked out through the action: the forend back and home once a
+    // shell on his own gun (the view's mirror carries it in first person), the bolt with it; at base otherwise.
+    let unloadPumpPosed = false;
+    function poseUnloadPump(g) {
+      if (g !== 'shotgun') return;
+      const gun = weaponMeshes && weaponMeshes.shotgun, pump = gun && gun.userData.pump, bp = gun && gun.userData.basePumpPos;
+      if (!pump || !bp) return;
+      const sw = ammoSwitch.active() && ammoSwitchGun === 'shotgun' ? ammoSwitch.state() : null;
+      if (sw && sw.phase === 'unload' && !reloading && !shotgunPumping) {
+        const u = sw.u, amt = u < 0.34 ? _seg(u, 0.04, 0.34) : u < 0.46 ? 1 : 1 - _seg(u, 0.46, 0.80);
+        pump.position.set(bp.x, bp.y, bp.z - 0.12 * amt);
+        if (gun.userData.pumpPoseHook) gun.userData.pumpPoseHook();
+        unloadPumpPosed = true;
+      } else if (unloadPumpPosed) {
+        unloadPumpPosed = false;
+        if (!shotgunPumping) { pump.position.copy(bp); if (gun.userData.pumpPoseHook) gun.userData.pumpPoseHook(); }
+      }
     }
     // GT-20080: the shell the hand holds is the one going in or coming out (the type in the gun otherwise).
     function syncReloadShell(g) {
@@ -55161,53 +55182,242 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // front shadows the ones behind it; burning zombies still spread fire by touch.
     // Damage per zombie is capped at one hit per weapon tick, which is the rate the old
     // cone dealt it, so the balance is unchanged for anything standing in the stream.
-    const FLAME_EMIT_RATE = 72;           // blobs per second while the trigger is held
+    const FLAME_EMIT_RATE = 88;           // blobs per second while the trigger is held
     const FLAME_SPEED = 17, FLAME_DRAG = 2.4;
-    const MAX_FLAME = 140;
-    const flameGeo = new THREE.IcosahedronGeometry(0.1, 1);   // AG-279 (J120): smooth organic flame blobs (80 faces) instead of chunky 20-face crystal
+    const MAX_FLAME = 165;
+    const BURN_IGNITE_S = 0.75, BURN_DURATION_S = 2.8;   // AG-296 / GP-20089 (J120): sustained stream exposure ignites target to ash
+
+    // AG-296 (J120): 6-fin 3D volumetric flame-tongue geometry (4 axial tongues around +Z + 2 canted cross-rosette fins = 24 verts / 12 tris,
+    // 6.6x lighter than 80-tri icosahedron, rich cross-section down the barrel in 1P and organic licking tongues from every angle).
+    const flameGeo = (() => {
+      const pos = [], nrm = [], uvs = [], idx = [];
+      let v0 = 0;
+      const pushQuad = (ax, ay, az, bx, by, bz, cx, cy, cz, dx, dy, dz, u0, vA, u1, vB) => {
+        pos.push(ax, ay, az, bx, by, bz, cx, cy, cz, dx, dy, dz);
+        const ux = bx - ax, uy = by - ay, uz = bz - az, vx = dx - ax, vy = dy - ay, vz = dz - az;
+        let nx = uy * vz - uz * vy, ny = uz * vx - ux * vz, nz = ux * vy - uy * vx;
+        const nl = Math.hypot(nx, ny, nz) || 1; nx /= nl; ny /= nl; nz /= nl;
+        for (let k = 0; k < 4; k++) nrm.push(nx, ny, nz);
+        uvs.push(u0, vA, u1, vA, u1, vB, u0, vB);
+        idx.push(v0, v0 + 1, v0 + 2, v0, v0 + 2, v0 + 3);
+        v0 += 4;
+      };
+      const r = 0.115, z0 = -0.135, z1 = 0.165;
+      for (let k = 0; k < 4; k++) {
+        const a = (k * Math.PI) / 4, ca = Math.cos(a) * r, sa = Math.sin(a) * r;
+        pushQuad(-ca, -sa, z0, ca, sa, z0, ca, sa, z1, -ca, -sa, z1, 0, 0, 1, 1);
+      }
+      // Two canted cross-fins so looking straight down the stream in 1P shows a turbulent fiery volume, never edge-on planes
+      const cr = 0.112, cz = 0.055;
+      pushQuad(-cr, -cr * 0.85, -cz, cr, -cr * 0.85, cz, cr, cr * 0.85, cz, -cr, cr * 0.85, -cz, 0.06, 0.08, 0.94, 0.88);
+      pushQuad(-cr * 0.85, cr, -cz, cr * 0.85, cr, cz, cr * 0.85, -cr, cz, -cr * 0.85, -cr, -cz, 0.06, 0.08, 0.94, 0.88);
+      const g = new THREE.BufferGeometry();
+      g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+      g.setAttribute('normal', new THREE.Float32BufferAttribute(nrm, 3));
+      g.setAttribute('uv', new THREE.Float32BufferAttribute(uvs, 2));
+      g.setIndex(idx);
+      g.parameters = { radius: 0.1, detail: 1 };
+      return g;
+    })();
+
+    // Campfire & lighter shared materials (kept intact for campFlameGeo & lighter)
     const flameCoreMat = glowMat(new THREE.MeshBasicMaterial({ color: 0xfff1b8, transparent: true, opacity: 0.95, depthWrite: false }), 2.6);
     const flameHotMat = glowMat(new THREE.MeshBasicMaterial({ color: 0xffa23a, transparent: true, opacity: 0.9, depthWrite: false }), 2.3);
     const flameMat = glowMat(new THREE.MeshBasicMaterial({ color: 0xff5214, transparent: true, opacity: 0.78, depthWrite: false }), 1.9);
-    const flameSmokeMat = new THREE.MeshBasicMaterial({ color: 0x2b2522, transparent: true, opacity: 0.38, depthWrite: false });
-    const flameSteamMat = new THREE.MeshBasicMaterial({ color: 0xd8dde0, transparent: true, opacity: 0.42, depthWrite: false });
-    // GB-233 ruling 5 / AG-279 (J120): brilliant incandescent core at nozzle, cooling through orange and deep red into smoke.
-    const flameStreamHotMat = glowMat(new THREE.MeshBasicMaterial({ color: 0xff8a24, transparent: true, opacity: 0.88, depthWrite: false }), 1.5);
-    const flameEdgeMat = new THREE.MeshBasicMaterial({ color: 0x3a2116, transparent: true, opacity: 0.5, depthWrite: false });
-    const FLAME_STAGES = [[0.06, flameCoreMat], [0.38, flameStreamHotMat], [0.65, flameMat], [2, flameSmokeMat]];
-    const FLAME_EDGE_SHARE = 0.3;
-    const FLAME_STEAM = 4; // stage index for a blob that hit water
+
+    // AG-296 (J120): procedural multi-tongue flame & soot textures so stream tongues lick, curl, and thin with crisp contrast
+    // against both bright sunlit white Training Ground tiles (Noon/Overcast) and dark Night shadow.
+    function makeStreamFlameTex(mode, seed0) {
+      if (typeof document === 'undefined') return null;
+      const cv = document.createElement('canvas'); cv.width = cv.height = 128;
+      const c = cv.getContext('2d');
+      if (!c) return null;
+      let s = seed0 >>> 0;
+      const rnd = () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; };
+      c.clearRect(0, 0, 128, 128);
+      if (mode === 'smoke' || mode === 'steam') {
+        const col = mode === 'steam' ? [216, 224, 228] : [34, 27, 24];
+        for (let i = 0; i < 14; i++) {
+          const x = 38 + (rnd() - 0.5) * 44, y = 38 + (rnd() - 0.5) * 44, r = 16 + rnd() * 24;
+          const g = c.createRadialGradient(x, y, 2, x, y, r);
+          const a = (mode === 'steam' ? 0.22 : 0.17) * (0.6 + rnd() * 0.5);
+          g.addColorStop(0, `rgba(${col[0]},${col[1]},${col[2]},${a.toFixed(3)})`);
+          g.addColorStop(0.65, `rgba(${col[0]},${col[1]},${col[2]},${(a * 0.42).toFixed(3)})`);
+          g.addColorStop(1, `rgba(${col[0]},${col[1]},${col[2]},0)`);
+          c.fillStyle = g; c.beginPath(); c.arc(x, y, r, 0, Math.PI * 2); c.fill();
+        }
+      } else {
+        const pal = mode === 'core'
+          ? { rim: [165, 52, 8, 0.34], outer: [255, 136, 24, 0.88], mid: [255, 222, 108, 0.96], heart: [255, 252, 232, 1] }
+          : mode === 'hot'
+          ? { rim: [92, 26, 6, 0.42], outer: [248, 78, 12, 0.90], mid: [255, 168, 38, 0.95], heart: [255, 242, 176, 0.98] }
+          : mode === 'mid'
+          ? { rim: [58, 18, 8, 0.48], outer: [214, 42, 8, 0.88], mid: [255, 114, 18, 0.92], heart: [255, 198, 76, 0.94] }
+          : mode === 'tip'
+          ? { rim: [38, 14, 9, 0.46], outer: [168, 28, 6, 0.78], mid: [238, 78, 12, 0.84], heart: [255, 156, 38, 0.86] }
+          : { rim: [26, 14, 10, 0.50], outer: [118, 26, 8, 0.72], mid: [196, 58, 12, 0.76], heart: [244, 118, 24, 0.72] };
+
+        // Subtle warm soot-heat outer sheath so bright orange fire pops cleanly against white Noon walls
+        const bg = c.createRadialGradient(64, 68, 6, 64, 62, 56);
+        bg.addColorStop(0, `rgba(${pal.outer[0]},${pal.outer[1]},${pal.outer[2]},${(pal.outer[3] * 0.65).toFixed(2)})`);
+        bg.addColorStop(0.62, `rgba(${pal.rim[0]},${pal.rim[1]},${pal.rim[2]},${pal.rim[3].toFixed(2)})`);
+        bg.addColorStop(1, 'rgba(24,10,6,0)');
+        c.fillStyle = bg; c.fillRect(0, 0, 128, 128);
+
+        // Licking, curling flame tongues reaching toward v=1 (top of canvas = +Z forward tip)
+        const tongues = mode === 'tip' || mode === 'edge' ? 7 : 6;
+        for (let i = 0; i < tongues; i++) {
+          const u = (i + 0.5) / tongues;
+          const bx = 26 + u * 76 + (rnd() - 0.5) * 10;
+          const by = 104 - rnd() * 14;
+          const tipX = 64 + (bx - 64) * (0.45 + rnd() * 0.45) + (rnd() - 0.5) * 22;
+          const tipY = 6 + rnd() * (mode === 'core' ? 18 : 14);
+          const w = (mode === 'tip' ? 9 : 13) + rnd() * 9;
+          const ctrlX = (bx + tipX) * 0.5 + (rnd() - 0.5) * 24;
+          const ctrlY = (by + tipY) * 0.5;
+          const tg = c.createLinearGradient(bx, by, tipX, tipY);
+          tg.addColorStop(0, `rgba(${pal.outer[0]},${pal.outer[1]},${pal.outer[2]},0)`);
+          tg.addColorStop(0.22, `rgba(${pal.mid[0]},${pal.mid[1]},${pal.mid[2]},${pal.mid[3].toFixed(2)})`);
+          tg.addColorStop(0.62, `rgba(${pal.outer[0]},${pal.outer[1]},${pal.outer[2]},${(pal.outer[3] * 0.88).toFixed(2)})`);
+          tg.addColorStop(0.90, `rgba(${pal.rim[0]},${pal.rim[1]},${pal.rim[2]},${(pal.rim[3] * 0.7).toFixed(2)})`);
+          tg.addColorStop(1, 'rgba(30,10,4,0)');
+          c.fillStyle = tg;
+          c.beginPath();
+          c.moveTo(bx - w, by);
+          c.quadraticCurveTo(ctrlX - w * 0.65, ctrlY, tipX, tipY);
+          c.quadraticCurveTo(ctrlX + w * 0.65, ctrlY, bx + w, by);
+          c.closePath();
+          c.fill();
+        }
+        // Incandescent turbulent heart
+        const hg = c.createRadialGradient(64, 68, 3, 64, 64, mode === 'tip' ? 26 : 34);
+        hg.addColorStop(0, `rgba(${pal.heart[0]},${pal.heart[1]},${pal.heart[2]},${pal.heart[3].toFixed(2)})`);
+        hg.addColorStop(0.45, `rgba(${pal.mid[0]},${pal.mid[1]},${pal.mid[2]},${(pal.mid[3] * 0.85).toFixed(2)})`);
+        hg.addColorStop(0.82, `rgba(${pal.outer[0]},${pal.outer[1]},${pal.outer[2]},${(pal.outer[3] * 0.38).toFixed(2)})`);
+        hg.addColorStop(1, `rgba(${pal.outer[0]},${pal.outer[1]},${pal.outer[2]},0)`);
+        c.fillStyle = hg; c.beginPath(); c.ellipse(64, 66, mode === 'tip' ? 24 : 31, mode === 'tip' ? 32 : 38, 0, 0, Math.PI * 2); c.fill();
+
+        // Crisp glowing ember flecks near the forward licking tips
+        if (mode === 'hot' || mode === 'mid' || mode === 'tip') {
+          for (let i = 0; i < 9; i++) {
+            const sx = 24 + rnd() * 80, sy = 10 + rnd() * 36, sr = 1.1 + rnd() * 2.1;
+            c.fillStyle = `rgba(255,${205 + ((rnd() * 48) | 0)},${90 + ((rnd() * 90) | 0)},${(0.65 + rnd() * 0.32).toFixed(2)})`;
+            c.beginPath(); c.arc(sx, sy, sr, 0, Math.PI * 2); c.fill();
+          }
+        }
+      }
+      const tex = new THREE.CanvasTexture(cv);
+      if (THREE.SRGBColorSpace) tex.colorSpace = THREE.SRGBColorSpace;
+      return tex;
+    }
+
+    const _fTexCore = makeStreamFlameTex('core', 0x41a711);
+    const _fTexHot = makeStreamFlameTex('hot', 0x41a722);
+    const _fTexMid = makeStreamFlameTex('mid', 0x41a733);
+    const _fTexTip = makeStreamFlameTex('tip', 0x41a744);
+    const _fTexEdge = makeStreamFlameTex('edge', 0x41a755);
+    const _fTexSmoke = makeStreamFlameTex('smoke', 0x41a766);
+    const _fTexSteam = makeStreamFlameTex('steam', 0x41a777);
+
+    const flameStreamCoreMat = glowMat(new THREE.MeshBasicMaterial({ map: _fTexCore, color: 0xffffff, transparent: true, opacity: 0.97, depthWrite: false, side: THREE.DoubleSide }), 2.45);
+    const flameStreamHotMat = glowMat(new THREE.MeshBasicMaterial({ map: _fTexHot, color: 0xffffff, transparent: true, opacity: 0.93, depthWrite: false, side: THREE.DoubleSide }), 1.95);
+    const flameStreamMidMat = glowMat(new THREE.MeshBasicMaterial({ map: _fTexMid, color: 0xffffff, transparent: true, opacity: 0.88, depthWrite: false, side: THREE.DoubleSide }), 1.6);
+    const flameStreamTipMat = glowMat(new THREE.MeshBasicMaterial({ map: _fTexTip, color: 0xffffff, transparent: true, opacity: 0.80, depthWrite: false, side: THREE.DoubleSide }), 1.35);
+    const flameEdgeMat = glowMat(new THREE.MeshBasicMaterial({ map: _fTexEdge, color: 0xffffff, transparent: true, opacity: 0.72, depthWrite: false, side: THREE.DoubleSide }), 1.15);
+    const flameSmokeMat = new THREE.MeshBasicMaterial({ map: _fTexSmoke, color: 0xffffff, transparent: true, opacity: 0.30, depthWrite: false, side: THREE.DoubleSide });
+    const flameSteamMat = new THREE.MeshBasicMaterial({ map: _fTexSteam, color: 0xffffff, transparent: true, opacity: 0.44, depthWrite: false, side: THREE.DoubleSide });
+
+    const FLAME_STAGES = [
+      [0.09, flameStreamCoreMat],
+      [0.42, flameStreamHotMat],
+      [0.72, flameStreamMidMat],
+      [0.92, flameStreamTipMat],
+      [2, flameSmokeMat]
+    ];
+    const FLAME_EDGE_SHARE = 0.26;
+    const FLAME_STEAM = 5; // stage index for a blob that hit water
     const flameParticles = [];
     const _flameNear = [];
-    const _flameDir = new THREE.Vector3();
+    const _flameDir = new THREE.Vector3(), _flameRight = new THREE.Vector3();
     const _flameOrigin = new THREE.Vector3(), _flameAim = new THREE.Vector3();
     let flameEmitAcc = 0, flameClock = 0, flameGroundCd = 0;
-    // Nozzle flare: a flickering cone of flame at the tip while the trigger is held.
-    // Built here rather than in makeFlamer(), which runs before these materials exist.
+
+    // Sustained-hit target ignition state (AG-296 / GP-20089: 0.75 s stream contact ignites standing target to ash)
+    const _targetFlameHeat = new Float32Array(16);
+    const _targetFlameGrace = new Float32Array(16);
+    const _targetFlamePt = Array.from({ length: 16 }, () => ({ x: 0, y: 0, z: 0, sz: 0 }));
+    function resetTargetFlameHeat() {
+      _targetFlameHeat.fill(0);
+      _targetFlameGrace.fill(0);
+    }
+
+    // Nozzle flare on 3P weapon + world-space incandescent nozzle core tongue (visible in both 1P viewmodel and 3P)
+    const _nozzleJet = new THREE.Mesh(flameGeo, flameStreamCoreMat);
+    _nozzleJet.name = 'flamer-nozzle-jet';
+    _nozzleJet.visible = false;
+    _nozzleJet.frustumCulled = false;
+    _nozzleJet.renderOrder = 3;
+    _nozzleJet.userData.effectPooled = true;
+    scene.add(_nozzleJet);
     {
-      const flare = new THREE.Mesh(new THREE.ConeGeometry(0.075, 0.34, 8, 1, true), flameStreamHotMat);   // GB-233 r5
+      const flare = new THREE.Mesh(new THREE.ConeGeometry(0.072, 0.36, 8, 1, true), flameStreamCoreMat);   // GB-233 r5
       flare.rotation.x = Math.PI / 2; // cone tip along the barrel (+z)
       flare.position.set(0, 0.05, 0.95);
       flare.visible = false;
-      flare.renderOrder = 3;   // AG-279: render over decals and wear
+      flare.renderOrder = 3;   // AG-279 / AG-296: render over decals and wear
       weaponMeshes.flamer.add(flare);
       weaponMeshes.flamer.userData.flare = flare;
     }
 
+    function prepareFlameWarmup() {
+      const warmMeshes = [];
+      const mats = [flameStreamCoreMat, flameStreamHotMat, flameStreamMidMat, flameStreamTipMat, flameEdgeMat, flameSmokeMat, flameSteamMat];
+      const cx = camera.position.x, cy = camera.position.y - 0.5, cz = camera.position.z;
+      for (const m of mats) {
+        const mesh = acquireEffectMesh(flameGeo, m, MAX_FLAME);
+        mesh.renderOrder = 3;
+        mesh.frustumCulled = false;
+        mesh.position.set(cx, cy, cz);
+        mesh.scale.setScalar(0.02);
+        warmMeshes.push(mesh);
+      }
+      const jetWas = _nozzleJet.visible;
+      _nozzleJet.visible = true;
+      _nozzleJet.position.set(cx, cy, cz);
+      _nozzleJet.scale.setScalar(0.02);
+      return () => {
+        for (const mesh of warmMeshes) { mesh.frustumCulled = true; releaseEffectMesh(mesh); }
+        _nozzleJet.visible = jetWas;
+      };
+    }
+
     function spawnFlameBlob(ox, oy, oz, dir, lead) {
       if (flameParticles.length >= MAX_FLAME) return;
-      // A narrow random cone around the aim.
-      const edge = Math.random() < FLAME_EDGE_SHARE, sw = edge ? 1.7 : 1;   // GB-233 r5: the rope's sooty outside
-      const sx = (Math.random() - 0.5) * 0.2 * sw, sy = (Math.random() - 0.5) * 0.14 * sw, sz = (Math.random() - 0.5) * 0.2 * sw;
-      const spd = FLAME_SPEED * (0.88 + Math.random() * 0.24);
+      // Cohesive pressurized rope at the nozzle with coherent helical wave phase so the stream licks and curls as one body
+      const edge = Math.random() < FLAME_EDGE_SHARE;
+      const cone = edge ? 0.125 : 0.064;
+      const phase = flameClock * 11.8 + (Math.random() - 0.5) * 0.55;
+      const sx = (Math.random() - 0.5) * cone + Math.cos(phase) * 0.022;
+      const sy = (Math.random() - 0.5) * cone * 0.72 + Math.sin(phase) * 0.018;
+      const sz = (Math.random() - 0.5) * cone + Math.sin(phase * 0.7) * 0.022;
+      const baseSpd = training.active ? FLAME_SPEED * 1.46 : FLAME_SPEED;
+      const spd = baseSpd * (0.90 + Math.random() * 0.22);
       const p = {
-        mesh: acquireEffectMesh(flameGeo, flameStreamHotMat, MAX_FLAME), stage: 0,
-        x: ox, y: oy, z: oz,rangePacket:rangeShotPacket,
+        mesh: acquireEffectMesh(flameGeo, flameStreamCoreMat, MAX_FLAME), stage: 0,
+        x: ox, y: oy, z: oz, rangePacket: rangeShotPacket,
         vx: (dir.x + sx) * spd + velX, vy: (dir.y + sy) * spd, vz: (dir.z + sz) * spd + velZ,
-        age: 0, life: 0.72 + Math.random() * 0.38, size: 1.5 + Math.random() * 0.8,
-        spin: (Math.random() - 0.5) * 9, grounded: false, quenched: false, edge
+        age: 0, life: (training.active ? 0.78 : 0.70) + Math.random() * 0.36,
+        size: edge ? (1.26 + Math.random() * 0.42) : (1.14 + Math.random() * 0.48),
+        spin: (Math.random() - 0.5) * 8.5,
+        phase, curl: (Math.random() < 0.5 ? -1 : 1) * (0.75 + Math.random() * 0.55),
+        roll: Math.random() * Math.PI * 2,
+        heavyFuel: !edge && Math.random() < 0.28,
+        sootTip: edge && Math.random() < 0.22,
+        charred: false, charSlide: 0,
+        grounded: false, quenched: false, edge
       };
-      p.mesh.renderOrder = 3;   // AG-279: render over decals, bullet holes, and char (renderOrder 1)
-      p.mesh.rotation.set(Math.random() * 6.3, Math.random() * 6.3, 0);
+      p.mesh.renderOrder = 3;   // AG-279 / AG-296: render strictly over decals (1) and barrel wisps (2)
+      p.mesh.rotation.set(0, 0, p.roll);
       flameParticles.push(p);
       // Spread emission across the frame so a slow frame doesn't fire one clump.
       stepFlameBlob(p, lead);
@@ -55216,12 +55426,20 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     function stepFlameBlob(p, dt) {
       p.age += dt;
       const t = p.age / p.life;
-      const k = Math.exp(-FLAME_DRAG * dt);
-      p.vx *= k; p.vz *= k; p.vy *= Math.exp(-FLAME_DRAG * 0.6 * dt);
-      // Liquid fuel sags; burning gas rises; turbulence grows as it slows.
-      p.vy += (t < 0.28 ? -3.6 : 2.8 + t * 1.5) * dt;
-      const turb = 5 * t * dt;
-      p.vx += (Math.random() - 0.5) * turb; p.vz += (Math.random() - 0.5) * turb;
+      const drag = training.active ? FLAME_DRAG * 0.74 : FLAME_DRAG;
+      const k = Math.exp(-drag * dt);
+      p.vx *= k; p.vz *= k; p.vy *= Math.exp(-drag * 0.58 * dt);
+      // Heavy liquid fuel droplets arc onto the floor to scorch it; volatilized flame tongues curl upward at the tips.
+      p.vy += (p.heavyFuel ? -4.8 : (t < 0.26 ? -3.2 : 2.9 + t * 2.7)) * dt;
+      // Coherent helical curl + fine tip lick so tongues whip and thin instead of puffing into static balls
+      const hLen = Math.hypot(p.vx, p.vz) || 1;
+      const rx = -p.vz / hLen, rz = p.vx / hLen;
+      const curlWave = Math.sin(p.phase + p.age * 13.5) * p.curl * (1.4 + t * 3.8) * dt;
+      const liftWave = Math.cos(p.phase * 0.85 + p.age * 11.0) * p.curl * (0.9 + t * 2.2) * dt;
+      p.vx += rx * curlWave + (Math.random() - 0.5) * 2.2 * t * dt;
+      p.vz += rz * curlWave + (Math.random() - 0.5) * 2.2 * t * dt;
+      p.vy += liftWave;
+      p.roll += p.spin * dt;
       p.x += p.vx * dt; p.y += p.vy * dt; p.z += p.vz * dt;
     }
 
@@ -55229,6 +55447,40 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       for (const p of flameParticles) releaseEffectMesh(p.mesh);
       flameParticles.length = 0;
       flameEmitAcc = 0;
+      _nozzleJet.visible = false;
+    }
+
+    function stepTargetFlameHeat(dt) {
+      if (!training.active || !training.tg) return;
+      const targets = training.tg.targets;
+      const n = Math.min(_targetFlameHeat.length, targets.length);
+      for (let idx = 0; idx < n; idx++) {
+        const t = targets[idx];
+        if (!t || t.state !== 'up' || t.burned) {
+          _targetFlameHeat[idx] = 0;
+          _targetFlameGrace[idx] = 0;
+          continue;
+        }
+        if (_targetFlameGrace[idx] > 0) {
+          _targetFlameGrace[idx] = Math.max(0, _targetFlameGrace[idx] - dt);
+          _targetFlameHeat[idx] += dt;
+          if (_targetFlameHeat[idx] >= BURN_IGNITE_S) {
+            _targetFlameHeat[idx] = 0;
+            _targetFlameGrace[idx] = 0;
+            const pt = _targetFlamePt[idx];
+            if (rangeFeature?.owns()) {
+              if (training.wreck?.take(idx, 'burn')) {
+                t.hits = (t.hits || 0) + 1;
+                rangeFeature.burn?.(idx, { igniteS: BURN_IGNITE_S, burnS: BURN_DURATION_S });
+              }
+            } else {
+              trainingHitTarget(idx, pt, false, pt.sz, { kind: 'burn' });
+            }
+          }
+        } else if (_targetFlameHeat[idx] > 0) {
+          _targetFlameHeat[idx] = Math.max(0, _targetFlameHeat[idx] - 0.85 * dt);
+        }
+      }
     }
 
     function updateFlameStream(dt) {
@@ -55255,20 +55507,34 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           flameEmitAcc -= 1;
           spawnFlameBlob(o.x, o.y, o.z, dir, Math.random() * dt);
         }
+        // Incandescent blowtorch root right at the nozzle shroud (bridges muzzle to stream in both 1P and 3P)
+        _nozzleJet.visible = true;
+        const jLen = 2.1 + Math.sin(flameClock * 43) * 0.45 + Math.random() * 0.45;
+        const jWid = 0.82 + Math.cos(flameClock * 37) * 0.14 + Math.random() * 0.16;
+        _nozzleJet.position.set(o.x + dir.x * 0.22, o.y + dir.y * 0.22, o.z + dir.z * 0.22);
+        _nozzleJet.quaternion.setFromUnitVectors(AXIS_Z, dir);
+        _nozzleJet.rotateZ(flameClock * 19);
+        _nozzleJet.scale.set(jWid, jWid, jLen);
+        _nozzleJet.renderOrder = 3;
+
         // Both the nozzle and the stream draw from the existing fixed light pool.
-        // The near glow keeps the flamer visible before any fuel reaches the ground.
-        requestEffectLight(o.x, o.y, o.z, 0xffa13d, 1.25 + Math.random() * 0.25, 3.5);
-        requestEffectLight(o.x + dir.x * 2.2, o.y + dir.y * 2.2 + 0.3, o.z + dir.z * 2.2, 0xff8a30, 2.4 + Math.random() * 0.8, 10);
+        requestEffectLight(o.x, o.y, o.z, 0xffae48, 1.35 + Math.random() * 0.3, 3.8);
+        requestEffectLight(o.x + dir.x * 2.5, o.y + dir.y * 2.5 + 0.3, o.z + dir.z * 2.5, 0xff7e24, 2.5 + Math.random() * 0.8, 10.5);
         if (flare) {
-          flare.visible = true;
-          const w = 0.85 + Math.random() * 0.35;
-          flare.scale.set(w, 0.7 + Math.random() * 0.7, w); // local y is the cone's length
+          flare.visible = !viewFlame;
+          const w = 0.82 + Math.random() * 0.32;
+          flare.scale.set(w, 0.75 + Math.random() * 0.65, w);
         }
       } else {
         flameEmitAcc = 0;
+        _nozzleJet.visible = false;
         if (flare) flare.visible = false;
       }
-      if (!flameParticles.length) return;
+
+      if (!flameParticles.length) {
+        stepTargetFlameHeat(dt);
+        return;
+      }
 
       // Zombies close enough to be touched this frame, gathered once.
       _flameNear.length = 0;
@@ -55287,20 +55553,50 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         const t = p.age / p.life;
         if (t >= 1) { releaseEffectMesh(p.mesh); flameParticles.splice(i, 1); continue; }
 
-        // AG-279 (J120): flames collide with Training Ground geometry, leave black char marks, and score targets
+        // AG-279 / AG-296 (J120): flames collide with Training Ground geometry, leave black carbon char marks,
+        // shed hot sparks on splash, and ignite targets after sustained 0.75 s exposure.
         if (training.active && training.tg && !p.quenched) {
           const tHit = traceTraining(training.tg, rangePrev, p);
           if (tHit) {
-            p.x = tHit.point.x; p.y = tHit.point.y; p.z = tHit.point.z;
-            if (!tHit.solid.securityDoor) training.char?.add(tHit);
+            const slideStep = Math.hypot(tHit.point.x - rangePrev.x, tHit.point.y - rangePrev.y, tHit.point.z - rangePrev.z);
+            p.x = tHit.point.x + tHit.normal.x * 0.03;
+            p.y = tHit.point.y + tHit.normal.y * 0.03;
+            p.z = tHit.point.z + tHit.normal.z * 0.03;
+            if (!tHit.solid.securityDoor) {
+              if (!p.charred) {
+                p.charred = true;
+                const cSize = tHit.solid.target != null ? (0.34 + Math.random() * 0.18) : (0.48 + Math.random() * 0.34);
+                training.char?.add({ ...tHit, size: cSize }, tHit.solid.target != null ? 0.82 : 0.92);
+                if (Math.random() < 0.38) {
+                  spawnMote(p.x, p.y + 0.03, p.z, emberMat, {
+                    vx: tHit.normal.x * 1.4 + (Math.random() - 0.5) * 2.2,
+                    vy: 1.4 + Math.random() * 2.4 + Math.max(0, tHit.normal.y) * 0.8,
+                    vz: tHit.normal.z * 1.4 + (Math.random() - 0.5) * 2.2,
+                    grav: -0.9, drag: 1.5, life: 0.28 + Math.random() * 0.34,
+                    scale: 0.08 + Math.random() * 0.12
+                  });
+                }
+              } else {
+                p.charSlide += slideStep;
+                if (p.charSlide > 0.44 && p.charSlide < 10) {
+                  p.charSlide = 99;
+                  training.char?.add({ ...tHit, size: 0.42 + Math.random() * 0.26 }, 0.72);
+                }
+              }
+            }
             const dot = p.vx * tHit.normal.x + p.vy * tHit.normal.y + p.vz * tHit.normal.z;
-            p.vx = (p.vx - 1.2 * dot * tHit.normal.x) * 0.45;
-            p.vy = (p.vy - 1.2 * dot * tHit.normal.y) * 0.45;
-            p.vz = (p.vz - 1.2 * dot * tHit.normal.z) * 0.45;
+            p.vx = (p.vx - 1.15 * dot * tHit.normal.x) * 0.46;
+            p.vy = (p.vy - 1.15 * dot * tHit.normal.y) * 0.46 + 0.35;
+            p.vz = (p.vz - 1.15 * dot * tHit.normal.z) * 0.46;
             p.grounded = true;
             if (tHit.solid.target != null) {
-              if (rangeFeature?.owns()) { rangeContacts.add(tHit.solid.target); rangeContactPacket = p.rangePacket; }
-              else trainingHitTarget(tHit.solid.target, tHit.point, false, rangePrev.z, { kind: 'burn' });   // CB-250 (J120): a flamed plate burns to ash
+              const idx = tHit.solid.target;
+              if (rangeFeature?.owns()) { rangeContacts.add(idx); rangeContactPacket = p.rangePacket; }
+              if (idx >= 0 && idx < _targetFlameGrace.length) {
+                _targetFlameGrace[idx] = 0.22;
+                const slot = _targetFlamePt[idx];
+                slot.x = tHit.point.x; slot.y = tHit.point.y; slot.z = tHit.point.z; slot.sz = rangePrev.z;
+              }
             }
           }
         }
@@ -55329,7 +55625,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           }
         }
 
-        if (!p.quenched && t < 0.55) {
+        // Outdoor trees only (skipping ~600 valley trees while inside the Training Ground saves ~1.5 ms/frame CPU)
+        if (!training.active && !p.quenched && t < 0.55) {
           for (const tree of trees) {
             if (!tree.alive || tree.falling || tree.burnT > 0) continue;
             const radius = p.y > tree.group.position.y + tree.canopyBottom ? tree.canopyRadius * 0.7 : tree.trunkRadius + 0.3;
@@ -55356,31 +55653,70 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           }
         }
 
-        // Colour by age: white-hot core, orange, deep red, then smoke - or steam off water.
+        // Buoyant glowing embers & heat peeling off the thinning outer flame tips (instanced emberMat, 0 extra draw calls)
+        if (!p.quenched && t > 0.36 && t < 0.90 && Math.random() < dt * (t > 0.58 ? 4.8 : 1.9)) {
+          spawnMote(
+            p.x + (Math.random() - 0.5) * 0.18,
+            p.y + 0.04 + Math.random() * 0.14,
+            p.z + (Math.random() - 0.5) * 0.18,
+            emberMat,
+            {
+              vx: p.vx * 0.20 + (Math.random() - 0.5) * 1.5,
+              vy: Math.max(1.2, p.vy * 0.35) + 1.2 + Math.random() * 2.2,
+              vz: p.vz * 0.20 + (Math.random() - 0.5) * 1.5,
+              grav: -1.1, drag: 1.55,
+              life: 0.26 + Math.random() * 0.36,
+              scale: 0.075 + Math.random() * 0.125
+            }
+          );
+        }
+
+        // Stage material: incandescent core -> roaring orange-gold -> deep crimson-orange -> curling flame tips (with sparse soft soot curls)
         let s = 0;
         if (p.quenched) s = FLAME_STEAM;
         else while (t > FLAME_STAGES[s][0]) s++;
         if (s !== p.stage) {
           p.stage = s;
-          p.mesh.material = s === FLAME_STEAM ? flameSteamMat : (p.edge ? (s === 0 ? flameStreamHotMat : (s < 3 ? flameEdgeMat : flameSmokeMat)) : FLAME_STAGES[s][1]);
+          if (s === FLAME_STEAM) p.mesh.material = flameSteamMat;
+          else if (s >= 4) p.mesh.material = p.sootTip ? flameSmokeMat : flameStreamTipMat;
+          else if (p.edge) p.mesh.material = s === 0 ? flameStreamHotMat : (s === 1 ? flameStreamMidMat : flameEdgeMat);
+          else p.mesh.material = FLAME_STAGES[s][1];
         }
-        p.mesh.renderOrder = 3;   // AG-279: transparent flames sort over renderOrder 1 decals, bullet holes, and char
+        p.mesh.renderOrder = 3;   // AG-279 / AG-296: transparent flames sort strictly over decals (1) & barrel wisps (2)
+
+        // Envelope: tight jet at nozzle, full roaring body in mid-flight, then THINS and stretches into licking upward-curled tips!
         const spd = Math.hypot(p.vx, p.vy, p.vz);
-        const grow = p.size * (0.3 + t * (s >= 3 ? 5 : 3.4));   // GB-233 r5: thin at the nozzle, widening (was 1 + t * 2.6/4.2)
-        const fade = t > 0.86 ? (1 - t) / 0.14 : 1;
-        // AG-279: high-velocity stream particles elongate along flight vector; transition to billowing spheres as drag slows them
-        if (!p.grounded && spd > 3.5 && t < 0.45) {
-          _flameDir.set(p.vx, p.vy, p.vz).normalize();
-          p.mesh.quaternion.setFromUnitVectors(AXIS_Z, _flameDir);
-          const stretch = Math.min(2.0, 1 + (spd - 3.5) * 0.08 * (1 - t / 0.45));
-          p.mesh.scale.set(grow * 0.88, grow * 0.88, grow * stretch);
+        let widthEnv;
+        if (p.quenched) {
+          widthEnv = (0.75 + t * 1.45) * (t > 0.82 ? (1 - t) / 0.18 : 1);
+        } else if (t <= 0.42) {
+          widthEnv = 0.36 + 1.28 * Math.sin((t / 0.42) * (Math.PI * 0.5));
         } else {
-          p.mesh.scale.setScalar(Math.max(0.01, grow * fade));
+          const u = (t - 0.42) / 0.58;
+          widthEnv = p.sootTip && t > 0.78
+            ? 0.52 * (1 - (t - 0.78) / 0.22)
+            : 1.64 * Math.pow(Math.max(0, 1 - u), 0.85) + 0.10 * (1 - u);
+        }
+        const lick = 1 + 0.16 * Math.sin(p.phase * 1.3 + p.age * 21);
+        const wScale = Math.max(0.02, p.size * widthEnv * lick);
+
+        if (spd > 0.65 && !p.quenched) {
+          _flameDir.set(p.vx / spd, p.vy / spd, p.vz / spd);
+          p.mesh.quaternion.setFromUnitVectors(AXIS_Z, _flameDir);
+          p.mesh.rotateZ(p.roll);
+          // Elongate along the flight/buoyancy vector so both the fast core AND the upward-curling tips read as licking tongues
+          const stretch = p.grounded
+            ? 1.15 + 0.35 * (1 - t)
+            : Math.min(2.45, 1.25 + spd * 0.055 + (t > 0.42 ? 0.55 * Math.sin(((t - 0.42) / 0.58) * Math.PI) : 0));
+          p.mesh.scale.set(wScale * 0.86, wScale * 0.86, Math.max(0.03, wScale * stretch));
+        } else {
+          p.mesh.scale.setScalar(wScale);
           p.mesh.rotation.y += p.spin * dt;
-          p.mesh.rotation.x += p.spin * 0.6 * dt;
+          p.mesh.rotation.z = p.roll;
         }
         p.mesh.position.set(p.x, p.y, p.z);
       }
+      stepTargetFlameHeat(dt);
       if(rangeContacts.size)rangeFeature.contact([...rangeContacts],dt,rangeContactPacket);
     }
     // (The glowing ember bed under a ground fire; its texture is built with the flames.)
@@ -63903,6 +64239,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (!training.stationCollision) training.stationCollision = createTrainingStationCollision(THREE, training.tg, training.copies);
       if (!training.infirmaryFence) training.infirmaryFence = createTrainingInfirmaryFence(THREE, training.tg, { onMotion: up => AudioSys.trainingCue(up ? 'fence-up' : 'fence-down') });
       training.infirmaryFence.reset();
+      if (!training.cameraCollision) training.cameraCollision = createTrainingCameraCollision(THREE, training.tg, training.stationCollision, training.copies.armory?.copy, () => training.infirmaryFence?.state().raised);
       if (!training.perimeter) training.perimeter = createTrainingPerimeter(THREE, training.tg);
       training.perimeter.reset();
       if (!training.zombieCollision) training.zombieCollision = createTrainingZombieCollision(training.tg, training.stationCollision, THREE, training.infirmaryFence);
@@ -63919,10 +64256,14 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       training.impacts.clear();
       if (!training.char) training.char = createTrainingChar(THREE, training.tg);
       training.char.clear();
-      if (!training.wreck) training.wreck = createTrainingWreck(THREE, training.tg, {   // CB-250
+      if (!training.wreck) training.wreck = createTrainingWreck(THREE, training.tg, {   // CB-250 / AG-296
         embers: (x, y, z, n, s) => spawnEmbers(x, y, z, n, s),
+        char: (h, s) => training.char?.add(h, s),
+        clearTargetMarks: (i) => { training.char?.clearTarget?.(i); },
         sound: (kind, x, y, z) => { const sa = sndAt(x, z, 40); if (kind === 'shatter') AudioSys.buildBreak('metal', sa.v * 0.9, sa.pan); else AudioSys.fireHiss(sa.v, sa.pan); },
       });
+      training.tg.wreck = training.wreck;
+      resetTargetFlameHeat();
       training.wreck.clear();   // a new visit: the plates are up and whole again
       const tg = training.tg;
       if (!tg.group.parent) scene.add(tg.group);
@@ -64035,6 +64376,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       renderer.setAnimationLoop(null);
       const restoreImpacts = training.impacts?.prepareWarmup();
       const restoreChar = training.char?.prepareWarmup();
+      const restoreWreck = training.wreck?.prepareWarmup?.();
+      const restoreFlame = prepareFlameWarmup();
       // CL-123 (GP-135): the shadow pass builds its own program for an instanced mesh, and the carried gear's
       // (magazines, shells, grenades, tanks: count 0 until he carries some) was built only on the first live frame
       // after the warm-up, once grantAllWeapons filled the pouches: two programs on first use. Lay out the carry for
@@ -64043,12 +64386,13 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const emptyInst = [];
       scene.traverse((o) => { if (o.isInstancedMesh && o.castShadow && o.count === 0 && o.instanceMatrix.count > 0) { o.count = 1; emptyInst.push(o); } });
       let done = false;
-      const finish = () => { if (done) return; done = true; restoreImpacts?.(); restoreChar?.(); for (const o of emptyInst) o.count = 0; renderer.setAnimationLoop(tick); for (const m of meshes) m.frustumCulled = true; if (!training.wake) b.classList.remove('on'); };
+      const finish = () => { if (done) return; done = true; restoreImpacts?.(); restoreChar?.(); restoreWreck?.(); restoreFlame?.(); for (const o of emptyInst) o.count = 0; renderer.setAnimationLoop(tick); for (const m of meshes) m.frustumCulled = true; if (!training.wake) b.classList.remove('on'); };
       Promise.resolve().then(() => renderer.compileAsync(scene, camera)).then(() => { warmFrame('training-impacts'); finish(); }, finish);
       setTimeout(finish, 10000);   // CL-118: a last resort only (a real GPU takes well under a second); without it a hung compile would freeze the game
     }
     function leaveTraining() {
       rangeFeature?.dispose();rangeFeature=null;rangeShotPacket=null;
+      resetTargetFlameHeat();
       clearSpiderWebs();
       enemyAbilities.clear();   // GP-179
       feralMotion.clear();   // GP-198
@@ -64331,6 +64675,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const p=localPlayer.position,lie=diveLie(dive,vy),S=_diveSolids;S.length=0;
       if(training.active&&training.tg){
         for(const s of training.tg.solids)if(s.target==null&&!s.floor)S.push(s);
+        if(training.cameraCollision)S.push(...training.cameraCollision.diveSolids);
       }else{
         const near=(x,z,r)=>Math.abs(x-p.x)<r+2&&Math.abs(z-p.z)<r+2;
         for(const s of worldSolids)if(near(s.x,s.z,s.radius))S.push({x:s.x,z:s.z,radius:s.radius,minY:s.y0,maxY:s.y1});
@@ -64380,11 +64725,15 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // chest bullseye 10, chest ring 5, the rest of the silhouette 2) times the lane (x1 at 8 m to x3 at 25 m); a blade or
     // a blast scores the plate. The string runs while he is on the range and is banked (the visit's best) when he walks
     // through to the build room or leaves.
-    function trainingHitTarget(index, point, precise = false, shooterZ = null, wreck = null) {   // CB-250: wreck { kind: 'burn' | 'blow', from } takes the plate out instead of flipping it
+    function trainingHitTarget(index, point, precise = false, shooterZ = null, wreck = null) {   // CB-250 / AG-296: wreck { kind: 'burn' | 'blow', from } takes the plate out instead of flipping it
       const tg = training.tg;
       if (!tg || !tg.targets[index]) return false;
       if(rangeFeature?.owns())return false; // drill events use their origin token through the private adapter
-      if (wreck && training.wreck) { if (!training.wreck.take(index, wreck.kind, wreck.from)) return false; tg.targets[index].hits++; }
+      if (wreck && training.wreck) {
+        if (!training.wreck.take(index, wreck.kind, wreck.from)) return false;
+        tg.targets[index].hits++;
+        if (wreck.kind === 'burn') rangeFeature?.burn?.(index, { igniteS: BURN_IGNITE_S, burnS: BURN_DURATION_S });
+      }
       else if (!tg.hitTarget(index, shooterZ != null ? fallSign(shooterZ, tg.origin.z, tg.targets[index].z) : 1)) return false;
       training.hits++;
       const sc = tg.scoreHit ? tg.scoreHit(index, precise ? point : null) || tg.scoreHit(index, null) : null;
@@ -65985,6 +66334,7 @@ live++;
         updateAmmoSwitch(dt);   // CB-294
         syncMagazineArt();   // CB-294 (GT-20080)
         updateReloadAnim(dt);
+        poseUnloadPump('shotgun');   // CB-302: after the reload anim's reset of the parts
         updateKnifeAnim(dt);
         PROF.mark('m:reload+knife');
         // The smoking idle holsters the visible gun. Do not keep solving both
@@ -66602,6 +66952,8 @@ live++;
       waveFinisherCamera();
       updateLoopCine();
       loopCineCamera();
+      if(training.active&&!viewFirst&&!training.wake&&training.cameraCollision)
+        training.cameraCollision.pull({x:camSubject.x,y:camSubject.y+1.6,z:camSubject.z},camera.position);
       camera.lookAt(camLook);
       // (the shot view, if a tool has set one, is applied last - see applyShotView)
       // Leave warm-up staging intact behind the opaque opening, then hide the marine.
@@ -66625,6 +66977,7 @@ live++;
           isSuppressed: !!suppressor[currentWeapon],
           viewmodel: viewmodel || null,
           weaponMesh: weaponMeshes[currentWeapon] || null,
+          suppressWisp: !!(flamerOn && currentWeapon === 'flamer' && !paused),
           camera
         });
       }
@@ -66762,7 +67115,7 @@ live++;
           wallCullDbg: () => (wallCull ? { cells: wallCull.stats.cells, hidden: wallCull.stats.hidden, tested: wallCull.stats.tested, segments: wallCull.stats.segments, ms: cullStats.wallMs, cull: wallCull } : null),   /* GB-273 */ launcherBrassDbg: () => ({ thrown: launcherBrassThrown, spent: launcherSpent }),   /* GB-133 */ dismemberDbg: (z, part) => detachZombiePart(z, part, 0, 1), MAIMED_HOP_MUL, cloneLean,   /* CL-136 */ slowMoDbg, triggerSlowMo, diveDbg: () => ({ phase: dive.phase, w: dive.w, k: diveTimeScale(dive), meter: dive.meter, cd: dive.cd, slowT: dive.slowT, slowing: slowmoOn(dive), vx: dive.vx, vz: dive.vz, dirX: dive.dirX, dirZ: dive.dirZ, dives: dive.dives, flat: diveFlatW,pose:divePoseFrame,contact:dive.contact }), setDiveMeterDbg: (v) => { dive.meter = Math.max(0, Math.min(1, +v || 0)); }, DIVE,   /* CL-193 */ selectorFlick,   /* GB-167 */   /* CL-137 */ trainingHideWorld, getHidWorld: () => training.hidWorld,   /* CL-138 */ profDbg: PROF, rotateCamera, cullDbg: cullStats, cullShowAll, zombiePoolDbg: () => Object.fromEntries([...zombiePool].map(([k, v]) => [k, v.length])), shadowPruneDbg: () => ({ on: SHADOW_PRUNE, ...shadowPrune }),   /* CL-288 */ sunShadowDbg: () => ({ ...sunShadowStats, deep: sunShadowDeep, tick: sunShadowTick, every: SUN_SHADOW_DEEP_EVERY, move: SUN_SHADOW_DEEP_MOVE }),   /* CL-237 */ zombieHitNightMul,   /* CL-244 */ marineShadowDbg: (full) => ({ builds: marineShadowBuilds, lastDiff: marineShadowDiff, proxy: marineShadowProxy, ms: marineShadowMs, sig: marineShadowSig, bones: marineShadowProxy ? marineShadowProxy.skeleton.bones.length : 0, verts: marineShadowProxy ? marineShadowProxy.geometry.attributes.position.count : 0, warm: marineShadowWarm, retired: marineShadowRetired.length, drawnAt: marineShadowProxy ? marineShadowProxy.userData.drawnAt : null, seen: marineShadowSeen, seenAt: marineShadowSeenAt, builtAt: marineShadowBuiltAt, frame: perfFrame, now: full ? marineShadowNow() : undefined }),   /* CL-241: warm..frame, now */ skinMergeGroup, skinUnmerge,   /* CL-140 */   /* GB-136 */ grenadeArcDbg: () => ({ charging: grenadeCharging, t: grenadeChargeT, visible: grenadeArc.visible, hit: grenadeArc.userData.hit, dots: grenadeArc.userData.dots, launcher: launcherArc.visible, lhit: launcherArc.userData.hit, lstate: launcherArc.userData.state, last: lastGrenadeThrow, n: grenades, cd: grenadeCd }), startGrenadeCharge, releaseGrenadeCharge, GRENADE_THROW, grenadeThrowSpeed, flyArc,   /* GB-134 */ grenadeAnimDbg: () => ({ phase: grenadeAnim.phase, t: grenadeAnim.t, inHand: grenadeAnim.inHand, queued: grenadeAnim.queued, hand: grenadeHand, carriedShown: grenadeInHandN, simple: !!grenadeArc.userData.simple, segs: grenadeArc.userData.segs, release: grenadeReleasePoint().clone(), anim: GRENADE_ANIM, keys: GR_KEY }), holdGrenadeAnim: (phase, t) => { grenadeAnimHold = phase ? { phase, t: t || 0 } : null; if (!phase) { grenadeAnim.phase = ''; setGrenadeInHand(false); } }, setGrenadesDbg: (n) => { grenades = n | 0; updateAmmoHud(); updateCarriedGear(0, true); },   /* CU-97 */ m240Dbg: () => { const b = mortarMounted && mortarMounted.type === 'm240' ? mortarMounted : null; return { belt: b ? b.belt : null, feedT: b ? (b.feedT || 0) : 0, reserve: reserveAmmo['7.62 belt'] | 0, flash: !!(b && b.mesh.userData.flash && b.mesh.userData.flash.visible), hud: ammoDetailEl ? ammoDetailEl.textContent : '', hudName: ammoWeaponEl ? ammoWeaponEl.textContent : '' }; }, watchmanDbg: () => ({state:mortarMounted?.watchman || null,weight:_watchman.weight,ghost:ghostGroup}), crewDbg: () => ({ mortar: { w: _mcrew.w, phase: _mcrew.load.phase, roundIn: _mcrew.load.round, dropping: _mcrew.load.dropping, dropT: _mcrew.load.dropT, fired: _mcrew.load.fired, round: _mcrew.round, muzzle: _mcrew.muzzle, axis: _mcrew.axis, feet: _mcrew.plant.feet, steps: _mcrew.plant.steps }, m240: { feet: _watchman.plant.feet, steps: _watchman.plant.steps } }),   /* GB-156 */ feedM240, m240MuzzleWorld, M240_FEED_S, stockedLooseCalibers, aimPointDbg: (x, y, z) => { aimTarget.set(x, y, z); }, upgradeAvailableHint, getUpgradeAvailHint: () => upgradeAvailHint, tipOnce, tipsDbg: () => ({ seen: Object.assign({}, tipsSeen || {}), reset: () => { tipsSeen = {}; try { localStorage.removeItem(TIP_STORE); } catch (e) {} } }), placeBannerText: () => placeBannerEl.textContent, bigBannerText: () => bigBannerT.textContent + ' | ' + bigBannerS.textContent,   /* GB-139 */ m240VisDbg: () => ({ carried: carriedM240Mesh.visible, carriedMortar: carriedMortarMesh.visible, carriedGun: carriedM240Mesh, spent: { ...m240Spent }, casings: casings.length, pitchTo: m240PitchTo, muzzle: m240MuzzleWorld, CARRY_M240, CARRY_ARM, ELEV: [M240_ELEV_MIN, M240_ELEV_MAX], setDown: setDownMortar, casingsList: casings }),   /* CL-131 */ brandtGunDbg: () => { const r = roofCrew.find((c) => c.who === 'brandt'); return r && r.gun ? { gun: r.gun, flashed: !!r.gun.userData.flash, shots: r.shots } : null; },   /* GB-138 */ getSimTime: () => simTime,   /* GB-131 */ getDebugTouched: () => debugTouched, resetGame, ensureCrew,   /* CL-105 */ makeMarine,   /* CL-94 */ carryDbg, carryPreview, updateCarriedGear, CARRY_SLOTS, drawDbg, updateMarineDraw, drawPreview,   /* CL-90 */ dressMarine, DRESS, getMarine: () => marine, dressGuns, getGunFurniture: () => gunFurniture,   /* CL-97 */ buildWarren, layoutWarren, WARREN_THEMES, HOLLOW, enterHollow, leaveHollow, warrenDbg: () => ({ safe: warrenSafe, lastY: warrenLastY, open: (x, y, z) => belowCamOpen(x, y, z), roof: (x, z) => belowRoofAt(x, z) }), hollowState: () => hollow.state(), belowDbg, applyVaultReward,   /* CL-259 */   /* GB-107 */ stirDbg,   /* GB-108 */ heartDbg,   /* GB-92 */ runePistolDbg,   /* GB-119 */ hordeDbg,   /* GB-94 */ getMedDropCount: () => medDrops.length,   /* GB-94 */ grantHaul, claimHollowHere, markHollowPassage: (b) => { markHollowPassage(b); return passageMark; },   /* CU-80, CU-72 */ hqLadderAt, stepHqLadder, onHqRoof: () => onHqRoof, mapRevealDbg: () => ({ seen: (x, z) => mapReveal.seen(x, z), count: () => mapReveal.count(), found: () => mapReveal.found(), step: () => stepMapReveal() }),   /* CU-198 */   /* CL-99 */ pitSignal, setPitWord, setPitSilenced, updatePitSignal, setOnTowerDeckDbg: (v) => { onTowerDeck = !!v; }, /* CL-107 */ firstPeople, updateFirstPeople, caveSealSolids, /* CL-112 */ buildHeart, HEART, /* CL-81 */ letGoDbg, /* CL-116 */ lightPoolDbg: { pool: () => ensureLightPool(), update: () => updateLightPool() }, /* CL-115 */ trainingDbg: { act: (a) => trainingDoAction(a), hitDbg: (i, p, wreck) => trainingHitTarget(i, p, false, null, wreck), wreck: () => training.wreck,   /* CB-250 */ round: (p) => trainingRound(p),   /* GB-163: a round by hand (shots, tests) */ start: () => startTraining(), enter: () => enterTraining(), leave: () => leaveTraining(), state: () => training, tg: () => training.tg,
             action: () => trainingActionTarget(), spawn: (k, n) => trainingSpawn(k, n), clear: () => trainingClear(), layout: () => trainingLayout(), clearLayout: () => trainingLayoutClear(), layoutPieces: () => training.layout || [], layoutRefused: () => training.layoutRefused || [], alive: () => trainingAlive(), blackout: () => trainingBlackout(), hitTarget: (i, pt) => trainingHitTarget(i, pt, !!pt), deployNow: (k, n) => trainingDeployNow(k, n), tunnel: () => training.tunnel, pops: () => training.pops, clearSkulls: () => trainingClearSkulls(),   /* CL-171 */
             update: (dt) => updateTraining(dt), panel: () => (ensureTrainingUi(), training.panel), openPanel: () => openTrainingPanel(), round: (p) => trainingRound(p), TRAINING,
-            lights: () => ({ on: !training.lightsOff, night: isNight, room: training.tg ? training.tg.lightsOn() : null }), toggleLights: () => toggleTrainingLights() /* CU-94 */, char: () => training.char }, flameDbg: { particles: () => flameParticles, stages: FLAME_STAGES }, /* CL-114 */ stockNoticeDbg: { arrivals: (n) => stockArrivals(n), queue: (n) => queueStockNotice(n), state: () => ({ t: stockNotice.t, hold: stockNotice.hold, guns: stockNotice.guns.slice(), shown: stockNotice.shown.slice(), visible: !!(stockNotice.el && stockNotice.el.classList.contains('show')) }), tick: (dt) => updateStockNotice(dt), show: (guns) => showStockNotice(guns), setDay: (n) => { day = n; }, NIGHT: GUN_STOCK_NIGHT }, modsOwnAllDbg: () => { for (const w in OPTIC_OPTIONS) { opticOwned[w] = opticOwned[w] || {}; for (const k of OPTIC_OPTIONS[w]) opticOwned[w][k] = true; } for (const w in SUPPRESSOR_PRICE) suppressorOwned[w] = true; return true; }, /* CL-332 */ armoryFinishDbg: { list: (k) => armoryFinishes(k), paint: (k, key) => paintArmoryGun(k, key) }, /* CL-113 */ armoryDbg: { mods: (w) => armoryMods(w), fit: (w, id, on) => fitArmoryMod(w, id, on), inReach: () => weaponsInReach(), picture: (k) => armoryPicture(k), pics: () => ({ drawn: armoryPics.drawn, cached: armoryPics.cache.size, ok: !!armoryPics.r }), rack: () => (house.armoryRack ? house.armoryRack.children.map((g) => g.userData.rackKind).filter(Boolean) : null), refreshRack: () => refreshArmoryRack(true), stored: () => armoryStoredKinds(), bigtex: () => bigtexWheel, ui: () => armoryUI, owned: () => ({ suppressor: { ...suppressorOwned }, auto: pistolAutoOwned, tank: sawTankUpgraded }) }, /* CL-83 */ nightRimDbg, /* CL-108, CL-109 */ historyProps, storyPropInReach, /* CL-111 */ runeFinishDbg: { unlocked: () => runeFinishUnlocked(), unlock: () => unlockRuneFinish(), lock: () => { runeFinish.unlocked = false; try { localStorage.removeItem(RUNE_FINISH_STORE); } catch (_) {} }, isGunFinishKey: (k) => isGunFinishKey(k), tex: () => runeFinish.tex, glow: (l) => updateRuneFinishGlow(l), state: () => runeFinish, furniture: () => gunFurniture, readWardrobe: () => readWardrobe(), KEY: RUNE_FINISH_KEY }, /* CL-78 */ guardianBossDbg: { rigOf: (z) => (z && z.mesh && z.mesh.userData.bossRig) || null, update: (dt) => updateGuardianBossRigs(dt), BOSS_RIG }, /* CL-93 */ rabbitDbg: { ensure: () => ensureRabbitMound(), state: () => rabbitMound, update: (dt) => updateRabbitMound(dt), wake: () => wakeKillerRabbit(), hit: (a, b) => rabbitMoundHit(a.x, a.y, a.z, b.x, b.y, b.z), give: () => { ensureRabbitMound(); rabbitMound.holy = true; rabbitMound.reliquary.userData.grenade.visible = false; }, ready: () => holyGrenadeReady(), throwG: () => { grenadeCd = 0; throwGrenade(); }, reset: () => resetRabbitMound(), distToPath: (x, z) => distToPath(x, z), RABBIT }, /* CL-92 */ lightningDbg: { yank: () => bootsYankPress(), yankState: () => ({ ...bootsYank, inReach: bootsYankInReach() }), skeleton: () => POI.mast && POI.mast.skeleton, strike: (k) => strikeLightning(k || null), update: (dt) => updateLightning(dt), state: () => lightning, odds: (o) => { lightning.odds = o || null; }, boots: () => ensureInsulatedBoots(), wear: (p) => wearInsulatedBoots(p || localPlayer), /* CL-178 */ mast: () => ({ ladder: mastLadder(), climb: mastClimb, high: onMastHigh(), perch: POI.mast ? POI.mast.perch : null, PERCH: MAST_PERCH }), climbMast: (y) => { const L = mastLadder(); if (!L) return false; mastClimb.on = true; climbingTower = true; player.position.set(L.x, Math.min(L.top, L.foot + (y || 0)), L.z); velX = 0; velZ = 0; vy = 0; return true; }, leaveMast: () => letGoOfMast(), /* CL-179 */ fall: () => mastFall, smoke: () => zapSmoke, ladderNow: () => ladderNow(), holster: () => ({ ...ladderHolster, unarmed }), /* CL-180 */ limbs: () => _lad.st, handTargets: () => _lad.hand, LADDER_GRIP, worn: (p) => insulatedBootsOn(p || localPlayer), reset: () => resetLightning(), marine: () => worldMarine, bolt: (x, z, hold) => { showBolt({ x, y: sampleHeight(x, z), z }); if (hold) { lightning.boltT = 1e9; lightning.flashT = 0; lightning.flashEl.style.opacity = '0'; } }, LIGHTNING, BOOTS_HEX }, /* CL-76 */ fogNightDbg: { active: () => fogNightActive(), k: () => fogNightK, force: (v) => { fogNightForce = v; }, step: (dt) => updateDayNight(dt), apply: (dt) => applyFogNight(dt), FOG_NIGHT }, /* CL-75 */ makeSurvivorFigure, SURVIVOR_LOOK, resolveTreeCollisionsDbg: (dt) => resolveTreeCollisions(dt),   /* CL-80 */ boatRig, getExtractionBoat: () => extractionBoat, /* CL-143 */ trainingBuildDbg: { refusal: (x, z, gx, gz, kind) => { const was = placeMode; if (kind) placeMode = kind; try { return placeRefusal(x, z, gx, gz); } finally { placeMode = was; } }, area: () => training.tg && training.tg.build, gridIndex }, /* CL-142 */ makeCargoPlane, insertionDbg: { begin: () => beginMarineInsertion(), rig: () => marineInsertion, ordersEl: () => ordersCardEl }, BOARD_HOLD_S, boardingDbg: () => ({ holdT: boardHoldT, pending: !!boardPending, reach: boardingReach(), won, gameOver, hot: !!matchStats.hotExtraction, state: extractionState }),   /* CL-73 */ setGunSuppressor, SUPPRESSOR,   /* CL-95 */
+            lights: () => ({ on: !training.lightsOff, night: isNight, room: training.tg ? training.tg.lightsOn() : null }), toggleLights: () => toggleTrainingLights() /* CU-94 */, char: () => training.char }, flameDbg: { particles: () => flameParticles, stages: FLAME_STAGES, nozzleJet: () => _nozzleJet, heat: (i) => _targetFlameHeat[i] || 0, igniteS: BURN_IGNITE_S, burnS: BURN_DURATION_S }, /* CL-114 */ stockNoticeDbg: { arrivals: (n) => stockArrivals(n), queue: (n) => queueStockNotice(n), state: () => ({ t: stockNotice.t, hold: stockNotice.hold, guns: stockNotice.guns.slice(), shown: stockNotice.shown.slice(), visible: !!(stockNotice.el && stockNotice.el.classList.contains('show')) }), tick: (dt) => updateStockNotice(dt), show: (guns) => showStockNotice(guns), setDay: (n) => { day = n; }, NIGHT: GUN_STOCK_NIGHT }, modsOwnAllDbg: () => { for (const w in OPTIC_OPTIONS) { opticOwned[w] = opticOwned[w] || {}; for (const k of OPTIC_OPTIONS[w]) opticOwned[w][k] = true; } for (const w in SUPPRESSOR_PRICE) suppressorOwned[w] = true; return true; }, /* CL-332 */ armoryFinishDbg: { list: (k) => armoryFinishes(k), paint: (k, key) => paintArmoryGun(k, key) }, /* CL-113 */ armoryDbg: { mods: (w) => armoryMods(w), fit: (w, id, on) => fitArmoryMod(w, id, on), inReach: () => weaponsInReach(), picture: (k) => armoryPicture(k), pics: () => ({ drawn: armoryPics.drawn, cached: armoryPics.cache.size, ok: !!armoryPics.r }), rack: () => (house.armoryRack ? house.armoryRack.children.map((g) => g.userData.rackKind).filter(Boolean) : null), refreshRack: () => refreshArmoryRack(true), stored: () => armoryStoredKinds(), bigtex: () => bigtexWheel, ui: () => armoryUI, owned: () => ({ suppressor: { ...suppressorOwned }, auto: pistolAutoOwned, tank: sawTankUpgraded }) }, /* CL-83 */ nightRimDbg, /* CL-108, CL-109 */ historyProps, storyPropInReach, /* CL-111 */ runeFinishDbg: { unlocked: () => runeFinishUnlocked(), unlock: () => unlockRuneFinish(), lock: () => { runeFinish.unlocked = false; try { localStorage.removeItem(RUNE_FINISH_STORE); } catch (_) {} }, isGunFinishKey: (k) => isGunFinishKey(k), tex: () => runeFinish.tex, glow: (l) => updateRuneFinishGlow(l), state: () => runeFinish, furniture: () => gunFurniture, readWardrobe: () => readWardrobe(), KEY: RUNE_FINISH_KEY }, /* CL-78 */ guardianBossDbg: { rigOf: (z) => (z && z.mesh && z.mesh.userData.bossRig) || null, update: (dt) => updateGuardianBossRigs(dt), BOSS_RIG }, /* CL-93 */ rabbitDbg: { ensure: () => ensureRabbitMound(), state: () => rabbitMound, update: (dt) => updateRabbitMound(dt), wake: () => wakeKillerRabbit(), hit: (a, b) => rabbitMoundHit(a.x, a.y, a.z, b.x, b.y, b.z), give: () => { ensureRabbitMound(); rabbitMound.holy = true; rabbitMound.reliquary.userData.grenade.visible = false; }, ready: () => holyGrenadeReady(), throwG: () => { grenadeCd = 0; throwGrenade(); }, reset: () => resetRabbitMound(), distToPath: (x, z) => distToPath(x, z), RABBIT }, /* CL-92 */ lightningDbg: { yank: () => bootsYankPress(), yankState: () => ({ ...bootsYank, inReach: bootsYankInReach() }), skeleton: () => POI.mast && POI.mast.skeleton, strike: (k) => strikeLightning(k || null), update: (dt) => updateLightning(dt), state: () => lightning, odds: (o) => { lightning.odds = o || null; }, boots: () => ensureInsulatedBoots(), wear: (p) => wearInsulatedBoots(p || localPlayer), /* CL-178 */ mast: () => ({ ladder: mastLadder(), climb: mastClimb, high: onMastHigh(), perch: POI.mast ? POI.mast.perch : null, PERCH: MAST_PERCH }), climbMast: (y) => { const L = mastLadder(); if (!L) return false; mastClimb.on = true; climbingTower = true; player.position.set(L.x, Math.min(L.top, L.foot + (y || 0)), L.z); velX = 0; velZ = 0; vy = 0; return true; }, leaveMast: () => letGoOfMast(), /* CL-179 */ fall: () => mastFall, smoke: () => zapSmoke, ladderNow: () => ladderNow(), holster: () => ({ ...ladderHolster, unarmed }), /* CL-180 */ limbs: () => _lad.st, handTargets: () => _lad.hand, LADDER_GRIP, worn: (p) => insulatedBootsOn(p || localPlayer), reset: () => resetLightning(), marine: () => worldMarine, bolt: (x, z, hold) => { showBolt({ x, y: sampleHeight(x, z), z }); if (hold) { lightning.boltT = 1e9; lightning.flashT = 0; lightning.flashEl.style.opacity = '0'; } }, LIGHTNING, BOOTS_HEX }, /* CL-76 */ fogNightDbg: { active: () => fogNightActive(), k: () => fogNightK, force: (v) => { fogNightForce = v; }, step: (dt) => updateDayNight(dt), apply: (dt) => applyFogNight(dt), FOG_NIGHT }, /* CL-75 */ makeSurvivorFigure, SURVIVOR_LOOK, resolveTreeCollisionsDbg: (dt) => resolveTreeCollisions(dt),   /* CL-80 */ boatRig, getExtractionBoat: () => extractionBoat, /* CL-143 */ trainingBuildDbg: { refusal: (x, z, gx, gz, kind) => { const was = placeMode; if (kind) placeMode = kind; try { return placeRefusal(x, z, gx, gz); } finally { placeMode = was; } }, area: () => training.tg && training.tg.build, gridIndex }, /* CL-142 */ makeCargoPlane, insertionDbg: { begin: () => beginMarineInsertion(), rig: () => marineInsertion, ordersEl: () => ordersCardEl }, BOARD_HOLD_S, boardingDbg: () => ({ holdT: boardHoldT, pending: !!boardPending, reach: boardingReach(), won, gameOver, hot: !!matchStats.hotExtraction, state: extractionState }),   /* CL-73 */ setGunSuppressor, SUPPRESSOR,   /* CL-95 */
           addDummyPlayer, removeDummyPlayer, nearestPlayer, playersNear, playerById, players, getPlayers: () => players, nightKindForDay: (d) => nightKindOf(d, nightPlanFor(d), isGuardianNight(d)),   /* CU-77 */
         });
         window.TT.shotLoadDbg = { base: SHOTGUN_BASE,   // CB-248, CB-294: the types in place of the fitted loads
@@ -66993,7 +67346,7 @@ live++;
         // Brass, which is transparent metal and shared by every gun.
         try { spawnCasing('pistol'); } catch (e) {}
         // One flame blob in each of the stream's colours, and one of steam.
-        for (const mat of [...FLAME_STAGES.map((st) => st[1]), flameSteamMat]) {
+        for (const mat of [...FLAME_STAGES.map((st) => st[1]), flameEdgeMat, flameSteamMat]) {
           spawnFlameBlob(px, py, pz, { x: 0, y: 0, z: 1 }, 0);
           const blob = flameParticles[flameParticles.length - 1];
           if (blob) { blob.mesh.material = mat; blob.mesh.position.set(px, py, pz); }

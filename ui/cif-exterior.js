@@ -30,8 +30,8 @@ export function dressCifExterior(THREE, root, text, lampMaterial) {
     corbel.name='cif-counter-corbel';
   }
   // Rain hood and a warm strip, using emission rather than another world light.
-  box(2.02,.10,.73,dark,0,3.14,.34);
-  box(2.02,.085,.045,edge,0,3.075,.69);
+  box(2.02,.10,.73,dark,0,3.14,.3345);
+  box(2.02,.085,.045,edge,0,3.075,.677);
   const lamp=lampMaterial; // Existing bay light also turns red during lockdown.
   box(1.45,.035,.09,lamp,0,2.455,.37);
   // Rolled shutter slats above the rail. Geometry shares the frame's material

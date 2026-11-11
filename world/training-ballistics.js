@@ -130,46 +130,78 @@ export function createTrainingImpacts(T,tg) {
 
 export const CHAR_LIFE = 30, CHAR_FADE = 6;
 
-// J120 (Jerry, 2026-11-09): flames leave black char marks on walls, floor and target plates in the Training Ground.
+// J120 (Jerry, 2026-11-09) / AG-296: flames leave rich black char marks on walls, floor and target plates in the Training Ground, fading slowly.
 // Batches are renderOrder 1 so flames (renderOrder 3) always render over them.
 export function createTrainingChar(T, tg) {
   let map = null;
   if (typeof document !== 'undefined') {
-    const cv = document.createElement('canvas'); cv.width = cv.height = 64;
+    // 2x2 variant atlas (256x256, 128x128 per quadrant) of organic carbon-black scorch & soot clouds (zero repeating ring artifacts).
+    const cv = document.createElement('canvas'); cv.width = cv.height = 256;
     const c = cv.getContext('2d');
-    const g = c.createRadialGradient(32, 32, 2, 32, 32, 30);
-    g.addColorStop(0, 'rgba(10, 8, 7, 0.96)');
-    g.addColorStop(0.25, 'rgba(18, 14, 12, 0.90)');
-    g.addColorStop(0.55, 'rgba(38, 26, 18, 0.65)');
-    g.addColorStop(0.8, 'rgba(25, 18, 15, 0.28)');
-    g.addColorStop(1, 'rgba(15, 10, 8, 0)');
-    c.fillStyle = g;
-    c.fillRect(0, 0, 64, 64);
-    c.fillStyle = 'rgba(8, 6, 5, 0.7)';
-    for (let i = 0; i < 18; i++) {
-      const a = (i / 18) * Math.PI * 2 + (i % 3) * 0.4;
-      const r = 14 + ((i * 7) % 13);
-      const rad = 2 + (i % 4) * 1.2;
-      c.beginPath();
-      c.arc(32 + Math.cos(a) * r, 32 + Math.sin(a) * r, rad, 0, Math.PI * 2);
-      c.fill();
+    let seed = 120296;
+    const rnd = () => { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; };
+    const puff = (cx, cy, rx, ry, rot, r, g, b, a0, aMid) => {
+      c.save(); c.translate(cx, cy); c.rotate(rot); c.scale(rx, ry);
+      const gr = c.createRadialGradient(0, 0, 0.04, 0, 0, 1);
+      gr.addColorStop(0, `rgba(${r},${g},${b},${a0})`);
+      gr.addColorStop(0.42, `rgba(${r},${g},${b},${aMid})`);
+      gr.addColorStop(0.76, `rgba(${Math.min(255, r + 10)},${Math.min(255, g + 7)},${Math.min(255, b + 5)},${(aMid * 0.34).toFixed(3)})`);
+      gr.addColorStop(1, `rgba(${r},${g},${b},0)`);
+      c.fillStyle = gr; c.beginPath(); c.arc(0, 0, 1, 0, Math.PI * 2); c.fill();
+      c.restore();
+    };
+    for (let cell = 0; cell < 4; cell++) {
+      const ox = (cell % 2) * 128 + 64, oy = ((cell >> 1) * 128) + 64;
+      c.save();
+      c.beginPath(); c.rect((cell % 2) * 128 + 3, (cell >> 1) * 128 + 3, 122, 122); c.clip();
+      // Broad warm scorched-umber thermal halo
+      puff(ox, oy - (cell >= 2 ? 4 : 0), 52, cell >= 2 ? 56 : 50, rnd() * 3.14, 24, 16, 11, 0.46, 0.22);
+      // Multi-lobe turbulent soot clouds (irregular silhouette, velvety feathered fringe)
+      const lobes = 14;
+      for (let i = 0; i < lobes; i++) {
+        const ang = (i / lobes) * Math.PI * 2 + (rnd() - 0.5) * 0.48;
+        const dist = 7 + rnd() * 20;
+        const upward = cell >= 2 && Math.sin(ang) < -0.2 ? 1.22 : 1;
+        const lx = ox + Math.cos(ang) * dist * 0.92;
+        const ly = oy + Math.sin(ang) * dist * upward;
+        puff(lx, ly, (15 + rnd() * 16), (13 + rnd() * 15) * upward, rnd() * 3.14, 10, 8, 7, 0.62 + rnd() * 0.22, 0.30);
+      }
+      // Deep carbon-black scorched heart
+      puff(ox + (rnd() - 0.5) * 5, oy + (rnd() - 0.5) * 5, 29, 26, rnd() * 3.14, 6, 5, 5, 0.96, 0.78);
+      // Fine dry soot streaks radiating softly inside quadrant bounds
+      for (let i = 0; i < 22; i++) {
+        const ang = rnd() * Math.PI * 2, r0 = 10 + rnd() * 16, len = 10 + rnd() * 18;
+        const sx = ox + Math.cos(ang) * (r0 + len * 0.45), sy = oy + Math.sin(ang) * (r0 + len * 0.45);
+        puff(sx, sy, len * 0.55, 3.2 + rnd() * 4.5, ang, 12, 10, 9, 0.34 + rnd() * 0.2, 0.14);
+      }
+      c.restore();
     }
     map = new T.CanvasTexture(cv); map.colorSpace = T.SRGBColorSpace;
   }
   const mat = new T.MeshBasicMaterial({ map, transparent: true, vertexColors: true, depthWrite: false, side: T.DoubleSide, polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -1 });
   mat.name = 'training-char-mark';
   const corners = [[-.5, -.5], [.5, -.5], [-.5, .5], [.5, -.5], [.5, .5], [-.5, .5]];
+  const setQuadUV = (uvAttr, slot, cell) => {
+    const u0 = (cell % 2) * 0.5 + 0.035, v0 = (cell >> 1) * 0.5 + 0.035, span = 0.43;
+    for (let i = 0; i < 6; i++) {
+      const [cx, cy] = corners[i];
+      uvAttr.setXY(slot * 6 + i, u0 + (cx + 0.5) * span, v0 + (cy + 0.5) * span);
+    }
+  };
   const make = (parent, capacity) => {
-    const geo = new T.BufferGeometry(), positions = new T.Float32BufferAttribute(new Float32Array(capacity * 18), 3), uv = [];
+    const geo = new T.BufferGeometry(), positions = new T.Float32BufferAttribute(new Float32Array(capacity * 18), 3);
+    const uvArr = new Float32Array(capacity * 12);
     positions.setUsage(T.DynamicDrawUsage);
-    for (let i = 0; i < capacity; i++) for (const [x, y] of corners) uv.push(x + .5, y + .5);
-    geo.setAttribute('position', positions); geo.setAttribute('uv', new T.Float32BufferAttribute(uv, 2)); geo.setDrawRange(0, 0);
+    for (let i = 0; i < capacity; i++) for (let k = 0; k < 6; k++) { const [x, y] = corners[k]; uvArr[(i * 6 + k) * 2] = (x + .5) * 0.43 + 0.035; uvArr[(i * 6 + k) * 2 + 1] = (y + .5) * 0.43 + 0.035; }
+    const uvs = new T.Float32BufferAttribute(uvArr, 2); uvs.setUsage(T.DynamicDrawUsage);
+    geo.setAttribute('position', positions); geo.setAttribute('uv', uvs); geo.setDrawRange(0, 0);
     const colors = new T.Float32BufferAttribute(new Float32Array(capacity * 24).fill(1), 4); colors.setUsage(T.DynamicDrawUsage); geo.setAttribute('color', colors);
     const mesh = new T.Mesh(geo, mat); mesh.name = 'training-char-marks'; mesh.renderOrder = 1; mesh.frustumCulled = false; mesh.raycast = () => {}; parent.add(mesh);
-    return { mesh, parent, capacity, next: 0, count: 0, positions, colors, life: new Float32Array(capacity), lastPos: new Float32Array(capacity * 3), lastTime: 0 };
+    return { mesh, parent, capacity, next: 0, count: 0, positions, uvs, colors, life: new Float32Array(capacity), alpha: new Float32Array(capacity), lastPos: new Float32Array(capacity * 3) };
   };
-  const batches = [make(tg.group, 128), ...tg.targets.map(t => make(t.pivot, 16))];
+  const batches = [make(tg.group, 256), ...tg.targets.map(t => make(t.pivot, 24))];
   const pos = new T.Vector3(), normal = new T.Vector3(), q = new T.Quaternion(), rotZ = new T.Quaternion(), parentQ = new T.Quaternion(), vertex = new T.Vector3(), front = new T.Vector3(0, 0, 1);
+  let seq = 0;
   return {
     prepareWarmup() {
       const ranges = batches.map(b => b.mesh.geometry.drawRange.count);
@@ -180,18 +212,29 @@ export function createTrainingChar(T, tg) {
       }
       return () => batches.forEach((b, i) => b.mesh.geometry.setDrawRange(0, ranges[i]));
     },
-    add(hit) {
-      const target = hit.solid?.target, batch = batches[target == null ? 0 : target + 1];
-      const now = (typeof performance !== 'undefined' ? performance.now() : Date.now()) * 0.001;
-      const lastIdx = (batch.next - 1 + batch.capacity) % batch.capacity;
-      if (batch.count > 0 && (now - batch.lastTime) < 0.12) {
-        const lx = batch.lastPos[lastIdx * 3], ly = batch.lastPos[lastIdx * 3 + 1], lz = batch.lastPos[lastIdx * 3 + 2];
+    add(hit, strength = 0.82) {
+      const target = hit.solid?.target;
+      if (target != null) {
+        const tObj = tg.targets[target];
+        if (!tObj || tObj.state === 'wrecked') return;
+        if (tg.onPlate && !tg.onPlate(target, hit.point)) return;
+      }
+      const batch = batches[target == null ? 0 : target + 1];
+      if (!batch) return;
+      // Check recent marks in this batch so a hosed wall/floor builds deep pitch-black char instead of cycling the ring buffer.
+      const checkN = Math.min(batch.count, 18);
+      const mergeR2 = target == null ? 0.058 : 0.016;
+      for (let k = 1; k <= checkN; k++) {
+        const idx = (batch.next - k + batch.capacity) % batch.capacity;
+        if (batch.life[idx] <= 0) continue;
+        const lx = batch.lastPos[idx * 3], ly = batch.lastPos[idx * 3 + 1], lz = batch.lastPos[idx * 3 + 2];
         const dx = hit.point.x - lx, dy = hit.point.y - ly, dz = hit.point.z - lz;
-        if (dx * dx + dy * dy + dz * dz < 0.035) {
-          batch.life[lastIdx] = CHAR_LIFE;
-          for (let i = 0; i < 6; i++) batch.colors.setW(lastIdx * 6 + i, 1);
+        if (dx * dx + dy * dy + dz * dz < mergeR2) {
+          batch.life[idx] = CHAR_LIFE;
+          const nextA = Math.min(1, (batch.alpha[idx] || 0.78) + 0.22);
+          batch.alpha[idx] = nextA;
+          for (let i = 0; i < 6; i++) batch.colors.setW(idx * 6 + i, nextA);
           batch.colors.needsUpdate = true;
-          batch.lastTime = now;
           return;
         }
       }
@@ -199,22 +242,31 @@ export function createTrainingChar(T, tg) {
       const s = hit.solid?.surface;
       if (s) { if (s.nx) pos.x = s.x; if (s.nz) pos.z = s.z; normal.set(s.nx, 0, s.nz); }
       if (target != null) pos.z = tg.origin.z + tg.targets[target].z;
-      pos.addScaledVector(normal, .018);
+      pos.addScaledVector(normal, .016);
       batch.parent.updateWorldMatrix(true, false); batch.parent.worldToLocal(pos);
       q.setFromUnitVectors(front, normal);
-      rotZ.setFromAxisAngle(front, Math.random() * 6.283);
+      const isWall = Math.abs(normal.y) < 0.45;
+      const roll = isWall ? ((Math.random() - 0.5) * 0.9) : (Math.random() * 6.283);
+      rotZ.setFromAxisAngle(front, roll);
       q.multiply(rotZ);
       batch.parent.getWorldQuaternion(parentQ); q.premultiply(parentQ.invert());
-      const size = target == null ? (.34 + Math.random() * .14) : (.18 + Math.random() * .08);
-      corners.forEach(([x, y], i) => { vertex.set(x * size, y * size, 0).applyQuaternion(q).add(pos); batch.positions.setXYZ(batch.next * 6 + i, vertex.x, vertex.y, vertex.z); });
-      batch.life[batch.next] = CHAR_LIFE;
-      batch.lastPos[batch.next * 3] = hit.point.x;
-      batch.lastPos[batch.next * 3 + 1] = hit.point.y;
-      batch.lastPos[batch.next * 3 + 2] = hit.point.z;
-      batch.lastTime = now;
-      for (let i = 0; i < 6; i++) batch.colors.setW(batch.next * 6 + i, 1);
+      const baseSz = hit.size || (target == null ? (.46 + Math.random() * .24) : (.22 + Math.random() * .09));
+      const sx = baseSz * (isWall ? (0.88 + Math.random() * 0.22) : (0.95 + Math.random() * 0.25));
+      const sy = baseSz * (isWall ? (1.05 + Math.random() * 0.30) : (0.95 + Math.random() * 0.25));
+      const slot = batch.next;
+      const cell = isWall ? (2 + (seq++ & 1)) : (seq++ & 1);
+      setQuadUV(batch.uvs, slot, cell);
+      batch.uvs.needsUpdate = true;
+      corners.forEach(([x, y], i) => { vertex.set(x * sx, y * sy, 0).applyQuaternion(q).add(pos); batch.positions.setXYZ(slot * 6 + i, vertex.x, vertex.y, vertex.z); });
+      batch.life[slot] = CHAR_LIFE;
+      const a0 = Math.max(0.45, Math.min(1, strength));
+      batch.alpha[slot] = a0;
+      batch.lastPos[slot * 3] = hit.point.x;
+      batch.lastPos[slot * 3 + 1] = hit.point.y;
+      batch.lastPos[slot * 3 + 2] = hit.point.z;
+      for (let i = 0; i < 6; i++) batch.colors.setW(slot * 6 + i, a0);
       batch.colors.needsUpdate = true;
-      batch.next = (batch.next + 1) % batch.capacity; batch.count = Math.min(batch.capacity, batch.count + 1);
+      batch.next = (slot + 1) % batch.capacity; batch.count = Math.min(batch.capacity, batch.count + 1);
       batch.positions.needsUpdate = true; batch.mesh.geometry.setDrawRange(0, batch.count * 6);
     },
     update(dt) {
@@ -224,7 +276,8 @@ export function createTrainingChar(T, tg) {
         for (let j = 0; j < b.capacity; j++) if (b.life[j] > 0) {
           b.life[j] = Math.max(0, b.life[j] - dt); if (b.life[j] > 0) alive++;
           if (b.life[j] < CHAR_FADE) {
-            for (let i = 0; i < 6; i++) b.colors.setW(j * 6 + i, b.life[j] / CHAR_FADE);
+            const w = (b.alpha[j] || 1) * (b.life[j] / CHAR_FADE);
+            for (let i = 0; i < 6; i++) b.colors.setW(j * 6 + i, w);
             dirty = true;
           }
         }
@@ -232,7 +285,12 @@ export function createTrainingChar(T, tg) {
         if (!alive && b.count > 0) { b.mesh.geometry.setDrawRange(0, 0); b.count = 0; b.next = 0; }
       }
     },
-    clear() { for (const b of batches) { b.mesh.geometry.setDrawRange(0, 0); b.count = 0; b.next = 0; b.life.fill(0); } },
+    clearTarget(targetIndex) {
+      const b = batches[targetIndex + 1];
+      if (!b) return;
+      b.mesh.geometry.setDrawRange(0, 0); b.count = 0; b.next = 0; b.life.fill(0); b.alpha.fill(0);
+    },
+    clear() { for (const b of batches) { b.mesh.geometry.setDrawRange(0, 0); b.count = 0; b.next = 0; b.life.fill(0); b.alpha.fill(0); } },
     count: () => batches.reduce((n, b) => n + b.life.reduce((a, t) => a + (t > 0 ? 1 : 0), 0), 0),
     dispose() { for (const b of batches) { b.mesh.removeFromParent(); b.mesh.geometry.dispose(); } mat.dispose(); map?.dispose(); }
   };

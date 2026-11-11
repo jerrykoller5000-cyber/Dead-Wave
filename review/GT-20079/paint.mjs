@@ -88,7 +88,7 @@ async function capture() {
     window.paintSnapshot=()=>{
       const out={},groups={assembled:g,firstPerson:vm.gun.root,slide:g.userData.slide,magazine:g.userData.mag,light:g.userData.laserLightUnit,suppressor:g.userData.suppressor,optic:id==='sniper'?g.getObjectByName('optic.nx8'):g.userData.fittedOptic};
       if(['revolver','uzi'].includes(id))groups.offhand=T.offhandMeshes[id];
-      if(['revolver','uzi','aa12','sniper'].includes(id)){
+      if(['revolver','uzi','aa12','sniper','minigun','launcher'].includes(id)){
         groups.rack=T.house.armoryRack.children.find(o=>o.userData.rackKind===id);
       }
       for(const [group,root] of Object.entries(groups)){
@@ -114,7 +114,7 @@ async function capture() {
         T.scene.add(lamp,lamp.target,new T.THREE.HemisphereLight(0xf3f7ff,0xc7bba9,1.5));window.reviewLamp=lamp;
       }
       const centre=copy.localToWorld(new T.THREE.Vector3(0,0,id==='ak'?.12:id==='m4'?.32:id==='revolver'?.09:id==='uzi'?.18:.24));
-      const cameraDistance=id==='sniper'?2.9:['m4','ak','aa12'].includes(id)?2.05:1;
+      const cameraDistance=id==='sniper'?2.9:['m4','ak','aa12','minigun','launcher'].includes(id)?2.05:1;
       const eye=centre.clone().addScaledVector(new T.THREE.Vector3(-.64,.22,.31),cameraDistance);
       T.setShotView({x:eye.x,y:eye.y,z:eye.z,tx:centre.x,ty:centre.y,tz:centre.z,fov:34});
       for(let i=0;i<5;i++){T.stepFrame(1/30);await new Promise(r=>setTimeout(r,80));}
@@ -190,7 +190,7 @@ async function capture() {
     return;
   }
   const lightingOnly=phase==='lights' || phase==='lights-before';
-  if(lightingOnly || (['revolver','uzi','aa12','sniper'].includes(id) && ['before','after'].includes(phase))){
+  if(lightingOnly || (['revolver','uzi','aa12','sniper','minigun','launcher'].includes(id) && ['before','after'].includes(phase))){
     const lightFolder=lightingOnly?folder:new URL('../'+(phase==='before'?'lights-before':'lights')+'/',folder);
     await mkdir(lightFolder,{recursive:true});
     await page.evaluate(`(async()=>{
@@ -219,7 +219,7 @@ async function capture() {
   }
   const states={};
   let tiles;
-  for(const angle of (['shotgun','ak','revolver','uzi','aa12','sniper'].includes(id)?['eye','side','rack']:['eye','side']))for(const [name,key] of [['factory',''],['camo',swatch],['restored','']]){
+  for(const angle of (['shotgun','ak','revolver','uzi','aa12','sniper','minigun','launcher'].includes(id)?['eye','side','rack']:['eye','side']))for(const [name,key] of [['factory',''],['camo',swatch],['restored','']]){
     const selected=await page.evaluate('setPaint('+JSON.stringify(key)+')');
     assert.equal(selected,key);
     if(angle==='eye'){
@@ -380,15 +380,16 @@ async function capture() {
     const mapped=new Set(states.camo.assembled.filter(m=>m.role).map(m=>m.map));
     if(mapped.size!==1||mapped.has(null))failures.push('The coated surfaces did not share one camo texture');
     const required=id==='pistol'?{assembled:['frame','slide'],slide:['slide']}:
-      {assembled:id==='ak'?['receiver','rail','optic shell']:['receiver','furniture','rail','optic shell']};
+      {assembled:['ak','minigun'].includes(id)?['receiver','rail','optic shell']:['receiver','furniture','rail','optic shell']};
     Object.assign(required,{light:['light shell'],optic:['optic shell']});
-    if(id!=='aa12')required.suppressor=['suppressor shell'];
-    if(['aa12','sniper'].includes(id)){
+    if(!['aa12','minigun','launcher'].includes(id))required.suppressor=['suppressor shell'];
+    if(['aa12','sniper','minigun','launcher'].includes(id)){
       await page.evaluate("TT.setShotView(null);TT.setViewFirstDbg(true);setPaint("+JSON.stringify(swatch)+")");
       const masks=await page.evaluate(`(async()=>{
         const T=TT,g=T.weaponMeshes[reviewId],vm=T.viewmodelDbg().gun;
-        const lib=await import('/studio/weapon-longarms.js');
-        const build=reviewId==='aa12'?lib.makeAa12Model:lib.makeSniperModel;
+        const builders={aa12:['longarms','makeAa12Model'],sniper:['longarms','makeSniperModel'],minigun:['heavy','makeMinigunModel'],launcher:['heavy','makeLauncherModel']};
+        const [moduleName,name]=builders[reviewId];
+        const build=(await import('/studio/weapon-'+moduleName+'.js'))[name];
         const raw=build({...T.inspectHost().builders.weaponContext(),finishGun:x=>x});
         const coating=T.getGunFurniture()[reviewId].find(m=>m.userData.weaponFinishRole==='receiver')?.map;
         if(!coating)throw Error('Missing camo');
@@ -409,7 +410,21 @@ async function capture() {
           lampGlass:raw.userData.laserLightUnit.getObjectByName('lightLens'),
           ...Object.fromEntries(Object.entries(raw.userData.controls).map(([key,n])=>[key,raw.getObjectByName(n)]))};
         if(reviewId==='aa12')Object.assign(factoryParts,{drum:raw.userData.mag,brake:raw.getObjectByName('Breacher muzzle brake')});
-        else{
+        else if(reviewId==='launcher'){
+          Object.assign(factoryParts,{drum:raw.userData.drum,iron:raw.userData.defaultSight,looseRound:raw.userData.loadRound,latch:raw.userData.drumLatch});
+          for(const [i,round] of raw.userData.drumRounds.entries())factoryParts['round'+i]=round;
+        }else if(reviewId==='minigun'){
+          Object.assign(factoryParts,{drum:raw.userData.ammoBox,rotor:raw.userData.barrelAssembly});
+          const defaults={coated:0,bare:0};
+          raw.userData.defaultSight.traverse(o=>{
+            if(!o.isMesh)return;
+            const painted=!!o.material.userData.weaponFinishRole;
+            if(painted && (o.material.transparent || o.material.isMeshBasicMaterial))throw Error('Paint on default glass or reticle');
+            if(painted)defaults.coated++;else defaults.bare++;
+          });
+          if(!defaults.coated||!defaults.bare)throw Error('Default optic needs coated and factory surfaces');
+          result.defaultOptic=defaults;
+        }else{
           Object.assign(factoryParts,{magazine:raw.userData.mag,bolt:raw.userData.bolt,round:raw.userData.boltRound});
           const optic=(await import('/studio/weapon-optics.js')).makeOptic('nx8');
           for(const name of ['ocular lens','50 mm objective lens','left parallax and illumination dial','exposed ZeroStop elevation turret','right capped windage turret'])

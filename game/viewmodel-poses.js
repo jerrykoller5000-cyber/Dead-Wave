@@ -304,6 +304,15 @@ const VM_STAGE3_RELOADS = Object.freeze({
   },
   tube: {
     kind: 'shell',
+    // CE-3 (J133: "If the player changes ammunition types he will first have to unload the current ammunition and put in
+    // the new ones"): X's change of type (index.html st.ammoSwitch, CB-294). Its load is this path, a shell a trip, at the
+    // reload's pace. Its unload works each shell out through the action (docs/ammo.md, 0.36 s a shell): the gun rolled 20
+    // degrees to its left (as the tube's load, less), which lifts the ejection port on its right toward the eye over the
+    // receiver, the support hand on the forend: back (the shell up out of the port and away, up and right), home.
+    // pump: [back from, back by, home from, home by] of each shell's 0..1, travel the forend's stroke (index.html's 0.12);
+    // shell: [out of the port from, clear by, gone], fly its flight (gun space); ease the roll's in/out time (s).
+    unload: { pos: [-.01, .035, .015], rot: [-.10, .04, .34], ease: .12, pump: [.04, .34, .46, .80], travel: .12,
+      shell: [.24, .44, .64], fly: [.06, .08, -.03] },
     // CL-306 (the audit: the load happened unseen behind the receiver): the gun rolls 30 degrees to the left and lifts, so
     // the loading port under the receiver turns toward the eye and the shell is seen going in
     // CL-326 (J76): a little up and rolled 17 degrees toward the support hand (was 43); the shell pinched from the pouch,
@@ -595,17 +604,19 @@ export const VM_RELOADS = Object.freeze({
 // userData.controls name); pivot (gun space) and turn (rad, about the gun's x) its pin and its travel; hold (s) the
 // trigger stays back after a shot, release (s) its return; held down (st.fireHeld) it stays back.
 export const VM_TRIGGER = Object.freeze({
-  // the pistol: the pad 42% down the blade; the travel at the face 4 game mm (the middle finger behind the guard's rear
-  // stops more: Claude 1's fit has it 2 mm inside the guard, CD-1 told)
-  pistol: { part: 'trigger', rest: [-0.225, 1.355, 0.288, -0.147], pull: [-0.187, 1.355, 0.416, -0.154], pivot: [0, 0.016, 0.075], turn: 0.0853, hold: 0.06, release: 0.09 },
+  // the pistol: the pad 42% down the blade; the travel at the face 4 game mm
+  // CE-2 (11 Nov, Claude 1's CD-1 pass 2: the hand 8.6 mm lower, the middle finger out of the guard): re-solved on the new
+  // fit, the pad 2.3 mm off the face at rest, nothing through the gun (tcl334b); clean of itself, gloved. (A closer solve,
+  // [0, 0.73, 0.977, 0.155], measured clean in the solver but 2.8 mm into the gun in tcl334b.)
+  pistol: { part: 'trigger', rest: [-0.216, 1.262, 0.075, 0.125], pull: [-0.216, 1.322, 0.098, 0.133], pivot: [0, 0.016, 0.075], turn: 0.0853, hold: 0.06, release: 0.09 },
   // the Wasp (J112: "the trigger finger is clipping through the trigger guard"): the fit's index ran through the guard and out
   // its side; now its pad lies on the trigger 68% down the blade (2 game mm off it), nothing through the guard. The trigger is
   // part of the frame's mesh (no control of its own yet: asked of ChatGPT 2), so no press until it can turn: pull = rest
-  uzi: { part: null, rest: [-0.278, 1.7, 1.084, -0.1], pull: [-0.278, 1.7, 1.084, -0.1], pivot: null, turn: 0, hold: 0.05, release: 0.07 },
-  // the GW-4: the pad on the trigger 55% down the blade, against ChatGPT 2's own trigger part (its pin at its top, userData.
-  // triggerPin). No press yet: the fit's middle finger is 0.8 mm into the trigger's tip at rest and any turn of the trigger
-  // drives it further in (1.6 mm at 0.04 rad); Claude 1 is moving it below the guard, then the pull is solved
-  m4: { part: 'trigger', rest: [-0.223, 1.86, 0.25, -0.093], pull: [-0.223, 1.86, 0.25, -0.093], pivot: null, turn: 0, hold: 0.05, release: 0.07 }
+  uzi: { part: null, rest: [-0.278, 1.7, 1.084, -0.1], pull: [-0.278, 1.7, 1.084, -0.1], pivot: null, turn: 0, hold: 0.05, release: 0.07 }
+  // the GW-4: off (11 Nov): from Claude 1's CD-1 pass-2 fit the index's pad can't come within 7.5 mm of the trigger's face
+  // (it sits 19 mm to the side, below the blade; asked of Claude 1). The old pose ([-0.223, 1.86, 0.25, -0.093]) is 1.1 mm
+  // into the magazine body there, and the nearest clean solve ([0.74, 0.8, 1.278, 0.35]) puts its pads 1.2 mm into it in
+  // tcl334c: the fit's own index stands until the fit lets it reach.
 });
 
 // CE-2 (J110: "Fire selection. Needs animation and manual manipulation by player fingers for each weapon"; J130): a gun's

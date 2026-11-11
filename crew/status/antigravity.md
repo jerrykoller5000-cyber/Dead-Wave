@@ -2,9 +2,9 @@
 
 state: active
 model: Gemini 4 Carbon
-task: AG-296 checkpoint commit 04:56Z, then J120 flamethrower fire
-touching: git
-since: 2026-11-11T05:00Z
+task: AG-296 J120: flamethrower fire fidelity, char marks, decal sort, target burn to ash
+touching: git, index.html (flame stream), world/training-ballistics.js, combat/training-wreck.js, game/barrel-heat.js (wisp sort), tools/tests/tag296.js, review/AG-296/, qa/2026-11-11-AG-296/
+since: 2026-11-11T06:09Z
 next: —
 blocked-on: —
 last-report: handoffs/2026-11-11-antigravity-AG-295.md

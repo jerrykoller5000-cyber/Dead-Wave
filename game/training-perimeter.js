@@ -63,7 +63,11 @@ export function createTrainingPerimeter(T,tg) {
   const layout=trainingPerimeterLayout(tg),height=2.35,top=2.83,floor=tg.floorY;
   const root=new T.Group();root.name='training-razor-perimeter';tg.group.add(root);root.updateWorldMatrix(true,true);
   const entries=[],owned=[],columns=tg.solids.filter(s=>s.column);
-  const renderSpans=layout.segments.flatMap(s=>trainingFenceSpans(s,columns));
+  // Keep the 30 cm concertina envelope and the 11 cm footplates clear of
+  // shell walls, doorway trim/keypads and columns, including return ends.
+  const keypads=(tg.securityDoor?.keypads||[]).map(k=>({minX:k.x-.07,maxX:k.x+.07,minZ:k.z-.08,maxZ:k.z+.08}));
+  const obstacles=[...columns,...tg.solids.filter(s=>s.wall),...keypads];
+  const renderSpans=layout.segments.flatMap(s=>trainingFenceSpans(s,obstacles));
   for(const side of ['west','south','east']) {
     const group=new T.Group();group.name='training-perimeter-'+side;root.add(group);
     const frame=new T.MeshStandardMaterial({color:0x39453e,roughness:.78,metalness:.5});

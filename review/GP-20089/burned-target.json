@@ -1,0 +1,50 @@
+{
+  "burned": {
+    "burn": true,
+    "state": "wrecked",
+    "flag": true,
+    "solidGone": true,
+    "hitAgain": false,
+    "otherHit": true,
+    "start": {
+      "ok": false,
+      "reason": "target-burned"
+    },
+    "afterExit": {
+      "state": "wrecked",
+      "flag": true
+    }
+  },
+  "cloneClean": {
+    "visible": true,
+    "scale": 1,
+    "plateVisible": true,
+    "plateScale": 1,
+    "char": false
+  },
+  "allDown": true,
+  "bankBurn": true,
+  "stateAfterBurn": "wrecked",
+  "readyAfterBurn": false,
+  "stateAfterLower": "wrecked",
+  "afterRelease": {
+    "state": "wrecked",
+    "burned": true,
+    "originalMark": true
+  },
+  "resetStart": {
+    "ok": true,
+    "id": "1794375038690-1"
+  },
+  "featureBankBurn": true,
+  "session": {
+    "state": "ABORTED",
+    "reason": "target-burned"
+  },
+  "bank0": {
+    "state": "wrecked",
+    "burned": true
+  },
+  "otherState": "up",
+  "errorText": "A range plate has burned up. Reset the range before starting a drill."
+}

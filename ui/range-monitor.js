@@ -3,11 +3,16 @@ import {drillInstruction,targetGoal} from './range-guide.js';
 import {bakeStatic} from '../world/bake.js';
 export function createRangeMonitor(T,tg){
  const height=3.3448; // Jerry: raise the overhead scoreboard by one foot.
- const g=new T.Group();g.name='range-drill-monitor';g.position.set(0,height,.69);g.rotation.y=Math.PI;tg.group.add(g);
+ const g=new T.Group();g.name='range-drill-monitor';g.position.set(0,height,.58);g.rotation.y=Math.PI;tg.group.add(g);
  const owned=new Set(),keep=o=>(owned.add(o),o),dark=keep(new T.MeshStandardMaterial({color:0x202a27,metalness:.65,roughness:.6})),steel=keep(new T.MeshStandardMaterial({color:0x67776d,metalness:.8,roughness:.55}));
  const box=(w,h,d,m,x,y,z)=>{const o=new T.Mesh(keep(new T.BoxGeometry(w,h,d)),m);o.position.set(x,y,z);g.add(o);};
  box(3.55,1.4,.15,dark,0,0,0);
- for(const x of [-1.5,1.5]){box(.12,1.66,.12,steel,x,0,-.08);for(const y of [-.63,.63])box(.05,.05,.04,steel,x,y,.09);}
+ for(const x of [-1.5,1.5]){
+  box(.12,1.66,.08,steel,x,0,.01);
+  // Short stand-offs meet the firing-line posts at their front face (.7075 m).
+  box(.12,.08,.0525,steel,x,.63,-.10125);
+  for(const y of [-.63,.63])box(.05,.05,.04,steel,x,y,.09);
+ }
  for(const y of [-.67,.67])box(3.5,.06,.04,steel,0,y,.09);
  const cv=document.createElement('canvas');cv.width=1024;cv.height=400;const c=cv.getContext('2d'),tex=keep(new T.CanvasTexture(cv));tex.colorSpace=T.SRGBColorSpace;
  const mat=keep(new T.MeshBasicMaterial({map:tex,toneMapped:false})),screen=new T.Mesh(keep(new T.PlaneGeometry(3.35,1.25)),mat);screen.name='range-monitor-screen';screen.position.z=.084;g.add(screen);

@@ -869,6 +869,14 @@ export function createViewmodel(ctx) {
       off.x += pos[0] * k; off.y += pos[1] * k; off.z += pos[2] * k;
       rq.multiply(eulerQ(rot[0] * k, rot[1] * k, rot[2] * k, _rq));
     }
+    // CE-3: through an ammo change's unload the gun rolls its ejection port toward the eye, eased in and out (R.unload)
+    { const U = !AK && R && R.unload, want = U && S.unloadW ? 1 : 0, tau = ((U && U.ease) || 0.12) / 3;
+      S.unloadK = (S.unloadK || 0) + (want - (S.unloadK || 0)) * (dt > 0 ? 1 - Math.exp(-dt / tau) : 0);
+      if (U && S.unloadK > 0.0005 && st.reloadU == null) {
+        const k = smooth(S.unloadK) * (1 - a * 0.7);
+        off.x += U.pos[0] * MX * k; off.y += U.pos[1] * k; off.z += U.pos[2] * k;
+        rq.multiply(eulerQ(U.rot[0] * MX * k, U.rot[1] * k, U.rot[2] * MX * k, _rq));
+      } }
     // raised from below
     const lo = 1 - smooth(S.raise);
     off.y -= 0.26 * lo; off.z += 0.06 * lo;
@@ -945,6 +953,27 @@ export function createViewmodel(ctx) {
       if (lead != null) ud.doubleActionPose(g.trigger, g.hammer, 0.88 * lead, false);
       else if (t < da.t[2]) ud.doubleActionPose(g.trigger, g.hammer, stroke(t, da.t[0], da.t[1], da.t[2]), true);
     }
+    if (da && g.cylinder && ud.chamberNoses) cylinderTurn(g, ud.chamberNoses, lead, st);
+  }
+  // CE-2 (J118: "the cylinder turns at the eye"): the view's cylinder indexed to its rounds. index.html fills chambers 0..L-1
+  // (live) and fires them from L-1 down (revolverChambers), each chamber at 30 + 60i degrees round the cylinder's axis, the
+  // top (90) on the bore under the hammer. At rest the chamber just fired (L) sits under the hammer; a pull turns the next
+  // live one (L-1) up by the time the hammer is at full cock (u 0.85), and the break leaves it there (L-1 is then the
+  // rest). In chamber steps: rest 1 - L, a pull adds up to one. Let go before the break and it eases back (6 steps/s).
+  // The turn is index.html's order: clockwise from behind, as a Colt's (a Smith & Wesson turns the other way).
+  const _cylQ = Q();
+  function cylinderTurn(g, noses, lead, st) {
+    let L = 0; for (const n of noses) if (n && n.visible) L++;
+    const want = 1 - L + (lead != null ? smooth(clamp(lead / 0.85, 0, 1)) : 0);
+    let s = g.cylSpin;
+    if (s == null || st.reloadU != null) s = want;
+    else {
+      let d = want - s; d -= 6 * Math.round(d / 6);   // the nearest way round
+      if (lead != null || d >= -1e-6) s += d;   // the pull, and the break's new count: at once
+      else s += Math.max(d, -6 * frameDt);   // let go before the break (or rounds put in outside a reload): back, eased
+    }
+    s -= 6 * Math.floor(s / 6); g.cylSpin = s; info.cylSpin = s;
+    if (Math.abs(s) > 1e-5) g.cylinder.quaternion.multiply(_cylQ.setFromAxisAngle(AX_Z, s * Math.PI / 3));
   }
   // A shot's kick into a pair of springs (back, up, a random side), and the view's share of it (CL-293).
   function shotKick(K, k, a, mul = 1) {
@@ -1009,6 +1038,13 @@ export function createViewmodel(ctx) {
     if (st) { S.pitch = st.pitch || 0; if (st.phase != null && isFinite(st.phase)) S.bobPhase = st.phase; }   // CL-324 (J70): the empty hands' frame and swing
     dt = Math.min(0.05, Math.max(0, dt || 0));
     frameDt = dt > 0 ? dt : 1 / 60;   // CL-305: the twist's rate limit
+    // CE-3 (J133): X's change of type on the gun in hand (index.html st.ammoSwitch, CB-294): its load is the reload's path,
+    // a shell a trip (st.reloadU the shell's own 0..1); its unload the forend worked once a shell (S.unloadW: gunFrame's roll,
+    // the stroke and the shell out of the port below). The view's own copy of st; nothing goes back.
+    const SWa = st && st.reloadU == null && st.ammoSwitch && st.ammoSwitch.gun === st.weapon ? st.ammoSwitch : null;
+    if (SWa && SWa.phase === 'load') st = Object.assign({}, st, { reloadU: clamp(SWa.u, 0, 1), reloadEmpty: true, rounds: null });
+    S.unloadW = SWa && SWa.phase === 'unload' ? SWa : null;
+    info.ammoSwitch = SWa ? { phase: SWa.phase, u: SWa.u } : null;
     const candidate = st && st.want && st.weapon && VM_POSES[st.weapon] ? weaponMeshes[st.weapon] : null;
     const needsStockSplit = st && (st.weapon === 'm4' || st.weapon === 'ak' ||
       st.weapon === 'shotgun' || st.weapon === 'aa12' || st.weapon === 'sniper');
@@ -1082,6 +1118,14 @@ export function createViewmodel(ctx) {
       // by mirrorParts) moved it with no hand on it in a tactical reload and doubled the empty reload's (0.196 for 0.07)
       if (gun.work && gun.workBase && ur != null && !AK) gun.work.position.z = gun.workBase.z;
       if (gun.work && rk && ur != null) { const back = smooth((ur - rk[0]) / (rk[1] - rk[0])) * (1 - smooth((ur - rk[2]) / 0.03)); gun.work.position.z -= rk[3] * back; } }
+    // CE-3 (J133): an ammo change's unload works the forend back and home once a shell (R.unload.pump); the support hand
+    // rides it as on a shot. The view's own stroke while his gun's forend is at rest (index.html may stroke its own: then
+    // the mirror carries it and this stands aside).
+    { const Uw = S.unloadW, Rr = reloadOf(P, st), U = Rr && Rr.unload;
+      if (Uw && U && gun.pump && gun.pumpBase && !AK) {
+        const sp = gun.src.userData.pump, sb = gun.src.userData.basePumpPos, pp = U.pump, u = clamp(Uw.u, 0, 1);
+        if (!sp || !sb || Math.abs(sp.position.z - sb.z) < 1e-5) gun.pump.position.z = gun.pumpBase.z - U.travel * smooth((u - pp[0]) / (pp[1] - pp[0])) * (1 - smooth((u - pp[2]) / (pp[3] - pp[2])));
+      } }
     // the hands (CL-301: a pair has no support hand: the left holds the left gun as the right holds its own, and no
     // reload hands; both guns dip in gunFrame)
     const R = AK ? null : reloadOf(P, st);
@@ -1254,6 +1298,9 @@ export function createViewmodel(ctx) {
     if (TR && poseR === gripP && !BL && !HN) {
       const want = (st.fireHeld || (S.slideT < TR.hold && S.shots > 0)) ? 1 : 0;
       S.trig = want >= (S.trig || 0) ? want : Math.max(want, (S.trig || 0) - dt / TR.release);
+      // J118: a double action's finger follows its trigger (the model's doubleActionPose turns it through the pull and the
+      // reset, actionCycle above): TR.follow is the trigger's turn at full travel
+      if (TR.follow && gun.trigger) S.trig = clamp(gun.trigger.rotation.x / TR.follow, 0, 1);
       const k = smooth(S.trig), f = (_trigPose = copyPose(gripP, _trigPose)).f[0];
       for (let j = 0; j < 4; j++) f[j] = TR.rest[j] + (TR.pull[j] - TR.rest[j]) * k;
       poseR = _trigPose; trigOn = true; info.trigger = k;
@@ -1297,6 +1344,13 @@ export function createViewmodel(ctx) {
         gun.mag.position.copy(gun.magBase.pos); gun.mag.quaternion.copy(gun.magBase.quat); gun.mag.scale.copy(gun.magBase.scale);
         gun.mag.visible = ms !== 'pouch';
       }
+      // CE-3 (GT-20080's top round, ChatGPT 2): index.html shows the rounds the gun holds, which change only at the reload's
+      // end, so the magazine that comes up from the pouch (from the swap on) shows its top round: it is a full one. Before
+      // the swap the outgoing one shows what it held (the mirror of his gun's).
+      if (R && R.mag && u != null && u >= R.mag.swapIn) {
+        if (gun.magTop === undefined) gun.magTop = gun.mag.getObjectByName('magazine top round') || null;
+        if (gun.magTop) gun.magTop.visible = true;
+      }
     }
     if (gun2 && gun2.mag && gun2.magBase) { gun2.mag.position.copy(gun2.magBase.pos); gun2.mag.quaternion.copy(gun2.magBase.quat); gun2.mag.scale.copy(gun2.magBase.scale); gun2.mag.visible = true; }
     // The pump loads one shell per game reload cycle. Keep the loose shell in
@@ -1326,6 +1380,18 @@ export function createViewmodel(ctx) {
         gun.shell.quaternion.copy(gun.shellBase.quat);
       }
     }
+    // CE-3 (J133): the unload's shell (the type coming out: index.html's syncReloadShell) up out of the ejection port on the
+    // back stroke and away to the right, turning (R.unload.shell, fly); index.html puts it back in his count
+    { const Uw = S.unloadW, U = R && R.unload, EP = gun.src.userData && gun.src.userData.ejectPort;
+      if (Uw && U && U.shell && gun.shell && gun.shellBase && EP && !AK) {
+        const u = clamp(Uw.u, 0, 1), W = U.shell, on = u >= W[0] && u < W[2];
+        gun.shell.visible = on;
+        if (on) {
+          const k1 = smooth((u - W[0]) / (W[1] - W[0])), k2 = clamp((u - W[1]) / (W[2] - W[1]), 0, 1);
+          gun.shell.position.set(EP[0] - 0.014 + 0.024 * k1 + U.fly[0] * k2, EP[1] + 0.008 * k1 + U.fly[1] * k2 - 0.06 * k2 * k2, EP[2] + U.fly[2] * k2);
+          gun.shell.quaternion.copy(gun.shellBase.quat).premultiply(_eq.setFromAxisAngle(AX_Y, -0.5 * k1 - 1.8 * k2)).premultiply(_rq.setFromAxisAngle(AX_Z, -2.4 * k2));
+        }
+      } }
     driveParts(R, u, st.rounds || null);
     place();
   }

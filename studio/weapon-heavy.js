@@ -1,5 +1,7 @@
 // GP-164: heavy-weapon cosmetic constructors. Existing animation and grip contracts remain in the caller.
 import { attachLaserLight } from './weapon-attachments.js';
+import { addTriggerArtwork, bindModelArtwork, groupArtwork } from './weapon-model-hooks.js';
+import { markPaintSurface } from './weapon-finish.js';
 
 // Small closed surface builders use BufferGeometry, also available in the test renderer.
 // Shared geometry contains no instance material, colour, animation or game state.
@@ -122,15 +124,20 @@ export function makeMinigunModel(ctx) {
   const { THREE, gunKit, gunArc, gunBand, gunEffects, finishGun, gunBody, gunDark, gunMid, gunAccent, gunPoly, gunRubber, gunOlive, fuelRedMat, glassMat, sightDotMat } = ctx;
   const gun = new THREE.Group();
   const K = gunKit(gun);
+  const panelSteel = new THREE.MeshStandardMaterial({color: 0x3b4245, metalness: .17, roughness: .72});
+  const drumFinish = new THREE.MeshStandardMaterial({color: 0x545a3e, metalness: .15, roughness: .67});
+  const lidFinish = new THREE.MeshStandardMaterial({color: 0x565e60, metalness: .33, roughness: .54});
   // Housing: one moulded body with a round back end, bolted side plates, cooling slots, the hub showing.
   // Ease the rear shell between its original top and bottom attachment points.
   // The posed glove pad reaches this face; the separate rear handle stays in its socket.
   const rearShell=gunArc(-.32,0,.13,Math.PI/2,Math.PI*1.5,10).map(([z,y])=>[
     z+.012*(1-(y/.13)**2),y
   ]);
-  K.slab([[.225,-.13],[.225,.13],...rearShell],.28,gunBody,{bevel:.035,segs:3});
+  const housing = K.slab([[.225,-.13],[.225,.13],...rearShell],.28,gunBody,{bevel:.035,segs:3});
+  markPaintSurface(housing, 'receiver');
   for (const sx of [-1, 1]) {
-    K.slab([[-0.255, -0.092], [0.152, -0.092], [0.161, -0.08], [0.161, 0.087], [0.148, 0.098], [-0.247, 0.098]], 0.020, gunMid, { x: sx * 0.150, bevel: 0.003 });
+    const plate = K.slab([[-0.255, -0.092], [0.152, -0.092], [0.161, -0.08], [0.161, 0.087], [0.148, 0.098], [-0.247, 0.098]], 0.020, gunMid, { x: sx * 0.150, bevel: 0.003 });
+    markPaintSurface(plate, 'receiver');
     for (let i = 0; i < 4; i++) K.box(0.012, 0.009, 0.26, gunDark, sx * 0.158, 0.065 - i * 0.039, -0.064, 0, 0, 0, null, 0.003);
     for (const [by, bz] of [[0.085, 0.13], [0.085, -0.24], [-0.085, 0.13], [-0.085, -0.24]]) K.cyl(0.011, 0.011, 0.012, gunAccent, sx * 0.157, by, bz, null, 6, 'x');
   }
@@ -144,7 +151,7 @@ export function makeMinigunModel(ctx) {
   K.box(0.017, 0.005, 0.064, gunMid, 0.174, 0.014, 0.122, 0, 0, -0.37, null, 0.001);
   for (const sx of [-1, 1]) {
     K.box(0.061, 0.007, 0.19, gunDark, sx * 0.079, 0.129, -0.075, 0, 0, 0, null, 0.004);
-    K.box(0.055, 0.008, 0.184, gunMid, sx * 0.079, 0.134, -0.075, 0, 0, 0, null, 0.004);
+    K.box(0.055, 0.008, 0.184, panelSteel, sx * 0.079, 0.134, -0.075, 0, 0, 0, null, 0.004);
     for (const z of [-0.148, -0.002]) K.cyl(0.004, 0.004, 0.003, gunAccent, sx * 0.079, 0.139, z, null, 8, 'y');
   }
   K.cyl(0.07, 0.07, 0.3, gunDark, 0, -0.02, -0.32, null, 12, 'x');
@@ -180,19 +187,23 @@ export function makeMinigunModel(ctx) {
   K.cyl(0.018, 0.018, 0.116, gunRubber, -0.304, 0.012, 0.16, null, 12, 'y');
   for (const y of [-0.043, 0.066]) K.cyl(0.024, 0.024, 0.01, gunMid, -0.304, y, 0.16, null, 12, 'y');
   for (const y of [-0.026, -0.007, 0.012, 0.031, 0.05]) K.cyl(0.0188, 0.0188, 0.003, gunDark, -0.304, y, 0.16, null, 12, 'y');
+  const archStart = gun.children.length;
   for (const z of [-0.12, 0.12]) K.box(0.03, 0.12, 0.03, gunDark, 0, 0.18, z);
   K.box(0.03, 0.021, 0.27, gunDark, 0, 0.238, 0);
+  for (const piece of gun.children.slice(archStart)) markPaintSurface(piece, 'rail');
   for (const z of [-0.12, 0.12]) { K.cyl(0.018, 0.018, 0.047, gunMid, 0, 0.155, z, null, 10, 'x'); bolt(K, gunDark, gunAccent, -0.025, 0.155, z); }
   const reflexStart = gun.children.length;
   K.box(0.05, 0.029, 0.18, gunRubber, 0, 0.263, 0);
   for (let i = 0; i < 8; i++) K.box(0.051, 0.003, 0.007, gunPoly, 0, 0.278, -0.072 + i * 0.020, 0, 0, 0, null, 0.001);
   // GP-20051/J22: protective chamfered reflex hood, lens, elevation/windage dials
   // and emitter housing. The red aiming datum stays at (0, .330, .0355).
+  const hoodStart = gun.children.length;
   K.box(0.045, 0.013, 0.083, gunDark, 0, 0.284, 0.006, 0, 0, 0, null, 0.003);
   K.box(0.052, 0.017, 0.025, gunMid, 0, 0.298, -0.022, 0, 0, 0, null, 0.003);
   for (const sx of [-1, 1])
     K.slab([[-0.029, 0.294], [-0.029, 0.346], [-0.017, 0.366], [0.038, 0.366], [0.045, 0.352], [0.045, 0.294]], 0.005, gunDark, { x: sx * 0.025, bevel: 0.0015 });
   K.box(0.055, 0.007, 0.055, gunDark, 0, 0.367, 0.01, 0, 0, 0, null, 0.002);
+  for (const piece of gun.children.slice(hoodStart)) markPaintSurface(piece, 'optic shell');
   K.box(0.051, 0.003, 0.009, gunAccent, 0, 0.367, 0.04, 0, 0, 0, null, 0.001);
   K.cyl(0.012, 0.012, 0.013, gunMid, 0, 0.373, -0.007, null, 12, 'y');
   K.cyl(0.011, 0.011, 0.013, gunMid, 0.03, 0.329, -0.016, null, 12, 'x');
@@ -206,7 +217,7 @@ export function makeMinigunModel(ctx) {
   for (const part of gun.children.slice(reflexStart, -1)) defaultSight.add(part);
   gun.userData.defaultSight = defaultSight;
   // Trigger and guard sit just ahead of the rear firing grip.
-  K.slab(gunBand([[-0.44, 0.07], [-0.43, 0.035], [-0.425, 0.008]], 0.005), 0.016, fuelRedMat, { bevel: 0.002 });
+  const trigger = addTriggerArtwork(gun, K, gunBand([[-0.44, 0.07], [-0.43, 0.035], [-0.425, 0.008]], 0.005), 0.016, fuelRedMat, { bevel: 0.002 }).parent;
   K.slab(gunBand([[-0.46, 0.081], [-0.40, 0.078], [-0.39, -0.045], [-0.465, -0.06]], 0.006), 0.024, gunDark, { bevel: 0.003 });
   // Face plate and a spindle hub for the barrel cluster.
   K.lathe([[0, 0.21], [0.126, 0.21], [0.132, 0.216], [0.132, 0.264], [0.126, 0.27], [0, 0.27]], gunMid, { seg: 20 });
@@ -214,10 +225,11 @@ export function makeMinigunModel(ctx) {
   const barrelAssembly = new THREE.Group();
   barrelAssembly.position.set(0, 0, 0.27);
   const barrelLen = 0.84, barrelR = 0.028, clusterR = 0.075;
+  const exposedTubes = [];
   K.cyl(0.03, 0.03, barrelLen, gunDark, 0, 0, barrelLen / 2, barrelAssembly, 10);
   for (let i = 0; i < 6; i++) {
     const ang = (i / 6) * Math.PI * 2, bx = Math.cos(ang) * clusterR, by = Math.sin(ang) * clusterR;
-    K.cyl(barrelR * 0.85, barrelR, barrelLen, gunAccent, bx, by, barrelLen / 2, barrelAssembly, 10);
+    exposedTubes.push(K.cyl(barrelR * 0.85, barrelR, barrelLen, gunAccent, bx, by, barrelLen / 2, barrelAssembly, 10));
     K.lathe([[0, barrelLen - 0.04], [barrelR * 1.08, barrelLen - 0.04], [barrelR * 1.08, barrelLen + 0.008], [barrelR * 0.5, barrelLen + 0.01], [barrelR * 0.5, barrelLen + 0.004], [0, barrelLen + 0.004]], gunDark, { x: bx, y: by, parent: barrelAssembly, seg: 10 });
   }
   // Machined retaining collars replace the bulky rounded rings. The centre stays open.
@@ -240,14 +252,14 @@ export function makeMinigunModel(ctx) {
   const ammoBox = new THREE.Group();
   ammoBox.position.set(0.2, -0.08, -0.02);
   ammoBox.rotation.z = 0.12;
-  K.cyl(0.125, 0.125, 0.155, gunOlive, 0, -0.045, 0, ammoBox, 32, 'x');
-  K.cyl(0.128, 0.124, 0.009, gunMid, 0.082, -0.045, 0, ammoBox, 32, 'x');
+  K.cyl(0.125, 0.125, 0.155, drumFinish, 0, -0.045, 0, ammoBox, 32, 'x');
+  K.cyl(0.128, 0.124, 0.009, lidFinish, 0.082, -0.045, 0, ammoBox, 32, 'x');
   K.cyl(0.050, 0.056, 0.009, gunOlive, 0.091, -0.045, 0, ammoBox, 24, 'x');
   for (let i = 0; i < 6; i++) {
     const a = i * Math.PI / 3;
     K.cyl(0.004, 0.004, 0.003, gunDark, 0.088, -0.045 + 0.108 * Math.cos(a), 0.108 * Math.sin(a), ammoBox, 8, 'x');
   }
-  K.box(0.048, 0.072, 0.062, gunOlive, -0.018, 0.110, 0.028, 0, 0, 0, ammoBox, 0.004);
+  K.box(0.048, 0.072, 0.062, drumFinish, -0.018, 0.110, 0.028, 0, 0, 0, ammoBox, 0.004);
   gun.add(ammoBox);
   // Fixed socket above the detachable drum neck.
   K.box(0.054, 0.030, 0.068, gunDark, 0.167, 0.071, 0.028, 0, 0, -0.12, null, 0.004);
@@ -267,7 +279,13 @@ export function makeMinigunModel(ctx) {
   gun.userData.reloadParts = Object.assign(gun.userData.reloadParts || {}, {
     ammoBox: { restPos: [0.2, -0.08, -0.02], restRot: [0, 0, 0.12], visibleAtRest: true }
   });
+  gun.userData.partFinish = true;
+  for (const piece of gun.children) {
+    if (piece.material === panelSteel) markPaintSurface(piece, 'receiver');
+  }
   attachLaserLight(gun, 'minigun', ctx);
+  const lamp = gun.userData.laserLightUnit;
+  for (const name of ['moduleShell', 'sideRailClamp']) markPaintSurface(lamp.getObjectByName(name), 'light shell');
   // GP-20063: scale the held rotary assembly toward one metre. The view gun
   // resets its source root transform, so scale the parts instead.
   const heldScale = 0.70;
@@ -276,6 +294,9 @@ export function makeMinigunModel(ctx) {
     child.position.multiplyScalar(heldScale);
     child.scale.multiplyScalar(heldScale);
   }
+  gun.userData.triggerPin = trigger.position.toArray();
+  trigger.userData.restPosition = trigger.position.toArray();
+  bindModelArtwork(gun, 'heatParts', 'barrel', groupArtwork(THREE, ...exposedTubes));
   gun.userData.muzzleLocal.multiplyScalar(heldScale);
   gun.userData.laserBaseZ *= heldScale;
   gun.userData.laserLensLocal?.multiplyScalar(heldScale);
@@ -284,7 +305,7 @@ export function makeMinigunModel(ctx) {
   // The fitted short rail replaces the stock reflex pad on the same arch.
   const opticSeat = K.group(0, 0, 0);
   opticSeat.name = 'rotary-optic-seat';
-  K.box(0.030, 0.003, 0.054, gunMid, 0, 0.1935, 0.006, 0, 0, 0, opticSeat, 0.0006);
+  markPaintSurface(K.box(0.030, 0.003, 0.054, gunMid, 0, 0.1935, 0.006, 0, 0, 0, opticSeat, 0.0006), 'rail');
   opticSeat.visible = false;
   gun.userData.opticPlate = opticSeat;
   gun.userData.reloadParts.ammoBox.restPos = ammoBox.position.toArray();
@@ -297,7 +318,10 @@ export function makeLauncherModel(ctx) {
   const { THREE, gunKit, gunBand, gripOutline, gunEffects, finishGun, gunBody, gunDark, gunMid, gunAccent, gunPoly, gunRubber, gunOlive, hazardYellow, steelMat, brassMat } = ctx;
   const gun = new THREE.Group();
   const K = gunKit(gun);
-  const receiverSteel = steelMat.clone(); receiverSteel.color.setHex(0x858a8d); receiverSteel.roughness = 0.53;   // matte stainless, not mirror-bright
+  const receiverSteel = steelMat.clone();
+  receiverSteel.color.setHex(0x70797e);
+  receiverSteel.roughness = .69;
+  receiverSteel.metalness = .38;
   // Rear frame up to the drum's back face, the top strap over the drum, the forward frame round the barrel.
   K.slab([[-0.25, 0.08], [-0.25, -0.035], [-0.23, -0.06], [0.039, -0.06], [0.049, -0.044], [0.049, 0.09], [0.033, 0.106], [-0.227, 0.106]], 0.15, receiverSteel, { bevel: 0.012 });
   // A shallow stamped rear service cover breaks the large blank face seen at 40 cm.
@@ -387,7 +411,7 @@ export function makeLauncherModel(ctx) {
   K.slab(gunBand([[0.03, -0.058], [0.03, -0.088], [0.016, -0.096], [-0.01, -0.09]], 0.007), 0.03, gunDark, { bevel: 0.004 });   // GB-180: a moulded guard, not a wire (pass 4: as wide as a real guard)
   // GB-175: trigger face toward the grip, tip curling forward (the convention Jerry set on the revolver and sniper).
   // GB-180: a solid trigger blade (wide at the root, tapering to the curled tip), not a wire.
-  K.slab([[0.0219, -0.062], [0.0173, -0.0725], [0.0179, -0.0788], [0.0223, -0.0832], [0.0177, -0.0888], [0.0101, -0.0832], [0.0067, -0.0715], [0.0101, -0.058]], 0.011, gunAccent, { bevel: 0.002 });
+  addTriggerArtwork(gun, K, [[0.0219, -0.062], [0.0173, -0.0725], [0.0179, -0.0788], [0.0223, -0.0832], [0.0177, -0.0888], [0.0101, -0.0832], [0.0067, -0.0715], [0.0101, -0.058]], 0.011, gunAccent, { bevel: 0.002 });
   // 6-chamber drum like a real M32/Milkor: cylinder axis along the bore (+z),
   // chambers parallel to the barrel, circular faces front/rear — not sideways.
   const drumHinge = new THREE.Group();
@@ -472,13 +496,15 @@ export function makeLauncherModel(ctx) {
       note: 'one loose grenade in the support palm, reused for each insertion' }
   });
   // Barrel shroud and original foregrip contact, with short accessory rails clear of the front sight.
-  K.lathe([[0, 0.2], [0.052, 0.2], [0.052, 0.66], [0, 0.66]], gunAccent, { y: 0.04, seg: 16 });
+  const barrel = K.lathe([[0, 0.2], [0.052, 0.2], [0.052, 0.66], [0, 0.66]], gunAccent, { y: 0.04, seg: 16 });
+  const firstRailPart = gun.children.length;
   for (const x of [0.058, -0.058]) K.box(0.012, 0.03, 0.3, gunDark, x, 0.04, 0.42);
   K.box(0.03, 0.012, 0.3, gunDark, 0, -0.018, 0.42);
   K.box(0.037, 0.006, 0.37, gunDark, 0, 0.091, 0.46, 0, 0, 0, null, 0.001);
   K.rail(0.37, 0, 0.101, 0.46, null, 0.049);   // 12-o'clock rail, behind the front post
   for (const sx of [-1, 1]) K.rail(0.36, sx * 0.068, 0.04, 0.46, null, 0.025, sx);   // 3 and 9
   K.rail(0.34, 0, -0.018, 0.46, null, 0.03, 2);   // 6-o'clock rail under the foregrip mount
+  for (const piece of gun.children.slice(firstRailPart)) markPaintSurface(piece, 'rail');
   K.slab([[0.395, -0.02], [0.445, -0.02], [0.44, -0.148], [0.43, -0.156], [0.405, -0.156], [0.398, -0.148]], 0.048, gunPoly, { bevel: 0.014, segs: 3 });
   for (const sx of [-1, 1]) for (let i = 0; i < 7; i++) K.box(0.002, 0.006, 0.033, gunDark, sx * 0.025, -0.05 - i * 0.014, 0.419, 0, 0, 0, null, 0.001);
   K.lathe([[0, 0.65], [0.062, 0.65], [0.062, 0.68], [0.042, 0.682], [0.042, 0.672], [0, 0.672]], gunDark, { y: 0.04, seg: 16 });
@@ -486,7 +512,19 @@ export function makeLauncherModel(ctx) {
   gun.userData.laser.position.set(0, 0.04, 3.7);
   gun.userData.laserBaseZ = 0.72;
   gun.userData.barrelAssembly = null;
+  gun.userData.partFinish = true;
+  for (const piece of gun.children) {
+    if (piece.material === receiverSteel) markPaintSurface(piece, 'receiver');
+    else if (piece.material === gunPoly) markPaintSurface(piece, 'furniture');
+  }
+  for (const piece of stock.children) {
+    if (piece.material === gunOlive) markPaintSurface(piece, 'furniture');
+  }
+  for (const piece of opticPlate.children) markPaintSurface(piece, 'rail');
   attachLaserLight(gun, 'launcher', ctx);
+  const lamp = gun.userData.laserLightUnit;
+  for (const name of ['moduleShell', 'topPlate']) markPaintSurface(lamp.getObjectByName(name), 'light shell');
+  bindModelArtwork(gun, 'heatParts', 'barrel', groupArtwork(THREE, barrel));
   return finishGun(gun);
 }
 

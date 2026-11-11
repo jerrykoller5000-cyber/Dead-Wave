@@ -1,0 +1,166 @@
+[
+  {
+    "pose": "hip",
+    "light": "noon",
+    "key": "launcher",
+    "raised": 1,
+    "ads": 0,
+    "reloading": false,
+    "time": 0.5,
+    "sun": 3.1,
+    "sha256": "e5bfbeeafcebd5f0fb800fd77df62a162a1ea33b08db17a164a404a4186fea31",
+    "bytes": 133841
+  },
+  {
+    "pose": "hip",
+    "light": "overcast",
+    "key": "launcher",
+    "raised": 1,
+    "ads": 0,
+    "reloading": false,
+    "time": 0.5,
+    "sun": 0.65,
+    "sha256": "619524d1f4d74568f4ba49f5d30112b4c545afd2be3aa0ba4f016eff9c7ed0a1",
+    "bytes": 124718
+  },
+  {
+    "pose": "hip",
+    "light": "dusk",
+    "key": "launcher",
+    "raised": 1,
+    "ads": 0,
+    "reloading": false,
+    "time": 0.5,
+    "sun": 1.55,
+    "sha256": "0786e5c05b96d053c721d5bccd343bd9b1fa51cc0cf0929c596ea737010a51a1",
+    "bytes": 119091
+  },
+  {
+    "pose": "hip",
+    "light": "night",
+    "key": "launcher",
+    "raised": 1,
+    "ads": 0,
+    "reloading": false,
+    "time": 0.5,
+    "sun": 0.35,
+    "sha256": "c47c22944a5e680e6fe648a21387957f16d14746cee541c61aa64c81fe4479a3",
+    "bytes": 75146
+  },
+  {
+    "pose": "aimed",
+    "light": "noon",
+    "key": "launcher",
+    "raised": 1,
+    "ads": 1,
+    "reloading": false,
+    "time": 0.5,
+    "sun": 3.1,
+    "ironSight": {
+      "leaf": true,
+      "rmr": false,
+      "overlay": 0
+    },
+    "sha256": "226a79a17657429d153134a7758d40fd4919da67cacdde856ee9ae9b8c220d7d",
+    "bytes": 120121
+  },
+  {
+    "pose": "aimed",
+    "light": "overcast",
+    "key": "launcher",
+    "raised": 1,
+    "ads": 1,
+    "reloading": false,
+    "time": 0.5,
+    "sun": 0.65,
+    "ironSight": {
+      "leaf": true,
+      "rmr": false,
+      "overlay": 0
+    },
+    "sha256": "a4b0029acf92496b175599c72d09f9ff2949fd3b611f56257cfbb3a3407f7b10",
+    "bytes": 116366
+  },
+  {
+    "pose": "aimed",
+    "light": "dusk",
+    "key": "launcher",
+    "raised": 1,
+    "ads": 1,
+    "reloading": false,
+    "time": 0.5,
+    "sun": 1.55,
+    "ironSight": {
+      "leaf": true,
+      "rmr": false,
+      "overlay": 0
+    },
+    "sha256": "0f6d77312a94751aa7d707cc502fc650c19433849213c490631ab9f0485183b2",
+    "bytes": 110525
+  },
+  {
+    "pose": "aimed",
+    "light": "night",
+    "key": "launcher",
+    "raised": 1,
+    "ads": 1,
+    "reloading": false,
+    "time": 0.5,
+    "sun": 0.35,
+    "ironSight": {
+      "leaf": true,
+      "rmr": false,
+      "overlay": 0
+    },
+    "sha256": "360b5847100bc509012c35fd13954bc3b7b76ec50ba3ca0134758e7d47553a0a",
+    "bytes": 69337
+  },
+  {
+    "pose": "reload",
+    "light": "noon",
+    "key": "launcher",
+    "raised": 1,
+    "ads": 0,
+    "reloading": true,
+    "time": 0.5,
+    "sun": 3.1,
+    "sha256": "b403e2fcb0545a0a8d0285da209997bd97cf6ecb49a735db2eb585dd67813e05",
+    "bytes": 137948
+  },
+  {
+    "pose": "reload",
+    "light": "overcast",
+    "key": "launcher",
+    "raised": 1,
+    "ads": 0,
+    "reloading": true,
+    "time": 0.5,
+    "sun": 0.65,
+    "sha256": "0dba19ce1a8fd6e82ce30f7aecd35c5da305f82f5f01a7ec4dafb9001f774652",
+    "bytes": 125494
+  },
+  {
+    "pose": "reload",
+    "light": "dusk",
+    "key": "launcher",
+    "raised": 1,
+    "ads": 0,
+    "reloading": true,
+    "time": 0.5,
+    "sun": 1.55,
+    "sha256": "106845831e146880fcc44cc2270272003e7e102d77b1155ecf92bd0249ac3f3b",
+    "bytes": 124502
+  },
+  {
+    "pose": "reload",
+    "light": "night",
+    "key": "launcher",
+    "raised": 1,
+    "ads": 0,
+    "reloading": true,
+    "time": 0.5,
+    "sun": 0.35,
+    "sha256": "751e02a5c28b6ba9a1cd668e42231bf7e1038bbbb74154b7275308899694faab",
+    "bytes": 78404
+  }
+]

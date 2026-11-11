@@ -22,6 +22,7 @@ export function createRangeFeature(T,tg,env){
  }});
  function start(d){
   if(!d||!drillWeapons(d).every(w=>RANGE_WEAPONS.includes(w)))return {ok:false,reason:'drill-unavailable'};
+  if(targets.anyBurned())return {ok:false,reason:'target-burned'};
   const c=env.context(),p=position();
   if(c.busy)return {ok:false,reason:'busy'};
   if(p.x< -8||p.x>8||p.z< -12||p.z>30)return {ok:false,reason:'start-position'};
@@ -38,6 +39,12 @@ export function createRangeFeature(T,tg,env){
  ui=mountRangeConsole({owned:env.owned,signature:(w,d)=>d?signature(d):env.signature(w),records,start,exit,cancel:()=>session.abort('cancel')});
  return {
   open,start,exit,isOpen:()=>ui.isOpen(),owns:session.owns,ruled:session.ruled,
+  burn(index,{igniteS,burnS}={}){
+   // Wreck owns the timed fire and ash. The range owns the lane's scoring state.
+   const changed=targets.burn(index);
+   if(changed&&session.running())session.abort('target-burned');
+   return changed;
+  },
   constrain:(p,previous,radius)=>prop.constrain(p,previous,radius),
   canAttack:(w,u=1,source='weapon')=>session.canAttack(w,u,source),attack:(w,o)=>session.attack(w,o),
   hit(index,point,token,event){

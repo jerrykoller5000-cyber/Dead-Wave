@@ -1,0 +1,49 @@
+{
+  "held": {
+    "coated": 22,
+    "factory": 20
+  },
+  "eye": {
+    "coated": 21,
+    "factory": 19
+  },
+  "barrel": {
+    "bare": 1
+  },
+  "lampGlass": {
+    "bare": 1
+  },
+  "trigger": {
+    "bare": 1
+  },
+  "drum": {
+    "bare": 74
+  },
+  "iron": {
+    "bare": 10
+  },
+  "looseRound": {
+    "bare": 3
+  },
+  "latch": {
+    "bare": 2
+  },
+  "round0": {
+    "bare": 7
+  },
+  "round1": {
+    "bare": 7
+  },
+  "round2": {
+    "bare": 7
+  },
+  "round3": {
+    "bare": 7
+  },
+  "round4": {
+    "bare": 7
+  },
+  "round5": {
+    "bare": 7
+  }
+}

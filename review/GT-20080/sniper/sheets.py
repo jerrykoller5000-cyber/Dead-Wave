@@ -29,5 +29,7 @@ if phase=='after':
                                     for state in ['before','after'] for light in lights],4,191,248)
     sheet('magazine-pairs.jpg',[(state+' / '+label,root/state/(file+'.jpg'),(290,130,693,480))
                                  for state in ['before','after'] for label,file in [('Empty','mag-empty'),('Loaded','mag-loaded')]],2,345,255)
+    sheet('magazine-return.jpg', [(state+' / 48%',root/state/'reload-48.jpg',(478,355,809,540)) for state in ['before','after']],2,331,185)
+    sheet('return-in-four-lights.jpg', [(light.title(),root/phase/f'return-48-{light}.jpg',(478,355,809,540)) for light in lights],4,280,160)
     sheet('eye-pairs.jpg',[(state+' / '+light,root/state/('eye-reload.jpg' if light=='noon' else 'eye-reload-'+light+'.jpg'),
                             (400,194,960,540)) for state in ['before','after'] for light in lights],4,273,169)

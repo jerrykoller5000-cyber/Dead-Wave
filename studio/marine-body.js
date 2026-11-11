@@ -394,10 +394,10 @@ export function buildMarineBody(T, {root, put, rmesh: roundedMesh, cyl, part, dr
   torsoSeam([[-.151,.876,.171],[-.154,1.055,.171],[-.10,1.126,.171],[.10,1.126,.171],[.154,1.055,.171],[.151,.876,.171]],carrierW,'vest',.002);
   // CC-341 (J128): the carrier's outline round the torso, for carrierClearance below: the plates (.35 wide, a .008 bevel
   // grown outside, .17 off the middle front and back) and the cummerbund's side panels (outer face .182), y as fitted.
-  torsoG.userData.carrierShape={rx:.183,cz:(.173-.170)/2,rz:(.173+.170)/2,y:[torsoY(.8055)-TORSO_Y,torsoY(1.1405)-TORSO_Y]};
+  torsoG.userData.carrierShape={rx:.183,cz:(.173-.170)/2,rz:(.173+.170)/2,y:[torsoY(.8055)-TORSO_Y,torsoY(1.1405)-TORSO_Y],frontZ:.226};
   for(let row=0;row<4;row++){
     const y=.836+row*.054;
-    v(rmesh(.31,.016,.008,webMat,.003),0,y,.174);
+    v(rmesh(row===3?.25:.31,.016,.008,webMat,.003),0,y,.174);   // CC-341: the top row stops short of the plate's corner, under the support arm
     for(let col=-2;col<=2;col++)v(rmesh(.005,.019,.006,carrierW,.001),col*.058,y,.18);
   }
   for(let i=-1;i<=1;i++) {
@@ -484,6 +484,7 @@ export function buildMarineBody(T, {root, put, rmesh: roundedMesh, cyl, part, dr
   // wrist (where the hand and its glove, Claude's, take over) as it was.
   const SHOULDER_X=.235, ARM_GIRTH=.84, FORE_GIRTH=.87;   // (and SHOULDER_Y, above)
   torsoG.userData.elbowRadius=.0595*ARM_GIRTH;   // CC-341: the sleeve's widest at the elbow (capRings at -.27), for carrierClearance
+  torsoG.userData.upperArmRadius=.0645*ARM_GIRTH;   // and half way down the upper arm (capRings at -.175)
   const girth=(rings,k,keepBelow=-1)=>rings.map(([y,rx,rz,cx=0,cz=0])=>y<keepBelow?[y,rx,rz,cx,cz]:[y,rx*k,rz*k,cx*k,cz*k]);
   function arm(side) {
     const armG=new T.Group();armG.position.set(side*SHOULDER_X,SHOULDER_Y-TORSO_Y,.02);torsoG.add(armG);
@@ -596,7 +597,11 @@ export function carrierClearance(ud){
   const t=ud&&ud.torsoG,sh=t&&t.userData.carrierShape,gp=ud&&ud.gearParts;
   if(!sh||!gp||!(gp.vest||[]).some((m)=>m.visible))return null;
   const margin=(t.userData.elbowRadius||.05)+.003;
-  const one=(side)=>({side,centre:[0,sh.cz],radii:[sh.rx,sh.rz],y:sh.y.slice(),margin});
+  // CC-341 (a), CLAUDE DIRECTOR 11 Nov: the upper arm's mid-point too (half way from the shoulder to the elbow): its sleeve
+  // must stay off the carrier's front, pouches included (frontZ, their foremost face), by its radius there, 3 mm of cloth
+  // and 1 cm of air, when the arm crosses the chest to a long gun's grip.
+  const mid={t:.5,margin:(t.userData.upperArmRadius||.054)+.013,frontZ:sh.frontZ||.226};
+  const one=(side)=>({side,centre:[0,sh.cz],radii:[sh.rx,sh.rz],y:sh.y.slice(),margin,upperArm:{...mid}});
   return {r:one(1),l:one(-1)};
 }
 // The same test the IK needs, for the checks and the review: how far (body units) a torso-space point lies inside the

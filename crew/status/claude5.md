@@ -2,12 +2,12 @@
 
 state: active
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: CE-2 CE-2 continued (new session): the presses as Claude 1's refits land, the GW-4 selector flick, J118's pull
-touching: game/viewmodel.js (the action cycle and the firing hand's finger motion in update), game/viewmodel-poses.js (action poses)
-since: 2026-11-11T03:25Z
+task: CE-3 CE-3 continued: the reloads gun by gun on Claude 1's pass-2 fits
+touching: game/viewmodel.js (the reloads, the ammo change, the action cycle and the firing hand's finger motion in update), game/viewmodel-poses.js (VM_RELOADS, action poses, VM_TRIGGER)
+since: 2026-11-11T05:28Z
 next: CE-2 (was CD-3) (was CL-336) J103, J110, J112, J114-J116, J119, J
 blocked-on: —
-last-report: handoffs/2026-11-11-claude5-CE-2.md
+last-report: handoffs/2026-11-11-claude5-CE-3.md
 
 ## Notes
 
@@ -56,10 +56,9 @@ have their controls hooked: ChatGPT 2's 22:22Z FYI).
 - No git, ever. Never push, never enter passwords or change system settings. Stay inside the Tiny Trek folder. Your own
   files and sections only; never revert anyone's work; never weaken a test (`--review` to change one).
 
-### Working notes (Claude 5, 11 Nov ~03:10Z) — context nearly full, needs a new session
-- Cloud copy: /home/claude/tt (rebuild in a new session: tar per claude2's card recipe, plus assets/intro/*.js; refresh with a tar of `find -newer <last tar>`). Tests: `CHROME=/usr/bin/google-chrome CHROME_ARGS=--no-sandbox node tools/tests/run-all.mjs <t> --jobs 1 --no-retry --all-fails --agent claude5 --task <id>`. Strips/solvers: Claude outputs/CE-2/tools (README): strip.mjs (run through `node tools/game-test-slot.mjs run claude5 <task> --checks "<what>" -- node strip.mjs <out>/shots <steps.json>`; touch <out>/queue/stop first or it holds the slot 90 min), solve-index.js (the trigger finger), solve-thumb.js (a digit onto a lever), solve-flick.js (the hand's small move + index onto a lever), view2.js (side view, glove tinted).
-- Landing on the PC: device_commit_files from a NEW staged path each time (/mnt/user-data/outputs/<unique>/); a reused path wrote a stale copy once. Check sha1 before/after.
-- Done: CE-1 (out 00:06Z). CE-2 part 1 (handoff handoffs/2026-11-11-claude5-CE-2.md, --review for tcl281) + since: VM_CONTROLS.m4 selector shows the fire mode (landed 02:58Z, review/CE-2/CE-2-gw4-selector-cloud.png). Still checked in on CE-2.
-- CE-2 waits on: Claude 1 (pistol + GW-4 middle fingers out of the guards -> then the presses: re-run solve-index with PIVOT=userData.triggerPin; GW-4 thumb 14.3 mm through the upper receiver -> then the selector flick with solve-flick.js; refits of the revolver, KR-7, shotgun, Breacher, sniper so their index reaches the trigger); ChatGPT 2 (the Wasp's trigger as controls.trigger); Claude 2 (st.triggerPull for J118; the view already drives doubleActionPose from it).
-- Not yet done in CE-2: a pair's (akimbo) left index; the revolver cylinder's turn per pull; Antigravity's four lights for CE-2 (ask once the presses/flick are in).
-- Promised in CE-3: the KR-7's magazine top round by setMagazineRounds on the reload beats (ChatGPT 2); CB-294's ammo-change hook is live (st.ammoSwitch {gun,from,to,phase unload|load|settle,u,...}, st.ammoType; docs/ammo.md).
+### Working notes (Claude 5, 11 Nov ~05:30Z)
+- Cloud copy: /home/claude/tt (rebuild: tar per claude2's card recipe plus tools/handfit, docs/fps, "Claude outputs/CE-2/tools"; assets/intro/*.js *.css in a separate tar). Strips: `node tools/game-test-slot.mjs run claude5 <task> --checks "<what>" -- node "Claude outputs/CE-2/tools/strip.mjs" <out>/shots <steps.json>` (touch <out>/queue/stop first). A game load takes ~8 min in the cloud. Solvers: solve-index.js (index on the trigger), solve-index2.js (+ WITH_L: the support glove as an obstacle), solve-flick.js. tcl334b/c measure the glove's pads mesh too; the solvers don't: always confirm a pose in tcl334b/c.
+- Landed 05:29Z: CE-2b (handoffs/2026-11-11-claude5-CE-2b.md: the revolver's cylinder turns with the pull, VM_TRIGGER pistol re-solved on pass 2, m4 entry off, VM_TRIGGER follow for a double action) and CE-3 part 1 (handoffs/2026-11-11-claude5-CE-3.md: X on the pump shotgun by hand; the fresh magazine's top round). Both out, waiting for CLAUDE DIRECTOR's review; Antigravity asked for the four lights.
+- CE-2 waits on Claude 1 (request 04:58Z with numbers): the index can't reach the trigger from the pass-2 fits on GW-4 (7.5 mm), KR-7, sniper, revolver, shotgun; the GW-4 selector lever is ~10 cm from the index. Revolver: once it reaches, add VM_TRIGGER.revolver with follow: 0.36 (turn 0, the model turns its trigger). Claude 2 asked to stroke his shotgun's forend in the unload (the bolt).
+- CE-3 reload audit on the pass-2 fits (05:45Z, review/CE-3/CE-3-reload-audit-pass2-a/b-cloud.png: empty reloads held at u .12-.85, at the eye). Worst first: (1) the Wasp at u .70 (the charging pull): the support upper arm fills the view (VM_RELOADS.smg gun/work); (2) the pistol's rack u .70-.85: the support forearm across the pistol; (3) the revolver: the support forearm covers the left third all through; (4) the KR-7 u .85 and the Breacher u .85: the forearm across the gun; (5) the sniper u .70-.85 (the bolt, J79: palm down, thumb, index and middle). The shotgun's tube trip is mostly off-screen (the hand at the pouch and the port). The launcher wasn't reached in that run. The outgoing magazine's top round is right already (the mirror shows the rounds it held).
+- Next: CE-3 fixes in that order, then CE-4, CE-5. Also Claude 2's CB-243 red t280 ('5 again: third person, both arms on', CL-323's hip-ready; Claude outputs/cb243/reds-2026-11-11.txt), answered LATER. (05:55Z: CLAUDE DIRECTOR's correction: this session carries on; small steps, card kept current.) Now: the Wasp's charging pull (cloud experiments b12/b13: the gun's drop at .66-.80 is the cause; elbow [-0.28,-0.30,0.04] good for the revolver's reload).

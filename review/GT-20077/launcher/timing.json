@@ -1,0 +1,128 @@
+{
+  "weapon": "launcher",
+  "readyMs": 11502,
+  "fps": 59.7,
+  "low": 47.5,
+  "samples": [
+    {
+      "weapon": "launcher",
+      "eye": "launcher",
+      "high": "high",
+      "fps": 59.99999999999999,
+      "low": 58.47953218412662,
+      "worst": 17.099999994039536,
+      "hitches": 16,
+      "frames": 60
+    },
+    {
+      "weapon": "launcher",
+      "eye": "launcher",
+      "high": "high",
+      "fps": 59.988002398447634,
+      "low": 58.13953482327815,
+      "worst": 17.200000017881393,
+      "hitches": 16,
+      "frames": 60
+    },
+    {
+      "weapon": "launcher",
+      "eye": "launcher",
+      "high": "high",
+      "fps": 60.00600059970231,
+      "low": 52.3560208770542,
+      "worst": 19.100000023841858,
+      "hitches": 16,
+      "frames": 60
+    },
+    {
+      "weapon": "launcher",
+      "eye": "launcher",
+      "high": "high",
+      "fps": 59.99999999999999,
+      "low": 58.13953492401612,
+      "worst": 17.19999998807907,
+      "hitches": 16,
+      "frames": 60
+    },
+    {
+      "weapon": "launcher",
+      "eye": "launcher",
+      "high": "high",
+      "fps": 59.988002398447634,
+      "low": 57.471264348129,
+      "worst": 17.400000005960464,
+      "hitches": 16,
+      "frames": 60
+    },
+    {
+      "weapon": "launcher",
+      "eye": "launcher",
+      "high": "high",
+      "fps": 59.928086297157805,
+      "low": 44.44444444444444,
+      "worst": 22.5,
+      "hitches": 16,
+      "frames": 60
+    },
+    {
+      "weapon": "launcher",
+      "eye": "launcher",
+      "high": "high",
+      "fps": 59.99400060029756,
+      "low": 48.309178771782136,
+      "worst": 20.69999998807907,
+      "hitches": 16,
+      "frames": 60
+    },
+    {
+      "weapon": "launcher",
+      "eye": "launcher",
+      "high": "high",
+      "fps": 60.096153847588944,
+      "low": 56.81818183742402,
+      "worst": 17.599999994039536,
+      "hitches": 16,
+      "frames": 60
+    },
+    {
+      "weapon": "launcher",
+      "eye": "launcher",
+      "high": "high",
+      "fps": 59.988002400235075,
+      "low": 40.48582993020474,
+      "worst": 24.700000017881393,
+      "hitches": 16,
+      "frames": 60
+    },
+    {
+      "weapon": "launcher",
+      "eye": "launcher",
+      "high": "high",
+      "fps": 56.988602280223304,
+      "low": 26.455026467541078,
+      "worst": 37.79999998211861,
+      "hitches": 16,
+      "frames": 57
+    },
+    {
+      "weapon": "launcher",
+      "eye": "launcher",
+      "high": "high",
+      "fps": 59.99400060029756,
+      "low": 50,
+      "worst": 20,
+      "hitches": 16,
+      "frames": 60
+    },
+    {
+      "weapon": "launcher",
+      "eye": "launcher",
+      "high": "high",
+      "fps": 60.00600059970231,
+      "low": 40.4858299790538,
+      "worst": 24.69999998807907,
+      "hitches": 16,
+      "frames": 60
+    }
+  ]
+}

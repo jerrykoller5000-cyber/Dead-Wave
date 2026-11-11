@@ -1,0 +1,140 @@
+{
+  "info": {
+    "live": [
+      0.012000000104308128,
+      0.0729300007224083,
+      0.012000000104308128
+    ],
+    "spent": [
+      0.012000000104308128,
+      0.050999999046325684,
+      0.012000000104308128
+    ],
+    "independentCounts": {},
+    "inventoryCounts": {},
+    "mouth": null,
+    "ejection": {
+      "source": "minigun",
+      "vertices": 357,
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "roundWasVisible": false
+    },
+    "hook": false
+  },
+  "frames": [
+    {
+      "mode": "eye",
+      "light": "noon",
+      "count": 300,
+      "gun": "minigun",
+      "reloading": true,
+      "magState": "seated",
+      "fraction": 0.74,
+      "clock": {
+        "timer": 0.299,
+        "anim": 1.15,
+        "weapon": "minigun"
+      }
+    },
+    {
+      "mode": "eye",
+      "light": "overcast",
+      "count": 300,
+      "gun": "minigun",
+      "reloading": true,
+      "magState": "seated",
+      "fraction": 0.74,
+      "clock": {
+        "timer": 0.299,
+        "anim": 1.15,
+        "weapon": "minigun"
+      }
+    },
+    {
+      "mode": "eye",
+      "light": "dusk",
+      "count": 300,
+      "gun": "minigun",
+      "reloading": true,
+      "magState": "seated",
+      "fraction": 0.74,
+      "clock": {
+        "timer": 0.299,
+        "anim": 1.15,
+        "weapon": "minigun"
+      }
+    },
+    {
+      "mode": "eye",
+      "light": "night",
+      "count": 300,
+      "gun": "minigun",
+      "reloading": true,
+      "magState": "seated",
+      "fraction": 0.74,
+      "clock": {
+        "timer": 0.299,
+        "anim": 1.15,
+        "weapon": "minigun"
+      }
+    },
+    {
+      "mode": "pair",
+      "light": "noon",
+      "count": 300
+    },
+    {
+      "mode": "pair",
+      "light": "overcast",
+      "count": 300
+    },
+    {
+      "mode": "pair",
+      "light": "dusk",
+      "count": 300
+    },
+    {
+      "mode": "pair",
+      "light": "night",
+      "count": 300
+    },
+    {
+      "mode": "mouth",
+      "light": "noon",
+      "count": 300
+    },
+    {
+      "mode": "mouth",
+      "light": "overcast",
+      "count": 300
+    },
+    {
+      "mode": "mouth",
+      "light": "dusk",
+      "count": 300
+    },
+    {
+      "mode": "mouth",
+      "light": "night",
+      "count": 300
+    },
+    {
+      "mode": "mag",
+      "light": "noon",
+      "count": 0,
+      "inventory": 0,
+      "topRoundVisible": false
+    },
+    {
+      "mode": "mag",
+      "light": "noon",
+      "count": 300,
+      "inventory": 300,
+      "topRoundVisible": false
+    }
+  ]
+}

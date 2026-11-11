@@ -1,0 +1,30 @@
+{
+  "default": {
+    "view": "default",
+    "defaultVisible": true,
+    "fitted": false,
+    "plateVisible": false
+  },
+  "rmr": {
+    "view": "rmr",
+    "defaultVisible": false,
+    "fitted": true,
+    "plateVisible": true,
+    "gap": {
+      "lowerMm": 0,
+      "upperMm": 0,
+      "penetrating": true
+    }
+  },
+  "drum": {
+    "view": "drum",
+    "defaultVisible": false,
+    "fitted": true,
+    "plateVisible": true,
+    "gap": {
+      "lowerMm": 0,
+      "upperMm": 0,
+      "penetrating": true
+    }
+  }
+}

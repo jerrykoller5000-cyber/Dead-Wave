@@ -2,30 +2,27 @@
 
 state: active
 model: Claude Opus 5.5
-task: CC-341 the marine's fabric, part 2: headgear inside the balaclava, sleeve through the carrier's flank; the wrists' after pictures
-touching: studio/marine-body.js (arm), studio/marine-headgear.js, tools/tests/tcc341.js
-since: 2026-11-11T03:14Z
-next: CC-341 J128 (Jerry, 10 Nov, standing, D-140; was CL-341): the marin
+task: CC-342 J109 optics recoil first, then J108 laser bend, J123 sniper scope-in, J121 chainsaw view, J119 Breacher stock, J120 flamer hose
+touching: game/viewmodel.js (the view: opticAds/adsOf, the eye-hide, the ADS pose and view placement, the laser), tools/tests/tcc342.js (new)
+since: 2026-11-11T05:57Z
+next: CC-342 J108, J109, J119, J120, J121, J123: the view in first person
 blocked-on: —
-last-report: handoffs/2026-11-11-claude3-CC-341.md
+last-report: handoffs/2026-11-11-claude3-CC-341c.md
 
 ## Notes
 
-### Where things stand (11 Nov ~04:50Z, session 4)
-- CC-341 in work (checked in). Cloud copy: /home/claude/tt (from _DELETE ME/claude3-cloud-copy-CC-341b.tgz, 03:15Z).
-  - LIVE on the PC already: tools/tests/tcc341.js v2 (skips the fake-three balaclava hem by name: fakethree's TubeGeometry is
-    flat rings, the hem read inside out = the old 27.7 mm), studio/marine-lab/lab.js (build opt joints:{...} from the game,
-    shot at:'wristR', tx/tz). Wrists before|after (lab, game joints): Claude outputs/CC-341/sheet-CC-341-wrists-lab.jpg.
-  - IN THE CLOUD ONLY (not yet on the PC): tcc341 v3 = bends the live cloth before measuring (liveCloth bends in
-    onBeforeRender; the test page never draws, so sleeves/trousers sat in bind pose: big find); marine-body.js: seatW
-    smooth01(-.14,.0) (was -.1,.045: trouser tops through the belt when the thigh lifts, now clean), carrierClearance(ud) +
-    carrierIntrusion export (for Claude 2's CB-291; told him to hold: elbows are clear once the cloth is bent).
-  - Left: the support arm's sleeve through the chest radio (radioPart, x -.158) in every kit pose. Asked the Director:
-    my pick (b) the radio to the back panel upper left. Then the +x side: sleeve through the cummerbund webbing in kit run.
-  - Pictures: lab = /home/claude/... (cloud). The in-game soft camera loads in 7 min and times out on reload: prefer the lab
-    with the game's joints (probe: tools/tests/tcc3probe.js prints 'INFO joints <pose>'; /home/claude/poses.json).
-  - Checkout: --review (tcc341 changed twice: the stand-in tube skip, the cloth bend). Ready to commit list in the handoff.
-- Then CC-342 (after CC-341).
+### Where things stand (11 Nov ~05:50Z, end of session 4: context nearly full, needs a new session)
+- CC-341 DONE (checked out --done --review; handoffs 2026-11-11-claude3-CC-341.md, -b, -c; sheets Claude outputs/CC-341/).
+  tcc341 16/0: it bends liveCloth + M.userData.waist before measuring, skips balaclava-hem (fake tube) by name, and
+  consults the new core/clip-exceptions.js (one entry, sleeve-on-carrier-front, 9 mm, kit run/crouch, until Claude 2's
+  CB-291 keeps the support upper arm off the carrier using carrierClearance(ud).upperArm). Director accepted the radio move
+  (he shows Jerry). Ready to commit: core/clip-exceptions.js, tools/tests/tcc341.js, studio/marine-body.js, marine-lab/lab.js.
+- NEXT: CC-342 (the first-person view fixes: the optics' recoil, the laser's bend looking down, the sniper's see-through
+  front and scope-in, the chainsaw with the FOV in, the Breacher's stock in the aim, the flamer's hose through the arm), in
+  game/viewmodel.js's view code lent by Claude 1 (name the sections in --touch; the hands stay Claude 1's). Not started.
+- Tools: make a fresh cloud copy (tar the code dirs on the PC into _DELETE ME/, stage, untar). A copy of tcc341 that prints
+  the deep points in torso space and the joints per pose ('INFO joints') fed the marine lab (tools/marine-lab.mjs with build
+  joints:{...}) for quick pictures; the in-game soft camera took 7 min to load and timed out on reload.
 
 ### This VM's quirks (session 3)
 - The PC mount refuses writing over some existing files (EINVAL on open with O_CREAT, sometimes on ftruncate): crew.mjs fails
