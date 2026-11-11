@@ -64,7 +64,8 @@
     ok(!!link && link.vx * right.x + link.vy * right.y + link.vz * right.z > 1, 'the link flies out to its right (' + (link ? f2(link.vx * right.x + link.vy * right.y + link.vz * right.z) : '-') + ' m/s)');
     // A burst: 20 rounds, 20 cases and 20 links.
     const sp1 = { ...V().spent };
-    for (let i = 0; i < 20; i++) { T.fireMortar(); await wait(100); }
+    // CB-306: 0.1 s of game time between rounds (the Watchman's interval is 0.09 s of game time; a slow page fired 9 of 20 by the wall clock)
+    for (let i = 0; i < 20; i++) { T.fireMortar(); const s0 = T.getSimTime(), w0 = Date.now(); while (T.getSimTime() - s0 < 0.1 && Date.now() - w0 < 5000) await wait(10); }
     const n = V().spent.brass - sp1.brass;
     ok(n >= 15 && V().spent.links - sp1.links === n, 'a burst: ' + n + ' cases and ' + (V().spent.links - sp1.links) + ' links');
     // Shouldered: the Watchman on his right shoulder, not the mortar.

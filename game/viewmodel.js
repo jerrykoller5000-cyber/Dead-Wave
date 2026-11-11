@@ -150,6 +150,7 @@ export function createViewmodel(ctx) {
     }
     return m;
   }
+  const VM_MAT_KEEP = new Set(['uuid', 'id', 'version', '_listeners', 'setupModelViewProjection', 'customProgramCacheKey', 'userData']);   // CD-1: vmMaterial's in-place update
   function vmMaterial(src, noVC = false) {
     if (!src) return src;
     if (Array.isArray(src)) return src.map((s) => vmMaterial(s, noVC));
@@ -157,6 +158,17 @@ export function createViewmodel(ctx) {
     let e = vmMats.get(key);
     if (e && e.version === src.version && e.map === src.map && e.transparent === src.transparent) return e.mat;
     const mat = makeVmMat(src, noVC);
+    // CD-1 (ChatGPT 2, GT-20079: factory -> M81 -> factory looked right but each view material was a new one): a source that
+    // changes its version, map or transparency updates the view copy it already has, in place: the same instance and uuid
+    // (the renderer rebuilds it on needsUpdate), the view's own hooks kept; only a change of kind makes a new one. (Every
+    // own property is carried over: a node material's copy() skips the standard ones, the colour and the map.)
+    if (e && e.mat && e.mat.type === mat.type) {
+      for (const k of Object.keys(mat)) if (!VM_MAT_KEEP.has(k)) e.mat[k] = mat[k];
+      e.mat.userData = { vm281: true };
+      e.mat.needsUpdate = true;
+      e.version = src.version; e.map = src.map; e.transparent = src.transparent; e.src = src;
+      return e.mat;
+    }
     if (e && e.mat && e.mat.dispose) { try { e.mat.dispose(); } catch (_) {} }
     vmMats.set(key, e = { src, mat, version: src.version, map: src.map, transparent: src.transparent });
     return mat;

@@ -36,3 +36,19 @@ export async function originalSawCovers(page,origin) {
     verifyServed();
   };
 }
+
+export function originalSniperSource(live) {
+  const current="  const cladding=new THREE.Mesh(squareCladding(THREE,rearRadius,.104,.005,rearFacets),gunBody);\n  cladding.position.set(0,.045,-.184);\n  cladding.castShadow=cladding.receiveShadow=true;\n  gun.add(cladding);";
+  const original="  K.box(0.054, 0.054, 0.104, gunBody, 0, 0.045, -0.184, 0, 0, 0, null, 0.005);   // the rear bridge, the action's width";
+  assert.equal(live.split(current).length,2,'Cannot identify current sniper cover');
+  const marks='D.screw(gun, rearRadius, 0.035, z';
+  assert.equal(live.split(marks).length,2);
+  return live.replace(current,original).replace(marks,'D.screw(gun, 0.0259, 0.035, z');
+}
+
+export async function originalSniperCover(page,origin) {
+  const path='/studio/weapon-longarms.js';
+  const live=await readFile(new URL('../../studio/weapon-longarms.js',import.meta.url),'utf8');
+  return replayArtwork(page,origin,path,originalSniperSource(live));
+}
+

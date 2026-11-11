@@ -121,7 +121,13 @@
     await take('m4');
     ok(!mirrored(ud.elbowRG) && !mirrored(ud.elbowLG) && handed(ud.elbowRG, 1) && handed(ud.elbowLG, -1), 'm4: the same fingered hands (not mirrored)');
     // Akimbo pistols.
-    await take('pistol'); T.toggleDualWieldDbg(); await simWait(1.2);
+    // CB-290: akimbo needs the pair in the loadout (pairInLoadout, since GP-20074); without it this measured the single pistol.
+    { const armory = T.armoryDbg && T.armoryDbg.ui() && T.armoryDbg.ui().armory;
+      if (armory) { for (let i = 0; i < 2; i++) if (armory.read().slots.secondary[i]) armory.stow('secondary', i);
+        if (!armory.has('pistol:second')) armory.buy({ id: 'pistol:second', kind: 'pistol', loaded: null }, { store: true });
+        armory.take('pistol:second', 'secondary', 0); } }
+    await take('pistol'); if (!T.offhandMeshes.pistol.visible) T.toggleDualWieldDbg(); await simWait(1.2);
+    ok(T.offhandMeshes.pistol.visible, 'akimbo: both pistols in his hands (the pair carried)');
     { const F = frame('pistol'), og = T.offhandMeshes.pistol, H = F.H; og.updateMatrixWorld(true);
       const gR = HD.gripPoint('R', V()), gL = HD.gripPoint('L', V()), wt = HD.wrist(), gA = HD.gripA();
       ok(!mirrored(ud.elbowRG) && !mirrored(ud.elbowLG), 'akimbo: hands not mirrored');

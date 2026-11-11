@@ -1,0 +1,170 @@
+{
+  "91/hip/noon": {
+    "pixels": 3936,
+    "changed": 818,
+    "over4": 114,
+    "peak": 48
+  },
+  "91/hip/overcast": {
+    "pixels": 3936,
+    "changed": 499,
+    "over4": 76,
+    "peak": 35
+  },
+  "91/hip/dusk": {
+    "pixels": 3936,
+    "changed": 532,
+    "over4": 50,
+    "peak": 34
+  },
+  "91/hip/night": {
+    "pixels": 3936,
+    "changed": 230,
+    "over4": 11,
+    "peak": 37
+  },
+  "91/aimed/noon": {
+    "pixels": 174,
+    "changed": 3,
+    "over4": 0,
+    "peak": 4
+  },
+  "91/aimed/overcast": {
+    "pixels": 174,
+    "changed": 2,
+    "over4": 0,
+    "peak": 1
+  },
+  "91/aimed/dusk": {
+    "pixels": 174,
+    "changed": 2,
+    "over4": 0,
+    "peak": 1
+  },
+  "91/aimed/night": {
+    "pixels": 174,
+    "changed": 1,
+    "over4": 0,
+    "peak": 1
+  },
+  "91/held-left/noon": {
+    "pixels": 66,
+    "changed": 9,
+    "over4": 3,
+    "peak": 21
+  },
+  "91/held-left/overcast": {
+    "pixels": 66,
+    "changed": 8,
+    "over4": 3,
+    "peak": 10
+  },
+  "91/held-left/dusk": {
+    "pixels": 66,
+    "changed": 7,
+    "over4": 3,
+    "peak": 9
+  },
+  "91/held-left/night": {
+    "pixels": 66,
+    "changed": 4,
+    "over4": 0,
+    "peak": 3
+  },
+  "91/rack/noon": {
+    "pixels": 6004,
+    "changed": 1,
+    "over4": 0,
+    "peak": 2
+  },
+  "91/rack/overcast": {
+    "pixels": 6004,
+    "changed": 1,
+    "over4": 0,
+    "peak": 2
+  },
+  "91/rack/dusk": {
+    "pixels": 6004,
+    "changed": 1,
+    "over4": 0,
+    "peak": 1
+  },
+  "91/rack/night": {
+    "pixels": 6004,
+    "changed": 0,
+    "over4": 0,
+    "peak": 0
+  },
+  "91/held-left-open/noon": {
+    "pixels": 60,
+    "changed": 60,
+    "over4": 50,
+    "peak": 15
+  },
+  "91/held-left-open/overcast": {
+    "pixels": 60,
+    "changed": 60,
+    "over4": 26,
+    "peak": 16
+  },
+  "91/held-left-open/dusk": {
+    "pixels": 60,
+    "changed": 60,
+    "over4": 60,
+    "peak": 12
+  },
+  "91/held-left-open/night": {
+    "pixels": 60,
+    "changed": 60,
+    "over4": 60,
+    "peak": 11
+  },
+  "108/held-right/noon": {
+    "pixels": 180,
+    "changed": 28,
+    "over4": 0,
+    "peak": 4
+  },
+  "108/held-right/overcast": {
+    "pixels": 180,
+    "changed": 21,
+    "over4": 0,
+    "peak": 2
+  },
+  "108/held-right/dusk": {
+    "pixels": 180,
+    "changed": 18,
+    "over4": 0,
+    "peak": 3
+  },
+  "108/held-right/night": {
+    "pixels": 180,
+    "changed": 4,
+    "over4": 0,
+    "peak": 1
+  },
+  "108/held-right-open/noon": {
+    "pixels": 186,
+    "changed": 57,
+    "over4": 9,
+    "peak": 10
+  },
+  "108/held-right-open/overcast": {
+    "pixels": 186,
+    "changed": 56,
+    "over4": 6,
+    "peak": 15
+  },
+  "108/held-right-open/dusk": {
+    "pixels": 186,
+    "changed": 47,
+    "over4": 6,
+    "peak": 10
+  },
+  "108/held-right-open/night": {
+    "pixels": 186,
+    "changed": 17,
+    "over4": 0,
+    "peak": 2
+  }
+}

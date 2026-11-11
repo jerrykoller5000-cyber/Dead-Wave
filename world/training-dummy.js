@@ -380,13 +380,15 @@ function buildVinylCanvasTexture(THREE) {
 //   cell 5 (col 1, row 2): bullet   — punctured vinyl entry hole, pale foam ring & powder smudge
 function buildMarksAtlasTexture(THREE) {
   if (typeof document === 'undefined') return null;
-  const W = 512, H = 512;
-  const CW = W / 2, CH = H / 3;
+  const W0 = 512, H0 = 512;
+  const SCALE = 2;
+  const CW = W0 / 2, CH = H0 / 3;
   const cv = document.createElement('canvas');
-  cv.width = W;
-  cv.height = H;
+  cv.width = W0 * SCALE;
+  cv.height = H0 * SCALE;
   const c = cv.getContext('2d');
-  c.clearRect(0, 0, W, H);
+  c.scale(SCALE, SCALE);
+  c.clearRect(0, 0, W0, H0);
 
   let seed = 908308;
   const rnd = () => {
@@ -396,162 +398,218 @@ function buildMarksAtlasTexture(THREE) {
 
   const cellOrigin = (cell) => [(cell % 2) * CW, Math.floor(cell / 2) * CH];
 
-  // Helper: tapered horizontal slash centered at (cx, cy) along local X
-  const drawBladeGash = (cell, halfLen, maxHalfOpen, ragged, foamBright, scuffAlpha) => {
+  // Helper: authentic parted blade cut — dark parted slit flanked by raw frayed khaki-tan canvas edges
+  const drawBladeGash = (cell, halfLen, darkHalfOpen, rimWidth, ragged, scuffAlpha) => {
     const [ox, oy] = cellOrigin(cell);
     const cx = ox + CW * 0.5, cy = oy + CH * 0.5;
     c.save();
     c.beginPath();
-    c.rect(ox + 6, oy + 6, CW - 12, CH - 12);
+    c.rect(ox + 4, oy + 4, CW - 8, CH - 8);
     c.clip();
 
-    // Impact friction scuff / darkened vinyl bruise halo
+    // 1) Subtle recessed impact scuff / crease shadow around parted canvas
     c.save();
     c.translate(cx, cy);
-    c.scale(halfLen * 1.12, Math.max(18, maxHalfOpen * 3.4));
-    const halo = c.createRadialGradient(0, 0, 0.08, 0, 0, 1);
-    halo.addColorStop(0, `rgba(24,22,17,${scuffAlpha})`);
-    halo.addColorStop(0.6, `rgba(34,31,24,${(scuffAlpha * 0.45).toFixed(3)})`);
-    halo.addColorStop(1, 'rgba(34,31,24,0)');
+    c.scale(halfLen * 1.12, Math.max(20, (darkHalfOpen + rimWidth) * 2.5));
+    const halo = c.createRadialGradient(0, 0, 0.10, 0, 0, 1);
+    halo.addColorStop(0, `rgba(16,14,10,${scuffAlpha})`);
+    halo.addColorStop(0.52, `rgba(26,23,17,${(scuffAlpha * 0.42).toFixed(3)})`);
+    halo.addColorStop(1, 'rgba(26,23,17,0)');
     c.fillStyle = halo;
     c.beginPath();
     c.arc(0, 0, 1, 0, Math.PI * 2);
     c.fill();
     c.restore();
 
-    // Outer torn dark vinyl lip shadow
-    const steps = 36;
-    const upper = [], lower = [];
+    const steps = 56;
+    const inU = [], inL = [], outU = [], outL = [];
     for (let i = 0; i <= steps; i++) {
       const t = (i / steps) * 2 - 1; // -1 .. +1
-      const env = Math.pow(Math.max(0, 1 - t * t), ragged > 0.5 ? 0.68 : 0.85);
-      const jagU = ragged * (rnd() - 0.45) * maxHalfOpen * 0.55;
-      const jagL = ragged * (rnd() - 0.45) * maxHalfOpen * 0.55;
-      const bow = Math.sin(t * Math.PI * 0.5) * (ragged > 0.2 ? 1.8 : 0.6);
-      upper.push([cx + t * halfLen, cy + bow - env * maxHalfOpen - Math.max(0, jagU)]);
-      lower.push([cx + t * halfLen, cy + bow + env * maxHalfOpen + Math.max(0, jagL)]);
+      const env = Math.pow(Math.max(0, 1 - t * t), ragged > 0.45 ? 0.58 : 0.72);
+      const envRim = Math.pow(Math.max(0, 1 - Math.pow(t * 0.97, 2)), 0.65);
+      const jagInU = ragged * (rnd() - 0.45) * darkHalfOpen * 0.36;
+      const jagInL = ragged * (rnd() - 0.45) * darkHalfOpen * 0.36;
+      const jagOutU = (0.28 + ragged * 0.85) * rnd() * rimWidth * 0.68;
+      const jagOutL = (0.28 + ragged * 0.85) * rnd() * rimWidth * 0.68;
+      const bow = Math.sin(t * Math.PI * 0.5) * (ragged > 0.2 ? 1.8 : 0.8);
+      const x = cx + t * halfLen;
+      const yInU = cy + bow - env * darkHalfOpen - Math.max(0, jagInU);
+      const yInL = cy + bow + env * darkHalfOpen + Math.max(0, jagInL);
+      inU.push([x, yInU]);
+      inL.push([x, yInL]);
+      outU.push([x, yInU - envRim * rimWidth - jagOutU]);
+      outL.push([x, yInL + envRim * rimWidth + jagOutL]);
     }
 
-    // Torn vinyl rim bevel (highlighted upper-edge catch + dark outer lip)
-    c.fillStyle = 'rgba(20,18,14,0.94)';
+    // 2) Soft dark outer tear shadow so lighter frayed canvas edges read even under bright flashlight/noon
+    c.fillStyle = 'rgba(18,16,12,0.68)';
     c.beginPath();
-    upper.forEach(([x, y], i) => (i ? c.lineTo(x, y - 2.4) : c.moveTo(x, y - 2.4)));
-    for (let i = lower.length - 1; i >= 0; i--) c.lineTo(lower[i][0], lower[i][1] + 2.6);
+    outU.forEach(([x, y], i) => (i ? c.lineTo(x, y - 1.6) : c.moveTo(x, y - 1.6)));
+    for (let i = outL.length - 1; i >= 0; i--) c.lineTo(outL[i][0], outL[i][1] + 1.6);
     c.closePath();
     c.fill();
 
-    // Pale-buff high-density polyurethane foam trench exposed inside the cut
-    c.fillStyle = foamBright;
+    // 3) Lighter frayed raw duck-canvas / pale foam border (warm khaki-buff, not chalky white!)
+    c.fillStyle = 'rgba(220,208,172,0.95)';
     c.beginPath();
-    upper.forEach(([x, y], i) => (i ? c.lineTo(x, y) : c.moveTo(x, y)));
-    for (let i = lower.length - 1; i >= 0; i--) c.lineTo(lower[i][0], lower[i][1]);
+    outU.forEach(([x, y], i) => (i ? c.lineTo(x, y) : c.moveTo(x, y)));
+    for (let i = outL.length - 1; i >= 0; i--) c.lineTo(outL[i][0], outL[i][1]);
     c.closePath();
     c.fill();
 
-    // Deep center blade kerf shadow line inside the foam
-    c.strokeStyle = 'rgba(18,15,11,0.92)';
-    c.lineWidth = Math.max(1.8, maxHalfOpen * 0.52);
-    c.lineCap = 'round';
-    c.beginPath();
-    for (let i = 0; i <= steps; i++) {
-      const x = (upper[i][0] + lower[i][0]) * 0.5;
-      const y = (upper[i][1] + lower[i][1]) * 0.5;
-      if (i === 0) c.moveTo(x, y);
-      else c.lineTo(x, y);
-    }
-    c.stroke();
-
-    // Crisp torn canvas lip highlight & frayed duck-canvas threads bridging/fringing the cut
-    c.strokeStyle = 'rgba(186,176,146,0.62)';
-    c.lineWidth = 1.2;
-    c.beginPath();
-    upper.forEach(([x, y], i) => (i ? c.lineTo(x, y - 1.3) : c.moveTo(x, y - 1.3)));
-    c.stroke();
-
-    const threadCount = Math.round(6 + ragged * 22);
-    for (let i = 0; i < threadCount; i++) {
-      const t = (rnd() * 1.7 - 0.85);
-      const env = Math.max(0, 1 - t * t);
-      if (env < 0.12) continue;
-      const tx = cx + t * halfLen;
-      const ty = cy + (rnd() - 0.5) * maxHalfOpen * 1.5;
-      const ang = (rnd() - 0.5) * 2.4;
-      const tl = 3 + rnd() * (5 + ragged * 7);
-      c.strokeStyle = rnd() < 0.7 ? 'rgba(208,196,164,0.75)' : 'rgba(54,50,39,0.7)';
-      c.lineWidth = 0.9 + rnd() * 0.7;
+    // Subtle olive-tan fiber mottling across the frayed lip so it looks woven, not flat plastic
+    for (let i = 0; i < 34; i++) {
+      const idx = 3 + Math.floor(rnd() * (steps - 6));
+      const upperSide = i % 2 === 0;
+      const [bx, by] = upperSide ? outU[idx] : outL[idx];
+      c.fillStyle = rnd() < 0.5 ? 'rgba(148,138,108,0.45)' : 'rgba(226,215,182,0.55)';
       c.beginPath();
-      c.moveTo(tx, ty);
-      c.lineTo(tx + Math.cos(ang) * tl, ty + Math.sin(ang) * tl);
+      c.arc(bx + (rnd() - 0.5) * 4, by + (upperSide ? 2 : -2), 1.4 + rnd() * 2.0, 0, Math.PI * 2);
+      c.fill();
+    }
+
+    // Fine frayed canvas threads along both parted edges
+    const threadCount = Math.round(28 + ragged * 38);
+    for (let i = 0; i < threadCount; i++) {
+      const t = rnd() * 1.84 - 0.92;
+      const env = Math.max(0, 1 - t * t);
+      if (env < 0.06) continue;
+      const idx = clamp(Math.round(((t + 1) * 0.5) * steps), 0, steps);
+      const upperSide = i % 2 === 0;
+      const [bx, by] = upperSide ? outU[idx] : outL[idx];
+      const ang = (upperSide ? -Math.PI * 0.5 : Math.PI * 0.5) + (rnd() - 0.5) * 1.65;
+      const tl = (3.2 + rnd() * (5.5 + ragged * 6.5)) * (0.45 + 0.55 * env);
+      c.strokeStyle = rnd() < 0.78 ? 'rgba(222,210,176,0.86)' : 'rgba(164,152,122,0.78)';
+      c.lineWidth = 1.0 + rnd() * 0.9;
+      c.lineCap = 'round';
+      c.beginPath();
+      c.moveTo(bx, by + (upperSide ? 1.0 : -1.0));
+      c.lineTo(bx + Math.cos(ang) * tl, by + Math.sin(ang) * tl);
       c.stroke();
+    }
+
+    // 4) Deep dark parted slit cavity down the center of the cut
+    c.fillStyle = '#080705';
+    c.beginPath();
+    inU.forEach(([x, y], i) => (i ? c.lineTo(x, y) : c.moveTo(x, y)));
+    for (let i = inL.length - 1; i >= 0; i--) c.lineTo(inL[i][0], inL[i][1]);
+    c.closePath();
+    c.fill();
+
+    // Subtle deep-shadow foam texture inside wide machete chop (no bright bars)
+    if (ragged > 0.45) {
+      for (let i = 0; i < 18; i++) {
+        const idx = 8 + Math.floor(rnd() * (steps - 16));
+        const mx = (inU[idx][0] + inL[idx][0]) * 0.5 + (rnd() - 0.5) * 4;
+        const my = (inU[idx][1] + inL[idx][1]) * 0.5 + (rnd() - 0.5) * 3;
+        c.fillStyle = 'rgba(48,42,31,0.48)';
+        c.beginPath();
+        c.arc(mx, my, 1.5 + rnd() * 2.2, 0, Math.PI * 2);
+        c.fill();
+      }
     }
 
     c.restore();
   };
 
-  // Cell 0: Knife — crisp narrow slash/puncture slit
-  drawBladeGash(0, 76, 4.8, 0.22, '#c8ba96', 0.30);
+  // Cell 0: Knife — crisp dark parted slash with lighter frayed canvas edges
+  drawBladeGash(0, 98, 6.2, 5.6, 0.26, 0.38);
 
-  // Cell 1: Machete — wide heavy ragged chop gash exposing buff foam core
-  drawBladeGash(1, 98, 9.2, 0.72, '#d2c39e', 0.42);
+  // Cell 1: Machete — broader heavy ragged chop gash with torn raw-canvas lips
+  drawBladeGash(1, 110, 10.5, 6.8, 0.72, 0.50);
 
-  // Cell 2: Katana — long razor-clean surgical slice from edge to edge
-  drawBladeGash(2, 112, 4.2, 0.08, '#cbbd99', 0.24);
+  // Cell 2: Katana — long razor-clean tapered dark parted slice with crisp lighter frayed edges
+  drawBladeGash(2, 121, 6.6, 5.3, 0.10, 0.34);
 
-  // Cell 3: Chainsaw — brutal chewed parallel saw-tooth track + friction rubber/vinyl scorch
+  // Cell 3: Chainsaw — ragged torn strip (chewed dark trench + jagged raw-canvas/foam flaps + shredded fibers)
   {
     const [ox, oy] = cellOrigin(3);
     const cx = ox + CW * 0.5, cy = oy + CH * 0.5;
     c.save();
     c.beginPath();
-    c.rect(ox + 6, oy + 6, CW - 12, CH - 12);
+    c.rect(ox + 4, oy + 4, CW - 8, CH - 8);
     c.clip();
 
-    // Heavy black friction-burn halo from high-speed chain heat
+    // Chain-oil & friction bruise halo around chewed strip
     c.save();
     c.translate(cx, cy);
-    c.scale(112, 44);
-    const burn = c.createRadialGradient(0, 0, 0.1, 0, 0, 1);
-    burn.addColorStop(0, 'rgba(14,12,10,0.76)');
-    burn.addColorStop(0.55, 'rgba(26,22,17,0.48)');
-    burn.addColorStop(1, 'rgba(26,22,17,0)');
+    c.scale(118, 48);
+    const burn = c.createRadialGradient(0, 0, 0.15, 0, 0, 1);
+    burn.addColorStop(0, 'rgba(14,12,9,0.78)');
+    burn.addColorStop(0.58, 'rgba(24,20,15,0.44)');
+    burn.addColorStop(1, 'rgba(24,20,15,0)');
     c.fillStyle = burn;
     c.beginPath();
     c.arc(0, 0, 1, 0, Math.PI * 2);
     c.fill();
     c.restore();
 
-    // Twin chewed chain-link tooth tracks + shredded foam chunks
-    for (const trackY of [-7.5, 7.5]) {
-      c.fillStyle = 'rgba(15,13,10,0.95)';
-      c.beginPath();
-      c.ellipse(cx, cy + trackY, 96, 7.2, 0, 0, Math.PI * 2);
-      c.fill();
+    const steps = 48;
+    const halfLen = 110;
+    const inU = [], inL = [], outU = [], outL = [];
+    for (let i = 0; i <= steps; i++) {
+      const t = (i / steps) * 2 - 1;
+      const env = Math.pow(Math.max(0, 1 - Math.pow(t, 4)), 0.55); // blunt-ended ragged torn strip
+      const toothU = (i % 2 === 0 ? 1 : -0.25) * (4.0 + rnd() * 6.5);
+      const toothL = (i % 2 === 1 ? 1 : -0.25) * (4.0 + rnd() * 6.5);
+      const x = cx + t * halfLen;
+      const yInU = cy - env * (12.5 + rnd() * 5.5);
+      const yInL = cy + env * (12.5 + rnd() * 5.5);
+      inU.push([x, yInU]);
+      inL.push([x, yInL]);
+      outU.push([x + (rnd() - 0.5) * 3, yInU - env * (7.5 + Math.max(0, toothU))]);
+      outL.push([x + (rnd() - 0.5) * 3, yInL + env * (7.5 + Math.max(0, toothL))]);
     }
-    for (let i = -14; i <= 14; i++) {
-      const tx = cx + i * 6.5 + (rnd() - 0.5) * 2.5;
-      const env = Math.pow(Math.max(0, 1 - Math.pow(i / 15, 2)), 0.55);
-      const h = (8 + rnd() * 9) * env;
-      // Tooth gouge + torn buff foam shred
-      c.fillStyle = i % 2 === 0 ? '#c9b992' : '#9c8d6d';
+
+    // Outer dark tear crease around ragged flaps
+    c.fillStyle = 'rgba(16,14,10,0.72)';
+    c.beginPath();
+    outU.forEach(([x, y], i) => (i ? c.lineTo(x, y - 1.8) : c.moveTo(x, y - 1.8)));
+    for (let i = outL.length - 1; i >= 0; i--) c.lineTo(outL[i][0], outL[i][1] + 1.8);
+    c.closePath();
+    c.fill();
+
+    // Jagged lighter frayed canvas & torn foam strip border
+    c.fillStyle = 'rgba(218,205,168,0.95)';
+    c.beginPath();
+    outU.forEach(([x, y], i) => (i ? c.lineTo(x, y) : c.moveTo(x, y)));
+    for (let i = outL.length - 1; i >= 0; i--) c.lineTo(outL[i][0], outL[i][1]);
+    c.closePath();
+    c.fill();
+
+    // Deep chewed dark chain trench interior
+    c.fillStyle = '#080705';
+    c.beginPath();
+    inU.forEach(([x, y], i) => (i ? c.lineTo(x, y) : c.moveTo(x, y)));
+    for (let i = inL.length - 1; i >= 0; i--) c.lineTo(inL[i][0], inL[i][1]);
+    c.closePath();
+    c.fill();
+
+    // Irregular shredded khaki-foam tufts chewed up inside the dark trench
+    for (let i = -9; i <= 9; i++) {
+      const tx = cx + i * 10.2 + (rnd() - 0.5) * 4;
+      const env = Math.max(0, 1 - Math.pow(i / 10.2, 4));
       c.save();
-      c.translate(tx, cy + (rnd() - 0.5) * 8);
-      c.rotate((rnd() - 0.5) * 0.7);
-      c.fillRect(-2.6, -h, 5.2, h * 2);
-      c.fillStyle = '#14120e';
-      c.fillRect(-1.4, -h * 0.75, 2.8, h * 1.5);
+      c.translate(tx, cy + (rnd() - 0.5) * 10 * env);
+      c.rotate(0.42 + (rnd() - 0.5) * 0.65);
+      c.fillStyle = rnd() < 0.6 ? 'rgba(156,144,112,0.68)' : 'rgba(72,64,48,0.72)';
+      c.fillRect(-2.2, -5.5 * env, 4.4, 8.5 * env);
       c.restore();
     }
-    // Shredded canvas threads flung outward along chain kerf
-    for (let i = 0; i < 42; i++) {
-      const tx = cx + (rnd() * 188 - 94);
-      const ty = cy + (rnd() * 30 - 15);
-      const ang = (rnd() - 0.5) * 3.14;
-      const len = 4 + rnd() * 11;
-      c.strokeStyle = rnd() < 0.6 ? 'rgba(206,193,158,0.82)' : 'rgba(20,18,14,0.85)';
-      c.lineWidth = 1.0 + rnd() * 1.1;
+
+    // Shredded raw-canvas threads flung along both chewed borders
+    for (let i = 0; i < 68; i++) {
+      const idx = 2 + Math.floor(rnd() * (steps - 4));
+      const upperSide = i % 2 === 0;
+      const [bx, by] = upperSide ? outU[idx] : outL[idx];
+      const ang = (upperSide ? -Math.PI * 0.5 : Math.PI * 0.5) + (rnd() - 0.5) * 1.9;
+      const len = 4.0 + rnd() * 10.5;
+      c.strokeStyle = rnd() < 0.78 ? 'rgba(220,208,174,0.88)' : 'rgba(24,20,15,0.80)';
+      c.lineWidth = 1.1 + rnd() * 1.1;
+      c.lineCap = 'round';
       c.beginPath();
-      c.moveTo(tx, ty);
-      c.lineTo(tx + Math.cos(ang) * len, ty + Math.sin(ang) * len);
+      c.moveTo(bx, by);
+      c.lineTo(bx + Math.cos(ang) * len, by + Math.sin(ang) * len);
       c.stroke();
     }
     c.restore();
@@ -583,7 +641,7 @@ function buildMarksAtlasTexture(THREE) {
       c.restore();
     };
 
-    puff(cx, cy, 92, 68, 0.15, 28, 20, 14, 0.56, 0.28);
+    puff(cx, cy, 94, 70, 0.15, 26, 19, 13, 0.60, 0.30);
     for (let i = 0; i < 16; i++) {
       const ang = (i / 16) * Math.PI * 2 + (rnd() - 0.5) * 0.42;
       const dist = 10 + rnd() * 30;
@@ -593,16 +651,15 @@ function buildMarksAtlasTexture(THREE) {
         24 + rnd() * 24,
         18 + rnd() * 20,
         rnd() * 3.14,
-        12, 11, 10,
-        0.74, 0.36
+        11, 10, 9,
+        0.78, 0.38
       );
     }
-    puff(cx, cy, 46, 36, 0.4, 8, 8, 8, 0.92, 0.62);
-    // Subtle heat-blistered vinyl speckles inside char core
+    puff(cx, cy, 48, 38, 0.4, 7, 7, 7, 0.94, 0.66);
     for (let i = 0; i < 26; i++) {
       const bx = cx + (rnd() - 0.5) * 68;
       const by = cy + (rnd() - 0.5) * 48;
-      c.fillStyle = rnd() < 0.4 ? 'rgba(64,54,40,0.42)' : 'rgba(5,5,5,0.75)';
+      c.fillStyle = rnd() < 0.4 ? 'rgba(72,60,44,0.45)' : 'rgba(5,5,5,0.78)';
       c.beginPath();
       c.arc(bx, by, 1.2 + rnd() * 2.4, 0, Math.PI * 2);
       c.fill();
@@ -610,45 +667,96 @@ function buildMarksAtlasTexture(THREE) {
     c.restore();
   }
 
-  // Cell 5: Bullet — punctured vinyl hole with pale foam ring & radial powder smudge
+  // Cell 5: Bullet — dark entry puncture surrounded by an authentic lighter torn raw-canvas/foam rim
   {
     const [ox, oy] = cellOrigin(5);
     const cx = ox + CW * 0.5, cy = oy + CH * 0.5;
     c.save();
     c.beginPath();
-    c.rect(ox + 6, oy + 6, CW - 12, CH - 12);
+    c.rect(ox + 4, oy + 4, CW - 8, CH - 8);
     c.clip();
 
-    const smudge = c.createRadialGradient(cx, cy, 6, cx, cy, 48);
-    smudge.addColorStop(0, 'rgba(16,15,13,0.88)');
-    smudge.addColorStop(0.32, 'rgba(34,31,26,0.58)');
-    smudge.addColorStop(0.68, 'rgba(44,41,34,0.22)');
-    smudge.addColorStop(1, 'rgba(44,41,34,0)');
+    // 1) Outer dark powder-burn & bullet-wipe smudge halo
+    const smudge = c.createRadialGradient(cx, cy, 12, cx, cy, 62);
+    smudge.addColorStop(0, 'rgba(12,10,8,0.88)');
+    smudge.addColorStop(0.38, 'rgba(24,20,15,0.52)');
+    smudge.addColorStop(0.70, 'rgba(34,28,22,0.18)');
+    smudge.addColorStop(1, 'rgba(34,28,22,0)');
     c.fillStyle = smudge;
     c.beginPath();
-    c.arc(cx, cy, 48, 0, Math.PI * 2);
+    c.arc(cx, cy, 62, 0, Math.PI * 2);
     c.fill();
 
-    // Torn foam ring peeking around entry hole
-    c.fillStyle = '#c8ba95';
+    // 2) Ragged lighter torn raw-canvas/foam rim
+    const ptsRim = 28;
+    const rimRadii = [];
+    for (let i = 0; i <= ptsRim; i++) {
+      rimRadii.push((i % 2 === 0 ? 31 : 25) + rnd() * 5.5);
+    }
+
+    c.fillStyle = 'rgba(16,14,10,0.72)';
     c.beginPath();
-    c.arc(cx, cy, 15.5, 0, Math.PI * 2);
+    for (let i = 0; i <= ptsRim; i++) {
+      const a = (i / ptsRim) * Math.PI * 2;
+      const r = rimRadii[i] + 2.0;
+      const px = cx + Math.cos(a) * r;
+      const py = cy + Math.sin(a) * r;
+      if (i === 0) c.moveTo(px, py);
+      else c.lineTo(px, py);
+    }
+    c.closePath();
     c.fill();
 
-    // Deep dark entry puncture cavity
-    c.fillStyle = '#090908';
+    c.fillStyle = 'rgba(220,208,172,0.95)';
     c.beginPath();
-    c.arc(cx, cy, 10.2, 0, Math.PI * 2);
+    for (let i = 0; i <= ptsRim; i++) {
+      const a = (i / ptsRim) * Math.PI * 2;
+      const r = rimRadii[i];
+      const px = cx + Math.cos(a) * r;
+      const py = cy + Math.sin(a) * r;
+      if (i === 0) c.moveTo(px, py);
+      else c.lineTo(px, py);
+    }
+    c.closePath();
     c.fill();
 
-    // Radial vinyl tear ticks
-    c.strokeStyle = 'rgba(20,18,14,0.85)';
-    c.lineWidth = 2.0;
-    for (let i = 0; i < 8; i++) {
-      const a = i * (Math.PI / 4) + (rnd() - 0.5) * 0.3;
+    // Fine frayed canvas threads around bullet tear rim
+    for (let i = 0; i < 24; i++) {
+      const a = (i / 24) * Math.PI * 2 + (rnd() - 0.5) * 0.25;
+      const r0 = 24 + rnd() * 5;
+      const r1 = r0 + 5 + rnd() * 7;
+      c.strokeStyle = rnd() < 0.8 ? 'rgba(222,210,176,0.86)' : 'rgba(164,152,122,0.78)';
+      c.lineWidth = 1.1 + rnd() * 0.8;
+      c.lineCap = 'round';
       c.beginPath();
-      c.moveTo(cx + Math.cos(a) * 9, cy + Math.sin(a) * 9);
-      c.lineTo(cx + Math.cos(a) * (18 + rnd() * 9), cy + Math.sin(a) * (18 + rnd() * 9));
+      c.moveTo(cx + Math.cos(a) * r0, cy + Math.sin(a) * r0);
+      c.lineTo(cx + Math.cos(a) * r1, cy + Math.sin(a) * r1);
+      c.stroke();
+    }
+
+    // 3) Deep pitch-black puncture cavity inside the lighter torn rim
+    c.fillStyle = '#060504';
+    c.beginPath();
+    const ptsHole = 24;
+    for (let i = 0; i <= ptsHole; i++) {
+      const a = (i / ptsHole) * Math.PI * 2;
+      const r = 18.5 + (rnd() - 0.5) * 3.2;
+      const px = cx + Math.cos(a) * r;
+      const py = cy + Math.sin(a) * r;
+      if (i === 0) c.moveTo(px, py);
+      else c.lineTo(px, py);
+    }
+    c.closePath();
+    c.fill();
+
+    // 4) Radial tear splits cutting across rim
+    c.strokeStyle = 'rgba(12,10,8,0.88)';
+    c.lineWidth = 1.8;
+    for (let i = 0; i < 7; i++) {
+      const a = i * (Math.PI * 2 / 7) + (rnd() - 0.5) * 0.28;
+      c.beginPath();
+      c.moveTo(cx + Math.cos(a) * 16, cy + Math.sin(a) * 16);
+      c.lineTo(cx + Math.cos(a) * (29 + rnd() * 7), cy + Math.sin(a) * (29 + rnd() * 7));
       c.stroke();
     }
     c.restore();
@@ -656,17 +764,18 @@ function buildMarksAtlasTexture(THREE) {
 
   const tex = new THREE.CanvasTexture(cv);
   tex.colorSpace = THREE.SRGBColorSpace;
+  tex.anisotropy = 4;
   tex.needsUpdate = true;
   return tex;
 }
 
 const MARK_PRESETS = {
-  knife:    { cell: 0, width: 0.145, height: 0.056, impulse: 2.35, orientToSlash: true },
-  machete:  { cell: 1, width: 0.225, height: 0.082, impulse: 3.85, orientToSlash: true },
-  katana:   { cell: 2, width: 0.275, height: 0.064, impulse: 4.15, orientToSlash: true },
-  chainsaw: { cell: 3, width: 0.235, height: 0.095, impulse: 1.25, orientToSlash: true },
-  scorch:   { cell: 4, width: 0.215, height: 0.165, impulse: 0.20, orientToSlash: false },
-  bullet:   { cell: 5, width: 0.072, height: 0.072, impulse: 1.05, orientToSlash: false }
+  knife:    { cell: 0, width: 0.180, height: 0.064, impulse: 2.35, orientToSlash: true },
+  machete:  { cell: 1, width: 0.245, height: 0.088, impulse: 3.85, orientToSlash: true },
+  katana:   { cell: 2, width: 0.320, height: 0.068, impulse: 4.15, orientToSlash: true },
+  chainsaw: { cell: 3, width: 0.275, height: 0.106, impulse: 1.25, orientToSlash: true },
+  scorch:   { cell: 4, width: 0.220, height: 0.165, impulse: 0.20, orientToSlash: false },
+  bullet:   { cell: 5, width: 0.082, height: 0.082, impulse: 1.05, orientToSlash: false }
 };
 
 export function normalizeDummyHitKind(raw) {
@@ -708,10 +817,19 @@ function projectOntoPivotSurface(lx, ly, lz, outPos, outNormal) {
   }
 
   const p = sampleProfileParams(wy, _profTmp);
+  const rx0 = Math.max(0.04, p[0]);
+  const rz0 = Math.max(0.04, p[1]);
   const cz = p[2];
   const dx = lx, dz = lz - cz;
-  const theta = (Math.abs(dx) > 1e-6 || Math.abs(dz) > 1e-6) ? Math.atan2(dx, dz) : 0;
+  const theta = (Math.abs(dx) > 1e-6 || Math.abs(dz) > 1e-6) ? Math.atan2(dx / rx0, dz / rz0) : 0;
   evalDummyBodySurface(wy, theta, _sP0);
+
+  // Account for raised 3D webbing cinch straps around y = 0.875 and y = 1.492 so decals wrap smoothly over straps too
+  let strapLift = 0;
+  const dLowStrap = Math.abs(wy - 0.875);
+  if (dLowStrap < 0.025) strapLift = Math.max(strapLift, 0.0048 * (1 - Math.max(0, dLowStrap - 0.016) / 0.009));
+  const dNeckStrap = Math.abs(wy - 1.492);
+  if (dNeckStrap < 0.018) strapLift = Math.max(strapLift, 0.0039 * (1 - Math.max(0, dNeckStrap - 0.011) / 0.007));
 
   // Finite-difference surface tangents for exact smooth outward normal
   const dT = 0.025;
@@ -734,7 +852,7 @@ function projectOntoPivotSurface(lx, ly, lz, outPos, outNormal) {
   const nLen = Math.hypot(nx, ny, nz) || 1;
   nx /= nLen; ny /= nLen; nz /= nLen;
 
-  outPos.set(_sP0.x, _sP0.y - DUMMY_SPEC.hingeY, _sP0.z);
+  outPos.set(_sP0.x + nx * strapLift, _sP0.y - DUMMY_SPEC.hingeY + ny * strapLift, _sP0.z + nz * strapLift);
   outNormal.set(nx, ny, nz);
   return wy;
 }
@@ -771,8 +889,10 @@ function signedDistancePivot(lx, ly, lz, pad = 0) {
     return Math.hypot(lx, lz) - r;
   }
   const p = sampleProfileParams(cy, _profTmp);
+  const rx0 = Math.max(0.04, p[0]);
+  const rz0 = Math.max(0.04, p[1]);
   const dz = lz - p[2];
-  const theta = (Math.abs(lx) > 1e-6 || Math.abs(dz) > 1e-6) ? Math.atan2(lx, dz) : 0;
+  const theta = (Math.abs(lx) > 1e-6 || Math.abs(dz) > 1e-6) ? Math.atan2(lx / rx0, dz / rz0) : 0;
   evalDummyBodySurface(cy, theta, _sP0);
   const surfR = Math.hypot(_sP0.x, _sP0.z - p[2]) + pad;
   const ptR = Math.hypot(lx, dz);
@@ -838,8 +958,8 @@ export function buildTrainingDummy(THREE, opts = {}) {
     side: THREE.DoubleSide,
     forceSinglePass: true,
     polygonOffset: true,
-    polygonOffsetFactor: -3.5,
-    polygonOffsetUnits: -3.5
+    polygonOffsetFactor: -5.0,
+    polygonOffsetUnits: -5.0
   }));
 
   const group = new THREE.Group();
@@ -938,13 +1058,16 @@ export function buildTrainingDummy(THREE, opts = {}) {
   // --- 3. Dynamic Curved Decal Batches (3x3 surface-wrapped grid = 8 tris / 24 verts per mark) ---
   // Each mark is subdivided into a 2x2 quad patch (9 grid points -> 24 vertices) projected directly onto
   // the dummy's curved local surface + 1.7 mm normal lift so long slashes wrap tightly around chest/ribs/head!
-  const VERTS_PER_MARK = 24;
-  const GRID_PAIRS = [
-    [0, 0, 1, 0, 0, 1], [1, 0, 1, 1, 0, 1],
-    [1, 0, 2, 0, 1, 1], [2, 0, 2, 1, 1, 1],
-    [0, 1, 1, 1, 0, 2], [1, 1, 1, 2, 0, 2],
-    [1, 1, 2, 1, 1, 2], [2, 1, 2, 2, 1, 2]
-  ];
+  const GRID_U = 8, GRID_V = 4;
+  const GRID_COLS = GRID_U + 1, GRID_ROWS = GRID_V + 1;
+  const GRID_PTS = GRID_COLS * GRID_ROWS;
+  const GRID_PAIRS = [];
+  for (let gy = 0; gy < GRID_V; gy++) {
+    for (let gx = 0; gx < GRID_U; gx++) {
+      GRID_PAIRS.push([gx, gy, gx + 1, gy, gx, gy + 1], [gx + 1, gy, gx + 1, gy + 1, gx, gy + 1]);
+    }
+  }
+  const VERTS_PER_MARK = GRID_PAIRS.length * 3;
 
   const makeMarkBatch = (parent, cap, name) => {
     const geo = keepGeo(new THREE.BufferGeometry());
@@ -1100,8 +1223,8 @@ export function buildTrainingDummy(THREE, opts = {}) {
   const _surfNrm = new THREE.Vector3();
   const _tanU = new THREE.Vector3();
   const _tanV = new THREE.Vector3();
-  const _gridP = Array.from({ length: 9 }, () => new THREE.Vector3());
-  const _gridN = Array.from({ length: 9 }, () => new THREE.Vector3());
+  const _gridP = Array.from({ length: GRID_PTS }, () => new THREE.Vector3());
+  const _gridN = Array.from({ length: GRID_PTS }, () => new THREE.Vector3());
   const _localHit = new THREE.Vector3();
   const _localDir = new THREE.Vector3();
   const _localSlash = new THREE.Vector3();
@@ -1255,14 +1378,14 @@ export function buildTrainingDummy(THREE, opts = {}) {
 
     const halfW = preset.width * 0.5;
     const halfH = preset.height * 0.5;
-    const lift = 0.0018; // 1.8 mm proud of curved vinyl/rubber surface
+    const lift = 0.0038; // 3.8 mm proud of curved vinyl/rubber surface (with 8x4 grid sagitta < 1.8 mm -> zero clipping!)
 
-    // Project all 9 points of the 3x3 patch onto the local surface so slashes hug curved chest/ribs/head
-    for (let gy = 0; gy < 3; gy++) {
-      const fy = gy - 1; // -1, 0, +1
-      for (let gx = 0; gx < 3; gx++) {
-        const fx = gx - 1; // -1, 0, +1
-        const idx = gy * 3 + gx;
+    // Project all 45 points of the 9x5 patch onto the local surface so slashes hug curved chest/ribs/head seamlessly
+    for (let gy = 0; gy < GRID_ROWS; gy++) {
+      const fy = (gy / GRID_V) * 2 - 1; // -1 .. +1
+      for (let gx = 0; gx < GRID_COLS; gx++) {
+        const fx = (gx / GRID_U) * 2 - 1; // -1 .. +1
+        const idx = gy * GRID_COLS + gx;
         const qx = _surfPos.x + _tanU.x * (fx * halfW) + _tanV.x * (fy * halfH);
         const qy = _surfPos.y + _tanU.y * (fx * halfW) + _tanV.y * (fy * halfH);
         const qz = _surfPos.z + _tanU.z * (fx * halfW) + _tanV.z * (fy * halfH);
@@ -1279,16 +1402,16 @@ export function buildTrainingDummy(THREE, opts = {}) {
 
     const slot = batch.next;
     const baseV = slot * VERTS_PER_MARK;
-    for (let k = 0; k < 8; k++) {
+    for (let k = 0; k < GRID_PAIRS.length; k++) {
       const tri = GRID_PAIRS[k];
       for (let v = 0; v < 3; v++) {
         const gx = tri[v * 2], gy = tri[v * 2 + 1];
-        const gi = gy * 3 + gx;
+        const gi = gy * GRID_COLS + gx;
         const vi = baseV + k * 3 + v;
         batch.positions.setXYZ(vi, _gridP[gi].x, _gridP[gi].y, _gridP[gi].z);
         batch.normals.setXYZ(vi, _gridN[gi].x, _gridN[gi].y, _gridN[gi].z);
-        const u = uMin + (gx * 0.5) * uSpan;
-        const uvV = vTop - (gy * 0.5) * vSpan;
+        const u = uMin + (gx / GRID_U) * uSpan;
+        const uvV = vTop - (gy / GRID_V) * vSpan;
         batch.uvs.setXY(vi, u, uvV);
         batch.colors.setXYZW(vi, 1, 1, 1, alpha);
       }
@@ -1334,24 +1457,27 @@ export function buildTrainingDummy(THREE, opts = {}) {
     }
 
     let slashLocal = null;
-    const slashSrc = hit.slashDir || (preset.orientToSlash ? hit.direction : null);
-    if (slashSrc && (slashSrc.x || slashSrc.y || slashSrc.z)) {
+    if (hit.slashDir && (hit.slashDir.x || hit.slashDir.y || hit.slashDir.z)) {
       targetObj.getWorldQuaternion(_parentQ);
-      _localSlash.set(slashSrc.x || 0, slashSrc.y || 0, slashSrc.z || 0).applyQuaternion(_parentQ.invert());
-      // Ensure non-degenerate tangent along surface even if `direction` is straight into the chest:
+      _localSlash.set(hit.slashDir.x || 0, hit.slashDir.y || 0, hit.slashDir.z || 0).applyQuaternion(_parentQ.invert());
       const projFn = onBase ? projectOntoBaseSurface : projectOntoPivotSurface;
       projFn(_localHit.x, _localHit.y, _localHit.z, _surfPos, _surfNrm);
       const tangSq = _localSlash.clone().addScaledVector(_surfNrm, -_localSlash.dot(_surfNrm)).lengthSq();
-      if (tangSq > 0.02) {
-        slashLocal = _localSlash;
-      } else {
-        // Stab/chop nearly parallel to normal -> give realistic slight diagonal blade cant
-        const roll = hit.roll != null ? hit.roll : (kind === 'katana' ? -0.58 : (kind === 'machete' ? -0.42 : -0.28));
-        _tanU.set(1, 0, 0).addScaledVector(_surfNrm, -_surfNrm.x).normalize();
-        _tanV.copy(_surfNrm).cross(_tanU).normalize();
-        _localSlash.copy(_tanU).multiplyScalar(Math.cos(roll)).addScaledVector(_tanV, Math.sin(roll));
-        slashLocal = _localSlash;
-      }
+      if (tangSq > 0.04) slashLocal = _localSlash;
+    }
+    if (!slashLocal && preset.orientToSlash) {
+      // When struck by gameplay ray/melee without an explicit blade-plane `slashDir`, orient along a natural diagonal slash
+      const projFn = onBase ? projectOntoBaseSurface : projectOntoPivotSurface;
+      projFn(_localHit.x, _localHit.y, _localHit.z, _surfPos, _surfNrm);
+      const baseRoll = kind === 'katana' ? -0.58 : (kind === 'machete' ? -0.44 : (kind === 'chainsaw' ? 0.22 : -0.34));
+      const vary = (((stats.hits | 0) % 5) - 2) * 0.06;
+      const roll = hit.roll != null ? hit.roll : (baseRoll + vary);
+      _tanU.set(1, 0, 0).addScaledVector(_surfNrm, -_surfNrm.x);
+      if (_tanU.lengthSq() < 1e-5) _tanU.set(0, 0, 1).addScaledVector(_surfNrm, -_surfNrm.z);
+      _tanU.normalize();
+      _tanV.copy(_surfNrm).cross(_tanU).normalize();
+      _localSlash.copy(_tanU).multiplyScalar(Math.cos(roll)).addScaledVector(_tanV, Math.sin(roll));
+      slashLocal = _localSlash;
     }
 
     writeCurvedMark(batch, onBase, _localHit, slashLocal, preset, hit.alpha != null ? hit.alpha : 1);

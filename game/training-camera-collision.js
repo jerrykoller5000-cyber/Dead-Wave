@@ -97,8 +97,8 @@ export function createTrainingMarineFade(marine){
     for(const p of parts)p.mesh.material=p.original;
     parts=null;
   }
-  function prepareWarmup(viewFirst = false, ag309 = false){
-    if (ag309 && viewFirst) return () => {};
+  function prepareWarmup(viewFirst = false){
+    if (viewFirst) return () => {};
     end();begin();
     if(keeperRoot?.parent)keeperRoot.parent.remove(keeperRoot);
     keeperRoot=new marine.constructor();
@@ -111,7 +111,6 @@ export function createTrainingMarineFade(marine){
       const seen=new Set();
       const matSig = (m) => {
         if (!m) return 'null';
-        if (!ag309) return String(m.id);
         const custom = Object.hasOwn(m, 'customProgramCacheKey') ? m.customProgramCacheKey() : '';
         return `${m.type}:${custom}:${m.side}:${m.transparent?1:0}:${m.depthWrite?1:0}:${m.blending}:${m.polygonOffset?1:0}`;
       };
@@ -124,7 +123,7 @@ export function createTrainingMarineFade(marine){
         const signature=`${originals.map(matSig).join(',')}/${fades.map(matSig).join(',')}/${attributes}/${p.mesh.isSkinnedMesh}/${p.mesh.isInstancedMesh}/${p.mesh.castShadow}/${p.mesh.receiveShadow}`;
         if(seen.has(signature))continue;
         seen.add(signature);
-        const matsToKeep = ag309 ? [p.original] : [p.original, p.faded];
+        const matsToKeep = [p.original];
         for(const material of matsToKeep){
           // Mesh.clone copies userData with JSON.stringify; the live marine's
           // metadata contains a large object graph and can throw RangeError.

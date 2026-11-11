@@ -2,9 +2,9 @@
 
 state: active
 model: Gemini 4 Carbon
-task: AG-309 Training entry ~5s: dedupe fade keepers & weapon warming
-touching: index.html (trainingWarmCompile),game/training-camera-collision.js
-since: 2026-11-11T16:15Z
+task: AG-309 AG-307 plan: Training entry from ~9s to ~5s: dedupe fade keepers & weapon warming
+touching: index.html game/training-camera-collision.js
+since: 2026-11-11T17:14Z
 next: —
 blocked-on: —
 last-report: handoffs/2026-11-11-antigravity-AG-308.md

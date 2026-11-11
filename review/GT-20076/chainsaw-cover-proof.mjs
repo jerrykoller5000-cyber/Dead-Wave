@@ -1,5 +1,5 @@
 import {makeChainsawModel} from '../../studio/weapon-heavy.js';
-import {visiblePieces} from '../../tools/tests/weapon-seating.js';
+import {comparePlanarBack} from './panel-surface.mjs';
 
 export function compareSideCovers(ctx) {
   const panels=[];
@@ -11,23 +11,7 @@ export function compareSideCovers(ctx) {
       return mesh;
     }};
   }});
-  const results=panels.map(({mesh,before})=>{
-    const side=Math.sign(mesh.position.x);
-    function surface(geometry){
-      const {position,normal,uv}=geometry.attributes, tuples=new Set();
-      let inner=Infinity,outer=-Infinity;
-      for(let i=0;i<position.count;i++){
-        const dist=side*(mesh.position.x+position.getX(i));
-        inner=Math.min(dist,inner);outer=Math.max(dist,outer);
-        if(dist>.136+1e-7) tuples.add([position.getX(i),position.getY(i),position.getZ(i),normal.getX(i),normal.getY(i),normal.getZ(i),uv.getX(i),uv.getY(i)].join(','));
-      }
-      return {tuples,inner,outer};
-    }
-    const a=surface(before),b=surface(mesh.geometry),pieces=visiblePieces(mesh);
-    return {side,before:a.tuples.size,after:b.tuples.size,missing:[...a.tuples].filter(t=>!b.tuples.has(t)).length,
-      added:[...b.tuples].filter(t=>!a.tuples.has(t)).length,inner:b.inner,outerMotion:b.outer-a.outer,
-      closed:pieces.length===1 && pieces[0].closed};
-  });
+  const results=panels.map(({mesh,before})=>comparePlanarBack(mesh,before,.136));
   const data=raw.userData;
   const matrices=data.chainTeeth.map(o=>o.matrix.clone());
   data.chainPhase+=.017;

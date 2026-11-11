@@ -1,0 +1,54 @@
+{
+  "primary": {
+    "enabled": {
+      "front": 0.6596999932088541,
+      "anchor": 0.6597,
+      "flash": 0.6597,
+      "visible": true
+    },
+    "disabled": {
+      "anchor": [
+        0,
+        0.03,
+        0.48
+      ],
+      "flash": [
+        0,
+        0.03,
+        0.48
+      ],
+      "base": [
+        0,
+        0.03,
+        0.48
+      ],
+      "visible": false
+    }
+  },
+  "offhand": {
+    "enabled": {
+      "front": 0.6596999932085699,
+      "anchor": 0.6597,
+      "flash": 0.6597,
+      "visible": true
+    },
+    "disabled": {
+      "anchor": [
+        0,
+        0.03,
+        0.48
+      ],
+      "flash": [
+        0,
+        0.03,
+        0.48
+      ],
+      "base": [
+        0,
+        0.03,
+        0.48
+      ],
+      "visible": false
+    }
+  }
+}

@@ -1,0 +1,336 @@
+{
+  "card": "CE-4-hq-ladder",
+  "capturedAt": "2026-11-11T17:13:04.276Z",
+  "backend": "WebGPUBackend",
+  "setup": {
+    "backend": "WebGPUBackend",
+    "ladder": {
+      "x": -5.4,
+      "z": 0,
+      "y": -3.1686761379241943,
+      "roof": 2.231323862075806
+    },
+    "clearZSide": -1,
+    "occluders": {
+      "northNegZ": 0,
+      "southPosZ": 0
+    },
+    "ladderGeom": {
+      "rungCount": 12,
+      "rungLengthZ": 0.38,
+      "rungDiamX": 0.036,
+      "railMaxX": -5.37,
+      "ladderMaxX": -5.25,
+      "pierFaceX": -5.25,
+      "railToPierClearanceCm": 12
+    }
+  },
+  "audit": {
+    "climbSamples": [
+      {
+        "step": 0,
+        "frame": 14,
+        "climbHeightM": 0.52,
+        "handsRelLadder": [
+          {
+            "x": -0.02,
+            "y": 1.64,
+            "z": 0.12
+          },
+          {
+            "x": -0.12,
+            "y": 1.68,
+            "z": -0.12
+          }
+        ]
+      },
+      {
+        "step": 1,
+        "frame": 32,
+        "climbHeightM": 1.24,
+        "handsRelLadder": [
+          {
+            "x": -0.02,
+            "y": 2.53,
+            "z": 0.12
+          },
+          {
+            "x": -0.02,
+            "y": 2.08,
+            "z": -0.12
+          }
+        ]
+      },
+      {
+        "step": 2,
+        "frame": 50,
+        "climbHeightM": 1.96,
+        "handsRelLadder": [
+          {
+            "x": -0.058,
+            "y": 3.4,
+            "z": 0.12
+          },
+          {
+            "x": -0.02,
+            "y": 2.97,
+            "z": -0.12
+          }
+        ]
+      },
+      {
+        "step": 3,
+        "frame": 68,
+        "climbHeightM": 2.68,
+        "handsRelLadder": [
+          {
+            "x": -0.091,
+            "y": 3.59,
+            "z": 0.12
+          },
+          {
+            "x": -0.02,
+            "y": 3.86,
+            "z": -0.12
+          }
+        ]
+      },
+      {
+        "step": 4,
+        "frame": 86,
+        "climbHeightM": 3.4,
+        "handsRelLadder": [
+          {
+            "x": -0.02,
+            "y": 4.31,
+            "z": 0.12
+          },
+          {
+            "x": -0.02,
+            "y": 4.75,
+            "z": -0.12
+          }
+        ]
+      },
+      {
+        "step": 5,
+        "frame": 104,
+        "climbHeightM": 4.12,
+        "handsRelLadder": [
+          {
+            "x": -0.02,
+            "y": 5.2,
+            "z": 0.12
+          },
+          {
+            "x": -0.02,
+            "y": 4.75,
+            "z": -0.12
+          }
+        ]
+      }
+    ],
+    "steppedOntoRoof": true,
+    "roofWalkPositions": [
+      {
+        "x": -4.59,
+        "y": 2.23,
+        "z": 0
+      },
+      {
+        "x": -4.5,
+        "y": 2.23,
+        "z": 0.23,
+        "onHqRoof": true
+      },
+      {
+        "x": -4.48,
+        "y": 2.23,
+        "z": 0.8,
+        "onHqRoof": true
+      },
+      {
+        "x": -4.48,
+        "y": 2.23,
+        "z": 1.53,
+        "onHqRoof": true
+      }
+    ],
+    "thirdPersonClearances": {
+      "low": {
+        "climbHeightM": 1.08,
+        "maxBodyOrFistX": -4.7858,
+        "pierFaceX": -5.25,
+        "wallFaceX": -5,
+        "clearanceFromPierCm": -46.42,
+        "clearanceFromWallCm": -21.42
+      },
+      "high": {
+        "climbHeightM": 2.92,
+        "maxBodyOrFistX": -4.6628,
+        "pierFaceX": -5.25,
+        "wallFaceX": -5,
+        "clearanceFromPierCm": -58.72,
+        "clearanceFromWallCm": -33.72
+      }
+    },
+    "maxHandOutsideRailM": 0,
+    "maxHandOffRungLineM": 0.12,
+    "maxArmEastXRelPierM": 0.9363
+  },
+  "nodeContainsAudit": {
+    "livePlayPageErrors": 0,
+    "windowTargetIsNode": false,
+    "bodyTargetIsNode": true,
+    "directContainsWindowThrows": "Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'.",
+    "culprit": "ui/prep-checklist.js:116 — bus.addEventListener(type, e => { if (!panel.contains(e.target)) return; }, true) where bus defaults to window; synthetic window.dispatchEvent(new KeyboardEvent(...)) sets e.target = window (not a Node), throwing TypeError on both cloud and PC, whereas real hardware input targets document.body (a Node) so live play never throws."
+  },
+  "shots": {
+    "eye-climb-0": {
+      "name": "eye-climb-0.jpg",
+      "bytes": 166790,
+      "lumaMean": 83.71,
+      "lumaStd": 68.16
+    },
+    "eye-climb-1": {
+      "name": "eye-climb-1.jpg",
+      "bytes": 27901,
+      "lumaMean": 56.42,
+      "lumaStd": 31.54
+    },
+    "eye-climb-2": {
+      "name": "eye-climb-2.jpg",
+      "bytes": 36464,
+      "lumaMean": 61.25,
+      "lumaStd": 29.16
+    },
+    "eye-4light-noon": {
+      "name": "eye-4light-noon.jpg",
+      "bytes": 24435,
+      "lumaMean": 58.93,
+      "lumaStd": 27.66
+    },
+    "eye-4light-overcast": {
+      "name": "eye-4light-overcast.jpg",
+      "bytes": 19877,
+      "lumaMean": 43.64,
+      "lumaStd": 16.43
+    },
+    "eye-4light-dusk": {
+      "name": "eye-4light-dusk.jpg",
+      "bytes": 28049,
+      "lumaMean": 54.76,
+      "lumaStd": 21.87
+    },
+    "eye-4light-night": {
+      "name": "eye-4light-night.jpg",
+      "bytes": 25216,
+      "lumaMean": 43.28,
+      "lumaStd": 16.64
+    },
+    "eye-climb-3": {
+      "name": "eye-climb-3.jpg",
+      "bytes": 27443,
+      "lumaMean": 70.03,
+      "lumaStd": 24.59
+    },
+    "eye-climb-4": {
+      "name": "eye-climb-4.jpg",
+      "bytes": 40688,
+      "lumaMean": 69.32,
+      "lumaStd": 26.58
+    },
+    "eye-climb-5": {
+      "name": "eye-climb-5.jpg",
+      "bytes": 39722,
+      "lumaMean": 80.7,
+      "lumaStd": 38.29
+    },
+    "roof-step-0": {
+      "name": "roof-step-0.jpg",
+      "bytes": 180225,
+      "lumaMean": 86.54,
+      "lumaStd": 43.42
+    },
+    "roof-step-1": {
+      "name": "roof-step-1.jpg",
+      "bytes": 186992,
+      "lumaMean": 84.67,
+      "lumaStd": 40.22
+    },
+    "roof-step-2": {
+      "name": "roof-step-2.jpg",
+      "bytes": 186599,
+      "lumaMean": 84.77,
+      "lumaStd": 40.48
+    },
+    "roof-step-3": {
+      "name": "roof-step-3.jpg",
+      "bytes": 185049,
+      "lumaMean": 84.73,
+      "lumaStd": 40.6
+    },
+    "tp-side-low-noon": {
+      "name": "tp-side-low-noon.jpg",
+      "bytes": 107238,
+      "lumaMean": 67.86,
+      "lumaStd": 47.78
+    },
+    "tp-side-low-overcast": {
+      "name": "tp-side-low-overcast.jpg",
+      "bytes": 94377,
+      "lumaMean": 48.14,
+      "lumaStd": 30.46
+    },
+    "tp-side-low-dusk": {
+      "name": "tp-side-low-dusk.jpg",
+      "bytes": 86411,
+      "lumaMean": 38.54,
+      "lumaStd": 32.98
+    },
+    "tp-side-low-night": {
+      "name": "tp-side-low-night.jpg",
+      "bytes": 88426,
+      "lumaMean": 61.8,
+      "lumaStd": 53.27
+    },
+    "tp-behind-low-noon": {
+      "name": "tp-behind-low-noon.jpg",
+      "bytes": 103534,
+      "lumaMean": 62.3,
+      "lumaStd": 42.1
+    },
+    "tp-side-high-noon": {
+      "name": "tp-side-high-noon.jpg",
+      "bytes": 74120,
+      "lumaMean": 89.52,
+      "lumaStd": 39.26
+    },
+    "tp-side-high-overcast": {
+      "name": "tp-side-high-overcast.jpg",
+      "bytes": 66427,
+      "lumaMean": 60.84,
+      "lumaStd": 26.61
+    },
+    "tp-side-high-dusk": {
+      "name": "tp-side-high-dusk.jpg",
+      "bytes": 65282,
+      "lumaMean": 47.01,
+      "lumaStd": 30.36
+    },
+    "tp-side-high-night": {
+      "name": "tp-side-high-night.jpg",
+      "bytes": 64938,
+      "lumaMean": 60.03,
+      "lumaStd": 49.19
+    },
+    "tp-behind-high-noon": {
+      "name": "tp-behind-high-noon.jpg",
+      "bytes": 85135,
+      "lumaMean": 68.22,
+      "lumaStd": 35.36
+    }
+  },
+  "pageErrors": [],
+  "gpuWarnings": []
+}

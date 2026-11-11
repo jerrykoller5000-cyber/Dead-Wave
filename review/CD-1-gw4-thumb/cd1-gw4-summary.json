@@ -1,0 +1,177 @@
+{
+  "card": "CD-1-gw4-thumb",
+  "capturedAt": "2026-11-11T17:02:32.325Z",
+  "backend": "WebGPUBackend",
+  "clearances": {
+    "hip": {
+      "eyePos": [
+        0,
+        -190.0917,
+        -648.9705
+      ],
+      "handCenterW": [
+        0.2162,
+        -190.2977,
+        -648.9745
+      ],
+      "camRight": [
+        -1,
+        0,
+        0
+      ],
+      "camUp": [
+        0,
+        0.696706709347164,
+        0.7173560908995242
+      ],
+      "camFwd": [
+        0,
+        -0.7173560908995242,
+        0.696706709347164
+      ],
+      "wristEye": [
+        -0.1601,
+        -0.1066,
+        -0.113
+      ],
+      "muzzleEye": [
+        0,
+        597.9811,
+        -315.7786
+      ],
+      "leftArmMaxYInEye": 0.2793,
+      "leftArmMinYInEye": -0.2312,
+      "leftArmXRangeInEye": [
+        -0.2941,
+        0.2375
+      ],
+      "belowSightLineByMeters": -0.2793
+    },
+    "aimed": {
+      "eyePos": [
+        -40.9034,
+        -189.9185,
+        -658.3605
+      ],
+      "handCenterW": [
+        0.2162,
+        -190.2977,
+        -648.9745
+      ],
+      "camRight": [
+        -0.9999987192343464,
+        -1.0842021724855047e-19,
+        0.001600477949566029
+      ],
+      "camUp": [
+        0.0011477368815746543,
+        0.6969483430711878,
+        0.7171204151259233
+      ],
+      "camFwd": [
+        0.001115450455072016,
+        -0.7171213335902971,
+        0.6969474504436874
+      ],
+      "wristEye": [
+        -41.0484,
+        6.5535,
+        -6.8274
+      ],
+      "muzzleEye": [
+        -39.8496,
+        604.5341,
+        -322.6937
+      ],
+      "leftArmMaxYInEye": 6.9392,
+      "leftArmMinYInEye": 6.429,
+      "leftArmXRangeInEye": [
+        -41.1824,
+        -40.6508
+      ],
+      "belowSightLineByMeters": -6.9392
+    }
+  },
+  "shots": {
+    "hip-noon": {
+      "name": "gw4-hip-noon.jpg",
+      "bytes": 270321,
+      "lumaMean": 131.44,
+      "lumaStd": 61.03
+    },
+    "hip-overcast": {
+      "name": "gw4-hip-overcast.jpg",
+      "bytes": 98452,
+      "lumaMean": 42.15,
+      "lumaStd": 24.27
+    },
+    "hip-dusk": {
+      "name": "gw4-hip-dusk.jpg",
+      "bytes": 87283,
+      "lumaMean": 26.12,
+      "lumaStd": 8.81
+    },
+    "hip-night": {
+      "name": "gw4-hip-night.jpg",
+      "bytes": 67320,
+      "lumaMean": 21.23,
+      "lumaStd": 7.95
+    },
+    "aimed-noon": {
+      "name": "gw4-aimed-noon.jpg",
+      "bytes": 112156,
+      "lumaMean": 44.19,
+      "lumaStd": 25.93
+    },
+    "aimed-overcast": {
+      "name": "gw4-aimed-overcast.jpg",
+      "bytes": 112973,
+      "lumaMean": 44.93,
+      "lumaStd": 24.45
+    },
+    "aimed-dusk": {
+      "name": "gw4-aimed-dusk.jpg",
+      "bytes": 140975,
+      "lumaMean": 33.99,
+      "lumaStd": 22.69
+    },
+    "aimed-night": {
+      "name": "gw4-aimed-night.jpg",
+      "bytes": 79321,
+      "lumaMean": 42.8,
+      "lumaStd": 31.36
+    },
+    "close-eye-hip": {
+      "name": "gw4-close-eye-hip.jpg",
+      "bytes": 100592,
+      "lumaMean": 61.9,
+      "lumaStd": 28.89
+    },
+    "close-left": {
+      "name": "gw4-close-left.jpg",
+      "bytes": 133590,
+      "lumaMean": 76.91,
+      "lumaStd": 48.21
+    },
+    "close-below": {
+      "name": "gw4-close-below.jpg",
+      "bytes": 61139,
+      "lumaMean": 31.18,
+      "lumaStd": 31.55
+    },
+    "close-front": {
+      "name": "gw4-close-front.jpg",
+      "bytes": 157191,
+      "lumaMean": 64.3,
+      "lumaStd": 40.54
+    },
+    "close-eye-aimed": {
+      "name": "gw4-close-eye-aimed.jpg",
+      "bytes": 69649,
+      "lumaMean": 67.14,
+      "lumaStd": 22.54
+    }
+  },
+  "pageErrors": [],
+  "gpuWarnings": []
+}

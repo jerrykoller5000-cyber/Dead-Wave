@@ -1,0 +1,26 @@
+{
+  "assembled": {
+    "count": 21,
+    "changedIds": 0
+  },
+  "firstPerson": {
+    "count": 20,
+    "changedIds": 0
+  },
+  "magazine": {
+    "count": 2,
+    "changedIds": 0
+  },
+  "light": {
+    "count": 4,
+    "changedIds": 0
+  },
+  "optic": {
+    "count": 7,
+    "changedIds": 0
+  },
+  "rack": {
+    "count": 5,
+    "changedIds": 0
+  }
+}

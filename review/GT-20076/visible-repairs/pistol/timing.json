@@ -1,0 +1,128 @@
+{
+  "weapon": "pistol",
+  "readyMs": 17086,
+  "fps": 50.9,
+  "low": 31.2,
+  "samples": [
+    {
+      "weapon": "pistol",
+      "eye": "pistol",
+      "high": "high",
+      "fps": 42.0336269020227,
+      "low": 18.621973933370413,
+      "worst": 53.69999998807907,
+      "hitches": 20,
+      "frames": 42
+    },
+    {
+      "weapon": "pistol",
+      "eye": "pistol",
+      "high": "high",
+      "fps": 41.65819955217953,
+      "low": 22.471910112359552,
+      "worst": 44.5,
+      "hitches": 20,
+      "frames": 41
+    },
+    {
+      "weapon": "pistol",
+      "eye": "pistol",
+      "high": "high",
+      "fps": 43.68143031261645,
+      "low": 24.813895792647816,
+      "worst": 40.29999998211861,
+      "hitches": 20,
+      "frames": 43
+    },
+    {
+      "weapon": "pistol",
+      "eye": "pistol",
+      "high": "high",
+      "fps": 34.968528324299704,
+      "low": 19.493177394708873,
+      "worst": 51.29999998211861,
+      "hitches": 21,
+      "frames": 35
+    },
+    {
+      "weapon": "pistol",
+      "eye": "pistol",
+      "high": "high",
+      "fps": 48.84501882627687,
+      "low": 25.380710656058863,
+      "worst": 39.400000005960464,
+      "hitches": 21,
+      "frames": 48
+    },
+    {
+      "weapon": "pistol",
+      "eye": "pistol",
+      "high": "high",
+      "fps": 53.92450569171019,
+      "low": 32.46753245496613,
+      "worst": 30.80000001192093,
+      "hitches": 21,
+      "frames": 54
+    },
+    {
+      "weapon": "pistol",
+      "eye": "pistol",
+      "high": "high",
+      "fps": 46.88747007294282,
+      "low": 25.906735755295756,
+      "worst": 38.599999994039536,
+      "hitches": 21,
+      "frames": 47
+    },
+    {
+      "weapon": "pistol",
+      "eye": "pistol",
+      "high": "high",
+      "fps": 52.65822784810126,
+      "low": 34.60207611743099,
+      "worst": 28.900000005960464,
+      "hitches": 21,
+      "frames": 52
+    },
+    {
+      "weapon": "pistol",
+      "eye": "pistol",
+      "high": "high",
+      "fps": 58.34423096302963,
+      "low": 38.16793890524825,
+      "worst": 26.200000017881393,
+      "hitches": 21,
+      "frames": 58
+    },
+    {
+      "weapon": "pistol",
+      "eye": "pistol",
+      "high": "high",
+      "fps": 54.99450055027277,
+      "low": 29.850746268656717,
+      "worst": 33.5,
+      "hitches": 21,
+      "frames": 55
+    },
+    {
+      "weapon": "pistol",
+      "eye": "pistol",
+      "high": "high",
+      "fps": 60.002033966525694,
+      "low": 49.751243795847785,
+      "worst": 20.099999994039536,
+      "hitches": 21,
+      "frames": 59
+    },
+    {
+      "weapon": "pistol",
+      "eye": "pistol",
+      "high": "high",
+      "fps": 54.827901309445835,
+      "low": 31.446540868714717,
+      "worst": 31.80000001192093,
+      "hitches": 21,
+      "frames": 54
+    }
+  ]
+}

@@ -2,35 +2,27 @@
 
 state: active
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: CB-290 fresh session: GP-20100's gate (tcb291/tcb289/t184/t187/t229 in cloud), then CB-291's three reds in the hold (t187 shotgun/launcher aim-follow, t229 akimbo forearm line)
-touching: index.html (holdShoulderIK, holdFreeShoulders), core/body-limits.js (body rules), tools/tests/tcb291.js, Claude outputs/cb290
-since: 2026-11-11T15:13Z
+task: CB-307 GT-20081's returns to me: fakethree Group.copy keeps name/visible (tgt20076), t334's rack seed, the heavy sleeve's paint registration (gunHeavyLook), t221/t277 fixtures; coverage kept
+touching: tools/tests/fakethree.mjs, tools/tests/t334.js, tools/tests/t221.js, tools/tests/t277.js, index.html (gunHeavyLook paint registration)
+since: 2026-11-11T17:14Z
 next: CB-290 J126 rule 3 (Jerry, 10 Nov, standing, D-138): "No part of th
 blocked-on: —
-last-report: handoffs/2026-11-11-claude2-CB-291.md
+last-report: handoffs/2026-11-11-claude2-CB-306.md
 
 ## Notes
 
-### context nearly full, needs a new session (claude2, 11 Nov 13:10Z; session from 08:53Z)
-- CB-291 DONE, checked out twice with --review (handoffs/2026-11-11-claude2-CB-291.md): landed 10:50Z (patch291 + 291b), 12:35Z
-  (patch291c: the natural elbow; tools/tests/fakethree.mjs real Matrix4.transpose: the harness's arm IK was wrong everywhere),
-  13:07Z (patch291d: the IK marks every arm, blends held, the idle's pinched hand kept). tcb291 3/0 (before 620 out).
-  Open for the Director: t187 aim-follow 1.96/1.50 deg (limit 1.5) and t229 akimbo forearm line are new reds; the harness fix
-  shows old reds (t195, t218, t229, tcc341 shirt/gloves) for their owners. AG's GPU look: review/CB-291/ag/ (PASS on elbows,
-  carrier, turns).
-- CLAUDE DIRECTOR 13:2xZ: CB-291 accepted; the 3 new reds (t187 shotgun/launcher aim-follow, t229 akimbo forearm line) are to be fixed in the hold (index.html holdShoulderIK / holdFreeShoulders), now part of CB-290. This session stopped at 13:31Z.
-- NEXT: CB-290 whole (CC-343 came back): the arms/gun ease back near walls and props (a ray from the shoulder along the aim), then
-  the legs (foot IK on ground/stairs/ramps/crates, knees out, t184's boot slide), a walking test past walls, doors, crates,
-  stairs, ramps in every stance and weapon class, worst five before/after in the four lights. Training Ground first (D-144).
-  Check in naming only your parts (the Director: core/clip-exceptions.js (body rules) if you touch it; ChatGPT 2 holds the
-  weapon section).
-- Then: t217's Wasp flash visual anchor (ChatGPT 2), Training HUD units + CIF copy (ChatGPT, GP-20097), ChatGPT 2's fakethree
-  asks (Object3D.copy keeps name/visible; material type + data defaults for foldStatic), my reds t213, t225. Not mine: crew.mjs
-  reply matching and t17 (ChatGPT, GP-20096).
-- Cloud recipe that worked: tar on the PC into Claude outputs/<task>/cloud-src.tgz (see Working notes) + a second tar for
-  assets/intro/*.js *.css and assets/soundtrack/*.json *.mid; DW_CHECK_MS=420000; a killed run-all can leave the cloud slot
-  held: kill its game-test-slot.mjs and chrome by PID. The marine lab (Claude outputs/cb291/ has no driver; /home/claude/w291/
-  lab291.mjs was cloud-only) renders joints in four lights but the harness joints are not the game's: use Antigravity for looks.
+### Session from 15:13Z (Opus 5.5)
+- GP-20100 gate PASS (no new reds; my IK untouched). CB-290 (CB-291's reds) checked out 17:04Z --review: holdFreeShoulders keeps a
+  held gun's aim (heldGunOn; shotgun up-left 1.98 -> 0.10 deg); t229's akimbo now carries the pair (real akimbo 0.68/0.80 rad).
+  Pictures review/CB-290/ (cloud, software). CB-290's legs = Claude 3 (CC-343). t217's Wasp flash -> ChatGPT 2 (Director WONT).
+- CB-306 done 17:2xZ: t213 burst and t225 were wall-clock waits; now game time. Asked the Director: t213 (a) the carried
+  Watchman's receiver 0.31 m off the shoulder (CARRY_M240.at in updateCarryPose; my pick: mine) and (b) its legs 0.50 m high.
+- NEXT: the GT-20081 returns (ChatGPT 2's 08:33Z request, LATER from me): tgt20076 (fakethree Group.copy keeps name/visible),
+  t334 (rack seed fixture), the heavy sleeve's paint registration (gunHeavyLook, index.html), t221 and t277 fixtures; --review.
+- Cloud pictures WORK now: review/CB-290/lights290.mjs pattern (real index.html via tools/cdp launch headless, ?debug=1&raf=timer,
+  wait for DWOpening.active === false up to 500 s; ~6 min load, ~30 s a shot). Run it with crew.mjs slot run in the cloud.
+- Cloud recipe: tar on the PC into Claude outputs/<task>/cloud-src.tgz (Working notes below) + cloud-src2.tgz (assets/intro
+  *.js *.css, assets/soundtrack *.json *.mid); CHROME_ARGS=--no-sandbox DW_CHECK_MS=420000; ~2-4 min a test.
 
 ### Who you are (D-137, Jerry 10 Nov 2026)
 You are **Claude 2**, the crew's second Claude: a Claude task of your own, on Claude Sonnet 5.5 (Extra). You took
@@ -51,7 +43,7 @@ money, accounts and publishing go to Jerry (`crew.mjs ask`).
   connected, your device shell sees it at `$HOME/mnt/Tiny Trek`. Read, search and edit there, in place: a short python
   read-modify-write, never retyping a file from tool output; keep a file's CRLF if it has it; UTF-8, no BOM.
 - Crew commands run there: `cd "$HOME/mnt/Tiny Trek"; timeout 45 node crew/crew.mjs me claude2` (retry once if it
-  times out). Check in with `--model "Claude Sonnet 5.5 (Extra)"`.
+  times out). Check in with `--model "<the model this session runs on>"`.
 - Game tests run in your cloud workspace on a copy of the tree, never on the PC while Jerry plays. Leave out of the copy:
   `gh-*` and `pk-*` files anywhere (they never leave the PC), `.git`, `node_modules`, `assets/soundtrack`. Then:
   `node tools/tests/run-all.mjs <tests> --jobs 1 --no-retry --all-fails --agent claude2 --task <id>` (set CHROME to the
@@ -73,13 +65,6 @@ money, accounts and publishing go to Jerry (`crew.mjs ask`).
 - Your own files only; never revert anyone's work; never weaken a test (to change what a test expects, check out with
   `--review`).
 - One game test at a time per computer, Jerry first; never close his windows.
-
-### Start here
-1. `node crew/crew.mjs me claude2`; read `AGENTS.md` and `crew/BOARD.md` (Orders from Jerry; decisions D-133..D-137).
-2. Cursor's last handoffs: `handoffs/2026-11-10-cursor-CU-24*.md` and `-CU-25*.md` (CU-247..251 were handed over not
-   started; CU-243 has the 9 Nov suite's reds).
-3. Set up your cloud copy, then CB-249 first (a clear bug with a test), CB-247, CB-251, CB-250, CB-248; CB-243 (the
-   full suite on the current tree, reds by owner) once your copy runs.
 
 ### Working notes (claude2, 10 Nov)
 - Cloud copy (6.5 MB): in the PC shell `tar czf "Claude outputs/<task>/cloud-src.tgz" --exclude='gh-*' --exclude='pk-*' --exclude=assets/soundtrack --exclude=assets/disclaimer --exclude=assets/intro --exclude=ui/audio index.html package.json assets combat core game studio ui world vendor tools/*.mjs tools/*.js tools/sweep crew/*.mjs tools/tests/*.js tools/tests/*.mjs docs/*.md`, plus `assets/intro/*.js assets/intro/*.css` (the page needs them or TT never appears); device_stage_files; unpack in /home/claude/cb.

@@ -3530,6 +3530,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // the deck lost to the riverbed and the player sank straight through the planks.
     // Being inside a deck's footprint at all is reason enough to stand on the deck.
     function playerGroundY(x, z, maxY) {
+      // CE-4 (loan): the HQ's roof holds him while he is up there, as entityGroundY has it (he dropped through it the
+      // frame he stepped off the ladder, and the HQ pushed him out to its foot)
+      if (onHqRoof && house.present && Math.abs(x - house.group.position.x) < house.half - 0.2 && Math.abs(z - house.group.position.z) < house.half - 0.2) return hqRoofY();
       const g = groundMinAround(x, z, 0.3);
       const p = platformHeightAt(x, z, maxY);
       return (p !== null && p > g && p - g < 60) ? p : g;
@@ -22218,7 +22221,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (climbingTower && tower) return { key: 'tower', yaw: 0, rung: 0, r0: tower.gy + 0.35, step: 0.36, n: 15, half: 0.24, foot: tower.gy };
       if (climbingHq && house.present) {
         const L = hqLadderAt();
-        return { key: 'hq', yaw: Math.atan2(house.group.position.x - L.x, house.group.position.z - L.z), rung: 0, r0: L.y + 0.3, step: (HQ_H - 0.5) / 11, n: 12, half: 0.17, foot: L.y };
+        return { key: 'hq', yaw: Math.atan2(house.group.position.x - L.x, house.group.position.z - L.z), rung: 0, r0: L.y + 0.3, step: (HQ_H - 0.5) / 11, n: 12, half: 0.12, foot: L.y, hand: HQ_LADDER_GRIP.hand, chest: HQ_LADDER_GRIP.chest };   // CE-4: the hands inside the rails (0.19 m off the middle); its own grip (HQ_LADDER_GRIP)
       }
       return null;
     }
@@ -22237,7 +22240,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const low = (lim) => { for (let k = 0; k < Lr.n; k++) if (rungY(k) >= lim) return k; return Lr.n - 1; };
       const far = st && st.key === Lr.key && (rungY(Math.max(st.hand[0].r, st.hand[1].r)) < y + 0.2 || rungY(Math.min(st.hand[0].r, st.hand[1].r)) > y + 2.2);
       if (!st || st.key !== Lr.key || far) {
-        const h = Math.max(0, top(y + 1.45)), f = top(y + 0.05);
+        const h = Math.max(0, top(y + (Lr.hand ? Lr.hand[1] - 0.05 : 1.45))), f = top(y + 0.05);
         const mk = (r) => ({ r, prev: r, u: 1 });
         st = _lad.st = { key: Lr.key, hand: [mk(h), mk(Math.max(0, h - 1))], foot: [mk(f), mk(rungY(f + 1) <= y + 0.4 ? f + 1 : f)] };
       }
@@ -22262,7 +22265,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           else if (isFoot && B.r > A.r && rungY(A.r) <= y + win[1]) { B.prev = B.r; B.r = A.r; B.u = 0; }
         }
       };
-      move(st.hand, G.hand, false);
+      move(st.hand, Lr.hand || G.hand, false);   // CE-4: a ladder may carry its own window (the HQ's)
       move(st.foot, G.foot, true);
       return { st, rungY };
     }
@@ -22281,7 +22284,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       rollPivot.rotation.set(0, 0, 0, 'XYZ'); rollPivot.position.y = ROLL_PIVOT_Y;
       marine.rotation.x = 0;
       marine.position.y = -ROLL_PIVOT_Y - G.sink;   // hung a little low on his arms, so the lower foot reaches its rung
-      marine.position.z = Lr.rung - G.chest;
+      marine.position.z = Lr.rung - (Lr.chest || G.chest);
       if (ud.lowerBody) { ud.lowerBody.rotation.set(0, 0, 0); ud.lowerBody.position.x = 0; }   // CL-186: and the stride's sway
       if (ud.hip) ud.hip.rotation.x = 0;
       const reachUp = st.hand[0].u < 1 ? 0 : st.hand[1].u < 1 ? 1 : -1;
@@ -28621,7 +28624,13 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       return _hpOut;
     }
     // CU-79 (story v2): a ladder up the west wall. The door stays shut; the roof is the way up.
-    const HQ_LADDER_X = -HQ_HALF - 0.15;
+    // CE-4 (J16, CLAUDE DIRECTOR's loan, 11 Nov): bolted to the west face's middle pier (its face 0.25 m out, 0.46 m wide):
+    // the rungs run along the wall (they stood straight out of it, one rail inside the wall and the pier), the rails stand
+    // 12 cm off the pier on brackets and run up past the parapet to grab; x is the rungs' line, where he climbs.
+    const HQ_LADDER_X = -HQ_HALF - 0.40;
+    // CE-4: the one ladder climbed in first person: his hands from his chest to a reach over his head (the body's window,
+    // LADDER_GRIP.hand [0.7, 1.5], kept them 0.1-0.7 m under his eye, out of sight) and his face a forearm off the rungs
+    const HQ_LADDER_GRIP = { hand: [0.9, 1.7], chest: 0.32 };
     let climbingHq = false;
     function hqRoofY() { return house.group.position.y + HQ_H; }
     function hqLadderAt() {
@@ -28630,17 +28639,19 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     {
       const rails = new THREE.MeshStandardMaterial({ color: 0x6a6248, roughness: 0.7, metalness: 0.25 });
       const lad = new THREE.Group();
-      const rail = (x) => {
-        const m = new THREE.Mesh(new THREE.BoxGeometry(0.06, HQ_H, 0.06), rails);
-        m.position.set(x, HQ_H / 2, 0);
-        lad.add(m);
-      };
-      rail(-0.22); rail(0.22);
-      for (let i = 0; i < 12; i++) {
-        const rung = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.04, 0.04), rails);
-        rung.position.set(0, 0.3 + i * (HQ_H - 0.5) / 11, 0);
-        lad.add(rung);
+      lad.name = 'hq-ladder';
+      const RAIL_TOP = HQ_H + 0.95, PIER_FACE = -HQ_HALF - 0.25;   // the rails 0.4 m over the parapet; the pier's face (house space)
+      const put = (geo, x, y, z) => { const m = new THREE.Mesh(geo, rails); m.position.set(x, y, z); m.castShadow = true; m.receiveShadow = true; lad.add(m); return m; };
+      const railGeo = new THREE.BoxGeometry(0.06, RAIL_TOP, 0.06);
+      for (const z of [-0.22, 0.22]) {
+        put(railGeo, 0, RAIL_TOP / 2, z);
+        // brackets from the rail's back to the pier, a hand's width under each third of the wall and at the roof's edge
+        const gap = (PIER_FACE - HQ_LADDER_X) - 0.03, bGeo = new THREE.BoxGeometry(gap, 0.05, 0.05);
+        for (const y of [0.9, 2.6, 4.3, HQ_H - 0.15]) put(bGeo, 0.03 + gap / 2, y, z);
       }
+      // round rungs (3.6 cm) between the rails' inner faces: something to close a hand round
+      const rungGeo = new THREE.CylinderGeometry(0.018, 0.018, 0.38, 12); rungGeo.rotateX(Math.PI / 2);
+      for (let i = 0; i < 12; i++) put(rungGeo, 0, 0.3 + i * (HQ_H - 0.5) / 11, 0);
       lad.position.set(HQ_LADDER_X, 0, 0);
       house.group.add(lad);
     }
@@ -28669,6 +28680,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         }
         return;
       }
+      if (onHqRoof && player.position.y < L.roof - 1) onHqRoof = false;   // CE-4: off the roof (walked or fell): the ladder takes him again
       const near = hypot(player.position.x - L.x, player.position.z - L.z) < 0.8;
       if (!onHqRoof && near && grounded && (keys.ArrowUp || keys.KeyW) && Math.abs(player.position.y - L.y) < 0.8) {
         climbingHq = true;
@@ -54310,6 +54322,20 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // CB-291: an arm no hold has a hand on this frame (unarmed, the run's swing, the idle's, a part-way blend) is held inside
     // the shoulder's row after everything that posed it; an arm the IK held in full (cb291Ik, cb291Q) was held by holdShoulderIK.
     const _bpA = [0, 0, 0], _bpV = new THREE.Vector3(), _bpQ = new THREE.Quaternion();
+    // CB-290 (CB-291's t187 red): the shotgun or the launcher aimed up and to the side asks the gun arm's shoulder 1-3 deg past
+    // its turn, and no swing round the hand's line is inside (the plate carrier); the table turned the arm after the gun was
+    // laid, so the gun turned with the hand off the aim by up to 2 deg. A gun the hold has in a hand now moves with that hand
+    // and keeps the turn the hold gave it (the fist takes the degree or two).
+    const _bpM = new THREE.Matrix4(), _bpM2 = new THREE.Matrix4(), _bpG = new THREE.Vector3(), _bpG2 = new THREE.Vector3();
+    function heldGunOn(arm) {
+      const H = WEAPON_HOLD[currentWeapon];
+      if (!H || H.level || holdW < 0.5 || knifeAnimT > 0) return null;
+      for (const m of [weaponMount, offhandMount]) {
+        if (!m.visible || !m.parent) continue;
+        for (let o = m.parent; o; o = o.parent) if (o === arm) return m;
+      }
+      return null;
+    }
     function holdFreeShoulders() {
       if (gameOver) return;
       const ud = marine.userData;
@@ -54321,6 +54347,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         if (!arm || !el) continue;
         _shIK.E.set(0, -IK_UPPER, 0); _bpA[0] = el.position.x; _bpA[1] = el.position.y; _bpA[2] = el.position.z;
         if (shoulderBad(arm, side, arm.quaternion, null) <= 1e-6) continue;
+        const gunM = heldGunOn(arm);
+        if (gunM) { gunM.updateMatrixWorld(true); _bpM.copy(gunM.matrixWorld); gunM.parent.getWorldPosition(_bpG); }
         _bpQ.copy(arm.quaternion);
         if (arm.userData.cb291Ik === bodyFrame) {
           const wr = el.userData.wrist;
@@ -54329,6 +54357,13 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         }
         if (shoulderBad(arm, side, _bpQ, null) > 1e-6) shoulderHold(_bpQ, _bpA, side);
         arm.quaternion.copy(_bpQ); bodyLimitHits.shoulder = (bodyLimitHits.shoulder || 0) + 1; arm.updateMatrixWorld(true);
+        if (gunM) {   // CB-290: the gun as the hold laid it, carried by the hand's move
+          gunM.parent.getWorldPosition(_bpG2).sub(_bpG);
+          _bpM.elements[12] += _bpG2.x; _bpM.elements[13] += _bpG2.y; _bpM.elements[14] += _bpG2.z;
+          _bpM.premultiply(_bpM2.copy(gunM.parent.matrixWorld).invert());
+          _bpM.decompose(gunM.position, gunM.quaternion, gunM.scale);
+          gunM.updateMatrixWorld(true); bodyLimitHits.gunKept = (bodyLimitHits.gunKept || 0) + 1;
+        }
       }
     }
     function clampBodyPose() {
@@ -64969,7 +65004,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       training.warmPromise = new Promise((res) => { resolveWarmDone = res; });
       training.bgWarmPromise = new Promise((res) => { resolveBgDone = res; });
 
-      const AG309_WARM = typeof location !== 'undefined' && new URLSearchParams(location.search).get('ag309') === '1';
+      const AG309_WARM = typeof location === 'undefined' || new URLSearchParams(location.search).get('ag309') !== '0';
       const activeWk = holsteredKey || currentWeapon || 'pistol';
 
       let origPPRender = null;
@@ -65088,7 +65123,27 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
 
           try {
             if (proxyGroup.children.length > 0) {
-              await compileForLiveTarget(proxyGroup);
+              const caches = renderer?._pipelines?.caches;
+              const prevKeys = caches ? new Set(caches.keys()) : null;
+              const p = compileForLiveTarget(proxyGroup);
+              const unready = [];
+              if (caches && prevKeys) {
+                for (const [k, pipe] of caches.entries()) {
+                  if (!prevKeys.has(k)) {
+                    const data = renderer.backend.get(pipe);
+                    if (!data || !data.pipeline) {
+                      unready.push([k, pipe]);
+                      caches.delete(k);
+                    }
+                  }
+                }
+              }
+              await p;
+              if (caches && unready.length > 0) {
+                for (const [k, pipe] of unready) {
+                  caches.set(k, pipe);
+                }
+              }
             }
           } catch (_) {}
           finally {
@@ -65698,11 +65753,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         const handReach = kind === 'katana' ? 1.75 : kind === 'machete' ? 1.4 : 1.15;
         const from = bl ? {x:bl.ax,y:bl.ay,z:bl.az} : {x:p.x,y:p.y+1.18,z:p.z};
         const to = bl ? {x:bl.bx,y:bl.by,z:bl.bz} : {x:p.x+fx*Math.min(reach,handReach),y:p.y+1.18,z:p.z+fz*Math.min(reach,handReach)};
-        const contact = training.dummy.trace(from,to,bl?.r||0.035);
+        const contact = bl ? training.dummy.sawContact(bl) : training.dummy.trace(from,to,0.035);
         const blocked = contact && trainingTraceExact(training.tg,{x:p.x,y:p.y+1.18,z:p.z},contact.point);
         if (contact && (!blocked || blocked.solid.dummy || blocked.t >= .99)) {
-          trainingDummyHit(kind,contact,bl ? WEAPON_STATS.chainsaw.damage : bladeStats().dmg,{x:fx,y:0,z:fz});
-          if (bl) { sawBiteT=.3; spawnSawSparks(contact.point.x,contact.point.y,contact.point.z,fx,fz,10,1.3); }
+          const impact = trainingDummyHit(kind,contact,bl ? WEAPON_STATS.chainsaw.damage : bladeStats().dmg,{x:fx,y:0,z:fz});
+          if (bl && impact) { sawBiteT=.3; spawnSawSparks(impact.point.x,impact.point.y,impact.point.z,fx,fz,10,1.3); }
           hits++;
         }
       }
@@ -67072,7 +67127,8 @@ live++;
 
         // Riding the ladder owns position.x/y/z outright (see updateTowerClimb) - the
         // usual ground/water movement below would otherwise fight it every frame.
-        if (!climbingTower) {
+        // CE-4: the HQ's ladder too (updateHqLadder): the ground put him back at its foot every frame, so it never climbed.
+        if (!climbingTower && !climbingHq) {
         const px0 = player.position.x, pz0 = player.position.z;
         const nrm = terrainNormal(px0, pz0, _physN);
         const slope = terrainSlope(px0, pz0);
@@ -67454,7 +67510,7 @@ live++;
         const swimming = !climbingTower && depth > 1.3 && player.position.y < waterLevel + 0.6;
 
         if(vault) { vy=0;grounded=false; }
-        else if (climbingTower) {
+        else if (climbingTower || climbingHq) {   // CE-4: and by updateHqLadder() on the HQ's
           // Height is owned entirely by updateTowerClimb() this frame - nothing to
           // resolve here, and no gravity fighting it.
           vy = 0;
@@ -68751,9 +68807,9 @@ live++;
     // Set up the way PassNode.updateBefore and PostProcessing.render set it, and put back before this returns: the
     // synchronous part of compileAsync reads all of it; only the wait for the pipelines is async. Shader variants (node
     // builds) are keyed on the material, not the target, so nothing compiled before is lost.
-    function compileForLiveTarget() {
+    function compileForLiveTarget(target = scene) {
       const rt = postProcessing && scenePassNode && scenePassNode.renderTarget;
-      if (!rt || typeof renderer.setRenderTarget !== 'function') return renderer.compileAsync(scene, camera);
+      if (!rt || typeof renderer.setRenderTarget !== 'function') return renderer.compileAsync(target, camera, scene);
       const prev = { rt: renderer.getRenderTarget(), mrt: renderer.getMRT ? renderer.getMRT() : null, tm: renderer.toneMapping, cs: renderer.outputColorSpace };
       try {   // the size the pass will ask for, so the first frame does not reallocate the target
         const size = renderer.getSize(new THREE.Vector2());
@@ -68766,7 +68822,7 @@ live++;
         renderer.outputColorSpace = THREE.LinearSRGBColorSpace;
         renderer.setRenderTarget(rt);
         if (renderer.setMRT) renderer.setMRT(scenePassNode._mrt || null);
-        p = renderer.compileAsync(scene, camera);
+        p = renderer.compileAsync(target, camera, scene);
       } finally {
         renderer.setRenderTarget(prev.rt);
         if (renderer.setMRT) renderer.setMRT(prev.mrt);

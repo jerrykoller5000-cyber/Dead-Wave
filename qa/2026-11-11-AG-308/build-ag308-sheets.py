@@ -107,7 +107,7 @@ def build_sheet_4lights():
             badge(draw, x + 8, y + 8, f"{l_title} · {row_title}")
 
     for out_dir in [OUT_QA, OUT_REV]:
-        canvas.save(os.path.join(out_dir, "sheet-ag308-4lights.jpg"), quality=93)
+        p = os.path.join(out_dir, "sheet-ag308-4lights.jpg"); tmp = p + ".tmp.jpg"; canvas.save(tmp, quality=93); os.replace(tmp, p)
 
 
 # --- SHEET 2: 6 Real-Hit Decal Close-Ups + Front/Side/Back + Effect Sorting + 6-Frame Wobble Filmstrip ---
@@ -217,7 +217,7 @@ def build_sheet_details():
         badge(draw, x + 8, y + 8, lbl)
 
     for out_dir in [OUT_QA, OUT_REV]:
-        canvas.save(os.path.join(out_dir, "dummy-details.jpg"), quality=93)
+        p = os.path.join(out_dir, "dummy-details.jpg"); tmp = p + ".tmp.jpg"; canvas.save(tmp, quality=93); os.replace(tmp, p)
 
 
 if __name__ == "__main__":

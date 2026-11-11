@@ -2,12 +2,12 @@
 
 state: active
 model: GPT-6
-task: GP-20101 Continue J137 melee dummy integration: chainsaw surface contact and range counter validation
-touching: game/training-dummy.js, index.html (training dummy hit routing), ui/range-feature.js, ui/range-console.js, ui/strings.js, review/GP-20101
-since: 2026-11-11T16:07Z
-next: GP-20101 J137 (Jerry, 11 Nov): the melee dummy's place and hits. Afte
+task: GP-20103 Guard prep checklist against non-Node key event targets
+touching: ui/prep-checklist.js (input guard), handoffs/2026-11-11-chatgpt-GP-20103.md
+since: 2026-11-11T17:10Z
+next: —
 blocked-on: —
-last-report: handoffs/2026-11-11-chatgpt-GP-20102-followup.md
+last-report: handoffs/2026-11-11-chatgpt-GP-20100.md
 
 ## Notes
 

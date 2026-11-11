@@ -1,0 +1,278 @@
+[
+  {
+    "phase": "before",
+    "scene": "shotgun-upleft",
+    "light": "noon",
+    "weapon": "shotgun",
+    "held": true,
+    "aimErr": 2.34,
+    "hits": {
+      "shoulder": 50
+    }
+  },
+  {
+    "phase": "before",
+    "scene": "shotgun-upleft",
+    "light": "overcast",
+    "weapon": "shotgun",
+    "held": true,
+    "aimErr": 2.19,
+    "hits": {
+      "shoulder": 65
+    }
+  },
+  {
+    "phase": "before",
+    "scene": "shotgun-upleft",
+    "light": "dusk",
+    "weapon": "shotgun",
+    "held": true,
+    "aimErr": 2.07,
+    "hits": {
+      "shoulder": 79
+    }
+  },
+  {
+    "phase": "before",
+    "scene": "shotgun-upleft",
+    "light": "night",
+    "weapon": "shotgun",
+    "held": true,
+    "aimErr": 2.02,
+    "hits": {
+      "shoulder": 93
+    }
+  },
+  {
+    "phase": "before",
+    "scene": "shotgun-behind",
+    "light": "noon",
+    "weapon": "shotgun",
+    "held": true,
+    "aimErr": 1.58,
+    "hits": {
+      "shoulder": 152
+    }
+  },
+  {
+    "phase": "before",
+    "scene": "shotgun-behind",
+    "light": "overcast",
+    "weapon": "shotgun",
+    "held": true,
+    "aimErr": 1.56,
+    "hits": {
+      "shoulder": 166
+    }
+  },
+  {
+    "phase": "before",
+    "scene": "shotgun-behind",
+    "light": "dusk",
+    "weapon": "shotgun",
+    "held": true,
+    "aimErr": 1.59,
+    "hits": {
+      "shoulder": 179
+    }
+  },
+  {
+    "phase": "before",
+    "scene": "shotgun-behind",
+    "light": "night",
+    "weapon": "shotgun",
+    "held": true,
+    "aimErr": 1.59,
+    "hits": {
+      "shoulder": 192
+    }
+  },
+  {
+    "phase": "before",
+    "scene": "launcher-upleft",
+    "light": "noon",
+    "weapon": "launcher",
+    "held": true,
+    "aimErr": 0.93,
+    "hits": {
+      "shoulder": 249
+    }
+  },
+  {
+    "phase": "before",
+    "scene": "launcher-upleft",
+    "light": "overcast",
+    "weapon": "launcher",
+    "held": true,
+    "aimErr": 1.02,
+    "hits": {
+      "shoulder": 263
+    }
+  },
+  {
+    "phase": "before",
+    "scene": "launcher-upleft",
+    "light": "dusk",
+    "weapon": "launcher",
+    "held": true,
+    "aimErr": 1.02,
+    "hits": {
+      "shoulder": 278
+    }
+  },
+  {
+    "phase": "before",
+    "scene": "launcher-upleft",
+    "light": "night",
+    "weapon": "launcher",
+    "held": true,
+    "aimErr": 1,
+    "hits": {
+      "shoulder": 292
+    }
+  },
+  {
+    "phase": "after",
+    "scene": "shotgun-upleft",
+    "light": "noon",
+    "weapon": "shotgun",
+    "held": true,
+    "aimErr": 0.12,
+    "hits": {
+      "shoulder": 50,
+      "gunKept": 50
+    }
+  },
+  {
+    "phase": "after",
+    "scene": "shotgun-upleft",
+    "light": "overcast",
+    "weapon": "shotgun",
+    "held": true,
+    "aimErr": 0.12,
+    "hits": {
+      "shoulder": 65,
+      "gunKept": 65
+    }
+  },
+  {
+    "phase": "after",
+    "scene": "shotgun-upleft",
+    "light": "dusk",
+    "weapon": "shotgun",
+    "held": true,
+    "aimErr": 0.11,
+    "hits": {
+      "shoulder": 80,
+      "gunKept": 80
+    }
+  },
+  {
+    "phase": "after",
+    "scene": "shotgun-upleft",
+    "light": "night",
+    "weapon": "shotgun",
+    "held": true,
+    "aimErr": 0.11,
+    "hits": {
+      "shoulder": 94,
+      "gunKept": 94
+    }
+  },
+  {
+    "phase": "after",
+    "scene": "shotgun-behind",
+    "light": "noon",
+    "weapon": "shotgun",
+    "held": true,
+    "aimErr": 0.08,
+    "hits": {
+      "shoulder": 152,
+      "gunKept": 152
+    }
+  },
+  {
+    "phase": "after",
+    "scene": "shotgun-behind",
+    "light": "overcast",
+    "weapon": "shotgun",
+    "held": true,
+    "aimErr": 0.08,
+    "hits": {
+      "shoulder": 166,
+      "gunKept": 166
+    }
+  },
+  {
+    "phase": "after",
+    "scene": "shotgun-behind",
+    "light": "dusk",
+    "weapon": "shotgun",
+    "held": true,
+    "aimErr": 0.09,
+    "hits": {
+      "shoulder": 180,
+      "gunKept": 180
+    }
+  },
+  {
+    "phase": "after",
+    "scene": "shotgun-behind",
+    "light": "night",
+    "weapon": "shotgun",
+    "held": true,
+    "aimErr": 0.08,
+    "hits": {
+      "shoulder": 194,
+      "gunKept": 194
+    }
+  },
+  {
+    "phase": "after",
+    "scene": "launcher-upleft",
+    "light": "noon",
+    "weapon": "launcher",
+    "held": true,
+    "aimErr": 0.05,
+    "hits": {
+      "shoulder": 252,
+      "gunKept": 252
+    }
+  },
+  {
+    "phase": "after",
+    "scene": "launcher-upleft",
+    "light": "overcast",
+    "weapon": "launcher",
+    "held": true,
+    "aimErr": 0.05,
+    "hits": {
+      "shoulder": 266,
+      "gunKept": 266
+    }
+  },
+  {
+    "phase": "after",
+    "scene": "launcher-upleft",
+    "light": "dusk",
+    "weapon": "launcher",
+    "held": true,
+    "aimErr": 0.05,
+    "hits": {
+      "shoulder": 280,
+      "gunKept": 280
+    }
+  },
+  {
+    "phase": "after",
+    "scene": "launcher-upleft",
+    "light": "night",
+    "weapon": "launcher",
+    "held": true,
+    "aimErr": 0.05,
+    "hits": {
+      "shoulder": 294,
+      "gunKept": 294
+    }
+  }
+]

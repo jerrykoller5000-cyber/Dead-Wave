@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {setTimeout as wait} from 'node:timers/promises';
+import {sampleHigh,compiledBuild} from '../GT-20076/frame-sample.mjs';
 import {fileURLToPath} from 'node:url';
 import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
@@ -8,10 +8,12 @@ import {launch} from '../../tools/cdp.mjs';
 import {save} from '../GT-20076/save.mjs';
 
 const [id,phase='baseline']=process.argv.slice(2);
+const repairTiming=/^j128(?:-([a-z][a-z0-9-]*))?$/.exec(phase);
 const compareSaw=id==='chainsaw' && ['compare-before','compare-after'].includes(phase);
-const handleVersion=id==='chainsaw' && /^saw-(legacy|panels|fitted)-[12]$/.exec(phase)?.[1];
+const handleVersion=id==='chainsaw' && /^saw-(legacy|panels|fitted)-[1-9]$/.exec(phase)?.[1];
+const sniperVersion=id==='sniper' && /^sniper-cover-(original|current)-[12]$/.exec(phase)?.[1];
 const compareKr=id==='ak' && /^(original|current)-kr-[12]$/.test(phase);
-assert(handleVersion || compareKr || compareSaw || ['baseline','revised','rework','action','ag294','j128'].includes(phase));
+assert(repairTiming || sniperVersion || handleVersion || compareKr || compareSaw || ['baseline','revised','rework','action','ag294'].includes(phase));
 assert(process.env.DW_GAME_TEST_TOKEN && /^[a-z0-9-]+$/.test(id));
 async function runtimeSignature(){
   const files=['index.html','game/viewmodel.js','game/viewmodel-poses.js','game/training-camera-collision.js','studio/weapon-heavy.js','studio/weapon-longarms.js'];
@@ -19,7 +21,7 @@ async function runtimeSignature(){
   for(const file of files)hash.update(await readFile(new URL('../../'+file,import.meta.url)));
   return hash.digest('hex');
 }
-const runSignature=handleVersion?await runtimeSignature():null;
+const runSignature=handleVersion || sniperVersion?await runtimeSignature():null;
 const server=await serve(fileURLToPath(new URL('../../',import.meta.url)),0);
 const browser=await launch({headless:false});
 try {
@@ -39,46 +41,31 @@ try {
     const {prepareHandleTiming}=await import('../GT-20083/original-handle.mjs');
     verifyHandle=await prepareHandleTiming(page,server.origin,handleVersion);
   }
-  const start=Date.now();
-  await page.goto(server.origin+'/index.html?debug=1',{waitUntil:'none'});
-  assert(await page.waitFor('window.DWOpening'));
-  await page.evaluate('DWOpening.dismissForTesting()');
-  assert(await page.waitFor('window.TT && DWLoad.snapshot().state==="ready"'));
-  const readyMs=Date.now()-start;
-  assert(await page.waitFor('!DWOpening.active'));
-  await page.evaluate("TT.applyGraphicsPreset('high');document.getElementById('playerName').value='Art';document.getElementById('modeTraining').click()");
-  assert(await page.waitFor('TT.trainingDbg.state().active && !document.getElementById("trainingBlackout")?.classList.contains("on")',{timeout:45000}));
-  await page.evaluate('window.sampleGun='+JSON.stringify(id));
-  await page.evaluate(`(async()=>{
-    TT.grantAllWeapons();TT.setViewFirstDbg(true);
-    if(TT.isUnarmed())TT.toggleHolster();
-    const slot=TT.WEAPON_ORDER.indexOf(sampleGun);
-    if(slot<0)throw Error('Unknown sample model');
-    for(let i=0;i<30 && TT.getCurrentWeapon()!==sampleGun;i++){
-      TT.setWeapon(slot);await new Promise(r=>setTimeout(r,120));
-    }
-  })()`);
-  assert(await page.waitFor('TT.viewmodelDbg().info.key===sampleGun && TT.viewmodelDbg().info.raise>.98 && TT.fpDbg().w>.98'));
-  const samples=[];
-  for(let second=0;second<12;second++){
-    await wait(1000);
-    const snap=await page.evaluate('({weapon:TT.getCurrentWeapon(),eye:TT.viewmodelDbg().info.key,high:TT.getGfx(),...TT.perfSnapshot()})');
-    assert.equal(snap.weapon,id);assert.equal(snap.eye,id);assert.equal(snap.high,'high');
-    samples.push(snap);
+  let verifySniper;
+  if(sniperVersion==='original'){
+    const {originalSniperCover}=await import('../GT-20076/replay-artwork.mjs');
+    verifySniper=await originalSniperCover(page,server.origin);
   }
-  const last=samples.slice(-10);
-  const mean=key=>Math.round(last.reduce((a,v)=>a+v[key],0)*10/last.length)/10;
-  const result={weapon:id,readyMs,fps:mean('fps'),low:mean('low'),samples};
-  assert(result.fps>0 && result.low>0);
+  const result=await sampleHigh(page,server.origin,id);
+  const {readyMs}=result;
   if(verifyKr) result.artworkFingerprint=await verifyKr();
-  if(verifyHandle){
-    result.artworkFingerprint=await verifyHandle();
+  if(verifyHandle) result.artworkFingerprint=await verifyHandle();
+  if(sniperVersion){
+    if(verifySniper)verifySniper();
+    const observed=await page.evaluate("Promise.all([import('/review/GT-20076/rank-visibility.mjs'),import('/tools/tests/weapon-seating.js')]).then(([r,s])=>s.artworkFingerprint(r.currentModel(TT,'sniper')))");
+    const audit=sniperVersion==='current'?'catalog-fix-sniper-seated':'catalog-fix-front-rail-boss';
+    const source=JSON.parse(await readFile(new URL('../GT-20076/'+audit+'/audit.json',import.meta.url),'utf8'));
+    assert.equal(observed,source.sniper.artworkFingerprint);result.artworkFingerprint=observed;
+  }
+  if(handleVersion || sniperVersion){
     result.runtimeBefore=runSignature;result.runtimeAfter=await runtimeSignature();
+    result.compiled=await compiledBuild(page,server.origin,handleVersion?'/studio/weapon-heavy.js':'/studio/weapon-longarms.js');
   }
   let path='./'+id+'/'+(phase==='baseline'?'timing.json':'timing-'+phase+'.json');
   if (phase==='ag294') path='./ag294-retakes/timing-'+id+'.json';
   if (handleVersion) path='../GT-20083/timing-'+phase+'.json';
-  if (phase==='j128') path='../GT-20076/visible-repairs/'+id+'/timing.json';
+  if (sniperVersion) path='../GT-20076/visible-repairs/sniper/timing-'+phase+'.json';
+  if (repairTiming) path='../GT-20076/visible-repairs/'+id+'/timing'+(repairTiming[1]?'-'+repairTiming[1]:'')+'.json';
   await save(new URL(path,import.meta.url),JSON.stringify(result,null,2));
   if(verifyBaseline)verifyBaseline();
   assert.deepEqual(page.errors,[]);

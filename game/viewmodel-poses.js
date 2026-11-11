@@ -451,14 +451,14 @@ export const VM_BLADES = Object.freeze({
   },
   machete: {   // a chop (0.40 s): raised high at the right with the blade straight up, swept across and down to the lower left, back
     keys: [[0, { p: [0.30, -0.34, -0.30], e: [0.2, -0.3, 0.2, 0] }], [0.30, { p: [0.26, 0.06, -0.42], e: [0.1, -1.35, 0.3, -0.3] }],
-      [0.58, { p: [0.03, -0.18, -0.58], e: [0.0, -1.0, 1.5, 1.5] }], [0.80, { p: [0.16, -0.22, -0.44], e: [0.1, -0.6, 1.0, 0.9] }],
-      [1, { p: [0.30, -0.34, -0.30], e: [0.2, -0.3, 0.2, 0] }]],   // the fist stays right of the middle (the forearm was a log across the view at -0.06); the flat to the eye in the chop (roll)
+      [0.58, { p: [0.03, -0.18, -0.58], e: [0.0, -1.0, 1.5, 1.5] }], [0.80, { p: [-0.10, -0.27, -0.46], e: [-0.1, -0.6, 1.4, 1.25] }],
+      [1, { p: [0.30, -0.34, -0.30], e: [0.2, -0.3, 0.2, 0] }]],   // CE-4: the follow-through goes on down and left past the cut (it swung back right along the view's bottom), then drops away below; the fist stays right of the middle (the forearm was a log across the view at -0.06); the flat to the eye in the chop (roll)
     hold: { pos: [0, -0.07, 0.0], rot: [0, 0.15, 0] },
     away: [-0.22, -0.46, -0.36]
   },
   katana: {   // a cut (0.30 s): the same arc, the blade long
     keys: [[0, { p: [0.30, -0.34, -0.30], e: [0.2, -0.3, 0.2, 0] }], [0.28, { p: [0.24, 0.08, -0.44], e: [0.1, -1.4, 0.3, -0.3] }],
-      [0.56, { p: [0.02, -0.18, -0.60], e: [0.0, -1.0, 1.5, 1.5] }], [0.80, { p: [0.16, -0.22, -0.44], e: [0.1, -0.6, 1.0, 0.9] }],
+      [0.56, { p: [0.02, -0.18, -0.60], e: [0.0, -1.0, 1.5, 1.5] }], [0.80, { p: [-0.10, -0.27, -0.48], e: [-0.1, -0.6, 1.4, 1.25] }],   // CE-4: the follow-through on down and left
       [1, { p: [0.30, -0.34, -0.30], e: [0.2, -0.3, 0.2, 0] }]],
     hold: { pos: [0, -0.07, 0.0], rot: [0, 0.15, 0] },
     away: [-0.22, -0.46, -0.36]

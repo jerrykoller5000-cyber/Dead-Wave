@@ -113,7 +113,7 @@ export function mountPrepChecklist({doc=document,bus=window}={}) {
   });
   // Let native keyboard/click disclosure work without sending fire/movement to the game.
   for(const type of ['keydown','keyup','mousedown','mouseup','wheel','contextmenu'])bus.addEventListener(type,e=>{
-    if(!panel.contains(e.target))return;
+    if(!(e.target instanceof Node)||!panel.contains(e.target))return;
     if((type==='keydown'||type==='keyup')&&!['Space','Enter','Tab','Escape','ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.code)) {
       summary.blur();return; // Movement/interact returns immediately to play after a click.
     }

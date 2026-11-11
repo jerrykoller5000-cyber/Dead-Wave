@@ -1,0 +1,32 @@
+{
+  "held-right": {
+    "area": [
+      618,
+      354,
+      652,
+      364
+    ],
+    "old": 287,
+    "current": 281,
+    "oldInterior": 253,
+    "missingMeshDepth": 0,
+    "missingMeshDepthWithOnePixelTolerance": 0,
+    "absentInterior": 0,
+    "absentWithOnePixelTolerance": 0
+  },
+  "held-right-open": {
+    "area": [
+      618,
+      355,
+      653,
+      365
+    ],
+    "old": 302,
+    "current": 312,
+    "oldInterior": 269,
+    "missingMeshDepth": 0,
+    "missingMeshDepthWithOnePixelTolerance": 0,
+    "absentInterior": 0,
+    "absentWithOnePixelTolerance": 0
+  }
+}

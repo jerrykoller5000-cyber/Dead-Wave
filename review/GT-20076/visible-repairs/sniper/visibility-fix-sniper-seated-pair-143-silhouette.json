@@ -1,0 +1,107 @@
+{
+  "hip": {
+    "area": [
+      657,
+      441,
+      720,
+      493
+    ],
+    "old": 3271,
+    "current": 3271,
+    "oldInterior": 3263,
+    "missingMeshDepth": 0,
+    "missingMeshDepthWithOnePixelTolerance": 0,
+    "absentInterior": 0,
+    "absentWithOnePixelTolerance": 0
+  },
+  "aim-entry": {
+    "area": [
+      581,
+      439,
+      681,
+      522
+    ],
+    "old": 7973,
+    "current": 7955,
+    "oldInterior": 7688,
+    "missingMeshDepth": 0,
+    "missingMeshDepthWithOnePixelTolerance": 0,
+    "absentInterior": 33,
+    "absentWithOnePixelTolerance": 7
+  },
+  "held-left": {
+    "area": [
+      360,
+      240,
+      388,
+      259
+    ],
+    "old": 419,
+    "current": 423,
+    "oldInterior": 368,
+    "missingMeshDepth": 0,
+    "missingMeshDepthWithOnePixelTolerance": 0,
+    "absentInterior": 0,
+    "absentWithOnePixelTolerance": 0
+  },
+  "held-right": {
+    "area": [
+      564,
+      236,
+      592,
+      255
+    ],
+    "old": 503,
+    "current": 507,
+    "oldInterior": 471,
+    "missingMeshDepth": 0,
+    "missingMeshDepthWithOnePixelTolerance": 0,
+    "absentInterior": 0,
+    "absentWithOnePixelTolerance": 0
+  },
+  "rack": {
+    "area": [
+      456,
+      370,
+      474,
+      401
+    ],
+    "old": 353,
+    "current": 177,
+    "oldInterior": 213,
+    "missingMeshDepth": 0,
+    "missingMeshDepthWithOnePixelTolerance": 0,
+    "absentInterior": 121,
+    "absentWithOnePixelTolerance": 81
+  },
+  "held-left-open": {
+    "area": [
+      360,
+      239,
+      388,
+      258
+    ],
+    "old": 437,
+    "current": 438,
+    "oldInterior": 387,
+    "missingMeshDepth": 0,
+    "missingMeshDepthWithOnePixelTolerance": 0,
+    "absentInterior": 0,
+    "absentWithOnePixelTolerance": 0
+  },
+  "held-right-open": {
+    "area": [
+      565,
+      237,
+      592,
+      255
+    ],
+    "old": 460,
+    "current": 463,
+    "oldInterior": 438,
+    "missingMeshDepth": 0,
+    "missingMeshDepthWithOnePixelTolerance": 0,
+    "absentInterior": 0,
+    "absentWithOnePixelTolerance": 0
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "hip": {
+    "area": [
+      643,
+      442,
+      688,
+      540
+    ],
+    "old": 3170,
+    "current": 3185,
+    "oldInterior": 3019,
+    "missingMeshDepth": 0,
+    "missingMeshDepthWithOnePixelTolerance": 0,
+    "absentInterior": 2,
+    "absentWithOnePixelTolerance": 0
+  },
+  "aimed": {
+    "area": [
+      432,
+      480,
+      439,
+      540
+    ],
+    "old": 279,
+    "current": 275,
+    "oldInterior": 218,
+    "missingMeshDepth": 0,
+    "missingMeshDepthWithOnePixelTolerance": 0,
+    "absentInterior": 1,
+    "absentWithOnePixelTolerance": 0
+  },
+  "held-left": {
+    "area": [
+      375,
+      283,
+      385,
+      298
+    ],
+    "old": 95,
+    "current": 96,
+    "oldInterior": 66,
+    "missingMeshDepth": 0,
+    "missingMeshDepthWithOnePixelTolerance": 0,
+    "absentInterior": 0,
+    "absentWithOnePixelTolerance": 0
+  },
+  "rack": {
+    "area": [
+      326,
+      276,
+      406,
+      359
+    ],
+    "old": 5072,
+    "current": 5016,
+    "oldInterior": 4901,
+    "missingMeshDepth": 0,
+    "missingMeshDepthWithOnePixelTolerance": 0,
+    "absentInterior": 55,
+    "absentWithOnePixelTolerance": 36
+  },
+  "held-left-open": {
+    "area": [
+      375,
+      285,
+      385,
+      299
+    ],
+    "old": 90,
+    "current": 90,
+    "oldInterior": 60,
+    "missingMeshDepth": 0,
+    "missingMeshDepthWithOnePixelTolerance": 0,
+    "absentInterior": 0,
+    "absentWithOnePixelTolerance": 0
+  }
+}

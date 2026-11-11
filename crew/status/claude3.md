@@ -11,21 +11,19 @@ last-report: handoffs/2026-11-11-claude3-CC-342b.md
 
 ## Notes
 
-### Where things stand (11 Nov 10:43Z, end of session 5: context nearly full, needs a new session)
-- CC-342 DONE and accepted by the Director (handoffs 2026-11-11-claude3-CC-342.md and -CC-342b.md; tcc342 32/0; pictures
-  Claude outputs/CC-342/). Landed in game/viewmodel.js, viewmodel-poses.js (chainsaw hip), index.html (weaponAimPoint line,
-  #opticDot block). Ready to commit.
-- NEXT (not started): CC-343 on the board = CB-290's legs half: foot IK on the ground, stairs, ramps and crates (soles flat,
-  hips drop for the lower foot), knees out of anything near, t184's boot slide; a test over stairs/ramps/crates/slopes in
-  every stance; worst five before/after in four lights. updateMarinePose's leg section in index.html is lent; Claude 2 keeps
-  the arms and gun: agree the boundary with Claude 2 FIRST (request), then check in with --touch "index.html (updateMarinePose
-  legs)". Director's words: handoffs/requests.md 'CC-342 done (2 handoffs)'.
-- crew.mjs writes to this card can fail EINVAL on this mount: run it as node -r $HOME/w/fsfix.cjs crew/crew.mjs ... (the file
-  catches EINVAL, writes <file>.tmp-claude3 and renames it over; rewrite it if gone).
-- Pictures in the soft camera: arm first (T.setUnarmedDbg(false)), lights on (T.trainingDbg.tg().setLights(true)), step with
-  T.stepFrame, then freeze time (performance.now) and `shot --live` without --ui (frozen --ui frames come out dark). The
-  camera needs assets/intro, disclaimer, insignia, audio in the cloud copy or it hangs loading. Patch the PC with anchored
-  python scripts on whole lines only (a mid-line anchor once swallowed retune(): fixed 08:16Z).
+### Where things stand (11 Nov 17:12Z, session 6, fresh from 15:14Z)
+- CC-343 = CB-290's legs half (checked in 15:15Z; marine-turn.js planted-feet lines lent 16:17Z by the Director). All work so
+  far in my cloud copy only (/home/claude/tt, patches /home/claude/w/patch343.py for index.html and patch343turn.py for
+  studio/marine-turn.js, both anchored, applied to the 15:18Z PC files; nothing on the PC yet). New test tools/tests/tcc343b.js
+  (cloud): 37 scenarios (flat/slope/build stairs/deck edge/wall/drum/sandbags x stand/crouch/walk/run/crouch-walk, rifle,
+  pistol, unarmed), stepped with T.flightHold + T.stepFrame(1/30), facing via T.setAimYawDbg; sole vs raycast tread meshes.
+  Before 10/37, latest 28/37+ (reds left: stairs walking/standing at 0.2, deck edge crouched, flat walk 8 mm, crouch-walk 12 mm).
+- Causes found: feet only on open terrain (stairs = collision ramp, treads up to 0.26 m above it); marine-turn's planted boots
+  (terrain-only ground, gait roll kept, crouched ankle past -50 clamped -> toe 20 mm in); CROUCH sole numbers stale; stale hips
+  world matrix; step glide treating a ramp as ledges (body a tread low up the stairs); 7.4 m/s walk stride too long for 45 deg.
+- Boundaries agreed: Claude 2 (IK, body-limits, clampBodyPose) DONE; ChatGPT (GP-20100 arms) DONE - tell ChatGPT if the hip
+  drop changes shoulder clearance. Next: finish reds, pictures (/home/claude/w/mkbatch.py: 5 scenes x 4 lights), tcb291/t184/
+  t187/t229/tcc341 regression in cloud, land on PC (re-check mtimes), handoff. Then tcc341's two cloth reds, then J128 kit.
 
 ### This VM's quirks (session 3)
 - The PC mount refuses writing over some existing files (EINVAL on open with O_CREAT, sometimes on ftruncate): crew.mjs fails

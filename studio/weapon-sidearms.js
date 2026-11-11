@@ -32,6 +32,15 @@ function flatDetail(T, parent, mat, w, h, d, x, y, z, rz = 0) {
   mesh.castShadow = mesh.receiveShadow = true; parent.add(mesh); return mesh;
 }
 
+// Keep the original exterior vertices, normals and UVs when a decorative slab meets its backing.
+function trimSlabBack(mesh, component, localPlane, direction) {
+  const position = mesh.geometry.attributes.position;
+  for (let i = component; i < position.array.length; i += position.itemSize) {
+    if (direction * (position.array[i] - localPlane) < 0) position.array[i] = localPlane;
+  }
+  mesh.geometry.computeBoundingSphere();
+}
+
 // Shallow checkering is one small mesh per panel, then folded into the caller's
 // material batch. It uses the existing furniture material, so camo still works.
 function checkeredPanel(T, parent, mat, outline, x, spacing = .007, radius = .0012, exposed = () => true) {
@@ -198,8 +207,7 @@ export function makePistolModel(ctx) {
   // its front face flush with the barrel's crown (gun z 0.31; the muzzle point stays at 0.32). The rear, the ejection
   // port and the rear sight stay where they were, so the GB-145 rack grab and the hand anchors are unchanged.
   // GB-172: a lower, narrower slide. The front face stays at local z 0.26 so it still meets the crown.
-  // GB-180 (Jerry: the slide floated over the frame): the slide's bottom comes down to local -0.044 (gun y 0.006), 6 mm
-  // over the frame's top rail (0.012), so the slide sits on the frame with no daylight under it.
+  // The lower edge meets the top of the separate frame artwork in the resting pose.
   K.slab([[-0.14, -0.044], [0.252, -0.044], [0.26, -0.034], [0.26, 0.012], [0.254, 0.020], [0.242, 0.024], [-0.126, 0.024], [-0.134, 0.018], [-0.14, 0.010]], 0.046, slideSteel, { bevel: 0.006, segs: 3, parent: slide });
   const plateOutline = [[-.015, .008], [.015, .008], [.019, .003], [.019, -.023],
     [.014, -.030], [-.014, -.030], [-.019, -.023], [-.019, .003]];
@@ -238,10 +246,9 @@ export function makePistolModel(ctx) {
   // peels a gunAccent chunk off the muzzle and reads as the barrel detaching.
   // Frame: the dust cover with an accessory rail, the trigger guard, trigger, controls.
   // GB-154: the dust cover runs on under the longer slide to 40 mm short of its front (was 0.17).
-  // GB-180: frame and slide line up. The frame's rear is flush with the slide's rear (gun z -0.09) and its dust cover
-  // runs to 14 mm short of the slide's front (a real pistol's proportion), its top 0.012 tucked up inside the slide.
+  // The cover meets the underside of the upper artwork along one continuous seam.
   // CL-331 (J95): the frame's back 2.5 mm inside the slide's (they were one plane at z -0.09: the flicker on the back)
-  K.slab([[-0.0875, 0.012], [0.294, 0.012], [0.298, 0.000], [0.294, -0.020], [0.112, -0.020], [0.104, -0.016], [0.04, -0.016], [0.026, -0.030], [-0.004, -0.036], [-0.022, -0.020], [-0.07, -0.012], [-0.0875, -0.004]], 0.044, gunPoly, { bevel: 0.007, segs: 3 }).name = 'pistol dust cover';
+  K.slab([[-0.0875, 0.006], [0.294, 0.006], [0.298, 0.000], [0.294, -0.020], [0.112, -0.020], [0.104, -0.016], [0.04, -0.016], [0.026, -0.030], [-0.004, -0.036], [-0.022, -0.020], [-0.07, -0.012], [-0.0875, -0.004]], 0.044, gunPoly, { bevel: 0.007, segs: 3 }).name = 'pistol dust cover';
   // GB-180: a beavertail / tang that sweeps back under the slide's rear and blends down into the grip's back strap.
   K.slab([[-.060,.006], [-.085,.005], [-.097,.003], [-.100,.002], [-.100,-.002],
     [-.096,-.006], [-.084,-.009], [-.073,-.013], [-.062,-.020], [-.048,-.014],
@@ -699,14 +706,17 @@ export function makeRevolverModel(ctx) {
   // J78: keep the upper palm and trigger reach where the hands meet it, but shorten the
   // oversized lower target stock. The cylinder/frame now read as the dominant mass.
   const RK = 0.27, sh = ([z, y]) => [z + Math.min(0, y) * RK, y < -0.07 ? -0.07 + (y + 0.07) * 0.72 : y];
+  const gripWidth=.066;
   K.slab([[.014, -.006], [.010, -.030], [.004, -.060], [-.002, -.090], [-.006, -.118], [-.006, -.140], [-.002, -.158], [-.006, -.172], [-.018, -.180],
     [-.045, -.183], [-.075, -.181], [-.094, -.174], [-.102, -.160], [-.100, -.135], [-.094, -.105], [-.088, -.075], [-.084, -.045], [-.084, -.015],
-    [-.086, .010], [-.082, .026], [-.072, .032], [-.060, .020], [-.042, .005], [-.017, -.002]].map(sh), .066, walnut, { bevel: .010, segs: 4 });
+    [-.086, .010], [-.082, .026], [-.072, .032], [-.060, .020], [-.042, .005], [-.017, -.002]].map(sh), gripWidth, walnut, { bevel: .010, segs: 4 });
   const panel = [[-.004, -.040], [-.010, -.080], [-.016, -.115], [-.018, -.140], [-.022, -.160], [-.045, -.168], [-.075, -.166], [-.086, -.152], [-.084, -.120],
     [-.078, -.088], [-.074, -.055], [-.072, -.035], [-.060, -.026], [-.020, -.028]].map(sh);
   const med = sh([-.058, -.031]), scr = sh([-.046, -.074]);
   for (const sx of [-1, 1]) {
-    K.slab(panel, .0012, walnutDark, { x: sx * .0329, bevel: .0004 });
+    const inset = K.slab(panel, .0012, walnutDark, { x: sx * .0329, bevel: .0004 });
+    // The side touching the glove keeps its original grain and bevel.
+    trimSlabBack(inset, 0, sx * gripWidth / 2 - inset.position.x, sx);
     checkeredPanel(THREE, gun, walnut, panel, sx * .0336, .0042, .0013);
     K.cyl(0.0072, 0.0072, 0.0016, nickel, sx * 0.0338, med[1], med[0], null, 18, 'x');   // the medallion
     K.cyl(0.0058, 0.0058, 0.0018, gunDark, sx * 0.0339, med[1], med[0], null, 18, 'x');
@@ -761,16 +771,21 @@ export function makeUziModel(ctx) {
   const coverSteel = new THREE.MeshStandardMaterial({color: 0x555e64, metalness: .36, roughness: .38});
   const loopSteel = new THREE.MeshStandardMaterial({color: 0x555a59, metalness: .65, roughness: .35});
   // Stamped receiver with pressed ribs; the top cover and its cocking knob.
-  K.slab([[-.14, -.031], [-.132, -.04], [.211, -.04], [.22, -.032], [.22, .067], [.215, .078], [-.122, .078], [-.134, .072], [-.14, .06]], .098, stamped, {bevel: .009, segs: 3});
+  const receiverWidth = .098, receiverTop = .078;
+  K.slab([[-.14, -.031], [-.132, -.04], [.211, -.04], [.22, -.032], [.22, .067], [.215, receiverTop], [-.122, receiverTop], [-.134, .072], [-.14, .06]], receiverWidth, stamped, {bevel: .009, segs: 3});
   for (const sx of [-1, 1]) {
     for (const y of [.014, .042]) {
-      K.slab(gunBand([[.024, y], [.038, y + .001], [.186, y + .001], [.198, y]], .0036), .003, coverSteel, {x: sx * .0496, bevel: .0014, segs: 3});
-      K.slab(gunBand([[-.116, y], [-.105, y + .001], [-.047, y + .001], [-.038, y]], .0036), .003, coverSteel, {x: sx * .0496, bevel: .0014, segs: 3});
+      for (const [start, rise, endRise, end] of [[.024, .038, .186, .198], [-.116, -.105, -.047, -.038]]) {
+        const outline = gunBand([[start, y], [rise, y + .001], [endRise, y + .001], [end, y]], .0036);
+        const rib = K.slab(outline, .003, coverSteel, {x: sx * .0496, bevel: .0014, segs: 3});
+        trimSlabBack(rib, 0, sx * receiverWidth / 2 - rib.position.x, sx);
+      }
     }
     K.slab([[-.116, -.035], [.077, -.035], [.081, -.017], [-.116, -.017]], .003, gunDark, {x: sx * .0494, bevel: .001});
     for (const z of [-.112, .073]) D.rivet(gun, sx * .0509, -.025, z, { axis: 'x', side: sx, r: 0.0032, mat: D.mats.dark });   // GB-309: spot welds (was floating accent cyl)
   }
-  K.slab([[-.13, .074], [.2, .074], [.2, .09], [.192, .098], [-.11, .104], [-.123, .1], [-.13, .092]], .09, coverSteel, {bevel: .009, segs: 3});
+  const topCover = K.slab([[-.13, .074], [.2, .074], [.2, .09], [.192, .098], [-.11, .104], [-.123, .1], [-.13, .092]], .09, coverSteel, {bevel: .009, segs: 3});
+  trimSlabBack(topCover, 1, receiverTop, 1);
   // GP-20054 (FN manual): the catch at the rear of the top cover is pushed back before the cover lifts.
   K.box(0.026, 0.008, 0.016, gunDark, 0, 0.100, -0.118, 0, 0, 0, null, 0.0015);
   for (const x of [-0.007, 0, 0.007]) K.box(0.002, 0.001, 0.011, gunAccent, x, 0.1045, -0.118, 0, 0, 0, null, 0);
@@ -923,11 +938,13 @@ export function makeUziModel(ctx) {
   gun.userData.barrelAssembly = null;
   gun.userData.slide = null;
   gunSuppressor(gun, K, 'uzi');   // CL-95
-  // The Micro UZI's can seats at the barrel nut rather than at the exposed muzzle threads.
-  // Stretch it forward around the existing barrel: its front remains at the established suppressed muzzle.
-  if (gun.userData.suppressor) {
-    gun.userData.suppressor.position.z = 0.34;
-    gun.userData.suppressor.scale.z = 1.8;
+  // Align the attachment graphic's last visible pixel with the shared effect anchor.
+  const effectGraphic = gun.userData.suppressor;
+  if (effectGraphic) {
+    const bounds = new THREE.Box3().setFromObject(effectGraphic, true);
+    const artDepth = bounds.max.z - effectGraphic.position.z;
+    const endpoint = gun.userData.muzzleBase.z + gun.userData.suppressorLen;
+    if (artDepth > 0) effectGraphic.scale.z = (endpoint - effectGraphic.position.z) / artDepth;
   }
   attachLaserLight(gun, 'uzi', ctx);
   // The lower Picatinny strip belongs to the purchased combined laser/light, so the bare Wasp retains J44's outline.

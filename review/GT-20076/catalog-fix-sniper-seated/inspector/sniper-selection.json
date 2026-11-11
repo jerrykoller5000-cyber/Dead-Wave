@@ -1,0 +1,26 @@
+{
+  "id": "weapon.sniper",
+  "name": "Sniper",
+  "kind": "model",
+  "variant": null,
+  "mode": null,
+  "center": {
+    "x": -25.96849985201616,
+    "y": -298.9283597850276,
+    "z": -631.7956623143319
+  },
+  "size": {
+    "x": 0.14907527894867556,
+    "y": 0.29511421698543927,
+    "z": 1.3345238857441473
+  },
+  "yaw": 0,
+  "info": {
+    "meshes": 90,
+    "drawables": 90,
+    "tris": 15562,
+    "points": 0,
+    "segments": 0,
+    "materials": 16
+  }
+}

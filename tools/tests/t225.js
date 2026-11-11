@@ -7,7 +7,8 @@
 (async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
-  const until = async (f, ms) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (f()) return true; await wait(10); } return !!f(); };
+  // CB-306: ms of game time (capped by a minute of wall clock), as GB-214 asks of this test's waits
+  const until = async (f, ms) => { const t0 = window.TT.getSimTime(), w0 = Date.now(); while (window.TT.getSimTime() - t0 < ms / 1000 && Date.now() - w0 < 60000) { if (f()) return true; await wait(10); } return !!f(); };
   const f2 = (v) => (+v).toFixed(2);
   // GB-214: waits between steps in game time (capped by wall clock), so a slow page does not start the next step early.
   const gwait = async (s, cap = 20000) => { const t0 = window.TT.getSimTime(), w0 = Date.now(); while (window.TT.getSimTime() - t0 < s && Date.now() - w0 < cap) await wait(10); };
@@ -73,7 +74,7 @@
     T.startGrenadeCharge();
     await until(() => A().inHand, 1500);
     window.dispatchEvent(new Event('blur'));
-    await wait(400);
+    await gwait(0.4, 3000);   // CB-306: game time, at most 3 s of wall clock (a blur may pause the game)
     ok(D().n === n2 && !A().hand.visible && A().phase === '' && !D().visible, 'a hold cut off (the window loses focus): it goes back, none thrown (' + D().n + ' left)');
   } catch (e) { ok(false, 'threw ' + (e && e.stack || e)); }
   try { T.holdGrenadeAnim && T.holdGrenadeAnim(null); T.releaseGrenadeCharge && T.releaseGrenadeCharge(); } catch (_) {}

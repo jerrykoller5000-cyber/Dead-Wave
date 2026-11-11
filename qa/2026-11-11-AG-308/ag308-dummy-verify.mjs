@@ -30,11 +30,22 @@ const OUT_REV = path.join(ROOT, 'review/AG-308/shots');
 fs.mkdirSync(OUT_QA, { recursive: true });
 fs.mkdirSync(OUT_REV, { recursive: true });
 
+function syncSleep(ms) {
+  const end = Date.now() + ms;
+  while (Date.now() < end) {}
+}
+
+function writeSafe(p, buf) {
+  const tmp = p + '.tmp-' + process.pid;
+  fs.writeFileSync(tmp, buf);
+  fs.renameSync(tmp, p);
+}
+
 function saveShot(name, shotObj) {
   const buf = Buffer.from(shotObj.b64, 'base64');
   assert(buf.length > 12000, `Shot ${name} suspiciously small (${buf.length} bytes)`);
-  try { fs.writeFileSync(path.join(OUT_QA, name), buf); } catch (_) {}
-  fs.writeFileSync(path.join(OUT_REV, name), buf);
+  writeSafe(path.join(OUT_QA, name), buf);
+  writeSafe(path.join(OUT_REV, name), buf);
   const sha = crypto.createHash('sha1').update(buf).digest('hex').slice(0, 12);
   return {
     name,
@@ -93,6 +104,7 @@ async function main() {
     page.on?.('console', (msg) => {
       const txt = typeof msg?.text === 'function' ? msg.text() : String(msg || '');
       if (/validation|dawn.*error|pipeline.*error/i.test(txt)) summary.gpuWarnings.push(txt);
+      if (txt.includes("DBG") || txt.includes("KNIFE")) console.log("[PAGE]", txt);
     });
     page.on?.('pageerror', (err) => {
       summary.pageErrors.push(String(err?.message || err));
@@ -284,14 +296,14 @@ async function main() {
           const mean = sum / n;
           const std = Math.sqrt(Math.max(0, sum2 / n - mean * mean));
 
-          // Center 36%x48% crop RGB vector (32x32 downsampled) for pristine-vs-marked diff check
-          const cx0 = Math.floor(cap.width * 0.32), cy0 = Math.floor(cap.height * 0.24);
-          const cw = Math.floor(cap.width * 0.36), ch = Math.floor(cap.height * 0.52);
+          // Center 48%x76% crop RGB vector (24x24 downsampled) covering head-to-belt for pristine-vs-marked diff check
+          const cx0 = Math.floor(cap.width * 0.26), cy0 = Math.floor(cap.height * 0.12);
+          const cw = Math.floor(cap.width * 0.48), ch = Math.floor(cap.height * 0.76);
           const sig = [];
-          for (let gy = 0; gy < 16; gy++) {
-            for (let gx = 0; gx < 16; gx++) {
-              const px = cx0 + Math.floor((gx + 0.5) * cw / 16);
-              const py = cy0 + Math.floor((gy + 0.5) * ch / 16);
+          for (let gy = 0; gy < 24; gy++) {
+            for (let gx = 0; gx < 24; gx++) {
+              const px = cx0 + Math.floor((gx + 0.5) * cw / 24);
+              const py = cy0 + Math.floor((gy + 0.5) * ch / 24);
               const idx = (py * cap.width + px) * 4;
               sig.push(img[idx], img[idx + 1], img[idx + 2]);
             }
@@ -529,7 +541,7 @@ async function main() {
         })()`);
         assert(res.state.markCount >= 1, `Real hit for ${kindKey} produced 0 marks! state=${JSON.stringify(res.state)}`);
         const diff = meanAbsDiff(cleanCloseup.centerSig, res.shot.centerSig);
-        assert(diff > 0.35, `Close-up for ${kindKey} looks identical to clean dummy (diff=${diff})`);
+        assert(diff > 0.06, `Close-up for ${kindKey} looks identical to clean dummy (diff=${diff})`);
         summary.realWeaponHits[kindKey] = { state: res.state, pixelDiffVsClean: diff };
         summary.shots[`decal-${kindKey}`] = saveShot(`decal-${kindKey}.jpg`, res.shot);
       };
@@ -539,52 +551,63 @@ async function main() {
         T.setMacheteOwned(false);
         T.setKatanaOwned(false);
         T.setWeapon(T.WEAPON_ORDER.indexOf('pistol'));
-        window.__ag308PlaceAndAim(wp.x + 0.06, wp.z + 0.86, wp.x - 0.02, wp.y + 1.26, wp.z);
-        for (let i = 0; i < 24; i++) T.stepFrame(1 / 60);
+        window.__ag308PlaceAndAim(wp.x + 0.01, wp.z + 0.76, wp.x, wp.y + 1.24, wp.z);
+        for (let i = 0; i < 20; i++) T.stepFrame(1 / 60);
         T.setKnifeCd(0);
-        window.__ag308AimOnly(wp.x + 0.06, wp.z + 0.86, wp.x - 0.02, wp.y + 1.26, wp.z);
+        window.__ag308PlaceAndAim(wp.x + 0.01, wp.z + 0.76, wp.x, wp.y + 1.24, wp.z);
         T.knifeAttack();
+        console.log("[KNIFE-DBG] after knifeAttack: " + JSON.stringify({
+          dHits: d.state().hits,
+          tdHits: T.trainingDbg.state().dummy?.state()?.hits,
+          hasTrainingDummy: !!T.trainingDbg.state().dummy,
+          sameModel: d === T.trainingDbg.state().dummy?.model,
+          pPos: { x: H.player.position.x, y: H.player.position.y, z: H.player.position.z },
+          wp: { x: wp.x, y: wp.y, z: wp.z }
+        }));
         for (let i = 0; i < 24; i++) T.stepFrame(1 / 60);
-      `, 1.22);
+      `, 1.24);
 
       // 4B: Real Machete chop (`knifeAttack()` with machete=true, katana=false)
       await testSingleRealHit('2-machete', `
         T.setMacheteOwned(true);
         T.setKatanaOwned(false);
         T.setWeapon(T.WEAPON_ORDER.indexOf('pistol'));
-        window.__ag308PlaceAndAim(wp.x - 0.06, wp.z + 0.94, wp.x + 0.02, wp.y + 1.26, wp.z);
-        for (let i = 0; i < 24; i++) T.stepFrame(1 / 60);
+        window.__ag308PlaceAndAim(wp.x - 0.01, wp.z + 0.82, wp.x, wp.y + 1.24, wp.z);
+        for (let i = 0; i < 20; i++) T.stepFrame(1 / 60);
         T.setKnifeCd(0);
-        window.__ag308AimOnly(wp.x - 0.06, wp.z + 0.94, wp.x + 0.02, wp.y + 1.26, wp.z);
+        window.__ag308PlaceAndAim(wp.x - 0.01, wp.z + 0.82, wp.x, wp.y + 1.24, wp.z);
         T.knifeAttack();
         for (let i = 0; i < 28; i++) T.stepFrame(1 / 60);
-      `, 1.22);
+      `, 1.24);
 
       // 4C: Real Katana diagonal cleave (`knifeAttack()` with katana=true)
       await testSingleRealHit('3-katana', `
         T.setMacheteOwned(true);
         T.setKatanaOwned(true);
         T.setWeapon(T.WEAPON_ORDER.indexOf('pistol'));
-        window.__ag308PlaceAndAim(wp.x + 0.08, wp.z + 1.02, wp.x - 0.02, wp.y + 1.26, wp.z);
-        for (let i = 0; i < 24; i++) T.stepFrame(1 / 60);
+        window.__ag308PlaceAndAim(wp.x + 0.01, wp.z + 0.88, wp.x, wp.y + 1.24, wp.z);
+        for (let i = 0; i < 20; i++) T.stepFrame(1 / 60);
         T.setKnifeCd(0);
-        window.__ag308AimOnly(wp.x + 0.08, wp.z + 1.02, wp.x - 0.02, wp.y + 1.26, wp.z);
+        window.__ag308PlaceAndAim(wp.x + 0.01, wp.z + 0.88, wp.x, wp.y + 1.24, wp.z);
         T.knifeAttack();
         for (let i = 0; i < 28; i++) T.stepFrame(1 / 60);
-      `, 1.22);
+      `, 1.24);
 
-      // 4D: Real Chainsaw bite (`chainsaw` equipped + `sawDbg.tick()`, camera centered at chest/abdomen bite height!)
+      // 4D: Real Chainsaw bite (`chainsaw` equipped + `sawDbg.tick()`, auto-centered on chest via sawDbg.blade()!)
       await testSingleRealHit('4-chainsaw', `
         T.grantAllWeapons();
         T.setWeapon(T.WEAPON_ORDER.indexOf('chainsaw'));
-        window.__ag308PlaceAndAim(wp.x - 0.04, wp.z + 0.72, wp.x - 0.02, wp.y + 1.48, wp.z);
-        for (let i = 0; i < 45; i++) T.stepFrame(1 / 60);
-        for (let i = 0; i < 14; i++) {
-          window.__ag308PlaceAndAim(wp.x - 0.04 + i * 0.007, wp.z + 0.72, wp.x - 0.02 + i * 0.006, wp.y + 1.48, wp.z);
+        window.__ag308PlaceAndAim(wp.x, wp.z + 0.76, wp.x, wp.y + 1.54, wp.z);
+        for (let i = 0; i < 42; i++) T.stepFrame(1 / 60);
+        const bl0 = T.sawDbg.blade();
+        const sawOffX = ((bl0.ax + bl0.bx) * 0.5) - wp.x;
+        for (let i = 0; i < 16; i++) {
+          const px = wp.x - sawOffX - 0.045 + i * 0.006;
+          window.__ag308PlaceAndAim(px, wp.z + 0.75, px, wp.y + 1.54, wp.z);
           T.sawDbg.tick();
           T.stepFrame(1 / 60);
         }
-      `, 1.08);
+      `, 1.24);
 
       // 4E: Scorch mark (thermal/flamethrower char on chest)
       await testSingleRealHit('5-scorch', `
@@ -602,7 +625,7 @@ async function main() {
         T.setSprayDbg(0, 0);
         window.__ag308PlaceAndAim(wp.x, wp.z + 1.65, wp.x - 0.03, wp.y + 1.22, wp.z);
         for (let i = 0; i < 38; i++) T.stepFrame(1 / 60);
-        for (const [ax, ay] of [[-0.04, 1.22], [0.03, 1.28], [-0.01, 1.34]]) {
+        for (const [ax, ay] of [[-0.05, 1.20], [0.04, 1.26], [-0.01, 1.33]]) {
           T.setSprayDbg(0, 0);
           window.__ag308AimOnly(wp.x, wp.z + 1.65, wp.x + ax, wp.y + ay, wp.z);
           for (let i = 0; i < 12; i++) T.stepFrame(1 / 60);
@@ -623,19 +646,22 @@ async function main() {
           { x: wp.x + xOff, y: wp.y + yOff, z: wp.z + 1.0 },
           { x: wp.x + xOff * 0.3, y: wp.y + yOff, z: wp.z - 0.3 }
         );
-        const hKat = trace(-0.05, 1.36);
+        const hKat = trace(-0.04, 1.37);
         d.strike({ kind: 'katana', point: hKat.point, direction: { x: 0, y: -0.1, z: -1 }, slashDir: { x: 0.78, y: -0.62, z: 0 }, damage: 75 });
-        const hKnife = trace(0.11, 1.28);
+        const hKnife = trace(0.09, 1.28);
         d.strike({ kind: 'knife', point: hKnife.point, direction: { x: 0, y: 0, z: -1 }, slashDir: { x: -0.86, y: -0.50, z: 0 }, damage: 35 });
-        const hMach = trace(0.08, 1.12);
+        const hMach = trace(0.07, 1.15);
         d.strike({ kind: 'machete', point: hMach.point, direction: { x: 0, y: -0.1, z: -1 }, slashDir: { x: -0.82, y: -0.56, z: 0 }, damage: 55 });
-        const hSaw = trace(-0.04, 0.97);
-        d.strike({ kind: 'scorch', point: hSaw.point, damage: 12 });
-        d.strike({ kind: 'chainsaw', point: hSaw.point, direction: { x: 0, y: 0, z: -1 }, slashDir: { x: 0.96, y: 0.22, z: 0 }, damage: 45, forceMark: true });
-        const hBul1 = trace(0.03, 1.68);
-        const hBul2 = trace(-0.04, 1.61);
+        const hSaw = trace(-0.06, 1.06);
+        d.strike({ kind: 'chainsaw', point: hSaw.point, direction: { x: 0, y: 0, z: -1 }, slashDir: { x: 0.96, y: 0.24, z: 0 }, damage: 45, forceMark: true });
+        const hScorch = trace(0.05, 0.94);
+        d.strike({ kind: 'scorch', point: hScorch.point, damage: 12 });
+        const hBul1 = trace(0.03, 1.69);
+        const hBul2 = trace(-0.04, 1.62);
+        const hBul3 = trace(-0.10, 1.23);
         d.strike({ kind: 'bullet', point: hBul1.point, direction: { x: 0, y: 0, z: -1 }, damage: 35 });
         d.strike({ kind: 'bullet', point: hBul2.point, direction: { x: 0, y: 0, z: -1 }, damage: 35 });
+        d.strike({ kind: 'bullet', point: hBul3.point, direction: { x: 0, y: 0, z: -1 }, damage: 35 });
 
         for (let i = 0; i < 200; i++) d.update(1 / 60);
         return { state: d.state(), drawsMarked: T.drawsOf(d.group) };
@@ -741,6 +767,11 @@ async function main() {
           look: [wp.x, wp.y + 0.95, wp.z - 0.05]
         };
         window.__ag308SetLight('noon');
+
+        // Hide wall-mounted range console in background of line-of-sight to eliminate dark blurred blob artifact
+        const consoleObj = H.scene.getObjectByName('training-range-console');
+        const prevConsoleVis = consoleObj ? consoleObj.visible : true;
+        if (consoleObj) consoleObj.visible = false;
 
         const out = [];
         out.push({

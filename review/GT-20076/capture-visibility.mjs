@@ -4,7 +4,7 @@ import {fileURLToPath} from 'node:url';
 import {serve} from '../../tools/serve.mjs';
 import {launch} from '../../tools/cdp.mjs';
 import {save} from './save.mjs';
-import {originalSawCovers} from './replay-artwork.mjs';
+import {originalSawCovers,originalSniperCover} from './replay-artwork.mjs';
 
 const rankOnly=process.argv.includes('--rank-only');
 const candidate=process.argv.find(arg=>arg.startsWith('--audit='));
@@ -12,6 +12,7 @@ const audit=candidate?candidate.slice('--audit='.length):'catalog-chain-skin';
 assert(/^catalog-[a-z0-9-]+$/.test(audit));
 const precise=process.argv.includes('--precise') || !!candidate;
 const replay=process.argv.includes('--original-saw-covers');
+const replaySniper=process.argv.includes('--original-sniper-cover');
 const requestedFolder=process.argv.find(arg=>arg.startsWith('--output='))?.slice(9);
 if(requestedFolder)assert(candidate && /^visibility-fix-[a-z0-9-]+$/.test(requestedFolder));
 const folder=requestedFolder || (candidate?'visibility-'+audit.slice('catalog-'.length):precise?'visibility-final':'visibility')+(replay?'-control':'');
@@ -27,7 +28,8 @@ const browser=await launch({headless:false});
 try {
   const page=await browser.newPage({width:960,height:540});
   if(replay) assert(audit==='catalog-fix-revolver-strip' && ids.length===1 && ids[0]==='chainsaw');
-  const verify=replay?await originalSawCovers(page,server.origin):null;
+  if(replaySniper)assert(!replay && requestedFolder && audit==='catalog-fix-front-rail-boss' && ids.length===1 && ids[0]==='sniper');
+  const verify=replay?await originalSawCovers(page,server.origin):replaySniper?await originalSniperCover(page,server.origin):null;
   await page.goto(server.origin+'/index.html?debug=1&raf=timer');
   assert(await page.waitFor('window.TT && DWLoad.snapshot().state==="ready"'));
   await page.evaluate('DWOpening.dismissForTesting()');
@@ -43,7 +45,7 @@ try {
     if(!rankOnly)await page.evaluate('vis.equip('+JSON.stringify(id)+')');
     const results={};
     const views=['hip','aimed','held-left','held-right'];
-    if(id==='sniper') views.push('aim-entry');
+    if(id==='sniper') views.splice(2,0,'aim-entry');
     if(id!=='chainsaw') views.push('rack');
     if(process.argv.includes('--open-floor')) views.push('held-left-open','held-right-open');
     for (const view of rankOnly?[]:views) {

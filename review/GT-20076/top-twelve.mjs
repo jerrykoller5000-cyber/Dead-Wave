@@ -9,5 +9,5 @@ for(const [i,p] of data.candidates.slice(0,12).entries()){
   const view=p.view.replace('held-left-open','clear floor, held left').replace('held-right-open','clear floor, held right').replace('held-left','barrier, held left').replace('held-right','barrier, held right');
   lines.push((i+1)+'. '+titles[p.model]+' pair '+p.pair+' — '+p.pixels+' px ('+view+').');
 }
-lines.push('Evidence: review/GT-20076/'+folder+'/top-12-crossings.jpg and ranked.json. The index in ranked.json identifies both artwork pieces. Known real intersections stay open. The first listed crossing follows the requested J138 handle-end touch-ups.');
+lines.push('Evidence: review/GT-20076/'+folder+'/top-12-crossings.jpg and ranked.json. The index in ranked.json identifies both artwork pieces. Known real intersections stay open.');
 await writeFile(new URL('top-12.txt',root),lines.join('\n')+'\n');console.log(lines.join('\n'));

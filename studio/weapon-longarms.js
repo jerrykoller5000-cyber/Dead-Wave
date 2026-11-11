@@ -1324,6 +1324,60 @@ export function makeShotgunModel(ctx) {
   return finishGun(gun);
 }
 
+// Closed square cladding around an existing faceted round skin. Both contours
+// are sampled on the same rays, so the inside follows the neighbour's actual faces.
+function squareCladding(T, radius, depth, bevel, facets) {
+  const sides = facets * 4, positions = [], uvs = [], indices = [];
+  const steps = [[0,bevel],[.14,.48*bevel],[.46,.16*bevel],[1,0]];
+  const rear = steps.map(([t,inset])=>[-depth/2+t*bevel,inset]);
+  const rows = [...rear,...rear.map(([z,inset])=>[-z,inset]).reverse()];
+  const inner = [], directions = [];
+  for (let i=0;i<sides;i++) {
+    const angle=i*2*Math.PI/sides, facetAngle=2*Math.PI/facets;
+    directions.push([Math.cos(angle),Math.sin(angle)]);
+    const offset=angle-(Math.floor(i/4)+.5)*facetAngle;
+    inner.push(radius*Math.cos(facetAngle/2)/Math.cos(offset));
+  }
+  function ring(radii,z) {
+    return radii.map((r,i)=>{
+      const [cx,cy]=directions[i], index=positions.length/3;
+      positions.push(r*cx,r*cy,z);uvs.push(z*4,r*cy*4);
+      return index;
+    });
+  }
+  function join(a,b) {
+    for(let i=0;i<sides;i++){
+      const j=(i+1)%sides;
+      indices.push(a[i],a[j],b[j],a[i],b[j],b[i]);
+    }
+  }
+  const outside = rows.map(([z,inset])=>{
+    const half=radius-inset, corner=bevel-.8*inset;
+    const radii=directions.map(([cx,cy],i)=>{
+      const major=Math.max(Math.abs(cx),Math.abs(cy)),minor=Math.min(Math.abs(cx),Math.abs(cy));
+      let distance=half/major;
+      if(distance*minor>half-corner){
+        const centre=half-corner, along=centre*(major+minor);
+        distance=along+Math.sqrt(Math.max(0,along*along-2*centre*centre+corner*corner));
+      }
+      // A narrow painted edge stays continuous at the four tangencies.
+      return Math.max(distance,inner[i]+.00025);
+    });
+    return {z,radii,vertices:ring(radii,z)};
+  });
+  for(let i=1;i<outside.length;i++)join(outside[i-1].vertices,outside[i].vertices);
+  const first=outside[0],last=outside[outside.length-1];
+  join(ring(inner,last.z),ring(inner,first.z));
+  // End annuli have their own normals; the visible side highlights stop at the edge.
+  join(ring(inner,first.z),ring(first.radii,first.z));
+  join(ring(last.radii,last.z),ring(inner,last.z));
+  const geo=new T.BufferGeometry();
+  geo.setAttribute('position',new T.Float32BufferAttribute(positions,3));
+  geo.setAttribute('uv',new T.Float32BufferAttribute(uvs,2));
+  geo.setIndex(indices);geo.computeVertexNormals();geo.computeBoundingSphere();
+  return geo;
+}
+
 export function makeSniperModel(ctx) {
   const { THREE, gunKit, gunBand, gripOutline, gunEffects, gunSuppressor, finishGun, gunBody, gunMid, gunDark, gunAccent, gunPoly, gunRubber, gunMetal, gunTan, steelMat, glassMat } = ctx;
   const gun = new THREE.Group();
@@ -1488,7 +1542,8 @@ export function makeSniperModel(ctx) {
   // the bolt's bright body shows in the opening: no rim, no carrier, the round leaves this way when the bolt comes back.
   // CL-319 (Jerry's bolt-action diagram): the opening sits over the magazine, where the bolt's face travels (z -0.035 to
   // 0.067; the chamber starts at its front), and the bolt (below) is a real bolt's length, from the rear bridge to the face.
-  K.lathe([[0, -0.272], [0.018, -0.272], [0.024, -0.25], [0.027, -0.24], [0.027, -0.035], [0, -0.035]], gunBody, { y: 0.045, seg: 18 });
+  const rearRadius=.027, rearFacets=18;
+  K.lathe([[0, -0.272], [0.018, -0.272], [0.024, -0.25], [rearRadius, -0.24], [rearRadius, -0.035], [0, -0.035]], gunBody, { y: 0.045, seg: rearFacets });
   K.lathe([[0, 0.067], [0.027, 0.067], [0.027, 0.14], [0.022, 0.152], [0, 0.152]], gunBody, { y: 0.045, seg: 18 });
   {
     const shellMat = gunBody.clone(); shellMat.side = THREE.DoubleSide;   // the wall shows its inside through the cut
@@ -1497,9 +1552,12 @@ export function makeSniperModel(ctx) {
     for (const a of [-0.349, 1.047]) K.box(0.0045, 0.002, 0.102, gunBody, 0.0248 * Math.cos(a), 0.045 + 0.0248 * Math.sin(a), 0.016, 0, 0, a);   // the wall's thickness at the cut's edges
   }
   K.box(0.031, 0.014, 0.34, gunDark, 0, 0.074, -0.02, 0, 0, 0, null, 0.002);   // the rail's base on the action's flat
-  K.box(0.054, 0.054, 0.104, gunBody, 0, 0.045, -0.184, 0, 0, 0, null, 0.005);   // the rear bridge, the action's width
+  const cladding=new THREE.Mesh(squareCladding(THREE,rearRadius,.104,.005,rearFacets),gunBody);
+  cladding.position.set(0,.045,-.184);
+  cladding.castShadow=cladding.receiveShadow=true;
+  gun.add(cladding);
   K.box(0.004, 0.026, 0.1, gunRubber, 0.0265, 0.055, -0.18, 0, 0, 0, null, 0.001);   // the handle notch
-  for (const z of [-0.225, -0.144]) D.screw(gun, 0.0259, 0.035, z, { axis: 'x', side: 1, r: 0.0028, head: 0.0012, kind: 'hex' });   // the bridge's bedding screws
+  for (const z of [-0.225, -0.144]) D.screw(gun, rearRadius, 0.035, z, { axis: 'x', side: 1, r: 0.0028, head: 0.0012, kind: 'hex' });   // the bridge's bedding screws
   K.lathe([[0, -0.3], [0.014, -0.3], [0.02, -0.29], [0.022, -0.27], [0, -0.27]], gunDark, { y: 0.045, seg: 14 });
   K.box(0.05, 0.03, 0.03, gunDark, 0, 0.012, 0.12, 0, 0, 0, null, 0.004);
   coatRail(.34, .085, -.02);

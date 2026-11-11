@@ -1,0 +1,26 @@
+{
+  "id": "weapon.uzi",
+  "name": "Uzi",
+  "kind": "model",
+  "variant": null,
+  "mode": null,
+  "center": {
+    "x": -25.99633336777609,
+    "y": -198.89999999999998,
+    "z": -631.8945496381407
+  },
+  "size": {
+    "x": 0.0777849984233292,
+    "y": 0.3174294389169461,
+    "z": 0.41635542387234636
+  },
+  "yaw": 0,
+  "info": {
+    "meshes": 26,
+    "drawables": 26,
+    "tris": 9480,
+    "points": 0,
+    "segments": 0,
+    "materials": 11
+  }
+}

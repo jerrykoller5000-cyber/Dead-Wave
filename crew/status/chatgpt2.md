@@ -2,12 +2,12 @@
 
 state: active
 model: GPT-6 (Codex, variant unsure)
-task: GT-20076 First refreshed crossing: sniper rear exterior during aim entry, matched gameplay ranks and saw High controls
-touching: studio/weapon-longarms.js (sniper rear exterior artwork), review/GT-20076, review/GT-20083 (paired High receipts), review/GT-20077/timing.mjs (performance proof)
-since: 2026-11-11T16:13Z
+task: GT-20076 Wasp four highest visible seams, existing effect artwork endpoint for t217; matched High receipts
+touching: studio/weapon-sidearms.js (Wasp exterior and attachment graphic; shared planar artwork trim), review/GT-20076, review/GT-20081/wasp-effect.mjs (effect receipt), review/GT-20083 (paired High receipts), review/GT-20077/timing.mjs (performance proof)
+since: 2026-11-11T17:07Z
 next: GT-20075 (Reviewed by CLAUDE DIRECTOR 20:45Z: accepted, two back: the
 blocked-on: —
-last-report: handoffs/2026-11-11-chatgpt2-GT-20083.md
+last-report: handoffs/2026-11-11-chatgpt2-GT-20076.md
 
 ## Notes
 
@@ -15,7 +15,7 @@ last-report: handoffs/2026-11-11-chatgpt2-GT-20083.md
 
 context nearly full, needs a new session
 
-GT-20083 accepted and sent to Jerry. Final boss source fingerprint 008907c1, saw 133 raw/zero involving rail, no unseated pieces, 9 draws, 42/42. Handoff and 4-light sheets in review/GT-20083/boss*.jpg. Now GT-20076 #1 sniper pair 143, 237px during aim entry; sources studio/weapon-longarms.js rear square exterior panel vs cylindrical skin, no hand or sight moves. Baseline rank visibility-fix-fleet-poses/sniper; strict current catalog-fix-front-rail-boss. Next pistol 0, Wasp 10. Outstanding three-way saw High check: run timing.mjs chainsaw saw-legacy-1, saw-panels-1, saw-fitted-1 (all exclusive, per-version hashes). Breacher factory identity source fix belongs Claude 1 after GW-4 thumb; rerun original paint fixture once connected.
+GT-20076 Wasp stage checked in. Before sequence (normal panel-proof uzi clear-before, wasp-effect before --j128 and real t217 unchanged) running. Current catalog-fix-revolver-walnut and visibility-fix-pistol-cover/uzi for source rank. Wasp #10 226px, #2 202, #5 194, #7 187. Director requests original t217 clear: point and visible artwork same location, no altered test. Use waspSeamEdits after all original evidence completes; then native strict, panel-proof uzi clear-after --check-wasp-covers, wasp-effect after --j128, t217, look and rank. Scoped review helpers ready. Revolver #91,#108 both removed 125→123, 71/71 matching exterior tuples each side, .000700 buried change and zero glove-facing motion (Claude 1 told); four lights, strict M81, t38/t333 42/42 High 59.3/45.1. Pistol #0 gone, 57/57 and matched A/B/A 60/55.1,59.9/47.9,59.9/50.1. Also pending matched-timing chainsaw rail-abca, sniper cover-aba, pistol cover-bab --reverse (separate exclusive slots). Breacher factory UUID fix verified 0/20 changed. No third-person saw rehold per director.
 
 Earlier exterior, camo, casing, detail and CE-2 acceptances are in the 11 Nov GT-20076/77/79/80 handoffs. The KR-7 laminate and D-152 budget were accepted on GT-20082 and GT-20081. Keep previous test expectations and the crew slot.
 

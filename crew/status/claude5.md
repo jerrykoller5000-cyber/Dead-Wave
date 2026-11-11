@@ -2,67 +2,21 @@
 
 state: active
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: CE-4 the HQ ladder (loan, CLAUDE DIRECTOR 15:58Z): climb with real frames, rungs along the wall, then its hands at the eye
-touching: index.html (HQ ladder: mesh, updateHqLadder, the climbingHq guards in the ground movement and vy), tools/tests/t154.js, game/viewmodel.js (blades, grenade, hands motion, ladder), game/viewmodel-poses.js (VM_BLADES, VM_GRENADE, VM_HANDS, VM_TRIGGER)
-since: 2026-11-11T15:58Z
+task: CE-2 VM_TRIGGER for the shotgun, AA-12 and sniper on Claude 1's refitted firing hands (the GW-4/AK/Wasp wait on his fists); CE-4's flashlight waits on ChatGPT 2's hook
+touching: game/viewmodel-poses.js (VM_TRIGGER, VM_BLADES, VM_HANDS), game/viewmodel.js (trigger, hands motion)
+since: 2026-11-11T17:12Z
 next: CE-2 (was CD-3) (was CL-336) J103, J110, J112, J114-J116, J119, J
 blocked-on: —
 last-report: handoffs/2026-11-11-claude5-CE-6.md
 
 ## Notes
 
-### FIRST, from CLAUDE DIRECTOR (13:56Z): four requests are waiting for you (node crew/crew.mjs requests claude5)
-Your heartbeat isn't showing WAITING FOR YOU (Claude 1's had the same filter). Before the knife's next strip: (1) the launcher's drumNoses flags: ChatGPT 2 put six loaded/spent groups in the model at 11:57Z (GT-20080); drive them from indexChambers (a fired chamber shows its spent case until the reload) and mirror them on the view copy; a six-shot cutaway strip; tell ChatGPT 2 so it runs its integrated check. (2) Claude 1's request: the three index-finger clip reds (GW-4, AK, Uzi) are the trigger finger's VM_TRIGGER entries: re-solve them against the current fits. Reply to each request.
+### Who you are (D-151)
+Claude 5 (agent `claude5`, ids `CE-`): the first person's motion (game/viewmodel.js motion sections, game/viewmodel-poses.js). CLAUDE DIRECTOR (agent `claude`) writes the cards, reviews, answers questions (`crew.mjs request claude5 claude "<q>" "<choices + pick>"`, carry on with the pick). Claude 1 (claude4) owns the fits (viewmodel-fit.js, hand-contacts.js); Claude 3 the view/camera sections; ChatGPT 2 the guns and their control hooks. No git; UTF-8 no BOM; keep line endings; game runs in your own cloud copy or the slot only.
 
-
-### Who you are (D-151, Jerry 10 Nov 2026)
-You are **Claude 5** (agent `claude5`, task ids `CE-`), a Claude task on Claude Opus 5.5 (High). Jerry moved to a bigger plan
-and let CLAUDE DIRECTOR (agent `claude`) add an agent: you take **the first person's motion** from Claude 1 (agent
-`claude4`), whose queue was the longest on the board. CLAUDE DIRECTOR is in charge: he writes your cards, reviews your
-sheets before Jerry sees them and, under D-81, answers your questions:
-`node crew/crew.mjs request claude5 claude "<question>" "<choices and your pick>"` (then carry on with your pick, rule 15b).
-
-### Your lane
-- In `game/viewmodel.js`: the motion (the trigger pull each shot, the controls worked by hand, the actions driven by
-  ChatGPT 2's pose hooks, the reloads, the ammo change's unload and load, the other actions, unarmed and the ladder),
-  and `game/viewmodel-poses.js`'s action poses. By section: Claude 1 keeps the hold and fit code there (VM_FIT reading,
-  contacts, the wrist), and Claude 3 has the view code for CC-342 (the optics' recoil, the laser, the scope-in). Name
-  your sections in --touch; agree a shared one with its owner first.
-- Your start pose is Claude 1's fit for each gun (game/viewmodel-fit.js, studio/hand-contacts.js: Claude 1's). Your
-  motion must keep J126 (no part of the hand through another or through the gun: tcl334, tcl334b/c/d, every frame you
-  add) and J127 (no joint past its limits: the rig clamps; check your keyframes against JOINT_LIMITS).
-- ChatGPT 2 (agent `chatgpt2`) makes each gun's controls separate moving parts with pose hooks (`userData.controls`) and
-  the actions (`doubleActionPose`, `recoilBoltPose`); Claude 2 (agent `claude2`) builds the ammo system (CB-294) and
-  gives you its unload/load hook. Antigravity (agent `antigravity`) shoots your work in the four lights on the RTX 5080.
-
-### Your queue (the board, under Claude 5)
-CE-1 (the actions driven in the shots), CE-2 (the hands at work: the trigger finger each shot, J110 fire selection,
-J130 every safety, selector, charging handle, bolt catch, slide stop and pump worked by hand), CE-3 (the reloads
-redone, J76-J83, and J133's unload-then-load on an ammo change), CE-4 (the other actions: blades, the throw, the
-mortar, building, the ladder), CE-5 (no gun: unarmed, the ladder). Gun by gun, the pistol and the GW-4 first (both
-have their controls hooked: ChatGPT 2's 22:22Z FYI).
-
-### Jerry's words for this work (docs/jerry/2026-11-09-playtest-notes.md)
-- J103 "Do not see hand racking slide for reload, need to see ... Trigger finger needs to be in actual trigger guard when
-  firing"; J110 fire selection "Needs animation and manual manipulation by player fingers for each weapon"; J112 the
-  Uzi's "trigger finger is clipping through the trigger guard and not actually pulling the trigger"; J130 "Make sure
-  safety's, selector switches, and actions on guns are physically manipulated by player"; J133 "If the player changes
-  ammunition types he will first have to unload the current ammunition and put in the new ones."
-- Rule 19: judge by looking at it at the eye, in motion, in the four lights; frame strips or clips as proof.
-
-### How you work
-- The repo is `C:\Users\Zero\Desktop\Tiny Trek` on Jerry's PC (`$HOME/mnt/Tiny Trek` in the shell on his computer). Heavy
-  work and game tests in your own cloud copy of the repo, one game at a time; on the PC only through the slot
-  (`node crew/crew.mjs slot run claude5 <task> --checks "<what>" -- <command>`). UTF-8 without BOM; keep line endings.
-- `node crew/crew.mjs me claude5` each session; check in with `--model "Claude Opus 5.5 (High)"` and `--touch`; out
-  with `--report handoffs/YYYY-MM-DD-claude5-<task>.md`. Rule 15b: the heartbeat (`crew.mjs note claude5 "..."` every
-  15 minutes, then answer what it lists), the next card at once, `standby` when nothing can start.
-- No git, ever. Never push, never enter passwords or change system settings. Stay inside the Tiny Trek folder. Your own
-  files and sections only; never revert anyone's work; never weaken a test (`--review` to change one).
-
-### Where things stand (Claude 5, 11 Nov 12:30Z; session from 09:35Z)
-- Done, out for review (ready to commit): CE-2b, CE-3 (parts 1-5), CD-1 lent (revolver hands, back with Claude 1), CE-6 (J136, handoffs/2026-11-11-claude5-CE-6.md: index.html indexChambers owns the revolver cylinder's and the launcher drum's index on the world guns, the view mirrors; tools/tests/tce6.js; sheet Claude outputs/CE-6/CE-6-filmstrips.jpg; Antigravity asked for the 4 lights).
-- Waiting on others: the revolver's VM_TRIGGER (Claude 1's fit: index pad 28 mm out, nearest clean 7.6 mm; add with follow 0.36 when he says it reaches); VM_TRIGGER.shotgun re-solve (Claude 1 refitted the shotgun's firing hand 10:00Z) and the GW-4 (CE-2); the launcher's fired-case art per chamber (ChatGPT 2, then hide drumNoses[L..5] in indexChambers); ChatGPT 2's chainsaw throttle (controls.trigger) for CE-2.
-- **Context nearly full, needs a new session** (Claude 5, 14:05Z). Now: CE-4, checked in. Parts 1-2 landed (handoffs/2026-11-11-claude5-CE-4.md, not ticked: the grenade's cocked fist out from under the HUD panel and its fingers eased (13:38Z); the knife's slash re-keyed with a wind-up and a follow-through in sight (14:04Z); sheets in Claude outputs/CE-4/). Next in CE-4: the HQ ladder's hands (T.hqLadderAt(), T.stepHqLadder(1, dt)), empty hands (T.setUnarmedDbg(true)), the mortar and building/E (st.want false there: the body's arms at the eye), the machete/katana return (below the view). Audit 14:40Z (cloud, a1 strip): unarmed shows no hands at the eye, and Jerry decided that stays (D-157, 15:08Z: 'No hands'; no change for unarmed); the ladder steps didn't climb (T.stepHqLadder from the ladder's foot without being on it: set it up as tools/tests/t154.js does, then st.hands 'ladder'). Also (Claude 1, 14:00Z, CE-2): VM_TRIGGER for m4, ak, uzi with solve-index (the guard as a keep-out: GW-4 5.2 mm, AK 2.3, Uzi 4.6 into the guard/trigger), answered LATER. CE-6's drumNoses follow-up done 14:22Z. Then CE-5. Audit tools: Claude outputs/CE-4/ (steps-audit.json, steps-gren.json, grid.py; a strip without grantAll for the knife: grantAll sets the machete; T.runDevCommand('katana')).
-- Tools (cloud, rebuilt each session from a tar of the PC tree in Claude outputs/<task>/; crew/notes.mjs needed for the test runner): Claude outputs/CE-2/tools (strip.mjs, solve-index.js, view2.js); CE-6's strip steps (mksteps.py: H.cut = a cutaway of one part from the bore, layers 7). Cloud runs: CHROME=/opt/pw-browsers/chromium-1243/chrome-linux64/chrome CHROME_ARGS=--no-sandbox DW_CHECK_MS=420000, through tools/game-test-slot.mjs; the cloud's Bash stops at 10 min: long runs with nohup.
-- Open: Claude 3's CC-342 save commented out the view's retune() (guard vm().retune && in steps).
+### Where things stand (Claude 5, 11 Nov 17:40Z; session from 15:16Z)
+- CE-4: parts 1-2 (grenade, knife), 3 (the HQ ladder, loan of index.html's HQ ladder: accepted at the eye) and 4 (machete/katana follow-through) landed, ready to commit (handoffs/2026-11-11-claude5-CE-4.md). Mortar/build/E, the tower and the mast have their own cameras (keep); unarmed: no hands (D-157). Left: the flashlight's switch press, waiting on ChatGPT 2's lightSwitch control hook (asked 17:38Z). Antigravity asked for the ladder's four lights and a clean side view.
+- CE-5: asked CLAUDE DIRECTOR to tick it (unarmed by D-157, the ladder in CE-4 part 3).
+- CE-2 trigger finger: VM_TRIGGER m4/ak/uzi can't be solved clean on the current fits (GW-4/Wasp: middle/ring fingers through the guard's loop; AK: the index root too close to the blade's line). Claude 1's next session moves those fists; then re-solve all three with Claude outputs/CE-2/tools/solve-index2.js (clip-check's bodies, glove + pads, only the index's vertices penalised; prefix KEY, PULL, FACE_Y, PAD_X, PAD_OFF, PEN_W 1000, POOL, CUT, PIVOT = userData.triggerPin; NO_SOLVE/EVAL_F to probe) and check with tcl334c. Then the revolver's entry when Claude 1 brings its index within reach (follow 0.36). Picture: Claude outputs/CE-2/CE-2-trigger-guard-views-1550.jpg.
+- Cloud recipe: tar the code dirs on the PC (index.html package.json AGENTS.md assets[no soundtrack] combat core game studio tools[no tests/test-*.html] ui vendor world crew/*.mjs) into Claude outputs/<task>/, stage, untar in /home/claude/tt; strip = Claude outputs/CE-2/tools/strip.mjs via `node tools/game-test-slot.mjs run claude5 <task> --checks ... -- node strip.mjs <out>/shots steps.json` (CHROME=/opt/pw-browsers/chromium-1243/chrome-linux64/chrome CHROME_ARGS=--no-sandbox); queue/stop to end, else it takes batches from <out>/../queue. Loading takes ~4 min. Keys: document.body.dispatchEvent(new KeyboardEvent('keydown',{code:'KeyW'})) (window gives a page error). OTS pitch: + is down. Tests: node tools/tests/run-all.mjs tNNN --all-fails --jobs 1 --agent claude5 --task <id>.
+- Device commit by stagedPath can write a stale copy: SendUserFile first and commit by fileUuid, then md5 it.

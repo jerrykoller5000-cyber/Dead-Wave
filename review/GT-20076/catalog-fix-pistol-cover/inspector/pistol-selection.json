@@ -1,0 +1,26 @@
+{
+  "id": "weapon.pistol",
+  "name": "Pistol",
+  "kind": "model",
+  "variant": null,
+  "mode": null,
+  "center": {
+    "x": -26,
+    "y": -198.90000000000003,
+    "z": -631.9330079656127
+  },
+  "size": {
+    "x": 0.03559397173176393,
+    "y": 0.17434363226217897,
+    "z": 0.2606530091774175
+  },
+  "yaw": 0,
+  "info": {
+    "meshes": 43,
+    "drawables": 43,
+    "tris": 7978,
+    "points": 0,
+    "segments": 0,
+    "materials": 12
+  }
+}

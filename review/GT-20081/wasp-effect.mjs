@@ -5,7 +5,8 @@ import {launch} from '../../tools/cdp.mjs';
 import {serve} from '../../tools/serve.mjs';
 import {save} from '../GT-20076/save.mjs';
 const phase=process.argv[2];assert(process.env.DW_GAME_TEST_TOKEN && ['before','after'].includes(phase));
-const dir=new URL('./wasp-effect-'+phase+'/',import.meta.url);await mkdir(dir,{recursive:true});
+const seam=process.argv.includes('--j128');
+const dir=new URL(seam?'../GT-20076/visible-repairs/uzi/effect-'+phase+'/':'./wasp-effect-'+phase+'/',import.meta.url);await mkdir(dir,{recursive:true});
 const server=await serve(fileURLToPath(new URL('../../',import.meta.url)),0),browser=await launch({headless:false});
 try{
   const page=await browser.newPage({width:1152,height:648});
@@ -43,6 +44,35 @@ try{
     rows.push(await page.evaluate('effectFrame('+JSON.stringify(light)+')'));
     const shot=await page.send('Page.captureScreenshot',{format:'jpeg',quality:95});
     await save(new URL(light+'.jpg',dir),Buffer.from(shot.data,'base64'));
+  }
+  if(seam){
+    const settings=await page.evaluate(`(()=>{
+      const T=TT.THREE;
+      const inspect=gun=>{
+        const u=gun.userData,graphic=u.suppressor, wasOn=u.suppressed;
+        TT.setGunSuppressor(gun,true);gun.updateWorldMatrix(true,true);
+        const toGun=gun.matrixWorld.clone().invert();let front=-Infinity;
+        graphic.traverseVisible(mesh=>{
+          const pos=mesh.geometry?.attributes?.position;
+          if(!mesh.isMesh || !pos || mesh.material?.visible===false)return;
+          const transform=toGun.clone().multiply(mesh.matrixWorld),point=new T.Vector3();
+          for(let i=0;i<pos.count;i++)front=Math.max(front,point.fromBufferAttribute(pos,i).applyMatrix4(transform).z);
+        });
+        const enabled={front,anchor:u.muzzleLocal.z,flash:u.flash.position.z,visible:graphic.visible};
+        TT.setGunSuppressor(gun,false);
+        const disabled={anchor:u.muzzleLocal.toArray(),flash:u.flash.position.toArray(),base:u.muzzleBase.toArray(),visible:graphic.visible};
+        TT.setGunSuppressor(gun,wasOn);
+        return {enabled,disabled};
+      };
+      return {primary:inspect(TT.weaponMeshes.uzi),offhand:inspect(TT.offhandMeshes.uzi)};
+    })()`);
+    await save(new URL('endpoints.json',dir),JSON.stringify(settings,null,2)+'\n');
+    for(const {enabled,disabled} of Object.values(settings)){
+      assert(enabled.visible && !disabled.visible && Number.isFinite(enabled.front));
+      assert.deepEqual(disabled.anchor,disabled.base);assert.deepEqual(disabled.flash,disabled.base);
+      assert(Math.abs(enabled.flash-enabled.anchor)<1e-6);
+      if(phase==='after')assert(Math.abs(enabled.front-enabled.anchor)<1e-6,'Visible artwork ends away from the game effect anchor');
+    }
   }
   await save(new URL('frames.json',dir),JSON.stringify(rows,null,2));assert.deepEqual(page.errors,[]);console.log('PASS Wasp actual effect frames',phase,JSON.stringify(rows));
 }finally{await browser.close();await server.close()}

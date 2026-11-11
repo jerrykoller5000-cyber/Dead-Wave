@@ -7,7 +7,7 @@ import {save} from './save.mjs';
 import {originalSawCovers} from './replay-artwork.mjs';
 
 const [id,phase]=process.argv.slice(2);
-assert(process.env.DW_GAME_TEST_TOKEN && /^[a-z0-9]+$/.test(id) && ['before','after','trim','final-trim','joins','rear-join','side-inset','crown','contact-trim','relief','closed-relief','floor-before','floor-after','clear-before','clear-after'].includes(phase));
+assert(process.env.DW_GAME_TEST_TOKEN && /^[a-z0-9]+$/.test(id) && ['before','after','trim','final-trim','joins','rear-join','side-inset','crown','contact-trim','relief','closed-relief','floor-before','floor-after','clear-before','clear-after','clear-seated'].includes(phase));
 const dir=new URL('./visible-repairs/'+id+'/'+phase+'/',import.meta.url);
 await mkdir(dir,{recursive:true});
 const server=await serve(fileURLToPath(new URL('../../',import.meta.url)),0),browser=await launch({headless:false});
@@ -43,6 +43,28 @@ try {
     assert.equal(proof.panels.length,2); assert.equal(proof.instances,42); assert.equal(proof.moved,42);
     for(const p of proof.panels){assert(p.closed && p.before>10);assert.equal(p.missing+p.added,0);assert.equal(p.outerMotion,0);assert(Math.abs(p.inner-.136)<1e-7);}
     console.log('PASS both exterior covers retain all exposed tuples, both are closed, and all 42 chain graphics move');
+  }
+  if(process.argv.includes('--check-wasp-covers')){
+    assert.equal(id,'uzi');
+    const result=await page.evaluate("import('/review/GT-20076/wasp-cover-proof.mjs').then(m=>m.compareWaspCovers(TT.inspectHost().builders.weaponContext()))");
+    await save(new URL('cover-surfaces.json',dir),JSON.stringify(result,null,2)+'\n');
+    assert.equal(result.filter(p=>p.part==='side strip').length,8);assert.equal(result.length,9);
+    for(const p of result){
+      assert(p.closed && p.before>8);assert.equal(p.missing+p.added,0);assert.equal(p.outerMotion,0);
+      assert(Math.abs(p.inner-(p.part==='top cover' ? .078 : .049))<1e-7);
+    }
+    console.log('PASS eight pressed strips and one top cover retain the original exposed surface samples');
+  }
+  if(process.argv.includes('--check-walnut-panels')){
+    assert.equal(id,'revolver');
+    const result=await page.evaluate("import('/review/GT-20076/walnut-panel-proof.mjs').then(m=>m.checkWalnutPanels(TT.inspectHost().builders.weaponContext()))");
+    await save(new URL('walnut-surfaces.json',dir),JSON.stringify(result,null,2)+'\n');
+    assert.equal(result.length,2);
+    for(const panel of result){
+      assert(panel.closed && panel.before>10 && panel.woodTexture && !panel.paintRole);
+      assert.equal(panel.missing+panel.added,0);assert.equal(panel.outerMotion,0);assert(Math.abs(panel.inner-.033)<1e-7);
+    }
+    console.log('PASS both walnut panels retain their complete exposed artwork, wood maps and contact planes');
   }
   await save(new URL('cameras.json',dir),JSON.stringify(cameras,null,2)+'\n');
   await save(new URL('renderer-log.json',dir),JSON.stringify({errors:page.errors,warnings:page.console.filter(v=>['error','warning'].includes(v.type)).slice(0,30)},null,2)+'\n');
