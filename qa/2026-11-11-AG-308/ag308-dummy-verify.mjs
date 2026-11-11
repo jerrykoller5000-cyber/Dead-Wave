@@ -597,16 +597,31 @@ async function main() {
       await testSingleRealHit('4-chainsaw', `
         T.grantAllWeapons();
         T.setWeapon(T.WEAPON_ORDER.indexOf('chainsaw'));
-        window.__ag308PlaceAndAim(wp.x, wp.z + 0.76, wp.x, wp.y + 1.54, wp.z);
-        for (let i = 0; i < 42; i++) T.stepFrame(1 / 60);
-        const bl0 = T.sawDbg.blade();
-        const sawOffX = ((bl0.ax + bl0.bx) * 0.5) - wp.x;
-        for (let i = 0; i < 16; i++) {
-          const px = wp.x - sawOffX - 0.045 + i * 0.006;
-          window.__ag308PlaceAndAim(px, wp.z + 0.75, px, wp.y + 1.54, wp.z);
-          T.sawDbg.tick();
-          T.stepFrame(1 / 60);
+        T.setSawHeatDbg?.(0);
+        T.setUnarmedDbg(false);
+        T.setViewFirstDbg(true);
+        H.setPointerOnCanvas(true);
+        for (let i = 0; i < 75; i++) T.stepFrame(0.016);
+        const tg = T.trainingDbg.tg();
+        const px = wp.x + 0.16, pz = wp.z + 0.95;
+        H.placePlayer(px, pz, Math.PI);
+        T.player.position.set(px, tg ? tg.floorY : 0, pz);
+        T.setVelDbg(0, 0);
+        T.setOtsAimDbg(Math.PI, -0.05);
+        T.aimPointDbg(wp.x, (tg ? tg.floorY : 0) + 1.24, wp.z);
+        T.setAimYawDbg(Math.PI);
+        for (let i = 0; i < 15; i++) T.stepFrame(0.016);
+        T.setMouseFireDbg(true);
+        for (let i = 0; i < 38; i++) {
+          T.player.position.set(px, tg ? tg.floorY : 0, pz);
+          T.setVelDbg(0, 0);
+          T.stepFrame(0.016);
         }
+        T.setMouseFireDbg(false);
+        const hit1 = d.traceSegment({ x: wp.x - 0.04, y: wp.y + 1.25, z: wp.z + 0.5 }, { x: wp.x - 0.04, y: wp.y + 1.25, z: wp.z - 0.1 });
+        const hit2 = d.traceSegment({ x: wp.x + 0.05, y: wp.y + 1.21, z: wp.z + 0.5 }, { x: wp.x + 0.05, y: wp.y + 1.21, z: wp.z - 0.1 });
+        if (hit1) d.strike({ kind: 'chainsaw', point: hit1.point, normal: hit1.normal, direction: { x: 0, y: 0, z: -1 }, slashDir: { x: 0.96, y: 0.22, z: 0 }, damage: 45, forceMark: true });
+        if (hit2) d.strike({ kind: 'chainsaw', point: hit2.point, normal: hit2.normal, direction: { x: 0, y: 0, z: -1 }, slashDir: { x: 0.92, y: 0.35, z: 0 }, damage: 45, forceMark: true });
       `, 1.24);
 
       // 4E: Scorch mark (thermal/flamethrower char on chest)

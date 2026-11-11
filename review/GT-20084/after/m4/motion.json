@@ -1,0 +1,54 @@
+{
+  "id": "m4",
+  "name": "controls-lightSwitch-m4",
+  "axis": [
+    0,
+    -1,
+    0
+  ],
+  "travel": 0.001,
+  "copies": {
+    "held": {
+      "rest": [
+        0.00126,
+        0.027870000000000002,
+        0.01625
+      ],
+      "moved": 138,
+      "stationary": 2214,
+      "furthest": 0.0010000001639127731,
+      "lateral": 0,
+      "reset": 0,
+      "otherCopyDrift": 0,
+      "pressSetupMs": 1
+    },
+    "eye": {
+      "rest": [
+        0.00126,
+        0.027870000000000002,
+        0.01625
+      ],
+      "moved": 138,
+      "stationary": 2214,
+      "furthest": 0.0010000001639127731,
+      "lateral": 0,
+      "reset": 0,
+      "otherCopyDrift": 0,
+      "pressSetupMs": 0.5999999940395355
+    },
+    "carry": {
+      "rest": [
+        0.00126,
+        0.027870000000000002,
+        0.01625
+      ],
+      "moved": 138,
+      "stationary": 2214,
+      "furthest": 0.0010000001639127731,
+      "lateral": 0,
+      "reset": 0,
+      "otherCopyDrift": 0,
+      "pressSetupMs": 0.8999999761581421
+    }
+  }
+}

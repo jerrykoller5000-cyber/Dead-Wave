@@ -12,36 +12,22 @@ last-report: handoffs/2026-11-11-claude4-CD-1-fixes2.md
 ## Notes
 - **FIRST, from CLAUDE DIRECTOR (16:07Z):** two Claude 1 sessions are running. The OLD one (checked out, 'answering requests only'): stop, answer nothing, schedule no more check-ins. The FRESH one (IN 15:12Z): you take every request, incl. vmMat (low) and Claude 5's CE-2 fists (middle/ring fingers through the GW-4/Wasp grips), and note every 15 min.
 
-### Where things stand (11 Nov 13:00Z, session 4, CD-1 fixes part 2) — **context nearly full, needs a new session**
-- DONE the director's FIRST note: VM_FIT.m4.l + its contacts are the 08:56Z checkpoint's again (11:58Z, checked against
-  Claude outputs/gw4-fallback/). Lesson: my exports showed only the gloves; ex4 exports now carry the arms and view.html
-  has a 'cam' view (the game camera): judge every hold there before landing. And read WAITING FOR YOU in full every note.
-- Landed today (handoffs/2026-11-11-claude4-CD-1-fixes2.md + addenda): shotgun r round its grip; flamer l and r out of the
-  body (tcl334d green); AA-12 r out of the receiver (30.8 -> 4.8); minigun r on its rear grip (tcl301 green); the glove's
-  crease pinholes (viewmodel.js syncArmMaterials, hand materials double-sided). Forearms at the eye unchanged by these
-  (Claude outputs/CD-1/fixes2/arms-at-the-eye-0858-vs-now.png).
-- Claude 5 (15:5xZ, CE-2): the GW-4's and the Wasp's (uzi) firing fists have middle/ring through the trigger guard's loop
-  (GW-4 2.1 mm, Wasp 3.4 in VM_FIT's own pose; Claude outputs/CE-2/CE-2-trigger-guard-views-1550.jpg): slide them down their
-  grips so middle/ring/little sit under the guard on the grip and the index root beside the opening (slide2.py, fit8 fire,
-  'cam' check), then tell Claude 5 (it solves the index). Answered LATER.
-- AFTER the GW-4 thumb (director 15:4xZ: low priority; ChatGPT 2's request): game/viewmodel.js vmMaterial disposes and re-makes a view material when its
-  source's version/map/transparent changes, so the Breacher's factory->M81->factory restore loses the first copy's UUID
-  (review/GT-20079/paint.mjs 244-247). Fix: keep one copy per source, update it in place (map, transparent, color via
-  finishViewMaterial, needsUpdate) instead of dispose + new; keep the node-material hack/cache key; their assertion unchanged.
-- Next: (1) the GW-4 thumb forward along the handguard's left with the forearm BELOW the gun: keep the palm on the left but
-  turn the hand about its palm normal so its y (to the elbow) points down/back (my 10:00Z roll was about the bore: y went up,
-  the sleeve rose); check the 'cam' view. Tried 12:55Z (c4/spin.py, 180 deg from the 10:00Z hold): forearm from below in 'cam'
-  but the palm ends on the top-left, fingers AND thumb over the top (an overhand; Claude outputs/CD-1/fixes2/gw4-thumb-try-spin.png):
-  try ~90 deg instead (palm low on the left, y down-back), then fit8 wrap, then gun/thumbside.mjs SIDEV=eye-left. (2) The revolver's support cup: two tries in Claude outputs/CD-1/fixes2/
-  revolver-support-tries.jpg. DIRECTOR (13:2xZ): not deferred to CD-4: right after the GW-4 thumb, give the revolver (and any
-  two-hand pistol hold) a per-gun support-elbow target in game/viewmodel.js (the fit's side), down and in, so the forearm comes from
-  under and the hand can cup round the firing glove; check at the eye with the arms ('cam') in the four lights before landing. (3) The trigger-finger reds
-  (GW-4 5.2, AK 2.3, Uzi 4.6) asked of Claude 5. Pistol 3.7 two-hand floor open. Then CD-4.
-- Cloud: /home/claude/gs306 (PC tar _DELETE ME/claude4-cloud-copy-CD-1d.tgz + -img-; refresh game/viewmodel*.js,
-  studio/hand-contacts.js from the PC first); /home/claude/work/exp.sh|exp4.sh <out> <gun> (exports; ex4 = with arms);
-  /home/claude/fpshot/mkst3.py, mkst4.py make the step files; checks c4/depth3.py and /home/claude/work/{inbodies,inside2,
-  bodyinfo,nearbodies,selfchk}. New on the PC: c4/roll.py, yaw.py(cloud), slide.py, slide2.py, pushgrid.py, gun/thumbside.mjs.
-  Commit tool: a NEW staged file name each time (a reused one wrote an older copy).
+### Where things stand (11 Nov 18:10Z, session 5, CD-1 fixes part 3: handoffs/2026-11-11-claude4-CD-1-fixes3.md)
+- LANDED: the GW-4 support thumb forward (VM_FIT.m4.l + contacts, ~16:28Z), ChatGPT 2's vmMat identity (vmMaterial updates
+  in place, 16:37Z), the revolver support cup (VM_FIT.revolver.l + VM_SUPPORT_ELBOW in viewmodel.js, 18:06Z). Antigravity
+  asked for the four lights of both; ChatGPT 2 to run paint.mjs.
+- Next: (3) the revolver's firing index within the trigger's reach (Claude 5's request: the pad 28 mm out on the frame);
+  (4) the GW-4 and Wasp firing fists down under their guards (Claude 5's CE-2 note: middle/ring through the guard; slide2 + fit8
+  fire), the flamer firing hand, m4 r 5.2, uzi r 4.6, the pistol's 3.7 mm two-hand floor. Then CD-4.
+- How (cloud): the PC tree tar ("_DELETE ME/claude4-cloud-copy-CD-1d.tgz" + -img- + a delta of files newer than it) into
+  /home/claude/gs306; symlinks /home/claude/handfit-work/{hand,gun,c4} -> tools/handfit/*; fpshot step files from
+  c4/mkst3.py + mkst4.py; viewer in /home/claude/look/v2 (view.html + vendor link). Export with
+  CHROME_ARGS="--js-flags=--max-old-space-size=7000 --disable-dev-shm-usage" (else the page crashes at the raise).
+  Loop: setfit -> expr.sh export -> lm.py (landmarks, forearm line) / depth3 -> look2.sh (cam + 5 views) -> fit8 (augment2 for
+  a hand round the other) -> applyoff -> pretwist.py (the game's twist saturates at 0.6 rad: turn the fit back by it).
+  Tests: run-all.mjs <tests> --jobs 1 --agent claude4 --task CD-1 (cloud slot); full messages need the raw output.
+- Lessons: judge every hold in the 'cam' view with the arms; the forearm follows the elbow hint only inside the wrist's
+  ellipse, so turn the hand toward the hint (or give the gun its own support elbow) before fitting the fingers.
 
 ### Who you are (D-145, Jerry 10 Nov 2026)
 You are **Claude 1** on the board (agent `claude4`, task ids `CD-`; Jerry named you, D-146), the crew's fourth Claude: a Claude task of your own on Claude Opus 5.5 (High). Jerry made CLAUDE DIRECTOR (agent `claude`) the game

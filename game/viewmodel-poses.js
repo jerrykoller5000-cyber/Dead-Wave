@@ -638,7 +638,10 @@ export const VM_TRIGGER = Object.freeze({
   // the Wasp (J112: "the trigger finger is clipping through the trigger guard"): the fit's index ran through the guard and out
   // its side; now its pad lies on the trigger 68% down the blade (2 game mm off it), nothing through the guard. The trigger is
   // part of the frame's mesh (no control of its own yet: asked of ChatGPT 2), so no press until it can turn: pull = rest
-  uzi: { part: null, rest: [-0.278, 1.7, 1.084, -0.1], pull: [-0.278, 1.7, 1.084, -0.1], pivot: null, turn: 0, hold: 0.05, release: 0.07 }
+  uzi: { part: null, rest: [-0.278, 1.7, 1.084, -0.1], pull: [-0.278, 1.7, 1.084, -0.1], pivot: null, turn: 0, hold: 0.05, release: 0.07 },
+  // the pump gun (CE-2, 11 Nov, on Claude 1's 10:00Z refit of its firing hand): the pad 5 mm off the face 43% down the blade,
+  // nothing of the index in the guard or the blade, at rest or pulled; 4 mm at the face, the blade on its pin
+  shotgun: { part: 'trigger', rest: [-0.2, 0.585, 0.895, 0.17], pull: [-0.2, 0.645, 0.985, 0.17], pivot: null, turn: 0.18, hold: 0.06, release: 0.1 }
   // the GW-4: off (11 Nov): from Claude 1's CD-1 pass-2 fit the index's pad can't come within 7.5 mm of the trigger's face
   // (it sits 19 mm to the side, below the blade; asked of Claude 1). The old pose ([-0.223, 1.86, 0.25, -0.093]) is 1.1 mm
   // into the magazine body there, and the nearest clean solve ([0.74, 0.8, 1.278, 0.35]) puts its pads 1.2 mm into it in

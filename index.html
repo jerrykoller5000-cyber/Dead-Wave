@@ -21849,9 +21849,118 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       armFwd: 0.1, armBend: 0.3, armOut: 0.06 };
     // CC-340: the leg chain as the built body has it (the hips, the thigh and the shin are a man's now: studio/marine-body.js)
     { const u = marine.userData; if (u.legLG && u.kneeLG && u.ankleLG) { CROUCH.hipY = u.legLG.position.y; CROUCH.L1 = u.kneeLG.position.length(); CROUCH.L2 = u.ankleLG.position.length(); } }
+    // CC-343: the boot's outsole as the built boot has it (its meshes, in the ankle's space): how far under the ankle the
+    // sole is, and how far it reaches forward to the toe and back to the heel. The feet's IK lays the sole on the ground
+    // with these (the old 0.104 / 0.174 / 0.107 were the first body's, and a pitched boot dug its toe in by them).
+    { const an = marine.userData.ankleLG; if (an) { marine.updateMatrixWorld(true);
+      const inv = new THREE.Matrix4().copy(an.matrixWorld).invert(), m = new THREE.Matrix4(), bb = new THREE.Box3(), all = new THREE.Box3();
+      an.traverse((o) => { if (!o.isMesh || !o.geometry) return; if (!o.geometry.boundingBox) o.geometry.computeBoundingBox(); all.union(bb.copy(o.geometry.boundingBox).applyMatrix4(m.multiplyMatrices(inv, o.matrixWorld))); });
+      if (!all.isEmpty() && all.min.y < -0.05) { CROUCH.ankleH = -all.min.y; CROUCH.toe = all.max.z; CROUCH.heel = -all.min.z; } } }
     // CL-120: scratch for the feet-on-the-ground pass in updateMarinePose (footGround).
     let _fgVa = null, _fgWa = null;
-    const FOOT_FLAT = Object.freeze({ dy: 0, slope: 0 }), FOOT_G = { dy: 0, slope: 0 };
+    const FOOT_FLAT = Object.freeze({ dy: 0, slope: 0, dz: 0 }), FOOT_G = { dy: 0, slope: 0, dz: 0 };   // CC-343: dz, a step back (or on) off an edge
+    // CC-343 (CB-290's legs, J126 rule 3: no part of his legs through anything): what a boot stands on at a point, in the
+    // world: the ground (the terrain, the Training Ground's floor, a hollow's), a deck, and a flight of stairs by its
+    // treads. The walk's collision is a ramp through the treads (stairs are "just a ramp", platformHeightAt): on the
+    // build stairs a tread's front stands up to 0.26 m over it, so his boots went that far into the treads; the
+    // trapper's cellar treads sit up to 0.23 m under it, and there they hung in the air. Only what he could stand on
+    // from rootY: a deck more than FOOT_REACH over it is overhead (a storey is 2 m; at the walk's 7.4 m/s a boot reaches a
+    // tread 0.6 m over his root on the stairs).
+    const FOOT_REACH = 1.0, FOOT_DROP = 0.3, FOOT_LIFT = 0.36;   // FOOT_LIFT: how far over the hips' ground a leg lifts its boot
+    const ANKLE_FLEX = [BODY_LIMITS.ankle.flex[0] + 0.01, BODY_LIMITS.ankle.flex[1] - 0.01];   // a hair inside the table's ankle row   // a foot more than FOOT_DROP over what is under it is out over a drop, not on it
+    const _footTreads = new WeakMap();
+    function footTreadY(d, lz) {
+      let tr = _footTreads.get(d);
+      if (tr === undefined) {
+        tr = null;
+        if (d.build) { for (const b of builds) if (b && b.deck === d) { tr = b.type === 'stairs' ? 'build' : null; break; } }
+        else if (trapper && d === trapper.cellarStairRamp) tr = 'cellar';
+        _footTreads.set(d, tr);
+      }
+      if (tr === 'build') {   // makeStairsMesh: 7 treads up the cell from its -z edge, each topped at rise * (i + 0.92) / 7
+        const i = Math.floor((lz + BUILD_GRID / 2) / (BUILD_GRID / 7));
+        if (i < 0 || i > 6) return null;
+        return (d.under != null ? d.under : d.deckY - 0.05) + d.rise * (i + 0.92) / 7;
+      }
+      if (tr === 'cellar') {  // game/trapper-path.js: 8 treads down from the door, tread s centred at (s + 0.82) / 8 of the drop, 5.5 cm thick
+        const s = Math.max(0, Math.min(7, Math.floor((0.5 - lz / d.hl * 0.5) * 8)));
+        return d.deckY + d.rise * (1 - (s + 0.82) / 8) + 0.0275;
+      }
+      return d.deckY + d.rise * (lz / d.hl * 0.5 + 0.5);
+    }
+    // How much of his stride he takes over the ground ahead and behind (1 on the flat; up a flight of stairs about 0.4).
+    function steepStride() {
+      const r = rollPivot.parent ? rollPivot.parent.position : null, v = hypot(velX, velZ);
+      if (!r || !grounded || v < 0.3 || onHqRoof || onTowerDeck) return 1;
+      const ux = velX / v * 0.35, uz = velZ / v * 0.35;
+      const s = Math.abs(footSurfaceY(r.x + ux, r.z + uz, r.y + 0.35) - footSurfaceY(r.x - ux, r.z - uz, r.y)) / 0.7;
+      return 1 / (1 + 1.5 * Math.min(1.5, s));
+    }
+    // The ground for the step glide (CL-133): a ramp (a flight of stairs) under (x, z) near height y, else the ground.
+    function rampGroundY(x, z, y) {
+      for (const d of platforms) {
+        if (!d.rise) continue;
+        const dx = x - d.x, dz = z - d.z, c = Math.cos(d.yaw), sn = Math.sin(d.yaw), lx = dx * c - dz * sn, lz = dx * sn + dz * c;
+        if (Math.abs(lx) > d.hw || Math.abs(lz) > d.hl) continue;
+        const h = d.deckY + d.rise * (lz / d.hl * 0.5 + 0.5);
+        if (Math.abs(h - y) < 0.8) return h;
+      }
+      return sampleHeight(x, z);
+    }
+    // Where along a boot's sole (heel -hb .. toe +tb) the ground changes from level ya, found by halving.
+    function footEdge(x, z, fx, fz, rootY, a, b, ya) {
+      for (let i = 0; i < 7; i++) { const m = (a + b) * 0.5; if (Math.abs(footSurfaceY(x + fx * m, z + fz * m, rootY) - ya) < 0.02) a = m; else b = m; }
+      return (a + b) * 0.5;
+    }
+    const FOOT_SHIFT = 0.1;   // the most a boot steps off a higher edge it only tips onto
+    // A boot (ankle at x, z, facing fx, fz) over a step's edge: { y, shift } - stand at y, moved shift along its facing.
+    const FOOT_E = { y: 0, shift: 0, hi: 0 };
+    function footAcrossEdge(x, z, fx, fz, rootY, gH, gB, gT) {
+      const hb = CROUCH.heel, tb = CROUCH.toe;
+      FOOT_E.y = FOOT_E.hi = Math.max(gH, gB, gT); FOOT_E.shift = 0;
+      if (Math.abs(gT - gH) < 0.03) return FOOT_E;
+      const toeHigh = gT > gH, lowY = toeHigh ? gH : gT;
+      if (lowY < rootY - FOOT_DROP) return FOOT_E;   // the lower side is a drop: stand on the higher, out over it
+      const e = toeHigh ? footEdge(x, z, fx, fz, rootY, -hb, tb, gH) : footEdge(x, z, fx, fz, rootY, tb, -hb, gT);
+      const over = toeHigh ? tb - e : e + hb;
+      if (over > FOOT_SHIFT) return FOOT_E;
+      FOOT_E.y = lowY; FOOT_E.shift = (toeHigh ? -1 : 1) * (over + 0.01);
+      return FOOT_E;
+    }
+    function footSurfaceY(x, z, rootY) {
+      let y = sampleHeight(x, z);
+      const maxY = rootY + FOOT_REACH;
+      for (const d of platforms) {
+        const dx = x - d.x, dz = z - d.z, R = d.hw + d.hl;
+        if (dx > R || dx < -R || dz > R || dz < -R) continue;
+        const c = Math.cos(d.yaw), sn = Math.sin(d.yaw), lx = dx * c - dz * sn, lz = dx * sn + dz * c;
+        if (Math.abs(lx) > d.hw || Math.abs(lz) > d.hl) continue;
+        const h = d.rise ? footTreadY(d, lz) : d.deckY;
+        if (h != null && h <= maxY && h > y) y = h;
+      }
+      return y;
+    }
+    // Under a boot at (x, z) (its ankle) facing yaw, for the turn on the spot (studio/marine-turn.js): what is under its
+    // heel, ball and toe and either side of it. On a hill or a ramp: the height at the ankle along their line, the hill's
+    // pitch along the boot (slope) and across it (roll). Across a step's edge (a tread's nosing, a deck's edge): the
+    // highest of them, flat (the sole on it, the rest out over the lower). Out over a drop (more than FOOT_DROP under
+    // rootY): rootY, the level he stands on.
+    const FOOT_F = { y: 0, slope: 0, roll: 0, dx: 0, dz: 0 };
+    function footFooting(x, z, yaw, rootY) {
+      const fx = Math.sin(yaw), fz = Math.cos(yaw), hb = CROUCH.heel, tb = CROUCH.toe, span = hb + tb, w = 0.06;
+      const gH = footSurfaceY(x - fx * hb, z - fz * hb, rootY), gT = footSurfaceY(x + fx * tb, z + fz * tb, rootY);
+      const gB = footSurfaceY(x + fx * 0.04, z + fz * 0.04, rootY);
+      const gL = footSurfaceY(x - fz * w, z + fx * w, rootY), gR = footSurfaceY(x + fz * w, z - fx * w, rootY);
+      const gM = gH + (gT - gH) * hb / span;
+      FOOT_F.dx = FOOT_F.dz = 0;
+      if (Math.abs(gB - (gH + (gT - gH) * (hb + 0.04) / span)) > 0.012 || Math.abs(gT - gH) > 0.5 * span ||
+          Math.abs((gL + gR) * 0.5 - gM) > 0.012 || Math.abs(gR - gL) > 0.5 * 2 * w) {
+        const E = footAcrossEdge(x, z, fx, fz, rootY, gH, gB, gT);
+        FOOT_F.y = Math.max(E.y, E.shift ? E.y : Math.max(gL, gR)); FOOT_F.slope = 0; FOOT_F.roll = 0; FOOT_F.dx = fx * E.shift; FOOT_F.dz = fz * E.shift;
+      } else { FOOT_F.y = gM; FOOT_F.slope = Math.atan2(gT - gH, span); FOOT_F.roll = Math.atan2(gR - gL, 2 * w); }
+      if (FOOT_F.y < rootY - FOOT_DROP) { FOOT_F.y = rootY; FOOT_F.slope = 0; FOOT_F.roll = 0; }
+      return FOOT_F;
+    }
 
     function updateTacticalHud() {
       if (!tacticalLineEl) return;
@@ -23106,8 +23215,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       // thigh a fraction with the knee.
       if (kneeL) kneeL.rotation.x = kL;
       if (kneeR) kneeR.rotation.x = kR;
-      if (legL) legL.rotation.x = POSE.thighL - (swimming ? 0 : kL * 0.35);
-      if (legR) legR.rotation.x = POSE.thighR - (swimming ? 0 : kR * 0.35);
+      // CC-343: the stride shortened on steep ground (strideK: 1 on the flat, about 0.4 up a flight of stairs).
+      POSE.strideK = _ease(POSE.strideK == null ? 1 : POSE.strideK, steepStride(), dt, 10);
+      if (legL) legL.rotation.x = POSE.thighL * (swimming ? 1 : POSE.strideK) - (swimming ? 0 : kL * 0.35);
+      if (legR) legR.rotation.x = POSE.thighR * (swimming ? 1 : POSE.strideK) - (swimming ? 0 : kR * 0.35);
       // Ankles counter most of the leg's tilt so the sole tracks the ground; a
       // swinging foot keeps a little toe-drop, a pointed foot while swimming.
       const ankleFlat = swimming ? -0.3 : (airborne ? 0.35 : 0.8);
@@ -23160,6 +23271,27 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       }
       marine.position.y = POSE.bodyDip - ROLL_PIVOT_Y;
 
+      // --- CL-133: the step glide ---
+      // A ledge (STEP_UP), a deck's edge or a stair moves his root up or down in one frame, and his whole body went
+      // with it. The part of the frame's rise that the ground under him does not explain (a hillside is continuous and
+      // is left alone) is taken off here and given back over MOVE_FEEL.stepGlide, so he glides onto the step.
+      // CC-343: before the feet (they are placed from where the hips are, glide and all), and a ramp (a flight of
+      // stairs) is continuous ground here like a hillside (each frame's rise up the stairs was taken for a ledge).
+      {
+        const rootObj = rollPivot.parent;
+        const ry = rootObj ? rootObj.position.y : 0;
+        if (POSE.rootY != null && rootObj && grounded && !airborne && POSE.wasGroundedPose && !diving() && !climbingTower && !swimming) {
+          const d = ry - POSE.rootY;
+          const pred = rampGroundY(rootObj.position.x, rootObj.position.z, ry) - rampGroundY(playerFrameStart.x, playerFrameStart.z, POSE.rootY);
+          const jump = d - pred;
+          if (Math.abs(jump) > MOVE_FEEL.stepMin && Math.abs(jump) < MOVE_FEEL.stepMax) { POSE.stepGlide = (POSE.stepGlide || 0) - jump; POSE.steps = (POSE.steps || 0) + 1; }
+        }
+        POSE.rootY = ry; POSE.wasGroundedPose = !airborne;
+        POSE.stepGlide = _ease(POSE.stepGlide || 0, 0, dt, MOVE_FEEL.stepGlide);
+        if (Math.abs(POSE.stepGlide) < 1e-4) POSE.stepGlide = 0;
+        if (POSE.stepGlide) marine.position.y += POSE.stepGlide;
+      }
+
       // --- Feet on the ground under them (CL-120) ---
       // The body stands on the lowest ground within 0.3 m of him (playerGroundY), so on a hillside the ground under
       // each boot is higher than the ground the legs are posed against, and the boots sank into the hill (about 0.1 m on
@@ -23172,25 +23304,39 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       // On the terrain, not on a deck, a build, the HQ roof or the tower. His root's height is not the test: standing he
       // is on the lowest ground round him, and walking his height is set before his step, so on a hill it trails the
       // ground under him by a few cm (more on a slow frame).
-      let feetOnTerrain = !!root && grounded && !swimming && !diving() && !onHqRoof && root.y - sampleHeight(root.x, root.z) < 0.15;
-      if (feetOnTerrain) {
-        const deck = platformHeightAt(root.x, root.z, root.y + 0.3);
-        if (deck !== null && deck > sampleHeight(root.x, root.z) + 0.05 && Math.abs(root.y - deck) < 0.3) feetOnTerrain = false;
-      }
+      // CC-343: on whatever he stands on (the ground, a deck, a flight of stairs, the Training Ground's floor), not only
+      // the open ground: footSurfaceY reads the ground, the decks and the stairs' treads. On the HQ roof and the tower's
+      // deck (flat, and not decks) the feet stay where the pose put them.
+      const feetOnTerrain = !!root && grounded && !swimming && !diving() && !onHqRoof && !onTowerDeck && !climbingTower && !vault;
+      const rootGY = feetOnTerrain ? playerGroundY(root.x, root.z, root.y + STEP_UP) : root ? root.y : 0;   // CC-343: where his root lands this frame
+      if (!ud.feet) ud.feet = [0, 0];
+      if (feetOnTerrain && legL && legL.parent) legL.parent.updateWorldMatrix(true, false);
+      ud.feet.on = feetOnTerrain; ud.feet.lift = POSE.feetLift || 0; ud.feet[0] = ud.feet[1] = null;
       const footGround = (leg, ty, tz) => {
         if (!feetOnTerrain || !leg.parent) return FOOT_FLAT;
-        const par = leg.parent;
+        const par = leg.parent, hb = CROUCH.heel, tb = CROUCH.toe, span = hb + tb, ry = rootGY;
         _fgV.set(leg.position.x, leg.position.y + ty, leg.position.z + tz);
         par.localToWorld(_fgW.copy(_fgV));
-        const wx = _fgW.x, wz = _fgW.z, gy = sampleHeight(wx, wz);
-        // Up from the body's ground to this foot's ground, in the parent's units.
-        const hi = par.worldToLocal(_fgV.set(wx, gy, wz)).y, lo = par.worldToLocal(_fgW.set(wx, root.y, wz)).y;
-        // Forward along the leg's plane, in world, for the hill's pitch under the sole.
+        const wx = _fgW.x, wz = _fgW.z;
+        // Forward along the leg's plane, in world.
         par.localToWorld(_fgV.set(leg.position.x, leg.position.y + ty, leg.position.z + tz + 0.12));
-        const fx = _fgV.x - wx, fz = _fgV.z - wz, fl = hypot(fx, fz) || 1;
-        const rise = sampleHeight(wx + fx / fl * 0.1, wz + fz / fl * 0.1) - sampleHeight(wx - fx / fl * 0.1, wz - fz / fl * 0.1);
-        FOOT_G.dy = Math.max(-0.08, Math.min(0.3, hi - lo));
-        FOOT_G.slope = Math.max(-0.5, Math.min(0.5, Math.atan2(rise, 0.2)));
+        let fx = _fgV.x - wx, fz = _fgV.z - wz; const fl = hypot(fx, fz) || 1; fx /= fl; fz /= fl;
+        // What is under the heel, the ball and the toe. On a hill or a ramp they lie on one line and the sole is laid
+        // along it; across a step's edge (a tread's nosing, a deck's edge) they don't, and the boot stands flat on the
+        // highest of them: the rest of it reaches out over the lower one, never into the higher.
+        const gH = footSurfaceY(wx - fx * hb, wz - fz * hb, ry), gT = footSurfaceY(wx + fx * tb, wz + fz * tb, ry);
+        const gB = footSurfaceY(wx + fx * 0.04, wz + fz * 0.04, ry);
+        let slope = Math.atan2(gT - gH, span), gy;
+        FOOT_G.dz = 0;
+        if (Math.abs(gB - (gH + (gT - gH) * (hb + 0.04) / span)) > 0.012 || Math.abs(slope) > 0.5) {
+          const E = footAcrossEdge(wx, wz, fx, fz, ry, gH, gB, gT); gy = E.y; slope = 0; FOOT_G.dz = E.shift; FOOT_G.hi = E.hi;
+        } else gy = gH + (gT - gH) * hb / span;
+        if (gy < ry - FOOT_DROP) { gy = ry; slope = 0; }   // out over a drop (a deck's edge, a stairwell): not stood on
+        // Up from the body's ground to this foot's ground, in the parent's units.
+        const hi = par.worldToLocal(_fgV.set(wx, gy, wz)).y, lo = par.worldToLocal(_fgW.set(wx, ry, wz)).y;
+        FOOT_G.dy = Math.max(-FOOT_DROP, Math.min(0.6, hi - lo));
+        FOOT_G.dyHi = FOOT_G.dz ? Math.max(-FOOT_DROP, Math.min(0.6, par.worldToLocal(_fgV.set(wx, FOOT_G.hi, wz)).y - lo)) : FOOT_G.dy;
+        FOOT_G.slope = slope;
         return FOOT_G;
       };
       // The hips go with the lower foot: on a hillside the body is moved to the ground under the lower of his two feet,
@@ -23198,17 +23344,19 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       // bent both knees, as if half crouched; one left on the ground under his middle stood the downhill boot on air).
       {
         if (feetOnTerrain && legL && legR && kneeL && kneeR) {
-          let lo = Infinity;
+          let lo = Infinity, hi = -Infinity;
           for (const leg of [legL, legR]) {
             const kn = leg === legL ? kneeL : kneeR, a0 = leg.rotation.x, k0 = kn.rotation.x;
             const sz = -(CROUCH.L1 * Math.sin(a0) + CROUCH.L2 * Math.sin(a0 + k0));
-            lo = Math.min(lo, footGround(leg, -(CROUCH.hipY + POSE.bodyDip - CROUCH.ankleH), sz).dy);
+            const dy = footGround(leg, -(CROUCH.hipY + POSE.bodyDip - CROUCH.ankleH), sz).dy;
+            lo = Math.min(lo, dy); hi = Math.max(hi, dy);
           }
+          lo = Math.max(lo, hi - FOOT_LIFT);   // CC-343: the higher boot within a leg's lift of the hips' ground
           // Eased in the world, not against his root: the step can move his root up and down a few cm from one frame
           // to the next, and the hips must follow that at once while the ground under his feet changes smoothly.
-          const g = root.y + lo * marine.scale.y;
-          POSE.feetGroundW = POSE.feetGroundW == null ? g : _ease(POSE.feetGroundW, g, dt, 12);
-          POSE.feetLift = Math.max(-0.08, Math.min(0.12, (POSE.feetGroundW - root.y) / marine.scale.y));
+          // CC-343: eased against his root now (see above); a step's height either way (it was -0.08 .. 0.12, a hill's).
+          POSE.feetGroundW = rootGY + lo * marine.scale.y;
+          POSE.feetLift = _ease(POSE.feetLift || 0, Math.max(-FOOT_DROP, Math.min(0.3, lo)), dt, 14);
         } else {
           POSE.feetGroundW = null;
           POSE.feetLift = _ease(POSE.feetLift || 0, 0, dt, 12);
@@ -23224,7 +23372,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       // landing heel first and rolling off the toe. The ankle pitch is solved with it so the sole stays on the ground.
       if (crouchAmt > 0.001 && grounded && !swimming && legL && legR && kneeL && kneeR && ud.ankleLG && ud.ankleRG) {
         const Q = CROUCH, L1 = Q.L1, L2 = Q.L2, c = crouchAmt;
-        const hipH = Q.hipY + POSE.bodyDip + (POSE.feetLift || 0);   // leg pivots above his ground (marine local y 0), lifted on a hill (CL-120)
+        const hipH = Q.hipY + POSE.bodyDip + ((POSE.feetLift || 0) + (POSE.stepGlide || 0));   // leg pivots above his ground (marine local y 0), lifted on a hill (CL-120)
         const moveK = POSE.crouchMove = _ease(POSE.crouchMove || 0, moving && grounded ? 1 : 0, dt, 8);
         for (let s = 0; s < 2; s++) {
           const leg = s ? legR : legL, kn = s ? kneeR : kneeL, an = s ? ud.ankleRG : ud.ankleLG;
@@ -23233,11 +23381,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           let wz, wl = 0, wp;
           if (u < Q.stance) {
             const q = u / Q.stance;
-            wz = Q.step * (1 - 2 * q);
+            wz = Q.step * (POSE.strideK == null ? 1 : POSE.strideK) * (1 - 2 * q);
             wp = q < 0.18 ? -0.22 * (1 - q / 0.18) : (q > 0.7 ? 0.45 * (q - 0.7) / 0.3 : 0);
           } else {
             const q = (u - Q.stance) / (1 - Q.stance), e = q * q * (3 - 2 * q);
-            wz = -Q.step + 2 * Q.step * e;
+            wz = (-Q.step + 2 * Q.step * e) * (POSE.strideK == null ? 1 : POSE.strideK);
             wl = Q.lift * Math.sin(Math.PI * q);
             wp = 0.45 - 0.67 * e;
           }
@@ -23250,26 +23398,33 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           const sy = -(L1 * Math.cos(a0) + L2 * Math.cos(a0 + k0)), sz = -(L1 * Math.sin(a0) + L2 * Math.sin(a0 + k0));
           // CL-120: the ground under this foot (a hillside), and the sole laid along the hill there.
           const fg = footGround(leg, -(hipH - Q.ankleH), sz + (fz - sz) * c);
-          const pitchG = pitch - fg.slope * c * (1 - Math.min(1, lift / Q.lift));
-          // Ankle height over the ground: rocked onto the toe (pitch > 0) or the heel (pitch < 0), against the hill.
-          const rel = pitchG + fg.slope;
-          const ankH = Q.ankleH * Math.cos(rel) + (rel > 0 ? Q.toe : Q.heel) * Math.sin(Math.abs(rel));
-          // Blended in height too, but never below the ground: mid-blend the standing legs would still sink.
-          const tg = -(hipH - ankH - lift) + fg.dy, ty = Math.max(tg, sy + (tg - sy) * c), tz = sz + (fz - sz) * c;
-          const d = Math.min(L1 + L2 - 0.002, Math.max(0.06, hypot(ty, tz)));
-          const k = Math.acos(Math.max(-1, Math.min(1, (d * d - L1 * L1 - L2 * L2) / (2 * L1 * L2))));
-          const a = Math.atan2(-tz, -ty) - Math.atan2(L2 * Math.sin(k), L1 + L2 * Math.cos(k));
+          let pitchG = pitch - fg.slope * c * (1 - Math.min(1, lift / Q.lift)), a = 0, k = 0;
+          for (let it = 0; it < 4; it++) {
+            // Ankle height over the ground: rocked onto the toe (pitch > 0) or the heel (pitch < 0), against the hill.
+            const rel = pitchG + fg.slope;
+            const ankH = Q.ankleH * Math.cos(rel) + (rel > 0 ? Q.toe : Q.heel) * Math.sin(Math.abs(rel));
+            // Blended in height too, but never below the ground: mid-blend the standing legs would still sink.
+            const tg = -(hipH + leg.position.x * Math.sin(lower ? lower.rotation.z : 0) - ankH - lift) + fg.dy, ty = Math.max(tg, sy + (tg - sy) * c), tz = sz + (fz - sz) * c + (fg.dz || 0) * c;   // CC-343: this hip's pivot
+            const d = Math.min(L1 + L2 - 0.002, Math.max(0.06, hypot(ty, tz)));
+            k = Math.acos(Math.max(-1, Math.min(1, (d * d - L1 * L1 - L2 * L2) / (2 * L1 * L2))));
+            a = Math.atan2(-tz, -ty) - Math.atan2(L2 * Math.sin(k), L1 + L2 * Math.cos(k));
+            // CC-343: the ankle inside its range; past it the boot rocks onto its ball (or heel) as far as the ankle
+            // allows, and the leg is solved again for that (clampBodyPose used to hold it after, the toe in the ground).
+            const ank = pitchG - a - k, ok = Math.max(ANKLE_FLEX[0], Math.min(ANKLE_FLEX[1], ank));
+            if (Math.abs(ok - ank) < 1e-4) break;
+            pitchG += ok - ank;
+          }
           leg.rotation.x = a;
           kn.rotation.x = k;
           an.rotation.x = pitchG - a - k;
           leg.rotation.z += ((s ? 1 : -1) * Q.splay - leg.rotation.z) * c;   // knees a touch wide
-          an.rotation.z = -leg.rotation.z * c;                               // and the soles kept flat
+          an.rotation.z = -(leg.rotation.z + (lower ? lower.rotation.z : 0)) * c;   // and the soles kept flat (CC-343: the pelvis's roll too)
         }
       }
       // GP-172: loading/landing lowers the hips over the ordinary gait's boot targets,
       // rather than bending knees in mid-air and leaving both soles above the floor.
       if (jumpGround && (loadK > .001 || landK > .001) && crouchAmt < .03 && legL && legR && kneeL && kneeR && ud.ankleLG && ud.ankleRG) {
-        const Q = CROUCH, hipH = Q.hipY + POSE.bodyDip + (POSE.feetLift || 0);
+        const Q = CROUCH, hipH = Q.hipY + POSE.bodyDip + ((POSE.feetLift || 0) + (POSE.stepGlide || 0));
         for (let side = 0; side < 2; side++) {
           const leg = side ? legR : legL, kn = side ? kneeR : kneeL, an = side ? ud.ankleRG : ud.ankleLG;
           const knee = side ? POSE.kneeR : POSE.kneeL, a0 = (side ? POSE.thighR : POSE.thighL) - knee * .35;
@@ -23286,26 +23441,43 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       // (the knee takes it up) and its sole laid along the slope. Only ever up, and only on open ground; on the flat
       // nothing moves (dy and slope are 0 there).
       if (feetOnTerrain && crouchAmt < 0.999 && legL && legR && kneeL && kneeR && ud.ankleLG && ud.ankleRG) {
-        const Q = CROUCH, L1 = Q.L1, L2 = Q.L2, hipH = Q.hipY + POSE.bodyDip + (POSE.feetLift || 0), w = 1 - crouchAmt;
+        const Q = CROUCH, L1 = Q.L1, L2 = Q.L2, hipH = Q.hipY + POSE.bodyDip + ((POSE.feetLift || 0) + (POSE.stepGlide || 0)), w = 1 - crouchAmt;
         for (let s = 0; s < 2; s++) {
           const leg = s ? legR : legL, kn = s ? kneeR : kneeL, an = s ? ud.ankleRG : ud.ankleLG;
           const a0 = leg.rotation.x, k0 = kn.rotation.x, p0 = a0 + k0 + an.rotation.x;
           const sy = -(L1 * Math.cos(a0) + L2 * Math.cos(a0 + k0)), sz = -(L1 * Math.sin(a0) + L2 * Math.sin(a0 + k0));
           const fg = footGround(leg, sy, sz);
-          if (fg.dy - (POSE.feetLift || 0) < 0.005 && Math.abs(fg.slope) < 0.02) continue;   // this foot's ground is where the hips put it
-          // How low the sole may go: the ground under it, against the hill's pitch.
-          const near = Math.max(0, 1 - Math.max(0, sy + hipH - Q.ankleH - fg.dy) / 0.08);   // 1 planted .. 0 swinging high
-          const pitch = p0 - fg.slope * near * w, rel = pitch + fg.slope;
-          const ankH = Q.ankleH * Math.cos(rel) + (rel > 0 ? Q.toe : Q.heel) * Math.sin(Math.abs(rel));
-          const floor = -(hipH - ankH) + fg.dy;
-          if (sy >= floor && near < 0.01) continue;
-          const ty = sy + (Math.max(sy, floor) - sy) * w;
-          const d = Math.min(L1 + L2 - 0.002, Math.max(0.06, hypot(ty, sz)));
-          const k = Math.acos(Math.max(-1, Math.min(1, (d * d - L1 * L1 - L2 * L2) / (2 * L1 * L2))));
-          const a = Math.atan2(-sz, -ty) - Math.atan2(L2 * Math.sin(k), L1 + L2 * Math.cos(k));
+          // CC-343: the pose's foot carried by how far its own ground is over (or under) the hips' ground: on a hill or
+          // the stairs the higher boot is lifted (the knee takes it up) and the lower one reaches down to its tread or
+          // off a deck's edge; never into the ground, and a planted sole laid along a hill. The ankle inside its range.
+          // A boot in step (the walk, the run) over an edge clears its higher side; the boots standing still step off it in
+          // the turn on the spot (studio/marine-turn.js footing), and crouched below.
+          const fdy = fg.dz ? fg.dyHi : fg.dy, fdz = 0;
+          const off = fdy - ((POSE.feetLift || 0) + (POSE.stepGlide || 0));
+          const hipS = hipH + leg.position.x * Math.sin(lower ? lower.rotation.z : 0);   // CC-343: this hip's pivot, the pelvis's roll in it
+          if (ud.feet) ud.feet[s] = off;
+          const near = Math.max(0, 1 - Math.max(0, sy + hipS - Q.ankleH - ((POSE.feetLift || 0) + (POSE.stepGlide || 0))) / 0.08);   // 1 planted .. 0 swinging high (in the pose)
+          an.rotation.z = -((lower ? lower.rotation.z : 0) + leg.rotation.z) * near * w;   // CC-343: a planted sole level across
+          const dz = fdz * w;   // CC-343: stepped off an edge it only tips onto
+          let pitch = p0 - fg.slope * near * w, a = 0, k = 0, moved = false;
+          for (let it = 0; it < 3; it++) {
+            const rel = pitch + fg.slope;
+            const ankH = Q.ankleH * Math.cos(rel) + (rel > 0 ? Q.toe : Q.heel) * Math.sin(Math.abs(rel));
+            const floor = -(hipS - ankH) + fdy, want = Math.max(sy + off, floor);
+            if (!it && Math.abs(want - sy) < 0.001 && !dz && (near < 0.01 || Math.abs(fg.slope) < 0.02)) break;   // on its ground as posed
+            moved = true;
+            const ty = sy + (want - sy) * w, tz = sz + dz;
+            const d = Math.min(L1 + L2 - 0.002, Math.max(0.06, hypot(ty, tz)));
+            k = Math.acos(Math.max(-1, Math.min(1, (d * d - L1 * L1 - L2 * L2) / (2 * L1 * L2))));
+            a = Math.atan2(-tz, -ty) - Math.atan2(L2 * Math.sin(k), L1 + L2 * Math.cos(k));
+            const ank = pitch - a - k, ok = Math.max(ANKLE_FLEX[0], Math.min(ANKLE_FLEX[1], ank));
+            if (Math.abs(ok - ank) < 1e-4) break;
+            pitch += ok - ank;
+          }
+          if (!moved) continue;
           leg.rotation.x = a;
           kn.rotation.x = k;
-          an.rotation.x = pitch - a - k;
+          an.rotation.x = Math.max(ANKLE_FLEX[0], Math.min(ANKLE_FLEX[1], pitch - a - k));
         }
       }
 
@@ -23364,29 +23536,12 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         if (rollPivot.rotation.x !== 0 || rollPivot.rotation.y !== 0 || rollPivot.rotation.z !== 0) rollPivot.rotation.set(0, 0, 0, 'XYZ');
       }
 
-      // --- CL-133: the step glide ---
-      // A ledge (STEP_UP), a deck's edge or a stair moves his root up or down in one frame, and his whole body went
-      // with it. The part of the frame's rise that the ground under him does not explain (a hillside is continuous and
-      // is left alone) is taken off here and given back over MOVE_FEEL.stepGlide, so he glides onto the step.
-      {
-        const rootObj = rollPivot.parent;
-        const ry = rootObj ? rootObj.position.y : 0;
-        if (POSE.rootY != null && rootObj && grounded && !airborne && POSE.wasGroundedPose && !diving() && !climbingTower && !swimming) {
-          const d = ry - POSE.rootY;
-          const pred = sampleHeight(rootObj.position.x, rootObj.position.z) - sampleHeight(playerFrameStart.x, playerFrameStart.z);
-          const jump = d - pred;
-          if (Math.abs(jump) > MOVE_FEEL.stepMin && Math.abs(jump) < MOVE_FEEL.stepMax) { POSE.stepGlide = (POSE.stepGlide || 0) - jump; POSE.steps = (POSE.steps || 0) + 1; }
-        }
-        POSE.rootY = ry; POSE.wasGroundedPose = !airborne;
-        POSE.stepGlide = _ease(POSE.stepGlide || 0, 0, dt, MOVE_FEEL.stepGlide);
-        if (Math.abs(POSE.stepGlide) < 1e-4) POSE.stepGlide = 0;
-        if (POSE.stepGlide) marine.position.y += POSE.stepGlide;
-      }
       // --- CL-133: the cross-fade between pose states (see poseXfade) ---
       poseXfade(diving() ? 'roll' : swimming ? 'swim' : airborne ? 'air' : (moving || GAIT.holdU != null) ? 'loco' : 'idle', dt);   // CL-193: the dive is the roll's state
       poseVault();   // GP-19900: weighted push, staggered tucked legs and landing
       marineTurn.apply(dt, { yaw: player.rotation.y, aimLocked: !unarmed, crouch: POSE.crouch,
-        ground: root ? (x, z) => feetOnTerrain ? Math.max(root.y, sampleHeight(x, z)) : root.y : undefined,
+        ground: root ? (x, z) => feetOnTerrain ? footFooting(x, z, player.rotation.y, rootGY).y : root.y : undefined,   // CC-343: the decks and the stairs' treads too
+        footing: root && feetOnTerrain ? (x, z, yaw) => footFooting(x, z, yaw, rootGY) : null, ankleH: CROUCH.ankleH, sole: [-CROUCH.heel, CROUCH.toe], flex: BODY_LIMITS.ankle.flex,   // CC-343
         eligible: gameStarted && !gameOver && !won && grounded && XFADE.w <= 0 &&
         !moving && hypot(velX, velZ) < .08 && !swimming && (POSE.crouch < .03 || POSE.crouch > .97) &&
         !diving() && !climbingTower && !mortarMounted && !mortarCarried && !marineDown() &&
@@ -25069,6 +25224,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
             const ring = new THREE.Mesh(new THREE.CylinderGeometry(H.r * 1.14, H.r * 1.14, H.len * 0.05, 14), MOD_LOOK_RING);
             ring.rotation.x = Math.PI / 2; ring.position.set(mz.x, mz.y, z0 + H.len * (0.14 + k * 0.24)); g.add(ring);
           }
+          for (const part of g.children) markPaintSurface(part, 'heavy barrel');   // CB-307: painted with the gun (t334)
           g.visible = false; gun.add(g); ud.heavyLook = g;
         }
       }
@@ -65005,6 +65161,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       training.bgWarmPromise = new Promise((res) => { resolveBgDone = res; });
 
       const AG309_WARM = typeof location === 'undefined' || new URLSearchParams(location.search).get('ag309') !== '0';
+      const AG309_BG = AG309_WARM && typeof location !== 'undefined' && new URLSearchParams(location.search).get('ag309_bg') === '1';
       const activeWk = holsteredKey || currentWeapon || 'pistol';
 
       let origPPRender = null;
@@ -65017,7 +65174,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
 
       const drawablePipelineSig = (o) => {
         const g = o.geometry;
-        if (!g || !o.material || o.isSkinnedMesh || o.isInstancedMesh) return null;
+        if (!g || !o.material || o.isInstancedMesh) return null;
+        if (o.isSkinnedMesh && (!o.skeleton || !o.skeleton.bones)) return null;
         const mats = Array.isArray(o.material) ? o.material : [o.material];
         let mKey = '';
         for (let i = 0; i < mats.length; i++) {
@@ -65044,7 +65202,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         }
         const morphN = g.morphAttributes ? Object.keys(g.morphAttributes).length : 0;
         const grps = mats.length > 1 && g.groups ? g.groups.length : 0;
-        return o.type + '/' + (o.castShadow ? 1 : 0) + '/' + (o.receiveShadow ? 1 : 0) + '/' + o.layers.mask + '/' + (g.index ? 1 : 0) + '/' + morphN + '/' + grps + '/' + mKey + '/' + attrs;
+        const skinTag = o.isSkinnedMesh ? 'skin:' + o.skeleton.bones.length : 'mesh';
+        return o.type + '/' + skinTag + '/' + (o.castShadow ? 1 : 0) + '/' + (o.receiveShadow ? 1 : 0) + '/' + o.layers.mask + '/' + (g.index ? 1 : 0) + '/' + morphN + '/' + grps + '/' + mKey + '/' + attrs;
       };
 
       const startTrainingBgWarm = () => {
@@ -65171,7 +65330,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         renderer.setAnimationLoop(tick);
         if (!training.wake) b.classList.remove('on');
         if (resolveWarmDone) { resolveWarmDone(); resolveWarmDone = null; }
-        if (AG309_WARM) {
+        if (AG309_BG) {
           startTrainingBgWarm();
         } else if (resolveBgDone) {
           resolveBgDone();
@@ -65217,7 +65376,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
             restoreFlame = prepareFlameWarmup();
             syncRigSkins();
 
-            vmWarm = ensureViewmodel() && typeof viewmodel.prepareWarmup === 'function' ? (AG309_WARM ? viewmodel.prepareWarmup([activeWk]) : viewmodel.prepareWarmup()) : null;
+            vmWarm = ensureViewmodel() && typeof viewmodel.prepareWarmup === 'function' ? (AG309_BG ? viewmodel.prepareWarmup([activeWk]) : viewmodel.prepareWarmup()) : null;
             updateCarriedGear(0, true);
 
             const showWarm = (o) => {
@@ -65233,7 +65392,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
               rootObj.traverse((o) => showWarm(o));
             };
 
-            if (AG309_WARM) {
+            if (AG309_BG) {
               showWarmTree(weaponMeshes[activeWk]);
               if (offhandMeshes && offhandMeshes[activeWk]) showWarmTree(offhandMeshes[activeWk]);
             } else {
@@ -65290,7 +65449,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
             const seenCompileSigs = new Set();
             const walkDedupe = (o) => {
               if (!o || !o.visible) return;
-              if (o.isMesh && !o.isSkinnedMesh && !o.isInstancedMesh && o.layers.test(camera.layers)) {
+              if (o.isMesh && !o.isInstancedMesh && o.layers.test(camera.layers)) {
                 const sig = drawablePipelineSig(o);
                 if (sig) {
                   if (seenCompileSigs.has(sig)) {

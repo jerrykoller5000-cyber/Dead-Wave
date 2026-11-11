@@ -1,0 +1,22 @@
+{
+  "off": 13,
+  "on": 16,
+  "moduleDraws": 3,
+  "meshes": [
+    {
+      "name": "",
+      "material": "gunPaint:pistol"
+    },
+    {
+      "name": "",
+      "material": "MeshStandardMaterial"
+    },
+    {
+      "name": "",
+      "material": "fold-static"
+    }
+  ],
+  "empty": 1,
+  "span": 0.34440127556081485,
+  "backend": "WebGPUBackend"
+}

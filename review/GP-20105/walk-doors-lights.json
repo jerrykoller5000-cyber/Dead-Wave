@@ -1,0 +1,100 @@
+{
+  "at": "2026-11-11T17:44:39.987Z",
+  "steps": [
+    {
+      "name": "entry-first",
+      "fp": true,
+      "blend": 0.7431749075836483,
+      "camera": [
+        0.0007923260327066132,
+        -197.18521545623472,
+        -641.8895448360308
+      ],
+      "gun": "pistol"
+    },
+    {
+      "name": "light-switch",
+      "action": "trainingLights",
+      "before": {
+        "on": true,
+        "night": false,
+        "room": true
+      }
+    },
+    {
+      "name": "lights-off",
+      "lights": {
+        "on": false,
+        "night": true,
+        "room": false
+      }
+    },
+    {
+      "name": "lights-on",
+      "lights": {
+        "on": true,
+        "night": false,
+        "room": true
+      }
+    },
+    {
+      "name": "keypad-first",
+      "front": {
+        "x": -9,
+        "z": -649.5
+      },
+      "action": "trainingDoor",
+      "before": {
+        "open": true,
+        "locked": false,
+        "amount": 1,
+        "blocked": false
+      },
+      "doorY": 3.12
+    },
+    {
+      "name": "door-toggled",
+      "security": {
+        "open": false,
+        "locked": false,
+        "amount": 1,
+        "blocked": true
+      },
+      "doorY": 3.12
+    },
+    {
+      "name": "keypad-third",
+      "fp": false,
+      "camera": [
+        -9.000640850885352,
+        -198.08,
+        -649.8100626610428
+      ],
+      "doorY": 0
+    },
+    {
+      "name": "exit",
+      "training": false,
+      "bodyClass": false
+    }
+  ],
+  "failedResources": [
+    {
+      "status": 404,
+      "url": "http://127.0.0.1:1709/version.json"
+    },
+    {
+      "status": 404,
+      "url": "http://127.0.0.1:1709/z-sounds/levels.json"
+    },
+    {
+      "status": 404,
+      "url": "http://127.0.0.1:1709/__perflog"
+    },
+    {
+      "status": 404,
+      "url": "http://127.0.0.1:1709/z-sounds/levels.json"
+    }
+  ],
+  "errors": []
+}

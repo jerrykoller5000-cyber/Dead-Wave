@@ -53,10 +53,12 @@ function saveJpg(name, shotObj) {
   return { name, bytes: buf.length, lumaMean: shotObj.lumaMean, lumaStd: shotObj.lumaStd };
 }
 
-function browserInitFn() {
+async function browserInitFn() {
   const T = window.TT, H = T.inspectHost(), G = T.THREE;
+  if (H.training().warmPromise) await H.training().warmPromise;
+  T.flightHold(true);
   for (let i = 0; i < 300 && H.training().wake; i++) T.stepFrame(0.05);
-  for (let i = 0; i < 20; i++) T.stepFrame(1 / 60);
+  for (let i = 0; i < 120; i++) T.stepFrame(0.05);
 
   const css = document.createElement('style');
   css.id = 'cd1-clean-hud';
@@ -136,12 +138,12 @@ function browserInitFn() {
     try { T.opticDbg?.clear?.('m4'); } catch (_) {}
     try { T.armoryDbg?.fit?.('m4', 'suppressor', false); } catch (_) {}
 
-    const px = tg.origin.x + 0.0, pz = tg.origin.z + 1.2;
-    H.placePlayer(px, pz, Math.PI);
+    const px = tg.origin.x + 0.0, pz = tg.origin.z - 2.2;
+    H.placePlayer(px, pz, 0);
     H.player.position.set(px, tg.floorY, pz);
-    H.player.rotation.y = Math.PI;
-    T.setAimYawDbg(Math.PI);
-    T.setOtsAimDbg(Math.PI, 0.0);
+    H.player.rotation.y = 0;
+    T.setAimYawDbg(0);
+    T.setOtsAimDbg(0, 0.0);
 
     const m4Idx = T.WEAPON_ORDER.indexOf('m4');
     T.setWeapon(m4Idx);

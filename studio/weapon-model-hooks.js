@@ -1,5 +1,7 @@
 // Optional accessories keep a placement group on every copy. Their geometry and
 // material variants are created only when that particular copy first shows them.
+import {updateLightSwitch} from './weapon-light-switch.js';
+
 const optionalTypes = new WeakMap();
 const optionalState = new WeakMap();
 
@@ -101,6 +103,7 @@ export function addArtworkInstances(T, gun, parent, name, entries, {fixedCapacit
 
 export function updateArtworkInstances(T, root) {
   if (!root) return;
+  updateLightSwitch(T,root);
   let batches = batchLists.get(root);
   if (!batches) {
     batches = [];

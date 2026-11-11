@@ -73,6 +73,8 @@
     const carry = rig.slings[0].gun;
     const carryPaint = carry && meshes(carry).filter((o) => o.material.userData.gunPaintId === 'm4');
     ok(!!carry && carryPaint.length >= 6 && carryPaint.every((o) => o.material.map && F.m4.includes(o.material)), 'slung copy shares M4 paint materials (' + (carryPaint?.length || 0) + ')');
+    { const arm = T.armoryDbg.ui().armory;   // CB-307: an M4 stored in the Armory, so the rack shows one
+      if (!arm.read().shelf.some((g) => g.kind === 'm4')) arm.buy({ id: 't334-rack-m4', kind: 'm4' }, { store: true }); }
     T.armoryDbg.refreshRack(true);
     const rack = T.house.armoryRack.children.find((o) => o.userData.rackKind === 'm4');
     const rackPaint = rack && meshes(rack).filter((o) => o.material.userData.gunPaintId === 'm4');

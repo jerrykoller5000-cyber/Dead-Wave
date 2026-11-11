@@ -2,6 +2,9 @@
 // Coordinates are gun-local; +z is the bore direction. The optical points stay
 // separate from the muzzle so recoil, first-person projection and the light can
 // all originate at their actual front windows.
+import {bindModelArtwork} from './weapon-model-hooks.js';
+import {createLightSwitch} from './weapon-light-switch.js';
+
 const MOUNTS = Object.freeze({
   pistol:   { kind: 'guard', x: 0, y: -0.035, z: 0.202, length: 0.16, width: 0.045, height: 0.034 },
   revolver: { kind: 'under', x: 0, y: 0.041, z: 0.246, length: 0.105, width: 0.043, height: 0.036 },
@@ -129,6 +132,38 @@ export function attachLaserLight(gun, kind, ctx) {
       box(0.015, 0.013, 0.003, gunDark, W * 0.34, 0, -L * 0.53, 'lanyardLoop');
     }
   }
+  let pad,axis,faceOffset;
+  const padKit=ctx.gunKit(unit);
+  if(spec.kind==='guard'){
+    pad=unit.children.find(mesh=>mesh.name==='activationPad' && mesh.position.x<0);
+    axis=new THREE.Vector3(1,0,0);faceOffset=.0015;
+  }else if(kind==='uzi'){
+    // The support grip covers the back of this compact light; its near side is exposed.
+    faceOffset=.0012;
+    pad=padKit.box(2*faceOffset,spec.height*.42,L*.20,gunDark,spec.width/2+faceOffset,-spec.height*.13,-L*.20,0,0,0,unit,.0009);
+    pad.name='lightSwitchPad';axis=new THREE.Vector3(-1,0,0);
+  }else if(spec.kind==='tube'){
+    pad=unit.getObjectByName('pressureSwitch');axis=new THREE.Vector3(-1,0,0);faceOffset=.0025;
+  }else if(spec.kind==='dualTube'){
+    faceOffset=.0012;
+    pad=padKit.lathe([[0,-faceOffset],[.0062,-faceOffset],[.0068,-.00085],[.007,-.00035],[.007,faceOffset],[0,faceOffset]],
+      gunDark,{y:.019,z:-L/2-faceOffset,seg:16});
+    pad.name='lightSwitchPad';
+    axis=new THREE.Vector3(0,0,1);
+  }else if(spec.kind==='peq' || spec.kind==='peq16'){
+    const plate=unit.getObjectByName('topPlate');faceOffset=.0012;
+    pad=padKit.box(spec.width*.34,2*faceOffset,L*.19,gunDark,plate.position.x,plate.position.y+.0015+faceOffset,plate.position.z,
+      0,0,0,unit,.0009);
+    pad.name='lightSwitchPad';
+    axis=new THREE.Vector3(0,-1,0);
+  }else{
+    faceOffset=.0012;
+    pad=padKit.box(spec.width*.42,spec.height*.42,2*faceOffset,gunDark,0,0,-L/2-faceOffset,0,0,0,unit,.0009);
+    pad.name='lightSwitchPad';
+    axis=new THREE.Vector3(0,0,1);
+  }
+  const contact=createLightSwitch(THREE,gun,unit,kind,pad,axis,.001,faceOffset);
+  bindModelArtwork(gun,'controls','lightSwitch',contact);
   gun.userData.laserLightUnit = unit;
   // Keep the light's local optical points and the held gun's projected origins in sync.
   // The M240's copy follows its elevation pivot; the Wasp's compact module has its own scale.

@@ -346,7 +346,14 @@ export class Object3D {
     if (recursive) for (const c of this.children) o.add(c.clone());
     return o;
   }
-  copy(src) { this.position.copy(src.position); this.rotation.copy(src.rotation); this.scale.copy(src.scale); return this; }
+  // CB-307: as three.js copies (name, visibility, shadows, userData, the children); it kept only the transform
+  copy(src, recursive = true) {
+    this.name = src.name; this.position.copy(src.position); this.rotation.copy(src.rotation); this.scale.copy(src.scale);
+    this.visible = src.visible; this.castShadow = src.castShadow; this.receiveShadow = src.receiveShadow; this.frustumCulled = src.frustumCulled;
+    this.renderOrder = src.renderOrder; this.matrixAutoUpdate = src.matrixAutoUpdate; this.userData = Object.assign({}, src.userData);
+    if (recursive) for (const c of src.children) this.add(c.clone());
+    return this;
+  }
   dispatchEvent() {} addEventListener() {} removeEventListener() {}
   onBeforeRender() {}
 }
@@ -534,6 +541,9 @@ class MaterialBase {
   constructor(p = {}) {
     this.isMaterial = true; this.color = new Color(0xffffff); this.emissive = new Color(0); this.opacity = 1; this.transparent = false; this.visible = true;
     this.side = 0; this.depthWrite = true; this.depthTest = true; this.userData = {}; this.needsUpdate = false; this.emissiveIntensity = 1; this.roughness = 1; this.metalness = 0;
+    // CB-307: the type and the data defaults three.js gives every material (world/bake.js plainMaterial reads them)
+    this.type = new.target.name; this.alphaTest = 0; this.wireframe = false; this.flatShading = false; this.vertexColors = false;
+    this.polygonOffset = false; this.polygonOffsetFactor = 0; this.polygonOffsetUnits = 0; this.toneMapped = true; this.blending = 1;
     this.setValues(p);
     return permissive(this);
   }

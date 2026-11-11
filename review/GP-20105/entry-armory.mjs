@@ -1,0 +1,53 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import assert from 'node:assert/strict';
+import { fileURLToPath } from 'node:url';
+import { serve } from '../../tools/serve.mjs';
+import { launch } from '../../tools/cdp.mjs';
+
+if (!process.env.DW_GAME_TEST_TOKEN) throw Error('Run through crew game-test slot');
+const root = path.resolve(fileURLToPath(new URL('../..', import.meta.url)));
+const out = path.join(root, 'review/GP-20105');
+fs.mkdirSync(out, { recursive: true });
+const server = await serve(root, 0);
+const browser = await launch({ headless: false, args: ['--window-size=1280,720'] });
+const report = { at:new Date().toISOString(), steps:[], errors:[], warnings:[] };
+try {
+  const page = await browser.newPage({ width:1280,height:720 });
+  await page.goto(`${server.origin}/index.html?debug=1&raf=timer`);
+  assert(await page.waitFor('!!window.TT && window.DWLoad?.snapshot().state==="ready"',{timeout:90000}));
+  await page.evaluate('DWOpening.dismissForTesting()');
+  assert(await page.waitFor('document.getElementById("opening").hidden',{timeout:15000}));
+  const entryStart=Date.now();
+  await page.evaluate(`(()=>{document.getElementById('playerName').value='GP-20105 walkthrough';document.getElementById('modeTraining').click()})()`);
+  await page.screenshot(path.join(out,'01-entry-blackout.png'));
+  assert(await page.waitFor('TT.trainingDbg.state().active',{timeout:90000}));
+  assert(await page.waitFor('!document.getElementById("trainingBlackout")?.classList.contains("on")',{timeout:20000}));
+  report.entryMs=Date.now()-entryStart;
+  report.steps.push(await page.evaluate(`(()=>({name:'entry-3p',first:TT.fpDbg().first,phase:TT.getPhase(),pos:TT.player.position.toArray(),hud:document.getElementById('hud')?.textContent?.slice(0,350)}))()`));
+  await page.screenshot(path.join(out,'02-entry-third-person.png'));
+  await page.evaluate(`(()=>{TT.setViewFirstDbg(true);for(let i=0;i<6;i++)TT.stepFrame(.016)})()`);
+  report.steps.push(await page.evaluate(`(()=>({name:'entry-1p',first:TT.fpDbg().first,camera:TT.camera.position.toArray()}))()`));
+  await page.screenshot(path.join(out,'03-entry-first-person.png'));
+  report.steps.push(await page.evaluate(`(()=>{const T=TT,tg=T.trainingDbg.tg(),f=tg.stations.kiosk.front;
+    T.player.position.set(f.x,tg.floorY,f.z);T.setVelDbg(0,0);for(let i=0;i<5;i++)T.stepFrame(.016);
+    const action=T.trainingDbg.action();T.doAction();return {name:'kiosk',action,open:document.getElementById('shop').classList.contains('show')};})()`));
+  await page.screenshot(path.join(out,'04-kiosk-first-person.png'));
+  report.steps.push(await page.evaluate(`(()=>{const T=TT,tg=T.trainingDbg.tg(),f=tg.stations.armory.front;
+    T.closeMenuDbg('shop');T.player.position.set(f.x,tg.floorY,f.z);T.setVelDbg(0,0);for(let i=0;i<5;i++)T.stepFrame(.016);
+    const action=T.trainingDbg.action();T.doAction();const p=document.getElementById('armoryPanel');
+    return {name:'armory',action,open:!p.hidden,offers:[...p.querySelectorAll('[data-buy-gun]')].map(x=>x.dataset.buyGun),cash:T.getBank()};})()`));
+  await page.screenshot(path.join(out,'05-armory-first-person.png'));
+  report.steps.push(await page.evaluate(`(()=>{const T=TT,p=document.getElementById('armoryPanel'),b=p.querySelector('[data-buy-gun="m4"]');
+    const before=T.getBank(),disabled=b?.disabled;b?.click();
+    return {name:'buy-m4',button:!!b,disabled,before,after:T.getBank(),owned:T.armoryDbg.ui().armory.has('m4'),text:p.textContent.slice(0,400)};})()`));
+  await page.screenshot(path.join(out,'06-m4-bought.png'));
+  report.errors=page.errors.slice();
+  report.warnings=page.console.filter(c=>['error','warning','warn'].includes(c.type));
+  report.perf=await page.evaluate('TT.perfSnapshot()');
+  assert(report.steps.find(x=>x.name==='kiosk').open);
+  assert(report.steps.find(x=>x.name==='armory').open);
+  assert(report.steps.find(x=>x.name==='buy-m4').owned);
+  console.log(`GP-20105 entry/armory: blackout ${report.entryMs}ms, kiosk open, armory open, M4 bought; ${report.errors.length} page errors, ${report.warnings.length} console warnings/errors`);
+} catch(e){report.failure=String(e?.stack||e);console.error(report.failure);process.exitCode=1;}
+finally{fs.writeFileSync(path.join(out,'entry-armory.json'),JSON.stringify(report,null,2)+'\n');await browser.close();await server.close();}

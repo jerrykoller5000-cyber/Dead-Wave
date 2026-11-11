@@ -1,18 +1,18 @@
 {
   "card": "CD-1-gw4-thumb",
-  "capturedAt": "2026-11-11T17:02:32.325Z",
+  "capturedAt": "2026-11-11T17:28:14.293Z",
   "backend": "WebGPUBackend",
   "clearances": {
     "hip": {
       "eyePos": [
-        0,
-        -190.0917,
-        -648.9705
+        -0.0024,
+        -198.5774,
+        -642.0871
       ],
       "handCenterW": [
-        0.2162,
-        -190.2977,
-        -648.9745
+        -0.2852,
+        -198.7721,
+        -641.3294
       ],
       "camRight": [
         -1,
@@ -21,155 +21,163 @@
       ],
       "camUp": [
         0,
-        0.696706709347164,
-        0.7173560908995242
+        1,
+        0
       ],
       "camFwd": [
         0,
-        -0.7173560908995242,
-        0.696706709347164
+        0,
+        1
       ],
       "wristEye": [
-        -0.1601,
-        -0.1066,
-        -0.113
+        0.227,
+        -0.189,
+        -0.7068
       ],
       "muzzleEye": [
-        0,
-        597.9811,
-        -315.7786
+        0.278,
+        -0.1348,
+        -1.1438
       ],
-      "leftArmMaxYInEye": 0.2793,
-      "leftArmMinYInEye": -0.2312,
+      "handMaxYInEye": -0.1441,
+      "leftArmMaxYInEye": -0.1441,
+      "leftArmMinYInEye": -0.4613,
+      "gunTopYInEye": -0.043,
+      "gunBottomYInEye": -0.3461,
       "leftArmXRangeInEye": [
-        -0.2941,
-        0.2375
+        -0.2584,
+        0.361
       ],
-      "belowSightLineByMeters": -0.2793
+      "belowSightLineByMeters": 0.1441,
+      "belowGunTopByMeters": 0.1011
     },
     "aimed": {
       "eyePos": [
-        -40.9034,
-        -189.9185,
-        -658.3605
+        0.1104,
+        -198.6534,
+        -642.0003
       ],
       "handCenterW": [
-        0.2162,
-        -190.2977,
-        -648.9745
+        0.084,
+        -198.7874,
+        -641.409
       ],
       "camRight": [
-        -0.9999987192343464,
-        -1.0842021724855047e-19,
-        0.001600477949566029
+        -1,
+        0,
+        0
       ],
       "camUp": [
-        0.0011477368815746543,
-        0.6969483430711878,
-        0.7171204151259233
+        0,
+        1,
+        0
       ],
       "camFwd": [
-        0.001115450455072016,
-        -0.7171213335902971,
-        0.6969474504436874
+        0,
+        0,
+        1
       ],
       "wristEye": [
-        -41.0484,
-        6.5535,
-        -6.8274
+        -0.0321,
+        -0.1327,
+        -0.5433
       ],
       "muzzleEye": [
-        -39.8496,
-        604.5341,
-        -322.6937
+        0,
+        -0.0594,
+        -0.9815
       ],
-      "leftArmMaxYInEye": 6.9392,
-      "leftArmMinYInEye": 6.429,
+      "handMaxYInEye": -0.0853,
+      "leftArmMaxYInEye": -0.0853,
+      "leftArmMinYInEye": -0.4229,
+      "gunTopYInEye": 0.0243,
+      "gunBottomYInEye": -0.2777,
       "leftArmXRangeInEye": [
-        -41.1824,
-        -40.6508
+        -0.2819,
+        0.1058
       ],
-      "belowSightLineByMeters": -6.9392
+      "belowSightLineByMeters": 0.0853,
+      "belowGunTopByMeters": 0.1096
     }
   },
   "shots": {
     "hip-noon": {
       "name": "gw4-hip-noon.jpg",
-      "bytes": 270321,
-      "lumaMean": 131.44,
-      "lumaStd": 61.03
+      "bytes": 162035,
+      "lumaMean": 72.78,
+      "lumaStd": 43.75
     },
     "hip-overcast": {
       "name": "gw4-hip-overcast.jpg",
-      "bytes": 98452,
-      "lumaMean": 42.15,
-      "lumaStd": 24.27
+      "bytes": 139610,
+      "lumaMean": 53.41,
+      "lumaStd": 36.62
     },
     "hip-dusk": {
       "name": "gw4-hip-dusk.jpg",
-      "bytes": 87283,
-      "lumaMean": 26.12,
-      "lumaStd": 8.81
+      "bytes": 141498,
+      "lumaMean": 31.1,
+      "lumaStd": 27.24
     },
     "hip-night": {
       "name": "gw4-hip-night.jpg",
-      "bytes": 67320,
-      "lumaMean": 21.23,
-      "lumaStd": 7.95
+      "bytes": 81081,
+      "lumaMean": 12.52,
+      "lumaStd": 15.86
     },
     "aimed-noon": {
       "name": "gw4-aimed-noon.jpg",
-      "bytes": 112156,
-      "lumaMean": 44.19,
-      "lumaStd": 25.93
+      "bytes": 129608,
+      "lumaMean": 81.32,
+      "lumaStd": 49.44
     },
     "aimed-overcast": {
       "name": "gw4-aimed-overcast.jpg",
-      "bytes": 112973,
-      "lumaMean": 44.93,
-      "lumaStd": 24.45
+      "bytes": 116427,
+      "lumaMean": 61.29,
+      "lumaStd": 38.56
     },
     "aimed-dusk": {
       "name": "gw4-aimed-dusk.jpg",
-      "bytes": 140975,
-      "lumaMean": 33.99,
-      "lumaStd": 22.69
+      "bytes": 113162,
+      "lumaMean": 36.31,
+      "lumaStd": 30.59
     },
     "aimed-night": {
       "name": "gw4-aimed-night.jpg",
-      "bytes": 79321,
-      "lumaMean": 42.8,
-      "lumaStd": 31.36
+      "bytes": 74109,
+      "lumaMean": 15.61,
+      "lumaStd": 14.03
     },
     "close-eye-hip": {
       "name": "gw4-close-eye-hip.jpg",
-      "bytes": 100592,
-      "lumaMean": 61.9,
-      "lumaStd": 28.89
+      "bytes": 110392,
+      "lumaMean": 73.06,
+      "lumaStd": 40.82
     },
     "close-left": {
       "name": "gw4-close-left.jpg",
-      "bytes": 133590,
-      "lumaMean": 76.91,
-      "lumaStd": 48.21
+      "bytes": 127957,
+      "lumaMean": 93.53,
+      "lumaStd": 39.67
     },
     "close-below": {
       "name": "gw4-close-below.jpg",
-      "bytes": 61139,
-      "lumaMean": 31.18,
-      "lumaStd": 31.55
+      "bytes": 145813,
+      "lumaMean": 48.72,
+      "lumaStd": 33.39
     },
     "close-front": {
       "name": "gw4-close-front.jpg",
-      "bytes": 157191,
-      "lumaMean": 64.3,
-      "lumaStd": 40.54
+      "bytes": 132506,
+      "lumaMean": 77.81,
+      "lumaStd": 36.32
     },
     "close-eye-aimed": {
       "name": "gw4-close-eye-aimed.jpg",
-      "bytes": 69649,
-      "lumaMean": 67.14,
-      "lumaStd": 22.54
+      "bytes": 120366,
+      "lumaMean": 93.62,
+      "lumaStd": 55.4
     }
   },
   "pageErrors": [],

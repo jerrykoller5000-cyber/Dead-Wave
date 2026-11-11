@@ -1,0 +1,553 @@
+{
+  "at": "2026-11-11T17:38:31.364Z",
+  "errors": [],
+  "kinds": [
+    "shambler",
+    "feral",
+    "leaper",
+    "spider",
+    "drowned",
+    "military",
+    "brute",
+    "spitter",
+    "screamer",
+    "bomber",
+    "demon",
+    "colossus",
+    "guardian"
+  ],
+  "tunnel": {
+    "group": false,
+    "gate": {
+      "x": -26,
+      "z": -613.4
+    },
+    "passage": {
+      "x": -26,
+      "wallZ": -612,
+      "spawnZ": -609,
+      "halfWidth": 3.3,
+      "height": 6.3
+    }
+  },
+  "arena": [
+    {
+      "kind": "shambler",
+      "started": 1,
+      "arrived": true,
+      "emerged": true,
+      "countdown": {
+        "deploy": {
+          "kind": "shambler",
+          "count": 1,
+          "remaining": 5,
+          "seconds": 5
+        },
+        "security": {
+          "open": false,
+          "locked": true,
+          "amount": 0,
+          "blocked": true
+        },
+        "motif": {
+          "kind": "shambler",
+          "track": "gh/motif-shambler",
+          "started": false
+        },
+        "track": null
+      },
+      "state": {
+        "alive": 1,
+        "type": "shambler",
+        "entry": true,
+        "visible": true,
+        "tunnel": true,
+        "motif": {
+          "kind": "shambler",
+          "track": "gh/motif-shambler",
+          "started": true
+        },
+        "track": "gh/motif-shambler"
+      }
+    },
+    {
+      "kind": "feral",
+      "started": 1,
+      "arrived": true,
+      "emerged": true,
+      "countdown": {
+        "deploy": {
+          "kind": "feral",
+          "count": 1,
+          "remaining": 5,
+          "seconds": 5
+        },
+        "security": {
+          "open": false,
+          "locked": true,
+          "amount": 0,
+          "blocked": true
+        },
+        "motif": {
+          "kind": "feral",
+          "track": "gh/motif-feral",
+          "started": false
+        },
+        "track": null
+      },
+      "state": {
+        "alive": 1,
+        "type": "feral",
+        "entry": true,
+        "visible": true,
+        "tunnel": true,
+        "motif": {
+          "kind": "feral",
+          "track": "gh/motif-feral",
+          "started": true
+        },
+        "track": "gh/motif-feral"
+      }
+    },
+    {
+      "kind": "leaper",
+      "started": 1,
+      "arrived": true,
+      "emerged": true,
+      "countdown": {
+        "deploy": {
+          "kind": "leaper",
+          "count": 1,
+          "remaining": 5,
+          "seconds": 5
+        },
+        "security": {
+          "open": false,
+          "locked": true,
+          "amount": 0,
+          "blocked": true
+        },
+        "motif": {
+          "kind": "leaper",
+          "track": "gh/motif-leaper",
+          "started": false
+        },
+        "track": null
+      },
+      "state": {
+        "alive": 1,
+        "type": "leaper",
+        "entry": true,
+        "visible": true,
+        "tunnel": true,
+        "motif": {
+          "kind": "leaper",
+          "track": "gh/motif-leaper",
+          "started": true
+        },
+        "track": "gh/motif-leaper"
+      }
+    },
+    {
+      "kind": "spider",
+      "started": 1,
+      "arrived": true,
+      "emerged": true,
+      "countdown": {
+        "deploy": {
+          "kind": "spider",
+          "count": 1,
+          "remaining": 5,
+          "seconds": 5
+        },
+        "security": {
+          "open": false,
+          "locked": true,
+          "amount": 0,
+          "blocked": true
+        },
+        "motif": {
+          "kind": "spider",
+          "track": "gh/motif-spider",
+          "started": false
+        },
+        "track": null
+      },
+      "state": {
+        "alive": 1,
+        "type": "spider",
+        "entry": true,
+        "visible": true,
+        "tunnel": true,
+        "motif": {
+          "kind": "spider",
+          "track": "gh/motif-spider",
+          "started": true
+        },
+        "track": "gh/motif-spider"
+      }
+    },
+    {
+      "kind": "drowned",
+      "started": 1,
+      "arrived": true,
+      "emerged": true,
+      "countdown": {
+        "deploy": {
+          "kind": "drowned",
+          "count": 1,
+          "remaining": 4.982,
+          "seconds": 5
+        },
+        "security": {
+          "open": false,
+          "locked": true,
+          "amount": 0,
+          "blocked": true
+        },
+        "motif": {
+          "kind": "drowned",
+          "track": "gh/motif-drowned",
+          "started": false
+        },
+        "track": null
+      },
+      "state": {
+        "alive": 1,
+        "type": "drowned",
+        "entry": true,
+        "visible": true,
+        "tunnel": true,
+        "motif": {
+          "kind": "drowned",
+          "track": "gh/motif-drowned",
+          "started": true
+        },
+        "track": "gh/motif-drowned"
+      }
+    },
+    {
+      "kind": "military",
+      "started": 1,
+      "arrived": true,
+      "emerged": true,
+      "countdown": {
+        "deploy": {
+          "kind": "military",
+          "count": 1,
+          "remaining": 5,
+          "seconds": 5
+        },
+        "security": {
+          "open": false,
+          "locked": true,
+          "amount": 0,
+          "blocked": true
+        },
+        "motif": {
+          "kind": "military",
+          "track": "gh/motif-shambler",
+          "started": false
+        },
+        "track": null
+      },
+      "state": {
+        "alive": 1,
+        "type": "military",
+        "entry": true,
+        "visible": true,
+        "tunnel": true,
+        "motif": {
+          "kind": "military",
+          "track": "gh/motif-shambler",
+          "started": true
+        },
+        "track": "gh/motif-shambler"
+      }
+    },
+    {
+      "kind": "brute",
+      "started": 1,
+      "arrived": true,
+      "emerged": true,
+      "countdown": {
+        "deploy": {
+          "kind": "brute",
+          "count": 1,
+          "remaining": 5,
+          "seconds": 5
+        },
+        "security": {
+          "open": false,
+          "locked": true,
+          "amount": 0,
+          "blocked": true
+        },
+        "motif": {
+          "kind": "brute",
+          "track": "gh/motif-brute",
+          "started": false
+        },
+        "track": null
+      },
+      "state": {
+        "alive": 1,
+        "type": "brute",
+        "entry": true,
+        "visible": true,
+        "tunnel": true,
+        "motif": {
+          "kind": "brute",
+          "track": "gh/motif-brute",
+          "started": true
+        },
+        "track": "gh/motif-brute"
+      }
+    },
+    {
+      "kind": "spitter",
+      "started": 1,
+      "arrived": true,
+      "emerged": true,
+      "countdown": {
+        "deploy": {
+          "kind": "spitter",
+          "count": 1,
+          "remaining": 5,
+          "seconds": 5
+        },
+        "security": {
+          "open": false,
+          "locked": true,
+          "amount": 0,
+          "blocked": true
+        },
+        "motif": {
+          "kind": "spitter",
+          "track": "gh/motif-spitter",
+          "started": false
+        },
+        "track": null
+      },
+      "state": {
+        "alive": 1,
+        "type": "spitter",
+        "entry": true,
+        "visible": true,
+        "tunnel": true,
+        "motif": {
+          "kind": "spitter",
+          "track": "gh/motif-spitter",
+          "started": true
+        },
+        "track": "gh/motif-spitter"
+      }
+    },
+    {
+      "kind": "screamer",
+      "started": 1,
+      "arrived": true,
+      "emerged": true,
+      "countdown": {
+        "deploy": {
+          "kind": "screamer",
+          "count": 1,
+          "remaining": 5,
+          "seconds": 5
+        },
+        "security": {
+          "open": false,
+          "locked": true,
+          "amount": 0,
+          "blocked": true
+        },
+        "motif": {
+          "kind": "screamer",
+          "track": "gh/motif-screamer",
+          "started": false
+        },
+        "track": null
+      },
+      "state": {
+        "alive": 1,
+        "type": "screamer",
+        "entry": true,
+        "visible": true,
+        "tunnel": true,
+        "motif": {
+          "kind": "screamer",
+          "track": "gh/motif-screamer",
+          "started": true
+        },
+        "track": "gh/motif-screamer"
+      }
+    },
+    {
+      "kind": "bomber",
+      "started": 1,
+      "arrived": true,
+      "emerged": true,
+      "countdown": {
+        "deploy": {
+          "kind": "bomber",
+          "count": 1,
+          "remaining": 4.976,
+          "seconds": 5
+        },
+        "security": {
+          "open": false,
+          "locked": true,
+          "amount": 0,
+          "blocked": true
+        },
+        "motif": {
+          "kind": "bomber",
+          "track": "gh/motif-bomber",
+          "started": false
+        },
+        "track": null
+      },
+      "state": {
+        "alive": 1,
+        "type": "bomber",
+        "entry": true,
+        "visible": true,
+        "tunnel": true,
+        "motif": {
+          "kind": "bomber",
+          "track": "gh/motif-bomber",
+          "started": true
+        },
+        "track": "gh/motif-bomber"
+      }
+    },
+    {
+      "kind": "demon",
+      "started": 1,
+      "arrived": true,
+      "emerged": true,
+      "countdown": {
+        "deploy": {
+          "kind": "demon",
+          "count": 1,
+          "remaining": 5,
+          "seconds": 5
+        },
+        "security": {
+          "open": false,
+          "locked": true,
+          "amount": 0,
+          "blocked": true
+        },
+        "motif": {
+          "kind": "demon",
+          "track": "gh/motif-demon",
+          "started": false
+        },
+        "track": null
+      },
+      "state": {
+        "alive": 1,
+        "type": "demon",
+        "entry": true,
+        "visible": true,
+        "tunnel": true,
+        "motif": {
+          "kind": "demon",
+          "track": "gh/motif-demon",
+          "started": true
+        },
+        "track": "gh/motif-demon"
+      }
+    },
+    {
+      "kind": "colossus",
+      "started": 1,
+      "arrived": true,
+      "emerged": true,
+      "countdown": {
+        "deploy": {
+          "kind": "colossus",
+          "count": 1,
+          "remaining": 5,
+          "seconds": 5
+        },
+        "security": {
+          "open": false,
+          "locked": true,
+          "amount": 0,
+          "blocked": true
+        },
+        "motif": {
+          "kind": "colossus",
+          "track": "gh/motif-colossus",
+          "started": false
+        },
+        "track": null
+      },
+      "state": {
+        "alive": 1,
+        "type": "colossus",
+        "entry": true,
+        "visible": true,
+        "tunnel": true,
+        "motif": {
+          "kind": "colossus",
+          "track": "gh/motif-colossus",
+          "started": true
+        },
+        "track": "gh/motif-colossus"
+      }
+    },
+    {
+      "kind": "guardian",
+      "started": 1,
+      "arrived": true,
+      "emerged": true,
+      "countdown": {
+        "deploy": {
+          "kind": "guardian",
+          "count": 1,
+          "remaining": 5,
+          "seconds": 5
+        },
+        "security": {
+          "open": false,
+          "locked": true,
+          "amount": 0,
+          "blocked": true
+        },
+        "motif": {
+          "kind": "guardian",
+          "track": "gh/motif-guardians",
+          "started": false
+        },
+        "track": null
+      },
+      "state": {
+        "alive": 1,
+        "type": "guardian",
+        "entry": true,
+        "visible": true,
+        "tunnel": true,
+        "motif": {
+          "kind": "guardian",
+          "track": "gh/motif-guardians",
+          "started": true
+        },
+        "track": "gh/motif-guardians"
+      }
+    }
+  ],
+  "mortar": {
+    "built": true,
+    "mounted": true,
+    "before": 8,
+    "after": 7,
+    "spent": 1,
+    "aim": "",
+    "afterAim": "",
+    "blocked": false,
+    "stillMounted": true
+  }
+}

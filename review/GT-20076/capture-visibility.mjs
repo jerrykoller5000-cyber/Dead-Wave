@@ -4,7 +4,7 @@ import {fileURLToPath} from 'node:url';
 import {serve} from '../../tools/serve.mjs';
 import {launch} from '../../tools/cdp.mjs';
 import {save} from './save.mjs';
-import {originalSawCovers,originalSniperCover} from './replay-artwork.mjs';
+import {originalSawCovers,originalSniperCover,originalWasp} from './replay-artwork.mjs';
 
 const rankOnly=process.argv.includes('--rank-only');
 const candidate=process.argv.find(arg=>arg.startsWith('--audit='));
@@ -12,6 +12,8 @@ const audit=candidate?candidate.slice('--audit='.length):'catalog-chain-skin';
 assert(/^catalog-[a-z0-9-]+$/.test(audit));
 const precise=process.argv.includes('--precise') || !!candidate;
 const replay=process.argv.includes('--original-saw-covers');
+const replayWasp=process.argv.includes('--original-wasp');
+const matched=process.argv.includes('--match-wasp-wall');
 const replaySniper=process.argv.includes('--original-sniper-cover');
 const requestedFolder=process.argv.find(arg=>arg.startsWith('--output='))?.slice(9);
 if(requestedFolder)assert(candidate && /^visibility-fix-[a-z0-9-]+$/.test(requestedFolder));
@@ -29,7 +31,9 @@ try {
   const page=await browser.newPage({width:960,height:540});
   if(replay) assert(audit==='catalog-fix-revolver-strip' && ids.length===1 && ids[0]==='chainsaw');
   if(replaySniper)assert(!replay && requestedFolder && audit==='catalog-fix-front-rail-boss' && ids.length===1 && ids[0]==='sniper');
-  const verify=replay?await originalSawCovers(page,server.origin):replaySniper?await originalSniperCover(page,server.origin):null;
+  if(matched)assert(ids.length===1 && ids[0]==='uzi');
+  if(replayWasp)assert(matched && !replay && !replaySniper && requestedFolder && audit==='catalog-fix-revolver-walnut');
+  const verify=replay?await originalSawCovers(page,server.origin):replaySniper?await originalSniperCover(page,server.origin):replayWasp?await originalWasp(page,server.origin):null;
   await page.goto(server.origin+'/index.html?debug=1&raf=timer');
   assert(await page.waitFor('window.TT && DWLoad.snapshot().state==="ready"'));
   await page.evaluate('DWOpening.dismissForTesting()');
@@ -37,7 +41,16 @@ try {
   if(!rankOnly){
     await page.evaluate("document.getElementById('playerName').value='Visibility';document.getElementById('modeTraining').click()");
     assert(await page.waitFor("TT.trainingDbg.state().active && !TT.trainingDbg.state().warming && !document.getElementById('trainingBlackout')?.classList.contains('on')"));
-    await page.evaluate('import("/review/GT-20076/visibility-camera.mjs").then(m=>{window.vis=m.makeViews(TT);return true})');
+    const mode=matched?(replayWasp?'record':'replay'):false;
+    await page.evaluate(`(async()=>{
+      const {makeViews}=await import('/review/GT-20076/visibility-camera.mjs');
+      const mode=${JSON.stringify(mode)};
+      if(mode==='replay'){
+        const response=await fetch('/review/GT-20076/visibility-fix-wasp-lift-before/uzi/cameras.json');
+        if(!response.ok)throw Error('Missing original game pose');window.recordedWaspViews=await response.json();
+      }
+      window.vis=makeViews(TT,mode);return true;
+    })()`);
   }
   for (const id of ids) {
     const dir=new URL('./'+folder+'/'+id+'/',import.meta.url);

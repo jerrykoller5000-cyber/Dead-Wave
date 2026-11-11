@@ -4,10 +4,10 @@ import {fileURLToPath} from 'node:url';
 import {serve} from '../../tools/serve.mjs';
 import {launch} from '../../tools/cdp.mjs';
 import {save} from './save.mjs';
-import {originalSawCovers} from './replay-artwork.mjs';
+import {originalSawCovers,originalWasp} from './replay-artwork.mjs';
 
 const [id,phase]=process.argv.slice(2);
-assert(process.env.DW_GAME_TEST_TOKEN && /^[a-z0-9]+$/.test(id) && ['before','after','trim','final-trim','joins','rear-join','side-inset','crown','contact-trim','relief','closed-relief','floor-before','floor-after','clear-before','clear-after','clear-seated'].includes(phase));
+assert(process.env.DW_GAME_TEST_TOKEN && /^[a-z0-9]+$/.test(id) && ['before','after','trim','final-trim','joins','rear-join','side-inset','crown','contact-trim','relief','closed-relief','floor-before','floor-after','clear-before','clear-after','clear-seated','clear-lift-before','clear-lift-after'].includes(phase));
 const dir=new URL('./visible-repairs/'+id+'/'+phase+'/',import.meta.url);
 await mkdir(dir,{recursive:true});
 const server=await serve(fileURLToPath(new URL('../../',import.meta.url)),0),browser=await launch({headless:false});
@@ -15,13 +15,24 @@ try {
   const page=await browser.newPage({width:960,height:540});
   const replay=process.argv.includes('--original-saw-covers');
   if(replay) assert(id==='chainsaw' && ['floor-before','clear-before'].includes(phase));
-  const verify=replay?await originalSawCovers(page,server.origin):null;
+  const matched=phase.startsWith('clear-lift-');
+  if(matched)assert.equal(id,'uzi');
+  const verify=replay?await originalSawCovers(page,server.origin):phase==='clear-lift-before'?await originalWasp(page,server.origin):null;
   await page.goto(server.origin+'/index.html?debug=1&raf=timer');
   assert(await page.waitFor('window.TT && DWLoad.snapshot().state==="ready"'));
   await page.evaluate('DWOpening.dismissForTesting()');assert(await page.waitFor('!DWOpening.active'));
   await page.evaluate("document.getElementById('playerName').value='Panel proof';document.getElementById('modeTraining').click()");
   assert(await page.waitFor("TT.trainingDbg.state().active && !TT.trainingDbg.state().warming && !document.getElementById('trainingBlackout')?.classList.contains('on')"));
-  await page.evaluate('import("/review/GT-20076/visibility-camera.mjs").then(m=>{window.vis=m.makeViews(TT);return true})');
+  const mode=matched?'replay':false;
+  await page.evaluate(`(async()=>{
+      const {makeViews}=await import('/review/GT-20076/visibility-camera.mjs');
+      const mode=${JSON.stringify(mode)};
+      if(mode==='replay'){
+        const response=await fetch('/review/GT-20076/visibility-fix-wasp-lift-before/uzi/cameras.json');
+        if(!response.ok)throw Error('Missing original game pose');window.recordedWaspViews=await response.json();
+      }
+      window.vis=makeViews(TT,mode);return true;
+    })()`);
   await page.evaluate('vis.equip('+JSON.stringify(id)+')');
   const cameras={};
   const views=['hip','aimed','held-left','held-right',...(id==='chainsaw'?[]:['rack'])];

@@ -1,0 +1,22 @@
+{
+  "noon": {
+    "changed": 0,
+    "over4": 0,
+    "peak": 0
+  },
+  "overcast": {
+    "changed": 0,
+    "over4": 0,
+    "peak": 0
+  },
+  "dusk": {
+    "changed": 0,
+    "over4": 0,
+    "peak": 0
+  },
+  "night": {
+    "changed": 0,
+    "over4": 0,
+    "peak": 0
+  }
+}

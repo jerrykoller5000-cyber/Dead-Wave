@@ -1,0 +1,241 @@
+{
+  "at": "2026-11-11T17:29:14.801Z",
+  "steps": [
+    {
+      "name": "entry-3p",
+      "first": false,
+      "phase": "prep",
+      "pos": [
+        0,
+        -200,
+        -640.61
+      ],
+      "hud": "\n    \n      Grave Shift \n      \n        Cash$∞\n        Skulls0\n        Horseshoes0\n        Training Ground\n        Land r220 · Land open\n      \n      \n        Health\n        100 / 100\n        \n          Armor\n          -\n        \n        Slow-mo\n      \n      \n        Daylight · 12:00\n        NVG - · Laser - · Light -\n      \n      Night 1 · PrepREAD"
+    },
+    {
+      "name": "entry-1p",
+      "first": true,
+      "camera": [
+        0.00012574341403279776,
+        -191.73394760403409,
+        -647.3234119430574
+      ]
+    },
+    {
+      "name": "kiosk",
+      "action": "kiosk",
+      "open": true
+    },
+    {
+      "name": "armory",
+      "action": "armory",
+      "open": true,
+      "offers": [
+        "uzi",
+        "shotgun",
+        "revolver",
+        "m4",
+        "chainsaw",
+        "ak",
+        "sniper",
+        "flamer",
+        "launcher",
+        "aa12",
+        "minigun"
+      ],
+      "cash": 999999
+    },
+    {
+      "name": "buy-m4",
+      "button": true,
+      "disabled": false,
+      "before": 999999,
+      "after": 999999,
+      "owned": true,
+      "text": "HQ · Weapons lockerArmoryChoose a gun from the shelves. Its workbench buys ammo and buys, fits or removes each attachment.Carried gunsPrimary 1Empty slotPrimary 2Empty slotSecondary 1Empty slotSecondary 2Empty slotHip holster · PistolStored gunsGW-4 Carbine30 loaded · 8 magazinesPrimaryWorkbenchGuns to buyWasp SMG$75 CashBuyShotgun$110 CashBuyRevolver$145 CashBuyChainsaw$190 CashBuyKR-7 Rifle$245 "
+    }
+  ],
+  "errors": [],
+  "warnings": [
+    {
+      "type": "warning",
+      "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+    },
+    {
+      "type": "warning",
+      "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+    },
+    {
+      "type": "warning",
+      "text": "Grave Shift: HQ bake skipped. ReferenceError: Cannot access 'hush' before initialization\n    at makeHouse (http://127.0.0.1:15492/index.html?debug=1&raf=timer&__gameTestToken=a405f103-0467-4de9-a6aa-4c133ae38d6e:28069:41)\n    at http://127.0.0.1:15492/index.html?debug=1&raf=timer&__gameTestToken=a405f103-0467-4de9-a6aa-4c133ae38d6e:28239:5"
+    },
+    {
+      "type": "warning",
+      "text": "THREE.Material: 'roughness' is not a property of THREE.MeshBasicNodeMaterial."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.Material: 'roughness' is not a property of THREE.MeshBasicNodeMaterial."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"ember\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"ember\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"ember\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"position\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"position\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"position\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "warning",
+      "text": "Calling [RenderPassEncoder (unlabeled)].Draw with a vertex count of 0 is unusual."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    }
+  ],
+  "entryMs": 7385,
+  "perf": {
+    "fps": 1.6771957287247774,
+    "low": 0.7757350089245394,
+    "worst": 1289.0999999940395,
+    "hitches": 22,
+    "frames": 3
+  }
+}

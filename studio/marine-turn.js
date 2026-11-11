@@ -108,6 +108,7 @@ export function createMarineTurn({ THREE: T, marine }) {
   const center = new T.Vector3(), previous = new T.Vector3(), local = new T.Vector3(), hip = new T.Vector3();
   const direction = new T.Vector3(), pole = new T.Vector3(), knee = new T.Vector3(), a = new T.Vector3(), b = new T.Vector3();
   const worldQ = new T.Quaternion(), inverseQ = new T.Quaternion(), pivotQ = new T.Quaternion(), toPivotQ = new T.Quaternion(), yAxis = new T.Vector3(0, 1, 0);
+  const xAxis = new T.Vector3(1, 0, 0), pivotPt = new T.Vector3(), held = { p: new T.Vector3(), q: new T.Quaternion() };   // CC-343
   const surfaceUp = new T.Vector3(), surfaceForward = new T.Vector3(), surfaceRight = new T.Vector3(), surfaceBasis = new T.Matrix4();
   let clock = null, applied = false, count = 0, visualYaw = 0;
   const debug = { active: false, swing: -1, steps: 0, plantedError: 0, feet: [0, 0] };
@@ -117,7 +118,13 @@ export function createMarineTurn({ THREE: T, marine }) {
     for (const s of saved) { s.o.quaternion.copy(s.q); s.o.position.y = s.y; }
     applied = false;
   }
-  function apply(dt, { eligible, yaw, ground, aimLocked = false, crouch = 0 }) {
+  // CC-343: footing(x, z, yaw) -> { y, slope, roll } (optional): what is under a boot at (x, z) facing yaw (the decks and a
+  // stair's treads, not only the ground; its pitch along yaw and its tilt across), so a planted boot lies on it; ankleH:
+  // the ankle's height over the sole (the built boot's); flex: the ankle's range [min, max] (core/body-limits.js), so a
+  // crouched boot is pitched only as far as the ankle can (the heel up, the ball on the ground) and the clamp after the
+  // pose changes nothing (it used to hold the ankle at -50 deg and put the toe 20 mm into the ground); sole: [heel, toe],
+  // the sole's ends along the boot (ankle space z), the points it turns on there.
+  function apply(dt, { eligible, yaw, ground, footing = null, ankleH = .104, sole = null, flex = null, aimLocked = false, crouch = 0 }) {
     crouch = Math.max(0, Math.min(1, crouch));
     const lift = .065 - .03 * crouch;
     marine.getWorldPosition(center);
@@ -127,7 +134,7 @@ export function createMarineTurn({ THREE: T, marine }) {
     previous.copy(center);
     for (const s of saved) { s.q.copy(s.o.quaternion); s.y = s.o.position.y; }
     applied = true;
-    const sc = marine.getWorldScale(a).y, ankleHeight = .104 * sc;
+    const sc = marine.getWorldScale(a).y, ankleHeight = ankleH * sc;
     // CU-99: the point a boot turns on, on the ground under it: its heel when it leads the turn, its ball when it trails.
     const turnPoint = (f, i, dir, out) => {
       const z = (leadsTurn(i, dir) ? PIVOT.heel : PIVOT.ball) * sc;
@@ -142,19 +149,25 @@ export function createMarineTurn({ THREE: T, marine }) {
       const c = Math.cos(d), sn = Math.sin(d), dx = f.p.x - b.x, dz = f.p.z - b.z;
       f.p.x = b.x + dx * c + dz * sn; f.p.z = b.z - dx * sn + dz * c;
       f.q.premultiply(bootQ.setFromAxisAngle(yAxis, d));
-      if (crouch > .5) crouchSole(f.p, f.q, facing);
+      if (crouch > .5 || footing) crouchSole(f.p, f.q, crouch > .5 ? facing : bootYaw(f.q));
       else if (ground) f.p.y = ground(f.p.x, f.p.z) + ankleHeight;
     };
+    const bootYaw = (q) => { fwd.set(0, 0, 1).applyQuaternion(q); return Math.atan2(fwd.x, fwd.z); };
     const crouchSole = (p, q, facing) => {
       // Lay the whole sole against the ground plane, including when the new step faces across a slope.
       const d = .08;
-      surfaceUp.set(ground ? (ground(p.x-d,p.z)-ground(p.x+d,p.z))/(2*d) : 0, 1,
+      const F = footing ? footing(p.x, p.z, facing) : null;
+      if (F) {   // CC-343: the plane under the boot along its own line and across it (a tread is flat to its nosing)
+        const tf = Math.tan(F.slope || 0), tr = Math.tan(F.roll || 0), fx = Math.sin(facing), fz = Math.cos(facing);
+        surfaceUp.set(-tf * fx - tr * fz, 1, -tf * fz + tr * fx).normalize();
+      } else surfaceUp.set(ground ? (ground(p.x-d,p.z)-ground(p.x+d,p.z))/(2*d) : 0, 1,
         ground ? (ground(p.x,p.z-d)-ground(p.x,p.z+d))/(2*d) : 0).normalize();
       surfaceForward.set(Math.sin(facing),0,Math.cos(facing));
       surfaceForward.addScaledVector(surfaceUp,-surfaceForward.dot(surfaceUp)).normalize();
       surfaceRight.crossVectors(surfaceUp,surfaceForward).normalize();
       q.setFromRotationMatrix(surfaceBasis.makeBasis(surfaceRight,surfaceUp,surfaceForward));
-      if (ground) p.y = ground(p.x,p.z) + ankleHeight / surfaceUp.y;
+      if (F) { p.x += F.dx || 0; p.z += F.dz || 0; p.y = F.y + ankleHeight / surfaceUp.y; }   // stepped off an edge it only tipped onto
+      else if (ground) p.y = ground(p.x,p.z) + ankleHeight / surfaceUp.y;
     };
     if (!clock) {
       clock = createTurnSteps(yaw); visualYaw = yaw; count = 0;
@@ -170,6 +183,7 @@ export function createMarineTurn({ THREE: T, marine }) {
         f.angle = Math.atan2(f.p.x - center.x, f.p.z - center.z) - yaw;
         if (ground) f.p.y = ground(f.p.x, f.p.z) + ankleHeight;
         if (crouch > .5) crouchSole(f.p,f.q,yaw);
+        else if (footing) crouchSole(f.p, f.q, bootYaw(f.q));   // CC-343
         f.height = f.p.y - center.y;
       });
     }
@@ -190,6 +204,7 @@ export function createMarineTurn({ THREE: T, marine }) {
         f.to.y = ground ? ground(f.to.x, f.to.z) + ankleHeight : f.from.y;
         f.toQ.setFromAxisAngle(yAxis, s.to - s.from).multiply(f.q);
         if (crouch > .5) crouchSole(f.to,f.toQ,s.to);
+        else if (footing) crouchSole(f.to, f.toQ, bootYaw(f.toQ));   // CC-343
         turnPoint(f, s.swing, Math.sign(s.to - s.from) || 1, f.turnOn);
       }
     }
@@ -252,8 +267,9 @@ export function createMarineTurn({ THREE: T, marine }) {
     sink = Math.min(.08 * sc, sink);
     if (sink > 0) { marine.position.y -= sink / (marine.parent ? marine.parent.getWorldScale(a).y : 1); marine.updateWorldMatrix(true, true); }
     let worst = 0;
-    for (let i = 0; i < 2; i++) {
-      const leg = legs[i], kn = knees[i], ankle = ankles[i], f = feet[i];
+    for (let i = 0; i < 2; i++) for (let pass = 0; pass < (flex ? 3 : 1); pass++) {
+      const leg = legs[i], kn = knees[i], ankle = ankles[i], f0 = feet[i];
+      const f = pass ? held : f0;
       // Two-bone 3D IK preserves the support ankle in world space, including its sole orientation.
       leg.parent.worldToLocal(local.copy(f.p)).sub(leg.position);
       const l1 = kn.position.length(), l2 = ankle.position.length();
@@ -274,6 +290,17 @@ export function createMarineTurn({ THREE: T, marine }) {
       kn.getWorldQuaternion(worldQ); ankle.quaternion.copy(worldQ.invert()).multiply(f.q);
       ankle.getWorldPosition(hip);
       if (i !== s.swing) worst = Math.max(worst, hip.distanceTo(f.p));
+      if (!flex) continue;
+      // CC-343: the ankle's flex as core/body-limits.js reads it (Euler YXZ, about x); past its range the boot turns on its
+      // ball (toe down, heel up) or its heel by what is over, and the leg is solved again onto that.
+      const aq = ankle.quaternion, ex = Math.asin(Math.max(-1, Math.min(1, -2 * (aq.y * aq.z - aq.x * aq.w))));
+      const over = ex < flex[0] ? flex[0] - ex : ex > flex[1] ? flex[1] - ex : 0;
+      if (Math.abs(over) < 1e-3) break;
+      if (!pass) { held.p.copy(f0.p); held.q.copy(f0.q); }
+      const pz = (over > 0 ? (sole ? sole[1] : PIVOT.ball) : (sole ? sole[0] : PIVOT.heel)) * sc;   // the toe's tip (or the heel's) stays on the ground, ankle space (z)
+      pivotPt.set(0, -ankleHeight, pz).applyQuaternion(held.q).add(held.p);
+      held.q.multiply(bootQ.setFromAxisAngle(xAxis, over * 1.0005));
+      held.p.copy(pivotPt).sub(a.set(0, -ankleHeight, pz).applyQuaternion(held.q));
     }
     debug.feet[0] = s.feet[0]; debug.feet[1] = s.feet[1];
     Object.assign(debug, { active: true, swing: s.swing, steps: count, plantedError: worst,

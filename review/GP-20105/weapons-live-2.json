@@ -1,0 +1,517 @@
+{
+  "at": "2026-11-11T17:54:26.047Z",
+  "batch": 2,
+  "guns": [
+    {
+      "w": "launcher",
+      "prep": {
+        "w": "launcher",
+        "current": "launcher",
+        "mag": null,
+        "ammo": 6,
+        "fuel": 60,
+        "vmActive": false,
+        "vmShowing": false,
+        "vmRootVisible": false
+      },
+      "fired": {
+        "before": 6,
+        "after": 5,
+        "fuelBefore": 60,
+        "fuelAfter": 60,
+        "saw": {
+          "holdT": 0,
+          "hearT": 0,
+          "fuel": 60,
+          "heat": 0,
+          "overheat": false,
+          "biteT": 0
+        }
+      },
+      "first": {
+        "fp": {
+          "first": true,
+          "w": 1,
+          "ads": 0,
+          "headHidden": true,
+          "armHidden": false,
+          "eye": {
+            "x": -0.002392816729128746,
+            "y": -198.5811644069393,
+            "z": -650.1208505818789
+          },
+          "sight": {
+            "pos": {
+              "x": -0.26239058920833014,
+              "y": -198.49621322638458,
+              "z": -650.2163339970797
+            },
+            "fwd": {
+              "x": 8.876469004271126e-12,
+              "y": 8.434546949765118e-10,
+              "z": -1
+            }
+          }
+        },
+        "vmActive": true,
+        "vmGun": "launcher",
+        "vmShowing": false,
+        "vmRootVisible": true
+      },
+      "ads": {
+        "fp": {
+          "first": true,
+          "w": 1,
+          "ads": 1,
+          "headHidden": true,
+          "armHidden": false,
+          "eye": {
+            "x": -0.10757259034316137,
+            "y": -198.63776011394307,
+            "z": -650.1884530711761
+          },
+          "sight": {
+            "pos": {
+              "x": -0.22465401748269068,
+              "y": -198.70834585111996,
+              "z": -650.0817367997197
+            },
+            "fwd": {
+              "x": 1.1657341758564479e-15,
+              "y": 1.3260226250367095e-13,
+              "z": -1
+            }
+          }
+        },
+        "vm": true
+      },
+      "near": {
+        "player": [
+          6.449999988004565,
+          -200,
+          -643
+        ],
+        "fp": {
+          "first": true,
+          "w": 1,
+          "ads": 0,
+          "headHidden": true,
+          "armHidden": false,
+          "eye": {
+            "x": 6.454570836403706,
+            "y": -198.57673438530813,
+            "z": -643.1106607390042
+          },
+          "sight": {
+            "pos": {
+              "x": 6.188904440104329,
+              "y": -198.493153153516,
+              "z": -643.2155314133687
+            },
+            "fwd": {
+              "x": 0.03129081488802618,
+              "y": 0.0008396121327514294,
+              "z": -0.9995099699128117
+            }
+          }
+        },
+        "vm": true
+      }
+    },
+    {
+      "w": "flamer",
+      "prep": {
+        "w": "flamer",
+        "current": "flamer",
+        "mag": {
+          "size": 60,
+          "maxSpare": 5,
+          "loaded": [
+            60
+          ],
+          "spare": [
+            60,
+            60,
+            60,
+            60,
+            60
+          ]
+        },
+        "ammo": 60,
+        "fuel": 60,
+        "vmActive": false,
+        "vmShowing": false,
+        "vmRootVisible": false
+      },
+      "fired": {
+        "before": 60,
+        "after": 55,
+        "fuelBefore": 60,
+        "fuelAfter": 60,
+        "saw": {
+          "holdT": 0,
+          "hearT": 0,
+          "fuel": 60,
+          "heat": 0,
+          "overheat": false,
+          "biteT": 0
+        }
+      },
+      "first": {
+        "fp": {
+          "first": true,
+          "w": 1,
+          "ads": 0,
+          "headHidden": true,
+          "armHidden": false,
+          "eye": {
+            "x": 0.09863778587988671,
+            "y": -198.58021514142771,
+            "z": -649.9346961258439
+          },
+          "sight": {
+            "pos": {
+              "x": 0.12748828167370635,
+              "y": -198.46006326930393,
+              "z": -650.1470423093446
+            },
+            "fwd": {
+              "x": 0.852559812855836,
+              "y": -0.0041144732005074115,
+              "z": 0.5226134676924276
+            }
+          }
+        },
+        "vmActive": true,
+        "vmGun": "flamer",
+        "vmShowing": false,
+        "vmRootVisible": true
+      },
+      "ads": {
+        "fp": {
+          "first": true,
+          "w": 1,
+          "ads": 1,
+          "headHidden": true,
+          "armHidden": false,
+          "eye": {
+            "x": 0.0928938250837485,
+            "y": -198.57826523407832,
+            "z": -649.9377977871414
+          },
+          "sight": {
+            "pos": {
+              "x": 0.16322372034840818,
+              "y": -198.664311682121,
+              "z": -650.0245989156604
+            },
+            "fwd": {
+              "x": 0.8574508602453721,
+              "y": 0.019302102562593206,
+              "z": 0.5142037058415025
+            }
+          }
+        },
+        "vm": true
+      },
+      "near": {
+        "player": [
+          6.449999988004565,
+          -200,
+          -643
+        ],
+        "fp": {
+          "first": true,
+          "w": 1,
+          "ads": 0,
+          "headHidden": true,
+          "armHidden": false,
+          "eye": {
+            "x": 6.540248443955334,
+            "y": -198.57530825495502,
+            "z": -642.9419068082194
+          },
+          "sight": {
+            "pos": {
+              "x": 6.765618940093602,
+              "y": -198.4249051482944,
+              "z": -643.0735994740041
+            },
+            "fwd": {
+              "x": 0.5339545525221704,
+              "y": -0.7084609311668235,
+              "z": 0.46149284377017813
+            }
+          }
+        },
+        "vm": true
+      }
+    },
+    {
+      "w": "chainsaw",
+      "prep": {
+        "w": "chainsaw",
+        "current": "chainsaw",
+        "mag": null,
+        "ammo": null,
+        "fuel": 60,
+        "vmActive": false,
+        "vmShowing": false,
+        "vmRootVisible": false
+      },
+      "fired": {
+        "before": null,
+        "after": null,
+        "fuelBefore": 60,
+        "fuelAfter": 59.28000000000008,
+        "saw": {
+          "holdT": 0,
+          "hearT": 0,
+          "fuel": 59.28000000000008,
+          "heat": 0.017999999999999995,
+          "overheat": false,
+          "biteT": 0
+        }
+      },
+      "first": {
+        "fp": {
+          "first": true,
+          "w": 1,
+          "ads": 0,
+          "headHidden": true,
+          "armHidden": false,
+          "eye": {
+            "x": 0.10510616990271657,
+            "y": -198.57851590587546,
+            "z": -649.9501186307026
+          },
+          "sight": {
+            "pos": {
+              "x": 0.35796241278115415,
+              "y": -198.5614454599725,
+              "z": -649.896267852579
+            },
+            "fwd": {
+              "x": 0.8613333472188214,
+              "y": -0.07974522228289027,
+              "z": 0.5017425280877373
+            }
+          }
+        },
+        "vmActive": true,
+        "vmGun": "chainsaw",
+        "vmShowing": false,
+        "vmRootVisible": true
+      },
+      "ads": {
+        "fp": {
+          "first": true,
+          "w": 1,
+          "ads": 1,
+          "headHidden": true,
+          "armHidden": false,
+          "eye": {
+            "x": 0.09804156471741853,
+            "y": -198.5767749252849,
+            "z": -649.9506782107536
+          },
+          "sight": {
+            "pos": {
+              "x": 0.35583300237374693,
+              "y": -198.5593512982128,
+              "z": -649.8987324185093
+            },
+            "fwd": {
+              "x": 0.8613333472188215,
+              "y": -0.0797452222828898,
+              "z": 0.5017425280877372
+            }
+          }
+        },
+        "vm": true
+      },
+      "near": {
+        "player": [
+          6.449999988004565,
+          -200,
+          -643
+        ],
+        "fp": {
+          "first": true,
+          "w": 1,
+          "ads": 0,
+          "headHidden": true,
+          "armHidden": false,
+          "eye": {
+            "x": 6.550167193379632,
+            "y": -198.5775134070878,
+            "z": -642.9449367829261
+          },
+          "sight": {
+            "pos": {
+              "x": 6.805539364190233,
+              "y": -198.554835125134,
+              "z": -642.8941850915252
+            },
+            "fwd": {
+              "x": 0.8613333472188215,
+              "y": -0.0797452222828901,
+              "z": 0.5017425280877372
+            }
+          }
+        },
+        "vm": true
+      }
+    },
+    {
+      "w": "minigun",
+      "prep": {
+        "w": "minigun",
+        "current": "minigun",
+        "mag": {
+          "size": 300,
+          "maxSpare": 4,
+          "loaded": [
+            300
+          ],
+          "spare": [
+            300,
+            300,
+            300,
+            300
+          ]
+        },
+        "ammo": 300,
+        "fuel": 59.28000000000008,
+        "vmActive": false,
+        "vmShowing": false,
+        "vmRootVisible": false
+      },
+      "fired": {
+        "before": 300,
+        "after": 289,
+        "fuelBefore": 59.28000000000008,
+        "fuelAfter": 59.28000000000008,
+        "saw": {
+          "holdT": 0,
+          "hearT": 0,
+          "fuel": 59.28000000000008,
+          "heat": 0,
+          "overheat": false,
+          "biteT": 0
+        }
+      },
+      "first": {
+        "fp": {
+          "first": true,
+          "w": 1,
+          "ads": 0,
+          "headHidden": true,
+          "armHidden": false,
+          "eye": {
+            "x": 0.08731432511619132,
+            "y": -198.57839168185328,
+            "z": -649.9295178810773
+          },
+          "sight": {
+            "pos": {
+              "x": 0.45478811422384896,
+              "y": -198.3816033855286,
+              "z": -650.1046958290843
+            },
+            "fwd": {
+              "x": 0.8437227781807676,
+              "y": 0.0004159099528894737,
+              "z": 0.5367790053623914
+            }
+          }
+        },
+        "vmActive": true,
+        "vmGun": "minigun",
+        "vmShowing": false,
+        "vmRootVisible": true
+      },
+      "ads": {
+        "fp": {
+          "first": true,
+          "w": 1,
+          "ads": 1,
+          "headHidden": true,
+          "armHidden": false,
+          "eye": {
+            "x": 0.08845272560068258,
+            "y": -198.57827770929495,
+            "z": -649.9319992375968
+          },
+          "sight": {
+            "pos": {
+              "x": 0.46437601511036813,
+              "y": -198.43030449108207,
+              "z": -650.0296210738004
+            },
+            "fwd": {
+              "x": 0.8474907658771755,
+              "y": 0.0064642439354334275,
+              "z": 0.5307707747260219
+            }
+          }
+        },
+        "vm": true
+      },
+      "near": {
+        "player": [
+          6.449999988004565,
+          -200,
+          -643
+        ],
+        "fp": {
+          "first": true,
+          "w": 1,
+          "ads": 0,
+          "headHidden": true,
+          "armHidden": false,
+          "eye": {
+            "x": 6.549559842224965,
+            "y": -198.58021320205856,
+            "z": -642.9348404620046
+          },
+          "sight": {
+            "pos": {
+              "x": 7.018051065503916,
+              "y": -198.46011779201578,
+              "z": -643.0074537958733
+            },
+            "fwd": {
+              "x": 0.5455125890028769,
+              "y": -0.5909910867078166,
+              "z": 0.5942605074134508
+            }
+          }
+        },
+        "vm": true
+      }
+    }
+  ],
+  "errors": [],
+  "init": {
+    "position": [
+      0,
+      -200,
+      -650
+    ],
+    "order": [
+      "minigun",
+      "m4",
+      "ak",
+      "pistol",
+      "uzi",
+      "shotgun",
+      "aa12",
+      "revolver",
+      "sniper",
+      "launcher",
+      "flamer",
+      "chainsaw"
+    ]
+  }
+}

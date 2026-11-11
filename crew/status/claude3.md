@@ -1,29 +1,30 @@
 # Claude 3
 
-state: active
+state: idle
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: CC-343 CB-290's legs: foot IK on stairs/ramps/crates/slopes; + marine-turn.js planted feet (lent 16:17Z)
-touching: index.html (updateMarinePose legs; CROUCH/FOOT scratch), studio/marine-turn.js (apply entry, turnBoot, crouchSole ground lines), tools/tests/tcc343b.js (new), Claude outputs/CC-343b
-since: 2026-11-11T16:19Z
-next: —
+task: —
+touching: —
+since: 2026-11-11T18:07Z
+next: CC-343 (15:06Z: Jerry OK'd fresh sessions (15:03Z): back to Claude 
 blocked-on: —
-last-report: handoffs/2026-11-11-claude3-CC-342b.md
+last-report: handoffs/2026-11-11-claude3-CC-343b.md
 
 ## Notes
 
-### Where things stand (11 Nov 17:12Z, session 6, fresh from 15:14Z)
-- CC-343 = CB-290's legs half (checked in 15:15Z; marine-turn.js planted-feet lines lent 16:17Z by the Director). All work so
-  far in my cloud copy only (/home/claude/tt, patches /home/claude/w/patch343.py for index.html and patch343turn.py for
-  studio/marine-turn.js, both anchored, applied to the 15:18Z PC files; nothing on the PC yet). New test tools/tests/tcc343b.js
-  (cloud): 37 scenarios (flat/slope/build stairs/deck edge/wall/drum/sandbags x stand/crouch/walk/run/crouch-walk, rifle,
-  pistol, unarmed), stepped with T.flightHold + T.stepFrame(1/30), facing via T.setAimYawDbg; sole vs raycast tread meshes.
-  Before 10/37, latest 28/37+ (reds left: stairs walking/standing at 0.2, deck edge crouched, flat walk 8 mm, crouch-walk 12 mm).
-- Causes found: feet only on open terrain (stairs = collision ramp, treads up to 0.26 m above it); marine-turn's planted boots
-  (terrain-only ground, gait roll kept, crouched ankle past -50 clamped -> toe 20 mm in); CROUCH sole numbers stale; stale hips
-  world matrix; step glide treating a ramp as ledges (body a tread low up the stairs); 7.4 m/s walk stride too long for 45 deg.
-- Boundaries agreed: Claude 2 (IK, body-limits, clampBodyPose) DONE; ChatGPT (GP-20100 arms) DONE - tell ChatGPT if the hip
-  drop changes shoulder clearance. Next: finish reds, pictures (/home/claude/w/mkbatch.py: 5 scenes x 4 lights), tcb291/t184/
-  t187/t229/tcc341 regression in cloud, land on PC (re-check mtimes), handoff. Then tcc341's two cloth reds, then J128 kit.
+### Where things stand (11 Nov 18:12Z, end of session 6: context nearly full, needs a new session)
+- CC-343 (CB-290's legs) PART 1 LANDED 18:05Z, card open: handoffs/2026-11-11-claude3-CC-343b.md. index.html (legs + CROUCH/FOOT
+  scratch) and studio/marine-turn.js (lent) patched by Claude outputs/CC-343b/patch343.py + patch343turn.py (anchored; the
+  files before are beside them). New tools/tests/tcc343b.js: 29/37 (was 10/37). Regressions clean (tcb291 3/0, tcb289 5/0,
+  t184 28/1 better, t187/t229/tcc341 the same reds as before).
+- Left on CC-343: stairs walking DOWN 228 mm in; stairs 0.2 standing facing down 298 mm over (marine-turn footing);
+  crouch-walk up 45 mm; deck edge crouched 36 mm over/56 off flat; deck edge side-on 26 off flat; stairs 0.7 crouched
+  17 mm over; flat crouch-walk 8.6 mm; t184 slide 40%. PICTURES NOT TAKEN: the cloud camera (--match --soft) never finished
+  loading in 20 min; batch maker Claude outputs/CC-343b/mkbatch.py (target player, yaw 65, pitch 18, dist 2.7; overcast
+  = T.weather.raining). Try --training or ask Antigravity for the 5080 shots.
+- Test tips: tcc343b holds the game (T.flightHold) and steps T.stepFrame(1/30); face with T.setAimYawDbg (the mouse aim is
+  off with no pointer); marine.userData.feet = {on, lift, [L,R] offsets} from the feet pass. In fakethree the Euler does
+  not follow quaternion writes (read quaternions). Cloud: DW_CHECK_MS=1500000 (the test is ~450 s there).
+- Then: tcc341's two cloth reds, then the J128 kit card.
 
 ### This VM's quirks (session 3)
 - The PC mount refuses writing over some existing files (EINVAL on open with O_CREAT, sometimes on ftruncate): crew.mjs fails

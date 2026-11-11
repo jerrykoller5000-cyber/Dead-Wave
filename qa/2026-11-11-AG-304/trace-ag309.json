@@ -1,0 +1,1344 @@
+{
+  "card": "AG-304",
+  "tag": "ag309",
+  "capturedAt": "2026-11-11T17:44:30.946Z",
+  "pass1P": {
+    "mode": "1P",
+    "bootReadyMs": 19453,
+    "enterTrainingMs": 5953,
+    "pipesBeforeEnter": 223,
+    "postBlackout": {
+      "pipelinesAtLift": 332,
+      "pipelinesEnd": 361,
+      "newPipelines": 29,
+      "samples": 60,
+      "medianDtMs": 16.6,
+      "p99DtMs": 409.9,
+      "maxDtMs": 409.9,
+      "over25ms": [
+        50.1,
+        47.3,
+        30.7,
+        27.5,
+        307,
+        245.3,
+        281.6,
+        204.9,
+        33.3,
+        328.8,
+        173.5,
+        177.2,
+        212.4,
+        25.2,
+        383,
+        409.9
+      ],
+      "over35ms": [
+        50.1,
+        47.3,
+        307,
+        245.3,
+        281.6,
+        204.9,
+        328.8,
+        173.5,
+        177.2,
+        212.4,
+        383,
+        409.9
+      ],
+      "avgDraws": 273,
+      "avgTris": 161327,
+      "initialVmVisible": false
+    },
+    "entryWalk": {
+      "mode": "1P",
+      "light": "noon",
+      "route": "R1_entry_stations_console",
+      "frameCount": 326,
+      "medianDtMs": 16.7,
+      "p99DtMs": 22.7,
+      "maxDtMs": 174.2,
+      "avgDraws": 207,
+      "newPipelines": 2,
+      "hitchCountOver25ms": 2,
+      "hitchCountOver35ms": 1,
+      "hitches": [
+        {
+          "dtMs": 174.2,
+          "newPipes": 1,
+          "draws": 169,
+          "room": "entry",
+          "pos": [
+            1.75,
+            -200,
+            -650.59
+          ]
+        },
+        {
+          "dtMs": 26.4,
+          "newPipes": 0,
+          "draws": 244,
+          "room": "corridor_approach",
+          "pos": [
+            -5.2,
+            -200,
+            -646.64
+          ]
+        }
+      ]
+    },
+    "weaponDraws": [
+      {
+        "weapon": "minigun",
+        "mode": "1P",
+        "samples": 18,
+        "maxDtMs": 69.6,
+        "over25ms": [
+          34.8,
+          69.6
+        ],
+        "over35ms": [
+          69.6
+        ],
+        "newPipelines": 0,
+        "avgDraws": 230
+      },
+      {
+        "weapon": "m4",
+        "mode": "1P",
+        "samples": 23,
+        "maxDtMs": 27.5,
+        "over25ms": [
+          27.5
+        ],
+        "over35ms": [],
+        "newPipelines": 0,
+        "avgDraws": 233
+      },
+      {
+        "weapon": "ak",
+        "mode": "1P",
+        "samples": 21,
+        "maxDtMs": 61.6,
+        "over25ms": [
+          61.6,
+          25.5
+        ],
+        "over35ms": [
+          61.6
+        ],
+        "newPipelines": 0,
+        "avgDraws": 240
+      },
+      {
+        "weapon": "pistol",
+        "mode": "1P",
+        "samples": 22,
+        "maxDtMs": 25.4,
+        "over25ms": [
+          25.4
+        ],
+        "over35ms": [],
+        "newPipelines": 0,
+        "avgDraws": 233
+      },
+      {
+        "weapon": "uzi",
+        "mode": "1P",
+        "samples": 22,
+        "maxDtMs": 32,
+        "over25ms": [
+          32
+        ],
+        "over35ms": [],
+        "newPipelines": 0,
+        "avgDraws": 234
+      },
+      {
+        "weapon": "shotgun",
+        "mode": "1P",
+        "samples": 21,
+        "maxDtMs": 39.7,
+        "over25ms": [
+          32.5,
+          39.7,
+          27.7
+        ],
+        "over35ms": [
+          39.7
+        ],
+        "newPipelines": -1,
+        "avgDraws": 235
+      },
+      {
+        "weapon": "aa12",
+        "mode": "1P",
+        "samples": 23,
+        "maxDtMs": 17.7,
+        "over25ms": [],
+        "over35ms": [],
+        "newPipelines": 0,
+        "avgDraws": 246
+      },
+      {
+        "weapon": "revolver",
+        "mode": "1P",
+        "samples": 12,
+        "maxDtMs": 70.5,
+        "over25ms": [
+          30.8,
+          70.1,
+          70.5
+        ],
+        "over35ms": [
+          70.1,
+          70.5
+        ],
+        "newPipelines": 2,
+        "avgDraws": 236
+      },
+      {
+        "weapon": "sniper",
+        "mode": "1P",
+        "samples": 12,
+        "maxDtMs": 30,
+        "over25ms": [
+          30
+        ],
+        "over35ms": [],
+        "newPipelines": 0,
+        "avgDraws": 244
+      },
+      {
+        "weapon": "launcher",
+        "mode": "1P",
+        "samples": 7,
+        "maxDtMs": 134.2,
+        "over25ms": [
+          39,
+          134.2,
+          111.3
+        ],
+        "over35ms": [
+          39,
+          134.2,
+          111.3
+        ],
+        "newPipelines": 2,
+        "avgDraws": 242
+      },
+      {
+        "weapon": "flamer",
+        "mode": "1P",
+        "samples": 22,
+        "maxDtMs": 17.9,
+        "over25ms": [],
+        "over35ms": [],
+        "newPipelines": 0,
+        "avgDraws": 234
+      },
+      {
+        "weapon": "chainsaw",
+        "mode": "1P",
+        "samples": 11,
+        "maxDtMs": 130.6,
+        "over25ms": [
+          96.8,
+          130.6
+        ],
+        "over35ms": [
+          96.8,
+          130.6
+        ],
+        "newPipelines": -1,
+        "avgDraws": 233
+      }
+    ],
+    "cutawayWalks": null,
+    "shots": [],
+    "pageErrors": []
+  },
+  "pass3P": {
+    "mode": "3P",
+    "bootReadyMs": 19896,
+    "enterTrainingMs": 7198,
+    "pipesBeforeEnter": 225,
+    "postBlackout": {
+      "pipelinesAtLift": 334,
+      "pipelinesEnd": 363,
+      "newPipelines": 29,
+      "samples": 60,
+      "medianDtMs": 13.9,
+      "p99DtMs": 751,
+      "maxDtMs": 751,
+      "over25ms": [
+        47.3,
+        92.6,
+        304.5,
+        74.2,
+        239.2,
+        275.8,
+        219.4,
+        379.2,
+        202.6,
+        196.7,
+        248.7,
+        751,
+        417.1
+      ],
+      "over35ms": [
+        47.3,
+        92.6,
+        304.5,
+        74.2,
+        239.2,
+        275.8,
+        219.4,
+        379.2,
+        202.6,
+        196.7,
+        248.7,
+        751,
+        417.1
+      ],
+      "avgDraws": 273,
+      "avgTris": 161327,
+      "initialVmVisible": false
+    },
+    "entryWalk": {
+      "mode": "3P",
+      "light": "noon",
+      "route": "R1_entry_stations_console",
+      "frameCount": 320,
+      "medianDtMs": 16.7,
+      "p99DtMs": 32,
+      "maxDtMs": 44.9,
+      "avgDraws": 417,
+      "newPipelines": 1,
+      "hitchCountOver25ms": 12,
+      "hitchCountOver35ms": 3,
+      "hitches": [
+        {
+          "dtMs": 26.2,
+          "newPipes": 0,
+          "draws": 341,
+          "room": "entry",
+          "pos": [
+            1.45,
+            -200,
+            -650.62
+          ]
+        },
+        {
+          "dtMs": 44.9,
+          "newPipes": 0,
+          "draws": 369,
+          "room": "cif",
+          "pos": [
+            3.76,
+            -200,
+            -650.34
+          ]
+        },
+        {
+          "dtMs": 26.2,
+          "newPipes": 0,
+          "draws": 366,
+          "room": "cif",
+          "pos": [
+            3.95,
+            -200,
+            -650.32
+          ]
+        },
+        {
+          "dtMs": 32,
+          "newPipes": 0,
+          "draws": 354,
+          "room": "cif",
+          "pos": [
+            4.9,
+            -200,
+            -648.76
+          ]
+        },
+        {
+          "dtMs": 27.3,
+          "newPipes": 0,
+          "draws": 365,
+          "room": "kiosk",
+          "pos": [
+            4.9,
+            -200,
+            -647.9
+          ]
+        },
+        {
+          "dtMs": 27.6,
+          "newPipes": 0,
+          "draws": 368,
+          "room": "kiosk",
+          "pos": [
+            4.9,
+            -200,
+            -647.41
+          ]
+        },
+        {
+          "dtMs": 27.9,
+          "newPipes": 0,
+          "draws": 460,
+          "room": "kiosk",
+          "pos": [
+            4.9,
+            -200,
+            -646.23
+          ]
+        },
+        {
+          "dtMs": 26.5,
+          "newPipes": 0,
+          "draws": 461,
+          "room": "kiosk",
+          "pos": [
+            4.9,
+            -200,
+            -646.04
+          ]
+        },
+        {
+          "dtMs": 27.8,
+          "newPipes": 0,
+          "draws": 460,
+          "room": "kiosk",
+          "pos": [
+            4.9,
+            -200,
+            -645.75
+          ]
+        },
+        {
+          "dtMs": 31.7,
+          "newPipes": 0,
+          "draws": 456,
+          "room": "kiosk",
+          "pos": [
+            4.9,
+            -200,
+            -645.25
+          ]
+        },
+        {
+          "dtMs": 37.1,
+          "newPipes": 0,
+          "draws": 451,
+          "room": "armory",
+          "pos": [
+            4.9,
+            -200,
+            -644.7
+          ]
+        },
+        {
+          "dtMs": 42.4,
+          "newPipes": 0,
+          "draws": 450,
+          "room": "armory",
+          "pos": [
+            4.9,
+            -200,
+            -644.12
+          ]
+        }
+      ]
+    },
+    "weaponDraws": [
+      {
+        "weapon": "minigun",
+        "mode": "3P",
+        "samples": 23,
+        "maxDtMs": 23.2,
+        "over25ms": [],
+        "over35ms": [],
+        "newPipelines": -2,
+        "avgDraws": 437
+      },
+      {
+        "weapon": "m4",
+        "mode": "3P",
+        "samples": 21,
+        "maxDtMs": 25.3,
+        "over25ms": [
+          25.3
+        ],
+        "over35ms": [],
+        "newPipelines": 0,
+        "avgDraws": 431
+      },
+      {
+        "weapon": "ak",
+        "mode": "3P",
+        "samples": 23,
+        "maxDtMs": 24,
+        "over25ms": [],
+        "over35ms": [],
+        "newPipelines": 0,
+        "avgDraws": 431
+      },
+      {
+        "weapon": "pistol",
+        "mode": "3P",
+        "samples": 22,
+        "maxDtMs": 28.1,
+        "over25ms": [
+          28.1
+        ],
+        "over35ms": [],
+        "newPipelines": 0,
+        "avgDraws": 431
+      },
+      {
+        "weapon": "uzi",
+        "mode": "3P",
+        "samples": 23,
+        "maxDtMs": 32.5,
+        "over25ms": [
+          32.5
+        ],
+        "over35ms": [],
+        "newPipelines": 0,
+        "avgDraws": 431
+      },
+      {
+        "weapon": "shotgun",
+        "mode": "3P",
+        "samples": 19,
+        "maxDtMs": 52.6,
+        "over25ms": [
+          25.1,
+          52.6
+        ],
+        "over35ms": [
+          52.6
+        ],
+        "newPipelines": -1,
+        "avgDraws": 433
+      },
+      {
+        "weapon": "aa12",
+        "mode": "3P",
+        "samples": 21,
+        "maxDtMs": 24.1,
+        "over25ms": [],
+        "over35ms": [],
+        "newPipelines": 0,
+        "avgDraws": 450
+      },
+      {
+        "weapon": "revolver",
+        "mode": "3P",
+        "samples": 16,
+        "maxDtMs": 86.3,
+        "over25ms": [
+          30.6,
+          86.3,
+          27
+        ],
+        "over35ms": [
+          86.3
+        ],
+        "newPipelines": 0,
+        "avgDraws": 428
+      },
+      {
+        "weapon": "sniper",
+        "mode": "3P",
+        "samples": 21,
+        "maxDtMs": 74.4,
+        "over25ms": [
+          29.4,
+          74.4
+        ],
+        "over35ms": [
+          74.4
+        ],
+        "newPipelines": 1,
+        "avgDraws": 429
+      },
+      {
+        "weapon": "launcher",
+        "mode": "3P",
+        "samples": 11,
+        "maxDtMs": 123.1,
+        "over25ms": [
+          101.9,
+          123.1,
+          36.3
+        ],
+        "over35ms": [
+          101.9,
+          123.1,
+          36.3
+        ],
+        "newPipelines": 1,
+        "avgDraws": 447
+      },
+      {
+        "weapon": "flamer",
+        "mode": "3P",
+        "samples": 22,
+        "maxDtMs": 24.6,
+        "over25ms": [],
+        "over35ms": [],
+        "newPipelines": 0,
+        "avgDraws": 436
+      },
+      {
+        "weapon": "chainsaw",
+        "mode": "3P",
+        "samples": 9,
+        "maxDtMs": 149.9,
+        "over25ms": [
+          104.6,
+          149.9
+        ],
+        "over35ms": [
+          104.6,
+          149.9
+        ],
+        "newPipelines": -2,
+        "avgDraws": 437
+      }
+    ],
+    "cutawayWalks": [
+      {
+        "mode": "3P",
+        "light": "noon",
+        "route": "R2_corridor_build_hangar",
+        "frameCount": 590,
+        "medianDtMs": 16.6,
+        "p99DtMs": 51.1,
+        "maxDtMs": 854.6,
+        "avgDraws": 377,
+        "newPipelines": 11,
+        "hitchCountOver25ms": 29,
+        "hitchCountOver35ms": 11,
+        "hitches": [
+          {
+            "dtMs": 71.6,
+            "newPipes": 0,
+            "draws": 357,
+            "room": "corridor_west",
+            "pos": [
+              -8.71,
+              -200,
+              -648
+            ]
+          },
+          {
+            "dtMs": 26.7,
+            "newPipes": 0,
+            "draws": 357,
+            "room": "corridor_west",
+            "pos": [
+              -8.88,
+              -200,
+              -648
+            ]
+          },
+          {
+            "dtMs": 46.4,
+            "newPipes": 0,
+            "draws": 385,
+            "room": "corridor_west",
+            "pos": [
+              -9.19,
+              -200,
+              -648
+            ]
+          },
+          {
+            "dtMs": 72.6,
+            "newPipes": 0,
+            "draws": 388,
+            "room": "corridor_west",
+            "pos": [
+              -9.99,
+              -200,
+              -648
+            ]
+          },
+          {
+            "dtMs": 47.4,
+            "newPipes": 0,
+            "draws": 388,
+            "room": "corridor_west",
+            "pos": [
+              -10.89,
+              -200,
+              -648
+            ]
+          },
+          {
+            "dtMs": 26,
+            "newPipes": 0,
+            "draws": 383,
+            "room": "corridor_west",
+            "pos": [
+              -12.11,
+              -200,
+              -648.11
+            ]
+          },
+          {
+            "dtMs": 27.5,
+            "newPipes": 0,
+            "draws": 381,
+            "room": "corridor_west",
+            "pos": [
+              -12.75,
+              -200,
+              -648.23
+            ]
+          },
+          {
+            "dtMs": 51.1,
+            "newPipes": 0,
+            "draws": 371,
+            "room": "corridor_west",
+            "pos": [
+              -13.85,
+              -200,
+              -648.43
+            ]
+          },
+          {
+            "dtMs": 29.2,
+            "newPipes": 0,
+            "draws": 322,
+            "room": "corridor_west",
+            "pos": [
+              -14.67,
+              -200,
+              -648.59
+            ]
+          },
+          {
+            "dtMs": 31.1,
+            "newPipes": 0,
+            "draws": 289,
+            "room": "infirmary_approach",
+            "pos": [
+              -15.42,
+              -200,
+              -648.72
+            ]
+          },
+          {
+            "dtMs": 28.2,
+            "newPipes": 0,
+            "draws": 268,
+            "room": "infirmary_approach",
+            "pos": [
+              -15.87,
+              -200,
+              -648.81
+            ]
+          },
+          {
+            "dtMs": 423.4,
+            "newPipes": 9,
+            "draws": 240,
+            "room": "infirmary_approach",
+            "pos": [
+              -17.89,
+              -200,
+              -649.18
+            ]
+          },
+          {
+            "dtMs": 854.6,
+            "newPipes": 0,
+            "draws": 234,
+            "room": "infirmary_approach",
+            "pos": [
+              -18,
+              -200,
+              -649.2
+            ]
+          },
+          {
+            "dtMs": 44.1,
+            "newPipes": 0,
+            "draws": 242,
+            "room": "infirmary_approach",
+            "pos": [
+              -18.65,
+              -200,
+              -649.01
+            ]
+          },
+          {
+            "dtMs": 113.8,
+            "newPipes": 1,
+            "draws": 256,
+            "room": "infirmary_approach",
+            "pos": [
+              -19.05,
+              -200,
+              -648.9
+            ]
+          },
+          {
+            "dtMs": 35.3,
+            "newPipes": 0,
+            "draws": 268,
+            "room": "infirmary_approach",
+            "pos": [
+              -19.36,
+              -200,
+              -648.81
+            ]
+          },
+          {
+            "dtMs": 29.2,
+            "newPipes": 0,
+            "draws": 362,
+            "room": "infirmary_approach",
+            "pos": [
+              -24.71,
+              -200,
+              -647.26
+            ]
+          },
+          {
+            "dtMs": 27.6,
+            "newPipes": 0,
+            "draws": 365,
+            "room": "infirmary_approach",
+            "pos": [
+              -26.27,
+              -200,
+              -646.82
+            ]
+          },
+          {
+            "dtMs": 32.9,
+            "newPipes": 0,
+            "draws": 408,
+            "room": "skull_window",
+            "pos": [
+              -39.5,
+              -200,
+              -641.28
+            ]
+          },
+          {
+            "dtMs": 30.9,
+            "newPipes": 0,
+            "draws": 400,
+            "room": "hq_panel",
+            "pos": [
+              -39.5,
+              -200,
+              -639.44
+            ]
+          },
+          {
+            "dtMs": 37.7,
+            "newPipes": 0,
+            "draws": 393,
+            "room": "hq_panel",
+            "pos": [
+              -35.73,
+              -200,
+              -635.04
+            ]
+          },
+          {
+            "dtMs": 35,
+            "newPipes": 0,
+            "draws": 392,
+            "room": "hq_panel",
+            "pos": [
+              -33.43,
+              -200,
+              -633.85
+            ]
+          },
+          {
+            "dtMs": 31.4,
+            "newPipes": 0,
+            "draws": 389,
+            "room": "build_killfloor",
+            "pos": [
+              -29.89,
+              -200,
+              -632.02
+            ]
+          },
+          {
+            "dtMs": 26.3,
+            "newPipes": 0,
+            "draws": 389,
+            "room": "build_killfloor",
+            "pos": [
+              -26,
+              -200,
+              -629.18
+            ]
+          },
+          {
+            "dtMs": 33.5,
+            "newPipes": 0,
+            "draws": 388,
+            "room": "build_killfloor",
+            "pos": [
+              -26,
+              -200,
+              -628.26
+            ]
+          },
+          {
+            "dtMs": 32.6,
+            "newPipes": 0,
+            "draws": 388,
+            "room": "build_killfloor",
+            "pos": [
+              -26,
+              -200,
+              -627.28
+            ]
+          },
+          {
+            "dtMs": 29.8,
+            "newPipes": 0,
+            "draws": 388,
+            "room": "build_killfloor",
+            "pos": [
+              -26,
+              -200,
+              -626.34
+            ]
+          },
+          {
+            "dtMs": 32.1,
+            "newPipes": 0,
+            "draws": 379,
+            "room": "zombie_gate_hazard",
+            "pos": [
+              -26,
+              -200,
+              -622.74
+            ]
+          },
+          {
+            "dtMs": 30.5,
+            "newPipes": 0,
+            "draws": 373,
+            "room": "zombie_gate_hazard",
+            "pos": [
+              -26,
+              -200,
+              -620.59
+            ]
+          }
+        ]
+      },
+      {
+        "mode": "3P",
+        "light": "overcast",
+        "route": "R2_corridor_build_hangar",
+        "frameCount": 605,
+        "medianDtMs": 16.7,
+        "p99DtMs": 25.5,
+        "maxDtMs": 64.8,
+        "avgDraws": 374,
+        "newPipelines": 0,
+        "hitchCountOver25ms": 7,
+        "hitchCountOver35ms": 4,
+        "hitches": [
+          {
+            "dtMs": 47.9,
+            "newPipes": 0,
+            "draws": 397,
+            "room": "skull_window",
+            "pos": [
+              -36.72,
+              -200,
+              -643.8
+            ]
+          },
+          {
+            "dtMs": 38.6,
+            "newPipes": 0,
+            "draws": 395,
+            "room": "hq_panel",
+            "pos": [
+              -39.5,
+              -200,
+              -639.35
+            ]
+          },
+          {
+            "dtMs": 43.9,
+            "newPipes": 0,
+            "draws": 388,
+            "room": "build_killfloor",
+            "pos": [
+              -28.19,
+              -200,
+              -631.14
+            ]
+          },
+          {
+            "dtMs": 27.2,
+            "newPipes": 0,
+            "draws": 390,
+            "room": "build_killfloor",
+            "pos": [
+              -27.72,
+              -200,
+              -630.89
+            ]
+          },
+          {
+            "dtMs": 64.8,
+            "newPipes": 0,
+            "draws": 386,
+            "room": "build_killfloor",
+            "pos": [
+              -26,
+              -200,
+              -629.01
+            ]
+          },
+          {
+            "dtMs": 25.5,
+            "newPipes": 0,
+            "draws": 381,
+            "room": "build_killfloor",
+            "pos": [
+              -26,
+              -200,
+              -625.26
+            ]
+          },
+          {
+            "dtMs": 27.1,
+            "newPipes": 0,
+            "draws": 380,
+            "room": "zombie_gate_hazard",
+            "pos": [
+              -26,
+              -200,
+              -624.97
+            ]
+          }
+        ]
+      },
+      {
+        "mode": "3P",
+        "light": "dusk",
+        "route": "R2_corridor_build_hangar",
+        "frameCount": 608,
+        "medianDtMs": 16.6,
+        "p99DtMs": 19.1,
+        "maxDtMs": 43.8,
+        "avgDraws": 379,
+        "newPipelines": 1,
+        "hitchCountOver25ms": 4,
+        "hitchCountOver35ms": 2,
+        "hitches": [
+          {
+            "dtMs": 35.6,
+            "newPipes": 0,
+            "draws": 310,
+            "room": "infirmary_approach",
+            "pos": [
+              -15.24,
+              -200,
+              -648.69
+            ]
+          },
+          {
+            "dtMs": 26.6,
+            "newPipes": 0,
+            "draws": 414,
+            "room": "hq_panel",
+            "pos": [
+              -39.5,
+              -200,
+              -639.67
+            ]
+          },
+          {
+            "dtMs": 43.8,
+            "newPipes": 0,
+            "draws": 415,
+            "room": "hq_panel",
+            "pos": [
+              -39.5,
+              -200,
+              -639.08
+            ]
+          },
+          {
+            "dtMs": 26.6,
+            "newPipes": 0,
+            "draws": 400,
+            "room": "hq_panel",
+            "pos": [
+              -36.27,
+              -200,
+              -635.33
+            ]
+          }
+        ]
+      },
+      {
+        "mode": "3P",
+        "light": "night",
+        "route": "R2_corridor_build_hangar",
+        "frameCount": 601,
+        "medianDtMs": 16.7,
+        "p99DtMs": 29.8,
+        "maxDtMs": 87.6,
+        "avgDraws": 375,
+        "newPipelines": 1,
+        "hitchCountOver25ms": 8,
+        "hitchCountOver35ms": 4,
+        "hitches": [
+          {
+            "dtMs": 87.6,
+            "newPipes": 1,
+            "draws": 246,
+            "room": "infirmary_approach",
+            "pos": [
+              -17.89,
+              -200,
+              -649.18
+            ]
+          },
+          {
+            "dtMs": 30,
+            "newPipes": 0,
+            "draws": 391,
+            "room": "skull_window",
+            "pos": [
+              -32.33,
+              -200,
+              -645.07
+            ]
+          },
+          {
+            "dtMs": 50.4,
+            "newPipes": 0,
+            "draws": 395,
+            "room": "skull_window",
+            "pos": [
+              -34.03,
+              -200,
+              -644.58
+            ]
+          },
+          {
+            "dtMs": 45.2,
+            "newPipes": 0,
+            "draws": 396,
+            "room": "skull_window",
+            "pos": [
+              -34.45,
+              -200,
+              -644.46
+            ]
+          },
+          {
+            "dtMs": 29.8,
+            "newPipes": 0,
+            "draws": 398,
+            "room": "skull_window",
+            "pos": [
+              -35.03,
+              -200,
+              -644.29
+            ]
+          },
+          {
+            "dtMs": 39.7,
+            "newPipes": 0,
+            "draws": 399,
+            "room": "skull_window",
+            "pos": [
+              -35.97,
+              -200,
+              -644.02
+            ]
+          },
+          {
+            "dtMs": 29.8,
+            "newPipes": 0,
+            "draws": 398,
+            "room": "skull_window",
+            "pos": [
+              -36.73,
+              -200,
+              -643.8
+            ]
+          },
+          {
+            "dtMs": 32.3,
+            "newPipes": 0,
+            "draws": 403,
+            "room": "skull_window",
+            "pos": [
+              -39.33,
+              -200,
+              -643.05
+            ]
+          }
+        ]
+      }
+    ],
+    "shots": [],
+    "pageErrors": []
+  },
+  "breakdown": {
+    "wallMs": 8207,
+    "clickSyncMs": 1241.4,
+    "events": [
+      {
+        "kind": "renderWhileBlackout",
+        "startAtMs": 1419.9,
+        "ms": 13.9
+      },
+      {
+        "kind": "compileAsync",
+        "startAtMs": 1366.9,
+        "syncCpuMs": 5703.3,
+        "totalMs": 5974.6,
+        "visMeshes": 235
+      },
+      {
+        "kind": "renderWhileBlackout",
+        "startAtMs": 7345.1,
+        "ms": 0.3
+      },
+      {
+        "kind": "renderWhileBlackout",
+        "startAtMs": 7343.5,
+        "ms": 175.6
+      },
+      {
+        "kind": "renderWhileBlackout",
+        "startAtMs": 7519.4,
+        "ms": 0.2
+      },
+      {
+        "kind": "renderWhileBlackout",
+        "startAtMs": 7519.6,
+        "ms": 0.1
+      },
+      {
+        "kind": "renderWhileBlackout",
+        "startAtMs": 7519.7,
+        "ms": 0
+      },
+      {
+        "kind": "renderWhileBlackout",
+        "startAtMs": 7519.7,
+        "ms": 0.2
+      },
+      {
+        "kind": "renderWhileBlackout",
+        "startAtMs": 7519.9,
+        "ms": 0.3
+      },
+      {
+        "kind": "renderWhileBlackout",
+        "startAtMs": 7520.2,
+        "ms": 0.1
+      },
+      {
+        "kind": "renderWhileBlackout",
+        "startAtMs": 7520.3,
+        "ms": 0.1
+      },
+      {
+        "kind": "renderWhileBlackout",
+        "startAtMs": 7520.4,
+        "ms": 0.1
+      },
+      {
+        "kind": "renderWhileBlackout",
+        "startAtMs": 7520.5,
+        "ms": 0.1
+      },
+      {
+        "kind": "renderWhileBlackout",
+        "startAtMs": 7520.6,
+        "ms": 0
+      },
+      {
+        "kind": "renderWhileBlackout",
+        "startAtMs": 7520.6,
+        "ms": 0.1
+      },
+      {
+        "kind": "renderWhileBlackout",
+        "startAtMs": 7520.7,
+        "ms": 0.1
+      },
+      {
+        "kind": "renderWhileBlackout",
+        "startAtMs": 7343.2,
+        "ms": 177.6
+      }
+    ]
+  },
+  "syncEnterCheck": {
+    "hadWarmPromise": true,
+    "hadBgWarmPromise": true,
+    "warmingAfter": false,
+    "bgWarmingAfter": false,
+    "immediate": {
+      "m4": 31,
+      "ak": 18,
+      "aa12": 22,
+      "revolver": 19,
+      "launcher": 20
+    },
+    "afterWarm": {
+      "m4": 31,
+      "ak": 19,
+      "aa12": 23,
+      "revolver": 19,
+      "launcher": 20
+    },
+    "afterBgWarm": {
+      "m4": 31,
+      "ak": 19,
+      "aa12": 23,
+      "revolver": 19,
+      "launcher": 20
+    }
+  },
+  "inspectCheck": {
+    "subjects": {
+      "weapon.pistol": {
+        "bytes": 77019,
+        "nonBlackRatio": 1,
+        "meanLuma": 66.87
+      },
+      "weapon.aa12": {
+        "bytes": 77787,
+        "nonBlackRatio": 0.9997,
+        "meanLuma": 67.58
+      }
+    },
+    "inspectErrors": [],
+    "pageErrors": [],
+    "gpuSyncWarnings": []
+  }
+}

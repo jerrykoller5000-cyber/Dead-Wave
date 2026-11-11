@@ -1,0 +1,34 @@
+{
+  "off": 17,
+  "on": 23,
+  "moduleDraws": 6,
+  "meshes": [
+    {
+      "name": "railClamp",
+      "material": "gunPaint:uzi"
+    },
+    {
+      "name": "moduleShell",
+      "material": "gunPaint:uzi"
+    },
+    {
+      "name": "",
+      "material": "MeshStandardMaterial"
+    },
+    {
+      "name": "",
+      "material": "gunPaint:uzi"
+    },
+    {
+      "name": "",
+      "material": "gunPaint:uzi"
+    },
+    {
+      "name": "",
+      "material": "fold-static"
+    }
+  ],
+  "empty": 1,
+  "span": 0.5524121740774158,
+  "backend": "WebGPUBackend"
+}

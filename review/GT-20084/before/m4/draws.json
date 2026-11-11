@@ -1,0 +1,26 @@
+{
+  "off": 27,
+  "on": 31,
+  "moduleDraws": 4,
+  "meshes": [
+    {
+      "name": "moduleShell",
+      "material": "gunPaint:m4"
+    },
+    {
+      "name": "topPlate",
+      "material": "gunPaint:m4"
+    },
+    {
+      "name": "",
+      "material": "MeshStandardMaterial"
+    },
+    {
+      "name": "",
+      "material": "fold-static"
+    }
+  ],
+  "empty": 1,
+  "span": 1.1267450668714947,
+  "backend": "WebGPUBackend"
+}

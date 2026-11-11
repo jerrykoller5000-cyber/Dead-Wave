@@ -1,0 +1,1055 @@
+{
+  "at": "2026-11-11T17:36:22.435Z",
+  "sections": {
+    "kiosk": {
+      "action": "kiosk",
+      "open": true,
+      "tabs": [],
+      "text": "\n      \n        Supply Terminal Cash $∞\n        SuppliesBuilds\n        \n        Pick up MedPens and field intel. Night 1: each Shambler is worth 1 skull value before bonuses. Bank skulls at the HQ window: 1 skull value = 1 Cash.\n        Field IntelSee every enemy type, count and approach at the HQ panel.Buy — 120 Cash+MedPen0 / 3 carriedAuto-injector. H to jab one: heals 60% of max health. Natural regen only ever climbs back to 40%.$35\n        Ba"
+    },
+    "armoryBefore": {
+      "action": "armory",
+      "open": true,
+      "bank": 999999,
+      "weaponOrder": [
+        "minigun",
+        "m4",
+        "ak",
+        "pistol",
+        "uzi",
+        "shotgun",
+        "aa12",
+        "revolver",
+        "sniper",
+        "launcher",
+        "flamer",
+        "chainsaw"
+      ],
+      "offers": [
+        "uzi",
+        "shotgun",
+        "revolver",
+        "m4",
+        "chainsaw",
+        "ak",
+        "sniper",
+        "flamer",
+        "launcher",
+        "aa12",
+        "minigun"
+      ],
+      "text": "HQ · Weapons lockerArmoryChoose a gun from the shelves. Its workbench buys ammo and buys, fits or removes each attachment.Carried gunsPrimary 1Empty slotPrimary 2Empty slotSecondary 1Empty slotSecondary 2Empty slotHip holster · PistolStored gunsNo guns storedGuns to buyWasp SMG$75 CashBuyShotgun$110 CashBuyRevolver$145 CashBuyGW-4 Carbine$180 CashBuyChainsaw$190 CashBuyKR-7 Rifle$245 CashBuySniper$320 CashBuyFlamethrower$340 CashBuyLauncher$480 CashBuyBreacher-12$650 CashBuyRotary Gun$850 CashBuyEmplacements · Watchman MG and mortarWatchman MG$260 CashBuyMortar$120 CashBuyWorkbenchPick a gun to see its attachments and finishes.\n      \n        Resupply Cash $∞\n        \n        \n        Restoc"
+    },
+    "guns": [
+      {
+        "gun": "minigun",
+        "offer": true,
+        "disabled": false,
+        "owned": true,
+        "bank": 1999149
+      },
+      {
+        "gun": "m4",
+        "offer": true,
+        "disabled": false,
+        "owned": true,
+        "bank": 1998969
+      },
+      {
+        "gun": "ak",
+        "offer": true,
+        "disabled": false,
+        "owned": true,
+        "bank": 1998724
+      },
+      {
+        "gun": "pistol",
+        "offer": false,
+        "owned": true,
+        "bank": 1998724
+      },
+      {
+        "gun": "uzi",
+        "offer": true,
+        "disabled": false,
+        "owned": true,
+        "bank": 1998649
+      },
+      {
+        "gun": "shotgun",
+        "offer": true,
+        "disabled": false,
+        "owned": true,
+        "bank": 1998539
+      },
+      {
+        "gun": "aa12",
+        "offer": true,
+        "disabled": false,
+        "owned": true,
+        "bank": 1997889
+      },
+      {
+        "gun": "revolver",
+        "offer": true,
+        "disabled": false,
+        "owned": true,
+        "bank": 1997744
+      },
+      {
+        "gun": "sniper",
+        "offer": true,
+        "disabled": false,
+        "owned": true,
+        "bank": 1997424
+      },
+      {
+        "gun": "launcher",
+        "offer": true,
+        "disabled": false,
+        "owned": true,
+        "bank": 1996944
+      },
+      {
+        "gun": "flamer",
+        "offer": true,
+        "disabled": false,
+        "owned": true,
+        "bank": 1996604
+      },
+      {
+        "gun": "chainsaw",
+        "offer": true,
+        "disabled": false,
+        "owned": true,
+        "bank": 1996414
+      }
+    ],
+    "mods": [
+      {
+        "gun": "minigun",
+        "id": "ext",
+        "hadRow": true,
+        "disabled": false,
+        "beforeOwned": false,
+        "owned": true,
+        "fitted": true
+      },
+      {
+        "gun": "minigun",
+        "id": "heavy",
+        "hadRow": true,
+        "disabled": false,
+        "beforeOwned": false,
+        "owned": true,
+        "fitted": true
+      },
+      {
+        "gun": "minigun",
+        "id": "optic:rmr",
+        "hadRow": true,
+        "disabled": false,
+        "beforeOwned": false,
+        "owned": true,
+        "fitted": true
+      },
+      {
+        "gun": "minigun",
+        "id": "laserLight",
+        "hadRow": true,
+        "disabled": false,
+        "beforeOwned": false,
+        "owned": true,
+        "fitted": true
+      },
+      {
+        "gun": "m4",
+        "id": "ext",
+        "hadRow": true,
+        "disabled": false,
+        "beforeOwned": false,
+        "owned": true,
+        "fitted": true
+      },
+      {
+        "gun": "m4",
+        "id": "heavy",
+        "hadRow": true,
+        "disabled": false,
+        "beforeOwned": false,
+        "owned": true,
+        "fitted": true
+      },
+      {
+        "gun": "m4",
+        "id": "suppressor",
+        "hadRow": true,
+        "disabled": false,
+        "beforeOwned": false,
+        "owned": true,
+        "fitted": true
+      },
+      {
+        "gun": "m4",
+        "id": "optic:acog",
+        "hadRow": true,
+        "disabled": false,
+        "beforeOwned": false,
+        "owned": true,
+        "fitted": true
+      },
+      {
+        "gun": "m4",
+        "id": "optic:prism",
+        "hadRow": true,
+        "disabled": false,
+        "beforeOwned": false,
+        "owned": true,
+        "fitted": true
+      },
+      {
+        "gun": "m4",
+        "id": "optic:rmr",
+        "hadRow": true,
+        "disabled": false,
+        "beforeOwned": false,
+        "owned": true,
+        "fitted": true
+      },
+      {
+        "gun": "m4",
+        "id": "laserLight",
+        "hadRow": true,
+        "disabled": false,
+        "beforeOwned": true,
+        "owned": true,
+        "fitted": false
+      },
+      {
+        "gun": "ak",
+        "id": "ext",
+        "hadRow": true,
+        "disabled": false,
+        "beforeOwned": false,
+        "owned": true,
+        "fitted": true
+      },
+      {
+        "gun": "ak",
+        "id": "heavy",
+        "hadRow": true,
+        "disabled": false,
+        "beforeOwned": false,
+        "owned": true,
+        "fitted": true
+      },
+      {
+        "gun": "ak",
+        "id": "suppressor",
+        "hadRow": true,
+        "disabled": false,
+        "beforeOwned": false,
+        "owned": true,
+        "fitted": true
+      },
+      {
+        "gun": "ak",
+        "id": "optic:acog",
+        "hadRow": true,
+        "disabled": false,
+        "beforeOwned": false,
+        "owned": true,
+        "fitted": true
+      },
+      {
+        "gun": "ak",
+        "id": "optic:prism",
+        "hadRow": true,
+        "disabled": false,
+        "beforeOwned": false,
+        "owned": true,
+        "fitted": true
+      },
+      {
+        "gun": "ak",
+        "id": "optic:rmr",
+        "hadRow": true,
+        "disabled": false,
+        "beforeOwned": false,
+        "owned": true,
+        "fitted": true
+      },
+      {
+        "gun": "ak",
+        "id": "laserLight",
+        "hadRow": true,
+        "disabled": false,
+        "beforeOwned": true,
+        "owned": true,
+        "fitted": false
+      },
+      {
+        "gun": "pistol",
+        "id": "ext",
+        "hadRow": true,
+        "disabled": false,
+        "beforeOwned": false,
+        "owned": true,
+        "fitted": true
+      },
+      {
+        "gun": "pistol",
+        "id": "suppressor",
+        "hadRow": true,
+        "disabled": false,
+        "beforeOwned": false,
+        "owned": true,
+        "fitted": true
+      },
+      {
+        "gun": "pistol",
+        "id": "optic:rmr",
+        "hadRow": true,
+        "disabled": false,
+        "beforeOwned": false,
+        "owned": true,
+        "fitted": true
+      },
+      {
+        "gun": "pistol",
+        "id": "laserLight",
+        "hadRow": true,
+        "disabled": false,
+        "beforeOwned": true,
+        "owned": true,
+        "fitted": false
+      },
+      {
+        "gun": "pistol",
+        "id": "auto",
+        "hadRow": true,
+        "disabled": false,
+        "beforeOwned": false,
+        "owned": true,
+        "fitted": true
+      },
+      {
+        "gun": "pistol",
+        "id": "pair",
+        "hadRow": true,
+        "disabled": false,
+        "beforeOwned": false,
+        "owned": true,
+        "fitted": true
+      },
+      {
+        "gun": "uzi",
+        "id": "ext",
+        "hadRow": true,
+        "disabled": false,
+        "beforeOwned": false,
+        "owned": true,
+        "fitted": true
+      },
+      {
+        "gun": "uzi",
+        "id": "heavy",
+        "hadRow": true,
+        "disabled": false,
+        "beforeOwned": false,
+        "owned": true,
+        "fitted": true
+      },
+      {
+        "gun": "uzi",
+        "id": "suppressor",
+        "hadRow": true,
+        "disabled": false,
+        "beforeOwned": false,
+        "owned": true,
+        "fitted": true
+      },
+      {
+        "gun": "uzi",
+        "id": "optic:rmr",
+        "hadRow": true,
+        "disabled": false,
+        "beforeOwned": false,
+        "owned": true,
+        "fitted": true
+      },
+      {
+        "gun": "uzi",
+        "id": "laserLight",
+        "hadRow": true,
+        "disabled": false,
+        "beforeOwned": true,
+        "owned": true,
+        "fitted": false
+      },
+      {
+        "gun": "uzi",
+        "id": "pair",
+        "hadRow": true,
+        "disabled": false,
+        "beforeOwned": false,
+        "owned": true,
+        "fitted": true
+      },
+      {
+        "gun": "shotgun",
+        "id": "ext",
+        "hadRow": true,
+        "disabled": false,
+        "beforeOwned": false,
+        "owned": true,
+        "fitted": true
+      },
+      {
+        "gun": "shotgun",
+        "id": "suppressor",
+        "hadRow": true,
+        "disabled": false,
+        "beforeOwned": false,
+        "owned": true,
+        "fitted": true
+      },
+      {
+        "gun": "shotgun",
+        "id": "optic:prism",
+        "hadRow": true,
+        "disabled": false,
+        "beforeOwned": false,
+        "owned": true,
+        "fitted": true
+      },
+      {
+        "gun": "shotgun",
+        "id": "optic:rmr",
+        "hadRow": true,
+        "disabled": false,
+        "beforeOwned": false,
+        "owned": true,
+        "fitted": true
+      },
+      {
+        "gun": "shotgun",
+        "id": "laserLight",
+        "hadRow": true,
+        "disabled": false,
+        "beforeOwned": true,
+        "owned": true,
+        "fitted": false
+      },
+      {
+        "gun": "aa12",
+        "id": "ext",
+        "hadRow": true,
+        "disabled": false,
+        "beforeOwned": false,
+        "owned": true,
+        "fitted": true
+      },
+      {
+        "gun": "aa12",
+        "id": "optic:rmr",
+        "hadRow": true,
+        "disabled": false,
+        "beforeOwned": false,
+        "owned": true,
+        "fitted": true
+      },
+      {
+        "gun": "aa12",
+        "id": "laserLight",
+        "hadRow": true,
+        "disabled": false,
+        "beforeOwned": true,
+        "owned": true,
+        "fitted": false
+      },
+      {
+        "gun": "revolver",
+        "id": "optic:prism",
+        "hadRow": true,
+        "disabled": false,
+        "beforeOwned": false,
+        "owned": true,
+        "fitted": true
+      },
+      {
+        "gun": "revolver",
+        "id": "optic:rmr",
+        "hadRow": true,
+        "disabled": false,
+        "beforeOwned": false,
+        "owned": true,
+        "fitted": true
+      },
+      {
+        "gun": "revolver",
+        "id": "laserLight",
+        "hadRow": true,
+        "disabled": false,
+        "beforeOwned": true,
+        "owned": true,
+        "fitted": false
+      },
+      {
+        "gun": "revolver",
+        "id": "pair",
+        "hadRow": true,
+        "disabled": false,
+        "beforeOwned": false,
+        "owned": true,
+        "fitted": false
+      },
+      {
+        "gun": "sniper",
+        "id": "ext",
+        "hadRow": true,
+        "disabled": false,
+        "beforeOwned": false,
+        "owned": true,
+        "fitted": true
+      },
+      {
+        "gun": "sniper",
+        "id": "suppressor",
+        "hadRow": true,
+        "disabled": false,
+        "beforeOwned": false,
+        "owned": true,
+        "fitted": true
+      },
+      {
+        "gun": "sniper",
+        "id": "laserLight",
+        "hadRow": true,
+        "disabled": false,
+        "beforeOwned": true,
+        "owned": true,
+        "fitted": false
+      },
+      {
+        "gun": "launcher",
+        "id": "optic:rmr",
+        "hadRow": true,
+        "disabled": false,
+        "beforeOwned": false,
+        "owned": true,
+        "fitted": true
+      },
+      {
+        "gun": "launcher",
+        "id": "laserLight",
+        "hadRow": true,
+        "disabled": false,
+        "beforeOwned": true,
+        "owned": true,
+        "fitted": false
+      },
+      {
+        "gun": "flamer",
+        "id": "ext",
+        "hadRow": true,
+        "disabled": false,
+        "beforeOwned": false,
+        "owned": true,
+        "fitted": true
+      },
+      {
+        "gun": "chainsaw",
+        "id": "tank",
+        "hadRow": true,
+        "disabled": false,
+        "beforeOwned": false,
+        "owned": true,
+        "fitted": true
+      }
+    ],
+    "laserColors": [
+      {
+        "id": "red",
+        "disabled": false,
+        "selected": "true"
+      },
+      {
+        "id": "green",
+        "disabled": false,
+        "selected": "true"
+      },
+      {
+        "id": "blue",
+        "disabled": false,
+        "selected": "true"
+      },
+      {
+        "id": "amber",
+        "disabled": false,
+        "selected": "true"
+      },
+      {
+        "id": "purple",
+        "disabled": false,
+        "selected": "true"
+      },
+      {
+        "id": "pink",
+        "disabled": false,
+        "selected": "true"
+      },
+      {
+        "id": "white",
+        "disabled": false,
+        "selected": "true"
+      }
+    ],
+    "ammo": [
+      {
+        "gun": "minigun",
+        "caliber": "7.62 belt",
+        "button": true,
+        "disabled": false,
+        "cost": 192,
+        "offer": "Ammo fullBuy ammo",
+        "spares": 4
+      },
+      {
+        "gun": "m4",
+        "caliber": "5.56mm",
+        "button": true,
+        "disabled": false,
+        "cost": 80,
+        "offer": "Ammo fullBuy ammo",
+        "spares": 8
+      },
+      {
+        "gun": "ak",
+        "caliber": "7.62mm",
+        "button": true,
+        "disabled": false,
+        "cost": 96,
+        "offer": "Ammo fullBuy ammo",
+        "spares": 8
+      },
+      {
+        "gun": "pistol",
+        "caliber": ".45",
+        "button": true,
+        "disabled": false,
+        "cost": 56,
+        "offer": "Ammo fullBuy ammo",
+        "spares": 14
+      },
+      {
+        "gun": "uzi",
+        "caliber": "9mm",
+        "button": true,
+        "disabled": false,
+        "cost": 72,
+        "offer": "Ammo fullBuy ammo",
+        "spares": 9
+      },
+      {
+        "gun": "shotgun",
+        "caliber": "12ga",
+        "button": false,
+        "disabled": false,
+        "cost": 0,
+        "spares": null
+      },
+      {
+        "gun": "aa12",
+        "caliber": "12ga",
+        "button": true,
+        "disabled": false,
+        "cost": 210,
+        "offer": "Ammo fullBuy ammo",
+        "spares": 7
+      },
+      {
+        "gun": "revolver",
+        "caliber": ".44",
+        "button": true,
+        "disabled": false,
+        "cost": 64,
+        "offer": "Ammo fullBuy ammo",
+        "spares": 8
+      },
+      {
+        "gun": "sniper",
+        "caliber": ".338",
+        "button": true,
+        "disabled": false,
+        "cost": 161,
+        "offer": "Ammo fullBuy ammo",
+        "spares": 7
+      },
+      {
+        "gun": "launcher",
+        "caliber": "40mm",
+        "button": true,
+        "disabled": false,
+        "cost": 220,
+        "offer": "Ammo fullBuy ammo",
+        "spares": null
+      },
+      {
+        "gun": "flamer",
+        "caliber": "Fuel",
+        "button": true,
+        "disabled": false,
+        "cost": 180,
+        "offer": "Ammo fullBuy ammo",
+        "spares": 5
+      },
+      {
+        "gun": "chainsaw",
+        "caliber": "chainsaw",
+        "button": true,
+        "disabled": false,
+        "cost": 18,
+        "offer": "Ammo fullBuy ammo",
+        "spares": null
+      }
+    ],
+    "reload": [
+      {
+        "gun": "minigun",
+        "selected": true,
+        "started": true,
+        "finished": true,
+        "before": [
+          0
+        ],
+        "after": [
+          300
+        ],
+        "reserveBefore": 20,
+        "reserveAfter": 20,
+        "sparesBefore": [
+          300,
+          300,
+          300,
+          300
+        ],
+        "sparesAfter": [
+          300,
+          300,
+          300
+        ]
+      },
+      {
+        "gun": "m4",
+        "selected": true,
+        "started": true,
+        "finished": true,
+        "before": [
+          0
+        ],
+        "after": [
+          30
+        ],
+        "reserveBefore": 240,
+        "reserveAfter": 210,
+        "sparesBefore": [
+          30,
+          30,
+          30,
+          30,
+          30,
+          30,
+          30,
+          30
+        ],
+        "sparesAfter": [
+          30,
+          30,
+          30,
+          30,
+          30,
+          30,
+          30
+        ]
+      },
+      {
+        "gun": "ak",
+        "selected": true,
+        "started": true,
+        "finished": true,
+        "before": [
+          0
+        ],
+        "after": [
+          30
+        ],
+        "reserveBefore": 240,
+        "reserveAfter": 210,
+        "sparesBefore": [
+          30,
+          30,
+          30,
+          30,
+          30,
+          30,
+          30,
+          30
+        ],
+        "sparesAfter": [
+          30,
+          30,
+          30,
+          30,
+          30,
+          30,
+          30
+        ]
+      },
+      {
+        "gun": "pistol",
+        "selected": true,
+        "started": true,
+        "finished": true,
+        "before": [
+          0,
+          0
+        ],
+        "after": [
+          18,
+          0
+        ],
+        "reserveBefore": 252,
+        "reserveAfter": 234,
+        "sparesBefore": [
+          18,
+          18,
+          18,
+          18,
+          18,
+          18,
+          18,
+          18,
+          18,
+          18,
+          18,
+          18,
+          18,
+          18
+        ],
+        "sparesAfter": [
+          18,
+          18,
+          18,
+          18,
+          18,
+          18,
+          18,
+          18,
+          18,
+          18,
+          18,
+          18,
+          18
+        ]
+      },
+      {
+        "gun": "uzi",
+        "selected": true,
+        "started": true,
+        "finished": true,
+        "before": [
+          0,
+          0
+        ],
+        "after": [
+          32,
+          0
+        ],
+        "reserveBefore": 288,
+        "reserveAfter": 256,
+        "sparesBefore": [
+          32,
+          32,
+          32,
+          32,
+          32,
+          32,
+          32,
+          32,
+          32
+        ],
+        "sparesAfter": [
+          32,
+          32,
+          32,
+          32,
+          32,
+          32,
+          32,
+          32
+        ]
+      },
+      {
+        "gun": "shotgun",
+        "selected": true,
+        "started": true,
+        "finished": true,
+        "before": 0,
+        "after": 12,
+        "reserveBefore": 20,
+        "reserveAfter": 8,
+        "sparesBefore": null,
+        "sparesAfter": null
+      },
+      {
+        "gun": "aa12",
+        "selected": true,
+        "started": true,
+        "finished": true,
+        "before": [
+          0
+        ],
+        "after": [
+          30
+        ],
+        "reserveBefore": 8,
+        "reserveAfter": 8,
+        "sparesBefore": [
+          30,
+          30,
+          30,
+          30,
+          30,
+          30,
+          30
+        ],
+        "sparesAfter": [
+          30,
+          30,
+          30,
+          30,
+          30,
+          30
+        ]
+      },
+      {
+        "gun": "revolver",
+        "selected": true,
+        "started": true,
+        "finished": true,
+        "before": [
+          0,
+          0
+        ],
+        "after": [
+          6,
+          0
+        ],
+        "reserveBefore": 48,
+        "reserveAfter": 42,
+        "sparesBefore": [
+          6,
+          6,
+          6,
+          6,
+          6,
+          6,
+          6,
+          6
+        ],
+        "sparesAfter": [
+          6,
+          6,
+          6,
+          6,
+          6,
+          6,
+          6
+        ]
+      },
+      {
+        "gun": "sniper",
+        "selected": true,
+        "started": true,
+        "finished": true,
+        "before": [
+          0
+        ],
+        "after": [
+          8
+        ],
+        "reserveBefore": 56,
+        "reserveAfter": 48,
+        "sparesBefore": [
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8
+        ],
+        "sparesAfter": [
+          8,
+          8,
+          8,
+          8,
+          8,
+          8
+        ]
+      },
+      {
+        "gun": "launcher",
+        "selected": true,
+        "started": true,
+        "finished": true,
+        "before": 0,
+        "after": 6,
+        "reserveBefore": 25,
+        "reserveAfter": 19,
+        "sparesBefore": null,
+        "sparesAfter": null
+      },
+      {
+        "gun": "flamer",
+        "selected": true,
+        "started": true,
+        "finished": true,
+        "before": [
+          0
+        ],
+        "after": [
+          90
+        ],
+        "reserveBefore": 450,
+        "reserveAfter": 360,
+        "sparesBefore": [
+          90,
+          90,
+          90,
+          90,
+          90
+        ],
+        "sparesAfter": [
+          90,
+          90,
+          90,
+          90
+        ]
+      },
+      {
+        "gun": "chainsaw",
+        "selected": true,
+        "started": false,
+        "finished": true,
+        "before": 0,
+        "after": 0,
+        "sparesBefore": null,
+        "sparesAfter": null
+      }
+    ]
+  },
+  "errors": [],
+  "renderer": "WebGPUBackend"
+}

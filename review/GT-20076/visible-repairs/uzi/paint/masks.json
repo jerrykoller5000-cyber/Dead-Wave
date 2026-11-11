@@ -1,0 +1,108 @@
+{
+  "held": {
+    "trigger": {
+      "coated": 0,
+      "factory": 1
+    },
+    "magRelease": {
+      "coated": 0,
+      "factory": 1
+    },
+    "selector": {
+      "coated": 0,
+      "factory": 1
+    },
+    "safety": {
+      "coated": 0,
+      "factory": 1
+    },
+    "chargingHandle": {
+      "coated": 0,
+      "factory": 1
+    },
+    "barrel": {
+      "coated": 0,
+      "factory": 1
+    },
+    "optic": {
+      "coated": 6,
+      "factory": 3
+    },
+    "rail": {
+      "coated": 2,
+      "factory": 0
+    },
+    "mag": {
+      "coated": 0,
+      "factory": 3
+    }
+  },
+  "offhand": {
+    "trigger": {
+      "coated": 0,
+      "factory": 1
+    },
+    "magRelease": {
+      "coated": 0,
+      "factory": 1
+    },
+    "selector": {
+      "coated": 0,
+      "factory": 1
+    },
+    "safety": {
+      "coated": 0,
+      "factory": 1
+    },
+    "chargingHandle": {
+      "coated": 0,
+      "factory": 1
+    },
+    "barrel": {
+      "coated": 0,
+      "factory": 1
+    },
+    "optic": {
+      "coated": 6,
+      "factory": 3
+    },
+    "rail": {
+      "coated": 2,
+      "factory": 0
+    }
+  },
+  "eye": {
+    "trigger": {
+      "coated": 0,
+      "factory": 1
+    },
+    "magRelease": {
+      "coated": 0,
+      "factory": 1
+    },
+    "selector": {
+      "coated": 0,
+      "factory": 1
+    },
+    "safety": {
+      "coated": 0,
+      "factory": 1
+    },
+    "chargingHandle": {
+      "coated": 0,
+      "factory": 1
+    },
+    "barrel": {
+      "coated": 0,
+      "factory": 1
+    },
+    "optic": {
+      "coated": 6,
+      "factory": 3
+    },
+    "rail": {
+      "coated": 2,
+      "factory": 0
+    }
+  }
+}

@@ -1,24 +1,28 @@
 # Claude 2
 
-state: active
+state: idle
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: CB-307 GT-20081's returns to me: fakethree Group.copy keeps name/visible (tgt20076), t334's rack seed, the heavy sleeve's paint registration (gunHeavyLook), t221/t277 fixtures; coverage kept
-touching: tools/tests/fakethree.mjs, tools/tests/t334.js, tools/tests/t221.js, tools/tests/t277.js, index.html (gunHeavyLook paint registration)
-since: 2026-11-11T17:14Z
-next: CB-290 J126 rule 3 (Jerry, 10 Nov, standing, D-138): "No part of th
+task: —
+touching: —
+since: 2026-11-11T17:32Z
+next: CB-307 GT-20081's returns to me: fakethree Group.copy keeps name/vi
 blocked-on: —
-last-report: handoffs/2026-11-11-claude2-CB-306.md
+last-report: handoffs/2026-11-11-claude2-CB-307.md
 
 ## Notes
 
-### Session from 15:13Z (Opus 5.5)
-- GP-20100 gate PASS (no new reds; my IK untouched). CB-290 (CB-291's reds) checked out 17:04Z --review: holdFreeShoulders keeps a
-  held gun's aim (heldGunOn; shotgun up-left 1.98 -> 0.10 deg); t229's akimbo now carries the pair (real akimbo 0.68/0.80 rad).
-  Pictures review/CB-290/ (cloud, software). CB-290's legs = Claude 3 (CC-343). t217's Wasp flash -> ChatGPT 2 (Director WONT).
-- CB-306 done 17:2xZ: t213 burst and t225 were wall-clock waits; now game time. Asked the Director: t213 (a) the carried
-  Watchman's receiver 0.31 m off the shoulder (CARRY_M240.at in updateCarryPose; my pick: mine) and (b) its legs 0.50 m high.
-- NEXT: the GT-20081 returns (ChatGPT 2's 08:33Z request, LATER from me): tgt20076 (fakethree Group.copy keeps name/visible),
-  t334 (rack seed fixture), the heavy sleeve's paint registration (gunHeavyLook, index.html), t221 and t277 fixtures; --review.
+### context nearly full, needs a new session (claude2, 11 Nov 17:5xZ; session from 15:13Z, Opus 5.5)
+- Done: GP-20100 gate PASS. CB-290 (CB-291's reds) out 17:04Z --review: holdFreeShoulders keeps a held gun's aim (heldGunOn);
+  t229's akimbo carries the pair. CB-306 done (t213 burst, t225: game-time waits). CB-307 out --review, NOT done: fakethree
+  copy + material defaults (+ tools/tests/fakethree-copy.test.mjs), t334 rack seed, gunHeavyLook sleeve painted (markPaintSurface).
+- NEXT (in order): (1) CB-307's pictures DONE (review/CB-307/ sheets, 18:3xZ). (2) t221/t277 under CB-307 (Director OK'd,
+  --review): t221 the bolt knob on the shooter's right in first person AND on the marine's right in third, the case thrown
+  right (views disagree = report a mirrored-eye defect); t277 the scope tube's real centre line at screen centre when aimed
+  (3 mm), never the camera's own anchor. Then CB-307 --done.
+  (3) t213 (a) approved by the Director: re-seat CARRY_M240.at [0.41,1.14,0.05] (updateCarryPose) on CC-340's shoulder (receiver
+  < 0.3 m from armRG), nothing into his head or pack, before/after pictures; (b) the folded legs went to ChatGPT.
+  (4) caseLook for the launcher (metalness 0.18/roughness 0.78, reset pool defaults on reuse; ChatGPT 2's request, my LATER).
+- A background job in the cloud dies when the turn ends: keep long runs inside one turn (poll with sleeps).
 - Cloud pictures WORK now: review/CB-290/lights290.mjs pattern (real index.html via tools/cdp launch headless, ?debug=1&raf=timer,
   wait for DWOpening.active === false up to 500 s; ~6 min load, ~30 s a shot). Run it with crew.mjs slot run in the cloud.
 - Cloud recipe: tar on the PC into Claude outputs/<task>/cloud-src.tgz (Working notes below) + cloud-src2.tgz (assets/intro

@@ -1,0 +1,413 @@
+[
+  {
+    "version": "original",
+    "weapon": "sniper",
+    "readyMs": 14604,
+    "fps": 58.8,
+    "low": 43.2,
+    "samples": [
+      {
+        "weapon": "sniper",
+        "eye": "sniper",
+        "high": "high",
+        "fps": 30.463038180894312,
+        "low": 1.9204916459053083,
+        "worst": 520.6999999880791,
+        "hitches": 27,
+        "frames": 30
+      },
+      {
+        "weapon": "sniper",
+        "eye": "sniper",
+        "high": "high",
+        "fps": 57.45388569735153,
+        "low": 33.003300349509736,
+        "worst": 30.299999982118607,
+        "hitches": 27,
+        "frames": 57
+      },
+      {
+        "weapon": "sniper",
+        "eye": "sniper",
+        "high": "high",
+        "fps": 54.29318318954717,
+        "low": 36.36363636363637,
+        "worst": 27.5,
+        "hitches": 27,
+        "frames": 54
+      },
+      {
+        "weapon": "sniper",
+        "eye": "sniper",
+        "high": "high",
+        "fps": 57.01140227977632,
+        "low": 33.78378375657202,
+        "worst": 29.600000023841858,
+        "hitches": 27,
+        "frames": 57
+      },
+      {
+        "weapon": "sniper",
+        "eye": "sniper",
+        "high": "high",
+        "fps": 56.20232838183963,
+        "low": 29.58579883221998,
+        "worst": 33.79999998211861,
+        "hitches": 27,
+        "frames": 56
+      },
+      {
+        "weapon": "sniper",
+        "eye": "sniper",
+        "high": "high",
+        "fps": 60.066072679589524,
+        "low": 42.91845491366404,
+        "worst": 23.30000001192093,
+        "hitches": 27,
+        "frames": 60
+      },
+      {
+        "weapon": "sniper",
+        "eye": "sniper",
+        "high": "high",
+        "fps": 59.84440454853052,
+        "low": 42.37288131312508,
+        "worst": 23.600000023841858,
+        "hitches": 27,
+        "frames": 60
+      },
+      {
+        "weapon": "sniper",
+        "eye": "sniper",
+        "high": "high",
+        "fps": 60.16243858345815,
+        "low": 38.610038601153136,
+        "worst": 25.900000005960464,
+        "hitches": 27,
+        "frames": 60
+      },
+      {
+        "weapon": "sniper",
+        "eye": "sniper",
+        "high": "high",
+        "fps": 59.99999999999999,
+        "low": 45.871559670653554,
+        "worst": 21.799999982118607,
+        "hitches": 27,
+        "frames": 60
+      },
+      {
+        "weapon": "sniper",
+        "eye": "sniper",
+        "high": "high",
+        "fps": 59.99400060029756,
+        "low": 57.47126444656447,
+        "worst": 17.399999976158142,
+        "hitches": 27,
+        "frames": 60
+      },
+      {
+        "weapon": "sniper",
+        "eye": "sniper",
+        "high": "high",
+        "fps": 60.0120024015534,
+        "low": 52.356020958746925,
+        "worst": 19.099999994039536,
+        "hitches": 27,
+        "frames": 60
+      },
+      {
+        "weapon": "sniper",
+        "eye": "sniper",
+        "high": "high",
+        "fps": 60.002033966525694,
+        "low": 52.356020958746925,
+        "worst": 19.099999994039536,
+        "hitches": 27,
+        "frames": 59
+      }
+    ],
+    "geometry": {
+      "fingerprint": "0ade15dd",
+      "pieces": 280,
+      "triangles": 13316
+    },
+    "artworkFingerprint": "0ade15dd",
+    "commonModules": 295,
+    "commonHash": "45e7c2cd7941785294a1f223b017ea34c004b4801071cf80964eb94a1cefab23"
+  },
+  {
+    "version": "current",
+    "weapon": "sniper",
+    "readyMs": 15270,
+    "fps": 59.3,
+    "low": 42.9,
+    "samples": [
+      {
+        "weapon": "sniper",
+        "eye": "sniper",
+        "high": "high",
+        "fps": 4.661135452648052,
+        "low": 1.9252984212332005,
+        "worst": 519.4000000059605,
+        "hitches": 26,
+        "frames": 5
+      },
+      {
+        "weapon": "sniper",
+        "eye": "sniper",
+        "high": "high",
+        "fps": 58.74012558198286,
+        "low": 34.843205589385484,
+        "worst": 28.69999998807907,
+        "hitches": 26,
+        "frames": 58
+      },
+      {
+        "weapon": "sniper",
+        "eye": "sniper",
+        "high": "high",
+        "fps": 59.83772819472617,
+        "low": 42.5531914893617,
+        "worst": 23.5,
+        "hitches": 26,
+        "frames": 59
+      },
+      {
+        "weapon": "sniper",
+        "eye": "sniper",
+        "high": "high",
+        "fps": 57.10278501200053,
+        "low": 20.161290325003442,
+        "worst": 49.599999994039536,
+        "hitches": 26,
+        "frames": 57
+      },
+      {
+        "weapon": "sniper",
+        "eye": "sniper",
+        "high": "high",
+        "fps": 59.99999999999999,
+        "low": 40.322580674234835,
+        "worst": 24.799999982118607,
+        "hitches": 26,
+        "frames": 60
+      },
+      {
+        "weapon": "sniper",
+        "eye": "sniper",
+        "high": "high",
+        "fps": 59.99400060029756,
+        "low": 52.63157894736842,
+        "worst": 19,
+        "hitches": 26,
+        "frames": 60
+      },
+      {
+        "weapon": "sniper",
+        "eye": "sniper",
+        "high": "high",
+        "fps": 60.00600059970231,
+        "low": 58.47953218412662,
+        "worst": 17.099999994039536,
+        "hitches": 26,
+        "frames": 60
+      },
+      {
+        "weapon": "sniper",
+        "eye": "sniper",
+        "high": "high",
+        "fps": 59.988002398447634,
+        "low": 58.47953208220698,
+        "worst": 17.100000023841858,
+        "hitches": 26,
+        "frames": 60
+      },
+      {
+        "weapon": "sniper",
+        "eye": "sniper",
+        "high": "high",
+        "fps": 59.99400060029756,
+        "low": 55.86592176910688,
+        "worst": 17.900000005960464,
+        "hitches": 26,
+        "frames": 60
+      },
+      {
+        "weapon": "sniper",
+        "eye": "sniper",
+        "high": "high",
+        "fps": 59.45183393757119,
+        "low": 44.44444444444444,
+        "worst": 22.5,
+        "hitches": 26,
+        "frames": 59
+      },
+      {
+        "weapon": "sniper",
+        "eye": "sniper",
+        "high": "high",
+        "fps": 56.37773079735036,
+        "low": 20,
+        "worst": 50,
+        "hitches": 26,
+        "frames": 56
+      },
+      {
+        "weapon": "sniper",
+        "eye": "sniper",
+        "high": "high",
+        "fps": 59.99400060029756,
+        "low": 36.23188406579561,
+        "worst": 27.599999994039536,
+        "hitches": 26,
+        "frames": 60
+      }
+    ],
+    "geometry": {
+      "fingerprint": "18dd99fb",
+      "pieces": 280,
+      "triangles": 14708
+    },
+    "artworkFingerprint": "18dd99fb",
+    "commonModules": 295,
+    "commonHash": "45e7c2cd7941785294a1f223b017ea34c004b4801071cf80964eb94a1cefab23"
+  },
+  {
+    "version": "original",
+    "weapon": "sniper",
+    "readyMs": 14767,
+    "fps": 59.9,
+    "low": 47.3,
+    "samples": [
+      {
+        "weapon": "sniper",
+        "eye": "sniper",
+        "high": "high",
+        "fps": 4.940223298122168,
+        "low": 1.9688915140544685,
+        "worst": 507.90000000596046,
+        "hitches": 27,
+        "frames": 5
+      },
+      {
+        "weapon": "sniper",
+        "eye": "sniper",
+        "high": "high",
+        "fps": 60.313630879856255,
+        "low": 35.971223044719984,
+        "worst": 27.799999982118607,
+        "hitches": 27,
+        "frames": 60
+      },
+      {
+        "weapon": "sniper",
+        "eye": "sniper",
+        "high": "high",
+        "fps": 60.00600059970231,
+        "low": 52.63157894736842,
+        "worst": 19,
+        "hitches": 27,
+        "frames": 60
+      },
+      {
+        "weapon": "sniper",
+        "eye": "sniper",
+        "high": "high",
+        "fps": 59.96402158740497,
+        "low": 53.475935777742016,
+        "worst": 18.700000017881393,
+        "hitches": 27,
+        "frames": 60
+      },
+      {
+        "weapon": "sniper",
+        "eye": "sniper",
+        "high": "high",
+        "fps": 59.83772819472617,
+        "low": 44.247787622289266,
+        "worst": 22.599999994039536,
+        "hitches": 27,
+        "frames": 59
+      },
+      {
+        "weapon": "sniper",
+        "eye": "sniper",
+        "high": "high",
+        "fps": 59.350165979633594,
+        "low": 33.898305084745765,
+        "worst": 29.5,
+        "hitches": 27,
+        "frames": 59
+      },
+      {
+        "weapon": "sniper",
+        "eye": "sniper",
+        "high": "high",
+        "fps": 59.99999999999999,
+        "low": 36.63003661404161,
+        "worst": 27.30000001192093,
+        "hitches": 27,
+        "frames": 60
+      },
+      {
+        "weapon": "sniper",
+        "eye": "sniper",
+        "high": "high",
+        "fps": 60.00600059970231,
+        "low": 42.5531914893617,
+        "worst": 23.5,
+        "hitches": 27,
+        "frames": 60
+      },
+      {
+        "weapon": "sniper",
+        "eye": "sniper",
+        "high": "high",
+        "fps": 59.99400060029756,
+        "low": 36.90036901180603,
+        "worst": 27.099999994039536,
+        "hitches": 27,
+        "frames": 60
+      },
+      {
+        "weapon": "sniper",
+        "eye": "sniper",
+        "high": "high",
+        "fps": 59.99999999999999,
+        "low": 59.17159761226685,
+        "worst": 16.900000005960464,
+        "hitches": 27,
+        "frames": 60
+      },
+      {
+        "weapon": "sniper",
+        "eye": "sniper",
+        "high": "high",
+        "fps": 59.99999999999999,
+        "low": 59.52380948157267,
+        "worst": 16.80000001192093,
+        "hitches": 27,
+        "frames": 60
+      },
+      {
+        "weapon": "sniper",
+        "eye": "sniper",
+        "high": "high",
+        "fps": 60.00600059970231,
+        "low": 54.34782606935118,
+        "worst": 18.400000005960464,
+        "hitches": 27,
+        "frames": 60
+      }
+    ],
+    "geometry": {
+      "fingerprint": "0ade15dd",
+      "pieces": 280,
+      "triangles": 13316
+    },
+    "artworkFingerprint": "0ade15dd",
+    "commonModules": 295,
+    "commonHash": "45e7c2cd7941785294a1f223b017ea34c004b4801071cf80964eb94a1cefab23"
+  }
+]

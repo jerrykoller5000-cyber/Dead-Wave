@@ -1,0 +1,38 @@
+{
+  "off": 12,
+  "on": 19,
+  "moduleDraws": 7,
+  "meshes": [
+    {
+      "name": "railClamp",
+      "material": "gunPaint:revolver"
+    },
+    {
+      "name": "moduleShell",
+      "material": "gunPaint:revolver"
+    },
+    {
+      "name": "",
+      "material": "gunPaint:revolver"
+    },
+    {
+      "name": "",
+      "material": "MeshStandardMaterial"
+    },
+    {
+      "name": "",
+      "material": "gunPaint:revolver"
+    },
+    {
+      "name": "",
+      "material": "gunPaint:revolver"
+    },
+    {
+      "name": "",
+      "material": "fold-static"
+    }
+  ],
+  "empty": 1,
+  "span": 0.4733614692820135,
+  "backend": "WebGPUBackend"
+}

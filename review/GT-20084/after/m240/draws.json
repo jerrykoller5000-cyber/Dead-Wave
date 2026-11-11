@@ -1,0 +1,102 @@
+{
+  "tripod": {
+    "draws": {
+      "off": 81,
+      "on": 84,
+      "moduleDraws": 3,
+      "meshes": [
+        {
+          "name": "",
+          "material": "MeshStandardMaterial"
+        },
+        {
+          "name": "",
+          "material": "MeshStandardMaterial"
+        },
+        {
+          "name": "",
+          "material": "MeshStandardMaterial"
+        }
+      ],
+      "empty": 1,
+      "span": 1.9044374190778943,
+      "backend": "WebGPUBackend"
+    },
+    "motion": {
+      "id": "m240",
+      "name": "controls-lightSwitch-m240",
+      "axis": [
+        0,
+        -1,
+        0
+      ],
+      "travel": 0.001,
+      "copies": {
+        "tripod": {
+          "rest": [
+            0.0014000000000000002,
+            0.02685,
+            0.0143
+          ],
+          "moved": 138,
+          "stationary": 4386,
+          "furthest": 0.0010000001639127731,
+          "lateral": 0,
+          "reset": 0,
+          "otherCopyDrift": 0,
+          "pressSetupMs": 1.7999999821186066
+        }
+      }
+    }
+  },
+  "folded": {
+    "draws": {
+      "off": 79,
+      "on": 82,
+      "moduleDraws": 3,
+      "meshes": [
+        {
+          "name": "",
+          "material": "MeshStandardMaterial"
+        },
+        {
+          "name": "",
+          "material": "MeshStandardMaterial"
+        },
+        {
+          "name": "",
+          "material": "MeshStandardMaterial"
+        }
+      ],
+      "empty": 1,
+      "span": 1.3514644080911458,
+      "backend": "WebGPUBackend"
+    },
+    "motion": {
+      "id": "m240",
+      "name": "controls-lightSwitch-m240",
+      "axis": [
+        0,
+        -1,
+        0
+      ],
+      "travel": 0.001,
+      "copies": {
+        "folded": {
+          "rest": [
+            0.0014000000000000002,
+            0.02685,
+            0.0143
+          ],
+          "moved": 138,
+          "stationary": 4386,
+          "furthest": 0.0010000001639127731,
+          "lateral": 0,
+          "reset": 0,
+          "otherCopyDrift": 0,
+          "pressSetupMs": 2.4000000059604645
+        }
+      }
+    }
+  }
+}

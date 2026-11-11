@@ -233,8 +233,9 @@ function browserRunClimbAndAuditFn() {
     const zSide = window.__ce4ClearSide;
     const keyW = (type) => document.body.dispatchEvent(new KeyboardEvent(type, { code: 'KeyW', key: 'w', bubbles: true }));
 
-    // Helper to reset player cleanly to the foot of the HQ west ladder facing EAST (+X, yaw = Math.PI/2, pitch = +0.08 rad up)
-    const EYE_PITCH = 0.08;
+    // Helper to reset player cleanly to the foot of the HQ west ladder facing EAST (+X, yaw = Math.PI/2).
+    // Eye is ~1.58m above feet while HQ_LADDER_GRIP.hand is [0.90, 1.70]m (midpoint 1.30m), so pitch -0.26 rad frames both fists & rungs!
+    const EYE_PITCH = -0.26;
     const startClimbFromFoot = (firstPerson) => {
       window.__ce4Hold = false;
       window.__ce4ManualCam = null;
@@ -417,9 +418,9 @@ function browserRunClimbAndAuditFn() {
         }
         window.__ce4SetLight('noon');
         shots['tp-behind-low-noon'] = await window.__ce4Capture({
-          fov: 54,
-          pos: [L.x - 1.15, py + 1.10, L.z + zSide * 0.78],
-          look: [L.x + 0.02, py + 1.14, L.z]
+          fov: 50,
+          pos: [L.x - 1.45, py + 1.12, L.z + 1.15],
+          look: [L.x - 0.08, py + 1.14, L.z - 0.05]
         });
         window.__ce4Hold = false;
       }
@@ -439,9 +440,9 @@ function browserRunClimbAndAuditFn() {
         }
         window.__ce4SetLight('noon');
         shots['tp-behind-high-noon'] = await window.__ce4Capture({
-          fov: 54,
-          pos: [L.x - 1.15, py + 1.02, L.z + zSide * 0.78],
-          look: [L.x + 0.02, py + 1.14, L.z]
+          fov: 50,
+          pos: [L.x - 1.45, py + 1.02, L.z + 1.15],
+          look: [L.x - 0.08, py + 1.14, L.z - 0.05]
         });
         window.__ce4Hold = false;
       }

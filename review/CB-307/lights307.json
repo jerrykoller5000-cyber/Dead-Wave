@@ -1,0 +1,146 @@
+[
+  {
+    "phase": "before",
+    "scene": "m4-heavy-camo-side",
+    "light": "noon",
+    "weapon": "m4",
+    "held": true,
+    "aimErr": 0,
+    "hits": {}
+  },
+  {
+    "phase": "before",
+    "scene": "m4-heavy-camo-side",
+    "light": "overcast",
+    "weapon": "m4",
+    "held": true,
+    "aimErr": 0,
+    "hits": {}
+  },
+  {
+    "phase": "before",
+    "scene": "m4-heavy-camo-side",
+    "light": "dusk",
+    "weapon": "m4",
+    "held": true,
+    "aimErr": 0,
+    "hits": {}
+  },
+  {
+    "phase": "before",
+    "scene": "m4-heavy-camo-side",
+    "light": "night",
+    "weapon": "m4",
+    "held": true,
+    "aimErr": 0,
+    "hits": {}
+  },
+  {
+    "phase": "before",
+    "scene": "m4-heavy-camo-front",
+    "light": "noon",
+    "weapon": "m4",
+    "held": true,
+    "aimErr": 0,
+    "hits": {}
+  },
+  {
+    "phase": "before",
+    "scene": "m4-heavy-camo-front",
+    "light": "overcast",
+    "weapon": "m4",
+    "held": true,
+    "aimErr": 0,
+    "hits": {}
+  },
+  {
+    "phase": "before",
+    "scene": "m4-heavy-camo-front",
+    "light": "dusk",
+    "weapon": "m4",
+    "held": true,
+    "aimErr": 0,
+    "hits": {}
+  },
+  {
+    "phase": "before",
+    "scene": "m4-heavy-camo-front",
+    "light": "night",
+    "weapon": "m4",
+    "held": true,
+    "aimErr": 0,
+    "hits": {}
+  },
+  {
+    "phase": "after",
+    "scene": "m4-heavy-camo-side",
+    "light": "noon",
+    "weapon": "m4",
+    "held": true,
+    "aimErr": 0,
+    "hits": {}
+  },
+  {
+    "phase": "after",
+    "scene": "m4-heavy-camo-side",
+    "light": "overcast",
+    "weapon": "m4",
+    "held": true,
+    "aimErr": 0,
+    "hits": {}
+  },
+  {
+    "phase": "after",
+    "scene": "m4-heavy-camo-side",
+    "light": "dusk",
+    "weapon": "m4",
+    "held": true,
+    "aimErr": 0,
+    "hits": {}
+  },
+  {
+    "phase": "after",
+    "scene": "m4-heavy-camo-side",
+    "light": "night",
+    "weapon": "m4",
+    "held": true,
+    "aimErr": 0,
+    "hits": {}
+  },
+  {
+    "phase": "after",
+    "scene": "m4-heavy-camo-front",
+    "light": "noon",
+    "weapon": "m4",
+    "held": true,
+    "aimErr": 0,
+    "hits": {}
+  },
+  {
+    "phase": "after",
+    "scene": "m4-heavy-camo-front",
+    "light": "overcast",
+    "weapon": "m4",
+    "held": true,
+    "aimErr": 0,
+    "hits": {}
+  },
+  {
+    "phase": "after",
+    "scene": "m4-heavy-camo-front",
+    "light": "dusk",
+    "weapon": "m4",
+    "held": true,
+    "aimErr": 0,
+    "hits": {}
+  },
+  {
+    "phase": "after",
+    "scene": "m4-heavy-camo-front",
+    "light": "night",
+    "weapon": "m4",
+    "held": true,
+    "aimErr": 0,
+    "hits": {}
+  }
+]

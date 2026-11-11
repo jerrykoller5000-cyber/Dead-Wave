@@ -1,0 +1,51 @@
+{
+  "id": "shotgun",
+  "name": "controls-lightSwitch-shotgun",
+  "axis": [
+    0,
+    0,
+    1
+  ],
+  "travel": 0.001,
+  "copies": {
+    "held": {
+      "rest": [
+        0,
+        0.019,
+        -0.08240000000000001
+      ],
+      "moved": 84,
+      "stationary": 3096,
+      "furthest": 0.0010000000474974513,
+      "lateral": 3.469447116743502e-21,
+      "reset": 0,
+      "otherCopyDrift": 0
+    },
+    "eye": {
+      "rest": [
+        0,
+        0.019,
+        -0.08240000000000001
+      ],
+      "moved": 84,
+      "stationary": 3096,
+      "furthest": 0.0010000000474974513,
+      "lateral": 6.938894233487004e-21,
+      "reset": 0,
+      "otherCopyDrift": 0
+    },
+    "carry": {
+      "rest": [
+        0,
+        0.019,
+        -0.08240000000000001
+      ],
+      "moved": 84,
+      "stationary": 3096,
+      "furthest": 0.0010000000474974513,
+      "lateral": 0,
+      "reset": 0,
+      "otherCopyDrift": 0
+    }
+  }
+}

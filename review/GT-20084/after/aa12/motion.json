@@ -1,0 +1,54 @@
+{
+  "id": "aa12",
+  "name": "controls-lightSwitch-aa12",
+  "axis": [
+    -1,
+    0,
+    0
+  ],
+  "travel": 0.001,
+  "copies": {
+    "held": {
+      "rest": [
+        0.020499999999999997,
+        0,
+        -0.046
+      ],
+      "moved": 18,
+      "stationary": 2850,
+      "furthest": 0.0010000001639127731,
+      "lateral": 0,
+      "reset": 0,
+      "otherCopyDrift": 0,
+      "pressSetupMs": 2.699999988079071
+    },
+    "eye": {
+      "rest": [
+        0.020499999999999997,
+        0,
+        -0.046
+      ],
+      "moved": 18,
+      "stationary": 2850,
+      "furthest": 0.0010000001639127731,
+      "lateral": 0,
+      "reset": 0,
+      "otherCopyDrift": 0,
+      "pressSetupMs": 2.199999988079071
+    },
+    "carry": {
+      "rest": [
+        0.020499999999999997,
+        0,
+        -0.046
+      ],
+      "moved": 18,
+      "stationary": 2850,
+      "furthest": 0.0010000001639127731,
+      "lateral": 0,
+      "reset": 0,
+      "otherCopyDrift": 0,
+      "pressSetupMs": 1.0999999940395355
+    }
+  }
+}

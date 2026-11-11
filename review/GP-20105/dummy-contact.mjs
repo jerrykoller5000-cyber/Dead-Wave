@@ -1,0 +1,92 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import assert from 'node:assert/strict';
+import { fileURLToPath } from 'node:url';
+import { serve } from '../../tools/serve.mjs';
+import { launch } from '../../tools/cdp.mjs';
+
+if (!process.env.DW_GAME_TEST_TOKEN) throw Error('Use crew game-test slot');
+const root = path.resolve(fileURLToPath(new URL('../..', import.meta.url)));
+const out = path.join(root, 'review/GP-20105');
+const server = await serve(root, 0);
+const browser = await launch({ headless: false, args: ['--window-size=1280,720'] });
+try {
+  const page = await browser.newPage({ width: 1280, height: 720 });
+  await page.goto(`${server.origin}/index.html?debug=1&raf=timer`);
+  assert(await page.waitFor('!!window.TT && window.DWLoad?.snapshot().state==="ready"', { timeout: 90000 }));
+  await page.evaluate('DWOpening.dismissForTesting()');
+  assert(await page.waitFor('document.getElementById("opening").hidden', { timeout: 15000 }));
+  await page.evaluate(`(()=>{document.getElementById('playerName').value='GP-20105-contact';document.getElementById('modeTraining').click()})()`);
+  assert(await page.waitFor('TT.trainingDbg.state().active', { timeout: 90000 }));
+  assert(await page.waitFor('!document.getElementById("trainingBlackout")?.classList.contains("on")', { timeout: 20000 }));
+  const proof = await page.evaluate(`(()=>{
+    const T=TT,tr=T.trainingDbg.state(),d=tr.dummy,tg=tr.tg,spot=d.model.group.position;
+    const calls=[],sounds=[],traces=[];
+    const rawStrike=d.strike,rawTrace=d.trace,rawSound=T.AudioSys.bulletImpact;
+    d.strike=(hit)=>{const result=rawStrike(hit);calls.push({kind:hit.kind,point:result.point,normal:result.normal,damage:result.damage,markAdded:result.markAdded});return result;};
+    d.trace=(a,b,pad)=>{const result=rawTrace(a,b,pad);if(pad>.04)traces.push({a,b,pad,point:result?.point||null});return result;};
+    T.AudioSys.bulletImpact=(...args)=>{sounds.push(args);return rawSound(...args);};
+    T.AudioSys.setMuted(true);
+    const beforeTargets=tg.targets.map(t=>t.hits),beforeRange=JSON.stringify(T.rangeDbg.read());
+    T.player.position.set(spot.x,tg.floorY,spot.z+1.05);T.setVelDbg(0,0);
+    const slash=(m,k)=>{T.setMacheteOwned(m);T.setKatanaOwned(k);T.setAimYawDbg(Math.PI);T.setKnifeCd(0);T.knifeAttack();};
+    slash(false,false);slash(true,false);slash(true,true);
+    T.grantAllWeapons();T.setWeapon(T.WEAPON_ORDER.indexOf('chainsaw'));T.setUnarmedDbg(false);T.setViewFirstDbg(false);
+    T.player.position.set(spot.x,tg.floorY,spot.z-.75);T.setVelDbg(0,0);
+    T.setOtsAimDbg(0,0);T.aimPointDbg(spot.x,tg.floorY+1.3,spot.z);T.setAimYawDbg(0);
+    for(let i=0;i<60;i++)T.stepFrame(.016); // the heavy weapon finishes its draw before the trigger is held
+    T.setMouseFireDbg(true);for(let i=0;i<35;i++)T.stepFrame(.016);T.setMouseFireDbg(false);
+    const thirdSawBlade={...T.sawDbg.blade()},thirdSawHits=d.state().byKind.chainsaw;
+    T.setSawHeatDbg(0);T.setViewFirstDbg(true);T.player.position.set(spot.x,tg.floorY,spot.z-.75);T.setVelDbg(0,0);
+    for(let i=0;i<10;i++)T.stepFrame(.016);
+    T.setMouseFireDbg(true);for(let i=0;i<35;i++)T.stepFrame(.016);T.setMouseFireDbg(false);
+    const sawBlade={...T.sawDbg.blade()},sawFirst=T.sawDbg.first(),sawHits=d.state().byKind.chainsaw-thirdSawHits;
+    const bullet={prev:{x:spot.x,y:tg.floorY+1.25,z:spot.z+3},pos:{x:spot.x,y:tg.floorY+1.25,z:spot.z-1},dir:{x:0,y:0,z:-1},damage:20,hit:false};
+    const bulletDone=T.trainingDbg.round(bullet);
+    const after=d.state(),afterTargets=tg.targets.map(t=>t.hits),afterRange=JSON.stringify(T.rangeDbg.read());
+    T.AudioSys.bulletImpact=rawSound;d.strike=rawStrike;d.trace=rawTrace;
+    return {beforeTargets,afterTargets,beforeRange,afterRange,calls,sounds:sounds.length,traces,thirdSawBlade,thirdSawHits,sawBlade,sawFirst,sawHits,bulletDone,bulletHit:bullet.hit,after};
+  })()`);
+  proof.errors = page.errors;
+  fs.writeFileSync(path.join(out, 'contact.json'), JSON.stringify(proof, null, 2) + '\n');
+  assert.deepEqual(proof.errors, []);
+  for (const kind of ['knife','machete','katana','chainsaw','bullet'])
+    assert(proof.calls.some(c=>c.kind===kind), `missing ${kind} physical contact`);
+  assert(proof.thirdSawHits > 0, 'third-person chain must trigger the zombie-column contact rule');
+  assert(proof.sawFirst && proof.sawHits > 0, 'first-person chain must touch the sculpted dummy');
+  assert(proof.bulletDone && proof.bulletHit, 'bullet must hit the dummy');
+  assert(proof.calls.every(c=>c.markAdded), 'each weapon leaves a surface mark');
+  assert(proof.sounds >= proof.calls.length, 'each contact makes an impact sound');
+  assert.deepEqual(proof.afterTargets, proof.beforeTargets, 'target hits stay unchanged');
+  assert.equal(proof.afterRange, proof.beforeRange, 'range drill state stays unchanged');
+  await page.evaluate(`(()=>{const T=TT,d=T.trainingDbg.state().dummy,p=d.model.group.position;
+    T.setMouseFireDbg(false);T.setUnarmedDbg(true);T.player.position.set(p.x+4,p.y,p.z);T.setVelDbg(0,0);
+    const c=T.renderer.domElement,keep=new Set();for(let e=c;e&&e!==document.body;e=e.parentElement)keep.add(e);
+    for(const ch of document.body.children)if(!keep.has(ch))ch.style.setProperty('display','none','important');
+    d.model.group.visible=false;T.setWorldTime(.5);
+    T.setShotView({x:p.x,y:p.y+1.30,z:p.z+2.30,tx:p.x,ty:p.y+1.05,tz:p.z,fov:54});
+    for(let i=0;i<5;i++)T.stepFrame(.016);
+  })()`);
+  await page.screenshot(path.join(out, 'before-dummy-noon.png'));
+  for(const [name,time] of [['noon',.5],['overcast',.43],['dusk',.74],['night',.02]]){
+    await page.evaluate(`((time)=>{const T=TT,d=T.trainingDbg.state().dummy,p=d.model.group.position;
+      d.model.group.visible=true;T.setWorldTime(time);
+      T.setShotView({x:p.x,y:p.y+1.30,z:p.z+2.30,tx:p.x,ty:p.y+1.05,tz:p.z,fov:54});
+      for(let i=0;i<5;i++)T.stepFrame(.016);
+    })(${time})`);
+    await page.screenshot(path.join(out, `after-all-hits-${name}.png`));
+  }
+  await page.evaluate(`(()=>{const T=TT,p=T.trainingDbg.state().dummy.model.group.position;
+    T.setWorldTime(.5);T.setShotView({x:p.x,y:p.y+1.30,z:p.z+.88,tx:p.x,ty:p.y+1.25,tz:p.z,fov:45});
+    for(let i=0;i<5;i++)T.stepFrame(.016);
+  })()`);
+  await page.screenshot(path.join(out, 'after-all-hits-close.png'));
+  await page.screenshot(path.join(out, 'after-all-hits-close-front.png'));
+  await page.evaluate(`(()=>{const T=TT,p=T.trainingDbg.state().dummy.model.group.position;
+    T.setShotView({x:p.x,y:p.y+1.30,z:p.z-.88,tx:p.x,ty:p.y+1.25,tz:p.z,fov:45});
+    for(let i=0;i<5;i++)T.stepFrame(.016);
+  })()`);
+  await page.screenshot(path.join(out, 'after-all-hits-close-back.png'));
+  assert.deepEqual(page.errors, []);
+  console.log(`PASS GP-20105: ${proof.calls.map(c=>c.kind).join(', ')}; saw 3P=${proof.thirdSawHits}, 1P=${proof.sawHits}; ${proof.sounds} impact sounds; ${proof.after.hits} hits; 0 page errors`);
+} finally { await browser.close(); await server.close(); }

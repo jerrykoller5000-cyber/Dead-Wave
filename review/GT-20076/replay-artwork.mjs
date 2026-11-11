@@ -3,7 +3,7 @@ import {readFile} from 'node:fs/promises';
 
 // Only the selected local studio asset is supplied to this review page.
 export async function replayArtwork(page,origin,path,source) {
-  assert(['/studio/weapon-heavy.js','/studio/weapon-longarms.js'].includes(path));
+  assert(['/studio/weapon-heavy.js','/studio/weapon-longarms.js','/studio/weapon-sidearms.js'].includes(path));
   const body=Buffer.from(source).toString('base64');
   let served=0;
   page.conn.onEvent(msg=>{
@@ -35,6 +35,19 @@ export async function originalSawCovers(page,origin) {
     assert.equal(hash,'5a077773','Expected original saw cover artwork');
     verifyServed();
   };
+}
+
+export async function originalWasp(page,origin) {
+  const path='/studio/weapon-sidearms.js';
+  let source=await readFile(new URL('../../studio/weapon-sidearms.js',import.meta.url),'utf8');
+  for(const [now,old] of [
+    ['        trimSlabBack(rib, 0, sx * receiverWidth / 2 - rib.position.x, sx);',''],
+    ['  trimSlabBack(topCover, 1, receiverTop, 1);',''],
+    ["  // Align the attachment graphic's last visible pixel with the shared effect anchor.\n  const effectGraphic = gun.userData.suppressor;\n  if (effectGraphic) {\n    const bounds = new THREE.Box3().setFromObject(effectGraphic, true);\n    const artDepth = bounds.max.z - effectGraphic.position.z;\n    const endpoint = gun.userData.muzzleBase.z + gun.userData.suppressorLen;\n    if (artDepth > 0) effectGraphic.scale.z = (endpoint - effectGraphic.position.z) / artDepth;\n  }","  // The Micro UZI's can seats at the barrel nut rather than at the exposed muzzle threads.\n  // Stretch it forward around the existing barrel: its front remains at the established suppressed muzzle.\n  if (gun.userData.suppressor) {\n    gun.userData.suppressor.position.z = 0.34;\n    gun.userData.suppressor.scale.z = 1.8;\n  }"]
+  ]){
+    assert.equal(source.split(now).length,2);source=source.replace(now,old);
+  }
+  return replayArtwork(page,origin,path,source);
 }
 
 export function originalSniperSource(live) {

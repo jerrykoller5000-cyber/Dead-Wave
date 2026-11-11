@@ -1,0 +1,26 @@
+{
+  "off": 27,
+  "on": 31,
+  "moduleDraws": 4,
+  "meshes": [
+    {
+      "name": "moduleShell",
+      "material": "gunPaint:sniper"
+    },
+    {
+      "name": "topPlate",
+      "material": "gunPaint:sniper"
+    },
+    {
+      "name": "",
+      "material": "MeshStandardMaterial"
+    },
+    {
+      "name": "",
+      "material": "MeshStandardMaterial"
+    }
+  ],
+  "empty": 1,
+  "span": 1.4151088175583548,
+  "backend": "WebGPUBackend"
+}

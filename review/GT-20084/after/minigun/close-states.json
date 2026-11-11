@@ -1,0 +1,490 @@
+{
+  "noon/false": {
+    "position": [
+      0,
+      0,
+      -0.0624
+    ],
+    "projected": [
+      -2.2285604991531955e-12,
+      -9.904713329569755e-13,
+      0.2594322140682764
+    ],
+    "draws": [
+      {
+        "geometry": "e7fd609e-c380-43ec-a295-5e6e29075904",
+        "material": "gunPaint:minigun",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      },
+      {
+        "geometry": "a3fda9f2-d25c-40b8-badc-2eea3bade424",
+        "material": "gunPaint:minigun",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      },
+      {
+        "geometry": "9db156b2-e745-4d72-9994-95c8ae34dec6",
+        "material": "MeshStandardMaterial",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      },
+      {
+        "geometry": "d2869cac-5750-4318-baa3-1f6705e71f73",
+        "material": "MeshStandardMaterial",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      }
+    ],
+    "nearest": [
+      {
+        "distance": 0.13500000199898293,
+        "geometry": "d2869cac-5750-4318-baa3-1f6705e71f73",
+        "inLamp": true,
+        "activePad": null,
+        "material": "MeshStandardMaterial"
+      },
+      {
+        "distance": 0.13773777930733605,
+        "geometry": "a3fda9f2-d25c-40b8-badc-2eea3bade424",
+        "inLamp": true,
+        "activePad": null,
+        "material": "gunPaint:minigun"
+      },
+      {
+        "distance": 0.15365941519680462,
+        "geometry": "818f94eb-5e0b-462c-80db-1872c661302f",
+        "inLamp": false,
+        "activePad": null,
+        "material": "gunPaint:minigun"
+      }
+    ]
+  },
+  "noon/true": {
+    "position": [
+      0,
+      0,
+      -0.061399999999999996
+    ],
+    "projected": [
+      -0.010036407347561581,
+      -0.0025489885157412673,
+      0.26125412766028844
+    ],
+    "draws": [
+      {
+        "geometry": "e7fd609e-c380-43ec-a295-5e6e29075904",
+        "material": "gunPaint:minigun",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      },
+      {
+        "geometry": "a3fda9f2-d25c-40b8-badc-2eea3bade424",
+        "material": "gunPaint:minigun",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      },
+      {
+        "geometry": "9db156b2-e745-4d72-9994-95c8ae34dec6",
+        "material": "MeshStandardMaterial",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      },
+      {
+        "geometry": "711ef30b-8a48-4c93-9a8b-2f56fe64befb",
+        "material": "MeshStandardMaterial",
+        "type": "MeshStandardMaterial",
+        "activePad": "controls-lightSwitch-minigun"
+      }
+    ],
+    "nearest": [
+      {
+        "distance": 0.13533363312236113,
+        "geometry": "711ef30b-8a48-4c93-9a8b-2f56fe64befb",
+        "inLamp": true,
+        "activePad": "controls-lightSwitch-minigun",
+        "material": "MeshStandardMaterial"
+      },
+      {
+        "distance": 0.13692120368525745,
+        "geometry": "a3fda9f2-d25c-40b8-badc-2eea3bade424",
+        "inLamp": true,
+        "activePad": null,
+        "material": "gunPaint:minigun"
+      },
+      {
+        "distance": 0.15403916239349652,
+        "geometry": "818f94eb-5e0b-462c-80db-1872c661302f",
+        "inLamp": false,
+        "activePad": null,
+        "material": "gunPaint:minigun"
+      }
+    ]
+  },
+  "overcast/false": {
+    "position": [
+      0,
+      0,
+      -0.0624
+    ],
+    "projected": [
+      -2.2285604991531955e-12,
+      -9.904713329569755e-13,
+      0.2594322140682764
+    ],
+    "draws": [
+      {
+        "geometry": "e7fd609e-c380-43ec-a295-5e6e29075904",
+        "material": "gunPaint:minigun",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      },
+      {
+        "geometry": "a3fda9f2-d25c-40b8-badc-2eea3bade424",
+        "material": "gunPaint:minigun",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      },
+      {
+        "geometry": "9db156b2-e745-4d72-9994-95c8ae34dec6",
+        "material": "MeshStandardMaterial",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      },
+      {
+        "geometry": "d2869cac-5750-4318-baa3-1f6705e71f73",
+        "material": "MeshStandardMaterial",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      }
+    ],
+    "nearest": [
+      {
+        "distance": 0.13500000199898293,
+        "geometry": "d2869cac-5750-4318-baa3-1f6705e71f73",
+        "inLamp": true,
+        "activePad": null,
+        "material": "MeshStandardMaterial"
+      },
+      {
+        "distance": 0.13773777930733605,
+        "geometry": "a3fda9f2-d25c-40b8-badc-2eea3bade424",
+        "inLamp": true,
+        "activePad": null,
+        "material": "gunPaint:minigun"
+      },
+      {
+        "distance": 0.15365941519680462,
+        "geometry": "818f94eb-5e0b-462c-80db-1872c661302f",
+        "inLamp": false,
+        "activePad": null,
+        "material": "gunPaint:minigun"
+      }
+    ]
+  },
+  "overcast/true": {
+    "position": [
+      0,
+      0,
+      -0.061399999999999996
+    ],
+    "projected": [
+      -0.010036407347561581,
+      -0.0025489885157412673,
+      0.26125412766028844
+    ],
+    "draws": [
+      {
+        "geometry": "e7fd609e-c380-43ec-a295-5e6e29075904",
+        "material": "gunPaint:minigun",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      },
+      {
+        "geometry": "a3fda9f2-d25c-40b8-badc-2eea3bade424",
+        "material": "gunPaint:minigun",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      },
+      {
+        "geometry": "9db156b2-e745-4d72-9994-95c8ae34dec6",
+        "material": "MeshStandardMaterial",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      },
+      {
+        "geometry": "df427f56-884e-4711-9d2d-74ed64f40809",
+        "material": "MeshStandardMaterial",
+        "type": "MeshStandardMaterial",
+        "activePad": "controls-lightSwitch-minigun"
+      }
+    ],
+    "nearest": [
+      {
+        "distance": 0.13533363312236113,
+        "geometry": "df427f56-884e-4711-9d2d-74ed64f40809",
+        "inLamp": true,
+        "activePad": "controls-lightSwitch-minigun",
+        "material": "MeshStandardMaterial"
+      },
+      {
+        "distance": 0.13692120368525745,
+        "geometry": "a3fda9f2-d25c-40b8-badc-2eea3bade424",
+        "inLamp": true,
+        "activePad": null,
+        "material": "gunPaint:minigun"
+      },
+      {
+        "distance": 0.15403916239349652,
+        "geometry": "818f94eb-5e0b-462c-80db-1872c661302f",
+        "inLamp": false,
+        "activePad": null,
+        "material": "gunPaint:minigun"
+      }
+    ]
+  },
+  "dusk/false": {
+    "position": [
+      0,
+      0,
+      -0.0624
+    ],
+    "projected": [
+      -2.2285604991531955e-12,
+      -9.904713329569755e-13,
+      0.2594322140682764
+    ],
+    "draws": [
+      {
+        "geometry": "e7fd609e-c380-43ec-a295-5e6e29075904",
+        "material": "gunPaint:minigun",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      },
+      {
+        "geometry": "a3fda9f2-d25c-40b8-badc-2eea3bade424",
+        "material": "gunPaint:minigun",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      },
+      {
+        "geometry": "9db156b2-e745-4d72-9994-95c8ae34dec6",
+        "material": "MeshStandardMaterial",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      },
+      {
+        "geometry": "d2869cac-5750-4318-baa3-1f6705e71f73",
+        "material": "MeshStandardMaterial",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      }
+    ],
+    "nearest": [
+      {
+        "distance": 0.13500000199898293,
+        "geometry": "d2869cac-5750-4318-baa3-1f6705e71f73",
+        "inLamp": true,
+        "activePad": null,
+        "material": "MeshStandardMaterial"
+      },
+      {
+        "distance": 0.13773777930733605,
+        "geometry": "a3fda9f2-d25c-40b8-badc-2eea3bade424",
+        "inLamp": true,
+        "activePad": null,
+        "material": "gunPaint:minigun"
+      },
+      {
+        "distance": 0.15365941519680462,
+        "geometry": "818f94eb-5e0b-462c-80db-1872c661302f",
+        "inLamp": false,
+        "activePad": null,
+        "material": "gunPaint:minigun"
+      }
+    ]
+  },
+  "dusk/true": {
+    "position": [
+      0,
+      0,
+      -0.061399999999999996
+    ],
+    "projected": [
+      -0.010036407347561581,
+      -0.0025489885157412673,
+      0.26125412766028844
+    ],
+    "draws": [
+      {
+        "geometry": "e7fd609e-c380-43ec-a295-5e6e29075904",
+        "material": "gunPaint:minigun",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      },
+      {
+        "geometry": "a3fda9f2-d25c-40b8-badc-2eea3bade424",
+        "material": "gunPaint:minigun",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      },
+      {
+        "geometry": "9db156b2-e745-4d72-9994-95c8ae34dec6",
+        "material": "MeshStandardMaterial",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      },
+      {
+        "geometry": "7dc50258-7b5a-4581-b259-de5bb55d189a",
+        "material": "MeshStandardMaterial",
+        "type": "MeshStandardMaterial",
+        "activePad": "controls-lightSwitch-minigun"
+      }
+    ],
+    "nearest": [
+      {
+        "distance": 0.13533363312236113,
+        "geometry": "7dc50258-7b5a-4581-b259-de5bb55d189a",
+        "inLamp": true,
+        "activePad": "controls-lightSwitch-minigun",
+        "material": "MeshStandardMaterial"
+      },
+      {
+        "distance": 0.13692120368525745,
+        "geometry": "a3fda9f2-d25c-40b8-badc-2eea3bade424",
+        "inLamp": true,
+        "activePad": null,
+        "material": "gunPaint:minigun"
+      },
+      {
+        "distance": 0.15403916239349652,
+        "geometry": "818f94eb-5e0b-462c-80db-1872c661302f",
+        "inLamp": false,
+        "activePad": null,
+        "material": "gunPaint:minigun"
+      }
+    ]
+  },
+  "night/false": {
+    "position": [
+      0,
+      0,
+      -0.0624
+    ],
+    "projected": [
+      -2.2285604991531955e-12,
+      -9.904713329569755e-13,
+      0.2594322140682764
+    ],
+    "draws": [
+      {
+        "geometry": "e7fd609e-c380-43ec-a295-5e6e29075904",
+        "material": "gunPaint:minigun",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      },
+      {
+        "geometry": "a3fda9f2-d25c-40b8-badc-2eea3bade424",
+        "material": "gunPaint:minigun",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      },
+      {
+        "geometry": "9db156b2-e745-4d72-9994-95c8ae34dec6",
+        "material": "MeshStandardMaterial",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      },
+      {
+        "geometry": "d2869cac-5750-4318-baa3-1f6705e71f73",
+        "material": "MeshStandardMaterial",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      }
+    ],
+    "nearest": [
+      {
+        "distance": 0.13500000199898293,
+        "geometry": "d2869cac-5750-4318-baa3-1f6705e71f73",
+        "inLamp": true,
+        "activePad": null,
+        "material": "MeshStandardMaterial"
+      },
+      {
+        "distance": 0.13773777930733605,
+        "geometry": "a3fda9f2-d25c-40b8-badc-2eea3bade424",
+        "inLamp": true,
+        "activePad": null,
+        "material": "gunPaint:minigun"
+      },
+      {
+        "distance": 0.15365941519680462,
+        "geometry": "818f94eb-5e0b-462c-80db-1872c661302f",
+        "inLamp": false,
+        "activePad": null,
+        "material": "gunPaint:minigun"
+      }
+    ]
+  },
+  "night/true": {
+    "position": [
+      0,
+      0,
+      -0.061399999999999996
+    ],
+    "projected": [
+      -0.010036407347561581,
+      -0.0025489885157412673,
+      0.26125412766028844
+    ],
+    "draws": [
+      {
+        "geometry": "e7fd609e-c380-43ec-a295-5e6e29075904",
+        "material": "gunPaint:minigun",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      },
+      {
+        "geometry": "a3fda9f2-d25c-40b8-badc-2eea3bade424",
+        "material": "gunPaint:minigun",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      },
+      {
+        "geometry": "9db156b2-e745-4d72-9994-95c8ae34dec6",
+        "material": "MeshStandardMaterial",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      },
+      {
+        "geometry": "fd56a95b-bf52-4719-a7d9-cfe4d6e56354",
+        "material": "MeshStandardMaterial",
+        "type": "MeshStandardMaterial",
+        "activePad": "controls-lightSwitch-minigun"
+      }
+    ],
+    "nearest": [
+      {
+        "distance": 0.13533363312236113,
+        "geometry": "fd56a95b-bf52-4719-a7d9-cfe4d6e56354",
+        "inLamp": true,
+        "activePad": "controls-lightSwitch-minigun",
+        "material": "MeshStandardMaterial"
+      },
+      {
+        "distance": 0.13692120368525745,
+        "geometry": "a3fda9f2-d25c-40b8-badc-2eea3bade424",
+        "inLamp": true,
+        "activePad": null,
+        "material": "gunPaint:minigun"
+      },
+      {
+        "distance": 0.15403916239349652,
+        "geometry": "818f94eb-5e0b-462c-80db-1872c661302f",
+        "inLamp": false,
+        "activePad": null,
+        "material": "gunPaint:minigun"
+      }
+    ]
+  }
+}

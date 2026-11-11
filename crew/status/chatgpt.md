@@ -2,12 +2,12 @@
 
 state: active
 model: GPT-6
-task: GP-20103 Guard prep checklist against non-Node key event targets
-touching: ui/prep-checklist.js (input guard), handoffs/2026-11-11-chatgpt-GP-20103.md
-since: 2026-11-11T17:10Z
+task: GP-20105 Training Ground end-to-end live walkthrough in both views
+touching: review/GP-20105, handoffs/2026-11-11-chatgpt-GP-20105.md
+since: 2026-11-11T17:26Z
 next: —
 blocked-on: —
-last-report: handoffs/2026-11-11-chatgpt-GP-20100.md
+last-report: handoffs/2026-11-11-chatgpt-GP-20104.md
 
 ## Notes
 

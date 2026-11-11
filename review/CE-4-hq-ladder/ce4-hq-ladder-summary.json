@@ -1,6 +1,6 @@
 {
   "card": "CE-4-hq-ladder",
-  "capturedAt": "2026-11-11T17:13:04.276Z",
+  "capturedAt": "2026-11-11T17:24:35.373Z",
   "backend": "WebGPUBackend",
   "setup": {
     "backend": "WebGPUBackend",
@@ -29,29 +29,12 @@
     "climbSamples": [
       {
         "step": 0,
-        "frame": 14,
-        "climbHeightM": 0.52,
+        "frame": 18,
+        "climbHeightM": 0.68,
         "handsRelLadder": [
           {
             "x": -0.02,
             "y": 1.64,
-            "z": 0.12
-          },
-          {
-            "x": -0.12,
-            "y": 1.68,
-            "z": -0.12
-          }
-        ]
-      },
-      {
-        "step": 1,
-        "frame": 32,
-        "climbHeightM": 1.24,
-        "handsRelLadder": [
-          {
-            "x": -0.02,
-            "y": 2.53,
             "z": 0.12
           },
           {
@@ -62,13 +45,30 @@
         ]
       },
       {
-        "step": 2,
-        "frame": 50,
-        "climbHeightM": 1.96,
+        "step": 1,
+        "frame": 33,
+        "climbHeightM": 1.28,
         "handsRelLadder": [
           {
+            "x": -0.02,
+            "y": 2.53,
+            "z": 0.12
+          },
+          {
             "x": -0.058,
-            "y": 3.4,
+            "y": 2.14,
+            "z": -0.12
+          }
+        ]
+      },
+      {
+        "step": 2,
+        "frame": 48,
+        "climbHeightM": 1.88,
+        "handsRelLadder": [
+          {
+            "x": -0.112,
+            "y": 3.17,
             "z": 0.12
           },
           {
@@ -80,12 +80,12 @@
       },
       {
         "step": 3,
-        "frame": 68,
-        "climbHeightM": 2.68,
+        "frame": 63,
+        "climbHeightM": 2.48,
         "handsRelLadder": [
           {
-            "x": -0.091,
-            "y": 3.59,
+            "x": -0.02,
+            "y": 3.42,
             "z": 0.12
           },
           {
@@ -97,8 +97,8 @@
       },
       {
         "step": 4,
-        "frame": 86,
-        "climbHeightM": 3.4,
+        "frame": 78,
+        "climbHeightM": 3.08,
         "handsRelLadder": [
           {
             "x": -0.02,
@@ -106,20 +106,20 @@
             "z": 0.12
           },
           {
-            "x": -0.02,
-            "y": 4.75,
+            "x": -0.058,
+            "y": 3.92,
             "z": -0.12
           }
         ]
       },
       {
         "step": 5,
-        "frame": 104,
-        "climbHeightM": 4.12,
+        "frame": 93,
+        "climbHeightM": 3.68,
         "handsRelLadder": [
           {
-            "x": -0.02,
-            "y": 5.2,
+            "x": -0.112,
+            "y": 4.96,
             "z": 0.12
           },
           {
@@ -158,25 +158,25 @@
     ],
     "thirdPersonClearances": {
       "low": {
-        "climbHeightM": 1.08,
-        "maxBodyOrFistX": -4.7858,
+        "climbHeightM": 0.92,
+        "maxBodyOrFistX": -4.996,
         "pierFaceX": -5.25,
         "wallFaceX": -5,
-        "clearanceFromPierCm": -46.42,
-        "clearanceFromWallCm": -21.42
+        "clearanceFromPierCm": -25.4,
+        "clearanceFromWallCm": -0.4
       },
       "high": {
-        "climbHeightM": 2.92,
-        "maxBodyOrFistX": -4.6628,
+        "climbHeightM": 2.2,
+        "maxBodyOrFistX": -4.5896,
         "pierFaceX": -5.25,
         "wallFaceX": -5,
-        "clearanceFromPierCm": -58.72,
-        "clearanceFromWallCm": -33.72
+        "clearanceFromPierCm": -66.04,
+        "clearanceFromWallCm": -41.04
       }
     },
     "maxHandOutsideRailM": 0,
     "maxHandOffRungLineM": 0.12,
-    "maxArmEastXRelPierM": 0.9363
+    "maxArmEastXRelPierM": 0.9368
   },
   "nodeContainsAudit": {
     "livePlayPageErrors": 0,
@@ -188,147 +188,147 @@
   "shots": {
     "eye-climb-0": {
       "name": "eye-climb-0.jpg",
-      "bytes": 166790,
-      "lumaMean": 83.71,
-      "lumaStd": 68.16
+      "bytes": 10308,
+      "lumaMean": 22.55,
+      "lumaStd": 3.69
     },
     "eye-climb-1": {
       "name": "eye-climb-1.jpg",
-      "bytes": 27901,
-      "lumaMean": 56.42,
-      "lumaStd": 31.54
-    },
-    "eye-climb-2": {
-      "name": "eye-climb-2.jpg",
-      "bytes": 36464,
-      "lumaMean": 61.25,
-      "lumaStd": 29.16
+      "bytes": 17023,
+      "lumaMean": 55.09,
+      "lumaStd": 28.87
     },
     "eye-4light-noon": {
       "name": "eye-4light-noon.jpg",
-      "bytes": 24435,
-      "lumaMean": 58.93,
-      "lumaStd": 27.66
+      "bytes": 30481,
+      "lumaMean": 60.98,
+      "lumaStd": 27.41
     },
     "eye-4light-overcast": {
       "name": "eye-4light-overcast.jpg",
-      "bytes": 19877,
-      "lumaMean": 43.64,
-      "lumaStd": 16.43
+      "bytes": 23297,
+      "lumaMean": 41.75,
+      "lumaStd": 17.73
     },
     "eye-4light-dusk": {
       "name": "eye-4light-dusk.jpg",
-      "bytes": 28049,
-      "lumaMean": 54.76,
-      "lumaStd": 21.87
+      "bytes": 33619,
+      "lumaMean": 55.58,
+      "lumaStd": 22.15
     },
     "eye-4light-night": {
       "name": "eye-4light-night.jpg",
-      "bytes": 25216,
-      "lumaMean": 43.28,
-      "lumaStd": 16.64
+      "bytes": 29385,
+      "lumaMean": 41.81,
+      "lumaStd": 18.15
+    },
+    "eye-climb-2": {
+      "name": "eye-climb-2.jpg",
+      "bytes": 30481,
+      "lumaMean": 60.98,
+      "lumaStd": 27.41
     },
     "eye-climb-3": {
       "name": "eye-climb-3.jpg",
-      "bytes": 27443,
-      "lumaMean": 70.03,
-      "lumaStd": 24.59
+      "bytes": 27951,
+      "lumaMean": 54.02,
+      "lumaStd": 23.79
     },
     "eye-climb-4": {
       "name": "eye-climb-4.jpg",
-      "bytes": 40688,
-      "lumaMean": 69.32,
-      "lumaStd": 26.58
+      "bytes": 37655,
+      "lumaMean": 66.16,
+      "lumaStd": 23.82
     },
     "eye-climb-5": {
       "name": "eye-climb-5.jpg",
-      "bytes": 39722,
-      "lumaMean": 80.7,
-      "lumaStd": 38.29
+      "bytes": 34104,
+      "lumaMean": 67.05,
+      "lumaStd": 27.51
     },
     "roof-step-0": {
       "name": "roof-step-0.jpg",
-      "bytes": 180225,
-      "lumaMean": 86.54,
-      "lumaStd": 43.42
+      "bytes": 179933,
+      "lumaMean": 86.5,
+      "lumaStd": 43.41
     },
     "roof-step-1": {
       "name": "roof-step-1.jpg",
-      "bytes": 186992,
-      "lumaMean": 84.67,
-      "lumaStd": 40.22
+      "bytes": 186957,
+      "lumaMean": 84.65,
+      "lumaStd": 40.2
     },
     "roof-step-2": {
       "name": "roof-step-2.jpg",
-      "bytes": 186599,
-      "lumaMean": 84.77,
-      "lumaStd": 40.48
+      "bytes": 186486,
+      "lumaMean": 84.76,
+      "lumaStd": 40.46
     },
     "roof-step-3": {
       "name": "roof-step-3.jpg",
-      "bytes": 185049,
-      "lumaMean": 84.73,
-      "lumaStd": 40.6
+      "bytes": 185009,
+      "lumaMean": 84.72,
+      "lumaStd": 40.59
     },
     "tp-side-low-noon": {
       "name": "tp-side-low-noon.jpg",
-      "bytes": 107238,
-      "lumaMean": 67.86,
-      "lumaStd": 47.78
+      "bytes": 110216,
+      "lumaMean": 82.78,
+      "lumaStd": 42.19
     },
     "tp-side-low-overcast": {
       "name": "tp-side-low-overcast.jpg",
-      "bytes": 94377,
-      "lumaMean": 48.14,
-      "lumaStd": 30.46
+      "bytes": 98240,
+      "lumaMean": 57.17,
+      "lumaStd": 29.27
     },
     "tp-side-low-dusk": {
       "name": "tp-side-low-dusk.jpg",
-      "bytes": 86411,
-      "lumaMean": 38.54,
-      "lumaStd": 32.98
+      "bytes": 92874,
+      "lumaMean": 49.98,
+      "lumaStd": 28.55
     },
     "tp-side-low-night": {
       "name": "tp-side-low-night.jpg",
-      "bytes": 88426,
-      "lumaMean": 61.8,
-      "lumaStd": 53.27
+      "bytes": 91311,
+      "lumaMean": 84.18,
+      "lumaStd": 72.25
     },
     "tp-behind-low-noon": {
       "name": "tp-behind-low-noon.jpg",
-      "bytes": 103534,
-      "lumaMean": 62.3,
-      "lumaStd": 42.1
+      "bytes": 117586,
+      "lumaMean": 59.27,
+      "lumaStd": 37.34
     },
     "tp-side-high-noon": {
       "name": "tp-side-high-noon.jpg",
-      "bytes": 74120,
-      "lumaMean": 89.52,
-      "lumaStd": 39.26
+      "bytes": 111342,
+      "lumaMean": 63.27,
+      "lumaStd": 46.99
     },
     "tp-side-high-overcast": {
       "name": "tp-side-high-overcast.jpg",
-      "bytes": 66427,
-      "lumaMean": 60.84,
-      "lumaStd": 26.61
+      "bytes": 98959,
+      "lumaMean": 43.73,
+      "lumaStd": 29.91
     },
     "tp-side-high-dusk": {
       "name": "tp-side-high-dusk.jpg",
-      "bytes": 65282,
-      "lumaMean": 47.01,
-      "lumaStd": 30.36
+      "bytes": 106645,
+      "lumaMean": 42.64,
+      "lumaStd": 30.31
     },
     "tp-side-high-night": {
       "name": "tp-side-high-night.jpg",
-      "bytes": 64938,
-      "lumaMean": 60.03,
-      "lumaStd": 49.19
+      "bytes": 106199,
+      "lumaMean": 57.15,
+      "lumaStd": 42.94
     },
     "tp-behind-high-noon": {
       "name": "tp-behind-high-noon.jpg",
-      "bytes": 85135,
-      "lumaMean": 68.22,
-      "lumaStd": 35.36
+      "bytes": 125275,
+      "lumaMean": 58.99,
+      "lumaStd": 41.31
     }
   },
   "pageErrors": [],

@@ -1,6 +1,6 @@
 import {displayDepth,packDepth} from './display-depth.mjs';
 
-export function makeViews(T) {
+export function makeViews(T,wallPoseMode=false) {
   const G=T.THREE, H=T.inspectHost();
   const step=n=>{for(let i=0;i<n;i++) T.stepFrame(1/30);};
   const css=document.createElement('style');
@@ -45,6 +45,41 @@ export function makeViews(T) {
     shown.visible=visible;
     for(let i=0;i<3;i++) { step(1); await new Promise(r=>setTimeout(r,35)); }
   }
+  // A/B cosmetic stills reuse only the actor's recorded pose. The new weapon geometry,
+  // materials and every part inside its root come from the normal model builder.
+  function captureActorPose(){
+    const rows=[],weapons=new Set([...Object.values(T.weaponMeshes),...Object.values(T.offhandMeshes)]);
+    function walk(node,path){
+      if(!node.visible || weapons.has(node))return;
+      if(node.matrixAutoUpdate)node.updateMatrix();
+      rows.push([path,node.type,node.name,node.matrix.toArray()]);
+      node.children.forEach((child,i)=>walk(child,[...path,i]));
+    }
+    walk(T.player,[]);
+    gun.updateWorldMatrix(true,false);
+    return {rows,gunWorld:gun.matrixWorld.toArray()};
+  }
+  function restoreActorPose(saved){
+    if(!saved?.rows?.length)throw Error('Missing recorded gameplay pose');
+    const resolved=new Map(),used=new Set();
+    for(const [path,type,name,matrix] of saved.rows){
+      const parent=path.length?resolved.get(path.slice(0,-1).join('.')):null;
+      const matches=n=>n && n.type===type && n.name===name && !used.has(n);
+      let node=path.length?parent?.children[path.at(-1)]:T.player;
+      // The game batches the skin into separately named identity draws. Their sibling
+      // order can differ between launches while their posed transform tree is identical.
+      if(!matches(node))node=parent?.children.find(matches);
+      if(!node)throw Error('Missing original actor node '+path.join('.')+' '+type+' '+name+' in '+(parent?.children.map(c=>c.type+'/'+c.name).join(',')||'no parent'));
+      resolved.set(path.join('.'),node);used.add(node);
+      node.matrix.fromArray(matrix);node.matrix.decompose(node.position,node.quaternion,node.scale);
+      node.matrixWorldNeedsUpdate=true;
+    }
+    T.player.updateWorldMatrix(true,true);
+    gun.parent.updateWorldMatrix(true,false);
+    const local=gun.parent.matrixWorld.clone().invert().multiply(new G.Matrix4().fromArray(saved.gunWorld));
+    local.decompose(gun.position,gun.quaternion,gun.scale);gun.updateMatrix();gun.updateWorldMatrix(true,true);
+    if(gun.matrixWorld.elements.some((v,i)=>Math.abs(v-saved.gunWorld[i])>1e-6))throw Error('Gun pose differs from recorded gameplay');
+  }
   async function pose(view, testSpot=null) {
     const openFloor=view.endsWith('-open');
     if(openFloor)view=view.slice(0,-5);
@@ -55,7 +90,14 @@ export function makeViews(T) {
     // behind it is reachable and clear of both the range and station colliders.
     let spot=[range.origin.x,range.origin.z-(openFloor?5:.55)];
     if(testSpot) spot=[range.origin.x+testSpot[0],range.origin.z+testSpot[1]];
+    const wall=wallPoseMode && id==='uzi' && !openFloor && !testSpot && !eye && !rackView;
     T.player.position.set(spot[0],range.floorY,spot[1]); T.setOtsAimDbg(testSpot?.[2]||0,-.08); step(75);
+    let saved;
+    if(wall && wallPoseMode==='replay'){
+      const reference=window.recordedWaspViews?.[view];
+      if(!reference || Math.hypot(reference.actualSpot[0]-spot[0],reference.actualSpot[2]-spot[1])>.001)throw Error('Original wall pose is at another spot');
+      saved=reference.nativePose;restoreActorPose(saved);
+    }
     if(openFloor && !testSpot){
       const p=T.player.position;
       const boxes=[...range.solids.filter(b=>!b.floor && b.target==null),...(T.trainingDbg.state().cameraCollision?.boxes||[])];
@@ -95,7 +137,8 @@ export function makeViews(T) {
         const pivot=gun.localToWorld(centre.clone());
         const side=view==='held-right'?1:-1;
         const offset=new G.Vector3(2.1*side,.43,.42).normalize().applyQuaternion(gun.getWorldQuaternion(new G.Quaternion()));
-        aim(pivot.clone().addScaledVector(offset,Math.max(.8,carry.userData.length*2.1)),pivot,34);
+        if(saved)aim(new G.Vector3(...saved.eye),new G.Vector3(...saved.target),saved.fov);
+        else aim(pivot.clone().addScaledVector(offset,Math.max(.8,carry.userData.length*2.1)),pivot,34);
         shown=gun; gun.updateWorldMatrix(true,false); model=gun.matrixWorld.clone();
       }
       transform=p=>{
@@ -113,8 +156,14 @@ export function makeViews(T) {
     const points=[[0,0,0],[1,0,0],[0,1,0],[0,0,1]].map(x=>transform(new G.Vector3(...x)));
     const glassHidden=view==='aimed' && !vm.root.visible && vm.info.ads>.88 && Number(document.getElementById('scopeOverlay').style.opacity)>.95;
     const forward=new G.Vector3(0,0,1).applyQuaternion(gun.getWorldQuaternion(new G.Quaternion()));
+    let nativePose;
+    if(wall && wallPoseMode==='record'){
+      nativePose=captureActorPose();
+      const eyePoint=camera.getWorldPosition(new G.Vector3());
+      nativePose.eye=eyePoint.toArray();nativePose.target=eyePoint.clone().add(camera.getWorldDirection(new G.Vector3())).toArray();nativePose.fov=camera.fov;
+    }
     return {points,eye,glassHidden,fov:eye?null:camera.fov,target:rackView?'whole displayed rack':'isolated held artwork',
-      spot,actualSpot:T.player.position.toArray(),heldElevation:eye||rackView?null:Math.asin(Math.max(-1,Math.min(1,forward.y)))*180/Math.PI};
+      nativePose,recordedWallPose:!!saved,spot,actualSpot:T.player.position.toArray(),heldElevation:eye||rackView?null:Math.asin(Math.max(-1,Math.min(1,forward.y)))*180/Math.PI};
   }
   async function mask(normal,repeat,hidden) {
     const decode=async str=>{

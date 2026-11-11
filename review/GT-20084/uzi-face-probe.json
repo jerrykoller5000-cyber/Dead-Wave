@@ -1,0 +1,152 @@
+[
+  {
+    "name": "rear",
+    "normal": [
+      0,
+      0,
+      -1
+    ],
+    "centre": [
+      0,
+      0,
+      -0.065
+    ],
+    "visible": 0,
+    "straight": false
+  },
+  {
+    "name": "left -0.2",
+    "normal": [
+      -1,
+      0,
+      0
+    ],
+    "centre": [
+      -0.026,
+      -0.00611,
+      -0.026000000000000002
+    ],
+    "visible": 16,
+    "straight": true
+  },
+  {
+    "name": "right -0.2",
+    "normal": [
+      1,
+      0,
+      0
+    ],
+    "centre": [
+      0.026,
+      -0.00611,
+      -0.026000000000000002
+    ],
+    "visible": 25,
+    "straight": true
+  },
+  {
+    "name": "bottom -0.2",
+    "normal": [
+      0,
+      -1,
+      0
+    ],
+    "centre": [
+      0,
+      -0.0235,
+      -0.026000000000000002
+    ],
+    "visible": 18,
+    "straight": true
+  },
+  {
+    "name": "left 0.1",
+    "normal": [
+      -1,
+      0,
+      0
+    ],
+    "centre": [
+      -0.026,
+      -0.00611,
+      0.013000000000000001
+    ],
+    "visible": 22,
+    "straight": true
+  },
+  {
+    "name": "right 0.1",
+    "normal": [
+      1,
+      0,
+      0
+    ],
+    "centre": [
+      0.026,
+      -0.00611,
+      0.013000000000000001
+    ],
+    "visible": 25,
+    "straight": true
+  },
+  {
+    "name": "bottom 0.1",
+    "normal": [
+      0,
+      -1,
+      0
+    ],
+    "centre": [
+      0,
+      -0.0235,
+      0.013000000000000001
+    ],
+    "visible": 25,
+    "straight": true
+  },
+  {
+    "name": "left 0.3",
+    "normal": [
+      -1,
+      0,
+      0
+    ],
+    "centre": [
+      -0.026,
+      -0.00611,
+      0.039
+    ],
+    "visible": 24,
+    "straight": true
+  },
+  {
+    "name": "right 0.3",
+    "normal": [
+      1,
+      0,
+      0
+    ],
+    "centre": [
+      0.026,
+      -0.00611,
+      0.039
+    ],
+    "visible": 25,
+    "straight": true
+  },
+  {
+    "name": "bottom 0.3",
+    "normal": [
+      0,
+      -1,
+      0
+    ],
+    "centre": [
+      0,
+      -0.0235,
+      0.039
+    ],
+    "visible": 25,
+    "straight": true
+  }
+]
