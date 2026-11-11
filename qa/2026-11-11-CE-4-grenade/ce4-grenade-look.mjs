@@ -80,7 +80,7 @@ async function main() {
     const page = await browser.newPage({ width: 1280, height: 720 });
     try {
       await moveOffscreen(page);
-      await page.goto(`${server.origin}/index.html?debug=1`, { timeout: 180000 });
+      await page.goto(`${server.origin}/index.html?debug=1&raf=timer`, { timeout: 180000 });
       await moveOffscreen(page);
       assert(await page.waitFor('window.TT && window.DWLoad && DWLoad.snapshot().state === "ready"', { timeout: 120000 }));
       await page.evaluate('DWOpening.dismissForTesting()');

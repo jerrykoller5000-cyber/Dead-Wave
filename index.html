@@ -54003,7 +54003,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // GP-20100: the held gun and both arms make room before IK when a nearby solid
     // interrupts the shoulder-to-muzzle corridor. The clear pose keeps its old aim.
     const WALL_HOLD = { lead: 0.16, keep: 0.12, back: 0.34, up: 0.08, pitch: 1.42, release: 10 };
-    const _wallHold = { kind: null, r: 0, l: 0, tip: new THREE.Vector3(), local: new THREE.Vector3(), shoulderR: new THREE.Vector3(), shoulderL: new THREE.Vector3(),
+    const _wallHold = { kind: null, r: 0, l: 0, tip: new THREE.Vector3(), probe: new THREE.Vector3(), local: new THREE.Vector3(), shoulderR: new THREE.Vector3(), shoulderL: new THREE.Vector3(),
       pivot: new THREE.Vector3(), dir: new THREE.Vector3(), scale: new THREE.Vector3(),
       pitch: new THREE.Quaternion(), poleR: new THREE.Vector3(), poleL: new THREE.Vector3(),
       inv: new THREE.Matrix4(), meshM: new THREE.Matrix4(), part: new THREE.Box3(), nearBuilds: [] };
@@ -54082,12 +54082,14 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       gun.getWorldScale(_wallHold.scale);
       const tip = _wallHold.tip.set(0, shape.y, shape.front).sub(_wallHold.pivot.set(pivotLocal[0], pivotLocal[1], pivotLocal[2]))
         .multiply(_wallHold.scale).applyQuaternion(gunQ).add(pivotW);
-      const length = shoulder.distanceTo(tip), clear = heldWallDistance(shoulder, tip, shape.radius);
+      const dir = _wallHold.dir.copy(tip).sub(shoulder);
+      const length = dir.length();
+      if (length > 0.001) dir.multiplyScalar(1 / length);
+      const clear = heldWallDistance(shoulder, _wallHold.probe.copy(tip).addScaledVector(dir, WALL_HOLD.lead), shape.radius);
       const want = Number.isFinite(clear) ? _clamp01((length + WALL_HOLD.lead - clear) / Math.max(0.1, length - WALL_HOLD.keep)) : 0;
       // The lead distance makes the approach continuous; an immediate increase keeps a fast step from entering the wall.
       const w = _wallHold[side] = Math.max(want, _wallHold[side] * Math.exp(-WALL_HOLD.release * Math.max(0, dt)));
       if (w > 0.001) {
-        const dir = _wallHold.dir.copy(tip).sub(shoulder).normalize();
         pivotW.addScaledVector(dir, -WALL_HOLD.back * w);
         pivotW.y += WALL_HOLD.up * w;
         gunQ.multiply(_wallHold.pitch.setFromAxisAngle(_AXIS_X, -WALL_HOLD.pitch * w));

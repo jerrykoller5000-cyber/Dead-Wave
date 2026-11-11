@@ -1,0 +1,413 @@
+{
+  "capturedAt": "2026-11-11T15:03:59.182Z",
+  "mode1P": {
+    "totalBlackoutWallMs": 6783.6,
+    "phases": [
+      {
+        "phase": "startTraining() + enterTraining() sync build (room/stations/colliders)",
+        "ms": 894.3
+      },
+      {
+        "phase": "warmFrame / render during blackout",
+        "ms": 18.6
+      },
+      {
+        "phase": "renderer.compileAsync (sync CPU)",
+        "ms": 4845.9,
+        "asyncTotalMs": 5122.6
+      },
+      {
+        "phase": "Dawn async pipeline queue wait (beyond sync CPU)",
+        "ms": 276.7
+      },
+      {
+        "phase": "warmFrame / render during blackout",
+        "ms": 0.4
+      },
+      {
+        "phase": "warmFrame / render during blackout",
+        "ms": 288.7
+      },
+      {
+        "phase": "warmFrame / render during blackout",
+        "ms": 0.1
+      },
+      {
+        "phase": "warmFrame / render during blackout",
+        "ms": 0
+      },
+      {
+        "phase": "warmFrame / render during blackout",
+        "ms": 0.1
+      },
+      {
+        "phase": "warmFrame / render during blackout",
+        "ms": 0.1
+      },
+      {
+        "phase": "warmFrame / render during blackout",
+        "ms": 0.2
+      },
+      {
+        "phase": "warmFrame / render during blackout",
+        "ms": 0
+      },
+      {
+        "phase": "warmFrame / render during blackout",
+        "ms": 0.1
+      },
+      {
+        "phase": "warmFrame / render during blackout",
+        "ms": 0
+      },
+      {
+        "phase": "warmFrame / render during blackout",
+        "ms": 0.2
+      },
+      {
+        "phase": "warmFrame / render during blackout",
+        "ms": 0
+      },
+      {
+        "phase": "warmFrame / render during blackout",
+        "ms": 0.1
+      },
+      {
+        "phase": "warmFrame / render during blackout",
+        "ms": 0
+      },
+      {
+        "phase": "warmFrame / render during blackout",
+        "ms": 290.3
+      },
+      {
+        "phase": "device.queue.onSubmittedWorkDone()",
+        "ms": 111.7
+      }
+    ],
+    "bucketsByCpuMs": [
+      {
+        "name": "Training Cutaway / Containment Fade Materials",
+        "objects": 362,
+        "uniqueMats": 62,
+        "uniqueGeoms": 80,
+        "cpuMs": 1515.5,
+        "newAsyncPipes": 22,
+        "asyncPipeSpanMs": 5084.7
+      },
+      {
+        "name": "Marine Fade Pipeline Keepers (SkinnedMesh fade)",
+        "objects": 106,
+        "uniqueMats": 62,
+        "uniqueGeoms": 43,
+        "cpuMs": 1014.6,
+        "newAsyncPipes": 39,
+        "asyncPipeSpanMs": 5080.7
+      },
+      {
+        "name": "3P Other 11 Weapons (weaponMeshes + offhand)",
+        "objects": 31,
+        "uniqueMats": 11,
+        "uniqueGeoms": 12,
+        "cpuMs": 469.1,
+        "newAsyncPipes": 11,
+        "asyncPipeSpanMs": 5076.2
+      },
+      {
+        "name": "3P Carried Gear, Slings & Pouches",
+        "objects": 197,
+        "uniqueMats": 37,
+        "uniqueGeoms": 52,
+        "cpuMs": 452,
+        "newAsyncPipes": 19,
+        "asyncPipeSpanMs": 5081.4
+      },
+      {
+        "name": "Training Ground Architecture & Props (tg.group)",
+        "objects": 383,
+        "uniqueMats": 80,
+        "uniqueGeoms": 115,
+        "cpuMs": 433.2,
+        "newAsyncPipes": 2,
+        "asyncPipeSpanMs": 4150.7
+      },
+      {
+        "name": "Training Copied HQ Stations (CIF/Armory/Kiosk/Panel/Skull)",
+        "objects": 52,
+        "uniqueMats": 14,
+        "uniqueGeoms": 17,
+        "cpuMs": 361.8,
+        "newAsyncPipes": 5,
+        "asyncPipeSpanMs": 3879.4
+      },
+      {
+        "name": "1P Other 11 Weapons (vm-warmup 11 gun clones)",
+        "objects": 14,
+        "uniqueMats": 10,
+        "uniqueGeoms": 13,
+        "cpuMs": 353.3,
+        "newAsyncPipes": 11,
+        "asyncPipeSpanMs": 3428
+      },
+      {
+        "name": "3P Marine Body & Rig (SkinnedMesh)",
+        "objects": 50,
+        "uniqueMats": 16,
+        "uniqueGeoms": 10,
+        "cpuMs": 328.4,
+        "newAsyncPipes": 8,
+        "asyncPipeSpanMs": 2312.3
+      },
+      {
+        "name": "1P Viewmodel Blade & Grenade Hands",
+        "objects": 7,
+        "uniqueMats": 7,
+        "uniqueGeoms": 7,
+        "cpuMs": 194.7,
+        "newAsyncPipes": 7,
+        "asyncPipeSpanMs": 3616.2
+      },
+      {
+        "name": "Training Perimeter Fence (solid + fade)",
+        "objects": 12,
+        "uniqueMats": 5,
+        "uniqueGeoms": 5,
+        "cpuMs": 84,
+        "newAsyncPipes": 2,
+        "asyncPipeSpanMs": 1330
+      },
+      {
+        "name": "Training Room Solid Keeper Proxies (cutawayKeepers)",
+        "objects": 1,
+        "uniqueMats": 1,
+        "uniqueGeoms": 1,
+        "cpuMs": 37.3,
+        "newAsyncPipes": 1,
+        "asyncPipeSpanMs": 3647.8
+      },
+      {
+        "name": "World / VFX Empty InstancedMesh Warmup",
+        "objects": 20,
+        "uniqueMats": 9,
+        "uniqueGeoms": 2,
+        "cpuMs": 27.3,
+        "newAsyncPipes": 0,
+        "asyncPipeSpanMs": 0
+      },
+      {
+        "name": "Other Scene / World Keepers",
+        "objects": 52,
+        "uniqueMats": 8,
+        "uniqueGeoms": 1,
+        "cpuMs": 2.3,
+        "newAsyncPipes": 0,
+        "asyncPipeSpanMs": 0
+      }
+    ]
+  },
+  "mode3P": {
+    "totalBlackoutWallMs": 8803.1,
+    "phases": [
+      {
+        "phase": "startTraining() + enterTraining() sync build (room/stations/colliders)",
+        "ms": 1132.4
+      },
+      {
+        "phase": "warmFrame / render during blackout",
+        "ms": 24.3
+      },
+      {
+        "phase": "renderer.compileAsync (sync CPU)",
+        "ms": 6435.1,
+        "asyncTotalMs": 6638
+      },
+      {
+        "phase": "Dawn async pipeline queue wait (beyond sync CPU)",
+        "ms": 202.9
+      },
+      {
+        "phase": "warmFrame / render during blackout",
+        "ms": 0.4
+      },
+      {
+        "phase": "warmFrame / render during blackout",
+        "ms": 384.6
+      },
+      {
+        "phase": "warmFrame / render during blackout",
+        "ms": 0.1
+      },
+      {
+        "phase": "warmFrame / render during blackout",
+        "ms": 0.1
+      },
+      {
+        "phase": "warmFrame / render during blackout",
+        "ms": 0.1
+      },
+      {
+        "phase": "warmFrame / render during blackout",
+        "ms": 0.1
+      },
+      {
+        "phase": "warmFrame / render during blackout",
+        "ms": 0.1
+      },
+      {
+        "phase": "warmFrame / render during blackout",
+        "ms": 0.1
+      },
+      {
+        "phase": "warmFrame / render during blackout",
+        "ms": 0.1
+      },
+      {
+        "phase": "warmFrame / render during blackout",
+        "ms": 0.1
+      },
+      {
+        "phase": "warmFrame / render during blackout",
+        "ms": 0.1
+      },
+      {
+        "phase": "warmFrame / render during blackout",
+        "ms": 0
+      },
+      {
+        "phase": "warmFrame / render during blackout",
+        "ms": 0.1
+      },
+      {
+        "phase": "warmFrame / render during blackout",
+        "ms": 0.1
+      },
+      {
+        "phase": "warmFrame / render during blackout",
+        "ms": 386.6
+      },
+      {
+        "phase": "device.queue.onSubmittedWorkDone()",
+        "ms": 168.1
+      }
+    ],
+    "bucketsByCpuMs": [
+      {
+        "name": "Training Cutaway / Containment Fade Materials",
+        "objects": 366,
+        "uniqueMats": 62,
+        "uniqueGeoms": 79,
+        "cpuMs": 1962.3,
+        "newAsyncPipes": 22,
+        "asyncPipeSpanMs": 6569.1
+      },
+      {
+        "name": "Marine Fade Pipeline Keepers (SkinnedMesh fade)",
+        "objects": 106,
+        "uniqueMats": 62,
+        "uniqueGeoms": 43,
+        "cpuMs": 1580.9,
+        "newAsyncPipes": 39,
+        "asyncPipeSpanMs": 6553.2
+      },
+      {
+        "name": "3P Carried Gear, Slings & Pouches",
+        "objects": 197,
+        "uniqueMats": 37,
+        "uniqueGeoms": 52,
+        "cpuMs": 796.6,
+        "newAsyncPipes": 19,
+        "asyncPipeSpanMs": 6554.6
+      },
+      {
+        "name": "Training Ground Architecture & Props (tg.group)",
+        "objects": 377,
+        "uniqueMats": 70,
+        "uniqueGeoms": 103,
+        "cpuMs": 544.1,
+        "newAsyncPipes": 2,
+        "asyncPipeSpanMs": 5127.1
+      },
+      {
+        "name": "3P Other 11 Weapons (weaponMeshes + offhand)",
+        "objects": 31,
+        "uniqueMats": 11,
+        "uniqueGeoms": 12,
+        "cpuMs": 474,
+        "newAsyncPipes": 11,
+        "asyncPipeSpanMs": 6548
+      },
+      {
+        "name": "3P Marine Body & Rig (SkinnedMesh)",
+        "objects": 50,
+        "uniqueMats": 16,
+        "uniqueGeoms": 10,
+        "cpuMs": 466.4,
+        "newAsyncPipes": 8,
+        "asyncPipeSpanMs": 2867.5
+      },
+      {
+        "name": "1P Other 11 Weapons (vm-warmup 11 gun clones)",
+        "objects": 14,
+        "uniqueMats": 10,
+        "uniqueGeoms": 13,
+        "cpuMs": 412.1,
+        "newAsyncPipes": 11,
+        "asyncPipeSpanMs": 4342.4
+      },
+      {
+        "name": "Training Copied HQ Stations (CIF/Armory/Kiosk/Panel/Skull)",
+        "objects": 62,
+        "uniqueMats": 14,
+        "uniqueGeoms": 17,
+        "cpuMs": 339.5,
+        "newAsyncPipes": 5,
+        "asyncPipeSpanMs": 4892.5
+      },
+      {
+        "name": "1P Viewmodel Blade & Grenade Hands",
+        "objects": 7,
+        "uniqueMats": 7,
+        "uniqueGeoms": 7,
+        "cpuMs": 283.1,
+        "newAsyncPipes": 7,
+        "asyncPipeSpanMs": 4603.2
+      },
+      {
+        "name": "Training Perimeter Fence (solid + fade)",
+        "objects": 16,
+        "uniqueMats": 5,
+        "uniqueGeoms": 5,
+        "cpuMs": 86,
+        "newAsyncPipes": 2,
+        "asyncPipeSpanMs": 1701.9
+      },
+      {
+        "name": "Training Room Solid Keeper Proxies (cutawayKeepers)",
+        "objects": 1,
+        "uniqueMats": 1,
+        "uniqueGeoms": 1,
+        "cpuMs": 39.4,
+        "newAsyncPipes": 1,
+        "asyncPipeSpanMs": 4647.5
+      },
+      {
+        "name": "World / VFX Empty InstancedMesh Warmup",
+        "objects": 20,
+        "uniqueMats": 9,
+        "uniqueGeoms": 2,
+        "cpuMs": 35.7,
+        "newAsyncPipes": 0,
+        "asyncPipeSpanMs": 0
+      },
+      {
+        "name": "Other Scene / World Keepers",
+        "objects": 52,
+        "uniqueMats": 8,
+        "uniqueGeoms": 1,
+        "cpuMs": 1.8,
+        "newAsyncPipes": 0,
+        "asyncPipeSpanMs": 0
+      }
+    ]
+  }
+}

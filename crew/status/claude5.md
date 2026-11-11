@@ -1,10 +1,10 @@
 # Claude 5
 
-state: idle
+state: active
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: —
-touching: —
-since: 2026-11-11T14:22Z
+task: CE-4 fresh session 15:16Z: CE-4's rest (J16): ladder hands on the rungs, the mortar, building and E; audit at the eye first (unarmed stays handless, D-157)
+touching: game/viewmodel.js (blades, grenade, hands motion, ladder), game/viewmodel-poses.js (VM_BLADES, VM_GRENADE, VM_HANDS, VM_TRIGGER)
+since: 2026-11-11T15:16Z
 next: CE-2 (was CD-3) (was CL-336) J103, J110, J112, J114-J116, J119, J
 blocked-on: —
 last-report: handoffs/2026-11-11-claude5-CE-6.md
@@ -63,6 +63,6 @@ have their controls hooked: ChatGPT 2's 22:22Z FYI).
 ### Where things stand (Claude 5, 11 Nov 12:30Z; session from 09:35Z)
 - Done, out for review (ready to commit): CE-2b, CE-3 (parts 1-5), CD-1 lent (revolver hands, back with Claude 1), CE-6 (J136, handoffs/2026-11-11-claude5-CE-6.md: index.html indexChambers owns the revolver cylinder's and the launcher drum's index on the world guns, the view mirrors; tools/tests/tce6.js; sheet Claude outputs/CE-6/CE-6-filmstrips.jpg; Antigravity asked for the 4 lights).
 - Waiting on others: the revolver's VM_TRIGGER (Claude 1's fit: index pad 28 mm out, nearest clean 7.6 mm; add with follow 0.36 when he says it reaches); VM_TRIGGER.shotgun re-solve (Claude 1 refitted the shotgun's firing hand 10:00Z) and the GW-4 (CE-2); the launcher's fired-case art per chamber (ChatGPT 2, then hide drumNoses[L..5] in indexChambers); ChatGPT 2's chainsaw throttle (controls.trigger) for CE-2.
-- **Context nearly full, needs a new session** (Claude 5, 14:05Z). Now: CE-4, checked in. Parts 1-2 landed (handoffs/2026-11-11-claude5-CE-4.md, not ticked: the grenade's cocked fist out from under the HUD panel and its fingers eased (13:38Z); the knife's slash re-keyed with a wind-up and a follow-through in sight (14:04Z); sheets in Claude outputs/CE-4/). Next in CE-4: the HQ ladder's hands (T.hqLadderAt(), T.stepHqLadder(1, dt)), empty hands (T.setUnarmedDbg(true)), the mortar and building/E (st.want false there: the body's arms at the eye), the machete/katana return (below the view). Also (Claude 1, 14:00Z, CE-2): VM_TRIGGER for m4, ak, uzi with solve-index (the guard as a keep-out: GW-4 5.2 mm, AK 2.3, Uzi 4.6 into the guard/trigger), answered LATER. CE-6's drumNoses follow-up done 14:22Z. Then CE-5. Audit tools: Claude outputs/CE-4/ (steps-audit.json, steps-gren.json, grid.py; a strip without grantAll for the knife: grantAll sets the machete; T.runDevCommand('katana')).
+- **Context nearly full, needs a new session** (Claude 5, 14:05Z). Now: CE-4, checked in. Parts 1-2 landed (handoffs/2026-11-11-claude5-CE-4.md, not ticked: the grenade's cocked fist out from under the HUD panel and its fingers eased (13:38Z); the knife's slash re-keyed with a wind-up and a follow-through in sight (14:04Z); sheets in Claude outputs/CE-4/). Next in CE-4: the HQ ladder's hands (T.hqLadderAt(), T.stepHqLadder(1, dt)), empty hands (T.setUnarmedDbg(true)), the mortar and building/E (st.want false there: the body's arms at the eye), the machete/katana return (below the view). Audit 14:40Z (cloud, a1 strip): unarmed shows no hands at the eye, and Jerry decided that stays (D-157, 15:08Z: 'No hands'; no change for unarmed); the ladder steps didn't climb (T.stepHqLadder from the ladder's foot without being on it: set it up as tools/tests/t154.js does, then st.hands 'ladder'). Also (Claude 1, 14:00Z, CE-2): VM_TRIGGER for m4, ak, uzi with solve-index (the guard as a keep-out: GW-4 5.2 mm, AK 2.3, Uzi 4.6 into the guard/trigger), answered LATER. CE-6's drumNoses follow-up done 14:22Z. Then CE-5. Audit tools: Claude outputs/CE-4/ (steps-audit.json, steps-gren.json, grid.py; a strip without grantAll for the knife: grantAll sets the machete; T.runDevCommand('katana')).
 - Tools (cloud, rebuilt each session from a tar of the PC tree in Claude outputs/<task>/; crew/notes.mjs needed for the test runner): Claude outputs/CE-2/tools (strip.mjs, solve-index.js, view2.js); CE-6's strip steps (mksteps.py: H.cut = a cutaway of one part from the bore, layers 7). Cloud runs: CHROME=/opt/pw-browsers/chromium-1243/chrome-linux64/chrome CHROME_ARGS=--no-sandbox DW_CHECK_MS=420000, through tools/game-test-slot.mjs; the cloud's Bash stops at 10 min: long runs with nohup.
 - Open: Claude 3's CC-342 save commented out the view's retune() (guard vm().retune && in steps).

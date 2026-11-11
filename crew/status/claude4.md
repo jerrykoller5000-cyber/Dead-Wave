@@ -1,10 +1,10 @@
 # Claude 1
 
-state: idle
+state: active
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: —
-touching: —
-since: 2026-11-11T12:49Z
+task: CD-1 fresh session (15:12Z): rebuilding the cloud copy, then the GW-4 thumb forward with the forearm below the gun
+touching: game/viewmodel-fit.js, studio/hand-contacts.js, studio/marine-hand.js, tools/handfit/, tools/tests/clip-check.js, game/viewmodel.js (support hold elbow)
+since: 2026-11-11T15:12Z
 next: CD-1 (08:52Z: back to Claude 1, a fresh session from 08:55Z (Jerr
 blocked-on: —
 last-report: handoffs/2026-11-11-claude4-CD-1-fixes2.md
@@ -19,6 +19,10 @@ last-report: handoffs/2026-11-11-claude4-CD-1-fixes2.md
   body (tcl334d green); AA-12 r out of the receiver (30.8 -> 4.8); minigun r on its rear grip (tcl301 green); the glove's
   crease pinholes (viewmodel.js syncArmMaterials, hand materials double-sided). Forearms at the eye unchanged by these
   (Claude outputs/CD-1/fixes2/arms-at-the-eye-0858-vs-now.png).
+- FIRST (ChatGPT 2's request 15:2xZ, answered LATER): game/viewmodel.js vmMaterial disposes and re-makes a view material when its
+  source's version/map/transparent changes, so the Breacher's factory->M81->factory restore loses the first copy's UUID
+  (review/GT-20079/paint.mjs 244-247). Fix: keep one copy per source, update it in place (map, transparent, color via
+  finishViewMaterial, needsUpdate) instead of dispose + new; keep the node-material hack/cache key; their assertion unchanged.
 - Next: (1) the GW-4 thumb forward along the handguard's left with the forearm BELOW the gun: keep the palm on the left but
   turn the hand about its palm normal so its y (to the elbow) points down/back (my 10:00Z roll was about the bore: y went up,
   the sleeve rose); check the 'cam' view. Tried 12:55Z (c4/spin.py, 180 deg from the 10:00Z hold): forearm from below in 'cam'

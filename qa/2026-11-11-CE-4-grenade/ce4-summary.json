@@ -1,0 +1,1118 @@
+{
+  "card": "CE-4",
+  "capturedAt": "2026-11-11T14:56:45.210Z",
+  "backend": "WebGPUBackend",
+  "bladeState": {
+    "macheteOwned": false,
+    "katanaOwned": false,
+    "currentWeapon": "pistol"
+  },
+  "hudTopLeftRect": {
+    "left": 16,
+    "top": 14,
+    "right": 264,
+    "bottom": 270.4,
+    "rightNdc": -0.588
+  },
+  "lights": {
+    "noon": [
+      {
+        "slug": "01-grab",
+        "label": "grab .12",
+        "file": "grenade-noon-01-grab.jpg",
+        "bytes": 181519,
+        "sha": "b5e4c9822eed",
+        "hudRightNdc": -0.588,
+        "gloveNdc": [
+          -0.673,
+          -2.622
+        ],
+        "grenade": {
+          "phase": "grab",
+          "t": 0.117,
+          "inHand": true
+        },
+        "handPlace": "grenade"
+      },
+      {
+        "slug": "02-raise",
+        "label": "raise .06",
+        "file": "grenade-noon-02-raise.jpg",
+        "bytes": 179615,
+        "sha": "27a5ab6fad28",
+        "hudRightNdc": -0.588,
+        "gloveNdc": [
+          -0.594,
+          -1.549
+        ],
+        "grenade": {
+          "phase": "raise",
+          "t": 0.057,
+          "inHand": true
+        },
+        "handPlace": "grenade"
+      },
+      {
+        "slug": "03-cocked",
+        "label": "cocked (.40s hold)",
+        "file": "grenade-noon-03-cocked.jpg",
+        "bytes": 180692,
+        "sha": "8e45e3fe7653",
+        "hudRightNdc": -0.588,
+        "gloveNdc": [
+          -0.283,
+          0.002
+        ],
+        "grenade": {
+          "phase": "cocked",
+          "t": 0.333,
+          "inHand": true
+        },
+        "handPlace": "grenade"
+      },
+      {
+        "slug": "04-whip",
+        "label": "whip .03",
+        "file": "grenade-noon-04-whip.jpg",
+        "bytes": 179494,
+        "sha": "4778b96b40c9",
+        "hudRightNdc": -0.588,
+        "gloveNdc": [
+          -0.253,
+          0.013
+        ],
+        "grenade": {
+          "phase": "throw",
+          "t": 0.017,
+          "inHand": true
+        },
+        "handPlace": "grenade"
+      },
+      {
+        "slug": "05-release",
+        "label": "release .10",
+        "file": "grenade-noon-05-release.jpg",
+        "bytes": 180796,
+        "sha": "9d5af99d771b",
+        "hudRightNdc": -0.588,
+        "gloveNdc": [
+          -0.111,
+          -0.022
+        ],
+        "grenade": {
+          "phase": "throw",
+          "t": 0.083,
+          "inHand": false
+        },
+        "handPlace": "grenade"
+      },
+      {
+        "slug": "06-follow",
+        "label": "follow .17",
+        "file": "grenade-noon-06-follow.jpg",
+        "bytes": 183732,
+        "sha": "56f9a3df8c32",
+        "hudRightNdc": -0.588,
+        "gloveNdc": [
+          -0.036,
+          -0.32
+        ],
+        "grenade": {
+          "phase": "throw",
+          "t": 0.15,
+          "inHand": false
+        },
+        "handPlace": "grenade"
+      },
+      {
+        "slug": "07-back-start",
+        "label": "back .02",
+        "file": "grenade-noon-07-back-start.jpg",
+        "bytes": 183993,
+        "sha": "66f8d9318ab8",
+        "hudRightNdc": -0.588,
+        "gloveNdc": [
+          0.037,
+          -0.641
+        ],
+        "grenade": {
+          "phase": "back",
+          "t": 0,
+          "inHand": false
+        },
+        "handPlace": "grenade"
+      },
+      {
+        "slug": "08-back-grip",
+        "label": "back .14",
+        "file": "grenade-noon-08-back-grip.jpg",
+        "bytes": 179861,
+        "sha": "d28560645ae5",
+        "hudRightNdc": -0.588,
+        "gloveNdc": [
+          0.204,
+          -0.673
+        ],
+        "grenade": {
+          "phase": "back",
+          "t": 0.133,
+          "inHand": false
+        },
+        "handPlace": "grenade"
+      }
+    ],
+    "overcast": [
+      {
+        "slug": "01-grab",
+        "label": "grab .12",
+        "file": "grenade-overcast-01-grab.jpg",
+        "bytes": 153795,
+        "sha": "9a189be82357",
+        "hudRightNdc": -0.588,
+        "gloveNdc": [
+          -0.673,
+          -2.622
+        ],
+        "grenade": {
+          "phase": "grab",
+          "t": 0.117,
+          "inHand": true
+        },
+        "handPlace": "grenade"
+      },
+      {
+        "slug": "02-raise",
+        "label": "raise .06",
+        "file": "grenade-overcast-02-raise.jpg",
+        "bytes": 152977,
+        "sha": "d28c5c7d7327",
+        "hudRightNdc": -0.588,
+        "gloveNdc": [
+          -0.594,
+          -1.549
+        ],
+        "grenade": {
+          "phase": "raise",
+          "t": 0.057,
+          "inHand": true
+        },
+        "handPlace": "grenade"
+      },
+      {
+        "slug": "03-cocked",
+        "label": "cocked (.40s hold)",
+        "file": "grenade-overcast-03-cocked.jpg",
+        "bytes": 153636,
+        "sha": "bfbdcc2fe6f8",
+        "hudRightNdc": -0.588,
+        "gloveNdc": [
+          -0.283,
+          0.002
+        ],
+        "grenade": {
+          "phase": "cocked",
+          "t": 0.333,
+          "inHand": true
+        },
+        "handPlace": "grenade"
+      },
+      {
+        "slug": "04-whip",
+        "label": "whip .03",
+        "file": "grenade-overcast-04-whip.jpg",
+        "bytes": 152192,
+        "sha": "3503ecfbee64",
+        "hudRightNdc": -0.588,
+        "gloveNdc": [
+          -0.253,
+          0.013
+        ],
+        "grenade": {
+          "phase": "throw",
+          "t": 0.017,
+          "inHand": true
+        },
+        "handPlace": "grenade"
+      },
+      {
+        "slug": "05-release",
+        "label": "release .10",
+        "file": "grenade-overcast-05-release.jpg",
+        "bytes": 153093,
+        "sha": "ad3eb6b87587",
+        "hudRightNdc": -0.588,
+        "gloveNdc": [
+          -0.111,
+          -0.022
+        ],
+        "grenade": {
+          "phase": "throw",
+          "t": 0.083,
+          "inHand": false
+        },
+        "handPlace": "grenade"
+      },
+      {
+        "slug": "06-follow",
+        "label": "follow .17",
+        "file": "grenade-overcast-06-follow.jpg",
+        "bytes": 155623,
+        "sha": "7a8c308766c2",
+        "hudRightNdc": -0.588,
+        "gloveNdc": [
+          -0.036,
+          -0.32
+        ],
+        "grenade": {
+          "phase": "throw",
+          "t": 0.15,
+          "inHand": false
+        },
+        "handPlace": "grenade"
+      },
+      {
+        "slug": "07-back-start",
+        "label": "back .02",
+        "file": "grenade-overcast-07-back-start.jpg",
+        "bytes": 156068,
+        "sha": "4d7b551a8afe",
+        "hudRightNdc": -0.588,
+        "gloveNdc": [
+          0.037,
+          -0.641
+        ],
+        "grenade": {
+          "phase": "back",
+          "t": 0,
+          "inHand": false
+        },
+        "handPlace": "grenade"
+      },
+      {
+        "slug": "08-back-grip",
+        "label": "back .14",
+        "file": "grenade-overcast-08-back-grip.jpg",
+        "bytes": 152325,
+        "sha": "37a9fb342029",
+        "hudRightNdc": -0.588,
+        "gloveNdc": [
+          0.204,
+          -0.673
+        ],
+        "grenade": {
+          "phase": "back",
+          "t": 0.133,
+          "inHand": false
+        },
+        "handPlace": "grenade"
+      }
+    ],
+    "dusk": [
+      {
+        "slug": "01-grab",
+        "label": "grab .12",
+        "file": "grenade-dusk-01-grab.jpg",
+        "bytes": 129845,
+        "sha": "c808e3cd413a",
+        "hudRightNdc": -0.588,
+        "gloveNdc": [
+          -0.673,
+          -2.622
+        ],
+        "grenade": {
+          "phase": "grab",
+          "t": 0.117,
+          "inHand": true
+        },
+        "handPlace": "grenade"
+      },
+      {
+        "slug": "02-raise",
+        "label": "raise .06",
+        "file": "grenade-dusk-02-raise.jpg",
+        "bytes": 128684,
+        "sha": "1a7416b567f6",
+        "hudRightNdc": -0.588,
+        "gloveNdc": [
+          -0.594,
+          -1.549
+        ],
+        "grenade": {
+          "phase": "raise",
+          "t": 0.057,
+          "inHand": true
+        },
+        "handPlace": "grenade"
+      },
+      {
+        "slug": "03-cocked",
+        "label": "cocked (.40s hold)",
+        "file": "grenade-dusk-03-cocked.jpg",
+        "bytes": 129520,
+        "sha": "0a54c547b272",
+        "hudRightNdc": -0.588,
+        "gloveNdc": [
+          -0.283,
+          0.002
+        ],
+        "grenade": {
+          "phase": "cocked",
+          "t": 0.333,
+          "inHand": true
+        },
+        "handPlace": "grenade"
+      },
+      {
+        "slug": "04-whip",
+        "label": "whip .03",
+        "file": "grenade-dusk-04-whip.jpg",
+        "bytes": 126781,
+        "sha": "35ec8785723d",
+        "hudRightNdc": -0.588,
+        "gloveNdc": [
+          -0.253,
+          0.013
+        ],
+        "grenade": {
+          "phase": "throw",
+          "t": 0.017,
+          "inHand": true
+        },
+        "handPlace": "grenade"
+      },
+      {
+        "slug": "05-release",
+        "label": "release .10",
+        "file": "grenade-dusk-05-release.jpg",
+        "bytes": 127797,
+        "sha": "4cf72e66d2cb",
+        "hudRightNdc": -0.588,
+        "gloveNdc": [
+          -0.111,
+          -0.022
+        ],
+        "grenade": {
+          "phase": "throw",
+          "t": 0.083,
+          "inHand": false
+        },
+        "handPlace": "grenade"
+      },
+      {
+        "slug": "06-follow",
+        "label": "follow .17",
+        "file": "grenade-dusk-06-follow.jpg",
+        "bytes": 129035,
+        "sha": "fb119919c541",
+        "hudRightNdc": -0.588,
+        "gloveNdc": [
+          -0.036,
+          -0.32
+        ],
+        "grenade": {
+          "phase": "throw",
+          "t": 0.15,
+          "inHand": false
+        },
+        "handPlace": "grenade"
+      },
+      {
+        "slug": "07-back-start",
+        "label": "back .02",
+        "file": "grenade-dusk-07-back-start.jpg",
+        "bytes": 128954,
+        "sha": "81a9a3e7150d",
+        "hudRightNdc": -0.588,
+        "gloveNdc": [
+          0.037,
+          -0.641
+        ],
+        "grenade": {
+          "phase": "back",
+          "t": 0,
+          "inHand": false
+        },
+        "handPlace": "grenade"
+      },
+      {
+        "slug": "08-back-grip",
+        "label": "back .14",
+        "file": "grenade-dusk-08-back-grip.jpg",
+        "bytes": 126935,
+        "sha": "b48bbcd6eb4d",
+        "hudRightNdc": -0.588,
+        "gloveNdc": [
+          0.204,
+          -0.674
+        ],
+        "grenade": {
+          "phase": "back",
+          "t": 0.133,
+          "inHand": false
+        },
+        "handPlace": "grenade"
+      }
+    ],
+    "night": [
+      {
+        "slug": "01-grab",
+        "label": "grab .12",
+        "file": "grenade-night-01-grab.jpg",
+        "bytes": 80672,
+        "sha": "236a34e0ef69",
+        "hudRightNdc": -0.588,
+        "gloveNdc": [
+          -0.673,
+          -2.622
+        ],
+        "grenade": {
+          "phase": "grab",
+          "t": 0.117,
+          "inHand": true
+        },
+        "handPlace": "grenade"
+      },
+      {
+        "slug": "02-raise",
+        "label": "raise .06",
+        "file": "grenade-night-02-raise.jpg",
+        "bytes": 79454,
+        "sha": "ff356ca3bd7a",
+        "hudRightNdc": -0.588,
+        "gloveNdc": [
+          -0.594,
+          -1.549
+        ],
+        "grenade": {
+          "phase": "raise",
+          "t": 0.057,
+          "inHand": true
+        },
+        "handPlace": "grenade"
+      },
+      {
+        "slug": "03-cocked",
+        "label": "cocked (.40s hold)",
+        "file": "grenade-night-03-cocked.jpg",
+        "bytes": 77734,
+        "sha": "a9e30a9d5fe7",
+        "hudRightNdc": -0.588,
+        "gloveNdc": [
+          -0.283,
+          0.002
+        ],
+        "grenade": {
+          "phase": "cocked",
+          "t": 0.333,
+          "inHand": true
+        },
+        "handPlace": "grenade"
+      },
+      {
+        "slug": "04-whip",
+        "label": "whip .03",
+        "file": "grenade-night-04-whip.jpg",
+        "bytes": 73964,
+        "sha": "00ecb1ac966d",
+        "hudRightNdc": -0.588,
+        "gloveNdc": [
+          -0.253,
+          0.013
+        ],
+        "grenade": {
+          "phase": "throw",
+          "t": 0.017,
+          "inHand": true
+        },
+        "handPlace": "grenade"
+      },
+      {
+        "slug": "05-release",
+        "label": "release .10",
+        "file": "grenade-night-05-release.jpg",
+        "bytes": 75476,
+        "sha": "177aaafa03cd",
+        "hudRightNdc": -0.588,
+        "gloveNdc": [
+          -0.111,
+          -0.022
+        ],
+        "grenade": {
+          "phase": "throw",
+          "t": 0.083,
+          "inHand": false
+        },
+        "handPlace": "grenade"
+      },
+      {
+        "slug": "06-follow",
+        "label": "follow .17",
+        "file": "grenade-night-06-follow.jpg",
+        "bytes": 76800,
+        "sha": "5d26f9979b02",
+        "hudRightNdc": -0.588,
+        "gloveNdc": [
+          -0.036,
+          -0.32
+        ],
+        "grenade": {
+          "phase": "throw",
+          "t": 0.15,
+          "inHand": false
+        },
+        "handPlace": "grenade"
+      },
+      {
+        "slug": "07-back-start",
+        "label": "back .02",
+        "file": "grenade-night-07-back-start.jpg",
+        "bytes": 76956,
+        "sha": "7345a4f7efd2",
+        "hudRightNdc": -0.588,
+        "gloveNdc": [
+          0.037,
+          -0.641
+        ],
+        "grenade": {
+          "phase": "back",
+          "t": 0,
+          "inHand": false
+        },
+        "handPlace": "grenade"
+      },
+      {
+        "slug": "08-back-grip",
+        "label": "back .14",
+        "file": "grenade-night-08-back-grip.jpg",
+        "bytes": 74917,
+        "sha": "67784b1e6e06",
+        "hudRightNdc": -0.588,
+        "gloveNdc": [
+          0.204,
+          -0.675
+        ],
+        "grenade": {
+          "phase": "back",
+          "t": 0.133,
+          "inHand": false
+        },
+        "handPlace": "grenade"
+      }
+    ]
+  },
+  "knifeLights": {
+    "noon": [
+      {
+        "slug": "f00",
+        "frame": 0,
+        "label": "f00 start",
+        "file": "knife-noon-f00.jpg",
+        "bytes": 171201,
+        "sha": "f9d8bb747b98",
+        "gloveNdc": [
+          -0.602,
+          -1.819
+        ],
+        "knifeAnimT": 0.203,
+        "knifeCd": 0.533
+      },
+      {
+        "slug": "f02",
+        "frame": 2,
+        "label": "f02 wind-up R",
+        "file": "knife-noon-f02.jpg",
+        "bytes": 171713,
+        "sha": "56de648ce715",
+        "gloveNdc": [
+          -0.549,
+          -1.951
+        ],
+        "knifeAnimT": 0.17,
+        "knifeCd": 0.5
+      },
+      {
+        "slug": "f04",
+        "frame": 4,
+        "label": "f04 early cut",
+        "file": "knife-noon-f04.jpg",
+        "bytes": 175142,
+        "sha": "7a01cddca292",
+        "gloveNdc": [
+          -0.686,
+          -1.891
+        ],
+        "knifeAnimT": 0.137,
+        "knifeCd": 0.467
+      },
+      {
+        "slug": "f06",
+        "frame": 6,
+        "label": "f06 mid cut",
+        "file": "knife-noon-f06.jpg",
+        "bytes": 176069,
+        "sha": "b1209c68579d",
+        "gloveNdc": [
+          -0.74,
+          -1.95
+        ],
+        "knifeAnimT": 0.103,
+        "knifeCd": 0.433
+      },
+      {
+        "slug": "f08",
+        "frame": 8,
+        "label": "f08 follow L",
+        "file": "knife-noon-f08.jpg",
+        "bytes": 176385,
+        "sha": "bac2926fb65c",
+        "gloveNdc": [
+          -0.715,
+          -1.897
+        ],
+        "knifeAnimT": 0.07,
+        "knifeCd": 0.4
+      },
+      {
+        "slug": "f10",
+        "frame": 10,
+        "label": "f10 drop L",
+        "file": "knife-noon-f10.jpg",
+        "bytes": 173866,
+        "sha": "01706db9379d",
+        "gloveNdc": [
+          -0.67,
+          -1.822
+        ],
+        "knifeAnimT": 0.037,
+        "knifeCd": 0.367
+      },
+      {
+        "slug": "f12",
+        "frame": 12,
+        "label": "f12 clear",
+        "file": "knife-noon-f12.jpg",
+        "bytes": 170705,
+        "sha": "dc5ba3c42ff2",
+        "gloveNdc": [
+          -0.611,
+          -1.783
+        ],
+        "knifeAnimT": 0.003,
+        "knifeCd": 0.333
+      },
+      {
+        "slug": "f14",
+        "frame": 14,
+        "label": "f14 pistol rise",
+        "file": "knife-noon-f14.jpg",
+        "bytes": 170805,
+        "sha": "90004662fe22",
+        "gloveNdc": [
+          0.353,
+          -1.934
+        ],
+        "knifeAnimT": 0,
+        "knifeCd": 0.3
+      },
+      {
+        "slug": "f20",
+        "frame": 20,
+        "label": "f20 pistol rest",
+        "file": "knife-noon-f20.jpg",
+        "bytes": 178353,
+        "sha": "73a3fefb7242",
+        "gloveNdc": [
+          0.283,
+          -0.712
+        ],
+        "knifeAnimT": 0,
+        "knifeCd": 0.2
+      }
+    ],
+    "overcast": [
+      {
+        "slug": "f00",
+        "frame": 0,
+        "label": "f00 start",
+        "file": "knife-overcast-f00.jpg",
+        "bytes": 146030,
+        "sha": "57f3e4ab9500",
+        "gloveNdc": [
+          -0.602,
+          -1.819
+        ],
+        "knifeAnimT": 0.203,
+        "knifeCd": 0.533
+      },
+      {
+        "slug": "f02",
+        "frame": 2,
+        "label": "f02 wind-up R",
+        "file": "knife-overcast-f02.jpg",
+        "bytes": 146428,
+        "sha": "fd2afc37c0be",
+        "gloveNdc": [
+          -0.549,
+          -1.951
+        ],
+        "knifeAnimT": 0.17,
+        "knifeCd": 0.5
+      },
+      {
+        "slug": "f04",
+        "frame": 4,
+        "label": "f04 early cut",
+        "file": "knife-overcast-f04.jpg",
+        "bytes": 149323,
+        "sha": "3a56837a8280",
+        "gloveNdc": [
+          -0.686,
+          -1.891
+        ],
+        "knifeAnimT": 0.137,
+        "knifeCd": 0.467
+      },
+      {
+        "slug": "f06",
+        "frame": 6,
+        "label": "f06 mid cut",
+        "file": "knife-overcast-f06.jpg",
+        "bytes": 150160,
+        "sha": "cb2140de3a47",
+        "gloveNdc": [
+          -0.74,
+          -1.95
+        ],
+        "knifeAnimT": 0.103,
+        "knifeCd": 0.433
+      },
+      {
+        "slug": "f08",
+        "frame": 8,
+        "label": "f08 follow L",
+        "file": "knife-overcast-f08.jpg",
+        "bytes": 150506,
+        "sha": "2476bbeb7ed7",
+        "gloveNdc": [
+          -0.715,
+          -1.897
+        ],
+        "knifeAnimT": 0.07,
+        "knifeCd": 0.4
+      },
+      {
+        "slug": "f10",
+        "frame": 10,
+        "label": "f10 drop L",
+        "file": "knife-overcast-f10.jpg",
+        "bytes": 148414,
+        "sha": "4bb0a00c6861",
+        "gloveNdc": [
+          -0.67,
+          -1.822
+        ],
+        "knifeAnimT": 0.037,
+        "knifeCd": 0.367
+      },
+      {
+        "slug": "f12",
+        "frame": 12,
+        "label": "f12 clear",
+        "file": "knife-overcast-f12.jpg",
+        "bytes": 146190,
+        "sha": "0da2b0fb9a79",
+        "gloveNdc": [
+          -0.611,
+          -1.783
+        ],
+        "knifeAnimT": 0.003,
+        "knifeCd": 0.333
+      },
+      {
+        "slug": "f14",
+        "frame": 14,
+        "label": "f14 pistol rise",
+        "file": "knife-overcast-f14.jpg",
+        "bytes": 146089,
+        "sha": "ec1b0bc7322d",
+        "gloveNdc": [
+          0.352,
+          -1.933
+        ],
+        "knifeAnimT": 0,
+        "knifeCd": 0.3
+      },
+      {
+        "slug": "f20",
+        "frame": 20,
+        "label": "f20 pistol rest",
+        "file": "knife-overcast-f20.jpg",
+        "bytes": 151851,
+        "sha": "d477830658d2",
+        "gloveNdc": [
+          0.283,
+          -0.711
+        ],
+        "knifeAnimT": 0,
+        "knifeCd": 0.2
+      }
+    ],
+    "dusk": [
+      {
+        "slug": "f00",
+        "frame": 0,
+        "label": "f00 start",
+        "file": "knife-dusk-f00.jpg",
+        "bytes": 119468,
+        "sha": "6762023f60c2",
+        "gloveNdc": [
+          -0.602,
+          -1.819
+        ],
+        "knifeAnimT": 0.203,
+        "knifeCd": 0.533
+      },
+      {
+        "slug": "f02",
+        "frame": 2,
+        "label": "f02 wind-up R",
+        "file": "knife-dusk-f02.jpg",
+        "bytes": 121118,
+        "sha": "da57369f8d83",
+        "gloveNdc": [
+          -0.549,
+          -1.951
+        ],
+        "knifeAnimT": 0.17,
+        "knifeCd": 0.5
+      },
+      {
+        "slug": "f04",
+        "frame": 4,
+        "label": "f04 early cut",
+        "file": "knife-dusk-f04.jpg",
+        "bytes": 122710,
+        "sha": "b500e2231d9c",
+        "gloveNdc": [
+          -0.686,
+          -1.891
+        ],
+        "knifeAnimT": 0.137,
+        "knifeCd": 0.467
+      },
+      {
+        "slug": "f06",
+        "frame": 6,
+        "label": "f06 mid cut",
+        "file": "knife-dusk-f06.jpg",
+        "bytes": 123285,
+        "sha": "3046835cfd5e",
+        "gloveNdc": [
+          -0.74,
+          -1.95
+        ],
+        "knifeAnimT": 0.103,
+        "knifeCd": 0.433
+      },
+      {
+        "slug": "f08",
+        "frame": 8,
+        "label": "f08 follow L",
+        "file": "knife-dusk-f08.jpg",
+        "bytes": 123663,
+        "sha": "d69d33d8b2d3",
+        "gloveNdc": [
+          -0.715,
+          -1.897
+        ],
+        "knifeAnimT": 0.07,
+        "knifeCd": 0.4
+      },
+      {
+        "slug": "f10",
+        "frame": 10,
+        "label": "f10 drop L",
+        "file": "knife-dusk-f10.jpg",
+        "bytes": 121886,
+        "sha": "dfe707d52b33",
+        "gloveNdc": [
+          -0.67,
+          -1.822
+        ],
+        "knifeAnimT": 0.037,
+        "knifeCd": 0.367
+      },
+      {
+        "slug": "f12",
+        "frame": 12,
+        "label": "f12 clear",
+        "file": "knife-dusk-f12.jpg",
+        "bytes": 119887,
+        "sha": "6a4a6ee3e60a",
+        "gloveNdc": [
+          -0.611,
+          -1.783
+        ],
+        "knifeAnimT": 0.003,
+        "knifeCd": 0.333
+      },
+      {
+        "slug": "f14",
+        "frame": 14,
+        "label": "f14 pistol rise",
+        "file": "knife-dusk-f14.jpg",
+        "bytes": 119898,
+        "sha": "1c2926b51873",
+        "gloveNdc": [
+          0.352,
+          -1.932
+        ],
+        "knifeAnimT": 0,
+        "knifeCd": 0.3
+      },
+      {
+        "slug": "f20",
+        "frame": 20,
+        "label": "f20 pistol rest",
+        "file": "knife-dusk-f20.jpg",
+        "bytes": 126586,
+        "sha": "0b765323ec6a",
+        "gloveNdc": [
+          0.283,
+          -0.71
+        ],
+        "knifeAnimT": 0,
+        "knifeCd": 0.2
+      }
+    ],
+    "night": [
+      {
+        "slug": "f00",
+        "frame": 0,
+        "label": "f00 start",
+        "file": "knife-night-f00.jpg",
+        "bytes": 72050,
+        "sha": "9e8f434e753b",
+        "gloveNdc": [
+          -0.602,
+          -1.819
+        ],
+        "knifeAnimT": 0.203,
+        "knifeCd": 0.533
+      },
+      {
+        "slug": "f02",
+        "frame": 2,
+        "label": "f02 wind-up R",
+        "file": "knife-night-f02.jpg",
+        "bytes": 71628,
+        "sha": "710c69217aef",
+        "gloveNdc": [
+          -0.549,
+          -1.951
+        ],
+        "knifeAnimT": 0.17,
+        "knifeCd": 0.5
+      },
+      {
+        "slug": "f04",
+        "frame": 4,
+        "label": "f04 early cut",
+        "file": "knife-night-f04.jpg",
+        "bytes": 73286,
+        "sha": "af022a455c54",
+        "gloveNdc": [
+          -0.686,
+          -1.891
+        ],
+        "knifeAnimT": 0.137,
+        "knifeCd": 0.467
+      },
+      {
+        "slug": "f06",
+        "frame": 6,
+        "label": "f06 mid cut",
+        "file": "knife-night-f06.jpg",
+        "bytes": 74007,
+        "sha": "c05352e0687a",
+        "gloveNdc": [
+          -0.74,
+          -1.95
+        ],
+        "knifeAnimT": 0.103,
+        "knifeCd": 0.433
+      },
+      {
+        "slug": "f08",
+        "frame": 8,
+        "label": "f08 follow L",
+        "file": "knife-night-f08.jpg",
+        "bytes": 74667,
+        "sha": "b8028beae900",
+        "gloveNdc": [
+          -0.715,
+          -1.897
+        ],
+        "knifeAnimT": 0.07,
+        "knifeCd": 0.4
+      },
+      {
+        "slug": "f10",
+        "frame": 10,
+        "label": "f10 drop L",
+        "file": "knife-night-f10.jpg",
+        "bytes": 74186,
+        "sha": "f6fbbef9803a",
+        "gloveNdc": [
+          -0.67,
+          -1.822
+        ],
+        "knifeAnimT": 0.037,
+        "knifeCd": 0.367
+      },
+      {
+        "slug": "f12",
+        "frame": 12,
+        "label": "f12 clear",
+        "file": "knife-night-f12.jpg",
+        "bytes": 73046,
+        "sha": "38a535a4e44f",
+        "gloveNdc": [
+          -0.611,
+          -1.783
+        ],
+        "knifeAnimT": 0.003,
+        "knifeCd": 0.333
+      },
+      {
+        "slug": "f14",
+        "frame": 14,
+        "label": "f14 pistol rise",
+        "file": "knife-night-f14.jpg",
+        "bytes": 73368,
+        "sha": "b76f27c30c1d",
+        "gloveNdc": [
+          0.352,
+          -1.931
+        ],
+        "knifeAnimT": 0,
+        "knifeCd": 0.3
+      },
+      {
+        "slug": "f20",
+        "frame": 20,
+        "label": "f20 pistol rest",
+        "file": "knife-night-f20.jpg",
+        "bytes": 76196,
+        "sha": "59ecc136a5be",
+        "gloveNdc": [
+          0.283,
+          -0.709
+        ],
+        "knifeAnimT": 0,
+        "knifeCd": 0.2
+      }
+    ]
+  },
+  "pageErrors": []
+}

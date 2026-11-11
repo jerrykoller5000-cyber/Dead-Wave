@@ -1,0 +1,51 @@
+Raw catalog overlaps, ordered by largest projected crossing for each model. Distinct screen pixels on the most exposed view.
+Reference and actual posed display surface depths agree at each accepted neighboring pixel.
+
+chainsaw | 170 raw | 118 screen candidates | 13 proved entirely enclosed | 39 other unresolved | peak 255 px
+pistol | 87 raw | 28 screen candidates | 33 proved entirely enclosed | 26 other unresolved | peak 232 px
+revolver | 125 raw | 59 screen candidates | 35 proved entirely enclosed | 31 other unresolved | peak 229 px
+uzi | 159 raw | 101 screen candidates | 28 proved entirely enclosed | 30 other unresolved | peak 225 px
+sniper | 236 raw | 180 screen candidates | 14 proved entirely enclosed | 42 other unresolved | peak 202 px
+ak | 136 raw | 83 screen candidates | 17 proved entirely enclosed | 36 other unresolved | peak 185 px
+launcher | 231 raw | 159 screen candidates | 10 proved entirely enclosed | 62 other unresolved | peak 185 px
+m4 | 417 raw | 320 screen candidates | 18 proved entirely enclosed | 79 other unresolved | peak 155 px
+minigun | 217 raw | 127 screen candidates | 5 proved entirely enclosed | 85 other unresolved | peak 138 px
+shotgun | 90 raw | 72 screen candidates | 0 proved entirely enclosed | 18 other unresolved | peak 116 px
+flamer | 183 raw | 100 screen candidates | 12 proved entirely enclosed | 71 other unresolved | peak 99 px
+aa12 | 117 raw | 95 screen candidates | 2 proved entirely enclosed | 20 other unresolved | peak 77 px
+
+{"raw":2168,"screen":1442,"enclosed":187,"unresolved":539}
+
+Largest screen crossings across all twelve models:
+chainsaw pair 10 | held-left | 255 px at 412,310
+pistol pair 0 | held-right | 232 px at 460,237
+revolver pair 91 | rack | 229 px at 348,310
+uzi pair 10 | held-right | 225 px at 554,158
+chainsaw pair 23 | held-right | 210 px at 546,257
+sniper pair 143 | aim-entry | 202 px at 618,476
+ak pair 97 | hip | 185 px at 695,496
+launcher pair 32 | aimed | 185 px at 484,404
+uzi pair 7 | held-right | 176 px at 512,183
+launcher pair 33 | hip | 168 px at 840,438
+ak pair 96 | hip | 166 px at 706,499
+m4 pair 90 | held-left | 155 px at 555,252
+ak pair 95 | hip | 148 px at 718,503
+m4 pair 19 | hip | 143 px at 787,461
+launcher pair 202 | rack | 140 px at 444,124
+sniper pair 222 | held-right | 139 px at 357,270
+minigun pair 1 | rack | 138 px at 485,367
+minigun pair 3 | rack | 138 px at 509,369
+m4 pair 15 | aimed | 137 px at 477,434
+ak pair 0 | hip | 136 px at 729,442
+chainsaw pair 2 | hip | 134 px at 634,423
+minigun pair 2 | rack | 133 px at 498,369
+uzi pair 69 | held-right | 131 px at 617,354
+uzi pair 65 | rack | 127 px at 359,358
+uzi pair 2 | held-left | 122 px at 442,188
+minigun pair 0 | held-left | 121 px at 385,266
+sniper pair 227 | held-right | 119 px at 353,273
+sniper pair 224 | rack | 118 px at 462,124
+chainsaw pair 0 | held-right | 117 px at 547,246
+shotgun pair 69 | held-right | 116 px at 407,250
+
+A screen crossing is a review candidate. An enclosure still needs a named, bounded, justified rule. Neither result removes a strict failure by itself.

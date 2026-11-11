@@ -81,10 +81,12 @@ function gripShape(cz, cy, h, d, rake, points) {
   });
 }
 // Six genuinely recessed chambers. Each sector is a closed cell surrounding its bore.
+const launcherDrumFace = .065;
+
 function launcherDrum(T) {
   return geometry(T, 'launcher-six-chambers', (quad) => {
     // M32A1 drum: 157 mm across at the held scale, with six true 40 mm bores.
-    const outerR = 0.112, orbit = 0.065, holeR = 0.030, halfLength = 0.065;
+    const outerR = 0.112, orbit = 0.065, holeR = 0.030, halfLength = launcherDrumFace;
     for (let sector = 0; sector < 6; sector++) {
       const angle = sector * Math.PI / 3, centre = [Math.sin(angle) * orbit, Math.cos(angle) * orbit];
       const rays = [];
@@ -431,8 +433,12 @@ export function makeLauncherModel(ctx) {
   part(THREE, launcherDrum(THREE), gunMid, drum);
   K.cyl(0.041, 0.041, 0.019, gunDark, 0, 0, 0.072, drum, 16, 'z');   // cylinder spring's forward housing
   K.cyl(0.015, 0.015, 0.011, gunMid, 0, 0, 0.085, drum, 12, 'z');   // winding axle cap
-  // The rim sits proud of the cap: coplanar flange/cap faces cause visible depth flicker.
-  for (const sz of [-1, 1]) K.lathe([[0.098, sz * 0.0635 - 0.003], [0.112, sz * 0.0635 - 0.003], [0.112, sz * 0.0635 + 0.003], [0.098, sz * 0.0635 + 0.003], [0.098, sz * 0.0635 - 0.003]], gunDark, { parent: drum, seg: 36 });
+  // The dark ring starts at the side graphic and keeps its original outer face.
+  for (const side of [-1, 1]) {
+    const face = side * launcherDrumFace, lip = side * (launcherDrumFace + .0015);
+    const back = Math.min(face, lip), front = Math.max(face, lip);
+    K.lathe([[.098,back],[.112,back],[.112,front],[.098,front],[.098,back]], gunDark, {parent:drum, seg:36});
+  }
   for (let i = 0; i < 6; i++) {
     const a = i * Math.PI / 3, x = Math.sin(a) * 0.065, y = Math.cos(a) * 0.065;
     K.lathe([[0.029, 0.065], [0.034, 0.065], [0.034, 0.070], [0.029, 0.070], [0.029, 0.065]],
@@ -782,10 +788,18 @@ export function makeChainsawModel(ctx) {
   // Recessed air intake and service seam break up the broad moulded top.
   K.box(0.105, 0.003, 0.045, gunMid, 0.035, 0.181, -0.198, 0, 0, 0, null, 0.006);
   for (let i = 0; i < 4; i++) K.box(0.008, 0.004, 0.035, gunDark, -0.003 + i * 0.022, 0.184, -0.198, 0, 0, 0, null, 0.002);
-  // Clutch/recoil housings follow the engine contour and meet the orange cowling.
+  // The painted side covers sit on the grey backing, with an uninterrupted bevel around each one.
+  const backingDepth = .012;
   for (const sx of [-1, 1]) {
-    K.slab([[-0.251, -0.035], [-0.251, 0.112], [-0.233, 0.127], [0.071, 0.127], [0.09, 0.108], [0.09, -0.035]], 0.012, gunMid, { x: sx * 0.13, bevel: 0.005 });
-    K.slab([[-0.243, -0.027], [-0.243, 0.106], [-0.225, 0.117], [0.067, 0.117], [0.078, 0.10], [0.078, -0.027]], 0.009, bodyMat, { x: sx * 0.139, bevel: 0.004 });
+    const backing = K.slab([[-0.251, -0.035], [-0.251, 0.112], [-0.233, 0.127], [0.071, 0.127], [0.09, 0.108], [0.09, -0.035]], backingDepth, gunMid, { x: sx * 0.13, bevel: 0.005 });
+    const cover = K.slab([[-0.243, -0.027], [-0.243, 0.106], [-0.225, 0.117], [0.067, 0.117], [0.078, 0.10], [0.078, -0.027]], 0.009, bodyMat, { x: sx * 0.139, bevel: 0.004 });
+    // The concealed bevel rings flatten against the backing. The exposed skin and bolt seats keep their original coordinates.
+    const backFace = backing.position.x + sx * backingDepth / 2 - cover.position.x;
+    const position = cover.geometry.attributes.position;
+    for (let vertex = 0; vertex < position.count; vertex++) {
+      if (sx * (position.getX(vertex) - backFace) < 0) position.setX(vertex, backFace);
+    }
+    cover.geometry.computeBoundingSphere();
     for (const [z, y] of [[-0.227, 0.101], [0.06, 0.1], [-0.226, -0.012], [0.058, -0.012]]) bolt(K, gunDark, gunAccent, sx * 0.1455, y, z, 0.0055);   // GB-297: seated on the outer cowling face (x 0.1435)
     K.box(0.012, 0.068, 0.064, gunDark, sx * 0.15, 0.004, -0.195, 0, 0, 0, null, 0.009);
     for (let i = 0; i < 5; i++) K.box(0.014, 0.004, 0.058, gunMid, sx * 0.152, -0.018 + i * 0.011, -0.195, 0, 0, 0, null, 0.001);

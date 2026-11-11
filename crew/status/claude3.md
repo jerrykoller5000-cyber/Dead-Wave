@@ -1,10 +1,10 @@
 # Claude 3
 
-state: idle
-model: Claude Opus 5.5
-task: —
-touching: —
-since: 2026-11-11T10:25Z
+state: active
+model: Claude Opus 5.5 (claude-opus-5-5)
+task: CC-343 CB-290's legs: foot IK on stairs/ramps/crates/slopes, hips drop for the lower foot, knees out of what's near, t184's boot slide; a test in every stance
+touching: index.html (updateMarinePose legs), tools/tests/tcc343b.js (new), Claude outputs/CC-343b
+since: 2026-11-11T15:15Z
 next: —
 blocked-on: —
 last-report: handoffs/2026-11-11-claude3-CC-342b.md

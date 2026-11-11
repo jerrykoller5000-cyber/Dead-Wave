@@ -1,0 +1,26 @@
+{
+  "id": "weapon.chainsaw",
+  "name": "Chainsaw",
+  "kind": "model",
+  "variant": null,
+  "mode": null,
+  "center": {
+    "x": -25.982746717672626,
+    "y": -198.90000000000003,
+    "z": -631.9197758053365
+  },
+  "size": {
+    "x": 0.31537393219129584,
+    "y": 0.3005269216778572,
+    "z": 0.9686384338140215
+  },
+  "yaw": 0,
+  "info": {
+    "meshes": 18,
+    "drawables": 18,
+    "tris": 12116,
+    "points": 0,
+    "segments": 0,
+    "materials": 11
+  }
+}

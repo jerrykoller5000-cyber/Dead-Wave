@@ -4,19 +4,23 @@ import {fileURLToPath} from 'node:url';
 import {serve} from '../../tools/serve.mjs';
 import {launch} from '../../tools/cdp.mjs';
 import {save} from './save.mjs';
+import {originalSawCovers} from './replay-artwork.mjs';
 
 const rankOnly=process.argv.includes('--rank-only');
 const candidate=process.argv.find(arg=>arg.startsWith('--audit='));
 const audit=candidate?candidate.slice('--audit='.length):'catalog-chain-skin';
 assert(/^catalog-[a-z0-9-]+$/.test(audit));
 const precise=process.argv.includes('--precise') || !!candidate;
-const folder=candidate?'visibility-'+audit.slice('catalog-'.length):precise?'visibility-final':'visibility';
+const replay=process.argv.includes('--original-saw-covers');
+const folder=(candidate?'visibility-'+audit.slice('catalog-'.length):precise?'visibility-final':'visibility')+(replay?'-control':'');
 const ids=process.argv.slice(2).filter(arg=>!arg.startsWith('--'));
 assert(process.env.DW_GAME_TEST_TOKEN && ids.length && ids.every(id=>/^[a-z0-9]+$/.test(id)));
 const server=await serve(fileURLToPath(new URL('../../',import.meta.url)),0);
 const browser=await launch({headless:false});
 try {
   const page=await browser.newPage({width:960,height:540});
+  if(replay) assert(audit==='catalog-fix-revolver-strip' && ids.length===1 && ids[0]==='chainsaw');
+  const verify=replay?await originalSawCovers(page,server.origin):null;
   await page.goto(server.origin+'/index.html?debug=1&raf=timer');
   assert(await page.waitFor('window.TT && DWLoad.snapshot().state==="ready"'));
   await page.evaluate('DWOpening.dismissForTesting()');
@@ -34,6 +38,7 @@ try {
     const views=['hip','aimed','held-left','held-right'];
     if(id==='sniper') views.push('aim-entry');
     if(id!=='chainsaw') views.push('rack');
+    if(process.argv.includes('--open-floor')) views.push('held-left-open','held-right-open');
     for (const view of rankOnly?[]:views) {
       const camera=await page.evaluate('vis.pose('+JSON.stringify(view)+')');
       const shot=async()=> (await page.send('Page.captureScreenshot',{format:'png'})).data;
@@ -61,5 +66,6 @@ try {
     console.log('RANK',id,rank.rawPairs,'raw pairs,',rank.crossingPairs,'with triangle crossings,',rank.screenCandidates,'screen candidates');
     console.log(JSON.stringify(rank.coverage));
   }
+  if(verify)await verify();
   assert.deepEqual(page.errors,[]);
 } finally {await browser.close(); await server.close();}

@@ -9,11 +9,14 @@ from PIL import Image, ImageDraw
 model, baseline, after, index = sys.argv[1:5]
 assert all(value.replace("-", "").isalnum() for value in (model,baseline,after))
 index=int(index)
+old_phase=sys.argv[5] if len(sys.argv)>5 else "before"
+assert old_phase.replace("-","").isalnum()
 root=Path(__file__).parent
 folder=root/"visible-repairs"/model
 rank=json.loads((root/baseline/model/"rank.json").read_text(encoding="utf-8"))
+rank_cameras=json.loads((root/baseline/model/"cameras.json").read_text(encoding="utf-8"))
 pair=next(p for p in rank["rows"] if p["index"]==index)
-cameras={s:json.loads((folder/s/"cameras.json").read_text(encoding="utf-8")) for s in ("before",after)}
+cameras={s:json.loads((folder/s/"cameras.json").read_text(encoding="utf-8")) for s in (old_phase,after)}
 def project(frame,point,width,height):
     basis=frame["points"]
     x,y,w=[basis[0][i]+sum(point[j]*(basis[j+1][i]-basis[0][i]) for j in range(3)) for i in range(3)]
@@ -25,20 +28,25 @@ for view,match in pair["views"].items():
     # Keep enough of the surrounding outline to recognise which visible part is changing.
     w=min(650,max(244,x1-x0+64));h=min(380,max(124,y1-y0+56))
     cx=(x0+x1)//2;cy=(y0+y1)//2
-    with Image.open(folder/"before"/(view+"-noon.png")) as before:
+    with Image.open(folder/old_phase/(view+"-noon.png")) as before:
         width,height=before.size
     errors=[]
+    rank_drift=[]
     for point in product((-.08,.08),(-.10,.10),(-.15,.15)):
-        a,b=(project(cameras[s][view],point,width,height) for s in ("before",after))
+        a,b=(project(cameras[s][view],point,width,height) for s in (old_phase,after))
         if a and b: errors.append(hypot(a[0]-b[0],a[1]-b[1]))
+        r=project(rank_cameras[view],point,width,height)
+        if a and r: rank_drift.append(hypot(a[0]-r[0],a[1]-r[1]))
     assert errors, "No projected camera anchors for "+view
+    # A changed held pose can put the old box entirely on the marine. A few pixels of sway fit within the crop margin.
+    assert rank_drift and max(rank_drift)<3, (view,"ranked camera no longer matches the before image",max(rank_drift,default=0))
     drift[view]=max(errors)
     assert drift[view]<1.0, (view,"camera drift in pixels",drift[view])
     left=min(max(0,cx-w//2),width-w);top=min(max(0,cy-h//2),height-h)
     display=410;dh=round(display*h/w)
     sheet=Image.new("RGB",(display*2,34+(dh+18)*4),"#20252a")
     pen=ImageDraw.Draw(sheet)
-    for col,phase in enumerate(("before",after)):
+    for col,phase in enumerate((old_phase,after)):
         pen.text((display*col+7,8),("BEFORE" if col==0 else "AFTER")+"  /  "+view,fill="white")
         for row,light in enumerate(("noon","overcast","dusk","night")):
             yy=30+row*(dh+18)

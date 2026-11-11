@@ -1,0 +1,62 @@
+{
+  "hip": {
+    "area": [
+      583,
+      295,
+      616,
+      310
+    ],
+    "old": 445,
+    "current": 400,
+    "oldInterior": 411,
+    "missingMeshDepth": 13,
+    "missingMeshDepthWithOnePixelTolerance": 0,
+    "absentInterior": 16,
+    "absentWithOnePixelTolerance": 0
+  },
+  "held-left": {
+    "area": [
+      484,
+      169,
+      685,
+      193
+    ],
+    "old": 3503,
+    "current": 3464,
+    "oldInterior": 3188,
+    "missingMeshDepth": 0,
+    "missingMeshDepthWithOnePixelTolerance": 0,
+    "absentInterior": 48,
+    "absentWithOnePixelTolerance": 0
+  },
+  "held-right": {
+    "area": [
+      261,
+      169,
+      478,
+      194
+    ],
+    "old": 4008,
+    "current": 4032,
+    "oldInterior": 3685,
+    "missingMeshDepth": 1,
+    "missingMeshDepthWithOnePixelTolerance": 0,
+    "absentInterior": 0,
+    "absentWithOnePixelTolerance": 0
+  },
+  "rack": {
+    "area": [
+      477,
+      189,
+      644,
+      195
+    ],
+    "old": 690,
+    "current": 639,
+    "oldInterior": 549,
+    "missingMeshDepth": 0,
+    "missingMeshDepthWithOnePixelTolerance": 0,
+    "absentInterior": 48,
+    "absentWithOnePixelTolerance": 0
+  }
+}

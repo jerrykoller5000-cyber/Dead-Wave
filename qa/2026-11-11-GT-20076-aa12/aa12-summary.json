@@ -1,0 +1,452 @@
+{
+  "capturedAt": "2026-11-11T14:51:47.180Z",
+  "backend": "WebGPUBackend",
+  "cameras": {
+    "eye-hip": {
+      "points": [
+        [
+          0.2851738600805866,
+          -0.29876749822600596,
+          0.5055671679972128
+        ],
+        [
+          1.0365634346879955,
+          -0.17155015912295532,
+          0.5349321603163046
+        ],
+        [
+          0.21507342281250103,
+          1.0371583760191496,
+          0.4747909722480742
+        ],
+        [
+          0.24971042467978918,
+          -0.24404086649790457,
+          1.1885797862815213
+        ]
+      ],
+      "eye": true,
+      "glassHidden": false,
+      "fov": null,
+      "target": "isolated held artwork"
+    },
+    "eye-ads": {
+      "points": [
+        [
+          0,
+          -0.25822334904450644,
+          0.43108399138549525
+        ],
+        [
+          0.8645871061758028,
+          -0.25822334904450644,
+          0.43108399138549525
+        ],
+        [
+          0,
+          1.2788203952680317,
+          0.43108399138549525
+        ],
+        [
+          0,
+          -0.25822334904450644,
+          1.1154199569274763
+        ]
+      ],
+      "eye": true,
+      "glassHidden": false,
+      "fov": null,
+      "target": "isolated held artwork"
+    },
+    "held-right": {
+      "points": [
+        [
+          0.25160034857177804,
+          -0.25378952923289805,
+          2.2463605193947798
+        ],
+        [
+          0.15355234709107846,
+          -0.844562032972448,
+          1.5884447472792997
+        ],
+        [
+          1.3404582796559912,
+          0.7801283611614916,
+          2.1116444327235184
+        ],
+        [
+          -0.3729427639438671,
+          1.6415380064423832,
+          2.1147773649716823
+        ]
+      ],
+      "eye": false,
+      "glassHidden": false,
+      "fov": 34,
+      "target": "isolated held artwork"
+    },
+    "held-left": {
+      "points": [
+        [
+          -0.25118396500536333,
+          -0.2550897451644286,
+          2.246360519394806
+        ],
+        [
+          -0.35019833268643846,
+          0.33517314913632734,
+          2.904276291510286
+        ],
+        [
+          -1.3417292630942277,
+          0.7731921404390374,
+          2.111644432723516
+        ],
+        [
+          0.3702548589181123,
+          1.6434599386976187,
+          2.1147773649717014
+        ]
+      ],
+      "eye": false,
+      "glassHidden": false,
+      "fov": 34,
+      "target": "isolated held artwork"
+    },
+    "rack": {
+      "points": [
+        [
+          -0.1239659623452739,
+          -0.37069240109496976,
+          1.7706646226903047
+        ],
+        [
+          -0.050113897798332356,
+          -0.25863117422507476,
+          2.4521105712420024
+        ],
+        [
+          -1.1789954558734874,
+          -0.3628481152140646,
+          1.8183658390889264
+        ],
+        [
+          -0.1239659623452739,
+          1.5061463802648174,
+          1.7297778657772085
+        ]
+      ],
+      "eye": false,
+      "glassHidden": false,
+      "fov": 40,
+      "target": "whole displayed rack"
+    }
+  },
+  "shots": {
+    "factory-eye-hip-noon.jpg": {
+      "bytes": 111468,
+      "sha": "48b7afb9ae38",
+      "meanLuma": 108.16
+    },
+    "factory-eye-hip-overcast.jpg": {
+      "bytes": 104881,
+      "sha": "ed389dd8f939",
+      "meanLuma": 104.91
+    },
+    "factory-eye-hip-dusk.jpg": {
+      "bytes": 99976,
+      "sha": "d2a84b392803",
+      "meanLuma": 66.04
+    },
+    "factory-eye-hip-night.jpg": {
+      "bytes": 60221,
+      "sha": "03637075803a",
+      "meanLuma": 18.18
+    },
+    "factory-eye-ads-noon.jpg": {
+      "bytes": 100349,
+      "sha": "77612b4a5c09",
+      "meanLuma": 121.99
+    },
+    "factory-eye-ads-overcast.jpg": {
+      "bytes": 97262,
+      "sha": "c23ebb6cc3d6",
+      "meanLuma": 105.66
+    },
+    "factory-eye-ads-dusk.jpg": {
+      "bytes": 92964,
+      "sha": "4d071a602b00",
+      "meanLuma": 69.8
+    },
+    "factory-eye-ads-night.jpg": {
+      "bytes": 57170,
+      "sha": "1837a40510b5",
+      "meanLuma": 19.7
+    },
+    "factory-held-right-noon.jpg": {
+      "bytes": 115327,
+      "sha": "d3837a0d7040",
+      "meanLuma": 84.53
+    },
+    "factory-held-right-overcast.jpg": {
+      "bytes": 107568,
+      "sha": "da5db4374cc1",
+      "meanLuma": 82.11
+    },
+    "factory-held-right-dusk.jpg": {
+      "bytes": 100915,
+      "sha": "e8cae1ffadf4",
+      "meanLuma": 52.19
+    },
+    "factory-held-right-night.jpg": {
+      "bytes": 55034,
+      "sha": "accd4f87cc05",
+      "meanLuma": 12.09
+    },
+    "factory-held-left-noon.jpg": {
+      "bytes": 119696,
+      "sha": "6e2a1c0531a5",
+      "meanLuma": 65.12
+    },
+    "factory-held-left-overcast.jpg": {
+      "bytes": 119941,
+      "sha": "d608f9cf3990",
+      "meanLuma": 70.66
+    },
+    "factory-held-left-dusk.jpg": {
+      "bytes": 95974,
+      "sha": "ab8044c857aa",
+      "meanLuma": 38.33
+    },
+    "factory-held-left-night.jpg": {
+      "bytes": 65273,
+      "sha": "7ac8e7d09432",
+      "meanLuma": 9.07
+    },
+    "factory-rack-noon.jpg": {
+      "bytes": 50628,
+      "sha": "e5b90fd59b87",
+      "meanLuma": 27.1
+    },
+    "factory-rack-overcast.jpg": {
+      "bytes": 47055,
+      "sha": "38290a59e819",
+      "meanLuma": 29.93
+    },
+    "factory-rack-dusk.jpg": {
+      "bytes": 36511,
+      "sha": "3561a7059234",
+      "meanLuma": 16.64
+    },
+    "factory-rack-night.jpg": {
+      "bytes": 37598,
+      "sha": "3c15896c227e",
+      "meanLuma": 9.52
+    },
+    "m81-eye-hip-noon.jpg": {
+      "bytes": 119569,
+      "sha": "c565495d84e0",
+      "meanLuma": 108.86
+    },
+    "m81-eye-hip-overcast.jpg": {
+      "bytes": 114588,
+      "sha": "a87d40425fa6",
+      "meanLuma": 105.52
+    },
+    "m81-eye-hip-dusk.jpg": {
+      "bytes": 106463,
+      "sha": "f01aea5565ab",
+      "meanLuma": 66.52
+    },
+    "m81-eye-hip-night.jpg": {
+      "bytes": 62112,
+      "sha": "05d654b93434",
+      "meanLuma": 18.24
+    },
+    "m81-held-right-noon.jpg": {
+      "bytes": 118793,
+      "sha": "5b3a8bd488e7",
+      "meanLuma": 85.58
+    },
+    "m81-held-right-overcast.jpg": {
+      "bytes": 111972,
+      "sha": "e4f525e88c6b",
+      "meanLuma": 83.05
+    },
+    "m81-held-right-dusk.jpg": {
+      "bytes": 103748,
+      "sha": "e9fd8a46a26e",
+      "meanLuma": 52.92
+    },
+    "m81-held-right-night.jpg": {
+      "bytes": 55844,
+      "sha": "a81bac6e3657",
+      "meanLuma": 12.19
+    },
+    "m81-rack-noon.jpg": {
+      "bytes": 56192,
+      "sha": "d938d6927408",
+      "meanLuma": 28.25
+    },
+    "m81-rack-overcast.jpg": {
+      "bytes": 53624,
+      "sha": "5309a2d60674",
+      "meanLuma": 31.3
+    },
+    "m81-rack-dusk.jpg": {
+      "bytes": 41014,
+      "sha": "02d2bf1f41d4",
+      "meanLuma": 17.42
+    },
+    "m81-rack-night.jpg": {
+      "bytes": 38540,
+      "sha": "8ced3e48bfe3",
+      "meanLuma": 9.62
+    },
+    "restored-eye-hip-noon.jpg": {
+      "bytes": 111831,
+      "sha": "bce2c4569964",
+      "meanLuma": 108.28
+    },
+    "restored-held-right-noon.jpg": {
+      "bytes": 115162,
+      "sha": "ae83f0251531",
+      "meanLuma": 84.39
+    },
+    "restored-rack-noon.jpg": {
+      "bytes": 50628,
+      "sha": "e5b90fd59b87",
+      "meanLuma": 27.1
+    }
+  },
+  "m81PaintCheck": {
+    "paintedM81": true,
+    "finishNow": null,
+    "factoryRestore": {
+      "restoredFactory": true,
+      "finishNow": "factory"
+    }
+  },
+  "inspectorShots": {
+    "inspector-aa12-side-noon.jpg": {
+      "bytes": 71068,
+      "sha": "fc16dc459a2e"
+    },
+    "inspector-aa12-three-overcast.jpg": {
+      "bytes": 89134,
+      "sha": "fb04eaa1a838"
+    },
+    "inspector-aa12-rear3-dusk.jpg": {
+      "bytes": 65404,
+      "sha": "9bd864860ef6"
+    },
+    "inspector-aa12-three-night.jpg": {
+      "bytes": 29754,
+      "sha": "fe9250822acc"
+    }
+  },
+  "consoleWarnings": [
+    {
+      "type": "warning",
+      "text": "Grave Shift: HQ bake skipped. ReferenceError: Cannot access 'hush' before initialization\n    at makeHouse (http://127.0.0.1:23203/index.html?debug=1&raf=timer&__gameTestToken=1c27dcfc-06c6-438a-9057-7b6057a2807c:28065:41)\n    at http://127.0.0.1:23203/index.html?debug=1&raf=timer&__gameTestToken=1c27dcfc-06c6-438a-9057-7b6057a2807c:28235:5"
+    },
+    {
+      "type": "warning",
+      "text": "THREE.Material: 'roughness' is not a property of THREE.MeshBasicNodeMaterial."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.Material: 'roughness' is not a property of THREE.MeshBasicNodeMaterial."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"ember\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"ember\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"ember\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"position\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"position\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"position\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"position\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"position\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "Calling [RenderPassEncoder (unlabeled)].Draw with a vertex count of 0 is unusual."
+    }
+  ],
+  "pageErrors": []
+}

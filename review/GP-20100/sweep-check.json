@@ -1,0 +1,37 @@
+[
+  {
+    "weapon": "pistol",
+    "frames": 81,
+    "maxStep": 0.05003883992739336,
+    "bad": 0,
+    "worst": []
+  },
+  {
+    "weapon": "m4",
+    "frames": 81,
+    "maxStep": 0.07290535553310457,
+    "bad": 0,
+    "worst": []
+  },
+  {
+    "weapon": "launcher",
+    "frames": 81,
+    "maxStep": 0.07389730913506747,
+    "bad": 0,
+    "worst": []
+  },
+  {
+    "weapon": "minigun",
+    "frames": 81,
+    "maxStep": 0.05536491026783703,
+    "bad": 0,
+    "worst": []
+  },
+  {
+    "weapon": "chainsaw",
+    "frames": 81,
+    "maxStep": 0.07534312692300302,
+    "bad": 0,
+    "worst": []
+  }
+]

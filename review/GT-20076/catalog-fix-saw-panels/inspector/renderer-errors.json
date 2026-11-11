@@ -1,0 +1,73 @@
+{
+  "errors": [],
+  "console": [
+    {
+      "type": "warning",
+      "text": "Grave Shift: HQ bake skipped. ReferenceError: Cannot access 'hush' before initialization\n    at makeHouse (http://127.0.0.1:56321/index.html?inspect=&debug=1&raf=timer&__gameTestToken=[redacted])\n    at http://127.0.0.1:56321/index.html?inspect=&debug=1&raf=timer&__gameTestToken=[redacted]"
+    },
+    {
+      "type": "warning",
+      "text": "THREE.Material: 'roughness' is not a property of THREE.MeshBasicNodeMaterial."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.Material: 'roughness' is not a property of THREE.MeshBasicNodeMaterial."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"ember\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"ember\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"ember\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"position\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"position\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"position\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"position\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "Calling [RenderPassEncoder (unlabeled)].Draw with a vertex count of 0 is unusual."
+    }
+  ]
+}

@@ -10,7 +10,7 @@ const builders={pistol:S.makePistolModel,revolver:S.makeRevolverModel,uzi:S.make
   m4:L.makeM4Model,ak:L.makeAkModel,aa12:L.makeAa12Model,shotgun:L.makeShotgunModel,sniper:L.makeSniperModel,
   minigun:H.makeMinigunModel,launcher:H.makeLauncherModel,flamer:H.makeFlamerModel,chainsaw:H.makeChainsawModel};
 
-function currentModel(T,id) {
+export function currentModel(T,id) {
   const ctx={...T.inspectHost().builders.weaponContext(),finishGun:g=>g,mergeRigidMeshes:()=>{}};
   const gun=builders[id](ctx);
   gun.visible=true; gun.scale.copy(T.weaponMeshes[id].scale);

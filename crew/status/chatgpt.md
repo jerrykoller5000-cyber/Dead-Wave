@@ -2,12 +2,12 @@
 
 state: active
 model: GPT-6.1 Sol
-task: GP-20100 Third-person wall clearance pull-back before arm IK
-touching: index.html (third-person hold pose and arm IK call site), review/GP-20100
-since: 2026-11-11T13:43Z
-next: —
+task: GP-20101 Place and wire the Training melee dummy with contact, reset and proof
+touching: index.html (Training dummy integration and hit routing), game/training-dummy.js (new), ui/strings.js (dummy text), review/GP-20101
+since: 2026-11-11T15:20Z
+next: GP-20101 J137 (Jerry, 11 Nov): the melee dummy's place and hits. Afte
 blocked-on: —
-last-report: handoffs/2026-11-11-chatgpt-GP-20099.md
+last-report: handoffs/2026-11-11-chatgpt-GP-20100.md
 
 ## Notes
 

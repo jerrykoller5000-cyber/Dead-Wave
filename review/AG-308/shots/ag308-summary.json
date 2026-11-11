@@ -1,0 +1,417 @@
+{
+  "card": "AG-308",
+  "capturedAt": "2026-11-11T15:22:20.581Z",
+  "backend": "WebGPUBackend",
+  "perf": {
+    "baseCalls": 1955,
+    "baseTris": 311710,
+    "dummyCalls": 2000,
+    "dummyTris": 288926,
+    "deltaCalls": 45,
+    "deltaTris": -22784,
+    "dummyPos": {
+      "x": -4.5,
+      "y": 0,
+      "z": -1
+    }
+  },
+  "shots": {
+    "dummy-noon-01-eye-clean.jpg": {
+      "bytes": 60320,
+      "sha": "1be973a552a7",
+      "name": "dummy-noon-01-eye-clean.jpg"
+    },
+    "dummy-overcast-01-eye-clean.jpg": {
+      "bytes": 54375,
+      "sha": "67ed62c56892",
+      "name": "dummy-overcast-01-eye-clean.jpg"
+    },
+    "dummy-dusk-01-eye-clean.jpg": {
+      "bytes": 55039,
+      "sha": "cbfe567e182c",
+      "name": "dummy-dusk-01-eye-clean.jpg"
+    },
+    "dummy-night-01-eye-clean.jpg": {
+      "bytes": 41743,
+      "sha": "f81ba9f18cac",
+      "name": "dummy-night-01-eye-clean.jpg"
+    },
+    "dummy-noon-02-eye-hits.jpg": {
+      "bytes": 60320,
+      "sha": "1be973a552a7",
+      "name": "dummy-noon-02-eye-hits.jpg"
+    },
+    "dummy-noon-03-third-person.jpg": {
+      "bytes": 29447,
+      "sha": "c31fe1ca0a36",
+      "name": "dummy-noon-03-third-person.jpg"
+    },
+    "dummy-noon-04-detail-decal.jpg": {
+      "bytes": 6163,
+      "sha": "d322e6c08069",
+      "name": "dummy-noon-04-detail-decal.jpg"
+    },
+    "dummy-overcast-02-eye-hits.jpg": {
+      "bytes": 54375,
+      "sha": "67ed62c56892",
+      "name": "dummy-overcast-02-eye-hits.jpg"
+    },
+    "dummy-overcast-03-third-person.jpg": {
+      "bytes": 26449,
+      "sha": "1189a566d1b5",
+      "name": "dummy-overcast-03-third-person.jpg"
+    },
+    "dummy-overcast-04-detail-decal.jpg": {
+      "bytes": 6163,
+      "sha": "d322e6c08069",
+      "name": "dummy-overcast-04-detail-decal.jpg"
+    },
+    "dummy-dusk-02-eye-hits.jpg": {
+      "bytes": 55039,
+      "sha": "cbfe567e182c",
+      "name": "dummy-dusk-02-eye-hits.jpg"
+    },
+    "dummy-dusk-03-third-person.jpg": {
+      "bytes": 26858,
+      "sha": "8a6d8c02f10b",
+      "name": "dummy-dusk-03-third-person.jpg"
+    },
+    "dummy-dusk-04-detail-decal.jpg": {
+      "bytes": 6163,
+      "sha": "d322e6c08069",
+      "name": "dummy-dusk-04-detail-decal.jpg"
+    },
+    "dummy-night-02-eye-hits.jpg": {
+      "bytes": 41743,
+      "sha": "f81ba9f18cac",
+      "name": "dummy-night-02-eye-hits.jpg"
+    },
+    "dummy-night-03-third-person.jpg": {
+      "bytes": 20896,
+      "sha": "91cf8f0ab42f",
+      "name": "dummy-night-03-third-person.jpg"
+    },
+    "dummy-night-04-detail-decal.jpg": {
+      "bytes": 6163,
+      "sha": "d322e6c08069",
+      "name": "dummy-night-04-detail-decal.jpg"
+    },
+    "dummy-noon-05-wobble-flex.jpg": {
+      "bytes": 29447,
+      "sha": "c31fe1ca0a36",
+      "name": "dummy-noon-05-wobble-flex.jpg"
+    },
+    "dummy-night-05-wobble-flex.jpg": {
+      "bytes": 20896,
+      "sha": "91cf8f0ab42f",
+      "name": "dummy-night-05-wobble-flex.jpg"
+    }
+  },
+  "wobbleData": [
+    {
+      "frame": 0,
+      "t": 0,
+      "rotX": -0.0851,
+      "rotZ": 0.0255,
+      "angle": 0.0888
+    },
+    {
+      "frame": 1,
+      "t": 0.016,
+      "rotX": -0.1559,
+      "rotZ": 0.0468,
+      "angle": 0.1627
+    },
+    {
+      "frame": 2,
+      "t": 0.032,
+      "rotX": -0.2108,
+      "rotZ": 0.0633,
+      "angle": 0.2201
+    },
+    {
+      "frame": 3,
+      "t": 0.048,
+      "rotX": -0.2493,
+      "rotZ": 0.0748,
+      "angle": 0.2603
+    },
+    {
+      "frame": 4,
+      "t": 0.064,
+      "rotX": -0.2715,
+      "rotZ": 0.0815,
+      "angle": 0.2835
+    },
+    {
+      "frame": 5,
+      "t": 0.08,
+      "rotX": -0.2784,
+      "rotZ": 0.0835,
+      "angle": 0.2906
+    },
+    {
+      "frame": 6,
+      "t": 0.096,
+      "rotX": -0.2714,
+      "rotZ": 0.0814,
+      "angle": 0.2833
+    },
+    {
+      "frame": 7,
+      "t": 0.112,
+      "rotX": -0.2526,
+      "rotZ": 0.0758,
+      "angle": 0.2637
+    },
+    {
+      "frame": 8,
+      "t": 0.128,
+      "rotX": -0.2243,
+      "rotZ": 0.0673,
+      "angle": 0.2342
+    },
+    {
+      "frame": 9,
+      "t": 0.144,
+      "rotX": -0.1889,
+      "rotZ": 0.0567,
+      "angle": 0.1973
+    },
+    {
+      "frame": 10,
+      "t": 0.16,
+      "rotX": -0.1491,
+      "rotZ": 0.0447,
+      "angle": 0.1556
+    },
+    {
+      "frame": 11,
+      "t": 0.176,
+      "rotX": -0.1071,
+      "rotZ": 0.0321,
+      "angle": 0.1118
+    },
+    {
+      "frame": 12,
+      "t": 0.192,
+      "rotX": -0.0651,
+      "rotZ": 0.0195,
+      "angle": 0.068
+    },
+    {
+      "frame": 13,
+      "t": 0.208,
+      "rotX": -0.0252,
+      "rotZ": 0.0076,
+      "angle": 0.0263
+    },
+    {
+      "frame": 14,
+      "t": 0.224,
+      "rotX": 0.011,
+      "rotZ": -0.0033,
+      "angle": 0.0115
+    },
+    {
+      "frame": 15,
+      "t": 0.24,
+      "rotX": 0.0424,
+      "rotZ": -0.0127,
+      "angle": 0.0442
+    },
+    {
+      "frame": 16,
+      "t": 0.256,
+      "rotX": 0.0679,
+      "rotZ": -0.0204,
+      "angle": 0.0709
+    },
+    {
+      "frame": 17,
+      "t": 0.272,
+      "rotX": 0.0873,
+      "rotZ": -0.0262,
+      "angle": 0.0911
+    },
+    {
+      "frame": 18,
+      "t": 0.288,
+      "rotX": 0.1002,
+      "rotZ": -0.03,
+      "angle": 0.1046
+    },
+    {
+      "frame": 19,
+      "t": 0.304,
+      "rotX": 0.1068,
+      "rotZ": -0.0321,
+      "angle": 0.1115
+    },
+    {
+      "frame": 20,
+      "t": 0.32,
+      "rotX": 0.1077,
+      "rotZ": -0.0323,
+      "angle": 0.1125
+    },
+    {
+      "frame": 21,
+      "t": 0.336,
+      "rotX": 0.1035,
+      "rotZ": -0.031,
+      "angle": 0.108
+    },
+    {
+      "frame": 22,
+      "t": 0.352,
+      "rotX": 0.0949,
+      "rotZ": -0.0285,
+      "angle": 0.0991
+    },
+    {
+      "frame": 23,
+      "t": 0.368,
+      "rotX": 0.0829,
+      "rotZ": -0.0249,
+      "angle": 0.0866
+    },
+    {
+      "frame": 24,
+      "t": 0.384,
+      "rotX": 0.0686,
+      "rotZ": -0.0206,
+      "angle": 0.0716
+    },
+    {
+      "frame": 25,
+      "t": 0.4,
+      "rotX": 0.0527,
+      "rotZ": -0.0158,
+      "angle": 0.055
+    },
+    {
+      "frame": 26,
+      "t": 0.416,
+      "rotX": 0.0363,
+      "rotZ": -0.0109,
+      "angle": 0.0379
+    },
+    {
+      "frame": 27,
+      "t": 0.432,
+      "rotX": 0.0202,
+      "rotZ": -0.0061,
+      "angle": 0.0211
+    },
+    {
+      "frame": 28,
+      "t": 0.448,
+      "rotX": 0.0052,
+      "rotZ": -0.0015,
+      "angle": 0.0054
+    },
+    {
+      "frame": 29,
+      "t": 0.464,
+      "rotX": -0.0084,
+      "rotZ": 0.0025,
+      "angle": 0.0087
+    }
+  ],
+  "decalHits": {
+    "strikes": [
+      {
+        "hit": true,
+        "markType": "slash",
+        "damage": 35,
+        "wobbleAngle": 0,
+        "sound": "dummy_hit_slash",
+        "stats": {
+          "hits": 1,
+          "damage": 35,
+          "slashes": 1,
+          "scorches": 0,
+          "bullets": 0,
+          "blunt": 0
+        }
+      },
+      {
+        "hit": true,
+        "markType": "slash",
+        "damage": 35,
+        "wobbleAngle": 0,
+        "sound": "dummy_hit_slash",
+        "stats": {
+          "hits": 2,
+          "damage": 70,
+          "slashes": 2,
+          "scorches": 0,
+          "bullets": 0,
+          "blunt": 0
+        }
+      },
+      {
+        "hit": true,
+        "markType": "chainsaw",
+        "damage": 140,
+        "wobbleAngle": 0,
+        "sound": "dummy_hit_chainsaw",
+        "stats": {
+          "hits": 3,
+          "damage": 210,
+          "slashes": 2,
+          "scorches": 1,
+          "bullets": 0,
+          "blunt": 0
+        }
+      },
+      {
+        "hit": true,
+        "markType": "bullet",
+        "damage": 45,
+        "wobbleAngle": 0,
+        "sound": "dummy_hit_bullet",
+        "stats": {
+          "hits": 4,
+          "damage": 255,
+          "slashes": 2,
+          "scorches": 1,
+          "bullets": 1,
+          "blunt": 0
+        }
+      },
+      {
+        "hit": true,
+        "markType": "blunt",
+        "damage": 20,
+        "wobbleAngle": 0,
+        "sound": "dummy_hit_thud",
+        "stats": {
+          "hits": 5,
+          "damage": 275,
+          "slashes": 2,
+          "scorches": 1,
+          "bullets": 1,
+          "blunt": 1
+        }
+      }
+    ],
+    "stats": {
+      "hits": 5,
+      "damage": 275,
+      "slashes": 2,
+      "scorches": 1,
+      "bullets": 1,
+      "blunt": 1
+    }
+  },
+  "pageErrors": [],
+  "frameRateTest": {
+    "samples": 60,
+    "minMs": 3.4,
+    "medMs": 5.3,
+    "maxMs": 11,
+    "fps": 188.7
+  }
+}

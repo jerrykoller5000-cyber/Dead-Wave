@@ -7,7 +7,8 @@ import {save} from '../GT-20076/save.mjs';
 
 const [id,phase='baseline']=process.argv.slice(2);
 const compareSaw=id==='chainsaw' && ['compare-before','compare-after'].includes(phase);
-assert(compareSaw || ['baseline','revised','rework','action','ag294'].includes(phase));
+const compareKr=id==='ak' && /^(original|current)-kr-[12]$/.test(phase);
+assert(compareKr || compareSaw || ['baseline','revised','rework','action','ag294','j128'].includes(phase));
 assert(process.env.DW_GAME_TEST_TOKEN && /^[a-z0-9-]+$/.test(id));
 const server=await serve(fileURLToPath(new URL('../../',import.meta.url)),0);
 const browser=await launch({headless:false});
@@ -17,6 +18,11 @@ try {
   if(phase==='compare-before'){
     const {originalSawForPage}=await import('./chainsaw/baseline-look.mjs');
     verifyBaseline=await originalSawForPage(page,server.origin);
+  }
+  let verifyKr;
+  if(compareKr){
+    const {prepareKrComparison}=await import('../GT-20076/kr-timing-control.mjs');
+    verifyKr=await prepareKrComparison(page,server.origin,phase.startsWith('original'));
   }
   const start=Date.now();
   await page.goto(server.origin+'/index.html?debug=1',{waitUntil:'none'});
@@ -49,7 +55,10 @@ try {
   const mean=key=>Math.round(last.reduce((a,v)=>a+v[key],0)*10/last.length)/10;
   const result={weapon:id,readyMs,fps:mean('fps'),low:mean('low'),samples};
   assert(result.fps>0 && result.low>0);
-  const path=phase==='ag294'?'./ag294-retakes/timing-'+id+'.json':'./'+id+'/'+(phase==='baseline'?'timing.json':'timing-'+phase+'.json');
+  if(verifyKr) result.artworkFingerprint=await verifyKr();
+  let path='./'+id+'/'+(phase==='baseline'?'timing.json':'timing-'+phase+'.json');
+  if (phase==='ag294') path='./ag294-retakes/timing-'+id+'.json';
+  if (phase==='j128') path='../GT-20076/visible-repairs/'+id+'/timing.json';
   await save(new URL(path,import.meta.url),JSON.stringify(result,null,2));
   if(verifyBaseline)verifyBaseline();
   assert.deepEqual(page.errors,[]);

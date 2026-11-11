@@ -1,0 +1,26 @@
+{
+  "panels": [
+    {
+      "side": -1,
+      "before": 46,
+      "after": 46,
+      "missing": 0,
+      "added": 0,
+      "inner": 0.13599999997392298,
+      "outerMotion": 0,
+      "closed": true
+    },
+    {
+      "side": 1,
+      "before": 46,
+      "after": 46,
+      "missing": 0,
+      "added": 0,
+      "inner": 0.13599999997392298,
+      "outerMotion": 0,
+      "closed": true
+    }
+  ],
+  "instances": 42,
+  "moved": 42
+}

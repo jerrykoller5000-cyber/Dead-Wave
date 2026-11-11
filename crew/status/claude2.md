@@ -1,10 +1,10 @@
 # Claude 2
 
-state: idle
+state: active
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: —
-touching: —
-since: 2026-11-11T13:09Z
+task: CB-290 fresh session: GP-20100's gate (tcb291/tcb289/t184/t187/t229 in cloud), then CB-291's three reds in the hold (t187 shotgun/launcher aim-follow, t229 akimbo forearm line)
+touching: index.html (holdShoulderIK, holdFreeShoulders), core/body-limits.js (body rules), tools/tests/tcb291.js, Claude outputs/cb290
+since: 2026-11-11T15:13Z
 next: CB-290 J126 rule 3 (Jerry, 10 Nov, standing, D-138): "No part of th
 blocked-on: —
 last-report: handoffs/2026-11-11-claude2-CB-291.md

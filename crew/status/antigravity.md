@@ -1,13 +1,13 @@
 # Antigravity
 
-state: idle
+state: active
 model: Gemini 4 Carbon
-task: —
-touching: —
-since: 2026-11-11T14:12Z
+task: AG-308 J137: Melee practice dummy model, blade/saw cut & scorch decals, hit wobble & 4-light 5080 sheets
+touching: world/training-dummy.js, qa/2026-11-11-AG-308, review/AG-308
+since: 2026-11-11T15:12Z
 next: —
 blocked-on: —
-last-report: handoffs/2026-11-11-antigravity-AG-304.md
+last-report: handoffs/2026-11-11-antigravity-AG-307.md
 
 ## Notes
 

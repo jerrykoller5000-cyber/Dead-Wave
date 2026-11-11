@@ -1,0 +1,103 @@
+{
+  "assembled": {
+    "count": 21,
+    "changedIds": 0,
+    "changed": []
+  },
+  "firstPerson": {
+    "count": 20,
+    "changedIds": 10,
+    "changed": [
+      {
+        "name": "vm:gunPaint:aa12",
+        "issued": "1b32c369-4e37-453d-934b-169588777a26",
+        "painted": "f4c5800f-ea38-4f41-b7c0-0b1d8c4429be",
+        "restored": "dcbe3bc0-6f7b-4dfe-a04e-4a272af1b806",
+        "sameProperties": true
+      },
+      {
+        "name": "vm:gunPaint:aa12",
+        "issued": "163785b6-5199-45a8-bf6a-9602a80d6d73",
+        "painted": "fd5bd4de-6631-4edf-b329-f9d3c8594791",
+        "restored": "529c2e26-0495-46ce-8ab5-8423f5c8b060",
+        "sameProperties": true
+      },
+      {
+        "name": "vm:gunPaint:aa12",
+        "issued": "066d65c1-118e-403b-8a91-04b0930826c4",
+        "painted": "48e4ea45-f18c-43f4-8e17-e313f2c13ffb",
+        "restored": "03ab63a9-ccac-4b13-ad2a-79bbc5e08c62",
+        "sameProperties": true
+      },
+      {
+        "name": "vm:gunPaint:aa12",
+        "issued": "c049bdbc-8b58-4d17-b693-1468320bdc91",
+        "painted": "5ebc414b-0aa0-413b-bb40-5640e59d3e64",
+        "restored": "d9495d0c-45db-4040-a783-40cc1d7e2c78",
+        "sameProperties": true
+      },
+      {
+        "name": "vm:gunPaint:aa12",
+        "issued": "081ce489-a64d-409e-9385-f6d7fecbd622",
+        "painted": "b965d814-e04c-4249-9b86-1afd22e189f4",
+        "restored": "9832a09a-3d68-4a79-8669-420c8b023b3a",
+        "sameProperties": true
+      },
+      {
+        "name": "vm:gunPaint:aa12",
+        "issued": "7e1f7b9b-d951-4d3a-bfc8-8585fd33ca4b",
+        "painted": "5bff5e5b-2a52-4fbc-a562-77a426287fe3",
+        "restored": "83950e12-83fd-4e3c-b98c-4ce94d106566",
+        "sameProperties": true
+      },
+      {
+        "name": "vm:gunPaint:aa12",
+        "issued": "1e4a6b34-1933-4cd6-9096-00647b8b7950",
+        "painted": "30a7cf48-e81a-4ce7-9bb3-d4d3ecea338b",
+        "restored": "a114fc48-3a67-45d8-9b2b-0f49fd72bab6",
+        "sameProperties": true
+      },
+      {
+        "name": "vm:gunPaint:aa12",
+        "issued": "5f60a2bc-07c2-470b-8710-4c4c275bd283",
+        "painted": "b8e9ca50-334d-418a-a15f-c44dda246dbd",
+        "restored": "3dcb1867-b4db-463c-93bf-ece2b3cebebf",
+        "sameProperties": true
+      },
+      {
+        "name": "vm:gunPaint:aa12",
+        "issued": "7e4dbca1-43eb-481c-ba2a-94c101f97e06",
+        "painted": "f0377dca-2bae-4b0d-a246-e9f17d8a6113",
+        "restored": "9ca35535-b6a6-40ee-8924-88e734062afc",
+        "sameProperties": true
+      },
+      {
+        "name": "vm:gunPaint:aa12",
+        "issued": "f76c77a5-d45d-42ab-9080-ff30f20c01e8",
+        "painted": "00c76ffb-7e57-4854-ad60-e6f7bda431c6",
+        "restored": "85add2f4-d34f-4d57-afc1-3bc35bd2cb36",
+        "sameProperties": true
+      }
+    ]
+  },
+  "magazine": {
+    "count": 2,
+    "changedIds": 0,
+    "changed": []
+  },
+  "light": {
+    "count": 4,
+    "changedIds": 0,
+    "changed": []
+  },
+  "optic": {
+    "count": 7,
+    "changedIds": 0,
+    "changed": []
+  },
+  "rack": {
+    "count": 5,
+    "changedIds": 0,
+    "changed": []
+  }
+}

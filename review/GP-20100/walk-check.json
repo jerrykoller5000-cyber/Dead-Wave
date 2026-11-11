@@ -1,0 +1,2282 @@
+[
+  {
+    "weapon": "minigun",
+    "kind": "wall",
+    "stance": "still",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 36948,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.27025443305383584,
+      -197.91568182279278,
+      -640.9072818018902
+    ]
+  },
+  {
+    "weapon": "minigun",
+    "kind": "wall",
+    "stance": "crouch",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 36948,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.26504262495615755,
+      -198.18238622028136,
+      -641.030428101736
+    ]
+  },
+  {
+    "weapon": "minigun",
+    "kind": "wall",
+    "stance": "walk",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 36948,
+    "player": [
+      0,
+      -200,
+      -640.9788064430888
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.22681824972184583,
+      -197.9356103971327,
+      -640.8948418062536
+    ]
+  },
+  {
+    "weapon": "minigun",
+    "kind": "wall",
+    "stance": "sprint",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 36948,
+    "player": [
+      0,
+      -200,
+      -641.0489105092
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.22234301985555646,
+      -197.9403033244964,
+      -640.8620522923793
+    ]
+  },
+  {
+    "weapon": "minigun",
+    "kind": "door",
+    "stance": "still",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 36948,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.2742947339207406,
+      -197.91503659910776,
+      -640.9052434665947
+    ]
+  },
+  {
+    "weapon": "minigun",
+    "kind": "door",
+    "stance": "crouch",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 36948,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.2695208351932539,
+      -198.17984438463307,
+      -641.0265749679146
+    ]
+  },
+  {
+    "weapon": "minigun",
+    "kind": "crate",
+    "stance": "still",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 36948,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.27589548658058427,
+      -197.92490738569134,
+      -640.9143076049368
+    ]
+  },
+  {
+    "weapon": "minigun",
+    "kind": "crate",
+    "stance": "crouch",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 36948,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.27118627576234494,
+      -198.18299563077292,
+      -641.0308132107613
+    ]
+  },
+  {
+    "weapon": "minigun",
+    "kind": "station",
+    "stance": "still",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 36948,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.27734955966044783,
+      -197.92711514449127,
+      -640.9163676810641
+    ]
+  },
+  {
+    "weapon": "minigun",
+    "kind": "station",
+    "stance": "crouch",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 36948,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.2724221475509623,
+      -198.18428267718153,
+      -641.0318856603203
+    ]
+  },
+  {
+    "weapon": "m4",
+    "kind": "wall",
+    "stance": "still",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 55228,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.2279809431730829,
+      -197.81382088266923,
+      -641.3119570022959
+    ]
+  },
+  {
+    "weapon": "m4",
+    "kind": "wall",
+    "stance": "crouch",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 55228,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.2282692857334253,
+      -198.03537674427497,
+      -641.3143806873435
+    ]
+  },
+  {
+    "weapon": "m4",
+    "kind": "wall",
+    "stance": "walk",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 55228,
+    "player": [
+      0,
+      -200,
+      -640.9788064430888
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.1729153991174388,
+      -197.8085239460696,
+      -641.2652818345748
+    ]
+  },
+  {
+    "weapon": "m4",
+    "kind": "wall",
+    "stance": "sprint",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 55228,
+    "player": [
+      0,
+      -200,
+      -641.0489105092
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.19416491935745375,
+      -197.81141394775287,
+      -641.187402309367
+    ]
+  },
+  {
+    "weapon": "m4",
+    "kind": "door",
+    "stance": "still",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 55228,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.22655573341980156,
+      -197.81615328526553,
+      -641.3193401371544
+    ]
+  },
+  {
+    "weapon": "m4",
+    "kind": "door",
+    "stance": "crouch",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 55228,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.2259151291868019,
+      -198.03794982377522,
+      -641.3096629242157
+    ]
+  },
+  {
+    "weapon": "m4",
+    "kind": "crate",
+    "stance": "still",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 55228,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.2247140758892756,
+      -197.82298939148282,
+      -641.3274083183549
+    ]
+  },
+  {
+    "weapon": "m4",
+    "kind": "crate",
+    "stance": "crouch",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 55228,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.2237968330331593,
+      -198.0370910949906,
+      -641.311088295062
+    ]
+  },
+  {
+    "weapon": "m4",
+    "kind": "station",
+    "stance": "still",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 55228,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.22244022227130644,
+      -197.82285551942647,
+      -641.3254361283591
+    ]
+  },
+  {
+    "weapon": "m4",
+    "kind": "station",
+    "stance": "crouch",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 55228,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.22148378711440217,
+      -198.03726208659518,
+      -641.3115678219109
+    ]
+  },
+  {
+    "weapon": "ak",
+    "kind": "wall",
+    "stance": "still",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 31956,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.21807856754664426,
+      -197.87109295972317,
+      -641.2844376202746
+    ]
+  },
+  {
+    "weapon": "ak",
+    "kind": "wall",
+    "stance": "crouch",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 31956,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.2178022144323261,
+      -198.10174288950014,
+      -641.3333812367072
+    ]
+  },
+  {
+    "weapon": "ak",
+    "kind": "wall",
+    "stance": "walk",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 31956,
+    "player": [
+      0,
+      -200,
+      -640.9788064430888
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.22776318344544844,
+      -197.87501954988346,
+      -641.2266514238429
+    ]
+  },
+  {
+    "weapon": "ak",
+    "kind": "wall",
+    "stance": "sprint",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 31956,
+    "player": [
+      0,
+      -200,
+      -641.0489105092
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.2544476674198474,
+      -197.89101771569025,
+      -641.1428364173483
+    ]
+  },
+  {
+    "weapon": "ak",
+    "kind": "door",
+    "stance": "still",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 31956,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.21678840516890413,
+      -197.87185320356596,
+      -641.2810042327767
+    ]
+  },
+  {
+    "weapon": "ak",
+    "kind": "door",
+    "stance": "crouch",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 31956,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.2174114445909737,
+      -198.09981866833468,
+      -641.3372597603571
+    ]
+  },
+  {
+    "weapon": "ak",
+    "kind": "crate",
+    "stance": "still",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 31956,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.21756462728259357,
+      -197.8771115731135,
+      -641.2903821843272
+    ]
+  },
+  {
+    "weapon": "ak",
+    "kind": "crate",
+    "stance": "crouch",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 31956,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.2186169041874788,
+      -198.10059300523884,
+      -641.3355854514953
+    ]
+  },
+  {
+    "weapon": "ak",
+    "kind": "station",
+    "stance": "still",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 31956,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.21914336939105392,
+      -197.8779845070914,
+      -641.2920823944402
+    ]
+  },
+  {
+    "weapon": "ak",
+    "kind": "station",
+    "stance": "crouch",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 31956,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.22047324863805554,
+      -198.10065895760798,
+      -641.3355599377601
+    ]
+  },
+  {
+    "weapon": "pistol",
+    "kind": "wall",
+    "stance": "still",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 25866,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.07118328732429764,
+      -198.56202717552455,
+      -640.7608031659296
+    ]
+  },
+  {
+    "weapon": "pistol",
+    "kind": "wall",
+    "stance": "crouch",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 25866,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.10515241258519371,
+      -198.87057022497453,
+      -640.792256527559
+    ]
+  },
+  {
+    "weapon": "pistol",
+    "kind": "wall",
+    "stance": "walk",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 25866,
+    "player": [
+      0,
+      -200,
+      -640.9788064430888
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.10156810902592985,
+      -198.5836002257496,
+      -640.7584655076383
+    ]
+  },
+  {
+    "weapon": "pistol",
+    "kind": "wall",
+    "stance": "sprint",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 25866,
+    "player": [
+      0,
+      -200,
+      -641.0489105092
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.07439172223275195,
+      -198.5692716173214,
+      -640.73426439727
+    ]
+  },
+  {
+    "weapon": "pistol",
+    "kind": "door",
+    "stance": "still",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 25866,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.07855972235020933,
+      -198.56760932527993,
+      -640.7620851140128
+    ]
+  },
+  {
+    "weapon": "pistol",
+    "kind": "door",
+    "stance": "crouch",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 25866,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.11005734276717546,
+      -198.87425668040055,
+      -640.790815134564
+    ]
+  },
+  {
+    "weapon": "pistol",
+    "kind": "crate",
+    "stance": "still",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 25866,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.08218678917288834,
+      -198.58008391812723,
+      -640.7649260697584
+    ]
+  },
+  {
+    "weapon": "pistol",
+    "kind": "crate",
+    "stance": "crouch",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 25866,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.11046512242096988,
+      -198.87131859709646,
+      -640.7923178924473
+    ]
+  },
+  {
+    "weapon": "pistol",
+    "kind": "station",
+    "stance": "still",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 25866,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.08144395485347611,
+      -198.57744772093392,
+      -640.7637255222716
+    ]
+  },
+  {
+    "weapon": "pistol",
+    "kind": "station",
+    "stance": "crouch",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 25866,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.10984463353141048,
+      -198.87032557818864,
+      -640.7930622904041
+    ]
+  },
+  {
+    "weapon": "uzi",
+    "kind": "wall",
+    "stance": "still",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 31248,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.118821687838484,
+      -198.52822795983835,
+      -640.9561964971039
+    ]
+  },
+  {
+    "weapon": "uzi",
+    "kind": "wall",
+    "stance": "crouch",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 31248,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.12475080059214579,
+      -198.80894773954176,
+      -640.8972803457938
+    ]
+  },
+  {
+    "weapon": "uzi",
+    "kind": "wall",
+    "stance": "walk",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 31248,
+    "player": [
+      0,
+      -200,
+      -640.9788064430888
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.11782598672285653,
+      -198.53086198839577,
+      -640.9570343427314
+    ]
+  },
+  {
+    "weapon": "uzi",
+    "kind": "wall",
+    "stance": "sprint",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 31248,
+    "player": [
+      0,
+      -200,
+      -641.0489105092
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.07580917470112657,
+      -198.52505671461566,
+      -640.9197597540602
+    ]
+  },
+  {
+    "weapon": "uzi",
+    "kind": "door",
+    "stance": "still",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 31248,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.1127397992572705,
+      -198.527855783318,
+      -640.9574211680384
+    ]
+  },
+  {
+    "weapon": "uzi",
+    "kind": "door",
+    "stance": "crouch",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 31248,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.11859073156738889,
+      -198.80586870569854,
+      -640.8981167805608
+    ]
+  },
+  {
+    "weapon": "uzi",
+    "kind": "crate",
+    "stance": "still",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 31248,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.11076012583904268,
+      -198.53881865985358,
+      -640.9504365094367
+    ]
+  },
+  {
+    "weapon": "uzi",
+    "kind": "crate",
+    "stance": "crouch",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 31248,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.11693696959472567,
+      -198.80864425143832,
+      -640.8966625271833
+    ]
+  },
+  {
+    "weapon": "uzi",
+    "kind": "station",
+    "stance": "still",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 31248,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.10899179463671305,
+      -198.54150645657685,
+      -640.9483516032874
+    ]
+  },
+  {
+    "weapon": "uzi",
+    "kind": "station",
+    "stance": "crouch",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 31248,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.11606973608359158,
+      -198.8100570390214,
+      -640.8957827298102
+    ]
+  },
+  {
+    "weapon": "shotgun",
+    "kind": "wall",
+    "stance": "still",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 26184,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.21695735441891023,
+      -197.69669805495965,
+      -641.1704322122422
+    ]
+  },
+  {
+    "weapon": "shotgun",
+    "kind": "wall",
+    "stance": "crouch",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 26184,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.2182137264631628,
+      -197.9197058967427,
+      -641.2783583089931
+    ]
+  },
+  {
+    "weapon": "shotgun",
+    "kind": "wall",
+    "stance": "walk",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 26184,
+    "player": [
+      0,
+      -200,
+      -640.9788064430888
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.17475759316931858,
+      -197.71865585653154,
+      -641.1250663792247
+    ]
+  },
+  {
+    "weapon": "shotgun",
+    "kind": "wall",
+    "stance": "sprint",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 26184,
+    "player": [
+      0,
+      -200,
+      -641.0489105092
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.1698768614707051,
+      -197.71803134677702,
+      -641.0538419964594
+    ]
+  },
+  {
+    "weapon": "shotgun",
+    "kind": "door",
+    "stance": "still",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 26184,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.2214617338299659,
+      -197.6972308244098,
+      -641.1775128611906
+    ]
+  },
+  {
+    "weapon": "shotgun",
+    "kind": "door",
+    "stance": "crouch",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 26184,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.22315905587624552,
+      -197.9230972601367,
+      -641.2844774229679
+    ]
+  },
+  {
+    "weapon": "shotgun",
+    "kind": "crate",
+    "stance": "still",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 26184,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.22395726387272,
+      -197.70230636284114,
+      -641.1856739346673
+    ]
+  },
+  {
+    "weapon": "shotgun",
+    "kind": "crate",
+    "stance": "crouch",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 26184,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.22542734657879399,
+      -197.9213755595052,
+      -641.2830645410321
+    ]
+  },
+  {
+    "weapon": "shotgun",
+    "kind": "station",
+    "stance": "still",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 26184,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.22600312381988027,
+      -197.701684621023,
+      -641.183694643269
+    ]
+  },
+  {
+    "weapon": "shotgun",
+    "kind": "station",
+    "stance": "crouch",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 26184,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.22717652147902093,
+      -197.9207337260892,
+      -641.2821167713407
+    ]
+  },
+  {
+    "weapon": "aa12",
+    "kind": "wall",
+    "stance": "still",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 44916,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.2285897858634786,
+      -197.8069477704823,
+      -641.4018776575215
+    ]
+  },
+  {
+    "weapon": "aa12",
+    "kind": "wall",
+    "stance": "crouch",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 44916,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.22844983420901896,
+      -198.0197928026168,
+      -641.3095458621441
+    ]
+  },
+  {
+    "weapon": "aa12",
+    "kind": "wall",
+    "stance": "walk",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 44916,
+    "player": [
+      0,
+      -200,
+      -640.9788064430888
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.1835741310195049,
+      -197.79801494128026,
+      -641.4144225983104
+    ]
+  },
+  {
+    "weapon": "aa12",
+    "kind": "wall",
+    "stance": "sprint",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 44916,
+    "player": [
+      0,
+      -200,
+      -641.0489105092
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.21197825936469125,
+      -197.79091122623336,
+      -641.3320524771755
+    ]
+  },
+  {
+    "weapon": "aa12",
+    "kind": "door",
+    "stance": "still",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 44916,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.22619685018921049,
+      -197.80775336206804,
+      -641.4058636476657
+    ]
+  },
+  {
+    "weapon": "aa12",
+    "kind": "door",
+    "stance": "crouch",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 44916,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.2251561062561371,
+      -198.01755049261087,
+      -641.3149319048485
+    ]
+  },
+  {
+    "weapon": "aa12",
+    "kind": "crate",
+    "stance": "still",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 44916,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.22393602931178927,
+      -197.81255071396643,
+      -641.3990379039072
+    ]
+  },
+  {
+    "weapon": "aa12",
+    "kind": "crate",
+    "stance": "crouch",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 44916,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.2227280639728644,
+      -198.01834934136625,
+      -641.31414101298
+    ]
+  },
+  {
+    "weapon": "aa12",
+    "kind": "station",
+    "stance": "still",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 44916,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.22142157132731638,
+      -197.81361345833932,
+      -641.3981862376351
+    ]
+  },
+  {
+    "weapon": "aa12",
+    "kind": "station",
+    "stance": "crouch",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 44916,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.22022458381864043,
+      -198.0190551375411,
+      -641.3143749544539
+    ]
+  },
+  {
+    "weapon": "revolver",
+    "kind": "wall",
+    "stance": "still",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 32957,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.057230824562063985,
+      -198.4759300461338,
+      -640.8132878884167
+    ]
+  },
+  {
+    "weapon": "revolver",
+    "kind": "wall",
+    "stance": "crouch",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 32957,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.08360100390740399,
+      -198.80827248377713,
+      -640.8582666299617
+    ]
+  },
+  {
+    "weapon": "revolver",
+    "kind": "wall",
+    "stance": "walk",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 32957,
+    "player": [
+      0,
+      -200,
+      -640.9788064430888
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.07809590544638738,
+      -198.4965884287648,
+      -640.8093867665438
+    ]
+  },
+  {
+    "weapon": "revolver",
+    "kind": "wall",
+    "stance": "sprint",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 32957,
+    "player": [
+      0,
+      -200,
+      -641.0489105092
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.0825302019184268,
+      -198.4817925668445,
+      -640.7774606242143
+    ]
+  },
+  {
+    "weapon": "revolver",
+    "kind": "door",
+    "stance": "still",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 32957,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.05947901042718674,
+      -198.48270123899943,
+      -640.8149561175625
+    ]
+  },
+  {
+    "weapon": "revolver",
+    "kind": "door",
+    "stance": "crouch",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 32957,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.08536474798266803,
+      -198.81292814957087,
+      -640.856616699579
+    ]
+  },
+  {
+    "weapon": "revolver",
+    "kind": "crate",
+    "stance": "still",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 32957,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.06274098345839639,
+      -198.49708798593159,
+      -640.8190609265835
+    ]
+  },
+  {
+    "weapon": "revolver",
+    "kind": "crate",
+    "stance": "crouch",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 32957,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.0866569944018185,
+      -198.8099186168739,
+      -640.8576475115976
+    ]
+  },
+  {
+    "weapon": "revolver",
+    "kind": "station",
+    "stance": "still",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 32957,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.0636722181237166,
+      -198.49359204304338,
+      -640.8178188131432
+    ]
+  },
+  {
+    "weapon": "revolver",
+    "kind": "station",
+    "stance": "crouch",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 32957,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.08822222072949515,
+      -198.80834685421075,
+      -640.8583530437197
+    ]
+  },
+  {
+    "weapon": "sniper",
+    "kind": "wall",
+    "stance": "still",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 42388,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.22335104319037377,
+      -197.5336950184069,
+      -641.3220139354441
+    ]
+  },
+  {
+    "weapon": "sniper",
+    "kind": "wall",
+    "stance": "crouch",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 42388,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.22469831980056232,
+      -197.76399284937946,
+      -641.3814691973166
+    ]
+  },
+  {
+    "weapon": "sniper",
+    "kind": "wall",
+    "stance": "walk",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 42388,
+    "player": [
+      0,
+      -200,
+      -640.9788064430888
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.25843026708464073,
+      -197.53003184474252,
+      -641.2729347282049
+    ]
+  },
+  {
+    "weapon": "sniper",
+    "kind": "wall",
+    "stance": "sprint",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 42388,
+    "player": [
+      0,
+      -200,
+      -641.0489105092
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.24381836063709017,
+      -197.52712658950668,
+      -641.2003428123376
+    ]
+  },
+  {
+    "weapon": "sniper",
+    "kind": "door",
+    "stance": "still",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 42388,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.22701553521014198,
+      -197.53373669733887,
+      -641.3225594298651
+    ]
+  },
+  {
+    "weapon": "sniper",
+    "kind": "door",
+    "stance": "crouch",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 42388,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.22756689580633296,
+      -197.76279500520386,
+      -641.3819852274593
+    ]
+  },
+  {
+    "weapon": "sniper",
+    "kind": "crate",
+    "stance": "still",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 42388,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.227425617557993,
+      -197.5401888190753,
+      -641.3320572127662
+    ]
+  },
+  {
+    "weapon": "sniper",
+    "kind": "crate",
+    "stance": "crouch",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 42388,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.22748075022482425,
+      -197.76414133625445,
+      -641.3787877363333
+    ]
+  },
+  {
+    "weapon": "sniper",
+    "kind": "station",
+    "stance": "still",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 42388,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.22686710571028282,
+      -197.54174821930667,
+      -641.3354797392345
+    ]
+  },
+  {
+    "weapon": "sniper",
+    "kind": "station",
+    "stance": "crouch",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 42388,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.22646577959930897,
+      -197.76570166118964,
+      -641.3765261928266
+    ]
+  },
+  {
+    "weapon": "launcher",
+    "kind": "wall",
+    "stance": "still",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 42183,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.2242188137181142,
+      -198.00054642689838,
+      -641.2179631365617
+    ]
+  },
+  {
+    "weapon": "launcher",
+    "kind": "wall",
+    "stance": "crouch",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 42183,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.22363574508739126,
+      -198.22595285040288,
+      -641.2902930846195
+    ]
+  },
+  {
+    "weapon": "launcher",
+    "kind": "wall",
+    "stance": "walk",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 42183,
+    "player": [
+      0,
+      -200,
+      -640.9788064430888
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.21153908350725598,
+      -198.01341999758884,
+      -641.1555924848584
+    ]
+  },
+  {
+    "weapon": "launcher",
+    "kind": "wall",
+    "stance": "sprint",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 42183,
+    "player": [
+      0,
+      -200,
+      -641.0489105092
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.1867864881734528,
+      -198.03787720742693,
+      -641.0778626092224
+    ]
+  },
+  {
+    "weapon": "launcher",
+    "kind": "door",
+    "stance": "still",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 42183,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.21942531390166334,
+      -198.00324371668052,
+      -641.2235902358987
+    ]
+  },
+  {
+    "weapon": "launcher",
+    "kind": "door",
+    "stance": "crouch",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 42183,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.21916490607939906,
+      -198.22845577478793,
+      -641.2871837369552
+    ]
+  },
+  {
+    "weapon": "launcher",
+    "kind": "crate",
+    "stance": "still",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 42183,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.2179743689570147,
+      -198.0087243773639,
+      -641.2322375466443
+    ]
+  },
+  {
+    "weapon": "launcher",
+    "kind": "crate",
+    "stance": "crouch",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 42183,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.21796228176456311,
+      -198.22711381232156,
+      -641.2890586372882
+    ]
+  },
+  {
+    "weapon": "launcher",
+    "kind": "station",
+    "stance": "still",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 42183,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.21717510609140567,
+      -198.00810463538585,
+      -641.2287434895306
+    ]
+  },
+  {
+    "weapon": "launcher",
+    "kind": "station",
+    "stance": "crouch",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 42183,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.2176281916954835,
+      -198.22656368640912,
+      -641.2909659968055
+    ]
+  },
+  {
+    "weapon": "flamer",
+    "kind": "wall",
+    "stance": "still",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 33783,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.1309168350337343,
+      -198.00376970103824,
+      -641.0060633220484
+    ]
+  },
+  {
+    "weapon": "flamer",
+    "kind": "wall",
+    "stance": "crouch",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 33783,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.15498391524492386,
+      -198.28737346426732,
+      -641.1224694013227
+    ]
+  },
+  {
+    "weapon": "flamer",
+    "kind": "wall",
+    "stance": "walk",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 33783,
+    "player": [
+      0,
+      -200,
+      -640.9788064430888
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.09046704684038423,
+      -198.02717405801357,
+      -640.9790825300939
+    ]
+  },
+  {
+    "weapon": "flamer",
+    "kind": "wall",
+    "stance": "sprint",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 33783,
+    "player": [
+      0,
+      -200,
+      -641.0489105092
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.09100806532149362,
+      -198.0151684085847,
+      -640.9320226168788
+    ]
+  },
+  {
+    "weapon": "flamer",
+    "kind": "door",
+    "stance": "still",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 33783,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.13802371907445976,
+      -198.00309146655363,
+      -641.0023561418391
+    ]
+  },
+  {
+    "weapon": "flamer",
+    "kind": "door",
+    "stance": "crouch",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 33783,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.16172011025600605,
+      -198.28245143326959,
+      -641.1162357480968
+    ]
+  },
+  {
+    "weapon": "flamer",
+    "kind": "crate",
+    "stance": "still",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 33783,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.14369787737433193,
+      -198.0137110796461,
+      -641.0089294299848
+    ]
+  },
+  {
+    "weapon": "flamer",
+    "kind": "crate",
+    "stance": "crouch",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 33783,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.164825085113954,
+      -198.28427829261673,
+      -641.1196932048119
+    ]
+  },
+  {
+    "weapon": "flamer",
+    "kind": "station",
+    "stance": "still",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 33783,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.14747439397335332,
+      -198.01620769680352,
+      -641.0103024935239
+    ]
+  },
+  {
+    "weapon": "flamer",
+    "kind": "station",
+    "stance": "crouch",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 33783,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.16720762939866426,
+      -198.28623412290736,
+      -641.12223698978
+    ]
+  },
+  {
+    "weapon": "chainsaw",
+    "kind": "wall",
+    "stance": "still",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 27084,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.13477774112661728,
+      -198.0436358489563,
+      -640.6988283901632
+    ]
+  },
+  {
+    "weapon": "chainsaw",
+    "kind": "wall",
+    "stance": "crouch",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 27084,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.16620634447042942,
+      -198.2665389307399,
+      -640.7814960711131
+    ]
+  },
+  {
+    "weapon": "chainsaw",
+    "kind": "wall",
+    "stance": "walk",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 27084,
+    "player": [
+      0,
+      -200,
+      -640.9788064430888
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.11392658981873788,
+      -198.09299006880354,
+      -640.6796429121082
+    ]
+  },
+  {
+    "weapon": "chainsaw",
+    "kind": "wall",
+    "stance": "sprint",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 27084,
+    "player": [
+      0,
+      -200,
+      -641.0489105092
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.13797133695918357,
+      -198.14467272964833,
+      -640.6478677378606
+    ]
+  },
+  {
+    "weapon": "chainsaw",
+    "kind": "door",
+    "stance": "still",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 27084,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.13341240759725292,
+      -198.04618783823733,
+      -640.7004773300869
+    ]
+  },
+  {
+    "weapon": "chainsaw",
+    "kind": "door",
+    "stance": "crouch",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 27084,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.16380566146912293,
+      -198.26910038465633,
+      -640.7845398542406
+    ]
+  },
+  {
+    "weapon": "chainsaw",
+    "kind": "crate",
+    "stance": "still",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 27084,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.13287106791248704,
+      -198.05233616993587,
+      -640.7055045068796
+    ]
+  },
+  {
+    "weapon": "chainsaw",
+    "kind": "crate",
+    "stance": "crouch",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 27084,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.16021111757065382,
+      -198.26778909502994,
+      -640.7828057047016
+    ]
+  },
+  {
+    "weapon": "chainsaw",
+    "kind": "station",
+    "stance": "still",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 27084,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.1289556033616963,
+      -198.05128430614468,
+      -640.7044548996193
+    ]
+  },
+  {
+    "weapon": "chainsaw",
+    "kind": "station",
+    "stance": "crouch",
+    "gunInside": 0,
+    "armInside": 0,
+    "vertices": 27084,
+    "player": [
+      0,
+      -200,
+      -640.9
+    ],
+    "yaw": 0,
+    "muzzle": [
+      0.15630854781949613,
+      -198.2672302203642,
+      -640.7813064411948
+    ]
+  }
+]

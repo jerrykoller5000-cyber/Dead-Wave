@@ -519,8 +519,11 @@ export function makeRevolverModel(ctx) {
 
   // --- Barrel (blued): round, with a raised rib along its top, serrated, a ramp front sight at the muzzle; under it the
   // shroud lug that takes the ejector rod's head.
-  const barrel = K.lathe([[0, .09], [.0185, .09], [.0185, .104], [.0165, .112], [.0165, .326], [.0152, .3315], [.0118, .332], [0, .332]], blued, { y: BY, seg: 28 });
-  K.slab([[.09, .0965], [.326, .0965], [.329, .1015], [.326, .1045], [.09, .1045]], .0115, blued, { bevel: .002, segs: 2 });   // the rib
+  const upperProfile = [[.0185, .09], [.0185, .104], [.0165, .112], [.0165, .326]];
+  const barrel = K.lathe([[0, .09], ...upperProfile, [.0152, .3315], [.0118, .332], [0, .332]], blued, { y: BY, seg: 28 });
+  // The decorative strip follows the curved artwork below it, with its original top edge.
+  const stripBase = upperProfile.map(([radius, z]) => [z, BY + radius]);
+  K.slab([...stripBase, [.329, .1015], [.326, .1045], [.09, .1045]], .0115, blued, { bevel: .0012, segs: 2 });
   for (let i = 0; i < 26; i++) K.box(0.0096, 0.0006, 0.0012, gunDark, 0, 0.1048, 0.112 + i * 0.0068, 0, 0, 0, null, 0);   // its serrations
   K.slab([[0.292, 0.104], [0.312, 0.117], [0.318, 0.121], [0.326, 0.121], [0.328, 0.104]], 0.0048, gunDark, { bevel: 0.0008 });   // the ramp front sight (its top at the sighted tip)
   K.slab([[.234, .0735], [.31, .0735], [.3185, .068], [.3185, .057], [.311, .0485], [.252, .0485], [.240, .051], [.234, .058]], .021, blued, { bevel: .006, segs: 3 });   // the shroud lug

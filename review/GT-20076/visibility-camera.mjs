@@ -45,11 +45,21 @@ export function makeViews(T) {
     shown.visible=visible;
     for(let i=0;i<3;i++) { step(1); await new Promise(r=>setTimeout(r,35)); }
   }
-  async function pose(view) {
+  async function pose(view, testSpot=null) {
+    const openFloor=view.endsWith('-open');
+    if(openFloor)view=view.slice(0,-5);
     const eye=['hip','aimed','aim-entry'].includes(view), rackView=view==='rack';
     frozen=false; T.setShotView(null); T.setViewFirstDbg(eye); T.setZoomHeldDbg(view==='aimed');
     const range=T.trainingDbg.tg();
-    T.player.position.set(range.origin.x,range.floorY,range.origin.z-.55); T.setOtsAimDbg(0,-.08); step(75);
+    let spot=[range.origin.x,range.origin.z-.55];
+    if(openFloor){
+      const obstacles=range.solids.filter(b=>b.maxY>range.floorY+.45 && b.minY<range.floorY+2.2);
+      spot=[[0,4],[3,4],[-3,4],[0,8]].map(([x,z])=>[range.origin.x+x,range.origin.z+z])
+        .find(([x,z])=>obstacles.every(b=>x<b.minX-1.8 || x>b.maxX+1.8 || z<b.minZ-1.8 || z>b.maxZ+1.8));
+      if(!spot)throw Error('No clear floor for the held artwork');
+    }
+    if(testSpot) spot=[range.origin.x+testSpot[0],range.origin.z+testSpot[1]];
+    T.player.position.set(spot[0],range.floorY,spot[1]); T.setOtsAimDbg(testSpot?.[2]||0,-.08); step(75);
     if(view==='aim-entry') {
       T.setZoomHeldDbg(true);
       for(let i=0;i<40 && T.viewmodelDbg().info.ads<.36;i++) T.stepFrame(1/60);
@@ -100,7 +110,9 @@ export function makeViews(T) {
     };
     const points=[[0,0,0],[1,0,0],[0,1,0],[0,0,1]].map(x=>transform(new G.Vector3(...x)));
     const glassHidden=view==='aimed' && !vm.root.visible && vm.info.ads>.88 && Number(document.getElementById('scopeOverlay').style.opacity)>.95;
-    return {points,eye,glassHidden,fov:eye?null:camera.fov,target:rackView?'whole displayed rack':'isolated held artwork'};
+    const forward=new G.Vector3(0,0,1).applyQuaternion(gun.getWorldQuaternion(new G.Quaternion()));
+    return {points,eye,glassHidden,fov:eye?null:camera.fov,target:rackView?'whole displayed rack':'isolated held artwork',
+      spot,actualSpot:T.player.position.toArray(),heldElevation:eye||rackView?null:Math.asin(Math.max(-1,Math.min(1,forward.y)))*180/Math.PI};
   }
   async function mask(normal,repeat,hidden) {
     const decode=async str=>{

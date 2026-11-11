@@ -1,0 +1,26 @@
+{
+  "id": "weapon.revolver",
+  "name": "Revolver",
+  "kind": "model",
+  "variant": null,
+  "mode": null,
+  "center": {
+    "x": -26.00179509403403,
+    "y": -198.90000000000003,
+    "z": -631.9273720986339
+  },
+  "size": {
+    "x": 0.07493846919847158,
+    "y": 0.21199746257028096,
+    "z": 0.37046820151192605
+  },
+  "yaw": 0,
+  "info": {
+    "meshes": 38,
+    "drawables": 38,
+    "tris": 11026,
+    "points": 0,
+    "segments": 0,
+    "materials": 11
+  }
+}

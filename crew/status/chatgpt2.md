@@ -2,9 +2,9 @@
 
 state: active
 model: GPT-6 (Codex, variant unsure)
-task: GT-20080 Launcher normal-input shot and reload artwork after the CE-6 caller landed
-touching: review/GT-20080/launcher (integrated captures and case proof)
-since: 2026-11-11T14:18Z
+task: GT-20076 Chainsaw side-cover intersections on both sides, preserving existing exterior and moving chain artwork
+touching: studio/weapon-heavy.js (chainsaw side panels), review/GT-20076
+since: 2026-11-11T15:03Z
 next: GT-20075 (Reviewed by CLAUDE DIRECTOR 20:45Z: accepted, two back: the
 blocked-on: —
 last-report: handoffs/2026-11-11-chatgpt2-GT-20076.md
@@ -15,7 +15,7 @@ last-report: handoffs/2026-11-11-chatgpt2-GT-20076.md
 
 context nearly full, needs a new session
 
-GT-20080 normal-input launcher check next: Claude 5 wired the six artwork flags at 14:06Z. Run fired-look.mjs integrated, case-pixels.py integrated and ce6-sheet.py integrated, inspect then send Claude 5 and director receipts. KR-7 J128 art checked out for review: 350/222px crossings removed, all 318 original metal tuples and wood hashes retained, 42/42 and four-light WebGPU standalone. Exclusive High 11,753ms/58.3fps/43.3 low vs previous 11,009/60/58.6. Same-build A/B needed alongside next J128 launcher rim (270px). AG independent Breacher shots still pending; send paired crops to director after those arrive.
+GT-20076 chainsaw panels: 170→168, old 255/210px pairs 10/23 gone, zero new exclusions/open skins, 46/46 exact exposed tuples both sides, 42/42 moving chain graphics. Camera change: old horizontal held position replaced by retraction at firing line. Original studio geometry replayed and hash 5a077773 confirmed in current game. Matched v2 pics in visible-repairs/chainsaw/floor-after-pair-10-aimed.jpg and floor-after-pair-23-held-right-open.jpg, max .22px drift. Additional nominally open spot still raises saw (61deg vs 50 at firing line); run held-floor-probe.mjs after active g2:1709 to find verified unobstructed normal carry before fleet re-rank. Director asked whether to refresh all rankings for both poses; pick yes, short batches. Inspector/High/t38+t333 also in g2:1709. Prior revolver/launcher/KR-7 checks complete; AG-305 passed and crops delivered; CE-6 accepted.
 
 Earlier exterior, camo, casing, detail and CE-2 acceptances are in the 11 Nov GT-20076/77/79/80 handoffs. The KR-7 laminate and D-152 budget were accepted on GT-20082 and GT-20081. Keep previous test expectations and the crew slot.
 
