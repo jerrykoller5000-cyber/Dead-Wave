@@ -1,0 +1,80 @@
+[
+  {
+    "priorTriangles": 140,
+    "triangles": 184,
+    "islands": 2,
+    "closed": true,
+    "sides": [
+      {
+        "side": -1,
+        "before": 60,
+        "after": 60,
+        "lost": 0,
+        "added": 0,
+        "back": 0.017000000923871994,
+        "outer": 0.01850000023841858
+      },
+      {
+        "side": 1,
+        "before": 60,
+        "after": 60,
+        "lost": 0,
+        "added": 0,
+        "back": 0.017000000923871994,
+        "outer": 0.01850000023841858
+      }
+    ]
+  },
+  {
+    "priorTriangles": 140,
+    "triangles": 184,
+    "islands": 2,
+    "closed": true,
+    "sides": [
+      {
+        "side": -1,
+        "before": 60,
+        "after": 60,
+        "lost": 0,
+        "added": 0,
+        "back": 0.017000000923871994,
+        "outer": 0.01850000023841858
+      },
+      {
+        "side": 1,
+        "before": 60,
+        "after": 60,
+        "lost": 0,
+        "added": 0,
+        "back": 0.017000000923871994,
+        "outer": 0.01850000023841858
+      }
+    ]
+  },
+  {
+    "priorTriangles": 140,
+    "triangles": 184,
+    "islands": 2,
+    "closed": true,
+    "sides": [
+      {
+        "side": -1,
+        "before": 60,
+        "after": 60,
+        "lost": 0,
+        "added": 0,
+        "back": 0.017000000923871994,
+        "outer": 0.01850000023841858
+      },
+      {
+        "side": 1,
+        "before": 60,
+        "after": 60,
+        "lost": 0,
+        "added": 0,
+        "back": 0.017000000923871994,
+        "outer": 0.01850000023841858
+      }
+    ]
+  }
+]

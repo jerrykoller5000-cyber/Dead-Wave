@@ -1,13 +1,13 @@
 # ChatGPT
 
-state: active
+state: idle
 model: GPT-6
-task: GP-20105 Training Ground end-to-end live walkthrough in both views
-touching: review/GP-20105, handoffs/2026-11-11-chatgpt-GP-20105.md
-since: 2026-11-11T17:26Z
+task: —
+touching: —
+since: 2026-11-11T19:14Z
 next: —
 blocked-on: —
-last-report: handoffs/2026-11-11-chatgpt-GP-20104.md
+last-report: handoffs/2026-11-11-chatgpt-GP-20104-followup.md
 
 ## Notes
 

@@ -1,0 +1,56 @@
+{
+  "at": "2026-11-11T18:22:08.225Z",
+  "windows": [
+    {
+      "view": "third",
+      "perf": {
+        "fps": 60.02400960419945,
+        "low": 30.864197525186267,
+        "worst": 32.400000005960464,
+        "hitches": 1,
+        "frames": 60
+      }
+    },
+    {
+      "view": "first",
+      "perf": {
+        "fps": 59.994000598509786,
+        "low": 58.47953218412662,
+        "worst": 17.099999994039536,
+        "hitches": 0,
+        "frames": 60
+      }
+    },
+    {
+      "view": "first-dark",
+      "perf": {
+        "fps": 59.99999999999999,
+        "low": 58.13953492401612,
+        "worst": 17.19999998807907,
+        "hitches": 0,
+        "frames": 60
+      }
+    },
+    {
+      "view": "first-dark-late",
+      "perf": {
+        "fps": 60.00600059970231,
+        "low": 40.98360654736552,
+        "worst": 24.400000005960464,
+        "hitches": 0,
+        "frames": 60
+      }
+    }
+  ],
+  "errors": [],
+  "exit": {
+    "pause": true,
+    "training": true,
+    "after": {
+      "training": false,
+      "frontend": true,
+      "mode": true,
+      "quitConfirm": false
+    }
+  }
+}

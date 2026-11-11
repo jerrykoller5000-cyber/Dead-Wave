@@ -60,6 +60,15 @@ try {
   })()`);
   await new Promise(r => setTimeout(r, 200));
   await page.screenshot(path.join(out, '09-targets-hit.png'));
+  await new Promise(r => setTimeout(r, 1500));
+  report.targetDown = await page.evaluate('TT.trainingDbg.tg().targets[2].state');
+  report.targetReset = await page.evaluate(`(() => {
+    const tg=TT.trainingDbg.tg();tg.resetTargets();return tg.targets.map(t=>t.state);
+  })()`);
+  await page.screenshot(path.join(out, '09b-targets-reset.png'));
+  await new Promise(r => setTimeout(r, 1200));
+  report.targetRisen = await page.evaluate('TT.trainingDbg.tg().targets[2].state');
+  await page.screenshot(path.join(out, '09c-targets-risen.png'));
   report.burn = await page.evaluate(`(() => {
     const D=TT.trainingDbg,t=D.tg().targets[0],b=t.box,p={x:(b.minX+b.maxX)/2,y:(b.minY+b.maxY)/2,z:b.minZ};
     return {worked:D.hitDbg(0,p,{kind:'burn',from:{x:p.x,y:p.y,z:p.z-3}}),state:t.state};

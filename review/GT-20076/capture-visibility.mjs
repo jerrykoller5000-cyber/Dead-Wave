@@ -13,7 +13,8 @@ assert(/^catalog-[a-z0-9-]+$/.test(audit));
 const precise=process.argv.includes('--precise') || !!candidate;
 const replay=process.argv.includes('--original-saw-covers');
 const replayWasp=process.argv.includes('--original-wasp');
-const matched=process.argv.includes('--match-wasp-wall');
+const matchKr=process.argv.includes('--match-kr-wall');
+const matched=process.argv.includes('--match-wasp-wall') || matchKr;
 const replaySniper=process.argv.includes('--original-sniper-cover');
 const requestedFolder=process.argv.find(arg=>arg.startsWith('--output='))?.slice(9);
 if(requestedFolder)assert(candidate && /^visibility-fix-[a-z0-9-]+$/.test(requestedFolder));
@@ -31,7 +32,7 @@ try {
   const page=await browser.newPage({width:960,height:540});
   if(replay) assert(audit==='catalog-fix-revolver-strip' && ids.length===1 && ids[0]==='chainsaw');
   if(replaySniper)assert(!replay && requestedFolder && audit==='catalog-fix-front-rail-boss' && ids.length===1 && ids[0]==='sniper');
-  if(matched)assert(ids.length===1 && ids[0]==='uzi');
+  if(matched)assert(ids.length===1 && ids[0]===(matchKr?'ak':'uzi'));
   if(replayWasp)assert(matched && !replay && !replaySniper && requestedFolder && audit==='catalog-fix-revolver-walnut');
   const verify=replay?await originalSawCovers(page,server.origin):replaySniper?await originalSniperCover(page,server.origin):replayWasp?await originalWasp(page,server.origin):null;
   await page.goto(server.origin+'/index.html?debug=1&raf=timer');
@@ -41,13 +42,14 @@ try {
   if(!rankOnly){
     await page.evaluate("document.getElementById('playerName').value='Visibility';document.getElementById('modeTraining').click()");
     assert(await page.waitFor("TT.trainingDbg.state().active && !TT.trainingDbg.state().warming && !document.getElementById('trainingBlackout')?.classList.contains('on')"));
-    const mode=matched?(replayWasp?'record':'replay'):false;
+    const mode=matched?(replayWasp || (matchKr && folder.endsWith('-before'))?'record':'replay'):false;
+    const reference=matchKr?'visibility-fix-kr-rib-before/ak':'visibility-fix-wasp-lift-before/uzi';
     await page.evaluate(`(async()=>{
       const {makeViews}=await import('/review/GT-20076/visibility-camera.mjs');
       const mode=${JSON.stringify(mode)};
       if(mode==='replay'){
-        const response=await fetch('/review/GT-20076/visibility-fix-wasp-lift-before/uzi/cameras.json');
-        if(!response.ok)throw Error('Missing original game pose');window.recordedWaspViews=await response.json();
+        const response=await fetch('/review/GT-20076/'+${JSON.stringify(reference)}+'/cameras.json');
+        if(!response.ok)throw Error('Missing original game pose');window.recordedArtViews=await response.json();
       }
       window.vis=makeViews(TT,mode);return true;
     })()`);

@@ -1,0 +1,101 @@
+{
+  "rows": [
+    {
+      "offset": 0,
+      "woodGap": {
+        "lowerMm": 0.4375,
+        "upperMm": 0.44531249999999994
+      },
+      "shellGap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    }
+  ],
+  "stroke": [
+    {
+      "amount": 0,
+      "visibleTravel": 0,
+      "woodGap": {
+        "lowerMm": 0.4375,
+        "upperMm": 0.44531249999999994
+      },
+      "shellGap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "amount": 0.25,
+      "visibleTravel": 0.00024999998277053237,
+      "woodGap": {
+        "lowerMm": 0.45312499999999994,
+        "upperMm": 0.4609375
+      },
+      "shellGap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "amount": 0.5,
+      "visibleTravel": 0.0005000000237487257,
+      "woodGap": {
+        "lowerMm": 0.46875,
+        "upperMm": 0.4765625
+      },
+      "shellGap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "amount": 0.75,
+      "visibleTravel": 0.000750000006519258,
+      "woodGap": {
+        "lowerMm": 0.484375,
+        "upperMm": 0.4921875
+      },
+      "shellGap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "amount": 1,
+      "visibleTravel": 0.0010000000038417056,
+      "woodGap": {
+        "lowerMm": 0.4921875,
+        "upperMm": 0.5
+      },
+      "shellGap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "amount": 0,
+      "visibleTravel": 0,
+      "woodGap": {
+        "lowerMm": 0.4375,
+        "upperMm": 0.44531249999999994
+      },
+      "shellGap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    }
+  ],
+  "contact": [
+    0,
+    -0.002,
+    -0.06740000000000002
+  ],
+  "face": [
+    0,
+    -0.002,
+    -0.06620000000000001
+  ],
+  "originalForeEnd": "KR-7 walnut",
+  "closed": true
+}

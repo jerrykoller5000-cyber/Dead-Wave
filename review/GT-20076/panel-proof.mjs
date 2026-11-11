@@ -7,7 +7,7 @@ import {save} from './save.mjs';
 import {originalSawCovers,originalWasp} from './replay-artwork.mjs';
 
 const [id,phase]=process.argv.slice(2);
-assert(process.env.DW_GAME_TEST_TOKEN && /^[a-z0-9]+$/.test(id) && ['before','after','trim','final-trim','joins','rear-join','side-inset','crown','contact-trim','relief','closed-relief','floor-before','floor-after','clear-before','clear-after','clear-seated','clear-lift-before','clear-lift-after'].includes(phase));
+assert(process.env.DW_GAME_TEST_TOKEN && /^[a-z0-9]+$/.test(id) && ['before','after','trim','final-trim','joins','rear-join','side-inset','crown','contact-trim','relief','closed-relief','floor-before','floor-after','clear-before','clear-after','clear-seated','clear-lift-before','clear-lift-after','clear-emboss-before','clear-emboss-after'].includes(phase));
 const dir=new URL('./visible-repairs/'+id+'/'+phase+'/',import.meta.url);
 await mkdir(dir,{recursive:true});
 const server=await serve(fileURLToPath(new URL('../../',import.meta.url)),0),browser=await launch({headless:false});
@@ -15,8 +15,9 @@ try {
   const page=await browser.newPage({width:960,height:540});
   const replay=process.argv.includes('--original-saw-covers');
   if(replay) assert(id==='chainsaw' && ['floor-before','clear-before'].includes(phase));
-  const matched=phase.startsWith('clear-lift-');
-  if(matched)assert.equal(id,'uzi');
+  const matchKr=phase.startsWith('clear-emboss-');
+  const matched=phase.startsWith('clear-lift-') || matchKr;
+  if(matched)assert.equal(id,matchKr?'ak':'uzi');
   const verify=replay?await originalSawCovers(page,server.origin):phase==='clear-lift-before'?await originalWasp(page,server.origin):null;
   await page.goto(server.origin+'/index.html?debug=1&raf=timer');
   assert(await page.waitFor('window.TT && DWLoad.snapshot().state==="ready"'));
@@ -24,12 +25,13 @@ try {
   await page.evaluate("document.getElementById('playerName').value='Panel proof';document.getElementById('modeTraining').click()");
   assert(await page.waitFor("TT.trainingDbg.state().active && !TT.trainingDbg.state().warming && !document.getElementById('trainingBlackout')?.classList.contains('on')"));
   const mode=matched?'replay':false;
+  const reference=matchKr?'visibility-fix-kr-rib-before/ak':'visibility-fix-wasp-lift-before/uzi';
   await page.evaluate(`(async()=>{
       const {makeViews}=await import('/review/GT-20076/visibility-camera.mjs');
       const mode=${JSON.stringify(mode)};
       if(mode==='replay'){
-        const response=await fetch('/review/GT-20076/visibility-fix-wasp-lift-before/uzi/cameras.json');
-        if(!response.ok)throw Error('Missing original game pose');window.recordedWaspViews=await response.json();
+        const response=await fetch('/review/GT-20076/'+${JSON.stringify(reference)}+'/cameras.json');
+        if(!response.ok)throw Error('Missing original game pose');window.recordedArtViews=await response.json();
       }
       window.vis=makeViews(TT,mode);return true;
     })()`);
@@ -65,6 +67,20 @@ try {
       assert(Math.abs(p.inner-(p.part==='top cover' ? .078 : .049))<1e-7);
     }
     console.log('PASS eight pressed strips and one top cover retain the original exposed surface samples');
+  }
+  if(process.argv.includes('--check-kr-bands')){
+    assert.equal(id,'ak');
+    const result=await page.evaluate("import('/review/GT-20076/kr-band-proof.mjs').then(m=>m.verifyRaisedGraphics(TT.inspectHost().builders.weaponContext()))");
+    await save(new URL('raised-graphics.json',dir),JSON.stringify(result,null,2)+'\n');
+    assert.equal(result.length,3);
+    for(const rib of result){
+      assert.equal(rib.islands,2);assert(rib.closed);
+      for(const side of rib.sides){
+        assert(side.before>10);assert.equal(side.lost+side.added,0);
+        assert(Math.abs(side.back-.017)<1e-7 && Math.abs(side.outer-.0185)<1e-7);
+      }
+    }
+    console.log('PASS three raised graphics, six closed faces, original visible geometry, normals and UVs');
   }
   if(process.argv.includes('--check-walnut-panels')){
     assert.equal(id,'revolver');

@@ -1,0 +1,41 @@
+{
+  "info": {
+    "id": "weapon.ak",
+    "name": "AK",
+    "kind": "model",
+    "variant": null,
+    "mode": null,
+    "center": {
+      "x": -25.990721331876863,
+      "y": -198.9,
+      "z": -631.8920676327322
+    },
+    "size": {
+      "x": 0.062488092431227216,
+      "y": 0.27147833041249214,
+      "z": 0.9222163585880025
+    },
+    "yaw": 0,
+    "info": {
+      "meshes": 41,
+      "drawables": 41,
+      "tris": 10158,
+      "points": 0,
+      "segments": 0,
+      "materials": 10
+    }
+  },
+  "artwork": {
+    "lightVisible": true,
+    "contact": [
+      0,
+      -0.002,
+      -0.06740000000000002
+    ],
+    "axis": [
+      0,
+      0,
+      1
+    ]
+  }
+}

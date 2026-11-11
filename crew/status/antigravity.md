@@ -1,10 +1,10 @@
 # Antigravity
 
-state: idle
+state: active
 model: Gemini 4 Carbon
-task: —
-touching: —
-since: 2026-11-11T18:17Z
+task: AG-310 Fix Armory buy/mod/close freezes: stop closed bench renders + toBlob, canvas swatches, skip hidden cifMarine in armory-only
+touching: index.html (openCIF/armoryPicture/armoryPreview/finishSwatch/applyArmoryLoadout/refreshArmoryRack), ui/armory.js (renderFinishes canvas), ui/armory.css (.armory-swatch canvas), tools/tests/t181.js
+since: 2026-11-11T19:16Z
 next: —
 blocked-on: —
 last-report: handoffs/2026-11-11-antigravity-AG-309.md

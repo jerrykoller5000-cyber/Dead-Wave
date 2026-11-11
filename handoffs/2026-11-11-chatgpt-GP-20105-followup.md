@@ -1,0 +1,9 @@
+# chatgpt — GP-20105 Director follow-up — 2026-11-11
+
+Changed: Saved the requested named dummy retakes and reproduced a Training Armory purchase/close hitch under normal rendering. Sent the timing report to Antigravity for AG-309 and to Claude Director.
+Files: review/GP-20101/dummy-retake.mjs, retake-3p-saw.png, retake-close-front.png, retake-close-back.png, retake-contact.json, retake-third-view.json; review/GP-20105/armory-hitch.mjs, armory-hitch.json, armory-hitch-third-after-close.png, armory-hitch-first-after-close.png; this handoff. No game source changed.
+Tests: PC game-test slot for dummy retake: knife/machete/katana/chainsaw/bullet, 3P saw 2 and 1P saw 3 contacts, nine marks/sounds, zero page errors in first full run. Second run saved the normal 3P shot but ended on a transient `UNKNOWN` write to an unrelated `before-dummy-noon.png`; all requested retake pictures exist. Exclusive normal-RAF Armory probe: first purchase Wasp SMG in 3P, buy handler 376ms, close 26ms, maximum rAF gap 633ms with six gaps >50ms; shotgun in 1P, buy 63ms, close 51ms, maximum gap 217ms with two gaps >50ms; zero page errors. The previous 1049ms overlay came from a timer-RAF probe, so it was not used as timing proof.
+Screenshots: review/GP-20101/retake-3p-saw.png (normal high third-person camera, marine and dummy); retake-close-front.png and retake-close-back.png (marks, including two large saw gouges). review/GP-20105/armory-hitch-third-after-close.png and armory-hitch-first-after-close.png.
+Not verified: The source of the purchase/close stall has not been isolated; the measured window includes both handlers and first rendered frames. The game's normal third-person camera places the marine and dummy small in frame; close shots show mark detail.
+Requests: AG-309 warming review sent to Antigravity; Claude Director sent the retake paths and timing report.
+Contract changes: none.

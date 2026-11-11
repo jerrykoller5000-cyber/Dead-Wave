@@ -1,0 +1,54 @@
+{
+  "id": "ak",
+  "name": "controls-lightSwitch-ak",
+  "axis": [
+    0,
+    0,
+    1
+  ],
+  "travel": 0.001,
+  "copies": {
+    "held": {
+      "rest": [
+        0,
+        -0.002,
+        -0.06740000000000002
+      ],
+      "moved": 138,
+      "stationary": 1506,
+      "furthest": 0.0010000020265579224,
+      "lateral": 3.469453982988821e-21,
+      "reset": 0,
+      "otherCopyDrift": 0,
+      "pressSetupMs": 0.9000000059604645
+    },
+    "eye": {
+      "rest": [
+        0,
+        -0.002,
+        -0.06740000000000002
+      ],
+      "moved": 138,
+      "stationary": 1506,
+      "furthest": 0.0010000020265579224,
+      "lateral": 0,
+      "reset": 0,
+      "otherCopyDrift": 0,
+      "pressSetupMs": 1.0999999940395355
+    },
+    "carry": {
+      "rest": [
+        0,
+        -0.002,
+        -0.06740000000000002
+      ],
+      "moved": 138,
+      "stationary": 1506,
+      "furthest": 0.0010000020265579224,
+      "lateral": 0,
+      "reset": 0,
+      "otherCopyDrift": 0,
+      "pressSetupMs": 0.9000000059604645
+    }
+  }
+}

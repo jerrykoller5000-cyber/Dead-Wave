@@ -314,6 +314,10 @@ async function capture() {
             paddle:raw.userData.slideLock,shell:raw.userData.reloadShell,bead:raw.getObjectByName('shotgun bead'),
             rubber:raw.getObjectByName('shotgun recoil pad')});
           if(reviewId==='ak'){
+            // The detachable bracket is built only when an optic is fitted.
+            // Verify the live fit before showing that same option on the unbatched proof copy.
+            if(!g.userData.opticPlate?.visible || !g.userData.opticPlate.children.length)throw Error('Native fitted KR-7 bracket missing');
+            raw.userData.opticPlate.visible=true;
             for(const key of ['magRelease','trigger'])parts[key]=raw.getObjectByName(raw.userData.controls[key]);
             parts.latch=raw.getObjectByName('KR-7 bracket latch');
             parts.stock=raw.getObjectByName('KR-7 stock');

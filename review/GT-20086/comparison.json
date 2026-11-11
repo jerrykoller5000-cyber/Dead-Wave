@@ -1,0 +1,25 @@
+{
+  "pixels": {
+    "noon": {
+      "restChange": 12970,
+      "pressChange": 8729
+    },
+    "overcast": {
+      "restChange": 12741,
+      "pressChange": 7985
+    },
+    "dusk": {
+      "restChange": 11683,
+      "pressChange": 8294
+    },
+    "night": {
+      "restChange": 8715,
+      "pressChange": 6623
+    }
+  },
+  "copies": [
+    "held",
+    "eye",
+    "carry"
+  ]
+}

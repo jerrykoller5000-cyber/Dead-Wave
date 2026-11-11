@@ -2,67 +2,67 @@
   "id": "uzi",
   "name": "controls-lightSwitch-uzi",
   "axis": [
+    -1,
     0,
-    0,
-    1
+    0
   ],
   "travel": 0.001,
   "copies": {
     "held": {
       "rest": [
-        0,
-        0,
-        -0.06740000000000002
+        0.028399999999999998,
+        -0.00611,
+        -0.026000000000000002
       ],
       "moved": 138,
       "stationary": 2478,
-      "furthest": 0.0010000020265579224,
-      "lateral": 1.3877815931955284e-20,
+      "furthest": 0.0010000001639127731,
+      "lateral": 0,
+      "reset": 0,
+      "otherCopyDrift": 0,
+      "pressSetupMs": 1.699999988079071
+    },
+    "eye": {
+      "rest": [
+        0.028399999999999998,
+        -0.00611,
+        -0.026000000000000002
+      ],
+      "moved": 138,
+      "stationary": 2478,
+      "furthest": 0.0010000001639127731,
+      "lateral": 0,
       "reset": 0,
       "otherCopyDrift": 0,
       "pressSetupMs": 1.199999988079071
     },
-    "eye": {
-      "rest": [
-        0,
-        0,
-        -0.06740000000000002
-      ],
-      "moved": 138,
-      "stationary": 2478,
-      "furthest": 0.0010000020265579224,
-      "lateral": 6.938907965977642e-21,
-      "reset": 0,
-      "otherCopyDrift": 0,
-      "pressSetupMs": 1.4000000059604645
-    },
     "carry": {
       "rest": [
-        0,
-        0,
-        -0.06740000000000002
+        0.028399999999999998,
+        -0.00611,
+        -0.026000000000000002
       ],
       "moved": 138,
       "stationary": 2478,
-      "furthest": 0.0010000020265579224,
+      "furthest": 0.0010000001639127731,
       "lateral": 0,
       "reset": 0,
       "otherCopyDrift": 0,
-      "pressSetupMs": 1.0999999940395355
+      "pressSetupMs": 1.5999999940395355
     },
     "offhand": {
       "rest": [
-        0,
-        0,
-        -0.06740000000000002
+        0.028399999999999998,
+        -0.00611,
+        -0.026000000000000002
       ],
       "moved": 138,
       "stationary": 2478,
-      "furthest": 0.0010000020265579224,
-      "lateral": 2.775563186391057e-20,
+      "furthest": 0.0010000001639127731,
+      "lateral": 1.734723475976807e-18,
       "reset": 0,
       "otherCopyDrift": 0,
-      "pressSetupMs": 1.2000000178813934
+      "pressSetupMs": 1
     }
   }
 }

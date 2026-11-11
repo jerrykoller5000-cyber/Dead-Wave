@@ -60,7 +60,10 @@
     const right = new THREE.Vector3(1, 0, 0).transformDirection(elev.matrixWorld);
     const CL = V().casingsList, brass = CL[CL.length - 2], link = CL[CL.length - 1];
     ok(!!brass && brass.vy < -0.5, 'the case drops out of the receiver (' + (brass ? f2(brass.vy) : '-') + ' m/s down)');
-    { const c = brass && brass.mesh.material.color; ok(!!c && c.r >= c.g && c.g >= c.b && c.g / c.r > 0.7 && c.b / c.r < 0.45, 'the case is brass-coloured (' + (c ? c.getHexString() : '-') + ')'); }
+    // CB-308: the colour as it is shown (sRGB: getHex, the hex printed). With three's colour management on (Jerry's PC) c.r/g/b are
+    // the linear working values: brass bc923f reads g/r 0.57 there (0.78 as shown) and failed while the case looked brass.
+    { const c = brass && brass.mesh.material.color, h = c ? c.getHex() : 0, r = (h >> 16 & 255) / 255, g = (h >> 8 & 255) / 255, b = (h & 255) / 255;
+      ok(!!c && r > 0 && r >= g && g >= b && g / r > 0.7 && b / r < 0.45, 'the case is brass-coloured (' + (c ? c.getHexString() : '-') + ')'); }
     ok(!!link && link.vx * right.x + link.vy * right.y + link.vz * right.z > 1, 'the link flies out to its right (' + (link ? f2(link.vx * right.x + link.vy * right.y + link.vz * right.z) : '-') + ' m/s)');
     // A burst: 20 rounds, 20 cases and 20 links.
     const sp1 = { ...V().spent };
@@ -70,7 +73,10 @@
     ok(n >= 15 && V().spent.links - sp1.links === n, 'a burst: ' + n + ' cases and ' + (V().spent.links - sp1.links) + ' links');
     // Shouldered: the Watchman on his right shoulder, not the mortar.
     T.shoulderMortar();
-    { const s0 = T.getSimTime(), w0 = Date.now(); while (T.getSimTime() - s0 < 0.3 && Date.now() - w0 < 8000) await wait(30); }   // GB-188: game time (the page runs slow)
+    // CB-307: the lift up onto the shoulder takes WATCHMAN.carryS of game time (0.58 s, game/watchman-mg.js watchmanCarry) and the
+    // steadying hand eases off 0.3 s after; 0.3 s caught it mid-lift (the receiver 0.31 m from the joint, still rising).
+    const carryS = (await import(new URL('/game/watchman-mg.js', location.origin).href)).WATCHMAN.carryS;
+    { const s0 = T.getSimTime(), w0 = Date.now(); while (T.getSimTime() - s0 < carryS + 0.35 && Date.now() - w0 < 20000) await wait(30); }   // GB-188: game time (the page runs slow)
     ok(V().carried === true && V().carriedMortar === false, 'shouldered, it is the Watchman he carries, not the mortar');
     const cg = V().carriedGun, ud = (T.marine || window.worldMarine).userData;
     cg.updateMatrixWorld(true);

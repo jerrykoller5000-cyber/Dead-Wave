@@ -1123,6 +1123,10 @@ export function createViewmodel(ctx) {
   }
 
   const _eR = [0, 0, 0], _eL = [0, 0, 0], _eA = [0, 0, 0];
+  // CD-1 (CLAUDE DIRECTOR, 11 Nov: the revolver's support hand cupped round the firing glove): a gun's own support elbow on
+  // the hold (view space from the support wrist, as elbowRel: x the view's, y down, z back toward him), so the forearm comes
+  // from under the gun and the hand can cup the other; live as info.tune[key].supportElbow. The hold only (a reload keeps its own).
+  const VM_SUPPORT_ELBOW = { revolver: [-0.02, -0.22, 0.20] };
   const _sh = V3(), _shm = M4(), VM_SHOULDER = [0.19, -0.24, 0.08];   // CL-293: his shoulder from the eye (as the eye sees it, his right)
   const _wm = M4(), _mf = F(), _mrel = F(), _wellF = F(), _localF = F(), _wiF = F(), _local2 = F(), _outF = F(), _gi = Q(), _psc = V3(), _mw = V3(), _rockQ = Q(), _rockPivot = V3(), _rockMoved = V3();
   function update(dt, st) {
@@ -1359,7 +1363,9 @@ export function createViewmodel(ctx) {
       mul(G, sockets.l, WL);
       // A shotgun's support hand stays on the moving forend through each pump stroke.
       if (gun.pump && gun.pumpBase) WL.p.add(_pg.copy(gun.pump.position).sub(gun.pumpBase).multiplyScalar(G.s).applyQuaternion(G.q));
-      if (FOL) follow(WL, eL);
+      const SEL = (info.tune[gun.key] && info.tune[gun.key].supportElbow) || VM_SUPPORT_ELBOW[gun.key];   // CD-1
+      if (SEL) rel(WL, SEL, eL);
+      else if (FOL) follow(WL, eL);
       else if (REL) rel(WL, REL.l, eL);
       twistToward(arms.l, WL, eL); info.handPlace = boltW > 0 ? 'bolt' : 'fore';
     }

@@ -1,17 +1,20 @@
 # Claude 3
 
-state: idle
+state: active
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: —
-touching: —
-since: 2026-11-11T18:07Z
-next: CC-343 (15:06Z: Jerry OK'd fresh sessions (15:03Z): back to Claude 
+task: CC-343 CC-343 part 2: the 8 reds left in tcc343b (stairs down, deck edges, crouch-walk) and t184's crouch-walk slide
+touching: index.html (legs + CROUCH/FOOT scratch), studio/marine-turn.js (apply, turnBoot, crouchSole: lent), tools/tests/tcc343b.js
+since: 2026-11-11T18:40Z
+next: CC-343 (15:06Z: Jerry OK'd fresh sessions (15:03Z): back to Claude
 blocked-on: —
 last-report: handoffs/2026-11-11-claude3-CC-343b.md
 
 ## Notes
 
-### Where things stand (11 Nov 18:12Z, end of session 6: context nearly full, needs a new session)
+### Where things stand (11 Nov 18:41Z, session 7 started, fresh)
+- Session 7 (fresh, 18:41Z): checked in CC-343 part 2 (the 8 tcc343b reds + t184 slide); building the cloud copy. Pictures of part 1: Antigravity (Director 18:16Z).
+
+### Session 6 notes (18:12Z)
 - CC-343 (CB-290's legs) PART 1 LANDED 18:05Z, card open: handoffs/2026-11-11-claude3-CC-343b.md. index.html (legs + CROUCH/FOOT
   scratch) and studio/marine-turn.js (lent) patched by Claude outputs/CC-343b/patch343.py + patch343turn.py (anchored; the
   files before are beside them). New tools/tests/tcc343b.js: 29/37 (was 10/37). Regressions clean (tcb291 3/0, tcb289 5/0,

@@ -1,0 +1,120 @@
+[
+  {
+    "id": "ak",
+    "parts": [
+      316,
+      316
+    ],
+    "before": 133,
+    "after": 133,
+    "new": [],
+    "removed": [],
+    "loose": 0,
+    "missing": 0,
+    "detail": 0,
+    "open": [
+      184,
+      184
+    ]
+  },
+  {
+    "id": "ak-equipped",
+    "parts": [
+      338,
+      338
+    ],
+    "before": 150,
+    "after": 149,
+    "new": [],
+    "removed": [
+      "root/BufferGeometry[53]|root/laserLightUnit[100]/lightSwitchPad[13]"
+    ],
+    "loose": 0,
+    "missing": 0,
+    "detail": 0,
+    "open": [
+      190,
+      190
+    ]
+  },
+  {
+    "id": "ak-heavy",
+    "parts": [
+      343,
+      343
+    ],
+    "before": 177,
+    "after": 176,
+    "new": [],
+    "removed": [
+      "root/BufferGeometry[53]|root/laserLightUnit[100]/lightSwitchPad[13]"
+    ],
+    "loose": 0,
+    "missing": 0,
+    "detail": 0,
+    "open": [
+      190,
+      190
+    ]
+  },
+  {
+    "id": "ak-acog",
+    "parts": [
+      405,
+      405
+    ],
+    "before": 196,
+    "after": 195,
+    "new": [],
+    "removed": [
+      "root/BufferGeometry[53]|root/laserLightUnit[100]/lightSwitchPad[13]"
+    ],
+    "loose": 0,
+    "missing": 0,
+    "detail": 0,
+    "open": [
+      208,
+      208
+    ]
+  },
+  {
+    "id": "ak-prism",
+    "parts": [
+      385,
+      385
+    ],
+    "before": 196,
+    "after": 195,
+    "new": [],
+    "removed": [
+      "root/BufferGeometry[53]|root/laserLightUnit[100]/lightSwitchPad[13]"
+    ],
+    "loose": 0,
+    "missing": 0,
+    "detail": 0,
+    "open": [
+      206,
+      206
+    ]
+  },
+  {
+    "id": "ak-rmr",
+    "parts": [
+      373,
+      373
+    ],
+    "before": 191,
+    "after": 190,
+    "new": [],
+    "removed": [
+      "root/BufferGeometry[53]|root/laserLightUnit[100]/lightSwitchPad[13]"
+    ],
+    "loose": 0,
+    "missing": 0,
+    "detail": 0,
+    "open": [
+      192,
+      192
+    ]
+  }
+]

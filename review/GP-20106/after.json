@@ -1,0 +1,91 @@
+{
+  "phase": "after",
+  "at": "2026-11-11T18:34:10.957Z",
+  "views": [
+    {
+      "view": "third",
+      "bought": "uzi",
+      "open": {
+        "title": "WASP SMG ACQUIRED",
+        "show": true,
+        "visibility": "hidden",
+        "panelOpen": true,
+        "cifOpen": true,
+        "fp": false,
+        "blend": 0,
+        "camera": [
+          6.45,
+          -190.092,
+          -651.36
+        ],
+        "dir": [
+          0,
+          -0.717,
+          0.697
+        ]
+      },
+      "closed": {
+        "title": "WASP SMG ACQUIRED",
+        "show": true,
+        "visibility": "visible",
+        "panelOpen": false,
+        "cifOpen": false,
+        "fp": false,
+        "blend": 0,
+        "camera": [
+          6.45,
+          -190.092,
+          -651.36
+        ],
+        "dir": [
+          0,
+          -0.717,
+          0.697
+        ]
+      }
+    },
+    {
+      "view": "first",
+      "bought": "shotgun",
+      "open": {
+        "title": "SHOTGUN ACQUIRED",
+        "show": true,
+        "visibility": "hidden",
+        "panelOpen": true,
+        "cifOpen": true,
+        "fp": true,
+        "blend": 1,
+        "camera": [
+          6.452,
+          -198.579,
+          -642.887
+        ],
+        "dir": [
+          0,
+          0,
+          1
+        ]
+      },
+      "closed": {
+        "title": "SHOTGUN ACQUIRED",
+        "show": true,
+        "visibility": "visible",
+        "panelOpen": false,
+        "cifOpen": false,
+        "fp": true,
+        "blend": 1,
+        "camera": [
+          6.452,
+          -198.579,
+          -642.887
+        ],
+        "dir": [
+          0,
+          0,
+          1
+        ]
+      }
+    }
+  ],
+  "errors": []
+}

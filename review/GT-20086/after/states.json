@@ -1,0 +1,434 @@
+{
+  "noon/false": {
+    "position": [
+      0,
+      -0.002,
+      -0.06740000000000002
+    ],
+    "projected": [
+      -0.0011752136786703624,
+      -0.04706043398876704,
+      0.2606743381804369
+    ],
+    "draws": [
+      {
+        "geometry": "1256b712-1e49-413e-a2bc-a772314f1817",
+        "material": "gunPaint:ak",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      },
+      {
+        "geometry": "4c99aedf-c7cc-438f-bae6-f93be0b69455",
+        "material": "gunPaint:ak",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      },
+      {
+        "geometry": "7a7ea8ac-bc98-4592-8c51-7a5022a14ea8",
+        "material": "MeshStandardMaterial",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      },
+      {
+        "geometry": "bca9eb32-b22f-4049-b999-b6a317ea2cf4",
+        "material": "fold-static",
+        "type": "MeshStandardNodeMaterial",
+        "activePad": null
+      }
+    ],
+    "nearest": [
+      {
+        "distance": 0.13523338327765647,
+        "geometry": "bca9eb32-b22f-4049-b999-b6a317ea2cf4",
+        "inLamp": true,
+        "activePad": null,
+        "material": "fold-static"
+      },
+      {
+        "distance": 0.1382894083940168,
+        "geometry": "4c99aedf-c7cc-438f-bae6-f93be0b69455",
+        "inLamp": true,
+        "activePad": null,
+        "material": "gunPaint:ak"
+      }
+    ]
+  },
+  "noon/true": {
+    "position": [
+      0,
+      -0.002,
+      -0.06640000000000001
+    ],
+    "projected": [
+      0.010080696370550923,
+      -0.04566546608948434,
+      0.26269716624947426
+    ],
+    "draws": [
+      {
+        "geometry": "1256b712-1e49-413e-a2bc-a772314f1817",
+        "material": "gunPaint:ak",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      },
+      {
+        "geometry": "4c99aedf-c7cc-438f-bae6-f93be0b69455",
+        "material": "gunPaint:ak",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      },
+      {
+        "geometry": "7a7ea8ac-bc98-4592-8c51-7a5022a14ea8",
+        "material": "MeshStandardMaterial",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      },
+      {
+        "geometry": "ab9d2fea-340f-4431-a72c-831e3100328b",
+        "material": "fold-static",
+        "type": "MeshStandardNodeMaterial",
+        "activePad": "controls-lightSwitch-ak"
+      }
+    ],
+    "nearest": [
+      {
+        "distance": 0.1356046443280442,
+        "geometry": "ab9d2fea-340f-4431-a72c-831e3100328b",
+        "inLamp": true,
+        "activePad": "controls-lightSwitch-ak",
+        "material": "fold-static"
+      },
+      {
+        "distance": 0.13737554428694929,
+        "geometry": "4c99aedf-c7cc-438f-bae6-f93be0b69455",
+        "inLamp": true,
+        "activePad": null,
+        "material": "gunPaint:ak"
+      }
+    ]
+  },
+  "overcast/false": {
+    "position": [
+      0,
+      -0.002,
+      -0.06740000000000002
+    ],
+    "projected": [
+      -0.0011752136786703624,
+      -0.04706043398876704,
+      0.2606743381804369
+    ],
+    "draws": [
+      {
+        "geometry": "1256b712-1e49-413e-a2bc-a772314f1817",
+        "material": "gunPaint:ak",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      },
+      {
+        "geometry": "4c99aedf-c7cc-438f-bae6-f93be0b69455",
+        "material": "gunPaint:ak",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      },
+      {
+        "geometry": "7a7ea8ac-bc98-4592-8c51-7a5022a14ea8",
+        "material": "MeshStandardMaterial",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      },
+      {
+        "geometry": "bca9eb32-b22f-4049-b999-b6a317ea2cf4",
+        "material": "fold-static",
+        "type": "MeshStandardNodeMaterial",
+        "activePad": null
+      }
+    ],
+    "nearest": [
+      {
+        "distance": 0.13523338327765647,
+        "geometry": "bca9eb32-b22f-4049-b999-b6a317ea2cf4",
+        "inLamp": true,
+        "activePad": null,
+        "material": "fold-static"
+      },
+      {
+        "distance": 0.1382894083940168,
+        "geometry": "4c99aedf-c7cc-438f-bae6-f93be0b69455",
+        "inLamp": true,
+        "activePad": null,
+        "material": "gunPaint:ak"
+      }
+    ]
+  },
+  "overcast/true": {
+    "position": [
+      0,
+      -0.002,
+      -0.06640000000000001
+    ],
+    "projected": [
+      0.010080696370550923,
+      -0.04566546608948434,
+      0.26269716624947426
+    ],
+    "draws": [
+      {
+        "geometry": "1256b712-1e49-413e-a2bc-a772314f1817",
+        "material": "gunPaint:ak",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      },
+      {
+        "geometry": "4c99aedf-c7cc-438f-bae6-f93be0b69455",
+        "material": "gunPaint:ak",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      },
+      {
+        "geometry": "7a7ea8ac-bc98-4592-8c51-7a5022a14ea8",
+        "material": "MeshStandardMaterial",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      },
+      {
+        "geometry": "4f4bfcba-c1e9-4047-be3c-8864d9756b1e",
+        "material": "fold-static",
+        "type": "MeshStandardNodeMaterial",
+        "activePad": "controls-lightSwitch-ak"
+      }
+    ],
+    "nearest": [
+      {
+        "distance": 0.1356046443280442,
+        "geometry": "4f4bfcba-c1e9-4047-be3c-8864d9756b1e",
+        "inLamp": true,
+        "activePad": "controls-lightSwitch-ak",
+        "material": "fold-static"
+      },
+      {
+        "distance": 0.13737554428694929,
+        "geometry": "4c99aedf-c7cc-438f-bae6-f93be0b69455",
+        "inLamp": true,
+        "activePad": null,
+        "material": "gunPaint:ak"
+      }
+    ]
+  },
+  "dusk/false": {
+    "position": [
+      0,
+      -0.002,
+      -0.06740000000000002
+    ],
+    "projected": [
+      -0.0011752136786703624,
+      -0.04706043398876704,
+      0.2606743381804369
+    ],
+    "draws": [
+      {
+        "geometry": "1256b712-1e49-413e-a2bc-a772314f1817",
+        "material": "gunPaint:ak",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      },
+      {
+        "geometry": "4c99aedf-c7cc-438f-bae6-f93be0b69455",
+        "material": "gunPaint:ak",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      },
+      {
+        "geometry": "7a7ea8ac-bc98-4592-8c51-7a5022a14ea8",
+        "material": "MeshStandardMaterial",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      },
+      {
+        "geometry": "bca9eb32-b22f-4049-b999-b6a317ea2cf4",
+        "material": "fold-static",
+        "type": "MeshStandardNodeMaterial",
+        "activePad": null
+      }
+    ],
+    "nearest": [
+      {
+        "distance": 0.13523338327765647,
+        "geometry": "bca9eb32-b22f-4049-b999-b6a317ea2cf4",
+        "inLamp": true,
+        "activePad": null,
+        "material": "fold-static"
+      },
+      {
+        "distance": 0.1382894083940168,
+        "geometry": "4c99aedf-c7cc-438f-bae6-f93be0b69455",
+        "inLamp": true,
+        "activePad": null,
+        "material": "gunPaint:ak"
+      }
+    ]
+  },
+  "dusk/true": {
+    "position": [
+      0,
+      -0.002,
+      -0.06640000000000001
+    ],
+    "projected": [
+      0.010080696370550923,
+      -0.04566546608948434,
+      0.26269716624947426
+    ],
+    "draws": [
+      {
+        "geometry": "1256b712-1e49-413e-a2bc-a772314f1817",
+        "material": "gunPaint:ak",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      },
+      {
+        "geometry": "4c99aedf-c7cc-438f-bae6-f93be0b69455",
+        "material": "gunPaint:ak",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      },
+      {
+        "geometry": "7a7ea8ac-bc98-4592-8c51-7a5022a14ea8",
+        "material": "MeshStandardMaterial",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      },
+      {
+        "geometry": "58dbc0e1-af2e-4bef-a51e-a15f103599bd",
+        "material": "fold-static",
+        "type": "MeshStandardNodeMaterial",
+        "activePad": "controls-lightSwitch-ak"
+      }
+    ],
+    "nearest": [
+      {
+        "distance": 0.1356046443280442,
+        "geometry": "58dbc0e1-af2e-4bef-a51e-a15f103599bd",
+        "inLamp": true,
+        "activePad": "controls-lightSwitch-ak",
+        "material": "fold-static"
+      },
+      {
+        "distance": 0.13737554428694929,
+        "geometry": "4c99aedf-c7cc-438f-bae6-f93be0b69455",
+        "inLamp": true,
+        "activePad": null,
+        "material": "gunPaint:ak"
+      }
+    ]
+  },
+  "night/false": {
+    "position": [
+      0,
+      -0.002,
+      -0.06740000000000002
+    ],
+    "projected": [
+      -0.0011752136786703624,
+      -0.04706043398876704,
+      0.2606743381804369
+    ],
+    "draws": [
+      {
+        "geometry": "1256b712-1e49-413e-a2bc-a772314f1817",
+        "material": "gunPaint:ak",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      },
+      {
+        "geometry": "4c99aedf-c7cc-438f-bae6-f93be0b69455",
+        "material": "gunPaint:ak",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      },
+      {
+        "geometry": "7a7ea8ac-bc98-4592-8c51-7a5022a14ea8",
+        "material": "MeshStandardMaterial",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      },
+      {
+        "geometry": "bca9eb32-b22f-4049-b999-b6a317ea2cf4",
+        "material": "fold-static",
+        "type": "MeshStandardNodeMaterial",
+        "activePad": null
+      }
+    ],
+    "nearest": [
+      {
+        "distance": 0.13523338327765647,
+        "geometry": "bca9eb32-b22f-4049-b999-b6a317ea2cf4",
+        "inLamp": true,
+        "activePad": null,
+        "material": "fold-static"
+      },
+      {
+        "distance": 0.1382894083940168,
+        "geometry": "4c99aedf-c7cc-438f-bae6-f93be0b69455",
+        "inLamp": true,
+        "activePad": null,
+        "material": "gunPaint:ak"
+      }
+    ]
+  },
+  "night/true": {
+    "position": [
+      0,
+      -0.002,
+      -0.06640000000000001
+    ],
+    "projected": [
+      0.010080696370550923,
+      -0.04566546608948434,
+      0.26269716624947426
+    ],
+    "draws": [
+      {
+        "geometry": "1256b712-1e49-413e-a2bc-a772314f1817",
+        "material": "gunPaint:ak",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      },
+      {
+        "geometry": "4c99aedf-c7cc-438f-bae6-f93be0b69455",
+        "material": "gunPaint:ak",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      },
+      {
+        "geometry": "7a7ea8ac-bc98-4592-8c51-7a5022a14ea8",
+        "material": "MeshStandardMaterial",
+        "type": "MeshStandardMaterial",
+        "activePad": null
+      },
+      {
+        "geometry": "e2eb02ad-c7bb-4b7c-97fc-e4eee737e41e",
+        "material": "fold-static",
+        "type": "MeshStandardNodeMaterial",
+        "activePad": "controls-lightSwitch-ak"
+      }
+    ],
+    "nearest": [
+      {
+        "distance": 0.1356046443280442,
+        "geometry": "e2eb02ad-c7bb-4b7c-97fc-e4eee737e41e",
+        "inLamp": true,
+        "activePad": "controls-lightSwitch-ak",
+        "material": "fold-static"
+      },
+      {
+        "distance": 0.13737554428694929,
+        "geometry": "4c99aedf-c7cc-438f-bae6-f93be0b69455",
+        "inLamp": true,
+        "activePad": null,
+        "material": "gunPaint:ak"
+      }
+    ]
+  }
+}

@@ -1,0 +1,431 @@
+{
+  "card": "CC-343b",
+  "capturedAt": "2026-11-11T18:50:31.511Z",
+  "backend": "WebGPUBackend",
+  "poses": {
+    "b:stairs-crouched": {
+      "cam": {
+        "x": 14.327264801901665,
+        "y": -0.8366044026512601,
+        "z": 12.985221399681322,
+        "tx": 12,
+        "ty": -1.6709502874636182,
+        "tz": 11.9,
+        "fov": 35
+      },
+      "playerPos": [
+        12,
+        -2.071,
+        11.9
+      ],
+      "feet": null,
+      "turn": {
+        "active": true,
+        "feet": [
+          0,
+          0
+        ]
+      }
+    },
+    "b:stairs-standing": {
+      "cam": {
+        "x": 14.327264801901665,
+        "y": -0.8366044026512601,
+        "z": 12.985221399681322,
+        "tx": 12,
+        "ty": -1.6709502874636182,
+        "tz": 11.9,
+        "fov": 35
+      },
+      "playerPos": [
+        12,
+        -2.071,
+        11.9
+      ],
+      "feet": null,
+      "turn": {
+        "active": true,
+        "feet": [
+          0,
+          0
+        ]
+      }
+    },
+    "b:stairs-down": {
+      "cam": {
+        "x": 9.672735198098335,
+        "y": -0.34640832421988754,
+        "z": 11.314778600318679,
+        "tx": 12,
+        "ty": -1.1807542090322456,
+        "tz": 12.4,
+        "fov": 35
+      },
+      "playerPos": [
+        12,
+        -1.581,
+        12.4
+      ],
+      "feet": null,
+      "turn": {
+        "active": true,
+        "feet": [
+          3.142,
+          3.142
+        ]
+      }
+    },
+    "b:stairs-walking": {
+      "cam": {
+        "x": 14.327264801901665,
+        "y": -0.5948015997150881,
+        "z": 13.231860258676218,
+        "tx": 12,
+        "ty": -1.429147484527446,
+        "tz": 12.146638858994896,
+        "fov": 35
+      },
+      "playerPos": [
+        12,
+        -1.853,
+        12.122
+      ],
+      "feet": null,
+      "turn": {
+        "active": false,
+        "feet": [
+          1.215,
+          0.303
+        ]
+      }
+    },
+    "b:deck-edge": {
+      "cam": {
+        "x": 7.3772648019016644,
+        "y": -1.538565186964986,
+        "z": 19.26821103479537,
+        "tx": 5.05,
+        "ty": -2.372911071777344,
+        "tz": 18.182989635114048,
+        "fov": 35
+      },
+      "playerPos": [
+        5.05,
+        -2.773,
+        18.183
+      ],
+      "feet": null,
+      "turn": {
+        "active": true,
+        "feet": [
+          0,
+          0
+        ]
+      }
+    },
+    "a:stairs-crouched": {
+      "cam": {
+        "x": 14.327264801901665,
+        "y": -0.8366044026512601,
+        "z": 12.985221399681322,
+        "tx": 12,
+        "ty": -1.6709502874636182,
+        "tz": 11.9,
+        "fov": 35
+      },
+      "playerPos": [
+        12,
+        -2.071,
+        11.9
+      ],
+      "feet": {
+        "lift": 0.168,
+        "f0": null,
+        "f1": null
+      },
+      "turn": {
+        "active": true,
+        "feet": [
+          0,
+          0
+        ]
+      }
+    },
+    "a:stairs-standing": {
+      "cam": {
+        "x": 14.327264801901665,
+        "y": -0.8366044026512601,
+        "z": 12.985221399681322,
+        "tx": 12,
+        "ty": -1.6709502874636182,
+        "tz": 11.9,
+        "fov": 35
+      },
+      "playerPos": [
+        12,
+        -2.071,
+        11.9
+      ],
+      "feet": {
+        "lift": 0.168,
+        "f0": 0,
+        "f1": 0
+      },
+      "turn": {
+        "active": true,
+        "feet": [
+          0,
+          0
+        ]
+      }
+    },
+    "a:stairs-down": {
+      "cam": {
+        "x": 9.672735198098335,
+        "y": -0.34640832421988754,
+        "z": 11.314778600318679,
+        "tx": 12,
+        "ty": -1.1807542090322456,
+        "tz": 12.4,
+        "fov": 35
+      },
+      "playerPos": [
+        12,
+        -1.581,
+        12.4
+      ],
+      "feet": {
+        "lift": -0.036,
+        "f0": 0.286,
+        "f1": 0.286
+      },
+      "turn": {
+        "active": true,
+        "feet": [
+          3.142,
+          3.142
+        ]
+      }
+    },
+    "a:stairs-walking": {
+      "cam": {
+        "x": 14.327264801901665,
+        "y": -0.5948015997150881,
+        "z": 13.231860258676218,
+        "tx": 12,
+        "ty": -1.429147484527446,
+        "tz": 12.146638858994896,
+        "fov": 35
+      },
+      "playerPos": [
+        12,
+        -1.773,
+        12.204
+      ],
+      "feet": {
+        "lift": 0.127,
+        "f0": -0.028,
+        "f1": -0.314
+      },
+      "turn": {
+        "active": false,
+        "feet": [
+          0,
+          0
+        ]
+      }
+    },
+    "a:deck-edge": {
+      "cam": {
+        "x": 7.3772648019016644,
+        "y": -1.538565186964986,
+        "z": 19.268211034059,
+        "tx": 5.05,
+        "ty": -2.372911071777344,
+        "tz": 18.182989634377677,
+        "fov": 35
+      },
+      "playerPos": [
+        5.05,
+        -2.773,
+        18.183
+      ],
+      "feet": {
+        "lift": -0.25,
+        "f0": 0,
+        "f1": 0.25
+      },
+      "turn": {
+        "active": true,
+        "feet": [
+          0,
+          0
+        ]
+      }
+    }
+  },
+  "shots": {
+    "b-stairs-crouched-noon": {
+      "file": "review/CC-343b/shots/b-stairs-crouched-noon.png",
+      "bytes": 405735
+    },
+    "b-stairs-crouched-overcast": {
+      "file": "review/CC-343b/shots/b-stairs-crouched-overcast.png",
+      "bytes": 370872
+    },
+    "b-stairs-crouched-dusk": {
+      "file": "review/CC-343b/shots/b-stairs-crouched-dusk.png",
+      "bytes": 305139
+    },
+    "b-stairs-crouched-night": {
+      "file": "review/CC-343b/shots/b-stairs-crouched-night.png",
+      "bytes": 278436
+    },
+    "b-stairs-standing-noon": {
+      "file": "review/CC-343b/shots/b-stairs-standing-noon.png",
+      "bytes": 396898
+    },
+    "b-stairs-standing-overcast": {
+      "file": "review/CC-343b/shots/b-stairs-standing-overcast.png",
+      "bytes": 369148
+    },
+    "b-stairs-standing-dusk": {
+      "file": "review/CC-343b/shots/b-stairs-standing-dusk.png",
+      "bytes": 294059
+    },
+    "b-stairs-standing-night": {
+      "file": "review/CC-343b/shots/b-stairs-standing-night.png",
+      "bytes": 272050
+    },
+    "b-stairs-down-noon": {
+      "file": "review/CC-343b/shots/b-stairs-down-noon.png",
+      "bytes": 477630
+    },
+    "b-stairs-down-overcast": {
+      "file": "review/CC-343b/shots/b-stairs-down-overcast.png",
+      "bytes": 411593
+    },
+    "b-stairs-down-dusk": {
+      "file": "review/CC-343b/shots/b-stairs-down-dusk.png",
+      "bytes": 364551
+    },
+    "b-stairs-down-night": {
+      "file": "review/CC-343b/shots/b-stairs-down-night.png",
+      "bytes": 333273
+    },
+    "b-stairs-walking-noon": {
+      "file": "review/CC-343b/shots/b-stairs-walking-noon.png",
+      "bytes": 419305
+    },
+    "b-stairs-walking-overcast": {
+      "file": "review/CC-343b/shots/b-stairs-walking-overcast.png",
+      "bytes": 395070
+    },
+    "b-stairs-walking-dusk": {
+      "file": "review/CC-343b/shots/b-stairs-walking-dusk.png",
+      "bytes": 319362
+    },
+    "b-stairs-walking-night": {
+      "file": "review/CC-343b/shots/b-stairs-walking-night.png",
+      "bytes": 293279
+    },
+    "b-deck-edge-noon": {
+      "file": "review/CC-343b/shots/b-deck-edge-noon.png",
+      "bytes": 462707
+    },
+    "b-deck-edge-overcast": {
+      "file": "review/CC-343b/shots/b-deck-edge-overcast.png",
+      "bytes": 429453
+    },
+    "b-deck-edge-dusk": {
+      "file": "review/CC-343b/shots/b-deck-edge-dusk.png",
+      "bytes": 344930
+    },
+    "b-deck-edge-night": {
+      "file": "review/CC-343b/shots/b-deck-edge-night.png",
+      "bytes": 324003
+    },
+    "a-stairs-crouched-noon": {
+      "file": "review/CC-343b/shots/a-stairs-crouched-noon.png",
+      "bytes": 407705
+    },
+    "a-stairs-crouched-overcast": {
+      "file": "review/CC-343b/shots/a-stairs-crouched-overcast.png",
+      "bytes": 375261
+    },
+    "a-stairs-crouched-dusk": {
+      "file": "review/CC-343b/shots/a-stairs-crouched-dusk.png",
+      "bytes": 307420
+    },
+    "a-stairs-crouched-night": {
+      "file": "review/CC-343b/shots/a-stairs-crouched-night.png",
+      "bytes": 275044
+    },
+    "a-stairs-standing-noon": {
+      "file": "review/CC-343b/shots/a-stairs-standing-noon.png",
+      "bytes": 392204
+    },
+    "a-stairs-standing-overcast": {
+      "file": "review/CC-343b/shots/a-stairs-standing-overcast.png",
+      "bytes": 355945
+    },
+    "a-stairs-standing-dusk": {
+      "file": "review/CC-343b/shots/a-stairs-standing-dusk.png",
+      "bytes": 289780
+    },
+    "a-stairs-standing-night": {
+      "file": "review/CC-343b/shots/a-stairs-standing-night.png",
+      "bytes": 262821
+    },
+    "a-stairs-down-noon": {
+      "file": "review/CC-343b/shots/a-stairs-down-noon.png",
+      "bytes": 482351
+    },
+    "a-stairs-down-overcast": {
+      "file": "review/CC-343b/shots/a-stairs-down-overcast.png",
+      "bytes": 416543
+    },
+    "a-stairs-down-dusk": {
+      "file": "review/CC-343b/shots/a-stairs-down-dusk.png",
+      "bytes": 363224
+    },
+    "a-stairs-down-night": {
+      "file": "review/CC-343b/shots/a-stairs-down-night.png",
+      "bytes": 334366
+    },
+    "a-stairs-walking-noon": {
+      "file": "review/CC-343b/shots/a-stairs-walking-noon.png",
+      "bytes": 416018
+    },
+    "a-stairs-walking-overcast": {
+      "file": "review/CC-343b/shots/a-stairs-walking-overcast.png",
+      "bytes": 376565
+    },
+    "a-stairs-walking-dusk": {
+      "file": "review/CC-343b/shots/a-stairs-walking-dusk.png",
+      "bytes": 318512
+    },
+    "a-stairs-walking-night": {
+      "file": "review/CC-343b/shots/a-stairs-walking-night.png",
+      "bytes": 290112
+    },
+    "a-deck-edge-noon": {
+      "file": "review/CC-343b/shots/a-deck-edge-noon.png",
+      "bytes": 484657
+    },
+    "a-deck-edge-overcast": {
+      "file": "review/CC-343b/shots/a-deck-edge-overcast.png",
+      "bytes": 441332
+    },
+    "a-deck-edge-dusk": {
+      "file": "review/CC-343b/shots/a-deck-edge-dusk.png",
+      "bytes": 359773
+    },
+    "a-deck-edge-night": {
+      "file": "review/CC-343b/shots/a-deck-edge-night.png",
+      "bytes": 336650
+    }
+  },
+  "pageErrors": [],
+  "gpuWarnings": []
+}

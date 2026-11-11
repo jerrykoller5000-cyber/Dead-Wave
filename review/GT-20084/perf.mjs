@@ -6,7 +6,8 @@ import {launch} from '../../tools/cdp.mjs';
 import {save} from '../GT-20076/save.mjs';
 import {sampleHigh} from '../GT-20076/frame-sample.mjs';
 
-const id=process.argv[2];assert(process.env.DW_GAME_TEST_TOKEN && ['shotgun','pistol'].includes(id));
+const id=process.argv[2],padReturn=id==='ak' && process.argv.includes('--pad-return');
+assert(process.env.DW_GAME_TEST_TOKEN && (['shotgun','pistol'].includes(id) || padReturn));
 const server=await serve(fileURLToPath(new URL('../../',import.meta.url)),0),browser=await launch({headless:false});
 try{
   const page=await browser.newPage({width:1280,height:720});
@@ -47,6 +48,6 @@ try{
     trials.push({phase,...state,fps:mean('fps'),low:mean('low'),samples});
     console.log('PASS',id,phase,trials.at(-1).fps,'fps',trials.at(-1).low,'low',state.releases,'releases');
   }
-  await save(new URL('./timing-'+id+'.json',import.meta.url),JSON.stringify({id,readyMs:first.readyMs,trials},null,2)+'\n');
+  await save(new URL(padReturn?'../GT-20086/timing.json':'./timing-'+id+'.json',import.meta.url),JSON.stringify({id,readyMs:first.readyMs,trials},null,2)+'\n');
   assert.deepEqual(page.errors,[]);
 }finally{await browser.close();await server.close();}

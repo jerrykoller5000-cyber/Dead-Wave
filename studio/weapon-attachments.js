@@ -11,7 +11,7 @@ const MOUNTS = Object.freeze({
   uzi:      { kind: 'under', x: 0, y: -0.036, z: 0.277, scale: 0.72, length: 0.13, width: 0.052, height: 0.047 },
   shotgun:  { kind: 'dualTube', x: 0.066, y: 0.012, z: 0.786, length: 0.16 },
   m4:       { kind: 'peq', x: 0.082, y: 0.056, z: 0.655, length: 0.125, width: 0.063, height: 0.047 },
-  ak:       { kind: 'under', x: 0, y: -0.050, z: 0.586, length: 0.13, width: 0.064, height: 0.047 },
+  ak:       { kind: 'under', x: 0, y: -0.050, z: 0.586, length: 0.13, width: 0.064, height: 0.047, padY: -0.002 },
   aa12:     { kind: 'tube', x: 0.072, y: 0.041, z: 0.748, length: 0.151 },
   sniper:   { kind: 'peq', x: 0.070, y: 0, z: 0.530, length: 0.125, width: 0.063, height: 0.047 },
   launcher: { kind: 'peq', x: 0.112, y: 0.040, z: 0.550, length: 0.115, width: 0.060, height: 0.047 },   // CL-322: on GP-20060's 3-o'clock rail (was x .087 y .045 z .222, on the receiver bracket)
@@ -158,7 +158,7 @@ export function attachLaserLight(gun, kind, ctx) {
     axis=new THREE.Vector3(0,-1,0);
   }else{
     faceOffset=.0012;
-    pad=padKit.box(spec.width*.42,spec.height*.42,2*faceOffset,gunDark,0,0,-L/2-faceOffset,0,0,0,unit,.0009);
+    pad=padKit.box(spec.width*.42,spec.height*.42,2*faceOffset,gunDark,0,spec.padY ?? 0,-L/2-faceOffset,0,0,0,unit,.0009);
     pad.name='lightSwitchPad';
     axis=new THREE.Vector3(0,0,1);
   }

@@ -1,0 +1,54 @@
+{
+  "m240": {
+    "id": "weapon.m240",
+    "name": "M240 (on its tripod)",
+    "kind": "model",
+    "variant": null,
+    "mode": null,
+    "center": {
+      "x": -26,
+      "y": -199.45324999979977,
+      "z": -631.8250000029802
+    },
+    "size": {
+      "x": 0.9530916213989258,
+      "y": 1.0935000004004678,
+      "z": 1.2339999973773956
+    },
+    "yaw": 0,
+    "info": {
+      "meshes": 80,
+      "drawables": 80,
+      "tris": 15998,
+      "points": 0,
+      "segments": 0,
+      "materials": 19
+    }
+  },
+  "m240-folded": {
+    "id": "weapon.m240-folded",
+    "name": "M240, folded (carried)",
+    "kind": "model",
+    "variant": null,
+    "mode": null,
+    "center": {
+      "x": -25.966750001341104,
+      "y": -199.78076311202068,
+      "z": -631.8250000029802
+    },
+    "size": {
+      "x": 0.23050000184774433,
+      "y": 0.43847377595864145,
+      "z": 1.2339999973773956
+    },
+    "yaw": 0,
+    "info": {
+      "meshes": 78,
+      "drawables": 78,
+      "tris": 14190,
+      "points": 0,
+      "segments": 0,
+      "materials": 18
+    }
+  }
+}

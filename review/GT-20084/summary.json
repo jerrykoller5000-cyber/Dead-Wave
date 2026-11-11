@@ -1,0 +1,235 @@
+{
+  "pistol": {
+    "bare": 13,
+    "fitted": 16,
+    "lamp": 3,
+    "copies": [
+      "held",
+      "eye",
+      "carry",
+      "offhand"
+    ],
+    "axis": [
+      1,
+      0,
+      0
+    ],
+    "travel": 0.001,
+    "maxEyeDriftPixels": 1.048140854583481e-12,
+    "changedPixels": {
+      "noon": 1417,
+      "overcast": 1410,
+      "dusk": 1412,
+      "night": 955
+    }
+  },
+  "revolver": {
+    "bare": 12,
+    "fitted": 19,
+    "lamp": 7,
+    "copies": [
+      "held",
+      "eye",
+      "carry",
+      "offhand"
+    ],
+    "axis": [
+      0,
+      0,
+      1
+    ],
+    "travel": 0.001,
+    "maxEyeDriftPixels": 1.0056627395985135e-12,
+    "changedPixels": {
+      "noon": 8198,
+      "overcast": 7377,
+      "dusk": 7978,
+      "night": 6351
+    }
+  },
+  "uzi": {
+    "bare": 17,
+    "fitted": 23,
+    "lamp": 6,
+    "copies": [
+      "held",
+      "eye",
+      "carry",
+      "offhand"
+    ],
+    "axis": [
+      -1,
+      0,
+      0
+    ],
+    "travel": 0.001,
+    "maxEyeDriftPixels": 3.0036837745360248,
+    "changedPixels": {
+      "noon": 4872,
+      "overcast": 4920,
+      "dusk": 4774,
+      "night": 3617
+    }
+  },
+  "shotgun": {
+    "bare": 15,
+    "fitted": 19,
+    "lamp": 4,
+    "copies": [
+      "held",
+      "eye",
+      "carry"
+    ],
+    "axis": [
+      0,
+      0,
+      1
+    ],
+    "travel": 0.001,
+    "maxEyeDriftPixels": 2.2737367544323206e-13,
+    "changedPixels": {
+      "noon": 5643,
+      "overcast": 5216,
+      "dusk": 5512,
+      "night": 4334
+    }
+  },
+  "aa12": {
+    "bare": 19,
+    "fitted": 23,
+    "lamp": 4,
+    "copies": [
+      "held",
+      "eye",
+      "carry"
+    ],
+    "axis": [
+      -1,
+      0,
+      0
+    ],
+    "travel": 0.001,
+    "maxEyeDriftPixels": 2.59938956909192,
+    "changedPixels": {
+      "noon": 1448,
+      "overcast": 1449,
+      "dusk": 1448,
+      "night": 1448
+    }
+  },
+  "m4": {
+    "bare": 27,
+    "fitted": 31,
+    "lamp": 4,
+    "copies": [
+      "held",
+      "eye",
+      "carry"
+    ],
+    "axis": [
+      0,
+      -1,
+      0
+    ],
+    "travel": 0.001,
+    "maxEyeDriftPixels": 0.6932514293189255,
+    "changedPixels": {
+      "noon": 9328,
+      "overcast": 8018,
+      "dusk": 7317,
+      "night": 3197
+    }
+  },
+  "ak": {
+    "bare": 15,
+    "fitted": 19,
+    "lamp": 4,
+    "copies": [
+      "held",
+      "eye",
+      "carry"
+    ],
+    "axis": [
+      0,
+      0,
+      1
+    ],
+    "travel": 0.001,
+    "maxEyeDriftPixels": 2.1745715690829965,
+    "changedPixels": {
+      "noon": 7539,
+      "overcast": 6850,
+      "dusk": 7331,
+      "night": 5887
+    }
+  },
+  "sniper": {
+    "bare": 27,
+    "fitted": 31,
+    "lamp": 4,
+    "copies": [
+      "held",
+      "eye",
+      "carry"
+    ],
+    "axis": [
+      0,
+      -1,
+      0
+    ],
+    "travel": 0.001,
+    "maxEyeDriftPixels": 2.064753291769588,
+    "changedPixels": {
+      "noon": 10786,
+      "overcast": 9329,
+      "dusk": 8442,
+      "night": 3705
+    }
+  },
+  "launcher": {
+    "bare": 16,
+    "fitted": 20,
+    "lamp": 4,
+    "copies": [
+      "held",
+      "eye",
+      "carry"
+    ],
+    "axis": [
+      0,
+      -1,
+      0
+    ],
+    "travel": 0.001,
+    "maxEyeDriftPixels": 2.5731020367373096,
+    "changedPixels": {
+      "noon": 9048,
+      "overcast": 8817,
+      "dusk": 7843,
+      "night": 3290
+    }
+  },
+  "minigun": {
+    "bare": 18,
+    "fitted": 22,
+    "lamp": 4,
+    "copies": [
+      "held",
+      "eye",
+      "carry"
+    ],
+    "axis": [
+      0,
+      0,
+      1
+    ],
+    "travel": 0.001,
+    "maxEyeDriftPixels": 0.7444304871588204,
+    "changedPixels": {
+      "noon": 9948,
+      "overcast": 8147,
+      "dusk": 9496,
+      "night": 6643
+    }
+  }
+}

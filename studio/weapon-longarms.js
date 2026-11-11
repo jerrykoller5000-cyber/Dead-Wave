@@ -592,7 +592,12 @@ export function makeAkModel(ctx) {
   const mag = K.group(0, -0.04, 0.04);
   const magB = profileCurve([-0.046, 0.012], [-0.04, -0.13], [0.052, -0.258], 7), magF = profileCurve([0.056, 0.012], [0.066, -0.11], [0.156, -0.232], 7);
   K.slab([...magB, ...magF.slice().reverse()], 0.034, gunAccent, { bevel: 0.004, parent: mag });
-  for (const w of [0.23, 0.5, 0.77]) K.slab(gunBand(magB.map((b, i) => [b[0] * (1 - w) + magF[i][0] * w, b[1] * (1 - w) + magF[i][1] * w]).slice(1, 7), 0.003), 0.037, gunBody, { bevel: 0.0012, parent: mag });
+  for (const w of [0.23, 0.5, 0.77]) {
+    const line = magB.map(([z,y], i) => [z * (1-w) + magF[i][0] * w, y * (1-w) + magF[i][1] * w]);
+    const outline = gunBand(line.slice(1, 7), 0.003);
+    const relief = K.slab(outline, 0.037, gunBody, { bevel: 0.0012, parent: mag });
+    separateBandFaces(THREE, relief.geometry, outline, 0.034 / 2);
+  }
   K.slab(gunBand(magB.slice(0, 8), 0.002), 0.035, gunDark, { bevel: 0.001, parent: mag });
   K.slab(gunBand(magF.slice(0, 8), 0.002), 0.035, gunDark, { bevel: 0.001, parent: mag });
   K.box(0.036, 0.018, 0.1, gunDark, 0, -0.01, 0.007, 0, 0, 0, mag, 0.002);                                // the well's lips
@@ -650,6 +655,39 @@ export function makeAkModel(ctx) {
   bindModelArtwork(gun, 'heatParts', 'barrel', groupArtwork(THREE, barrel));
   bindModelArtwork(gun, 'heatParts', 'suppressor', gun.userData.suppressor);
   return finishGun(gun);
+}
+
+// A raised graphic on each side of a flat panel. Keep the slab's exterior bevels
+// and close each ribbon against the painted face underneath it.
+function separateBandFaces(T, geometry, outline, faceX) {
+  const { position, normal, uv } = geometry.attributes;
+  const positions = [], normals = [], uvs = [];
+  for (const side of [-1, 1]) {
+    for (let i = 0; i < position.count; i += 3) {
+      if (side * position.getX(i) < 0 && side * position.getX(i+1) < 0 && side * position.getX(i+2) < 0) continue;
+      for (let v = i; v < i + 3; v++) {
+        positions.push(side * Math.max(faceX, side * position.getX(v)), position.getY(v), position.getZ(v));
+        normals.push(normal.getX(v), normal.getY(v), normal.getZ(v));
+        uvs.push(uv.getX(v), uv.getY(v));
+      }
+    }
+    // gunBand returns one edge of a ribbon followed by the other in reverse.
+    // Close each short segment independently so the back follows its curve.
+    for (let a = 0; a < outline.length / 2 - 1; a++) {
+      const b = a + 1, d = outline.length - 1 - a, c = d - 1;
+      const corners = side > 0 ? [a,c,b, a,d,c] : [a,b,c, a,c,d];
+      for (const corner of corners) {
+        const [z, y] = outline[corner];
+        positions.push(side * faceX, y, z);
+        normals.push(-side, 0, 0);
+        uvs.push(z * 4, y * 4);
+      }
+    }
+  }
+  geometry.setAttribute('position', new T.Float32BufferAttribute(positions, 3));
+  geometry.setAttribute('normal', new T.Float32BufferAttribute(normals, 3));
+  geometry.setAttribute('uv', new T.Float32BufferAttribute(uvs, 2));
+  geometry.computeBoundingSphere();
 }
 
 // Clip the back of a convex decorative panel against its support. All original

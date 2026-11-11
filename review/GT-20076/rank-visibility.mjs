@@ -48,7 +48,7 @@ export async function rankViews(T,id,folder='visibility',audit='catalog-chain-sk
   const cameras=await (await get(path+'cameras.json')).json();
   const parts=currentModel(T,id);
   const fingerprint=artworkFingerprint(parts);
-  if(data.artworkFingerprint && fingerprint!==data.artworkFingerprint)throw Error(id+' artwork changed since strict catalog');
+  if(data.artworkFingerprint && fingerprint!==data.artworkFingerprint)throw Error(id+' artwork changed since strict catalog: built '+fingerprint+' ('+parts.length+' parts), expected '+data.artworkFingerprint+' ('+data.parts+' parts), scale '+T.weaponMeshes[id].scale.toArray());
   if(parts.length!==data.parts) throw Error(id+' strict audit count mismatch '+parts.length+' vs '+data.parts);
   const indices=new Map(parts.map((p,i)=>[p.label,i]));
   const pairs=(data.rawOverlaps||data.overlaps).map(({a,b},index)=>{

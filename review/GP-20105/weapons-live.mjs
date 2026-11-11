@@ -50,6 +50,10 @@ try {
       const vm=T.viewmodelDbg();return {fp:T.fpDbg(),vmActive:vm?.info?.active,vmGun:vm?.gun?.key,vmShowing:vm?.showing?.(),vmRootVisible:vm?.root?.visible};})()`);
     await pause(100);
     await page.screenshot(shot(w,'first-draw'));
+    const firstFired=await page.evaluate(`(()=>{const T=TT,w=${JSON.stringify(w)},before=T.magazinesDbg(w)?.loaded?.[0]??T.getAmmo()[w],fuelBefore=T.getSawFuel();
+      T.setMouseFireDbg(true);for(let i=0;i<45;i++)T.stepFrame(.016);T.setMouseFireDbg(false);
+      return {before,after:T.magazinesDbg(w)?.loaded?.[0]??T.getAmmo()[w],fuelBefore,fuelAfter:T.getSawFuel(),saw:T.sawCutDbg?.()};})()`);
+    await page.screenshot(shot(w,'first-fire'));
     await page.send('Input.dispatchMouseEvent',{type:'mousePressed',x:640,y:360,button:'right',clickCount:1});
     const ads=await page.evaluate(`(()=>{const T=TT;for(let i=0;i<50;i++)T.stepFrame(.016);return {fp:T.fpDbg(),vm:T.viewmodelDbg()?.info?.active};})()`);
     await page.screenshot(shot(w,'first-ads'));
@@ -58,7 +62,7 @@ try {
       T.player.position.set(f.x,tg.floorY,f.z);T.setVelDbg(0,0);T.setAimYawDbg(Math.PI/2);
       for(let i=0;i<55;i++)T.stepFrame(.016);return {player:T.player.position.toArray(),fp:T.fpDbg(),vm:T.viewmodelDbg()?.info?.active};})()`);
     await page.screenshot(shot(w,'first-wall'));
-    report.guns.push({w,prep,fired,first,ads,near});
+    report.guns.push({w,prep,fired,first,firstFired,ads,near});
     await page.evaluate(`(()=>{const T=TT,tg=T.trainingDbg.tg();T.player.position.set(tg.origin.x,tg.floorY,tg.origin.z-10);T.setVelDbg(0,0);T.setAimYawDbg(Math.PI);T.setViewFirstDbg(false);
       for(let i=0;i<50;i++)T.stepFrame(.016);})()`);
   }

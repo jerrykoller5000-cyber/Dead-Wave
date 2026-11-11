@@ -1,13 +1,13 @@
 # Claude 2
 
-state: idle
+state: active
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: —
-touching: —
-since: 2026-11-11T17:32Z
+task: CB-307 t221's last red (Director's (a), 19:1xZ): the third-person firing hand leaves the grip and works the sniper's bolt between shots, the gun held where it is; t221 checks the firing palm on the knob (--review); pictures after
+touching: index.html (holdShoulderGun, sniper bolt cycle), tools/tests/t221.js
+since: 2026-11-11T19:19Z
 next: CB-307 GT-20081's returns to me: fakethree Group.copy keeps name/vi
 blocked-on: —
-last-report: handoffs/2026-11-11-claude2-CB-307.md
+last-report: handoffs/2026-11-11-claude2-CB-308.md
 
 ## Notes
 

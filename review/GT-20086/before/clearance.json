@@ -1,0 +1,261 @@
+{
+  "rows": [
+    {
+      "offset": 0,
+      "woodGap": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      "shellGap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "offset": -0.0005,
+      "woodGap": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      "shellGap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "offset": -0.001,
+      "woodGap": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      "shellGap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "offset": -0.0015,
+      "woodGap": {
+        "lowerMm": 0.07031250000000001,
+        "upperMm": 0.078125
+      },
+      "shellGap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "offset": -0.002,
+      "woodGap": {
+        "lowerMm": 0.4375,
+        "upperMm": 0.44531249999999994
+      },
+      "shellGap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "offset": -0.0025,
+      "woodGap": {
+        "lowerMm": 0.8046875000000001,
+        "upperMm": 0.8125000000000001
+      },
+      "shellGap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "offset": -0.003,
+      "woodGap": {
+        "lowerMm": 1.1796875000000002,
+        "upperMm": 1.1875000000000002
+      },
+      "shellGap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "offset": -0.0035,
+      "woodGap": {
+        "lowerMm": 1.546875,
+        "upperMm": 1.5546875
+      },
+      "shellGap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "offset": -0.004,
+      "woodGap": {
+        "lowerMm": 1.9140625,
+        "upperMm": 1.921875
+      },
+      "shellGap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "offset": -0.0045000000000000005,
+      "woodGap": {
+        "lowerMm": 2.2812500000000004,
+        "upperMm": 2.2890625000000004
+      },
+      "shellGap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "offset": -0.005,
+      "woodGap": {
+        "lowerMm": 2.6562499999999996,
+        "upperMm": 2.6640624999999996
+      },
+      "shellGap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "offset": -0.0055,
+      "woodGap": {
+        "lowerMm": 3.0234375,
+        "upperMm": 3.03125
+      },
+      "shellGap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "offset": -0.006,
+      "woodGap": {
+        "lowerMm": 3.3906250000000004,
+        "upperMm": 3.3984375000000004
+      },
+      "shellGap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "offset": -0.006500000000000001,
+      "woodGap": {
+        "lowerMm": 3.7578125,
+        "upperMm": 3.765625
+      },
+      "shellGap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "offset": -0.007,
+      "woodGap": {
+        "lowerMm": 4.1328125,
+        "upperMm": 4.140625
+      },
+      "shellGap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "offset": -0.0075,
+      "woodGap": {
+        "lowerMm": 4.500000000000001,
+        "upperMm": 4.507812500000001
+      },
+      "shellGap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "offset": -0.008,
+      "woodGap": {
+        "lowerMm": 4.867187500000001,
+        "upperMm": 4.875000000000001
+      },
+      "shellGap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "offset": -0.0085,
+      "woodGap": {
+        "lowerMm": 5.234374999999999,
+        "upperMm": 5.242187499999999
+      },
+      "shellGap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "offset": -0.009000000000000001,
+      "woodGap": {
+        "lowerMm": 5.609375,
+        "upperMm": 5.6171875
+      },
+      "shellGap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "offset": -0.0095,
+      "woodGap": {
+        "lowerMm": 5.9765625,
+        "upperMm": 5.984375
+      },
+      "shellGap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "offset": -0.01,
+      "woodGap": {
+        "lowerMm": 6.34375,
+        "upperMm": 6.3515625
+      },
+      "shellGap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "offset": -0.0105,
+      "woodGap": {
+        "lowerMm": 6.710937500000001,
+        "upperMm": 6.718750000000001
+      },
+      "shellGap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    }
+  ],
+  "contact": [
+    0,
+    0,
+    -0.06740000000000002
+  ],
+  "face": [
+    0,
+    0,
+    -0.06620000000000001
+  ],
+  "originalForeEnd": "KR-7 walnut",
+  "closed": true
+}

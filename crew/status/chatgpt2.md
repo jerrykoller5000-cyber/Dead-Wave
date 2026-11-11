@@ -2,9 +2,9 @@
 
 state: active
 model: GPT-6 (Codex, variant unsure)
-task: GT-20084 Handheld flashlight controls.lightSwitch and restPosition for every fitted copy; same draws and visible press travel for CE-4
-touching: studio/weapon-attachments.js (handheld light switches), studio/weapon-model-hooks.js (light artwork update), studio/weapon-light-switch.js (switch graphics if needed), review/GT-20084, review/GT-20076 (pending paired High receipts)
-since: 2026-11-11T17:37Z
+task: GT-20086 KR-7 light pad cleared through its full stroke. Verify the fitted model and the High frame-time return.
+touching: studio/weapon-attachments.js (KR-7 light pad), review/GT-20086, review/GT-20084/perf.mjs (KR-7 return option)
+since: 2026-11-11T19:20Z
 next: GT-20075 (Reviewed by CLAUDE DIRECTOR 20:45Z: accepted, two back: the
 blocked-on: —
 last-report: handoffs/2026-11-11-chatgpt2-GT-20076.md
@@ -15,7 +15,7 @@ last-report: handoffs/2026-11-11-chatgpt2-GT-20076.md
 
 context nearly full, needs a new session
 
-GT-20084 active. Final rendering path uses a private sparse-position update during the press, then restores/disposes the temporary geometry. All UVs/materials and draw submissions retained, each copy independent. Original GPU morph attempt failed to show pump/sniper motion despite numeric pass, evidence in review/GT-20084/first-render. Final pump/sniper now 5,643/10,786 changed noon pixels across 4 lights, actual .001 on held/eye/carry, zero sibling and release drift, 19/31 fitted draws. Pistol/revolver also pass. Wasp was initially anchored rearward (+Z); updated ray check shows centre occluded by support grip. Run face-probe.mjs uzi, then move new Uzi pad to demonstrably clear exterior face and tell Claude 5 its revised normal. Remaining final native suite: fit after aa12 m4 ak, launcher minigun m240, rerun uzi; sheets.py every model/visual check, full-fleet t38/t333 and exclusive perf.mjs shotgun. Before files cover all ten handheld & Watchman folded/tripod. Draft GT-20084 handoff exists; complete only after validation. Pistol J128 matched B/A/B 53/26.2→59.6/42.8→54.8/29.9, geometry 7978 tris unchanged: performance open, director informed, isolate in same live scene later. Remaining ranked KR-7 #97/187px plus Watchman GP-20104 hanging on model owner, asked director for order after switch.
+GT-20086 now active, assigned by director. The KR-7 flashlight pad overlaps the existing lower wood on equipped art by .662 mm. Current marker [0,0,-.0674], +Z axis and .001 travel. Claude 5 has advance notice. review/GT-20086/check.mjs before captures original near and whole eye in 4 lights plus a virtual clearance sweep in before/clearance.json. Select smallest clean offset with positive separation and shell contact, give Claude 5 the exact proposed local delta BEFORE editing studio/weapon-attachments.js, then run after with identical camera, real rest/press on all three copies, strict equipped audit, targeted tests, handoff, --done. Back to J128 global top rank: launcher #32/185 aimed and #33/174 hip. Prior KR-7 magazine turn checked out --review, ready to commit, three removed 136→133, 360 exact surface samples, camo and wood five copies, all 12 High blocks p95 16.8, 42/42 tests. Pistol three same-live-eye original/revised 59.7/58.7, 53.7/51.9 and 51.2/52.4; no consistent outcome; both miss budget in last two, director informed. GT-20085 Watchman fold complete, other runner found a separate shoulder-seat issue with Claude 2. All checks through the slot, no git.
 
 Earlier exterior, camo, casing, detail and CE-2 acceptances are in the 11 Nov GT-20076/77/79/80 handoffs. The KR-7 laminate and D-152 budget were accepted on GT-20082 and GT-20081. Keep previous test expectations and the crew slot.
 

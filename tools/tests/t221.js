@@ -43,13 +43,29 @@
       const mm = new THREE.Matrix4().multiplyMatrices(inv, o.matrixWorld);
       for (let i = 0; i < pa.count; i++) { v.fromBufferAttribute(pa, i).applyMatrix4(mm); minX = Math.min(minX, v.x); maxX = Math.max(maxX, v.x); }
     });
-    ok(maxX < 0, 'the whole bolt handle is on the gun\'s right, gun-local x < 0 (x ' + f3(minX) + ' .. ' + f3(maxX) + ')');
-    ok(minX < -0.08, 'the knob stands out on the right (' + f3(minX) + ')');
-    ok(gun.userData.boltSide === -1, 'gun.userData.boltSide is -1');
+    // CB-307 (CLAUDE DIRECTOR): the side as Jerry sees it. The handle all to one side of the bore, the knob standing out;
+    // that side his right in third person (his torso's +x is the gun side) and the shooter's right on screen in first person.
+    const side = maxX > -minX ? 1 : -1, near = side > 0 ? -minX : maxX;   // the knob's side; the root may sit over the bore
+    ok(near < 0.03, 'the bolt handle is on one side of the gun, its root no more than 3 cm over the bore (gun-local x ' + f3(minX) + ' .. ' + f3(maxX) + ')');
+    ok(Math.max(-minX, maxX) > 0.08, 'the knob stands out from the gun (' + f3(side < 0 ? minX : maxX) + ')');
+    ok(gun.userData.boltSide === side, 'gun.userData.boltSide says the side the model has (' + gun.userData.boltSide + ', model ' + side + ')');
     const grab = bolt.userData.gb145Grab;
     const knobL = () => { gun.updateMatrixWorld(true); return gun.worldToLocal(bolt.localToWorld(grab.clone())); };
     const knob0 = grab && knobL();
-    ok(!!grab && knob0.x < -0.1, 'the hand\'s grab point is the knob (gun-local x ' + (knob0 ? f3(knob0.x) : '-') + ')');
+    ok(!!grab && knob0.x * side > 0.1, 'the hand\'s grab point is the knob (gun-local x ' + (knob0 ? f3(knob0.x) : '-') + ')');
+    const torsoRight = () => { ud.torsoG.updateMatrixWorld(true); return V().set(1, 0, 0).transformDirection(ud.torsoG.matrixWorld); };
+    const kw = bolt.localToWorld(grab.clone()), bw = gun.localToWorld(V().set(0, knob0.y, knob0.z));
+    const tpSide = kw.sub(bw).dot(torsoRight());
+    ok(tpSide > 0.05, 'third person: the knob on the marine\'s right (' + f3(tpSide) + ' m to his right of the bore)');
+    let fpSide = null;
+    T.setViewFirstDbg(true);
+    { const w0 = Date.now(); while (Date.now() - w0 < 20000 && !(T.fpDbg && T.fpDbg().w > 0.95)) await wait(50); }
+    { const vm = T.viewmodelDbg && T.viewmodelDbg(); await wait(300);
+      if (vm && vm.showing('sniper')) { const nk = vm.ndc(vm.viewPoint(knob0.clone())), nb = vm.ndc(vm.viewPoint(V().set(0, knob0.y, knob0.z))); fpSide = nk.x - nb.x; } }
+    T.setViewFirstDbg(false);
+    { const w0 = Date.now(); while (Date.now() - w0 < 20000 && T.fpDbg && T.fpDbg().w > 0.05) await wait(50); }
+    ok(fpSide != null && fpSide > 0.01, 'first person: the knob on the shooter\'s right on screen (' + (fpSide == null ? 'no view gun' : f3(fpSide) + ' NDC right of the bore') + ')');
+    if (fpSide != null && (fpSide > 0) !== (tpSide > 0)) ok(false, 'the two views disagree on the bolt\'s side (a mirrored view): a defect for the view gun or the model');
 
     const I = T.WEAPON_STATS.sniper.interval;
     ok(Math.abs(I - 0.9) < 1e-9 && T.WEAPON_STATS.sniper.damage === 92 && T.WEAPON_STATS.sniper.maxAmmo === 5, 'the sniper\'s interval (0.9 s), damage (92) and magazine (5) are unchanged');
@@ -111,7 +127,8 @@
       ok(c1.t - t1 > 0.2 * 1000, 'on the bolt\'s pull, not on the shot (+' + ((c1.t - t1) / 1000).toFixed(3) + ' s)');
       const q = c1.q;
       const vl = V().set(c1.v.x, c1.v.y, c1.v.z).applyQuaternion(q);
-      ok(vl.x < -1, 'thrown out to the gun\'s right (gun-local vx ' + f3(vl.x) + '; world ' + [c1.v.x, c1.v.y, c1.v.z].map(f3).join(',') + ' age ' + f3(c1.age) + (c1.b ? ' bounced' : '') + (c1.s ? ' settled' : '') + ')');
+      const vr = V().set(c1.v.x, c1.v.y, c1.v.z).dot(torsoRight());
+      ok(vr > 1 && vl.x * side > 1, 'thrown out to his right, the bolt\'s side (' + f3(vr) + ' m/s to his right; gun-local vx ' + f3(vl.x) + '; world ' + [c1.v.x, c1.v.y, c1.v.z].map(f3).join(',') + ' age ' + f3(c1.age) + (c1.b ? ' bounced' : '') + (c1.s ? ' settled' : '') + ')');
     }
     for (let w1 = Date.now(); (S0().cycles || 0) < cycles0 + 2 && Date.now() - w1 < 10000;) await wait(10);   // the second shot's cycle
     for (let w1 = Date.now(); S0().active && Date.now() - w1 < 30000;) await wait(20);

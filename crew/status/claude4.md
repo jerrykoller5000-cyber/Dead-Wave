@@ -2,9 +2,9 @@
 
 state: active
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: CD-1 fresh session (15:12Z): rebuilding the cloud copy, then the GW-4 thumb forward with the forearm below the gun
-touching: game/viewmodel-fit.js, studio/hand-contacts.js, studio/marine-hand.js, tools/handfit/, tools/tests/clip-check.js, game/viewmodel.js (support hold elbow)
-since: 2026-11-11T15:12Z
+task: CD-1 fresh session 18:38Z: rebuilding the cloud copy, then the firing fists under the guards (GW-4, Wasp, AA-12, sniper)
+touching: game/viewmodel-fit.js, studio/hand-contacts.js, tools/handfit/
+since: 2026-11-11T18:38Z
 next: CD-1 (08:52Z: back to Claude 1, a fresh session from 08:55Z (Jerr
 blocked-on: —
 last-report: handoffs/2026-11-11-claude4-CD-1-fixes2.md
@@ -12,12 +12,21 @@ last-report: handoffs/2026-11-11-claude4-CD-1-fixes2.md
 ## Notes
 - **FIRST, from CLAUDE DIRECTOR (16:07Z):** two Claude 1 sessions are running. The OLD one (checked out, 'answering requests only'): stop, answer nothing, schedule no more check-ins. The FRESH one (IN 15:12Z): you take every request, incl. vmMat (low) and Claude 5's CE-2 fists (middle/ring fingers through the GW-4/Wasp grips), and note every 15 min.
 
+### Where things stand (11 Nov 18:38Z, session 6: fresh, Jerry's OK 18:31Z)
+- Checked in CD-1: rebuilding the cloud copy; queue (1) the firing fists under the guards (GW-4, Wasp, AA-12, sniper: middle/ring
+  under the guard, index free for Claude 5), (2) the flamer firing hand 22 mm, uzi r 4.6, the pistol's 3.7 mm floor.
+
 ### Where things stand (11 Nov 18:10Z, session 5, CD-1 fixes part 3: handoffs/2026-11-11-claude4-CD-1-fixes3.md)
 - LANDED: the GW-4 support thumb forward (VM_FIT.m4.l + contacts, ~16:28Z), ChatGPT 2's vmMat identity (vmMaterial updates
   in place, 16:37Z), the revolver support cup (VM_FIT.revolver.l + VM_SUPPORT_ELBOW in viewmodel.js, 18:06Z). Antigravity
   asked for the four lights of both; ChatGPT 2 to run paint.mjs.
-- Next: (3) the revolver's firing index within the trigger's reach (Claude 5's request: the pad 28 mm out on the frame);
-  (4) the GW-4 and Wasp firing fists down under their guards (Claude 5's CE-2 note: middle/ring through the guard; slide2 + fit8
+- Also LANDED 18:23Z: the revolver's firing index within the trigger's reach (pad 2.8 mm; Claude 5 adds VM_TRIGGER).
+- **Context nearly full, needs a new session** (18:35Z). This session answers requests only until CLAUDE DIRECTOR starts the next.
+- Started (4), the GW-4 fist: in the 16:2xZ export the firing hand's deepest (5.2 mm, part 43; 2.2 in controls-trigger) sits by the
+  index tip, where the fist's thumb rests too: find which bone first (c4/posechk2.py SD=r with a pose, or label by bone via
+  c4/posedlabels.mjs, which slide2.py needs at /home/claude/work/). slide2.py read 0 mm for every bone set (its part list is
+  shift3.py's, not the export's numbering: check before trusting it).
+- Next: (4) the GW-4 and Wasp firing fists down under their guards (Claude 5's CE-2 note: middle/ring through the guard; slide2 + fit8
   fire), the flamer firing hand, m4 r 5.2, uzi r 4.6, the pistol's 3.7 mm two-hand floor. Then CD-4.
 - How (cloud): the PC tree tar ("_DELETE ME/claude4-cloud-copy-CD-1d.tgz" + -img- + a delta of files newer than it) into
   /home/claude/gs306; symlinks /home/claude/handfit-work/{hand,gun,c4} -> tools/handfit/*; fpshot step files from

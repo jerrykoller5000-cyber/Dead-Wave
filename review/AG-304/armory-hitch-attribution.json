@@ -1,0 +1,740 @@
+{
+  "label": "baseline",
+  "runs": [
+    {
+      "view": "third",
+      "openTiming": {
+        "t0": 41052.4,
+        "doActionMs": 183.9
+      },
+      "event": {
+        "tBuyStart": 41284.8,
+        "tBought": 41797.2,
+        "tClosed": 41833.3,
+        "buyMs": 512.4,
+        "closeMs": 36.1,
+        "mainPipelinesAtBuy": 347,
+        "gun": "uzi",
+        "open": false
+      },
+      "sample": {
+        "maxGapMs": 833.3,
+        "over50": 4,
+        "over100": 3,
+        "topGaps": [
+          833.3,
+          400,
+          183.4,
+          50.2,
+          50,
+          50,
+          33.6,
+          33.5
+        ],
+        "gapStamps": [
+          {
+            "at": 41448,
+            "gapMs": 183.4
+          },
+          {
+            "at": 41848,
+            "gapMs": 400
+          },
+          {
+            "at": 41881.3,
+            "gapMs": 33.3
+          },
+          {
+            "at": 42714.6,
+            "gapMs": 833.3
+          },
+          {
+            "at": 42814.9,
+            "gapMs": 33.6
+          },
+          {
+            "at": 43231.4,
+            "gapMs": 33.4
+          },
+          {
+            "at": 43481.3,
+            "gapMs": 33.4
+          },
+          {
+            "at": 43997.8,
+            "gapMs": 33.3
+          },
+          {
+            "at": 44447.9,
+            "gapMs": 33.3
+          },
+          {
+            "at": 45098,
+            "gapMs": 50.2
+          },
+          {
+            "at": 45147.8,
+            "gapMs": 33.1
+          },
+          {
+            "at": 45181.3,
+            "gapMs": 33.5
+          },
+          {
+            "at": 45231.3,
+            "gapMs": 50
+          },
+          {
+            "at": 45264.6,
+            "gapMs": 33.3
+          },
+          {
+            "at": 45314.5,
+            "gapMs": 33.2
+          },
+          {
+            "at": 45364.6,
+            "gapMs": 33.4
+          },
+          {
+            "at": 45447.9,
+            "gapMs": 50
+          },
+          {
+            "at": 45731.2,
+            "gapMs": 33.3
+          },
+          {
+            "at": 45781.2,
+            "gapMs": 33.3
+          }
+        ],
+        "mainPipelinesAfter": 347,
+        "frames": 173,
+        "perf": {
+          "fps": 46.990601878783984,
+          "low": 21.459227470555945,
+          "worst": 46.599999994039536,
+          "hitches": 2,
+          "frames": 47
+        },
+        "probeEvents": [
+          {
+            "kind": "canvas.toDataURL",
+            "size": "96x48",
+            "t0": 41338.3,
+            "ms": 242.6
+          },
+          {
+            "kind": "canvas.toDataURL",
+            "size": "96x48",
+            "t0": 41584.3,
+            "ms": 18
+          },
+          {
+            "kind": "canvas.toDataURL",
+            "size": "96x48",
+            "t0": 41607.2,
+            "ms": 2.8
+          },
+          {
+            "kind": "canvas.toDataURL",
+            "size": "96x48",
+            "t0": 41611.7,
+            "ms": 3.1
+          },
+          {
+            "kind": "canvas.toDataURL",
+            "size": "96x48",
+            "t0": 41616.6,
+            "ms": 2.3
+          },
+          {
+            "kind": "canvas.toDataURL",
+            "size": "96x48",
+            "t0": 41620.5,
+            "ms": 2.1
+          },
+          {
+            "kind": "canvas.toDataURL",
+            "size": "96x48",
+            "t0": 41624,
+            "ms": 2.6
+          },
+          {
+            "kind": "canvas.toDataURL",
+            "size": "96x48",
+            "t0": 41628.3,
+            "ms": 2.9
+          },
+          {
+            "kind": "canvas.toDataURL",
+            "size": "96x48",
+            "t0": 41633.3,
+            "ms": 2.3
+          },
+          {
+            "kind": "canvas.toDataURL",
+            "size": "96x48",
+            "t0": 41637.2,
+            "ms": 2.1
+          },
+          {
+            "kind": "canvas.toDataURL",
+            "size": "96x48",
+            "t0": 41644.1,
+            "ms": 2.5
+          },
+          {
+            "kind": "canvas.toDataURL",
+            "size": "96x48",
+            "t0": 41648,
+            "ms": 3
+          },
+          {
+            "kind": "canvas.toDataURL",
+            "size": "96x48",
+            "t0": 41652.8,
+            "ms": 2.8
+          },
+          {
+            "kind": "canvas.toDataURL",
+            "size": "96x48",
+            "t0": 41657.5,
+            "ms": 2.9
+          },
+          {
+            "kind": "canvas.toDataURL",
+            "size": "96x48",
+            "t0": 41661.4,
+            "ms": 2.3
+          },
+          {
+            "kind": "canvas.toDataURL",
+            "size": "96x48",
+            "t0": 41668.4,
+            "ms": 2.9
+          },
+          {
+            "kind": "canvas.toDataURL",
+            "size": "96x48",
+            "t0": 41683,
+            "ms": 2.4
+          },
+          {
+            "kind": "canvas.toDataURL",
+            "size": "96x48",
+            "t0": 41690.2,
+            "ms": 2.4
+          },
+          {
+            "kind": "canvas.toDataURL",
+            "size": "96x48",
+            "t0": 41694.9,
+            "ms": 2.1
+          },
+          {
+            "kind": "canvas.toDataURL",
+            "size": "96x48",
+            "t0": 41699.2,
+            "ms": 2.4
+          },
+          {
+            "kind": "canvas.toDataURL",
+            "size": "96x48",
+            "t0": 41703.3,
+            "ms": 2.1
+          },
+          {
+            "kind": "canvas.toDataURL",
+            "size": "96x48",
+            "t0": 41710.5,
+            "ms": 3.6
+          },
+          {
+            "kind": "canvas.toDataURL",
+            "size": "96x48",
+            "t0": 41720,
+            "ms": 2.4
+          },
+          {
+            "kind": "canvas.toDataURL",
+            "size": "96x48",
+            "t0": 41724.2,
+            "ms": 2.2
+          },
+          {
+            "kind": "canvas.toDataURL",
+            "size": "96x48",
+            "t0": 41728,
+            "ms": 2.3
+          },
+          {
+            "kind": "canvas.toDataURL",
+            "size": "96x48",
+            "t0": 41732.1,
+            "ms": 2.1
+          },
+          {
+            "kind": "canvas.toDataURL",
+            "size": "96x48",
+            "t0": 41739,
+            "ms": 2.3
+          },
+          {
+            "kind": "canvas.toDataURL",
+            "size": "96x48",
+            "t0": 41743.1,
+            "ms": 2.5
+          },
+          {
+            "kind": "canvas.toDataURL",
+            "size": "96x48",
+            "t0": 41747,
+            "ms": 2.2
+          },
+          {
+            "kind": "canvas.toDataURL",
+            "size": "96x48",
+            "t0": 41755.2,
+            "ms": 2.6
+          },
+          {
+            "kind": "canvas.toDataURL",
+            "size": "96x48",
+            "t0": 41759.5,
+            "ms": 2.4
+          },
+          {
+            "kind": "canvas.toDataURL",
+            "size": "96x48",
+            "t0": 41763.8,
+            "ms": 2.4
+          },
+          {
+            "kind": "canvas.toDataURL",
+            "size": "96x48",
+            "t0": 41767.8,
+            "ms": 2.1
+          },
+          {
+            "kind": "canvas.toDataURL",
+            "size": "96x48",
+            "t0": 41786.6,
+            "ms": 2.3
+          },
+          {
+            "kind": "renderer.render",
+            "tag": "main",
+            "t0": 41847,
+            "ms": 12.5,
+            "pDelta": 0,
+            "pTotal": 347
+          },
+          {
+            "kind": "renderer.render",
+            "tag": "main",
+            "t0": 41879.2,
+            "ms": 13.7,
+            "pDelta": 0,
+            "pTotal": 347
+          },
+          {
+            "kind": "renderer.init",
+            "tag": "cifMarine",
+            "t0": 41200.3,
+            "ms": 696.9
+          },
+          {
+            "kind": "renderer.init",
+            "tag": "400x200",
+            "t0": 41238.9,
+            "ms": 658.4
+          },
+          {
+            "kind": "renderer.render",
+            "tag": "400x200",
+            "t0": 42375.6,
+            "ms": 48.5,
+            "pDelta": 3,
+            "pTotal": 3
+          },
+          {
+            "kind": "canvas.toDataURL",
+            "size": "400x200",
+            "t0": 42424.4,
+            "ms": 167.6
+          },
+          {
+            "kind": "renderer.render",
+            "tag": "400x200",
+            "t0": 42598.9,
+            "ms": 2.6,
+            "pDelta": 0,
+            "pTotal": 3
+          },
+          {
+            "kind": "canvas.toDataURL",
+            "size": "400x200",
+            "t0": 42601.8,
+            "ms": 5.4
+          },
+          {
+            "kind": "renderer.render",
+            "tag": "400x200",
+            "t0": 42613,
+            "ms": 1.5,
+            "pDelta": 0,
+            "pTotal": 3
+          },
+          {
+            "kind": "canvas.toDataURL",
+            "size": "400x200",
+            "t0": 42614.8,
+            "ms": 4.8
+          },
+          {
+            "kind": "renderer.render",
+            "tag": "400x200",
+            "t0": 42623.8,
+            "ms": 1.8,
+            "pDelta": 0,
+            "pTotal": 3
+          },
+          {
+            "kind": "canvas.toDataURL",
+            "size": "400x200",
+            "t0": 42625.8,
+            "ms": 4.5
+          },
+          {
+            "kind": "renderer.render",
+            "tag": "400x200",
+            "t0": 42639.2,
+            "ms": 2.5,
+            "pDelta": 0,
+            "pTotal": 3
+          },
+          {
+            "kind": "canvas.toDataURL",
+            "size": "400x200",
+            "t0": 42642,
+            "ms": 6.1
+          },
+          {
+            "kind": "renderer.render",
+            "tag": "400x200",
+            "t0": 42653.3,
+            "ms": 1.6,
+            "pDelta": 0,
+            "pTotal": 3
+          },
+          {
+            "kind": "canvas.toDataURL",
+            "size": "400x200",
+            "t0": 42655.2,
+            "ms": 3.7
+          },
+          {
+            "kind": "renderer.render",
+            "tag": "400x200",
+            "t0": 42666.9,
+            "ms": 2.1,
+            "pDelta": 0,
+            "pTotal": 3
+          },
+          {
+            "kind": "canvas.toDataURL",
+            "size": "400x200",
+            "t0": 42669.3,
+            "ms": 4.4
+          },
+          {
+            "kind": "renderer.render",
+            "tag": "main",
+            "t0": 42906.3,
+            "ms": 12.9,
+            "pDelta": 0,
+            "pTotal": 347
+          },
+          {
+            "kind": "renderer.render",
+            "tag": "main",
+            "t0": 42906,
+            "ms": 15.3,
+            "pDelta": 0,
+            "pTotal": 347
+          },
+          {
+            "kind": "renderer.render",
+            "tag": "main",
+            "t0": 43093.4,
+            "ms": 12.3,
+            "pDelta": 0,
+            "pTotal": 347
+          },
+          {
+            "kind": "renderer.render",
+            "tag": "main",
+            "t0": 43112,
+            "ms": 12.5,
+            "pDelta": 0,
+            "pTotal": 347
+          },
+          {
+            "kind": "renderer.render",
+            "tag": "main",
+            "t0": 43493.5,
+            "ms": 12.2,
+            "pDelta": 0,
+            "pTotal": 347
+          },
+          {
+            "kind": "renderer.render",
+            "tag": "main",
+            "t0": 43870.9,
+            "ms": 13.8,
+            "pDelta": 0,
+            "pTotal": 347
+          },
+          {
+            "kind": "renderer.render",
+            "tag": "main",
+            "t0": 43870.7,
+            "ms": 16.5,
+            "pDelta": 0,
+            "pTotal": 347
+          },
+          {
+            "kind": "renderer.render",
+            "tag": "main",
+            "t0": 44434.4,
+            "ms": 12.6,
+            "pDelta": 0,
+            "pTotal": 347
+          },
+          {
+            "kind": "renderer.render",
+            "tag": "main",
+            "t0": 44490.9,
+            "ms": 12.3,
+            "pDelta": 0,
+            "pTotal": 347
+          },
+          {
+            "kind": "renderer.render",
+            "tag": "main",
+            "t0": 44527.7,
+            "ms": 13,
+            "pDelta": 0,
+            "pTotal": 347
+          },
+          {
+            "kind": "renderer.render",
+            "tag": "main",
+            "t0": 44939.8,
+            "ms": 12.3,
+            "pDelta": 0,
+            "pTotal": 347
+          }
+        ]
+      }
+    },
+    {
+      "view": "first",
+      "openTiming": {
+        "t0": 47098,
+        "doActionMs": 351.4
+      },
+      "event": {
+        "tBuyStart": 48348,
+        "tBought": 48407.3,
+        "tClosed": 48458.4,
+        "buyMs": 59.3,
+        "closeMs": 51.1,
+        "mainPipelinesAtBuy": 348,
+        "gun": "shotgun",
+        "open": false
+      },
+      "sample": {
+        "maxGapMs": 283.4,
+        "over50": 3,
+        "over100": 1,
+        "topGaps": [
+          283.4,
+          66.6,
+          50.1,
+          50,
+          49.9,
+          33.5,
+          33.4,
+          33.4
+        ],
+        "gapStamps": [
+          {
+            "at": 48631.2,
+            "gapMs": 283.4
+          },
+          {
+            "at": 48847.9,
+            "gapMs": 33.5
+          },
+          {
+            "at": 48931.1,
+            "gapMs": 66.6
+          },
+          {
+            "at": 48997.8,
+            "gapMs": 33.4
+          },
+          {
+            "at": 50564.5,
+            "gapMs": 50.1
+          },
+          {
+            "at": 50964.5,
+            "gapMs": 33.4
+          },
+          {
+            "at": 51047.8,
+            "gapMs": 33.4
+          },
+          {
+            "at": 51114.5,
+            "gapMs": 49.9
+          },
+          {
+            "at": 51181.2,
+            "gapMs": 33.4
+          },
+          {
+            "at": 51247.9,
+            "gapMs": 33.4
+          },
+          {
+            "at": 51314.5,
+            "gapMs": 50
+          },
+          {
+            "at": 51397.8,
+            "gapMs": 33.3
+          },
+          {
+            "at": 51464.5,
+            "gapMs": 33.4
+          },
+          {
+            "at": 51681.1,
+            "gapMs": 33.4
+          },
+          {
+            "at": 51747.7,
+            "gapMs": 33.2
+          },
+          {
+            "at": 51797.8,
+            "gapMs": 33.4
+          },
+          {
+            "at": 51897.8,
+            "gapMs": 33.4
+          },
+          {
+            "at": 52481.1,
+            "gapMs": 33.4
+          },
+          {
+            "at": 52564.4,
+            "gapMs": 33.3
+          }
+        ],
+        "mainPipelinesAfter": 348,
+        "frames": 217,
+        "perf": {
+          "fps": 53.368240862267754,
+          "low": 27.548209357344344,
+          "worst": 36.30000001192093,
+          "hitches": 3,
+          "frames": 53
+        },
+        "probeEvents": [
+          {
+            "kind": "renderer.render",
+            "tag": "cifMarine",
+            "t0": 47215.2,
+            "ms": 216.6,
+            "pDelta": 19,
+            "pTotal": 19
+          },
+          {
+            "kind": "renderer.render",
+            "tag": "cifMarine",
+            "t0": 47490.5,
+            "ms": 5.2,
+            "pDelta": 0,
+            "pTotal": 19
+          },
+          {
+            "kind": "renderer.render",
+            "tag": "400x200",
+            "t0": 47505.3,
+            "ms": 1.5,
+            "pDelta": 0,
+            "pTotal": 3
+          },
+          {
+            "kind": "canvas.toDataURL",
+            "size": "400x200",
+            "t0": 47507.1,
+            "ms": 813.7
+          },
+          {
+            "kind": "renderer.render",
+            "tag": "cifMarine",
+            "t0": 48344.6,
+            "ms": 1.3,
+            "pDelta": 0,
+            "pTotal": 19
+          },
+          {
+            "kind": "renderer.render",
+            "tag": "400x200",
+            "t0": 48474.3,
+            "ms": 14.5,
+            "pDelta": 1,
+            "pTotal": 4
+          },
+          {
+            "kind": "canvas.toDataURL",
+            "size": "400x200",
+            "t0": 48489,
+            "ms": 108.3
+          },
+          {
+            "kind": "renderer.render",
+            "tag": "400x200",
+            "t0": 48608.2,
+            "ms": 1.5,
+            "pDelta": 0,
+            "pTotal": 4
+          },
+          {
+            "kind": "canvas.toDataURL",
+            "size": "400x200",
+            "t0": 48610,
+            "ms": 3.9
+          },
+          {
+            "kind": "renderer.render",
+            "tag": "main",
+            "t0": 51187.4,
+            "ms": 13.3,
+            "pDelta": 0,
+            "pTotal": 348
+          }
+        ]
+      }
+    }
+  ],
+  "errors": []
+}

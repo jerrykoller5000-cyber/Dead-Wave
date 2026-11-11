@@ -1250,11 +1250,12 @@ export function makeM240Model(ctx, folded = false) {
   // CU-81: a tripod with a traversing head, and an M240B on its cradle: the receiver and feed cover with its
   // rail, the butt stock and grip, the barrel with its carry handle, gas tube and flash hider, and the belt
   // feeding from an ammo can on the left. The barrel is userData.barrel (not .tube, which the mortar's aim tips).
+  const hub = new THREE.Vector3(0, 0.74, 0);
   for (let i = 0; i < 3; i++) {
     const a = i / 3 * Math.PI * 2;
     const foot = folded ? new THREE.Vector3([-0.035, 0.035, 0][i], 0.66 + (i === 2 ? -0.03 : 0), 0.62)
       : new THREE.Vector3(...[[0, 0.035, 0.5], [-0.42, 0.035, -0.32], [0.42, 0.035, -0.32]][i]);
-    const hub = new THREE.Vector3(0, 0.74, 0), delta = hub.clone().sub(foot), mid = hub.clone().add(foot).multiplyScalar(0.5);
+    const delta = hub.clone().sub(foot), mid = hub.clone().add(foot).multiplyScalar(0.5);
     const l = K.cyl(0.022, 0.028, delta.length(), gunDark, mid.x, mid.y, mid.z, null, 8, 'y');
     l.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), delta.normalize());
     for (const u of [0.23, 0.55, 0.84]) {
@@ -1270,6 +1271,7 @@ export function makeM240Model(ctx, folded = false) {
     if (folded) K.box(0.05, 0.03, 0.06, gunDark, foot.x, foot.y, foot.z, 0, 0, 0, null, 0.006);
     else K.box(0.09, 0.025, 0.075, gunDark, foot.x, 0.022, foot.z, 0, -a, 0, null, 0.006);
   }
+  const foldedLegArt = folded ? g.children.slice() : null;
   K.cyl(0.06, 0.075, 0.12, gunBody, 0, 0.74, 0, null, 14, 'y');
   K.cyl(0.024, 0.024, 0.1, gunDark, 0, 0.82, 0, null, 10, 'y');
   K.cyl(0.037, 0.037, 0.11, gunDark, 0, 0.765, 0, null, 14, 'x');
@@ -1287,10 +1289,18 @@ export function makeM240Model(ctx, folded = false) {
     K.cyl(0.008, 0.008, 0.087, gunAccent, 0, 0.755, -0.21, null, 10, 'x');
   }
   if (folded) {
+    const firstWrap = g.children.length;
     K.box(0.105, 0.016, 0.034, gunOlive, 0, 0.65, 0.46, 0, 0, 0, null, 0.004);
     K.box(0.105, 0.016, 0.034, gunOlive, 0, 0.713, 0.46, 0, 0, 0, null, 0.004);
     for (const sx of [-1, 1]) K.box(0.015, 0.077, 0.034, gunOlive, sx * 0.047, 0.6815, 0.46, 0, 0, 0, null, 0.004);
     K.box(0.032, 0.013, 0.043, gunMid, 0, 0.724, 0.46, 0, 0, 0, null, 0.003);
+    // Pose the bound artwork as a single piece for the shoulder-carry silhouette.
+    // The existing hub remains the contact point with the body.
+    const tucked = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1, 0, 0), -0.10);
+    for (const piece of foldedLegArt.concat(g.children.slice(firstWrap))) {
+      piece.position.sub(hub).applyQuaternion(tucked).add(hub);
+      piece.quaternion.premultiply(tucked);
+    }
   }
   const firstGunPart = g.children.length;   // CL-131: from here on, the parts that elevate
   K.box(0.096, 0.026, 0.25, gunDark, 0, 0.805, 0.077, 0, 0, 0, null, 0.005);

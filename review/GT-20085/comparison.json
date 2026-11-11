@@ -1,0 +1,78 @@
+{
+  "heldBefore": [
+    0.23050000184774433,
+    0.5005694776531305,
+    1.2339999973773954
+  ],
+  "heldAfter": [
+    0.23050000184774433,
+    0.438473775958642,
+    1.2339999973773954
+  ],
+  "localRows": {
+    "placed": 234,
+    "folded": 189
+  },
+  "changedRows": {
+    "placed": [],
+    "folded": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      22,
+      23,
+      24,
+      25,
+      26
+    ]
+  },
+  "shoulderDistances": [
+    0.1725545258310415,
+    0.1694478512413289
+  ],
+  "maxFixedArtworkScreenDriftPixels": {
+    "player": 0.36741520883661793,
+    "side": 0.0,
+    "rear": 0.0
+  },
+  "seating": {
+    "originalPairs": 236,
+    "revisedPairs": 236,
+    "newPairs": 0,
+    "removedPairs": 0,
+    "openSurfaces": 13,
+    "loose": 0,
+    "detailBreaches": 0,
+    "unseated": 0
+  },
+  "inspector": {
+    "m240": {
+      "meshes": 80,
+      "drawables": 80,
+      "tris": 15998,
+      "points": 0,
+      "segments": 0,
+      "materials": 19
+    },
+    "m240-folded": {
+      "meshes": 78,
+      "drawables": 78,
+      "tris": 14190,
+      "points": 0,
+      "segments": 0,
+      "materials": 18
+    }
+  }
+}

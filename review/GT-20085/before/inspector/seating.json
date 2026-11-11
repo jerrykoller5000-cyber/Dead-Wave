@@ -1,0 +1,4261 @@
+{
+  "parts": 189,
+  "openSurfaces": 13,
+  "loose": [],
+  "rawOverlaps": [
+    {
+      "a": "root/CylinderGeometry[1]",
+      "b": "root/CylinderGeometry[0]",
+      "at": [
+        -0.00688,
+        0.72428,
+        0.12181
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[2]",
+      "b": "root/CylinderGeometry[0]",
+      "at": [
+        -0.01808,
+        0.69868,
+        0.32021
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[3]",
+      "b": "root/CylinderGeometry[0]",
+      "at": [
+        -0.02823,
+        0.67548,
+        0.50001
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[4]",
+      "b": "root/CylinderGeometry[0]",
+      "at": [
+        -0.01,
+        0.66,
+        0.62
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[5]",
+      "b": "root/CylinderGeometry[0]",
+      "at": [
+        -0.00456,
+        0.72731,
+        -0.00138
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[5]",
+      "b": "root/CylinderGeometry[1]",
+      "at": [
+        0.00673,
+        0.74512,
+        0.1426
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[5]",
+      "b": "root/CylinderGeometry[2]",
+      "at": [
+        0.00236,
+        0.67709,
+        0.341
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[5]",
+      "b": "root/CylinderGeometry[3]",
+      "at": [
+        0.0022,
+        0.67194,
+        0.51713
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[6]",
+      "b": "root/CylinderGeometry[0]",
+      "at": [
+        -0.01763,
+        0.70152,
+        0.16267
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[6]",
+      "b": "root/CylinderGeometry[1]",
+      "at": [
+        -0.00772,
+        0.69595,
+        0.11897
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[6]",
+      "b": "root/CylinderGeometry[5]",
+      "at": [
+        0.00688,
+        0.72428,
+        0.12181
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[7]",
+      "b": "root/CylinderGeometry[0]",
+      "at": [
+        -0.00877,
+        0.68129,
+        0.31948
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[7]",
+      "b": "root/CylinderGeometry[2]",
+      "at": [
+        -0.00877,
+        0.68129,
+        0.31948
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[7]",
+      "b": "root/CylinderGeometry[5]",
+      "at": [
+        0.01808,
+        0.69868,
+        0.32021
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[8]",
+      "b": "root/CylinderGeometry[0]",
+      "at": [
+        -0.00369,
+        0.67369,
+        0.50158
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[8]",
+      "b": "root/CylinderGeometry[3]",
+      "at": [
+        -0.00043,
+        0.66492,
+        0.52854
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[8]",
+      "b": "root/CylinderGeometry[5]",
+      "at": [
+        0.02823,
+        0.67548,
+        0.50001
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[9]",
+      "b": "root/CylinderGeometry[5]",
+      "at": [
+        0.05824,
+        0.66,
+        0.59176
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[10]",
+      "b": "root/CylinderGeometry[0]",
+      "at": [
+        -0.01252,
+        0.74511,
+        0.00091
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[10]",
+      "b": "root/CylinderGeometry[1]",
+      "at": [
+        0,
+        0.73841,
+        0.1426
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[10]",
+      "b": "root/CylinderGeometry[2]",
+      "at": [
+        0,
+        0.70515,
+        0.341
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[10]",
+      "b": "root/CylinderGeometry[3]",
+      "at": [
+        0,
+        0.67502,
+        0.5208
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[10]",
+      "b": "root/BufferGeometry[4]",
+      "at": [
+        -0.0198,
+        0.64949,
+        0.62346
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[10]",
+      "b": "root/CylinderGeometry[5]",
+      "at": [
+        0.01252,
+        0.74511,
+        0.00091
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[10]",
+      "b": "root/CylinderGeometry[6]",
+      "at": [
+        0,
+        0.73841,
+        0.1426
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[10]",
+      "b": "root/CylinderGeometry[7]",
+      "at": [
+        0,
+        0.70515,
+        0.341
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[10]",
+      "b": "root/CylinderGeometry[8]",
+      "at": [
+        0,
+        0.67502,
+        0.5208
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[10]",
+      "b": "root/BufferGeometry[9]",
+      "at": [
+        0.0198,
+        0.64949,
+        0.62346
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[11]",
+      "b": "root/CylinderGeometry[0]",
+      "at": [
+        -0.02771,
+        0.72679,
+        0.16607
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[11]",
+      "b": "root/CylinderGeometry[1]",
+      "at": [
+        0,
+        0.74988,
+        0.12751
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[11]",
+      "b": "root/CylinderGeometry[5]",
+      "at": [
+        0.016,
+        0.73832,
+        0.16812
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[11]",
+      "b": "root/CylinderGeometry[6]",
+      "at": [
+        0,
+        0.74988,
+        0.12751
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[11]",
+      "b": "root/CylinderGeometry[10]",
+      "at": [
+        0,
+        0.71837,
+        0.12192
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[12]",
+      "b": "root/CylinderGeometry[0]",
+      "at": [
+        -0.032,
+        0.68317,
+        0.32032
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[12]",
+      "b": "root/CylinderGeometry[2]",
+      "at": [
+        0,
+        0.71468,
+        0.32591
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[12]",
+      "b": "root/CylinderGeometry[5]",
+      "at": [
+        0.016,
+        0.71046,
+        0.32516
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[12]",
+      "b": "root/CylinderGeometry[7]",
+      "at": [
+        0,
+        0.71468,
+        0.32591
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[12]",
+      "b": "root/CylinderGeometry[10]",
+      "at": [
+        0,
+        0.68317,
+        0.32032
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[13]",
+      "b": "root/CylinderGeometry[0]",
+      "at": [
+        -0.032,
+        0.65127,
+        0.50012
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[13]",
+      "b": "root/CylinderGeometry[3]",
+      "at": [
+        0,
+        0.68278,
+        0.50571
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[13]",
+      "b": "root/CylinderGeometry[5]",
+      "at": [
+        0.016,
+        0.67856,
+        0.50496
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[13]",
+      "b": "root/CylinderGeometry[8]",
+      "at": [
+        0,
+        0.68278,
+        0.50571
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[13]",
+      "b": "root/CylinderGeometry[10]",
+      "at": [
+        0,
+        0.65127,
+        0.50012
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[14]",
+      "b": "root/CylinderGeometry[0]",
+      "at": [
+        -0.02246,
+        0.64246,
+        0.59254
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[14]",
+      "b": "root/CylinderGeometry[5]",
+      "at": [
+        0.02246,
+        0.64246,
+        0.59254
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[14]",
+      "b": "root/CylinderGeometry[10]",
+      "at": [
+        0.02246,
+        0.64246,
+        0.59254
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[15]",
+      "b": "root/CylinderGeometry[0]",
+      "at": [
+        -0.01085,
+        0.72,
+        0.06752
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[15]",
+      "b": "root/CylinderGeometry[5]",
+      "at": [
+        0.01952,
+        0.72,
+        0.06554
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[15]",
+      "b": "root/CylinderGeometry[10]",
+      "at": [
+        -0.01085,
+        0.72,
+        0.06752
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[16]",
+      "b": "root/CylinderGeometry[15]",
+      "at": [
+        0,
+        0.77,
+        0.024
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[17]",
+      "b": "root/CylinderGeometry[0]",
+      "at": [
+        -0.01833,
+        0.73131,
+        0.01318
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[17]",
+      "b": "root/CylinderGeometry[5]",
+      "at": [
+        -0.01833,
+        0.74036,
+        0.02649
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[17]",
+      "b": "root/CylinderGeometry[10]",
+      "at": [
+        -0.01833,
+        0.73131,
+        0.01318
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[17]",
+      "b": "root/CylinderGeometry[15]",
+      "at": [
+        -0.055,
+        0.74895,
+        -0.03334
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[17]",
+      "b": "root/CylinderGeometry[16]",
+      "at": [
+        -0.01833,
+        0.80107,
+        0.00274
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[18]",
+      "b": "root/CylinderGeometry[15]",
+      "at": [
+        -0.056,
+        0.765,
+        0.022
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[19]",
+      "b": "root/CylinderGeometry[15]",
+      "at": [
+        -0.05567,
+        0.76868,
+        0.01138
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[19]",
+      "b": "root/CylinderGeometry[18]",
+      "at": [
+        -0.058,
+        0.76873,
+        -0.01143
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[20]",
+      "b": "root/CylinderGeometry[15]",
+      "at": [
+        0.056,
+        0.765,
+        0.022
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[21]",
+      "b": "root/CylinderGeometry[15]",
+      "at": [
+        0.06033,
+        0.76868,
+        0.01138
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[21]",
+      "b": "root/CylinderGeometry[20]",
+      "at": [
+        0.058,
+        0.76873,
+        -0.01143
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[22]",
+      "b": "root/CylinderGeometry[0]",
+      "at": [
+        -0.03405,
+        0.65705,
+        0.4651
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[22]",
+      "b": "root/CylinderGeometry[5]",
+      "at": [
+        0.03405,
+        0.65666,
+        0.47038
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[22]",
+      "b": "root/CylinderGeometry[10]",
+      "at": [
+        0,
+        0.65683,
+        0.44417
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[23]",
+      "b": "root/CylinderGeometry[0]",
+      "at": [
+        -0.02566,
+        0.70559,
+        0.46
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[23]",
+      "b": "root/CylinderGeometry[5]",
+      "at": [
+        0.02566,
+        0.70559,
+        0.46
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[24]",
+      "b": "root/CylinderGeometry[0]",
+      "at": [
+        -0.04067,
+        0.6815,
+        0.47583
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[24]",
+      "b": "root/BufferGeometry[22]",
+      "at": [
+        -0.04067,
+        0.64417,
+        0.46
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[24]",
+      "b": "root/BufferGeometry[23]",
+      "at": [
+        -0.04067,
+        0.71883,
+        0.46
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[25]",
+      "b": "root/CylinderGeometry[5]",
+      "at": [
+        0.04067,
+        0.6815,
+        0.44417
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[25]",
+      "b": "root/BufferGeometry[22]",
+      "at": [
+        0.04067,
+        0.64417,
+        0.46
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[25]",
+      "b": "root/BufferGeometry[23]",
+      "at": [
+        0.04067,
+        0.71883,
+        0.46
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[26]",
+      "b": "root/BufferGeometry[23]",
+      "at": [
+        0.01512,
+        0.71838,
+        0.46
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[0]",
+      "b": "root/CylinderGeometry[15]",
+      "at": [
+        0,
+        0.79346,
+        -0.04654
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[0]",
+      "b": "root/CylinderGeometry[16]",
+      "at": [
+        0.0153,
+        0.81681,
+        -0.00514
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[0]",
+      "b": "root/CylinderGeometry[17]",
+      "at": [
+        0.04632,
+        0.79753,
+        -0.00514
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[1]",
+      "b": "root/CylinderGeometry[16]",
+      "at": [
+        0.00214,
+        0.82,
+        0
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[3]",
+      "b": "root/m240-elev[27]/BufferGeometry[2]",
+      "at": [
+        -0.06485,
+        0.86365,
+        0.11365
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[5]",
+      "b": "root/m240-elev[27]/CylinderGeometry[4]",
+      "at": [
+        -0.068,
+        0.88341,
+        -0.18646
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[7]",
+      "b": "root/m240-elev[27]/CylinderGeometry[6]",
+      "at": [
+        -0.068,
+        0.88341,
+        0.15654
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[9]",
+      "b": "root/m240-elev[27]/CylinderGeometry[8]",
+      "at": [
+        -0.068,
+        0.84441,
+        -0.18446
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[11]",
+      "b": "root/m240-elev[27]/CylinderGeometry[10]",
+      "at": [
+        -0.068,
+        0.84441,
+        0.15254
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[13]",
+      "b": "root/m240-elev[27]/CylinderGeometry[12]",
+      "at": [
+        -0.068,
+        0.88241,
+        -0.05046
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[14]",
+      "b": "root/m240-elev[27]/BufferGeometry[2]",
+      "at": [
+        -0.06442,
+        0.88958,
+        -0.14242
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[15]",
+      "b": "root/m240-elev[27]/BufferGeometry[2]",
+      "at": [
+        -0.06442,
+        0.88958,
+        0.13158
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[17]",
+      "b": "root/m240-elev[27]/BufferGeometry[16]",
+      "at": [
+        0.06485,
+        0.86365,
+        -0.04565
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[19]",
+      "b": "root/m240-elev[27]/CylinderGeometry[18]",
+      "at": [
+        0.068,
+        0.88341,
+        -0.18646
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[21]",
+      "b": "root/m240-elev[27]/CylinderGeometry[20]",
+      "at": [
+        0.068,
+        0.88341,
+        0.15654
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[23]",
+      "b": "root/m240-elev[27]/CylinderGeometry[22]",
+      "at": [
+        0.068,
+        0.84441,
+        -0.18446
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[25]",
+      "b": "root/m240-elev[27]/CylinderGeometry[24]",
+      "at": [
+        0.068,
+        0.84441,
+        0.15254
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[27]",
+      "b": "root/m240-elev[27]/CylinderGeometry[26]",
+      "at": [
+        0.068,
+        0.88241,
+        -0.05046
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[28]",
+      "b": "root/m240-elev[27]/BufferGeometry[16]",
+      "at": [
+        0.06442,
+        0.88958,
+        -0.14958
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[29]",
+      "b": "root/m240-elev[27]/BufferGeometry[16]",
+      "at": [
+        0.06442,
+        0.88958,
+        0.12442
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[30]",
+      "b": "root/m240-elev[27]/BufferGeometry[16]",
+      "at": [
+        0.06385,
+        0.88565,
+        0.00535
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[30]",
+      "b": "root/m240-elev[27]/BufferGeometry[17]",
+      "at": [
+        0.068,
+        0.8635,
+        0.052
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[31]",
+      "b": "root/m240-elev[27]/BufferGeometry[16]",
+      "at": [
+        0.06542,
+        0.86458,
+        0.00092
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[31]",
+      "b": "root/m240-elev[27]/BufferGeometry[17]",
+      "at": [
+        0.06529,
+        0.863,
+        0.00079
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[31]",
+      "b": "root/m240-elev[27]/BufferGeometry[30]",
+      "at": [
+        0.06529,
+        0.86471,
+        0.052
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[32]",
+      "b": "root/CylinderGeometry[16]",
+      "at": [
+        0,
+        0.82041,
+        0.01159
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[32]",
+      "b": "root/m240-elev[27]/BufferGeometry[0]",
+      "at": [
+        0.03265,
+        0.81585,
+        0.07815
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[32]",
+      "b": "root/m240-elev[27]/BufferGeometry[1]",
+      "at": [
+        0,
+        0.821,
+        0.045
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[33]",
+      "b": "root/CylinderGeometry[16]",
+      "at": [
+        0,
+        0.81771,
+        0.00679
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[33]",
+      "b": "root/m240-elev[27]/BufferGeometry[0]",
+      "at": [
+        0.03221,
+        0.816,
+        0.01321
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[33]",
+      "b": "root/m240-elev[27]/BufferGeometry[32]",
+      "at": [
+        0.03208,
+        0.81758,
+        0.01308
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-feed-tray[34]/BufferGeometry[0]",
+      "b": "root/m240-elev[27]/BufferGeometry[1]",
+      "at": [
+        0.05165,
+        0.91115,
+        0.13915
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-feed-tray[34]/BufferGeometry[1]",
+      "b": "root/m240-elev[27]/BufferGeometry[1]",
+      "at": [
+        -0.04642,
+        0.91092,
+        0.12458
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-feed-tray[34]/BufferGeometry[1]",
+      "b": "root/m240-elev[27]/m240-feed-tray[34]/BufferGeometry[0]",
+      "at": [
+        -0.04629,
+        0.91079,
+        0.025
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-feed-tray[34]/BufferGeometry[2]",
+      "b": "root/m240-elev[27]/BufferGeometry[1]",
+      "at": [
+        0.05158,
+        0.91092,
+        0.12458
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-feed-tray[34]/BufferGeometry[2]",
+      "b": "root/m240-elev[27]/m240-feed-tray[34]/BufferGeometry[0]",
+      "at": [
+        0.04629,
+        0.91079,
+        0.025
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-feed-tray[34]/BufferGeometry[3]",
+      "b": "root/m240-elev[27]/BufferGeometry[1]",
+      "at": [
+        -0.044,
+        0.914,
+        -0.063
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-feed-tray[34]/BufferGeometry[3]",
+      "b": "root/m240-elev[27]/m240-feed-tray[34]/BufferGeometry[1]",
+      "at": [
+        -0.04815,
+        0.91485,
+        -0.06915
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-feed-cover[35]/BufferGeometry[0]",
+      "b": "root/m240-elev[27]/BufferGeometry[1]",
+      "at": [
+        -0.0425,
+        0.912,
+        0.14
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-feed-cover[35]/BufferGeometry[0]",
+      "b": "root/m240-elev[27]/m240-feed-tray[34]/BufferGeometry[1]",
+      "at": [
+        -0.05055,
+        0.91729,
+        -0.00067
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-feed-cover[35]/BufferGeometry[0]",
+      "b": "root/m240-elev[27]/m240-feed-tray[34]/BufferGeometry[2]",
+      "at": [
+        0.04721,
+        0.91395,
+        -0.00606
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-feed-cover[35]/BufferGeometry[0]",
+      "b": "root/m240-elev[27]/m240-feed-tray[34]/BufferGeometry[3]",
+      "at": [
+        -0.03985,
+        0.92715,
+        -0.05685
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-feed-cover[35]/BufferGeometry[2]",
+      "b": "root/m240-elev[27]/m240-feed-cover[35]/BufferGeometry[0]",
+      "at": [
+        0.02315,
+        0.95085,
+        -0.05385
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-feed-cover[35]/BoxGeometry[3]",
+      "b": "root/m240-elev[27]/m240-feed-cover[35]/BufferGeometry[0]",
+      "at": [
+        0.021,
+        0.95,
+        -0.037
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-feed-cover[35]/BufferGeometry[4]",
+      "b": "root/m240-elev[27]/m240-feed-cover[35]/BufferGeometry[0]",
+      "at": [
+        0,
+        0.95,
+        -0.032
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-feed-cover[35]/BoxGeometry[5]",
+      "b": "root/m240-elev[27]/m240-feed-cover[35]/BufferGeometry[0]",
+      "at": [
+        0.021,
+        0.95,
+        -0.027
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-feed-cover[35]/BufferGeometry[18]",
+      "b": "root/m240-elev[27]/m240-feed-cover[35]/BufferGeometry[0]",
+      "at": [
+        0.00773,
+        0.93673,
+        -0.06127
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/CylinderGeometry[36]",
+      "b": "root/m240-elev[27]/BufferGeometry[1]",
+      "at": [
+        -0.0225,
+        0.91402,
+        0.13405
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/CylinderGeometry[36]",
+      "b": "root/m240-elev[27]/m240-feed-cover[35]/BufferGeometry[0]",
+      "at": [
+        -0.0225,
+        0.92664,
+        0.13867
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-rear-sight-leaf[38]/TorusGeometry[1]",
+      "b": "root/m240-elev[27]/m240-rear-sight-leaf[38]/BufferGeometry[0]",
+      "at": [
+        -0.0035,
+        0.94594,
+        -0.09227
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-rear-sight-leaf[38]/CylinderGeometry[2]",
+      "b": "root/m240-elev[27]/BufferGeometry[37]",
+      "at": [
+        -0.0065,
+        0.9314,
+        -0.1585
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-rear-sight-leaf[38]/CylinderGeometry[2]",
+      "b": "root/m240-elev[27]/m240-rear-sight-leaf[38]/BufferGeometry[0]",
+      "at": [
+        -0.0065,
+        0.9456,
+        -0.1533
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[40]",
+      "b": "root/m240-elev[27]/BufferGeometry[39]",
+      "at": [
+        0.01067,
+        0.81867,
+        -0.42267
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[41]",
+      "b": "root/m240-elev[27]/BufferGeometry[1]",
+      "at": [
+        -0.028,
+        0.83112,
+        -0.17666
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[42]",
+      "b": "root/m240-elev[27]/BufferGeometry[1]",
+      "at": [
+        -0.03404,
+        0.82754,
+        -0.06946
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[42]",
+      "b": "root/m240-elev[27]/BufferGeometry[39]",
+      "at": [
+        0,
+        0.829,
+        -0.246
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[42]",
+      "b": "root/m240-elev[27]/BufferGeometry[41]",
+      "at": [
+        -0.01017,
+        0.829,
+        -0.18667
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/CylinderGeometry[43]",
+      "b": "root/m240-elev[27]/BufferGeometry[1]",
+      "at": [
+        -0.0385,
+        0.821,
+        -0.219
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/CylinderGeometry[43]",
+      "b": "root/m240-elev[27]/BufferGeometry[42]",
+      "at": [
+        -0.01283,
+        0.81433,
+        -0.21136
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/CylinderGeometry[44]",
+      "b": "root/m240-elev[27]/BufferGeometry[41]",
+      "at": [
+        -0.01233,
+        0.784,
+        -0.14527
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/CylinderGeometry[45]",
+      "b": "root/m240-elev[27]/BufferGeometry[41]",
+      "at": [
+        -0.0275,
+        0.783,
+        -0.142
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/CylinderGeometry[45]",
+      "b": "root/m240-elev[27]/CylinderGeometry[44]",
+      "at": [
+        -0.0325,
+        0.783,
+        -0.151
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/CylinderGeometry[46]",
+      "b": "root/m240-elev[27]/CylinderGeometry[44]",
+      "at": [
+        -0.035,
+        0.783,
+        -0.146
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/CylinderGeometry[46]",
+      "b": "root/m240-elev[27]/CylinderGeometry[45]",
+      "at": [
+        -0.031,
+        0.783,
+        -0.146
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/CylinderGeometry[47]",
+      "b": "root/m240-elev[27]/BufferGeometry[41]",
+      "at": [
+        0.0275,
+        0.783,
+        -0.142
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/CylinderGeometry[47]",
+      "b": "root/m240-elev[27]/CylinderGeometry[44]",
+      "at": [
+        0.0275,
+        0.783,
+        -0.151
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/CylinderGeometry[48]",
+      "b": "root/m240-elev[27]/CylinderGeometry[44]",
+      "at": [
+        0.031,
+        0.783,
+        -0.146
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/CylinderGeometry[48]",
+      "b": "root/m240-elev[27]/CylinderGeometry[47]",
+      "at": [
+        0.031,
+        0.783,
+        -0.146
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-charging-handle[49]/BufferGeometry[0]",
+      "b": "root/m240-elev[27]/BufferGeometry[16]",
+      "at": [
+        0.0655,
+        0.852,
+        -0.02
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-charging-handle[49]/BufferGeometry[0]",
+      "b": "root/m240-elev[27]/BufferGeometry[17]",
+      "at": [
+        0.06638,
+        0.86012,
+        -0.02
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-charging-handle[49]/BufferGeometry[0]",
+      "b": "root/m240-elev[27]/BufferGeometry[28]",
+      "at": [
+        0.06677,
+        0.85973,
+        -0.14373
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-charging-handle[49]/CylinderGeometry[1]",
+      "b": "root/m240-elev[27]/m240-charging-handle[49]/BufferGeometry[0]",
+      "at": [
+        0.0735,
+        0.852,
+        0.068
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-charging-handle[49]/CylinderGeometry[2]",
+      "b": "root/m240-elev[27]/m240-charging-handle[49]/CylinderGeometry[1]",
+      "at": [
+        0.1195,
+        0.852,
+        0.06
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[50]",
+      "b": "root/m240-elev[27]/BufferGeometry[41]",
+      "at": [
+        -0.01383,
+        0.78328,
+        -0.13045
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[50]",
+      "b": "root/m240-elev[27]/BufferGeometry[42]",
+      "at": [
+        -0.015,
+        0.816,
+        -0.08096
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[51]",
+      "b": "root/m240-elev[27]/BufferGeometry[1]",
+      "at": [
+        -0.00491,
+        0.82097,
+        -0.10956
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[51]",
+      "b": "root/m240-elev[27]/BufferGeometry[42]",
+      "at": [
+        -0.0055,
+        0.81919,
+        -0.10849
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/CylinderGeometry[73]",
+      "b": "root/m240-elev[27]/BufferGeometry[52]",
+      "at": [
+        0,
+        0.875,
+        0.232
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/CylinderGeometry[73]",
+      "b": "root/m240-elev[27]/BufferGeometry[53]",
+      "at": [
+        0,
+        0.906,
+        0.227
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/CylinderGeometry[74]",
+      "b": "root/m240-elev[27]/BufferGeometry[52]",
+      "at": [
+        0,
+        0.875,
+        0.475
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/CylinderGeometry[74]",
+      "b": "root/m240-elev[27]/BufferGeometry[53]",
+      "at": [
+        0.02192,
+        0.89692,
+        0.467
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[75]",
+      "b": "root/m240-elev[27]/BufferGeometry[1]",
+      "at": [
+        -0.04627,
+        0.88373,
+        0.19577
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[76]",
+      "b": "root/m240-elev[27]/BufferGeometry[75]",
+      "at": [
+        -0.06859,
+        0.87591,
+        0.203
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[77]",
+      "b": "root/m240-elev[27]/BufferGeometry[52]",
+      "at": [
+        0,
+        0.875,
+        0.715
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[78]",
+      "b": "root/m240-elev[27]/BufferGeometry[53]",
+      "at": [
+        0.00581,
+        0.84455,
+        0.24414
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[78]",
+      "b": "root/m240-elev[27]/CylinderGeometry[73]",
+      "at": [
+        0.00433,
+        0.84831,
+        0.226
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[78]",
+      "b": "root/m240-elev[27]/CylinderGeometry[74]",
+      "at": [
+        0.0061,
+        0.84703,
+        0.469
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[79]",
+      "b": "root/m240-elev[27]/BufferGeometry[52]",
+      "at": [
+        0.01746,
+        0.87246,
+        0.59246
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[79]",
+      "b": "root/m240-elev[27]/BufferGeometry[78]",
+      "at": [
+        0,
+        0.82676,
+        0.54676
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/CylinderGeometry[80]",
+      "b": "root/m240-elev[27]/BufferGeometry[79]",
+      "at": [
+        0.01564,
+        0.84747,
+        0.571
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/TorusGeometry[81]",
+      "b": "root/m240-elev[27]/BufferGeometry[52]",
+      "at": [
+        0.00556,
+        0.85937,
+        0.557
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/TorusGeometry[81]",
+      "b": "root/m240-elev[27]/BufferGeometry[79]",
+      "at": [
+        0.01434,
+        0.85298,
+        0.56046
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[82]",
+      "b": "root/m240-elev[27]/BufferGeometry[79]",
+      "at": [
+        -0.01485,
+        0.84215,
+        0.58635
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[82]",
+      "b": "root/m240-elev[27]/CylinderGeometry[80]",
+      "at": [
+        -0.01459,
+        0.84241,
+        0.594
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[83]",
+      "b": "root/m240-elev[27]/BufferGeometry[79]",
+      "at": [
+        0.01485,
+        0.84215,
+        0.58635
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[83]",
+      "b": "root/m240-elev[27]/CylinderGeometry[80]",
+      "at": [
+        0.01485,
+        0.84215,
+        0.58635
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[84]",
+      "b": "root/m240-elev[27]/BufferGeometry[52]",
+      "at": [
+        0.00509,
+        0.89091,
+        0.69509
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-barrel-handle[85]/CylinderGeometry[0]",
+      "b": "root/m240-elev[27]/BufferGeometry[52]",
+      "at": [
+        -0.015,
+        0.87733,
+        0.28137
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-barrel-handle[85]/CylinderGeometry[0]",
+      "b": "root/m240-elev[27]/BufferGeometry[53]",
+      "at": [
+        0.031,
+        0.875,
+        0.26129
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-barrel-handle[85]/CylinderGeometry[0]",
+      "b": "root/m240-elev[27]/BufferGeometry[54]",
+      "at": [
+        0.03875,
+        0.882,
+        0.25588
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-barrel-handle[85]/CylinderGeometry[0]",
+      "b": "root/m240-elev[27]/BufferGeometry[55]",
+      "at": [
+        0.045,
+        0.889,
+        0.268
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-barrel-handle[85]/CylinderGeometry[0]",
+      "b": "root/m240-elev[27]/BoxGeometry[56]",
+      "at": [
+        0.045,
+        0.875,
+        0.282
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-barrel-handle[85]/BufferGeometry[2]",
+      "b": "root/m240-elev[27]/m240-barrel-handle[85]/BufferGeometry[1]",
+      "at": [
+        0.04,
+        0.96112,
+        0.31088
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/CylinderGeometry[86]",
+      "b": "root/m240-elev[27]/BufferGeometry[53]",
+      "at": [
+        0.00122,
+        0.90598,
+        0.26129
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/CylinderGeometry[87]",
+      "b": "root/m240-elev[27]/BufferGeometry[53]",
+      "at": [
+        0.01742,
+        0.90064,
+        0.44986
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[88]",
+      "b": "root/m240-elev[27]/m240-barrel-handle[85]/BufferGeometry[1]",
+      "at": [
+        0.04,
+        0.95979,
+        0.31671
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[88]",
+      "b": "root/m240-elev[27]/m240-barrel-handle[85]/BufferGeometry[2]",
+      "at": [
+        0.04858,
+        0.95992,
+        0.31658
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[89]",
+      "b": "root/m240-elev[27]/m240-barrel-handle[85]/BufferGeometry[1]",
+      "at": [
+        0.04,
+        0.95979,
+        0.33571
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[89]",
+      "b": "root/m240-elev[27]/m240-barrel-handle[85]/BufferGeometry[2]",
+      "at": [
+        0.04858,
+        0.95992,
+        0.33558
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[90]",
+      "b": "root/m240-elev[27]/m240-barrel-handle[85]/BufferGeometry[1]",
+      "at": [
+        0.04,
+        0.95979,
+        0.35471
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[90]",
+      "b": "root/m240-elev[27]/m240-barrel-handle[85]/BufferGeometry[2]",
+      "at": [
+        0.04858,
+        0.95992,
+        0.35458
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[91]",
+      "b": "root/m240-elev[27]/m240-barrel-handle[85]/BufferGeometry[1]",
+      "at": [
+        0.04,
+        0.95979,
+        0.37371
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[91]",
+      "b": "root/m240-elev[27]/m240-barrel-handle[85]/BufferGeometry[2]",
+      "at": [
+        0.04858,
+        0.95992,
+        0.37358
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[92]",
+      "b": "root/m240-elev[27]/m240-barrel-handle[85]/BufferGeometry[1]",
+      "at": [
+        0.04,
+        0.95979,
+        0.39271
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[92]",
+      "b": "root/m240-elev[27]/m240-barrel-handle[85]/BufferGeometry[2]",
+      "at": [
+        0.04858,
+        0.95992,
+        0.39258
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[93]",
+      "b": "root/m240-elev[27]/m240-barrel-handle[85]/BufferGeometry[1]",
+      "at": [
+        0.04,
+        0.95979,
+        0.41171
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[93]",
+      "b": "root/m240-elev[27]/m240-barrel-handle[85]/BufferGeometry[2]",
+      "at": [
+        0.04858,
+        0.95992,
+        0.40642
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-bipod-folded[94]/CylinderGeometry[0]",
+      "b": "root/m240-elev[27]/BufferGeometry[78]",
+      "at": [
+        -0.01117,
+        0.8306,
+        0.45445
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-bipod-folded[94]/CylinderGeometry[1]",
+      "b": "root/m240-elev[27]/m240-bipod-folded[94]/CylinderGeometry[0]",
+      "at": [
+        -0.025,
+        0.792,
+        0.4695
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-bipod-folded[94]/BufferGeometry[2]",
+      "b": "root/m240-elev[27]/m240-bipod-folded[94]/CylinderGeometry[1]",
+      "at": [
+        -0.025,
+        0.80512,
+        0.25212
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-bipod-folded[94]/CylinderGeometry[3]",
+      "b": "root/m240-elev[27]/m240-bipod-folded[94]/CylinderGeometry[0]",
+      "at": [
+        0.025,
+        0.792,
+        0.4695
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-bipod-folded[94]/BufferGeometry[4]",
+      "b": "root/m240-elev[27]/m240-bipod-folded[94]/CylinderGeometry[3]",
+      "at": [
+        0.025,
+        0.80512,
+        0.25212
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/sideRailClamp[0]",
+      "b": "root/m240-elev[27]/BufferGeometry[63]",
+      "at": [
+        0.0466,
+        0.87475,
+        0.36965
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/sideRailClamp[0]",
+      "b": "root/m240-elev[27]/BufferGeometry[65]",
+      "at": [
+        0.0466,
+        0.878,
+        0.39788
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/sideRailClamp[0]",
+      "b": "root/m240-elev[27]/BufferGeometry[67]",
+      "at": [
+        0.0466,
+        0.87561,
+        0.4205
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/sideRailClamp[0]",
+      "b": "root/m240-elev[27]/BufferGeometry[69]",
+      "at": [
+        0.0466,
+        0.88666,
+        0.4465
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/sideRailClamp[0]",
+      "b": "root/m240-elev[27]/BufferGeometry[71]",
+      "at": [
+        0.0596,
+        0.878,
+        0.42612
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/clampScrew[1]",
+      "b": "root/m240-elev[27]/BufferGeometry[65]",
+      "at": [
+        0.04771,
+        0.87874,
+        0.398
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/clampScrew[1]",
+      "b": "root/m240-elev[27]/BufferGeometry[71]",
+      "at": [
+        0.055,
+        0.86959,
+        0.398
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/clampScrew[1]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/sideRailClamp[0]",
+      "at": [
+        0.0524,
+        0.869,
+        0.398
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/clampScrew[2]",
+      "b": "root/m240-elev[27]/BufferGeometry[69]",
+      "at": [
+        0.04771,
+        0.87874,
+        0.444
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/clampScrew[2]",
+      "b": "root/m240-elev[27]/BufferGeometry[71]",
+      "at": [
+        0.055,
+        0.86959,
+        0.444
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/clampScrew[2]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/sideRailClamp[0]",
+      "at": [
+        0.0524,
+        0.869,
+        0.444
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/moduleShell[3]",
+      "b": "root/m240-elev[27]/BufferGeometry[71]",
+      "at": [
+        0.058,
+        0.875,
+        0.42
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/moduleShell[3]",
+      "b": "root/m240-elev[27]/BufferGeometry[72]",
+      "at": [
+        0.11773,
+        0.87973,
+        0.37273
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/moduleShell[3]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/sideRailClamp[0]",
+      "at": [
+        0.058,
+        0.8825,
+        0.40167
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/coverSeam[4]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/moduleShell[3]",
+      "at": [
+        0.1266,
+        0.8957,
+        0.4651
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/lightBezelWall[5]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/moduleShell[3]",
+      "at": [
+        0.0776,
+        0.85774,
+        0.4735
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/laserBezelWall[10]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/moduleShell[3]",
+      "at": [
+        0.1105,
+        0.86699,
+        0.4735
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/modeDial[15]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/moduleShell[3]",
+      "at": [
+        0.079,
+        0.89065,
+        0.4031
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/modeDial[15]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/coverSeam[4]",
+      "at": [
+        0.079,
+        0.89065,
+        0.4031
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/modeDial[16]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/moduleShell[3]",
+      "at": [
+        0.1077,
+        0.89065,
+        0.4031
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/modeDial[16]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/coverSeam[4]",
+      "at": [
+        0.1077,
+        0.89065,
+        0.4031
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/topPlate[17]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/moduleShell[3]",
+      "at": [
+        0.11365,
+        0.89645,
+        0.45355
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/blankDataPlate[18]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/moduleShell[3]",
+      "at": [
+        0.1272,
+        0.8838,
+        0.38315
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/selectorDial[19]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/moduleShell[3]",
+      "at": [
+        0.081,
+        0.8965,
+        0.4204
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/selectorDial[19]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/modeDial[15]",
+      "at": [
+        0.081,
+        0.9045,
+        0.4024
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/selectorDial[19]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/modeDial[16]",
+      "at": [
+        0.09854,
+        0.90183,
+        0.4001
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/selectorDial[19]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/topPlate[17]",
+      "at": [
+        0.081,
+        0.89795,
+        0.4204
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/selectorBar[20]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/modeDial[15]",
+      "at": [
+        0.07617,
+        0.907,
+        0.40173
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/selectorBar[20]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/selectorDial[19]",
+      "at": [
+        0.0955,
+        0.904,
+        0.4044
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/adjusterDial[21]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/moduleShell[3]",
+      "at": [
+        0.1147,
+        0.8965,
+        0.395
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/lightHead[22]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/lightBezelWall[5]",
+      "at": [
+        0.0776,
+        0.85774,
+        0.4775
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/lightHead[22]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/lightBezel[6]",
+      "at": [
+        0.08995,
+        0.875,
+        0.4776
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/lightBezelSeat[25]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/lightHead[22]",
+      "at": [
+        0.0916,
+        0.8696,
+        0.4976
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/lightCavity[26]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/lightHead[22]",
+      "at": [
+        0.0776,
+        0.8556,
+        0.498
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/lightLens[27]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/lightHead[22]",
+      "at": [
+        0.0776,
+        0.85686,
+        0.4987
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/laserHousing[28]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/laserBezelWall[10]",
+      "at": [
+        0.11812,
+        0.87252,
+        0.4775
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/laserHousing[28]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/laserBezel[11]",
+      "at": [
+        0.11623,
+        0.875,
+        0.4776
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/laserBezelWall[29]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/laserHousing[28]",
+      "at": [
+        0.1098,
+        0.87306,
+        0.4945
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/laserBezelSeat[31]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/laserHousing[28]",
+      "at": [
+        0.1168,
+        0.88265,
+        0.4966
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/laserCavity[32]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/laserHousing[28]",
+      "at": [
+        0.1098,
+        0.87565,
+        0.4962
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/lanyardLoop[34]",
+      "b": "root/m240-elev[27]/BufferGeometry[72]",
+      "at": [
+        0.1093,
+        0.87717,
+        0.3612
+      ]
+    }
+  ],
+  "overlaps": [
+    {
+      "a": "root/CylinderGeometry[1]",
+      "b": "root/CylinderGeometry[0]",
+      "at": [
+        -0.00688,
+        0.72428,
+        0.12181
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[2]",
+      "b": "root/CylinderGeometry[0]",
+      "at": [
+        -0.01808,
+        0.69868,
+        0.32021
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[3]",
+      "b": "root/CylinderGeometry[0]",
+      "at": [
+        -0.02823,
+        0.67548,
+        0.50001
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[4]",
+      "b": "root/CylinderGeometry[0]",
+      "at": [
+        -0.01,
+        0.66,
+        0.62
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[5]",
+      "b": "root/CylinderGeometry[0]",
+      "at": [
+        -0.00456,
+        0.72731,
+        -0.00138
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[5]",
+      "b": "root/CylinderGeometry[1]",
+      "at": [
+        0.00673,
+        0.74512,
+        0.1426
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[5]",
+      "b": "root/CylinderGeometry[2]",
+      "at": [
+        0.00236,
+        0.67709,
+        0.341
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[5]",
+      "b": "root/CylinderGeometry[3]",
+      "at": [
+        0.0022,
+        0.67194,
+        0.51713
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[6]",
+      "b": "root/CylinderGeometry[0]",
+      "at": [
+        -0.01763,
+        0.70152,
+        0.16267
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[6]",
+      "b": "root/CylinderGeometry[1]",
+      "at": [
+        -0.00772,
+        0.69595,
+        0.11897
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[6]",
+      "b": "root/CylinderGeometry[5]",
+      "at": [
+        0.00688,
+        0.72428,
+        0.12181
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[7]",
+      "b": "root/CylinderGeometry[0]",
+      "at": [
+        -0.00877,
+        0.68129,
+        0.31948
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[7]",
+      "b": "root/CylinderGeometry[2]",
+      "at": [
+        -0.00877,
+        0.68129,
+        0.31948
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[7]",
+      "b": "root/CylinderGeometry[5]",
+      "at": [
+        0.01808,
+        0.69868,
+        0.32021
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[8]",
+      "b": "root/CylinderGeometry[0]",
+      "at": [
+        -0.00369,
+        0.67369,
+        0.50158
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[8]",
+      "b": "root/CylinderGeometry[3]",
+      "at": [
+        -0.00043,
+        0.66492,
+        0.52854
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[8]",
+      "b": "root/CylinderGeometry[5]",
+      "at": [
+        0.02823,
+        0.67548,
+        0.50001
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[9]",
+      "b": "root/CylinderGeometry[5]",
+      "at": [
+        0.05824,
+        0.66,
+        0.59176
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[10]",
+      "b": "root/CylinderGeometry[0]",
+      "at": [
+        -0.01252,
+        0.74511,
+        0.00091
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[10]",
+      "b": "root/CylinderGeometry[1]",
+      "at": [
+        0,
+        0.73841,
+        0.1426
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[10]",
+      "b": "root/CylinderGeometry[2]",
+      "at": [
+        0,
+        0.70515,
+        0.341
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[10]",
+      "b": "root/CylinderGeometry[3]",
+      "at": [
+        0,
+        0.67502,
+        0.5208
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[10]",
+      "b": "root/BufferGeometry[4]",
+      "at": [
+        -0.0198,
+        0.64949,
+        0.62346
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[10]",
+      "b": "root/CylinderGeometry[5]",
+      "at": [
+        0.01252,
+        0.74511,
+        0.00091
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[10]",
+      "b": "root/CylinderGeometry[6]",
+      "at": [
+        0,
+        0.73841,
+        0.1426
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[10]",
+      "b": "root/CylinderGeometry[7]",
+      "at": [
+        0,
+        0.70515,
+        0.341
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[10]",
+      "b": "root/CylinderGeometry[8]",
+      "at": [
+        0,
+        0.67502,
+        0.5208
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[10]",
+      "b": "root/BufferGeometry[9]",
+      "at": [
+        0.0198,
+        0.64949,
+        0.62346
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[11]",
+      "b": "root/CylinderGeometry[0]",
+      "at": [
+        -0.02771,
+        0.72679,
+        0.16607
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[11]",
+      "b": "root/CylinderGeometry[1]",
+      "at": [
+        0,
+        0.74988,
+        0.12751
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[11]",
+      "b": "root/CylinderGeometry[5]",
+      "at": [
+        0.016,
+        0.73832,
+        0.16812
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[11]",
+      "b": "root/CylinderGeometry[6]",
+      "at": [
+        0,
+        0.74988,
+        0.12751
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[11]",
+      "b": "root/CylinderGeometry[10]",
+      "at": [
+        0,
+        0.71837,
+        0.12192
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[12]",
+      "b": "root/CylinderGeometry[0]",
+      "at": [
+        -0.032,
+        0.68317,
+        0.32032
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[12]",
+      "b": "root/CylinderGeometry[2]",
+      "at": [
+        0,
+        0.71468,
+        0.32591
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[12]",
+      "b": "root/CylinderGeometry[5]",
+      "at": [
+        0.016,
+        0.71046,
+        0.32516
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[12]",
+      "b": "root/CylinderGeometry[7]",
+      "at": [
+        0,
+        0.71468,
+        0.32591
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[12]",
+      "b": "root/CylinderGeometry[10]",
+      "at": [
+        0,
+        0.68317,
+        0.32032
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[13]",
+      "b": "root/CylinderGeometry[0]",
+      "at": [
+        -0.032,
+        0.65127,
+        0.50012
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[13]",
+      "b": "root/CylinderGeometry[3]",
+      "at": [
+        0,
+        0.68278,
+        0.50571
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[13]",
+      "b": "root/CylinderGeometry[5]",
+      "at": [
+        0.016,
+        0.67856,
+        0.50496
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[13]",
+      "b": "root/CylinderGeometry[8]",
+      "at": [
+        0,
+        0.68278,
+        0.50571
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[13]",
+      "b": "root/CylinderGeometry[10]",
+      "at": [
+        0,
+        0.65127,
+        0.50012
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[14]",
+      "b": "root/CylinderGeometry[0]",
+      "at": [
+        -0.02246,
+        0.64246,
+        0.59254
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[14]",
+      "b": "root/CylinderGeometry[5]",
+      "at": [
+        0.02246,
+        0.64246,
+        0.59254
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[14]",
+      "b": "root/CylinderGeometry[10]",
+      "at": [
+        0.02246,
+        0.64246,
+        0.59254
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[15]",
+      "b": "root/CylinderGeometry[0]",
+      "at": [
+        -0.01085,
+        0.72,
+        0.06752
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[15]",
+      "b": "root/CylinderGeometry[5]",
+      "at": [
+        0.01952,
+        0.72,
+        0.06554
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[15]",
+      "b": "root/CylinderGeometry[10]",
+      "at": [
+        -0.01085,
+        0.72,
+        0.06752
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[16]",
+      "b": "root/CylinderGeometry[15]",
+      "at": [
+        0,
+        0.77,
+        0.024
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[17]",
+      "b": "root/CylinderGeometry[0]",
+      "at": [
+        -0.01833,
+        0.73131,
+        0.01318
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[17]",
+      "b": "root/CylinderGeometry[5]",
+      "at": [
+        -0.01833,
+        0.74036,
+        0.02649
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[17]",
+      "b": "root/CylinderGeometry[10]",
+      "at": [
+        -0.01833,
+        0.73131,
+        0.01318
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[17]",
+      "b": "root/CylinderGeometry[15]",
+      "at": [
+        -0.055,
+        0.74895,
+        -0.03334
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[17]",
+      "b": "root/CylinderGeometry[16]",
+      "at": [
+        -0.01833,
+        0.80107,
+        0.00274
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[18]",
+      "b": "root/CylinderGeometry[15]",
+      "at": [
+        -0.056,
+        0.765,
+        0.022
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[19]",
+      "b": "root/CylinderGeometry[15]",
+      "at": [
+        -0.05567,
+        0.76868,
+        0.01138
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[19]",
+      "b": "root/CylinderGeometry[18]",
+      "at": [
+        -0.058,
+        0.76873,
+        -0.01143
+      ]
+    },
+    {
+      "a": "root/CylinderGeometry[20]",
+      "b": "root/CylinderGeometry[15]",
+      "at": [
+        0.056,
+        0.765,
+        0.022
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[21]",
+      "b": "root/CylinderGeometry[15]",
+      "at": [
+        0.06033,
+        0.76868,
+        0.01138
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[21]",
+      "b": "root/CylinderGeometry[20]",
+      "at": [
+        0.058,
+        0.76873,
+        -0.01143
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[22]",
+      "b": "root/CylinderGeometry[0]",
+      "at": [
+        -0.03405,
+        0.65705,
+        0.4651
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[22]",
+      "b": "root/CylinderGeometry[5]",
+      "at": [
+        0.03405,
+        0.65666,
+        0.47038
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[22]",
+      "b": "root/CylinderGeometry[10]",
+      "at": [
+        0,
+        0.65683,
+        0.44417
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[23]",
+      "b": "root/CylinderGeometry[0]",
+      "at": [
+        -0.02566,
+        0.70559,
+        0.46
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[23]",
+      "b": "root/CylinderGeometry[5]",
+      "at": [
+        0.02566,
+        0.70559,
+        0.46
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[24]",
+      "b": "root/CylinderGeometry[0]",
+      "at": [
+        -0.04067,
+        0.6815,
+        0.47583
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[24]",
+      "b": "root/BufferGeometry[22]",
+      "at": [
+        -0.04067,
+        0.64417,
+        0.46
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[24]",
+      "b": "root/BufferGeometry[23]",
+      "at": [
+        -0.04067,
+        0.71883,
+        0.46
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[25]",
+      "b": "root/CylinderGeometry[5]",
+      "at": [
+        0.04067,
+        0.6815,
+        0.44417
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[25]",
+      "b": "root/BufferGeometry[22]",
+      "at": [
+        0.04067,
+        0.64417,
+        0.46
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[25]",
+      "b": "root/BufferGeometry[23]",
+      "at": [
+        0.04067,
+        0.71883,
+        0.46
+      ]
+    },
+    {
+      "a": "root/BufferGeometry[26]",
+      "b": "root/BufferGeometry[23]",
+      "at": [
+        0.01512,
+        0.71838,
+        0.46
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[0]",
+      "b": "root/CylinderGeometry[15]",
+      "at": [
+        0,
+        0.79346,
+        -0.04654
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[0]",
+      "b": "root/CylinderGeometry[16]",
+      "at": [
+        0.0153,
+        0.81681,
+        -0.00514
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[0]",
+      "b": "root/CylinderGeometry[17]",
+      "at": [
+        0.04632,
+        0.79753,
+        -0.00514
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[1]",
+      "b": "root/CylinderGeometry[16]",
+      "at": [
+        0.00214,
+        0.82,
+        0
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[3]",
+      "b": "root/m240-elev[27]/BufferGeometry[2]",
+      "at": [
+        -0.06485,
+        0.86365,
+        0.11365
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[5]",
+      "b": "root/m240-elev[27]/CylinderGeometry[4]",
+      "at": [
+        -0.068,
+        0.88341,
+        -0.18646
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[7]",
+      "b": "root/m240-elev[27]/CylinderGeometry[6]",
+      "at": [
+        -0.068,
+        0.88341,
+        0.15654
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[9]",
+      "b": "root/m240-elev[27]/CylinderGeometry[8]",
+      "at": [
+        -0.068,
+        0.84441,
+        -0.18446
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[11]",
+      "b": "root/m240-elev[27]/CylinderGeometry[10]",
+      "at": [
+        -0.068,
+        0.84441,
+        0.15254
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[13]",
+      "b": "root/m240-elev[27]/CylinderGeometry[12]",
+      "at": [
+        -0.068,
+        0.88241,
+        -0.05046
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[14]",
+      "b": "root/m240-elev[27]/BufferGeometry[2]",
+      "at": [
+        -0.06442,
+        0.88958,
+        -0.14242
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[15]",
+      "b": "root/m240-elev[27]/BufferGeometry[2]",
+      "at": [
+        -0.06442,
+        0.88958,
+        0.13158
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[17]",
+      "b": "root/m240-elev[27]/BufferGeometry[16]",
+      "at": [
+        0.06485,
+        0.86365,
+        -0.04565
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[19]",
+      "b": "root/m240-elev[27]/CylinderGeometry[18]",
+      "at": [
+        0.068,
+        0.88341,
+        -0.18646
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[21]",
+      "b": "root/m240-elev[27]/CylinderGeometry[20]",
+      "at": [
+        0.068,
+        0.88341,
+        0.15654
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[23]",
+      "b": "root/m240-elev[27]/CylinderGeometry[22]",
+      "at": [
+        0.068,
+        0.84441,
+        -0.18446
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[25]",
+      "b": "root/m240-elev[27]/CylinderGeometry[24]",
+      "at": [
+        0.068,
+        0.84441,
+        0.15254
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[27]",
+      "b": "root/m240-elev[27]/CylinderGeometry[26]",
+      "at": [
+        0.068,
+        0.88241,
+        -0.05046
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[28]",
+      "b": "root/m240-elev[27]/BufferGeometry[16]",
+      "at": [
+        0.06442,
+        0.88958,
+        -0.14958
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[29]",
+      "b": "root/m240-elev[27]/BufferGeometry[16]",
+      "at": [
+        0.06442,
+        0.88958,
+        0.12442
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[30]",
+      "b": "root/m240-elev[27]/BufferGeometry[16]",
+      "at": [
+        0.06385,
+        0.88565,
+        0.00535
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[30]",
+      "b": "root/m240-elev[27]/BufferGeometry[17]",
+      "at": [
+        0.068,
+        0.8635,
+        0.052
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[31]",
+      "b": "root/m240-elev[27]/BufferGeometry[16]",
+      "at": [
+        0.06542,
+        0.86458,
+        0.00092
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[31]",
+      "b": "root/m240-elev[27]/BufferGeometry[17]",
+      "at": [
+        0.06529,
+        0.863,
+        0.00079
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[31]",
+      "b": "root/m240-elev[27]/BufferGeometry[30]",
+      "at": [
+        0.06529,
+        0.86471,
+        0.052
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[32]",
+      "b": "root/CylinderGeometry[16]",
+      "at": [
+        0,
+        0.82041,
+        0.01159
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[32]",
+      "b": "root/m240-elev[27]/BufferGeometry[0]",
+      "at": [
+        0.03265,
+        0.81585,
+        0.07815
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[32]",
+      "b": "root/m240-elev[27]/BufferGeometry[1]",
+      "at": [
+        0,
+        0.821,
+        0.045
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[33]",
+      "b": "root/CylinderGeometry[16]",
+      "at": [
+        0,
+        0.81771,
+        0.00679
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[33]",
+      "b": "root/m240-elev[27]/BufferGeometry[0]",
+      "at": [
+        0.03221,
+        0.816,
+        0.01321
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[33]",
+      "b": "root/m240-elev[27]/BufferGeometry[32]",
+      "at": [
+        0.03208,
+        0.81758,
+        0.01308
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-feed-tray[34]/BufferGeometry[0]",
+      "b": "root/m240-elev[27]/BufferGeometry[1]",
+      "at": [
+        0.05165,
+        0.91115,
+        0.13915
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-feed-tray[34]/BufferGeometry[1]",
+      "b": "root/m240-elev[27]/BufferGeometry[1]",
+      "at": [
+        -0.04642,
+        0.91092,
+        0.12458
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-feed-tray[34]/BufferGeometry[1]",
+      "b": "root/m240-elev[27]/m240-feed-tray[34]/BufferGeometry[0]",
+      "at": [
+        -0.04629,
+        0.91079,
+        0.025
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-feed-tray[34]/BufferGeometry[2]",
+      "b": "root/m240-elev[27]/BufferGeometry[1]",
+      "at": [
+        0.05158,
+        0.91092,
+        0.12458
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-feed-tray[34]/BufferGeometry[2]",
+      "b": "root/m240-elev[27]/m240-feed-tray[34]/BufferGeometry[0]",
+      "at": [
+        0.04629,
+        0.91079,
+        0.025
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-feed-tray[34]/BufferGeometry[3]",
+      "b": "root/m240-elev[27]/BufferGeometry[1]",
+      "at": [
+        -0.044,
+        0.914,
+        -0.063
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-feed-tray[34]/BufferGeometry[3]",
+      "b": "root/m240-elev[27]/m240-feed-tray[34]/BufferGeometry[1]",
+      "at": [
+        -0.04815,
+        0.91485,
+        -0.06915
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-feed-cover[35]/BufferGeometry[0]",
+      "b": "root/m240-elev[27]/BufferGeometry[1]",
+      "at": [
+        -0.0425,
+        0.912,
+        0.14
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-feed-cover[35]/BufferGeometry[0]",
+      "b": "root/m240-elev[27]/m240-feed-tray[34]/BufferGeometry[1]",
+      "at": [
+        -0.05055,
+        0.91729,
+        -0.00067
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-feed-cover[35]/BufferGeometry[0]",
+      "b": "root/m240-elev[27]/m240-feed-tray[34]/BufferGeometry[2]",
+      "at": [
+        0.04721,
+        0.91395,
+        -0.00606
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-feed-cover[35]/BufferGeometry[0]",
+      "b": "root/m240-elev[27]/m240-feed-tray[34]/BufferGeometry[3]",
+      "at": [
+        -0.03985,
+        0.92715,
+        -0.05685
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-feed-cover[35]/BufferGeometry[2]",
+      "b": "root/m240-elev[27]/m240-feed-cover[35]/BufferGeometry[0]",
+      "at": [
+        0.02315,
+        0.95085,
+        -0.05385
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-feed-cover[35]/BoxGeometry[3]",
+      "b": "root/m240-elev[27]/m240-feed-cover[35]/BufferGeometry[0]",
+      "at": [
+        0.021,
+        0.95,
+        -0.037
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-feed-cover[35]/BufferGeometry[4]",
+      "b": "root/m240-elev[27]/m240-feed-cover[35]/BufferGeometry[0]",
+      "at": [
+        0,
+        0.95,
+        -0.032
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-feed-cover[35]/BoxGeometry[5]",
+      "b": "root/m240-elev[27]/m240-feed-cover[35]/BufferGeometry[0]",
+      "at": [
+        0.021,
+        0.95,
+        -0.027
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-feed-cover[35]/BufferGeometry[18]",
+      "b": "root/m240-elev[27]/m240-feed-cover[35]/BufferGeometry[0]",
+      "at": [
+        0.00773,
+        0.93673,
+        -0.06127
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/CylinderGeometry[36]",
+      "b": "root/m240-elev[27]/BufferGeometry[1]",
+      "at": [
+        -0.0225,
+        0.91402,
+        0.13405
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/CylinderGeometry[36]",
+      "b": "root/m240-elev[27]/m240-feed-cover[35]/BufferGeometry[0]",
+      "at": [
+        -0.0225,
+        0.92664,
+        0.13867
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-rear-sight-leaf[38]/TorusGeometry[1]",
+      "b": "root/m240-elev[27]/m240-rear-sight-leaf[38]/BufferGeometry[0]",
+      "at": [
+        -0.0035,
+        0.94594,
+        -0.09227
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-rear-sight-leaf[38]/CylinderGeometry[2]",
+      "b": "root/m240-elev[27]/BufferGeometry[37]",
+      "at": [
+        -0.0065,
+        0.9314,
+        -0.1585
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-rear-sight-leaf[38]/CylinderGeometry[2]",
+      "b": "root/m240-elev[27]/m240-rear-sight-leaf[38]/BufferGeometry[0]",
+      "at": [
+        -0.0065,
+        0.9456,
+        -0.1533
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[40]",
+      "b": "root/m240-elev[27]/BufferGeometry[39]",
+      "at": [
+        0.01067,
+        0.81867,
+        -0.42267
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[41]",
+      "b": "root/m240-elev[27]/BufferGeometry[1]",
+      "at": [
+        -0.028,
+        0.83112,
+        -0.17666
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[42]",
+      "b": "root/m240-elev[27]/BufferGeometry[1]",
+      "at": [
+        -0.03404,
+        0.82754,
+        -0.06946
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[42]",
+      "b": "root/m240-elev[27]/BufferGeometry[39]",
+      "at": [
+        0,
+        0.829,
+        -0.246
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[42]",
+      "b": "root/m240-elev[27]/BufferGeometry[41]",
+      "at": [
+        -0.01017,
+        0.829,
+        -0.18667
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/CylinderGeometry[43]",
+      "b": "root/m240-elev[27]/BufferGeometry[1]",
+      "at": [
+        -0.0385,
+        0.821,
+        -0.219
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/CylinderGeometry[43]",
+      "b": "root/m240-elev[27]/BufferGeometry[42]",
+      "at": [
+        -0.01283,
+        0.81433,
+        -0.21136
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/CylinderGeometry[44]",
+      "b": "root/m240-elev[27]/BufferGeometry[41]",
+      "at": [
+        -0.01233,
+        0.784,
+        -0.14527
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/CylinderGeometry[45]",
+      "b": "root/m240-elev[27]/BufferGeometry[41]",
+      "at": [
+        -0.0275,
+        0.783,
+        -0.142
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/CylinderGeometry[45]",
+      "b": "root/m240-elev[27]/CylinderGeometry[44]",
+      "at": [
+        -0.0325,
+        0.783,
+        -0.151
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/CylinderGeometry[46]",
+      "b": "root/m240-elev[27]/CylinderGeometry[44]",
+      "at": [
+        -0.035,
+        0.783,
+        -0.146
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/CylinderGeometry[46]",
+      "b": "root/m240-elev[27]/CylinderGeometry[45]",
+      "at": [
+        -0.031,
+        0.783,
+        -0.146
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/CylinderGeometry[47]",
+      "b": "root/m240-elev[27]/BufferGeometry[41]",
+      "at": [
+        0.0275,
+        0.783,
+        -0.142
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/CylinderGeometry[47]",
+      "b": "root/m240-elev[27]/CylinderGeometry[44]",
+      "at": [
+        0.0275,
+        0.783,
+        -0.151
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/CylinderGeometry[48]",
+      "b": "root/m240-elev[27]/CylinderGeometry[44]",
+      "at": [
+        0.031,
+        0.783,
+        -0.146
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/CylinderGeometry[48]",
+      "b": "root/m240-elev[27]/CylinderGeometry[47]",
+      "at": [
+        0.031,
+        0.783,
+        -0.146
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-charging-handle[49]/BufferGeometry[0]",
+      "b": "root/m240-elev[27]/BufferGeometry[16]",
+      "at": [
+        0.0655,
+        0.852,
+        -0.02
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-charging-handle[49]/BufferGeometry[0]",
+      "b": "root/m240-elev[27]/BufferGeometry[17]",
+      "at": [
+        0.06638,
+        0.86012,
+        -0.02
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-charging-handle[49]/BufferGeometry[0]",
+      "b": "root/m240-elev[27]/BufferGeometry[28]",
+      "at": [
+        0.06677,
+        0.85973,
+        -0.14373
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-charging-handle[49]/CylinderGeometry[1]",
+      "b": "root/m240-elev[27]/m240-charging-handle[49]/BufferGeometry[0]",
+      "at": [
+        0.0735,
+        0.852,
+        0.068
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-charging-handle[49]/CylinderGeometry[2]",
+      "b": "root/m240-elev[27]/m240-charging-handle[49]/CylinderGeometry[1]",
+      "at": [
+        0.1195,
+        0.852,
+        0.06
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[50]",
+      "b": "root/m240-elev[27]/BufferGeometry[41]",
+      "at": [
+        -0.01383,
+        0.78328,
+        -0.13045
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[50]",
+      "b": "root/m240-elev[27]/BufferGeometry[42]",
+      "at": [
+        -0.015,
+        0.816,
+        -0.08096
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[51]",
+      "b": "root/m240-elev[27]/BufferGeometry[1]",
+      "at": [
+        -0.00491,
+        0.82097,
+        -0.10956
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[51]",
+      "b": "root/m240-elev[27]/BufferGeometry[42]",
+      "at": [
+        -0.0055,
+        0.81919,
+        -0.10849
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/CylinderGeometry[73]",
+      "b": "root/m240-elev[27]/BufferGeometry[52]",
+      "at": [
+        0,
+        0.875,
+        0.232
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/CylinderGeometry[73]",
+      "b": "root/m240-elev[27]/BufferGeometry[53]",
+      "at": [
+        0,
+        0.906,
+        0.227
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/CylinderGeometry[74]",
+      "b": "root/m240-elev[27]/BufferGeometry[52]",
+      "at": [
+        0,
+        0.875,
+        0.475
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/CylinderGeometry[74]",
+      "b": "root/m240-elev[27]/BufferGeometry[53]",
+      "at": [
+        0.02192,
+        0.89692,
+        0.467
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[75]",
+      "b": "root/m240-elev[27]/BufferGeometry[1]",
+      "at": [
+        -0.04627,
+        0.88373,
+        0.19577
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[76]",
+      "b": "root/m240-elev[27]/BufferGeometry[75]",
+      "at": [
+        -0.06859,
+        0.87591,
+        0.203
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[77]",
+      "b": "root/m240-elev[27]/BufferGeometry[52]",
+      "at": [
+        0,
+        0.875,
+        0.715
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[78]",
+      "b": "root/m240-elev[27]/BufferGeometry[53]",
+      "at": [
+        0.00581,
+        0.84455,
+        0.24414
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[78]",
+      "b": "root/m240-elev[27]/CylinderGeometry[73]",
+      "at": [
+        0.00433,
+        0.84831,
+        0.226
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[78]",
+      "b": "root/m240-elev[27]/CylinderGeometry[74]",
+      "at": [
+        0.0061,
+        0.84703,
+        0.469
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[79]",
+      "b": "root/m240-elev[27]/BufferGeometry[52]",
+      "at": [
+        0.01746,
+        0.87246,
+        0.59246
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[79]",
+      "b": "root/m240-elev[27]/BufferGeometry[78]",
+      "at": [
+        0,
+        0.82676,
+        0.54676
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/CylinderGeometry[80]",
+      "b": "root/m240-elev[27]/BufferGeometry[79]",
+      "at": [
+        0.01564,
+        0.84747,
+        0.571
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/TorusGeometry[81]",
+      "b": "root/m240-elev[27]/BufferGeometry[52]",
+      "at": [
+        0.00556,
+        0.85937,
+        0.557
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/TorusGeometry[81]",
+      "b": "root/m240-elev[27]/BufferGeometry[79]",
+      "at": [
+        0.01434,
+        0.85298,
+        0.56046
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[82]",
+      "b": "root/m240-elev[27]/BufferGeometry[79]",
+      "at": [
+        -0.01485,
+        0.84215,
+        0.58635
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[82]",
+      "b": "root/m240-elev[27]/CylinderGeometry[80]",
+      "at": [
+        -0.01459,
+        0.84241,
+        0.594
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[83]",
+      "b": "root/m240-elev[27]/BufferGeometry[79]",
+      "at": [
+        0.01485,
+        0.84215,
+        0.58635
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[83]",
+      "b": "root/m240-elev[27]/CylinderGeometry[80]",
+      "at": [
+        0.01485,
+        0.84215,
+        0.58635
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[84]",
+      "b": "root/m240-elev[27]/BufferGeometry[52]",
+      "at": [
+        0.00509,
+        0.89091,
+        0.69509
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-barrel-handle[85]/CylinderGeometry[0]",
+      "b": "root/m240-elev[27]/BufferGeometry[52]",
+      "at": [
+        -0.015,
+        0.87733,
+        0.28137
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-barrel-handle[85]/CylinderGeometry[0]",
+      "b": "root/m240-elev[27]/BufferGeometry[53]",
+      "at": [
+        0.031,
+        0.875,
+        0.26129
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-barrel-handle[85]/CylinderGeometry[0]",
+      "b": "root/m240-elev[27]/BufferGeometry[54]",
+      "at": [
+        0.03875,
+        0.882,
+        0.25588
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-barrel-handle[85]/CylinderGeometry[0]",
+      "b": "root/m240-elev[27]/BufferGeometry[55]",
+      "at": [
+        0.045,
+        0.889,
+        0.268
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-barrel-handle[85]/CylinderGeometry[0]",
+      "b": "root/m240-elev[27]/BoxGeometry[56]",
+      "at": [
+        0.045,
+        0.875,
+        0.282
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-barrel-handle[85]/BufferGeometry[2]",
+      "b": "root/m240-elev[27]/m240-barrel-handle[85]/BufferGeometry[1]",
+      "at": [
+        0.04,
+        0.96112,
+        0.31088
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/CylinderGeometry[86]",
+      "b": "root/m240-elev[27]/BufferGeometry[53]",
+      "at": [
+        0.00122,
+        0.90598,
+        0.26129
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/CylinderGeometry[87]",
+      "b": "root/m240-elev[27]/BufferGeometry[53]",
+      "at": [
+        0.01742,
+        0.90064,
+        0.44986
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[88]",
+      "b": "root/m240-elev[27]/m240-barrel-handle[85]/BufferGeometry[1]",
+      "at": [
+        0.04,
+        0.95979,
+        0.31671
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[88]",
+      "b": "root/m240-elev[27]/m240-barrel-handle[85]/BufferGeometry[2]",
+      "at": [
+        0.04858,
+        0.95992,
+        0.31658
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[89]",
+      "b": "root/m240-elev[27]/m240-barrel-handle[85]/BufferGeometry[1]",
+      "at": [
+        0.04,
+        0.95979,
+        0.33571
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[89]",
+      "b": "root/m240-elev[27]/m240-barrel-handle[85]/BufferGeometry[2]",
+      "at": [
+        0.04858,
+        0.95992,
+        0.33558
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[90]",
+      "b": "root/m240-elev[27]/m240-barrel-handle[85]/BufferGeometry[1]",
+      "at": [
+        0.04,
+        0.95979,
+        0.35471
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[90]",
+      "b": "root/m240-elev[27]/m240-barrel-handle[85]/BufferGeometry[2]",
+      "at": [
+        0.04858,
+        0.95992,
+        0.35458
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[91]",
+      "b": "root/m240-elev[27]/m240-barrel-handle[85]/BufferGeometry[1]",
+      "at": [
+        0.04,
+        0.95979,
+        0.37371
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[91]",
+      "b": "root/m240-elev[27]/m240-barrel-handle[85]/BufferGeometry[2]",
+      "at": [
+        0.04858,
+        0.95992,
+        0.37358
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[92]",
+      "b": "root/m240-elev[27]/m240-barrel-handle[85]/BufferGeometry[1]",
+      "at": [
+        0.04,
+        0.95979,
+        0.39271
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[92]",
+      "b": "root/m240-elev[27]/m240-barrel-handle[85]/BufferGeometry[2]",
+      "at": [
+        0.04858,
+        0.95992,
+        0.39258
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[93]",
+      "b": "root/m240-elev[27]/m240-barrel-handle[85]/BufferGeometry[1]",
+      "at": [
+        0.04,
+        0.95979,
+        0.41171
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/BufferGeometry[93]",
+      "b": "root/m240-elev[27]/m240-barrel-handle[85]/BufferGeometry[2]",
+      "at": [
+        0.04858,
+        0.95992,
+        0.40642
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-bipod-folded[94]/CylinderGeometry[0]",
+      "b": "root/m240-elev[27]/BufferGeometry[78]",
+      "at": [
+        -0.01117,
+        0.8306,
+        0.45445
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-bipod-folded[94]/CylinderGeometry[1]",
+      "b": "root/m240-elev[27]/m240-bipod-folded[94]/CylinderGeometry[0]",
+      "at": [
+        -0.025,
+        0.792,
+        0.4695
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-bipod-folded[94]/BufferGeometry[2]",
+      "b": "root/m240-elev[27]/m240-bipod-folded[94]/CylinderGeometry[1]",
+      "at": [
+        -0.025,
+        0.80512,
+        0.25212
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-bipod-folded[94]/CylinderGeometry[3]",
+      "b": "root/m240-elev[27]/m240-bipod-folded[94]/CylinderGeometry[0]",
+      "at": [
+        0.025,
+        0.792,
+        0.4695
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/m240-bipod-folded[94]/BufferGeometry[4]",
+      "b": "root/m240-elev[27]/m240-bipod-folded[94]/CylinderGeometry[3]",
+      "at": [
+        0.025,
+        0.80512,
+        0.25212
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/sideRailClamp[0]",
+      "b": "root/m240-elev[27]/BufferGeometry[63]",
+      "at": [
+        0.0466,
+        0.87475,
+        0.36965
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/sideRailClamp[0]",
+      "b": "root/m240-elev[27]/BufferGeometry[65]",
+      "at": [
+        0.0466,
+        0.878,
+        0.39788
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/sideRailClamp[0]",
+      "b": "root/m240-elev[27]/BufferGeometry[67]",
+      "at": [
+        0.0466,
+        0.87561,
+        0.4205
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/sideRailClamp[0]",
+      "b": "root/m240-elev[27]/BufferGeometry[69]",
+      "at": [
+        0.0466,
+        0.88666,
+        0.4465
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/sideRailClamp[0]",
+      "b": "root/m240-elev[27]/BufferGeometry[71]",
+      "at": [
+        0.0596,
+        0.878,
+        0.42612
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/clampScrew[1]",
+      "b": "root/m240-elev[27]/BufferGeometry[65]",
+      "at": [
+        0.04771,
+        0.87874,
+        0.398
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/clampScrew[1]",
+      "b": "root/m240-elev[27]/BufferGeometry[71]",
+      "at": [
+        0.055,
+        0.86959,
+        0.398
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/clampScrew[1]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/sideRailClamp[0]",
+      "at": [
+        0.0524,
+        0.869,
+        0.398
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/clampScrew[2]",
+      "b": "root/m240-elev[27]/BufferGeometry[69]",
+      "at": [
+        0.04771,
+        0.87874,
+        0.444
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/clampScrew[2]",
+      "b": "root/m240-elev[27]/BufferGeometry[71]",
+      "at": [
+        0.055,
+        0.86959,
+        0.444
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/clampScrew[2]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/sideRailClamp[0]",
+      "at": [
+        0.0524,
+        0.869,
+        0.444
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/moduleShell[3]",
+      "b": "root/m240-elev[27]/BufferGeometry[71]",
+      "at": [
+        0.058,
+        0.875,
+        0.42
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/moduleShell[3]",
+      "b": "root/m240-elev[27]/BufferGeometry[72]",
+      "at": [
+        0.11773,
+        0.87973,
+        0.37273
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/moduleShell[3]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/sideRailClamp[0]",
+      "at": [
+        0.058,
+        0.8825,
+        0.40167
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/coverSeam[4]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/moduleShell[3]",
+      "at": [
+        0.1266,
+        0.8957,
+        0.4651
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/lightBezelWall[5]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/moduleShell[3]",
+      "at": [
+        0.0776,
+        0.85774,
+        0.4735
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/laserBezelWall[10]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/moduleShell[3]",
+      "at": [
+        0.1105,
+        0.86699,
+        0.4735
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/modeDial[15]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/moduleShell[3]",
+      "at": [
+        0.079,
+        0.89065,
+        0.4031
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/modeDial[15]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/coverSeam[4]",
+      "at": [
+        0.079,
+        0.89065,
+        0.4031
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/modeDial[16]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/moduleShell[3]",
+      "at": [
+        0.1077,
+        0.89065,
+        0.4031
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/modeDial[16]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/coverSeam[4]",
+      "at": [
+        0.1077,
+        0.89065,
+        0.4031
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/topPlate[17]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/moduleShell[3]",
+      "at": [
+        0.11365,
+        0.89645,
+        0.45355
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/blankDataPlate[18]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/moduleShell[3]",
+      "at": [
+        0.1272,
+        0.8838,
+        0.38315
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/selectorDial[19]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/moduleShell[3]",
+      "at": [
+        0.081,
+        0.8965,
+        0.4204
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/selectorDial[19]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/modeDial[15]",
+      "at": [
+        0.081,
+        0.9045,
+        0.4024
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/selectorDial[19]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/modeDial[16]",
+      "at": [
+        0.09854,
+        0.90183,
+        0.4001
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/selectorDial[19]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/topPlate[17]",
+      "at": [
+        0.081,
+        0.89795,
+        0.4204
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/selectorBar[20]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/modeDial[15]",
+      "at": [
+        0.07617,
+        0.907,
+        0.40173
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/selectorBar[20]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/selectorDial[19]",
+      "at": [
+        0.0955,
+        0.904,
+        0.4044
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/adjusterDial[21]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/moduleShell[3]",
+      "at": [
+        0.1147,
+        0.8965,
+        0.395
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/lightHead[22]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/lightBezelWall[5]",
+      "at": [
+        0.0776,
+        0.85774,
+        0.4775
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/lightHead[22]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/lightBezel[6]",
+      "at": [
+        0.08995,
+        0.875,
+        0.4776
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/lightBezelSeat[25]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/lightHead[22]",
+      "at": [
+        0.0916,
+        0.8696,
+        0.4976
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/lightCavity[26]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/lightHead[22]",
+      "at": [
+        0.0776,
+        0.8556,
+        0.498
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/lightLens[27]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/lightHead[22]",
+      "at": [
+        0.0776,
+        0.85686,
+        0.4987
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/laserHousing[28]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/laserBezelWall[10]",
+      "at": [
+        0.11812,
+        0.87252,
+        0.4775
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/laserHousing[28]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/laserBezel[11]",
+      "at": [
+        0.11623,
+        0.875,
+        0.4776
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/laserBezelWall[29]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/laserHousing[28]",
+      "at": [
+        0.1098,
+        0.87306,
+        0.4945
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/laserBezelSeat[31]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/laserHousing[28]",
+      "at": [
+        0.1168,
+        0.88265,
+        0.4966
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/laserCavity[32]",
+      "b": "root/m240-elev[27]/laserLightUnit[95]/laserHousing[28]",
+      "at": [
+        0.1098,
+        0.87565,
+        0.4962
+      ]
+    },
+    {
+      "a": "root/m240-elev[27]/laserLightUnit[95]/lanyardLoop[34]",
+      "b": "root/m240-elev[27]/BufferGeometry[72]",
+      "at": [
+        0.1093,
+        0.87717,
+        0.3612
+      ]
+    }
+  ],
+  "excusedSeats": [],
+  "unseated": [],
+  "detailSeats": [],
+  "detailBreaches": []
+}

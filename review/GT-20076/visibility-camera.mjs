@@ -64,6 +64,16 @@ export function makeViews(T,wallPoseMode=false) {
     const resolved=new Map(),used=new Set();
     for(const [path,type,name,matrix] of saved.rows){
       const parent=path.length?resolved.get(path.slice(0,-1).join('.')):null;
+      // Skin batches are identity draws bound to the restored bones. Their count can
+      // change with clothing. Verify both sets of draws and replay the pose on the bones.
+      if(type==='SkinnedMesh' && name==='rig-skin'){
+        const identity=new G.Matrix4();
+        const batches=parent?.children.filter(n=>n.isSkinnedMesh && n.name===name);
+        if(!identity.equals(new G.Matrix4().fromArray(matrix)) || !batches?.length ||
+           batches.some(n=>!n.userData.rigSkin || n.children.length || !identity.equals(n.matrix)))
+          throw Error('Unexpected transform on a skin batch');
+        continue;
+      }
       const matches=n=>n && n.type===type && n.name===name && !used.has(n);
       let node=path.length?parent?.children[path.at(-1)]:T.player;
       // The game batches the skin into separately named identity draws. Their sibling
@@ -77,7 +87,10 @@ export function makeViews(T,wallPoseMode=false) {
     T.player.updateWorldMatrix(true,true);
     gun.parent.updateWorldMatrix(true,false);
     const local=gun.parent.matrixWorld.clone().invert().multiply(new G.Matrix4().fromArray(saved.gunWorld));
-    local.decompose(gun.position,gun.quaternion,gun.scale);gun.updateMatrix();gun.updateWorldMatrix(true,true);
+    const reconstructedScale=new G.Vector3();
+    local.decompose(gun.position,gun.quaternion,reconstructedScale);
+    if(reconstructedScale.distanceTo(gun.scale)>1e-7)throw Error('Recorded pose changes the authored weapon scale');
+    gun.updateMatrix();gun.updateWorldMatrix(true,true);
     if(gun.matrixWorld.elements.some((v,i)=>Math.abs(v-saved.gunWorld[i])>1e-6))throw Error('Gun pose differs from recorded gameplay');
   }
   async function pose(view, testSpot=null) {
@@ -90,11 +103,11 @@ export function makeViews(T,wallPoseMode=false) {
     // behind it is reachable and clear of both the range and station colliders.
     let spot=[range.origin.x,range.origin.z-(openFloor?5:.55)];
     if(testSpot) spot=[range.origin.x+testSpot[0],range.origin.z+testSpot[1]];
-    const wall=wallPoseMode && id==='uzi' && !openFloor && !testSpot && !eye && !rackView;
+    const wall=wallPoseMode && ['uzi','ak'].includes(id) && !openFloor && !testSpot && !eye && !rackView;
     T.player.position.set(spot[0],range.floorY,spot[1]); T.setOtsAimDbg(testSpot?.[2]||0,-.08); step(75);
     let saved;
     if(wall && wallPoseMode==='replay'){
-      const reference=window.recordedWaspViews?.[view];
+      const reference=window.recordedArtViews?.[view];
       if(!reference || Math.hypot(reference.actualSpot[0]-spot[0],reference.actualSpot[2]-spot[1])>.001)throw Error('Original wall pose is at another spot');
       saved=reference.nativePose;restoreActorPose(saved);
     }

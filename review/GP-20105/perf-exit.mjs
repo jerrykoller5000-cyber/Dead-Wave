@@ -32,6 +32,9 @@ try{
   await page.evaluate(`(()=>{TT.trainingDbg.toggleLights();TT.resetPerf()})()`);await pause(6000);
   report.windows.push({view:'first-dark',perf:await page.evaluate('TT.perfSnapshot()')});
   await page.screenshot(path.join(out,'42-perf-first-dark.png'));
+  await page.evaluate('TT.resetPerf()');await pause(6000);
+  report.windows.push({view:'first-dark-late',perf:await page.evaluate('TT.perfSnapshot()')});
+  await page.screenshot(path.join(out,'42b-perf-first-dark-late.png'));
   report.exit=await page.evaluate(`(()=>{TT.openMenuDbg('pause');const p=document.getElementById('pause');return {pause:p?.classList.contains('show'),training:TT.trainingDbg.state().active};})()`);
   await page.screenshot(path.join(out,'43-pause-exit.png'));
   await page.evaluate('document.getElementById("quitMenuBtn").click()');

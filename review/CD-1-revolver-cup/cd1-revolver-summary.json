@@ -1,0 +1,276 @@
+{
+  "card": "CD-1-revolver-cup",
+  "capturedAt": "2026-11-11T18:28:02.628Z",
+  "backend": "WebGPUBackend",
+  "metrics": {
+    "hip": {
+      "akimbo": false,
+      "eyePos": [
+        -0.0006,
+        -198.5762,
+        -642.0912
+      ],
+      "gripCenterW": [
+        -0.1588,
+        -198.7964,
+        -641.6796
+      ],
+      "camRight": [
+        -1,
+        0,
+        -3.614007241618348e-21
+      ],
+      "camUp": [
+        0,
+        1,
+        0
+      ],
+      "camFwd": [
+        -3.614007241618348e-21,
+        0,
+        1
+      ],
+      "wristLEye": [
+        0.0906,
+        -0.2918,
+        -0.3607
+      ],
+      "elbowLEye": [
+        0.0411,
+        -0.4496,
+        -0.2109
+      ],
+      "elbowOffsetFromWristEye": [
+        -0.0495,
+        -0.1578,
+        0.1498
+      ],
+      "leftGloveEyeY": [
+        -0.3318,
+        -0.1578
+      ],
+      "rightGloveEyeY": [
+        -0.2599,
+        -0.1087
+      ],
+      "gunEyeY": [
+        -0.2407,
+        -0.0128
+      ],
+      "belowSightLineByMeters": 0.1578,
+      "crossings": {
+        "leftGlove_vs_rightGlove": {
+          "edgeCrossings": 176,
+          "sampleParts": [
+            "vm-hand-glove-main<->vm-hand-bare-main",
+            "vm-hand-glove-main<->vm-hand-bare-nails",
+            "vm-hand-bare-main<->vm-hand-bare-main",
+            "vm-hand-bare-nails<->vm-hand-bare-main"
+          ]
+        },
+        "leftGlove_vs_gun": {
+          "edgeCrossings": 17,
+          "sampleParts": [
+            "vm-hand-glove-main<->mesh"
+          ]
+        },
+        "leftSleeve_vs_rightSleeve": {
+          "edgeCrossings": 0,
+          "sampleParts": []
+        },
+        "leftSleeve_vs_rightGlove": {
+          "edgeCrossings": 0,
+          "sampleParts": []
+        },
+        "leftSleeve_vs_gun": {
+          "edgeCrossings": 0,
+          "sampleParts": []
+        },
+        "rightSleeve_vs_leftGlove": {
+          "edgeCrossings": 0,
+          "sampleParts": []
+        },
+        "rightSleeve_vs_gun": {
+          "edgeCrossings": 0,
+          "sampleParts": []
+        }
+      }
+    },
+    "aimed": {
+      "akimbo": false,
+      "eyePos": [
+        0.0107,
+        -198.5788,
+        -642.0859
+      ],
+      "gripCenterW": [
+        0.0309,
+        -198.7637,
+        -641.7187
+      ],
+      "camRight": [
+        -1,
+        0,
+        0
+      ],
+      "camUp": [
+        0,
+        1,
+        0
+      ],
+      "camFwd": [
+        0,
+        0,
+        1
+      ],
+      "wristLEye": [
+        -0.0943,
+        -0.2516,
+        -0.3149
+      ],
+      "elbowLEye": [
+        -0.1441,
+        -0.4071,
+        -0.1629
+      ],
+      "elbowOffsetFromWristEye": [
+        -0.0497,
+        -0.1555,
+        0.1521
+      ],
+      "leftGloveEyeY": [
+        -0.2926,
+        -0.1258
+      ],
+      "rightGloveEyeY": [
+        -0.2369,
+        -0.0773
+      ],
+      "gunEyeY": [
+        -0.2104,
+        0.0054
+      ],
+      "belowSightLineByMeters": 0.1258,
+      "crossings": {
+        "leftGlove_vs_rightGlove": {
+          "edgeCrossings": 237,
+          "sampleParts": [
+            "vm-hand-glove-main<->vm-hand-bare-main",
+            "vm-hand-glove-main<->vm-hand-bare-nails",
+            "vm-hand-bare-main<->vm-hand-bare-main",
+            "vm-hand-bare-main<->vm-hand-bare-nails",
+            "vm-hand-bare-nails<->vm-hand-bare-main"
+          ]
+        },
+        "leftGlove_vs_gun": {
+          "edgeCrossings": 17,
+          "sampleParts": [
+            "vm-hand-glove-main<->mesh"
+          ]
+        },
+        "leftSleeve_vs_rightSleeve": {
+          "edgeCrossings": 0,
+          "sampleParts": []
+        },
+        "leftSleeve_vs_rightGlove": {
+          "edgeCrossings": 0,
+          "sampleParts": []
+        },
+        "leftSleeve_vs_gun": {
+          "edgeCrossings": 0,
+          "sampleParts": []
+        },
+        "rightSleeve_vs_leftGlove": {
+          "edgeCrossings": 0,
+          "sampleParts": []
+        },
+        "rightSleeve_vs_gun": {
+          "edgeCrossings": 0,
+          "sampleParts": []
+        }
+      }
+    }
+  },
+  "shots": {
+    "hip-noon": {
+      "name": "revolver-hip-noon.jpg",
+      "bytes": 153534,
+      "lumaMean": 73.92,
+      "lumaStd": 43.31
+    },
+    "hip-overcast": {
+      "name": "revolver-hip-overcast.jpg",
+      "bytes": 133062,
+      "lumaMean": 53.55,
+      "lumaStd": 36.29
+    },
+    "hip-dusk": {
+      "name": "revolver-hip-dusk.jpg",
+      "bytes": 132831,
+      "lumaMean": 31.76,
+      "lumaStd": 26.87
+    },
+    "hip-night": {
+      "name": "revolver-hip-night.jpg",
+      "bytes": 79674,
+      "lumaMean": 13.23,
+      "lumaStd": 16.86
+    },
+    "aimed-noon": {
+      "name": "revolver-aimed-noon.jpg",
+      "bytes": 135350,
+      "lumaMean": 85.14,
+      "lumaStd": 51.42
+    },
+    "aimed-overcast": {
+      "name": "revolver-aimed-overcast.jpg",
+      "bytes": 122920,
+      "lumaMean": 63.03,
+      "lumaStd": 40.16
+    },
+    "aimed-dusk": {
+      "name": "revolver-aimed-dusk.jpg",
+      "bytes": 118985,
+      "lumaMean": 36.95,
+      "lumaStd": 32.12
+    },
+    "aimed-night": {
+      "name": "revolver-aimed-night.jpg",
+      "bytes": 80667,
+      "lumaMean": 17.9,
+      "lumaStd": 16.63
+    },
+    "close-eye-hip": {
+      "name": "revolver-close-eye-hip.jpg",
+      "bytes": 86706,
+      "lumaMean": 66.02,
+      "lumaStd": 36.24
+    },
+    "close-left": {
+      "name": "revolver-close-left.jpg",
+      "bytes": 124591,
+      "lumaMean": 91.72,
+      "lumaStd": 33.19
+    },
+    "close-front": {
+      "name": "revolver-close-front.jpg",
+      "bytes": 141032,
+      "lumaMean": 69.59,
+      "lumaStd": 28.65
+    },
+    "close-below": {
+      "name": "revolver-close-below.jpg",
+      "bytes": 98336,
+      "lumaMean": 44.84,
+      "lumaStd": 40.01
+    },
+    "close-eye-aimed": {
+      "name": "revolver-close-eye-aimed.jpg",
+      "bytes": 119458,
+      "lumaMean": 97.92,
+      "lumaStd": 55.5
+    }
+  },
+  "pageErrors": [],
+  "gpuWarnings": []
+}

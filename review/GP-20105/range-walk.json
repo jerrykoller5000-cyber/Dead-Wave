@@ -1,5 +1,5 @@
 {
-  "at": "2026-11-11T17:33:52.223Z",
+  "at": "2026-11-11T18:24:44.868Z",
   "errors": [],
   "console": {
     "action": "rangeConsole",
@@ -371,7 +371,7 @@
   "active": {
     "start": {
       "ok": true,
-      "id": "1794418471075-46"
+      "id": "1794421514373-46"
     },
     "state": {
       "state": "PREPARING",
@@ -392,7 +392,7 @@
         "contact": 0.6,
         "layout": "close"
       },
-      "id": "1794418471075-46",
+      "id": "1794421514373-46",
       "loadout": "{\"mode\":\"semi\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
       "elapsed": 0,
       "countdown": 8,
@@ -423,7 +423,7 @@
     }
   },
   "activeAfterCountdown": {
-    "state": "COUNTDOWN",
+    "state": "ACTIVE",
     "drill": {
       "weapon": "pistol",
       "id": "first-steps",
@@ -441,14 +441,22 @@
       "contact": 0.6,
       "layout": "close"
     },
-    "id": "1794418471075-46",
+    "id": "1794421514373-46",
     "loadout": "{\"mode\":\"semi\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
-    "elapsed": 0,
-    "countdown": 0.33379999995232046,
-    "wave": 0,
-    "activation": 0,
-    "plan": null,
-    "phase": "gap",
+    "elapsed": 2.0531999999880783,
+    "countdown": 0,
+    "wave": 1,
+    "activation": 1,
+    "plan": {
+      "ids": [
+        0
+      ],
+      "zone": null,
+      "priority": null,
+      "weapon": "pistol",
+      "exposure": 6
+    },
+    "phase": "exposed",
     "expectedWeapon": "pistol",
     "action": "shoot",
     "firstShot": null,
@@ -468,7 +476,16 @@
       "reloads": 0
     },
     "result": null,
-    "targets": []
+    "targets": [
+      {
+        "index": 0,
+        "hits": 0,
+        "contact": 0,
+        "done": false,
+        "clearAt": null,
+        "bonus": false
+      }
+    ]
   },
   "targets": {
     "five": 5,
@@ -487,6 +504,15 @@
     "state": "falling",
     "hits": 1
   },
+  "targetDown": "down",
+  "targetReset": [
+    "up",
+    "up",
+    "up",
+    "up",
+    "up"
+  ],
+  "targetRisen": "up",
   "burn": {
     "worked": true,
     "state": "wrecked"
@@ -500,7 +526,7 @@
       {
         "index": 0,
         "kind": "burn",
-        "t": 5.708099999994034,
+        "t": 5.5375999999940335,
         "ash": true,
         "ashSize": 1,
         "flames": 0,
@@ -513,17 +539,17 @@
       {
         "index": 4,
         "kind": "blow",
-        "t": 2.409499999999999,
+        "t": 2.3361999999880787,
         "ash": false,
         "ashSize": 0,
         "flames": 0,
         "pieces": 9,
         "resting": 9,
         "p0": {
-          "y": 0.07,
-          "x": 0.45,
-          "z": 1.3,
-          "vy": -1.54,
+          "y": 0.05,
+          "x": -1.23,
+          "z": 2.16,
+          "vy": -0.58,
           "rest": true
         },
         "plateVisible": false,
