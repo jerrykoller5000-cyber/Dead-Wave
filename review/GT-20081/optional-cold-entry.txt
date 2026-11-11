@@ -1,0 +1,12 @@
+GRANT chatgpt2 GT-20081: starting one game-test command
+file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/cdp.mjs:166
+      throw new Error('evaluate failed: ' + text);
+            ^
+
+Error: evaluate failed: Error: Cold optional artwork state m4 {"visible":true,"children":1,"name":"flat-top optic adapter"}
+    at <anonymous>:4:49
+    at <anonymous>:9:5
+    at Page.evaluate (file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/cdp.mjs:166:13)
+    at async file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/GT-20081/optional.mjs:26:14
+
+Node.js v24.13.0

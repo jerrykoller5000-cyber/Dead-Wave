@@ -1,0 +1,14 @@
+Game-test request a5303721-51f6-486b-a86d-3b8862dc504a queued at position 1. Waiting...
+GRANT chatgpt2 GT-20081: starting one game-test command
+check-players: 313 player.position reads, all in the allowed places
+           FAIL all twelve guns: 456 meshes after merging
+FAIL  t38     11 pass   1 fail  103.8s
+           recovering browser after t38: 1 fail
+ok    t333    16 pass   0 fail  42.9s
+
+2 checks: 27 pass, 1 fail
+
+by owner:
+  unassigned — triage
+    t38    1 fail  FAIL all twelve guns: 456 meshes after merging
+           FAIL all twelve guns: 456 meshes after merging

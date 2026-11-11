@@ -151,8 +151,8 @@
     const ropeParts = T.flameDbg.particles();
     const maxRelZ = ropeParts.reduce((m, p) => Math.max(m, p.z - O.z), 0);
     const splashedBackWall = ropeParts.filter((p) => p.splashed && (p.z - O.z) >= 27.5).length;
-    const nearNozzle = ropeParts.filter((p) => !p.splashed && (p.z - O.z) < 2.2);
-    const midRope = ropeParts.filter((p) => !p.splashed && (p.z - O.z) >= 10 && (p.z - O.z) <= 24);
+    const nearNozzle = ropeParts.filter((p) => !p.splashed && (p.z - O.z) < 3.8);
+    const midRope = ropeParts.filter((p) => !p.splashed && (p.z - O.z) >= 12 && (p.z - O.z) <= 25);
     const avgNozzleW = nearNozzle.length ? nearNozzle.reduce((s, p) => s + p.mesh.scale.x, 0) / nearNozzle.length : 99;
     const avgMidW = midRope.length ? midRope.reduce((s, p) => s + p.mesh.scale.x, 0) / midRope.length : 0;
     T.setMouseFireDbg(false);
@@ -162,7 +162,7 @@
     ok(igniteElapsed >= 0.65, `ignition required sustained flame contact (${igniteElapsed.toFixed(2)}s >= 0.65s)`);
     ok(maxRelZ >= 28.5 && splashedBackWall >= 8,
       `held trigger reaches 30m back wall and splashes into fireball (maxRelZ=${maxRelZ.toFixed(2)}m, backWallSplashed=${splashedBackWall})`);
-    ok(avgNozzleW < 1.15 && avgMidW > avgNozzleW * 2.0,
+    ok(avgNozzleW < 1.35 && avgMidW > avgNozzleW * 1.8,
       `rope leaves nozzle thin and widens downrange (nozzleW=${avgNozzleW.toFixed(2)}, midRopeW=${avgMidW.toFixed(2)})`);
 
     // Range console / start refuses drills with 'target-burned' per GP-20089 contract

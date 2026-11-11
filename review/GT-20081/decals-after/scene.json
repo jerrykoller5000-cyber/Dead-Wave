@@ -1,0 +1,7017 @@
+{
+  "counts": {
+    "minigun": {
+      "meshes": 23,
+      "shown": 0,
+      "drawGroups": 0,
+      "vertices": 37157
+    },
+    "m4": {
+      "meshes": 36,
+      "shown": 0,
+      "drawGroups": 0,
+      "vertices": 56517
+    },
+    "ak": {
+      "meshes": 26,
+      "shown": 0,
+      "drawGroups": 0,
+      "vertices": 37475
+    },
+    "aa12": {
+      "meshes": 24,
+      "shown": 0,
+      "drawGroups": 0,
+      "vertices": 44819
+    },
+    "pistol": {
+      "meshes": 20,
+      "shown": 0,
+      "drawGroups": 0,
+      "vertices": 26843
+    },
+    "uzi": {
+      "meshes": 29,
+      "shown": 0,
+      "drawGroups": 0,
+      "vertices": 33305
+    },
+    "shotgun": {
+      "meshes": 24,
+      "shown": 0,
+      "drawGroups": 0,
+      "vertices": 28403
+    },
+    "revolver": {
+      "meshes": 26,
+      "shown": 0,
+      "drawGroups": 0,
+      "vertices": 34732
+    },
+    "sniper": {
+      "meshes": 37,
+      "shown": 0,
+      "drawGroups": 0,
+      "vertices": 54489
+    },
+    "launcher": {
+      "meshes": 24,
+      "shown": 0,
+      "drawGroups": 0,
+      "vertices": 42791
+    },
+    "flamer": {
+      "meshes": 16,
+      "shown": 0,
+      "drawGroups": 0,
+      "vertices": 33181
+    },
+    "chainsaw": {
+      "meshes": 17,
+      "shown": 0,
+      "drawGroups": 0,
+      "vertices": 27028
+    }
+  },
+  "total": 302,
+  "details": {
+    "minigun": [
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 612,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 0,
+            "name": "gunPaint:minigun",
+            "role": "receiver",
+            "paint": "minigun",
+            "color": 4737873,
+            "roughness": 0.66,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "defaultSight",
+        "name": "",
+        "owner": "minigun-default-reflex",
+        "shown": false,
+        "vertices": 144,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 1,
+            "name": "gunPaint:minigun",
+            "role": "optic shell",
+            "paint": "minigun",
+            "color": 6053992,
+            "roughness": 0.68,
+            "metalness": 0.06,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "defaultSight",
+        "name": "",
+        "owner": "minigun-default-reflex",
+        "shown": false,
+        "vertices": 144,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 2,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 7901595,
+            "roughness": 0.08,
+            "metalness": 0.9,
+            "transparent": true,
+            "map": false,
+            "vertexColors": false,
+            "fx": true
+          }
+        ]
+      },
+      {
+        "part": "defaultSight",
+        "name": "",
+        "owner": "minigun-default-reflex",
+        "shown": false,
+        "vertices": 696,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 3,
+            "name": "gunPaint:minigun",
+            "role": "optic shell",
+            "paint": "minigun",
+            "color": 2566445,
+            "roughness": 0.68,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "defaultSight",
+        "name": "",
+        "owner": "minigun-default-reflex",
+        "shown": false,
+        "vertices": 1008,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 4,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 16724770,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": true
+          }
+        ]
+      },
+      {
+        "part": "defaultSight",
+        "name": "",
+        "owner": "minigun-default-reflex",
+        "shown": false,
+        "vertices": 1728,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 5,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "controls-trigger",
+        "name": "",
+        "owner": "controls-trigger",
+        "shown": false,
+        "vertices": 204,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 6,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 11019804,
+            "roughness": 0.5,
+            "metalness": 0.3,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "heatParts-barrel",
+        "name": "",
+        "owner": "heatParts-barrel",
+        "shown": false,
+        "vertices": 720,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 7,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 3685185,
+            "roughness": 0.6,
+            "metalness": 0.1,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "barrelAssembly",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 1296,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 7,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 3685185,
+            "roughness": 0.6,
+            "metalness": 0.1,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "barrelAssembly",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 12360,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 8,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 0.66,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "mag",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 1776,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 5,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "flash",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 49,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 9,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 16777113,
+            "transparent": true,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "laser",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 16,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 10,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 16732497,
+            "transparent": true,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "laserLightUnit",
+        "name": "sideRailClamp",
+        "owner": "laserLightUnit",
+        "shown": false,
+        "vertices": 36,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 11,
+            "name": "gunPaint:minigun",
+            "role": "light shell",
+            "paint": "minigun",
+            "color": 2566445,
+            "roughness": 0.68,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "laserLightUnit",
+        "name": "moduleShell",
+        "owner": "laserLightUnit",
+        "shown": false,
+        "vertices": 36,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 12,
+            "name": "gunPaint:minigun",
+            "role": "light shell",
+            "paint": "minigun",
+            "color": 3290167,
+            "roughness": 0.76,
+            "metalness": 0.03,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "laserLightUnit",
+        "name": "",
+        "owner": "laserLightUnit",
+        "shown": false,
+        "vertices": 336,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 13,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 1323070,
+            "roughness": 0.08,
+            "metalness": 0.9,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": true
+          }
+        ]
+      },
+      {
+        "part": "laserLightUnit",
+        "name": "",
+        "owner": "laserLightUnit",
+        "shown": false,
+        "vertices": 1428,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 8,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 0.66,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "opticPlate",
+        "name": "",
+        "owner": "rotary-optic-seat",
+        "shown": false,
+        "vertices": 144,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 14,
+            "name": "gunPaint:minigun",
+            "role": "rail",
+            "paint": "minigun",
+            "color": 6053992,
+            "roughness": 0.68,
+            "metalness": 0.06,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 408,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 15,
+            "name": "gunPaint:minigun",
+            "role": "receiver",
+            "paint": "minigun",
+            "color": 6053992,
+            "roughness": 0.68,
+            "metalness": 0.06,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 288,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 16,
+            "name": "gunPaint:minigun",
+            "role": "receiver",
+            "paint": "minigun",
+            "color": 3883589,
+            "roughness": 0.72,
+            "metalness": 0.17,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 432,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 17,
+            "name": "gunPaint:minigun",
+            "role": "rail",
+            "paint": "minigun",
+            "color": 2566445,
+            "roughness": 0.68,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 8508,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 8,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 0.66,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 4788,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 5,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      }
+    ],
+    "m4": [
+      {
+        "part": "opticPlate",
+        "name": "",
+        "owner": "flat-top optic adapter",
+        "shown": false,
+        "vertices": 144,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 0,
+            "name": "gunPaint:m4",
+            "role": "optic shell",
+            "paint": "m4",
+            "color": 2566445,
+            "roughness": 0.68,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "recoilBoltParts[0]",
+        "name": "",
+        "owner": "recoil-bolt",
+        "shown": false,
+        "vertices": 144,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 1,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 7634565,
+            "roughness": 0.52,
+            "metalness": 0.4,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "recoilBoltParts[1]",
+        "name": "",
+        "owner": "recoil-bolt",
+        "shown": false,
+        "vertices": 144,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 2,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 5263957,
+            "roughness": 0.41,
+            "metalness": 0.54,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "work",
+        "name": "",
+        "owner": "work",
+        "shown": false,
+        "vertices": 540,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 3,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 240,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 1,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 7634565,
+            "roughness": 0.52,
+            "metalness": 0.4,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "controls-trigger",
+        "name": "",
+        "owner": "controls-trigger",
+        "shown": false,
+        "vertices": 276,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 4,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 2566445,
+            "roughness": 0.68,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "fpStock",
+        "name": "",
+        "owner": "fp-stock",
+        "shown": false,
+        "vertices": 444,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 5,
+            "name": "gunPaint:m4",
+            "role": "furniture",
+            "paint": "m4",
+            "color": 3618874,
+            "roughness": 0.83,
+            "metalness": 0.02,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "fpStock",
+        "name": "",
+        "owner": "fp-stock",
+        "shown": false,
+        "vertices": 2112,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 3,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "GW-4 rear collar",
+        "owner": "",
+        "shown": false,
+        "vertices": 96,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 6,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 3093817,
+            "roughness": 0.61,
+            "metalness": 0.28,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 288,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 7,
+            "name": "gunPaint:m4",
+            "role": "rail",
+            "paint": "m4",
+            "color": 4737873,
+            "roughness": 0.66,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 144,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 8,
+            "name": "gunPaint:m4",
+            "role": "rail",
+            "paint": "m4",
+            "color": 6053992,
+            "roughness": 0.68,
+            "metalness": 0.06,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "defaultSight",
+        "name": "",
+        "owner": "m4-default-holo",
+        "shown": false,
+        "vertices": 144,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 9,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 1323070,
+            "roughness": 0.08,
+            "metalness": 0.9,
+            "transparent": true,
+            "map": false,
+            "vertexColors": false,
+            "fx": true
+          }
+        ]
+      },
+      {
+        "part": "defaultSight",
+        "name": "",
+        "owner": "m4-default-holo",
+        "shown": false,
+        "vertices": 996,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 0,
+            "name": "gunPaint:m4",
+            "role": "optic shell",
+            "paint": "m4",
+            "color": 2566445,
+            "roughness": 0.68,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "defaultSight",
+        "name": "",
+        "owner": "m4-default-holo",
+        "shown": false,
+        "vertices": 1008,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 10,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 16724770,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": true
+          }
+        ]
+      },
+      {
+        "part": "defaultSight",
+        "name": "",
+        "owner": "m4-default-holo",
+        "shown": false,
+        "vertices": 1644,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 3,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "mag",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 2424,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 3,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "flash",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 49,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 11,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 16777113,
+            "transparent": true,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "laser",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 16,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 12,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 16732497,
+            "transparent": true,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "suppressor",
+        "name": "",
+        "owner": "suppressor",
+        "shown": false,
+        "vertices": 168,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 13,
+            "name": "gunPaint:m4",
+            "role": "suppressor shell",
+            "paint": "m4",
+            "color": 2566445,
+            "roughness": 0.68,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "suppressor",
+        "name": "",
+        "owner": "suppressor",
+        "shown": false,
+        "vertices": 648,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 14,
+            "name": "gunPaint:m4",
+            "role": "suppressor shell",
+            "paint": "m4",
+            "color": 3685185,
+            "roughness": 0.6,
+            "metalness": 0.1,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "suppressor",
+        "name": "",
+        "owner": "suppressor",
+        "shown": false,
+        "vertices": 264,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 3,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "laserLightUnit",
+        "name": "moduleShell",
+        "owner": "laserLightUnit",
+        "shown": false,
+        "vertices": 36,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 15,
+            "name": "gunPaint:m4",
+            "role": "light shell",
+            "paint": "m4",
+            "color": 3290167,
+            "roughness": 0.76,
+            "metalness": 0.03,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "laserLightUnit",
+        "name": "topPlate",
+        "owner": "laserLightUnit",
+        "shown": false,
+        "vertices": 36,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 16,
+            "name": "gunPaint:m4",
+            "role": "light shell",
+            "paint": "m4",
+            "color": 2566445,
+            "roughness": 0.68,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "laserLightUnit",
+        "name": "",
+        "owner": "laserLightUnit",
+        "shown": false,
+        "vertices": 336,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 17,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 1323070,
+            "roughness": 0.08,
+            "metalness": 0.9,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": true
+          }
+        ]
+      },
+      {
+        "part": "laserLightUnit",
+        "name": "",
+        "owner": "laserLightUnit",
+        "shown": false,
+        "vertices": 1800,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 3,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "controls-selector",
+        "name": "",
+        "owner": "controls-selector",
+        "shown": false,
+        "vertices": 252,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 4,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 2566445,
+            "roughness": 0.68,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "controls-boltCatch",
+        "name": "",
+        "owner": "controls-boltCatch",
+        "shown": false,
+        "vertices": 132,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 4,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 2566445,
+            "roughness": 0.68,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "controls-magRelease",
+        "name": "",
+        "owner": "controls-magRelease",
+        "shown": false,
+        "vertices": 64,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 4,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 2566445,
+            "roughness": 0.68,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "heatParts-barrel",
+        "name": "",
+        "owner": "heatParts-barrel",
+        "shown": false,
+        "vertices": 336,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 2,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 5263957,
+            "roughness": 0.41,
+            "metalness": 0.54,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 504,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 18,
+            "name": "gunPaint:m4",
+            "role": "receiver",
+            "paint": "m4",
+            "color": 4211271,
+            "roughness": 0.44,
+            "metalness": 0.5,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 4500,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 19,
+            "name": "gunPaint:m4",
+            "role": "rail",
+            "paint": "m4",
+            "color": 2566445,
+            "roughness": 0.68,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 12960,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 20,
+            "name": "gunPaint:m4",
+            "role": "rail",
+            "paint": "m4",
+            "color": 3685185,
+            "roughness": 0.6,
+            "metalness": 0.1,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 3468,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 21,
+            "name": "gunPaint:m4",
+            "role": "receiver",
+            "paint": "m4",
+            "color": 3158582,
+            "roughness": 0.53,
+            "metalness": 0.36,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 516,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 22,
+            "name": "gunPaint:m4",
+            "role": "receiver",
+            "paint": "m4",
+            "color": 3093817,
+            "roughness": 0.61,
+            "metalness": 0.28,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 2736,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 5,
+            "name": "gunPaint:m4",
+            "role": "furniture",
+            "paint": "m4",
+            "color": 3618874,
+            "roughness": 0.83,
+            "metalness": 0.02,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 16908,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 3,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      }
+    ],
+    "ak": [
+      {
+        "part": "opticPlate",
+        "name": "KR-7 bracket web",
+        "owner": "side optic bracket",
+        "shown": false,
+        "vertices": 564,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 0,
+            "name": "gunPaint:ak",
+            "role": "rail",
+            "paint": "ak",
+            "color": 5264986,
+            "roughness": 0.52,
+            "metalness": 0.35,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "opticPlate",
+        "name": "KR-7 bracket latch",
+        "owner": "side optic bracket",
+        "shown": false,
+        "vertices": 240,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 1,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 2566445,
+            "roughness": 0.68,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "opticPlate",
+        "name": "",
+        "owner": "side optic bracket",
+        "shown": false,
+        "vertices": 288,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 2,
+            "name": "gunPaint:ak",
+            "role": "rail",
+            "paint": "ak",
+            "color": 2566445,
+            "roughness": 0.68,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "recoilBoltParts[0]",
+        "name": "",
+        "owner": "recoil-bolt",
+        "shown": false,
+        "vertices": 144,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 3,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 3817288,
+            "roughness": 0.42,
+            "metalness": 0.85,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "recoilBoltParts[1]",
+        "name": "",
+        "owner": "recoil-bolt",
+        "shown": false,
+        "vertices": 144,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 4,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 6053992,
+            "roughness": 0.68,
+            "metalness": 0.06,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "work",
+        "name": "",
+        "owner": "work",
+        "shown": false,
+        "vertices": 480,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 1,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 2566445,
+            "roughness": 0.68,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "controls-trigger",
+        "name": "",
+        "owner": "controls-trigger",
+        "shown": false,
+        "vertices": 276,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 1,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 2566445,
+            "roughness": 0.68,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "fpStock",
+        "name": "",
+        "owner": "fp-stock",
+        "shown": false,
+        "vertices": 132,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 5,
+            "name": "gunPaint:ak",
+            "role": "receiver",
+            "paint": "ak",
+            "color": 4870229,
+            "roughness": 0.49,
+            "metalness": 0.34,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "fpStock",
+        "name": "",
+        "owner": "fp-stock",
+        "shown": false,
+        "vertices": 2988,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 6,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "magazineTopRound",
+        "name": "magazine top round",
+        "owner": "",
+        "shown": false,
+        "vertices": 378,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 7,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 0.38,
+            "metalness": 0.42,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "mag",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 3924,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 6,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "flash",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 49,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 8,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 16777113,
+            "transparent": true,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "laser",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 16,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 9,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 16732497,
+            "transparent": true,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "suppressor",
+        "name": "",
+        "owner": "suppressor",
+        "shown": false,
+        "vertices": 648,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 10,
+            "name": "gunPaint:ak",
+            "role": "suppressor shell",
+            "paint": "ak",
+            "color": 3685185,
+            "roughness": 0.6,
+            "metalness": 0.1,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "suppressor",
+        "name": "",
+        "owner": "suppressor",
+        "shown": false,
+        "vertices": 336,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 11,
+            "name": "gunPaint:ak",
+            "role": "suppressor shell",
+            "paint": "ak",
+            "color": 3817288,
+            "roughness": 0.42,
+            "metalness": 0.85,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "suppressor",
+        "name": "",
+        "owner": "suppressor",
+        "shown": false,
+        "vertices": 264,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 6,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "laserLightUnit",
+        "name": "railClamp",
+        "owner": "laserLightUnit",
+        "shown": false,
+        "vertices": 36,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 12,
+            "name": "gunPaint:ak",
+            "role": "light shell",
+            "paint": "ak",
+            "color": 2566445,
+            "roughness": 0.68,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "laserLightUnit",
+        "name": "moduleShell",
+        "owner": "laserLightUnit",
+        "shown": false,
+        "vertices": 36,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 13,
+            "name": "gunPaint:ak",
+            "role": "light shell",
+            "paint": "ak",
+            "color": 3290167,
+            "roughness": 0.76,
+            "metalness": 0.03,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "laserLightUnit",
+        "name": "",
+        "owner": "laserLightUnit",
+        "shown": false,
+        "vertices": 336,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 14,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 1323070,
+            "roughness": 0.08,
+            "metalness": 0.9,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": true
+          }
+        ]
+      },
+      {
+        "part": "laserLightUnit",
+        "name": "",
+        "owner": "laserLightUnit",
+        "shown": false,
+        "vertices": 1092,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 6,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "controls-selector",
+        "name": "",
+        "owner": "controls-selector",
+        "shown": false,
+        "vertices": 720,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 1,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 2566445,
+            "roughness": 0.68,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "controls-magRelease",
+        "name": "",
+        "owner": "controls-magRelease",
+        "shown": false,
+        "vertices": 144,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 1,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 2566445,
+            "roughness": 0.68,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "heatParts-barrel",
+        "name": "",
+        "owner": "heatParts-barrel",
+        "shown": false,
+        "vertices": 288,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 15,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 3685185,
+            "roughness": 0.6,
+            "metalness": 0.1,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 5184,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 5,
+            "name": "gunPaint:ak",
+            "role": "receiver",
+            "paint": "ak",
+            "color": 4870229,
+            "roughness": 0.49,
+            "metalness": 0.34,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 2376,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 16,
+            "name": "KR-7 walnut",
+            "role": "",
+            "paint": "",
+            "color": 8870456,
+            "roughness": 0.52,
+            "metalness": 0.03,
+            "transparent": false,
+            "map": true,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 16392,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 6,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      }
+    ],
+    "aa12": [
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 420,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 0,
+            "name": "gunPaint:aa12",
+            "role": "rail",
+            "paint": "aa12",
+            "color": 2566445,
+            "roughness": 0.68,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "recoilBolt",
+        "name": "",
+        "owner": "recoil-bolt",
+        "shown": false,
+        "vertices": 144,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 1,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 3817288,
+            "roughness": 0.42,
+            "metalness": 0.85,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "recoilBolt",
+        "name": "",
+        "owner": "recoil-bolt",
+        "shown": false,
+        "vertices": 144,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 2,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 6053992,
+            "roughness": 0.68,
+            "metalness": 0.06,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "recoilBolt",
+        "name": "",
+        "owner": "recoil-bolt",
+        "shown": false,
+        "vertices": 144,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 3,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 2566445,
+            "roughness": 0.68,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "work",
+        "name": "",
+        "owner": "work",
+        "shown": false,
+        "vertices": 288,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 4,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "fpStock",
+        "name": "",
+        "owner": "fp-stock",
+        "shown": false,
+        "vertices": 1068,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 5,
+            "name": "gunPaint:aa12",
+            "role": "furniture",
+            "paint": "aa12",
+            "color": 3290167,
+            "roughness": 0.76,
+            "metalness": 0.03,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "fpStock",
+        "name": "",
+        "owner": "fp-stock",
+        "shown": false,
+        "vertices": 1572,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 4,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "controls-trigger",
+        "name": "",
+        "owner": "controls-trigger",
+        "shown": false,
+        "vertices": 276,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 6,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 3685185,
+            "roughness": 0.6,
+            "metalness": 0.1,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "magStretch",
+        "name": "",
+        "owner": "magazineBody",
+        "shown": false,
+        "vertices": 14640,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 4,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "magazineTopRound",
+        "name": "magazine top round",
+        "owner": "",
+        "shown": false,
+        "vertices": 450,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 7,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 0.48,
+            "metalness": 0.2,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "mag",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 432,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 4,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "heatParts-barrel",
+        "name": "heatParts-barrel",
+        "owner": "",
+        "shown": false,
+        "vertices": 288,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 6,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 3685185,
+            "roughness": 0.6,
+            "metalness": 0.1,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "flash",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 49,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 8,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 16777113,
+            "transparent": true,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "laser",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 16,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 9,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 16732497,
+            "transparent": true,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "laserLightUnit",
+        "name": "",
+        "owner": "laserLightUnit",
+        "shown": false,
+        "vertices": 204,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 10,
+            "name": "gunPaint:aa12",
+            "role": "light shell",
+            "paint": "aa12",
+            "color": 4804954,
+            "roughness": 0.43,
+            "metalness": 0.33,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "laserLightUnit",
+        "name": "",
+        "owner": "laserLightUnit",
+        "shown": false,
+        "vertices": 204,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 11,
+            "name": "gunPaint:aa12",
+            "role": "light shell",
+            "paint": "aa12",
+            "color": 3290167,
+            "roughness": 0.76,
+            "metalness": 0.03,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "laserLightUnit",
+        "name": "",
+        "owner": "laserLightUnit",
+        "shown": false,
+        "vertices": 336,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 12,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 1323070,
+            "roughness": 0.08,
+            "metalness": 0.9,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": true
+          }
+        ]
+      },
+      {
+        "part": "laserLightUnit",
+        "name": "",
+        "owner": "laserLightUnit",
+        "shown": false,
+        "vertices": 2124,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 4,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "controls-selector",
+        "name": "",
+        "owner": "controls-selector",
+        "shown": false,
+        "vertices": 264,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 4,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 1548,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 13,
+            "name": "gunPaint:aa12",
+            "role": "receiver",
+            "paint": "aa12",
+            "color": 4804954,
+            "roughness": 0.43,
+            "metalness": 0.33,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 336,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 14,
+            "name": "gunPaint:aa12",
+            "role": "receiver",
+            "paint": "aa12",
+            "color": 3554369,
+            "roughness": 0.52,
+            "metalness": 0.26,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 1992,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 5,
+            "name": "gunPaint:aa12",
+            "role": "furniture",
+            "paint": "aa12",
+            "color": 3290167,
+            "roughness": 0.76,
+            "metalness": 0.03,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 3648,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 15,
+            "name": "gunPaint:aa12",
+            "role": "receiver",
+            "paint": "aa12",
+            "color": 4737873,
+            "roughness": 0.66,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 14232,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 4,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      }
+    ],
+    "pistol": [
+      {
+        "part": "slide",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 420,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 0,
+            "name": "gunPaint:pistol",
+            "role": "slide",
+            "paint": "pistol",
+            "color": 4344920,
+            "roughness": 0.36,
+            "metalness": 0.61,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "slide",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 36,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 1,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 16724770,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": true
+          }
+        ]
+      },
+      {
+        "part": "slide",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 7512,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 2,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "mag",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 2208,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 2,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "frame",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 144,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 3,
+            "name": "gunPaint:pistol",
+            "role": "frame",
+            "paint": "pistol",
+            "color": 3290167,
+            "roughness": 0.76,
+            "metalness": 0.03,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "heatParts-barrel",
+        "name": "",
+        "owner": "heatParts-barrel",
+        "shown": false,
+        "vertices": 726,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 2,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "frame",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 480,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 2,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "flash",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 49,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 4,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 16777113,
+            "transparent": true,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "laser",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 16,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 5,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 16732497,
+            "transparent": true,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "suppressor",
+        "name": "",
+        "owner": "suppressor",
+        "shown": false,
+        "vertices": 168,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 6,
+            "name": "gunPaint:pistol",
+            "role": "suppressor shell",
+            "paint": "pistol",
+            "color": 2566445,
+            "roughness": 0.68,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "suppressor",
+        "name": "",
+        "owner": "suppressor",
+        "shown": false,
+        "vertices": 480,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 7,
+            "name": "gunPaint:pistol",
+            "role": "suppressor shell",
+            "paint": "pistol",
+            "color": 3685185,
+            "roughness": 0.6,
+            "metalness": 0.1,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "suppressor",
+        "name": "",
+        "owner": "suppressor",
+        "shown": false,
+        "vertices": 264,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 2,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "laserLightUnit",
+        "name": "",
+        "owner": "laserLightUnit",
+        "shown": false,
+        "vertices": 108,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 8,
+            "name": "gunPaint:pistol",
+            "role": "light shell",
+            "paint": "pistol",
+            "color": 3290167,
+            "roughness": 0.76,
+            "metalness": 0.03,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "laserLightUnit",
+        "name": "",
+        "owner": "laserLightUnit",
+        "shown": false,
+        "vertices": 336,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 9,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 1323070,
+            "roughness": 0.08,
+            "metalness": 0.9,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": true
+          }
+        ]
+      },
+      {
+        "part": "laserLightUnit",
+        "name": "",
+        "owner": "laserLightUnit",
+        "shown": false,
+        "vertices": 1488,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 2,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "controls-trigger",
+        "name": "",
+        "owner": "controls-trigger",
+        "shown": false,
+        "vertices": 444,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 2,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "controls-magRelease",
+        "name": "",
+        "owner": "controls-magRelease",
+        "shown": false,
+        "vertices": 204,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 10,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 2566445,
+            "roughness": 0.68,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "controls-slideStop",
+        "name": "",
+        "owner": "controls-slideStop",
+        "shown": false,
+        "vertices": 168,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 11,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 3028028,
+            "roughness": 0.58,
+            "metalness": 0.29,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 4392,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 3,
+            "name": "gunPaint:pistol",
+            "role": "frame",
+            "paint": "pistol",
+            "color": 3290167,
+            "roughness": 0.76,
+            "metalness": 0.03,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 7200,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 2,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      }
+    ],
+    "uzi": [
+      {
+        "part": "work",
+        "name": "",
+        "owner": "work",
+        "shown": false,
+        "vertices": 912,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 0,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "opticRail",
+        "name": "",
+        "owner": "uzi-optic-rail",
+        "shown": false,
+        "vertices": 648,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 1,
+            "name": "gunPaint:uzi",
+            "role": "rail",
+            "paint": "uzi",
+            "color": 2566445,
+            "roughness": 0.68,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "opticRail",
+        "name": "",
+        "owner": "uzi-optic-rail",
+        "shown": false,
+        "vertices": 432,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 2,
+            "name": "gunPaint:uzi",
+            "role": "rail",
+            "paint": "uzi",
+            "color": 3685185,
+            "roughness": 0.6,
+            "metalness": 0.1,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "controls-safety",
+        "name": "controls-safety",
+        "owner": "",
+        "shown": false,
+        "vertices": 144,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 3,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 2566445,
+            "roughness": 0.68,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "controls-trigger",
+        "name": "",
+        "owner": "controls-trigger",
+        "shown": false,
+        "vertices": 276,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 4,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 3685185,
+            "roughness": 0.6,
+            "metalness": 0.1,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "controls-magRelease",
+        "name": "",
+        "owner": "controls-magRelease",
+        "shown": false,
+        "vertices": 744,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 0,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "controls-selector",
+        "name": "",
+        "owner": "controls-selector",
+        "shown": false,
+        "vertices": 372,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 0,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "mag",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 132,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 4,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 3685185,
+            "roughness": 0.6,
+            "metalness": 0.1,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "magazineTopRound",
+        "name": "magazine top round",
+        "owner": "",
+        "shown": false,
+        "vertices": 336,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 5,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 0.33,
+            "metalness": 0.55,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "mag",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 972,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 3,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 2566445,
+            "roughness": 0.68,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "heatParts-barrel",
+        "name": "heatParts-barrel",
+        "owner": "",
+        "shown": false,
+        "vertices": 360,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 4,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 3685185,
+            "roughness": 0.6,
+            "metalness": 0.1,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "recoilBoltParts[0]",
+        "name": "",
+        "owner": "recoil-bolt",
+        "shown": false,
+        "vertices": 144,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 6,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 6053992,
+            "roughness": 0.68,
+            "metalness": 0.06,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "recoilBoltParts[1]",
+        "name": "",
+        "owner": "recoil-bolt",
+        "shown": false,
+        "vertices": 144,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 4,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 3685185,
+            "roughness": 0.6,
+            "metalness": 0.1,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "flash",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 49,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 7,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 16777113,
+            "transparent": true,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "laser",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 16,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 8,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 16732497,
+            "transparent": true,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "suppressor",
+        "name": "",
+        "owner": "suppressor",
+        "shown": false,
+        "vertices": 168,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 9,
+            "name": "gunPaint:uzi",
+            "role": "suppressor shell",
+            "paint": "uzi",
+            "color": 2566445,
+            "roughness": 0.68,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "suppressor",
+        "name": "",
+        "owner": "suppressor",
+        "shown": false,
+        "vertices": 480,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 10,
+            "name": "gunPaint:uzi",
+            "role": "suppressor shell",
+            "paint": "uzi",
+            "color": 3685185,
+            "roughness": 0.6,
+            "metalness": 0.1,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "suppressor",
+        "name": "",
+        "owner": "suppressor",
+        "shown": false,
+        "vertices": 264,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 0,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "laserLightUnit",
+        "name": "railClamp",
+        "owner": "laserLightUnit",
+        "shown": false,
+        "vertices": 36,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 11,
+            "name": "gunPaint:uzi",
+            "role": "light shell",
+            "paint": "uzi",
+            "color": 2566445,
+            "roughness": 0.68,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "laserLightUnit",
+        "name": "moduleShell",
+        "owner": "laserLightUnit",
+        "shown": false,
+        "vertices": 36,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 12,
+            "name": "gunPaint:uzi",
+            "role": "light shell",
+            "paint": "uzi",
+            "color": 3290167,
+            "roughness": 0.76,
+            "metalness": 0.03,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "laserLightUnit",
+        "name": "",
+        "owner": "laserLightUnit",
+        "shown": false,
+        "vertices": 336,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 13,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 1323070,
+            "roughness": 0.08,
+            "metalness": 0.9,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": true
+          }
+        ]
+      },
+      {
+        "part": "laserLightUnit",
+        "name": "",
+        "owner": "laserLightUnit",
+        "shown": false,
+        "vertices": 396,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 1,
+            "name": "gunPaint:uzi",
+            "role": "rail",
+            "paint": "uzi",
+            "color": 2566445,
+            "roughness": 0.68,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "laserLightUnit",
+        "name": "",
+        "owner": "laserLightUnit",
+        "shown": false,
+        "vertices": 576,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 2,
+            "name": "gunPaint:uzi",
+            "role": "rail",
+            "paint": "uzi",
+            "color": 3685185,
+            "roughness": 0.6,
+            "metalness": 0.1,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "laserLightUnit",
+        "name": "",
+        "owner": "laserLightUnit",
+        "shown": false,
+        "vertices": 1092,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 0,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 696,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 14,
+            "name": "gunPaint:uzi",
+            "role": "receiver",
+            "paint": "uzi",
+            "color": 4804951,
+            "roughness": 0.48,
+            "metalness": 0.28,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 3300,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 15,
+            "name": "gunPaint:uzi",
+            "role": "receiver",
+            "paint": "uzi",
+            "color": 5594724,
+            "roughness": 0.38,
+            "metalness": 0.36,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 1836,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 16,
+            "name": "gunPaint:uzi",
+            "role": "furniture",
+            "paint": "uzi",
+            "color": 3290167,
+            "roughness": 0.76,
+            "metalness": 0.03,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 2016,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 17,
+            "name": "gunPaint:uzi",
+            "role": "furniture",
+            "paint": "uzi",
+            "color": 2566445,
+            "roughness": 0.68,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 16392,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 0,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      }
+    ],
+    "shotgun": [
+      {
+        "part": "body",
+        "name": "shotgun receiver",
+        "owner": "",
+        "shown": false,
+        "vertices": 420,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 0,
+            "name": "gunPaint:shotgun",
+            "role": "receiver",
+            "paint": "shotgun",
+            "color": 5594213,
+            "roughness": 0.43,
+            "metalness": 0.32,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "shotgunBolt",
+        "name": "",
+        "owner": "shotgun-bolt",
+        "shown": false,
+        "vertices": 480,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 1,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "shotgun lifter",
+        "owner": "",
+        "shown": false,
+        "vertices": 804,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 2,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 7897994,
+            "roughness": 0.38,
+            "metalness": 0.46,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "shotgun-slide-lock",
+        "name": "",
+        "owner": "shotgun-slide-lock",
+        "shown": false,
+        "vertices": 312,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 1,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "controls-trigger",
+        "name": "shotgun trigger",
+        "owner": "controls-trigger",
+        "shown": false,
+        "vertices": 276,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 3,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 3685185,
+            "roughness": 0.6,
+            "metalness": 0.1,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "fpStock",
+        "name": "",
+        "owner": "fp-stock",
+        "shown": false,
+        "vertices": 948,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 1,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "pump",
+        "name": "",
+        "owner": "controls-pump",
+        "shown": false,
+        "vertices": 4536,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 4,
+            "name": "gunPaint:shotgun",
+            "role": "furniture",
+            "paint": "shotgun",
+            "color": 3684667,
+            "roughness": 0.8,
+            "metalness": 0.04,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "pump",
+        "name": "",
+        "owner": "controls-pump",
+        "shown": false,
+        "vertices": 288,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 5,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 5594468,
+            "roughness": 0.46,
+            "metalness": 0.48,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "heatParts-barrel",
+        "name": "",
+        "owner": "heatParts-barrel",
+        "shown": false,
+        "vertices": 192,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 6,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 3752525,
+            "roughness": 0.37,
+            "metalness": 0.57,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "receiver",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 720,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 7,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 8752787,
+            "roughness": 0.55,
+            "metalness": 0.38,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "receiver",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 5736,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 1,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "flash",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 49,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 8,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 16777113,
+            "transparent": true,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "laser",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 16,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 9,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 16732497,
+            "transparent": true,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "reloadShell",
+        "name": "shotgun reload shell",
+        "owner": "",
+        "shown": false,
+        "vertices": 450,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 10,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 0.52,
+            "metalness": 0.14,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "suppressor",
+        "name": "",
+        "owner": "suppressor",
+        "shown": false,
+        "vertices": 1128,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 11,
+            "name": "gunPaint:shotgun",
+            "role": "suppressor shell",
+            "paint": "shotgun",
+            "color": 3685185,
+            "roughness": 0.6,
+            "metalness": 0.1,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "suppressor",
+        "name": "",
+        "owner": "suppressor",
+        "shown": false,
+        "vertices": 312,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 12,
+            "name": "gunPaint:shotgun",
+            "role": "suppressor shell",
+            "paint": "shotgun",
+            "color": 2566445,
+            "roughness": 0.68,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "suppressor",
+        "name": "",
+        "owner": "suppressor",
+        "shown": false,
+        "vertices": 264,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 1,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "laserLightUnit",
+        "name": "sideRail",
+        "owner": "laserLightUnit",
+        "shown": false,
+        "vertices": 36,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 13,
+            "name": "gunPaint:shotgun",
+            "role": "light shell",
+            "paint": "shotgun",
+            "color": 6053992,
+            "roughness": 0.68,
+            "metalness": 0.06,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "laserLightUnit",
+        "name": "",
+        "owner": "laserLightUnit",
+        "shown": false,
+        "vertices": 336,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 14,
+            "name": "gunPaint:shotgun",
+            "role": "light shell",
+            "paint": "shotgun",
+            "color": 3290167,
+            "roughness": 0.76,
+            "metalness": 0.03,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "laserLightUnit",
+        "name": "",
+        "owner": "laserLightUnit",
+        "shown": false,
+        "vertices": 336,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 15,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 1323070,
+            "roughness": 0.08,
+            "metalness": 0.9,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": true
+          }
+        ]
+      },
+      {
+        "part": "laserLightUnit",
+        "name": "",
+        "owner": "laserLightUnit",
+        "shown": false,
+        "vertices": 2304,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 1,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "controls-safety",
+        "name": "",
+        "owner": "controls-safety",
+        "shown": false,
+        "vertices": 480,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 5,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 5594468,
+            "roughness": 0.46,
+            "metalness": 0.48,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 4872,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 4,
+            "name": "gunPaint:shotgun",
+            "role": "furniture",
+            "paint": "shotgun",
+            "color": 3684667,
+            "roughness": 0.8,
+            "metalness": 0.04,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 3108,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 1,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      }
+    ],
+    "revolver": [
+      {
+        "part": "crane",
+        "name": "",
+        "owner": "revolver-crane",
+        "shown": false,
+        "vertices": 456,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 0,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 4213077,
+            "roughness": 0.32,
+            "metalness": 0.68,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "heatParts-barrel",
+        "name": "heatParts-barrel",
+        "owner": "",
+        "shown": false,
+        "vertices": 1008,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 0,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 4213077,
+            "roughness": 0.32,
+            "metalness": 0.68,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "revolver-trigger",
+        "name": "",
+        "owner": "revolver-trigger",
+        "shown": false,
+        "vertices": 468,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 1,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 6445133,
+            "roughness": 0.4,
+            "metalness": 0.68,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "revolver-chamber-layer-0",
+        "name": "revolver-chamber-layer-0",
+        "owner": "",
+        "shown": false,
+        "vertices": 222,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 2,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "revolver-visible-tips",
+        "name": "revolver-visible-tips",
+        "owner": "",
+        "shown": false,
+        "vertices": 65,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 3,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 13140315,
+            "roughness": 0.32,
+            "metalness": 0.58,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "mag",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 4848,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 2,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "speedloader",
+        "name": "",
+        "owner": "speedloader",
+        "shown": false,
+        "vertices": 153,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 4,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 2566445,
+            "roughness": 0.68,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "revolver-palm-instances",
+        "name": "revolver-palm-instances",
+        "owner": "",
+        "shown": false,
+        "vertices": 294,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 5,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 0.32,
+            "metalness": 0.58,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "revolver-spent-instances",
+        "name": "revolver-spent-instances",
+        "owner": "",
+        "shown": false,
+        "vertices": 273,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 5,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 0.32,
+            "metalness": 0.58,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "revolver-loader-instances",
+        "name": "revolver-loader-instances",
+        "owner": "",
+        "shown": false,
+        "vertices": 294,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 5,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 0.32,
+            "metalness": 0.58,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "controls-hammer",
+        "name": "",
+        "owner": "controls-hammer",
+        "shown": false,
+        "vertices": 1752,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 2,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "flash",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 49,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 6,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 16777113,
+            "transparent": true,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "laser",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 16,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 7,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 16732497,
+            "transparent": true,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "laserLightUnit",
+        "name": "railClamp",
+        "owner": "laserLightUnit",
+        "shown": false,
+        "vertices": 36,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 8,
+            "name": "gunPaint:revolver",
+            "role": "light shell",
+            "paint": "revolver",
+            "color": 2566445,
+            "roughness": 0.68,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "laserLightUnit",
+        "name": "moduleShell",
+        "owner": "laserLightUnit",
+        "shown": false,
+        "vertices": 36,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 9,
+            "name": "gunPaint:revolver",
+            "role": "light shell",
+            "paint": "revolver",
+            "color": 3290167,
+            "roughness": 0.76,
+            "metalness": 0.03,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "laserLightUnit",
+        "name": "",
+        "owner": "laserLightUnit",
+        "shown": false,
+        "vertices": 144,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 10,
+            "name": "gunPaint:revolver",
+            "role": "rail",
+            "paint": "revolver",
+            "color": 4213077,
+            "roughness": 0.32,
+            "metalness": 0.68,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "laserLightUnit",
+        "name": "",
+        "owner": "laserLightUnit",
+        "shown": false,
+        "vertices": 336,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 11,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 1323070,
+            "roughness": 0.08,
+            "metalness": 0.9,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": true
+          }
+        ]
+      },
+      {
+        "part": "laserLightUnit",
+        "name": "",
+        "owner": "laserLightUnit",
+        "shown": false,
+        "vertices": 360,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 12,
+            "name": "gunPaint:revolver",
+            "role": "rail",
+            "paint": "revolver",
+            "color": 2566445,
+            "roughness": 0.68,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "laserLightUnit",
+        "name": "",
+        "owner": "laserLightUnit",
+        "shown": false,
+        "vertices": 432,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 13,
+            "name": "gunPaint:revolver",
+            "role": "rail",
+            "paint": "revolver",
+            "color": 3685185,
+            "roughness": 0.6,
+            "metalness": 0.1,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "laserLightUnit",
+        "name": "",
+        "owner": "laserLightUnit",
+        "shown": false,
+        "vertices": 1092,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 2,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "opticPlate",
+        "name": "",
+        "owner": "revolverOpticPlate",
+        "shown": false,
+        "vertices": 288,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 10,
+            "name": "gunPaint:revolver",
+            "role": "rail",
+            "paint": "revolver",
+            "color": 4213077,
+            "roughness": 0.32,
+            "metalness": 0.68,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "opticPlate",
+        "name": "",
+        "owner": "revolverOpticPlate",
+        "shown": false,
+        "vertices": 480,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 4,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 2566445,
+            "roughness": 0.68,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 2640,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 14,
+            "name": "gunPaint:revolver",
+            "role": "frame",
+            "paint": "revolver",
+            "color": 4213077,
+            "roughness": 0.32,
+            "metalness": 0.68,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 6108,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 15,
+            "name": "Revolver walnut",
+            "role": "",
+            "paint": "",
+            "color": 7751983,
+            "roughness": 0.48,
+            "metalness": 0,
+            "transparent": false,
+            "map": true,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 984,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 16,
+            "name": "Revolver walnut inset",
+            "role": "",
+            "paint": "",
+            "color": 5716258,
+            "roughness": 0.65,
+            "metalness": 0,
+            "transparent": false,
+            "map": true,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 11898,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 2,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      }
+    ],
+    "sniper": [
+      {
+        "part": "controls-trigger",
+        "name": "",
+        "owner": "controls-trigger",
+        "shown": false,
+        "vertices": 276,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 0,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 3685185,
+            "roughness": 0.6,
+            "metalness": 0.1,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 852,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 1,
+            "name": "gunPaint:sniper",
+            "role": "furniture",
+            "paint": "sniper",
+            "color": 3290167,
+            "roughness": 0.76,
+            "metalness": 0.03,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "mag",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 132,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 0,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 3685185,
+            "roughness": 0.6,
+            "metalness": 0.1,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "magazineTopRound",
+        "name": "magazine top round",
+        "owner": "",
+        "shown": false,
+        "vertices": 378,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 2,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 0.39,
+            "metalness": 0.42,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "mag",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 1428,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 3,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 0.66,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "fpStock",
+        "name": "",
+        "owner": "fp-stock",
+        "shown": false,
+        "vertices": 816,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 4,
+            "name": "gunPaint:sniper",
+            "role": "furniture",
+            "paint": "sniper",
+            "color": 10126688,
+            "roughness": 0.74,
+            "metalness": 0.05,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "fpStock",
+        "name": "",
+        "owner": "fp-stock",
+        "shown": false,
+        "vertices": 1584,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 3,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 0.66,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "fpStock",
+        "name": "",
+        "owner": "fp-stock",
+        "shown": false,
+        "vertices": 2664,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 5,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 30,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 6,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 4737873,
+            "roughness": 0.66,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "scope",
+        "shown": false,
+        "vertices": 90,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 7,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 1323070,
+            "roughness": 0.08,
+            "metalness": 0.9,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": true
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "scope",
+        "shown": false,
+        "vertices": 7992,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 3,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 0.66,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "scope",
+        "shown": false,
+        "vertices": 1632,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 5,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "bolt",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 1968,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 3,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 0.66,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "bolt",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 312,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 5,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "boltRound",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 378,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 2,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 0.39,
+            "metalness": 0.42,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "flash",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 49,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 8,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 16777113,
+            "transparent": true,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "laser",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 16,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 9,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 16732497,
+            "transparent": true,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "suppressor",
+        "name": "",
+        "owner": "suppressor",
+        "shown": false,
+        "vertices": 648,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 10,
+            "name": "gunPaint:sniper",
+            "role": "suppressor shell",
+            "paint": "sniper",
+            "color": 3685185,
+            "roughness": 0.6,
+            "metalness": 0.1,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "suppressor",
+        "name": "",
+        "owner": "suppressor",
+        "shown": false,
+        "vertices": 1032,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 11,
+            "name": "gunPaint:sniper",
+            "role": "suppressor shell",
+            "paint": "sniper",
+            "color": 2566445,
+            "roughness": 0.68,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "suppressor",
+        "name": "",
+        "owner": "suppressor",
+        "shown": false,
+        "vertices": 264,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 5,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "laserLightUnit",
+        "name": "moduleShell",
+        "owner": "laserLightUnit",
+        "shown": false,
+        "vertices": 36,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 12,
+            "name": "gunPaint:sniper",
+            "role": "light shell",
+            "paint": "sniper",
+            "color": 3290167,
+            "roughness": 0.76,
+            "metalness": 0.03,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "laserLightUnit",
+        "name": "topPlate",
+        "owner": "laserLightUnit",
+        "shown": false,
+        "vertices": 36,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 13,
+            "name": "gunPaint:sniper",
+            "role": "light shell",
+            "paint": "sniper",
+            "color": 2566445,
+            "roughness": 0.68,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "laserLightUnit",
+        "name": "",
+        "owner": "laserLightUnit",
+        "shown": false,
+        "vertices": 336,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 7,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 1323070,
+            "roughness": 0.08,
+            "metalness": 0.9,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": true
+          }
+        ]
+      },
+      {
+        "part": "laserLightUnit",
+        "name": "",
+        "owner": "laserLightUnit",
+        "shown": false,
+        "vertices": 1800,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 3,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 0.66,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "controls-magRelease",
+        "name": "",
+        "owner": "controls-magRelease",
+        "shown": false,
+        "vertices": 144,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 14,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 2566445,
+            "roughness": 0.68,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "heatParts-barrel",
+        "name": "",
+        "owner": "heatParts-barrel",
+        "shown": false,
+        "vertices": 384,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 0,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 3685185,
+            "roughness": 0.6,
+            "metalness": 0.1,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 3828,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 15,
+            "name": "gunPaint:sniper",
+            "role": "receiver",
+            "paint": "sniper",
+            "color": 10126688,
+            "roughness": 0.74,
+            "metalness": 0.05,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 1656,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 16,
+            "name": "gunPaint:sniper",
+            "role": "rail",
+            "paint": "sniper",
+            "color": 2566445,
+            "roughness": 0.68,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 4608,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 17,
+            "name": "gunPaint:sniper",
+            "role": "rail",
+            "paint": "sniper",
+            "color": 3685185,
+            "roughness": 0.6,
+            "metalness": 0.1,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 5304,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 3,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 0.66,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "scope rail bridge",
+        "owner": "optic.nx8",
+        "shown": false,
+        "vertices": 84,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 18,
+            "name": "gunPaint:sniper",
+            "role": "optic shell",
+            "paint": "sniper",
+            "color": 2369578,
+            "roughness": 0.74,
+            "metalness": 0.05,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "NX8 tapered optical housing",
+        "owner": "optic.nx8",
+        "shown": false,
+        "vertices": 2304,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 19,
+            "name": "gunPaint:sniper",
+            "role": "optic shell",
+            "paint": "sniper",
+            "color": 4344399,
+            "roughness": 0.52,
+            "metalness": 0.24,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "50 mm objective lens",
+        "owner": "optic.nx8",
+        "shown": false,
+        "vertices": 26,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 20,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 7837850,
+            "roughness": 0.14,
+            "metalness": 0,
+            "transparent": true,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "ocular lens",
+        "owner": "optic.nx8",
+        "shown": false,
+        "vertices": 26,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 20,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 7837850,
+            "roughness": 0.14,
+            "metalness": 0,
+            "transparent": true,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "optic.nx8",
+        "shown": false,
+        "vertices": 1932,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 21,
+            "name": "gunPaint:sniper",
+            "role": "optic shell",
+            "paint": "sniper",
+            "color": 3027508,
+            "roughness": 0.5,
+            "metalness": 0.55,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "optic.nx8",
+        "shown": false,
+        "vertices": 2688,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 5,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 6756,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 5,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      }
+    ],
+    "launcher": [
+      {
+        "part": "defaultSight",
+        "name": "",
+        "owner": "launcher-iron-leaf",
+        "shown": false,
+        "vertices": 1440,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 0,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "opticPlate",
+        "name": "",
+        "owner": "launcher-optic-seat",
+        "shown": false,
+        "vertices": 144,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 1,
+            "name": "gunPaint:launcher",
+            "role": "rail",
+            "paint": "launcher",
+            "color": 2566445,
+            "roughness": 0.68,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "opticPlate",
+        "name": "",
+        "owner": "launcher-optic-seat",
+        "shown": false,
+        "vertices": 144,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 2,
+            "name": "gunPaint:launcher",
+            "role": "rail",
+            "paint": "launcher",
+            "color": 6053992,
+            "roughness": 0.68,
+            "metalness": 0.06,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "fpStock",
+        "name": "",
+        "owner": "fp-stock",
+        "shown": false,
+        "vertices": 588,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 3,
+            "name": "gunPaint:launcher",
+            "role": "furniture",
+            "paint": "launcher",
+            "color": 5397051,
+            "roughness": 0.74,
+            "metalness": 0.06,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "fpStock",
+        "name": "",
+        "owner": "fp-stock",
+        "shown": false,
+        "vertices": 1332,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 0,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "controls-trigger",
+        "name": "",
+        "owner": "controls-trigger",
+        "shown": false,
+        "vertices": 276,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 4,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 3685185,
+            "roughness": 0.6,
+            "metalness": 0.1,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "drumLatch",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 264,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 0,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "mag",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 144,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 5,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 6053992,
+            "roughness": 0.68,
+            "metalness": 0.06,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "drumWinder",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 288,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 0,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "launcher-loaded-inserts",
+        "name": "launcher-loaded-inserts",
+        "owner": "",
+        "shown": false,
+        "vertices": 255,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 6,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 0.78,
+            "metalness": 0.18,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "drum",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 12528,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 0,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "loadRound",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 255,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 6,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 0.78,
+            "metalness": 0.18,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "flash",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 49,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 7,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 16769945,
+            "transparent": true,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "laser",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 16,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 8,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 16732497,
+            "transparent": true,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "laserLightUnit",
+        "name": "moduleShell",
+        "owner": "laserLightUnit",
+        "shown": false,
+        "vertices": 36,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 9,
+            "name": "gunPaint:launcher",
+            "role": "light shell",
+            "paint": "launcher",
+            "color": 3290167,
+            "roughness": 0.76,
+            "metalness": 0.03,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "laserLightUnit",
+        "name": "topPlate",
+        "owner": "laserLightUnit",
+        "shown": false,
+        "vertices": 36,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 10,
+            "name": "gunPaint:launcher",
+            "role": "light shell",
+            "paint": "launcher",
+            "color": 2566445,
+            "roughness": 0.68,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "laserLightUnit",
+        "name": "",
+        "owner": "laserLightUnit",
+        "shown": false,
+        "vertices": 336,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 11,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 1323070,
+            "roughness": 0.08,
+            "metalness": 0.9,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": true
+          }
+        ]
+      },
+      {
+        "part": "laserLightUnit",
+        "name": "",
+        "owner": "laserLightUnit",
+        "shown": false,
+        "vertices": 1800,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 0,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "heatParts-barrel",
+        "name": "",
+        "owner": "heatParts-barrel",
+        "shown": false,
+        "vertices": 192,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 4,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 3685185,
+            "roughness": 0.6,
+            "metalness": 0.1,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 408,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 12,
+            "name": "gunPaint:launcher",
+            "role": "receiver",
+            "paint": "launcher",
+            "color": 7371134,
+            "roughness": 0.69,
+            "metalness": 0.38,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 1848,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 13,
+            "name": "gunPaint:launcher",
+            "role": "furniture",
+            "paint": "launcher",
+            "color": 3290167,
+            "roughness": 0.76,
+            "metalness": 0.03,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 3564,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 1,
+            "name": "gunPaint:launcher",
+            "role": "rail",
+            "paint": "launcher",
+            "color": 2566445,
+            "roughness": 0.68,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 7920,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 14,
+            "name": "gunPaint:launcher",
+            "role": "rail",
+            "paint": "launcher",
+            "color": 3685185,
+            "roughness": 0.6,
+            "metalness": 0.1,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 8928,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 0,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      }
+    ],
+    "flamer": [
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 63,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 0,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 16752704,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": true
+          }
+        ]
+      },
+      {
+        "part": "fuelCan",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 144,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 1,
+            "name": "gunPaint:flamer",
+            "role": "",
+            "paint": "flamer",
+            "color": 14263583,
+            "roughness": 0.55,
+            "metalness": 0.2,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "fuelCan",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 1080,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 2,
+            "name": "gunPaint:flamer",
+            "role": "",
+            "paint": "flamer",
+            "color": 11019804,
+            "roughness": 0.5,
+            "metalness": 0.3,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "fuelCan",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 2304,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 3,
+            "name": "gunPaint:flamer",
+            "role": "",
+            "paint": "flamer",
+            "color": 3290167,
+            "roughness": 0.76,
+            "metalness": 0.03,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "fuelCan",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 384,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 4,
+            "name": "gunPaint:flamer",
+            "role": "",
+            "paint": "flamer",
+            "color": 11581117,
+            "roughness": 0.26,
+            "metalness": 0.62,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "fuelCan",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 192,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 5,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 13015877,
+            "roughness": 0.3,
+            "metalness": 0.65,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "fuelCan",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 1728,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 6,
+            "name": "gunPaint:flamer",
+            "role": "",
+            "paint": "flamer",
+            "color": 16777215,
+            "roughness": 0.66,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 72,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 7,
+            "name": "gunPaint:flamer",
+            "role": "",
+            "paint": "flamer",
+            "color": 15262936,
+            "roughness": 0.5,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "fuelNeedle",
+        "name": "",
+        "owner": "fuel-gauge-needle",
+        "shown": false,
+        "vertices": 52,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 8,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 16724770,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": true
+          }
+        ]
+      },
+      {
+        "part": "fuelNeedle",
+        "name": "",
+        "owner": "fuel-gauge-needle",
+        "shown": false,
+        "vertices": 120,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 9,
+            "name": "gunPaint:flamer",
+            "role": "",
+            "paint": "flamer",
+            "color": 2566445,
+            "roughness": 0.68,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 2808,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 3,
+            "name": "gunPaint:flamer",
+            "role": "",
+            "paint": "flamer",
+            "color": 3290167,
+            "roughness": 0.76,
+            "metalness": 0.03,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 3804,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 10,
+            "name": "gunPaint:flamer",
+            "role": "",
+            "paint": "flamer",
+            "color": 3685185,
+            "roughness": 0.6,
+            "metalness": 0.1,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 732,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 4,
+            "name": "gunPaint:flamer",
+            "role": "",
+            "paint": "flamer",
+            "color": 11581117,
+            "roughness": 0.26,
+            "metalness": 0.62,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 16944,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 6,
+            "name": "gunPaint:flamer",
+            "role": "",
+            "paint": "flamer",
+            "color": 16777215,
+            "roughness": 0.66,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 2736,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 11,
+            "name": "fold-static",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "roughness": 1,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": true,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "flare",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 18,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 12,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 16777215,
+            "transparent": true,
+            "map": true,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      }
+    ],
+    "chainsaw": [
+      {
+        "part": "fuelCap",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 64,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 0,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 1513498,
+            "roughness": 0.95,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "fuelCap",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 96,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 1,
+            "name": "gunPaint:chainsaw",
+            "role": "",
+            "paint": "chainsaw",
+            "color": 3685185,
+            "roughness": 0.6,
+            "metalness": 0.1,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 276,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 2,
+            "name": "gunPaint:chainsaw",
+            "role": "",
+            "paint": "chainsaw",
+            "color": 14263583,
+            "roughness": 0.55,
+            "metalness": 0.2,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "starterHandle",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 144,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 3,
+            "name": "gunPaint:chainsaw",
+            "role": "",
+            "paint": "chainsaw",
+            "color": 6053992,
+            "roughness": 0.68,
+            "metalness": 0.06,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "starterHandle",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 144,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 4,
+            "name": "gunPaint:chainsaw",
+            "role": "",
+            "paint": "chainsaw",
+            "color": 3290167,
+            "roughness": 0.76,
+            "metalness": 0.03,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "starterCord",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 72,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 5,
+            "name": "gunPaint:chainsaw",
+            "role": "",
+            "paint": "chainsaw",
+            "color": 2566445,
+            "roughness": 0.68,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "chainInst",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 156,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 6,
+            "name": "gunPaint:chainsaw",
+            "role": "",
+            "paint": "chainsaw",
+            "color": 11581117,
+            "roughness": 0.26,
+            "metalness": 0.62,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 1224,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 7,
+            "name": "gunPaint:chainsaw",
+            "role": "",
+            "paint": "chainsaw",
+            "color": 11647410,
+            "roughness": 0.55,
+            "metalness": 0.62,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "sawBloodGroup",
+        "name": "",
+        "owner": "saw-blood-overlay",
+        "shown": false,
+        "vertices": 84,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 8,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 5898754,
+            "roughness": 0.22,
+            "metalness": 0.1,
+            "transparent": true,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 828,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 9,
+            "name": "gunPaint:chainsaw",
+            "role": "",
+            "paint": "chainsaw",
+            "color": 11031077,
+            "roughness": 0.66,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 660,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 10,
+            "name": "gunPaint:chainsaw",
+            "role": "",
+            "paint": "chainsaw",
+            "color": 13003566,
+            "roughness": 0.66,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 2460,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 3,
+            "name": "gunPaint:chainsaw",
+            "role": "",
+            "paint": "chainsaw",
+            "color": 6053992,
+            "roughness": 0.68,
+            "metalness": 0.06,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 1128,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 0,
+            "name": "",
+            "role": "",
+            "paint": "",
+            "color": 1513498,
+            "roughness": 0.95,
+            "metalness": 0,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 2196,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 4,
+            "name": "gunPaint:chainsaw",
+            "role": "",
+            "paint": "chainsaw",
+            "color": 3290167,
+            "roughness": 0.76,
+            "metalness": 0.03,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 8424,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 5,
+            "name": "gunPaint:chainsaw",
+            "role": "",
+            "paint": "chainsaw",
+            "color": 2566445,
+            "roughness": 0.68,
+            "metalness": 0.08,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 1680,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 1,
+            "name": "gunPaint:chainsaw",
+            "role": "",
+            "paint": "chainsaw",
+            "color": 3685185,
+            "roughness": 0.6,
+            "metalness": 0.1,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      },
+      {
+        "part": "body",
+        "name": "",
+        "owner": "",
+        "shown": false,
+        "vertices": 7392,
+        "drawGroups": 1,
+        "finishes": [
+          {
+            "id": 6,
+            "name": "gunPaint:chainsaw",
+            "role": "",
+            "paint": "chainsaw",
+            "color": 11581117,
+            "roughness": 0.26,
+            "metalness": 0.62,
+            "transparent": false,
+            "map": false,
+            "vertexColors": false,
+            "fx": false
+          }
+        ]
+      }
+    ]
+  },
+  "offhand": {
+    "setter": "function",
+    "independent": true
+  },
+  "clone": {
+    "mount": "fitted-optic-rmr",
+    "child": true,
+    "copy": "fitted-optic-rmr",
+    "copyChild": true
+  }
+}

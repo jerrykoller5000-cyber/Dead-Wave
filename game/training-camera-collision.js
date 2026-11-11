@@ -18,18 +18,27 @@ export function trainingCloseFraming(head,eye,look,forward){
 
 // If the old orbit is squeezed between the marine and a station, move to the
 // station's player side. Turning the eye alone cannot show a prop behind it.
-export function trainingStationShoulder(head,eye,look,stations,pull){
-  let chosen=null,best=3.8;
+export function trainingStationShoulder(head,eye,look,stations,pull,forward){
+  let chosen=null,best=8.5;
   for(const s of Object.values(stations||{})){
     if(!s?.front||!Number.isFinite(s.x)||!Number.isFinite(s.z))continue;
+    const nx=s.front.x-s.x,nz=s.front.z-s.z;
+    if((head.x-s.front.x)*nx+(head.z-s.front.z)*nz<-.2*Math.hypot(nx,nz))continue;
     const d=Math.hypot(head.x-s.front.x,head.z-s.front.z);
     if(d<best){best=d;chosen=s;}
   }
   if(!chosen)return null;
   const dx=chosen.front.x-chosen.x,dz=chosen.front.z-chosen.z;
   const length=Math.hypot(dx,dz)||1,nx=dx/length,nz=dz/length;
-  const distanceWeight=Math.max(0,Math.min(1,(3.8-best)/2));
-  const u=distanceWeight*distanceWeight*(3-2*distanceWeight);
+  // The station view is for approaching its face. Looking across that face
+  // (such as down the firing lane) keeps the ordinary hip/ADS aim camera.
+  const facing=forward?nx*forward.x+nz*forward.z:1;
+  const facingWeight=Math.max(0,Math.min(1,(facing-.35)/.4));
+  if(!facingWeight)return null;
+  // Start on the open approach. Waiting for the ray to hit the station's
+  // envelope makes a far orbit eye jump to the near face in one frame.
+  const distanceWeight=Math.max(0,Math.min(1,(8.5-best)/4.7));
+  const u=distanceWeight*distanceWeight*(3-2*distanceWeight)*facingWeight*facingWeight*(3-2*facingWeight);
   eye.x+=(head.x+nx*1.5+nz*.45-eye.x)*u;
   eye.y+=(head.y+.32-eye.y)*u;
   eye.z+=(head.z+nz*1.5-nx*.45-eye.z)*u;

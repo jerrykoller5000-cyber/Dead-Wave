@@ -7,7 +7,7 @@ import { gunDetail } from './gun-detail.js';
 import { attachLaserLight } from './weapon-attachments.js';
 import { fitPortCarrier, roundGeometry } from './weapon-casings.js';
 import { markPaintSurface, walnutTexture } from './weapon-finish.js';
-import { addTriggerArtwork, bindModelArtwork, groupArtwork } from './weapon-model-hooks.js';
+import { addTriggerArtwork, bindModelArtwork, groupArtwork, optionalArtworkGroup } from './weapon-model-hooks.js';
 
 function ventedSleeve(T, parent, material, { z0, z1, radius, wall, y, faces = 12, slots, ventFaces }) {
   const pos = [], uv = [], step = Math.PI * 2 / faces;
@@ -114,10 +114,10 @@ export function makeM4Model(ctx) {
   // door, the brass deflector and the forward assist behind it; the seam to the lower at y 0.
   K.slab([[-0.18, -0.006], [0.2, -0.006], [0.2, 0.07], [0.192, 0.078], [-0.168, 0.078], [-0.18, 0.066]], UW, finish.upper, { bevel: 0.005, segs: 2 });
   paintedRail(0.36, 0, 0.085, 0.01, null, 0.031);
-  const opticSeat = K.group(0, 0, 0);
-  opticSeat.name = 'flat-top optic adapter'; opticSeat.visible = false;
-  K.box(0.034, 0.011, 0.070, gunDark, 0, 0.1015, 0.005, 0, 0, 0, opticSeat, 0.001);
-  gun.userData.opticPlate = opticSeat;
+  gun.userData.opticPlate = optionalArtworkGroup(ctx, gun, 'flat-top optic adapter', plate => {
+    K.box(0.034, 0.011, 0.070, gunDark, 0, 0.1015, 0.005, 0, 0, 0, plate, 0.001);
+    for (const piece of plate.children) markPaintSurface(piece, 'optic shell');
+  });
   gun.userData.ejectPort = [UW / 2 + 0.008, 0.029, 0.062];
   K.slab([[-0.11, 0.0], [0.16, 0.0], [0.16, 0.058], [-0.06, 0.058], [-0.11, 0.04]], 0.012, finish.upper, { x: UW / 2, bevel: 0.004 });   // the bulge round the port
   // CL-318 (J26: "ejection port needs work"): the port as a real cut: a raised rim round a 57 x 22 mm opening, the dark
@@ -311,8 +311,6 @@ export function makeM4Model(ctx) {
       markPaintSurface(mesh, 'receiver');
     } else if (mat === finish.furniture) {
       markPaintSurface(mesh, 'furniture');
-    } else if (mesh.parent === opticSeat) {
-      markPaintSurface(mesh, 'optic shell');
     }
   });
   bindModelArtwork(gun, 'controls', 'selector', groupArtwork(THREE, selector, selectorCap));
@@ -373,19 +371,19 @@ export function makeAkModel(ctx) {
   D.pin(gun, 0, 0.0, -0.12, { axis: 'x', len: 2 * HW, r: 0.003, mat: gunDark, caps: true });   // the hammer pin
   D.pin(gun, 0, -0.006, -0.06, { axis: 'x', len: 2 * HW, r: 0.003, mat: gunDark, caps: true });  // the trigger pin
   // Removable side bracket. Its shelf supports the short optic rail at y=.085.
-  const opticSeat = K.group(0, 0, 0);
-  opticSeat.name = 'side optic bracket'; opticSeat.visible = false;
-  K.box(0.010, 0.025, 0.111, gunDark, -HW - 0.005, 0.008, 0.063, 0, 0, 0, opticSeat, 0.002);
-  // A flared side plate carries the visual weight of the sight. The scallop
-  // leaves a strip of the rounded cover visible below the rail in profile.
-  K.slab([[.009,.020],[.109,.020],[.114,.026],[.097,.041],[.093,.054],
-    [.111,.069],[.111,.077],[.017,.077],[.017,.065],[.035,.048],
-    [.032,.039],[.009,.029]], .010, bracket, {x:-HW-.005,bevel:.002,segs:3,parent:opticSeat}).name = 'KR-7 bracket web';
-  K.slab([[.013,.007],[.014,.016],[.052,.025],[.063,.024],[.065,.019],
-    [.056,.014],[.026,.006]], .003, gunDark,
-    {x:-HW-.011,bevel:.0009,segs:2,parent:opticSeat}).name = 'KR-7 bracket latch';
-  K.box(HW + 0.027, 0.008, 0.100, gunDark, (0.007 - HW) / 2, 0.081, 0.064, 0, 0, 0, opticSeat, 0.0015);
-  gun.userData.opticPlate = opticSeat;
+  gun.userData.opticPlate = optionalArtworkGroup(ctx, gun, 'side optic bracket', plate => {
+    K.box(0.010, 0.025, 0.111, gunDark, -HW - 0.005, 0.008, 0.063, 0, 0, 0, plate, 0.002);
+    // A flared side plate carries the visual weight of the sight. The scallop
+    // leaves a strip of the rounded cover visible below the rail in profile.
+    K.slab([[.009,.020],[.109,.020],[.114,.026],[.097,.041],[.093,.054],
+      [.111,.069],[.111,.077],[.017,.077],[.017,.065],[.035,.048],
+      [.032,.039],[.009,.029]], .010, bracket, {x:-HW-.005,bevel:.002,segs:3,parent:plate}).name = 'KR-7 bracket web';
+    K.slab([[.013,.007],[.014,.016],[.052,.025],[.063,.024],[.065,.019],
+      [.056,.014],[.026,.006]], .003, gunDark,
+      {x:-HW-.011,bevel:.0009,segs:2,parent:plate}).name = 'KR-7 bracket latch';
+    K.box(HW + 0.027, 0.008, 0.100, gunDark, (0.007 - HW) / 2, 0.081, 0.064, 0, 0, 0, plate, 0.0015);
+    for (const piece of plate.children) if (piece.name !== 'KR-7 bracket latch') markPaintSurface(piece, 'rail');
+  });
   gun.userData.ejectPort = [HW + 0.003, 0.016, 0.1875];
   // Dust cover: the stamped lid with its rounded top and the AKM's eight ribs across the rear half.
   // (CL-315 note: one parkerized finish on the cover and the receiver, as an AKM has; the ribs a shade lighter to read.)
@@ -560,9 +558,7 @@ export function makeAkModel(ctx) {
   gun.userData.partFinish = true;
   gun.traverse(mesh => {
     if (!mesh.isMesh || mesh.parent === mag) return;
-    if (mesh.parent === opticSeat) {
-      if (mesh.name !== 'KR-7 bracket latch') markPaintSurface(mesh, 'rail');
-    } else if (mesh.material === gunBody) {
+    if (mesh.material === gunBody) {
       markPaintSurface(mesh, 'receiver');
     } else if (mesh.parent === gun.userData.laserLightUnit && ['moduleShell','railClamp'].includes(mesh.name)) {
       markPaintSurface(mesh, 'light shell');
@@ -1304,31 +1300,34 @@ export function makeSniperModel(ctx) {
   // rings back an inch or two"): the whole scope and both rings 0.06 back (4.3 cm): the front ring at 0.087 on the rail
   // (its base hung past the rail's end at 0.15), the rear at -0.121, the eyecup at -0.296 (the cheek riser starts at
   // -0.32). The axis (y 0.14, the sight line) is unchanged and SIGHT.sniper's point (-0.20) is still inside the tube.
-  const scope = K.group(0, 0, -0.06); scope.name = 'scope';
-  K.lathe([[0, -0.218], [0.028, -0.218], [0.032, -0.21], [0.032, -0.175], [0.027, -0.16], [0.024, -0.14], [0.0235, -0.13], [0.0235, 0.165], [0.028, 0.19],
-           [0.038, 0.25], [0.039, 0.3], [0.039, 0.318], [0.034, 0.322], [0, 0.322]], gunDark, { y: 0.14, seg: 20, parent: scope });
-  K.lathe([[0.028, -0.236], [0.033, -0.236], [0.033, -0.214], [0.028, -0.214], [0.028, -0.236]], gunRubber, { y: 0.14, seg: 16, parent: scope });
-  K.disc(0.033, glassMat, 0, 0.14, 0.3225, 0, scope, 16);
-  K.disc(0.026, glassMat, 0, 0.14, -0.2185, Math.PI, scope, 14);
-  K.box(0.05, 0.052, 0.075, gunDark, 0, 0.14, 0.05, 0, 0, 0, scope, 0.011);
-  K.cyl(0.017, 0.017, 0.04, gunMid, 0, 0.185, 0.05, scope, 14, 'y');
-  K.cyl(0.017, 0.017, 0.04, gunMid, 0.044, 0.14, 0.05, scope, 14, 'x');
-  K.cyl(0.015, 0.015, 0.035, gunMid, -0.042, 0.14, 0.05, scope, 12, 'x');
-  // GB-174 (Jerry: the rings floated): each ring's base sits flush on the rail top (0.092), jaws hug the rail's sides
-  // with a cross-bolt through a rail slot; a split ring clamps the 0.0255 tube on its axis (y 0.14).
-  for (const z of [-0.061, 0.147]) {
-    K.box(0.04, 0.016, 0.022, gunDark, 0, 0.1, z, 0, 0, 0, scope, 0.003);
-    for (const sx of [-1, 1]) K.box(0.006, 0.02, 0.022, gunDark, sx * 0.0185, 0.092, z, 0, 0, 0, scope, 0.0015);
-    K.cyl(0.003, 0.003, 0.05, gunMid, 0, 0.088, z, scope, 8, 'x');
-    K.box(0.03, 0.01, 0.018, gunDark, 0, 0.11, z, 0, 0, 0, scope, 0.002);
-    K.lathe([[0.0235, z - 0.009], [0.0295, z - 0.009], [0.031, z - 0.007], [0.031, z + 0.007], [0.0295, z + 0.009], [0.0235, z + 0.009]], gunDark, { y: 0.14, seg: 20, parent: scope });
-    for (const sx of [-1, 1]) D.screw(scope, sx * 0.031, 0.14 + 0.012, z, { axis: 'x', side: sx, r: 0.003, kind: 'torx' });
-  }
-  for (const z of [-0.164, -0.151, 0.303]) K.lathe([[0.023, z - 0.003], [z > 0 ? 0.041 : 0.029, z - 0.003], [z > 0 ? 0.041 : 0.029, z + 0.003], [0.023, z + 0.003]], gunBody, { y: 0.14, seg: 20, parent: scope });
-  for (let i = 0; i < 16; i++) {
-    const a = i * Math.PI / 8;
-    K.box(0.003, 0.015, 0.003, gunDark, Math.cos(a) * 0.0172, 0.195, 0.05 + Math.sin(a) * 0.0172, 0, -a, 0, scope, 0);
-  }
+  // Standalone inspection can show the older artwork. The game equips its issued optic before drawing.
+  const scope = optionalArtworkGroup(ctx, gun, 'scope', art => {
+    K.lathe([[0, -0.218], [0.028, -0.218], [0.032, -0.21], [0.032, -0.175], [0.027, -0.16], [0.024, -0.14], [0.0235, -0.13], [0.0235, 0.165], [0.028, 0.19],
+             [0.038, 0.25], [0.039, 0.3], [0.039, 0.318], [0.034, 0.322], [0, 0.322]], gunDark, { y: 0.14, seg: 20, parent: art });
+    K.lathe([[0.028, -0.236], [0.033, -0.236], [0.033, -0.214], [0.028, -0.214], [0.028, -0.236]], gunRubber, { y: 0.14, seg: 16, parent: art });
+    K.disc(0.033, glassMat, 0, 0.14, 0.3225, 0, art, 16);
+    K.disc(0.026, glassMat, 0, 0.14, -0.2185, Math.PI, art, 14);
+    K.box(0.05, 0.052, 0.075, gunDark, 0, 0.14, 0.05, 0, 0, 0, art, 0.011);
+    K.cyl(0.017, 0.017, 0.04, gunMid, 0, 0.185, 0.05, art, 14, 'y');
+    K.cyl(0.017, 0.017, 0.04, gunMid, 0.044, 0.14, 0.05, art, 14, 'x');
+    K.cyl(0.015, 0.015, 0.035, gunMid, -0.042, 0.14, 0.05, art, 12, 'x');
+    // GB-174 (Jerry: the rings floated): each ring's base sits flush on the rail top (0.092), jaws hug the rail's sides
+    // with a cross-bolt through a rail slot; a split ring clamps the 0.0255 tube on its axis (y 0.14).
+    for (const z of [-0.061, 0.147]) {
+      K.box(0.04, 0.016, 0.022, gunDark, 0, 0.1, z, 0, 0, 0, art, 0.003);
+      for (const sx of [-1, 1]) K.box(0.006, 0.02, 0.022, gunDark, sx * 0.0185, 0.092, z, 0, 0, 0, art, 0.0015);
+      K.cyl(0.003, 0.003, 0.05, gunMid, 0, 0.088, z, art, 8, 'x');
+      K.box(0.03, 0.01, 0.018, gunDark, 0, 0.11, z, 0, 0, 0, art, 0.002);
+      K.lathe([[0.0235, z - 0.009], [0.0295, z - 0.009], [0.031, z - 0.007], [0.031, z + 0.007], [0.0295, z + 0.009], [0.0235, z + 0.009]], gunDark, { y: 0.14, seg: 20, parent: art });
+      for (const sx of [-1, 1]) D.screw(art, sx * 0.031, 0.14 + 0.012, z, { axis: 'x', side: sx, r: 0.003, kind: 'torx' });
+    }
+    for (const z of [-0.164, -0.151, 0.303]) K.lathe([[0.023, z - 0.003], [z > 0 ? 0.041 : 0.029, z - 0.003], [z > 0 ? 0.041 : 0.029, z + 0.003], [0.023, z + 0.003]], gunBody, { y: 0.14, seg: 20, parent: art });
+    for (let i = 0; i < 16; i++) {
+      const a = i * Math.PI / 8;
+      K.box(0.003, 0.015, 0.003, gunDark, Math.cos(a) * 0.0172, 0.195, 0.05 + Math.sin(a) * 0.0172, 0, -a, 0, art, 0);
+    }
+  }, 'optic.nx8');
+  scope.position.z = -0.06;
   // Bolt handle — GB-146 (Jerry, 2026-10-09: "The sniper bolt is on the wrong side") put it on the gun's right (-x) for
   // the eye of the time, which looked out of his (left-handed) head unmirrored. CL-306 (7 Nov): the first-person view
   // now mirrors his hold (D-75, VM.mirror), so -x read on the LEFT again; the handle is on +x (the gun's left) so it

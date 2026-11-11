@@ -1,0 +1,645 @@
+{
+  "empty": {
+    "draws": 1,
+    "triangles": 1
+  },
+  "result": {
+    "minigun": {
+      "all": 28,
+      "shown": 21,
+      "cold": 22,
+      "added": 6,
+      "removed": 0,
+      "hidden": [
+        {
+          "owner": "laser",
+          "gate": "laser",
+          "name": "",
+          "material": "MeshBasicMaterial",
+          "cold": true
+        },
+        {
+          "owner": "rotary-optic-seat",
+          "gate": "rotary-optic-seat",
+          "name": "",
+          "material": "gunPaint:minigun",
+          "cold": false
+        },
+        {
+          "owner": "heavyBarrelLook",
+          "gate": "heavyBarrelLook",
+          "name": "",
+          "material": "MeshStandardMaterial",
+          "cold": false
+        },
+        {
+          "owner": "heavyBarrelLook",
+          "gate": "heavyBarrelLook",
+          "name": "",
+          "material": "MeshStandardMaterial",
+          "cold": false
+        },
+        {
+          "owner": "heavyBarrelLook",
+          "gate": "heavyBarrelLook",
+          "name": "",
+          "material": "MeshStandardMaterial",
+          "cold": false
+        },
+        {
+          "owner": "heavyBarrelLook",
+          "gate": "heavyBarrelLook",
+          "name": "",
+          "material": "MeshStandardMaterial",
+          "cold": false
+        },
+        {
+          "owner": "heavyBarrelLook",
+          "gate": "heavyBarrelLook",
+          "name": "",
+          "material": "MeshStandardMaterial",
+          "cold": false
+        }
+      ],
+      "draws": 22,
+      "triangles": 12424
+    },
+    "m4": {
+      "all": 41,
+      "shown": 31,
+      "cold": 35,
+      "added": 6,
+      "removed": 0,
+      "hidden": [
+        {
+          "owner": "flat-top optic adapter",
+          "gate": "flat-top optic adapter",
+          "name": "",
+          "material": "gunPaint:m4",
+          "cold": false
+        },
+        {
+          "owner": "laser",
+          "gate": "laser",
+          "name": "",
+          "material": "MeshBasicMaterial",
+          "cold": true
+        },
+        {
+          "owner": "suppressor",
+          "gate": "suppressor",
+          "name": "",
+          "material": "gunPaint:m4",
+          "cold": true
+        },
+        {
+          "owner": "suppressor",
+          "gate": "suppressor",
+          "name": "",
+          "material": "gunPaint:m4",
+          "cold": true
+        },
+        {
+          "owner": "suppressor",
+          "gate": "suppressor",
+          "name": "",
+          "material": "fold-static",
+          "cold": true
+        },
+        {
+          "owner": "heavyBarrelLook",
+          "gate": "heavyBarrelLook",
+          "name": "",
+          "material": "MeshStandardMaterial",
+          "cold": false
+        },
+        {
+          "owner": "heavyBarrelLook",
+          "gate": "heavyBarrelLook",
+          "name": "",
+          "material": "MeshStandardMaterial",
+          "cold": false
+        },
+        {
+          "owner": "heavyBarrelLook",
+          "gate": "heavyBarrelLook",
+          "name": "",
+          "material": "MeshStandardMaterial",
+          "cold": false
+        },
+        {
+          "owner": "heavyBarrelLook",
+          "gate": "heavyBarrelLook",
+          "name": "",
+          "material": "MeshStandardMaterial",
+          "cold": false
+        },
+        {
+          "owner": "heavyBarrelLook",
+          "gate": "heavyBarrelLook",
+          "name": "",
+          "material": "MeshStandardMaterial",
+          "cold": false
+        }
+      ],
+      "draws": 31,
+      "triangles": 18488
+    },
+    "ak": {
+      "all": 31,
+      "shown": 19,
+      "cold": 23,
+      "added": 8,
+      "removed": 0,
+      "hidden": [
+        {
+          "owner": "KR-7 bracket web",
+          "gate": "side optic bracket",
+          "name": "KR-7 bracket web",
+          "material": "gunPaint:ak",
+          "cold": false
+        },
+        {
+          "owner": "KR-7 bracket latch",
+          "gate": "side optic bracket",
+          "name": "KR-7 bracket latch",
+          "material": "MeshStandardMaterial",
+          "cold": false
+        },
+        {
+          "owner": "side optic bracket",
+          "gate": "side optic bracket",
+          "name": "",
+          "material": "gunPaint:ak",
+          "cold": false
+        },
+        {
+          "owner": "laser",
+          "gate": "laser",
+          "name": "",
+          "material": "MeshBasicMaterial",
+          "cold": true
+        },
+        {
+          "owner": "suppressor",
+          "gate": "suppressor",
+          "name": "",
+          "material": "gunPaint:ak",
+          "cold": true
+        },
+        {
+          "owner": "suppressor",
+          "gate": "suppressor",
+          "name": "",
+          "material": "gunPaint:ak",
+          "cold": true
+        },
+        {
+          "owner": "suppressor",
+          "gate": "suppressor",
+          "name": "",
+          "material": "fold-static",
+          "cold": true
+        },
+        {
+          "owner": "heavyBarrelLook",
+          "gate": "heavyBarrelLook",
+          "name": "",
+          "material": "MeshStandardMaterial",
+          "cold": false
+        },
+        {
+          "owner": "heavyBarrelLook",
+          "gate": "heavyBarrelLook",
+          "name": "",
+          "material": "MeshStandardMaterial",
+          "cold": false
+        },
+        {
+          "owner": "heavyBarrelLook",
+          "gate": "heavyBarrelLook",
+          "name": "",
+          "material": "MeshStandardMaterial",
+          "cold": false
+        },
+        {
+          "owner": "heavyBarrelLook",
+          "gate": "heavyBarrelLook",
+          "name": "",
+          "material": "MeshStandardMaterial",
+          "cold": false
+        },
+        {
+          "owner": "heavyBarrelLook",
+          "gate": "heavyBarrelLook",
+          "name": "",
+          "material": "MeshStandardMaterial",
+          "cold": false
+        }
+      ],
+      "draws": 19,
+      "triangles": 12304
+    },
+    "aa12": {
+      "all": 24,
+      "shown": 23,
+      "cold": 24,
+      "added": 0,
+      "removed": 0,
+      "hidden": [
+        {
+          "owner": "laser",
+          "gate": "laser",
+          "name": "",
+          "material": "MeshBasicMaterial",
+          "cold": true
+        }
+      ],
+      "draws": 23,
+      "triangles": 15644
+    },
+    "pistol": {
+      "all": 20,
+      "shown": 16,
+      "cold": 20,
+      "added": 0,
+      "removed": 0,
+      "hidden": [
+        {
+          "owner": "laser",
+          "gate": "laser",
+          "name": "",
+          "material": "MeshBasicMaterial",
+          "cold": true
+        },
+        {
+          "owner": "suppressor",
+          "gate": "suppressor",
+          "name": "",
+          "material": "gunPaint:pistol",
+          "cold": true
+        },
+        {
+          "owner": "suppressor",
+          "gate": "suppressor",
+          "name": "",
+          "material": "gunPaint:pistol",
+          "cold": true
+        },
+        {
+          "owner": "suppressor",
+          "gate": "suppressor",
+          "name": "",
+          "material": "fold-static",
+          "cold": true
+        }
+      ],
+      "draws": 16,
+      "triangles": 8682
+    },
+    "uzi": {
+      "all": 34,
+      "shown": 23,
+      "cold": 27,
+      "added": 7,
+      "removed": 0,
+      "hidden": [
+        {
+          "owner": "uzi-optic-rail",
+          "gate": "uzi-optic-rail",
+          "name": "",
+          "material": "gunPaint:uzi",
+          "cold": false
+        },
+        {
+          "owner": "uzi-optic-rail",
+          "gate": "uzi-optic-rail",
+          "name": "",
+          "material": "gunPaint:uzi",
+          "cold": false
+        },
+        {
+          "owner": "laser",
+          "gate": "laser",
+          "name": "",
+          "material": "MeshBasicMaterial",
+          "cold": true
+        },
+        {
+          "owner": "suppressor",
+          "gate": "suppressor",
+          "name": "",
+          "material": "gunPaint:uzi",
+          "cold": true
+        },
+        {
+          "owner": "suppressor",
+          "gate": "suppressor",
+          "name": "",
+          "material": "gunPaint:uzi",
+          "cold": true
+        },
+        {
+          "owner": "suppressor",
+          "gate": "suppressor",
+          "name": "",
+          "material": "fold-static",
+          "cold": true
+        },
+        {
+          "owner": "heavyBarrelLook",
+          "gate": "heavyBarrelLook",
+          "name": "",
+          "material": "MeshStandardMaterial",
+          "cold": false
+        },
+        {
+          "owner": "heavyBarrelLook",
+          "gate": "heavyBarrelLook",
+          "name": "",
+          "material": "MeshStandardMaterial",
+          "cold": false
+        },
+        {
+          "owner": "heavyBarrelLook",
+          "gate": "heavyBarrelLook",
+          "name": "",
+          "material": "MeshStandardMaterial",
+          "cold": false
+        },
+        {
+          "owner": "heavyBarrelLook",
+          "gate": "heavyBarrelLook",
+          "name": "",
+          "material": "MeshStandardMaterial",
+          "cold": false
+        },
+        {
+          "owner": "heavyBarrelLook",
+          "gate": "heavyBarrelLook",
+          "name": "",
+          "material": "MeshStandardMaterial",
+          "cold": false
+        }
+      ],
+      "draws": 23,
+      "triangles": 10964
+    },
+    "shotgun": {
+      "all": 25,
+      "shown": 19,
+      "cold": 24,
+      "added": 1,
+      "removed": 0,
+      "hidden": [
+        {
+          "owner": "laser",
+          "gate": "laser",
+          "name": "",
+          "material": "MeshBasicMaterial",
+          "cold": true
+        },
+        {
+          "owner": "shotgun reload shell",
+          "gate": "shotgun reload shell",
+          "name": "shotgun reload shell",
+          "material": "MeshStandardMaterial",
+          "cold": true
+        },
+        {
+          "owner": "suppressor",
+          "gate": "suppressor",
+          "name": "",
+          "material": "gunPaint:shotgun",
+          "cold": true
+        },
+        {
+          "owner": "suppressor",
+          "gate": "suppressor",
+          "name": "",
+          "material": "gunPaint:shotgun",
+          "cold": true
+        },
+        {
+          "owner": "suppressor",
+          "gate": "suppressor",
+          "name": "",
+          "material": "fold-static",
+          "cold": true
+        },
+        {
+          "owner": "extendedTube",
+          "gate": "extendedTube",
+          "name": "",
+          "material": "MeshStandardMaterial",
+          "cold": false
+        }
+      ],
+      "draws": 19,
+      "triangles": 8788
+    },
+    "revolver": {
+      "all": 26,
+      "shown": 19,
+      "cold": 24,
+      "added": 2,
+      "removed": 0,
+      "hidden": [
+        {
+          "owner": "speedloader",
+          "gate": "speedloader",
+          "name": "",
+          "material": "MeshStandardMaterial",
+          "cold": true
+        },
+        {
+          "owner": "revolver-palm-instances",
+          "gate": "revolver-palm-instances",
+          "name": "revolver-palm-instances",
+          "material": "MeshStandardMaterial",
+          "cold": true
+        },
+        {
+          "owner": "revolver-spent-instances",
+          "gate": "revolver-spent-instances",
+          "name": "revolver-spent-instances",
+          "material": "MeshStandardMaterial",
+          "cold": true
+        },
+        {
+          "owner": "revolver-loader-instances",
+          "gate": "revolver-loader-instances",
+          "name": "revolver-loader-instances",
+          "material": "MeshStandardMaterial",
+          "cold": true
+        },
+        {
+          "owner": "laser",
+          "gate": "laser",
+          "name": "",
+          "material": "MeshBasicMaterial",
+          "cold": true
+        },
+        {
+          "owner": "revolverOpticPlate",
+          "gate": "revolverOpticPlate",
+          "name": "",
+          "material": "gunPaint:revolver",
+          "cold": false
+        },
+        {
+          "owner": "revolverOpticPlate",
+          "gate": "revolverOpticPlate",
+          "name": "",
+          "material": "MeshStandardMaterial",
+          "cold": false
+        }
+      ],
+      "draws": 19,
+      "triangles": 11874
+    },
+    "sniper": {
+      "all": 37,
+      "shown": 29,
+      "cold": 37,
+      "added": 0,
+      "removed": 0,
+      "hidden": [
+        {
+          "owner": "scope",
+          "gate": "scope",
+          "name": "",
+          "material": "MeshStandardMaterial",
+          "cold": true
+        },
+        {
+          "owner": "scope",
+          "gate": "scope",
+          "name": "",
+          "material": "MeshStandardMaterial",
+          "cold": true
+        },
+        {
+          "owner": "scope",
+          "gate": "scope",
+          "name": "",
+          "material": "fold-static",
+          "cold": true
+        },
+        {
+          "owner": "boltRound",
+          "gate": "boltRound",
+          "name": "",
+          "material": "MeshStandardMaterial",
+          "cold": true
+        },
+        {
+          "owner": "laser",
+          "gate": "laser",
+          "name": "",
+          "material": "MeshBasicMaterial",
+          "cold": true
+        },
+        {
+          "owner": "suppressor",
+          "gate": "suppressor",
+          "name": "",
+          "material": "gunPaint:sniper",
+          "cold": true
+        },
+        {
+          "owner": "suppressor",
+          "gate": "suppressor",
+          "name": "",
+          "material": "gunPaint:sniper",
+          "cold": true
+        },
+        {
+          "owner": "suppressor",
+          "gate": "suppressor",
+          "name": "",
+          "material": "fold-static",
+          "cold": true
+        }
+      ],
+      "draws": 31,
+      "triangles": 14840
+    },
+    "launcher": {
+      "all": 24,
+      "shown": 20,
+      "cold": 22,
+      "added": 2,
+      "removed": 0,
+      "hidden": [
+        {
+          "owner": "launcher-optic-seat",
+          "gate": "launcher-optic-seat",
+          "name": "",
+          "material": "gunPaint:launcher",
+          "cold": false
+        },
+        {
+          "owner": "launcher-optic-seat",
+          "gate": "launcher-optic-seat",
+          "name": "",
+          "material": "gunPaint:launcher",
+          "cold": false
+        },
+        {
+          "owner": "loadRound",
+          "gate": "loadRound",
+          "name": "",
+          "material": "MeshStandardMaterial",
+          "cold": true
+        },
+        {
+          "owner": "laser",
+          "gate": "laser",
+          "name": "",
+          "material": "MeshBasicMaterial",
+          "cold": true
+        }
+      ],
+      "draws": 20,
+      "triangles": 16724
+    },
+    "flamer": {
+      "all": 16,
+      "shown": 15,
+      "cold": 16,
+      "added": 0,
+      "removed": 0,
+      "hidden": [
+        {
+          "owner": "flare",
+          "gate": "flare",
+          "name": "",
+          "material": "MeshBasicMaterial",
+          "cold": true
+        }
+      ],
+      "draws": 15,
+      "triangles": 11128
+    },
+    "chainsaw": {
+      "all": 17,
+      "shown": 16,
+      "cold": 17,
+      "added": 0,
+      "removed": 0,
+      "hidden": [
+        {
+          "owner": "starterCord",
+          "gate": "starterCord",
+          "name": "",
+          "material": "gunPaint:chainsaw",
+          "cold": true
+        }
+      ],
+      "draws": 17,
+      "triangles": 10124
+    }
+  },
+  "backend": "WebGPUBackend"
+}

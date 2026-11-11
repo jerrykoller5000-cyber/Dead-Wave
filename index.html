@@ -1536,6 +1536,7 @@ import { fetchBruteGetUp, createBruteGetUp } from './combat/brute-getup.js'; // 
     import { createSawStart, stepSawStart, sawStartPose } from './game/chainsaw-animation.js';
     import { SHOTGUN_LOADS, SHOTGUN_LOAD_IDS, isShotgunLoad, shotgunLoadStats, shotgunLoadParams, shotgunHitBase } from './combat/shotgun-loads.js';   // CB-248 (J114): the pump shotgun's 3.5-inch buckshot and slug
     import { AMMO_TYPES, hasTypes as ammoHasTypes, typeIds as ammoTypeIds, issuedType as ammoIssuedType, canonType as ammoCanon, typeOf as ammoTypeOf, typeStats as ammoTypeStats, nextType as ammoNextType, createTypeSwitch, j134Breaches } from './combat/ammo-types.js';   // CB-294 (J133, J134): ammo types per gun, X to change, unload then load
+    import { updateArtworkInstances } from './studio/weapon-model-hooks.js';
     import { spentCaseGeometry, roundGeometry } from './studio/weapon-casings.js';   // CB-294 (GT-20080): the shotgun's hull by type
     import { createTrainingWreck } from './combat/training-wreck.js';   // CB-250 (J120, J122): the flamer burns a plate to ash, a shell blows it apart; the range computer dies
     import { bladeColumn, bladePoint, trainingBladeHits, bladeHeading } from './combat/saw-blade.js';   // CB-251 (J121): the saw cuts where its chain is
@@ -23511,6 +23512,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         noseQuad.renderOrder = 2;
         bg.add(noseQuad);
       }
+      // The fourteen marks fade together. Keep their UVs, original transforms and draw order.
+      mergeStaticKeepUV(bg);
+      bg.children[0].renderOrder = 2;
       bar.add(bg);
       gun.userData.sawBloodGroup = bg;
       gun.userData.sawBloodMat = bloodMat;
@@ -24419,6 +24423,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         if (clone) clone.visible = false;
       }
       { const pr = src.userData.palmRounds, c = pr && pr.isObject3D && copy[orig.indexOf(pr)]; if (c) c.visible = false; }
+      if (src.userData.artworkInstanceMeshes) updateArtworkInstances(THREE, g);
       // CL-236: out of the marine's shadow proxy (CL-234 marked it above this line, and this line wiped it: AG-110), and
       // casting its own shadow, as it did as part of the proxy (a folded minigun or revolver copy cast none on its own).
       g.userData = { carryKind: kind, proxySkip: true };
@@ -28069,7 +28074,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       return g;
     }
     const smokeMat = new THREE.MeshBasicMaterial({ color: 0x3a3a3a, transparent: true, opacity: 0.32, depthWrite: false });
-    // The physical rack displays only guns in storage, at their actual model scale.
+    // The physical rack displays stored and carried guns at their actual model scale.
     // Display copies are not extra inventory.
     let armoryRackKey = '', armoryRackT = 0;
     const RACK_PEG_GEO = new THREE.BoxGeometry(0.035, 0.035, 0.07), RACK_PEG_MAT = new THREE.MeshStandardMaterial({ color: 0x8a9096, roughness: 0.4, metalness: 0.75 });
@@ -28077,7 +28082,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       return runArmory.read().shelf.map((gun) => gun.kind).filter((kind) => weaponMeshes[kind]);
     }
     function armoryDisplayKinds() {
-      return armoryStoredKinds();
+      const carried = runArmory.loadout();
+      const kinds = new Set([...armoryStoredKinds(), 'pistol']);
+      for (const id of [...carried.primary, ...carried.secondary]) if (id) kinds.add(id.split(':')[0]);
+      return [...kinds].filter((kind) => kind !== 'chainsaw' && weaponMeshes[kind]);
     }
     // A rack copy baked flat: one mesh per material (a gun is dozens of parts; seven of them were ~400 draws).
     const _rkV = new THREE.Vector3(), _rkN = new THREE.Vector3(), _rkNM = new THREE.Matrix3(), _rkM = new THREE.Matrix4(), _rkI = new THREE.Matrix4();
@@ -28089,9 +28097,17 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const byMat = new Map();
       const walk = (o) => {
         if (!o.visible) return;
-        if (o.isMesh && o.geometry && o.geometry.attributes && o.geometry.attributes.position && !Array.isArray(o.material) && !o.isInstancedMesh) {
+        if (o.isMesh && o.geometry?.attributes.position && !Array.isArray(o.material) &&
+            (!o.isInstancedMesh || o.userData.artworkSlots)) {
           let list = byMat.get(o.material); if (!list) byMat.set(o.material, (list = []));
-          list.push(o);
+          const base = new THREE.Matrix4().multiplyMatrices(_rkI, o.matrixWorld);
+          if (o.isInstancedMesh) {
+            const local = new THREE.Matrix4();
+            for (let i = 0; i < o.count; i++) {
+              o.getMatrixAt(i, local);
+              list.push({geometry:o.geometry, m:new THREE.Matrix4().multiplyMatrices(base, local)});
+            }
+          } else list.push({geometry:o.geometry, m:base});
         }
         for (const c of o.children) walk(c);
       };
@@ -28099,7 +28115,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const flat = new THREE.Group();
       for (const [mat, list] of byMat) {
         let total = 0;
-        const prep = list.map((o) => { const temporary = !!o.geometry.index, geo = temporary ? o.geometry.toNonIndexed() : o.geometry; total += geo.attributes.position.count; return { geo, temporary, m: new THREE.Matrix4().multiplyMatrices(_rkI, o.matrixWorld) }; });
+        const prep = list.map(({geometry, m}) => {
+          const temporary = !!geometry.index, geo = temporary ? geometry.toNonIndexed() : geometry;
+          total += geo.attributes.position.count;
+          return {geo, temporary, m};
+        });
         const pos = new Float32Array(total * 3), nrm = new Float32Array(total * 3), uv = new Float32Array(total * 2);
         // foldStatic's shared material reads its factory colour and surface
         // finish from these attributes. They follow the vertices into the rack.
@@ -52963,6 +52983,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
     const _weaponAimPoint = new THREE.Vector3(), _aimSelfEnd = new THREE.Vector3();
     function weaponAimPoint(out = _weaponAimPoint, scoped = sniperScopingNow) {
+      // CC-342 (J108: "Weird laser bend when looking as far down as you can"): in first person the aim is the centre ray's
+      // own hit, as the sniper's scope: GP-170's personal space (a cursor ray through him, third person) pushed any point
+      // under 2.25 m out and up, so looking down the laser and the rounds left the sights' line for a point beyond it
+      // (a caller that asks for the safeguard by name, updateScopeDir's raise, keeps it)
+      if (arguments.length < 2 && viewFirst && OTS.w > 0.5) scoped = true;
       marineAimPoint(localPlayer.position, shotAimTarget(), aimYaw, out,
         { self:aimThroughMarine, crouch:crouching, scoped });
       // Share the cleared aim with the gun and bullets, including near-body picks.
@@ -55223,10 +55248,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         const a = (k * Math.PI) / 4, ca = Math.cos(a) * r, sa = Math.sin(a) * r;
         pushQuad(-ca, -sa, z0, ca, sa, z0, ca, sa, z1, -ca, -sa, z1, 0, 0, 1, 1);
       }
-      // Two nearly-transverse cross-rosette fins so looking straight down the rope in 1P shows a full roaring cross-section at every distance
-      const cr = 0.122, cz = 0.012;
-      pushQuad(-cr, -cr * 0.92, -cz, cr, -cr * 0.92, cz, cr, cr * 0.92, cz, -cr, cr * 0.92, -cz, 0.04, 0.04, 0.96, 0.96);
-      pushQuad(-cr * 0.92, cr, cz, cr * 0.92, cr, -cz, cr * 0.92, -cr, -cz, -cr * 0.92, -cr, cz, 0.04, 0.04, 0.96, 0.96);
+      // Two diagonally-canted cross-rosette tongues so 1P down-barrel keeps a full cross-section with zero flat waist seam
+      const cr = 0.124, cz0 = -0.110, cz1 = 0.125;
+      pushQuad(-cr, -cr * 0.92, cz0, cr, -cr * 0.92, cz1, cr, cr * 0.92, cz1, -cr, cr * 0.92, cz0, 0.04, 0.04, 0.96, 0.96);
+      pushQuad(-cr * 0.92, cr, cz0, cr * 0.92, cr, cz1, cr * 0.92, -cr, cz1, -cr * 0.92, -cr, cz0, 0.04, 0.04, 0.96, 0.96);
       const g = new THREE.BufferGeometry();
       g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
       g.setAttribute('normal', new THREE.Float32BufferAttribute(nrm, 3));
@@ -55264,9 +55289,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         }
       } else {
         const pal = mode === 'core'
-          ? { rim: [165, 52, 8, 0.34], outer: [255, 136, 24, 0.88], mid: [255, 222, 108, 0.96], heart: [255, 252, 232, 1] }
+          ? { rim: [148, 28, 4, 0.78], outer: [255, 78, 8, 0.96], mid: [255, 174, 34, 0.99], heart: [255, 246, 192, 1] }
           : mode === 'hot'
-          ? { rim: [92, 26, 6, 0.42], outer: [248, 78, 12, 0.90], mid: [255, 168, 38, 0.95], heart: [255, 242, 176, 0.98] }
+          ? { rim: [108, 24, 5, 0.62], outer: [252, 68, 10, 0.94], mid: [255, 154, 30, 0.97], heart: [255, 236, 160, 0.99] }
           : mode === 'mid'
           ? { rim: [58, 18, 8, 0.48], outer: [214, 42, 8, 0.88], mid: [255, 114, 18, 0.92], heart: [255, 198, 76, 0.94] }
           : mode === 'tip'
@@ -55345,8 +55370,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     const _fTexSmoke = makeStreamFlameTex('smoke', 0x41a766);
     const _fTexSteam = makeStreamFlameTex('steam', 0x41a777);
 
-    const flameStreamCoreMat = glowMat(new THREE.MeshBasicMaterial({ map: _fTexCore, color: 0xffffff, transparent: true, opacity: 0.97, depthWrite: false, side: THREE.DoubleSide }), 2.45);
-    const flameStreamHotMat = glowMat(new THREE.MeshBasicMaterial({ map: _fTexHot, color: 0xffffff, transparent: true, opacity: 0.93, depthWrite: false, side: THREE.DoubleSide }), 1.95);
+    const flameStreamCoreMat = glowMat(new THREE.MeshBasicMaterial({ map: _fTexCore, color: 0xffffff, transparent: true, opacity: 0.98, depthWrite: false, side: THREE.DoubleSide }), 1.48);
+    const flameStreamHotMat = glowMat(new THREE.MeshBasicMaterial({ map: _fTexHot, color: 0xffffff, transparent: true, opacity: 0.95, depthWrite: false, side: THREE.DoubleSide }), 1.55);
     const flameStreamMidMat = glowMat(new THREE.MeshBasicMaterial({ map: _fTexMid, color: 0xffffff, transparent: true, opacity: 0.88, depthWrite: false, side: THREE.DoubleSide }), 1.6);
     const flameStreamTipMat = glowMat(new THREE.MeshBasicMaterial({ map: _fTexTip, color: 0xffffff, transparent: true, opacity: 0.80, depthWrite: false, side: THREE.DoubleSide }), 1.35);
     const flameEdgeMat = glowMat(new THREE.MeshBasicMaterial({ map: _fTexEdge, color: 0xffffff, transparent: true, opacity: 0.72, depthWrite: false, side: THREE.DoubleSide }), 1.15);
@@ -55366,7 +55391,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     const _flameNear = [];
     const _flameDir = new THREE.Vector3(), _flameRight = new THREE.Vector3();
     const _flameOrigin = new THREE.Vector3(), _flameAim = new THREE.Vector3();
-    let flameEmitAcc = 0, flameClock = 0, flameGroundCd = 0;
+    let flameEmitAcc = 0, flameClock = 0, flameGroundCd = 0, flameSpawnSeq = 0;
 
     // Sustained-hit target ignition state (AG-296 / GP-20089: 0.75 s stream contact ignites standing target to ash)
     const _targetFlameHeat = new Float32Array(16);
@@ -55421,16 +55446,18 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
 
     function spawnFlameBlob(ox, oy, oz, dir, lead) {
       if (flameParticles.length >= MAX_FLAME) return;
+      flameSpawnSeq = (flameSpawnSeq + 1) | 0;
       const edge = Math.random() < FLAME_EDGE_SHARE;
       const sootTip = Math.random() < (edge ? 0.30 : 0.16);
-      // Coherent helical whip + tight nozzle cone so fuel leaves the nozzle thin and travels as a connected curling rope
-      const whip = flameClock * 8.6 + lead * 8.6;
-      const cone = edge ? 0.026 : 0.011;
+      // Tight golden-angle nozzle jet + coherent helical phase so fuel leaves the nozzle thin and travels as an unbroken curling rope
+      const jetPhase = flameSpawnSeq * 2.399963 + flameClock * 24.0;
+      const whip = flameClock * 7.8 + lead * 7.8;
+      const cone = edge ? 0.022 : 0.009;
       const rx = -dir.z, rz = dir.x;
       const rl = Math.hypot(rx, rz) || 1;
       const ux = rx / rl, uz = rz / rl;
-      const lat = Math.sin(whip) * (edge ? 0.022 : 0.013) + (Math.random() - 0.5) * cone;
-      const vert = Math.cos(whip * 1.15) * (edge ? 0.015 : 0.008) + (Math.random() - 0.5) * cone * 0.75 - 0.010;
+      const lat = Math.sin(jetPhase) * (edge ? 0.019 : 0.011) + (Math.random() - 0.5) * cone;
+      const vert = Math.cos(jetPhase * 1.13) * (edge ? 0.013 : 0.007) + (Math.random() - 0.5) * cone * 0.75 - 0.010;
       const dx = dir.x + ux * lat;
       const dy = dir.y + vert;
       const dz = dir.z + uz * lat;
@@ -55453,6 +55480,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         grounded: false, quenched: false, edge, sootTip
       };
       p.mesh.renderOrder = 3;
+      p.mesh.frustumCulled = false;
       flameParticles.push(p);
       if (lead > 0) stepFlameBlob(p, lead);
     }
@@ -55462,13 +55490,13 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (p.splashed) {
         p.splashAge += dt;
         const u = Math.min(1, p.splashAge / p.splashLife);
-        const drag = Math.exp(-2.35 * dt);
+        const drag = Math.exp(-2.85 * dt);
         p.vx *= drag; p.vz *= drag;
-        p.vy = p.vy * Math.exp(-1.45 * dt) + (3.9 - 1.5 * u) * dt;
-        const swirl = 4.6 * (0.4 + u) * dt;
-        p.vx += Math.sin(p.phase + p.splashAge * 9.5) * swirl + (Math.random() - 0.5) * 2.2 * dt;
-        p.vz += Math.cos(p.phase * 1.2 + p.splashAge * 9.5) * swirl + (Math.random() - 0.5) * 2.2 * dt;
-        p.roll += p.spin * 0.75 * dt;
+        p.vy = p.vy * Math.exp(-1.75 * dt) + (2.85 - 1.15 * u) * dt;
+        const swirl = 3.15 * (0.35 + u) * dt;
+        p.vx += Math.sin(p.phase + p.splashAge * 9.5) * swirl + (Math.random() - 0.5) * 1.5 * dt;
+        p.vz += Math.cos(p.phase * 1.2 + p.splashAge * 9.5) * swirl + (Math.random() - 0.5) * 1.5 * dt;
+        p.roll += p.spin * 0.85 * dt;
         p.x += p.vx * dt; p.y += p.vy * dt; p.z += p.vz * dt;
         return;
       }
@@ -55495,7 +55523,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
 
     function clearFlameStream() {
-      for (const p of flameParticles) releaseEffectMesh(p.mesh);
+      for (const p of flameParticles) { p.mesh.frustumCulled = true; releaseEffectMesh(p.mesh); }
       flameParticles.length = 0;
       flameEmitAcc = 0;
       _nozzleJet.visible = false;
@@ -55542,10 +55570,14 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const flare = gun.userData.flare;
       if (firing) {
         // First person draws a separate view gun: emit where its nozzle appears.
-        // The body gun remains the origin in third person and while the view gun raises.
-        const viewFlame = !!viewmodel && viewmodel.showing('flamer') && !!viewmodel.muzzleWorld(_flameOrigin);
+        // The body gun remains the origin in third person, detached shot cameras, and while the view gun raises/lowers.
+        const viewFlame = viewFirst && !shotView && !!viewmodel && viewmodel.showing('flamer') && !!viewmodel.muzzleWorld(_flameOrigin);
         const o = viewFlame ? _flameOrigin : getMuzzleWorld();
-        const aim = viewFlame ? _flameAim.subVectors(weaponAimPoint(), o).normalize() : getAimDir();
+        const wp = weaponAimPoint();
+        if (viewFlame) _flameAim.subVectors(wp, o);
+        else _flameAim.set(wp.x - o.x, wp.y + (aimKind === 'body' ? 0 : 1.05) - o.y, wp.z - o.z);
+        if (_flameAim.lengthSq() < 1e-6) _flameAim.set(Math.sin(aimYaw), 0, Math.cos(aimYaw));
+        const aim = _flameAim.normalize();
         // A flamethrower is hosed, not pointed: pitch is held between ~7° down and ~34°
         // up. Following a reticle on the ground near your boots would spray your own feet;
         // this way the stream reaches out and sags onto the ground a few metres ahead,
@@ -55558,11 +55590,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           flameEmitAcc -= 1;
           spawnFlameBlob(o.x, o.y, o.z, dir, Math.random() * dt);
         }
-        // Thin incandescent pressurized fuel root right at the nozzle shroud (bridges muzzle to thin rope start in 1P and 3P)
+        // Thin incandescent pressurized fuel root right out of the nozzle shroud (clears 1P viewmodel depth and bridges seamlessly to rope)
         _nozzleJet.visible = true;
-        const jLen = 2.25 + Math.sin(flameClock * 43) * 0.35 + Math.random() * 0.35;
-        const jWid = 0.52 + Math.cos(flameClock * 37) * 0.08 + Math.random() * 0.08;
-        _nozzleJet.position.set(o.x + dir.x * 0.20, o.y + dir.y * 0.20, o.z + dir.z * 0.20);
+        const jLen = 2.95 + Math.sin(flameClock * 43) * 0.38 + Math.random() * 0.35;
+        const jWid = 0.74 + Math.cos(flameClock * 37) * 0.09 + Math.random() * 0.08;
+        _nozzleJet.position.set(o.x + dir.x * 0.34, o.y + dir.y * 0.34, o.z + dir.z * 0.34);
         _nozzleJet.quaternion.setFromUnitVectors(AXIS_Z, dir);
         _nozzleJet.rotateZ(flameClock * 19);
         _nozzleJet.scale.set(jWid, jWid, jLen);
@@ -55604,6 +55636,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         if(rangeFeature?.owns()&&!p.quenched&&!p.grounded&&p.age<p.life*.85){const index=rangeFeature.flame(rangePrev,p,p.rangePacket);if(index!=null){rangeContacts.add(index);rangeContactPacket=p.rangePacket;}}
         const t = p.age / p.life;
         if (t >= 1 || (p.splashed && p.splashAge >= p.splashLife)) {
+          p.mesh.frustumCulled = true;
           releaseEffectMesh(p.mesh);
           flameParticles.splice(i, 1);
           continue;
@@ -55644,23 +55677,23 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
             if (!p.splashed) {
               p.splashed = true;
               p.splashAge = 0;
-              p.splashLife = 0.62 + Math.random() * 0.32;
+              p.splashLife = 0.50 + Math.random() * 0.28;
               p.life = p.age + p.splashLife;
               const ang = Math.random() * 6.283185;
-              const sp = 2.4 + Math.random() * 4.8;
+              const sp = 0.95 + Math.random() * 1.95;
               if (Math.abs(ny) < 0.5) {
-                // Vertical wall or target plate: erupt radially across wall & roll upward into a thick 3D fireball
+                // Vertical wall or target plate: cling, spread, and boil upward into a compact churning 3D fireball
                 const tx = -nz, tz = nx;
                 const tl = Math.hypot(tx, tz) || 1;
-                const bounce = 0.85 + Math.random() * 2.35;
+                const bounce = 0.30 + Math.random() * 0.85;
                 p.vx = (tx / tl) * Math.cos(ang) * sp + nx * bounce;
                 p.vz = (tz / tl) * Math.cos(ang) * sp + nz * bounce;
-                p.vy = Math.sin(ang) * sp * 0.62 + 2.5 + Math.random() * 3.2;
+                p.vy = Math.sin(ang) * sp * 0.45 + 1.35 + Math.random() * 2.15;
               } else {
                 // Floor or horizontal surface: splash outward along floor and curl up
-                p.vx = p.vx * 0.32 + Math.cos(ang) * sp * 0.75;
-                p.vz = p.vz * 0.32 + Math.sin(ang) * sp * 0.75;
-                p.vy = 1.6 + Math.random() * 2.8;
+                p.vx = p.vx * 0.28 + Math.cos(ang) * sp * 0.72;
+                p.vz = p.vz * 0.28 + Math.sin(ang) * sp * 0.72;
+                p.vy = 1.15 + Math.random() * 1.95;
               }
             } else {
               const dot = p.vx * nx + p.vy * ny + p.vz * nz;
@@ -55780,7 +55813,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           s = t < 0.12 ? 0 : t < 0.40 ? 1 : t < 0.68 ? 2 : t < 0.88 ? 3 : 4;
           if (s === 4 && !p.sootTip) s = 3;
         } else {
-          s = dist < 3.6 ? 0 : dist < 17.5 ? 1 : dist < 27.5 ? 2 : (t > 0.90 && p.sootTip ? 4 : 2);
+          s = dist < 2.2 ? 0 : dist < 17.5 ? 1 : dist < 27.5 ? 2 : (t > 0.90 && p.sootTip ? 4 : 2);
         }
         if (s !== p.stage) {
           p.stage = s;
@@ -55791,44 +55824,50 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         }
         p.mesh.renderOrder = 3;   // AG-279 / AG-296: transparent flames sort strictly over decals (1) & barrel wisps (2)
 
-        // Envelope: leaves the nozzle thin (~9 cm), widens & curls steadily along the 30 m rope,
-        // and swells into a billowing 3.5 m fireball on target / back-wall splash!
+        // Envelope: leaves the nozzle thin (~11 cm), widens & curls steadily along the 30 m rope,
+        // and swells into a compact, churning 3D fireball on 8 m target / 30 m back-wall splash!
         const spd = Math.hypot(p.vx, p.vy, p.vz);
         let widthEnv;
         if (p.quenched) {
           widthEnv = (0.85 + t * 1.8) * (t > 0.82 ? (1 - t) / 0.18 : 1);
         } else if (p.splashed) {
           const u = p.splashAge / p.splashLife;
-          if (u < 0.56) {
-            widthEnv = 2.85 + 3.45 * Math.sin((u / 0.56) * (Math.PI * 0.5));
+          const wallBoost = 1 + 0.48 * Math.min(1, Math.max(0, (dist - 15) / 12));
+          if (u < 0.52) {
+            widthEnv = (1.65 + 2.15 * Math.sin((u / 0.52) * (Math.PI * 0.5))) * wallBoost;
           } else {
-            const v = (u - 0.56) / 0.44;
-            widthEnv = p.sootTip && u > 0.82
-              ? 3.1 * (1 - (u - 0.82) / 0.18)
-              : 6.30 * Math.pow(Math.max(0, 1 - v), 0.78) + 0.25 * (1 - v);
+            const v = (u - 0.52) / 0.48;
+            widthEnv = (p.sootTip && u > 0.82
+              ? 2.4 * (1 - (u - 0.82) / 0.18)
+              : 3.80 * Math.pow(Math.max(0, 1 - v), 0.78) + 0.22 * (1 - v)) * wallBoost;
           }
           splashSumX += p.x; splashSumY += p.y; splashSumZ += p.z; splashCount++;
         } else if (p.edge) {
           if (t <= 0.45) {
-            widthEnv = 0.36 + 2.05 * Math.sin((t / 0.45) * (Math.PI * 0.5));
+            widthEnv = 0.42 + 1.95 * Math.sin((t / 0.45) * (Math.PI * 0.5));
           } else {
             const v = (t - 0.45) / 0.55;
-            widthEnv = 2.41 * Math.pow(Math.max(0, 1 - v), 0.82) + 0.14 * (1 - v);
+            widthEnv = 2.37 * Math.pow(Math.max(0, 1 - v), 0.82) + 0.14 * (1 - v);
           }
         } else {
           const tipFade = t > 0.88 ? Math.max(0.15, (1 - t) / 0.12) : 1;
-          widthEnv = (0.40 + 4.35 * Math.pow(distFrac, 0.72)) * tipFade;
+          widthEnv = (0.60 + 3.55 * Math.pow(distFrac, 0.78)) * tipFade;
         }
         const lick = 1 + 0.15 * Math.sin(p.phase * 1.3 + p.age * 18);
         const wScale = Math.max(0.03, p.size * widthEnv * lick);
 
-        if (spd > 0.55 && !p.quenched) {
+        if (p.splashed && !p.quenched) {
+          p.mesh.rotation.set(
+            Math.sin(p.phase + p.splashAge * 4.5) * 0.55,
+            p.phase + p.splashAge * 3.1,
+            p.roll
+          );
+          p.mesh.scale.set(wScale, wScale * 1.08, wScale * 0.94);
+        } else if (spd > 0.55 && !p.quenched) {
           _flameDir.set(p.vx / spd, p.vy / spd, p.vz / spd);
           p.mesh.quaternion.setFromUnitVectors(AXIS_Z, _flameDir);
           p.mesh.rotateZ(p.roll);
-          const stretch = p.splashed
-            ? 1.18 + Math.min(0.85, spd * 0.11)
-            : Math.min(3.35, 1.85 + spd * 0.042);
+          const stretch = Math.min(3.25, 1.82 + spd * 0.040);
           p.mesh.scale.set(wScale * 0.88, wScale * 0.88, Math.max(0.05, wScale * stretch));
         } else {
           p.mesh.scale.setScalar(wScale);
@@ -67035,7 +67074,12 @@ live++;
       scopeOverlayEl.style.opacity = String(glass);
       scopeZoomLabelEl.style.opacity = String(Math.max(glass > 0.6 ? Math.min(1, (glass - 0.6) * 2.5) : 0, ovw && ovw.kind === 'acog' && fpAdsW > 0.5 ? Math.min(1, opticLabelT / 0.3) : 0));
       { const du = Math.min(1, Math.max(0, (fpAdsW - 0.8) / 0.17)), dw = ovw && (ovw.kind === 'rmr' || ovw.kind === 'acog') ? (ovw.kind === 'acog' ? ovw.top : 1) * du * du * (3 - 2 * du) : 0;   // CL-323: the red dot's dot
-        const ds = dw > 0.001 ? dw.toFixed(3) : '0'; if (opticDotEl.style.opacity !== ds) opticDotEl.style.opacity = ds; }
+        const ds = dw > 0.001 ? dw.toFixed(3) : '0'; if (opticDotEl.style.opacity !== ds) opticDotEl.style.opacity = ds;
+        // CC-342 (J109: "the new optics do not have any recoil visible"): the dot rides the view gun's bore (its kick and
+        // sway, game/viewmodel.js opticDotOffset), back on the aim as they settle; centred when it isn't shown
+        const od = dw > 0.001 && viewmodel && viewmodel.opticDotOffset ? viewmodel.opticDotOffset(opticDotEl._ccOff || (opticDotEl._ccOff = { x: 0, y: 0 })) : null;
+        const tf = od ? 'translate(' + (od.x * innerWidth / 2).toFixed(1) + 'px, ' + (-od.y * innerHeight / 2).toFixed(1) + 'px)' : '';
+        if (opticDotEl.style.transform !== tf) opticDotEl.style.transform = tf; }
       // Crossfade the ordinary cursor-following reticle out as the scope's own
       // centred crosshair fades in, so there's never two overlapping at once.
       reticleEl.style.opacity = String(Math.max(0, 1 - glass * 1.6) * (fpKind === 'iron' ? 1 - fpAdsW : 1));
@@ -67081,9 +67125,9 @@ live++;
       if(training.active&&!viewFirst&&!training.wake&&training.cameraCollision){
         const head={x:camSubject.x,y:camSubject.y+1.6,z:camSubject.z};
         const contact=training.cameraCollision.pull(head,camera.position);
-        if(contact&&!window.__GP91_BASELINE){
-          const station=trainingStationShoulder(head,camera.position,camLook,training.tg.stations,(a,b)=>training.cameraCollision.pull(a,b));
-          if(!station)trainingCloseFraming(head,camera.position,camLook,{x:fwdX,z:fwdZ});
+        if(!window.__GP91_BASELINE){
+          const station=trainingStationShoulder(head,camera.position,camLook,training.tg.stations,(a,b)=>training.cameraCollision.pull(a,b),{x:fwdX,z:fwdZ});
+          if(contact&&!station)trainingCloseFraming(head,camera.position,camLook,{x:fwdX,z:fwdZ});
         }
         if(!window.__GP91_BASELINE)trainingEyeDistance=Math.hypot(camera.position.x-head.x,camera.position.y-head.y,camera.position.z-head.z);
       }
@@ -67104,6 +67148,11 @@ live++;
       skyDome.position.copy(camera.position);
       PROF.mark('camera');
       flightRecord(dt);   // CU-160
+      const heldArtwork = weaponMeshes[currentWeapon];
+      if (heldArtwork?.userData.artworkInstanceMeshes) updateArtworkInstances(THREE, heldArtwork);
+      if (akimboOn() && offhandMeshes[currentWeapon]?.userData.artworkInstanceMeshes) {
+        updateArtworkInstances(THREE, offhandMeshes[currentWeapon]);
+      }
       updateViewmodel(realDt);   // CL-281
       if (barrelHeat) {   // AG-290 (J131, J132: barrel heat, smoke wisp & barrel/suppressor red glow)
         barrelHeat.update(realDt, {

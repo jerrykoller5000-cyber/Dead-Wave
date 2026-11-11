@@ -1,0 +1,16 @@
+Game-test request d7b6ce90-d672-4c6a-9032-dfe83382ea41 queued at position 1. Waiting...
+GRANT chatgpt2 GT-20081: starting one game-test command
+check-players: 313 player.position reads, all in the allowed places
+           page error: Error: Missing artwork slot chamber-round-0
+           page error: Error: Missing artwork slot chamber-round-0
+           FAIL all twelve guns: 467 meshes after merging
+FAIL  t38     11 pass   1 fail  81.3s
+           recovering browser after t38: 1 fail
+ok    t333    16 pass   0 fail  41.2s
+
+2 checks: 27 pass, 1 fail
+
+by owner:
+  unassigned — triage
+    t38    1 fail  FAIL all twelve guns: 467 meshes after merging
+           FAIL all twelve guns: 467 meshes after merging

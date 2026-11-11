@@ -1,0 +1,126 @@
+{
+  "thrown": 3,
+  "afterEject": [
+    true,
+    true,
+    true,
+    false,
+    false,
+    false
+  ],
+  "eyeAfterEject": [
+    true,
+    true,
+    true,
+    false,
+    false,
+    false
+  ],
+  "partialCounts": {
+    "held": {
+      "launcher-loaded-inserts": 3
+    },
+    "eye": {
+      "launcher-loaded-inserts": 3
+    }
+  },
+  "caseGeometryMatches": true,
+  "usesLive": true,
+  "liveCached": true,
+  "liveFinish": {
+    "roughness": 0.78,
+    "metalness": 0.18
+  },
+  "spentFinish": {
+    "roughness": 0.78,
+    "metalness": 0.18
+  },
+  "frames": [
+    {
+      "view": "open",
+      "light": "noon",
+      "palmVisible": false,
+      "loaded": 3
+    },
+    {
+      "view": "open",
+      "light": "overcast",
+      "palmVisible": false,
+      "loaded": 3
+    },
+    {
+      "view": "open",
+      "light": "dusk",
+      "palmVisible": false,
+      "loaded": 3
+    },
+    {
+      "view": "open",
+      "light": "night",
+      "palmVisible": false,
+      "loaded": 3
+    },
+    {
+      "view": "palm",
+      "light": "noon",
+      "palmVisible": true,
+      "loaded": 3
+    },
+    {
+      "view": "palm",
+      "light": "overcast",
+      "palmVisible": true,
+      "loaded": 3
+    },
+    {
+      "view": "palm",
+      "light": "dusk",
+      "palmVisible": true,
+      "loaded": 3
+    },
+    {
+      "view": "palm",
+      "light": "night",
+      "palmVisible": true,
+      "loaded": 3
+    },
+    {
+      "view": "props",
+      "light": "noon",
+      "palmVisible": false,
+      "loaded": 3
+    },
+    {
+      "view": "props",
+      "light": "overcast",
+      "palmVisible": false,
+      "loaded": 3
+    },
+    {
+      "view": "props",
+      "light": "dusk",
+      "palmVisible": false,
+      "loaded": 3
+    },
+    {
+      "view": "props",
+      "light": "night",
+      "palmVisible": false,
+      "loaded": 3
+    }
+  ],
+  "end": {
+    "instanceCounts": {
+      "held": {
+        "launcher-loaded-inserts": 6
+      },
+      "eye": {
+        "launcher-loaded-inserts": 6
+      }
+    },
+    "loaded": 6,
+    "shown": 6,
+    "eye": 6,
+    "reloading": false
+  }
+}

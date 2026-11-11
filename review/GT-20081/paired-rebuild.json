@@ -1,0 +1,34 @@
+{
+  "before": {
+    "paired": true,
+    "worldRight": {
+      "revolver-chamber-layer-0": 4,
+      "revolver-visible-tips": 2,
+      "revolver-palm-instances": 0,
+      "revolver-spent-instances": 0,
+      "revolver-loader-instances": 0
+    },
+    "worldLeft": {
+      "revolver-chamber-layer-0": 2,
+      "revolver-visible-tips": 1,
+      "revolver-palm-instances": 0,
+      "revolver-spent-instances": 0,
+      "revolver-loader-instances": 0
+    },
+    "eyeRight": {
+      "revolver-chamber-layer-0": 4,
+      "revolver-visible-tips": 2,
+      "revolver-palm-instances": 0,
+      "revolver-spent-instances": 0,
+      "revolver-loader-instances": 0
+    },
+    "sourceCounts": [
+      2,
+      1
+    ]
+  },
+  "rebuiltPartial": {
+    "count": 2,
+    "capacity": 6
+  }
+}

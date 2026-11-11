@@ -1,60 +1,124 @@
 {
   "phase": "after",
-  "capturedAt": "2026-11-11T07:02:30.723Z",
+  "capturedAt": "2026-11-11T07:51:58.488Z",
   "metrics": {
     "noon": {
       "s1": {
-        "count": 112,
-        "maxRelZ": 29.39,
-        "splashed": 49,
-        "target0Burned": false
+        "count": 101,
+        "minRelZ": 1.81,
+        "maxRelZ": 29.36,
+        "splashed": 40,
+        "target0Burned": true
       },
       "s2": {
-        "count": 174,
-        "maxRelZ": 29.45,
-        "splashed": 79,
+        "count": 154,
+        "minRelZ": 1.94,
+        "maxRelZ": 29.51,
+        "splashed": 47,
+        "target0Burned": true
+      },
+      "side1": {
+        "count": 101,
+        "minRelZ": 1.81,
+        "maxRelZ": 29.36,
+        "splashed": 40,
+        "target0Burned": true
+      },
+      "side2": {
+        "count": 154,
+        "minRelZ": 1.94,
+        "maxRelZ": 29.51,
+        "splashed": 47,
         "target0Burned": true
       }
     },
     "overcast": {
       "s1": {
-        "count": 107,
-        "maxRelZ": 29.02,
-        "splashed": 51,
-        "target0Burned": false
+        "count": 102,
+        "minRelZ": 1.9,
+        "maxRelZ": 29.35,
+        "splashed": 42,
+        "target0Burned": true
       },
       "s2": {
-        "count": 164,
+        "count": 153,
+        "minRelZ": 2.04,
         "maxRelZ": 29.39,
-        "splashed": 74,
+        "splashed": 45,
+        "target0Burned": true
+      },
+      "side1": {
+        "count": 102,
+        "minRelZ": 1.9,
+        "maxRelZ": 29.35,
+        "splashed": 42,
+        "target0Burned": true
+      },
+      "side2": {
+        "count": 153,
+        "minRelZ": 2.04,
+        "maxRelZ": 29.39,
+        "splashed": 45,
         "target0Burned": true
       }
     },
     "dusk": {
       "s1": {
-        "count": 112,
-        "maxRelZ": 29.13,
-        "splashed": 50,
-        "target0Burned": false
+        "count": 102,
+        "minRelZ": 1.81,
+        "maxRelZ": 29.39,
+        "splashed": 38,
+        "target0Burned": true
       },
       "s2": {
-        "count": 158,
-        "maxRelZ": 29.49,
-        "splashed": 64,
+        "count": 155,
+        "minRelZ": 1.96,
+        "maxRelZ": 29.5,
+        "splashed": 48,
+        "target0Burned": true
+      },
+      "side1": {
+        "count": 102,
+        "minRelZ": 1.81,
+        "maxRelZ": 29.39,
+        "splashed": 38,
+        "target0Burned": true
+      },
+      "side2": {
+        "count": 155,
+        "minRelZ": 1.96,
+        "maxRelZ": 29.5,
+        "splashed": 48,
         "target0Burned": true
       }
     },
     "night": {
       "s1": {
-        "count": 103,
-        "maxRelZ": 22.35,
-        "splashed": 47,
-        "target0Burned": false
+        "count": 101,
+        "minRelZ": 1.9,
+        "maxRelZ": 29.37,
+        "splashed": 40,
+        "target0Burned": true
       },
       "s2": {
-        "count": 160,
-        "maxRelZ": 29.57,
-        "splashed": 67,
+        "count": 157,
+        "minRelZ": 1.84,
+        "maxRelZ": 29.54,
+        "splashed": 45,
+        "target0Burned": true
+      },
+      "side1": {
+        "count": 101,
+        "minRelZ": 1.9,
+        "maxRelZ": 29.37,
+        "splashed": 40,
+        "target0Burned": true
+      },
+      "side2": {
+        "count": 157,
+        "minRelZ": 1.84,
+        "maxRelZ": 29.54,
+        "splashed": 45,
         "target0Burned": true
       }
     }

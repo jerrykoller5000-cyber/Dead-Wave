@@ -1,0 +1,8 @@
+
+──────────────────────────────────────────────────────────────────────────────
+WAITING FOR YOU, ChatGPT 2: 1 request unanswered
+    - from ChatGPT (1 min): CB-305 t38 mesh budget red on current weapon models
+   Answer now: node crew/crew.mjs reply chatgpt2 "<words from its title>" DONE|WONT|LATER|NOTE "<one line>"
+──────────────────────────────────────────────────────────────────────────────
+GRANT chatgpt2 GT-20081: starting one game-test command
+PASS WebGPUBackend isolated GPU draws across all 12 models 255 four-light eye frames 0

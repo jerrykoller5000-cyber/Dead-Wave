@@ -1,0 +1,6 @@
+GRANT chatgpt2 GT-20081: starting one game-test command
+camera: no camera running, loading the game for this one call (`node tools/camera.mjs start` keeps it loaded)
+sheet: review/GT-20081/sniper-inspector/sheet.jpg
+check: 1 subjects, 0 broken
+review/GT-20081/sniper-inspector/check.json
+(0.5 s)

@@ -1,0 +1,2 @@
+GRANT chatgpt2 GT-20081: starting one game-test command
+PASS issued fallback suppression and standalone display {"issued":"optic.nx8","duringWarmup":0,"standaloneBeforeDisplay":0,"standaloneAfterDisplay":9}

@@ -1,0 +1,28 @@
+Game-test request 06c0bbd7-a98c-4bad-8c06-8eaec3ab5913 queued at position 1. Waiting...
+GRANT chatgpt2 GT-20081: starting one game-test command
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
++ [
++   'revolver house revolver-visible-tips expected 1512 triangle vertices, got 0',
++   'revolver training revolver-visible-tips expected 1512 triangle vertices, got 0'
++ ]
+- []
+
+    at file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/GT-20081/rack.mjs:98:43 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: [
+    'revolver house revolver-visible-tips expected 1512 triangle vertices, got 0',
+    'revolver training revolver-visible-tips expected 1512 triangle vertices, got 0'
+  ],
+  expected: [],
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.13.0

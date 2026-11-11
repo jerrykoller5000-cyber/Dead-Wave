@@ -1,0 +1,11 @@
+GRANT chatgpt2 GT-20081: starting one game-test command
+file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/cdp.mjs:166
+      throw new Error('evaluate failed: ' + text);
+            ^
+
+Error: evaluate failed: Error: Normal Y entry did not equip the pair
+    at <anonymous>:16:29
+    at Page.evaluate (file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/cdp.mjs:166:13)
+    at async file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/GT-20081/entry.mjs:41:14
+
+Node.js v24.13.0

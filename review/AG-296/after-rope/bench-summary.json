@@ -1,0 +1,135 @@
+{
+  "phase": "after-rope",
+  "capturedAt": "2026-11-11T08:05:18.989Z",
+  "renderer": {
+    "backend": "WebGPUBackend",
+    "gfx": "high"
+  },
+  "loadReadyMs": 12633,
+  "bench": {
+    "idle": {
+      "label": "idle_range_1p_flamer",
+      "seconds": 5,
+      "fps": 59.6,
+      "frameMs": 16.78,
+      "low1pct": 43.6,
+      "worstMs": 18.5,
+      "hitches": 0,
+      "draws": 239,
+      "triangles": 132965,
+      "prof": {
+        "frames": 303,
+        "tickMs": 11.41,
+        "top": [
+          {
+            "k": "r:render",
+            "avg": 5.8,
+            "max": 11.8
+          },
+          {
+            "k": "m:hold",
+            "avg": 1.57,
+            "max": 4.5
+          },
+          {
+            "k": "m:pose",
+            "avg": 0.97,
+            "max": 2.5
+          },
+          {
+            "k": "aim+climb",
+            "avg": 0.71,
+            "max": 2
+          },
+          {
+            "k": "r:matrices",
+            "avg": 0.66,
+            "max": 1.4
+          },
+          {
+            "k": "effects",
+            "avg": 0.31,
+            "max": 0.7
+          },
+          {
+            "k": "viewmodel",
+            "avg": 0.27,
+            "max": 0.7
+          },
+          {
+            "k": "daynight",
+            "avg": 0.13,
+            "max": 0.5
+          }
+        ],
+        "spikes": 0,
+        "newPipelines": 0,
+        "activeFlames": 0,
+        "maxStreamReachM": 0,
+        "charMarks": 0
+      }
+    },
+    "activeFire": {
+      "label": "active_flamer_rope_30m_fireball_char_burn",
+      "seconds": 6,
+      "fps": 57.7,
+      "frameMs": 17.33,
+      "low1pct": 41.2,
+      "worstMs": 21,
+      "hitches": 0,
+      "draws": 570,
+      "triangles": 141629,
+      "prof": {
+        "frames": 354,
+        "tickMs": 15.84,
+        "top": [
+          {
+            "k": "r:render",
+            "avg": 8.49,
+            "max": 15.8
+          },
+          {
+            "k": "w:rest",
+            "avg": 2.12,
+            "max": 6.5
+          },
+          {
+            "k": "m:hold",
+            "avg": 1.36,
+            "max": 3.6
+          },
+          {
+            "k": "m:pose",
+            "avg": 0.94,
+            "max": 2.2
+          },
+          {
+            "k": "r:matrices",
+            "avg": 0.91,
+            "max": 2.5
+          },
+          {
+            "k": "aim+climb",
+            "avg": 0.5,
+            "max": 2
+          },
+          {
+            "k": "effects",
+            "avg": 0.4,
+            "max": 1.8
+          },
+          {
+            "k": "viewmodel",
+            "avg": 0.25,
+            "max": 0.8
+          }
+        ],
+        "spikes": 0,
+        "newPipelines": 1,
+        "activeFlames": 175,
+        "maxStreamReachM": 29.44,
+        "charMarks": 173
+      }
+    }
+  }
+}

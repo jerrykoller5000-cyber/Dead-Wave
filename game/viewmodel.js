@@ -287,6 +287,7 @@ export function createViewmodel(ctx) {
       o = new T.Mesh(geoOf(src.geometry), vmMaterial(src.material));
       o.castShadow = false; o.receiveShadow = false; o.frustumCulled = false; o.renderOrder = src.renderOrder || 0;   // CL-304 (J6): no world shadow on the view gun either
     } else o = new T.Group();
+    if (src.userData.artworkSlot) o.userData.artworkSlot = src.userData.artworkSlot;
     o.name = src.name; o.position.copy(src.position); o.quaternion.copy(src.quaternion); o.scale.copy(src.scale); o.visible = src.visible;
     pairs.push([src, o]);
     for (const c of src.children) { if (skip.has(c) || c.isLight || c.isCamera) continue; o.add(cloneLean(c, pairs, skip)); }
@@ -477,6 +478,11 @@ export function createViewmodel(ctx) {
   const spring = (c) => ({ x: [0, 0, 0], v: [0, 0, 0], t: [0, 0, 0], k: c.k, c: 2 * c.z * Math.sqrt(c.k) });
   const sp = { pos: spring(VM.spring.pos), rot: spring(VM.spring.rot) };
   const cs = spring(VM.camera || { k: 300, z: 0.82 });   // CL-293: the view's share of each shot (pitch, yaw), cameraPunch()
+  // CC-342 (J109: "the new optics do not have any recoil visible when using them"): the optic is bolted to the gun, so
+  // through a magnified optic's glass (the prism, the ACOG; the view gun hidden behind it) the sight picture turns with
+  // the gun's own kick: a spring kicked as the gun's (back up, a random side), weighted by the glass (S.glassW), added
+  // to cameraPunch. A red dot's dot rides the gun's bore instead (opticDotOffset).
+  const ok = spring(VM.spring.rot);
   // CL-301: a pair's kicks, each gun its own (the sway, the bob and the rest stay in sp, shared)
   const KA = { pos: spring(VM.spring.pos), rot: spring(VM.spring.rot) }, KB = { pos: spring(VM.spring.pos), rot: spring(VM.spring.rot) };
   function stepSpring(s, dt) {
@@ -757,6 +763,24 @@ export function createViewmodel(ctx) {
     _optRear.set(0, y, z); _optAd.relief = d; _optAd.magW = mag ? 1 - t : 0;
     return _optAd;
   }
+  // CC-342 (J109): the optic's own kick (ok) on each of the gun's shots, at the aim's share as the gun's (P.kick.ads), and
+  // the glass's weight: from 55% of the aim to 88%, as index.html fades #scopeOverlay in (optGlass), times its magW (0 on
+  // the ACOG's RMR on top).
+  function opticKick(P, OA, st, a, dt) {
+    const n = gun.src.userData.shots | 0, k = P.kick;
+    if (S.okShots != null && S.okGun === gun.src && n !== S.okShots && k && OA) {
+      const m = 1 + ((k.ads != null ? k.ads : 1) - 1) * a;
+      // a velocity kick, as the camera's (CL-293): it rises over ~65 ms and settles in ~0.25 s; at 0.6 its peak is the
+      // gun's own turn a frame after the shot (the M4's ACOG: 40 mrad, a sixth of the 4X field)
+      const imp = 2.72 * Math.sqrt(ok.k) * (VM.opticKick != null ? VM.opticKick : 0.6);
+      ok.v[1] += k.up * m * imp; ok.v[0] += (Math.random() - 0.5) * 2 * k.side * m * imp;
+    }
+    S.okShots = n; S.okGun = gun.src; S.opticTop = st.opticTop || 0;
+    stepSpring(ok, dt);
+    const lim = VM.opticKickMax || 0.12; ok.x[1] = clamp(ok.x[1], -lim, lim); ok.x[0] = clamp(ok.x[0], -lim, lim);
+    const u = clamp(((st.ads || 0) - 0.55) / 0.33, 0, 1);
+    S.glassW = OA && OA.magW > 0 ? OA.magW * smooth(u) : 0;
+  }
   function gunFrame(P, key, st, dt, AK = null) {
     // CL-301 (GP-20022): the view's own grip point (VM_SOCKETS grip) when it has one, so the view holds still when the third
     // person's hold (WEAPON_HOLD grip) moves; the hold's grip otherwise.
@@ -823,6 +847,7 @@ export function createViewmodel(ctx) {
       if (f2 !== S.lastFlashT2 && S.lastFlashT2 != null) { shotKick(KB, P.kick, a, VM.akimbo.kick); S.slideT2 = 0; S.shots2++; }
       S.lastFlashT2 = f2;
     }
+    opticKick(P, OA, st, a, dt);   // CC-342 (J109)
     stepSpring(sp.pos, dt); stepSpring(sp.rot, dt);
     stepSpring(KA.pos, dt); stepSpring(KA.rot, dt); stepSpring(KB.pos, dt); stepSpring(KB.rot, dt);
     stepSpring(cs, dt); if (VM.camera) cs.x[0] = clamp(cs.x[0], -VM.camera.max, VM.camera.max);
@@ -1677,6 +1702,20 @@ export function createViewmodel(ctx) {
     return pointWorld(g?.src.userData.muzzleLocal, out, which);
   }
   function showing(key) { return info.active && !!gun && gun.key === key && S.raise > 0.5; }
+  // CC-342 (J109): where a red dot's dot is drawn (ndc, the screen's centre 0, 0; y up): along the optic's own line from the
+  // view gun's dot (its RMR, or the ACOG's RMR on top), so it rides the gun's kick and sway as the window round it does.
+  // null without a fitted optic's line.
+  const _odA = V3(), _odB = V3(), _odD = V3(), _odN = { x: 0, y: 0, d: 0 };
+  function opticDotOffset(out = { x: 0, y: 0 }) {
+    const m = gun && gun.src && gun.src.userData.fittedOptic, L = m && m.userData.line;
+    if (!L || !info.active) return null;
+    const top = L.topDot && L.topEye && S.opticTop > 0.5, e = top ? L.topEye : L.eye, d = top ? L.topDot : L.dot;
+    _odD.set(d[0] - e[0], d[1] - e[1], d[2] - e[2]);
+    if (_odD.lengthSq() < 1e-10) _odD.set(0, 0, 1); else _odD.normalize();
+    _odA.set(d[0], d[1], d[2]).addScaledVector(_odD, 400 / Math.max(1e-3, gun.s));   // 400 m ahead along its line
+    viewPoint(_odA, _odB); ndc(_odB, _odN);
+    out.x = _odN.x; out.y = _odN.y; return out;
+  }
   const _bdR = Q();
   function dispose() {
     setEyeHide(false, null);
@@ -1684,7 +1723,7 @@ export function createViewmodel(ctx) {
     if (root.parent) root.parent.remove(root);
   }
   return {
-    root, space, update, place, muzzleWorld, pointWorld, showing, viewPoint, ndc, dispose, info, retune: () => { sockets.key = null; for (const k in sockCache) delete sockCache[k]; },
+    root, space, update, place, muzzleWorld, pointWorld, showing, viewPoint, ndc, dispose, info, opticDotOffset,   // CC-342: opticDotOffset retune: () => { sockets.key = null; for (const k in sockCache) delete sockCache[k]; },
     // CL-293: the view's turn for this shot's spring (radians: p up, y left); 0 unless the view gun is up.
     // CL-327: how far the view gun is turned off its rest pose (the sway, the kick, the sprint's carry, a reload, the
     // raise), in the eye's space (the mirror undone), for the laser's and the light's line. which 2: the pair's left gun.
@@ -1696,7 +1735,8 @@ export function createViewmodel(ctx) {
       if (MX < 0) { out.y = -out.y; out.z = -out.z; }
       return out;
     },
-    cameraPunch: (out = { p: 0, y: 0 }) => { const on = info.active && S.raise > 0.5; out.p = on ? cs.x[0] : 0; out.y = on ? cs.x[1] : 0; return out; },
+    cameraPunch: (out = { p: 0, y: 0 }) => { const on = info.active && S.raise > 0.5, gw = on && S.glassW > 0 ? S.glassW : 0;   // CC-342 (J109): through the glass, the gun's own kick
+      out.p = on ? cs.x[0] + ok.x[1] * gw : 0; out.y = on ? cs.x[1] + ok.x[0] * MX * gw : 0; return out; },
     get gun() { return gun; }, get gun2() { return gun2; }, get frame2() { return G2; }, get arms() { return arms; }, get sockets() { return sockets; }, get frame() { return G; },
     get wrists() { return { r: WR, l: WL }; }, get proj() { return proj; }, get hidden() { return hidden; }, get filtering() { return filterOn; },
     isEyeHidden: (o) => hideOn && !!(o && o.userData && o.userData.vmEyeHide)

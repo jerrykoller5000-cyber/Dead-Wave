@@ -44,7 +44,7 @@
     const holds = T.getShoulderDbg().holds;
     const pouchOf = (sx) => {
       const vest = ud.gearParts && ud.gearParts.vest && ud.gearParts.vest.some((o) => o.visible), piv = ud.torsoPivotY || 0.7;
-      return ud.torsoG.localToWorld(vest ? V().set(0.12 * sx, 0.965 - piv, 0.25) : V().set(0.115 * sx, 0.68 - piv, 0.19));
+      return ud.torsoG.localToWorld(vest ? V().set(0.12 * sx, 0.235, 0.25) : V().set(0.115 * sx, 0.68 - piv, 0.19));
     };
     // The seated foot, measured before the reload: gun space and magazine space.
     const seatOf = (gun) => {
@@ -59,7 +59,22 @@
       const inMag = V().set((lo[0] + hi[0]) / 2, lo[1], (lo[2] + hi[2]) / 2);
       return { inMag, inGun: gun.worldToLocal(mag.localToWorld(inMag.clone())) };
     };
+    const carryPair = (w) => {
+      const armory = T.armoryDbg?.ui()?.armory;
+      if (!armory) return false;
+      for (let i = 0; i < 2; i++) if (armory.read().slots.secondary[i]) armory.stow('secondary', i);
+      if (w !== 'pistol') {
+        if (!armory.has(w)) armory.buy({ id: w, kind: w, loaded: 0 }, { store: true });
+        if (!armory.take(w, 'secondary', 0).ok) return false;
+      }
+      const second = `${w}:second`;
+      if (!armory.has(second)) armory.buy({ id: second, kind: w, loaded: null }, { store: true });
+      if (!armory.take(second, 'secondary', w === 'pistol' ? 0 : 1).ok) return false;
+      const slots = armory.loadout().secondary;
+      return slots.includes(second) && (w === 'pistol' || slots.includes(w));
+    };
     const take = async (w, aki) => {
+      if (aki && !carryPair(w)) return false;
       for (let i = 0; i < 16 && T.getCurrentWeapon() !== w; i++) T.setWeapon(i);
       await wait(300);
       await new Promise((r) => { const t0 = Date.now(); const f = () => (T.getCurrentWeapon() === w && T.getSwapDbg().swapT <= 0 && !(T.drawDbg && T.drawDbg().active)) || Date.now() - t0 > 6000 ? r() : setTimeout(f, 50); f(); });

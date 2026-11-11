@@ -1,0 +1,1753 @@
+{
+  "total": 302,
+  "roleSavings": 56,
+  "maskSavings": 69,
+  "result": {
+    "minigun": {
+      "meshes": 23,
+      "byRole": 4,
+      "byMask": 5,
+      "rows": [
+        {
+          "parent": "Group",
+          "items": [
+            {
+              "name": "",
+              "role": "receiver",
+              "coated": true,
+              "color": 4737873,
+              "rough": 0.66,
+              "metal": 0.08,
+              "material": "gunPaint:minigun"
+            },
+            {
+              "name": "",
+              "role": "receiver",
+              "coated": true,
+              "color": 6053992,
+              "rough": 0.68,
+              "metal": 0.06,
+              "material": "gunPaint:minigun"
+            },
+            {
+              "name": "",
+              "role": "receiver",
+              "coated": true,
+              "color": 3883589,
+              "rough": 0.72,
+              "metal": 0.17,
+              "material": "gunPaint:minigun"
+            },
+            {
+              "name": "",
+              "role": "rail",
+              "coated": true,
+              "color": 2566445,
+              "rough": 0.68,
+              "metal": 0.08,
+              "material": "gunPaint:minigun"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": false,
+              "color": 16777215,
+              "rough": 1,
+              "metal": 0,
+              "material": "fold-static"
+            }
+          ]
+        },
+        {
+          "parent": "minigun-default-reflex",
+          "items": [
+            {
+              "name": "",
+              "role": "optic shell",
+              "coated": true,
+              "color": 6053992,
+              "rough": 0.68,
+              "metal": 0.06,
+              "material": "gunPaint:minigun"
+            },
+            {
+              "name": "",
+              "role": "optic shell",
+              "coated": true,
+              "color": 2566445,
+              "rough": 0.68,
+              "metal": 0.08,
+              "material": "gunPaint:minigun"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": false,
+              "color": 16777215,
+              "rough": 1,
+              "metal": 0,
+              "material": "fold-static"
+            }
+          ]
+        },
+        {
+          "parent": "laserLightUnit",
+          "items": [
+            {
+              "name": "sideRailClamp",
+              "role": "light shell",
+              "coated": true,
+              "color": 2566445,
+              "rough": 0.68,
+              "metal": 0.08,
+              "material": "gunPaint:minigun"
+            },
+            {
+              "name": "moduleShell",
+              "role": "light shell",
+              "coated": true,
+              "color": 3290167,
+              "rough": 0.76,
+              "metal": 0.03,
+              "material": "gunPaint:minigun"
+            }
+          ]
+        }
+      ]
+    },
+    "m4": {
+      "meshes": 36,
+      "byRole": 8,
+      "byMask": 10,
+      "rows": [
+        {
+          "parent": "fp-stock",
+          "items": [
+            {
+              "name": "",
+              "role": "furniture",
+              "coated": true,
+              "color": 3618874,
+              "rough": 0.83,
+              "metal": 0.02,
+              "material": "gunPaint:m4"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": false,
+              "color": 16777215,
+              "rough": 1,
+              "metal": 0,
+              "material": "fold-static"
+            }
+          ]
+        },
+        {
+          "parent": "Group",
+          "items": [
+            {
+              "name": "GW-4 rear collar",
+              "role": "",
+              "coated": false,
+              "color": 3093817,
+              "rough": 0.61,
+              "metal": 0.28,
+              "material": ""
+            },
+            {
+              "name": "",
+              "role": "rail",
+              "coated": true,
+              "color": 4737873,
+              "rough": 0.66,
+              "metal": 0.08,
+              "material": "gunPaint:m4"
+            },
+            {
+              "name": "",
+              "role": "rail",
+              "coated": true,
+              "color": 6053992,
+              "rough": 0.68,
+              "metal": 0.06,
+              "material": "gunPaint:m4"
+            },
+            {
+              "name": "",
+              "role": "receiver",
+              "coated": true,
+              "color": 4211271,
+              "rough": 0.44,
+              "metal": 0.5,
+              "material": "gunPaint:m4"
+            },
+            {
+              "name": "",
+              "role": "rail",
+              "coated": true,
+              "color": 2566445,
+              "rough": 0.68,
+              "metal": 0.08,
+              "material": "gunPaint:m4"
+            },
+            {
+              "name": "",
+              "role": "rail",
+              "coated": true,
+              "color": 3685185,
+              "rough": 0.6,
+              "metal": 0.1,
+              "material": "gunPaint:m4"
+            },
+            {
+              "name": "",
+              "role": "receiver",
+              "coated": true,
+              "color": 3158582,
+              "rough": 0.53,
+              "metal": 0.36,
+              "material": "gunPaint:m4"
+            },
+            {
+              "name": "",
+              "role": "receiver",
+              "coated": true,
+              "color": 3093817,
+              "rough": 0.61,
+              "metal": 0.28,
+              "material": "gunPaint:m4"
+            },
+            {
+              "name": "",
+              "role": "furniture",
+              "coated": true,
+              "color": 3618874,
+              "rough": 0.83,
+              "metal": 0.02,
+              "material": "gunPaint:m4"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": false,
+              "color": 16777215,
+              "rough": 1,
+              "metal": 0,
+              "material": "fold-static"
+            }
+          ]
+        },
+        {
+          "parent": "m4-default-holo",
+          "items": [
+            {
+              "name": "",
+              "role": "optic shell",
+              "coated": true,
+              "color": 2566445,
+              "rough": 0.68,
+              "metal": 0.08,
+              "material": "gunPaint:m4"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": false,
+              "color": 16777215,
+              "rough": 1,
+              "metal": 0,
+              "material": "fold-static"
+            }
+          ]
+        },
+        {
+          "parent": "suppressor",
+          "items": [
+            {
+              "name": "",
+              "role": "suppressor shell",
+              "coated": true,
+              "color": 2566445,
+              "rough": 0.68,
+              "metal": 0.08,
+              "material": "gunPaint:m4"
+            },
+            {
+              "name": "",
+              "role": "suppressor shell",
+              "coated": true,
+              "color": 3685185,
+              "rough": 0.6,
+              "metal": 0.1,
+              "material": "gunPaint:m4"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": false,
+              "color": 16777215,
+              "rough": 1,
+              "metal": 0,
+              "material": "fold-static"
+            }
+          ]
+        },
+        {
+          "parent": "laserLightUnit",
+          "items": [
+            {
+              "name": "moduleShell",
+              "role": "light shell",
+              "coated": true,
+              "color": 3290167,
+              "rough": 0.76,
+              "metal": 0.03,
+              "material": "gunPaint:m4"
+            },
+            {
+              "name": "topPlate",
+              "role": "light shell",
+              "coated": true,
+              "color": 2566445,
+              "rough": 0.68,
+              "metal": 0.08,
+              "material": "gunPaint:m4"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": false,
+              "color": 16777215,
+              "rough": 1,
+              "metal": 0,
+              "material": "fold-static"
+            }
+          ]
+        }
+      ]
+    },
+    "ak": {
+      "meshes": 26,
+      "byRole": 3,
+      "byMask": 3,
+      "rows": [
+        {
+          "parent": "side optic bracket",
+          "items": [
+            {
+              "name": "KR-7 bracket web",
+              "role": "rail",
+              "coated": true,
+              "color": 5264986,
+              "rough": 0.52,
+              "metal": 0.35,
+              "material": "gunPaint:ak"
+            },
+            {
+              "name": "KR-7 bracket latch",
+              "role": "",
+              "coated": false,
+              "color": 2566445,
+              "rough": 0.68,
+              "metal": 0.08,
+              "material": ""
+            },
+            {
+              "name": "",
+              "role": "rail",
+              "coated": true,
+              "color": 2566445,
+              "rough": 0.68,
+              "metal": 0.08,
+              "material": "gunPaint:ak"
+            }
+          ]
+        },
+        {
+          "parent": "fp-stock",
+          "items": [
+            {
+              "name": "",
+              "role": "receiver",
+              "coated": true,
+              "color": 4870229,
+              "rough": 0.49,
+              "metal": 0.34,
+              "material": "gunPaint:ak"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": false,
+              "color": 16777215,
+              "rough": 1,
+              "metal": 0,
+              "material": "fold-static"
+            }
+          ]
+        },
+        {
+          "parent": "suppressor",
+          "items": [
+            {
+              "name": "",
+              "role": "suppressor shell",
+              "coated": true,
+              "color": 3685185,
+              "rough": 0.6,
+              "metal": 0.1,
+              "material": "gunPaint:ak"
+            },
+            {
+              "name": "",
+              "role": "suppressor shell",
+              "coated": true,
+              "color": 3817288,
+              "rough": 0.42,
+              "metal": 0.85,
+              "material": "gunPaint:ak"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": false,
+              "color": 16777215,
+              "rough": 1,
+              "metal": 0,
+              "material": "fold-static"
+            }
+          ]
+        },
+        {
+          "parent": "laserLightUnit",
+          "items": [
+            {
+              "name": "railClamp",
+              "role": "light shell",
+              "coated": true,
+              "color": 2566445,
+              "rough": 0.68,
+              "metal": 0.08,
+              "material": "gunPaint:ak"
+            },
+            {
+              "name": "moduleShell",
+              "role": "light shell",
+              "coated": true,
+              "color": 3290167,
+              "rough": 0.76,
+              "metal": 0.03,
+              "material": "gunPaint:ak"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": false,
+              "color": 16777215,
+              "rough": 1,
+              "metal": 0,
+              "material": "fold-static"
+            }
+          ]
+        },
+        {
+          "parent": "Group",
+          "items": [
+            {
+              "name": "",
+              "role": "receiver",
+              "coated": true,
+              "color": 4870229,
+              "rough": 0.49,
+              "metal": 0.34,
+              "material": "gunPaint:ak"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": false,
+              "color": 16777215,
+              "rough": 1,
+              "metal": 0,
+              "material": "fold-static"
+            }
+          ]
+        }
+      ]
+    },
+    "aa12": {
+      "meshes": 24,
+      "byRole": 5,
+      "byMask": 7,
+      "rows": [
+        {
+          "parent": "Group",
+          "items": [
+            {
+              "name": "",
+              "role": "rail",
+              "coated": true,
+              "color": 2566445,
+              "rough": 0.68,
+              "metal": 0.08,
+              "material": "gunPaint:aa12"
+            },
+            {
+              "name": "",
+              "role": "receiver",
+              "coated": true,
+              "color": 4804954,
+              "rough": 0.43,
+              "metal": 0.33,
+              "material": "gunPaint:aa12"
+            },
+            {
+              "name": "",
+              "role": "receiver",
+              "coated": true,
+              "color": 3554369,
+              "rough": 0.52,
+              "metal": 0.26,
+              "material": "gunPaint:aa12"
+            },
+            {
+              "name": "",
+              "role": "furniture",
+              "coated": true,
+              "color": 3290167,
+              "rough": 0.76,
+              "metal": 0.03,
+              "material": "gunPaint:aa12"
+            },
+            {
+              "name": "",
+              "role": "receiver",
+              "coated": true,
+              "color": 4737873,
+              "rough": 0.66,
+              "metal": 0.08,
+              "material": "gunPaint:aa12"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": false,
+              "color": 16777215,
+              "rough": 1,
+              "metal": 0,
+              "material": "fold-static"
+            }
+          ]
+        },
+        {
+          "parent": "recoil-bolt",
+          "items": [
+            {
+              "name": "",
+              "role": "",
+              "coated": false,
+              "color": 3817288,
+              "rough": 0.42,
+              "metal": 0.85,
+              "material": ""
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": false,
+              "color": 6053992,
+              "rough": 0.68,
+              "metal": 0.06,
+              "material": ""
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": false,
+              "color": 2566445,
+              "rough": 0.68,
+              "metal": 0.08,
+              "material": ""
+            }
+          ]
+        },
+        {
+          "parent": "fp-stock",
+          "items": [
+            {
+              "name": "",
+              "role": "furniture",
+              "coated": true,
+              "color": 3290167,
+              "rough": 0.76,
+              "metal": 0.03,
+              "material": "gunPaint:aa12"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": false,
+              "color": 16777215,
+              "rough": 1,
+              "metal": 0,
+              "material": "fold-static"
+            }
+          ]
+        },
+        {
+          "parent": "laserLightUnit",
+          "items": [
+            {
+              "name": "",
+              "role": "light shell",
+              "coated": true,
+              "color": 4804954,
+              "rough": 0.43,
+              "metal": 0.33,
+              "material": "gunPaint:aa12"
+            },
+            {
+              "name": "",
+              "role": "light shell",
+              "coated": true,
+              "color": 3290167,
+              "rough": 0.76,
+              "metal": 0.03,
+              "material": "gunPaint:aa12"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": false,
+              "color": 16777215,
+              "rough": 1,
+              "metal": 0,
+              "material": "fold-static"
+            }
+          ]
+        }
+      ]
+    },
+    "pistol": {
+      "meshes": 20,
+      "byRole": 1,
+      "byMask": 1,
+      "rows": [
+        {
+          "parent": "Group",
+          "items": [
+            {
+              "name": "",
+              "role": "slide",
+              "coated": true,
+              "color": 4344920,
+              "rough": 0.36,
+              "metal": 0.61,
+              "material": "gunPaint:pistol"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": false,
+              "color": 16777215,
+              "rough": 1,
+              "metal": 0,
+              "material": "fold-static"
+            }
+          ]
+        },
+        {
+          "parent": "Group",
+          "items": [
+            {
+              "name": "",
+              "role": "frame",
+              "coated": true,
+              "color": 3290167,
+              "rough": 0.76,
+              "metal": 0.03,
+              "material": "gunPaint:pistol"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": false,
+              "color": 16777215,
+              "rough": 1,
+              "metal": 0,
+              "material": "fold-static"
+            }
+          ]
+        },
+        {
+          "parent": "suppressor",
+          "items": [
+            {
+              "name": "",
+              "role": "suppressor shell",
+              "coated": true,
+              "color": 2566445,
+              "rough": 0.68,
+              "metal": 0.08,
+              "material": "gunPaint:pistol"
+            },
+            {
+              "name": "",
+              "role": "suppressor shell",
+              "coated": true,
+              "color": 3685185,
+              "rough": 0.6,
+              "metal": 0.1,
+              "material": "gunPaint:pistol"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": false,
+              "color": 16777215,
+              "rough": 1,
+              "metal": 0,
+              "material": "fold-static"
+            }
+          ]
+        },
+        {
+          "parent": "laserLightUnit",
+          "items": [
+            {
+              "name": "",
+              "role": "light shell",
+              "coated": true,
+              "color": 3290167,
+              "rough": 0.76,
+              "metal": 0.03,
+              "material": "gunPaint:pistol"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": false,
+              "color": 16777215,
+              "rough": 1,
+              "metal": 0,
+              "material": "fold-static"
+            }
+          ]
+        },
+        {
+          "parent": "Group",
+          "items": [
+            {
+              "name": "",
+              "role": "frame",
+              "coated": true,
+              "color": 3290167,
+              "rough": 0.76,
+              "metal": 0.03,
+              "material": "gunPaint:pistol"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": false,
+              "color": 16777215,
+              "rough": 1,
+              "metal": 0,
+              "material": "fold-static"
+            }
+          ]
+        }
+      ]
+    },
+    "uzi": {
+      "meshes": 29,
+      "byRole": 7,
+      "byMask": 9,
+      "rows": [
+        {
+          "parent": "uzi-optic-rail",
+          "items": [
+            {
+              "name": "",
+              "role": "rail",
+              "coated": true,
+              "color": 2566445,
+              "rough": 0.68,
+              "metal": 0.08,
+              "material": "gunPaint:uzi"
+            },
+            {
+              "name": "",
+              "role": "rail",
+              "coated": true,
+              "color": 3685185,
+              "rough": 0.6,
+              "metal": 0.1,
+              "material": "gunPaint:uzi"
+            }
+          ]
+        },
+        {
+          "parent": "Group",
+          "items": [
+            {
+              "name": "",
+              "role": "",
+              "coated": false,
+              "color": 3685185,
+              "rough": 0.6,
+              "metal": 0.1,
+              "material": ""
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": false,
+              "color": 2566445,
+              "rough": 0.68,
+              "metal": 0.08,
+              "material": ""
+            }
+          ]
+        },
+        {
+          "parent": "suppressor",
+          "items": [
+            {
+              "name": "",
+              "role": "suppressor shell",
+              "coated": true,
+              "color": 2566445,
+              "rough": 0.68,
+              "metal": 0.08,
+              "material": "gunPaint:uzi"
+            },
+            {
+              "name": "",
+              "role": "suppressor shell",
+              "coated": true,
+              "color": 3685185,
+              "rough": 0.6,
+              "metal": 0.1,
+              "material": "gunPaint:uzi"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": false,
+              "color": 16777215,
+              "rough": 1,
+              "metal": 0,
+              "material": "fold-static"
+            }
+          ]
+        },
+        {
+          "parent": "laserLightUnit",
+          "items": [
+            {
+              "name": "railClamp",
+              "role": "light shell",
+              "coated": true,
+              "color": 2566445,
+              "rough": 0.68,
+              "metal": 0.08,
+              "material": "gunPaint:uzi"
+            },
+            {
+              "name": "moduleShell",
+              "role": "light shell",
+              "coated": true,
+              "color": 3290167,
+              "rough": 0.76,
+              "metal": 0.03,
+              "material": "gunPaint:uzi"
+            },
+            {
+              "name": "",
+              "role": "rail",
+              "coated": true,
+              "color": 2566445,
+              "rough": 0.68,
+              "metal": 0.08,
+              "material": "gunPaint:uzi"
+            },
+            {
+              "name": "",
+              "role": "rail",
+              "coated": true,
+              "color": 3685185,
+              "rough": 0.6,
+              "metal": 0.1,
+              "material": "gunPaint:uzi"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": false,
+              "color": 16777215,
+              "rough": 1,
+              "metal": 0,
+              "material": "fold-static"
+            }
+          ]
+        },
+        {
+          "parent": "Group",
+          "items": [
+            {
+              "name": "",
+              "role": "receiver",
+              "coated": true,
+              "color": 4804951,
+              "rough": 0.48,
+              "metal": 0.28,
+              "material": "gunPaint:uzi"
+            },
+            {
+              "name": "",
+              "role": "receiver",
+              "coated": true,
+              "color": 5594724,
+              "rough": 0.38,
+              "metal": 0.36,
+              "material": "gunPaint:uzi"
+            },
+            {
+              "name": "",
+              "role": "furniture",
+              "coated": true,
+              "color": 3290167,
+              "rough": 0.76,
+              "metal": 0.03,
+              "material": "gunPaint:uzi"
+            },
+            {
+              "name": "",
+              "role": "furniture",
+              "coated": true,
+              "color": 2566445,
+              "rough": 0.68,
+              "metal": 0.08,
+              "material": "gunPaint:uzi"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": false,
+              "color": 16777215,
+              "rough": 1,
+              "metal": 0,
+              "material": "fold-static"
+            }
+          ]
+        }
+      ]
+    },
+    "shotgun": {
+      "meshes": 24,
+      "byRole": 3,
+      "byMask": 4,
+      "rows": [
+        {
+          "parent": "Group",
+          "items": [
+            {
+              "name": "shotgun receiver",
+              "role": "receiver",
+              "coated": true,
+              "color": 5594213,
+              "rough": 0.43,
+              "metal": 0.32,
+              "material": "gunPaint:shotgun"
+            },
+            {
+              "name": "shotgun lifter",
+              "role": "",
+              "coated": false,
+              "color": 7897994,
+              "rough": 0.38,
+              "metal": 0.46,
+              "material": ""
+            },
+            {
+              "name": "",
+              "role": "furniture",
+              "coated": true,
+              "color": 3684667,
+              "rough": 0.8,
+              "metal": 0.04,
+              "material": "gunPaint:shotgun"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": false,
+              "color": 16777215,
+              "rough": 1,
+              "metal": 0,
+              "material": "fold-static"
+            }
+          ]
+        },
+        {
+          "parent": "controls-pump",
+          "items": [
+            {
+              "name": "",
+              "role": "furniture",
+              "coated": true,
+              "color": 3684667,
+              "rough": 0.8,
+              "metal": 0.04,
+              "material": "gunPaint:shotgun"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": false,
+              "color": 5594468,
+              "rough": 0.46,
+              "metal": 0.48,
+              "material": ""
+            }
+          ]
+        },
+        {
+          "parent": "suppressor",
+          "items": [
+            {
+              "name": "",
+              "role": "suppressor shell",
+              "coated": true,
+              "color": 3685185,
+              "rough": 0.6,
+              "metal": 0.1,
+              "material": "gunPaint:shotgun"
+            },
+            {
+              "name": "",
+              "role": "suppressor shell",
+              "coated": true,
+              "color": 2566445,
+              "rough": 0.68,
+              "metal": 0.08,
+              "material": "gunPaint:shotgun"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": false,
+              "color": 16777215,
+              "rough": 1,
+              "metal": 0,
+              "material": "fold-static"
+            }
+          ]
+        },
+        {
+          "parent": "laserLightUnit",
+          "items": [
+            {
+              "name": "sideRail",
+              "role": "light shell",
+              "coated": true,
+              "color": 6053992,
+              "rough": 0.68,
+              "metal": 0.06,
+              "material": "gunPaint:shotgun"
+            },
+            {
+              "name": "",
+              "role": "light shell",
+              "coated": true,
+              "color": 3290167,
+              "rough": 0.76,
+              "metal": 0.03,
+              "material": "gunPaint:shotgun"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": false,
+              "color": 16777215,
+              "rough": 1,
+              "metal": 0,
+              "material": "fold-static"
+            }
+          ]
+        }
+      ]
+    },
+    "revolver": {
+      "meshes": 26,
+      "byRole": 3,
+      "byMask": 4,
+      "rows": [
+        {
+          "parent": "laserLightUnit",
+          "items": [
+            {
+              "name": "railClamp",
+              "role": "light shell",
+              "coated": true,
+              "color": 2566445,
+              "rough": 0.68,
+              "metal": 0.08,
+              "material": "gunPaint:revolver"
+            },
+            {
+              "name": "moduleShell",
+              "role": "light shell",
+              "coated": true,
+              "color": 3290167,
+              "rough": 0.76,
+              "metal": 0.03,
+              "material": "gunPaint:revolver"
+            },
+            {
+              "name": "",
+              "role": "rail",
+              "coated": true,
+              "color": 4213077,
+              "rough": 0.32,
+              "metal": 0.68,
+              "material": "gunPaint:revolver"
+            },
+            {
+              "name": "",
+              "role": "rail",
+              "coated": true,
+              "color": 2566445,
+              "rough": 0.68,
+              "metal": 0.08,
+              "material": "gunPaint:revolver"
+            },
+            {
+              "name": "",
+              "role": "rail",
+              "coated": true,
+              "color": 3685185,
+              "rough": 0.6,
+              "metal": 0.1,
+              "material": "gunPaint:revolver"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": false,
+              "color": 16777215,
+              "rough": 1,
+              "metal": 0,
+              "material": "fold-static"
+            }
+          ]
+        },
+        {
+          "parent": "revolverOpticPlate",
+          "items": [
+            {
+              "name": "",
+              "role": "rail",
+              "coated": true,
+              "color": 4213077,
+              "rough": 0.32,
+              "metal": 0.68,
+              "material": "gunPaint:revolver"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": false,
+              "color": 2566445,
+              "rough": 0.68,
+              "metal": 0.08,
+              "material": ""
+            }
+          ]
+        },
+        {
+          "parent": "Group",
+          "items": [
+            {
+              "name": "",
+              "role": "frame",
+              "coated": true,
+              "color": 4213077,
+              "rough": 0.32,
+              "metal": 0.68,
+              "material": "gunPaint:revolver"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": false,
+              "color": 16777215,
+              "rough": 1,
+              "metal": 0,
+              "material": "fold-static"
+            }
+          ]
+        }
+      ]
+    },
+    "sniper": {
+      "meshes": 37,
+      "byRole": 5,
+      "byMask": 7,
+      "rows": [
+        {
+          "parent": "Group",
+          "items": [
+            {
+              "name": "",
+              "role": "furniture",
+              "coated": true,
+              "color": 3290167,
+              "rough": 0.76,
+              "metal": 0.03,
+              "material": "gunPaint:sniper"
+            },
+            {
+              "name": "",
+              "role": "receiver",
+              "coated": true,
+              "color": 10126688,
+              "rough": 0.74,
+              "metal": 0.05,
+              "material": "gunPaint:sniper"
+            },
+            {
+              "name": "",
+              "role": "rail",
+              "coated": true,
+              "color": 2566445,
+              "rough": 0.68,
+              "metal": 0.08,
+              "material": "gunPaint:sniper"
+            },
+            {
+              "name": "",
+              "role": "rail",
+              "coated": true,
+              "color": 3685185,
+              "rough": 0.6,
+              "metal": 0.1,
+              "material": "gunPaint:sniper"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": false,
+              "color": 16777215,
+              "rough": 1,
+              "metal": 0,
+              "material": "fold-static"
+            }
+          ]
+        },
+        {
+          "parent": "fp-stock",
+          "items": [
+            {
+              "name": "",
+              "role": "furniture",
+              "coated": true,
+              "color": 10126688,
+              "rough": 0.74,
+              "metal": 0.05,
+              "material": "gunPaint:sniper"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": false,
+              "color": 16777215,
+              "rough": 1,
+              "metal": 0,
+              "material": "fold-static"
+            }
+          ]
+        },
+        {
+          "parent": "suppressor",
+          "items": [
+            {
+              "name": "",
+              "role": "suppressor shell",
+              "coated": true,
+              "color": 3685185,
+              "rough": 0.6,
+              "metal": 0.1,
+              "material": "gunPaint:sniper"
+            },
+            {
+              "name": "",
+              "role": "suppressor shell",
+              "coated": true,
+              "color": 2566445,
+              "rough": 0.68,
+              "metal": 0.08,
+              "material": "gunPaint:sniper"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": false,
+              "color": 16777215,
+              "rough": 1,
+              "metal": 0,
+              "material": "fold-static"
+            }
+          ]
+        },
+        {
+          "parent": "laserLightUnit",
+          "items": [
+            {
+              "name": "moduleShell",
+              "role": "light shell",
+              "coated": true,
+              "color": 3290167,
+              "rough": 0.76,
+              "metal": 0.03,
+              "material": "gunPaint:sniper"
+            },
+            {
+              "name": "topPlate",
+              "role": "light shell",
+              "coated": true,
+              "color": 2566445,
+              "rough": 0.68,
+              "metal": 0.08,
+              "material": "gunPaint:sniper"
+            }
+          ]
+        },
+        {
+          "parent": "optic.nx8",
+          "items": [
+            {
+              "name": "scope rail bridge",
+              "role": "optic shell",
+              "coated": true,
+              "color": 2369578,
+              "rough": 0.74,
+              "metal": 0.05,
+              "material": "gunPaint:sniper"
+            },
+            {
+              "name": "NX8 tapered optical housing",
+              "role": "optic shell",
+              "coated": true,
+              "color": 4344399,
+              "rough": 0.52,
+              "metal": 0.24,
+              "material": "gunPaint:sniper"
+            },
+            {
+              "name": "",
+              "role": "optic shell",
+              "coated": true,
+              "color": 3027508,
+              "rough": 0.5,
+              "metal": 0.55,
+              "material": "gunPaint:sniper"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": false,
+              "color": 16777215,
+              "rough": 1,
+              "metal": 0,
+              "material": "fold-static"
+            }
+          ]
+        }
+      ]
+    },
+    "launcher": {
+      "meshes": 24,
+      "byRole": 3,
+      "byMask": 5,
+      "rows": [
+        {
+          "parent": "launcher-optic-seat",
+          "items": [
+            {
+              "name": "",
+              "role": "rail",
+              "coated": true,
+              "color": 2566445,
+              "rough": 0.68,
+              "metal": 0.08,
+              "material": "gunPaint:launcher"
+            },
+            {
+              "name": "",
+              "role": "rail",
+              "coated": true,
+              "color": 6053992,
+              "rough": 0.68,
+              "metal": 0.06,
+              "material": "gunPaint:launcher"
+            }
+          ]
+        },
+        {
+          "parent": "fp-stock",
+          "items": [
+            {
+              "name": "",
+              "role": "furniture",
+              "coated": true,
+              "color": 5397051,
+              "rough": 0.74,
+              "metal": 0.06,
+              "material": "gunPaint:launcher"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": false,
+              "color": 16777215,
+              "rough": 1,
+              "metal": 0,
+              "material": "fold-static"
+            }
+          ]
+        },
+        {
+          "parent": "laserLightUnit",
+          "items": [
+            {
+              "name": "moduleShell",
+              "role": "light shell",
+              "coated": true,
+              "color": 3290167,
+              "rough": 0.76,
+              "metal": 0.03,
+              "material": "gunPaint:launcher"
+            },
+            {
+              "name": "topPlate",
+              "role": "light shell",
+              "coated": true,
+              "color": 2566445,
+              "rough": 0.68,
+              "metal": 0.08,
+              "material": "gunPaint:launcher"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": false,
+              "color": 16777215,
+              "rough": 1,
+              "metal": 0,
+              "material": "fold-static"
+            }
+          ]
+        },
+        {
+          "parent": "Group",
+          "items": [
+            {
+              "name": "",
+              "role": "receiver",
+              "coated": true,
+              "color": 7371134,
+              "rough": 0.69,
+              "metal": 0.38,
+              "material": "gunPaint:launcher"
+            },
+            {
+              "name": "",
+              "role": "furniture",
+              "coated": true,
+              "color": 3290167,
+              "rough": 0.76,
+              "metal": 0.03,
+              "material": "gunPaint:launcher"
+            },
+            {
+              "name": "",
+              "role": "rail",
+              "coated": true,
+              "color": 2566445,
+              "rough": 0.68,
+              "metal": 0.08,
+              "material": "gunPaint:launcher"
+            },
+            {
+              "name": "",
+              "role": "rail",
+              "coated": true,
+              "color": 3685185,
+              "rough": 0.6,
+              "metal": 0.1,
+              "material": "gunPaint:launcher"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": false,
+              "color": 16777215,
+              "rough": 1,
+              "metal": 0,
+              "material": "fold-static"
+            }
+          ]
+        }
+      ]
+    },
+    "flamer": {
+      "meshes": 16,
+      "byRole": 6,
+      "byMask": 6,
+      "rows": [
+        {
+          "parent": "Group",
+          "items": [
+            {
+              "name": "",
+              "role": "",
+              "coated": true,
+              "color": 14263583,
+              "rough": 0.55,
+              "metal": 0.2,
+              "material": "gunPaint:flamer"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": true,
+              "color": 11019804,
+              "rough": 0.5,
+              "metal": 0.3,
+              "material": "gunPaint:flamer"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": true,
+              "color": 3290167,
+              "rough": 0.76,
+              "metal": 0.03,
+              "material": "gunPaint:flamer"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": true,
+              "color": 11581117,
+              "rough": 0.26,
+              "metal": 0.62,
+              "material": "gunPaint:flamer"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": false,
+              "color": 13015877,
+              "rough": 0.3,
+              "metal": 0.65,
+              "material": ""
+            }
+          ]
+        },
+        {
+          "parent": "Group",
+          "items": [
+            {
+              "name": "",
+              "role": "",
+              "coated": true,
+              "color": 15262936,
+              "rough": 0.5,
+              "metal": 0,
+              "material": "gunPaint:flamer"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": true,
+              "color": 3290167,
+              "rough": 0.76,
+              "metal": 0.03,
+              "material": "gunPaint:flamer"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": true,
+              "color": 3685185,
+              "rough": 0.6,
+              "metal": 0.1,
+              "material": "gunPaint:flamer"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": true,
+              "color": 11581117,
+              "rough": 0.26,
+              "metal": 0.62,
+              "material": "gunPaint:flamer"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": false,
+              "color": 16777215,
+              "rough": 1,
+              "metal": 0,
+              "material": "fold-static"
+            }
+          ]
+        }
+      ]
+    },
+    "chainsaw": {
+      "meshes": 17,
+      "byRole": 8,
+      "byMask": 8,
+      "rows": [
+        {
+          "parent": "Group",
+          "items": [
+            {
+              "name": "",
+              "role": "",
+              "coated": false,
+              "color": 1513498,
+              "rough": 0.95,
+              "metal": 0,
+              "material": ""
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": true,
+              "color": 3685185,
+              "rough": 0.6,
+              "metal": 0.1,
+              "material": "gunPaint:chainsaw"
+            }
+          ]
+        },
+        {
+          "parent": "Group",
+          "items": [
+            {
+              "name": "",
+              "role": "",
+              "coated": true,
+              "color": 14263583,
+              "rough": 0.55,
+              "metal": 0.2,
+              "material": "gunPaint:chainsaw"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": true,
+              "color": 11031077,
+              "rough": 0.66,
+              "metal": 0.08,
+              "material": "gunPaint:chainsaw"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": true,
+              "color": 13003566,
+              "rough": 0.66,
+              "metal": 0.08,
+              "material": "gunPaint:chainsaw"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": true,
+              "color": 6053992,
+              "rough": 0.68,
+              "metal": 0.06,
+              "material": "gunPaint:chainsaw"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": false,
+              "color": 1513498,
+              "rough": 0.95,
+              "metal": 0,
+              "material": ""
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": true,
+              "color": 3290167,
+              "rough": 0.76,
+              "metal": 0.03,
+              "material": "gunPaint:chainsaw"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": true,
+              "color": 2566445,
+              "rough": 0.68,
+              "metal": 0.08,
+              "material": "gunPaint:chainsaw"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": true,
+              "color": 3685185,
+              "rough": 0.6,
+              "metal": 0.1,
+              "material": "gunPaint:chainsaw"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": true,
+              "color": 11581117,
+              "rough": 0.26,
+              "metal": 0.62,
+              "material": "gunPaint:chainsaw"
+            }
+          ]
+        },
+        {
+          "parent": "Group",
+          "items": [
+            {
+              "name": "",
+              "role": "",
+              "coated": true,
+              "color": 6053992,
+              "rough": 0.68,
+              "metal": 0.06,
+              "material": "gunPaint:chainsaw"
+            },
+            {
+              "name": "",
+              "role": "",
+              "coated": true,
+              "color": 3290167,
+              "rough": 0.76,
+              "metal": 0.03,
+              "material": "gunPaint:chainsaw"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

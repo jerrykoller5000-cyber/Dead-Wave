@@ -7,7 +7,7 @@ import { save } from '../../GT-20076/save.mjs';
 
 const phase = process.argv[2];
 assert(process.env.DW_GAME_TEST_TOKEN && ['before','after','timing'].includes(phase));
-const folder = new URL('./' + phase + '/', import.meta.url);
+const folder = process.argv.includes('--instances') ? new URL('../../GT-20081/revolver-reload/',import.meta.url) : new URL('./' + phase + '/', import.meta.url);
 await mkdir(folder, {recursive:true});
 const server = await serve(fileURLToPath(new URL('../../../', import.meta.url)), 0);
 const browser = await launch({headless:false});
@@ -48,7 +48,19 @@ try {
       const stage=new T.Group();
       stage.position.set(20,80,-60);stage.scale.setScalar(14);
       stage.visible=false;TT.scene.add(stage);
-      const props={loader:raw.speedloader.children[1],palm:raw.palmRounds.children[0],empty:raw.emptyCasings[0]};
+      const {verifyArtworkInstances,renderIndividualReference}=await import('/review/GT-20081/verify.mjs');
+      // The gallery draws one actual member of each family, whether it is individually drawn or instanced.
+      function galleryPart(slot,type){
+        const bank=raw.artworkInstanceMeshes?.find(b=>b.name==='revolver-'+type+'-instances' ||
+          (type!=='spent' && b.name==='revolver-live-reload-instances'));
+        if(!bank)return slot;
+        const marker=bank.userData.artworkSlots.find(s=>s.name===slot.name);
+        if(!marker)throw Error('Missing gallery instance '+type);
+        const group=new T.Group(),mesh=new T.Mesh(bank.geometry,bank.material);
+        new T.Matrix4().fromArray(marker.local).decompose(mesh.position,mesh.quaternion,mesh.scale);
+        group.add(mesh);return group;
+      }
+      const props={loader:galleryPart(raw.speedloader.children[1],'loader'),palm:galleryPart(raw.palmRounds.children[0],'palm'),empty:galleryPart(raw.emptyCasings[0],'spent')};
       const bounds={};
       let col=0;
       for(const [name,part] of Object.entries(props)){
@@ -74,6 +86,7 @@ try {
         H.sun.target.position.copy(p);H.sun.target.updateMatrixWorld();H.sun.color.setHex(L.sunColor);H.sun.intensity=L.sun;
         H.hemi.color.setHex(L.skyColor);H.hemi.groundColor.setHex(L.ground);H.hemi.intensity=L.sky;
         H.ambientFill.intensity=L.fill;H.moon.intensity=0;
+        const eye=TT.viewmodelDbg()?.gun?.root;if(eye && window.compareArtwork)renderIndividualReference(T,eye,!!window.individualArt);
       }});
       window.sampleReload=async(name,beat,lightName)=>{
         stage.visible=name==='props';light=lightName;
@@ -90,13 +103,13 @@ try {
         if(stage.visible)return {name};
         const vm=TT.viewmodelDbg(),g=vm.gun;
         return {name,at:beat,key:vm.info.key,active:vm.info.active,reloading:TT.isReloading(),counts:TT.vmStateDbg().rounds,
+          instanceCounts:{eye:verifyArtworkInstances(T,g.root),held:verifyArtworkInstances(T,TT.weaponMeshes.revolver)},
           empty:g.empties.visible?g.empties.children.filter(o=>o.visible).length:0,
           palm:g.palmRounds.visible?g.palmRounds.children.filter(o=>o.visible).length:0,
           loader:g.speedloader.visible?g.speedloader.children.slice(1).filter(o=>o.visible).length:0};
       };
       return {bounds,mmPerLocal:1000*TT.weaponMeshes.revolver.scale.x/TT.getWeaponSizeDbg().upm,liveExport:!!ref,spentCached:lib.spentCaseGeometry(T,'revolver')===lib.spentCaseGeometry(T,'revolver'),
-        liveUsed:!!ref && raw.palmRounds.children[0].children.some(o=>o.geometry===ref)
-          && raw.speedloader.children[1].children.some(o=>o.geometry===ref)};
+        liveUsed:!!ref && props.palm.children.some(o=>o.geometry===ref) && props.loader.children.some(o=>o.geometry===ref)};
     })()`);
     report.frames=[];
     for(const [name,beat] of [['empty',.205],['palm',.302],['loader',.47],['props',.47]]){
@@ -106,10 +119,20 @@ try {
           assert.equal(frame.key,'revolver');assert(frame.active && frame.reloading);
           assert.deepEqual(frame.counts,{spent:3,live:2,load:5});
           assert.equal(frame[name],{empty:3,palm:2,loader:5}[name]);
+          if(process.argv.includes('--instances')) {
+            const family=name==='empty'?'spent':('revolver-live-reload-instances' in frame.instanceCounts.eye?'live-reload':name);
+            assert.equal(frame.instanceCounts.eye['revolver-'+family+'-instances'],frame[name]);
+          }
         }
         const shot=await page.send('Page.captureScreenshot',{format:'jpeg',quality:95});
         await save(new URL(name+'-'+light+'.jpg',folder),Buffer.from(shot.data,'base64'));
         report.frames.push({...frame,light});
+        if(process.argv.includes('--instances') && name!=='props'){
+          await page.evaluate('window.compareArtwork=true;window.individualArt=true;TT.stepFrame(0);new Promise(r=>setTimeout(r,100))');
+          const reference=await page.send('Page.captureScreenshot',{format:'jpeg',quality:95});
+          await save(new URL('individual-'+name+'-'+light+'.jpg',folder),Buffer.from(reference.data,'base64'));
+          await page.evaluate('window.individualArt=false;TT.stepFrame(0)');
+        }
       }
     }
     await save(new URL('proof.json',folder),JSON.stringify(report,null,2));

@@ -412,7 +412,12 @@ async function capture() {
         if(reviewId==='aa12')Object.assign(factoryParts,{drum:raw.userData.mag,brake:raw.getObjectByName('Breacher muzzle brake')});
         else if(reviewId==='launcher'){
           Object.assign(factoryParts,{drum:raw.userData.drum,iron:raw.userData.defaultSight,looseRound:raw.userData.loadRound,latch:raw.userData.drumLatch});
-          for(const [i,round] of raw.userData.drumRounds.entries())factoryParts['round'+i]=round;
+          const batch=raw.userData.drum.getObjectByName('launcher-loaded-inserts');
+          if(batch){
+            if(!batch.isInstancedMesh || batch.count!==6 || batch.userData.artworkSlots.length!==6 ||
+                !raw.userData.drumRounds.every((r,i)=>batch.userData.artworkSlots[i].name===r.name))throw Error('Missing factory rounds in batch');
+            factoryParts.loadedInserts=batch;
+          }else for(const [i,round] of raw.userData.drumRounds.entries())factoryParts['round'+i]=round;
         }else if(reviewId==='minigun'){
           Object.assign(factoryParts,{drum:raw.userData.ammoBox,rotor:raw.userData.barrelAssembly});
           const defaults={coated:0,bare:0};

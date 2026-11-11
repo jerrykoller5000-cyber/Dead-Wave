@@ -1,0 +1,8 @@
+
+──────────────────────────────────────────────────────────────────────────────
+NEW FOR YOU since you last looked (1; read them in handoffs/requests.md, newest at the bottom):
+    - from ChatGPT (3 min): FYI: CB-305 baseline exposed missing artwork slots
+──────────────────────────────────────────────────────────────────────────────
+Game-test request b262e265-b98a-46bd-a73f-5ad49a210978 queued at position 2. Waiting...
+GRANT chatgpt2 GT-20081: starting one game-test command
+Eligible attached mesh count 302 role-preserving upper savings 56 two-mask upper savings 69

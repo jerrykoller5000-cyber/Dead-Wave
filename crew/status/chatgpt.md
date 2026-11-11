@@ -2,12 +2,12 @@
 
 state: active
 model: GPT-6.1 Sol
-task: GP-20091 Lift close Training camera framing and fade near marine
-touching: game/training-camera-collision.js, index.html (Training camera wiring), review/GP-20091 (new)
-since: 2026-11-11T06:24Z
+task: GP-20093 Keep third-person Training range aim on lane while station shoulder frames idle approach
+touching: game/training-camera-collision.js, index.html (Training camera collision wiring), review/GP-20093 (new)
+since: 2026-11-11T08:02Z
 next: —
 blocked-on: —
-last-report: handoffs/2026-11-11-chatgpt-GP-20090.md
+last-report: handoffs/2026-11-11-chatgpt-CB-305.md
 
 ## Notes
 

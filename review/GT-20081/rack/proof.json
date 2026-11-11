@@ -1,0 +1,84 @@
+{
+  "failures": [],
+  "launcher": {
+    "counts": {
+      "launcher-loaded-inserts": 6
+    },
+    "mapped": {
+      "house": {
+        "launcher-loaded-inserts": {
+          "expected": 8064,
+          "actual": 8064,
+          "packed": false,
+          "maxCoordinateError": 3.7105004346837944e-9,
+          "material": "7242d5d3-c28a-4629-9633-0b77689b9512"
+        }
+      },
+      "training": {
+        "launcher-loaded-inserts": {
+          "expected": 8064,
+          "actual": 8064,
+          "packed": false,
+          "maxCoordinateError": 3.7105004346837944e-9,
+          "material": "7242d5d3-c28a-4629-9633-0b77689b9512"
+        }
+      }
+    }
+  },
+  "revolver": {
+    "counts": {
+      "revolver-chamber-layer-0": 6,
+      "revolver-visible-tips": 6,
+      "revolver-live-reload-instances": 0,
+      "revolver-spent-instances": 0
+    },
+    "mapped": {
+      "house": {
+        "revolver-chamber-layer-0": {
+          "expected": 20922,
+          "actual": 20922,
+          "packed": false,
+          "maxCoordinateError": 7.445523114713026e-9,
+          "material": "06813e71-68f9-4d55-a9a6-09524ca6dcd0"
+        },
+        "revolver-visible-tips": {
+          "expected": 1512,
+          "actual": 1512,
+          "packed": true,
+          "maxCoordinateError": 1.1953401402031716e-7,
+          "material": "12d974d2-d8c5-4123-858a-d79d8c2b8042"
+        },
+        "revolver-live-reload-instances,revolver-spent-instances": {
+          "expected": 0,
+          "actual": 0,
+          "packed": false,
+          "maxCoordinateError": 0,
+          "material": "ee4b3a5e-c158-4def-82df-806b8dd7e6ea"
+        }
+      },
+      "training": {
+        "revolver-chamber-layer-0": {
+          "expected": 20922,
+          "actual": 20922,
+          "packed": false,
+          "maxCoordinateError": 7.445523114713026e-9,
+          "material": "06813e71-68f9-4d55-a9a6-09524ca6dcd0"
+        },
+        "revolver-visible-tips": {
+          "expected": 1512,
+          "actual": 1512,
+          "packed": true,
+          "maxCoordinateError": 1.1953401046760348e-7,
+          "material": "12d974d2-d8c5-4123-858a-d79d8c2b8042"
+        },
+        "revolver-live-reload-instances,revolver-spent-instances": {
+          "expected": 0,
+          "actual": 0,
+          "packed": false,
+          "maxCoordinateError": 0,
+          "material": "ee4b3a5e-c158-4def-82df-806b8dd7e6ea"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+GRANT chatgpt2 GT-20081: starting one game-test command
+PASS after 12 frames, three real ejected props; held and eye occupancy [ true, true, true, false, false, false ] [ true, true, true, false, false, false ] end {
+  instanceCounts: {
+    held: { 'launcher-loaded-inserts': 6 },
+    eye: { 'launcher-loaded-inserts': 6 }
+  },
+  loaded: 6,
+  shown: 6,
+  eye: 6,
+  reloading: false
+}

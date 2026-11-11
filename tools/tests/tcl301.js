@@ -25,6 +25,10 @@
     ok(await take('pistol'), 'a pistol in hand');
     T.setViewFirstDbg(true);
     T.setDualOwnedDbg('pistol', true);
+    const armory = T.armoryDbg.ui().armory;
+    if (!armory.has('pistol:second')) armory.buy({ id: 'pistol:second', kind: 'pistol', loaded: null }, { store: true });
+    const pairTaken = armory.take('pistol:second', 'secondary', 0);
+    ok(pairTaken.ok && armory.loadout().secondary.includes('pistol:second'), 'the pistol pair is carried in an Armory secondary slot');
     for (let i = 0; i < 3 && !(VM() && VM().info.akimbo); i++) { T.toggleDualWieldDbg(); await until(() => VM() && VM().info.akimbo, 3000); }
     ok(await until(() => VM() && VM().info.active && VM().info.akimbo && VM().info.raise > 0.99, 20000), 'first person with the pair: the view guns are up (akimbo ' + (VM() && VM().info.akimbo) + ')');
     const vm = VM();

@@ -1,0 +1,11 @@
+GRANT chatgpt2 GT-20081: starting one game-test command
+file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/cdp.mjs:166
+      throw new Error('evaluate failed: ' + text);
+            ^
+
+Error: evaluate failed: Error: revolver house revolver-visible-tips expected 1512 triangle vertices, got 0
+    at <anonymous>:47:36
+    at Page.evaluate (file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/cdp.mjs:166:13)
+    at async file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/GT-20081/rack.mjs:21:16
+
+Node.js v24.13.0

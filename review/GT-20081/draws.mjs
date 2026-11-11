@@ -15,6 +15,7 @@ try {
   const page=await browser.newPage({width:960,height:540});
   await page.goto(server.origin+'/index.html?debug=1&raf=timer');
   assert(await page.waitFor('window.TT && DWLoad.snapshot().state==="ready"'));
+  await page.evaluate(`window.coldArtworkNodes={};for(const [id,gun] of Object.entries(TT.weaponMeshes)){const nodes=[];gun.traverse(o=>{if(o.isMesh)nodes.push(o)});coldArtworkNodes[id]=nodes}true`);
   await page.evaluate('DWOpening.dismissForTesting()');
   assert(await page.waitFor('!DWOpening.active'));
   await page.evaluate("document.getElementById('playerName').value='Artwork';document.getElementById('modeTraining').click()");
@@ -46,7 +47,22 @@ try {
         const c=b.getCenter(new T.Vector3()),s=b.getSize(new T.Vector3()).length();
         cam.position.copy(c).addScaledVector(new T.Vector3(1,.4,.6).normalize(),s*2.5);cam.lookAt(c);cam.updateMatrixWorld();
         draw();const sample=draw();
-        result[id]={all,shown,rootVisible:copy.visible,sourceVisible:source.visible,children:copy.children.filter(o=>o.visible).length,draws:sample.draws-empty.draws,triangles:sample.triangles-empty.triangles};
+        const refs=new Map(),present=new Set(),cold=new Set(coldArtworkNodes[id]),hidden=[];
+        for(const [key,value] of Object.entries(source.userData)){
+          if(value?.isObject3D)refs.set(value,value.name||key);
+          else if(Array.isArray(value))value.forEach((o,i)=>{if(o?.isObject3D)refs.set(o,o.name||key+'['+i+']')});
+        }
+        source.traverse(o=>{
+          if(!o.isMesh)return;present.add(o);
+          let owner='',gate='';
+          for(let p=o;p&&p!==source;p=p.parent){
+            if(!owner && (refs.has(p)||p.name))owner=refs.get(p)||p.name;
+            if(!p.visible)gate=refs.get(p)||p.name||owner||p.type;
+          }
+          if(gate)hidden.push({owner:owner||'body',gate,name:o.name,material:o.material.name||o.material.type,cold:cold.has(o)});
+        });
+        result[id]={all,shown,cold:cold.size,added:[...present].filter(o=>!cold.has(o)).length,
+          removed:[...cold].filter(o=>!present.has(o)).length,hidden,draws:sample.draws-empty.draws,triangles:sample.triangles-empty.triangles};
         scene.remove(copy);
       }
       return {empty,result,backend:renderer.backend?.constructor.name};
@@ -78,14 +94,27 @@ try {
       const v=TT.viewmodelDbg().info;if(v.key!==key||!v.active||v.raise<.98)throw Error('Eye missing '+key);
     };
   })()`);
-  for(const id of ['sniper','launcher','revolver','chainsaw']){
+  const ids=process.argv.includes('--inventory')?[]:process.argv.includes('--decals')?['chainsaw']:['sniper','launcher','revolver','chainsaw'];
+  for(const id of ids){
     for(const light of ['noon','overcast','dusk','night']){
       await page.evaluate('batchEye('+JSON.stringify(id)+','+JSON.stringify(light)+')');
+      if(process.argv.includes('--decals')){
+        const overlay=await page.evaluate(`(async()=>{
+          for(let i=0;i<4;i++){TT.sawEffectsDbg.setBlood(.65,0);TT.stepFrame(1/30);await new Promise(r=>setTimeout(r,75))}
+          const g=TT.weaponMeshes.chainsaw.userData.sawBloodGroup,eye=TT.viewmodelDbg().gun.root.getObjectByName('saw-blood-overlay');
+          const counts=n=>{const pieces=[];n.traverse(o=>{if(o.isMesh)pieces.push({vertices:o.geometry.index?.count??o.geometry.attributes.position.count,order:o.renderOrder,opacity:o.material.opacity})});return pieces};
+          return {held:counts(g),eye:counts(eye)};
+        })()`);
+        assert(overlay.held.every(o=>o.opacity>.6 && o.order===2));
+        assert.equal(overlay.held.reduce((s,o)=>s+o.vertices,0),84);
+        assert(overlay.eye.every(o=>o.opacity>.6));
+        await save(new URL('decals-'+light+'.json',folder),JSON.stringify(overlay,null,2));
+      }
       const img=await page.send('Page.captureScreenshot',{format:'jpeg',quality:95});
       await save(new URL(id+'-'+light+'.jpg',folder),Buffer.from(img.data,'base64'));
     }
   }
   assert.deepEqual(page.errors,[]);
   const total=Object.values(report.result).reduce((sum,r)=>sum+r.draws,0);
-  console.log('PASS',report.backend,'isolated GPU draws across all 12 models',total,'four-light eye frames',16);
+  console.log('PASS',report.backend,'isolated GPU draws across all 12 models',total,'four-light eye frames',ids.length*4);
 }finally{await browser.close();await server.close()}

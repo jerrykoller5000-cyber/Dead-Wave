@@ -1,3 +1,67 @@
+// Optional accessories keep a placement group on every copy. Their geometry and
+// material variants are created only when that particular copy first shows them.
+const optionalTypes = new WeakMap();
+const optionalState = new WeakMap();
+
+export function optionalArtworkGroup(ctx, gun, name, build, fallbackFor = null) {
+  const T = ctx.THREE;
+  let Group = optionalTypes.get(T);
+  if (!Group) {
+    Group = class extends T.Group {
+      constructor() {
+        super();
+        const state = {shown:false, build:null, fallbackFor:null};
+        optionalState.set(this, state);
+        Object.defineProperty(this, 'visible', {
+          configurable:true, enumerable:true,
+          get() { this.realizeFittedArtwork(); return state.shown; },
+          set(value) { state.shown = !!value; this.realizeFittedArtwork(); }
+        });
+      }
+
+      realizeFittedArtwork() {
+        const state = optionalState.get(this);
+        if (!state?.shown || !state.build) return;
+        const gun = this.parent;
+        // Shader warm-up temporarily shows every group. A mounted accessory is
+        // requested by the fitting operation; a detached part can be inspected alone.
+        if (state.fallbackFor) {
+          if (!gun?.parent || gun.children.some(child => child.name === state.fallbackFor)) return;
+        } else if (gun?.parent && !gun.userData.fittedOptic &&
+                   !gun.children.some(child => child.name.startsWith('fitted-optic-'))) return;
+        const stage = new T.Group();
+        state.build(stage);
+        this.add(...stage.children.slice());
+        state.build = null;
+      }
+
+      traverse(callback) {
+        this.realizeFittedArtwork();
+        super.traverse(callback);
+      }
+
+      copy(source, recursive = true) {
+        const target = optionalState.get(this), original = optionalState.get(source);
+        target.build = null;
+        super.copy(source, recursive);
+        target.shown = source.visible;
+        target.fallbackFor = original?.fallbackFor || null;
+        target.build = original?.build || null;
+        return this;
+      }
+    };
+    optionalTypes.set(T, Group);
+  }
+  const group = new Group();
+  group.name = name;
+  const state = optionalState.get(group);
+  state.fallbackFor = fallbackFor;
+  state.shown = !!fallbackFor;
+  state.build = stage => { build(stage); ctx.finishGun(stage); };
+  gun.add(group);
+  return group;
+}
+
 // Render repeated props in one draw. Animation keeps its original logical nodes;
 // each instance uses its own node's current transform and visibility.
 const batchLists = new WeakMap();
@@ -15,6 +79,7 @@ export function addArtworkInstances(T, gun, parent, name, entries) {
       throw new Error('Mixed geometry or material in artwork batch ' + name);
     }
     if (!anchor.name) anchor.name = name + '-slot-' + index;
+    anchor.userData.artworkSlot = anchor.name;
     mesh.updateMatrix();
     anchor.remove(mesh);
     return {name: anchor.name, local: mesh.matrix.toArray()};
@@ -37,8 +102,12 @@ export function updateArtworkInstances(T, root) {
   for (const batch of batches) {
     let state = batchSlots.get(batch);
     if (!state) {
+      const markers = new Map();
+      batch.parent.traverse(node => {
+        if (node.userData.artworkSlot) markers.set(node.userData.artworkSlot, node);
+      });
       const slots = batch.userData.artworkSlots.map(slot => {
-        const node = batch.parent.getObjectByName(slot.name);
+        const node = markers.get(slot.name);
         if (!node) throw new Error('Missing artwork slot ' + slot.name);
         return {node, local: new T.Matrix4().fromArray(slot.local)};
       });

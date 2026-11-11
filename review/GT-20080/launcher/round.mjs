@@ -8,7 +8,7 @@ import { save } from '../../GT-20076/save.mjs';
 const phase = process.argv[2];
 const timing = phase === 'timing-before' || phase === 'timing-after';
 assert((timing || ['before', 'after'].includes(phase)) && process.env.DW_GAME_TEST_TOKEN);
-const folder = new URL('./' + phase + '/', import.meta.url);
+const folder = process.argv.includes('--instances') ? new URL('../../GT-20081/launcher-reload/',import.meta.url) : new URL('./' + phase + '/', import.meta.url);
 await mkdir(folder, {recursive:true});
 const server = await serve(fileURLToPath(new URL('../../../', import.meta.url)), 0);
 const browser = await launch({headless:false});
@@ -47,7 +47,13 @@ try {
     const spent=art.spentCaseGeometry(T,'launcher'), live=art.roundGeometry(T,'launcher');
     const {makeLauncherModel}=await import('/studio/weapon-heavy.js');
     const raw=makeLauncherModel({...host.builders.weaponContext(),finishGun:node=>node}).userData;
-    const usesLive=!!live && [raw.loadRound,...raw.drumRounds].every(part=>part.children.some(m=>m.geometry===live && m.material.vertexColors));
+    const bank=raw.drum.getObjectByName('launcher-loaded-inserts');
+    const originalParts=[raw.loadRound,...raw.drumRounds];
+    const usesLive=!!live && (bank ? bank.isInstancedMesh && bank.geometry===live && bank.material.vertexColors &&
+      bank.userData.artworkSlots.length===6 && raw.drumRounds.every((o,i)=>o.name===bank.userData.artworkSlots[i].name) &&
+      raw.loadRound.children.some(o=>o.geometry===live && o.material.vertexColors) :
+      originalParts.every(part=>part.children.some(m=>m.geometry===live && m.material.vertexColors)));
+    const {verifyArtworkInstances}=await import('/review/GT-20081/verify.mjs');
     const css=document.createElement('style');
     css.textContent='body > :not(canvas):not(script):not(style):not(#view){visibility:hidden!important}';
     document.head.append(css);
@@ -64,6 +70,8 @@ try {
     const emitted=TT.casings.filter(c=>c.mesh.userData.caseOf==='launcher');
     if(thrown!==3 || !emitted.some(c=>c.mesh.geometry===spent && c.mesh.material.vertexColors))throw Error('Ejection mismatch '+thrown+'/'+emitted.length);
     const afterEject=parts.drumRounds.map(r=>r.visible);
+    const counts=()=>({held:verifyArtworkInstances(T,gun),eye:verifyArtworkInstances(T,TT.viewmodelDbg().gun.root)});
+    const partialCounts=bank?counts():null;
     const pairs=new Map(TT.viewmodelDbg().gun.pairs);
     const eyeParts=parts.drumRounds.map(r=>pairs.get(r));
     const eyeAfterEject=eyeParts.map(r=>r?.visible??null);
@@ -107,10 +115,10 @@ try {
     window.finishArt=()=>{
       stage.visible=false;TT.setShotView(null);TT.setViewFirstDbg(true);
       TT.reloadClipDbg.hold(null);step(750);
-      return {loaded:TT.getAmmo().launcher,shown:parts.drumRounds.filter(o=>o.visible).length,eye:parts.drumRounds.filter(r=>new Map(TT.viewmodelDbg().gun.pairs).get(r)?.visible).length,reloading:TT.isReloading()};
+      return {instanceCounts:bank?counts():null,loaded:TT.getAmmo().launcher,shown:parts.drumRounds.filter(o=>o.visible).length,eye:parts.drumRounds.filter(r=>new Map(TT.viewmodelDbg().gun.pairs).get(r)?.visible).length,reloading:TT.isReloading()};
     };
     const meshFinish = m => ({roughness:m.roughness,metalness:m.metalness});
-    return {thrown,afterEject,eyeAfterEject,caseGeometryMatches:true,usesLive,liveCached:!!live && art.roundGeometry(T,'launcher')===live,
+    return {thrown,afterEject,eyeAfterEject,partialCounts,caseGeometryMatches:true,usesLive,liveCached:!!live && art.roundGeometry(T,'launcher')===live,
       liveFinish:meshFinish(raw.loadRound.children[0].material),spentFinish:meshFinish(emitted[0].mesh.material)};
   })()`);
   result.frames=[];
@@ -123,6 +131,12 @@ try {
   }
   result.end=await page.evaluate('finishArt()');
   await save(new URL('proof.json',folder),JSON.stringify(result,null,2));
+  if(process.argv.includes('--instances')){
+    for(const view of ['held','eye']){
+      assert.equal(result.partialCounts[view]['launcher-loaded-inserts'],3);
+      assert.equal(result.end.instanceCounts[view]['launcher-loaded-inserts'],6);
+    }
+  }
   if(phase==='after'){
     assert(result.usesLive && result.liveCached,'Palm and all six inserts should use the cached live prop');
     assert.deepEqual(result.spentFinish,result.liveFinish,'The actual emitted case should share the incoming prop finish');

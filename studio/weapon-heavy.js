@@ -1,6 +1,6 @@
 // GP-164: heavy-weapon cosmetic constructors. Existing animation and grip contracts remain in the caller.
 import { attachLaserLight } from './weapon-attachments.js';
-import { addArtworkInstances, addTriggerArtwork, bindModelArtwork, groupArtwork } from './weapon-model-hooks.js';
+import { addArtworkInstances, addTriggerArtwork, bindModelArtwork, groupArtwork, optionalArtworkGroup } from './weapon-model-hooks.js';
 import { markPaintSurface } from './weapon-finish.js';
 import { roundGeometry } from './weapon-casings.js';
 
@@ -304,11 +304,9 @@ export function makeMinigunModel(ctx) {
   gun.userData.lightLensLocal?.multiplyScalar(heldScale);
   gun.userData.baseAmmoPos.copy(ammoBox.position);
   // The fitted short rail replaces the stock reflex pad on the same arch.
-  const opticSeat = K.group(0, 0, 0);
-  opticSeat.name = 'rotary-optic-seat';
-  markPaintSurface(K.box(0.030, 0.003, 0.054, gunMid, 0, 0.1935, 0.006, 0, 0, 0, opticSeat, 0.0006), 'rail');
-  opticSeat.visible = false;
-  gun.userData.opticPlate = opticSeat;
+  gun.userData.opticPlate = optionalArtworkGroup(ctx, gun, 'rotary-optic-seat', plate => {
+    markPaintSurface(K.box(0.030, 0.003, 0.054, gunMid, 0, 0.1935, 0.006, 0, 0, 0, plate, 0.0006), 'rail');
+  });
   gun.userData.reloadParts.ammoBox.restPos = ammoBox.position.toArray();
   // A full-diameter side peg still accepts the support glove.
   K.cyl(0.018, 0.018, 0.081, gunRubber, -0.304 * heldScale, 0.012 * heldScale, 0.16 * heldScale, null, 12, 'y');
@@ -343,12 +341,11 @@ export function makeLauncherModel(ctx) {
       K.box(0.005, 0.002, 0.005, gunMid, side * 0.006, y - 0.001, leafZ, 0, 0, 0, irons);
     }
   }
-  const opticPlate = K.group(0, 0, 0);
-  opticPlate.name = 'launcher-optic-seat';
-  K.box(0.035, 0.016, 0.067, gunDark, 0, 0.114, -0.049, 0, 0, 0, opticPlate, 0.002);
-  K.box(0.030, 0.006, 0.053, gunMid, 0, 0.143, -0.049, 0, 0, 0, opticPlate, 0.001);
-  opticPlate.visible = false;
-  gun.userData.opticPlate = opticPlate;
+  gun.userData.opticPlate = optionalArtworkGroup(ctx, gun, 'launcher-optic-seat', plate => {
+    K.box(0.035, 0.016, 0.067, gunDark, 0, 0.114, -0.049, 0, 0, 0, plate, 0.002);
+    K.box(0.030, 0.006, 0.053, gunMid, 0, 0.143, -0.049, 0, 0, 0, plate, 0.001);
+    for (const piece of plate.children) markPaintSurface(piece, 'rail');
+  });
   for (const sx of [-1, 1]) {
     K.slab([[-0.245, -0.017], [-0.112, -0.017], [-0.103, -0.024], [-0.103, -0.051], [-0.233, -0.051], [-0.245, -0.04]], 0.004, gunMid, { x: sx * 0.077, bevel: 0.002 });
     for (const [z, y, ox] of [[-0.229, 0.084, 0.0775], [0.023, 0.081, 0.0775], [-0.226, -0.035, 0.081], [-0.12, -0.035, 0.081]]) bolt(K, gunDark, gunAccent, sx * ox, y, z, 0.005);   // GB-297: upper bolts on the frame face, lower on the side panel
@@ -527,7 +524,6 @@ export function makeLauncherModel(ctx) {
   for (const piece of stock.children) {
     if (piece.material === gunOlive) markPaintSurface(piece, 'furniture');
   }
-  for (const piece of opticPlate.children) markPaintSurface(piece, 'rail');
   attachLaserLight(gun, 'launcher', ctx);
   const lamp = gun.userData.laserLightUnit;
   for (const name of ['moduleShell', 'topPlate']) markPaintSurface(lamp.getObjectByName(name), 'light shell');

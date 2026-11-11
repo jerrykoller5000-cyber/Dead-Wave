@@ -3,7 +3,9 @@
 // Millimetre-scale knurl teeth do not need the rounded box helper's subdivisions.
 // Same centre line as gripOutline. u runs down the grip, v+ is the front strap.
 import { gunDetail } from './gun-detail.js';
-import { addTriggerArtwork, bindModelArtwork, groupArtwork } from './weapon-model-hooks.js';
+import * as TSL from 'three/tsl';
+import { foldStatic } from '../world/bake.js';
+import { addArtworkInstances, addTriggerArtwork, bindModelArtwork, groupArtwork, optionalArtworkGroup } from './weapon-model-hooks.js';
 import { markPaintSurface, walnutTexture } from './weapon-finish.js';
 import { attachLaserLight } from './weapon-attachments.js';
 import { fitPortCarrier, roundGeometry, spentCaseGeometry } from './weapon-casings.js';
@@ -550,7 +552,15 @@ export function makeRevolverModel(ctx) {
     mesh.castShadow = mesh.receiveShadow = true;
     return mesh;
   };
-  const chamberRounds = [], chamberNoses = [];
+  // Bake the fixed colours once using the same material batch as the original chamber artwork.
+  const chamberArt = new THREE.Group();
+  K.cyl(0.0076, 0.0076, 0.048, brassMat, 0, 0, -0.008, chamberArt, 12);
+  K.disc(0.0077, brassMat, 0, 0, -CH - 0.0015, Math.PI, chamberArt, 16);
+  K.disc(0.0023, gunDark, 0, 0, -CH - 0.0018, Math.PI, chamberArt, 10);
+  ctx.mergeRigidMeshes(chamberArt, {}, new Set());
+  foldStatic(THREE, TSL, chamberArt);
+  const chamberLayers = chamberArt.children.map(source => ({source, entries:[]}));
+  const chamberRounds = [], chamberNoses = [], noseEntries = [];
   for (let i = 0; i < 6; i++) {
     const a = Math.PI / 6 + i * Math.PI / 3;   // a chamber at the top, on the bore (y 0.083)
     const rx = Math.cos(a) * RC, ry = Math.sin(a) * RC;
@@ -558,11 +568,17 @@ export function makeRevolverModel(ctx) {
     K.disc(0.0092, gunDark, rx, ry, CH + 0.0005, 0, cylinder, 16);
     const round = new THREE.Group(); round.name = `chamber-round-${i}`;
     round.position.set(rx, ry, 0);
-    K.cyl(0.0076, 0.0076, 0.048, brassMat, 0, 0, -0.008, round, 12);
-    K.disc(0.0077, brassMat, 0, 0, -CH - 0.0015, Math.PI, round, 16);
-    K.disc(0.0023, gunDark, 0, 0, -CH - 0.0018, Math.PI, round, 10);
+    for (const layer of chamberLayers) {
+      const mesh = layer.source.clone(false);
+      round.add(mesh);
+      layer.entries.push({anchor:round, mesh});
+    }
     // The counter hides this copper cap independently of the brass back.
-    const cap = new THREE.Mesh(noseCap, copper);
+    const cap = new THREE.Group();
+    cap.name = 'revolver-nose-' + i;
+    const tip = new THREE.Mesh(noseCap, copper);
+    cap.add(tip);
+    noseEntries.push({anchor:cap, mesh:tip});
     cap.scale.y = .34;
     cap.rotation.x = Math.PI / 2;
     cap.position.z = CH + .0005;
@@ -570,6 +586,10 @@ export function makeRevolverModel(ctx) {
     cylinder.add(round); chamberRounds.push(round);
     K.box(0.0012, 0.0045, 0.006, gunDark, Math.cos(a) * (CR - 0.0002), Math.sin(a) * (CR - 0.0002), -CH + 0.012, 0, 0, a, cylinder, 0.0003);   // the stop notch
   }
+  for (const [index, layer] of chamberLayers.entries()) {
+    addArtworkInstances(THREE, gun, cylinder, 'revolver-chamber-layer-' + index, layer.entries);
+  }
+  addArtworkInstances(THREE, gun, cylinder, 'revolver-visible-tips', noseEntries);
   gun.userData.chamberRounds = chamberRounds; // CL-326 can hide each live round as its chamber fires.
   gun.userData.chamberNoses = chamberNoses;
   // CL-326 (J78): the unfired rounds he tips out into his palm on a reload (first person places them; hidden otherwise)
@@ -628,6 +648,12 @@ export function makeRevolverModel(ctx) {
   }
   speedloader.visible = false;
   gun.add(speedloader);
+  for (const [name, slots] of [
+    ['revolver-live-reload-instances', [...palmRounds.children, ...speedloader.children.slice(1)]],
+    ['revolver-spent-instances', emptyCasings]
+  ]) {
+    addArtworkInstances(THREE, gun, gun, name, slots.map(anchor => ({anchor, mesh:anchor.children[0]})));
+  }
   gun.userData.speedloader = speedloader;
   gun.userData.baseSpeedloaderPos = speedloader.position.clone();
   gun.userData.baseSpeedloaderRot = speedloader.rotation.clone();
@@ -700,19 +726,17 @@ export function makeRevolverModel(ctx) {
   K.box(0.022, 0.020, 0.112, blued, 0, 0.022, -0.002, 0, 0, 0, gun.userData.laserLightUnit, 0.002);
   K.rail(0.080, 0, 0.018, 0.018, gun.userData.laserLightUnit, 0.026, 2);
   for (const piece of light.children.slice(firstMountPart)) markPaintSurface(piece, 'rail');
-  const opticPlate = K.group(0, 0, 0);
-  opticPlate.name = 'revolverOpticPlate';
-  opticPlate.visible = false;
-  K.box(0.028, 0.003, 0.052, blued, 0, 0.1165, -0.018, 0, 0, 0, opticPlate, 0.0008);
-  K.box(0.024, 0.004, 0.046, blued, 0, 0.120, -0.018, 0, 0, 0, opticPlate, 0.0006);
-  for (const sx of [-1, 1]) {
-    K.box(0.003, 0.004, 0.041, gunDark, sx * 0.014, 0.119, -0.018, 0, 0, 0, opticPlate, 0.0004);
-    K.cyl(0.0017, 0.0017, 0.001, gunDark, sx * 0.008, 0.1185, -0.032, opticPlate, 8, 'y');
-  }
-  for (const piece of opticPlate.children) {
-    if (piece.material === blued) markPaintSurface(piece, 'rail');
-  }
-  gun.userData.opticPlate = opticPlate;
+  gun.userData.opticPlate = optionalArtworkGroup(ctx, gun, 'revolverOpticPlate', plate => {
+    K.box(0.028, 0.003, 0.052, blued, 0, 0.1165, -0.018, 0, 0, 0, plate, 0.0008);
+    K.box(0.024, 0.004, 0.046, blued, 0, 0.120, -0.018, 0, 0, 0, plate, 0.0006);
+    for (const sx of [-1, 1]) {
+      K.box(0.003, 0.004, 0.041, gunDark, sx * 0.014, 0.119, -0.018, 0, 0, 0, plate, 0.0004);
+      K.cyl(0.0017, 0.0017, 0.001, gunDark, sx * 0.008, 0.1185, -0.032, plate, 8, 'y');
+    }
+    for (const piece of plate.children) {
+      if (piece.material === blued) markPaintSurface(piece, 'rail');
+    }
+  });
   // The eye and the off hand resolve these names on their own copy. Both
   // action bindings use the same pivots as the original reload and shot art.
   gun.userData.triggerPin = trigger.position.toArray();
@@ -768,10 +792,11 @@ export function makeUziModel(ctx) {
   K.box(0.018, 0.007, 0.012, gunMid, 0, 0.100, 0.214, 0, 0, 0, null, 0.001);    // barrel catch at the front of the sight housing
   // Jerry's UZI PRO photo supplies attachment points only (J44). The short RMR rail bridges over the
   // original top cocking knob's travel, preserving the iron sight and top-knob silhouette when no optic is fitted.
-  const opticRail = K.group(0, 0, 0); opticRail.name = 'uzi-optic-rail'; opticRail.visible = false;
-  for (const sx of [-1, 1]) K.box(0.008, 0.042, 0.088, gunDark, sx * 0.031, 0.119, 0.035, 0, 0, 0, opticRail, 0.002);
-  K.rail(0.088, 0, 0.145, 0.035, opticRail, 0.066);
-  gun.userData.opticRail = opticRail;
+  gun.userData.opticRail = optionalArtworkGroup(ctx, gun, 'uzi-optic-rail', plate => {
+    for (const sx of [-1, 1]) K.box(0.008, 0.042, 0.088, gunDark, sx * 0.031, 0.119, 0.035, 0, 0, 0, plate, 0.002);
+    K.rail(0.088, 0, 0.145, 0.035, plate, 0.066);
+    for (const piece of plate.children) markPaintSurface(piece, 'rail');
+  });
   // The stowed-weapon fitting uses this side support envelope when another
   // gun rests against the Wasp; the stock struts, pivots and butt are gone.
   K.slab([[-.150, .016], [-.118, .016], [-.114, .034], [-.124, .050], [-.148, .052], [-.156, .036]], .028, stamped, {x: .051, bevel: .005, segs: 3});   // GB-316 (J25): side pad seated on the receiver (was a floating rear blob)
@@ -904,7 +929,6 @@ export function makeUziModel(ctx) {
   const light = gun.userData.laserLightUnit, firstRailPiece = light.children.length;
   K.rail(0.11, 0, 0.02075, 0.04, light, 0.030, 2);
   for (const piece of light.children.slice(firstRailPiece)) markPaintSurface(piece, 'rail');
-  for (const piece of opticRail.children) markPaintSurface(piece, 'rail');
   for (const name of ['moduleShell','railClamp']) markPaintSurface(light.getObjectByName(name), 'light shell');
   for (const piece of gun.userData.suppressor?.children.slice(0,-2) || []) markPaintSurface(piece, 'suppressor shell');
   gun.userData.partFinish = true;

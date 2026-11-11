@@ -1,0 +1,15 @@
+Game-test request fb9a2663-645b-4721-b000-71d3f7428642 queued at position 1. Waiting...
+GRANT chatgpt2 GT-20081: starting one game-test command
+check-players: 313 player.position reads, all in the allowed places
+           INFO G -0.185,-0.111,-0.468,0.633 grip -0.188,-0.153,-0.459 WR -0.243,-0.186,-0.395 sock 0.077,-0.123,-0.123 s 1.863
+           INFO forearm r -0.23,-0.20,0.95 l 0.23,-0.20,0.95, elbows z -0.201, -0.202
+           FAIL the minigun's right hand grips its rear grip (0.015,0.011,-0.372; the grip's centre 0, -0.012, -0.364)
+FAIL  tcl301  22 pass   1 fail  64.0s
+           recovering browser after tcl301: 1 fail
+
+1 checks: 22 pass, 1 fail
+
+by owner:
+  unassigned
+    tcl301 1 fail  FAIL the minigun's right hand grips its rear grip (0.015,0.011,-0.372; the grip's centre 0, -0.0
+           FAIL the minigun's right hand grips its rear grip (0.015,0.011,-0.372; the grip's centre 0, -0.012, -0.364)

@@ -1,0 +1,117 @@
+{
+  "empty": {
+    "draws": 1,
+    "triangles": 1
+  },
+  "result": {
+    "minigun": {
+      "all": 28,
+      "shown": 21,
+      "rootVisible": true,
+      "sourceVisible": true,
+      "children": 12,
+      "draws": 22,
+      "triangles": 12424
+    },
+    "m4": {
+      "all": 41,
+      "shown": 31,
+      "rootVisible": true,
+      "sourceVisible": true,
+      "children": 35,
+      "draws": 31,
+      "triangles": 18488
+    },
+    "ak": {
+      "all": 31,
+      "shown": 19,
+      "rootVisible": true,
+      "sourceVisible": true,
+      "children": 26,
+      "draws": 19,
+      "triangles": 12304
+    },
+    "aa12": {
+      "all": 24,
+      "shown": 23,
+      "rootVisible": true,
+      "sourceVisible": true,
+      "children": 46,
+      "draws": 23,
+      "triangles": 15644
+    },
+    "pistol": {
+      "all": 20,
+      "shown": 16,
+      "rootVisible": true,
+      "sourceVisible": true,
+      "children": 16,
+      "draws": 16,
+      "triangles": 8682
+    },
+    "uzi": {
+      "all": 34,
+      "shown": 23,
+      "rootVisible": true,
+      "sourceVisible": true,
+      "children": 19,
+      "draws": 23,
+      "triangles": 10964
+    },
+    "shotgun": {
+      "all": 25,
+      "shown": 19,
+      "rootVisible": true,
+      "sourceVisible": true,
+      "children": 17,
+      "draws": 19,
+      "triangles": 8788
+    },
+    "revolver": {
+      "all": 26,
+      "shown": 19,
+      "rootVisible": true,
+      "sourceVisible": true,
+      "children": 22,
+      "draws": 19,
+      "triangles": 11874
+    },
+    "sniper": {
+      "all": 37,
+      "shown": 29,
+      "rootVisible": true,
+      "sourceVisible": true,
+      "children": 37,
+      "draws": 31,
+      "triangles": 14840
+    },
+    "launcher": {
+      "all": 24,
+      "shown": 20,
+      "rootVisible": true,
+      "sourceVisible": true,
+      "children": 13,
+      "draws": 20,
+      "triangles": 16724
+    },
+    "flamer": {
+      "all": 16,
+      "shown": 15,
+      "rootVisible": true,
+      "sourceVisible": true,
+      "children": 9,
+      "draws": 15,
+      "triangles": 11128
+    },
+    "chainsaw": {
+      "all": 30,
+      "shown": 29,
+      "rootVisible": true,
+      "sourceVisible": true,
+      "children": 12,
+      "draws": 43,
+      "triangles": 10124
+    }
+  },
+  "backend": "WebGPUBackend"
+}

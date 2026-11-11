@@ -1,0 +1,74 @@
+{
+  "traces": [
+    {
+      "name": "uzi-optic-rail",
+      "stack": "Error\n    at eval (eval at set (http://127.0.0.1:8799/studio/weapon-model-hooks.js:20:29), <anonymous>:1:67)\n    at Group.set [as visible] (http://127.0.0.1:8799/studio/weapon-model-hooks.js:20:29)\n    at http://127.0.0.1:8799/index.html?debug=1&raf=timer&__gameTestToken=[redacted]:67693:113\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13900:3)\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13906:18)\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13906:18)\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13906:18)\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13906:18)\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13906:18)\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13906:18)"
+    },
+    {
+      "name": "revolverOpticPlate",
+      "stack": "Error\n    at eval (eval at set (http://127.0.0.1:8799/studio/weapon-model-hooks.js:20:29), <anonymous>:1:67)\n    at Group.set [as visible] (http://127.0.0.1:8799/studio/weapon-model-hooks.js:20:29)\n    at http://127.0.0.1:8799/index.html?debug=1&raf=timer&__gameTestToken=[redacted]:67693:113\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13900:3)\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13906:18)\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13906:18)\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13906:18)\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13906:18)\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13906:18)\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13906:18)"
+    },
+    {
+      "name": "rotary-optic-seat",
+      "stack": "Error\n    at eval (eval at set (http://127.0.0.1:8799/studio/weapon-model-hooks.js:20:29), <anonymous>:1:67)\n    at Group.set [as visible] (http://127.0.0.1:8799/studio/weapon-model-hooks.js:20:29)\n    at http://127.0.0.1:8799/index.html?debug=1&raf=timer&__gameTestToken=[redacted]:67693:113\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13900:3)\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13906:18)\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13906:18)\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13906:18)\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13906:18)\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13906:18)\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13906:18)"
+    },
+    {
+      "name": "flat-top optic adapter",
+      "stack": "Error\n    at eval (eval at set (http://127.0.0.1:8799/studio/weapon-model-hooks.js:20:29), <anonymous>:1:67)\n    at Group.set [as visible] (http://127.0.0.1:8799/studio/weapon-model-hooks.js:20:29)\n    at http://127.0.0.1:8799/index.html?debug=1&raf=timer&__gameTestToken=[redacted]:67693:113\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13900:3)\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13906:18)\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13906:18)\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13906:18)\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13906:18)\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13906:18)\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13906:18)"
+    },
+    {
+      "name": "side optic bracket",
+      "stack": "Error\n    at eval (eval at set (http://127.0.0.1:8799/studio/weapon-model-hooks.js:20:29), <anonymous>:1:67)\n    at Group.set [as visible] (http://127.0.0.1:8799/studio/weapon-model-hooks.js:20:29)\n    at http://127.0.0.1:8799/index.html?debug=1&raf=timer&__gameTestToken=[redacted]:67693:113\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13900:3)\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13906:18)\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13906:18)\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13906:18)\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13906:18)\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13906:18)\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13906:18)"
+    },
+    {
+      "name": "uzi-optic-rail",
+      "stack": "Error\n    at eval (eval at set (http://127.0.0.1:8799/studio/weapon-model-hooks.js:20:29), <anonymous>:1:67)\n    at Group.set [as visible] (http://127.0.0.1:8799/studio/weapon-model-hooks.js:20:29)\n    at http://127.0.0.1:8799/index.html?debug=1&raf=timer&__gameTestToken=[redacted]:67693:113\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13900:3)\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13906:18)\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13906:18)\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13906:18)\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13906:18)\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13906:18)\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13906:18)"
+    },
+    {
+      "name": "revolverOpticPlate",
+      "stack": "Error\n    at eval (eval at set (http://127.0.0.1:8799/studio/weapon-model-hooks.js:20:29), <anonymous>:1:67)\n    at Group.set [as visible] (http://127.0.0.1:8799/studio/weapon-model-hooks.js:20:29)\n    at http://127.0.0.1:8799/index.html?debug=1&raf=timer&__gameTestToken=[redacted]:67693:113\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13900:3)\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13906:18)\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13906:18)\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13906:18)\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13906:18)\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13906:18)\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13906:18)"
+    },
+    {
+      "name": "launcher-optic-seat",
+      "stack": "Error\n    at eval (eval at set (http://127.0.0.1:8799/studio/weapon-model-hooks.js:20:29), <anonymous>:1:67)\n    at Group.set [as visible] (http://127.0.0.1:8799/studio/weapon-model-hooks.js:20:29)\n    at http://127.0.0.1:8799/index.html?debug=1&raf=timer&__gameTestToken=[redacted]:67693:113\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13900:3)\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13906:18)\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13906:18)\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13906:18)\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13906:18)\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13906:18)\n    at Group.traverse (http://127.0.0.1:8799/vendor/three/three.core.js:13906:18)"
+    }
+  ],
+  "primary": [
+    [
+      "m4",
+      true,
+      1,
+      "flat-top optic adapter"
+    ],
+    [
+      "ak",
+      true,
+      3,
+      "side optic bracket"
+    ],
+    [
+      "uzi",
+      true,
+      2,
+      "uzi-optic-rail"
+    ],
+    [
+      "revolver",
+      true,
+      2,
+      "revolverOpticPlate"
+    ],
+    [
+      "minigun",
+      true,
+      1,
+      "rotary-optic-seat"
+    ],
+    [
+      "launcher",
+      true,
+      2,
+      "launcher-optic-seat"
+    ]
+  ]
+}

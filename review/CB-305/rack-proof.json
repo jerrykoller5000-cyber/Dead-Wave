@@ -1,0 +1,26 @@
+{
+  "kinds": [
+    "shotgun",
+    "m4",
+    "ak",
+    "pistol",
+    "uzi",
+    "revolver"
+  ],
+  "carried": [
+    "pistol",
+    "m4",
+    "ak",
+    "uzi",
+    "revolver"
+  ],
+  "stored": [
+    "shotgun"
+  ],
+  "point": [
+    5.52,
+    -0.8686761379241945,
+    2.54
+  ],
+  "visible": true
+}

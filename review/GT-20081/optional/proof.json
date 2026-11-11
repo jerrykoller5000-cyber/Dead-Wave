@@ -1,0 +1,66 @@
+{
+  "cold": {
+    "m4": {
+      "cold": 0,
+      "separateClone": 1
+    },
+    "ak": {
+      "cold": 0,
+      "separateClone": 3
+    },
+    "uzi": {
+      "cold": 0,
+      "separateClone": 2
+    },
+    "revolver": {
+      "cold": 0,
+      "separateClone": 2
+    },
+    "minigun": {
+      "cold": 0,
+      "separateClone": 1
+    },
+    "launcher": {
+      "cold": 0,
+      "separateClone": 2
+    }
+  },
+  "fitted": {
+    "m4": {
+      "kind": "rmr",
+      "meshes": 1,
+      "coated": 1,
+      "eye": 1
+    },
+    "ak": {
+      "kind": "rmr",
+      "meshes": 3,
+      "coated": 2,
+      "eye": 3
+    },
+    "uzi": {
+      "kind": "rmr",
+      "meshes": 2,
+      "coated": 2,
+      "eye": 2
+    },
+    "revolver": {
+      "kind": "rmr",
+      "meshes": 2,
+      "coated": 1,
+      "eye": 2
+    },
+    "minigun": {
+      "kind": "rmr",
+      "meshes": 1,
+      "coated": 1,
+      "eye": 1
+    },
+    "launcher": {
+      "kind": "rmr",
+      "meshes": 2,
+      "coated": 2,
+      "eye": 2
+    }
+  }
+}

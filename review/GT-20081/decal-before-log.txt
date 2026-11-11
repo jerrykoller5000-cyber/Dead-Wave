@@ -1,0 +1,3 @@
+Game-test request d5cb8102-e976-4114-bee8-c040ef9ec32d queued at position 1. Waiting...
+GRANT chatgpt2 GT-20081: starting one game-test command
+PASS WebGPUBackend isolated GPU draws across all 12 models 281 four-light eye frames 4
