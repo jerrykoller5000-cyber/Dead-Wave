@@ -6,7 +6,7 @@ import {launch} from '../../tools/cdp.mjs';
 import {save} from './save.mjs';
 
 const [id,phase]=process.argv.slice(2);
-assert(process.env.DW_GAME_TEST_TOKEN && /^[a-z0-9]+$/.test(id) && ['before','after','trim','final-trim','joins'].includes(phase));
+assert(process.env.DW_GAME_TEST_TOKEN && /^[a-z0-9]+$/.test(id) && ['before','after','trim','final-trim','joins','rear-join','side-inset','crown','contact-trim'].includes(phase));
 const dir=new URL('./visible-repairs/'+id+'/'+phase+'/',import.meta.url);
 await mkdir(dir,{recursive:true});
 const server=await serve(fileURLToPath(new URL('../../',import.meta.url)),0),browser=await launch({headless:false});
@@ -16,7 +16,7 @@ try {
   assert(await page.waitFor('window.TT && DWLoad.snapshot().state==="ready"'));
   await page.evaluate('DWOpening.dismissForTesting()');assert(await page.waitFor('!DWOpening.active'));
   await page.evaluate("document.getElementById('playerName').value='Panel proof';document.getElementById('modeTraining').click()");
-  assert(await page.waitFor("TT.trainingDbg.state().active && !document.getElementById('trainingBlackout')?.classList.contains('on')"));
+  assert(await page.waitFor("TT.trainingDbg.state().active && !TT.trainingDbg.state().warming && !document.getElementById('trainingBlackout')?.classList.contains('on')"));
   await page.evaluate('import("/review/GT-20076/visibility-camera.mjs").then(m=>{window.vis=m.makeViews(TT);return true})');
   await page.evaluate('vis.equip('+JSON.stringify(id)+')');
   const cameras={};

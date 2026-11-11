@@ -19,10 +19,13 @@ try {
   assert(await p.waitFor('window.TT && DWLoad.snapshot().state==="ready"'));
   await p.evaluate('window.DWOpening?.dismissForTesting?.()');
   await p.evaluate('window.captureWeaponSources=true');
+  const observe=process.argv.includes('--observe');
+  if(observe)await p.evaluate('import("/review/GT-20076/observe-visibility.mjs").then(m=>{m.observe(TT);return true})');
   const code=await fs.readFile(path.join(root,'tools/tests/tgt20076.js'),'utf8');
   const lines=await p.evaluate(code,480000);
   const data=await p.evaluate('window.weaponSeatAudit');
   const slings=await p.evaluate('window.weaponSlingAudit');
+  if(observe)await fs.writeFile(path.join(out,'source-visibility.json'),JSON.stringify(await p.evaluate('window.visibilityTrace'),null,2)+'\n');
   await fs.writeFile(path.join(out,'slings.json'),JSON.stringify(slings,null,2)+'\n');
   await fs.writeFile(path.join(out,'audit.json'),JSON.stringify(data,null,2)+'\n');
   await fs.writeFile(path.join(out,'audit.txt'),lines+'\n');

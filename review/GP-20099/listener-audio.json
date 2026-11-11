@@ -1,0 +1,520 @@
+{
+  "result": {
+    "training": {
+      "enabled": true,
+      "loopSeconds": 24,
+      "active": true,
+      "looping": true,
+      "cues": {
+        "enter": 7.290666666666667,
+        "open": 28.6,
+        "target": 28.770666666666667,
+        "impact": 28.941333333333333,
+        "spawn": 29.112,
+        "clear": 29.272,
+        "reset": 29.432,
+        "wake": 29.581333333333333,
+        "blackout": 29.890666666666668
+      },
+      "musicGain": 0.3199999928474426,
+      "introGain": 1,
+      "door": {
+        "ready": true,
+        "seconds": 0.5973333333333334,
+        "plays": 1,
+        "active": 0
+      },
+      "rangeStart": {
+        "ready": true,
+        "seconds": 0.3,
+        "plays": 0,
+        "active": 0
+      },
+      "encounters": {
+        "selected": null,
+        "tracks": {}
+      },
+      "facility": {
+        "up": 0,
+        "down": 0,
+        "bump": 0,
+        "shot": 0,
+        "moving": false
+      }
+    },
+    "mix": {
+      "ctx": "running",
+      "weap": 1.350000023841858,
+      "fx": 0.800000011920929,
+      "amb": 0,
+      "masterVolume": 1,
+      "musicVolume": 1,
+      "ambienceVolume": 1,
+      "musicDuck": 1,
+      "rain": null
+    },
+    "checks": [
+      {
+        "name": "shot:pistol",
+        "started": 2,
+        "sources": [
+          "AudioBufferSourceNode",
+          "AudioBufferSourceNode"
+        ]
+      },
+      {
+        "name": "shot:uzi",
+        "started": 2,
+        "sources": [
+          "AudioBufferSourceNode",
+          "AudioBufferSourceNode"
+        ]
+      },
+      {
+        "name": "shot:m4",
+        "started": 2,
+        "sources": [
+          "AudioBufferSourceNode",
+          "AudioBufferSourceNode"
+        ]
+      },
+      {
+        "name": "shot:ak",
+        "started": 2,
+        "sources": [
+          "AudioBufferSourceNode",
+          "AudioBufferSourceNode"
+        ]
+      },
+      {
+        "name": "shot:shotgun",
+        "started": 2,
+        "sources": [
+          "AudioBufferSourceNode",
+          "AudioBufferSourceNode"
+        ]
+      },
+      {
+        "name": "shot:aa12",
+        "started": 2,
+        "sources": [
+          "AudioBufferSourceNode",
+          "AudioBufferSourceNode"
+        ]
+      },
+      {
+        "name": "shot:revolver",
+        "started": 2,
+        "sources": [
+          "AudioBufferSourceNode",
+          "AudioBufferSourceNode"
+        ]
+      },
+      {
+        "name": "shot:sniper",
+        "started": 2,
+        "sources": [
+          "AudioBufferSourceNode",
+          "AudioBufferSourceNode"
+        ]
+      },
+      {
+        "name": "shot:minigun",
+        "started": 2,
+        "sources": [
+          "AudioBufferSourceNode",
+          "AudioBufferSourceNode"
+        ]
+      },
+      {
+        "name": "shot:flamer",
+        "started": 2,
+        "sources": [
+          "AudioBufferSourceNode",
+          "OscillatorNode"
+        ]
+      },
+      {
+        "name": "shot:launcher",
+        "started": 2,
+        "sources": [
+          "AudioBufferSourceNode",
+          "AudioBufferSourceNode"
+        ]
+      },
+      {
+        "name": "reload:magRelease",
+        "started": 1,
+        "sources": [
+          "AudioBufferSourceNode"
+        ]
+      },
+      {
+        "name": "reload:magOut",
+        "started": 1,
+        "sources": [
+          "AudioBufferSourceNode"
+        ]
+      },
+      {
+        "name": "reload:magIn",
+        "started": 1,
+        "sources": [
+          "AudioBufferSourceNode"
+        ]
+      },
+      {
+        "name": "reload:magSlap",
+        "started": 1,
+        "sources": [
+          "AudioBufferSourceNode"
+        ]
+      },
+      {
+        "name": "reload:slideBack",
+        "started": 1,
+        "sources": [
+          "AudioBufferSourceNode"
+        ]
+      },
+      {
+        "name": "reload:slideFwd",
+        "started": 1,
+        "sources": [
+          "AudioBufferSourceNode"
+        ]
+      },
+      {
+        "name": "reload:akRockOut",
+        "started": 1,
+        "sources": [
+          "AudioBufferSourceNode"
+        ]
+      },
+      {
+        "name": "reload:akRockIn",
+        "started": 1,
+        "sources": [
+          "AudioBufferSourceNode"
+        ]
+      },
+      {
+        "name": "reload:drumOut",
+        "started": 1,
+        "sources": [
+          "AudioBufferSourceNode"
+        ]
+      },
+      {
+        "name": "reload:drumIn",
+        "started": 1,
+        "sources": [
+          "AudioBufferSourceNode"
+        ]
+      },
+      {
+        "name": "reload:boltUp",
+        "started": 1,
+        "sources": [
+          "AudioBufferSourceNode"
+        ]
+      },
+      {
+        "name": "reload:boltBack",
+        "started": 1,
+        "sources": [
+          "AudioBufferSourceNode"
+        ]
+      },
+      {
+        "name": "reload:boltFwd",
+        "started": 0,
+        "sources": []
+      },
+      {
+        "name": "reload:boltDown",
+        "started": 0,
+        "sources": []
+      },
+      {
+        "name": "reload:boxLatch",
+        "started": 1,
+        "sources": [
+          "AudioBufferSourceNode"
+        ]
+      },
+      {
+        "name": "reload:belt",
+        "started": 1,
+        "sources": [
+          "AudioBufferSourceNode"
+        ]
+      },
+      {
+        "name": "reload:boxSeat",
+        "started": 0,
+        "sources": []
+      },
+      {
+        "name": "reload:shell",
+        "started": 1,
+        "sources": [
+          "AudioBufferSourceNode"
+        ]
+      },
+      {
+        "name": "reload:bigBrass",
+        "started": 1,
+        "sources": [
+          "AudioBufferSourceNode"
+        ]
+      },
+      {
+        "name": "reload:grab",
+        "started": 1,
+        "sources": [
+          "AudioBufferSourceNode"
+        ]
+      },
+      {
+        "name": "reload:valveShut",
+        "started": 1,
+        "sources": [
+          "AudioBufferSourceNode"
+        ]
+      },
+      {
+        "name": "reload:valveOpen",
+        "started": 1,
+        "sources": [
+          "AudioBufferSourceNode"
+        ]
+      },
+      {
+        "name": "reload:tankOff",
+        "started": 1,
+        "sources": [
+          "AudioBufferSourceNode"
+        ]
+      },
+      {
+        "name": "reload:tankOn",
+        "started": 1,
+        "sources": [
+          "AudioBufferSourceNode"
+        ]
+      },
+      {
+        "name": "reload:igniter",
+        "started": 1,
+        "sources": [
+          "AudioBufferSourceNode"
+        ]
+      },
+      {
+        "name": "reload:motorBlip",
+        "started": 1,
+        "sources": [
+          "AudioBufferSourceNode"
+        ]
+      },
+      {
+        "name": "reload:charge",
+        "started": 2,
+        "sources": [
+          "AudioBufferSourceNode",
+          "AudioBufferSourceNode"
+        ]
+      },
+      {
+        "name": "reload:brass",
+        "started": 6,
+        "sources": [
+          "AudioBufferSourceNode",
+          "AudioBufferSourceNode",
+          "AudioBufferSourceNode",
+          "AudioBufferSourceNode",
+          "AudioBufferSourceNode",
+          "AudioBufferSourceNode"
+        ]
+      },
+      {
+        "name": "dryfire",
+        "started": 1,
+        "sources": [
+          "AudioBufferSourceNode"
+        ]
+      },
+      {
+        "name": "ammo-switch",
+        "started": 1,
+        "sources": [
+          "AudioBufferSourceNode"
+        ]
+      },
+      {
+        "name": "fire-selector",
+        "started": 2,
+        "sources": [
+          "AudioBufferSourceNode",
+          "AudioBufferSourceNode"
+        ]
+      },
+      {
+        "name": "training:open",
+        "started": 1,
+        "sources": [
+          "OscillatorNode"
+        ]
+      },
+      {
+        "name": "training:target",
+        "started": 3,
+        "sources": [
+          "OscillatorNode",
+          "OscillatorNode",
+          "OscillatorNode"
+        ]
+      },
+      {
+        "name": "training:impact",
+        "started": 2,
+        "sources": [
+          "OscillatorNode",
+          "OscillatorNode"
+        ]
+      },
+      {
+        "name": "training:spawn",
+        "started": 2,
+        "sources": [
+          "OscillatorNode",
+          "OscillatorNode"
+        ]
+      },
+      {
+        "name": "training:clear",
+        "started": 2,
+        "sources": [
+          "OscillatorNode",
+          "OscillatorNode"
+        ]
+      },
+      {
+        "name": "training:reset",
+        "started": 2,
+        "sources": [
+          "OscillatorNode",
+          "OscillatorNode"
+        ]
+      },
+      {
+        "name": "training:wake",
+        "started": 3,
+        "sources": [
+          "OscillatorNode",
+          "OscillatorNode",
+          "OscillatorNode"
+        ]
+      },
+      {
+        "name": "training:door:0.8:0.5",
+        "started": 1,
+        "sources": [
+          "AudioBufferSourceNode"
+        ]
+      },
+      {
+        "name": "training:blackout",
+        "started": 2,
+        "sources": [
+          "OscillatorNode",
+          "OscillatorNode"
+        ]
+      },
+      {
+        "name": "keypad",
+        "started": 1,
+        "sources": [
+          "AudioBufferSourceNode"
+        ]
+      },
+      {
+        "name": "flamer-burn",
+        "started": 2,
+        "sources": [
+          "AudioBufferSourceNode",
+          "AudioBufferSourceNode"
+        ]
+      },
+      {
+        "name": "launcher-pop",
+        "started": 1,
+        "sources": [
+          "AudioBufferSourceNode"
+        ]
+      },
+      {
+        "name": "chainsaw-dry-pull",
+        "started": 14,
+        "sources": [
+          "AudioBufferSourceNode",
+          "AudioBufferSourceNode",
+          "OscillatorNode",
+          "OscillatorNode",
+          "OscillatorNode",
+          "OscillatorNode",
+          "OscillatorNode",
+          "OscillatorNode",
+          "OscillatorNode",
+          "OscillatorNode",
+          "OscillatorNode",
+          "AudioBufferSourceNode",
+          "OscillatorNode",
+          "AudioBufferSourceNode"
+        ]
+      },
+      {
+        "name": "chainsaw-start",
+        "started": 4,
+        "sources": [
+          "OscillatorNode",
+          "OscillatorNode",
+          "OscillatorNode",
+          "AudioBufferSourceNode"
+        ]
+      },
+      {
+        "name": "chainsaw-grit",
+        "started": 2,
+        "sources": [
+          "AudioBufferSourceNode",
+          "OscillatorNode"
+        ]
+      },
+      {
+        "name": "isolated:boltFwd",
+        "started": 1,
+        "sources": [
+          "AudioBufferSourceNode"
+        ]
+      },
+      {
+        "name": "isolated:boltDown",
+        "started": 1,
+        "sources": [
+          "AudioBufferSourceNode"
+        ]
+      },
+      {
+        "name": "isolated:boxSeat",
+        "started": 1,
+        "sources": [
+          "AudioBufferSourceNode"
+        ]
+      }
+    ],
+    "events": 102
+  },
+  "pageErrors": []
+}

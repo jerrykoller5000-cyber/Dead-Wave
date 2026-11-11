@@ -30,9 +30,10 @@ function clipLine(a, b) {
   return [lerp(a,b,lo),lerp(a,b,hi)];
 }
 
-export function visibilityBuffer(parts, project, width, height) {
+export function visibilityBuffer(parts, project, width, height, referenceDepth) {
   const labels = new Int32Array(width*height).fill(-1);
   const depths = new Float64Array(width*height);
+  const coverage = referenceDepth ? new Uint8Array(width*height) : null;
   function screen([x,y,w]) { return [(1+x/w)*width/2,(1-y/w)*height/2,1/w]; }
   function raster(a,b,c,id) {
     const ax = a[0], ay = a[1], bx = b[0]-ax, by = b[1]-ay, cx = c[0]-ax, cy = c[1]-ay;
@@ -47,6 +48,12 @@ export function visibilityBuffer(parts, project, width, height) {
       const u=(px*cy-py*cx)/area, v=(bx*py-by*px)/area;
       if (u < 0 || v < 0 || u+v > 1) continue;
       const depth=a[2]+u*(b[2]-a[2])+v*(c[2]-a[2]), at=y*width+x;
+      if (referenceDepth) {
+        coverage[at]=1;
+        // The rest model can contain a panel hidden by the game's current pose.
+        // Discard that fragment before it can conceal an actually drawn face.
+        if (Math.abs(depth-referenceDepth[at])>depth*.00035) continue;
+      }
       if (depth > depths[at]) { depths[at]=depth; labels[at]=id; }
     }
   }
@@ -84,5 +91,5 @@ export function visibilityBuffer(parts, project, width, height) {
     }
     return [...pixels];
   }
-  return {labels,depths,witnessed};
+  return {labels,depths,coverage,witnessed};
 }

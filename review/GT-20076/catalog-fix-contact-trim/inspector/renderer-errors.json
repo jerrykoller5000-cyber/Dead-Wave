@@ -1,0 +1,24 @@
+{
+  "errors": [
+    "TypeError: Failed to execute 'setPipeline' on 'GPURenderPassEncoder': parameter 1 is not of type 'GPURenderPipeline'.\n    at WebGPUBackend.draw (http://127.0.0.1:29006/vendor/three/three.webgpu.js:69278:19)\n    at WebGPURenderer._renderObjectDirect (http://127.0.0.1:29006/vendor/three/three.webgpu.js:52207:16)\n    at WebGPURenderer.renderObject (http://127.0.0.1:29006/vendor/three/three.webgpu.js:52128:9)\n    at WebGPURenderer._renderObjects (http://127.0.0.1:29006/vendor/three/three.webgpu.js:52043:9)\n    at WebGPURenderer._renderScene (http://127.0.0.1:29006/vendor/three/three.webgpu.js:50726:64)",
+    "TypeError: Failed to execute 'setPipeline' on 'GPURenderPassEncoder': parameter 1 is not of type 'GPURenderPipeline'.\n    at WebGPUBackend.draw (http://127.0.0.1:29006/vendor/three/three.webgpu.js:69278:19)\n    at WebGPURenderer._renderObjectDirect (http://127.0.0.1:29006/vendor/three/three.webgpu.js:52207:16)\n    at WebGPURenderer.renderObject (http://127.0.0.1:29006/vendor/three/three.webgpu.js:52128:9)\n    at WebGPURenderer._renderObjects (http://127.0.0.1:29006/vendor/three/three.webgpu.js:52043:9)\n    at WebGPURenderer._renderScene (http://127.0.0.1:29006/vendor/three/three.webgpu.js:50726:64)"
+  ],
+  "console": [
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+  ]
+}

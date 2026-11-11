@@ -1,0 +1,2617 @@
+{
+  "result": {
+    "cases": [
+      {
+        "name": "station:kiosk",
+        "events": [
+          {
+            "label": "station:kiosk",
+            "kind": "shutter",
+            "args": [
+              true
+            ],
+            "at": 27656.19999998808
+          },
+          {
+            "label": "station:kiosk",
+            "kind": "buffer-source",
+            "at": 27657
+          },
+          {
+            "label": "station:kiosk",
+            "kind": "buffer-source",
+            "at": 27657
+          },
+          {
+            "label": "station:kiosk",
+            "kind": "buffer-source",
+            "at": 27657
+          },
+          {
+            "label": "station:kiosk",
+            "kind": "buffer-source",
+            "at": 27657.09999999404
+          },
+          {
+            "label": "station:kiosk",
+            "kind": "buffer-source",
+            "at": 27657.19999998808
+          },
+          {
+            "label": "station:kiosk",
+            "kind": "buffer-source",
+            "at": 27657.19999998808
+          },
+          {
+            "label": "station:kiosk",
+            "kind": "oscillator-source",
+            "at": 27657.19999998808
+          }
+        ],
+        "action": "kiosk"
+      },
+      {
+        "name": "station:cif",
+        "events": [
+          {
+            "label": "station:cif",
+            "kind": "cifLocker",
+            "args": [
+              true
+            ],
+            "at": 27998.899999976158
+          },
+          {
+            "label": "station:cif",
+            "kind": "buffer-source",
+            "at": 27999.29999998212
+          },
+          {
+            "label": "station:cif",
+            "kind": "buffer-source",
+            "at": 27999.399999976158
+          },
+          {
+            "label": "station:cif",
+            "kind": "buffer-source",
+            "at": 27999.5
+          },
+          {
+            "label": "station:cif",
+            "kind": "buffer-source",
+            "at": 27999.5
+          },
+          {
+            "label": "station:cif",
+            "kind": "buffer-source",
+            "at": 27999.5
+          },
+          {
+            "label": "station:cif",
+            "kind": "buffer-source",
+            "at": 27999.59999999404
+          },
+          {
+            "label": "station:cif",
+            "kind": "buffer-source",
+            "at": 27999.69999998808
+          },
+          {
+            "label": "station:cif",
+            "kind": "oscillator-source",
+            "at": 27999.69999998808
+          }
+        ],
+        "action": "cif"
+      },
+      {
+        "name": "station:armory",
+        "events": [
+          {
+            "label": "station:armory",
+            "kind": "cifLocker",
+            "args": [
+              true
+            ],
+            "at": 28901.69999998808
+          },
+          {
+            "label": "station:armory",
+            "kind": "buffer-source",
+            "at": 28901.899999976158
+          },
+          {
+            "label": "station:armory",
+            "kind": "buffer-source",
+            "at": 28902
+          },
+          {
+            "label": "station:armory",
+            "kind": "buffer-source",
+            "at": 28902
+          },
+          {
+            "label": "station:armory",
+            "kind": "buffer-source",
+            "at": 28902
+          },
+          {
+            "label": "station:armory",
+            "kind": "buffer-source",
+            "at": 28902.09999999404
+          },
+          {
+            "label": "station:armory",
+            "kind": "buffer-source",
+            "at": 28902.09999999404
+          },
+          {
+            "label": "station:armory",
+            "kind": "buffer-source",
+            "at": 28902.19999998808
+          },
+          {
+            "label": "station:armory",
+            "kind": "oscillator-source",
+            "at": 28902.29999998212
+          },
+          {
+            "label": "station:armory",
+            "kind": "armoryBench",
+            "args": [],
+            "at": 29028.69999998808
+          }
+        ],
+        "action": "armory"
+      },
+      {
+        "name": "station:rangeConsole",
+        "events": [
+          {
+            "label": "station:rangeConsole",
+            "kind": "trainingCue",
+            "args": [
+              "open"
+            ],
+            "at": 29402.59999999404
+          },
+          {
+            "label": "station:rangeConsole",
+            "kind": "oscillator-source",
+            "at": 29403
+          }
+        ],
+        "action": "rangeConsole"
+      },
+      {
+        "name": "station:hqPanel",
+        "events": [
+          {
+            "label": "station:hqPanel",
+            "kind": "trainingCue",
+            "args": [
+              "open"
+            ],
+            "at": 29906.19999998808
+          },
+          {
+            "label": "station:hqPanel",
+            "kind": "buffer-source",
+            "at": 29906.29999998212
+          }
+        ],
+        "action": "trainingPanel"
+      },
+      {
+        "name": "station:lights-off",
+        "events": [
+          {
+            "label": "station:lights-off",
+            "kind": "lightSwitch",
+            "args": [],
+            "at": 30255.399999976158
+          },
+          {
+            "label": "station:lights-off",
+            "kind": "oscillator-source",
+            "at": 30255.899999976158
+          },
+          {
+            "label": "station:lights-off",
+            "kind": "buffer-source",
+            "at": 30256.09999999404
+          }
+        ],
+        "off": {
+          "on": false,
+          "night": true,
+          "room": false
+        }
+      },
+      {
+        "name": "station:lights-on",
+        "events": [
+          {
+            "label": "station:lights-on",
+            "kind": "lightSwitch",
+            "args": [],
+            "at": 30415.59999999404
+          },
+          {
+            "label": "station:lights-on",
+            "kind": "oscillator-source",
+            "at": 30415.59999999404
+          },
+          {
+            "label": "station:lights-on",
+            "kind": "buffer-source",
+            "at": 30415.69999998808
+          }
+        ],
+        "on": {
+          "on": true,
+          "night": false,
+          "room": true
+        }
+      },
+      {
+        "name": "station:door-open",
+        "events": [
+          {
+            "label": "station:door-open",
+            "kind": "clip",
+            "args": [
+              "keypadPress"
+            ],
+            "at": 30678.79999998212
+          },
+          {
+            "label": "station:door-open",
+            "kind": "buffer-source",
+            "at": 30679.29999998212
+          },
+          {
+            "label": "station:door-open",
+            "kind": "trainingCue",
+            "args": [
+              "door:0.9366758548402568:-0.19999999999999998"
+            ],
+            "at": 30679.399999976158
+          },
+          {
+            "label": "station:door-open",
+            "kind": "buffer-source",
+            "at": 30679.5
+          }
+        ]
+      },
+      {
+        "name": "station:door-close",
+        "events": [
+          {
+            "label": "station:door-close",
+            "kind": "clip",
+            "args": [
+              "keypadPress"
+            ],
+            "at": 31289.79999998212
+          },
+          {
+            "label": "station:door-close",
+            "kind": "buffer-source",
+            "at": 31289.899999976158
+          },
+          {
+            "label": "station:door-close",
+            "kind": "trainingCue",
+            "args": [
+              "door:0.9366758548402568:-0.19999999999999998"
+            ],
+            "at": 31289.899999976158
+          },
+          {
+            "label": "station:door-close",
+            "kind": "buffer-source",
+            "at": 31290.09999999404
+          }
+        ]
+      },
+      {
+        "name": "fire:pistol",
+        "events": [
+          {
+            "label": "fire:pistol",
+            "kind": "fireWeapon",
+            "args": [
+              "pistol",
+              {
+                "suppressed": false,
+                "hand": -1
+              }
+            ],
+            "at": 32762.29999998212
+          },
+          {
+            "label": "fire:pistol",
+            "kind": "buffer-source",
+            "at": 32763.19999998808
+          },
+          {
+            "label": "fire:pistol",
+            "kind": "buffer-source",
+            "at": 32763.19999998808
+          },
+          {
+            "label": "fire:pistol",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 32824.19999998808
+          },
+          {
+            "label": "fire:pistol",
+            "kind": "oscillator-source",
+            "at": 32826.09999999404
+          },
+          {
+            "label": "fire:pistol",
+            "kind": "oscillator-source",
+            "at": 32826.19999998808
+          }
+        ],
+        "ammoBefore": 12,
+        "ammoAfter": 11
+      },
+      {
+        "name": "fire:uzi",
+        "events": [
+          {
+            "label": "fire:uzi",
+            "kind": "fireWeapon",
+            "args": [
+              "uzi",
+              {
+                "suppressed": false,
+                "hand": -1
+              }
+            ],
+            "at": 34369.59999999404
+          },
+          {
+            "label": "fire:uzi",
+            "kind": "buffer-source",
+            "at": 34370.79999998212
+          },
+          {
+            "label": "fire:uzi",
+            "kind": "buffer-source",
+            "at": 34370.89999997616
+          },
+          {
+            "label": "fire:uzi",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 34421.79999998212
+          },
+          {
+            "label": "fire:uzi",
+            "kind": "buffer-source",
+            "at": 34422
+          },
+          {
+            "label": "fire:uzi",
+            "kind": "fireWeapon",
+            "args": [
+              "uzi",
+              {
+                "suppressed": false,
+                "hand": -1
+              }
+            ],
+            "at": 34450.69999998808
+          },
+          {
+            "label": "fire:uzi",
+            "kind": "buffer-source",
+            "at": 34450.89999997616
+          },
+          {
+            "label": "fire:uzi",
+            "kind": "buffer-source",
+            "at": 34451
+          },
+          {
+            "label": "fire:uzi",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 34502.19999998808
+          },
+          {
+            "label": "fire:uzi",
+            "kind": "buffer-source",
+            "at": 34502.5
+          },
+          {
+            "label": "fire:uzi",
+            "kind": "fireWeapon",
+            "args": [
+              "uzi",
+              {
+                "suppressed": false,
+                "hand": -1
+              }
+            ],
+            "at": 34523.09999999404
+          },
+          {
+            "label": "fire:uzi",
+            "kind": "buffer-source",
+            "at": 34523.29999998212
+          },
+          {
+            "label": "fire:uzi",
+            "kind": "buffer-source",
+            "at": 34523.29999998212
+          },
+          {
+            "label": "fire:uzi",
+            "kind": "buffer-source",
+            "at": 34523.29999998212
+          },
+          {
+            "label": "fire:uzi",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 34581.5
+          },
+          {
+            "label": "fire:uzi",
+            "kind": "buffer-source",
+            "at": 34581.69999998808
+          },
+          {
+            "label": "fire:uzi",
+            "kind": "fireWeapon",
+            "args": [
+              "uzi",
+              {
+                "suppressed": false,
+                "hand": -1
+              }
+            ],
+            "at": 34599.79999998212
+          },
+          {
+            "label": "fire:uzi",
+            "kind": "buffer-source",
+            "at": 34600
+          },
+          {
+            "label": "fire:uzi",
+            "kind": "buffer-source",
+            "at": 34600
+          },
+          {
+            "label": "fire:uzi",
+            "kind": "buffer-source",
+            "at": 34600.09999999404
+          },
+          {
+            "label": "fire:uzi",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 34665.79999998212
+          },
+          {
+            "label": "fire:uzi",
+            "kind": "buffer-source",
+            "at": 34666
+          },
+          {
+            "label": "fire:uzi",
+            "kind": "fireWeapon",
+            "args": [
+              "uzi",
+              {
+                "suppressed": false,
+                "hand": -1
+              }
+            ],
+            "at": 34686.89999997616
+          },
+          {
+            "label": "fire:uzi",
+            "kind": "buffer-source",
+            "at": 34687.09999999404
+          },
+          {
+            "label": "fire:uzi",
+            "kind": "buffer-source",
+            "at": 34687.19999998808
+          },
+          {
+            "label": "fire:uzi",
+            "kind": "buffer-source",
+            "at": 34687.19999998808
+          },
+          {
+            "label": "fire:uzi",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 34747.5
+          },
+          {
+            "label": "fire:uzi",
+            "kind": "buffer-source",
+            "at": 34747.59999999404
+          }
+        ],
+        "ammoBefore": 32,
+        "ammoAfter": 27
+      },
+      {
+        "name": "fire:m4",
+        "events": [
+          {
+            "label": "fire:m4",
+            "kind": "fireWeapon",
+            "args": [
+              "m4",
+              {
+                "suppressed": false,
+                "hand": -1
+              }
+            ],
+            "at": 36016.29999998212
+          },
+          {
+            "label": "fire:m4",
+            "kind": "buffer-source",
+            "at": 36017
+          },
+          {
+            "label": "fire:m4",
+            "kind": "buffer-source",
+            "at": 36017
+          },
+          {
+            "label": "fire:m4",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 36055.79999998212
+          },
+          {
+            "label": "fire:m4",
+            "kind": "buffer-source",
+            "at": 36056
+          },
+          {
+            "label": "fire:m4",
+            "kind": "fireWeapon",
+            "args": [
+              "m4",
+              {
+                "suppressed": false,
+                "hand": -1
+              }
+            ],
+            "at": 36122.89999997616
+          },
+          {
+            "label": "fire:m4",
+            "kind": "buffer-source",
+            "at": 36123.19999998808
+          },
+          {
+            "label": "fire:m4",
+            "kind": "buffer-source",
+            "at": 36123.19999998808
+          },
+          {
+            "label": "fire:m4",
+            "kind": "buffer-source",
+            "at": 36123.19999998808
+          },
+          {
+            "label": "fire:m4",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 36161.19999998808
+          },
+          {
+            "label": "fire:m4",
+            "kind": "buffer-source",
+            "at": 36161.39999997616
+          },
+          {
+            "label": "fire:m4",
+            "kind": "fireWeapon",
+            "args": [
+              "m4",
+              {
+                "suppressed": false,
+                "hand": -1
+              }
+            ],
+            "at": 36239.5
+          },
+          {
+            "label": "fire:m4",
+            "kind": "buffer-source",
+            "at": 36239.69999998808
+          },
+          {
+            "label": "fire:m4",
+            "kind": "buffer-source",
+            "at": 36239.69999998808
+          },
+          {
+            "label": "fire:m4",
+            "kind": "buffer-source",
+            "at": 36239.79999998212
+          },
+          {
+            "label": "fire:m4",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 36294.69999998808
+          },
+          {
+            "label": "fire:m4",
+            "kind": "buffer-source",
+            "at": 36294.79999998212
+          },
+          {
+            "label": "fire:m4",
+            "kind": "fireWeapon",
+            "args": [
+              "m4",
+              {
+                "suppressed": false,
+                "hand": -1
+              }
+            ],
+            "at": 36341
+          },
+          {
+            "label": "fire:m4",
+            "kind": "buffer-source",
+            "at": 36341.19999998808
+          },
+          {
+            "label": "fire:m4",
+            "kind": "buffer-source",
+            "at": 36341.29999998212
+          },
+          {
+            "label": "fire:m4",
+            "kind": "buffer-source",
+            "at": 36341.29999998212
+          },
+          {
+            "label": "fire:m4",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 36383.89999997616
+          },
+          {
+            "label": "fire:m4",
+            "kind": "buffer-source",
+            "at": 36384.09999999404
+          }
+        ],
+        "ammoBefore": 30,
+        "ammoAfter": 26
+      },
+      {
+        "name": "fire:ak",
+        "events": [
+          {
+            "label": "fire:ak",
+            "kind": "fireWeapon",
+            "args": [
+              "ak",
+              {
+                "suppressed": false,
+                "hand": -1
+              }
+            ],
+            "at": 37638.19999998808
+          },
+          {
+            "label": "fire:ak",
+            "kind": "buffer-source",
+            "at": 37638.79999998212
+          },
+          {
+            "label": "fire:ak",
+            "kind": "buffer-source",
+            "at": 37638.79999998212
+          },
+          {
+            "label": "fire:ak",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 37673.19999998808
+          },
+          {
+            "label": "fire:ak",
+            "kind": "buffer-source",
+            "at": 37673.39999997616
+          },
+          {
+            "label": "fire:ak",
+            "kind": "fireWeapon",
+            "args": [
+              "ak",
+              {
+                "suppressed": false,
+                "hand": -1
+              }
+            ],
+            "at": 37752.19999998808
+          },
+          {
+            "label": "fire:ak",
+            "kind": "buffer-source",
+            "at": 37752.29999998212
+          },
+          {
+            "label": "fire:ak",
+            "kind": "buffer-source",
+            "at": 37752.5
+          },
+          {
+            "label": "fire:ak",
+            "kind": "buffer-source",
+            "at": 37752.5
+          },
+          {
+            "label": "fire:ak",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 37794.59999999404
+          },
+          {
+            "label": "fire:ak",
+            "kind": "buffer-source",
+            "at": 37794.79999998212
+          },
+          {
+            "label": "fire:ak",
+            "kind": "fireWeapon",
+            "args": [
+              "ak",
+              {
+                "suppressed": false,
+                "hand": -1
+              }
+            ],
+            "at": 37881.09999999404
+          },
+          {
+            "label": "fire:ak",
+            "kind": "buffer-source",
+            "at": 37881.29999998212
+          },
+          {
+            "label": "fire:ak",
+            "kind": "buffer-source",
+            "at": 37881.39999997616
+          },
+          {
+            "label": "fire:ak",
+            "kind": "buffer-source",
+            "at": 37881.39999997616
+          },
+          {
+            "label": "fire:ak",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 37913.79999998212
+          },
+          {
+            "label": "fire:ak",
+            "kind": "buffer-source",
+            "at": 37914
+          },
+          {
+            "label": "fire:ak",
+            "kind": "buffer-source",
+            "at": 38117.59999999404
+          }
+        ],
+        "ammoBefore": 30,
+        "ammoAfter": 27
+      },
+      {
+        "name": "fire:shotgun",
+        "events": [
+          {
+            "label": "fire:shotgun",
+            "kind": "fireWeapon",
+            "args": [
+              "shotgun",
+              {
+                "suppressed": false,
+                "hand": -1
+              }
+            ],
+            "at": 39265.79999998212
+          },
+          {
+            "label": "fire:shotgun",
+            "kind": "buffer-source",
+            "at": 39266.29999998212
+          },
+          {
+            "label": "fire:shotgun",
+            "kind": "buffer-source",
+            "at": 39266.29999998212
+          },
+          {
+            "label": "fire:shotgun",
+            "kind": "shotgunPump",
+            "args": [],
+            "at": 39286.69999998808
+          },
+          {
+            "label": "fire:shotgun",
+            "kind": "buffer-source",
+            "at": 39287.89999997616
+          },
+          {
+            "label": "fire:shotgun",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 39341.69999998808
+          },
+          {
+            "label": "fire:shotgun",
+            "kind": "buffer-source",
+            "at": 39341.79999998212
+          },
+          {
+            "label": "fire:shotgun",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 39341.89999997616
+          },
+          {
+            "label": "fire:shotgun",
+            "kind": "buffer-source",
+            "at": 39341.89999997616
+          },
+          {
+            "label": "fire:shotgun",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 39341.89999997616
+          },
+          {
+            "label": "fire:shotgun",
+            "kind": "buffer-source",
+            "at": 39341.89999997616
+          },
+          {
+            "label": "fire:shotgun",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 39341.89999997616
+          },
+          {
+            "label": "fire:shotgun",
+            "kind": "buffer-source",
+            "at": 39341.89999997616
+          },
+          {
+            "label": "fire:shotgun",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 39341.89999997616
+          },
+          {
+            "label": "fire:shotgun",
+            "kind": "buffer-source",
+            "at": 39342.09999999404
+          },
+          {
+            "label": "fire:shotgun",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 39342.09999999404
+          },
+          {
+            "label": "fire:shotgun",
+            "kind": "buffer-source",
+            "at": 39342.09999999404
+          },
+          {
+            "label": "fire:shotgun",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 39342.09999999404
+          },
+          {
+            "label": "fire:shotgun",
+            "kind": "buffer-source",
+            "at": 39342.19999998808
+          },
+          {
+            "label": "fire:shotgun",
+            "kind": "buffer-source",
+            "at": 39392.89999997616
+          },
+          {
+            "label": "fire:shotgun",
+            "kind": "shotgunPump",
+            "args": [],
+            "at": 39499.09999999404
+          },
+          {
+            "label": "fire:shotgun",
+            "kind": "buffer-source",
+            "at": 39499.69999998808
+          },
+          {
+            "label": "fire:shotgun",
+            "kind": "buffer-source",
+            "at": 39722
+          }
+        ],
+        "ammoBefore": 8,
+        "ammoAfter": 7
+      },
+      {
+        "name": "fire:aa12",
+        "events": [
+          {
+            "label": "fire:aa12",
+            "kind": "fireWeapon",
+            "args": [
+              "aa12",
+              {
+                "suppressed": false,
+                "hand": -1
+              }
+            ],
+            "at": 40901.39999997616
+          },
+          {
+            "label": "fire:aa12",
+            "kind": "buffer-source",
+            "at": 40902.09999999404
+          },
+          {
+            "label": "fire:aa12",
+            "kind": "buffer-source",
+            "at": 40902.19999998808
+          },
+          {
+            "label": "fire:aa12",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 40979.5
+          },
+          {
+            "label": "fire:aa12",
+            "kind": "buffer-source",
+            "at": 40979.59999999404
+          },
+          {
+            "label": "fire:aa12",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 40979.59999999404
+          },
+          {
+            "label": "fire:aa12",
+            "kind": "buffer-source",
+            "at": 40979.69999998808
+          },
+          {
+            "label": "fire:aa12",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 40979.79999998212
+          },
+          {
+            "label": "fire:aa12",
+            "kind": "buffer-source",
+            "at": 40979.79999998212
+          },
+          {
+            "label": "fire:aa12",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 40979.79999998212
+          },
+          {
+            "label": "fire:aa12",
+            "kind": "buffer-source",
+            "at": 40979.79999998212
+          },
+          {
+            "label": "fire:aa12",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 40979.79999998212
+          },
+          {
+            "label": "fire:aa12",
+            "kind": "buffer-source",
+            "at": 40979.89999997616
+          },
+          {
+            "label": "fire:aa12",
+            "kind": "fireWeapon",
+            "args": [
+              "aa12",
+              {
+                "suppressed": false,
+                "hand": -1
+              }
+            ],
+            "at": 41094.29999998212
+          },
+          {
+            "label": "fire:aa12",
+            "kind": "buffer-source",
+            "at": 41094.5
+          },
+          {
+            "label": "fire:aa12",
+            "kind": "buffer-source",
+            "at": 41094.5
+          },
+          {
+            "label": "fire:aa12",
+            "kind": "buffer-source",
+            "at": 41094.59999999404
+          },
+          {
+            "label": "fire:aa12",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 41158.59999999404
+          },
+          {
+            "label": "fire:aa12",
+            "kind": "buffer-source",
+            "at": 41158.79999998212
+          },
+          {
+            "label": "fire:aa12",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 41158.89999997616
+          },
+          {
+            "label": "fire:aa12",
+            "kind": "buffer-source",
+            "at": 41158.89999997616
+          },
+          {
+            "label": "fire:aa12",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 41158.89999997616
+          },
+          {
+            "label": "fire:aa12",
+            "kind": "buffer-source",
+            "at": 41159
+          },
+          {
+            "label": "fire:aa12",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 41159.09999999404
+          },
+          {
+            "label": "fire:aa12",
+            "kind": "buffer-source",
+            "at": 41159.09999999404
+          },
+          {
+            "label": "fire:aa12",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 41159.19999998808
+          },
+          {
+            "label": "fire:aa12",
+            "kind": "buffer-source",
+            "at": 41159.19999998808
+          }
+        ],
+        "ammoBefore": 20,
+        "ammoAfter": 18
+      },
+      {
+        "name": "fire:revolver",
+        "events": [
+          {
+            "label": "fire:revolver",
+            "kind": "fireWeapon",
+            "args": [
+              "revolver",
+              {
+                "suppressed": false,
+                "hand": -1
+              }
+            ],
+            "at": 42633.39999997616
+          },
+          {
+            "label": "fire:revolver",
+            "kind": "buffer-source",
+            "at": 42634
+          },
+          {
+            "label": "fire:revolver",
+            "kind": "buffer-source",
+            "at": 42634
+          },
+          {
+            "label": "fire:revolver",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 42688.29999998212
+          },
+          {
+            "label": "fire:revolver",
+            "kind": "buffer-source",
+            "at": 42688.39999997616
+          }
+        ],
+        "ammoBefore": 6,
+        "ammoAfter": 5
+      },
+      {
+        "name": "fire:sniper",
+        "events": [
+          {
+            "label": "fire:sniper",
+            "kind": "fireWeapon",
+            "args": [
+              "sniper",
+              {
+                "suppressed": false,
+                "hand": -1
+              }
+            ],
+            "at": 44123.89999997616
+          },
+          {
+            "label": "fire:sniper",
+            "kind": "buffer-source",
+            "at": 44124.39999997616
+          },
+          {
+            "label": "fire:sniper",
+            "kind": "buffer-source",
+            "at": 44124.5
+          },
+          {
+            "label": "fire:sniper",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 44148.69999998808
+          },
+          {
+            "label": "fire:sniper",
+            "kind": "buffer-source",
+            "at": 44149
+          },
+          {
+            "label": "fire:sniper",
+            "kind": "reloadCue",
+            "args": [
+              "boltUp",
+              0.9
+            ],
+            "at": 44338.69999998808
+          },
+          {
+            "label": "fire:sniper",
+            "kind": "buffer-source",
+            "at": 44339.29999998212
+          },
+          {
+            "label": "fire:sniper",
+            "kind": "reloadCue",
+            "args": [
+              "boltBack",
+              0.9
+            ],
+            "at": 44440.29999998212
+          },
+          {
+            "label": "fire:sniper",
+            "kind": "buffer-source",
+            "at": 44440.69999998808
+          }
+        ],
+        "ammoBefore": 5,
+        "ammoAfter": 4
+      },
+      {
+        "name": "fire:minigun",
+        "events": [
+          {
+            "label": "fire:minigun",
+            "kind": "oscillator-source",
+            "at": 45729
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "oscillator-source",
+            "at": 45729
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "oscillator-source",
+            "at": 45729
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 45729
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "oscillator-source",
+            "at": 45729
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 45761.69999998808
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 45780.09999999404
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "fireWeapon",
+            "args": [
+              "minigun"
+            ],
+            "at": 45814.29999998212
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 45814.89999997616
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 45814.89999997616
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "fireWeapon",
+            "args": [
+              "minigun"
+            ],
+            "at": 45815.09999999404
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 45815.09999999404
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 45815.09999999404
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "fireWeapon",
+            "args": [
+              "minigun"
+            ],
+            "at": 45833.39999997616
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 45833.39999997616
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 45833.5
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 45854.69999998808
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 45854.79999998212
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 45854.89999997616
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 45854.89999997616
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 45874.19999998808
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 45874.29999998212
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "fireWeapon",
+            "args": [
+              "minigun"
+            ],
+            "at": 45907.59999999404
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 45907.69999998808
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 45907.79999998212
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 45907.79999998212
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 45959.29999998212
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 45959.39999997616
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "fireWeapon",
+            "args": [
+              "minigun"
+            ],
+            "at": 45976.39999997616
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 45976.59999999404
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 45976.59999999404
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 46026.89999997616
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46027
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "fireWeapon",
+            "args": [
+              "minigun"
+            ],
+            "at": 46043.19999998808
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46043.29999998212
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46043.29999998212
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 46093.29999998212
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46093.5
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "fireWeapon",
+            "args": [
+              "minigun"
+            ],
+            "at": 46110.29999998212
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46110.39999997616
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46110.5
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 46161.39999997616
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46161.5
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "fireWeapon",
+            "args": [
+              "minigun"
+            ],
+            "at": 46177.69999998808
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46177.89999997616
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46177.89999997616
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 46229.79999998212
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46229.89999997616
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "fireWeapon",
+            "args": [
+              "minigun"
+            ],
+            "at": 46245.79999998212
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46245.89999997616
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46246
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46280.69999998808
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "fireWeapon",
+            "args": [
+              "minigun"
+            ],
+            "at": 46297.09999999404
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46297.29999998212
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46297.29999998212
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 46298.79999998212
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46298.79999998212
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 46350.19999998808
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46350.19999998808
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "fireWeapon",
+            "args": [
+              "minigun"
+            ],
+            "at": 46365.29999998212
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46365.39999997616
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46365.39999997616
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46366.69999998808
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 46418.09999999404
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46418.19999998808
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "fireWeapon",
+            "args": [
+              "minigun"
+            ],
+            "at": 46435.29999998212
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46435.29999998212
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46435.39999997616
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46469.89999997616
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 46485.5
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46485.59999999404
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "fireWeapon",
+            "args": [
+              "minigun"
+            ],
+            "at": 46502.09999999404
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46502.29999998212
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46502.29999998212
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 46537.59999999404
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46537.79999998212
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46554.29999998212
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "fireWeapon",
+            "args": [
+              "minigun"
+            ],
+            "at": 46571.39999997616
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46571.5
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46571.59999999404
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 46608
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46608
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "fireWeapon",
+            "args": [
+              "minigun"
+            ],
+            "at": 46641.79999998212
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46641.89999997616
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46641.89999997616
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46660.29999998212
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 46693.59999999404
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46693.69999998808
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "fireWeapon",
+            "args": [
+              "minigun"
+            ],
+            "at": 46710.19999998808
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46710.39999997616
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46710.39999997616
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 46762
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46762.09999999404
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "fireWeapon",
+            "args": [
+              "minigun"
+            ],
+            "at": 46780.79999998212
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46781
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46781
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46798.89999997616
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 46818
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46818.09999999404
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "fireWeapon",
+            "args": [
+              "minigun"
+            ],
+            "at": 46834.89999997616
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46835.19999998808
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46835.19999998808
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 46885.59999999404
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46885.59999999404
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "fireWeapon",
+            "args": [
+              "minigun"
+            ],
+            "at": 46902.19999998808
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46902.29999998212
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46902.39999997616
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46935.89999997616
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "trainingCue",
+            "args": [
+              "impact"
+            ],
+            "at": 46951.59999999404
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 46951.69999998808
+          },
+          {
+            "label": "fire:minigun",
+            "kind": "buffer-source",
+            "at": 47081.59999999404
+          }
+        ],
+        "ammoBefore": 300,
+        "ammoAfter": 281
+      },
+      {
+        "name": "fire:flamer",
+        "events": [
+          {
+            "label": "fire:flamer",
+            "kind": "flameBurst",
+            "args": [
+              "player",
+              1
+            ],
+            "at": 48247.89999997616
+          },
+          {
+            "label": "fire:flamer",
+            "kind": "buffer-source",
+            "at": 48248.09999999404
+          },
+          {
+            "label": "fire:flamer",
+            "kind": "buffer-source",
+            "at": 48254.79999998212
+          },
+          {
+            "label": "fire:flamer",
+            "kind": "flameBurst",
+            "args": [
+              "player",
+              1
+            ],
+            "at": 48325.5
+          },
+          {
+            "label": "fire:flamer",
+            "kind": "flameBurst",
+            "args": [
+              "player",
+              1
+            ],
+            "at": 48395.39999997616
+          },
+          {
+            "label": "fire:flamer",
+            "kind": "flameBurst",
+            "args": [
+              "player",
+              1
+            ],
+            "at": 48483.39999997616
+          },
+          {
+            "label": "fire:flamer",
+            "kind": "flameBurst",
+            "args": [
+              "player",
+              1
+            ],
+            "at": 48566.19999998808
+          },
+          {
+            "label": "fire:flamer",
+            "kind": "flameBurst",
+            "args": [
+              "player",
+              1
+            ],
+            "at": 48639.79999998212
+          },
+          {
+            "label": "fire:flamer",
+            "kind": "flameBurst",
+            "args": [
+              "player",
+              1
+            ],
+            "at": 48725.89999997616
+          }
+        ],
+        "ammoBefore": 60,
+        "ammoAfter": 56.5
+      },
+      {
+        "name": "fire:launcher",
+        "events": [
+          {
+            "label": "fire:launcher",
+            "kind": "fireWeapon",
+            "args": [
+              "launcher",
+              {
+                "suppressed": false,
+                "hand": -1
+              }
+            ],
+            "at": 50063
+          },
+          {
+            "label": "fire:launcher",
+            "kind": "buffer-source",
+            "at": 50063.59999999404
+          },
+          {
+            "label": "fire:launcher",
+            "kind": "buffer-source",
+            "at": 50063.59999999404
+          },
+          {
+            "label": "fire:launcher",
+            "kind": "buffer-source",
+            "at": 50162.59999999404
+          },
+          {
+            "label": "fire:launcher",
+            "kind": "buffer-source",
+            "at": 50162.69999998808
+          }
+        ],
+        "ammoBefore": 6,
+        "ammoAfter": 5
+      },
+      {
+        "name": "reload:pistol",
+        "events": [
+          {
+            "label": "reload:pistol",
+            "kind": "buffer-source",
+            "at": 50752.09999999404
+          },
+          {
+            "label": "reload:pistol",
+            "kind": "buffer-source",
+            "at": 51278.09999999404
+          },
+          {
+            "label": "reload:pistol",
+            "kind": "reloadCue",
+            "args": [
+              "magRelease",
+              0.8
+            ],
+            "at": 51417.09999999404
+          },
+          {
+            "label": "reload:pistol",
+            "kind": "buffer-source",
+            "at": 51417.19999998808
+          },
+          {
+            "label": "reload:pistol",
+            "kind": "reloadCue",
+            "args": [
+              "magOut",
+              0.8
+            ],
+            "at": 51455.29999998212
+          },
+          {
+            "label": "reload:pistol",
+            "kind": "buffer-source",
+            "at": 51455.29999998212
+          },
+          {
+            "label": "reload:pistol",
+            "kind": "reloadCue",
+            "args": [
+              "magIn",
+              0.8
+            ],
+            "at": 51968.79999998212
+          },
+          {
+            "label": "reload:pistol",
+            "kind": "buffer-source",
+            "at": 51968.89999997616
+          },
+          {
+            "label": "reload:pistol",
+            "kind": "reloadCue",
+            "args": [
+              "magSlap",
+              0.8
+            ],
+            "at": 52109
+          },
+          {
+            "label": "reload:pistol",
+            "kind": "buffer-source",
+            "at": 52109.19999998808
+          },
+          {
+            "label": "reload:pistol",
+            "kind": "reloadCue",
+            "args": [
+              "slideBack",
+              0.8
+            ],
+            "at": 52271
+          },
+          {
+            "label": "reload:pistol",
+            "kind": "buffer-source",
+            "at": 52271.19999998808
+          },
+          {
+            "label": "reload:pistol",
+            "kind": "reloadCue",
+            "args": [
+              "slideFwd",
+              0.8
+            ],
+            "at": 52470.79999998212
+          },
+          {
+            "label": "reload:pistol",
+            "kind": "buffer-source",
+            "at": 52470.89999997616
+          },
+          {
+            "label": "reload:pistol",
+            "kind": "buffer-source",
+            "at": 52617.29999998212
+          }
+        ],
+        "reload": {
+          "timer": 0,
+          "anim": 1.35,
+          "weapon": null
+        }
+      },
+      {
+        "name": "dryfire:pistol",
+        "events": [
+          {
+            "label": "dryfire:pistol",
+            "kind": "emptyClick",
+            "args": [],
+            "at": 53903.79999998212
+          },
+          {
+            "label": "dryfire:pistol",
+            "kind": "buffer-source",
+            "at": 53904
+          },
+          {
+            "label": "dryfire:pistol",
+            "kind": "buffer-source",
+            "at": 54138.19999998808
+          }
+        ]
+      },
+      {
+        "name": "ammo-switch:shotgun",
+        "events": [
+          {
+            "label": "ammo-switch:shotgun",
+            "kind": "buffer-source",
+            "at": 54180.69999998808
+          },
+          {
+            "label": "ammo-switch:shotgun",
+            "kind": "reloadCue",
+            "args": [
+              "grab",
+              0.6
+            ],
+            "at": 54697.69999998808
+          },
+          {
+            "label": "ammo-switch:shotgun",
+            "kind": "buffer-source",
+            "at": 54697.69999998808
+          },
+          {
+            "label": "ammo-switch:shotgun",
+            "kind": "reloadCue",
+            "args": [
+              "grab",
+              0.6
+            ],
+            "at": 55045.79999998212
+          },
+          {
+            "label": "ammo-switch:shotgun",
+            "kind": "buffer-source",
+            "at": 55045.79999998212
+          },
+          {
+            "label": "ammo-switch:shotgun",
+            "kind": "reloadCue",
+            "args": [
+              "grab",
+              0.6
+            ],
+            "at": 55406.69999998808
+          },
+          {
+            "label": "ammo-switch:shotgun",
+            "kind": "buffer-source",
+            "at": 55406.69999998808
+          },
+          {
+            "label": "ammo-switch:shotgun",
+            "kind": "reloadCue",
+            "args": [
+              "grab",
+              0.6
+            ],
+            "at": 55797.69999998808
+          },
+          {
+            "label": "ammo-switch:shotgun",
+            "kind": "buffer-source",
+            "at": 55797.79999998212
+          },
+          {
+            "label": "ammo-switch:shotgun",
+            "kind": "reloadCue",
+            "args": [
+              "grab",
+              0.6
+            ],
+            "at": 56130.19999998808
+          },
+          {
+            "label": "ammo-switch:shotgun",
+            "kind": "buffer-source",
+            "at": 56130.29999998212
+          }
+        ],
+        "started": true,
+        "state": {
+          "kind": "shotgun",
+          "order": [
+            "birdshot",
+            "buckshot",
+            "slug"
+          ],
+          "types": {
+            "birdshot": {
+              "id": "birdshot",
+              "name": "Birdshot",
+              "tag": "BIRDSHOT",
+              "real": "12 ga 2 3/4\" #4 shot",
+              "pack": 20,
+              "price": 20,
+              "hull": "red",
+              "hullHex": 11019804,
+              "cap": 154,
+              "room": 0,
+              "canBuy": false,
+              "buyN": 0,
+              "buyPrice": 0
+            },
+            "buckshot": {
+              "id": "buckshot",
+              "name": "Buckshot",
+              "tag": "BUCKSHOT",
+              "real": "12 ga 2 3/4\" 00 buck",
+              "pack": 20,
+              "price": 30,
+              "hull": "blue",
+              "hullHex": 2903964,
+              "cap": 154,
+              "room": 154,
+              "canBuy": true,
+              "buyN": 20,
+              "buyPrice": 30
+            },
+            "slug": {
+              "id": "slug",
+              "name": "Slug",
+              "tag": "SLUG",
+              "real": "12 ga 2 3/4\" 1 oz rifled slug",
+              "pack": 20,
+              "price": 40,
+              "hull": "ivory",
+              "hullHex": 15129792,
+              "cap": 154,
+              "room": 134,
+              "canBuy": true,
+              "buyN": 20,
+              "buyPrice": 40
+            }
+          },
+          "loaded": "birdshot",
+          "inGun": 3,
+          "carried": {
+            "birdshot": 158,
+            "buckshot": 0,
+            "slug": 20
+          },
+          "next": "slug",
+          "switching": {
+            "gun": "shotgun",
+            "from": "birdshot",
+            "to": "slug",
+            "phase": "unload",
+            "u": 0.21333333328366438,
+            "unloaded": 4,
+            "unload": 7,
+            "loaded": 0,
+            "load": 8,
+            "t": 1.5167999999821176,
+            "n": 1,
+            "total": 6.13
+          },
+          "canSwitch": false
+        }
+      },
+      {
+        "name": "wreck:flamer",
+        "events": [
+          {
+            "label": "wreck:flamer",
+            "kind": "flameBurst",
+            "args": [
+              "player",
+              1
+            ],
+            "at": 57649.89999997616
+          },
+          {
+            "label": "wreck:flamer",
+            "kind": "buffer-source",
+            "at": 57650
+          },
+          {
+            "label": "wreck:flamer",
+            "kind": "buffer-source",
+            "at": 57650.09999999404
+          },
+          {
+            "label": "wreck:flamer",
+            "kind": "flameBurst",
+            "args": [
+              "player",
+              1
+            ],
+            "at": 57717.39999997616
+          },
+          {
+            "label": "wreck:flamer",
+            "kind": "flameBurst",
+            "args": [
+              "player",
+              1
+            ],
+            "at": 57797.69999998808
+          },
+          {
+            "label": "wreck:flamer",
+            "kind": "flameBurst",
+            "args": [
+              "player",
+              1
+            ],
+            "at": 57880.89999997616
+          },
+          {
+            "label": "wreck:flamer",
+            "kind": "flameBurst",
+            "args": [
+              "player",
+              1
+            ],
+            "at": 57965.5
+          },
+          {
+            "label": "wreck:flamer",
+            "kind": "flameBurst",
+            "args": [
+              "player",
+              1
+            ],
+            "at": 58050.09999999404
+          },
+          {
+            "label": "wreck:flamer",
+            "kind": "flameBurst",
+            "args": [
+              "player",
+              1
+            ],
+            "at": 58118.89999997616
+          },
+          {
+            "label": "wreck:flamer",
+            "kind": "flameBurst",
+            "args": [
+              "player",
+              1
+            ],
+            "at": 58202.5
+          },
+          {
+            "label": "wreck:flamer",
+            "kind": "flameBurst",
+            "args": [
+              "player",
+              1
+            ],
+            "at": 58290.29999998212
+          },
+          {
+            "label": "wreck:flamer",
+            "kind": "flameBurst",
+            "args": [
+              "player",
+              1
+            ],
+            "at": 58360.09999999404
+          },
+          {
+            "label": "wreck:flamer",
+            "kind": "flameBurst",
+            "args": [
+              "player",
+              1
+            ],
+            "at": 58441.5
+          },
+          {
+            "label": "wreck:flamer",
+            "kind": "flameBurst",
+            "args": [
+              "player",
+              1
+            ],
+            "at": 58524.69999998808
+          },
+          {
+            "label": "wreck:flamer",
+            "kind": "fireHiss",
+            "args": [
+              0.6913736188355218,
+              0
+            ],
+            "at": 58561
+          },
+          {
+            "label": "wreck:flamer",
+            "kind": "buffer-source",
+            "at": 58562.79999998212
+          },
+          {
+            "label": "wreck:flamer",
+            "kind": "trainingCue",
+            "args": [
+              "target"
+            ],
+            "at": 58563.09999999404
+          },
+          {
+            "label": "wreck:flamer",
+            "kind": "oscillator-source",
+            "at": 58563.59999999404
+          },
+          {
+            "label": "wreck:flamer",
+            "kind": "oscillator-source",
+            "at": 58563.59999999404
+          },
+          {
+            "label": "wreck:flamer",
+            "kind": "oscillator-source",
+            "at": 58563.59999999404
+          },
+          {
+            "label": "wreck:flamer",
+            "kind": "flameBurst",
+            "args": [
+              "player",
+              1
+            ],
+            "at": 58609.19999998808
+          },
+          {
+            "label": "wreck:flamer",
+            "kind": "flameBurst",
+            "args": [
+              "player",
+              1
+            ],
+            "at": 58677.29999998212
+          }
+        ],
+        "target": "wrecked",
+        "index": 0
+      },
+      {
+        "name": "wreck:launcher",
+        "events": [
+          {
+            "label": "wreck:launcher",
+            "kind": "fireWeapon",
+            "args": [
+              "launcher",
+              {
+                "suppressed": false,
+                "hand": -1
+              }
+            ],
+            "at": 60304
+          },
+          {
+            "label": "wreck:launcher",
+            "kind": "buffer-source",
+            "at": 60304.09999999404
+          },
+          {
+            "label": "wreck:launcher",
+            "kind": "buffer-source",
+            "at": 60455.29999998212
+          },
+          {
+            "label": "wreck:launcher",
+            "kind": "buffer-source",
+            "at": 60456
+          },
+          {
+            "label": "wreck:launcher",
+            "kind": "trainingCue",
+            "args": [
+              "target"
+            ],
+            "at": 60456.09999999404
+          },
+          {
+            "label": "wreck:launcher",
+            "kind": "buffer-source",
+            "at": 60456.09999999404
+          }
+        ],
+        "target": "wrecked",
+        "index": 2
+      }
+    ],
+    "allEvents": 420
+  },
+  "pageErrors": []
+}

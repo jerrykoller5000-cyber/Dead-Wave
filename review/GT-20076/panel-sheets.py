@@ -7,7 +7,7 @@ from PIL import Image,ImageDraw
 
 base=Path(__file__).parent/"visible-repairs"/"aa12"
 end=sys.argv[1] if len(sys.argv)>1 else 'after'
-assert end in ('after','trim','final-trim','joins')
+assert end in ('after','trim','final-trim','joins','rear-join','side-inset','crown','contact-trim')
 cams={s:json.loads((base/s/"cameras.json").read_text(encoding="utf-8")) for s in ("before",end)}
 def project(frame,p):
     pts=frame["points"]
@@ -16,9 +16,13 @@ def project(frame,p):
 
 disc="--disc" in sys.argv
 polymer="--polymer" in sys.argv
+graphic="--graphic" in sys.argv
+grip="--grip" in sys.argv
 anchors=list(product((-.048,.048),(-.05,.06),(-.19,.19)))
 if disc: anchors=list(product((-.155,.155),(-.415,-.105),(-.04,.14)))
 if polymer: anchors=list(product((-.04,.04),(-.10,.11),(-.55,-.255)))
+if graphic: anchors=list(product((.044,.054),(-.01,.05),(.03,.17)))
+if grip: anchors=list(product((-.027,.027),(-.265,-.09),(-.25,-.10)))
 drift={}
 for view in cams["before"]:
     a=[project(cams["before"][view],p) for p in anchors]
@@ -44,6 +48,6 @@ for view in cams["before"]:
                 y=32+row*(height+18)
                 pen.text((col*width+7,y),light,fill="#e9e5dc")
                 sheet.paste(img.crop(rect).resize((width,height),Image.Resampling.LANCZOS),(col*width,y+15))
-    sheet.save(base/(("paired-" if end=="after" else end+"-")+("disc-" if disc else "polymer-" if polymer else "")+view+".jpg"),quality=94)
-(base/(("camera-drift" if end=="after" else end+"-camera-drift")+("-disc" if disc else "-polymer" if polymer else "")+"-pixels.json")).write_text(json.dumps(drift,indent=2)+"\n",encoding="utf8")
+    sheet.save(base/(("paired-" if end=="after" else end+"-")+("disc-" if disc else "polymer-" if polymer else "graphic-" if graphic else "grip-" if grip else "")+view+".jpg"),quality=94)
+(base/(("camera-drift" if end=="after" else end+"-camera-drift")+("-disc" if disc else "-polymer" if polymer else "-graphic" if graphic else "-grip" if grip else "")+"-pixels.json")).write_text(json.dumps(drift,indent=2)+"\n",encoding="utf8")
 print("Maximum panel-anchor drift on each matched view",drift)

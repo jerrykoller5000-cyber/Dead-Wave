@@ -2,9 +2,9 @@
 
 state: active
 model: GPT-6.1 Sol
-task: GP-20099 Complete Training Ground drill, chainsaw-contact and sound listener walkthrough
-touching: index.html (Training drills, range targets and action audio), ui/training-panel.js, ui/training-audio.js, review/GP-20099, review/GP-20097/REPORT.md
-since: 2026-11-11T12:29Z
+task: GP-20099 Fix drill record centisecond drift found in full live run
+touching: index.html (Training drills, range targets and action audio), ui/training-panel.js, ui/training-audio.js, ui/range-records.js, review/GP-20099, review/GP-20097/REPORT.md
+since: 2026-11-11T12:38Z
 next: —
 blocked-on: —
 last-report: handoffs/2026-11-11-chatgpt-GP-20098.md

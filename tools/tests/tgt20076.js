@@ -1,6 +1,12 @@
 // GT-20076 / J128: assembled visible weapon meshes at their gameplay size, before static batching.
 (async () => {
   const T = window.TT;
+  // The load channel can be ready while the intro is still running its staged
+  // fight. Wait for the real menu before touching the live inventory and fits.
+  window.DWOpening?.dismissForTesting?.();
+  const menuDeadline=performance.now()+60000;
+  while(window.DWOpening?.active && performance.now()<menuDeadline)await new Promise(r=>setTimeout(r,90));
+  if(window.DWOpening?.active)throw Error('Weapon audit did not reach the main menu');
   const {auditWeapon,auditSling} = await import('/tools/tests/weapon-seating.js');
   const B = T.inspectHost().builders;
   const L = await import('/studio/weapon-longarms.js');
@@ -228,7 +234,10 @@
   document.getElementById('playerName').value='WeaponSeating';
   document.getElementById('modeTraining').click();
   const deadline=performance.now()+30000;
-  const settled=()=>T.trainingDbg.state().active && !document.getElementById('trainingBlackout')?.classList.contains('on') && Math.abs(T.getWorldTime()-.5)<.02;
+  const settled=()=>{
+    const state=T.trainingDbg.state();
+    return state.active && !state.warming && !document.getElementById('trainingBlackout')?.classList.contains('on') && Math.abs(T.getWorldTime()-.5)<.02;
+  };
   while(!settled() && performance.now()<deadline) {
     await new Promise(resolve=>setTimeout(resolve,100));
   }

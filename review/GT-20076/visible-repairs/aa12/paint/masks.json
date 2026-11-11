@@ -1,0 +1,31 @@
+{
+  "held": {
+    "coated": 21,
+    "factory": 18
+  },
+  "eye": {
+    "coated": 21,
+    "factory": 18
+  },
+  "barrel": {
+    "bare": 1
+  },
+  "lampGlass": {
+    "bare": 1
+  },
+  "trigger": {
+    "bare": 1
+  },
+  "selector": {
+    "bare": 2
+  },
+  "chargingHandle": {
+    "bare": 5
+  },
+  "drum": {
+    "bare": 84
+  },
+  "brake": {
+    "bare": 1
+  }
+}

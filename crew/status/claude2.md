@@ -4,26 +4,33 @@ state: idle
 model: Claude Opus 5.5 (claude-opus-5-5)
 task: —
 touching: —
-since: 2026-11-11T12:35Z
+since: 2026-11-11T13:09Z
 next: CB-290 J126 rule 3 (Jerry, 10 Nov, standing, D-138): "No part of th
 blocked-on: —
 last-report: handoffs/2026-11-11-claude2-CB-291.md
 
 ## Notes
 
-### Where CB-291 stands (claude2, 11 Nov ~12:40Z, session from 08:53Z)
-- LANDED on the PC 10:50Z (Claude outputs/cb291/land291.py: patch291.py + patch291b.py on index.html; core/body-limits.js
-  (shoulderAngles/shoulderHold, the shoulder row back/across/turn, turn read from the hinge), its node test 10/10,
-  studio/marine-turn.js TWIST.cap 42 deg, core/clip-exceptions.js minus sleeve-on-carrier-front, tools/tests/tcb291.js).
-- NOT YET ON THE PC: Claude outputs/cb291/patch291c.py + block291c.txt (the hold picks the most natural legal elbow, not the
-  table's edge) and fakethree.final.mjs (tools/tests/fakethree.mjs Matrix4.transpose() was a no-op: every headless arm IK aimed
-  wrong; real transpose). Both in /mnt outputs of the cloud; commit + run patch291c on index.html.
-- With the real transpose: tcb291 3/0 (before 620 samples out), tcb289, t149, t159, t189, t194, t216, t226, t262, t299 green;
-  red tcc341 (2), t187 (4), t195 (1), t218 (4), t229 (6): comparing with the unpatched tree on the same harness (cloud
-  /home/claude/cb0) to see which are mine and which the old harness hid.
-- crew.mjs reply fix and t17: lent to ChatGPT (GP-20096) by the Director 10:08Z; my cloud fix dropped.
-- Next: CB-290 whole (arms/gun ease-back, then legs; CC-343 came back), then t217 Wasp flash anchor, ChatGPT's HUD units/CIF copy,
-  ChatGPT 2's fakethree Object3D.copy/material type asks.
+### context nearly full, needs a new session (claude2, 11 Nov 13:10Z; session from 08:53Z)
+- CB-291 DONE, checked out twice with --review (handoffs/2026-11-11-claude2-CB-291.md): landed 10:50Z (patch291 + 291b), 12:35Z
+  (patch291c: the natural elbow; tools/tests/fakethree.mjs real Matrix4.transpose: the harness's arm IK was wrong everywhere),
+  13:07Z (patch291d: the IK marks every arm, blends held, the idle's pinched hand kept). tcb291 3/0 (before 620 out).
+  Open for the Director: t187 aim-follow 1.96/1.50 deg (limit 1.5) and t229 akimbo forearm line are new reds; the harness fix
+  shows old reds (t195, t218, t229, tcc341 shirt/gloves) for their owners. AG's GPU look: review/CB-291/ag/ (PASS on elbows,
+  carrier, turns).
+- CLAUDE DIRECTOR 13:2xZ: CB-291 accepted; the 3 new reds (t187 shotgun/launcher aim-follow, t229 akimbo forearm line) are to be fixed in the hold (index.html holdShoulderIK / holdFreeShoulders), now part of CB-290. This session stopped at 13:31Z.
+- NEXT: CB-290 whole (CC-343 came back): the arms/gun ease back near walls and props (a ray from the shoulder along the aim), then
+  the legs (foot IK on ground/stairs/ramps/crates, knees out, t184's boot slide), a walking test past walls, doors, crates,
+  stairs, ramps in every stance and weapon class, worst five before/after in the four lights. Training Ground first (D-144).
+  Check in naming only your parts (the Director: core/clip-exceptions.js (body rules) if you touch it; ChatGPT 2 holds the
+  weapon section).
+- Then: t217's Wasp flash visual anchor (ChatGPT 2), Training HUD units + CIF copy (ChatGPT, GP-20097), ChatGPT 2's fakethree
+  asks (Object3D.copy keeps name/visible; material type + data defaults for foldStatic), my reds t213, t225. Not mine: crew.mjs
+  reply matching and t17 (ChatGPT, GP-20096).
+- Cloud recipe that worked: tar on the PC into Claude outputs/<task>/cloud-src.tgz (see Working notes) + a second tar for
+  assets/intro/*.js *.css and assets/soundtrack/*.json *.mid; DW_CHECK_MS=420000; a killed run-all can leave the cloud slot
+  held: kill its game-test-slot.mjs and chrome by PID. The marine lab (Claude outputs/cb291/ has no driver; /home/claude/w291/
+  lab291.mjs was cloud-only) renders joints in four lights but the harness joints are not the game's: use Antigravity for looks.
 
 ### Who you are (D-137, Jerry 10 Nov 2026)
 You are **Claude 2**, the crew's second Claude: a Claude task of your own, on Claude Sonnet 5.5 (Extra). You took

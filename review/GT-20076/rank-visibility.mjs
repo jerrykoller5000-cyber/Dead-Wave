@@ -68,11 +68,15 @@ export async function rankViews(T,id,folder='visibility',audit='catalog-chain-sk
     const mask=new Uint8Array(await (await get(path+view+'-mask.bin')).arrayBuffer());
     if(mask.length!==width*height)throw Error('Changed screenshot size');
     if(camera.glassHidden && camera.pixels===0) {coverage[view]={glassOnly:true,maskPixels:0};continue;}
-    const buffer=visibilityBuffer(parts,projection(points,data.metresPerLocalUnit),width,height);
     const depth=camera.actualDepth ? new Float32Array(await new Response((await get(path+view+'-depth.gz')).body.pipeThrough(new DecompressionStream('gzip'))).arrayBuffer()) : null;
     if(depth && depth.length!==width*height)throw Error('Inconsistent posed depth dimensions');
+    const buffer=visibilityBuffer(parts,projection(points,data.metresPerLocalUnit),width,height,depth);
     let projected=0,both=0,matched=0;
-    for(let i=0;i<mask.length;i++) if(buffer.labels[i]>=0){projected++;both+=mask[i];if(mask[i] && depth && Math.abs(buffer.depths[i]-depth[i])<=buffer.depths[i]*.00035)matched++;}
+    for(let i=0;i<mask.length;i++){
+      const covered=buffer.coverage?buffer.coverage[i]:buffer.labels[i]>=0;
+      if(covered){projected++;both+=mask[i];}
+      if(depth && buffer.labels[i]>=0 && mask[i])matched++;
+    }
     coverage[view]={projected,maskPixels:camera.pixels,overlapPixels:both,depthMatched:depth?matched:null};
     if(depth && matched<100)throw Error(id+' '+view+' actual posed depths fail alignment '+matched);
     if(projected<100 || !both)throw Error(id+' '+view+' projected mask does not meet visible artwork');

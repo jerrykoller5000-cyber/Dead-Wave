@@ -21,13 +21,15 @@ try {
   assert(await page.waitFor('window.TT && DWLoad.snapshot().state==="ready"'));
   await page.evaluate('DWOpening.dismissForTesting()');
   assert(await page.waitFor('!DWOpening.active'));
-  await page.evaluate("document.getElementById('playerName').value='Visibility';document.getElementById('modeTraining').click()");
-  assert(await page.waitFor("TT.trainingDbg.state().active && !document.getElementById('trainingBlackout')?.classList.contains('on')"));
-  await page.evaluate('import("/review/GT-20076/visibility-camera.mjs").then(m=>{window.vis=m.makeViews(TT);return true})');
+  if(!rankOnly){
+    await page.evaluate("document.getElementById('playerName').value='Visibility';document.getElementById('modeTraining').click()");
+    assert(await page.waitFor("TT.trainingDbg.state().active && !TT.trainingDbg.state().warming && !document.getElementById('trainingBlackout')?.classList.contains('on')"));
+    await page.evaluate('import("/review/GT-20076/visibility-camera.mjs").then(m=>{window.vis=m.makeViews(TT);return true})');
+  }
   for (const id of ids) {
     const dir=new URL('./'+folder+'/'+id+'/',import.meta.url);
     await mkdir(dir,{recursive:true});
-    await page.evaluate('vis.equip('+JSON.stringify(id)+')');
+    if(!rankOnly)await page.evaluate('vis.equip('+JSON.stringify(id)+')');
     const results={};
     const views=['hip','aimed','held-left','held-right'];
     if(id==='sniper') views.push('aim-entry');

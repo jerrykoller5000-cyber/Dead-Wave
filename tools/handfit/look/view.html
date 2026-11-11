@@ -17,6 +17,8 @@ for (const sd of ['r', 'l']) { const h = D.hands[sd]; if (!h || !h.wor) continue
   if (h.idx) g.setIndex(new THREE.BufferAttribute(new Uint32Array(dec(h.idx)), 1)); g.computeVertexNormals();
   scene.add(h.idx ? new THREE.Mesh(g, new THREE.MeshStandardMaterial({ color: cols[sd], roughness: 0.8, side: q.get('dbl') ? THREE.DoubleSide : THREE.FrontSide })) : new THREE.Points(g, new THREE.PointsMaterial({ color: cols[sd], size: 2 })));
   if (!q.get('focus') || q.get('focus') === sd) for (let i = 0; i < P.length; i += 30) pts.push(new THREE.Vector3(P[i], P[i + 1], P[i + 2])); }
+// CD-1 (Claude 1): the arms as drawn (exports from ex4-*: sleeves, cuffs, the bare forearm), so the eye view shows what the player sees
+if (D.arms) for (const sd of ['r', 'l']) for (const [k, a] of Object.entries(D.arms[sd] || {})) { const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(dec(a.wor)), 3)); if (a.idx) g.setIndex(new THREE.BufferAttribute(new Uint32Array(dec(a.idx)), 1)); g.computeVertexNormals(); scene.add(new THREE.Mesh(g, new THREE.MeshStandardMaterial({ color: sd === 'r' ? 0x6b6f4a : 0x4a5a6f, roughness: 0.9, side: THREE.DoubleSide }))); }
 const c = new THREE.Vector3(); for (const p of pts) c.add(p); c.divideScalar(pts.length);
 let rad = 0; for (const p of pts) rad = Math.max(rad, p.distanceTo(c));
 const cam = new THREE.PerspectiveCamera(30, 1, 0.005, 10);
@@ -28,6 +30,7 @@ rad *= +(q.get('zoom') || 1); const dist = rad / Math.tan(15 * Math.PI / 180) * 
 window.shot = async (name) => {
   // in the eye's frame: x right, y up, z back (the eye looks along -z)
   const dir = { eye: null, front: ax[2].clone().negate(), back: ax[2].clone(), left: ax[0].clone().negate(), right: ax[0].clone(), below: ax[1].clone().negate(), above: ax[1].clone(), fl: ax[2].clone().negate().add(ax[0].clone().negate()).add(ax[1].clone().multiplyScalar(-0.5)).normalize(), br: ax[2].clone().add(ax[0]).add(ax[1].clone().multiplyScalar(-0.6)).normalize() }[name];
+  if (name === 'cam' && M) { cam.position.copy(eye); cam.quaternion.setFromRotationMatrix(new THREE.Matrix4().extractRotation(M)); cam.fov = D.info.cam.fov || 60; cam.updateProjectionMatrix(); dl.position.copy(cam.position).add(ax[1].clone().multiplyScalar(0.3)); r.render(scene, cam); await new Promise((res) => requestAnimationFrame(() => requestAnimationFrame(res))); return true; }
   if (name === 'eye' && !eye) return false; if (name === 'eye') { cam.position.copy(eye); cam.up.copy(ax[1]); cam.fov = 2 * Math.atan(rad * 1.1 / eye.distanceTo(c)) * 180 / Math.PI; }
   else { cam.position.copy(c).addScaledVector(dir, dist); cam.up.copy(Math.abs(dir.dot(ax[1])) > 0.9 ? ax[2].clone().negate() : ax[1]); cam.fov = 30; }
   cam.lookAt(c); cam.updateProjectionMatrix(); dl.position.copy(cam.position).add(ax[1].clone().multiplyScalar(0.3));

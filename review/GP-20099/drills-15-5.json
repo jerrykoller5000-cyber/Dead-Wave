@@ -1,0 +1,290 @@
+[
+  {
+    "weapon": "ak",
+    "id": "four-count",
+    "mode": "burst",
+    "expected": 8,
+    "started": true,
+    "reason": null,
+    "states": [
+      "COUNTDOWN",
+      "ACTIVE",
+      "IDLE"
+    ],
+    "raised": 8,
+    "hitAccepted": 32,
+    "hitRejected": 0,
+    "zoneMissing": [],
+    "firstHud": "Four Count\nLIVE\n0 points\n30s remaining\n\nUse KR-7 Rifle. Aim for any scoring zone. Hits to clear each plate: 4.\n\nWave 1/8 · 0 plates cleared\nEscape: abort drill",
+    "lastHud": "Four CountLIVE196 points19s remainingUse KR-7 Rifle. Aim for any scoring zone. Hits to clear each plate: 4.Wave 8/8 · 8 plates clearedEscape: abort drill",
+    "result": {
+      "id": "1794400647138-1",
+      "state": "COMPLETED",
+      "reason": "",
+      "valid": true,
+      "score": 226,
+      "time": 11.630300000011923,
+      "firstShot": 0.5,
+      "efficiency": 100,
+      "weapon": "ak",
+      "drill": "four-count",
+      "loadout": "{\"mode\":\"auto\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+      "at": 1794400647450,
+      "base": 116,
+      "bonuses": 110,
+      "deductions": 0,
+      "shots": 32,
+      "units": 32,
+      "attackSeconds": 0,
+      "contactSeconds": 0,
+      "cleared": 8,
+      "missed": 0,
+      "draws": 0,
+      "reloads": 0
+    },
+    "reportText": "Choose a drill\nFIRING RANGE / DRILL CONTROL\n×\n\nChoose a weapon, pick a drill, read the four steps, then press Start. Work from Learn through Practice to Challenge.\n\nLast drill result\nFour Count\n226\n\nDRILL COMPLETE\n\nRun time: 11.63s\nShot accuracy: 100.0%\nPlates cleared: 8/8\nShots fired: 32\nFirst shot after beep: 0.50s\n\nBase 116 + bonuses 110 − deductions 0\n\nNew personal record: Best score · Fastest full clear · Best full-clear accuracy\n\n1. Learn\n→\n2. Practice\n→\n3. Challenge\n1. Weapon\nPistol\nWasp SMG\nGW-4 Carbine\nKR-7 Rifle\nShotgun\nBreacher-12\nRevolver\nSniper\n2. Drill\n1\nLEARN\nFirst Five\nFive close plates, one at a time. Any scoring zone counts; take your time and learn the range.\n2\nLEARN\nDraw on the Beep\nStart holstered. After the beep, draw with Tab and clear one close plate.\n3\nPRACTICE\nBullseye Circuit\nClear five plates by hitting only their body bullseyes.\n4\nPRACTICE\nCall Sign\nAlternate called head and bullseye shots, one plate at a time.\n5\nPRACTICE\nPop Patrol\nFollow an unpredictable left-to-right pop-up patrol; quick hits earn a speed bonus.\n6\nPRACTICE\nTwelve Clean\nClear twelve plates with twelve rounds. Every wasted shot costs an opportunity.\n7\nCHALLENGE\nQuickdraw Countdown\nTwelve reaction rounds; each exposure gets shorter. Base semi-auto is enough.\n8\nCHALLENGE\nPistol / Rifle Relay\nSix single-plate stages alternate pistol and carbine. Follow the weapon call before firing.\nLEARN\nFirst Five\nStart drill\nBriefing\nPersonal bests\n\nFive close plates, one at a time. Any scoring zone counts; take your time and learn the range.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates.\nUse Pistol. Aim for any scoring zone. Hits to clear each plate: 1.\nFollow each new target wave. A plate drops when its required hits are complete.\nPlates to clear: 5\nTime limit: 45s\nLane order: 1 → 2 → 3 → 4 → 5\n\nWeapons required: Pistol\n\nHow points and penalties work\n\nSelect a drill at the range console. Watch the overhead board for the countdown, instructions and final score.",
+    "recordCount": 1,
+    "action": "",
+    "ui": {
+      "result": {
+        "score": "226",
+        "metrics": "Run time: 11.63s\nShot accuracy: 100.0%\nPlates cleared: 8/8\nShots fired: 32\nFirst shot after beep: 0.50s",
+        "status": "DRILL COMPLETE"
+      },
+      "board": {
+        "best": "Best score\n226\nFastest full clear\n11.63s\nBest full-clear accuracy\n100.0%",
+        "history": "Score: 226\nRun time: 11.63s\nShot accuracy: 100.0%\nPlates cleared: 8/8\n11/11/2026"
+      }
+    },
+    "saved": {
+      "id": "1794400647138-1",
+      "score": 226,
+      "time": 11.63,
+      "efficiency": 100,
+      "at": 1794400647454,
+      "cleared": 8,
+      "missed": 0,
+      "shots": 32,
+      "firstShot": 0.5,
+      "draws": 0,
+      "reloads": 0,
+      "goal": 8
+    }
+  },
+  {
+    "weapon": "ak",
+    "id": "heavy-beat",
+    "mode": "groups",
+    "expected": 16,
+    "started": true,
+    "reason": null,
+    "states": [
+      "COUNTDOWN",
+      "ACTIVE",
+      "IDLE"
+    ],
+    "raised": 8,
+    "hitAccepted": 16,
+    "hitRejected": 0,
+    "zoneMissing": [],
+    "firstHud": "Heavy Beat\nLIVE\n0 points\n30s remaining\n\nUse KR-7 Rifle. Aim for any scoring zone. Hits to clear each plate: 1.\n\nWave 1/8 · 0 plates cleared\nEscape: abort drill",
+    "lastHud": "Heavy BeatLIVE222 points16s remainingUse KR-7 Rifle. Aim for any scoring zone. Hits to clear each plate: 1.Wave 8/8 · 16 plates clearedEscape: abort drill",
+    "result": {
+      "id": "1794400647906-2",
+      "state": "COMPLETED",
+      "reason": "",
+      "valid": true,
+      "score": 222,
+      "time": 15.16390000000596,
+      "firstShot": 0.5,
+      "efficiency": 100,
+      "weapon": "ak",
+      "drill": "heavy-beat",
+      "loadout": "{\"mode\":\"auto\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+      "at": 1794400648196,
+      "base": 62,
+      "bonuses": 160,
+      "deductions": 0,
+      "shots": 16,
+      "units": 16,
+      "attackSeconds": 0,
+      "contactSeconds": 0,
+      "cleared": 16,
+      "missed": 0,
+      "draws": 0,
+      "reloads": 0
+    },
+    "reportText": "Choose a drill\nFIRING RANGE / DRILL CONTROL\n×\n\nChoose a weapon, pick a drill, read the four steps, then press Start. Work from Learn through Practice to Challenge.\n\nLast drill result\nHeavy Beat\n222\n\nDRILL COMPLETE\n\nRun time: 15.16s\nShot accuracy: 100.0%\nPlates cleared: 16/16\nShots fired: 16\nFirst shot after beep: 0.50s\n\nBase 62 + bonuses 160 − deductions 0\n\nNew personal record: Best score · Fastest full clear · Best full-clear accuracy\n\n1. Learn\n→\n2. Practice\n→\n3. Challenge\n1. Weapon\nPistol\nWasp SMG\nGW-4 Carbine\nKR-7 Rifle\nShotgun\nBreacher-12\nRevolver\nSniper\n2. Drill\n1\nPRACTICE\nFour Count\nFour scoring hits per plate with the rifle’s own firing rhythm.\n2\nPRACTICE\nHeavy Beat\nClear paired plates across alternating near and far lanes.\n3\nPRACTICE\nTorso Ladder\nGrowing groups accept chest-ring and bullseye hits only.\n4\nPRACTICE\nReset / Read\nA deliberate pause precedes each changing head or bullseye call.\n5\nCHALLENGE\nTwo-Mag Discipline\nThree hits per plate, sixty rounds total. Reload carefully.\nPRACTICE\nFour Count\nStart drill\nBriefing\nPersonal bests\nYour personal records\nBest score\n226\nFastest full clear\n11.63s\nBest full-clear accuracy\n100.0%\n\nSpeed and accuracy records require every plate cleared, with no missed plates. Records are separate for each drill and weapon setup.\n\nBest score\nFastest full clear\nBest full-clear accuracy\nScore: 226\nRun time: 11.63s\nShot accuracy: 100.0%\nPlates cleared: 8/8\n11/11/2026\n\nSelect a drill at the range console. Watch the overhead board for the countdown, instructions and final score.",
+    "recordCount": 1,
+    "action": "",
+    "ui": {
+      "result": {
+        "score": "222",
+        "metrics": "Run time: 15.16s\nShot accuracy: 100.0%\nPlates cleared: 16/16\nShots fired: 16\nFirst shot after beep: 0.50s",
+        "status": "DRILL COMPLETE"
+      },
+      "board": {
+        "best": "Best score\n222\nFastest full clear\n15.16s\nBest full-clear accuracy\n100.0%",
+        "history": "Score: 222\nRun time: 15.16s\nShot accuracy: 100.0%\nPlates cleared: 16/16\n11/11/2026"
+      }
+    },
+    "saved": {
+      "id": "1794400647906-2",
+      "score": 222,
+      "time": 15.164,
+      "efficiency": 100,
+      "at": 1794400648198,
+      "cleared": 16,
+      "missed": 0,
+      "shots": 16,
+      "firstShot": 0.5,
+      "draws": 0,
+      "reloads": 0,
+      "goal": 16
+    }
+  },
+  {
+    "weapon": "ak",
+    "id": "torso-ladder",
+    "mode": "ladder",
+    "expected": 16,
+    "started": true,
+    "reason": null,
+    "states": [
+      "COUNTDOWN",
+      "ACTIVE",
+      "IDLE"
+    ],
+    "raised": 6,
+    "hitAccepted": 16,
+    "hitRejected": 0,
+    "zoneMissing": [],
+    "firstHud": "Torso Ladder\nLIVE\n0 points\n35s remaining\n\nUse KR-7 Rifle. Aim for Ring. Hits to clear each plate: 1.\n\nWave 1/6 · 0 plates cleared\nEscape: abort drill",
+    "lastHud": "Torso LadderLIVE318 points27s remainingUse KR-7 Rifle. Aim for Ring. Hits to clear each plate: 1.Wave 6/6 · 16 plates clearedEscape: abort drill",
+    "result": {
+      "id": "1794400648276-3",
+      "state": "COMPLETED",
+      "reason": "",
+      "valid": true,
+      "score": 318,
+      "time": 8.58109999999404,
+      "firstShot": 0.5,
+      "efficiency": 100,
+      "weapon": "ak",
+      "drill": "torso-ladder",
+      "loadout": "{\"mode\":\"auto\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+      "at": 1794400648506,
+      "base": 158,
+      "bonuses": 160,
+      "deductions": 0,
+      "shots": 16,
+      "units": 16,
+      "attackSeconds": 0,
+      "contactSeconds": 0,
+      "cleared": 16,
+      "missed": 0,
+      "draws": 0,
+      "reloads": 0
+    },
+    "reportText": "Choose a drill\nFIRING RANGE / DRILL CONTROL\n×\n\nChoose a weapon, pick a drill, read the four steps, then press Start. Work from Learn through Practice to Challenge.\n\nLast drill result\nTorso Ladder\n318\n\nDRILL COMPLETE\n\nRun time: 8.58s\nShot accuracy: 100.0%\nPlates cleared: 16/16\nShots fired: 16\nFirst shot after beep: 0.50s\n\nBase 158 + bonuses 160 − deductions 0\n\nNew personal record: Best score · Fastest full clear · Best full-clear accuracy\n\n1. Learn\n→\n2. Practice\n→\n3. Challenge\n1. Weapon\nPistol\nWasp SMG\nGW-4 Carbine\nKR-7 Rifle\nShotgun\nBreacher-12\nRevolver\nSniper\n2. Drill\n1\nPRACTICE\nFour Count\nFour scoring hits per plate with the rifle’s own firing rhythm.\n2\nPRACTICE\nHeavy Beat\nClear paired plates across alternating near and far lanes.\n3\nPRACTICE\nTorso Ladder\nGrowing groups accept chest-ring and bullseye hits only.\n4\nPRACTICE\nReset / Read\nA deliberate pause precedes each changing head or bullseye call.\n5\nCHALLENGE\nTwo-Mag Discipline\nThree hits per plate, sixty rounds total. Reload carefully.\nPRACTICE\nHeavy Beat\nStart drill\nBriefing\nPersonal bests\nYour personal records\nBest score\n222\nFastest full clear\n15.16s\nBest full-clear accuracy\n100.0%\n\nSpeed and accuracy records require every plate cleared, with no missed plates. Records are separate for each drill and weapon setup.\n\nBest score\nFastest full clear\nBest full-clear accuracy\nScore: 222\nRun time: 15.16s\nShot accuracy: 100.0%\nPlates cleared: 16/16\n11/11/2026\n\nSelect a drill at the range console. Watch the overhead board for the countdown, instructions and final score.",
+    "recordCount": 1,
+    "action": "",
+    "ui": {
+      "result": {
+        "score": "318",
+        "metrics": "Run time: 8.58s\nShot accuracy: 100.0%\nPlates cleared: 16/16\nShots fired: 16\nFirst shot after beep: 0.50s",
+        "status": "DRILL COMPLETE"
+      },
+      "board": {
+        "best": "Best score\n318\nFastest full clear\n8.58s\nBest full-clear accuracy\n100.0%",
+        "history": "Score: 318\nRun time: 8.58s\nShot accuracy: 100.0%\nPlates cleared: 16/16\n11/11/2026"
+      }
+    },
+    "saved": {
+      "id": "1794400648276-3",
+      "score": 318,
+      "time": 8.581,
+      "efficiency": 100,
+      "at": 1794400648508,
+      "cleared": 16,
+      "missed": 0,
+      "shots": 16,
+      "firstShot": 0.5,
+      "draws": 0,
+      "reloads": 0,
+      "goal": 16
+    }
+  },
+  {
+    "weapon": "ak",
+    "id": "two-mags",
+    "mode": "budget",
+    "expected": 15,
+    "started": true,
+    "reason": null,
+    "states": [
+      "COUNTDOWN",
+      "ACTIVE",
+      "IDLE"
+    ],
+    "raised": 15,
+    "hitAccepted": 45,
+    "hitRejected": 0,
+    "zoneMissing": [],
+    "firstHud": "Two-Mag Discipline\nLIVE\n0 points\n45s remaining\n\nUse KR-7 Rifle. Aim for any scoring zone. Hits to clear each plate: 3.\n\nWave 1/15 · 0 plates cleared\nEscape: abort drill",
+    "lastHud": "Two-Mag DisciplineLIVE330 points24s remainingUse KR-7 Rifle. Aim for any scoring zone. Hits to clear each plate: 3.Wave 15/15 · 15 plates clearedEscape: abort drill",
+    "result": {
+      "id": "1794400648615-4",
+      "state": "COMPLETED",
+      "reason": "",
+      "valid": true,
+      "score": 380,
+      "time": 22.235400000005956,
+      "firstShot": 0.5,
+      "efficiency": 100,
+      "weapon": "ak",
+      "drill": "two-mags",
+      "loadout": "{\"mode\":\"auto\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+      "at": 1794400649016,
+      "base": 180,
+      "bonuses": 200,
+      "deductions": 0,
+      "shots": 45,
+      "units": 45,
+      "attackSeconds": 0,
+      "contactSeconds": 0,
+      "cleared": 15,
+      "missed": 0,
+      "draws": 0,
+      "reloads": 0
+    },
+    "reportText": "Choose a drill\nFIRING RANGE / DRILL CONTROL\n×\n\nChoose a weapon, pick a drill, read the four steps, then press Start. Work from Learn through Practice to Challenge.\n\nLast drill result\nTwo-Mag Discipline\n380\n\nDRILL COMPLETE\n\nRun time: 22.24s\nShot accuracy: 100.0%\nPlates cleared: 15/15\nShots fired: 45\nFirst shot after beep: 0.50s\n\nBase 180 + bonuses 200 − deductions 0\n\nNew personal record: Best score · Fastest full clear · Best full-clear accuracy\n\n1. Learn\n→\n2. Practice\n→\n3. Challenge\n1. Weapon\nPistol\nWasp SMG\nGW-4 Carbine\nKR-7 Rifle\nShotgun\nBreacher-12\nRevolver\nSniper\n2. Drill\n1\nPRACTICE\nFour Count\nFour scoring hits per plate with the rifle’s own firing rhythm.\n2\nPRACTICE\nHeavy Beat\nClear paired plates across alternating near and far lanes.\n3\nPRACTICE\nTorso Ladder\nGrowing groups accept chest-ring and bullseye hits only.\n4\nPRACTICE\nReset / Read\nA deliberate pause precedes each changing head or bullseye call.\n5\nCHALLENGE\nTwo-Mag Discipline\nThree hits per plate, sixty rounds total. Reload carefully.\nPRACTICE\nTorso Ladder\nStart drill\nBriefing\nPersonal bests\nYour personal records\nBest score\n318\nFastest full clear\n8.58s\nBest full-clear accuracy\n100.0%\n\nSpeed and accuracy records require every plate cleared, with no missed plates. Records are separate for each drill and weapon setup.\n\nBest score\nFastest full clear\nBest full-clear accuracy\nScore: 318\nRun time: 8.58s\nShot accuracy: 100.0%\nPlates cleared: 16/16\n11/11/2026\n\nSelect a drill at the range console. Watch the overhead board for the countdown, instructions and final score.",
+    "recordCount": 1,
+    "action": "",
+    "ui": {
+      "result": {
+        "score": "380",
+        "metrics": "Run time: 22.24s\nShot accuracy: 100.0%\nPlates cleared: 15/15\nShots fired: 45\nFirst shot after beep: 0.50s",
+        "status": "DRILL COMPLETE"
+      },
+      "board": {
+        "best": "Best score\n380\nFastest full clear\n22.23s\nBest full-clear accuracy\n100.0%",
+        "history": "Score: 380\nRun time: 22.23s\nShot accuracy: 100.0%\nPlates cleared: 15/15\n11/11/2026"
+      }
+    },
+    "saved": {
+      "id": "1794400648615-4",
+      "score": 380,
+      "time": 22.235,
+      "efficiency": 100,
+      "at": 1794400649018,
+      "cleared": 15,
+      "missed": 0,
+      "shots": 45,
+      "firstShot": 0.5,
+      "draws": 0,
+      "reloads": 0,
+      "goal": 15
+    }
+  }
+]

@@ -25,6 +25,28 @@ if(phase.includes('joins')){
     assert(!current.has(key(a,b)),'Polymer still crosses its neighbor '+key(a,b));
   }
 }
+if(phase.includes('side-inset')){
+  const border='root/BufferGeometry[23]',back='root/BufferGeometry[24]';
+  const targets=[[border,panels[1]],[back,panels[1]],[border,back]];
+  for(let i=0;i<3;i++)targets.push([back,'root/recoil-bolt[25]/BufferGeometry['+i+']']);
+  for(const [a,b] of targets){
+    assert(old.has(key(a,b)),'Missing original graphic overlap '+key(a,b));
+    assert(!current.has(key(a,b)),'Graphic still crosses its neighbour '+key(a,b));
+  }
+}
+if(phase.includes('crown')){
+  assert(old.has(key('root/BufferGeometry[1]',base)));
+  assert(!current.has(key('root/BufferGeometry[1]',base)),'The two painted crown surfaces still intersect');
+  assert(after.openSurfaces<=before.openSurfaces,'A skin has been left open');
+}
+if(phase.includes('contact-trim')){
+  for(const [a,b] of [['root/BufferGeometry[47]',base],
+    ['root/BufferGeometry[42]','root/BufferGeometry[41]'],['root/BufferGeometry[43]','root/BufferGeometry[41]']]){
+    assert(old.has(key(a,b)),'Missing initial casing or grip trim pair');
+    assert(!current.has(key(a,b)),'Original casing or trim crossing remains '+key(a,b));
+  }
+  assert(after.openSurfaces<=before.openSurfaces);
+}
 assert.equal(after.parts,before.parts);
 for(const name of ['loose','unseated','detailBreaches'])assert.equal(after[name].length,0,name);
 const added=[...current.keys()].filter(k=>!old.has(k));

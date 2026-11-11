@@ -24,11 +24,19 @@ try{
       const v=auditWeapon(scene,{metresPerUnit:1.8/1.655,pose:state,lookup});
       return {raw:v.rawOverlaps.length,open:v.overlaps.length,excused:v.excusedSeats.map(s=>({id:s.id,maximum:s.maximum}))};
     };
-    const result={production:check(pose),candidate:check(pose,allow),variant:check('weapon:aa12-heavy:rest',allow)};
-    host.material.transparent=true;result.glazed=check(pose,allow);
-    host.material.transparent=false;piece.position.x+=.03;result.showing=check(pose,allow);
+    const variantPose='weapon:aa12-heavy:rest';
+    const result={production:check(pose),candidate:check(pose,allow),variant:check(variantPose,allow),productionVariant:check(variantPose)};
+    host.material.transparent=true;result.glazed=check(pose,allow);result.productionGlazed=check(pose);
+    host.material.transparent=false;piece.position.x+=.03;result.showing=check(pose,allow);result.productionShowing=check(pose);
     return result;
   })()`);
+  if(process.argv.includes('--production')) {
+    assert.equal(out.production.raw,1);assert.equal(out.production.open,0);
+    assert.equal(out.production.excused[0]?.id,'breacher-enclosed-sleeve');
+    for(const key of ['productionVariant','productionGlazed','productionShowing']){
+      assert.equal(out[key].raw,1);assert.equal(out[key].open,1);assert.equal(out[key].excused.length,0);
+    }
+  }
   assert.equal(out.candidate.raw,1);assert.equal(out.candidate.open,0);assert.equal(out.candidate.excused.length,1);
   for(const key of ['variant','glazed','showing']){assert.equal(out[key].raw,1);assert.equal(out[key].open,1);assert.equal(out[key].excused.length,0);}
   await save(new URL('./visible-repairs/aa12/enclosure.json',import.meta.url),JSON.stringify(out,null,2)+'\n');

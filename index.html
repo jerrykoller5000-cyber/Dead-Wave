@@ -54042,8 +54042,12 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       _ik.m2.multiply(_ik.m1.transpose());
       _ik.q.setFromRotationMatrix(_ik.m2);
       holdShoulderIK(armG, elbowG, hand, theta, f1, _ik.q);   // CB-291
-      if (w >= 0.999) { armG.userData.cb291Ik = bodyFrame; (armG.userData.cb291Q || (armG.userData.cb291Q = new THREE.Quaternion())).copy(_ik.q); }
+      if (w < 0.999 && (armG === marine.userData.armRG || armG === marine.userData.armLG)) {   // CB-291 (d): a part-way blend starts inside the table too
+        _bpA[0] = 0; _bpA[1] = -IK_UPPER; _bpA[2] = 0; shoulderHold(armG.quaternion, _bpA, armG === marine.userData.armLG ? -1 : 1);
+      }
       armG.quaternion.slerp(_ik.q, w);
+      if (w < 0.999 && (armG === marine.userData.armRG || armG === marine.userData.armLG)) shoulderHold(armG.quaternion, _bpA, armG === marine.userData.armLG ? -1 : 1);   // and the blend itself
+      armG.userData.cb291Ik = bodyFrame; (armG.userData.cb291Q || (armG.userData.cb291Q = new THREE.Quaternion())).copy(armG.quaternion);   // CB-291: holdFreeShoulders leaves it
       _ik.q.setFromAxisAngle(_AXIS_X, theta);
       elbowG.quaternion.slerp(_ik.q, w);
     }
@@ -54203,16 +54207,26 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     let bodyFrame = 0;   // CB-291: which arms the IK held this frame (armG.userData.cb291Ik)
     // CB-291: an arm no hold has a hand on this frame (unarmed, the run's swing, the idle's, a part-way blend) is held inside
     // the shoulder's row after everything that posed it; an arm the IK held in full (cb291Ik, cb291Q) was held by holdShoulderIK.
-    const _bpA = [0, 0, 0];
+    const _bpA = [0, 0, 0], _bpV = new THREE.Vector3(), _bpQ = new THREE.Quaternion();
     function holdFreeShoulders() {
       if (gameOver) return;
       const ud = marine.userData;
       for (const [arm, el, side] of [[ud.armRG, ud.elbowRG, 1], [ud.armLG, ud.elbowLG, -1]]) {
-        // skipped only when the IK held it in full this frame and nothing posed it since (a blend or a later pose is held here)
-        if (!arm || !el || (arm.userData.cb291Ik === bodyFrame && Math.abs(arm.quaternion.dot(arm.userData.cb291Q)) > 0.99999)) continue;
-        _bpA[0] = el.position.x; _bpA[1] = el.position.y; _bpA[2] = el.position.z;
-        const held = shoulderHold(arm.quaternion, _bpA, side);
-        if (held.length) { bodyLimitHits.shoulder = (bodyLimitHits.shoulder || 0) + 1; arm.updateMatrixWorld(true); }
+        // CB-291 (d): every arm, last in the frame, against the table. Inside: left as it is (a gun arm the hold placed, the gun
+        // riding its hand). Outside after the IK posed it this frame (a hand on something: the idle's pinch correction, a grip
+        // no swing could reach legally): swung round its shoulder-to-wrist line so that hand stays put if any swing is inside;
+        // else, and for an arm the IK never posed, held inside by the shortest swing and turn (the table wins over the hand).
+        if (!arm || !el) continue;
+        _shIK.E.set(0, -IK_UPPER, 0); _bpA[0] = el.position.x; _bpA[1] = el.position.y; _bpA[2] = el.position.z;
+        if (shoulderBad(arm, side, arm.quaternion, null) <= 1e-6) continue;
+        _bpQ.copy(arm.quaternion);
+        if (arm.userData.cb291Ik === bodyFrame) {
+          const wr = el.userData.wrist;
+          _bpV.set(0, 0, 0); if (wr) _bpV.copy(wr.position); _bpV.applyQuaternion(el.quaternion).add(el.position).applyQuaternion(arm.quaternion);
+          if (_bpV.lengthSq() > 1e-6) holdShoulderIK(arm, el, null, 0, _bpV.normalize(), _bpQ);
+        }
+        if (shoulderBad(arm, side, _bpQ, null) > 1e-6) shoulderHold(_bpQ, _bpA, side);
+        arm.quaternion.copy(_bpQ); bodyLimitHits.shoulder = (bodyLimitHits.shoulder || 0) + 1; arm.updateMatrixWorld(true);
       }
     }
     function clampBodyPose() {
@@ -64821,93 +64835,327 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         }
       }
     }
+    let _trainingBgCancel = null;
     function trainingWarmCompile() {
       const tg = training.tg;
       if (!tg || !renderer || typeof renderer.compileAsync !== 'function') return;
+      if (_trainingBgCancel) { try { _trainingBgCancel(); } catch (_) {} _trainingBgCancel = null; }
       ensureTrainingUi();
       const b = training.blackout; b.classList.add('on');
-      const meshes = [];
-      tg.group.traverse((o) => { if (o.isMesh && o.frustumCulled) { o.frustumCulled = false; meshes.push(o); } });
       camera.updateMatrixWorld(true);
-      // CL-117 fix (ChatGPT, GP-133): the render loop stops while the pipelines build. On WebGPU compileAsync creates
-      // them asynchronously, and a live frame that drew one before it was finished handed setPipeline nothing
-      // (ShadowNode.renderShadow -> setPipeline not a GPURenderPipeline, then scene.background null). The load-time
-      // warm-up is safe only because the loop has not started yet; here it had.
+      // CL-117 fix (ChatGPT, GP-133): the render loop stops while the pipelines build.
       renderer.setAnimationLoop(null);
-      const restoreImpacts = training.impacts?.prepareWarmup();
-      const restoreChar = training.char?.prepareWarmup();
-      const restoreWreck = training.wreck?.prepareWarmup?.();
-      const restoreFlame = prepareFlameWarmup();
-      // AG-302: pre-build and compile every gun's 1P view copy and the arms (plus hidden 3P held guns/pouches) during blackout.
-      syncRigSkins();
-      const vmWarm = ensureViewmodel() && typeof viewmodel.prepareWarmup === 'function' ? viewmodel.prepareWarmup() : null;
-      // CL-123 (GP-135): the shadow pass builds its own program for an instanced mesh, and the carried gear's
-      // (magazines, shells, grenades, tanks: count 0 until he carries some) was built only on the first live frame
-      // after the warm-up, once grantAllWeapons filled the pouches: two programs on first use. Lay out the carry for
-      // the loadout he now has, then draw one of each empty instanced shadow caster in the warm-up frame.
-      updateCarriedGear(0, true);
-      const emptyInst = [], warmVis = [], seenVis = new Set();
-      const showWarm = (o) => {
-        if (!o || seenVis.has(o)) return;
-        seenVis.add(o);
-        warmVis.push({ o, vis: o.visible, cull: o.frustumCulled });
-        o.visible = true;
-        if (o.isMesh) o.frustumCulled = false;
+      training.warming = true;
+      training.bgWarming = false;
+      let done = false;
+      let resolveWarmDone = null, resolveBgDone = null;
+      training.warmPromise = new Promise((res) => { resolveWarmDone = res; });
+      training.bgWarmPromise = new Promise((res) => { resolveBgDone = res; });
+
+      const collectLightSpine = () => {
+        const ls = new Set([scene]);
+        const walk = (o) => {
+          if (!o || (!o.visible && !o.isLight)) return;
+          if (o.isLight) {
+            if (o.layers.test(camera.layers)) {
+              for (let p = o; p && p !== scene; p = p.parent) ls.add(p);
+            }
+            return;
+          }
+          for (let i = 0; i < o.children.length; i++) walk(o.children[i]);
+        };
+        walk(scene);
+        return ls;
       };
-      const showWarmTree = (rootObj) => {
-        if (!rootObj) return;
-        for (let p = rootObj; p && p !== scene; p = p.parent) showWarm(p);
-        rootObj.traverse((o) => showWarm(o));
+
+      const collectShadowLights = () => {
+        const out = [];
+        const walk = (o) => {
+          if (!o || (!o.visible && !o.isLight)) return;
+          if (o.isLight && o.shadow && o.layers.test(camera.layers)) out.push(o);
+          for (let i = 0; i < o.children.length; i++) walk(o.children[i]);
+        };
+        walk(scene);
+        return out;
       };
-      for (const k of WEAPON_ORDER) { showWarmTree(weaponMeshes[k]); showWarmTree(offhandMeshes && offhandMeshes[k]); }
-      showWarmTree(knife); showWarmTree(grenadeHand);
-      scene.traverse((o) => {
-        if (o.isInstancedMesh && o.castShadow && o.count === 0 && o.instanceMatrix.count > 0) {
-          o.count = 1; emptyInst.push(o);
-          for (let p = o; p && p !== scene; p = p.parent) showWarm(p);
+
+      const compileOnlyDrawables = (drawables, lightSpine, shadowLights) => {
+        const valid = [], keepAnc = new Set([scene]), topRoots = new Set();
+        for (let i = 0; i < drawables.length; i++) {
+          const m = drawables[i];
+          if (!m || !m.geometry || !m.material) continue;
+          let p = m, top = m;
+          while (p && p !== scene) { top = p; p = p.parent; }
+          if (p !== scene) continue;
+          valid.push(m);
+          topRoots.add(top);
+          for (let q = m; q && q !== scene; q = q.parent) keepAnc.add(q);
         }
-      });
-      let restored = false, done = false;
-      const restoreWarm = () => {
-        if (restored) return;
-        restored = true;
-        restoreImpacts?.(); restoreChar?.(); restoreWreck?.(); restoreFlame?.(); vmWarm?.restore?.();
-        for (const o of emptyInst) o.count = 0;
-        for (let i = warmVis.length - 1; i >= 0; i--) { const s = warmVis[i]; s.o.visible = s.vis; s.o.frustumCulled = s.cull; }
-        for (const m of meshes) m.frustumCulled = true;
-      };
-      let restoreCutaway = null, restoreMarineFade = null, restorePerimeter = null, restoreContainment = null;
-      const restoreFadePass = () => {
-        try { restoreCutaway?.(); } catch (_) {} restoreCutaway = null;
-        try { restoreMarineFade?.(); } catch (_) {} restoreMarineFade = null;
-        try { restorePerimeter?.(); } catch (_) {} restorePerimeter = null;
-        try { restoreContainment?.(); } catch (_) {} restoreContainment = null;
-      };
-      const finish = () => { if (done) return; done = true; restoreFadePass(); restoreWarm(); renderer.setAnimationLoop(tick); if (!training.wake) b.classList.remove('on'); };
-      Promise.resolve()
-        .then(() => vmWarm?.ready)
-        .then(() => { if (!done) return compileForLiveTarget(); })
-        .then(async () => {
-          if (done) return;
-          warmFrame('training-impacts');
-          if (!done && (tg.cutaway?.prepareWarmup || trainingMarineFade?.prepareWarmup || training.perimeter?.prepareWarmup || training.containment?.prepareWarmup)) {
-            try { restoreCutaway = tg.cutaway?.prepareWarmup?.() || null; } catch (_) {}
-            try { restoreMarineFade = trainingMarineFade?.prepareWarmup?.() || null; } catch (_) {}
-            try { restorePerimeter = training.perimeter?.prepareWarmup?.() || null; } catch (_) {}
-            try { restoreContainment = training.containment?.prepareWarmup?.() || null; } catch (_) {}
-            const vVis = viewmodel?.root ? viewmodel.root.visible : false;
-            try {
-              if (viewmodel?.root) viewmodel.root.visible = false;
-              await compileForLiveTarget();
-              if (viewmodel?.root) viewmodel.root.visible = vVis;
-              if (!done) warmFrame('training-marine-fade');
-            } finally {
-              if (viewmodel?.root) viewmodel.root.visible = vVis;
-              restoreFadePass();
+        if (!valid.length) return Promise.resolve();
+        const spine = new Set(keepAnc);
+        for (const l of lightSpine) spine.add(l);
+        const visChanges = [], meshChanges = [], shadChanges = [];
+        try {
+          for (const n of keepAnc) {
+            if (!n.visible) { visChanges.push({ o: n, vis: false }); n.visible = true; }
+          }
+          for (const n of spine) {
+            const ch = n.children;
+            for (let i = 0; i < ch.length; i++) {
+              const c = ch[i];
+              if (!spine.has(c) && c.visible) {
+                visChanges.push({ o: c, vis: true });
+                c.visible = false;
+              }
             }
           }
-          if (done) return;
-          restoreWarm();
+          for (let i = 0; i < valid.length; i++) {
+            const m = valid[i];
+            const inst = !!(m.isInstancedMesh && m.count === 0 && m.instanceMatrix && m.instanceMatrix.count > 0);
+            meshChanges.push({ m, cull: m.frustumCulled, inst });
+            m.frustumCulled = false;
+            if (inst) m.count = 1;
+          }
+          for (const top of topRoots) top.updateMatrixWorld(true);
+          for (let i = 0; i < shadowLights.length; i++) {
+            const s = shadowLights[i].shadow;
+            if (!s) continue;
+            shadChanges.push({ s, auto: s.autoUpdate, needs: s.needsUpdate });
+            s.autoUpdate = false;
+            s.needsUpdate = false;
+          }
+          return compileForLiveTarget();
+        } finally {
+          for (let i = 0; i < shadChanges.length; i++) {
+            const sc = shadChanges[i];
+            sc.s.autoUpdate = sc.auto;
+            sc.s.needsUpdate = sc.needs;
+          }
+          for (let i = meshChanges.length - 1; i >= 0; i--) {
+            const mc = meshChanges[i];
+            mc.m.frustumCulled = mc.cull;
+            if (mc.inst) mc.m.count = 0;
+          }
+          for (let i = visChanges.length - 1; i >= 0; i--) {
+            visChanges[i].o.visible = visChanges[i].vis;
+          }
+        }
+      };
+
+      const issuedKey = holsteredKey || currentWeapon || 'pistol';
+
+      const startTrainingBgWarm = () => {
+        if (!training.active) {
+          if (resolveBgDone) { resolveBgDone(); resolveBgDone = null; }
+          return;
+        }
+        training.bgWarming = true;
+        let cancelled = false, rafId = 0, timerId = 0, activeVmCleanup = null, inFlight = false;
+        const finishBg = () => {
+          if (cancelled) return;
+          cancelled = true;
+          if (rafId) { cancelAnimationFrame(rafId); rafId = 0; }
+          if (timerId) { clearTimeout(timerId); timerId = 0; }
+          if (activeVmCleanup) { try { activeVmCleanup.cleanup(); } catch (_) {} activeVmCleanup = null; }
+          training.bgWarming = false;
+          if (_trainingBgCancel === finishBg) _trainingBgCancel = null;
+          if (resolveBgDone) { resolveBgDone(); resolveBgDone = null; }
+        };
+        _trainingBgCancel = finishBg;
+
+        const priority = ['m4', 'revolver', 'shotgun', 'ak', 'uzi', 'sniper', 'aa12', 'launcher', 'flamer', 'minigun', 'chainsaw', 'pistol'];
+        const pendingKeys = [];
+        for (const k of priority) if (WEAPON_ORDER.includes(k) && !pendingKeys.includes(k)) pendingKeys.push(k);
+        for (const k of WEAPON_ORDER) if (!pendingKeys.includes(k)) pendingKeys.push(k);
+
+        const lightSpine = collectLightSpine();
+        const shadowLights = collectShadowLights();
+        let curMeshes = [], curIdx = 0, sliceN = 8;
+        const collectTreeDrawables = (rootObj, out) => {
+          if (!rootObj) return;
+          rootObj.traverse((o) => {
+            if ((o.isMesh || o.isLine || o.isPoints || o.isSprite) && o.geometry && o.material) out.push(o);
+          });
+        };
+
+        const stepSlice = () => {
+          timerId = 0;
+          if (cancelled || !training.active || training.warming) { finishBg(); return; }
+          if (inFlight) { scheduleNext(); return; }
+          while (curIdx >= curMeshes.length) {
+            if (activeVmCleanup) { try { activeVmCleanup.cleanup(); } catch (_) {} activeVmCleanup = null; }
+            if (!pendingKeys.length) { finishBg(); return; }
+            const heldIdx = (!unarmed && currentWeapon) ? pendingKeys.indexOf(currentWeapon) : -1;
+            const nextKey = heldIdx >= 0 ? pendingKeys.splice(heldIdx, 1)[0] : pendingKeys.shift();
+            curMeshes = [];
+            curIdx = 0;
+            if (nextKey !== issuedKey) collectTreeDrawables(weaponMeshes[nextKey], curMeshes);
+            collectTreeDrawables(offhandMeshes && offhandMeshes[nextKey], curMeshes);
+            if (ensureViewmodel() && typeof viewmodel.warmBgGun === 'function') {
+              activeVmCleanup = viewmodel.warmBgGun(nextKey);
+              if (activeVmCleanup && activeVmCleanup.meshes.length) curMeshes.push(...activeVmCleanup.meshes);
+            }
+          }
+          const batch = curMeshes.slice(curIdx, curIdx + sliceN);
+          curIdx += batch.length;
+          const t0 = performance.now();
+          inFlight = true;
+          let p;
+          try {
+            p = compileOnlyDrawables(batch, lightSpine, shadowLights);
+          } catch (_) {
+            p = Promise.resolve();
+          }
+          const ms = performance.now() - t0;
+          sliceN = Math.max(4, Math.min(20, Math.round(sliceN * Math.min(2, 4.2 / Math.max(0.4, ms)))));
+          Promise.resolve(p).catch(() => {}).finally(() => {
+            inFlight = false;
+            if (!cancelled) scheduleNext();
+          });
+        };
+
+        const scheduleNext = () => {
+          if (cancelled || rafId || timerId) return;
+          rafId = requestAnimationFrame(() => {
+            rafId = 0;
+            if (cancelled) return;
+            timerId = setTimeout(stepSlice, 0);
+          });
+        };
+        scheduleNext();
+      };
+
+      let origPPRender = null;
+      const restorePPRender = () => {
+        if (origPPRender && postProcessing) {
+          postProcessing.render = origPPRender;
+          origPPRender = null;
+        }
+      };
+
+      const finish = () => {
+        if (done) return;
+        done = true;
+        restorePPRender();
+        training.warming = false;
+        clock.getDelta();
+        renderer.setAnimationLoop(tick);
+        if (!training.wake) b.classList.remove('on');
+        if (resolveWarmDone) { resolveWarmDone(); resolveWarmDone = null; }
+        startTrainingBgWarm();
+      };
+
+      // AG-304: Phase 1 warms only what frame 1 needs (the room, carried gear, arms + issued pistol, and the ~75 changed
+      // cutaway/perimeter/marine-fade meshes) and restores ALL scene/weapon/material state synchronously inside finally so
+      // external callers (e.g. inspectHost().enterTraining()) never race with async restoration. Phase 2 compiles the other
+      // 11 guns in ~4 ms post-render slices over the first second after the blackout lifts.
+      Promise.resolve()
+        .then(() => {
+          if (done || !training.active) return;
+          let pSolid = Promise.resolve(), pFade = Promise.resolve();
+          const unculledScene = [];
+          const walkUncull = (o) => {
+            if (!o || !o.visible) return;
+            if ((o.isMesh || o.isLine || o.isPoints || o.isSprite) && o.frustumCulled) {
+              o.frustumCulled = false;
+              unculledScene.push(o);
+            }
+            for (let i = 0; i < o.children.length; i++) walkUncull(o.children[i]);
+          };
+          walkUncull(scene);
+          try {
+            const restoreImpacts = training.impacts?.prepareWarmup();
+            const restoreChar = training.char?.prepareWarmup();
+            const restoreWreck = training.wreck?.prepareWarmup?.();
+            const restoreFlame = prepareFlameWarmup();
+            syncRigSkins();
+            const vmWarm = ensureViewmodel() && typeof viewmodel.prepareWarmup === 'function' ? viewmodel.prepareWarmup([issuedKey]) : null;
+            updateCarriedGear(0, true);
+            const emptyInst = [], warmVis = [], seenVis = new Set();
+            const showWarm = (o) => {
+              if (!o || seenVis.has(o)) return;
+              seenVis.add(o);
+              warmVis.push({ o, vis: o.visible, cull: o.frustumCulled });
+              o.visible = true;
+              if (o.isMesh || o.isLine || o.isPoints || o.isSprite) o.frustumCulled = false;
+            };
+            const showWarmTree = (rootObj) => {
+              if (!rootObj) return;
+              for (let p = rootObj; p && p !== scene; p = p.parent) showWarm(p);
+              rootObj.traverse((o) => showWarm(o));
+            };
+            showWarmTree(weaponMeshes[issuedKey]);
+            showWarmTree(knife);
+            showWarmTree(grenadeHand);
+            scene.traverse((o) => {
+              if (o.isInstancedMesh && o.castShadow && o.count === 0 && o.instanceMatrix.count > 0) {
+                o.count = 1; emptyInst.push(o);
+                for (let p = o; p && p !== scene; p = p.parent) showWarm(p);
+              }
+            });
+            try {
+              if (cullStats.hidden) { cullShowAll(); cullStats.hidden = 0; }
+              updateLightPool();
+              sunShadowCadence();
+              if (viewmodel) viewmodel.place();
+              updateSceneMatrices();
+              pSolid = compileForLiveTarget();
+            } finally {
+              restoreImpacts?.(); restoreChar?.(); restoreWreck?.(); restoreFlame?.(); vmWarm?.restore?.();
+              for (const o of emptyInst) o.count = 0;
+              for (let i = warmVis.length - 1; i >= 0; i--) { const s = warmVis[i]; s.o.visible = s.vis; s.o.frustumCulled = s.cull; }
+            }
+
+            // Delta-only fade pass: compile ONLY the ~75 meshes whose material swaps during cutaway/perimeter/marine-fade.
+            const preMats = new Map();
+            tg.group.traverse((o) => { if (o.isMesh && !o.isSkinnedMesh && o.material) preMats.set(o, o.material); });
+            let restoreCutaway = null, restoreMarineFade = null, restorePerimeter = null, restoreContainment = null;
+            try {
+              try { restoreCutaway = tg.cutaway?.prepareWarmup?.() || null; } catch (_) {}
+              try { restoreMarineFade = trainingMarineFade?.prepareWarmup?.() || null; } catch (_) {}
+              try { restorePerimeter = training.perimeter?.prepareWarmup?.() || null; } catch (_) {}
+              try { restoreContainment = training.containment?.prepareWarmup?.() || null; } catch (_) {}
+              const fadeDrawables = [];
+              for (const [o, mBefore] of preMats) {
+                if (o.material !== mBefore) fadeDrawables.push(o);
+              }
+              const keeperRoot = marine?.parent?.getObjectByName?.('training-marine-fade-pipeline-keepers');
+              if (keeperRoot) {
+                keeperRoot.traverse((o) => { if (o.isMesh && o.geometry && o.material) fadeDrawables.push(o); });
+              }
+              if (fadeDrawables.length) {
+                pFade = compileOnlyDrawables(fadeDrawables, collectLightSpine(), collectShadowLights());
+              }
+            } finally {
+              try { restoreCutaway?.(); } catch (_) {}
+              try { restoreMarineFade?.(); } catch (_) {}
+              try { restorePerimeter?.(); } catch (_) {}
+              try { restoreContainment?.(); } catch (_) {}
+            }
+          } finally {
+            for (let i = 0; i < unculledScene.length; i++) unculledScene[i].frustumCulled = true;
+          }
+
+          if (postProcessing && !origPPRender) {
+            origPPRender = postProcessing.render;
+            postProcessing.render = () => {};
+          }
+          return Promise.all([Promise.resolve(pSolid), Promise.resolve(pFade)]);
+        })
+        .then(async () => {
+          if (done || !training.active) { finish(); return; }
+          restorePPRender();
+          if (!viewFirst && !training.wake && training.cameraCollision) {
+            const head = { x: localPlayer.position.x, y: localPlayer.position.y + 1.6, z: localPlayer.position.z };
+            training.cameraCollision.pull(head, camera.position);
+            const eyeDist = hypot(camera.position.x - head.x, camera.position.y - head.y, camera.position.z - head.z);
+            trainingMarineFade.update(eyeDist);
+          } else {
+            trainingMarineFade.update(Infinity);
+          }
+          camera.lookAt(camLook);
+          tg.cutaway?.update?.(camera.position, viewFirst ? _noCutaway : localPlayer.position, 0);
+          training.perimeter?.update?.(camera.position, viewFirst ? _noCutaway : localPlayer.position, 0);
           warmFrame('training-clean');
           try { await renderer.backend?.device?.queue?.onSubmittedWorkDone?.(); } catch (_) {}
           finish();
@@ -66416,6 +66664,7 @@ live++;
     }
     const _noCutaway = { x: 1e6, y: 0, z: 1e6, noCutaway: true };   // CL-324 (J90): a focus outside every cutaway zone: all its walls stay
     function stepFrame(dt) {
+      if (training.warming) return;
       if (flightReplayFrames && flightReplayAt < flightReplayFrames.length) flightApply(flightReplayFrames[flightReplayAt++]);
       flightStepping = true;
       flightStepDt = Math.min(0.05, Math.max(0, +dt || 0));

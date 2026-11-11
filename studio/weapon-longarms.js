@@ -579,6 +579,107 @@ export function makeAkModel(ctx) {
   return finishGun(gun);
 }
 
+// Clip the back of a convex decorative panel against its support. All original
+// exposed positions, normals and UVs remain in the same local coordinates.
+function trimPanelBack(T, panel, side, supportFace) {
+  const source = panel.geometry;
+  const {position, normal, uv} = source.attributes;
+  const planeX = side * supportFace - panel.position.x;
+  const distance = vertex => side * (vertex.point.x - planeX);
+  const vertices = Array.from({length: position.count}, (_, i) => ({
+    point: new T.Vector3().fromBufferAttribute(position, i),
+    normal: new T.Vector3().fromBufferAttribute(normal, i),
+    uv: new T.Vector2().fromBufferAttribute(uv, i)
+  }));
+  const positions = [], normals = [], uvs = [], edges = [];
+  function triangle(a, b, c) {
+    for (const v of [a, b, c]) {
+      positions.push(v.point.x, v.point.y, v.point.z);
+      normals.push(v.normal.x, v.normal.y, v.normal.z);
+      uvs.push(v.uv.x, v.uv.y);
+    }
+  }
+  const index = source.index, count = index ? index.count : vertices.length;
+  for (let i = 0; i < count; i += 3) {
+    const face = [0, 1, 2].map(j => vertices[index ? index.getX(i + j) : i + j]);
+    const kept = [], ends = [];
+    for (let j = 0; j < 3; j++) {
+      const a = face[j], b = face[(j + 1) % 3], da = distance(a), db = distance(b);
+      if (da >= 0) kept.push(a);
+      if ((da < 0) === (db < 0)) continue;
+      const t = da / (da - db);
+      const v = {point: a.point.clone().lerp(b.point, t), normal: a.normal.clone().lerp(b.normal, t), uv: a.uv.clone().lerp(b.uv, t)};
+      v.point.x = planeX;
+      kept.push(v); ends.push(v.point);
+    }
+    for (let j = 2; j < kept.length; j++) triangle(kept[0], kept[j - 1], kept[j]);
+    if (ends.length === 2) edges.push(ends);
+  }
+  if (!edges.length) return;
+  // Each cut triangle supplies one boundary edge. Keeping even collinear
+  // subdivisions closes the original surface without T-junctions in the cap.
+  const centre = new T.Vector3();
+  for (const [a, b] of edges) centre.add(a).add(b);
+  centre.multiplyScalar(1 / (2 * edges.length));
+  const backNormal = new T.Vector3(-side, 0, 0);
+  const back = point => ({point, normal: backNormal, uv: new T.Vector2(point.z * 4, point.y * 4)});
+  const middle = back(centre);
+  for (const [a, b] of edges) {
+    const crossX = (a.y - centre.y) * (b.z - centre.z) - (a.z - centre.z) * (b.y - centre.y);
+    if (side * crossX > 0) triangle(middle, back(b), back(a));
+    else triangle(middle, back(a), back(b));
+  }
+  const trimmed = new T.BufferGeometry();
+  trimmed.setAttribute('position', new T.Float32BufferAttribute(positions, 3));
+  trimmed.setAttribute('normal', new T.Float32BufferAttribute(normals, 3));
+  trimmed.setAttribute('uv', new T.Float32BufferAttribute(uvs, 2));
+  trimmed.computeBoundingSphere();
+  panel.geometry = trimmed;
+  source.dispose();
+}
+
+// A closed rounded skin with a flat underside. The ring's cut height follows
+// the top of its neighbouring painted panel, including the sloped rear corner.
+function roundedCoverSkin(T, profile, cutHeight) {
+  const positions=[], uv=[], indices=[];
+  const vertex=([x,y,z])=>{
+    const i=positions.length/3;
+    positions.push(x,y,z); uv.push(z*4,y*4);
+    return i;
+  };
+  const quad=(a,b,c,d)=>indices.push(a,b,c,a,c,d);
+  const fractions=[0,...Array.from({length:14},(_,i)=>(i+.5)/14),1];
+  const arc=profile.map(([radius,z])=>{
+    const base=cutHeight(z), begin=Math.asin(base/radius);
+    return fractions.map(f=>{
+      const a=begin+f*(Math.PI-2*begin);
+      return [radius*Math.cos(a),radius*Math.sin(a),z];
+    });
+  });
+  const sides=arc.map(points=>points.map(vertex));
+  const bottom=arc.map((points,i)=>{
+    const right=points[0],left=points[points.length-1];
+    return [left,[0,cutHeight(profile[i][1]),profile[i][1]],right].map(vertex);
+  });
+  for(let i=1;i<sides.length;i++){
+    const front=sides[i],back=sides[i-1];
+    for(let j=1;j<front.length;j++)quad(back[j-1],back[j],front[j],front[j-1]);
+    for(let j=1;j<3;j++)quad(bottom[i-1][j-1],bottom[i-1][j],bottom[i][j],bottom[i][j-1]);
+  }
+  for(const i of [0,arc.length-1]){
+    const points=arc[i].map(vertex),z=profile[i][1],mid=vertex([0,cutHeight(z),z]);
+    for(let j=1;j<points.length;j++){
+      if(i===0)indices.push(mid,points[j],points[j-1]);
+      else indices.push(mid,points[j-1],points[j]);
+    }
+  }
+  const geometry=new T.BufferGeometry();
+  geometry.setAttribute('position',new T.Float32BufferAttribute(positions,3));
+  geometry.setAttribute('uv',new T.Float32BufferAttribute(uv,2));
+  geometry.setIndex(indices); geometry.computeVertexNormals(); geometry.computeBoundingSphere();
+  return geometry;
+}
+
 export function makeAa12Model(ctx) {
   const { THREE, gunKit, gunBand, gripOutline, gunEffects, finishGun, gunBody, gunMid, gunDark, gunAccent, gunPoly, gunRubber, gunMetal } = ctx;
   const gun = new THREE.Group();
@@ -595,14 +696,23 @@ export function makeAa12Model(ctx) {
   const plateSteel = new THREE.MeshStandardMaterial({color: 0x363c41, metalness: .26, roughness: .52});
   // Receiver: the tall slab-sided box with its rounded top, the pressed side plates on their bolts, the seam lines, the
   // vents along the top edge, the rear's stock seam.
-  // The rounded cover supplies the crown. A retraced edge on this flat outline
-  // gave the bevel a spike that projected past its rear seam.
-  const receiver = K.slab([[-0.26, 0.07], [-0.26, -0.074], [-0.242, -0.09], [0.26, -0.09], [0.26, 0.07]], RW, coverSteel, { bevel: 0.006, segs: 2 });
+  // A short sloping corner closes the side under the rounded cover. The old
+  // outline doubled back along its rear edge and the bevel crossed the seam.
+  const rearCorner = [-0.26, 0.1], topCorner = [-0.244, 0.07];
+  const casingJoin = [[0.23, -0.068], [0.25, -0.082]];
+  // The front casing keeps the contact surface the hand already follows. The
+  // side below it ends at that casing's outline and keeps its exposed lower lip.
+  const receiver = K.slab([rearCorner, [-0.26, -0.074], [-0.242, -0.09], [0.26, -0.09],
+    [0.26, casingJoin[1][1]], casingJoin[1], casingJoin[0], [casingJoin[0][0], topCorner[1]], topCorner],
+    RW, coverSteel, { bevel: 0.006, segs: 2 });
   // Form the rear seam in the rounded cover itself. A straight strip across
   // the crown previously stood clear of both sides when seen from the eye.
-  const cover = K.lathe([[0, -.258], [.043, -.258], [.045, -.250], [.045, -.2474], [.0442, -.2469],
-    [.0442, -.2458], [.045, -.2453], [.045, .252], [.043, .26], [0, .26]],
-    coverSteel, {y: .07, seg: 28, phase: Math.PI / 28});
+  const cornerSlope = (rearCorner[1]-topCorner[1])/(rearCorner[0]-topCorner[0]);
+  const coverGeometry = roundedCoverSkin(THREE, [[.043, -.258], [.045, -.250], [.045, -.2474], [.0442, -.2469],
+    [.0442, -.2458], [.045, -.2453], [.045, topCorner[0]], [.045, .252], [.043, .26]],
+    z=>Math.max(0,(z-topCorner[0])*cornerSlope));
+  const cover = new THREE.Mesh(coverGeometry,coverSteel);
+  cover.position.y=topCorner[1]; cover.castShadow=true; cover.receiveShadow=true; gun.add(cover);
   // Only the outward half of each decorative side panel is visible. Its back
   // meets the side wall; the outer paint plane still meets its original trim.
   const panelDepth = 0.003;
@@ -627,13 +737,22 @@ export function makeAa12Model(ctx) {
   const PX = RW / 2 + 0.003;   // the side plates' outer face
   // CL-318 (J28: "ejection port needs to look more believable"): a rimmed 85 x 36 mm opening, the recess, the bolt
   // carrier's bright side in it with the bolt's face and the extractor at the front.
-  K.slab(gunBand([[0.04, -0.004], [0.04, 0.046], [0.16, 0.046], [0.16, -0.004], [0.04, -0.004]], 0.003), 0.0035, gunMid, { x: PX + 0.001, bevel: 0.001 });   // the rim
-  K.box(0.004, 0.046, 0.116, gunRubber, PX + 0.0003, 0.021, 0.1, 0, 0, 0, null, 0.001);   // the recess
+  // The dark inset lies on the side panel; only its border has a raised edge.
+  const borderDepth = 0.00275, insetDepth = 0.00035;
+  K.slab(gunBand([[0.04, -0.004], [0.04, 0.046], [0.16, 0.046], [0.16, -0.004], [0.04, -0.004]], 0.003),
+    borderDepth, gunMid, { x: PX + borderDepth / 2, bevel: 0.001 });
+  K.box(insetDepth, 0.0438, 0.1138, gunRubber, PX + insetDepth / 2, 0.021, 0.1, 0, 0, 0, null, 0.00012);
   // The three visible bolt pieces travel together during the AA-12's constant-recoil stroke.
   const recoilBolt = new THREE.Group(); recoilBolt.name = 'recoil-bolt'; gun.add(recoilBolt);
-  recoilBolt.add(K.box(0.004, 0.03, 0.07, gunMetal, PX + 0.0008, 0.021, 0.08, 0, 0, 0, null, 0.001));     // the carrier's side
-  recoilBolt.add(K.box(0.004, 0.03, 0.016, gunMid, PX + 0.0009, 0.021, 0.124, 0, 0, 0, null, 0.001));     // the bolt's face
-  recoilBolt.add(K.box(0.005, 0.008, 0.014, gunDark, PX + 0.001, 0.036, 0.13, 0, 0, 0, null, 0.001));     // the extractor
+  // The animated highlights share the inset's front plane at their backs.
+  // Keep their previous outer faces, child order and pose coordinates.
+  const highlight = (front, h, length, material, y, z) => {
+    const depth = front - insetDepth;
+    K.box(depth, h, length, material, PX + insetDepth + depth / 2, y, z, 0, 0, 0, recoilBolt, 0.001);
+  };
+  highlight(0.0028, 0.03, 0.07, gunMetal, 0.021, 0.08);
+  highlight(0.0029, 0.03, 0.016, gunMid, 0.021, 0.124);
+  highlight(0.0035, 0.008, 0.014, gunDark, 0.036, 0.13);
   gun.userData.recoilBolt = recoilBolt;
   // CL-322: the stroke seen through the port. grp is this group or the view gun's copy of it (the same three children);
   // s the stroke back (>= 0). The carrier's side is trimmed to what is still in the opening (z 0.043-0.157), the face and
@@ -677,8 +796,8 @@ export function makeAa12Model(ctx) {
   // Trim the hidden ends of the three static shells to their shared outlines.
   // The top still follows the original slope across the whole visible panel.
   const polymerTop = z => 0.104 + (z + 0.3) * (0.104 - 0.068) / (0.535 - 0.3);
-  K.slab([[-0.258, 0.11], [-0.31, 0.104], [-0.31, -0.07], [-0.282, -0.074], [-0.26, -0.078],
-    [-0.26, 0.07], [-0.258, 0.07]], 0.08, gunPoly, { bevel: 0.01, segs: 3, parent: stock });
+  K.slab([[-0.26, 0.11], [-0.31, 0.104], [-0.31, -0.07], [-0.282, -0.074], [-0.26, -0.078]],
+    0.08, gunPoly, { bevel: 0.01, segs: 3, parent: stock });
   K.slab([[-0.31, polymerTop(-0.31)], [-0.535, 0.068], [-0.553, 0.06], [-0.553, -0.1], [-0.538, -0.106],
     [-0.47, -0.092], [-0.36, -0.07], [-0.31, -0.0667]], 0.07, gunPoly, { bevel: 0.012, segs: 3, parent: stock });
   K.slab([[-0.33, 0.108], [-0.522, 0.076], [-0.532, polymerTop(-0.532)], [-0.33, polymerTop(-0.33)]],
@@ -698,7 +817,11 @@ export function makeAa12Model(ctx) {
     [-0.06, 0.036], [0.08, 0.032], [0.2, 0.026], [0.3, 0.03], [0.4, 0.025], [0.5, 0.029], [0.6, 0.024], [0.7, 0.028], [0.82, 0.026], [0.96, 0.03],
     [1.03, 0.014], [1.03, -0.022], [0.98, -0.04], [0.8, -0.042], [0.55, -0.042], [0.3, -0.038], [0.1, -0.036], [-0.06, -0.04]
   ]), 0.052, gunPoly, { bevel: 0.012, segs: 3 });
-  for (const sx of [-1, 1]) K.slab(shapedGrip(-0.17, -0.16, 0.19, 0.08, 0.3, [[0.16, 0.012], [0.94, 0.014], [0.94, -0.026], [0.16, -0.022]]), 0.003, gunRubber, { x: sx * 0.0255, bevel: 0.002 });
+  for (const sx of [-1, 1]) {
+    const graphic = K.slab(shapedGrip(-0.17, -0.16, 0.19, 0.08, 0.3,
+      [[0.16, 0.012], [0.94, 0.014], [0.94, -0.026], [0.16, -0.022]]), 0.003, gunRubber, { x: sx * 0.0255, bevel: 0.002 });
+    trimPanelBack(THREE, graphic, sx, 0.026);
+  }
   // CL-318 (J28: "trigger guard needs work"): a real loop, 9 units long from the receiver's underside ahead of the
   // trigger to the grip's front, 5 cm deep, 2 cm wide; the trigger in its middle (18 units ahead of where it was).
   K.slab(gunBand([[-0.03, -0.088], [-0.034, -0.13], [-0.05, -0.142], [-0.1, -0.142], [-0.118, -0.128], [-0.116, -0.1]], 0.009), 0.03, gunPoly, { bevel: 0.0035, segs: 2 });
@@ -768,7 +891,7 @@ export function makeAa12Model(ctx) {
   // Handguard: the box flush with the receiver top, its side vents, the ribs under it for the support hand (its underside
   // -0.082 where the fist rides), its screws; the barrel-nut sleeve, the octagonal shroud with its collars, the front
   // sight on its clamp ring (the post's tip 0.168: the sight line), the barrel and the brake.
-  const forearm = K.slab([[0.23, 0.105], [0.49, 0.105], [0.49, -0.074], [0.475, -0.082], [0.45, -0.082], [0.425, -0.07], [0.29, -0.07], [0.265, -0.082], [0.25, -0.082], [0.23, -0.068]], RW, gunBody, { bevel: 0.005, segs: 2 });
+  const forearm = K.slab([[0.23, 0.105], [0.49, 0.105], [0.49, -0.074], [0.475, -0.082], [0.45, -0.082], [0.425, -0.07], [0.29, -0.07], [0.265, -0.082], casingJoin[1], casingJoin[0]], RW, gunBody, { bevel: 0.005, segs: 2 });
   forearm.userData.clipPart = 'breacher-opaque-front-casing';
   for (const sx of [-1, 1]) {
     for (const z of [0.29, 0.35, 0.41]) K.box(0.004, 0.03, 0.045, gunRubber, sx * (RW / 2 + 0.0003), 0.06, z + 0.02, 0, 0, 0, null, 0.002);   // the side vent slots

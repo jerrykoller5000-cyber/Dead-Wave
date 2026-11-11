@@ -1,0 +1,101 @@
+{
+  "result": {
+    "switch": {
+      "start": {
+        "opened": {
+          "ok": true,
+          "id": "1794401521313-1"
+        },
+        "state": "ACTIVE"
+      },
+      "afterSwap": {
+        "state": "ACTIVE",
+        "reason": "",
+        "score": 0,
+        "shots": 0,
+        "records": 0,
+        "weapon": "m4"
+      },
+      "attack": null,
+      "afterAttack": {
+        "state": "DISQUALIFIED",
+        "reason": "weapon",
+        "score": 0,
+        "shots": 0,
+        "records": 0,
+        "weapon": "pistol"
+      }
+    },
+    "reload": {
+      "start": {
+        "opened": {
+          "ok": true,
+          "id": "1794401522563-2"
+        },
+        "state": "ACTIVE"
+      },
+      "during": {
+        "state": "ACTIVE",
+        "reason": "",
+        "score": 0,
+        "shots": 0,
+        "records": 0,
+        "weapon": "pistol"
+      },
+      "after": {
+        "state": "ACTIVE",
+        "reason": "",
+        "score": 0,
+        "shots": 0,
+        "records": 0,
+        "weapon": "pistol"
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.35,
+        "weapon": null
+      }
+    },
+    "leave": {
+      "start": {
+        "opened": {
+          "ok": true,
+          "id": "1794401527868-3"
+        },
+        "state": "ACTIVE"
+      },
+      "after": {
+        "state": "ABORTED",
+        "reason": "left-range",
+        "score": 0,
+        "shots": 0,
+        "records": 0,
+        "weapon": "pistol"
+      }
+    },
+    "burn": {
+      "start": {
+        "opened": {
+          "ok": true,
+          "id": "1794401528007-4"
+        },
+        "state": "ACTIVE"
+      },
+      "target": 0,
+      "changed": true,
+      "after": {
+        "state": "ABORTED",
+        "reason": "target-burned",
+        "score": 0,
+        "shots": 0,
+        "records": 0,
+        "weapon": "pistol"
+      },
+      "restart": {
+        "ok": false,
+        "reason": "target-burned"
+      }
+    }
+  },
+  "pageErrors": []
+}

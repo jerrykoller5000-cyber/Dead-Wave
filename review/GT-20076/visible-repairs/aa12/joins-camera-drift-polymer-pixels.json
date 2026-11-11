@@ -1,7 +1,7 @@
 {
   "hip": 0.0,
   "aimed": 0.0,
-  "held-left": 0.01,
-  "held-right": 0.01,
+  "held-left": 0.02,
+  "held-right": 0.03,
   "rack": 0.0
 }

@@ -1,0 +1,36 @@
+[
+  {
+    "side": -1,
+    "origin": [
+      -0.0255,
+      0,
+      0
+    ],
+    "movedOrigin": 0,
+    "outsideVertices": 20,
+    "missing": 0,
+    "added": 0,
+    "extremeChange": 0,
+    "pointsBehindBefore": 90,
+    "pointsBehindAfter": 0,
+    "islands": 1,
+    "closed": true
+  },
+  {
+    "side": 1,
+    "origin": [
+      0.0255,
+      0,
+      0
+    ],
+    "movedOrigin": 0,
+    "outsideVertices": 20,
+    "missing": 0,
+    "added": 0,
+    "extremeChange": 0,
+    "pointsBehindBefore": 90,
+    "pointsBehindAfter": 0,
+    "islands": 1,
+    "closed": true
+  }
+]

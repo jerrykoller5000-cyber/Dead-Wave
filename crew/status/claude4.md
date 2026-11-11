@@ -1,33 +1,38 @@
 # Claude 1
 
-state: active
+state: idle
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: CD-1 the glove's folds at the knuckle creases: first-person hand materials double-sided
-touching: game/viewmodel-fit.js, studio/hand-contacts.js, tools/handfit/, tools/tests/clip-check.js, game/viewmodel.js (syncArmMaterials)
-since: 2026-11-11T11:32Z
+task: —
+touching: —
+since: 2026-11-11T12:49Z
 next: CD-1 (08:52Z: back to Claude 1, a fresh session from 08:55Z (Jerr
 blocked-on: —
 last-report: handoffs/2026-11-11-claude4-CD-1-fixes2.md
 
 ## Notes
 
-### FIRST, from CLAUDE DIRECTOR (11:40Z): the GW-4's support forearm covers the first-person screen
-Since your 10:00Z m4.l re-hold (fixes2), the GW-4's left sleeve lies across the centre-left of the screen in every room (review/AG-301/sheet-1-routes-1P-4lights.jpg; compare review/AG-290/after-fp-m4-hot-noon.png, the arm below the gun before). You have five open requests from me (node crew/crew.mjs requests claude4): answer them. Before the glove folds or anything else: fix m4.l so the forearm comes from below (elbow down and out) and check it at the eye in the game, or put your own m4.l and its contacts back to their pre-10:00Z state. Post the at-the-eye picture and reply.
-
-
-### Where things stand (11 Nov 11:52Z, session 4, CD-1 fixes part 2)
-- Landed today (handoffs/2026-11-11-claude4-CD-1-fixes2.md, its addenda): shotgun r round its grip; GW-4 l thumb on the
-  handguard's left (palm low there, fingers under: may want the palm higher); flamer l and r out of the body (tcl334d green);
-  AA-12 r out of the receiver (30.8 -> 4.8: the index's base at the grip/guard junction); minigun r on its rear grip (tcl301
-  green, ChatGPT told); the glove's crease pinholes (viewmodel.js syncArmMaterials: hand materials double-sided).
-- Open: the trigger-finger reds (GW-4 5.2, AK 2.3, Uzi 4.6) asked of Claude 5 (VM_TRIGGER overrides VM_FIT's index); the
-  pistol's 3.7 mm two-hand floor; the revolver's support hand flat beside the firing hand (cup it: wrap round the capped
-  firing glove, c4/augment2.py + fit8 wrap); Antigravity's four lights (asked 10:00Z, 11:50Z). Then CD-4.
-- Cloud copy: /home/claude/gs306 (tar of the PC into _DELETE ME/claude4-cloud-copy-CD-1d.tgz + -img-), exports with
-  /home/claude/work/exp.sh <out> <gun> (fptune5 + /home/claude/fpshot/ex-<gun>.json from mkst3.py), checks c4/depth3.py,
-  /home/claude/work/{inbodies,inside2,bodyinfo,nearbodies}.py. New tools on the PC: c4/roll.py, slide.py, slide2.py,
-  pushgrid.py, gun/thumbside.mjs; gripaxis.py NEAR/RAD. Commit tool: give each staged file a NEW name (a reused
-  stagedPath wrote an older copy once).
+### Where things stand (11 Nov 13:00Z, session 4, CD-1 fixes part 2) — **context nearly full, needs a new session**
+- DONE the director's FIRST note: VM_FIT.m4.l + its contacts are the 08:56Z checkpoint's again (11:58Z, checked against
+  Claude outputs/gw4-fallback/). Lesson: my exports showed only the gloves; ex4 exports now carry the arms and view.html
+  has a 'cam' view (the game camera): judge every hold there before landing. And read WAITING FOR YOU in full every note.
+- Landed today (handoffs/2026-11-11-claude4-CD-1-fixes2.md + addenda): shotgun r round its grip; flamer l and r out of the
+  body (tcl334d green); AA-12 r out of the receiver (30.8 -> 4.8); minigun r on its rear grip (tcl301 green); the glove's
+  crease pinholes (viewmodel.js syncArmMaterials, hand materials double-sided). Forearms at the eye unchanged by these
+  (Claude outputs/CD-1/fixes2/arms-at-the-eye-0858-vs-now.png).
+- Next: (1) the GW-4 thumb forward along the handguard's left with the forearm BELOW the gun: keep the palm on the left but
+  turn the hand about its palm normal so its y (to the elbow) points down/back (my 10:00Z roll was about the bore: y went up,
+  the sleeve rose); check the 'cam' view. Tried 12:55Z (c4/spin.py, 180 deg from the 10:00Z hold): forearm from below in 'cam'
+  but the palm ends on the top-left, fingers AND thumb over the top (an overhand; Claude outputs/CD-1/fixes2/gw4-thumb-try-spin.png):
+  try ~90 deg instead (palm low on the left, y down-back), then fit8 wrap, then gun/thumbside.mjs SIDEV=eye-left. (2) The revolver's support cup: two tries in Claude outputs/CD-1/fixes2/
+  revolver-support-tries.jpg. DIRECTOR (13:2xZ): not deferred to CD-4: right after the GW-4 thumb, give the revolver (and any
+  two-hand pistol hold) a per-gun support-elbow target in game/viewmodel.js (the fit's side), down and in, so the forearm comes from
+  under and the hand can cup round the firing glove; check at the eye with the arms ('cam') in the four lights before landing. (3) The trigger-finger reds
+  (GW-4 5.2, AK 2.3, Uzi 4.6) asked of Claude 5. Pistol 3.7 two-hand floor open. Then CD-4.
+- Cloud: /home/claude/gs306 (PC tar _DELETE ME/claude4-cloud-copy-CD-1d.tgz + -img-; refresh game/viewmodel*.js,
+  studio/hand-contacts.js from the PC first); /home/claude/work/exp.sh|exp4.sh <out> <gun> (exports; ex4 = with arms);
+  /home/claude/fpshot/mkst3.py, mkst4.py make the step files; checks c4/depth3.py and /home/claude/work/{inbodies,inside2,
+  bodyinfo,nearbodies,selfchk}. New on the PC: c4/roll.py, yaw.py(cloud), slide.py, slide2.py, pushgrid.py, gun/thumbside.mjs.
+  Commit tool: a NEW staged file name each time (a reused one wrote an older copy).
 
 ### Who you are (D-145, Jerry 10 Nov 2026)
 You are **Claude 1** on the board (agent `claude4`, task ids `CD-`; Jerry named you, D-146), the crew's fourth Claude: a Claude task of your own on Claude Opus 5.5 (High). Jerry made CLAUDE DIRECTOR (agent `claude`) the game

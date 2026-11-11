@@ -1,0 +1,119 @@
+{
+  "setup": {
+    "index": 2,
+    "box": {
+      "minX": -0.64,
+      "maxX": 0.64,
+      "minY": -199.34,
+      "maxY": -197.1,
+      "minZ": -624.07,
+      "maxZ": -623.93
+    },
+    "walkOriginal": -640.24,
+    "walkTest": -622.43,
+    "player": {
+      "x": -0.3,
+      "y": -200,
+      "z": -624.8900000000001
+    },
+    "hits": 0,
+    "target": {
+      "state": "up",
+      "hits": 0
+    }
+  },
+  "before": {
+    "weapon": "chainsaw",
+    "phase": "prep",
+    "swap": {
+      "swapT": 0,
+      "swapDur": 0.28,
+      "fireCooldown": 0
+    },
+    "player": {
+      "x": -0.3,
+      "y": -200,
+      "z": -624.8900000000001
+    },
+    "blade": {
+      "ax": -0.21132910278640063,
+      "ay": -199.14376231665153,
+      "az": -624.2705250182295,
+      "bx": -0.21132910278640063,
+      "by": -199.18011079673548,
+      "bz": -623.8161690171801,
+      "r": 0.044136301364522214
+    },
+    "fuel": 60,
+    "start": {
+      "phase": "ready",
+      "t": 1.02,
+      "starts": 1,
+      "take": 0,
+      "cord": 0
+    },
+    "flags": {
+      "fireHeld": false,
+      "mouseFireHeld": false,
+      "unarmed": false,
+      "placeMode": null,
+      "buildMode": false,
+      "blocked": false,
+      "reloading": false,
+      "fireCooldown": 0,
+      "dualActive": false,
+      "akimbo": false
+    },
+    "hits": 0,
+    "target": {
+      "state": "up",
+      "hits": 0
+    },
+    "sparks": 3
+  },
+  "after": {
+    "player": {
+      "x": -0.3,
+      "y": -200,
+      "z": -624.8900000000001
+    },
+    "blade": {
+      "ax": -0.20421587676233877,
+      "ay": -199.14599491724948,
+      "az": -624.2689275949439,
+      "bx": -0.20421587676233874,
+      "by": -199.18234339733343,
+      "bz": -623.8145715938945,
+      "r": 0.044136301364522006
+    },
+    "fuel": 58.74284999997912,
+    "start": {
+      "phase": "ready",
+      "t": 1.02,
+      "starts": 1,
+      "take": 0,
+      "cord": 0
+    },
+    "flags": {
+      "fireHeld": true,
+      "mouseFireHeld": false,
+      "unarmed": false,
+      "placeMode": null,
+      "buildMode": false,
+      "blocked": false,
+      "reloading": false,
+      "fireCooldown": 0.12,
+      "dualActive": false,
+      "akimbo": false
+    },
+    "hits": 1,
+    "target": {
+      "state": "down",
+      "hits": 1
+    },
+    "score": 4,
+    "sparks": 5,
+    "bite": 0
+  },
+  "pageErrors": []
+}

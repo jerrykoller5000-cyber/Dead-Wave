@@ -57,7 +57,7 @@ try{
     assert(await page.waitFor('window.TT && DWLoad.snapshot().state==="ready"'));
     await page.evaluate('DWOpening.dismissForTesting()');assert(await page.waitFor('!DWOpening.active'));
     await page.evaluate("document.getElementById('playerName').value='Carry comparison';document.getElementById('modeTraining').click()");
-    assert(await page.waitFor("TT.trainingDbg.state().active && !document.getElementById('trainingBlackout')?.classList.contains('on')"));
+    assert(await page.waitFor("TT.trainingDbg.state().active && !TT.trainingDbg.state().warming && !document.getElementById('trainingBlackout')?.classList.contains('on')"));
     results[mode]=await page.evaluate(`(async()=>{
       const {auditSling}=await import('/tools/tests/weapon-seating.js'),T=TT.THREE;
       TT.flightHold(true);TT.grantAllWeapons();TT.setViewFirstDbg(false);

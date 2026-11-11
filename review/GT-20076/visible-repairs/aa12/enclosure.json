@@ -1,8 +1,13 @@
 {
   "production": {
     "raw": 1,
-    "open": 1,
-    "excused": []
+    "open": 0,
+    "excused": [
+      {
+        "id": "breacher-enclosed-sleeve",
+        "maximum": 0.03349318151754693
+      }
+    ]
   },
   "candidate": {
     "raw": 1,
@@ -19,12 +24,27 @@
     "open": 1,
     "excused": []
   },
+  "productionVariant": {
+    "raw": 1,
+    "open": 1,
+    "excused": []
+  },
   "glazed": {
     "raw": 1,
     "open": 1,
     "excused": []
   },
+  "productionGlazed": {
+    "raw": 1,
+    "open": 1,
+    "excused": []
+  },
   "showing": {
+    "raw": 1,
+    "open": 1,
+    "excused": []
+  },
+  "productionShowing": {
     "raw": 1,
     "open": 1,
     "excused": []

@@ -50,6 +50,14 @@ export const CLIP_EXCEPTIONS = Object.freeze([
     max: 0.100001, // 1 µm allows float32 world-transform rounding
     reason: 'The zero-draw flame-char decal pool begins at the local origin and is repositioned to burn surfaces when used.',
     until: 'The pooled char mesh is created at each burn surface instead.'
+  }),
+  Object.freeze({
+    id: 'breacher-enclosed-sleeve',
+    layers: Object.freeze(['breacher-inner-sleeve', 'breacher-opaque-front-casing']),
+    poses: Object.freeze(['weapon:aa12:rest']),
+    max: 0.033494, // Whole-island geometric upper bound, rounded up to the next micrometre.
+    reason: 'The decorative inner sleeve is completely enclosed by the opaque static casing on the base Breacher.',
+    until: 'The sleeve, casing or their material changes.'
   })
 ]);
 

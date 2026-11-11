@@ -27,7 +27,9 @@ export function createRangeRecords({load=()=>null,save=()=>{},now=()=>Date.now()
   summary(d,l){const b=bests[boardKey(d,l)]||{};return Object.fromEntries(Object.entries(b).map(([k,r])=>[k,{...r}]));},
   commit(d,l,result){
    if(result?.state!=='COMPLETED'||!valid({...result,at:now()})||saved.has(result.id))return null;
-   const key=boardKey(d,l),entry={id:result.id,score:result.score,time:Math.round(result.time*1000)/1000,efficiency:Math.round(result.efficiency*100)/100,at:now()};
+   // Keep the measured time until display formatting. Rounding to milliseconds
+   // here and again to centiseconds can move the board by 0.01s from the result.
+   const key=boardKey(d,l),entry={id:result.id,score:result.score,time:result.time,efficiency:Math.round(result.efficiency*100)/100,at:now()};
    for(const k of ['cleared','missed','shots','firstShot','draws','reloads'])if(result[k]!=null)entry[k]=result[k];entry.goal=targetGoal(d);
    const rows=[...(boards[key]||[])];if(rows.some(r=>r.id===entry.id))return null;saved.add(entry.id);rows.push(entry);rows.sort(compareRangeResults);boards[key]=rows.slice(0,10);
    const prev=bests[key]?{...bests[key]}:{};consider(key,entry);

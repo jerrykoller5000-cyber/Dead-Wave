@@ -85,3 +85,16 @@ Make those (copies or symlinks), or change the three prefixes.
 - **Placing on a new grip**: `c4/transfer.js` / `mktransfer.py` (a hand's hold on one grip carried to another).
 - **Contacts**: `c4/cont10.sh <gun-side> <export>` then `node c4/encode9.mjs cont10 studio/hand-contacts.js` (`CLEAR=` in
   gun/contact.mjs for a margin). After pass 2 tcl334b is green (the revolver's two hands 0.5 mm, right at the line).
+
+## Claude 1's fixes, part 2 (CD-1, 11 Nov ~09-13Z)
+- **Exports with the arms**: `c4/mkst3.py` (step files from g9: setup, take, raise, export; one gun a page) and `c4/mkst4.py`
+  (ex4-*: the export also carries the sleeves, cuffs and bare forearm as drawn); `c4/exp4.sh <out> <gun>...` runs them through
+  the cloud's slot. `look/view.html` draws the arms and has a **`cam` view: the game's own camera** (square crop). Judge every
+  hold there before landing: a fit can be clean on the gun and still put the forearm across the screen (the GW-4, 10:00Z).
+- **Placing**: `c4/gripaxis.py` NEAR=1 (NEARMIN) picks the closed body nearest the grip point (a grip moulded into the stock),
+  RAD limits it; `c4/roll.py` (about the bore), `c4/yaw.py` (about the gun's vertical); `c4/slide.py` / `slide2.py` (along a
+  grip, out of named bodies; slide2 leaves the thumb out of the measure); `c4/pushgrid.py` (the smallest rigid push out of
+  every body, for a hand wedged where two bodies meet); `gun/thumbside.mjs` (the thumb on a chosen side of a bar: SIDEV, WANT,
+  MWANT; RAND for a random search).
+- With the stricter clip-check (bodies split), parts that used to read open are now in the fields: several hands were found
+  inside receivers (flamer, AA-12): slide them down their grips first, then fit8.

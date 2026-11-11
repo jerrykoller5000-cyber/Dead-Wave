@@ -1,0 +1,48 @@
+GP-20099 · Training Ground live end-state and visible record results
+Each line: weapon / drill · cleared/goal · score · shots · time · record · source
+01. pistol/bullseye · 50/50 · score 1500 · 50 shots · 14.67s · record 1 · drills-0-5.json
+02. pistol/call-sign · 10/10 · score 300 · 10 shots · 14.63s · record 1 · drills-0-5.json
+03. pistol/pop-patrol · 12/12 · score 263 · 12 shots · 17.65s · record 1 · drills-0-5.json
+04. pistol/twelve-clean · 12/12 · score 205 · 12 shots · 17.68s · record 1 · drills-0-5.json
+05. pistol/quickdraw · 12/12 · score 345 · 12 shots · 17.65s · record 1 · drills-0-5.json
+06. uzi/three-taps · 10/10 · score 245 · 30 shots · 14.75s · record 1 · drills-5-5.json
+07. uzi/crossfire · 16/16 · score 222 · 16 shots · 11.65s · record 1 · drills-5-5.json
+08. uzi/one-mag · 12/12 · score 260 · 24 shots · 17.75s · record 1 · drills-5-5.json
+09. uzi/blink · 16/16 · score 462 · 16 shots · 27.73s · record 1 · drills-5-5.json
+10. uzi/swarm · 21/21 · score 376 · 42 shots · 11.68s · record 1 · drills-5-5.json
+11. m4/near-far · 12/12 · score 288 · 12 shots · 17.86s · record 1 · drills-10-5.json
+12. m4/identify · 12/12 · score 311 · 12 shots · 17.72s · record 1 · drills-10-5.json
+13. m4/priority · 25/25 · score 350 · 25 shots · 7.12s · record 1 · drills-10-5.json
+14. m4/controlled-pairs · 12/12 · score 245 · 24 shots · 17.79s · record 1 · drills-10-5.json
+15. m4/five-wide · 25/25 · score 350 · 25 shots · 7.12s · record 1 · drills-10-5.json
+16. ak/four-count · 8/8 · score 226 · 32 shots · 11.63s · record 1 · drills-15-5.json
+17. ak/heavy-beat · 16/16 · score 222 · 16 shots · 15.16s · record 1 · drills-15-5.json
+18. ak/torso-ladder · 16/16 · score 318 · 16 shots · 8.58s · record 1 · drills-15-5.json
+19. ak/two-mags · 15/15 · score 380 · 45 shots · 22.31s · record 1 · drills-18-2.json
+20. ak/reset-and-read · 10/10 · score 350 · 10 shots · 19.19s · record 1 · drills-18-2.json
+21. shotgun/seven-on-steel · 50/50 · score 700 · 50 shots · 14.69s · record 1 · drills-20-5.json
+22. shotgun/pump-rhythm · 10/10 · score 140 · 10 shots · 19.18s · record 1 · drills-20-5.json
+23. shotgun/double-door · 10/10 · score 140 · 10 shots · 7.07s · record 1 · drills-20-5.json
+24. shotgun/eight-shells · 8/8 · score 159 · 8 shots · 11.61s · record 1 · drills-20-5.json
+25. shotgun/center-mass · 8/8 · score 191 · 8 shots · 11.62s · record 1 · drills-20-5.json
+26. aa12/breach-wave · 18/18 · score 249 · 18 shots · 8.62s · record 1 · drills-25-5.json
+27. aa12/five-pellet-focus · 50/50 · score 1010 · 50 shots · 14.70s · record 1 · drills-25-5.json
+28. aa12/drum-discipline · 12/12 · score 225 · 12 shots · 17.69s · record 1 · drills-25-5.json
+29. aa12/switchback · 15/15 · score 210 · 15 shots · 22.32s · record 1 · drills-25-5.json
+30. aa12/stairwell · 21/21 · score 293 · 21 shots · 11.66s · record 1 · drills-25-5.json
+31. revolver/six-certainties · 6/6 · score 142 · 6 shots · 8.61s · record 1 · drills-30-5.json
+32. revolver/triple-stack · 15/15 · score 195 · 15 shots · 7.07s · record 1 · drills-30-5.json
+33. revolver/keyhole · 50/50 · score 2250 · 50 shots · 14.66s · record 1 · drills-30-5.json
+34. revolver/duel · 12/12 · score 348 · 12 shots · 8.58s · record 1 · drills-30-5.json
+35. revolver/ring-reader · 10/10 · score 273 · 10 shots · 14.68s · record 1 · drills-30-5.json
+36. sniper/long-glass · 50/50 · score 2250 · 50 shots · 14.67s · record 1 · drills-35-5.json
+37. sniper/four-deep · 16/16 · score 216 · 16 shots · 5.54s · record 1 · drills-35-5.json
+38. sniper/hold-your-breath · 8/8 · score 269 · 8 shots · 16.90s · record 1 · drills-35-5.json
+39. sniper/head-body-echo · 8/8 · score 225 · 8 shots · 11.60s · record 1 · drills-35-5.json
+40. sniper/five-round-test · 5/5 · score 145 · 5 shots · 7.06s · record 1 · drills-35-5.json
+41. pistol/first-steps · 5/5 · score 70 · 5 shots · 9.12s · record 1 · drills-40-5.json
+42. pistol/draw-ready · 1/1 · score 22 · 1 shots · 1.02s · record 1 · drew after beep · drills-40-5.json
+43. m4/reload-ready · 1/1 · score 14 · 2 shots · 3.38s · record 1 · reload completed · drills-40-5.json
+44. pistol/pistol-rifle · 6/6 · score 82 · 6 shots · 11.11s · record 1 · drills-40-5.json
+45. shotgun/three-gun · 9/9 · score 124 · 9 shots · 17.15s · record 1 · drills-40-5.json
+TOTAL 45/45 complete, 726 targets cleared, 0 rejected scored hits, 45 saved records, zero page errors.

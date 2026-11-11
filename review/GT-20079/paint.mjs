@@ -7,7 +7,9 @@ import {save} from '../GT-20076/save.mjs';
 
 const [id,phase]=process.argv.slice(2);
 assert(process.env.DW_GAME_TEST_TOKEN && /^[a-z0-9-]+$/.test(id) && ['before','pre-finish','after','lights','lights-before','riser','rack-before','rack-after','rack-final','carry-fixed'].includes(phase));
-const folder=new URL('./'+id+'/'+phase+'/',import.meta.url);
+const repair=process.argv.includes('--j128');
+if(repair)assert.equal(phase,'after');
+const folder=new URL(repair?'../GT-20076/visible-repairs/'+id+'/paint/':'./'+id+'/'+phase+'/',import.meta.url);
 await mkdir(folder,{recursive:true});
 const server=await serve(fileURLToPath(new URL('../../',import.meta.url)),0);
 const browser=await launch({headless:false});

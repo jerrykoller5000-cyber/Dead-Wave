@@ -1,0 +1,54 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import assert from 'node:assert/strict';
+import {serve} from '../../tools/serve.mjs';
+import {launch} from '../../tools/cdp.mjs';
+
+if(!process.env.DW_GAME_TEST_TOKEN)throw Error('Use the crew game-test slot');
+const root=path.resolve(fileURLToPath(new URL('../..',import.meta.url)));
+const out=path.join(root,'review/GP-20099');
+const server=await serve(root,0),browser=await launch({headless:false,args:['--window-size=1280,720']});
+let page;
+try{
+  page=await browser.newPage({width:1280,height:720});
+  await page.goto(`${server.origin}/index.html?debug=1&raf=timer`);
+  if(!await page.waitFor('!!window.TT && DWLoad?.snapshot().state==="ready"',{timeout:90000}))throw Error('boot timed out');
+  await page.evaluate(`(()=>{DWOpening.dismissForTesting();document.getElementById('playerName').value='GP-20099 interruptions';document.getElementById('modeTraining').click()})()`);
+  if(!await page.waitFor('TT.trainingDbg.state().active && !document.getElementById("trainingBlackout")?.classList.contains("on")',{timeout:60000}))throw Error('Training timed out');
+  const result=await page.evaluate(`(async()=>{
+    const T=TT,tg=T.trainingDbg.tg(),F=T.rangeDbg.feature();
+    const {RANGE_DRILLS}=await import('/ui/range-drills.js');
+    const d=RANGE_DRILLS.find(x=>x.id==='first-steps');
+    const front=tg.stations.rangeConsole.front;
+    T.player.position.set(front.x,tg.floorY,front.z);T.grantAllWeapons();T.setUnarmedDbg(false);
+    const tick=async n=>{for(let i=0;i<n;i++){tg.update(.25);F.tick(.25);if(i%8===7)await new Promise(requestAnimationFrame);}};
+    const start=async()=>{F.open();const opened=F.start(d);await tick(40);return {opened,state:F.read().state};};
+    const snapshot=()=>{const s=F.read();return {state:s.state,reason:s.result?.reason||'',score:s.score,shots:s.stats.shots,records:F.records.list(d,s.loadout).length,weapon:T.getCurrentWeapon()}};
+    const cases={};
+    T.setWeapon(T.WEAPON_ORDER.indexOf('pistol'));
+    cases.switch={start:await start()};T.setWeapon(T.WEAPON_ORDER.indexOf('m4'));F.tick(.25);cases.switch.afterSwap=snapshot();
+    cases.switch.attack=F.attack('m4');cases.switch.afterAttack=snapshot();F.exit();
+    T.setWeapon(T.WEAPON_ORDER.indexOf('pistol'));
+    cases.reload={start:await start()};T.setAmmoDbg('pistol',0);cases.reload.began=T.startReload();cases.reload.during=snapshot();
+    for(let i=0;i<80&&T.getReloadDbg().timer>0;i++)await new Promise(r=>setTimeout(r,100));
+    cases.reload.after=snapshot();cases.reload.reload=T.getReloadDbg();F.exit();
+    cases.leave={start:await start()};T.player.position.x=tg.origin.x+9;F.check();cases.leave.after=snapshot();F.exit();
+    T.player.position.set(front.x,tg.floorY,front.z);
+    cases.burn={start:await start()};const target=0;cases.burn.target=target;
+    cases.burn.changed=F.burn(target,{igniteS:.1,burnS:.1});cases.burn.after=snapshot();cases.burn.restart=F.start(d);F.exit();
+    return cases;
+  })()`);
+  fs.writeFileSync(path.join(out,'drill-interruptions.json'),JSON.stringify({result,pageErrors:page.errors},null,2));
+  assert.equal(result.switch.afterAttack.state,'DISQUALIFIED');
+  assert.equal(result.switch.afterAttack.reason,'weapon');
+  assert.equal(result.switch.afterAttack.records,0);
+  assert.equal(result.reload.after.state,'ACTIVE');
+  assert.equal(result.reload.reload.timer,0);
+  assert.equal(result.leave.after.reason,'left-range');
+  assert.equal(result.leave.after.records,0);
+  assert.equal(result.burn.after.reason,'target-burned');
+  assert.equal(result.burn.restart.reason,'target-burned');
+  assert.deepEqual(page.errors,[]);
+  console.log('PASS drill interruptions: wrong gun disqualified, reload survives and completes, leave aborts, burned target aborts and blocks restart; no records, no page errors');
+}finally{if(page)await page.close();await browser.close();await server.close();}
