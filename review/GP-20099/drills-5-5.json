@@ -1,0 +1,365 @@
+[
+  {
+    "weapon": "uzi",
+    "id": "three-taps",
+    "mode": "burst",
+    "expected": 10,
+    "started": true,
+    "reason": null,
+    "states": [
+      "COUNTDOWN",
+      "ACTIVE",
+      "IDLE"
+    ],
+    "raised": 10,
+    "hitAccepted": 30,
+    "hitRejected": 0,
+    "zoneMissing": [],
+    "firstHud": "Three Taps\nLIVE\n0 points\n30s remaining\n\nUse Wasp SMG. Aim for any scoring zone. Hits to clear each plate: 3.\n\nWave 1/10 · 0 plates cleared\nEscape: abort drill",
+    "lastHud": "Three TapsLIVE220 points16s remainingUse Wasp SMG. Aim for any scoring zone. Hits to clear each plate: 3.Wave 10/10 · 10 plates clearedEscape: abort drill",
+    "result": {
+      "id": "1794400499538-1",
+      "state": "COMPLETED",
+      "reason": "",
+      "valid": true,
+      "score": 245,
+      "time": 14.750000000029802,
+      "firstShot": 0.5,
+      "efficiency": 100,
+      "weapon": "uzi",
+      "drill": "three-taps",
+      "loadout": "{\"mode\":\"auto\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+      "at": 1794400500038,
+      "base": 120,
+      "bonuses": 125,
+      "deductions": 0,
+      "shots": 30,
+      "units": 30,
+      "attackSeconds": 0,
+      "contactSeconds": 0,
+      "cleared": 10,
+      "missed": 0,
+      "draws": 0,
+      "reloads": 0
+    },
+    "reportText": "Choose a drill\nFIRING RANGE / DRILL CONTROL\n×\n\nChoose a weapon, pick a drill, read the four steps, then press Start. Work from Learn through Practice to Challenge.\n\nLast drill result\nThree Taps\n245\n\nDRILL COMPLETE\n\nRun time: 14.75s\nShot accuracy: 100.0%\nPlates cleared: 10/10\nShots fired: 30\nFirst shot after beep: 0.50s\n\nBase 120 + bonuses 125 − deductions 0\n\nNew personal record: Best score · Fastest full clear · Best full-clear accuracy\n\n1. Learn\n→\n2. Practice\n→\n3. Challenge\n1. Weapon\nPistol\nWasp SMG\nGW-4 Carbine\nKR-7 Rifle\nShotgun\nBreacher-12\nRevolver\nSniper\n2. Drill\n1\nLEARN\nFirst Five\nFive close plates, one at a time. Any scoring zone counts; take your time and learn the range.\n2\nLEARN\nDraw on the Beep\nStart holstered. After the beep, draw with Tab and clear one close plate.\n3\nPRACTICE\nBullseye Circuit\nClear five plates by hitting only their body bullseyes.\n4\nPRACTICE\nCall Sign\nAlternate called head and bullseye shots, one plate at a time.\n5\nPRACTICE\nPop Patrol\nFollow an unpredictable left-to-right pop-up patrol; quick hits earn a speed bonus.\n6\nPRACTICE\nTwelve Clean\nClear twelve plates with twelve rounds. Every wasted shot costs an opportunity.\n7\nCHALLENGE\nQuickdraw Countdown\nTwelve reaction rounds; each exposure gets shorter. Base semi-auto is enough.\n8\nCHALLENGE\nPistol / Rifle Relay\nSix single-plate stages alternate pistol and carbine. Follow the weapon call before firing.\nLEARN\nFirst Five\nStart drill\nBriefing\nPersonal bests\n\nFive close plates, one at a time. Any scoring zone counts; take your time and learn the range.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates.\nUse Pistol. Aim for any scoring zone. Hits to clear each plate: 1.\nFollow each new target wave. A plate drops when its required hits are complete.\nPlates to clear: 5\nTime limit: 45s\nLane order: 1 → 2 → 3 → 4 → 5\n\nWeapons required: Pistol\n\nHow points and penalties work\n\nSelect a drill at the range console. Watch the overhead board for the countdown, instructions and final score.",
+    "recordCount": 1,
+    "action": "",
+    "ui": {
+      "result": {
+        "score": "245",
+        "metrics": "Run time: 14.75s\nShot accuracy: 100.0%\nPlates cleared: 10/10\nShots fired: 30\nFirst shot after beep: 0.50s",
+        "status": "DRILL COMPLETE"
+      },
+      "board": {
+        "best": "Best score\n245\nFastest full clear\n14.75s\nBest full-clear accuracy\n100.0%",
+        "history": "Score: 245\nRun time: 14.75s\nShot accuracy: 100.0%\nPlates cleared: 10/10\n11/11/2026"
+      }
+    },
+    "saved": {
+      "id": "1794400499538-1",
+      "score": 245,
+      "time": 14.75,
+      "efficiency": 100,
+      "at": 1794400500044,
+      "cleared": 10,
+      "missed": 0,
+      "shots": 30,
+      "firstShot": 0.5,
+      "draws": 0,
+      "reloads": 0,
+      "goal": 10
+    }
+  },
+  {
+    "weapon": "uzi",
+    "id": "crossfire",
+    "mode": "groups",
+    "expected": 16,
+    "started": true,
+    "reason": null,
+    "states": [
+      "COUNTDOWN",
+      "ACTIVE",
+      "IDLE"
+    ],
+    "raised": 8,
+    "hitAccepted": 16,
+    "hitRejected": 0,
+    "zoneMissing": [],
+    "firstHud": "Crossfire\nLIVE\n0 points\n30s remaining\n\nUse Wasp SMG. Aim for any scoring zone. Hits to clear each plate: 1.\n\nWave 1/8 · 0 plates cleared\nEscape: abort drill",
+    "lastHud": "CrossfireLIVE222 points19s remainingUse Wasp SMG. Aim for any scoring zone. Hits to clear each plate: 1.Wave 8/8 · 16 plates clearedEscape: abort drill",
+    "result": {
+      "id": "1794400500578-2",
+      "state": "COMPLETED",
+      "reason": "",
+      "valid": true,
+      "score": 222,
+      "time": 11.653300000011921,
+      "firstShot": 0.5,
+      "efficiency": 100,
+      "weapon": "uzi",
+      "drill": "crossfire",
+      "loadout": "{\"mode\":\"auto\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+      "at": 1794400500939,
+      "base": 62,
+      "bonuses": 160,
+      "deductions": 0,
+      "shots": 16,
+      "units": 16,
+      "attackSeconds": 0,
+      "contactSeconds": 0,
+      "cleared": 16,
+      "missed": 0,
+      "draws": 0,
+      "reloads": 0
+    },
+    "reportText": "Choose a drill\nFIRING RANGE / DRILL CONTROL\n×\n\nChoose a weapon, pick a drill, read the four steps, then press Start. Work from Learn through Practice to Challenge.\n\nLast drill result\nCrossfire\n222\n\nDRILL COMPLETE\n\nRun time: 11.65s\nShot accuracy: 100.0%\nPlates cleared: 16/16\nShots fired: 16\nFirst shot after beep: 0.50s\n\nBase 62 + bonuses 160 − deductions 0\n\nNew personal record: Best score · Fastest full clear · Best full-clear accuracy\n\n1. Learn\n→\n2. Practice\n→\n3. Challenge\n1. Weapon\nPistol\nWasp SMG\nGW-4 Carbine\nKR-7 Rifle\nShotgun\nBreacher-12\nRevolver\nSniper\n2. Drill\n1\nLEARN\nThree Taps\nPut three scoring hits on each plate before it folds. Short controlled bursts win.\n2\nPRACTICE\nCrossfire\nTwo opposing plates rise together. Transition rapidly between lanes.\n3\nPRACTICE\nOne Magazine\nClear plates with two hits each using only 32 rounds.\n4\nCHALLENGE\nBlink\nSixteen brief single-plate exposures reward fast acquisition.\n5\nCHALLENGE\nSwarm Control\nGroups grow from one plate to five. Land two hits on each plate.\nLEARN\nThree Taps\nStart drill\nBriefing\nPersonal bests\nYour personal records\nBest score\n245\nFastest full clear\n14.75s\nBest full-clear accuracy\n100.0%\n\nSpeed and accuracy records require every plate cleared, with no missed plates. Records are separate for each drill and weapon setup.\n\nBest score\nFastest full clear\nBest full-clear accuracy\nScore: 245\nRun time: 14.75s\nShot accuracy: 100.0%\nPlates cleared: 10/10\n11/11/2026\n\nSelect a drill at the range console. Watch the overhead board for the countdown, instructions and final score.",
+    "recordCount": 1,
+    "action": "",
+    "ui": {
+      "result": {
+        "score": "222",
+        "metrics": "Run time: 11.65s\nShot accuracy: 100.0%\nPlates cleared: 16/16\nShots fired: 16\nFirst shot after beep: 0.50s",
+        "status": "DRILL COMPLETE"
+      },
+      "board": {
+        "best": "Best score\n222\nFastest full clear\n11.65s\nBest full-clear accuracy\n100.0%",
+        "history": "Score: 222\nRun time: 11.65s\nShot accuracy: 100.0%\nPlates cleared: 16/16\n11/11/2026"
+      }
+    },
+    "saved": {
+      "id": "1794400500578-2",
+      "score": 222,
+      "time": 11.653,
+      "efficiency": 100,
+      "at": 1794400500942,
+      "cleared": 16,
+      "missed": 0,
+      "shots": 16,
+      "firstShot": 0.5,
+      "draws": 0,
+      "reloads": 0,
+      "goal": 16
+    }
+  },
+  {
+    "weapon": "uzi",
+    "id": "one-mag",
+    "mode": "budget",
+    "expected": 12,
+    "started": true,
+    "reason": null,
+    "states": [
+      "COUNTDOWN",
+      "ACTIVE",
+      "IDLE"
+    ],
+    "raised": 12,
+    "hitAccepted": 24,
+    "hitRejected": 0,
+    "zoneMissing": [],
+    "firstHud": "One Magazine\nLIVE\n0 points\n30s remaining\n\nUse Wasp SMG. Aim for any scoring zone. Hits to clear each plate: 2.\n\nWave 1/12 · 0 plates cleared\nEscape: abort drill",
+    "lastHud": "One MagazineLIVE210 points13s remainingUse Wasp SMG. Aim for any scoring zone. Hits to clear each plate: 2.Wave 12/12 · 12 plates clearedEscape: abort drill",
+    "result": {
+      "id": "1794400501196-3",
+      "state": "COMPLETED",
+      "reason": "",
+      "valid": true,
+      "score": 260,
+      "time": 17.74659999999404,
+      "firstShot": 0.5,
+      "efficiency": 100,
+      "weapon": "uzi",
+      "drill": "one-mag",
+      "loadout": "{\"mode\":\"auto\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+      "at": 1794400501654,
+      "base": 90,
+      "bonuses": 170,
+      "deductions": 0,
+      "shots": 24,
+      "units": 24,
+      "attackSeconds": 0,
+      "contactSeconds": 0,
+      "cleared": 12,
+      "missed": 0,
+      "draws": 0,
+      "reloads": 0
+    },
+    "reportText": "Choose a drill\nFIRING RANGE / DRILL CONTROL\n×\n\nChoose a weapon, pick a drill, read the four steps, then press Start. Work from Learn through Practice to Challenge.\n\nLast drill result\nOne Magazine\n260\n\nDRILL COMPLETE\n\nRun time: 17.75s\nShot accuracy: 100.0%\nPlates cleared: 12/12\nShots fired: 24\nFirst shot after beep: 0.50s\n\nBase 90 + bonuses 170 − deductions 0\n\nNew personal record: Best score · Fastest full clear · Best full-clear accuracy\n\n1. Learn\n→\n2. Practice\n→\n3. Challenge\n1. Weapon\nPistol\nWasp SMG\nGW-4 Carbine\nKR-7 Rifle\nShotgun\nBreacher-12\nRevolver\nSniper\n2. Drill\n1\nLEARN\nThree Taps\nPut three scoring hits on each plate before it folds. Short controlled bursts win.\n2\nPRACTICE\nCrossfire\nTwo opposing plates rise together. Transition rapidly between lanes.\n3\nPRACTICE\nOne Magazine\nClear plates with two hits each using only 32 rounds.\n4\nCHALLENGE\nBlink\nSixteen brief single-plate exposures reward fast acquisition.\n5\nCHALLENGE\nSwarm Control\nGroups grow from one plate to five. Land two hits on each plate.\nPRACTICE\nCrossfire\nStart drill\nBriefing\nPersonal bests\nYour personal records\nBest score\n222\nFastest full clear\n11.65s\nBest full-clear accuracy\n100.0%\n\nSpeed and accuracy records require every plate cleared, with no missed plates. Records are separate for each drill and weapon setup.\n\nBest score\nFastest full clear\nBest full-clear accuracy\nScore: 222\nRun time: 11.65s\nShot accuracy: 100.0%\nPlates cleared: 16/16\n11/11/2026\n\nSelect a drill at the range console. Watch the overhead board for the countdown, instructions and final score.",
+    "recordCount": 1,
+    "action": "",
+    "ui": {
+      "result": {
+        "score": "260",
+        "metrics": "Run time: 17.75s\nShot accuracy: 100.0%\nPlates cleared: 12/12\nShots fired: 24\nFirst shot after beep: 0.50s",
+        "status": "DRILL COMPLETE"
+      },
+      "board": {
+        "best": "Best score\n260\nFastest full clear\n17.75s\nBest full-clear accuracy\n100.0%",
+        "history": "Score: 260\nRun time: 17.75s\nShot accuracy: 100.0%\nPlates cleared: 12/12\n11/11/2026"
+      }
+    },
+    "saved": {
+      "id": "1794400501196-3",
+      "score": 260,
+      "time": 17.747,
+      "efficiency": 100,
+      "at": 1794400501657,
+      "cleared": 12,
+      "missed": 0,
+      "shots": 24,
+      "firstShot": 0.5,
+      "draws": 0,
+      "reloads": 0,
+      "goal": 12
+    }
+  },
+  {
+    "weapon": "uzi",
+    "id": "blink",
+    "mode": "sequence",
+    "expected": 16,
+    "started": true,
+    "reason": null,
+    "states": [
+      "COUNTDOWN",
+      "ACTIVE",
+      "IDLE"
+    ],
+    "raised": 16,
+    "hitAccepted": 16,
+    "hitRejected": 0,
+    "zoneMissing": [],
+    "firstHud": "Blink\nLIVE\n0 points\n30s remaining\n\nUse Wasp SMG. Aim for any scoring zone. Hits to clear each plate: 1.\n\nWave 1/16 · 0 plates cleared\nEscape: abort drill",
+    "lastHud": "BlinkLIVE462 points3s remainingUse Wasp SMG. Aim for any scoring zone. Hits to clear each plate: 1.Wave 16/16 · 16 plates clearedEscape: abort drill",
+    "result": {
+      "id": "1794400501927-4",
+      "state": "COMPLETED",
+      "reason": "",
+      "valid": true,
+      "score": 462,
+      "time": 27.728699999988077,
+      "firstShot": 0.5,
+      "efficiency": 100,
+      "weapon": "uzi",
+      "drill": "blink",
+      "loadout": "{\"mode\":\"auto\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+      "at": 1794400502643,
+      "base": 62,
+      "bonuses": 400,
+      "deductions": 0,
+      "shots": 16,
+      "units": 16,
+      "attackSeconds": 0,
+      "contactSeconds": 0,
+      "cleared": 16,
+      "missed": 0,
+      "draws": 0,
+      "reloads": 0
+    },
+    "reportText": "Choose a drill\nFIRING RANGE / DRILL CONTROL\n×\n\nChoose a weapon, pick a drill, read the four steps, then press Start. Work from Learn through Practice to Challenge.\n\nLast drill result\nBlink\n462\n\nDRILL COMPLETE\n\nRun time: 27.73s\nShot accuracy: 100.0%\nPlates cleared: 16/16\nShots fired: 16\nFirst shot after beep: 0.50s\n\nBase 62 + bonuses 400 − deductions 0\n\nNew personal record: Best score · Fastest full clear · Best full-clear accuracy\n\n1. Learn\n→\n2. Practice\n→\n3. Challenge\n1. Weapon\nPistol\nWasp SMG\nGW-4 Carbine\nKR-7 Rifle\nShotgun\nBreacher-12\nRevolver\nSniper\n2. Drill\n1\nLEARN\nThree Taps\nPut three scoring hits on each plate before it folds. Short controlled bursts win.\n2\nPRACTICE\nCrossfire\nTwo opposing plates rise together. Transition rapidly between lanes.\n3\nPRACTICE\nOne Magazine\nClear plates with two hits each using only 32 rounds.\n4\nCHALLENGE\nBlink\nSixteen brief single-plate exposures reward fast acquisition.\n5\nCHALLENGE\nSwarm Control\nGroups grow from one plate to five. Land two hits on each plate.\nPRACTICE\nOne Magazine\nStart drill\nBriefing\nPersonal bests\nYour personal records\nBest score\n260\nFastest full clear\n17.75s\nBest full-clear accuracy\n100.0%\n\nSpeed and accuracy records require every plate cleared, with no missed plates. Records are separate for each drill and weapon setup.\n\nBest score\nFastest full clear\nBest full-clear accuracy\nScore: 260\nRun time: 17.75s\nShot accuracy: 100.0%\nPlates cleared: 12/12\n11/11/2026\n\nSelect a drill at the range console. Watch the overhead board for the countdown, instructions and final score.",
+    "recordCount": 1,
+    "action": "",
+    "ui": {
+      "result": {
+        "score": "462",
+        "metrics": "Run time: 27.73s\nShot accuracy: 100.0%\nPlates cleared: 16/16\nShots fired: 16\nFirst shot after beep: 0.50s",
+        "status": "DRILL COMPLETE"
+      },
+      "board": {
+        "best": "Best score\n462\nFastest full clear\n27.73s\nBest full-clear accuracy\n100.0%",
+        "history": "Score: 462\nRun time: 27.73s\nShot accuracy: 100.0%\nPlates cleared: 16/16\n11/11/2026"
+      }
+    },
+    "saved": {
+      "id": "1794400501927-4",
+      "score": 462,
+      "time": 27.729,
+      "efficiency": 100,
+      "at": 1794400502645,
+      "cleared": 16,
+      "missed": 0,
+      "shots": 16,
+      "firstShot": 0.5,
+      "draws": 0,
+      "reloads": 0,
+      "goal": 16
+    }
+  },
+  {
+    "weapon": "uzi",
+    "id": "swarm",
+    "mode": "ladder",
+    "expected": 21,
+    "started": true,
+    "reason": null,
+    "states": [
+      "COUNTDOWN",
+      "ACTIVE",
+      "IDLE"
+    ],
+    "raised": 8,
+    "hitAccepted": 42,
+    "hitRejected": 0,
+    "zoneMissing": [],
+    "firstHud": "Swarm Control\nLIVE\n0 points\n30s remaining\n\nUse Wasp SMG. Aim for any scoring zone. Hits to clear each plate: 2.\n\nWave 1/8 · 0 plates cleared\nEscape: abort drill",
+    "lastHud": "Swarm ControlLIVE376 points19s remainingUse Wasp SMG. Aim for any scoring zone. Hits to clear each plate: 2.Wave 8/8 · 21 plates clearedEscape: abort drill",
+    "result": {
+      "id": "1794400502862-5",
+      "state": "COMPLETED",
+      "reason": "",
+      "valid": true,
+      "score": 376,
+      "time": 11.682800000011921,
+      "firstShot": 0.5,
+      "efficiency": 100,
+      "weapon": "uzi",
+      "drill": "swarm",
+      "loadout": "{\"mode\":\"auto\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+      "at": 1794400503299,
+      "base": 166,
+      "bonuses": 210,
+      "deductions": 0,
+      "shots": 42,
+      "units": 42,
+      "attackSeconds": 0,
+      "contactSeconds": 0,
+      "cleared": 21,
+      "missed": 0,
+      "draws": 0,
+      "reloads": 0
+    },
+    "reportText": "Choose a drill\nFIRING RANGE / DRILL CONTROL\n×\n\nChoose a weapon, pick a drill, read the four steps, then press Start. Work from Learn through Practice to Challenge.\n\nLast drill result\nSwarm Control\n376\n\nDRILL COMPLETE\n\nRun time: 11.68s\nShot accuracy: 100.0%\nPlates cleared: 21/21\nShots fired: 42\nFirst shot after beep: 0.50s\n\nBase 166 + bonuses 210 − deductions 0\n\nNew personal record: Best score · Fastest full clear · Best full-clear accuracy\n\n1. Learn\n→\n2. Practice\n→\n3. Challenge\n1. Weapon\nPistol\nWasp SMG\nGW-4 Carbine\nKR-7 Rifle\nShotgun\nBreacher-12\nRevolver\nSniper\n2. Drill\n1\nLEARN\nThree Taps\nPut three scoring hits on each plate before it folds. Short controlled bursts win.\n2\nPRACTICE\nCrossfire\nTwo opposing plates rise together. Transition rapidly between lanes.\n3\nPRACTICE\nOne Magazine\nClear plates with two hits each using only 32 rounds.\n4\nCHALLENGE\nBlink\nSixteen brief single-plate exposures reward fast acquisition.\n5\nCHALLENGE\nSwarm Control\nGroups grow from one plate to five. Land two hits on each plate.\nCHALLENGE\nBlink\nStart drill\nBriefing\nPersonal bests\nYour personal records\nBest score\n462\nFastest full clear\n27.73s\nBest full-clear accuracy\n100.0%\n\nSpeed and accuracy records require every plate cleared, with no missed plates. Records are separate for each drill and weapon setup.\n\nBest score\nFastest full clear\nBest full-clear accuracy\nScore: 462\nRun time: 27.73s\nShot accuracy: 100.0%\nPlates cleared: 16/16\n11/11/2026\n\nSelect a drill at the range console. Watch the overhead board for the countdown, instructions and final score.",
+    "recordCount": 1,
+    "action": "",
+    "ui": {
+      "result": {
+        "score": "376",
+        "metrics": "Run time: 11.68s\nShot accuracy: 100.0%\nPlates cleared: 21/21\nShots fired: 42\nFirst shot after beep: 0.50s",
+        "status": "DRILL COMPLETE"
+      },
+      "board": {
+        "best": "Best score\n376\nFastest full clear\n11.68s\nBest full-clear accuracy\n100.0%",
+        "history": "Score: 376\nRun time: 11.68s\nShot accuracy: 100.0%\nPlates cleared: 21/21\n11/11/2026"
+      }
+    },
+    "saved": {
+      "id": "1794400502862-5",
+      "score": 376,
+      "time": 11.683,
+      "efficiency": 100,
+      "at": 1794400503302,
+      "cleared": 21,
+      "missed": 0,
+      "shots": 42,
+      "firstShot": 0.5,
+      "draws": 0,
+      "reloads": 0,
+      "goal": 21
+    }
+  },
+  {
+    "pageErrors": []
+  }
+]

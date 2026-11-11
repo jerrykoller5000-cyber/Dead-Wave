@@ -595,7 +595,9 @@ export function makeAa12Model(ctx) {
   const plateSteel = new THREE.MeshStandardMaterial({color: 0x363c41, metalness: .26, roughness: .52});
   // Receiver: the tall slab-sided box with its rounded top, the pressed side plates on their bolts, the seam lines, the
   // vents along the top edge, the rear's stock seam.
-  const receiver = K.slab([[-0.26, 0.1], [-0.26, -0.074], [-0.242, -0.09], [0.26, -0.09], [0.26, 0.07], [-0.26, 0.07]], RW, coverSteel, { bevel: 0.006, segs: 2 });
+  // The rounded cover supplies the crown. A retraced edge on this flat outline
+  // gave the bevel a spike that projected past its rear seam.
+  const receiver = K.slab([[-0.26, 0.07], [-0.26, -0.074], [-0.242, -0.09], [0.26, -0.09], [0.26, 0.07]], RW, coverSteel, { bevel: 0.006, segs: 2 });
   // Form the rear seam in the rounded cover itself. A straight strip across
   // the crown previously stood clear of both sides when seen from the eye.
   const cover = K.lathe([[0, -.258], [.043, -.258], [.045, -.250], [.045, -.2474], [.0442, -.2469],
@@ -644,7 +646,9 @@ export function makeAa12Model(ctx) {
     face.visible = claw.visible = zf - 0.016 >= 0.043;
     face.position.z = zf - 0.008; claw.position.z = zf - 0.002;
   };
-  K.box(0.004, 0.014, 0.26, gunRubber, -PX - 0.0003, 0.055, 0.025, 0, 0, 0, null, 0.002);
+  // The dark side marking lies flat on the panel. Keep its visible face at its original height.
+  const stripeDepth = 0.0023;
+  K.box(stripeDepth, 0.014, 0.26, gunRubber, -PX - stripeDepth / 2, 0.055, 0.025, 0, 0, 0, null, 0.001);
   // CL-326 (J77): the charging handle is its own group (gun.userData.work, as the GW-4's and KR-7's), at rest where it
   // was at its slot's front, so the reload's hand can pull it back along the slot
   { const work = K.group(-PX - 0.008, 0.05, 0.18); work.name = 'work';
@@ -670,9 +674,15 @@ export function makeAa12Model(ctx) {
   const stock = K.group(0, 0, 0); stock.name = 'fp-stock';
   // CL-318 (J28: "stock needs to transition into the gun not leave a giant shelf on the top portion"): the nose fills the
   // receiver's rear profile up to its rounded top and the comb runs straight back from there, as an AA-12's does.
-  K.slab([[-0.255, 0.11], [-0.31, 0.104], [-0.31, -0.07], [-0.282, -0.074], [-0.255, -0.078]], 0.08, gunPoly, { bevel: 0.01, segs: 3, parent: stock });
-  K.slab([[-0.3, 0.104], [-0.535, 0.068], [-0.553, 0.06], [-0.553, -0.1], [-0.538, -0.106], [-0.47, -0.092], [-0.36, -0.07], [-0.3, -0.066]], 0.07, gunPoly, { bevel: 0.012, segs: 3, parent: stock });
-  K.slab([[-0.33, 0.108], [-0.522, 0.076], [-0.532, 0.066], [-0.33, 0.096]], 0.054, gunPoly, { bevel: 0.006, segs: 2, parent: stock });   // the comb
+  // Trim the hidden ends of the three static shells to their shared outlines.
+  // The top still follows the original slope across the whole visible panel.
+  const polymerTop = z => 0.104 + (z + 0.3) * (0.104 - 0.068) / (0.535 - 0.3);
+  K.slab([[-0.258, 0.11], [-0.31, 0.104], [-0.31, -0.07], [-0.282, -0.074], [-0.26, -0.078],
+    [-0.26, 0.07], [-0.258, 0.07]], 0.08, gunPoly, { bevel: 0.01, segs: 3, parent: stock });
+  K.slab([[-0.31, polymerTop(-0.31)], [-0.535, 0.068], [-0.553, 0.06], [-0.553, -0.1], [-0.538, -0.106],
+    [-0.47, -0.092], [-0.36, -0.07], [-0.31, -0.0667]], 0.07, gunPoly, { bevel: 0.012, segs: 3, parent: stock });
+  K.slab([[-0.33, 0.108], [-0.522, 0.076], [-0.532, polymerTop(-0.532)], [-0.33, polymerTop(-0.33)]],
+    0.054, gunPoly, { bevel: 0.006, segs: 2, parent: stock });
   for (const sx of [-1, 1]) {
     K.slab([[-0.335, 0.04], [-0.5, 0.034], [-0.5, -0.042], [-0.42, -0.054], [-0.335, -0.038]], 0.003, gunPoly, { x: sx * 0.036, bevel: 0.002, parent: stock });
     D.groove(stock, { x: sx * 0.035, y: 0.0, z: -0.42, axis: 'x', side: sx, along: 'z', len: 0.17, w: 0.0008 });   // the moulding seam
@@ -704,11 +714,15 @@ export function makeAa12Model(ctx) {
   gun.userData.magBaseScale = mag.scale.clone();
   K.lathe([[0, -0.065], [0.142, -0.065], [0.154, -0.057], [0.155, -0.044], [0.149, -0.037], [0.149, 0.037], [0.155, 0.044], [0.154, 0.057], [0.142, 0.065], [0, 0.065]], gunAccent, { parent: drumBody, seg: 32 });
   for (const sz of [-1, 1]) {
+    // The decorative face, bead and concentric badges meet at their edges.
+    // Matching the bead's angular divisions keeps its border continuous.
+    const faceLayer = (rt, rb, back, front, material, sides) =>
+      K.cyl(rt, rb, front - back, material, 0, 0, sz * (front + back) / 2, drumBody, sides);
     K.cyl(0.137, 0.137, 0.005, gunBody, 0, 0, sz * 0.065, drumBody, 32);
-    K.tor(0.138, 0.003, gunDark, 0, 0, sz * 0.068, 0, 0, 0, drumBody, Math.PI * 2, 24);
-    K.cyl(0.059, 0.062, 0.009, gunDark, 0, 0, sz * 0.071, drumBody, 24);
-    K.cyl(0.05, 0.052, 0.004, gunBody, 0, 0, sz * 0.077, drumBody, 24);
-    K.cyl(0.017, 0.019, 0.009, gunDark, 0, 0, sz * 0.082, drumBody, 12);
+    K.tor(0.139, 0.002, gunDark, 0, 0, sz * 0.068, 0, 0, 0, drumBody, Math.PI * 2, 32);
+    faceLayer(0.059, 0.062, 0.0675, 0.0755, gunDark, 24);
+    faceLayer(0.05, 0.052, 0.0755, 0.079, gunBody, 24);
+    faceLayer(0.017, 0.019, 0.079, 0.0865, gunDark, 12);
     for (let i = 0; i < 8; i++) { const a = i / 8 * Math.PI * 2; D.screw(drumBody, Math.sin(a) * 0.125, Math.cos(a) * 0.125, sz * 0.0675, { axis: 'z', side: sz, r: 0.0035, kind: 'hex' }); }
   }
   K.box(0.07, 0.012, 0.008, gunDark, 0, 0, 0.088, 0, 0, 0.55, drumBody, 0.002);                   // the winding key on the front hub
@@ -755,13 +769,15 @@ export function makeAa12Model(ctx) {
   // -0.082 where the fist rides), its screws; the barrel-nut sleeve, the octagonal shroud with its collars, the front
   // sight on its clamp ring (the post's tip 0.168: the sight line), the barrel and the brake.
   const forearm = K.slab([[0.23, 0.105], [0.49, 0.105], [0.49, -0.074], [0.475, -0.082], [0.45, -0.082], [0.425, -0.07], [0.29, -0.07], [0.265, -0.082], [0.25, -0.082], [0.23, -0.068]], RW, gunBody, { bevel: 0.005, segs: 2 });
+  forearm.userData.clipPart = 'breacher-opaque-front-casing';
   for (const sx of [-1, 1]) {
     for (const z of [0.29, 0.35, 0.41]) K.box(0.004, 0.03, 0.045, gunRubber, sx * (RW / 2 + 0.0003), 0.06, z + 0.02, 0, 0, 0, null, 0.002);   // the side vent slots
     for (const z of [0.253, 0.463]) for (const y of [-0.045, 0.019, 0.085]) D.screw(gun, sx * RW / 2, y, z, { axis: 'x', side: sx, r: 0.003, kind: 'hex' });
     D.groove(gun, { x: sx * RW / 2, y: 0.0, z: 0.36, axis: 'x', side: sx, along: 'z', len: 0.24, w: 0.0008 });   // the moulding seam
   }
   for (const z of [0.30, 0.33, 0.36, 0.39, 0.42]) K.box(0.07, 0.009, 0.01, gunPoly, 0, -0.0715, z, 0, 0, 0, null, 0.002);
-  K.lathe([[0.02, 0.255], [0.04, 0.255], [0.042, 0.262], [0.042, 0.27], [0.039, 0.275], [0.039, 0.444], [0.02, 0.444]], gunMid, { y: 0.015, seg: 16 });   // GB-174: the barrel nut sleeve
+  const innerSleeve = K.lathe([[0.02, 0.255], [0.04, 0.255], [0.042, 0.262], [0.042, 0.27], [0.039, 0.275], [0.039, 0.444], [0.02, 0.444]], gunMid, { y: 0.015, seg: 16 });
+  innerSleeve.userData.clipPart = 'breacher-inner-sleeve';
   const shroud = ventedSleeve(THREE, gun, gunBody, { z0: 0.448, z1: 0.789, radius: 0.046, wall: 0.004, y: 0.015, faces: 8,
     slots: [[0.467, 0.496], [0.519, 0.548], [0.571, 0.6], [0.623, 0.652], [0.675, 0.704]], ventFaces: [0, 1, 2, 3, 5, 6, 7] });
   for (const z of [0.447, 0.787]) K.lathe([[0.02, z - 0.008], [0.05, z - 0.008], [0.05, z + 0.007], [0.02, z + 0.007]], gunMid, { y: 0.015, seg: 8, phase: Math.PI / 8 });

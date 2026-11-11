@@ -72,7 +72,9 @@ export function createTrainingPerimeter(T,tg) {
     const group=new T.Group();group.name='training-perimeter-'+side;root.add(group);
     const frame=new T.MeshStandardMaterial({color:0x39453e,roughness:.78,metalness:.5});
     const wire=new T.MeshStandardMaterial({color:0x7c8980,roughness:.72,metalness:.55,side:T.DoubleSide});
-    owned.push(frame,wire);const pos=[];
+    const frameFade=frame.clone(),wireFade=wire.clone();
+    for(const m of [frameFade,wireFade]){m.transparent=true;m.depthWrite=false;m.opacity=.999;}
+    owned.push(frame,wire,frameFade,wireFade);const pos=[];
     const strip=(a,b,width,normal)=>{
       const dx=b[0]-a[0],dy=b[1]-a[1],dz=b[2]-a[2];
       let v=new T.Vector3(dx,dy,dz).cross(new T.Vector3(...normal)).normalize().multiplyScalar(width/2);
@@ -102,11 +104,18 @@ export function createTrainingPerimeter(T,tg) {
       }
     }
     const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(pos,3));geo.computeVertexNormals();owned.push(geo);group.add(new T.Mesh(geo,wire));
-    bakeStatic(T,group);group.traverse(m=>{if(m.geometry)owned.push(m.geometry);});
+    bakeStatic(T,group);const frameMeshes=[],wireMeshes=[];
+    group.traverse(m=>{if(m.geometry)owned.push(m.geometry);if(m.material===frame)frameMeshes.push(m);if(m.material===wire)wireMeshes.push(m);});
     const box=new T.Box3().setFromObject(group);
-    entries.push({group,frame,wire,axis:side==='south'?'z':'x',at:side==='south'?layout.room.minZ+tg.build.grid:side==='west'?layout.room.minX+tg.build.grid:layout.room.maxX-tg.build.grid,
+    entries.push({group,frame,wire,frameMeshes,wireMeshes,frameFade,wireFade,faded:false,axis:side==='south'?'z':'x',at:side==='south'?layout.room.minZ+tg.build.grid:side==='west'?layout.room.minX+tg.build.grid:layout.room.maxX-tg.build.grid,
       bounds:side==='south'?[['x',box.min.x,box.max.x],['y',floor,floor+top]]:[['z',box.min.z,box.max.z],['y',floor,floor+top]],opacity:1});
   }
+  const setFaded=(e,fade)=>{
+    if(e.faded===fade)return;
+    e.faded=fade;
+    for(const m of e.frameMeshes)m.material=fade?e.frameFade:e.frame;
+    for(const m of e.wireMeshes)m.material=fade?e.wireFade:e.wire;
+  };
   const solids=layout.segments.map(s=>({minX:Math.min(s.x0,s.x1)-.045,maxX:Math.max(s.x0,s.x1)+.045,minZ:Math.min(s.z0,s.z1)-.045,maxZ:Math.max(s.z0,s.z1)+.045,minY:floor,maxY:floor+top,metal:true,perimeterFence:true,perimeterSide:s.side}));
   tg.solids.push(...solids);const blocker=createTrainingBlockers(solids);let previous=new WeakMap();
   // Reuse the shell's camera-only query: faded wire must not catch the aim cursor.
@@ -116,9 +125,10 @@ export function createTrainingPerimeter(T,tg) {
   if(tg.cutaway)tg.cutaway.ignoreSolid=ignore;
   return {
     group:root,layout,solids,renderSpans,constrain:blocker.constrain,
+    prepareWarmup(){const states=entries.map(e=>e.faded);for(const e of entries)setFaded(e,true);return ()=>entries.forEach((e,i)=>setFaded(e,states[i]));},
     reset(){previous=new WeakMap();},
     keepZombie(z){const p=z.mesh?.position;if(!p)return;const from=previous.get(z)||p;const v=blocker.constrain(p,from,(z.radius||.42)+.06);p.x=v.x;p.z=v.z;previous.set(z,{x:p.x,y:p.y,z:p.z});},
-    update(camera,focus,dt){for(const e of entries){const hide=!focus?.noCutaway&&viewCrossesPlane(camera,focus,e.axis,e.at,e.bounds,.12),want=hide?.08:1;e.opacity+=Math.sign(want-e.opacity)*Math.min(Math.abs(want-e.opacity),Math.max(0,dt)*6);for(const m of [e.frame,e.wire]){const transparent=e.opacity<.995;if(m.transparent!==transparent){m.transparent=transparent;m.needsUpdate=true;}m.opacity=e.opacity;m.depthWrite=!transparent;}}},
+    update(camera,focus,dt){for(const e of entries){const hide=!focus?.noCutaway&&viewCrossesPlane(camera,focus,e.axis,e.at,e.bounds,.12),want=hide?.08:1;e.opacity+=Math.sign(want-e.opacity)*Math.min(Math.abs(want-e.opacity),Math.max(0,dt)*6);e.frameFade.opacity=e.wireFade.opacity=Math.min(e.opacity,.999);setFaded(e,e.opacity<.995);}},
     state:()=>entries.map(e=>({side:e.group.name,opacity:e.opacity})),
     dispose(){root.removeFromParent();if(tg.cutaway?.ignoreSolid===ignore)tg.cutaway.ignoreSolid=oldIgnore;for(const s of solids){const i=tg.solids.indexOf(s);if(i>=0)tg.solids.splice(i,1);}new Set(owned).forEach(o=>o.dispose());}
   };

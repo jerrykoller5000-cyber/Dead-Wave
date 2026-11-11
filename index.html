@@ -54051,22 +54051,26 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     const _AXIS_X = new THREE.Vector3(1, 0, 0);
     // CB-291 (J127, D-139; CLAUDE DIRECTOR 11 Nov, (b)): the shoulder is held inside core/body-limits.js by the IK itself, so
     // the hands stay on the guns. The arm the IK found (q, its parent's space) is swung round the line from the shoulder to
-    // the hand (axis): the hand stays put, the elbow goes round. The smallest swing that puts the shoulder inside the table
+    // the hand (axis): the hand stays put, the elbow goes round. A swing that puts the shoulder inside the table
     // (back, across, and the upper arm's turn read from its hinge, where the elbow points: shoulderAngles) and, with the plate
     // carrier on, the elbow outside it and the upper arm's middle off its front (studio/marine-body.js carrierClearance,
-    // CC-341) is kept; where none is, the least bad. A swing of 0 (the pose already inside) costs one reading.
+    // CC-341) is kept, the most natural of them (below); where none is, the least bad. A pose already inside costs one reading.
     const _shIK = { q: new THREE.Quaternion(), r: new THREE.Quaternion(), e: new THREE.Vector3(), w: new THREE.Vector3(), u: new THREE.Vector3(),
-      f: new THREE.Vector3(), m: new THREE.Vector3(), p: new THREE.Vector3(), E: new THREE.Vector3(), W: new THREE.Vector3() };
-    const SHOULDER_STEP = 5 * Math.PI / 180;
+      f: new THREE.Vector3(), m: new THREE.Vector3(), p: new THREE.Vector3(), E: new THREE.Vector3(), c: {} };
+    const SHOULDER_STEP = 5 * Math.PI / 180, SLEEVE_T = [0.2, 0.35, 0.5, 0.65, 0.8];
     function shoulderBad(armG, side, q, cc) {
       const u = _shIK.u.copy(_shIK.E).applyQuaternion(q), h = _shIK.f.copy(_AXIS_X).applyQuaternion(q);   // the hinge: where the elbow points
       const a = shoulderAngles([u.x, u.y, u.z], [h.x, h.y, h.z], side);
       let bad = shoulderPast(a);
-      if (cc) {   // metres to radians: 1 cm counts as about 6 deg
-        const el = _shIK.p.copy(armG.position).add(u), mid = _shIK.m.copy(armG.position).addScaledVector(u, cc.upperArm.t);
-        bad += 10 * carrierIntrusion(cc, el) + 10 * carrierIntrusion(cc, mid);
+      if (cc) {   // metres to radians: 1 cm counts as about 17 deg (a sleeve through the carrier is the worse of the two)
+        bad += 30 * carrierIntrusion(cc, _shIK.p.copy(armG.position).add(u));   // the elbow
         const fz = cc.upperArm.frontZ + cc.upperArm.margin;
-        if (mid.y >= cc.y[0] && mid.y <= cc.y[1] && Math.abs(mid.x - cc.centre[0]) < cc.radii[0] && mid.z > cc.centre[1] && mid.z < fz) bad += 10 * (fz - mid.z);
+        _shIK.c.margin = cc.upperArm.margin - 0.01; _shIK.c.centre = cc.centre; _shIK.c.radii = cc.radii; _shIK.c.y = cc.y;   // the sleeve's own radius and 3 mm
+        for (const t of SLEEVE_T) {   // along the upper arm: outside the carrier, and off its front where it crosses his chest
+          const pt = _shIK.m.copy(armG.position).addScaledVector(u, t);
+          bad += 30 * carrierIntrusion(_shIK.c, pt);
+          if (t >= 0.3 && pt.y >= cc.y[0] && pt.y <= cc.y[1] && Math.abs(pt.x - cc.centre[0]) < cc.radii[0] && pt.z > cc.centre[1] && pt.z < fz) bad += 30 * (fz - pt.z);
+        }
       }
       return bad;
     }
@@ -54078,16 +54082,20 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const at = (ang) => shoulderBad(armG, side, _shIK.q.setFromAxisAngle(axis, ang).multiply(q), c);
       const b0 = at(0);
       if (b0 <= 1e-6) return;
-      let best = 0, bestBad = b0, found = 0;
-      for (let i = 1; i <= 36 && !found; i++) for (const sg of [1, -1]) {
-        const ang = sg * i * SHOULDER_STEP, b = at(ang);
-        if (b <= 1e-6) { found = ang; break; }
-        if (b < bestBad - 1e-9) { bestBad = b; best = ang; }
+      // Of the swings that put it inside, the most natural elbow: the upper arm turned least and the elbow not above the
+      // shoulder (a reach to the belt keeps it down, not flared up at the table's edge), then the smaller swing; none inside:
+      // the least bad.
+      let best = 0, bestBad = b0, bestTurn = Infinity, found = false;
+      const turnAt = (ang) => { const qq = _shIK.q.setFromAxisAngle(axis, ang).multiply(q), u = _shIK.u.copy(_shIK.E).applyQuaternion(qq), h = _shIK.f.copy(_AXIS_X).applyQuaternion(qq);
+        const a = shoulderAngles([u.x, u.y, u.z], [h.x, h.y, h.z], side); return Math.abs(a.turn == null ? 0 : a.turn) + 0.15 * Math.abs(ang) + Math.max(0, u.y / IK_UPPER); };   // an elbow above the shoulder costs up to 57 deg
+      for (let i = 1; i < 72; i++) {
+        const ang = (i <= 36 ? i : i - 72) * SHOULDER_STEP, b = at(ang);
+        if (b <= 1e-6) { const t = turnAt(ang); if (!found || t < bestTurn) { found = true; bestTurn = t; best = ang; bestBad = 0; } }
+        else if (!found && b < bestBad - 1e-9) { bestBad = b; best = ang; }
       }
-      if (found) {   // the edge between the last bad step and the first good one
-        let lo = found - Math.sign(found) * SHOULDER_STEP, hi = found;
-        for (let k = 0; k < 8; k++) { const m = (lo + hi) / 2; if (at(m) <= 1e-6) hi = m; else lo = m; }
-        best = hi; bestBad = 0;
+      if (found) for (const d of [-2.5, 2.5]) {   // a finer look either side
+        const ang = best + d * Math.PI / 180;
+        if (at(ang) <= 1e-6) { const t = turnAt(ang); if (t < bestTurn) { bestTurn = t; best = ang; } }
       }
       if (mine) { armLimitHits.shoulder = (armLimitHits.shoulder || 0) + 1; if (bestBad > 0) armLimitHits.shoulderShort = (armLimitHits.shoulderShort || 0) + 1; }
       q.premultiply(_shIK.r.setFromAxisAngle(axis, best));
@@ -64868,26 +64876,34 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         for (let i = warmVis.length - 1; i >= 0; i--) { const s = warmVis[i]; s.o.visible = s.vis; s.o.frustumCulled = s.cull; }
         for (const m of meshes) m.frustumCulled = true;
       };
-      let restoreCutaway = null;
-      const finish = () => { if (done) return; done = true; try { restoreCutaway?.(); restoreCutaway = null; } catch (_) {} restoreWarm(); renderer.setAnimationLoop(tick); if (!training.wake) b.classList.remove('on'); };
+      let restoreCutaway = null, restoreMarineFade = null, restorePerimeter = null, restoreContainment = null;
+      const restoreFadePass = () => {
+        try { restoreCutaway?.(); } catch (_) {} restoreCutaway = null;
+        try { restoreMarineFade?.(); } catch (_) {} restoreMarineFade = null;
+        try { restorePerimeter?.(); } catch (_) {} restorePerimeter = null;
+        try { restoreContainment?.(); } catch (_) {} restoreContainment = null;
+      };
+      const finish = () => { if (done) return; done = true; restoreFadePass(); restoreWarm(); renderer.setAnimationLoop(tick); if (!training.wake) b.classList.remove('on'); };
       Promise.resolve()
         .then(() => vmWarm?.ready)
         .then(() => { if (!done) return compileForLiveTarget(); })
         .then(async () => {
           if (done) return;
           warmFrame('training-impacts');
-          if (!done && tg.cutaway?.prepareWarmup) {
-            restoreCutaway = tg.cutaway.prepareWarmup();
-            const pVis = player.visible, vVis = viewmodel?.root ? viewmodel.root.visible : false;
+          if (!done && (tg.cutaway?.prepareWarmup || trainingMarineFade?.prepareWarmup || training.perimeter?.prepareWarmup || training.containment?.prepareWarmup)) {
+            try { restoreCutaway = tg.cutaway?.prepareWarmup?.() || null; } catch (_) {}
+            try { restoreMarineFade = trainingMarineFade?.prepareWarmup?.() || null; } catch (_) {}
+            try { restorePerimeter = training.perimeter?.prepareWarmup?.() || null; } catch (_) {}
+            try { restoreContainment = training.containment?.prepareWarmup?.() || null; } catch (_) {}
+            const vVis = viewmodel?.root ? viewmodel.root.visible : false;
             try {
-              player.visible = false; if (viewmodel?.root) viewmodel.root.visible = false;
+              if (viewmodel?.root) viewmodel.root.visible = false;
               await compileForLiveTarget();
-              player.visible = pVis; if (viewmodel?.root) viewmodel.root.visible = vVis;
-              if (!done) warmFrame('training-cutaway');
+              if (viewmodel?.root) viewmodel.root.visible = vVis;
+              if (!done) warmFrame('training-marine-fade');
             } finally {
-              player.visible = pVis; if (viewmodel?.root) viewmodel.root.visible = vVis;
-              restoreCutaway?.();
-              restoreCutaway = null;
+              if (viewmodel?.root) viewmodel.root.visible = vVis;
+              restoreFadePass();
             }
           }
           if (done) return;

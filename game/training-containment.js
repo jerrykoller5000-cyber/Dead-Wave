@@ -76,8 +76,6 @@ export function createTrainingContainment(T,tg,{makeGun,getZombies,onHit,onShot}
   const walls=tg.cutaway?.state()||[];let changed=false;
   for(const [i,t]of controller.turrets.entries()){const opacity=walls.find(e=>e.side===t.wall)?.opacity??1;if(Math.abs(fadeValues[i]-opacity)>1e-6){fadeValues[i]=opacity;changed=true;}}
   if(changed)fadeAttribute.needsUpdate=true;
-  const solid=fadeValues.every(v=>v>=.995);
-  for(const [source,mat]of fadeMaterials)mat.depthWrite=solid && source.depthWrite;
  }
  const parts=[];template.traverse(o=>{if(!o.isMesh||!o.visible)return;let inBarrel=false;for(let n=o;n;n=n.parent)if(n===barrel)inBarrel=true;
   const mesh=new T.InstancedMesh(fadedGeometry(o.geometry),fadedMaterial(o.material),count);mesh.name='training-containment-'+(inBarrel?'rotor':'gun');mesh.frustumCulled=false;mesh.castShadow=false;mesh.receiveShadow=true;mesh.instanceMatrix.setUsage(T.DynamicDrawUsage);root.add(mesh);

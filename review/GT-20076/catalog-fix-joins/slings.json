@@ -1,0 +1,1386 @@
+{
+  "m4-slot1": {
+    "ends": [
+      {
+        "gunGapMm": null,
+        "gunContact": false,
+        "webContact": true
+      },
+      {
+        "gunGapMm": null,
+        "gunContact": false,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false,
+    "display": {
+      "kind": "m4",
+      "selected": "m4",
+      "unarmed": true,
+      "source": {
+        "visible": true,
+        "meshes": 4,
+        "scale": [
+          0.6740955727336614,
+          0.6740955727336614,
+          0.6740955727336614
+        ],
+        "children": 39
+      },
+      "copy": {
+        "visible": true,
+        "meshes": 4,
+        "scale": [
+          1.1764705882352942,
+          1.1764705882352942,
+          1.1764705882352942
+        ],
+        "children": 1
+      },
+      "inner": {
+        "visible": true,
+        "meshes": 4,
+        "scale": [
+          0.6740955727336614,
+          0.6740955727336614,
+          0.6740955727336614
+        ],
+        "children": 39
+      }
+    }
+  },
+  "m4-slot2": {
+    "ends": [
+      {
+        "gunGapMm": null,
+        "gunContact": false,
+        "webContact": true
+      },
+      {
+        "gunGapMm": null,
+        "gunContact": false,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false,
+    "display": {
+      "kind": "m4",
+      "selected": "m4",
+      "unarmed": true,
+      "source": {
+        "visible": true,
+        "meshes": 4,
+        "scale": [
+          0.6740955727336614,
+          0.6740955727336614,
+          0.6740955727336614
+        ],
+        "children": 39
+      },
+      "copy": {
+        "visible": true,
+        "meshes": 4,
+        "scale": [
+          1.1764705882352942,
+          1.1764705882352942,
+          1.1764705882352942
+        ],
+        "children": 1
+      },
+      "inner": {
+        "visible": true,
+        "meshes": 4,
+        "scale": [
+          0.6740955727336614,
+          0.6740955727336614,
+          0.6740955727336614
+        ],
+        "children": 39
+      }
+    }
+  },
+  "m4-slot1-vest": {
+    "ends": [
+      {
+        "gunGapMm": null,
+        "gunContact": false,
+        "webContact": true
+      },
+      {
+        "gunGapMm": null,
+        "gunContact": false,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false,
+    "display": {
+      "kind": "m4",
+      "selected": "m4",
+      "unarmed": true,
+      "source": {
+        "visible": true,
+        "meshes": 4,
+        "scale": [
+          0.6740955727336614,
+          0.6740955727336614,
+          0.6740955727336614
+        ],
+        "children": 39
+      },
+      "copy": {
+        "visible": true,
+        "meshes": 4,
+        "scale": [
+          1.1764705882352942,
+          1.1764705882352942,
+          1.1764705882352942
+        ],
+        "children": 1
+      },
+      "inner": {
+        "visible": true,
+        "meshes": 4,
+        "scale": [
+          0.6740955727336614,
+          0.6740955727336614,
+          0.6740955727336614
+        ],
+        "children": 39
+      }
+    }
+  },
+  "m4-slot2-vest": {
+    "ends": [
+      {
+        "gunGapMm": null,
+        "gunContact": false,
+        "webContact": true
+      },
+      {
+        "gunGapMm": null,
+        "gunContact": false,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false,
+    "display": {
+      "kind": "m4",
+      "selected": "m4",
+      "unarmed": true,
+      "source": {
+        "visible": true,
+        "meshes": 4,
+        "scale": [
+          0.6740955727336614,
+          0.6740955727336614,
+          0.6740955727336614
+        ],
+        "children": 39
+      },
+      "copy": {
+        "visible": true,
+        "meshes": 4,
+        "scale": [
+          1.1764705882352942,
+          1.1764705882352942,
+          1.1764705882352942
+        ],
+        "children": 1
+      },
+      "inner": {
+        "visible": true,
+        "meshes": 4,
+        "scale": [
+          0.6740955727336614,
+          0.6740955727336614,
+          0.6740955727336614
+        ],
+        "children": 39
+      }
+    }
+  },
+  "ak-slot1": {
+    "error": "Incomplete sling ak (web 1, clips 1/1, weapon 0, scale 1/1/1)",
+    "display": {
+      "kind": "ak",
+      "selected": "ak",
+      "unarmed": true,
+      "source": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.6864180327868853,
+          0.6864180327868853,
+          0.6864180327868853
+        ],
+        "children": 30
+      },
+      "copy": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          1.1764705882352942,
+          1.1764705882352942,
+          1.1764705882352942
+        ],
+        "children": 1
+      },
+      "inner": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.6864180327868853,
+          0.6864180327868853,
+          0.6864180327868853
+        ],
+        "children": 30
+      }
+    }
+  },
+  "ak-slot2": {
+    "error": "Incomplete sling ak (web 1, clips 1/1, weapon 0, scale 1/1/1)",
+    "display": {
+      "kind": "ak",
+      "selected": "ak",
+      "unarmed": true,
+      "source": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.6864180327868853,
+          0.6864180327868853,
+          0.6864180327868853
+        ],
+        "children": 30
+      },
+      "copy": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          1.1764705882352942,
+          1.1764705882352942,
+          1.1764705882352942
+        ],
+        "children": 1
+      },
+      "inner": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.6864180327868853,
+          0.6864180327868853,
+          0.6864180327868853
+        ],
+        "children": 30
+      }
+    }
+  },
+  "ak-slot1-vest": {
+    "error": "Incomplete sling ak (web 1, clips 1/1, weapon 0, scale 1/1/1)",
+    "display": {
+      "kind": "ak",
+      "selected": "ak",
+      "unarmed": true,
+      "source": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.6864180327868853,
+          0.6864180327868853,
+          0.6864180327868853
+        ],
+        "children": 30
+      },
+      "copy": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          1.1764705882352942,
+          1.1764705882352942,
+          1.1764705882352942
+        ],
+        "children": 1
+      },
+      "inner": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.6864180327868853,
+          0.6864180327868853,
+          0.6864180327868853
+        ],
+        "children": 30
+      }
+    }
+  },
+  "ak-slot2-vest": {
+    "error": "Incomplete sling ak (web 1, clips 1/1, weapon 0, scale 1/1/1)",
+    "display": {
+      "kind": "ak",
+      "selected": "ak",
+      "unarmed": true,
+      "source": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.6864180327868853,
+          0.6864180327868853,
+          0.6864180327868853
+        ],
+        "children": 30
+      },
+      "copy": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          1.1764705882352942,
+          1.1764705882352942,
+          1.1764705882352942
+        ],
+        "children": 1
+      },
+      "inner": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.6864180327868853,
+          0.6864180327868853,
+          0.6864180327868853
+        ],
+        "children": 30
+      }
+    }
+  },
+  "aa12-slot1": {
+    "error": "Incomplete sling aa12 (web 1, clips 1/1, weapon 0, scale 1/1/1)",
+    "display": {
+      "kind": "aa12",
+      "selected": "aa12",
+      "unarmed": true,
+      "source": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.6843359655419957,
+          0.6843359655419957,
+          0.6843359655419957
+        ],
+        "children": 47
+      },
+      "copy": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          1.1764705882352942,
+          1.1764705882352942,
+          1.1764705882352942
+        ],
+        "children": 1
+      },
+      "inner": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.6843359655419957,
+          0.6843359655419957,
+          0.6843359655419957
+        ],
+        "children": 47
+      }
+    }
+  },
+  "aa12-slot2": {
+    "error": "Incomplete sling aa12 (web 1, clips 1/1, weapon 0, scale 1/1/1)",
+    "display": {
+      "kind": "aa12",
+      "selected": "aa12",
+      "unarmed": true,
+      "source": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.6843359655419957,
+          0.6843359655419957,
+          0.6843359655419957
+        ],
+        "children": 47
+      },
+      "copy": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          1.1764705882352942,
+          1.1764705882352942,
+          1.1764705882352942
+        ],
+        "children": 1
+      },
+      "inner": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.6843359655419957,
+          0.6843359655419957,
+          0.6843359655419957
+        ],
+        "children": 47
+      }
+    }
+  },
+  "aa12-slot1-vest": {
+    "error": "Incomplete sling aa12 (web 1, clips 1/1, weapon 0, scale 1/1/1)",
+    "display": {
+      "kind": "aa12",
+      "selected": "aa12",
+      "unarmed": true,
+      "source": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.6843359655419957,
+          0.6843359655419957,
+          0.6843359655419957
+        ],
+        "children": 47
+      },
+      "copy": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          1.1764705882352942,
+          1.1764705882352942,
+          1.1764705882352942
+        ],
+        "children": 1
+      },
+      "inner": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.6843359655419957,
+          0.6843359655419957,
+          0.6843359655419957
+        ],
+        "children": 47
+      }
+    }
+  },
+  "aa12-slot2-vest": {
+    "error": "Incomplete sling aa12 (web 1, clips 1/1, weapon 0, scale 1/1/1)",
+    "display": {
+      "kind": "aa12",
+      "selected": "aa12",
+      "unarmed": true,
+      "source": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.6843359655419957,
+          0.6843359655419957,
+          0.6843359655419957
+        ],
+        "children": 47
+      },
+      "copy": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          1.1764705882352942,
+          1.1764705882352942,
+          1.1764705882352942
+        ],
+        "children": 1
+      },
+      "inner": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.6843359655419957,
+          0.6843359655419957,
+          0.6843359655419957
+        ],
+        "children": 47
+      }
+    }
+  },
+  "shotgun-slot1": {
+    "error": "Incomplete sling shotgun (web 1, clips 1/1, weapon 0, scale 1/1/1)",
+    "display": {
+      "kind": "shotgun",
+      "selected": "shotgun",
+      "unarmed": true,
+      "source": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.7934885739664083,
+          0.7934885739664083,
+          0.7934885739664083
+        ],
+        "children": 21
+      },
+      "copy": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          1.1764705882352942,
+          1.1764705882352942,
+          1.1764705882352942
+        ],
+        "children": 1
+      },
+      "inner": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.7934885739664083,
+          0.7934885739664083,
+          0.7934885739664083
+        ],
+        "children": 21
+      }
+    }
+  },
+  "shotgun-slot2": {
+    "error": "Incomplete sling shotgun (web 1, clips 1/1, weapon 0, scale 1/1/1)",
+    "display": {
+      "kind": "shotgun",
+      "selected": "shotgun",
+      "unarmed": true,
+      "source": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.7934885739664083,
+          0.7934885739664083,
+          0.7934885739664083
+        ],
+        "children": 21
+      },
+      "copy": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          1.1764705882352942,
+          1.1764705882352942,
+          1.1764705882352942
+        ],
+        "children": 1
+      },
+      "inner": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.7934885739664083,
+          0.7934885739664083,
+          0.7934885739664083
+        ],
+        "children": 21
+      }
+    }
+  },
+  "shotgun-slot1-vest": {
+    "error": "Incomplete sling shotgun (web 1, clips 1/1, weapon 0, scale 1/1/1)",
+    "display": {
+      "kind": "shotgun",
+      "selected": "shotgun",
+      "unarmed": true,
+      "source": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.7934885739664083,
+          0.7934885739664083,
+          0.7934885739664083
+        ],
+        "children": 21
+      },
+      "copy": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          1.1764705882352942,
+          1.1764705882352942,
+          1.1764705882352942
+        ],
+        "children": 1
+      },
+      "inner": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.7934885739664083,
+          0.7934885739664083,
+          0.7934885739664083
+        ],
+        "children": 21
+      }
+    }
+  },
+  "shotgun-slot2-vest": {
+    "error": "Incomplete sling shotgun (web 1, clips 1/1, weapon 0, scale 1/1/1)",
+    "display": {
+      "kind": "shotgun",
+      "selected": "shotgun",
+      "unarmed": true,
+      "source": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.7934885739664083,
+          0.7934885739664083,
+          0.7934885739664083
+        ],
+        "children": 21
+      },
+      "copy": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          1.1764705882352942,
+          1.1764705882352942,
+          1.1764705882352942
+        ],
+        "children": 1
+      },
+      "inner": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.7934885739664083,
+          0.7934885739664083,
+          0.7934885739664083
+        ],
+        "children": 21
+      }
+    }
+  },
+  "sniper-slot1": {
+    "error": "Incomplete sling sniper (web 1, clips 1/1, weapon 0, scale 1/1/1)",
+    "display": {
+      "kind": "sniper",
+      "selected": "sniper",
+      "unarmed": true,
+      "source": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.7233191680486456,
+          0.7233191680486456,
+          0.7233191680486456
+        ],
+        "children": 41
+      },
+      "copy": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          1.1764705882352942,
+          1.1764705882352942,
+          1.1764705882352942
+        ],
+        "children": 1
+      },
+      "inner": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.7233191680486456,
+          0.7233191680486456,
+          0.7233191680486456
+        ],
+        "children": 41
+      }
+    }
+  },
+  "sniper-slot2": {
+    "error": "Incomplete sling sniper (web 1, clips 1/1, weapon 0, scale 1/1/1)",
+    "display": {
+      "kind": "sniper",
+      "selected": "sniper",
+      "unarmed": true,
+      "source": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.7233191680486456,
+          0.7233191680486456,
+          0.7233191680486456
+        ],
+        "children": 41
+      },
+      "copy": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          1.1764705882352942,
+          1.1764705882352942,
+          1.1764705882352942
+        ],
+        "children": 1
+      },
+      "inner": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.7233191680486456,
+          0.7233191680486456,
+          0.7233191680486456
+        ],
+        "children": 41
+      }
+    }
+  },
+  "sniper-slot1-vest": {
+    "error": "Incomplete sling sniper (web 1, clips 1/1, weapon 0, scale 1/1/1)",
+    "display": {
+      "kind": "sniper",
+      "selected": "sniper",
+      "unarmed": true,
+      "source": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.7233191680486456,
+          0.7233191680486456,
+          0.7233191680486456
+        ],
+        "children": 41
+      },
+      "copy": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          1.1764705882352942,
+          1.1764705882352942,
+          1.1764705882352942
+        ],
+        "children": 1
+      },
+      "inner": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.7233191680486456,
+          0.7233191680486456,
+          0.7233191680486456
+        ],
+        "children": 41
+      }
+    }
+  },
+  "sniper-slot2-vest": {
+    "error": "Incomplete sling sniper (web 1, clips 1/1, weapon 0, scale 1/1/1)",
+    "display": {
+      "kind": "sniper",
+      "selected": "sniper",
+      "unarmed": true,
+      "source": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.7233191680486456,
+          0.7233191680486456,
+          0.7233191680486456
+        ],
+        "children": 41
+      },
+      "copy": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          1.1764705882352942,
+          1.1764705882352942,
+          1.1764705882352942
+        ],
+        "children": 1
+      },
+      "inner": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.7233191680486456,
+          0.7233191680486456,
+          0.7233191680486456
+        ],
+        "children": 41
+      }
+    }
+  },
+  "launcher-slot1": {
+    "ends": [
+      {
+        "gunGapMm": null,
+        "gunContact": false,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 89.07,
+        "gunContact": false,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false,
+    "display": {
+      "kind": "launcher",
+      "selected": "launcher",
+      "unarmed": true,
+      "source": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.6978001833180568,
+          0.6978001833180568,
+          0.6978001833180568
+        ],
+        "children": 16
+      },
+      "copy": {
+        "visible": true,
+        "meshes": 1,
+        "scale": [
+          1.1764705882352942,
+          1.1764705882352942,
+          1.1764705882352942
+        ],
+        "children": 1
+      },
+      "inner": {
+        "visible": true,
+        "meshes": 1,
+        "scale": [
+          0.6978001833180568,
+          0.6978001833180568,
+          0.6978001833180568
+        ],
+        "children": 16
+      }
+    }
+  },
+  "launcher-slot2": {
+    "ends": [
+      {
+        "gunGapMm": null,
+        "gunContact": false,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 89.05,
+        "gunContact": false,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false,
+    "display": {
+      "kind": "launcher",
+      "selected": "launcher",
+      "unarmed": true,
+      "source": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.6978001833180568,
+          0.6978001833180568,
+          0.6978001833180568
+        ],
+        "children": 16
+      },
+      "copy": {
+        "visible": true,
+        "meshes": 1,
+        "scale": [
+          1.1764705882352942,
+          1.1764705882352942,
+          1.1764705882352942
+        ],
+        "children": 1
+      },
+      "inner": {
+        "visible": true,
+        "meshes": 1,
+        "scale": [
+          0.6978001833180568,
+          0.6978001833180568,
+          0.6978001833180568
+        ],
+        "children": 16
+      }
+    }
+  },
+  "launcher-slot1-vest": {
+    "ends": [
+      {
+        "gunGapMm": null,
+        "gunContact": false,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 89.07,
+        "gunContact": false,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false,
+    "display": {
+      "kind": "launcher",
+      "selected": "launcher",
+      "unarmed": true,
+      "source": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.6978001833180568,
+          0.6978001833180568,
+          0.6978001833180568
+        ],
+        "children": 16
+      },
+      "copy": {
+        "visible": true,
+        "meshes": 1,
+        "scale": [
+          1.1764705882352942,
+          1.1764705882352942,
+          1.1764705882352942
+        ],
+        "children": 1
+      },
+      "inner": {
+        "visible": true,
+        "meshes": 1,
+        "scale": [
+          0.6978001833180568,
+          0.6978001833180568,
+          0.6978001833180568
+        ],
+        "children": 16
+      }
+    }
+  },
+  "launcher-slot2-vest": {
+    "ends": [
+      {
+        "gunGapMm": null,
+        "gunContact": false,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 89.05,
+        "gunContact": false,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false,
+    "display": {
+      "kind": "launcher",
+      "selected": "launcher",
+      "unarmed": true,
+      "source": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.6978001833180568,
+          0.6978001833180568,
+          0.6978001833180568
+        ],
+        "children": 16
+      },
+      "copy": {
+        "visible": true,
+        "meshes": 1,
+        "scale": [
+          1.1764705882352942,
+          1.1764705882352942,
+          1.1764705882352942
+        ],
+        "children": 1
+      },
+      "inner": {
+        "visible": true,
+        "meshes": 1,
+        "scale": [
+          0.6978001833180568,
+          0.6978001833180568,
+          0.6978001833180568
+        ],
+        "children": 16
+      }
+    }
+  },
+  "minigun-slot1": {
+    "error": "Incomplete sling minigun (web 1, clips 1/1, weapon 0, scale 0.527/0.527/0.5270000000000001)",
+    "display": {
+      "kind": "minigun",
+      "selected": "minigun",
+      "unarmed": true,
+      "source": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.88,
+          0.88,
+          0.88
+        ],
+        "children": 15
+      },
+      "copy": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.62,
+          0.62,
+          0.62
+        ],
+        "children": 1
+      },
+      "inner": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.88,
+          0.88,
+          0.88
+        ],
+        "children": 15
+      }
+    }
+  },
+  "minigun-slot2": {
+    "error": "Incomplete sling minigun (web 1, clips 1/1, weapon 0, scale 0.527/0.527/0.5270000000000001)",
+    "display": {
+      "kind": "minigun",
+      "selected": "minigun",
+      "unarmed": true,
+      "source": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.88,
+          0.88,
+          0.88
+        ],
+        "children": 15
+      },
+      "copy": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.62,
+          0.62,
+          0.62
+        ],
+        "children": 1
+      },
+      "inner": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.88,
+          0.88,
+          0.88
+        ],
+        "children": 15
+      }
+    }
+  },
+  "minigun-slot1-vest": {
+    "error": "Incomplete sling minigun (web 1, clips 1/1, weapon 0, scale 0.527/0.527/0.5270000000000001)",
+    "display": {
+      "kind": "minigun",
+      "selected": "minigun",
+      "unarmed": true,
+      "source": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.88,
+          0.88,
+          0.88
+        ],
+        "children": 15
+      },
+      "copy": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.62,
+          0.62,
+          0.62
+        ],
+        "children": 1
+      },
+      "inner": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.88,
+          0.88,
+          0.88
+        ],
+        "children": 15
+      }
+    }
+  },
+  "minigun-slot2-vest": {
+    "error": "Incomplete sling minigun (web 1, clips 1/1, weapon 0, scale 0.527/0.527/0.5270000000000001)",
+    "display": {
+      "kind": "minigun",
+      "selected": "minigun",
+      "unarmed": true,
+      "source": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.88,
+          0.88,
+          0.88
+        ],
+        "children": 15
+      },
+      "copy": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.62,
+          0.62,
+          0.62
+        ],
+        "children": 1
+      },
+      "inner": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.88,
+          0.88,
+          0.88
+        ],
+        "children": 15
+      }
+    }
+  },
+  "flamer-slot1": {
+    "error": "Incomplete sling flamer (web 1, clips 1/1, weapon 0, scale 1/1/1)",
+    "display": {
+      "kind": "flamer",
+      "selected": "flamer",
+      "unarmed": true,
+      "source": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.8383417123705056,
+          0.8383417123705056,
+          0.8383417123705056
+        ],
+        "children": 8
+      },
+      "copy": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          1.1764705882352942,
+          1.1764705882352942,
+          1.1764705882352942
+        ],
+        "children": 1
+      },
+      "inner": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.8383417123705056,
+          0.8383417123705056,
+          0.8383417123705056
+        ],
+        "children": 8
+      }
+    }
+  },
+  "flamer-slot2": {
+    "error": "Incomplete sling flamer (web 1, clips 1/1, weapon 0, scale 1/1/1)",
+    "display": {
+      "kind": "flamer",
+      "selected": "flamer",
+      "unarmed": true,
+      "source": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.8383417123705056,
+          0.8383417123705056,
+          0.8383417123705056
+        ],
+        "children": 8
+      },
+      "copy": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          1.1764705882352942,
+          1.1764705882352942,
+          1.1764705882352942
+        ],
+        "children": 1
+      },
+      "inner": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.8383417123705056,
+          0.8383417123705056,
+          0.8383417123705056
+        ],
+        "children": 8
+      }
+    }
+  },
+  "flamer-slot1-vest": {
+    "error": "Incomplete sling flamer (web 1, clips 1/1, weapon 0, scale 1/1/1)",
+    "display": {
+      "kind": "flamer",
+      "selected": "flamer",
+      "unarmed": true,
+      "source": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.8383417123705056,
+          0.8383417123705056,
+          0.8383417123705056
+        ],
+        "children": 8
+      },
+      "copy": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          1.1764705882352942,
+          1.1764705882352942,
+          1.1764705882352942
+        ],
+        "children": 1
+      },
+      "inner": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.8383417123705056,
+          0.8383417123705056,
+          0.8383417123705056
+        ],
+        "children": 8
+      }
+    }
+  },
+  "flamer-slot2-vest": {
+    "error": "Incomplete sling flamer (web 1, clips 1/1, weapon 0, scale 1/1/1)",
+    "display": {
+      "kind": "flamer",
+      "selected": "flamer",
+      "unarmed": true,
+      "source": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.8383417123705056,
+          0.8383417123705056,
+          0.8383417123705056
+        ],
+        "children": 8
+      },
+      "copy": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          1.1764705882352942,
+          1.1764705882352942,
+          1.1764705882352942
+        ],
+        "children": 1
+      },
+      "inner": {
+        "visible": true,
+        "meshes": 0,
+        "scale": [
+          0.8383417123705056,
+          0.8383417123705056,
+          0.8383417123705056
+        ],
+        "children": 8
+      }
+    }
+  },
+  "chainsaw-slot1": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false
+  },
+  "chainsaw-slot2": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false
+  },
+  "chainsaw-slot1-vest": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false
+  },
+  "chainsaw-slot2-vest": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false
+  }
+}

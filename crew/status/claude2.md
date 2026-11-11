@@ -1,22 +1,29 @@
 # Claude 2
 
-state: active
+state: idle
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: CB-291 J127 third-person body limits: landing (the neck, hips, knees, ankles after the pose; 45 deg spine caps; the shoulders held in the arm IK and after free poses; the carrier kept off the sleeve)
-touching: index.html (updateMarinePose, clampBodyPose, solveArmIK + holdShoulderIK, drawPose, the frame's holdFreeShoulders line, TT debug export, imports), core/body-limits.js, core/body-limits.test.mjs, core/clip-exceptions.js, studio/marine-turn.js (TWIST.cap), tools/tests/tcb291.js (new)
-since: 2026-11-11T10:50Z
+task: —
+touching: —
+since: 2026-11-11T12:35Z
 next: CB-290 J126 rule 3 (Jerry, 10 Nov, standing, D-138): "No part of th
 blocked-on: —
-last-report: handoffs/2026-11-11-claude2-CB-304.md
+last-report: handoffs/2026-11-11-claude2-CB-291.md
 
 ## Notes
 
-### context nearly full, needs a new session (claude2, 11 Nov 06:15Z)
-The 00:05Z session is near its limit; start a fresh Claude 2 session. Everything is on the PC (the cloud copies go with the session).
-- Done tonight, checked out (handoffs/2026-11-11-claude2-CB-*.md): CB-295, CB-296, CB-289 (b), CB-294 (tcb248 --review), CB-297, CB-299, CB-243 (the reds list: 33 reds, each owner asked), CB-301, CB-302, CB-303, CB-304.
-- Next, in order: (1) CB-305 (ChatGPT's GP-20090 asks, my tests and rack): t262 and tcl301 take the pair through the Armory (the second gun in a secondary slot: pairInLoadout), every pose check kept; t138 asserts the same 4 magazines before the stow, on the shelf and after, without clearing the live ledger (+ a workbench buy case); t180: armoryDisplayKinds (index.html ~28073) shows the carried guns on the rack again within t38's mesh budget. (2) CB-291 step 1: Claude outputs/cb291/patch291.py (the neck, hips, knees, ankles held after the pose; the spine left out) + body-limits.draft.js (copy over core/body-limits.js: it keeps every CB-289 export) + tcb291.draft.js -> tools/tests/tcb291.js; node --test core/body-limits.test.mjs (body-limits.test.draft.mjs) 9/9. Audit on the 02:52Z tree: only the shoulders (twist read raw, CLAUDE DIRECTOR wants it against where the elbow points, held inside the IK with Claude 3's carrierClearance(ud): asked of Claude 3) and the spine's turn (63 deg aimed: asked CLAUDE DIRECTOR (a) hips follow / (b) exception / (c) leave) stay outside with step 1. (3) CB-290, CB-292 (Antigravity's AG-292 found the kiosk/armory past the range wall x=8.0: on CB-292's list). (4) my reds: t213 (minigun burst 9 cases 9 links), t225 (grenade arc), t184 (boot slide: CB-290), t17 is FLAKY (green/red/green on three trees).
-- Open with others: ChatGPT 2 (offhand Wasp clone lacks setMagazineRounds), CLAUDE DIRECTOR (crew.mjs reply collision fix; spine), Antigravity (tag289 import path), Claude 3 (carrierClearance shape).
-- Cloud copy recipe: Working notes' tar PLUS assets/intro/*.js *.css and assets/soundtrack/*.json *.mid (an --exclude of a dir drops files named under it); set DW_CHECK_MS=420000 in the cloud; run-all now prints each FAIL as it happens. Patch tools: Claude outputs/cb295/syncheck.mjs (node --check of index.html's module scripts). A cloud reds run of ~120 tests takes ~2.5 h at one worker.
+### Where CB-291 stands (claude2, 11 Nov ~12:40Z, session from 08:53Z)
+- LANDED on the PC 10:50Z (Claude outputs/cb291/land291.py: patch291.py + patch291b.py on index.html; core/body-limits.js
+  (shoulderAngles/shoulderHold, the shoulder row back/across/turn, turn read from the hinge), its node test 10/10,
+  studio/marine-turn.js TWIST.cap 42 deg, core/clip-exceptions.js minus sleeve-on-carrier-front, tools/tests/tcb291.js).
+- NOT YET ON THE PC: Claude outputs/cb291/patch291c.py + block291c.txt (the hold picks the most natural legal elbow, not the
+  table's edge) and fakethree.final.mjs (tools/tests/fakethree.mjs Matrix4.transpose() was a no-op: every headless arm IK aimed
+  wrong; real transpose). Both in /mnt outputs of the cloud; commit + run patch291c on index.html.
+- With the real transpose: tcb291 3/0 (before 620 samples out), tcb289, t149, t159, t189, t194, t216, t226, t262, t299 green;
+  red tcc341 (2), t187 (4), t195 (1), t218 (4), t229 (6): comparing with the unpatched tree on the same harness (cloud
+  /home/claude/cb0) to see which are mine and which the old harness hid.
+- crew.mjs reply fix and t17: lent to ChatGPT (GP-20096) by the Director 10:08Z; my cloud fix dropped.
+- Next: CB-290 whole (arms/gun ease-back, then legs; CC-343 came back), then t217 Wasp flash anchor, ChatGPT's HUD units/CIF copy,
+  ChatGPT 2's fakethree Object3D.copy/material type asks.
 
 ### Who you are (D-137, Jerry 10 Nov 2026)
 You are **Claude 2**, the crew's second Claude: a Claude task of your own, on Claude Sonnet 5.5 (Extra). You took

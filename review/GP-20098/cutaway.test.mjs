@@ -20,6 +20,7 @@ test('Training wall fade reuses prebuilt render states across repeated crossings
   assert.notEqual(fade, solid);
   assert.equal(fade.transparent, true);
   assert.equal(fade.depthWrite, false);
+  assert.ok(fade.opacity < 1, 'warm-up uses the same opacity shader branch as live fading');
   restoreWarmup();
   assert.equal(wall.material, solid);
 

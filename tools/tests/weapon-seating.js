@@ -1,5 +1,5 @@
 // Geometry-only queries. Bounds prune candidates; actual triangles establish contact.
-import {Box3, Matrix4, Ray, Triangle, Vector3} from '../../vendor/three/three.core.js';
+import {BackSide, Box3, Matrix4, Ray, Triangle, Vector3} from '../../vendor/three/three.core.js';
 import {clipException} from '../../core/clip-exceptions.js';
 
 const EPS = 0.0005; // metres
@@ -193,6 +193,20 @@ export function visiblePieces(root,metresPerUnit=1,ignore=[]) {
   return parts;
 }
 
+// The offline camera review can outlive a live edit to a model. Refuse a
+// comparison if the strict catalog and the rendered review built different art.
+export function artworkFingerprint(parts) {
+  let hash=2166136261;
+  const mix=n=>{hash=Math.imul(hash^(n|0),16777619)>>>0;};
+  for(const p of parts){
+    for(let i=0;i<p.label.length;i++) mix(p.label.charCodeAt(i));
+    mix(p.vertices.length); mix(p.faces.length);
+    for(const v of p.vertices){mix(Math.round(v.x*1e8));mix(Math.round(v.y*1e8));mix(Math.round(v.z*1e8));}
+    for(const f of p.faces){mix(f.ids[0]);mix(f.ids[1]);mix(f.ids[2]);}
+  }
+  return hash.toString(16).padStart(8,'0');
+}
+
 // Surface-gap bounds in millimetres for the meshes actually drawn, including contained pieces.
 export function visibleSurfaceGap(left,right,metresPerUnit=1) {
   const a=visiblePieces(left,metresPerUnit),b=visiblePieces(right,metresPerUnit);
@@ -349,9 +363,9 @@ function inspectDetailSeat(frame,host) {
 export function enclosedArtwork(inner, host) {
   if (!host.closed || !host.box.containsBox(inner.box)) return null;
   const materials=Array.isArray(host.mesh.material)?host.mesh.material:[host.mesh.material];
-  if (!materials.length || materials.some(m=>!m || m.transparent || m.opacity!==1 || m.alphaTest>0 ||
-      m.alphaHash || m.alphaMap || m.transmission>0 || m.wireframe || m.colorWrite===false ||
-      m.side===1 || m.clippingPlanes?.length || m.isShaderMaterial || m.opacityNode || m.maskNode)) return null;
+  if (!materials.length || materials.some(m=>!m || m.visible===false || m.transparent || m.opacity!==1 || m.alphaTest>0 ||
+      m.alphaHash || m.alphaMap || m.alphaToCoverage || m.transmission>0 || m.wireframe || m.colorWrite===false || m.depthWrite===false ||
+      m.side===BackSide || m.clippingPlanes?.length || m.isShaderMaterial || m.opacityNode || m.maskNode || m.positionNode || m.vertexNode)) return null;
   if (surfacesTouch(inner.tree,host.tree,1e-14) || !inside(inner.vertices[0],host)) return null;
   // Distance to the nearest box wall bounds the distance to the real surface,
   // including for a concave host. Bound the entire island, not a single witness.
@@ -466,7 +480,7 @@ export function auditWeapon(root, {metresPerUnit=1, ignore=[], seats=[], sources
     result.first=describe(group[0]);
     return result;
   }
-  return {parts:parts.length, openSurfaces:parts.filter(p=>!p.closed).length,
+  return {parts:parts.length, artworkFingerprint:sources?artworkFingerprint(parts):undefined, openSurfaces:parts.filter(p=>!p.closed).length,
     loose:components.slice(1).map(looseGroup),
     rawOverlaps,overlaps,excusedSeats,unseated,detailSeats,detailBreaches};
 }

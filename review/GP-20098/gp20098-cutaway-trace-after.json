@@ -1,0 +1,875 @@
+{
+  "card": "GP-20098",
+  "capturedAt": "2026-11-11T12:14:10.876Z",
+  "enterTrainingMs": 12170,
+  "runs": [
+    {
+      "light": "noon",
+      "mode": "3P",
+      "route": "R2_corridor_build_hangar",
+      "frameCount": 579,
+      "medianDtMs": 17.2,
+      "p99DtMs": 32.1,
+      "maxDtMs": 193.9,
+      "newPipelines": 5,
+      "hitchCountOver25ms": 7,
+      "hitches": [
+        {
+          "light": "noon",
+          "room": "corridor_east",
+          "dtMs": 30.3,
+          "newPipes": 0,
+          "pos": [
+            -6.08,
+            -200,
+            -648
+          ],
+          "cutaway": [
+            {
+              "side": "rangeSouth",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "east",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "south",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "west",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "overhead",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "east",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "rangeSouth",
+              "opacity": 1,
+              "hidden": false
+            }
+          ]
+        },
+        {
+          "light": "noon",
+          "room": "corridor_west",
+          "dtMs": 40.9,
+          "newPipes": 0,
+          "pos": [
+            -13.06,
+            -200,
+            -648.29
+          ],
+          "cutaway": [
+            {
+              "side": "rangeSouth",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "east",
+              "opacity": 0.5981999999284744,
+              "hidden": false
+            },
+            {
+              "side": "south",
+              "opacity": 0.06,
+              "hidden": true
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "west",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "overhead",
+              "opacity": 0,
+              "hidden": true
+            },
+            {
+              "side": "east",
+              "opacity": 0.5981999999284744,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "rangeSouth",
+              "opacity": 1,
+              "hidden": false
+            }
+          ]
+        },
+        {
+          "light": "noon",
+          "room": "infirmary_approach",
+          "dtMs": 193.9,
+          "newPipes": 4,
+          "pos": [
+            -17.88,
+            -200,
+            -649.18
+          ],
+          "cutaway": [
+            {
+              "side": "rangeSouth",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "east",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "south",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "west",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "overhead",
+              "opacity": 0,
+              "hidden": true
+            },
+            {
+              "side": "east",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "rangeSouth",
+              "opacity": 1,
+              "hidden": false
+            }
+          ]
+        },
+        {
+          "light": "noon",
+          "room": "infirmary_approach",
+          "dtMs": 63.4,
+          "newPipes": 1,
+          "pos": [
+            -18.92,
+            -200,
+            -648.93
+          ],
+          "cutaway": [
+            {
+              "side": "rangeSouth",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "east",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "south",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "west",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "overhead",
+              "opacity": 0,
+              "hidden": true
+            },
+            {
+              "side": "east",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "rangeSouth",
+              "opacity": 1,
+              "hidden": false
+            }
+          ]
+        },
+        {
+          "light": "noon",
+          "room": "infirmary_approach",
+          "dtMs": 36.6,
+          "newPipes": 0,
+          "pos": [
+            -19.26,
+            -200,
+            -648.84
+          ],
+          "cutaway": [
+            {
+              "side": "rangeSouth",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "east",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "south",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "west",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "overhead",
+              "opacity": 0,
+              "hidden": true
+            },
+            {
+              "side": "east",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "rangeSouth",
+              "opacity": 1,
+              "hidden": false
+            }
+          ]
+        },
+        {
+          "light": "noon",
+          "room": "skull_window",
+          "dtMs": 32.1,
+          "newPipes": 0,
+          "pos": [
+            -39.5,
+            -200,
+            -640.81
+          ],
+          "cutaway": [
+            {
+              "side": "rangeSouth",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "east",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "south",
+              "opacity": 0.06,
+              "hidden": true
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "west",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "overhead",
+              "opacity": 0,
+              "hidden": true
+            },
+            {
+              "side": "east",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "rangeSouth",
+              "opacity": 1,
+              "hidden": false
+            }
+          ]
+        },
+        {
+          "light": "noon",
+          "room": "hq_panel",
+          "dtMs": 36,
+          "newPipes": 0,
+          "pos": [
+            -36.15,
+            -200,
+            -635.26
+          ],
+          "cutaway": [
+            {
+              "side": "rangeSouth",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "east",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "south",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "west",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "overhead",
+              "opacity": 0,
+              "hidden": true
+            },
+            {
+              "side": "east",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "rangeSouth",
+              "opacity": 1,
+              "hidden": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "light": "overcast",
+      "mode": "3P",
+      "route": "R2_corridor_build_hangar",
+      "frameCount": 610,
+      "medianDtMs": 16.7,
+      "p99DtMs": 19.4,
+      "maxDtMs": 26,
+      "newPipelines": 0,
+      "hitchCountOver25ms": 1,
+      "hitches": [
+        {
+          "light": "overcast",
+          "room": "corridor_west",
+          "dtMs": 26,
+          "newPipes": 0,
+          "pos": [
+            -13.04,
+            -200,
+            -648.28
+          ],
+          "cutaway": [
+            {
+              "side": "rangeSouth",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "east",
+              "opacity": 0.7068000000715255,
+              "hidden": false
+            },
+            {
+              "side": "south",
+              "opacity": 0.06,
+              "hidden": true
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "west",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "overhead",
+              "opacity": 0,
+              "hidden": true
+            },
+            {
+              "side": "east",
+              "opacity": 0.7068000000715255,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "rangeSouth",
+              "opacity": 1,
+              "hidden": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "light": "dusk",
+      "mode": "3P",
+      "route": "R2_corridor_build_hangar",
+      "frameCount": 591,
+      "medianDtMs": 17,
+      "p99DtMs": 23.4,
+      "maxDtMs": 28.2,
+      "newPipelines": 1,
+      "hitchCountOver25ms": 1,
+      "hitches": [
+        {
+          "light": "dusk",
+          "room": "infirmary_approach",
+          "dtMs": 28.2,
+          "newPipes": 0,
+          "pos": [
+            -27.65,
+            -200,
+            -646.42
+          ],
+          "cutaway": [
+            {
+              "side": "rangeSouth",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "east",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "south",
+              "opacity": 0.06,
+              "hidden": true
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "west",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "overhead",
+              "opacity": 0,
+              "hidden": true
+            },
+            {
+              "side": "east",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "rangeSouth",
+              "opacity": 1,
+              "hidden": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "light": "night",
+      "mode": "3P",
+      "route": "R2_corridor_build_hangar",
+      "frameCount": 589,
+      "medianDtMs": 16.9,
+      "p99DtMs": 24.7,
+      "maxDtMs": 27.9,
+      "newPipelines": 0,
+      "hitchCountOver25ms": 3,
+      "hitches": [
+        {
+          "light": "night",
+          "room": "corridor_east",
+          "dtMs": 27.1,
+          "newPipes": 0,
+          "pos": [
+            -5.97,
+            -200,
+            -648
+          ],
+          "cutaway": [
+            {
+              "side": "rangeSouth",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "east",
+              "opacity": 0.06,
+              "hidden": true
+            },
+            {
+              "side": "south",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "west",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "overhead",
+              "opacity": 0,
+              "hidden": true
+            },
+            {
+              "side": "east",
+              "opacity": 0.06,
+              "hidden": true
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "rangeSouth",
+              "opacity": 1,
+              "hidden": false
+            }
+          ]
+        },
+        {
+          "light": "night",
+          "room": "corridor_east",
+          "dtMs": 27.9,
+          "newPipes": 0,
+          "pos": [
+            -6.16,
+            -200,
+            -648
+          ],
+          "cutaway": [
+            {
+              "side": "rangeSouth",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "east",
+              "opacity": 0.06,
+              "hidden": true
+            },
+            {
+              "side": "south",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "west",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "overhead",
+              "opacity": 0,
+              "hidden": true
+            },
+            {
+              "side": "east",
+              "opacity": 0.06,
+              "hidden": true
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "rangeSouth",
+              "opacity": 1,
+              "hidden": false
+            }
+          ]
+        },
+        {
+          "light": "night",
+          "room": "infirmary_approach",
+          "dtMs": 27.6,
+          "newPipes": 0,
+          "pos": [
+            -24.01,
+            -200,
+            -647.47
+          ],
+          "cutaway": [
+            {
+              "side": "rangeSouth",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "east",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "south",
+              "opacity": 0.06,
+              "hidden": true
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "west",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "overhead",
+              "opacity": 0,
+              "hidden": true
+            },
+            {
+              "side": "east",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "north",
+              "opacity": 1,
+              "hidden": false
+            },
+            {
+              "side": "rangeSouth",
+              "opacity": 1,
+              "hidden": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

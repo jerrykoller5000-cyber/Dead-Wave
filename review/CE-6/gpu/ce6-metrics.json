@@ -1,0 +1,686 @@
+{
+  "card": "AG-303 (CE-6 / J136)",
+  "capturedAt": "2026-11-11T12:33:33.831Z",
+  "revolver1P": [
+    {
+      "pull": 1,
+      "stepsTaken": 6,
+      "pullDbg": {
+        "t": 0.09999999999999999,
+        "pull": 0.12,
+        "shots": 0
+      },
+      "midTurn": 1.9118,
+      "midTop": 5,
+      "midTopLive": true,
+      "midHammerRotX": -0.382,
+      "midTriggerRotX": 0.22,
+      "chamberIndex": {
+        "s": 1.9117841107422793,
+        "L": 6,
+        "n": 0,
+        "shotT": 14.419299999982284,
+        "r0": null,
+        "posed": true
+      },
+      "vmAngleDeg": 0,
+      "liveBefore": 6,
+      "liveAfter": 5,
+      "deltaChambers": 1,
+      "topAfter": 5,
+      "chamberIndexAfter": {
+        "s": 2,
+        "L": 5,
+        "n": 1,
+        "shotT": 0.4666666666666666,
+        "r0": null,
+        "posed": false
+      },
+      "restFlickerChambers": 0,
+      "vmAngleDegAfter": 0
+    },
+    {
+      "pull": 2,
+      "stepsTaken": 6,
+      "pullDbg": {
+        "t": 0.09999999999999999,
+        "pull": 0.12,
+        "shots": 1
+      },
+      "midTurn": 2.9118,
+      "midTop": 4,
+      "midTopLive": true,
+      "midHammerRotX": -0.382,
+      "midTriggerRotX": 0.22,
+      "chamberIndex": {
+        "s": 2.9117841107422793,
+        "L": 5,
+        "n": 1,
+        "shotT": 0.5666666666666668,
+        "r0": null,
+        "posed": true
+      },
+      "vmAngleDeg": 0,
+      "liveBefore": 5,
+      "liveAfter": 4,
+      "deltaChambers": 1,
+      "topAfter": 4,
+      "chamberIndexAfter": {
+        "s": -3,
+        "L": 4,
+        "n": 2,
+        "shotT": 0.4666666666666666,
+        "r0": null,
+        "posed": false
+      },
+      "restFlickerChambers": 0,
+      "vmAngleDegAfter": 0
+    },
+    {
+      "pull": 3,
+      "stepsTaken": 6,
+      "pullDbg": {
+        "t": 0.09999999999999999,
+        "pull": 0.12,
+        "shots": 2
+      },
+      "midTurn": 3.9118,
+      "midTop": 3,
+      "midTopLive": true,
+      "midHammerRotX": -0.382,
+      "midTriggerRotX": 0.22,
+      "chamberIndex": {
+        "s": -2.0882158892577207,
+        "L": 4,
+        "n": 2,
+        "shotT": 0.5666666666666668,
+        "r0": null,
+        "posed": true
+      },
+      "vmAngleDeg": 0,
+      "liveBefore": 4,
+      "liveAfter": 3,
+      "deltaChambers": 1,
+      "topAfter": 3,
+      "chamberIndexAfter": {
+        "s": -2,
+        "L": 3,
+        "n": 3,
+        "shotT": 0.4666666666666666,
+        "r0": null,
+        "posed": false
+      },
+      "restFlickerChambers": 0,
+      "vmAngleDegAfter": 0
+    },
+    {
+      "pull": 4,
+      "stepsTaken": 6,
+      "pullDbg": {
+        "t": 0.09999999999999999,
+        "pull": 0.12,
+        "shots": 3
+      },
+      "midTurn": 4.9118,
+      "midTop": 2,
+      "midTopLive": true,
+      "midHammerRotX": -0.382,
+      "midTriggerRotX": 0.22,
+      "chamberIndex": {
+        "s": -1.0882158892577207,
+        "L": 3,
+        "n": 3,
+        "shotT": 0.5666666666666668,
+        "r0": null,
+        "posed": true
+      },
+      "vmAngleDeg": 0,
+      "liveBefore": 3,
+      "liveAfter": 2,
+      "deltaChambers": 1,
+      "topAfter": 2,
+      "chamberIndexAfter": {
+        "s": -1,
+        "L": 2,
+        "n": 4,
+        "shotT": 0.4666666666666666,
+        "r0": null,
+        "posed": false
+      },
+      "restFlickerChambers": 0,
+      "vmAngleDegAfter": 0
+    },
+    {
+      "pull": 5,
+      "stepsTaken": 6,
+      "pullDbg": {
+        "t": 0.09999999999999999,
+        "pull": 0.12,
+        "shots": 4
+      },
+      "midTurn": 5.9118,
+      "midTop": 1,
+      "midTopLive": true,
+      "midHammerRotX": -0.382,
+      "midTriggerRotX": 0.22,
+      "chamberIndex": {
+        "s": -0.08821588925772073,
+        "L": 2,
+        "n": 4,
+        "shotT": 0.5666666666666668,
+        "r0": null,
+        "posed": true
+      },
+      "vmAngleDeg": 0,
+      "liveBefore": 2,
+      "liveAfter": 1,
+      "deltaChambers": 1,
+      "topAfter": 1,
+      "chamberIndexAfter": {
+        "s": 0,
+        "L": 1,
+        "n": 5,
+        "shotT": 0.4666666666666666,
+        "r0": null,
+        "posed": false
+      },
+      "restFlickerChambers": 0,
+      "vmAngleDegAfter": 0
+    },
+    {
+      "pull": 6,
+      "stepsTaken": 6,
+      "pullDbg": {
+        "t": 0.09999999999999999,
+        "pull": 0.12,
+        "shots": 5
+      },
+      "midTurn": 0.9118,
+      "midTop": 0,
+      "midTopLive": true,
+      "midHammerRotX": -0.382,
+      "midTriggerRotX": 0.22,
+      "chamberIndex": {
+        "s": 0.9117841107422793,
+        "L": 1,
+        "n": 5,
+        "shotT": 0.5666666666666668,
+        "r0": null,
+        "posed": true
+      },
+      "vmAngleDeg": 0,
+      "liveBefore": 1,
+      "liveAfter": 0,
+      "deltaChambers": 1,
+      "topAfter": 0,
+      "chamberIndexAfter": {
+        "s": 1,
+        "L": 0,
+        "n": 6,
+        "shotT": 0.24999999999999997,
+        "r0": null,
+        "posed": false
+      },
+      "restFlickerChambers": 0,
+      "vmAngleDegAfter": 0
+    }
+  ],
+  "revolver3P": [
+    {
+      "pull": 1,
+      "midTurn": 1.9118,
+      "midTop": 5,
+      "midHammerRotX": -0.382,
+      "liveAfter": 5,
+      "deltaChambers": 1,
+      "topAfter": 5
+    },
+    {
+      "pull": 2,
+      "midTurn": 2.9118,
+      "midTop": 4,
+      "midHammerRotX": -0.382,
+      "liveAfter": 4,
+      "deltaChambers": 1,
+      "topAfter": 4
+    },
+    {
+      "pull": 3,
+      "midTurn": 3.9118,
+      "midTop": 3,
+      "midHammerRotX": -0.382,
+      "liveAfter": 3,
+      "deltaChambers": 1,
+      "topAfter": 3
+    },
+    {
+      "pull": 4,
+      "midTurn": 4.9118,
+      "midTop": 2,
+      "midHammerRotX": -0.382,
+      "liveAfter": 2,
+      "deltaChambers": 1,
+      "topAfter": 2
+    },
+    {
+      "pull": 5,
+      "midTurn": 5.9118,
+      "midTop": 1,
+      "midHammerRotX": -0.382,
+      "liveAfter": 1,
+      "deltaChambers": 1,
+      "topAfter": 1
+    },
+    {
+      "pull": 6,
+      "midTurn": 0.9118,
+      "midTop": 0,
+      "midHammerRotX": -0.382,
+      "liveAfter": 0,
+      "deltaChambers": 1,
+      "topAfter": 0
+    }
+  ],
+  "revolverReload": {
+    "seen": true,
+    "worstSingleFrameDeltaChambers": 0.1612,
+    "worstAtFrame": 0,
+    "liveAfter": 6,
+    "topAfter": 0
+  },
+  "revolverPair1P": {
+    "pairReady": true,
+    "pulls": [
+      {
+        "pull": 1,
+        "mainDelta": 1,
+        "offhandDelta": 0,
+        "mainLive": 5,
+        "offhandLive": 6,
+        "mainChamberIndex": {
+          "s": 2,
+          "L": 5,
+          "n": 13,
+          "shotT": 0.4833333333333333,
+          "r0": null,
+          "posed": false
+        },
+        "offhandChamberIndex": {
+          "s": 1,
+          "L": 6,
+          "n": 0,
+          "shotT": 29.53596666664826,
+          "r0": null
+        }
+      },
+      {
+        "pull": 2,
+        "mainDelta": 0,
+        "offhandDelta": 1,
+        "mainLive": 5,
+        "offhandLive": 5,
+        "mainChamberIndex": {
+          "s": 2,
+          "L": 5,
+          "n": 13,
+          "shotT": 1.1166666666666676,
+          "r0": null,
+          "posed": false
+        },
+        "offhandChamberIndex": {
+          "s": 2,
+          "L": 5,
+          "n": 1,
+          "shotT": 0.4833333333333333,
+          "r0": null,
+          "posed": false
+        }
+      },
+      {
+        "pull": 3,
+        "mainDelta": 1,
+        "offhandDelta": 0,
+        "mainLive": 4,
+        "offhandLive": 5,
+        "mainChamberIndex": {
+          "s": -3,
+          "L": 4,
+          "n": 14,
+          "shotT": 0.4833333333333333,
+          "r0": null,
+          "posed": false
+        },
+        "offhandChamberIndex": {
+          "s": 2,
+          "L": 5,
+          "n": 1,
+          "shotT": 1.1166666666666676,
+          "r0": null,
+          "posed": false
+        }
+      },
+      {
+        "pull": 4,
+        "mainDelta": 0,
+        "offhandDelta": 1,
+        "mainLive": 4,
+        "offhandLive": 4,
+        "mainChamberIndex": {
+          "s": -3,
+          "L": 4,
+          "n": 14,
+          "shotT": 1.1166666666666676,
+          "r0": null,
+          "posed": false
+        },
+        "offhandChamberIndex": {
+          "s": -3,
+          "L": 4,
+          "n": 2,
+          "shotT": 0.4833333333333333,
+          "r0": null,
+          "posed": false
+        }
+      },
+      {
+        "pull": 5,
+        "mainDelta": 1,
+        "offhandDelta": 0,
+        "mainLive": 3,
+        "offhandLive": 4,
+        "mainChamberIndex": {
+          "s": -2,
+          "L": 3,
+          "n": 15,
+          "shotT": 0.4833333333333333,
+          "r0": null,
+          "posed": false
+        },
+        "offhandChamberIndex": {
+          "s": -3,
+          "L": 4,
+          "n": 2,
+          "shotT": 1.1166666666666676,
+          "r0": null,
+          "posed": false
+        }
+      },
+      {
+        "pull": 6,
+        "mainDelta": 0,
+        "offhandDelta": 1,
+        "mainLive": 3,
+        "offhandLive": 3,
+        "mainChamberIndex": {
+          "s": -2,
+          "L": 3,
+          "n": 15,
+          "shotT": 1.1166666666666676,
+          "r0": null,
+          "posed": false
+        },
+        "offhandChamberIndex": {
+          "s": -2,
+          "L": 3,
+          "n": 3,
+          "shotT": 0.4833333333333333,
+          "r0": null,
+          "posed": false
+        }
+      }
+    ]
+  },
+  "revolverPair3P": null,
+  "launcher1P": [
+    {
+      "shot": 1,
+      "liveBefore": 6,
+      "liveAfter": 5,
+      "topBefore": 5,
+      "topAfter": 4,
+      "deltaChambers": -1,
+      "restFlickerChambers": 0,
+      "drumRoundsVisible": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "drumNosesVisible": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "chamberIndex": {
+        "s": -2,
+        "L": 5,
+        "n": 1,
+        "r0": null
+      },
+      "vmDrumAngleDeg": 0
+    },
+    {
+      "shot": 2,
+      "liveBefore": 5,
+      "liveAfter": 4,
+      "topBefore": 4,
+      "topAfter": 3,
+      "deltaChambers": -1,
+      "restFlickerChambers": 0,
+      "drumRoundsVisible": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "drumNosesVisible": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "chamberIndex": {
+        "s": -3,
+        "L": 4,
+        "n": 2,
+        "r0": null
+      },
+      "vmDrumAngleDeg": 0
+    },
+    {
+      "shot": 3,
+      "liveBefore": 4,
+      "liveAfter": 3,
+      "topBefore": 3,
+      "topAfter": 2,
+      "deltaChambers": -1,
+      "restFlickerChambers": 0,
+      "drumRoundsVisible": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "drumNosesVisible": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "chamberIndex": {
+        "s": 2,
+        "L": 3,
+        "n": 3,
+        "r0": null
+      },
+      "vmDrumAngleDeg": 0
+    },
+    {
+      "shot": 4,
+      "liveBefore": 3,
+      "liveAfter": 2,
+      "topBefore": 2,
+      "topAfter": 1,
+      "deltaChambers": -1,
+      "restFlickerChambers": 0,
+      "drumRoundsVisible": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "drumNosesVisible": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "chamberIndex": {
+        "s": 1,
+        "L": 2,
+        "n": 4,
+        "r0": null
+      },
+      "vmDrumAngleDeg": 0
+    },
+    {
+      "shot": 5,
+      "liveBefore": 2,
+      "liveAfter": 1,
+      "topBefore": 1,
+      "topAfter": 0,
+      "deltaChambers": -1,
+      "restFlickerChambers": 0,
+      "drumRoundsVisible": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "drumNosesVisible": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "chamberIndex": {
+        "s": 0,
+        "L": 1,
+        "n": 5,
+        "r0": null
+      },
+      "vmDrumAngleDeg": 0
+    },
+    {
+      "shot": 6,
+      "liveBefore": 1,
+      "liveAfter": 0,
+      "topBefore": 0,
+      "topAfter": 5,
+      "deltaChambers": -1,
+      "restFlickerChambers": 0,
+      "drumRoundsVisible": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "drumNosesVisible": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "chamberIndex": {
+        "s": -1,
+        "L": 0,
+        "n": 6,
+        "r0": null
+      },
+      "vmDrumAngleDeg": 0
+    }
+  ],
+  "launcher3P": [
+    {
+      "shot": 1,
+      "liveAfter": 5,
+      "deltaChambers": -1,
+      "topAfter": 4,
+      "drumRoundsVisibleCount": 6,
+      "drumNosesVisibleCount": 6
+    },
+    {
+      "shot": 2,
+      "liveAfter": 4,
+      "deltaChambers": -1,
+      "topAfter": 3,
+      "drumRoundsVisibleCount": 6,
+      "drumNosesVisibleCount": 6
+    },
+    {
+      "shot": 3,
+      "liveAfter": 3,
+      "deltaChambers": -1,
+      "topAfter": 2,
+      "drumRoundsVisibleCount": 6,
+      "drumNosesVisibleCount": 6
+    },
+    {
+      "shot": 4,
+      "liveAfter": 2,
+      "deltaChambers": -1,
+      "topAfter": 1,
+      "drumRoundsVisibleCount": 6,
+      "drumNosesVisibleCount": 6
+    },
+    {
+      "shot": 5,
+      "liveAfter": 1,
+      "deltaChambers": -1,
+      "topAfter": 0,
+      "drumRoundsVisibleCount": 6,
+      "drumNosesVisibleCount": 6
+    },
+    {
+      "shot": 6,
+      "liveAfter": 0,
+      "deltaChambers": -1,
+      "topAfter": 5,
+      "drumRoundsVisibleCount": 6,
+      "drumNosesVisibleCount": 6
+    }
+  ],
+  "launcherReload": {
+    "seen": true,
+    "worstSingleFrameDeltaChambers": 0.2051,
+    "worstAtFrame": 2,
+    "liveAfter": 6,
+    "topAfter": 5
+  },
+  "pageErrors": []
+}

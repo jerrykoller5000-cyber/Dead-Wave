@@ -1,0 +1,577 @@
+{
+  "events": [
+    {
+      "x": -5.2,
+      "z": -8,
+      "name": "",
+      "parent": "",
+      "material": "",
+      "materialId": 10034,
+      "transparent": false,
+      "castShadow": true,
+      "scene": "",
+      "key": "90,302,false,1,false,204,205,100,,,,true,true,true,3,false,519,7680,7680,7680,255,255,2,4,,rgba16float,depth24plus,triangle-list,color,3,emb"
+    },
+    {
+      "x": -5.2,
+      "z": -8,
+      "name": "",
+      "parent": "",
+      "material": "",
+      "materialId": 10035,
+      "transparent": false,
+      "castShadow": true,
+      "scene": "",
+      "key": "76,170,false,1,false,204,205,100,,,,true,true,true,3,false,519,7680,7680,7680,255,255,2,4,,rgba16float,depth24plus,triangle-list,color,3,emb"
+    },
+    {
+      "x": -5.52,
+      "z": -8,
+      "name": "bird-flock-body-instanced",
+      "parent": "",
+      "material": "",
+      "materialId": 13745,
+      "transparent": false,
+      "castShadow": false,
+      "scene": "",
+      "key": "303,304,false,1,false,204,205,100,,,,true,true,true,3,false,519,7680,7680,7680,255,255,2,4,,rgba16float,depth24plus,triangle-list,color,4,no"
+    },
+    {
+      "x": -5.52,
+      "z": -8,
+      "name": "skyline-hikers-crows",
+      "parent": "",
+      "material": "",
+      "materialId": 13749,
+      "transparent": false,
+      "castShadow": false,
+      "scene": "",
+      "key": "305,21,false,1,false,204,205,100,,,,true,true,true,3,false,519,7680,7680,7680,255,255,2,4,,rgba16float,depth24plus,triangle-list,normal,3,po"
+    },
+    {
+      "x": -5.52,
+      "z": -8,
+      "name": "skyline-hikers-crow-wings",
+      "parent": "",
+      "material": "",
+      "materialId": 13749,
+      "transparent": false,
+      "castShadow": false,
+      "scene": "",
+      "key": "306,21,false,1,false,204,205,100,,,,true,true,true,3,false,519,7680,7680,7680,255,255,2,4,,rgba16float,depth24plus,triangle-list,position,3,"
+    },
+    {
+      "x": -5.52,
+      "z": -8,
+      "name": "",
+      "parent": "",
+      "material": "",
+      "materialId": 13786,
+      "transparent": false,
+      "castShadow": false,
+      "scene": "",
+      "key": "107,307,false,1,false,204,205,100,,,,true,true,true,3,false,519,7680,7680,7680,255,255,2,4,,rgba16float,depth24plus,triangle-list,color,3,no"
+    },
+    {
+      "x": -5.52,
+      "z": -8,
+      "name": "fob-tyre-ruts",
+      "parent": "",
+      "material": "",
+      "materialId": 12919,
+      "transparent": true,
+      "castShadow": false,
+      "scene": "",
+      "key": "43,266,true,1,false,204,205,100,,,,true,false,true,3,false,519,7680,7680,7680,255,255,1,4,,rgba16float,depth24plus,triangle-list,normal,3,po"
+    },
+    {
+      "x": -5.52,
+      "z": -8,
+      "name": "bird-flock-wings-instanced",
+      "parent": "",
+      "material": "",
+      "materialId": 13746,
+      "transparent": true,
+      "castShadow": false,
+      "scene": "",
+      "key": "109,110,true,1,false,204,205,100,,,,true,false,true,3,false,519,7680,7680,7680,255,255,1,4,,rgba16float,depth24plus,triangle-list,color,4,no"
+    },
+    {
+      "x": -5.52,
+      "z": -8,
+      "name": "bird-flock-wings-instanced",
+      "parent": "",
+      "material": "",
+      "materialId": 13746,
+      "transparent": true,
+      "castShadow": false,
+      "scene": "",
+      "key": "109,110,true,1,false,204,205,100,,,,true,false,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,color,4,no"
+    },
+    {
+      "x": -5.52,
+      "z": -8,
+      "name": "skyline-trapper-smoke",
+      "parent": "",
+      "material": "",
+      "materialId": 13747,
+      "transparent": true,
+      "castShadow": false,
+      "scene": "",
+      "key": "111,112,true,1,false,204,205,100,,,,true,false,true,3,false,519,7680,7680,7680,255,255,1,4,,rgba16float,depth24plus,triangle-list,normal,3,p"
+    },
+    {
+      "x": -5.52,
+      "z": -8,
+      "name": "skyline-trapper-smoke",
+      "parent": "",
+      "material": "",
+      "materialId": 13747,
+      "transparent": true,
+      "castShadow": false,
+      "scene": "",
+      "key": "111,112,true,1,false,204,205,100,,,,true,false,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,normal,3,p"
+    },
+    {
+      "x": -5.52,
+      "z": -8,
+      "name": "skyline-fuel-smoke",
+      "parent": "",
+      "material": "",
+      "materialId": 13748,
+      "transparent": true,
+      "castShadow": false,
+      "scene": "",
+      "key": "113,112,true,1,false,204,205,100,,,,true,false,true,3,false,519,7680,7680,7680,255,255,1,4,,rgba16float,depth24plus,triangle-list,normal,3,p"
+    },
+    {
+      "x": -5.52,
+      "z": -8,
+      "name": "skyline-fuel-smoke",
+      "parent": "",
+      "material": "",
+      "materialId": 13748,
+      "transparent": true,
+      "castShadow": false,
+      "scene": "",
+      "key": "113,112,true,1,false,204,205,100,,,,true,false,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,normal,3,p"
+    },
+    {
+      "x": -5.52,
+      "z": -8,
+      "name": "old-mine-dawn-mist",
+      "parent": "",
+      "material": "",
+      "materialId": 13785,
+      "transparent": true,
+      "castShadow": false,
+      "scene": "",
+      "key": "114,112,true,1,false,204,205,100,,,,true,false,true,3,false,519,7680,7680,7680,255,255,1,4,,rgba16float,depth24plus,triangle-list,normal,3,p"
+    },
+    {
+      "x": -5.52,
+      "z": -8,
+      "name": "old-mine-dawn-mist",
+      "parent": "",
+      "material": "",
+      "materialId": 13785,
+      "transparent": true,
+      "castShadow": false,
+      "scene": "",
+      "key": "114,112,true,1,false,204,205,100,,,,true,false,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,normal,3,p"
+    },
+    {
+      "x": -5.83,
+      "z": -8,
+      "name": "",
+      "parent": "",
+      "material": "",
+      "materialId": 13966,
+      "transparent": false,
+      "castShadow": false,
+      "scene": "",
+      "key": "115,308,false,1,false,204,205,100,,,,true,true,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,color,3,em"
+    },
+    {
+      "x": -5.83,
+      "z": -8,
+      "name": "",
+      "parent": "",
+      "material": "",
+      "materialId": 13967,
+      "transparent": false,
+      "castShadow": false,
+      "scene": "",
+      "key": "117,309,false,1,false,204,205,100,,,,true,true,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,color,3,em"
+    },
+    {
+      "x": -6.15,
+      "z": -8,
+      "name": "zombie-skin",
+      "parent": "",
+      "material": "",
+      "materialId": 14169,
+      "transparent": false,
+      "castShadow": true,
+      "scene": "",
+      "key": "121,310,false,1,false,204,205,100,,,,true,true,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,color,3,no"
+    },
+    {
+      "x": -6.15,
+      "z": -8,
+      "name": "",
+      "parent": "",
+      "material": "",
+      "materialId": 14096,
+      "transparent": true,
+      "castShadow": false,
+      "scene": "",
+      "key": "39,40,true,1,false,204,205,100,,,,true,false,true,3,false,519,7680,7680,7680,255,255,1,4,,rgba16float,depth24plus,triangle-list,normal,3,pos"
+    },
+    {
+      "x": -6.15,
+      "z": -8,
+      "name": "",
+      "parent": "",
+      "material": "",
+      "materialId": 16662,
+      "transparent": true,
+      "castShadow": false,
+      "scene": "",
+      "key": "76,262,true,1,false,204,205,100,,,,true,true,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,color,3,norm"
+    },
+    {
+      "x": -6.46,
+      "z": -8,
+      "name": "feral-motion-echo",
+      "parent": "",
+      "material": "",
+      "materialId": 16795,
+      "transparent": true,
+      "castShadow": false,
+      "scene": "",
+      "key": "311,312,true,1,false,204,205,100,,,,true,false,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,color,3,no"
+    },
+    {
+      "x": -7.09,
+      "z": -8,
+      "name": "",
+      "parent": "",
+      "material": "",
+      "materialId": 51,
+      "transparent": false,
+      "castShadow": false,
+      "scene": "",
+      "key": "313,314,false,1,false,204,205,100,,,,true,false,true,3,false,519,7680,7680,7680,255,255,1,4,,rgba16float,depth24plus,triangle-list,normal,3,"
+    },
+    {
+      "x": -7.09,
+      "z": -8,
+      "name": "",
+      "parent": "",
+      "material": "",
+      "materialId": 53,
+      "transparent": false,
+      "castShadow": false,
+      "scene": "",
+      "key": "4,315,false,1,false,204,205,100,,,,true,true,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,color,3,gwea"
+    },
+    {
+      "x": -7.09,
+      "z": -8,
+      "name": "gale-leaves",
+      "parent": "",
+      "material": "",
+      "materialId": 73,
+      "transparent": false,
+      "castShadow": false,
+      "scene": "",
+      "key": "316,317,false,1,false,204,205,100,,,,true,true,true,3,false,519,7680,7680,7680,255,255,2,4,,rgba16float,depth24plus,triangle-list,normal,3,p"
+    },
+    {
+      "x": -7.09,
+      "z": -8,
+      "name": "",
+      "parent": "",
+      "material": "",
+      "materialId": 74,
+      "transparent": true,
+      "castShadow": false,
+      "scene": "",
+      "key": "318,319,true,1,false,204,205,100,,,,true,false,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,normal,3,p"
+    },
+    {
+      "x": -11.18,
+      "z": -8,
+      "name": "",
+      "parent": "",
+      "material": "",
+      "materialId": 18004,
+      "transparent": true,
+      "castShadow": false,
+      "scene": "",
+      "key": "97,98,true,2,false,204,205,100,,,,true,false,true,3,false,519,7680,7680,7680,255,255,1,4,,rgba16float,depth24plus,triangle-list,normal,3,pos"
+    },
+    {
+      "x": -11.18,
+      "z": -8,
+      "name": "",
+      "parent": "",
+      "material": "",
+      "materialId": 13923,
+      "transparent": true,
+      "castShadow": false,
+      "scene": "",
+      "key": "320,321,true,2,false,204,205,100,,,,true,false,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,,position,5,3,uv,5,3,2,i"
+    },
+    {
+      "x": -11.18,
+      "z": -8,
+      "name": "spitter-acid-trail-batch",
+      "parent": "",
+      "material": "",
+      "materialId": 18008,
+      "transparent": true,
+      "castShadow": false,
+      "scene": "",
+      "key": "322,323,true,1,false,204,205,100,,,,true,false,true,3,false,519,7680,7680,7680,255,255,2,4,,rgba16float,depth24plus,triangle-list,acidAge,1,"
+    },
+    {
+      "x": -11.18,
+      "z": -8,
+      "name": "spider-ground-web",
+      "parent": "",
+      "material": "",
+      "materialId": 18009,
+      "transparent": true,
+      "castShadow": false,
+      "scene": "",
+      "key": "39,40,true,1,false,204,205,100,,,,true,false,true,3,false,519,7680,7680,7680,255,255,1,4,,rgba16float,depth24plus,triangle-list,normal,3,pos"
+    },
+    {
+      "x": -11.18,
+      "z": -8,
+      "name": "spider-ground-web",
+      "parent": "",
+      "material": "",
+      "materialId": 18009,
+      "transparent": true,
+      "castShadow": false,
+      "scene": "",
+      "key": "39,40,true,1,false,204,205,100,,,,true,false,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,normal,3,pos"
+    },
+    {
+      "x": -11.82,
+      "z": -8.06,
+      "name": "rig-skin",
+      "parent": "",
+      "material": "wear:shirt",
+      "materialId": 9394,
+      "transparent": false,
+      "castShadow": false,
+      "scene": "",
+      "key": "56,324,false,1,false,204,205,100,,,,true,true,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,color,3,nor"
+    },
+    {
+      "x": -11.82,
+      "z": -8.06,
+      "name": "rig-skin",
+      "parent": "",
+      "material": "wear:trousers",
+      "materialId": 9395,
+      "transparent": false,
+      "castShadow": false,
+      "scene": "",
+      "key": "47,324,false,1,false,204,205,100,,,,true,true,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,color,3,nor"
+    },
+    {
+      "x": -11.82,
+      "z": -8.06,
+      "name": "rig-skin",
+      "parent": "",
+      "material": "wear:boots",
+      "materialId": 9396,
+      "transparent": false,
+      "castShadow": false,
+      "scene": "",
+      "key": "53,325,false,1,false,204,205,100,,,,true,true,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,color,3,nor"
+    },
+    {
+      "x": -11.82,
+      "z": -8.06,
+      "name": "rig-skin",
+      "parent": "",
+      "material": "wear:belt",
+      "materialId": 9399,
+      "transparent": false,
+      "castShadow": false,
+      "scene": "",
+      "key": "54,325,false,1,false,204,205,100,,,,true,true,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,color,3,nor"
+    },
+    {
+      "x": -11.82,
+      "z": -8.06,
+      "name": "rig-skin",
+      "parent": "",
+      "material": "wear:belt",
+      "materialId": 9399,
+      "transparent": false,
+      "castShadow": false,
+      "scene": "",
+      "key": "49,325,false,1,false,204,205,100,,,,true,true,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,color,3,nor"
+    },
+    {
+      "x": -11.82,
+      "z": -8.06,
+      "name": "rig-skin",
+      "parent": "",
+      "material": "wear:pack",
+      "materialId": 9407,
+      "transparent": false,
+      "castShadow": false,
+      "scene": "",
+      "key": "58,325,false,1,false,204,205,100,,,,true,true,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,color,3,nor"
+    },
+    {
+      "x": -11.82,
+      "z": -8.06,
+      "name": "rig-skin",
+      "parent": "",
+      "material": "rig-skin-plain",
+      "materialId": 9423,
+      "transparent": false,
+      "castShadow": false,
+      "scene": "",
+      "key": "167,257,false,1,false,204,205,100,,,,true,true,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,color,3,dw"
+    },
+    {
+      "x": -11.82,
+      "z": -8.06,
+      "name": "rig-skin",
+      "parent": "",
+      "material": "rig-skin-plain",
+      "materialId": 9423,
+      "transparent": false,
+      "castShadow": false,
+      "scene": "",
+      "key": "51,257,false,1,false,204,205,100,,,,true,true,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,color,3,dwR"
+    },
+    {
+      "x": -11.82,
+      "z": -8.06,
+      "name": "hair-fade",
+      "parent": "medium-fade",
+      "material": "",
+      "materialId": 9415,
+      "transparent": true,
+      "castShadow": false,
+      "scene": "",
+      "key": "43,326,true,1,false,204,205,100,,,,true,false,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,normal,3,po"
+    },
+    {
+      "x": -13.13,
+      "z": -8.3,
+      "name": "",
+      "parent": "hq-damaged-terminal",
+      "material": "",
+      "materialId": 9825,
+      "transparent": true,
+      "castShadow": false,
+      "scene": "",
+      "key": "327,328,true,1,false,204,205,100,,,,true,false,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,line-list,position,3,,"
+    },
+    {
+      "x": -17.68,
+      "z": -9.14,
+      "name": "live-sleeve",
+      "parent": "live-sleeve-live",
+      "material": "ShadowMaterial",
+      "materialId": 16311,
+      "transparent": true,
+      "castShadow": true,
+      "scene": "",
+      "key": "2,3,true,1,false,204,205,100,,,,true,true,true,3,false,519,7680,7680,7680,255,255,0,1,,rgba8unorm,depth24plus,triangle-list,color,3,normal,3"
+    },
+    {
+      "x": -17.68,
+      "z": -9.14,
+      "name": "",
+      "parent": "",
+      "material": "ShadowMaterial",
+      "materialId": 16311,
+      "transparent": true,
+      "castShadow": true,
+      "scene": "",
+      "key": "2,3,true,1,false,204,205,100,,,,true,true,true,3,false,519,7680,7680,7680,255,255,0,1,,rgba8unorm,depth24plus,triangle-list,normal,3,positio"
+    },
+    {
+      "x": -18.6,
+      "z": -9.03,
+      "name": "rig-skin",
+      "parent": "",
+      "material": "rig-skin-plain",
+      "materialId": 9423,
+      "transparent": false,
+      "castShadow": false,
+      "scene": "",
+      "key": "329,257,false,1,false,204,205,100,,,,true,true,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,color,3,dw"
+    }
+  ],
+  "cutaway": [
+    {
+      "side": "rangeSouth",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "east",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "south",
+      "opacity": 0.06,
+      "hidden": true
+    },
+    {
+      "side": "north",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "west",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "overhead",
+      "opacity": 0,
+      "hidden": true
+    },
+    {
+      "side": "east",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "north",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "north",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "north",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "rangeSouth",
+      "opacity": 1,
+      "hidden": false
+    }
+  ]
+}

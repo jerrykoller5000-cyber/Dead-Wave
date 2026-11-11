@@ -6,7 +6,7 @@ import {launch} from '../../tools/cdp.mjs';
 import {save} from './save.mjs';
 
 const [id,phase]=process.argv.slice(2);
-assert(process.env.DW_GAME_TEST_TOKEN && /^[a-z0-9]+$/.test(id) && ['before','after'].includes(phase));
+assert(process.env.DW_GAME_TEST_TOKEN && /^[a-z0-9]+$/.test(id) && ['before','after','trim','final-trim','joins'].includes(phase));
 const dir=new URL('./visible-repairs/'+id+'/'+phase+'/',import.meta.url);
 await mkdir(dir,{recursive:true});
 const server=await serve(fileURLToPath(new URL('../../',import.meta.url)),0),browser=await launch({headless:false});
@@ -29,5 +29,6 @@ try {
     }
   }
   await save(new URL('cameras.json',dir),JSON.stringify(cameras,null,2)+'\n');
+  await save(new URL('renderer-log.json',dir),JSON.stringify({errors:page.errors,warnings:page.console.filter(v=>['error','warning'].includes(v.type)).slice(0,30)},null,2)+'\n');
   assert.deepEqual(page.errors,[]);console.log('PASS',id,phase,Object.keys(cameras).length,'gameplay views in all four lights');
 }finally{await browser.close();await server.close();}

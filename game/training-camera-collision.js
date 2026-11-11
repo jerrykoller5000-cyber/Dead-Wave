@@ -62,32 +62,80 @@ export function trainingStationShoulder(head,eye,look,stations,pull,forward){
 // Material copies keep the world gun, other marines and shared clothing opaque.
 export function createTrainingMarineFade(marine){
   const head=marine.userData.headG;
-  let parts=null,materials=null,owned=null;
+  let parts=null,keeperRoot=null;
+  const materials=new Set(),copies=new Map();
+  const fadeCopy=(source,helmet)=>{
+    if(!source||source.transparent)return source;
+    let pair=copies.get(source);
+    if(!pair){pair={};copies.set(source,pair);}
+    const key=helmet?'head':'body';
+    if(!pair[key]){
+      const fade=source.clone();
+      fade.transparent=true;fade.depthWrite=false;fade.opacity=Math.min(source.opacity,.999);
+      pair[key]=fade;materials.add(fade);
+    }
+    const fade=pair[key];
+    fade.color?.copy(source.color);
+    if(source.emissive){fade.emissive.copy(source.emissive);fade.emissiveIntensity=source.emissiveIntensity;}
+    return fade;
+  };
   function begin(){
-    parts=[];materials=[];owned=new Set();
-    const copies=new Map();
+    if(parts)return;
+    parts=[];
     marine.traverse(mesh=>{
       if(!mesh.isMesh||!mesh.material)return;
       let p=mesh,helmet=false;
       while(p&&p!==marine){if(p===head){helmet=true;break;}p=p.parent;}
       const original=mesh.material;
-      const clone=m=>{
-        if(!m||m.transparent)return m;
-        const key=helmet?'head':'body';
-        let pair=copies.get(m);
-        if(!pair){pair={};copies.set(m,pair);}
-        if(!pair[key]){pair[key]=m.clone();pair[key].transparent=true;pair[key].depthWrite=false;pair[key].needsUpdate=true;materials.push(pair[key]);owned.add(pair[key]);}
-        return pair[key];
-      };
-      mesh.material=Array.isArray(original)?original.map(clone):clone(original);
-      parts.push({mesh,original,helmet});
+      const faded=Array.isArray(original)?original.map(m=>fadeCopy(m,helmet)):fadeCopy(original,helmet);
+      mesh.material=faded;
+      parts.push({mesh,original,faded,helmet});
     });
   }
   function end(){
     if(!parts)return;
     for(const p of parts)p.mesh.material=p.original;
-    for(const m of materials)m.dispose();
-    parts=materials=owned=null;
+    parts=null;
+  }
+  function prepareWarmup(){
+    end();begin();
+    if(keeperRoot?.parent)keeperRoot.parent.remove(keeperRoot);
+    keeperRoot=new marine.constructor();
+    keeperRoot.name='training-marine-fade-pipeline-keepers';
+    const parent=marine.parent;
+    if(parent){
+      parent.updateWorldMatrix(true,false);
+      marine.updateWorldMatrix(true,true);
+      const inverse=parent.matrixWorld.clone().invert();
+      const seen=new Set();
+      for(const p of parts){
+        if(!p.mesh.geometry||p.faded===p.original)continue;
+        const originals=Array.isArray(p.original)?p.original:[p.original];
+        const fades=Array.isArray(p.faded)?p.faded:[p.faded];
+        if(fades.every((m,i)=>m===originals[i]))continue;
+        const attributes=Object.entries(p.mesh.geometry.attributes||{}).map(([k,a])=>`${k}:${a.itemSize}:${a.normalized}:${a.array.constructor.name}`).join('|');
+        const signature=`${originals.map(m=>m?.id).join(',')}/${fades.map(m=>m?.id).join(',')}/${attributes}/${p.mesh.isSkinnedMesh}/${p.mesh.isInstancedMesh}/${p.mesh.castShadow}/${p.mesh.receiveShadow}`;
+        if(seen.has(signature))continue;
+        seen.add(signature);
+        for(const material of [p.original,p.faded]){
+          // Mesh.clone copies userData with JSON.stringify; the live marine's
+          // metadata contains a large object graph and can throw RangeError.
+          const keeper=new p.mesh.constructor(p.mesh.geometry,material,p.mesh.isInstancedMesh?1:undefined);
+          if(p.mesh.isSkinnedMesh)keeper.bind(p.mesh.skeleton,p.mesh.bindMatrix);
+          if(p.mesh.isInstancedMesh)keeper.instanceMatrix=p.mesh.instanceMatrix;
+          keeper.castShadow=p.mesh.castShadow;
+          keeper.receiveShadow=p.mesh.receiveShadow;
+          keeper.frustumCulled=false;
+          keeper.matrixAutoUpdate=false;
+          keeper.matrix.copy(inverse.clone().multiply(p.mesh.matrixWorld));
+          keeper.userData.pipelineKeeper=true;
+          keeperRoot.add(keeper);
+        }
+      }
+      parent.add(keeperRoot);
+    }
+    let restored=false;
+    return ()=>{if(restored)return;restored=true;end();if(keeperRoot)keeperRoot.visible=false;};
   }
   return {
     update(distance){
@@ -99,15 +147,15 @@ export function createTrainingMarineFade(marine){
       for(const p of parts){
         const ms=Array.isArray(p.mesh.material)?p.mesh.material:[p.mesh.material];
         for(const m of ms){
-          if(!m||!owned.has(m)||seen.has(m))continue;
+          if(!m||!materials.has(m)||seen.has(m))continue;
           seen.add(m);
           // Head copies are separate even when body and helmet share a fabric.
-          m.opacity=p.helmet?helmet:body;
+          m.opacity=Math.min(p.helmet?helmet:body,.999);
         }
       }
       return {helmet,body};
     },
-    reset:end
+    reset:end,prepareWarmup
   };
 }
 

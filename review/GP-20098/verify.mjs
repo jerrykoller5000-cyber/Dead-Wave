@@ -27,6 +27,10 @@ try {
   assert.match(hint, /Try every camo/);
   assert.doesNotMatch(hint, /Four camos issued/);
   await page.screenshot(path.join(out, 'after-cif.png'));
+  await page.setViewport(390, 844);
+  await pause(250);
+  await page.screenshot(path.join(out, 'after-cif-390.png'));
+  await page.setViewport(1280, 720);
   await page.evaluate('TT.closeCIF();TT.grantAllWeapons();TT.setUnarmedDbg(false);TT.setShotView(null)');
   const hud = {};
   for (const [weapon, unit] of [['flamer','fuel'], ['launcher','grenades'], ['pistol','Bullets']]) {
@@ -36,6 +40,11 @@ try {
     assert.match(hud[weapon], new RegExp('\\b' + unit + '\\b'));
     await page.screenshot(path.join(out, `after-${weapon}-hud.png`));
   }
+  await page.setViewport(390, 844);
+  await page.evaluate('TT.setViewFirstDbg(true);TT.setWorldTime(.86);TT.setWeapon(TT.WEAPON_ORDER.indexOf("flamer"))');
+  await pause(450);
+  assert.match(await page.evaluate('document.getElementById("ammoDetail").textContent'), /\bfuel\b/);
+  await page.screenshot(path.join(out, 'after-flamer-hud-390-1p-night.png'));
   fs.writeFileSync(path.join(out, 'verify.json'), JSON.stringify({hint, hud}, null, 2));
   console.log('PASS Training CIF:', hint);
   for (const [weapon, copy] of Object.entries(hud)) console.log(`PASS ${weapon} HUD: ${copy}`);

@@ -2,12 +2,12 @@
 
 state: active
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: CE-6 J136: the revolver's cylinder and the launcher's drum index one chamber per pull, first and third person (lent: index.html indexChambers + its 2 calls); the revolver's VM_TRIGGER entry
-touching: game/viewmodel.js (cylinderTurn, VM_TRIGGER), game/viewmodel-poses.js (VM_TRIGGER), index.html (indexChambers, its 2 call lines, updateAmmoHud revolver split), tools/tests/tce6.js (new)
-since: 2026-11-11T10:28Z
+task: CE-4 J16: the hands' other actions in first person: the audit at the eye (knife, machete, katana, grenade throw, mortar, building and E, ladder), then the worst first
+touching: game/viewmodel.js (blades, grenade, hands: VM_BLADES/VM_GRENADE/VM_HANDS motion), game/viewmodel-poses.js (VM_BLADES, VM_GRENADE, VM_HANDS)
+since: 2026-11-11T12:30Z
 next: CE-2 (was CD-3) (was CL-336) J103, J110, J112, J114-J116, J119, J
 blocked-on: —
-last-report: handoffs/2026-11-11-claude5-CD-1.md
+last-report: handoffs/2026-11-11-claude5-CE-6.md
 
 ## Notes
 
@@ -56,10 +56,9 @@ have their controls hooked: ChatGPT 2's 22:22Z FYI).
 - No git, ever. Never push, never enter passwords or change system settings. Stay inside the Tiny Trek folder. Your own
   files and sections only; never revert anyone's work; never weaken a test (`--review` to change one).
 
-### Where things stand (Claude 5, 11 Nov 09:00Z; the 03:25Z session stops here, a new Claude 5 starts with CE-4)
-- Out for review (all on the PC, ready to commit): CE-2b (revolver cylinder turns with the pull; VM_TRIGGER pistol on pass 2, m4 off; VM_TRIGGER follow for a double action), CE-3 parts 1-5 (closed: the shotgun's X change by hand, the fresh magazine's top round, the Wasp's charging pull, the revolver's support arm, the pistol's rack, the KR-7's handle; the audit sheets in review/CE-3/), CD-1 lent (handoffs/2026-11-11-claude5-CD-1.md: the revolver's two hands refitted; CD-1 is back with the new Claude 1).
-- FIRST (CLAUDE DIRECTOR, J136): CE-6: the revolver's cylinder turns on every pull and the launcher's drum one chamber per shot, first AND third person, six shots at the eye and from the third-person camera, a test that fails if a shot doesn't index. The view's revolver turn exists (viewmodel.js cylinderTurn, CE-2b, from index.html's chamber visibility); third person and the launcher have none (index.html: ask CLAUDE DIRECTOR for the loan).
-- Then: CE-4. Audit already done in the cloud (b21, 07:55Z): the knife swing arcs right-up-left and reads; the grenade: cocked fist up at the left, the throw opens the hand forward (good), but the return ('back' phase) shows a thumbs-up glove: give it a relaxed hand; empty hands show nothing at the eye (check the frame). Hooks: T.setKnifeCd(0); T.knifeAttack(); T.handsDbg.knifeHold(u); T.setGrenadesDbg(n); T.startGrenadeCharge(); T.releaseGrenadeCharge(); T.grenadeAnimDbg() (returns circular: read .phase/.t only); T.setUnarmedDbg(true).
-- CE-2 still waits on Claude 1's fits for the index to reach the trigger (GW-4 7.5 mm, KR-7, sniper, revolver, shotgun; the GW-4 selector ~10 cm). The revolver's VM_TRIGGER entry: add with follow: 0.36, turn 0, once it reaches.
-- Open: Claude 3's CC-342 save commented out the view's retune() (viewmodel.js return line; asked him 08:00Z). ChatGPT's t262 (pair pouch marks) held per his correction.
-- Tools: Claude outputs/CE-2/tools (strip.mjs, solve-index.js, solve-index2.js (+ support glove), eval-index.js (index poses vs the support hand both ways, the gun, the pad), solve-flick.js, view2.js). A cloud copy is rebuilt from a tar of the PC tree (tools/handfit/README for the fitting layout: /home/claude/gs306 and /home/claude/handfit-work links). For reload experiments a temporary window hook in reloadGunOffset/elbowL in the cloud only; never land it.
+### Where things stand (Claude 5, 11 Nov 12:30Z; session from 09:35Z)
+- Done, out for review (ready to commit): CE-2b, CE-3 (parts 1-5), CD-1 lent (revolver hands, back with Claude 1), CE-6 (J136, handoffs/2026-11-11-claude5-CE-6.md: index.html indexChambers owns the revolver cylinder's and the launcher drum's index on the world guns, the view mirrors; tools/tests/tce6.js; sheet Claude outputs/CE-6/CE-6-filmstrips.jpg; Antigravity asked for the 4 lights).
+- Waiting on others: the revolver's VM_TRIGGER (Claude 1's fit: index pad 28 mm out, nearest clean 7.6 mm; add with follow 0.36 when he says it reaches); VM_TRIGGER.shotgun re-solve (Claude 1 refitted the shotgun's firing hand 10:00Z) and the GW-4 (CE-2); the launcher's fired-case art per chamber (ChatGPT 2, then hide drumNoses[L..5] in indexChambers); ChatGPT 2's chainsaw throttle (controls.trigger) for CE-2.
+- Now: CE-4 (the other actions: knife/machete/katana, grenade throw, mortar, building and E, the ladder). Audit (07:55Z cloud): the knife swing arcs right-up-left and reads; the grenade: cocked fist up at the left, the throw opens the hand forward (good), the return ('back' phase) shows a thumbs-up glove: give it a relaxed hand; empty hands show nothing at the eye (check). Hooks: T.setKnifeCd(0); T.knifeAttack(); T.handsDbg.knifeHold(u); T.setGrenadesDbg(n); T.startGrenadeCharge(); T.releaseGrenadeCharge(); T.grenadeAnimDbg() (.phase/.t); T.setUnarmedDbg(true).
+- Tools (cloud, rebuilt each session from a tar of the PC tree in Claude outputs/<task>/; crew/notes.mjs needed for the test runner): Claude outputs/CE-2/tools (strip.mjs, solve-index.js, view2.js); CE-6's strip steps (mksteps.py: H.cut = a cutaway of one part from the bore, layers 7). Cloud runs: CHROME=/opt/pw-browsers/chromium-1243/chrome-linux64/chrome CHROME_ARGS=--no-sandbox DW_CHECK_MS=420000, through tools/game-test-slot.mjs; the cloud's Bash stops at 10 min: long runs with nohup.
+- Open: Claude 3's CC-342 save commented out the view's retune() (guard vm().retune && in steps).

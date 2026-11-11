@@ -1,0 +1,600 @@
+{
+  "m4-slot1": {
+    "ends": [
+      {
+        "gunGapMm": null,
+        "gunContact": false,
+        "webContact": true
+      },
+      {
+        "gunGapMm": null,
+        "gunContact": false,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false
+  },
+  "m4-slot2": {
+    "ends": [
+      {
+        "gunGapMm": null,
+        "gunContact": false,
+        "webContact": true
+      },
+      {
+        "gunGapMm": null,
+        "gunContact": false,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false
+  },
+  "m4-slot1-vest": {
+    "ends": [
+      {
+        "gunGapMm": null,
+        "gunContact": false,
+        "webContact": true
+      },
+      {
+        "gunGapMm": null,
+        "gunContact": false,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false
+  },
+  "m4-slot2-vest": {
+    "ends": [
+      {
+        "gunGapMm": null,
+        "gunContact": false,
+        "webContact": true
+      },
+      {
+        "gunGapMm": null,
+        "gunContact": false,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false
+  },
+  "ak-slot1": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false
+  },
+  "ak-slot2": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false
+  },
+  "ak-slot1-vest": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false
+  },
+  "ak-slot2-vest": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false
+  },
+  "aa12-slot1": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [
+      {
+        "sling": "web",
+        "gun": "root/group[0]/group[21]/magazineBody[0]/BufferGeometry[16]~0",
+        "at": [
+          0.2587,
+          0.95857,
+          -0.13308
+        ],
+        "strapU": 1.821
+      }
+    ],
+    "nearWeb": false
+  },
+  "aa12-slot2": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false
+  },
+  "aa12-slot1-vest": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [
+      {
+        "sling": "web",
+        "gun": "root/group[0]/group[21]/magazineBody[0]/BufferGeometry[16]~0",
+        "at": [
+          0.25839,
+          0.96014,
+          -0.13451
+        ],
+        "strapU": 1.714
+      }
+    ],
+    "nearWeb": false
+  },
+  "aa12-slot2-vest": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false
+  },
+  "shotgun-slot1": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false
+  },
+  "shotgun-slot2": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false
+  },
+  "shotgun-slot1-vest": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false
+  },
+  "shotgun-slot2-vest": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false
+  },
+  "sniper-slot1": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false
+  },
+  "sniper-slot2": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false
+  },
+  "sniper-slot1-vest": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false
+  },
+  "sniper-slot2-vest": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false
+  },
+  "launcher-slot1": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false
+  },
+  "launcher-slot2": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false
+  },
+  "launcher-slot1-vest": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false
+  },
+  "launcher-slot2-vest": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false
+  },
+  "minigun-slot1": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false
+  },
+  "minigun-slot2": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false
+  },
+  "minigun-slot1-vest": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false
+  },
+  "minigun-slot2-vest": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false
+  },
+  "flamer-slot1": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false
+  },
+  "flamer-slot2": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false
+  },
+  "flamer-slot1-vest": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false
+  },
+  "flamer-slot2-vest": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false
+  },
+  "chainsaw-slot1": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false
+  },
+  "chainsaw-slot2": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false
+  },
+  "chainsaw-slot1-vest": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false
+  },
+  "chainsaw-slot2-vest": {
+    "ends": [
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      },
+      {
+        "gunGapMm": 0.01,
+        "gunContact": true,
+        "webContact": true
+      }
+    ],
+    "overlaps": [],
+    "nearWeb": false
+  }
+}

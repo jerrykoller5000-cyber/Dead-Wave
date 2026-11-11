@@ -61,6 +61,9 @@ export function partitionTrainingShell(T, tgGroup, origin) {
         solid.depthWrite = source.transparent ? false : source.depthWrite;
         fade.transparent = true;
         fade.depthWrite = false;
+        // WebGPU's StandardNodeMaterial has a separate opacity===1 program.
+        // Enter the fading program during blackout, before any live crossing.
+        if (!source.transparent) fade.opacity = Math.min(source.opacity, .999);
         pair = { solid, fade, meshes: [], usingFade: !!source.transparent };
         mats.set(source, pair);
         owned.push(solid, fade);
@@ -88,7 +91,7 @@ export function partitionTrainingShell(T, tgGroup, origin) {
   function syncMaterials() {
     for (const e of entries) for (const [source, pair] of e.mats) {
       pair.solid.opacity = source.opacity;
-      pair.fade.opacity = source.opacity * e.opacity;
+      pair.fade.opacity = source.transparent ? source.opacity * e.opacity : Math.min(source.opacity * e.opacity, .999);
       for (const mat of [pair.solid, pair.fade]) {
         mat.color?.copy(source.color);
         if (source.emissive) { mat.emissive.copy(source.emissive); mat.emissiveIntensity = source.emissiveIntensity; }

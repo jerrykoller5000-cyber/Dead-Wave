@@ -243,7 +243,9 @@ export class Matrix4 {
     te[12] = t14 * d; te[13] = (n13 * n24 * n31 - n14 * n23 * n31 + n14 * n21 * n33 - n11 * n24 * n33 - n13 * n21 * n34 + n11 * n23 * n34) * d; te[14] = (n14 * n22 * n31 - n12 * n24 * n31 - n14 * n21 * n32 + n11 * n24 * n32 + n12 * n21 * n34 - n11 * n22 * n34) * d; te[15] = (n12 * n23 * n31 - n13 * n22 * n31 + n13 * n21 * n32 - n11 * n23 * n32 - n12 * n21 * n33 + n11 * n22 * n33) * d;
     return this;
   }
-  transpose() { return this; }
+  // CB-291: a real transpose (it was a no-op, so solveArmIK's basis change m2 * m1^T aimed the arms wrong under the harness:
+  // the hand point never reached its target headless, and the arm's readings were of a pose the game never draws).
+  transpose() { const e = this.elements; let t; for (const [i, j] of [[1, 4], [2, 8], [3, 12], [6, 9], [7, 13], [11, 14]]) { t = e[i]; e[i] = e[j]; e[j] = t; } return this; }
   lookAt() { return this; }
   extractRotation() { return this; }
   fromArray(a, o = 0) { this.elements = Array.from(a).slice(o, o + 16); return this; }

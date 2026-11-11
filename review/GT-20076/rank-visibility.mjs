@@ -1,4 +1,4 @@
-import {visiblePieces,enclosedArtwork} from '../../tools/tests/weapon-seating.js';
+import {visiblePieces,enclosedArtwork,artworkFingerprint} from '../../tools/tests/weapon-seating.js';
 import * as S from '../../studio/weapon-sidearms.js';
 import * as L from '../../studio/weapon-longarms.js';
 import * as H from '../../studio/weapon-heavy.js';
@@ -47,6 +47,8 @@ export async function rankViews(T,id,folder='visibility',audit='catalog-chain-sk
   const data=(await (await get('/review/GT-20076/'+audit+'/audit.json')).json())[id];
   const cameras=await (await get(path+'cameras.json')).json();
   const parts=currentModel(T,id);
+  const fingerprint=artworkFingerprint(parts);
+  if(data.artworkFingerprint && fingerprint!==data.artworkFingerprint)throw Error(id+' artwork changed since strict catalog');
   if(parts.length!==data.parts) throw Error(id+' strict audit count mismatch '+parts.length+' vs '+data.parts);
   const indices=new Map(parts.map((p,i)=>[p.label,i]));
   const pairs=(data.rawOverlaps||data.overlaps).map(({a,b},index)=>{
@@ -82,6 +84,6 @@ export async function rankViews(T,id,folder='visibility',audit='catalog-chain-sk
   const rows=pairs.map(({index,a,b,segments,enclosed,views})=>({index,a,b,segments:segments.length,enclosed,views,
     peakPixels:Math.max(0,...Object.values(views).map(s=>s.pixels))}));
   rows.sort((a,b)=>b.peakPixels-a.peakPixels || a.index-b.index);
-  return {id,rawPairs:rows.length,crossingPairs:rows.filter(r=>r.segments).length,
+  return {id,fingerprint,strictFingerprint:data.artworkFingerprint||null,rawPairs:rows.length,crossingPairs:rows.filter(r=>r.segments).length,
     screenCandidates:rows.filter(r=>r.peakPixels).length,coverage,rows};
 }

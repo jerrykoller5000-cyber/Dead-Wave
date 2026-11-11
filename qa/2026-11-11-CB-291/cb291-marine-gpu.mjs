@@ -40,6 +40,20 @@ const SETUP_FN = `(async () => {
   window.__LIGHTS = LIGHTS;
   window.agLight = 'noon';
   window.__holdSim = false;
+  // Let direct 4-light sun shine cleanly onto the marine without the 8m hangar ceiling blocking directional sun!
+  // (Marine and props still cast full self- and floor-shadows.)
+  const tg0 = T.trainingDbg.tg();
+  if (tg0 && tg0.group) {
+    tg0.group.updateMatrixWorld(true);
+    const box = new H.THREE.Box3();
+    tg0.group.traverse((o) => {
+      if (!o.isMesh) return;
+      box.setFromObject(o);
+      if (box.min.y - tg0.floorY > 6.5 || o.parent?.name === 'training-cutaway-overhead') {
+        o.castShadow = false;
+      }
+    });
+  }
   window.__illuminate = function illuminate() {
     const L = window.__LIGHTS[window.agLight] || window.__LIGHTS['noon'];
     const p = T.player.position;
@@ -67,25 +81,43 @@ const SETUP_FN = `(async () => {
     const el = document.querySelector(sel);
     if (el) el.style.display = 'none';
   }
+  window.__resetClean = async function(gunKey, zOff = -2.0) {
+    const tg = T.trainingDbg.tg(), O = tg.origin;
+    window.__holdSim = false;
+    T.setShotView(null);
+    T.flightInput({ keys: [] });
+    T.setZoomHeldDbg(false);
+    T.reloadClipDbg.hold(null);
+    // Switch away & back with full ammo so any prior reload or idle stow is 100% cleared!
+    T.marineIdleDbg().reset();
+    if (T.isUnarmed()) T.toggleHolster();
+    const pistolIdx = T.WEAPON_ORDER.indexOf('pistol');
+    const targetIdx = T.WEAPON_ORDER.indexOf(gunKey);
+    T.setWeapon(targetIdx === pistolIdx ? T.WEAPON_ORDER.indexOf('ak') : pistolIdx);
+    await new Promise((r) => setTimeout(r, 80));
+    T.setAmmoDbg(gunKey, 30);
+    T.setWeapon(targetIdx);
+    if (T.isUnarmed()) T.toggleHolster();
+    T.marineIdleDbg().reset();
+    T.player.position.set(O.x + 0.0, tg.floorY, O.z + zOff);
+    T.setAimYawDbg(0);
+    T.setOtsAimDbg(0, 0.0);
+    T.setViewFirstDbg(false);
+    // Let live OTS gameplay camera converge cleanly onto the marine!
+    await new Promise((r) => setTimeout(r, 420));
+    T.marineIdleDbg().reset();
+  };
 })()`;
 
-// 9 captures covering all 8 Claude 2 cases (7 split into forward & backward sprint so both ankle/hip directions show clearly!)
 const CASES = [
   {
     id: '01-aa12-reload',
     label: '(1) AA-12 reload @ 0.65',
     prep: `async () => {
-      const T = window.TT, tg = T.trainingDbg.tg(), O = tg.origin;
-      window.__holdSim = false;
-      T.flightInput({ keys: [] }); T.setZoomHeldDbg(false); T.reloadClipDbg.hold(null);
-      T.player.position.set(O.x + 0.0, tg.floorY, O.z - 5.5);
-      T.setAimYawDbg(0); T.setOtsAimDbg(0, -0.02); T.setViewFirstDbg(false);
-      T.setWeapon(T.WEAPON_ORDER.indexOf('aa12'));
-      T.marineIdleDbg().reset();
-      await new Promise((r) => setTimeout(r, 380));
-      T.marineIdleDbg().reset();
+      const T = window.TT;
+      await window.__resetClean('aa12', -2.0);
       T.setAmmoDbg('aa12', 0); T.startReload(); T.reloadClipDbg.hold(0.65);
-      await new Promise((r) => setTimeout(r, 180));
+      await new Promise((r) => setTimeout(r, 160));
       window.__holdSim = true;
     }`
   },
@@ -93,17 +125,10 @@ const CASES = [
     id: '02-launcher-reload',
     label: '(2) Launcher reload @ 0.80',
     prep: `async () => {
-      const T = window.TT, tg = T.trainingDbg.tg(), O = tg.origin;
-      window.__holdSim = false;
-      T.flightInput({ keys: [] }); T.setZoomHeldDbg(false); T.reloadClipDbg.hold(null);
-      T.player.position.set(O.x + 0.0, tg.floorY, O.z - 5.5);
-      T.setAimYawDbg(0); T.setOtsAimDbg(0, -0.02); T.setViewFirstDbg(false);
-      T.setWeapon(T.WEAPON_ORDER.indexOf('launcher'));
-      T.marineIdleDbg().reset();
-      await new Promise((r) => setTimeout(r, 380));
-      T.marineIdleDbg().reset();
+      const T = window.TT;
+      await window.__resetClean('launcher', -2.0);
       T.setAmmoDbg('launcher', 0); T.startReload(); T.reloadClipDbg.hold(0.8);
-      await new Promise((r) => setTimeout(r, 180));
+      await new Promise((r) => setTimeout(r, 160));
       window.__holdSim = true;
     }`
   },
@@ -111,17 +136,10 @@ const CASES = [
     id: '03-m4-reload',
     label: '(3) M4 reload @ 0.50',
     prep: `async () => {
-      const T = window.TT, tg = T.trainingDbg.tg(), O = tg.origin;
-      window.__holdSim = false;
-      T.flightInput({ keys: [] }); T.setZoomHeldDbg(false); T.reloadClipDbg.hold(null);
-      T.player.position.set(O.x + 0.0, tg.floorY, O.z - 5.5);
-      T.setAimYawDbg(0); T.setOtsAimDbg(0, -0.02); T.setViewFirstDbg(false);
-      T.setWeapon(T.WEAPON_ORDER.indexOf('m4'));
-      T.marineIdleDbg().reset();
-      await new Promise((r) => setTimeout(r, 380));
-      T.marineIdleDbg().reset();
+      const T = window.TT;
+      await window.__resetClean('m4', -2.0);
       T.setAmmoDbg('m4', 0); T.startReload(); T.reloadClipDbg.hold(0.5);
-      await new Promise((r) => setTimeout(r, 180));
+      await new Promise((r) => setTimeout(r, 160));
       window.__holdSim = true;
     }`
   },
@@ -129,17 +147,11 @@ const CASES = [
     id: '04-m4-aimed',
     label: '(4) M4 aimed (ADS)',
     prep: `async () => {
-      const T = window.TT, tg = T.trainingDbg.tg(), O = tg.origin;
-      window.__holdSim = false;
-      T.flightInput({ keys: [] }); T.reloadClipDbg.hold(null);
-      T.player.position.set(O.x + 0.0, tg.floorY, O.z - 5.5);
-      T.setAimYawDbg(0); T.setOtsAimDbg(0, -0.02); T.setViewFirstDbg(false);
-      T.setWeapon(T.WEAPON_ORDER.indexOf('m4'));
-      T.marineIdleDbg().reset();
+      const T = window.TT;
+      await window.__resetClean('m4', -2.0);
       T.setZoomHeldDbg(true);
-      await new Promise((r) => setTimeout(r, 420));
+      await new Promise((r) => setTimeout(r, 380));
       T.marineIdleDbg().reset();
-      await new Promise((r) => setTimeout(r, 60));
       window.__holdSim = true;
     }`
   },
@@ -147,17 +159,11 @@ const CASES = [
     id: '05-shotgun-aimed',
     label: '(5) Shotgun aimed (ADS)',
     prep: `async () => {
-      const T = window.TT, tg = T.trainingDbg.tg(), O = tg.origin;
-      window.__holdSim = false;
-      T.flightInput({ keys: [] }); T.reloadClipDbg.hold(null);
-      T.player.position.set(O.x + 0.0, tg.floorY, O.z - 5.5);
-      T.setAimYawDbg(0); T.setOtsAimDbg(0, -0.02); T.setViewFirstDbg(false);
-      T.setWeapon(T.WEAPON_ORDER.indexOf('shotgun'));
-      T.marineIdleDbg().reset();
+      const T = window.TT;
+      await window.__resetClean('shotgun', -2.0);
       T.setZoomHeldDbg(true);
-      await new Promise((r) => setTimeout(r, 420));
+      await new Promise((r) => setTimeout(r, 380));
       T.marineIdleDbg().reset();
-      await new Promise((r) => setTimeout(r, 60));
       window.__holdSim = true;
     }`
   },
@@ -165,18 +171,12 @@ const CASES = [
     id: '06-smoking-idle',
     label: '(6) Smoking idle @ t=7.3s',
     prep: `async () => {
-      const T = window.TT, tg = T.trainingDbg.tg(), O = tg.origin;
-      window.__holdSim = false;
-      T.flightInput({ keys: [] }); T.setZoomHeldDbg(false); T.reloadClipDbg.hold(null);
-      T.player.position.set(O.x + 0.0, tg.floorY, O.z - 5.5);
-      T.setAimYawDbg(0); T.setOtsAimDbg(0, -0.02); T.setViewFirstDbg(false);
-      T.setWeapon(T.WEAPON_ORDER.indexOf('m4'));
-      T.marineIdleDbg().reset();
-      await new Promise((r) => setTimeout(r, 380));
+      const T = window.TT;
+      await window.__resetClean('m4', -2.0);
       const idle = T.marineIdleDbg();
       try { idle.state = { phase: 'smoking', time: 7.3, quiet: 40 }; } catch (_) {}
       if (idle.state && idle.state.phase !== 'smoking') Object.assign(idle.state, { phase: 'smoking', time: 7.3, quiet: 40 });
-      await new Promise((r) => setTimeout(r, 60));
+      await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
       window.__holdSim = true;
     }`
   },
@@ -184,15 +184,10 @@ const CASES = [
     id: '07a-sprint-forward',
     label: '(7a) Sprint forward (ankles & hips)',
     prep: `async () => {
-      const T = window.TT, tg = T.trainingDbg.tg(), O = tg.origin;
-      window.__holdSim = false;
-      T.setZoomHeldDbg(false); T.reloadClipDbg.hold(null);
-      T.player.position.set(O.x + 0.0, tg.floorY, O.z - 8.5);
-      T.setAimYawDbg(0); T.setOtsAimDbg(0, -0.02); T.setViewFirstDbg(false);
-      T.setWeapon(T.WEAPON_ORDER.indexOf('m4'));
-      T.marineIdleDbg().reset();
+      const T = window.TT;
+      await window.__resetClean('m4', -5.5);
       T.flightInput({ keys: ['ShiftLeft', 'w'] });
-      await new Promise((r) => setTimeout(r, 480));
+      await new Promise((r) => setTimeout(r, 460));
       window.__holdSim = true;
       T.flightInput({ keys: [] });
     }`
@@ -201,15 +196,10 @@ const CASES = [
     id: '07b-sprint-backward',
     label: '(7b) Backpedal / sprint back (ankles & hips)',
     prep: `async () => {
-      const T = window.TT, tg = T.trainingDbg.tg(), O = tg.origin;
-      window.__holdSim = false;
-      T.setZoomHeldDbg(false); T.reloadClipDbg.hold(null);
-      T.player.position.set(O.x + 0.0, tg.floorY, O.z - 3.5);
-      T.setAimYawDbg(0); T.setOtsAimDbg(0, -0.02); T.setViewFirstDbg(false);
-      T.setWeapon(T.WEAPON_ORDER.indexOf('m4'));
-      T.marineIdleDbg().reset();
+      const T = window.TT;
+      await window.__resetClean('m4', 0.5);
       T.flightInput({ keys: ['ShiftLeft', 's'] });
-      await new Promise((r) => setTimeout(r, 480));
+      await new Promise((r) => setTimeout(r, 460));
       window.__holdSim = true;
       T.flightInput({ keys: [] });
     }`
@@ -218,25 +208,18 @@ const CASES = [
     id: '08-turn-90-rifle',
     label: '(8) Standing 90-deg turn w/ rifle (hips follow >42 deg)',
     prep: `async () => {
-      const T = window.TT, tg = T.trainingDbg.tg(), O = tg.origin;
-      window.__holdSim = false;
-      T.flightInput({ keys: [] }); T.setZoomHeldDbg(false); T.reloadClipDbg.hold(null);
-      T.player.position.set(O.x + 0.0, tg.floorY, O.z - 5.5);
-      T.setAimYawDbg(0); T.setOtsAimDbg(0, -0.02); T.setViewFirstDbg(false);
-      T.setWeapon(T.WEAPON_ORDER.indexOf('m4'));
-      T.marineIdleDbg().reset();
-      await new Promise((r) => setTimeout(r, 400));
-      T.marineIdleDbg().reset();
+      const T = window.TT;
+      await window.__resetClean('m4', -2.0);
       // Turn aim 90 degrees (+PI/2) while standing so torso & hips follow past the 42-deg deadband
       T.setAimYawDbg(Math.PI / 2);
-      T.setOtsAimDbg(Math.PI / 2, -0.02);
-      await new Promise((r) => setTimeout(r, 140));
+      T.setOtsAimDbg(Math.PI / 2, 0.0);
+      await new Promise((r) => setTimeout(r, 150));
       window.__holdSim = true;
     }`
   }
 ];
 
-// Same 3 cameras relative to player's position & aim direction for every case!
+// Capture 'gameplay' FIRST while T.setShotView is still null (live OTS camera converged during prep!), then 'front34', then 'side'!
 const CAMS = ['gameplay', 'front34', 'side'];
 
 async function main() {
@@ -265,7 +248,7 @@ async function main() {
     })()`);
     assert(await page.waitFor('TT.trainingDbg.state().active && !document.getElementById("trainingBlackout")?.classList.contains("on")', { timeout: 60000 }));
     await page.evaluate(SETUP_FN);
-    await new Promise((r) => setTimeout(r, 400));
+    await new Promise((r) => setTimeout(r, 300));
 
     for (const c of CASES) {
       await page.evaluate(`(${c.prep})()`);
@@ -273,8 +256,9 @@ async function main() {
         for (const light of LIGHTS) {
           await page.evaluate(`(async (cam, light, wTime, caseId) => {
             const T = window.TT;
-            window.agLight = light;
             T.setWorldTime(wTime);
+            window.agLight = light;
+            window.__illuminate();
             const p = T.player.position;
             const yaw = caseId === '08-turn-90-rifle' ? Math.PI / 2 : 0;
             const fwdX = Math.sin(yaw), fwdZ = Math.cos(yaw);
@@ -282,12 +266,10 @@ async function main() {
             if (cam === 'gameplay') {
               T.setShotView(null);
             } else if (cam === 'front34') {
-              // 3/4 front close camera (in front and slightly to marine's gun side so hands, gun, elbows, shoulders, hips & ankles read clearly)
               const cx = p.x + fwdX * 1.65 - rgtX * 1.15;
               const cz = p.z + fwdZ * 1.65 - rgtZ * 1.15;
               T.setShotView({ x: cx, y: p.y + 1.18, z: cz, tx: p.x, ty: p.y + 0.94, tz: p.z, fov: 46 });
             } else if (cam === 'side') {
-              // Side close camera (gun/left-handed marine's weapon side)
               const cx = p.x - rgtX * 1.95 + fwdX * 0.25;
               const cz = p.z - rgtZ * 1.95 + fwdZ * 0.25;
               T.setShotView({ x: cx, y: p.y + 1.08, z: cz, tx: p.x, ty: p.y + 0.92, tz: p.z, fov: 46 });
@@ -298,7 +280,7 @@ async function main() {
           fs.writeFileSync(path.join(OUT_DIR, `${c.id}-${cam}-${light}.jpg`), Buffer.from(shot.data, 'base64'));
         }
       }
-      console.log(`[CB-291] Captured ${c.id} (3 cams x 4 lights)`);
+      console.log(`[CB-291-v2] Captured ${c.id} (3 cams x 4 lights)`);
     }
   } finally {
     await browser.close();

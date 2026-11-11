@@ -103,6 +103,8 @@
     count('same named insert showing through the outside still fails',1,{pose:'fixture:rest',lookup});
     insert.position.x=.012; shell.material.transparent=true; shell.material.opacity=.4;
     count('same named insert visible through glazing still fails',1,{pose:'fixture:rest',lookup});
+    shell.material.transparent=false; shell.material.opacity=1; shell.material.visible=false;
+    count('disabled shell material cannot hide the named insert',1,{pose:'fixture:rest',lookup});
   }
   function requiredSeats(gun) {
     const seats=[];
@@ -233,7 +235,20 @@
   if(!settled()) throw Error('Training Ground carry scene did not settle');
   T.grantAllWeapons();
   T.setViewFirstDbg(false);
+  // The training spawn can be unarmed even after selecting a weapon. A carry
+  // copy made there inherits the hidden draw meshes of the holstered source.
+  if(T.isUnarmed())T.toggleHolster();
+  if(T.isUnarmed())throw Error('Carry fixture could not draw its source model');
   const marine=T.makeMarine(), slings={};
+  function displayState(spot,kind) {
+    const summarize=node=>{
+      if(!node)return null;
+      let meshes=0;node.traverseVisible(o=>{if(o.isMesh && o.geometry?.attributes?.position)meshes++;});
+      return {visible:node.visible,meshes,scale:node.scale.toArray(),children:node.children.length};
+    };
+    return {kind,selected:T.getCurrentWeapon(),unarmed:T.isUnarmed(),source:summarize(T.weaponMeshes[kind]),
+      copy:summarize(spot.gun),inner:summarize(spot.gun?.children[0]),held:T.drawDbg?.().held};
+  }
   for (const kind of ['m4','ak','aa12','shotgun','sniper','launcher','minigun','flamer','chainsaw']) {
     // A carried copy inherits the live weapon's visible pieces. Wait for the
     // normal equip transition before asking the preview rig to clone that gun.
@@ -251,12 +266,13 @@
         let state;
         try {state=auditSling(spot,1.8/1.655);}
         catch(error) {
-          slings[id]={error:error.message};
+          slings[id]={error:error.message,...(sources?{display:displayState(spot,kind)}:{})};
           lines.push('FAIL sling '+id+' '+error.message);
           continue;
         }
         slings[id]=state;
         const unsupported=state.ends.filter(e=>!e.gunContact || !e.webContact).length;
+        if(sources && (unsupported || state.overlaps.length)) state.display=displayState(spot,kind);
         lines.push((!unsupported && !state.overlaps.length?'PASS ':'FAIL ')+'sling '+id+
           ' ('+unsupported+' unsupported ends, '+state.overlaps.length+' penetrating pairs)');
       }

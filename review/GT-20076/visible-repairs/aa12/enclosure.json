@@ -1,0 +1,32 @@
+{
+  "production": {
+    "raw": 1,
+    "open": 1,
+    "excused": []
+  },
+  "candidate": {
+    "raw": 1,
+    "open": 0,
+    "excused": [
+      {
+        "id": "breacher-enclosed-sleeve",
+        "maximum": 0.03349318151754693
+      }
+    ]
+  },
+  "variant": {
+    "raw": 1,
+    "open": 1,
+    "excused": []
+  },
+  "glazed": {
+    "raw": 1,
+    "open": 1,
+    "excused": []
+  },
+  "showing": {
+    "raw": 1,
+    "open": 1,
+    "excused": []
+  }
+}
