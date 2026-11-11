@@ -1,0 +1,17 @@
+pistol | 497 pieces | 0 detached groups | 0 missing intended contacts | 87 other intersections | 0 detail breaches
+revolver | 930 pieces | 0 detached groups | 0 missing intended contacts | 127 other intersections | 0 detail breaches
+uzi | 183 pieces | 0 detached groups | 0 missing intended contacts | 159 other intersections | 0 detail breaches
+m4 | 391 pieces | 0 detached groups | 0 missing intended contacts | 417 other intersections | 0 detail breaches
+ak | 313 pieces | 0 detached groups | 0 missing intended contacts | 141 other intersections | 0 detail breaches
+aa12 | 231 pieces | 0 detached groups | 0 missing intended contacts | 150 other intersections | 0 detail breaches
+shotgun | 85 pieces | 0 detached groups | 0 missing intended contacts | 90 other intersections | 0 detail breaches
+sniper | 280 pieces | 0 detached groups | 0 missing intended contacts | 236 other intersections | 0 detail breaches
+minigun | 182 pieces | 0 detached groups | 0 missing intended contacts | 217 other intersections | 0 detail breaches
+launcher | 258 pieces | 0 detached groups | 0 missing intended contacts | 233 other intersections | 0 detail breaches
+flamer | 131 pieces | 0 detached groups | 0 missing intended contacts | 183 other intersections | 0 detail breaches
+chainsaw | 350 pieces | 0 detached groups | 0 missing intended contacts | 311 other intersections | 0 detail breaches
+frag-grenade | 8 pieces | 0 detached groups | 0 missing intended contacts | 6 other intersections | 0 detail breaches
+Base models covered 12 ; base models still red 12 ; pistol, revolver, uzi, m4, ak, aa12, shotgun, sniper, minigun, launcher, flamer, chainsaw
+All checks 52 pass 50 fail; all model/loadout assemblies 56
+Harness geometry fixtures 10 pass, 0 fail
+Sling states 36 ; 36 pass, 0 fail

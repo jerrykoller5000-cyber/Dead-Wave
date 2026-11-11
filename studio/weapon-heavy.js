@@ -709,20 +709,53 @@ export function makeFlamerModel(ctx) {
   return finishGun(gun);
 }
 
+const sawCoverMaps = new WeakMap();
+function sawCoverTexture(T) {
+  if (sawCoverMaps.has(T)) return sawCoverMaps.get(T);
+  const size = 128, data = new Uint8Array(size * size * 4);
+  let seed = 0x428e9;
+  for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
+    seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
+    const grain = seed / 0x100000000;
+    const cloud = Math.sin((x + 5 * Math.sin(y * Math.PI / 32)) * Math.PI / 32)
+      * Math.cos(y * Math.PI / 64);
+    const value = Math.round(239 + 7 * cloud - 17 * grain ** 3);
+    const i = 4 * (y * size + x);
+    data[i] = value; data[i + 1] = value; data[i + 2] = value; data[i + 3] = 255;
+  }
+  const map = new T.DataTexture(data, size, size);
+  map.name = 'moulded tool cover stipple';
+  map.wrapS = map.wrapT = T.RepeatWrapping;
+  map.magFilter = T.LinearFilter; map.minFilter = T.LinearMipmapLinearFilter;
+  map.generateMipmaps = true; map.needsUpdate = true;
+  sawCoverMaps.set(T, map);
+  return map;
+}
+
 export function makeChainsawModel(ctx) {
   const { THREE, gunKit, gunArc, gunBand, gripOutline, finishGun, gunBody, gunDark, gunMid, gunAccent, gunPoly, gunRubber, steelMat, hazardYellow, bladeMat, layoutChainsawChain } = ctx;
   const gun = new THREE.Group();
   const K = gunKit(gun);
   // Engine body (glows when the saw runs hot) under a moulded top cover with vents.
   const bodyMat = gunBody.clone();
-  bodyMat.color.setHex(0xa85225);
+  bodyMat.name = 'chainsaw motor enamel';
+  bodyMat.color.setHex(0x985632);
+  bodyMat.roughness = .69;
   bodyMat.emissive = new THREE.Color(0xff6611);
   bodyMat.emissiveIntensity = 0;
   const coverMat = bodyMat.clone();
-  coverMat.color.setHex(0xc66b2e);
+  coverMat.name = 'chainsaw moulded covers';
+  coverMat.color.setHex(0xbd733e);
+  coverMat.roughness = .74;
+  coverMat.metalness = .025;
+  coverMat.map = sawCoverTexture(THREE);
+  gun.userData.partFinish = true;
+  coverMat.userData.weaponFinishRole = 'furniture';
   const barMat = steelMat.clone();
-  barMat.color.setHex(0xb1b9b2);
-  barMat.roughness = 0.55;
+  barMat.name = 'chainsaw satin bar';
+  barMat.color.setHex(0x87908c);
+  barMat.roughness = .65;
+  barMat.metalness = .47;
   K.slab([[-0.27, 0.105], [-0.28, 0.083], [-0.28, -0.024], [-0.248, -0.06], [0.088, -0.06], [0.11, -0.038], [0.11, 0.112], [0.09, 0.14], [-0.24, 0.14]], 0.24, bodyMat, { bevel: 0.012, segs: 3 });
   // Orange cowling steps down at the front, leaving a clear grip over the engine.
   K.slab([[-0.25, 0.132], [0.073, 0.132], [0.073, 0.148], [-0.01, 0.154], [-0.03, 0.177], [-0.214, 0.18], [-0.25, 0.155]], 0.22, coverMat, { bevel: 0.010, segs: 3 });
@@ -772,7 +805,7 @@ export function makeChainsawModel(ctx) {
   K.slab(gunBand([[-0.245, 0.08], [-0.445, 0.08], [-0.49, 0.025], [-0.49, -0.095], [-0.27, -0.095]], 0.014), 0.07, gunPoly, { bevel: 0.007 });
   K.box(0.074, 0.13, 0.055, gunRubber, 0, -0.014, -0.46, 0, 0, 0, null, 0.012);
   for (let i = 0; i < 5; i++) K.box(0.076, 0.007, 0.058, gunPoly, 0, -0.064 + i * 0.024, -0.46, 0, 0, 0, null, 0.002);
-  K.slab(gunBand([[-0.395, 0.062], [-0.393, 0.045], [-0.375, 0.01], [-0.365, -0.03]], 0.006), 0.022, hazardYellow, { bevel: 0.002 });
+  addTriggerArtwork(gun, K, gunBand([[-0.395, 0.062], [-0.393, 0.045], [-0.375, 0.01], [-0.365, -0.03]], 0.006), 0.022, hazardYellow, { bevel: 0.002 });
   K.slab(gunBand([[-0.395, 0.062], [-0.34, 0.06], [-0.326, -0.065], [-0.42, -0.069]], 0.006), 0.033, gunDark, { bevel: 0.003 });
   K.box(0.072, 0.02, 0.04, gunAccent, 0, 0.085, -0.445, 0, 0, 0, null, 0.004);
   K.box(0.05, 0.009, 0.027, gunDark, 0, 0.0995, -0.444, 0, 0, 0, null, 0.003); // throttle lock paddle
@@ -834,19 +867,56 @@ export function makeChainsawModel(ctx) {
   // Do NOT rigid-spin this group — advanceChainsawChain moves each tooth along the path.
   const chainGroup = new THREE.Group();
   chainGroup.position.set(0, 0.04, 0.48);
-  const toothCount = 22;
+  const toothCount = 42;
   const chainTeeth = [];
-  // GP-20051/J31: tall angled cutter crowns break the bar's outline at the
-  // normal sheet scale; bright steel separates them from the grey guide bar.
-  const toothPrototype = B.slab([[-0.016, -0.011], [0.013, -0.011], [0.016, 0.001], [0.008, 0.019], [-0.001, 0.014], [-0.004, 0.002], [-0.016, 0.002]], 0.053, steelMat, { bevel: 0.001, segs: 1 });
-  bar.remove(toothPrototype);
+  // One low, dark segment and two offset steel accents repeat around the
+  // existing animated path. Their silhouette stays fine in the player's view.
+  // A single closed skin carries the alternating highlights. Adjacent faces
+  // share vertices, including where the raised areas meet the dark band.
+  const positions = [], colors = [], indices = [];
+  const columns = 3, rows = 4, stride = columns + 1, layer = stride * (rows + 1);
+  const dark = gunDark.color, bright = steelMat.color;
+  for (let top = 0; top < 2; top++) for (let row = 0; row <= rows; row++) {
+    const v = row / rows - .5, side = Math.sign(v);
+    const stripe = Math.max(0, 1 - 4 * Math.abs(Math.abs(v) - .25));
+    for (let col = 0; col <= columns; col++) {
+      const u = col / columns - .5;
+      const ridge = stripe * Math.max(0, Math.min(1, .40 + 1.50 * side * u));
+      const tone = top && ridge > .3 ? .98 : .06;
+      const x = u * (.025 + .012 * ridge);
+      positions.push(x, top ? -.0002 + .0066 * ridge : -.0048, .041 * v);
+      colors.push(dark.r + (bright.r - dark.r) * tone, dark.g + (bright.g - dark.g) * tone, dark.b + (bright.b - dark.b) * tone);
+    }
+  }
+  const quad = (a, b, c, d) => indices.push(a, b, c, a, c, d);
+  for (let row = 0; row < rows; row++) for (let col = 0; col < columns; col++) {
+    const a = row * stride + col, b = a + 1, d = a + stride, c = d + 1;
+    quad(a, b, c, d);
+    quad(layer + a, layer + d, layer + c, layer + b);
+    if (row === 0) quad(a, layer + a, layer + b, b);
+    if (col === columns - 1) quad(b, layer + b, layer + c, c);
+    if (row === rows - 1) quad(c, layer + c, layer + d, d);
+    if (col === 0) quad(d, layer + d, layer + a, a);
+  }
+  const surface = new THREE.BufferGeometry();
+  surface.setAttribute('position', new THREE.BufferAttribute(new Float32Array(positions), 3));
+  surface.setAttribute('color', new THREE.BufferAttribute(new Float32Array(colors), 3));
+  surface.setIndex(indices);
+  const segment = surface.toNonIndexed();
+  segment.computeVertexNormals();
+  segment.computeBoundingSphere();
+  const chainFinish = steelMat.clone();
+  chainFinish.name = 'chainsaw link finish';
+  chainFinish.color.setHex(0xffffff);
+  chainFinish.vertexColors = true;
+  chainFinish.roughness = .58;
   for (let i = 0; i < toothCount; i++) {
     // GB-189: teeth are transform-only nodes; one InstancedMesh draws all of them.
     const tooth = new THREE.Object3D();
     chainGroup.add(tooth);
     chainTeeth.push(tooth);
   }
-  const chainInst = new THREE.InstancedMesh(toothPrototype.geometry, steelMat, toothCount);
+  const chainInst = new THREE.InstancedMesh(segment, chainFinish, toothCount);
   chainInst.castShadow = chainInst.receiveShadow = true;
   chainInst.frustumCulled = false;
   chainGroup.add(chainInst);

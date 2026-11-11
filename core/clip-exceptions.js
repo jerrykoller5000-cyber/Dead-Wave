@@ -4,17 +4,6 @@
 // unnamed passes. Pure data, no imports, so the page, the tests and node all read it.
 export const CLIP_EXCEPTIONS = Object.freeze([
   Object.freeze({
-    id: 'sleeve-on-carrier-front',
-    layers: Object.freeze(['shirt', 'vest']),   // inner, outer (tcc341's pair)
-    poses: Object.freeze(['kit: run', 'kit: crouch']),
-    max: 0.009,
-    reason: 'CC-341 (b), CLAUDE DIRECTOR 11 Nov: with the plate carrier on and a long gun held in a run or a crouch, the support ' +
-      'arm\'s upper sleeve lies up to 8 mm into the carrier\'s left front (plate face and mag pouch): cloth pressed on kit, it ' +
-      'reads right on sight',
-    until: 'CB-291 (Claude 2): the hold IK keeps the support upper arm ~1 cm off the carrier\'s front (carrierClearance(ud) ' +
-      'upperArm, studio/marine-body.js); then this entry goes'
-  }),
-  Object.freeze({
     id: 'training-void-shell',
     layers: Object.freeze(['training-void', 'training-floor']),
     poses: Object.freeze(['training:static']),

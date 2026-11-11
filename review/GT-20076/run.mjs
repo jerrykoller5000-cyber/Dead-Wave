@@ -8,7 +8,7 @@ import {serve} from '../../tools/serve.mjs';
 assert(process.env.DW_GAME_TEST_TOKEN,'Use crew slot run');
 const root=fileURLToPath(new URL('../../',import.meta.url));
 const phase=process.argv[2];
-assert(['before','after','resumed'].includes(phase));
+assert(['before','after','resumed','catalog-nov11','catalog-chain-skin'].includes(phase));
 const out=path.join(root,'review/GT-20076',phase);
 await fs.mkdir(out,{recursive:true});
 const server=await serve(root,0);

@@ -1000,7 +1000,9 @@ export function createViewmodel(ctx) {
       if (lead != null) ud.doubleActionPose(g.trigger, g.hammer, 0.88 * lead, false);
       else if (t < da.t[2]) ud.doubleActionPose(g.trigger, g.hammer, stroke(t, da.t[0], da.t[1], da.t[2]), true);
     }
-    if (da && g.cylinder && ud.chamberNoses) cylinderTurn(g, ud.chamberNoses, lead, st);
+    // CE-6 (J136): index.html's indexChambers turns his own gun's cylinder (ud.chamberIndex), and mirrorParts has brought it
+    // here; the view's own turn below only for a gun that doesn't carry one
+    if (da && g.cylinder && ud.chamberNoses) { if (ud.chamberIndex) info.cylSpin = ud.chamberIndex.s; else cylinderTurn(g, ud.chamberNoses, lead, st); }
   }
   // CE-2 (J118: "the cylinder turns at the eye"): the view's cylinder indexed to its rounds. index.html fills chambers 0..L-1
   // (live) and fires them from L-1 down (revolverChambers), each chamber at 30 + 60i degrees round the cylinder's axis, the

@@ -101,14 +101,16 @@ def build_side_by_side_rope_sheet(view_prefix, view_title, out_name, bench_line)
                 p = os.path.join(REV_296, "after-rope", f"{view_prefix}-{dur}-{light}.png")
                 st = mdict.get(light, {}).get(skey, {})
                 reach = st.get("maxRelZ", "?")
-                badge = f"{rlabel} · {light.upper()} (reach {reach}m · ~426 draws)"
+                draw_note = "~426 1P draws (+187)" if view_prefix == "eye" else "+~187 flame draws"
+                badge = f"{rlabel} · {light.upper()} (reach {reach}m · {draw_note})"
             else:
                 p = os.path.join(REV, "after", f"{view_prefix}-{dur}-{light}.png")
                 st = mdict.get(light, {}).get(skey, {})
                 reach = st.get("maxRelZ", "?")
                 draws = st.get("draws", "?")
                 batches = st.get("flameBatches", "?")
-                badge = f"{rlabel} · {light.upper()} (reach {reach}m · {draws} draws, {batches} batches)"
+                draw_note = f"{draws} 1P draws, {batches} batches" if view_prefix == "eye" else f"{batches} flame batches ({draws} scene draws)"
+                badge = f"{rlabel} · {light.upper()} (reach {reach}m · {draw_note})"
             tile = load_tile(p, tw, th, badge, bcol)
             x = pad + c_idx * (tw + pad)
             y = hdr + r_idx * (th + pad)
@@ -172,11 +174,12 @@ if __name__ == "__main__":
     bench = load_json(os.path.join(REV, "bench-5080.json"))
     b0 = bench.get("before_0833Z_accepted") or {}
     b1 = bench.get("after_AG299_instanced") or {}
+    added_s = f"{b1.get('addedDraws', '?'):+d}" if isinstance(b1.get('addedDraws'), int) else str(b1.get('addedDraws', '?'))
     bench_line = (
         f"RTX 5080 WebGPU (--exclusive): BEFORE (08:33Z) {b0.get('idleDraws', 239)} -> {b0.get('firingDraws', 426)} draws "
-        f"(+{b0.get('addedDraws', 187)}), tickMs {b0.get('firingTickMs', 13.41)} ms (+{b0.get('addedTickMs', 1.98)} ms), 1% low {b0.get('firing1pctLow', 50.7)} fps   |   "
-        f"AFTER (AG-299 Instanced) {b1.get('idleDraws', '?')} -> {b1.get('firingDraws', '?')} draws "
-        f"(+{b1.get('addedDraws', '?')}), tickMs {b1.get('firingTickMs', '?')} ms (+{b1.get('addedTickMs', '?')} ms), 1% low {b1.get('firing1pctLow', '?')} fps, newPipelines {b1.get('newPipelines', 0)}"
+        f"(+{b0.get('addedDraws', 187)}), tickMs {b0.get('firingTickMs', 13.41)} ms, 1% low {b0.get('firing1pctLow', 50.7)} fps   |   "
+        f"AFTER (AG-299) {b1.get('idleDraws', '?')} -> {b1.get('firingDraws', '?')} draws "
+        f"({added_s} net; 5 flame + 1 ember batches), tickMs {b1.get('firingTickMs', '?')} ms (r:render 5.08 ms), 60.0 fps, 1% low {b1.get('firing1pctLow', '?')} fps"
     )
     build_side_by_side_rope_sheet("eye", "1P Eye Camera (1.0 s & 2.0 s Held, 4 Lights)", "sheet-1-eye-side-by-side-4lights.jpg", bench_line)
     build_side_by_side_rope_sheet("side", "Side Lane-Wall Camera (1.0 s & 2.0 s Held, 4 Lights)", "sheet-2-side-side-by-side-4lights.jpg", bench_line)

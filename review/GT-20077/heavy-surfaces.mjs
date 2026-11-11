@@ -6,13 +6,19 @@ import {serve} from '../../tools/serve.mjs';
 import {save} from '../GT-20076/save.mjs';
 
 const [id, phase]=process.argv.slice(2);
-assert(process.env.DW_GAME_TEST_TOKEN && ['flamer','chainsaw'].includes(id) && ['before','art','after'].includes(phase));
+assert(process.env.DW_GAME_TEST_TOKEN && ['flamer','chainsaw'].includes(id) && ['before','baseline-look','art','after','coarse-chain','fine-chain','unified-chain'].includes(phase));
 const dir=new URL('./'+id+'/'+phase+'/',import.meta.url);
 await mkdir(dir,{recursive:true});
 const server=await serve(fileURLToPath(new URL('../../',import.meta.url)),0);
 const browser=await launch({headless:false});
 try {
   const page=await browser.newPage({width:1280,height:720});
+  let verifyBaseline;
+  if(phase==='baseline-look'){
+    assert.equal(id,'chainsaw');
+    const {originalSawForPage}=await import('./chainsaw/baseline-look.mjs');
+    verifyBaseline=await originalSawForPage(page,server.origin);
+  }
   await page.goto(server.origin+'/index.html?debug=1&raf=timer');
   assert(await page.waitFor('window.TT && DWLoad.snapshot().state==="ready"'));
   await page.evaluate('DWOpening.dismissForTesting()');assert(await page.waitFor('!DWOpening.active'));
@@ -95,7 +101,7 @@ try {
   parts.restored=await page.evaluate('finishAppearance(reviewId,"restored")');
   await save(new URL(reverseOnly?'reverse-frames.json':'frames.json',dir),JSON.stringify(frames,null,2));
   await save(new URL(reverseOnly?'reverse-materials.json':'materials.json',dir),JSON.stringify(parts,null,2));
-  if(phase !== 'before'){
+  if(phase==='art'||phase==='after'){
     const rig = await page.evaluate(`(()=>{
       const G=TT.THREE, source=TT.weaponMeshes[reviewId], eye=TT.viewmodelDbg().gun.root;
       const id=source.userData.controls?.trigger, pin=source.userData.triggerPin;
@@ -129,5 +135,27 @@ try {
       else assert.deepEqual(b.mats[i],m,'Factory material changed on '+m.name);
     }
   }
+  if(phase.endsWith('-chain')){
+    const motion=await page.evaluate(`(async()=>{
+      const T=TT.THREE,held=TT.weaponMeshes.chainsaw,vm=TT.viewmodelDbg().gun.root;
+      const ctx=TT.inspectHost().builders.weaponContext(), {makeChainsawModel}=await import('/studio/weapon-heavy.js');
+      const raw=makeChainsawModel({...ctx,finishGun:g=>g});
+      const inst=raw.userData.chainInst, n=inst.count;
+      const before=inst.instanceMatrix.array.slice();
+      raw.userData.chainPhase=.173;ctx.layoutChainsawChain(raw);
+      let changed=0;
+      for(let i=0;i<n;i++){
+        const at=i*16;
+        if(inst.instanceMatrix.array.slice(at,at+16).some((v,j)=>Math.abs(v-before[at+j])>1e-5))changed++;
+      }
+      const batches=root=>{let found=0;root.traverse(o=>{if(o.isInstancedMesh&&o.count===n)found++});return found};
+      return {instances:n,changed,heldBatches:batches(held),eyeBatches:batches(vm),
+        templateTriangles:(inst.geometry.index?.count||inst.geometry.attributes.position.count)/3};
+    })()`);
+    assert(motion.instances>0 && motion.changed===motion.instances && motion.heldBatches===1 && motion.eyeBatches===1);
+    await save(new URL('chain-motion.json',dir),JSON.stringify(motion,null,2));
+    console.log('PASS one eye and one held chain batch;',motion.instances,'of',motion.instances,'instance matrices advance');
+  }
+  if(verifyBaseline)verifyBaseline();
   assert.deepEqual(page.errors,[]);console.log('PASS',id,phase,frames.length,'four-light held and eye views');
 }finally{await browser.close();await server.close()}

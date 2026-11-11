@@ -59,17 +59,23 @@ test('GP-19910: a round meets a target on its drawn plate, not the front of its 
     assert.equal(back.normal.z,1,'and faces downrange, the way the round came');
   }
 });
-test('createTrainingChar and createTrainingImpacts create renderOrder 1 batches on group and targets and record hits',()=>{
+test('createTrainingChar and createTrainingImpacts create ordered single-pass batches above wear (1) and below flames (3)',()=>{
   const tg=buildTrainingGround(T);
   const char=createTrainingChar(T,tg);
   const impacts=createTrainingImpacts(T,tg);
   assert.equal(char.count(),0);
   assert.equal(impacts.count(),0);
 
-  // Group child mesh for char marks has renderOrder === 1
+  // Group child meshes sort strictly wear (1) < impacts (1.1) < char (1.2) < wisps (2) < flames (3)
   const charMesh = tg.group.children.find(c => c.name === 'training-char-marks');
-  assert.ok(charMesh, 'char mesh added to tg.group');
-  assert.equal(charMesh.renderOrder, 1, 'char mesh renderOrder is 1 (flames at 3 draw over decals)');
+  const impactMesh = tg.group.children.find(c => c.name === 'training-impact-marks');
+  assert.ok(charMesh && impactMesh, 'char and impact meshes added to tg.group');
+  assert.equal(impactMesh.renderOrder, 1.1, 'impact mesh renderOrder is 1.1 (above wear 1, below char 1.2)');
+  assert.equal(charMesh.renderOrder, 1.2, 'char mesh renderOrder is 1.2 (above impacts 1.1, below wisps 2 & flames 3)');
+  assert.equal(impactMesh.material.forceSinglePass, true);
+  assert.equal(charMesh.material.forceSinglePass, true);
+  assert.equal(impactMesh.material.polygonOffset, true);
+  assert.equal(charMesh.material.polygonOffset, true);
 
   // Warmup primes and restores
   const restoreChar = char.prepareWarmup();

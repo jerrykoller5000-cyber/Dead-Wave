@@ -2,9 +2,9 @@
 
 state: active
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: CB-291 J127 third-person body limits: land step 1 (neck, hips, knees, ankles held after the pose), then (a) hips follow aim past 45, the sprint ankles/back-sprint hips to the table, shoulder twist in the IK
-touching: index.html (updateMarinePose, clampBodyPose, solveArmIK shoulder twist, TT debug export), core/body-limits.js, core/body-limits.test.mjs, tools/tests/tcb291.js (new)
-since: 2026-11-11T08:54Z
+task: CB-291 J127 third-person body limits: landing (the neck, hips, knees, ankles after the pose; 45 deg spine caps; the shoulders held in the arm IK and after free poses; the carrier kept off the sleeve)
+touching: index.html (updateMarinePose, clampBodyPose, solveArmIK + holdShoulderIK, drawPose, the frame's holdFreeShoulders line, TT debug export, imports), core/body-limits.js, core/body-limits.test.mjs, core/clip-exceptions.js, studio/marine-turn.js (TWIST.cap), tools/tests/tcb291.js (new)
+since: 2026-11-11T10:50Z
 next: CB-290 J126 rule 3 (Jerry, 10 Nov, standing, D-138): "No part of th
 blocked-on: —
 last-report: handoffs/2026-11-11-claude2-CB-304.md

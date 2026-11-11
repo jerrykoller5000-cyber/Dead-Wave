@@ -117,3 +117,45 @@ test('the elbow: 0 to 150 deg, never backwards', () => {
   close(clampElbowHinge(-2.5, 0.4), 0.4 - 150 * DEG, 1e-12, '150 deg counted from its lean');
   assert.ok(wristOver(0, 0) === 0); close(elbowBend(-0.5, 0.4), 0.9, 1e-12, 'bend = lean - hinge');
 });
+
+test('CB-291: the trunk, limb and hinge holds put a pose back inside its row and leave one inside untouched', async () => {
+  const { BODY_LIMITS: L, clampTrunk, clampLimb, clampHinge, trunkAngles, limbAngles, hingeAngle, outside } = await import('./body-limits.js');
+  for (let i = 0; i < 1500; i++) {
+    const q = randQ();
+    clampTrunk(q, L.spine); assert.deepEqual(outside(L.spine, trunkAngles(q), 1e-6), [], 'spine #' + i);
+    const n = randQ(); clampTrunk(n, L.neck); assert.deepEqual(outside(L.neck, trunkAngles(n), 1e-6), [], 'neck #' + i);
+    for (const side of [1, -1]) { const h = randQ(); clampLimb(h, side, L.hip); assert.deepEqual(outside(L.hip, limbAngles(h, side), 1e-6), [], 'hip #' + i); }
+    const k = randQ(); clampHinge(k, L.knee.bend); assert.deepEqual(outside(L.knee, { bend: hingeAngle(k) }, 1e-6), [], 'knee #' + i);
+  }
+  const inside = qAxis([1, 0, 0], 0.3), keep = { ...inside };
+  assert.deepEqual(clampTrunk(inside, L.spine), []); for (const c of 'xyzw') close(inside[c], keep[c], 1e-12, 'untouched ' + c);
+  const hip = qAxis([-1, 0, 0], 0.5), hk = { ...hip };   // the thigh 29 deg forward
+  assert.deepEqual(clampLimb(hip, 1, L.hip), []); for (const c of 'xyzw') close(hip[c], hk[c], 1e-12, 'hip untouched ' + c);
+  const back = qAxis([0, 0, 1], 0); const kn = qAxis([1, 0, 0], -0.4);   // a knee bent backwards
+  assert.deepEqual(clampHinge(kn, L.knee.bend), ['bend']); close(hingeAngle(kn), 0, 1e-12, 'straight'); void back;
+  const far = qAxis([-1, 0, 0], 2.6);   // the thigh 149 deg forward
+  clampLimb(far, 1, L.hip); close(limbAngles(far, 1).flex, L.hip.flex[1], 1e-9, 'held at 125');
+});
+
+test('CB-291: the shoulder reads its turn from where the elbow points (its hinge); shoulderHold puts any arm back inside its row', async () => {
+  const { BODY_LIMITS: L, shoulderAngles, shoulderPast, shoulderHold } = await import('./body-limits.js');
+  const D = Math.PI / 180;
+  // hanging, the hinge along +x (the elbow bends forward): no turn; the hinge along +z (the forearm across him): 90 deg in
+  close(shoulderAngles([0, -1, 0], [1, 0, 0], 1).turn, 0, 1e-9, 'hanging, bending forward');
+  close(shoulderAngles([0, -1, 0], [0, 0, 1], 1).turn, 90 * D, 1e-9, 'right arm (+x), forearm across');
+  close(shoulderAngles([0, -1, 0], [0, 0, -1], -1).turn, 90 * D, 1e-9, 'left arm (-x), forearm across');
+  close(shoulderAngles([0, 0, 1], [1, 0, 0], 1).turn, 0, 1e-9, 'raised forward, the forearm would bend up');
+  assert.equal(shoulderAngles([0, 1, 0], [1, 0, 0], 1).turn, null, 'straight up: no turn');
+  close(shoulderAngles([0, 0, -1], [1, 0, 0], 1).back, 90 * D, 1e-9, 'straight back');
+  close(shoulderAngles([-1, 0, 0], [0, 0, 1], 1).across, 90 * D, 1e-9, 'right arm straight across');
+  const rotv = (q, v) => { const { x, y, z, w } = q; const tx = 2 * (y * v[2] - z * v[1]), ty = 2 * (z * v[0] - x * v[2]), tz = 2 * (x * v[1] - y * v[0]); return [v[0] + w * tx + (y * tz - z * ty), v[1] + w * ty + (z * tx - x * tz), v[2] + w * tz + (x * ty - y * tx)]; };
+  for (let i = 0; i < 3000; i++) for (const side of [1, -1]) {
+    const q = randQ();
+    shoulderHold(q, [0, -0.28, 0], side);
+    const a = shoulderAngles(rotv(q, [0, -0.28, 0]), rotv(q, [1, 0, 0]), side);
+    assert.ok(shoulderPast(a, L.shoulder) < 1e-6, 'held #' + i + ' ' + JSON.stringify(a));
+  }
+  const inside = qAxis([1, 0, 0], -0.6), keep = { ...inside };   // the arm 34 deg forward: inside
+  assert.deepEqual(shoulderHold(inside, [0, -0.28, 0], 1), []);
+  for (const c of 'xyzw') close(inside[c], keep[c], 1e-12, 'untouched ' + c);
+});

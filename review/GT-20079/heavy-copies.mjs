@@ -23,7 +23,7 @@ try{
     TT.grantAllWeapons();TT.modsOwnAllDbg();TT.setViewFirstDbg(true);if(TT.isUnarmed())TT.toggleHolster();
     TT.flightHold(true);const advance=n=>{for(let i=0;i<n;i++)TT.stepFrame(1/30)};
     const arm=TT.armoryDbg.ui().armory;
-    if(!TT.armoryDbg.stored().includes(finishKind))arm.buy({id:'finish-copy-'+finishKind,kind:finishKind},{store:true});
+    if(finishKind!=='chainsaw'&&!TT.armoryDbg.stored().includes(finishKind))arm.buy({id:'finish-copy-'+finishKind,kind:finishKind},{store:true});
     for(let i=0;i<25&&TT.getCurrentWeapon()!==finishKind;i++){TT.setWeapon(TT.WEAPON_ORDER.indexOf(finishKind));advance(12)}
     advance(70);
     const result={},rackVertices={};
@@ -33,8 +33,16 @@ try{
       if(!TT.armoryFinishDbg.paint(finishKind,paint))throw Error('Could not paint');
       advance(55);TT.armoryDbg.refreshRack(true);advance(5);
       const rack=TT.scene.getObjectByName('training-armory').getObjectByName('armoryRack');
-      const roots={held:TT.weaponMeshes[finishKind],eye:TT.viewmodelDbg().gun.root,carry:TT.carryGunCopyDbg(finishKind),
-        rack:rack.children.find(o=>o.userData.rackKind===finishKind)};
+      const roots={held:TT.weaponMeshes[finishKind],eye:TT.viewmodelDbg().gun.root,carry:TT.carryGunCopyDbg(finishKind)};
+      const rackModel=rack.children.find(o=>o.userData.rackKind===finishKind);
+      if(finishKind==='chainsaw'){
+        if(rackModel)throw Error('Unexpected chainsaw rack display');
+        const data=roots.held.userData;
+        let heatMeshes=0;
+        roots.held.traverse(o=>{if(o.isMesh&&o.material===data.heatMat)heatMeshes++});
+        if(!heatMeshes||!data.chainInst?.count)throw Error('Missing rendered heat surface or animated chain');
+        (result.motion||={})[label]={heatMeshes,chainInstances:data.chainInst.count};
+      }else roots.rack=rackModel;
       const item={};
       for(const [view,root] of Object.entries(roots)){
         if(!root)throw Error('Missing '+view);
@@ -53,6 +61,8 @@ try{
         });
         item[view]={painted:painted.sort(),factory:factory.sort(),paintedVertices};
       }
+      result[label]=item;
+      if(!roots.rack)continue;
       rack.updateWorldMatrix(true,true);
       const inverse=new TT.THREE.Matrix4().copy(rack.matrixWorld).invert(),matrix=new TT.THREE.Matrix4();
       // At factory finish the rack-wide batch owns the housing vertices, outside
@@ -72,8 +82,8 @@ try{
           rackVertices[label].push({pos,signature,mask});
         }
       });
-      result[label]=item;
     }
+    if(finishKind==='chainsaw')return result;
     // A bare rack housing is baked into vertex colors. Match every vertex in
     // the refreshed rack to the original vertex multiset; only coated vertices may change finish.
     function counts(items,key){const bag=new Map();for(const item of items){const value=key(item);bag.set(value,(bag.get(value)||0)+1)}return bag}
@@ -105,6 +115,11 @@ try{
       assert(camo.painted.every((p,i)=>p[2] && p[2]!==factory.painted[i][2]),name+' missing pattern');
     }
     console.log('PASS',name,camo.painted.length,'coated surfaces,',camo.factory.length,'factory surfaces across factory/M81/restore');
+  }
+  if(id==='chainsaw'){
+    assert.deepEqual(states.motion.factory,states.motion.m81);
+    assert.deepEqual(states.motion.factory,states.motion.restored);
+    console.log('PASS live motor heat material and chain instances persist; Armory intentionally excludes saw from wall rack');
   }
   assert.deepEqual(page.errors,[]);
 }finally{await browser.close();await server.close()}

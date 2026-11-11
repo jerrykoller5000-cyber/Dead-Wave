@@ -6,12 +6,18 @@ import {launch} from '../../tools/cdp.mjs';
 import {save} from '../GT-20076/save.mjs';
 
 const [id,phase='baseline']=process.argv.slice(2);
-assert(['baseline','revised','rework','action','ag294'].includes(phase));
+const compareSaw=id==='chainsaw' && ['compare-before','compare-after'].includes(phase);
+assert(compareSaw || ['baseline','revised','rework','action','ag294'].includes(phase));
 assert(process.env.DW_GAME_TEST_TOKEN && /^[a-z0-9-]+$/.test(id));
 const server=await serve(fileURLToPath(new URL('../../',import.meta.url)),0);
 const browser=await launch({headless:false});
 try {
   const page=await browser.newPage({width:1280,height:720});
+  let verifyBaseline;
+  if(phase==='compare-before'){
+    const {originalSawForPage}=await import('./chainsaw/baseline-look.mjs');
+    verifyBaseline=await originalSawForPage(page,server.origin);
+  }
   const start=Date.now();
   await page.goto(server.origin+'/index.html?debug=1',{waitUntil:'none'});
   assert(await page.waitFor('window.DWOpening'));
@@ -45,6 +51,7 @@ try {
   assert(result.fps>0 && result.low>0);
   const path=phase==='ag294'?'./ag294-retakes/timing-'+id+'.json':'./'+id+'/'+(phase==='baseline'?'timing.json':'timing-'+phase+'.json');
   await save(new URL(path,import.meta.url),JSON.stringify(result,null,2));
+  if(verifyBaseline)verifyBaseline();
   assert.deepEqual(page.errors,[]);
   console.log('PASS '+id+' held and at eye for all 12 samples: ready '+readyMs+' ms; '+result.fps+' fps, '+result.low+' fps low');
 } finally {await browser.close();await server.close()}

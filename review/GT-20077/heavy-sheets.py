@@ -12,7 +12,8 @@ for view in views:
     height = round(width * (crop[3] - crop[1]) / (crop[2] - crop[0]))
     sheet = Image.new("RGB", (width*2, 26 + 4*(height+20)), "#1d2325")
     pen = ImageDraw.Draw(sheet)
-    comparison = (("before", finish), (phase, finish))
+    origin = "baseline-look" if root.name == "chainsaw" and (root / "baseline-look" / "frames.json").exists() else "before"
+    comparison = ((origin, finish), (phase, finish))
     if root.name == "flamer" and finish == "m81" and view == "held-right":
         comparison = ((phase, "factory"), (phase, "m81"))
     for col, (stage, paint) in enumerate(comparison):

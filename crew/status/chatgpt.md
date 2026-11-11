@@ -1,13 +1,13 @@
 # ChatGPT
 
-state: active
+state: idle
 model: GPT-6.1 Sol
-task: CB-292 Complete lent Training Ground J128 floor decals and station wall placements
-touching: world/training.js (floor paint), world/training-wear.js (floor decal offsets), world/training-build-wear.js (floor decal offset), index.html (Training station copies), tools/tests/t336.js, core/clip-exceptions.js, review/CB-292
-since: 2026-11-11T09:56Z
+task: —
+touching: —
+since: 2026-11-11T11:03Z
 next: —
 blocked-on: —
-last-report: handoffs/2026-11-11-chatgpt-CB-292.md
+last-report: handoffs/2026-11-11-chatgpt-GP-20097.md
 
 ## Notes
 

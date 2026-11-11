@@ -66,7 +66,7 @@ export function createTrainingImpacts(T,tg) {
     for(let i=0;i<7;i++){const a=i*2.4;c.beginPath();c.moveTo(32+Math.cos(a)*8,32+Math.sin(a)*8);c.lineTo(32+Math.cos(a)*21,32+Math.sin(a)*21);c.stroke();}
     map=new T.CanvasTexture(cv);map.colorSpace=T.SRGBColorSpace;
   }
-  const mat=new T.MeshBasicMaterial({map,transparent:true,vertexColors:true,depthWrite:false,side:T.DoubleSide});
+  const mat=new T.MeshBasicMaterial({map,transparent:true,vertexColors:true,depthWrite:false,side:T.DoubleSide,forceSinglePass:true,polygonOffset:true,polygonOffsetFactor:-3,polygonOffsetUnits:-3});
   mat.name='training-impact-mark';
   const corners=[[-.5,-.5],[.5,-.5],[-.5,.5],[.5,-.5],[.5,.5],[-.5,.5]];
   // Quads share a vertex buffer rather than an instance-uniform whose compiled
@@ -77,7 +77,7 @@ export function createTrainingImpacts(T,tg) {
     for(let i=0;i<capacity;i++)for(const[x,y]of corners)uv.push(x+.5,y+.5);
     geo.setAttribute('position',positions);geo.setAttribute('uv',new T.Float32BufferAttribute(uv,2));geo.setDrawRange(0,0);
     const colors=new T.Float32BufferAttribute(new Float32Array(capacity*24).fill(1),4);colors.setUsage(T.DynamicDrawUsage);geo.setAttribute('color',colors);
-    const mesh=new T.Mesh(geo,mat);mesh.name='training-impact-marks';mesh.renderOrder=1;mesh.frustumCulled=false;mesh.raycast=()=>{};parent.add(mesh);
+    const mesh=new T.Mesh(geo,mat);mesh.name='training-impact-marks';mesh.renderOrder=1.1;mesh.frustumCulled=false;mesh.raycast=()=>{};parent.add(mesh);
     return{mesh,parent,capacity,next:0,count:0,positions,colors,life:new Float32Array(capacity)};
   };
   const batches=[make(tg.group,128),...tg.targets.map(t=>make(t.pivot,16))];
@@ -100,7 +100,8 @@ export function createTrainingImpacts(T,tg) {
       const s=hit.solid.surface;
       if(s){if(s.nx)pos.x=s.x;if(s.nz)pos.z=s.z;normal.set(s.nx,0,s.nz);}
       if(target!=null)pos.z=tg.origin.z+tg.targets[target].z;
-      pos.addScaledVector(normal,.015);
+      const lift=hit.solid.floor?.0017:(target!=null?.0018:.0022);
+      pos.addScaledVector(normal,lift);
       batch.parent.updateWorldMatrix(true,false);batch.parent.worldToLocal(pos);
       q.setFromUnitVectors(front,normal);batch.parent.getWorldQuaternion(parentQ);q.premultiply(parentQ.invert());
       const size=target==null?.12:.06;
@@ -178,7 +179,7 @@ export function createTrainingChar(T, tg) {
     }
     map = new T.CanvasTexture(cv); map.colorSpace = T.SRGBColorSpace;
   }
-  const mat = new T.MeshBasicMaterial({ map, transparent: true, vertexColors: true, depthWrite: false, side: T.DoubleSide, polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -1 });
+  const mat = new T.MeshBasicMaterial({ map, transparent: true, vertexColors: true, depthWrite: false, side: T.DoubleSide, forceSinglePass: true, polygonOffset: true, polygonOffsetFactor: -4, polygonOffsetUnits: -4 });
   mat.name = 'training-char-mark';
   const corners = [[-.5, -.5], [.5, -.5], [-.5, .5], [.5, -.5], [.5, .5], [-.5, .5]];
   const setQuadUV = (uvAttr, slot, cell) => {
@@ -196,7 +197,7 @@ export function createTrainingChar(T, tg) {
     const uvs = new T.Float32BufferAttribute(uvArr, 2); uvs.setUsage(T.DynamicDrawUsage);
     geo.setAttribute('position', positions); geo.setAttribute('uv', uvs); geo.setDrawRange(0, 0);
     const colors = new T.Float32BufferAttribute(new Float32Array(capacity * 24).fill(1), 4); colors.setUsage(T.DynamicDrawUsage); geo.setAttribute('color', colors);
-    const mesh = new T.Mesh(geo, mat); mesh.name = 'training-char-marks'; mesh.renderOrder = 1; mesh.frustumCulled = false; mesh.raycast = () => {}; parent.add(mesh);
+    const mesh = new T.Mesh(geo, mat); mesh.name = 'training-char-marks'; mesh.renderOrder = 1.2; mesh.frustumCulled = false; mesh.raycast = () => {}; parent.add(mesh);
     return { mesh, parent, capacity, next: 0, count: 0, positions, uvs, colors, life: new Float32Array(capacity), alpha: new Float32Array(capacity), lastPos: new Float32Array(capacity * 3) };
   };
   const batches = [make(tg.group, 256), ...tg.targets.map(t => make(t.pivot, 24))];
@@ -242,7 +243,8 @@ export function createTrainingChar(T, tg) {
       const s = hit.solid?.surface;
       if (s) { if (s.nx) pos.x = s.x; if (s.nz) pos.z = s.z; normal.set(s.nx, 0, s.nz); }
       if (target != null) pos.z = tg.origin.z + tg.targets[target].z;
-      pos.addScaledVector(normal, .016);
+      const lift = hit.solid?.floor ? .0019 : (target != null ? .0022 : .0028);
+      pos.addScaledVector(normal, lift);
       batch.parent.updateWorldMatrix(true, false); batch.parent.worldToLocal(pos);
       q.setFromUnitVectors(front, normal);
       const isWall = Math.abs(normal.y) < 0.45;

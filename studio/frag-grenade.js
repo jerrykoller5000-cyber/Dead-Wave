@@ -9,53 +9,29 @@ const MATS = new WeakMap();
 function mats(THREE) {
   let m = MATS.get(THREE);
   if (!m) {
+    const size = 64, grainPixels = new Uint8Array(size * size * 4);
+    let seed = 0x6f28d;
+    for (let i = 0; i < grainPixels.length; i += 4) {
+      seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
+      const value = 214 + (seed >>> 27);
+      grainPixels[i] = value; grainPixels[i + 1] = value; grainPixels[i + 2] = value; grainPixels[i + 3] = 255;
+    }
+    const stipple = new THREE.DataTexture(grainPixels, size, size);
+    stipple.name = 'field enamel stipple';
+    stipple.wrapS = stipple.wrapT = THREE.RepeatWrapping;
+    stipple.repeat.set(4, 2);
+    stipple.magFilter = THREE.LinearFilter; stipple.minFilter = THREE.LinearMipmapLinearFilter;
+    stipple.generateMipmaps = true; stipple.needsUpdate = true;
     m = {
-      body: new THREE.MeshStandardMaterial({ color: 0xffffff, vertexColors: true, roughness: 0.78, metalness: 0.08 }),
-      metal: new THREE.MeshStandardMaterial({ color: 0x9a9c94, roughness: 0.38, metalness: 0.78 }),
-      spoon: new THREE.MeshStandardMaterial({ color: 0x575c45, roughness: 0.5, metalness: 0.55 })
+      body: new THREE.MeshStandardMaterial({ color: 0xffffff, vertexColors: true, roughness: 0.84, roughnessMap: stipple, metalness: 0.06 }),
+      metal: new THREE.MeshStandardMaterial({ color: 0x92958c, roughness: 0.56, metalness: 0.58 }),
+      spoon: new THREE.MeshStandardMaterial({ color: 0x79817b, roughness: 0.56, metalness: 0.67 })
     };
     MATS.set(THREE, m);
   }
   return m;
 }
-// A small deterministic hash, so every grenade has the same scuffs (and tests are stable).
-const hash = (i) => { const s = Math.sin(i * 127.1 + 311.7) * 43758.5453; return s - Math.floor(s); };
-
 export const FRAG = Object.freeze({ TALL: 1.12, NECK: 0.3 });
-
-const STENCIL = new WeakMap();
-function stencilMaterial(THREE) {
-  let m = STENCIL.get(THREE);
-  if (m !== undefined) return m;
-  if (typeof document === 'undefined') { STENCIL.set(THREE, null); return null; }
-  const c = document.createElement('canvas'); c.width = 256; c.height = 128;
-  const x = c.getContext('2d');
-  x.clearRect(0, 0, 256, 128);
-  x.fillStyle = '#d8c24a'; x.textAlign = 'center'; x.textBaseline = 'middle';
-  x.font = 'bold 34px "Courier New", monospace';
-  x.fillText('GRENADE', 128, 30); x.fillText('HAND FRAG', 128, 66);
-  x.font = 'bold 28px "Courier New", monospace'; x.fillText('M67', 128, 100);
-  const tex = new THREE.CanvasTexture(c); tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = 4;
-  m = new THREE.MeshStandardMaterial({ map: tex, transparent: true, alphaTest: 0.25, roughness: 0.85, metalness: 0.02, polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -1 });
-  STENCIL.set(THREE, m);
-  return m;
-}
-function makeStencil(THREE, tall) {
-  const mat = stencilMaterial(THREE);
-  if (!mat) return null;
-  const geo = new THREE.PlaneGeometry(0.72, 0.42, 8, 5);
-  const p = geo.attributes.position;
-  for (let i = 0; i < p.count; i++) {
-    // the plane's x,y map to the body's angle and height on the -x side, then onto the ellipsoid's skin
-    const ang = Math.PI - p.getX(i) * 0.78, y = 0.16 * tall + p.getY(i) * tall * 0.9;   // x along -z so the patch faces out (-x) and reads the right way round
-    const rr = Math.sqrt(Math.max(0, 1 - (y / tall) ** 2)) * 1.004;
-    p.setXYZ(i, Math.cos(ang) * rr, y, Math.sin(ang) * rr);
-  }
-  geo.computeVertexNormals();
-  const mesh = new THREE.Mesh(geo, mat);
-  mesh.renderOrder = 1;
-  return mesh;
-}
 
 export function makeFragGrenade({ THREE, r = 0.05, tall = FRAG.TALL }) {
   const M = mats(THREE);
@@ -71,15 +47,18 @@ export function makeFragGrenade({ THREE, r = 0.05, tall = FRAG.TALL }) {
   const prof = ys.map((y) => new THREE.Vector2(Math.max(0.001, Math.sqrt(Math.max(0, 1 - (y / tall) ** 2))), y));
   const bodyGeo = new THREE.LatheGeometry(prof, 28);
   const pos = bodyGeo.attributes.position, col = new Float32Array(pos.count * 3);
-  const olive = [0.30, 0.33, 0.21], band = [0.66, 0.58, 0.25];   // sRGB
+  const olive = [.34, .37, .265], band = [.64, .59, .36];   // sRGB
   for (let i = 0; i < pos.count; i++) {
-    const y = pos.getY(i) / tall, ang = Math.atan2(pos.getZ(i), pos.getX(i));
-    let c = olive.slice();
-    if (y > 0.43 && y < 0.53) c = band.map((v, k) => v * 0.8 + olive[k] * 0.2);   // the marking stripe
-    if (Math.abs(y) < 0.014) c = c.map((v) => v * 0.55);                           // the seam
-    const n = 0.95 + 0.07 * hash(Math.round(ang * 5) * 31 + Math.round(y * 9));     // tone variation, broad patches
-    const scuff = hash(i * 7.3) > 0.965 ? 1.45 : 1;                                 // worn paint, bare spots
-    for (let k = 0; k < 3; k++) col[i * 3 + k] = Math.pow(Math.min(1, c[k] * n * scuff), 2.2);   // vertex colours are linear
+    const x = pos.getX(i), y = pos.getY(i) / tall, z = pos.getZ(i);
+    // Spatial wear is continuous across the lathe seam and shared vertices.
+    const variation = Math.sin(8*x + 4*y + z) * Math.cos(5*z - 3*y);
+    const rub = Math.max(0, Math.sin(10*x - 6*z) * Math.cos(7*y + 2*z) - .56);
+    const ink = y > .43 && y < .53 ? .78 - .22 * rub : 0;
+    const shade = (Math.abs(y) < .014 ? .76 : 1) * (.99 + .035 * variation);
+    for (let k = 0; k < 3; k++) {
+      const paint = olive[k] + ink * (band[k] - olive[k]);
+      col[i * 3 + k] = Math.pow(paint * shade + .035 * rub, 2.2);
+    }
   }
   bodyGeo.setAttribute('color', new THREE.BufferAttribute(col, 3));
   bodyGeo.computeVertexNormals();
@@ -131,12 +110,6 @@ export function makeFragGrenade({ THREE, r = 0.05, tall = FRAG.TALL }) {
   const tab = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.05, 0.3), M.spoon); tab.name = 'spoon-tab';
   tab.position.set(0.24, top + 0.52, 0); tab.rotation.z = 0.35; spoon.add(tab);
 
-  // CL-315 (D-121): the stencil, yellow on the olive under the band on the side away from the spoon: a decal patch laid
-  // on the body's skin (its vertices pushed onto the ellipsoid, 0.4 % proud) with a canvas texture; left out where
-  // there is no canvas (node tests).
-  const stencil = makeStencil(THREE, tall);
-  if (stencil) { stencil.name = 'stencil'; g.add(stencil); }
-
-  outer.userData.parts = { body, fuse, spoon, pin, ring, clip, tab, stencil };
+  outer.userData.parts = { body, fuse, spoon, pin, ring, clip, tab, stencil: null };
   return outer;
 }

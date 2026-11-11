@@ -1,0 +1,227 @@
+{
+  "factory": {
+    "proof": "factory",
+    "mats": [
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16777215,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 14263583,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16777215,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 2566445,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16777215,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 5898754,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 9983538,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "furniture",
+        "registered": "chainsaw",
+        "color": 12415806,
+        "map": "ee1a1b70-a07f-4927-bd90-06846814b5cb"
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16777215,
+        "map": null
+      }
+    ],
+    "trigger": "controls-trigger",
+    "pin": [
+      0,
+      0.062,
+      -0.395
+    ],
+    "perPart": true
+  },
+  "m81": {
+    "proof": "m81",
+    "mats": [
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16777215,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 14263583,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16777215,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 2566445,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16777215,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 5898754,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 9983538,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "furniture",
+        "registered": "chainsaw",
+        "color": 15131350,
+        "map": "b096e1bb-a7b9-4cdd-9897-79a3d5f1e4e0"
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16777215,
+        "map": null
+      }
+    ],
+    "trigger": "controls-trigger",
+    "pin": [
+      0,
+      0.062,
+      -0.395
+    ],
+    "perPart": true
+  },
+  "restored": {
+    "proof": "restored",
+    "mats": [
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16777215,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 14263583,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16777215,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 2566445,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16777215,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 5898754,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 9983538,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "furniture",
+        "registered": "chainsaw",
+        "color": 12415806,
+        "map": "ee1a1b70-a07f-4927-bd90-06846814b5cb"
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16777215,
+        "map": null
+      }
+    ],
+    "trigger": "controls-trigger",
+    "pin": [
+      0,
+      0.062,
+      -0.395
+    ],
+    "perPart": true
+  }
+}

@@ -1,0 +1,264 @@
+{
+  "factory": {
+    "proof": "factory",
+    "mats": [
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 1513498,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "chainsaw",
+        "color": 3685185,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "chainsaw",
+        "color": 14263583,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "chainsaw",
+        "color": 6053992,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "chainsaw",
+        "color": 3290167,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "chainsaw",
+        "color": 2566445,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "chainsaw",
+        "color": 11581117,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "chainsaw",
+        "color": 8884364,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 5898754,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "chainsaw",
+        "color": 9983538,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "chainsaw",
+        "color": 12415806,
+        "map": "165b3179-5401-46ba-a18e-d7a729923cb3"
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "chainsaw",
+        "color": 6053992,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 1513498,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "chainsaw",
+        "color": 3290167,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "chainsaw",
+        "color": 2566445,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "chainsaw",
+        "color": 3685185,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "chainsaw",
+        "color": 11581117,
+        "map": null
+      }
+    ],
+    "trigger": "controls-trigger",
+    "pin": [
+      0,
+      0.062,
+      -0.395
+    ],
+    "perPart": false
+  },
+  "restored": {
+    "proof": "restored",
+    "mats": [
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 1513498,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "chainsaw",
+        "color": 3685185,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "chainsaw",
+        "color": 14263583,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "chainsaw",
+        "color": 6053992,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "chainsaw",
+        "color": 3290167,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "chainsaw",
+        "color": 2566445,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "chainsaw",
+        "color": 11581117,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "chainsaw",
+        "color": 8884364,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 5898754,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "chainsaw",
+        "color": 9983538,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "chainsaw",
+        "color": 12415806,
+        "map": "165b3179-5401-46ba-a18e-d7a729923cb3"
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "chainsaw",
+        "color": 6053992,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 1513498,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "chainsaw",
+        "color": 3290167,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "chainsaw",
+        "color": 2566445,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "chainsaw",
+        "color": 3685185,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "chainsaw",
+        "color": 11581117,
+        "map": null
+      }
+    ],
+    "trigger": "controls-trigger",
+    "pin": [
+      0,
+      0.062,
+      -0.395
+    ],
+    "perPart": false
+  }
+}

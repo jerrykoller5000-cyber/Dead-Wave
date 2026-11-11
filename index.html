@@ -1395,11 +1395,11 @@
     import { buildDamagedTerminal } from './ui/hq-damaged-terminal.js';
     import { buildMarineHead, buildMarineHair, buildMarineFeatures, buildBalaclava, buildSurvivorBeard, HEAD_GROUP_SCALE } from './ui/marine-face.js';
     import { buildMarineEyewear } from './ui/marine-eyewear.js';   // CL-139: the eyewear, fitted to that head
-    import { buildMarineBody } from './studio/marine-body.js';
+    import { buildMarineBody, carrierClearance, carrierIntrusion } from './studio/marine-body.js';   // CB-291: the arm IK keeps off the carrier
     import { createViewmodel } from './game/viewmodel.js';   // CL-281: the first-person view gun
     import { HAND_POSES, lerpPose } from './studio/marine-hand.js';   // GB-152
     import { createSelectorFlick } from './game/selector-flick.js';   // GB-167: the thumb on the fire selector
-    import { ARM_LIMITS, BODY_EXCEPTIONS, clampWrist, clampElbowHinge, wristInside } from './core/body-limits.js';   // CB-289: the arm table
+    import { ARM_LIMITS, BODY_EXCEPTIONS, clampWrist, clampElbowHinge, wristInside, BODY_LIMITS, clampTrunk, clampLimb, clampHinge, shoulderAngles, shoulderPast, shoulderHold } from './core/body-limits.js';   // CB-289: the arm table
     import { applyMarineSurfaceDetail } from './studio/marine-detail.js';
     import { makePistolModel, makeRevolverModel, makeUziModel, makeKnifeModel } from './studio/weapon-sidearms.js';
     import { drawWeaponRail } from './studio/gun-detail.js';
@@ -22028,7 +22028,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // about 45-50 on the hips), follow faster the further behind they are (follow + catchUp at 0.8 rad behind), and the
     // rest of the way to the travel line the thighs take at the hip joints (both turn up to hipYaw), so the feet still
     // step along the travel. Standing still, studio/marine-turn.js keeps the same cap (its TWIST).
-    const TWIST_LIMIT = { cap: 0.96, hipYaw: 0.6, follow: 9, catchUp: 16, legEase: 14 };
+    // CB-291 (a) (J127, D-139; CLAUDE DIRECTOR 11 Nov): cap was 0.96 (55 deg); the spine turns at most 45 deg on the hips
+    // (core/body-limits.js), so past it the hips come round with the aim (and the thighs and feet after them); 3 deg is left
+    // for the recoil's and a bite's twist on top.
+    const TWIST_LIMIT = { cap: BODY_LIMITS.spine.turn[1] - 3 * Math.PI / 180, hipYaw: 0.6, follow: 9, catchUp: 16, legEase: 14 };
     // CL-126 (Jerry: "Needs heavy breathing after running on idle"): POSE.winded climbs to 1 over about 6 s of running and
     // drains over about 9 s standing (14 s walking). Standing winded, he breathes hard: twice the rate, a chest that heaves,
     // shoulders that rise, a nod, a lean, and the breath itself (AudioSys.playerBreath) on each in and out.
@@ -24805,6 +24808,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const ud = m.userData;
       ud.torsoG.rotation.y += f.twistY;
       ud.torsoG.rotation.x += f.bend;
+      if (ud.lowerBody) {   // CB-291 (J127): the reach's turn of the chest stays inside the spine's 45 deg on the hips
+        const lim = BODY_LIMITS.spine.turn[1] - 2 * Math.PI / 180, tw = _wrapAngle(ud.torsoG.rotation.y - ud.lowerBody.rotation.y);
+        if (Math.abs(tw) > lim) ud.torsoG.rotation.y = ud.lowerBody.rotation.y + Math.sign(tw) * lim;
+      }
       m.updateWorldMatrix(true, true);
       // CL-122: the turn moves the guns on his back and chest with it, so read where they are now.
       if (d) { const g = d.frame(); if (g.target) f = { ...f, target: g.target }; }
@@ -52312,9 +52319,92 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (!R) return;
       for (let i = 0; i < R.length; i++) { const isLive = i < live, on = isLive || i < live + spent; if (R[i].visible !== on) R[i].visible = on; if (N && N[i] && N[i].visible !== isLive) N[i].visible = isLive; }
     }
+    // CE-6 (J136, Claude 5): the revolver's cylinder and the launcher's drum indexed to their rounds on the world guns, every
+    // frame (the first-person copies mirror them). The revolver, a double action that turns as a Colt's (clockwise from
+    // behind): chambers 0..L-1 are live and fire from L-1 down (revolverChambers); at rest the chamber just fired (L) sits
+    // under the hammer; the pull (revolverPullT on the gun that fires next) turns the next live one up by full cock (u .85)
+    // and raises the hammer (J118, the model's doubleActionPose); the break leaves it there and the trigger goes forward to
+    // its reset. In chamber steps about the cylinder's own axis from its base: rest 1 - L, a pull adds one. The launcher, an
+    // M32's spring-driven drum: chambers 0..L-1 live, the next one (L-1) behind the barrel at rest; each shot's spring turns
+    // the drum one chamber on (CHAMBER_SPRING s); the fired cases stay in their chambers until the reload dumps them. Rest
+    // L - 1. In a reload the reload's swing owns the part; an offset brings it in from the rest index as it opens (the free
+    // cylinder, the drum turned to its first empty chamber) and out to the new rest as it closes (the revolver) or winds (the
+    // launcher), the load's own steps untouched. State on gun.userData.chamberIndex (s: steps, L: live, n: pulls indexed).
+    const CHAMBER_SPRING = 0.07, _ciWrap = (x) => x - 6 * Math.round(x / 6);
+    const _ciSeg = (u, a, b) => { const t = Math.max(0, Math.min(1, (u - a) / (b - a))); return t * t * (3 - 2 * t); };
+    const _ciStroke = (t, tb, th, te) => (t < 0 ? 0 : t < tb ? _ciSeg(t, 0, tb) : t < th ? 1 : t < te ? 1 - _ciSeg(t, th, te) : 0);
+    function indexChambers(dt) {
+      const reloadU = reloading ? Math.max(0, Math.min(1, 1 - reloadTimer / Math.max(0.05, reloadAnimDuration || 1))) : null;
+      const pullU = currentWeapon === 'revolver' && revolverPullT >= 0 ? Math.min(1, revolverPullT / REVOLVER_PULL) : null;
+      const pulled = pullU != null ? firingGun() : null;
+      const revs = [weaponMeshes.revolver, offhandMeshes.revolver];
+      for (let hand = 0; hand < 2; hand++) {
+        const g = revs[hand], ud = g && g.userData, cyl = ud && ud.cylinder, N = ud && ud.chamberNoses, br = ud && ud.baseCylinderRot;
+        if (!cyl || !N || !br) continue;
+        let L = 0; for (const n of N) if (n && n.visible) L++;
+        const C = ud.chamberIndex || (ud.chamberIndex = { s: null, L, n: 0, shotT: 9, r0: null });
+        const inReload = reloadU != null && currentWeapon === 'revolver' && (hand === 0 || akimboOn());
+        if (inReload) {
+          if (C.r0 == null) C.r0 = C.s == null ? 1 - L : C.s;
+          const P = ud.pairReload, w = akimboOn() && P ? (hand ? P.left : P.right) : null;
+          const u = w ? Math.max(0, Math.min(1, (reloadU - w[0]) / (w[1] - w[0]))) : reloadU;
+          const need = Math.max(1, Math.ceil((revolverReloadNeed || 1) / (akimboOn() ? 2 : 1)));
+          const off = C.r0 * (1 - _ciSeg(u, 0, 0.16)) + _ciWrap(1 - L - need) * _ciSeg(u, 0.80, 0.96);
+          cyl.rotation.z += off * Math.PI / 3;
+          C.s = _ciWrap((u >= 0.78 ? need : 0) + off); C.L = L; C.shotT = 9;
+          continue;
+        }
+        C.r0 = null;
+        const pu = g === pulled ? pullU : null;
+        if (L < C.L && C.s != null) { C.shotT = 0; C.n++; }   // the break: this gun's round went
+        else C.shotT += dt;
+        C.L = L;
+        const want = 1 - L + (pu != null ? (() => { const k = Math.max(0, Math.min(1, pu / 0.85)); return k * k * (3 - 2 * k); })() : 0);
+        let s = C.s;
+        if (s == null) s = want;
+        else {
+          const d = _ciWrap(want - s);
+          if (pu != null || d >= -1e-6) s += d;   // the pull, and the break's new count: at once
+          else s += Math.max(d, -6 * dt);   // let go before the break: back, eased
+        }
+        s = _ciWrap(s); C.s = s;
+        cyl.rotation.copy(br); cyl.rotation.z += s * Math.PI / 3;
+        if (ud.doubleActionPose && ud.trigger && ud.hammer) {
+          if (pu != null) { ud.doubleActionPose(ud.trigger, ud.hammer, 0.88 * pu, false); C.posed = true; }
+          else if (C.shotT < 0.16) { ud.doubleActionPose(ud.trigger, ud.hammer, _ciStroke(C.shotT, 0.001, 0.045, 0.16), true); C.posed = true; }
+          else if (C.posed) { ud.doubleActionPose(ud.trigger, ud.hammer, 0, true); C.posed = false; }
+        }
+      }
+      const lg = weaponMeshes.launcher, lud = lg && lg.userData, drum = lud && lud.drum, bd = lud && lud.baseDrumRot;
+      if (drum && bd) {
+        const L = ammoByWeapon.launcher | 0;
+        const C = lud.chamberIndex || (lud.chamberIndex = { s: null, L, n: 0, r0: null });
+        if (reloadU != null && currentWeapon === 'launcher') {
+          if (C.r0 == null) C.r0 = C.s == null ? L - 1 : C.s;
+          const need = Math.max(1, launcherReloadNeed || 1);
+          const off = C.r0 * (1 - _ciSeg(reloadU, 0.06, 0.26)) + _ciWrap(L - 1 - launcherReloadFrom - need) * _ciSeg(reloadU, 0.78, 0.85);
+          drum.rotation.z += off * Math.PI / 3;
+          C.s = _ciWrap(drum.rotation.z / (Math.PI / 3) - bd.z / (Math.PI / 3)); C.L = L;
+        } else {
+          C.r0 = null;
+          if (L < C.L && C.s != null) C.n++;
+          C.L = L;
+          const want = L - 1;
+          let s = C.s;
+          if (s == null) s = want;
+          else {
+            const d = _ciWrap(want - s);
+            if (d < -1e-6) s += Math.max(d, -dt / CHAMBER_SPRING);   // the spring's turn after a shot
+            else if (d > 1e-6) s += Math.min(d, 6 * dt);   // rounds put in outside a reload: eased
+          }
+          s = _ciWrap(s); C.s = s;
+          drum.rotation.copy(bd); drum.rotation.z += s * Math.PI / 3;
+        }
+      }
+    }
     function updateAmmoHud() {
-      if (!(reloading && reloadWeapon === 'revolver')) {   // CL-326: the chambers as the count stands (a pair: half each, the right gun the odd one)
-        const a = ammoByWeapon.revolver | 0, pair = !!(dualActive && pairInLoadout('revolver')), aR = pair ? Math.ceil(a / 2) : a, sR = pair ? Math.ceil(revolverSpent / 2) : revolverSpent;
+      if (!(reloading && reloadWeapon === 'revolver')) {   // CL-326: the chambers as the count stands (a pair: half each, the right gun the odd one; CE-6: each gun's live rounds its own magazine's, so the gun that fired shows it)
+        const a = ammoByWeapon.revolver | 0, pair = !!(dualActive && pairInLoadout('revolver')), mR = pair && magazineStore.revolver && magazineStore.revolver.loaded && magazineStore.revolver.loaded[0], aR = pair ? (mR ? Math.min(a, mR.rounds | 0) : Math.ceil(a / 2)) : a, sR = pair ? Math.ceil(revolverSpent / 2) : revolverSpent;
         revolverChambers(weaponMeshes.revolver, aR, sR);
         if (offhandMeshes.revolver) revolverChambers(offhandMeshes.revolver, pair ? a - aR : 6, pair ? revolverSpent - sR : 0);
       }
@@ -53949,12 +54039,57 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       _ik.m2.makeBasis(f1, f2, f3);
       _ik.m2.multiply(_ik.m1.transpose());
       _ik.q.setFromRotationMatrix(_ik.m2);
+      holdShoulderIK(armG, elbowG, hand, theta, f1, _ik.q);   // CB-291
+      if (w >= 0.999) { armG.userData.cb291Ik = bodyFrame; (armG.userData.cb291Q || (armG.userData.cb291Q = new THREE.Quaternion())).copy(_ik.q); }
       armG.quaternion.slerp(_ik.q, w);
       _ik.q.setFromAxisAngle(_AXIS_X, theta);
       elbowG.quaternion.slerp(_ik.q, w);
     }
 
     const _AXIS_X = new THREE.Vector3(1, 0, 0);
+    // CB-291 (J127, D-139; CLAUDE DIRECTOR 11 Nov, (b)): the shoulder is held inside core/body-limits.js by the IK itself, so
+    // the hands stay on the guns. The arm the IK found (q, its parent's space) is swung round the line from the shoulder to
+    // the hand (axis): the hand stays put, the elbow goes round. The smallest swing that puts the shoulder inside the table
+    // (back, across, and the upper arm's turn read from its hinge, where the elbow points: shoulderAngles) and, with the plate
+    // carrier on, the elbow outside it and the upper arm's middle off its front (studio/marine-body.js carrierClearance,
+    // CC-341) is kept; where none is, the least bad. A swing of 0 (the pose already inside) costs one reading.
+    const _shIK = { q: new THREE.Quaternion(), r: new THREE.Quaternion(), e: new THREE.Vector3(), w: new THREE.Vector3(), u: new THREE.Vector3(),
+      f: new THREE.Vector3(), m: new THREE.Vector3(), p: new THREE.Vector3(), E: new THREE.Vector3(), W: new THREE.Vector3() };
+    const SHOULDER_STEP = 5 * Math.PI / 180;
+    function shoulderBad(armG, side, q, cc) {
+      const u = _shIK.u.copy(_shIK.E).applyQuaternion(q), h = _shIK.f.copy(_AXIS_X).applyQuaternion(q);   // the hinge: where the elbow points
+      const a = shoulderAngles([u.x, u.y, u.z], [h.x, h.y, h.z], side);
+      let bad = shoulderPast(a);
+      if (cc) {   // metres to radians: 1 cm counts as about 6 deg
+        const el = _shIK.p.copy(armG.position).add(u), mid = _shIK.m.copy(armG.position).addScaledVector(u, cc.upperArm.t);
+        bad += 10 * carrierIntrusion(cc, el) + 10 * carrierIntrusion(cc, mid);
+        const fz = cc.upperArm.frontZ + cc.upperArm.margin;
+        if (mid.y >= cc.y[0] && mid.y <= cc.y[1] && Math.abs(mid.x - cc.centre[0]) < cc.radii[0] && mid.z > cc.centre[1] && mid.z < fz) bad += 10 * (fz - mid.z);
+      }
+      return bad;
+    }
+    function holdShoulderIK(armG, elbowG, hand, theta, axis, q) {
+      const ud = marine.userData, mine = armG === ud.armRG || armG === ud.armLG;
+      const side = armG === ud.armLG ? -1 : armG === ud.armRG ? 1 : (armG.position.x < 0 ? -1 : 1);
+      _shIK.E.set(0, -IK_UPPER, 0);
+      const cc = mine && armG.parent === ud.torsoG ? carrierClearance(ud) : null, c = cc && (side > 0 ? cc.r : cc.l);
+      const at = (ang) => shoulderBad(armG, side, _shIK.q.setFromAxisAngle(axis, ang).multiply(q), c);
+      const b0 = at(0);
+      if (b0 <= 1e-6) return;
+      let best = 0, bestBad = b0, found = 0;
+      for (let i = 1; i <= 36 && !found; i++) for (const sg of [1, -1]) {
+        const ang = sg * i * SHOULDER_STEP, b = at(ang);
+        if (b <= 1e-6) { found = ang; break; }
+        if (b < bestBad - 1e-9) { bestBad = b; best = ang; }
+      }
+      if (found) {   // the edge between the last bad step and the first good one
+        let lo = found - Math.sign(found) * SHOULDER_STEP, hi = found;
+        for (let k = 0; k < 8; k++) { const m = (lo + hi) / 2; if (at(m) <= 1e-6) hi = m; else lo = m; }
+        best = hi; bestBad = 0;
+      }
+      if (mine) { armLimitHits.shoulder = (armLimitHits.shoulder || 0) + 1; if (bestBad > 0) armLimitHits.shoulderShort = (armLimitHits.shoulderShort || 0) + 1; }
+      q.premultiply(_shIK.r.setFromAxisAngle(axis, best));
+    }
     const _POLE_R = new THREE.Vector3(0.55, -0.8, -0.25);
     const _POLE_L = new THREE.Vector3(-0.55, -0.8, -0.1);
     const _HAND_R = new THREE.Vector3(-0.01, -0.26, 0.12); // gripR in elbowRG
@@ -54050,6 +54185,44 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     let wristTurnR = 0, wristTurnL = 0, wristNeedR = 0, wristNeedL = 0;   // the last turns at the wrists and what they wanted (radians), for the tests and the review
     let gripAR = 0, gripAL = 0;   // the last grip points' place between the hand point (0) and the fist's middle (1)
     const wristOf = (elbowG) => (elbowG && elbowG.userData.wrist) || null;
+    // CB-291 (J127, Jerry 10 Nov, standing, D-139; AGENTS.md rule 25): no joint of his body past what a body can do. After the
+    // frame's pose the spine (the torso against the hips), the neck, each hip, knee and ankle are held inside BODY_LIMITS
+    // (core/body-limits.js); the shoulders, elbows and wrists are held by the IK (CB-289), so the hands stay on the guns. Death
+    // is left out (the rule's own exception).
+    const _bpq = new THREE.Quaternion(), bodyLimitHits = {};
+    let bodyFrame = 0;   // CB-291: which arms the IK held this frame (armG.userData.cb291Ik)
+    // CB-291: an arm no hold has a hand on this frame (unarmed, the run's swing, the idle's, a part-way blend) is held inside
+    // the shoulder's row after everything that posed it; an arm the IK held in full (cb291Ik, cb291Q) was held by holdShoulderIK.
+    const _bpA = [0, 0, 0];
+    function holdFreeShoulders() {
+      if (gameOver) return;
+      const ud = marine.userData;
+      for (const [arm, el, side] of [[ud.armRG, ud.elbowRG, 1], [ud.armLG, ud.elbowLG, -1]]) {
+        // skipped only when the IK held it in full this frame and nothing posed it since (a blend or a later pose is held here)
+        if (!arm || !el || (arm.userData.cb291Ik === bodyFrame && Math.abs(arm.quaternion.dot(arm.userData.cb291Q)) > 0.99999)) continue;
+        _bpA[0] = el.position.x; _bpA[1] = el.position.y; _bpA[2] = el.position.z;
+        const held = shoulderHold(arm.quaternion, _bpA, side);
+        if (held.length) { bodyLimitHits.shoulder = (bodyLimitHits.shoulder || 0) + 1; arm.updateMatrixWorld(true); }
+      }
+    }
+    function clampBodyPose() {
+      bodyFrame++;
+      if (gameOver) return;
+      const ud = marine.userData, hit = (k, held) => { if (held.length) bodyLimitHits[k] = (bodyLimitHits[k] || 0) + 1; };
+      if (ud.torsoG && ud.lowerBody && ud.torsoG.parent === ud.lowerBody.parent) {
+        _bpq.copy(ud.lowerBody.quaternion).invert().multiply(ud.torsoG.quaternion);
+        const held = clampTrunk(_bpq, BODY_LIMITS.spine);
+        if (held.length) { ud.torsoG.quaternion.copy(ud.lowerBody.quaternion).multiply(_bpq); hit('spine', held); }
+      }
+      if (ud.headG) hit('neck', clampTrunk(ud.headG.quaternion, BODY_LIMITS.neck));
+      for (const [leg, side] of [[ud.legRG, 1], [ud.legLG, -1]]) {
+        if (!leg) continue;
+        hit('hip', clampLimb(leg.quaternion, side, BODY_LIMITS.hip));
+        const kn = leg.userData.knee, an = leg.userData.ankle;
+        if (kn) hit('knee', clampHinge(kn.quaternion, BODY_LIMITS.knee.bend));
+        if (an) hit('ankle', clampTrunk(an.quaternion, { flex: BODY_LIMITS.ankle.flex, side: BODY_LIMITS.ankle.side }));
+      }
+    }
     // CB-289 (Jerry, 10 Nov: "Setting limits for extension in the arms would prevent impossible movements"; J127, D-139):
     // the wrist's turn the hold asks for is held inside core/body-limits.js's table: 75 deg toward the palm, 70 back, 20
     // toward the thumb, 35 toward the little finger (an ellipse between), and the forearm's roll and the wrist's turn about
@@ -66602,6 +66775,7 @@ live++;
         PROF.mark('m:pose');
         updateMortarCrewPose();
         updateCarryPose(dt);   // CL-131
+        clampBodyPose();   // CB-291
         PROF.mark('m:mortar+carry');
         if (reloading) {
           reloadTimer -= dt;
@@ -66612,6 +66786,7 @@ live++;
         syncMagazineArt();   // CB-294 (GT-20080)
         updateReloadAnim(dt);
         poseUnloadPump('shotgun');   // CB-302: after the reload anim's reset of the parts
+        indexChambers(dt);   // CE-6 (J136): after the reload anim's reset of the parts
         updateKnifeAnim(dt);
         PROF.mark('m:reload+knife');
         // The smoking idle holsters the visible gun. Do not keep solving both
@@ -66635,6 +66810,7 @@ live++;
         updateWatchmanExperiencePose(dt);   // GP-174: mounted/carry grip overrides run after the ordinary weapon hold
         ladderHands();   // CL-180: on a ladder the hands stay on the rungs whatever ran over the arms
         vaultHands();   // GP-19900: palm contact after idle/weapon overrides
+        holdFreeShoulders();   // CB-291: last, the shoulders of the arms no hold has a hand on
         PROF.mark('m:idle');
         updateLasers();
         PROF.mark('m:lasers');
@@ -66681,6 +66857,7 @@ live++;
         updateMastFall(dt);   // CL-179
         updateMarinePose(dt, false, false);
         updateReloadAnim(dt);
+        indexChambers(dt);   // CE-6 (J136)
         updateKnifeAnim(dt);
         holdWeapon(dt);
         updateLasers();
@@ -67370,7 +67547,7 @@ live++;
           // Debug-only: economy hooks. grantAllWeapons hands over the arsenal so the older
           // weapon probes keep working; the rest let probes drive the kiosk directly.
           grantAllWeapons, KIOSK, openShop, closeShop, buyWeapon, buyAmmo, buyGear, buyBuild, skullValueDbg: () => skullValueTotal, siegeNightDbg: () => siegeNightNow, LATE_CASH_NIGHT, LATE_CASH_FACTOR, LATE_CASH_STEP, lateCashMul, buyExtMag, buyHeavyBarrel, fitWeaponMod, weaponMods, HEAVY_BARREL_PRICE, EXT_MAG_RELOAD_MUL, HEAVY_CLIMB_MUL, HEAVY_SWAP_DUR, HEAVY_MOVE_SPREAD_MUL, recoilClimb, getReloadDbg: () => ({ timer: reloadTimer, anim: reloadAnimDuration, weapon: reloadWeapon }), /* CL-84 */ akimboDbg: { AKIMBO_CARRY, carry: () => akimboCarryW, retreat: () => akimboRetreat },   /* CL-188 */ airDbg: { AIR, pose: () => POSE.airPose, jumpNow: () => { if (!grounded) return false; vy = PHYS.jumpVel; grounded = false; coyoteT = 0; return true; } },   /* CL-210 */ rigSkinDbg: { info: (r) => rigSkinInfo(r || marine), count: () => rigSkinCount(), sync: () => syncRigSkins() },   /* CL-189 */ aoDbg: { AO_DEFAULTS, info: () => marine.userData.aoInfo, bake: (o) => (marine.userData.aoInfo = bakeMarineAO(THREE, marine, { ...marine.userData.ao, ...(o || {}) })) },   /* CL-186 */ zombieFeetDbg: { ZFEET, ZLEAN },   /* CL-187 */ gaitDbg: { GAIT, GAIT_FEEL, GAIT_WEIGHT, UNARMED_ARMS, UNARMED_RUN, WINDED, winded: () => POSE.winded || 0, setWinded: (v) => { POSE.winded = v; }, breaths: () => POSE.breaths || 0, pose: () => POSE, clips: () => MARINE_GAIT, w: () => POSE.gaitW || 0, run: () => POSE.gaitRun || 0, sample: (u, r) => { const g = marineGait(u, r); return g && { ...g }; } },   /* CL-84 */ smoothDbg: { MOVE_FEEL, GUN_LAG, xfade: () => XFADE, gunLag: () => gunLag, wish: () => ({ x: wishVX, z: wishVZ }), vel: () => ({ x: velX, z: velZ, y: vy }), lookY: () => camLookYS, pose: () => POSE, phase: () => walkPhase, lerpK: _lerpK, decayK: _decayK },   /* CL-133 */ handsDbg: { HANDS, roll: () => ({ r: handRollR, l: handRollL }), WRIST, HAND_R: _HAND_R, HAND_L: _HAND_L, wrist: () => ({ r: wristTurnR, l: wristTurnL, needR: wristNeedR, needL: wristNeedL }), gripPoint: (side, out = new THREE.Vector3()) => side === 'L' ? fistPointW(marine.userData.elbowLG, _HAND_L, gripAL, out) : fistPointW(marine.userData.elbowRG, _HAND_R, gripAR, out), gripA: () => ({ r: gripAR, l: gripAL }),   /* CU-100: where each hand closes now (the hand point while it isn't holding) */ knife: () => ({ u: knifeArmU, clip: KNIFE_CLIP, chop: MACHETE_CLIP, dur: knifeSwingDur, places: _kp }), FP_BLADE_PATH, FP_BLADE_AIM, FP_BLADE_DIP, fpBladeDip: () => fpBladeDip, BLADE_BODY, bladeTwist: (u, h) => bladeTwist(u, h),   /* CL-261 */ knifeHold: (u) => { knifeHoldU = u == null ? null : _clamp01(u); if (u != null) { knifeSwingDur = bladeSwingDur(); knifeAnimT = knifeSwingDur * (1 - knifeHoldU) || 0.0001; } }, drawHold: (t) => { drawHoldT = t == null ? null : Math.max(0, t); }, knifeClip: (on) => { if (!on) { _kc = KNIFE_CLIP || _kc; KNIFE_CLIP = null; } else if (_kc) KNIFE_CLIP = _kc; }, drawPlace, gripDownDir, foreChannelDir },   /* CL-122 */ fpReloadLiftDbg: () => FP_RELOAD_LIFT, fpReloadLiftGunDbg: () => FP_RELOAD_LIFT_GUN, fpReloadSetDbg: () => ({ ...fpReloadSet() }),   /* GB-245 */ reloadClipDbg: { clip: () => RELOAD_CLIP, places: () => _rlP, hold: (u) => { reloadHoldU = u == null ? null : _clamp01(u); if (reloading && u != null) reloadTimer = Math.max(0.001, (reloadAnimDuration || 1) * (1 - reloadHoldU)); }, mag: () => (RELOAD_CLIP ? Studio.magAt(RELOAD_CLIP, _clamp01(1 - reloadTimer / Math.max(0.05, reloadAnimDuration || 1))) : null) }, getSwapDbg: () => ({ swapT, swapDur, fireCooldown }), setSprayDbg: (h, n) => { sprayHeat = h; sprayShot = n | 0; sprayWeapon = currentWeapon; }, setVelDbg: (x, z) => { velX = x; velZ = z; }, resetEconomyDbg: () => resetEconomy(), WEAPON_ORDER, buySuppressor, SUPPRESSOR_PRICE, SHOT_HEARING, SUPPRESSED_HEARING_MUL, SUPPRESSED_DAMAGE_MUL, shotHearingRadius, suppressedDamageMul, heardShotDbg: () => ({ shotsHeard, lastShotNoise }), sawCutTick, sawCutDbg: () => ({ holdT: sawCutHoldT, hearT: sawCutHearT, fuel: sawFuel, heat: sawHeat, overheat: sawOverheat, biteT: sawBiteT }), buyPistolAuto, PISTOL_AUTO_PRICE, toggleFireMode, toggleHolster, isUnarmed: () => unarmed, setSpareMags, handInGun, takeOutGun, spareMagCount: (w) => (magazineStore[w] && magazineStore[w].spare ? magazineStore[w].spare.length : 0), magazinesDbg: (w) => (magazineStore[w] ? magazineSnapshot(magazineStore, w) : null), setMagazinesDbg: (w, loaded, spare, loaded2 = null) => { const e = magazineStore[w]; if (!e) return false; e.loaded[0].rounds = Math.min(e.size, loaded | 0); if (loaded2 != null && e.loaded[1]) e.loaded[1].rounds = Math.min(e.size, loaded2 | 0); e.spare = spare.slice(0, e.maxSpare).map((r) => ({ rounds: Math.min(e.size, r | 0), size: e.size })); syncMagazine(w); updateAmmoHud(); return true; }, reloadGainsMagazine, toggleDualWieldDbg: () => toggleDualWield(), setDualOwnedDbg: (w, on = true) => { dualOwned[w] = !!on; if (on && isMagazineWeapon(w) && magazineStore[w]) { issueSecondGun(magazineStore, w); syncMagazine(w); } return !!dualOwned[w]; },   /* CL-188 */   /* GB-137 */ stepFireDbg: (dt) => tryFire(dt), recoilSpan, GEAR, WEAPON_PRICE, AMMO_PACK, caliberOf, RESERVE_CAP, RESERVE_CAP_BASE, SPARE_CAP_MULT, START_RESERVE_45, reserveCap, BUILD_UNLOCK_PRICE,
-          getWeaponOwned: () => weaponOwned, magArtDbg: () => ({ ..._magArtShown }),   /* CB-301 */ carryGunCopyDbg: (k) => carryGunCopy(k),   /* CB-299 */ revolverPullDbg: () => ({ t: revolverPullT, pull: REVOLVER_PULL, shots: revolverPullShots }),   /* CB-297 */ ammoTypeState: (g) => ammoTypeState(g), buyAmmoType: (g, t) => buyAmmoType(g, t),   /* CB-294 */ ammoDbg: { start: (to) => startAmmoSwitch(to), state: () => ammoSwitch.state(), loaded: () => ({ ...ammoLoaded }), carried: (g = 'shotgun') => ammoCarriedAll(g), carry: (g, t, n) => ammoAddCarried(g, t, n), count: () => ammoSwitchCount, chamber: () => shotgunChamber.type, hulls: () => [...shotgunChamber.hulls], j134: () => j134Breaches((g) => !!((WEAPON_STATS[g] && WEAPON_STATS[g].auto) || FIRE_SELECT[g] || g === 'pistol')), shellShown: () => ammoShellShown, load: (t) => { const k = ammoCanon('shotgun', t); if (!k) return false; ammoLoaded.shotgun = k; applyShotgunLoad(); updateAmmoHud(); return true; } },armLimitsDbg: () => armLimitsNow(),   /* CB-289 */ grantWeaponDbg: (w) => { grantVaultWeapon(w); if (w !== 'pistol' && !weaponInReach(w)) takeOutGun(w); return weaponInReach(w); },   /* CB-296: one gun issued with its ammo (tools/bench.mjs --fp) */ toggleFlashlightDbg: () => { toggleFlashlight(); return flashlightOn; }, /* CL-327 */ getReserve: () => reserveAmmo, getGearOwned: () => gearOwned, getBuildUnlocked: () => buildUnlocked,
+          getWeaponOwned: () => weaponOwned, magArtDbg: () => ({ ..._magArtShown }),   /* CB-301 */ carryGunCopyDbg: (k) => carryGunCopy(k),   /* CB-299 */ revolverPullDbg: () => ({ t: revolverPullT, pull: REVOLVER_PULL, shots: revolverPullShots }),   /* CB-297 */ ammoTypeState: (g) => ammoTypeState(g), buyAmmoType: (g, t) => buyAmmoType(g, t),   /* CB-294 */ ammoDbg: { start: (to) => startAmmoSwitch(to), state: () => ammoSwitch.state(), loaded: () => ({ ...ammoLoaded }), carried: (g = 'shotgun') => ammoCarriedAll(g), carry: (g, t, n) => ammoAddCarried(g, t, n), count: () => ammoSwitchCount, chamber: () => shotgunChamber.type, hulls: () => [...shotgunChamber.hulls], j134: () => j134Breaches((g) => !!((WEAPON_STATS[g] && WEAPON_STATS[g].auto) || FIRE_SELECT[g] || g === 'pistol')), shellShown: () => ammoShellShown, load: (t) => { const k = ammoCanon('shotgun', t); if (!k) return false; ammoLoaded.shotgun = k; applyShotgunLoad(); updateAmmoHud(); return true; } },armLimitsDbg: () => armLimitsNow(), bodyLimitsDbg: () => ({ hits: { ...bodyLimitHits } }),   /* CB-289 */ grantWeaponDbg: (w) => { grantVaultWeapon(w); if (w !== 'pistol' && !weaponInReach(w)) takeOutGun(w); return weaponInReach(w); },   /* CB-296: one gun issued with its ammo (tools/bench.mjs --fp) */ toggleFlashlightDbg: () => { toggleFlashlight(); return flashlightOn; }, /* CL-327 */ getReserve: () => reserveAmmo, getGearOwned: () => gearOwned, getBuildUnlocked: () => buildUnlocked,
           sawPullDbg: SAW_PULL, /* CL-326 */ getAmmo: () => ammoByWeapon, getPhase: () => phase, setPhase: (p) => { phase = p; }, isShopOpen: () => shopOpen, requestViewToggleDbg: () => requestViewToggle(), viewSwapDbg: (k) => { if (k !== undefined) viewSwapHold = k; return { in: viewSwapIn, out: viewSwapOut, hold: viewSwapHold }; }, /* CL-328 */ getSawFuel: () => sawFuel, sawStartDbg: () => ({ ...sawStart, ...sawStartPose(sawStart) }),
           // Debug-only: survival-rules hooks (health cap, medkits, cash decay, self-damage).
           acidGlobs, pickWaterSpawn, waveComposition, nightPlanFor, NIGHT_PLAN, NIGHT_TIER, nightPushSizes, getWavePace: () => nightPace, pickZombieType, getWavePreview, getBounties, spawnBounties, expireBounties, bountyRewardFor, getSurvivors, survivorDbg, survivorHelpDbg, roofDbg, getHushState, hushDbg, spawnWanderer, wandererAllowed, wandererTrails, wandererReward, WANDERER_PACE, bountyGuardTypes, bountyDbg: () => ({ due: bountiesDue, seq: !!hq.seq, last: bountyLastKeys.slice() }), getWaveDirectorState, getActiveCaveIndices, spawnWaveBatch, beginWave, startPrep, clearZombies, isGuardianNight, getGuardianState, getGuardianAlive, GUARDIAN_KEYS, ZOMBIE_TYPES, MAX_ZOMBIES, spawnObjectiveDefenders, getRadioDefenderState, grantSupply, listOwnedAmmoPackChoices, grantBuildBlueprint, pulseGuardianFailsafeForTest, RADIO_DEFENDER, CAVE_ROLES, roleForCave, applyCaveRole, CLIMB_HEIGHT, climberCanVaultBuild, warnActiveCaves, getRendererBackend: () => rendererBackend, TSL,

@@ -1,0 +1,247 @@
+{
+  "overlays": [
+    {
+      "name": "firing-line",
+      "oldMm": 12.000000000000455,
+      "newMm": 1.0000000000047748
+    },
+    {
+      "name": "(unnamed)",
+      "oldMm": 14.000000000010004,
+      "newMm": 1.0000000000047748
+    },
+    {
+      "name": "(unnamed)",
+      "oldMm": 14.000000000010004,
+      "newMm": 1.0000000000047748
+    },
+    {
+      "name": "(unnamed)",
+      "oldMm": 14.000000000010004,
+      "newMm": 1.0000000000047748
+    },
+    {
+      "name": "(unnamed)",
+      "oldMm": 14.000000000010004,
+      "newMm": 1.0000000000047748
+    },
+    {
+      "name": "(unnamed)",
+      "oldMm": 14.000000000010004,
+      "newMm": 1.0000000000047748
+    },
+    {
+      "name": "(unnamed)",
+      "oldMm": 14.000000000010004,
+      "newMm": 1.0000000000047748
+    },
+    {
+      "name": "(unnamed)",
+      "oldMm": 4.9999999999954525,
+      "newMm": 1.0000000000047748
+    },
+    {
+      "name": "(unnamed)",
+      "oldMm": 13.200000000011869,
+      "newMm": 1.4999999999929514
+    },
+    {
+      "name": "(unnamed)",
+      "oldMm": 2.999999999985903,
+      "newMm": 1.0000000000047748
+    },
+    {
+      "name": "training-no-build-paint",
+      "oldMm": 7.000000216066837,
+      "newMm": 1.0000000474974513
+    },
+    {
+      "name": "(unnamed)",
+      "oldMm": 8.99999999998613,
+      "newMm": 1.0000000000047748
+    },
+    {
+      "name": "(unnamed)",
+      "oldMm": 8.00000037997961,
+      "newMm": 1.0000000474974513
+    }
+  ],
+  "records": [
+    {
+      "camera": [
+        0,
+        -199.58,
+        -643
+      ],
+      "time": 0.5,
+      "light": "noon",
+      "site": "firing-line",
+      "phase": "before"
+    },
+    {
+      "camera": [
+        0,
+        -199.58,
+        -643
+      ],
+      "time": 0.5,
+      "light": "noon",
+      "site": "firing-line",
+      "phase": "after"
+    },
+    {
+      "camera": [
+        -26,
+        -199.58,
+        -626
+      ],
+      "time": 0.5,
+      "light": "noon",
+      "site": "no-build",
+      "phase": "before"
+    },
+    {
+      "camera": [
+        -26,
+        -199.58,
+        -626
+      ],
+      "time": 0.5,
+      "light": "noon",
+      "site": "no-build",
+      "phase": "after"
+    },
+    {
+      "camera": [
+        0,
+        -199.58,
+        -643
+      ],
+      "time": 0.5,
+      "light": "overcast",
+      "site": "firing-line",
+      "phase": "before"
+    },
+    {
+      "camera": [
+        0,
+        -199.58,
+        -643
+      ],
+      "time": 0.5,
+      "light": "overcast",
+      "site": "firing-line",
+      "phase": "after"
+    },
+    {
+      "camera": [
+        -26,
+        -199.58,
+        -626
+      ],
+      "time": 0.5,
+      "light": "overcast",
+      "site": "no-build",
+      "phase": "before"
+    },
+    {
+      "camera": [
+        -26,
+        -199.58,
+        -626
+      ],
+      "time": 0.5,
+      "light": "overcast",
+      "site": "no-build",
+      "phase": "after"
+    },
+    {
+      "camera": [
+        0,
+        -199.58,
+        -643
+      ],
+      "time": 0.76,
+      "light": "dusk",
+      "site": "firing-line",
+      "phase": "before"
+    },
+    {
+      "camera": [
+        0,
+        -199.58,
+        -643
+      ],
+      "time": 0.76,
+      "light": "dusk",
+      "site": "firing-line",
+      "phase": "after"
+    },
+    {
+      "camera": [
+        -26,
+        -199.58,
+        -626
+      ],
+      "time": 0.76,
+      "light": "dusk",
+      "site": "no-build",
+      "phase": "before"
+    },
+    {
+      "camera": [
+        -26,
+        -199.58,
+        -626
+      ],
+      "time": 0.76,
+      "light": "dusk",
+      "site": "no-build",
+      "phase": "after"
+    },
+    {
+      "camera": [
+        0,
+        -199.58,
+        -643
+      ],
+      "time": 0.02,
+      "light": "night",
+      "site": "firing-line",
+      "phase": "before"
+    },
+    {
+      "camera": [
+        0,
+        -199.58,
+        -643
+      ],
+      "time": 0.02,
+      "light": "night",
+      "site": "firing-line",
+      "phase": "after"
+    },
+    {
+      "camera": [
+        -26,
+        -199.58,
+        -626
+      ],
+      "time": 0.02,
+      "light": "night",
+      "site": "no-build",
+      "phase": "before"
+    },
+    {
+      "camera": [
+        -26,
+        -199.58,
+        -626
+      ],
+      "time": 0.02,
+      "light": "night",
+      "site": "no-build",
+      "phase": "after"
+    }
+  ]
+}

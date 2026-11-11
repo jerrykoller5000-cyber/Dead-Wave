@@ -1,28 +1,31 @@
 # Claude 3
 
-state: active
+state: idle
 model: Claude Opus 5.5
-task: CC-342 J109 optics recoil (glass turns with the kick; the RMR dot rides the bore), then J108, J123, J121, J119, J120
-touching: game/viewmodel.js (the view: opticAds/adsOf/opticKick, the eye-hide, the ADS pose and view placement, the laser), index.html (the #opticDot block, lent by the Director for CC-342), tools/tests/tcc342.js (new)
-since: 2026-11-11T06:54Z
-next: CC-342 J108, J109, J119, J120, J121, J123: the view in first person
+task: —
+touching: —
+since: 2026-11-11T10:25Z
+next: —
 blocked-on: —
-last-report: handoffs/2026-11-11-claude3-CC-341c.md
+last-report: handoffs/2026-11-11-claude3-CC-342b.md
 
 ## Notes
 
-### Where things stand (11 Nov ~05:50Z, end of session 4: context nearly full, needs a new session)
-- CC-341 DONE (checked out --done --review; handoffs 2026-11-11-claude3-CC-341.md, -b, -c; sheets Claude outputs/CC-341/).
-  tcc341 16/0: it bends liveCloth + M.userData.waist before measuring, skips balaclava-hem (fake tube) by name, and
-  consults the new core/clip-exceptions.js (one entry, sleeve-on-carrier-front, 9 mm, kit run/crouch, until Claude 2's
-  CB-291 keeps the support upper arm off the carrier using carrierClearance(ud).upperArm). Director accepted the radio move
-  (he shows Jerry). Ready to commit: core/clip-exceptions.js, tools/tests/tcc341.js, studio/marine-body.js, marine-lab/lab.js.
-- NEXT: CC-342 (the first-person view fixes: the optics' recoil, the laser's bend looking down, the sniper's see-through
-  front and scope-in, the chainsaw with the FOV in, the Breacher's stock in the aim, the flamer's hose through the arm), in
-  game/viewmodel.js's view code lent by Claude 1 (name the sections in --touch; the hands stay Claude 1's). Not started.
-- Tools: make a fresh cloud copy (tar the code dirs on the PC into _DELETE ME/, stage, untar). A copy of tcc341 that prints
-  the deep points in torso space and the joints per pose ('INFO joints') fed the marine lab (tools/marine-lab.mjs with build
-  joints:{...}) for quick pictures; the in-game soft camera took 7 min to load and timed out on reload.
+### Where things stand (11 Nov 10:43Z, end of session 5: context nearly full, needs a new session)
+- CC-342 DONE and accepted by the Director (handoffs 2026-11-11-claude3-CC-342.md and -CC-342b.md; tcc342 32/0; pictures
+  Claude outputs/CC-342/). Landed in game/viewmodel.js, viewmodel-poses.js (chainsaw hip), index.html (weaponAimPoint line,
+  #opticDot block). Ready to commit.
+- NEXT (not started): CC-343 on the board = CB-290's legs half: foot IK on the ground, stairs, ramps and crates (soles flat,
+  hips drop for the lower foot), knees out of anything near, t184's boot slide; a test over stairs/ramps/crates/slopes in
+  every stance; worst five before/after in four lights. updateMarinePose's leg section in index.html is lent; Claude 2 keeps
+  the arms and gun: agree the boundary with Claude 2 FIRST (request), then check in with --touch "index.html (updateMarinePose
+  legs)". Director's words: handoffs/requests.md 'CC-342 done (2 handoffs)'.
+- crew.mjs writes to this card can fail EINVAL on this mount: run it as node -r $HOME/w/fsfix.cjs crew/crew.mjs ... (the file
+  catches EINVAL, writes <file>.tmp-claude3 and renames it over; rewrite it if gone).
+- Pictures in the soft camera: arm first (T.setUnarmedDbg(false)), lights on (T.trainingDbg.tg().setLights(true)), step with
+  T.stepFrame, then freeze time (performance.now) and `shot --live` without --ui (frozen --ui frames come out dark). The
+  camera needs assets/intro, disclaimer, insignia, audio in the cloud copy or it hangs loading. Patch the PC with anchored
+  python scripts on whole lines only (a mid-line anchor once swallowed retune(): fixed 08:16Z).
 
 ### This VM's quirks (session 3)
 - The PC mount refuses writing over some existing files (EINVAL on open with O_CREAT, sometimes on ftruncate): crew.mjs fails

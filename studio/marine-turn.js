@@ -94,7 +94,9 @@ export function createTurnSteps(yaw = 0) {
 // legs need to keep up more with the top half"): the shoulders never turn more than `cap` past the hips. The hips lead
 // the planted feet by up to `hip` (half the feet's lag, more if the cap needs it), and anything past cap + hip turns the
 // feet in place on the balls instead of twisting him further.
-export const TWIST = { cap: .96, hip: .45, share: .5 };
+// CB-291 (a) (J127, D-139; CLAUDE DIRECTOR 11 Nov): cap was .96 (55 deg); the spine turns at most 45 deg on the hips
+// (core/body-limits.js BODY_LIMITS.spine), so the feet pivot and step round sooner; 3 deg left for the recoil's twist.
+export const TWIST = { cap: 42 * Math.PI / 180, hip: .45, share: .5 };
 export function createMarineTurn({ THREE: T, marine }) {
   const ud = marine.userData, lower = ud.lowerBody;
   const legs = [ud.legLG, ud.legRG], knees = [ud.kneeLG, ud.kneeRG], ankles = [ud.ankleLG, ud.ankleRG];

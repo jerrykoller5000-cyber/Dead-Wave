@@ -1,4 +1,4 @@
-﻿(async () => {
+(async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise(r => setTimeout(r, ms));
   await startMatch(T, 'TestMarine');
@@ -17,12 +17,17 @@
   for (const t of T.trees) { t.alive = false; t.stump = false; } for (const r of T.rocks) r.alive = false;
   const p = T.player.position;
   let found = null;
-  for (let tries = 0; tries < 400 && !found; tries++) {
-    const cx = Math.round((Math.random() - 0.5) * 50), cz = Math.round((Math.random() - 0.5) * 50);
-    let good = true;
-    for (let dx = -6; dx <= 6 && good; dx++) for (let dz = -6; dz <= 6 && good; dz++) if (T.placeRefusalFor('spikes', cx + dx, cz + dz) && Math.abs(dx) + Math.abs(dz) > 1) good = false;
-    if (good) found = { cx, cz };
+  // Scan clear sites in a fixed order so slope and nearby builds cannot vary by run.
+  for (let radius = 0; radius <= 25 && !found; radius++) {
+    for (let cx = -radius; cx <= radius && !found; cx++) for (let cz = -radius; cz <= radius && !found; cz++) {
+      if (Math.max(Math.abs(cx), Math.abs(cz)) !== radius) continue;
+      let good = true;
+      for (let dx = -6; dx <= 6 && good; dx++) for (let dz = -6; dz <= 6 && good; dz++)
+        if (T.placeRefusalFor('spikes', cx + dx, cz + dz) && Math.abs(dx) + Math.abs(dz) > 1) good = false;
+      if (good) found = { cx, cz };
+    }
   }
+  if (!found) throw Error('No clear 13×13 build-test site');
   const gx = found.cx, gz = found.cz;
   const ground = async () => {
     p.set(T.gridCentre(gx), T.sampleHeight(T.gridCentre(gx), T.gridCentre(gz)), T.gridCentre(gz));
@@ -52,20 +57,16 @@
   ok(roof && roof.level === 1, 'setup: roof over a ground floor');
   // aim from high above straight down through the roof at the cell
   T.setPlaceMode('light');
-  T.setAimRay(T.gridCentre(b) + 0.1, 30, T.gridCentre(c2) + 0.1, -0.01, -1, -0.01);
-  await wait(50);
+  const aimRoof = () => T.setAimRay(T.gridCentre(b) + 0.1, 30, T.gridCentre(c2) + 0.1, -0.01, -1, -0.01);
+  // A normal game tick can replace a debug ray during a wall-clock wait.
+  aimRoof();
   const pt = T.getPlacePoint();
   ok(pt.hit && pt.hit.level === 0 && pt.hit.type === 'floor', 'on the ground, the reticle looks through the roof to the ground floor (' + (pt.hit && pt.hit.type + '@' + pt.hit.level) + ')');
-  // Flaky under load (Claude): give scrapTarget a couple of tries so the ray settles.
-  let st = null;
-  for (let i = 0; i < 8; i++) {
-    T.setAimRay(T.gridCentre(b) + 0.1, 30, T.gridCentre(c2) + 0.1, -0.01, -1, -0.01);
-    await wait(40);
-    st = T.scrapTarget();
-    if (st && st.level === 0) break;
-  }
+  aimRoof();
+  const st = T.scrapTarget();
   ok(st && st.level === 0, 'X targets the ground-level piece first (' + (st && st.type + '@' + st.level) + ')');
   p.set(T.gridCentre(b), roof.deck.deckY, T.gridCentre(c2)); await wait(100);
+  aimRoof();
   const st2 = T.scrapTarget();
   ok(st2 === roof, 'standing on the roof, X targets the roof (' + (st2 && st2.type + '@' + st2.level) + ')');
   await ground();
@@ -86,11 +87,15 @@
   const m1 = T.builds.filter(b => b.type === 'mine').length;
   ok(m0 - m1 === 5 && T.getBank() > bank0, 'hold X + drag scrapped the mines: ' + (m0 - m1) + ', +$' + (T.getBank() - bank0));
   // fade: roof over the marine eases rather than snapping
-  p.set(T.gridCentre(b), T.sampleHeight(T.gridCentre(b), T.gridCentre(c2)), T.gridCentre(c2));
-  await wait(80);
-  let op = 1; roof.mesh.traverse(o => { if (o.isMesh && o.material) op = Math.min(op, o.material.opacity); });
-  await wait(600);
-  let op2 = 1; roof.mesh.traverse(o => { if (o.isMesh && o.material) op2 = Math.min(op2, o.material.opacity); });
-  ok(op2 < 0.3 && op > op2, 'roof fades smoothly (' + op.toFixed(2) + ' -> ' + op2.toFixed(2) + ')');
+  T.flightHold(true);
+  let op, op2;
+  try {
+    p.set(T.gridCentre(b), T.sampleHeight(T.gridCentre(b), T.gridCentre(c2)), T.gridCentre(c2));
+    for (let i = 0; i < 2; i++) T.stepFrame(0.016);
+    op = 1; roof.mesh.traverse(o => { if (o.isMesh && o.material) op = Math.min(op, o.material.opacity); });
+    for (let i = 0; i < 12; i++) T.stepFrame(0.016);
+    op2 = 1; roof.mesh.traverse(o => { if (o.isMesh && o.material) op2 = Math.min(op2, o.material.opacity); });
+  } finally { T.flightHold(false); }
+  ok(op > 0.3 && op < 1 && op2 < 0.3 && op > op2, 'roof fades smoothly (' + op.toFixed(2) + ' -> ' + op2.toFixed(2) + ')');
   return out.join('\n');
 })()

@@ -26,14 +26,14 @@
     ok(typeof char.add === 'function' && typeof char.count === 'function', 'training.char has add and count methods');
     ok(char.count() === 0, 'training.char starts empty (count 0)');
 
-    // 1. Verify renderOrder of char marks mesh and impact decals
+    // 1. Verify renderOrder of char marks mesh and impact decals (AG-301: wear 1 < impact 1.1 < char 1.2 < wisps 2 < flames 3)
     const charMesh = tg.group.getObjectByName('training-char-marks');
     ok(!!charMesh, 'training-char-marks mesh exists in tg.group');
-    ok(charMesh && charMesh.renderOrder === 1, 'char marks mesh has renderOrder 1 (' + (charMesh ? charMesh.renderOrder : 'none') + ')');
+    ok(charMesh && charMesh.renderOrder > 1 && charMesh.renderOrder < 2, 'char marks mesh sorts above wear (1) and below wisps/flames (2/3) (' + (charMesh ? charMesh.renderOrder : 'none') + ')');
 
     const impactMesh = tg.group.getObjectByName('training-impact-marks');
     ok(!!impactMesh, 'training-impact-marks mesh exists in tg.group');
-    ok(impactMesh && impactMesh.renderOrder === 1, 'impact marks mesh has renderOrder 1 (' + (impactMesh ? impactMesh.renderOrder : 'none') + ')');
+    ok(impactMesh && impactMesh.renderOrder > 1 && impactMesh.renderOrder < charMesh.renderOrder, 'impact marks mesh sorts above wear (1) and below char (' + (impactMesh ? impactMesh.renderOrder : 'none') + ')');
 
     // 2. Verify flamer nozzle flare renderOrder
     const flamerMesh = T.weaponMeshes?.flamer;

@@ -40,11 +40,11 @@
     const O = tg.origin;
     const floor = O.y;
 
-    // 1. Strict Render-Order Hierarchy: decals/char (1) < barrel wisps (2) < flame stream & nozzle jet (3) < embers & target burn (4)
+    // 1. Strict Render-Order Hierarchy: wear (1) < bullet impacts (1.1) < char (1.2) < barrel wisps (2) < flame stream & nozzle jet (3) < embers & target burn (4)
     const charMesh = tg.group.getObjectByName('training-char-marks');
     const impactMesh = tg.group.getObjectByName('training-impact-marks');
-    ok(charMesh?.renderOrder === 1 && impactMesh?.renderOrder === 1,
-      `char (${charMesh?.renderOrder}) and bullet impact (${impactMesh?.renderOrder}) batches keep renderOrder 1`);
+    ok(impactMesh?.renderOrder === 1.1 && charMesh?.renderOrder === 1.2 && impactMesh?.material?.forceSinglePass && charMesh?.material?.forceSinglePass && impactMesh?.material?.polygonOffset && charMesh?.material?.polygonOffset,
+      `AG-301: bullet impact (${impactMesh?.renderOrder}) and char (${charMesh?.renderOrder}) sort strictly above wear (1) & below wisps (2) with polygonOffset + forceSinglePass`);
 
     const wispOrder = T.barrelHeat?._wisps?.[0]?.mesh?.renderOrder;
     ok(wispOrder === 2, `barrel-heat smoke wisps use renderOrder 2 < flame renderOrder 3 (got ${wispOrder})`);

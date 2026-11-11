@@ -1,0 +1,41 @@
+{
+  "capturedAt": "2026-11-11T10:56:38.583Z",
+  "fragAudit": {
+    "heldAudit": {
+      "meshCount": 8,
+      "decalNodes": 0,
+      "colorMaps": 0,
+      "hasSpoon": true,
+      "hasBody": true
+    },
+    "sampleAudit": {
+      "meshCount": 8,
+      "decalNodes": 0,
+      "colorMaps": 0,
+      "hasSpoon": true,
+      "hasBody": true
+    },
+    "vmAudit": {
+      "meshCount": 0,
+      "decalNodes": 0,
+      "colorMaps": 0,
+      "hasSpoon": false,
+      "hasBody": false
+    }
+  },
+  "sawAudit": {
+    "worldHeldInstanced": [
+      {
+        "name": "(instanced)",
+        "count": 42
+      }
+    ],
+    "vmInstanced": [
+      {
+        "name": "(instanced)",
+        "count": 42
+      }
+    ]
+  },
+  "pageErrors": []
+}

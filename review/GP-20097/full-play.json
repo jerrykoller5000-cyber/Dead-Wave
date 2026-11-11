@@ -1,0 +1,2153 @@
+{
+  "log": [
+    {
+      "name": "01-entry",
+      "data": {
+        "weapon": "pistol",
+        "ammo": 12,
+        "reload": {
+          "timer": 0,
+          "anim": 1.8,
+          "weapon": null
+        },
+        "hits": 0,
+        "panels": {
+          "shop": false,
+          "cif": false,
+          "armory": false,
+          "range": false
+        },
+        "prompt": "",
+        "errors": 0
+      }
+    },
+    {
+      "name": "02-kiosk-before",
+      "data": {
+        "med": 0,
+        "cash": 999999,
+        "text": "SUPPLY TERMINAL\nCASH $∞\nSUPPLIES\nBUILDS\n\nPick up MedPens and field intel. Night 1: each Shambler is worth 1 skull value before bonuses. Bank skulls at the HQ window: 1 skull value = 1 Cash.\n\nFIELD INTEL\nSee every enemy type, count and approach at the HQ panel.\nBuy — 120 Cash\n+\nMEDPEN0 / 3 CARRIED\nAuto-injector. H to jab one: heals 60% of max health. Natural regen only ever climbs back to 40%.\n$35\nBACK TO THE FIGHT (E / ESC)"
+      }
+    },
+    {
+      "name": "kiosk-buttons",
+      "data": {
+        "buttons": [
+          "Supplies",
+          "Builds",
+          "Buy — 120 Cash",
+          "$35",
+          "Back to the fight (E / Esc)"
+        ],
+        "found": true
+      }
+    },
+    {
+      "name": "03-kiosk-bought",
+      "data": {
+        "med": 1,
+        "cash": 999999,
+        "text": "SUPPLY TERMINAL\nCASH $∞\nSUPPLIES\nBUILDS\n\nPick up MedPens and field intel. Night 1: each Shambler is worth 1 skull value before bonuses. Bank skulls at the HQ window: 1 skull value = 1 Cash.\n\nFIELD INTEL\nSee every enemy type, count and approach at the HQ panel.\nBuy — 120 Cash\n+\nMEDPEN1 / 3 CARRIED\nAuto-injector. H to jab one: heals 60% of max health. Natural regen only ever climbs back to 40%.\n$35\nBACK TO THE FIGHT (E / ESC)"
+      }
+    },
+    {
+      "name": "04-cif-before",
+      "data": {
+        "tabs": [
+          "Head",
+          "Clothing",
+          "Equipment",
+          "Appearance"
+        ],
+        "items": [
+          "Hat",
+          "Balaclava",
+          "Eyewear"
+        ],
+        "camo": "m81",
+        "wardrobe": {
+          "version": 1,
+          "items": {
+            "cap": {
+              "camo": "m81",
+              "style": "cover"
+            },
+            "helmet": {
+              "camo": "m81"
+            },
+            "mask": {
+              "camo": "coyoteBrown"
+            },
+            "shirt": {
+              "camo": "m81",
+              "sleeves": "down"
+            },
+            "trousers": {
+              "camo": "m81",
+              "cut": "trousers"
+            },
+            "gloves": {
+              "camo": "m81",
+              "worn": true
+            },
+            "carrier": {},
+            "pads": {},
+            "holster": {},
+            "belt": {},
+            "pack": {},
+            "eyewear": {
+              "style": "none"
+            },
+            "boots": {
+              "colour": "black",
+              "rubber": "yellow"
+            }
+          },
+          "guns": {},
+          "body": {
+            "hair": "darkBrown",
+            "eyes": "brown",
+            "skin": 3
+          }
+        }
+      }
+    },
+    {
+      "name": "uniform-choice",
+      "data": {
+        "item": "shirt",
+        "swatch": "flecktarn",
+        "shirt": "flecktarn",
+        "wardrobe": {
+          "version": 1,
+          "items": {
+            "cap": {
+              "camo": "m81",
+              "style": "cover"
+            },
+            "helmet": {
+              "camo": "m81"
+            },
+            "mask": {
+              "camo": "coyoteBrown"
+            },
+            "shirt": {
+              "camo": "flecktarn",
+              "sleeves": "down"
+            },
+            "trousers": {
+              "camo": "m81",
+              "cut": "trousers"
+            },
+            "gloves": {
+              "camo": "m81",
+              "worn": true
+            },
+            "carrier": {},
+            "pads": {},
+            "holster": {},
+            "belt": {},
+            "pack": {},
+            "eyewear": {
+              "style": "none"
+            },
+            "boots": {
+              "colour": "black",
+              "rubber": "yellow"
+            }
+          },
+          "guns": {},
+          "body": {
+            "hair": "darkBrown",
+            "eyes": "brown",
+            "skin": 3
+          }
+        }
+      }
+    },
+    {
+      "name": "05-cif-uniform",
+      "data": {
+        "weapon": "pistol",
+        "ammo": 12,
+        "reload": {
+          "timer": 0,
+          "anim": 1.8,
+          "weapon": null
+        },
+        "hits": 0,
+        "panels": {
+          "shop": false,
+          "cif": true,
+          "armory": false,
+          "range": false
+        },
+        "prompt": "",
+        "errors": 0
+      }
+    },
+    {
+      "name": "06-armory-before",
+      "data": {
+        "read": {
+          "hip": {
+            "id": "pistol:base",
+            "kind": "pistol"
+          },
+          "slots": {
+            "primary": [
+              null,
+              null
+            ],
+            "secondary": [
+              null,
+              null
+            ]
+          },
+          "shelf": []
+        },
+        "owned": {
+          "pistol": true
+        }
+      }
+    },
+    {
+      "name": "armory-transactions",
+      "data": {
+        "purchased": {
+          "hip": {
+            "id": "pistol:base",
+            "kind": "pistol"
+          },
+          "slots": {
+            "primary": [
+              null,
+              null
+            ],
+            "secondary": [
+              null,
+              null
+            ]
+          },
+          "shelf": [
+            {
+              "id": "m4",
+              "kind": "m4",
+              "loaded": 30,
+              "magazines": [
+                {
+                  "rounds": 30
+                },
+                {
+                  "rounds": 30
+                },
+                {
+                  "rounds": 30
+                },
+                {
+                  "rounds": 30
+                },
+                {
+                  "rounds": 30
+                },
+                {
+                  "rounds": 30
+                },
+                {
+                  "rounds": 30
+                },
+                {
+                  "rounds": 30
+                }
+              ],
+              "rounds": 0,
+              "upgrades": {}
+            }
+          ]
+        },
+        "taken": {
+          "hip": {
+            "id": "pistol:base",
+            "kind": "pistol"
+          },
+          "slots": {
+            "primary": [
+              {
+                "id": "m4",
+                "kind": "m4",
+                "loaded": 30,
+                "magazines": [
+                  {
+                    "rounds": 30
+                  },
+                  {
+                    "rounds": 30
+                  },
+                  {
+                    "rounds": 30
+                  },
+                  {
+                    "rounds": 30
+                  },
+                  {
+                    "rounds": 30
+                  },
+                  {
+                    "rounds": 30
+                  },
+                  {
+                    "rounds": 30
+                  },
+                  {
+                    "rounds": 30
+                  }
+                ],
+                "rounds": 0,
+                "upgrades": {}
+              },
+              null
+            ],
+            "secondary": [
+              null,
+              null
+            ]
+          },
+          "shelf": []
+        },
+        "stowed": {
+          "hip": {
+            "id": "pistol:base",
+            "kind": "pistol"
+          },
+          "slots": {
+            "primary": [
+              null,
+              null
+            ],
+            "secondary": [
+              null,
+              null
+            ]
+          },
+          "shelf": [
+            {
+              "id": "m4",
+              "kind": "m4",
+              "loaded": 30,
+              "magazines": [
+                {
+                  "rounds": 30
+                },
+                {
+                  "rounds": 30
+                },
+                {
+                  "rounds": 30
+                },
+                {
+                  "rounds": 30
+                },
+                {
+                  "rounds": 30
+                },
+                {
+                  "rounds": 30
+                },
+                {
+                  "rounds": 30
+                },
+                {
+                  "rounds": 30
+                }
+              ],
+              "rounds": 0,
+              "upgrades": {}
+            }
+          ]
+        },
+        "retaken": {
+          "hip": {
+            "id": "pistol:base",
+            "kind": "pistol"
+          },
+          "slots": {
+            "primary": [
+              {
+                "id": "m4",
+                "kind": "m4",
+                "loaded": 30,
+                "magazines": [
+                  {
+                    "rounds": 30
+                  },
+                  {
+                    "rounds": 30
+                  },
+                  {
+                    "rounds": 30
+                  },
+                  {
+                    "rounds": 30
+                  },
+                  {
+                    "rounds": 30
+                  },
+                  {
+                    "rounds": 30
+                  },
+                  {
+                    "rounds": 30
+                  },
+                  {
+                    "rounds": 30
+                  }
+                ],
+                "rounds": 0,
+                "upgrades": {}
+              },
+              null
+            ],
+            "secondary": [
+              null,
+              null
+            ]
+          },
+          "shelf": []
+        },
+        "rack": [
+          "m4",
+          "pistol"
+        ],
+        "owned": {
+          "pistol": true,
+          "m4": true
+        }
+      }
+    },
+    {
+      "name": "07-armory-retaken",
+      "data": {
+        "weapon": "pistol",
+        "ammo": 12,
+        "reload": {
+          "timer": 0,
+          "anim": 1.8,
+          "weapon": null
+        },
+        "hits": 0,
+        "panels": {
+          "shop": false,
+          "cif": true,
+          "armory": true,
+          "range": false
+        },
+        "prompt": "",
+        "errors": 0
+      }
+    },
+    {
+      "name": "08-console-menu",
+      "data": {
+        "text": "Choose a drill\nFIRING RANGE / DRILL CONTROL\n×\n\nChoose a weapon, pick a drill, read the four steps, then press Start. Work from Learn through Practice to Challenge.\n\n1. Learn\n→\n2. Practice\n→\n3. Challenge\n1. Weapon\nPistol\nWasp SMG\nGW-4 Carbine\nKR-7 Rifle\nShotgun\nBreacher-12\nRevolver\nSniper\n2. Drill\n1\nLEARN\nFirst Five\nFive close plates, one at a time. Any scoring zone counts; take your time and learn the range.\n2\nLEARN\nDraw on the Beep\nStart holstered. After the beep, draw with Tab and clear one close plate.\n3\nPRACTICE\nBullseye Circuit\nClear five plates by hitting only their body bullseyes.\n4\nPRACTICE\nCall Sign\nAlternate called head and bullseye shots, one plate at a time.\n5\nPRACTICE\nPop Patrol\nFollow an unpredictable left-to-right pop-up patrol; quick hits earn a speed bonus.\n6\nPRACTICE\nTwelve Clean\nClear twelve plates with twelve rounds. Every wasted shot costs an opportunity.\n7\nCHALLENGE\nQuickdraw Countdown\nTwelve reaction rounds; each exposure gets shorter. Base semi-auto is enough.\n8\nCHALLENGE\nPistol / Rifle Relay\nSix single-plate stages alternate pistol and carbine. Follow the weapon call before firing.\nLEARN\nFirst Five\nStart drill\nBriefing\nPersonal bests\n\nFive close plates, one at a time. Any scoring zone counts; take your time and learn the range.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates.\nUse Pistol. Aim for any scoring zone. Hits to clear each plate: 1.\nFollow each"
+      }
+    },
+    {
+      "name": "drill-walkthrough",
+      "data": [
+        {
+          "weapon": "pistol",
+          "id": "bullseye",
+          "title": "Bullseye Circuit",
+          "brief": "Clear five plates by hitting only their body bullseyes.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates.\nUse Pistol. Aim for Bullseye. Hits to clear e",
+          "card": true,
+          "enabled": true,
+          "start": {
+            "ok": true,
+            "id": "1794394292625-1"
+          },
+          "state": "PREPARING"
+        },
+        {
+          "weapon": "pistol",
+          "id": "call-sign",
+          "title": "Call Sign",
+          "brief": "Alternate called head and bullseye shots, one plate at a time.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates.\nUse Pistol. Aim for Head. Hits to clea",
+          "card": true,
+          "enabled": true,
+          "start": {
+            "ok": true,
+            "id": "1794394292634-2"
+          },
+          "state": "PREPARING"
+        },
+        {
+          "weapon": "pistol",
+          "id": "pop-patrol",
+          "title": "Pop Patrol",
+          "brief": "Follow an unpredictable left-to-right pop-up patrol; quick hits earn a speed bonus.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates.\nUse Pistol. Aim f",
+          "card": true,
+          "enabled": true,
+          "start": {
+            "ok": true,
+            "id": "1794394292642-3"
+          },
+          "state": "PREPARING"
+        },
+        {
+          "weapon": "pistol",
+          "id": "twelve-clean",
+          "title": "Twelve Clean",
+          "brief": "Clear twelve plates with twelve rounds. Every wasted shot costs an opportunity.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates.\nUse Pistol. Aim for a",
+          "card": true,
+          "enabled": true,
+          "start": {
+            "ok": true,
+            "id": "1794394292651-4"
+          },
+          "state": "PREPARING"
+        },
+        {
+          "weapon": "pistol",
+          "id": "quickdraw",
+          "title": "Quickdraw Countdown",
+          "brief": "Twelve reaction rounds; each exposure gets shorter. Base semi-auto is enough.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates.\nUse Pistol. Aim for any",
+          "card": true,
+          "enabled": true,
+          "start": {
+            "ok": true,
+            "id": "1794394292659-5"
+          },
+          "state": "PREPARING"
+        },
+        {
+          "weapon": "uzi",
+          "id": "three-taps",
+          "title": "Three Taps",
+          "brief": "Put three scoring hits on each plate before it folds. Short controlled bursts win.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates.\nUse Wasp SMG. Aim ",
+          "card": true,
+          "enabled": true,
+          "start": {
+            "ok": true,
+            "id": "1794394292670-6"
+          },
+          "state": "PREPARING"
+        },
+        {
+          "weapon": "uzi",
+          "id": "crossfire",
+          "title": "Crossfire",
+          "brief": "Two opposing plates rise together. Transition rapidly between lanes.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates.\nUse Wasp SMG. Aim for any scorin",
+          "card": true,
+          "enabled": true,
+          "start": {
+            "ok": true,
+            "id": "1794394292690-7"
+          },
+          "state": "PREPARING"
+        },
+        {
+          "weapon": "uzi",
+          "id": "one-mag",
+          "title": "One Magazine",
+          "brief": "Clear plates with two hits each using only 32 rounds.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates.\nUse Wasp SMG. Aim for any scoring zone. Hits to",
+          "card": true,
+          "enabled": true,
+          "start": {
+            "ok": true,
+            "id": "1794394292714-8"
+          },
+          "state": "PREPARING"
+        },
+        {
+          "weapon": "uzi",
+          "id": "blink",
+          "title": "Blink",
+          "brief": "Sixteen brief single-plate exposures reward fast acquisition.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates.\nUse Wasp SMG. Aim for any scoring zone.",
+          "card": true,
+          "enabled": true,
+          "start": {
+            "ok": true,
+            "id": "1794394292724-9"
+          },
+          "state": "PREPARING"
+        },
+        {
+          "weapon": "uzi",
+          "id": "swarm",
+          "title": "Swarm Control",
+          "brief": "Groups grow from one plate to five. Land two hits on each plate.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates.\nUse Wasp SMG. Aim for any scoring zo",
+          "card": true,
+          "enabled": true,
+          "start": {
+            "ok": true,
+            "id": "1794394292733-10"
+          },
+          "state": "PREPARING"
+        },
+        {
+          "weapon": "m4",
+          "id": "near-far",
+          "title": "Near / Far",
+          "brief": "Alternate nearby and distant plates; balance acquisition speed with ring placement.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates.\nUse GW-4 Carbine.",
+          "card": true,
+          "enabled": true,
+          "start": {
+            "ok": true,
+            "id": "1794394292742-11"
+          },
+          "state": "PREPARING"
+        },
+        {
+          "weapon": "m4",
+          "id": "identify",
+          "title": "Identify / Fire",
+          "brief": "Read the changing head, bullseye or chest-ring call before firing.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates.\nUse GW-4 Carbine. Aim for Bullseye",
+          "card": true,
+          "enabled": true,
+          "start": {
+            "ok": true,
+            "id": "1794394292752-12"
+          },
+          "state": "PREPARING"
+        },
+        {
+          "weapon": "m4",
+          "id": "priority",
+          "title": "Priority Order",
+          "brief": "Five plates rise together. Shoot the called lane first; each clear reveals the next priority.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates.\nUse GW-",
+          "card": true,
+          "enabled": true,
+          "start": {
+            "ok": true,
+            "id": "1794394292762-13"
+          },
+          "state": "PREPARING"
+        },
+        {
+          "weapon": "m4",
+          "id": "controlled-pairs",
+          "title": "Controlled Pairs",
+          "brief": "Two scoring hits per plate. Select semi or auto before starting.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates.\nUse GW-4 Carbine. Aim for any scorin",
+          "card": true,
+          "enabled": true,
+          "start": {
+            "ok": true,
+            "id": "1794394292772-14"
+          },
+          "state": "PREPARING"
+        },
+        {
+          "weapon": "m4",
+          "id": "five-wide",
+          "title": "Five Wide",
+          "brief": "Clear a full five-lane wave inside each exposure window.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates.\nUse GW-4 Carbine. Aim for any scoring zone. ",
+          "card": true,
+          "enabled": true,
+          "start": {
+            "ok": true,
+            "id": "1794394292783-15"
+          },
+          "state": "PREPARING"
+        },
+        {
+          "weapon": "ak",
+          "id": "four-count",
+          "title": "Four Count",
+          "brief": "Four scoring hits per plate with the rifle’s own firing rhythm.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates.\nUse KR-7 Rifle. Aim for any scoring z",
+          "card": true,
+          "enabled": true,
+          "start": {
+            "ok": true,
+            "id": "1794394292798-16"
+          },
+          "state": "PREPARING"
+        },
+        {
+          "weapon": "ak",
+          "id": "heavy-beat",
+          "title": "Heavy Beat",
+          "brief": "Clear paired plates across alternating near and far lanes.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates.\nUse KR-7 Rifle. Aim for any scoring zone. ",
+          "card": true,
+          "enabled": true,
+          "start": {
+            "ok": true,
+            "id": "1794394292809-17"
+          },
+          "state": "PREPARING"
+        },
+        {
+          "weapon": "ak",
+          "id": "torso-ladder",
+          "title": "Torso Ladder",
+          "brief": "Growing groups accept chest-ring and bullseye hits only.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates.\nUse KR-7 Rifle. Aim for Ring. Hits to clear ",
+          "card": true,
+          "enabled": true,
+          "start": {
+            "ok": true,
+            "id": "1794394292821-18"
+          },
+          "state": "PREPARING"
+        },
+        {
+          "weapon": "ak",
+          "id": "two-mags",
+          "title": "Two-Mag Discipline",
+          "brief": "Three hits per plate, sixty rounds total. Reload carefully.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates.\nUse KR-7 Rifle. Aim for any scoring zone.",
+          "card": true,
+          "enabled": true,
+          "start": {
+            "ok": true,
+            "id": "1794394292833-19"
+          },
+          "state": "PREPARING"
+        },
+        {
+          "weapon": "ak",
+          "id": "reset-and-read",
+          "title": "Reset / Read",
+          "brief": "A deliberate pause precedes each changing head or bullseye call.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates.\nUse KR-7 Rifle. Aim for Head. Hits t",
+          "card": true,
+          "enabled": true,
+          "start": {
+            "ok": true,
+            "id": "1794394292848-20"
+          },
+          "state": "PREPARING"
+        },
+        {
+          "weapon": "shotgun",
+          "id": "seven-on-steel",
+          "title": "Seven on Steel",
+          "brief": "Place as many of the seven pellets as possible on each close plate.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates.\nUse Shotgun. Aim for any scoring ",
+          "card": true,
+          "enabled": true,
+          "start": {
+            "ok": true,
+            "id": "1794394292864-21"
+          },
+          "state": "PREPARING"
+        },
+        {
+          "weapon": "shotgun",
+          "id": "pump-rhythm",
+          "title": "Pump Rhythm",
+          "brief": "Clear sequential plates at a pace that respects the pump cycle.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates.\nUse Shotgun. Aim for any scoring zone",
+          "card": true,
+          "enabled": true,
+          "start": {
+            "ok": true,
+            "id": "1794394292876-22"
+          },
+          "state": "PREPARING"
+        },
+        {
+          "weapon": "shotgun",
+          "id": "double-door",
+          "title": "Double Door",
+          "brief": "Close paired plates invite careful spread placement across both silhouettes.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates.\nUse Shotgun. Aim for any",
+          "card": true,
+          "enabled": true,
+          "start": {
+            "ok": true,
+            "id": "1794394292885-23"
+          },
+          "state": "PREPARING"
+        },
+        {
+          "weapon": "shotgun",
+          "id": "eight-shells",
+          "title": "Eight Shells",
+          "brief": "Eight exposures, eight shells. Maximize pellet placement without waste.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates.\nUse Shotgun. Aim for any scor",
+          "card": true,
+          "enabled": true,
+          "start": {
+            "ok": true,
+            "id": "1794394292893-24"
+          },
+          "state": "PREPARING"
+        },
+        {
+          "weapon": "shotgun",
+          "id": "center-mass",
+          "title": "Center Mass",
+          "brief": "Read the bullseye or chest-ring call and keep your pellet pattern centered.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates.\nUse Shotgun. Aim for Bull",
+          "card": true,
+          "enabled": true,
+          "start": {
+            "ok": true,
+            "id": "1794394292903-25"
+          },
+          "state": "PREPARING"
+        },
+        {
+          "weapon": "aa12",
+          "id": "breach-wave",
+          "title": "Breach Wave",
+          "brief": "Clear three close plates per wave with the faster Breacher.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates.\nUse Breacher-12. Aim for any scoring zone",
+          "card": true,
+          "enabled": true,
+          "start": {
+            "ok": true,
+            "id": "1794394292915-26"
+          },
+          "state": "PREPARING"
+        },
+        {
+          "weapon": "aa12",
+          "id": "five-pellet-focus",
+          "title": "Five-Pellet Focus",
+          "brief": "Chest rings only; each additional legitimate pellet earns a placement bonus.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates.\nUse Breacher-12. Aim for",
+          "card": true,
+          "enabled": true,
+          "start": {
+            "ok": true,
+            "id": "1794394292925-27"
+          },
+          "state": "PREPARING"
+        },
+        {
+          "weapon": "aa12",
+          "id": "drum-discipline",
+          "title": "Drum Discipline",
+          "brief": "Twenty shells for twelve close plates. Keep your fire controlled.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates.\nUse Breacher-12. Aim for any scorin",
+          "card": true,
+          "enabled": true,
+          "start": {
+            "ok": true,
+            "id": "1794394292934-28"
+          },
+          "state": "PREPARING"
+        },
+        {
+          "weapon": "aa12",
+          "id": "switchback",
+          "title": "Switchback",
+          "brief": "Rapidly alternate distant left and right plates.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates.\nUse Breacher-12. Aim for any scoring zone. Hits to c",
+          "card": true,
+          "enabled": true,
+          "start": {
+            "ok": true,
+            "id": "1794394292944-29"
+          },
+          "state": "PREPARING"
+        },
+        {
+          "weapon": "aa12",
+          "id": "stairwell",
+          "title": "Stairwell",
+          "brief": "Close groups grow from one plate to five, then repeat.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates.\nUse Breacher-12. Aim for any scoring zone. Hit",
+          "card": true,
+          "enabled": true,
+          "start": {
+            "ok": true,
+            "id": "1794394292954-30"
+          },
+          "state": "PREPARING"
+        },
+        {
+          "weapon": "revolver",
+          "id": "six-certainties",
+          "title": "Six Certainties",
+          "brief": "Six plates, six deliberate rounds. Make each discharge count.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates.\nUse Revolver. Aim for any scoring zone.",
+          "card": true,
+          "enabled": true,
+          "start": {
+            "ok": true,
+            "id": "1794394292963-31"
+          },
+          "state": "PREPARING"
+        },
+        {
+          "weapon": "revolver",
+          "id": "triple-stack",
+          "title": "Triple Stack",
+          "brief": "Three aligned plates can be pierced by one correctly placed shot.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates.\nUse Revolver. Aim for any scoring z",
+          "card": true,
+          "enabled": true,
+          "start": {
+            "ok": true,
+            "id": "1794394292981-32"
+          },
+          "state": "PREPARING"
+        },
+        {
+          "weapon": "revolver",
+          "id": "keyhole",
+          "title": "Keyhole",
+          "brief": "Only the small head rings count. Clear the five-lane bank.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates.\nUse Revolver. Aim for Head. Hits to clear ",
+          "card": true,
+          "enabled": true,
+          "start": {
+            "ok": true,
+            "id": "1794394292991-33"
+          },
+          "state": "PREPARING"
+        },
+        {
+          "weapon": "revolver",
+          "id": "duel",
+          "title": "Duel",
+          "brief": "Two opposing plates rise together; clear both quickly.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates.\nUse Revolver. Aim for any scoring zone. Hits t",
+          "card": true,
+          "enabled": true,
+          "start": {
+            "ok": true,
+            "id": "1794394293004-34"
+          },
+          "state": "PREPARING"
+        },
+        {
+          "weapon": "revolver",
+          "id": "ring-reader",
+          "title": "Ring Reader",
+          "brief": "Cycle through head, bullseye and chest-ring calls.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates.\nUse Revolver. Aim for Head. Hits to clear each pla",
+          "card": true,
+          "enabled": true,
+          "start": {
+            "ok": true,
+            "id": "1794394293017-35"
+          },
+          "state": "PREPARING"
+        },
+        {
+          "weapon": "sniper",
+          "id": "long-glass",
+          "title": "Long Glass",
+          "brief": "Distant body bullseyes only. Take precise shots across the full range.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates.\nUse Sniper. Aim for Bullseye. ",
+          "card": true,
+          "enabled": true,
+          "start": {
+            "ok": true,
+            "id": "1794394293027-36"
+          },
+          "state": "PREPARING"
+        },
+        {
+          "weapon": "sniper",
+          "id": "four-deep",
+          "title": "Four Deep",
+          "brief": "Four aligned plates reward the rifle’s existing penetration.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates.\nUse Sniper. Aim for any scoring zone. Hi",
+          "card": true,
+          "enabled": true,
+          "start": {
+            "ok": true,
+            "id": "1794394293042-37"
+          },
+          "state": "PREPARING"
+        },
+        {
+          "weapon": "sniper",
+          "id": "hold-your-breath",
+          "title": "Hold Your Breath",
+          "brief": "Brief long-range exposures are separated by a deliberate recovery beat.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates.\nUse Sniper. Aim for any scori",
+          "card": true,
+          "enabled": true,
+          "start": {
+            "ok": true,
+            "id": "1794394293053-38"
+          },
+          "state": "PREPARING"
+        },
+        {
+          "weapon": "sniper",
+          "id": "head-body-echo",
+          "title": "Head / Body Echo",
+          "brief": "Alternate distant head and bullseye calls.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates.\nUse Sniper. Aim for Head. Hits to clear each plate: 1.\nFol",
+          "card": true,
+          "enabled": true,
+          "start": {
+            "ok": true,
+            "id": "1794394293063-39"
+          },
+          "state": "PREPARING"
+        },
+        {
+          "weapon": "sniper",
+          "id": "five-round-test",
+          "title": "Five-Round Test",
+          "brief": "Five distant targets and five rounds; maximize precision and efficiency.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates.\nUse Sniper. Aim for any scor",
+          "card": true,
+          "enabled": true,
+          "start": {
+            "ok": true,
+            "id": "1794394293074-40"
+          },
+          "state": "PREPARING"
+        },
+        {
+          "weapon": "pistol",
+          "id": "first-steps",
+          "title": "First Five",
+          "brief": "Five close plates, one at a time. Any scoring zone counts; take your time and learn the range.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates.\nUse Pi",
+          "card": true,
+          "enabled": true,
+          "start": {
+            "ok": true,
+            "id": "1794394293083-41"
+          },
+          "state": "PREPARING"
+        },
+        {
+          "weapon": "pistol",
+          "id": "draw-ready",
+          "title": "Draw on the Beep",
+          "brief": "Start holstered. After the beep, draw with Tab and clear one close plate.\n\nStart with your weapon holstered. Keep it holstered through the countdown.\nAfter the beep: press Tab to draw, aim, then shoot.\nUse Pistol. Aim for any scoring zone. Hits to cl",
+          "card": true,
+          "enabled": true,
+          "start": {
+            "ok": true,
+            "id": "1794394293090-42"
+          },
+          "state": "PREPARING"
+        },
+        {
+          "weapon": "m4",
+          "id": "reload-ready",
+          "title": "Reload and Engage",
+          "brief": "Start empty. After the beep, reload with R, then land two scoring hits on one close plate.\n\nStart with an empty weapon and a spare magazine. Wait for the beep.\nAfter the beep: press R, finish reloading, then shoot.\nUse GW-4 Carbine. Aim for any scori",
+          "card": true,
+          "enabled": true,
+          "start": {
+            "ok": true,
+            "id": "1794394293100-43"
+          },
+          "state": "PREPARING"
+        },
+        {
+          "weapon": "pistol",
+          "id": "pistol-rifle",
+          "title": "Pistol / Rifle Relay",
+          "brief": "Six single-plate stages alternate pistol and carbine. Follow the weapon call before firing.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates.\nUse Pisto",
+          "card": true,
+          "enabled": true,
+          "start": {
+            "ok": true,
+            "id": "1794394293117-44"
+          },
+          "state": "PREPARING"
+        },
+        {
+          "weapon": "shotgun",
+          "id": "three-gun",
+          "title": "Three-Gun Circuit",
+          "brief": "Nine close stages cycle pistol, carbine and shotgun. Switch to the called weapon and clear each plate.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates",
+          "card": true,
+          "enabled": true,
+          "start": {
+            "ok": true,
+            "id": "1794394293129-45"
+          },
+          "state": "PREPARING"
+        }
+      ]
+    },
+    {
+      "name": "09-console-after-all",
+      "data": {
+        "runs": 45,
+        "read": {
+          "state": "IDLE",
+          "drill": null,
+          "id": "1794394293129-45",
+          "loadout": "[[\"pistol\",\"{\\\"mode\\\":\\\"semi\\\",\\\"ext\\\":false,\\\"heavy\\\":false,\\\"can\\\":false,\\\"laser\\\":false,\\\"auto\\\":false,\\\"skills\\\":{\\\"vitality\\\":0,\\\"power\\\":0,\\\"hands\\\":0,\\\"legs\\\":0,\\\"scavenger\\\":0,\\\"grenadier\\\":0}}\"],[\"m4\",\"{\\\"mode\\\":\\\"auto\\\",\\\"ext\\\":false,\\\"heavy\\\":false,\\\"can\\\":false,\\\"laser\\\":false,\\\"auto\\\":false,\\\"skills\\\":{\\\"vitality\\\":0,\\\"power\\\":0,\\\"hands\\\":0,\\\"legs\\\":0,\\\"scavenger\\\":0,\\\"grenadier\\\":0}}\"],[\"shotgun\",\"{\\\"mode\\\":\\\"semi\\\",\\\"ext\\\":false,\\\"heavy\\\":false,\\\"can\\\":false,\\\"laser\\\":false,\\\"auto\\\":false,\\\"skills\\\":{\\\"vitality\\\":0,\\\"power\\\":0,\\\"hands\\\":0,\\\"legs\\\":0,\\\"scavenger\\\":0,\\\"grenadier\\\":0}}\"]]",
+          "elapsed": 0,
+          "countdown": 8,
+          "wave": 0,
+          "activation": 0,
+          "plan": null,
+          "phase": "ended",
+          "action": "shoot",
+          "firstShot": null,
+          "score": 0,
+          "efficiency": 0,
+          "stats": {
+            "base": 0,
+            "bonuses": 0,
+            "deductions": 0,
+            "shots": 0,
+            "units": 0,
+            "attackSeconds": 0,
+            "contactSeconds": 0,
+            "cleared": 0,
+            "missed": 0,
+            "draws": 0,
+            "reloads": 0
+          },
+          "result": null,
+          "targets": []
+        },
+        "open": false
+      }
+    },
+    {
+      "name": "09a-drill-active",
+      "data": {
+        "state": "ACTIVE",
+        "hud": "First Five\nLIVE\n0 points\n45s remaining\n\nUse Pistol. Aim for any scoring zone. Hits to clear each plate: 1.\n\nWave 1/5 · 0 plates cleared\nEscape: abort drill"
+      }
+    },
+    {
+      "name": "guns-fired-reloaded",
+      "data": [
+        {
+          "weapon": "pistol",
+          "before": {
+            "weapon": "pistol",
+            "ammo": 12,
+            "hits": 0
+          },
+          "fired": {
+            "weapon": "pistol",
+            "ammo": 11,
+            "hits": 0,
+            "flags": {
+              "fireHeld": true,
+              "mouseFireHeld": false,
+              "unarmed": false,
+              "placeMode": null,
+              "buildMode": false,
+              "blocked": false,
+              "reloading": false,
+              "fireCooldown": -0.21769999998807912,
+              "dualActive": false,
+              "akimbo": false
+            }
+          },
+          "reloadStart": {
+            "timer": 1.35,
+            "anim": 1.35,
+            "weapon": "pistol"
+          },
+          "reloading": {
+            "timer": 0.9920999999940397,
+            "anim": 1.35,
+            "weapon": "pistol"
+          }
+        },
+        {
+          "weapon": "uzi",
+          "before": {
+            "weapon": "uzi",
+            "ammo": 32,
+            "hits": 0
+          },
+          "fired": {
+            "weapon": "uzi",
+            "ammo": 25,
+            "hits": 0,
+            "flags": {
+              "fireHeld": false,
+              "mouseFireHeld": false,
+              "unarmed": false,
+              "placeMode": null,
+              "buildMode": false,
+              "blocked": false,
+              "reloading": false,
+              "fireCooldown": 0.033628571446452815,
+              "dualActive": false,
+              "akimbo": false
+            }
+          },
+          "reloadStart": {
+            "timer": 1.4,
+            "anim": 1.4,
+            "weapon": "uzi"
+          },
+          "reloading": {
+            "timer": 1.0355,
+            "anim": 1.4,
+            "weapon": "uzi"
+          }
+        },
+        {
+          "weapon": "m4",
+          "before": {
+            "weapon": "m4",
+            "ammo": 30,
+            "hits": 0
+          },
+          "fired": {
+            "weapon": "m4",
+            "ammo": 25,
+            "hits": 0,
+            "flags": {
+              "fireHeld": true,
+              "mouseFireHeld": false,
+              "unarmed": false,
+              "placeMode": null,
+              "buildMode": false,
+              "blocked": false,
+              "reloading": false,
+              "fireCooldown": 0.0507000000178814,
+              "dualActive": false,
+              "akimbo": false
+            }
+          },
+          "reloadStart": {
+            "timer": 1.55,
+            "anim": 1.55,
+            "weapon": "m4"
+          },
+          "reloading": {
+            "timer": 1.2015,
+            "anim": 1.55,
+            "weapon": "m4"
+          }
+        },
+        {
+          "weapon": "ak",
+          "before": {
+            "weapon": "ak",
+            "ammo": 30,
+            "hits": 0
+          },
+          "fired": {
+            "weapon": "ak",
+            "ammo": 25,
+            "hits": 0,
+            "flags": {
+              "fireHeld": false,
+              "mouseFireHeld": false,
+              "unarmed": false,
+              "placeMode": null,
+              "buildMode": false,
+              "blocked": false,
+              "reloading": false,
+              "fireCooldown": 0.07659999999403953,
+              "dualActive": false,
+              "akimbo": false
+            }
+          },
+          "reloadStart": {
+            "timer": 2,
+            "anim": 2,
+            "weapon": "ak"
+          },
+          "reloading": {
+            "timer": 1.631699999988079,
+            "anim": 2,
+            "weapon": "ak"
+          }
+        },
+        {
+          "weapon": "shotgun",
+          "before": {
+            "weapon": "shotgun",
+            "ammo": 8,
+            "hits": 0
+          },
+          "fired": {
+            "weapon": "shotgun",
+            "ammo": 7,
+            "hits": 0,
+            "flags": {
+              "fireHeld": true,
+              "mouseFireHeld": false,
+              "unarmed": false,
+              "placeMode": null,
+              "buildMode": false,
+              "blocked": false,
+              "reloading": false,
+              "fireCooldown": 0.2046999999880788,
+              "dualActive": false,
+              "akimbo": false
+            }
+          },
+          "reloadStart": {
+            "timer": 0.42,
+            "anim": 0.42,
+            "weapon": "shotgun"
+          },
+          "reloading": {
+            "timer": 0.06779999998211844,
+            "anim": 0.42,
+            "weapon": "shotgun"
+          }
+        },
+        {
+          "weapon": "aa12",
+          "before": {
+            "weapon": "aa12",
+            "ammo": 20,
+            "hits": 0
+          },
+          "fired": {
+            "weapon": "aa12",
+            "ammo": 17,
+            "hits": 1,
+            "flags": {
+              "fireHeld": true,
+              "mouseFireHeld": false,
+              "unarmed": false,
+              "placeMode": null,
+              "buildMode": false,
+              "blocked": false,
+              "reloading": false,
+              "fireCooldown": 0.09200000000000001,
+              "dualActive": false,
+              "akimbo": false
+            }
+          },
+          "reloadStart": {
+            "timer": 2.6,
+            "anim": 2.6,
+            "weapon": "aa12"
+          },
+          "reloading": {
+            "timer": 2.237499999999999,
+            "anim": 2.6,
+            "weapon": "aa12"
+          }
+        },
+        {
+          "weapon": "revolver",
+          "before": {
+            "weapon": "revolver",
+            "ammo": 6,
+            "hits": 1
+          },
+          "fired": {
+            "weapon": "revolver",
+            "ammo": 5,
+            "hits": 1,
+            "flags": {
+              "fireHeld": true,
+              "mouseFireHeld": false,
+              "unarmed": false,
+              "placeMode": null,
+              "buildMode": false,
+              "blocked": false,
+              "reloading": false,
+              "fireCooldown": 0.06309999999403942,
+              "dualActive": false,
+              "akimbo": false
+            }
+          },
+          "reloadStart": {
+            "timer": 1.8,
+            "anim": 1.8,
+            "weapon": "revolver"
+          },
+          "reloading": {
+            "timer": 1.4312000000178815,
+            "anim": 1.8,
+            "weapon": "revolver"
+          }
+        },
+        {
+          "weapon": "sniper",
+          "before": {
+            "weapon": "sniper",
+            "ammo": 5,
+            "hits": 1
+          },
+          "fired": {
+            "weapon": "sniper",
+            "ammo": 4,
+            "hits": 1,
+            "flags": {
+              "fireHeld": true,
+              "mouseFireHeld": false,
+              "unarmed": false,
+              "placeMode": null,
+              "buildMode": false,
+              "blocked": false,
+              "reloading": false,
+              "fireCooldown": 0.4005999999940396,
+              "dualActive": false,
+              "akimbo": false
+            }
+          },
+          "reloadStart": {
+            "timer": 2.35,
+            "anim": 2.35,
+            "weapon": "sniper"
+          },
+          "reloading": {
+            "timer": 1.9830000000000008,
+            "anim": 2.35,
+            "weapon": "sniper"
+          }
+        },
+        {
+          "weapon": "minigun",
+          "before": {
+            "weapon": "minigun",
+            "ammo": 300,
+            "hits": 1
+          },
+          "fired": {
+            "weapon": "minigun",
+            "ammo": 278,
+            "hits": 1,
+            "flags": {
+              "fireHeld": false,
+              "mouseFireHeld": false,
+              "unarmed": false,
+              "placeMode": null,
+              "buildMode": false,
+              "blocked": false,
+              "reloading": false,
+              "fireCooldown": 0.06056666667262706,
+              "dualActive": false,
+              "akimbo": false
+            }
+          },
+          "reloadStart": {
+            "timer": 1.15,
+            "anim": 1.15,
+            "weapon": "minigun"
+          },
+          "reloading": {
+            "timer": 0.7795000000000001,
+            "anim": 1.15,
+            "weapon": "minigun"
+          }
+        },
+        {
+          "weapon": "chainsaw",
+          "before": {
+            "weapon": "chainsaw",
+            "ammo": null,
+            "hits": 1
+          },
+          "fired": {
+            "weapon": "chainsaw",
+            "ammo": null,
+            "hits": 1,
+            "flags": {
+              "fireHeld": true,
+              "mouseFireHeld": false,
+              "unarmed": false,
+              "placeMode": null,
+              "buildMode": false,
+              "blocked": false,
+              "reloading": false,
+              "fireCooldown": 0.003199999988079058,
+              "dualActive": false,
+              "akimbo": false
+            }
+          },
+          "reloadStart": {
+            "timer": 0,
+            "anim": 1.15,
+            "weapon": null
+          },
+          "reloading": {
+            "timer": 0,
+            "anim": 1.15,
+            "weapon": null
+          }
+        }
+      ]
+    },
+    {
+      "name": "shotgun-types",
+      "data": {
+        "kind": "shotgun",
+        "order": [
+          "birdshot",
+          "buckshot",
+          "slug"
+        ],
+        "types": {
+          "birdshot": {
+            "id": "birdshot",
+            "name": "Birdshot",
+            "tag": "BIRDSHOT",
+            "real": "12 ga 2 3/4\" #4 shot",
+            "pack": 20,
+            "price": 20,
+            "hull": "red",
+            "hullHex": 11019804,
+            "cap": 154,
+            "room": 1,
+            "canBuy": true,
+            "buyN": 1,
+            "buyPrice": 1
+          },
+          "buckshot": {
+            "id": "buckshot",
+            "name": "Buckshot",
+            "tag": "BUCKSHOT",
+            "real": "12 ga 2 3/4\" 00 buck",
+            "pack": 20,
+            "price": 30,
+            "hull": "blue",
+            "hullHex": 2903964,
+            "cap": 154,
+            "room": 154,
+            "canBuy": true,
+            "buyN": 20,
+            "buyPrice": 30
+          },
+          "slug": {
+            "id": "slug",
+            "name": "Slug",
+            "tag": "SLUG",
+            "real": "12 ga 2 3/4\" 1 oz rifled slug",
+            "pack": 20,
+            "price": 40,
+            "hull": "ivory",
+            "hullHex": 15129792,
+            "cap": 154,
+            "room": 154,
+            "canBuy": true,
+            "buyN": 20,
+            "buyPrice": 40
+          }
+        },
+        "loaded": "birdshot",
+        "inGun": 8,
+        "carried": {
+          "birdshot": 153,
+          "buckshot": 0,
+          "slug": 0
+        },
+        "next": null,
+        "switching": null,
+        "canSwitch": false
+      }
+    },
+    {
+      "name": "shotgun-switches",
+      "data": [
+        {
+          "type": "buckshot",
+          "before": {
+            "kind": "shotgun",
+            "order": [
+              "birdshot",
+              "buckshot",
+              "slug"
+            ],
+            "types": {
+              "birdshot": {
+                "id": "birdshot",
+                "name": "Birdshot",
+                "tag": "BIRDSHOT",
+                "real": "12 ga 2 3/4\" #4 shot",
+                "pack": 20,
+                "price": 20,
+                "hull": "red",
+                "hullHex": 11019804,
+                "cap": 154,
+                "room": 1,
+                "canBuy": true,
+                "buyN": 1,
+                "buyPrice": 1
+              },
+              "buckshot": {
+                "id": "buckshot",
+                "name": "Buckshot",
+                "tag": "BUCKSHOT",
+                "real": "12 ga 2 3/4\" 00 buck",
+                "pack": 20,
+                "price": 30,
+                "hull": "blue",
+                "hullHex": 2903964,
+                "cap": 154,
+                "room": 154,
+                "canBuy": true,
+                "buyN": 20,
+                "buyPrice": 30
+              },
+              "slug": {
+                "id": "slug",
+                "name": "Slug",
+                "tag": "SLUG",
+                "real": "12 ga 2 3/4\" 1 oz rifled slug",
+                "pack": 20,
+                "price": 40,
+                "hull": "ivory",
+                "hullHex": 15129792,
+                "cap": 154,
+                "room": 154,
+                "canBuy": true,
+                "buyN": 20,
+                "buyPrice": 40
+              }
+            },
+            "loaded": "birdshot",
+            "inGun": 8,
+            "carried": {
+              "birdshot": 153,
+              "buckshot": 0,
+              "slug": 0
+            },
+            "next": null,
+            "switching": null,
+            "canSwitch": false
+          },
+          "bought": {
+            "bought": 20,
+            "price": 30
+          },
+          "started": true,
+          "after": {
+            "kind": "shotgun",
+            "order": [
+              "birdshot",
+              "buckshot",
+              "slug"
+            ],
+            "types": {
+              "birdshot": {
+                "id": "birdshot",
+                "name": "Birdshot",
+                "tag": "BIRDSHOT",
+                "real": "12 ga 2 3/4\" #4 shot",
+                "pack": 20,
+                "price": 20,
+                "hull": "red",
+                "hullHex": 11019804,
+                "cap": 154,
+                "room": 1,
+                "canBuy": true,
+                "buyN": 1,
+                "buyPrice": 1
+              },
+              "buckshot": {
+                "id": "buckshot",
+                "name": "Buckshot",
+                "tag": "BUCKSHOT",
+                "real": "12 ga 2 3/4\" 00 buck",
+                "pack": 20,
+                "price": 30,
+                "hull": "blue",
+                "hullHex": 2903964,
+                "cap": 154,
+                "room": 134,
+                "canBuy": true,
+                "buyN": 20,
+                "buyPrice": 30
+              },
+              "slug": {
+                "id": "slug",
+                "name": "Slug",
+                "tag": "SLUG",
+                "real": "12 ga 2 3/4\" 1 oz rifled slug",
+                "pack": 20,
+                "price": 40,
+                "hull": "ivory",
+                "hullHex": 15129792,
+                "cap": 154,
+                "room": 154,
+                "canBuy": true,
+                "buyN": 20,
+                "buyPrice": 40
+              }
+            },
+            "loaded": "birdshot",
+            "inGun": 8,
+            "carried": {
+              "birdshot": 153,
+              "buckshot": 20,
+              "slug": 0
+            },
+            "next": "buckshot",
+            "switching": {
+              "gun": "shotgun",
+              "from": "birdshot",
+              "to": "buckshot",
+              "phase": "unload",
+              "u": 0,
+              "unloaded": 0,
+              "unload": 8,
+              "loaded": 0,
+              "load": 8,
+              "t": 0,
+              "n": 1,
+              "total": 6.49
+            },
+            "canSwitch": false
+          }
+        },
+        {
+          "type": "slug",
+          "before": {
+            "kind": "shotgun",
+            "order": [
+              "birdshot",
+              "buckshot",
+              "slug"
+            ],
+            "types": {
+              "birdshot": {
+                "id": "birdshot",
+                "name": "Birdshot",
+                "tag": "BIRDSHOT",
+                "real": "12 ga 2 3/4\" #4 shot",
+                "pack": 20,
+                "price": 20,
+                "hull": "red",
+                "hullHex": 11019804,
+                "cap": 154,
+                "room": 0,
+                "canBuy": false,
+                "buyN": 0,
+                "buyPrice": 0
+              },
+              "buckshot": {
+                "id": "buckshot",
+                "name": "Buckshot",
+                "tag": "BUCKSHOT",
+                "real": "12 ga 2 3/4\" 00 buck",
+                "pack": 20,
+                "price": 30,
+                "hull": "blue",
+                "hullHex": 2903964,
+                "cap": 154,
+                "room": 142,
+                "canBuy": true,
+                "buyN": 20,
+                "buyPrice": 30
+              },
+              "slug": {
+                "id": "slug",
+                "name": "Slug",
+                "tag": "SLUG",
+                "real": "12 ga 2 3/4\" 1 oz rifled slug",
+                "pack": 20,
+                "price": 40,
+                "hull": "ivory",
+                "hullHex": 15129792,
+                "cap": 154,
+                "room": 154,
+                "canBuy": true,
+                "buyN": 20,
+                "buyPrice": 40
+              }
+            },
+            "loaded": "buckshot",
+            "inGun": 8,
+            "carried": {
+              "birdshot": 161,
+              "buckshot": 12,
+              "slug": 0
+            },
+            "next": "birdshot",
+            "switching": null,
+            "canSwitch": true
+          },
+          "bought": {
+            "bought": 20,
+            "price": 40
+          },
+          "started": true,
+          "after": {
+            "kind": "shotgun",
+            "order": [
+              "birdshot",
+              "buckshot",
+              "slug"
+            ],
+            "types": {
+              "birdshot": {
+                "id": "birdshot",
+                "name": "Birdshot",
+                "tag": "BIRDSHOT",
+                "real": "12 ga 2 3/4\" #4 shot",
+                "pack": 20,
+                "price": 20,
+                "hull": "red",
+                "hullHex": 11019804,
+                "cap": 154,
+                "room": 0,
+                "canBuy": false,
+                "buyN": 0,
+                "buyPrice": 0
+              },
+              "buckshot": {
+                "id": "buckshot",
+                "name": "Buckshot",
+                "tag": "BUCKSHOT",
+                "real": "12 ga 2 3/4\" 00 buck",
+                "pack": 20,
+                "price": 30,
+                "hull": "blue",
+                "hullHex": 2903964,
+                "cap": 154,
+                "room": 142,
+                "canBuy": true,
+                "buyN": 20,
+                "buyPrice": 30
+              },
+              "slug": {
+                "id": "slug",
+                "name": "Slug",
+                "tag": "SLUG",
+                "real": "12 ga 2 3/4\" 1 oz rifled slug",
+                "pack": 20,
+                "price": 40,
+                "hull": "ivory",
+                "hullHex": 15129792,
+                "cap": 154,
+                "room": 134,
+                "canBuy": true,
+                "buyN": 20,
+                "buyPrice": 40
+              }
+            },
+            "loaded": "buckshot",
+            "inGun": 8,
+            "carried": {
+              "birdshot": 161,
+              "buckshot": 12,
+              "slug": 20
+            },
+            "next": "slug",
+            "switching": {
+              "gun": "shotgun",
+              "from": "buckshot",
+              "to": "slug",
+              "phase": "unload",
+              "u": 0,
+              "unloaded": 0,
+              "unload": 8,
+              "loaded": 0,
+              "load": 8,
+              "t": 0,
+              "n": 2,
+              "total": 6.49
+            },
+            "canSwitch": false
+          }
+        },
+        {
+          "type": "birdshot",
+          "before": {
+            "kind": "shotgun",
+            "order": [
+              "birdshot",
+              "buckshot",
+              "slug"
+            ],
+            "types": {
+              "birdshot": {
+                "id": "birdshot",
+                "name": "Birdshot",
+                "tag": "BIRDSHOT",
+                "real": "12 ga 2 3/4\" #4 shot",
+                "pack": 20,
+                "price": 20,
+                "hull": "red",
+                "hullHex": 11019804,
+                "cap": 154,
+                "room": 0,
+                "canBuy": false,
+                "buyN": 0,
+                "buyPrice": 0
+              },
+              "buckshot": {
+                "id": "buckshot",
+                "name": "Buckshot",
+                "tag": "BUCKSHOT",
+                "real": "12 ga 2 3/4\" 00 buck",
+                "pack": 20,
+                "price": 30,
+                "hull": "blue",
+                "hullHex": 2903964,
+                "cap": 154,
+                "room": 134,
+                "canBuy": true,
+                "buyN": 20,
+                "buyPrice": 30
+              },
+              "slug": {
+                "id": "slug",
+                "name": "Slug",
+                "tag": "SLUG",
+                "real": "12 ga 2 3/4\" 1 oz rifled slug",
+                "pack": 20,
+                "price": 40,
+                "hull": "ivory",
+                "hullHex": 15129792,
+                "cap": 154,
+                "room": 142,
+                "canBuy": true,
+                "buyN": 20,
+                "buyPrice": 40
+              }
+            },
+            "loaded": "slug",
+            "inGun": 8,
+            "carried": {
+              "birdshot": 161,
+              "buckshot": 20,
+              "slug": 12
+            },
+            "next": "birdshot",
+            "switching": null,
+            "canSwitch": true
+          },
+          "bought": false,
+          "started": true,
+          "after": {
+            "kind": "shotgun",
+            "order": [
+              "birdshot",
+              "buckshot",
+              "slug"
+            ],
+            "types": {
+              "birdshot": {
+                "id": "birdshot",
+                "name": "Birdshot",
+                "tag": "BIRDSHOT",
+                "real": "12 ga 2 3/4\" #4 shot",
+                "pack": 20,
+                "price": 20,
+                "hull": "red",
+                "hullHex": 11019804,
+                "cap": 154,
+                "room": 0,
+                "canBuy": false,
+                "buyN": 0,
+                "buyPrice": 0
+              },
+              "buckshot": {
+                "id": "buckshot",
+                "name": "Buckshot",
+                "tag": "BUCKSHOT",
+                "real": "12 ga 2 3/4\" 00 buck",
+                "pack": 20,
+                "price": 30,
+                "hull": "blue",
+                "hullHex": 2903964,
+                "cap": 154,
+                "room": 134,
+                "canBuy": true,
+                "buyN": 20,
+                "buyPrice": 30
+              },
+              "slug": {
+                "id": "slug",
+                "name": "Slug",
+                "tag": "SLUG",
+                "real": "12 ga 2 3/4\" 1 oz rifled slug",
+                "pack": 20,
+                "price": 40,
+                "hull": "ivory",
+                "hullHex": 15129792,
+                "cap": 154,
+                "room": 142,
+                "canBuy": true,
+                "buyN": 20,
+                "buyPrice": 40
+              }
+            },
+            "loaded": "slug",
+            "inGun": 8,
+            "carried": {
+              "birdshot": 161,
+              "buckshot": 20,
+              "slug": 12
+            },
+            "next": "birdshot",
+            "switching": {
+              "gun": "shotgun",
+              "from": "slug",
+              "to": "birdshot",
+              "phase": "unload",
+              "u": 0,
+              "unloaded": 0,
+              "unload": 8,
+              "loaded": 0,
+              "load": 8,
+              "t": 0,
+              "n": 3,
+              "total": 6.49
+            },
+            "canSwitch": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "10-shotgun-loads",
+      "data": {
+        "weapon": "shotgun",
+        "ammo": 8,
+        "reload": {
+          "timer": 0,
+          "anim": 1.15,
+          "weapon": null
+        },
+        "hits": 1,
+        "panels": {
+          "shop": false,
+          "cif": false,
+          "armory": false,
+          "range": false
+        },
+        "prompt": "EArmory",
+        "errors": 0
+      }
+    },
+    {
+      "name": "flamer-burn",
+      "data": {
+        "setup": {
+          "cx": 6,
+          "face": -632.07,
+          "ammo": 60
+        },
+        "result": {
+          "state": "wrecked",
+          "wreck": {
+            "index": 0,
+            "kind": "burn",
+            "t": 0.11750000000000001,
+            "ash": false,
+            "ashSize": 0,
+            "flames": 18,
+            "pieces": 0,
+            "resting": 0,
+            "p0": null,
+            "plateVisible": true,
+            "plateColor": 0.933060606060606
+          },
+          "ammo": 53
+        },
+        "reloadStart": {
+          "timer": 2.4,
+          "anim": 2.4,
+          "weapon": "flamer"
+        }
+      }
+    },
+    {
+      "name": "11-flamer-ash",
+      "data": {
+        "weapon": "flamer",
+        "ammo": 53,
+        "reload": {
+          "timer": 2.3834999999999997,
+          "anim": 2.4,
+          "weapon": "flamer"
+        },
+        "hits": 2,
+        "panels": {
+          "shop": false,
+          "cif": false,
+          "armory": false,
+          "range": false
+        },
+        "prompt": "EArmory",
+        "errors": 0
+      }
+    },
+    {
+      "name": "launcher-blast",
+      "data": {
+        "setup": {
+          "cx": 0,
+          "face": -624.07,
+          "ammo": 6
+        },
+        "result": {
+          "state": "wrecked",
+          "wreck": {
+            "index": 2,
+            "kind": "blow",
+            "t": 0.052199999988079074,
+            "ash": false,
+            "ashSize": 0,
+            "flames": 0,
+            "pieces": 9,
+            "resting": 0,
+            "p0": {
+              "y": 2.84,
+              "x": -0.16,
+              "z": 0.08,
+              "vy": 3.41,
+              "rest": false
+            },
+            "plateVisible": false,
+            "plateColor": null
+          },
+          "ammo": 5
+        },
+        "reloadStart": {
+          "timer": 1.2000000000000002,
+          "anim": 1.2000000000000002,
+          "weapon": "launcher"
+        }
+      }
+    },
+    {
+      "name": "12-launcher-pieces",
+      "data": {
+        "weapon": "launcher",
+        "ammo": 5,
+        "reload": {
+          "timer": 1.2000000000000002,
+          "anim": 1.2000000000000002,
+          "weapon": "launcher"
+        },
+        "hits": 3,
+        "panels": {
+          "shop": false,
+          "cif": false,
+          "armory": false,
+          "range": false
+        },
+        "prompt": "EArmory",
+        "errors": 0
+      }
+    },
+    {
+      "name": "13-console-after-wreck",
+      "data": {
+        "open": false,
+        "wreck": 2,
+        "prompt": "EArmory"
+      }
+    },
+    {
+      "name": "14-lights-off",
+      "data": {
+        "lights": {
+          "on": false,
+          "night": true,
+          "room": false
+        },
+        "prompt": "EArmory"
+      }
+    },
+    {
+      "name": "15-lights-on",
+      "data": {
+        "lights": {
+          "on": true,
+          "night": false,
+          "room": true
+        }
+      }
+    },
+    {
+      "name": "16-left",
+      "data": {
+        "active": false,
+        "body": "playing"
+      }
+    },
+    {
+      "name": "17-reset",
+      "data": {
+        "active": true,
+        "wreck": 0,
+        "targets": [
+          "up",
+          "up",
+          "up",
+          "up",
+          "up"
+        ],
+        "cash": 999999
+      }
+    }
+  ],
+  "errors": []
+}

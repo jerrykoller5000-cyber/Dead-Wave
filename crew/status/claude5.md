@@ -2,9 +2,9 @@
 
 state: active
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: CE-6 J136: the revolver's cylinder and the launcher's drum index one chamber per pull, first and third person; the revolver's VM_TRIGGER entry
-touching: game/viewmodel.js (cylinderTurn, VM_TRIGGER), tools/tests/tce6.js (new)
-since: 2026-11-11T09:38Z
+task: CE-6 J136: the revolver's cylinder and the launcher's drum index one chamber per pull, first and third person (lent: index.html indexChambers + its 2 calls); the revolver's VM_TRIGGER entry
+touching: game/viewmodel.js (cylinderTurn, VM_TRIGGER), game/viewmodel-poses.js (VM_TRIGGER), index.html (indexChambers, its 2 call lines, updateAmmoHud revolver split), tools/tests/tce6.js (new)
+since: 2026-11-11T10:28Z
 next: CE-2 (was CD-3) (was CL-336) J103, J110, J112, J114-J116, J119, J
 blocked-on: —
 last-report: handoffs/2026-11-11-claude5-CD-1.md

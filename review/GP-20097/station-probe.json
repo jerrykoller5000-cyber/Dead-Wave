@@ -1,0 +1,509 @@
+[
+  {
+    "stage": "entry",
+    "data": {
+      "active": true,
+      "unarmed": true,
+      "cash": 999999,
+      "prompt": "",
+      "order": [
+        "minigun",
+        "m4",
+        "ak",
+        "pistol",
+        "uzi",
+        "shotgun",
+        "aa12",
+        "revolver",
+        "sniper",
+        "launcher",
+        "flamer",
+        "chainsaw"
+      ]
+    }
+  },
+  {
+    "stage": "kiosk-approach",
+    "data": {
+      "site": "kiosk",
+      "action": "kiosk",
+      "prompt": "",
+      "position": [
+        6.782016085386276,
+        -200,
+        -646.6
+      ],
+      "front": {
+        "x": 6.98,
+        "z": -646.6
+      }
+    }
+  },
+  {
+    "stage": "kiosk-open",
+    "data": {
+      "site": "kiosk",
+      "panels": [
+        {
+          "id": "shop",
+          "hidden": false,
+          "display": "",
+          "show": true,
+          "text": "\n      \n        Supply Terminal Cash $∞\n        SuppliesBuilds\n        \n        Pick up MedPens and field intel. Night 1: each Shambler is worth 1 skull value before bonuses. Bank skulls at the HQ window: 1 skull value = 1 Cash.\n        Field IntelSee every enemy type, count and approach at the HQ panel.Buy — 120 Cash+MedPen0 / 3 carriedAuto-injector. H to jab one: heals 60% of max health. Natural regen only ever climbs back to 40%.$35\n        Ba"
+        },
+        {
+          "id": "cifPanel"
+        },
+        {
+          "id": "armoryPanel",
+          "hidden": true,
+          "display": "",
+          "show": false,
+          "text": "HQ · Weapons lockerArmoryChoose a gun from the shelves. Its workbench buys ammo and buys, fits or removes each attachment.Carried gunsStored gunsGuns to buyEmplacements · Watchman MG and mortarMove to shelfDone"
+        },
+        {
+          "id": "rangeConsole",
+          "hidden": true,
+          "display": "",
+          "show": false,
+          "text": ""
+        },
+        {
+          "id": "trainingPanel",
+          "hidden": true,
+          "display": "",
+          "show": false,
+          "text": "Training Ground · HQ panelCall in zombiesChoose a kind and count. The security door locks immediately; zombies arrive after five seconds. Clear the room to unlock it.Zombie kindHow manyCloseClear all zombies"
+        }
+      ],
+      "prompt": "ESupply Terminal",
+      "lights": {
+        "on": true,
+        "night": false,
+        "room": true
+      },
+      "bodyText": "\nMEDPEN0 / 3 CARRIED\nAuto-injector. H to jab one: heals 60% of max health. Natural regen only ever climbs back to 40%.\n$35\nBACK TO THE FIGHT (E / ESC)\nTRAINING GROUND\nPistol issued · buy equipment at the left-wall terminals with unlimited Cash\nESUPPLY TERMINAL\nTRAINING GROUND\nTargets down: 0\nScore 0"
+    }
+  },
+  {
+    "stage": "kiosk-closed",
+    "data": {
+      "ok": true
+    }
+  },
+  {
+    "stage": "cif-approach",
+    "data": {
+      "site": "cif",
+      "action": "cif",
+      "prompt": "ECIF",
+      "position": [
+        6.844500007033348,
+        -200,
+        -650.2
+      ],
+      "front": {
+        "x": 6.98,
+        "z": -650.2
+      }
+    }
+  },
+  {
+    "stage": "cif-open",
+    "data": {
+      "site": "cif",
+      "panels": [
+        {
+          "id": "shop",
+          "hidden": false,
+          "display": "",
+          "show": false,
+          "text": "\n      \n        Supply Terminal Cash $∞\n        SuppliesBuilds\n        \n        Pick up MedPens and field intel. Night 1: each Shambler is worth 1 skull value before bonuses. Bank skulls at the HQ window: 1 skull value = 1 Cash.\n        Field IntelSee every enemy type, count and approach at the HQ panel.Buy — 120 Cash+MedPen0 / 3 carriedAuto-injector. H to jab one: heals 60% of max health. Natural regen only ever climbs back to 40%.$35\n        Ba"
+        },
+        {
+          "id": "cifPanel"
+        },
+        {
+          "id": "armoryPanel",
+          "hidden": true,
+          "display": "",
+          "show": false,
+          "text": "HQ · Weapons lockerArmoryChoose a gun from the shelves. Its workbench buys ammo and buys, fits or removes each attachment.Carried gunsStored gunsGuns to buyEmplacements · Watchman MG and mortarMove to shelfDone"
+        },
+        {
+          "id": "rangeConsole",
+          "hidden": true,
+          "display": "",
+          "show": false,
+          "text": ""
+        },
+        {
+          "id": "trainingPanel",
+          "hidden": true,
+          "display": "",
+          "show": false,
+          "text": "Training Ground · HQ panelCall in zombiesChoose a kind and count. The security door locks immediately; zombies arrive after five seconds. Clear the room to unlock it.Zombie kindHow manyCloseClear all zombies"
+        }
+      ],
+      "prompt": "ECIF",
+      "lights": {
+        "on": true,
+        "night": false,
+        "room": true
+      },
+      "bodyText": "\nEarned\nAIR FORCE BLUE (RAF)\nEarned\nAIR FORCE BLUE (USAF)\nEarned\nPRUSSIAN BLUE\nEarned\nFOREST GREEN\nEarned\nRESET HEAD\nAppearance saved automatically\nDONE · E / ESC\nTRAINING GROUND\nPistol issued · buy equipment at the left-wall terminals with unlimited Cash\nECIF\nTRAINING GROUND\nTargets down: 0\nScore 0"
+    }
+  },
+  {
+    "stage": "cif-closed",
+    "data": {
+      "ok": true
+    }
+  },
+  {
+    "stage": "armory-approach",
+    "data": {
+      "site": "armory",
+      "action": "armory",
+      "prompt": "ECIF",
+      "position": [
+        6.449999988004565,
+        -200,
+        -643
+      ],
+      "front": {
+        "x": 6.98,
+        "z": -643
+      }
+    }
+  },
+  {
+    "stage": "armory-open",
+    "data": {
+      "site": "armory",
+      "panels": [
+        {
+          "id": "shop",
+          "hidden": false,
+          "display": "",
+          "show": false,
+          "text": "\n      \n        Resupply Cash $∞\n        \n        \n        Restock all ammo here. Buy and fit a second gun at its workbench above. Night 1: each Shambler is worth 1 skull value before bonuses. Bank skulls at the HQ window: 1 skull value = 1 Cash.\n        Ammo▥Restock all2 shortFill carried magazines, loose ammo and chainsaw fuel. Hand grenades: 12 Cash each, up to your carrying limit. R reloads your gun.Restock $87Upgrades◇Machetereplaces the kni"
+        },
+        {
+          "id": "cifPanel"
+        },
+        {
+          "id": "armoryPanel",
+          "hidden": false,
+          "display": "",
+          "show": false,
+          "text": "HQ · Weapons lockerArmoryChoose a gun from the shelves. Its workbench buys ammo and buys, fits or removes each attachment.Carried gunsPrimary 1Empty slotPrimary 2Empty slotSecondary 1Empty slotSecondary 2Empty slotHip holster · PistolStored gunsNo guns storedGuns to buyWasp SMG$75 CashBuyShotgun$110 CashBuyRevolver$145 CashBuyGW-4 Carbine$180 CashBuyChainsaw$190 CashBuyKR-7 Rifle$245 CashBuySniper$320 CashBuyFlamethrower$340 CashBuyLauncher$480 C"
+        },
+        {
+          "id": "rangeConsole",
+          "hidden": true,
+          "display": "",
+          "show": false,
+          "text": ""
+        },
+        {
+          "id": "trainingPanel",
+          "hidden": true,
+          "display": "",
+          "show": false,
+          "text": "Training Ground · HQ panelCall in zombiesChoose a kind and count. The security door locks immediately; zombies arrive after five seconds. Clear the room to unlock it.Zombie kindHow manyCloseClear all zombies"
+        }
+      ],
+      "prompt": "EArmory",
+      "lights": {
+        "on": true,
+        "night": false,
+        "room": true
+      },
+      "bodyText": "each, up to your carrying limit. R reloads your gun.\nRestock $87\nUPGRADES\n◇\nMACHETEREPLACES THE KNIFE\nA heavier blade for F: 2.45m reach and 69 damage (knife: 2.4m, 26). Narrower swing, up to 3 targets, slightly quicker recovery.\n$85\nMOVE TO SHELF\nDONE\nEARMORY\nTRAINING GROUND\nTargets down: 0\nScore 0"
+    }
+  },
+  {
+    "stage": "armory-closed",
+    "data": {
+      "ok": true
+    }
+  },
+  {
+    "stage": "rangeConsole-approach",
+    "data": {
+      "site": "rangeConsole",
+      "action": "rangeConsole",
+      "prompt": "EArmory",
+      "position": [
+        -6.5245,
+        -200,
+        -644.6
+      ],
+      "front": {
+        "x": -6.5245,
+        "y": -200,
+        "z": -644.6
+      }
+    }
+  },
+  {
+    "stage": "rangeConsole-open",
+    "data": {
+      "site": "rangeConsole",
+      "panels": [
+        {
+          "id": "shop",
+          "hidden": false,
+          "display": "",
+          "show": false,
+          "text": "\n      \n        Supply Terminal Cash $∞\n        \n        \n        Restock all ammo here. Buy and fit a second gun at its workbench above. Night 1: each Shambler is worth 1 skull value before bonuses. Bank skulls at the HQ window: 1 skull value = 1 Cash.\n        Ammo▥Restock all2 shortFill carried magazines, loose ammo and chainsaw fuel. Hand grenades: 12 Cash each, up to your carrying limit. R reloads your gun.Restock $87Upgrades◇Machetereplaces "
+        },
+        {
+          "id": "cifPanel"
+        },
+        {
+          "id": "armoryPanel",
+          "hidden": true,
+          "display": "",
+          "show": false,
+          "text": "HQ · Weapons lockerArmoryChoose a gun from the shelves. Its workbench buys ammo and buys, fits or removes each attachment.Carried gunsPrimary 1Empty slotPrimary 2Empty slotSecondary 1Empty slotSecondary 2Empty slotHip holster · PistolStored gunsNo guns storedGuns to buyWasp SMG$75 CashBuyShotgun$110 CashBuyRevolver$145 CashBuyGW-4 Carbine$180 CashBuyChainsaw$190 CashBuyKR-7 Rifle$245 CashBuySniper$320 CashBuyFlamethrower$340 CashBuyLauncher$480 C"
+        },
+        {
+          "id": "rangeConsole",
+          "hidden": false,
+          "display": "",
+          "show": false,
+          "text": "Choose a drillFIRING RANGE / DRILL CONTROL×Choose a weapon, pick a drill, read the four steps, then press Start. Work from Learn through Practice to Challenge.1. Learn→2. Practice→3. Challenge1. WeaponPistolWasp SMG 🔒GW-4 Carbine 🔒KR-7 Rifle 🔒Shotgun 🔒Breacher-12 🔒Revolver 🔒Sniper 🔒2. Drill1LearnFirst FiveFive close plates, one at a time. Any scoring zone counts; take your time and learn the range.2LearnDraw on the BeepStart holstered. Aft"
+        },
+        {
+          "id": "trainingPanel",
+          "hidden": true,
+          "display": "",
+          "show": false,
+          "text": "Training Ground · HQ panelCall in zombiesChoose a kind and count. The security door locks immediately; zombies arrive after five seconds. Clear the room to unlock it.Zombie kindHow manyCloseClear all zombies"
+        }
+      ],
+      "prompt": "ERANGE DRILLS",
+      "lights": {
+        "on": true,
+        "night": false,
+        "room": true
+      },
+      "bodyText": "ew target wave. A plate drops when its required hits are complete.\nPlates to clear: 5\nTime limit: 45s\nLane order: 1 → 2 → 3 → 4 → 5\n\nWeapons required: Pistol\n\nHow points and penalties work\n\nSelect a drill at the range console. Watch the overhead board for the countdown, instructions and final score."
+    }
+  },
+  {
+    "stage": "rangeConsole-closed",
+    "data": {
+      "ok": true
+    }
+  },
+  {
+    "stage": "lightSwitch-approach",
+    "data": {
+      "site": "lightSwitch",
+      "action": "trainingLights",
+      "prompt": "ELights off",
+      "position": [
+        -7.180000000000001,
+        -200,
+        -645.95
+      ],
+      "front": {
+        "x": -7.180000000000001,
+        "z": -645.95
+      }
+    }
+  },
+  {
+    "stage": "lightSwitch-open",
+    "data": {
+      "site": "lightSwitch",
+      "panels": [
+        {
+          "id": "shop",
+          "hidden": false,
+          "display": "",
+          "show": false,
+          "text": "\n      \n        Supply Terminal Cash $∞\n        \n        \n        Restock all ammo here. Buy and fit a second gun at its workbench above. Night 1: each Shambler is worth 1 skull value before bonuses. Bank skulls at the HQ window: 1 skull value = 1 Cash.\n        Ammo▥Restock all2 shortFill carried magazines, loose ammo and chainsaw fuel. Hand grenades: 12 Cash each, up to your carrying limit. R reloads your gun.Restock $87Upgrades◇Machetereplaces "
+        },
+        {
+          "id": "cifPanel"
+        },
+        {
+          "id": "armoryPanel",
+          "hidden": true,
+          "display": "",
+          "show": false,
+          "text": "HQ · Weapons lockerArmoryChoose a gun from the shelves. Its workbench buys ammo and buys, fits or removes each attachment.Carried gunsPrimary 1Empty slotPrimary 2Empty slotSecondary 1Empty slotSecondary 2Empty slotHip holster · PistolStored gunsNo guns storedGuns to buyWasp SMG$75 CashBuyShotgun$110 CashBuyRevolver$145 CashBuyGW-4 Carbine$180 CashBuyChainsaw$190 CashBuyKR-7 Rifle$245 CashBuySniper$320 CashBuyFlamethrower$340 CashBuyLauncher$480 C"
+        },
+        {
+          "id": "rangeConsole",
+          "hidden": true,
+          "display": "",
+          "show": false,
+          "text": "Choose a drillFIRING RANGE / DRILL CONTROL×Choose a weapon, pick a drill, read the four steps, then press Start. Work from Learn through Practice to Challenge.1. Learn→2. Practice→3. Challenge1. WeaponPistolWasp SMG 🔒GW-4 Carbine 🔒KR-7 Rifle 🔒Shotgun 🔒Breacher-12 🔒Revolver 🔒Sniper 🔒2. Drill1LearnFirst FiveFive close plates, one at a time. Any scoring zone counts; take your time and learn the range.2LearnDraw on the BeepStart holstered. Aft"
+        },
+        {
+          "id": "trainingPanel",
+          "hidden": true,
+          "display": "",
+          "show": false,
+          "text": "Training Ground · HQ panelCall in zombiesChoose a kind and count. The security door locks immediately; zombies arrive after five seconds. Clear the room to unlock it.Zombie kindHow manyCloseClear all zombies"
+        }
+      ],
+      "prompt": "ELights off",
+      "lights": {
+        "on": false,
+        "night": true,
+        "room": false
+      },
+      "bodyText": "100\nSLOW-MO\n2\nKILL STREAK\n12\nPISTOL\n12 / 12 · 50 Bullets · SEMI\nG×0\nH×0\n5 mags\n12\n12\n12\n12\n2\ngpu   NVIDIA GeForce RTX 5080\ncpu   24 threads · 32GB\nres   1280x720 @1.00x\nrend  WebGPU\nfps   50\nlow   5\nworst 206ms\nhitch 19\ndraws 262\ntris  150k\nzombs 0\nELIGHTS OFF\nTRAINING GROUND\nTargets down: 0\nScore 0"
+    }
+  },
+  {
+    "stage": "lightSwitch-closed",
+    "data": {
+      "ok": true
+    }
+  },
+  {
+    "stage": "hqPanel-approach",
+    "data": {
+      "site": "hqPanel",
+      "action": "trainingPanel",
+      "prompt": "ELights on",
+      "position": [
+        -42.779999999999994,
+        -200,
+        -637
+      ],
+      "front": {
+        "x": -42.779999999999994,
+        "z": -637
+      }
+    }
+  },
+  {
+    "stage": "hqPanel-open",
+    "data": {
+      "site": "hqPanel",
+      "panels": [
+        {
+          "id": "shop",
+          "hidden": false,
+          "display": "",
+          "show": false,
+          "text": "\n      \n        Supply Terminal Cash $∞\n        \n        \n        Restock all ammo here. Buy and fit a second gun at its workbench above. Night 1: each Shambler is worth 1 skull value before bonuses. Bank skulls at the HQ window: 1 skull value = 1 Cash.\n        Ammo▥Restock all2 shortFill carried magazines, loose ammo and chainsaw fuel. Hand grenades: 12 Cash each, up to your carrying limit. R reloads your gun.Restock $87Upgrades◇Machetereplaces "
+        },
+        {
+          "id": "cifPanel"
+        },
+        {
+          "id": "armoryPanel",
+          "hidden": true,
+          "display": "",
+          "show": false,
+          "text": "HQ · Weapons lockerArmoryChoose a gun from the shelves. Its workbench buys ammo and buys, fits or removes each attachment.Carried gunsPrimary 1Empty slotPrimary 2Empty slotSecondary 1Empty slotSecondary 2Empty slotHip holster · PistolStored gunsNo guns storedGuns to buyWasp SMG$75 CashBuyShotgun$110 CashBuyRevolver$145 CashBuyGW-4 Carbine$180 CashBuyChainsaw$190 CashBuyKR-7 Rifle$245 CashBuySniper$320 CashBuyFlamethrower$340 CashBuyLauncher$480 C"
+        },
+        {
+          "id": "rangeConsole",
+          "hidden": true,
+          "display": "",
+          "show": false,
+          "text": "Choose a drillFIRING RANGE / DRILL CONTROL×Choose a weapon, pick a drill, read the four steps, then press Start. Work from Learn through Practice to Challenge.1. Learn→2. Practice→3. Challenge1. WeaponPistolWasp SMG 🔒GW-4 Carbine 🔒KR-7 Rifle 🔒Shotgun 🔒Breacher-12 🔒Revolver 🔒Sniper 🔒2. Drill1LearnFirst FiveFive close plates, one at a time. Any scoring zone counts; take your time and learn the range.2LearnDraw on the BeepStart holstered. Aft"
+        },
+        {
+          "id": "trainingPanel",
+          "hidden": false,
+          "display": "",
+          "show": false,
+          "text": "Training Ground · HQ panelCall in zombiesChoose a kind and count. The security door locks immediately; zombies arrive after five seconds. Clear the room to unlock it.Zombie kindShamblerFeralLeaperSpiderDrownedMilitaryBruteSpitterScreamerBomberDemonColossusGuardianHow many13510The build room is empty.Send in 3 · ShamblerCloseClear all zombiesPlace test defensesClear test defenses"
+        }
+      ],
+      "prompt": "EHQ panel: call in zombies",
+      "lights": {
+        "on": true,
+        "night": false,
+        "room": true
+      },
+      "bodyText": " immediately; zombies arrive after five seconds. Clear the room to unlock it.\n\nZOMBIE KIND\nShambler\nFeral\nLeaper\nSpider\nDrowned\nMilitary\nBrute\nSpitter\nScreamer\nBomber\nDemon\nColossus\nGuardian\nHOW MANY\n1\n3\n5\n10\n\nThe build room is empty.\n\nSEND IN 3 · SHAMBLER\nCLOSE\nCLEAR ALL ZOMBIES\nPLACE TEST DEFENSES"
+    }
+  },
+  {
+    "stage": "hqPanel-closed",
+    "data": {
+      "ok": true
+    }
+  },
+  {
+    "stage": "skullWindow-approach",
+    "data": {
+      "site": "skullWindow",
+      "action": "hqWindow",
+      "prompt": "EHQ panel: call in zombies",
+      "position": [
+        -42.75426815032959,
+        -200,
+        -643
+      ],
+      "front": {
+        "x": -42.779999999999994,
+        "z": -643
+      }
+    }
+  },
+  {
+    "stage": "skullWindow-open",
+    "data": {
+      "site": "skullWindow",
+      "panels": [
+        {
+          "id": "shop",
+          "hidden": false,
+          "display": "",
+          "show": false,
+          "text": "\n      \n        Supply Terminal Cash $∞\n        \n        \n        Restock all ammo here. Buy and fit a second gun at its workbench above. Night 1: each Shambler is worth 1 skull value before bonuses. Bank skulls at the HQ window: 1 skull value = 1 Cash.\n        Ammo▥Restock all2 shortFill carried magazines, loose ammo and chainsaw fuel. Hand grenades: 12 Cash each, up to your carrying limit. R reloads your gun.Restock $87Upgrades◇Machetereplaces "
+        },
+        {
+          "id": "cifPanel"
+        },
+        {
+          "id": "armoryPanel",
+          "hidden": true,
+          "display": "",
+          "show": false,
+          "text": "HQ · Weapons lockerArmoryChoose a gun from the shelves. Its workbench buys ammo and buys, fits or removes each attachment.Carried gunsPrimary 1Empty slotPrimary 2Empty slotSecondary 1Empty slotSecondary 2Empty slotHip holster · PistolStored gunsNo guns storedGuns to buyWasp SMG$75 CashBuyShotgun$110 CashBuyRevolver$145 CashBuyGW-4 Carbine$180 CashBuyChainsaw$190 CashBuyKR-7 Rifle$245 CashBuySniper$320 CashBuyFlamethrower$340 CashBuyLauncher$480 C"
+        },
+        {
+          "id": "rangeConsole",
+          "hidden": true,
+          "display": "",
+          "show": false,
+          "text": "Choose a drillFIRING RANGE / DRILL CONTROL×Choose a weapon, pick a drill, read the four steps, then press Start. Work from Learn through Practice to Challenge.1. Learn→2. Practice→3. Challenge1. WeaponPistolWasp SMG 🔒GW-4 Carbine 🔒KR-7 Rifle 🔒Shotgun 🔒Breacher-12 🔒Revolver 🔒Sniper 🔒2. Drill1LearnFirst FiveFive close plates, one at a time. Any scoring zone counts; take your time and learn the range.2LearnDraw on the BeepStart holstered. Aft"
+        },
+        {
+          "id": "trainingPanel",
+          "hidden": true,
+          "display": "",
+          "show": false,
+          "text": "Training Ground · HQ panelCall in zombiesChoose a kind and count. The security door locks immediately; zombies arrive after five seconds. Clear the room to unlock it.Zombie kindShamblerFeralLeaperSpiderDrownedMilitaryBruteSpitterScreamerBomberDemonColossusGuardianHow many13510The build room is empty.Send in 3 · ShamblerCloseClear all zombiesPlace test defensesClear test defenses"
+        }
+      ],
+      "prompt": "Skull window",
+      "lights": {
+        "on": true,
+        "night": false,
+        "room": true
+      },
+      "bodyText": " · SEMI\nG×0\nH×0\n5 mags\n12\n12\n12\n12\n2\ngpu   NVIDIA GeForce RTX 5080\ncpu   24 threads · 32GB\nres   1280x720 @1.00x\nrend  WebGPU\nfps   65\nlow   12\nworst 84ms\nhitch 21\ndraws 159\ntris  128k\nzombs 0\nNO SKULLS\nKill something and bring back what it leaves\nSKULL WINDOW\nTRAINING GROUND\nTargets down: 0\nScore 0"
+    }
+  },
+  {
+    "stage": "skullWindow-closed",
+    "data": {
+      "ok": true
+    }
+  }
+]

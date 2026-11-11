@@ -1,0 +1,289 @@
+{
+  "backend": "WebGPUBackend",
+  "chainsaw": {
+    "views": [
+      {
+        "fin": "factory",
+        "view": "hip",
+        "light": "noon",
+        "draws": 487,
+        "meshCount": 9,
+        "instCount": 1,
+        "paintedMeshes": 0,
+        "vmFov": 48
+      },
+      {
+        "fin": "factory",
+        "view": "hip",
+        "light": "overcast",
+        "draws": 487,
+        "meshCount": 9,
+        "instCount": 1,
+        "paintedMeshes": 0,
+        "vmFov": 48
+      },
+      {
+        "fin": "factory",
+        "view": "hip",
+        "light": "dusk",
+        "draws": 487,
+        "meshCount": 9,
+        "instCount": 1,
+        "paintedMeshes": 0,
+        "vmFov": 48
+      },
+      {
+        "fin": "factory",
+        "view": "hip",
+        "light": "night",
+        "draws": 487,
+        "meshCount": 9,
+        "instCount": 1,
+        "paintedMeshes": 0,
+        "vmFov": 48
+      },
+      {
+        "fin": "factory",
+        "view": "aimed",
+        "light": "noon",
+        "draws": 458,
+        "meshCount": 9,
+        "instCount": 1,
+        "paintedMeshes": 0,
+        "vmFov": 48
+      },
+      {
+        "fin": "factory",
+        "view": "aimed",
+        "light": "overcast",
+        "draws": 447,
+        "meshCount": 9,
+        "instCount": 1,
+        "paintedMeshes": 0,
+        "vmFov": 48
+      },
+      {
+        "fin": "factory",
+        "view": "aimed",
+        "light": "dusk",
+        "draws": 447,
+        "meshCount": 9,
+        "instCount": 1,
+        "paintedMeshes": 0,
+        "vmFov": 48
+      },
+      {
+        "fin": "factory",
+        "view": "aimed",
+        "light": "night",
+        "draws": 447,
+        "meshCount": 9,
+        "instCount": 1,
+        "paintedMeshes": 0,
+        "vmFov": 48
+      },
+      {
+        "fin": "factory",
+        "view": "held",
+        "light": "noon",
+        "draws": 554,
+        "meshCount": 9,
+        "instCount": 1,
+        "paintedMeshes": 1,
+        "vmFov": 48
+      },
+      {
+        "fin": "factory",
+        "view": "held",
+        "light": "overcast",
+        "draws": 723,
+        "meshCount": 9,
+        "instCount": 1,
+        "paintedMeshes": 1,
+        "vmFov": 48
+      },
+      {
+        "fin": "factory",
+        "view": "held",
+        "light": "dusk",
+        "draws": 720,
+        "meshCount": 9,
+        "instCount": 1,
+        "paintedMeshes": 1,
+        "vmFov": 48
+      },
+      {
+        "fin": "factory",
+        "view": "held",
+        "light": "night",
+        "draws": 720,
+        "meshCount": 9,
+        "instCount": 1,
+        "paintedMeshes": 1,
+        "vmFov": 48
+      },
+      {
+        "fin": "m81",
+        "view": "hip",
+        "light": "noon",
+        "draws": 723,
+        "meshCount": 9,
+        "instCount": 1,
+        "paintedMeshes": 0,
+        "vmFov": 48
+      },
+      {
+        "fin": "m81",
+        "view": "hip",
+        "light": "overcast",
+        "draws": 487,
+        "meshCount": 9,
+        "instCount": 1,
+        "paintedMeshes": 0,
+        "vmFov": 48
+      },
+      {
+        "fin": "m81",
+        "view": "hip",
+        "light": "dusk",
+        "draws": 487,
+        "meshCount": 9,
+        "instCount": 1,
+        "paintedMeshes": 0,
+        "vmFov": 48
+      },
+      {
+        "fin": "m81",
+        "view": "hip",
+        "light": "night",
+        "draws": 487,
+        "meshCount": 9,
+        "instCount": 1,
+        "paintedMeshes": 0,
+        "vmFov": 48
+      },
+      {
+        "fin": "m81",
+        "view": "aimed",
+        "light": "noon",
+        "draws": 458,
+        "meshCount": 9,
+        "instCount": 1,
+        "paintedMeshes": 0,
+        "vmFov": 48
+      },
+      {
+        "fin": "m81",
+        "view": "aimed",
+        "light": "overcast",
+        "draws": 447,
+        "meshCount": 9,
+        "instCount": 1,
+        "paintedMeshes": 0,
+        "vmFov": 48
+      },
+      {
+        "fin": "m81",
+        "view": "aimed",
+        "light": "dusk",
+        "draws": 448,
+        "meshCount": 9,
+        "instCount": 1,
+        "paintedMeshes": 0,
+        "vmFov": 48
+      },
+      {
+        "fin": "m81",
+        "view": "aimed",
+        "light": "night",
+        "draws": 448,
+        "meshCount": 9,
+        "instCount": 1,
+        "paintedMeshes": 0,
+        "vmFov": 48
+      },
+      {
+        "fin": "m81",
+        "view": "held",
+        "light": "noon",
+        "draws": 553,
+        "meshCount": 9,
+        "instCount": 1,
+        "paintedMeshes": 1,
+        "vmFov": 48
+      },
+      {
+        "fin": "m81",
+        "view": "held",
+        "light": "overcast",
+        "draws": 724,
+        "meshCount": 9,
+        "instCount": 1,
+        "paintedMeshes": 1,
+        "vmFov": 48
+      },
+      {
+        "fin": "m81",
+        "view": "held",
+        "light": "dusk",
+        "draws": 722,
+        "meshCount": 9,
+        "instCount": 1,
+        "paintedMeshes": 1,
+        "vmFov": 48
+      },
+      {
+        "fin": "m81",
+        "view": "held",
+        "light": "night",
+        "draws": 722,
+        "meshCount": 9,
+        "instCount": 1,
+        "paintedMeshes": 1,
+        "vmFov": 48
+      }
+    ],
+    "rack": [
+      {
+        "fin": "factory",
+        "light": "noon",
+        "foundRack": false
+      },
+      {
+        "fin": "factory",
+        "light": "overcast",
+        "foundRack": false
+      },
+      {
+        "fin": "factory",
+        "light": "dusk",
+        "foundRack": false
+      },
+      {
+        "fin": "factory",
+        "light": "night",
+        "foundRack": false
+      },
+      {
+        "fin": "m81",
+        "light": "noon",
+        "foundRack": false
+      },
+      {
+        "fin": "m81",
+        "light": "overcast",
+        "foundRack": false
+      },
+      {
+        "fin": "m81",
+        "light": "dusk",
+        "foundRack": false
+      },
+      {
+        "fin": "m81",
+        "light": "night",
+        "foundRack": false
+      }
+    ]
+  }
+}

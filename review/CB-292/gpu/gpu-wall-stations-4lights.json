@@ -1,0 +1,55 @@
+{
+  "stations": [],
+  "floorPaint": [
+    {
+      "site": "firing-line",
+      "lights": {
+        "noon": {
+          "overlayCount": 13,
+          "polyOffsetCount": 13,
+          "maxGapMm": 1.5
+        },
+        "overcast": {
+          "overlayCount": 13,
+          "polyOffsetCount": 13,
+          "maxGapMm": 1.5
+        },
+        "dusk": {
+          "overlayCount": 13,
+          "polyOffsetCount": 13,
+          "maxGapMm": 1.5
+        },
+        "night": {
+          "overlayCount": 13,
+          "polyOffsetCount": 13,
+          "maxGapMm": 1.5
+        }
+      }
+    },
+    {
+      "site": "no-build",
+      "lights": {
+        "noon": {
+          "overlayCount": 13,
+          "polyOffsetCount": 13,
+          "maxGapMm": 1.5
+        },
+        "overcast": {
+          "overlayCount": 13,
+          "polyOffsetCount": 13,
+          "maxGapMm": 1.5
+        },
+        "dusk": {
+          "overlayCount": 13,
+          "polyOffsetCount": 13,
+          "maxGapMm": 1.5
+        },
+        "night": {
+          "overlayCount": 13,
+          "polyOffsetCount": 13,
+          "maxGapMm": 1.5
+        }
+      }
+    }
+  ]
+}

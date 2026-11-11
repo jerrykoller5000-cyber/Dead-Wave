@@ -1,0 +1,165 @@
+{
+  "card": "AG-299",
+  "capturedAt": "2026-11-11T10:16:45.236Z",
+  "renderer": {
+    "backend": "WebGPUBackend",
+    "gfx": "high"
+  },
+  "loadReadyMs": 11774,
+  "before_0833Z_accepted": {
+    "idleDraws": 239,
+    "firingDraws": 426,
+    "addedDraws": 187,
+    "idleTickMs": 11.43,
+    "firingTickMs": 13.41,
+    "addedTickMs": 1.98,
+    "firing1pctLow": 50.7,
+    "firingFps": 59.8,
+    "newPipelines": 1
+  },
+  "after_AG299_instanced": {
+    "idleDraws": 233,
+    "firingDraws": 228,
+    "addedDraws": -5,
+    "idleTickMs": 9.7,
+    "firingTickMs": 11.22,
+    "addedTickMs": 1.52,
+    "firing1pctLow": 50.9,
+    "firingFps": 60,
+    "newPipelines": 1
+  },
+  "bench": {
+    "idle": {
+      "label": "idle_range_1p_flamer",
+      "seconds": 5,
+      "fps": 60,
+      "frameMs": 16.67,
+      "low1pct": 54.7,
+      "worstMs": 16.8,
+      "hitches": 0,
+      "draws": 233,
+      "triangles": 133157,
+      "flameBatches": 0,
+      "prof": {
+        "frames": 304,
+        "tickMs": 9.7,
+        "top": [
+          {
+            "k": "r:render",
+            "avg": 5.07,
+            "max": 7.4
+          },
+          {
+            "k": "m:hold",
+            "avg": 1.46,
+            "max": 2.3
+          },
+          {
+            "k": "m:pose",
+            "avg": 0.64,
+            "max": 1.1
+          },
+          {
+            "k": "r:matrices",
+            "avg": 0.57,
+            "max": 1
+          },
+          {
+            "k": "aim+climb",
+            "avg": 0.5,
+            "max": 0.9
+          },
+          {
+            "k": "effects",
+            "avg": 0.3,
+            "max": 0.6
+          },
+          {
+            "k": "viewmodel",
+            "avg": 0.23,
+            "max": 0.5
+          },
+          {
+            "k": "drops+hud",
+            "avg": 0.12,
+            "max": 0.5
+          }
+        ],
+        "spikes": 0,
+        "newPipelines": 0,
+        "activeFlames": 0,
+        "visFlameStageBatches": 0,
+        "visEmberBatch": 0,
+        "visBurnBatch": 0,
+        "maxStreamReachM": 0,
+        "charMarks": 0
+      }
+    },
+    "activeFire": {
+      "label": "active_flamer_rope_30m_fireball_char_burn",
+      "seconds": 6,
+      "fps": 60,
+      "frameMs": 16.67,
+      "low1pct": 50.9,
+      "worstMs": 19.3,
+      "hitches": 0,
+      "draws": 228,
+      "triangles": 145147,
+      "flameBatches": 5,
+      "prof": {
+        "frames": 364,
+        "tickMs": 11.22,
+        "top": [
+          {
+            "k": "r:render",
+            "avg": 5.08,
+            "max": 7.7
+          },
+          {
+            "k": "m:hold",
+            "avg": 1.4,
+            "max": 2.3
+          },
+          {
+            "k": "w:rest",
+            "avg": 1.38,
+            "max": 4.3
+          },
+          {
+            "k": "m:pose",
+            "avg": 0.77,
+            "max": 1.8
+          },
+          {
+            "k": "r:matrices",
+            "avg": 0.61,
+            "max": 1.2
+          },
+          {
+            "k": "aim+climb",
+            "avg": 0.58,
+            "max": 1.6
+          },
+          {
+            "k": "effects",
+            "avg": 0.39,
+            "max": 1.9
+          },
+          {
+            "k": "viewmodel",
+            "avg": 0.19,
+            "max": 0.5
+          }
+        ],
+        "spikes": 0,
+        "newPipelines": 1,
+        "activeFlames": 98,
+        "visFlameStageBatches": 5,
+        "visEmberBatch": 1,
+        "visBurnBatch": 0,
+        "maxStreamReachM": 29.39,
+        "charMarks": 62
+      }
+    }
+  }
+}

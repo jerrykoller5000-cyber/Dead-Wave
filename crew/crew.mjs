@@ -64,6 +64,7 @@ import path from 'node:path';
 import os from 'node:os';
 import { fileURLToPath } from 'node:url';
 import { parseNotes, reviewState, notesStub } from './notes.mjs';
+import { chooseReplyRequest, refindReplyRequest } from './reply-match.mjs';
 
 const CREW = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(CREW, '..');
@@ -972,28 +973,17 @@ if (!cmd || cmd === 'panel') {
   if (!which || !['DONE', 'WONT', 'LATER', 'NOTE'].includes(status) || !text) {
     console.error('Usage: crew reply <agent> <number from `requests`, or words from the title> DONE|WONT|LATER|NOTE "<one line>"'); process.exit(2);
   }
-  const all = process.argv.includes('--all');
-  const mine = requestsFor(agent, { all: true });
-  const recent = requestsFor(agent, { all });
-  let hit = /^\d+$/.test(which) ? recent[+which - 1] : null;
+  const source = parseRequests(read(requestsPath));
+  const since = new Date(Date.now() - 864e5).toISOString().slice(0, 10);
+  const {hit, error, matches} = chooseReplyRequest(source, agent, which, {all:process.argv.includes('--all'), since});
   if (!hit) {
-    const w = which.toLowerCase();
-    const found = [...mine].reverse().filter((r) => r.title.toLowerCase().includes(w));
-    if (found.length > 1 && !found.every((r) => r.title === found[0].title)) {
-      console.error(`"${which}" matches ${found.length} requests; use more words or the number:\n` + found.slice(0, 6).map((r, i) => reqLine(r, i + 1)).join('\n')); process.exit(2);
-    }
-    hit = found[0];
+    console.error(error + (matches ? '\n' + matches.slice(0, 6).map((r, i) => reqLine(r, i + 1)).join('\n') : ` node crew/crew.mjs requests ${agent} --all lists yours.`));
+    process.exit(2);
   }
-  if (!hit) {
-    // Also allow answering one already answered, or one not addressed to you by name.
-    const w = which.toLowerCase();
-    hit = [...parseRequests(read(requestsPath))].reverse().find((r) => r.title.toLowerCase().includes(w));
-    if (hit) console.log(`(Not one of your open requests: answering "${hit.title}", ${hit.from} → ${hit.to.map((a) => AGENTS[a] || a).join(', ')}.)`);
-  }
-  if (!hit) { console.error(`No request whose title has "${which}". node crew/crew.mjs requests ${agent} --all lists yours.`); process.exit(2); }
   const cur = read(requestsPath), eol = eolOf(cur);
-  // Re-find it in the file as it is now, then add the answer at the end of its section.
-  const fresh = parseRequests(cur).find((r) => r.date === hit.date && r.title === hit.title && r.from === hit.from);
+  // Re-find the same sender/date/title/recipient and occurrence in the current file.
+  const fresh = refindReplyRequest(source, parseRequests(cur), hit);
+  if (!fresh) { console.error('The selected request changed while replying. Run requests again.'); process.exit(2); }
   const end = fresh.end;
   const sectionText = cur.slice(fresh.start, end).replace(/(\r?\n)+$/, '');
   const word = status === 'NOTE' ? '' : ` ${status}.`;
@@ -1001,7 +991,7 @@ if (!cmd || cmd === 'panel') {
   const next = cur.slice(0, fresh.start) + sectionText + eol + eol + line + eol + (end < cur.length ? eol + cur.slice(end).replace(/^(\r?\n)+/, '') : '');
   rewriteKeepingTail(requestsPath, cur, next);
   log(agent, 'REPLY', `${status} · ${hit.from}: ${hit.title.slice(0, 90)} · ${text.slice(0, 100)}`);
-  console.log(`Answered "${hit.title}" (${hit.from}, ${hit.date}) with ${status}.`);
+  console.log(`Answered "${hit.title}" (${hit.from} → ${hit.to.map((a) => AGENTS[a] || a).join(', ')}, ${hit.date}) with ${status}.`);
 } else if (cmd === 'wait') {
   // Jerry, 2026-10-15: a session that ends before its turn in the game-test queue says so, not "done".
   need(agent);

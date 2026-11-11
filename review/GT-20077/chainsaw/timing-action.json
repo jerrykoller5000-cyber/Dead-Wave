@@ -1,0 +1,128 @@
+{
+  "weapon": "chainsaw",
+  "readyMs": 15127,
+  "fps": 59.6,
+  "low": 43.8,
+  "samples": [
+    {
+      "weapon": "chainsaw",
+      "eye": "chainsaw",
+      "high": "high",
+      "fps": 59.96544364228335,
+      "low": 37.593984928710135,
+      "worst": 26.600000023841858,
+      "hitches": 19,
+      "frames": 59
+    },
+    {
+      "weapon": "chainsaw",
+      "eye": "chainsaw",
+      "high": "high",
+      "fps": 60.042029419878155,
+      "low": 47.393364942297936,
+      "worst": 21.099999994039536,
+      "hitches": 19,
+      "frames": 60
+    },
+    {
+      "weapon": "chainsaw",
+      "eye": "chainsaw",
+      "high": "high",
+      "fps": 59.87416277617528,
+      "low": 44.05286345925776,
+      "worst": 22.69999998807907,
+      "hitches": 19,
+      "frames": 59
+    },
+    {
+      "weapon": "chainsaw",
+      "eye": "chainsaw",
+      "high": "high",
+      "fps": 59.60659646193013,
+      "low": 34.48275862068966,
+      "worst": 29,
+      "hitches": 19,
+      "frames": 60
+    },
+    {
+      "weapon": "chainsaw",
+      "eye": "chainsaw",
+      "high": "high",
+      "fps": 59.928086297157805,
+      "low": 45.66210050633193,
+      "worst": 21.899999976158142,
+      "hitches": 19,
+      "frames": 60
+    },
+    {
+      "weapon": "chainsaw",
+      "eye": "chainsaw",
+      "high": "high",
+      "fps": 59.99999999999999,
+      "low": 54.94505489107175,
+      "worst": 18.200000017881393,
+      "hitches": 19,
+      "frames": 60
+    },
+    {
+      "weapon": "chainsaw",
+      "eye": "chainsaw",
+      "high": "high",
+      "fps": 58.99999999999999,
+      "low": 30.581039766500133,
+      "worst": 32.69999998807907,
+      "hitches": 19,
+      "frames": 59
+    },
+    {
+      "weapon": "chainsaw",
+      "eye": "chainsaw",
+      "high": "high",
+      "fps": 58.06968361965134,
+      "low": 27.932960907806713,
+      "worst": 35.79999998211861,
+      "hitches": 19,
+      "frames": 58
+    },
+    {
+      "weapon": "chainsaw",
+      "eye": "chainsaw",
+      "high": "high",
+      "fps": 59.86231667272316,
+      "low": 47.393364942297936,
+      "worst": 21.099999994039536,
+      "hitches": 19,
+      "frames": 60
+    },
+    {
+      "weapon": "chainsaw",
+      "eye": "chainsaw",
+      "high": "high",
+      "fps": 59.988002400235075,
+      "low": 48.07692304936916,
+      "worst": 20.80000001192093,
+      "hitches": 19,
+      "frames": 60
+    },
+    {
+      "weapon": "chainsaw",
+      "eye": "chainsaw",
+      "high": "high",
+      "fps": 59.994000598509786,
+      "low": 59.17159761226685,
+      "worst": 16.900000005960464,
+      "hitches": 19,
+      "frames": 60
+    },
+    {
+      "weapon": "chainsaw",
+      "eye": "chainsaw",
+      "high": "high",
+      "fps": 60.006000601490804,
+      "low": 45.24886879048436,
+      "worst": 22.099999994039536,
+      "hitches": 19,
+      "frames": 60
+    }
+  ]
+}

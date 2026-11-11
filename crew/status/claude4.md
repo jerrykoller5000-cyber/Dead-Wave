@@ -2,12 +2,12 @@
 
 state: active
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: CD-1 landing the shotgun's firing hand and the GW-4's support thumb (fits + contacts), then the clip reds
+task: CD-1 the clip reds: flamer firing hand, aa12, m4 r, uzi, ak trigger, minigun rear hand
 touching: game/viewmodel-fit.js, studio/hand-contacts.js, tools/handfit/, tools/tests/clip-check.js
-since: 2026-11-11T09:53Z
-next: CD-1 (was CL-334) J101: a new, detailed hand (first and third per
+since: 2026-11-11T10:38Z
+next: CD-1 (08:52Z: back to Claude 1, a fresh session from 08:55Z (Jerr
 blocked-on: —
-last-report: handoffs/2026-11-11-claude4-CD-1-fixes.md
+last-report: handoffs/2026-11-11-claude4-CD-1-fixes2.md
 
 ## Notes
 

@@ -1,0 +1,116 @@
+{
+  "readyMs": 12043,
+  "high": true,
+  "fps": 60,
+  "low": 56.4,
+  "samples": [
+    {
+      "held": true,
+      "high": "high",
+      "fps": 13.106159895071965,
+      "low": 1.2792631444483178,
+      "worst": 781.6999999880791,
+      "hitches": 21,
+      "frames": 13
+    },
+    {
+      "held": true,
+      "high": "high",
+      "fps": 59.99999999999999,
+      "low": 49.26108378723433,
+      "worst": 20.299999982118607,
+      "hitches": 21,
+      "frames": 60
+    },
+    {
+      "held": true,
+      "high": "high",
+      "fps": 59.99400060029756,
+      "low": 45.45454545454545,
+      "worst": 22,
+      "hitches": 21,
+      "frames": 60
+    },
+    {
+      "held": true,
+      "high": "high",
+      "fps": 59.99999999999999,
+      "low": 58.8235294117647,
+      "worst": 17,
+      "hitches": 21,
+      "frames": 60
+    },
+    {
+      "held": true,
+      "high": "high",
+      "fps": 59.9760095958042,
+      "low": 58.8235294117647,
+      "worst": 17,
+      "hitches": 21,
+      "frames": 60
+    },
+    {
+      "held": true,
+      "high": "high",
+      "fps": 60.01800540233617,
+      "low": 46.0829493340715,
+      "worst": 21.69999998807907,
+      "hitches": 21,
+      "frames": 60
+    },
+    {
+      "held": true,
+      "high": "high",
+      "fps": 59.99400060029756,
+      "low": 59.17159761226685,
+      "worst": 16.900000005960464,
+      "hitches": 21,
+      "frames": 60
+    },
+    {
+      "held": true,
+      "high": "high",
+      "fps": 60.006000601490804,
+      "low": 59.52380948157267,
+      "worst": 16.80000001192093,
+      "hitches": 21,
+      "frames": 60
+    },
+    {
+      "held": true,
+      "high": "high",
+      "fps": 60.00600059970231,
+      "low": 59.171597716613064,
+      "worst": 16.899999976158142,
+      "hitches": 21,
+      "frames": 60
+    },
+    {
+      "held": true,
+      "high": "high",
+      "fps": 59.988002400235075,
+      "low": 58.47953218412662,
+      "worst": 17.099999994039536,
+      "hitches": 21,
+      "frames": 60
+    },
+    {
+      "held": true,
+      "high": "high",
+      "fps": 60.0120024015534,
+      "low": 58.8235294117647,
+      "worst": 17,
+      "hitches": 21,
+      "frames": 60
+    },
+    {
+      "held": true,
+      "high": "high",
+      "fps": 59.99999999999999,
+      "low": 59.171597716613064,
+      "worst": 16.899999976158142,
+      "hitches": 21,
+      "frames": 60
+    }
+  ]
+}
