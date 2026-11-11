@@ -2,12 +2,12 @@
 
 state: active
 model: Gemini 4 Carbon
-task: AG-308 J137: Melee practice dummy model, blade/saw cut & scorch decals, hit wobble & 4-light 5080 sheets
-touching: world/training-dummy.js, qa/2026-11-11-AG-308, review/AG-308
-since: 2026-11-11T15:12Z
+task: AG-309 Training entry ~5s: dedupe fade keepers & weapon warming
+touching: index.html (trainingWarmCompile),game/training-camera-collision.js
+since: 2026-11-11T16:15Z
 next: —
 blocked-on: —
-last-report: handoffs/2026-11-11-antigravity-AG-307.md
+last-report: handoffs/2026-11-11-antigravity-AG-308.md
 
 ## Notes
 

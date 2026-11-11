@@ -51,15 +51,17 @@ export function makeViews(T) {
     const eye=['hip','aimed','aim-entry'].includes(view), rackView=view==='rack';
     frozen=false; T.setShotView(null); T.setViewFirstDbg(eye); T.setZoomHeldDbg(view==='aimed');
     const range=T.trainingDbg.tg();
-    let spot=[range.origin.x,range.origin.z-.55];
-    if(openFloor){
-      const obstacles=range.solids.filter(b=>b.maxY>range.floorY+.45 && b.minY<range.floorY+2.2);
-      spot=[[0,4],[3,4],[-3,4],[0,8]].map(([x,z])=>[range.origin.x+x,range.origin.z+z])
-        .find(([x,z])=>obstacles.every(b=>x<b.minX-1.8 || x>b.maxX+1.8 || z<b.minZ-1.8 || z>b.maxZ+1.8));
-      if(!spot)throw Error('No clear floor for the held artwork');
-    }
+    // Downrange positions are clamped at the firing line. The floor five units
+    // behind it is reachable and clear of both the range and station colliders.
+    let spot=[range.origin.x,range.origin.z-(openFloor?5:.55)];
     if(testSpot) spot=[range.origin.x+testSpot[0],range.origin.z+testSpot[1]];
     T.player.position.set(spot[0],range.floorY,spot[1]); T.setOtsAimDbg(testSpot?.[2]||0,-.08); step(75);
+    if(openFloor && !testSpot){
+      const p=T.player.position;
+      const boxes=[...range.solids.filter(b=>!b.floor && b.target==null),...(T.trainingDbg.state().cameraCollision?.boxes||[])];
+      const near=b=>b.maxY>p.y+.4 && b.minY<p.y+2.2 && p.x>b.minX-1.8 && p.x<b.maxX+1.8 && p.z>b.minZ-1.8 && p.z<b.maxZ+1.8;
+      if(Math.hypot(p.x-spot[0],p.z-spot[1])>.05 || boxes.some(near))throw Error('Clear-floor artwork position is obstructed or clamped');
+    }
     if(view==='aim-entry') {
       T.setZoomHeldDbg(true);
       for(let i=0;i<40 && T.viewmodelDbg().info.ads<.36;i++) T.stepFrame(1/60);

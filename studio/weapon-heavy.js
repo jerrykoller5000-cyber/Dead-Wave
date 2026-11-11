@@ -757,6 +757,136 @@ function sawCoverTexture(T) {
   return map;
 }
 
+// The visible metal and rubber share a centreline and meet on matching end rings.
+// Each finish is one cached mesh, including the two mounting pads and their caps.
+function sawFrontHandle(T, finish) {
+  return geometry(T, 'saw-front-'+finish, (quad, tri) => {
+    const v = (x,y,z) => new T.Vector3(x,y,z);
+    const axis = v(1,0,0), upZ = v(0,0,1);
+    const row = (p,t,r,s=r) => ({p,t,r,s});
+    const contactQ=new T.Quaternion().setFromUnitVectors(v(0,1,0),v(.01,.103,.045).normalize());
+    const contactU=v(0,0,1).applyQuaternion(contactQ),contactV=v(1,0,0).applyQuaternion(contactQ);
+    function skin(rows, sides=24, fittedSide=false) {
+      const rings = rows.map(({p,t,r,s}) => {
+        const u = upZ.clone().cross(t).normalize(), w = t.clone().cross(u).normalize();
+        return Array.from({length:sides}, (_,i) => {
+          const angle = i * 2 * Math.PI / sides;
+          const radial=u.clone().multiplyScalar(r*Math.cos(angle)).addScaledVector(w,s*Math.sin(angle));
+          if(fittedSide){
+            // Under the posed glove the rounded skin stays inside the former contact facets.
+            const sector=Math.atan2(radial.dot(contactV),radial.dot(contactU))/(Math.PI/4);
+            const offset=(sector-Math.floor(sector)-.5)*Math.PI/4;
+            const envelope=Math.cos(Math.PI/8)/Math.cos(offset);
+            const weight=Math.max(0,Math.min(1,(p.y-.123)/.013,(.222-p.y)/.013));
+            radial.multiplyScalar(1+(envelope-1)*weight);
+          }
+          return p.clone().add(radial);
+        });
+      });
+      closeRings(rows,rings);
+    }
+    function closeRings(rows,rings) {
+      const sides=rings[0].length;
+      const normals = rings.map((ring,j) => ring.map((point,i) => {
+        const around = ring[(i+1)%sides].clone().sub(ring[(i+sides-1)%sides]);
+        const along = rings[Math.min(j+1,rings.length-1)][i].clone().sub(rings[Math.max(0,j-1)][i]);
+        const n = around.cross(along).normalize();
+        if(n.dot(point.clone().sub(rows[j].p))<0)n.negate();
+        return n.toArray();
+      }));
+      for(let j=1;j<rings.length;j++) for(let i=0;i<sides;i++){
+        const k=(i+1)%sides;
+        quad(rings[j-1][i].toArray(),rings[j-1][k].toArray(),rings[j][k].toArray(),rings[j][i].toArray(),
+          normals[j-1][i],normals[j-1][k],normals[j][k],normals[j][i]);
+      }
+      for(const j of [0,rows.length-1]){
+        const n=rows[j].t.clone().multiplyScalar(j===0?-1:1).toArray();
+        for(let i=0;i<sides;i++)tri(rows[j].p.toArray(),rings[j][i].toArray(),rings[j][(i+1)%sides].toArray(),n);
+      }
+    }
+
+    const panelFace=.1435, leftDepth=.020, rightDepth=.042, mountFace=panelFace+leftDepth;
+    const rightSeat=v(.164,.113,.020);
+    const centreY=.246, centreZ=-.035, left=-.076, right=.056;
+    if(finish==='caps'){
+      // Bright chamfered heads sit against the outer face of each rubber mount.
+      for(const [side,depth,y,z] of [[-1,leftDepth,-.004,-.147],[1,rightDepth,.093,.018]]){
+        skin([[0,.0062],[.001,.0074],[.0031,.0074],[.0043,.0059]].map(([d,r])=>
+          row(v(side*(panelFace+depth+d),y,z),v(side,0,0),r)),10);
+      }
+      return;
+    }
+    if(finish==='rubber'){
+      const sleeve=[];
+      const samples=Array.from({length:89},(_,i)=>left+(right-left)*i/88);
+      for(let rib=-2;rib<=2;rib++)samples.push(-.01+rib*.025);
+      samples.sort((a,b)=>a-b);
+      for(const [i,x] of samples.entries()){
+        if(i && x-samples[i-1]<1e-8)continue;
+        const edge=Math.min(x-left,right-x);
+        const blend=Math.max(0,Math.min(1,edge/.009));
+        let radius=.014+.004*blend*blend*(3-2*blend);
+        for(let rib=-2;rib<=2;rib++){
+          const t=Math.abs(x-(-.01+rib*.025))/.005;
+          if(t<1)radius+=.002*(1+Math.cos(Math.PI*t))/2;
+        }
+        sleeve.push(row(v(x,centreY,centreZ),axis,radius));
+      }
+      skin(sleeve);
+      // A flared shoulder gives the left boss depth in profile and a raised face for the cap.
+      skin([[0,.033,.0148],[.002,.035,.0155],[.006,.0345,.0155],[.012,.033,.0152],
+        [.017,.031,.0151],[leftDepth,.0295,.0150]].map(([d,ry,rz])=>
+        row(v(-(panelFace+d),.012,-.147),v(-1,0,0),ry,rz)));
+
+      // The opposite pad has a level top for the descending rail. Its side face
+      // carries the cap, and the broad rounded shoulder meets the original panel.
+      const padRows=[], padRings=[];
+      for(const [depth,inset] of [[0,.004],[.002,.0015],[.005,0],[.032,0],[.036,.0015],[.039,.0045],[.041,.008],[rightDepth,.011]]){
+        const centre=v(panelFace+depth,.093,.019), ring=[];
+        const halfY=.020-inset,halfZ=.032-inset,corner=Math.min(.016,halfY*.84);
+        for(let quadrant=0;quadrant<4;quadrant++){
+          const signY=quadrant===0||quadrant===3?1:-1,signZ=quadrant<2?1:-1;
+          for(let i=0;i<=4;i++){
+            const angle=(quadrant+i/4)*Math.PI/2;
+            ring.push(v(centre.x,centre.y+signY*(halfY-corner)+corner*Math.cos(angle),
+              centre.z+signZ*(halfZ-corner)+corner*Math.sin(angle)));
+          }
+        }
+        padRows.push(row(centre,axis,1));padRings.push(ring);
+      }
+      closeRings(padRows,padRings);
+      return;
+    }
+
+    function bend(knots, fittedSide=false) {
+      const rows=[];
+      for(let j=1;j<knots.length;j++){
+        const [p,a]=knots[j-1], [q,b]=knots[j], length=p.distanceTo(q)/3;
+        const c=p.clone().addScaledVector(a,length), d=q.clone().addScaledVector(b,-length);
+        const steps=Math.max(6,Math.ceil(length*3/.009));
+        for(let i=j===1?0:1;i<=steps;i++){
+          const t=i/steps, u=1-t;
+          const point=p.clone().multiplyScalar(u*u*u).addScaledVector(c,3*u*u*t).addScaledVector(d,3*u*t*t).addScaledVector(q,t*t*t);
+          const tangent=c.clone().sub(p).multiplyScalar(u*u).addScaledVector(d.clone().sub(c),2*u*t).addScaledVector(q.clone().sub(d),t*t).normalize();
+          rows.push(row(point,tangent,.014));
+        }
+      }
+      skin(rows,24,fittedSide);
+    }
+    const contact=v(.01,.103,.045), gripDirection=contact.clone().normalize();
+    const oldSide=v(-.15,.115,-.13);
+    // Retain the straight contact under the fitted left palm as well as the top grip.
+    bend([[v(-mountFace,.022,-.147),v(-1,0,0)],[v(-.175,.022,-.147),v(-1,0,0)],
+      [v(-.183,.068,-.147),v(0,1,0)],
+      [v(-.163,.119,-.135),v(.36,.88,.30).normalize()],
+      [oldSide.clone().addScaledVector(contact,.19),gripDirection],[oldSide.clone().addScaledVector(contact,.90),gripDirection],
+      [v(-.126,.228,-.069),v(.72,.4,.58).normalize()],[v(left,centreY,centreZ),axis]],true);
+    bend([[v(right,centreY,centreZ),axis],[v(.123,.221,.009),v(.65,-.57,.50).normalize()],
+      [v(.159,.171,.018),v(.22,-.97,.04).normalize()],[v(.164,.143,.020),v(0,-1,0)],
+      [rightSeat,v(0,-1,0)]]);
+  });
+}
+
 export function makeChainsawModel(ctx) {
   const { THREE, gunKit, gunArc, gunBand, gripOutline, finishGun, gunBody, gunDark, gunMid, gunAccent, gunPoly, gunRubber, steelMat, hazardYellow, bladeMat, layoutChainsawChain } = ctx;
   const gun = new THREE.Group();
@@ -818,7 +948,8 @@ export function makeChainsawModel(ctx) {
     K.box(0.003, 0.004, 0.018, gunDark, 0.1675, 0.047 + Math.sin(a) * 0.034, -0.085 + Math.cos(a) * 0.034, a, 0, 0, null, 0.001);
   }
   // Removable filter cover and thumb knob on the opposite side of the engine.
-  K.box(0.012, 0.082, 0.082, gunMid, -0.151, 0.053, -0.09, 0, 0, 0, null, 0.009);
+  // The filter assembly sits on the cowling independently of the front handle.
+  K.box(0.0135, 0.082, 0.082, gunMid, -0.15025, 0.053, -0.09, 0, 0, 0, null, 0.009);
   K.box(0.008, 0.068, 0.067, coverMat, -0.16, 0.053, -0.09, 0, 0, 0, null, 0.007);
   for (let i = 0; i < 3; i++) K.box(0.003, 0.004, 0.045, gunDark, -0.165, 0.029 + i * 0.022, -0.09, 0, 0, 0, null, 0.001);
   K.cyl(0.009, 0.009, 0.01, gunRubber, -0.17, 0.079, -0.064, null, 10, 'x');
@@ -842,12 +973,9 @@ export function makeChainsawModel(ctx) {
   K.slab(gunBand([[-0.395, 0.062], [-0.34, 0.06], [-0.326, -0.065], [-0.42, -0.069]], 0.006), 0.033, gunDark, { bevel: 0.003 });
   K.box(0.072, 0.02, 0.04, gunAccent, 0, 0.085, -0.445, 0, 0, 0, null, 0.004);
   K.box(0.05, 0.009, 0.027, gunDark, 0, 0.0995, -0.444, 0, 0, 0, null, 0.003); // throttle lock paddle
-  // The front hoop crosses the top grip and descends on the left side of the body.
-  const hoop = [[-0.15, 0.018, -0.14], [-0.15, 0.115, -0.13], [-0.14, 0.218, -0.085], [-0.08, 0.246, -0.035], [0.06, 0.246, -0.035], [0.13, 0.216, 0.018], [0.13, 0.027, 0.055]];
-  for (let i = 0; i < hoop.length - 1; i++) rod(THREE, K, hoop[i], hoop[i + 1], 0.014, gunDark);
-  K.cyl(0.018, 0.018, 0.132, gunRubber, -0.01, 0.246, -0.035, null, 14, 'x');
-  for (let i = -2; i <= 2; i++) K.cyl(0.02, 0.02, 0.008, gunPoly, -0.01 + i * 0.025, 0.246, -0.035, null, 14, 'x');
-  for (const [x, y, z] of [hoop[0], hoop[hoop.length - 1]]) K.box(0.032, 0.035, 0.04, gunPoly, x, y, z, 0, 0, 0, null, 0.006);
+  part(THREE,sawFrontHandle(THREE,'metal'),gunDark,gun).name='chainsaw front rail metal';
+  part(THREE,sawFrontHandle(THREE,'rubber'),gunRubber,gun).name='chainsaw front rail rubber';
+  part(THREE,sawFrontHandle(THREE,'caps'),gunMid,gun).name='chainsaw front rail caps';
   // Front hand guard stands ahead of the support hand, before the chain root.
   K.slab([[0.075, 0.055], [0.102, 0.055], [0.135, 0.219], [0.109, 0.225]], 0.16, gunMid, { bevel: 0.007 });
   for (const sx of [-1, 1]) {

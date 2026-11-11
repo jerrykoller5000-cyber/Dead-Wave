@@ -3,7 +3,7 @@ import {RANGE_WEAPONS} from './range-drills.js';
 import {orderedDrills,drillLevel,drillSteps,drillWeapons,targetGoal,drillInstruction,drillLaneOrder} from './range-guide.js';
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const t=(k,p)=>esc(text(k,p)),label=d=>text(`range.drill.${d.weapon}.${d.id}.name`);
-export function mountRangeConsole({owned,signature,records,start,exit,cancel}={}){
+export function mountRangeConsole({owned,signature,records,start,exit,cancel,dummyState=()=>null,resetDummy=()=>{}}={}){
  if(!document.getElementById('rangeDrillStyle')){const link=document.createElement('link');link.id='rangeDrillStyle';link.rel='stylesheet';link.href=new URL('./range-drills.css',import.meta.url).href;document.head.append(link);}
  const root=document.createElement('section');root.id='rangeConsole';root.hidden=true;root.setAttribute('role','dialog');root.setAttribute('aria-modal','true');root.setAttribute('aria-label',text('range.console'));
  const hud=document.createElement('aside');hud.id='rangeDrillHud';hud.hidden=true;document.body.append(root,hud);
@@ -23,10 +23,12 @@ export function mountRangeConsole({owned,signature,records,start,exit,cancel}={}
  }
  function render(){
   if(mode!=='selection')return;const ds=orderedDrills(weapon),d=selected||ds[0];selected=d;
-  root.innerHTML=`<div class="rd-panel"><header><div><small>${t('range.select')}</small><h2>${t('range.console')}</h2></div><button data-close aria-label="${t('range.close')}">×</button></header><p>${t('range.menu.intro')}</p>${lastRun?runReport(lastRun):''}<div class="rd-path">${[1,2,3].map(n=>`<span>${n}. ${t('range.level.'+n)}</span>`).join('<i>→</i>')}</div><section class="rd-weapon-section"><h3>${t('range.menu.weapon')}</h3><nav aria-label="${t('range.weapons')}">${RANGE_WEAPONS.map(w=>`<button data-weapon="${w}" class="${w===weapon?'selected':''}">${t('range.weapon.'+w)}${owned(w)?'':' 🔒'}</button>`).join('')}</nav></section><main class="rd-layout"><section class="rd-drill-section"><h3>${t('range.menu.drill')}</h3><div class="rd-drills">${ds.map((v,i)=>`<button class="range-card ${v===d?'selected':''}" data-drill="${v.id}" aria-pressed="${v===d}"><span class="rd-number">${i+1}</span><span><small>${t('range.level.'+drillLevel(v))}</small><b>${esc(label(v))}</b><span>${t(`range.drill.${weapon}.${v.id}.objective`)}</span></span></button>`).join('')}</div></section>${details(d)}</main></div>`;
+  const dummy=dummyState?.();
+  root.innerHTML=`<div class="rd-panel"><header><div><small>${t('range.select')}</small><h2>${t('range.console')}</h2></div><button data-close aria-label="${t('range.close')}">×</button></header><p>${t('range.menu.intro')}</p>${dummy?`<section class="rd-last-run" id="rangeDummyCounter"><header><h3>${t('range.dummy.title')}</h3><button data-dummy-reset>${t('range.dummy.reset')}</button></header><div class="rd-result-metrics"><span>${t('range.dummy.hits')}: <b>${Number(dummy.hits)||0}</b></span><span>${t('range.dummy.damage')}: <b>${Math.round(Number(dummy.damage)||0)}</b></span></div></section>`:''}${lastRun?runReport(lastRun):''}<div class="rd-path">${[1,2,3].map(n=>`<span>${n}. ${t('range.level.'+n)}</span>`).join('<i>→</i>')}</div><section class="rd-weapon-section"><h3>${t('range.menu.weapon')}</h3><nav aria-label="${t('range.weapons')}">${RANGE_WEAPONS.map(w=>`<button data-weapon="${w}" class="${w===weapon?'selected':''}">${t('range.weapon.'+w)}${owned(w)?'':' 🔒'}</button>`).join('')}</nav></section><main class="rd-layout"><section class="rd-drill-section"><h3>${t('range.menu.drill')}</h3><div class="rd-drills">${ds.map((v,i)=>`<button class="range-card ${v===d?'selected':''}" data-drill="${v.id}" aria-pressed="${v===d}"><span class="rd-number">${i+1}</span><span><small>${t('range.level.'+drillLevel(v))}</small><b>${esc(label(v))}</b><span>${t(`range.drill.${weapon}.${v.id}.objective`)}</span></span></button>`).join('')}</div></section>${details(d)}</main></div>`;
  }
  root.addEventListener('click',e=>{
   e.stopPropagation();const b=e.target.closest('button');if(!b)return;
+  if(b.hasAttribute('data-dummy-reset')){resetDummy();render();return;}
   if(b.hasAttribute('data-close')||b.hasAttribute('data-exit')){exit();return;}
   if(b.dataset.view){detailView=b.dataset.view;render();return;}
   if(b.dataset.metric){metric=b.dataset.metric;if(mode==='selection')render();return;}

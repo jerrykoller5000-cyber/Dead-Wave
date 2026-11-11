@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {mkdir} from 'node:fs/promises';
+import {mkdir,readFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import {serve} from '../../tools/serve.mjs';
 import {launch} from '../../tools/cdp.mjs';
@@ -12,8 +12,15 @@ const audit=candidate?candidate.slice('--audit='.length):'catalog-chain-skin';
 assert(/^catalog-[a-z0-9-]+$/.test(audit));
 const precise=process.argv.includes('--precise') || !!candidate;
 const replay=process.argv.includes('--original-saw-covers');
-const folder=(candidate?'visibility-'+audit.slice('catalog-'.length):precise?'visibility-final':'visibility')+(replay?'-control':'');
+const requestedFolder=process.argv.find(arg=>arg.startsWith('--output='))?.slice(9);
+if(requestedFolder)assert(candidate && /^visibility-fix-[a-z0-9-]+$/.test(requestedFolder));
+const folder=requestedFolder || (candidate?'visibility-'+audit.slice('catalog-'.length):precise?'visibility-final':'visibility')+(replay?'-control':'');
 const ids=process.argv.slice(2).filter(arg=>!arg.startsWith('--'));
+// An urgent art card can supersede the remaining queued fleet batches.
+if(requestedFolder){
+  const card=await readFile(new URL('../../crew/status/chatgpt2.md',import.meta.url),'utf8');
+  if(!/^task: GT-20076\b/m.test(card)){console.log('Fleet capture deferred until GT-20076 is active again');process.exit(2);}
+}
 assert(process.env.DW_GAME_TEST_TOKEN && ids.length && ids.every(id=>/^[a-z0-9]+$/.test(id)));
 const server=await serve(fileURLToPath(new URL('../../',import.meta.url)),0);
 const browser=await launch({headless:false});

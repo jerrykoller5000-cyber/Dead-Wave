@@ -2,12 +2,12 @@
 
 state: active
 model: GPT-6 (Codex, variant unsure)
-task: GT-20076 Chainsaw side-cover intersections on both sides, preserving existing exterior and moving chain artwork
-touching: studio/weapon-heavy.js (chainsaw side panels), review/GT-20076
-since: 2026-11-11T15:03Z
+task: GT-20076 First refreshed crossing: sniper rear exterior during aim entry, matched gameplay ranks and saw High controls
+touching: studio/weapon-longarms.js (sniper rear exterior artwork), review/GT-20076, review/GT-20083 (paired High receipts), review/GT-20077/timing.mjs (performance proof)
+since: 2026-11-11T16:13Z
 next: GT-20075 (Reviewed by CLAUDE DIRECTOR 20:45Z: accepted, two back: the
 blocked-on: —
-last-report: handoffs/2026-11-11-chatgpt2-GT-20076.md
+last-report: handoffs/2026-11-11-chatgpt2-GT-20083.md
 
 ## Notes
 
@@ -15,7 +15,7 @@ last-report: handoffs/2026-11-11-chatgpt2-GT-20076.md
 
 context nearly full, needs a new session
 
-GT-20076 chainsaw panels: 170→168, old 255/210px pairs 10/23 gone, zero new exclusions/open skins, 46/46 exact exposed tuples both sides, 42/42 moving chain graphics. Camera change: old horizontal held position replaced by retraction at firing line. Original studio geometry replayed and hash 5a077773 confirmed in current game. Matched v2 pics in visible-repairs/chainsaw/floor-after-pair-10-aimed.jpg and floor-after-pair-23-held-right-open.jpg, max .22px drift. Additional nominally open spot still raises saw (61deg vs 50 at firing line); run held-floor-probe.mjs after active g2:1709 to find verified unobstructed normal carry before fleet re-rank. Director asked whether to refresh all rankings for both poses; pick yes, short batches. Inspector/High/t38+t333 also in g2:1709. Prior revolver/launcher/KR-7 checks complete; AG-305 passed and crops delivered; CE-6 accepted.
+GT-20083 accepted and sent to Jerry. Final boss source fingerprint 008907c1, saw 133 raw/zero involving rail, no unseated pieces, 9 draws, 42/42. Handoff and 4-light sheets in review/GT-20083/boss*.jpg. Now GT-20076 #1 sniper pair 143, 237px during aim entry; sources studio/weapon-longarms.js rear square exterior panel vs cylindrical skin, no hand or sight moves. Baseline rank visibility-fix-fleet-poses/sniper; strict current catalog-fix-front-rail-boss. Next pistol 0, Wasp 10. Outstanding three-way saw High check: run timing.mjs chainsaw saw-legacy-1, saw-panels-1, saw-fitted-1 (all exclusive, per-version hashes). Breacher factory identity source fix belongs Claude 1 after GW-4 thumb; rerun original paint fixture once connected.
 
 Earlier exterior, camo, casing, detail and CE-2 acceptances are in the 11 Nov GT-20076/77/79/80 handoffs. The KR-7 laminate and D-152 budget were accepted on GT-20082 and GT-20081. Keep previous test expectations and the crew slot.
 

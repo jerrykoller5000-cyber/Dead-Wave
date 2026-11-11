@@ -3,17 +3,20 @@ import {readFile,writeFile} from 'node:fs/promises';
 const folder=process.argv[2]??'visibility-final';
 const revised=/^visibility-fix-[a-z0-9-]+$/.test(folder);
 assert(revised || ['visibility','visibility-final'].includes(folder));
-const previous=process.argv.slice(3);
+const previous=process.argv.slice(3).filter(s=>!s.startsWith('--'));
+const audit=process.argv.find(s=>s.startsWith('--audit='))?.slice(8) || folder.replace('visibility-','catalog-');
+if(revised)assert(/^catalog-[a-z0-9-]+$/.test(audit));
+const bothPoses=process.argv.includes('--both-poses');
 assert(previous.every(name=>/^visibility-fix-[a-z0-9-]+$/.test(name)));
 const ids=['pistol','revolver','uzi','m4','ak','aa12','shotgun','sniper','minigun','launcher','flamer','chainsaw'];
 const root=new URL('./'+folder+'/',import.meta.url);
 const read=async (dir,file)=>JSON.parse(await readFile(new URL('./'+dir+'/'+file,import.meta.url),'utf8'));
-const current=revised?await read(folder.replace('visibility-','catalog-'),'audit.json'):null;
+const current=revised?await read(audit,'audit.json'):null;
 const baseline=revised?await read('catalog-chain-skin','audit.json'):null;
 const witnesses=row=>(row.rawOverlaps||row.overlaps).map(({a,b,at,host,witnessDepthMm})=>[a,b,at,host,witnessDepthMm]);
 const sources={};
 const records=await Promise.all(ids.map(async id=>{
-  for(const dir of revised?[folder,...previous,'visibility-final']:[folder]){
+  for(const dir of revised?[folder,...previous,...(bothPoses?[]:['visibility-final'])]:[folder]){
     let rank;
     try {rank=await read(dir,id+'/rank.json');} catch(error){if(error.code==='ENOENT')continue;throw error;}
     if(current){
@@ -26,6 +29,13 @@ const records=await Promise.all(ids.map(async id=>{
         assert.equal(current[id].openSurfaces,baseline[id].openSurfaces);
       }
       assert.equal(rank.rawPairs,(current[id].rawOverlaps||current[id].overlaps).length);
+    }
+    if(bothPoses){
+      const cameras=await read(dir,id+'/cameras.json');
+      for(const view of ['held-left','held-right','held-left-open','held-right-open']) {
+        const c=cameras[view]; assert(c && c.actualDepth && rank.coverage[view]?.depthMatched>0,id+' missing '+view);
+        assert(Math.hypot(c.actualSpot[0]-c.spot[0],c.actualSpot[2]-c.spot[1])<.05,id+' displaced '+view);
+      }
     }
     sources[id]=dir;
     return rank;

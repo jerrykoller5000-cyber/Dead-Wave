@@ -7,14 +7,14 @@ import {save} from './save.mjs';
 import {originalSawCovers} from './replay-artwork.mjs';
 
 const [id,phase]=process.argv.slice(2);
-assert(process.env.DW_GAME_TEST_TOKEN && /^[a-z0-9]+$/.test(id) && ['before','after','trim','final-trim','joins','rear-join','side-inset','crown','contact-trim','relief','closed-relief','floor-before','floor-after'].includes(phase));
+assert(process.env.DW_GAME_TEST_TOKEN && /^[a-z0-9]+$/.test(id) && ['before','after','trim','final-trim','joins','rear-join','side-inset','crown','contact-trim','relief','closed-relief','floor-before','floor-after','clear-before','clear-after'].includes(phase));
 const dir=new URL('./visible-repairs/'+id+'/'+phase+'/',import.meta.url);
 await mkdir(dir,{recursive:true});
 const server=await serve(fileURLToPath(new URL('../../',import.meta.url)),0),browser=await launch({headless:false});
 try {
   const page=await browser.newPage({width:960,height:540});
   const replay=process.argv.includes('--original-saw-covers');
-  if(replay) assert(id==='chainsaw' && phase==='floor-before');
+  if(replay) assert(id==='chainsaw' && ['floor-before','clear-before'].includes(phase));
   const verify=replay?await originalSawCovers(page,server.origin):null;
   await page.goto(server.origin+'/index.html?debug=1&raf=timer');
   assert(await page.waitFor('window.TT && DWLoad.snapshot().state==="ready"'));
@@ -25,7 +25,8 @@ try {
   await page.evaluate('vis.equip('+JSON.stringify(id)+')');
   const cameras={};
   const views=['hip','aimed','held-left','held-right',...(id==='chainsaw'?[]:['rack'])];
-  if(phase.startsWith('floor-')) views.push('held-left-open','held-right-open');
+  if(id==='sniper')views.splice(2,0,'aim-entry');
+  if(phase.startsWith('floor-') || phase.startsWith('clear-')) views.push('held-left-open','held-right-open');
   for(const view of views){
     cameras[view]=await page.evaluate('vis.pose('+JSON.stringify(view)+')');
     for(const light of ['noon','overcast','dusk','night']){

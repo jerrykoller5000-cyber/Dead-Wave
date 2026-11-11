@@ -65,12 +65,13 @@ export const TRAINING = Object.freeze({
 
 // CL-144: the silhouette and its rings, in the plate's canvas units (256 x 448, its top at 0): what is drawn and what
 // is scored are one description. u runs across the plate, v down it.
-export const PLATE_ART = Object.freeze({ W: 256, H: 448, head: { u: 128, v: 70, r: 52, ring: 20 }, chest: { u: 128, v: 260, bull: 26, ring: 54 },
+export const PLATE_ART = Object.freeze({ W: 256, H: 448, head: { u: 128, v: 70, r: 52, ring: 20 }, neck: { minU: 108, maxU: 148, top: 110, bottom: 162 }, chest: { u: 128, v: 260, bull: 26, ring: 54 },
   body: { top: 170, shoulder: 120, bottom: 442, inTop: 52, inBottom: 42 } });
 // On the silhouette (not the cut-away corners of the plate) at (u, v)?
 export function onSilhouette(u, v) {
   const A = PLATE_ART, hd = A.head, b = A.body;
   if (Math.hypot(u - hd.u, v - hd.v) <= hd.r) return true;
+  if (u >= A.neck.minU && u <= A.neck.maxU && v >= A.neck.top && v <= A.neck.bottom) return true;
   if (v > b.bottom || v < b.shoulder) return false;
   const du = Math.abs(u - A.W / 2);
   if (v < b.top) {   // the shoulders: a quadratic from (52,170) through (128,120) to (204,170): x is linear in t there
@@ -435,6 +436,8 @@ export function buildTrainingGround(T, opts = {}) {
     const fig = (inset, col) => {
       c.fillStyle = col; c.beginPath();
       c.arc(A.head.u, A.head.v, A.head.r - inset, 0, Math.PI * 2); c.fill();
+      c.fillRect(A.neck.minU + inset, A.neck.top + inset,
+        A.neck.maxU - A.neck.minU - inset * 2, A.neck.bottom - A.neck.top - inset * 2);
       c.beginPath(); c.moveTo(b.inBottom + inset, b.bottom - inset); c.lineTo(b.inTop + inset, b.top + inset); c.quadraticCurveTo(W / 2, b.shoulder + inset, W - b.inTop - inset, b.top + inset);
       c.lineTo(W - b.inBottom - inset, b.bottom - inset); c.closePath(); c.fill();
     };
@@ -454,7 +457,7 @@ export function buildTrainingGround(T, opts = {}) {
     c.fillText(String(TRAINING.SCORE.plate), A.chest.u, b.bottom - 40);
     c.restore();
   }));
-  const plateMat = std({ color: 0xffffff, map: plateTex, transparent: true, alphaTest: 0.5, roughness: 0.5, metalness: 0.2, side: T.DoubleSide });
+  const plateMat = std({ color: 0xffffff, map: plateTex, transparent: true, alphaTest: 0.5, roughness: 0.5, metalness: 0.2, polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -1, side: T.DoubleSide });
   const K = TRAINING.TARGET_SCALE;
   // The plate doubles; its foot stays where it was (0.66 m up), so the chest rings come at a standing man's eye line
   // (about 1.6 m) and a blade still reaches the plate.
@@ -468,11 +471,16 @@ export function buildTrainingGround(T, opts = {}) {
     for (const s of [-1, 1]) box(0.045, 0.04, 0.14, steel, s * 0.1125, 0.26, 0, root); // flanking pillow blocks flush on hazard plate
     const pivot = new T.Group(); pivot.position.set(0, PIVOT_Y, 0); root.add(pivot);
     box(0.18, 0.04, 0.10, steelLight, 0, 0.02, 0, pivot);          // pivot axle knuckle
-    // Backing uprights (z = -0.028) and rear-mounted crossbars (z = -0.059) with 0.0 mm contact and zero overlap.
-    box(0.06, 1.45, 0.04, steelLight, 0, 0.765, -0.028, pivot);
-    for (const s of [-1, 1]) box(0.045, 1.45, 0.04, steelLight, s * 0.35, 0.765, -0.028, pivot);
-    box(0.78, 0.04, 0.022, steelLight, 0, 1.10, -0.059, pivot);
-    box(0.78, 0.04, 0.022, steelLight, 0, 0.45, -0.059, pivot);
+    // The firing line looks along +z. The plate faces -z, so its backing is on +z.
+    // The short lower stem meets the plate's foot; the backing begins high enough to clear
+    // the base when the pivot lies down in either direction.
+    box(0.035, 0.32, 0.009, steelLight, 0, 0.20, 0, pivot).name = 'target-lower-stem';
+    box(0.06, 1.13, 0.04, steelLight, 0, 0.925, 0.02, pivot).name = 'target-backing-center';
+    for (const s of [-1, 1]) box(0.045, 1.07, 0.04, steelLight, s * 0.35, 0.955, 0.02, pivot).name = 'target-backing-side';
+    box(0.78, 0.04, 0.022, steelLight, 0, 1.10, 0.051, pivot).name = 'target-backing-crossbar';
+    box(0.78, 0.04, 0.022, steelLight, 0, 0.56, 0.051, pivot).name = 'target-backing-crossbar';
+    // The backing touches the translucent plate; its own shadow would stripe the target face at distance.
+    for (const part of pivot.children) if (part.name.startsWith('target-backing-')) part.castShadow = false;
     const plate = add(new T.PlaneGeometry(PLATE.w, PLATE.h), plateMat, 0, PLATE.y, 0, pivot);
     plate.rotation.y = Math.PI; plate.castShadow = true; plate.name = 'target-plate';
     const t = { lane: i + 1, range: TRAINING.RANGES[i], state: 'up', t: 0, hits: 0, fall: 1, pivot, plate, x: lx, z };
@@ -827,3 +835,4 @@ export function buildTrainingGround(T, opts = {}) {
     }
   };
 }
+     

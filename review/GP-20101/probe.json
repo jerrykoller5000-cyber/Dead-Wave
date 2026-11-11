@@ -1,0 +1,318 @@
+{
+  "contact": {
+    "spot": {
+      "x": -5,
+      "y": -200,
+      "z": -642.8
+    },
+    "solid": {
+      "minX": -5.32,
+      "maxX": -4.68,
+      "minY": -200,
+      "maxY": -198.21,
+      "minZ": -643.12,
+      "maxZ": -642.4799999999999,
+      "cx": -5,
+      "cz": -642.8,
+      "radius": 0.32,
+      "prop": true,
+      "dummy": true
+    },
+    "blades": [
+      {
+        "kind": "knife",
+        "state": {
+          "hits": 1,
+          "damage": 26,
+          "byKind": {
+            "knife": 1,
+            "machete": 0,
+            "katana": 0,
+            "chainsaw": 0,
+            "scorch": 0,
+            "bullet": 0
+          },
+          "markCount": 1,
+          "tiltX": 0,
+          "tiltZ": 0,
+          "twistY": 0,
+          "tiltRad": 0,
+          "angularSpeed": 1.8800000000000077
+        }
+      },
+      {
+        "kind": "machete",
+        "state": {
+          "hits": 2,
+          "damage": 95,
+          "byKind": {
+            "knife": 1,
+            "machete": 1,
+            "katana": 0,
+            "chainsaw": 0,
+            "scorch": 0,
+            "bullet": 0
+          },
+          "markCount": 2,
+          "tiltX": 0,
+          "tiltZ": 0,
+          "twistY": 0,
+          "tiltRad": 0,
+          "angularSpeed": 4.96000000000002
+        }
+      },
+      {
+        "kind": "katana",
+        "state": {
+          "hits": 3,
+          "damage": 335,
+          "byKind": {
+            "knife": 1,
+            "machete": 1,
+            "katana": 1,
+            "chainsaw": 0,
+            "scorch": 0,
+            "bullet": 0
+          },
+          "markCount": 3,
+          "tiltX": 0,
+          "tiltZ": 0,
+          "twistY": 0,
+          "tiltRad": 0,
+          "angularSpeed": 8.280000000000035
+        }
+      }
+    ],
+    "sawAttempts": [
+      {
+        "a": {
+          "x": -5,
+          "z": -641.75,
+          "yaw": 3.141592653589793
+        },
+        "blade": {
+          "ax": -5.026486835968927,
+          "ay": -198.57334320587694,
+          "az": -641.8798386632083,
+          "bx": -5.026486835968927,
+          "by": -198.20303723595399,
+          "bz": -642.1456093845705,
+          "r": 0.0441363013645216
+        },
+        "hits": 0
+      },
+      {
+        "a": {
+          "x": -5.2,
+          "z": -643.6999999999999,
+          "yaw": 0
+        },
+        "blade": {
+          "ax": -4.96399950507451,
+          "ay": -199.31106186950504,
+          "az": -643.4715921129193,
+          "bx": -4.926462347028381,
+          "by": -199.62915245137935,
+          "bz": -643.1472929744951,
+          "r": 0.0441363013645216
+        },
+        "hits": 0
+      }
+    ],
+    "saw": {
+      "hits": 3,
+      "damage": 335,
+      "byKind": {
+        "knife": 1,
+        "machete": 1,
+        "katana": 1,
+        "chainsaw": 0,
+        "scorch": 0,
+        "bullet": 0
+      },
+      "markCount": 3,
+      "tiltX": -0.00066725599061366,
+      "tiltZ": -8.171529131168898e-20,
+      "twistY": -2.5402469195984144e-19,
+      "tiltRad": 0.00066725599061366,
+      "angularSpeed": 0.9242694946931164
+    },
+    "bulletDone": true,
+    "bulletHit": true,
+    "after": {
+      "hits": 4,
+      "damage": 355,
+      "byKind": {
+        "knife": 1,
+        "machete": 1,
+        "katana": 1,
+        "chainsaw": 0,
+        "scorch": 0,
+        "bullet": 1
+      },
+      "markCount": 4,
+      "tiltX": -0.00066725599061366,
+      "tiltZ": -8.171529131168898e-20,
+      "twistY": -2.5402469195984144e-19,
+      "tiltRad": 0.00066725599061366,
+      "angularSpeed": 0.014381123802233442
+    },
+    "calls": [
+      {
+        "kind": "knife",
+        "point": {
+          "x": -5,
+          "y": -198.82,
+          "z": -642.6436527882929
+        },
+        "normal": {
+          "x": -0.00929137297069585,
+          "y": -0.2578322330915874,
+          "z": 0.9661450253286641
+        },
+        "result": {
+          "hit": true,
+          "kind": "knife",
+          "zone": "torso",
+          "markAdded": true,
+          "damage": 26,
+          "totalHits": 1,
+          "totalDamage": 26,
+          "point": {
+            "x": -5,
+            "y": -198.82,
+            "z": -642.6436527882929
+          },
+          "normal": {
+            "x": -0.00929137297069585,
+            "y": -0.2578322330915874,
+            "z": 0.9661450253286641
+          },
+          "tiltRad": 0
+        }
+      },
+      {
+        "kind": "machete",
+        "point": {
+          "x": -5,
+          "y": -198.82,
+          "z": -642.6436527882929
+        },
+        "normal": {
+          "x": -0.00929137297069585,
+          "y": -0.2578322330915874,
+          "z": 0.9661450253286641
+        },
+        "result": {
+          "hit": true,
+          "kind": "machete",
+          "zone": "torso",
+          "markAdded": true,
+          "damage": 69,
+          "totalHits": 2,
+          "totalDamage": 95,
+          "point": {
+            "x": -5,
+            "y": -198.82,
+            "z": -642.6436527882929
+          },
+          "normal": {
+            "x": -0.00929137297069585,
+            "y": -0.2578322330915874,
+            "z": 0.9661450253286641
+          },
+          "tiltRad": 0
+        }
+      },
+      {
+        "kind": "katana",
+        "point": {
+          "x": -5,
+          "y": -198.82,
+          "z": -642.6436527882929
+        },
+        "normal": {
+          "x": -0.00929137297069585,
+          "y": -0.2578322330915874,
+          "z": 0.9661450253286641
+        },
+        "result": {
+          "hit": true,
+          "kind": "katana",
+          "zone": "torso",
+          "markAdded": true,
+          "damage": 240,
+          "totalHits": 3,
+          "totalDamage": 335,
+          "point": {
+            "x": -5,
+            "y": -198.82,
+            "z": -642.6436527882929
+          },
+          "normal": {
+            "x": -0.00929137297069585,
+            "y": -0.2578322330915874,
+            "z": 0.9661450253286641
+          },
+          "tiltRad": 0
+        }
+      },
+      {
+        "kind": "bullet",
+        "point": {
+          "x": -5,
+          "y": -198.74999987823782,
+          "z": -642.6328253305765
+        },
+        "normal": {
+          "x": -0.02026243404948851,
+          "y": 0.005644880555134935,
+          "z": 0.9997787600714012
+        },
+        "result": {
+          "hit": true,
+          "kind": "bullet",
+          "zone": "torso",
+          "markAdded": true,
+          "damage": 20,
+          "totalHits": 4,
+          "totalDamage": 355,
+          "point": {
+            "x": -5,
+            "y": -198.74999987823782,
+            "z": -642.6328253305765
+          },
+          "normal": {
+            "x": -0.020262434049483448,
+            "y": 0.0056448805551314665,
+            "z": 0.9997787600714013
+          },
+          "tiltRad": 0.00066725599061366
+        }
+      }
+    ]
+  },
+  "counter": {
+    "before": "MELEE PRACTICEReset dummyHits: 4Damage: 355",
+    "visible": true,
+    "after": {
+      "hits": 0,
+      "damage": 0,
+      "byKind": {
+        "knife": 0,
+        "machete": 0,
+        "katana": 0,
+        "chainsaw": 0,
+        "scorch": 0,
+        "bullet": 0
+      },
+      "markCount": 0,
+      "tiltX": 0,
+      "tiltZ": 0,
+      "twistY": 0,
+      "tiltRad": 0,
+      "angularSpeed": 0
+    }
+  },
+  "errors": []
+}

@@ -1,0 +1,22 @@
+{
+  "fov": 48,
+  "handVertices": 6456,
+  "legacy": {
+    "near": 137,
+    "inside": 0,
+    "deep": 0,
+    "maxDepth": 0,
+    "closest": 0.0003335937187632591,
+    "pieces": 14,
+    "closed": true
+  },
+  "current": {
+    "near": 117,
+    "inside": 0,
+    "deep": 0,
+    "maxDepth": 0,
+    "closest": 0.0004484362550867393,
+    "pieces": 7,
+    "closed": true
+  }
+}

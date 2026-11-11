@@ -2,9 +2,9 @@
 
 state: active
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: CE-4 fresh session 15:16Z: CE-4's rest (J16): ladder hands on the rungs, the mortar, building and E; audit at the eye first (unarmed stays handless, D-157)
-touching: game/viewmodel.js (blades, grenade, hands motion, ladder), game/viewmodel-poses.js (VM_BLADES, VM_GRENADE, VM_HANDS, VM_TRIGGER)
-since: 2026-11-11T15:16Z
+task: CE-4 the HQ ladder (loan, CLAUDE DIRECTOR 15:58Z): climb with real frames, rungs along the wall, then its hands at the eye
+touching: index.html (HQ ladder: mesh, updateHqLadder, the climbingHq guards in the ground movement and vy), tools/tests/t154.js, game/viewmodel.js (blades, grenade, hands motion, ladder), game/viewmodel-poses.js (VM_BLADES, VM_GRENADE, VM_HANDS, VM_TRIGGER)
+since: 2026-11-11T15:58Z
 next: CE-2 (was CD-3) (was CL-336) J103, J110, J112, J114-J116, J119, J
 blocked-on: —
 last-report: handoffs/2026-11-11-claude5-CE-6.md

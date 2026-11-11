@@ -1,0 +1,14 @@
+Recomputed all 12 base models with the actual game, verified strict model fingerprints, both normal eye cameras, both sides near the firing-line barrier and both sides on confirmed clear floor. The rack is included where available. Open floor is the reachable spot five units behind the firing line. Each count is distinct pixels witnessed by both real capture and posed surface depth.
+1. Sniper pair 143 — 237 px (aim-entry).
+2. Pistol pair 0 — 229 px (barrier, held right).
+3. Wasp pair 10 — 227 px (clear floor, held right).
+4. Revolver pair 91 — 195 px (rack).
+5. Wasp pair 5 — 194 px (barrier, held right).
+6. Wasp pair 7 — 190 px (barrier, held right).
+7. Wasp pair 2 — 186 px (clear floor, held left).
+8. KR-7 pair 97 — 185 px (hip).
+9. Launcher pair 32 — 185 px (aimed).
+10. Sniper pair 225 — 179 px (clear floor, held left).
+11. Sniper pair 222 — 176 px (clear floor, held right).
+12. Launcher pair 33 — 175 px (hip).
+Evidence: review/GT-20076/visibility-fix-fleet-poses-final/top-12-crossings.jpg and ranked.json. The index in ranked.json identifies both artwork pieces. Known real intersections stay open. The first listed crossing follows the requested J138 handle-end touch-ups.

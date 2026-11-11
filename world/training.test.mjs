@@ -119,6 +119,40 @@ test('CL-144: the plates are twice the size, and a hit scores by its ring and th
   assert.equal(tg.onPlate(4, { x: t4.box.minX + 0.01, y: t4.box.maxY - 0.01, z: t4.box.minZ }), false, 'a corner of the box is not the plate');
 });
 
+test('GP-20102: target backing stays behind the plate and clear of its base through either fall', async () => {
+  const { onSilhouette, scoreZone } = await import('./training.js');
+  assert.equal(onSilhouette(128, 133), true, 'the drawn neck connects head to shoulders in the hit shape');
+  assert.deepEqual(scoreZone(128, 133), { zone: 'plate', points: TRAINING.SCORE.plate });
+  assert.equal(onSilhouette(99, 133), false, 'the neck does not fill the gap beside it');
+  const tg = buildTrainingGround(T);
+  const depth = m => m.geometry.parameters.depth ?? m.geometry.parameters[2];
+  const height = m => m.geometry.parameters.height ?? m.geometry.parameters[1];
+  for (const target of tg.targets) {
+    const parts = target.pivot.children.filter(m => m.name?.startsWith('target-backing-'));
+    assert.equal(parts.length, 5, `lane ${target.lane} has three uprights and two crossbars`);
+    for (const m of parts) {
+      assert.ok(m.position.z - depth(m) / 2 >= -1e-9, `lane ${target.lane} backing is on the rear (+z) of the plate`);
+    }
+    const rails = parts.filter(m => m.name === 'target-backing-side');
+    const bars = parts.filter(m => m.name === 'target-backing-crossbar');
+    assert.equal(rails.length, 2);
+    assert.equal(bars.length, 2);
+    assert.ok(Math.abs(bars[0].position.z - depth(bars[0]) / 2 -
+      (rails[0].position.z + depth(rails[0]) / 2)) < 1e-9, 'crossbars meet rear of uprights');
+    const stem = target.pivot.children.find(m => m.name === 'target-lower-stem');
+    assert.ok(stem, 'the backing has a lower connection to the plate foot');
+    for (const direction of [-1, 1]) for (let step = 0; step <= 29; step++) {
+      const angle = direction * 1.45 * step / 29;
+      for (const m of [...parts, stem]) {
+        const yMin = m.position.y - height(m) / 2, zMin = m.position.z - depth(m) / 2, zMax = m.position.z + depth(m) / 2;
+        const bottom = .24 + yMin * Math.cos(angle) - (angle >= 0 ? zMax : zMin) * Math.sin(angle);
+        assert.ok(bottom >= .24 - 1e-6, `lane ${target.lane} ${m.name} clears hazard base at ${angle.toFixed(3)} rad`);
+      }
+    }
+  }
+  tg.dispose();
+});
+
 test('CL-146: the door has a keypad each side, and nothing in the hangar touches the shared wall', () => {
   const tg = buildTrainingGround(T, { grid: 2 });
   const O = TRAINING.ORIGIN, B = TRAINING.BUILD, kp = tg.securityDoor.keypads;

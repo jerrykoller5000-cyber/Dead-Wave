@@ -1455,6 +1455,7 @@
     import { createZombieAbilityRuntime } from './game/zombie-ability-runtime.js';
     import { attachZombieAbilityVisuals, resetZombieAbilityVisuals, updateZombieAbilityVisuals } from './game/zombie-ability-visuals.js';
     import { createRangeFeature } from './ui/range-feature.js';   // GP-19901
+    import { createTrainingDummyExercise } from './game/training-dummy.js'; // GP-20101
     import { trainingFloorHit, traceTraining, createTrainingImpacts, createTrainingChar } from './world/training-ballistics.js';
     import { rangeGrenadeHit, bounceRangeGrenade } from './combat/training-grenades.js';
     import { mountTrainingPanel, mountTrainingHud } from './ui/training-panel.js';   // CL-115
@@ -64686,6 +64687,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if(rangeFeature||!training.tg)return;
       rangeFeature=createRangeFeature(THREE,training.tg,{
         owned:w=>!!weaponOwned[w],signature:rangeSignature,drillReady:true,
+        dummyState:()=>training.dummy?.state(),
+        resetDummy:()=>{training.dummy?.reset();AudioSys.trainingCue('reset');},
         context:()=>({position:localPlayer.position,camera:rangeEye(),weapon:currentWeapon,holstered:unarmed,reloading,loaded:ammoByWeapon[currentWeapon]||0,pairChanged:dualActive,paused:paused||shopOpen||cifOpen,alive:playerHp>0&&!training.wake&&!gameOver,inTraining:training.active,busy:!!vault||!!training.wake||!!training.deployment?.read()||trainingAlive()>0||mortarMounted||mortarCarried||onAnyLadder()||!grounded}),
         equip:(w,d=null)=>{
           const weapons=[...new Set(d?.weaponCycle||[w])];
@@ -64710,7 +64713,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const tg=training.tg;if(!tg)return false;
       const ignored=p.rangeTouched||(p.rangeTouched=new Set());let a={x:p.prev.x,y:p.prev.y,z:p.prev.z};const b={x:p.pos.x,y:p.pos.y,z:p.pos.z};
       for(let n=0;n<5;n++){
-        const hit=traceTraining(tg,a,b,{ignoreTargets:ignored});if(!hit)return false;
+        const hit=trainingTraceExact(tg,a,b,{ignoreTargets:ignored});if(!hit)return false;
+        if(hit.solid.dummy){trainingDummyHit('bullet',hit,p.damage||WEAPON_STATS[currentWeapon]?.damage||1,p.dir);p.hit=true;return true;}
         if(hit.solid.target==null){if(hit.solid.lockerDoor)tg.wear?.hitDoor?.(hit.point,{x:p.dir.x,z:p.dir.z});if(!hit.solid.securityDoor&&!hit.solid.metal)training.impacts?.add(hit);spawnEmbers(hit.point.x,hit.point.y,hit.point.z,5,.4);p.hit=true;return true;}
         const index=hit.solid.target;ignored.add(index);
         if(rangeFeature?.owns())rangeFeature.hit(index,hit.point,p.rangePacket,p.rangeEvent);
@@ -64819,6 +64823,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (!gameStarted) return;
       ensureTrainingUi();
       if (!training.tg) { training.tg = buildTrainingGround(THREE, { gridOffset: BUILD_GRID / 2, grid: BUILD_GRID, securityLabel: sayText('training.securityLabel'), labels: { noBuild: sayText('training.noBuildZone', {}, 'NO BUILD ZONE'), gate: sayText('training.gateTitle'), containment: sayText('training.gateDetail'), infirmary: sayText('training.infirmaryLabel'), medical: sayText('training.medicalLabel') } }); training.copies = trainingCopies(training.tg); }
+      if (!training.dummy) training.dummy = createTrainingDummyExercise(THREE, training.tg); // GP-20101
       if (!training.infirmary) training.infirmary = createTrainingInfirmary(training.tg); // GP-19882
       if (!training.armoryCollision && training.copies.armory) training.armoryCollision = createTrainingArmoryCollision(THREE, training.copies.armory.copy);
       if (!training.stationCollision) training.stationCollision = createTrainingStationCollision(THREE, training.tg, training.copies);
@@ -64887,6 +64892,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       camera.far = TRAINING.FAR; camera.updateProjectionMatrix();
       refreshArmoryRack(true);
       trainingHideWorld(true);   // CL-138: the valley leaves while he is in here
+      training.dummy.enter(scene); // GP-20101: scene root keeps AG-308's world-space hit/decal transforms exact
       // CU-192 (J33): the warm frame is drawn while the loop is stopped, so it keeps whatever light the
       // title had (morning, or night if the clock had run on). Put noon in before that frame, or the
       // blackout fades up on a dim room.
@@ -64950,6 +64956,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     function trainingWarmCompile() {
       const tg = training.tg;
       if (!tg || !renderer || typeof renderer.compileAsync !== 'function') return;
+      if (_trainingBgCancel) { try { _trainingBgCancel(); } catch (_) {} _trainingBgCancel = null; }
       ensureTrainingUi();
       const b = training.blackout; b.classList.add('on');
       camera.updateMatrixWorld(true);
@@ -64958,9 +64965,12 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       training.warming = true;
       training.bgWarming = false;
       let done = false;
-      let resolveWarmDone = null;
+      let resolveWarmDone = null, resolveBgDone = null;
       training.warmPromise = new Promise((res) => { resolveWarmDone = res; });
-      training.bgWarmPromise = Promise.resolve();
+      training.bgWarmPromise = new Promise((res) => { resolveBgDone = res; });
+
+      const AG309_WARM = typeof location !== 'undefined' && new URLSearchParams(location.search).get('ag309') === '1';
+      const activeWk = holsteredKey || currentWeapon || 'pistol';
 
       let origPPRender = null;
       const restorePPRender = () => {
@@ -64979,8 +64989,13 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           const m = mats[i];
           if (!m) return null;
           if (i) mKey += ',';
-          const prog = typeof m.customProgramCacheKey === 'function' ? m.customProgramCacheKey() : m.type;
-          mKey += prog + ':' + m.side + ':' + (m.transparent ? 1 : 0) + ':' + (m.depthWrite ? 1 : 0) + ':' + m.blending + ':' + (m.polygonOffset ? 1 : 0);
+          if (!AG309_WARM) {
+            mKey += m.uuid;
+          } else {
+            const custom = Object.hasOwn(m, 'customProgramCacheKey') ? m.customProgramCacheKey() : '';
+            const texFlags = (m.map ? 1 : 0) | (m.normalMap ? 2 : 0) | (m.roughnessMap ? 4 : 0) | (m.metalnessMap ? 8 : 0) | (m.aoMap ? 16 : 0) | (m.alphaMap ? 32 : 0) | (m.emissiveMap ? 64 : 0);
+            mKey += m.type + ':' + custom + ':' + texFlags + ':' + m.side + ':' + (m.transparent ? 1 : 0) + ':' + (m.depthWrite ? 1 : 0) + ':' + (m.depthTest ? 1 : 0) + ':' + m.blending + ':' + (m.polygonOffset ? 1 : 0) + ':' + (m.vertexColors ? 1 : 0);
+          }
         }
         const attrObj = g.attributes;
         if (!attrObj) return null;
@@ -64997,6 +65012,101 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         return o.type + '/' + (o.castShadow ? 1 : 0) + '/' + (o.receiveShadow ? 1 : 0) + '/' + o.layers.mask + '/' + (g.index ? 1 : 0) + '/' + morphN + '/' + grps + '/' + mKey + '/' + attrs;
       };
 
+      const startTrainingBgWarm = () => {
+        if (!training.active || INSPECT || window.DWInspect || window.DWInspectHost) {
+          if (resolveBgDone) { resolveBgDone(); resolveBgDone = null; }
+          return;
+        }
+        training.bgWarming = true;
+        let cancelled = false, timerId = 0, activeVmCleanup = null;
+        const finishBg = () => {
+          if (cancelled) return;
+          cancelled = true;
+          if (timerId) { clearTimeout(timerId); timerId = 0; }
+          if (activeVmCleanup) { try { activeVmCleanup.cleanup(); } catch (_) {} activeVmCleanup = null; }
+          training.bgWarming = false;
+          if (_trainingBgCancel === finishBg) _trainingBgCancel = null;
+          if (resolveBgDone) { resolveBgDone(); resolveBgDone = null; }
+        };
+        _trainingBgCancel = finishBg;
+
+        const priority = ['m4', 'revolver', 'shotgun', 'ak', 'uzi', 'sniper', 'aa12', 'launcher', 'flamer', 'minigun', 'chainsaw'];
+        const queue = [];
+        for (const k of priority) if (k !== activeWk && WEAPON_ORDER.includes(k) && !queue.includes(k)) queue.push(k);
+        for (const k of WEAPON_ORDER) if (k !== activeWk && !queue.includes(k)) queue.push(k);
+
+        const stepSlice = async () => {
+          timerId = 0;
+          if (cancelled || !training.active || training.warming || INSPECT || window.DWInspect || window.DWInspectHost) {
+            finishBg();
+            return;
+          }
+          if (activeVmCleanup) {
+            try { activeVmCleanup.cleanup(); } catch (_) {}
+            activeVmCleanup = null;
+          }
+          if (!queue.length) {
+            finishBg();
+            return;
+          }
+          const nextKey = queue.shift();
+          const proxyGroup = new THREE.Group();
+          proxyGroup.name = 'bg-warm-' + nextKey;
+
+          if (ensureViewmodel() && typeof viewmodel.warmBgGun === 'function') {
+            activeVmCleanup = viewmodel.warmBgGun(nextKey);
+            if (activeVmCleanup && activeVmCleanup.meshes) {
+              for (let i = 0; i < activeVmCleanup.meshes.length; i++) {
+                const m = activeVmCleanup.meshes[i];
+                if (m && m.geometry && m.material) {
+                  const km = new THREE.Mesh(m.geometry, m.material);
+                  km.castShadow = m.castShadow;
+                  km.receiveShadow = m.receiveShadow;
+                  km.layers.mask = m.layers.mask;
+                  km.frustumCulled = false;
+                  proxyGroup.add(km);
+                }
+              }
+            }
+          }
+
+          const addCarryKeepers = (rootObj) => {
+            if (!rootObj) return;
+            rootObj.traverse((o) => {
+              if ((o.isMesh || o.isLine || o.isPoints || o.isSprite) && o.geometry && o.material) {
+                const km = new THREE.Mesh(o.geometry, o.material);
+                km.castShadow = o.castShadow;
+                km.receiveShadow = o.receiveShadow;
+                km.layers.mask = o.layers.mask;
+                km.frustumCulled = false;
+                proxyGroup.add(km);
+              }
+            });
+          };
+          addCarryKeepers(weaponMeshes[nextKey]);
+          if (offhandMeshes && offhandMeshes[nextKey]) addCarryKeepers(offhandMeshes[nextKey]);
+
+          try {
+            if (proxyGroup.children.length > 0) {
+              await compileForLiveTarget(proxyGroup);
+            }
+          } catch (_) {}
+          finally {
+            if (activeVmCleanup) {
+              try { activeVmCleanup.cleanup(); } catch (_) {}
+              activeVmCleanup = null;
+            }
+            while (proxyGroup.children.length) proxyGroup.remove(proxyGroup.children[proxyGroup.children.length - 1]);
+          }
+
+          if (!cancelled) {
+            timerId = setTimeout(stepSlice, 16);
+          }
+        };
+
+        timerId = setTimeout(stepSlice, 16);
+      };
+
       const finish = () => {
         if (done) return;
         done = true;
@@ -65006,6 +65116,12 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         renderer.setAnimationLoop(tick);
         if (!training.wake) b.classList.remove('on');
         if (resolveWarmDone) { resolveWarmDone(); resolveWarmDone = null; }
+        if (AG309_WARM) {
+          startTrainingBgWarm();
+        } else if (resolveBgDone) {
+          resolveBgDone();
+          resolveBgDone = null;
+        }
       };
 
       // AG-304: Single parallel compileAsync pass over all unique pipeline signatures (~180-220 unique shaders instead of ~1,800
@@ -65034,7 +65150,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           cutawayKeepers.name = 'training-cutaway-warm-keepers';
           cutawayKeepers.position.set(0, 0, 0);
 
-          let restoreImpacts = null, restoreChar = null, restoreWreck = null, restoreFlame = null;
+          let restoreImpacts = null, restoreChar = null, restoreWreck = null, restoreFlame = null, restoreDummy = null;
           let restoreCutaway = null, restoreMarineFade = null, restorePerimeter = null, restoreContainment = null;
           let vmWarm = null;
           const emptyInst = [], warmVis = [], seenVis = new Set(), dedupVis = [];
@@ -65046,7 +65162,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
             restoreFlame = prepareFlameWarmup();
             syncRigSkins();
 
-            vmWarm = ensureViewmodel() && typeof viewmodel.prepareWarmup === 'function' ? viewmodel.prepareWarmup(WEAPON_ORDER) : null;
+            vmWarm = ensureViewmodel() && typeof viewmodel.prepareWarmup === 'function' ? (AG309_WARM ? viewmodel.prepareWarmup([activeWk]) : viewmodel.prepareWarmup()) : null;
             updateCarriedGear(0, true);
 
             const showWarm = (o) => {
@@ -65062,9 +65178,14 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
               rootObj.traverse((o) => showWarm(o));
             };
 
-            for (const k of WEAPON_ORDER) {
-              showWarmTree(weaponMeshes[k]);
-              showWarmTree(offhandMeshes && offhandMeshes[k]);
+            if (AG309_WARM) {
+              showWarmTree(weaponMeshes[activeWk]);
+              if (offhandMeshes && offhandMeshes[activeWk]) showWarmTree(offhandMeshes[activeWk]);
+            } else {
+              for (const wk of WEAPON_ORDER) {
+                showWarmTree(weaponMeshes[wk]);
+                if (offhandMeshes && offhandMeshes[wk]) showWarmTree(offhandMeshes[wk]);
+              }
             }
             showWarmTree(knife);
             showWarmTree(grenadeHand);
@@ -65101,7 +65222,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
             try { restoreCutaway = tg.cutaway?.prepareWarmup?.() || null; } catch (_) {}
             try { restorePerimeter = training.perimeter?.prepareWarmup?.() || null; } catch (_) {}
             try { restoreContainment = training.containment?.prepareWarmup?.() || null; } catch (_) {}
-            try { restoreMarineFade = trainingMarineFade?.prepareWarmup?.() || null; } catch (_) {}
+            try { restoreMarineFade = trainingMarineFade?.prepareWarmup?.(viewFirst, AG309_WARM) || null; } catch (_) {}
+            try { restoreDummy = training.dummy?.prepareWarmup?.() || null; } catch (_) {}
 
             if (cullStats.hidden) { cullShowAll(); cullStats.hidden = 0; }
             updateLightPool();
@@ -65137,6 +65259,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
             try { restorePerimeter?.(); } catch (_) {}
             try { restoreContainment?.(); } catch (_) {}
             try { restoreMarineFade?.(); } catch (_) {}
+            try { restoreDummy?.(); } catch (_) {}
             restoreImpacts?.();
             restoreChar?.();
             restoreWreck?.();
@@ -65178,6 +65301,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       setTimeout(finish, 15000);   // CL-118: a last resort only
     }
     function leaveTraining() {
+      if (_trainingBgCancel) { try { _trainingBgCancel(); } catch (_) {} _trainingBgCancel = null; }
       rangeFeature?.dispose();rangeFeature=null;rangeShotPacket=null;
       resetTargetFlameHeat();
       clearSpiderWebs();
@@ -65189,6 +65313,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       clearTrainingHazards();
       training.char?.clear();
       training.wreck?.clear();   // CB-250
+      training.dummy?.leave();   // GP-20101: leave the practice prop and its counter ready for the next visit
       training.infirmaryFence?.reset();
       bankTrainingScore();   // CL-144
       resetJump(jumpFeel); vaultSpaceWas = false;
@@ -65492,6 +65617,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (station?.moved) { p.x = station.x; p.z = station.z; if (station.blockX) velX = 0; if (station.blockZ) velZ = 0; }
       const rangeConsole = rangeFeature?.constrain(p, playerFrameStart, PLAYER_RADIUS);
       if (rangeConsole?.moved) { p.x = rangeConsole.x; p.z = rangeConsole.z; if (rangeConsole.blockX) velX = 0; if (rangeConsole.blockZ) velZ = 0; }
+      if (training.dummy?.pushOut(p, PLAYER_RADIUS)) { velX = 0; velZ = 0; }
       const ko = tg.keepOut?.(p, PLAYER_RADIUS); if (ko?.moved) { p.x = ko.x; p.z = ko.z; }   // GB-161: the locker bank (and he bumps its door)
       // GP-19882: scripted collapse/bed poses deliberately enter the furniture.
       const medical = !training.wake && training.infirmary?.constrain(p, playerFrameStart, PLAYER_RADIUS);
@@ -65507,6 +65633,16 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // usual pass has it). A target that is down lets it by.
     const _trA = { x: 0, y: 0, z: 0 }, _trB = { x: 0, y: 0, z: 0 };
     const _trainingAimEnd = new THREE.Vector3();
+    // The dummy's solid is a broad-phase prop box. A round, reticle or laser
+    // must use its moving surface; a graze past the box can continue to the wall.
+    function trainingTraceExact(tg, a, b, opts) {
+      const broad = traceTraining(tg, a, b, opts);
+      if (!broad?.solid?.dummy || !training.dummy) return broad;
+      const exact = training.dummy.trace(a, b);
+      const other = traceTraining({ ...tg, solids: tg.solids.filter(s => !s.dummy) }, a, b, opts);
+      if (!exact) return other;
+      return other && other.t < exact.t ? other : exact;
+    }
     // GP-169: bullets, blades and blasts share the same score, hinge and feedback.
     // CL-144 (Jerry, 2026-10-10: "a scoring system based on hits"): a round scores by the ring it lands in (head ring 10,
     // chest bullseye 10, chest ring 5, the rest of the silhouette 2) times the lane (x1 at 8 m to x3 at 25 m); a blade or
@@ -65555,6 +65691,21 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           if (bl && hit.point && typeof spawnSawSparks === 'function') spawnSawSparks(hit.point.x, hit.point.y, hit.point.z, fx, fz, 16, 2.2);
         }
       }
+      if (hits < limit && training.dummy) {
+        const kind = bl ? 'chainsaw' : katanaOwned ? 'katana' : macheteOwned ? 'machete' : 'knife';
+        // The saw uses its actual moving chain segment. A hand blade must reach
+        // the sculpted surface along the aim, not just enter the old broad cone.
+        const handReach = kind === 'katana' ? 1.75 : kind === 'machete' ? 1.4 : 1.15;
+        const from = bl ? {x:bl.ax,y:bl.ay,z:bl.az} : {x:p.x,y:p.y+1.18,z:p.z};
+        const to = bl ? {x:bl.bx,y:bl.by,z:bl.bz} : {x:p.x+fx*Math.min(reach,handReach),y:p.y+1.18,z:p.z+fz*Math.min(reach,handReach)};
+        const contact = training.dummy.trace(from,to,bl?.r||0.035);
+        const blocked = contact && trainingTraceExact(training.tg,{x:p.x,y:p.y+1.18,z:p.z},contact.point);
+        if (contact && (!blocked || blocked.solid.dummy || blocked.t >= .99)) {
+          trainingDummyHit(kind,contact,bl ? WEAPON_STATS.chainsaw.damage : bladeStats().dmg,{x:fx,y:0,z:fz});
+          if (bl) { sawBiteT=.3; spawnSawSparks(contact.point.x,contact.point.y,contact.point.z,fx,fz,10,1.3); }
+          hits++;
+        }
+      }
       if (bl) {
         const cut = training.tg.wear?.cutDoor?.({ x:(bl.ax+bl.bx)/2, z:(bl.az+bl.bz)/2 }, { x:fx, z:fz }, Math.hypot(bl.bx-bl.ax, bl.bz-bl.az)/2 + bl.r);
         if (cut && typeof spawnSawSparks === 'function') spawnSawSparks((bl.ax+bl.bx)/2, p.y + 0.9, (bl.az+bl.bz)/2, fx, fz, 14, 2.0);
@@ -65562,12 +65713,20 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       else training.tg.wear?.cutDoor?.({ x:p.x, z:p.z }, { x:fx, z:fz }, reach);   // GB-161: a blade sets the dented locker door swinging
       return hits;
     }
+    function trainingDummyHit(kind, hit, damage, direction) {
+      const contact = training.dummy?.strike({kind,point:hit.point,normal:hit.normal,direction,damage});
+      if (!contact) return null;
+      const sa = sndAt(contact.point.x, contact.point.z, 35);
+      AudioSys.bulletImpact('wood', Math.max(.2, sa.v * .8), sa.pan); // impactful pad thud, spatialized at contact
+      publishUI('training-dummy', {hits:contact.totalHits,damage:contact.totalDamage,kind:contact.kind});
+      return contact;
+    }
     function trainingRound(p) {
       if(rangeFeature?.owns()||p.rangePacket){const done=rangeRound(p);if(done!=null)return done;}
       const tg = training.tg;
       if (!tg) return false;
       _trA.x = p.prev.x; _trA.y = p.prev.y; _trA.z = p.prev.z; _trB.x = p.pos.x; _trB.y = p.pos.y; _trB.z = p.pos.z;
-      const hit = traceTraining(tg, _trA, _trB);
+      const hit = trainingTraceExact(tg, _trA, _trB);
       if (!hit) return false;
       const best = hit.solid, bt = hit.t;
       for (const z of zombies) {
@@ -65578,8 +65737,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       }
       const hx = _trA.x + (_trB.x - _trA.x) * bt, hy = _trA.y + (_trB.y - _trA.y) * bt, hz = _trA.z + (_trB.z - _trA.z) * bt;
       if (best.lockerDoor) tg.wear?.hitDoor?.({ x:hx, y:hy, z:hz }, { x:_trB.x-_trA.x, z:_trB.z-_trA.z });   // GB-161: a round swings it
-      if (!best.securityDoor && !best.metal) training.impacts?.add(hit);   // GB-163: no holes in the steel lockers   // a moving shutter must not leave marks floating in its opening
-      if (best.target != null) {
+      if (!best.dummy && !best.securityDoor && !best.metal) training.impacts?.add(hit);   // GP-20101: AG-308 owns its moving-surface holes
+      if (best.dummy) {
+        trainingDummyHit('bullet',hit,p.damage||WEAPON_STATS[currentWeapon]?.damage||1,{x:_trB.x-_trA.x,y:_trB.y-_trA.y,z:_trB.z-_trA.z});
+      } else if (best.target != null) {
         trainingHitTarget(best.target, { x:hx, y:hy, z:hz }, true, _trA.z);
       } else if (best.metal) { spawnEmbers(hx, hy, hz, 9, .45); AudioSys.trainingCue('impact'); }   // GB-163: steel sparks
       else { spawnDust(hx, hy, hz, 2); AudioSys.trainingCue('impact'); }
@@ -65729,6 +65890,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const rising = tg.targets.some(t=>t.state==='rising');
       const falling = tg.targets.map(t=>t.state==='falling');   // CL-161
       tg.update(rangeFeature?.owns()&&(paused||shopOpen||cifOpen)?0:dt);
+      training.dummy?.update(paused || shopOpen || cifOpen ? 0 : dt);
       rangeFeature?.tick(dt);
       { const fp = viewFirst && OTS.on;   // CL-324 (J90): no wall fade in first person (a third-person camera's feature)
         tg.cutaway?.update(camera.position, fp ? _noCutaway : localPlayer.position, dt);

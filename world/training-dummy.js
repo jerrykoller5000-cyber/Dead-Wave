@@ -120,7 +120,7 @@ function evalDummyBodySurface(worldY, theta, out) {
 }
 
 function buildSculptedTorsoGeometry(THREE, hingeY) {
-  const radialSegs = 40;
+  const radialSegs = 32;
   const yRings = [
     0.820, 0.826, 0.836, 0.855, 0.885, 0.925, 0.970, 1.020, 1.075,
     1.130, 1.185, 1.240, 1.290, 1.335, 1.375, 1.410, 1.442, 1.472,
@@ -894,10 +894,10 @@ export function buildTrainingDummy(THREE, opts = {}) {
   // Lower steel spring cup + central internal steel damper rod + heavy coil spring
   addPart(baseGroup, tGeo(new THREE.CylinderGeometry(0.076, 0.086, 0.036, 18)), steelMat, 0, 0.176, 0);
   addPart(baseGroup, tGeo(new THREE.CylinderGeometry(0.031, 0.031, 0.185, 14)), steelMat, 0, 0.265, 0);
-  addPart(baseGroup, tGeo(new THREE.TorusGeometry(0.068, 0.013, 8, 20)), rubberMat, 0, 0.194, 0, Math.PI / 2, 0, 0);
-  addPart(baseGroup, tGeo(new THREE.TorusGeometry(0.066, 0.012, 8, 20)), rubberMat, 0, 0.340, 0, Math.PI / 2, 0, 0);
+  addPart(baseGroup, tGeo(new THREE.TorusGeometry(0.068, 0.013, 7, 16)), rubberMat, 0, 0.194, 0, Math.PI / 2, 0, 0);
+  addPart(baseGroup, tGeo(new THREE.TorusGeometry(0.066, 0.012, 7, 16)), rubberMat, 0, 0.340, 0, Math.PI / 2, 0, 0);
 
-  const coilGeo = tGeo(new THREE.TorusGeometry(0.057, 0.0135, 9, 20));
+  const coilGeo = tGeo(new THREE.TorusGeometry(0.057, 0.0135, 7, 16));
   for (let i = 0; i < 5; i++) {
     const cy = 0.212 + i * 0.0285;
     addPart(baseGroup, coilGeo, steelMat, 0, cy, 0, Math.PI / 2 + 0.09, i * 0.7, 0);

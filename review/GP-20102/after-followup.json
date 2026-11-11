@@ -1,0 +1,92 @@
+[
+  {
+    "name": "close-lane-1",
+    "lane": 1,
+    "angle": 0,
+    "camera": [
+      6,
+      -198.45,
+      -636.5
+    ]
+  },
+  {
+    "name": "close-lane-2",
+    "lane": 2,
+    "angle": 0,
+    "camera": [
+      3,
+      -198.45,
+      -632.5
+    ]
+  },
+  {
+    "name": "close-lane-3",
+    "lane": 3,
+    "angle": 0,
+    "camera": [
+      0,
+      -198.45,
+      -628.5
+    ]
+  },
+  {
+    "name": "close-lane-4",
+    "lane": 4,
+    "angle": 0,
+    "camera": [
+      -3,
+      -198.45,
+      -624.5
+    ]
+  },
+  {
+    "name": "close-lane-5",
+    "lane": 5,
+    "angle": 0,
+    "camera": [
+      -6,
+      -198.45,
+      -619.5
+    ]
+  },
+  {
+    "name": "clear-side-up",
+    "lane": 3,
+    "angle": 0,
+    "camera": [
+      3.5,
+      -197.5,
+      -625.2
+    ]
+  },
+  {
+    "name": "clear-side-downrange",
+    "lane": 3,
+    "angle": 1.45,
+    "camera": [
+      3.5,
+      -197.5,
+      -625.2
+    ]
+  },
+  {
+    "name": "clear-side-toward-line",
+    "lane": 3,
+    "angle": -1.45,
+    "camera": [
+      3.5,
+      -197.5,
+      -625.2
+    ]
+  },
+  {
+    "name": "far-all",
+    "lane": 3,
+    "angle": 0,
+    "camera": [
+      0,
+      -198.1,
+      -633
+    ]
+  }
+]

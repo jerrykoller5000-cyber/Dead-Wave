@@ -1,0 +1,152 @@
+[
+  {
+    "name": "front-noon",
+    "time": 0.5,
+    "fall": 0,
+    "angle": 0,
+    "camera": [
+      0,
+      -198.1,
+      -633
+    ],
+    "target": [
+      0,
+      16
+    ]
+  },
+  {
+    "name": "front-overcast",
+    "time": 0.43,
+    "fall": 0,
+    "angle": 0,
+    "camera": [
+      0,
+      -198.1,
+      -633
+    ],
+    "target": [
+      0,
+      16
+    ]
+  },
+  {
+    "name": "front-dusk",
+    "time": 0.74,
+    "fall": 0,
+    "angle": 0,
+    "camera": [
+      0,
+      -198.1,
+      -633
+    ],
+    "target": [
+      0,
+      16
+    ]
+  },
+  {
+    "name": "front-night",
+    "time": 0.02,
+    "fall": 0,
+    "angle": 0,
+    "camera": [
+      0,
+      -198.1,
+      -633
+    ],
+    "target": [
+      0,
+      16
+    ]
+  },
+  {
+    "name": "side-up",
+    "time": 0.5,
+    "fall": 0,
+    "angle": 0,
+    "camera": [
+      2.2,
+      -198.1,
+      -624
+    ],
+    "target": [
+      0,
+      16
+    ]
+  },
+  {
+    "name": "side-downrange",
+    "time": 0.5,
+    "fall": 1,
+    "angle": 1.45,
+    "camera": [
+      2.2,
+      -198.1,
+      -624
+    ],
+    "target": [
+      0,
+      16
+    ]
+  },
+  {
+    "name": "side-toward-line",
+    "time": 0.5,
+    "fall": -1,
+    "angle": -1.45,
+    "camera": [
+      2.2,
+      -198.1,
+      -624
+    ],
+    "target": [
+      0,
+      16
+    ]
+  },
+  {
+    "name": "rear-three-up",
+    "time": 0.5,
+    "fall": 0,
+    "angle": 0,
+    "camera": [
+      2.4,
+      -197.9,
+      -621.5
+    ],
+    "target": [
+      0,
+      16
+    ]
+  },
+  {
+    "name": "rear-three-downrange",
+    "time": 0.5,
+    "fall": 1,
+    "angle": 1.45,
+    "camera": [
+      4,
+      -196.7,
+      -618.5
+    ],
+    "target": [
+      0,
+      16
+    ]
+  },
+  {
+    "name": "rear-three-toward-line",
+    "time": 0.5,
+    "fall": -1,
+    "angle": -1.45,
+    "camera": [
+      4,
+      -196.7,
+      -618.5
+    ],
+    "target": [
+      0,
+      16
+    ]
+  }
+]

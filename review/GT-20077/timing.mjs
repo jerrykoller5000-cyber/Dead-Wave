@@ -1,15 +1,25 @@
 import assert from 'node:assert/strict';
 import {setTimeout as wait} from 'node:timers/promises';
 import {fileURLToPath} from 'node:url';
+import {readFile} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
 import {serve} from '../../tools/serve.mjs';
 import {launch} from '../../tools/cdp.mjs';
 import {save} from '../GT-20076/save.mjs';
 
 const [id,phase='baseline']=process.argv.slice(2);
 const compareSaw=id==='chainsaw' && ['compare-before','compare-after'].includes(phase);
+const handleVersion=id==='chainsaw' && /^saw-(legacy|panels|fitted)-[12]$/.exec(phase)?.[1];
 const compareKr=id==='ak' && /^(original|current)-kr-[12]$/.test(phase);
-assert(compareKr || compareSaw || ['baseline','revised','rework','action','ag294','j128'].includes(phase));
+assert(handleVersion || compareKr || compareSaw || ['baseline','revised','rework','action','ag294','j128'].includes(phase));
 assert(process.env.DW_GAME_TEST_TOKEN && /^[a-z0-9-]+$/.test(id));
+async function runtimeSignature(){
+  const files=['index.html','game/viewmodel.js','game/viewmodel-poses.js','game/training-camera-collision.js','studio/weapon-heavy.js','studio/weapon-longarms.js'];
+  const hash=createHash('sha256');
+  for(const file of files)hash.update(await readFile(new URL('../../'+file,import.meta.url)));
+  return hash.digest('hex');
+}
+const runSignature=handleVersion?await runtimeSignature():null;
 const server=await serve(fileURLToPath(new URL('../../',import.meta.url)),0);
 const browser=await launch({headless:false});
 try {
@@ -23,6 +33,11 @@ try {
   if(compareKr){
     const {prepareKrComparison}=await import('../GT-20076/kr-timing-control.mjs');
     verifyKr=await prepareKrComparison(page,server.origin,phase.startsWith('original'));
+  }
+  let verifyHandle;
+  if(handleVersion){
+    const {prepareHandleTiming}=await import('../GT-20083/original-handle.mjs');
+    verifyHandle=await prepareHandleTiming(page,server.origin,handleVersion);
   }
   const start=Date.now();
   await page.goto(server.origin+'/index.html?debug=1',{waitUntil:'none'});
@@ -56,8 +71,13 @@ try {
   const result={weapon:id,readyMs,fps:mean('fps'),low:mean('low'),samples};
   assert(result.fps>0 && result.low>0);
   if(verifyKr) result.artworkFingerprint=await verifyKr();
+  if(verifyHandle){
+    result.artworkFingerprint=await verifyHandle();
+    result.runtimeBefore=runSignature;result.runtimeAfter=await runtimeSignature();
+  }
   let path='./'+id+'/'+(phase==='baseline'?'timing.json':'timing-'+phase+'.json');
   if (phase==='ag294') path='./ag294-retakes/timing-'+id+'.json';
+  if (handleVersion) path='../GT-20083/timing-'+phase+'.json';
   if (phase==='j128') path='../GT-20076/visible-repairs/'+id+'/timing.json';
   await save(new URL(path,import.meta.url),JSON.stringify(result,null,2));
   if(verifyBaseline)verifyBaseline();

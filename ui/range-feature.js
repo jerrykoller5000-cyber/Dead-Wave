@@ -36,7 +36,7 @@ export function createRangeFeature(T,tg,env){
  }
  function exit(){session.reset();pending=null;entry=null;ui.close();env.pause(false);env.stop();ui.update(session.snapshot());}
  function open(){if(session.running())session.abort('cancel');session.reset();pending=null;entry=null;env.stop();env.pause(true);ui.open();env.cue('open');}
- ui=mountRangeConsole({owned:env.owned,signature:(w,d)=>d?signature(d):env.signature(w),records,start,exit,cancel:()=>session.abort('cancel')});
+ ui=mountRangeConsole({owned:env.owned,signature:(w,d)=>d?signature(d):env.signature(w),records,start,exit,cancel:()=>session.abort('cancel'),dummyState:env.dummyState,resetDummy:env.resetDummy});
  return {
   open,start,exit,isOpen:()=>ui.isOpen(),owns:session.owns,ruled:session.ruled,
   burn(index,{igniteS,burnS}={}){

@@ -1,0 +1,226 @@
+{
+  "spot": {
+    "x": -5,
+    "y": -200,
+    "z": -642.8
+  },
+  "tries": [
+    {
+      "first": false,
+      "active": false,
+      "fp": {
+        "first": false,
+        "w": 0,
+        "ads": 0,
+        "headHidden": false,
+        "armHidden": false,
+        "eye": null,
+        "sight": {
+          "pos": {
+            "x": -4.882272618106379,
+            "y": -198.7212428561153,
+            "z": -643.8498292727304
+          },
+          "fwd": {
+            "x": 3.3306690738755396e-16,
+            "y": 0.9553643355407518,
+            "z": 0.2954301717441495
+          }
+        }
+      },
+      "vm": true,
+      "vmShow": false,
+      "flags": {
+        "fireHeld": false,
+        "mouseFireHeld": true,
+        "unarmed": false,
+        "placeMode": null,
+        "buildMode": false,
+        "blocked": false,
+        "reloading": false,
+        "fireCooldown": 0,
+        "dualActive": false,
+        "akimbo": false
+      },
+      "side": -1,
+      "pitch": 0,
+      "dx": 0,
+      "blade": {
+        "ax": -4.882272618106379,
+        "ay": -198.51951166870217,
+        "az": -643.5900541809999,
+        "bx": -4.882272618106379,
+        "by": -198.08404932338286,
+        "bz": -643.455394857138,
+        "r": 0.04413630136452174
+      },
+      "direct": null,
+      "hits": 0
+    },
+    {
+      "first": false,
+      "active": false,
+      "fp": {
+        "first": false,
+        "w": 0,
+        "ads": 0,
+        "headHidden": false,
+        "armHidden": false,
+        "eye": null,
+        "sight": {
+          "pos": {
+            "x": -5.119838323974204,
+            "y": -198.74812631465534,
+            "z": -641.7518047240956
+          },
+          "fwd": {
+            "x": 2.220446049250332e-16,
+            "y": 0.9556135118777549,
+            "z": -0.29462317613633865
+          }
+        }
+      },
+      "vm": true,
+      "vmShow": false,
+      "flags": {
+        "fireHeld": false,
+        "mouseFireHeld": true,
+        "unarmed": false,
+        "placeMode": null,
+        "buildMode": false,
+        "blocked": false,
+        "reloading": false,
+        "fireCooldown": 0,
+        "dualActive": false,
+        "akimbo": false
+      },
+      "side": 1,
+      "pitch": 0,
+      "dx": 0,
+      "blade": {
+        "ax": -5.119838323974204,
+        "ay": -198.54617579599983,
+        "az": -642.0114093432252,
+        "bx": -5.119838323974204,
+        "by": -198.11059987420703,
+        "bz": -642.1457008323388,
+        "r": 0.04413630136452223
+      },
+      "direct": null,
+      "hits": 0
+    },
+    {
+      "first": true,
+      "active": true,
+      "fp": {
+        "first": true,
+        "w": 0.8333734169744564,
+        "ads": 0,
+        "headHidden": true,
+        "armHidden": false,
+        "eye": {
+          "x": -5.0025411605982235,
+          "y": -198.57744520752087,
+          "z": -643.4366935675704
+        },
+        "sight": {
+          "pos": {
+            "x": -4.920590710989658,
+            "y": -198.58444079099743,
+            "z": -643.1790220520181
+          },
+          "fwd": {
+            "x": -1.3877787807814666e-16,
+            "y": -0.07974522228289009,
+            "z": 0.996815278536125
+          }
+        }
+      },
+      "vm": true,
+      "vmShow": true,
+      "flags": {
+        "fireHeld": true,
+        "mouseFireHeld": true,
+        "unarmed": false,
+        "placeMode": null,
+        "buildMode": false,
+        "blocked": false,
+        "reloading": false,
+        "fireCooldown": 0.023999999999999994,
+        "dualActive": false,
+        "akimbo": false
+      },
+      "side": -1,
+      "pitch": 0,
+      "dx": 0,
+      "blade": {
+        "ax": -5.084508205317868,
+        "ay": -198.18587880712948,
+        "az": -643.209705783772,
+        "bx": -4.713417333089233,
+        "by": -197.96067764603447,
+        "bz": -642.8992983193575,
+        "r": 0.05294900329847345
+      },
+      "direct": null,
+      "hits": 2
+    },
+    {
+      "first": true,
+      "active": true,
+      "fp": {
+        "first": true,
+        "w": 0.9722355818292316,
+        "ads": 0,
+        "headHidden": true,
+        "armHidden": false,
+        "eye": {
+          "x": -4.998836517682983,
+          "y": -198.57774471591358,
+          "z": -642.1638721374903
+        },
+        "sight": {
+          "pos": {
+            "x": -5.078603044473726,
+            "y": -198.54598702572477,
+            "z": -642.4087805464371
+          },
+          "fwd": {
+            "x": 2.584737979205469e-16,
+            "y": -0.07974522228288995,
+            "z": -0.9968152785361251
+          }
+        }
+      },
+      "vm": true,
+      "vmShow": true,
+      "flags": {
+        "fireHeld": true,
+        "mouseFireHeld": true,
+        "unarmed": false,
+        "placeMode": null,
+        "buildMode": false,
+        "blocked": false,
+        "reloading": false,
+        "fireCooldown": 0.104,
+        "dualActive": false,
+        "akimbo": false
+      },
+      "side": 1,
+      "pitch": 0,
+      "dx": 0,
+      "blade": {
+        "ax": -4.916658718135213,
+        "ay": -198.78298849761467,
+        "az": -643.0350928628679,
+        "bx": -5.2877224575435875,
+        "by": -198.5518427386922,
+        "bz": -643.3418908487986,
+        "r": 0.05287281447169642
+      },
+      "direct": null,
+      "hits": 0
+    }
+  ],
+  "errors": []
+}
