@@ -7,7 +7,7 @@ import {launch} from '../../tools/cdp.mjs';
 
 if(!process.env.DW_GAME_TEST_TOKEN)throw Error('Use crew game-test slot');
 const root=path.resolve(fileURLToPath(new URL('../..',import.meta.url)));
-const out=path.join(root,'review/CB-305');
+const out=path.join(root,'review/GP-20093');
 const server=await serve(root,0),browser=await launch({headless:false,args:['--window-size=1280,720']});
 const rows=[];
 try{
@@ -26,15 +26,15 @@ try{
       const T=TT,t=T.trainingDbg.state(),s=t.tg.stations[spot]||null,p=T.player.position;
       const x=spot==='rangeBench'?0:s.front.x,z=spot==='rangeBench'?-640.5:s.front.z;
       // Face down the target lane, keeping the same heading across camera variants.
-      const yaw=Math.PI;
+      const yaw=0;
       T.rotateCamera(yaw-prev);T.setAimYawDbg(-yaw);T.setVelDbg(0,0);p.set(x,t.tg.floorY,z);
       T.camera.position.set(x,t.tg.floorY+1.6,z);
       window.__GP91_BASELINE=phase==='before';T.setZoomHeldDbg(aim==='ads');
       for(let i=0;i<100;i++)T.stepFrame(.016);
       const v=new T.THREE.Vector3();T.camera.getWorldDirection(v);
       const a=T.aimTarget.clone(),c=T.camera.position.clone(),q=T.getAimCamDbg();
-      return {spot,phase,aim,yaw,camera:c.toArray(),forward:v.toArray(),aimTarget:a.toArray(),aimCamera:q,
-        lane:{x:0,z:-1},station:s&&{x:s.x,z:s.z,front:s.front}};
+      return {spot,phase,aim,yaw,camera:c.toArray(),forward:v.toArray(),aimTarget:a.toArray(),player:p.toArray(),aimCamera:q,
+        lane:{x:0,z:1},station:s&&{x:s.x,z:s.z,front:s.front}};
     })(${JSON.stringify(spot)},${JSON.stringify(phase)},${JSON.stringify(aim)},${prev})`);
     prev=row.yaw;
     await page.screenshot(path.join(out,`aim-${spot}-${phase}-${aim}.png`));rows.push(row);

@@ -1,0 +1,92 @@
+[
+  {
+    "state": "stored",
+    "kinds": [
+      "shotgun",
+      "pistol"
+    ],
+    "carried": {
+      "primary": [
+        null,
+        null
+      ],
+      "secondary": [
+        null,
+        null
+      ],
+      "hip": "pistol:base"
+    },
+    "stored": [
+      "shotgun"
+    ],
+    "off": {
+      "calls": 690,
+      "ms": 14,
+      "range": [
+        690,
+        690
+      ]
+    },
+    "on": {
+      "calls": 697,
+      "ms": 12.5,
+      "range": [
+        697,
+        697
+      ]
+    },
+    "rackCalls": 7,
+    "camera": [
+      10.52,
+      -0.5686761379241945,
+      2.54
+    ]
+  },
+  {
+    "state": "carried",
+    "kinds": [
+      "shotgun",
+      "m4",
+      "ak",
+      "pistol",
+      "uzi",
+      "revolver"
+    ],
+    "carried": {
+      "primary": [
+        "m4",
+        "ak"
+      ],
+      "secondary": [
+        "uzi",
+        "revolver"
+      ],
+      "hip": "pistol:base"
+    },
+    "stored": [
+      "shotgun"
+    ],
+    "off": {
+      "calls": 698,
+      "ms": 9.700000017881393,
+      "range": [
+        698,
+        698
+      ]
+    },
+    "on": {
+      "calls": 719,
+      "ms": 10.5,
+      "range": [
+        719,
+        719
+      ]
+    },
+    "rackCalls": 21,
+    "camera": [
+      10.52,
+      -0.5686761379241945,
+      2.54
+    ]
+  }
+]

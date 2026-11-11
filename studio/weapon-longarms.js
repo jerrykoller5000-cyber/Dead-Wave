@@ -6,7 +6,7 @@
 import { gunDetail } from './gun-detail.js';
 import { attachLaserLight } from './weapon-attachments.js';
 import { fitPortCarrier, roundGeometry } from './weapon-casings.js';
-import { markPaintSurface, walnutTexture } from './weapon-finish.js';
+import { birchTexture, mapBirchSlab, markPaintSurface } from './weapon-finish.js';
 import { addTriggerArtwork, bindModelArtwork, groupArtwork, optionalArtworkGroup } from './weapon-model-hooks.js';
 
 function ventedSleeve(T, parent, material, { z0, z1, radius, wall, y, faces = 12, slots, ventFaces }) {
@@ -329,24 +329,23 @@ function krFinish(ctx) {
     receiver.color.setHex(0x4a5055); receiver.roughness = .49; receiver.metalness = .34;
     const bracket = ctx.gunMid.clone();
     bracket.color.setHex(0x50565a); bracket.roughness = .52; bracket.metalness = .35;
-    const walnut = ctx.woodMat.clone();
-    walnut.name = 'KR-7 walnut';
-    walnut.color.setHex(0x875a38); walnut.roughness = .52;
-    walnut.map = walnutTexture(ctx.THREE).clone();
-    walnut.map.rotation = Math.PI / 2;
-    walnut.map.repeat.set(.8, .65);
-    walnut.map.needsUpdate = true;
+    const birch = ctx.woodMat.clone();
+    birch.name = 'KR-7 walnut'; // Stable material key used by the Armory's finish checks.
+    birch.color.setHex(0xffffff);
+    birch.roughness = .46;
+    birch.metalness = 0;
+    birch.map = birchTexture(ctx.THREE);
     const cartridge = ctx.brassMat.clone();
     cartridge.color.setHex(0xffffff); cartridge.vertexColors = true;
     cartridge.roughness = .38; cartridge.metalness = .42;
-    krFinishes.set(ctx.gunBody, {receiver, bracket, walnut, cartridge});
+    krFinishes.set(ctx.gunBody, {receiver, bracket, birch, cartridge});
   }
   return krFinishes.get(ctx.gunBody);
 }
 
 export function makeAkModel(ctx) {
   const { THREE, gunKit, gunBand, gunEffects, gunSuppressor, finishGun, profileCurve, gunMid, gunDark, gunAccent, gunRubber, woodDark, gunMetal } = ctx;
-  const {receiver: gunBody, bracket, walnut: woodMat, cartridge} = krFinish(ctx);
+  const {receiver: gunBody, bracket, birch: woodMat, cartridge} = krFinish(ctx);
   const gun = new THREE.Group();
   const K = gunKit(gun);
   const D = gunDetail(ctx);
@@ -396,7 +395,11 @@ export function makeAkModel(ctx) {
   coverProfile.push([.022,.15],[.021,.155],[0,.155]);
   K.lathe(coverProfile, gunBody, {y:.036,seg:20,phase:Math.PI/20}).name = 'KR-7 receiver cover';
   // GP-20056, Century parts figure 1 and field strip: the recoil spring cam protrudes through the rear of the lid.
-  K.cyl(0.008, 0.008, 0.003, gunMid, 0, 0.044, -0.202, null, 12, 'z');
+  const rearButtonFinish = gunMid.clone();
+  rearButtonFinish.color.lerp(gunDark.color, .60);
+  rearButtonFinish.roughness = .80;
+  rearButtonFinish.metalness = .12;
+  K.cyl(0.008, 0.008, 0.003, rearButtonFinish, 0, 0.044, -0.202, null, 12, 'z');
   K.cyl(0.0055, 0.0055, 0.009, gunDark, 0, 0.044, -0.205, null, 12, 'z');
   // The rear sight block on the cover's front: the tangent leaf on it, its slider, the U notch's ears at the sight line (0.074).
   K.slab([[0.15, 0.03], [0.248, 0.03], [0.248, 0.056], [0.2, 0.066], [0.15, 0.064]], 0.034, gunDark, { bevel: 0.0025 });
@@ -442,10 +445,11 @@ export function makeAkModel(ctx) {
   // CL-312 b (Jerry: "check and fix all pistol grips"): the AKM grip widens a little to a flat base (it tapered to a point).
   // The centre line cz -0.13, cy -0.135, h 0.165 (was -0.1, -0.14, 0.19): the palm point (u 0.42) is (-0.1256, -0.1226) now:
   // VM_SOCKETS.ak grip, WEAPON_HOLD.ak grip and trig follow.
-  K.slab(shapedGrip(-0.13, -0.135, 0.165, 0.08, 0.34, [
+  const gripWood = K.slab(shapedGrip(-0.13, -0.135, 0.165, 0.08, 0.34, [
     [-0.14, 0.02], [-0.02, 0.022], [0.14, 0.024], [0.4, 0.024], [0.64, 0.026], [0.86, 0.03], [1.0, 0.031], [1.04, 0.018],
     [1.04, -0.02], [0.98, -0.036], [0.8, -0.038], [0.5, -0.034], [0.2, -0.03], [0.0, -0.028], [-0.14, -0.014]
   ]), 0.045, woodMat, { bevel: 0.008, segs: 3 });
+  mapBirchSlab(gripWood, Math.PI / 2 - .34, .36);
   K.box(0.03, 0.003, 0.036, gunDark, 0, -0.135 - 0.54 * 0.165 * Math.cos(0.34), -0.13 - 0.54 * 0.165 * Math.sin(0.34), 0.34, 0, 0, null, 0.0008);   // the base's steel plate
   for (const sx of [-1, 1]) D.checkering(gun, woodDark, shapedGrip(-0.13, -0.135, 0.13, 0.05, 0.34, [[0.12, 0.012], [0.88, 0.012], [0.88, -0.022], [0.12, -0.022]]), sx * 0.0227, 0.0045, 0.0011);   // the grip's checkering
   D.screw(gun, 0.0227, -0.15, -0.136, { axis: 'x', side: 1, r: 0.0045, kind: 'slot' });                 // GB-178: the grip screw on the panel
@@ -466,10 +470,7 @@ export function makeAkModel(ctx) {
     D.screw(stock, 0, y, surfaceZ, { axis: 'z', side: -1, r: 0.003, kind: 'slot' });
   }
   K.box(0.022, 0.03, 0.016, gunDark, 0, -0.06, -0.593, 0, 0, 0, stock, 0.002);                     // the trapdoor
-  for (const sx of [-1, 1]) {
-    K.slab(gunBand([[-0.32, -0.035], [-0.386, -0.049], [-0.472, -0.056], [-0.535, -0.049]], 0.0015), 0.002, woodDark, { x: sx * 0.023, bevel: 0, parent: stock });
-    K.slab(gunBand([[-0.396, -0.066], [-0.451, -0.079], [-0.536, -0.096]], 0.0011), 0.002, woodDark, { x: sx * 0.023, bevel: 0, parent: stock });
-  }
+  mapBirchSlab(stockBody, .12, .08);
   K.tor(0.012, 0.0035, gunDark, 0, -0.119, -0.45, 0, Math.PI / 2, 0, stock);
   // J85: shorten only the butt behind the receiver joint; the grip and reload datums stay put.
   stock.scale.z = 0.77;
@@ -481,12 +482,10 @@ export function makeAkModel(ctx) {
   gun.add(stockBody);
   gun.userData.fpStock = stock;
   // Handguards: the lower with its palm swell and finger grooves, the upper over the gas tube, the steel bands and their latches.
-  K.slab([[0.244, 0.012], [0.53, 0.012], [0.535, -0.01], [0.53, -0.04], [0.45, -0.052], [0.33, -0.053], [0.262, -0.047], [0.244, -0.034]], 0.062, woodMat, { bevel: 0.01, segs: 3 });
-  for (const sx of [-1, 1]) {
-    K.slab(gunBand([[0.28, -0.005], [0.34, -0.014], [0.43, -0.012], [0.498, -0.003]], 0.0022), 0.002, woodDark, { x: sx * 0.031, bevel: 0.001 });
-    K.slab(gunBand([[0.29, -0.03], [0.36, -0.036], [0.466, -0.032]], 0.0014), 0.002, woodDark, { x: sx * 0.031, bevel: 0.001 });
-  }
-  K.slab([[0.248, 0.012], [0.505, 0.012], [0.512, 0.026], [0.49, 0.04], [0.26, 0.04], [0.248, 0.03]], 0.044, woodMat, { bevel: 0.004, segs: 2 });   // the upper handguard
+  const lowerWood = K.slab([[0.244, 0.012], [0.53, 0.012], [0.535, -0.01], [0.53, -0.04], [0.45, -0.052], [0.33, -0.053], [0.262, -0.047], [0.244, -0.034]], 0.062, woodMat, { bevel: 0.01, segs: 3 });
+  mapBirchSlab(lowerWood, 0, .63);
+  const upperWood = K.slab([[0.248, 0.012], [0.505, 0.012], [0.512, 0.026], [0.49, 0.04], [0.26, 0.04], [0.248, 0.03]], 0.044, woodMat, { bevel: 0.004, segs: 2 });   // the upper handguard
+  mapBirchSlab(upperWood, 0, .21);
   for (const sx of [-1, 1]) for (const z of [0.3, 0.36, 0.42]) D.vents(gun, { x: sx * 0.022, y: 0.028, z, axis: 'x', side: sx, along: 'y', count: 1, w: 0.014, len: 0.006, deep: 0.002 });   // its vents
   for (const z of [0.236, 0.512]) { K.box(0.064, 0.064, 0.014, gunDark, 0, -0.004, z, 0, 0, 0, null, 0.003); D.screw(gun, 0.032, -0.004, z, { axis: 'x', side: 1, r: 0.0025, kind: 'slot' }); }   // the bands
   K.box(0.012, 0.008, 0.014, gunDark, 0.03, 0.014, 0.512, 0, 0, 0, null, 0.001);   // the front band's latch

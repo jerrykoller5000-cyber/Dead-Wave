@@ -80,7 +80,10 @@ export function createRangeTargets(T,tg){
 export function rangeConsolePlacement(tg){
  const O=tg.origin,s=tg.stations.lightSwitch,yaw=s.yaw,nx=Math.sin(yaw),nz=Math.cos(yaw);
  // Left when facing the switch: opposite the panel's local right axis.
- return {x:s.x-O.x+nx*.115-Math.cos(yaw)*1.35,y:1.4,z:s.z-O.z+nz*.115+Math.sin(yaw)*1.35,yaw,nx,nz};
+ // The rear mounting straps reach .1255 m behind the root; the switch root is
+ // .02 m off the tile wall. This offset seats the straps on that wall exactly.
+ const mount=.1255-.02;
+ return {x:s.x-O.x+nx*mount-Math.cos(yaw)*1.35,y:1.4,z:s.z-O.z+nz*mount+Math.sin(yaw)*1.35,yaw,nx,nz};
 }
 export function createRangeProp(T,tg,labels){
  const g=new T.Group();g.name='training-range-console';const at=rangeConsolePlacement(tg);g.position.set(at.x,at.y,at.z);g.rotation.y=at.yaw;tg.group.add(g);const owned=[];

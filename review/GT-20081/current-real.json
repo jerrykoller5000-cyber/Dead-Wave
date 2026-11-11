@@ -1,0 +1,61 @@
+{
+  "fixture": [
+    {
+      "name": "copy-probe",
+      "visible": false
+    },
+    {
+      "name": "",
+      "visible": true
+    }
+  ],
+  "accessories": {
+    "passed": 49,
+    "failed": [
+      "FAIL ak: the can is on the bore axis",
+      "FAIL ak: the can is in proportion to the barrel",
+      "FAIL uzi: nothing pokes through the can",
+      "FAIL uzi: it reaches well past the muzzle",
+      "FAIL uzi: on, the muzzle point is the can's front end",
+      "FAIL shotgun: the can is in proportion to the barrel"
+    ]
+  },
+  "pistol": {
+    "source": "fitted-optic-rmr",
+    "child": true,
+    "cloneChild": true
+  },
+  "paint": {
+    "initiallyOnRack": false,
+    "rackMeshes": 11,
+    "rackCorrect": true,
+    "sleeveVisible": true,
+    "sleeveMeshes": 5,
+    "sleeveCoated": 0
+  },
+  "sniper": {
+    "modelSide": 1,
+    "projectedSide": 1,
+    "screenX": 0.19702180970529914,
+    "ads": 1,
+    "issuedScope": true,
+    "legacyVisible": false,
+    "lensCentre": {
+      "x": -1.9419972829858363e-12,
+      "y": -0.015183989999865064
+    },
+    "cameraAnchor": {
+      "x": 1.1506040509110454e-117,
+      "y": 0
+    },
+    "overlay": 1
+  },
+  "effect": {
+    "transformed": true,
+    "visible": true,
+    "hasVertices": true,
+    "artistAnchorFollowsSurface": false,
+    "relativeEndpointOffset": 0.13233455288465765,
+    "actualFlashAtModelAnchor": true
+  }
+}

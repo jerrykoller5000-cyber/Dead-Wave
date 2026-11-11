@@ -1,124 +1,124 @@
 {
   "phase": "after",
-  "capturedAt": "2026-11-11T07:51:58.488Z",
+  "capturedAt": "2026-11-11T08:24:47.468Z",
   "metrics": {
     "noon": {
       "s1": {
-        "count": 101,
-        "minRelZ": 1.81,
-        "maxRelZ": 29.36,
-        "splashed": 40,
+        "count": 56,
+        "minRelZ": 1.99,
+        "maxRelZ": 29.38,
+        "splashed": 25,
         "target0Burned": true
       },
       "s2": {
-        "count": 154,
-        "minRelZ": 1.94,
-        "maxRelZ": 29.51,
-        "splashed": 47,
+        "count": 85,
+        "minRelZ": 2.25,
+        "maxRelZ": 29.43,
+        "splashed": 26,
         "target0Burned": true
       },
       "side1": {
-        "count": 101,
-        "minRelZ": 1.81,
-        "maxRelZ": 29.36,
-        "splashed": 40,
+        "count": 56,
+        "minRelZ": 1.99,
+        "maxRelZ": 29.38,
+        "splashed": 25,
         "target0Burned": true
       },
       "side2": {
-        "count": 154,
-        "minRelZ": 1.94,
-        "maxRelZ": 29.51,
-        "splashed": 47,
+        "count": 85,
+        "minRelZ": 2.25,
+        "maxRelZ": 29.43,
+        "splashed": 26,
         "target0Burned": true
       }
     },
     "overcast": {
       "s1": {
-        "count": 102,
-        "minRelZ": 1.9,
-        "maxRelZ": 29.35,
-        "splashed": 42,
+        "count": 58,
+        "minRelZ": 2.17,
+        "maxRelZ": 29.37,
+        "splashed": 28,
         "target0Burned": true
       },
       "s2": {
-        "count": 153,
-        "minRelZ": 2.04,
+        "count": 86,
+        "minRelZ": 2.1,
         "maxRelZ": 29.39,
-        "splashed": 45,
+        "splashed": 28,
         "target0Burned": true
       },
       "side1": {
-        "count": 102,
-        "minRelZ": 1.9,
-        "maxRelZ": 29.35,
-        "splashed": 42,
+        "count": 58,
+        "minRelZ": 2.17,
+        "maxRelZ": 29.37,
+        "splashed": 28,
         "target0Burned": true
       },
       "side2": {
-        "count": 153,
-        "minRelZ": 2.04,
+        "count": 86,
+        "minRelZ": 2.1,
         "maxRelZ": 29.39,
-        "splashed": 45,
+        "splashed": 28,
         "target0Burned": true
       }
     },
     "dusk": {
       "s1": {
-        "count": 102,
-        "minRelZ": 1.81,
+        "count": 55,
+        "minRelZ": 2.34,
         "maxRelZ": 29.39,
-        "splashed": 38,
+        "splashed": 22,
         "target0Burned": true
       },
       "s2": {
-        "count": 155,
-        "minRelZ": 1.96,
-        "maxRelZ": 29.5,
-        "splashed": 48,
+        "count": 86,
+        "minRelZ": 2.17,
+        "maxRelZ": 29.38,
+        "splashed": 24,
         "target0Burned": true
       },
       "side1": {
-        "count": 102,
-        "minRelZ": 1.81,
+        "count": 55,
+        "minRelZ": 2.34,
         "maxRelZ": 29.39,
-        "splashed": 38,
+        "splashed": 22,
         "target0Burned": true
       },
       "side2": {
-        "count": 155,
-        "minRelZ": 1.96,
-        "maxRelZ": 29.5,
-        "splashed": 48,
+        "count": 86,
+        "minRelZ": 2.17,
+        "maxRelZ": 29.38,
+        "splashed": 24,
         "target0Burned": true
       }
     },
     "night": {
       "s1": {
-        "count": 101,
-        "minRelZ": 1.9,
-        "maxRelZ": 29.37,
-        "splashed": 40,
+        "count": 57,
+        "minRelZ": 1.8,
+        "maxRelZ": 29.39,
+        "splashed": 24,
         "target0Burned": true
       },
       "s2": {
-        "count": 157,
-        "minRelZ": 1.84,
-        "maxRelZ": 29.54,
-        "splashed": 45,
+        "count": 87,
+        "minRelZ": 1.91,
+        "maxRelZ": 29.39,
+        "splashed": 27,
         "target0Burned": true
       },
       "side1": {
-        "count": 101,
-        "minRelZ": 1.9,
-        "maxRelZ": 29.37,
-        "splashed": 40,
+        "count": 57,
+        "minRelZ": 1.8,
+        "maxRelZ": 29.39,
+        "splashed": 24,
         "target0Burned": true
       },
       "side2": {
-        "count": 157,
-        "minRelZ": 1.84,
-        "maxRelZ": 29.54,
-        "splashed": 45,
+        "count": 87,
+        "minRelZ": 1.91,
+        "maxRelZ": 29.39,
+        "splashed": 27,
         "target0Burned": true
       }
     }

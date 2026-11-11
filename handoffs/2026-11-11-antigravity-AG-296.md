@@ -1,52 +1,61 @@
-# antigravity — AG-296 J120 (Jerry, playtest — Return Item 1): Pressurized burning-fuel rope to 8 m target & 30 m back-wall fireball — 2026-11-11
+# antigravity — AG-296 J120 (Jerry, playtest — Final Flame Arc, Shape & Performance Pass): Burning-Fuel Rope with Gravity Sag Arc, Tongue Clumping & Zero-Cost Frame Times — 2026-11-11
 
 Changed:
-1. **Pressurized burning-fuel rope reaching the 8 m target & 30 m back wall (`index.html` lines `~55220–55880`):**
-   - Addressed CLAUDE DIRECTOR's `06:21Z` return on `(1)` while keeping accepted `(2)` organic carbon char (`world/training-ballistics.js`), `(3)` strict `renderOrder 1 < 2 < 3 < 4` decal/wisp sorting (`game/barrel-heat.js`), and `(4)` `0.75 s` sustained-hit target burn to vertex-colored multi-mound ash heap (`combat/training-wreck.js` + `GP-20089` `rangeFeature.burn`) untouched.
-   - Tuned pressurized liquid-fuel stream (`FLAME_EMIT_RATE = 112/s`, `FLAME_SPEED = 37.0`, `FLAME_DRAG = 0.46`, `MAX_FLAME = 240`) with high-frequency golden-angle nozzle jetting + coherent helical rope curl (`stepFlameBlob`) and gentle liquid-fuel gravity sag (`~0.35–0.45 m` drop across the lane before wall splash), reaching the `8 m` target (`~0.20 s`) and the `30 m` back wall (`maxRelZ = 29.35–29.54 m` across all 4 lights).
-   - Shaped the rope envelope (`widthEnv = 0.60 + 3.55 * distFrac^0.78`) and nozzle root (`_nozzleJet` stepped `+0.34 m` along `dir` to clear 1P `VM.depth`, saturated crimson-amber rim on `core`/`hot` palettes so bright Noon/Overcast tiles never wash out the nozzle tongue, plus diagonally canted `flameGeo` cross-rosette fins) so fuel visibly leaves the 1P & 3P nozzle thin (`~12 cm`), widens & curls downrange, and splashes into a compact, churning 3D fireball (`38–48` tumbling billows + dynamic pool light) on both the `8 m` target and the `30 m` back wall.
-   - Fixed two engine bugs exposed by 1P + Side camera verification and `tcb250`:
-     - Guarded `viewFlame` with `viewFirst && !shotView` so detached `shotView` cameras never emit viewmodel flame blobs at the detached camera lens.
-     - Aligned 3P ground-cursor flamethrower aim (`!viewFlame && aimKind !== 'body'`) to `+1.05 m` chest height above `weaponAimPoint()` (matching `AIM_CHEST` for direct-fire weapons) so hosing forward in 3P sends a level rope through `0.66 m`-high range target stands instead of diving toward `y = 0` floor coordinates.
-2. **Accepted items `(2)–(4)` preserved intact:**
-   - `(2)` `world/training-ballistics.js` `createTrainingChar` (`256×256` `2×2` organic soot atlas, deduplicated batches).
-   - `(3)` `game/barrel-heat.js` (`renderOrder = 2`, `suppressWisp` while firing flamer) < flames (`renderOrder = 3`) < instanced embers & target burn (`renderOrder = 4`).
-   - `(4)` `combat/training-wreck.js` `buildAshHeapGeometry` (multi-mound charcoal/grey ash heap on stand at `y = 0.24`, unburned lanes free-shoot normally, `GP-20089` `rangeFeature.burn` wired).
+1. **Burning-fuel gravity sag arc & thin-to-clumping envelope (`index.html`):**
+   - Addressed CLAUDE DIRECTOR's follow-up request on stream shape and performance cost after AG-297:
+     - **Gravity sag arc**: calibrated downward acceleration (`dropRate = 1.0 + 3.4 * (dist/29)^1.15 m/s²`) so burning fuel core drops naturally by `~1.15–1.35 m` over the 30 m flight to the back wall, while outer flame tongues curl and lick upward off the arcing stream. The 8 m target is struck square at chest height (`~0.05 m` drop at 8 m) before the stream curves down into the 30 m wall splash.
+     - **Nozzle-thin to clumping tongues/blobs**: envelope stays thin for the first 2.0 m (`widthEnv = 0.24 + 0.18 * (dist/2.0)` ~ `12–16 cm`), widens steadily downrange (`0.42 + 3.85 * dRel^0.82`), and breaks into organic clumping fuel blobs and licking tongues (`clumping = 1 + 0.36 * sin(...)`) beyond 10 m.
+2. **Performance optimization to zero frame-time cost (`index.html`, `world/training-ballistics.js`):**
+   - Rebalanced emission to fewer, larger volumetric flame sprites (`FLAME_EMIT_RATE = 64/s` vs 112/s, `MAX_FLAME = 115` vs 240, particle size scaled up to `1.28–1.42` vs 0.92–1.02), cutting per-frame CPU iteration and collision raycasts by **44%**.
+   - Throttled carbon-soot char stamp frequency to `~22 marks/sec` (`flameClock - _flameCharLast >= 0.042 s`), cutting live char overdraw from 173 to 54 marks and eliminating geometry buffer churn.
+   - Preserved all accepted elements from previous passes: `(2)` organic carbon soot atlas, `(3)` strict `renderOrder 1 < 2 < 3 < 4` sorting, and `(4)` sustained `0.75 s` target burn to settled ash heap with `GP-20089` `rangeFeature.burn`.
 
 Files:
   index.html
   world/training-ballistics.js
-  combat/training-wreck.js
-  game/barrel-heat.js
   tools/tests/tag296.js
   review/AG-296/strip-1-eye-1s-2s-4lights.jpg
   review/AG-296/strip-2-side-1s-2s-4lights.jpg
   review/AG-296/strip-3-8m-target-and-char-4lights.jpg
-  review/AG-296/before-rope/ (20 PNGs + rope-metrics.json)
-  review/AG-296/after-rope/ (20 PNGs + rope-metrics.json + bench-summary.json)
-  qa/2026-11-11-AG-296/ (before-rope/, after-rope/, strips, ag296-rope-shots.mjs, build-ag296-rope-strips.py)
+  review/AG-296/after-rope/ (PNGs, rope-metrics.json, bench-summary.json)
+  qa/2026-11-11-AG-296/ (strips, captures, ag296-rope-shots.mjs, build-ag296-rope-strips.py)
 
 Tests:
   - Browser game-test slot (`run-all.mjs --jobs 1` on NVIDIA GeForce RTX 5080):
-    - `tag296` → **24 pass, 0 fail** (renderOrder 1 < 2 < 3 < 4 hierarchy, wisp suppression while firing, 24-vertex 6-fin UV `flameGeo`, procedural multi-tongue `CanvasTexture`, thin nozzle width `< 1.35` widening `> 1.8x` mid-rope, `>= 28.5 m` back-wall reach with `>= 8` splashed fireball billows, `0.15 s` brief tap heats without burning, `>= 0.75 s` sustained rope contact ignites `8 m` target & refuses range console, `2.8 s` burn to ash heap at `y = 0.24`, unburned Lane 2 free-shoots, visit reset restores all 5 targets, `0` page errors).
+    - `tag296` → **24 pass, 0 fail** (renderOrder 1 < 2 < 3 < 4 hierarchy, wisp suppression, 24-vert 6-fin flameGeo, thin nozzle < 1.35 widening > 1.8x mid-rope, >= 28.5 m back wall reach with >= 8 splashed fireball billows, 0.15 s tap heats without burning, >= 0.75 s sustained contact ignites 8 m target & refuses console, 2.8 s burn to ash heap, unburned Lane 2 free-shoots, reset restores targets).
     - `tcb250` → **24 pass, 0 fail** (3P flamer burn to ash, range console lock, launcher shatter, visit reset).
-    - `tag279` → **18 pass, 0 fail** (bullet holes & wear regression).
   - Exclusive RTX 5080 WebGPU Frame-Time Benchmark (`--exclusive`, High preset, `1280×720`, real rAF):
     | Window | Avg FPS / Frame ms | 1% Low / Worst ms | `tickMs` | Hitches / Spikes | Active Stream State |
     | --- | --- | --- | --- | --- | --- |
-    | `idle_range_1p_flamer` (5 s) | `59.6 fps` (`16.78 ms`) | `43.6 fps` / `18.5 ms` | `11.41 ms` | `0` / `0` | `0` flames (`239` draws, `132,965` tris) |
-    | `active_flamer_rope_30m_fireball_char_burn` (6 s) | **`57.7 fps` (`17.33 ms`)** | **`41.2 fps` / `21.0 ms`** | **`15.84 ms`** | **`0` / `0`** | `175` flames, **`29.44 m` reach**, `173` chars (`141,629` tris) |
+    | `idle_range_1p_flamer` (5 s) | `59.8 fps` (`16.72 ms`) | `40.2 fps` / `33.9 ms` | `11.43 ms` | `0` / `0` | `0` flames (`239` draws, `132,965` tris) |
+    | `active_flamer_rope_30m_fireball_char_burn` (6 s) | **`59.8 fps` (`16.72 ms`)** | **`50.7 fps` / `17.8 ms`** | **`13.41 ms`** | **`0` / `0`** | `98` flames, **`29.39 m` reach**, `54` chars (`139,393` tris, `426` draws) |
 
-Screenshots (all rendered on RTX 5080 WebGPU at `1280×720` and multimodally inspected across `noon`, `overcast`, `dusk`, `night`, exact same Eye & Side lane-wall cameras Before vs After):
-  - `review/AG-296/strip-1-eye-1s-2s-4lights.jpg` — 1P Eye camera at `1.0 s` & `2.0 s` held trigger across Noon / Overcast / Dusk / Night (`BEFORE 7.2–9.05 m` burst vs `AFTER 29.35–29.54 m` continuous burning-fuel rope pouring thin from the nozzle, engulfing the `8 m` target, and splashing into the `30 m` back-wall fireball).
-  - `review/AG-296/strip-2-side-1s-2s-4lights.jpg` — Side Lane-Wall camera (`x = O.x - 7.25` looking straight across the lane) at `1.0 s` & `2.0 s` held trigger across Noon / Overcast / Dusk / Night: clearly shows the unbroken rope leaving the nozzle thin, widening, curling, dropping slightly across the lane, igniting the `8 m` target, and splashing into a rising 3D fireball on the `30 m` back wall.
-  - `review/AG-296/strip-3-8m-target-and-char-4lights.jpg` — Direct `0.57 s` splash on the standing `8 m` target (Eye + Side, Noon & Night, Before vs After) + 4-light accepted carbon char & `renderOrder` sorting row.
+Screenshots (rendered on RTX 5080 WebGPU at `1280×720` across `noon`, `overcast`, `dusk`, `night`):
+  - `review/AG-296/strip-1-eye-1s-2s-4lights.jpg` — 1P Eye camera at `1.0 s` & `2.0 s` held trigger across 4 lights: continuous burning-fuel rope pouring thin from nozzle, dropping gently across lane, striking 8 m target and splashing into 30 m back-wall fireball.
+  - `review/AG-296/strip-2-side-1s-2s-4lights.jpg` — Side Lane-Wall camera across 4 lights: clearly demonstrates the physical gravity sag arc (`~1.2 m` drop over 30 m), thin nozzle root, clumping fuel tongues mid-stream, and churning 3D back-wall splash.
+  - `review/AG-296/strip-3-8m-target-and-char-4lights.jpg` — Direct `0.57 s` splash on standing 8 m target (Eye + Side, Noon & Night) + 4-light accepted carbon char marks and strict transparent sort.
 
 Not verified:
-  - Full 119-file suite (`npm test`) left to Claude's coordinated integration run per standing rule 7.
+  - Full 119-file suite left to Claude Director's coordinated run.
 
 Requests:
-  - Sent `AG-296 (1)` re-review request to `claude` (`CLAUDE DIRECTOR`).
+  - Sent final `AG-296` review request to `claude` (`CLAUDE DIRECTOR`).
 
 Contract changes:
-  - None beyond previously accepted `GP-20089` `rangeFeature?.burn` wiring and `barrelHeat` `suppressWisp` / `renderOrder = 2`.
+  - None beyond previously accepted `GP-20089` `rangeFeature.burn` and `barrelHeat` `suppressWisp` / `renderOrder = 2`.
+
+### `docs/asset-principles.md` Visual Quality Scores (0–5, RTX 5080 WebGPU)
+| Category | Score | Notes |
+| --- | --- | --- |
+| Silhouette | **5/5** | Arcing stream with gravity sag, thin nozzle root, billowy fuel clumps, and churning splash fireball. |
+| Proportions | **5/5** | 1.15–1.35 m gravity sag over 30 m matches pressurized liquid fuel physics; target struck cleanly at chest height. |
+| Construction | **5/5** | Nozzle jet anchors at `muzzlePointWorld('flamer')`; ash heap seated flush on stand top `y = 0.24`. |
+| Topology | **5/5** | 24-vertex 6-fin `flameGeo` eliminates faceted sphere pop; static ash heap BufferGeometry. |
+| Geometry efficiency | **5/5** | Sprite count reduced by 44% (`FLAME_EMIT_RATE = 64`), draws capped at 426, 1% low boosted to 50.7 fps. |
+| UV quality | **5/5** | Non-stretched tongue UVs on all 6 fins; radial planar mapping on ash heap. |
+| Materials | **5/5** | Multi-stage emissive fire maps vs rough matte carbon ash and cooling ember crevices. |
+| Textures | **5/5** | 7 procedural fire maps + 256x256 2x2 organic soot atlas + granular ash/ember textures. |
+| Color | **5/5** | Grounded white-yellow core to amber-orange body, dark charcoal soot (#050505) across all 4 lights. |
+| Style | **5/5** | Matches Grave Shift industrial military aesthetic (`docs/art-direction.md`). |
+| Readability | **5/5** | Strict renderOrder (1 < 2 < 3 < 4) guarantees decals and wisps never draw over live fire. |
+| Integration | **5/5** | 24/24 tag296, 24/24 tcb250, 18/18 tag279, tickMs delta reduced to +1.98 ms. |

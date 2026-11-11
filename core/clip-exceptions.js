@@ -13,6 +13,46 @@ export const CLIP_EXCEPTIONS = Object.freeze([
       'reads right on sight',
     until: 'CB-291 (Claude 2): the hold IK keeps the support upper arm ~1 cm off the carrier\'s front (carrierClearance(ud) ' +
       'upperArm, studio/marine-body.js); then this entry goes'
+  }),
+  Object.freeze({
+    id: 'training-void-shell',
+    layers: Object.freeze(['training-void', 'training-floor']),
+    poses: Object.freeze(['training:static']),
+    max: 15,
+    reason: 'The inward-facing dark backdrop encloses the Training Ground to hide the distant valley; it is not a solid object.',
+    until: 'The Training Ground no longer uses the enclosing backdrop.'
+  }),
+  Object.freeze({
+    id: 'training-outer-underlay',
+    layers: Object.freeze(['training-outer-underlay', 'training-floor']),
+    poses: Object.freeze(['training:static']),
+    max: 0.020001, // 1 µm allows float32 world-transform rounding
+    reason: 'The dark underlay lies 2 cm beneath the two walkable floor planes to prevent z-fighting at their edges.',
+    until: 'The underlay is removed or replaced by the walkable floor.'
+  }),
+  Object.freeze({
+    id: 'training-passage-floor-slab',
+    layers: Object.freeze(['training-passage-floor-slab', 'training-floor']),
+    poses: Object.freeze(['training:static']),
+    max: 0.04,
+    reason: 'The 4 cm steel passage slab has its top flush with the walking plane; its underside is below the floor.',
+    until: 'The passage floor is rebuilt without a separate slab.'
+  }),
+  Object.freeze({
+    id: 'training-impact-mark-pool',
+    layers: Object.freeze(['training-impact-marks', 'training-floor']),
+    poses: Object.freeze(['training:effect']),
+    max: 0.03,
+    reason: 'The zero-draw impact decal pool begins at the local origin and is repositioned to bullet-hit surfaces when used.',
+    until: 'The pooled impact mesh is created at each hit surface instead.'
+  }),
+  Object.freeze({
+    id: 'training-char-mark-pool',
+    layers: Object.freeze(['training-char-marks', 'training-floor']),
+    poses: Object.freeze(['training:effect']),
+    max: 0.100001, // 1 µm allows float32 world-transform rounding
+    reason: 'The zero-draw flame-char decal pool begins at the local origin and is repositioned to burn surfaces when used.',
+    until: 'The pooled char mesh is created at each burn surface instead.'
   })
 ]);
 

@@ -1,0 +1,136 @@
+[
+  {
+    "view": "aimed",
+    "light": "noon",
+    "ads": 1,
+    "key": "revolver",
+    "finish": ""
+  },
+  {
+    "view": "aimed",
+    "light": "overcast",
+    "ads": 1,
+    "key": "revolver",
+    "finish": ""
+  },
+  {
+    "view": "aimed",
+    "light": "dusk",
+    "ads": 1,
+    "key": "revolver",
+    "finish": ""
+  },
+  {
+    "view": "aimed",
+    "light": "night",
+    "ads": 1,
+    "key": "revolver",
+    "finish": ""
+  },
+  {
+    "view": "aimed",
+    "light": "noon",
+    "ads": 1,
+    "key": "revolver",
+    "finish": "m81"
+  },
+  {
+    "view": "aimed",
+    "light": "overcast",
+    "ads": 1,
+    "key": "revolver",
+    "finish": "m81"
+  },
+  {
+    "view": "aimed",
+    "light": "dusk",
+    "ads": 1,
+    "key": "revolver",
+    "finish": "m81"
+  },
+  {
+    "view": "aimed",
+    "light": "night",
+    "ads": 1,
+    "key": "revolver",
+    "finish": "m81"
+  },
+  {
+    "view": "aimed",
+    "light": "noon",
+    "ads": 1,
+    "key": "ak",
+    "finish": ""
+  },
+  {
+    "view": "aimed",
+    "light": "overcast",
+    "ads": 1,
+    "key": "ak",
+    "finish": ""
+  },
+  {
+    "view": "aimed",
+    "light": "dusk",
+    "ads": 1,
+    "key": "ak",
+    "finish": ""
+  },
+  {
+    "view": "aimed",
+    "light": "night",
+    "ads": 1,
+    "key": "ak",
+    "finish": ""
+  },
+  {
+    "view": "aimed",
+    "light": "noon",
+    "ads": 1,
+    "key": "ak",
+    "finish": "m81"
+  },
+  {
+    "view": "aimed",
+    "light": "overcast",
+    "ads": 1,
+    "key": "ak",
+    "finish": "m81"
+  },
+  {
+    "view": "aimed",
+    "light": "dusk",
+    "ads": 1,
+    "key": "ak",
+    "finish": "m81"
+  },
+  {
+    "view": "aimed",
+    "light": "night",
+    "ads": 1,
+    "key": "ak",
+    "finish": "m81"
+  },
+  {
+    "view": "rack",
+    "light": "noon"
+  },
+  {
+    "view": "hip",
+    "light": "noon",
+    "ads": 0,
+    "key": "ak",
+    "finish": "m81"
+  },
+  {
+    "view": "rack",
+    "light": "noon"
+  },
+  {
+    "view": "hip",
+    "light": "noon",
+    "ads": 0,
+    "key": "ak",
+    "finish": "m81"
+  }
+]

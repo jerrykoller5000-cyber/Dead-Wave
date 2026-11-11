@@ -1,0 +1,26 @@
+{
+  "revolver": {
+    "before": {
+      "pixels": 2100,
+      "median": 164.7,
+      "p95": 203.2
+    },
+    "after": {
+      "pixels": 2100,
+      "median": 100.2,
+      "p95": 102.2
+    }
+  },
+  "ak": {
+    "before": {
+      "pixels": 332,
+      "median": 161.9,
+      "p95": 162.0
+    },
+    "after": {
+      "pixels": 332,
+      "median": 101.9,
+      "p95": 102.1
+    }
+  }
+}

@@ -1,0 +1,377 @@
+{
+  "startedAt": "2026-11-11T08:15:15.085Z",
+  "results": {
+    "gp20087": [
+      {
+        "spot": "cif",
+        "yaw": -1.5707963267948966,
+        "player": {
+          "x": 6.855000016689301,
+          "y": -200,
+          "z": -650.2
+        },
+        "camPos": {
+          "x": 5.355000016689301,
+          "y": -198.08,
+          "z": -649.75
+        },
+        "insideSolids": []
+      },
+      {
+        "spot": "kiosk",
+        "yaw": -1.5707963267948966,
+        "player": {
+          "x": 6.98,
+          "y": -200,
+          "z": -646.6
+        },
+        "camPos": {
+          "x": 5.48,
+          "y": -198.08,
+          "z": -646.15
+        },
+        "insideSolids": []
+      },
+      {
+        "spot": "armory",
+        "yaw": -1.5707963267948966,
+        "player": {
+          "x": 6.459999976158143,
+          "y": -200,
+          "z": -643
+        },
+        "camPos": {
+          "x": 4.959999976158143,
+          "y": -198.08,
+          "z": -642.55
+        },
+        "insideSolids": []
+      },
+      {
+        "spot": "hqPanel",
+        "yaw": 1.5707963267948966,
+        "player": {
+          "x": -42.779999999999994,
+          "y": -200,
+          "z": -637
+        },
+        "camPos": {
+          "x": -41.279999999999994,
+          "y": -198.08,
+          "z": -637.45
+        },
+        "insideSolids": []
+      },
+      {
+        "spot": "skullWindow",
+        "yaw": 1.5707963267948966,
+        "player": {
+          "x": -42.779999999999994,
+          "y": -200,
+          "z": -643
+        },
+        "camPos": {
+          "x": -41.279999999999994,
+          "y": -198.08,
+          "z": -643.45
+        },
+        "insideSolids": []
+      },
+      {
+        "spot": "lightSwitch",
+        "yaw": 1.5707963267948966,
+        "player": {
+          "x": -7.180000000000001,
+          "y": -200,
+          "z": -645.95
+        },
+        "camPos": {
+          "x": -5.680000000000001,
+          "y": -198.08,
+          "z": -646.4000000000001
+        },
+        "insideSolids": []
+      },
+      {
+        "spot": "rangeConsole",
+        "yaw": 1.5707963267948966,
+        "player": {
+          "x": -6.515000000000001,
+          "y": -200,
+          "z": -644.6
+        },
+        "camPos": {
+          "x": -5.015000000000001,
+          "y": -198.08,
+          "z": -645.0500000000001
+        },
+        "insideSolids": []
+      },
+      {
+        "spot": "corridor",
+        "yaw": 1.5707963267948966,
+        "player": {
+          "x": -6.2,
+          "y": -200,
+          "z": -642
+        },
+        "camPos": {
+          "x": -4.7,
+          "y": -198.08,
+          "z": -642.45
+        },
+        "insideSolids": []
+      },
+      {
+        "spot": "armoryRoom",
+        "yaw": -1.5707963267948966,
+        "player": {
+          "x": 6.459999976158143,
+          "y": -200,
+          "z": -641.5
+        },
+        "camPos": {
+          "x": 4.959999976158143,
+          "y": -198.08,
+          "z": -641.05
+        },
+        "insideSolids": []
+      },
+      {
+        "spot": "rangeBench",
+        "yaw": 3.141592653589793,
+        "player": {
+          "x": 0,
+          "y": -200,
+          "z": -640.5
+        },
+        "camPos": {
+          "x": -0.1402030099105235,
+          "y": -197.11527892354712,
+          "z": -639.4421690311242
+        },
+        "insideSolids": []
+      }
+    ],
+    "gp20088": [
+      {
+        "key": "perimeter",
+        "light": "noon",
+        "qPath": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-11-AG-297\\gp20088\\perimeter-noon.png",
+        "rPath": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\review\\GP-20088\\gpu\\perimeter-noon.png"
+      },
+      {
+        "key": "perimeter",
+        "light": "overcast",
+        "qPath": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-11-AG-297\\gp20088\\perimeter-overcast.png",
+        "rPath": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\review\\GP-20088\\gpu\\perimeter-overcast.png"
+      },
+      {
+        "key": "perimeter",
+        "light": "dusk",
+        "qPath": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-11-AG-297\\gp20088\\perimeter-dusk.png",
+        "rPath": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\review\\GP-20088\\gpu\\perimeter-dusk.png"
+      },
+      {
+        "key": "perimeter",
+        "light": "night",
+        "qPath": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-11-AG-297\\gp20088\\perimeter-night.png",
+        "rPath": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\review\\GP-20088\\gpu\\perimeter-night.png"
+      },
+      {
+        "key": "infirmary",
+        "light": "noon",
+        "qPath": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-11-AG-297\\gp20088\\infirmary-noon.png",
+        "rPath": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\review\\GP-20088\\gpu\\infirmary-noon.png"
+      },
+      {
+        "key": "infirmary",
+        "light": "overcast",
+        "qPath": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-11-AG-297\\gp20088\\infirmary-overcast.png",
+        "rPath": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\review\\GP-20088\\gpu\\infirmary-overcast.png"
+      },
+      {
+        "key": "infirmary",
+        "light": "dusk",
+        "qPath": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-11-AG-297\\gp20088\\infirmary-dusk.png",
+        "rPath": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\review\\GP-20088\\gpu\\infirmary-dusk.png"
+      },
+      {
+        "key": "infirmary",
+        "light": "night",
+        "qPath": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-11-AG-297\\gp20088\\infirmary-night.png",
+        "rPath": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\review\\GP-20088\\gpu\\infirmary-night.png"
+      },
+      {
+        "key": "monitor",
+        "light": "noon",
+        "qPath": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-11-AG-297\\gp20088\\monitor-noon.png",
+        "rPath": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\review\\GP-20088\\gpu\\monitor-noon.png"
+      },
+      {
+        "key": "monitor",
+        "light": "overcast",
+        "qPath": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-11-AG-297\\gp20088\\monitor-overcast.png",
+        "rPath": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\review\\GP-20088\\gpu\\monitor-overcast.png"
+      },
+      {
+        "key": "monitor",
+        "light": "dusk",
+        "qPath": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-11-AG-297\\gp20088\\monitor-dusk.png",
+        "rPath": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\review\\GP-20088\\gpu\\monitor-dusk.png"
+      },
+      {
+        "key": "monitor",
+        "light": "night",
+        "qPath": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-11-AG-297\\gp20088\\monitor-night.png",
+        "rPath": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\review\\GP-20088\\gpu\\monitor-night.png"
+      },
+      {
+        "key": "cif",
+        "light": "noon",
+        "qPath": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-11-AG-297\\gp20088\\cif-noon.png",
+        "rPath": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\review\\GP-20088\\gpu\\cif-noon.png"
+      },
+      {
+        "key": "cif",
+        "light": "overcast",
+        "qPath": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-11-AG-297\\gp20088\\cif-overcast.png",
+        "rPath": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\review\\GP-20088\\gpu\\cif-overcast.png"
+      },
+      {
+        "key": "cif",
+        "light": "dusk",
+        "qPath": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-11-AG-297\\gp20088\\cif-dusk.png",
+        "rPath": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\review\\GP-20088\\gpu\\cif-dusk.png"
+      },
+      {
+        "key": "cif",
+        "light": "night",
+        "qPath": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\qa\\2026-11-11-AG-297\\gp20088\\cif-night.png",
+        "rPath": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\review\\GP-20088\\gpu\\cif-night.png"
+      }
+    ],
+    "ce2": [
+      {
+        "weapon": "revolver",
+        "light": "noon",
+        "breakInfo": {
+          "ammo": 5,
+          "active": true
+        }
+      },
+      {
+        "weapon": "revolver",
+        "light": "overcast",
+        "breakInfo": {
+          "ammo": 5,
+          "active": true
+        }
+      },
+      {
+        "weapon": "revolver",
+        "light": "dusk",
+        "breakInfo": {
+          "ammo": 5,
+          "active": true
+        }
+      },
+      {
+        "weapon": "revolver",
+        "light": "night",
+        "breakInfo": {
+          "ammo": 5,
+          "active": true
+        }
+      },
+      {
+        "weapon": "pistol",
+        "light": "noon"
+      },
+      {
+        "weapon": "pistol",
+        "light": "overcast"
+      },
+      {
+        "weapon": "pistol",
+        "light": "dusk"
+      },
+      {
+        "weapon": "pistol",
+        "light": "night"
+      }
+    ],
+    "ce3": [
+      {
+        "action": "pistol-rack",
+        "light": "noon"
+      },
+      {
+        "action": "pistol-rack",
+        "light": "overcast"
+      },
+      {
+        "action": "pistol-rack",
+        "light": "dusk"
+      },
+      {
+        "action": "pistol-rack",
+        "light": "night"
+      },
+      {
+        "action": "kr7-handle",
+        "light": "noon"
+      },
+      {
+        "action": "kr7-handle",
+        "light": "overcast"
+      },
+      {
+        "action": "kr7-handle",
+        "light": "dusk"
+      },
+      {
+        "action": "kr7-handle",
+        "light": "night"
+      },
+      {
+        "action": "shotgun-switch",
+        "light": "noon"
+      },
+      {
+        "action": "shotgun-switch",
+        "light": "overcast"
+      },
+      {
+        "action": "shotgun-switch",
+        "light": "dusk"
+      },
+      {
+        "action": "shotgun-switch",
+        "light": "night"
+      },
+      {
+        "action": "revolver-reload",
+        "light": "noon"
+      },
+      {
+        "action": "revolver-reload",
+        "light": "overcast"
+      },
+      {
+        "action": "revolver-reload",
+        "light": "dusk"
+      },
+      {
+        "action": "revolver-reload",
+        "light": "night"
+      }
+    ]
+  },
+  "bench": {
+    "draws": 18873,
+    "triangles": 131757,
+    "renderer": "WebGPUBackend"
+  },
+  "finishedAt": "2026-11-11T08:16:52.250Z"
+}

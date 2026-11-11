@@ -458,6 +458,9 @@ export function makeRevolverModel(ctx) {
   // The fixed frame takes the armory coating. The action and walnut retain their factory finishes.
   const blued = new THREE.MeshStandardMaterial({ color: 0x404955, metalness: 0.68, roughness: 0.32 });
   const frameFinish = blued.clone();
+  // A satin finish keeps the curve visible above the walnut grip in direct sun.
+  frameFinish.roughness = .58;
+  frameFinish.metalness = .53;
   frameFinish.userData.weaponFinishRole = 'frame';
   const caseCol = new THREE.MeshStandardMaterial({ color: 0x62584d, metalness: 0.68, roughness: 0.40 });
   const walnut = new THREE.MeshStandardMaterial({ color: 0x76492f, map: revolverWalnutTexture(THREE), metalness: 0, roughness: 0.48 });

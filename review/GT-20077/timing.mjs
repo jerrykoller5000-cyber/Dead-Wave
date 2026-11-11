@@ -6,7 +6,7 @@ import {launch} from '../../tools/cdp.mjs';
 import {save} from '../GT-20076/save.mjs';
 
 const [id,phase='baseline']=process.argv.slice(2);
-assert(['baseline','revised','rework','action'].includes(phase));
+assert(['baseline','revised','rework','action','ag294'].includes(phase));
 assert(process.env.DW_GAME_TEST_TOKEN && /^[a-z0-9-]+$/.test(id));
 const server=await serve(fileURLToPath(new URL('../../',import.meta.url)),0);
 const browser=await launch({headless:false});
@@ -43,7 +43,8 @@ try {
   const mean=key=>Math.round(last.reduce((a,v)=>a+v[key],0)*10/last.length)/10;
   const result={weapon:id,readyMs,fps:mean('fps'),low:mean('low'),samples};
   assert(result.fps>0 && result.low>0);
-  await save(new URL('./'+id+'/'+(phase==='baseline'?'timing.json':'timing-'+phase+'.json'),import.meta.url),JSON.stringify(result,null,2));
+  const path=phase==='ag294'?'./ag294-retakes/timing-'+id+'.json':'./'+id+'/'+(phase==='baseline'?'timing.json':'timing-'+phase+'.json');
+  await save(new URL(path,import.meta.url),JSON.stringify(result,null,2));
   assert.deepEqual(page.errors,[]);
   console.log('PASS '+id+' held and at eye for all 12 samples: ready '+readyMs+' ms; '+result.fps+' fps, '+result.low+' fps low');
 } finally {await browser.close();await server.close()}

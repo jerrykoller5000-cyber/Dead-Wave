@@ -1,0 +1,19 @@
+GRANT chatgpt2 GT-20081: starting one game-test command
+Renderer copy [ { name: 'copy-probe', visible: false }, { name: '', visible: true } ] real accessory check 49 pass 6 fail stored rack/sleeve {
+  initiallyOnRack: false,
+  rackMeshes: 11,
+  rackCorrect: true,
+  sleeveVisible: true,
+  sleeveMeshes: 5,
+  sleeveCoated: 0
+} screen side 1 scope {
+  modelSide: 1,
+  projectedSide: 1,
+  screenX: 0.19702180970529914,
+  ads: 1,
+  issuedScope: true,
+  legacyVisible: false,
+  lensCentre: { x: -1.9419972829858363e-12, y: -0.015183989999865064 },
+  cameraAnchor: { x: 1.1506040509110454e-117, y: 0 },
+  overlay: 1
+}

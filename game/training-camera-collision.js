@@ -5,10 +5,12 @@ const CAMERA_GAP=.035;
 
 // A pulled-in eye needs to look past the marine at what he faces. The regular
 // orbit keeps the feet in view; that framing makes a close eye stare at them.
-export function trainingCloseFraming(head,eye,look,forward){
+export function trainingCloseFraming(head,eye,look,forward,pull){
   const distance=Math.hypot(eye.x-head.x,eye.y-head.y,eye.z-head.z);
   const weight=Math.max(0,Math.min(1,(3.2-distance)/1.3));
   if(weight){
+    eye.y+=(head.y+.32-eye.y)*weight;
+    pull?.(head,eye);
     look.x+=(head.x+forward.x*3.5-look.x)*weight;
     look.y+=(head.y+.15-look.y)*weight;
     look.z+=(head.z+forward.z*3.5-look.z)*weight;
@@ -19,13 +21,20 @@ export function trainingCloseFraming(head,eye,look,forward){
 // If the old orbit is squeezed between the marine and a station, move to the
 // station's player side. Turning the eye alone cannot show a prop behind it.
 export function trainingStationShoulder(head,eye,look,stations,pull,forward){
-  let chosen=null,best=8.5;
+  let chosen=null,best=8.5,sideWeight=0;
   for(const s of Object.values(stations||{})){
     if(!s?.front||!Number.isFinite(s.x)||!Number.isFinite(s.z))continue;
     const nx=s.front.x-s.x,nz=s.front.z-s.z;
-    if((head.x-s.front.x)*nx+(head.z-s.front.z)*nz<-.2*Math.hypot(nx,nz))continue;
+    const length=Math.hypot(nx,nz);
+    if(length<1e-6)continue;
+    if((head.x-s.front.x)*nx+(head.z-s.front.z)*nz<-.2*length)continue;
+    // A nearby face across the corridor is not the one being approached.
+    // Ease out at its edge so the marine stays in frame while walking past.
+    const side=Math.abs((head.x-s.front.x)*nz-(head.z-s.front.z)*nx)/length;
+    const across=Math.max(0,Math.min(1,(2.25-side)/.7));
+    if(!across)continue;
     const d=Math.hypot(head.x-s.front.x,head.z-s.front.z);
-    if(d<best){best=d;chosen=s;}
+    if(d<best){best=d;chosen=s;sideWeight=across*across*(3-2*across);}
   }
   if(!chosen)return null;
   const dx=chosen.front.x-chosen.x,dz=chosen.front.z-chosen.z;
@@ -38,7 +47,7 @@ export function trainingStationShoulder(head,eye,look,stations,pull,forward){
   // Start on the open approach. Waiting for the ray to hit the station's
   // envelope makes a far orbit eye jump to the near face in one frame.
   const distanceWeight=Math.max(0,Math.min(1,(8.5-best)/4.7));
-  const u=distanceWeight*distanceWeight*(3-2*distanceWeight)*facingWeight*facingWeight*(3-2*facingWeight);
+  const u=distanceWeight*distanceWeight*(3-2*distanceWeight)*facingWeight*facingWeight*(3-2*facingWeight)*sideWeight;
   eye.x+=(head.x+nx*1.5+nz*.45-eye.x)*u;
   eye.y+=(head.y+.32-eye.y)*u;
   eye.z+=(head.z+nz*1.5-nx*.45-eye.z)*u;

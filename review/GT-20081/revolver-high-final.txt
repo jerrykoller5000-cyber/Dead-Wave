@@ -1,0 +1,3 @@
+Game-test request e9bc7f1d-ba25-43df-9d4b-49de9f2b0111 queued at position 2. Waiting...
+GRANT chatgpt2 GT-20081: starting one game-test command
+PASS 12 High samples with five incoming rounds: ready 12315 ms, 56.6 fps, 38.4 low

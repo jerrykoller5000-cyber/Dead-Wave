@@ -1,0 +1,37 @@
+GRANT chatgpt2 GT-20081: starting one game-test command
+check-players: 313 player.position reads, all in the allowed places
+           page error: TypeError: Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'.
+           page error: TypeError: Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'.
+           FAIL revolver: measured 0.403 m long next to him (m x look 0.378)
+           FAIL uzi: measured 0.453 m long next to him (m x look 0.470)
+           FAIL ak: measured 1.003 m long next to him (m x look 1.188)
+           FAIL launcher: measured 0.842 m long next to him (m x look 0.900)
+           FAIL flamer: measured 1.100 m long next to him (m x look 0.997)
+FAIL  t188    86 pass   5 fail  171.0s
+           recovering browser after t188: 5 fail
+           FAIL ak: the can is on the bore axis (off by 5.0 mm)
+           FAIL ak: the can is in proportion to the barrel (-0.00x its radius)
+           FAIL uzi: nothing pokes through the can (widest part in it 37.1 mm, can radius 27.0 mm)
+           FAIL uzi: it reaches well past the muzzle (60.7 mm) and is longer than it is wide
+           FAIL uzi: on, the muzzle point is the can's front end (120.0 mm)
+           FAIL shotgun: the can is in proportion to the barrel (3.43x its radius)
+FAIL  t217    49 pass   6 fail  34.0s
+           recovering browser after t217: 6 fail
+
+2 checks: 135 pass, 11 fail
+
+by owner:
+  unassigned
+    t188   5 fail  FAIL revolver: measured 0.403 m long next to him (m x look 0.378)
+           FAIL revolver: measured 0.403 m long next to him (m x look 0.378)
+           FAIL uzi: measured 0.453 m long next to him (m x look 0.470)
+           FAIL ak: measured 1.003 m long next to him (m x look 1.188)
+           FAIL launcher: measured 0.842 m long next to him (m x look 0.900)
+           FAIL flamer: measured 1.100 m long next to him (m x look 0.997)
+    t217   6 fail  FAIL ak: the can is on the bore axis (off by 5.0 mm)
+           FAIL ak: the can is on the bore axis (off by 5.0 mm)
+           FAIL ak: the can is in proportion to the barrel (-0.00x its radius)
+           FAIL uzi: nothing pokes through the can (widest part in it 37.1 mm, can radius 27.0 mm)
+           FAIL uzi: it reaches well past the muzzle (60.7 mm) and is longer than it is wide
+           FAIL uzi: on, the muzzle point is the can's front end (120.0 mm)
+           FAIL shotgun: the can is in proportion to the barrel (3.43x its radius)

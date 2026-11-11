@@ -1,65 +1,65 @@
 {
   "phase": "after-rope",
-  "capturedAt": "2026-11-11T08:05:18.989Z",
+  "capturedAt": "2026-11-11T08:25:40.816Z",
   "renderer": {
     "backend": "WebGPUBackend",
     "gfx": "high"
   },
-  "loadReadyMs": 12633,
+  "loadReadyMs": 11897,
   "bench": {
     "idle": {
       "label": "idle_range_1p_flamer",
       "seconds": 5,
-      "fps": 59.6,
-      "frameMs": 16.78,
-      "low1pct": 43.6,
-      "worstMs": 18.5,
+      "fps": 59.8,
+      "frameMs": 16.72,
+      "low1pct": 40.2,
+      "worstMs": 33.9,
       "hitches": 0,
       "draws": 239,
       "triangles": 132965,
       "prof": {
-        "frames": 303,
-        "tickMs": 11.41,
+        "frames": 301,
+        "tickMs": 11.43,
         "top": [
           {
             "k": "r:render",
-            "avg": 5.8,
-            "max": 11.8
+            "avg": 5.88,
+            "max": 11.3
           },
           {
             "k": "m:hold",
-            "avg": 1.57,
-            "max": 4.5
+            "avg": 1.64,
+            "max": 8.1
           },
           {
             "k": "m:pose",
-            "avg": 0.97,
-            "max": 2.5
-          },
-          {
-            "k": "aim+climb",
-            "avg": 0.71,
-            "max": 2
+            "avg": 0.87,
+            "max": 6.8
           },
           {
             "k": "r:matrices",
-            "avg": 0.66,
-            "max": 1.4
+            "avg": 0.69,
+            "max": 1.5
+          },
+          {
+            "k": "aim+climb",
+            "avg": 0.64,
+            "max": 1.7
           },
           {
             "k": "effects",
-            "avg": 0.31,
-            "max": 0.7
+            "avg": 0.3,
+            "max": 0.6
           },
           {
             "k": "viewmodel",
-            "avg": 0.27,
-            "max": 0.7
+            "avg": 0.28,
+            "max": 2.7
           },
           {
-            "k": "daynight",
-            "avg": 0.13,
-            "max": 0.5
+            "k": "w:rest",
+            "avg": 0.14,
+            "max": 5
           }
         ],
         "spikes": 0,
@@ -72,63 +72,63 @@
     "activeFire": {
       "label": "active_flamer_rope_30m_fireball_char_burn",
       "seconds": 6,
-      "fps": 57.7,
-      "frameMs": 17.33,
-      "low1pct": 41.2,
-      "worstMs": 21,
+      "fps": 59.8,
+      "frameMs": 16.72,
+      "low1pct": 50.7,
+      "worstMs": 17.8,
       "hitches": 0,
-      "draws": 570,
-      "triangles": 141629,
+      "draws": 426,
+      "triangles": 139393,
       "prof": {
-        "frames": 354,
-        "tickMs": 15.84,
+        "frames": 365,
+        "tickMs": 13.41,
         "top": [
           {
             "k": "r:render",
-            "avg": 8.49,
-            "max": 15.8
-          },
-          {
-            "k": "w:rest",
-            "avg": 2.12,
-            "max": 6.5
+            "avg": 7,
+            "max": 11.6
           },
           {
             "k": "m:hold",
-            "avg": 1.36,
+            "avg": 1.4,
+            "max": 3.1
+          },
+          {
+            "k": "w:rest",
+            "avg": 1.28,
             "max": 3.6
           },
           {
             "k": "m:pose",
-            "avg": 0.94,
-            "max": 2.2
+            "avg": 0.93,
+            "max": 2.6
           },
           {
             "k": "r:matrices",
-            "avg": 0.91,
-            "max": 2.5
+            "avg": 0.74,
+            "max": 1.5
           },
           {
             "k": "aim+climb",
-            "avg": 0.5,
-            "max": 2
+            "avg": 0.58,
+            "max": 1.5
           },
           {
             "k": "effects",
             "avg": 0.4,
-            "max": 1.8
+            "max": 1.7
           },
           {
             "k": "viewmodel",
-            "avg": 0.25,
-            "max": 0.8
+            "avg": 0.22,
+            "max": 0.5
           }
         ],
         "spikes": 0,
         "newPipelines": 1,
-        "activeFlames": 175,
-        "maxStreamReachM": 29.44,
-        "charMarks": 173
+        "activeFlames": 98,
+        "maxStreamReachM": 29.39,
+        "charMarks": 54
       }
     }
   }

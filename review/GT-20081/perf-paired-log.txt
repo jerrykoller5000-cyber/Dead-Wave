@@ -1,0 +1,12 @@
+Game-test request db261f65-0ad5-4a25-9443-8bdfc5e91f9b queued at position 1. Waiting...
+GRANT chatgpt2 GT-20081: starting one game-test command
+PASS High on one unchanged reload [
+  [ 'instances', '59.8', '45.1' ],
+  [ 'individual', '59.4', '40.1' ],
+  [ 'instances', '59.3', '39.8' ]
+] CPU milliseconds per held and eye update [
+  '0.003', '0.002',
+  '0.002', '0.001',
+  '0.001', '0.002',
+  '0.002', '0.003'
+]

@@ -1,0 +1,34 @@
+[
+  {
+    "view": "rack",
+    "light": "noon"
+  },
+  {
+    "view": "hip",
+    "light": "noon",
+    "ads": 0,
+    "key": "ak",
+    "finish": "m81",
+    "dir": [
+      0,
+      -0.07991469396917283,
+      0.9968017063026193
+    ]
+  },
+  {
+    "view": "rack",
+    "light": "noon"
+  },
+  {
+    "view": "hip",
+    "light": "noon",
+    "ads": 0,
+    "key": "ak",
+    "finish": "m81",
+    "dir": [
+      0,
+      -0.07991469396917283,
+      0.9968017063026193
+    ]
+  }
+]

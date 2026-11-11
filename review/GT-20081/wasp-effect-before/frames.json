@@ -1,0 +1,34 @@
+[
+  {
+    "light": "noon",
+    "delta": 1,
+    "appearance": true,
+    "eye": "uzi",
+    "flashVisible": true,
+    "flashOpacity": 0.9074074074074074
+  },
+  {
+    "light": "overcast",
+    "delta": 1,
+    "appearance": true,
+    "eye": "uzi",
+    "flashVisible": true,
+    "flashOpacity": 0.9074074074074074
+  },
+  {
+    "light": "dusk",
+    "delta": 1,
+    "appearance": true,
+    "eye": "uzi",
+    "flashVisible": true,
+    "flashOpacity": 0.9074074074074074
+  },
+  {
+    "light": "night",
+    "delta": 1,
+    "appearance": true,
+    "eye": "uzi",
+    "flashVisible": true,
+    "flashOpacity": 0.9074074074074074
+  }
+]

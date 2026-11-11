@@ -1,0 +1,17 @@
+GRANT chatgpt2 GT-20081: starting one game-test command
+check-players: 313 player.position reads, all in the allowed places
+ERROR tgt20076   0 pass   0 fail  39.9s  — evaluate failed: Error: missing fitted optic pistol rmr
+           recovering browser after tgt20076: evaluate failed: Error: missing fitted optic pistol rmr
+           FAIL rack copy shares M4 paint and root UVs (0)
+           FAIL new fitted M4 heavy sleeve is registered for camo (5)
+FAIL  t334    24 pass   2 fail  60.9s
+           recovering browser after t334: 2 fail
+
+2 checks: 24 pass, 2 fail, 1 could not run
+
+by owner:
+  unassigned
+    t334   2 fail  FAIL rack copy shares M4 paint and root UVs (0)
+           FAIL rack copy shares M4 paint and root UVs (0)
+           FAIL new fitted M4 heavy sleeve is registered for camo (5)
+    tgt20076 0 fail  evaluate failed: Error: missing fitted optic pistol rmr

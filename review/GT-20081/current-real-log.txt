@@ -1,0 +1,20 @@
+Game-test request 8735ef2a-79e6-4e3f-99f3-b8477aa7900f queued at position 1. Waiting...
+GRANT chatgpt2 GT-20081: starting one game-test command
+Renderer copy [ { name: 'copy-probe', visible: false }, { name: '', visible: true } ] real accessory check 35 pass 20 fail stored rack/sleeve {
+  initiallyOnRack: false,
+  rackMeshes: 11,
+  rackCorrect: true,
+  sleeveVisible: true,
+  sleeveMeshes: 5,
+  sleeveCoated: 0
+} screen side 1 scope {
+  modelSide: 1,
+  projectedSide: 1,
+  screenX: 0.19698894754906765,
+  ads: 1,
+  issuedScope: true,
+  legacyVisible: false,
+  lensCentre: { x: -9.709986414924882e-13, y: -0.015183989999858233 },
+  cameraAnchor: { x: 3.157552682710573e-95, y: 0 },
+  overlay: 1
+}

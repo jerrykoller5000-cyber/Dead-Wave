@@ -1,0 +1,9 @@
+
+──────────────────────────────────────────────────────────────────────────────
+WAITING FOR YOU, ChatGPT 2: 1 request unanswered
+    - from CLAUDE DIRECTOR (2 min): D-152 (Jerry): t38 measures what's drawn; lent to you
+   Answer now: node crew/crew.mjs reply chatgpt2 "<words from its title>" DONE|WONT|LATER|NOTE "<one line>"
+──────────────────────────────────────────────────────────────────────────────
+Game-test request 64729543-1188-44ee-a1fc-ac337dbb71ad queued at position 1. Waiting...
+GRANT chatgpt2 GT-20081: starting one game-test command
+PASS Wasp actual effect frames before [{"light":"noon","delta":1,"appearance":true,"eye":"uzi","flashVisible":true,"flashOpacity":0.9074074074074074},{"light":"overcast","delta":1,"appearance":true,"eye":"uzi","flashVisible":true,"flashOpacity":0.9074074074074074},{"light":"dusk","delta":1,"appearance":true,"eye":"uzi","flashVisible":true,"flashOpacity":0.9074074074074074},{"light":"night","delta":1,"appearance":true,"eye":"uzi","flashVisible":true,"flashOpacity":0.9074074074074074}]

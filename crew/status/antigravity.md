@@ -1,10 +1,10 @@
 # Antigravity
 
-state: active
+state: idle
 model: Gemini 4 Carbon
-task: AG-296 AG-296 (1): burning-fuel rope strips, tag296 & 5080 bench
-touching: index.html (flame stream), tools/tests/tag296.js, review/AG-296/, qa/2026-11-11-AG-296/
-since: 2026-11-11T07:04Z
+task: —
+touching: —
+since: 2026-11-11T08:26Z
 next: —
 blocked-on: —
 last-report: handoffs/2026-11-11-antigravity-AG-296.md
