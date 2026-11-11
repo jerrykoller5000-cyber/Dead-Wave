@@ -2,7 +2,7 @@
 import { attachLaserLight } from './weapon-attachments.js';
 import { addArtworkInstances, addTriggerArtwork, bindModelArtwork, groupArtwork, optionalArtworkGroup } from './weapon-model-hooks.js';
 import { markPaintSurface } from './weapon-finish.js';
-import { roundGeometry } from './weapon-casings.js';
+import { roundGeometry, spentCaseGeometry } from './weapon-casings.js';
 
 // Small closed surface builders use BufferGeometry, also available in the test renderer.
 // Shared geometry contains no instance material, colour, animation or game state.
@@ -453,13 +453,30 @@ export function makeLauncherModel(ctx) {
     parent.add(mesh);
     return mesh;
   }
-  const drumRounds = [], displayedRounds = [];
+  const emptyArt = spentCaseGeometry(THREE, 'launcher');
+  emptyArt.computeBoundingBox();
+  const drumRounds = [], drumNoses = [], displayedRounds = [], displayedCases = [];
   for (let i = 0; i < 6; i++) {
     const ang = (i / 6) * Math.PI * 2;
     const cx = Math.sin(ang) * 0.065, cy = Math.cos(ang) * 0.065;
     const round = new THREE.Group();
     const mesh = placeRound(round, cx, cy, -.0035, .063, .131);
-    displayedRounds.push({anchor:round, mesh});
+    round.name = 'launcher-loaded-inserts-slot-' + i;
+    const nose = new THREE.Group();
+    nose.name = 'launcher-live-display-' + i;
+    round.add(nose);
+    drumNoses.push(nose);
+    displayedRounds.push({anchor:round, mesh, gate:nose});
+
+    // The alternate appearance shares the loaded prop's back face and scale.
+    // The shell belongs to its occupied slot until the reload clears that slot.
+    const empty = new THREE.Mesh(emptyArt, roundFinish);
+    empty.quaternion.copy(mesh.quaternion);
+    empty.scale.copy(mesh.scale);
+    empty.position.copy(mesh.position);
+    empty.position.z += (roundArt.boundingBox.min.y - emptyArt.boundingBox.min.y) * mesh.scale.y;
+    round.add(empty);
+    displayedCases.push({anchor:round, mesh:empty, gate:nose, whenVisible:false});
     drum.add(round);
     drumRounds.push(round);
     const fa = ang + Math.PI / 6;
@@ -475,6 +492,8 @@ export function makeLauncherModel(ctx) {
   drumHinge.add(drum);
   gun.add(drumHinge);
   addArtworkInstances(THREE, gun, drum, 'launcher-loaded-inserts', displayedRounds);
+  addArtworkInstances(THREE, gun, drum, 'launcher-spent-inserts', displayedCases, {fixedCapacity:true});
+  gun.userData.drumNoses = drumNoses;
   gun.userData.drum = drum;
   gun.userData.drumRounds = drumRounds;
   gun.userData.drumWinder = drumWinder;

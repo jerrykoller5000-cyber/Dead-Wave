@@ -1,5 +1,6 @@
 // Geometry-only queries. Bounds prune candidates; actual triangles establish contact.
 import {Box3, Matrix4, Ray, Triangle, Vector3} from '../../vendor/three/three.core.js';
+import {clipException} from '../../core/clip-exceptions.js';
 
 const EPS = 0.0005; // metres
 const axes = ['x','y','z'];
@@ -171,7 +172,8 @@ function penetration(part,host,depth) {
   return null;
 }
 
-function visiblePieces(root,metresPerUnit,ignore=[]) {
+// The gameplay-camera review uses these same labelled islands and triangles.
+export function visiblePieces(root,metresPerUnit=1,ignore=[]) {
   root.updateWorldMatrix(true,true);
   const parts=[], excluded=new Set(ignore);
   const origin = new Matrix4().makeScale(metresPerUnit,metresPerUnit,metresPerUnit);
@@ -342,7 +344,34 @@ function inspectDetailSeat(frame,host) {
   return Number.isFinite(nearest)?{nearest,depth:deepest}:null;
 }
 
-export function auditWeapon(root, {metresPerUnit=1, ignore=[], seats=[], sources}={}) {
+// A connected island wholly inside a closed solid cannot be seen through its
+// outside surface. A coincident, touching, or emerging face stays unresolved.
+export function enclosedArtwork(inner, host) {
+  if (!host.closed || !host.box.containsBox(inner.box)) return null;
+  const materials=Array.isArray(host.mesh.material)?host.mesh.material:[host.mesh.material];
+  if (!materials.length || materials.some(m=>!m || m.transparent || m.opacity!==1 || m.alphaTest>0 ||
+      m.alphaHash || m.alphaMap || m.transmission>0 || m.wireframe || m.colorWrite===false ||
+      m.side===1 || m.clippingPlanes?.length || m.isShaderMaterial || m.opacityNode || m.maskNode)) return null;
+  if (surfacesTouch(inner.tree,host.tree,1e-14) || !inside(inner.vertices[0],host)) return null;
+  // Distance to the nearest box wall bounds the distance to the real surface,
+  // including for a concave host. Bound the entire island, not a single witness.
+  const maximum = Math.min(...axes.map(k => Math.min(
+    (host.box.max[k]-host.box.min[k])/2,
+    inner.box.max[k]-host.box.min[k], host.box.max[k]-inner.box.min[k]
+  )));
+  return {maximum};
+}
+
+function hiddenException(part,host,pose,lookup) {
+  const inner=part.mesh.userData.clipPart, outer=host.mesh.userData.clipPart;
+  if (!pose || !inner || !outer || !lookup(inner,outer,pose,0)) return null;
+  const buried=enclosedArtwork(part,host);
+  if (!buried) return null;
+  const rule=lookup(inner,outer,pose,buried.maximum);
+  return rule && {id:rule.id,inner,outer,pose,maximum:buried.maximum,reason:rule.reason};
+}
+
+export function auditWeapon(root, {metresPerUnit=1, ignore=[], seats=[], sources,pose,lookup=clipException}={}) {
   const parts=visiblePieces(root,metresPerUnit,ignore);
   const byMesh=new Map();
   for(const part of parts) {
@@ -382,7 +411,7 @@ export function auditWeapon(root, {metresPerUnit=1, ignore=[], seats=[], sources
   }
   const parents=parts.map((_,i)=>i);
   const find=i=>{while(parents[i]!==i){parents[i]=parents[parents[i]];i=parents[i];}return i;};
-  const overlaps=[];
+  const overlaps=[], rawOverlaps=[], excusedSeats=[];
   for(let i=0;i<parts.length;i++) for(let j=0;j<i;j++) {
     const a=parts[i], b=parts[j];
     if(boxDistance(a.box,b.box)>EPS*EPS) continue;
@@ -397,7 +426,10 @@ export function auditWeapon(root, {metresPerUnit=1, ignore=[], seats=[], sources
         row.witnessDepthMm=+(1000*depthToSurface(witness,host.tree)).toFixed(3);
         row.sourceA=sources.get(a.mesh); row.sourceB=sources.get(b.mesh);
       }
-      overlaps.push(row);
+      rawOverlaps.push(row);
+      const named=hiddenException(a,b,pose,lookup) || hiddenException(b,a,pose,lookup);
+      if (named) excusedSeats.push({...row,...named});
+      else overlaps.push(row);
     }
     if(find(i)!==find(j) && (witness || surfacesTouch(a.tree,b.tree,EPS*EPS))) parents[find(i)]=find(j);
   }
@@ -436,5 +468,5 @@ export function auditWeapon(root, {metresPerUnit=1, ignore=[], seats=[], sources
   }
   return {parts:parts.length, openSurfaces:parts.filter(p=>!p.closed).length,
     loose:components.slice(1).map(looseGroup),
-    overlaps,unseated,detailSeats,detailBreaches};
+    rawOverlaps,overlaps,excusedSeats,unseated,detailSeats,detailBreaches};
 }

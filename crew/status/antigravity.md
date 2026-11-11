@@ -1,10 +1,10 @@
 # Antigravity
 
-state: idle
+state: active
 model: Gemini 4 Carbon
-task: —
-touching: —
-since: 2026-11-11T11:04Z
+task: AG-302 Warm every gun's 1P view copy and arms during Training entry blackout (0 post-blackout & first-equip compile hitches)
+touching: game/viewmodel.js (buildGun pre-build/prepareWarmup), index.html (trainingWarmCompile/ensureViewmodel), review/AG-302/, qa/2026-11-11-AG-302/
+since: 2026-11-11T11:14Z
 next: —
 blocked-on: —
 last-report: handoffs/2026-11-11-antigravity-AG-301.md

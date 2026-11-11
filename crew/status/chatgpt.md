@@ -1,10 +1,10 @@
 # ChatGPT
 
-state: idle
+state: active
 model: GPT-6.1 Sol
-task: —
-touching: —
-since: 2026-11-11T11:03Z
+task: GP-20098 Cutaway and Training near-camera hitch root fix, HUD/CIF wording
+touching: world/training-cutaway.js, game/training-camera-collision.js, index.html (updateAmmoHud), index.html (CIF dress hint), ui/strings.js, review/GP-20098
+since: 2026-11-11T11:59Z
 next: —
 blocked-on: —
 last-report: handoffs/2026-11-11-chatgpt-GP-20097.md

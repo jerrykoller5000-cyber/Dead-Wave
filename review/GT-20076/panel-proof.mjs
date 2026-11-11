@@ -1,0 +1,33 @@
+import assert from 'node:assert/strict';
+import {mkdir} from 'node:fs/promises';
+import {fileURLToPath} from 'node:url';
+import {serve} from '../../tools/serve.mjs';
+import {launch} from '../../tools/cdp.mjs';
+import {save} from './save.mjs';
+
+const [id,phase]=process.argv.slice(2);
+assert(process.env.DW_GAME_TEST_TOKEN && /^[a-z0-9]+$/.test(id) && ['before','after'].includes(phase));
+const dir=new URL('./visible-repairs/'+id+'/'+phase+'/',import.meta.url);
+await mkdir(dir,{recursive:true});
+const server=await serve(fileURLToPath(new URL('../../',import.meta.url)),0),browser=await launch({headless:false});
+try {
+  const page=await browser.newPage({width:960,height:540});
+  await page.goto(server.origin+'/index.html?debug=1&raf=timer');
+  assert(await page.waitFor('window.TT && DWLoad.snapshot().state==="ready"'));
+  await page.evaluate('DWOpening.dismissForTesting()');assert(await page.waitFor('!DWOpening.active'));
+  await page.evaluate("document.getElementById('playerName').value='Panel proof';document.getElementById('modeTraining').click()");
+  assert(await page.waitFor("TT.trainingDbg.state().active && !document.getElementById('trainingBlackout')?.classList.contains('on')"));
+  await page.evaluate('import("/review/GT-20076/visibility-camera.mjs").then(m=>{window.vis=m.makeViews(TT);return true})');
+  await page.evaluate('vis.equip('+JSON.stringify(id)+')');
+  const cameras={};
+  for(const view of ['hip','aimed','held-left','held-right',...(id==='chainsaw'?[]:['rack'])]){
+    cameras[view]=await page.evaluate('vis.pose('+JSON.stringify(view)+')');
+    for(const light of ['noon','overcast','dusk','night']){
+      await page.evaluate('vis.light('+JSON.stringify(light)+')');
+      const shot=await page.send('Page.captureScreenshot',{format:'png'});
+      await save(new URL(view+'-'+light+'.png',dir),Buffer.from(shot.data,'base64'));
+    }
+  }
+  await save(new URL('cameras.json',dir),JSON.stringify(cameras,null,2)+'\n');
+  assert.deepEqual(page.errors,[]);console.log('PASS',id,phase,Object.keys(cameras).length,'gameplay views in all four lights');
+}finally{await browser.close();await server.close();}

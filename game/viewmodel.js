@@ -273,6 +273,10 @@ export function createViewmodel(ctx) {
     const stamp = [m.uniform, m.skin, m.glove, m.pads].map((x) => (x ? x.uuid + ':' + x.version + ':' + (x.map ? x.map.uuid : '') : '-')).join('|');
     if (stamp === matStamp && arms) return;
     const vm = { uniform: vmMaterial(m.uniform, true), skin: vmMaterial(m.skin, true), glove: vmMaterial(m.glove, true), pads: vmMaterial(m.pads, true) };
+    // CD-1 (Claude 1, J126): in a strong curl the glove's skinning folds a few faces over at the knuckle creases (about 25 per
+    // hand, the largest ~5 mm²); one-sided they drew as pinholes (the background through the glove at the eye). The hand's
+    // own copies are drawn from both sides so a fold shows the glove, not a hole; the sleeve keeps its one side.
+    for (const k of ['skin', 'glove', 'pads']) if (vm[k] && T.DoubleSide !== undefined && vm[k].side !== T.DoubleSide) { vm[k].side = T.DoubleSide; vm[k].needsUpdate = true; }
     if (!arms) { arms = { r: buildViewArm(T, 1, vm), l: buildViewArm(T, -1, vm) }; flipMeshes(arms.r.root); flipMeshes(arms.l.root); }
     else { arms.r.setMaterials(vm); arms.l.setMaterials(vm); }
     if (!arms.r.root.parent) space.add(arms.r.root, arms.l.root);
@@ -337,14 +341,39 @@ export function createViewmodel(ctx) {
     if (gun) { gunHolder.remove(gun.root); gun = null; }
     if (gun2) { gunHolder2.remove(gun2.root); gun2 = null; }
   }
+  // AG-302: pre-built gun copies stay cached across switches (rebuilt automatically if fitted nodes/source change).
+  const gunCache = new Map(), gun2Cache = new Map();
+  function resetGunCopy(g) {
+    g.root.position.set(0, 0, 0); g.root.quaternion.set(0, 0, 0, 1); g.root.scale.set(1, 1, 1); g.root.visible = true;
+    mirrorParts(g);
+    if (g.work && g.workBase) g.work.position.copy(g.workBase);
+    if (g.pump && g.pumpBase) g.pump.position.copy(g.pumpBase);
+    if (g.bolt && g.boltBase) g.bolt.position.copy(g.boltBase);
+    for (const [part, base] of [[g.shell, g.shellBase], [g.ammoBox, g.ammoBoxBase], [g.fuelCan, g.fuelCanBase],
+      [g.empties, g.emptiesBase], [g.speedloader, g.speedloaderBase], [g.fuelCap, g.fuelCapBase], [g.loadRound, g.loadRoundBase]]) {
+      if (part && base) { part.position.copy(base.pos); part.quaternion.copy(base.quat); }
+    }
+    if (g.mag && g.magBase) { g.mag.position.copy(g.magBase.pos); g.mag.quaternion.copy(g.magBase.quat); g.mag.scale.copy(g.magBase.scale); }
+  }
+  function takeGunCopy(cache, key, src, holder) {
+    let g = cache.get(key);
+    if (!g || g.src !== src || g.nodes !== countNodes(src)) {
+      g = copyGun(key, src, holder);
+      cache.set(key, g);
+    } else {
+      resetGunCopy(g);
+      holder.add(g.root);
+    }
+    return g;
+  }
   function buildGun(key, pair = false) {
     dropGun();
     const src = weaponMeshes[key];
     if (!src) return;
     S.lastFlashT = null; S.lastFlashT2 = null;
-    gun = copyGun(key, src, gunHolder);
+    gun = takeGunCopy(gunCache, key, src, gunHolder);
     const off = pair && ctx.offhand ? ctx.offhand(key) : null;
-    if (off) gun2 = copyGun(key, off, gunHolder2);
+    if (off) gun2 = takeGunCopy(gun2Cache, key, off, gunHolder2);
   }
   let _coated = null;
   function coatedLens() {   // CC-342 (J123): blue-black coated glass with a hard sheen, as a scope's lenses look from outside
@@ -1742,14 +1771,84 @@ export function createViewmodel(ctx) {
     viewPoint(_odA, _odB); ndc(_odB, _odN);
     out.x = _odN.x; out.y = _odN.y; return out;
   }
+  // AG-302: pre-build every gun's first-person copy and the arms for Training blackout compilation, then restore hidden state.
+  function prepareWarmup() {
+    dropGun();
+    setEyeHide(false, null);
+    syncArmMaterials();
+    const warmGroup = new T.Group();
+    warmGroup.name = 'vm-warmup';
+    warmGroup.position.set(0, 0, -0.6);
+    space.add(warmGroup);
+    for (const k of Object.keys(VM_POSES)) {
+      const src = weaponMeshes[k];
+      if (!src) continue;
+      takeGunCopy(gunCache, k, src, warmGroup);
+      const off = VM.akimbo && VM.akimbo[k] && ctx.offhand ? ctx.offhand(k) : null;
+      if (off) takeGunCopy(gun2Cache, k, off, warmGroup);
+    }
+    const bl = bladeCopy(), gr = grenadeCopy();
+    const prevRootVis = root.visible;
+    const saved = [];
+    root.visible = true;
+    root.traverse((o) => {
+      if (o === root) return;
+      const inst = !!(o.isInstancedMesh && o.count === 0 && o.instanceMatrix && o.instanceMatrix.count > 0);
+      saved.push({ o, vis: o.visible, cull: o.frustumCulled, inst });
+      o.visible = true;
+      if (o.isMesh) o.frustumCulled = false;
+      if (inst) o.count = 1;
+    });
+    place();
+    const pendingTex = [];
+    root.traverse((o) => {
+      if (!o.isMesh || !o.material) return;
+      const mats = Array.isArray(o.material) ? o.material : [o.material];
+      for (const m of mats) for (const tk of ['map', 'normalMap']) {
+        const tex = m && m[tk];
+        if (tex && !tex.image) pendingTex.push(tex);
+      }
+    });
+    const ready = pendingTex.length
+      ? new Promise((resolve) => {
+          const t0 = Date.now();
+          const check = () => {
+            if (pendingTex.every((t) => !!t.image) || Date.now() - t0 > 200) resolve();
+            else setTimeout(check, 8);
+          };
+          check();
+        })
+      : Promise.resolve();
+    let restored = false;
+    const restore = () => {
+      if (restored) return;
+      restored = true;
+      for (let i = saved.length - 1; i >= 0; i--) {
+        const s = saved[i];
+        s.o.visible = s.vis;
+        s.o.frustumCulled = s.cull;
+        if (s.inst) s.o.count = 0;
+      }
+      while (warmGroup.children.length) warmGroup.remove(warmGroup.children[warmGroup.children.length - 1]);
+      space.remove(warmGroup);
+      if (bl && bl.root) bl.root.visible = false;
+      if (gr && gr.root) gr.root.visible = false;
+      root.visible = prevRootVis;
+      dropGun();
+      setEyeHide(false, null);
+    };
+    return { ready, restore };
+  }
   const _bdR = Q();
   function dispose() {
     setEyeHide(false, null);
     dropGun();
+    gunCache.clear();
+    gun2Cache.clear();
     if (root.parent) root.parent.remove(root);
   }
   return {
-    root, space, update, place, muzzleWorld, pointWorld, showing, viewPoint, ndc, dispose, info, opticDotOffset /* CC-342 */, retune: () => { sockets.key = null; for (const k in sockCache) delete sockCache[k]; },
+    root, space, update, place, muzzleWorld, pointWorld, showing, viewPoint, ndc, dispose, prepareWarmup, info, opticDotOffset /* CC-342 */, retune: () => { sockets.key = null; for (const k in sockCache) delete sockCache[k]; },
     // CL-293: the view's turn for this shot's spring (radians: p up, y left); 0 unless the view gun is up.
     // CL-327: how far the view gun is turned off its rest pose (the sway, the kick, the sprint's carry, a reload, the
     // raise), in the eye's space (the mirror undone), for the laser's and the light's line. which 2: the pair's left gun.

@@ -1,0 +1,468 @@
+{
+  "events": [
+    {
+      "x": -5.2,
+      "name": "sato-drag",
+      "parent": "",
+      "material": "",
+      "materialId": 16587,
+      "transparent": true,
+      "castShadow": false,
+      "scene": "",
+      "key": "6,229,true,1,false,204,205,100,,,,true,false,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,normal,3,pos"
+    },
+    {
+      "x": -5.2,
+      "name": "feral-motion-echo",
+      "parent": "",
+      "material": "",
+      "materialId": 16809,
+      "transparent": true,
+      "castShadow": false,
+      "scene": "",
+      "key": "278,279,true,1,false,204,205,100,,,,true,false,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,color,3,no"
+    },
+    {
+      "x": -6,
+      "name": "",
+      "parent": "",
+      "material": "",
+      "materialId": 51,
+      "transparent": false,
+      "castShadow": false,
+      "scene": "",
+      "key": "280,281,false,1,false,204,205,100,,,,true,false,true,3,false,519,7680,7680,7680,255,255,1,4,,rgba16float,depth24plus,triangle-list,normal,3,"
+    },
+    {
+      "x": -6,
+      "name": "",
+      "parent": "",
+      "material": "",
+      "materialId": 53,
+      "transparent": false,
+      "castShadow": false,
+      "scene": "",
+      "key": "4,282,false,1,false,204,205,100,,,,true,true,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,color,3,gwea"
+    },
+    {
+      "x": -6,
+      "name": "gale-leaves",
+      "parent": "",
+      "material": "",
+      "materialId": 73,
+      "transparent": false,
+      "castShadow": false,
+      "scene": "",
+      "key": "283,284,false,1,false,204,205,100,,,,true,true,true,3,false,519,7680,7680,7680,255,255,2,4,,rgba16float,depth24plus,triangle-list,normal,3,p"
+    },
+    {
+      "x": -6,
+      "name": "debris-chunks",
+      "parent": "",
+      "material": "",
+      "materialId": 216,
+      "transparent": false,
+      "castShadow": true,
+      "scene": "",
+      "key": "285,286,false,1,false,204,205,100,,,,true,true,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,normal,3,p"
+    },
+    {
+      "x": -6,
+      "name": "",
+      "parent": "",
+      "material": "",
+      "materialId": 217,
+      "transparent": false,
+      "castShadow": false,
+      "scene": "",
+      "key": "20,21,false,1,false,204,205,100,,,,true,true,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,normal,3,pos"
+    },
+    {
+      "x": -6,
+      "name": "",
+      "parent": "",
+      "material": "",
+      "materialId": 9329,
+      "transparent": false,
+      "castShadow": false,
+      "scene": "",
+      "key": "25,287,false,1,false,204,205,100,,,,true,true,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,color,3,nor"
+    },
+    {
+      "x": -6,
+      "name": "",
+      "parent": "",
+      "material": "",
+      "materialId": 9331,
+      "transparent": false,
+      "castShadow": false,
+      "scene": "",
+      "key": "25,288,false,1,false,204,205,100,,,,true,true,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,color,3,nor"
+    },
+    {
+      "x": -6,
+      "name": "",
+      "parent": "",
+      "material": "",
+      "materialId": 74,
+      "transparent": true,
+      "castShadow": false,
+      "scene": "",
+      "key": "289,290,true,1,false,204,205,100,,,,true,false,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,normal,3,p"
+    },
+    {
+      "x": -6,
+      "name": "",
+      "parent": "",
+      "material": "",
+      "materialId": 218,
+      "transparent": true,
+      "castShadow": false,
+      "scene": "",
+      "key": "291,292,true,1,false,204,205,100,,,,true,false,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,normal,3,p"
+    },
+    {
+      "x": -10.8,
+      "name": "",
+      "parent": "",
+      "material": "",
+      "materialId": 17750,
+      "transparent": true,
+      "castShadow": false,
+      "scene": "",
+      "key": "95,96,true,2,false,204,205,100,,,,true,false,true,3,false,519,7680,7680,7680,255,255,1,4,,rgba16float,depth24plus,triangle-list,normal,3,pos"
+    },
+    {
+      "x": -10.8,
+      "name": "",
+      "parent": "",
+      "material": "",
+      "materialId": 13932,
+      "transparent": true,
+      "castShadow": false,
+      "scene": "",
+      "key": "293,294,true,2,false,204,205,100,,,,true,false,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,,position,5,3,uv,5,3,2,i"
+    },
+    {
+      "x": -10.8,
+      "name": "spitter-acid-trail-batch",
+      "parent": "",
+      "material": "",
+      "materialId": 17754,
+      "transparent": true,
+      "castShadow": false,
+      "scene": "",
+      "key": "295,296,true,1,false,204,205,100,,,,true,false,true,3,false,519,7680,7680,7680,255,255,2,4,,rgba16float,depth24plus,triangle-list,acidAge,1,"
+    },
+    {
+      "x": -10.8,
+      "name": "spider-ground-web",
+      "parent": "",
+      "material": "",
+      "materialId": 17755,
+      "transparent": true,
+      "castShadow": false,
+      "scene": "",
+      "key": "36,62,true,1,false,204,205,100,,,,true,false,true,3,false,519,7680,7680,7680,255,255,1,4,,rgba16float,depth24plus,triangle-list,normal,3,pos"
+    },
+    {
+      "x": -10.8,
+      "name": "spider-ground-web",
+      "parent": "",
+      "material": "",
+      "materialId": 17755,
+      "transparent": true,
+      "castShadow": false,
+      "scene": "",
+      "key": "36,62,true,1,false,204,205,100,,,,true,false,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,normal,3,pos"
+    },
+    {
+      "x": -11.6,
+      "name": "pgb-patch",
+      "parent": "",
+      "material": "pgb-patch",
+      "materialId": 9372,
+      "transparent": false,
+      "castShadow": false,
+      "scene": "",
+      "key": "297,298,false,1,false,204,205,100,,,,true,true,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,normal,3,p"
+    },
+    {
+      "x": -11.6,
+      "name": "",
+      "parent": "",
+      "material": "wear:shirt",
+      "materialId": 9394,
+      "transparent": false,
+      "castShadow": false,
+      "scene": "",
+      "key": "28,299,false,1,false,204,205,100,,,,true,true,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,color,3,nor"
+    },
+    {
+      "x": -11.6,
+      "name": "rig-skin",
+      "parent": "",
+      "material": "wear:shirt",
+      "materialId": 9394,
+      "transparent": false,
+      "castShadow": false,
+      "scene": "",
+      "key": "49,300,false,1,false,204,205,100,,,,true,true,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,color,3,nor"
+    },
+    {
+      "x": -11.6,
+      "name": "rig-skin",
+      "parent": "",
+      "material": "wear:trousers",
+      "materialId": 9395,
+      "transparent": false,
+      "castShadow": false,
+      "scene": "",
+      "key": "40,300,false,1,false,204,205,100,,,,true,true,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,color,3,nor"
+    },
+    {
+      "x": -11.6,
+      "name": "rig-skin",
+      "parent": "",
+      "material": "wear:boots",
+      "materialId": 9396,
+      "transparent": false,
+      "castShadow": false,
+      "scene": "",
+      "key": "46,301,false,1,false,204,205,100,,,,true,true,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,color,3,nor"
+    },
+    {
+      "x": -11.6,
+      "name": "gb152-hand",
+      "parent": "",
+      "material": "wear:gloves",
+      "materialId": 9398,
+      "transparent": false,
+      "castShadow": false,
+      "scene": "",
+      "key": "28,299,false,1,false,204,205,100,,,,true,true,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,color,3,nor"
+    },
+    {
+      "x": -11.6,
+      "name": "rig-skin",
+      "parent": "",
+      "material": "wear:belt",
+      "materialId": 9399,
+      "transparent": false,
+      "castShadow": false,
+      "scene": "",
+      "key": "47,301,false,1,false,204,205,100,,,,true,true,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,color,3,nor"
+    },
+    {
+      "x": -11.6,
+      "name": "rig-skin",
+      "parent": "",
+      "material": "wear:belt",
+      "materialId": 9399,
+      "transparent": false,
+      "castShadow": false,
+      "scene": "",
+      "key": "42,301,false,1,false,204,205,100,,,,true,true,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,color,3,nor"
+    },
+    {
+      "x": -11.6,
+      "name": "balaclava-hem",
+      "parent": "balaclava",
+      "material": "wear:mask",
+      "materialId": 9401,
+      "transparent": false,
+      "castShadow": true,
+      "scene": "",
+      "key": "28,299,false,1,false,204,205,100,,,,true,true,true,3,false,519,7680,7680,7680,255,255,2,4,,rgba16float,depth24plus,triangle-list,color,3,nor"
+    },
+    {
+      "x": -11.6,
+      "name": "",
+      "parent": "",
+      "material": "wear:cap",
+      "materialId": 9402,
+      "transparent": false,
+      "castShadow": false,
+      "scene": "",
+      "key": "28,299,false,1,false,204,205,100,,,,true,true,true,3,false,519,7680,7680,7680,255,255,2,4,,rgba16float,depth24plus,triangle-list,color,3,nor"
+    },
+    {
+      "x": -11.6,
+      "name": "rig-skin",
+      "parent": "",
+      "material": "wear:pack",
+      "materialId": 9407,
+      "transparent": false,
+      "castShadow": false,
+      "scene": "",
+      "key": "51,301,false,1,false,204,205,100,,,,true,true,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,color,3,nor"
+    },
+    {
+      "x": -11.6,
+      "name": "rig-skin",
+      "parent": "",
+      "material": "rig-skin-plain",
+      "materialId": 9423,
+      "transparent": false,
+      "castShadow": false,
+      "scene": "",
+      "key": "162,243,false,1,false,204,205,100,,,,true,true,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,color,3,dw"
+    },
+    {
+      "x": -11.6,
+      "name": "rig-skin",
+      "parent": "",
+      "material": "rig-skin-plain",
+      "materialId": 9423,
+      "transparent": false,
+      "castShadow": false,
+      "scene": "",
+      "key": "44,243,false,1,false,204,205,100,,,,true,true,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,color,3,dwR"
+    },
+    {
+      "x": -11.6,
+      "name": "",
+      "parent": "training-perimeter-east",
+      "material": "",
+      "materialId": 17176,
+      "transparent": true,
+      "castShadow": false,
+      "scene": "",
+      "key": "8,214,true,1,false,204,205,100,,,,true,false,true,3,false,519,7680,7680,7680,255,255,1,4,,rgba16float,depth24plus,triangle-list,normal,3,pos"
+    },
+    {
+      "x": -11.6,
+      "name": "",
+      "parent": "training-perimeter-east",
+      "material": "",
+      "materialId": 17176,
+      "transparent": true,
+      "castShadow": false,
+      "scene": "",
+      "key": "8,214,true,1,false,204,205,100,,,,true,false,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,normal,3,pos"
+    },
+    {
+      "x": -11.6,
+      "name": "hair-fade",
+      "parent": "medium-fade",
+      "material": "",
+      "materialId": 9415,
+      "transparent": true,
+      "castShadow": false,
+      "scene": "",
+      "key": "57,302,true,1,false,204,205,100,,,,true,false,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,normal,3,po"
+    },
+    {
+      "x": -11.6,
+      "name": "training-containment-rotor",
+      "parent": "training-containment",
+      "material": "",
+      "materialId": 17191,
+      "transparent": true,
+      "castShadow": false,
+      "scene": "",
+      "key": "221,222,true,1,false,204,205,100,,,,true,false,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,color,3,co"
+    },
+    {
+      "x": -11.6,
+      "name": "training-containment-gun",
+      "parent": "training-containment",
+      "material": "",
+      "materialId": 17193,
+      "transparent": true,
+      "castShadow": false,
+      "scene": "",
+      "key": "219,220,true,1,false,204,205,100,,,,true,false,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,containmen"
+    },
+    {
+      "x": -11.6,
+      "name": "training-containment-mount",
+      "parent": "training-containment",
+      "material": "",
+      "materialId": 17206,
+      "transparent": true,
+      "castShadow": false,
+      "scene": "",
+      "key": "223,224,true,1,false,204,205,100,,,,true,false,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,containmen"
+    },
+    {
+      "x": -11.6,
+      "name": "training-containment-status",
+      "parent": "training-containment",
+      "material": "",
+      "materialId": 17208,
+      "transparent": true,
+      "castShadow": false,
+      "scene": "",
+      "key": "250,251,true,1,false,204,205,100,,,,true,false,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,containmen"
+    },
+    {
+      "x": -19.2,
+      "name": "",
+      "parent": "training-perimeter-south",
+      "material": "",
+      "materialId": 17174,
+      "transparent": true,
+      "castShadow": false,
+      "scene": "",
+      "key": "8,214,true,1,false,204,205,100,,,,true,false,true,3,false,519,7680,7680,7680,255,255,0,4,,rgba16float,depth24plus,triangle-list,normal,3,pos"
+    }
+  ],
+  "cutaway": [
+    {
+      "side": "rangeSouth",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "east",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "south",
+      "opacity": 0.06,
+      "hidden": true
+    },
+    {
+      "side": "north",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "west",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "overhead",
+      "opacity": 0,
+      "hidden": true
+    },
+    {
+      "side": "east",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "north",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "north",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "north",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "rangeSouth",
+      "opacity": 1,
+      "hidden": false
+    }
+  ]
+}

@@ -54,9 +54,19 @@ export function partitionTrainingShell(T, tgGroup, origin) {
     group.traverse(mesh => {
       if (!mesh.isMesh || Array.isArray(mesh.material)) return;
       const source = mesh.material;
-      let material = mats.get(source);
-      if (!material) { material = source.clone(); material.transparent = true; material.depthWrite = false; mats.set(source, material); owned.push(material); }
-      mesh.material = material;
+      let pair = mats.get(source);
+      if (!pair) {
+        const solid = source.clone(), fade = source.clone();
+        solid.transparent = source.transparent;
+        solid.depthWrite = source.transparent ? false : source.depthWrite;
+        fade.transparent = true;
+        fade.depthWrite = false;
+        pair = { solid, fade, meshes: [], usingFade: !!source.transparent };
+        mats.set(source, pair);
+        owned.push(solid, fade);
+      }
+      pair.meshes.push(mesh);
+      mesh.material = pair.usingFade ? pair.fade : pair.solid;
       // Blended solid bases must precede their transparent decal overlays.
       if (!source.transparent) mesh.renderOrder = -1;
     });
@@ -70,15 +80,22 @@ export function partitionTrainingShell(T, tgGroup, origin) {
     north: ['z', 28, [['x', -44, -8], ['y', 0, 24]]],
     rangeSouth: ['z', -12, [['x', -8, 8], ['y', 0, 6]]]   // GB-161
   };
+  function useFade(pair, fade) {
+    if (pair.usingFade === fade) return;
+    pair.usingFade = fade;
+    for (const mesh of pair.meshes) mesh.material = fade ? pair.fade : pair.solid;
+  }
   function syncMaterials() {
-    for (const e of entries) for (const [source, mat] of e.mats) {
-      mat.opacity = source.opacity * e.opacity;
-      mat.color?.copy(source.color); if (source.emissive) { mat.emissive.copy(source.emissive); mat.emissiveIntensity = source.emissiveIntensity; }
-      // A solid wall stays in the opaque pass. Leaving it transparent made the tile sort against the paint
-      // and the locker, so the surface changed as the camera turned.
-      const solid = e.opacity >= .995 && !source.transparent;
-      if (mat.transparent === solid) { mat.transparent = !solid; mat.needsUpdate = true; }
-      mat.depthWrite = !mat.transparent && source.depthWrite && e.opacity >= .995;
+    for (const e of entries) for (const [source, pair] of e.mats) {
+      pair.solid.opacity = source.opacity;
+      pair.fade.opacity = source.opacity * e.opacity;
+      for (const mat of [pair.solid, pair.fade]) {
+        mat.color?.copy(source.color);
+        if (source.emissive) { mat.emissive.copy(source.emissive); mat.emissiveIntensity = source.emissiveIntensity; }
+      }
+      // Keep both render states compiled. A fade only swaps the mesh's material;
+      // changing transparent on a live WebGPU material rebuilds its pipeline.
+      useFade(pair, e.opacity < .995 || source.transparent);
     }
   }
   function update(camera, player, dt = 1 / 60) {
@@ -112,6 +129,16 @@ export function partitionTrainingShell(T, tgGroup, origin) {
   }
   return {
     update, syncMaterials,
+    // Call after the opaque entry compile, compile the scene again, then restore.
+    // The blackout/paused render loop in trainingWarmCompile makes this safe.
+    prepareWarmup() {
+      const states = [];
+      for (const e of entries) for (const pair of e.mats.values()) {
+        states.push([pair, pair.usingFade]);
+        useFade(pair, true);
+      }
+      return () => { for (const [pair, wasFade] of states) useFade(pair, wasFade); };
+    },
     // Only the third-person camera query uses this; rounds, laser and scoped aim remain solid.
     ignoreSolid(s) {
       if (!enabled || s.target != null || s.door || s.gate) return false;

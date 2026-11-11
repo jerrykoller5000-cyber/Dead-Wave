@@ -1,0 +1,42 @@
+[
+  {
+    "name": "vm-hand-glove-main",
+    "mat": "vm:wear:gloves:detail",
+    "side": 2
+  },
+  {
+    "name": "vm-hand-glove-pads",
+    "mat": "vm:MeshStandardMaterial",
+    "side": 2
+  },
+  {
+    "name": "vm-hand-bare-main",
+    "mat": "vm:MeshStandardMaterial:detail",
+    "side": 2
+  },
+  {
+    "name": "vm-hand-bare-nails",
+    "mat": "vm:MeshStandardMaterial:nails",
+    "side": 2
+  },
+  {
+    "name": "vm-hand-glove-main",
+    "mat": "vm:wear:gloves:detail",
+    "side": 2
+  },
+  {
+    "name": "vm-hand-glove-pads",
+    "mat": "vm:MeshStandardMaterial",
+    "side": 2
+  },
+  {
+    "name": "vm-hand-bare-main",
+    "mat": "vm:MeshStandardMaterial:detail",
+    "side": 2
+  },
+  {
+    "name": "vm-hand-bare-nails",
+    "mat": "vm:MeshStandardMaterial:nails",
+    "side": 2
+  }
+]

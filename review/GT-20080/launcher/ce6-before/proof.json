@@ -1,0 +1,165 @@
+{
+  "phase": "before",
+  "rows": [
+    {
+      "ammo": 6,
+      "occupancy": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "held": [
+        6,
+        0
+      ],
+      "eye": [
+        6,
+        0
+      ],
+      "acceptedCase": false
+    },
+    {
+      "ammo": 5,
+      "occupancy": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "held": [
+        6,
+        0
+      ],
+      "eye": [
+        6,
+        0
+      ],
+      "acceptedCase": false
+    },
+    {
+      "ammo": 4,
+      "occupancy": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "held": [
+        6,
+        0
+      ],
+      "eye": [
+        6,
+        0
+      ],
+      "acceptedCase": false
+    },
+    {
+      "ammo": 3,
+      "occupancy": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "held": [
+        6,
+        0
+      ],
+      "eye": [
+        6,
+        0
+      ],
+      "acceptedCase": false
+    },
+    {
+      "ammo": 2,
+      "occupancy": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "held": [
+        6,
+        0
+      ],
+      "eye": [
+        6,
+        0
+      ],
+      "acceptedCase": false
+    },
+    {
+      "ammo": 1,
+      "occupancy": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "held": [
+        6,
+        0
+      ],
+      "eye": [
+        6,
+        0
+      ],
+      "acceptedCase": false
+    },
+    {
+      "ammo": 0,
+      "occupancy": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "held": [
+        6,
+        0
+      ],
+      "eye": [
+        6,
+        0
+      ],
+      "acceptedCase": false
+    }
+  ],
+  "ejected": {
+    "ammo": 0,
+    "occupancy": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    "held": [
+      0,
+      0
+    ],
+    "eye": [
+      0,
+      0
+    ],
+    "acceptedCase": false
+  }
+}

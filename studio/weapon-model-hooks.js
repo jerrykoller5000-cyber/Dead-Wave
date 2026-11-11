@@ -67,14 +67,15 @@ export function optionalArtworkGroup(ctx, gun, name, build, fallbackFor = null) 
 const batchLists = new WeakMap();
 const batchSlots = new WeakMap();
 
-export function addArtworkInstances(T, gun, parent, name, entries) {
+export function addArtworkInstances(T, gun, parent, name, entries, {fixedCapacity=false}={}) {
   const first = entries[0].mesh;
   const batch = new T.InstancedMesh(first.geometry, first.material, entries.length);
   batch.name = name;
   batch.castShadow = first.castShadow;
   batch.receiveShadow = first.receiveShadow;
   batch.frustumCulled = false;
-  batch.userData.artworkSlots = entries.map(({anchor, mesh}, index) => {
+  if (fixedCapacity) batch.userData.artworkCapacity = entries.length;
+  batch.userData.artworkSlots = entries.map(({anchor, mesh, gate, whenVisible=true}, index) => {
     if (mesh.parent !== anchor || mesh.geometry !== first.geometry || mesh.material !== first.material) {
       throw new Error('Mixed geometry or material in artwork batch ' + name);
     }
@@ -82,7 +83,14 @@ export function addArtworkInstances(T, gun, parent, name, entries) {
     anchor.userData.artworkSlot = anchor.name;
     mesh.updateMatrix();
     anchor.remove(mesh);
-    return {name: anchor.name, local: mesh.matrix.toArray()};
+    const slot = {name: anchor.name, local: mesh.matrix.toArray()};
+    if (gate) {
+      if (!gate.name || gate.parent !== anchor) throw new Error('Invalid artwork switch in ' + name);
+      gate.userData.artworkSlot = gate.name;
+      slot.gate = gate.name;
+      slot.whenVisible = whenVisible;
+    }
+    return slot;
   });
   parent.add(batch);
   (gun.userData.artworkInstanceMeshes ||= []).push(batch);
@@ -109,13 +117,16 @@ export function updateArtworkInstances(T, root) {
       const slots = batch.userData.artworkSlots.map(slot => {
         const node = markers.get(slot.name);
         if (!node) throw new Error('Missing artwork slot ' + slot.name);
-        return {node, local: new T.Matrix4().fromArray(slot.local)};
+        const gate = slot.gate && markers.get(slot.gate);
+        if (slot.gate && !gate) throw new Error('Missing artwork switch ' + slot.gate);
+        return {node, gate, whenVisible: slot.whenVisible, local: new T.Matrix4().fromArray(slot.local)};
       });
-      state = {slots, matrix: new T.Matrix4()};
+      state = {slots, matrix: new T.Matrix4(), parked: new T.Matrix4().makeScale(0,0,0)};
       batchSlots.set(batch, state);
     }
     let count = 0, changed = false;
     for (const slot of state.slots) {
+      if (slot.gate && slot.gate.visible !== slot.whenVisible) continue;
       const matrix = state.matrix.copy(slot.local);
       let node = slot.node;
       while (node && node !== batch.parent && node.visible) {
@@ -131,8 +142,19 @@ export function updateArtworkInstances(T, root) {
       }
       count++;
     }
-    if (changed || count !== batch.count) {
-      batch.count = count;
+    // r175 sizes its per-instance shader buffer from the count at compilation.
+    // An initially empty alternate appearance needs enough room for every slot
+    // on its first draw. Trailing slots collapse to a point and draw no pixels.
+    const drawCount = batch.userData.artworkCapacity || count;
+    for (let i=count; i<drawCount; i++) {
+      const start=i*16;
+      if (state.parked.elements.some((v,k)=>v!==batch.instanceMatrix.array[start+k])) {
+        batch.setMatrixAt(i,state.parked);
+        changed=true;
+      }
+    }
+    if (changed || drawCount !== batch.count) {
+      batch.count = drawCount;
       batch.instanceMatrix.needsUpdate = true;
       batch.boundingBox = null;
       batch.boundingSphere = null;

@@ -1,0 +1,4109 @@
+{
+  "id": "uzi",
+  "rawPairs": 159,
+  "crossingPairs": 130,
+  "screenCandidates": 98,
+  "coverage": {
+    "hip": {
+      "projected": 39088,
+      "maskPixels": 37747,
+      "overlapPixels": 37341
+    },
+    "aimed": {
+      "projected": 23304,
+      "maskPixels": 20593,
+      "overlapPixels": 20340
+    },
+    "held-left": {
+      "projected": 42177,
+      "maskPixels": 22489,
+      "overlapPixels": 20716
+    },
+    "held-right": {
+      "projected": 41809,
+      "maskPixels": 35602,
+      "overlapPixels": 33521
+    },
+    "rack": {
+      "projected": 31133,
+      "maskPixels": 18273,
+      "overlapPixels": 14794
+    }
+  },
+  "rows": [
+    {
+      "index": 10,
+      "a": "root/BufferGeometry[15]",
+      "b": "root/BufferGeometry[0]",
+      "segments": 32,
+      "views": {
+        "hip": {
+          "pixels": 177,
+          "at": [
+            682,
+            323
+          ],
+          "bounds": [
+            598,
+            296,
+            772,
+            336
+          ]
+        },
+        "aimed": {
+          "pixels": 91,
+          "at": [
+            479,
+            324
+          ],
+          "bounds": [
+            435,
+            320,
+            524,
+            324
+          ]
+        },
+        "held-left": {
+          "pixels": 144,
+          "at": [
+            403,
+            159
+          ],
+          "bounds": [
+            290,
+            150,
+            515,
+            166
+          ]
+        },
+        "held-right": {
+          "pixels": 226,
+          "at": [
+            554,
+            158
+          ],
+          "bounds": [
+            442,
+            150,
+            666,
+            166
+          ]
+        },
+        "rack": {
+          "pixels": 70,
+          "at": [
+            438,
+            175
+          ],
+          "bounds": [
+            308,
+            175,
+            499,
+            178
+          ]
+        }
+      },
+      "peakPixels": 226
+    },
+    {
+      "index": 7,
+      "a": "root/BufferGeometry[10]",
+      "b": "root/BufferGeometry[0]",
+      "segments": 16,
+      "views": {
+        "held-right": {
+          "pixels": 186,
+          "at": [
+            511,
+            183
+          ],
+          "bounds": [
+            455,
+            179,
+            572,
+            193
+          ]
+        }
+      },
+      "peakPixels": 186
+    },
+    {
+      "index": 69,
+      "a": "root/group[54]/group[0]/BufferGeometry[2]",
+      "b": "root/group[54]/group[0]/BufferGeometry[0]",
+      "segments": 18,
+      "views": {
+        "held-right": {
+          "pixels": 133,
+          "at": [
+            617,
+            354
+          ],
+          "bounds": [
+            608,
+            321,
+            628,
+            386
+          ]
+        }
+      },
+      "peakPixels": 133
+    },
+    {
+      "index": 2,
+      "a": "root/BufferGeometry[3]",
+      "b": "root/BufferGeometry[0]",
+      "segments": 16,
+      "views": {
+        "hip": {
+          "pixels": 80,
+          "at": [
+            608,
+            329
+          ],
+          "bounds": [
+            591,
+            316,
+            625,
+            339
+          ]
+        },
+        "held-left": {
+          "pixels": 117,
+          "at": [
+            445,
+            189
+          ],
+          "bounds": [
+            385,
+            180,
+            503,
+            190
+          ]
+        },
+        "rack": {
+          "pixels": 6,
+          "at": [
+            493,
+            193
+          ],
+          "bounds": [
+            397,
+            193,
+            498,
+            198
+          ]
+        }
+      },
+      "peakPixels": 117
+    },
+    {
+      "index": 1,
+      "a": "root/BufferGeometry[2]",
+      "b": "root/BufferGeometry[0]",
+      "segments": 16,
+      "views": {
+        "hip": {
+          "pixels": 67,
+          "at": [
+            651,
+            380
+          ],
+          "bounds": [
+            639,
+            367,
+            666,
+            391
+          ]
+        },
+        "held-left": {
+          "pixels": 109,
+          "at": [
+            319,
+            197
+          ],
+          "bounds": [
+            294,
+            191,
+            344,
+            200
+          ]
+        },
+        "rack": {
+          "pixels": 6,
+          "at": [
+            348,
+            210
+          ],
+          "bounds": [
+            314,
+            210,
+            355,
+            213
+          ]
+        }
+      },
+      "peakPixels": 109
+    },
+    {
+      "index": 9,
+      "a": "root/BufferGeometry[12]",
+      "b": "root/BufferGeometry[0]",
+      "segments": 18,
+      "views": {
+        "held-right": {
+          "pixels": 109,
+          "at": [
+            574,
+            221
+          ],
+          "bounds": [
+            536,
+            214,
+            650,
+            236
+          ]
+        }
+      },
+      "peakPixels": 109
+    },
+    {
+      "index": 4,
+      "a": "root/BufferGeometry[5]",
+      "b": "root/BufferGeometry[0]",
+      "segments": 18,
+      "views": {
+        "hip": {
+          "pixels": 88,
+          "at": [
+            638,
+            400
+          ],
+          "bounds": [
+            607,
+            374,
+            662,
+            438
+          ]
+        },
+        "held-left": {
+          "pixels": 52,
+          "at": [
+            316,
+            216
+          ],
+          "bounds": [
+            294,
+            214,
+            341,
+            218
+          ]
+        },
+        "rack": {
+          "pixels": 108,
+          "at": [
+            364,
+            241
+          ],
+          "bounds": [
+            314,
+            231,
+            429,
+            242
+          ]
+        }
+      },
+      "peakPixels": 108
+    },
+    {
+      "index": 6,
+      "a": "root/BufferGeometry[9]",
+      "b": "root/BufferGeometry[0]",
+      "segments": 16,
+      "views": {
+        "held-right": {
+          "pixels": 106,
+          "at": [
+            637,
+            196
+          ],
+          "bounds": [
+            612,
+            190,
+            662,
+            199
+          ]
+        }
+      },
+      "peakPixels": 106
+    },
+    {
+      "index": 8,
+      "a": "root/BufferGeometry[11]",
+      "b": "root/BufferGeometry[0]",
+      "segments": 20,
+      "views": {
+        "held-right": {
+          "pixels": 106,
+          "at": [
+            637,
+            173
+          ],
+          "bounds": [
+            612,
+            172,
+            661,
+            180
+          ]
+        }
+      },
+      "peakPixels": 106
+    },
+    {
+      "index": 87,
+      "a": "root/BufferGeometry[65]",
+      "b": "root/BufferGeometry[55]",
+      "segments": 88,
+      "views": {
+        "hip": {
+          "pixels": 34,
+          "at": [
+            582,
+            319
+          ],
+          "bounds": [
+            580,
+            301,
+            586,
+            340
+          ]
+        },
+        "held-left": {
+          "pixels": 94,
+          "at": [
+            573,
+            208
+          ],
+          "bounds": [
+            571,
+            184,
+            577,
+            231
+          ]
+        },
+        "held-right": {
+          "pixels": 103,
+          "at": [
+            385,
+            206
+          ],
+          "bounds": [
+            381,
+            182,
+            387,
+            230
+          ]
+        },
+        "rack": {
+          "pixels": 85,
+          "at": [
+            560,
+            205
+          ],
+          "bounds": [
+            559,
+            184,
+            561,
+            225
+          ]
+        }
+      },
+      "peakPixels": 103
+    },
+    {
+      "index": 0,
+      "a": "root/BufferGeometry[1]",
+      "b": "root/BufferGeometry[0]",
+      "segments": 20,
+      "views": {
+        "hip": {
+          "pixels": 86,
+          "at": [
+            608,
+            346
+          ],
+          "bounds": [
+            589,
+            334,
+            623,
+            362
+          ]
+        },
+        "held-left": {
+          "pixels": 102,
+          "at": [
+            409,
+            200
+          ],
+          "bounds": [
+            384,
+            199,
+            443,
+            207
+          ]
+        },
+        "rack": {
+          "pixels": 8,
+          "at": [
+            403,
+            210
+          ],
+          "bounds": [
+            396,
+            210,
+            499,
+            215
+          ]
+        }
+      },
+      "peakPixels": 102
+    },
+    {
+      "index": 5,
+      "a": "root/BufferGeometry[8]",
+      "b": "root/BufferGeometry[0]",
+      "segments": 20,
+      "views": {
+        "held-right": {
+          "pixels": 102,
+          "at": [
+            530,
+            206
+          ],
+          "bounds": [
+            456,
+            198,
+            572,
+            213
+          ]
+        }
+      },
+      "peakPixels": 102
+    },
+    {
+      "index": 85,
+      "a": "root/BufferGeometry[63]",
+      "b": "root/BufferGeometry[55]",
+      "segments": 88,
+      "views": {
+        "hip": {
+          "pixels": 35,
+          "at": [
+            585,
+            322
+          ],
+          "bounds": [
+            583,
+            303,
+            589,
+            343
+          ]
+        },
+        "held-left": {
+          "pixels": 97,
+          "at": [
+            557,
+            207
+          ],
+          "bounds": [
+            554,
+            183,
+            560,
+            230
+          ]
+        },
+        "held-right": {
+          "pixels": 102,
+          "at": [
+            401,
+            204
+          ],
+          "bounds": [
+            398,
+            181,
+            404,
+            229
+          ]
+        },
+        "rack": {
+          "pixels": 86,
+          "at": [
+            545,
+            204
+          ],
+          "bounds": [
+            545,
+            184,
+            547,
+            225
+          ]
+        }
+      },
+      "peakPixels": 102
+    },
+    {
+      "index": 83,
+      "a": "root/BufferGeometry[61]",
+      "b": "root/BufferGeometry[55]",
+      "segments": 86,
+      "views": {
+        "hip": {
+          "pixels": 27,
+          "at": [
+            588,
+            324
+          ],
+          "bounds": [
+            587,
+            305,
+            591,
+            343
+          ]
+        },
+        "held-left": {
+          "pixels": 100,
+          "at": [
+            539,
+            204
+          ],
+          "bounds": [
+            537,
+            181,
+            543,
+            228
+          ]
+        },
+        "held-right": {
+          "pixels": 101,
+          "at": [
+            419,
+            203
+          ],
+          "bounds": [
+            415,
+            180,
+            421,
+            227
+          ]
+        },
+        "rack": {
+          "pixels": 85,
+          "at": [
+            532,
+            204
+          ],
+          "bounds": [
+            531,
+            184,
+            533,
+            225
+          ]
+        }
+      },
+      "peakPixels": 101
+    },
+    {
+      "index": 88,
+      "a": "root/BufferGeometry[66]",
+      "b": "root/BufferGeometry[55]",
+      "segments": 88,
+      "views": {
+        "hip": {
+          "pixels": 29,
+          "at": [
+            581,
+            316
+          ],
+          "bounds": [
+            579,
+            301,
+            585,
+            339
+          ]
+        },
+        "held-left": {
+          "pixels": 97,
+          "at": [
+            581,
+            209
+          ],
+          "bounds": [
+            579,
+            184,
+            585,
+            232
+          ]
+        },
+        "held-right": {
+          "pixels": 101,
+          "at": [
+            376,
+            208
+          ],
+          "bounds": [
+            373,
+            183,
+            379,
+            231
+          ]
+        },
+        "rack": {
+          "pixels": 70,
+          "at": [
+            568,
+            205
+          ],
+          "bounds": [
+            567,
+            184,
+            569,
+            225
+          ]
+        }
+      },
+      "peakPixels": 101
+    },
+    {
+      "index": 81,
+      "a": "root/BufferGeometry[59]",
+      "b": "root/BufferGeometry[55]",
+      "segments": 92,
+      "views": {
+        "held-left": {
+          "pixels": 76,
+          "at": [
+            524,
+            198
+          ],
+          "bounds": [
+            522,
+            180,
+            526,
+            217
+          ]
+        },
+        "held-right": {
+          "pixels": 99,
+          "at": [
+            435,
+            202
+          ],
+          "bounds": [
+            432,
+            179,
+            437,
+            226
+          ]
+        },
+        "rack": {
+          "pixels": 85,
+          "at": [
+            517,
+            205
+          ],
+          "bounds": [
+            516,
+            184,
+            518,
+            225
+          ]
+        }
+      },
+      "peakPixels": 99
+    },
+    {
+      "index": 82,
+      "a": "root/BufferGeometry[60]",
+      "b": "root/BufferGeometry[55]",
+      "segments": 92,
+      "views": {
+        "held-left": {
+          "pixels": 95,
+          "at": [
+            532,
+            203
+          ],
+          "bounds": [
+            529,
+            181,
+            534,
+            227
+          ]
+        },
+        "held-right": {
+          "pixels": 99,
+          "at": [
+            426,
+            202
+          ],
+          "bounds": [
+            423,
+            179,
+            429,
+            226
+          ]
+        },
+        "rack": {
+          "pixels": 84,
+          "at": [
+            524,
+            205
+          ],
+          "bounds": [
+            523,
+            184,
+            525,
+            225
+          ]
+        }
+      },
+      "peakPixels": 99
+    },
+    {
+      "index": 84,
+      "a": "root/BufferGeometry[62]",
+      "b": "root/BufferGeometry[55]",
+      "segments": 86,
+      "views": {
+        "hip": {
+          "pixels": 34,
+          "at": [
+            587,
+            321
+          ],
+          "bounds": [
+            585,
+            303,
+            591,
+            344
+          ]
+        },
+        "held-left": {
+          "pixels": 98,
+          "at": [
+            548,
+            205
+          ],
+          "bounds": [
+            546,
+            182,
+            551,
+            229
+          ]
+        },
+        "held-right": {
+          "pixels": 99,
+          "at": [
+            410,
+            204
+          ],
+          "bounds": [
+            407,
+            180,
+            412,
+            228
+          ]
+        },
+        "rack": {
+          "pixels": 82,
+          "at": [
+            539,
+            203
+          ],
+          "bounds": [
+            538,
+            184,
+            540,
+            225
+          ]
+        }
+      },
+      "peakPixels": 99
+    },
+    {
+      "index": 86,
+      "a": "root/BufferGeometry[64]",
+      "b": "root/BufferGeometry[55]",
+      "segments": 88,
+      "views": {
+        "hip": {
+          "pixels": 31,
+          "at": [
+            584,
+            318
+          ],
+          "bounds": [
+            582,
+            302,
+            588,
+            341
+          ]
+        },
+        "held-left": {
+          "pixels": 96,
+          "at": [
+            566,
+            207
+          ],
+          "bounds": [
+            562,
+            184,
+            568,
+            231
+          ]
+        },
+        "held-right": {
+          "pixels": 98,
+          "at": [
+            392,
+            205
+          ],
+          "bounds": [
+            390,
+            182,
+            396,
+            229
+          ]
+        },
+        "rack": {
+          "pixels": 70,
+          "at": [
+            553,
+            207
+          ],
+          "bounds": [
+            552,
+            184,
+            554,
+            225
+          ]
+        }
+      },
+      "peakPixels": 98
+    },
+    {
+      "index": 89,
+      "a": "root/BufferGeometry[67]",
+      "b": "root/BufferGeometry[55]",
+      "segments": 82,
+      "views": {
+        "hip": {
+          "pixels": 27,
+          "at": [
+            579,
+            316
+          ],
+          "bounds": [
+            578,
+            300,
+            583,
+            336
+          ]
+        },
+        "held-left": {
+          "pixels": 95,
+          "at": [
+            591,
+            208
+          ],
+          "bounds": [
+            588,
+            185,
+            594,
+            233
+          ]
+        },
+        "held-right": {
+          "pixels": 98,
+          "at": [
+            367,
+            207
+          ],
+          "bounds": [
+            364,
+            184,
+            371,
+            232
+          ]
+        },
+        "rack": {
+          "pixels": 82,
+          "at": [
+            574,
+            204
+          ],
+          "bounds": [
+            574,
+            184,
+            576,
+            225
+          ]
+        }
+      },
+      "peakPixels": 98
+    },
+    {
+      "index": 65,
+      "a": "root/group[54]/group[0]/BufferGeometry[1]",
+      "b": "root/group[54]/group[0]/BufferGeometry[0]",
+      "segments": 18,
+      "views": {
+        "held-left": {
+          "pixels": 71,
+          "at": [
+            336,
+            372
+          ],
+          "bounds": [
+            329,
+            355,
+            340,
+            388
+          ]
+        },
+        "rack": {
+          "pixels": 89,
+          "at": [
+            360,
+            353
+          ],
+          "bounds": [
+            350,
+            327,
+            366,
+            389
+          ]
+        }
+      },
+      "peakPixels": 89
+    },
+    {
+      "index": 3,
+      "a": "root/BufferGeometry[4]",
+      "b": "root/BufferGeometry[0]",
+      "segments": 20,
+      "views": {
+        "hip": {
+          "pixels": 66,
+          "at": [
+            655,
+            354
+          ],
+          "bounds": [
+            642,
+            342,
+            669,
+            362
+          ]
+        },
+        "held-left": {
+          "pixels": 20,
+          "at": [
+            316,
+            178
+          ],
+          "bounds": [
+            295,
+            173,
+            344,
+            180
+          ]
+        },
+        "rack": {
+          "pixels": 7,
+          "at": [
+            318,
+            198
+          ],
+          "bounds": [
+            314,
+            197,
+            358,
+            198
+          ]
+        }
+      },
+      "peakPixels": 66
+    },
+    {
+      "index": 74,
+      "a": "root/BufferGeometry[55]",
+      "b": "root/BufferGeometry[0]",
+      "segments": 66,
+      "views": {
+        "held-left": {
+          "pixels": 20,
+          "at": [
+            518,
+            197
+          ],
+          "bounds": [
+            518,
+            188,
+            519,
+            207
+          ]
+        },
+        "held-right": {
+          "pixels": 66,
+          "at": [
+            439,
+            197
+          ],
+          "bounds": [
+            431,
+            169,
+            441,
+            228
+          ]
+        }
+      },
+      "peakPixels": 66
+    },
+    {
+      "index": 134,
+      "a": "root/recoil-bolt[117]/BufferGeometry[0]",
+      "b": "root/BufferGeometry[116]",
+      "segments": 24,
+      "views": {
+        "held-right": {
+          "pixels": 63,
+          "at": [
+            536,
+            186
+          ],
+          "bounds": [
+            521,
+            185,
+            549,
+            201
+          ]
+        }
+      },
+      "peakPixels": 63
+    },
+    {
+      "index": 53,
+      "a": "root/BufferGeometry[45]",
+      "b": "root/BufferGeometry[35]",
+      "segments": 72,
+      "views": {
+        "hip": {
+          "pixels": 10,
+          "at": [
+            635,
+            536
+          ],
+          "bounds": [
+            632,
+            532,
+            638,
+            539
+          ]
+        },
+        "held-right": {
+          "pixels": 51,
+          "at": [
+            613,
+            315
+          ],
+          "bounds": [
+            590,
+            306,
+            634,
+            320
+          ]
+        },
+        "rack": {
+          "pixels": 43,
+          "at": [
+            367,
+            322
+          ],
+          "bounds": [
+            348,
+            318,
+            383,
+            326
+          ]
+        }
+      },
+      "peakPixels": 51
+    },
+    {
+      "index": 40,
+      "a": "root/BufferGeometry[34]",
+      "b": "root/BufferGeometry[0]",
+      "segments": 39,
+      "views": {
+        "hip": {
+          "pixels": 49,
+          "at": [
+            771,
+            380
+          ],
+          "bounds": [
+            769,
+            363,
+            782,
+            402
+          ]
+        },
+        "aimed": {
+          "pixels": 44,
+          "at": [
+            519,
+            365
+          ],
+          "bounds": [
+            519,
+            349,
+            531,
+            386
+          ]
+        },
+        "held-right": {
+          "pixels": 41,
+          "at": [
+            661,
+            179
+          ],
+          "bounds": [
+            660,
+            166,
+            674,
+            191
+          ]
+        }
+      },
+      "peakPixels": 49
+    },
+    {
+      "index": 92,
+      "a": "root/BufferGeometry[72]",
+      "b": "root/BufferGeometry[55]",
+      "segments": 58,
+      "views": {
+        "held-left": {
+          "pixels": 42,
+          "at": [
+            600,
+            207
+          ],
+          "bounds": [
+            600,
+            187,
+            605,
+            228
+          ]
+        },
+        "held-right": {
+          "pixels": 48,
+          "at": [
+            358,
+            204
+          ],
+          "bounds": [
+            353,
+            181,
+            359,
+            227
+          ]
+        },
+        "rack": {
+          "pixels": 37,
+          "at": [
+            582,
+            204
+          ],
+          "bounds": [
+            582,
+            187,
+            584,
+            222
+          ]
+        }
+      },
+      "peakPixels": 48
+    },
+    {
+      "index": 11,
+      "a": "root/BufferGeometry[16]",
+      "b": "root/BufferGeometry[15]",
+      "segments": 23,
+      "views": {
+        "hip": {
+          "pixels": 43,
+          "at": [
+            726,
+            307
+          ],
+          "bounds": [
+            712,
+            298,
+            744,
+            308
+          ]
+        },
+        "aimed": {
+          "pixels": 33,
+          "at": [
+            480,
+            300
+          ],
+          "bounds": [
+            466,
+            295,
+            493,
+            300
+          ]
+        },
+        "held-right": {
+          "pixels": 1,
+          "at": [
+            651,
+            133
+          ],
+          "bounds": [
+            651,
+            133,
+            651,
+            133
+          ]
+        }
+      },
+      "peakPixels": 43
+    },
+    {
+      "index": 70,
+      "a": "root/group[54]/group[0]/BufferGeometry[3]",
+      "b": "root/group[54]/group[0]/BufferGeometry[0]",
+      "segments": 28,
+      "views": {
+        "held-left": {
+          "pixels": 39,
+          "at": [
+            331,
+            397
+          ],
+          "bounds": [
+            316,
+            390,
+            348,
+            401
+          ]
+        },
+        "held-right": {
+          "pixels": 40,
+          "at": [
+            625,
+            395
+          ],
+          "bounds": [
+            609,
+            388,
+            640,
+            398
+          ]
+        },
+        "rack": {
+          "pixels": 36,
+          "at": [
+            352,
+            398
+          ],
+          "bounds": [
+            338,
+            392,
+            366,
+            400
+          ]
+        }
+      },
+      "peakPixels": 40
+    },
+    {
+      "index": 129,
+      "a": "root/BufferGeometry[116]",
+      "b": "root/BufferGeometry[10]",
+      "segments": 29,
+      "views": {
+        "held-right": {
+          "pixels": 40,
+          "at": [
+            532,
+            185
+          ],
+          "bounds": [
+            515,
+            184,
+            549,
+            188
+          ]
+        }
+      },
+      "peakPixels": 40
+    },
+    {
+      "index": 41,
+      "a": "root/BufferGeometry[35]",
+      "b": "root/BufferGeometry[0]",
+      "segments": 38,
+      "views": {
+        "rack": {
+          "pixels": 31,
+          "at": [
+            372,
+            244
+          ],
+          "bounds": [
+            357,
+            244,
+            387,
+            245
+          ]
+        }
+      },
+      "peakPixels": 31
+    },
+    {
+      "index": 133,
+      "a": "root/BufferGeometry[116]",
+      "b": "root/BufferGeometry[115]",
+      "segments": 22,
+      "views": {
+        "held-right": {
+          "pixels": 27,
+          "at": [
+            537,
+            201
+          ],
+          "bounds": [
+            515,
+            184,
+            549,
+            202
+          ]
+        }
+      },
+      "peakPixels": 27
+    },
+    {
+      "index": 33,
+      "a": "root/BufferGeometry[24]",
+      "b": "root/BufferGeometry[15]",
+      "segments": 34,
+      "views": {
+        "held-right": {
+          "pixels": 26,
+          "at": [
+            452,
+            152
+          ],
+          "bounds": [
+            447,
+            149,
+            460,
+            157
+          ]
+        }
+      },
+      "peakPixels": 26
+    },
+    {
+      "index": 32,
+      "a": "root/BufferGeometry[23]",
+      "b": "root/BufferGeometry[15]",
+      "segments": 28,
+      "views": {
+        "held-left": {
+          "pixels": 10,
+          "at": [
+            340,
+            133
+          ],
+          "bounds": [
+            337,
+            133,
+            343,
+            134
+          ]
+        },
+        "held-right": {
+          "pixels": 24,
+          "at": [
+            629,
+            134
+          ],
+          "bounds": [
+            619,
+            133,
+            640,
+            135
+          ]
+        }
+      },
+      "peakPixels": 24
+    },
+    {
+      "index": 57,
+      "a": "root/controls-selector[50]/BufferGeometry[2]",
+      "b": "root/controls-selector[50]/CylinderGeometry[0]",
+      "segments": 49,
+      "views": {
+        "hip": {
+          "pixels": 18,
+          "at": [
+            628,
+            346
+          ],
+          "bounds": [
+            625,
+            339,
+            629,
+            352
+          ]
+        },
+        "held-left": {
+          "pixels": 24,
+          "at": [
+            370,
+            185
+          ],
+          "bounds": [
+            368,
+            182,
+            378,
+            192
+          ]
+        },
+        "rack": {
+          "pixels": 24,
+          "at": [
+            383,
+            199
+          ],
+          "bounds": [
+            381,
+            196,
+            390,
+            205
+          ]
+        }
+      },
+      "peakPixels": 24
+    },
+    {
+      "index": 122,
+      "a": "root/BufferGeometry[115]",
+      "b": "root/BufferGeometry[8]",
+      "segments": 47,
+      "views": {
+        "held-right": {
+          "pixels": 23,
+          "at": [
+            537,
+            201
+          ],
+          "bounds": [
+            522,
+            199,
+            552,
+            203
+          ]
+        }
+      },
+      "peakPixels": 23
+    },
+    {
+      "index": 136,
+      "a": "root/TorusGeometry[118]",
+      "b": "root/BufferGeometry[0]",
+      "segments": 30,
+      "views": {
+        "hip": {
+          "pixels": 23,
+          "at": [
+            723,
+            390
+          ],
+          "bounds": [
+            718,
+            388,
+            741,
+            393
+          ]
+        },
+        "aimed": {
+          "pixels": 23,
+          "at": [
+            486,
+            380
+          ],
+          "bounds": [
+            468,
+            378,
+            491,
+            382
+          ]
+        }
+      },
+      "peakPixels": 23
+    },
+    {
+      "index": 13,
+      "a": "root/work[20]/CylinderGeometry[1]",
+      "b": "root/work[20]/CylinderGeometry[0]",
+      "segments": 32,
+      "views": {
+        "hip": {
+          "pixels": 22,
+          "at": [
+            647,
+            283
+          ],
+          "bounds": [
+            637,
+            281,
+            657,
+            283
+          ]
+        },
+        "aimed": {
+          "pixels": 18,
+          "at": [
+            482,
+            283
+          ],
+          "bounds": [
+            469,
+            283,
+            490,
+            283
+          ]
+        },
+        "held-left": {
+          "pixels": 13,
+          "at": [
+            449,
+            139
+          ],
+          "bounds": [
+            443,
+            138,
+            461,
+            140
+          ]
+        },
+        "held-right": {
+          "pixels": 22,
+          "at": [
+            505,
+            139
+          ],
+          "bounds": [
+            495,
+            138,
+            514,
+            140
+          ]
+        },
+        "rack": {
+          "pixels": 18,
+          "at": [
+            450,
+            158
+          ],
+          "bounds": [
+            442,
+            158,
+            458,
+            159
+          ]
+        }
+      },
+      "peakPixels": 22
+    },
+    {
+      "index": 113,
+      "a": "root/heatParts-barrel[93]",
+      "b": "root/BufferGeometry[72]",
+      "segments": 36,
+      "views": {
+        "held-left": {
+          "pixels": 18,
+          "at": [
+            615,
+            205
+          ],
+          "bounds": [
+            614,
+            194,
+            616,
+            217
+          ]
+        },
+        "held-right": {
+          "pixels": 22,
+          "at": [
+            344,
+            205
+          ],
+          "bounds": [
+            342,
+            193,
+            345,
+            216
+          ]
+        }
+      },
+      "peakPixels": 22
+    },
+    {
+      "index": 25,
+      "a": "root/work[20]/BoxGeometry[13]",
+      "b": "root/work[20]/CylinderGeometry[1]",
+      "segments": 10,
+      "views": {
+        "hip": {
+          "pixels": 21,
+          "at": [
+            646,
+            277
+          ],
+          "bounds": [
+            645,
+            273,
+            648,
+            281
+          ]
+        },
+        "aimed": {
+          "pixels": 14,
+          "at": [
+            474,
+            279
+          ],
+          "bounds": [
+            474,
+            276,
+            476,
+            282
+          ]
+        },
+        "held-left": {
+          "pixels": 10,
+          "at": [
+            442,
+            133
+          ],
+          "bounds": [
+            442,
+            130,
+            443,
+            138
+          ]
+        },
+        "rack": {
+          "pixels": 8,
+          "at": [
+            441,
+            154
+          ],
+          "bounds": [
+            441,
+            151,
+            441,
+            158
+          ]
+        }
+      },
+      "peakPixels": 21
+    },
+    {
+      "index": 30,
+      "a": "root/BufferGeometry[21]",
+      "b": "root/BufferGeometry[15]",
+      "segments": 28,
+      "views": {
+        "hip": {
+          "pixels": 8,
+          "at": [
+            692,
+            295
+          ],
+          "bounds": [
+            683,
+            294,
+            700,
+            296
+          ]
+        },
+        "held-left": {
+          "pixels": 21,
+          "at": [
+            330,
+            134
+          ],
+          "bounds": [
+            316,
+            133,
+            337,
+            135
+          ]
+        },
+        "held-right": {
+          "pixels": 9,
+          "at": [
+            614,
+            133
+          ],
+          "bounds": [
+            611,
+            133,
+            617,
+            134
+          ]
+        }
+      },
+      "peakPixels": 21
+    },
+    {
+      "index": 12,
+      "a": "root/work[20]/CylinderGeometry[0]",
+      "b": "root/BufferGeometry[15]",
+      "segments": 16,
+      "views": {
+        "hip": {
+          "pixels": 6,
+          "at": [
+            642,
+            288
+          ],
+          "bounds": [
+            640,
+            288,
+            652,
+            289
+          ]
+        },
+        "aimed": {
+          "pixels": 4,
+          "at": [
+            470,
+            289
+          ],
+          "bounds": [
+            469,
+            289,
+            490,
+            289
+          ]
+        },
+        "held-left": {
+          "pixels": 20,
+          "at": [
+            453,
+            145
+          ],
+          "bounds": [
+            443,
+            144,
+            462,
+            146
+          ]
+        },
+        "held-right": {
+          "pixels": 17,
+          "at": [
+            506,
+            145
+          ],
+          "bounds": [
+            496,
+            144,
+            514,
+            145
+          ]
+        }
+      },
+      "peakPixels": 20
+    },
+    {
+      "index": 24,
+      "a": "root/work[20]/BoxGeometry[12]",
+      "b": "root/work[20]/CylinderGeometry[1]",
+      "segments": 9,
+      "views": {
+        "hip": {
+          "pixels": 20,
+          "at": [
+            641,
+            277
+          ],
+          "bounds": [
+            641,
+            273,
+            643,
+            281
+          ]
+        },
+        "aimed": {
+          "pixels": 20,
+          "at": [
+            472,
+            278
+          ],
+          "bounds": [
+            470,
+            274,
+            472,
+            282
+          ]
+        },
+        "held-left": {
+          "pixels": 16,
+          "at": [
+            444,
+            134
+          ],
+          "bounds": [
+            443,
+            130,
+            444,
+            138
+          ]
+        },
+        "rack": {
+          "pixels": 14,
+          "at": [
+            442,
+            154
+          ],
+          "bounds": [
+            442,
+            151,
+            443,
+            157
+          ]
+        }
+      },
+      "peakPixels": 20
+    },
+    {
+      "index": 28,
+      "a": "root/work[20]/BoxGeometry[16]",
+      "b": "root/work[20]/CylinderGeometry[1]",
+      "segments": 9,
+      "views": {
+        "hip": {
+          "pixels": 16,
+          "at": [
+            658,
+            278
+          ],
+          "bounds": [
+            657,
+            274,
+            659,
+            283
+          ]
+        },
+        "aimed": {
+          "pixels": 20,
+          "at": [
+            489,
+            278
+          ],
+          "bounds": [
+            487,
+            274,
+            489,
+            282
+          ]
+        },
+        "held-right": {
+          "pixels": 15,
+          "at": [
+            513,
+            134
+          ],
+          "bounds": [
+            513,
+            130,
+            514,
+            138
+          ]
+        }
+      },
+      "peakPixels": 20
+    },
+    {
+      "index": 16,
+      "a": "root/work[20]/BoxGeometry[4]",
+      "b": "root/work[20]/CylinderGeometry[1]",
+      "segments": 9,
+      "views": {
+        "held-right": {
+          "pixels": 19,
+          "at": [
+            499,
+            135
+          ],
+          "bounds": [
+            498,
+            131,
+            500,
+            139
+          ]
+        }
+      },
+      "peakPixels": 19
+    },
+    {
+      "index": 20,
+      "a": "root/work[20]/BoxGeometry[8]",
+      "b": "root/work[20]/CylinderGeometry[1]",
+      "segments": 9,
+      "views": {
+        "held-left": {
+          "pixels": 19,
+          "at": [
+            459,
+            135
+          ],
+          "bounds": [
+            458,
+            131,
+            460,
+            139
+          ]
+        },
+        "rack": {
+          "pixels": 14,
+          "at": [
+            455,
+            154
+          ],
+          "bounds": [
+            455,
+            151,
+            456,
+            157
+          ]
+        }
+      },
+      "peakPixels": 19
+    },
+    {
+      "index": 21,
+      "a": "root/work[20]/BoxGeometry[9]",
+      "b": "root/work[20]/CylinderGeometry[1]",
+      "segments": 10,
+      "views": {
+        "hip": {
+          "pixels": 3,
+          "at": [
+            636,
+            273
+          ],
+          "bounds": [
+            635,
+            272,
+            636,
+            277
+          ]
+        },
+        "held-left": {
+          "pixels": 19,
+          "at": [
+            455,
+            135
+          ],
+          "bounds": [
+            454,
+            131,
+            456,
+            139
+          ]
+        },
+        "rack": {
+          "pixels": 15,
+          "at": [
+            452,
+            154
+          ],
+          "bounds": [
+            452,
+            150,
+            453,
+            157
+          ]
+        }
+      },
+      "peakPixels": 19
+    },
+    {
+      "index": 23,
+      "a": "root/work[20]/BoxGeometry[11]",
+      "b": "root/work[20]/CylinderGeometry[1]",
+      "segments": 10,
+      "views": {
+        "hip": {
+          "pixels": 19,
+          "at": [
+            638,
+            276
+          ],
+          "bounds": [
+            637,
+            272,
+            639,
+            281
+          ]
+        },
+        "aimed": {
+          "pixels": 18,
+          "at": [
+            469,
+            278
+          ],
+          "bounds": [
+            468,
+            274,
+            469,
+            282
+          ]
+        },
+        "held-left": {
+          "pixels": 8,
+          "at": [
+            446,
+            133
+          ],
+          "bounds": [
+            446,
+            130,
+            447,
+            138
+          ]
+        },
+        "rack": {
+          "pixels": 14,
+          "at": [
+            445,
+            154
+          ],
+          "bounds": [
+            445,
+            151,
+            446,
+            157
+          ]
+        }
+      },
+      "peakPixels": 19
+    },
+    {
+      "index": 26,
+      "a": "root/work[20]/BoxGeometry[14]",
+      "b": "root/work[20]/CylinderGeometry[1]",
+      "segments": 14,
+      "views": {
+        "hip": {
+          "pixels": 19,
+          "at": [
+            652,
+            278
+          ],
+          "bounds": [
+            650,
+            274,
+            652,
+            282
+          ]
+        },
+        "aimed": {
+          "pixels": 4,
+          "at": [
+            480,
+            275
+          ],
+          "bounds": [
+            479,
+            274,
+            480,
+            275
+          ]
+        }
+      },
+      "peakPixels": 19
+    },
+    {
+      "index": 27,
+      "a": "root/work[20]/BoxGeometry[15]",
+      "b": "root/work[20]/CylinderGeometry[1]",
+      "segments": 10,
+      "views": {
+        "hip": {
+          "pixels": 19,
+          "at": [
+            655,
+            278
+          ],
+          "bounds": [
+            654,
+            274,
+            656,
+            282
+          ]
+        },
+        "aimed": {
+          "pixels": 14,
+          "at": [
+            485,
+            279
+          ],
+          "bounds": [
+            483,
+            276,
+            485,
+            282
+          ]
+        },
+        "held-right": {
+          "pixels": 3,
+          "at": [
+            515,
+            131
+          ],
+          "bounds": [
+            515,
+            130,
+            515,
+            137
+          ]
+        }
+      },
+      "peakPixels": 19
+    },
+    {
+      "index": 60,
+      "a": "root/group[54]/group[0]/BufferGeometry[0]",
+      "b": "root/BufferGeometry[42]",
+      "segments": 64,
+      "views": {
+        "held-right": {
+          "pixels": 6,
+          "at": [
+            605,
+            323
+          ],
+          "bounds": [
+            599,
+            318,
+            620,
+            325
+          ]
+        },
+        "rack": {
+          "pixels": 19,
+          "at": [
+            367,
+            328
+          ],
+          "bounds": [
+            353,
+            325,
+            377,
+            330
+          ]
+        }
+      },
+      "peakPixels": 19
+    },
+    {
+      "index": 140,
+      "a": "root/CylinderGeometry[123]",
+      "b": "root/heatParts-barrel[93]",
+      "segments": 50,
+      "views": {
+        "held-left": {
+          "pixels": 19,
+          "at": [
+            703,
+            215
+          ],
+          "bounds": [
+            701,
+            204,
+            703,
+            222
+          ]
+        },
+        "held-right": {
+          "pixels": 18,
+          "at": [
+            257,
+            212
+          ],
+          "bounds": [
+            256,
+            203,
+            258,
+            221
+          ]
+        },
+        "rack": {
+          "pixels": 5,
+          "at": [
+            665,
+            210
+          ],
+          "bounds": [
+            664,
+            208,
+            665,
+            211
+          ]
+        }
+      },
+      "peakPixels": 19
+    },
+    {
+      "index": 19,
+      "a": "root/work[20]/BoxGeometry[7]",
+      "b": "root/work[20]/CylinderGeometry[1]",
+      "segments": 10,
+      "views": {
+        "held-left": {
+          "pixels": 18,
+          "at": [
+            461,
+            135
+          ],
+          "bounds": [
+            461,
+            131,
+            462,
+            139
+          ]
+        },
+        "held-right": {
+          "pixels": 7,
+          "at": [
+            494,
+            132
+          ],
+          "bounds": [
+            493,
+            131,
+            494,
+            134
+          ]
+        },
+        "rack": {
+          "pixels": 7,
+          "at": [
+            458,
+            154
+          ],
+          "bounds": [
+            458,
+            151,
+            458,
+            157
+          ]
+        }
+      },
+      "peakPixels": 18
+    },
+    {
+      "index": 29,
+      "a": "root/work[20]/BoxGeometry[17]",
+      "b": "root/work[20]/CylinderGeometry[1]",
+      "segments": 10,
+      "views": {
+        "hip": {
+          "pixels": 7,
+          "at": [
+            659,
+            280
+          ],
+          "bounds": [
+            659,
+            275,
+            660,
+            283
+          ]
+        },
+        "aimed": {
+          "pixels": 18,
+          "at": [
+            490,
+            278
+          ],
+          "bounds": [
+            490,
+            274,
+            491,
+            282
+          ]
+        },
+        "held-right": {
+          "pixels": 18,
+          "at": [
+            511,
+            134
+          ],
+          "bounds": [
+            510,
+            130,
+            511,
+            138
+          ]
+        }
+      },
+      "peakPixels": 18
+    },
+    {
+      "index": 31,
+      "a": "root/BufferGeometry[22]",
+      "b": "root/BufferGeometry[15]",
+      "segments": 34,
+      "views": {
+        "hip": {
+          "pixels": 2,
+          "at": [
+            617,
+            285
+          ],
+          "bounds": [
+            617,
+            285,
+            618,
+            285
+          ]
+        },
+        "held-left": {
+          "pixels": 18,
+          "at": [
+            506,
+            153
+          ],
+          "bounds": [
+            498,
+            150,
+            510,
+            158
+          ]
+        },
+        "rack": {
+          "pixels": 3,
+          "at": [
+            501,
+            168
+          ],
+          "bounds": [
+            501,
+            167,
+            501,
+            169
+          ]
+        }
+      },
+      "peakPixels": 18
+    },
+    {
+      "index": 14,
+      "a": "root/work[20]/BoxGeometry[2]",
+      "b": "root/work[20]/CylinderGeometry[1]",
+      "segments": 14,
+      "views": {
+        "held-right": {
+          "pixels": 17,
+          "at": [
+            507,
+            134
+          ],
+          "bounds": [
+            506,
+            131,
+            508,
+            138
+          ]
+        }
+      },
+      "peakPixels": 17
+    },
+    {
+      "index": 15,
+      "a": "root/work[20]/BoxGeometry[3]",
+      "b": "root/work[20]/CylinderGeometry[1]",
+      "segments": 10,
+      "views": {
+        "held-right": {
+          "pixels": 17,
+          "at": [
+            503,
+            135
+          ],
+          "bounds": [
+            502,
+            131,
+            504,
+            138
+          ]
+        }
+      },
+      "peakPixels": 17
+    },
+    {
+      "index": 17,
+      "a": "root/work[20]/BoxGeometry[5]",
+      "b": "root/work[20]/CylinderGeometry[1]",
+      "segments": 10,
+      "views": {
+        "held-right": {
+          "pixels": 17,
+          "at": [
+            496,
+            135
+          ],
+          "bounds": [
+            495,
+            131,
+            496,
+            139
+          ]
+        }
+      },
+      "peakPixels": 17
+    },
+    {
+      "index": 22,
+      "a": "root/work[20]/BoxGeometry[10]",
+      "b": "root/work[20]/CylinderGeometry[1]",
+      "segments": 14,
+      "views": {
+        "hip": {
+          "pixels": 13,
+          "at": [
+            636,
+            276
+          ],
+          "bounds": [
+            635,
+            272,
+            637,
+            280
+          ]
+        },
+        "held-left": {
+          "pixels": 16,
+          "at": [
+            451,
+            134
+          ],
+          "bounds": [
+            450,
+            131,
+            451,
+            138
+          ]
+        },
+        "rack": {
+          "pixels": 16,
+          "at": [
+            449,
+            153
+          ],
+          "bounds": [
+            448,
+            150,
+            449,
+            157
+          ]
+        }
+      },
+      "peakPixels": 16
+    },
+    {
+      "index": 121,
+      "a": "root/BufferGeometry[115]",
+      "b": "root/BufferGeometry[0]",
+      "segments": 16,
+      "views": {
+        "held-right": {
+          "pixels": 16,
+          "at": [
+            551,
+            192
+          ],
+          "bounds": [
+            551,
+            184,
+            551,
+            199
+          ]
+        }
+      },
+      "peakPixels": 16
+    },
+    {
+      "index": 18,
+      "a": "root/work[20]/BoxGeometry[6]",
+      "b": "root/work[20]/CylinderGeometry[1]",
+      "segments": 14,
+      "views": {
+        "held-left": {
+          "pixels": 14,
+          "at": [
+            463,
+            134
+          ],
+          "bounds": [
+            463,
+            131,
+            464,
+            138
+          ]
+        },
+        "held-right": {
+          "pixels": 6,
+          "at": [
+            494,
+            136
+          ],
+          "bounds": [
+            494,
+            133,
+            494,
+            139
+          ]
+        },
+        "rack": {
+          "pixels": 4,
+          "at": [
+            459,
+            152
+          ],
+          "bounds": [
+            459,
+            151,
+            459,
+            158
+          ]
+        }
+      },
+      "peakPixels": 14
+    },
+    {
+      "index": 38,
+      "a": "root/BufferGeometry[31]",
+      "b": "root/BufferGeometry[22]",
+      "segments": 31,
+      "views": {
+        "held-left": {
+          "pixels": 10,
+          "at": [
+            518,
+            155
+          ],
+          "bounds": [
+            510,
+            152,
+            519,
+            158
+          ]
+        },
+        "rack": {
+          "pixels": 13,
+          "at": [
+            506,
+            169
+          ],
+          "bounds": [
+            501,
+            165,
+            509,
+            169
+          ]
+        }
+      },
+      "peakPixels": 13
+    },
+    {
+      "index": 114,
+      "a": "root/BoxGeometry[112]",
+      "b": "root/BufferGeometry[15]",
+      "segments": 7,
+      "views": {
+        "hip": {
+          "pixels": 1,
+          "at": [
+            627,
+            286
+          ],
+          "bounds": [
+            627,
+            286,
+            627,
+            286
+          ]
+        },
+        "held-left": {
+          "pixels": 3,
+          "at": [
+            494,
+            149
+          ],
+          "bounds": [
+            493,
+            148,
+            495,
+            149
+          ]
+        },
+        "held-right": {
+          "pixels": 12,
+          "at": [
+            463,
+            149
+          ],
+          "bounds": [
+            459,
+            148,
+            468,
+            149
+          ]
+        }
+      },
+      "peakPixels": 12
+    },
+    {
+      "index": 36,
+      "a": "root/BufferGeometry[30]",
+      "b": "root/BufferGeometry[29]",
+      "segments": 50,
+      "views": {
+        "hip": {
+          "pixels": 11,
+          "at": [
+            637,
+            263
+          ],
+          "bounds": [
+            635,
+            261,
+            639,
+            264
+          ]
+        },
+        "aimed": {
+          "pixels": 9,
+          "at": [
+            487,
+            263
+          ],
+          "bounds": [
+            486,
+            262,
+            488,
+            265
+          ]
+        }
+      },
+      "peakPixels": 11
+    },
+    {
+      "index": 39,
+      "a": "root/BufferGeometry[31]",
+      "b": "root/BufferGeometry[24]",
+      "segments": 31,
+      "views": {
+        "held-right": {
+          "pixels": 10,
+          "at": [
+            440,
+            156
+          ],
+          "bounds": [
+            439,
+            152,
+            442,
+            158
+          ]
+        }
+      },
+      "peakPixels": 10
+    },
+    {
+      "index": 135,
+      "a": "root/recoil-bolt[117]/BufferGeometry[1]",
+      "b": "root/BufferGeometry[116]",
+      "segments": 20,
+      "views": {
+        "held-right": {
+          "pixels": 10,
+          "at": [
+            518,
+            187
+          ],
+          "bounds": [
+            516,
+            187,
+            522,
+            201
+          ]
+        }
+      },
+      "peakPixels": 10
+    },
+    {
+      "index": 93,
+      "a": "root/BoxGeometry[73]",
+      "b": "root/BufferGeometry[55]",
+      "segments": 10,
+      "views": {
+        "held-right": {
+          "pixels": 9,
+          "at": [
+            360,
+            205
+          ],
+          "bounds": [
+            358,
+            205,
+            361,
+            207
+          ]
+        }
+      },
+      "peakPixels": 9
+    },
+    {
+      "index": 103,
+      "a": "root/BoxGeometry[83]",
+      "b": "root/BufferGeometry[55]",
+      "segments": 12,
+      "views": {
+        "held-left": {
+          "pixels": 9,
+          "at": [
+            598,
+            207
+          ],
+          "bounds": [
+            597,
+            206,
+            600,
+            208
+          ]
+        },
+        "rack": {
+          "pixels": 8,
+          "at": [
+            581,
+            204
+          ],
+          "bounds": [
+            580,
+            202,
+            582,
+            204
+          ]
+        }
+      },
+      "peakPixels": 9
+    },
+    {
+      "index": 123,
+      "a": "root/BufferGeometry[115]",
+      "b": "root/BufferGeometry[10]",
+      "segments": 49,
+      "views": {
+        "held-right": {
+          "pixels": 9,
+          "at": [
+            548,
+            185
+          ],
+          "bounds": [
+            514,
+            184,
+            551,
+            188
+          ]
+        }
+      },
+      "peakPixels": 9
+    },
+    {
+      "index": 35,
+      "a": "root/BufferGeometry[30]",
+      "b": "root/BufferGeometry[28]",
+      "segments": 50,
+      "views": {
+        "hip": {
+          "pixels": 5,
+          "at": [
+            624,
+            262
+          ],
+          "bounds": [
+            623,
+            261,
+            624,
+            263
+          ]
+        },
+        "aimed": {
+          "pixels": 8,
+          "at": [
+            472,
+            263
+          ],
+          "bounds": [
+            471,
+            262,
+            473,
+            265
+          ]
+        }
+      },
+      "peakPixels": 8
+    },
+    {
+      "index": 94,
+      "a": "root/BoxGeometry[74]",
+      "b": "root/BufferGeometry[55]",
+      "segments": 12,
+      "views": {
+        "held-right": {
+          "pixels": 7,
+          "at": [
+            358,
+            199
+          ],
+          "bounds": [
+            357,
+            197,
+            359,
+            200
+          ]
+        }
+      },
+      "peakPixels": 7
+    },
+    {
+      "index": 63,
+      "a": "root/group[54]/group[0]/BufferGeometry[1]",
+      "b": "root/BufferGeometry[42]",
+      "segments": 34,
+      "views": {
+        "rack": {
+          "pixels": 6,
+          "at": [
+            364,
+            327
+          ],
+          "bounds": [
+            362,
+            327,
+            366,
+            328
+          ]
+        }
+      },
+      "peakPixels": 6
+    },
+    {
+      "index": 102,
+      "a": "root/BoxGeometry[82]",
+      "b": "root/BufferGeometry[55]",
+      "segments": 10,
+      "views": {
+        "held-left": {
+          "pixels": 6,
+          "at": [
+            601,
+            199
+          ],
+          "bounds": [
+            600,
+            198,
+            602,
+            200
+          ]
+        },
+        "rack": {
+          "pixels": 5,
+          "at": [
+            582,
+            196
+          ],
+          "bounds": [
+            582,
+            195,
+            583,
+            197
+          ]
+        }
+      },
+      "peakPixels": 6
+    },
+    {
+      "index": 104,
+      "a": "root/BoxGeometry[84]",
+      "b": "root/BufferGeometry[55]",
+      "segments": 12,
+      "views": {
+        "held-left": {
+          "pixels": 6,
+          "at": [
+            599,
+            215
+          ],
+          "bounds": [
+            599,
+            214,
+            600,
+            216
+          ]
+        },
+        "rack": {
+          "pixels": 5,
+          "at": [
+            582,
+            210
+          ],
+          "bounds": [
+            582,
+            209,
+            583,
+            211
+          ]
+        }
+      },
+      "peakPixels": 6
+    },
+    {
+      "index": 112,
+      "a": "root/BoxGeometry[92]",
+      "b": "root/BufferGeometry[55]",
+      "segments": 10,
+      "views": {
+        "held-right": {
+          "pixels": 6,
+          "at": [
+            359,
+            213
+          ],
+          "bounds": [
+            358,
+            213,
+            360,
+            215
+          ]
+        }
+      },
+      "peakPixels": 6
+    },
+    {
+      "index": 56,
+      "a": "root/controls-magRelease[49]/BufferGeometry[2]",
+      "b": "root/BufferGeometry[45]",
+      "segments": 8,
+      "views": {
+        "rack": {
+          "pixels": 5,
+          "at": [
+            343,
+            317
+          ],
+          "bounds": [
+            341,
+            317,
+            345,
+            317
+          ]
+        }
+      },
+      "peakPixels": 5
+    },
+    {
+      "index": 59,
+      "a": "root/group[54]/group[0]/BufferGeometry[0]",
+      "b": "root/BufferGeometry[35]",
+      "segments": 36,
+      "views": {
+        "held-right": {
+          "pixels": 5,
+          "at": [
+            593,
+            316
+          ],
+          "bounds": [
+            591,
+            315,
+            594,
+            317
+          ]
+        },
+        "rack": {
+          "pixels": 4,
+          "at": [
+            381,
+            321
+          ],
+          "bounds": [
+            380,
+            320,
+            382,
+            322
+          ]
+        }
+      },
+      "peakPixels": 5
+    },
+    {
+      "index": 67,
+      "a": "root/group[54]/group[0]/BufferGeometry[2]",
+      "b": "root/BufferGeometry[42]",
+      "segments": 34,
+      "views": {
+        "held-right": {
+          "pixels": 5,
+          "at": [
+            610,
+            322
+          ],
+          "bounds": [
+            608,
+            321,
+            612,
+            322
+          ]
+        }
+      },
+      "peakPixels": 5
+    },
+    {
+      "index": 95,
+      "a": "root/BoxGeometry[75]",
+      "b": "root/BufferGeometry[55]",
+      "segments": 12,
+      "views": {
+        "held-right": {
+          "pixels": 5,
+          "at": [
+            355,
+            191
+          ],
+          "bounds": [
+            354,
+            190,
+            355,
+            193
+          ]
+        }
+      },
+      "peakPixels": 5
+    },
+    {
+      "index": 96,
+      "a": "root/BoxGeometry[76]",
+      "b": "root/BufferGeometry[55]",
+      "segments": 10,
+      "views": {
+        "held-right": {
+          "pixels": 5,
+          "at": [
+            354,
+            185
+          ],
+          "bounds": [
+            353,
+            184,
+            355,
+            187
+          ]
+        }
+      },
+      "peakPixels": 5
+    },
+    {
+      "index": 105,
+      "a": "root/BoxGeometry[85]",
+      "b": "root/BufferGeometry[55]",
+      "segments": 12,
+      "views": {
+        "held-left": {
+          "pixels": 5,
+          "at": [
+            601,
+            222
+          ],
+          "bounds": [
+            601,
+            220,
+            602,
+            223
+          ]
+        },
+        "rack": {
+          "pixels": 4,
+          "at": [
+            584,
+            216
+          ],
+          "bounds": [
+            583,
+            215,
+            584,
+            217
+          ]
+        }
+      },
+      "peakPixels": 5
+    },
+    {
+      "index": 106,
+      "a": "root/BoxGeometry[86]",
+      "b": "root/BufferGeometry[55]",
+      "segments": 10,
+      "views": {
+        "held-left": {
+          "pixels": 5,
+          "at": [
+            602,
+            227
+          ],
+          "bounds": [
+            601,
+            225,
+            602,
+            228
+          ]
+        },
+        "rack": {
+          "pixels": 3,
+          "at": [
+            584,
+            221
+          ],
+          "bounds": [
+            583,
+            220,
+            584,
+            221
+          ]
+        }
+      },
+      "peakPixels": 5
+    },
+    {
+      "index": 111,
+      "a": "root/BoxGeometry[91]",
+      "b": "root/BufferGeometry[55]",
+      "segments": 10,
+      "views": {
+        "held-right": {
+          "pixels": 5,
+          "at": [
+            357,
+            221
+          ],
+          "bounds": [
+            357,
+            219,
+            358,
+            222
+          ]
+        }
+      },
+      "peakPixels": 5
+    },
+    {
+      "index": 61,
+      "a": "root/group[54]/group[0]/BufferGeometry[0]",
+      "b": "root/BufferGeometry[45]",
+      "segments": 64,
+      "views": {
+        "held-right": {
+          "pixels": 4,
+          "at": [
+            593,
+            317
+          ],
+          "bounds": [
+            591,
+            316,
+            594,
+            318
+          ]
+        },
+        "rack": {
+          "pixels": 3,
+          "at": [
+            381,
+            321
+          ],
+          "bounds": [
+            380,
+            321,
+            382,
+            322
+          ]
+        }
+      },
+      "peakPixels": 4
+    },
+    {
+      "index": 97,
+      "a": "root/BoxGeometry[77]",
+      "b": "root/BufferGeometry[55]",
+      "segments": 10,
+      "views": {
+        "held-right": {
+          "pixels": 4,
+          "at": [
+            357,
+            181
+          ],
+          "bounds": [
+            356,
+            180,
+            357,
+            182
+          ]
+        }
+      },
+      "peakPixels": 4
+    },
+    {
+      "index": 100,
+      "a": "root/BoxGeometry[80]",
+      "b": "root/BufferGeometry[55]",
+      "segments": 12,
+      "views": {
+        "held-left": {
+          "pixels": 1,
+          "at": [
+            605,
+            187
+          ],
+          "bounds": [
+            605,
+            187,
+            605,
+            187
+          ]
+        },
+        "rack": {
+          "pixels": 4,
+          "at": [
+            584,
+            186
+          ],
+          "bounds": [
+            583,
+            185,
+            584,
+            187
+          ]
+        }
+      },
+      "peakPixels": 4
+    },
+    {
+      "index": 101,
+      "a": "root/BoxGeometry[81]",
+      "b": "root/BufferGeometry[55]",
+      "segments": 10,
+      "views": {
+        "held-left": {
+          "pixels": 4,
+          "at": [
+            604,
+            192
+          ],
+          "bounds": [
+            603,
+            191,
+            604,
+            193
+          ]
+        },
+        "rack": {
+          "pixels": 4,
+          "at": [
+            584,
+            190
+          ],
+          "bounds": [
+            584,
+            189,
+            584,
+            192
+          ]
+        }
+      },
+      "peakPixels": 4
+    },
+    {
+      "index": 110,
+      "a": "root/BoxGeometry[90]",
+      "b": "root/BufferGeometry[55]",
+      "segments": 12,
+      "views": {
+        "held-right": {
+          "pixels": 4,
+          "at": [
+            357,
+            225
+          ],
+          "bounds": [
+            357,
+            224,
+            357,
+            227
+          ]
+        }
+      },
+      "peakPixels": 4
+    },
+    {
+      "index": 34,
+      "a": "root/BufferGeometry[25]",
+      "b": "root/BufferGeometry[15]",
+      "segments": 16,
+      "views": {
+        "hip": {
+          "pixels": 3,
+          "at": [
+            711,
+            297
+          ],
+          "bounds": [
+            710,
+            297,
+            712,
+            297
+          ]
+        }
+      },
+      "peakPixels": 3
+    },
+    {
+      "index": 45,
+      "a": "root/BufferGeometry[40]",
+      "b": "root/BufferGeometry[35]",
+      "segments": 8,
+      "views": {
+        "rack": {
+          "pixels": 3,
+          "at": [
+            385,
+            302
+          ],
+          "bounds": [
+            384,
+            301,
+            386,
+            302
+          ]
+        }
+      },
+      "peakPixels": 3
+    },
+    {
+      "index": 46,
+      "a": "root/BufferGeometry[41]",
+      "b": "root/BufferGeometry[35]",
+      "segments": 8,
+      "views": {
+        "rack": {
+          "pixels": 3,
+          "at": [
+            383,
+            311
+          ],
+          "bounds": [
+            382,
+            310,
+            384,
+            311
+          ]
+        }
+      },
+      "peakPixels": 3
+    },
+    {
+      "index": 47,
+      "a": "root/BufferGeometry[42]",
+      "b": "root/BufferGeometry[35]",
+      "segments": 28,
+      "views": {
+        "rack": {
+          "pixels": 3,
+          "at": [
+            361,
+            326
+          ],
+          "bounds": [
+            360,
+            326,
+            362,
+            326
+          ]
+        }
+      },
+      "peakPixels": 3
+    },
+    {
+      "index": 55,
+      "a": "root/controls-trigger[46]/BufferGeometry[0]",
+      "b": "root/BufferGeometry[44]",
+      "segments": 18,
+      "views": {
+        "rack": {
+          "pixels": 3,
+          "at": [
+            410,
+            250
+          ],
+          "bounds": [
+            409,
+            249,
+            410,
+            250
+          ]
+        }
+      },
+      "peakPixels": 3
+    },
+    {
+      "index": 98,
+      "a": "root/BoxGeometry[78]",
+      "b": "root/BufferGeometry[55]",
+      "segments": 10,
+      "views": {
+        "held-right": {
+          "pixels": 3,
+          "at": [
+            358,
+            178
+          ],
+          "bounds": [
+            357,
+            178,
+            359,
+            179
+          ]
+        }
+      },
+      "peakPixels": 3
+    },
+    {
+      "index": 107,
+      "a": "root/BoxGeometry[87]",
+      "b": "root/BufferGeometry[55]",
+      "segments": 8,
+      "views": {
+        "held-left": {
+          "pixels": 3,
+          "at": [
+            600,
+            228
+          ],
+          "bounds": [
+            600,
+            228,
+            601,
+            229
+          ]
+        },
+        "rack": {
+          "pixels": 2,
+          "at": [
+            582,
+            224
+          ],
+          "bounds": [
+            582,
+            223,
+            582,
+            224
+          ]
+        }
+      },
+      "peakPixels": 3
+    },
+    {
+      "index": 109,
+      "a": "root/BoxGeometry[89]",
+      "b": "root/BufferGeometry[55]",
+      "segments": 8,
+      "views": {
+        "held-right": {
+          "pixels": 3,
+          "at": [
+            359,
+            228
+          ],
+          "bounds": [
+            358,
+            227,
+            359,
+            229
+          ]
+        }
+      },
+      "peakPixels": 3
+    },
+    {
+      "index": 37,
+      "a": "root/BufferGeometry[31]",
+      "b": "root/BufferGeometry[15]",
+      "segments": 22,
+      "views": {
+        "held-left": {
+          "pixels": 2,
+          "at": [
+            510,
+            157
+          ],
+          "bounds": [
+            510,
+            157,
+            510,
+            158
+          ]
+        }
+      },
+      "peakPixels": 2
+    },
+    {
+      "index": 42,
+      "a": "root/BufferGeometry[37]",
+      "b": "root/BufferGeometry[35]",
+      "segments": 8,
+      "views": {
+        "rack": {
+          "pixels": 2,
+          "at": [
+            391,
+            275
+          ],
+          "bounds": [
+            391,
+            275,
+            392,
+            275
+          ]
+        }
+      },
+      "peakPixels": 2
+    },
+    {
+      "index": 43,
+      "a": "root/BufferGeometry[38]",
+      "b": "root/BufferGeometry[35]",
+      "segments": 6,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 44,
+      "a": "root/BufferGeometry[39]",
+      "b": "root/BufferGeometry[35]",
+      "segments": 6,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 48,
+      "a": "root/BufferGeometry[43]",
+      "b": "root/BufferGeometry[0]",
+      "segments": 40,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 49,
+      "a": "root/BufferGeometry[43]",
+      "b": "root/BufferGeometry[35]",
+      "segments": 38,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 50,
+      "a": "root/BufferGeometry[44]",
+      "b": "root/BufferGeometry[0]",
+      "segments": 36,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 51,
+      "a": "root/BufferGeometry[44]",
+      "b": "root/BufferGeometry[35]",
+      "segments": 38,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 52,
+      "a": "root/BufferGeometry[44]",
+      "b": "root/BufferGeometry[43]",
+      "segments": 54,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 54,
+      "a": "root/controls-trigger[46]/BufferGeometry[0]",
+      "b": "root/BufferGeometry[0]",
+      "segments": 24,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 58,
+      "a": "root/controls-selector[50]/BufferGeometry[2]",
+      "b": "root/controls-selector[50]/BoxGeometry[1]",
+      "segments": 6,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 62,
+      "a": "root/group[54]/group[0]/BufferGeometry[1]",
+      "b": "root/BufferGeometry[35]",
+      "segments": 20,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 64,
+      "a": "root/group[54]/group[0]/BufferGeometry[1]",
+      "b": "root/BufferGeometry[45]",
+      "segments": 32,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 66,
+      "a": "root/group[54]/group[0]/BufferGeometry[2]",
+      "b": "root/BufferGeometry[35]",
+      "segments": 20,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 68,
+      "a": "root/group[54]/group[0]/BufferGeometry[2]",
+      "b": "root/BufferGeometry[45]",
+      "segments": 32,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 71,
+      "a": "root/group[54]/group[0]/BufferGeometry[4]",
+      "b": "root/BufferGeometry[35]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 72,
+      "a": "root/group[54]/group[0]/BufferGeometry[5]",
+      "b": "root/BufferGeometry[35]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 73,
+      "a": "root/group[54]/group[0]/BufferGeometry[6]",
+      "b": "root/BufferGeometry[35]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 75,
+      "a": "root/BufferGeometry[56]",
+      "b": "root/BufferGeometry[0]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 76,
+      "a": "root/BufferGeometry[56]",
+      "b": "root/BufferGeometry[55]",
+      "segments": 64,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 77,
+      "a": "root/BufferGeometry[57]",
+      "b": "root/BufferGeometry[0]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 78,
+      "a": "root/BufferGeometry[57]",
+      "b": "root/BufferGeometry[55]",
+      "segments": 92,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 79,
+      "a": "root/BufferGeometry[58]",
+      "b": "root/BufferGeometry[0]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 80,
+      "a": "root/BufferGeometry[58]",
+      "b": "root/BufferGeometry[55]",
+      "segments": 92,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 90,
+      "a": "root/CylinderGeometry[68]",
+      "b": "root/BufferGeometry[0]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 91,
+      "a": "root/CylinderGeometry[70]",
+      "b": "root/BufferGeometry[0]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 99,
+      "a": "root/BoxGeometry[79]",
+      "b": "root/BufferGeometry[55]",
+      "segments": 8,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 108,
+      "a": "root/BoxGeometry[88]",
+      "b": "root/BufferGeometry[55]",
+      "segments": 8,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 115,
+      "a": "root/BoxGeometry[112]",
+      "b": "root/work[20]/CylinderGeometry[0]",
+      "segments": 28,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 116,
+      "a": "root/BufferGeometry[113]",
+      "b": "root/BufferGeometry[15]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 117,
+      "a": "root/BufferGeometry[113]",
+      "b": "root/work[20]/CylinderGeometry[0]",
+      "segments": 52,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 118,
+      "a": "root/BufferGeometry[114]",
+      "b": "root/BufferGeometry[15]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 119,
+      "a": "root/BufferGeometry[114]",
+      "b": "root/work[20]/CylinderGeometry[0]",
+      "segments": 20,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 120,
+      "a": "root/BufferGeometry[114]",
+      "b": "root/BufferGeometry[113]",
+      "segments": 22,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 124,
+      "a": "root/BufferGeometry[115]",
+      "b": "root/group[104]/BoxGeometry[0]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 125,
+      "a": "root/BufferGeometry[115]",
+      "b": "root/group[104]/BoxGeometry[1]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 126,
+      "a": "root/BufferGeometry[115]",
+      "b": "root/group[104]/BoxGeometry[2]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 127,
+      "a": "root/BufferGeometry[115]",
+      "b": "root/group[104]/BoxGeometry[3]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 128,
+      "a": "root/BufferGeometry[115]",
+      "b": "root/group[104]/BoxGeometry[4]",
+      "segments": 16,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 130,
+      "a": "root/BufferGeometry[116]",
+      "b": "root/group[104]/BoxGeometry[1]",
+      "segments": 12,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 131,
+      "a": "root/BufferGeometry[116]",
+      "b": "root/group[104]/BoxGeometry[2]",
+      "segments": 14,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 132,
+      "a": "root/BufferGeometry[116]",
+      "b": "root/group[104]/BoxGeometry[3]",
+      "segments": 12,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 137,
+      "a": "root/BufferGeometry[119]",
+      "b": "root/BufferGeometry[0]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 138,
+      "a": "root/BufferGeometry[119]",
+      "b": "root/TorusGeometry[118]",
+      "segments": 32,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 139,
+      "a": "root/CylinderGeometry[122]",
+      "b": "root/heatParts-barrel[93]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 141,
+      "a": "root/CylinderGeometry[123]",
+      "b": "root/CircleGeometry[95]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 142,
+      "a": "root/CylinderGeometry[123]",
+      "b": "root/CylinderGeometry[122]",
+      "segments": 42,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 143,
+      "a": "root/BoxGeometry[124]",
+      "b": "root/heatParts-barrel[93]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 144,
+      "a": "root/BoxGeometry[124]",
+      "b": "root/CylinderGeometry[122]",
+      "segments": 14,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 145,
+      "a": "root/BoxGeometry[125]",
+      "b": "root/heatParts-barrel[93]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 146,
+      "a": "root/BoxGeometry[126]",
+      "b": "root/heatParts-barrel[93]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 147,
+      "a": "root/BoxGeometry[127]",
+      "b": "root/heatParts-barrel[93]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 148,
+      "a": "root/BoxGeometry[127]",
+      "b": "root/CylinderGeometry[122]",
+      "segments": 14,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 149,
+      "a": "root/BoxGeometry[128]",
+      "b": "root/heatParts-barrel[93]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 150,
+      "a": "root/BoxGeometry[129]",
+      "b": "root/heatParts-barrel[93]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 151,
+      "a": "root/BoxGeometry[130]",
+      "b": "root/heatParts-barrel[93]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 152,
+      "a": "root/BoxGeometry[130]",
+      "b": "root/CylinderGeometry[122]",
+      "segments": 14,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 153,
+      "a": "root/BoxGeometry[131]",
+      "b": "root/heatParts-barrel[93]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 154,
+      "a": "root/BoxGeometry[132]",
+      "b": "root/heatParts-barrel[93]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 155,
+      "a": "root/BoxGeometry[133]",
+      "b": "root/heatParts-barrel[93]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 156,
+      "a": "root/BoxGeometry[133]",
+      "b": "root/CylinderGeometry[122]",
+      "segments": 14,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 157,
+      "a": "root/BoxGeometry[134]",
+      "b": "root/heatParts-barrel[93]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 158,
+      "a": "root/BoxGeometry[135]",
+      "b": "root/heatParts-barrel[93]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    }
+  ]
+}

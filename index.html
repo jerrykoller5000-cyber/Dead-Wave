@@ -30213,7 +30213,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       AudioSys.chainsawStop();
       cancelPlaceMode();
       for (const k of Object.keys(keys)) keys[k] = false;
-      if (cifHintEl) cifHintEl.textContent = dressLabel('dress', 'hint', 'Each piece takes its own camo. Drag him to turn him.');
+      if (cifHintEl) cifHintEl.textContent = dressLabel('dress', training.active ? 'trainingHint' : 'hint', 'Each piece takes its own camo. Drag him to turn him.');
       previewFocus = dressItem;
       setDressRotation(false); frameDressOn(null); dressLastT = 0; dressZoomTo = dressView.zoom = 1; dressPointers.clear(); dressPinch = null; dressPointerId = null; dressDrag = false;   // CL-125 / GP-138: he opens still, the whole of him in view
       renderDressItems();
@@ -52458,7 +52458,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         if (ammoCountEl) ammoCountEl.textContent = String(ammoLabel);
         const mode = selectorGun(currentWeapon) ? ('  ·  ' + (weaponIsAuto(currentWeapon) ? 'AUTO' : 'SEMI')) : '';
         const loadTag = ammoHasTypes(currentWeapon) ? '  ·  ' + ammoHudTag(currentWeapon) : '';   // CB-294: the type in the gun, or the change as it runs
-        if (ammoDetailEl) ammoDetailEl.textContent = ammoLabel + ' / ' + magSize(currentWeapon) + '  ·  ' + res + ' Bullets' + mode + loadTag;
+        if (ammoDetailEl) ammoDetailEl.textContent = ammoLabel + ' / ' + magSize(currentWeapon) + '  ·  ' + res + ' ' + sayText('ammo.unit.' + (currentWeapon === 'launcher' ? 'grenades' : currentWeapon === 'flamer' ? 'fuel' : 'bullets')) + mode + loadTag;
         if (Number.isFinite(ammo) && ammo <= 0) ammoEl.classList.add('empty');
         else ammoEl.classList.remove('empty');
       }
@@ -53243,9 +53243,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       return true;
     }
     function fpPunchUndo() { camera.quaternion.copy(_fpPunchQ); camera.updateMatrixWorld(); }
-    function updateViewmodel(dt) {
-      if (viewmodel === null) {
-        if (!gameStarted || !VM_ON) return;
+    function ensureViewmodel() {
+      if (viewmodel === null && gameStarted && VM_ON) {
         try { viewmodel = createViewmodel({ THREE, TSL, renderer, scene, camera, marine, weaponMeshes, hold: (k) => WEAPON_HOLD[k],
           stowed: () => (carryRig ? [...carryRig.slings.map((x) => x.g), ...carryRig.holsters.map((x) => x.g)] : []),   // AG-168: his stowed guns out of the eye
           offhand: (k) => offhandMeshes[k] || null,   // CL-301: a pair's other gun
@@ -53253,7 +53252,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           grenade: () => grenadeHand }); }   // CL-307: the one in his hand, for the view's own throw
         catch (err) { console.warn('Grave Shift: the first-person view gun failed to build.', err); viewmodel = false; }
       }
-      if (!viewmodel) return;
+      return viewmodel;
+    }
+    function updateViewmodel(dt) {
+      if (!ensureViewmodel()) return;
       const st = _vmState;
       // CL-301 (Jerry, 3 Nov): a pair too (st.akimbo): the view's two guns, one in each hand (it fell back to the old view)
       // CL-307: a blade swing no longer drops the view (it was the body's left arm past the eye): the view does its own
@@ -64828,17 +64830,73 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const restoreChar = training.char?.prepareWarmup();
       const restoreWreck = training.wreck?.prepareWarmup?.();
       const restoreFlame = prepareFlameWarmup();
+      // AG-302: pre-build and compile every gun's 1P view copy and the arms (plus hidden 3P held guns/pouches) during blackout.
+      syncRigSkins();
+      const vmWarm = ensureViewmodel() && typeof viewmodel.prepareWarmup === 'function' ? viewmodel.prepareWarmup() : null;
       // CL-123 (GP-135): the shadow pass builds its own program for an instanced mesh, and the carried gear's
       // (magazines, shells, grenades, tanks: count 0 until he carries some) was built only on the first live frame
       // after the warm-up, once grantAllWeapons filled the pouches: two programs on first use. Lay out the carry for
       // the loadout he now has, then draw one of each empty instanced shadow caster in the warm-up frame.
       updateCarriedGear(0, true);
-      const emptyInst = [];
-      scene.traverse((o) => { if (o.isInstancedMesh && o.castShadow && o.count === 0 && o.instanceMatrix.count > 0) { o.count = 1; emptyInst.push(o); } });
-      let done = false;
-      const finish = () => { if (done) return; done = true; restoreImpacts?.(); restoreChar?.(); restoreWreck?.(); restoreFlame?.(); for (const o of emptyInst) o.count = 0; renderer.setAnimationLoop(tick); for (const m of meshes) m.frustumCulled = true; if (!training.wake) b.classList.remove('on'); };
-      Promise.resolve().then(() => renderer.compileAsync(scene, camera)).then(() => { warmFrame('training-impacts'); finish(); }, finish);
-      setTimeout(finish, 10000);   // CL-118: a last resort only (a real GPU takes well under a second); without it a hung compile would freeze the game
+      const emptyInst = [], warmVis = [], seenVis = new Set();
+      const showWarm = (o) => {
+        if (!o || seenVis.has(o)) return;
+        seenVis.add(o);
+        warmVis.push({ o, vis: o.visible, cull: o.frustumCulled });
+        o.visible = true;
+        if (o.isMesh) o.frustumCulled = false;
+      };
+      const showWarmTree = (rootObj) => {
+        if (!rootObj) return;
+        for (let p = rootObj; p && p !== scene; p = p.parent) showWarm(p);
+        rootObj.traverse((o) => showWarm(o));
+      };
+      for (const k of WEAPON_ORDER) { showWarmTree(weaponMeshes[k]); showWarmTree(offhandMeshes && offhandMeshes[k]); }
+      showWarmTree(knife); showWarmTree(grenadeHand);
+      scene.traverse((o) => {
+        if (o.isInstancedMesh && o.castShadow && o.count === 0 && o.instanceMatrix.count > 0) {
+          o.count = 1; emptyInst.push(o);
+          for (let p = o; p && p !== scene; p = p.parent) showWarm(p);
+        }
+      });
+      let restored = false, done = false;
+      const restoreWarm = () => {
+        if (restored) return;
+        restored = true;
+        restoreImpacts?.(); restoreChar?.(); restoreWreck?.(); restoreFlame?.(); vmWarm?.restore?.();
+        for (const o of emptyInst) o.count = 0;
+        for (let i = warmVis.length - 1; i >= 0; i--) { const s = warmVis[i]; s.o.visible = s.vis; s.o.frustumCulled = s.cull; }
+        for (const m of meshes) m.frustumCulled = true;
+      };
+      let restoreCutaway = null;
+      const finish = () => { if (done) return; done = true; try { restoreCutaway?.(); restoreCutaway = null; } catch (_) {} restoreWarm(); renderer.setAnimationLoop(tick); if (!training.wake) b.classList.remove('on'); };
+      Promise.resolve()
+        .then(() => vmWarm?.ready)
+        .then(() => { if (!done) return compileForLiveTarget(); })
+        .then(async () => {
+          if (done) return;
+          warmFrame('training-impacts');
+          if (!done && tg.cutaway?.prepareWarmup) {
+            restoreCutaway = tg.cutaway.prepareWarmup();
+            const pVis = player.visible, vVis = viewmodel?.root ? viewmodel.root.visible : false;
+            try {
+              player.visible = false; if (viewmodel?.root) viewmodel.root.visible = false;
+              await compileForLiveTarget();
+              player.visible = pVis; if (viewmodel?.root) viewmodel.root.visible = vVis;
+              if (!done) warmFrame('training-cutaway');
+            } finally {
+              player.visible = pVis; if (viewmodel?.root) viewmodel.root.visible = vVis;
+              restoreCutaway?.();
+              restoreCutaway = null;
+            }
+          }
+          if (done) return;
+          restoreWarm();
+          warmFrame('training-clean');
+          try { await renderer.backend?.device?.queue?.onSubmittedWorkDone?.(); } catch (_) {}
+          finish();
+        }, finish);
+      setTimeout(finish, 15000);   // CL-118: a last resort only (a real GPU takes well under a second); without it a hung compile would freeze the game
     }
     function leaveTraining() {
       rangeFeature?.dispose();rangeFeature=null;rangeShotPacket=null;

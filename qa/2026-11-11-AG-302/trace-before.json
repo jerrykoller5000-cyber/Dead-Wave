@@ -1,0 +1,503 @@
+{
+  "card": "AG-302",
+  "tag": "before",
+  "capturedAt": "2026-11-11T11:26:10.545Z",
+  "pass1P": {
+    "mode": "1P",
+    "bootReadyMs": 19058,
+    "enterTrainingMs": 4462,
+    "pipesBeforeEnter": 223,
+    "postBlackout": {
+      "pipelinesAtLift": 337,
+      "pipelinesEnd": 337,
+      "newPipelines": 0,
+      "samples": 60,
+      "maxDtMs": 885,
+      "over25ms": [
+        595.2,
+        885
+      ],
+      "avgDraws": 269,
+      "avgTris": 155855,
+      "initialVmVisible": false,
+      "initialVmSpaceChildren": [
+        {
+          "name": "vm-gun",
+          "children": 0,
+          "visible": true
+        },
+        {
+          "name": "vm-gun-2",
+          "children": 0,
+          "visible": true
+        },
+        {
+          "name": "vm-blade",
+          "children": 0,
+          "visible": true
+        },
+        {
+          "name": "vm-grenade",
+          "children": 0,
+          "visible": true
+        }
+      ]
+    },
+    "entryWalk": {
+      "mode": "1P",
+      "route": "R1_entry_stations_console",
+      "frameCount": 320,
+      "medianDtMs": 16.7,
+      "p99DtMs": 31.1,
+      "maxDtMs": 823.1,
+      "avgDraws": 206,
+      "newPipelines": 6,
+      "hitchCountOver25ms": 5,
+      "hitches": [
+        {
+          "dtMs": 55.7,
+          "newPipes": 0,
+          "draws": 133,
+          "room": "entry",
+          "pos": [
+            1.63,
+            -200,
+            -650.6
+          ]
+        },
+        {
+          "dtMs": 301.2,
+          "newPipes": 8,
+          "draws": 169,
+          "room": "entry",
+          "pos": [
+            1.87,
+            -200,
+            -650.57
+          ]
+        },
+        {
+          "dtMs": 823.1,
+          "newPipes": 0,
+          "draws": 164,
+          "room": "entry",
+          "pos": [
+            2.11,
+            -200,
+            -650.54
+          ]
+        },
+        {
+          "dtMs": 30.8,
+          "newPipes": 0,
+          "draws": 164,
+          "room": "entry",
+          "pos": [
+            2.25,
+            -200,
+            -650.52
+          ]
+        },
+        {
+          "dtMs": 31.1,
+          "newPipes": 0,
+          "draws": 261,
+          "room": "range_bench",
+          "pos": [
+            -1.75,
+            -200,
+            -643.03
+          ]
+        }
+      ]
+    },
+    "weaponDraws": [
+      {
+        "weapon": "minigun",
+        "mode": "1P",
+        "samples": 13,
+        "maxDtMs": 75.9,
+        "over25ms": [
+          26.7,
+          75.9
+        ],
+        "newPipelines": 2,
+        "avgDraws": 222,
+        "vmVisible": true
+      },
+      {
+        "weapon": "m4",
+        "mode": "1P",
+        "samples": 19,
+        "maxDtMs": 23.4,
+        "over25ms": [],
+        "newPipelines": 0,
+        "avgDraws": 231,
+        "vmVisible": false
+      },
+      {
+        "weapon": "ak",
+        "mode": "1P",
+        "samples": 3,
+        "maxDtMs": 81.3,
+        "over25ms": [
+          29.9,
+          81.3
+        ],
+        "newPipelines": 2,
+        "avgDraws": 242,
+        "vmVisible": true
+      },
+      {
+        "weapon": "pistol",
+        "mode": "1P",
+        "samples": 21,
+        "maxDtMs": 25.7,
+        "over25ms": [
+          25.7
+        ],
+        "newPipelines": 0,
+        "avgDraws": 230,
+        "vmVisible": true
+      },
+      {
+        "weapon": "uzi",
+        "mode": "1P",
+        "samples": 22,
+        "maxDtMs": 30.4,
+        "over25ms": [
+          25.2,
+          30.4
+        ],
+        "newPipelines": 0,
+        "avgDraws": 228,
+        "vmVisible": true
+      },
+      {
+        "weapon": "shotgun",
+        "mode": "1P",
+        "samples": 15,
+        "maxDtMs": 109.3,
+        "over25ms": [
+          36.9,
+          109.3
+        ],
+        "newPipelines": 1,
+        "avgDraws": 231,
+        "vmVisible": false
+      },
+      {
+        "weapon": "aa12",
+        "mode": "1P",
+        "samples": 22,
+        "maxDtMs": 23.6,
+        "over25ms": [],
+        "newPipelines": 0,
+        "avgDraws": 241,
+        "vmVisible": true
+      },
+      {
+        "weapon": "revolver",
+        "mode": "1P",
+        "samples": 11,
+        "maxDtMs": 73.6,
+        "over25ms": [
+          25.3,
+          46.1,
+          71.3,
+          73.6
+        ],
+        "newPipelines": 2,
+        "avgDraws": 230,
+        "vmVisible": true
+      },
+      {
+        "weapon": "sniper",
+        "mode": "1P",
+        "samples": 6,
+        "maxDtMs": 55.1,
+        "over25ms": [
+          55.1
+        ],
+        "newPipelines": 1,
+        "avgDraws": 236,
+        "vmVisible": true
+      },
+      {
+        "weapon": "launcher",
+        "mode": "1P",
+        "samples": 7,
+        "maxDtMs": 137.4,
+        "over25ms": [
+          40.4,
+          137.3,
+          137.4
+        ],
+        "newPipelines": 1,
+        "avgDraws": 239,
+        "vmVisible": true
+      },
+      {
+        "weapon": "flamer",
+        "mode": "1P",
+        "samples": 22,
+        "maxDtMs": 18.7,
+        "over25ms": [],
+        "newPipelines": 0,
+        "avgDraws": 229,
+        "vmVisible": true
+      },
+      {
+        "weapon": "chainsaw",
+        "mode": "1P",
+        "samples": 9,
+        "maxDtMs": 151.5,
+        "over25ms": [
+          100.4,
+          151.5
+        ],
+        "newPipelines": 0,
+        "avgDraws": 228,
+        "vmVisible": true
+      }
+    ],
+    "shots": []
+  },
+  "pass3P": {
+    "mode": "3P",
+    "bootReadyMs": 23099,
+    "enterTrainingMs": 7245,
+    "pipesBeforeEnter": 225,
+    "postBlackout": {
+      "pipelinesAtLift": 339,
+      "pipelinesEnd": 339,
+      "newPipelines": 0,
+      "samples": 60,
+      "maxDtMs": 1241.7,
+      "over25ms": [
+        1241.7
+      ],
+      "avgDraws": 269,
+      "avgTris": 155855,
+      "initialVmVisible": false,
+      "initialVmSpaceChildren": [
+        {
+          "name": "vm-gun",
+          "children": 0,
+          "visible": true
+        },
+        {
+          "name": "vm-gun-2",
+          "children": 0,
+          "visible": true
+        },
+        {
+          "name": "vm-blade",
+          "children": 0,
+          "visible": true
+        },
+        {
+          "name": "vm-grenade",
+          "children": 0,
+          "visible": true
+        }
+      ]
+    },
+    "entryWalk": {
+      "mode": "3P",
+      "route": "R1_entry_stations_console",
+      "frameCount": 303,
+      "medianDtMs": 17.8,
+      "p99DtMs": 25,
+      "maxDtMs": 40.4,
+      "avgDraws": 412,
+      "newPipelines": 0,
+      "hitchCountOver25ms": 3,
+      "hitches": [
+        {
+          "dtMs": 30.9,
+          "newPipes": 0,
+          "draws": 279,
+          "room": "entry",
+          "pos": [
+            0.61,
+            -200,
+            -650.72
+          ]
+        },
+        {
+          "dtMs": 27.6,
+          "newPipes": 0,
+          "draws": 331,
+          "room": "entry",
+          "pos": [
+            1.49,
+            -200,
+            -650.62
+          ]
+        },
+        {
+          "dtMs": 40.4,
+          "newPipes": 0,
+          "draws": 354,
+          "room": "kiosk",
+          "pos": [
+            4.9,
+            -200,
+            -648.35
+          ]
+        }
+      ]
+    },
+    "weaponDraws": [
+      {
+        "weapon": "minigun",
+        "mode": "3P",
+        "samples": 19,
+        "maxDtMs": 39.6,
+        "over25ms": [
+          39.6
+        ],
+        "newPipelines": -2,
+        "avgDraws": 430,
+        "vmVisible": false
+      },
+      {
+        "weapon": "m4",
+        "mode": "3P",
+        "samples": 19,
+        "maxDtMs": 32.9,
+        "over25ms": [
+          32.9,
+          27.7,
+          27.3
+        ],
+        "newPipelines": 0,
+        "avgDraws": 422,
+        "vmVisible": false
+      },
+      {
+        "weapon": "ak",
+        "mode": "3P",
+        "samples": 18,
+        "maxDtMs": 27.1,
+        "over25ms": [
+          27.1
+        ],
+        "newPipelines": 1,
+        "avgDraws": 421,
+        "vmVisible": false
+      },
+      {
+        "weapon": "pistol",
+        "mode": "3P",
+        "samples": 14,
+        "maxDtMs": 150.9,
+        "over25ms": [
+          150.9,
+          26.2
+        ],
+        "newPipelines": 0,
+        "avgDraws": 423,
+        "vmVisible": false
+      },
+      {
+        "weapon": "uzi",
+        "mode": "3P",
+        "samples": 21,
+        "maxDtMs": 27.2,
+        "over25ms": [
+          27.2
+        ],
+        "newPipelines": 0,
+        "avgDraws": 423,
+        "vmVisible": false
+      },
+      {
+        "weapon": "shotgun",
+        "mode": "3P",
+        "samples": 21,
+        "maxDtMs": 26,
+        "over25ms": [
+          26
+        ],
+        "newPipelines": -1,
+        "avgDraws": 424,
+        "vmVisible": false
+      },
+      {
+        "weapon": "aa12",
+        "mode": "3P",
+        "samples": 23,
+        "maxDtMs": 18.9,
+        "over25ms": [],
+        "newPipelines": 0,
+        "avgDraws": 442,
+        "vmVisible": false
+      },
+      {
+        "weapon": "revolver",
+        "mode": "3P",
+        "samples": 17,
+        "maxDtMs": 94.9,
+        "over25ms": [
+          33,
+          94.9
+        ],
+        "newPipelines": 0,
+        "avgDraws": 420,
+        "vmVisible": false
+      },
+      {
+        "weapon": "sniper",
+        "mode": "3P",
+        "samples": 20,
+        "maxDtMs": 24.7,
+        "over25ms": [],
+        "newPipelines": 2,
+        "avgDraws": 420,
+        "vmVisible": false
+      },
+      {
+        "weapon": "launcher",
+        "mode": "3P",
+        "samples": 11,
+        "maxDtMs": 126.3,
+        "over25ms": [
+          126.3,
+          122.3
+        ],
+        "newPipelines": 0,
+        "avgDraws": 439,
+        "vmVisible": false
+      },
+      {
+        "weapon": "flamer",
+        "mode": "3P",
+        "samples": 22,
+        "maxDtMs": 25.2,
+        "over25ms": [
+          25.1,
+          25.2
+        ],
+        "newPipelines": 0,
+        "avgDraws": 428,
+        "vmVisible": false
+      },
+      {
+        "weapon": "chainsaw",
+        "mode": "3P",
+        "samples": 6,
+        "maxDtMs": 183.5,
+        "over25ms": [
+          122.4,
+          183.5
+        ],
+        "newPipelines": -1,
+        "avgDraws": 429,
+        "vmVisible": false
+      }
+    ],
+    "shots": []
+  }
+}

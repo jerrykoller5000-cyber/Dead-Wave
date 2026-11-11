@@ -601,8 +601,12 @@ export function makeAa12Model(ctx) {
   const cover = K.lathe([[0, -.258], [.043, -.258], [.045, -.250], [.045, -.2474], [.0442, -.2469],
     [.0442, -.2458], [.045, -.2453], [.045, .252], [.043, .26], [0, .26]],
     coverSteel, {y: .07, seg: 28, phase: Math.PI / 28});
+  // Only the outward half of each decorative side panel is visible. Its back
+  // meets the side wall; the outer paint plane still meets its original trim.
+  const panelDepth = 0.003;
   for (const sx of [-1, 1]) {
-    const plate = K.slab([[-0.202, 0.062], [0.193, 0.062], [0.2, 0.054], [0.2, -0.053], [-0.202, -0.053]], 0.006, plateSteel, { x: sx * RW / 2, bevel: 0.0025 });   // the side plate
+    const plate = K.slab([[-0.202, 0.062], [0.193, 0.062], [0.2, 0.054], [0.2, -0.053], [-0.202, -0.053]],
+      panelDepth, plateSteel, { x: sx * (RW + panelDepth) / 2, bevel: 0.0013 });
     markPaintSurface(plate, 'receiver');
     for (const [by, bz] of [[0.03, 0.177], [-0.04, 0.177], [0.03, -0.181], [-0.04, -0.181]]) D.screw(gun, sx * (RW / 2 + 0.003), by, bz, { axis: 'x', side: sx, r: 0.004, kind: 'hex' });
     D.groove(gun, { x: sx * RW / 2, y: -0.076, z: 0.0, axis: 'x', side: sx, along: 'z', len: 0.49, w: 0.0008 });                 // the fold line along the bottom

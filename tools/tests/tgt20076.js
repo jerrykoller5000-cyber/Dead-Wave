@@ -83,6 +83,26 @@
     const batched=new THREE.BufferGeometry();
     batched.setAttribute('position',new THREE.Float32BufferAttribute([0,0,0, .01,0,0, 0,.01,0, .02,0,0, .03,0,0, .02,.01,0],3));
     check(auditWeapon(new THREE.Mesh(batched)).loose.length===1,'disconnected islands in one draw mesh');
+
+    scene.clear();
+    const shell=block([.04,.04,.04],0), insert=block([.006,.006,.006],.012);
+    insert.userData.clipPart='fixture-insert'; shell.userData.clipPart='fixture-shell';
+    const lookup=(inner,outer,pose,depth)=>inner==='fixture-insert' && outer==='fixture-shell' &&
+      pose==='fixture:rest' && depth<=.012 ? {id:'fixture-buried-art',reason:'Internal colour insert'} : null;
+    const count=(label,expected,options)=>{
+      const r=auditWeapon(scene,options);
+      check(r.rawOverlaps.length===1 && r.overlaps.length===expected &&
+        r.excusedSeats.length===1-expected,label);
+    };
+    count('hidden unnamed artwork still fails',1,{pose:'fixture:rest'});
+    count('individually named concealed insert reports the rule',0,{pose:'fixture:rest',lookup});
+    count('concealed insert in another pose still fails',1,{pose:'fixture:other',lookup});
+    insert.position.x=0;
+    count('concealed insert past the named maximum still fails',1,{pose:'fixture:rest',lookup});
+    insert.position.x=.018;
+    count('same named insert showing through the outside still fails',1,{pose:'fixture:rest',lookup});
+    insert.position.x=.012; shell.material.transparent=true; shell.material.opacity=.4;
+    count('same named insert visible through glazing still fails',1,{pose:'fixture:rest',lookup});
   }
   function requiredSeats(gun) {
     const seats=[];
@@ -130,11 +150,13 @@
   function check(id,g) {
     g.visible=true;
     const u=g.userData;
-    const r=auditWeapon(g,{metresPerUnit:1.8/1.655,sources,seats:requiredSeats(g),ignore:[u.flash,u.flashLight,u.laser,u.flare].filter(Boolean)});
+    const r=auditWeapon(g,{metresPerUnit:1.8/1.655,pose:'weapon:'+id+':rest',sources,seats:requiredSeats(g),ignore:[u.flash,u.flashLight,u.laser,u.flare].filter(Boolean)});
     r.metresPerLocalUnit=g.scale.toArray().map(s=>s*1.8/1.655);
     results[id]=r;
     const loose=r.loose.length, overlaps=r.overlaps.length;
     lines.push((r.parts>0 && !loose && !overlaps && !r.unseated.length && !r.detailBreaches.length?'PASS ':'FAIL ')+id+' ('+r.parts+' pieces, '+loose+' unsupported groups, '+r.unseated.length+' missing host contacts, '+overlaps+' other intersection pairs, '+r.detailSeats.length+' bounded detail seats, '+r.detailBreaches.length+' detail seat breaches)');
+    if (r.excusedSeats.length) lines.push('INFO '+id+' raw intersections '+r.rawOverlaps.length+
+      ', named concealed pairs '+r.excusedSeats.length+': '+r.excusedSeats.map(x=>x.id).join(', '));
     if(r.detailBreaches.length) lines.push('INFO '+id+' detail breaches: '+JSON.stringify(r.detailBreaches.slice(0,4)));
     if(loose) lines.push('INFO '+id+' loose: '+JSON.stringify(r.loose.slice(0,2)));
     if(overlaps) lines.push('INFO '+id+' penetration: '+JSON.stringify(r.overlaps.slice(0,2)));

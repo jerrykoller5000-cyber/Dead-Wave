@@ -1,0 +1,1990 @@
+{
+  "id": "pistol",
+  "rawPairs": 87,
+  "crossingPairs": 54,
+  "screenCandidates": 37,
+  "coverage": {
+    "hip": {
+      "projected": 17429,
+      "maskPixels": 12965,
+      "overlapPixels": 12145
+    },
+    "aimed": {
+      "projected": 13430,
+      "maskPixels": 8028,
+      "overlapPixels": 7973
+    },
+    "held-left": {
+      "projected": 27112,
+      "maskPixels": 20599,
+      "overlapPixels": 18140
+    },
+    "held-right": {
+      "projected": 27113,
+      "maskPixels": 22552,
+      "overlapPixels": 19967
+    },
+    "rack": {
+      "projected": 16767,
+      "maskPixels": 14297,
+      "overlapPixels": 13181
+    }
+  },
+  "rows": [
+    {
+      "index": 0,
+      "a": "root/pistol dust cover[1]",
+      "b": "root/group[0]/BufferGeometry[0]",
+      "segments": 48,
+      "views": {
+        "hip": {
+          "pixels": 106,
+          "at": [
+            648,
+            380
+          ],
+          "bounds": [
+            593,
+            343,
+            710,
+            400
+          ]
+        },
+        "aimed": {
+          "pixels": 44,
+          "at": [
+            479,
+            360
+          ],
+          "bounds": [
+            458,
+            358,
+            501,
+            360
+          ]
+        },
+        "held-left": {
+          "pixels": 207,
+          "at": [
+            501,
+            237
+          ],
+          "bounds": [
+            349,
+            222,
+            616,
+            249
+          ]
+        },
+        "held-right": {
+          "pixels": 231,
+          "at": [
+            460,
+            237
+          ],
+          "bounds": [
+            343,
+            222,
+            610,
+            249
+          ]
+        },
+        "rack": {
+          "pixels": 173,
+          "at": [
+            474,
+            240
+          ],
+          "bounds": [
+            372,
+            240,
+            586,
+            242
+          ]
+        }
+      },
+      "peakPixels": 231
+    },
+    {
+      "index": 19,
+      "a": "root/pistol grip[24]",
+      "b": "root/pistol dust cover[1]",
+      "segments": 82,
+      "views": {
+        "hip": {
+          "pixels": 44,
+          "at": [
+            658,
+            393
+          ],
+          "bounds": [
+            639,
+            384,
+            665,
+            408
+          ]
+        },
+        "held-left": {
+          "pixels": 16,
+          "at": [
+            430,
+            241
+          ],
+          "bounds": [
+            423,
+            238,
+            433,
+            246
+          ]
+        },
+        "held-right": {
+          "pixels": 12,
+          "at": [
+            534,
+            238
+          ],
+          "bounds": [
+            529,
+            237,
+            539,
+            240
+          ]
+        },
+        "rack": {
+          "pixels": 53,
+          "at": [
+            419,
+            244
+          ],
+          "bounds": [
+            399,
+            242,
+            443,
+            254
+          ]
+        }
+      },
+      "peakPixels": 53
+    },
+    {
+      "index": 1,
+      "a": "root/pistol rear tang[2]",
+      "b": "root/pistol dust cover[1]",
+      "segments": 62,
+      "views": {
+        "hip": {
+          "pixels": 49,
+          "at": [
+            686,
+            401
+          ],
+          "bounds": [
+            666,
+            398,
+            712,
+            409
+          ]
+        },
+        "aimed": {
+          "pixels": 52,
+          "at": [
+            479,
+            361
+          ],
+          "bounds": [
+            459,
+            361,
+            500,
+            372
+          ]
+        },
+        "held-left": {
+          "pixels": 28,
+          "at": [
+            356,
+            233
+          ],
+          "bounds": [
+            349,
+            224,
+            368,
+            238
+          ]
+        },
+        "held-right": {
+          "pixels": 13,
+          "at": [
+            608,
+            230
+          ],
+          "bounds": [
+            603,
+            224,
+            610,
+            233
+          ]
+        },
+        "rack": {
+          "pixels": 26,
+          "at": [
+            381,
+            250
+          ],
+          "bounds": [
+            372,
+            242,
+            393,
+            253
+          ]
+        }
+      },
+      "peakPixels": 52
+    },
+    {
+      "index": 50,
+      "a": "root/group[30]/heatParts-barrel[4]/BufferGeometry[1]",
+      "b": "root/group[0]/BufferGeometry[0]",
+      "segments": 20,
+      "views": {
+        "hip": {
+          "pixels": 21,
+          "at": [
+            641,
+            318
+          ],
+          "bounds": [
+            631,
+            318,
+            652,
+            322
+          ]
+        },
+        "held-left": {
+          "pixels": 22,
+          "at": [
+            465,
+            186
+          ],
+          "bounds": [
+            444,
+            183,
+            478,
+            186
+          ]
+        },
+        "held-right": {
+          "pixels": 41,
+          "at": [
+            496,
+            185
+          ],
+          "bounds": [
+            481,
+            183,
+            515,
+            186
+          ]
+        }
+      },
+      "peakPixels": 41
+    },
+    {
+      "index": 14,
+      "a": "root/BufferGeometry[14]",
+      "b": "root/pistol dust cover[1]",
+      "segments": 25,
+      "views": {
+        "hip": {
+          "pixels": 13,
+          "at": [
+            637,
+            377
+          ],
+          "bounds": [
+            630,
+            373,
+            638,
+            380
+          ]
+        },
+        "held-left": {
+          "pixels": 37,
+          "at": [
+            447,
+            239
+          ],
+          "bounds": [
+            434,
+            230,
+            459,
+            240
+          ]
+        },
+        "rack": {
+          "pixels": 31,
+          "at": [
+            453,
+            246
+          ],
+          "bounds": [
+            443,
+            240,
+            463,
+            246
+          ]
+        }
+      },
+      "peakPixels": 37
+    },
+    {
+      "index": 13,
+      "a": "root/BufferGeometry[14]",
+      "b": "root/group[0]/BufferGeometry[0]",
+      "segments": 15,
+      "views": {
+        "hip": {
+          "pixels": 14,
+          "at": [
+            634,
+            370
+          ],
+          "bounds": [
+            629,
+            366,
+            638,
+            373
+          ]
+        },
+        "held-left": {
+          "pixels": 29,
+          "at": [
+            446,
+            231
+          ],
+          "bounds": [
+            435,
+            230,
+            459,
+            233
+          ]
+        },
+        "rack": {
+          "pixels": 16,
+          "at": [
+            457,
+            239
+          ],
+          "bounds": [
+            443,
+            239,
+            463,
+            240
+          ]
+        }
+      },
+      "peakPixels": 29
+    },
+    {
+      "index": 48,
+      "a": "root/group[30]/heatParts-barrel[4]/BufferGeometry[0]",
+      "b": "root/group[0]/BufferGeometry[0]",
+      "segments": 28,
+      "views": {
+        "held-left": {
+          "pixels": 23,
+          "at": [
+            630,
+            215
+          ],
+          "bounds": [
+            629,
+            206,
+            631,
+            227
+          ]
+        },
+        "held-right": {
+          "pixels": 22,
+          "at": [
+            329,
+            215
+          ],
+          "bounds": [
+            328,
+            206,
+            330,
+            227
+          ]
+        },
+        "rack": {
+          "pixels": 7,
+          "at": [
+            594,
+            215
+          ],
+          "bounds": [
+            594,
+            212,
+            594,
+            218
+          ]
+        }
+      },
+      "peakPixels": 23
+    },
+    {
+      "index": 65,
+      "a": "root/BufferGeometry[40]",
+      "b": "root/pistol grip[24]",
+      "segments": 46,
+      "views": {
+        "rack": {
+          "pixels": 18,
+          "at": [
+            440,
+            262
+          ],
+          "bounds": [
+            437,
+            257,
+            443,
+            270
+          ]
+        }
+      },
+      "peakPixels": 18
+    },
+    {
+      "index": 53,
+      "a": "root/group[30]/heatParts-barrel[4]/CylinderGeometry[2]",
+      "b": "root/group[0]/BufferGeometry[0]",
+      "segments": 44,
+      "views": {
+        "held-left": {
+          "pixels": 16,
+          "at": [
+            630,
+            216
+          ],
+          "bounds": [
+            629,
+            207,
+            631,
+            226
+          ]
+        },
+        "held-right": {
+          "pixels": 15,
+          "at": [
+            329,
+            216
+          ],
+          "bounds": [
+            328,
+            207,
+            330,
+            226
+          ]
+        },
+        "rack": {
+          "pixels": 4,
+          "at": [
+            594,
+            211
+          ],
+          "bounds": [
+            594,
+            210,
+            594,
+            213
+          ]
+        }
+      },
+      "peakPixels": 16
+    },
+    {
+      "index": 54,
+      "a": "root/group[30]/heatParts-barrel[4]/CylinderGeometry[2]",
+      "b": "root/group[30]/heatParts-barrel[4]/BufferGeometry[0]",
+      "segments": 48,
+      "views": {
+        "held-left": {
+          "pixels": 15,
+          "at": [
+            631,
+            215
+          ],
+          "bounds": [
+            630,
+            207,
+            632,
+            226
+          ]
+        },
+        "held-right": {
+          "pixels": 13,
+          "at": [
+            328,
+            215
+          ],
+          "bounds": [
+            327,
+            207,
+            329,
+            226
+          ]
+        },
+        "rack": {
+          "pixels": 2,
+          "at": [
+            595,
+            212
+          ],
+          "bounds": [
+            595,
+            212,
+            595,
+            213
+          ]
+        }
+      },
+      "peakPixels": 15
+    },
+    {
+      "index": 12,
+      "a": "root/pistol guard root[13]",
+      "b": "root/pistol guard[12]",
+      "segments": 94,
+      "views": {
+        "rack": {
+          "pixels": 14,
+          "at": [
+            446,
+            272
+          ],
+          "bounds": [
+            443,
+            268,
+            446,
+            277
+          ]
+        }
+      },
+      "peakPixels": 14
+    },
+    {
+      "index": 4,
+      "a": "root/BoxGeometry[5]",
+      "b": "root/pistol dust cover[1]",
+      "segments": 14,
+      "views": {
+        "held-left": {
+          "pixels": 13,
+          "at": [
+            527,
+            259
+          ],
+          "bounds": [
+            521,
+            258,
+            533,
+            259
+          ]
+        },
+        "held-right": {
+          "pixels": 13,
+          "at": [
+            432,
+            259
+          ],
+          "bounds": [
+            426,
+            258,
+            438,
+            259
+          ]
+        }
+      },
+      "peakPixels": 13
+    },
+    {
+      "index": 6,
+      "a": "root/BoxGeometry[7]",
+      "b": "root/pistol dust cover[1]",
+      "segments": 14,
+      "views": {
+        "held-left": {
+          "pixels": 13,
+          "at": [
+            546,
+            261
+          ],
+          "bounds": [
+            540,
+            260,
+            552,
+            261
+          ]
+        },
+        "held-right": {
+          "pixels": 13,
+          "at": [
+            413,
+            261
+          ],
+          "bounds": [
+            407,
+            260,
+            419,
+            261
+          ]
+        },
+        "rack": {
+          "pixels": 3,
+          "at": [
+            536,
+            256
+          ],
+          "bounds": [
+            535,
+            256,
+            537,
+            256
+          ]
+        }
+      },
+      "peakPixels": 13
+    },
+    {
+      "index": 8,
+      "a": "root/BoxGeometry[9]",
+      "b": "root/pistol dust cover[1]",
+      "segments": 14,
+      "views": {
+        "held-left": {
+          "pixels": 13,
+          "at": [
+            564,
+            263
+          ],
+          "bounds": [
+            558,
+            262,
+            570,
+            263
+          ]
+        },
+        "held-right": {
+          "pixels": 13,
+          "at": [
+            395,
+            263
+          ],
+          "bounds": [
+            389,
+            262,
+            401,
+            263
+          ]
+        },
+        "rack": {
+          "pixels": 11,
+          "at": [
+            547,
+            256
+          ],
+          "bounds": [
+            542,
+            256,
+            552,
+            256
+          ]
+        }
+      },
+      "peakPixels": 13
+    },
+    {
+      "index": 55,
+      "a": "root/group[30]/heatParts-barrel[4]/CylinderGeometry[3]",
+      "b": "root/group[30]/heatParts-barrel[4]/BufferGeometry[0]",
+      "segments": 38,
+      "views": {
+        "held-left": {
+          "pixels": 11,
+          "at": [
+            631,
+            215
+          ],
+          "bounds": [
+            630,
+            209,
+            632,
+            221
+          ]
+        },
+        "held-right": {
+          "pixels": 12,
+          "at": [
+            328,
+            215
+          ],
+          "bounds": [
+            327,
+            209,
+            329,
+            221
+          ]
+        }
+      },
+      "peakPixels": 12
+    },
+    {
+      "index": 75,
+      "a": "root/BufferGeometry[47]",
+      "b": "root/pistol grip[24]",
+      "segments": 19,
+      "views": {
+        "rack": {
+          "pixels": 12,
+          "at": [
+            433,
+            288
+          ],
+          "bounds": [
+            431,
+            285,
+            433,
+            291
+          ]
+        }
+      },
+      "peakPixels": 12
+    },
+    {
+      "index": 47,
+      "a": "root/group[30]/CylinderGeometry[3]",
+      "b": "root/group[0]/BufferGeometry[0]",
+      "segments": 33,
+      "views": {
+        "held-left": {
+          "pixels": 11,
+          "at": [
+            627,
+            241
+          ],
+          "bounds": [
+            625,
+            236,
+            628,
+            244
+          ]
+        },
+        "held-right": {
+          "pixels": 11,
+          "at": [
+            332,
+            241
+          ],
+          "bounds": [
+            331,
+            236,
+            334,
+            244
+          ]
+        }
+      },
+      "peakPixels": 11
+    },
+    {
+      "index": 64,
+      "a": "root/BufferGeometry[40]",
+      "b": "root/pistol guard root[13]",
+      "segments": 43,
+      "views": {
+        "rack": {
+          "pixels": 11,
+          "at": [
+            443,
+            269
+          ],
+          "bounds": [
+            437,
+            267,
+            446,
+            271
+          ]
+        }
+      },
+      "peakPixels": 11
+    },
+    {
+      "index": 5,
+      "a": "root/BufferGeometry[6]",
+      "b": "root/pistol dust cover[1]",
+      "segments": 26,
+      "views": {
+        "hip": {
+          "pixels": 3,
+          "at": [
+            612,
+            370
+          ],
+          "bounds": [
+            612,
+            369,
+            613,
+            370
+          ]
+        },
+        "held-left": {
+          "pixels": 9,
+          "at": [
+            537,
+            260
+          ],
+          "bounds": [
+            533,
+            259,
+            540,
+            260
+          ]
+        },
+        "held-right": {
+          "pixels": 10,
+          "at": [
+            422,
+            260
+          ],
+          "bounds": [
+            419,
+            259,
+            426,
+            260
+          ]
+        }
+      },
+      "peakPixels": 10
+    },
+    {
+      "index": 11,
+      "a": "root/pistol guard[12]",
+      "b": "root/pistol dust cover[1]",
+      "segments": 82,
+      "views": {
+        "held-left": {
+          "pixels": 9,
+          "at": [
+            481,
+            252
+          ],
+          "bounds": [
+            435,
+            246,
+            488,
+            254
+          ]
+        },
+        "held-right": {
+          "pixels": 8,
+          "at": [
+            474,
+            254
+          ],
+          "bounds": [
+            471,
+            252,
+            478,
+            254
+          ]
+        },
+        "rack": {
+          "pixels": 10,
+          "at": [
+            480,
+            254
+          ],
+          "bounds": [
+            442,
+            254,
+            486,
+            256
+          ]
+        }
+      },
+      "peakPixels": 10
+    },
+    {
+      "index": 81,
+      "a": "root/controls-magRelease[59]/BufferGeometry[0]",
+      "b": "root/pistol grip[24]",
+      "segments": 17,
+      "views": {
+        "hip": {
+          "pixels": 6,
+          "at": [
+            638,
+            390
+          ],
+          "bounds": [
+            638,
+            389,
+            639,
+            392
+          ]
+        },
+        "held-left": {
+          "pixels": 2,
+          "at": [
+            428,
+            245
+          ],
+          "bounds": [
+            427,
+            244,
+            428,
+            245
+          ]
+        },
+        "rack": {
+          "pixels": 10,
+          "at": [
+            437,
+            253
+          ],
+          "bounds": [
+            437,
+            251,
+            439,
+            255
+          ]
+        }
+      },
+      "peakPixels": 10
+    },
+    {
+      "index": 3,
+      "a": "root/BufferGeometry[4]",
+      "b": "root/pistol dust cover[1]",
+      "segments": 26,
+      "views": {
+        "hip": {
+          "pixels": 2,
+          "at": [
+            616,
+            373
+          ],
+          "bounds": [
+            616,
+            373,
+            617,
+            373
+          ]
+        },
+        "held-left": {
+          "pixels": 9,
+          "at": [
+            517,
+            258
+          ],
+          "bounds": [
+            514,
+            257,
+            521,
+            258
+          ]
+        },
+        "held-right": {
+          "pixels": 9,
+          "at": [
+            442,
+            258
+          ],
+          "bounds": [
+            438,
+            257,
+            445,
+            258
+          ]
+        },
+        "rack": {
+          "pixels": 2,
+          "at": [
+            508,
+            256
+          ],
+          "bounds": [
+            508,
+            256,
+            509,
+            256
+          ]
+        }
+      },
+      "peakPixels": 9
+    },
+    {
+      "index": 7,
+      "a": "root/BufferGeometry[8]",
+      "b": "root/pistol dust cover[1]",
+      "segments": 26,
+      "views": {
+        "hip": {
+          "pixels": 1,
+          "at": [
+            607,
+            366
+          ],
+          "bounds": [
+            607,
+            366,
+            607,
+            366
+          ]
+        },
+        "held-left": {
+          "pixels": 9,
+          "at": [
+            554,
+            262
+          ],
+          "bounds": [
+            551,
+            261,
+            558,
+            262
+          ]
+        },
+        "held-right": {
+          "pixels": 9,
+          "at": [
+            405,
+            262
+          ],
+          "bounds": [
+            401,
+            261,
+            408,
+            262
+          ]
+        },
+        "rack": {
+          "pixels": 6,
+          "at": [
+            540,
+            256
+          ],
+          "bounds": [
+            537,
+            256,
+            542,
+            256
+          ]
+        }
+      },
+      "peakPixels": 9
+    },
+    {
+      "index": 9,
+      "a": "root/BufferGeometry[10]",
+      "b": "root/pistol dust cover[1]",
+      "segments": 26,
+      "views": {
+        "hip": {
+          "pixels": 2,
+          "at": [
+            603,
+            363
+          ],
+          "bounds": [
+            603,
+            363,
+            604,
+            363
+          ]
+        },
+        "held-left": {
+          "pixels": 9,
+          "at": [
+            574,
+            263
+          ],
+          "bounds": [
+            570,
+            263,
+            577,
+            264
+          ]
+        },
+        "held-right": {
+          "pixels": 9,
+          "at": [
+            385,
+            264
+          ],
+          "bounds": [
+            382,
+            263,
+            389,
+            264
+          ]
+        },
+        "rack": {
+          "pixels": 6,
+          "at": [
+            555,
+            256
+          ],
+          "bounds": [
+            552,
+            256,
+            557,
+            256
+          ]
+        }
+      },
+      "peakPixels": 9
+    },
+    {
+      "index": 22,
+      "a": "root/pistol grip[24]",
+      "b": "root/pistol guard root[13]",
+      "segments": 32,
+      "views": {
+        "rack": {
+          "pixels": 9,
+          "at": [
+            438,
+            273
+          ],
+          "bounds": [
+            438,
+            269,
+            439,
+            277
+          ]
+        }
+      },
+      "peakPixels": 9
+    },
+    {
+      "index": 78,
+      "a": "root/controls-trigger[58]/pistol trigger[0]",
+      "b": "root/pistol guard[12]",
+      "segments": 24,
+      "views": {
+        "held-left": {
+          "pixels": 9,
+          "at": [
+            462,
+            272
+          ],
+          "bounds": [
+            459,
+            271,
+            464,
+            272
+          ]
+        },
+        "held-right": {
+          "pixels": 9,
+          "at": [
+            497,
+            272
+          ],
+          "bounds": [
+            495,
+            271,
+            500,
+            272
+          ]
+        }
+      },
+      "peakPixels": 9
+    },
+    {
+      "index": 83,
+      "a": "root/controls-slideStop[60]/BufferGeometry[0]",
+      "b": "root/BufferGeometry[14]",
+      "segments": 58,
+      "views": {
+        "hip": {
+          "pixels": 7,
+          "at": [
+            631,
+            368
+          ],
+          "bounds": [
+            629,
+            367,
+            633,
+            369
+          ]
+        },
+        "held-left": {
+          "pixels": 9,
+          "at": [
+            453,
+            231
+          ],
+          "bounds": [
+            449,
+            231,
+            455,
+            232
+          ]
+        },
+        "rack": {
+          "pixels": 8,
+          "at": [
+            457,
+            239
+          ],
+          "bounds": [
+            453,
+            239,
+            460,
+            239
+          ]
+        }
+      },
+      "peakPixels": 9
+    },
+    {
+      "index": 51,
+      "a": "root/group[30]/heatParts-barrel[4]/BufferGeometry[1]",
+      "b": "root/group[0]/BoxGeometry[49]",
+      "segments": 28,
+      "views": {
+        "hip": {
+          "pixels": 7,
+          "at": [
+            646,
+            322
+          ],
+          "bounds": [
+            636,
+            318,
+            648,
+            323
+          ]
+        },
+        "held-left": {
+          "pixels": 7,
+          "at": [
+            450,
+            183
+          ],
+          "bounds": [
+            446,
+            183,
+            473,
+            185
+          ]
+        },
+        "held-right": {
+          "pixels": 7,
+          "at": [
+            509,
+            183
+          ],
+          "bounds": [
+            486,
+            183,
+            512,
+            185
+          ]
+        }
+      },
+      "peakPixels": 7
+    },
+    {
+      "index": 63,
+      "a": "root/BufferGeometry[40]",
+      "b": "root/pistol guard[12]",
+      "segments": 82,
+      "views": {
+        "rack": {
+          "pixels": 7,
+          "at": [
+            444,
+            258
+          ],
+          "bounds": [
+            442,
+            257,
+            446,
+            268
+          ]
+        }
+      },
+      "peakPixels": 7
+    },
+    {
+      "index": 66,
+      "a": "root/BufferGeometry[40]",
+      "b": "root/BufferGeometry[39]",
+      "segments": 24,
+      "views": {
+        "rack": {
+          "pixels": 7,
+          "at": [
+            446,
+            260
+          ],
+          "bounds": [
+            444,
+            259,
+            447,
+            261
+          ]
+        }
+      },
+      "peakPixels": 7
+    },
+    {
+      "index": 56,
+      "a": "root/group[30]/heatParts-barrel[4]/CylinderGeometry[3]",
+      "b": "root/group[30]/heatParts-barrel[4]/CylinderGeometry[2]",
+      "segments": 46,
+      "views": {
+        "held-left": {
+          "pixels": 6,
+          "at": [
+            631,
+            215
+          ],
+          "bounds": [
+            630,
+            209,
+            632,
+            221
+          ]
+        },
+        "held-right": {
+          "pixels": 5,
+          "at": [
+            328,
+            215
+          ],
+          "bounds": [
+            327,
+            209,
+            329,
+            221
+          ]
+        }
+      },
+      "peakPixels": 6
+    },
+    {
+      "index": 77,
+      "a": "root/controls-trigger[58]/pistol trigger[0]",
+      "b": "root/pistol dust cover[1]",
+      "segments": 24,
+      "views": {
+        "held-left": {
+          "pixels": 3,
+          "at": [
+            457,
+            248
+          ],
+          "bounds": [
+            456,
+            248,
+            458,
+            248
+          ]
+        },
+        "held-right": {
+          "pixels": 3,
+          "at": [
+            502,
+            248
+          ],
+          "bounds": [
+            501,
+            248,
+            503,
+            248
+          ]
+        },
+        "rack": {
+          "pixels": 6,
+          "at": [
+            461,
+            253
+          ],
+          "bounds": [
+            458,
+            253,
+            463,
+            253
+          ]
+        }
+      },
+      "peakPixels": 6
+    },
+    {
+      "index": 2,
+      "a": "root/BufferGeometry[3]",
+      "b": "root/pistol dust cover[1]",
+      "segments": 18,
+      "views": {
+        "held-left": {
+          "pixels": 5,
+          "at": [
+            512,
+            257
+          ],
+          "bounds": [
+            510,
+            257,
+            514,
+            257
+          ]
+        },
+        "held-right": {
+          "pixels": 5,
+          "at": [
+            447,
+            257
+          ],
+          "bounds": [
+            445,
+            257,
+            449,
+            257
+          ]
+        },
+        "rack": {
+          "pixels": 4,
+          "at": [
+            506,
+            256
+          ],
+          "bounds": [
+            504,
+            256,
+            507,
+            256
+          ]
+        }
+      },
+      "peakPixels": 5
+    },
+    {
+      "index": 21,
+      "a": "root/pistol grip[24]",
+      "b": "root/pistol guard[12]",
+      "segments": 52,
+      "views": {
+        "rack": {
+          "pixels": 5,
+          "at": [
+            443,
+            256
+          ],
+          "bounds": [
+            442,
+            254,
+            443,
+            258
+          ]
+        }
+      },
+      "peakPixels": 5
+    },
+    {
+      "index": 23,
+      "a": "root/pistol grip[24]",
+      "b": "root/CylinderGeometry[15]",
+      "segments": 13,
+      "views": {
+        "hip": {
+          "pixels": 5,
+          "at": [
+            646,
+            387
+          ],
+          "bounds": [
+            645,
+            386,
+            647,
+            387
+          ]
+        }
+      },
+      "peakPixels": 5
+    },
+    {
+      "index": 10,
+      "a": "root/BufferGeometry[11]",
+      "b": "root/pistol dust cover[1]",
+      "segments": 18,
+      "views": {
+        "held-left": {
+          "pixels": 3,
+          "at": [
+            579,
+            264
+          ],
+          "bounds": [
+            578,
+            264,
+            580,
+            264
+          ]
+        },
+        "held-right": {
+          "pixels": 3,
+          "at": [
+            380,
+            264
+          ],
+          "bounds": [
+            379,
+            264,
+            381,
+            264
+          ]
+        },
+        "rack": {
+          "pixels": 2,
+          "at": [
+            559,
+            256
+          ],
+          "bounds": [
+            558,
+            256,
+            559,
+            256
+          ]
+        }
+      },
+      "peakPixels": 3
+    },
+    {
+      "index": 59,
+      "a": "root/BufferGeometry[39]",
+      "b": "root/pistol guard[12]",
+      "segments": 74,
+      "views": {
+        "rack": {
+          "pixels": 1,
+          "at": [
+            444,
+            259
+          ],
+          "bounds": [
+            444,
+            259,
+            444,
+            259
+          ]
+        }
+      },
+      "peakPixels": 1
+    },
+    {
+      "index": 15,
+      "a": "root/BufferGeometry[17]",
+      "b": "root/CylinderGeometry[16]",
+      "segments": 38,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 16,
+      "a": "root/BoxGeometry[21]",
+      "b": "root/BufferGeometry[14]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 17,
+      "a": "root/BoxGeometry[22]",
+      "b": "root/BufferGeometry[14]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 18,
+      "a": "root/BoxGeometry[23]",
+      "b": "root/BufferGeometry[14]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 20,
+      "a": "root/pistol grip[24]",
+      "b": "root/pistol rear tang[2]",
+      "segments": 48,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 24,
+      "a": "root/pistol grip[24]",
+      "b": "root/CylinderGeometry[16]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 25,
+      "a": "root/pistol grip[24]",
+      "b": "root/BufferGeometry[17]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 26,
+      "a": "root/pistol grip[24]",
+      "b": "root/CylinderGeometry[18]",
+      "segments": 13,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 27,
+      "a": "root/pistol grip[24]",
+      "b": "root/CylinderGeometry[19]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 28,
+      "a": "root/pistol grip[24]",
+      "b": "root/BufferGeometry[20]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 29,
+      "a": "root/group[29]/BufferGeometry[0]",
+      "b": "root/pistol dust cover[1]",
+      "segments": 44,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 30,
+      "a": "root/group[29]/BufferGeometry[0]",
+      "b": "root/pistol grip[24]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 31,
+      "a": "root/group[29]/CylinderGeometry[2]",
+      "b": "root/pistol grip[24]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 32,
+      "a": "root/group[29]/CylinderGeometry[3]",
+      "b": "root/pistol grip[24]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 33,
+      "a": "root/group[29]/CylinderGeometry[4]",
+      "b": "root/pistol grip[24]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 34,
+      "a": "root/group[29]/CylinderGeometry[5]",
+      "b": "root/pistol grip[24]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 35,
+      "a": "root/group[29]/CylinderGeometry[6]",
+      "b": "root/pistol grip[24]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 36,
+      "a": "root/group[29]/CylinderGeometry[7]",
+      "b": "root/pistol grip[24]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 37,
+      "a": "root/group[29]/CylinderGeometry[8]",
+      "b": "root/pistol grip[24]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 38,
+      "a": "root/group[29]/CylinderGeometry[9]",
+      "b": "root/pistol grip[24]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 39,
+      "a": "root/group[29]/CylinderGeometry[10]",
+      "b": "root/pistol grip[24]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 40,
+      "a": "root/group[29]/CylinderGeometry[11]",
+      "b": "root/pistol grip[24]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 41,
+      "a": "root/group[29]/CylinderGeometry[12]",
+      "b": "root/pistol grip[24]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 42,
+      "a": "root/group[29]/CylinderGeometry[13]",
+      "b": "root/pistol grip[24]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 43,
+      "a": "root/group[30]/BufferGeometry[0]",
+      "b": "root/group[0]/BufferGeometry[0]",
+      "segments": 24,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 44,
+      "a": "root/group[30]/BufferGeometry[0]",
+      "b": "root/pistol dust cover[1]",
+      "segments": 42,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 45,
+      "a": "root/group[30]/BufferGeometry[1]",
+      "b": "root/group[0]/BufferGeometry[0]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 46,
+      "a": "root/group[30]/BufferGeometry[2]",
+      "b": "root/group[0]/BufferGeometry[0]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 49,
+      "a": "root/group[30]/heatParts-barrel[4]/BufferGeometry[0]",
+      "b": "root/group[30]/BufferGeometry[2]",
+      "segments": 32,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 52,
+      "a": "root/group[30]/heatParts-barrel[4]/BufferGeometry[1]",
+      "b": "root/group[30]/heatParts-barrel[4]/BufferGeometry[0]",
+      "segments": 22,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 57,
+      "a": "root/BufferGeometry[32]",
+      "b": "root/pistol grip[24]",
+      "segments": 18,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 58,
+      "a": "root/BufferGeometry[39]",
+      "b": "root/pistol dust cover[1]",
+      "segments": 20,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 60,
+      "a": "root/BufferGeometry[39]",
+      "b": "root/pistol guard root[13]",
+      "segments": 62,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 61,
+      "a": "root/BufferGeometry[39]",
+      "b": "root/pistol grip[24]",
+      "segments": 26,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 62,
+      "a": "root/BufferGeometry[40]",
+      "b": "root/pistol dust cover[1]",
+      "segments": 46,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 67,
+      "a": "root/BufferGeometry[42]",
+      "b": "root/pistol grip[24]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 68,
+      "a": "root/BufferGeometry[43]",
+      "b": "root/pistol grip[24]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 69,
+      "a": "root/group[44]/CylinderGeometry[0]",
+      "b": "root/pistol grip[24]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 70,
+      "a": "root/group[44]/CylinderGeometry[1]",
+      "b": "root/pistol grip[24]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 71,
+      "a": "root/BoxGeometry[45]",
+      "b": "root/group[0]/BufferGeometry[0]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 72,
+      "a": "root/BoxGeometry[45]",
+      "b": "root/group[30]/BufferGeometry[0]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 73,
+      "a": "root/BufferGeometry[46]",
+      "b": "root/pistol guard root[13]",
+      "segments": 27,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 74,
+      "a": "root/BufferGeometry[46]",
+      "b": "root/pistol grip[24]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 76,
+      "a": "root/BufferGeometry[48]",
+      "b": "root/pistol grip[24]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 79,
+      "a": "root/controls-trigger[58]/BufferGeometry[1]",
+      "b": "root/controls-trigger[58]/pistol trigger[0]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 80,
+      "a": "root/controls-magRelease[59]/BufferGeometry[0]",
+      "b": "root/pistol dust cover[1]",
+      "segments": 20,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 82,
+      "a": "root/controls-magRelease[59]/BufferGeometry[0]",
+      "b": "root/BufferGeometry[42]",
+      "segments": 26,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 84,
+      "a": "root/controls-slideStop[60]/BufferGeometry[0]",
+      "b": "root/BoxGeometry[21]",
+      "segments": 9,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 85,
+      "a": "root/controls-slideStop[60]/BufferGeometry[0]",
+      "b": "root/BoxGeometry[22]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    },
+    {
+      "index": 86,
+      "a": "root/controls-slideStop[60]/BufferGeometry[0]",
+      "b": "root/BoxGeometry[23]",
+      "segments": 0,
+      "views": {},
+      "peakPixels": 0
+    }
+  ]
+}

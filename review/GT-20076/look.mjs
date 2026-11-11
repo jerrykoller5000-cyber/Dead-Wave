@@ -6,10 +6,10 @@ import {launch} from '../../tools/cdp.mjs';
 import {serve} from '../../tools/serve.mjs';
 
 const phase = process.argv[2];
-assert(process.env.DW_GAME_TEST_TOKEN && ['before','after','catalog-nov11'].includes(phase));
+assert(process.env.DW_GAME_TEST_TOKEN && ['before','after','catalog-nov11','catalog-chain-skin'].includes(phase));
 const root = fileURLToPath(new URL('../../',import.meta.url));
 const selection = process.argv.slice(3);
-const folder = selection.length && phase!=='catalog-nov11' ? path.join(root,'review/GT-20076','surfaces',phase) : path.join(root,'review/GT-20076',phase,'inspector');
+const folder = selection.length && !phase.startsWith('catalog-') ? path.join(root,'review/GT-20076','surfaces',phase) : path.join(root,'review/GT-20076',phase,'inspector');
 await fs.mkdir(folder,{recursive:true});
 const server = await serve(root,0);
 const browser = await launch({headless:false});

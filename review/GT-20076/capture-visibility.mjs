@@ -1,0 +1,63 @@
+import assert from 'node:assert/strict';
+import {mkdir} from 'node:fs/promises';
+import {fileURLToPath} from 'node:url';
+import {serve} from '../../tools/serve.mjs';
+import {launch} from '../../tools/cdp.mjs';
+import {save} from './save.mjs';
+
+const rankOnly=process.argv.includes('--rank-only');
+const candidate=process.argv.find(arg=>arg.startsWith('--audit='));
+const audit=candidate?candidate.slice('--audit='.length):'catalog-chain-skin';
+assert(/^catalog-[a-z0-9-]+$/.test(audit));
+const precise=process.argv.includes('--precise') || !!candidate;
+const folder=candidate?'visibility-'+audit.slice('catalog-'.length):precise?'visibility-final':'visibility';
+const ids=process.argv.slice(2).filter(arg=>!arg.startsWith('--'));
+assert(process.env.DW_GAME_TEST_TOKEN && ids.length && ids.every(id=>/^[a-z0-9]+$/.test(id)));
+const server=await serve(fileURLToPath(new URL('../../',import.meta.url)),0);
+const browser=await launch({headless:false});
+try {
+  const page=await browser.newPage({width:960,height:540});
+  await page.goto(server.origin+'/index.html?debug=1&raf=timer');
+  assert(await page.waitFor('window.TT && DWLoad.snapshot().state==="ready"'));
+  await page.evaluate('DWOpening.dismissForTesting()');
+  assert(await page.waitFor('!DWOpening.active'));
+  await page.evaluate("document.getElementById('playerName').value='Visibility';document.getElementById('modeTraining').click()");
+  assert(await page.waitFor("TT.trainingDbg.state().active && !document.getElementById('trainingBlackout')?.classList.contains('on')"));
+  await page.evaluate('import("/review/GT-20076/visibility-camera.mjs").then(m=>{window.vis=m.makeViews(TT);return true})');
+  for (const id of ids) {
+    const dir=new URL('./'+folder+'/'+id+'/',import.meta.url);
+    await mkdir(dir,{recursive:true});
+    await page.evaluate('vis.equip('+JSON.stringify(id)+')');
+    const results={};
+    const views=['hip','aimed','held-left','held-right'];
+    if(id==='sniper') views.push('aim-entry');
+    if(id!=='chainsaw') views.push('rack');
+    for (const view of rankOnly?[]:views) {
+      const camera=await page.evaluate('vis.pose('+JSON.stringify(view)+')');
+      const shot=async()=> (await page.send('Page.captureScreenshot',{format:'png'})).data;
+      const normal=await shot();
+      await page.evaluate('vis.draw(true)');
+      const repeat=await shot();
+      await page.evaluate('vis.draw(false)');
+      const hidden=await shot();
+      await page.evaluate('vis.draw(true)');
+      const mask=await page.evaluate('vis.mask('+[normal,repeat,hidden].map(s=>JSON.stringify(s)).join(',')+')');
+      if(camera.glassHidden) assert.equal(mask.pixels,0,'Fully scoped artwork should be hidden');
+      else assert(mask.pixels>=100,id+' '+view+' difference mask covers only '+mask.pixels+' pixels');
+      await save(new URL(view+'.png',dir),Buffer.from(normal,'base64'));
+      await save(new URL(view+'-mask.bin',dir),Buffer.from(mask.bytes,'base64'));
+      if(precise && !camera.glassHidden) {
+        const depth=await page.evaluate('vis.depth('+mask.width+','+mask.height+')',120000);
+        await save(new URL(view+'-depth.gz',dir),Buffer.from(depth,'base64'));
+      }
+      results[view]={...camera,actualDepth:precise&&!camera.glassHidden,width:mask.width,height:mask.height,pixels:mask.pixels};
+      await save(new URL('cameras.json',dir),JSON.stringify(results,null,2)+'\n');
+      console.log('PASS',id,view,mask.pixels,'changed pixels');
+    }
+    const rank=await page.evaluate('import("/review/GT-20076/rank-visibility.mjs").then(m=>m.rankViews(TT,'+[id,folder,audit].map(x=>JSON.stringify(x)).join(',')+'))',120000);
+    await save(new URL('rank.json',dir),JSON.stringify(rank,null,2)+'\n');
+    console.log('RANK',id,rank.rawPairs,'raw pairs,',rank.crossingPairs,'with triangle crossings,',rank.screenCandidates,'screen candidates');
+    console.log(JSON.stringify(rank.coverage));
+  }
+  assert.deepEqual(page.errors,[]);
+} finally {await browser.close(); await server.close();}

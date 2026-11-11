@@ -899,6 +899,7 @@ const messages = {
   "cif.rubber.olive": "Olive rubber",
   "cif.rubber.orange": "Hunter orange",
   "cif.dress.hint": "Buy field gear here, then dress each piece. Four camos issued; earn the rest in the field.",
+  "cif.dress.trainingHint": "Try every camo and dress each piece here. The Training Ground kit is for practice.",
   "cif.dress.reset": "Reset this tab",
   "cif.him.hair": "Hair",
   "cif.him.eyes": "Eyes",
@@ -1202,6 +1203,7 @@ const messages = {
   "calibre.60mm": "81mm",
 
   // ammo
+  "ammo.unit.bullets": "Bullets",
   "ammo.unit.fuel": "fuel",
   "ammo.unit.shells": "shells",
   "ammo.unit.grenades": "grenades",
