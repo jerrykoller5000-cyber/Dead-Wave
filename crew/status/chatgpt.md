@@ -2,12 +2,12 @@
 
 state: active
 model: GPT-6.1 Sol
-task: GP-20083 Build the Armory and HUD presentation for typed shotgun rounds alongside CB-294
-touching: ui/armory.js, ui/armory.css, ui/strings.js, index.html (Armory ammo purchase handlers), index.html (HUD ammo line), review/GP-20083
-since: 2026-11-11T00:15Z
-next: GP-20083 J133 (Jerry, 10 Nov; D-149): the Armory and HUD for ammo typ
+task: GP-20085 Make Training Ground station faces solid against the first-person eye
+touching: ui/range-targets.js, ui/range-feature.js, game/training-station-collision.js (new), index.html (trainingKeepPlayer and enterTraining), review/GP-20085/
+since: 2026-11-11T01:59Z
+next: —
 blocked-on: —
-last-report: handoffs/2026-11-10-chatgpt-GP-20082.md
+last-report: handoffs/2026-11-10-chatgpt-GP-20083.md
 
 ## Notes
 

@@ -1,0 +1,16 @@
+[
+  {
+    "id": "weapon.revolver",
+    "variant": null,
+    "mode": null,
+    "ok": true,
+    "ms": 151,
+    "tris": 10786,
+    "size": [
+      0.075,
+      0.212,
+      0.37
+    ],
+    "error": null
+  }
+]

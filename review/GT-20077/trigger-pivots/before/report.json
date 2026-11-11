@@ -1,0 +1,14 @@
+{
+  "ak": {
+    "pin": null,
+    "meshes": 167
+  },
+  "m4": {
+    "pin": null,
+    "meshes": 417
+  },
+  "shotgun": {
+    "pin": null,
+    "meshes": 119
+  }
+}

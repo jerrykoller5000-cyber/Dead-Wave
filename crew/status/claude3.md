@@ -2,29 +2,36 @@
 
 state: active
 model: Claude Opus 5.5
-task: CC-343 First person: his body turns with the view (AG-288 find 1): find what stops the turn at the range console, make FP hold; a test at the console and a wall, pitched -37/-60
-touching: index.html (player turning), index.html (first-person body), tools/tests/tcc343.js (new)
-since: 2026-11-10T23:17Z
+task: CC-341 J128: the marine's fabric, layer on layer: tcc341 (posed layer-pair clip check), then the fixes
+touching: studio/marine-body.js, studio/marine-cloth.js, studio/marine-hats.js, tools/tests/tcc341.js (new)
+since: 2026-11-11T01:47Z
 next: CC-341 J128 (Jerry, 10 Nov, standing, D-140; was CL-341): the marin
 blocked-on: —
-last-report: handoffs/2026-11-10-claude3-CC-341.md
+last-report: handoffs/2026-11-11-claude3-CC-343.md
 
 ## Notes
 
-### Where things stand (10 Nov ~22:45Z, end of session 2: context nearly full, needs a new session)
-- CC-340: live on the PC, checked out --done --review. Antigravity owes the four lights and the frame time (said LATER).
-- AG-288 find 1 (the Director's URGENT): checked, not from CC-340 (same on the pre-CC-340 tree): 0.4 m from the range console
-  his body won't turn to face it (player.rotation.y stays put) while the first-person view turns, so the eye looks back over
-  his pack. Sent to the Director for Claude 1 / Claude 2 (shot: Claude outputs/CC-340/AG288-find1-check.jpg). On the way I
-  applied FP_EYE in metres (index.html firstPersonEye: the new head's scale had moved the FP eye 2.5 cm back): LIVE, my pick,
-  the Director may still say Claude 1 should own it. The file before it: Claude outputs/CC-340/before-live/index.before-fpeye.html.
-- CC-341 (checked in, just started): nothing changed yet but FP_EYE. Plan: tools/tests/tcc341.js poses him (stand armed and
-  unarmed, walk, run, crouch, crouch-walk, aim, reload, jump) and checks each layer pair (skin < shirt < vest/carrier, shirt <
-  belt/pouches, glove cuff < sleeve, head < balaclava < helmet, trousers < boots) for any vertex > 0.5 mm through, reusing
-  rayHits/distTri from tools/tests/clip-check.js. Most of the body is one baked 'rig-skin' SkinnedMesh per material group
-  (RIG_SKIN, bakeRigSkin): read posed vertices with mesh.getVertexPosition(i, v) then localToWorld; open shells need the
+### Where things stand (11 Nov ~01:50Z, session 3)
+- CC-343 done (checked out --done): in first person his body faces the view (index.html updateMouseAimBody, one line); tcc343.
+  Asked the Director about the eye inside the range console at 0.4 m pitched -60 (my pick: a solid for the console).
+- CC-341 (checked in 01:47Z): nothing of the fabric changed yet. Plan: tools/tests/tcc341.js poses him (stand armed and
+  unarmed, walk, run, crouch, crouch-walk, aim, reload, jump) and checks each layer pair (skin < shirt < vest/carrier,
+  shirt < belt/pouches, glove cuff < sleeve, head < balaclava < helmet, trousers < boots) for any vertex > 0.5 mm through,
+  reusing rayHits/distTri from tools/tests/clip-check.js. Most of the body is one baked 'rig-skin' SkinnedMesh per material
+  group (RIG_SKIN, bakeRigSkin): posed vertices with mesh.getVertexPosition(i, v) then localToWorld; open shells need the
   nearest-face signed distance, not the ray parity. The in-game mesh list and its probe: Claude outputs/CC-341/.
 - Then CC-342 (after CC-341).
+
+### This VM's quirks (session 3)
+- The PC mount refuses writing over some existing files (EINVAL on open with O_CREAT, sometimes on ftruncate): crew.mjs fails
+  writing cards. Run it as `node -r $HOME/w/fsfix.cjs crew/crew.mjs ...` (device shell's $HOME/w; if gone, rewrite it: on
+  EINVAL write '<file>.tmp-claude3' and rename it over). Never probe with O_TRUNC on a real file (it emptied this card once).
+- PC files are CRLF: patch with \r\n. Re-check bytes and mtime right before writing.
+- Cloud copy without git: tar the code dirs on the PC (no assets/soundtrack, no tools/tests/test-*.html), cp into
+  "_DELETE ME/", stage it, untar in /home/claude/tt; then stage crew/{notes,crew}.mjs + tests.json + reviews.json. Re-sync files
+  newer than that tgz (find -newer) before testing a live file. A first boot can time out ("window.TT never appeared"): rerun.
+- The camera in --training --soft: frozen between pictures, so set the scene with `eval` + T.stepFrame(1/30) loops, then
+  `shot --live --out <file>`; long `pre` scripts time out under SwiftShader. A reload drops first person.
 
 ### Tools that work (cloud)
 - The lab: `node tools/marine-lab.mjs <outdir> <spec.json>` (studio/marine-lab): the body and head outside the game in

@@ -10,6 +10,19 @@ export function bindModelArtwork(gun, map, key, node) {
   return node;
 }
 
+// These slab profiles start and end at their upper attachment. Use the middle
+// of that edge as the animation origin in gun space. The authored surface is
+// translated back by the same offset inside its new group.
+export function addTriggerArtwork(gun, kit, outline, width, material, options) {
+  const first = outline[0], last = outline[outline.length - 1];
+  const y = (first[1] + last[1]) / 2, z = (first[0] + last[0]) / 2;
+  const group = kit.group(0, y, z);
+  const blade = kit.slab(outline, width, material, {...options, parent: group, y: -y, z: -z});
+  gun.userData.triggerPin = group.position.toArray();
+  bindModelArtwork(gun, 'controls', 'trigger', group);
+  return blade;
+}
+
 // Place an art pivot at the centre of these sibling meshes without changing the
 // rendered surface. Bounds are measured in their shared parent's coordinates.
 export function groupArtwork(T, ...meshes) {

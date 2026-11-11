@@ -38,6 +38,7 @@ export function createRangeFeature(T,tg,env){
  ui=mountRangeConsole({owned:env.owned,signature:(w,d)=>d?signature(d):env.signature(w),records,start,exit,cancel:()=>session.abort('cancel')});
  return {
   open,start,exit,isOpen:()=>ui.isOpen(),owns:session.owns,ruled:session.ruled,
+  constrain:(p,previous,radius)=>prop.constrain(p,previous,radius),
   canAttack:(w,u=1,source='weapon')=>session.canAttack(w,u,source),attack:(w,o)=>session.attack(w,o),
   hit(index,point,token,event){
    if(!session.owns())return false;const i=targets.localIndex(index);if(i<0)return false;

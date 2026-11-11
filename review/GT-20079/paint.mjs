@@ -6,7 +6,7 @@ import {serve} from '../../tools/serve.mjs';
 import {save} from '../GT-20076/save.mjs';
 
 const [id,phase]=process.argv.slice(2);
-assert(process.env.DW_GAME_TEST_TOKEN && /^[a-z0-9-]+$/.test(id) && ['before','pre-finish','after','lights','riser','rack-before','rack-after'].includes(phase));
+assert(process.env.DW_GAME_TEST_TOKEN && /^[a-z0-9-]+$/.test(id) && ['before','pre-finish','after','lights','riser','rack-before','rack-after','rack-final'].includes(phase));
 const folder=new URL('./'+id+'/'+phase+'/',import.meta.url);
 await mkdir(folder,{recursive:true});
 const server=await serve(fileURLToPath(new URL('../../',import.meta.url)),0);
@@ -27,7 +27,7 @@ async function capture() {
     for(let i=0;i<25 && T.getCurrentWeapon()!==id;i++){T.setWeapon(T.WEAPON_ORDER.indexOf(id));await new Promise(r=>setTimeout(r,120));}
     T.setOtsAimDbg(0,-.08);
     const mods=T.armoryDbg.mods(id);
-    const optic = id==='m4'?'acog':'rmr';
+    const optic = ['ak','m4'].includes(id)?'acog':'rmr';
     for(const key of ['suppressor','laserLight','optic:'+optic]){
       const mod=mods.find(x=>x.id===key);
       if(mod && !T.armoryDbg.fit(id,key,true))throw Error('Cannot fit '+key+'; owned='+mod.owned);
@@ -93,7 +93,7 @@ async function capture() {
         root.traverse(o=>{
           if(!o.isMesh || !o.material || Array.isArray(o.material))return;
           const m=o.material;
-          if(!mats.has(m.uuid))mats.set(m.uuid,{part:o.name,material:m.uuid,role:m.userData.weaponFinishRole||null,registered:!!m.userData.gunPaintId,map:m.map?.uuid||null,color:m.color?.getHex(),roughness:m.roughness,metalness:m.metalness});
+          if(!mats.has(m.uuid))mats.set(m.uuid,{part:o.name,materialName:m.name||'',material:m.uuid,role:m.userData.weaponFinishRole||null,registered:!!m.userData.gunPaintId,map:m.map?.uuid||null,color:m.color?.getHex(),roughness:m.roughness,metalness:m.metalness});
         });out[group]=Array.from(mats.values());
       }
       return out;
@@ -109,8 +109,8 @@ async function capture() {
         lamp.target.position.copy(copy.position);
         T.scene.add(lamp,lamp.target,new T.THREE.HemisphereLight(0xf3f7ff,0xc7bba9,1.5));window.reviewLamp=lamp;
       }
-      const centre=copy.localToWorld(new T.THREE.Vector3(0,0,id==='m4'?.32:.24));
-      const eye=centre.clone().addScaledVector(new T.THREE.Vector3(-.64,.22,.31),id==='m4'?2.05:1);
+      const centre=copy.localToWorld(new T.THREE.Vector3(0,0,id==='ak'?.12:id==='m4'?.32:.24));
+      const eye=centre.clone().addScaledVector(new T.THREE.Vector3(-.64,.22,.31),['m4','ak'].includes(id)?2.05:1);
       T.setShotView({x:eye.x,y:eye.y,z:eye.z,tx:centre.x,ty:centre.y,tz:centre.z,fov:34});
       for(let i=0;i<5;i++){T.stepFrame(1/30);await new Promise(r=>setTimeout(r,80));}
     };
@@ -184,7 +184,7 @@ async function capture() {
   }
   const states={};
   let tiles;
-  for(const angle of (id==='shotgun'?['eye','side','rack']:['eye','side']))for(const [name,key] of [['factory',''],['camo',swatch],['restored','']]){
+  for(const angle of (['shotgun','ak'].includes(id)?['eye','side','rack']:['eye','side']))for(const [name,key] of [['factory',''],['camo',swatch],['restored','']]){
     const selected=await page.evaluate('setPaint('+JSON.stringify(key)+')');
     assert.equal(selected,key);
     if(angle==='eye'){
@@ -213,7 +213,7 @@ async function capture() {
     const count=parts.filter(m=>m.map).length;
     console.log(group, count,'of',parts.length,'materials have maps');
   }
-  if(phase==='after' || phase==='riser'){
+  if(phase==='after' || phase==='riser' || phase==='rack-final'){
     if(id==='pistol'){
       const ids=await page.evaluate(`(async()=>{
         const {makePistolModel}=await import('/studio/weapon-sidearms.js');
@@ -228,10 +228,10 @@ async function capture() {
       await save(new URL('part-roles.json',folder),JSON.stringify(ids,null,2)+'\n');
       assert.deepEqual(ids,{trigger:'factory',grip:'frame',slide:'slide',rearPlate:'factory',magazine:'factory',module:'light shell',rubber:'factory',glass:'factory',cavity:'factory'});
     }
-    if(id==='m4' || id==='shotgun'){
+    if(['m4','ak','shotgun'].includes(id)){
       const rows={};
       const options=await page.evaluate('TT.opticDbg.options[reviewId]');
-      assert.deepEqual([...options].sort(),id==='m4'?['acog','prism','rmr']:['prism','rmr']);
+      assert.deepEqual([...options].sort(),id==='shotgun'?['prism','rmr']:['acog','prism','rmr']);
       for(const kind of options){
         const values=await page.evaluate(`(async()=>{
           const T=TT, kind='${kind}', g=T.weaponMeshes[reviewId];
@@ -258,23 +258,37 @@ async function capture() {
             if(!o.isMesh || !o.material)return;
             const m=o.material;
             if(m.userData.weaponFinishRole==='optic shell' && m.map)counts.coated++;
-            else if(reviewId==='shotgun' && m.userData.weaponFinishRole==='rail' && m.map)counts.rail++;
+            else if(reviewId!=='m4' && m.userData.weaponFinishRole==='rail' && m.map)counts.rail++;
             else if(!m.userData.weaponFinishRole && !m.userData.gunPaintId)counts.factory++;
             else leaks.push(o.name);
           });
           const lib=await import('/studio/weapon-longarms.js');
-          const build=reviewId==='m4'?lib.makeM4Model:lib.makeShotgunModel;
+          const build={m4:lib.makeM4Model,ak:lib.makeAkModel,shotgun:lib.makeShotgunModel}[reviewId];
           const raw=build({...T.inspectHost().builders.weaponContext(),finishGun:g=>g});
           const roles={};
           const parts={barrel:raw.getObjectByName(raw.userData.heatParts.barrel),
-            lightLens:raw.userData.laserLightUnit.getObjectByName('lightLens'),dial:raw.userData.laserLightUnit.getObjectByName(reviewId==='shotgun'?'windageDial':'modeDial'),
+            lightLens:raw.userData.laserLightUnit.getObjectByName('lightLens'),
             laserCavity:raw.userData.laserLightUnit.getObjectByName('laserCavity')};
-          if(reviewId==='m4')Object.assign(parts,{magazine:raw.userData.mag,handle:raw.userData.work,sideInlay:raw.userData.recoilBolt,
+          if(reviewId!=='ak')parts.dial=raw.userData.laserLightUnit.getObjectByName(reviewId==='shotgun'?'windageDial':'modeDial');
+          if(reviewId==='m4' || reviewId==='ak')Object.assign(parts,{magazine:raw.userData.mag,handle:raw.userData.work,sideInlay:raw.userData.recoilBolt,
             selectors:raw.getObjectByName(raw.userData.controls.selector)});
           else Object.assign(parts,{bolt:raw.userData.shotgunBolt,lifter:raw.getObjectByName('shotgun lifter'),
             trigger:raw.getObjectByName('shotgun trigger'),safety:raw.getObjectByName(raw.userData.controls.safety),
             paddle:raw.userData.slideLock,shell:raw.userData.reloadShell,bead:raw.getObjectByName('shotgun bead'),
             rubber:raw.getObjectByName('shotgun recoil pad')});
+          if(reviewId==='ak'){
+            for(const key of ['magRelease','trigger'])parts[key]=raw.getObjectByName(raw.userData.controls[key]);
+            parts.latch=raw.getObjectByName('KR-7 bracket latch');
+            parts.stock=raw.getObjectByName('KR-7 stock');
+            parts.bore=raw.userData.suppressor.children.at(-1);
+            parts.nose=raw.userData.suppressor.children.at(-2);
+            const wood=parts.stock.material;
+            if(!wood.map)throw Error('Missing factory walnut texture');
+            let count=0;raw.traverse(o=>{if(o.material===wood)count++});
+            if(count<4)throw Error('Missing wood on the grip or fore-end');
+            const targets={'KR-7 receiver cover':'receiver','KR-7 bracket web':'rail'};
+            for(const [name,role] of Object.entries(targets))if(raw.getObjectByName(name)?.material.userData.weaponFinishRole!==role)throw Error('Missing finish on '+name);
+          }
           if(reviewId==='shotgun'){
             const lamp=raw.userData.laserLightUnit;
             const shells=[['shotgun receiver','receiver'],['shotgun grip','furniture'],['shotgun stock body','furniture']];
@@ -311,7 +325,7 @@ async function capture() {
           }
         }
         if(!values.counts.coated || !values.counts.factory || values.leaks.length)failures.push('Optic mask '+kind);
-        if(id==='shotgun' && !values.counts.rail)failures.push('Missing coated removable rail on '+kind);
+        if(id!=='m4' && !values.counts.rail)failures.push('Missing coated removable rail on '+kind);
         if(Object.values(values.roles).some(n=>n!==0))failures.push(id+' paint on factory hardware');
         const shot=await page.send('Page.captureScreenshot',{format:'jpeg',quality:94});
         await save(new URL('optic-'+kind+'.jpg',folder),Buffer.from(shot.data,'base64'));
@@ -319,9 +333,19 @@ async function capture() {
       await save(new URL('optics.json',folder),JSON.stringify(rows,null,2));
       await page.evaluate("setPaint('')");
     }
+    if(id==='ak'){
+      const wood=states.factory.assembled.find(m=>m.materialName==='KR-7 walnut');
+      if(!wood?.map || wood.registered || wood.role)failures.push('Factory walnut was not isolated');
+      else for(const [key,state] of Object.entries(states)){
+        for(const group of ['assembled','firstPerson']){
+          if(!state[group].some(m=>m.map===wood.map && m.color===wood.color))failures.push(key+' '+group+' lost factory walnut');
+        }
+      }
+    }
     const mapped=new Set(states.camo.assembled.filter(m=>m.role).map(m=>m.map));
     if(mapped.size!==1||mapped.has(null))failures.push('The coated surfaces did not share one camo texture');
-    const required=id==='pistol'?{assembled:['frame','slide'],slide:['slide']}:{assembled:['receiver','furniture','rail','optic shell']};
+    const required=id==='pistol'?{assembled:['frame','slide'],slide:['slide']}:
+      {assembled:id==='ak'?['receiver','rail','optic shell']:['receiver','furniture','rail','optic shell']};
     Object.assign(required,{light:['light shell'],suppressor:['suppressor shell'],optic:['optic shell']});
     for(const [group,roles] of Object.entries(required)){
       const parts=states.camo[group]||[];

@@ -1,0 +1,23 @@
+{
+  "factory": {
+    "folds": [
+      14052,
+      15828
+    ],
+    "faults": []
+  },
+  "camo": {
+    "folds": [
+      14052,
+      2604
+    ],
+    "faults": []
+  },
+  "restored": {
+    "folds": [
+      14052,
+      15828
+    ],
+    "faults": []
+  }
+}

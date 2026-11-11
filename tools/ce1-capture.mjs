@@ -121,7 +121,11 @@ async function main() {
       T.modsOwnAllDbg();
       if (T.isUnarmed()) T.toggleHolster();
       T.flightHold(false);
-      if (!window.__home) window.__home = T.player.position.clone();
+      T.setOtsAimDbg(0, -0.08);
+
+      // Step frames for camera and view to settle facing the shooting range
+      for (let k = 0; k < 60; k++) T.stepFrame(1 / 30);
+      window.__home = T.player.position.clone();
 
       function illuminate() {
         const L = window.__LIGHTS[window.eyeLight] || window.__LIGHTS['noon'];
@@ -141,6 +145,7 @@ async function main() {
       H.attach({ held: () => false, scale: (dt) => dt, frame: illuminate });
     })()`);
 
+    const restOnly = process.argv.includes('--rest-only');
     const manifest = [];
     let shotCount = 0;
 
@@ -159,31 +164,30 @@ async function main() {
           window.eyeLight = ${JSON.stringify(light.name)};
           if (T.setWorldTime) T.setWorldTime(${light.time});
 
-          const vm = T.viewmodelDbg();
-          if (vm && vm.info) {
-            vm.info.tune = {};
-            if (vm.retune) vm.retune();
-          }
-
           T.flightHold(false);
           T.setZoomHeldDbg(false);
-          T.setOtsAimDbg(0, -0.1);
+          T.setOtsAimDbg(0, -0.08);
           T.player.position.copy(window.__home);
 
           const idx = T.WEAPON_ORDER.indexOf(gunKey);
           for (let i = 0; i < 30 && T.getCurrentWeapon() !== gunKey; i++) {
             T.setWeapon(idx);
-            await new Promise((r) => setTimeout(r, 100));
+            for (let k = 0; k < 5; k++) T.stepFrame(1 / 30);
           }
           if (T.isUnarmed()) T.toggleHolster();
 
           // Wait until viewmodel has this gun active and raised
-          for (let i = 0; i < 300 && !(vm && vm.info && vm.info.active && vm.info.key === gunKey && vm.info.raise > 0.999); i++) {
+          for (let i = 0; i < 300; i++) {
             T.stepFrame(1 / 30);
+            const curVm = T.viewmodelDbg();
+            if (curVm && curVm.info && curVm.info.active && curVm.info.key === gunKey && curVm.info.raise > 0.999) {
+              break;
+            }
           }
 
-          T.flightHold(true);
+          // Step 60 more frames for camera sway/inertia to fully rest
           for (let i = 0; i < 60; i++) T.stepFrame(1 / 30);
+          T.flightHold(true);
         })()`);
 
         // Verify weapon ready
@@ -207,8 +211,10 @@ async function main() {
         console.log(`  Ready check:`, readyState);
         assert(readyState.active && readyState.key === gun.key && readyState.raise > 0.99, 'Weapon must be raised and active');
 
+        const stepsToRun = restOnly ? ACTION_STEPS.filter((s) => s.id === 'f000') : ACTION_STEPS;
+
         // Step through action cycle
-        for (const step of ACTION_STEPS) {
+        for (const step of stepsToRun) {
           shotCount++;
           const filename = `${gun.key}-hip-${light.name}-${step.id}.png`;
           const title = `${gun.name} · Hip · ${light.name} · ${step.label}`;
@@ -220,9 +226,10 @@ async function main() {
             if (isFire) {
               s.userData.shots = (s.userData.shots | 0) + 1;
             }
-            if (dt > 0) {
-              T.stepFrame(dt);
-            }
+            // Always step a frame so WebGPU renders the scene!
+            // For f000 (0 ms Rest), dt is 0, so step 1/60s to render the settled gun.
+            // For shot frames, step the authored action cycle dt.
+            T.stepFrame(dt > 0 ? dt : 1 / 60);
             const vm = T.viewmodelDbg();
             const g = vm?.gun;
             const r = {
@@ -260,7 +267,7 @@ async function main() {
         }
 
         // Additional test: GW-4 (m4) and KR-7 (ak) ADS at 25 ms down the sights
-        if (gun.key === 'm4' || gun.key === 'ak') {
+        if (!restOnly && (gun.key === 'm4' || gun.key === 'ak')) {
           console.log(`  >> Capturing ADS 25 ms down the sights for ${gun.name} @ ${light.name}...`);
           await page.evaluate(`(async () => {
             const T = window.TT;
@@ -310,9 +317,24 @@ async function main() {
       }
     }
 
-    const manifestJson = JSON.stringify(manifest, null, 2);
-    writeRetry(path.join(OUT_GPU, 'ce1-manifest.json'), manifestJson);
-    writeRetry(path.join(OUT_QA, 'ce1-manifest.json'), manifestJson);
+    if (restOnly && fs.existsSync(path.join(OUT_GPU, 'ce1-manifest.json'))) {
+      try {
+        const oldManifest = JSON.parse(fs.readFileSync(path.join(OUT_GPU, 'ce1-manifest.json'), 'utf8'));
+        const newFiles = new Set(manifest.map((m) => m.file));
+        const merged = oldManifest.filter((m) => !newFiles.has(m.file)).concat(manifest);
+        const manifestJson = JSON.stringify(merged, null, 2);
+        writeRetry(path.join(OUT_GPU, 'ce1-manifest.json'), manifestJson);
+        writeRetry(path.join(OUT_QA, 'ce1-manifest.json'), manifestJson);
+      } catch {
+        const manifestJson = JSON.stringify(manifest, null, 2);
+        writeRetry(path.join(OUT_GPU, 'ce1-manifest.json'), manifestJson);
+        writeRetry(path.join(OUT_QA, 'ce1-manifest.json'), manifestJson);
+      }
+    } else {
+      const manifestJson = JSON.stringify(manifest, null, 2);
+      writeRetry(path.join(OUT_GPU, 'ce1-manifest.json'), manifestJson);
+      writeRetry(path.join(OUT_QA, 'ce1-manifest.json'), manifestJson);
+    }
     console.log(`\n[CE-1] All captures complete! Total ${manifest.length} images saved to review/CE-1/gpu/ and qa/2026-11-10-CE-1/`);
   } finally {
     try { await browser.close(); } catch {}

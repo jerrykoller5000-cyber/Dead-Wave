@@ -1,0 +1,16 @@
+PASS pistol: every small part touches a bigger one (65 small)
+FAIL revolver: every small part touches a bigger one (89 small) FLOAT 2 at -0.036,-0.073,-0.066 | 0.036,-0.073,-0.066
+PASS uzi: every small part touches a bigger one (85 small)
+FAIL m4: every small part touches a bigger one (60 small) FLOAT 1 at -0.024,0.005,-0.110
+PASS ak: every small part touches a bigger one (68 small)
+PASS aa12: every small part touches a bigger one (117 small)
+PASS shotgun: every small part touches a bigger one (32 small)
+PASS sniper: every small part touches a bigger one (91 small)
+PASS minigun: every small part touches a bigger one (56 small)
+PASS launcher: every small part touches a bigger one (61 small)
+PASS flamer: every small part touches a bigger one (43 small)
+PASS chainsaw: every small part touches a bigger one (130 small)
+PASS m240: every small part touches a bigger one (57 small)
+PASS mortar: every small part touches a bigger one (7 small)
+PASS checked all 14 guns (14)
+FAIL no floating hardware across the set (3)

@@ -1,0 +1,212 @@
+[
+  {
+    "station": "cif",
+    "width": 1280,
+    "back": 1.4,
+    "action": "cif",
+    "overlap": {
+      "health": false,
+      "prompt": false,
+      "score": {
+        "top": 14,
+        "bottom": 45.59375
+      },
+      "promptTop": 127.30313110351562
+    }
+  },
+  {
+    "station": "kiosk",
+    "width": 1280,
+    "back": 1.4,
+    "action": "kiosk",
+    "overlap": {
+      "health": false,
+      "prompt": false,
+      "score": {
+        "top": 14,
+        "bottom": 45.59375
+      },
+      "promptTop": 127.30313110351562
+    }
+  },
+  {
+    "station": "armory",
+    "width": 1280,
+    "back": 1.4,
+    "action": "armory",
+    "overlap": {
+      "health": false,
+      "prompt": false,
+      "score": {
+        "top": 14,
+        "bottom": 45.59375
+      },
+      "promptTop": 127.30313110351562
+    }
+  },
+  {
+    "station": "hqPanel",
+    "width": 1280,
+    "back": 1.4,
+    "action": "trainingPanel",
+    "overlap": {
+      "health": false,
+      "prompt": false,
+      "score": {
+        "top": 14,
+        "bottom": 45.59375
+      },
+      "promptTop": 144.4031219482422
+    }
+  },
+  {
+    "station": "skullWindow",
+    "width": 1280,
+    "back": 1.4,
+    "action": "hqWindow",
+    "overlap": {
+      "health": false,
+      "prompt": false,
+      "score": {
+        "top": 14,
+        "bottom": 45.59375
+      },
+      "promptTop": 147.4031219482422
+    }
+  },
+  {
+    "station": "lightSwitch",
+    "width": 1280,
+    "back": 1.4,
+    "action": "trainingLights",
+    "overlap": {
+      "health": false,
+      "prompt": false,
+      "score": {
+        "top": 14,
+        "bottom": 45.59375
+      },
+      "promptTop": 106.8031234741211
+    }
+  },
+  {
+    "station": "rangeConsole",
+    "width": 1280,
+    "back": 1.4,
+    "action": "rangeConsole",
+    "overlap": {
+      "health": false,
+      "prompt": false,
+      "score": {
+        "top": 14,
+        "bottom": 45.59375
+      },
+      "promptTop": 155.4031219482422
+    }
+  },
+  {
+    "station": "cif",
+    "width": 390,
+    "back": 1.4,
+    "action": "cif",
+    "overlap": {
+      "health": false,
+      "prompt": false,
+      "score": {
+        "top": 14,
+        "bottom": 61.890625
+      },
+      "promptTop": 152.60311889648438
+    }
+  },
+  {
+    "station": "kiosk",
+    "width": 390,
+    "back": 1.4,
+    "action": "kiosk",
+    "overlap": {
+      "health": false,
+      "prompt": false,
+      "score": {
+        "top": 14,
+        "bottom": 61.890625
+      },
+      "promptTop": 152.60311889648438
+    }
+  },
+  {
+    "station": "armory",
+    "width": 390,
+    "back": 1.4,
+    "action": "armory",
+    "overlap": {
+      "health": false,
+      "prompt": false,
+      "score": {
+        "top": 14,
+        "bottom": 61.890625
+      },
+      "promptTop": 152.60311889648438
+    }
+  },
+  {
+    "station": "hqPanel",
+    "width": 390,
+    "back": 1.4,
+    "action": "trainingPanel",
+    "overlap": {
+      "health": false,
+      "prompt": false,
+      "score": {
+        "top": 14,
+        "bottom": 61.890625
+      },
+      "promptTop": 172.60311889648438
+    }
+  },
+  {
+    "station": "skullWindow",
+    "width": 390,
+    "back": 1.4,
+    "action": "hqWindow",
+    "overlap": {
+      "health": false,
+      "prompt": false,
+      "score": {
+        "top": 14,
+        "bottom": 61.890625
+      },
+      "promptTop": 175.60311889648438
+    }
+  },
+  {
+    "station": "lightSwitch",
+    "width": 390,
+    "back": 1.4,
+    "action": "trainingLights",
+    "overlap": {
+      "health": false,
+      "prompt": false,
+      "score": {
+        "top": 14,
+        "bottom": 61.890625
+      },
+      "promptTop": 128.60311889648438
+    }
+  },
+  {
+    "station": "rangeConsole",
+    "width": 390,
+    "back": 1.4,
+    "action": "rangeConsole",
+    "overlap": {
+      "health": false,
+      "prompt": false,
+      "score": {
+        "top": 14,
+        "bottom": 61.890625
+      },
+      "promptTop": 185.60311889648438
+    }
+  }
+]

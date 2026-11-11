@@ -15,7 +15,7 @@
 //
 // index.html calls update(dt, state) each frame before it draws and place() in renderFrame; it asks muzzleWorld()
 // where the view gun's muzzle appears (the laser leaves from there).
-import { VM, VM_POSES, VM_RELOADS, VM_SOCKETS, VM_BLADES, VM_GRENADE, VM_HANDS } from './viewmodel-poses.js';
+import { VM, VM_POSES, VM_RELOADS, VM_SOCKETS, VM_BLADES, VM_GRENADE, VM_HANDS, VM_TRIGGER } from './viewmodel-poses.js';
 import { SIGHT } from './sight-points.js';
 import { buildViewArm, wristSpacePoint, HAND_SCALE } from '../studio/fp-arms.js';
 import { copyPose, lerpPose, HAND_POSES } from '../studio/marine-hand.js';
@@ -359,6 +359,9 @@ export function createViewmodel(ctx) {
       stock: map.get(ud.fpStock) || null,
       flash: map.get(ud.flash) || null,
       nodes: countNodes(src), s: 1, foot: null, magBase: null };
+    // CE-2 (J130): the gun's controls (ChatGPT 2's userData.controls: a name per control) as the copy's own nodes, for the hand
+    gun.ctrls = {};
+    for (const [k, nm] of Object.entries(ud.controls || {})) { const o = nm && src.getObjectByName(nm), c = o && map.get(o); if (c) gun.ctrls[k] = c; }
     gun.workBase = gun.work ? gun.work.position.clone() : null;
     gun.pumpBase = gun.pump ? gun.pump.position.clone() : null;
     gun.boltBase = gun.bolt ? gun.bolt.position.clone() : null;   // GB-301: exposed like the shotgun's pump
@@ -872,6 +875,29 @@ export function createViewmodel(ctx) {
     G.q.premultiply(rq);
   }
 
+  // CE-2: the trigger finger's scratch, and the hold's give without the index finger's vertices (the give fades with the
+  // whole pose's distance from the fit, so an index on the trigger would take the other fingers' give with it): its pose
+  // keeps the fit's but for the index, which follows the hand's own.
+  let _trigPose = copyPose(HAND_POSES.relaxed); const _trgP = V3(), _trgQ = Q(), trigContacts = new Map();
+  function trigContact(key, pose) {
+    const c0 = handContact(key, 'r'); if (!c0) return null;
+    let c = trigContacts.get(key);
+    if (!c || c.src !== c0) {
+      c = { src: c0, pose: copyPose(c0.pose) };
+      for (const kind of ['glove', 'bare', 'pads']) {
+        const K = c0[kind], sk = arms.r.rig.skins && arms.r.rig.skins.find((x) => x.kind === kind);
+        if (!K || !sk) { c[kind] = K; continue; }
+        const keep = [];
+        for (let i = 0; i < K.idx.length; i++) { const v = K.idx[i], w = sk.w1[v], a = sk.seg[v], b = sk.b1[v]; if (!((a >= 1 && a <= 3 && 1 - w > 0.2) || (b >= 1 && b <= 3 && w > 0.2))) keep.push(i); }
+        const idx = new Uint16Array(keep.length), d = new Float32Array(keep.length * 3);
+        keep.forEach((i, n) => { idx[n] = K.idx[i]; d[n * 3] = K.d[i * 3]; d[n * 3 + 1] = K.d[i * 3 + 1]; d[n * 3 + 2] = K.d[i * 3 + 2]; });
+        c[kind] = { idx, d };
+      }
+      trigContacts.set(key, c);
+    }
+    for (let j = 0; j < 4; j++) c.pose.f[0][j] = pose.f[0][j];
+    return c;
+  }
   // CE-1: a shot's stroke: 0 to 1 by tb, held to th, home (0) by te; 0 outside.
   const stroke = (t, tb, th, te) => (t < 0 ? 0 : t < tb ? smooth(t / tb) : t < th ? 1 : t < te ? 1 - smooth((t - th) / (te - th)) : 0);
   // CE-1 (GT-20075, Claude 5): the action on a view copy, t seconds after its last shot. Runs after mirrorParts, which
@@ -1188,9 +1214,29 @@ export function createViewmodel(ctx) {
       const len = _sh.length();
       if (len > 1e-4) { a.upper.quaternion.setFromUnitVectors(AX_Y, _sh.multiplyScalar(1 / len)); a.upper.scale.set(1, Math.max(1, len / 0.34), 1); }
     }
+    // CE-2 (J103: "Trigger finger needs to be in actual trigger guard when firing ... Finger needs to physically pull the
+    // trigger for each shot"; J112): on a gun with VM_TRIGGER the firing hand's index lies in the guard with its pad on the
+    // trigger's face (solved against the gun with the hand where VM_FIT puts it), and presses it back on each shot and while
+    // the trigger is held; the trigger turns on its pin with it. Claude 1's fit keeps the hand, the other fingers and the
+    // thumb (agreed 11 Nov). Not on a pair yet (their hands sit on the hold's grip, not the fit).
+    const TR = !AK && VM_TRIGGER[gun.key];
+    let trigOn = false;
+    if (TR && poseR === gripP && !BL && !HN) {
+      const want = (st.fireHeld || (S.slideT < TR.hold && S.shots > 0)) ? 1 : 0;
+      S.trig = want >= (S.trig || 0) ? want : Math.max(want, (S.trig || 0) - dt / TR.release);
+      const k = smooth(S.trig), f = (_trigPose = copyPose(gripP, _trigPose)).f[0];
+      for (let j = 0; j < 4; j++) f[j] = TR.rest[j] + (TR.pull[j] - TR.rest[j]) * k;
+      poseR = _trigPose; trigOn = true; info.trigger = k;
+      const tp = gun.ctrls[TR.part || 'trigger'];
+      if (tp && tp.parent === gun.root && TR.turn) {
+        _trgP.set(TR.pivot[0], TR.pivot[1], TR.pivot[2]); _trgQ.setFromAxisAngle(AX_X, TR.turn * k);
+        tp.position.sub(_trgP).applyQuaternion(_trgQ).add(_trgP); tp.quaternion.premultiply(_trgQ);
+      }
+    } else { S.trig = 0; info.trigger = null; }
     // CL-334 h (J126 rule 2: "No part of the hand may clip through any part of a weapon"): where this gun's hold presses the
-    // hand into its grip, the hand gives (studio/hand-contacts.js); it fades as the hand's pose leaves the hold's
-    if (arms.r.rig.setContact) { arms.r.rig.setContact(handContact(gun.key, 'r')); arms.l.rig.setContact(AK ? null : handContact(gun.key, 'l')); }
+    // hand into its grip, the hand gives (studio/hand-contacts.js); it fades as the hand's pose leaves the hold's.
+    // CE-2: with the index on the trigger, the give without the index's own (the rest of the hand keeps its give)
+    if (arms.r.rig.setContact) { arms.r.rig.setContact(trigOn ? trigContact(gun.key, poseR) : handContact(gun.key, 'r')); arms.l.rig.setContact(AK ? null : handContact(gun.key, 'l')); }
     arms.r.rig.set(poseR).update(); arms.l.rig.set(poseL).update();
     for (const a of [arms.r, arms.l]) if (a.bridge && a.parts.rolled.visible && a.bridge.userData.bend) a.bridge.userData.bend();
     // the magazine: seated, in the support palm, or away in the pouch

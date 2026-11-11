@@ -1,10 +1,10 @@
 # Antigravity
 
-state: active
+state: idle
 model: Gemini 4 Carbon
-task: AG-291 CE-1 four lights on RTX 5080: gun action cycles across 6 weapons
-touching: review/CE-1/gpu, review/CE-1
-since: 2026-11-11T00:19Z
+task: —
+touching: —
+since: 2026-11-11T01:13Z
 next: —
 blocked-on: —
 last-report: handoffs/2026-11-10-antigravity-AG-286.md

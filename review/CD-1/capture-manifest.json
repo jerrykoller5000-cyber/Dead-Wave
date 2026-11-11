@@ -365,7 +365,7 @@
     "weapon": "uzi",
     "pose": "aimed",
     "light": "noon",
-    "bytes": 383955
+    "bytes": 358390
   },
   {
     "file": "m4-aimed-noon.png",
@@ -373,7 +373,7 @@
     "weapon": "m4",
     "pose": "aimed",
     "light": "noon",
-    "bytes": 388560
+    "bytes": 333639
   },
   {
     "file": "ak-aimed-noon.png",
@@ -381,7 +381,7 @@
     "weapon": "ak",
     "pose": "aimed",
     "light": "noon",
-    "bytes": 380223
+    "bytes": 335198
   },
   {
     "file": "shotgun-aimed-noon.png",
@@ -389,7 +389,7 @@
     "weapon": "shotgun",
     "pose": "aimed",
     "light": "noon",
-    "bytes": 371399
+    "bytes": 366446
   },
   {
     "file": "sniper-aimed-noon.png",
@@ -397,7 +397,7 @@
     "weapon": "sniper",
     "pose": "aimed",
     "light": "noon",
-    "bytes": 390524
+    "bytes": 336763
   },
   {
     "file": "aa12-aimed-noon.png",
@@ -405,7 +405,7 @@
     "weapon": "aa12",
     "pose": "aimed",
     "light": "noon",
-    "bytes": 367493
+    "bytes": 317811
   },
   {
     "file": "minigun-aimed-noon.png",
@@ -413,7 +413,7 @@
     "weapon": "minigun",
     "pose": "aimed",
     "light": "noon",
-    "bytes": 374709
+    "bytes": 369581
   },
   {
     "file": "pistol-aimed-noon.png",
@@ -421,7 +421,7 @@
     "weapon": "pistol",
     "pose": "aimed",
     "light": "noon",
-    "bytes": 406646
+    "bytes": 390340
   },
   {
     "file": "revolver-aimed-noon.png",
@@ -429,6 +429,6 @@
     "weapon": "revolver",
     "pose": "aimed",
     "light": "noon",
-    "bytes": 394933
+    "bytes": 382888
   }
 ]

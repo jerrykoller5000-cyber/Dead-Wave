@@ -1,0 +1,2384 @@
+{
+  "factory": {
+    "assembled": [
+      {
+        "part": "KR-7 bracket web",
+        "materialName": "gunPaint:ak",
+        "material": "1f73566b-b529-41f5-b138-5b35a0363e36",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 5264986,
+        "roughness": 0.52,
+        "metalness": 0.35
+      },
+      {
+        "part": "KR-7 bracket latch",
+        "materialName": "",
+        "material": "065b0d4a-d356-44a7-b8f0-976fe8353096",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:ak",
+        "material": "a9e6d016-aa1d-4bcc-bf6d-3ff67e615472",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "d08526ad-815e-4d51-adb0-a256b0c5c5a1",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3817288,
+        "roughness": 0.42,
+        "metalness": 0.85
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "4132ddb4-7789-4f59-b62b-cafa506732db",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 6053992,
+        "roughness": 0.68,
+        "metalness": 0.06
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:ak",
+        "material": "5a3c2f08-c5a0-4a0c-8f1d-a710e23d0533",
+        "role": "receiver",
+        "registered": true,
+        "map": null,
+        "color": 4870229,
+        "roughness": 0.49,
+        "metalness": 0.34
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "6409a0a0-956b-4e3e-8648-80fb9e3581cb",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "085f1aa2-c4c0-4fc8-96e0-583ca135f8aa",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777113
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "6db751af-4088-4367-a8a6-51a52e9068e9",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16732497
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:ak",
+        "material": "3b695ea2-6695-4ece-b89a-167d0bef9424",
+        "role": "suppressor shell",
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:ak",
+        "material": "0a0dd9fe-4155-4137-8269-f7898b3dcc3c",
+        "role": "suppressor shell",
+        "registered": true,
+        "map": null,
+        "color": 3817288,
+        "roughness": 0.42,
+        "metalness": 0.85
+      },
+      {
+        "part": "railClamp",
+        "materialName": "gunPaint:ak",
+        "material": "a3188435-14dc-4b18-aaa3-c6fc92d2a6cc",
+        "role": "light shell",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "moduleShell",
+        "materialName": "gunPaint:ak",
+        "material": "4d9274b4-d79f-448e-aebc-355508fd1da3",
+        "role": "light shell",
+        "registered": true,
+        "map": null,
+        "color": 3290167,
+        "roughness": 0.76,
+        "metalness": 0.03
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "50b1cf75-41a1-43c2-9618-15e92387d054",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "6e5c41c6-f51b-4c23-9140-cfbca55c58f7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "materialName": "KR-7 walnut",
+        "material": "554552a3-59f8-4f2a-812b-a90543bb08f3",
+        "role": null,
+        "registered": false,
+        "map": "984fb170-e973-4d27-b34e-b1e7d76d20bd",
+        "color": 8870456,
+        "roughness": 0.52,
+        "metalness": 0.03
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "f066979f-87e2-46a7-816c-9a466484f1e8",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2829873,
+        "roughness": 0.42,
+        "metalness": 0.62
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "8eaafdb8-4c3d-4dc9-b8ee-897b9091d438",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 4869714,
+        "roughness": 0.35,
+        "metalness": 0.7
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:ak",
+        "material": "7420c28f-1d4a-4ddc-b6e6-713fde7c5e75",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "chamfered alloy clamp foot",
+        "materialName": "gunPaint:ak",
+        "material": "83e9c6e9-3b63-4a51-9e8a-76b2ddd9ae77",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 3027508,
+        "roughness": 0.5,
+        "metalness": 0.55
+      },
+      {
+        "part": "painted riser",
+        "materialName": "gunPaint:ak",
+        "material": "14488b9f-f012-4a24-a274-c096c4ebcacd",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 2369578,
+        "roughness": 0.74,
+        "metalness": 0.05
+      },
+      {
+        "part": "rubber eyepiece",
+        "materialName": "",
+        "material": "39ddc3cb-8dd2-41b0-91cb-3a47ab7c6bce",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1514524,
+        "roughness": 0.9,
+        "metalness": 0
+      },
+      {
+        "part": "32 mm objective lens",
+        "materialName": "",
+        "material": "ae196a2f-4402-438b-bdf7-8b43df298296",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "rail clamp lip",
+        "materialName": "",
+        "material": "7116066e-8e37-4417-ac41-f1716bad83b3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7370362,
+        "roughness": 0.45,
+        "metalness": 0.7
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "materialName": "",
+        "material": "212c4968-0307-43e1-9894-b324892e22b9",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "f1281cc3-5f57-4532-b1cc-c033501f57f5",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "8539308e-030c-44d7-86c9-b690e64cd87c",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "firstPerson": [
+      {
+        "part": "KR-7 bracket web",
+        "materialName": "vm:gunPaint:ak",
+        "material": "906d8fed-113f-46ec-8866-cbbdeb31b0c8",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5264986,
+        "roughness": 0.52,
+        "metalness": 0.35
+      },
+      {
+        "part": "KR-7 bracket latch",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "44b5a1e6-1157-469b-a34d-6de5e0bcc641",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685184,
+        "roughness": 0.69,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:ak",
+        "material": "3c6bef8e-38bc-4f9e-9fd4-03d3b8d8dcc2",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685184,
+        "roughness": 0.69,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "a074944b-9a82-4020-aa54-3c616d820ed4",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 8094347,
+        "roughness": 0.42,
+        "metalness": 0.85
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "08d82a7d-e598-4229-bea1-44c97e4ac27e",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 8751504,
+        "roughness": 0.61,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:ak",
+        "material": "2055feb2-8b93-4da7-bd18-b78ecdc74870",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 4870229,
+        "roughness": 0.49,
+        "metalness": 0.34
+      },
+      {
+        "part": "",
+        "materialName": "vm:fold-static",
+        "material": "58f4cee9-627e-4ead-b812-ee4d349f625d",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshBasicMaterial",
+        "material": "c8e6edd8-cbf2-46d1-8a26-158d84fc4849",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777113
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:ak",
+        "material": "16b7338b-51e2-4352-a685-2e8bc7cf2173",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5659490,
+        "roughness": 0.58,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:ak",
+        "material": "05362150-5a0c-4f03-93a6-29c350cdebb8",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 8094347,
+        "roughness": 0.42,
+        "metalness": 0.85
+      },
+      {
+        "part": "railClamp",
+        "materialName": "vm:gunPaint:ak",
+        "material": "65f4a4cf-7128-4355-83b0-c86e01196a10",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685184,
+        "roughness": 0.69,
+        "metalness": 0.08
+      },
+      {
+        "part": "moduleShell",
+        "materialName": "vm:gunPaint:ak",
+        "material": "0776775e-4118-46f8-bc3b-f31f5ecd4c2b",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5264465,
+        "roughness": 0.84,
+        "metalness": 0.02
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "ca06475d-dadd-43e7-9df5-32f78fcb2a52",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "b869225e-80e8-4938-9ea8-cfd436594fa1",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5659490,
+        "roughness": 0.58,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "materialName": "vm:KR-7 walnut",
+        "material": "3d7d141b-78e3-4039-b5cc-46d52fb4c2dd",
+        "role": null,
+        "registered": false,
+        "map": "984fb170-e973-4d27-b34e-b1e7d76d20bd",
+        "color": 8870456,
+        "roughness": 0.52,
+        "metalness": 0.03
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "efdb525b-8a0e-4e75-a714-c0eb4f60aa72",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2829873,
+        "roughness": 0.42,
+        "metalness": 0.62
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "b604ee86-9ece-4570-a070-de07837b714d",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 4869714,
+        "roughness": 0.35,
+        "metalness": 0.7
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:ak",
+        "material": "6ab98ddf-3ddd-492b-973b-a781dbc20fd8",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5659490,
+        "roughness": 0.58,
+        "metalness": 0.1
+      },
+      {
+        "part": "chamfered alloy clamp foot",
+        "materialName": "vm:gunPaint:ak",
+        "material": "489f95b0-b836-4689-b51b-0c517b74ba35",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3027508,
+        "roughness": 0.5,
+        "metalness": 0.55
+      },
+      {
+        "part": "painted riser",
+        "materialName": "vm:gunPaint:ak",
+        "material": "7af939cb-9de0-4ba6-8930-e42f598eac13",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2369578,
+        "roughness": 0.74,
+        "metalness": 0.05
+      },
+      {
+        "part": "rubber eyepiece",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "93a40110-7e9f-4f90-8640-10d09e93bb13",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1514524,
+        "roughness": 0.9,
+        "metalness": 0
+      },
+      {
+        "part": "32 mm objective lens",
+        "materialName": "vm:MeshPhysicalMaterial",
+        "material": "873be1c8-91bb-4509-afe1-a91279836fee",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "rail clamp lip",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "ca5f5bdc-e841-4e23-ab0a-eb740dbf8079",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7370362,
+        "roughness": 0.45,
+        "metalness": 0.7
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "materialName": "vm:MeshBasicMaterial",
+        "material": "b5113a18-7dfe-4887-a894-10311afa981a",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      },
+      {
+        "part": "",
+        "materialName": "vm:fold-static",
+        "material": "ebf5aa8e-905f-4fab-801f-0bb17d49bba5",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "vm:fold-static",
+        "material": "ff5416a2-185f-4065-8852-d28420ca98b7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "magazine": [
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "6409a0a0-956b-4e3e-8648-80fb9e3581cb",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "light": [
+      {
+        "part": "railClamp",
+        "materialName": "gunPaint:ak",
+        "material": "a3188435-14dc-4b18-aaa3-c6fc92d2a6cc",
+        "role": "light shell",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "moduleShell",
+        "materialName": "gunPaint:ak",
+        "material": "4d9274b4-d79f-448e-aebc-355508fd1da3",
+        "role": "light shell",
+        "registered": true,
+        "map": null,
+        "color": 3290167,
+        "roughness": 0.76,
+        "metalness": 0.03
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "50b1cf75-41a1-43c2-9618-15e92387d054",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "6409a0a0-956b-4e3e-8648-80fb9e3581cb",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "suppressor": [
+      {
+        "part": "",
+        "materialName": "gunPaint:ak",
+        "material": "3b695ea2-6695-4ece-b89a-167d0bef9424",
+        "role": "suppressor shell",
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:ak",
+        "material": "0a0dd9fe-4155-4137-8269-f7898b3dcc3c",
+        "role": "suppressor shell",
+        "registered": true,
+        "map": null,
+        "color": 3817288,
+        "roughness": 0.42,
+        "metalness": 0.85
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "6409a0a0-956b-4e3e-8648-80fb9e3581cb",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "optic": [
+      {
+        "part": "",
+        "materialName": "gunPaint:ak",
+        "material": "a9e6d016-aa1d-4bcc-bf6d-3ff67e615472",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:ak",
+        "material": "7420c28f-1d4a-4ddc-b6e6-713fde7c5e75",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "chamfered alloy clamp foot",
+        "materialName": "gunPaint:ak",
+        "material": "83e9c6e9-3b63-4a51-9e8a-76b2ddd9ae77",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 3027508,
+        "roughness": 0.5,
+        "metalness": 0.55
+      },
+      {
+        "part": "painted riser",
+        "materialName": "gunPaint:ak",
+        "material": "14488b9f-f012-4a24-a274-c096c4ebcacd",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 2369578,
+        "roughness": 0.74,
+        "metalness": 0.05
+      },
+      {
+        "part": "rubber eyepiece",
+        "materialName": "",
+        "material": "39ddc3cb-8dd2-41b0-91cb-3a47ab7c6bce",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1514524,
+        "roughness": 0.9,
+        "metalness": 0
+      },
+      {
+        "part": "32 mm objective lens",
+        "materialName": "",
+        "material": "ae196a2f-4402-438b-bdf7-8b43df298296",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "rail clamp lip",
+        "materialName": "",
+        "material": "7116066e-8e37-4417-ac41-f1716bad83b3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7370362,
+        "roughness": 0.45,
+        "metalness": 0.7
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "materialName": "",
+        "material": "212c4968-0307-43e1-9894-b324892e22b9",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "6409a0a0-956b-4e3e-8648-80fb9e3581cb",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "f1281cc3-5f57-4532-b1cc-c033501f57f5",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "8539308e-030c-44d7-86c9-b690e64cd87c",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ]
+  },
+  "camo": {
+    "assembled": [
+      {
+        "part": "KR-7 bracket web",
+        "materialName": "gunPaint:ak",
+        "material": "1f73566b-b529-41f5-b138-5b35a0363e36",
+        "role": "rail",
+        "registered": true,
+        "map": "95204901-4ecd-4f88-8ea3-347a511d0a28",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "KR-7 bracket latch",
+        "materialName": "",
+        "material": "065b0d4a-d356-44a7-b8f0-976fe8353096",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:ak",
+        "material": "a9e6d016-aa1d-4bcc-bf6d-3ff67e615472",
+        "role": "rail",
+        "registered": true,
+        "map": "95204901-4ecd-4f88-8ea3-347a511d0a28",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "d08526ad-815e-4d51-adb0-a256b0c5c5a1",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3817288,
+        "roughness": 0.42,
+        "metalness": 0.85
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "4132ddb4-7789-4f59-b62b-cafa506732db",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 6053992,
+        "roughness": 0.68,
+        "metalness": 0.06
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:ak",
+        "material": "5a3c2f08-c5a0-4a0c-8f1d-a710e23d0533",
+        "role": "receiver",
+        "registered": true,
+        "map": "95204901-4ecd-4f88-8ea3-347a511d0a28",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "6409a0a0-956b-4e3e-8648-80fb9e3581cb",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "085f1aa2-c4c0-4fc8-96e0-583ca135f8aa",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777113
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "6db751af-4088-4367-a8a6-51a52e9068e9",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16732497
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:ak",
+        "material": "3b695ea2-6695-4ece-b89a-167d0bef9424",
+        "role": "suppressor shell",
+        "registered": true,
+        "map": "95204901-4ecd-4f88-8ea3-347a511d0a28",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:ak",
+        "material": "0a0dd9fe-4155-4137-8269-f7898b3dcc3c",
+        "role": "suppressor shell",
+        "registered": true,
+        "map": "95204901-4ecd-4f88-8ea3-347a511d0a28",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "railClamp",
+        "materialName": "gunPaint:ak",
+        "material": "a3188435-14dc-4b18-aaa3-c6fc92d2a6cc",
+        "role": "light shell",
+        "registered": true,
+        "map": "95204901-4ecd-4f88-8ea3-347a511d0a28",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "moduleShell",
+        "materialName": "gunPaint:ak",
+        "material": "4d9274b4-d79f-448e-aebc-355508fd1da3",
+        "role": "light shell",
+        "registered": true,
+        "map": "95204901-4ecd-4f88-8ea3-347a511d0a28",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "50b1cf75-41a1-43c2-9618-15e92387d054",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "6e5c41c6-f51b-4c23-9140-cfbca55c58f7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "materialName": "KR-7 walnut",
+        "material": "554552a3-59f8-4f2a-812b-a90543bb08f3",
+        "role": null,
+        "registered": false,
+        "map": "984fb170-e973-4d27-b34e-b1e7d76d20bd",
+        "color": 8870456,
+        "roughness": 0.52,
+        "metalness": 0.03
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "f066979f-87e2-46a7-816c-9a466484f1e8",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2829873,
+        "roughness": 0.42,
+        "metalness": 0.62
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "8eaafdb8-4c3d-4dc9-b8ee-897b9091d438",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 4869714,
+        "roughness": 0.35,
+        "metalness": 0.7
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:ak",
+        "material": "7420c28f-1d4a-4ddc-b6e6-713fde7c5e75",
+        "role": "rail",
+        "registered": true,
+        "map": "95204901-4ecd-4f88-8ea3-347a511d0a28",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "chamfered alloy clamp foot",
+        "materialName": "gunPaint:ak",
+        "material": "83e9c6e9-3b63-4a51-9e8a-76b2ddd9ae77",
+        "role": "optic shell",
+        "registered": true,
+        "map": "95204901-4ecd-4f88-8ea3-347a511d0a28",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "painted riser",
+        "materialName": "gunPaint:ak",
+        "material": "14488b9f-f012-4a24-a274-c096c4ebcacd",
+        "role": "optic shell",
+        "registered": true,
+        "map": "95204901-4ecd-4f88-8ea3-347a511d0a28",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "rubber eyepiece",
+        "materialName": "",
+        "material": "39ddc3cb-8dd2-41b0-91cb-3a47ab7c6bce",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1514524,
+        "roughness": 0.9,
+        "metalness": 0
+      },
+      {
+        "part": "32 mm objective lens",
+        "materialName": "",
+        "material": "ae196a2f-4402-438b-bdf7-8b43df298296",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "rail clamp lip",
+        "materialName": "",
+        "material": "7116066e-8e37-4417-ac41-f1716bad83b3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7370362,
+        "roughness": 0.45,
+        "metalness": 0.7
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "materialName": "",
+        "material": "212c4968-0307-43e1-9894-b324892e22b9",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "f1281cc3-5f57-4532-b1cc-c033501f57f5",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "8539308e-030c-44d7-86c9-b690e64cd87c",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "firstPerson": [
+      {
+        "part": "KR-7 bracket web",
+        "materialName": "vm:gunPaint:ak",
+        "material": "c3bb72f1-82d8-4c97-8bce-749a82a71d89",
+        "role": null,
+        "registered": false,
+        "map": "95204901-4ecd-4f88-8ea3-347a511d0a28",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "KR-7 bracket latch",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "44b5a1e6-1157-469b-a34d-6de5e0bcc641",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685184,
+        "roughness": 0.69,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:ak",
+        "material": "ea9e47aa-028c-4d30-b9ae-9de6fcc79c05",
+        "role": null,
+        "registered": false,
+        "map": "95204901-4ecd-4f88-8ea3-347a511d0a28",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "a074944b-9a82-4020-aa54-3c616d820ed4",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 8094347,
+        "roughness": 0.42,
+        "metalness": 0.85
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "08d82a7d-e598-4229-bea1-44c97e4ac27e",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 8751504,
+        "roughness": 0.61,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:ak",
+        "material": "bbc535a0-71a1-457e-aaf0-3659ae850ac0",
+        "role": null,
+        "registered": false,
+        "map": "95204901-4ecd-4f88-8ea3-347a511d0a28",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "vm:fold-static",
+        "material": "58f4cee9-627e-4ead-b812-ee4d349f625d",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshBasicMaterial",
+        "material": "c8e6edd8-cbf2-46d1-8a26-158d84fc4849",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777113
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:ak",
+        "material": "2a0a8a8b-b67b-4b65-a98b-970b22b8a8db",
+        "role": null,
+        "registered": false,
+        "map": "95204901-4ecd-4f88-8ea3-347a511d0a28",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:ak",
+        "material": "7d55609a-2caa-42df-af2f-b5cf712382c7",
+        "role": null,
+        "registered": false,
+        "map": "95204901-4ecd-4f88-8ea3-347a511d0a28",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "railClamp",
+        "materialName": "vm:gunPaint:ak",
+        "material": "328a4de4-82c1-45ae-98ff-88f1addf8ef4",
+        "role": null,
+        "registered": false,
+        "map": "95204901-4ecd-4f88-8ea3-347a511d0a28",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "moduleShell",
+        "materialName": "vm:gunPaint:ak",
+        "material": "13cbd7b9-cce9-4f4a-ab1f-3f8cd6603a6d",
+        "role": null,
+        "registered": false,
+        "map": "95204901-4ecd-4f88-8ea3-347a511d0a28",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "ca06475d-dadd-43e7-9df5-32f78fcb2a52",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "b869225e-80e8-4938-9ea8-cfd436594fa1",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5659490,
+        "roughness": 0.58,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "materialName": "vm:KR-7 walnut",
+        "material": "3d7d141b-78e3-4039-b5cc-46d52fb4c2dd",
+        "role": null,
+        "registered": false,
+        "map": "984fb170-e973-4d27-b34e-b1e7d76d20bd",
+        "color": 8870456,
+        "roughness": 0.52,
+        "metalness": 0.03
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "efdb525b-8a0e-4e75-a714-c0eb4f60aa72",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2829873,
+        "roughness": 0.42,
+        "metalness": 0.62
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "b604ee86-9ece-4570-a070-de07837b714d",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 4869714,
+        "roughness": 0.35,
+        "metalness": 0.7
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:ak",
+        "material": "b895c525-0958-4d04-8f63-a35ee368bc2f",
+        "role": null,
+        "registered": false,
+        "map": "95204901-4ecd-4f88-8ea3-347a511d0a28",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "chamfered alloy clamp foot",
+        "materialName": "vm:gunPaint:ak",
+        "material": "e717999f-3405-4dbd-9e29-e4a3aecc7ed6",
+        "role": null,
+        "registered": false,
+        "map": "95204901-4ecd-4f88-8ea3-347a511d0a28",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "painted riser",
+        "materialName": "vm:gunPaint:ak",
+        "material": "c24efc55-a181-41a6-9dd2-3b50db9675af",
+        "role": null,
+        "registered": false,
+        "map": "95204901-4ecd-4f88-8ea3-347a511d0a28",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "rubber eyepiece",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "93a40110-7e9f-4f90-8640-10d09e93bb13",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1514524,
+        "roughness": 0.9,
+        "metalness": 0
+      },
+      {
+        "part": "32 mm objective lens",
+        "materialName": "vm:MeshPhysicalMaterial",
+        "material": "873be1c8-91bb-4509-afe1-a91279836fee",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "rail clamp lip",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "ca5f5bdc-e841-4e23-ab0a-eb740dbf8079",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7370362,
+        "roughness": 0.45,
+        "metalness": 0.7
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "materialName": "vm:MeshBasicMaterial",
+        "material": "b5113a18-7dfe-4887-a894-10311afa981a",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      },
+      {
+        "part": "",
+        "materialName": "vm:fold-static",
+        "material": "ebf5aa8e-905f-4fab-801f-0bb17d49bba5",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "vm:fold-static",
+        "material": "ff5416a2-185f-4065-8852-d28420ca98b7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "magazine": [
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "6409a0a0-956b-4e3e-8648-80fb9e3581cb",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "light": [
+      {
+        "part": "railClamp",
+        "materialName": "gunPaint:ak",
+        "material": "a3188435-14dc-4b18-aaa3-c6fc92d2a6cc",
+        "role": "light shell",
+        "registered": true,
+        "map": "95204901-4ecd-4f88-8ea3-347a511d0a28",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "moduleShell",
+        "materialName": "gunPaint:ak",
+        "material": "4d9274b4-d79f-448e-aebc-355508fd1da3",
+        "role": "light shell",
+        "registered": true,
+        "map": "95204901-4ecd-4f88-8ea3-347a511d0a28",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "50b1cf75-41a1-43c2-9618-15e92387d054",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "6409a0a0-956b-4e3e-8648-80fb9e3581cb",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "suppressor": [
+      {
+        "part": "",
+        "materialName": "gunPaint:ak",
+        "material": "3b695ea2-6695-4ece-b89a-167d0bef9424",
+        "role": "suppressor shell",
+        "registered": true,
+        "map": "95204901-4ecd-4f88-8ea3-347a511d0a28",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:ak",
+        "material": "0a0dd9fe-4155-4137-8269-f7898b3dcc3c",
+        "role": "suppressor shell",
+        "registered": true,
+        "map": "95204901-4ecd-4f88-8ea3-347a511d0a28",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "6409a0a0-956b-4e3e-8648-80fb9e3581cb",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "optic": [
+      {
+        "part": "",
+        "materialName": "gunPaint:ak",
+        "material": "a9e6d016-aa1d-4bcc-bf6d-3ff67e615472",
+        "role": "rail",
+        "registered": true,
+        "map": "95204901-4ecd-4f88-8ea3-347a511d0a28",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:ak",
+        "material": "7420c28f-1d4a-4ddc-b6e6-713fde7c5e75",
+        "role": "rail",
+        "registered": true,
+        "map": "95204901-4ecd-4f88-8ea3-347a511d0a28",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "chamfered alloy clamp foot",
+        "materialName": "gunPaint:ak",
+        "material": "83e9c6e9-3b63-4a51-9e8a-76b2ddd9ae77",
+        "role": "optic shell",
+        "registered": true,
+        "map": "95204901-4ecd-4f88-8ea3-347a511d0a28",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "painted riser",
+        "materialName": "gunPaint:ak",
+        "material": "14488b9f-f012-4a24-a274-c096c4ebcacd",
+        "role": "optic shell",
+        "registered": true,
+        "map": "95204901-4ecd-4f88-8ea3-347a511d0a28",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "rubber eyepiece",
+        "materialName": "",
+        "material": "39ddc3cb-8dd2-41b0-91cb-3a47ab7c6bce",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1514524,
+        "roughness": 0.9,
+        "metalness": 0
+      },
+      {
+        "part": "32 mm objective lens",
+        "materialName": "",
+        "material": "ae196a2f-4402-438b-bdf7-8b43df298296",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "rail clamp lip",
+        "materialName": "",
+        "material": "7116066e-8e37-4417-ac41-f1716bad83b3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7370362,
+        "roughness": 0.45,
+        "metalness": 0.7
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "materialName": "",
+        "material": "212c4968-0307-43e1-9894-b324892e22b9",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "6409a0a0-956b-4e3e-8648-80fb9e3581cb",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "f1281cc3-5f57-4532-b1cc-c033501f57f5",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "8539308e-030c-44d7-86c9-b690e64cd87c",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ]
+  },
+  "restored": {
+    "assembled": [
+      {
+        "part": "KR-7 bracket web",
+        "materialName": "gunPaint:ak",
+        "material": "1f73566b-b529-41f5-b138-5b35a0363e36",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 5264986,
+        "roughness": 0.52,
+        "metalness": 0.35
+      },
+      {
+        "part": "KR-7 bracket latch",
+        "materialName": "",
+        "material": "065b0d4a-d356-44a7-b8f0-976fe8353096",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:ak",
+        "material": "a9e6d016-aa1d-4bcc-bf6d-3ff67e615472",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "d08526ad-815e-4d51-adb0-a256b0c5c5a1",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3817288,
+        "roughness": 0.42,
+        "metalness": 0.85
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "4132ddb4-7789-4f59-b62b-cafa506732db",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 6053992,
+        "roughness": 0.68,
+        "metalness": 0.06
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:ak",
+        "material": "5a3c2f08-c5a0-4a0c-8f1d-a710e23d0533",
+        "role": "receiver",
+        "registered": true,
+        "map": null,
+        "color": 4870229,
+        "roughness": 0.49,
+        "metalness": 0.34
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "6409a0a0-956b-4e3e-8648-80fb9e3581cb",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "085f1aa2-c4c0-4fc8-96e0-583ca135f8aa",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777113
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "6db751af-4088-4367-a8a6-51a52e9068e9",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16732497
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:ak",
+        "material": "3b695ea2-6695-4ece-b89a-167d0bef9424",
+        "role": "suppressor shell",
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:ak",
+        "material": "0a0dd9fe-4155-4137-8269-f7898b3dcc3c",
+        "role": "suppressor shell",
+        "registered": true,
+        "map": null,
+        "color": 3817288,
+        "roughness": 0.42,
+        "metalness": 0.85
+      },
+      {
+        "part": "railClamp",
+        "materialName": "gunPaint:ak",
+        "material": "a3188435-14dc-4b18-aaa3-c6fc92d2a6cc",
+        "role": "light shell",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "moduleShell",
+        "materialName": "gunPaint:ak",
+        "material": "4d9274b4-d79f-448e-aebc-355508fd1da3",
+        "role": "light shell",
+        "registered": true,
+        "map": null,
+        "color": 3290167,
+        "roughness": 0.76,
+        "metalness": 0.03
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "50b1cf75-41a1-43c2-9618-15e92387d054",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "6e5c41c6-f51b-4c23-9140-cfbca55c58f7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "materialName": "KR-7 walnut",
+        "material": "554552a3-59f8-4f2a-812b-a90543bb08f3",
+        "role": null,
+        "registered": false,
+        "map": "984fb170-e973-4d27-b34e-b1e7d76d20bd",
+        "color": 8870456,
+        "roughness": 0.52,
+        "metalness": 0.03
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "f066979f-87e2-46a7-816c-9a466484f1e8",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2829873,
+        "roughness": 0.42,
+        "metalness": 0.62
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "8eaafdb8-4c3d-4dc9-b8ee-897b9091d438",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 4869714,
+        "roughness": 0.35,
+        "metalness": 0.7
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:ak",
+        "material": "7420c28f-1d4a-4ddc-b6e6-713fde7c5e75",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "chamfered alloy clamp foot",
+        "materialName": "gunPaint:ak",
+        "material": "83e9c6e9-3b63-4a51-9e8a-76b2ddd9ae77",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 3027508,
+        "roughness": 0.5,
+        "metalness": 0.55
+      },
+      {
+        "part": "painted riser",
+        "materialName": "gunPaint:ak",
+        "material": "14488b9f-f012-4a24-a274-c096c4ebcacd",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 2369578,
+        "roughness": 0.74,
+        "metalness": 0.05
+      },
+      {
+        "part": "rubber eyepiece",
+        "materialName": "",
+        "material": "39ddc3cb-8dd2-41b0-91cb-3a47ab7c6bce",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1514524,
+        "roughness": 0.9,
+        "metalness": 0
+      },
+      {
+        "part": "32 mm objective lens",
+        "materialName": "",
+        "material": "ae196a2f-4402-438b-bdf7-8b43df298296",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "rail clamp lip",
+        "materialName": "",
+        "material": "7116066e-8e37-4417-ac41-f1716bad83b3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7370362,
+        "roughness": 0.45,
+        "metalness": 0.7
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "materialName": "",
+        "material": "212c4968-0307-43e1-9894-b324892e22b9",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "f1281cc3-5f57-4532-b1cc-c033501f57f5",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "8539308e-030c-44d7-86c9-b690e64cd87c",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "firstPerson": [
+      {
+        "part": "KR-7 bracket web",
+        "materialName": "vm:gunPaint:ak",
+        "material": "cce659bf-5f29-4bbc-9765-474292203cf5",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5264986,
+        "roughness": 0.52,
+        "metalness": 0.35
+      },
+      {
+        "part": "KR-7 bracket latch",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "44b5a1e6-1157-469b-a34d-6de5e0bcc641",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685184,
+        "roughness": 0.69,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:ak",
+        "material": "49cd4294-ceab-4199-89dc-a4eec1d0c092",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685184,
+        "roughness": 0.69,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "a074944b-9a82-4020-aa54-3c616d820ed4",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 8094347,
+        "roughness": 0.42,
+        "metalness": 0.85
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "08d82a7d-e598-4229-bea1-44c97e4ac27e",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 8751504,
+        "roughness": 0.61,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:ak",
+        "material": "01d4672b-87a5-41bf-884d-669561739090",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 4870229,
+        "roughness": 0.49,
+        "metalness": 0.34
+      },
+      {
+        "part": "",
+        "materialName": "vm:fold-static",
+        "material": "58f4cee9-627e-4ead-b812-ee4d349f625d",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshBasicMaterial",
+        "material": "c8e6edd8-cbf2-46d1-8a26-158d84fc4849",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777113
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:ak",
+        "material": "a67f75b9-5b34-4b91-8b37-b4b2c22df15b",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5659490,
+        "roughness": 0.58,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:ak",
+        "material": "549f5020-bdbe-4eda-a21c-712bb2faf36a",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 8094347,
+        "roughness": 0.42,
+        "metalness": 0.85
+      },
+      {
+        "part": "railClamp",
+        "materialName": "vm:gunPaint:ak",
+        "material": "7d4d7343-8187-49bd-bdd6-54cb6c1430e0",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685184,
+        "roughness": 0.69,
+        "metalness": 0.08
+      },
+      {
+        "part": "moduleShell",
+        "materialName": "vm:gunPaint:ak",
+        "material": "1bf24570-ebb9-468b-8904-11ae4aa2303a",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5264465,
+        "roughness": 0.84,
+        "metalness": 0.02
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "ca06475d-dadd-43e7-9df5-32f78fcb2a52",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "b869225e-80e8-4938-9ea8-cfd436594fa1",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5659490,
+        "roughness": 0.58,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "materialName": "vm:KR-7 walnut",
+        "material": "3d7d141b-78e3-4039-b5cc-46d52fb4c2dd",
+        "role": null,
+        "registered": false,
+        "map": "984fb170-e973-4d27-b34e-b1e7d76d20bd",
+        "color": 8870456,
+        "roughness": 0.52,
+        "metalness": 0.03
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "efdb525b-8a0e-4e75-a714-c0eb4f60aa72",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2829873,
+        "roughness": 0.42,
+        "metalness": 0.62
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "b604ee86-9ece-4570-a070-de07837b714d",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 4869714,
+        "roughness": 0.35,
+        "metalness": 0.7
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:ak",
+        "material": "8942c675-421e-47bd-a242-99aea3e1efdb",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5659490,
+        "roughness": 0.58,
+        "metalness": 0.1
+      },
+      {
+        "part": "chamfered alloy clamp foot",
+        "materialName": "vm:gunPaint:ak",
+        "material": "e8b6e8cb-5c3d-4434-b02f-d52f7a0b66e7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3027508,
+        "roughness": 0.5,
+        "metalness": 0.55
+      },
+      {
+        "part": "painted riser",
+        "materialName": "vm:gunPaint:ak",
+        "material": "6fec7ee4-2a17-4bc1-a048-39c731b94086",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2369578,
+        "roughness": 0.74,
+        "metalness": 0.05
+      },
+      {
+        "part": "rubber eyepiece",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "93a40110-7e9f-4f90-8640-10d09e93bb13",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1514524,
+        "roughness": 0.9,
+        "metalness": 0
+      },
+      {
+        "part": "32 mm objective lens",
+        "materialName": "vm:MeshPhysicalMaterial",
+        "material": "873be1c8-91bb-4509-afe1-a91279836fee",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "rail clamp lip",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "ca5f5bdc-e841-4e23-ab0a-eb740dbf8079",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7370362,
+        "roughness": 0.45,
+        "metalness": 0.7
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "materialName": "vm:MeshBasicMaterial",
+        "material": "b5113a18-7dfe-4887-a894-10311afa981a",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      },
+      {
+        "part": "",
+        "materialName": "vm:fold-static",
+        "material": "ebf5aa8e-905f-4fab-801f-0bb17d49bba5",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "vm:fold-static",
+        "material": "ff5416a2-185f-4065-8852-d28420ca98b7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "magazine": [
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "6409a0a0-956b-4e3e-8648-80fb9e3581cb",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "light": [
+      {
+        "part": "railClamp",
+        "materialName": "gunPaint:ak",
+        "material": "a3188435-14dc-4b18-aaa3-c6fc92d2a6cc",
+        "role": "light shell",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "moduleShell",
+        "materialName": "gunPaint:ak",
+        "material": "4d9274b4-d79f-448e-aebc-355508fd1da3",
+        "role": "light shell",
+        "registered": true,
+        "map": null,
+        "color": 3290167,
+        "roughness": 0.76,
+        "metalness": 0.03
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "50b1cf75-41a1-43c2-9618-15e92387d054",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "6409a0a0-956b-4e3e-8648-80fb9e3581cb",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "suppressor": [
+      {
+        "part": "",
+        "materialName": "gunPaint:ak",
+        "material": "3b695ea2-6695-4ece-b89a-167d0bef9424",
+        "role": "suppressor shell",
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:ak",
+        "material": "0a0dd9fe-4155-4137-8269-f7898b3dcc3c",
+        "role": "suppressor shell",
+        "registered": true,
+        "map": null,
+        "color": 3817288,
+        "roughness": 0.42,
+        "metalness": 0.85
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "6409a0a0-956b-4e3e-8648-80fb9e3581cb",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "optic": [
+      {
+        "part": "",
+        "materialName": "gunPaint:ak",
+        "material": "a9e6d016-aa1d-4bcc-bf6d-3ff67e615472",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:ak",
+        "material": "7420c28f-1d4a-4ddc-b6e6-713fde7c5e75",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "chamfered alloy clamp foot",
+        "materialName": "gunPaint:ak",
+        "material": "83e9c6e9-3b63-4a51-9e8a-76b2ddd9ae77",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 3027508,
+        "roughness": 0.5,
+        "metalness": 0.55
+      },
+      {
+        "part": "painted riser",
+        "materialName": "gunPaint:ak",
+        "material": "14488b9f-f012-4a24-a274-c096c4ebcacd",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 2369578,
+        "roughness": 0.74,
+        "metalness": 0.05
+      },
+      {
+        "part": "rubber eyepiece",
+        "materialName": "",
+        "material": "39ddc3cb-8dd2-41b0-91cb-3a47ab7c6bce",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1514524,
+        "roughness": 0.9,
+        "metalness": 0
+      },
+      {
+        "part": "32 mm objective lens",
+        "materialName": "",
+        "material": "ae196a2f-4402-438b-bdf7-8b43df298296",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "rail clamp lip",
+        "materialName": "",
+        "material": "7116066e-8e37-4417-ac41-f1716bad83b3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7370362,
+        "roughness": 0.45,
+        "metalness": 0.7
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "materialName": "",
+        "material": "212c4968-0307-43e1-9894-b324892e22b9",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "6409a0a0-956b-4e3e-8648-80fb9e3581cb",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "f1281cc3-5f57-4532-b1cc-c033501f57f5",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "8539308e-030c-44d7-86c9-b690e64cd87c",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ]
+  }
+}

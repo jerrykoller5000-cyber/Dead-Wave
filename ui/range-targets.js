@@ -2,6 +2,7 @@ import {targetLayout} from './range-drills.js';
 import {buildRangeControlModel} from './range-control-model.js';
 import {traceTraining} from '../world/training-ballistics.js';
 import {viewCrossesPlane} from '../world/training-cutaway.js';
+import {createTrainingBlockers} from '../game/training-infirmary.js';
 // Reuse the actual plates, silhouette, scoring zones and hinge update. Own only the temporary bank.
 export function createRangeTargets(T,tg){
  const baseCount=tg.targets.length,original=tg.targets.slice(),owned=[];let bank=[],group=null,priorVisible=null;
@@ -72,7 +73,8 @@ export function createRangeProp(T,tg,labels){
  const O=tg.origin,x=O.x+at.x,z=O.z+at.z;tg.stations.rangeConsole={x,y:O.y,z,yaw:at.yaw,front:{x:x+at.nx*1.35,y:O.y,z:z+at.nz*1.35}};
  const depth=(model.front-model.back)/2,offset=(model.front+model.back)/2,cx=x+at.nx*offset,cz=z+at.nz*offset;
  const halfX=Math.abs(Math.cos(at.yaw))*model.halfWidth+Math.abs(at.nx)*depth,halfZ=Math.abs(at.nx)*model.halfWidth+Math.abs(at.nz)*depth;
- const solid={minX:cx-halfX,maxX:cx+halfX,minY:O.y+at.y-model.halfHeight,maxY:O.y+at.y+model.halfHeight,minZ:cz-halfZ,maxZ:cz+halfZ,prop:true,metal:true};tg.solids.push(solid);
+ const solid={minX:cx-halfX,maxX:cx+halfX,minY:O.y+at.y-model.halfHeight,maxY:O.y+at.y+model.halfHeight,minZ:cz-halfZ,maxZ:cz+halfZ,prop:true,metal:true,station:'rangeConsole'};tg.solids.push(solid);
+ const collision=createTrainingBlockers([solid]);
  let opacity=1;const axis=Math.abs(at.nx)>.5?'x':'z',plane=axis==='x'?x:z,bounds=axis==='x'?[['z',z-.9,z+.9],['y',O.y,O.y+6]]:[['x',x-.9,x+.9],['y',O.y,O.y+6]];
- return {update(camera,player,dt){if(!camera||!player)return;const hidden=viewCrossesPlane(camera,player,axis,plane,bounds),want=hidden?.06:1;const next=opacity+Math.sign(want-opacity)*Math.min(Math.abs(want-opacity),Math.max(0,dt)*6);if(next===opacity)return;opacity=next;for(const m of model.materials){const blend=opacity<.995;m.opacity=opacity;m.depthWrite=!blend;}},dispose(){tg.group.remove(g);const i=tg.solids.indexOf(solid);if(i>=0)tg.solids.splice(i,1);delete tg.stations.rangeConsole;for(const x of owned)x.dispose?.();}};
+ return {solid,constrain:collision.constrain,update(camera,player,dt){if(!camera||!player)return;const hidden=viewCrossesPlane(camera,player,axis,plane,bounds),want=hidden?.06:1;const next=opacity+Math.sign(want-opacity)*Math.min(Math.abs(want-opacity),Math.max(0,dt)*6);if(next===opacity)return;opacity=next;for(const m of model.materials){const blend=opacity<.995;m.opacity=opacity;m.depthWrite=!blend;}},dispose(){tg.group.remove(g);const i=tg.solids.indexOf(solid);if(i>=0)tg.solids.splice(i,1);delete tg.stations.rangeConsole;for(const x of owned)x.dispose?.();}};
 }

@@ -1,5 +1,6 @@
 from pathlib import Path
 import sys
+from tempfile import NamedTemporaryFile
 from PIL import Image, ImageChops, ImageDraw, ImageStat
 
 root = Path(__file__).resolve().parent
@@ -10,7 +11,8 @@ poses = ("hip", "aimed", "reload")
 regions = {"hip": (680, 335, 1020, 675), "aimed": (490, 310, 790, 610),
            "reload": (680, 235, 1040, 595)}
 
-if gun in ("m4", "shotgun"):
+longarm = gun in ("m4", "ak", "shotgun")
+if longarm:
     regions = {"hip": (735, 365, 1280, 720), "aimed": (440, 279, 840, 720),
                "reload": (695, 232, 1280, 720)}
 
@@ -36,7 +38,9 @@ def make_sheet(name, rows, columns, side, height=None):
         for c, tile in enumerate(tiles):
             canvas.paste(tile, (margin + c * (side + margin), y + 14))
         y += row_height
-    canvas.save(folder / name, quality=93)
+    with NamedTemporaryFile(dir=folder, suffix=".jpg", delete=False) as output:
+        canvas.save(output, format="JPEG", quality=93)
+    Path(output.name).replace(folder / name)
 
 revision = "--revision" in sys.argv
 stages = ("after", "revised") if revision else ("before", "after")
@@ -54,12 +58,13 @@ rows = []
 for pose in poses:
     for phase in stages:
         rows.append((pose + " / " + phase, [
-            (folder / phase / (pose + "-" + light + ".jpg"), regions.get(pose) if gun in ("pistol", "m4", "shotgun") else None)
+            (folder / phase / (pose + "-" + light + ".jpg"), regions.get(pose) if longarm or gun == "pistol" else None)
             for light in lights]))
-make_sheet(prefix + "eye-pairs.jpg", rows, lights, 320 if gun in ("m4", "shotgun") else 245)
+make_sheet(prefix + "eye-pairs.jpg", rows, lights, 320 if longarm else 245)
 
-if gun in ("m4", "shotgun"):
-    shots = ["whole", "rear", "side", "mag"] if gun == "m4" else ["whole", "rear", "foreend", "front", "side", "underside"]
+if longarm:
+    shots = {"m4": ["whole", "rear", "side", "mag"], "ak": ["whole", "wood", "receiver", "mag"],
+             "shotgun": ["whole", "rear", "foreend", "front", "side", "underside"]}[gun]
     rows = [(label, [(folder / "details" / phase / (label + ".jpg"), None)
                      for phase in stages]) for label in shots]
     make_sheet(prefix + "model-pairs.jpg", rows, ["Reviewed" if revision else "Before", "Revised" if revision else "After"], 520, 293)
@@ -67,6 +72,13 @@ if gun in ("m4", "shotgun"):
         crop = (535, 395, 745, 720)
         rows = [(phase, [(folder / phase / ("aimed-" + light + ".jpg"), crop) for light in lights]) for phase in stages]
         make_sheet("aimed-rear.jpg", rows, lights, 210, 325)
+
+if gun == "ak":
+    for view in ("side", "bracket"):
+        rows = [(kind.upper(), [(folder / "details" / phase / (kind + "-" + view + ".jpg"),
+                                (250, 130, 713, 500)) for phase in stages])
+                for kind in ("rmr", "prism", "acog")]
+        make_sheet(prefix + "optics-" + view + ".jpg", rows, ["Before", "After"], 418, 332)
 
 if gun == "shotgun":
     crop = (500, 345, 780, 720)

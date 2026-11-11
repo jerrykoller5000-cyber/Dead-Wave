@@ -134,9 +134,9 @@ try {
     }
     console.log('Sampled '+Object.keys(result.rays).length+' occupied aimed pixels; rear stock group visible: '+result.stockVisible);
   }
-  if(phase==='rig' || (['after','revised'].includes(phase) && ['m4','shotgun'].includes(id))){
+  if(phase==='rig' || (['after','revised'].includes(phase) && ['m4','ak','shotgun'].includes(id))){
     const maps=await page.evaluate(`(()=>{
-      const expected={pistol:['trigger','magRelease','slideStop'],m4:['selector','boltCatch','magRelease','chargingHandle'],shotgun:['safety','slideRelease','pump']}[proofId];
+      const expected={pistol:['trigger','magRelease','slideStop'],m4:['selector','boltCatch','magRelease','chargingHandle'],ak:['selector','magRelease','trigger','chargingHandle'],shotgun:['safety','slideRelease','pump']}[proofId];
       const src=TT.weaponMeshes[proofId],eye=TT.viewmodelDbg().gun.root;
       const copies={world:src,eye};
       if(proofId==='pistol')copies.offhand=TT.offhandMeshes.pistol;

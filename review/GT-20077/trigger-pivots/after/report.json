@@ -1,0 +1,32 @@
+{
+  "ak": {
+    "pin": [
+      0,
+      -0.03,
+      -0.022
+    ],
+    "changed": 1,
+    "name": "controls-trigger",
+    "meshes": 167
+  },
+  "m4": {
+    "pin": [
+      0,
+      -0.05,
+      -0.034
+    ],
+    "changed": 1,
+    "name": "controls-trigger",
+    "meshes": 417
+  },
+  "shotgun": {
+    "pin": [
+      0,
+      -0.044,
+      0.033
+    ],
+    "changed": 1,
+    "name": "controls-trigger",
+    "meshes": 119
+  }
+}

@@ -1,0 +1,128 @@
+{
+  "weapon": "revolver",
+  "readyMs": 14191,
+  "fps": 60,
+  "low": 48,
+  "samples": [
+    {
+      "weapon": "revolver",
+      "eye": "revolver",
+      "high": "high",
+      "fps": 59.99400060029756,
+      "low": 43.66812225937632,
+      "worst": 22.900000005960464,
+      "hitches": 18,
+      "frames": 60
+    },
+    {
+      "weapon": "revolver",
+      "eye": "revolver",
+      "high": "high",
+      "fps": 60.006000601490804,
+      "low": 50.50505055066165,
+      "worst": 19.799999982118607,
+      "hitches": 18,
+      "frames": 60
+    },
+    {
+      "weapon": "revolver",
+      "eye": "revolver",
+      "high": "high",
+      "fps": 59.99999999999999,
+      "low": 44.64285713097803,
+      "worst": 22.400000005960464,
+      "hitches": 18,
+      "frames": 60
+    },
+    {
+      "weapon": "revolver",
+      "eye": "revolver",
+      "high": "high",
+      "fps": 60.00600059970231,
+      "low": 56.179775243274435,
+      "worst": 17.80000001192093,
+      "hitches": 18,
+      "frames": 60
+    },
+    {
+      "weapon": "revolver",
+      "eye": "revolver",
+      "high": "high",
+      "fps": 59.988002400235075,
+      "low": 55.86592186211996,
+      "worst": 17.899999976158142,
+      "hitches": 18,
+      "frames": 60
+    },
+    {
+      "weapon": "revolver",
+      "eye": "revolver",
+      "high": "high",
+      "fps": 60.00600059970231,
+      "low": 52.356020958746925,
+      "worst": 19.099999994039536,
+      "hitches": 18,
+      "frames": 60
+    },
+    {
+      "weapon": "revolver",
+      "eye": "revolver",
+      "high": "high",
+      "fps": 60.00600059970231,
+      "low": 54.64480870757285,
+      "worst": 18.30000001192093,
+      "hitches": 18,
+      "frames": 60
+    },
+    {
+      "weapon": "revolver",
+      "eye": "revolver",
+      "high": "high",
+      "fps": 59.99999999999999,
+      "low": 43.10344829801005,
+      "worst": 23.19999998807907,
+      "hitches": 18,
+      "frames": 60
+    },
+    {
+      "weapon": "revolver",
+      "eye": "revolver",
+      "high": "high",
+      "fps": 59.99999999999999,
+      "low": 42.01680670164372,
+      "worst": 23.80000001192093,
+      "hitches": 18,
+      "frames": 60
+    },
+    {
+      "weapon": "revolver",
+      "eye": "revolver",
+      "high": "high",
+      "fps": 60.00600059970231,
+      "low": 40.65040651391444,
+      "worst": 24.599999994039536,
+      "hitches": 18,
+      "frames": 60
+    },
+    {
+      "weapon": "revolver",
+      "eye": "revolver",
+      "high": "high",
+      "fps": 59.99999999999999,
+      "low": 42.19409284822754,
+      "worst": 23.69999998807907,
+      "hitches": 18,
+      "frames": 60
+    },
+    {
+      "weapon": "revolver",
+      "eye": "revolver",
+      "high": "high",
+      "fps": 59.994000598509786,
+      "low": 48.54368933443412,
+      "worst": 20.599999994039536,
+      "hitches": 18,
+      "frames": 60
+    }
+  ]
+}

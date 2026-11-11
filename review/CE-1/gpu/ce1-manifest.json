@@ -1,0 +1,7370 @@
+[
+  {
+    "file": "pistol-hip-noon-f008.png",
+    "title": "Issue Sidearm Pistol · Hip · noon · 8 ms (Break/Fired)",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f008",
+    "ms": 8,
+    "bytes": 387098,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "work": -0.0229,
+      "slide": 0.0271
+    }
+  },
+  {
+    "file": "pistol-hip-noon-f017.png",
+    "title": "Issue Sidearm Pistol · Hip · noon · 17 ms",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f017",
+    "ms": 17,
+    "bytes": 390761,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "work": -0.0545,
+      "slide": -0.0045
+    }
+  },
+  {
+    "file": "pistol-hip-noon-f025.png",
+    "title": "Issue Sidearm Pistol · Hip · noon · 25 ms (Peak Stroke)",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f025",
+    "ms": 25,
+    "bytes": 392061,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "work": -0.0527,
+      "slide": -0.0027
+    }
+  },
+  {
+    "file": "pistol-hip-noon-f033.png",
+    "title": "Issue Sidearm Pistol · Hip · noon · 33 ms",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f033",
+    "ms": 33,
+    "bytes": 392611,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "work": -0.0456,
+      "slide": 0.0044
+    }
+  },
+  {
+    "file": "pistol-hip-noon-f042.png",
+    "title": "Issue Sidearm Pistol · Hip · noon · 42 ms",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f042",
+    "ms": 42,
+    "bytes": 391475,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "work": -0.034,
+      "slide": 0.016
+    }
+  },
+  {
+    "file": "pistol-hip-noon-f050.png",
+    "title": "Issue Sidearm Pistol · Hip · noon · 50 ms",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f050",
+    "ms": 50,
+    "bytes": 392730,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "work": -0.0225,
+      "slide": 0.0275
+    }
+  },
+  {
+    "file": "pistol-hip-noon-f067.png",
+    "title": "Issue Sidearm Pistol · Hip · noon · 67 ms",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f067",
+    "ms": 67,
+    "bytes": 391727,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "work": -0.0029,
+      "slide": 0.0471
+    }
+  },
+  {
+    "file": "pistol-hip-noon-f083.png",
+    "title": "Issue Sidearm Pistol · Hip · noon · 83 ms",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f083",
+    "ms": 83,
+    "bytes": 392448,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "work": 0,
+      "slide": 0.05
+    }
+  },
+  {
+    "file": "pistol-hip-noon-f100.png",
+    "title": "Issue Sidearm Pistol · Hip · noon · 100 ms",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f100",
+    "ms": 100,
+    "bytes": 392820,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "work": 0,
+      "slide": 0.05
+    }
+  },
+  {
+    "file": "pistol-hip-noon-f130.png",
+    "title": "Issue Sidearm Pistol · Hip · noon · 130 ms",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f130",
+    "ms": 130,
+    "bytes": 393496,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "work": 0,
+      "slide": 0.05
+    }
+  },
+  {
+    "file": "pistol-hip-noon-f170.png",
+    "title": "Issue Sidearm Pistol · Hip · noon · 170 ms (Reset)",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f170",
+    "ms": 170,
+    "bytes": 392242,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "work": 0,
+      "slide": 0.05
+    }
+  },
+  {
+    "file": "m4-hip-noon-f008.png",
+    "title": "GW-4 Carbine · Hip · noon · 8 ms (Break/Fired)",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f008",
+    "ms": 8,
+    "bytes": 385267,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0401,
+          0.764,
+          true
+        ],
+        [
+          0.069,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "m4-hip-noon-f017.png",
+    "title": "GW-4 Carbine · Hip · noon · 17 ms",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f017",
+    "ms": 17,
+    "bytes": 385066,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0235,
+          0.216,
+          true
+        ],
+        [
+          0.0358,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "m4-hip-noon-f025.png",
+    "title": "GW-4 Carbine · Hip · noon · 25 ms (Peak Stroke)",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f025",
+    "ms": 25,
+    "bytes": 384574,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.017,
+          0,
+          false
+        ],
+        [
+          0.0182,
+          0.2,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "m4-hip-noon-f033.png",
+    "title": "GW-4 Carbine · Hip · noon · 33 ms",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f033",
+    "ms": 33,
+    "bytes": 384262,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.017,
+          0,
+          false
+        ],
+        [
+          0.017,
+          0,
+          false
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "m4-hip-noon-f042.png",
+    "title": "GW-4 Carbine · Hip · noon · 42 ms",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f042",
+    "ms": 42,
+    "bytes": 384439,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.017,
+          0,
+          false
+        ],
+        [
+          0.0194,
+          0.413,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "m4-hip-noon-f050.png",
+    "title": "GW-4 Carbine · Hip · noon · 50 ms",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f050",
+    "ms": 50,
+    "bytes": 384798,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0196,
+          0.088,
+          true
+        ],
+        [
+          0.0281,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "m4-hip-noon-f067.png",
+    "title": "GW-4 Carbine · Hip · noon · 67 ms",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f067",
+    "ms": 67,
+    "bytes": 385517,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.037,
+          0.66,
+          true
+        ],
+        [
+          0.0627,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "m4-hip-noon-f083.png",
+    "title": "GW-4 Carbine · Hip · noon · 83 ms",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f083",
+    "ms": 83,
+    "bytes": 384468,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0471,
+          0.995,
+          true
+        ],
+        [
+          0.0829,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "m4-hip-noon-f100.png",
+    "title": "GW-4 Carbine · Hip · noon · 100 ms",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f100",
+    "ms": 100,
+    "bytes": 383182,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0472,
+          1,
+          true
+        ],
+        [
+          0.0832,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "m4-hip-noon-f130.png",
+    "title": "GW-4 Carbine · Hip · noon · 130 ms",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f130",
+    "ms": 130,
+    "bytes": 384496,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0472,
+          1,
+          true
+        ],
+        [
+          0.0832,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "m4-hip-noon-f170.png",
+    "title": "GW-4 Carbine · Hip · noon · 170 ms (Reset)",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f170",
+    "ms": 170,
+    "bytes": 384885,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0472,
+          1,
+          true
+        ],
+        [
+          0.0832,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "m4-ads-noon-f000.png",
+    "title": "GW-4 Carbine · ADS Rest · noon",
+    "weapon": "m4",
+    "pose": "ads",
+    "light": "noon",
+    "step": "f000",
+    "ms": 0
+  },
+  {
+    "file": "m4-ads-noon-f025.png",
+    "title": "GW-4 Carbine · ADS 25ms · noon",
+    "weapon": "m4",
+    "pose": "ads",
+    "light": "noon",
+    "step": "f025",
+    "ms": 25
+  },
+  {
+    "file": "ak-hip-noon-f008.png",
+    "title": "KR-7 Rifle · Hip · noon · 8 ms (Break/Fired)",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f008",
+    "ms": 8,
+    "bytes": 386932,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.1749,
+          0.791,
+          true
+        ],
+        [
+          0.2021,
+          1,
+          true
+        ]
+      ],
+      "work": -0.0116
+    }
+  },
+  {
+    "file": "ak-hip-noon-f017.png",
+    "title": "KR-7 Rifle · Hip · noon · 17 ms",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f017",
+    "ms": 17,
+    "bytes": 383963,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.1609,
+          0.286,
+          true
+        ],
+        [
+          0.1742,
+          1,
+          true
+        ]
+      ],
+      "work": -0.0396
+    }
+  },
+  {
+    "file": "ak-hip-noon-f025.png",
+    "title": "KR-7 Rifle · Hip · noon · 25 ms (Peak Stroke)",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f025",
+    "ms": 25,
+    "bytes": 385195,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.153,
+          0,
+          false
+        ],
+        [
+          0.1554,
+          0.463,
+          true
+        ]
+      ],
+      "work": -0.0611
+    }
+  },
+  {
+    "file": "ak-hip-noon-f033.png",
+    "title": "KR-7 Rifle · Hip · noon · 33 ms",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f033",
+    "ms": 33,
+    "bytes": 384817,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.153,
+          0,
+          false
+        ],
+        [
+          0.153,
+          0,
+          false
+        ]
+      ],
+      "work": -0.066
+    }
+  },
+  {
+    "file": "ak-hip-noon-f042.png",
+    "title": "KR-7 Rifle · Hip · noon · 42 ms",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f042",
+    "ms": 42,
+    "bytes": 383861,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.153,
+          0,
+          false
+        ],
+        [
+          0.1541,
+          0.2,
+          true
+        ]
+      ],
+      "work": -0.0639
+    }
+  },
+  {
+    "file": "ak-hip-noon-f050.png",
+    "title": "KR-7 Rifle · Hip · noon · 50 ms",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f050",
+    "ms": 50,
+    "bytes": 383284,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.153,
+          0,
+          false
+        ],
+        [
+          0.1582,
+          0.977,
+          true
+        ]
+      ],
+      "work": -0.0557
+    }
+  },
+  {
+    "file": "ak-hip-noon-f067.png",
+    "title": "KR-7 Rifle · Hip · noon · 67 ms",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f067",
+    "ms": 67,
+    "bytes": 382432,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.1669,
+          0.5,
+          true
+        ],
+        [
+          0.186,
+          1,
+          true
+        ]
+      ],
+      "work": -0.0277
+    }
+  },
+  {
+    "file": "ak-hip-noon-f083.png",
+    "title": "KR-7 Rifle · Hip · noon · 83 ms",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f083",
+    "ms": 83,
+    "bytes": 380931,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.1784,
+          0.918,
+          true
+        ],
+        [
+          0.2092,
+          1,
+          true
+        ]
+      ],
+      "work": -0.0046
+    }
+  },
+  {
+    "file": "ak-hip-noon-f100.png",
+    "title": "KR-7 Rifle · Hip · noon · 100 ms",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f100",
+    "ms": 100,
+    "bytes": 380364,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.1807,
+          1,
+          true
+        ],
+        [
+          0.2137,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "ak-hip-noon-f130.png",
+    "title": "KR-7 Rifle · Hip · noon · 130 ms",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f130",
+    "ms": 130,
+    "bytes": 380981,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.1807,
+          1,
+          true
+        ],
+        [
+          0.2137,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "ak-hip-noon-f170.png",
+    "title": "KR-7 Rifle · Hip · noon · 170 ms (Reset)",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f170",
+    "ms": 170,
+    "bytes": 379014,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.1807,
+          1,
+          true
+        ],
+        [
+          0.2137,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "ak-ads-noon-f000.png",
+    "title": "KR-7 Rifle · ADS Rest · noon",
+    "weapon": "ak",
+    "pose": "ads",
+    "light": "noon",
+    "step": "f000",
+    "ms": 0
+  },
+  {
+    "file": "ak-ads-noon-f025.png",
+    "title": "KR-7 Rifle · ADS 25ms · noon",
+    "weapon": "ak",
+    "pose": "ads",
+    "light": "noon",
+    "step": "f025",
+    "ms": 25
+  },
+  {
+    "file": "uzi-hip-noon-f008.png",
+    "title": "Wasp / Uzi SMG · Hip · noon · 8 ms (Break/Fired)",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f008",
+    "ms": 8,
+    "bytes": 378192,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0727,
+          0.581,
+          true
+        ],
+        [
+          0.0883,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "uzi-hip-noon-f017.png",
+    "title": "Wasp / Uzi SMG · Hip · noon · 17 ms",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f017",
+    "ms": 17,
+    "bytes": 379127,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.061,
+          0,
+          false
+        ],
+        [
+          0.0625,
+          0.38,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "uzi-hip-noon-f025.png",
+    "title": "Wasp / Uzi SMG · Hip · noon · 25 ms (Peak Stroke)",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f025",
+    "ms": 25,
+    "bytes": 379550,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.061,
+          0,
+          false
+        ],
+        [
+          0.061,
+          0.013,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "uzi-hip-noon-f033.png",
+    "title": "Wasp / Uzi SMG · Hip · noon · 33 ms",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f033",
+    "ms": 33,
+    "bytes": 377753,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.061,
+          0,
+          false
+        ],
+        [
+          0.0644,
+          0.886,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "uzi-hip-noon-f042.png",
+    "title": "Wasp / Uzi SMG · Hip · noon · 42 ms",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f042",
+    "ms": 42,
+    "bytes": 377620,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0682,
+          0.358,
+          true
+        ],
+        [
+          0.0793,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "uzi-hip-noon-f050.png",
+    "title": "Wasp / Uzi SMG · Hip · noon · 50 ms",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f050",
+    "ms": 50,
+    "bytes": 378332,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0755,
+          0.719,
+          true
+        ],
+        [
+          0.0938,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "uzi-hip-noon-f067.png",
+    "title": "Wasp / Uzi SMG · Hip · noon · 67 ms",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f067",
+    "ms": 67,
+    "bytes": 377195,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0812,
+          1,
+          true
+        ],
+        [
+          0.1052,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "uzi-hip-noon-f083.png",
+    "title": "Wasp / Uzi SMG · Hip · noon · 83 ms",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f083",
+    "ms": 83,
+    "bytes": 377106,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0812,
+          1,
+          true
+        ],
+        [
+          0.1052,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "uzi-hip-noon-f100.png",
+    "title": "Wasp / Uzi SMG · Hip · noon · 100 ms",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f100",
+    "ms": 100,
+    "bytes": 379075,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0812,
+          1,
+          true
+        ],
+        [
+          0.1052,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "uzi-hip-noon-f130.png",
+    "title": "Wasp / Uzi SMG · Hip · noon · 130 ms",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f130",
+    "ms": 130,
+    "bytes": 378729,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0812,
+          1,
+          true
+        ],
+        [
+          0.1052,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "uzi-hip-noon-f170.png",
+    "title": "Wasp / Uzi SMG · Hip · noon · 170 ms (Reset)",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f170",
+    "ms": 170,
+    "bytes": 377537,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0812,
+          1,
+          true
+        ],
+        [
+          0.1052,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "revolver-hip-noon-f008.png",
+    "title": ".44 Magnum Revolver · Hip · noon · 8 ms (Break/Fired)",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f008",
+    "ms": 8,
+    "bytes": 377969,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "trig": 0.36,
+      "ham": 0
+    }
+  },
+  {
+    "file": "revolver-hip-noon-f017.png",
+    "title": ".44 Magnum Revolver · Hip · noon · 17 ms",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f017",
+    "ms": 17,
+    "bytes": 380152,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "trig": 0.36,
+      "ham": 0
+    }
+  },
+  {
+    "file": "revolver-hip-noon-f025.png",
+    "title": ".44 Magnum Revolver · Hip · noon · 25 ms (Peak Stroke)",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f025",
+    "ms": 25,
+    "bytes": 378856,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "trig": 0.36,
+      "ham": 0
+    }
+  },
+  {
+    "file": "revolver-hip-noon-f033.png",
+    "title": ".44 Magnum Revolver · Hip · noon · 33 ms",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f033",
+    "ms": 33,
+    "bytes": 381937,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "trig": 0.36,
+      "ham": 0
+    }
+  },
+  {
+    "file": "revolver-hip-noon-f042.png",
+    "title": ".44 Magnum Revolver · Hip · noon · 42 ms",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f042",
+    "ms": 42,
+    "bytes": 381777,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "trig": 0.36,
+      "ham": 0
+    }
+  },
+  {
+    "file": "revolver-hip-noon-f050.png",
+    "title": ".44 Magnum Revolver · Hip · noon · 50 ms",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f050",
+    "ms": 50,
+    "bytes": 382003,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "trig": 0.358,
+      "ham": 0
+    }
+  },
+  {
+    "file": "revolver-hip-noon-f067.png",
+    "title": ".44 Magnum Revolver · Hip · noon · 67 ms",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f067",
+    "ms": 67,
+    "bytes": 383647,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "trig": 0.326,
+      "ham": 0
+    }
+  },
+  {
+    "file": "revolver-hip-noon-f083.png",
+    "title": ".44 Magnum Revolver · Hip · noon · 83 ms",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f083",
+    "ms": 83,
+    "bytes": 386315,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "trig": 0.268,
+      "ham": 0
+    }
+  },
+  {
+    "file": "revolver-hip-noon-f100.png",
+    "title": ".44 Magnum Revolver · Hip · noon · 100 ms",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f100",
+    "ms": 100,
+    "bytes": 385688,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "trig": 0.192,
+      "ham": 0
+    }
+  },
+  {
+    "file": "revolver-hip-noon-f130.png",
+    "title": ".44 Magnum Revolver · Hip · noon · 130 ms",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f130",
+    "ms": 130,
+    "bytes": 384300,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "trig": 0.061,
+      "ham": 0
+    }
+  },
+  {
+    "file": "revolver-hip-noon-f170.png",
+    "title": ".44 Magnum Revolver · Hip · noon · 170 ms (Reset)",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f170",
+    "ms": 170,
+    "bytes": 385818,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "trig": 0,
+      "ham": 0
+    }
+  },
+  {
+    "file": "aa12-hip-noon-f008.png",
+    "title": "AA-12 Breacher Combat Shotgun · Hip · noon · 8 ms (Break/Fired)",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f008",
+    "ms": 8,
+    "bytes": 368379,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0743,
+          0.894,
+          true
+        ],
+        [
+          0.1136,
+          1,
+          true
+        ],
+        [
+          0.1196,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "aa12-hip-noon-f017.png",
+    "title": "AA-12 Breacher Combat Shotgun · Hip · noon · 17 ms",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f017",
+    "ms": 17,
+    "bytes": 369467,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0601,
+          0.488,
+          true
+        ],
+        [
+          0.0852,
+          1,
+          true
+        ],
+        [
+          0.0912,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "aa12-hip-noon-f025.png",
+    "title": "AA-12 Breacher Combat Shotgun · Hip · noon · 25 ms (Peak Stroke)",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f025",
+    "ms": 25,
+    "bytes": 367768,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0453,
+          0.066,
+          true
+        ],
+        [
+          0.0556,
+          1,
+          true
+        ],
+        [
+          0.0616,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "aa12-hip-noon-f033.png",
+    "title": "AA-12 Breacher Combat Shotgun · Hip · noon · 33 ms",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f033",
+    "ms": 33,
+    "bytes": 368382,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.044,
+          0.029,
+          false
+        ],
+        [
+          0.0321,
+          1,
+          false
+        ],
+        [
+          0.0381,
+          1,
+          false
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "aa12-hip-noon-f042.png",
+    "title": "AA-12 Breacher Combat Shotgun · Hip · noon · 42 ms",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f042",
+    "ms": 42,
+    "bytes": 369306,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.044,
+          0.029,
+          false
+        ],
+        [
+          0.0241,
+          1,
+          false
+        ],
+        [
+          0.0301,
+          1,
+          false
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "aa12-hip-noon-f050.png",
+    "title": "AA-12 Breacher Combat Shotgun · Hip · noon · 50 ms",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f050",
+    "ms": 50,
+    "bytes": 367879,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.044,
+          0.029,
+          false
+        ],
+        [
+          0.0274,
+          1,
+          false
+        ],
+        [
+          0.0334,
+          1,
+          false
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "aa12-hip-noon-f067.png",
+    "title": "AA-12 Breacher Combat Shotgun · Hip · noon · 67 ms",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f067",
+    "ms": 67,
+    "bytes": 369589,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.044,
+          0.029,
+          false
+        ],
+        [
+          0.0456,
+          1,
+          false
+        ],
+        [
+          0.0516,
+          1,
+          false
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "aa12-hip-noon-f083.png",
+    "title": "AA-12 Breacher Combat Shotgun · Hip · noon · 83 ms",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f083",
+    "ms": 83,
+    "bytes": 368623,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0528,
+          0.281,
+          true
+        ],
+        [
+          0.0707,
+          1,
+          true
+        ],
+        [
+          0.0767,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "aa12-hip-noon-f100.png",
+    "title": "AA-12 Breacher Combat Shotgun · Hip · noon · 100 ms",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f100",
+    "ms": 100,
+    "bytes": 368089,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0665,
+          0.672,
+          true
+        ],
+        [
+          0.0981,
+          1,
+          true
+        ],
+        [
+          0.1041,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "aa12-hip-noon-f130.png",
+    "title": "AA-12 Breacher Combat Shotgun · Hip · noon · 130 ms",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f130",
+    "ms": 130,
+    "bytes": 369453,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0795,
+          1.043,
+          true
+        ],
+        [
+          0.124,
+          1,
+          true
+        ],
+        [
+          0.13,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "aa12-hip-noon-f170.png",
+    "title": "AA-12 Breacher Combat Shotgun · Hip · noon · 170 ms (Reset)",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f170",
+    "ms": 170,
+    "bytes": 368154,
+    "info": {
+      "shots": 1,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0795,
+          1.043,
+          true
+        ],
+        [
+          0.124,
+          1,
+          true
+        ],
+        [
+          0.13,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "pistol-hip-overcast-f008.png",
+    "title": "Issue Sidearm Pistol · Hip · overcast · 8 ms (Break/Fired)",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f008",
+    "ms": 8,
+    "bytes": 368309,
+    "info": {
+      "shots": 2,
+      "ads": 0,
+      "raise": 1,
+      "work": -0.0229,
+      "slide": 0.0271
+    }
+  },
+  {
+    "file": "pistol-hip-overcast-f017.png",
+    "title": "Issue Sidearm Pistol · Hip · overcast · 17 ms",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f017",
+    "ms": 17,
+    "bytes": 369694,
+    "info": {
+      "shots": 2,
+      "ads": 0,
+      "raise": 1,
+      "work": -0.0545,
+      "slide": -0.0045
+    }
+  },
+  {
+    "file": "pistol-hip-overcast-f025.png",
+    "title": "Issue Sidearm Pistol · Hip · overcast · 25 ms (Peak Stroke)",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f025",
+    "ms": 25,
+    "bytes": 368735,
+    "info": {
+      "shots": 2,
+      "ads": 0,
+      "raise": 1,
+      "work": -0.0527,
+      "slide": -0.0027
+    }
+  },
+  {
+    "file": "pistol-hip-overcast-f033.png",
+    "title": "Issue Sidearm Pistol · Hip · overcast · 33 ms",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f033",
+    "ms": 33,
+    "bytes": 369847,
+    "info": {
+      "shots": 2,
+      "ads": 0,
+      "raise": 1,
+      "work": -0.0456,
+      "slide": 0.0044
+    }
+  },
+  {
+    "file": "pistol-hip-overcast-f042.png",
+    "title": "Issue Sidearm Pistol · Hip · overcast · 42 ms",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f042",
+    "ms": 42,
+    "bytes": 371240,
+    "info": {
+      "shots": 2,
+      "ads": 0,
+      "raise": 1,
+      "work": -0.034,
+      "slide": 0.016
+    }
+  },
+  {
+    "file": "pistol-hip-overcast-f050.png",
+    "title": "Issue Sidearm Pistol · Hip · overcast · 50 ms",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f050",
+    "ms": 50,
+    "bytes": 368233,
+    "info": {
+      "shots": 2,
+      "ads": 0,
+      "raise": 1,
+      "work": -0.0225,
+      "slide": 0.0275
+    }
+  },
+  {
+    "file": "pistol-hip-overcast-f067.png",
+    "title": "Issue Sidearm Pistol · Hip · overcast · 67 ms",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f067",
+    "ms": 67,
+    "bytes": 369014,
+    "info": {
+      "shots": 2,
+      "ads": 0,
+      "raise": 1,
+      "work": -0.0029,
+      "slide": 0.0471
+    }
+  },
+  {
+    "file": "pistol-hip-overcast-f083.png",
+    "title": "Issue Sidearm Pistol · Hip · overcast · 83 ms",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f083",
+    "ms": 83,
+    "bytes": 375019,
+    "info": {
+      "shots": 2,
+      "ads": 0,
+      "raise": 1,
+      "work": 0,
+      "slide": 0.05
+    }
+  },
+  {
+    "file": "pistol-hip-overcast-f100.png",
+    "title": "Issue Sidearm Pistol · Hip · overcast · 100 ms",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f100",
+    "ms": 100,
+    "bytes": 375174,
+    "info": {
+      "shots": 2,
+      "ads": 0,
+      "raise": 1,
+      "work": 0,
+      "slide": 0.05
+    }
+  },
+  {
+    "file": "pistol-hip-overcast-f130.png",
+    "title": "Issue Sidearm Pistol · Hip · overcast · 130 ms",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f130",
+    "ms": 130,
+    "bytes": 371107,
+    "info": {
+      "shots": 2,
+      "ads": 0,
+      "raise": 1,
+      "work": 0,
+      "slide": 0.05
+    }
+  },
+  {
+    "file": "pistol-hip-overcast-f170.png",
+    "title": "Issue Sidearm Pistol · Hip · overcast · 170 ms (Reset)",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f170",
+    "ms": 170,
+    "bytes": 376943,
+    "info": {
+      "shots": 2,
+      "ads": 0,
+      "raise": 1,
+      "work": 0,
+      "slide": 0.05
+    }
+  },
+  {
+    "file": "m4-hip-overcast-f008.png",
+    "title": "GW-4 Carbine · Hip · overcast · 8 ms (Break/Fired)",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f008",
+    "ms": 8,
+    "bytes": 348090,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0401,
+          0.764,
+          true
+        ],
+        [
+          0.069,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "m4-hip-overcast-f017.png",
+    "title": "GW-4 Carbine · Hip · overcast · 17 ms",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f017",
+    "ms": 17,
+    "bytes": 352496,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0235,
+          0.216,
+          true
+        ],
+        [
+          0.0358,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "m4-hip-overcast-f025.png",
+    "title": "GW-4 Carbine · Hip · overcast · 25 ms (Peak Stroke)",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f025",
+    "ms": 25,
+    "bytes": 350365,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.017,
+          0,
+          false
+        ],
+        [
+          0.0182,
+          0.2,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "m4-hip-overcast-f033.png",
+    "title": "GW-4 Carbine · Hip · overcast · 33 ms",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f033",
+    "ms": 33,
+    "bytes": 352914,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.017,
+          0,
+          false
+        ],
+        [
+          0.017,
+          0,
+          false
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "m4-hip-overcast-f042.png",
+    "title": "GW-4 Carbine · Hip · overcast · 42 ms",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f042",
+    "ms": 42,
+    "bytes": 352390,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.017,
+          0,
+          false
+        ],
+        [
+          0.0194,
+          0.413,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "m4-hip-overcast-f050.png",
+    "title": "GW-4 Carbine · Hip · overcast · 50 ms",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f050",
+    "ms": 50,
+    "bytes": 352871,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0196,
+          0.088,
+          true
+        ],
+        [
+          0.0281,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "m4-hip-overcast-f067.png",
+    "title": "GW-4 Carbine · Hip · overcast · 67 ms",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f067",
+    "ms": 67,
+    "bytes": 352997,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.037,
+          0.66,
+          true
+        ],
+        [
+          0.0627,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "m4-hip-overcast-f083.png",
+    "title": "GW-4 Carbine · Hip · overcast · 83 ms",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f083",
+    "ms": 83,
+    "bytes": 351910,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0471,
+          0.995,
+          true
+        ],
+        [
+          0.0829,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "m4-hip-overcast-f100.png",
+    "title": "GW-4 Carbine · Hip · overcast · 100 ms",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f100",
+    "ms": 100,
+    "bytes": 352030,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0472,
+          1,
+          true
+        ],
+        [
+          0.0832,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "m4-hip-overcast-f130.png",
+    "title": "GW-4 Carbine · Hip · overcast · 130 ms",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f130",
+    "ms": 130,
+    "bytes": 353138,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0472,
+          1,
+          true
+        ],
+        [
+          0.0832,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "m4-hip-overcast-f170.png",
+    "title": "GW-4 Carbine · Hip · overcast · 170 ms (Reset)",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f170",
+    "ms": 170,
+    "bytes": 352487,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0472,
+          1,
+          true
+        ],
+        [
+          0.0832,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "m4-ads-overcast-f000.png",
+    "title": "GW-4 Carbine · ADS Rest · overcast",
+    "weapon": "m4",
+    "pose": "ads",
+    "light": "overcast",
+    "step": "f000",
+    "ms": 0
+  },
+  {
+    "file": "m4-ads-overcast-f025.png",
+    "title": "GW-4 Carbine · ADS 25ms · overcast",
+    "weapon": "m4",
+    "pose": "ads",
+    "light": "overcast",
+    "step": "f025",
+    "ms": 25
+  },
+  {
+    "file": "ak-hip-overcast-f008.png",
+    "title": "KR-7 Rifle · Hip · overcast · 8 ms (Break/Fired)",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f008",
+    "ms": 8,
+    "bytes": 353973,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.1749,
+          0.791,
+          true
+        ],
+        [
+          0.2021,
+          1,
+          true
+        ]
+      ],
+      "work": -0.0116
+    }
+  },
+  {
+    "file": "ak-hip-overcast-f017.png",
+    "title": "KR-7 Rifle · Hip · overcast · 17 ms",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f017",
+    "ms": 17,
+    "bytes": 354545,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.1609,
+          0.286,
+          true
+        ],
+        [
+          0.1742,
+          1,
+          true
+        ]
+      ],
+      "work": -0.0396
+    }
+  },
+  {
+    "file": "ak-hip-overcast-f025.png",
+    "title": "KR-7 Rifle · Hip · overcast · 25 ms (Peak Stroke)",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f025",
+    "ms": 25,
+    "bytes": 351364,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.153,
+          0,
+          false
+        ],
+        [
+          0.1554,
+          0.463,
+          true
+        ]
+      ],
+      "work": -0.0611
+    }
+  },
+  {
+    "file": "ak-hip-overcast-f033.png",
+    "title": "KR-7 Rifle · Hip · overcast · 33 ms",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f033",
+    "ms": 33,
+    "bytes": 354190,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.153,
+          0,
+          false
+        ],
+        [
+          0.153,
+          0,
+          false
+        ]
+      ],
+      "work": -0.066
+    }
+  },
+  {
+    "file": "ak-hip-overcast-f042.png",
+    "title": "KR-7 Rifle · Hip · overcast · 42 ms",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f042",
+    "ms": 42,
+    "bytes": 354424,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.153,
+          0,
+          false
+        ],
+        [
+          0.1541,
+          0.2,
+          true
+        ]
+      ],
+      "work": -0.0639
+    }
+  },
+  {
+    "file": "ak-hip-overcast-f050.png",
+    "title": "KR-7 Rifle · Hip · overcast · 50 ms",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f050",
+    "ms": 50,
+    "bytes": 358056,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.153,
+          0,
+          false
+        ],
+        [
+          0.1582,
+          0.977,
+          true
+        ]
+      ],
+      "work": -0.0557
+    }
+  },
+  {
+    "file": "ak-hip-overcast-f067.png",
+    "title": "KR-7 Rifle · Hip · overcast · 67 ms",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f067",
+    "ms": 67,
+    "bytes": 354857,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.1669,
+          0.5,
+          true
+        ],
+        [
+          0.186,
+          1,
+          true
+        ]
+      ],
+      "work": -0.0277
+    }
+  },
+  {
+    "file": "ak-hip-overcast-f083.png",
+    "title": "KR-7 Rifle · Hip · overcast · 83 ms",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f083",
+    "ms": 83,
+    "bytes": 352830,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.1784,
+          0.918,
+          true
+        ],
+        [
+          0.2092,
+          1,
+          true
+        ]
+      ],
+      "work": -0.0046
+    }
+  },
+  {
+    "file": "ak-hip-overcast-f100.png",
+    "title": "KR-7 Rifle · Hip · overcast · 100 ms",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f100",
+    "ms": 100,
+    "bytes": 350583,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.1807,
+          1,
+          true
+        ],
+        [
+          0.2137,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "ak-hip-overcast-f130.png",
+    "title": "KR-7 Rifle · Hip · overcast · 130 ms",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f130",
+    "ms": 130,
+    "bytes": 352177,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.1807,
+          1,
+          true
+        ],
+        [
+          0.2137,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "ak-hip-overcast-f170.png",
+    "title": "KR-7 Rifle · Hip · overcast · 170 ms (Reset)",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f170",
+    "ms": 170,
+    "bytes": 349881,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.1807,
+          1,
+          true
+        ],
+        [
+          0.2137,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "ak-ads-overcast-f000.png",
+    "title": "KR-7 Rifle · ADS Rest · overcast",
+    "weapon": "ak",
+    "pose": "ads",
+    "light": "overcast",
+    "step": "f000",
+    "ms": 0
+  },
+  {
+    "file": "ak-ads-overcast-f025.png",
+    "title": "KR-7 Rifle · ADS 25ms · overcast",
+    "weapon": "ak",
+    "pose": "ads",
+    "light": "overcast",
+    "step": "f025",
+    "ms": 25
+  },
+  {
+    "file": "uzi-hip-overcast-f008.png",
+    "title": "Wasp / Uzi SMG · Hip · overcast · 8 ms (Break/Fired)",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f008",
+    "ms": 8,
+    "bytes": 347241,
+    "info": {
+      "shots": 2,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0727,
+          0.581,
+          true
+        ],
+        [
+          0.0883,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "uzi-hip-overcast-f017.png",
+    "title": "Wasp / Uzi SMG · Hip · overcast · 17 ms",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f017",
+    "ms": 17,
+    "bytes": 343971,
+    "info": {
+      "shots": 2,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.061,
+          0,
+          false
+        ],
+        [
+          0.0625,
+          0.38,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "uzi-hip-overcast-f025.png",
+    "title": "Wasp / Uzi SMG · Hip · overcast · 25 ms (Peak Stroke)",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f025",
+    "ms": 25,
+    "bytes": 344946,
+    "info": {
+      "shots": 2,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.061,
+          0,
+          false
+        ],
+        [
+          0.061,
+          0.013,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "uzi-hip-overcast-f033.png",
+    "title": "Wasp / Uzi SMG · Hip · overcast · 33 ms",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f033",
+    "ms": 33,
+    "bytes": 345323,
+    "info": {
+      "shots": 2,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.061,
+          0,
+          false
+        ],
+        [
+          0.0644,
+          0.886,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "uzi-hip-overcast-f042.png",
+    "title": "Wasp / Uzi SMG · Hip · overcast · 42 ms",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f042",
+    "ms": 42,
+    "bytes": 346774,
+    "info": {
+      "shots": 2,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0682,
+          0.358,
+          true
+        ],
+        [
+          0.0793,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "uzi-hip-overcast-f050.png",
+    "title": "Wasp / Uzi SMG · Hip · overcast · 50 ms",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f050",
+    "ms": 50,
+    "bytes": 347028,
+    "info": {
+      "shots": 2,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0755,
+          0.719,
+          true
+        ],
+        [
+          0.0938,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "uzi-hip-overcast-f067.png",
+    "title": "Wasp / Uzi SMG · Hip · overcast · 67 ms",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f067",
+    "ms": 67,
+    "bytes": 346515,
+    "info": {
+      "shots": 2,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0812,
+          1,
+          true
+        ],
+        [
+          0.1052,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "uzi-hip-overcast-f083.png",
+    "title": "Wasp / Uzi SMG · Hip · overcast · 83 ms",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f083",
+    "ms": 83,
+    "bytes": 346723,
+    "info": {
+      "shots": 2,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0812,
+          1,
+          true
+        ],
+        [
+          0.1052,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "uzi-hip-overcast-f100.png",
+    "title": "Wasp / Uzi SMG · Hip · overcast · 100 ms",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f100",
+    "ms": 100,
+    "bytes": 345814,
+    "info": {
+      "shots": 2,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0812,
+          1,
+          true
+        ],
+        [
+          0.1052,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "uzi-hip-overcast-f130.png",
+    "title": "Wasp / Uzi SMG · Hip · overcast · 130 ms",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f130",
+    "ms": 130,
+    "bytes": 344537,
+    "info": {
+      "shots": 2,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0812,
+          1,
+          true
+        ],
+        [
+          0.1052,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "uzi-hip-overcast-f170.png",
+    "title": "Wasp / Uzi SMG · Hip · overcast · 170 ms (Reset)",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f170",
+    "ms": 170,
+    "bytes": 340531,
+    "info": {
+      "shots": 2,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0812,
+          1,
+          true
+        ],
+        [
+          0.1052,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "revolver-hip-overcast-f008.png",
+    "title": ".44 Magnum Revolver · Hip · overcast · 8 ms (Break/Fired)",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f008",
+    "ms": 8,
+    "bytes": 350676,
+    "info": {
+      "shots": 2,
+      "ads": 0,
+      "raise": 1,
+      "trig": 0.36,
+      "ham": 0
+    }
+  },
+  {
+    "file": "revolver-hip-overcast-f017.png",
+    "title": ".44 Magnum Revolver · Hip · overcast · 17 ms",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f017",
+    "ms": 17,
+    "bytes": 346123,
+    "info": {
+      "shots": 2,
+      "ads": 0,
+      "raise": 1,
+      "trig": 0.36,
+      "ham": 0
+    }
+  },
+  {
+    "file": "revolver-hip-overcast-f025.png",
+    "title": ".44 Magnum Revolver · Hip · overcast · 25 ms (Peak Stroke)",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f025",
+    "ms": 25,
+    "bytes": 352834,
+    "info": {
+      "shots": 2,
+      "ads": 0,
+      "raise": 1,
+      "trig": 0.36,
+      "ham": 0
+    }
+  },
+  {
+    "file": "revolver-hip-overcast-f033.png",
+    "title": ".44 Magnum Revolver · Hip · overcast · 33 ms",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f033",
+    "ms": 33,
+    "bytes": 351450,
+    "info": {
+      "shots": 2,
+      "ads": 0,
+      "raise": 1,
+      "trig": 0.36,
+      "ham": 0
+    }
+  },
+  {
+    "file": "revolver-hip-overcast-f042.png",
+    "title": ".44 Magnum Revolver · Hip · overcast · 42 ms",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f042",
+    "ms": 42,
+    "bytes": 354928,
+    "info": {
+      "shots": 2,
+      "ads": 0,
+      "raise": 1,
+      "trig": 0.36,
+      "ham": 0
+    }
+  },
+  {
+    "file": "revolver-hip-overcast-f050.png",
+    "title": ".44 Magnum Revolver · Hip · overcast · 50 ms",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f050",
+    "ms": 50,
+    "bytes": 355177,
+    "info": {
+      "shots": 2,
+      "ads": 0,
+      "raise": 1,
+      "trig": 0.358,
+      "ham": 0
+    }
+  },
+  {
+    "file": "revolver-hip-overcast-f067.png",
+    "title": ".44 Magnum Revolver · Hip · overcast · 67 ms",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f067",
+    "ms": 67,
+    "bytes": 355523,
+    "info": {
+      "shots": 2,
+      "ads": 0,
+      "raise": 1,
+      "trig": 0.326,
+      "ham": 0
+    }
+  },
+  {
+    "file": "revolver-hip-overcast-f083.png",
+    "title": ".44 Magnum Revolver · Hip · overcast · 83 ms",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f083",
+    "ms": 83,
+    "bytes": 360068,
+    "info": {
+      "shots": 2,
+      "ads": 0,
+      "raise": 1,
+      "trig": 0.268,
+      "ham": 0
+    }
+  },
+  {
+    "file": "revolver-hip-overcast-f100.png",
+    "title": ".44 Magnum Revolver · Hip · overcast · 100 ms",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f100",
+    "ms": 100,
+    "bytes": 359000,
+    "info": {
+      "shots": 2,
+      "ads": 0,
+      "raise": 1,
+      "trig": 0.192,
+      "ham": 0
+    }
+  },
+  {
+    "file": "revolver-hip-overcast-f130.png",
+    "title": ".44 Magnum Revolver · Hip · overcast · 130 ms",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f130",
+    "ms": 130,
+    "bytes": 360119,
+    "info": {
+      "shots": 2,
+      "ads": 0,
+      "raise": 1,
+      "trig": 0.061,
+      "ham": 0
+    }
+  },
+  {
+    "file": "revolver-hip-overcast-f170.png",
+    "title": ".44 Magnum Revolver · Hip · overcast · 170 ms (Reset)",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f170",
+    "ms": 170,
+    "bytes": 357828,
+    "info": {
+      "shots": 2,
+      "ads": 0,
+      "raise": 1,
+      "trig": 0,
+      "ham": 0
+    }
+  },
+  {
+    "file": "aa12-hip-overcast-f008.png",
+    "title": "AA-12 Breacher Combat Shotgun · Hip · overcast · 8 ms (Break/Fired)",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f008",
+    "ms": 8,
+    "bytes": 332680,
+    "info": {
+      "shots": 2,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0743,
+          0.894,
+          true
+        ],
+        [
+          0.1136,
+          1,
+          true
+        ],
+        [
+          0.1196,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "aa12-hip-overcast-f017.png",
+    "title": "AA-12 Breacher Combat Shotgun · Hip · overcast · 17 ms",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f017",
+    "ms": 17,
+    "bytes": 336351,
+    "info": {
+      "shots": 2,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0601,
+          0.488,
+          true
+        ],
+        [
+          0.0852,
+          1,
+          true
+        ],
+        [
+          0.0912,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "aa12-hip-overcast-f025.png",
+    "title": "AA-12 Breacher Combat Shotgun · Hip · overcast · 25 ms (Peak Stroke)",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f025",
+    "ms": 25,
+    "bytes": 334846,
+    "info": {
+      "shots": 2,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0453,
+          0.066,
+          true
+        ],
+        [
+          0.0556,
+          1,
+          true
+        ],
+        [
+          0.0616,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "aa12-hip-overcast-f033.png",
+    "title": "AA-12 Breacher Combat Shotgun · Hip · overcast · 33 ms",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f033",
+    "ms": 33,
+    "bytes": 333574,
+    "info": {
+      "shots": 2,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.044,
+          0.029,
+          false
+        ],
+        [
+          0.0321,
+          1,
+          false
+        ],
+        [
+          0.0381,
+          1,
+          false
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "aa12-hip-overcast-f042.png",
+    "title": "AA-12 Breacher Combat Shotgun · Hip · overcast · 42 ms",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f042",
+    "ms": 42,
+    "bytes": 332907,
+    "info": {
+      "shots": 2,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.044,
+          0.029,
+          false
+        ],
+        [
+          0.0241,
+          1,
+          false
+        ],
+        [
+          0.0301,
+          1,
+          false
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "aa12-hip-overcast-f050.png",
+    "title": "AA-12 Breacher Combat Shotgun · Hip · overcast · 50 ms",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f050",
+    "ms": 50,
+    "bytes": 333256,
+    "info": {
+      "shots": 2,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.044,
+          0.029,
+          false
+        ],
+        [
+          0.0274,
+          1,
+          false
+        ],
+        [
+          0.0334,
+          1,
+          false
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "aa12-hip-overcast-f067.png",
+    "title": "AA-12 Breacher Combat Shotgun · Hip · overcast · 67 ms",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f067",
+    "ms": 67,
+    "bytes": 332572,
+    "info": {
+      "shots": 2,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.044,
+          0.029,
+          false
+        ],
+        [
+          0.0456,
+          1,
+          false
+        ],
+        [
+          0.0516,
+          1,
+          false
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "aa12-hip-overcast-f083.png",
+    "title": "AA-12 Breacher Combat Shotgun · Hip · overcast · 83 ms",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f083",
+    "ms": 83,
+    "bytes": 330688,
+    "info": {
+      "shots": 2,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0528,
+          0.281,
+          true
+        ],
+        [
+          0.0707,
+          1,
+          true
+        ],
+        [
+          0.0767,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "aa12-hip-overcast-f100.png",
+    "title": "AA-12 Breacher Combat Shotgun · Hip · overcast · 100 ms",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f100",
+    "ms": 100,
+    "bytes": 338109,
+    "info": {
+      "shots": 2,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0665,
+          0.672,
+          true
+        ],
+        [
+          0.0981,
+          1,
+          true
+        ],
+        [
+          0.1041,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "aa12-hip-overcast-f130.png",
+    "title": "AA-12 Breacher Combat Shotgun · Hip · overcast · 130 ms",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f130",
+    "ms": 130,
+    "bytes": 337312,
+    "info": {
+      "shots": 2,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0795,
+          1.043,
+          true
+        ],
+        [
+          0.124,
+          1,
+          true
+        ],
+        [
+          0.13,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "aa12-hip-overcast-f170.png",
+    "title": "AA-12 Breacher Combat Shotgun · Hip · overcast · 170 ms (Reset)",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f170",
+    "ms": 170,
+    "bytes": 333754,
+    "info": {
+      "shots": 2,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0795,
+          1.043,
+          true
+        ],
+        [
+          0.124,
+          1,
+          true
+        ],
+        [
+          0.13,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "pistol-hip-dusk-f008.png",
+    "title": "Issue Sidearm Pistol · Hip · dusk · 8 ms (Break/Fired)",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f008",
+    "ms": 8,
+    "bytes": 326408,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "work": -0.0229,
+      "slide": 0.0271
+    }
+  },
+  {
+    "file": "pistol-hip-dusk-f017.png",
+    "title": "Issue Sidearm Pistol · Hip · dusk · 17 ms",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f017",
+    "ms": 17,
+    "bytes": 325134,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "work": -0.0545,
+      "slide": -0.0045
+    }
+  },
+  {
+    "file": "pistol-hip-dusk-f025.png",
+    "title": "Issue Sidearm Pistol · Hip · dusk · 25 ms (Peak Stroke)",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f025",
+    "ms": 25,
+    "bytes": 328879,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "work": -0.0527,
+      "slide": -0.0027
+    }
+  },
+  {
+    "file": "pistol-hip-dusk-f033.png",
+    "title": "Issue Sidearm Pistol · Hip · dusk · 33 ms",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f033",
+    "ms": 33,
+    "bytes": 328113,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "work": -0.0456,
+      "slide": 0.0044
+    }
+  },
+  {
+    "file": "pistol-hip-dusk-f042.png",
+    "title": "Issue Sidearm Pistol · Hip · dusk · 42 ms",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f042",
+    "ms": 42,
+    "bytes": 328347,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "work": -0.034,
+      "slide": 0.016
+    }
+  },
+  {
+    "file": "pistol-hip-dusk-f050.png",
+    "title": "Issue Sidearm Pistol · Hip · dusk · 50 ms",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f050",
+    "ms": 50,
+    "bytes": 324732,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "work": -0.0225,
+      "slide": 0.0275
+    }
+  },
+  {
+    "file": "pistol-hip-dusk-f067.png",
+    "title": "Issue Sidearm Pistol · Hip · dusk · 67 ms",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f067",
+    "ms": 67,
+    "bytes": 326251,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "work": -0.0029,
+      "slide": 0.0471
+    }
+  },
+  {
+    "file": "pistol-hip-dusk-f083.png",
+    "title": "Issue Sidearm Pistol · Hip · dusk · 83 ms",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f083",
+    "ms": 83,
+    "bytes": 331472,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "work": 0,
+      "slide": 0.05
+    }
+  },
+  {
+    "file": "pistol-hip-dusk-f100.png",
+    "title": "Issue Sidearm Pistol · Hip · dusk · 100 ms",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f100",
+    "ms": 100,
+    "bytes": 331535,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "work": 0,
+      "slide": 0.05
+    }
+  },
+  {
+    "file": "pistol-hip-dusk-f130.png",
+    "title": "Issue Sidearm Pistol · Hip · dusk · 130 ms",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f130",
+    "ms": 130,
+    "bytes": 327629,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "work": 0,
+      "slide": 0.05
+    }
+  },
+  {
+    "file": "pistol-hip-dusk-f170.png",
+    "title": "Issue Sidearm Pistol · Hip · dusk · 170 ms (Reset)",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f170",
+    "ms": 170,
+    "bytes": 335575,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "work": 0,
+      "slide": 0.05
+    }
+  },
+  {
+    "file": "m4-hip-dusk-f008.png",
+    "title": "GW-4 Carbine · Hip · dusk · 8 ms (Break/Fired)",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f008",
+    "ms": 8,
+    "bytes": 312451,
+    "info": {
+      "shots": 5,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0401,
+          0.764,
+          true
+        ],
+        [
+          0.069,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "m4-hip-dusk-f017.png",
+    "title": "GW-4 Carbine · Hip · dusk · 17 ms",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f017",
+    "ms": 17,
+    "bytes": 317816,
+    "info": {
+      "shots": 5,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0235,
+          0.216,
+          true
+        ],
+        [
+          0.0358,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "m4-hip-dusk-f025.png",
+    "title": "GW-4 Carbine · Hip · dusk · 25 ms (Peak Stroke)",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f025",
+    "ms": 25,
+    "bytes": 311404,
+    "info": {
+      "shots": 5,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.017,
+          0,
+          false
+        ],
+        [
+          0.0182,
+          0.2,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "m4-hip-dusk-f033.png",
+    "title": "GW-4 Carbine · Hip · dusk · 33 ms",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f033",
+    "ms": 33,
+    "bytes": 317510,
+    "info": {
+      "shots": 5,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.017,
+          0,
+          false
+        ],
+        [
+          0.017,
+          0,
+          false
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "m4-hip-dusk-f042.png",
+    "title": "GW-4 Carbine · Hip · dusk · 42 ms",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f042",
+    "ms": 42,
+    "bytes": 316595,
+    "info": {
+      "shots": 5,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.017,
+          0,
+          false
+        ],
+        [
+          0.0194,
+          0.413,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "m4-hip-dusk-f050.png",
+    "title": "GW-4 Carbine · Hip · dusk · 50 ms",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f050",
+    "ms": 50,
+    "bytes": 316412,
+    "info": {
+      "shots": 5,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0196,
+          0.088,
+          true
+        ],
+        [
+          0.0281,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "m4-hip-dusk-f067.png",
+    "title": "GW-4 Carbine · Hip · dusk · 67 ms",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f067",
+    "ms": 67,
+    "bytes": 316755,
+    "info": {
+      "shots": 5,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.037,
+          0.66,
+          true
+        ],
+        [
+          0.0627,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "m4-hip-dusk-f083.png",
+    "title": "GW-4 Carbine · Hip · dusk · 83 ms",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f083",
+    "ms": 83,
+    "bytes": 317139,
+    "info": {
+      "shots": 5,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0471,
+          0.995,
+          true
+        ],
+        [
+          0.0829,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "m4-hip-dusk-f100.png",
+    "title": "GW-4 Carbine · Hip · dusk · 100 ms",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f100",
+    "ms": 100,
+    "bytes": 310445,
+    "info": {
+      "shots": 5,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0472,
+          1,
+          true
+        ],
+        [
+          0.0832,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "m4-hip-dusk-f130.png",
+    "title": "GW-4 Carbine · Hip · dusk · 130 ms",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f130",
+    "ms": 130,
+    "bytes": 316927,
+    "info": {
+      "shots": 5,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0472,
+          1,
+          true
+        ],
+        [
+          0.0832,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "m4-hip-dusk-f170.png",
+    "title": "GW-4 Carbine · Hip · dusk · 170 ms (Reset)",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f170",
+    "ms": 170,
+    "bytes": 311997,
+    "info": {
+      "shots": 5,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0472,
+          1,
+          true
+        ],
+        [
+          0.0832,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "m4-ads-dusk-f000.png",
+    "title": "GW-4 Carbine · ADS Rest · dusk",
+    "weapon": "m4",
+    "pose": "ads",
+    "light": "dusk",
+    "step": "f000",
+    "ms": 0
+  },
+  {
+    "file": "m4-ads-dusk-f025.png",
+    "title": "GW-4 Carbine · ADS 25ms · dusk",
+    "weapon": "m4",
+    "pose": "ads",
+    "light": "dusk",
+    "step": "f025",
+    "ms": 25
+  },
+  {
+    "file": "ak-hip-dusk-f008.png",
+    "title": "KR-7 Rifle · Hip · dusk · 8 ms (Break/Fired)",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f008",
+    "ms": 8,
+    "bytes": 314991,
+    "info": {
+      "shots": 5,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.1749,
+          0.791,
+          true
+        ],
+        [
+          0.2021,
+          1,
+          true
+        ]
+      ],
+      "work": -0.0116
+    }
+  },
+  {
+    "file": "ak-hip-dusk-f017.png",
+    "title": "KR-7 Rifle · Hip · dusk · 17 ms",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f017",
+    "ms": 17,
+    "bytes": 314954,
+    "info": {
+      "shots": 5,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.1609,
+          0.286,
+          true
+        ],
+        [
+          0.1742,
+          1,
+          true
+        ]
+      ],
+      "work": -0.0396
+    }
+  },
+  {
+    "file": "ak-hip-dusk-f025.png",
+    "title": "KR-7 Rifle · Hip · dusk · 25 ms (Peak Stroke)",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f025",
+    "ms": 25,
+    "bytes": 309164,
+    "info": {
+      "shots": 5,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.153,
+          0,
+          false
+        ],
+        [
+          0.1554,
+          0.463,
+          true
+        ]
+      ],
+      "work": -0.0611
+    }
+  },
+  {
+    "file": "ak-hip-dusk-f033.png",
+    "title": "KR-7 Rifle · Hip · dusk · 33 ms",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f033",
+    "ms": 33,
+    "bytes": 313940,
+    "info": {
+      "shots": 5,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.153,
+          0,
+          false
+        ],
+        [
+          0.153,
+          0,
+          false
+        ]
+      ],
+      "work": -0.066
+    }
+  },
+  {
+    "file": "ak-hip-dusk-f042.png",
+    "title": "KR-7 Rifle · Hip · dusk · 42 ms",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f042",
+    "ms": 42,
+    "bytes": 313904,
+    "info": {
+      "shots": 5,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.153,
+          0,
+          false
+        ],
+        [
+          0.1541,
+          0.2,
+          true
+        ]
+      ],
+      "work": -0.0639
+    }
+  },
+  {
+    "file": "ak-hip-dusk-f050.png",
+    "title": "KR-7 Rifle · Hip · dusk · 50 ms",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f050",
+    "ms": 50,
+    "bytes": 315593,
+    "info": {
+      "shots": 5,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.153,
+          0,
+          false
+        ],
+        [
+          0.1582,
+          0.977,
+          true
+        ]
+      ],
+      "work": -0.0557
+    }
+  },
+  {
+    "file": "ak-hip-dusk-f067.png",
+    "title": "KR-7 Rifle · Hip · dusk · 67 ms",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f067",
+    "ms": 67,
+    "bytes": 308680,
+    "info": {
+      "shots": 5,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.1669,
+          0.5,
+          true
+        ],
+        [
+          0.186,
+          1,
+          true
+        ]
+      ],
+      "work": -0.0277
+    }
+  },
+  {
+    "file": "ak-hip-dusk-f083.png",
+    "title": "KR-7 Rifle · Hip · dusk · 83 ms",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f083",
+    "ms": 83,
+    "bytes": 312624,
+    "info": {
+      "shots": 5,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.1784,
+          0.918,
+          true
+        ],
+        [
+          0.2092,
+          1,
+          true
+        ]
+      ],
+      "work": -0.0046
+    }
+  },
+  {
+    "file": "ak-hip-dusk-f100.png",
+    "title": "KR-7 Rifle · Hip · dusk · 100 ms",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f100",
+    "ms": 100,
+    "bytes": 314110,
+    "info": {
+      "shots": 5,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.1807,
+          1,
+          true
+        ],
+        [
+          0.2137,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "ak-hip-dusk-f130.png",
+    "title": "KR-7 Rifle · Hip · dusk · 130 ms",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f130",
+    "ms": 130,
+    "bytes": 310495,
+    "info": {
+      "shots": 5,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.1807,
+          1,
+          true
+        ],
+        [
+          0.2137,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "ak-hip-dusk-f170.png",
+    "title": "KR-7 Rifle · Hip · dusk · 170 ms (Reset)",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f170",
+    "ms": 170,
+    "bytes": 311242,
+    "info": {
+      "shots": 5,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.1807,
+          1,
+          true
+        ],
+        [
+          0.2137,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "ak-ads-dusk-f000.png",
+    "title": "KR-7 Rifle · ADS Rest · dusk",
+    "weapon": "ak",
+    "pose": "ads",
+    "light": "dusk",
+    "step": "f000",
+    "ms": 0
+  },
+  {
+    "file": "ak-ads-dusk-f025.png",
+    "title": "KR-7 Rifle · ADS 25ms · dusk",
+    "weapon": "ak",
+    "pose": "ads",
+    "light": "dusk",
+    "step": "f025",
+    "ms": 25
+  },
+  {
+    "file": "uzi-hip-dusk-f008.png",
+    "title": "Wasp / Uzi SMG · Hip · dusk · 8 ms (Break/Fired)",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f008",
+    "ms": 8,
+    "bytes": 310583,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0727,
+          0.581,
+          true
+        ],
+        [
+          0.0883,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "uzi-hip-dusk-f017.png",
+    "title": "Wasp / Uzi SMG · Hip · dusk · 17 ms",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f017",
+    "ms": 17,
+    "bytes": 309261,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.061,
+          0,
+          false
+        ],
+        [
+          0.0625,
+          0.38,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "uzi-hip-dusk-f025.png",
+    "title": "Wasp / Uzi SMG · Hip · dusk · 25 ms (Peak Stroke)",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f025",
+    "ms": 25,
+    "bytes": 307906,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.061,
+          0,
+          false
+        ],
+        [
+          0.061,
+          0.013,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "uzi-hip-dusk-f033.png",
+    "title": "Wasp / Uzi SMG · Hip · dusk · 33 ms",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f033",
+    "ms": 33,
+    "bytes": 307979,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.061,
+          0,
+          false
+        ],
+        [
+          0.0644,
+          0.886,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "uzi-hip-dusk-f042.png",
+    "title": "Wasp / Uzi SMG · Hip · dusk · 42 ms",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f042",
+    "ms": 42,
+    "bytes": 308715,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0682,
+          0.358,
+          true
+        ],
+        [
+          0.0793,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "uzi-hip-dusk-f050.png",
+    "title": "Wasp / Uzi SMG · Hip · dusk · 50 ms",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f050",
+    "ms": 50,
+    "bytes": 308222,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0755,
+          0.719,
+          true
+        ],
+        [
+          0.0938,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "uzi-hip-dusk-f067.png",
+    "title": "Wasp / Uzi SMG · Hip · dusk · 67 ms",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f067",
+    "ms": 67,
+    "bytes": 306805,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0812,
+          1,
+          true
+        ],
+        [
+          0.1052,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "uzi-hip-dusk-f083.png",
+    "title": "Wasp / Uzi SMG · Hip · dusk · 83 ms",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f083",
+    "ms": 83,
+    "bytes": 309276,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0812,
+          1,
+          true
+        ],
+        [
+          0.1052,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "uzi-hip-dusk-f100.png",
+    "title": "Wasp / Uzi SMG · Hip · dusk · 100 ms",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f100",
+    "ms": 100,
+    "bytes": 307930,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0812,
+          1,
+          true
+        ],
+        [
+          0.1052,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "uzi-hip-dusk-f130.png",
+    "title": "Wasp / Uzi SMG · Hip · dusk · 130 ms",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f130",
+    "ms": 130,
+    "bytes": 309472,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0812,
+          1,
+          true
+        ],
+        [
+          0.1052,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "uzi-hip-dusk-f170.png",
+    "title": "Wasp / Uzi SMG · Hip · dusk · 170 ms (Reset)",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f170",
+    "ms": 170,
+    "bytes": 301890,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0812,
+          1,
+          true
+        ],
+        [
+          0.1052,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "revolver-hip-dusk-f008.png",
+    "title": ".44 Magnum Revolver · Hip · dusk · 8 ms (Break/Fired)",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f008",
+    "ms": 8,
+    "bytes": 310034,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "trig": 0.36,
+      "ham": 0
+    }
+  },
+  {
+    "file": "revolver-hip-dusk-f017.png",
+    "title": ".44 Magnum Revolver · Hip · dusk · 17 ms",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f017",
+    "ms": 17,
+    "bytes": 302905,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "trig": 0.36,
+      "ham": 0
+    }
+  },
+  {
+    "file": "revolver-hip-dusk-f025.png",
+    "title": ".44 Magnum Revolver · Hip · dusk · 25 ms (Peak Stroke)",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f025",
+    "ms": 25,
+    "bytes": 309535,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "trig": 0.36,
+      "ham": 0
+    }
+  },
+  {
+    "file": "revolver-hip-dusk-f033.png",
+    "title": ".44 Magnum Revolver · Hip · dusk · 33 ms",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f033",
+    "ms": 33,
+    "bytes": 309899,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "trig": 0.36,
+      "ham": 0
+    }
+  },
+  {
+    "file": "revolver-hip-dusk-f042.png",
+    "title": ".44 Magnum Revolver · Hip · dusk · 42 ms",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f042",
+    "ms": 42,
+    "bytes": 311422,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "trig": 0.36,
+      "ham": 0
+    }
+  },
+  {
+    "file": "revolver-hip-dusk-f050.png",
+    "title": ".44 Magnum Revolver · Hip · dusk · 50 ms",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f050",
+    "ms": 50,
+    "bytes": 305324,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "trig": 0.358,
+      "ham": 0
+    }
+  },
+  {
+    "file": "revolver-hip-dusk-f067.png",
+    "title": ".44 Magnum Revolver · Hip · dusk · 67 ms",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f067",
+    "ms": 67,
+    "bytes": 307740,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "trig": 0.326,
+      "ham": 0
+    }
+  },
+  {
+    "file": "revolver-hip-dusk-f083.png",
+    "title": ".44 Magnum Revolver · Hip · dusk · 83 ms",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f083",
+    "ms": 83,
+    "bytes": 316337,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "trig": 0.268,
+      "ham": 0
+    }
+  },
+  {
+    "file": "revolver-hip-dusk-f100.png",
+    "title": ".44 Magnum Revolver · Hip · dusk · 100 ms",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f100",
+    "ms": 100,
+    "bytes": 317689,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "trig": 0.192,
+      "ham": 0
+    }
+  },
+  {
+    "file": "revolver-hip-dusk-f130.png",
+    "title": ".44 Magnum Revolver · Hip · dusk · 130 ms",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f130",
+    "ms": 130,
+    "bytes": 318626,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "trig": 0.061,
+      "ham": 0
+    }
+  },
+  {
+    "file": "revolver-hip-dusk-f170.png",
+    "title": ".44 Magnum Revolver · Hip · dusk · 170 ms (Reset)",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f170",
+    "ms": 170,
+    "bytes": 314538,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "trig": 0,
+      "ham": 0
+    }
+  },
+  {
+    "file": "aa12-hip-dusk-f008.png",
+    "title": "AA-12 Breacher Combat Shotgun · Hip · dusk · 8 ms (Break/Fired)",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f008",
+    "ms": 8,
+    "bytes": 294283,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0743,
+          0.894,
+          true
+        ],
+        [
+          0.1136,
+          1,
+          true
+        ],
+        [
+          0.1196,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "aa12-hip-dusk-f017.png",
+    "title": "AA-12 Breacher Combat Shotgun · Hip · dusk · 17 ms",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f017",
+    "ms": 17,
+    "bytes": 299547,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0601,
+          0.488,
+          true
+        ],
+        [
+          0.0852,
+          1,
+          true
+        ],
+        [
+          0.0912,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "aa12-hip-dusk-f025.png",
+    "title": "AA-12 Breacher Combat Shotgun · Hip · dusk · 25 ms (Peak Stroke)",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f025",
+    "ms": 25,
+    "bytes": 300347,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0453,
+          0.066,
+          true
+        ],
+        [
+          0.0556,
+          1,
+          true
+        ],
+        [
+          0.0616,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "aa12-hip-dusk-f033.png",
+    "title": "AA-12 Breacher Combat Shotgun · Hip · dusk · 33 ms",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f033",
+    "ms": 33,
+    "bytes": 295421,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.044,
+          0.029,
+          false
+        ],
+        [
+          0.0321,
+          1,
+          false
+        ],
+        [
+          0.0381,
+          1,
+          false
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "aa12-hip-dusk-f042.png",
+    "title": "AA-12 Breacher Combat Shotgun · Hip · dusk · 42 ms",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f042",
+    "ms": 42,
+    "bytes": 293165,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.044,
+          0.029,
+          false
+        ],
+        [
+          0.0241,
+          1,
+          false
+        ],
+        [
+          0.0301,
+          1,
+          false
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "aa12-hip-dusk-f050.png",
+    "title": "AA-12 Breacher Combat Shotgun · Hip · dusk · 50 ms",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f050",
+    "ms": 50,
+    "bytes": 299820,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.044,
+          0.029,
+          false
+        ],
+        [
+          0.0274,
+          1,
+          false
+        ],
+        [
+          0.0334,
+          1,
+          false
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "aa12-hip-dusk-f067.png",
+    "title": "AA-12 Breacher Combat Shotgun · Hip · dusk · 67 ms",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f067",
+    "ms": 67,
+    "bytes": 300016,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.044,
+          0.029,
+          false
+        ],
+        [
+          0.0456,
+          1,
+          false
+        ],
+        [
+          0.0516,
+          1,
+          false
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "aa12-hip-dusk-f083.png",
+    "title": "AA-12 Breacher Combat Shotgun · Hip · dusk · 83 ms",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f083",
+    "ms": 83,
+    "bytes": 294366,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0528,
+          0.281,
+          true
+        ],
+        [
+          0.0707,
+          1,
+          true
+        ],
+        [
+          0.0767,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "aa12-hip-dusk-f100.png",
+    "title": "AA-12 Breacher Combat Shotgun · Hip · dusk · 100 ms",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f100",
+    "ms": 100,
+    "bytes": 298236,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0665,
+          0.672,
+          true
+        ],
+        [
+          0.0981,
+          1,
+          true
+        ],
+        [
+          0.1041,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "aa12-hip-dusk-f130.png",
+    "title": "AA-12 Breacher Combat Shotgun · Hip · dusk · 130 ms",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f130",
+    "ms": 130,
+    "bytes": 301066,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0795,
+          1.043,
+          true
+        ],
+        [
+          0.124,
+          1,
+          true
+        ],
+        [
+          0.13,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "aa12-hip-dusk-f170.png",
+    "title": "AA-12 Breacher Combat Shotgun · Hip · dusk · 170 ms (Reset)",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f170",
+    "ms": 170,
+    "bytes": 295400,
+    "info": {
+      "shots": 3,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0795,
+          1.043,
+          true
+        ],
+        [
+          0.124,
+          1,
+          true
+        ],
+        [
+          0.13,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "pistol-hip-night-f008.png",
+    "title": "Issue Sidearm Pistol · Hip · night · 8 ms (Break/Fired)",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "night",
+    "step": "f008",
+    "ms": 8,
+    "bytes": 247403,
+    "info": {
+      "shots": 4,
+      "ads": 0,
+      "raise": 1,
+      "work": -0.0229,
+      "slide": 0.0271
+    }
+  },
+  {
+    "file": "pistol-hip-night-f017.png",
+    "title": "Issue Sidearm Pistol · Hip · night · 17 ms",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "night",
+    "step": "f017",
+    "ms": 17,
+    "bytes": 248757,
+    "info": {
+      "shots": 4,
+      "ads": 0,
+      "raise": 1,
+      "work": -0.0545,
+      "slide": -0.0045
+    }
+  },
+  {
+    "file": "pistol-hip-night-f025.png",
+    "title": "Issue Sidearm Pistol · Hip · night · 25 ms (Peak Stroke)",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "night",
+    "step": "f025",
+    "ms": 25,
+    "bytes": 249424,
+    "info": {
+      "shots": 4,
+      "ads": 0,
+      "raise": 1,
+      "work": -0.0527,
+      "slide": -0.0027
+    }
+  },
+  {
+    "file": "pistol-hip-night-f033.png",
+    "title": "Issue Sidearm Pistol · Hip · night · 33 ms",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "night",
+    "step": "f033",
+    "ms": 33,
+    "bytes": 248810,
+    "info": {
+      "shots": 4,
+      "ads": 0,
+      "raise": 1,
+      "work": -0.0456,
+      "slide": 0.0044
+    }
+  },
+  {
+    "file": "pistol-hip-night-f042.png",
+    "title": "Issue Sidearm Pistol · Hip · night · 42 ms",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "night",
+    "step": "f042",
+    "ms": 42,
+    "bytes": 250741,
+    "info": {
+      "shots": 4,
+      "ads": 0,
+      "raise": 1,
+      "work": -0.034,
+      "slide": 0.016
+    }
+  },
+  {
+    "file": "pistol-hip-night-f050.png",
+    "title": "Issue Sidearm Pistol · Hip · night · 50 ms",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "night",
+    "step": "f050",
+    "ms": 50,
+    "bytes": 251815,
+    "info": {
+      "shots": 4,
+      "ads": 0,
+      "raise": 1,
+      "work": -0.0225,
+      "slide": 0.0275
+    }
+  },
+  {
+    "file": "pistol-hip-night-f067.png",
+    "title": "Issue Sidearm Pistol · Hip · night · 67 ms",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "night",
+    "step": "f067",
+    "ms": 67,
+    "bytes": 253161,
+    "info": {
+      "shots": 4,
+      "ads": 0,
+      "raise": 1,
+      "work": -0.0029,
+      "slide": 0.0471
+    }
+  },
+  {
+    "file": "pistol-hip-night-f083.png",
+    "title": "Issue Sidearm Pistol · Hip · night · 83 ms",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "night",
+    "step": "f083",
+    "ms": 83,
+    "bytes": 252737,
+    "info": {
+      "shots": 4,
+      "ads": 0,
+      "raise": 1,
+      "work": 0,
+      "slide": 0.05
+    }
+  },
+  {
+    "file": "pistol-hip-night-f100.png",
+    "title": "Issue Sidearm Pistol · Hip · night · 100 ms",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "night",
+    "step": "f100",
+    "ms": 100,
+    "bytes": 253934,
+    "info": {
+      "shots": 4,
+      "ads": 0,
+      "raise": 1,
+      "work": 0,
+      "slide": 0.05
+    }
+  },
+  {
+    "file": "pistol-hip-night-f130.png",
+    "title": "Issue Sidearm Pistol · Hip · night · 130 ms",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "night",
+    "step": "f130",
+    "ms": 130,
+    "bytes": 253572,
+    "info": {
+      "shots": 4,
+      "ads": 0,
+      "raise": 1,
+      "work": 0,
+      "slide": 0.05
+    }
+  },
+  {
+    "file": "pistol-hip-night-f170.png",
+    "title": "Issue Sidearm Pistol · Hip · night · 170 ms (Reset)",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "night",
+    "step": "f170",
+    "ms": 170,
+    "bytes": 251884,
+    "info": {
+      "shots": 4,
+      "ads": 0,
+      "raise": 1,
+      "work": 0,
+      "slide": 0.05
+    }
+  },
+  {
+    "file": "m4-hip-night-f008.png",
+    "title": "GW-4 Carbine · Hip · night · 8 ms (Break/Fired)",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "night",
+    "step": "f008",
+    "ms": 8,
+    "bytes": 243127,
+    "info": {
+      "shots": 7,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0401,
+          0.764,
+          true
+        ],
+        [
+          0.069,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "m4-hip-night-f017.png",
+    "title": "GW-4 Carbine · Hip · night · 17 ms",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "night",
+    "step": "f017",
+    "ms": 17,
+    "bytes": 241765,
+    "info": {
+      "shots": 7,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0235,
+          0.216,
+          true
+        ],
+        [
+          0.0358,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "m4-hip-night-f025.png",
+    "title": "GW-4 Carbine · Hip · night · 25 ms (Peak Stroke)",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "night",
+    "step": "f025",
+    "ms": 25,
+    "bytes": 243733,
+    "info": {
+      "shots": 7,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.017,
+          0,
+          false
+        ],
+        [
+          0.0182,
+          0.2,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "m4-hip-night-f033.png",
+    "title": "GW-4 Carbine · Hip · night · 33 ms",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "night",
+    "step": "f033",
+    "ms": 33,
+    "bytes": 243203,
+    "info": {
+      "shots": 7,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.017,
+          0,
+          false
+        ],
+        [
+          0.017,
+          0,
+          false
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "m4-hip-night-f042.png",
+    "title": "GW-4 Carbine · Hip · night · 42 ms",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "night",
+    "step": "f042",
+    "ms": 42,
+    "bytes": 243365,
+    "info": {
+      "shots": 7,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.017,
+          0,
+          false
+        ],
+        [
+          0.0194,
+          0.413,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "m4-hip-night-f050.png",
+    "title": "GW-4 Carbine · Hip · night · 50 ms",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "night",
+    "step": "f050",
+    "ms": 50,
+    "bytes": 244236,
+    "info": {
+      "shots": 7,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0196,
+          0.088,
+          true
+        ],
+        [
+          0.0281,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "m4-hip-night-f067.png",
+    "title": "GW-4 Carbine · Hip · night · 67 ms",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "night",
+    "step": "f067",
+    "ms": 67,
+    "bytes": 243951,
+    "info": {
+      "shots": 7,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.037,
+          0.66,
+          true
+        ],
+        [
+          0.0627,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "m4-hip-night-f083.png",
+    "title": "GW-4 Carbine · Hip · night · 83 ms",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "night",
+    "step": "f083",
+    "ms": 83,
+    "bytes": 243461,
+    "info": {
+      "shots": 7,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0471,
+          0.995,
+          true
+        ],
+        [
+          0.0829,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "m4-hip-night-f100.png",
+    "title": "GW-4 Carbine · Hip · night · 100 ms",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "night",
+    "step": "f100",
+    "ms": 100,
+    "bytes": 244238,
+    "info": {
+      "shots": 7,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0472,
+          1,
+          true
+        ],
+        [
+          0.0832,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "m4-hip-night-f130.png",
+    "title": "GW-4 Carbine · Hip · night · 130 ms",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "night",
+    "step": "f130",
+    "ms": 130,
+    "bytes": 244595,
+    "info": {
+      "shots": 7,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0472,
+          1,
+          true
+        ],
+        [
+          0.0832,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "m4-hip-night-f170.png",
+    "title": "GW-4 Carbine · Hip · night · 170 ms (Reset)",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "night",
+    "step": "f170",
+    "ms": 170,
+    "bytes": 245225,
+    "info": {
+      "shots": 7,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0472,
+          1,
+          true
+        ],
+        [
+          0.0832,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "m4-ads-night-f000.png",
+    "title": "GW-4 Carbine · ADS Rest · night",
+    "weapon": "m4",
+    "pose": "ads",
+    "light": "night",
+    "step": "f000",
+    "ms": 0
+  },
+  {
+    "file": "m4-ads-night-f025.png",
+    "title": "GW-4 Carbine · ADS 25ms · night",
+    "weapon": "m4",
+    "pose": "ads",
+    "light": "night",
+    "step": "f025",
+    "ms": 25
+  },
+  {
+    "file": "ak-hip-night-f008.png",
+    "title": "KR-7 Rifle · Hip · night · 8 ms (Break/Fired)",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "night",
+    "step": "f008",
+    "ms": 8,
+    "bytes": 242666,
+    "info": {
+      "shots": 7,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.1749,
+          0.791,
+          true
+        ],
+        [
+          0.2021,
+          1,
+          true
+        ]
+      ],
+      "work": -0.0116
+    }
+  },
+  {
+    "file": "ak-hip-night-f017.png",
+    "title": "KR-7 Rifle · Hip · night · 17 ms",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "night",
+    "step": "f017",
+    "ms": 17,
+    "bytes": 243940,
+    "info": {
+      "shots": 7,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.1609,
+          0.286,
+          true
+        ],
+        [
+          0.1742,
+          1,
+          true
+        ]
+      ],
+      "work": -0.0396
+    }
+  },
+  {
+    "file": "ak-hip-night-f025.png",
+    "title": "KR-7 Rifle · Hip · night · 25 ms (Peak Stroke)",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "night",
+    "step": "f025",
+    "ms": 25,
+    "bytes": 244963,
+    "info": {
+      "shots": 7,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.153,
+          0,
+          false
+        ],
+        [
+          0.1554,
+          0.463,
+          true
+        ]
+      ],
+      "work": -0.0611
+    }
+  },
+  {
+    "file": "ak-hip-night-f033.png",
+    "title": "KR-7 Rifle · Hip · night · 33 ms",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "night",
+    "step": "f033",
+    "ms": 33,
+    "bytes": 244286,
+    "info": {
+      "shots": 7,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.153,
+          0,
+          false
+        ],
+        [
+          0.153,
+          0,
+          false
+        ]
+      ],
+      "work": -0.066
+    }
+  },
+  {
+    "file": "ak-hip-night-f042.png",
+    "title": "KR-7 Rifle · Hip · night · 42 ms",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "night",
+    "step": "f042",
+    "ms": 42,
+    "bytes": 245559,
+    "info": {
+      "shots": 7,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.153,
+          0,
+          false
+        ],
+        [
+          0.1541,
+          0.2,
+          true
+        ]
+      ],
+      "work": -0.0639
+    }
+  },
+  {
+    "file": "ak-hip-night-f050.png",
+    "title": "KR-7 Rifle · Hip · night · 50 ms",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "night",
+    "step": "f050",
+    "ms": 50,
+    "bytes": 243889,
+    "info": {
+      "shots": 7,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.153,
+          0,
+          false
+        ],
+        [
+          0.1582,
+          0.977,
+          true
+        ]
+      ],
+      "work": -0.0557
+    }
+  },
+  {
+    "file": "ak-hip-night-f067.png",
+    "title": "KR-7 Rifle · Hip · night · 67 ms",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "night",
+    "step": "f067",
+    "ms": 67,
+    "bytes": 243243,
+    "info": {
+      "shots": 7,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.1669,
+          0.5,
+          true
+        ],
+        [
+          0.186,
+          1,
+          true
+        ]
+      ],
+      "work": -0.0277
+    }
+  },
+  {
+    "file": "ak-hip-night-f083.png",
+    "title": "KR-7 Rifle · Hip · night · 83 ms",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "night",
+    "step": "f083",
+    "ms": 83,
+    "bytes": 242608,
+    "info": {
+      "shots": 7,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.1784,
+          0.918,
+          true
+        ],
+        [
+          0.2092,
+          1,
+          true
+        ]
+      ],
+      "work": -0.0046
+    }
+  },
+  {
+    "file": "ak-hip-night-f100.png",
+    "title": "KR-7 Rifle · Hip · night · 100 ms",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "night",
+    "step": "f100",
+    "ms": 100,
+    "bytes": 242650,
+    "info": {
+      "shots": 7,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.1807,
+          1,
+          true
+        ],
+        [
+          0.2137,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "ak-hip-night-f130.png",
+    "title": "KR-7 Rifle · Hip · night · 130 ms",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "night",
+    "step": "f130",
+    "ms": 130,
+    "bytes": 242927,
+    "info": {
+      "shots": 7,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.1807,
+          1,
+          true
+        ],
+        [
+          0.2137,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "ak-hip-night-f170.png",
+    "title": "KR-7 Rifle · Hip · night · 170 ms (Reset)",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "night",
+    "step": "f170",
+    "ms": 170,
+    "bytes": 239940,
+    "info": {
+      "shots": 7,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.1807,
+          1,
+          true
+        ],
+        [
+          0.2137,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "ak-ads-night-f000.png",
+    "title": "KR-7 Rifle · ADS Rest · night",
+    "weapon": "ak",
+    "pose": "ads",
+    "light": "night",
+    "step": "f000",
+    "ms": 0
+  },
+  {
+    "file": "ak-ads-night-f025.png",
+    "title": "KR-7 Rifle · ADS 25ms · night",
+    "weapon": "ak",
+    "pose": "ads",
+    "light": "night",
+    "step": "f025",
+    "ms": 25
+  },
+  {
+    "file": "uzi-hip-night-f008.png",
+    "title": "Wasp / Uzi SMG · Hip · night · 8 ms (Break/Fired)",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "night",
+    "step": "f008",
+    "ms": 8,
+    "bytes": 232368,
+    "info": {
+      "shots": 4,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0727,
+          0.581,
+          true
+        ],
+        [
+          0.0883,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "uzi-hip-night-f017.png",
+    "title": "Wasp / Uzi SMG · Hip · night · 17 ms",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "night",
+    "step": "f017",
+    "ms": 17,
+    "bytes": 232188,
+    "info": {
+      "shots": 4,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.061,
+          0,
+          false
+        ],
+        [
+          0.0625,
+          0.38,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "uzi-hip-night-f025.png",
+    "title": "Wasp / Uzi SMG · Hip · night · 25 ms (Peak Stroke)",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "night",
+    "step": "f025",
+    "ms": 25,
+    "bytes": 231012,
+    "info": {
+      "shots": 4,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.061,
+          0,
+          false
+        ],
+        [
+          0.061,
+          0.013,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "uzi-hip-night-f033.png",
+    "title": "Wasp / Uzi SMG · Hip · night · 33 ms",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "night",
+    "step": "f033",
+    "ms": 33,
+    "bytes": 233017,
+    "info": {
+      "shots": 4,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.061,
+          0,
+          false
+        ],
+        [
+          0.0644,
+          0.886,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "uzi-hip-night-f042.png",
+    "title": "Wasp / Uzi SMG · Hip · night · 42 ms",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "night",
+    "step": "f042",
+    "ms": 42,
+    "bytes": 235244,
+    "info": {
+      "shots": 4,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0682,
+          0.358,
+          true
+        ],
+        [
+          0.0793,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "uzi-hip-night-f050.png",
+    "title": "Wasp / Uzi SMG · Hip · night · 50 ms",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "night",
+    "step": "f050",
+    "ms": 50,
+    "bytes": 232822,
+    "info": {
+      "shots": 4,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0755,
+          0.719,
+          true
+        ],
+        [
+          0.0938,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "uzi-hip-night-f067.png",
+    "title": "Wasp / Uzi SMG · Hip · night · 67 ms",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "night",
+    "step": "f067",
+    "ms": 67,
+    "bytes": 233603,
+    "info": {
+      "shots": 4,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0812,
+          1,
+          true
+        ],
+        [
+          0.1052,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "uzi-hip-night-f083.png",
+    "title": "Wasp / Uzi SMG · Hip · night · 83 ms",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "night",
+    "step": "f083",
+    "ms": 83,
+    "bytes": 234176,
+    "info": {
+      "shots": 4,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0812,
+          1,
+          true
+        ],
+        [
+          0.1052,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "uzi-hip-night-f100.png",
+    "title": "Wasp / Uzi SMG · Hip · night · 100 ms",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "night",
+    "step": "f100",
+    "ms": 100,
+    "bytes": 235642,
+    "info": {
+      "shots": 4,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0812,
+          1,
+          true
+        ],
+        [
+          0.1052,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "uzi-hip-night-f130.png",
+    "title": "Wasp / Uzi SMG · Hip · night · 130 ms",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "night",
+    "step": "f130",
+    "ms": 130,
+    "bytes": 235507,
+    "info": {
+      "shots": 4,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0812,
+          1,
+          true
+        ],
+        [
+          0.1052,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "uzi-hip-night-f170.png",
+    "title": "Wasp / Uzi SMG · Hip · night · 170 ms (Reset)",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "night",
+    "step": "f170",
+    "ms": 170,
+    "bytes": 234338,
+    "info": {
+      "shots": 4,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0812,
+          1,
+          true
+        ],
+        [
+          0.1052,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "revolver-hip-night-f008.png",
+    "title": ".44 Magnum Revolver · Hip · night · 8 ms (Break/Fired)",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "night",
+    "step": "f008",
+    "ms": 8,
+    "bytes": 234039,
+    "info": {
+      "shots": 4,
+      "ads": 0,
+      "raise": 1,
+      "trig": 0.36,
+      "ham": 0
+    }
+  },
+  {
+    "file": "revolver-hip-night-f017.png",
+    "title": ".44 Magnum Revolver · Hip · night · 17 ms",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "night",
+    "step": "f017",
+    "ms": 17,
+    "bytes": 234758,
+    "info": {
+      "shots": 4,
+      "ads": 0,
+      "raise": 1,
+      "trig": 0.36,
+      "ham": 0
+    }
+  },
+  {
+    "file": "revolver-hip-night-f025.png",
+    "title": ".44 Magnum Revolver · Hip · night · 25 ms (Peak Stroke)",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "night",
+    "step": "f025",
+    "ms": 25,
+    "bytes": 233711,
+    "info": {
+      "shots": 4,
+      "ads": 0,
+      "raise": 1,
+      "trig": 0.36,
+      "ham": 0
+    }
+  },
+  {
+    "file": "revolver-hip-night-f033.png",
+    "title": ".44 Magnum Revolver · Hip · night · 33 ms",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "night",
+    "step": "f033",
+    "ms": 33,
+    "bytes": 233999,
+    "info": {
+      "shots": 4,
+      "ads": 0,
+      "raise": 1,
+      "trig": 0.36,
+      "ham": 0
+    }
+  },
+  {
+    "file": "revolver-hip-night-f042.png",
+    "title": ".44 Magnum Revolver · Hip · night · 42 ms",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "night",
+    "step": "f042",
+    "ms": 42,
+    "bytes": 234160,
+    "info": {
+      "shots": 4,
+      "ads": 0,
+      "raise": 1,
+      "trig": 0.36,
+      "ham": 0
+    }
+  },
+  {
+    "file": "revolver-hip-night-f050.png",
+    "title": ".44 Magnum Revolver · Hip · night · 50 ms",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "night",
+    "step": "f050",
+    "ms": 50,
+    "bytes": 234326,
+    "info": {
+      "shots": 4,
+      "ads": 0,
+      "raise": 1,
+      "trig": 0.358,
+      "ham": 0
+    }
+  },
+  {
+    "file": "revolver-hip-night-f067.png",
+    "title": ".44 Magnum Revolver · Hip · night · 67 ms",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "night",
+    "step": "f067",
+    "ms": 67,
+    "bytes": 235383,
+    "info": {
+      "shots": 4,
+      "ads": 0,
+      "raise": 1,
+      "trig": 0.326,
+      "ham": 0
+    }
+  },
+  {
+    "file": "revolver-hip-night-f083.png",
+    "title": ".44 Magnum Revolver · Hip · night · 83 ms",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "night",
+    "step": "f083",
+    "ms": 83,
+    "bytes": 235552,
+    "info": {
+      "shots": 4,
+      "ads": 0,
+      "raise": 1,
+      "trig": 0.268,
+      "ham": 0
+    }
+  },
+  {
+    "file": "revolver-hip-night-f100.png",
+    "title": ".44 Magnum Revolver · Hip · night · 100 ms",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "night",
+    "step": "f100",
+    "ms": 100,
+    "bytes": 237434,
+    "info": {
+      "shots": 4,
+      "ads": 0,
+      "raise": 1,
+      "trig": 0.192,
+      "ham": 0
+    }
+  },
+  {
+    "file": "revolver-hip-night-f130.png",
+    "title": ".44 Magnum Revolver · Hip · night · 130 ms",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "night",
+    "step": "f130",
+    "ms": 130,
+    "bytes": 239682,
+    "info": {
+      "shots": 4,
+      "ads": 0,
+      "raise": 1,
+      "trig": 0.061,
+      "ham": 0
+    }
+  },
+  {
+    "file": "revolver-hip-night-f170.png",
+    "title": ".44 Magnum Revolver · Hip · night · 170 ms (Reset)",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "night",
+    "step": "f170",
+    "ms": 170,
+    "bytes": 240491,
+    "info": {
+      "shots": 4,
+      "ads": 0,
+      "raise": 1,
+      "trig": 0,
+      "ham": 0
+    }
+  },
+  {
+    "file": "aa12-hip-night-f008.png",
+    "title": "AA-12 Breacher Combat Shotgun · Hip · night · 8 ms (Break/Fired)",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "night",
+    "step": "f008",
+    "ms": 8,
+    "bytes": 234903,
+    "info": {
+      "shots": 4,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0743,
+          0.894,
+          true
+        ],
+        [
+          0.1136,
+          1,
+          true
+        ],
+        [
+          0.1196,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "aa12-hip-night-f017.png",
+    "title": "AA-12 Breacher Combat Shotgun · Hip · night · 17 ms",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "night",
+    "step": "f017",
+    "ms": 17,
+    "bytes": 231299,
+    "info": {
+      "shots": 4,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0601,
+          0.488,
+          true
+        ],
+        [
+          0.0852,
+          1,
+          true
+        ],
+        [
+          0.0912,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "aa12-hip-night-f025.png",
+    "title": "AA-12 Breacher Combat Shotgun · Hip · night · 25 ms (Peak Stroke)",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "night",
+    "step": "f025",
+    "ms": 25,
+    "bytes": 230196,
+    "info": {
+      "shots": 4,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0453,
+          0.066,
+          true
+        ],
+        [
+          0.0556,
+          1,
+          true
+        ],
+        [
+          0.0616,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "aa12-hip-night-f033.png",
+    "title": "AA-12 Breacher Combat Shotgun · Hip · night · 33 ms",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "night",
+    "step": "f033",
+    "ms": 33,
+    "bytes": 230638,
+    "info": {
+      "shots": 4,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.044,
+          0.029,
+          false
+        ],
+        [
+          0.0321,
+          1,
+          false
+        ],
+        [
+          0.0381,
+          1,
+          false
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "aa12-hip-night-f042.png",
+    "title": "AA-12 Breacher Combat Shotgun · Hip · night · 42 ms",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "night",
+    "step": "f042",
+    "ms": 42,
+    "bytes": 230892,
+    "info": {
+      "shots": 4,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.044,
+          0.029,
+          false
+        ],
+        [
+          0.0241,
+          1,
+          false
+        ],
+        [
+          0.0301,
+          1,
+          false
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "aa12-hip-night-f050.png",
+    "title": "AA-12 Breacher Combat Shotgun · Hip · night · 50 ms",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "night",
+    "step": "f050",
+    "ms": 50,
+    "bytes": 230743,
+    "info": {
+      "shots": 4,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.044,
+          0.029,
+          false
+        ],
+        [
+          0.0274,
+          1,
+          false
+        ],
+        [
+          0.0334,
+          1,
+          false
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "aa12-hip-night-f067.png",
+    "title": "AA-12 Breacher Combat Shotgun · Hip · night · 67 ms",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "night",
+    "step": "f067",
+    "ms": 67,
+    "bytes": 230279,
+    "info": {
+      "shots": 4,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.044,
+          0.029,
+          false
+        ],
+        [
+          0.0456,
+          1,
+          false
+        ],
+        [
+          0.0516,
+          1,
+          false
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "aa12-hip-night-f083.png",
+    "title": "AA-12 Breacher Combat Shotgun · Hip · night · 83 ms",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "night",
+    "step": "f083",
+    "ms": 83,
+    "bytes": 230985,
+    "info": {
+      "shots": 4,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0528,
+          0.281,
+          true
+        ],
+        [
+          0.0707,
+          1,
+          true
+        ],
+        [
+          0.0767,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "aa12-hip-night-f100.png",
+    "title": "AA-12 Breacher Combat Shotgun · Hip · night · 100 ms",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "night",
+    "step": "f100",
+    "ms": 100,
+    "bytes": 234755,
+    "info": {
+      "shots": 4,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0665,
+          0.672,
+          true
+        ],
+        [
+          0.0981,
+          1,
+          true
+        ],
+        [
+          0.1041,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "aa12-hip-night-f130.png",
+    "title": "AA-12 Breacher Combat Shotgun · Hip · night · 130 ms",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "night",
+    "step": "f130",
+    "ms": 130,
+    "bytes": 232922,
+    "info": {
+      "shots": 4,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0795,
+          1.043,
+          true
+        ],
+        [
+          0.124,
+          1,
+          true
+        ],
+        [
+          0.13,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "aa12-hip-night-f170.png",
+    "title": "AA-12 Breacher Combat Shotgun · Hip · night · 170 ms (Reset)",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "night",
+    "step": "f170",
+    "ms": 170,
+    "bytes": 232852,
+    "info": {
+      "shots": 4,
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0795,
+          1.043,
+          true
+        ],
+        [
+          0.124,
+          1,
+          true
+        ],
+        [
+          0.13,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "pistol-hip-noon-f000.png",
+    "title": "Issue Sidearm Pistol · Hip · noon · Rest (0 ms)",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f000",
+    "ms": 0,
+    "bytes": 415857,
+    "info": {
+      "ads": 0,
+      "raise": 1,
+      "work": 0,
+      "slide": 0.05
+    }
+  },
+  {
+    "file": "m4-hip-noon-f000.png",
+    "title": "GW-4 Carbine · Hip · noon · Rest (0 ms)",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f000",
+    "ms": 0,
+    "bytes": 385321,
+    "info": {
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0472,
+          1,
+          true
+        ],
+        [
+          0.0832,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "ak-hip-noon-f000.png",
+    "title": "KR-7 Rifle · Hip · noon · Rest (0 ms)",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f000",
+    "ms": 0,
+    "bytes": 378719,
+    "info": {
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.1807,
+          1,
+          true
+        ],
+        [
+          0.2137,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "uzi-hip-noon-f000.png",
+    "title": "Wasp / Uzi SMG · Hip · noon · Rest (0 ms)",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f000",
+    "ms": 0,
+    "bytes": 379660,
+    "info": {
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0812,
+          1,
+          true
+        ],
+        [
+          0.1052,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "revolver-hip-noon-f000.png",
+    "title": ".44 Magnum Revolver · Hip · noon · Rest (0 ms)",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f000",
+    "ms": 0,
+    "bytes": 393937,
+    "info": {
+      "ads": 0,
+      "raise": 1,
+      "trig": 0,
+      "ham": 0
+    }
+  },
+  {
+    "file": "aa12-hip-noon-f000.png",
+    "title": "AA-12 Breacher Combat Shotgun · Hip · noon · Rest (0 ms)",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "noon",
+    "step": "f000",
+    "ms": 0,
+    "bytes": 370288,
+    "info": {
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0795,
+          1.043,
+          true
+        ],
+        [
+          0.124,
+          1,
+          true
+        ],
+        [
+          0.13,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "pistol-hip-overcast-f000.png",
+    "title": "Issue Sidearm Pistol · Hip · overcast · Rest (0 ms)",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f000",
+    "ms": 0,
+    "bytes": 383158,
+    "info": {
+      "ads": 0,
+      "raise": 1,
+      "work": 0,
+      "slide": 0.05
+    }
+  },
+  {
+    "file": "m4-hip-overcast-f000.png",
+    "title": "GW-4 Carbine · Hip · overcast · Rest (0 ms)",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f000",
+    "ms": 0,
+    "bytes": 354752,
+    "info": {
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0472,
+          1,
+          true
+        ],
+        [
+          0.0832,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "ak-hip-overcast-f000.png",
+    "title": "KR-7 Rifle · Hip · overcast · Rest (0 ms)",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f000",
+    "ms": 0,
+    "bytes": 351144,
+    "info": {
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.1807,
+          1,
+          true
+        ],
+        [
+          0.2137,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "uzi-hip-overcast-f000.png",
+    "title": "Wasp / Uzi SMG · Hip · overcast · Rest (0 ms)",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f000",
+    "ms": 0,
+    "bytes": 343528,
+    "info": {
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0812,
+          1,
+          true
+        ],
+        [
+          0.1052,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "revolver-hip-overcast-f000.png",
+    "title": ".44 Magnum Revolver · Hip · overcast · Rest (0 ms)",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f000",
+    "ms": 0,
+    "bytes": 360635,
+    "info": {
+      "ads": 0,
+      "raise": 1,
+      "trig": 0,
+      "ham": 0
+    }
+  },
+  {
+    "file": "aa12-hip-overcast-f000.png",
+    "title": "AA-12 Breacher Combat Shotgun · Hip · overcast · Rest (0 ms)",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "overcast",
+    "step": "f000",
+    "ms": 0,
+    "bytes": 336835,
+    "info": {
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0795,
+          1.043,
+          true
+        ],
+        [
+          0.124,
+          1,
+          true
+        ],
+        [
+          0.13,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "pistol-hip-dusk-f000.png",
+    "title": "Issue Sidearm Pistol · Hip · dusk · Rest (0 ms)",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f000",
+    "ms": 0,
+    "bytes": 335991,
+    "info": {
+      "ads": 0,
+      "raise": 1,
+      "work": 0,
+      "slide": 0.05
+    }
+  },
+  {
+    "file": "m4-hip-dusk-f000.png",
+    "title": "GW-4 Carbine · Hip · dusk · Rest (0 ms)",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f000",
+    "ms": 0,
+    "bytes": 310661,
+    "info": {
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0472,
+          1,
+          true
+        ],
+        [
+          0.0832,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "ak-hip-dusk-f000.png",
+    "title": "KR-7 Rifle · Hip · dusk · Rest (0 ms)",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f000",
+    "ms": 0,
+    "bytes": 304001,
+    "info": {
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.1807,
+          1,
+          true
+        ],
+        [
+          0.2137,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "uzi-hip-dusk-f000.png",
+    "title": "Wasp / Uzi SMG · Hip · dusk · Rest (0 ms)",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f000",
+    "ms": 0,
+    "bytes": 301735,
+    "info": {
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0812,
+          1,
+          true
+        ],
+        [
+          0.1052,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "revolver-hip-dusk-f000.png",
+    "title": ".44 Magnum Revolver · Hip · dusk · Rest (0 ms)",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f000",
+    "ms": 0,
+    "bytes": 314771,
+    "info": {
+      "ads": 0,
+      "raise": 1,
+      "trig": 0,
+      "ham": 0
+    }
+  },
+  {
+    "file": "aa12-hip-dusk-f000.png",
+    "title": "AA-12 Breacher Combat Shotgun · Hip · dusk · Rest (0 ms)",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "dusk",
+    "step": "f000",
+    "ms": 0,
+    "bytes": 292957,
+    "info": {
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0795,
+          1.043,
+          true
+        ],
+        [
+          0.124,
+          1,
+          true
+        ],
+        [
+          0.13,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "pistol-hip-night-f000.png",
+    "title": "Issue Sidearm Pistol · Hip · night · Rest (0 ms)",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "night",
+    "step": "f000",
+    "ms": 0,
+    "bytes": 258476,
+    "info": {
+      "ads": 0,
+      "raise": 1,
+      "work": 0,
+      "slide": 0.05
+    }
+  },
+  {
+    "file": "m4-hip-night-f000.png",
+    "title": "GW-4 Carbine · Hip · night · Rest (0 ms)",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "night",
+    "step": "f000",
+    "ms": 0,
+    "bytes": 245122,
+    "info": {
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0472,
+          1,
+          true
+        ],
+        [
+          0.0832,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "ak-hip-night-f000.png",
+    "title": "KR-7 Rifle · Hip · night · Rest (0 ms)",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "night",
+    "step": "f000",
+    "ms": 0,
+    "bytes": 238257,
+    "info": {
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.1807,
+          1,
+          true
+        ],
+        [
+          0.2137,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "uzi-hip-night-f000.png",
+    "title": "Wasp / Uzi SMG · Hip · night · Rest (0 ms)",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "night",
+    "step": "f000",
+    "ms": 0,
+    "bytes": 230391,
+    "info": {
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0812,
+          1,
+          true
+        ],
+        [
+          0.1052,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  },
+  {
+    "file": "revolver-hip-night-f000.png",
+    "title": ".44 Magnum Revolver · Hip · night · Rest (0 ms)",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "night",
+    "step": "f000",
+    "ms": 0,
+    "bytes": 240932,
+    "info": {
+      "ads": 0,
+      "raise": 1,
+      "trig": 0,
+      "ham": 0
+    }
+  },
+  {
+    "file": "aa12-hip-night-f000.png",
+    "title": "AA-12 Breacher Combat Shotgun · Hip · night · Rest (0 ms)",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "night",
+    "step": "f000",
+    "ms": 0,
+    "bytes": 233562,
+    "info": {
+      "ads": 0,
+      "raise": 1,
+      "bolt": [
+        [
+          0.0795,
+          1.043,
+          true
+        ],
+        [
+          0.124,
+          1,
+          true
+        ],
+        [
+          0.13,
+          1,
+          true
+        ]
+      ],
+      "work": 0
+    }
+  }
+]

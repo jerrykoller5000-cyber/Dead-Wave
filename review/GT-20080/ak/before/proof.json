@@ -1,0 +1,53 @@
+{
+  "info": {
+    "live": null,
+    "spent": [
+      0.01140000019222498,
+      0.039000000804662704,
+      0.01140000019222498
+    ],
+    "hook": false
+  },
+  "frames": [
+    {
+      "mode": "eye",
+      "light": "noon",
+      "count": 30,
+      "gun": "ak",
+      "reloading": true,
+      "magState": "hand"
+    },
+    {
+      "mode": "pair",
+      "light": "noon",
+      "count": 30
+    },
+    {
+      "mode": "pair",
+      "light": "overcast",
+      "count": 30
+    },
+    {
+      "mode": "pair",
+      "light": "dusk",
+      "count": 30
+    },
+    {
+      "mode": "pair",
+      "light": "night",
+      "count": 30
+    },
+    {
+      "mode": "mag",
+      "light": "noon",
+      "count": 0,
+      "topRoundVisible": false
+    },
+    {
+      "mode": "mag",
+      "light": "noon",
+      "count": 30,
+      "topRoundVisible": false
+    }
+  ]
+}

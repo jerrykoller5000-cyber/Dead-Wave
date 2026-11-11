@@ -4,7 +4,7 @@
 // Same centre line as gripOutline. u runs down the grip, v+ is the front strap.
 import { gunDetail } from './gun-detail.js';
 import { bindModelArtwork, groupArtwork } from './weapon-model-hooks.js';
-import { markPaintSurface } from './weapon-finish.js';
+import { markPaintSurface, walnutTexture } from './weapon-finish.js';
 import { attachLaserLight } from './weapon-attachments.js';
 import { fitPortCarrier, spentCaseGeometry } from './weapon-casings.js';
 
@@ -434,25 +434,18 @@ function revolverCylinder(T, parent, mat, R, z0, z1, depth) {
   return mesh;
 }
 
-let walnutGrain;
-function walnutTexture(T) {
-  if (walnutGrain) return walnutGrain;
-  const size = 128, data = new Uint8Array(size * size * 4);
-  for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
-    const u = 2 * Math.PI * x / size, v = 2 * Math.PI * y / size;
-    const cut = u + 0.31 * Math.sin(v + u) + 0.13 * Math.sin(2 * v - u);
-    const streak = (1 + Math.cos(12 * cut + 0.7 * Math.sin(5 * cut))) / 2;
-    const value = Math.round(242 - 45 * streak ** 5 - 12 * Math.sin(4 * cut));
-    const i = (y * size + x) * 4;
-    data[i] = value; data[i + 1] = value; data[i + 2] = value; data[i + 3] = 255;
+// The grip occupies fewer UVs than the longarm furniture. Sample a finer,
+// slightly sloped cut on its smooth back and both checkered panels.
+let revolverGrain;
+function revolverWalnutTexture(T) {
+  if (!revolverGrain) {
+    revolverGrain = walnutTexture(T).clone();
+    revolverGrain.repeat.set(6.8, 3.1);
+    revolverGrain.offset.set(0.21, 0.18);
+    revolverGrain.rotation = -0.12;
+    revolverGrain.needsUpdate = true;
   }
-  walnutGrain = new T.DataTexture(data, size, size);
-  walnutGrain.wrapS = walnutGrain.wrapT = T.RepeatWrapping;
-  walnutGrain.magFilter = T.LinearFilter;
-  walnutGrain.minFilter = T.LinearMipmapLinearFilter;
-  walnutGrain.generateMipmaps = true; walnutGrain.needsUpdate = true;
-  walnutGrain.repeat.set(3, 1.5);
-  return walnutGrain;
+  return revolverGrain;
 }
 
 export function makeRevolverModel(ctx) {
@@ -462,10 +455,10 @@ export function makeRevolverModel(ctx) {
   const D = gunDetail(ctx);
   // The finishes off the picture: deep blue-black polished steel, the hammer and trigger case-coloured, walnut stocks
   // (the camo paints over all of them as over any gun; these are the issue colours).
-  const blued = new THREE.MeshStandardMaterial({ color: 0x2c323c, metalness: 0.8, roughness: 0.27 });
-  const caseCol = new THREE.MeshStandardMaterial({ color: 0x4a4744, metalness: 0.82, roughness: 0.32 });
-  const walnut = new THREE.MeshStandardMaterial({ color: 0x855335, map: walnutTexture(THREE), metalness: 0, roughness: 0.55 });
-  const walnutDark = new THREE.MeshStandardMaterial({ color: 0x65402b, map: walnutTexture(THREE), metalness: 0, roughness: 0.70 });
+  const blued = new THREE.MeshStandardMaterial({ color: 0x404955, metalness: 0.68, roughness: 0.32 });
+  const caseCol = new THREE.MeshStandardMaterial({ color: 0x62584d, metalness: 0.68, roughness: 0.40 });
+  const walnut = new THREE.MeshStandardMaterial({ color: 0x76492f, map: revolverWalnutTexture(THREE), metalness: 0, roughness: 0.48 });
+  const walnutDark = new THREE.MeshStandardMaterial({ color: 0x573922, map: revolverWalnutTexture(THREE), metalness: 0, roughness: 0.65 });
   const nickel = new THREE.MeshStandardMaterial({ color: 0xc9c6bd, metalness: 0.9, roughness: 0.22 });
   const BY = 0.083, MZ = 0.332;                      // the bore's height and the muzzle
   const CY = 0.057, CZ = 0.02, CR = 0.044, CH = 0.039, RC = 0.026;   // larger J78 cylinder; the chamber circle still meets the bore
@@ -668,8 +661,10 @@ export function makeRevolverModel(ctx) {
     K.cyl(0.0072, 0.0072, 0.0016, nickel, sx * 0.0338, med[1], med[0], null, 18, 'x');   // the medallion
     K.cyl(0.0058, 0.0058, 0.0018, gunDark, sx * 0.0339, med[1], med[0], null, 18, 'x');
     K.cyl(0.0044, 0.0044, 0.002, nickel, sx * 0.034, med[1], med[0], null, 16, 'x');
-    K.cyl(0.0042, 0.0042, 0.0016, nickel, sx * 0.0337, scr[1], scr[0], null, 14, 'x');   // the grip screw's escutcheon
-    D.screw(gun, sx * 0.0345, scr[1], scr[0], { axis: 'x', side: sx, r: 0.0026, head: 0.0012, kind: 'slot' });
+    // Keep the silver trim nearly flush with the flat grip panel. The slotted
+    // head sits on its outer face, so the drive mark follows the same stack.
+    K.cyl(0.0042, 0.0042, 0.0006, nickel, sx * 0.0336, scr[1], scr[0], null, 14, 'x');
+    D.screw(gun, sx * 0.0339, scr[1], scr[0], { axis: 'x', side: sx, r: 0.0026, head: 0.0012, kind: 'slot' });
   }
 
   gunEffects(gun, new THREE.Vector3(0, BY, 0.35), 0.045, 2.8, 6, 0.005);

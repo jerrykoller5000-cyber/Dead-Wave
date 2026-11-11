@@ -1,0 +1,79 @@
+[
+  {
+    "weapon": "pistol",
+    "id": "draw-ready",
+    "mode": "sequence",
+    "expected": 1,
+    "started": true,
+    "reason": null,
+    "states": [
+      "COUNTDOWN",
+      "ACTIVE",
+      "IDLE"
+    ],
+    "raised": 1,
+    "hitAccepted": 1,
+    "hitRejected": 0,
+    "zoneMissing": [],
+    "firstHud": "Draw on the Beep\nLIVE\n0 points\n12s remaining\n\nAfter the beep: press Tab to draw, aim, then shoot.\n\nWave 1/1 · 0 plates cleared\nEscape: abort drill",
+    "lastHud": "Draw on the BeepLIVE22 points12s remainingUse Pistol. Aim for any scoring zone. Hits to clear each plate: 1.Wave 1/1 · 1 plates clearedEscape: abort drill",
+    "result": {
+      "state": "COMPLETED",
+      "id": "1794357912869-1",
+      "score": 22,
+      "time": 1.024,
+      "efficiency": 100,
+      "at": 1794357913110,
+      "cleared": 1,
+      "missed": 0,
+      "shots": 1,
+      "firstShot": 0.5243000000119209,
+      "draws": 1,
+      "reloads": 0,
+      "goal": 1
+    },
+    "reportText": "Choose a drill\nFIRING RANGE / DRILL CONTROL\n×\n\nChoose a weapon, pick a drill, read the four steps, then press Start. Work from Learn through Practice to Challenge.\n\n1. Learn\n→\n2. Practice\n→\n3. Challenge\n1. Weapon\nPistol\nWasp SMG\nGW-4 Carbine\nKR-7 Rifle\nShotgun\nBreacher-12\nRevolver\nSniper\n2. Drill\n1\nLEARN\nFirst Five\nFive close plates, one at a time. Any scoring zone counts; take your time and learn the range.\n2\nLEARN\nDraw on the Beep\nStart holstered. After the beep, draw with Tab and clear one close plate.\n3\nPRACTICE\nBullseye Circuit\nClear five plates by hitting only their body bullseyes.\n4\nPRACTICE\nCall Sign\nAlternate called head and bullseye shots, one plate at a time.\n5\nPRACTICE\nPop Patrol\nFollow an unpredictable left-to-right pop-up patrol; quick hits earn a speed bonus.\n6\nPRACTICE\nTwelve Clean\nClear twelve plates with twelve rounds. Every wasted shot costs an opportunity.\n7\nCHALLENGE\nQuickdraw Countdown\nTwelve reaction rounds; each exposure gets shorter. Base semi-auto is enough.\n8\nCHALLENGE\nPistol / Rifle Relay\nSix single-plate stages alternate pistol and carbine. Follow the weapon call before firing.\nLEARN\nFirst Five\nStart drill\nBriefing\nPersonal bests\n\nFive close plates, one at a time. Any scoring zone counts; take your time and learn the range.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates.\nUse Pistol. Aim for any scoring zone. Hits to clear each plate: 1.\nFollow each new target wave. A plate drops when its required hits are complete.\nPlates to clear: 5\nTime limit: 45s\nLane order: 1 → 2 → 3 → 4 → 5\n\nWeapons required: Pistol\n\nHow points and penalties work\n\nSelect a drill at the range console. Watch the overhead board for the countdown, instructions and final score.\n\nLast drill result\nDraw on the Beep\n22\n\nDRILL COMPLETE\n\nRun time: 1.02s\nshot accuracy: 100.0%\nPlates cleared: 1/1\nShots fired: 1\nFirst shot after beep: 0.52s\n\nBase 2 + bonuses 20 − deductions 0\n\nNew personal record: Best score · Fastest full clear · Best full-clear accuracy · Fastest draw + shot",
+    "recordCount": 1,
+    "action": "drew after beep"
+  },
+  {
+    "weapon": "m4",
+    "id": "reload-ready",
+    "mode": "sequence",
+    "expected": 1,
+    "started": true,
+    "reason": null,
+    "states": [
+      "COUNTDOWN",
+      "ACTIVE",
+      "IDLE"
+    ],
+    "raised": 1,
+    "hitAccepted": 2,
+    "hitRejected": 0,
+    "zoneMissing": [],
+    "firstHud": "Reload and Engage\nLIVE\n0 points\n18s remaining\n\nAfter the beep: press R, finish reloading, then shoot.\n\nWave 1/1 · 0 plates cleared\nEscape: abort drill",
+    "lastHud": "Reload and EngageLIVE14 points15s remainingUse GW-4 Carbine. Aim for any scoring zone. Hits to clear each plate: 2.Wave 1/1 · 1 plates clearedEscape: abort drill",
+    "result": {
+      "state": "COMPLETED",
+      "id": "1794357914408-2",
+      "score": 14,
+      "time": 3.347,
+      "efficiency": 100,
+      "at": 1794357917178,
+      "cleared": 1,
+      "missed": 0,
+      "shots": 2,
+      "firstShot": 2.847200000017879,
+      "draws": 0,
+      "reloads": 1,
+      "goal": 1
+    },
+    "reportText": "Choose a drill\nFIRING RANGE / DRILL CONTROL\n×\n\nChoose a weapon, pick a drill, read the four steps, then press Start. Work from Learn through Practice to Challenge.\n\n1. Learn\n→\n2. Practice\n→\n3. Challenge\n1. Weapon\nPistol\nWasp SMG\nGW-4 Carbine\nKR-7 Rifle\nShotgun\nBreacher-12\nRevolver\nSniper\n2. Drill\n1\nLEARN\nFirst Five\nFive close plates, one at a time. Any scoring zone counts; take your time and learn the range.\n2\nLEARN\nDraw on the Beep\nStart holstered. After the beep, draw with Tab and clear one close plate.\n3\nPRACTICE\nBullseye Circuit\nClear five plates by hitting only their body bullseyes.\n4\nPRACTICE\nCall Sign\nAlternate called head and bullseye shots, one plate at a time.\n5\nPRACTICE\nPop Patrol\nFollow an unpredictable left-to-right pop-up patrol; quick hits earn a speed bonus.\n6\nPRACTICE\nTwelve Clean\nClear twelve plates with twelve rounds. Every wasted shot costs an opportunity.\n7\nCHALLENGE\nQuickdraw Countdown\nTwelve reaction rounds; each exposure gets shorter. Base semi-auto is enough.\n8\nCHALLENGE\nPistol / Rifle Relay\nSix single-plate stages alternate pistol and carbine. Follow the weapon call before firing.\nLEARN\nFirst Five\nStart drill\nBriefing\nPersonal bests\n\nFive close plates, one at a time. Any scoring zone counts; take your time and learn the range.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates.\nUse Pistol. Aim for any scoring zone. Hits to clear each plate: 1.\nFollow each new target wave. A plate drops when its required hits are complete.\nPlates to clear: 5\nTime limit: 45s\nLane order: 1 → 2 → 3 → 4 → 5\n\nWeapons required: Pistol\n\nHow points and penalties work\n\nSelect a drill at the range console. Watch the overhead board for the countdown, instructions and final score.\n\nLast drill result\nReload and Engage\n14\n\nDRILL COMPLETE\n\nRun time: 3.35s\nshot accuracy: 100.0%\nPlates cleared: 1/1\nShots fired: 2\nFirst shot after beep: 2.85s\n\nBase 4 + bonuses 10 − deductions 0\n\nNew personal record: Best score · Fastest full clear · Best full-clear accuracy",
+    "recordCount": 1,
+    "action": "reload undefined"
+  },
+  {
+    "pageErrors": []
+  }
+]

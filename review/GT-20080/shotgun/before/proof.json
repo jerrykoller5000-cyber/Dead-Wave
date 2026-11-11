@@ -38,32 +38,221 @@
       ]
     }
   },
+  "selected": 0.3,
+  "sweep": [
+    {
+      "type": "birdshot",
+      "u": 0.3,
+      "visible": true,
+      "screen": [
+        -0.5603086042970243,
+        -2.2087447979944
+      ],
+      "shown": 17,
+      "blockers": [
+        "shell",
+        "vm-hand-glove-main",
+        "other"
+      ],
+      "vertices": 64
+    },
+    {
+      "type": "birdshot",
+      "u": 0.34,
+      "visible": true,
+      "screen": [
+        -0.09460612246592356,
+        -1.4656447221071844
+      ],
+      "shown": 12,
+      "blockers": [
+        "shell",
+        "vm-hand-glove-main"
+      ],
+      "vertices": 64
+    },
+    {
+      "type": "birdshot",
+      "u": 0.38,
+      "visible": true,
+      "screen": [
+        0.2559907681968611,
+        -0.9140261306788503
+      ],
+      "shown": 8,
+      "blockers": [
+        "vm-hand-glove-main",
+        "shell",
+        "other"
+      ],
+      "vertices": 64
+    },
+    {
+      "type": "birdshot",
+      "u": 0.42,
+      "visible": true,
+      "screen": [
+        0.4452733892137989,
+        -0.6389559354190409
+      ],
+      "shown": 4,
+      "blockers": [
+        "other",
+        "shotgun receiver",
+        "shell",
+        "vm-hand-glove-main"
+      ],
+      "vertices": 64
+    },
+    {
+      "type": "birdshot",
+      "u": 0.46,
+      "visible": true,
+      "screen": [
+        0.47146653339632577,
+        -0.5919614102722234
+      ],
+      "shown": 1,
+      "blockers": [
+        "other",
+        "shotgun receiver",
+        "vm-hand-glove-main",
+        "shell"
+      ],
+      "vertices": 64
+    },
+    {
+      "type": "birdshot",
+      "u": 0.5,
+      "visible": true,
+      "screen": [
+        0.47137649364825934,
+        -0.5959907175428363
+      ],
+      "shown": 1,
+      "blockers": [
+        "other",
+        "shotgun receiver",
+        "vm-hand-glove-main",
+        "shell"
+      ],
+      "vertices": 64
+    },
+    {
+      "type": "birdshot",
+      "u": 0.54,
+      "visible": true,
+      "screen": [
+        0.4763369097024737,
+        -0.6030847048673947
+      ],
+      "shown": 1,
+      "blockers": [
+        "other",
+        "shotgun receiver",
+        "shell",
+        "vm-hand-glove-main"
+      ],
+      "vertices": 64
+    },
+    {
+      "type": "birdshot",
+      "u": 0.56,
+      "visible": true,
+      "screen": [
+        0.4884415477359559,
+        -0.610204733109947
+      ],
+      "shown": 0,
+      "blockers": [
+        "other",
+        "shotgun receiver",
+        "vm-hand-glove-main"
+      ],
+      "vertices": 64
+    },
+    {
+      "type": "birdshot",
+      "u": 0.59,
+      "visible": true,
+      "screen": [
+        0.4796286389675176,
+        -0.5948025881671485
+      ],
+      "shown": 0,
+      "blockers": [
+        "other",
+        "shotgun receiver",
+        "vm-hand-glove-main"
+      ],
+      "vertices": 64
+    },
+    {
+      "type": "birdshot",
+      "u": 0.64,
+      "visible": false,
+      "shown": 0
+    },
+    {
+      "type": "birdshot",
+      "u": 0.69,
+      "visible": false,
+      "shown": 0
+    },
+    {
+      "type": "birdshot",
+      "u": 0.72,
+      "visible": false,
+      "shown": 0
+    }
+  ],
   "frames": [
     {
       "type": "birdshot",
-      "screen": [
-        0.4714710929644914,
-        -0.5917580148580559
-      ],
+      "u": 0.3,
       "visible": true,
+      "screen": [
+        -0.5603304035015322,
+        -2.2095431672580084
+      ],
+      "shown": 17,
+      "blockers": [
+        "shell",
+        "vm-hand-glove-main",
+        "other"
+      ],
       "vertices": 64
     },
     {
       "type": "buckshot",
-      "screen": [
-        0.47127341774769754,
-        -0.6006336437167016
-      ],
+      "u": 0.3,
       "visible": true,
+      "screen": [
+        -0.5603567643654758,
+        -2.2105059154648585
+      ],
+      "shown": 17,
+      "blockers": [
+        "shell",
+        "vm-hand-glove-main",
+        "other"
+      ],
       "vertices": 64
     },
     {
       "type": "slug",
-      "screen": [
-        0.4715252382834467,
-        -0.5893473926642401
-      ],
+      "u": 0.3,
       "visible": true,
+      "screen": [
+        -0.5602972228753965,
+        -2.208327162271832
+      ],
+      "shown": 17,
+      "blockers": [
+        "shell",
+        "vm-hand-glove-main",
+        "other"
+      ],
       "vertices": 64
     },
     {

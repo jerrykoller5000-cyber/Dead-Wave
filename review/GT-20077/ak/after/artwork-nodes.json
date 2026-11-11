@@ -1,0 +1,48 @@
+{
+  "controls": {
+    "selector": {
+      "name": "controls-selector",
+      "meshes": {
+        "world": 1,
+        "eye": 1
+      }
+    },
+    "magRelease": {
+      "name": "controls-magRelease",
+      "meshes": {
+        "world": 1,
+        "eye": 1
+      }
+    },
+    "trigger": {
+      "name": "controls-trigger",
+      "meshes": {
+        "world": 1,
+        "eye": 1
+      }
+    },
+    "chargingHandle": {
+      "name": "work",
+      "meshes": {
+        "world": 1,
+        "eye": 1
+      }
+    }
+  },
+  "heatParts": {
+    "barrel": {
+      "name": "heatParts-barrel",
+      "meshes": {
+        "world": 1,
+        "eye": 1
+      }
+    },
+    "suppressor": {
+      "name": "suppressor",
+      "meshes": {
+        "world": 3,
+        "eye": 3
+      }
+    }
+  }
+}

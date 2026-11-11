@@ -1,0 +1,27 @@
+[
+  {
+    "weapon": "pistol",
+    "id": "bullseye",
+    "mode": "precision",
+    "expected": 50,
+    "started": true,
+    "reason": null,
+    "states": [
+      "COUNTDOWN",
+      "ACTIVE",
+      "IDLE"
+    ],
+    "raised": 10,
+    "hitAccepted": 50,
+    "hitRejected": 0,
+    "zoneMissing": [],
+    "firstHud": "Bullseye Circuit\nLIVE\n0 points\n35s remaining\n\nUse Pistol. Aim for Bullseye. Hits to clear each plate: 1.\n\nWave 1/10 · 0 plates cleared\nEscape: abort drill",
+    "lastHud": "Bullseye CircuitLIVE1500 points21s remainingUse Pistol. Aim for Bullseye. Hits to clear each plate: 1.Wave 10/10 · 50 plates clearedEscape: abort drill",
+    "result": null,
+    "reportText": "Choose a drill\nFIRING RANGE / DRILL CONTROL\n×\n\nChoose a weapon, pick a drill, read the four steps, then press Start. Work from Learn through Practice to Challenge.\n\n1. Learn\n→\n2. Practice\n→\n3. Challenge\n1. Weapon\nPistol\nWasp SMG\nGW-4 Carbine\nKR-7 Rifle\nShotgun\nBreacher-12\nRevolver\nSniper\n2. Drill\n1\nLEARN\nFirst Five\nFive close plates, one at a time. Any scoring zone counts; take your time and learn the range.\n2\nLEARN\nDraw on the Beep\nStart holstered. After the beep, draw with Tab and clear one close plate.\n3\nPRACTICE\nBullseye Circuit\nClear five plates by hitting only their body bullseyes.\n4\nPRACTICE\nCall Sign\nAlternate called head and bullseye shots, one plate at a time.\n5\nPRACTICE\nPop Patrol\nFollow an unpredictable left-to-right pop-up patrol; quick hits earn a speed bonus.\n6\nPRACTICE\nTwelve Clean\nClear twelve plates with twelve rounds. Every wasted shot costs an opportunity.\n7\nCHALLENGE\nQuickdraw Countdown\nTwelve reaction rounds; each exposure gets shorter. Base semi-auto is enough.\n8\nCHALLENGE\nPistol / Rifle Relay\nSix single-plate stages alternate pistol and carbine. Follow the weapon call before firing.\nLEARN\nFirst Five\nStart drill\nBriefing\nPersonal bests\n\nFive close plates, one at a time. Any scoring zone counts; take your time and learn the range.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates.\nUse Pistol. Aim for any scoring zone. Hits to clear each plate: 1.\nFollow each new target wave. A plate drops when its required hits are complete.\nPlates to clear: 5\nTime limit: 45s\nLane order: 1 → 2 → 3 → 4 → 5\n\nWeapons required: Pistol\n\nHow points and penalties work\n\nSelect a drill at the range console. Watch the overhead board for the countdown, instructions and final score.\n\nLast drill result\nBullseye Circuit\n1500\n\nDRILL COMPLETE\n\nRun time: 14.69s\nshot accuracy: 100.0%\nPlates cleared: 50/50\nShots fired: 50\nFirst shot after beep: 0.50s\n\nBase 1000 + bonuses 500 − deductions 0\n\nNew personal record: Best score · Fastest full clear · Best full-clear accuracy",
+    "recordCount": 0
+  },
+  {
+    "pageErrors": []
+  }
+]

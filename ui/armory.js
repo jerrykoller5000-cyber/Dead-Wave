@@ -21,7 +21,7 @@ import { text, hasText } from './strings.js';
 export function mountArmory({ doc = document, bus = window, cif = doc.getElementById('cif'),
   getPhase = () => 'prep', getOwned = () => [], onApply = () => {}, onReset = null, armory: shared = null,
   getMods = () => [], onFit = () => false, onBuyMod = () => false, getAmmoOffer = () => null, onBuyAmmo = () => false,
-  getTypedAmmo = () => null, onBuyTypedAmmo = () => false,
+  getAmmoTypes = () => null, onBuyAmmoType = () => false, getCash = () => Infinity,
   getGunOffers = () => [], onBuyGun = () => false, getBuildOffers = () => [], onBuyBuild = () => false,
   onOpenCatalogue = () => {}, onCloseCatalogue = () => {}, picture = async () => null, icon = () => '', describe = () => '',
   getFinishes = () => null, onFinish = () => false, preview = null,
@@ -135,27 +135,32 @@ export function mountArmory({ doc = document, bus = window, cif = doc.getElement
     section.setAttribute('aria-label', text('armory.typed.title'));
     section.append(el('h4', null, text('armory.typed.title')),
       el('p', 'armory-typed-hint', text('armory.typed.hint')));
-    const current = stock.loadedType || stock.selectedType;
+    const current = stock.loaded;
     if (current) section.append(el('p', 'armory-typed-loaded', text('armory.typed.loaded', {
-      count: Math.max(0, Number(stock.loaded) || 0), type: text('ammo.type.' + current)
+      count: Math.max(0, Number(stock.inGun) || 0), type: text('ammo.type.' + current + '.name')
     })));
     const list = el('ul', 'armory-typed-list');
-    for (const row of stock.rows) {
-      const name = text('ammo.type.' + row.id);
-      const item = el('li', row.id === current ? 'loaded' : '');
-      item.dataset.ammoType = row.id;
+    for (const id of stock.order) {
+      const row = stock.types?.[id];
+      if (!row) continue;
+      const name = text('ammo.type.' + id + '.name');
+      const item = el('li', id === current ? 'loaded' : '');
+      item.dataset.ammoType = id;
       const copy = el('div', 'armory-typed-copy');
-      copy.append(el('strong', null, name), el('small', null, text('armory.typed.carried', {
-        count: Math.max(0, Number(row.reserve ?? row.count) || 0)
-      })));
-      const price = row.full ? text('armory.typed.full') : row.affordable === false
-        ? text('armory.store.shortfall', {price: row.price, amount: row.shortfall})
-        : text('armory.typed.pack', {count: row.packSize ?? row.quantity, price: row.price});
+      const carried = Math.max(0, Number(stock.carried?.[id]) || 0);
+      copy.append(el('strong', null, name), el('small', null, row.cap == null
+        ? text('armory.typed.carried', {count: carried})
+        : text('armory.typed.carriedCap', {count: carried, cap: row.cap})));
+      const full = row.canBuy === false || row.full === true;
+      const shortfall = Math.max(0, row.price - getCash());
+      const price = full ? text('armory.typed.full') : shortfall
+        ? text('armory.store.shortfall', {price: row.price, amount: shortfall})
+        : text('armory.typed.pack', {count: row.pack, price: row.price});
       copy.append(el('small', 'armory-typed-price', price));
       const buy = el('button', null, text('armory.typed.buy', {type: name}));
-      buy.type = 'button'; buy.dataset.buyAmmoType = row.id;
-      buy.disabled = !!row.full || row.affordable === false;
-      buy.addEventListener('click', () => { if (onBuyTypedAmmo(kind, row.id)) render(); });
+      buy.type = 'button'; buy.dataset.buyAmmoType = id;
+      buy.disabled = full || shortfall > 0;
+      buy.addEventListener('click', () => { if (onBuyAmmoType(kind, id)) render(); });
       item.append(copy, buy); list.append(item);
     }
     section.append(list); benchEl.append(section);
@@ -172,11 +177,11 @@ export function mountArmory({ doc = document, bus = window, cif = doc.getElement
     const pic = previewer ? previewer.element : gunPicture(kind, 'armory-pic big');
     if (previewer) previewer.show(kind, text('armory.preview.label',{gun:text('weapon.'+kind+'.name')}));
     const name = el('p', 'armory-bench-name', text(`weapon.${kind}.name`));
-    const typed = getTypedAmmo(kind);
+    const typed = getAmmoTypes(kind);
     benchEl.append(pic, name);
-    if (!typed?.rows?.length) benchEl.append(el('p', 'armory-bench-ammo', describe(kind) || ''));
-    if (typed?.rows?.length) renderTypedAmmo(kind, typed);
-    const offer = typed?.rows?.length ? null : getAmmoOffer(kind);
+    if (!typed?.order?.length) benchEl.append(el('p', 'armory-bench-ammo', describe(kind) || ''));
+    if (typed?.order?.length) renderTypedAmmo(kind, typed);
+    const offer = typed?.order?.length ? null : getAmmoOffer(kind);
     if (offer) {
       const refill = el('div', 'armory-ammo-offer');
       refill.append(el('span', null, offer.full ? t('armory.ammoFull', {}, 'Ammo full') : offer.affordable
@@ -187,7 +192,7 @@ export function mountArmory({ doc = document, bus = window, cif = doc.getElement
       buy.addEventListener('click', () => { if (onBuyAmmo(kind)) render(); });
       refill.append(buy); benchEl.append(refill);
     }
-    const mods = modsOf(kind).filter(m => !typed?.rows?.length || !m.id.startsWith('load:'));
+    const mods = modsOf(kind).filter(m => !typed?.order?.length || !m.id.startsWith('load:'));
     if (!mods.length) { benchEl.append(el('p', 'armory-bench-empty', t('armory.noMods', {}, 'This gun takes no attachments.'))); renderFinishes(kind); renderLaser(benchGun()); return; }
     const list = el('ul', 'armory-mods');
     for (const m of mods) {

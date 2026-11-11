@@ -1,0 +1,1033 @@
+{
+  "phase": "after",
+  "stations": [
+    {
+      "station": "cif",
+      "width": 1280,
+      "action": "cif",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": 6.98,
+        "z": -650.2
+      },
+      "stationAt": {
+        "x": 7.98,
+        "z": -650.2
+      },
+      "light": "noon"
+    },
+    {
+      "station": "kiosk",
+      "width": 1280,
+      "action": "kiosk",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": 6.98,
+        "z": -646.6
+      },
+      "stationAt": {
+        "x": 7.98,
+        "z": -646.6
+      },
+      "light": "noon"
+    },
+    {
+      "station": "armory",
+      "width": 1280,
+      "action": "armory",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": 6.98,
+        "z": -643
+      },
+      "stationAt": {
+        "x": 7.98,
+        "z": -643
+      },
+      "light": "noon"
+    },
+    {
+      "station": "hqPanel",
+      "width": 1280,
+      "action": "trainingPanel",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": -42.779999999999994,
+        "z": -637
+      },
+      "stationAt": {
+        "x": -43.98,
+        "z": -637
+      },
+      "light": "noon"
+    },
+    {
+      "station": "skullWindow",
+      "width": 1280,
+      "action": "hqWindow",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": -42.779999999999994,
+        "z": -643
+      },
+      "stationAt": {
+        "x": -43.98,
+        "z": -643
+      },
+      "light": "noon"
+    },
+    {
+      "station": "lightSwitch",
+      "width": 1280,
+      "action": "trainingLights",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": -7.180000000000001,
+        "z": -645.95
+      },
+      "stationAt": {
+        "x": -7.98,
+        "z": -645.95
+      },
+      "light": "noon"
+    },
+    {
+      "station": "rangeConsole",
+      "width": 1280,
+      "action": "rangeConsole",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": -6.515000000000001,
+        "y": -200,
+        "z": -644.6
+      },
+      "stationAt": {
+        "x": -7.865,
+        "z": -644.6
+      },
+      "light": "noon"
+    },
+    {
+      "station": "cif",
+      "width": 390,
+      "action": "cif",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": 6.98,
+        "z": -650.2
+      },
+      "stationAt": {
+        "x": 7.98,
+        "z": -650.2
+      },
+      "light": "noon"
+    },
+    {
+      "station": "kiosk",
+      "width": 390,
+      "action": "kiosk",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": 6.98,
+        "z": -646.6
+      },
+      "stationAt": {
+        "x": 7.98,
+        "z": -646.6
+      },
+      "light": "noon"
+    },
+    {
+      "station": "armory",
+      "width": 390,
+      "action": "armory",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": 6.98,
+        "z": -643
+      },
+      "stationAt": {
+        "x": 7.98,
+        "z": -643
+      },
+      "light": "noon"
+    },
+    {
+      "station": "hqPanel",
+      "width": 390,
+      "action": "trainingPanel",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": -42.779999999999994,
+        "z": -637
+      },
+      "stationAt": {
+        "x": -43.98,
+        "z": -637
+      },
+      "light": "noon"
+    },
+    {
+      "station": "skullWindow",
+      "width": 390,
+      "action": "hqWindow",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": -42.779999999999994,
+        "z": -643
+      },
+      "stationAt": {
+        "x": -43.98,
+        "z": -643
+      },
+      "light": "noon"
+    },
+    {
+      "station": "lightSwitch",
+      "width": 390,
+      "action": "trainingLights",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": -7.180000000000001,
+        "z": -645.95
+      },
+      "stationAt": {
+        "x": -7.98,
+        "z": -645.95
+      },
+      "light": "noon"
+    },
+    {
+      "station": "rangeConsole",
+      "width": 390,
+      "action": "rangeConsole",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": -6.515000000000001,
+        "y": -200,
+        "z": -644.6
+      },
+      "stationAt": {
+        "x": -7.865,
+        "z": -644.6
+      },
+      "light": "noon"
+    },
+    {
+      "station": "cif",
+      "width": 1280,
+      "action": "cif",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": 6.98,
+        "z": -650.2
+      },
+      "stationAt": {
+        "x": 7.98,
+        "z": -650.2
+      },
+      "light": "overcast"
+    },
+    {
+      "station": "kiosk",
+      "width": 1280,
+      "action": "kiosk",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": 6.98,
+        "z": -646.6
+      },
+      "stationAt": {
+        "x": 7.98,
+        "z": -646.6
+      },
+      "light": "overcast"
+    },
+    {
+      "station": "armory",
+      "width": 1280,
+      "action": "armory",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": 6.98,
+        "z": -643
+      },
+      "stationAt": {
+        "x": 7.98,
+        "z": -643
+      },
+      "light": "overcast"
+    },
+    {
+      "station": "hqPanel",
+      "width": 1280,
+      "action": "trainingPanel",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": -42.779999999999994,
+        "z": -637
+      },
+      "stationAt": {
+        "x": -43.98,
+        "z": -637
+      },
+      "light": "overcast"
+    },
+    {
+      "station": "skullWindow",
+      "width": 1280,
+      "action": "hqWindow",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": -42.779999999999994,
+        "z": -643
+      },
+      "stationAt": {
+        "x": -43.98,
+        "z": -643
+      },
+      "light": "overcast"
+    },
+    {
+      "station": "lightSwitch",
+      "width": 1280,
+      "action": "trainingLights",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": -7.180000000000001,
+        "z": -645.95
+      },
+      "stationAt": {
+        "x": -7.98,
+        "z": -645.95
+      },
+      "light": "overcast"
+    },
+    {
+      "station": "rangeConsole",
+      "width": 1280,
+      "action": "rangeConsole",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": -6.515000000000001,
+        "y": -200,
+        "z": -644.6
+      },
+      "stationAt": {
+        "x": -7.865,
+        "z": -644.6
+      },
+      "light": "overcast"
+    },
+    {
+      "station": "cif",
+      "width": 390,
+      "action": "cif",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": 6.98,
+        "z": -650.2
+      },
+      "stationAt": {
+        "x": 7.98,
+        "z": -650.2
+      },
+      "light": "overcast"
+    },
+    {
+      "station": "kiosk",
+      "width": 390,
+      "action": "kiosk",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": 6.98,
+        "z": -646.6
+      },
+      "stationAt": {
+        "x": 7.98,
+        "z": -646.6
+      },
+      "light": "overcast"
+    },
+    {
+      "station": "armory",
+      "width": 390,
+      "action": "armory",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": 6.98,
+        "z": -643
+      },
+      "stationAt": {
+        "x": 7.98,
+        "z": -643
+      },
+      "light": "overcast"
+    },
+    {
+      "station": "hqPanel",
+      "width": 390,
+      "action": "trainingPanel",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": -42.779999999999994,
+        "z": -637
+      },
+      "stationAt": {
+        "x": -43.98,
+        "z": -637
+      },
+      "light": "overcast"
+    },
+    {
+      "station": "skullWindow",
+      "width": 390,
+      "action": "hqWindow",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": -42.779999999999994,
+        "z": -643
+      },
+      "stationAt": {
+        "x": -43.98,
+        "z": -643
+      },
+      "light": "overcast"
+    },
+    {
+      "station": "lightSwitch",
+      "width": 390,
+      "action": "trainingLights",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": -7.180000000000001,
+        "z": -645.95
+      },
+      "stationAt": {
+        "x": -7.98,
+        "z": -645.95
+      },
+      "light": "overcast"
+    },
+    {
+      "station": "rangeConsole",
+      "width": 390,
+      "action": "rangeConsole",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": -6.515000000000001,
+        "y": -200,
+        "z": -644.6
+      },
+      "stationAt": {
+        "x": -7.865,
+        "z": -644.6
+      },
+      "light": "overcast"
+    },
+    {
+      "station": "cif",
+      "width": 1280,
+      "action": "cif",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": 6.98,
+        "z": -650.2
+      },
+      "stationAt": {
+        "x": 7.98,
+        "z": -650.2
+      },
+      "light": "dusk"
+    },
+    {
+      "station": "kiosk",
+      "width": 1280,
+      "action": "kiosk",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": 6.98,
+        "z": -646.6
+      },
+      "stationAt": {
+        "x": 7.98,
+        "z": -646.6
+      },
+      "light": "dusk"
+    },
+    {
+      "station": "armory",
+      "width": 1280,
+      "action": "armory",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": 6.98,
+        "z": -643
+      },
+      "stationAt": {
+        "x": 7.98,
+        "z": -643
+      },
+      "light": "dusk"
+    },
+    {
+      "station": "hqPanel",
+      "width": 1280,
+      "action": "trainingPanel",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": -42.779999999999994,
+        "z": -637
+      },
+      "stationAt": {
+        "x": -43.98,
+        "z": -637
+      },
+      "light": "dusk"
+    },
+    {
+      "station": "skullWindow",
+      "width": 1280,
+      "action": "hqWindow",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": -42.779999999999994,
+        "z": -643
+      },
+      "stationAt": {
+        "x": -43.98,
+        "z": -643
+      },
+      "light": "dusk"
+    },
+    {
+      "station": "lightSwitch",
+      "width": 1280,
+      "action": "trainingLights",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": -7.180000000000001,
+        "z": -645.95
+      },
+      "stationAt": {
+        "x": -7.98,
+        "z": -645.95
+      },
+      "light": "dusk"
+    },
+    {
+      "station": "rangeConsole",
+      "width": 1280,
+      "action": "rangeConsole",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": -6.515000000000001,
+        "y": -200,
+        "z": -644.6
+      },
+      "stationAt": {
+        "x": -7.865,
+        "z": -644.6
+      },
+      "light": "dusk"
+    },
+    {
+      "station": "cif",
+      "width": 390,
+      "action": "cif",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": 6.98,
+        "z": -650.2
+      },
+      "stationAt": {
+        "x": 7.98,
+        "z": -650.2
+      },
+      "light": "dusk"
+    },
+    {
+      "station": "kiosk",
+      "width": 390,
+      "action": "kiosk",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": 6.98,
+        "z": -646.6
+      },
+      "stationAt": {
+        "x": 7.98,
+        "z": -646.6
+      },
+      "light": "dusk"
+    },
+    {
+      "station": "armory",
+      "width": 390,
+      "action": "armory",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": 6.98,
+        "z": -643
+      },
+      "stationAt": {
+        "x": 7.98,
+        "z": -643
+      },
+      "light": "dusk"
+    },
+    {
+      "station": "hqPanel",
+      "width": 390,
+      "action": "trainingPanel",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": -42.779999999999994,
+        "z": -637
+      },
+      "stationAt": {
+        "x": -43.98,
+        "z": -637
+      },
+      "light": "dusk"
+    },
+    {
+      "station": "skullWindow",
+      "width": 390,
+      "action": "hqWindow",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": -42.779999999999994,
+        "z": -643
+      },
+      "stationAt": {
+        "x": -43.98,
+        "z": -643
+      },
+      "light": "dusk"
+    },
+    {
+      "station": "lightSwitch",
+      "width": 390,
+      "action": "trainingLights",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": -7.180000000000001,
+        "z": -645.95
+      },
+      "stationAt": {
+        "x": -7.98,
+        "z": -645.95
+      },
+      "light": "dusk"
+    },
+    {
+      "station": "rangeConsole",
+      "width": 390,
+      "action": "rangeConsole",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": -6.515000000000001,
+        "y": -200,
+        "z": -644.6
+      },
+      "stationAt": {
+        "x": -7.865,
+        "z": -644.6
+      },
+      "light": "dusk"
+    },
+    {
+      "station": "cif",
+      "width": 1280,
+      "action": "cif",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": 6.98,
+        "z": -650.2
+      },
+      "stationAt": {
+        "x": 7.98,
+        "z": -650.2
+      },
+      "light": "night"
+    },
+    {
+      "station": "kiosk",
+      "width": 1280,
+      "action": "kiosk",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": 6.98,
+        "z": -646.6
+      },
+      "stationAt": {
+        "x": 7.98,
+        "z": -646.6
+      },
+      "light": "night"
+    },
+    {
+      "station": "armory",
+      "width": 1280,
+      "action": "armory",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": 6.98,
+        "z": -643
+      },
+      "stationAt": {
+        "x": 7.98,
+        "z": -643
+      },
+      "light": "night"
+    },
+    {
+      "station": "hqPanel",
+      "width": 1280,
+      "action": "trainingPanel",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": -42.779999999999994,
+        "z": -637
+      },
+      "stationAt": {
+        "x": -43.98,
+        "z": -637
+      },
+      "light": "night"
+    },
+    {
+      "station": "skullWindow",
+      "width": 1280,
+      "action": "hqWindow",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": -42.779999999999994,
+        "z": -643
+      },
+      "stationAt": {
+        "x": -43.98,
+        "z": -643
+      },
+      "light": "night"
+    },
+    {
+      "station": "lightSwitch",
+      "width": 1280,
+      "action": "trainingLights",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": -7.180000000000001,
+        "z": -645.95
+      },
+      "stationAt": {
+        "x": -7.98,
+        "z": -645.95
+      },
+      "light": "night"
+    },
+    {
+      "station": "rangeConsole",
+      "width": 1280,
+      "action": "rangeConsole",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": -6.515000000000001,
+        "y": -200,
+        "z": -644.6
+      },
+      "stationAt": {
+        "x": -7.865,
+        "z": -644.6
+      },
+      "light": "night"
+    },
+    {
+      "station": "cif",
+      "width": 390,
+      "action": "cif",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": 6.98,
+        "z": -650.2
+      },
+      "stationAt": {
+        "x": 7.98,
+        "z": -650.2
+      },
+      "light": "night"
+    },
+    {
+      "station": "kiosk",
+      "width": 390,
+      "action": "kiosk",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": 6.98,
+        "z": -646.6
+      },
+      "stationAt": {
+        "x": 7.98,
+        "z": -646.6
+      },
+      "light": "night"
+    },
+    {
+      "station": "armory",
+      "width": 390,
+      "action": "armory",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": 6.98,
+        "z": -643
+      },
+      "stationAt": {
+        "x": 7.98,
+        "z": -643
+      },
+      "light": "night"
+    },
+    {
+      "station": "hqPanel",
+      "width": 390,
+      "action": "trainingPanel",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": -42.779999999999994,
+        "z": -637
+      },
+      "stationAt": {
+        "x": -43.98,
+        "z": -637
+      },
+      "light": "night"
+    },
+    {
+      "station": "skullWindow",
+      "width": 390,
+      "action": "hqWindow",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": -42.779999999999994,
+        "z": -643
+      },
+      "stationAt": {
+        "x": -43.98,
+        "z": -643
+      },
+      "light": "night"
+    },
+    {
+      "station": "lightSwitch",
+      "width": 390,
+      "action": "trainingLights",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": -7.180000000000001,
+        "z": -645.95
+      },
+      "stationAt": {
+        "x": -7.98,
+        "z": -645.95
+      },
+      "light": "night"
+    },
+    {
+      "station": "rangeConsole",
+      "width": 390,
+      "action": "rangeConsole",
+      "hint": "TRAINING GROUND\nTargets down: 0\nScore 0",
+      "front": {
+        "x": -6.515000000000001,
+        "y": -200,
+        "z": -644.6
+      },
+      "stationAt": {
+        "x": -7.865,
+        "z": -644.6
+      },
+      "light": "night"
+    }
+  ],
+  "panels": [
+    {
+      "station": "cif",
+      "width": 1280,
+      "action": "cif",
+      "found": true,
+      "hidden": false,
+      "preview": "FOB THRESHOLD / PERSONAL EQUIPMENT\n\nCIF\nCENTRAL ISSUE FACILITY\n\nBuy field gear here, then dress each piece. Four camos issued; earn the rest in the field.\n\nYOUR GRAVEWALKER\n\nDrag to turn. Scroll or pinch to zoom. Changes save as you choose.\n\nRotate\nFront view\nHEAD\nCLOTHING\nEQUIPMENT\nAPPEARANCE\nHAT\nBALACLAVA\nEYEWEAR\nHat\n\nEquipped: Classic Woodland\n\nISSUE COUNTER\nCombat helmet\nBallistic protection. Adds 25 armor and mounts night vision.\nFree training stock\nBuy\nNight vision\nFlip-down night vision o",
+      "scrollWidth": 1280
+    },
+    {
+      "station": "kiosk",
+      "width": 1280,
+      "action": "kiosk",
+      "found": true,
+      "hidden": false,
+      "preview": "SUPPLY TERMINAL\nCASH $∞\nSUPPLIES\nBUILDS\n\nPick up MedPens and field intel. Night 1: each Shambler is worth 1 skull value before bonuses. Bank skulls at the HQ window: 1 skull value = 1 Cash.\n\nFIELD INTEL\nSee every enemy type, count and approach at the HQ panel.\nBuy — 120 Cash\n+\nMEDPEN0 / 3 CARRIED\nAuto-injector. H to jab one: heals 60% of max health. Natural regen only ever climbs back to 40%.\n$35\nBACK TO THE FIGHT (E / ESC)",
+      "scrollWidth": 1280
+    },
+    {
+      "station": "armory",
+      "width": 1280,
+      "action": "armory",
+      "found": true,
+      "hidden": false,
+      "preview": "HQ · WEAPONS LOCKER\n\nARMORY\n\nChoose a gun from the shelves. Its workbench buys ammo and buys, fits or removes each attachment.\n\nCARRIED GUNS\nPRIMARY 1\nEmpty slot\nPRIMARY 2\nEmpty slot\nSECONDARY 1\nEmpty slot\nSECONDARY 2\nEmpty slot\nHip holster · Pistol\nSTORED GUNS\n\nNo guns stored\n\nGUNS TO BUY\nWasp SMG\n$75 Cash\nBUY\nShotgun\n$110 Cash\nBUY\nRevolver\n$145 Cash\nBUY\nGW-4 Carbine\n$180 Cash\nBUY\nChainsaw\n$190 Cash\nBUY\nKR-7 Rifle\n$245 Cash\nBUY\nSniper\n$320 Cash\nBUY\nFlamethrower\n$340 Cash\nBUY\nLauncher\n$480 Cash\n",
+      "scrollWidth": 1280
+    },
+    {
+      "station": "hqPanel",
+      "width": 1280,
+      "action": "trainingPanel",
+      "found": true,
+      "hidden": false,
+      "preview": "TRAINING GROUND · HQ PANEL\n\nCALL IN ZOMBIES\n\nChoose a kind and count. The security door locks immediately; zombies arrive after five seconds. Clear the room to unlock it.\n\nZOMBIE KIND\nShambler\nFeral\nLeaper\nSpider\nDrowned\nMilitary\nBrute\nSpitter\nScreamer\nBomber\nDemon\nColossus\nGuardian\nHOW MANY\n1\n3\n5\n10\n\nThe build room is empty.\n\nSEND IN 3 · SHAMBLER\nCLOSE\nCLEAR ALL ZOMBIES\nPLACE TEST DEFENSES",
+      "scrollWidth": 1280
+    },
+    {
+      "station": "rangeConsole",
+      "width": 1280,
+      "action": "rangeConsole",
+      "found": true,
+      "hidden": false,
+      "preview": "Choose a drill\nFIRING RANGE / DRILL CONTROL\n×\n\nChoose a weapon, pick a drill, read the four steps, then press Start. Work from Learn through Practice to Challenge.\n\n1. Learn\n→\n2. Practice\n→\n3. Challenge\n1. Weapon\nPistol\nWasp SMG 🔒\nGW-4 Carbine 🔒\nKR-7 Rifle 🔒\nShotgun 🔒\nBreacher-12 🔒\nRevolver 🔒\nSniper 🔒\n2. Drill\n1\nLEARN\nFirst Five\nFive close plates, one at a time. Any scoring zone counts; take your time and learn the range.\n2\nLEARN\nDraw on the Beep\nStart holstered. After the beep, draw with",
+      "scrollWidth": 1280
+    },
+    {
+      "station": "cif",
+      "width": 390,
+      "action": "cif",
+      "found": true,
+      "hidden": false,
+      "preview": "FOB THRESHOLD / PERSONAL EQUIPMENT\n\nCIF\nCENTRAL ISSUE FACILITY\n\nBuy field gear here, then dress each piece. Four camos issued; earn the rest in the field.\n\nYOUR GRAVEWALKER\n\nDrag to turn. Scroll or pinch to zoom. Changes save as you choose.\n\nRotate\nFront view\nHEAD\nCLOTHING\nEQUIPMENT\nAPPEARANCE\nHAT\nBALACLAVA\nEYEWEAR\nHat\n\nEquipped: Classic Woodland\n\nISSUE COUNTER\nCombat helmet\nBallistic protection. Adds 25 armor and mounts night vision.\nFree training stock\nBuy\nNight vision\nFlip-down night vision o",
+      "scrollWidth": 390
+    },
+    {
+      "station": "kiosk",
+      "width": 390,
+      "action": "kiosk",
+      "found": true,
+      "hidden": false,
+      "preview": "SUPPLY TERMINAL\nCASH $∞\nSUPPLIES\nBUILDS\n\nMedPens and field intel. Bank skulls at HQ for Cash.\n\nFIELD INTEL\nSee every enemy type, count and approach at the HQ panel.\nBuy — 120 Cash\n+\nMEDPEN0 / 3 CARRIED\nAuto-injector. H to jab one: heals 60% of max health. Natural regen only ever climbs back to 40%.\n$35\nBACK TO THE FIGHT (E / ESC)",
+      "scrollWidth": 390
+    },
+    {
+      "station": "armory",
+      "width": 390,
+      "action": "armory",
+      "found": true,
+      "hidden": false,
+      "preview": "HQ · WEAPONS LOCKER\n\nARMORY\n\nChoose a gun from the shelves. Its workbench buys ammo and buys, fits or removes each attachment.\n\nCARRIED GUNS\nPRIMARY 1\nEmpty slot\nPRIMARY 2\nEmpty slot\nSECONDARY 1\nEmpty slot\nSECONDARY 2\nEmpty slot\nHip holster · Pistol\nSTORED GUNS\n\nNo guns stored\n\nGUNS TO BUY\nWasp SMG\n$75 Cash\nBUY\nShotgun\n$110 Cash\nBUY\nRevolver\n$145 Cash\nBUY\nGW-4 Carbine\n$180 Cash\nBUY\nChainsaw\n$190 Cash\nBUY\nKR-7 Rifle\n$245 Cash\nBUY\nSniper\n$320 Cash\nBUY\nFlamethrower\n$340 Cash\nBUY\nLauncher\n$480 Cash\n",
+      "scrollWidth": 390
+    },
+    {
+      "station": "hqPanel",
+      "width": 390,
+      "action": "trainingPanel",
+      "found": true,
+      "hidden": false,
+      "preview": "TRAINING GROUND · HQ PANEL\n\nCALL IN ZOMBIES\n\nChoose a kind and count. The security door locks immediately; zombies arrive after five seconds. Clear the room to unlock it.\n\nZOMBIE KIND\nShambler\nFeral\nLeaper\nSpider\nDrowned\nMilitary\nBrute\nSpitter\nScreamer\nBomber\nDemon\nColossus\nGuardian\nHOW MANY\n1\n3\n5\n10\n\nThe build room is empty.\n\nSEND IN 3 · SHAMBLER\nCLOSE\nCLEAR ALL ZOMBIES\nPLACE TEST DEFENSES",
+      "scrollWidth": 390
+    },
+    {
+      "station": "rangeConsole",
+      "width": 390,
+      "action": "rangeConsole",
+      "found": true,
+      "hidden": false,
+      "preview": "Choose a drill\nFIRING RANGE / DRILL CONTROL\n×\n\nChoose a weapon, pick a drill, read the four steps, then press Start. Work from Learn through Practice to Challenge.\n\n1. Learn\n→\n2. Practice\n→\n3. Challenge\n1. Weapon\nPistol\nWasp SMG 🔒\nGW-4 Carbine 🔒\nKR-7 Rifle 🔒\nShotgun 🔒\nBreacher-12 🔒\nRevolver 🔒\nSniper 🔒\n2. Drill\n1\nLEARN\nFirst Five\nFive close plates, one at a time. Any scoring zone counts; take your time and learn the range.\n2\nLEARN\nDraw on the Beep\nStart holstered. After the beep, draw with",
+      "scrollWidth": 390
+    }
+  ],
+  "lights": [
+    {
+      "light": "noon",
+      "state": {
+        "on": true,
+        "night": false,
+        "room": true
+      }
+    },
+    {
+      "light": "overcast",
+      "state": {
+        "on": false,
+        "night": true,
+        "room": false
+      }
+    },
+    {
+      "light": "dusk",
+      "state": {
+        "on": true,
+        "night": false,
+        "room": true
+      }
+    },
+    {
+      "light": "night",
+      "state": {
+        "on": false,
+        "night": true,
+        "room": false
+      }
+    }
+  ],
+  "errors": [],
+  "drill": {
+    "start": {
+      "ok": true,
+      "id": "1794360264865-1"
+    },
+    "hud": "First Five\nLIVE\n0 points\n43s remaining\n\nUse Pistol. Aim for any scoring zone. Hits to clear each plate: 1.\n\nWave 1/5 · 0 plates cleared\nEscape: abort drill",
+    "state": "ACTIVE"
+  },
+  "result": {
+    "weapon": "pistol",
+    "id": "first-steps",
+    "mode": "sequence",
+    "expected": 5,
+    "started": true,
+    "reason": null,
+    "states": [
+      "COUNTDOWN",
+      "ACTIVE",
+      "IDLE"
+    ],
+    "raised": 5,
+    "hitAccepted": 5,
+    "hitRejected": 0,
+    "zoneMissing": [],
+    "firstHud": "First Five\nLIVE\n0 points\n45s remaining\n\nUse Pistol. Aim for any scoring zone. Hits to clear each plate: 1.\n\nWave 1/5 · 0 plates cleared\nEscape: abort drill",
+    "lastHud": "First FiveLIVE70 points37s remainingUse Pistol. Aim for any scoring zone. Hits to clear each plate: 1.Wave 5/5 · 5 plates clearedEscape: abort drill",
+    "result": {
+      "state": "COMPLETED",
+      "id": "1794360265414-2",
+      "score": 70,
+      "time": 9.097,
+      "efficiency": 100,
+      "at": 1794360265620,
+      "cleared": 5,
+      "missed": 0,
+      "shots": 5,
+      "firstShot": 0.5,
+      "draws": 0,
+      "reloads": 0,
+      "goal": 5
+    },
+    "reportText": "Choose a drill\nFIRING RANGE / DRILL CONTROL\n×\n\nChoose a weapon, pick a drill, read the four steps, then press Start. Work from Learn through Practice to Challenge.\n\nLast drill result\nFirst Five\n70\n\nDRILL COMPLETE\n\nRun time: 9.10s\nShot accuracy: 100.0%\nPlates cleared: 5/5\nShots fired: 5\nFirst shot after beep: 0.50s\n\nBase 20 + bonuses 50 − deductions 0\n\nNew personal record: Best score · Fastest full clear · Best full-clear accuracy\n\n1. Learn\n→\n2. Practice\n→\n3. Challenge\n1. Weapon\nPistol\nWasp SMG 🔒\nGW-4 Carbine 🔒\nKR-7 Rifle 🔒\nShotgun 🔒\nBreacher-12 🔒\nRevolver 🔒\nSniper 🔒\n2. Drill\n1\nLEARN\nFirst Five\nFive close plates, one at a time. Any scoring zone counts; take your time and learn the range.\n2\nLEARN\nDraw on the Beep\nStart holstered. After the beep, draw with Tab and clear one close plate.\n3\nPRACTICE\nBullseye Circuit\nClear five plates by hitting only their body bullseyes.\n4\nPRACTICE\nCall Sign\nAlternate called head and bullseye shots, one plate at a time.\n5\nPRACTICE\nPop Patrol\nFollow an unpredictable left-to-right pop-up patrol; quick hits earn a speed bonus.\n6\nPRACTICE\nTwelve Clean\nClear twelve plates with twelve rounds. Every wasted shot costs an opportunity.\n7\nCHALLENGE\nQuickdraw Countdown\nTwelve reaction rounds; each exposure gets shorter. Base semi-auto is enough.\n8\nCHALLENGE\nPistol / Rifle Relay\nSix single-plate stages alternate pistol and carbine. Follow the weapon call before firing.\nLEARN\nFirst Five\nStart drill\nBriefing\nPersonal bests\n\nFive close plates, one at a time. Any scoring zone counts; take your time and learn the range.\n\nTake your place behind the firing bench with the listed weapon ready.\nWait for the overhead countdown and start beep. Then shoot the raised plates.\nUse Pistol. Aim for any scoring zone. Hits to clear each plate: 1.\nFollow each new target wave. A plate drops when its required hits are complete.\nPlates to clear: 5\nTime limit: 45s\nLane order: 1 → 2 → 3 → 4 → 5\n\nWeapons required: Pistol\n\nHow points and penalties work\n\nSelect a drill at the range console. Watch the overhead board for the countdown, instructions and final score.",
+    "recordCount": 1,
+    "action": ""
+  },
+  "resultLayout": {
+    "width": 390,
+    "scrollWidth": 390,
+    "left": 23,
+    "right": 352,
+    "top": 228.953125,
+    "text": "Last drill result\nFirst Five\n70\n\nDRILL COMPLETE\n\nRun time: 9.10s\nShot accuracy: 100.0%\nPlates cleared: 5/5\nShots fired: 5\nFirst shot after beep: 0.50s\n\nBase 20 + bonuses 50 − deductions 0\n\nNew personal record: Best score · Fastest full clear · Best full-clear accuracy"
+  }
+}

@@ -679,13 +679,19 @@ try {
       const owned = TT.getWeaponOwned ? TT.getWeaponOwned() : null;
       const issued = !!(owned && !owned[${JSON.stringify(FP)}]);
       if (issued) { if (TT.grantWeaponDbg) TT.grantWeaponDbg(${JSON.stringify(FP)}); else owned[${JSON.stringify(FP)}] = true; }
-      if (TT.setWeapon) TT.setWeapon(idx);
-      if (TT.isUnarmed && TT.isUnarmed() && TT.toggleHolster) TT.toggleHolster();
+      // CB-296: draw first (the Training Ground starts him holstered, and drawing brings back the holstered pistol), then select
+      // the asked gun, and again until it is in hand
+      if (TT.isUnarmed && TT.isUnarmed() && TT.toggleHolster) { TT.toggleHolster(); await wait(300); }
+      for (let k = 0; k < 10 && TT.getCurrentWeapon && TT.getCurrentWeapon() !== ${JSON.stringify(FP)}; k++) {
+        if (TT.setWeapon) TT.setWeapon(idx);
+        if (TT.isUnarmed && TT.isUnarmed() && TT.toggleHolster) TT.toggleHolster();
+        await wait(300);
+      }
       TT.setViewFirstDbg(true);
       const t0 = Date.now();
       let vm = false;
       const vmFn = typeof TT.viewmodelDbg === 'function';
-      while (Date.now() - t0 < 12000) {
+      while (Date.now() - t0 < 40000) {   // CB-296: was 12 s; software rendering (the cloud) takes longer to bring the view up
         const fp = TT.fpDbg();
         const gun = vmFn ? TT.viewmodelDbg() : null;
         vm = !!(gun && gun.info && gun.info.active);

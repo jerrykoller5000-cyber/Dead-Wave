@@ -1399,6 +1399,7 @@
     import { createViewmodel } from './game/viewmodel.js';   // CL-281: the first-person view gun
     import { HAND_POSES, lerpPose } from './studio/marine-hand.js';   // GB-152
     import { createSelectorFlick } from './game/selector-flick.js';   // GB-167: the thumb on the fire selector
+    import { ARM_LIMITS, BODY_EXCEPTIONS, clampWrist, clampElbowHinge, wristInside } from './core/body-limits.js';   // CB-289: the arm table
     import { applyMarineSurfaceDetail } from './studio/marine-detail.js';
     import { makePistolModel, makeRevolverModel, makeUziModel, makeKnifeModel } from './studio/weapon-sidearms.js';
     import { drawWeaponRail } from './studio/gun-detail.js';
@@ -1466,6 +1467,7 @@
     import { createTrainingPerimeter, isTrainingBorderCell } from './game/training-perimeter.js';
     import { createTrainingInfirmary } from './game/training-infirmary.js'; // GP-19882
     import { createTrainingArmoryCollision } from './game/training-armory-collision.js'; // GP-19895
+    import { createTrainingStationCollision } from './game/training-station-collision.js'; // GP-20085
     import { createTrainingInfirmaryFence } from './game/training-infirmary-fence.js'; // GP-19893
     import { createTrainingRelease } from './ui/training-release.js';   // GP-191
     import { createHitPops, hitPopText } from './ui/training-hit-pops.js';   // CL-171
@@ -24326,7 +24328,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       g.traverse((o) => { if (o.isLight) lights.push(o); });
       for (const l of lights) if (l.parent) l.parent.remove(l);
       const fx = new Set();
-      for (const [k, v] of Object.entries(src.userData)) if (v && v.isObject3D && /laser|flash|reloadShell|beam|glow/i.test(k)) fx.add(v);
+      for (const [k, v] of Object.entries(src.userData)) {
+        if (v?.isObject3D && v !== src.userData.laserLightUnit && /laser|flash|reloadShell|beam|glow/i.test(k)) fx.add(v);
+      }
       const orig = [], copy = [];
       src.traverse((o) => { if (!o.isLight) orig.push(o); });
       g.traverse((o) => copy.push(o));
@@ -24343,7 +24347,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         const pos = src.userData['base' + base + 'Pos'], rot = src.userData['base' + base + 'Rot'];
         if (pos) clone.position.copy(pos);
         if (rot) clone.rotation.copy(rot);
-        clone.visible = true;
+        clone.visible = key !== 'reloadShell';
       }
       // CL-236: out of the marine's shadow proxy (CL-234 marked it above this line, and this line wiped it: AG-110), and
       // casting its own shadow, as it did as part of the proxy (a folded minigun or revolver copy cast none on its own).
@@ -28032,15 +28036,26 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         let total = 0;
         const prep = list.map((o) => { const temporary = !!o.geometry.index, geo = temporary ? o.geometry.toNonIndexed() : o.geometry; total += geo.attributes.position.count; return { geo, temporary, m: new THREE.Matrix4().multiplyMatrices(_rkI, o.matrixWorld) }; });
         const pos = new Float32Array(total * 3), nrm = new Float32Array(total * 3), uv = new Float32Array(total * 2);
+        // foldStatic's shared material reads its factory colour and surface
+        // finish from these attributes. They follow the vertices into the rack.
+        const colorSize = prep.reduce((size, p) => Math.max(size, p.geo.attributes.color?.itemSize || 0), 0);
+        const colors = colorSize ? new THREE.BufferAttribute(new Float32Array(total * colorSize), colorSize) : null;
+        const finish = prep.some(p => p.geo.attributes.foldRM) ? new THREE.BufferAttribute(new Float32Array(total * 2), 2) : null;
         let at = 0;
         for (const { geo, m } of prep) {
           _rkNM.getNormalMatrix(m);
+          const C = geo.attributes.color, RM = geo.attributes.foldRM;
           const P = geo.attributes.position, N = geo.attributes.normal, U = geo.attributes.uv;
           for (let i = 0; i < P.count; i++) {
             _rkV.fromBufferAttribute(P, i).applyMatrix4(m);
             pos[(at + i) * 3] = _rkV.x; pos[(at + i) * 3 + 1] = _rkV.y; pos[(at + i) * 3 + 2] = _rkV.z;
             if (N) { _rkN.fromBufferAttribute(N, i).applyMatrix3(_rkNM).normalize(); nrm[(at + i) * 3] = _rkN.x; nrm[(at + i) * 3 + 1] = _rkN.y; nrm[(at + i) * 3 + 2] = _rkN.z; }
             if (U) { uv[(at + i) * 2] = U.getX(i); uv[(at + i) * 2 + 1] = U.getY(i); }
+            if (colors) {
+              colors.setXYZ(at + i, C ? C.getX(i) : 1, C ? C.getY(i) : 1, C ? C.getZ(i) : 1);
+              if (colorSize === 4) colors.setW(at + i, C?.itemSize === 4 ? C.getW(i) : 1);
+            }
+            if (finish) finish.setXY(at + i, RM ? RM.getX(i) : mat.roughness, RM ? RM.getY(i) : mat.metalness);
           }
           at += P.count;
         }
@@ -28051,6 +28066,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
         geo.setAttribute('normal', new THREE.BufferAttribute(nrm, 3));
         geo.setAttribute('uv', new THREE.BufferAttribute(uv, 2));
+        if (colors) geo.setAttribute('color', colors);
+        if (finish) geo.setAttribute('foldRM', finish);
         if (!prep.some(({ geo: g2 }) => g2.attributes.normal)) geo.computeVertexNormals();
         for (const p of prep) if (p.temporary) p.geo.dispose();
         geo.computeBoundingSphere();
@@ -30229,6 +30246,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         if (kind === 'm240' || kind === 'mortar') return buyAmmo(kind === 'm240' ? '7.62 belt' : '60mm');
         return buyWeaponAmmo(kind).bought > 0;
       },
+      getAmmoTypes: (kind) => typeof ammoTypeState === 'function' ? ammoTypeState(kind) : null,
+      onBuyAmmoType: (kind, type) => phase === 'prep' && !nightLockdown() && typeof buyAmmoType === 'function'
+        ? buyAmmoType(kind, type) : false,
+      getCash: () => bank,
       getGunOffers: () => WEAPON_ORDER.filter(w => !weaponOwned[w])
         .sort((a, b) => Number(training.active || equipmentStocked(b, day)) - Number(training.active || equipmentStocked(a, day)) || weaponPrice(a) - weaponPrice(b))
         .map(w => {
@@ -52088,6 +52109,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (ammoWeaponEl) ammoWeaponEl.textContent = st.name;
       const mg = mortarMounted && mortarMounted.type === 'm240' ? mortarMounted : null;   // GB-138: on the Watchman, its belt
       const carriedMg = mortarCarried?.kind === 'm240' ? mortarCarried : null;
+      const typedAmmo = typeof ammoTypeState === 'function' ? ammoTypeState(currentWeapon) : null;
       magazineHud.render(currentWeapon, !mortarMounted && !mortarCarried && isMagazineWeapon(currentWeapon) && magazineStore[currentWeapon] ? magazineSnapshot(magazineStore, currentWeapon) : null);
       if (mg) {
         const belt = mg.belt | 0, res = reserveAmmo['7.62 belt'] | 0, feeding = mg.feedT > 0;
@@ -52100,6 +52122,18 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         if (ammoWeaponEl) ammoWeaponEl.textContent = BUILD_NAMES.m240;
         if (ammoCountEl) ammoCountEl.textContent = String(carriedMg.belt | 0);
         if (ammoDetailEl) ammoDetailEl.textContent = sayText('m240.carriedAmmo', {belt: carriedMg.belt | 0});
+      } else if (typedAmmo) {
+        const loaded = Math.max(0, typedAmmo.inGun | 0);
+        const type = sayText('ammo.type.' + typedAmmo.loaded + '.tag', {}, typedAmmo.types?.[typedAmmo.loaded]?.tag || typedAmmo.loaded);
+        const reserve = Math.max(0, typedAmmo.carried?.[typedAmmo.loaded] | 0);
+        if (ammoWeaponEl) ammoWeaponEl.textContent = st.name + ' · ' + sayText('hud.ammo.typeHint');
+        if (ammoCountEl) ammoCountEl.textContent = String(loaded);
+        if (ammoDetailEl) ammoDetailEl.textContent = typedAmmo.switching
+          ? sayText('hud.ammo.switching', { type: sayText('ammo.type.' + typedAmmo.switching.to + '.tag', {}, typedAmmo.switching.to), phase: sayText('hud.ammo.switch.' + typedAmmo.switching.phase) })
+          : reloading ? sayText('hud.ammo.typedReloading', {type, reserve})
+          : sayText('hud.ammo.typed', {loaded, capacity: magSize(currentWeapon), type, reserve});
+        if (loaded <= 0 && !reloading && !typedAmmo.switching) ammoEl.classList.add('empty');
+        else ammoEl.classList.remove('empty');
       } else if (reloading) {
         ammoEl.classList.remove('empty');
         if (ammoCountEl) ammoCountEl.textContent = '…';
@@ -53167,6 +53201,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       }
       const dx = aimTarget.x - player.position.x;
       const dz = aimTarget.z - player.position.z;
+      // CC-343 (AG-288 find 1): from his eyes his body faces where he looks. The guard below is the third person's (a cursor
+      // on his own feet must not spin him), but from his eyes a console 0.4 m off, a wall or the floor pitched down all land
+      // inside its 0.75 m, so he kept his old facing while the view turned and the eye looked back over his shirt and pack.
+      if (!scoped && _otsCentre && viewFirst && fpOffSet) { aimYaw = OTS.yaw; return; }
       if (!scoped && (aimThroughMarine || dx*dx+dz*dz < AIM_PERSONAL_SPACE.facingRadius**2)) return;
       // Snap - preferred for TPS mouse aim (less wonky lag)
       aimYaw = Math.atan2(dx, dz);
@@ -53662,7 +53700,12 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const t1 = c - phi, t2 = -c - phi;
       const wrap = (x) => Math.atan2(Math.sin(x), Math.cos(x));
       const th1 = wrap(t1), th2 = wrap(t2);
-      const theta = Math.abs(th1 + 0.8) < Math.abs(th2 + 0.8) ? th1 : th2; // the natural (forward) bend
+      let theta = Math.abs(th1 + 0.8) < Math.abs(th2 + 0.8) ? th1 : th2; // the natural (forward) bend
+      // CB-289 (J127, rule 25): the elbow bends 0 to 150 deg, never backwards (core/body-limits.js); a target out of that
+      // reach leaves the hand short of it rather than the arm broken
+      // (the bend counted along the forearm, elbow to wrist, which leans forward of the elbow's -y at hinge 0)
+      { const lean = elbowLean(elbowG, hand), held = clampElbowHinge(theta, lean); if (held !== theta) { armLimitHits.elbow++; if (held > theta) armLimitHits.elbowFold++; else armLimitHits.elbowStraight++; } theta = held;
+        if (elbowG === marine.userData.elbowRG) armLimitElbowR = lean - theta; else if (elbowG === marine.userData.elbowLG) armLimitElbowL = lean - theta; }
       // Hand in arm space at that bend, then swing the arm so it points at the target
       // with the elbow toward the pole.
       const cs = Math.cos(theta), sn = Math.sin(theta);
@@ -53780,6 +53823,48 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     let wristTurnR = 0, wristTurnL = 0, wristNeedR = 0, wristNeedL = 0;   // the last turns at the wrists and what they wanted (radians), for the tests and the review
     let gripAR = 0, gripAL = 0;   // the last grip points' place between the hand point (0) and the fist's middle (1)
     const wristOf = (elbowG) => (elbowG && elbowG.userData.wrist) || null;
+    // CB-289 (Jerry, 10 Nov: "Setting limits for extension in the arms would prevent impossible movements"; J127, D-139):
+    // the wrist's turn the hold asks for is held inside core/body-limits.js's table: 75 deg toward the palm, 70 back, 20
+    // toward the thumb, 35 toward the little finger (an ellipse between), and the forearm's roll and the wrist's turn about
+    // the forearm's line together within 85 deg; the arm then reaches to put the fist on the grip as near as that allows.
+    // The one named exception (BODY_EXCEPTIONS 'support-foregrip', CB-289 (b)): the support hand on a vertical foregrip or
+    // the pump, up to 60 deg past the table, only while it is on it (not through a reload).
+    const armLimitHits = { wrist: 0, elbow: 0, elbowStraight: 0, elbowFold: 0 };
+    let armLimitR = null, armLimitL = null, armLimitElbowR = 0, armLimitElbowL = 0;
+    const _armLimV = new THREE.Vector3();
+    // How far the forearm (elbow to wrist) leans forward of the elbow's -y at hinge 0, read once per arm off the rig.
+    function elbowLean(elbowG, hand) {
+      if (elbowG.userData.cb289Lean != null) return elbowG.userData.cb289Lean;
+      const w = elbowG.userData.wrist ? elbowG.userData.wrist.position : hand;
+      return (elbowG.userData.cb289Lean = Math.atan2(w.z, -w.y));
+    }
+    function supportOnForegrip() {
+      if (reloading || unarmed) return false;
+      const H = WEAPON_HOLD[currentWeapon];
+      return !!H && (H.fore === 'pump' || HANDS.fore[currentWeapon] === 'up');
+    }
+    function limitWrist(elbowG, wr, roll) {
+      const ud = marine.userData, left = elbowG === ud.elbowLG;
+      if (!left && elbowG !== ud.elbowRG) return null;
+      const ex = left && supportOnForegrip() ? 'support-foregrip' : null;
+      // rollForearm turns the forearm about its line toward the hand (down the forearm, -y): the wrist's twist sense is -roll
+      const r = clampWrist(wr.quaternion, left ? -1 : 1, -roll, ex);
+      if (r.held) armLimitHits.wrist++;
+      if (left) armLimitL = r; else armLimitR = r;
+      return r;
+    }
+    // For the checks: both arms as they are posed now, against the table (the forearm's last roll counted).
+    function armLimitsNow() {
+      const ud = marine.userData, out = { table: ARM_LIMITS, exceptions: BODY_EXCEPTIONS.map((e) => e.id), hits: { ...armLimitHits } };
+      for (const [k, e, side, roll] of [['r', ud.elbowRG, 1, -handRollR], ['l', ud.elbowLG, -1, -handRollL]]) {
+        const wr = wristOf(e), ex = k === 'l' && supportOnForegrip() ? 'support-foregrip' : null;
+        // the elbow's bend: the forearm's line (elbow to wrist) against the upper arm's (-y), forward (+z) positive, backwards negative
+        const v = wr ? _armLimV.copy(wr.position).normalize().applyQuaternion(e.quaternion) : _armLimV.set(0, -1, 0), bend = Math.atan2(Math.hypot(v.x, v.z) * (v.z < -1e-6 ? -1 : 1), -v.y);
+        out[k] = wr ? { ...wristInside(wr.quaternion, side, roll, ex), exception: ex, elbow: bend, last: k === 'r' ? armLimitR : armLimitL } : null;
+      }
+      out.elbowIK = { r: armLimitElbowR, l: armLimitElbowL };
+      return out;
+    }
     function restWrists(ud) { for (const e of [ud.elbowRG, ud.elbowLG]) { const wr = wristOf(e); if (wr) wr.quaternion.identity(); } gripAR = gripAL = 0; }
     // Where a hand's grip point is in the world now: the fist's channel middle (a = 1), part way back to the hand point.
     function fistPointW(elbowG, hand, a, out) {
@@ -53855,6 +53940,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         const ang = 2 * Math.acos(Math.min(1, Math.abs(_wr.q.w)));
         const s = (ang > WRIST.max ? WRIST.max / ang : 1) * k * a;
         wr.quaternion.copy(_wr.id).slerp(_wr.q, s);
+        limitWrist(elbowG, wr, roll);   // CB-289: inside the table before the arm reaches to make up what it misses
         turn = ang * s; need = ang;
         wr.updateMatrixWorld(true);
         const miss = _wr.d.copy(anchorW).sub(wr.localToWorld(_wr.c.copy(g)));
@@ -63638,6 +63724,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (!training.tg) { training.tg = buildTrainingGround(THREE, { gridOffset: BUILD_GRID / 2, grid: BUILD_GRID, securityLabel: sayText('training.securityLabel'), labels: { noBuild: sayText('training.noBuildZone', {}, 'NO BUILD ZONE'), gate: sayText('training.gateTitle'), containment: sayText('training.gateDetail'), infirmary: sayText('training.infirmaryLabel'), medical: sayText('training.medicalLabel') } }); training.copies = trainingCopies(training.tg); }
       if (!training.infirmary) training.infirmary = createTrainingInfirmary(training.tg); // GP-19882
       if (!training.armoryCollision && training.copies.armory) training.armoryCollision = createTrainingArmoryCollision(THREE, training.copies.armory.copy);
+      if (!training.stationCollision) training.stationCollision = createTrainingStationCollision(THREE, training.tg, training.copies);
       if (!training.infirmaryFence) training.infirmaryFence = createTrainingInfirmaryFence(THREE, training.tg, { onMotion: up => AudioSys.trainingCue(up ? 'fence-up' : 'fence-down') });
       training.infirmaryFence.reset();
       if (!training.perimeter) training.perimeter = createTrainingPerimeter(THREE, training.tg);
@@ -64088,6 +64175,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (safe?.moved) { p.x = safe.x; p.z = safe.z; velX = 0; }
       const armory = training.armoryCollision?.constrain(p, playerFrameStart, PLAYER_RADIUS);
       if (armory?.moved) { p.x = armory.x; p.z = armory.z; if (armory.blockX) velX = 0; if (armory.blockZ) velZ = 0; }
+      const station = training.stationCollision?.constrain(p, playerFrameStart, PLAYER_RADIUS);
+      if (station?.moved) { p.x = station.x; p.z = station.z; if (station.blockX) velX = 0; if (station.blockZ) velZ = 0; }
+      const rangeConsole = rangeFeature?.constrain(p, playerFrameStart, PLAYER_RADIUS);
+      if (rangeConsole?.moved) { p.x = rangeConsole.x; p.z = rangeConsole.z; if (rangeConsole.blockX) velX = 0; if (rangeConsole.blockZ) velZ = 0; }
       const ko = tg.keepOut?.(p, PLAYER_RADIUS); if (ko?.moved) { p.x = ko.x; p.z = ko.z; }   // GB-161: the locker bank (and he bumps its door)
       // GP-19882: scripted collapse/bed poses deliberately enter the furniture.
       const medical = !training.wake && training.infirmary?.constrain(p, playerFrameStart, PLAYER_RADIUS);
@@ -66447,7 +66538,7 @@ live++;
           // Debug-only: economy hooks. grantAllWeapons hands over the arsenal so the older
           // weapon probes keep working; the rest let probes drive the kiosk directly.
           grantAllWeapons, KIOSK, openShop, closeShop, buyWeapon, buyAmmo, buyGear, buyBuild, skullValueDbg: () => skullValueTotal, siegeNightDbg: () => siegeNightNow, LATE_CASH_NIGHT, LATE_CASH_FACTOR, LATE_CASH_STEP, lateCashMul, buyExtMag, buyHeavyBarrel, fitWeaponMod, weaponMods, HEAVY_BARREL_PRICE, EXT_MAG_RELOAD_MUL, HEAVY_CLIMB_MUL, HEAVY_SWAP_DUR, HEAVY_MOVE_SPREAD_MUL, recoilClimb, getReloadDbg: () => ({ timer: reloadTimer, anim: reloadAnimDuration, weapon: reloadWeapon }), /* CL-84 */ akimboDbg: { AKIMBO_CARRY, carry: () => akimboCarryW, retreat: () => akimboRetreat },   /* CL-188 */ airDbg: { AIR, pose: () => POSE.airPose, jumpNow: () => { if (!grounded) return false; vy = PHYS.jumpVel; grounded = false; coyoteT = 0; return true; } },   /* CL-210 */ rigSkinDbg: { info: (r) => rigSkinInfo(r || marine), count: () => rigSkinCount(), sync: () => syncRigSkins() },   /* CL-189 */ aoDbg: { AO_DEFAULTS, info: () => marine.userData.aoInfo, bake: (o) => (marine.userData.aoInfo = bakeMarineAO(THREE, marine, { ...marine.userData.ao, ...(o || {}) })) },   /* CL-186 */ zombieFeetDbg: { ZFEET, ZLEAN },   /* CL-187 */ gaitDbg: { GAIT, GAIT_FEEL, GAIT_WEIGHT, UNARMED_ARMS, UNARMED_RUN, WINDED, winded: () => POSE.winded || 0, setWinded: (v) => { POSE.winded = v; }, breaths: () => POSE.breaths || 0, pose: () => POSE, clips: () => MARINE_GAIT, w: () => POSE.gaitW || 0, run: () => POSE.gaitRun || 0, sample: (u, r) => { const g = marineGait(u, r); return g && { ...g }; } },   /* CL-84 */ smoothDbg: { MOVE_FEEL, GUN_LAG, xfade: () => XFADE, gunLag: () => gunLag, wish: () => ({ x: wishVX, z: wishVZ }), vel: () => ({ x: velX, z: velZ, y: vy }), lookY: () => camLookYS, pose: () => POSE, phase: () => walkPhase, lerpK: _lerpK, decayK: _decayK },   /* CL-133 */ handsDbg: { HANDS, roll: () => ({ r: handRollR, l: handRollL }), WRIST, HAND_R: _HAND_R, HAND_L: _HAND_L, wrist: () => ({ r: wristTurnR, l: wristTurnL, needR: wristNeedR, needL: wristNeedL }), gripPoint: (side, out = new THREE.Vector3()) => side === 'L' ? fistPointW(marine.userData.elbowLG, _HAND_L, gripAL, out) : fistPointW(marine.userData.elbowRG, _HAND_R, gripAR, out), gripA: () => ({ r: gripAR, l: gripAL }),   /* CU-100: where each hand closes now (the hand point while it isn't holding) */ knife: () => ({ u: knifeArmU, clip: KNIFE_CLIP, chop: MACHETE_CLIP, dur: knifeSwingDur, places: _kp }), FP_BLADE_PATH, FP_BLADE_AIM, FP_BLADE_DIP, fpBladeDip: () => fpBladeDip, BLADE_BODY, bladeTwist: (u, h) => bladeTwist(u, h),   /* CL-261 */ knifeHold: (u) => { knifeHoldU = u == null ? null : _clamp01(u); if (u != null) { knifeSwingDur = bladeSwingDur(); knifeAnimT = knifeSwingDur * (1 - knifeHoldU) || 0.0001; } }, drawHold: (t) => { drawHoldT = t == null ? null : Math.max(0, t); }, knifeClip: (on) => { if (!on) { _kc = KNIFE_CLIP || _kc; KNIFE_CLIP = null; } else if (_kc) KNIFE_CLIP = _kc; }, drawPlace, gripDownDir, foreChannelDir },   /* CL-122 */ fpReloadLiftDbg: () => FP_RELOAD_LIFT, fpReloadLiftGunDbg: () => FP_RELOAD_LIFT_GUN, fpReloadSetDbg: () => ({ ...fpReloadSet() }),   /* GB-245 */ reloadClipDbg: { clip: () => RELOAD_CLIP, places: () => _rlP, hold: (u) => { reloadHoldU = u == null ? null : _clamp01(u); if (reloading && u != null) reloadTimer = Math.max(0.001, (reloadAnimDuration || 1) * (1 - reloadHoldU)); }, mag: () => (RELOAD_CLIP ? Studio.magAt(RELOAD_CLIP, _clamp01(1 - reloadTimer / Math.max(0.05, reloadAnimDuration || 1))) : null) }, getSwapDbg: () => ({ swapT, swapDur, fireCooldown }), setSprayDbg: (h, n) => { sprayHeat = h; sprayShot = n | 0; sprayWeapon = currentWeapon; }, setVelDbg: (x, z) => { velX = x; velZ = z; }, resetEconomyDbg: () => resetEconomy(), WEAPON_ORDER, buySuppressor, SUPPRESSOR_PRICE, SHOT_HEARING, SUPPRESSED_HEARING_MUL, SUPPRESSED_DAMAGE_MUL, shotHearingRadius, suppressedDamageMul, heardShotDbg: () => ({ shotsHeard, lastShotNoise }), sawCutTick, sawCutDbg: () => ({ holdT: sawCutHoldT, hearT: sawCutHearT, fuel: sawFuel, heat: sawHeat, overheat: sawOverheat, biteT: sawBiteT }), buyPistolAuto, PISTOL_AUTO_PRICE, toggleFireMode, toggleHolster, isUnarmed: () => unarmed, setSpareMags, handInGun, takeOutGun, spareMagCount: (w) => (magazineStore[w] && magazineStore[w].spare ? magazineStore[w].spare.length : 0), magazinesDbg: (w) => (magazineStore[w] ? magazineSnapshot(magazineStore, w) : null), setMagazinesDbg: (w, loaded, spare, loaded2 = null) => { const e = magazineStore[w]; if (!e) return false; e.loaded[0].rounds = Math.min(e.size, loaded | 0); if (loaded2 != null && e.loaded[1]) e.loaded[1].rounds = Math.min(e.size, loaded2 | 0); e.spare = spare.slice(0, e.maxSpare).map((r) => ({ rounds: Math.min(e.size, r | 0), size: e.size })); syncMagazine(w); updateAmmoHud(); return true; }, reloadGainsMagazine, toggleDualWieldDbg: () => toggleDualWield(), setDualOwnedDbg: (w, on = true) => { dualOwned[w] = !!on; if (on && isMagazineWeapon(w) && magazineStore[w]) { issueSecondGun(magazineStore, w); syncMagazine(w); } return !!dualOwned[w]; },   /* CL-188 */   /* GB-137 */ stepFireDbg: (dt) => tryFire(dt), recoilSpan, GEAR, WEAPON_PRICE, AMMO_PACK, caliberOf, RESERVE_CAP, RESERVE_CAP_BASE, SPARE_CAP_MULT, START_RESERVE_45, reserveCap, BUILD_UNLOCK_PRICE,
-          getWeaponOwned: () => weaponOwned, grantWeaponDbg: (w) => grantVaultWeapon(w),   /* CB-296: one gun issued with its ammo (tools/bench.mjs --fp) */ toggleFlashlightDbg: () => { toggleFlashlight(); return flashlightOn; }, /* CL-327 */ getReserve: () => reserveAmmo, getGearOwned: () => gearOwned, getBuildUnlocked: () => buildUnlocked,
+          getWeaponOwned: () => weaponOwned, armLimitsDbg: () => armLimitsNow(),   /* CB-289 */ grantWeaponDbg: (w) => { grantVaultWeapon(w); if (w !== 'pistol' && !weaponInReach(w)) takeOutGun(w); return weaponInReach(w); },   /* CB-296: one gun issued with its ammo (tools/bench.mjs --fp) */ toggleFlashlightDbg: () => { toggleFlashlight(); return flashlightOn; }, /* CL-327 */ getReserve: () => reserveAmmo, getGearOwned: () => gearOwned, getBuildUnlocked: () => buildUnlocked,
           sawPullDbg: SAW_PULL, /* CL-326 */ getAmmo: () => ammoByWeapon, getPhase: () => phase, setPhase: (p) => { phase = p; }, isShopOpen: () => shopOpen, requestViewToggleDbg: () => requestViewToggle(), viewSwapDbg: (k) => { if (k !== undefined) viewSwapHold = k; return { in: viewSwapIn, out: viewSwapOut, hold: viewSwapHold }; }, /* CL-328 */ getSawFuel: () => sawFuel, sawStartDbg: () => ({ ...sawStart, ...sawStartPose(sawStart) }),
           // Debug-only: survival-rules hooks (health cap, medkits, cash decay, self-damage).
           acidGlobs, pickWaterSpawn, waveComposition, nightPlanFor, NIGHT_PLAN, NIGHT_TIER, nightPushSizes, getWavePace: () => nightPace, pickZombieType, getWavePreview, getBounties, spawnBounties, expireBounties, bountyRewardFor, getSurvivors, survivorDbg, survivorHelpDbg, roofDbg, getHushState, hushDbg, spawnWanderer, wandererAllowed, wandererTrails, wandererReward, WANDERER_PACE, bountyGuardTypes, bountyDbg: () => ({ due: bountiesDue, seq: !!hq.seq, last: bountyLastKeys.slice() }), getWaveDirectorState, getActiveCaveIndices, spawnWaveBatch, beginWave, startPrep, clearZombies, isGuardianNight, getGuardianState, getGuardianAlive, GUARDIAN_KEYS, ZOMBIE_TYPES, MAX_ZOMBIES, spawnObjectiveDefenders, getRadioDefenderState, grantSupply, listOwnedAmmoPackChoices, grantBuildBlueprint, pulseGuardianFailsafeForTest, RADIO_DEFENDER, CAVE_ROLES, roleForCave, applyCaveRole, CLIMB_HEIGHT, climberCanVaultBuild, warnActiveCaves, getRendererBackend: () => rendererBackend, TSL,

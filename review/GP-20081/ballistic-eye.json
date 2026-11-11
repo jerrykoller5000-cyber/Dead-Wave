@@ -1,0 +1,33 @@
+{
+  "setup": {
+    "start": {
+      "ok": true,
+      "id": "1794358375268-1"
+    },
+    "active": "ACTIVE",
+    "target": "up",
+    "box": {
+      "minX": 5.36,
+      "maxX": 6.64,
+      "minY": -199.34,
+      "maxY": -197.1,
+      "minZ": -635.07,
+      "maxZ": -634.93
+    },
+    "score": 0,
+    "hud": "First Five\nLIVE\n0 points\n43s remaining\n\nUse Pistol. Aim for any scoring zone. Hits to clear each plate: 1.\n\nWave 1/5 · 0 plates cleared\nEscape: abort drill"
+  },
+  "shot": {
+    "contacted": true,
+    "hit": true,
+    "score": 12,
+    "cleared": 1,
+    "state": "up",
+    "point": {
+      "x": 6,
+      "y": -199.228,
+      "z": -635
+    }
+  },
+  "errors": []
+}

@@ -5,9 +5,9 @@
 // the bore and background show through at every viewing angle. No CSG or new mats.
 import { gunDetail } from './gun-detail.js';
 import { attachLaserLight } from './weapon-attachments.js';
-import { fitPortCarrier } from './weapon-casings.js';
-import { markPaintSurface } from './weapon-finish.js';
-import { bindModelArtwork, groupArtwork } from './weapon-model-hooks.js';
+import { fitPortCarrier, roundGeometry } from './weapon-casings.js';
+import { markPaintSurface, walnutTexture } from './weapon-finish.js';
+import { addTriggerArtwork, bindModelArtwork, groupArtwork } from './weapon-model-hooks.js';
 
 function ventedSleeve(T, parent, material, { z0, z1, radius, wall, y, faces = 12, slots, ventFaces }) {
   const pos = [], uv = [], step = Math.PI * 2 / faces;
@@ -151,7 +151,10 @@ export function makeM4Model(ctx) {
   for (const z of [-0.15, 0.115]) D.pin(gun, 0, -0.012, z, { axis: 'x', len: LW, r: 0.0045, proud: 0.0015, caps: true, mat: z < 0 ? finish.panel : gunMetal });                          // the takedown and pivot pins
   const selector = K.slab(gunBand([[-0.11, -0.012], [-0.08, -0.03]], 0.004), 0.004, gunDark, { x: -LW / 2 - 0.001, bevel: 0.001 });                    // the selector lever
   const selectorCap = K.cyl(0.0075, 0.0075, 0.004, gunDark, -LW / 2 - 0.001, -0.012, -0.11, null, 10, 'x');                                                // its axle's boss
-  for (const [ry, rz] of [[-0.003, -0.126], [0.0, -0.11], [-0.003, -0.094]]) D.screw(gun, -LW / 2 + 0.0012, ry + 0.005, rz, { axis: 'x', side: -1, r: 0.0015, kind: 'button', mat: gunMid });   // the safe/semi/auto marks
+  // The raised centre mark sits on the narrower upper panel above the seam.
+  for (const [y, z, x] of [[.002,-.126,-LW/2+.0012],[.005,-.11,-UW/2],[.002,-.094,-LW/2+.0012]]) {
+    D.screw(gun, x, y, z, { axis:'x', side:-1, r:.0015, kind:'button', mat:gunMid });
+  }
   const catchPlate = K.slab([[0.09, -0.016], [0.118, -0.016], [0.118, -0.046], [0.09, -0.046]], 0.006, gunDark, { x: -LW / 2 - 0.002, bevel: 0.002 });   // the bolt catch paddle (the work point, the reload's slap)
   K.tor(0.009, 0.0025, gunBody, LW / 2 + 0.0015, -0.03, 0.09, 0, Math.PI / 2, 0, null, Math.PI * 2, 12);                            // the mag release's fence
   const release = K.cyl(0.006, 0.006, 0.006, gunDark, LW / 2 + 0.003, -0.03, 0.09, null, 10, 'x');                                                    // the button
@@ -160,7 +163,7 @@ export function makeM4Model(ctx) {
   // up more space"): the trigger 18 units behind where it was (15 mm behind the well's rear face), the guard a real loop
   // from the well's rear to the grip's front, 4 cm deep, and the grip 4 units back on its mount boss.
   K.slab(gunBand([[-0.008, -0.062], [-0.014, -0.1], [-0.03, -0.108], [-0.066, -0.108], [-0.082, -0.096], [-0.08, -0.07]], 0.008), 0.03, gunDark, { bevel: 0.003 });   // the trigger guard
-  K.slab([[-0.0283, -0.0525], [-0.0367, -0.0689], [-0.0359, -0.0843], [-0.0272, -0.0957], [-0.0328, -0.1003], [-0.0441, -0.0877], [-0.0473, -0.0671], [-0.0397, -0.0475]], 0.012, gunDark, { bevel: 0.002 });   // GB-175/180: the trigger
+  addTriggerArtwork(gun, K, [[-0.0283, -0.0525], [-0.0367, -0.0689], [-0.0359, -0.0843], [-0.0272, -0.0957], [-0.0328, -0.1003], [-0.0441, -0.0877], [-0.0473, -0.0671], [-0.0397, -0.0475]], 0.012, gunDark, { bevel: 0.002 });   // GB-175/180: the trigger
   K.slab(shapedGrip(-0.12, -0.12, 0.18, 0.08, 0.3, [[-0.12, 0.04], [0.04, 0.04], [0.04, -0.046], [-0.12, -0.046]]), 0.048, finish.lower, { bevel: 0.006, segs: 2 });   // the lower's grip mount, the grip grows out of it
   // CL-312 b (Jerry: "check and fix all pistol grips"): an A2 grip at an A2's size (32 mm wide, 53 mm deep under the
   // beavertail, 46 at the palm): the finger nub on the front strap and the four ridges under it, the backstrap's swell,
@@ -321,8 +324,31 @@ export function makeM4Model(ctx) {
   return finishGun(gun);
 }
 
+const krFinishes = new WeakMap();
+function krFinish(ctx) {
+  if (!krFinishes.has(ctx.gunBody)) {
+    const receiver = ctx.gunBody.clone();
+    receiver.color.setHex(0x4a5055); receiver.roughness = .49; receiver.metalness = .34;
+    const bracket = ctx.gunMid.clone();
+    bracket.color.setHex(0x50565a); bracket.roughness = .52; bracket.metalness = .35;
+    const walnut = ctx.woodMat.clone();
+    walnut.name = 'KR-7 walnut';
+    walnut.color.setHex(0x875a38); walnut.roughness = .52;
+    walnut.map = walnutTexture(ctx.THREE).clone();
+    walnut.map.rotation = Math.PI / 2;
+    walnut.map.repeat.set(.8, .65);
+    walnut.map.needsUpdate = true;
+    const cartridge = ctx.brassMat.clone();
+    cartridge.color.setHex(0xffffff); cartridge.vertexColors = true;
+    cartridge.roughness = .38; cartridge.metalness = .42;
+    krFinishes.set(ctx.gunBody, {receiver, bracket, walnut, cartridge});
+  }
+  return krFinishes.get(ctx.gunBody);
+}
+
 export function makeAkModel(ctx) {
-  const { THREE, gunKit, gunBand, gunEffects, gunSuppressor, finishGun, profileCurve, gunBody, gunMid, gunDark, gunAccent, gunRubber, woodMat, woodDark, gunMetal } = ctx;
+  const { THREE, gunKit, gunBand, gunEffects, gunSuppressor, finishGun, profileCurve, gunMid, gunDark, gunAccent, gunRubber, woodDark, gunMetal } = ctx;
+  const {receiver: gunBody, bracket, walnut: woodMat, cartridge} = krFinish(ctx);
   const gun = new THREE.Group();
   const K = gunKit(gun);
   const D = gunDetail(ctx);
@@ -350,17 +376,27 @@ export function makeAkModel(ctx) {
   const opticSeat = K.group(0, 0, 0);
   opticSeat.name = 'side optic bracket'; opticSeat.visible = false;
   K.box(0.010, 0.025, 0.111, gunDark, -HW - 0.005, 0.008, 0.063, 0, 0, 0, opticSeat, 0.002);
-  for (const z of [0.026, 0.097]) {
-    K.box(0.008, 0.057, 0.021, gunMid, -HW - 0.006, 0.049, z, 0, 0, 0, opticSeat, 0.0015);
-  }
+  // A flared side plate carries the visual weight of the sight. The scallop
+  // leaves a strip of the rounded cover visible below the rail in profile.
+  K.slab([[.009,.020],[.109,.020],[.114,.026],[.097,.041],[.093,.054],
+    [.111,.069],[.111,.077],[.017,.077],[.017,.065],[.035,.048],
+    [.032,.039],[.009,.029]], .010, bracket, {x:-HW-.005,bevel:.002,segs:3,parent:opticSeat}).name = 'KR-7 bracket web';
+  K.slab([[.013,.007],[.014,.016],[.052,.025],[.063,.024],[.065,.019],
+    [.056,.014],[.026,.006]], .003, gunDark,
+    {x:-HW-.011,bevel:.0009,segs:2,parent:opticSeat}).name = 'KR-7 bracket latch';
   K.box(HW + 0.027, 0.008, 0.100, gunDark, (0.007 - HW) / 2, 0.081, 0.064, 0, 0, 0, opticSeat, 0.0015);
   gun.userData.opticPlate = opticSeat;
   gun.userData.ejectPort = [HW + 0.003, 0.016, 0.1875];
   // Dust cover: the stamped lid with its rounded top and the AKM's eight ribs across the rear half.
   // (CL-315 note: one parkerized finish on the cover and the receiver, as an AKM has; the ribs a shade lighter to read.)
   K.slab([[-0.2, 0.027], [0.155, 0.027], [0.155, 0.04], [-0.18, 0.04], [-0.2, 0.036]], 2 * HW - 0.002, gunBody, { bevel: 0.002, segs: 2 });
-  K.lathe([[0, -0.2], [0.021, -0.2], [0.022, -0.19], [0.022, 0.15], [0.021, 0.155], [0, 0.155]], gunBody, { y: 0.036, seg: 16, phase: Math.PI / 16 });
-  D.ribs(gun, { x: 0, y: 0.058, z: -0.12, axis: 'y', side: 1, along: 'z', count: 8, pitch: 0.013, w: 0.03, h: 0.001, t: 0.0022, mat: gunMid });
+  const coverProfile = [[0,-.2],[.021,-.2],[.022,-.19]];
+  for (let i = 0; i < 8; i++) {
+    const z = -.167 + i * .013;
+    coverProfile.push([.022,z],[.0231,z+.0016],[.0231,z+.0030],[.022,z+.0047]);
+  }
+  coverProfile.push([.022,.15],[.021,.155],[0,.155]);
+  K.lathe(coverProfile, gunBody, {y:.036,seg:20,phase:Math.PI/20}).name = 'KR-7 receiver cover';
   // GP-20056, Century parts figure 1 and field strip: the recoil spring cam protrudes through the rear of the lid.
   K.cyl(0.008, 0.008, 0.003, gunMid, 0, 0.044, -0.202, null, 12, 'z');
   K.cyl(0.0055, 0.0055, 0.009, gunDark, 0, 0.044, -0.205, null, 12, 'z');
@@ -373,11 +409,11 @@ export function makeAkModel(ctx) {
   // CL-318 (J27: "the safety needs to look more realistic and like an AK-47 safety"): the stamped selector lever: its
   // hub on the axle above and behind the trigger, the long flat blade running forward along the receiver's side to the
   // thumb tab over the trigger guard's front, the two notches it clicks into at the cover's edge.
-  K.cyl(0.011, 0.011, 0.004, gunDark, HW + 0.002, 0.004, -0.12, null, 14, 'x');                                             // the hub
+  const selectorHub = K.cyl(0.011, 0.011, 0.004, gunDark, HW + 0.002, 0.004, -0.12, null, 14, 'x');                                             // the hub
   D.screw(gun, HW + 0.004, 0.004, -0.12, { axis: 'x', side: 1, r: 0.004, kind: 'slot' });                                    // the axle's head
-  K.slab(gunBand([[-0.12, 0.012], [-0.05, 0.01], [0.012, 0.004]], 0.0055), 0.0035, gunDark, { x: HW + 0.0022, bevel: 0.0012 });   // the blade
-  K.slab(gunBand([[0.006, 0.006], [0.02, -0.004], [0.028, -0.02]], 0.005), 0.0035, gunDark, { x: HW + 0.0022, bevel: 0.0012 });   // the thumb tab, bent down at the front
-  K.box(0.005, 0.004, 0.012, gunDark, HW + 0.0045, -0.012, 0.024, 0, 0, 0, null, 0.001);                                       // its lip, bent out
+  const selectorBlade = K.slab(gunBand([[-0.12, 0.012], [-0.05, 0.01], [0.012, 0.004]], 0.0055), 0.0035, gunDark, { x: HW + 0.0022, bevel: 0.0012 });   // the blade
+  const selectorTab = K.slab(gunBand([[0.006, 0.006], [0.02, -0.004], [0.028, -0.02]], 0.005), 0.0035, gunDark, { x: HW + 0.0022, bevel: 0.0012 });   // the thumb tab, bent down at the front
+  const selectorLip = K.box(0.005, 0.004, 0.012, gunDark, HW + 0.0045, -0.012, 0.024, 0, 0, 0, null, 0.001);                                       // its lip, bent out
   for (const z of [-0.145, -0.108]) D.groove(gun, { x: HW, y: 0.024, z, axis: 'x', side: 1, along: 'y', len: 0.012, w: 0.0008 });   // the selector's notches
   // The pressed SAFE/FIRE sweep and its end stops are on the same right wall as the selector.
   K.slab(gunBand([[-0.12, 0.004], [-0.085, 0.025], [-0.038, 0.03]], 0.0012), 0.0015, gunMid, { x: HW + 0.001, bevel: 0 });
@@ -401,9 +437,9 @@ export function makeAkModel(ctx) {
   // CL-318 (J27: the guard squeezed between the grip and the magazine; the grip shortened): the guard a real loop from
   // the mag release's rear to the grip's front, 36 units long; the grip 3 units back and 2.5 shorter.
   K.slab(gunBand([[0.002, -0.028], [0.0, -0.072], [-0.016, -0.084], [-0.06, -0.084], [-0.076, -0.068], [-0.074, -0.04]], 0.0055), 0.022, gunDark, { bevel: 0.003 });
-  K.box(0.016, 0.018, 0.006, gunDark, 0, -0.04, 0.004);   // the mag release paddle
+  const magRelease = K.box(0.016, 0.018, 0.006, gunDark, 0, -0.04, 0.004);   // the mag release paddle
   // GB-175: trigger face toward the grip, tip curling forward; GB-180: a solid blade.
-  K.slab([[-0.0165, -0.0329], [-0.0248, -0.046], [-0.024, -0.0581], [-0.0155, -0.0675], [-0.0205, -0.0725], [-0.032, -0.0619], [-0.0352, -0.044], [-0.0275, -0.0271]], 0.009, gunDark, { bevel: 0.002 });
+  addTriggerArtwork(gun, K, [[-0.0165, -0.0329], [-0.0248, -0.046], [-0.024, -0.0581], [-0.0155, -0.0675], [-0.0205, -0.0725], [-0.032, -0.0619], [-0.0352, -0.044], [-0.0275, -0.0271]], 0.009, gunDark, { bevel: 0.002 });
   // GB-178: a clean AK grip on the same centre line and hand anchor (u 0.42, v 0); its top runs up into the receiver.
   // CL-312 b (Jerry: "check and fix all pistol grips"): the AKM grip widens a little to a flat base (it tapered to a point).
   // The centre line cz -0.13, cy -0.135, h 0.165 (was -0.1, -0.14, 0.19): the palm point (u 0.42) is (-0.1256, -0.1226) now:
@@ -420,7 +456,7 @@ export function makeAkModel(ctx) {
   const stock = K.group(0, 0, 0); stock.name = 'fp-stock';
   // CL-318 (J27: "the stock needs to transition better to the receiver"): the wood runs into a steel rear-trunnion sleeve
   // the receiver's own width, riveted, instead of meeting the receiver's end with a step and a block on top.
-  K.slab([[-0.232, 0.028], ...profileCurve([-0.255, 0.03], [-0.34, 0.012], [-0.412, 0.012], 5),
+  const stockBody = K.slab([[-0.232, 0.028], ...profileCurve([-0.255, 0.03], [-0.34, 0.012], [-0.412, 0.012], 5),
     ...profileCurve([-0.412, 0.012], [-0.515, 0.017], [-0.571, -0.009], 5), [-0.579, -0.145], [-0.57, -0.153],
     ...profileCurve([-0.57, -0.153], [-0.414, -0.084], [-0.337, -0.069], 5),
     ...profileCurve([-0.337, -0.069], [-0.27, -0.044], [-0.232, -0.028], 4)], 0.046, woodMat, { bevel: 0.01, segs: 3, parent: stock });
@@ -440,6 +476,11 @@ export function makeAkModel(ctx) {
   // J85: shorten only the butt behind the receiver joint; the grip and reload datums stay put.
   stock.scale.z = 0.77;
   stock.position.z = -0.225 * (1 - stock.scale.z);
+  // Keep the wood visible from the player's eye, with the same issued contour.
+  stockBody.scale.z = stock.scale.z;
+  stockBody.position.z = stock.position.z;
+  stockBody.name = 'KR-7 stock';
+  gun.add(stockBody);
   gun.userData.fpStock = stock;
   // Handguards: the lower with its palm swell and finger grooves, the upper over the gas tube, the steel bands and their latches.
   K.slab([[0.244, 0.012], [0.53, 0.012], [0.535, -0.01], [0.53, -0.04], [0.45, -0.052], [0.33, -0.053], [0.262, -0.047], [0.244, -0.034]], 0.062, woodMat, { bevel: 0.01, segs: 3 });
@@ -462,7 +503,7 @@ export function makeAkModel(ctx) {
   K.slab([[0.595, 0.04], [0.645, 0.036], [0.645, -0.02], [0.595, -0.022]], 0.03, gunMid, { bevel: 0.003 });   // the gas block
   D.pin(gun, 0, 0.012, 0.62, { axis: 'x', len: 0.03, r: 0.002, caps: true });
   // Barrel and cleaning rod; the front sight tower with its hood; the bayonet lug; the slant brake. (GB-259: the post's tip at the sight line.)
-  K.lathe([[0, 0.5], [0.0125, 0.5], [0.0125, 0.6], [0.011, 0.608], [0.011, 0.755], [0, 0.755]], gunAccent, { y: -0.005, seg: 12 });
+  const barrel = K.lathe([[0, 0.5], [0.0125, 0.5], [0.0125, 0.6], [0.011, 0.608], [0.011, 0.755], [0, 0.755]], gunAccent, { y: -0.005, seg: 12 });
   K.lathe([[0, 0.53], [0.003, 0.53], [0.003, 0.715], [0.005, 0.719], [0.005, 0.729], [0, 0.729]], gunDark, { y: -0.026, seg: 6 });
   K.slab([[0.701, -0.024], [0.745, -0.024], [0.741, 0.036], [0.709, 0.036]], 0.026, gunDark, { bevel: 0.003 });
   K.tor(0.018, 0.0045, gunDark, 0, 0.062, 0.723, 0, 0, 0, null, Math.PI, 10);                          // the hood
@@ -488,6 +529,24 @@ export function makeAkModel(ctx) {
   K.box(0.018, 0.009, 0.018, gunDark, 0, 0.01, 0.06, 0, 0, 0, mag, 0.001);
   K.box(0.022, 0.007, 0.012, gunDark, 0, 0.009, -0.057, 0, 0, 0, mag, 0.001);
   K.slab([[0.048, -0.254], [0.16, -0.226], [0.164, -0.241], [0.05, -0.271]], 0.038, gunDark, { bevel: 0.003, parent: mag });   // the floorplate
+  // The top prop follows this specific magazine into the support hand. Its
+  // visibility belongs to the ammo count of the magazine being displayed.
+  const roundArt = roundGeometry(THREE, 'ak');
+  roundArt.computeBoundingBox();
+  const metresPerLocalUnit = .92 * .88 * 1.35 / 1.464;
+  const topRound = new THREE.Mesh(roundArt, cartridge);
+  topRound.name = 'magazine top round';
+  topRound.scale.setScalar(1 / metresPerLocalUnit);
+  topRound.rotation.x = Math.PI/2;
+  topRound.position.set(.001, .012 + roundArt.boundingBox.max.z / metresPerLocalUnit, .004);
+  topRound.visible = false;
+  mag.add(topRound);
+  for (const side of [-1,1]) {
+    K.slab([[-.038,.012],[-.035,.019],[-.029,.022],[.011,.020],[.022,.015],[.026,.012]],
+      .003, gunDark, {x:side*.0115,bevel:.0008,segs:2,parent:mag});
+  }
+  gun.userData.magazineTopRound = topRound;
+  gun.userData.setMagazineRounds = count => { topRound.visible = Number.isFinite(count) && count > 0; };
   gun.userData.mag = mag;
   gun.userData.baseMagPos = mag.position.clone();
   gun.userData.baseMagRot = mag.rotation.clone();
@@ -498,6 +557,29 @@ export function makeAkModel(ctx) {
   gun.userData.slide = null;
   gunSuppressor(gun, K, 'ak');   // CL-95
   attachLaserLight(gun, 'ak', ctx);
+  gun.userData.partFinish = true;
+  gun.traverse(mesh => {
+    if (!mesh.isMesh || mesh.parent === mag) return;
+    if (mesh.parent === opticSeat) {
+      if (mesh.name !== 'KR-7 bracket latch') markPaintSurface(mesh, 'rail');
+    } else if (mesh.material === gunBody) {
+      markPaintSurface(mesh, 'receiver');
+    } else if (mesh.parent === gun.userData.laserLightUnit && ['moduleShell','railClamp'].includes(mesh.name)) {
+      markPaintSurface(mesh, 'light shell');
+    }
+  });
+  // gunSuppressor appends the end-face insert and the bore after the outer sleeve.
+  for (const mesh of gun.userData.suppressor?.children.slice(0,-2) || []) markPaintSurface(mesh, 'suppressor shell');
+  const selector = K.group(selectorHub.position.x, selectorHub.position.y, selectorHub.position.z);
+  for (const part of [selectorHub, selectorBlade, selectorTab, selectorLip]) {
+    part.position.sub(selector.position);
+    selector.add(part);
+  }
+  bindModelArtwork(gun, 'controls', 'selector', selector);
+  bindModelArtwork(gun, 'controls', 'magRelease', groupArtwork(THREE, magRelease));
+  bindModelArtwork(gun, 'controls', 'chargingHandle', work);
+  bindModelArtwork(gun, 'heatParts', 'barrel', groupArtwork(THREE, barrel));
+  bindModelArtwork(gun, 'heatParts', 'suppressor', gun.userData.suppressor);
   return finishGun(gun);
 }
 
@@ -686,6 +768,7 @@ function shotgunFinish(base) {
       receiver: surface(0x555c65, 0.43, 0.32),
       bolt: surface(0x4d5967, 0.27, 0.62),
       lifter: surface(0x78838a, 0.38, 0.46),
+      shell: Object.assign(surface(0xffffff, 0.52, 0.14), { vertexColors: true }),
       edge: surface(0x555d64, 0.46, 0.48),
       inlay: Object.assign(surface(0x858e93, 0.55, 0.38), { flatShading: true }),
       furniture: surface(0x38393b, 0.80, 0.04)
@@ -769,7 +852,7 @@ function shotgunReceiver(T, width, material) {
 }
 
 export function makeShotgunModel(ctx) {
-  const { THREE, gunKit, gunBand, gunEffects, gunSuppressor, finishGun, profileCurve, gunBody, gunMid, gunDark, gunAccent, gunPoly, gunRubber, shellRedMat, brassMat, gunMetal } = ctx;
+  const { THREE, gunKit, gunBand, gunEffects, gunSuppressor, finishGun, profileCurve, gunBody, gunMid, gunDark, gunAccent, gunPoly, gunRubber, brassMat } = ctx;
   const gun = new THREE.Group();
   const K = gunKit(gun);
   const D = gunDetail(ctx);
@@ -838,7 +921,7 @@ export function makeShotgunModel(ctx) {
   K.slab([[0.086, -0.028], [-0.036, -0.028], [-0.04, -0.04], [-0.03, -0.054], [0.08, -0.054], [0.088, -0.044]], 0.044, gunDark, { bevel: 0.004, segs: 2 });
   K.slab(gunBand([[0.072, -0.052], [0.076, -0.08], [0.064, -0.098], [0.012, -0.1], [-0.012, -0.09], [-0.02, -0.052]], 0.009), 0.034, gunDark, { bevel: 0.004, segs: 2 });
   // GB-175/180: the trigger's face toward the grip, the tip curling forward, a solid blade.
-  K.slab([[0.0384, -0.0471], [0.0303, -0.0589], [0.0319, -0.0699], [0.0405, -0.0795], [0.0355, -0.0845], [0.0241, -0.0741], [0.0197, -0.0571], [0.0276, -0.0409]], 0.012, gunAccent, { bevel: 0.002 }).name = 'shotgun trigger';
+  addTriggerArtwork(gun, K, [[0.0384, -0.0471], [0.0303, -0.0589], [0.0319, -0.0699], [0.0405, -0.0795], [0.0355, -0.0845], [0.0241, -0.0741], [0.0197, -0.0571], [0.0276, -0.0409]], 0.012, gunAccent, { bevel: 0.002 }).name = 'shotgun trigger';
   // Stock with a recoil pad; the pistol grip; the sling slot. GB-259: the stock group is gun.userData.fpStock ('fp-stock').
   const stock = K.group(0, 0, 0); stock.name = 'fp-stock';
   // CL-319 (Jerry's reference: a one-piece synthetic pistol-grip stock): its outline measured off the picture at the
@@ -938,10 +1021,12 @@ export function makeShotgunModel(ctx) {
   gun.userData.laserBaseZ = 0.99;
   gun.userData.barrelAssembly = null;
   // The tube-load shell (hidden until the reload's insert beats), at the loading port's mouth.
-  const loadShell = new THREE.Mesh(new THREE.CylinderGeometry(0.0105, 0.011, 0.058, 10), shellRedMat);
-  const loadRim = new THREE.Mesh(new THREE.CylinderGeometry(0.0118, 0.0118, 0.007, 10), brassMat);
-  loadRim.position.y = -0.0255;
-  loadShell.add(loadRim);
+  const loadShell = new THREE.Mesh(roundGeometry(THREE, 'shotgun'), finish.shell);
+  loadShell.name = 'shotgun reload shell';
+  // Undo the issued gun's art scale so the held prop has the same size as the loose prop.
+  const issuedMetresPerLocalUnit = 0.95 * 1.25 / 1.376;
+  loadShell.scale.setScalar(1 / issuedMetresPerLocalUnit);
+  gun.userData.setReloadShellType = load => { loadShell.geometry = roundGeometry(THREE, 'shotgun', load); };
   loadShell.rotation.x = Math.PI / 2;
   loadShell.position.set(0.0, -0.034, 0.12);
   loadShell.visible = false;

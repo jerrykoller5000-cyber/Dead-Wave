@@ -7,7 +7,7 @@ import {launch} from '../../tools/cdp.mjs';
 import {save} from '../GT-20076/save.mjs';
 
 const [phase,id='m4']=process.argv.slice(2);
-assert(['m4','shotgun'].includes(id));
+assert(['m4','ak','shotgun'].includes(id));
 assert(process.env.DW_GAME_TEST_TOKEN && ['before','after','reviewed','revised'].includes(phase));
 const dir = new URL('./'+id+'/details/' + phase + '/', import.meta.url);
 await mkdir(dir,{recursive:true});
@@ -24,13 +24,13 @@ try {
   await page.evaluate('window.modelId='+JSON.stringify(id));
   await page.evaluate(`(async()=>{
     const lib=await import('/studio/weapon-longarms.js');
-    window.buildRaw=()=>lib[modelId==='m4'?'makeM4Model':'makeShotgunModel']({...TT.inspectHost().builders.weaponContext(),finishGun:g=>g});
+    window.buildRaw=()=>lib[{m4:'makeM4Model',ak:'makeAkModel',shotgun:'makeShotgunModel'}[modelId]]({...TT.inspectHost().builders.weaponContext(),finishGun:g=>g});
   })()`);
   const snapshot = await page.evaluate(`(async()=>{
     const T=TT.THREE, raw=buildRaw();
     const u=raw.userData;
     const skip=[u.flash,u.flashLight,u.flare,u.laser].filter(Boolean);
-    const vertices=[],point=new T.Vector3();
+    const vertices=[],outsideMount=[],point=new T.Vector3();
     raw.updateMatrixWorld(true);
     raw.traverse(o=>{
       if(!o.isMesh || !o.geometry.attributes.position)return;
@@ -40,7 +40,9 @@ try {
         point.fromBufferAttribute(attr,i).applyMatrix4(o.matrixWorld);
         coords.push(Math.round(point.x*1e6),Math.round(point.y*1e6),Math.round(point.z*1e6));
       }
-      vertices.push(coords.join(','));
+      const signature=coords.join(',');
+      vertices.push(signature);
+      if(modelId==='ak' && o.parent!==u.opticPlate)outsideMount.push(signature);
     });
     const stage=new T.Group();stage.position.set(30,80,-60);stage.scale.setScalar(5);stage.add(raw);TT.scene.add(stage);
     TT.setViewFirstDbg(false);
@@ -53,6 +55,19 @@ try {
       const eye=center.clone().addScaledVector(new T.Vector3(...view).normalize(),distance*5);
       TT.setShotView({x:eye.x,y:eye.y,z:eye.z,tx:center.x,ty:center.y,tz:center.z,fov:34});
     };
+    if(modelId==='ak'){
+      TT.modsOwnAllDbg();
+      const gun=TT.weaponMeshes.ak;
+      window.fitReviewOptic=kind=>{
+        if(!TT.armoryDbg.fit('ak','optic:'+kind,true) && TT.opticDbg.fitted().ak!==kind)throw Error('Cannot fit '+kind);
+        const fitted=gun.userData.fittedOptic;
+        if(!fitted || !gun.userData.opticPlate.visible)throw Error('Missing fitted bracket');
+        if(window.reviewMounted)stage.remove(reviewMounted);
+        const copy=TT.cloneLean(fitted);
+        stage.add(copy);window.reviewMounted=copy;u.opticPlate.visible=true;
+        return {kind,line:fitted.userData.line,position:copy.position.toArray()};
+      };
+    }
     const contacts={};
     const metric=TT.weaponMeshes[modelId].scale.x*1.8/1.655;
     // Stage translation and the presentation scale must not enter the fit measurements.
@@ -76,18 +91,19 @@ try {
         }
       });
     }
-    return {vertices,contacts};
+    return {vertices,contacts,outsideMount};
   })()`);
   if(id==='shotgun'||['reviewed','revised'].includes(phase)){
     assert.equal(Object.keys(snapshot.contacts).length,6);
     await save(new URL('contact-surfaces.json',dir),JSON.stringify(snapshot.contacts));
   }
-  if(id==='shotgun'||['after','revised'].includes(phase)){
+  if(id==='shotgun'||id==='ak'||['after','revised'].includes(phase)){
     const audit=await page.evaluate(`(async()=>{
       const {auditWeapon}=await import('/tools/tests/weapon-seating.js');
       const raw=buildRaw();
       raw.scale.copy(TT.weaponMeshes[modelId].scale);
       const u=raw.userData;
+      if(modelId==='ak')u.opticPlate.visible=true;
       const r=auditWeapon(raw,{metresPerUnit:1.8/1.655,ignore:[u.flash,u.flashLight,u.laser,u.flare].filter(Boolean)});
       return {parts:r.parts,open:r.openSurfaces,intersections:r.overlaps.length,loose:r.loose,details:r.detailSeats.length,breaches:r.detailBreaches};
     })()`,90000);
@@ -97,7 +113,16 @@ try {
   }
   const hashes = snapshot.vertices.map(coords=>createHash('sha256').update(coords).digest('hex')).sort();
   await save(new URL('mesh-shapes.json',dir),JSON.stringify(hashes,null,2));
-  const views=id==='shotgun'?[
+  if(id==='ak'){
+    const fixed=snapshot.outsideMount.map(s=>createHash('sha256').update(s).digest('hex')).sort();
+    await save(new URL('outside-mount.json',dir),JSON.stringify(fixed));
+  }
+  const views=id==='ak'?[
+    ['whole',[1,.28,-.32],[0,-.016,.14],1.63],
+    ['receiver',[1,.24,-.23],[0,.018,.03],.58],
+    ['wood',[-.8,.42,.62],[0,.002,.29],.81],
+    ['mag',[-.8,-.1,.3],[0,-.135,.07],.63]
+  ]:id==='shotgun'?[
     ['side',[1,.16,-.10],[0,.005,.09],.43],['underside',[.18,-1,-.16],[0,-.015,.105],.37],
     ['rear',[-.8,.45,-1],[0,.0,-.14],.7],['foreend',[.85,-.16,.48],[0,.0,.48],.62],
     ['front',[.8,.12,.7],[0,.015,.84],.42],['whole',[1,.24,-.26],[0,0,.23],1.50]
@@ -111,6 +136,18 @@ try {
     await page.evaluate('frameGW('+[name,view,target,distance].map(x=>JSON.stringify(x)).join(',')+');new Promise(r=>setTimeout(r,250))');
     const shot=await page.send('Page.captureScreenshot',{format:'jpeg',quality:94});
     await save(new URL(name+'.jpg',dir),Buffer.from(shot.data,'base64'));
+  }
+  if(id==='ak'){
+    const lines={};
+    for(const kind of ['rmr','prism','acog']){
+      lines[kind]=await page.evaluate('fitReviewOptic('+JSON.stringify(kind)+')');
+      for(const [label,view] of [['side',[1,.1,-.06]],['bracket',[-1,.22,-.38]]]){
+        await page.evaluate('frameGW("mount",'+JSON.stringify(view)+',[0,.075,.065],.36);new Promise(r=>setTimeout(r,250))');
+        const shot=await page.send('Page.captureScreenshot',{format:'jpeg',quality:94});
+        await save(new URL(kind+'-'+label+'.jpg',dir),Buffer.from(shot.data,'base64'));
+      }
+    }
+    await save(new URL('optic-lines.json',dir),JSON.stringify(lines,null,2));
   }
   assert.deepEqual(page.errors,[]);
   console.log('PASS '+phase+' '+id+': '+hashes.length+' mesh fingerprints and '+views.length+' model views');

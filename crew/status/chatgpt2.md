@@ -2,22 +2,22 @@
 
 state: active
 model: GPT-6 (Codex, variant unsure)
-task: GT-20080 Three distinct live and spent shotgun shell props for CB-294 and proof in four lights
-touching: studio/weapon-casings.js, studio/weapon-longarms.js, review/GT-20080
-since: 2026-11-11T00:19Z
-next: GT-20080 shotgun shells while Director reviews the rack loan
+task: GT-20077 Revolver J118, compare the walnut grip at the eye and on the standalone model
+touching: studio/weapon-sidearms.js (revolver exterior), review/GT-20077/revolver
+since: 2026-11-11T01:46Z
+next: GT-20077 revolver J118 first, with its GT-20079 finish and GT-20080 live/spent art, then Wasp/Uzi
 blocked-on: —
-last-report: handoffs/2026-11-11-chatgpt2-GT-20079.md
+last-report: handoffs/2026-11-11-chatgpt2-GT-20077.md
 
 ## Notes
 
 ### Where things stand
 
-Director accepted the GT-20077 shotgun revision and cleared the KR-7. See handoffs/2026-11-11-chatgpt2-GT-20077.md and the four revision sheets in review/GT-20077/shotgun/. The gun clears the bead. The posed support glove crosses it; Claude 1 has the measured fit and exact mesh. No gun contact moved except the comb (4.84 game mm). Inspector 1/0 broken. High 60.0 fps, low 55.1.
+context nearly full, needs a new session. Revolver (J118) is next. Director confirmed he will start the replacement chat on the PC. The factory walnut and blued-steel comparison is in review/GT-20077/revolver/ (model-pairs.jpg and eye-pairs.jpg). All 200 raw rest surfaces matched. Continue J118's existing artwork review, GT-20079 camo with the wood exposed, and GT-20080 live/spent art before the Wasp/Uzi, then Breacher, sniper, minigun and launcher. The pistol already had its exterior review.
 
-GT-20079 masks and optic rail are implemented. Both fitted optics and rack/eye/held 0.420 m tiles passed. The matched baseline is review/GT-20079/shotgun/pre-finish/. The real rack has white hardware and an exposed reload shell; I requested rackGunCopy/carryGunCopy from Director. Check that request before editing those sections. Keep the strict first-person material-ID check intact; the existing viewmodel cache recreates materials after swatch changes. See handoffs/2026-11-10-chatgpt2-GT-20079.md for pistol and GW-4.
+Director accepted the pump shotgun and KR-7 exterior, per-part camo and live/spent artwork. Proof is in the 11 Nov UTC GT-20077, GT-20079 and GT-20080 handoffs. Claude 2 owns ammo/count integration, Claude 5 owns reload timing, Claude 1 owns the shotgun aimed glove and KR-7 view position. The strict first-person material-identity assertion still fails despite visible restoration. Keep the assertion intact.
 
-GT-20080 interface approved by Director and Claude 2: spentCaseGeometry(THREE, weapon, load?), roundGeometry(THREE, weapon, load?), setReloadShellType(load); birdshot/default, buckshot, slug, with std/buck/issued aliases. Next are the three shotgun props for CB-294, then KR-7. GT-20075 and GT-20076 stay open at catalog level. Claude 5 owns action motion; Claude 1 owns contact and hand fit. Crew notes every 15 minutes, game only in the slot, no git.
+Director also accepted the GT-20076 repair in handoffs/2026-11-11-chatgpt2-GT-20076.md, 16/16 on both backends, and the three CE-2 art bindings in review/GT-20077/trigger-pivots/. All 703 rest meshes matched and only one blade moved per preview. Claude 5 has the fields. The catalog-wide intersection audit remains open. Use a slot for every game run, keep the 15-minute heartbeat and leave git to the commit crew.
 
 ### Who you are (D-142, Jerry 10 Nov 2026)
 You are **ChatGPT 2**, the crew's second ChatGPT, on GPT-6 Astra (High) in Codex. You take the weapons from ChatGPT (who

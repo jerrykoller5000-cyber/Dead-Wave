@@ -40,40 +40,124 @@ export function fitPortCarrier(gun, K, {x, y, rear, front, height}, steel, faceM
   };
 }
 
-export function spentCaseGeometry(THREE, weapon) {
-  const kind = sharedShape[weapon] || weapon;
-  if (!Object.hasOwn(shapes, kind)) return null;
+// These are exterior render props. A shallow dark cup and a creased cap
+// distinguish a spent hull from a live one in the reload and ejection views.
+const shellArt = {
+  birdshot: { color: 0xa43e37, headFraction: .12, bands: 0 },
+  buckshot: { color: 0x497ba0, headFraction: .25, bands: 1 },
+  slug: { color: 0xc9c3a2, headFraction: .25, bands: 2 }
+};
+
+function shotgunShell(THREE, load, spent) {
+  const type = load === 'buck' || load === 'buckshot' ? 'buckshot' : load === 'slug' ? 'slug' : 'birdshot';
+  const art = shellArt[type];
+  const key = type + (spent ? '-spent' : '-live');
   let cache = geometryByThree.get(THREE);
   if (!cache) geometryByThree.set(THREE, cache = new Map());
-  if (cache.has(kind)) return cache.get(kind);
+  if (cache.has(key)) return cache.get(key);
+
+  const [openLength, rim, body, mouth] = shapes.shotgun;
+  const head = openLength * art.headFraction;
+  const length = spent ? openLength : openLength - 7;
+  const profile = [[0,spent ? .45 : 0],[body * .20,0],[body * .37,0],
+    [body * .40,.35],[body * .44,0],[rim,0],[rim,2],[body,3],
+    [body,head],[body,head+.2],[body * .99,head+.4]];
+  // Short moulded bands also distinguish the three colours under dim light.
+  for (let i = 0; i < art.bands; i++) {
+    const y = length * .57 + i * 4;
+    profile.push([body,y],[body * .99,y+.25],[body * .99,y+2],[body,y+2.25]);
+  }
+  profile.push([mouth,length-4],[mouth,length-.6],[mouth*.98,length]);
+  if (spent) profile.push([mouth*.90,length-.2],[mouth*.86,length-7],[0,length-8]);
+  else profile.push([mouth*.89,length-.5],[mouth*.55,length-.9],[mouth*.15,length-1.6],[0,length-1.7]);
+
+  const points = profile.map(([r,y]) => new THREE.Vector2(r/1000,(y-length/2)/1000));
+  const geometry = new THREE.LatheGeometry(points,24);
+  const positions = geometry.attributes.position, colors = [];
+  const hull = new THREE.Color(art.color), brass = new THREE.Color(0xc29b5f);
+  const base = new THREE.Color(0x9c8d79), interior = new THREE.Color(0x302c29);
+  for (let i=0; i<positions.count; i++) {
+    const x=positions.getX(i), z=positions.getZ(i), y=positions.getY(i)*1000+length/2;
+    const radius=Math.hypot(x,z)*1000;
+    const crease=(1+Math.cos(6*Math.atan2(x,z)))/2;
+    let color=hull, shade=1;
+    if (y < head+.3) color=y<.5 && radius<body*.42 ? base : brass;
+    else if (spent && radius < mouth*.91 && y>length-9) color=interior;
+    else if (!spent && y>length-2 && radius<mouth*.9) {
+      const relief=crease*(1-Math.abs(radius/mouth-.52));
+      positions.setY(i,positions.getY(i)-.0015*relief);
+      shade=.96-.43*relief;
+    } else {
+      for(let band=0;band<art.bands;band++){
+        const start=length*.57+band*4;
+        if(y>start+.1 && y<start+2.1)shade=.48;
+      }
+    }
+    if (spent && y>length-1) positions.setY(i,positions.getY(i)-.0014*crease);
+    colors.push(color.r*shade,color.g*shade,color.b*shade);
+  }
+  geometry.setAttribute('color',new THREE.Float32BufferAttribute(colors,3));
+  geometry.computeVertexNormals();
+  geometry.computeBoundingSphere();
+  cache.set(key,geometry);
+  return geometry;
+}
+
+export function roundGeometry(THREE, weapon, load) {
+  if (weapon === 'shotgun') return shotgunShell(THREE, load, false);
+  if (weapon === 'aa12') return shotgunShell(THREE, 'birdshot', false);
+  if (weapon === 'ak') return metallicCartridge(THREE, weapon, true);
+  return null;
+}
+
+export function spentCaseGeometry(THREE, weapon, load) {
+  const kind = sharedShape[weapon] || weapon;
+  if (kind === 'shotgun') return shotgunShell(THREE, weapon === 'shotgun' ? load : 'birdshot', true);
+  if (!Object.hasOwn(shapes, kind)) return null;
+  return metallicCartridge(THREE, kind, false);
+}
+
+function metallicCartridge(THREE, kind, live) {
+  let cache = geometryByThree.get(THREE);
+  if (!cache) geometryByThree.set(THREE, cache = new Map());
+  const key = live ? kind + '-live' : kind;
+  if (cache.has(key)) return cache.get(key);
 
   const [length, rim, body, mouth, shoulder] = shapes[kind];
-  const rimmed = kind === 'revolver' || kind === 'shotgun' || kind === 'launcher';
+  const rimmed = kind === 'revolver' || kind === 'launcher';
   const wall = mouth * 0.09;
   const primer = body * 0.38;
   const profile = [
-    [0, 0.38], [primer * 0.27, 0], [primer, 0], [primer * 1.05, 0.28],
+    [0, live ? 0 : 0.38], [primer * 0.27, 0], [primer, 0], [primer * 1.05, 0.28],
     [primer * 1.14, 0], [rim, 0], [rim, length * 0.045]
   ];
   if (!rimmed) profile.push([body * 0.83, length * 0.065], [body * 0.83, length * 0.086]);
   profile.push([body, length * 0.105]);
-  if (kind === 'shotgun') profile.push([body, 13], [body * 0.986, 13.3]);
   if (shoulder) profile.push([body * 0.91, shoulder], [mouth, length * 0.86]);
-  profile.push([mouth, length], [mouth - wall, length], [mouth - wall, length * 0.76],
-    [body * 0.76, length * 0.20], [0, length * 0.20]);
-  const points = profile.map(([r, y]) => new THREE.Vector2(r * 0.001, (y - length / 2) * 0.001));
+  const tip = live ? length * .43 : 0;
+  if (live) {
+    // A closed, copper-coloured silhouette, continuous with the brass prop.
+    profile.push([mouth,length],[mouth*.92,length+.12],[mouth*.91,length+tip*.18],
+      [mouth*.75,length+tip*.48],[mouth*.43,length+tip*.77],[0,length+tip]);
+  } else {
+    profile.push([mouth, length], [mouth - wall, length], [mouth - wall, length * 0.76],
+      [body * 0.76, length * 0.20], [0, length * 0.20]);
+  }
+  const centre = (length + tip) / 2;
+  const points = profile.map(([r, y]) => new THREE.Vector2(r * 0.001, (y - centre) * 0.001));
   const geometry = new THREE.LatheGeometry(points, 20);
   const position = geometry.attributes.position;
   const colors = [];
   for (let i = 0; i < position.count; i++) {
-    const y = position.getY(i) * 1000 + length / 2;
+    const y = position.getY(i) * 1000 + centre;
     const r = Math.hypot(position.getX(i), position.getZ(i)) * 1000;
-    if (kind === 'shotgun' && y > 13.1) colors.push(0.64, 0.033, 0.018);
+    if (live && y > length + .05) colors.push(.58, .22, .105);
+    else if (kind === 'ak' && !live && y >= length*.19 && (r <= mouth-wall+.001 || (Math.abs(y-length*.2)<.001 && r<=body*.77))) colors.push(.15,.095,.048);
     else if (kind === 'launcher') colors.push(0.78, 0.75, 0.70);
     else if (y < 0.4 && r <= primer * 1.06) colors.push(0.73, 0.63, 0.49);
     else colors.push(0.88, 0.60, 0.27);
   }
   geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
-  cache.set(kind, geometry);
+  cache.set(key, geometry);
   return geometry;
 }

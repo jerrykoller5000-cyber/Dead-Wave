@@ -1,0 +1,8 @@
+{
+  "id": "shotgun",
+  "phase": "rack-final",
+  "swatch": "m81",
+  "failures": [
+    "firstPerson did not restore the exact material instances and properties"
+  ]
+}

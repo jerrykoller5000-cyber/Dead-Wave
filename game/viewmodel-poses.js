@@ -94,7 +94,9 @@ export const VM_POSES = Object.freeze({
     elbows: { r: [0.36, -0.75, 0.06], l: [-0.34, -0.75, 0.06] },   // AG-168: low and wide, so the forearms leave the view down its corners
     // CL-293 (Jerry, 3 Nov: "elbow flared in the wrong direction... looks inverted": elbowFollow ran the forearms out flat
     // from the sides, elbows up): each elbow hangs below and behind its wrist, so the forearms come up from the bottom corners.
-    elbowRel: { r: [0.076, -0.024, 0.308], l: [-0.101, -0.074, 0.293] },   // CL-325 f: the wrists straighter, each elbow toward its hand's line (was r [0.07, -0.17, 0.26], l [-0.07, -0.17, 0.26])
+    // CE-1 (tcl281: the support forearm was 32 degrees off the eye line, under the 40 the rule wants; its sleeve lay flat
+    // across the bottom of the view): its elbow lower and further out, 42 degrees, the wrist's bend unchanged (0.35)
+    elbowRel: { r: [0.076, -0.024, 0.308], l: [-0.14, -0.14, 0.26] },   // was l [-0.101, -0.074, 0.293]. CL-325 f: the wrists straighter, each elbow toward its hand's line (was r [0.07, -0.17, 0.26], l [-0.07, -0.17, 0.26])
     sprint: { down: 0.025, across: 0, back: 0.015, yaw: 0.02, pitch: -0.12, roll: 0.06, in: 0.18, out: 0.14 }, runBob: 1.7,   // CL-325 (J73)
     reload: 'pistol'
   },
@@ -580,4 +582,23 @@ export const VM_RELOADS = Object.freeze({
   },
   ...VM_STAGE2_RELOADS,
   ...VM_STAGE3_RELOADS
+});
+
+// CE-2 (J103: "Trigger finger needs to be in actual trigger guard when firing the pistol. Finger needs to physically pull
+// the trigger for each shot"; J112: the Wasp's "trigger finger is clipping through the trigger guard and not actually
+// pulling the trigger"): the firing hand's index finger (its f[0]: knuckle, middle, end, spread) on each gun's trigger,
+// on top of Claude 1's fit (VM_FIT r: the hand's place, the other fingers, the thumb). rest: its pad on the trigger's face
+// in the guard; pull: the trigger back by its travel, the pad still on it. Both solved in the cloud against the gun as the
+// game draws it with the hand where VM_FIT puts it (no glove vertex inside any closed part over 0.4 mm; Claude 5's
+// solve-index, Claude outputs/CE-2/). Re-solve when the gun or the fit changes. part: the control that moves (the gun's
+// userData.controls name); pivot (gun space) and turn (rad, about the gun's x) its pin and its travel; hold (s) the
+// trigger stays back after a shot, release (s) its return; held down (st.fireHeld) it stays back.
+export const VM_TRIGGER = Object.freeze({
+  // the pistol: the pad 42% down the blade; the travel at the face 4 game mm (the middle finger behind the guard's rear
+  // stops more: Claude 1's fit has it 2 mm inside the guard, CD-1 told)
+  pistol: { part: 'trigger', rest: [-0.225, 1.355, 0.288, -0.147], pull: [-0.187, 1.355, 0.416, -0.154], pivot: [0, 0.016, 0.075], turn: 0.0853, hold: 0.06, release: 0.09 },
+  // the Wasp (J112: "the trigger finger is clipping through the trigger guard"): the fit's index ran through the guard and out
+  // its side; now its pad lies on the trigger 68% down the blade (2 game mm off it), nothing through the guard. The trigger is
+  // part of the frame's mesh (no control of its own yet: asked of ChatGPT 2), so no press until it can turn: pull = rest
+  uzi: { part: null, rest: [-0.278, 1.7, 1.084, -0.1], pull: [-0.278, 1.7, 1.084, -0.1], pivot: null, turn: 0, hold: 0.05, release: 0.07 }
 });

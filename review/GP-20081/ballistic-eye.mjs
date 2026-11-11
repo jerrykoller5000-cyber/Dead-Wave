@@ -1,0 +1,31 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import assert from 'node:assert/strict';
+import {fileURLToPath} from 'node:url';
+import {serve} from '../../tools/serve.mjs';
+import {launch} from '../../tools/cdp.mjs';
+if(!process.env.DW_GAME_TEST_TOKEN)throw Error('Use crew game-test slot');
+const root=path.resolve(fileURLToPath(new URL('../..',import.meta.url))),out=path.join(root,'review/GP-20081');
+const server=await serve(root,0),browser=await launch({headless:false,args:['--window-size=1280,720']});
+const report={};
+try{
+ const page=await browser.newPage({width:1280,height:720});
+ await page.goto(`${server.origin}/index.html?debug=1&raf=timer`);
+ assert(await page.waitFor('!!window.TT && window.DWLoad?.snapshot().state === "ready"',{timeout:90000}));
+ await page.evaluate('DWOpening.dismissForTesting()');
+ assert(await page.waitFor('document.getElementById("opening").hidden',{timeout:15000}));
+ await page.evaluate(`(()=>{document.getElementById('playerName').value='GP-20081 Ballistic';document.getElementById('modeTraining').click()})()`);
+ assert(await page.waitFor('TT.trainingDbg.state().active && TT.getPhase()==="prep"',{timeout:90000}));
+ assert(await page.waitFor('!document.getElementById("trainingBlackout")?.classList.contains("on")',{timeout:30000}));
+ report.setup=await page.evaluate(`(async()=>{const T=TT,tg=T.trainingDbg.tg(),F=T.rangeDbg.feature(),d=(await import('/ui/range-drills.js')).RANGE_DRILLS.find(x=>x.id==='first-steps'),f=tg.stations.rangeConsole.front;T.player.position.set(f.x,tg.floorY,f.z);T.grantAllWeapons();F.open();const start=F.start(d);for(let i=0;i<42;i++){tg.update(.25);F.tick(.25);if(i%8===7)await new Promise(requestAnimationFrame)}const t=tg.targets.find(v=>v.solid?.rangeOwned&&v.state==='up'),b=t.box,x=(b.minX+b.maxX)/2,y=(b.minY+b.maxY)/2,z=(b.minZ+b.maxZ)/2;T.setShotView({x:x,y:tg.floorY+1.65,z:z-5,tx:x,ty:y,tz:z,fov:52});return {start,active:F.read().state,target:t.state,box:b,score:F.read().score,hud:document.querySelector('#rangeDrillHud')?.innerText}})()`);
+ await new Promise(r=>setTimeout(r,450));
+ await page.screenshot(path.join(out,'target-before-eye.png'));
+ report.shot=await page.evaluate(`(()=>{const T=TT,tg=T.trainingDbg.tg(),F=T.rangeDbg.feature(),i=tg.targets.findIndex(v=>v.solid?.rangeOwned&&v.state==='up'),b=tg.targets[i].box,x=(b.minX+b.maxX)/2,z=(b.minZ+b.maxZ)/2;let p=null;for(let j=0;j<=20&&!p;j++){const c={x,y:b.minY+(b.maxY-b.minY)*j/20,z};if(tg.scoreHit(i,c))p=c}if(!p)throw Error('No scoring point');const token=F.attack('pistol'),shot={prev:{x:p.x,y:p.y,z:b.minZ-.5},pos:{x:p.x,y:p.y,z:b.maxZ+.5},dir:{x:0,y:0,z:1},rangePacket:token,rangeEvent:1,hit:false};const contacted=T.trainingDbg.round(shot),s=F.read();return {contacted,hit:shot.hit,score:s.score,cleared:s.stats.cleared,state:tg.targets[i].state,point:p}})()`);
+ await page.evaluate(`(async()=>{const tg=TT.trainingDbg.tg(),F=TT.rangeDbg.feature();for(let i=0;i<5;i++){tg.update(.25);F.tick(.25);await new Promise(requestAnimationFrame)}})()`);
+ await page.screenshot(path.join(out,'target-after-eye.png'));
+ report.errors=page.errors;
+ assert.equal(report.setup.active,'ACTIVE');assert.equal(report.setup.target,'up');
+ assert(report.shot.contacted&&report.shot.hit&&report.shot.cleared>=1&&report.shot.score>0);
+ assert.deepEqual(report.errors,[]);
+ console.log(`PASS GP-20081 actual training round: ${report.setup.target} → ${report.shot.state}, score ${report.setup.score} → ${report.shot.score}, cleared ${report.shot.cleared}, no page errors`);
+}finally{fs.writeFileSync(path.join(out,'ballistic-eye.json'),JSON.stringify(report,null,2));await browser.close();await server.close();}

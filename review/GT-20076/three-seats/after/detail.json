@@ -1,0 +1,389 @@
+{
+  "m4": [
+    {
+      "centre": [
+        -0.02275,
+        0.005,
+        -0.11
+      ],
+      "extent": [
+        -0.023849999994039535,
+        -0.021650000005960464
+      ],
+      "seat": {
+        "kind": "screw",
+        "axis": "x",
+        "side": -1,
+        "surface": -0.0005,
+        "depth": 0.0006
+      },
+      "part": "",
+      "parent": "",
+      "parentPosition": [
+        -0.02225,
+        0.005,
+        -0.11
+      ],
+      "nearest": [
+        {
+          "name": "",
+          "where": "at makeM4Model (http://127.0.0.1:20464/studio/weapon-longarms.js:115:5)",
+          "gap": 0,
+          "xAtCentre": -0.02225000038743019
+        },
+        {
+          "name": "",
+          "where": "at makeM4Model (http://127.0.0.1:20464/studio/weapon-longarms.js:167:5)",
+          "gap": 0.0033281265012919904
+        },
+        {
+          "name": "",
+          "where": "at makeM4Model (http://127.0.0.1:20464/studio/weapon-longarms.js:148:5)",
+          "gap": 0.003537608189508319
+        },
+        {
+          "name": "",
+          "where": "at makeM4Model (http://127.0.0.1:20464/studio/weapon-longarms.js:152:22)",
+          "gap": 0.012107636658474804
+        }
+      ]
+    },
+    {
+      "centre": [
+        -0.024050000016775448,
+        0.005,
+        -0.11
+      ],
+      "extent": [
+        -0.02445000002849847,
+        -0.023650000005052425
+      ],
+      "seat": {
+        "kind": "crown",
+        "axis": "x",
+        "side": -1,
+        "surface": 0,
+        "depth": 0.0002,
+        "hostIndex": 0
+      },
+      "part": "",
+      "parent": "",
+      "parentPosition": [
+        -0.02225,
+        0.005,
+        -0.11
+      ],
+      "nearest": [
+        {
+          "name": "",
+          "where": "at makeM4Model (http://127.0.0.1:20464/studio/weapon-longarms.js:115:5)",
+          "gap": 0.0013999996176222336,
+          "xAtCentre": -0.02225000038743019
+        },
+        {
+          "name": "",
+          "where": "at makeM4Model (http://127.0.0.1:20464/studio/weapon-longarms.js:167:5)",
+          "gap": 0.003668021056801081
+        },
+        {
+          "name": "",
+          "where": "at makeM4Model (http://127.0.0.1:20464/studio/weapon-longarms.js:148:5)",
+          "gap": 0.0038775027450174094
+        },
+        {
+          "name": "",
+          "where": "at makeM4Model (http://127.0.0.1:20464/studio/weapon-longarms.js:152:22)",
+          "gap": 0.012447531213983894
+        }
+      ]
+    }
+  ],
+  "revolver": [
+    {
+      "centre": [
+        -0.0336,
+        -0.07288,
+        -0.06598
+      ],
+      "extent": [
+        -0.03390000001424923,
+        -0.03329999998575076
+      ],
+      "seat": {},
+      "part": "",
+      "parent": "",
+      "parentPosition": [
+        0,
+        0,
+        0
+      ],
+      "where": "at makeRevolverModel (http://127.0.0.1:20464/studio/weapon-sidearms.js:652:7)",
+      "nearest": [
+        {
+          "name": "",
+          "where": "at makeRevolverModel (http://127.0.0.1:20464/studio/weapon-sidearms.js:645:7)",
+          "gap": 0,
+          "xAtCentre": -0.03350000002849847
+        },
+        {
+          "name": "",
+          "gap": 0,
+          "xAtCentre": -0.03359999880194675
+        },
+        {
+          "name": "",
+          "where": "at makeRevolverModel (http://127.0.0.1:20464/studio/weapon-sidearms.js:638:5)",
+          "gap": 0.00030000016456469686,
+          "xAtCentre": -0.032999999821186066
+        },
+        {
+          "name": "",
+          "where": "at makeRevolverModel (http://127.0.0.1:20464/studio/weapon-sidearms.js:453:5)",
+          "gap": 0.06379854920152708
+        }
+      ]
+    },
+    {
+      "centre": [
+        -0.0342,
+        -0.07288,
+        -0.06598
+      ],
+      "extent": [
+        -0.035099999984540046,
+        -0.033300000015459956
+      ],
+      "seat": {
+        "kind": "screw",
+        "axis": "x",
+        "side": -1,
+        "surface": -0.0003,
+        "depth": 0.0006
+      },
+      "part": "",
+      "parent": "",
+      "parentPosition": [
+        -0.0339,
+        -0.07288,
+        -0.06598
+      ],
+      "nearest": [
+        {
+          "name": "",
+          "where": "at makeRevolverModel (http://127.0.0.1:20464/studio/weapon-sidearms.js:645:7)",
+          "gap": 0,
+          "xAtCentre": -0.03350000002849847
+        },
+        {
+          "name": "",
+          "gap": 0,
+          "xAtCentre": -0.03359999880194675
+        },
+        {
+          "name": "",
+          "where": "at makeRevolverModel (http://127.0.0.1:20464/studio/weapon-sidearms.js:638:5)",
+          "gap": 0.0003000001942738903,
+          "xAtCentre": -0.032999999821186066
+        },
+        {
+          "name": "",
+          "where": "at makeRevolverModel (http://127.0.0.1:20464/studio/weapon-sidearms.js:453:5)",
+          "gap": 0.06535811758063148
+        }
+      ]
+    },
+    {
+      "centre": [
+        -0.03505,
+        -0.07288,
+        -0.06598
+      ],
+      "extent": [
+        -0.035200000007124616,
+        -0.03489999999287538
+      ],
+      "seat": {
+        "kind": "mark",
+        "axis": "x",
+        "side": -1,
+        "surface": 0.000049999999999999914,
+        "depth": 0.0002,
+        "hostIndex": 0
+      },
+      "part": "",
+      "parent": "",
+      "parentPosition": [
+        -0.0339,
+        -0.07288,
+        -0.06598
+      ],
+      "nearest": [
+        {
+          "name": "",
+          "gap": 0.0013000011909287401,
+          "xAtCentre": -0.03359999880194675
+        },
+        {
+          "name": "",
+          "where": "at makeRevolverModel (http://127.0.0.1:20464/studio/weapon-sidearms.js:645:7)",
+          "gap": 0.0013999999643769107,
+          "xAtCentre": -0.03350000002849847
+        },
+        {
+          "name": "",
+          "where": "at makeRevolverModel (http://127.0.0.1:20464/studio/weapon-sidearms.js:638:5)",
+          "gap": 0.0019000001716893145,
+          "xAtCentre": -0.032999999821186066
+        },
+        {
+          "name": "",
+          "where": "at makeRevolverModel (http://127.0.0.1:20464/studio/weapon-sidearms.js:453:5)",
+          "gap": 0.06599374904379153
+        }
+      ]
+    },
+    {
+      "centre": [
+        0.0336,
+        -0.07288,
+        -0.06598
+      ],
+      "extent": [
+        0.03329999998575076,
+        0.03390000001424923
+      ],
+      "seat": {},
+      "part": "",
+      "parent": "",
+      "parentPosition": [
+        0,
+        0,
+        0
+      ],
+      "where": "at makeRevolverModel (http://127.0.0.1:20464/studio/weapon-sidearms.js:652:7)",
+      "nearest": [
+        {
+          "name": "",
+          "where": "at makeRevolverModel (http://127.0.0.1:20464/studio/weapon-sidearms.js:645:7)",
+          "gap": 0,
+          "xAtCentre": 0.03350000002849847
+        },
+        {
+          "name": "",
+          "gap": 0,
+          "xAtCentre": 0.03359999880194675
+        },
+        {
+          "name": "",
+          "where": "at makeRevolverModel (http://127.0.0.1:20464/studio/weapon-sidearms.js:638:5)",
+          "gap": 0.00030000016456469686,
+          "xAtCentre": 0.032999999821186066
+        },
+        {
+          "name": "",
+          "where": "at makeRevolverModel (http://127.0.0.1:20464/studio/weapon-sidearms.js:453:5)",
+          "gap": 0.06379854920152708
+        }
+      ]
+    },
+    {
+      "centre": [
+        0.0342,
+        -0.07288,
+        -0.06598
+      ],
+      "extent": [
+        0.033300000015459956,
+        0.035099999984540046
+      ],
+      "seat": {
+        "kind": "screw",
+        "axis": "x",
+        "side": 1,
+        "surface": -0.0003,
+        "depth": 0.0006
+      },
+      "part": "",
+      "parent": "",
+      "parentPosition": [
+        0.0339,
+        -0.07288,
+        -0.06598
+      ],
+      "nearest": [
+        {
+          "name": "",
+          "where": "at makeRevolverModel (http://127.0.0.1:20464/studio/weapon-sidearms.js:645:7)",
+          "gap": 0,
+          "xAtCentre": 0.03350000002849847
+        },
+        {
+          "name": "",
+          "gap": 0,
+          "xAtCentre": 0.03359999880194675
+        },
+        {
+          "name": "",
+          "where": "at makeRevolverModel (http://127.0.0.1:20464/studio/weapon-sidearms.js:638:5)",
+          "gap": 0.0003000001942738903,
+          "xAtCentre": 0.032999999821186066
+        },
+        {
+          "name": "",
+          "where": "at makeRevolverModel (http://127.0.0.1:20464/studio/weapon-sidearms.js:453:5)",
+          "gap": 0.06535811758063148
+        }
+      ]
+    },
+    {
+      "centre": [
+        0.03505,
+        -0.07288,
+        -0.06598
+      ],
+      "extent": [
+        0.03489999999287538,
+        0.035200000007124616
+      ],
+      "seat": {
+        "kind": "mark",
+        "axis": "x",
+        "side": 1,
+        "surface": 0.000049999999999999914,
+        "depth": 0.0002,
+        "hostIndex": 0
+      },
+      "part": "",
+      "parent": "",
+      "parentPosition": [
+        0.0339,
+        -0.07288,
+        -0.06598
+      ],
+      "nearest": [
+        {
+          "name": "",
+          "gap": 0.0013000011909287401,
+          "xAtCentre": 0.03359999880194675
+        },
+        {
+          "name": "",
+          "where": "at makeRevolverModel (http://127.0.0.1:20464/studio/weapon-sidearms.js:645:7)",
+          "gap": 0.0013999999643769107,
+          "xAtCentre": 0.03350000002849847
+        },
+        {
+          "name": "",
+          "where": "at makeRevolverModel (http://127.0.0.1:20464/studio/weapon-sidearms.js:638:5)",
+          "gap": 0.0019000001716893145,
+          "xAtCentre": 0.032999999821186066
+        },
+        {
+          "name": "",
+          "where": "at makeRevolverModel (http://127.0.0.1:20464/studio/weapon-sidearms.js:453:5)",
+          "gap": 0.06599374904379153
+        }
+      ]
+    }
+  ]
+}

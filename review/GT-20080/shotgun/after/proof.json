@@ -1,0 +1,318 @@
+{
+  "phase": "after",
+  "result": {
+    "birdshot": {
+      "live": [
+        0.022600000724196434,
+        0.06300000101327896,
+        0.022600000724196434
+      ],
+      "spent": [
+        0.022600000724196434,
+        0.07000000029802322,
+        0.022600000724196434
+      ]
+    },
+    "buckshot": {
+      "live": [
+        0.022600000724196434,
+        0.08190000057220459,
+        0.022600000724196434
+      ],
+      "spent": [
+        0.022600000724196434,
+        0.08889999985694885,
+        0.022600000724196434
+      ]
+    },
+    "slug": {
+      "live": [
+        0.022600000724196434,
+        0.08190000057220459,
+        0.022600000724196434
+      ],
+      "spent": [
+        0.022600000724196434,
+        0.08889999985694885,
+        0.022600000724196434
+      ]
+    }
+  },
+  "selected": 0.39,
+  "sweep": [
+    {
+      "type": "birdshot",
+      "u": 0.3,
+      "visible": true,
+      "screen": [
+        -0.5603086042970243,
+        -2.2087447979942394
+      ],
+      "shown": 0,
+      "blockers": [
+        "offscreen"
+      ],
+      "vertices": 450
+    },
+    {
+      "type": "birdshot",
+      "u": 0.34,
+      "visible": true,
+      "screen": [
+        -0.09460612246594892,
+        -1.4656447221075921
+      ],
+      "shown": 0,
+      "blockers": [
+        "offscreen"
+      ],
+      "vertices": 450
+    },
+    {
+      "type": "birdshot",
+      "u": 0.37,
+      "visible": true,
+      "screen": [
+        0.18261810692682676,
+        -1.0265529622945153
+      ],
+      "shown": 5,
+      "blockers": [
+        "offscreen",
+        "vm-hand-glove-main",
+        "other",
+        "shell"
+      ],
+      "vertices": 450
+    },
+    {
+      "type": "birdshot",
+      "u": 0.38,
+      "visible": true,
+      "screen": [
+        0.25569413206933694,
+        -0.9233101499322877
+      ],
+      "shown": 7,
+      "blockers": [
+        "offscreen",
+        "shell",
+        "vm-hand-glove-main",
+        "other"
+      ],
+      "vertices": 450
+    },
+    {
+      "type": "birdshot",
+      "u": 0.39,
+      "visible": true,
+      "screen": [
+        0.3192169872092258,
+        -0.8200456196320443
+      ],
+      "shown": 8,
+      "blockers": [
+        "vm-hand-glove-main",
+        "shell",
+        "other"
+      ],
+      "vertices": 450
+    },
+    {
+      "type": "birdshot",
+      "u": 0.4,
+      "visible": true,
+      "screen": [
+        0.3720493025909579,
+        -0.7439362522286894
+      ],
+      "shown": 8,
+      "blockers": [
+        "vm-hand-glove-main",
+        "shell",
+        "other"
+      ],
+      "vertices": 450
+    },
+    {
+      "type": "birdshot",
+      "u": 0.42,
+      "visible": true,
+      "screen": [
+        0.4453459868865934,
+        -0.6358920952613569
+      ],
+      "shown": 3,
+      "blockers": [
+        "other",
+        "shotgun receiver",
+        "shell",
+        "vm-hand-glove-main"
+      ],
+      "vertices": 450
+    },
+    {
+      "type": "birdshot",
+      "u": 0.46,
+      "visible": true,
+      "screen": [
+        0.47149092549942556,
+        -0.5908740352985599
+      ],
+      "shown": 1,
+      "blockers": [
+        "other",
+        "shotgun receiver",
+        "vm-hand-glove-main",
+        "shell"
+      ],
+      "vertices": 450
+    },
+    {
+      "type": "birdshot",
+      "u": 0.5,
+      "visible": true,
+      "screen": [
+        0.47126421378053973,
+        -0.6010498170563953
+      ],
+      "shown": 1,
+      "blockers": [
+        "other",
+        "shotgun receiver",
+        "vm-hand-glove-main",
+        "shell"
+      ],
+      "vertices": 450
+    },
+    {
+      "type": "birdshot",
+      "u": 0.54,
+      "visible": true,
+      "screen": [
+        0.47651111062307405,
+        -0.5951815793125552
+      ],
+      "shown": 1,
+      "blockers": [
+        "other",
+        "shotgun receiver",
+        "shell",
+        "vm-hand-glove-main"
+      ],
+      "vertices": 450
+    },
+    {
+      "type": "birdshot",
+      "u": 0.56,
+      "visible": true,
+      "screen": [
+        0.4882513981049447,
+        -0.6191918449978707
+      ],
+      "shown": 0,
+      "blockers": [
+        "other",
+        "shotgun receiver",
+        "vm-hand-glove-main"
+      ],
+      "vertices": 450
+    },
+    {
+      "type": "birdshot",
+      "u": 0.59,
+      "visible": true,
+      "screen": [
+        0.479790095793218,
+        -0.5867483122754046
+      ],
+      "shown": 0,
+      "blockers": [
+        "other",
+        "shotgun receiver",
+        "vm-hand-glove-main"
+      ],
+      "vertices": 450
+    },
+    {
+      "type": "birdshot",
+      "u": 0.64,
+      "visible": false,
+      "shown": 0
+    },
+    {
+      "type": "birdshot",
+      "u": 0.69,
+      "visible": false,
+      "shown": 0
+    },
+    {
+      "type": "birdshot",
+      "u": 0.72,
+      "visible": false,
+      "shown": 0
+    }
+  ],
+  "frames": [
+    {
+      "type": "birdshot",
+      "u": 0.39,
+      "visible": true,
+      "screen": [
+        0.31897427946626267,
+        -0.8282092691071579
+      ],
+      "shown": 8,
+      "blockers": [
+        "vm-hand-glove-main",
+        "shell",
+        "other"
+      ],
+      "vertices": 450
+    },
+    {
+      "type": "buckshot",
+      "u": 0.39,
+      "visible": true,
+      "screen": [
+        0.31927193769665524,
+        -0.8182049026681627
+      ],
+      "shown": 5,
+      "blockers": [
+        "vm-hand-glove-main",
+        "shell",
+        "other"
+      ],
+      "vertices": 550
+    },
+    {
+      "type": "slug",
+      "u": 0.39,
+      "visible": true,
+      "screen": [
+        0.31903288391723,
+        -0.826233032827607
+      ],
+      "shown": 5,
+      "blockers": [
+        "vm-hand-glove-main",
+        "shell",
+        "other"
+      ],
+      "vertices": 650
+    },
+    {
+      "light": "noon"
+    },
+    {
+      "light": "overcast"
+    },
+    {
+      "light": "dusk"
+    },
+    {
+      "light": "night"
+    }
+  ]
+}

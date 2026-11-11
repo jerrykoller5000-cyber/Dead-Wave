@@ -1,0 +1,20 @@
+{
+  "birdshot": {
+    "liveLength": 0.06300000101327896,
+    "spentLength": 0.07000000029802322,
+    "headHeight": 0.00860000029206276,
+    "openMouth": true
+  },
+  "buckshot": {
+    "liveLength": 0.06300000101327896,
+    "spentLength": 0.07000000029802322,
+    "headHeight": 0.017700000666081905,
+    "openMouth": true
+  },
+  "slug": {
+    "liveLength": 0.06300000101327896,
+    "spentLength": 0.07000000029802322,
+    "headHeight": 0.017700000666081905,
+    "openMouth": true
+  }
+}
