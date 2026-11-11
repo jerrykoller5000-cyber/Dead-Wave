@@ -1,0 +1,16 @@
+{
+  "id": "uzi",
+  "maxDifference": 0,
+  "expectedFaces": 284,
+  "matches": {
+    "world": 284,
+    "eye": 284,
+    "carry": 284
+  },
+  "rawBefore": 150,
+  "rawAfter": 150,
+  "added": [],
+  "parts": 183,
+  "open": 2,
+  "loose": 0
+}

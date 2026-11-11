@@ -79,7 +79,29 @@
     T.armoryDbg.ui().bench('m4'); await wait(50);
     const sw = panel.querySelectorAll('.armory-finish:not(.armory-laser) .armory-swatch');
     ok(sw.length > 1 && [...sw].every((b) => !b.disabled), 'swatches on the M4\'s workbench, the ones to earn folded away (' + sw.length + ')');
-    ok(!!panel.querySelector('.armory-swatch img[src^="data:image/png"]'), 'each painted from the real camo');
+    const camoSw = [...sw].filter((b) => b.dataset.finish);
+    const swatchSig = (b) => {
+      const cv = b.querySelector('canvas'), img = b.querySelector('img[src^="data:image/png"]');
+      let read = cv;
+      if (!read && img && img.complete && img.naturalWidth > 0) {
+        read = document.createElement('canvas'); read.width = img.naturalWidth; read.height = img.naturalHeight;
+        read.getContext('2d').drawImage(img, 0, 0);
+      }
+      if (!read || !read.width || !read.height) return img && img.src.length > 200 ? img.src : null;
+      const d = read.getContext('2d').getImageData(0, 0, read.width, read.height).data;
+      let painted = false;
+      for (let i = 3; i < d.length; i += 4) if (d[i] > 0) { painted = true; break; }
+      if (!painted) return null;
+      const pts = [];
+      for (let sy = 0; sy < 4; sy++) for (let sx = 0; sx < 4; sx++) {
+        const x = Math.floor((sx + 0.5) * read.width / 4), y = Math.floor((sy + 0.5) * read.height / 4);
+        const o = (y * read.width + x) * 4;
+        pts.push(d[o] + ',' + d[o + 1] + ',' + d[o + 2]);
+      }
+      return pts.join(';');
+    };
+    const sigs = camoSw.map(swatchSig);
+    ok(camoSw.length > 0 && sigs.every(Boolean) && new Set(sigs).size === camoSw.length, 'each painted from the real camo (' + camoSw.length + ' unique swatches)');
     panel.querySelector('.armory-swatch[data-finish="' + free.key + '"]').click(); await wait(50);
     ok(T.getWardrobe().guns.m4 === free.key, 'clicking one paints the M4 (' + free.key + ')');
     ok(panel.querySelector('.armory-swatch.on').dataset.finish === free.key, 'and it shows as chosen');

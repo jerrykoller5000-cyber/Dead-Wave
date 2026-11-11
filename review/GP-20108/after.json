@@ -1,0 +1,827 @@
+{
+  "phase": "after",
+  "at": "2026-11-11T20:08:48.853Z",
+  "spots": [
+    {
+      "name": "range-firing",
+      "x": 0,
+      "z": -3,
+      "up": {
+        "player": [
+          0,
+          -200,
+          -643
+        ],
+        "camera": [
+          0.00018908164059194832,
+          -195.28842741655305,
+          -645.7552069183918
+        ],
+        "aim": {
+          "on": true,
+          "w": 0.5755495476379214,
+          "yaw": 0,
+          "pitch": 1.24,
+          "locked": true,
+          "fov": 38,
+          "tilt": 0
+        },
+        "draws": 244,
+        "ceiling": {
+          "visible": true,
+          "on": true,
+          "firstPerson": true,
+          "baked": {
+            "merged": 4,
+            "removed": 57
+          },
+          "lightCount": 4
+        }
+      },
+      "ahead": {
+        "player": [
+          0,
+          -200,
+          -643
+        ],
+        "camera": [
+          0.0012666286089029002,
+          -198.55866548744888,
+          -642.9056035245305
+        ],
+        "aim": {
+          "on": true,
+          "w": 0.9728505909810077,
+          "yaw": 0,
+          "pitch": 0.06,
+          "locked": true,
+          "fov": 38,
+          "tilt": 0
+        },
+        "draws": 145,
+        "ceiling": {
+          "visible": true,
+          "on": true,
+          "firstPerson": true,
+          "baked": {
+            "merged": 4,
+            "removed": 57
+          },
+          "lightCount": 4
+        }
+      }
+    },
+    {
+      "name": "range-lanes",
+      "x": 0,
+      "z": 13,
+      "up": {
+        "player": [
+          -8.42,
+          -200,
+          -627
+        ],
+        "camera": [
+          -8.418518022005907,
+          -198.577597591272,
+          -626.8859844753273
+        ],
+        "aim": {
+          "on": true,
+          "w": 1,
+          "yaw": 0,
+          "pitch": 1.24,
+          "locked": true,
+          "fov": 38,
+          "tilt": 0
+        },
+        "draws": 227,
+        "ceiling": {
+          "visible": true,
+          "on": true,
+          "firstPerson": true,
+          "baked": {
+            "merged": 4,
+            "removed": 57
+          },
+          "lightCount": 4
+        }
+      },
+      "ahead": {
+        "player": [
+          -8.42,
+          -200,
+          -627
+        ],
+        "camera": [
+          -8.418297616282672,
+          -198.57792573068713,
+          -626.886169084152
+        ],
+        "aim": {
+          "on": true,
+          "w": 1,
+          "yaw": 0,
+          "pitch": 0.06,
+          "locked": true,
+          "fov": 38,
+          "tilt": 0
+        },
+        "draws": 140,
+        "ceiling": {
+          "visible": true,
+          "on": true,
+          "firstPerson": true,
+          "baked": {
+            "merged": 4,
+            "removed": 57
+          },
+          "lightCount": 4
+        }
+      }
+    },
+    {
+      "name": "range-stations",
+      "x": 5,
+      "z": -7,
+      "up": {
+        "player": [
+          5,
+          -200,
+          -647
+        ],
+        "camera": [
+          4.906176737155688,
+          -198.5784244434554,
+          -646.9801601473146
+        ],
+        "aim": {
+          "on": true,
+          "w": 1,
+          "yaw": -1.5707963267948966,
+          "pitch": 1.24,
+          "locked": true,
+          "fov": 38,
+          "tilt": 0
+        },
+        "draws": 176,
+        "ceiling": {
+          "visible": true,
+          "on": true,
+          "firstPerson": true,
+          "baked": {
+            "merged": 4,
+            "removed": 57
+          },
+          "lightCount": 4
+        }
+      },
+      "ahead": {
+        "player": [
+          5,
+          -200,
+          -647
+        ],
+        "camera": [
+          4.887047496205949,
+          -198.57912971843288,
+          -646.9980337789914
+        ],
+        "aim": {
+          "on": true,
+          "w": 1,
+          "yaw": -1.5707963267948966,
+          "pitch": 0.06,
+          "locked": true,
+          "fov": 38,
+          "tilt": 0
+        },
+        "draws": 147,
+        "ceiling": {
+          "visible": true,
+          "on": true,
+          "firstPerson": true,
+          "baked": {
+            "merged": 4,
+            "removed": 57
+          },
+          "lightCount": 4
+        }
+      }
+    },
+    {
+      "name": "apron-door",
+      "x": -11,
+      "z": -8,
+      "up": {
+        "player": [
+          -11,
+          -200,
+          -648
+        ],
+        "camera": [
+          -10.92371167765215,
+          -198.57970017371895,
+          -648.0007340392779
+        ],
+        "aim": {
+          "on": true,
+          "w": 1,
+          "yaw": 1.5707963267948966,
+          "pitch": 1.24,
+          "locked": true,
+          "fov": 38,
+          "tilt": 0
+        },
+        "draws": 261,
+        "ceiling": {
+          "visible": true,
+          "on": true,
+          "firstPerson": true,
+          "baked": {
+            "merged": 4,
+            "removed": 57
+          },
+          "lightCount": 4
+        }
+      },
+      "ahead": {
+        "player": [
+          -11,
+          -200,
+          -648
+        ],
+        "camera": [
+          -10.882920795712772,
+          -198.58068317619134,
+          -648.0018648049921
+        ],
+        "aim": {
+          "on": true,
+          "w": 1,
+          "yaw": 1.5707963267948966,
+          "pitch": 0.06,
+          "locked": true,
+          "fov": 38,
+          "tilt": 0
+        },
+        "draws": 151,
+        "ceiling": {
+          "visible": true,
+          "on": true,
+          "firstPerson": true,
+          "baked": {
+            "merged": 4,
+            "removed": 57
+          },
+          "lightCount": 4
+        }
+      }
+    },
+    {
+      "name": "infirmary",
+      "x": -38,
+      "z": -9,
+      "up": {
+        "player": [
+          -38,
+          -200,
+          -647.4300000000001
+        ],
+        "camera": [
+          -37.97932856052265,
+          -198.58131892849855,
+          -647.3301716426411
+        ],
+        "aim": {
+          "on": true,
+          "w": 1,
+          "yaw": 0,
+          "pitch": 1.24,
+          "locked": true,
+          "fov": 38,
+          "tilt": 0
+        },
+        "draws": 220,
+        "ceiling": {
+          "visible": true,
+          "on": true,
+          "firstPerson": true,
+          "baked": {
+            "merged": 4,
+            "removed": 57
+          },
+          "lightCount": 4
+        }
+      },
+      "ahead": {
+        "player": [
+          -38,
+          -200,
+          -647.4300000000001
+        ],
+        "camera": [
+          -37.9988238123297,
+          -198.58104078278487,
+          -647.3097962440249
+        ],
+        "aim": {
+          "on": true,
+          "w": 1,
+          "yaw": 0,
+          "pitch": 0.06,
+          "locked": true,
+          "fov": 38,
+          "tilt": 0
+        },
+        "draws": 145,
+        "ceiling": {
+          "visible": true,
+          "on": true,
+          "firstPerson": true,
+          "baked": {
+            "merged": 4,
+            "removed": 57
+          },
+          "lightCount": 4
+        }
+      }
+    },
+    {
+      "name": "hq-ladder",
+      "x": -41,
+      "z": 1,
+      "up": {
+        "player": [
+          -41,
+          -200,
+          -639
+        ],
+        "camera": [
+          -40.90251193590904,
+          -198.57954554406987,
+          -638.9814085171558
+        ],
+        "aim": {
+          "on": true,
+          "w": 1,
+          "yaw": 1.5707963267948966,
+          "pitch": 1.24,
+          "locked": true,
+          "fov": 38,
+          "tilt": 0
+        },
+        "draws": 204,
+        "ceiling": {
+          "visible": true,
+          "on": true,
+          "firstPerson": true,
+          "baked": {
+            "merged": 4,
+            "removed": 57
+          },
+          "lightCount": 4
+        }
+      },
+      "ahead": {
+        "player": [
+          -41,
+          -200,
+          -639
+        ],
+        "camera": [
+          -40.888216307716995,
+          -198.57779613210133,
+          -638.9998449302022
+        ],
+        "aim": {
+          "on": true,
+          "w": 1,
+          "yaw": 1.5707963267948966,
+          "pitch": 0.06,
+          "locked": true,
+          "fov": 38,
+          "tilt": 0
+        },
+        "draws": 131,
+        "ceiling": {
+          "visible": true,
+          "on": true,
+          "firstPerson": true,
+          "baked": {
+            "merged": 4,
+            "removed": 57
+          },
+          "lightCount": 4
+        }
+      }
+    },
+    {
+      "name": "hangar-center",
+      "x": -25,
+      "z": 7,
+      "up": {
+        "player": [
+          -25,
+          -200,
+          -633
+        ],
+        "camera": [
+          -24.983309328027996,
+          -198.57660279610184,
+          -632.9099646134918
+        ],
+        "aim": {
+          "on": true,
+          "w": 1,
+          "yaw": 0,
+          "pitch": 1.24,
+          "locked": true,
+          "fov": 38,
+          "tilt": 0
+        },
+        "draws": 288,
+        "ceiling": {
+          "visible": true,
+          "on": true,
+          "firstPerson": true,
+          "baked": {
+            "merged": 4,
+            "removed": 57
+          },
+          "lightCount": 4
+        }
+      },
+      "ahead": {
+        "player": [
+          -25,
+          -200,
+          -633
+        ],
+        "camera": [
+          -25.002162888815082,
+          -198.5762510062424,
+          -632.8918167963675
+        ],
+        "aim": {
+          "on": true,
+          "w": 1,
+          "yaw": 0,
+          "pitch": 0.06,
+          "locked": true,
+          "fov": 38,
+          "tilt": 0
+        },
+        "draws": 144,
+        "ceiling": {
+          "visible": true,
+          "on": true,
+          "firstPerson": true,
+          "baked": {
+            "merged": 4,
+            "removed": 57
+          },
+          "lightCount": 4
+        }
+      }
+    },
+    {
+      "name": "passage-gate",
+      "x": -26,
+      "z": 25,
+      "up": {
+        "player": [
+          -26,
+          -200,
+          -615
+        ],
+        "camera": [
+          -26.00318745951208,
+          -198.57678719192404,
+          -614.8887444704204
+        ],
+        "aim": {
+          "on": true,
+          "w": 1,
+          "yaw": 0,
+          "pitch": 1.24,
+          "locked": true,
+          "fov": 38,
+          "tilt": 0
+        },
+        "draws": 174,
+        "ceiling": {
+          "visible": true,
+          "on": true,
+          "firstPerson": true,
+          "baked": {
+            "merged": 4,
+            "removed": 57
+          },
+          "lightCount": 4
+        }
+      },
+      "ahead": {
+        "player": [
+          -26,
+          -200,
+          -615
+        ],
+        "camera": [
+          -26.004305010742254,
+          -198.57794416515773,
+          -614.8855402449014
+        ],
+        "aim": {
+          "on": true,
+          "w": 1,
+          "yaw": 0,
+          "pitch": 0.06,
+          "locked": true,
+          "fov": 38,
+          "tilt": 0
+        },
+        "draws": 154,
+        "ceiling": {
+          "visible": true,
+          "on": true,
+          "firstPerson": true,
+          "baked": {
+            "merged": 4,
+            "removed": 57
+          },
+          "lightCount": 4
+        }
+      }
+    }
+  ],
+  "lights": [
+    {
+      "name": "noon",
+      "player": [
+        0,
+        -200,
+        -643
+      ],
+      "camera": [
+        -0.005188718755460897,
+        -198.57856728672317,
+        -642.8847961424216
+      ],
+      "draws": 121,
+      "lights": {
+        "on": true,
+        "night": false,
+        "room": true
+      }
+    },
+    {
+      "name": "overcast",
+      "player": [
+        0,
+        -200,
+        -643
+      ],
+      "camera": [
+        -0.006028415542926491,
+        -198.57910801658377,
+        -642.8856622066844
+      ],
+      "draws": 154,
+      "lights": {
+        "on": true,
+        "night": false,
+        "room": true
+      }
+    },
+    {
+      "name": "dusk",
+      "player": [
+        0,
+        -200,
+        -643
+      ],
+      "camera": [
+        -0.006717970662528544,
+        -198.5796720369935,
+        -642.8861752494114
+      ],
+      "draws": 154,
+      "lights": {
+        "on": true,
+        "night": false,
+        "room": true
+      }
+    },
+    {
+      "name": "night",
+      "player": [
+        0,
+        -200,
+        -643
+      ],
+      "camera": [
+        -0.007024874754407444,
+        -198.5802390791418,
+        -642.8848476313103
+      ],
+      "draws": 154,
+      "lights": {
+        "on": true,
+        "night": false,
+        "room": true
+      }
+    },
+    {
+      "name": "lights-off",
+      "player": [
+        0,
+        -200,
+        -643
+      ],
+      "camera": [
+        -0.007025289521873738,
+        -198.58084027284275,
+        -642.8817060623353
+      ],
+      "draws": 154,
+      "lights": {
+        "on": false,
+        "night": true,
+        "room": false
+      }
+    }
+  ],
+  "errors": [],
+  "thirdPerson": {
+    "camera": [
+      -0.2748265045816913,
+      -194.2433959924668,
+      -647.9743512879198
+    ],
+    "draws": 139,
+    "cutaway": [
+      {
+        "side": "rangeSouth",
+        "opacity": 1,
+        "hidden": false
+      },
+      {
+        "side": "east",
+        "opacity": 1,
+        "hidden": false
+      },
+      {
+        "side": "south",
+        "opacity": 1,
+        "hidden": false
+      },
+      {
+        "side": "north",
+        "opacity": 1,
+        "hidden": false
+      },
+      {
+        "side": "west",
+        "opacity": 1,
+        "hidden": false
+      },
+      {
+        "side": "overhead",
+        "opacity": 1,
+        "hidden": false
+      },
+      {
+        "side": "east",
+        "opacity": 1,
+        "hidden": false
+      },
+      {
+        "side": "north",
+        "opacity": 1,
+        "hidden": false
+      },
+      {
+        "side": "north",
+        "opacity": 1,
+        "hidden": false
+      },
+      {
+        "side": "north",
+        "opacity": 1,
+        "hidden": false
+      },
+      {
+        "side": "rangeSouth",
+        "opacity": 1,
+        "hidden": false
+      }
+    ]
+  },
+  "warnings": [
+    {
+      "type": "warning",
+      "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+    },
+    {
+      "type": "warning",
+      "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+    },
+    {
+      "type": "warning",
+      "text": "THREE.Material: 'roughness' is not a property of THREE.MeshBasicNodeMaterial."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.Material: 'roughness' is not a property of THREE.MeshBasicNodeMaterial."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"ember\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"ember\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"ember\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"position\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"position\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"position\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "warning",
+      "text": "Calling [RenderPassEncoder (unlabeled)].Draw with a vertex count of 0 is unusual."
+    }
+  ]
+}

@@ -98,3 +98,20 @@ Make those (copies or symlinks), or change the three prefixes.
   MWANT; RAND for a random search).
 - With the stricter clip-check (bodies split), parts that used to read open are now in the fields: several hands were found
   inside receivers (flamer, AA-12): slide them down their grips first, then fit8.
+
+## Claude 1's fixes, part 4 (CD-1, 11 Nov ~18:40-21Z): the fists under the guards
+- **Exports on the heavier tree**: the page crashed at the raise (the old take cycled through every gun). `c4/exp5.sh` /
+  `expr5.sh` use `ex6-<gun>.json` (from ex4: the gun taken directly, the raise stepped in 40-frame chunks with pauses).
+  `c4/after.sh <out> <guns>` waits for any running export, then exports in turn (one lease per agent: never two at once).
+- **The field's box (bug)**: sdf_c4.py's grid was the hand's own box + 10 mm, and grid.mjs reads 10 mm (clean) outside it, so
+  an index straightened out of the box read clean (a false AA-12 'fix'). `PAD=0.035` widens it (fitT.sh/fitS.sh pass PAD).
+- **Bones out of the cost**: gungrip3.mjs `SKIPB='[2,3]'` (an index Claude 5's VM_TRIGGER poses); contact.mjs `SKIPB='[1,2,3]'`
+  (no give made on the index). `c4/fitS.sh <gun-r> <export> "<keep-out box>"`: fitT's fields, no trigger target, SKIPB.
+- **Looking at what is where**: `c4/diag.py <export> r` (every body the hand is in: part, depth, bones), `bodies.py` (closed
+  bodies with gun-space boxes), `slice.py <export> <bodies> <x mm>` (an ascii side map of bodies at a plane, the index/middle/
+  ring/palm overlaid), `hh.py` (the two gloves into each other by bone), `posechk3.py <export> r '<pose>'` (a re-posed hand
+  against every body), `c2g.py` (hand points into gun space), `lookr.sh <export> <name> [parts]` (cam/eye/4 sides, red parts).
+- **The index's reach**: `gun/idxgrid.mjs <field> '<pose>' '<TGT>'` (every index angle, the hand fixed: clean poses by pad
+  distance; `CLR=-100` for all), `idxgrid2.mjs` (RG ranges), `idxmove.mjs` (hand moves x index; B2/A1 turns).
+- **The loop that held**: fitT/fitS -> `applyoff.py` -> setfit -> re-export -> diag/depth3. NOT pretwist after applyoff here: with
+  the twist at its limit ("carried") applyoff's fit already draws as solved (pretwist turned it 34 deg off).

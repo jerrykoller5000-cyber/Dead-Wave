@@ -5,6 +5,7 @@ import { loadGrid } from './grid.mjs';
 import * as M from '../hand/mh-tool.mjs';
 const [base, poseArg, mvArg] = process.argv.slice(2);
 const G = loadGrid(base), pose = JSON.parse(poseArg), MV = mvArg ? JSON.parse(mvArg) : null;
+const SKIPB = process.env.SKIPB ? JSON.parse(process.env.SKIPB) : [];   // CD-1 fixes 4: bones whose vertices never give (an index Claude 5's VM_TRIGGER poses)
 const CLEAR = +process.env.CLEAR || 0.0003, SIG = 0.003, C = [0, -0.271, 0.008];
 let gd = G.d;
 if (MV) {   // the solve's place (the gun moved and turned in the hand's space), for a check before the game has it
@@ -24,7 +25,7 @@ function give(P) {
   // a smooth field kept out of the gun: project the vertices inside onto the surface (plus CLEAR), then smooth the field
   // over the surface (Gaussian, SIG), again and again; the last pass projects only
   const NB = []; for (let v = 0; v < n; v++) { const L = []; for (const u of near(v)) { const dd = (P.p[u * 3] - P.p[v * 3]) ** 2 + (P.p[u * 3 + 1] - P.p[v * 3 + 1]) ** 2 + (P.p[u * 3 + 2] - P.p[v * 3 + 2]) ** 2, w = Math.exp(-dd / (2 * SIG * SIG)); if (w > 0.05) L.push(u, w); } NB.push(L); }
-  const project = () => { let m = 0; for (let v = 0; v < n; v++) { const p = at(v), d = gd(...p); if (d < CLEAR) { const g = grad(...p), e = CLEAR - d + 0.00002; D[v * 3] += g[0] * e; D[v * 3 + 1] += g[1] * e; D[v * 3 + 2] += g[2] * e; m++; } } return m; };
+  const project = () => { let m = 0; for (let v = 0; v < n; v++) { if (SKIPB.length && P.b0 && SKIPB.includes(P.b0[v])) continue; const p = at(v), d = gd(...p); if (d < CLEAR) { const g = grad(...p), e = CLEAR - d + 0.00002; D[v * 3] += g[0] * e; D[v * 3 + 1] += g[1] * e; D[v * 3 + 2] += g[2] * e; m++; } } return m; };
   const live = new Uint8Array(n);
   for (let it = 0; it < 30; it++) {
     if (!project() && it > 0) break;

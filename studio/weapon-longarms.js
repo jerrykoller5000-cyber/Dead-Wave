@@ -3,6 +3,7 @@
 
 // A thin, faceted sleeve with actual through-slots. Each cut has an inner wall;
 // the bore and background show through at every viewing angle. No CSG or new mats.
+import { slab } from '../core/geometry.js';
 import { gunDetail } from './gun-detail.js';
 import { attachLaserLight } from './weapon-attachments.js';
 import { fitPortCarrier, roundGeometry } from './weapon-casings.js';
@@ -90,6 +91,54 @@ function gw4Finish(base) {
   return gw4Finishes.get(base);
 }
 
+// The nested outlines give the window a lip that catches side light and a shaded inner wall.
+function gw4Window(T, gun, K, x, finish, dark) {
+  const outline = (length, height, rearCorner = .006) => {
+    const bottom = -(.65 * height + .0022), topCorner = rearCorner + .002;
+    return [[-length + rearCorner, bottom], [length - .003, bottom], [length, bottom + .003],
+      [length, height - .004], [length - .004, height], [-length + topCorner, height],
+      [-length, height - topCorner], [-length, bottom + rearCorner]];
+  };
+  const floor = outline(.045, .0145, .0015);
+  const rings = [
+    [0, outline(.050, .020)], [.0038, outline(.050, .020)],
+    [.0065, outline(.0485, .0186, .004)], [.0065, outline(.0466, .0169, .0025)],
+    [.00287, floor], [0, floor]
+  ];
+  const positions = [], uv = [];
+  for (let r = 0; r < rings.length; r++) {
+    const a = rings[r], b = rings[(r + 1) % rings.length];
+    for (let i = 0; i < a[1].length; i++) {
+      const j = (i + 1) % a[1].length;
+      for (const [ring, corner] of [[a,i],[b,i],[b,j],[a,i],[b,j],[a,j]]) {
+        const [z, y] = ring[1][corner];
+        positions.push(ring[0], y, z);
+        uv.push(z + .05, y + .02);
+      }
+    }
+  }
+  const geometry = new T.BufferGeometry();
+  geometry.setAttribute('position', new T.Float32BufferAttribute(positions, 3));
+  geometry.setAttribute('uv', new T.Float32BufferAttribute(uv, 2));
+  geometry.computeVertexNormals();
+  const rim = new T.Mesh(geometry, finish.lower);
+  rim.name = 'GW-4 window rim';
+  rim.castShadow = rim.receiveShadow = true;
+  rim.position.set(x, .029, .059);
+  gun.add(rim);
+  K.slab(floor, .00287, dark, {x:x + .00287 / 2, y:.029, z:.059, bevel:0}).name = 'GW-4 window inset';
+
+  fitPortCarrier(gun, K, {x:x + .0042, y:.029, rear:.017, front:.089, height:.020}, finish.tube, finish.panel);
+  // A gently crowned face gives the moving artwork a gradient even at rest.
+  for (const part of gun.userData.recoilBoltParts) {
+    part.geometry.computeBoundingBox();
+    const bounds = part.geometry.boundingBox;
+    const profile = [[-.00133, -.010], [-.00065, -.010], [.00055, -.006],
+      [.0011, -.001], [.00085, .0035], [-.0001, .008], [-.00105, .010], [-.00133, .010]];
+    part.geometry = slab(profile, bounds.max.z - bounds.min.z, .00012, 1).rotateY(Math.PI / 2);
+  }
+}
+
 export function makeM4Model(ctx) {
   const { THREE, gunKit, gunBand, gunEffects, gunSuppressor, finishGun, profileCurve, gunBody, gunMid, gunDark, gunAccent, gunPoly, gunRubber, gunMetal, magPoly, glassMat, sightDotMat, gaugeFace } = ctx;
   const gun = new THREE.Group();
@@ -120,12 +169,7 @@ export function makeM4Model(ctx) {
   });
   gun.userData.ejectPort = [UW / 2 + 0.008, 0.029, 0.062];
   K.slab([[-0.11, 0.0], [0.16, 0.0], [0.16, 0.058], [-0.06, 0.058], [-0.11, 0.04]], 0.012, finish.upper, { x: UW / 2, bevel: 0.004 });   // the bulge round the port
-  // CL-318 (J26: "ejection port needs work"): the port as a real cut: a raised rim round a 57 x 22 mm opening, the dark
-  // recess, the bolt carrier's bright side seen through it with the bolt face at its front.
-  // Flat artwork layers give the side panel a readable frame in grazing light.
-  K.box(0.003, 0.037, 0.096, finish.lower, UW / 2 + 0.007, 0.029, 0.059, 0, 0, 0, null, 0);
-  K.box(0.002, 0.031, 0.089, gunRubber, UW / 2 + 0.0086, 0.029, 0.059, 0, 0, 0, null, 0);
-  fitPortCarrier(gun, K, {x: UW / 2 + 0.0102, y: 0.029, rear: 0.017, front: 0.089, height: 0.020}, finish.panel, finish.tube);
+  gw4Window(THREE, gun, K, UW / 2 + .006, finish, gunRubber);
   K.slab([[0.014, -0.022], [0.104, -0.022], [0.104, 0.011], [0.014, 0.011]], 0.004, finish.seam, { x: LW / 2 + 0.005, bevel: 0.0015 });   // the port cover, open: hinged under the port, hanging down the lower's side
   D.pin(gun, LW / 2 + 0.004, 0.012, 0.0604, { axis: 'z', len: 0.094, r: 0.0016 });                                                     // its hinge pin along the port's bottom edge
   K.slab([[-0.062, 0.018], [-0.026, 0.018], [-0.018, 0.06], [-0.062, 0.066]], 0.02, finish.upper, { x: UW / 2 + 0.006, bevel: 0.004 });   // the brass deflector
@@ -138,14 +182,17 @@ export function makeM4Model(ctx) {
   K.box(0.008, 0.009, 0.022, finish.tube, -0.023, 0.0, -0.003, 0, 0, 0, work, 0.0025);            // the latch, on the real left
   D.ribs(work, { x: 0, y: 0.0055, z: -0.006, axis: 'y', side: 1, along: 'z', count: 3, pitch: 0.005, w: 0.036, h: 0.001, t: 0.0014, mat: gunMid });
   gun.userData.work = work;
-  // The scalloped rear cap reads across the screen at the eye.
-  K.slab([[-.024,.061],[-.019,.057],[.018,.057],[.024,.061],[.022,.069],
+  // Keep the scalloped trim seated on the tube and below the travelling artwork.
+  const rearFace = K.slab([[-.024,.061],[-.019,.057],[.018,.057],[.024,.061],[.022,.069],
     [.016,.072],[.010,.072],[.006,.069],[-.006,.069],[-.012,.073],[-.021,.071]],
-    .018, finish.seam, { bevel:.0016, segs:2, ry:Math.PI/2, z:-.205 }).name = 'GW-4 rear face';
+    .018, finish.seam, { bevel:.0016, segs:2, ry:Math.PI/2, z:-.205 });
+  rearFace.name = 'GW-4 rear face';
+  rearFace.scale.y = 1 / 3;
+  rearFace.position.y = .057 * (1 - rearFace.scale.y);
   K.slab([[-0.165, 0.092], [-0.115, 0.092], [-0.12, 0.108], [-0.16, 0.108]], 0.03, gunDark, { bevel: 0.003 });          // the folded rear sight
   // Lower receiver: the trigger housing, the flared mag well, the two pins through, the selector and bolt catch on -x,
   // the mag release button in its fence on +x, the trigger guard, the A2 grip (CL-312 b).
-  K.slab([[-0.172, 0.0], [0.13, 0.0], [0.13, -0.028], [0.118, -0.042], [0.117, -0.112], [0.132, -0.13], [-0.016, -0.13], [-0.004, -0.112],
+  K.slab([[-0.172, -0.006], [0.13, -0.006], [0.13, -0.028], [0.118, -0.042], [0.117, -0.112], [0.132, -0.13], [-0.016, -0.13], [-0.004, -0.112],
           [-0.006, -0.064], [-0.03, -0.058], [-0.1, -0.058], [-0.16, -0.05], [-0.172, -0.03]], LW, finish.lower, { bevel: 0.005, segs: 2 });
   for (const sx of [-1, 1]) D.groove(gun, { x: sx * LW / 2, y: -0.03, z: 0.0, axis: 'x', side: sx, along: 'z', len: 0.1, w: 0.0008 });   // the housing's machined step
   for (const z of [-0.15, 0.115]) D.pin(gun, 0, -0.012, z, { axis: 'x', len: LW, r: 0.0045, proud: 0.0015, caps: true, mat: z < 0 ? finish.panel : gunMetal });                          // the takedown and pivot pins
@@ -162,7 +209,22 @@ export function makeM4Model(ctx) {
   // CL-318 (J26: "trigger and trigger guard look too shallow and vertically narrow; pistol grip needs to slide back opening
   // up more space"): the trigger 18 units behind where it was (15 mm behind the well's rear face), the guard a real loop
   // from the well's rear to the grip's front, 4 cm deep, and the grip 4 units back on its mount boss.
-  K.slab(gunBand([[-0.008, -0.062], [-0.014, -0.1], [-0.03, -0.108], [-0.066, -0.108], [-0.082, -0.096], [-0.08, -0.07]], 0.008), 0.03, gunDark, { bevel: 0.003 });   // the trigger guard
+  const gloveGuard = K.slab(gunBand([[-0.008, -0.062], [-0.014, -0.1], [-0.03, -0.108], [-0.066, -0.108], [-0.082, -0.096], [-0.08, -0.07]], 0.008), 0.03, gunDark, { bevel: 0.003 });
+  // Give the oversized game glove room in the drawn loop; keep its upper attachment fixed.
+  {
+    const geometry = gloveGuard.geometry, vertices = geometry.attributes.position;
+    geometry.computeBoundingBox();
+    const {min, max} = geometry.boundingBox, height = max.y - min.y;
+    const smooth = THREE.MathUtils.smoothstep;
+    for (let i = 0; i < vertices.count; i++) {
+      const y = vertices.getY(i), z = vertices.getZ(i), depth = (max.y - y) / height;
+      vertices.setY(i, y - height * .12 * smooth(depth, .34, .80));
+      const front = (z - min.z) / (max.z - min.z);
+      vertices.setZ(i, z + .008 * smooth(front, .54, .81) * smooth(depth, .09, .44));
+    }
+    geometry.computeBoundingBox();
+    geometry.computeBoundingSphere();
+  }   // the trigger guard
   addTriggerArtwork(gun, K, [[-0.0283, -0.0525], [-0.0367, -0.0689], [-0.0359, -0.0843], [-0.0272, -0.0957], [-0.0328, -0.1003], [-0.0441, -0.0877], [-0.0473, -0.0671], [-0.0397, -0.0475]], 0.012, gunDark, { bevel: 0.002 });   // GB-175/180: the trigger
   K.slab(shapedGrip(-0.12, -0.12, 0.18, 0.08, 0.3, [[-0.12, 0.04], [0.04, 0.04], [0.04, -0.046], [-0.12, -0.046]]), 0.048, finish.lower, { bevel: 0.006, segs: 2 });   // the lower's grip mount, the grip grows out of it
   // CL-312 b (Jerry: "check and fix all pistol grips"): an A2 grip at an A2's size (32 mm wide, 53 mm deep under the
@@ -211,7 +273,9 @@ export function makeM4Model(ctx) {
   ventedSleeve(THREE, gun, finish.lower, { z0: 0.21, z1: 0.70, radius: 0.03, wall: 0.004, y: 0.02, faces: 12,
     slots: [[0.238, 0.286], [0.309, 0.357], [0.38, 0.428], [0.451, 0.499], [0.522, 0.57], [0.593, 0.641], [0.652, 0.68]], ventFaces: [1, 4, 7, 10] });
   markPaintSurface(K.lathe([[0.022, 0.692], [0.03, 0.692], [0.03, 0.70], [0.027, 0.706], [0.022, 0.706]], gunBody, { y: 0.02, seg: 12, phase: Math.PI / 12 }), 'rail');   // the front cap
-  markPaintSurface(K.box(0.024, 0.035, 0.49, gunMid, 0, 0.0625, 0.455, 0, 0, 0, null, 0.003), 'rail'); // continuous web from sleeve to top rail
+  // Seat the narrow painted strip between the sleeve's top facet and the base of the raised bands.
+  const webBottom = 0.02 + 0.03 * Math.cos(Math.PI / 12), webTop = 0.085 - 0.007;
+  markPaintSurface(K.box(0.024, webTop - webBottom, 0.49, gunMid, 0, (webTop + webBottom) / 2, 0.455, 0, 0, 0, null, 0.003), 'rail');
   paintedRail(0.49, 0, 0.085, 0.455, null, 0.031);
   for (const sx of [-1, 1]) paintedRail(0.49, sx * 0.033, 0.02, 0.455, null, 0.034, sx);
   paintedRail(0.49, 0, -0.013, 0.455, null, 0.031, 2);
@@ -423,7 +487,7 @@ export function makeAkModel(ctx) {
   // the mirrored first-person view shows +x on the right (docs/fps/fidelity.md).
   const HW = 0.023;
   // Receiver: flat stamped sides, the rear tang falling to the stock, the front trunnion's seam and its rivets.
-  K.slab([[-0.225, 0.028], [-0.225, -0.018], [-0.2, -0.028], [0.252, -0.028], [0.252, 0.028]], 2 * HW, gunBody, { bevel: 0.0025, segs: 2 });
+  K.slab([[-0.225, 0.028], [-0.225, -0.018], [-0.2, -0.028], [-0.12, -0.028], [-0.11, -0.026], [0.252, -0.026], [0.252, 0.028]], 2 * HW, gunBody, { bevel: 0.0025, segs: 2 });
   // J85: the lower stamping has real depth around the magazine well instead of
   // reading as a pencil-thin line above a full-size magazine and pistol grip.
   K.slab([[-0.11, -0.026], [0.252, -0.026], [0.252, -0.039], [0.18, -0.047], [0.07, -0.047], [-0.065, -0.039], [-0.11, -0.031]], 2 * HW, gunBody, { bevel: 0.0025, segs: 2 });
@@ -935,7 +999,22 @@ export function makeAa12Model(ctx) {
   }
   // CL-318 (J28: "trigger guard needs work"): a real loop, 9 units long from the receiver's underside ahead of the
   // trigger to the grip's front, 5 cm deep, 2 cm wide; the trigger in its middle (18 units ahead of where it was).
-  K.slab(gunBand([[-0.03, -0.088], [-0.034, -0.13], [-0.05, -0.142], [-0.1, -0.142], [-0.118, -0.128], [-0.116, -0.1]], 0.009), 0.03, gunPoly, { bevel: 0.0035, segs: 2 });
+  const gloveGuard = K.slab(gunBand([[-0.03, -0.088], [-0.034, -0.13], [-0.05, -0.142], [-0.1, -0.142], [-0.118, -0.128], [-0.116, -0.1]], 0.009), 0.03, gunPoly, { bevel: 0.0035, segs: 2 });
+  // The oversized virtual index root sits beside the rear of this drawn loop.
+  {
+    const geometry = gloveGuard.geometry, vertices = geometry.attributes.position;
+    geometry.computeBoundingBox();
+    const {min, max} = geometry.boundingBox, height = max.y - min.y, length = max.z - min.z;
+    for (let i = 0; i < vertices.count; i++) {
+      const z = vertices.getZ(i), depth = (max.y - vertices.getY(i)) / height;
+      const rear = (max.z - z) / length;
+      const u = Math.max(0, Math.min(1, (rear - .59) / (.90 - .59)));
+      const v = Math.max(0, Math.min(1, (depth - .13) / (.53 - .13)));
+      vertices.setZ(i, z + length * .068 * u * u * (3 - 2 * u) * v * v * (3 - 2 * v));
+    }
+    geometry.computeBoundingBox();
+    geometry.computeBoundingSphere();
+  }
   addTriggerArtwork(gun, K, [[-0.0601, -0.09], [-0.0647, -0.1005], [-0.064, -0.1081], [-0.0593, -0.1147], [-0.0647, -0.1193], [-0.072, -0.1119], [-0.0753, -0.0995], [-0.0719, -0.086]], 0.011, gunAccent, { bevel: 0.002 });   // GB-174/180: the trigger
   // The drum: its axis along the bore, 89 mm thick now, the rolled rims, the hub with its winding cover and key on the
   // front face, the eight face bolts, the feed tower up into the receiver, the latches at its sides.
@@ -1416,6 +1495,40 @@ function squareCladding(T, radius, depth, bevel, facets) {
   return geo;
 }
 
+// Each thin dark band keeps its outside bevel. Its back follows the tapered
+// silhouette of the existing artwork in the band's own outward direction.
+const sniperStripSkins = new WeakMap();
+function fittedSniperStrip(T, strip, host, index) {
+  const original = strip.geometry;
+  let skins = sniperStripSkins.get(original);
+  if (!skins) { skins = []; sniperStripSkins.set(original, skins); }
+  if (skins[index]) return skins[index];
+
+  strip.updateMatrix();
+  host.updateMatrix();
+  const toStrip = strip.matrix.clone().invert().multiply(host.matrix);
+  const shell = host.geometry.attributes.position, point = new T.Vector3(), rim = new Map();
+  for (let i = 0; i < shell.count; i++) {
+    point.fromBufferAttribute(shell, i).applyMatrix4(toStrip);
+    rim.set(point.z, Math.max(rim.get(point.z) ?? -Infinity, point.x));
+  }
+  const profile = [...rim].sort(([z1], [z2]) => z1 - z2);
+  const skin = original.clone(), position = skin.attributes.position;
+  for (let i = 0; i < position.count; i++) {
+    const z = position.getZ(i);
+    const hi = profile.findIndex(([section]) => section >= z);
+    if (hi < 1) continue;
+    const [z0, x0] = profile[hi - 1], [z1, x1] = profile[hi];
+    const faceX = x0 + (x1 - x0) * (z - z0) / (z1 - z0);
+    if (position.getX(i) < faceX) position.setX(i, faceX);
+  }
+  skin.userData = { ...original.userData, shared: true };
+  skin.computeBoundingBox();
+  skin.computeBoundingSphere();
+  skins[index] = skin;
+  return skin;
+}
+
 export function makeSniperModel(ctx) {
   const { THREE, gunKit, gunBand, gripOutline, gunEffects, gunSuppressor, finishGun, gunBody, gunMid, gunDark, gunAccent, gunPoly, gunRubber, gunMetal, gunTan, steelMat, glassMat } = ctx;
   const gun = new THREE.Group();
@@ -1603,7 +1716,11 @@ export function makeSniperModel(ctx) {
   // GB-180 pass 5 (vs a real heavy-barrel bolt gun: ours was a pencil): a 30%-fatter contour barrel, deeper flutes, a
   // bigger brake with real side ports.
   const barrel = K.lathe([[0, 0.13], [0.026, 0.13], [0.026, 0.2], [0.024, 0.225], [0.0185, 1.1], [0, 1.1]], gunAccent, { y: 0.04, seg: 16 });   // tip under t217 probe radius
-  for (let i = 0; i < 6; i++) { const a = i / 6 * Math.PI * 2; K.box(0.005, 0.005, 0.46, gunDark, Math.cos(a) * 0.0205, 0.04 + Math.sin(a) * 0.0205, 0.78, 0, 0, a); }
+  for (let i = 0; i < 6; i++) {
+    const a = i / 6 * Math.PI * 2;
+    const strip = K.box(0.005, 0.005, 0.46, gunDark, Math.cos(a) * 0.0205, 0.04 + Math.sin(a) * 0.0205, 0.78, 0, 0, a);
+    strip.geometry = fittedSniperStrip(THREE, strip, barrel, i);
+  }
   K.slab([[1.095, 0.019], [1.2, 0.019], [1.205, 0.025], [1.205, 0.055], [1.2, 0.061], [1.095, 0.061]], 0.046, gunMid, { bevel: 0.008 });   // pass 5: brake kept inside the can (t217)
   for (let i = 0; i < 3; i++) for (const sx of [-1, 1]) K.box(0.006, 0.024, 0.018, gunRubber, sx * 0.023, 0.04, 1.115 + i * 0.03);
   for (const z of [1.133, 1.163, 1.193]) K.box(0.049, 0.008, 0.006, gunDark, 0, 0.06, z, 0, 0, 0, null, 0.001);   // ported brake's top baffles

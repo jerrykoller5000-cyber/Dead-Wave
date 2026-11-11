@@ -1,0 +1,16 @@
+{
+  "id": "aa12",
+  "maxDifference": 0,
+  "expectedFaces": 140,
+  "matches": {
+    "world": 140,
+    "eye": 140,
+    "carry": 140
+  },
+  "rawBefore": 117,
+  "rawAfter": 117,
+  "added": [],
+  "parts": 231,
+  "open": 7,
+  "loose": 0
+}

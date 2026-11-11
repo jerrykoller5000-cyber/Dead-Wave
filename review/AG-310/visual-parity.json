@@ -1,0 +1,18 @@
+[
+  {
+    "title": "1. Armory Panel: Shelf/Slot Real Pictures + M4 Workbench Preview",
+    "meanAbsRgbDiffOutOf255": 43.574
+  },
+  {
+    "title": "2. Armory Workbench: Rotated 3D Gun Preview (toBlob async readback)",
+    "meanAbsRgbDiffOutOf255": 5.143
+  },
+  {
+    "title": "3. Armory Workbench: All 34 Camo Finish Swatches (<canvas> vs sync toDataURL <img>)",
+    "meanAbsRgbDiffOutOf255": 0
+  },
+  {
+    "title": "4. Real CIF Station Card: cifMarine Turntable + Dress Pattern Swatches",
+    "meanAbsRgbDiffOutOf255": 0.008
+  }
+]

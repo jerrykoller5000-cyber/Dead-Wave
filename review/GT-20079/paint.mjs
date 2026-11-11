@@ -415,6 +415,18 @@ async function capture() {
         const factoryParts={barrel:raw.getObjectByName(raw.userData.heatParts.barrel),
           lampGlass:raw.userData.laserLightUnit.getObjectByName('lightLens'),
           ...Object.fromEntries(Object.entries(raw.userData.controls).map(([key,n])=>[key,raw.getObjectByName(n)]))};
+        // The light switch is a marker. Exercise it to find the actual drawn factory pad.
+        const lamp=raw.userData.laserLightUnit,marker=factoryParts.lightSwitch,press=raw.userData.lightSwitch;
+        if(!marker || marker.parent!==lamp || !(press?.travel>0))throw Error('Missing raw light contact');
+        const {updateLightSwitch}=await import('/studio/weapon-light-switch.js');
+        const previouslyShown=lamp.visible;lamp.visible=true;updateLightSwitch(T.THREE,raw);
+        const rest=marker.position.clone();
+        marker.position.addScaledVector(new T.THREE.Vector3(...press.axis),press.travel);updateLightSwitch(T.THREE,raw);
+        const moving=[];lamp.traverse(mesh=>{if(mesh.isMesh && mesh.geometry.userData.lightSwitchPress===marker.name)moving.push(mesh);});
+        if(moving.length!==1)throw Error('Expected one rendered factory switch pad, found '+moving.length);
+        factoryParts.lightSwitch=moving[0];
+        marker.position.copy(rest);updateLightSwitch(T.THREE,raw);lamp.visible=previouslyShown;
+        if(moving[0].geometry.userData.lightSwitchPress)throw Error('Light pad did not return');
         if(reviewId==='aa12')Object.assign(factoryParts,{drum:raw.userData.mag,brake:raw.getObjectByName('Breacher muzzle brake')});
         else if(reviewId==='launcher'){
           Object.assign(factoryParts,{drum:raw.userData.drum,iron:raw.userData.defaultSight,looseRound:raw.userData.loadRound,latch:raw.userData.drumLatch});

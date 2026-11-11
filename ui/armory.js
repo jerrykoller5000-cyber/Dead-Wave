@@ -258,7 +258,7 @@ export function mountArmory({ doc = document, bus = window, cif = doc.getElement
       const b = el('button', 'armory-swatch' + (f.key === (data.current || '') ? ' on' : '') + (f.locked ? ' locked' : '')); b.type = 'button';
       b.dataset.finish = f.key; b.title = f.locked ? f.name + (f.hint ? ' · ' + f.hint : '') : f.name;
       b.setAttribute('aria-label', b.title); b.setAttribute('aria-pressed', String(f.key === (data.current || '')));
-      if (f.swatch) { const img = doc.createElement('img'); img.alt = ''; img.src = f.swatch; b.append(img); }
+      if (f.swatch) { if (typeof f.swatch === 'string') { const img = doc.createElement('img'); img.alt = ''; img.src = f.swatch; b.append(img); } else b.append(typeof f.swatch === 'function' ? f.swatch(doc) : f.swatch); }
       else b.append(el('span', 'armory-swatch-plain'));
       if (f.locked) b.disabled = true;
       b.addEventListener('click', () => { if (!f.locked && onFinish(kind, f.key)) render(); });

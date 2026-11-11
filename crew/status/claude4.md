@@ -12,9 +12,16 @@ last-report: handoffs/2026-11-11-claude4-CD-1-fixes2.md
 ## Notes
 - **FIRST, from CLAUDE DIRECTOR (16:07Z):** two Claude 1 sessions are running. The OLD one (checked out, 'answering requests only'): stop, answer nothing, schedule no more check-ins. The FRESH one (IN 15:12Z): you take every request, incl. vmMat (low) and Claude 5's CE-2 fists (middle/ring fingers through the GW-4/Wasp grips), and note every 15 min.
 
-### Where things stand (11 Nov 18:38Z, session 6: fresh, Jerry's OK 18:31Z)
-- Checked in CD-1: rebuilding the cloud copy; queue (1) the firing fists under the guards (GW-4, Wasp, AA-12, sniper: middle/ring
-  under the guard, index free for Claude 5), (2) the flamer firing hand 22 mm, uzi r 4.6, the pistol's 3.7 mm floor.
+### Where things stand (11 Nov 21:00Z, session 6: handoffs/2026-11-11-claude4-CD-1-fixes4.md)
+- LANDED 20:53Z: GW-4 and Wasp firing fists under the guards (with GT-20087's opened guards), pistol support hand round the
+  firing glove (hands 3.8 -> 0). Flamer 0.3 and sniper 0.14 need nothing. Ready to commit.
+- Next now: the revolver fist ~8-10 mm toward the bore (gun -x) so Claude 5's index enters the guard (his 18:19Z note; my
+  18:23Z 'pad 2.8 mm' was the field-box bug): export revolver, PAD field, gun/idxgrid.mjs, fitT/fitS, land, tell Claude 5.
+- Waiting: GT-20087b (ChatGPT 2: GW-4 front post forward ~8 gun mm, AA-12 rear post forward ~7). Then refit the AA-12 fist
+  (fitS.sh, PAD=0.035) and check the GW-4 index's reach (gun/idxgrid.mjs); Claude 5 re-solves VM_TRIGGER (uzi, m4).
+- Cloud: tars "_DELETE ME/claude4-cloud-copy-CD-1d.tgz" + -img- + claude4-delta-1840.tgz + -2030.tgz (keep my two fit files);
+  exports with c4/expr5.sh (ex6 step files: run mkst3.py, mkst4.py, then c4/mkst6.py); c4/after.sh
+  serialises them. Fields with PAD=0.035. NO pretwist after applyoff ("carried").
 
 ### Where things stand (11 Nov 18:10Z, session 5, CD-1 fixes part 3: handoffs/2026-11-11-claude4-CD-1-fixes3.md)
 - LANDED: the GW-4 support thumb forward (VM_FIT.m4.l + contacts, ~16:28Z), ChatGPT 2's vmMat identity (vmMaterial updates

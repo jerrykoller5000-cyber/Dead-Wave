@@ -18,7 +18,8 @@ def to_canon(P):
     return np.c_[s * (P4[:, 0] - ox), P4[:, 1], P4[:, 2] - gz]
 wor = np.frombuffer(base64.b64decode(H['wor']), dtype=np.float32).reshape(-1, 3).astype(np.float64)
 canon_hand = to_canon(wor)
-lo = canon_hand.min(0) - 0.010; hi = canon_hand.max(0) + 0.010
+PAD = float(os.environ.get('PAD', '0.010'))   # CD-1 fixes 4: a wider box when a finger moves far (an index straightened out of it read 10 mm clean)
+lo = canon_hand.min(0) - PAD; hi = canon_hand.max(0) + PAD
 dims = np.ceil((hi - lo) / STEP).astype(int) + 1
 field = np.full(tuple(dims), BAND, dtype=np.float32)
 facts = []

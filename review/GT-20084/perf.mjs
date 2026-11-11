@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import {setTimeout as wait} from 'node:timers/promises';
 import {fileURLToPath} from 'node:url';
+import {readFile} from 'node:fs/promises';
 import {serve} from '../../tools/serve.mjs';
 import {launch} from '../../tools/cdp.mjs';
 import {save} from '../GT-20076/save.mjs';
@@ -11,6 +12,19 @@ assert(process.env.DW_GAME_TEST_TOKEN && (['shotgun','pistol'].includes(id) || p
 const server=await serve(fileURLToPath(new URL('../../',import.meta.url)),0),browser=await launch({headless:false});
 try{
   const page=await browser.newPage({width:1280,height:720});
+  const baseline=padReturn && process.argv.includes('--original-pad');let originalServed=0;
+  if(baseline){
+    const path='/studio/weapon-attachments.js',url=server.origin+path;
+    const art=await readFile(new URL('../..'+path,import.meta.url),'utf8');
+    assert.equal(art.split(', padY: -0.002').length,2);
+    const body=Buffer.from(art.replace(', padY: -0.002','')).toString('base64');
+    page.conn.onEvent(e=>{
+      if(e.sessionId!==page.sessionId || e.method!=='Fetch.requestPaused')return;
+      assert.equal(new URL(e.params.request.url).pathname,path);originalServed++;
+      page.send('Fetch.fulfillRequest',{requestId:e.params.requestId,responseCode:200,responseHeaders:[{name:'Content-Type',value:'text/javascript'}],body}).catch(err=>page.errors.push(err.message));
+    });
+    await page.send('Fetch.enable',{patterns:[{urlPattern:url+'*'}]});
+  }
   const first=await sampleHigh(page,server.origin,id);
   await page.evaluate(`(async()=>{
     const {updateArtworkInstances}=await import('/studio/weapon-model-hooks.js');
@@ -48,6 +62,8 @@ try{
     trials.push({phase,...state,fps:mean('fps'),low:mean('low'),samples});
     console.log('PASS',id,phase,trials.at(-1).fps,'fps',trials.at(-1).low,'low',state.releases,'releases');
   }
-  await save(new URL(padReturn?'../GT-20086/timing.json':'./timing-'+id+'.json',import.meta.url),JSON.stringify({id,readyMs:first.readyMs,trials},null,2)+'\n');
+  if(baseline)assert.equal(originalServed,1);
+  const output=padReturn?'../GT-20086/'+(baseline?'timing-before.json':process.argv.includes('--repeat')?'timing-repeat.json':'timing.json'):'./timing-'+id+'.json';
+  await save(new URL(output,import.meta.url),JSON.stringify({id,readyMs:first.readyMs,trials},null,2)+'\n');
   assert.deepEqual(page.errors,[]);
 }finally{await browser.close();await server.close();}

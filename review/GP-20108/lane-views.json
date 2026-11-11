@@ -1,0 +1,146 @@
+{
+  "at": "2026-11-11T20:58:37.023Z",
+  "views": [
+    {
+      "name": "lane-from-line",
+      "off": false,
+      "file": "lane-from-line-noon.png",
+      "view": {
+        "x": 0,
+        "y": -198.4,
+        "z": -643,
+        "tx": 0,
+        "ty": -188.4,
+        "tz": -633,
+        "fov": 84
+      },
+      "actualCamera": [
+        0,
+        -198.4,
+        -643
+      ],
+      "lights": {
+        "on": true,
+        "night": false,
+        "room": true
+      },
+      "ceiling": {
+        "visible": true,
+        "on": true,
+        "firstPerson": true,
+        "baked": {
+          "merged": 4,
+          "removed": 57
+        },
+        "lightCount": 4
+      },
+      "draws": 247
+    },
+    {
+      "name": "lane-from-line",
+      "off": true,
+      "file": "lane-from-line-off.png",
+      "view": {
+        "x": 0,
+        "y": -198.4,
+        "z": -643,
+        "tx": 0,
+        "ty": -188.4,
+        "tz": -633,
+        "fov": 84
+      },
+      "actualCamera": [
+        0,
+        -198.4,
+        -643
+      ],
+      "lights": {
+        "on": false,
+        "night": true,
+        "room": false
+      },
+      "ceiling": {
+        "visible": true,
+        "on": false,
+        "firstPerson": true,
+        "baked": {
+          "merged": 4,
+          "removed": 57
+        },
+        "lightCount": 4
+      },
+      "draws": 202
+    },
+    {
+      "name": "lane-mid-back",
+      "off": false,
+      "file": "lane-mid-back-noon.png",
+      "view": {
+        "x": 0,
+        "y": -198.4,
+        "z": -626,
+        "tx": 0,
+        "ty": -186.4,
+        "tz": -638,
+        "fov": 84
+      },
+      "actualCamera": [
+        0,
+        -198.4,
+        -626
+      ],
+      "lights": {
+        "on": true,
+        "night": false,
+        "room": true
+      },
+      "ceiling": {
+        "visible": true,
+        "on": true,
+        "firstPerson": true,
+        "baked": {
+          "merged": 4,
+          "removed": 57
+        },
+        "lightCount": 4
+      },
+      "draws": 195
+    },
+    {
+      "name": "lane-mid-back",
+      "off": true,
+      "file": "lane-mid-back-off.png",
+      "view": {
+        "x": 0,
+        "y": -198.4,
+        "z": -626,
+        "tx": 0,
+        "ty": -186.4,
+        "tz": -638,
+        "fov": 84
+      },
+      "actualCamera": [
+        0,
+        -198.4,
+        -626
+      ],
+      "lights": {
+        "on": false,
+        "night": true,
+        "room": false
+      },
+      "ceiling": {
+        "visible": true,
+        "on": false,
+        "firstPerson": true,
+        "baked": {
+          "merged": 4,
+          "removed": 57
+        },
+        "lightCount": 4
+      },
+      "draws": 195
+    }
+  ],
+  "errors": []
+}

@@ -62,6 +62,22 @@ function ventTube(T, r, wall, length, rows, columns, holeA = 0.5, holeZ = 0.58, 
     }
   });
 }
+// Keep the exposed bevels of a painted box and seat its hidden back on the adjacent artwork.
+// The rounded boxes come from a shared cache, so only this drawing gets the fitted vertices.
+function seatBoxArt(mesh, axis, faceAt, side = 1) {
+  const skin = mesh.geometry.clone(), component = axis === 'x' ? 0 : 1;
+  skin.userData = { ...skin.userData, shared: false };
+  const position = skin.attributes.position;
+  for (let i = 0; i < position.count; i++) {
+    const limit = faceAt(mesh.position.z + position.getZ(i)) - mesh.position[axis];
+    const offset = i * position.itemSize + component;
+    if (side * (position.array[offset] - limit) < 0) position.array[offset] = limit;
+  }
+  skin.computeBoundingBox();
+  skin.computeBoundingSphere();
+  mesh.geometry = skin;
+}
+
 function bolt(K, dark, bright, x, y, z, radius = 0.006, parent = null) {
   K.cyl(radius, radius, 0.004, bright, x, y, z, parent, 8, 'x');
   K.box(0.005, radius * 0.35, radius * 1.05, dark, x, y, z, 0, 0, 0, parent, 0.0004);
@@ -141,8 +157,12 @@ export function makeMinigunModel(ctx) {
   for (const sx of [-1, 1]) {
     const plate = K.slab([[-0.255, -0.092], [0.152, -0.092], [0.161, -0.08], [0.161, 0.087], [0.148, 0.098], [-0.247, 0.098]], 0.020, gunMid, { x: sx * 0.150, bevel: 0.003 });
     markPaintSurface(plate, 'receiver');
-    for (let i = 0; i < 4; i++) K.box(0.012, 0.009, 0.26, gunDark, sx * 0.158, 0.065 - i * 0.039, -0.064, 0, 0, 0, null, 0.003);
-    for (const [by, bz] of [[0.085, 0.13], [0.085, -0.24], [-0.085, 0.13], [-0.085, -0.24]]) K.cyl(0.011, 0.011, 0.012, gunAccent, sx * 0.157, by, bz, null, 6, 'x');
+    const sideFace = plate.position.x + sx * .010;
+    for (let i = 0; i < 4; i++) {
+      const rib = K.box(0.012, 0.009, 0.26, gunDark, sx * 0.158, 0.065 - i * 0.039, -0.064, 0, 0, 0, null, 0.003);
+      seatBoxArt(rib, 'x', () => sideFace, sx);
+    }
+    for (const [by, bz] of [[0.085, 0.13], [0.085, -0.24], [-0.085, 0.13], [-0.085, -0.24]]) K.cyl(0.011, 0.011, 0.003, gunAccent, sideFace + sx * .0015, by, bz, null, 6, 'x');
   }
   // Two removable top service panels break up the broad receiver shell without
   // crossing the centre sight line or shifting either hand's support point.
@@ -327,9 +347,15 @@ export function makeLauncherModel(ctx) {
   K.slab([[-0.25, 0.08], [-0.25, -0.035], [-0.23, -0.06], [0.039, -0.06], [0.049, -0.044], [0.049, 0.09], [0.033, 0.106], [-0.227, 0.106]], 0.15, receiverSteel, { bevel: 0.012 });
   // A shallow stamped rear service cover breaks the large blank face seen at 40 cm.
   // It stays inside the frame envelope and folds into its existing opaque batch.
-  K.box(0.104, 0.036, 0.002, gunDark, 0, 0.057, -0.251, 0, 0, 0, null, 0.003);
-  K.box(0.084, 0.024, 0.001, gunMid, 0, 0.057, -0.253, 0, 0, 0, null, 0.002);
-  for (const x of [-0.047, 0.047]) K.cyl(0.0025, 0.0025, 0.002, gunAccent, x, 0.057, -0.254, null, 8);
+  const bossY = 0.04, bossZ = -0.25, bossRadius = 0.029, bossSegments = 16;
+  const outerCover = K.box(0.104, 0.036, 0.002, gunDark, 0, 0.057, -0.251, 0, 0, 0, null, 0.003);
+  const insetCover = K.box(0.084, 0.024, 0.001, gunMid, 0, 0.057, -0.253, 0, 0, 0, null, 0.002);
+  // Both painted rims meet the same upper facet on the rounded rear artwork.
+  const facetSlope = Math.tan(Math.PI / bossSegments);
+  for (const cover of [outerCover, insetCover]) {
+    seatBoxArt(cover, 'y', z => bossY + bossRadius - Math.abs(z - bossZ) * facetSlope);
+  }
+  for (const x of [-0.047, 0.047]) K.cyl(0.0025, 0.0025, 0.002, gunAccent, x, 0.0718, -0.253, null, 8);
   // J122: a three-notch leaf and protected front post on the original ADS axis.
   const leafZ = -0.085;
   const irons = K.group(0, 0, 0);
@@ -383,7 +409,7 @@ export function makeLauncherModel(ctx) {
   stock.position.set(0, 0.04, -0.25);
   for (const piece of stock.children) { piece.position.y -= 0.04; piece.position.z += 0.25; }   // at rest unchanged; X now tilts the stock
   stock.scale.z = 0.7;   // collapsed M32A1 stock; pivot and firing grip stay fixed
-  K.cyl(0.029, 0.029, 0.11, gunDark, 0, 0.04, -0.25, null, 16, 'x');   // angle-adjustment pivot on the receiver
+  K.cyl(bossRadius, bossRadius, 0.11, gunDark, 0, bossY, bossZ, null, bossSegments, 'x');   // angle-adjustment pivot on the receiver
   for (const sx of [-1, 1]) {
     K.cyl(0.022, 0.022, 0.005, gunMid, sx * 0.056, 0.04, -0.25, null, 12, 'x');
     K.box(0.004, 0.008, 0.015, gunDark, sx * 0.06, 0.061, -0.245, 0, 0, 0, null, 0.001);   // angle release tabs
@@ -529,7 +555,8 @@ export function makeLauncherModel(ctx) {
   const firstRailPart = gun.children.length;
   for (const x of [0.058, -0.058]) K.box(0.012, 0.03, 0.3, gunDark, x, 0.04, 0.42);
   K.box(0.03, 0.012, 0.3, gunDark, 0, -0.018, 0.42);
-  K.box(0.037, 0.006, 0.37, gunDark, 0, 0.091, 0.46, 0, 0, 0, null, 0.001);
+  const topStrip = K.box(0.037, 0.006, 0.37, gunDark, 0, 0.091, 0.46, 0, 0, 0, null, 0.001);
+  seatBoxArt(topStrip, 'y', () => 0.04 + 0.052);
   K.rail(0.37, 0, 0.101, 0.46, null, 0.049);   // 12-o'clock rail, behind the front post
   for (const sx of [-1, 1]) K.rail(0.36, sx * 0.068, 0.04, 0.46, null, 0.025, sx);   // 3 and 9
   K.rail(0.34, 0, -0.018, 0.46, null, 0.03, 2);   // 6-o'clock rail under the foregrip mount
@@ -913,8 +940,14 @@ export function makeChainsawModel(ctx) {
   barMat.metalness = .47;
   K.slab([[-0.27, 0.105], [-0.28, 0.083], [-0.28, -0.024], [-0.248, -0.06], [0.088, -0.06], [0.11, -0.038], [0.11, 0.112], [0.09, 0.14], [-0.24, 0.14]], 0.24, bodyMat, { bevel: 0.012, segs: 3 });
   // Orange cowling steps down at the front, leaving a clear grip over the engine.
-  K.slab([[-0.25, 0.132], [0.073, 0.132], [0.073, 0.148], [-0.01, 0.154], [-0.03, 0.177], [-0.214, 0.18], [-0.25, 0.155]], 0.22, coverMat, { bevel: 0.010, segs: 3 });
-  for (let i = 0; i < 4; i++) K.box(0.135, 0.008, 0.012, gunDark, 0, 0.18, -0.193 + i * 0.04, 0, 0, 0, null, 0.002);
+  const cowl = K.slab([[-0.25, 0.132], [0.073, 0.132], [0.073, 0.148], [-0.01, 0.154], [-0.03, 0.177], [-0.214, 0.18], [-0.25, 0.155]], 0.22, coverMat, { bevel: 0.010, segs: 3 });
+  seatBoxArt(cowl, 'y', z => Math.min(.14, .105 + (z + .27) * (.035 / .03)));
+  for (let i = 0; i < 4; i++) {
+    // The first rubber strip ends at the intake border.
+    const left = -.0675, right = i === 0 ? -.0175 : .0675;
+    const rib = K.box(right - left, 0.008, 0.012, gunDark, (left + right) / 2, 0.18, -0.193 + i * 0.04, 0, 0, 0, null, 0.002);
+    seatBoxArt(rib, 'y', z => .180 + (.177 - .180) * (z + .214) / (.214 - .030));
+  }
   // Recessed air intake and service seam break up the broad moulded top.
   K.box(0.105, 0.003, 0.045, gunMid, 0.035, 0.181, -0.198, 0, 0, 0, null, 0.006);
   for (let i = 0; i < 4; i++) K.box(0.008, 0.004, 0.035, gunDark, -0.003 + i * 0.022, 0.184, -0.198, 0, 0, 0, null, 0.002);

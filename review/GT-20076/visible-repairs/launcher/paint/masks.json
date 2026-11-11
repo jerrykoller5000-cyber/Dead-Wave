@@ -1,0 +1,37 @@
+{
+  "held": {
+    "coated": 22,
+    "factory": 15
+  },
+  "eye": {
+    "coated": 21,
+    "factory": 14
+  },
+  "barrel": {
+    "bare": 1
+  },
+  "lampGlass": {
+    "bare": 1
+  },
+  "trigger": {
+    "bare": 1
+  },
+  "lightSwitch": {
+    "bare": 1
+  },
+  "drum": {
+    "bare": 34
+  },
+  "iron": {
+    "bare": 10
+  },
+  "looseRound": {
+    "bare": 1
+  },
+  "latch": {
+    "bare": 2
+  },
+  "loadedInserts": {
+    "bare": 1
+  }
+}

@@ -21,6 +21,7 @@ const m0 = x0.slice(18, 23).concat([x0[27]]);
 // CD-1 pass 2: KOGRID, a second field (keep-outs: a trigger guard's opening) for every bone but the index's; TGT
 // '[x,y,z]' (the field's space, metres), the trigger's face for the index's pad (bone 3), pulled with weight TGW
 const KG = process.env.KOGRID ? loadGrid(process.env.KOGRID) : null, TG = process.env.TGT ? JSON.parse(process.env.TGT) : null, TGW = +process.env.TGW || 0.5;
+const SKIPB = process.env.SKIPB ? JSON.parse(process.env.SKIPB) : [];   // CD-1 fixes 4: bones left out of the gun's cost (an index Claude 5's VM_TRIGGER poses)
 const NAMES = ['palm', 'i1', 'i2', 'i3', 'm1', 'm2', 'm3', 'r1', 'r2', 'r3', 'l1', 'l2', 'l3', 't0', 't1', 't2'];
 function cost(x, full) {
   const pose = unpack(x), P = M.handPosed(pose, GL), byB = new Float64Array(16).fill(1), byK = new Float64Array(16).fill(1); let tgd = 1;
@@ -37,7 +38,7 @@ function cost(x, full) {
   }
   const mm = (d) => d * 1000;
   let gun = 0, gap = 0;
-  for (let b = 0; b < 16; b++) { const d = mm(byB[b]); if (d < -0.2) gun += (d + 0.2) ** 2; }
+  for (let b = 0; b < 16; b++) { if (SKIPB.includes(b)) continue; const d = mm(byB[b]); if (d < -0.2) gun += (d + 0.2) ** 2; }
   for (const b of TOUCH) gap += Math.max(0, mm(byB[b]) - 0.3) ** 2;
   let ko = 0; if (KG) for (let b = 0; b < 16; b++) { const d = mm(byK[b]); if (d < -0.2) ko += (d + 0.2) ** 2; }
   const tgt = TG ? TGW * Math.max(0, mm(tgd) - 0.5) ** 2 : 0;

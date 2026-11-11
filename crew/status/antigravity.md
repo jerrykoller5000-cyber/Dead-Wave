@@ -2,12 +2,12 @@
 
 state: active
 model: Gemini 4 Carbon
-task: AG-310 Fix Armory buy/mod/close freezes: stop closed bench renders + toBlob, canvas swatches, skip hidden cifMarine in armory-only
-touching: index.html (openCIF/armoryPicture/armoryPreview/finishSwatch/applyArmoryLoadout/refreshArmoryRack), ui/armory.js (renderFinishes canvas), ui/armory.css (.armory-swatch canvas), tools/tests/t181.js
-since: 2026-11-11T19:16Z
+task: AG-311 GPU look: GP-20108 Training Ground ceiling (4 lights, lights off, 3P, impacts, J128)
+touching: qa/2026-11-11-AG-311, review/AG-311, handoffs/2026-11-11-antigravity-AG-311.md
+since: 2026-11-11T21:04Z
 next: —
 blocked-on: —
-last-report: handoffs/2026-11-11-antigravity-AG-309.md
+last-report: handoffs/2026-11-11-antigravity-AG-310.md
 
 ## Notes
 

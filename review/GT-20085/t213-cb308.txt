@@ -1,0 +1,25 @@
+GRANT chatgpt2 GT-20076: starting one game-test command
+ok    t213     22 pass   0 fail  46.1s  (real renderer)
+    PASS TT.m240VisDbg is exported
+    PASS the gun sits on its own hinge (userData.elev holds the barrel)
+    PASS manned
+    PASS aimed up at a mark 10 m out and 4.5 m up, the barrel tips up onto it (20.1 deg up, 0.2 deg off)
+    PASS at a chest-high mark it is about level (0.9 deg, 0.2 deg off)
+    PASS straight up it stops at the cradle's limit (35.0 deg)
+    PASS into the ground it stops at its lower limit (-20.1 deg)
+    PASS only the gun tips: the tripod stays level and the hinge only elevates
+    PASS a round starts at the tipped muzzle (1.15 m up)
+    PASS it is heard as the Watchman, not the AK (m240 1, ak 0)
+    PASS one case and one link per round
+    PASS the case drops out of the receiver (-1.60 m/s down)
+    PASS the case is brass-coloured (c6993c)
+    PASS the link flies out to its right (2.01 m/s)
+    PASS a burst: 19 cases and 19 links
+    PASS shouldered, it is the Watchman he carries, not the mortar
+    PASS its receiver rests on his right shoulder (0.17 m from the joint)
+    PASS muzzle forward and up (along his facing 0.97, up 0.26)
+    PASS its legs are folded under the barrel (0.23 wide, 0.44 high, 1.23 long)
+    PASS set down, nothing is left on his shoulder
+    PASS Brandt's M240 tips down at a dead man below the roof (20.1 deg down, 2 rounds)
+    PASS no errors
+1 checks: 22 pass, 0 fail (real renderer)

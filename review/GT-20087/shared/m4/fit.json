@@ -1,0 +1,16 @@
+{
+  "id": "m4",
+  "maxDifference": 0,
+  "expectedFaces": 140,
+  "matches": {
+    "world": 140,
+    "eye": 140,
+    "carry": 140
+  },
+  "rawBefore": 417,
+  "rawAfter": 417,
+  "added": [],
+  "parts": 391,
+  "open": 3,
+  "loose": 0
+}

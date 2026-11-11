@@ -1,0 +1,1960 @@
+{
+  "factory": {
+    "assembled": [
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "a9f9a64e-bf2d-43ae-a848-5da5dd53a6e8",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:launcher",
+        "material": "ba7932b1-5d35-41d8-87c1-d02665486f6b",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:launcher",
+        "material": "051810cb-a0ce-486f-a043-e68ddd8f7035",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 6053992,
+        "roughness": 0.68,
+        "metalness": 0.06
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:launcher",
+        "material": "7b839916-2757-48ec-af4a-e94e9ea43b07",
+        "role": "furniture",
+        "registered": true,
+        "map": null,
+        "color": 5397051,
+        "roughness": 0.74,
+        "metalness": 0.06
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "49377650-b87a-4623-b2dd-908ef56f3ba2",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "400ff107-95b0-4f10-a671-b1ea3f6d8810",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 6053992,
+        "roughness": 0.68,
+        "metalness": 0.06
+      },
+      {
+        "part": "launcher-loaded-inserts",
+        "materialName": "",
+        "material": "045efb24-deca-4288-af8e-34a38675d6f0",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 0.78,
+        "metalness": 0.18
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "d65f3db7-303e-4bed-8404-0da7d32f29d7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16769945
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "6a97289e-09e4-4f60-ae8c-5712893bdc42",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16732497
+      },
+      {
+        "part": "moduleShell",
+        "materialName": "gunPaint:launcher",
+        "material": "40b54b25-b3e1-48c2-80f0-727a4762181c",
+        "role": "light shell",
+        "registered": true,
+        "map": null,
+        "color": 3290167,
+        "roughness": 0.76,
+        "metalness": 0.03
+      },
+      {
+        "part": "topPlate",
+        "materialName": "gunPaint:launcher",
+        "material": "532aed32-5c84-49cf-a437-5ef72ae3bc40",
+        "role": "light shell",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "7a3978eb-7bd8-4956-b233-c1ad636345a9",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:launcher",
+        "material": "7b608174-e02c-426e-9f1f-357731b7114a",
+        "role": "receiver",
+        "registered": true,
+        "map": null,
+        "color": 7371134,
+        "roughness": 0.69,
+        "metalness": 0.38
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:launcher",
+        "material": "e1237b70-5a62-4021-9d7d-de02e2b8f6bb",
+        "role": "furniture",
+        "registered": true,
+        "map": null,
+        "color": 3290167,
+        "roughness": 0.76,
+        "metalness": 0.03
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:launcher",
+        "material": "670a91d7-f299-4ad2-992a-bd2cdeb2311d",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "chamfered alloy clamp foot",
+        "materialName": "gunPaint:launcher",
+        "material": "006d599c-a06f-4632-a784-f7cf35a8b565",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 3027508,
+        "roughness": 0.5,
+        "metalness": 0.55
+      },
+      {
+        "part": "painted riser",
+        "materialName": "gunPaint:launcher",
+        "material": "d5a4b32d-c570-4e6b-b8d2-f46c092b6670",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 2369578,
+        "roughness": 0.74,
+        "metalness": 0.05
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "materialName": "",
+        "material": "d69a5fd0-b013-4d95-b2fd-a0308adb2563",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "materialName": "",
+        "material": "d1a637cf-adeb-4985-91d7-d2404cda3b63",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      }
+    ],
+    "firstPerson": [
+      {
+        "part": "",
+        "materialName": "vm:fold-static",
+        "material": "2ff5470a-d5f7-4220-af5b-5cd70d809fbc",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:launcher",
+        "material": "d709a443-6642-4db2-a808-5a0b8294333b",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685184,
+        "roughness": 0.69,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:launcher",
+        "material": "1acb76a4-5c54-41d0-a2c6-c61634c05ac6",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 8751504,
+        "roughness": 0.61,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:launcher",
+        "material": "5a578f22-2f7e-47ff-b0b2-c08f9d1f8d71",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5397051,
+        "roughness": 0.74,
+        "metalness": 0.06
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "c61a7fa8-13a1-44d2-9366-c006b5075b38",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5659490,
+        "roughness": 0.58,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "82dc6161-a4b3-48c1-b447-0cd64fd2ea3f",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 8751504,
+        "roughness": 0.61,
+        "metalness": 0.08
+      },
+      {
+        "part": "launcher-loaded-inserts",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "43e14da5-48df-4fd3-bffb-38171b2f4acf",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 0.78,
+        "metalness": 0.18
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshBasicMaterial",
+        "material": "1df358a3-0207-4d76-ac85-95f1b048ebb2",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16769945
+      },
+      {
+        "part": "moduleShell",
+        "materialName": "vm:gunPaint:launcher",
+        "material": "64a38db0-6dcd-4678-9704-945cb5e93371",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5264465,
+        "roughness": 0.84,
+        "metalness": 0.02
+      },
+      {
+        "part": "topPlate",
+        "materialName": "vm:gunPaint:launcher",
+        "material": "c66be2d8-662b-4653-90ca-195529756b98",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685184,
+        "roughness": 0.69,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "19c65112-95da-4a78-bf33-45ee3213c119",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:launcher",
+        "material": "75704b8c-ae11-4fb3-9516-cd8121128487",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7371134,
+        "roughness": 0.69,
+        "metalness": 0.38
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:launcher",
+        "material": "dd22d643-199f-437d-a3f9-2e6a2acb74d1",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5264465,
+        "roughness": 0.84,
+        "metalness": 0.02
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:launcher",
+        "material": "58099a4c-4345-4c5f-9963-3f9267482999",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5659490,
+        "roughness": 0.58,
+        "metalness": 0.1
+      },
+      {
+        "part": "chamfered alloy clamp foot",
+        "materialName": "vm:gunPaint:launcher",
+        "material": "16c910a0-5742-4b73-ae4f-ef6eb18a39e7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3027508,
+        "roughness": 0.5,
+        "metalness": 0.55
+      },
+      {
+        "part": "painted riser",
+        "materialName": "vm:gunPaint:launcher",
+        "material": "17fb103e-1a3f-453b-bf8c-b6ffad85601f",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2369578,
+        "roughness": 0.74,
+        "metalness": 0.05
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "materialName": "vm:MeshPhysicalMaterial",
+        "material": "98a0d305-3281-418f-a323-8def6a618b73",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "materialName": "vm:MeshBasicMaterial",
+        "material": "93d6a78e-523c-4eea-87c7-8b4431840129",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      }
+    ],
+    "magazine": [
+      {
+        "part": "",
+        "materialName": "",
+        "material": "400ff107-95b0-4f10-a671-b1ea3f6d8810",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 6053992,
+        "roughness": 0.68,
+        "metalness": 0.06
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "a9f9a64e-bf2d-43ae-a848-5da5dd53a6e8",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "launcher-loaded-inserts",
+        "materialName": "",
+        "material": "045efb24-deca-4288-af8e-34a38675d6f0",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 0.78,
+        "metalness": 0.18
+      }
+    ],
+    "light": [
+      {
+        "part": "moduleShell",
+        "materialName": "gunPaint:launcher",
+        "material": "40b54b25-b3e1-48c2-80f0-727a4762181c",
+        "role": "light shell",
+        "registered": true,
+        "map": null,
+        "color": 3290167,
+        "roughness": 0.76,
+        "metalness": 0.03
+      },
+      {
+        "part": "topPlate",
+        "materialName": "gunPaint:launcher",
+        "material": "532aed32-5c84-49cf-a437-5ef72ae3bc40",
+        "role": "light shell",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "7a3978eb-7bd8-4956-b233-c1ad636345a9",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "a9f9a64e-bf2d-43ae-a848-5da5dd53a6e8",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "optic": [
+      {
+        "part": "",
+        "materialName": "gunPaint:launcher",
+        "material": "ba7932b1-5d35-41d8-87c1-d02665486f6b",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:launcher",
+        "material": "670a91d7-f299-4ad2-992a-bd2cdeb2311d",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "chamfered alloy clamp foot",
+        "materialName": "gunPaint:launcher",
+        "material": "006d599c-a06f-4632-a784-f7cf35a8b565",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 3027508,
+        "roughness": 0.5,
+        "metalness": 0.55
+      },
+      {
+        "part": "painted riser",
+        "materialName": "gunPaint:launcher",
+        "material": "d5a4b32d-c570-4e6b-b8d2-f46c092b6670",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 2369578,
+        "roughness": 0.74,
+        "metalness": 0.05
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "materialName": "",
+        "material": "d69a5fd0-b013-4d95-b2fd-a0308adb2563",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "materialName": "",
+        "material": "d1a637cf-adeb-4985-91d7-d2404cda3b63",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "a9f9a64e-bf2d-43ae-a848-5da5dd53a6e8",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "rack": [
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "a9f9a64e-bf2d-43ae-a848-5da5dd53a6e8",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "045efb24-deca-4288-af8e-34a38675d6f0",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 0.78,
+        "metalness": 0.18
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "7a3978eb-7bd8-4956-b233-c1ad636345a9",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "d69a5fd0-b013-4d95-b2fd-a0308adb2563",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "d1a637cf-adeb-4985-91d7-d2404cda3b63",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      }
+    ]
+  },
+  "camo": {
+    "assembled": [
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "a9f9a64e-bf2d-43ae-a848-5da5dd53a6e8",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:launcher",
+        "material": "ba7932b1-5d35-41d8-87c1-d02665486f6b",
+        "role": "rail",
+        "registered": true,
+        "map": "ebfdc98c-f94e-4adb-8045-2ec3da0c04c1",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:launcher",
+        "material": "051810cb-a0ce-486f-a043-e68ddd8f7035",
+        "role": "rail",
+        "registered": true,
+        "map": "ebfdc98c-f94e-4adb-8045-2ec3da0c04c1",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:launcher",
+        "material": "7b839916-2757-48ec-af4a-e94e9ea43b07",
+        "role": "furniture",
+        "registered": true,
+        "map": "ebfdc98c-f94e-4adb-8045-2ec3da0c04c1",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "49377650-b87a-4623-b2dd-908ef56f3ba2",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "400ff107-95b0-4f10-a671-b1ea3f6d8810",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 6053992,
+        "roughness": 0.68,
+        "metalness": 0.06
+      },
+      {
+        "part": "launcher-loaded-inserts",
+        "materialName": "",
+        "material": "045efb24-deca-4288-af8e-34a38675d6f0",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 0.78,
+        "metalness": 0.18
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "d65f3db7-303e-4bed-8404-0da7d32f29d7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16769945
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "6a97289e-09e4-4f60-ae8c-5712893bdc42",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16732497
+      },
+      {
+        "part": "moduleShell",
+        "materialName": "gunPaint:launcher",
+        "material": "40b54b25-b3e1-48c2-80f0-727a4762181c",
+        "role": "light shell",
+        "registered": true,
+        "map": "ebfdc98c-f94e-4adb-8045-2ec3da0c04c1",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "topPlate",
+        "materialName": "gunPaint:launcher",
+        "material": "532aed32-5c84-49cf-a437-5ef72ae3bc40",
+        "role": "light shell",
+        "registered": true,
+        "map": "ebfdc98c-f94e-4adb-8045-2ec3da0c04c1",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "7a3978eb-7bd8-4956-b233-c1ad636345a9",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:launcher",
+        "material": "7b608174-e02c-426e-9f1f-357731b7114a",
+        "role": "receiver",
+        "registered": true,
+        "map": "ebfdc98c-f94e-4adb-8045-2ec3da0c04c1",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:launcher",
+        "material": "e1237b70-5a62-4021-9d7d-de02e2b8f6bb",
+        "role": "furniture",
+        "registered": true,
+        "map": "ebfdc98c-f94e-4adb-8045-2ec3da0c04c1",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:launcher",
+        "material": "670a91d7-f299-4ad2-992a-bd2cdeb2311d",
+        "role": "rail",
+        "registered": true,
+        "map": "ebfdc98c-f94e-4adb-8045-2ec3da0c04c1",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "chamfered alloy clamp foot",
+        "materialName": "gunPaint:launcher",
+        "material": "006d599c-a06f-4632-a784-f7cf35a8b565",
+        "role": "optic shell",
+        "registered": true,
+        "map": "ebfdc98c-f94e-4adb-8045-2ec3da0c04c1",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "painted riser",
+        "materialName": "gunPaint:launcher",
+        "material": "d5a4b32d-c570-4e6b-b8d2-f46c092b6670",
+        "role": "optic shell",
+        "registered": true,
+        "map": "ebfdc98c-f94e-4adb-8045-2ec3da0c04c1",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "materialName": "",
+        "material": "d69a5fd0-b013-4d95-b2fd-a0308adb2563",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "materialName": "",
+        "material": "d1a637cf-adeb-4985-91d7-d2404cda3b63",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      }
+    ],
+    "firstPerson": [
+      {
+        "part": "",
+        "materialName": "vm:fold-static",
+        "material": "2ff5470a-d5f7-4220-af5b-5cd70d809fbc",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:launcher",
+        "material": "d709a443-6642-4db2-a808-5a0b8294333b",
+        "role": null,
+        "registered": false,
+        "map": "ebfdc98c-f94e-4adb-8045-2ec3da0c04c1",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:launcher",
+        "material": "1acb76a4-5c54-41d0-a2c6-c61634c05ac6",
+        "role": null,
+        "registered": false,
+        "map": "ebfdc98c-f94e-4adb-8045-2ec3da0c04c1",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:launcher",
+        "material": "5a578f22-2f7e-47ff-b0b2-c08f9d1f8d71",
+        "role": null,
+        "registered": false,
+        "map": "ebfdc98c-f94e-4adb-8045-2ec3da0c04c1",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "c61a7fa8-13a1-44d2-9366-c006b5075b38",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5659490,
+        "roughness": 0.58,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "82dc6161-a4b3-48c1-b447-0cd64fd2ea3f",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 8751504,
+        "roughness": 0.61,
+        "metalness": 0.08
+      },
+      {
+        "part": "launcher-loaded-inserts",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "43e14da5-48df-4fd3-bffb-38171b2f4acf",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 0.78,
+        "metalness": 0.18
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshBasicMaterial",
+        "material": "1df358a3-0207-4d76-ac85-95f1b048ebb2",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16769945
+      },
+      {
+        "part": "moduleShell",
+        "materialName": "vm:gunPaint:launcher",
+        "material": "64a38db0-6dcd-4678-9704-945cb5e93371",
+        "role": null,
+        "registered": false,
+        "map": "ebfdc98c-f94e-4adb-8045-2ec3da0c04c1",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "topPlate",
+        "materialName": "vm:gunPaint:launcher",
+        "material": "c66be2d8-662b-4653-90ca-195529756b98",
+        "role": null,
+        "registered": false,
+        "map": "ebfdc98c-f94e-4adb-8045-2ec3da0c04c1",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "19c65112-95da-4a78-bf33-45ee3213c119",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:launcher",
+        "material": "75704b8c-ae11-4fb3-9516-cd8121128487",
+        "role": null,
+        "registered": false,
+        "map": "ebfdc98c-f94e-4adb-8045-2ec3da0c04c1",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:launcher",
+        "material": "dd22d643-199f-437d-a3f9-2e6a2acb74d1",
+        "role": null,
+        "registered": false,
+        "map": "ebfdc98c-f94e-4adb-8045-2ec3da0c04c1",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:launcher",
+        "material": "58099a4c-4345-4c5f-9963-3f9267482999",
+        "role": null,
+        "registered": false,
+        "map": "ebfdc98c-f94e-4adb-8045-2ec3da0c04c1",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "chamfered alloy clamp foot",
+        "materialName": "vm:gunPaint:launcher",
+        "material": "16c910a0-5742-4b73-ae4f-ef6eb18a39e7",
+        "role": null,
+        "registered": false,
+        "map": "ebfdc98c-f94e-4adb-8045-2ec3da0c04c1",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "painted riser",
+        "materialName": "vm:gunPaint:launcher",
+        "material": "17fb103e-1a3f-453b-bf8c-b6ffad85601f",
+        "role": null,
+        "registered": false,
+        "map": "ebfdc98c-f94e-4adb-8045-2ec3da0c04c1",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "materialName": "vm:MeshPhysicalMaterial",
+        "material": "98a0d305-3281-418f-a323-8def6a618b73",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "materialName": "vm:MeshBasicMaterial",
+        "material": "93d6a78e-523c-4eea-87c7-8b4431840129",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      }
+    ],
+    "magazine": [
+      {
+        "part": "",
+        "materialName": "",
+        "material": "400ff107-95b0-4f10-a671-b1ea3f6d8810",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 6053992,
+        "roughness": 0.68,
+        "metalness": 0.06
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "a9f9a64e-bf2d-43ae-a848-5da5dd53a6e8",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "launcher-loaded-inserts",
+        "materialName": "",
+        "material": "045efb24-deca-4288-af8e-34a38675d6f0",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 0.78,
+        "metalness": 0.18
+      }
+    ],
+    "light": [
+      {
+        "part": "moduleShell",
+        "materialName": "gunPaint:launcher",
+        "material": "40b54b25-b3e1-48c2-80f0-727a4762181c",
+        "role": "light shell",
+        "registered": true,
+        "map": "ebfdc98c-f94e-4adb-8045-2ec3da0c04c1",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "topPlate",
+        "materialName": "gunPaint:launcher",
+        "material": "532aed32-5c84-49cf-a437-5ef72ae3bc40",
+        "role": "light shell",
+        "registered": true,
+        "map": "ebfdc98c-f94e-4adb-8045-2ec3da0c04c1",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "7a3978eb-7bd8-4956-b233-c1ad636345a9",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "a9f9a64e-bf2d-43ae-a848-5da5dd53a6e8",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "optic": [
+      {
+        "part": "",
+        "materialName": "gunPaint:launcher",
+        "material": "ba7932b1-5d35-41d8-87c1-d02665486f6b",
+        "role": "rail",
+        "registered": true,
+        "map": "ebfdc98c-f94e-4adb-8045-2ec3da0c04c1",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:launcher",
+        "material": "670a91d7-f299-4ad2-992a-bd2cdeb2311d",
+        "role": "rail",
+        "registered": true,
+        "map": "ebfdc98c-f94e-4adb-8045-2ec3da0c04c1",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "chamfered alloy clamp foot",
+        "materialName": "gunPaint:launcher",
+        "material": "006d599c-a06f-4632-a784-f7cf35a8b565",
+        "role": "optic shell",
+        "registered": true,
+        "map": "ebfdc98c-f94e-4adb-8045-2ec3da0c04c1",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "painted riser",
+        "materialName": "gunPaint:launcher",
+        "material": "d5a4b32d-c570-4e6b-b8d2-f46c092b6670",
+        "role": "optic shell",
+        "registered": true,
+        "map": "ebfdc98c-f94e-4adb-8045-2ec3da0c04c1",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "materialName": "",
+        "material": "d69a5fd0-b013-4d95-b2fd-a0308adb2563",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "materialName": "",
+        "material": "d1a637cf-adeb-4985-91d7-d2404cda3b63",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "a9f9a64e-bf2d-43ae-a848-5da5dd53a6e8",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "rack": [
+      {
+        "part": "",
+        "materialName": "gunPaint:launcher",
+        "material": "ba7932b1-5d35-41d8-87c1-d02665486f6b",
+        "role": "rail",
+        "registered": true,
+        "map": "ebfdc98c-f94e-4adb-8045-2ec3da0c04c1",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:launcher",
+        "material": "051810cb-a0ce-486f-a043-e68ddd8f7035",
+        "role": "rail",
+        "registered": true,
+        "map": "ebfdc98c-f94e-4adb-8045-2ec3da0c04c1",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:launcher",
+        "material": "7b839916-2757-48ec-af4a-e94e9ea43b07",
+        "role": "furniture",
+        "registered": true,
+        "map": "ebfdc98c-f94e-4adb-8045-2ec3da0c04c1",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "a9f9a64e-bf2d-43ae-a848-5da5dd53a6e8",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "045efb24-deca-4288-af8e-34a38675d6f0",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 0.78,
+        "metalness": 0.18
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:launcher",
+        "material": "40b54b25-b3e1-48c2-80f0-727a4762181c",
+        "role": "light shell",
+        "registered": true,
+        "map": "ebfdc98c-f94e-4adb-8045-2ec3da0c04c1",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:launcher",
+        "material": "532aed32-5c84-49cf-a437-5ef72ae3bc40",
+        "role": "light shell",
+        "registered": true,
+        "map": "ebfdc98c-f94e-4adb-8045-2ec3da0c04c1",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "7a3978eb-7bd8-4956-b233-c1ad636345a9",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:launcher",
+        "material": "7b608174-e02c-426e-9f1f-357731b7114a",
+        "role": "receiver",
+        "registered": true,
+        "map": "ebfdc98c-f94e-4adb-8045-2ec3da0c04c1",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:launcher",
+        "material": "e1237b70-5a62-4021-9d7d-de02e2b8f6bb",
+        "role": "furniture",
+        "registered": true,
+        "map": "ebfdc98c-f94e-4adb-8045-2ec3da0c04c1",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:launcher",
+        "material": "670a91d7-f299-4ad2-992a-bd2cdeb2311d",
+        "role": "rail",
+        "registered": true,
+        "map": "ebfdc98c-f94e-4adb-8045-2ec3da0c04c1",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:launcher",
+        "material": "006d599c-a06f-4632-a784-f7cf35a8b565",
+        "role": "optic shell",
+        "registered": true,
+        "map": "ebfdc98c-f94e-4adb-8045-2ec3da0c04c1",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:launcher",
+        "material": "d5a4b32d-c570-4e6b-b8d2-f46c092b6670",
+        "role": "optic shell",
+        "registered": true,
+        "map": "ebfdc98c-f94e-4adb-8045-2ec3da0c04c1",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "d69a5fd0-b013-4d95-b2fd-a0308adb2563",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "d1a637cf-adeb-4985-91d7-d2404cda3b63",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      }
+    ]
+  },
+  "restored": {
+    "assembled": [
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "a9f9a64e-bf2d-43ae-a848-5da5dd53a6e8",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:launcher",
+        "material": "ba7932b1-5d35-41d8-87c1-d02665486f6b",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:launcher",
+        "material": "051810cb-a0ce-486f-a043-e68ddd8f7035",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 6053992,
+        "roughness": 0.68,
+        "metalness": 0.06
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:launcher",
+        "material": "7b839916-2757-48ec-af4a-e94e9ea43b07",
+        "role": "furniture",
+        "registered": true,
+        "map": null,
+        "color": 5397051,
+        "roughness": 0.74,
+        "metalness": 0.06
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "49377650-b87a-4623-b2dd-908ef56f3ba2",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "400ff107-95b0-4f10-a671-b1ea3f6d8810",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 6053992,
+        "roughness": 0.68,
+        "metalness": 0.06
+      },
+      {
+        "part": "launcher-loaded-inserts",
+        "materialName": "",
+        "material": "045efb24-deca-4288-af8e-34a38675d6f0",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 0.78,
+        "metalness": 0.18
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "d65f3db7-303e-4bed-8404-0da7d32f29d7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16769945
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "6a97289e-09e4-4f60-ae8c-5712893bdc42",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16732497
+      },
+      {
+        "part": "moduleShell",
+        "materialName": "gunPaint:launcher",
+        "material": "40b54b25-b3e1-48c2-80f0-727a4762181c",
+        "role": "light shell",
+        "registered": true,
+        "map": null,
+        "color": 3290167,
+        "roughness": 0.76,
+        "metalness": 0.03
+      },
+      {
+        "part": "topPlate",
+        "materialName": "gunPaint:launcher",
+        "material": "532aed32-5c84-49cf-a437-5ef72ae3bc40",
+        "role": "light shell",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "7a3978eb-7bd8-4956-b233-c1ad636345a9",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:launcher",
+        "material": "7b608174-e02c-426e-9f1f-357731b7114a",
+        "role": "receiver",
+        "registered": true,
+        "map": null,
+        "color": 7371134,
+        "roughness": 0.69,
+        "metalness": 0.38
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:launcher",
+        "material": "e1237b70-5a62-4021-9d7d-de02e2b8f6bb",
+        "role": "furniture",
+        "registered": true,
+        "map": null,
+        "color": 3290167,
+        "roughness": 0.76,
+        "metalness": 0.03
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:launcher",
+        "material": "670a91d7-f299-4ad2-992a-bd2cdeb2311d",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "chamfered alloy clamp foot",
+        "materialName": "gunPaint:launcher",
+        "material": "006d599c-a06f-4632-a784-f7cf35a8b565",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 3027508,
+        "roughness": 0.5,
+        "metalness": 0.55
+      },
+      {
+        "part": "painted riser",
+        "materialName": "gunPaint:launcher",
+        "material": "d5a4b32d-c570-4e6b-b8d2-f46c092b6670",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 2369578,
+        "roughness": 0.74,
+        "metalness": 0.05
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "materialName": "",
+        "material": "d69a5fd0-b013-4d95-b2fd-a0308adb2563",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "materialName": "",
+        "material": "d1a637cf-adeb-4985-91d7-d2404cda3b63",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      }
+    ],
+    "firstPerson": [
+      {
+        "part": "",
+        "materialName": "vm:fold-static",
+        "material": "2ff5470a-d5f7-4220-af5b-5cd70d809fbc",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:launcher",
+        "material": "d709a443-6642-4db2-a808-5a0b8294333b",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685184,
+        "roughness": 0.69,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:launcher",
+        "material": "1acb76a4-5c54-41d0-a2c6-c61634c05ac6",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 8751504,
+        "roughness": 0.61,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:launcher",
+        "material": "5a578f22-2f7e-47ff-b0b2-c08f9d1f8d71",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5397051,
+        "roughness": 0.74,
+        "metalness": 0.06
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "c61a7fa8-13a1-44d2-9366-c006b5075b38",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5659490,
+        "roughness": 0.58,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "82dc6161-a4b3-48c1-b447-0cd64fd2ea3f",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 8751504,
+        "roughness": 0.61,
+        "metalness": 0.08
+      },
+      {
+        "part": "launcher-loaded-inserts",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "43e14da5-48df-4fd3-bffb-38171b2f4acf",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 0.78,
+        "metalness": 0.18
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshBasicMaterial",
+        "material": "1df358a3-0207-4d76-ac85-95f1b048ebb2",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16769945
+      },
+      {
+        "part": "moduleShell",
+        "materialName": "vm:gunPaint:launcher",
+        "material": "64a38db0-6dcd-4678-9704-945cb5e93371",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5264465,
+        "roughness": 0.84,
+        "metalness": 0.02
+      },
+      {
+        "part": "topPlate",
+        "materialName": "vm:gunPaint:launcher",
+        "material": "c66be2d8-662b-4653-90ca-195529756b98",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685184,
+        "roughness": 0.69,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "19c65112-95da-4a78-bf33-45ee3213c119",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:launcher",
+        "material": "75704b8c-ae11-4fb3-9516-cd8121128487",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7371134,
+        "roughness": 0.69,
+        "metalness": 0.38
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:launcher",
+        "material": "dd22d643-199f-437d-a3f9-2e6a2acb74d1",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5264465,
+        "roughness": 0.84,
+        "metalness": 0.02
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:launcher",
+        "material": "58099a4c-4345-4c5f-9963-3f9267482999",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5659490,
+        "roughness": 0.58,
+        "metalness": 0.1
+      },
+      {
+        "part": "chamfered alloy clamp foot",
+        "materialName": "vm:gunPaint:launcher",
+        "material": "16c910a0-5742-4b73-ae4f-ef6eb18a39e7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3027508,
+        "roughness": 0.5,
+        "metalness": 0.55
+      },
+      {
+        "part": "painted riser",
+        "materialName": "vm:gunPaint:launcher",
+        "material": "17fb103e-1a3f-453b-bf8c-b6ffad85601f",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2369578,
+        "roughness": 0.74,
+        "metalness": 0.05
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "materialName": "vm:MeshPhysicalMaterial",
+        "material": "98a0d305-3281-418f-a323-8def6a618b73",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "materialName": "vm:MeshBasicMaterial",
+        "material": "93d6a78e-523c-4eea-87c7-8b4431840129",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      }
+    ],
+    "magazine": [
+      {
+        "part": "",
+        "materialName": "",
+        "material": "400ff107-95b0-4f10-a671-b1ea3f6d8810",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 6053992,
+        "roughness": 0.68,
+        "metalness": 0.06
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "a9f9a64e-bf2d-43ae-a848-5da5dd53a6e8",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "launcher-loaded-inserts",
+        "materialName": "",
+        "material": "045efb24-deca-4288-af8e-34a38675d6f0",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 0.78,
+        "metalness": 0.18
+      }
+    ],
+    "light": [
+      {
+        "part": "moduleShell",
+        "materialName": "gunPaint:launcher",
+        "material": "40b54b25-b3e1-48c2-80f0-727a4762181c",
+        "role": "light shell",
+        "registered": true,
+        "map": null,
+        "color": 3290167,
+        "roughness": 0.76,
+        "metalness": 0.03
+      },
+      {
+        "part": "topPlate",
+        "materialName": "gunPaint:launcher",
+        "material": "532aed32-5c84-49cf-a437-5ef72ae3bc40",
+        "role": "light shell",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "7a3978eb-7bd8-4956-b233-c1ad636345a9",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "a9f9a64e-bf2d-43ae-a848-5da5dd53a6e8",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "optic": [
+      {
+        "part": "",
+        "materialName": "gunPaint:launcher",
+        "material": "ba7932b1-5d35-41d8-87c1-d02665486f6b",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:launcher",
+        "material": "670a91d7-f299-4ad2-992a-bd2cdeb2311d",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "chamfered alloy clamp foot",
+        "materialName": "gunPaint:launcher",
+        "material": "006d599c-a06f-4632-a784-f7cf35a8b565",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 3027508,
+        "roughness": 0.5,
+        "metalness": 0.55
+      },
+      {
+        "part": "painted riser",
+        "materialName": "gunPaint:launcher",
+        "material": "d5a4b32d-c570-4e6b-b8d2-f46c092b6670",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 2369578,
+        "roughness": 0.74,
+        "metalness": 0.05
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "materialName": "",
+        "material": "d69a5fd0-b013-4d95-b2fd-a0308adb2563",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "materialName": "",
+        "material": "d1a637cf-adeb-4985-91d7-d2404cda3b63",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "a9f9a64e-bf2d-43ae-a848-5da5dd53a6e8",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "rack": [
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "a9f9a64e-bf2d-43ae-a848-5da5dd53a6e8",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "045efb24-deca-4288-af8e-34a38675d6f0",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 0.78,
+        "metalness": 0.18
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "7a3978eb-7bd8-4956-b233-c1ad636345a9",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "d69a5fd0-b013-4d95-b2fd-a0308adb2563",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "d1a637cf-adeb-4985-91d7-d2404cda3b63",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      }
+    ]
+  }
+}

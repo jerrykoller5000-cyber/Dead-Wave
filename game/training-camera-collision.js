@@ -208,7 +208,9 @@ export function createTrainingCameraCollision(THREE,tg,stations,armoryCopy,raise
   return {diveSolids:extra,boxes:extra,
     pull(from,eye){
       candidates.length=0;
-      for(const b of tg.solids)if(!b.floor&&b.target==null&&(!b.infirmaryFence||raisedFence()))candidates.push(b);
+      // The down-facing range ceiling is a bullet solid, but the overhead
+      // third-person eye must keep its existing view into the room.
+      for(const b of tg.solids)if(!b.floor&&!b.ceiling&&b.target==null&&(!b.infirmaryFence||raisedFence()))candidates.push(b);
       candidates.push(...extra);
       const hit=trainingCameraContact(from,eye,candidates);
       if(!hit)return null;

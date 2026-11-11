@@ -1,6 +1,6 @@
 import {displayDepth,packDepth} from './display-depth.mjs';
 
-export function makeViews(T,wallPoseMode=false) {
+export function makeViews(T,wallPoseMode=false,includeOpenFloor=false) {
   const G=T.THREE, H=T.inspectHost();
   const step=n=>{for(let i=0;i<n;i++) T.stepFrame(1/30);};
   const css=document.createElement('style');
@@ -61,9 +61,11 @@ export function makeViews(T,wallPoseMode=false) {
   }
   function restoreActorPose(saved){
     if(!saved?.rows?.length)throw Error('Missing recorded gameplay pose');
-    const resolved=new Map(),used=new Set();
+    const resolved=new Map(),used=new Set(),nativeAttachments=new Set();
     for(const [path,type,name,matrix] of saved.rows){
-      const parent=path.length?resolved.get(path.slice(0,-1).join('.')):null;
+      const parentKey=path.slice(0,-1).join('.'),key=path.join('.');
+      if(path.length && nativeAttachments.has(parentKey)){nativeAttachments.add(key);continue;}
+      const parent=path.length?resolved.get(parentKey):null;
       // Skin batches are identity draws bound to the restored bones. Their count can
       // change with clothing. Verify both sets of draws and replay the pose on the bones.
       if(type==='SkinnedMesh' && name==='rig-skin'){
@@ -80,7 +82,10 @@ export function makeViews(T,wallPoseMode=false) {
       // order can differ between launches while their posed transform tree is identical.
       if(!matches(node))node=parent?.children.find(matches);
       if(!node)throw Error('Missing original actor node '+path.join('.')+' '+type+' '+name+' in '+(parent?.children.map(c=>c.type+'/'+c.name).join(',')||'no parent'));
-      resolved.set(path.join('.'),node);used.add(node);
+      resolved.set(key,node);used.add(node);
+      // A holstered model is rebaked with the revised artwork. Replay the holster's
+      // carrier pose, then leave the native accessory's own drawing hierarchy alone.
+      if(node.isGroup && parent?.children.some(child=>child.name==='open-molded-holster'))nativeAttachments.add(key);
       node.matrix.fromArray(matrix);node.matrix.decompose(node.position,node.quaternion,node.scale);
       node.matrixWorldNeedsUpdate=true;
     }
@@ -103,11 +108,11 @@ export function makeViews(T,wallPoseMode=false) {
     // behind it is reachable and clear of both the range and station colliders.
     let spot=[range.origin.x,range.origin.z-(openFloor?5:.55)];
     if(testSpot) spot=[range.origin.x+testSpot[0],range.origin.z+testSpot[1]];
-    const wall=wallPoseMode && ['uzi','ak'].includes(id) && !openFloor && !testSpot && !eye && !rackView;
+    const wall=wallPoseMode && (!openFloor || includeOpenFloor) && !testSpot && !eye && !rackView;
     T.player.position.set(spot[0],range.floorY,spot[1]); T.setOtsAimDbg(testSpot?.[2]||0,-.08); step(75);
     let saved;
     if(wall && wallPoseMode==='replay'){
-      const reference=window.recordedArtViews?.[view];
+      const reference=window.recordedArtViews?.[openFloor?view+'-open':view];
       if(!reference || Math.hypot(reference.actualSpot[0]-spot[0],reference.actualSpot[2]-spot[1])>.001)throw Error('Original wall pose is at another spot');
       saved=reference.nativePose;restoreActorPose(saved);
     }

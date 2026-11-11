@@ -4,9 +4,9 @@
 # fitT.sh <name gun-r> <export> "<ko x0 x1 y0 y1 z0 z1>" "<trigger face x y z, gun space>" [MV mm]  -> res10/<name>.txt
 cd /home/claude/handfit-work/gun; mkdir -p out10 res10
 n=$1; src=$2; h=${n##*-}; MVV=${5:-16}
-[ -f out10/$n.bin ] || BAND=0.015 python3 -I ../c4/sdf_c4.py $src $h out10/$n 0.001 > out10/$n.log 2>&1
+[ -f out10/$n.bin ] || PAD=${PAD:-0.010} BAND=0.015 python3 -I ../c4/sdf_c4.py $src $h out10/$n 0.001 > out10/$n.log 2>&1
 python3 -I ../c4/kojson.py $src out10/$n-ko.json $3 > /dev/null
-[ -f out10/$n-ko.bin ] || BAND=0.015 python3 -I ../c4/sdf_c4.py out10/$n-ko.json $h out10/$n-ko 0.001 > out10/$n-ko.log 2>&1
+[ -f out10/$n-ko.bin ] || PAD=${PAD:-0.010} BAND=0.015 python3 -I ../c4/sdf_c4.py out10/$n-ko.json $h out10/$n-ko 0.001 > out10/$n-ko.log 2>&1
 TG=$(python3 -I ../c4/tgt.py $src $h $4)
 P=$(node -e "import('./grid.mjs').then(G=>{const g=G.loadGrid('out10/$n');console.log(JSON.stringify(g.H.hand.pose))})")
 T='[0,4,5,6,7,8,9,10,11,12]'

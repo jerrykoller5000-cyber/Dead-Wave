@@ -1,0 +1,59 @@
+{
+  "at": "2026-11-11T20:20:34.237Z",
+  "hit": {
+    "solid": true,
+    "normal": {
+      "x": 0,
+      "y": -1,
+      "z": 0
+    },
+    "point": {
+      "x": 0,
+      "y": -194.025,
+      "z": -643
+    },
+    "marksBefore": 0,
+    "marksAfter": 1,
+    "ceiling": {
+      "visible": true,
+      "on": true,
+      "firstPerson": true,
+      "baked": {
+        "merged": 4,
+        "removed": 57
+      },
+      "lightCount": 4
+    },
+    "draws": 140
+  },
+  "off": {
+    "room": {
+      "on": false,
+      "night": true,
+      "room": false
+    },
+    "ceiling": {
+      "visible": true,
+      "on": false,
+      "firstPerson": true,
+      "baked": {
+        "merged": 4,
+        "removed": 57
+      },
+      "lightCount": 4
+    },
+    "draws": 154
+  },
+  "third": {
+    "visible": false,
+    "ignoredForCameraAim": true,
+    "cameraContact": false,
+    "eye": [
+      0,
+      -191,
+      -643
+    ],
+    "draws": 147
+  },
+  "errors": []
+}

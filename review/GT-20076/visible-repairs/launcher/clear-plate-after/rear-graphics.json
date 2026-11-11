@@ -1,0 +1,68 @@
+{
+  "graphics": [
+    {
+      "before": 18,
+      "after": 18,
+      "lost": 0,
+      "added": 0,
+      "originalsWereShared": true,
+      "privateGeometry": true,
+      "islands": 1,
+      "closed": true,
+      "roundGap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "before": 18,
+      "after": 18,
+      "lost": 0,
+      "added": 0,
+      "originalsWereShared": true,
+      "privateGeometry": true,
+      "islands": 1,
+      "closed": true,
+      "roundGap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    }
+  ],
+  "studs": [
+    {
+      "at": [
+        -0.047,
+        0.0718,
+        -0.253
+      ],
+      "support": {
+        "lowerMm": 0.20312500000000003,
+        "upperMm": 0.21093750000000003
+      },
+      "round": {
+        "lowerMm": 0.515625,
+        "upperMm": 0.5234375
+      }
+    },
+    {
+      "at": [
+        0.047,
+        0.0718,
+        -0.253
+      ],
+      "support": {
+        "lowerMm": 0.21875,
+        "upperMm": 0.22656249999999997
+      },
+      "round": {
+        "lowerMm": 0.515625,
+        "upperMm": 0.5234375
+      }
+    }
+  ],
+  "coverSupport": {
+    "lowerMm": 0.3828125,
+    "upperMm": 0.390625
+  }
+}

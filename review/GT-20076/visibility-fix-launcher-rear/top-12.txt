@@ -1,0 +1,14 @@
+Recomputed all 12 base models with the actual game, verified strict model fingerprints, both normal eye cameras, both sides near the firing-line barrier and both sides on confirmed clear floor. The rack is included where available. Open floor is the reachable spot five units behind the firing line. Each count is distinct pixels witnessed by both real capture and posed surface depth.
+1. Sniper pair 223 — 180 px (clear floor, held left).
+2. Sniper pair 220 — 176 px (clear floor, held right).
+3. Pistol pair 43 — 172 px (clear floor, held right).
+4. Pistol pair 42 — 170 px (barrier, held right).
+5. GW-4 pair 90 — 159 px (clear floor, held left).
+6. Sniper pair 222 — 157 px (clear floor, held left).
+7. Sniper pair 221 — 148 px (clear floor, held right).
+8. Launcher pair 196 — 140 px (rack).
+9. Chainsaw pair 2 — 139 px (hip).
+10. GW-4 pair 19 — 138 px (hip).
+11. Minigun pair 1 — 138 px (rack).
+12. Minigun pair 3 — 138 px (rack).
+Evidence: review/GT-20076/visibility-fix-launcher-rear/top-12-crossings.jpg and ranked.json. The index in ranked.json identifies both artwork pieces. Known real intersections stay open.

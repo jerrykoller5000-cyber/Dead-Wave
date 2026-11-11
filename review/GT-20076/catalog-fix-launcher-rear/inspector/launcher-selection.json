@@ -1,0 +1,26 @@
+{
+  "id": "weapon.launcher",
+  "name": "Launcher",
+  "kind": "model",
+  "variant": null,
+  "mode": null,
+  "center": {
+    "x": -26.015351603949814,
+    "y": -198.89999999999998,
+    "z": -631.9113096051685
+  },
+  "size": {
+    "x": 0.18701045378755765,
+    "y": 0.2653582288039331,
+    "z": 0.774418634429253
+  },
+  "yaw": 0,
+  "info": {
+    "meshes": 25,
+    "drawables": 25,
+    "tris": 15928,
+    "points": 0,
+    "segments": 0,
+    "materials": 10
+  }
+}

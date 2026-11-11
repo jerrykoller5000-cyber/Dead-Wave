@@ -1,0 +1,683 @@
+{
+  "phase": "before",
+  "at": "2026-11-11T20:05:11.590Z",
+  "spots": [
+    {
+      "name": "range-firing",
+      "x": 0,
+      "z": -3,
+      "up": {
+        "player": [
+          0,
+          -200,
+          -643
+        ],
+        "camera": [
+          0.00017854123493034343,
+          -195.19275344624126,
+          -645.838733719963
+        ],
+        "aim": {
+          "on": true,
+          "w": 0.5678748354972722,
+          "yaw": 0,
+          "pitch": 1.24,
+          "locked": true,
+          "fov": 38,
+          "tilt": 0
+        },
+        "draws": 244,
+        "ceiling": null
+      },
+      "ahead": {
+        "player": [
+          0,
+          -200,
+          -643
+        ],
+        "camera": [
+          0.0012864827702372442,
+          -198.5705374963648,
+          -642.8936462091998
+        ],
+        "aim": {
+          "on": true,
+          "w": 0.9838125657285393,
+          "yaw": 0,
+          "pitch": 0.06,
+          "locked": true,
+          "fov": 38,
+          "tilt": 0
+        },
+        "draws": 140,
+        "ceiling": null
+      }
+    },
+    {
+      "name": "range-lanes",
+      "x": 0,
+      "z": 13,
+      "up": {
+        "player": [
+          -8.42,
+          -200,
+          -627
+        ],
+        "camera": [
+          -8.418490677978916,
+          -198.57762121499476,
+          -626.8859264753376
+        ],
+        "aim": {
+          "on": true,
+          "w": 1,
+          "yaw": 0,
+          "pitch": 1.24,
+          "locked": true,
+          "fov": 38,
+          "tilt": 0
+        },
+        "draws": 222,
+        "ceiling": null
+      },
+      "ahead": {
+        "player": [
+          -8.42,
+          -200,
+          -627
+        ],
+        "camera": [
+          -8.418300308450227,
+          -198.57792088035475,
+          -626.8861587147142
+        ],
+        "aim": {
+          "on": true,
+          "w": 1,
+          "yaw": 0,
+          "pitch": 0.06,
+          "locked": true,
+          "fov": 38,
+          "tilt": 0
+        },
+        "draws": 135,
+        "ceiling": null
+      }
+    },
+    {
+      "name": "range-stations",
+      "x": 5,
+      "z": -7,
+      "up": {
+        "player": [
+          5,
+          -200,
+          -647
+        ],
+        "camera": [
+          4.9060612511209145,
+          -198.57833870051397,
+          -646.9801537318011
+        ],
+        "aim": {
+          "on": true,
+          "w": 1,
+          "yaw": -1.5707963267948966,
+          "pitch": 1.24,
+          "locked": true,
+          "fov": 38,
+          "tilt": 0
+        },
+        "draws": 171,
+        "ceiling": null
+      },
+      "ahead": {
+        "player": [
+          5,
+          -200,
+          -647
+        ],
+        "camera": [
+          4.88732239037846,
+          -198.57884177250645,
+          -646.9980554103449
+        ],
+        "aim": {
+          "on": true,
+          "w": 1,
+          "yaw": -1.5707963267948966,
+          "pitch": 0.06,
+          "locked": true,
+          "fov": 38,
+          "tilt": 0
+        },
+        "draws": 142,
+        "ceiling": null
+      }
+    },
+    {
+      "name": "apron-door",
+      "x": -11,
+      "z": -8,
+      "up": {
+        "player": [
+          -11,
+          -200,
+          -648
+        ],
+        "camera": [
+          -10.92398415667392,
+          -198.57953948122795,
+          -648.0007391305376
+        ],
+        "aim": {
+          "on": true,
+          "w": 1,
+          "yaw": 1.5707963267948966,
+          "pitch": 1.24,
+          "locked": true,
+          "fov": 38,
+          "tilt": 0
+        },
+        "draws": 256,
+        "ceiling": null
+      },
+      "ahead": {
+        "player": [
+          -11,
+          -200,
+          -648
+        ],
+        "camera": [
+          -10.883340277447907,
+          -198.58056651322974,
+          -648.0018903651252
+        ],
+        "aim": {
+          "on": true,
+          "w": 1,
+          "yaw": 1.5707963267948966,
+          "pitch": 0.06,
+          "locked": true,
+          "fov": 38,
+          "tilt": 0
+        },
+        "draws": 146,
+        "ceiling": null
+      }
+    },
+    {
+      "name": "infirmary",
+      "x": -38,
+      "z": -9,
+      "up": {
+        "player": [
+          -38,
+          -200,
+          -647.4300000000001
+        ],
+        "camera": [
+          -37.97938355265468,
+          -198.58120132028026,
+          -647.3307304826704
+        ],
+        "aim": {
+          "on": true,
+          "w": 1,
+          "yaw": 0,
+          "pitch": 1.24,
+          "locked": true,
+          "fov": 38,
+          "tilt": 0
+        },
+        "draws": 215,
+        "ceiling": null
+      },
+      "ahead": {
+        "player": [
+          -38,
+          -200,
+          -647.4300000000001
+        ],
+        "camera": [
+          -37.99866453068351,
+          -198.58126247174656,
+          -647.3094703590217
+        ],
+        "aim": {
+          "on": true,
+          "w": 1,
+          "yaw": 0,
+          "pitch": 0.06,
+          "locked": true,
+          "fov": 38,
+          "tilt": 0
+        },
+        "draws": 142,
+        "ceiling": null
+      }
+    },
+    {
+      "name": "hq-ladder",
+      "x": -41,
+      "z": 1,
+      "up": {
+        "player": [
+          -41,
+          -200,
+          -639
+        ],
+        "camera": [
+          -40.90129997197627,
+          -198.58006281575422,
+          -638.9813896414737
+        ],
+        "aim": {
+          "on": true,
+          "w": 1,
+          "yaw": 1.5707963267948966,
+          "pitch": 1.24,
+          "locked": true,
+          "fov": 38,
+          "tilt": 0
+        },
+        "draws": 199,
+        "ceiling": null
+      },
+      "ahead": {
+        "player": [
+          -41,
+          -200,
+          -639
+        ],
+        "camera": [
+          -40.88686614500567,
+          -198.57825324138403,
+          -639.0000584020203
+        ],
+        "aim": {
+          "on": true,
+          "w": 1,
+          "yaw": 1.5707963267948966,
+          "pitch": 0.06,
+          "locked": true,
+          "fov": 38,
+          "tilt": 0
+        },
+        "draws": 131,
+        "ceiling": null
+      }
+    },
+    {
+      "name": "hangar-center",
+      "x": -25,
+      "z": 7,
+      "up": {
+        "player": [
+          -25,
+          -200,
+          -633
+        ],
+        "camera": [
+          -24.98290809312564,
+          -198.57692965114762,
+          -632.9093478182062
+        ],
+        "aim": {
+          "on": true,
+          "w": 1,
+          "yaw": 0,
+          "pitch": 1.24,
+          "locked": true,
+          "fov": 38,
+          "tilt": 0
+        },
+        "draws": 283,
+        "ceiling": null
+      },
+      "ahead": {
+        "player": [
+          -25,
+          -200,
+          -633
+        ],
+        "camera": [
+          -25.001701454542243,
+          -198.5762465931884,
+          -632.8924392927609
+        ],
+        "aim": {
+          "on": true,
+          "w": 1,
+          "yaw": 0,
+          "pitch": 0.06,
+          "locked": true,
+          "fov": 38,
+          "tilt": 0
+        },
+        "draws": 139,
+        "ceiling": null
+      }
+    },
+    {
+      "name": "passage-gate",
+      "x": -26,
+      "z": 25,
+      "up": {
+        "player": [
+          -26,
+          -200,
+          -615
+        ],
+        "camera": [
+          -26.00260882672138,
+          -198.57634368219277,
+          -614.8906325183102
+        ],
+        "aim": {
+          "on": true,
+          "w": 1,
+          "yaw": 0,
+          "pitch": 1.24,
+          "locked": true,
+          "fov": 38,
+          "tilt": 0
+        },
+        "draws": 169,
+        "ceiling": null
+      },
+      "ahead": {
+        "player": [
+          -26,
+          -200,
+          -615
+        ],
+        "camera": [
+          -26.003365326864717,
+          -198.5769576449171,
+          -614.8881450021314
+        ],
+        "aim": {
+          "on": true,
+          "w": 1,
+          "yaw": 0,
+          "pitch": 0.06,
+          "locked": true,
+          "fov": 38,
+          "tilt": 0
+        },
+        "draws": 151,
+        "ceiling": null
+      }
+    }
+  ],
+  "lights": [
+    {
+      "name": "noon",
+      "player": [
+        0,
+        -200,
+        -643
+      ],
+      "camera": [
+        -0.004210720696812942,
+        -198.57784895651446,
+        -642.8857340283585
+      ],
+      "draws": 121,
+      "lights": {
+        "on": true,
+        "night": false,
+        "room": true
+      }
+    },
+    {
+      "name": "overcast",
+      "player": [
+        0,
+        -200,
+        -643
+      ],
+      "camera": [
+        -0.005112399320395644,
+        -198.57852331124232,
+        -642.8847894719712
+      ],
+      "draws": 149,
+      "lights": {
+        "on": true,
+        "night": false,
+        "room": true
+      }
+    },
+    {
+      "name": "dusk",
+      "player": [
+        0,
+        -200,
+        -643
+      ],
+      "camera": [
+        -0.005958437241575062,
+        -198.57906951962974,
+        -642.8855609187318
+      ],
+      "draws": 149,
+      "lights": {
+        "on": true,
+        "night": false,
+        "room": true
+      }
+    },
+    {
+      "name": "night",
+      "player": [
+        0,
+        -200,
+        -643
+      ],
+      "camera": [
+        -0.006614200730096285,
+        -198.57956012626184,
+        -642.8862447188038
+      ],
+      "draws": 149,
+      "lights": {
+        "on": true,
+        "night": false,
+        "room": true
+      }
+    },
+    {
+      "name": "lights-off",
+      "player": [
+        0,
+        -200,
+        -643
+      ],
+      "camera": [
+        -0.007004728786975778,
+        -198.58018342515555,
+        -642.8850575768388
+      ],
+      "draws": 149,
+      "lights": {
+        "on": false,
+        "night": true,
+        "room": false
+      }
+    }
+  ],
+  "errors": [],
+  "thirdPerson": {
+    "camera": [
+      -0.2561744340654111,
+      -193.96162801471093,
+      -648.2041631238018
+    ],
+    "draws": 139,
+    "cutaway": [
+      {
+        "side": "rangeSouth",
+        "opacity": 1,
+        "hidden": false
+      },
+      {
+        "side": "east",
+        "opacity": 1,
+        "hidden": false
+      },
+      {
+        "side": "south",
+        "opacity": 1,
+        "hidden": false
+      },
+      {
+        "side": "north",
+        "opacity": 1,
+        "hidden": false
+      },
+      {
+        "side": "west",
+        "opacity": 1,
+        "hidden": false
+      },
+      {
+        "side": "overhead",
+        "opacity": 1,
+        "hidden": false
+      },
+      {
+        "side": "east",
+        "opacity": 1,
+        "hidden": false
+      },
+      {
+        "side": "north",
+        "opacity": 1,
+        "hidden": false
+      },
+      {
+        "side": "north",
+        "opacity": 1,
+        "hidden": false
+      },
+      {
+        "side": "north",
+        "opacity": 1,
+        "hidden": false
+      },
+      {
+        "side": "rangeSouth",
+        "opacity": 1,
+        "hidden": false
+      }
+    ]
+  },
+  "warnings": [
+    {
+      "type": "warning",
+      "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+    },
+    {
+      "type": "warning",
+      "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+    },
+    {
+      "type": "warning",
+      "text": "THREE.Material: 'roughness' is not a property of THREE.MeshBasicNodeMaterial."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.Material: 'roughness' is not a property of THREE.MeshBasicNodeMaterial."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"ember\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"ember\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"ember\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"position\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"position\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"position\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "warning",
+      "text": "Calling [RenderPassEncoder (unlabeled)].Draw with a vertex count of 0 is unusual."
+    }
+  ]
+}

@@ -1,13 +1,13 @@
 # ChatGPT
 
-state: idle
+state: blocked
 model: GPT-6
-task: —
+task: GP-20108 Build Training Ground ceilings, cutaway, impacts and verify eye views
 touching: —
-since: 2026-11-11T19:14Z
+since: 2026-11-11T21:01Z
 next: —
-blocked-on: —
-last-report: handoffs/2026-11-11-chatgpt-GP-20104-followup.md
+blocked-on: Awaiting Antigravity 5080 ceiling look and screenshot verdict; four requested lane views are ready
+last-report: handoffs/2026-11-11-chatgpt-GP-20108.md
 
 ## Notes
 

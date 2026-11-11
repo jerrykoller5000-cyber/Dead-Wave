@@ -22,8 +22,11 @@ def project(frame,point,width,height):
     x,y,w=[basis[0][i]+sum(point[j]*(basis[j+1][i]-basis[0][i]) for j in range(3)) for i in range(3)]
     return ((1+x/w)*width/2,(1-y/w)*height/2) if w>0 else None
 
+requested=next((a[8:].split(',') for a in sys.argv[6:] if a.startswith('--views=')),None)
+if requested: assert all(v in cameras[after] and v in cameras[old_phase] for v in requested)
 drift={}
 for view,match in pair["views"].items():
+    if requested and view not in requested: continue
     x0,y0,x1,y1=match["bounds"]
     # Keep enough of the surrounding outline to recognise which visible part is changing.
     w=min(650,max(244,x1-x0+64));h=min(380,max(124,y1-y0+56))

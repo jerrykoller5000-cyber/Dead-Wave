@@ -6,14 +6,20 @@ import {launch} from '../../tools/cdp.mjs';
 import {save} from './save.mjs';
 
 const id=process.argv[2],run=process.argv[3]||'first';
-assert(process.env.DW_GAME_TEST_TOKEN && ['pistol','ak'].includes(id) && /^[a-z0-9-]+$/.test(run));
-const cfg=id==='ak'
+assert(process.env.DW_GAME_TEST_TOKEN && ['pistol','ak','launcher'].includes(id) && /^[a-z0-9-]+$/.test(run));
+const cfg=id==='launcher'
+  ? {file:'weapon-heavy',current:'      if (position.getY(i) < floor) position.setY(i, floor);',old:'',keys:['bf3b948d','b247bf55']}
+  : id==='ak'
   ? {file:'weapon-longarms',fn:'makeAkModel',current:'    separateBandFaces(THREE, relief.geometry, outline, 0.034 / 2);',old:'',keys:['6c5a4c64','606cbcca']}
   : {file:'weapon-sidearms',fn:'makePistolModel',current:'K.slab([[-0.0875, 0.006], [0.294, 0.006]',old:'K.slab([[-0.0875, 0.012], [0.294, 0.012]',keys:['98c22316','de60ca31']};
 const root=new URL('../../',import.meta.url),mod='/studio/'+cfg.file+'.js';
 const source=await readFile(new URL('.'+mod,root),'utf8');
 assert.equal(source.split(cfg.current).length,2);
-const historical=source.replace(cfg.current,cfg.old);
+let historical=source.replace(cfg.current,cfg.old);
+if(id==='launcher'){
+  const stud='gunAccent, x, 0.0718, -0.253, null, 8);';assert.equal(historical.split(stud).length,2);
+  historical=historical.replace(stud,'gunAccent, x, 0.057, -0.254, null, 8);');
+}
 const order=process.argv.includes('--reverse')?['after','before','before','after','after','before']:['before','after','after','before','before','after'];
 const browser=await launch({headless:false});
 let previous;

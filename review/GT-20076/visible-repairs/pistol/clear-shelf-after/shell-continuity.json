@@ -1,0 +1,28 @@
+{
+  "frames": 81,
+  "open": 0.07,
+  "returned": 0,
+  "rows": [
+    {
+      "shift": 0,
+      "tested": 1208,
+      "uncovered": 0,
+      "changedSamples": 0,
+      "visibleTopDifference": 0
+    },
+    {
+      "shift": 0.035,
+      "tested": 1208,
+      "uncovered": 0,
+      "changedSamples": 0,
+      "visibleTopDifference": 0
+    },
+    {
+      "shift": 0.07,
+      "tested": 1208,
+      "uncovered": 0,
+      "changedSamples": 86,
+      "visibleTopDifference": 0.006498906359384321
+    }
+  ]
+}

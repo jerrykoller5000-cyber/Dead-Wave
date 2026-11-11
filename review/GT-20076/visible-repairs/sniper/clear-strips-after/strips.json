@@ -1,0 +1,86 @@
+[
+  {
+    "angle": 0,
+    "closed": true,
+    "changed": 78,
+    "greatestChange": 0.003691882244311273,
+    "exposed": 26,
+    "changedExterior": 12,
+    "surfaceMotion": 0.000011428880497987848,
+    "outwardMotion": 0,
+    "gap": {
+      "lowerMm": 0,
+      "upperMm": 0.0078125
+    }
+  },
+  {
+    "angle": 1.0471975511965976,
+    "closed": true,
+    "changed": 66,
+    "greatestChange": 0.0035040498478338122,
+    "exposed": 26,
+    "changedExterior": 0,
+    "surfaceMotion": 0,
+    "outwardMotion": 0,
+    "gap": {
+      "lowerMm": 0.015625,
+      "upperMm": 0.0234375
+    }
+  },
+  {
+    "angle": 2.0943951023931953,
+    "closed": true,
+    "changed": 66,
+    "greatestChange": 0.0035040498478338122,
+    "exposed": 26,
+    "changedExterior": 0,
+    "surfaceMotion": 0,
+    "outwardMotion": 0,
+    "gap": {
+      "lowerMm": 0.015625,
+      "upperMm": 0.0234375
+    }
+  },
+  {
+    "angle": 3.141592653589793,
+    "closed": true,
+    "changed": 78,
+    "greatestChange": 0.003691882244311273,
+    "exposed": 26,
+    "changedExterior": 12,
+    "surfaceMotion": 0.000011428880497987848,
+    "outwardMotion": 0,
+    "gap": {
+      "lowerMm": 0,
+      "upperMm": 0.0078125
+    }
+  },
+  {
+    "angle": 4.1887902047863905,
+    "closed": true,
+    "changed": 66,
+    "greatestChange": 0.0035040498478338122,
+    "exposed": 26,
+    "changedExterior": 0,
+    "surfaceMotion": 0,
+    "outwardMotion": 0,
+    "gap": {
+      "lowerMm": 0.015625,
+      "upperMm": 0.0234375
+    }
+  },
+  {
+    "angle": 5.235987755982989,
+    "closed": true,
+    "changed": 66,
+    "greatestChange": 0.0035040498478338122,
+    "exposed": 26,
+    "changedExterior": 0,
+    "surfaceMotion": 0,
+    "outwardMotion": 0,
+    "gap": {
+      "lowerMm": 0.015625,
+      "upperMm": 0.0234375
+    }
+  }
+]

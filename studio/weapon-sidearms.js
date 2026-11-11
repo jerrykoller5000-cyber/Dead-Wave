@@ -315,9 +315,7 @@ export function makePistolModel(ctx) {
   // (see kickPistolRecoil / slideKick). Reload slide travel is 0.13 — barrel must
   // stay continuous through that full rack (no floating stub in the ejection window).
   const frame = K.group(0, 0, 0);
-  // Dust-cover shelf under the barrel — bridges polymer receiver to muzzle so the
-  // barrel stays visually locked when the slide racks back on reload.
-  K.box(0.040, 0.016, 0.24, gunPoly, 0, 0.006, 0.14, 0, 0, 0, frame, 0.006);
+  // The continuous polymer shell above already draws the fixed lower outline.
   K.box(0.034, 0.014, 0.18, gunDark, 0, 0.028, 0.08, 0, 0, 0, frame, 0.004);
   K.box(0.022, 0.014, 0.06, gunAccent, 0.0, 0.042, 0.09, 0, 0, 0, frame, 0.004);
   // GB-180: the barrel hood shows in the ejection port, flush with the slide's top, sitting on the barrel.
@@ -836,7 +834,20 @@ export function makeUziModel(ctx) {
   for (const rib of strapRibs) markPaintSurface(rib, 'furniture');
   // Flat base cap (mag floorplate reads flush with it).
   K.box(0.050, 0.003, 0.090, gunDark, 0, UZI_GY - 0.52 * UZI_GH * Math.cos(UZI_RAKE), UZI_GZ - 0.52 * UZI_GH * Math.sin(UZI_RAKE), UZI_RAKE, 0, 0, null, 0.0006);
-  K.slab(gunBand([[0.088, -0.034], [0.096, -0.042], [0.100, -0.056], [0.094, -0.070], [0.078, -0.080], [0.052, -0.082], [0.030, -0.076], [0.018, -0.062], [0.016, -0.046]], 0.0075), 0.032, gunDark, { bevel: 0.005, segs: 3 });   // GB-316 (J25): smoother moulded guard
+  const gloveGuard = K.slab(gunBand([[0.088, -0.034], [0.096, -0.042], [0.100, -0.056], [0.094, -0.070], [0.078, -0.080], [0.052, -0.082], [0.030, -0.076], [0.018, -0.062], [0.016, -0.046]], 0.0075), 0.032, gunDark, { bevel: 0.005, segs: 3 });
+  // Give the oversized game glove room in the drawn loop; keep its upper attachment fixed.
+  {
+    const geometry = gloveGuard.geometry, vertices = geometry.attributes.position;
+    geometry.computeBoundingBox();
+    const {min, max} = geometry.boundingBox, height = max.y - min.y;
+    for (let i = 0; i < vertices.count; i++) {
+      const y = vertices.getY(i), depth = (max.y - y) / height;
+      const t = Math.max(0, Math.min(1, (depth - .34) / (.80 - .34)));
+      vertices.setY(i, y - height * .12 * t * t * (3 - 2 * t));
+    }
+    geometry.computeBoundingBox();
+    geometry.computeBoundingSphere();
+  }   // GB-316 (J25): smoother moulded guard
   K.slab([[0.012, -0.030], [0.036, -0.032], [0.040, -0.050], [0.024, -0.058], [0.008, -0.046]], 0.028, gunPoly, { bevel: 0.005, segs: 3 });   // guard root into the front strap
   K.box(0.068, 0.010, 0.108, gunPoly, 0, UZI_GY - 0.48 * UZI_GH * Math.cos(UZI_RAKE), UZI_GZ - 0.48 * UZI_GH * Math.sin(UZI_RAKE), UZI_RAKE, 0, 0, null, 0.003);   // GB-316 (J25): clean magwell flare at the base
   // GB-175: trigger face toward the grip, tip curling forward (the convention Jerry set on the revolver and sniper).
@@ -858,7 +869,13 @@ export function makeUziModel(ctx) {
   const mag = K.group(0, -0.205, -0.0435);
   const stick = new THREE.Group(); stick.rotation.x = 0.22; mag.add(stick);
   K.slab([[-0.022, 0.107], [0.022, 0.107], [0.022, -0.109], [-0.022, -0.109]], 0.036, gunAccent, { bevel: 0.003, parent: stick });
-  for (const sx of [-1, 1]) K.box(0.003, 0.18, 0.006, gunDark, sx * 0.0185, 0, 0, 0, 0, 0, stick);
+  for (const sx of [-1, 1]) {
+    const strip = K.box(0.003, 0.18, 0.006, gunDark, sx * 0.0185, 0, 0, 0, 0, 0, stick);
+    strip.geometry = strip.geometry.clone();
+    strip.geometry.userData = { ...strip.geometry.userData, shared: false };
+    trimSlabBack(strip, 0, sx * .018 - strip.position.x, sx);
+    strip.geometry.computeBoundingBox();
+  }
   K.slab([[-0.026, -0.106], [0.026, -0.106], [0.026, -0.119], [-0.026, -0.119]], 0.042, gunDark, { bevel: 0.003, parent: stick });
   // The dark floor is visible between the two lips when this magazine is empty.
   K.box(.026, .002, .042, gunDark, 0, .108, 0, 0, 0, 0, stick, 0);

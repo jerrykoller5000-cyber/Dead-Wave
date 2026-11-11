@@ -1,0 +1,115 @@
+{
+  "phase": "before",
+  "at": "2026-11-11T19:53:36.703Z",
+  "lights": [
+    {
+      "name": "noon",
+      "worldTime": 0.5,
+      "houseVisible": true,
+      "perf": {
+        "fps": 59.12416073719571,
+        "low": 31.645569626222226,
+        "worst": 31.599999994039536,
+        "hitches": 20,
+        "frames": 59
+      },
+      "draws": 551,
+      "camera": [
+        10.708500025653839,
+        6.8240234091281895,
+        13.407564670944215
+      ]
+    },
+    {
+      "name": "overcast",
+      "worldTime": 0.43,
+      "houseVisible": true,
+      "perf": {
+        "fps": 57.55831566295994,
+        "low": 30.581039738629002,
+        "worst": 32.70000001788139,
+        "hitches": 20,
+        "frames": 57
+      },
+      "draws": 554,
+      "camera": [
+        10.708500025653839,
+        6.8240234091281895,
+        13.407564670944215
+      ]
+    },
+    {
+      "name": "dusk",
+      "worldTime": 0.74,
+      "houseVisible": true,
+      "perf": {
+        "fps": 52.59431576881458,
+        "low": 33.898305084745765,
+        "worst": 29.5,
+        "hitches": 20,
+        "frames": 52
+      },
+      "draws": 632,
+      "camera": [
+        10.708500025653839,
+        6.8240234091281895,
+        13.407564670944215
+      ]
+    },
+    {
+      "name": "night",
+      "worldTime": 0.02,
+      "houseVisible": true,
+      "perf": {
+        "fps": 48.33350115828022,
+        "low": 30.21148036797808,
+        "worst": 33.099999994039536,
+        "hitches": 20,
+        "frames": 48
+      },
+      "draws": 464,
+      "camera": [
+        10.708500025653839,
+        6.8240234091281895,
+        13.407564670944215
+      ]
+    }
+  ],
+  "errors": [],
+  "house": {
+    "baked": {
+      "merged": 49,
+      "removed": 507
+    },
+    "folded": {
+      "folded": 11,
+      "removed": 95
+    },
+    "meshes": 120,
+    "visible": 118,
+    "hushBoardVisible": false,
+    "box": {
+      "center": [
+        0.08250002145767255,
+        1.45757365077734,
+        -0.27942003965377804
+      ],
+      "size": [
+        12.075000004768372,
+        9.252499583363534,
+        11.218839926719665
+      ]
+    },
+    "camera": [
+      42,
+      2.3630955664828552,
+      -28.36049429562455
+    ]
+  },
+  "bakeWarnings": [
+    {
+      "type": "warning",
+      "text": "Grave Shift: HQ bake skipped. ReferenceError: Cannot access 'hush' before initialization\n    at makeHouse (http://127.0.0.1:4336/index.html?debug=1&__gameTestToken=bf50816b-7712-4e6b-8d0c-e6f5efbdb6aa:28225:41)\n    at http://127.0.0.1:4336/index.html?debug=1&__gameTestToken=bf50816b-7712-4e6b-8d0c-e6f5efbdb6aa:28420:5"
+    }
+  ]
+}

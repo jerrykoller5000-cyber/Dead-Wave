@@ -11,8 +11,16 @@ last-report: handoffs/2026-11-11-claude3-CC-343b.md
 
 ## Notes
 
-### Where things stand (11 Nov 18:41Z, session 7 started, fresh)
-- Session 7 (fresh, 18:41Z): checked in CC-343 part 2 (the 8 tcc343b reds + t184 slide); building the cloud copy. Pictures of part 1: Antigravity (Director 18:16Z).
+### Where things stand (11 Nov 20:31Z, session 7)
+- CC-343 part 2, in my cloud only (not on the PC yet). Patches (anchored, re-runnable on the PC's part-1 index.html, in order):
+  cloud /home/claude/w/p2/patch343c.py (deck edges standing still: a boot steps back/in onto the deck he stands on, only where the
+  whole boot fits (footFlatAt) - fixes the squat AG's 5080 sheet showed; crouched hips from crouchFootZ; rampGroundY never under the
+  ground + no glide on/off a ramp); patch343d.py (ankle solve iterations + a "last word" sole pass) and patch343e.py (crouch pace from
+  his real travel, t184) are EXPERIMENTS: d gave walking-up no-foot regressions; e untested. Copy them to Claude outputs/CC-343c/.
+- Results: base tcc343b 29/8; c+d 31/6..32/5. t184 slide ~41% unchanged: the body is pushed sideways (slides along something) in
+  t184's real-time run while the crouch paces from velX/velZ (patch e targets it). Stairs at a sprint (7.4 m/s = a tread a frame)
+  need a stair-stepping gait (part 3), not a patch. Stairs 0.2 facing down (298 over) is marine-turn: a foot one tread high.
+- D-162: no 5080 looks; pictures from my cloud camera: /home/claude/w/mkbatch2.py makes pics2/batch-{b,a}.json (4 scenes x 4 lights).
 
 ### Session 6 notes (18:12Z)
 - CC-343 (CB-290's legs) PART 1 LANDED 18:05Z, card open: handoffs/2026-11-11-claude3-CC-343b.md. index.html (legs + CROUCH/FOOT
