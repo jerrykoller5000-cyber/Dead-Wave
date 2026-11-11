@@ -1,0 +1,39 @@
+{
+  "controls": {
+    "trigger": {
+      "name": "controls-trigger",
+      "meshes": {
+        "world": 1,
+        "eye": 1
+      }
+    },
+    "selector": {
+      "name": "controls-selector",
+      "meshes": {
+        "world": 2,
+        "eye": 2
+      }
+    },
+    "chargingHandle": {
+      "name": "work",
+      "meshes": {
+        "world": 2,
+        "eye": 2
+      }
+    }
+  },
+  "triggerPin": [
+    0,
+    -0.088,
+    -0.066
+  ],
+  "heatParts": {
+    "barrel": {
+      "name": "heatParts-barrel",
+      "meshes": {
+        "world": 1,
+        "eye": 1
+      }
+    }
+  }
+}

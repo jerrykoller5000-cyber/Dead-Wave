@@ -6,7 +6,10 @@ from PIL import Image, ImageDraw
 
 folder = Path(__file__).resolve().parent / sys.argv[1]
 lights = ('noon', 'overcast', 'dusk', 'night')
-proof = json.loads((folder / 'after' / 'proof.json').read_text(encoding='utf-8'))
+revised = sys.argv[2:] == ['revised']
+phases = ('after', 'revised') if revised else ('before', 'after')
+prefix = 'revision-' if revised else ''
+proof = json.loads((folder / phases[1] / 'proof.json').read_text(encoding='utf-8'))
 
 def write(name, rows, columns, crop, limits):
     width, height = limits
@@ -25,14 +28,19 @@ def write(name, rows, columns, crop, limits):
             panel.paste(tile,(pad+i*(width+pad),y+15))
     with NamedTemporaryFile(dir=folder,suffix='.jpg',delete=False) as temp:
         panel.save(temp,format='JPEG',quality=94)
-    Path(temp.name).replace(folder/name)
+    Path(temp.name).replace(folder/(prefix+name))
+
+if revised:
+    write('eye-lights.jpg', [('74% reload', [folder/phases[1]/('eye-reload'+('' if light=='noon' else '-'+light)+'.jpg') for light in lights])],
+          lights, (490,289,849,540), (350,240))
 
 extent=proof['info']
+wasp = folder.name == 'uzi'
 lengths=f"Issued round {extent['live'][1]*1000:.1f} / spent case {extent['spent'][1]*1000:.1f} game mm"
 write('round-case.jpg', [(label,[folder/phase/(light+'.jpg') for light in lights])
-                         for phase,label in [('before','Previous case'),('after',lengths)]],
-      lights,(272,77,694,452),(240,216))
+                         for phase,label in [(phases[0],'Previous live and spent artwork' if revised else 'Previous case'),(phases[1],lengths)]],
+      lights,(315,202,647,456) if wasp else (272,77,694,452),(240,216))
 write('magazine-pairs.jpg',[(phase.capitalize(),[folder/phase/(part+'.jpg') for part in ('mag-empty','mag-loaded')])
-                             for phase in ('before','after')],['Empty','Loaded'],(244,138,705,429),(430,270))
-write('eye-pairs.jpg',[('74% reload',[folder/phase/'eye-reload.jpg' for phase in ('before','after')])],
-      ['Before','After'],(488,302,838,500),(350,199))
+                             for phase in phases],['Empty','Loaded'],(244,138,705,429),(430,270))
+write('eye-pairs.jpg',[('74% reload',[folder/phase/'eye-reload.jpg' for phase in phases])],
+      [phase.capitalize() for phase in phases],(490,289,849,540) if wasp else (488,302,838,500),(350,240) if wasp else (350,199))

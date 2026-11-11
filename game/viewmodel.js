@@ -670,7 +670,7 @@ export function createViewmodel(ctx) {
   // wrist bends as a wrist does, by direction: toward the palm (flexion) and back (extension) as far as max (and 75 / 70
   // degrees), but sideways only 20 degrees toward the thumb and 35 toward the little finger; between them on an ellipse.
   // Seen from the hand (+y toward the elbow, +z the palm's side, +x*side the thumb's edge), the forearm leans toward the
-  // palm when the wrist flexes, and toward the little finger's edge when the hand turns toward the thumb.
+  // palm when the wrist flexes, and toward the thumb's edge when the hand turns toward the thumb (radial; CD-1, Claude 2's proof).
   const WRIST_LIMITS = { flex: 1.31, ext: 1.22, radial: 0.35, ulnar: 0.61 };
   const _y = V3(), _d = V3(), _ax = V3(), _qs = Q(), _qe = Q(), _wp = V3(), _qa = Q(), _hx = V3(), _hz = V3();
   function poseArm(arm, W, hint, max) {
@@ -679,13 +679,13 @@ export function createViewmodel(ctx) {
     {
       const side = arm.side || 1;
       _hx.set(1, 0, 0).applyQuaternion(W.q); _hz.set(0, 0, 1).applyQuaternion(W.q);
-      let aF = Math.atan2(_d.dot(_hz), _d.dot(_y)), aD = Math.atan2(-_d.dot(_hx) * side, _d.dot(_y));   // aF > 0 flexion; aD > 0 radial
+      let aF = Math.atan2(_d.dot(_hz), _d.dot(_y)), aD = Math.atan2(_d.dot(_hx) * side, _d.dot(_y));   // aF > 0 flexion; aD > 0 radial (CD-1: in a radial bend the forearm leans to the thumb's edge; the sign was the other way, Claude 2's proof)
       const lf = aF >= 0 ? Math.min(WRIST_LIMITS.flex, max) : Math.min(WRIST_LIMITS.ext, max), ld = aD >= 0 ? WRIST_LIMITS.radial : WRIST_LIMITS.ulnar;
       const e = (aF / lf) * (aF / lf) + (aD / ld) * (aD / ld);
       arm.wristBend = { flex: +aF.toFixed(3), dev: +aD.toFixed(3), over: +e.toFixed(2) };   // for the checks (radians, before the limit)
       if (e > 1) {
         const k = 1 / Math.sqrt(e); aF *= k; aD *= k;
-        const tx = -Math.tan(aD) * side, tz = Math.tan(aF);
+        const tx = Math.tan(aD) * side, tz = Math.tan(aF);
         _d.copy(_y).addScaledVector(_hx, tx).addScaledVector(_hz, tz).normalize();
       }
     }

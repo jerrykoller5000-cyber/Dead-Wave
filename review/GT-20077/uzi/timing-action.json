@@ -1,0 +1,128 @@
+{
+  "weapon": "uzi",
+  "readyMs": 11848,
+  "fps": 60,
+  "low": 54.9,
+  "samples": [
+    {
+      "weapon": "uzi",
+      "eye": "uzi",
+      "high": "high",
+      "fps": 58.99999999999999,
+      "low": 30.030030019279703,
+      "worst": 33.30000001192093,
+      "hitches": 19,
+      "frames": 59
+    },
+    {
+      "weapon": "uzi",
+      "eye": "uzi",
+      "high": "high",
+      "fps": 59.99400060029756,
+      "low": 56.49717517929372,
+      "worst": 17.69999998807907,
+      "hitches": 19,
+      "frames": 60
+    },
+    {
+      "weapon": "uzi",
+      "eye": "uzi",
+      "high": "high",
+      "fps": 59.9760095958042,
+      "low": 54.94505489107175,
+      "worst": 18.200000017881393,
+      "hitches": 19,
+      "frames": 60
+    },
+    {
+      "weapon": "uzi",
+      "eye": "uzi",
+      "high": "high",
+      "fps": 60.01800540233617,
+      "low": 58.8235294117647,
+      "worst": 17,
+      "hitches": 19,
+      "frames": 60
+    },
+    {
+      "weapon": "uzi",
+      "eye": "uzi",
+      "high": "high",
+      "fps": 59.99999999999999,
+      "low": 59.17159761226685,
+      "worst": 16.900000005960464,
+      "hitches": 19,
+      "frames": 60
+    },
+    {
+      "weapon": "uzi",
+      "eye": "uzi",
+      "high": "high",
+      "fps": 59.99999999999999,
+      "low": 45.45454545454545,
+      "worst": 22,
+      "hitches": 19,
+      "frames": 60
+    },
+    {
+      "weapon": "uzi",
+      "eye": "uzi",
+      "high": "high",
+      "fps": 60.00600059970231,
+      "low": 58.8235294117647,
+      "worst": 17,
+      "hitches": 19,
+      "frames": 60
+    },
+    {
+      "weapon": "uzi",
+      "eye": "uzi",
+      "high": "high",
+      "fps": 59.99999999999999,
+      "low": 54.94505489107175,
+      "worst": 18.200000017881393,
+      "hitches": 19,
+      "frames": 60
+    },
+    {
+      "weapon": "uzi",
+      "eye": "uzi",
+      "high": "high",
+      "fps": 59.93498577777607,
+      "low": 52.08333328482695,
+      "worst": 19.200000017881393,
+      "hitches": 19,
+      "frames": 59
+    },
+    {
+      "weapon": "uzi",
+      "eye": "uzi",
+      "high": "high",
+      "fps": 60.09615384579507,
+      "low": 52.08333328482695,
+      "worst": 19.200000017881393,
+      "hitches": 19,
+      "frames": 60
+    },
+    {
+      "weapon": "uzi",
+      "eye": "uzi",
+      "high": "high",
+      "fps": 59.994000598509786,
+      "low": 56.49717508416677,
+      "worst": 17.700000017881393,
+      "hitches": 19,
+      "frames": 60
+    },
+    {
+      "weapon": "uzi",
+      "eye": "uzi",
+      "high": "high",
+      "fps": 60.006000601490804,
+      "low": 56.179775243274435,
+      "worst": 17.80000001192093,
+      "hitches": 19,
+      "frames": 60
+    }
+  ]
+}

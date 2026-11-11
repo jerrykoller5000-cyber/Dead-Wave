@@ -1,0 +1,2218 @@
+{
+  "gpuRenderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "guns": {
+    "shotgun": {
+      "id": "shotgun",
+      "slug": "shotgun",
+      "name": "Pump Shotgun",
+      "displayName": "Pump Shotgun (12ga)",
+      "optic": "rmr",
+      "appliedFinish": "m81",
+      "fittedMods": [
+        "suppressor",
+        "optic:rmr",
+        "laserLight"
+      ],
+      "diagnostics": {
+        "hasCamoMap": true,
+        "tiles": {
+          "held": {
+            "paintedTris": 3276,
+            "tileM": [
+              0.42,
+              0.42,
+              0.42
+            ]
+          },
+          "eye": {
+            "paintedTris": 3276,
+            "tileM": [
+              0.42,
+              0.42,
+              0.42
+            ]
+          },
+          "rack": {
+            "paintedTris": 3276,
+            "tileM": [
+              0.42,
+              0.42,
+              0.42
+            ]
+          }
+        },
+        "controls": {
+          "trigger": "controls-trigger",
+          "safety": "controls-safety",
+          "slideRelease": "shotgun-slide-lock",
+          "pump": "controls-pump"
+        },
+        "heatParts": {
+          "barrel": "heatParts-barrel",
+          "suppressor": "suppressor"
+        },
+        "paintedMeshCount": 3,
+        "bareMeshCount": 13,
+        "paintedSample": [
+          "shotgun receiver",
+          "controls-pump",
+          "(unnamed)"
+        ],
+        "bareSample": [
+          "shotgun-bolt",
+          "shotgun lifter",
+          "shotgun-slide-lock",
+          "shotgun trigger",
+          "fp-stock",
+          "controls-pump",
+          "heatParts-barrel",
+          "(unnamed)",
+          "shotgun reload shell",
+          "controls-safety"
+        ]
+      },
+      "shots": [
+        {
+          "file": "hip-factory-noon.png",
+          "finish": "factory",
+          "pose": "hip",
+          "light": "noon",
+          "bytes": 365258,
+          "state": {
+            "pose": "hip",
+            "light": "noon",
+            "ads": 0,
+            "reloading": false,
+            "sun": 3.1
+          }
+        },
+        {
+          "file": "hip-factory-overcast.png",
+          "finish": "factory",
+          "pose": "hip",
+          "light": "overcast",
+          "bytes": 340582,
+          "state": {
+            "pose": "hip",
+            "light": "overcast",
+            "ads": 0,
+            "reloading": false,
+            "sun": 0.65
+          }
+        },
+        {
+          "file": "hip-factory-dusk.png",
+          "finish": "factory",
+          "pose": "hip",
+          "light": "dusk",
+          "bytes": 300088,
+          "state": {
+            "pose": "hip",
+            "light": "dusk",
+            "ads": 0,
+            "reloading": false,
+            "sun": 1.55
+          }
+        },
+        {
+          "file": "hip-factory-night.png",
+          "finish": "factory",
+          "pose": "hip",
+          "light": "night",
+          "bytes": 177635,
+          "state": {
+            "pose": "hip",
+            "light": "night",
+            "ads": 0,
+            "reloading": false,
+            "sun": 0.35
+          }
+        },
+        {
+          "file": "aimed-factory-noon.png",
+          "finish": "factory",
+          "pose": "aimed",
+          "light": "noon",
+          "bytes": 368061,
+          "state": {
+            "pose": "aimed",
+            "light": "noon",
+            "ads": 1,
+            "reloading": false,
+            "sun": 3.1
+          }
+        },
+        {
+          "file": "aimed-factory-overcast.png",
+          "finish": "factory",
+          "pose": "aimed",
+          "light": "overcast",
+          "bytes": 324300,
+          "state": {
+            "pose": "aimed",
+            "light": "overcast",
+            "ads": 1,
+            "reloading": false,
+            "sun": 0.65
+          }
+        },
+        {
+          "file": "aimed-factory-dusk.png",
+          "finish": "factory",
+          "pose": "aimed",
+          "light": "dusk",
+          "bytes": 294382,
+          "state": {
+            "pose": "aimed",
+            "light": "dusk",
+            "ads": 1,
+            "reloading": false,
+            "sun": 1.55
+          }
+        },
+        {
+          "file": "aimed-factory-night.png",
+          "finish": "factory",
+          "pose": "aimed",
+          "light": "night",
+          "bytes": 171772,
+          "state": {
+            "pose": "aimed",
+            "light": "night",
+            "ads": 1,
+            "reloading": false,
+            "sun": 0.35
+          }
+        },
+        {
+          "file": "reload-factory-noon.png",
+          "finish": "factory",
+          "pose": "reload",
+          "light": "noon",
+          "bytes": 362909,
+          "state": {
+            "pose": "reload",
+            "light": "noon",
+            "ads": 0,
+            "reloading": true,
+            "sun": 3.1
+          }
+        },
+        {
+          "file": "reload-factory-overcast.png",
+          "finish": "factory",
+          "pose": "reload",
+          "light": "overcast",
+          "bytes": 339997,
+          "state": {
+            "pose": "reload",
+            "light": "overcast",
+            "ads": 0,
+            "reloading": true,
+            "sun": 0.65
+          }
+        },
+        {
+          "file": "reload-factory-dusk.png",
+          "finish": "factory",
+          "pose": "reload",
+          "light": "dusk",
+          "bytes": 289780,
+          "state": {
+            "pose": "reload",
+            "light": "dusk",
+            "ads": 0,
+            "reloading": true,
+            "sun": 1.55
+          }
+        },
+        {
+          "file": "reload-factory-night.png",
+          "finish": "factory",
+          "pose": "reload",
+          "light": "night",
+          "bytes": 174753,
+          "state": {
+            "pose": "reload",
+            "light": "night",
+            "ads": 0,
+            "reloading": true,
+            "sun": 0.35
+          }
+        },
+        {
+          "file": "hip-m81-noon.png",
+          "finish": "m81",
+          "pose": "hip",
+          "light": "noon",
+          "bytes": 379272,
+          "state": {
+            "pose": "hip",
+            "light": "noon",
+            "ads": 0,
+            "reloading": false,
+            "sun": 3.1
+          }
+        },
+        {
+          "file": "hip-m81-overcast.png",
+          "finish": "m81",
+          "pose": "hip",
+          "light": "overcast",
+          "bytes": 356936,
+          "state": {
+            "pose": "hip",
+            "light": "overcast",
+            "ads": 0,
+            "reloading": false,
+            "sun": 0.65
+          }
+        },
+        {
+          "file": "hip-m81-dusk.png",
+          "finish": "m81",
+          "pose": "hip",
+          "light": "dusk",
+          "bytes": 312599,
+          "state": {
+            "pose": "hip",
+            "light": "dusk",
+            "ads": 0,
+            "reloading": false,
+            "sun": 1.55
+          }
+        },
+        {
+          "file": "hip-m81-night.png",
+          "finish": "m81",
+          "pose": "hip",
+          "light": "night",
+          "bytes": 185431,
+          "state": {
+            "pose": "hip",
+            "light": "night",
+            "ads": 0,
+            "reloading": false,
+            "sun": 0.35
+          }
+        },
+        {
+          "file": "aimed-m81-noon.png",
+          "finish": "m81",
+          "pose": "aimed",
+          "light": "noon",
+          "bytes": 377104,
+          "state": {
+            "pose": "aimed",
+            "light": "noon",
+            "ads": 1,
+            "reloading": false,
+            "sun": 3.1
+          }
+        },
+        {
+          "file": "aimed-m81-overcast.png",
+          "finish": "m81",
+          "pose": "aimed",
+          "light": "overcast",
+          "bytes": 337302,
+          "state": {
+            "pose": "aimed",
+            "light": "overcast",
+            "ads": 1,
+            "reloading": false,
+            "sun": 0.65
+          }
+        },
+        {
+          "file": "aimed-m81-dusk.png",
+          "finish": "m81",
+          "pose": "aimed",
+          "light": "dusk",
+          "bytes": 307826,
+          "state": {
+            "pose": "aimed",
+            "light": "dusk",
+            "ads": 1,
+            "reloading": false,
+            "sun": 1.55
+          }
+        },
+        {
+          "file": "aimed-m81-night.png",
+          "finish": "m81",
+          "pose": "aimed",
+          "light": "night",
+          "bytes": 177100,
+          "state": {
+            "pose": "aimed",
+            "light": "night",
+            "ads": 1,
+            "reloading": false,
+            "sun": 0.35
+          }
+        },
+        {
+          "file": "reload-m81-noon.png",
+          "finish": "m81",
+          "pose": "reload",
+          "light": "noon",
+          "bytes": 371491,
+          "state": {
+            "pose": "reload",
+            "light": "noon",
+            "ads": 0,
+            "reloading": true,
+            "sun": 3.1
+          }
+        },
+        {
+          "file": "reload-m81-overcast.png",
+          "finish": "m81",
+          "pose": "reload",
+          "light": "overcast",
+          "bytes": 351460,
+          "state": {
+            "pose": "reload",
+            "light": "overcast",
+            "ads": 0,
+            "reloading": true,
+            "sun": 0.65
+          }
+        },
+        {
+          "file": "reload-m81-dusk.png",
+          "finish": "m81",
+          "pose": "reload",
+          "light": "dusk",
+          "bytes": 298149,
+          "state": {
+            "pose": "reload",
+            "light": "dusk",
+            "ads": 0,
+            "reloading": true,
+            "sun": 1.55
+          }
+        },
+        {
+          "file": "reload-m81-night.png",
+          "finish": "m81",
+          "pose": "reload",
+          "light": "night",
+          "bytes": 177862,
+          "state": {
+            "pose": "reload",
+            "light": "night",
+            "ads": 0,
+            "reloading": true,
+            "sun": 0.35
+          }
+        },
+        {
+          "file": "rack-factory-noon.png",
+          "finish": "factory",
+          "pose": "rack",
+          "light": "noon",
+          "bytes": 42168
+        },
+        {
+          "file": "rack-m81-noon.png",
+          "finish": "m81",
+          "pose": "rack",
+          "light": "noon",
+          "bytes": 61239
+        },
+        {
+          "file": "rack-m81-fitted.png",
+          "finish": "m81",
+          "pose": "rack-fitted",
+          "light": "noon",
+          "fittedMods": [
+            "suppressor",
+            "optic:rmr",
+            "laserLight"
+          ],
+          "bytes": 112970
+        },
+        {
+          "file": "fitted-eye-noon.png",
+          "finish": "m81",
+          "pose": "hip-fitted",
+          "light": "noon",
+          "fittedMods": [
+            "suppressor",
+            "optic:rmr",
+            "laserLight"
+          ],
+          "bytes": 379151
+        }
+      ]
+    },
+    "ak": {
+      "id": "ak",
+      "slug": "ak",
+      "name": "KR-7",
+      "displayName": "KR-7 Rifle (ak)",
+      "optic": "acog",
+      "appliedFinish": "m81",
+      "fittedMods": [
+        "suppressor",
+        "optic:acog",
+        "laserLight"
+      ],
+      "diagnostics": {
+        "hasCamoMap": true,
+        "tiles": {
+          "held": {
+            "paintedTris": 1772,
+            "tileM": [
+              0.42,
+              0.42,
+              0.42
+            ]
+          },
+          "eye": {
+            "paintedTris": 1772,
+            "tileM": [
+              0.42,
+              0.42,
+              0.42
+            ]
+          },
+          "rack": {
+            "paintedTris": 1772,
+            "tileM": [
+              0.42,
+              0.42,
+              0.42
+            ]
+          }
+        },
+        "controls": {
+          "trigger": "controls-trigger",
+          "selector": "controls-selector",
+          "magRelease": "controls-magRelease",
+          "chargingHandle": "work"
+        },
+        "heatParts": {
+          "barrel": "heatParts-barrel",
+          "suppressor": "suppressor"
+        },
+        "paintedMeshCount": 2,
+        "bareMeshCount": 11,
+        "paintedSample": [
+          "fp-stock",
+          "(unnamed)"
+        ],
+        "bareSample": [
+          "recoil-bolt",
+          "work",
+          "controls-trigger",
+          "fp-stock",
+          "(unnamed)",
+          "controls-selector",
+          "controls-magRelease",
+          "heatParts-barrel"
+        ]
+      },
+      "shots": [
+        {
+          "file": "hip-factory-noon.png",
+          "finish": "factory",
+          "pose": "hip",
+          "light": "noon",
+          "bytes": 384183,
+          "state": {
+            "pose": "hip",
+            "light": "noon",
+            "ads": 0,
+            "reloading": false,
+            "sun": 3.1
+          }
+        },
+        {
+          "file": "hip-factory-overcast.png",
+          "finish": "factory",
+          "pose": "hip",
+          "light": "overcast",
+          "bytes": 352678,
+          "state": {
+            "pose": "hip",
+            "light": "overcast",
+            "ads": 0,
+            "reloading": false,
+            "sun": 0.65
+          }
+        },
+        {
+          "file": "hip-factory-dusk.png",
+          "finish": "factory",
+          "pose": "hip",
+          "light": "dusk",
+          "bytes": 307052,
+          "state": {
+            "pose": "hip",
+            "light": "dusk",
+            "ads": 0,
+            "reloading": false,
+            "sun": 1.55
+          }
+        },
+        {
+          "file": "hip-factory-night.png",
+          "finish": "factory",
+          "pose": "hip",
+          "light": "night",
+          "bytes": 187531,
+          "state": {
+            "pose": "hip",
+            "light": "night",
+            "ads": 0,
+            "reloading": false,
+            "sun": 0.35
+          }
+        },
+        {
+          "file": "aimed-factory-noon.png",
+          "finish": "factory",
+          "pose": "aimed",
+          "light": "noon",
+          "bytes": 332373,
+          "state": {
+            "pose": "aimed",
+            "light": "noon",
+            "ads": 1,
+            "reloading": false,
+            "sun": 3.1
+          }
+        },
+        {
+          "file": "aimed-factory-overcast.png",
+          "finish": "factory",
+          "pose": "aimed",
+          "light": "overcast",
+          "bytes": 302366,
+          "state": {
+            "pose": "aimed",
+            "light": "overcast",
+            "ads": 1,
+            "reloading": false,
+            "sun": 0.65
+          }
+        },
+        {
+          "file": "aimed-factory-dusk.png",
+          "finish": "factory",
+          "pose": "aimed",
+          "light": "dusk",
+          "bytes": 272401,
+          "state": {
+            "pose": "aimed",
+            "light": "dusk",
+            "ads": 1,
+            "reloading": false,
+            "sun": 1.55
+          }
+        },
+        {
+          "file": "aimed-factory-night.png",
+          "finish": "factory",
+          "pose": "aimed",
+          "light": "night",
+          "bytes": 155793,
+          "state": {
+            "pose": "aimed",
+            "light": "night",
+            "ads": 1,
+            "reloading": false,
+            "sun": 0.35
+          }
+        },
+        {
+          "file": "reload-factory-noon.png",
+          "finish": "factory",
+          "pose": "reload",
+          "light": "noon",
+          "bytes": 377858,
+          "state": {
+            "pose": "reload",
+            "light": "noon",
+            "ads": 0,
+            "reloading": true,
+            "sun": 3.1
+          }
+        },
+        {
+          "file": "reload-factory-overcast.png",
+          "finish": "factory",
+          "pose": "reload",
+          "light": "overcast",
+          "bytes": 347903,
+          "state": {
+            "pose": "reload",
+            "light": "overcast",
+            "ads": 0,
+            "reloading": true,
+            "sun": 0.65
+          }
+        },
+        {
+          "file": "reload-factory-dusk.png",
+          "finish": "factory",
+          "pose": "reload",
+          "light": "dusk",
+          "bytes": 311627,
+          "state": {
+            "pose": "reload",
+            "light": "dusk",
+            "ads": 0,
+            "reloading": true,
+            "sun": 1.55
+          }
+        },
+        {
+          "file": "reload-factory-night.png",
+          "finish": "factory",
+          "pose": "reload",
+          "light": "night",
+          "bytes": 183851,
+          "state": {
+            "pose": "reload",
+            "light": "night",
+            "ads": 0,
+            "reloading": true,
+            "sun": 0.35
+          }
+        },
+        {
+          "file": "hip-m81-noon.png",
+          "finish": "m81",
+          "pose": "hip",
+          "light": "noon",
+          "bytes": 394879,
+          "state": {
+            "pose": "hip",
+            "light": "noon",
+            "ads": 0,
+            "reloading": false,
+            "sun": 3.1
+          }
+        },
+        {
+          "file": "hip-m81-overcast.png",
+          "finish": "m81",
+          "pose": "hip",
+          "light": "overcast",
+          "bytes": 362344,
+          "state": {
+            "pose": "hip",
+            "light": "overcast",
+            "ads": 0,
+            "reloading": false,
+            "sun": 0.65
+          }
+        },
+        {
+          "file": "hip-m81-dusk.png",
+          "finish": "m81",
+          "pose": "hip",
+          "light": "dusk",
+          "bytes": 317139,
+          "state": {
+            "pose": "hip",
+            "light": "dusk",
+            "ads": 0,
+            "reloading": false,
+            "sun": 1.55
+          }
+        },
+        {
+          "file": "hip-m81-night.png",
+          "finish": "m81",
+          "pose": "hip",
+          "light": "night",
+          "bytes": 191688,
+          "state": {
+            "pose": "hip",
+            "light": "night",
+            "ads": 0,
+            "reloading": false,
+            "sun": 0.35
+          }
+        },
+        {
+          "file": "aimed-m81-noon.png",
+          "finish": "m81",
+          "pose": "aimed",
+          "light": "noon",
+          "bytes": 332555,
+          "state": {
+            "pose": "aimed",
+            "light": "noon",
+            "ads": 1,
+            "reloading": false,
+            "sun": 3.1
+          }
+        },
+        {
+          "file": "aimed-m81-overcast.png",
+          "finish": "m81",
+          "pose": "aimed",
+          "light": "overcast",
+          "bytes": 304221,
+          "state": {
+            "pose": "aimed",
+            "light": "overcast",
+            "ads": 1,
+            "reloading": false,
+            "sun": 0.65
+          }
+        },
+        {
+          "file": "aimed-m81-dusk.png",
+          "finish": "m81",
+          "pose": "aimed",
+          "light": "dusk",
+          "bytes": 269057,
+          "state": {
+            "pose": "aimed",
+            "light": "dusk",
+            "ads": 1,
+            "reloading": false,
+            "sun": 1.55
+          }
+        },
+        {
+          "file": "aimed-m81-night.png",
+          "finish": "m81",
+          "pose": "aimed",
+          "light": "night",
+          "bytes": 155997,
+          "state": {
+            "pose": "aimed",
+            "light": "night",
+            "ads": 1,
+            "reloading": false,
+            "sun": 0.35
+          }
+        },
+        {
+          "file": "reload-m81-noon.png",
+          "finish": "m81",
+          "pose": "reload",
+          "light": "noon",
+          "bytes": 395500,
+          "state": {
+            "pose": "reload",
+            "light": "noon",
+            "ads": 0,
+            "reloading": true,
+            "sun": 3.1
+          }
+        },
+        {
+          "file": "reload-m81-overcast.png",
+          "finish": "m81",
+          "pose": "reload",
+          "light": "overcast",
+          "bytes": 363850,
+          "state": {
+            "pose": "reload",
+            "light": "overcast",
+            "ads": 0,
+            "reloading": true,
+            "sun": 0.65
+          }
+        },
+        {
+          "file": "reload-m81-dusk.png",
+          "finish": "m81",
+          "pose": "reload",
+          "light": "dusk",
+          "bytes": 316119,
+          "state": {
+            "pose": "reload",
+            "light": "dusk",
+            "ads": 0,
+            "reloading": true,
+            "sun": 1.55
+          }
+        },
+        {
+          "file": "reload-m81-night.png",
+          "finish": "m81",
+          "pose": "reload",
+          "light": "night",
+          "bytes": 190988,
+          "state": {
+            "pose": "reload",
+            "light": "night",
+            "ads": 0,
+            "reloading": true,
+            "sun": 0.35
+          }
+        },
+        {
+          "file": "rack-factory-noon.png",
+          "finish": "factory",
+          "pose": "rack",
+          "light": "noon",
+          "bytes": 84817
+        },
+        {
+          "file": "rack-m81-noon.png",
+          "finish": "m81",
+          "pose": "rack",
+          "light": "noon",
+          "bytes": 91899
+        },
+        {
+          "file": "rack-m81-fitted.png",
+          "finish": "m81",
+          "pose": "rack-fitted",
+          "light": "noon",
+          "fittedMods": [
+            "suppressor",
+            "optic:acog",
+            "laserLight"
+          ],
+          "bytes": 100034
+        },
+        {
+          "file": "fitted-eye-noon.png",
+          "finish": "m81",
+          "pose": "hip-fitted",
+          "light": "noon",
+          "fittedMods": [
+            "suppressor",
+            "optic:acog",
+            "laserLight"
+          ],
+          "bytes": 393233
+        }
+      ]
+    },
+    "revolver": {
+      "id": "revolver",
+      "slug": "revolver",
+      "name": "Revolver",
+      "displayName": "Service Revolver (.357)",
+      "optic": null,
+      "appliedFinish": "m81",
+      "fittedMods": [
+        "laserLight"
+      ],
+      "diagnostics": {
+        "hasCamoMap": true,
+        "tiles": {
+          "held": {
+            "paintedTris": 880,
+            "tileM": [
+              0.42,
+              0.42,
+              0.42
+            ]
+          },
+          "eye": {
+            "paintedTris": 880,
+            "tileM": [
+              0.42,
+              0.42,
+              0.42
+            ]
+          },
+          "rack": {
+            "paintedTris": 880,
+            "tileM": [
+              0.42,
+              0.42,
+              0.42
+            ]
+          }
+        },
+        "controls": {
+          "trigger": "revolver-trigger",
+          "hammer": "controls-hammer"
+        },
+        "heatParts": {
+          "barrel": "heatParts-barrel"
+        },
+        "paintedMeshCount": 1,
+        "bareMeshCount": 16,
+        "paintedSample": [
+          "(unnamed)"
+        ],
+        "bareSample": [
+          "revolver-crane",
+          "heatParts-barrel",
+          "revolver-trigger",
+          "(unnamed)",
+          "speedloader",
+          "loader-round-0",
+          "loader-round-1",
+          "loader-round-2",
+          "loader-round-3",
+          "loader-round-4",
+          "loader-round-5",
+          "controls-hammer"
+        ]
+      },
+      "shots": [
+        {
+          "file": "hip-factory-noon.png",
+          "finish": "factory",
+          "pose": "hip",
+          "light": "noon",
+          "bytes": 434353,
+          "state": {
+            "pose": "hip",
+            "light": "noon",
+            "ads": 0,
+            "reloading": false,
+            "sun": 3.1
+          }
+        },
+        {
+          "file": "hip-factory-overcast.png",
+          "finish": "factory",
+          "pose": "hip",
+          "light": "overcast",
+          "bytes": 407948,
+          "state": {
+            "pose": "hip",
+            "light": "overcast",
+            "ads": 0,
+            "reloading": false,
+            "sun": 0.65
+          }
+        },
+        {
+          "file": "hip-factory-dusk.png",
+          "finish": "factory",
+          "pose": "hip",
+          "light": "dusk",
+          "bytes": 353707,
+          "state": {
+            "pose": "hip",
+            "light": "dusk",
+            "ads": 0,
+            "reloading": false,
+            "sun": 1.55
+          }
+        },
+        {
+          "file": "hip-factory-night.png",
+          "finish": "factory",
+          "pose": "hip",
+          "light": "night",
+          "bytes": 212536,
+          "state": {
+            "pose": "hip",
+            "light": "night",
+            "ads": 0,
+            "reloading": false,
+            "sun": 0.35
+          }
+        },
+        {
+          "file": "aimed-factory-noon.png",
+          "finish": "factory",
+          "pose": "aimed",
+          "light": "noon",
+          "bytes": 454311,
+          "state": {
+            "pose": "aimed",
+            "light": "noon",
+            "ads": 1,
+            "reloading": false,
+            "sun": 3.1
+          }
+        },
+        {
+          "file": "aimed-factory-overcast.png",
+          "finish": "factory",
+          "pose": "aimed",
+          "light": "overcast",
+          "bytes": 404661,
+          "state": {
+            "pose": "aimed",
+            "light": "overcast",
+            "ads": 1,
+            "reloading": false,
+            "sun": 0.65
+          }
+        },
+        {
+          "file": "aimed-factory-dusk.png",
+          "finish": "factory",
+          "pose": "aimed",
+          "light": "dusk",
+          "bytes": 363571,
+          "state": {
+            "pose": "aimed",
+            "light": "dusk",
+            "ads": 1,
+            "reloading": false,
+            "sun": 1.55
+          }
+        },
+        {
+          "file": "aimed-factory-night.png",
+          "finish": "factory",
+          "pose": "aimed",
+          "light": "night",
+          "bytes": 209858,
+          "state": {
+            "pose": "aimed",
+            "light": "night",
+            "ads": 1,
+            "reloading": false,
+            "sun": 0.35
+          }
+        },
+        {
+          "file": "reload-factory-noon.png",
+          "finish": "factory",
+          "pose": "reload",
+          "light": "noon",
+          "bytes": 498266,
+          "state": {
+            "pose": "reload",
+            "light": "noon",
+            "ads": 0,
+            "reloading": true,
+            "sun": 3.1
+          }
+        },
+        {
+          "file": "reload-factory-overcast.png",
+          "finish": "factory",
+          "pose": "reload",
+          "light": "overcast",
+          "bytes": 458429,
+          "state": {
+            "pose": "reload",
+            "light": "overcast",
+            "ads": 0,
+            "reloading": true,
+            "sun": 0.65
+          }
+        },
+        {
+          "file": "reload-factory-dusk.png",
+          "finish": "factory",
+          "pose": "reload",
+          "light": "dusk",
+          "bytes": 411161,
+          "state": {
+            "pose": "reload",
+            "light": "dusk",
+            "ads": 0,
+            "reloading": true,
+            "sun": 1.55
+          }
+        },
+        {
+          "file": "reload-factory-night.png",
+          "finish": "factory",
+          "pose": "reload",
+          "light": "night",
+          "bytes": 246605,
+          "state": {
+            "pose": "reload",
+            "light": "night",
+            "ads": 0,
+            "reloading": true,
+            "sun": 0.35
+          }
+        },
+        {
+          "file": "hip-m81-noon.png",
+          "finish": "m81",
+          "pose": "hip",
+          "light": "noon",
+          "bytes": 442442,
+          "state": {
+            "pose": "hip",
+            "light": "noon",
+            "ads": 0,
+            "reloading": false,
+            "sun": 3.1
+          }
+        },
+        {
+          "file": "hip-m81-overcast.png",
+          "finish": "m81",
+          "pose": "hip",
+          "light": "overcast",
+          "bytes": 416518,
+          "state": {
+            "pose": "hip",
+            "light": "overcast",
+            "ads": 0,
+            "reloading": false,
+            "sun": 0.65
+          }
+        },
+        {
+          "file": "hip-m81-dusk.png",
+          "finish": "m81",
+          "pose": "hip",
+          "light": "dusk",
+          "bytes": 360420,
+          "state": {
+            "pose": "hip",
+            "light": "dusk",
+            "ads": 0,
+            "reloading": false,
+            "sun": 1.55
+          }
+        },
+        {
+          "file": "hip-m81-night.png",
+          "finish": "m81",
+          "pose": "hip",
+          "light": "night",
+          "bytes": 216092,
+          "state": {
+            "pose": "hip",
+            "light": "night",
+            "ads": 0,
+            "reloading": false,
+            "sun": 0.35
+          }
+        },
+        {
+          "file": "aimed-m81-noon.png",
+          "finish": "m81",
+          "pose": "aimed",
+          "light": "noon",
+          "bytes": 460442,
+          "state": {
+            "pose": "aimed",
+            "light": "noon",
+            "ads": 1,
+            "reloading": false,
+            "sun": 3.1
+          }
+        },
+        {
+          "file": "aimed-m81-overcast.png",
+          "finish": "m81",
+          "pose": "aimed",
+          "light": "overcast",
+          "bytes": 410580,
+          "state": {
+            "pose": "aimed",
+            "light": "overcast",
+            "ads": 1,
+            "reloading": false,
+            "sun": 0.65
+          }
+        },
+        {
+          "file": "aimed-m81-dusk.png",
+          "finish": "m81",
+          "pose": "aimed",
+          "light": "dusk",
+          "bytes": 368660,
+          "state": {
+            "pose": "aimed",
+            "light": "dusk",
+            "ads": 1,
+            "reloading": false,
+            "sun": 1.55
+          }
+        },
+        {
+          "file": "aimed-m81-night.png",
+          "finish": "m81",
+          "pose": "aimed",
+          "light": "night",
+          "bytes": 213359,
+          "state": {
+            "pose": "aimed",
+            "light": "night",
+            "ads": 1,
+            "reloading": false,
+            "sun": 0.35
+          }
+        },
+        {
+          "file": "reload-m81-noon.png",
+          "finish": "m81",
+          "pose": "reload",
+          "light": "noon",
+          "bytes": 504785,
+          "state": {
+            "pose": "reload",
+            "light": "noon",
+            "ads": 0,
+            "reloading": true,
+            "sun": 3.1
+          }
+        },
+        {
+          "file": "reload-m81-overcast.png",
+          "finish": "m81",
+          "pose": "reload",
+          "light": "overcast",
+          "bytes": 464350,
+          "state": {
+            "pose": "reload",
+            "light": "overcast",
+            "ads": 0,
+            "reloading": true,
+            "sun": 0.65
+          }
+        },
+        {
+          "file": "reload-m81-dusk.png",
+          "finish": "m81",
+          "pose": "reload",
+          "light": "dusk",
+          "bytes": 409271,
+          "state": {
+            "pose": "reload",
+            "light": "dusk",
+            "ads": 0,
+            "reloading": true,
+            "sun": 1.55
+          }
+        },
+        {
+          "file": "reload-m81-night.png",
+          "finish": "m81",
+          "pose": "reload",
+          "light": "night",
+          "bytes": 249569,
+          "state": {
+            "pose": "reload",
+            "light": "night",
+            "ads": 0,
+            "reloading": true,
+            "sun": 0.35
+          }
+        },
+        {
+          "file": "rack-factory-noon.png",
+          "finish": "factory",
+          "pose": "rack",
+          "light": "noon",
+          "bytes": 91404
+        },
+        {
+          "file": "rack-m81-noon.png",
+          "finish": "m81",
+          "pose": "rack",
+          "light": "noon",
+          "bytes": 106215
+        },
+        {
+          "file": "rack-m81-fitted.png",
+          "finish": "m81",
+          "pose": "rack-fitted",
+          "light": "noon",
+          "fittedMods": [
+            "laserLight"
+          ],
+          "bytes": 111302
+        },
+        {
+          "file": "fitted-eye-noon.png",
+          "finish": "m81",
+          "pose": "hip-fitted",
+          "light": "noon",
+          "fittedMods": [
+            "laserLight"
+          ],
+          "bytes": 427718
+        }
+      ]
+    },
+    "uzi": {
+      "id": "uzi",
+      "slug": "wasp",
+      "name": "Wasp",
+      "displayName": "Wasp SMG (uzi)",
+      "optic": "rmr",
+      "appliedFinish": "m81",
+      "fittedMods": [
+        "suppressor",
+        "optic:rmr",
+        "laserLight"
+      ],
+      "diagnostics": {
+        "hasCamoMap": true,
+        "tiles": {
+          "held": {
+            "paintedTris": 2616,
+            "tileM": [
+              0.42,
+              0.42,
+              0.42
+            ]
+          },
+          "eye": {
+            "paintedTris": 2616,
+            "tileM": [
+              0.42,
+              0.42,
+              0.42
+            ]
+          },
+          "rack": {
+            "paintedTris": 2616,
+            "tileM": [
+              0.42,
+              0.42,
+              0.42
+            ]
+          }
+        },
+        "controls": {
+          "trigger": "controls-trigger",
+          "magRelease": "controls-magRelease",
+          "selector": "controls-selector",
+          "safety": "controls-safety",
+          "chargingHandle": "work"
+        },
+        "heatParts": {
+          "barrel": "heatParts-barrel",
+          "suppressor": "suppressor"
+        },
+        "paintedMeshCount": 4,
+        "bareMeshCount": 13,
+        "paintedSample": [
+          "(unnamed)"
+        ],
+        "bareSample": [
+          "work",
+          "controls-safety",
+          "controls-trigger",
+          "controls-magRelease",
+          "controls-selector",
+          "(unnamed)",
+          "magazine top round",
+          "heatParts-barrel",
+          "recoil-bolt"
+        ]
+      },
+      "shots": [
+        {
+          "file": "hip-factory-noon.png",
+          "finish": "factory",
+          "pose": "hip",
+          "light": "noon",
+          "bytes": 385418,
+          "state": {
+            "pose": "hip",
+            "light": "noon",
+            "ads": 0,
+            "reloading": false,
+            "sun": 3.1
+          }
+        },
+        {
+          "file": "hip-factory-overcast.png",
+          "finish": "factory",
+          "pose": "hip",
+          "light": "overcast",
+          "bytes": 347702,
+          "state": {
+            "pose": "hip",
+            "light": "overcast",
+            "ads": 0,
+            "reloading": false,
+            "sun": 0.65
+          }
+        },
+        {
+          "file": "hip-factory-dusk.png",
+          "finish": "factory",
+          "pose": "hip",
+          "light": "dusk",
+          "bytes": 313016,
+          "state": {
+            "pose": "hip",
+            "light": "dusk",
+            "ads": 0,
+            "reloading": false,
+            "sun": 1.55
+          }
+        },
+        {
+          "file": "hip-factory-night.png",
+          "finish": "factory",
+          "pose": "hip",
+          "light": "night",
+          "bytes": 188057,
+          "state": {
+            "pose": "hip",
+            "light": "night",
+            "ads": 0,
+            "reloading": false,
+            "sun": 0.35
+          }
+        },
+        {
+          "file": "aimed-factory-noon.png",
+          "finish": "factory",
+          "pose": "aimed",
+          "light": "noon",
+          "bytes": 367729,
+          "state": {
+            "pose": "aimed",
+            "light": "noon",
+            "ads": 1,
+            "reloading": false,
+            "sun": 3.1
+          }
+        },
+        {
+          "file": "aimed-factory-overcast.png",
+          "finish": "factory",
+          "pose": "aimed",
+          "light": "overcast",
+          "bytes": 325795,
+          "state": {
+            "pose": "aimed",
+            "light": "overcast",
+            "ads": 1,
+            "reloading": false,
+            "sun": 0.65
+          }
+        },
+        {
+          "file": "aimed-factory-dusk.png",
+          "finish": "factory",
+          "pose": "aimed",
+          "light": "dusk",
+          "bytes": 296689,
+          "state": {
+            "pose": "aimed",
+            "light": "dusk",
+            "ads": 1,
+            "reloading": false,
+            "sun": 1.55
+          }
+        },
+        {
+          "file": "aimed-factory-night.png",
+          "finish": "factory",
+          "pose": "aimed",
+          "light": "night",
+          "bytes": 173246,
+          "state": {
+            "pose": "aimed",
+            "light": "night",
+            "ads": 1,
+            "reloading": false,
+            "sun": 0.35
+          }
+        },
+        {
+          "file": "reload-factory-noon.png",
+          "finish": "factory",
+          "pose": "reload",
+          "light": "noon",
+          "bytes": 388027,
+          "state": {
+            "pose": "reload",
+            "light": "noon",
+            "ads": 0,
+            "reloading": true,
+            "sun": 3.1
+          }
+        },
+        {
+          "file": "reload-factory-overcast.png",
+          "finish": "factory",
+          "pose": "reload",
+          "light": "overcast",
+          "bytes": 346932,
+          "state": {
+            "pose": "reload",
+            "light": "overcast",
+            "ads": 0,
+            "reloading": true,
+            "sun": 0.65
+          }
+        },
+        {
+          "file": "reload-factory-dusk.png",
+          "finish": "factory",
+          "pose": "reload",
+          "light": "dusk",
+          "bytes": 316710,
+          "state": {
+            "pose": "reload",
+            "light": "dusk",
+            "ads": 0,
+            "reloading": true,
+            "sun": 1.55
+          }
+        },
+        {
+          "file": "reload-factory-night.png",
+          "finish": "factory",
+          "pose": "reload",
+          "light": "night",
+          "bytes": 192488,
+          "state": {
+            "pose": "reload",
+            "light": "night",
+            "ads": 0,
+            "reloading": true,
+            "sun": 0.35
+          }
+        },
+        {
+          "file": "hip-m81-noon.png",
+          "finish": "m81",
+          "pose": "hip",
+          "light": "noon",
+          "bytes": 399732,
+          "state": {
+            "pose": "hip",
+            "light": "noon",
+            "ads": 0,
+            "reloading": false,
+            "sun": 3.1
+          }
+        },
+        {
+          "file": "hip-m81-overcast.png",
+          "finish": "m81",
+          "pose": "hip",
+          "light": "overcast",
+          "bytes": 366681,
+          "state": {
+            "pose": "hip",
+            "light": "overcast",
+            "ads": 0,
+            "reloading": false,
+            "sun": 0.65
+          }
+        },
+        {
+          "file": "hip-m81-dusk.png",
+          "finish": "m81",
+          "pose": "hip",
+          "light": "dusk",
+          "bytes": 319380,
+          "state": {
+            "pose": "hip",
+            "light": "dusk",
+            "ads": 0,
+            "reloading": false,
+            "sun": 1.55
+          }
+        },
+        {
+          "file": "hip-m81-night.png",
+          "finish": "m81",
+          "pose": "hip",
+          "light": "night",
+          "bytes": 195167,
+          "state": {
+            "pose": "hip",
+            "light": "night",
+            "ads": 0,
+            "reloading": false,
+            "sun": 0.35
+          }
+        },
+        {
+          "file": "aimed-m81-noon.png",
+          "finish": "m81",
+          "pose": "aimed",
+          "light": "noon",
+          "bytes": 373150,
+          "state": {
+            "pose": "aimed",
+            "light": "noon",
+            "ads": 1,
+            "reloading": false,
+            "sun": 3.1
+          }
+        },
+        {
+          "file": "aimed-m81-overcast.png",
+          "finish": "m81",
+          "pose": "aimed",
+          "light": "overcast",
+          "bytes": 332350,
+          "state": {
+            "pose": "aimed",
+            "light": "overcast",
+            "ads": 1,
+            "reloading": false,
+            "sun": 0.65
+          }
+        },
+        {
+          "file": "aimed-m81-dusk.png",
+          "finish": "m81",
+          "pose": "aimed",
+          "light": "dusk",
+          "bytes": 301870,
+          "state": {
+            "pose": "aimed",
+            "light": "dusk",
+            "ads": 1,
+            "reloading": false,
+            "sun": 1.55
+          }
+        },
+        {
+          "file": "aimed-m81-night.png",
+          "finish": "m81",
+          "pose": "aimed",
+          "light": "night",
+          "bytes": 176644,
+          "state": {
+            "pose": "aimed",
+            "light": "night",
+            "ads": 1,
+            "reloading": false,
+            "sun": 0.35
+          }
+        },
+        {
+          "file": "reload-m81-noon.png",
+          "finish": "m81",
+          "pose": "reload",
+          "light": "noon",
+          "bytes": 413644,
+          "state": {
+            "pose": "reload",
+            "light": "noon",
+            "ads": 0,
+            "reloading": true,
+            "sun": 3.1
+          }
+        },
+        {
+          "file": "reload-m81-overcast.png",
+          "finish": "m81",
+          "pose": "reload",
+          "light": "overcast",
+          "bytes": 374626,
+          "state": {
+            "pose": "reload",
+            "light": "overcast",
+            "ads": 0,
+            "reloading": true,
+            "sun": 0.65
+          }
+        },
+        {
+          "file": "reload-m81-dusk.png",
+          "finish": "m81",
+          "pose": "reload",
+          "light": "dusk",
+          "bytes": 330927,
+          "state": {
+            "pose": "reload",
+            "light": "dusk",
+            "ads": 0,
+            "reloading": true,
+            "sun": 1.55
+          }
+        },
+        {
+          "file": "reload-m81-night.png",
+          "finish": "m81",
+          "pose": "reload",
+          "light": "night",
+          "bytes": 204364,
+          "state": {
+            "pose": "reload",
+            "light": "night",
+            "ads": 0,
+            "reloading": true,
+            "sun": 0.35
+          }
+        },
+        {
+          "file": "rack-factory-noon.png",
+          "finish": "factory",
+          "pose": "rack",
+          "light": "noon",
+          "bytes": 64505
+        },
+        {
+          "file": "rack-m81-noon.png",
+          "finish": "m81",
+          "pose": "rack",
+          "light": "noon",
+          "bytes": 89303
+        },
+        {
+          "file": "rack-m81-fitted.png",
+          "finish": "m81",
+          "pose": "rack-fitted",
+          "light": "noon",
+          "fittedMods": [
+            "suppressor",
+            "optic:rmr",
+            "laserLight"
+          ],
+          "bytes": 107082
+        },
+        {
+          "file": "fitted-eye-noon.png",
+          "finish": "m81",
+          "pose": "reload74-fitted",
+          "light": "noon",
+          "fittedMods": [
+            "suppressor",
+            "optic:rmr",
+            "laserLight"
+          ],
+          "bytes": 408560
+        }
+      ]
+    },
+    "aa12": {
+      "id": "aa12",
+      "slug": "breacher",
+      "name": "Breacher-12",
+      "displayName": "Breacher-12 (aa12)",
+      "optic": "rmr",
+      "appliedFinish": "m81",
+      "fittedMods": [
+        "optic:rmr",
+        "laserLight"
+      ],
+      "diagnostics": {
+        "hasCamoMap": true,
+        "tiles": {
+          "held": {
+            "paintedTris": 12708,
+            "tileM": [
+              0.409,
+              0.42,
+              0.42
+            ]
+          },
+          "eye": {
+            "paintedTris": 12708,
+            "tileM": [
+              0.402,
+              0.42,
+              0.42
+            ]
+          },
+          "rack": {
+            "paintedTris": 12708,
+            "tileM": [
+              0.42,
+              0.42,
+              0.42
+            ]
+          }
+        },
+        "controls": {
+          "trigger": "controls-trigger",
+          "selector": "controls-selector",
+          "chargingHandle": "work"
+        },
+        "heatParts": {
+          "barrel": "heatParts-barrel"
+        },
+        "paintedMeshCount": 25,
+        "bareMeshCount": 3,
+        "paintedSample": [
+          "recoil-bolt",
+          "work",
+          "(unnamed)",
+          "fp-stock",
+          "controls-trigger",
+          "magazineBody",
+          "heatParts-barrel",
+          "controls-selector"
+        ],
+        "bareSample": [
+          "fp-stock",
+          "(unnamed)"
+        ]
+      },
+      "shots": [
+        {
+          "file": "hip-factory-noon.png",
+          "finish": "factory",
+          "pose": "hip",
+          "light": "noon",
+          "bytes": 370087,
+          "state": {
+            "pose": "hip",
+            "light": "noon",
+            "ads": 0,
+            "reloading": false,
+            "sun": 3.1
+          }
+        },
+        {
+          "file": "hip-factory-overcast.png",
+          "finish": "factory",
+          "pose": "hip",
+          "light": "overcast",
+          "bytes": 341268,
+          "state": {
+            "pose": "hip",
+            "light": "overcast",
+            "ads": 0,
+            "reloading": false,
+            "sun": 0.65
+          }
+        },
+        {
+          "file": "hip-factory-dusk.png",
+          "finish": "factory",
+          "pose": "hip",
+          "light": "dusk",
+          "bytes": 300826,
+          "state": {
+            "pose": "hip",
+            "light": "dusk",
+            "ads": 0,
+            "reloading": false,
+            "sun": 1.55
+          }
+        },
+        {
+          "file": "hip-factory-night.png",
+          "finish": "factory",
+          "pose": "hip",
+          "light": "night",
+          "bytes": 180771,
+          "state": {
+            "pose": "hip",
+            "light": "night",
+            "ads": 0,
+            "reloading": false,
+            "sun": 0.35
+          }
+        },
+        {
+          "file": "aimed-factory-noon.png",
+          "finish": "factory",
+          "pose": "aimed",
+          "light": "noon",
+          "bytes": 321650,
+          "state": {
+            "pose": "aimed",
+            "light": "noon",
+            "ads": 1,
+            "reloading": false,
+            "sun": 3.1
+          }
+        },
+        {
+          "file": "aimed-factory-overcast.png",
+          "finish": "factory",
+          "pose": "aimed",
+          "light": "overcast",
+          "bytes": 293017,
+          "state": {
+            "pose": "aimed",
+            "light": "overcast",
+            "ads": 1,
+            "reloading": false,
+            "sun": 0.65
+          }
+        },
+        {
+          "file": "aimed-factory-dusk.png",
+          "finish": "factory",
+          "pose": "aimed",
+          "light": "dusk",
+          "bytes": 258594,
+          "state": {
+            "pose": "aimed",
+            "light": "dusk",
+            "ads": 1,
+            "reloading": false,
+            "sun": 1.55
+          }
+        },
+        {
+          "file": "aimed-factory-night.png",
+          "finish": "factory",
+          "pose": "aimed",
+          "light": "night",
+          "bytes": 152133,
+          "state": {
+            "pose": "aimed",
+            "light": "night",
+            "ads": 1,
+            "reloading": false,
+            "sun": 0.35
+          }
+        },
+        {
+          "file": "reload-factory-noon.png",
+          "finish": "factory",
+          "pose": "reload",
+          "light": "noon",
+          "bytes": 354813,
+          "state": {
+            "pose": "reload",
+            "light": "noon",
+            "ads": 0,
+            "reloading": true,
+            "sun": 3.1
+          }
+        },
+        {
+          "file": "reload-factory-overcast.png",
+          "finish": "factory",
+          "pose": "reload",
+          "light": "overcast",
+          "bytes": 316376,
+          "state": {
+            "pose": "reload",
+            "light": "overcast",
+            "ads": 0,
+            "reloading": true,
+            "sun": 0.65
+          }
+        },
+        {
+          "file": "reload-factory-dusk.png",
+          "finish": "factory",
+          "pose": "reload",
+          "light": "dusk",
+          "bytes": 285495,
+          "state": {
+            "pose": "reload",
+            "light": "dusk",
+            "ads": 0,
+            "reloading": true,
+            "sun": 1.55
+          }
+        },
+        {
+          "file": "reload-factory-night.png",
+          "finish": "factory",
+          "pose": "reload",
+          "light": "night",
+          "bytes": 169930,
+          "state": {
+            "pose": "reload",
+            "light": "night",
+            "ads": 0,
+            "reloading": true,
+            "sun": 0.35
+          }
+        },
+        {
+          "file": "hip-m81-noon.png",
+          "finish": "m81",
+          "pose": "hip",
+          "light": "noon",
+          "bytes": 416487,
+          "state": {
+            "pose": "hip",
+            "light": "noon",
+            "ads": 0,
+            "reloading": false,
+            "sun": 3.1
+          }
+        },
+        {
+          "file": "hip-m81-overcast.png",
+          "finish": "m81",
+          "pose": "hip",
+          "light": "overcast",
+          "bytes": 390611,
+          "state": {
+            "pose": "hip",
+            "light": "overcast",
+            "ads": 0,
+            "reloading": false,
+            "sun": 0.65
+          }
+        },
+        {
+          "file": "hip-m81-dusk.png",
+          "finish": "m81",
+          "pose": "hip",
+          "light": "dusk",
+          "bytes": 338221,
+          "state": {
+            "pose": "hip",
+            "light": "dusk",
+            "ads": 0,
+            "reloading": false,
+            "sun": 1.55
+          }
+        },
+        {
+          "file": "hip-m81-night.png",
+          "finish": "m81",
+          "pose": "hip",
+          "light": "night",
+          "bytes": 200989,
+          "state": {
+            "pose": "hip",
+            "light": "night",
+            "ads": 0,
+            "reloading": false,
+            "sun": 0.35
+          }
+        },
+        {
+          "file": "aimed-m81-noon.png",
+          "finish": "m81",
+          "pose": "aimed",
+          "light": "noon",
+          "bytes": 327622,
+          "state": {
+            "pose": "aimed",
+            "light": "noon",
+            "ads": 1,
+            "reloading": false,
+            "sun": 3.1
+          }
+        },
+        {
+          "file": "aimed-m81-overcast.png",
+          "finish": "m81",
+          "pose": "aimed",
+          "light": "overcast",
+          "bytes": 301060,
+          "state": {
+            "pose": "aimed",
+            "light": "overcast",
+            "ads": 1,
+            "reloading": false,
+            "sun": 0.65
+          }
+        },
+        {
+          "file": "aimed-m81-dusk.png",
+          "finish": "m81",
+          "pose": "aimed",
+          "light": "dusk",
+          "bytes": 270277,
+          "state": {
+            "pose": "aimed",
+            "light": "dusk",
+            "ads": 1,
+            "reloading": false,
+            "sun": 1.55
+          }
+        },
+        {
+          "file": "aimed-m81-night.png",
+          "finish": "m81",
+          "pose": "aimed",
+          "light": "night",
+          "bytes": 156544,
+          "state": {
+            "pose": "aimed",
+            "light": "night",
+            "ads": 1,
+            "reloading": false,
+            "sun": 0.35
+          }
+        },
+        {
+          "file": "reload-m81-noon.png",
+          "finish": "m81",
+          "pose": "reload",
+          "light": "noon",
+          "bytes": 417432,
+          "state": {
+            "pose": "reload",
+            "light": "noon",
+            "ads": 0,
+            "reloading": true,
+            "sun": 3.1
+          }
+        },
+        {
+          "file": "reload-m81-overcast.png",
+          "finish": "m81",
+          "pose": "reload",
+          "light": "overcast",
+          "bytes": 384520,
+          "state": {
+            "pose": "reload",
+            "light": "overcast",
+            "ads": 0,
+            "reloading": true,
+            "sun": 0.65
+          }
+        },
+        {
+          "file": "reload-m81-dusk.png",
+          "finish": "m81",
+          "pose": "reload",
+          "light": "dusk",
+          "bytes": 341836,
+          "state": {
+            "pose": "reload",
+            "light": "dusk",
+            "ads": 0,
+            "reloading": true,
+            "sun": 1.55
+          }
+        },
+        {
+          "file": "reload-m81-night.png",
+          "finish": "m81",
+          "pose": "reload",
+          "light": "night",
+          "bytes": 200128,
+          "state": {
+            "pose": "reload",
+            "light": "night",
+            "ads": 0,
+            "reloading": true,
+            "sun": 0.35
+          }
+        },
+        {
+          "file": "rack-factory-noon.png",
+          "finish": "factory",
+          "pose": "rack",
+          "light": "noon",
+          "bytes": 121253
+        },
+        {
+          "file": "rack-m81-noon.png",
+          "finish": "m81",
+          "pose": "rack",
+          "light": "noon",
+          "bytes": 170478
+        },
+        {
+          "file": "rack-m81-fitted.png",
+          "finish": "m81",
+          "pose": "rack-fitted",
+          "light": "noon",
+          "fittedMods": [
+            "optic:rmr",
+            "laserLight"
+          ],
+          "bytes": 170819
+        },
+        {
+          "file": "fitted-eye-noon.png",
+          "finish": "m81",
+          "pose": "hip-fitted",
+          "light": "noon",
+          "fittedMods": [
+            "optic:rmr",
+            "laserLight"
+          ],
+          "bytes": 402881
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "factory": {
+    "empties": false,
+    "speedloader": false,
+    "palm-rounds": false
+  },
+  "camo": {
+    "empties": false,
+    "speedloader": false,
+    "palm-rounds": false
+  },
+  "restored": {
+    "empties": false,
+    "speedloader": false,
+    "palm-rounds": false
+  }
+}

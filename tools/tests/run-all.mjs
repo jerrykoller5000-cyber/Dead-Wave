@@ -194,14 +194,14 @@ async function runOne(name) {
       await page.evaluate(fs.readFileSync(path.join(HERE, 'lib.js'), 'utf8'));
       // t37 walks seven burials and each one waits out the insertion, so a 75s cap
       // cut it off mid-test. Three minutes still stops a probe that would otherwise sit.
-      const CHECK_MS = 180000;
+      const CHECK_MS = Number(process.env.DW_CHECK_MS) || 180000;   // CB-243: DW_CHECK_MS raises it on a slow box (the cloud)
       let timer;
       const running = page.evaluate(code, CHECK_MS + 20000).finally(() => clearTimeout(timer));
       running.catch(() => {});
       const out = await Promise.race([
         running,
         new Promise((_, reject) => {
-          timer = setTimeout(() => reject(new Error('time limit: check still running after 180s')), CHECK_MS);
+          timer = setTimeout(() => reject(new Error('time limit: check still running after ' + (CHECK_MS / 1000) + 's')), CHECK_MS);
         })
       ]);
       const text = typeof out === 'string' ? out : JSON.stringify(out);
@@ -223,6 +223,8 @@ async function runOne(name) {
   if ((fail || note) && errs.length && argv.includes('--all-fails')) for (const e of errs) console.log('           page error: ' + e.slice(0, 220));
   // A check's INFO lines (a benchmark's numbers, say) are shown with --all-fails whether it passed or not.
   if (argv.includes('--all-fails')) for (const l of lines.filter((l) => l.startsWith('INFO'))) console.log(`           ${l}`);
+  // CB-243: and its FAIL lines as they happen, so a long run that is stopped half way still says why each red was red
+  if (argv.includes('--all-fails')) for (const l of lines.filter((l) => /^FAIL\b/.test(l))) console.log(`           ${l.slice(0, 400)}`);
   const tag = note ? 'ERROR' : (fail ? 'FAIL ' : (info ? 'info ' : 'ok   '));
   const detail = note ? '  — ' + note
     : (info ? '  — ' + (raw.trim() ? raw.trim().split('\n')[0].slice(0, 90) : 'returned nothing') : '');

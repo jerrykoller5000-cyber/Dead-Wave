@@ -13,14 +13,17 @@ const FREE = process.env.FREE ? JSON.parse(process.env.FREE) : null;   // which 
 const L = M.handLayout(1, 0, 0), C = [0, L.gripY, 0.008];   // the grip channel: the move's and the turn's centre
 const pack = (p) => [...p.f.flatMap((q) => q.slice(0, 3)), ...p.t.slice(0, 6), 0, 0, 0, 0, 0, ...p.f.map((q) => q[3] || 0), 0];   // + a turn about x (27)   // + dx dy dz (m), turns about y and z, the spreads
 const unpack = (x) => ({ f: [0, 1, 2, 3].map((i) => [x[i * 3], x[i * 3 + 1], x[i * 3 + 2], x[23 + i]]), t: x.slice(12, 18) });
-const LIM = [...[0, 1, 2, 3].flatMap(() => [J.mcp, J.pip, J.dip]), [-0.2, 1.6], [-1.6, 1.4], [-0.2, 1.4], J.cmcRoll, J.tMcp, J.cmcAbd, [-MV, MV], [-MV, MV], [-MV, MV], [-0.3, 0.3], [-0.3, 0.3], J.spread, J.spread, J.spread, J.spread, [-0.3, 0.3]];
+const LIM = [...[0, 1, 2, 3].flatMap(() => [J.mcp, J.pip, J.dip]), [-0.2, 1.6], [-1.6, 1.4], [-0.2, 1.4], J.cmcRoll, J.tMcp, J.cmcAbd, [-MV, MV], [-MV, MV], [-MV, MV], [-0.3, 0.3], [-0.3, 0.3], J.spread, J.spread, J.spread, J.spread, [-(+process.env.XT || 0.3), +process.env.XT || 0.3]];   // XT (CD-1 pass 2): a wider turn about x where the twist's limit holds it
 const clampX = (x) => x.map((v, k) => Math.max(LIM[k][0], Math.min(LIM[k][1], v)));
 const x0 = clampX(pack(start));
-if (process.env.START) { const S = JSON.parse(process.env.START); x0[18] = S.move[0] / 1000; x0[19] = S.move[1] / 1000; x0[20] = S.move[2] / 1000; x0[21] = S.turn[0] || 0; x0[22] = S.turn[1] || 0; x0[27] = S.turn[2] || 0; }
+if (process.env.START) { const S = JSON.parse(process.env.START); x0[18] = S.move[0] / 1000; x0[19] = S.move[1] / 1000; x0[20] = S.move[2] / 1000; x0[21] = S.turn[0] || 0; x0[22] = S.turn[1] || 0; x0[27] = process.env.NOX ? 0 : (S.turn[2] || 0); }
 const m0 = x0.slice(18, 23).concat([x0[27]]);
+// CD-1 pass 2: KOGRID, a second field (keep-outs: a trigger guard's opening) for every bone but the index's; TGT
+// '[x,y,z]' (the field's space, metres), the trigger's face for the index's pad (bone 3), pulled with weight TGW
+const KG = process.env.KOGRID ? loadGrid(process.env.KOGRID) : null, TG = process.env.TGT ? JSON.parse(process.env.TGT) : null, TGW = +process.env.TGW || 0.5;
 const NAMES = ['palm', 'i1', 'i2', 'i3', 'm1', 'm2', 'm3', 'r1', 'r2', 'r3', 'l1', 'l2', 'l3', 't0', 't1', 't2'];
 function cost(x, full) {
-  const pose = unpack(x), P = M.handPosed(pose, GL), byB = new Float64Array(16).fill(1);
+  const pose = unpack(x), P = M.handPosed(pose, GL), byB = new Float64Array(16).fill(1), byK = new Float64Array(16).fill(1); let tgd = 1;
   const [dx, dy, dz, a, b2] = x.slice(18), ca = Math.cos(a), sa = Math.sin(a), cb = Math.cos(b2), sb = Math.sin(b2), c3 = Math.cos(x[27]), s3 = Math.sin(x[27]);
   for (let v = 0; v < P.n; v++) {
     // the hand moved by (dx, dy, dz) and turned (a about its length, b2 about the palm's normal) at the grip channel = the gun the other way
@@ -29,31 +32,35 @@ function cost(x, full) {
     const rx = cb * qx + sb * py, ry0 = -sb * qx + cb * py;
     const ry = c3 * ry0 + s3 * qz, rz = -s3 * ry0 + c3 * qz;
     const d = G.d(rx + C[0], ry + C[1], rz + C[2]); if (d < byB[P.b0[v]]) byB[P.b0[v]] = d;
+    if (KG && (P.b0[v] < 1 || P.b0[v] > 3)) { const k = KG.d(rx + C[0], ry + C[1], rz + C[2]); if (k < byK[P.b0[v]]) byK[P.b0[v]] = k; }
+    if (TG && P.b0[v] === 3) { const e = Math.hypot(rx + C[0] - TG[0], ry + C[1] - TG[1], rz + C[2] - TG[2]); if (e < tgd) tgd = e; }
   }
   const mm = (d) => d * 1000;
   let gun = 0, gap = 0;
   for (let b = 0; b < 16; b++) { const d = mm(byB[b]); if (d < -0.2) gun += (d + 0.2) ** 2; }
   for (const b of TOUCH) gap += Math.max(0, mm(byB[b]) - 0.3) ** 2;
+  let ko = 0; if (KG) for (let b = 0; b < 16; b++) { const d = mm(byK[b]); if (d < -0.2) ko += (d + 0.2) ** 2; }
+  const tgt = TG ? TGW * Math.max(0, mm(tgd) - 0.5) ** 2 : 0;
   const R = M.handClipReport(pose, 0.0005, true, GL);
   let self = 0; for (const k in R.nearBone) { const d = R.nearBone[k]; if (d < -0.35) self += (d + 0.35) ** 2; }
   let coup = 0; for (let i = 0; i < 4; i++) { const b = x[i * 3 + 1], c = x[i * 3 + 2]; if (TOUCH.includes(1 + i * 3 + 1)) coup += Math.max(0, 0.5 * b - c) ** 2 + Math.max(0, c - 0.95 * b) ** 2; }
   let dev = 0; for (let k = 0; k < 18; k++) dev += (x[k] - x0[k]) ** 2; for (let k = 23; k < 27; k++) dev += 2 * (x[k] - x0[k]) ** 2;
   const move = (x[18] ** 2 + x[19] ** 2 + x[20] ** 2) * 1e6 * 0.05 + (x[21] ** 2 + x[22] ** 2 + x[27] ** 2) * 20 + ((x[18] - m0[0]) ** 2 + (x[19] - m0[1]) ** 2 + (x[20] - m0[2]) ** 2) * 1e6 * 0.05;
-  const c = gun * 10 + gap + self * 6 + coup * 30 + dev * 0.15 + move;
-  return full ? { c, gun, gap, self, coup, dev, move, byB: Array.from(byB, (d) => +mm(d).toFixed(1)), R } : { c };
+  const c = ko * 10 + tgt + gun * 10 + gap + self * 6 + coup * 30 + dev * 0.15 + move;
+  return full ? { c, ko: +ko.toFixed(2), tgd: +mm(tgd).toFixed(1), gun, gap, self, coup, dev, move, byB: Array.from(byB, (d) => +mm(d).toFixed(1)), R } : { c };
 }
 let x = x0.slice(), best = cost(x, true);
 if (process.env.SCAN) {   // the place first: a grid over the move and the turns with the start pose
   let bs = best;
   const SR = process.env.SCANR ? JSON.parse(process.env.SCANR) : { x: [-10, -6, -3, 0, 3], z: [-2, 0, 2, 4], y: [-3, 0, 3] };
-  for (const dx of SR.x) for (const dz of SR.z) for (const dy of SR.y) for (const a of [-0.2, -0.1, 0, 0.1, 0.2]) for (const b2 of [-0.25, -0.12, 0, 0.12]) for (const a3 of [-0.2, 0, 0.2]) {
+  for (const dx of SR.x) for (const dz of SR.z) for (const dy of SR.y) for (const a of [-0.2, -0.1, 0, 0.1, 0.2]) for (const b2 of [-0.25, -0.12, 0, 0.12]) for (const a3 of (process.env.NOX ? [0] : process.env.XT ? [-0.5, -0.35, -0.2, 0, 0.2, 0.35, 0.5].filter((v) => Math.abs(v) <= +process.env.XT) : [-0.2, 0, 0.2])) {   // NOX (CD-1 pass 2): no turn about the hand's x: the game's twist (twistToward) sets that roll from the elbow
     const q = x0.slice(); q[18] = dx / 1000; q[19] = dy / 1000; q[20] = dz / 1000; q[21] = a; q[22] = b2; q[27] = a3; const qc = clampX(q); const e = cost(qc); if (e.c < bs.c) { bs = e; x = qc; }
   }
   best = cost(x, true);
 }
-const show = (tag, e) => console.log(tag, e.c.toFixed(2), 'gun', e.gun.toFixed(2), 'gap', e.gap.toFixed(2), 'self', e.self.toFixed(2), 'move', JSON.stringify(x.slice(18, 21).map((v) => +(v * 1000).toFixed(1))), 'turn', x[21].toFixed(3), x[22].toFixed(3), x[27].toFixed(3), '|', e.byB.map((d, k) => NAMES[k] + ' ' + d).join(' '));
+const show = (tag, e) => console.log(tag, e.c.toFixed(2), 'ko', e.ko, 'tgd', e.tgd, 'gun', e.gun.toFixed(2), 'gap', e.gap.toFixed(2), 'self', e.self.toFixed(2), 'move', JSON.stringify(x.slice(18, 21).map((v) => +(v * 1000).toFixed(1))), 'turn', x[21].toFixed(3), x[22].toFixed(3), x[27].toFixed(3), '|', e.byB.map((d, k) => NAMES[k] + ' ' + d).join(' '));
 show('start', best);
-const free = (k) => !FREE || FREE.includes(k);
+const free = (k) => (!process.env.NOX || k !== 27) && (!FREE || FREE.includes(k));
 const pairs = [];
 for (let i = 0; i < 4; i++) pairs.push([i * 3, i * 3 + 1], [i * 3 + 1, i * 3 + 2], [i * 3, i * 3 + 2]);
 pairs.push([12, 17], [16, 17], [12, 16], [14, 16], [13, 17], [12, 13], [15, 17], [18, 19], [18, 20], [19, 20], [18, 22], [20, 21], [23, 24], [24, 25], [25, 26]);
@@ -73,4 +80,4 @@ for (const step of [0.1, 0.05, 0.025, 0.0125]) {
 }
 const pose = unpack(x);
 console.log('SELF', best.R.max, JSON.stringify(best.R.pairs));
-console.log('RESULT ' + JSON.stringify({ pose: { f: pose.f.map((q) => q.map((v) => +v.toFixed(3))), t: pose.t.map((v) => +v.toFixed(3)) }, move: x.slice(18, 21).map((v) => +(v * 1000).toFixed(2)), turn: [+x[21].toFixed(4), +x[22].toFixed(4), +x[27].toFixed(4)], byB: best.byB, self: best.R.max }));
+console.log('RESULT ' + JSON.stringify({ pose: { f: pose.f.map((q) => q.map((v) => +v.toFixed(3))), t: pose.t.map((v) => +v.toFixed(3)) }, move: x.slice(18, 21).map((v) => +(v * 1000).toFixed(2)), turn: [+x[21].toFixed(4), +x[22].toFixed(4), +x[27].toFixed(4)], byB: best.byB, self: best.R.max, ko: best.ko, tgd: best.tgd }));

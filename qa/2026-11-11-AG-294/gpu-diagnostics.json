@@ -1,0 +1,1251 @@
+{
+  "gpuRenderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "guns": {
+    "shotgun": {
+      "sheet": "shotgun.jpg",
+      "poseDeltasM81Noon": {
+        "hip_vs_aimed": 39.94,
+        "hip_vs_reload": 4.91,
+        "aimed_vs_reload": 40.09
+      },
+      "camoTilesM": {
+        "held": {
+          "paintedTris": 3276,
+          "tileM": [
+            0.42,
+            0.42,
+            0.42
+          ]
+        },
+        "eye": {
+          "paintedTris": 3276,
+          "tileM": [
+            0.42,
+            0.42,
+            0.42
+          ]
+        },
+        "rack": {
+          "paintedTris": 3276,
+          "tileM": [
+            0.42,
+            0.42,
+            0.42
+          ]
+        }
+      },
+      "paintedMeshCount": 3,
+      "bareMeshCount": 13,
+      "paintedSample": [
+        "shotgun receiver",
+        "controls-pump",
+        "(unnamed)"
+      ],
+      "bareSample": [
+        "shotgun-bolt",
+        "shotgun lifter",
+        "shotgun-slide-lock",
+        "shotgun trigger",
+        "fp-stock",
+        "controls-pump",
+        "heatParts-barrel",
+        "(unnamed)",
+        "shotgun reload shell",
+        "controls-safety"
+      ],
+      "tiles": [
+        {
+          "mean_luma": 83.06,
+          "stddev_luma": 45.43,
+          "specular_burn_pct": 0.002,
+          "deep_dark_pct": 0.18,
+          "file": "hip-factory-noon.png"
+        },
+        {
+          "mean_luma": 85.83,
+          "stddev_luma": 50.67,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 0.98,
+          "file": "hip-factory-overcast.png"
+        },
+        {
+          "mean_luma": 52.9,
+          "stddev_luma": 32.08,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 1.19,
+          "file": "hip-factory-dusk.png"
+        },
+        {
+          "mean_luma": 12.46,
+          "stddev_luma": 8.78,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 39.08,
+          "file": "hip-factory-night.png"
+        },
+        {
+          "mean_luma": 93.92,
+          "stddev_luma": 40.27,
+          "specular_burn_pct": 0.347,
+          "deep_dark_pct": 0.05,
+          "file": "aimed-factory-noon.png"
+        },
+        {
+          "mean_luma": 94.65,
+          "stddev_luma": 47.18,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 2.01,
+          "file": "aimed-factory-overcast.png"
+        },
+        {
+          "mean_luma": 57.94,
+          "stddev_luma": 27.94,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 2.02,
+          "file": "aimed-factory-dusk.png"
+        },
+        {
+          "mean_luma": 13.96,
+          "stddev_luma": 8.82,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 28.99,
+          "file": "aimed-factory-night.png"
+        },
+        {
+          "mean_luma": 95.39,
+          "stddev_luma": 44.26,
+          "specular_burn_pct": 0.003,
+          "deep_dark_pct": 1.14,
+          "file": "reload-factory-noon.png"
+        },
+        {
+          "mean_luma": 97.55,
+          "stddev_luma": 48.53,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 3.16,
+          "file": "reload-factory-overcast.png"
+        },
+        {
+          "mean_luma": 61.26,
+          "stddev_luma": 31.36,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 3.39,
+          "file": "reload-factory-dusk.png"
+        },
+        {
+          "mean_luma": 14.82,
+          "stddev_luma": 8.57,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 29.02,
+          "file": "reload-factory-night.png"
+        },
+        {
+          "mean_luma": 84.43,
+          "stddev_luma": 44.44,
+          "specular_burn_pct": 0.003,
+          "deep_dark_pct": 0.19,
+          "file": "hip-m81-noon.png"
+        },
+        {
+          "mean_luma": 87.26,
+          "stddev_luma": 49.61,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 0.98,
+          "file": "hip-m81-overcast.png"
+        },
+        {
+          "mean_luma": 54.04,
+          "stddev_luma": 31.33,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 1.22,
+          "file": "hip-m81-dusk.png"
+        },
+        {
+          "mean_luma": 12.66,
+          "stddev_luma": 8.58,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 38.1,
+          "file": "hip-m81-night.png"
+        },
+        {
+          "mean_luma": 96.94,
+          "stddev_luma": 35.7,
+          "specular_burn_pct": 0.359,
+          "deep_dark_pct": 0.05,
+          "file": "aimed-m81-noon.png"
+        },
+        {
+          "mean_luma": 98.69,
+          "stddev_luma": 42.88,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 1.86,
+          "file": "aimed-m81-overcast.png"
+        },
+        {
+          "mean_luma": 60.63,
+          "stddev_luma": 24.55,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 1.94,
+          "file": "aimed-m81-dusk.png"
+        },
+        {
+          "mean_luma": 14.4,
+          "stddev_luma": 8.11,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 28.47,
+          "file": "aimed-m81-night.png"
+        },
+        {
+          "mean_luma": 96.15,
+          "stddev_luma": 43.48,
+          "specular_burn_pct": 0.001,
+          "deep_dark_pct": 1.19,
+          "file": "reload-m81-noon.png"
+        },
+        {
+          "mean_luma": 98.65,
+          "stddev_luma": 47.47,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 3.08,
+          "file": "reload-m81-overcast.png"
+        },
+        {
+          "mean_luma": 61.88,
+          "stddev_luma": 30.78,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 3.39,
+          "file": "reload-m81-dusk.png"
+        },
+        {
+          "mean_luma": 14.92,
+          "stddev_luma": 8.4,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 27.94,
+          "file": "reload-m81-night.png"
+        },
+        {
+          "mean_luma": 54.54,
+          "stddev_luma": 4.52,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 0.0,
+          "file": "rack-factory-noon.png"
+        },
+        {
+          "mean_luma": 55.35,
+          "stddev_luma": 7.44,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 0.0,
+          "file": "rack-m81-noon.png"
+        },
+        {
+          "mean_luma": 59.95,
+          "stddev_luma": 11.29,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 0.0,
+          "file": "rack-m81-fitted.png"
+        },
+        {
+          "mean_luma": 93.11,
+          "stddev_luma": 41.68,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 0.12,
+          "file": "fitted-eye-noon.png"
+        }
+      ]
+    },
+    "ak": {
+      "sheet": "ak.jpg",
+      "poseDeltasM81Noon": {
+        "hip_vs_aimed": 44.33,
+        "hip_vs_reload": 6.92,
+        "aimed_vs_reload": 46.83
+      },
+      "camoTilesM": {
+        "held": {
+          "paintedTris": 1772,
+          "tileM": [
+            0.42,
+            0.42,
+            0.42
+          ]
+        },
+        "eye": {
+          "paintedTris": 1772,
+          "tileM": [
+            0.42,
+            0.42,
+            0.42
+          ]
+        },
+        "rack": {
+          "paintedTris": 1772,
+          "tileM": [
+            0.42,
+            0.42,
+            0.42
+          ]
+        }
+      },
+      "paintedMeshCount": 2,
+      "bareMeshCount": 11,
+      "paintedSample": [
+        "fp-stock",
+        "(unnamed)"
+      ],
+      "bareSample": [
+        "recoil-bolt",
+        "work",
+        "controls-trigger",
+        "fp-stock",
+        "(unnamed)",
+        "controls-selector",
+        "controls-magRelease",
+        "heatParts-barrel"
+      ],
+      "tiles": [
+        {
+          "mean_luma": 82.96,
+          "stddev_luma": 43.47,
+          "specular_burn_pct": 0.002,
+          "deep_dark_pct": 0.56,
+          "file": "hip-factory-noon.png"
+        },
+        {
+          "mean_luma": 84.87,
+          "stddev_luma": 49.5,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 1.9,
+          "file": "hip-factory-overcast.png"
+        },
+        {
+          "mean_luma": 52.96,
+          "stddev_luma": 30.74,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 2.22,
+          "file": "hip-factory-dusk.png"
+        },
+        {
+          "mean_luma": 12.37,
+          "stddev_luma": 8.6,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 38.46,
+          "file": "hip-factory-night.png"
+        },
+        {
+          "mean_luma": 106.2,
+          "stddev_luma": 31.83,
+          "specular_burn_pct": 0.341,
+          "deep_dark_pct": 0.0,
+          "file": "aimed-factory-noon.png"
+        },
+        {
+          "mean_luma": 108.64,
+          "stddev_luma": 37.26,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 0.13,
+          "file": "aimed-factory-overcast.png"
+        },
+        {
+          "mean_luma": 66.56,
+          "stddev_luma": 21.18,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 0.3,
+          "file": "aimed-factory-dusk.png"
+        },
+        {
+          "mean_luma": 16.74,
+          "stddev_luma": 7.8,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 19.34,
+          "file": "aimed-factory-night.png"
+        },
+        {
+          "mean_luma": 86.35,
+          "stddev_luma": 44.25,
+          "specular_burn_pct": 0.015,
+          "deep_dark_pct": 0.43,
+          "file": "reload-factory-noon.png"
+        },
+        {
+          "mean_luma": 84.25,
+          "stddev_luma": 49.64,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 1.91,
+          "file": "reload-factory-overcast.png"
+        },
+        {
+          "mean_luma": 54.55,
+          "stddev_luma": 31.65,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 1.9,
+          "file": "reload-factory-dusk.png"
+        },
+        {
+          "mean_luma": 12.65,
+          "stddev_luma": 8.84,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 43.71,
+          "file": "reload-factory-night.png"
+        },
+        {
+          "mean_luma": 84.39,
+          "stddev_luma": 42.52,
+          "specular_burn_pct": 0.003,
+          "deep_dark_pct": 0.55,
+          "file": "hip-m81-noon.png"
+        },
+        {
+          "mean_luma": 85.9,
+          "stddev_luma": 48.46,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 1.83,
+          "file": "hip-m81-overcast.png"
+        },
+        {
+          "mean_luma": 53.99,
+          "stddev_luma": 29.96,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 2.32,
+          "file": "hip-m81-dusk.png"
+        },
+        {
+          "mean_luma": 12.55,
+          "stddev_luma": 8.46,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 38.36,
+          "file": "hip-m81-night.png"
+        },
+        {
+          "mean_luma": 105.27,
+          "stddev_luma": 31.14,
+          "specular_burn_pct": 0.342,
+          "deep_dark_pct": 0.0,
+          "file": "aimed-m81-noon.png"
+        },
+        {
+          "mean_luma": 108.71,
+          "stddev_luma": 37.04,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 0.23,
+          "file": "aimed-m81-overcast.png"
+        },
+        {
+          "mean_luma": 66.52,
+          "stddev_luma": 20.97,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 0.39,
+          "file": "aimed-m81-dusk.png"
+        },
+        {
+          "mean_luma": 16.39,
+          "stddev_luma": 7.52,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 19.29,
+          "file": "aimed-m81-night.png"
+        },
+        {
+          "mean_luma": 88.34,
+          "stddev_luma": 43.08,
+          "specular_burn_pct": 0.006,
+          "deep_dark_pct": 0.45,
+          "file": "reload-m81-noon.png"
+        },
+        {
+          "mean_luma": 85.68,
+          "stddev_luma": 48.4,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 1.92,
+          "file": "reload-m81-overcast.png"
+        },
+        {
+          "mean_luma": 55.86,
+          "stddev_luma": 30.75,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 1.96,
+          "file": "reload-m81-dusk.png"
+        },
+        {
+          "mean_luma": 12.88,
+          "stddev_luma": 8.65,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 41.21,
+          "file": "reload-m81-night.png"
+        },
+        {
+          "mean_luma": 55.98,
+          "stddev_luma": 8.46,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 0.0,
+          "file": "rack-factory-noon.png"
+        },
+        {
+          "mean_luma": 56.53,
+          "stddev_luma": 9.64,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 0.0,
+          "file": "rack-m81-noon.png"
+        },
+        {
+          "mean_luma": 57.47,
+          "stddev_luma": 11.42,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 0.0,
+          "file": "rack-m81-fitted.png"
+        },
+        {
+          "mean_luma": 89.28,
+          "stddev_luma": 40.78,
+          "specular_burn_pct": 0.002,
+          "deep_dark_pct": 0.42,
+          "file": "fitted-eye-noon.png"
+        }
+      ]
+    },
+    "revolver": {
+      "sheet": "revolver.jpg",
+      "poseDeltasM81Noon": {
+        "hip_vs_aimed": 37.12,
+        "hip_vs_reload": 11.41,
+        "aimed_vs_reload": 39.56
+      },
+      "camoTilesM": {
+        "held": {
+          "paintedTris": 880,
+          "tileM": [
+            0.42,
+            0.42,
+            0.42
+          ]
+        },
+        "eye": {
+          "paintedTris": 880,
+          "tileM": [
+            0.42,
+            0.42,
+            0.42
+          ]
+        },
+        "rack": {
+          "paintedTris": 880,
+          "tileM": [
+            0.42,
+            0.42,
+            0.42
+          ]
+        }
+      },
+      "paintedMeshCount": 1,
+      "bareMeshCount": 16,
+      "paintedSample": [
+        "(unnamed)"
+      ],
+      "bareSample": [
+        "revolver-crane",
+        "heatParts-barrel",
+        "revolver-trigger",
+        "(unnamed)",
+        "speedloader",
+        "loader-round-0",
+        "loader-round-1",
+        "loader-round-2",
+        "loader-round-3",
+        "loader-round-4",
+        "loader-round-5",
+        "controls-hammer"
+      ],
+      "tiles": [
+        {
+          "mean_luma": 88.4,
+          "stddev_luma": 38.87,
+          "specular_burn_pct": 0.056,
+          "deep_dark_pct": 0.19,
+          "file": "hip-factory-noon.png"
+        },
+        {
+          "mean_luma": 87.93,
+          "stddev_luma": 46.35,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 1.19,
+          "file": "hip-factory-overcast.png"
+        },
+        {
+          "mean_luma": 55.57,
+          "stddev_luma": 27.56,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 0.9,
+          "file": "hip-factory-dusk.png"
+        },
+        {
+          "mean_luma": 13.43,
+          "stddev_luma": 8.0,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 32.16,
+          "file": "hip-factory-night.png"
+        },
+        {
+          "mean_luma": 96.42,
+          "stddev_luma": 34.69,
+          "specular_burn_pct": 0.005,
+          "deep_dark_pct": 0.07,
+          "file": "aimed-factory-noon.png"
+        },
+        {
+          "mean_luma": 89.01,
+          "stddev_luma": 44.23,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 1.46,
+          "file": "aimed-factory-overcast.png"
+        },
+        {
+          "mean_luma": 56.87,
+          "stddev_luma": 24.31,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 1.74,
+          "file": "aimed-factory-dusk.png"
+        },
+        {
+          "mean_luma": 15.29,
+          "stddev_luma": 9.06,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 25.03,
+          "file": "aimed-factory-night.png"
+        },
+        {
+          "mean_luma": 79.99,
+          "stddev_luma": 39.8,
+          "specular_burn_pct": 0.084,
+          "deep_dark_pct": 0.22,
+          "file": "reload-factory-noon.png"
+        },
+        {
+          "mean_luma": 67.46,
+          "stddev_luma": 44.63,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 3.26,
+          "file": "reload-factory-overcast.png"
+        },
+        {
+          "mean_luma": 46.4,
+          "stddev_luma": 28.12,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 1.74,
+          "file": "reload-factory-dusk.png"
+        },
+        {
+          "mean_luma": 11.42,
+          "stddev_luma": 8.43,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 42.21,
+          "file": "reload-factory-night.png"
+        },
+        {
+          "mean_luma": 90.52,
+          "stddev_luma": 37.31,
+          "specular_burn_pct": 0.055,
+          "deep_dark_pct": 0.19,
+          "file": "hip-m81-noon.png"
+        },
+        {
+          "mean_luma": 90.04,
+          "stddev_luma": 44.52,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 1.18,
+          "file": "hip-m81-overcast.png"
+        },
+        {
+          "mean_luma": 57.09,
+          "stddev_luma": 26.21,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 0.83,
+          "file": "hip-m81-dusk.png"
+        },
+        {
+          "mean_luma": 13.83,
+          "stddev_luma": 7.77,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 29.24,
+          "file": "hip-m81-night.png"
+        },
+        {
+          "mean_luma": 98.97,
+          "stddev_luma": 30.26,
+          "specular_burn_pct": 0.005,
+          "deep_dark_pct": 0.06,
+          "file": "aimed-m81-noon.png"
+        },
+        {
+          "mean_luma": 92.2,
+          "stddev_luma": 40.84,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 1.46,
+          "file": "aimed-m81-overcast.png"
+        },
+        {
+          "mean_luma": 59.76,
+          "stddev_luma": 21.69,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 1.6,
+          "file": "aimed-m81-dusk.png"
+        },
+        {
+          "mean_luma": 15.46,
+          "stddev_luma": 7.04,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 18.85,
+          "file": "aimed-m81-night.png"
+        },
+        {
+          "mean_luma": 82.07,
+          "stddev_luma": 39.17,
+          "specular_burn_pct": 0.095,
+          "deep_dark_pct": 0.21,
+          "file": "reload-m81-noon.png"
+        },
+        {
+          "mean_luma": 69.81,
+          "stddev_luma": 43.8,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 3.27,
+          "file": "reload-m81-overcast.png"
+        },
+        {
+          "mean_luma": 47.56,
+          "stddev_luma": 27.62,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 2.01,
+          "file": "reload-m81-dusk.png"
+        },
+        {
+          "mean_luma": 11.84,
+          "stddev_luma": 8.34,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 39.65,
+          "file": "reload-m81-night.png"
+        },
+        {
+          "mean_luma": 59.99,
+          "stddev_luma": 15.09,
+          "specular_burn_pct": 0.001,
+          "deep_dark_pct": 0.0,
+          "file": "rack-factory-noon.png"
+        },
+        {
+          "mean_luma": 62.58,
+          "stddev_luma": 15.55,
+          "specular_burn_pct": 0.001,
+          "deep_dark_pct": 0.0,
+          "file": "rack-m81-noon.png"
+        },
+        {
+          "mean_luma": 63.2,
+          "stddev_luma": 15.86,
+          "specular_burn_pct": 0.001,
+          "deep_dark_pct": 0.0,
+          "file": "rack-m81-fitted.png"
+        },
+        {
+          "mean_luma": 95.17,
+          "stddev_luma": 36.87,
+          "specular_burn_pct": 0.09,
+          "deep_dark_pct": 0.12,
+          "file": "fitted-eye-noon.png"
+        }
+      ]
+    },
+    "uzi": {
+      "sheet": "wasp.jpg",
+      "poseDeltasM81Noon": {
+        "hip_vs_aimed": 47.07,
+        "hip_vs_reload": 8.51,
+        "aimed_vs_reload": 48.81
+      },
+      "camoTilesM": {
+        "held": {
+          "paintedTris": 2616,
+          "tileM": [
+            0.42,
+            0.42,
+            0.42
+          ]
+        },
+        "eye": {
+          "paintedTris": 2616,
+          "tileM": [
+            0.42,
+            0.42,
+            0.42
+          ]
+        },
+        "rack": {
+          "paintedTris": 2616,
+          "tileM": [
+            0.42,
+            0.42,
+            0.42
+          ]
+        }
+      },
+      "paintedMeshCount": 4,
+      "bareMeshCount": 13,
+      "paintedSample": [
+        "(unnamed)"
+      ],
+      "bareSample": [
+        "work",
+        "controls-safety",
+        "controls-trigger",
+        "controls-magRelease",
+        "controls-selector",
+        "(unnamed)",
+        "magazine top round",
+        "heatParts-barrel",
+        "recoil-bolt"
+      ],
+      "tiles": [
+        {
+          "mean_luma": 87.64,
+          "stddev_luma": 42.08,
+          "specular_burn_pct": 0.081,
+          "deep_dark_pct": 1.01,
+          "file": "hip-factory-noon.png"
+        },
+        {
+          "mean_luma": 82.36,
+          "stddev_luma": 49.12,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 2.94,
+          "file": "hip-factory-overcast.png"
+        },
+        {
+          "mean_luma": 53.82,
+          "stddev_luma": 30.03,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 3.08,
+          "file": "hip-factory-dusk.png"
+        },
+        {
+          "mean_luma": 13.12,
+          "stddev_luma": 8.51,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 34.72,
+          "file": "hip-factory-night.png"
+        },
+        {
+          "mean_luma": 108.48,
+          "stddev_luma": 27.2,
+          "specular_burn_pct": 0.153,
+          "deep_dark_pct": 1.42,
+          "file": "aimed-factory-noon.png"
+        },
+        {
+          "mean_luma": 104.01,
+          "stddev_luma": 41.51,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 2.03,
+          "file": "aimed-factory-overcast.png"
+        },
+        {
+          "mean_luma": 65.53,
+          "stddev_luma": 20.83,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 2.17,
+          "file": "aimed-factory-dusk.png"
+        },
+        {
+          "mean_luma": 17.45,
+          "stddev_luma": 6.32,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 10.39,
+          "file": "aimed-factory-night.png"
+        },
+        {
+          "mean_luma": 78.8,
+          "stddev_luma": 38.66,
+          "specular_burn_pct": 0.077,
+          "deep_dark_pct": 0.4,
+          "file": "reload-factory-noon.png"
+        },
+        {
+          "mean_luma": 70.83,
+          "stddev_luma": 47.11,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 2.77,
+          "file": "reload-factory-overcast.png"
+        },
+        {
+          "mean_luma": 46.99,
+          "stddev_luma": 27.66,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 2.37,
+          "file": "reload-factory-dusk.png"
+        },
+        {
+          "mean_luma": 11.15,
+          "stddev_luma": 8.11,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 43.41,
+          "file": "reload-factory-night.png"
+        },
+        {
+          "mean_luma": 89.41,
+          "stddev_luma": 41.55,
+          "specular_burn_pct": 0.081,
+          "deep_dark_pct": 1.03,
+          "file": "hip-m81-noon.png"
+        },
+        {
+          "mean_luma": 83.58,
+          "stddev_luma": 48.22,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 2.97,
+          "file": "hip-m81-overcast.png"
+        },
+        {
+          "mean_luma": 55.11,
+          "stddev_luma": 29.45,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 3.1,
+          "file": "hip-m81-dusk.png"
+        },
+        {
+          "mean_luma": 13.4,
+          "stddev_luma": 8.43,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 34.02,
+          "file": "hip-m81-night.png"
+        },
+        {
+          "mean_luma": 107.36,
+          "stddev_luma": 25.66,
+          "specular_burn_pct": 0.182,
+          "deep_dark_pct": 1.42,
+          "file": "aimed-m81-noon.png"
+        },
+        {
+          "mean_luma": 104.34,
+          "stddev_luma": 41.07,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 2.03,
+          "file": "aimed-m81-overcast.png"
+        },
+        {
+          "mean_luma": 66.19,
+          "stddev_luma": 19.98,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 2.17,
+          "file": "aimed-m81-dusk.png"
+        },
+        {
+          "mean_luma": 16.96,
+          "stddev_luma": 5.67,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 9.23,
+          "file": "aimed-m81-night.png"
+        },
+        {
+          "mean_luma": 82.0,
+          "stddev_luma": 38.5,
+          "specular_burn_pct": 0.082,
+          "deep_dark_pct": 0.38,
+          "file": "reload-m81-noon.png"
+        },
+        {
+          "mean_luma": 73.07,
+          "stddev_luma": 46.21,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 2.76,
+          "file": "reload-m81-overcast.png"
+        },
+        {
+          "mean_luma": 49.09,
+          "stddev_luma": 27.31,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 2.5,
+          "file": "reload-m81-dusk.png"
+        },
+        {
+          "mean_luma": 11.67,
+          "stddev_luma": 8.11,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 42.21,
+          "file": "reload-m81-night.png"
+        },
+        {
+          "mean_luma": 62.0,
+          "stddev_luma": 12.79,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 0.0,
+          "file": "rack-factory-noon.png"
+        },
+        {
+          "mean_luma": 64.88,
+          "stddev_luma": 15.12,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 0.0,
+          "file": "rack-m81-noon.png"
+        },
+        {
+          "mean_luma": 65.17,
+          "stddev_luma": 15.41,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 0.0,
+          "file": "rack-m81-fitted.png"
+        },
+        {
+          "mean_luma": 91.95,
+          "stddev_luma": 43.88,
+          "specular_burn_pct": 1.335,
+          "deep_dark_pct": 0.18,
+          "file": "fitted-eye-noon.png"
+        }
+      ]
+    },
+    "aa12": {
+      "sheet": "breacher.jpg",
+      "poseDeltasM81Noon": {
+        "hip_vs_aimed": 48.13,
+        "hip_vs_reload": 12.09,
+        "aimed_vs_reload": 52.92
+      },
+      "camoTilesM": {
+        "held": {
+          "paintedTris": 12708,
+          "tileM": [
+            0.409,
+            0.42,
+            0.42
+          ]
+        },
+        "eye": {
+          "paintedTris": 12708,
+          "tileM": [
+            0.402,
+            0.42,
+            0.42
+          ]
+        },
+        "rack": {
+          "paintedTris": 12708,
+          "tileM": [
+            0.42,
+            0.42,
+            0.42
+          ]
+        }
+      },
+      "paintedMeshCount": 25,
+      "bareMeshCount": 3,
+      "paintedSample": [
+        "recoil-bolt",
+        "work",
+        "(unnamed)",
+        "fp-stock",
+        "controls-trigger",
+        "magazineBody",
+        "heatParts-barrel",
+        "controls-selector"
+      ],
+      "bareSample": [
+        "fp-stock",
+        "(unnamed)"
+      ],
+      "tiles": [
+        {
+          "mean_luma": 77.44,
+          "stddev_luma": 43.15,
+          "specular_burn_pct": 0.003,
+          "deep_dark_pct": 0.18,
+          "file": "hip-factory-noon.png"
+        },
+        {
+          "mean_luma": 76.02,
+          "stddev_luma": 47.29,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 0.51,
+          "file": "hip-factory-overcast.png"
+        },
+        {
+          "mean_luma": 48.6,
+          "stddev_luma": 30.25,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 0.9,
+          "file": "hip-factory-dusk.png"
+        },
+        {
+          "mean_luma": 10.77,
+          "stddev_luma": 8.75,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 51.15,
+          "file": "hip-factory-night.png"
+        },
+        {
+          "mean_luma": 119.22,
+          "stddev_luma": 26.96,
+          "specular_burn_pct": 0.439,
+          "deep_dark_pct": 0.0,
+          "file": "aimed-factory-noon.png"
+        },
+        {
+          "mean_luma": 112.34,
+          "stddev_luma": 33.97,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 0.0,
+          "file": "aimed-factory-overcast.png"
+        },
+        {
+          "mean_luma": 71.32,
+          "stddev_luma": 16.76,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 0.08,
+          "file": "aimed-factory-dusk.png"
+        },
+        {
+          "mean_luma": 20.48,
+          "stddev_luma": 8.04,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 5.79,
+          "file": "aimed-factory-night.png"
+        },
+        {
+          "mean_luma": 68.3,
+          "stddev_luma": 41.36,
+          "specular_burn_pct": 0.063,
+          "deep_dark_pct": 0.27,
+          "file": "reload-factory-noon.png"
+        },
+        {
+          "mean_luma": 62.45,
+          "stddev_luma": 44.51,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 0.83,
+          "file": "reload-factory-overcast.png"
+        },
+        {
+          "mean_luma": 41.22,
+          "stddev_luma": 28.68,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 0.78,
+          "file": "reload-factory-dusk.png"
+        },
+        {
+          "mean_luma": 8.66,
+          "stddev_luma": 8.59,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 62.94,
+          "file": "reload-factory-night.png"
+        },
+        {
+          "mean_luma": 81.34,
+          "stddev_luma": 40.73,
+          "specular_burn_pct": 0.006,
+          "deep_dark_pct": 0.18,
+          "file": "hip-m81-noon.png"
+        },
+        {
+          "mean_luma": 80.13,
+          "stddev_luma": 44.94,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 0.51,
+          "file": "hip-m81-overcast.png"
+        },
+        {
+          "mean_luma": 51.33,
+          "stddev_luma": 28.26,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 0.99,
+          "file": "hip-m81-dusk.png"
+        },
+        {
+          "mean_luma": 11.29,
+          "stddev_luma": 8.45,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 49.83,
+          "file": "hip-m81-night.png"
+        },
+        {
+          "mean_luma": 113.79,
+          "stddev_luma": 21.44,
+          "specular_burn_pct": 0.42,
+          "deep_dark_pct": 0.0,
+          "file": "aimed-m81-noon.png"
+        },
+        {
+          "mean_luma": 111.5,
+          "stddev_luma": 34.67,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 0.0,
+          "file": "aimed-m81-overcast.png"
+        },
+        {
+          "mean_luma": 70.74,
+          "stddev_luma": 15.42,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 0.06,
+          "file": "aimed-m81-dusk.png"
+        },
+        {
+          "mean_luma": 18.35,
+          "stddev_luma": 5.44,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 4.55,
+          "file": "aimed-m81-night.png"
+        },
+        {
+          "mean_luma": 74.25,
+          "stddev_luma": 39.11,
+          "specular_burn_pct": 0.051,
+          "deep_dark_pct": 0.26,
+          "file": "reload-m81-noon.png"
+        },
+        {
+          "mean_luma": 67.74,
+          "stddev_luma": 42.47,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 0.8,
+          "file": "reload-m81-overcast.png"
+        },
+        {
+          "mean_luma": 45.3,
+          "stddev_luma": 26.76,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 0.81,
+          "file": "reload-m81-dusk.png"
+        },
+        {
+          "mean_luma": 9.52,
+          "stddev_luma": 8.19,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 53.66,
+          "file": "reload-m81-night.png"
+        },
+        {
+          "mean_luma": 59.2,
+          "stddev_luma": 13.21,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 0.0,
+          "file": "rack-factory-noon.png"
+        },
+        {
+          "mean_luma": 61.59,
+          "stddev_luma": 14.63,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 0.0,
+          "file": "rack-m81-noon.png"
+        },
+        {
+          "mean_luma": 61.59,
+          "stddev_luma": 14.64,
+          "specular_burn_pct": 0.0,
+          "deep_dark_pct": 0.0,
+          "file": "rack-m81-fitted.png"
+        },
+        {
+          "mean_luma": 86.93,
+          "stddev_luma": 41.13,
+          "specular_burn_pct": 0.019,
+          "deep_dark_pct": 0.1,
+          "file": "fitted-eye-noon.png"
+        }
+      ]
+    }
+  }
+}

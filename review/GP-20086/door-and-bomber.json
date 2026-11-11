@@ -1,0 +1,88 @@
+{
+  "rows": {
+    "rows": [
+      {
+        "kind": "shambler",
+        "minX": -35.682227501072205,
+        "fenceMaxX": -36.24,
+        "raised": true
+      },
+      {
+        "kind": "feral",
+        "minX": -35.73911598605831,
+        "fenceMaxX": -36.24,
+        "raised": true
+      },
+      {
+        "kind": "leaper",
+        "minX": -35.30654037921688,
+        "fenceMaxX": -36.24,
+        "raised": true
+      },
+      {
+        "kind": "spider",
+        "minX": -35.92789908000438,
+        "fenceMaxX": -36.24,
+        "raised": true
+      },
+      {
+        "kind": "drowned",
+        "minX": -35.491617061604586,
+        "fenceMaxX": -36.24,
+        "raised": true
+      },
+      {
+        "kind": "military",
+        "minX": -35.59170568237306,
+        "fenceMaxX": -36.24,
+        "raised": true
+      },
+      {
+        "kind": "brute",
+        "minX": -35.66094358860375,
+        "fenceMaxX": -36.24,
+        "raised": true
+      },
+      {
+        "kind": "spitter",
+        "minX": -35.411669392869456,
+        "fenceMaxX": -36.24,
+        "raised": true
+      },
+      {
+        "kind": "screamer",
+        "minX": -35.62201004189645,
+        "fenceMaxX": -36.24,
+        "raised": true
+      },
+      {
+        "kind": "bomber",
+        "minX": -35.712752803691586,
+        "fenceMaxX": -36.24,
+        "raised": true
+      },
+      {
+        "kind": "demon",
+        "minX": -35.51895189014882,
+        "fenceMaxX": -36.24,
+        "raised": true
+      },
+      {
+        "kind": "colossus",
+        "minX": -35.64888594872091,
+        "fenceMaxX": -36.24,
+        "raised": true
+      },
+      {
+        "kind": "guardian",
+        "minX": -35.36511832187655,
+        "fenceMaxX": -36.24,
+        "raised": true
+      }
+    ],
+    "bomber": {
+      "frames": 0,
+      "attackFrames": 0
+    }
+  }
+}

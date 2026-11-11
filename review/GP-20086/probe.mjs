@@ -37,17 +37,37 @@ try {
     const row=await page.evaluate(`(()=>{const T=TT,tg=T.trainingDbg.tg(),r=tg.zombieRoom;T.clearZombies();const z=T.spawnZombie(r.minX+2,-630,'${kind}',true,true);z.trainingZ=true;z.riseT=0;z.speed=z.baseSpeed=0;z.mesh.position.set(r.minX+2,tg.floorY,-630);let minX=Infinity,minY=Infinity;for(let i=0;i<35;i++){z.mesh.position.x-=.14;T.stepFrame(.016);const b=new T.THREE.Box3().setFromObject(z.mesh);minX=Math.min(minX,b.min.x);minY=Math.min(minY,b.min.y)}return {kind:'${kind}',minX,minY,finalX:z.mesh.position.x}})()`);
     proof.motion.push(row);
   }
+  proof.fence=[];
+  for(const kind of proof.layout.types){
+    const row=await page.evaluate(`(()=>{const T=TT,tg=T.trainingDbg.tg(),s=tg.solids.find(s=>s.perimeterFence&&s.minZ< -630&&s.maxZ> -630&&s.minX< -42&&s.maxX> -42);T.clearZombies();const z=T.spawnZombie(s.maxX+2,-630,'${kind}',true,true);z.trainingZ=true;z.riseT=0;z.speed=z.baseSpeed=0;z.mesh.position.set(s.maxX+2,tg.floorY,-630);let minX=Infinity;for(let i=0;i<30;i++){z.mesh.position.x-=.12;T.stepFrame(.016);const b=new T.THREE.Box3().setFromObject(z.mesh);minX=Math.min(minX,b.min.x)}return {kind:'${kind}',fence:s,maxX:s.maxX,minX}})()`);
+    proof.fence.push(row);
+  }
   proof.corpses=[];
   for(const kind of proof.layout.types){
     const row=await page.evaluate(`(()=>{const T=TT,tg=T.trainingDbg.tg(),r=tg.zombieRoom;T.clearZombies();const z=T.spawnZombie(r.minX+3,-630,'${kind}',true,true);z.trainingZ=true;z.riseT=0;z.speed=z.baseSpeed=0;z.mesh.position.set(r.minX+3,tg.floorY,-630);T.stepFrame(.016);T.killZombie(z,false,{kind:'bullet',dir:{x:-1,z:0},raw:120});let c=T.getCorpses().at(-1),minX=Infinity,minY=Infinity,maxY=-Infinity;if(!c)return {kind:'${kind}',corpse:false};for(let i=0;i<75;i++){T.stepFrame(.016);const b=new T.THREE.Box3().setFromObject(c.mesh);minX=Math.min(minX,b.min.x);minY=Math.min(minY,b.min.y);maxY=Math.max(maxY,b.max.y)}return {kind:'${kind}',corpse:!!c,minX,minY,maxY,floor:tg.floorY,pos:{x:c.mesh.position.x,y:c.mesh.position.y,z:c.mesh.position.z}}})()`);
     proof.corpses.push(row);
   }
-  if(stage==='after') for(const row of proof.corners){
+  if(stage.startsWith('after')) for(const row of proof.corners){
     assert(row.box.minX>=proof.layout.room.minX-.03,`${row.kind} body through west wall`);
     assert(row.box.minZ>=proof.layout.room.minZ-.03,`${row.kind} body through south wall`);
   }
-  if(stage==='after') for(const row of proof.station) assert(!row.overlap,`${row.kind} through HQ station`);
-  if(stage==='after') for(const row of proof.motion) assert(row.minX>=proof.layout.room.minX-.03,`${row.kind} walking through west wall`);
+  if(stage.startsWith('after')) for(const row of proof.station) assert(!row.overlap,`${row.kind} through HQ station`);
+  if(stage.startsWith('after')) for(const row of proof.motion) assert(row.minX>=proof.layout.room.minX-.03,`${row.kind} walking through west wall`);
+  if(stage.startsWith('after')) for(const row of proof.fence) assert(row.minX>=row.maxX-.03,`${row.kind} walking through perimeter fence`);
+  if(stage.startsWith('after')) for(const row of proof.corpses) if(row.corpse){
+    assert(row.minX>=proof.layout.room.minX-.03,`${row.kind} corpse through west wall`);
+    assert(row.minY>=row.floor-.03,`${row.kind} corpse through floor`);
+  }
+  if(stage==='shots'){
+    await page.evaluate(`(()=>{const T=TT,tg=T.trainingDbg.tg(),s=tg.solids.find(s=>s.perimeterFence&&s.minZ< -630&&s.maxZ> -630&&s.minX< -42&&s.maxX> -42),f=tg.floorY;T.clearZombies();T.setShotView({x:-35,y:f+4,z:-624,tx:-41,ty:f+1.2,tz:-630,fov:38});const C=tg=>{const z=T.spawnZombie(s.maxX+2,-630,'colossus',true,true);z.trainingZ=true;z.riseT=0;z.speed=z.baseSpeed=0;z.mesh.position.set(s.maxX+2,f,-630);for(let i=0;i<30;i++){z.mesh.position.x-=.12;T.stepFrame(.016)}return z};window.__gp86={collision:T.trainingDbg.state().zombieCollision,spawn:C};__gp86.saved=__gp86.collision.keep;__gp86.collision.keep=()=>{};__gp86.z=C()})()`);
+    await page.screenshot(path.join(out,'before-fence-colossus.png'));
+    await page.evaluate(`(()=>{const T=TT;__gp86.collision.keep=__gp86.saved;T.clearZombies();__gp86.z=__gp86.spawn()})()`);
+    await page.screenshot(path.join(out,'after-fence-colossus.png'));
+    await page.evaluate(`(()=>{const T=TT,tg=T.trainingDbg.tg(),f=tg.floorY;T.clearZombies();T.setShotView({x:-27,y:f+2.2,z:-625,tx:-31,ty:f+.45,tz:-630,fov:36});const c=__gp86.collision;c.savedCorpse=c.keepCorpse;c.keepCorpse=()=>{};const z=T.spawnZombie(-31,-630,'shambler',true,true);z.trainingZ=true;z.riseT=0;z.speed=z.baseSpeed=0;z.mesh.position.set(-31,f,-630);T.stepFrame(.016);T.killZombie(z,false,{kind:'bullet',dir:{x:-1,z:0},raw:120});for(let i=0;i<75;i++)T.stepFrame(.016);__gp86.corpse=T.getCorpses().at(-1)})()`);
+    await page.screenshot(path.join(out,'before-corpse-floor.png'));
+    await page.evaluate(`(()=>{const T=TT,c=__gp86.collision;c.keepCorpse=c.savedCorpse;__gp86.corpse.trainingFitted=false;T.stepFrame(.016)})()`);
+    await page.screenshot(path.join(out,'after-corpse-floor.png'));
+  }
   console.log(`GP-20086 baseline ${proof.layout.types.length} kinds, ${proof.layout.solids.length} room solids; corners captured`);
   assert.deepEqual(page.errors,[]);
 }finally{fs.writeFileSync(path.join(out,`probe-${stage}.json`),JSON.stringify(proof,null,2));await browser.close();await server.close();}

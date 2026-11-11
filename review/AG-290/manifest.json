@@ -1,6 +1,6 @@
 {
   "task": "AG-290",
-  "timestamp": "2026-11-11T02:44:58.832Z",
+  "timestamp": "2026-11-11T02:54:41.866Z",
   "gpu": "NVIDIA GeForce RTX 5080 WebGPU",
   "location": "Training Ground Firing Range",
   "shotsCount": 37,
@@ -17,7 +17,7 @@
       "activeWisps": 0,
       "light": "noon",
       "firstPerson": true,
-      "bytes": 383427
+      "bytes": 382856
     },
     {
       "file": "fp-m4-hot-noon.png",
@@ -28,10 +28,10 @@
       "liveHeat": 0.899,
       "barrelEmissive": 0.634,
       "suppressorEmissive": 0,
-      "activeWisps": 35,
+      "activeWisps": 8,
       "light": "noon",
       "firstPerson": true,
-      "bytes": 385691
+      "bytes": 379058
     },
     {
       "file": "fp-m4-cool58-noon.png",
@@ -42,10 +42,10 @@
       "liveHeat": 0.575,
       "barrelEmissive": 0.325,
       "suppressorEmissive": 0,
-      "activeWisps": 45,
+      "activeWisps": 5,
       "light": "noon",
       "firstPerson": true,
-      "bytes": 392087
+      "bytes": 383727
     },
     {
       "file": "fp-m4-cool32-noon.png",
@@ -53,13 +53,13 @@
       "weapon": "m4",
       "suppressed": false,
       "targetHeat": 0.32,
-      "liveHeat": 0.319,
-      "barrelEmissive": 0.147,
+      "liveHeat": 0.316,
+      "barrelEmissive": 0.146,
       "suppressorEmissive": 0,
-      "activeWisps": 48,
+      "activeWisps": 4,
       "light": "noon",
       "firstPerson": true,
-      "bytes": 392753
+      "bytes": 384245
     },
     {
       "file": "fp-m4-cold-overcast.png",
@@ -73,7 +73,7 @@
       "activeWisps": 0,
       "light": "overcast",
       "firstPerson": true,
-      "bytes": 353063
+      "bytes": 353427
     },
     {
       "file": "fp-m4-hot-overcast.png",
@@ -84,10 +84,10 @@
       "liveHeat": 0.899,
       "barrelEmissive": 0.879,
       "suppressorEmissive": 0,
-      "activeWisps": 37,
+      "activeWisps": 8,
       "light": "overcast",
       "firstPerson": true,
-      "bytes": 357147
+      "bytes": 354214
     },
     {
       "file": "fp-m4-cold-dusk.png",
@@ -101,7 +101,7 @@
       "activeWisps": 0,
       "light": "dusk",
       "firstPerson": true,
-      "bytes": 312941
+      "bytes": 312982
     },
     {
       "file": "fp-m4-hot-dusk.png",
@@ -112,10 +112,10 @@
       "liveHeat": 0.899,
       "barrelEmissive": 1.613,
       "suppressorEmissive": 0,
-      "activeWisps": 37,
+      "activeWisps": 9,
       "light": "dusk",
       "firstPerson": true,
-      "bytes": 321867
+      "bytes": 316126
     },
     {
       "file": "fp-m4-cold-night.png",
@@ -129,7 +129,7 @@
       "activeWisps": 0,
       "light": "night",
       "firstPerson": true,
-      "bytes": 238120
+      "bytes": 238061
     },
     {
       "file": "fp-m4-hot-night.png",
@@ -138,12 +138,12 @@
       "suppressed": false,
       "targetHeat": 0.9,
       "liveHeat": 0.899,
-      "barrelEmissive": 2.265,
+      "barrelEmissive": 2.266,
       "suppressorEmissive": 0,
-      "activeWisps": 37,
+      "activeWisps": 8,
       "light": "night",
       "firstPerson": true,
-      "bytes": 242342
+      "bytes": 242460
     },
     {
       "file": "fp-m4-cool58-night.png",
@@ -154,10 +154,10 @@
       "liveHeat": 0.576,
       "barrelEmissive": 1.163,
       "suppressorEmissive": 0,
-      "activeWisps": 45,
+      "activeWisps": 5,
       "light": "night",
       "firstPerson": true,
-      "bytes": 246406
+      "bytes": 240443
     },
     {
       "file": "fp-m4-cool32-night.png",
@@ -165,13 +165,13 @@
       "weapon": "m4",
       "suppressed": false,
       "targetHeat": 0.32,
-      "liveHeat": 0.316,
-      "barrelEmissive": 0.519,
+      "liveHeat": 0.317,
+      "barrelEmissive": 0.52,
       "suppressorEmissive": 0,
-      "activeWisps": 46,
+      "activeWisps": 4,
       "light": "night",
       "firstPerson": true,
-      "bytes": 247078
+      "bytes": 240074
     },
     {
       "file": "fp-m4-sup-cold-noon.png",
@@ -185,7 +185,7 @@
       "activeWisps": 0,
       "light": "noon",
       "firstPerson": true,
-      "bytes": 381615
+      "bytes": 378012
     },
     {
       "file": "fp-m4-sup-hot-noon.png",
@@ -193,13 +193,13 @@
       "weapon": "m4",
       "suppressed": true,
       "targetHeat": 0.9,
-      "liveHeat": 0.899,
+      "liveHeat": 0.898,
       "barrelEmissive": 0,
       "suppressorEmissive": 0.634,
-      "activeWisps": 34,
+      "activeWisps": 8,
       "light": "noon",
       "firstPerson": true,
-      "bytes": 388293
+      "bytes": 385799
     },
     {
       "file": "fp-m4-sup-hot-overcast.png",
@@ -210,10 +210,10 @@
       "liveHeat": 0.899,
       "barrelEmissive": 0,
       "suppressorEmissive": 0.879,
-      "activeWisps": 48,
+      "activeWisps": 8,
       "light": "overcast",
       "firstPerson": true,
-      "bytes": 363394
+      "bytes": 355403
     },
     {
       "file": "fp-m4-sup-hot-dusk.png",
@@ -221,13 +221,13 @@
       "weapon": "m4",
       "suppressed": true,
       "targetHeat": 0.9,
-      "liveHeat": 0.898,
+      "liveHeat": 0.899,
       "barrelEmissive": 0,
-      "suppressorEmissive": 1.612,
-      "activeWisps": 45,
+      "suppressorEmissive": 1.613,
+      "activeWisps": 8,
       "light": "dusk",
       "firstPerson": true,
-      "bytes": 325661
+      "bytes": 317589
     },
     {
       "file": "fp-m4-sup-cold-night.png",
@@ -241,7 +241,7 @@
       "activeWisps": 0,
       "light": "night",
       "firstPerson": true,
-      "bytes": 240471
+      "bytes": 240721
     },
     {
       "file": "fp-m4-sup-hot-night.png",
@@ -249,13 +249,13 @@
       "weapon": "m4",
       "suppressed": true,
       "targetHeat": 0.9,
-      "liveHeat": 0.899,
+      "liveHeat": 0.896,
       "barrelEmissive": 0,
-      "suppressorEmissive": 2.265,
-      "activeWisps": 35,
+      "suppressorEmissive": 2.252,
+      "activeWisps": 6,
       "light": "night",
       "firstPerson": true,
-      "bytes": 241623
+      "bytes": 243451
     },
     {
       "file": "fp-minigun-cold-noon.png",
@@ -269,7 +269,7 @@
       "activeWisps": 0,
       "light": "noon",
       "firstPerson": true,
-      "bytes": 382687
+      "bytes": 384158
     },
     {
       "file": "fp-minigun-hot-noon.png",
@@ -277,13 +277,13 @@
       "weapon": "minigun",
       "suppressed": false,
       "targetHeat": 0.92,
-      "liveHeat": 0.919,
-      "barrelEmissive": 0.664,
+      "liveHeat": 0.918,
+      "barrelEmissive": 0.663,
       "suppressorEmissive": 0,
-      "activeWisps": 36,
+      "activeWisps": 8,
       "light": "noon",
       "firstPerson": true,
-      "bytes": 391979
+      "bytes": 383708
     },
     {
       "file": "fp-minigun-hot-overcast.png",
@@ -292,12 +292,12 @@
       "suppressed": false,
       "targetHeat": 0.92,
       "liveHeat": 0.918,
-      "barrelEmissive": 0.919,
+      "barrelEmissive": 0.918,
       "suppressorEmissive": 0,
-      "activeWisps": 48,
+      "activeWisps": 8,
       "light": "overcast",
       "firstPerson": true,
-      "bytes": 373156
+      "bytes": 358452
     },
     {
       "file": "fp-minigun-hot-dusk.png",
@@ -308,10 +308,10 @@
       "liveHeat": 0.919,
       "barrelEmissive": 1.688,
       "suppressorEmissive": 0,
-      "activeWisps": 45,
+      "activeWisps": 8,
       "light": "dusk",
       "firstPerson": true,
-      "bytes": 331577
+      "bytes": 317137
     },
     {
       "file": "fp-minigun-cold-night.png",
@@ -325,7 +325,7 @@
       "activeWisps": 0,
       "light": "night",
       "firstPerson": true,
-      "bytes": 244151
+      "bytes": 244606
     },
     {
       "file": "fp-minigun-hot-night.png",
@@ -334,12 +334,12 @@
       "suppressed": false,
       "targetHeat": 0.92,
       "liveHeat": 0.918,
-      "barrelEmissive": 2.368,
+      "barrelEmissive": 2.37,
       "suppressorEmissive": 0,
-      "activeWisps": 41,
+      "activeWisps": 9,
       "light": "night",
       "firstPerson": true,
-      "bytes": 250845
+      "bytes": 247990
     },
     {
       "file": "tp-m4-cold-noon.png",
@@ -353,7 +353,7 @@
       "activeWisps": 0,
       "light": "noon",
       "firstPerson": false,
-      "bytes": 358990
+      "bytes": 358597
     },
     {
       "file": "tp-m4-hot-noon.png",
@@ -364,10 +364,10 @@
       "liveHeat": 0.898,
       "barrelEmissive": 0.634,
       "suppressorEmissive": 0,
-      "activeWisps": 36,
+      "activeWisps": 8,
       "light": "noon",
       "firstPerson": false,
-      "bytes": 360307
+      "bytes": 358638
     },
     {
       "file": "tp-m4-hot-overcast.png",
@@ -378,10 +378,10 @@
       "liveHeat": 0.899,
       "barrelEmissive": 0.879,
       "suppressorEmissive": 0,
-      "activeWisps": 48,
+      "activeWisps": 8,
       "light": "overcast",
       "firstPerson": false,
-      "bytes": 326790
+      "bytes": 327543
     },
     {
       "file": "tp-m4-hot-dusk.png",
@@ -389,13 +389,13 @@
       "weapon": "m4",
       "suppressed": false,
       "targetHeat": 0.9,
-      "liveHeat": 0.899,
-      "barrelEmissive": 1.613,
+      "liveHeat": 0.898,
+      "barrelEmissive": 1.611,
       "suppressorEmissive": 0,
-      "activeWisps": 45,
+      "activeWisps": 8,
       "light": "dusk",
       "firstPerson": false,
-      "bytes": 306022
+      "bytes": 300645
     },
     {
       "file": "tp-m4-cold-night.png",
@@ -409,7 +409,7 @@
       "activeWisps": 0,
       "light": "night",
       "firstPerson": false,
-      "bytes": 247902
+      "bytes": 247323
     },
     {
       "file": "tp-m4-hot-night.png",
@@ -417,13 +417,13 @@
       "weapon": "m4",
       "suppressed": false,
       "targetHeat": 0.9,
-      "liveHeat": 0.899,
-      "barrelEmissive": 2.265,
+      "liveHeat": 0.898,
+      "barrelEmissive": 2.263,
       "suppressorEmissive": 0,
-      "activeWisps": 41,
+      "activeWisps": 8,
       "light": "night",
       "firstPerson": false,
-      "bytes": 259442
+      "bytes": 255942
     },
     {
       "file": "tp-m4-cool38-night.png",
@@ -434,10 +434,10 @@
       "liveHeat": 0.376,
       "barrelEmissive": 0.66,
       "suppressorEmissive": 0,
-      "activeWisps": 37,
+      "activeWisps": 5,
       "light": "night",
       "firstPerson": false,
-      "bytes": 261416
+      "bytes": 252644
     },
     {
       "file": "tp-m4-sup-cold-night.png",
@@ -451,7 +451,7 @@
       "activeWisps": 0,
       "light": "night",
       "firstPerson": false,
-      "bytes": 252221
+      "bytes": 251918
     },
     {
       "file": "tp-m4-sup-hot-noon.png",
@@ -462,10 +462,10 @@
       "liveHeat": 0.899,
       "barrelEmissive": 0,
       "suppressorEmissive": 0.634,
-      "activeWisps": 36,
+      "activeWisps": 8,
       "light": "noon",
       "firstPerson": false,
-      "bytes": 361114
+      "bytes": 359566
     },
     {
       "file": "tp-m4-sup-hot-night.png",
@@ -473,13 +473,13 @@
       "weapon": "m4",
       "suppressed": true,
       "targetHeat": 0.9,
-      "liveHeat": 0.899,
+      "liveHeat": 0.898,
       "barrelEmissive": 0,
-      "suppressorEmissive": 2.266,
-      "activeWisps": 48,
+      "suppressorEmissive": 2.264,
+      "activeWisps": 9,
       "light": "night",
       "firstPerson": false,
-      "bytes": 256747
+      "bytes": 254184
     },
     {
       "file": "tp-minigun-cold-noon.png",
@@ -493,7 +493,7 @@
       "activeWisps": 0,
       "light": "noon",
       "firstPerson": false,
-      "bytes": 386666
+      "bytes": 387270
     },
     {
       "file": "tp-minigun-hot-noon.png",
@@ -501,13 +501,13 @@
       "weapon": "minigun",
       "suppressed": false,
       "targetHeat": 0.92,
-      "liveHeat": 0.917,
-      "barrelEmissive": 0.661,
+      "liveHeat": 0.918,
+      "barrelEmissive": 0.663,
       "suppressorEmissive": 0,
-      "activeWisps": 37,
+      "activeWisps": 8,
       "light": "noon",
       "firstPerson": false,
-      "bytes": 378187
+      "bytes": 372773
     },
     {
       "file": "tp-minigun-hot-night.png",
@@ -516,12 +516,12 @@
       "suppressed": false,
       "targetHeat": 0.92,
       "liveHeat": 0.919,
-      "barrelEmissive": 2.37,
+      "barrelEmissive": 2.371,
       "suppressorEmissive": 0,
-      "activeWisps": 48,
+      "activeWisps": 8,
       "light": "night",
       "firstPerson": false,
-      "bytes": 300964
+      "bytes": 275702
     }
   ]
 }

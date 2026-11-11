@@ -1,0 +1,54 @@
+{
+  "info": {
+    "live": null,
+    "spent": [
+      0.009999999776482582,
+      0.01899999938905239,
+      0.009999999776482582
+    ],
+    "independentCounts": {},
+    "hook": false
+  },
+  "frames": [
+    {
+      "mode": "eye",
+      "light": "noon",
+      "count": 32,
+      "gun": "uzi",
+      "reloading": true,
+      "magState": "hand"
+    },
+    {
+      "mode": "pair",
+      "light": "noon",
+      "count": 32
+    },
+    {
+      "mode": "pair",
+      "light": "overcast",
+      "count": 32
+    },
+    {
+      "mode": "pair",
+      "light": "dusk",
+      "count": 32
+    },
+    {
+      "mode": "pair",
+      "light": "night",
+      "count": 32
+    },
+    {
+      "mode": "mag",
+      "light": "noon",
+      "count": 0,
+      "topRoundVisible": false
+    },
+    {
+      "mode": "mag",
+      "light": "noon",
+      "count": 32,
+      "topRoundVisible": false
+    }
+  ]
+}

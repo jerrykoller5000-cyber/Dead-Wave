@@ -595,23 +595,28 @@ export function makeAa12Model(ctx) {
   // axis and radius (the magFoot), the stock's length and the handguard's underside (the support) are where they were.
   // The ejection port is on +x (the view's right); the charging handle in its slot and the selector on -x.
   const RW = 0.09;
+  const coverSteel = new THREE.MeshStandardMaterial({color: 0x49515a, metalness: .33, roughness: .43});
+  const plateSteel = new THREE.MeshStandardMaterial({color: 0x363c41, metalness: .26, roughness: .52});
   // Receiver: the tall slab-sided box with its rounded top, the pressed side plates on their bolts, the seam lines, the
   // vents along the top edge, the rear's stock seam.
-  K.slab([[-0.26, 0.1], [-0.26, -0.074], [-0.242, -0.09], [0.26, -0.09], [0.26, 0.07], [-0.26, 0.07]], RW, gunMid, { bevel: 0.006, segs: 2 });
-  K.lathe([[0, -0.258], [0.043, -0.258], [0.045, -0.25], [0.045, 0.252], [0.043, 0.26], [0, 0.26]], gunMid, { y: 0.07, seg: 28, phase: Math.PI / 28 });   // the rounded top
+  K.slab([[-0.26, 0.1], [-0.26, -0.074], [-0.242, -0.09], [0.26, -0.09], [0.26, 0.07], [-0.26, 0.07]], RW, coverSteel, { bevel: 0.006, segs: 2 });
+  // Form the rear seam in the rounded cover itself. A straight strip across
+  // the crown previously stood clear of both sides when seen from the eye.
+  K.lathe([[0, -.258], [.043, -.258], [.045, -.250], [.045, -.2474], [.0442, -.2469],
+    [.0442, -.2458], [.045, -.2453], [.045, .252], [.043, .26], [0, .26]],
+    coverSteel, {y: .07, seg: 28, phase: Math.PI / 28});
   for (const sx of [-1, 1]) {
-    K.slab([[-0.202, 0.062], [0.193, 0.062], [0.2, 0.054], [0.2, -0.053], [-0.202, -0.053]], 0.006, gunDark, { x: sx * RW / 2, bevel: 0.0025 });   // the side plate
+    K.slab([[-0.202, 0.062], [0.193, 0.062], [0.2, 0.054], [0.2, -0.053], [-0.202, -0.053]], 0.006, plateSteel, { x: sx * RW / 2, bevel: 0.0025 });   // the side plate
     for (const [by, bz] of [[0.03, 0.177], [-0.04, 0.177], [0.03, -0.181], [-0.04, -0.181]]) D.screw(gun, sx * (RW / 2 + 0.003), by, bz, { axis: 'x', side: sx, r: 0.004, kind: 'hex' });
     D.groove(gun, { x: sx * RW / 2, y: -0.076, z: 0.0, axis: 'x', side: sx, along: 'z', len: 0.49, w: 0.0008 });                 // the fold line along the bottom
     D.vents(gun, { x: sx * RW / 2, y: 0.082, z: 0.12, axis: 'x', side: sx, along: 'z', count: 4, pitch: 0.02, w: 0.016, len: 0.006, deep: 0.002 });   // the vents
   }
-  D.groove(gun, { x: 0, y: 0.115, z: -0.246, axis: 'y', side: 1, along: 'x', len: RW - 0.01, w: 0.001 });   // the cover's rear seam
   // The carry handle: one uninterrupted top and a clear opening under it; the rear sight's aperture ring at 0.168, the
   // sight line (GB-259/J20); two sling loops.
   K.slab(gunBand([[-0.17, 0.09], [-0.153, 0.143], [-0.138, 0.151], [0.188, 0.151], [0.217, 0.13], [0.225, 0.09]], 0.009), 0.04, gunDark, { bevel: 0.003 });
   for (const z of [-0.158, 0.211]) D.pin(gun, 0, 0.108, z, { axis: 'x', len: 0.04, r: 0.0035, proud: 0.001, caps: z === -0.158 });
   K.box(0.025, 0.007, 0.025, gunDark, 0, 0.156, -0.12, 0, 0, 0, null, 0.002);
-  K.tor(0.009, 0.003, gunMid, 0, 0.168, -0.12, 0, 0, 0, null, Math.PI * 2, 12);
+  K.tor(0.009, 0.003, plateSteel, 0, 0.168, -0.12, 0, 0, 0, null, Math.PI * 2, 12);
   for (const sx of [-1, 1]) D.screw(gun, sx * 0.02, 0.142, 0.06, { axis: 'x', side: sx, r: 0.003, kind: 'slot' });   // the handle's clamp screws
   // Ejection port on +x with the bolt's face in it; the charging handle in its slot on -x (the work part's place); the
   // selector over the grip on -x with its marks.
@@ -651,8 +656,8 @@ export function makeAa12Model(ctx) {
   // grip, with two recessed index positions. Its seat is part of the left
   // receiver plate; the lever projects only enough to catch the thumb.
   K.box(0.006, 0.027, 0.060, gunDark, -PX - 0.002, -0.045, -0.132, 0, 0, 0, null, 0.003);
-  K.box(0.008, 0.009, 0.033, gunMid, -PX - 0.006, -0.046, -0.118, -0.18, 0, 0, null, 0.002);
-  K.cyl(0.008, 0.008, 0.007, gunAccent, -PX - 0.007, -0.045, -0.13, null, 10, 'x');
+  const selectorLever = K.box(0.008, 0.009, 0.033, gunMid, -PX - 0.006, -0.046, -0.118, -0.18, 0, 0, null, 0.002);
+  const selectorHub = K.cyl(0.008, 0.008, 0.007, gunAccent, -PX - 0.007, -0.045, -0.13, null, 10, 'x');
   for (const z of [-0.157, -0.108]) K.cyl(0.0025, 0.0025, 0.002, gunMid, -PX - 0.0055, -0.058, z, null, 8, 'x');
   for (const [ry, rz] of [[-0.058, -0.112], [-0.066, -0.13], [-0.058, -0.148]]) D.screw(gun, -RW / 2, ry, rz, { axis: 'x', side: -1, r: 0.0015, kind: 'button', mat: gunMid });   // on the receiver's face, under the plate's edge
   for (const sx of [-1, 1]) {
@@ -686,7 +691,7 @@ export function makeAa12Model(ctx) {
   // CL-318 (J28: "trigger guard needs work"): a real loop, 9 units long from the receiver's underside ahead of the
   // trigger to the grip's front, 5 cm deep, 2 cm wide; the trigger in its middle (18 units ahead of where it was).
   K.slab(gunBand([[-0.03, -0.088], [-0.034, -0.13], [-0.05, -0.142], [-0.1, -0.142], [-0.118, -0.128], [-0.116, -0.1]], 0.009), 0.03, gunPoly, { bevel: 0.0035, segs: 2 });
-  K.slab([[-0.0601, -0.09], [-0.0647, -0.1005], [-0.064, -0.1081], [-0.0593, -0.1147], [-0.0647, -0.1193], [-0.072, -0.1119], [-0.0753, -0.0995], [-0.0719, -0.086]], 0.011, gunAccent, { bevel: 0.002 });   // GB-174/180: the trigger
+  addTriggerArtwork(gun, K, [[-0.0601, -0.09], [-0.0647, -0.1005], [-0.064, -0.1081], [-0.0593, -0.1147], [-0.0647, -0.1193], [-0.072, -0.1119], [-0.0753, -0.0995], [-0.0719, -0.086]], 0.011, gunAccent, { bevel: 0.002 });   // GB-174/180: the trigger
   // The drum: its axis along the bore, 89 mm thick now, the rolled rims, the hub with its winding cover and key on the
   // front face, the eight face bolts, the feed tower up into the receiver, the latches at its sides.
   const mag = new THREE.Group();
@@ -739,7 +744,7 @@ export function makeAa12Model(ctx) {
   K.box(0.008, 0.092, 0.012, gunDark, 0, 0.122, 0.75, 0, 0, 0, null, 0.002);                                                               // the post: its tip 0.168
   for (const sx of [-1, 1]) K.box(0.005, 0.098, 0.018, gunDark, sx * 0.0145, 0.126, 0.75, 0, 0, 0, null, 0.0015);                         // the ears
   D.screw(gun, 0, 0.063, 0.75, { axis: 'z', side: 1, r: 0.003, kind: 'hex' });
-  K.lathe([[0, 0.25], [0.018, 0.25], [0.018, 0.74], [0.024, 0.75], [0.024, 0.905], [0, 0.905]], gunAccent, { y: 0.015, seg: 12 });   // GB-173/189: the barrel, mostly inside the shroud
+  const barrel = K.lathe([[0, 0.25], [0.018, 0.25], [0.018, 0.74], [0.024, 0.75], [0.024, 0.905], [0, 0.905]], gunAccent, { y: 0.015, seg: 12 });   // GB-173/189: the barrel, mostly inside the shroud
   K.lathe([[0, 0.902], [0.03, 0.902], [0.034, 0.91], [0.034, 0.97], [0.03, 0.976], [0.014, 0.976], [0.014, 0.966], [0, 0.966]], gunMid, { y: 0.015, seg: 14 });   // the brake
   K.disc(0.0095, gunRubber, 0, 0.015, 0.9661, 0, null, 12);   // GB-173: the bore at the muzzle
   for (let i = 0; i < 3; i++) K.box(0.072, 0.008, 0.01, gunRubber, 0, 0.015, 0.92 + i * 0.018);
@@ -750,6 +755,17 @@ export function makeAa12Model(ctx) {
   gun.userData.barrelAssembly = null;
   gun.userData.slide = null;
   attachLaserLight(gun, 'aa12', ctx);
+  const lamp = gun.userData.laserLightUnit;
+  for (const name of ['collarClamp','lampHead','lightBezel','laserBezel']) lamp.getObjectByName(name).material = coverSteel;
+  lamp.getObjectByName('lampBand').material = plateSteel;
+  const selector = K.group(...selectorHub.position.toArray());
+  for (const part of [selectorHub, selectorLever]) {
+    part.position.sub(selector.position);
+    selector.add(part);
+  }
+  bindModelArtwork(gun, 'controls', 'selector', selector);
+  bindModelArtwork(gun, 'controls', 'chargingHandle', gun.userData.work);
+  bindModelArtwork(gun, 'heatParts', 'barrel', barrel);
   return finishGun(gun);
 }
 
@@ -1064,6 +1080,7 @@ export function makeSniperModel(ctx) {
   const gun = new THREE.Group();
   const K = gunKit(gun);
   const D = gunDetail(ctx);
+  const cheekFinish = new THREE.MeshStandardMaterial({color: 0x695e47, metalness: .02, roughness: .86});
   // CL-314 (D-121, the fidelity upgrade): the sniper at a chassis rifle's widths. Builder's units (x 0.723 to metres):
   // the chassis 51 mm wide at the mag well (it was 72), the forend 50 across its rails (64), the action 39 (61), the
   // barrel 38 at the chamber to 27 at the muzzle (49 to 33), the brake 33, the stock 43 and its pad 48, the cheek
@@ -1106,7 +1123,7 @@ export function makeSniperModel(ctx) {
   K.slab(gunBand([[-0.03, -0.05], [-0.031, -0.075], [-0.042, -0.086], [-0.072, -0.083], [-0.082, -0.07]], 0.007), 0.03, gunDark, { bevel: 0.004 });   // GB-180: a moulded guard, not a wire (pass 4: as wide as a real guard)
   // GB-174 (Jerry: the trigger was backwards): face toward the grip, tip curling forward.
   // GB-180: a solid trigger blade (wide at the root, tapering to the curled tip), not a wire.
-  K.slab([[-0.0441, -0.052], [-0.0487, -0.0625], [-0.048, -0.07], [-0.0435, -0.0755], [-0.0485, -0.0805], [-0.056, -0.074], [-0.0593, -0.0615], [-0.0559, -0.048]], 0.01, gunAccent, { bevel: 0.002 });
+  addTriggerArtwork(gun, K, [[-0.0441, -0.052], [-0.0487, -0.0625], [-0.048, -0.07], [-0.0435, -0.0755], [-0.0485, -0.0805], [-0.056, -0.074], [-0.0593, -0.0615], [-0.0559, -0.048]], 0.01, gunAccent, { bevel: 0.002 });
   // The old tang was buried in a solid receiver. Trim only that hidden upper end
   // into the new chassis bridge; the grip's palm center and lower contour stay put.
   // CL-312 b (Jerry: "check and fix all pistol grips"): the thumbhole stock's grip as a moulded grip (34 mm wide, 54 deep
@@ -1127,7 +1144,7 @@ export function makeSniperModel(ctx) {
   for (const sx of [-1, 1]) for (const z of [-0.026, 0.026]) K.box(0.0025, 0.113, 0.004, gunBody, sx * 0.025, -0.004, z, 0, 0, 0, mag, 0.001);
   for (const sx of [-1, 1]) K.box(0.002, 0.03, 0.05, gunDark, sx * 0.0255, -0.02, 0, 0, 0, 0, mag, 0.001);   // the witness window's frame
   K.box(0.021, 0.017, 0.007, gunDark, 0, -0.064, -0.031, 0, 0, 0, null, 0.002);
-  K.box(0.024, 0.012, 0.01, gunDark, 0, -0.06, 0.047, 0, 0, 0, null, 0.002);   // forward-pressed magazine catch
+  const magazineCatch = K.box(0.024, 0.012, 0.01, gunDark, 0, -0.06, 0.047, 0, 0, 0, null, 0.002);   // forward-pressed magazine catch
   K.box(0.024, 0.006, 0.036, gunDark, 0, -0.055, -0.22, 0, 0, 0, null, 0.002);   // upper/lower receiver latch behind grip
   for (const sx of [-1, 1]) K.cyl(0.009, 0.009, 0.003, gunDark, sx * 0.0335, -0.039, -0.12, null, 12, 'x');   // ambidextrous safety hubs
   for (const sx of [-1, 1]) K.box(0.004, 0.009, 0.02, gunDark, sx * 0.034, -0.043, -0.104, 0, 0, 0, null, 0.002);   // selector tabs
@@ -1143,7 +1160,7 @@ export function makeSniperModel(ctx) {
   K.slab(gunBand([[-0.257, 0.026], [-0.285, -0.025], [-0.315, -0.06]], 0.016), 0.057, gunTan, { bevel: 0.006, parent: stock });   // front diagonal strut
   K.cyl(0.021, 0.021, 0.105, gunDark, 0, -0.005, -0.26, stock, 14, 'y');   // vertical fold hinge for port-side swing
   K.cyl(0.008, 0.008, 0.006, gunMid, 0.031, -0.002, -0.26, stock, 12, 'x');   // hinge release button
-  K.slab([[-0.32, 0.058], [-0.535, 0.058], [-0.535, 0.122], [-0.37, 0.128], [-0.32, 0.106]], 0.054, gunTan, { bevel: 0.009, segs: 3, parent: stock });   // GB-180: a tall cheek riser
+  K.slab([[-0.32, 0.058], [-0.535, 0.058], [-0.535, 0.122], [-0.37, 0.128], [-0.32, 0.106]], 0.054, cheekFinish, { bevel: 0.009, segs: 3, parent: stock });   // GB-180: a tall cheek riser
   for (const z of [-0.36, -0.48]) for (const sx of [-1, 1]) K.cyl(0.008, 0.008, 0.004, steelMat, sx * 0.028, 0.09, z, stock, 8, 'x');   // riser clamp knobs
   for (const z of [-0.38, -0.5]) K.cyl(0.007, 0.007, 0.05, gunMid, 0, 0.065, z, stock, 10, 'y');   // cheek-height posts
   K.cyl(0.014, 0.014, 0.008, gunDark, 0.031, 0.09, -0.48, stock, 16, 'x');   // cheek-height knob
@@ -1194,7 +1211,7 @@ export function makeSniperModel(ctx) {
   // Fluted heavy barrel, tapered, and a chunky ported brake.
   // GB-180 pass 5 (vs a real heavy-barrel bolt gun: ours was a pencil): a 30%-fatter contour barrel, deeper flutes, a
   // bigger brake with real side ports.
-  K.lathe([[0, 0.13], [0.026, 0.13], [0.026, 0.2], [0.024, 0.225], [0.0185, 1.1], [0, 1.1]], gunAccent, { y: 0.04, seg: 16 });   // tip under t217 probe radius
+  const barrel = K.lathe([[0, 0.13], [0.026, 0.13], [0.026, 0.2], [0.024, 0.225], [0.0185, 1.1], [0, 1.1]], gunAccent, { y: 0.04, seg: 16 });   // tip under t217 probe radius
   for (let i = 0; i < 6; i++) { const a = i / 6 * Math.PI * 2; K.box(0.005, 0.005, 0.46, gunDark, Math.cos(a) * 0.0205, 0.04 + Math.sin(a) * 0.0205, 0.78, 0, 0, a); }
   K.slab([[1.095, 0.019], [1.2, 0.019], [1.205, 0.025], [1.205, 0.055], [1.2, 0.061], [1.095, 0.061]], 0.046, gunMid, { bevel: 0.008 });   // pass 5: brake kept inside the can (t217)
   for (let i = 0; i < 3; i++) for (const sx of [-1, 1]) K.box(0.006, 0.024, 0.018, gunRubber, sx * 0.023, 0.04, 1.115 + i * 0.03);
@@ -1300,5 +1317,8 @@ export function makeSniperModel(ctx) {
   gun.userData.barrelAssembly = null;
   gunSuppressor(gun, K, 'sniper');   // CL-95
   attachLaserLight(gun, 'sniper', ctx);
+  bindModelArtwork(gun, 'controls', 'magRelease', groupArtwork(THREE, magazineCatch));
+  bindModelArtwork(gun, 'heatParts', 'barrel', groupArtwork(THREE, barrel));
+  bindModelArtwork(gun, 'heatParts', 'suppressor', gun.userData.suppressor);
   return finishGun(gun);
 }

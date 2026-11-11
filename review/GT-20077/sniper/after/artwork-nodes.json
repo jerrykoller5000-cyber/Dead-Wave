@@ -1,0 +1,39 @@
+{
+  "controls": {
+    "trigger": {
+      "name": "controls-trigger",
+      "meshes": {
+        "world": 1,
+        "eye": 1
+      }
+    },
+    "magRelease": {
+      "name": "controls-magRelease",
+      "meshes": {
+        "world": 1,
+        "eye": 1
+      }
+    }
+  },
+  "triggerPin": [
+    0,
+    -0.05,
+    -0.05
+  ],
+  "heatParts": {
+    "barrel": {
+      "name": "heatParts-barrel",
+      "meshes": {
+        "world": 1,
+        "eye": 1
+      }
+    },
+    "suppressor": {
+      "name": "suppressor",
+      "meshes": {
+        "world": 4,
+        "eye": 4
+      }
+    }
+  }
+}

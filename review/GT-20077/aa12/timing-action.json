@@ -1,0 +1,128 @@
+{
+  "weapon": "aa12",
+  "readyMs": 13255,
+  "fps": 60,
+  "low": 51.1,
+  "samples": [
+    {
+      "weapon": "aa12",
+      "eye": "aa12",
+      "high": "high",
+      "fps": 59.99999999999999,
+      "low": 44.44444444444444,
+      "worst": 22.5,
+      "hitches": 18,
+      "frames": 60
+    },
+    {
+      "weapon": "aa12",
+      "eye": "aa12",
+      "high": "high",
+      "fps": 59.988002398447634,
+      "low": 58.13953492401612,
+      "worst": 17.19999998807907,
+      "hitches": 18,
+      "frames": 60
+    },
+    {
+      "weapon": "aa12",
+      "eye": "aa12",
+      "high": "high",
+      "fps": 59.99999999999999,
+      "low": 58.8235294117647,
+      "worst": 17,
+      "hitches": 18,
+      "frames": 60
+    },
+    {
+      "weapon": "aa12",
+      "eye": "aa12",
+      "high": "high",
+      "fps": 59.99999999999999,
+      "low": 50,
+      "worst": 20,
+      "hitches": 18,
+      "frames": 60
+    },
+    {
+      "weapon": "aa12",
+      "eye": "aa12",
+      "high": "high",
+      "fps": 59.99999999999999,
+      "low": 58.8235294117647,
+      "worst": 17,
+      "hitches": 18,
+      "frames": 60
+    },
+    {
+      "weapon": "aa12",
+      "eye": "aa12",
+      "high": "high",
+      "fps": 59.994000598509786,
+      "low": 58.8235294117647,
+      "worst": 17,
+      "hitches": 18,
+      "frames": 60
+    },
+    {
+      "weapon": "aa12",
+      "eye": "aa12",
+      "high": "high",
+      "fps": 59.99999999999999,
+      "low": 59.17159761226685,
+      "worst": 16.900000005960464,
+      "hitches": 18,
+      "frames": 60
+    },
+    {
+      "weapon": "aa12",
+      "eye": "aa12",
+      "high": "high",
+      "fps": 60.00600059970231,
+      "low": 43.66812225937632,
+      "worst": 22.900000005960464,
+      "hitches": 18,
+      "frames": 60
+    },
+    {
+      "weapon": "aa12",
+      "eye": "aa12",
+      "high": "high",
+      "fps": 60.00600059970231,
+      "low": 39.06250000909495,
+      "worst": 25.599999994039536,
+      "hitches": 18,
+      "frames": 60
+    },
+    {
+      "weapon": "aa12",
+      "eye": "aa12",
+      "high": "high",
+      "fps": 60.00600059970231,
+      "low": 45.45454545454545,
+      "worst": 22,
+      "hitches": 18,
+      "frames": 60
+    },
+    {
+      "weapon": "aa12",
+      "eye": "aa12",
+      "high": "high",
+      "fps": 60.00600059970231,
+      "low": 46.08294927078215,
+      "worst": 21.700000017881393,
+      "hitches": 18,
+      "frames": 60
+    },
+    {
+      "weapon": "aa12",
+      "eye": "aa12",
+      "high": "high",
+      "fps": 59.99400060029756,
+      "low": 51.546391815925865,
+      "worst": 19.399999976158142,
+      "hitches": 18,
+      "frames": 60
+    }
+  ]
+}

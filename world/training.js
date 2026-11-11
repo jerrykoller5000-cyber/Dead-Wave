@@ -280,7 +280,10 @@ export function buildTrainingGround(T, opts = {}) {
       const shy = h - H + lap;
       const up = add(sidingUv(new T.PlaneGeometry(len, shy), len, shy), siding, cx + nx * 0.025, H + (h - H - lap) / 2, cz + nz * 0.025);
       up.rotation.y = yaw; up.receiveShadow = true;
-      const ledge = add(new T.BoxGeometry(len, 0.08, 0.06), steel, cx + nx * 0.08, H - 0.04, cz + nz * 0.08);
+      const trimZ0 = nx !== 0 && (Math.abs(Math.min(z0, z1) - B.minZ) < 0.01) ? 0.056 : 0;
+      const trimZ1 = nx !== 0 && (Math.abs(Math.max(z0, z1) - B.maxZ) < 0.01 || Math.abs(Math.max(z0, z1) - (B.maxZ + 7)) < 0.01) ? 0.056 : 0;
+      const lLen = len - trimZ0 - trimZ1, lCz = nx !== 0 ? (Math.min(z0, z1) + trimZ0 + Math.max(z0, z1) - trimZ1) / 2 : cz;
+      const ledge = add(new T.BoxGeometry(lLen, 0.08, 0.056), steel, cx + nx * 0.028, H - 0.04, lCz + nz * 0.028);
       ledge.rotation.y = yaw; ledge.receiveShadow = true;
     }
     const b = add(new T.PlaneGeometry(len, 0.16), band, cx + nx * 0.004, 1.05, cz + nz * 0.004); b.rotation.y = yaw;
@@ -317,8 +320,8 @@ export function buildTrainingGround(T, opts = {}) {
   wall(gateX - 3.3, B.maxZ, gateX - 3.3, B.maxZ + 7, 1, 0, gateHeight);
   wall(gateX + 3.3, B.maxZ, gateX + 3.3, B.maxZ + 7, -1, 0, gateHeight);
   wall(gateX - 3.3, B.maxZ + 7, gateX + 3.3, B.maxZ + 7, 0, -1, gateHeight);
-  const passageFloor = box(6.6,.04,7,steel,gateX,-.02,B.maxZ+3.5);
-  const passageRoof = box(6.6,.12,7,steel,gateX,gateHeight+.06,B.maxZ+3.5);
+  const passageFloor = box(6.6,.04,7.03,steel,gateX,-.02,B.maxZ+3.485); passageFloor.userData.isFloorSlab = true;
+  const passageRoof = box(6.6,.12,7.03,steel,gateX,gateHeight+.06,B.maxZ+3.485); passageRoof.userData.isRoofSlab = true;
   wall(B.minX, B.minZ, B.minX, B.maxZ, 1, 0, HB);
   // Over the doorway, the wall above the opening (both faces), and a hazard-striped frame.
   for (const [x, ny] of [[R.minX + 0.002, 1], [B.maxX - 0.002, -1]]) {
@@ -328,21 +331,28 @@ export function buildTrainingGround(T, opts = {}) {
   { const doorW = D.maxZ - D.minZ, lap = 0.16, shy = HB - H + lap;
     const up = add(sidingUv(new T.PlaneGeometry(doorW, shy), doorW, shy), siding, B.maxX - 0.025, H + (HB - H - lap) / 2, (D.minZ + D.maxZ) / 2);
     up.rotation.y = -Math.PI / 2; }
-  for (const z of [D.minZ, D.maxZ]) box(0.5, 3.0, 0.14, hazard, D.x, 1.5, z);
-  box(0.5, 0.18, D.maxZ - D.minZ + 0.14, hazard, D.x, 3.05, (D.minZ + D.maxZ) / 2);
-
-  // GP-167: a reinforced lift shutter. Its own baked subtree moves as one piece;
-  // it is excluded from the room bake, and the shared solids list follows its state.
   const doorZ = (D.minZ + D.maxZ) / 2;
+  for (const z of [D.minZ, D.maxZ]) {
+    box(0.5, 3.0, 0.14, hazard, D.x, 1.5, z);
+    box(0.364, 0.18, 0.14, hazard, D.x, 3.09, z);
+  }
+  for (const side of [-1, 1]) {
+    box(0.068, 0.18, D.maxZ - D.minZ + 0.14, hazard, D.x + side * 0.216, 3.09, doorZ);
+    box(0.093, 0.14, D.maxZ - D.minZ + 0.22, steel, D.x + side * 0.2285, 3.25, doorZ);
+  }
+  for (const [z, dz] of [[D.minZ, -0.02], [D.maxZ, 0.02]]) box(0.364, 0.14, 0.18, steel, D.x, 3.25, z + dz);
+
+  // GP-167: a reinforced lift shutter. Its own baked subtree rises cleanly through the split lintel/hood slot.
   const shutter = new T.Group(); shutter.name = 'training-security-shutter';
   shutter.position.set(D.x, 3.12, doorZ); g.add(shutter);
-  box(.26, 2.96, D.maxZ - D.minZ - .14, steel, 0, 1.48, 0, shutter);
+  box(.20, 2.88, D.maxZ - D.minZ - .1404, steel, 0, 1.44, 0, shutter);
   for (const side of [-1, 1]) {
-    box(.025, 2.56, 2.5, steelLight, side * .145, 1.48, 0, shutter);
+    box(.018, 2.48, 2.5, steelLight, side * .109, 1.48, 0, shutter);
     for (const y of [.42, .95, 1.48, 2.01, 2.54])
-      box(.035, .055, 2.55, steel, side * .165, y, 0, shutter);
-    box(.04, .14, 2.6, hazard, side * .17, .18, 0, shutter);
-    box(.08, .4, .07, steel, side * .2, 1.35, .85, shutter);
+      box(.022, .055, 2.5, steel, side * .129, y, 0, shutter);
+    box(.032, .14, 2.6, hazard, side * .116, .11, 0, shutter);
+    for (const hy of [1.045, 1.385]) box(.022, .05, .07, steel, side * .129, hy, .85, shutter);
+    box(.036, .4, .07, steel, side * .158, 1.215, .85, shutter);
   }
   bakeStatic(T, shutter);
   const doorLamp = std({ color: 0x51db8b, emissive: 0x51db8b, emissiveIntensity: .8, roughness: .4 });
@@ -362,10 +372,9 @@ export function buildTrainingGround(T, opts = {}) {
     box(.025, .08, .14, doorLamp, D.x + side * (.25 + .0125), 1.42, kz);
     box(.04, .16, .14, steelLight, D.x + side * (.25 + .02), 1.28, kz);
     const face = add(new T.PlaneGeometry(.13, .15), keypadFace, D.x + side * (.25 + .04 + .001), 1.28, kz);
-    face.rotation.y = side * Math.PI / 2;
+    face.rotation.y = side * Math.PI / 2; (face.userData || (face.userData = {})).isDecal = true;
     keypads.push({ side, x: O.x + D.x + side * (.25 + .04), y: O.y + 1.28, z: O.z + kz, front: W(D.x + side * 1.0, kz) });
   }
-  box(.55, .14, D.maxZ - D.minZ + .22, steel, D.x, 3.2, doorZ);
   const doorSolid = { minX: O.x+D.x-.18, maxX: O.x+D.x+.18, minY: O.y, maxY: O.y+3,
     minZ: O.z+D.minZ, maxZ: O.z+D.maxZ, securityDoor: true };
   const securityDoor = {
@@ -453,14 +462,14 @@ export function buildTrainingGround(T, opts = {}) {
     const root = new T.Group(); root.position.set(lx, 0, z); g.add(root);
     box(0.62 * 1.5, 0.2, 0.46 * 1.5, steel, 0, 0.1, 0, root);     // a wider stand for the bigger plate
     box(0.7 * 1.5, 0.04, 0.54 * 1.5, hazard, 0, 0.22, 0, root);
-    box(0.24, 0.04, 0.14, steel, 0, 0.24, 0, root);                // hinge axle pillow block
+    for (const s of [-1, 1]) box(0.045, 0.04, 0.14, steel, s * 0.1125, 0.26, 0, root); // flanking pillow blocks flush on hazard plate
     const pivot = new T.Group(); pivot.position.set(0, PIVOT_Y, 0); root.add(pivot);
     box(0.18, 0.04, 0.10, steelLight, 0, 0.02, 0, pivot);          // pivot axle knuckle
-    // Backing uprights and crossbar support the silhouette plate from behind (z = -0.028) with no clipping.
+    // Backing uprights (z = -0.028) and rear-mounted crossbars (z = -0.059) with 0.0 mm contact and zero overlap.
     box(0.06, 1.45, 0.04, steelLight, 0, 0.765, -0.028, pivot);
     for (const s of [-1, 1]) box(0.045, 1.45, 0.04, steelLight, s * 0.35, 0.765, -0.028, pivot);
-    box(0.78, 0.04, 0.035, steelLight, 0, 1.10, -0.028, pivot);
-    box(0.78, 0.04, 0.035, steelLight, 0, 0.45, -0.028, pivot);
+    box(0.78, 0.04, 0.022, steelLight, 0, 1.10, -0.059, pivot);
+    box(0.78, 0.04, 0.022, steelLight, 0, 0.45, -0.059, pivot);
     const plate = add(new T.PlaneGeometry(PLATE.w, PLATE.h), plateMat, 0, PLATE.y, 0, pivot);
     plate.rotation.y = Math.PI; plate.castShadow = true; plate.name = 'target-plate';
     const t = { lane: i + 1, range: TRAINING.RANGES[i], state: 'up', t: 0, hits: 0, fall: 1, pivot, plate, x: lx, z };
@@ -563,42 +572,49 @@ export function buildTrainingGround(T, opts = {}) {
     const roofSteel = std({ color: 0x353c42, roughness: 0.55, metalness: 0.55 });
     const noShadow = (m) => { m.castShadow = false; return m; };
     const TRUSS_Z = [-6, 0, 6, 12, 18, 24];
-    const spanX = B.maxX - B.minX, midX = (B.minX + B.maxX) / 2, yLo = HB - 2.0, yHi = HB - 0.15;
+    const spanX = B.maxX - B.minX, midX = (B.minX + B.maxX) / 2, yLo = HB - 2.0, yHi = HB - 0.33;
+    const webH = (yHi - 0.13) - (yLo + 0.13), webY = (yLo + yHi) / 2, bayW = 3.0 - 0.14, dTh = 0.11;
+    const dAng = Math.atan2(bayW, webH);
+    const diagLen = Math.min((bayW - 0.004 - dTh * Math.cos(dAng)) / Math.sin(dAng), (webH - 0.004 - dTh * Math.sin(dAng)) / Math.cos(dAng));
+    const colTop = yLo - 0.13, colBot = 0.06, colH = colTop - colBot, colY = (colBot + colTop) / 2;
     for (const z of TRUSS_Z) {
-      // CL-146 (Jerry: "the pillar and textures of the new hangar bleed through the walls and they are tweaking out and
-      // shifting"): nothing up here may touch a wall's plane. A face in the plane of a wall fights it for the same
-      // pixels (the flicker), and the shared wall is one plane each way, so a column's back face showed through the
-      // range's tiles. The chords stop 10 cm short of the walls, the columns stand 6 cm off them.
+      // CL-146: chords stop 10 cm short of the walls, columns stand 6 cm off them and seat 0.0 mm on footplates under the truss.
       noShadow(box(spanX - 0.2, 0.26, 0.26, roofSteel, midX, yLo, z));
       noShadow(box(spanX - 0.2, 0.26, 0.26, roofSteel, midX, yHi, z));
       for (let x = B.minX + 1.5, k = 0; x < B.maxX - 1; x += 3, k++) {
-        noShadow(box(0.14, yHi - yLo, 0.14, roofSteel, x, (yLo + yHi) / 2, z));
+        noShadow(box(0.14, webH, 0.14, roofSteel, x, webY, z));
         if (x + 3 < B.maxX - 0.5) {
-          const diag = noShadow(box(0.12, Math.hypot(3, yHi - yLo), 0.12, roofSteel, x + 1.5, (yLo + yHi) / 2, z));
-          diag.rotation.z = (k % 2 ? 1 : -1) * Math.atan2(3, yHi - yLo);
+          const diag = noShadow(box(dTh, diagLen, dTh, roofSteel, x + 1.5, webY, z));
+          diag.rotation.z = (k % 2 ? 1 : -1) * dAng;
         }
       }
-      // the columns under each end, and their footplates
+      // the columns under each end, seated 0.0 mm on their 0.06 m footplates and supporting the bottom truss chord
       for (const [x, side] of [[B.minX + 0.30, 1], [B.maxX - 0.30, -1]]) {
-        box(0.48, HB - 0.03, 0.42, steel, x, (HB - 0.03) / 2, z);
-        box(0.08, HB - 0.03, 0.7, steel, x + side * 0.22, (HB - 0.03) / 2, z);
-        box(0.62, 0.06, 0.8, steelLight, x + side * 0.08, 0.03, z);
+        box(0.48, colH, 0.42, steel, x, colY, z);
+        box(0.08, colH, 0.7, steel, x + side * 0.28, colY, z);
+        box(0.62, colBot, 0.8, steelLight, x + side * 0.08, colBot / 2, z);
         solids.push({ minX: O.x + x - 0.27, maxX: O.x + x + 0.27, minY: O.y, maxY: O.y + HB, minZ: O.z + z - 0.35, maxZ: O.z + z + 0.35, column: true });
       }
-      // high-bay lamps: a housing and a glowing face, hung under the bottom chord
+      // high-bay lamps: drop rod seated 0.0 mm under bottom chord and 0.0 mm on hood top
       for (const x of [midX - 10, midX, midX + 10]) {
-        noShadow(box(0.05, 0.9, 0.05, roofSteel, x, yLo - 0.58, z));
+        noShadow(box(0.05, 0.86, 0.05, roofSteel, x, yLo - 0.56, z));
         const hood = add(new T.CylinderGeometry(0.22, 0.62, 0.42, 16, 1, true), roofSteel, x, yLo - 1.2, z);
         hood.castShadow = false;
         const lens = add(new T.CircleGeometry(0.58, 16), buildLampMat, x, yLo - 1.4, z); lens.rotation.x = Math.PI / 2;
       }
     }
-    // purlins along the room, and the deck over them (facing down: seen from inside only)
-    for (let x = B.minX + 2; x < B.maxX - 1; x += 4) noShadow(box(0.16, 0.2, B.maxZ - B.minZ - 0.2, roofSteel, x, yHi + 0.2, (B.minZ + B.maxZ) / 2));
-    const deck = add(new T.PlaneGeometry(spanX, B.maxZ - B.minZ), std({ color: 0x23282c, roughness: 0.9, metalness: 0.2 }), midX, HB + 0.02, (B.minZ + B.maxZ) / 2);
+    // purlins seated 0.0 mm on top chord [HB-0.20, HB], and the deck over them
+    for (let x = B.minX + 2; x < B.maxX - 1; x += 4) noShadow(box(0.16, 0.2, B.maxZ - B.minZ - 0.2, roofSteel, x, yHi + 0.23, (B.minZ + B.maxZ) / 2));
+    const deck = add(new T.PlaneGeometry(spanX, B.maxZ - B.minZ), std({ color: 0x23282c, roughness: 0.9, metalness: 0.2 }), midX, HB + 0.002, (B.minZ + B.maxZ) / 2);
     deck.rotation.x = Math.PI / 2; deck.castShadow = false;
-    // a crane rail along both long walls, a third of the way up: something to read the height against
-    for (const [x, side] of [[B.minX + 0.2, 1], [B.maxX - 0.2, -1]]) noShadow(box(0.3, 0.42, B.maxZ - B.minZ - 0.2, steel, x + side * 0.12, 8.5, (B.minZ + B.maxZ) / 2));
+    // crane rails spanning cleanly between column bays along both long walls at y = 8.5 m
+    const zStops = [B.minZ + 0.1, ...TRUSS_Z, B.maxZ - 0.1];
+    for (const [x, side] of [[B.minX + 0.2, 1], [B.maxX - 0.2, -1]]) {
+      for (let k = 0; k < zStops.length - 1; k++) {
+        const za = k === 0 ? zStops[0] : zStops[k] + 0.35, zb = k + 1 === zStops.length - 1 ? zStops[k + 1] : zStops[k + 1] - 0.35;
+        noShadow(box(0.3, 0.42, zb - za, steel, x + side * 0.12, 8.5, (za + zb) / 2));
+      }
+    }
   }
 
   // --- CL-143: where he may build. The game's lattice is world-aligned (squares of `grid`, centred on its multiples),
@@ -667,7 +683,7 @@ export function buildTrainingGround(T, opts = {}) {
     geo.setIndex(idx); geo.computeVertexNormals();
     if (stripeTex) { stripeTex.wrapS = stripeTex.wrapT = T.RepeatWrapping; stripeTex.repeat.set(1, 1); }
     const paint = add(geo, std({ color: 0xffffff, map: stripeTex, roughness: 0.62, polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -1 }), 0, 0, 0);
-    paint.receiveShadow = true; paint.name = 'training-no-build-paint';
+    paint.receiveShadow = true; paint.name = 'training-no-build-paint'; (paint.userData || (paint.userData = {})).isDecal = true;
     // the outer edge: a yellow line along every side of a zone square that meets a buildable square
     const edgeMat = std({ color: 0xf2c418, roughness: 0.55 });
     for (const [gx, gz] of paintCells) {
@@ -695,13 +711,14 @@ export function buildTrainingGround(T, opts = {}) {
   const lights = [];
   const SW = { x: R.minX, y: 1.4, z: D.maxZ + 0.55 };
   const sw = new T.Group(); sw.position.set(SW.x, SW.y, SW.z); sw.rotation.y = Math.PI / 2; g.add(sw);   // its +z faces into the range
-  box(0.3, 0.42, 0.03, yellow, 0, 0, 0.02, sw);   // its back stands 5 mm off the wall: flush, it flickers through the build room's face
-  box(0.2, 0.3, 0.014, std({ color: 0xe9ecee, roughness: 0.5 }), 0, -0.02, 0.042, sw);
+  box(0.3, 0.42, 0.03, yellow, 0, 0, 0.0154, sw);   // back seated 0.4 mm off single-sided Range wall plane (<= 0.5 mm, no Build bleed)
+  box(0.2, 0.3, 0.014, std({ color: 0xe9ecee, roughness: 0.5 }), 0, -0.02, 0.0374, sw);
   const pilotMat = std({ color: 0x2a2620, emissive: 0xffa640, emissiveIntensity: 0, roughness: 0.4 });
-  box(0.06, 0.025, 0.01, pilotMat, 0, 0.1, 0.054, sw);
-  const lever = new T.Group(); lever.name = 'training-light-switch-lever'; lever.position.set(0, -0.03, 0.049); sw.add(lever);
-  box(0.032, 0.032, 0.07, steel, 0, 0, 0.035, lever);
-  box(0.046, 0.046, 0.03, std({ color: 0x16181a, roughness: 0.6 }), 0, 0, 0.075, lever);
+  box(0.06, 0.025, 0.01, pilotMat, 0, 0.1, 0.0494, sw);
+  box(0.052, 0.068, 0.01, steelLight, 0, -0.03, 0.0494, sw);
+  const lever = new T.Group(); lever.name = 'training-light-switch-lever'; lever.position.set(0, -0.03, 0.0544); sw.add(lever);
+  box(0.030, 0.030, 0.052, steel, 0, 0, 0.0345, lever);
+  box(0.046, 0.046, 0.03, std({ color: 0x16181a, roughness: 0.6 }), 0, 0, 0.0755, lever);
   sign('LIGHTS', 0.6, 0.15, R.minX + 0.03, SW.y + 0.34, SW.z, Math.PI / 2, { bg: '#16181a', color: '#f2c418', size: 170 });
   let lit = true, cutaway = null;
   function setLights(on) {

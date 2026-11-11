@@ -49,7 +49,7 @@ try {
     result.states[phase]={fps:mean('fps'),low:mean('low'),samples};
     console.log(phase,result.states[phase].fps,'fps;',result.states[phase].low,'low');
   }
-  const file=process.argv.includes('--rack')?'timing-rack.json':process.argv[3]?'timing-'+optic+'.json':'timing.json';
+  const file=process.argv.includes('--repeat')?'timing-repeat.json':process.argv.includes('--rack')?'timing-rack.json':process.argv[3]?'timing-'+optic+'.json':'timing.json';
   await save(new URL('./'+id+'/'+file,import.meta.url),JSON.stringify(result,null,2));
   assert.deepEqual(page.errors,[]);
 } finally {await browser.close();await server.close()}

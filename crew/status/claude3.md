@@ -1,10 +1,10 @@
 # Claude 3
 
-state: idle
+state: active
 model: Claude Opus 5.5
-task: —
-touching: —
-since: 2026-11-11T02:48Z
+task: CC-341 the marine's fabric, part 2: headgear inside the balaclava, sleeve through the carrier's flank; the wrists' after pictures
+touching: studio/marine-body.js (arm), studio/marine-headgear.js, tools/tests/tcc341.js
+since: 2026-11-11T03:14Z
 next: CC-341 J128 (Jerry, 10 Nov, standing, D-140; was CL-341): the marin
 blocked-on: —
 last-report: handoffs/2026-11-11-claude3-CC-341.md

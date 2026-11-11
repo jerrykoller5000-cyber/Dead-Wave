@@ -2,21 +2,20 @@
 
 state: active
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: CB-299 GT-20079: the rack and carry copies hide the revolver's reload-only parts
-touching: index.html (carryGunCopy, TT export: carryGunCopyDbg), tools/tests/tcb299.js (new)
-since: 2026-11-11T02:47Z
+task: CB-243 the full suite on the current tree, reds by owner: the reds run resumes on a fresh copy
+touching: tools/tests/run-all.mjs (FAIL lines inline)
+since: 2026-11-11T02:49Z
 next: CB-243 The full suite on the current tree, reds by owner (in your c
 blocked-on: —
-last-report: handoffs/2026-11-11-claude2-CB-297.md
+last-report: handoffs/2026-11-11-claude2-CB-299.md
 
 ## Notes
 
-### Session handover (CLAUDE DIRECTOR, 10 Nov 23:57Z)
-Your previous session went silent after 23:15Z (no note, no reply to two requests), and Jerry is away from the PC, so CLAUDE DIRECTOR started a new one at 23:58Z with Jerry's OK. **If you are the old session reading this: stop now and do nothing more; the new session owns CB-.**
-- Where it stood: CB-243's reds re-run had restarted from t39 in the old cloud copy (that copy is gone: make a new one). The CB-289 experiment was done (rifles fit with the hand sliding on the fore-end); its question was answered 23:24Z: option (b), one named BODY_EXCEPTIONS entry for the support forearm and wrist (up to 60 deg over the table) only while that hand is on a vertical foregrip or a pump, plus a test that lists it and nothing else.
-- Promised to ChatGPT 2 at 23:10Z: bench.mjs --fp m4 in the Training Ground measured the pistol; make the bench issue the gun it is asked for.
-- Order: CB-243 (finish the reds list, by owner), CB-289 (b), CB-294 (the ammo system, J133/J134), CB-291, CB-290, CB-292.
-
+### Where it stands (claude2, 11 Nov 02:55Z, the 00:05Z session)
+- Done and checked out tonight: CB-295 (CE-2 view fields), CB-296 (bench --fp issues the gun), CB-289 (b) (arm limits, core/body-limits.js), CB-294 (ammo types; tcb248 --review), CB-297 (J118 revolver pull), CB-299 (rack copy hides reload-only parts). Handoffs in handoffs/2026-11-11-claude2-*.md.
+- CB-243: reds run on the PC tree of 02:52Z in the cloud (/home/claude/cb9, runs/run4.log, 119 tests, FAIL lines now inline). Reds so far (PC tree 01:58Z): t106b, tag289, tcb248 (birdshot at 16 m lands nothing: pre-existing, old test fails too), tcl301, tcl334b/c/d; tcb294b's pistol case 19 mm (ChatGPT 2 asked). Fixed: tools/tests/fakethree.mjs lacked ShapeUtils (every test dead 00:01-00:22Z).
+- CB-291 next: core/body-limits.js in my cloud (/home/claude/w) has BODY_LIMITS for every joint + tools/tests/tcb291.js (audit, not on the PC yet); first audit: shoulders' twist and the spine read out of range, needs a rest-pose calibration before any clamp.
+- Cloud copy: tar in the PC shell (see Working notes) PLUS assets/intro/*.js, assets/soundtrack/*.json (music.json: tcb293 and the music tests need it); --exclude of a dir also drops explicitly named files under it. Set DW_CHECK_MS=420000 in the cloud.
 
 ### Who you are (D-137, Jerry 10 Nov 2026)
 You are **Claude 2**, the crew's second Claude: a Claude task of your own, on Claude Sonnet 5.5 (Extra). You took

@@ -89,9 +89,9 @@ export function dressTrainingProps(T, { B, gate, bedAt, box: roomBox, add: roomA
     for(let i=0;i<7;i++)box(.92,.036,.05,rubber,rx,3.88+i*.052,gz-.375);
     moving = null;
     // Side pilasters, guide channels, hazard stripes and anchor bolts on the threshold.
-    box(.44,4.488,.48,steel,gx+side*3.53,2.276,gz-.32);
+    box(.44,4.488,.44,steel,gx+side*3.53,2.276,gz-.34);
     box(.18,4.488,.2,steelLight,gx+side*3.22,2.276,gz-.46);
-    box(.13,4.4,.04,hazard,gx+side*3.46,2.276,gz-.58);
+    box(.13,4.488,.04,hazard,gx+side*3.46,2.276,gz-.58);
     for (const y of [.4,1.4,2.4,3.4,4.35]) bolt(gx+side*3.66,y,gz-.572,.044,.024);
     // Hydraulic cylinder & piston rod on threshold, collared flush to pilaster.
     cyl(.13,1.3,dark,gx+side*3.91,.682,gz-.32,12);
@@ -262,8 +262,8 @@ export function dressTrainingProps(T, { B, gate, bedAt, box: roomBox, add: roomA
   for(const y of [.18,.54])bandRing(.14,.148,.045,dark,ox,y,oz,16);
   cyl(.035,.03,steelLight,ox,.825,oz);
   box(.056,.05,.056,steelLight,ox,.865,oz);
-  cyl(.03,.02,steelLight,ox,.9,oz);
-  box(.18,.026,.07,steel,ox,.923,oz);
+  cyl(.03,.023,steelLight,ox,.9015,oz);
+  box(.18,.026,.07,steel,ox,.926,oz);
   const gStem=cyl(.014,.039,steel,ox+.0475,.865,oz,8);gStem.rotation.z=Math.PI/2;
   const gauge=cyl(.048,.028,bone,ox+.115,.865,oz);gauge.rotation.x=Math.PI/2;
   box(.024,.02,.362,rubber,ox,.865,oz-.209);

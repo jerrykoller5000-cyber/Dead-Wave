@@ -10,19 +10,121 @@ export const TRAINING_ZOMBIE_CLEARANCE=Object.freeze({
 });
 export function trainingZombieClearance(z){return Math.max((z.radius||.42)+.18,TRAINING_ZOMBIE_CLEARANCE[z.typeKey]||.8);}
 
-export function createTrainingZombieCollision(tg,stations){
+export function createTrainingZombieCollision(tg,stations,THREE,infirmaryFence){
   const room=tg.zombieRoom,floor=tg.floorY;
   const within=s=>Number.isFinite(s.minX)&&Number.isFinite(s.maxX)&&Number.isFinite(s.minZ)&&Number.isFinite(s.maxZ)&&
     s.maxX>room.minX&&s.minX<room.maxX&&s.maxZ>room.minZ&&s.minZ<room.maxZ&&s.maxY>floor+.15&&s.minY<floor+3.6;
-  // Fences own their moving state and have their own swept collision. The
-  // remaining props and the station copies are fixed while a drill runs.
-  const boxes=[...tg.solids.filter(s=>s.prop&&!s.perimeterFence&&!s.infirmaryFence&&!s.containment&&within(s)),
+  // The perimeter is fixed. The infirmary fence retracts for the wake-up,
+  // so its blockers are applied only when the visible panels are raised.
+  const boxes=[...tg.solids.filter(s=>(s.perimeterFence||(s.prop&&!s.infirmaryFence&&!s.containment))&&within(s)),
     ...(stations?.boxes||[]).filter(within)];
   const blocker=createTrainingBlockers(boxes);
+  const movingBoxes=tg.solids.filter(s=>s.infirmaryFence&&within(s));
+  const movingBlocker=createTrainingBlockers(movingBoxes);
+  const allBoxes=[...boxes,...movingBoxes];
+  const activeBoxes=()=>infirmaryFence?.state().raised?allBoxes:boxes;
   let previous=new WeakMap();
-  return {boxes,clearance:trainingZombieClearance,reset(){previous=new WeakMap();},
+  const bodyBox=new THREE.Box3();
+  const partBox=new THREE.Box3();
+  const vertex=new THREE.Vector3(),boneMatrix=new THREE.Matrix4(),skinBoxes=new WeakMap();
+  function skinBounds(skin){
+    let bounds=skinBoxes.get(skin.geometry);
+    if(!bounds){
+      const geo=skin.geometry,p=geo.getAttribute('position'),si=geo.getAttribute('skinIndex'),sw=geo.getAttribute('skinWeight');
+      bounds=Array.from({length:skin.skeleton.bones.length},()=>null);
+      for(let i=0;i<p.count;i++){
+        vertex.fromBufferAttribute(p,i);
+        for(let k=0;k<4;k++){
+          const weight=k===0?sw.getX(i):k===1?sw.getY(i):k===2?sw.getZ(i):sw.getW(i);
+          if(weight<=0)continue;
+          const index=k===0?si.getX(i):k===1?si.getY(i):k===2?si.getZ(i):si.getW(i);
+          if(!bounds[index])bounds[index]=new THREE.Box3().makeEmpty();
+          bounds[index].expandByPoint(vertex);
+        }
+      }
+      skinBoxes.set(geo,bounds);
+    }
+    for(let i=0;i<bounds.length;i++){
+      const box=bounds[i],bone=skin.skeleton.bones[i];if(!box||!bone)continue;
+      boneMatrix.copy(skin.matrixWorld).multiply(skin.bindMatrixInverse).multiply(bone.matrixWorld).multiply(skin.skeleton.boneInverses[i]).multiply(skin.bindMatrix);
+      bodyBox.union(partBox.copy(box).applyMatrix4(boneMatrix));
+    }
+  }
+  function visibleBounds(mesh){
+    mesh.updateMatrixWorld(true);
+    bodyBox.makeEmpty();
+    mesh.traverse(o=>{
+      if(!o.isMesh||!o.visible)return;
+      for(let parent=o.parent;parent&&parent!==mesh;parent=parent.parent)if(!parent.visible)return;
+      if(o.isSkinnedMesh){skinBounds(o);return;}
+      const bounds=o.boundingBox||o.geometry?.boundingBox;
+      if(!bounds){o.geometry?.computeBoundingBox();}
+      const box=o.boundingBox||o.geometry?.boundingBox;
+      if(box)bodyBox.union(partBox.copy(box).applyMatrix4(o.matrixWorld));
+    });
+    return bodyBox;
+  }
+  function settleLimbs(c){
+    const mesh=c.mesh,ud=mesh.userData;
+    let low=visibleBounds(mesh).min.y;
+    for(const [key,lost] of [['armLG',c.parts?.armL],['armRG',c.parts?.armR],['legLG',c.parts?.legL],['legRG',c.parts?.legR]]){
+      const g=ud[key];if(!g||lost)continue;
+      const x0=g.rotation.x,z0=g.rotation.z;
+      let bx=x0,bz=z0,best=low;
+      for(const dx of [-1,-.5,0,.5,1])for(const dz of [-1,-.5,0,.5,1]){
+        const x=x0+dx,z=z0+dz;
+        if(x< -1.7||x>1.7||z< -1.7||z>1.7)continue;
+        g.rotation.x=x;g.rotation.z=z;
+        const y=visibleBounds(mesh).min.y-.03*(Math.abs(dx)+Math.abs(dz));
+        if(y>best+.015){best=y;bx=x;bz=z;}
+      }
+      g.rotation.x=bx;g.rotation.z=bz;
+      low=visibleBounds(mesh).min.y;
+    }
+  }
+  return {boxes,clearance:trainingZombieClearance,bounds(mesh){return visibleBounds(mesh).clone();},reset(){previous=new WeakMap();},
     keep(z){const p=z.mesh?.position;if(!p)return;
-      const from=previous.get(z)||{x:p.x,y:p.y,z:p.z},v=blocker.constrain(p,from,trainingZombieClearance(z));
-      p.x=v.x;p.z=v.z;previous.set(z,{x:p.x,y:p.y,z:p.z});
+      const from=previous.get(z)||{x:p.x,y:p.y,z:p.z},r=trainingZombieClearance(z);
+      const v=blocker.constrain(p,from,r);p.x=v.x;p.z=v.z;
+      if(infirmaryFence?.state().raised){const q=movingBlocker.constrain(p,from,r);p.x=q.x;p.z=q.z;}
+      previous.set(z,{x:p.x,y:p.y,z:p.z});
+    },
+    keepCorpse(c){
+      if(!c.training)return;
+      const mesh=c.mesh;
+      if(c.frozen&&c.trainingFitted){mesh.position.y+=c.trainingLift||0;return;}
+      if(!c.trainingSettled&&c.t-c.fallT>.4){settleLimbs(c);c.trainingSettled=true;}
+      const oldX=mesh.position.x,oldZ=mesh.position.z;
+      // The visible skin is skinned; Three does not refresh its bounds as it
+      // animates. Hidden source meshes have different bounds and can make a
+      // corpse appear to hover if they are treated as the rendered body.
+      visibleBounds(mesh);
+      for(let pass=0;pass<5;pass++){
+        if(pass)visibleBounds(mesh);
+        let dx=0,dz=0;
+        if(bodyBox.min.x<room.minX+.02)dx=room.minX+.02-bodyBox.min.x;
+        else if(bodyBox.max.x>room.maxX-.02)dx=room.maxX-.02-bodyBox.max.x;
+        if(bodyBox.min.z<room.minZ+.02)dz=room.minZ+.02-bodyBox.min.z;
+        else if(bodyBox.max.z>room.maxZ-.02)dz=room.maxZ-.02-bodyBox.max.z;
+        if(dx||dz){mesh.position.x+=dx;mesh.position.z+=dz;continue;}
+        let move=null;
+        for(const b of activeBoxes()){
+          if(bodyBox.max.y<=b.minY+.02||bodyBox.min.y>=b.maxY-.02||bodyBox.max.x<=b.minX+.02||bodyBox.min.x>=b.maxX-.02||bodyBox.max.z<=b.minZ+.02||bodyBox.min.z>=b.maxZ-.02)continue;
+          const choices=[{x:b.minX-.02-bodyBox.max.x,z:0},{x:b.maxX+.02-bodyBox.min.x,z:0},{x:0,z:b.minZ-.02-bodyBox.max.z},{x:0,z:b.maxZ+.02-bodyBox.min.z}];
+          for(const v of choices){
+            if(bodyBox.min.x+v.x<room.minX||bodyBox.max.x+v.x>room.maxX||bodyBox.min.z+v.z<room.minZ||bodyBox.max.z+v.z>room.maxZ)continue;
+            if(!move||Math.abs(v.x+v.z)<Math.abs(move.x+move.z))move=v;
+          }
+          if(move)break;
+        }
+        if(!move)break;
+        mesh.position.x+=move.x;mesh.position.z+=move.z;
+      }
+      visibleBounds(mesh);
+      c.trainingLift=Math.max(0,floor+.015-bodyBox.min.y);
+      mesh.position.y+=c.trainingLift;
+      c.pool.position.x+=mesh.position.x-oldX;
+      c.pool.position.z+=mesh.position.z-oldZ;
+      if(c.frozen)c.trainingFitted=true;
     }};
 }

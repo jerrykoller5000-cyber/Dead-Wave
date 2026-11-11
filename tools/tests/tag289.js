@@ -21,11 +21,11 @@
     //    Uses real three.core.js so ExtrudeGeometry / LatheGeometry bevels and
     //    profiles are verified identically in both npm test and realtest.mjs.
     // =========================================================================
-    const REAL_THREE = await import(new URL('./vendor/three/three.core.js', location.href).href);
-    const { TRAINING } = await import(new URL('./world/training.js', location.href).href);
-    const { dressTrainingProps } = await import(new URL('./world/training-props.js', location.href).href);
-    const { dressTrainingWear } = await import(new URL('./world/training-wear.js', location.href).href);
-    const { BUILD_WEAR, dressBuildWear } = await import(new URL('./world/training-build-wear.js', location.href).href);
+    const REAL_THREE = await import('/vendor/three/three.core.js');
+    const { TRAINING } = await import('/world/training.js');
+    const { dressTrainingProps } = await import('/world/training-props.js');
+    const { dressTrainingWear } = await import('/world/training-wear.js');
+    const { BUILD_WEAR, dressBuildWear } = await import('/world/training-build-wear.js');
 
     const _v = new REAL_THREE.Vector3();
     const _bExp = new REAL_THREE.Box3();
@@ -463,13 +463,17 @@
         if (flashlight) {
           ok(flashlight.penumbra >= 0.70, 'Flashlight: softened penumbra >= 0.70 (got ' + flashlight.penumbra + ')');
           T.grantAllWeapons();
+          if (T.getGearOwned) T.getGearOwned().laserLight = true;
           T.setWeapon(T.WEAPON_ORDER.indexOf('pistol'));
           if (T.isUnarmed()) T.toggleHolster();
           T.setViewFirstDbg(true);
           D.state().lightsOff = true;
           tg.setLights(false);
-          if (typeof step === 'function') await step(T, 0.65);
-          else await wait(650);
+          const stepS = async (s) => {
+            if (typeof T.stepFrame === 'function') { for (let k = 0; k < Math.ceil(s / 0.05); k++) T.stepFrame(0.05); }
+            else await wait(Math.round(s * 1000));
+          };
+          await stepS(0.65);
           if (!(flashlight.intensity > 0.5)) {
             if (!T.toggleFlashlightDbg()) T.toggleFlashlightDbg();
           }
@@ -478,8 +482,7 @@
           H.placePlayer(O.x - 0.4, O.z - 11.0, Math.PI);
           T.player.position.set(O.x - 0.4, O.y, O.z - 11.0);
           T.setOtsAimDbg(Math.PI, 0);
-          if (typeof step === 'function') await step(T, 0.30);
-          else await wait(300);
+          await stepS(0.35);
           const int1m = flashlight.intensity;
           ok(int1m > 0.4 && int1m < 3.5, 'Flashlight: 1 m night wall caps intensity for readable pool (got ' + int1m.toFixed(2) + ')');
 
@@ -487,8 +490,7 @@
           H.placePlayer(O.x - 0.4, O.z - 9.0, Math.PI);
           T.player.position.set(O.x - 0.4, O.y, O.z - 9.0);
           T.setOtsAimDbg(Math.PI, 0);
-          if (typeof step === 'function') await step(T, 0.30);
-          else await wait(300);
+          await stepS(0.35);
           const int3m = flashlight.intensity;
           ok(int3m > 2.5 && int3m < 10.0 && int3m > int1m, 'Flashlight: 3 m night wall scales up cleanly without white burnout (got ' + int3m.toFixed(2) + ')');
 
@@ -496,8 +498,7 @@
           H.placePlayer(O.x - 0.4, O.z - 4.0, Math.PI);
           T.player.position.set(O.x - 0.4, O.y, O.z - 4.0);
           T.setOtsAimDbg(Math.PI, 0);
-          if (typeof step === 'function') await step(T, 0.30);
-          else await wait(300);
+          await stepS(0.35);
           const int8m = flashlight.intensity;
           ok(int8m > 12.0 && int8m < 32.0 && int8m > int3m, 'Flashlight: 8 m night wall scales up cleanly (got ' + int8m.toFixed(2) + ')');
 
@@ -505,8 +506,7 @@
           H.placePlayer(O.x, O.z - 1.0, 0);
           T.player.position.set(O.x, O.y, O.z - 1.0);
           T.setOtsAimDbg(0, 0);
-          if (typeof step === 'function') await step(T, 0.25);
-          else await wait(220);
+          await stepS(0.30);
           const intOpen = flashlight.intensity;
           ok(intOpen === 42, 'Flashlight: >= 16 m open downrange preserves full 42 intensity (got ' + intOpen.toFixed(2) + ')');
         }

@@ -254,6 +254,7 @@ function acog(root) {
 
 // 4-32x50 NX8: 340 mm, 30 mm tube, 59 mm objective, exposed ZeroStop and side parallax control.
 function nx8(root) {
+  const graphite = new THREE.MeshStandardMaterial({color: 0x424a4f, metalness: .24, roughness: .52});
   // On the issued rifle the root is the rail centre. The teeth rise 11 mm above it.
   beveledBox(root, 'scope rail bridge', paint, [0.042, 0.006, 0.132], [0, 0.014, 0]);
   for (const side of [-1,1]) {
@@ -267,15 +268,15 @@ function nx8(root) {
   const outside = [[0.0215,-0.171],[0.0215,-0.117],[0.015,-0.099],[0.015,0.084],[0.0295,0.122],[0.0295,0.171]];
   const inside = outside.slice().reverse().map(([r,z]) => [r-0.0045,z]);
   const section = [...outside,...inside,outside[0]].map(([r,z]) => new THREE.Vector2(r,z));
-  const tube = new THREE.Mesh(new THREE.LatheGeometry(section,32), paint);
+  const tube = new THREE.Mesh(new THREE.LatheGeometry(section,32), graphite);
   tube.name = 'NX8 tapered optical housing'; tube.rotation.x = Math.PI/2; tube.position.y = 0.054;
   tube.castShadow = tube.receiveShadow = true; root.add(tube);
   // J79: 6 mm of objective bell encloses the glass rather than ending flush with it.
   objective(root, '50 mm objective lens', 0.025, 0.054, 0.164);
   objective(root, 'ocular lens', 0.017, 0.054, -0.170);
   boredHousing(root, 'machined turret saddle', 0.015, 0.018, 0.054, -0.006, 0.030);
-  cylinder(root, 'exposed ZeroStop elevation turret', alloy, 0.013, 0.024, [0, 0.084, -0.006], 'y', 22);
-  cylinder(root, 'right capped windage turret', alloy, 0.011, 0.018, [0.027, 0.054, -0.006], 'x', 18);
+  cylinder(root, 'exposed ZeroStop elevation turret', graphite, 0.013, 0.024, [0, 0.084, -0.006], 'y', 22);
+  cylinder(root, 'right capped windage turret', graphite, 0.011, 0.018, [0.027, 0.054, -0.006], 'x', 18);
   cylinder(root, 'left parallax and illumination dial', rubber, 0.014, 0.018, [-0.027, 0.054, -0.006], 'x', 18);
   boredHousing(root, 'knurled zoom ring', 0.0215, 0.0225, 0.054, -0.131, 0.019, true);
   // J92: tactile zoom grip and marked ZeroStop read in the hand without a texture.

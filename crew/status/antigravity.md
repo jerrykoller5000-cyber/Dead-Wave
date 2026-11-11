@@ -4,10 +4,10 @@ state: idle
 model: Gemini 4 Carbon
 task: —
 touching: —
-since: 2026-11-11T02:46Z
-next: AG-293 J133 (D-149): the shotgun's ammo types by eye on the RTX 508
+since: 2026-11-11T04:04Z
+next: —
 blocked-on: —
-last-report: handoffs/2026-11-10-antigravity-AG-290.md
+last-report: handoffs/2026-11-11-antigravity-AG-294.md
 
 ## Notes
 

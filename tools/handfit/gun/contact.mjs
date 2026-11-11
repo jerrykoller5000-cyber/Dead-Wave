@@ -5,7 +5,7 @@ import { loadGrid } from './grid.mjs';
 import * as M from '../hand/mh-tool.mjs';
 const [base, poseArg, mvArg] = process.argv.slice(2);
 const G = loadGrid(base), pose = JSON.parse(poseArg), MV = mvArg ? JSON.parse(mvArg) : null;
-const CLEAR = 0.0003, SIG = 0.003, C = [0, -0.271, 0.008];
+const CLEAR = +process.env.CLEAR || 0.0003, SIG = 0.003, C = [0, -0.271, 0.008];
 let gd = G.d;
 if (MV) {   // the solve's place (the gun moved and turned in the hand's space), for a check before the game has it
   const [dx, dy, dz] = MV.move.map((v) => v / 1000), [a, b, c] = [MV.turn[0] || 0, MV.turn[1] || 0, MV.turn[2] || 0];

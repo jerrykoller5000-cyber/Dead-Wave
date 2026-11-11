@@ -1,0 +1,67 @@
+{
+  "controls": {
+    "trigger": {
+      "name": "controls-trigger",
+      "meshes": {
+        "world": 1,
+        "eye": 1,
+        "offhand": 1
+      }
+    },
+    "magRelease": {
+      "name": "controls-magRelease",
+      "meshes": {
+        "world": 2,
+        "eye": 2,
+        "offhand": 2
+      }
+    },
+    "safety": {
+      "name": "controls-safety",
+      "meshes": {
+        "world": 1,
+        "eye": 1,
+        "offhand": 1
+      }
+    },
+    "selector": {
+      "name": "controls-selector",
+      "meshes": {
+        "world": 2,
+        "eye": 2,
+        "offhand": 2
+      }
+    },
+    "chargingHandle": {
+      "name": "work",
+      "meshes": {
+        "world": 2,
+        "eye": 2,
+        "offhand": 2
+      }
+    }
+  },
+  "triggerPin": [
+    0,
+    -0.038,
+    0.052000000000000005
+  ],
+  "heatParts": {
+    "barrel": {
+      "name": "heatParts-barrel",
+      "meshes": {
+        "world": 1,
+        "eye": 1,
+        "offhand": 1
+      }
+    },
+    "suppressor": {
+      "name": "suppressor",
+      "meshes": {
+        "world": 4,
+        "eye": 4,
+        "offhand": 4
+      }
+    }
+  }
+}

@@ -66,3 +66,22 @@ Make those (copies or symlinks), or change the three prefixes.
 - Left after this pass: the launcher's firing hand (17.7 mm: its back inside the receiver; the wrap start put the palm the
   wrong side), the pistol's and revolver's two-hand holds (23.8 and 9.1 mm), the chainsaw's rear hand (clean in the test,
   20.9 in the export: check why).
+
+## Claude 4's pass 2 (CD-1, 11 Nov ~00-04Z)
+- **The twist.** The game rolls each hand round its grip channel toward its elbow (game/viewmodel.js twistToward, up to
+  VM.twistMax 0.6 rad). A fit's roll is the elbow's unless the twist is at that limit; x and the grip point are drawn exactly.
+  `c4/drawn.py <export> <gun>` shows a hand as drawn against VM_FIT (`FIT=` the fit file the export was made with).
+- **Exports**: `c4/g9-steps.json` (g7 plus `info.gunMw` and only the parts within 6 cm of the hands). The page takes ~4 GB:
+  one export page at a time, nothing else running (the cloud's limit is ~6.2 GB: the m4/ak/shotgun pages die with two guns).
+  Careful: a part outside the 6 cm window at the export is outside the fit too (the KR-7's magazine once): re-export and check.
+- **Apply without the page**: `c4/applyoff.py <export> <gun> <r|l> '<RESULT>'` (apply7's move on the drawn hand; carries the
+  twist where it's at its limit; `ROLL=1` holds a wanted roll at the limit); `c4/setfit.py` writes one hand into VM_FIT;
+  `c4/fixroll.py` when a carried twist left its limit. Re-export and check with depth2/drawn every time.
+- **Solve extras** (gun/gungrip3.mjs): `NOX=1` (no turn about x: the twist owns it), `XT` (a wider x turn), `KOGRID` (a keep-out
+  field for every bone but the index: a trigger guard's opening, `c4/keepout.py`, `c4/kojson.py`), `TGT` (the index pad to the
+  trigger's face, `c4/tgt.py`); `c4/fitT.sh` runs it. `c4/keepout_sight.py`: the aimed sight line as a keep-out.
+- **Two hands**: `c4/augment2.py` (the firing glove welded and capped: closed). Fitting the support hand round it is slow (the
+  field takes ~10 min). The firing hand's contact dents change the firing glove: fit the support hand after the contacts.
+- **Placing on a new grip**: `c4/transfer.js` / `mktransfer.py` (a hand's hold on one grip carried to another).
+- **Contacts**: `c4/cont10.sh <gun-side> <export>` then `node c4/encode9.mjs cont10 studio/hand-contacts.js` (`CLEAR=` in
+  gun/contact.mjs for a margin). Left after pass 2: the revolver's two hands 1.1 mm into each other (tcl334b).

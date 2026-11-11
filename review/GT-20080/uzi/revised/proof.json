@@ -1,0 +1,111 @@
+{
+  "info": {
+    "live": [
+      0.009999999776482582,
+      0.02969999983906746,
+      0.009999999776482582
+    ],
+    "spent": [
+      0.009999999776482582,
+      0.01899999938905239,
+      0.009999999776482582
+    ],
+    "independentCounts": {
+      "0,4": [
+        false,
+        true
+      ],
+      "7,0": [
+        true,
+        false
+      ]
+    },
+    "inventoryCounts": {
+      "0": false,
+      "1": true,
+      "32": true
+    },
+    "mouth": {
+      "oldTop": 0.115,
+      "emptyTop": 0.11900000274181366,
+      "loadedTop": 0.12304255287761383,
+      "mmPerLocal": 712.121212121212,
+      "tipDirection": [
+        0,
+        -0.2182296230808689,
+        0.9758974493306056
+      ],
+      "tipZ": 0.002169855701201241,
+      "headZ": -0.03853129684799688,
+      "muzzleZ": 0.48,
+      "copperVertices": 105
+    },
+    "hook": true
+  },
+  "frames": [
+    {
+      "mode": "eye",
+      "light": "noon",
+      "count": 32,
+      "gun": "uzi",
+      "reloading": true,
+      "magState": "hand"
+    },
+    {
+      "mode": "eye",
+      "light": "overcast",
+      "count": 32,
+      "gun": "uzi",
+      "reloading": true,
+      "magState": "hand"
+    },
+    {
+      "mode": "eye",
+      "light": "dusk",
+      "count": 32,
+      "gun": "uzi",
+      "reloading": true,
+      "magState": "hand"
+    },
+    {
+      "mode": "eye",
+      "light": "night",
+      "count": 32,
+      "gun": "uzi",
+      "reloading": true,
+      "magState": "hand"
+    },
+    {
+      "mode": "pair",
+      "light": "noon",
+      "count": 32
+    },
+    {
+      "mode": "pair",
+      "light": "overcast",
+      "count": 32
+    },
+    {
+      "mode": "pair",
+      "light": "dusk",
+      "count": 32
+    },
+    {
+      "mode": "pair",
+      "light": "night",
+      "count": 32
+    },
+    {
+      "mode": "mag",
+      "light": "noon",
+      "count": 0,
+      "topRoundVisible": false
+    },
+    {
+      "mode": "mag",
+      "light": "noon",
+      "count": 32,
+      "topRoundVisible": true
+    }
+  ]
+}

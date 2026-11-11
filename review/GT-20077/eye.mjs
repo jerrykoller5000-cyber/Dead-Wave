@@ -31,7 +31,9 @@ try {
     T.flightHold(true);
     for(let i=0;i<150;i++)T.stepFrame(1/30);
     if(!T.viewmodelDbg().info.active || T.viewmodelDbg().info.key!==proofId)throw Error('View model missing');
-    const css=document.createElement('style');css.textContent='body > :not(canvas):not(script):not(style):not(#view){visibility:hidden!important}';document.head.append(css);
+    const css=document.createElement('style');
+    const keepOverlay=proofId==='sniper'?':not(#scopeOverlay)':'';
+    css.textContent='body > :not(canvas):not(script):not(style):not(#view)'+keepOverlay+'{visibility:hidden!important}';document.head.append(css);
     window.eyeLight='noon';
     function illuminate(){
       const L=LIGHTS[eyeLight],p=T.player.position;
@@ -134,14 +136,14 @@ try {
     }
     console.log('Sampled '+Object.keys(result.rays).length+' occupied aimed pixels; rear stock group visible: '+result.stockVisible);
   }
-  if(phase==='rig' || (['after','revised'].includes(phase) && ['m4','ak','shotgun'].includes(id))){
+  if(phase==='rig' || (['after','revised'].includes(phase) && ['m4','ak','shotgun','uzi','aa12','sniper'].includes(id))){
     const maps=await page.evaluate(`(()=>{
-      const expected={pistol:['trigger','magRelease','slideStop'],m4:['selector','boltCatch','magRelease','chargingHandle'],ak:['selector','magRelease','trigger','chargingHandle'],shotgun:['safety','slideRelease','pump']}[proofId];
+      const expected={pistol:['trigger','magRelease','slideStop'],aa12:['trigger','selector','chargingHandle'],sniper:['trigger','magRelease'],uzi:['trigger','magRelease','safety','selector','chargingHandle'],m4:['selector','boltCatch','magRelease','chargingHandle'],ak:['selector','magRelease','trigger','chargingHandle'],shotgun:['safety','slideRelease','pump']}[proofId];
       const src=TT.weaponMeshes[proofId],eye=TT.viewmodelDbg().gun.root;
       const copies={world:src,eye};
-      if(proofId==='pistol')copies.offhand=TT.offhandMeshes.pistol;
+      if(['pistol','uzi'].includes(proofId))copies.offhand=TT.offhandMeshes[proofId];
       const result={};
-      for(const [kind,keys] of [['controls',expected],['heatParts',['barrel','suppressor']]]){
+      for(const [kind,keys] of [['controls',expected],['heatParts',proofId==='aa12'?['barrel']:['barrel','suppressor']]]){
         const entries=result[kind]={};
         for(const key of keys){
           const name=src.userData[kind]?.[key];
@@ -158,6 +160,15 @@ try {
           }
           const original=src.getObjectByName(name);
           if(original.userData.restPosition.length!==3 || original.userData.restQuaternion.length!==4)throw Error('Missing rest pose '+name);
+          if(['uzi','aa12','sniper'].includes(proofId) && key==='trigger'){
+            const pin=src.userData.triggerPin;
+            if(!pin || pin.some((v,i)=>Math.abs(v-original.position.toArray()[i])>1e-8))throw Error('Missing blade pivot');
+            for(const root of Object.values(copies)){
+              const node=root.getObjectByName(name);
+              if(node.position.distanceTo(new TT.THREE.Vector3(...pin))>1e-8)throw Error('Incorrect pivot on copy');
+            }
+            result.triggerPin=pin;
+          }
           entries[key]={name,meshes:counts};
         }
       }
@@ -267,6 +278,14 @@ try {
       const shot=await page.send('Page.captureScreenshot',{format:'jpeg',quality:90,captureBeyondViewport:false});
       await save(new URL('third-person-'+light+'.jpg',folder),Buffer.from(shot.data,'base64'));
     }
+  }
+  if(id==='sniper'){
+    const {captureScope}=await import('./sniper/scope.mjs');
+    await captureScope(page,folder);
+  }
+  if(id==='aa12'){
+    const {captureFittings}=await import('./aa12/fittings.mjs');
+    await captureFittings(page,folder);
   }
   assert.deepEqual(page.errors,[]);
   console.log('PASS',id,phase,records.length,'distinct frames of the actual first-person model');

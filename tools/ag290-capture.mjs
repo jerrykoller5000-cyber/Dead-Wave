@@ -2,8 +2,10 @@
 // AG-290 (Jerry, 10 Nov; J131, J132): barrel heat, smoke wisp & barrel/suppressor red glow.
 // Retaken in the Training Ground firing range on NVIDIA GeForce RTX 5080 using the AG-286 range harness:
 // - GW-4 (m4) fired until hot (heat ~0.90) then naturally cooling (0.58 -> 0.32 -> 0.0), 1P & 3P, across 4 lights
-// - Suppressed GW-4 (can glows & smokes, barrel stays cool), 1P & 3P, across 4 lights
-// - Minigun spun hot (heat ~0.92, 6-barrel cluster glows & smokes), 1P & 3P, across 4 lights
+// - Daylight attenuation: subtle dark cherry warmth at Noon vs full incandescent glow at Night
+// - Visible thin curling smoke wisp rising off muzzle, stronger when hotter
+// - Suppressed GW-4 (can glows & smokes with axial gradient, bore & barrel stay cold), 1P & 3P, across 4 lights
+// - Minigun spun hot (heat ~0.92, 6 rotary barrels glow inside dark clamp collars), 1P & 3P, across 4 lights
 
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -156,7 +158,6 @@ async function main() {
       T.setViewFirstDbg(true);
       T.grantAllWeapons();
       T.modsOwnAllDbg();
-      if (T.setLasersDbg) T.setLasersDbg(false);
       if (T.isUnarmed()) T.toggleHolster();
       T.flightHold(false);
 
@@ -215,7 +216,13 @@ async function main() {
         T.flightHold(false);
         T.setZoomHeldDbg(false);
 
-        // 1. Equip weapon & suppressor if needed
+        // 1. Equip weapon & suppressor if needed (cool & clear previous gun before slinging onto back)
+        if (T.getCurrentWeapon() !== s.weapon) {
+          window.__pinHeat = 0.0;
+          if (T.barrelHeat) T.barrelHeat.reset();
+          if (T.armoryDbg?.fit) T.armoryDbg.fit('m4', 'suppressor', false);
+          await new Promise((r) => setTimeout(r, 90));
+        }
         const idx = T.WEAPON_ORDER.indexOf(s.weapon);
         for (let k = 0; k < 30 && T.getCurrentWeapon() !== s.weapon; k++) {
           T.setWeapon(idx);
@@ -224,7 +231,6 @@ async function main() {
         if (T.isUnarmed()) T.toggleHolster();
 
         const mods = T.armoryDbg?.mods(s.weapon) || [];
-        if (T.setLasersDbg) T.setLasersDbg(false);
         if (mods.some((m) => m.id === 'suppressor')) {
           T.armoryDbg.fit(s.weapon, 'suppressor', !!s.suppressed);
         }
@@ -235,7 +241,6 @@ async function main() {
           T.setViewFirstDbg(true);
           T.setOtsAimDbg(0, -0.06);
 
-          // Wait in real time for live raf=timer loop to activate and render this weapon's viewmodel
           let ready = false;
           for (let k = 0; k < 50; k++) {
             await new Promise((r) => setTimeout(r, 50));
@@ -260,7 +265,6 @@ async function main() {
             await new Promise((r) => setTimeout(r, 400));
           }
           const p = T.player.position;
-          // Marine stands behind firing line facing +Z; -X is weapon-hand side, looking across Marine + barrel + range targets
           T.setShotView({
             x: p.x - 1.02,
             y: p.y + 1.38,
@@ -273,39 +277,40 @@ async function main() {
           await new Promise((r) => setTimeout(r, 260));
         }
 
-        // 3. Heat & smoke simulation in live real-time frames
+        // 3. Heat & rising smoke wisp simulation in live real-time frames
+        const wasCold = T.barrelHeat.getHeat(s.weapon) < 0.35;
         if (s.coolingFrom != null) {
-          // Ensure hot starting state with active smoke wisps, then unpin and let barrelHeat.update cool naturally
           if (T.barrelHeat.getHeat(s.weapon) < s.heat + 0.05) {
             window.__pinHeat = s.coolingFrom;
             T.barrelHeat.setHeat(s.weapon, s.coolingFrom);
-            await new Promise((r) => setTimeout(r, 700));
+            await new Promise((r) => setTimeout(r, 1100));
           }
           window.__pinHeat = null;
-          for (let k = 0; k < 180; k++) {
+          for (let k = 0; k < 280; k++) {
             if (T.barrelHeat.getHeat(s.weapon) <= s.heat) break;
             await new Promise((r) => setTimeout(r, 50));
           }
           window.__pinHeat = T.barrelHeat.getHeat(s.weapon);
-          await new Promise((r) => setTimeout(r, 120));
+          await new Promise((r) => setTimeout(r, 200));
         } else if (s.heat <= 0) {
           window.__pinHeat = 0.0;
           T.barrelHeat.reset();
-          await new Promise((r) => setTimeout(r, 380));
+          await new Promise((r) => setTimeout(r, 350));
         } else {
-          if (switchedRig || T.barrelHeat.getHeat(s.weapon) < 0.5) {
+          if (switchedRig || wasCold) {
             T.barrelHeat.reset();
-            const burst = 45;
+            const burst = Math.ceil(s.heat / 0.009) + 8;
             for (let b = 0; b < burst; b++) {
               T.barrelHeat.addShot(s.weapon, !!s.suppressed);
             }
           }
           window.__pinHeat = s.heat;
           T.barrelHeat.setHeat(s.weapon, s.heat);
-          await new Promise((r) => setTimeout(r, 1200));
+          // Let curling smoke wisp rise ~30-40 cm off the muzzle over ~1.65s of live 60fps frames
+          await new Promise((r) => setTimeout(r, (switchedRig || wasCold) ? 1650 : 680));
         }
 
-        // 4. Verify menu hidden + measure actual emissiveIntensity on barrel & suppressor + count active wisps
+        // 4. Verify menu hidden + measure emissiveIntensity + daylight attenuation + active visible wisps
         const menu = document.getElementById('menu');
         if (menu && menu.offsetParent !== null && window.getComputedStyle(menu).visibility !== 'hidden') {
           throw new Error('FAIL: Menu element is visible before capture!');
@@ -339,7 +344,8 @@ async function main() {
 
         const barrelEmissive = maxEmissive(parts.barrel);
         const suppressorEmissive = maxEmissive(parts.suppressor);
-        const activeWisps = T.barrelHeat._wisps.filter((w) => w.active && w.mesh && w.mesh.visible && w.mat.opacity > 0.02).length;
+        const wispGroupVis = !!(T.barrelHeat._wispGroup && T.barrelHeat._wispGroup.visible);
+        const activeWisps = T.barrelHeat._wisps.filter((w) => w.active && w.mesh && w.mesh.visible && w.mat.opacity > 0.03).length;
         const liveHeat = +T.barrelHeat.getHeat(s.weapon).toFixed(3);
 
         if (s.heat === 0) {
@@ -347,17 +353,23 @@ async function main() {
             throw new Error('FAIL: Cold weapon has residual glow: barrel=' + barrelEmissive + ' sup=' + suppressorEmissive);
           }
         } else if (s.heat >= 0.85) {
-          const expMin = (s.light === 'night') ? 1.8 : ((s.light === 'dusk') ? 1.0 : 0.45);
-          if (s.suppressed) {
-            if (suppressorEmissive < expMin) throw new Error('FAIL: Hot suppressor did not glow: ' + suppressorEmissive + ' (expected >=' + expMin + ')');
-            if (barrelEmissive !== 0) throw new Error('FAIL: Barrel glowed while suppressed! barrel=' + barrelEmissive);
-          } else {
-            if (barrelEmissive < expMin) throw new Error('FAIL: Hot barrel did not glow: ' + barrelEmissive + ' (expected >=' + expMin + ')');
+          const minEm = s.light === 'noon' ? 0.30 : (s.light === 'overcast' ? 0.50 : (s.light === 'dusk' ? 0.65 : 1.25));
+          const targetEm = s.suppressed ? suppressorEmissive : barrelEmissive;
+          if (targetEm < minEm) {
+            throw new Error('FAIL: Hot glow below expected range (' + minEm + ') in ' + s.light + ': ' + targetEm);
           }
-          if (activeWisps < 2) throw new Error('FAIL: Expected active smoke wisps at hot muzzle, got ' + activeWisps);
+          if (s.light === 'noon' && targetEm > 0.65) {
+            throw new Error('FAIL: Noon glow too bright (not attenuated for daylight): ' + targetEm);
+          }
+          if (s.suppressed && barrelEmissive !== 0) {
+            throw new Error('FAIL: Barrel glowed while suppressed! barrel=' + barrelEmissive);
+          }
+          if (!wispGroupVis || activeWisps < 6) {
+            throw new Error('FAIL: Expected visible rising smoke wisp (got groupVis=' + wispGroupVis + ', activeWisps=' + activeWisps + ')');
+          }
         }
 
-        return { liveHeat, barrelEmissive, suppressorEmissive, activeWisps };
+        return { liveHeat, barrelEmissive, suppressorEmissive, activeWisps, wispGroupVis };
       })()`);
 
       const qaPath = path.join(OUT_QA, s.name);

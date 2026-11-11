@@ -254,6 +254,72 @@ def build_strips_sheet():
     print(f"Saved strips sheet: {out_rev} ({sheet_w}x{sheet_h})")
 
 
+def build_smoke_strip():
+    rows = [
+        (
+            "Row 1 · Noon Range (Daylight Ambient): Fired Hot (0.90) -> Cooling (0.32) -> Cold (0.00) Wisps",
+            [
+                ("FIRED HOT (0.90) · Noon · Thin Curling Wisp", "fp-m4-hot-noon.png"),
+                ("COOLING (0.32) · Noon · Faint Dissipating Wisp", "fp-m4-cool32-noon.png"),
+                ("COLD (0.00) · Noon · Smoke Gone", "fp-m4-cold-noon.png"),
+            ],
+        ),
+        (
+            "Row 2 · Night Range (Dark Ambient): Fired Hot (0.90) -> Cooling (0.32) -> Cold (0.00) Wisps",
+            [
+                ("FIRED HOT (0.90) · Night · Thin Curling Wisp", "fp-m4-hot-night.png"),
+                ("COOLING (0.32) · Night · Faint Dissipating Wisp", "fp-m4-cool32-night.png"),
+                ("COLD (0.00) · Night · Smoke Gone", "fp-m4-cold-night.png"),
+            ],
+        ),
+    ]
+
+    target_w, target_h = 480, 270
+    pad = 16
+    header_h = 54
+    strip_h = 24 + target_h + 14
+
+    sheet_w = pad * 2 + target_w * 3 + 12 * 2
+    sheet_h = header_h + len(rows) * strip_h + pad
+
+    sheet = Image.new("RGB", (sheet_w, sheet_h), (16, 18, 22))
+    draw = ImageDraw.Draw(sheet)
+
+    try:
+        font_title = ImageFont.truetype("arial.ttf", 18)
+        font_strip = ImageFont.truetype("arial.ttf", 13)
+        font_label = ImageFont.truetype("arial.ttf", 11)
+    except Exception:
+        font_title = font_strip = font_label = ImageFont.load_default()
+
+    draw.rectangle([(0, 0), (sheet_w, header_h)], fill=(26, 30, 38))
+    draw.text(
+        (pad, 15),
+        "AG-290: Smoke Wisps Strip — Hot (0.90), Cooling (0.32), and Cold (0.00) at Noon and Night (J131)",
+        fill=(242, 246, 255),
+        font=font_title,
+    )
+
+    y = header_h + 10
+    for strip_title, items in rows:
+        draw.text((pad, y), strip_title, fill=(255, 214, 110), font=font_strip)
+        y += 24
+        for col, (lbl, fname) in enumerate(items):
+            x = pad + col * (target_w + 12)
+            img = Image.open(os.path.join(REV_DIR, fname)).resize((target_w, target_h), Image.Resampling.LANCZOS)
+            sheet.paste(img, (x, y))
+            draw.rectangle([(x, y), (x + target_w, y + 20)], fill=(0, 0, 0))
+            draw.text((x + 6, y + 3), lbl, fill=(255, 190, 110), font=font_label)
+        y += target_h + 14
+
+    out_rev = os.path.join(REV_DIR, "smoke-strip.jpg")
+    out_qa = os.path.join(QA_DIR, "smoke-strip.jpg")
+    save_atomic(sheet, out_rev, quality=92)
+    save_atomic(sheet, out_qa, quality=92)
+    print(f"Saved smoke strip: {out_rev} ({sheet_w}x{sheet_h})")
+
+
 if __name__ == "__main__":
     build_master_sheet()
     build_strips_sheet()
+    build_smoke_strip()

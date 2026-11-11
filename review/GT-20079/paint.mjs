@@ -6,7 +6,7 @@ import {serve} from '../../tools/serve.mjs';
 import {save} from '../GT-20076/save.mjs';
 
 const [id,phase]=process.argv.slice(2);
-assert(process.env.DW_GAME_TEST_TOKEN && /^[a-z0-9-]+$/.test(id) && ['before','pre-finish','after','lights','lights-before','riser','rack-before','rack-after','rack-final'].includes(phase));
+assert(process.env.DW_GAME_TEST_TOKEN && /^[a-z0-9-]+$/.test(id) && ['before','pre-finish','after','lights','lights-before','riser','rack-before','rack-after','rack-final','carry-fixed'].includes(phase));
 const folder=new URL('./'+id+'/'+phase+'/',import.meta.url);
 await mkdir(folder,{recursive:true});
 const server=await serve(fileURLToPath(new URL('../../',import.meta.url)),0);
@@ -87,7 +87,7 @@ async function capture() {
     };
     window.paintSnapshot=()=>{
       const out={},groups={assembled:g,firstPerson:vm.gun.root,slide:g.userData.slide,magazine:g.userData.mag,light:g.userData.laserLightUnit,suppressor:g.userData.suppressor,optic:g.userData.fittedOptic};
-      if(id==='revolver'){
+      if(['revolver','uzi'].includes(id)){
         groups.offhand=T.offhandMeshes[id];
         groups.rack=T.house.armoryRack.children.find(o=>o.userData.rackKind===id);
       }
@@ -113,7 +113,7 @@ async function capture() {
         lamp.target.position.copy(copy.position);
         T.scene.add(lamp,lamp.target,new T.THREE.HemisphereLight(0xf3f7ff,0xc7bba9,1.5));window.reviewLamp=lamp;
       }
-      const centre=copy.localToWorld(new T.THREE.Vector3(0,0,id==='ak'?.12:id==='m4'?.32:id==='revolver'?.09:.24));
+      const centre=copy.localToWorld(new T.THREE.Vector3(0,0,id==='ak'?.12:id==='m4'?.32:id==='revolver'?.09:id==='uzi'?.18:.24));
       const eye=centre.clone().addScaledVector(new T.THREE.Vector3(-.64,.22,.31),['m4','ak'].includes(id)?2.05:1);
       T.setShotView({x:eye.x,y:eye.y,z:eye.z,tx:centre.x,ty:centre.y,tz:centre.z,fov:34});
       for(let i=0;i<5;i++){T.stepFrame(1/30);await new Promise(r=>setTimeout(r,80));}
@@ -133,6 +133,32 @@ async function capture() {
     };
     return key;
   })()`);
+  if(phase==='carry-fixed'){
+    assert.equal(id,'revolver');
+    // Recreate the side-view fill that was present for the original rack frames.
+    await page.evaluate('sidePaint()');
+    const states={};
+    for(const [name,key] of [['factory',''],['camo',swatch],['restored','']]){
+      assert.equal(await page.evaluate('setPaint('+JSON.stringify(key)+')'),key);
+      await page.evaluate('rackPaint()');
+      states[name]=await page.evaluate(`(()=>{
+        const clone=TT.carryGunCopyDbg('revolver'),result={};
+        for(const label of ['empties','speedloader','palm-rounds']){
+          const part=clone.getObjectByName(label);
+          if(!part)throw Error('Missing carry prop '+label);
+          result[label]=part.visible;
+        }
+        return result;
+      })()`);
+      assert(Object.values(states[name]).every(visible=>visible===false),'Visible reload prop on carry copy');
+      const shot=await page.send('Page.captureScreenshot',{format:'jpeg',quality:94});
+      await save(new URL('rack-'+name+'.jpg',folder),Buffer.from(shot.data,'base64'));
+    }
+    assert.deepEqual(page.errors,[]);
+    await save(new URL('proof.json',folder),JSON.stringify(states,null,2));
+    console.log('PASS all three reload groups hidden on factory, M81 and restored carry copies');
+    return;
+  }
   if(phase==='rack-before' || phase==='rack-after'){
     const results={};
     for(const [name,key] of [['factory',''],['camo',swatch],['restored','']]){
@@ -163,7 +189,7 @@ async function capture() {
     return;
   }
   const lightingOnly=phase==='lights' || phase==='lights-before';
-  if(lightingOnly || (id==='revolver' && ['before','after'].includes(phase))){
+  if(lightingOnly || (['revolver','uzi'].includes(id) && ['before','after'].includes(phase))){
     const lightFolder=lightingOnly?folder:new URL('../'+(phase==='before'?'lights-before':'lights')+'/',folder);
     await mkdir(lightFolder,{recursive:true});
     await page.evaluate(`(async()=>{
@@ -192,7 +218,7 @@ async function capture() {
   }
   const states={};
   let tiles;
-  for(const angle of (['shotgun','ak','revolver'].includes(id)?['eye','side','rack']:['eye','side']))for(const [name,key] of [['factory',''],['camo',swatch],['restored','']]){
+  for(const angle of (['shotgun','ak','revolver','uzi'].includes(id)?['eye','side','rack']:['eye','side']))for(const [name,key] of [['factory',''],['camo',swatch],['restored','']]){
     const selected=await page.evaluate('setPaint('+JSON.stringify(key)+')');
     assert.equal(selected,key);
     if(angle==='eye'){
@@ -355,6 +381,46 @@ async function capture() {
     const required=id==='pistol'?{assembled:['frame','slide'],slide:['slide']}:
       {assembled:id==='ak'?['receiver','rail','optic shell']:['receiver','furniture','rail','optic shell']};
     Object.assign(required,{light:['light shell'],suppressor:['suppressor shell'],optic:['optic shell']});
+    if(id==='uzi'){
+      await page.evaluate("TT.setShotView(null);TT.setViewFirstDbg(true);setPaint("+JSON.stringify(swatch)+")");
+      const masks=await page.evaluate(`(()=>{
+        const result={};
+        const viewGun=TT.viewmodelDbg().gun,sourceOf=new Map(viewGun.pairs.map(([source,copy])=>[copy,source]));
+        const coating=TT.getGunFurniture().uzi.find(m=>m.userData.weaponFinishRole==='receiver')?.map;
+        if(!coating)throw Error('Missing selected Wasp finish');
+        for(const [view,g] of Object.entries({held:TT.weaponMeshes.uzi,offhand:TT.offhandMeshes.uzi,eye:viewGun.root})){
+          const u=TT.weaponMeshes.uzi.userData,groups={};
+          for(const [key,name] of Object.entries(u.controls))groups[key]=g.getObjectByName(name);
+          groups.barrel=g.getObjectByName(u.heatParts.barrel);
+          groups.optic=g.getObjectByName('fitted-optic-rmr');
+          groups.rail=g.getObjectByName('uzi-optic-rail');
+          if(view==='held')groups.mag=u.mag;
+          result[view]={};
+          for(const [key,group] of Object.entries(groups)){
+            if(!group)throw Error(view+' missing '+key);
+            let coated=0,factory=0;
+            group.traverse(o=>{
+              if(!o.isMesh)return;
+              const source=view==='eye'?sourceOf.get(o):o;
+              if(!source || !source.material)throw Error('Unmatched surface '+view+' '+key);
+              const intended=!!source.material.userData.weaponFinishRole;
+              // Eye materials preserve the selected texture but omit the source tags.
+              if((o.material.map===coating)!==intended)throw Error('Incorrect visible coating '+view+' '+key);
+              if(intended)coated++;
+              else factory++;
+            });
+            result[view][key]={coated,factory};
+          }
+        }
+        return result;
+      })()`);
+      await save(new URL('masks.json',folder),JSON.stringify(masks,null,2));
+      for(const parts of Object.values(masks))for(const [key,part] of Object.entries(parts)){
+        if(key==='optic')assert(part.coated && part.factory,'RMR housing and fixed glass');
+        else if(key==='rail')assert(part.coated && !part.factory,'Wasp optic rail');
+        else assert(part.factory && !part.coated,'Bare Wasp '+key);
+      }
+    }
     if(id==='revolver'){
       required.assembled=['frame','rail','optic shell'];
       delete required.suppressor;

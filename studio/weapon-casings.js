@@ -107,7 +107,7 @@ function shotgunShell(THREE, load, spent) {
 export function roundGeometry(THREE, weapon, load) {
   if (weapon === 'shotgun') return shotgunShell(THREE, load, false);
   if (weapon === 'aa12') return shotgunShell(THREE, 'birdshot', false);
-  if (weapon === 'ak' || weapon === 'revolver') return metallicCartridge(THREE, weapon, true);
+  if (weapon === 'ak' || weapon === 'revolver' || weapon === 'uzi') return metallicCartridge(THREE, weapon, true);
   return null;
 }
 
@@ -135,11 +135,16 @@ function metallicCartridge(THREE, kind, live) {
   if (!rimmed) profile.push([body * 0.83, length * 0.065], [body * 0.83, length * 0.086]);
   profile.push([body, length * 0.105]);
   if (shoulder) profile.push([body * 0.91, shoulder], [mouth, length * 0.86]);
-  const tip = live ? (kind === 'revolver' ? mouth * 1.45 : length * .43) : 0;
-  if (live && kind === 'revolver') {
+  const rounded = kind === 'revolver' || kind === 'uzi';
+  let tip = 0;
+  if (live) {
+    tip = rounded ? mouth * 1.45 : length * .43;
+    if (kind === 'uzi') tip = 29.7 - length;
+  }
+  if (live && rounded) {
     // Broad, rounded crown on the sidearm prop, legible when only its nose shows.
     profile.push([mouth,length],[mouth*.96,length+tip*.12],[mouth*.91,length+tip*.46],
-      [mouth*.78,length+tip*.79],[mouth*.56,length+tip*.99],[0,length+tip]);
+      [mouth*.78,length+tip*.79],[mouth*(kind === 'uzi' ? .24 : .56),length+tip*.99],[0,length+tip]);
   } else if (live) {
     // A closed, copper-coloured silhouette, continuous with the brass prop.
     profile.push([mouth,length],[mouth*.92,length+.12],[mouth*.91,length+tip*.18],

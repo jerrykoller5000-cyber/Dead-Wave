@@ -189,19 +189,21 @@ export function dressTrainingWear(T, { R, B, bedAt, add, box, std, texture, lamp
   const steel = std({ color: 0x3a4046, roughness: 0.45, metalness: 0.6 });
   const bolts = { px: [], nx: [] }, vents = { px: [], nx: [] };
   for (const [side, z] of WEAR.VENTS) {
-    const x = sideX[side] + nrm[side] * 0.03;
-    const v = box(0.05, 0.46, 0.92, ventMat, x, 5.0, z);
-    for (let i = 0; i < 5; i++) box(0.03, 0.03, 0.84, steel, x + nrm[side] * 0.03, 4.84 + i * 0.08, z);
-    for (const dy of [-0.19, 0.19]) for (const dz of [-0.42, 0.42]) { box(0.02, 0.04, 0.04, boltMat, x + nrm[side] * 0.035, 5.0 + dy, z + dz); bolts[side].push([z + dz, 5.0 + dy]); }
+    const x = sideX[side] + nrm[side] * 0.02;
+    box(0.04, 0.46, 0.92, ventMat, x, 5.0, z);
+    for (let i = 0; i < 5; i++) box(0.02, 0.03, 0.78, steel, sideX[side] + nrm[side] * 0.05, 4.84 + i * 0.08, z);
+    for (const dy of [-0.19, 0.19]) for (const dz of [-0.42, 0.42]) { box(0.016, 0.04, 0.04, boltMat, sideX[side] + nrm[side] * 0.048, 5.0 + dy, z + dz); bolts[side].push([z + dz, 5.0 + dy]); }
     vents[side].push(z); parts.push('wear-vent');
   }
   for (const side of ['px', 'nx']) {
     const x = sideX[side] + nrm[side] * 0.06;
-    const z0 = side === 'px' ? -1.5 : -5.2;
-    const cond = box(0.05, 0.05, R.maxZ - 0.6 - z0, steel, x, 4.4, (z0 + R.maxZ - 0.6) / 2); cond.castShadow = false;
-    for (let z = z0 + 1; z < R.maxZ - 1; z += 4) {
-      box(0.03, 0.12, 0.09, steel, sideX[side] + nrm[side] * 0.02, 4.4, z);
-      for (const dz of [-0.03, 0.03]) { box(0.02, 0.025, 0.025, boltMat, sideX[side] + nrm[side] * 0.04, 4.46, z + dz); bolts[side].push([z + dz, 4.46]); }
+    const z0 = side === 'px' ? -1.5 : -5.2, zPostLo = 0.7075, zPostHi = 0.7825, zEnd = R.maxZ - 0.6;
+    for (const [za, zb] of [[z0, zPostLo], [zPostHi, zEnd]]) {
+      const cond = box(0.05, 0.05, zb - za, steel, x, 4.4, (za + zb) / 2); cond.castShadow = false;
+    }
+    for (let z = z0 + 1; z < zEnd - 0.4; z += 4) {
+      box(0.035, 0.12, 0.09, steel, sideX[side] + nrm[side] * 0.0175, 4.4, z);
+      for (const dz of [-0.03, 0.03]) { box(0.016, 0.024, 0.024, boltMat, sideX[side] + nrm[side] * 0.043, 4.444, z + dz); bolts[side].push([z + dz, 4.46]); }
     }
     parts.push('wear-conduit');
   }
@@ -446,49 +448,48 @@ export function dressTrainingWear(T, { R, B, bedAt, add, box, std, texture, lamp
   printed('wear-sign-forward', 1.0, 0.7, [768, 0, 256, 180], R.minX + 0.02, 2.2, 11, yawOf.nx);
 
   const BZ = R.minZ;   // the back wall (faces +z)
-  // The board, framed, right of the rack.
-  box(1.18, 0.86, 0.03, steel, 5.0, 1.85, BZ + 0.02);
-  printed('wear-days-board', 1.1, 0.77, [0, 256, 512, 360], 5.0, 1.85, BZ + 0.05, 0);   // GB-163: 1.5 cm proud of its frame (it fought it)
-  // The weapon rack: a steel rail of seven hooks, the fifth snapped off (two empty bolt holes and a clean shadow).
-  box(2.2, 0.12, 0.04, steel, 2.3, 1.55, BZ + 0.03); box(2.2, 0.12, 0.04, steel, 2.3, 1.05, BZ + 0.03);
+  // The board, framed, right of the rack (seated 0.0 mm flush on BZ).
+  box(1.18, 0.86, 0.03, steel, 5.0, 1.85, BZ + 0.015);
+  printed('wear-days-board', 1.1, 0.77, [0, 256, 512, 360], 5.0, 1.85, BZ + 0.045, 0);   // GB-163: 1.5 cm proud of its frame (it fought it)
+  // The weapon rack: steel rails seated 0.0 mm flush on BZ, hooks flush on rails with zero stem/tip overlap.
+  box(2.2, 0.12, 0.04, steel, 2.3, 1.55, BZ + 0.02); box(2.2, 0.12, 0.04, steel, 2.3, 1.05, BZ + 0.02);
   for (let i = 0; i < 7; i++) {
     const x = 1.4 + i * 0.3;
-    if (i === WEAR.MISSING_HOOK) { for (const dy of [-0.025, 0.025]) box(0.012, 0.012, 0.004, std({ color: 0x0c0d0e }), x, 1.55 + dy, BZ + 0.052); continue; }
-    for (const y of [1.55, 1.05]) { box(0.025, 0.025, 0.13, steel, x, y, BZ + 0.11); box(0.025, 0.06, 0.025, steel, x, y + 0.03, BZ + 0.17); }
+    if (i === WEAR.MISSING_HOOK) { for (const dy of [-0.025, 0.025]) box(0.012, 0.012, 0.004, std({ color: 0x0c0d0e }), x, 1.55 + dy, BZ + 0.042); continue; }
+    for (const y of [1.55, 1.05]) { box(0.025, 0.025, 0.11, steel, x, y, BZ + 0.095); box(0.025, 0.06, 0.025, steel, x, y + 0.0175, BZ + 0.1625); }
   }
   parts.push('wear-rack-missing-hook');
-  // The cracked monitor on its bracket, taped corner to corner.
-  box(0.08, 0.08, 0.16, steel, -2.2, 1.75, BZ + 0.08);
+  // The cracked monitor on its bracket, seated 0.0 mm flush on BZ and taped right across the screen face.
+  box(0.08, 0.08, 0.155, steel, -2.2, 1.75, BZ + 0.0775);
   box(0.66, 0.44, 0.05, std({ color: 0x1b1d1f, roughness: 0.6 }), -2.2, 1.75, BZ + 0.18);
-  printed('wear-monitor-cracked', 0.6, 0.38, [512, 256, 384, 256], -2.2, 1.75, BZ + 0.215, 0);
+  printed('wear-monitor-cracked', 0.6, 0.38, [512, 256, 384, 256], -2.2, 1.75, BZ + 0.208, 0);
   const tapeMat = std({ color: 0xc9b98a, roughness: 0.95, polygonOffset: true, polygonOffsetFactor: -3, polygonOffsetUnits: -3, side: T.DoubleSide });
   for (const a of [0.55, -0.55]) {
-    const t = add(new T.PlaneGeometry(0.58, 0.038), tapeMat, -2.2, 1.75, BZ + 0.26);
-    t.rotation.z = a; t.castShadow = false;
+    const t = add(new T.PlaneGeometry(0.58, 0.038), tapeMat, -2.2, 1.75, BZ + 0.212);
+    t.rotation.z = a; t.castShadow = false; (t.userData || (t.userData = {})).isDecal = true;
   }
   parts.push('wear-monitor-tape');
-  // Three lockers; the middle one dented, its door sprung ajar and hanging. GB-161: the bank is solid to him (one
-  // box: `blockers`), and the dented door is on a hinge with a soft spring: bumped, shot or cut it swings and settles
-  // back ajar; it never shuts (DOOR.min) and never folds back into the next locker (DOOR.max).
+  // Three lockers seated 0.0 mm flush on y=0 and z=BZ; middle door hung on lower pivot bracket clear of carcass.
   const lockerMat = std({ color: 0x5d6b5f, roughness: 0.55, metalness: 0.4 });
   const blockers = [];
   let door = null;
   for (let i = 0; i < 3; i++) {
     const x = -6.4 + i * 0.62;
-    box(0.6, 1.85, 0.48, lockerMat, x, 0.93, BZ + 0.26);
-    if (i !== 1) { printed('wear-locker-door', 0.54, 1.62, [896, 256, 128, 384], x, 0.96, BZ + 0.512, 0); parts.pop(); continue; }
+    box(0.6, 1.85, 0.48, lockerMat, x, 0.925, BZ + 0.24);
+    if (i !== 1) { printed('wear-locker-door', 0.54, 1.62, [896, 256, 128, 384], x, 0.955, BZ + 0.488, 0); parts.pop(); continue; }
     const cavity = std({ color: 0x141614, roughness: 0.95 });
-    add(new T.PlaneGeometry(0.5, 1.7), cavity, x, 0.96, BZ + 0.1);
-    for (const s of [-1, 1]) { const side = add(new T.PlaneGeometry(0.32, 1.7), cavity, x + s * 0.24, 0.96, BZ + 0.26); side.rotation.y = -s * Math.PI / 2; }
-    const sole = add(new T.PlaneGeometry(0.48, 0.3), cavity, x, 0.14, BZ + 0.26); sole.rotation.x = -Math.PI / 2;
-    const lid = add(new T.PlaneGeometry(0.48, 0.3), cavity, x, 1.76, BZ + 0.26); lid.rotation.x = Math.PI / 2;
+    const cBack = add(new T.PlaneGeometry(0.5, 1.7), cavity, x, 0.955, BZ + 0.08); (cBack.userData || (cBack.userData = {})).isDecal = true;
+    for (const s of [-1, 1]) { const side = add(new T.PlaneGeometry(0.32, 1.7), cavity, x + s * 0.24, 0.955, BZ + 0.24); side.rotation.y = -s * Math.PI / 2; (side.userData || (side.userData = {})).isDecal = true; }
+    const sole = add(new T.PlaneGeometry(0.48, 0.3), cavity, x, 0.135, BZ + 0.24); sole.rotation.x = -Math.PI / 2; (sole.userData || (sole.userData = {})).isDecal = true;
+    const lid = add(new T.PlaneGeometry(0.48, 0.3), cavity, x, 1.755, BZ + 0.24); lid.rotation.x = Math.PI / 2; (lid.userData || (lid.userData = {})).isDecal = true;
     const D = WEAR.DOOR, hx = x - 0.27, hz = BZ + 0.505, dw = 0.54;
+    box(0.036, 0.022, 0.038, steel, hx + 0.018, 0.1168, BZ + 0.499);
     const pivot = new T.Group(); pivot.name = 'training-wear-locker-door'; pivot.position.set(hx, 0, hz); pivot.rotation.y = -D.rest; root.add(pivot);
-    const leaf = box(dw, 1.62, 0.02, lockerMat, dw / 2, 0.95, 0, pivot); leaf.rotation.z = 0.025;
-    const face = add(cell(new T.PlaneGeometry(dw, 1.62), 896, 256, 128, 384), sheetMat, dw / 2, 0.95, 0.018, pivot); face.rotation.z = 0.025;
+    const leaf = box(dw, 1.62, 0.02, lockerMat, dw / 2 + 0.016, 0.945, 0, pivot); leaf.rotation.z = 0.025;
+    const face = add(cell(new T.PlaneGeometry(dw, 1.62), 896, 256, 128, 384), sheetMat, dw / 2 + 0.016, 0.945, 0.014, pivot); face.rotation.z = 0.025; (face.userData || (face.userData = {})).isDecal = true;
     door = { pivot, hx, hz, w: dw, h: 1.65, angle: D.rest, vel: 0, solid: { minX: 0, maxX: 0, minY: 0, maxY: 1.78, minZ: 0, maxZ: 0, lockerDoor: true, prop: true } };
   }
-  blockers.push({ minX: -6.4 - 0.31, maxX: -6.4 + 2 * 0.62 + 0.31, minY: 0, maxY: 1.86, minZ: BZ, maxZ: BZ + 0.51, lockers: true });
+  blockers.push({ minX: -6.4 - 0.31, maxX: -6.4 + 2 * 0.62 + 0.31, minY: 0, maxY: 1.85, minZ: BZ, maxZ: BZ + 0.49, lockers: true });
   const doorBox = () => {   // the leaf's box at its angle (local), a little thick so rounds find it
     const ex = door.hx + Math.cos(door.angle) * door.w, ez = door.hz + Math.sin(door.angle) * door.w;
     door.solid.minX = Math.min(door.hx, ex) - 0.03; door.solid.maxX = Math.max(door.hx, ex) + 0.03;

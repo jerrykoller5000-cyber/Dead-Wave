@@ -1,0 +1,98 @@
+{
+  "phase": "before",
+  "gpuRenderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "count": 13,
+  "shots": [
+    {
+      "id": "01-range-bench-rail",
+      "area": "Range",
+      "title": "Firing Line Foot Rail (+17.5 mm float / 47.5 mm clip) & Kick Panel (+25 mm gap)",
+      "phase": "before",
+      "bytes": 113820
+    },
+    {
+      "id": "02-range-bench-legs",
+      "area": "Range",
+      "title": "Firing Line Steel Bench Legs (-60.0 mm floating gap short of rubber worktop)",
+      "phase": "before",
+      "bytes": 140076
+    },
+    {
+      "id": "03-range-wall-bleed",
+      "area": "Range / Shared Wall",
+      "title": "Firing Line End Post & Baseplate (+110 mm punching through x=-8 wall into Yard)",
+      "phase": "before",
+      "bytes": 76721
+    },
+    {
+      "id": "04-range-lockers",
+      "area": "Range",
+      "title": "Locker Bank (+5.0 mm floor float, +20.0 mm wall gap & 13.4 mm ajar hinge clip)",
+      "phase": "before",
+      "bytes": 73206
+    },
+    {
+      "id": "05-armory-rack-board",
+      "area": "Armory Room / Range Back Wall",
+      "title": "Weapon Rack Rails (+10 mm wall gap, hook clip), DAYS Board (+5 mm) & Monitor Tape",
+      "phase": "before",
+      "bytes": 141568
+    },
+    {
+      "id": "06-cif-vents-conduit",
+      "area": "CIF / Range East Wall",
+      "title": "Side Wall Vents (+5 mm float), Conduit Clamps (+5 mm) & Bulkhead Post/Mesh Pierce",
+      "phase": "before",
+      "bytes": 187710
+    },
+    {
+      "id": "07-range-target-stand",
+      "area": "Range Downrange",
+      "title": "Pop-Up Target Stand Hinge Knuckle (20 mm clip) & Backing Crossbars (37.5 mm clip)",
+      "phase": "before",
+      "bytes": 223412
+    },
+    {
+      "id": "08-corridor-doorway-shutter",
+      "area": "Corridors / Doorway",
+      "title": "Doorway Lintel (40 mm jamb clip) & Open Security Shutter (150 mm through steel hood)",
+      "phase": "before",
+      "bytes": 400626
+    },
+    {
+      "id": "09-corridor-light-switch",
+      "area": "Corridors / Doorway",
+      "title": "Doorway Light Switch Backplate (+5 mm wall gap) & Toggle Lever (7.7 mm faceplate clip)",
+      "phase": "before",
+      "bytes": 34806
+    },
+    {
+      "id": "10-yard-nw-cobweb-ledge",
+      "area": "Yard (Build Room NW)",
+      "title": "NW Ceiling Cobweb (104 mm through walls & above ledge) & Corner Waist Ledge (80 mm clip)",
+      "phase": "before",
+      "bytes": 231141
+    },
+    {
+      "id": "11-yard-se-cobweb",
+      "area": "Yard (Build Room SE)",
+      "title": "SE Floor Cobweb (-30.0 mm sunk below y=0.000 floor) & Wall Corner",
+      "phase": "before",
+      "bytes": 132585
+    },
+    {
+      "id": "12-yard-hangar-column",
+      "area": "Yard (Build Room Hangar)",
+      "title": "Hangar Column Footplate (60 mm clip), Waist Ledge (50 mm float/clip) & Crane Rail (370 mm)",
+      "phase": "before",
+      "bytes": 282610
+    },
+    {
+      "id": "13-yard-infirmary-o2-gate",
+      "area": "Yard (Infirmary Bay)",
+      "title": "Infirmary O2 Cylinder Valve Guard vs Pressure Gauge (3.0 mm overlap -> 0.0 mm flush)",
+      "phase": "before",
+      "bytes": 74624
+    }
+  ]
+}

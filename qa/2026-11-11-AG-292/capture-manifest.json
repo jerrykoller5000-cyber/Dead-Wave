@@ -1,0 +1,114 @@
+{
+  "task": "AG-292",
+  "timestamp": "2026-11-11T03:41:07.789Z",
+  "fixesCount": 4,
+  "fixManifest": [
+    {
+      "id": "fix-01-lockers",
+      "title": "Fix 1: Range Lockers Base Seating (Floor Contact)",
+      "beforeFile": "before-01-range-lockers.png",
+      "afterFile": "after-01-range-lockers.png",
+      "beforeLabel": "BEFORE: Center y = 0.93m, base floating 5.0mm above floor tiles (minY = 0.0050m)",
+      "afterLabel": "AFTER (AG-292): Center y = 0.925m, base seated flush on floor tiles (minY = 0.0000m, 0.0mm gap)"
+    },
+    {
+      "id": "fix-02-vents",
+      "title": "Fix 2: Range Wall Vents Flush Seating Against East Tiled Wall",
+      "beforeFile": "before-02-range-vents.png",
+      "afterFile": "after-02-range-vents.png",
+      "beforeLabel": "BEFORE: Frame center 0.03m off wall (w=0.05), back face floating 5.0mm off tiles",
+      "afterLabel": "AFTER (AG-292): Frame center 0.025m off wall, back face flush on tiles (0.0mm gap)"
+    },
+    {
+      "id": "fix-03-conduits",
+      "title": "Fix 3: Range Conduit Bracket Spanning Flush to Wall Face",
+      "beforeFile": "before-03-range-conduits.png",
+      "afterFile": "after-03-range-conduits.png",
+      "beforeLabel": "BEFORE: Narrow bracket detached from wall, floating gap 35.0mm",
+      "afterLabel": "AFTER (AG-292): Bracket spans flush from wall face (x = 7.9925m, 0.0mm gap) & clamps pipe"
+    },
+    {
+      "id": "fix-04-firingline",
+      "title": "Fix 4: Range Firing Line Bench Kick Rail Seated Flush on Floor Tiles",
+      "beforeFile": "before-04-range-firingline.png",
+      "afterFile": "after-04-range-firingline.png",
+      "beforeLabel": "BEFORE: Height 0.075m, center y = 0.055m, floating 17.5mm above floor tiles (minY = 0.0175m)",
+      "afterLabel": "AFTER (AG-292): Height 0.090m, center y = 0.045m, seated flush on floor tiles (minY = 0.0000m, 0.0mm gap)"
+    }
+  ],
+  "shotsCount": 12,
+  "shotManifest": [
+    {
+      "name": "01-range-lockers-floor.png",
+      "area": "range",
+      "title": "Range: Locker Bank Base Seated Flush on Floor (y = 0.000m, 0.0mm gap)",
+      "sizeBytes": 50822
+    },
+    {
+      "name": "02-range-vents-wall.png",
+      "area": "range",
+      "title": "Range: Wall Vent Grille Frame Flush Against East Tiled Wall (0.0mm gap)",
+      "sizeBytes": 79152
+    },
+    {
+      "name": "03-range-conduits-bracket.png",
+      "area": "range",
+      "title": "Range: Conduit Bracket Spanning Flush to Wall Face & Clamping Pipe",
+      "sizeBytes": 48155
+    },
+    {
+      "name": "04-range-firingline-base.png",
+      "area": "range",
+      "title": "Range: Firing Line Bench Base Kick Rail Flush on Floor Tiles (0.0mm gap)",
+      "sizeBytes": 178372
+    },
+    {
+      "name": "05-armory-rack-wall.png",
+      "area": "armory",
+      "title": "Armory: Weapon Rack Rails & Mounting Backboard Flush on Back Wall BZ",
+      "sizeBytes": 75301
+    },
+    {
+      "name": "06-armory-station-counter.png",
+      "area": "armory",
+      "title": "Armory: Station Counter, Solid Housing & Wall Mount in Training Ground",
+      "sizeBytes": 52967
+    },
+    {
+      "name": "07-cif-station-counter.png",
+      "area": "cif",
+      "title": "CIF: Central Issue Facility Station Seated Solidly on Wall & Floor",
+      "sizeBytes": 88969
+    },
+    {
+      "name": "08-corridors-doorway-keypad.png",
+      "area": "corridors",
+      "title": "Corridors: Doorway Hazard Trim, Flush Keypad & Security Shutter",
+      "sizeBytes": 430077
+    },
+    {
+      "name": "09-yard-containment-gate.png",
+      "area": "yard",
+      "title": "Yard: Containment Gate Threshold Plate Flush on Floor y = 0.000m",
+      "sizeBytes": 148936
+    },
+    {
+      "name": "10-yard-infirmary-stretcher.png",
+      "area": "yard",
+      "title": "Yard: Field Infirmary Wheeled Stretcher Seated on Floor Mat (y = 0.020m)",
+      "sizeBytes": 168428
+    },
+    {
+      "name": "11-yard-infirmary-cabinet.png",
+      "area": "yard",
+      "title": "Yard: Medical Cabinet 4 Steel Legs on Mat & Monitor on Worktop",
+      "sizeBytes": 49594
+    },
+    {
+      "name": "12-yard-hangar-columns.png",
+      "area": "yard",
+      "title": "Yard: Hangar Column Steel Base Footplate Seated Flush on Floor (y = 0.000m)",
+      "sizeBytes": 160083
+    }
+  ]
+}

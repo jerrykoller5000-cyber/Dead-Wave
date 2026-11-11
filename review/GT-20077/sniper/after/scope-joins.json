@@ -1,0 +1,32 @@
+{
+  "collar-to-body-0": {
+    "lowerMm": 0,
+    "upperMm": 0,
+    "penetrating": true
+  },
+  "support-to-collar-0": {
+    "lowerMm": 0,
+    "upperMm": 0.0078125
+  },
+  "collar-to-body-1": {
+    "lowerMm": 0,
+    "upperMm": 0,
+    "penetrating": true
+  },
+  "support-to-collar-1": {
+    "lowerMm": 0,
+    "upperMm": 0.0078125
+  },
+  "exposed ZeroStop elevation turret": {
+    "lowerMm": 0,
+    "upperMm": 0.0078125
+  },
+  "right capped windage turret": {
+    "lowerMm": 0,
+    "upperMm": 0.0078125
+  },
+  "left parallax and illumination dial": {
+    "lowerMm": 0,
+    "upperMm": 0.0078125
+  }
+}

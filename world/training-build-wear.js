@@ -211,9 +211,15 @@ export function dressBuildWear(T, { B, D, gate, add, std, texture }) {
   const web = (x, y, z, ry, rz, size) => { const m = add(new T.PlaneGeometry(size, size), webMat, x, y, z); m.rotation.set(0, ry, rz); parts.push('build-web'); decals.push(m); return m; };
   const C = [[B.minX, B.minZ, Math.PI / 4], [B.maxX, B.minZ, -Math.PI / 4], [B.minX, B.maxZ, 3 * Math.PI / 4], [B.maxX, B.maxZ, -3 * Math.PI / 4]];
   C.forEach(([x, z, ry], i) => {
-    const ix = x + Math.sign(B.minX + B.maxX - 2 * x) * 0.32, iz = z + Math.sign(B.minZ + B.maxZ - 2 * z) * 0.32;
-    if (i !== 1 && i !== 3) web(ix, 5.62, iz, ry, Math.PI, 0.9 + i * 0.15);          // up under the tile ledge
-    if (i !== 2 && i !== 0) web(ix, 0.42, iz, ry, 0, 0.6 + i * 0.1);                  // down at the floor
+    const sx = Math.sign(B.minX + B.maxX - 2 * x), sz = Math.sign(B.minZ + B.maxZ - 2 * z);
+    if (i !== 1 && i !== 3) {
+      const sTop = 0.9 + i * 0.15, dTop = sTop * Math.SQRT1_2 / 2 + 0.002;
+      web(x + sx * dTop, 5.918 - sTop / 2, z + sz * dTop, ry, Math.PI, sTop);        // up under the tile ledge
+    }
+    if (i !== 2 && i !== 0) {
+      const sBot = 0.6 + i * 0.1, dBot = sBot * Math.SQRT1_2 / 2 + 0.002;
+      web(x + sx * dBot, sBot / 2 + 0.0002, z + sz * dBot, ry, 0, sBot);             // seated on the floor
+    }
   });
   for (const g of mounts.slice(0, 1)) {                                    // GB-165: behind one gun mount (5 webs in all)
     const ry = g.wall === 'west' ? Math.PI / 2 : g.wall === 'east' ? -Math.PI / 2 : g.wall === 'north' ? Math.PI : 0;
