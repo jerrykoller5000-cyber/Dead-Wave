@@ -1,0 +1,62 @@
+{
+  "phase": "after",
+  "capturedAt": "2026-11-11T07:02:30.723Z",
+  "metrics": {
+    "noon": {
+      "s1": {
+        "count": 112,
+        "maxRelZ": 29.39,
+        "splashed": 49,
+        "target0Burned": false
+      },
+      "s2": {
+        "count": 174,
+        "maxRelZ": 29.45,
+        "splashed": 79,
+        "target0Burned": true
+      }
+    },
+    "overcast": {
+      "s1": {
+        "count": 107,
+        "maxRelZ": 29.02,
+        "splashed": 51,
+        "target0Burned": false
+      },
+      "s2": {
+        "count": 164,
+        "maxRelZ": 29.39,
+        "splashed": 74,
+        "target0Burned": true
+      }
+    },
+    "dusk": {
+      "s1": {
+        "count": 112,
+        "maxRelZ": 29.13,
+        "splashed": 50,
+        "target0Burned": false
+      },
+      "s2": {
+        "count": 158,
+        "maxRelZ": 29.49,
+        "splashed": 64,
+        "target0Burned": true
+      }
+    },
+    "night": {
+      "s1": {
+        "count": 103,
+        "maxRelZ": 22.35,
+        "splashed": 47,
+        "target0Burned": false
+      },
+      "s2": {
+        "count": 160,
+        "maxRelZ": 29.57,
+        "splashed": 67,
+        "target0Burned": true
+      }
+    }
+  }
+}

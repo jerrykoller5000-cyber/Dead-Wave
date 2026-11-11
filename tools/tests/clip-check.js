@@ -1,6 +1,6 @@
 // CL-334 h: the hands against the guns, first person (J126 rule 2, J128), for tcl334b/c/d: each a few guns (the suite's
 // time limit). clipCheck(T, keys, ok, out): every gun in keys up at the hip, settled; both hands (the glove, its pads, or the
-// bare hand and its nails) against every closed part of the gun, and the gloved wrists against the sleeves.
+// bare hand and its nails) against every closed body of the gun (each mesh split into its bodies, CD-1), and the gloved wrists against the sleeves.
 export async function clipCheck(T, keys, ok, out) {
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
   const THREE = T.THREE || window.THREE, TOL = 0.0005;
@@ -16,6 +16,18 @@ export async function clipCheck(T, keys, ok, out) {
     for (let t = 0; t < P.length / 9; t++) { const k = [key(t * 3), key(t * 3 + 1), key(t * 3 + 2)]; for (const [a, b] of [[0, 1], [1, 2], [2, 0]]) { const e = k[a] < k[b] ? k[a] + '|' + k[b] : k[b] + '|' + k[a]; E.set(e, (E.get(e) || 0) + 1); } }
     for (const c of E.values()) if (c !== 2) return false;
     return true;
+  };
+  // CD-1 (11 Nov): a mesh can hold several bodies (the revolver's walnut grip shares its mesh with 780 open checkering quads):
+  // split it into its connected bodies (faces sharing an edge, 10 µm) and check every closed one; one open body no longer
+  // hides the rest of the mesh from the check
+  const bodiesOf = (P) => {
+    const n = P.length / 9, par = new Int32Array(n), first = new Map(), key = (i) => Math.round(P[i * 3] * 1e5) + ',' + Math.round(P[i * 3 + 1] * 1e5) + ',' + Math.round(P[i * 3 + 2] * 1e5);
+    for (let t = 0; t < n; t++) par[t] = t;
+    const fd = (x) => { while (par[x] !== x) { par[x] = par[par[x]]; x = par[x]; } return x; };
+    for (let t = 0; t < n; t++) { const k = [key(t * 3), key(t * 3 + 1), key(t * 3 + 2)]; for (const [a, b] of [[0, 1], [1, 2], [2, 0]]) { const e = k[a] < k[b] ? k[a] + '|' + k[b] : k[b] + '|' + k[a]; const f = first.get(e); if (f === undefined) first.set(e, t); else par[fd(t)] = fd(f); } }
+    const g = new Map(); for (let t = 0; t < n; t++) { const r = fd(t); if (!g.has(r)) g.set(r, []); g.get(r).push(t); }
+    if (g.size === 1) return [P];
+    return [...g.values()].map((ts) => { const B = new Float32Array(ts.length * 9); ts.forEach((t, i) => B.set(P.subarray(t * 9, t * 9 + 9), i * 9)); return B; });
   };
   const rayHits = (P, x, y, z) => {   // faces crossed by the ray from (x, y, z) along a slanted direction
     const dx = 0.8366, dy = 0.3419, dz = 0.4279; let n = 0;
@@ -63,7 +75,7 @@ export async function clipCheck(T, keys, ok, out) {
     for (const key of keys) {
       if (!(await take(key))) { out.push('INFO ' + key + ': not up in first person'); continue; }
       const V = vm(); V.root.updateMatrixWorld(true);
-      const parts = []; V.gun.root.traverse((m) => { if (m.isMesh && m.geometry && m.geometry.attributes.position && vis(m)) { const P = worldTris(m); if (closedOf(P)) { const box = new THREE.Box3(); const v = new THREE.Vector3(); for (let i = 0; i < P.length; i += 3) box.expandByPoint(v.set(P[i], P[i + 1], P[i + 2])); parts.push({ name: m.name || (m.parent && m.parent.name) || '?', P, box }); } } });
+      const parts = []; V.gun.root.traverse((m) => { if (m.isMesh && m.geometry && m.geometry.attributes.position && vis(m)) { for (const P of bodiesOf(worldTris(m))) if (closedOf(P)) { const box = new THREE.Box3(); const v = new THREE.Vector3(); for (let i = 0; i < P.length; i += 3) box.expandByPoint(v.set(P[i], P[i + 1], P[i + 2])); parts.push({ name: m.name || (m.parent && m.parent.name) || '?', P, box }); } } });
       let worst = 0, where = '';
       for (const sd of ['r', 'l']) {
         const A = V.arms && V.arms[sd]; if (!A) continue;

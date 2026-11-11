@@ -1,0 +1,100 @@
+{
+  "thrown": 3,
+  "afterEject": [
+    true,
+    true,
+    true,
+    false,
+    false,
+    false
+  ],
+  "eyeAfterEject": [
+    true,
+    true,
+    true,
+    false,
+    false,
+    false
+  ],
+  "caseGeometryMatches": true,
+  "frames": [
+    {
+      "view": "open",
+      "light": "noon",
+      "palmVisible": false,
+      "loaded": 3
+    },
+    {
+      "view": "open",
+      "light": "overcast",
+      "palmVisible": false,
+      "loaded": 3
+    },
+    {
+      "view": "open",
+      "light": "dusk",
+      "palmVisible": false,
+      "loaded": 3
+    },
+    {
+      "view": "open",
+      "light": "night",
+      "palmVisible": false,
+      "loaded": 3
+    },
+    {
+      "view": "palm",
+      "light": "noon",
+      "palmVisible": true,
+      "loaded": 3
+    },
+    {
+      "view": "palm",
+      "light": "overcast",
+      "palmVisible": true,
+      "loaded": 3
+    },
+    {
+      "view": "palm",
+      "light": "dusk",
+      "palmVisible": true,
+      "loaded": 3
+    },
+    {
+      "view": "palm",
+      "light": "night",
+      "palmVisible": true,
+      "loaded": 3
+    },
+    {
+      "view": "props",
+      "light": "noon",
+      "palmVisible": false,
+      "loaded": 3
+    },
+    {
+      "view": "props",
+      "light": "overcast",
+      "palmVisible": false,
+      "loaded": 3
+    },
+    {
+      "view": "props",
+      "light": "dusk",
+      "palmVisible": false,
+      "loaded": 3
+    },
+    {
+      "view": "props",
+      "light": "night",
+      "palmVisible": false,
+      "loaded": 3
+    }
+  ],
+  "end": {
+    "loaded": 6,
+    "shown": 6,
+    "eye": 6,
+    "reloading": false
+  }
+}

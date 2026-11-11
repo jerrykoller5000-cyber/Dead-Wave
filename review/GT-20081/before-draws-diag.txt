@@ -1,0 +1,20 @@
+Game-test request 7871f9cc-f2bc-4eb4-9a2c-527cb25b9a05 queued at position 1. Waiting...
+GRANT chatgpt2 GT-20081: starting one game-test command
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Missing GPU counters: [["minigun",{"all":23,"shown":0,"draws":0,"triangles":0}],["m4",{"all":36,"shown":0,"draws":0,"triangles":0}],["ak",{"all":26,"shown":0,"draws":0,"triangles":0}],["aa12",{"all":24,"shown":0,"draws":0,"triangles":0}],["pistol",{"all":20,"shown":0,"draws":0,"triangles":0}],["uzi",{"all":29,"shown":0,"draws":0,"triangles":0}],["shotgun",{"all":24,"shown":0,"draws":0,"triangles":0}],["revolver",{"all":51,"shown":0,"draws":0,"triangles":0}],["sniper",{"all":38,"shown":0,"draws":0,"triangles":0}],["launcher",{"all":29,"shown":0,"draws":0,"triangles":0}],["flamer",{"all":16,"shown":0,"draws":0,"triangles":0}],["chainsaw",{"all":30,"shown":0,"draws":0,"triangles":0}]]
+
+12 !== 0
+
+    at file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/GT-20081/draws.mjs:49:10 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 12,
+  expected: 0,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.13.0

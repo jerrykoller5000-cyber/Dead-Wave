@@ -1349,6 +1349,9 @@ export function makeSniperModel(ctx) {
   K.sph(0.017, gunDark, BS * 0.0922, 0, 0, stem, 12);
   K.cyl(0.008, 0.008, 0.018, gunBody, BS * 0.063, 0, 0, stem, 12, 'x');
   K.tor(0.012, 0.0015, gunBody, BS * 0.099, 0, 0, 0, Math.PI / 2, 0, stem, Math.PI * 2, 12);
+  // These four rigid details share the parent animation and can enter its material batches.
+  for (const detail of stem.children.slice()) bolt.attach(detail);
+  bolt.remove(stem);
   // the body: closed, its tail in the rear bridge and its face at the chamber (z 0.067); bright, with two flutes that turn
   // up out of the opening as the handle lifts, the lug ring and the extractor band behind the face, the extractor's claw
   K.cyl(0.0205, 0.0205, 0.207, gunMetal, 0, 0, 0.1435, bolt, 18, 'z');

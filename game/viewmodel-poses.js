@@ -227,8 +227,10 @@ const VM_STAGE2_RELOADS = Object.freeze({
       [.34, { pos: [-.07, .07, .01], rot: [.18, .26, -.36] }],
       [.50, { pos: [-.07, .07, .01], rot: [.18, .26, -.36] }],
       [.62, { pos: [-.058, .075, .008], rot: [.12, .22, -.28] }],
-      [.72, { pos: [-.08, -.10, -.08], rot: [.10, -.10, -.42] }],   // CL-306: for the pull the gun goes down and ahead, rolled left, so the arm crosses low
-      [.84, { pos: [-.08, -.10, -.08], rot: [.10, -.10, -.42] }],
+      // CE-3 (the pass-2 audit: down and ahead, the support arm crossed over it and the gun left the view): canted 32 degrees
+      // toward the support hand, the handle's side up to it, the forearm from the lower left (was [-.08, -.10, -.08] / [.10, -.10, -.42])
+      [.72, { pos: [-.03, 0, -.04], rot: [.10, .10, .55] }],
+      [.84, { pos: [-.03, 0, -.04], rot: [.10, .10, .55] }],
       [.92, { pos: [-.025, .03, 0], rot: [.18, .04, -.10] }], [1, null]],
     // CL-322 (the AK manual, GP-20056's lugs): out, the catch pressed, the magazine rocks forward on its front lug at the
     // well (.12-.17) and only then comes down; in, it arrives tilted with the front lug in the well (.555) and rocks back
@@ -238,6 +240,7 @@ const VM_STAGE2_RELOADS = Object.freeze({
       [.555, 'well', 'mag'], [.64, 'well', 'mag'], [.67, 'well', 'cup'], [.76, 'work', 'pinch'],
       [.83, 'work', 'pinch'], [.90, 'fore', 'fore'], [1, 'fore', 'fore']],
     mag: { grab: .12, swapOut: .335, swapIn: .385, seat: .64 },
+    elbowL: [-0.28, -0.30, 0.04],   // CE-3: the support elbow low and out to the left as the hand leaves the hold
     rock: { out: [.12, .17], in: [.585, .64], angle: .27, pivot: [0, .012, .066] },
     rack: [.76, .80, .83, .045],
     places: { well: { z: [.15, .90, .41], y: [-.60, -.28, -.75] }, below: { drop: .16 },
@@ -250,8 +253,10 @@ const VM_STAGE2_RELOADS = Object.freeze({
     gun: [[0, null], [.10, { pos: [-.035, .05, .015], rot: [.10, .20, -.23] }],
       [.51, { pos: [-.035, .055, .015], rot: [.10, .22, -.23] }],
       [.58, { pos: [-.03, .065, .008], rot: [.08, .16, -.18] }],
-      [.66, { pos: [-.07, -.12, -.10], rot: [.04, -.12, -.30] }],   // (rolled 63 degrees was tried: the forearm filled the centre of the view instead)
-      [.80, { pos: [-.07, -.12, -.10], rot: [.04, -.12, -.30] }],
+      // CE-3 (the pass-2 audit: dropped low and close, the support arm came over it and filled the view): canted 32 degrees
+      // toward the support hand and a little ahead, the knob turned to the hand, the forearm up from the lower left
+      [.66, { pos: [-.03, 0, -.04], rot: [.10, .10, .55] }],
+      [.80, { pos: [-.03, 0, -.04], rot: [.10, .10, .55] }],
       [.90, { pos: [-.018, .02, -.01], rot: [.12, .06, -.05] }], [1, null]],
     hand: [[0, 'fore', 'fore'], [.08, 'well', 'mag'], [.17, 'below', 'mag'],
       [.32, 'pouch', 'mag'], [.36, 'pouch', 'pouch'], [.49, 'below', 'mag'],
@@ -259,6 +264,7 @@ const VM_STAGE2_RELOADS = Object.freeze({
       [.78, 'work', 'pinch'], [.82, 'fore', 'fore'], [1, 'fore', 'fore']],
     mag: { grab: .10, swapOut: .315, swapIn: .365, seat: .58 },
     rack: [.70, .74, .78, .045],
+    elbowL: [-0.28, -0.30, 0.04],   // CE-3: the support elbow low and out to the left as the hand leaves the hold (VM.reloadElbowL's [-0.04, -0.34, 0.14] stood it up through the view)
     places: { well: { z: [0, .98, .20], y: [-.7, -.2, -.68] }, below: { drop: .12 },
       work: { at: [0, .115, .11], z: [0, -1, 0], y: [-.72, -.38, -.58] },   // CL-306: the forearm from the lower left
       pouch: { at: [-.24, -.46, -.29], z: [.25, .9, .3], y: [-.4, -.6, .65] } }
@@ -330,6 +336,7 @@ const VM_STAGE3_RELOADS = Object.freeze({
   },
   cylinder: {
     kind: 'part',
+    elbowL: [-0.28, -0.30, 0.04],   // CE-3 (the pass-2 audit): the support forearm up from the lower left, not standing over the left third of the view
     gun: [[0, null], [.14, { pos: [-.025, .04, .025], rot: [-.06, .13, .05] }],
       [.78, { pos: [-.025, .04, .025], rot: [-.06, .13, .05] }],
       [.96, { pos: [-.015, .025, .012], rot: [-.03, .07, .02] }], [1, null]],
@@ -569,8 +576,11 @@ export const VM_RELOADS = Object.freeze({
       [0.12, { pos: [-0.045, 0.045, 0.03], rot: [0.16, 0.34, -0.42] }],
       [0.55, { pos: [-0.045, 0.05, 0.03], rot: [0.16, 0.36, -0.42] }],
       [0.62, { pos: [-0.04, 0.062, 0.025], rot: [0.14, 0.31, -0.4] }],   // the slap lifts it
-      [0.68, { pos: [-0.04, 0.0, -0.03], rot: [0.22, 0.0, 0.42] }],      // CL-306 (the audit: it rolled 90 degrees): a 25-degree tilt in toward the support hand, the gun a little ahead
-      [0.80, { pos: [-0.03, -0.005, -0.02], rot: [0.24, 0.0, 0.45] }],   // pushed out against the rack
+      // CE-3 (the pass-2 audit: the support forearm lay across the pistol through the rack): out to the right, a little down and
+      // ahead, canted 40 degrees in toward the support hand, so the overhand grip comes from the lower left with the slide in view
+      // (was [-0.04, 0, -0.03] / [0.22, 0, 0.42], CL-306's 25-degree tilt)
+      [0.68, { pos: [0.02, -0.02, -0.06], rot: [0.2, 0.1, 0.7] }],
+      [0.80, { pos: [0.02, -0.025, -0.05], rot: [0.22, 0.1, 0.72] }],   // pushed out against the rack
       [0.90, { pos: [-0.02, 0.0, 0.0], rot: [0.2, 0.06, 0.3] }],
       [1.00, null]
     ],
@@ -580,6 +590,7 @@ export const VM_RELOADS = Object.freeze({
       [0.93, 'work', 'open'], [1.00, 'fore', 'fore']
     ],
     mag: { grab: 0.10, swapOut: 0.305, swapIn: 0.375, seat: 0.60 },
+    elbowL: [-0.28, -0.30, 0.04],   // CE-3: the support elbow low and out to the left as the hand leaves the hold
     rack: [0.72, 0.76, 0.89, 0.07],   // AG-168: the slide back over [0], [1], forward at [2]; travel (gun units)
     tacticalRack: true,   // CE-2 (J103, CLAUDE DIRECTOR 11 Nov): racked by the support hand with rounds left too
     places: {

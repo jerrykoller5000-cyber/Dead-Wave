@@ -30,10 +30,13 @@ def bodies(part):
     if len(T) < 3: return []
     T = np.round(T * 1e5) / 1e5   # as clip-check.js keys the corners (10 um), so a part it calls closed is closed here
     m = trimesh.Trimesh(vertices=T, faces=np.arange(len(T)).reshape(-1, 3), process=True)
-    if not len(m.faces) or not m.is_watertight: return [(part['name'], T)]
-    bs = m.split(only_watertight=False)
-    if len(bs) <= 1 or not all(b.is_watertight for b in bs): return [(part['name'], T)]
-    return [(part['name'] + '/' + str(i), b.vertices[b.faces].reshape(-1, 3)) for i, b in enumerate(bs)]
+    if not len(m.faces): return [(part['name'], T)]
+    bs = m.split(only_watertight=False)   # CD-1 fixes: split even when some bodies are open (the revolver's grip + its checkering)
+    if len(bs) <= 1: return [(part['name'], T)]
+    shut = [b for b in bs if b.is_watertight]; ope = [b for b in bs if not b.is_watertight]
+    out = [(part['name'] + '/' + str(i), b.vertices[b.faces].reshape(-1, 3)) for i, b in enumerate(shut)]
+    if ope: out.append((part['name'] + '/open', np.concatenate([b.vertices[b.faces].reshape(-1, 3) for b in ope])))   # the open ones together
+    return out
 ALLB = [b for part in D['parts'] for b in bodies(part)]
 for bname, T in ALLB:
     part = {'name': bname}

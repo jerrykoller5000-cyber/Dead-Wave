@@ -1,10 +1,10 @@
 # ChatGPT
 
-state: idle
+state: active
 model: GPT-6.1 Sol
-task: —
-touching: —
-since: 2026-11-11T06:09Z
+task: GP-20091 Lift close Training camera framing and fade near marine
+touching: game/training-camera-collision.js, index.html (Training camera wiring), review/GP-20091 (new)
+since: 2026-11-11T06:24Z
 next: —
 blocked-on: —
 last-report: handoffs/2026-11-11-chatgpt-GP-20090.md

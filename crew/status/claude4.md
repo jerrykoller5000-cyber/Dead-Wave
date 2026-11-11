@@ -1,17 +1,20 @@
 # Claude 1
 
-state: active
+state: idle
 model: Claude Opus 5.5
-task: CD-1 pass 2 fixes
-touching: game/viewmodel-fit.js, studio/hand-contacts.js, tools/handfit/, tools/tests/clip-check.js
-since: 2026-11-11T05:55Z
-next: CD-4 (was CL-342) J129 (Jerry, 10 Nov): the weapons' second round
+task: —
+touching: —
+since: 2026-11-11T06:34Z
+next: CD-1 (was CL-334) J101: a new, detailed hand (first and third per
 blocked-on: —
-last-report: handoffs/2026-11-11-claude4-CD-1.md
+last-report: handoffs/2026-11-11-claude4-CD-1-fixes.md
 
 ## Notes
 
-### Where things stand (11 Nov 06:05Z, session 3, CD-1 fixes)
+### Where things stand (11 Nov 06:40Z, session 3, CD-1 fixes) — **context nearly full, needs a new session**
+- Read handoffs/2026-11-11-claude4-CD-1-fixes.md first: its "Next session" line is the queue (revolver hands round the real
+  grip, shotgun firing fingers, GW-4 support thumb, grip length at the eye, contacts, tests, before/after). Done: GW-4 support
+  wraps (VM_FIT m4.l on the PC), clip-check.js splits bodies (on the PC, out with --review). CD-1 stays open.
 - Director's 4 fixes back from pass 2: (1) GW-4 support fingers open in a V; (2) pump shotgun firing fingers open off the grip;
   (3) revolver grey patches through the gloves; (4) revolver grip hanging below the hand at the eye.
 - FOUND (3)+(4): the revolver's walnut grip shares its mesh with 780 open checkering quads, so clip-check.js read the whole
@@ -21,6 +24,12 @@ last-report: handoffs/2026-11-11-claude4-CD-1.md
   aa12 30.8, flamer 46.0 (l)); c4/sdf_c4.py and c4/depth3.py split the same way. Request to CLAUDE DIRECTOR sent 05:54Z.
 - Cloud: exports need c4/fptune5.mjs (NOSHOT=1 VW=320 VH=180, steps split A1/A2/B/export with waits: the page OOMs otherwise;
   one gun per page). Steps in the cloud's /home/claude/fpshot/st3-<gun>.json (made from g9 minus retune).
+- New cloud tools (tools/handfit/c4, not yet copied to the PC): preview.mjs (a RESULT drawn offline into an export),
+  gripaxis.py (a firing hand put on a grip body's centre line; wrap2.js's PCA fails on the wide revolver grip), depth3.py,
+  fptune5.mjs; look/view.html NOGUN=1/DBL=1. Placing a hand in the page: V.info.tune[gun] = {poseR|poseL, r|l: {basis,p}};
+  V.retune(), then export (fpshot/mktune.py builds the steps). Then fit8.sh <name-r|l> wrap|fire <export>, applyoff.py
+  (FIT= a fit file holding the placed hand), setfit.py, re-export, depth3.py, look/shoot.mjs.
+- GW-4 support: wrap start done (fingers over the handguard's side), 1st solve as drawn 7.4 mm into the rail: one more solve.
 
 
 ### Who you are (D-145, Jerry 10 Nov 2026)

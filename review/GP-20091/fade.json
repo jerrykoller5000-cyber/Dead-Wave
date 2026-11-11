@@ -1,0 +1,24 @@
+[
+  {
+    "phase": "before",
+    "eye": {
+      "x": -8.42,
+      "y": -198.4,
+      "z": -635
+    },
+    "distance": 5.773159728050814e-15,
+    "headOpacity": 1,
+    "inside": []
+  },
+  {
+    "phase": "after",
+    "eye": {
+      "x": -8.42,
+      "y": -198.4,
+      "z": -635
+    },
+    "distance": 5.773159728050814e-15,
+    "headOpacity": 0,
+    "inside": []
+  }
+]

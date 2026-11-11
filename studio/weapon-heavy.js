@@ -1,7 +1,8 @@
 // GP-164: heavy-weapon cosmetic constructors. Existing animation and grip contracts remain in the caller.
 import { attachLaserLight } from './weapon-attachments.js';
-import { addTriggerArtwork, bindModelArtwork, groupArtwork } from './weapon-model-hooks.js';
+import { addArtworkInstances, addTriggerArtwork, bindModelArtwork, groupArtwork } from './weapon-model-hooks.js';
 import { markPaintSurface } from './weapon-finish.js';
+import { roundGeometry } from './weapon-casings.js';
 
 // Small closed surface builders use BufferGeometry, also available in the test renderer.
 // Shared geometry contains no instance material, colour, animation or game state.
@@ -315,7 +316,7 @@ export function makeMinigunModel(ctx) {
 }
 
 export function makeLauncherModel(ctx) {
-  const { THREE, gunKit, gunBand, gripOutline, gunEffects, finishGun, gunBody, gunDark, gunMid, gunAccent, gunPoly, gunRubber, gunOlive, hazardYellow, steelMat, brassMat } = ctx;
+  const { THREE, gunKit, gunBand, gripOutline, gunEffects, finishGun, gunBody, gunDark, gunMid, gunAccent, gunPoly, gunRubber, gunOlive, steelMat } = ctx;
   const gun = new THREE.Group();
   const K = gunKit(gun);
   const receiverSteel = steelMat.clone();
@@ -440,19 +441,28 @@ export function makeLauncherModel(ctx) {
     K.lathe([[0.029, 0.065], [0.034, 0.065], [0.034, 0.070], [0.029, 0.070], [0.029, 0.065]],
       gunAccent, { x, y, parent: drum, seg: 16 }); // steel lips around the six open chamber mouths
   }
-  const drumRounds = [];
+  // The loose copy and the six inventory inserts use one matte, vertex-coloured prop.
+  const roundArt = roundGeometry(THREE, 'launcher');
+  roundArt.computeBoundingBox();
+  const artSize = roundArt.boundingBox.getSize(new THREE.Vector3());
+  const roundFinish = new THREE.MeshStandardMaterial({
+    color: 0xffffff, vertexColors: true, roughness: .78, metalness: .18
+  });
+  function placeRound(parent, x, y, z, width, height) {
+    const mesh = new THREE.Mesh(roundArt, roundFinish);
+    mesh.rotation.x = Math.PI / 2;
+    mesh.scale.set(width / artSize.x, height / artSize.y, width / artSize.z);
+    mesh.position.set(x, y, z);
+    parent.add(mesh);
+    return mesh;
+  }
+  const drumRounds = [], displayedRounds = [];
   for (let i = 0; i < 6; i++) {
     const ang = (i / 6) * Math.PI * 2;
     const cx = Math.sin(ang) * 0.065, cy = Math.cos(ang) * 0.065;
     const round = new THREE.Group();
-    // Each coloured section meets the next at its end face. The animation moves them as one insert.
-    K.cyl(0.0315, 0.0315, 0.003, brassMat, cx, cy, -0.0665, round, 16);
-    K.cyl(0.004, 0.004, 0.001, gunDark, cx, cy, -0.0685, round, 10);
-    K.cyl(0.025, 0.025, 0.088, gunOlive, cx, cy, -0.021, round, 16);
-    K.cyl(0.029, 0.029, 0.009, gunDark, cx, cy, 0.0275, round, 16);
-    K.lathe([[0, 0.032], [0.025, 0.032], [0.025, 0.0425], [0, 0.0425]], gunOlive, { x: cx, y: cy, parent: round, seg: 16 });
-    K.cyl(0.025, 0.025, 0.003, hazardYellow, cx, cy, 0.044, round, 16);
-    K.lathe([[0, 0.0455], [0.025, 0.0455], [0.024, 0.048], [0.020, 0.055], [0.012, 0.061], [0, 0.062]], gunOlive, { x: cx, y: cy, parent: round, seg: 16 });
+    const mesh = placeRound(round, cx, cy, -.0035, .063, .131);
+    displayedRounds.push({anchor:round, mesh});
     drum.add(round);
     drumRounds.push(round);
     const fa = ang + Math.PI / 6;
@@ -467,6 +477,7 @@ export function makeLauncherModel(ctx) {
   drum.add(drumWinder);
   drumHinge.add(drum);
   gun.add(drumHinge);
+  addArtworkInstances(THREE, gun, drum, 'launcher-loaded-inserts', displayedRounds);
   gun.userData.drum = drum;
   gun.userData.drumRounds = drumRounds;
   gun.userData.drumWinder = drumWinder;
@@ -482,11 +493,7 @@ export function makeLauncherModel(ctx) {
   // One loose 40 mm round for the support palm during each loading trip. Its origin is the round's centre;
   // keep it as a hidden direct child so the first-person copy can move it independently of the drum.
   const loadRound = K.group(0, 0, 0);
-  K.lathe([[0, -0.052], [0.025, -0.052], [0.027, -0.047], [0.027, -0.038],
-    [0.025, -0.033], [0.025, 0.016], [0.022, 0.031], [0.014, 0.048], [0, 0.052]], gunOlive,
-  { parent: loadRound, seg: 16 });
-  K.cyl(0.0275, 0.0275, 0.005, gunAccent, 0, 0, -0.048, loadRound, 16);
-  K.cyl(0.0255, 0.0255, 0.004, hazardYellow, 0, 0, -0.032, loadRound, 16);
+  placeRound(loadRound, 0, 0, 0, .055, .104);
   loadRound.visible = false;
   gun.userData.loadRound = loadRound;
   gun.userData.baseLoadRoundPos = loadRound.position.clone();

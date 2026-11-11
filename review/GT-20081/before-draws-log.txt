@@ -1,0 +1,16 @@
+GRANT chatgpt2 GT-20081: starting one game-test command
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Missing GPU counters
+    at file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/GT-20081/draws.mjs:47:3 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+
+Node.js v24.13.0

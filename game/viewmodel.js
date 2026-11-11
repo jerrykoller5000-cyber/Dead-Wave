@@ -23,6 +23,7 @@ import { ITEM_POSES, gripPose } from '../studio/hand-grips.js';
 import { handContact } from '../studio/hand-contacts.js';   // CL-334 h
 import { VM_FIT } from './viewmodel-fit.js';   // CL-334 h: each gun's hands fitted to its shape (generated)
 import { flippedTwin, needsFlip } from './vm-flip.js';
+import { updateArtworkInstances } from '../studio/weapon-model-hooks.js';
 
 const smooth = (t) => { t = t < 0 ? 0 : t > 1 ? 1 : t; return t * t * (3 - 2 * t); };
 const clamp = (v, a, b) => (v < a ? a : v > b ? b : v);
@@ -273,7 +274,10 @@ export function createViewmodel(ctx) {
     if (src.isInstancedMesh) {
       // The chainsaw's moving teeth are one draw. Keep their instances in the
       // eye copy; a plain Mesh would show only the prototype tooth.
-      o = new T.InstancedMesh(geoOf(src.geometry), vmMaterial(src.material), src.count);
+      const capacity = src.instanceMatrix.array.length / 16;
+      o = new T.InstancedMesh(geoOf(src.geometry), vmMaterial(src.material), capacity);
+      o.count = src.count;
+      if (src.userData.artworkSlots) o.userData.artworkSlots = src.userData.artworkSlots;
       o.instanceMatrix.array.set(src.instanceMatrix.array);
       o.instanceMatrix.needsUpdate = true;
       o.userData.vmInstanceVersion = src.instanceMatrix.version;
@@ -1393,6 +1397,8 @@ export function createViewmodel(ctx) {
         }
       } }
     driveParts(R, u, st.rounds || null);
+    updateArtworkInstances(T, gun.root);
+    if (gun2) updateArtworkInstances(T, gun2.root);
     place();
   }
   // CL-306: the reload's moving parts (GB-302: named on the gun, at rest unless the view moves them). The revolver's six

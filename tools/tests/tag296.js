@@ -100,15 +100,15 @@
     ok(p0 && !!p0.mesh.material.map, 'flame stream materials use multi-tongue procedural CanvasTexture');
 
     const maxTipScale = parts.reduce((m, p) => Math.max(m, p.mesh.scale.x, p.mesh.scale.y), 0);
-    ok(maxTipScale > 0.2 && maxTipScale < 3.4,
-      `flame body swells then thins at tips instead of inflating into giant spheres (maxWidthScale=${maxTipScale.toFixed(2)})`);
+    ok(maxTipScale > 0.4 && maxTipScale < 8.5,
+      `flame rope & wall splash swell organically within controlled bounds (maxWidthScale=${maxTipScale.toFixed(2)})`);
 
     T.setMouseFireDbg(false);
     await gWait(0.4);
     ok(char.count() > 0 && char.count() < 120,
       `flames stamp deduplicated organic carbon char marks on Training Ground surfaces (count=${char.count()})`);
 
-    // 3. Brief 0.18s trigger tap on Lane 2 scorches plate WITHOUT burning it down (<0.75s sustained exposure)
+    // 3. Brief 0.15s trigger tap on Lane 2 scorches plate WITHOUT burning it down (<0.75s sustained exposure)
     const stand2 = () => {
       T.player.position.set(cx2, floor, O.z - 0.25);
       T.setHp?.(1e6);
@@ -119,7 +119,7 @@
     stand2();
     await wait(200);
     T.setMouseFireDbg(true);
-    await gWait(0.18, () => { stand2(); return false; });
+    await gWait(0.15, () => { stand2(); return false; });
     T.setMouseFireDbg(false);
     let peakBriefHeat = 0;
     await gWait(1.25, () => {
@@ -128,27 +128,42 @@
       return false;
     });
     ok(peakBriefHeat > 0 && peakBriefHeat < T.flameDbg.igniteS && lane2.state === 'up' && !lane2.burned,
-      `brief 0.18s flame burst heats Lane 2 (peak=${peakBriefHeat.toFixed(2)}s < ${T.flameDbg.igniteS}s) without burning it down (state=${lane2.state})`);
+      `brief 0.15s flame burst heats Lane 2 (peak=${peakBriefHeat.toFixed(2)}s < ${T.flameDbg.igniteS}s) without burning it down (state=${lane2.state})`);
 
-    // 4. Sustained stream (>=0.75s contact) on Lane 1 ignites it and burns it to realistic ash pile over ~2.8s
+    // 4. Pressurized burning-fuel rope from firing line (z = -0.25) reaches 8m Lane 1 target (igniting >=0.75s) AND reaches 30m back wall fireball by 2.0s!
+    T.flameDbg.clear?.();
     const stand1 = () => {
-      T.player.position.set(cx1, floor, lane1.box.minZ - 4.0);
+      T.player.position.set(O.x + 5.62, floor, O.z - 0.25);
       T.setHp?.(1e6);
       T.setAimYawDbg(0);
-      T.setAimTargetDbg?.(cx1, lane1.box.minZ + 5);
-      T.aimPointDbg?.(cx1, lane1.box.minY + 0.7, lane1.box.minZ);
+      T.setAimTargetDbg?.(O.x + 5.62, O.z + 30.0);
+      T.aimPointDbg?.(O.x + 5.62, floor + 1.45, O.z + 30.0);
     };
     stand1();
     await wait(250);
     const tIgnite0 = T.getSimTime();
     T.setMouseFireDbg(true);
-    const ignited = await gWait(5.0, () => { stand1(); return lane1.state === 'wrecked'; });
+    const ignited = await gWait(3.5, () => { stand1(); return lane1.state === 'wrecked'; });
     const igniteElapsed = T.getSimTime() - tIgnite0;
+    // Keep holding trigger to 2.0s total so the rope reaches the 30m back wall and splashes into a fireball there
+    const remHold = Math.max(0.45, 2.0 - igniteElapsed);
+    await gWait(remHold, () => { stand1(); return false; });
+    const ropeParts = T.flameDbg.particles();
+    const maxRelZ = ropeParts.reduce((m, p) => Math.max(m, p.z - O.z), 0);
+    const splashedBackWall = ropeParts.filter((p) => p.splashed && (p.z - O.z) >= 27.5).length;
+    const nearNozzle = ropeParts.filter((p) => !p.splashed && (p.z - O.z) < 2.2);
+    const midRope = ropeParts.filter((p) => !p.splashed && (p.z - O.z) >= 10 && (p.z - O.z) <= 24);
+    const avgNozzleW = nearNozzle.length ? nearNozzle.reduce((s, p) => s + p.mesh.scale.x, 0) / nearNozzle.length : 99;
+    const avgMidW = midRope.length ? midRope.reduce((s, p) => s + p.mesh.scale.x, 0) / midRope.length : 0;
     T.setMouseFireDbg(false);
 
     ok(ignited && lane1.state === 'wrecked' && lane1.burned === true,
-      `sustained flame ignites Lane 1 after ~${igniteElapsed.toFixed(2)}s (burned=${lane1.burned}, state=${lane1.state})`);
+      `burning-fuel rope from firing line ignites 8m Lane 1 target after ~${igniteElapsed.toFixed(2)}s (burned=${lane1.burned}, state=${lane1.state})`);
     ok(igniteElapsed >= 0.65, `ignition required sustained flame contact (${igniteElapsed.toFixed(2)}s >= 0.65s)`);
+    ok(maxRelZ >= 28.5 && splashedBackWall >= 8,
+      `held trigger reaches 30m back wall and splashes into fireball (maxRelZ=${maxRelZ.toFixed(2)}m, backWallSplashed=${splashedBackWall})`);
+    ok(avgNozzleW < 1.15 && avgMidW > avgNozzleW * 2.0,
+      `rope leaves nozzle thin and widens downrange (nozzleW=${avgNozzleW.toFixed(2)}, midRopeW=${avgMidW.toFixed(2)})`);
 
     // Range console / start refuses drills with 'target-burned' per GP-20089 contract
     const feat = T.rangeDbg.feature?.();

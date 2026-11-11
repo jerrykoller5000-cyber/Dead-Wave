@@ -2,9 +2,9 @@
 
 state: active
 model: Claude Opus 5.5
-task: CC-342 J109 optics recoil first, then J108 laser bend, J123 sniper scope-in, J121 chainsaw view, J119 Breacher stock, J120 flamer hose
-touching: game/viewmodel.js (the view: opticAds/adsOf, the eye-hide, the ADS pose and view placement, the laser), tools/tests/tcc342.js (new)
-since: 2026-11-11T05:57Z
+task: CC-342 J109 optics recoil (glass turns with the kick; the RMR dot rides the bore), then J108, J123, J121, J119, J120
+touching: game/viewmodel.js (the view: opticAds/adsOf/opticKick, the eye-hide, the ADS pose and view placement, the laser), index.html (the #opticDot block, lent by the Director for CC-342), tools/tests/tcc342.js (new)
+since: 2026-11-11T06:54Z
 next: CC-342 J108, J109, J119, J120, J121, J123: the view in first person
 blocked-on: —
 last-report: handoffs/2026-11-11-claude3-CC-341c.md

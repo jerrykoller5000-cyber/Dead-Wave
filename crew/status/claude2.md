@@ -4,19 +4,19 @@ state: idle
 model: Claude Opus 5.5 (claude-opus-5-5)
 task: —
 touching: —
-since: 2026-11-11T06:02Z
+since: 2026-11-11T06:12Z
 next: CB-290 J126 rule 3 (Jerry, 10 Nov, standing, D-138): "No part of th
 blocked-on: —
-last-report: handoffs/2026-11-11-claude2-CB-302.md
+last-report: handoffs/2026-11-11-claude2-CB-304.md
 
 ## Notes
 
-### Where it stands (claude2, 11 Nov 04:55Z, the 00:05Z session)
-- Done tonight (handoffs/2026-11-11-claude2-*.md): CB-295, CB-296, CB-289 (b), CB-294 (tcb248 --review), CB-297 (J118), CB-299; CB-303 (fakethree TubeGeometry = three's) is on the PC, checked in, its browser check pending.
-- Written, not on the PC yet (patches in /mnt/user-data/outputs in my cloud, copies in Claude outputs/): CB-301 (paired magazine art + the incoming magazine's count mid-reload, patch300.py/tcb301; ids shifted: CB-300 was taken), CB-302 (the forend worked through the ammo change's unload, patch301.py/tcb302), CB-291's trunk/leg hold (Claude outputs/cb291/patch291.py + body-limits.draft.js + tcb291.draft.js; CLAUDE DIRECTOR chose (b); carrierClearance call asked of Claude 3).
-- CB-243 reds run (cloud /home/claude/cb9, runs/run4.log, the 02:52Z tree): 72/119 at 04:54Z. Reds with owners so far: t106b (music.json kits: CLAUDE DIRECTOR), tag289 (its ./vendor import path: Antigravity, asked), tcl301 (FP akimbo view guns), tcl334b/c/d (hand through hand/gun: Claude 1 CD-1), tgb273, tgt20076 (missing fitted optic pistol rmr: ChatGPT 2), t17 (build reticle storey pick: green at 00:15Z, red now: to bisect), t38 (470 meshes), t39, t180, t184, t213/t217/t221 (GB-era gun geometry vs ChatGPT 2's models), t225, t262; cloud-only (no gh audio): t60 t61 t73 t172 t178. Green again: tcb248, tcb293, tcl275b/d, tcb289/294/294b/295/297/299.
-- Next on wake: read runs/run4.log end, the chained batch (/home/claude/chain.sh: runs/audit-raw.log and cb10/runs/batch5.log), land CB-301/302 if green, calibrate and land CB-291, write CB-243's reds handoff (reds by owner), land tools/tests/run-all.mjs (FAIL lines inline, DW_CHECK_MS) - already on the PC.
-- Cloud copy recipe: Working notes' tar PLUS assets/intro/*.js *.css and assets/soundtrack/*.json *.mid (an --exclude of a dir drops files named under it); DW_CHECK_MS=420000 in the cloud.
+### context nearly full, needs a new session (claude2, 11 Nov 06:15Z)
+The 00:05Z session is near its limit; start a fresh Claude 2 session. Everything is on the PC (the cloud copies go with the session).
+- Done tonight, checked out (handoffs/2026-11-11-claude2-CB-*.md): CB-295, CB-296, CB-289 (b), CB-294 (tcb248 --review), CB-297, CB-299, CB-243 (the reds list: 33 reds, each owner asked), CB-301, CB-302, CB-303, CB-304.
+- Next, in order: (1) CB-305 (ChatGPT's GP-20090 asks, my tests and rack): t262 and tcl301 take the pair through the Armory (the second gun in a secondary slot: pairInLoadout), every pose check kept; t138 asserts the same 4 magazines before the stow, on the shelf and after, without clearing the live ledger (+ a workbench buy case); t180: armoryDisplayKinds (index.html ~28073) shows the carried guns on the rack again within t38's mesh budget. (2) CB-291 step 1: Claude outputs/cb291/patch291.py (the neck, hips, knees, ankles held after the pose; the spine left out) + body-limits.draft.js (copy over core/body-limits.js: it keeps every CB-289 export) + tcb291.draft.js -> tools/tests/tcb291.js; node --test core/body-limits.test.mjs (body-limits.test.draft.mjs) 9/9. Audit on the 02:52Z tree: only the shoulders (twist read raw, CLAUDE DIRECTOR wants it against where the elbow points, held inside the IK with Claude 3's carrierClearance(ud): asked of Claude 3) and the spine's turn (63 deg aimed: asked CLAUDE DIRECTOR (a) hips follow / (b) exception / (c) leave) stay outside with step 1. (3) CB-290, CB-292 (Antigravity's AG-292 found the kiosk/armory past the range wall x=8.0: on CB-292's list). (4) my reds: t213 (minigun burst 9 cases 9 links), t225 (grenade arc), t184 (boot slide: CB-290), t17 is FLAKY (green/red/green on three trees).
+- Open with others: ChatGPT 2 (offhand Wasp clone lacks setMagazineRounds), CLAUDE DIRECTOR (crew.mjs reply collision fix; spine), Antigravity (tag289 import path), Claude 3 (carrierClearance shape).
+- Cloud copy recipe: Working notes' tar PLUS assets/intro/*.js *.css and assets/soundtrack/*.json *.mid (an --exclude of a dir drops files named under it); set DW_CHECK_MS=420000 in the cloud; run-all now prints each FAIL as it happens. Patch tools: Claude outputs/cb295/syncheck.mjs (node --check of index.html's module scripts). A cloud reds run of ~120 tests takes ~2.5 h at one worker.
 
 ### Who you are (D-137, Jerry 10 Nov 2026)
 You are **Claude 2**, the crew's second Claude: a Claude task of your own, on Claude Sonnet 5.5 (Extra). You took

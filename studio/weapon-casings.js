@@ -14,6 +14,7 @@ const shapes = {
 };
 const sharedShape = { aa12: 'shotgun', m240: 'minigun' };
 const geometryByThree = new WeakMap();
+const launcherSilver = 0xbcc3c3;
 
 // Visible portion of a carrier sliding behind the rear edge of a receiver window.
 // The view gun calls the same pose on its copy. The rear edge conceals the steel
@@ -104,7 +105,35 @@ function shotgunShell(THREE, load, spent) {
   return geometry;
 }
 
+// Closed silhouette from the game's loose palm prop. The colour bands distinguish
+// a loaded insert even when its outline is lost against the glove.
+function launcherRound(THREE) {
+  let cache = geometryByThree.get(THREE);
+  if (!cache) geometryByThree.set(THREE, cache = new Map());
+  if (cache.has('launcher-live')) return cache.get('launcher-live');
+
+  const silver = new THREE.Color(launcherSilver), band = new THREE.Color(0xb89c4d);
+  const olive = new THREE.Color(0x626a43), centre = new THREE.Color(0x626b6a);
+  const outline = [
+    [0, 0, centre], [.13, 0, centre], [.17, 0, silver], [.90, 0, silver],
+    [1, .05, silver], [1, .15, silver],
+    [.94, .16, olive], [.92, .18, olive], [.92, .19, band], [.92, .23, band],
+    [.92, .24, olive], [.91, .65, olive], [.80, .80, olive], [.51, .96, olive], [0, 1, olive]
+  ];
+  const radius = shapes.launcher[1] * .001;
+  const points = outline.map(([r, y]) => new THREE.Vector2(r * radius, (y - .5) * radius * 3.8));
+  const geo = new THREE.LatheGeometry(points, 16), colors = [];
+  for (let i = 0; i < geo.attributes.position.count; i++) {
+    const color = outline[i % outline.length][2];
+    colors.push(color.r, color.g, color.b);
+  }
+  geo.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+  cache.set('launcher-live', geo);
+  return geo;
+}
+
 export function roundGeometry(THREE, weapon, load) {
+  if (weapon === 'launcher') return launcherRound(THREE);
   if (weapon === 'shotgun') return shotgunShell(THREE, load, false);
   if (weapon === 'aa12') return shotgunShell(THREE, 'birdshot', false);
   if (weapon === 'ak' || weapon === 'revolver' || weapon === 'uzi' || weapon === 'sniper' || weapon === 'minigun') return metallicCartridge(THREE, weapon, true);
@@ -158,12 +187,17 @@ function metallicCartridge(THREE, kind, live) {
   const geometry = new THREE.LatheGeometry(points, 20);
   const position = geometry.attributes.position;
   const colors = [];
+  const shell = kind === 'launcher' ? new THREE.Color(launcherSilver) : null;
   for (let i = 0; i < position.count; i++) {
     const y = position.getY(i) * 1000 + centre;
     const r = Math.hypot(position.getX(i), position.getZ(i)) * 1000;
     if (live && y > length + .05) colors.push(.58, .22, .105);
     else if ((kind === 'ak' || kind === 'revolver' || kind === 'sniper') && !live && y >= length*.19 && (r <= mouth-wall+.001 || (Math.abs(y-length*.2)<.001 && r<=body*.77))) colors.push(.15,.095,.048);
-    else if (kind === 'launcher') colors.push(0.78, 0.75, 0.70);
+    else if (kind === 'launcher') {
+      const inside = y >= length * .19 && r <= mouth - wall + .001;
+      if (inside) colors.push(.075, .082, .080);
+      else colors.push(shell.r, shell.g, shell.b);
+    }
     else if (y < 0.4 && r <= primer * 1.06) colors.push(0.73, 0.63, 0.49);
     else colors.push(0.88, 0.60, 0.27);
   }

@@ -1,0 +1,57 @@
+Game-test request c2ee0bd4-3b2e-44b9-8d03-2532f93fd1af queued at position 1. Waiting...
+GRANT chatgpt2 GT-20081: starting one game-test command
+check-players: 313 player.position reads, all in the allowed places
+           FAIL all twelve guns: 516 meshes after merging
+FAIL  t38     11 pass   1 fail  119.0s
+           recovering browser after t38: 1 fail
+           page error: TypeError: Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'.
+           FAIL the whole bolt handle is on the gun's right, gun-local x < 0 (x -0.021 .. 0.147)
+           FAIL the knob stands out on the right (-0.021)
+           FAIL gun.userData.boltSide is -1
+           FAIL the hand's grab point is the knob (gun-local x 0.130)
+           FAIL thrown out to the gun's right (gun-local vx 3.273; world 3.292,1.425,-0.858 age 0.050)
+FAIL  t221    22 pass   5 fail  83.5s
+           recovering browser after t221: 5 fail
+           INFO minigun muzzle 0.000,0.000,0.791 box -0.231,-0.183,-0.397 / 0.215,0.266,0.784
+           INFO minigun dir 1 rearTop 0.000,0.266,0.003 frontTop 0.000,0.076,0.741
+           INFO m4 muzzle 0.000,0.020,0.980 box -0.053,-0.278,-0.569 / 0.053,0.170,0.978
+           INFO m4 dir 1 rearTop 0.000,0.170,0.046 frontTop 0.000,0.138,0.673
+           INFO ak muzzle 0.000,-0.005,0.855 box -0.032,-0.311,-0.515 / 0.059,0.083,0.829
+           INFO ak dir 1 rearTop -0.005,0.074,0.218 frontTop 0.007,0.083,0.723
+           INFO aa12 muzzle 0.000,0.015,0.980 box -0.155,-0.415,-0.580 / 0.155,0.180,0.976
+           INFO aa12 dir 1 rearTop -0.000,0.180,-0.120 frontTop -0.014,0.175,0.750
+           INFO pistol muzzle 0.000,0.050,0.320 box -0.028,-0.177,-0.100 / 0.028,0.092,0.312
+           INFO pistol dir 1 rearTop -0.014,0.075,0.072 frontTop -0.002,0.092,0.287
+           INFO uzi muzzle 0.000,0.030,0.480 box -0.054,-0.324,-0.157 / 0.065,0.158,0.479
+           INFO uzi dir 1 rearTop -0.014,0.150,0.206 frontTop -0.001,0.067,0.354
+           INFO shotgun muzzle 0.000,0.030,0.970 box -0.030,-0.199,-0.497 / 0.030,0.059,0.952
+           INFO shotgun dir 1 rearTop 0.000,0.056,-0.021 frontTop 0.000,0.059,0.910
+           INFO revolver muzzle 0.000,0.083,0.350 box -0.050,-0.151,-0.145 / 0.046,0.122,0.333
+           INFO revolver dir 1 rearTop -0.015,0.115,0.064 frontTop -0.002,0.121,0.326
+           INFO sniper muzzle 0.000,0.040,1.220 box -0.037,-0.203,-0.640 / 0.147,0.182,1.205
+           INFO sniper dir 1 rearTop 0.001,0.182,-0.112 frontTop 0.000,0.064,1.133
+           INFO launcher muzzle 0.000,0.040,0.720 box -0.156,-0.188,-0.428 / 0.112,0.192,0.682
+           INFO launcher dir 1 rearTop -0.010,0.192,-0.085 frontTop -0.013,0.174,0.638
+           INFO flamer muzzle 0.000,0.050,0.998 box -0.085,-0.175,-0.191 / 0.178,0.112,1.015
+           INFO flamer dir 1 rearTop 0.000,0.102,0.401 frontTop 0.000,0.112,1.007
+           INFO chainsaw muzzle 0.000,0.040,0.696 box -0.175,-0.109,-0.504 / 0.218,0.265,0.703
+           INFO chainsaw dir 1 rearTop -0.014,0.265,-0.031 frontTop -0.010,0.090,0.654
+           FAIL sniper: eye on the scope axis within 3 mm (eye y 0.1400, tube top 0.1815)
+FAIL  t277    37 pass   1 fail  51.4s
+           recovering browser after t277: 1 fail
+
+3 checks: 70 pass, 7 fail
+
+by owner:
+  unassigned — triage
+    t38    1 fail  FAIL all twelve guns: 516 meshes after merging
+           FAIL all twelve guns: 516 meshes after merging
+  unassigned
+    t221   5 fail  FAIL the whole bolt handle is on the gun's right, gun-local x < 0 (x -0.021 .. 0.147)
+           FAIL the whole bolt handle is on the gun's right, gun-local x < 0 (x -0.021 .. 0.147)
+           FAIL the knob stands out on the right (-0.021)
+           FAIL gun.userData.boltSide is -1
+           FAIL the hand's grab point is the knob (gun-local x 0.130)
+           FAIL thrown out to the gun's right (gun-local vx 3.273; world 3.292,1.425,-0.858 age 0.050)
+    t277   1 fail  FAIL sniper: eye on the scope axis within 3 mm (eye y 0.1400, tube top 0.1815)
+           FAIL sniper: eye on the scope axis within 3 mm (eye y 0.1400, tube top 0.1815)

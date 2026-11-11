@@ -1,0 +1,157 @@
+{
+  "phase": "after",
+  "capturedAt": "2026-11-11T06:14:07.886Z",
+  "renderer": {
+    "backend": "WebGPUBackend",
+    "gfx": "high"
+  },
+  "loadReadyMs": 10811,
+  "bench": {
+    "idle": {
+      "label": "idle_range_1p_flamer",
+      "seconds": 5,
+      "fps": 59.9,
+      "frameMs": 16.69,
+      "low1pct": 40.1,
+      "worstMs": 17,
+      "hitches": 0,
+      "draws": 219,
+      "triangles": 128639,
+      "prof": {
+        "frames": 303,
+        "tickMs": 9.66,
+        "top": [
+          {
+            "k": "r:render",
+            "avg": 5.17,
+            "max": 8.6
+          },
+          {
+            "k": "m:hold",
+            "avg": 1.25,
+            "max": 3.4
+          },
+          {
+            "k": "m:pose",
+            "avg": 0.71,
+            "max": 1.9
+          },
+          {
+            "k": "aim+climb",
+            "avg": 0.54,
+            "max": 1.3
+          },
+          {
+            "k": "r:matrices",
+            "avg": 0.54,
+            "max": 2
+          },
+          {
+            "k": "effects",
+            "avg": 0.27,
+            "max": 0.6
+          },
+          {
+            "k": "viewmodel",
+            "avg": 0.24,
+            "max": 0.7
+          },
+          {
+            "k": "drops+hud",
+            "avg": 0.12,
+            "max": 0.9
+          }
+        ],
+        "spikes": 0,
+        "newPipelines": 0,
+        "activeFlames": 0,
+        "charMarks": 0
+      }
+    },
+    "activeFire": {
+      "label": "active_flamer_stream_char_burn",
+      "seconds": 6,
+      "fps": 60,
+      "frameMs": 16.67,
+      "low1pct": 54.3,
+      "worstMs": 18.6,
+      "hitches": 0,
+      "draws": 390,
+      "triangles": 138289,
+      "prof": {
+        "frames": 365,
+        "tickMs": 12.54,
+        "top": [
+          {
+            "k": "r:render",
+            "avg": 6.6,
+            "max": 11.4
+          },
+          {
+            "k": "m:hold",
+            "avg": 1.22,
+            "max": 2.7
+          },
+          {
+            "k": "w:rest",
+            "avg": 1.16,
+            "max": 2.3
+          },
+          {
+            "k": "m:pose",
+            "avg": 1.07,
+            "max": 2.1
+          },
+          {
+            "k": "r:matrices",
+            "avg": 0.63,
+            "max": 1.2
+          },
+          {
+            "k": "aim+climb",
+            "avg": 0.53,
+            "max": 1.1
+          },
+          {
+            "k": "effects",
+            "avg": 0.25,
+            "max": 0.6
+          },
+          {
+            "k": "viewmodel",
+            "avg": 0.22,
+            "max": 0.5
+          }
+        ],
+        "spikes": 0,
+        "newPipelines": 0,
+        "activeFlames": 84,
+        "charMarks": 170
+      }
+    }
+  },
+  "burnReport": {
+    "lane0Before": "up",
+    "lane1Before": "up"
+  },
+  "postBurnState": {
+    "burnedFromFiringLine": true,
+    "lane0State": "wrecked",
+    "wreck0": {
+      "index": 0,
+      "kind": "burn",
+      "t": 4.977999999999997,
+      "ash": true,
+      "ashSize": 1,
+      "flames": 0,
+      "pieces": 0,
+      "resting": 0,
+      "p0": null,
+      "plateVisible": false,
+      "plateColor": 0.06000000000000005
+    },
+    "charCount": 68,
+    "lane2StateAfterShot": "falling",
+    "hitLane2": true
+  }
+}
