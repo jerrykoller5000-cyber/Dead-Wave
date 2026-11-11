@@ -1,0 +1,338 @@
+{
+  "phase": "integrated",
+  "rows": [
+    {
+      "ammo": 6,
+      "occupancy": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "flags": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "held": [
+        6,
+        0
+      ],
+      "eye": [
+        6,
+        0
+      ],
+      "independent": true,
+      "eyeFlags": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "acceptedCase": true
+    },
+    {
+      "ammo": 5,
+      "occupancy": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "flags": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        false
+      ],
+      "held": [
+        5,
+        1
+      ],
+      "eye": [
+        5,
+        1
+      ],
+      "independent": true,
+      "eyeFlags": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        false
+      ],
+      "acceptedCase": true
+    },
+    {
+      "ammo": 4,
+      "occupancy": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "flags": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false
+      ],
+      "held": [
+        4,
+        2
+      ],
+      "eye": [
+        4,
+        2
+      ],
+      "independent": true,
+      "eyeFlags": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false
+      ],
+      "acceptedCase": true
+    },
+    {
+      "ammo": 3,
+      "occupancy": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "flags": [
+        true,
+        true,
+        true,
+        false,
+        false,
+        false
+      ],
+      "held": [
+        3,
+        3
+      ],
+      "eye": [
+        3,
+        3
+      ],
+      "independent": true,
+      "eyeFlags": [
+        true,
+        true,
+        true,
+        false,
+        false,
+        false
+      ],
+      "acceptedCase": true
+    },
+    {
+      "ammo": 2,
+      "occupancy": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "flags": [
+        true,
+        true,
+        false,
+        false,
+        false,
+        false
+      ],
+      "held": [
+        2,
+        4
+      ],
+      "eye": [
+        2,
+        4
+      ],
+      "independent": true,
+      "eyeFlags": [
+        true,
+        true,
+        false,
+        false,
+        false,
+        false
+      ],
+      "acceptedCase": true
+    },
+    {
+      "ammo": 1,
+      "occupancy": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "flags": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "held": [
+        1,
+        5
+      ],
+      "eye": [
+        1,
+        5
+      ],
+      "independent": true,
+      "eyeFlags": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "acceptedCase": true
+    },
+    {
+      "ammo": 0,
+      "occupancy": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "flags": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "held": [
+        0,
+        6
+      ],
+      "eye": [
+        0,
+        6
+      ],
+      "independent": true,
+      "eyeFlags": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "acceptedCase": true
+    }
+  ],
+  "ejected": {
+    "ammo": 0,
+    "occupancy": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    "flags": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    "held": [
+      0,
+      0
+    ],
+    "eye": [
+      0,
+      0
+    ],
+    "independent": true,
+    "eyeFlags": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    "acceptedCase": true
+  },
+  "refilled": {
+    "ammo": 6,
+    "occupancy": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "flags": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "held": [
+      6,
+      0
+    ],
+    "eye": [
+      6,
+      0
+    ],
+    "independent": true,
+    "eyeFlags": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "acceptedCase": true
+  }
+}

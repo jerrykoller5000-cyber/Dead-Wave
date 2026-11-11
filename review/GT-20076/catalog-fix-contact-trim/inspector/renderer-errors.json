@@ -1,24 +1,88 @@
 {
   "errors": [
-    "TypeError: Failed to execute 'setPipeline' on 'GPURenderPassEncoder': parameter 1 is not of type 'GPURenderPipeline'.\n    at WebGPUBackend.draw (http://127.0.0.1:29006/vendor/three/three.webgpu.js:69278:19)\n    at WebGPURenderer._renderObjectDirect (http://127.0.0.1:29006/vendor/three/three.webgpu.js:52207:16)\n    at WebGPURenderer.renderObject (http://127.0.0.1:29006/vendor/three/three.webgpu.js:52128:9)\n    at WebGPURenderer._renderObjects (http://127.0.0.1:29006/vendor/three/three.webgpu.js:52043:9)\n    at WebGPURenderer._renderScene (http://127.0.0.1:29006/vendor/three/three.webgpu.js:50726:64)",
-    "TypeError: Failed to execute 'setPipeline' on 'GPURenderPassEncoder': parameter 1 is not of type 'GPURenderPipeline'.\n    at WebGPUBackend.draw (http://127.0.0.1:29006/vendor/three/three.webgpu.js:69278:19)\n    at WebGPURenderer._renderObjectDirect (http://127.0.0.1:29006/vendor/three/three.webgpu.js:52207:16)\n    at WebGPURenderer.renderObject (http://127.0.0.1:29006/vendor/three/three.webgpu.js:52128:9)\n    at WebGPURenderer._renderObjects (http://127.0.0.1:29006/vendor/three/three.webgpu.js:52043:9)\n    at WebGPURenderer._renderScene (http://127.0.0.1:29006/vendor/three/three.webgpu.js:50726:64)"
+    "TypeError: Failed to execute 'setPipeline' on 'GPURenderPassEncoder': parameter 1 is not of type 'GPURenderPipeline'.\n    at WebGPUBackend.draw (http://127.0.0.1:49329/vendor/three/three.webgpu.js:69278:19)\n    at WebGPURenderer._renderObjectDirect (http://127.0.0.1:49329/vendor/three/three.webgpu.js:52207:16)\n    at WebGPURenderer.renderObject (http://127.0.0.1:49329/vendor/three/three.webgpu.js:52128:9)\n    at WebGPURenderer._renderObjects (http://127.0.0.1:49329/vendor/three/three.webgpu.js:52043:9)\n    at WebGPURenderer._renderScene (http://127.0.0.1:49329/vendor/three/three.webgpu.js:50726:64)",
+    "TypeError: Failed to execute 'setPipeline' on 'GPURenderPassEncoder': parameter 1 is not of type 'GPURenderPipeline'.\n    at WebGPUBackend.draw (http://127.0.0.1:49329/vendor/three/three.webgpu.js:69278:19)\n    at WebGPURenderer._renderObjectDirect (http://127.0.0.1:49329/vendor/three/three.webgpu.js:52207:16)\n    at WebGPURenderer.renderObject (http://127.0.0.1:49329/vendor/three/three.webgpu.js:52128:9)\n    at WebGPURenderer._renderObjects (http://127.0.0.1:49329/vendor/three/three.webgpu.js:52043:9)\n    at WebGPURenderer._renderScene (http://127.0.0.1:49329/vendor/three/three.webgpu.js:50726:64)"
   ],
   "console": [
     {
-      "type": "error",
-      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+      "type": "warning",
+      "text": "Grave Shift: HQ bake skipped. ReferenceError: Cannot access 'hush' before initialization\n    at makeHouse (http://127.0.0.1:49329/index.html?inspect=&debug=1&raf=timer&__gameTestToken=bf371068-f76b-499e-8b5c-d2b24d67a8de:28065:41)\n    at http://127.0.0.1:49329/index.html?inspect=&debug=1&raf=timer&__gameTestToken=bf371068-f76b-499e-8b5c-d2b24d67a8de:28235:5"
     },
     {
-      "type": "error",
-      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+      "type": "warning",
+      "text": "THREE.Material: 'roughness' is not a property of THREE.MeshBasicNodeMaterial."
     },
     {
-      "type": "error",
-      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+      "type": "warning",
+      "text": "THREE.Material: 'roughness' is not a property of THREE.MeshBasicNodeMaterial."
     },
     {
-      "type": "error",
-      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"ember\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"ember\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"ember\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"position\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"position\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "Calling [RenderPassEncoder (unlabeled)].Draw with a vertex count of 0 is unusual."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_4\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_4\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_4\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_4\"].\n"
     }
   ]
 }

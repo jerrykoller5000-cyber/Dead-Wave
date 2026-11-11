@@ -1668,7 +1668,7 @@ export function createViewmodel(ctx) {
   // CL-307: the grenade throw's support hand. The body's phase and its time pick two of VM_GRENADE's places and the way
   // between them; 'fore' is the hand's place on the gun. The fist as on a mirrored pistol grip (the pair's left hand);
   // the grenade's root at hold in it while the body has one in hand.
-  const _grA = F(), _grB = F(), _grF = F(), _grS = F(), _grH = F(), _grQ = Q();
+  const _grA = F(), _grB = F(), _grF = F(), _grS = F(), _grH = F(), _grQ = Q(), _grP = copyPose(HAND_POSES.relaxed);
   function grenadeFrame(gr, WL, eL, dt) {
     const T0 = VM_GRENADE.times, P = VM_GRENADE.places, ph = gr.phase, t = gr.t || 0;
     let a, b, k, inHand;
@@ -1709,7 +1709,12 @@ export function createViewmodel(ctx) {
     eL[0] = WL.p.x - 0.12 * MX; eL[1] = WL.p.y - 0.30; eL[2] = WL.p.z + 0.16;
     twistToward(arms.l, WL, eL);
     info.handPlace = 'grenade';
-    return inHand ? sockets.poseR : POSES.open;
+    // CE-4: the fingers eased through it (VM_GRENADE.fingers), the fist while the grenade is in hand
+    const FG = VM_GRENADE.fingers;
+    if (inHand || !FG) return inHand ? sockets.poseR : POSES.open;
+    if (ph === 'grab') return lerpPose(sockets.poseL, FG.reach, smooth(t / T0.inHand), _grP);
+    if (ph === 'throw') return lerpPose(sockets.poseR, FG.release, smooth((t - T0.whip) / FG.open), _grP);
+    return lerpPose(FG.release, sockets.poseL, smooth(t / T0.back), _grP);
   }
   // The support wrist's frame in the gun's own space (WL is view space).
   function placeLocalOfWrist(out) {

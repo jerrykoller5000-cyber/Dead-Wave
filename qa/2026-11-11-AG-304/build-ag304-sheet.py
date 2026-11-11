@@ -37,7 +37,7 @@ a1 = aft["pass1P"]["enterTrainingMs"]
 a3 = aft["pass3P"]["enterTrainingMs"]
 d.text(
     (28, 52),
-    f"Entry Blackout: 1P {b1} ms -> {a1} ms ({b1/max(1,a1):.2f}x faster)  |  3P {b3} ms -> {a3} ms ({b3/max(1,a3):.2f}x faster)  |  Two-Phase Warm-Up (Frame-1 Blackout + Time-Sliced Background Guns)",
+    f"Entry Blackout: 1P {b1} ms -> {a1} ms ({b1/max(1,a1):.2f}x faster)  |  3P {b3} ms -> {a3} ms ({b3/max(1,a3):.2f}x faster)  |  Single-Pass Parallel Warm-Up (Keeper Meshes + All Weapons Pre-Compiled)",
     fill=(110, 231, 183),
     font=f_h2,
 )

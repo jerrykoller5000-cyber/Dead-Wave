@@ -1,0 +1,26 @@
+{
+  "id": "weapon.aa12",
+  "name": "AA-12",
+  "kind": "model",
+  "variant": null,
+  "mode": null,
+  "center": {
+    "x": -26,
+    "y": -198.90000000000003,
+    "z": -631.8645014693595
+  },
+  "size": {
+    "x": 0.21214415094960515,
+    "y": 0.4071799003846479,
+    "z": 1.064826758467575
+  },
+  "yaw": 0,
+  "info": {
+    "meshes": 114,
+    "drawables": 114,
+    "tris": 13866,
+    "points": 0,
+    "segments": 0,
+    "materials": 12
+  }
+}

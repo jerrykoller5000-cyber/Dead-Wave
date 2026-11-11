@@ -1,10 +1,37 @@
 import assert from 'node:assert/strict';
 import {readFile,writeFile} from 'node:fs/promises';
 const folder=process.argv[2]??'visibility-final';
-assert(['visibility','visibility-final'].includes(folder));
+const revised=/^visibility-fix-[a-z0-9-]+$/.test(folder);
+assert(revised || ['visibility','visibility-final'].includes(folder));
+const previous=process.argv.slice(3);
+assert(previous.every(name=>/^visibility-fix-[a-z0-9-]+$/.test(name)));
 const ids=['pistol','revolver','uzi','m4','ak','aa12','shotgun','sniper','minigun','launcher','flamer','chainsaw'];
 const root=new URL('./'+folder+'/',import.meta.url);
-const records=await Promise.all(ids.map(async id=>JSON.parse(await readFile(new URL(id+'/rank.json',root),'utf8'))));
+const read=async (dir,file)=>JSON.parse(await readFile(new URL('./'+dir+'/'+file,import.meta.url),'utf8'));
+const current=revised?await read(folder.replace('visibility-','catalog-'),'audit.json'):null;
+const baseline=revised?await read('catalog-chain-skin','audit.json'):null;
+const witnesses=row=>(row.rawOverlaps||row.overlaps).map(({a,b,at,host,witnessDepthMm})=>[a,b,at,host,witnessDepthMm]);
+const sources={};
+const records=await Promise.all(ids.map(async id=>{
+  for(const dir of revised?[folder,...previous,'visibility-final']:[folder]){
+    let rank;
+    try {rank=await read(dir,id+'/rank.json');} catch(error){if(error.code==='ENOENT')continue;throw error;}
+    if(current){
+      if(rank.fingerprint){
+        if(rank.fingerprint!==current[id].artworkFingerprint)continue;
+      }else{
+        assert.equal(dir,'visibility-final');
+        assert.deepEqual(witnesses(current[id]),witnesses(baseline[id]),id+' needs new posed captures');
+        assert.equal(current[id].parts,baseline[id].parts);
+        assert.equal(current[id].openSurfaces,baseline[id].openSurfaces);
+      }
+      assert.equal(rank.rawPairs,(current[id].rawOverlaps||current[id].overlaps).length);
+    }
+    sources[id]=dir;
+    return rank;
+  }
+  throw Error('Missing current rank for '+id);
+}));
 const all=[],summary=[];
 for(const r of records) {
   assert.equal(r.rows.length,r.rawPairs);
@@ -24,5 +51,5 @@ const lines=['Raw catalog overlaps, ordered by largest projected crossing for ea
   '',JSON.stringify(totals),'','Largest screen crossings across all twelve models:',...all.slice(0,30).map(r=>r.model+' pair '+r.pair+' | '+r.view+' | '+r.pixels+' px at '+r.at.join(',')),
   '','A screen crossing is a review candidate. An enclosure still needs a named, bounded, justified rule. Neither result removes a strict failure by itself.'];
 await writeFile(new URL('ranked.txt',root),lines.join('\n')+'\n');
-await writeFile(new URL('ranked.json',root),JSON.stringify({summary,totals,candidates:all},null,2)+'\n');
+await writeFile(new URL('ranked.json',root),JSON.stringify({summary,totals,candidates:all,sources},null,2)+'\n');
 console.log(lines.slice(0,16).join('\n'));

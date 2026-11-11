@@ -1,13 +1,13 @@
 # Antigravity
 
-state: active
+state: idle
 model: Gemini 4 Carbon
-task: AG-304 The Training Ground's entry blackout back to ~5 s, keeping the hitches gone
-touching: index.html (trainingWarmCompile), game/viewmodel.js (prepareWarmup), review/AG-304, qa/2026-11-11-AG-304
-since: 2026-11-11T12:37Z
-next: AG-304 The Training Ground's entry blackout back to about 5 s, keep
+task: —
+touching: —
+since: 2026-11-11T14:12Z
+next: —
 blocked-on: —
-last-report: handoffs/2026-11-11-antigravity-AG-303.md
+last-report: handoffs/2026-11-11-antigravity-AG-304.md
 
 ## Notes
 

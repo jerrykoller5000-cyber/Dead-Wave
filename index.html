@@ -52379,6 +52379,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (drum && bd) {
         const L = ammoByWeapon.launcher | 0;
         const C = lud.chamberIndex || (lud.chamberIndex = { s: null, L, n: 0, r0: null });
+        // GT-20080 (ChatGPT 2, 11:57Z): each occupied chamber shows its live round (drumNoses[i] on) or its spent case (off):
+        // chambers 0..L-1 live, the rest fired until the reload's dump hides them (drumRounds)
+        const DN = lud.drumNoses; if (DN) for (let i = 0; i < DN.length; i++) { const on = i < L; if (DN[i] && DN[i].visible !== on) DN[i].visible = on; }
         if (reloadU != null && currentWeapon === 'launcher') {
           if (C.r0 == null) C.r0 = C.s == null ? L - 1 : C.s;
           const need = Math.max(1, launcherReloadNeed || 1);
@@ -53997,6 +54000,102 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     const _hScale = new THREE.Vector3();
     let holdW = 0, holdWL = 0;
 
+    // GP-20100: the held gun and both arms make room before IK when a nearby solid
+    // interrupts the shoulder-to-muzzle corridor. The clear pose keeps its old aim.
+    const WALL_HOLD = { lead: 0.16, keep: 0.12, back: 0.34, up: 0.08, pitch: 1.42, release: 10 };
+    const _wallHold = { kind: null, r: 0, l: 0, tip: new THREE.Vector3(), local: new THREE.Vector3(), shoulderR: new THREE.Vector3(), shoulderL: new THREE.Vector3(),
+      pivot: new THREE.Vector3(), dir: new THREE.Vector3(), scale: new THREE.Vector3(),
+      pitch: new THREE.Quaternion(), poleR: new THREE.Vector3(), poleL: new THREE.Vector3(),
+      inv: new THREE.Matrix4(), meshM: new THREE.Matrix4(), part: new THREE.Box3(), nearBuilds: [] };
+    function heldWallShape(gun, H) {
+      if (gun.userData.gp20100WallShape) return gun.userData.gp20100WallShape;
+      gun.updateMatrixWorld(true);
+      _wallHold.inv.copy(gun.matrixWorld).invert();
+      const box = new THREE.Box3();
+      gun.traverse((o) => {
+        if (!o.isMesh || !o.geometry || o === gun.userData.flash || o === gun.userData.laser) return;
+        for (let p = o; p && p !== gun; p = p.parent) if (!p.visible) return;
+        if (!o.geometry.boundingBox) o.geometry.computeBoundingBox();
+        if (!o.geometry.boundingBox) return;
+        _wallHold.meshM.multiplyMatrices(_wallHold.inv, o.matrixWorld);
+        box.union(_wallHold.part.copy(o.geometry.boundingBox).applyMatrix4(_wallHold.meshM));
+      });
+      const mz = gun.userData.muzzleLocal;
+      const front = Math.max(Number.isFinite(box.max.z) ? box.max.z : H.grip[2] + 0.7, mz ? mz.z : -Infinity);
+      const y = mz ? mz.y : (Number.isFinite(box.min.y) ? (box.min.y + box.max.y) * 0.5 : H.grip[1]);
+      const width = Number.isFinite(box.min.x) ? box.max.x - box.min.x : 0.2;
+      const height = Number.isFinite(box.min.y) ? box.max.y - box.min.y : 0.2;
+      return (gun.userData.gp20100WallShape = { front, y, radius: Math.min(0.32, Math.max(0.1, width * 0.5, height * 0.5)) });
+    }
+    function heldWallBoxT(b, a, c, radius) {
+      if (b.minX == null || b.minY == null || b.minZ == null) return null;
+      if (Math.min(a.x, c.x) > b.maxX + radius || Math.max(a.x, c.x) < b.minX - radius ||
+          Math.min(a.y, c.y) > b.maxY + radius || Math.max(a.y, c.y) < b.minY - radius ||
+          Math.min(a.z, c.z) > b.maxZ + radius || Math.max(a.z, c.z) < b.minZ - radius) return null;
+      return segmentHitsBox(a.x, a.y, a.z, c.x, c.y, c.z,
+        (b.minX + b.maxX) * 0.5, (b.minY + b.maxY) * 0.5, (b.minZ + b.maxZ) * 0.5,
+        (b.maxX - b.minX) * 0.5 + radius, (b.maxY - b.minY) * 0.5 + radius, (b.maxZ - b.minZ) * 0.5 + radius);
+    }
+    function heldWallDistance(a, c, radius) {
+      const len = a.distanceTo(c);
+      if (len < 0.05) return Infinity;
+      let best = Infinity;
+      if (training.active && training.tg) {
+        for (const b of training.tg.solids) {
+          if (b.floor || b.target != null) continue;
+          const t = heldWallBoxT(b, a, c, radius);
+          if (t !== null) best = Math.min(best, t * len);
+        }
+        for (const b of training.cameraCollision?.boxes || []) {
+          const t = heldWallBoxT(b, a, c, radius);
+          if (t !== null) best = Math.min(best, t * len);
+        }
+        return best;
+      }
+      const midX = (a.x + c.x) * 0.5, midZ = (a.z + c.z) * 0.5, reach = len * 0.5 + radius;
+      for (const s of worldSolids) {
+        if (Math.abs(s.x - midX) > reach + s.radius || Math.abs(s.z - midZ) > reach + s.radius) continue;
+        const t = segmentHitsCylinder(a.x, a.y, a.z, c.x, c.y, c.z, s.x, s.z, s.radius + radius, s.y0 - radius, s.y1 + radius);
+        if (t !== null) best = Math.min(best, t * len);
+      }
+      for (const b of buildsNear(midX, midZ, 2.4, _wallHold.nearBuilds)) {
+        if (!b.mesh || b.hp <= 0 || Math.abs(b.x - midX) > reach + 1.5 || Math.abs(b.z - midZ) > reach + 1.5) continue;
+        const t = segmentHitsBuild(b, a.x, a.y, a.z, c.x, c.y, c.z);
+        if (t !== null) best = Math.min(best, Math.max(0, t * len - radius));
+      }
+      for (const o of rocks) {
+        if (!o.alive || !o.mesh?.visible || Math.abs(o.x - midX) > reach + o.radius || Math.abs(o.z - midZ) > reach + o.radius) continue;
+        const t = segmentHitsCylinder(a.x, a.y, a.z, c.x, c.y, c.z, o.x, o.z, o.radius + radius, o.mesh.position.y - radius, o.mesh.position.y + o.height + radius);
+        if (t !== null) best = Math.min(best, t * len);
+      }
+      for (const o of trees) {
+        if ((!o.alive && !o.stump) || !o.group?.visible || Math.abs(o.x - midX) > reach + o.trunkRadius || Math.abs(o.z - midZ) > reach + o.trunkRadius) continue;
+        const t = segmentHitsCylinder(a.x, a.y, a.z, c.x, c.y, c.z, o.x, o.z, o.trunkRadius + radius, o.group.position.y - radius,
+          o.group.position.y + (o.stump ? 0.55 : o.canopyBottom + 0.4) + radius);
+        if (t !== null) best = Math.min(best, t * len);
+      }
+      return best;
+    }
+    function heldWallPull(gun, H, shoulder, pivotW, pivotLocal, gunQ, side, dt) {
+      if (viewFirst) { _wallHold[side] = 0; return 0; }
+      const shape = heldWallShape(gun, H);
+      gun.getWorldScale(_wallHold.scale);
+      const tip = _wallHold.tip.set(0, shape.y, shape.front).sub(_wallHold.pivot.set(pivotLocal[0], pivotLocal[1], pivotLocal[2]))
+        .multiply(_wallHold.scale).applyQuaternion(gunQ).add(pivotW);
+      const length = shoulder.distanceTo(tip), clear = heldWallDistance(shoulder, tip, shape.radius);
+      const want = Number.isFinite(clear) ? _clamp01((length + WALL_HOLD.lead - clear) / Math.max(0.1, length - WALL_HOLD.keep)) : 0;
+      // The lead distance makes the approach continuous; an immediate increase keeps a fast step from entering the wall.
+      const w = _wallHold[side] = Math.max(want, _wallHold[side] * Math.exp(-WALL_HOLD.release * Math.max(0, dt)));
+      if (w > 0.001) {
+        const dir = _wallHold.dir.copy(tip).sub(shoulder).normalize();
+        pivotW.addScaledVector(dir, -WALL_HOLD.back * w);
+        pivotW.y += WALL_HOLD.up * w;
+        gunQ.multiply(_wallHold.pitch.setFromAxisAngle(_AXIS_X, -WALL_HOLD.pitch * w));
+      }
+      return w;
+    }
+    function heldWallPole(base, out, w) { return out.copy(base).setX(base.x * (1 - 0.75 * w)).setZ(base.z - 0.25 * w); }
+
     // Two-bone arm IK. Swings the shoulder group and bends the elbow hinge (rotation.x)
     // so the point `hand` (elbow space) lands on `targetW`; `pole` (torso space) is the
     // way the elbow should point. Blended in by w over whatever the pose set.
@@ -54524,7 +54623,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
     const _shAimDbg = { f: new THREE.Vector3(), t: new THREE.Vector3() };
     const _agv = { m: new THREE.Vector3(), s: new THREE.Vector3(), f: new THREE.Vector3() };   // GB-188: aimGun's muzzle pass
-    function holdShoulderGun(ud, gun, H, k) {
+    function holdShoulderGun(ud, gun, H, k, dt) {
       const S = SHOULDER_HOLD, sh = H.sh, torso = ud.torsoG, armR = ud.armRG;
       const ads = shoulderAds(), a = ads * ads * (3 - 2 * ads);
       shoulderAdsW = a;
@@ -54579,10 +54678,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const rlCant = viewFirst ? 1 + (_rls.cant - 1) * fpReloadLiftW : 1;   // GB-245: the roll, tunable
       _hE.set(reloadMountOff.rx * rlT + rlTip + recoilKick.rx, reloadMountOff.ry * rlT + recoilKick.ry, reloadMountOff.rz * rlT * rlCant + recoilKick.rz);
       _hq.gun.multiply(_hq.a.setFromEuler(_hE));
+      const sw = _hv.b.copy(armR.position); torso.localToWorld(sw);
+      heldWallPull(gun, H, sw, P, sh.butt, _hq.gun, 'r', dt);
       const origin = _hv.origin.copy(butt).multiplyScalar(-s).applyQuaternion(_hq.gun).add(P);
       origin.x += fx * recoilKick.z; origin.y += fy * recoilKick.z; origin.z += fz * recoilKick.z; // negative = back into the shoulder
       // The grip, kept inside the firing arm's reach (slides the gun back if a pose asks too much).
-      const sw = _hv.b.copy(armR.position); torso.localToWorld(sw);
       const grip = _hv.f;
       for (let i = 0; i < 2; i++) {
         grip.set(H.grip[0], H.grip[1], H.grip[2]).multiplyScalar(s).applyQuaternion(_hq.gun).add(origin);
@@ -54592,8 +54692,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       }
       tuckDiveGun(origin,gun,_hq.gun,_hScale);
       grip.set(H.grip[0], H.grip[1], H.grip[2]).multiplyScalar(s).applyQuaternion(_hq.gun).add(origin);
-      if (HANDS.skip[currentWeapon]) { solveArmIK(armR, ud.elbowRG, _HAND_R, grip, _POLE_R, k); handRollR = 0; }
-      else handRollR = holdHand(armR, ud.elbowRG, _HAND_R, grip, gripDownDir(_rl.w).applyQuaternion(_hq.gun), 1, _POLE_R, k, 1);   // CL-122, CU-100
+      const poleR = heldWallPole(_POLE_R, _wallHold.poleR, _wallHold.r);
+      if (HANDS.skip[currentWeapon]) { solveArmIK(armR, ud.elbowRG, _HAND_R, grip, poleR, k); handRollR = 0; }
+      else handRollR = holdHand(armR, ud.elbowRG, _HAND_R, grip, gripDownDir(_rl.w).applyQuaternion(_hq.gun), 1, poleR, k, 1);   // CL-122, CU-100
       armR.updateMatrixWorld(true);
       _hm.a.compose(origin, _hq.gun, _hScale);                            // desired gun world
       _hm.b.compose(gun.position, gun.quaternion, gun.scale).invert();  // gun in mount
@@ -54778,6 +54879,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const ud = marine.userData;
       const gun = getActiveGun();
       const H = WEAPON_HOLD[currentWeapon];
+      if (_wallHold.kind !== currentWeapon) { _wallHold.kind = currentWeapon; _wallHold.r = _wallHold.l = 0; }
       const on = !!H && weaponMount.visible && !gameOver && !won && !playerSwimming && !mortarMounted && !mortarCarried;
       holdW += ((on ? 1 : 0) - holdW) * _lerpK(10, dt);   // CL-133: frame-rate free (here and below)
       updateGunLag(dt);
@@ -54813,7 +54915,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       // GB-245: in first person a reload brings the gun forward off the shoulder onto the carry the handguns use, so
       // the grip, the magwell and both hands stay in his view; the shoulder itself is unchanged at rest and aimed.
       const fpReloadHipW = viewFirst && reloading && fpReloadSet().hip ? Math.min(1, fpReloadLiftW * 4) : 0;
-      if (H.sh && !aki && !vault && fpReloadHipW < 0.5) holdShoulderGun(ud, gun, H, k);   // GB-129
+      if (H.sh && !aki && !vault && fpReloadHipW < 0.5) holdShoulderGun(ud, gun, H, k, dt);   // GB-129
       else {
         const off = _hv.origin.set(holdX, H.hold[1], H.hold[2]).applyAxisAngle(_AXIS_X, -pitch * 0.7);
         if (viewFirst && OTS.w > 0) off.y += (FP_LIFT_GUN[currentWeapon] != null && !aki ? FP_LIFT_GUN[currentWeapon] * FP_LIFT / 0.2 : FP_LIFT) * OTS.w;   // CL-250: up at the ready in first person (GB-224: the heavies more)
@@ -54897,10 +54999,13 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         clearDiveAnchor(anchor,armR);aimGun();
         if (dipR > 0.001) akimboWellFix(anchor, gun, currentWeapon, _hq.gun, dipR);   // GB-188: the turn it now has
         tuckDiveGrip(anchor,gun,H,_hq.gun);
+        torso.localToWorld(_wallHold.shoulderR.copy(armR.position));
+        heldWallPull(gun, H, _wallHold.shoulderR, anchor, H.grip, _hq.gun, 'r', dt);
+        const poleR = heldWallPole(diving() ? diveDualPole(aki ? _akPoleR : _POLE_R) : aki ? _akPoleR : _POLE_R, _wallHold.poleR, _wallHold.r);
         // Solve the right arm onto the grip before placing the gun, so the gun's parent
         // chain is where it will be drawn.
-        if (HANDS.skip[currentWeapon]) { solveArmIK(armR, ud.elbowRG, _HAND_R, anchor, _POLE_R, k); handRollR = 0; }
-        else handRollR = holdDiveHand(armR, ud.elbowRG, _HAND_R, anchor, gripDownDir(_rl.w).applyQuaternion(_hq.gun), 1, diving() ? diveDualPole(aki?_akPoleR:_POLE_R) : aki?_akPoleR:_POLE_R, k, 1);   // CL-188: akimbo, the elbow in   // CL-122, CU-100; GB-151: a mirrored fist's index is at +x
+        if (HANDS.skip[currentWeapon]) { solveArmIK(armR, ud.elbowRG, _HAND_R, anchor, poleR, k); handRollR = 0; }
+        else handRollR = holdDiveHand(armR, ud.elbowRG, _HAND_R, anchor, gripDownDir(_rl.w).applyQuaternion(_hq.gun), 1, poleR, k, 1);   // CL-188: akimbo, the elbow in   // CL-122, CU-100; GB-151: a mirrored fist's index is at +x
         armR.updateMatrixWorld(true);
 
         // Place the gun so its grip point sits on the anchor (plus recoil pushback), then
@@ -54947,7 +55052,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           _hq.gun.setFromRotationMatrix(_hm.a).multiply(_hq.a.setFromEuler(_hE));
           if (dipL > 0.001) akimboWellFix(anchorL, offGun, currentWeapon, _hq.gun, dipL);   // GB-188
           tuckDiveGrip(anchorL,offGun,H,_hq.gun);
-          handRollL = holdDiveHand(armL, ud.elbowLG, _HAND_L, anchorL, gripDownDir(_rl.w).negate().applyQuaternion(_hq.gun), 1, diveDualPole(_akPoleL,true), k, 1);   // CL-188: the elbow in   // CL-122: the second gun's grip; CU-100
+          torso.localToWorld(_wallHold.shoulderL.copy(armL.position));
+          heldWallPull(offGun, H, _wallHold.shoulderL, anchorL, H.grip, _hq.gun, 'l', dt);
+          handRollL = holdDiveHand(armL, ud.elbowLG, _HAND_L, anchorL, gripDownDir(_rl.w).negate().applyQuaternion(_hq.gun), 1,
+            heldWallPole(diveDualPole(_akPoleL, true), _wallHold.poleL, _wallHold.l), k, 1);   // CL-188: akimbo, the elbow in   // CL-122: the second gun's grip; CU-100
           armL.updateMatrixWorld(true);
           offGun.getWorldScale(_hScale);
           const gripL2 = _hv.f.set(H.grip[0], H.grip[1], H.grip[2]).multiply(_hScale).applyQuaternion(_hq.gun);
@@ -55054,7 +55162,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       // CU-100: the forend (the foregrip, the saw's handle) through the fist and the hand turned onto it at the wrist,
       // fading to the hand point and a resting wrist as it lets go for a magazine or the bolt; the pistol and the
       // revolver keep their cup round the firing fist as it was.
-      if (HANDS.skip[currentWeapon]) { solveArmIK(armL, ud.elbowLG, _HAND_L, fore, _POLE_L, holdWL * k); handRollL = 0; }
+      const poleL = heldWallPole(_POLE_L, _wallHold.poleL, _wallHold.r);
+      if (HANDS.skip[currentWeapon]) { solveArmIK(armL, ud.elbowLG, _HAND_L, fore, poleL, holdWL * k); handRollL = 0; }
       else {
         // The pistol's and revolver's cup round the firing fist and the saw's front handle (the fist over the top of
         // its arch; the wrist's turn there would not settle) keep the hold as it was.
@@ -55071,7 +55180,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           const drop = foreDrop(gun, H);
           if (drop > 0) fore.addScaledVector(_wr.d.set(0, 1, 0).transformDirection(gun.matrixWorld), -drop * gun.getWorldScale(_hScale).y * aL);
         }
-        handRollL = holdHand(armL, ud.elbowLG, _HAND_L, fore, chL, sgL, _POLE_L, holdWL * k, aL, holdWL * k * handRollLW);
+        handRollL = holdHand(armL, ud.elbowLG, _HAND_L, fore, chL, sgL, poleL, holdWL * k, aL, holdWL * k * handRollLW);
         // A long gun's forend out of the arm's reach (the gun is in his shoulder; the fist's channel middle sits deeper
         // in the hand than the hand point did): the hand goes back along it toward the receiver by what it fell short,
         // still on the gun, as a short-armed shooter holds it. Not the pump: the hand works it.
@@ -55080,10 +55189,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         const short = aL > 0.001 ? fistPointW(ud.elbowLG, _HAND_L, aL, _wr.at).distanceTo(fore) : 0;
         if (short > 0.004 && !HANDS.fore[currentWeapon] && H.fore !== 'pump' && H.sh) {
           fore.addScaledVector(chL, -Math.min(WRIST.slideMax, short * 1.25) * aL);
-          handRollL = holdHand(armL, ud.elbowLG, _HAND_L, fore, chL, sgL, _POLE_L, holdWL * k, aL, holdWL * k * handRollLW);
+          handRollL = holdHand(armL, ud.elbowLG, _HAND_L, fore, chL, sgL, poleL, holdWL * k, aL, holdWL * k * handRollLW);
         } else if (short > 0.004 && (H.fore === 'pump' || HANDS.fore[currentWeapon] === 'up') && wristOf(ud.elbowLG)) {
           const aS = aL * Math.max(0, 1 - 1.2 * short / _HAND_L.distanceTo(wristOf(ud.elbowLG).userData.grip));
-          handRollL = holdHand(armL, ud.elbowLG, _HAND_L, fore, chL, sgL, _POLE_L, holdWL * k, aS, holdWL * k * handRollLW);
+          handRollL = holdHand(armL, ud.elbowLG, _HAND_L, fore, chL, sgL, poleL, holdWL * k, aS, holdWL * k * handRollLW);
         }
       }
       if (magInHand) {
@@ -64839,7 +64948,6 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     function trainingWarmCompile() {
       const tg = training.tg;
       if (!tg || !renderer || typeof renderer.compileAsync !== 'function') return;
-      if (_trainingBgCancel) { try { _trainingBgCancel(); } catch (_) {} _trainingBgCancel = null; }
       ensureTrainingUi();
       const b = training.blackout; b.classList.add('on');
       camera.updateMatrixWorld(true);
@@ -64848,182 +64956,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       training.warming = true;
       training.bgWarming = false;
       let done = false;
-      let resolveWarmDone = null, resolveBgDone = null;
+      let resolveWarmDone = null;
       training.warmPromise = new Promise((res) => { resolveWarmDone = res; });
-      training.bgWarmPromise = new Promise((res) => { resolveBgDone = res; });
-
-      const collectLightSpine = () => {
-        const ls = new Set([scene]);
-        const walk = (o) => {
-          if (!o || (!o.visible && !o.isLight)) return;
-          if (o.isLight) {
-            if (o.layers.test(camera.layers)) {
-              for (let p = o; p && p !== scene; p = p.parent) ls.add(p);
-            }
-            return;
-          }
-          for (let i = 0; i < o.children.length; i++) walk(o.children[i]);
-        };
-        walk(scene);
-        return ls;
-      };
-
-      const collectShadowLights = () => {
-        const out = [];
-        const walk = (o) => {
-          if (!o || (!o.visible && !o.isLight)) return;
-          if (o.isLight && o.shadow && o.layers.test(camera.layers)) out.push(o);
-          for (let i = 0; i < o.children.length; i++) walk(o.children[i]);
-        };
-        walk(scene);
-        return out;
-      };
-
-      const compileOnlyDrawables = (drawables, lightSpine, shadowLights) => {
-        const valid = [], keepAnc = new Set([scene]), topRoots = new Set();
-        for (let i = 0; i < drawables.length; i++) {
-          const m = drawables[i];
-          if (!m || !m.geometry || !m.material) continue;
-          let p = m, top = m;
-          while (p && p !== scene) { top = p; p = p.parent; }
-          if (p !== scene) continue;
-          valid.push(m);
-          topRoots.add(top);
-          for (let q = m; q && q !== scene; q = q.parent) keepAnc.add(q);
-        }
-        if (!valid.length) return Promise.resolve();
-        const spine = new Set(keepAnc);
-        for (const l of lightSpine) spine.add(l);
-        const visChanges = [], meshChanges = [], shadChanges = [];
-        try {
-          for (const n of keepAnc) {
-            if (!n.visible) { visChanges.push({ o: n, vis: false }); n.visible = true; }
-          }
-          for (const n of spine) {
-            const ch = n.children;
-            for (let i = 0; i < ch.length; i++) {
-              const c = ch[i];
-              if (!spine.has(c) && c.visible) {
-                visChanges.push({ o: c, vis: true });
-                c.visible = false;
-              }
-            }
-          }
-          for (let i = 0; i < valid.length; i++) {
-            const m = valid[i];
-            const inst = !!(m.isInstancedMesh && m.count === 0 && m.instanceMatrix && m.instanceMatrix.count > 0);
-            meshChanges.push({ m, cull: m.frustumCulled, inst });
-            m.frustumCulled = false;
-            if (inst) m.count = 1;
-          }
-          for (const top of topRoots) top.updateMatrixWorld(true);
-          for (let i = 0; i < shadowLights.length; i++) {
-            const s = shadowLights[i].shadow;
-            if (!s) continue;
-            shadChanges.push({ s, auto: s.autoUpdate, needs: s.needsUpdate });
-            s.autoUpdate = false;
-            s.needsUpdate = false;
-          }
-          return compileForLiveTarget();
-        } finally {
-          for (let i = 0; i < shadChanges.length; i++) {
-            const sc = shadChanges[i];
-            sc.s.autoUpdate = sc.auto;
-            sc.s.needsUpdate = sc.needs;
-          }
-          for (let i = meshChanges.length - 1; i >= 0; i--) {
-            const mc = meshChanges[i];
-            mc.m.frustumCulled = mc.cull;
-            if (mc.inst) mc.m.count = 0;
-          }
-          for (let i = visChanges.length - 1; i >= 0; i--) {
-            visChanges[i].o.visible = visChanges[i].vis;
-          }
-        }
-      };
-
-      const issuedKey = holsteredKey || currentWeapon || 'pistol';
-
-      const startTrainingBgWarm = () => {
-        if (!training.active) {
-          if (resolveBgDone) { resolveBgDone(); resolveBgDone = null; }
-          return;
-        }
-        training.bgWarming = true;
-        let cancelled = false, rafId = 0, timerId = 0, activeVmCleanup = null, inFlight = false;
-        const finishBg = () => {
-          if (cancelled) return;
-          cancelled = true;
-          if (rafId) { cancelAnimationFrame(rafId); rafId = 0; }
-          if (timerId) { clearTimeout(timerId); timerId = 0; }
-          if (activeVmCleanup) { try { activeVmCleanup.cleanup(); } catch (_) {} activeVmCleanup = null; }
-          training.bgWarming = false;
-          if (_trainingBgCancel === finishBg) _trainingBgCancel = null;
-          if (resolveBgDone) { resolveBgDone(); resolveBgDone = null; }
-        };
-        _trainingBgCancel = finishBg;
-
-        const priority = ['m4', 'revolver', 'shotgun', 'ak', 'uzi', 'sniper', 'aa12', 'launcher', 'flamer', 'minigun', 'chainsaw', 'pistol'];
-        const pendingKeys = [];
-        for (const k of priority) if (WEAPON_ORDER.includes(k) && !pendingKeys.includes(k)) pendingKeys.push(k);
-        for (const k of WEAPON_ORDER) if (!pendingKeys.includes(k)) pendingKeys.push(k);
-
-        const lightSpine = collectLightSpine();
-        const shadowLights = collectShadowLights();
-        let curMeshes = [], curIdx = 0, sliceN = 8;
-        const collectTreeDrawables = (rootObj, out) => {
-          if (!rootObj) return;
-          rootObj.traverse((o) => {
-            if ((o.isMesh || o.isLine || o.isPoints || o.isSprite) && o.geometry && o.material) out.push(o);
-          });
-        };
-
-        const stepSlice = () => {
-          timerId = 0;
-          if (cancelled || !training.active || training.warming) { finishBg(); return; }
-          if (inFlight) { scheduleNext(); return; }
-          while (curIdx >= curMeshes.length) {
-            if (activeVmCleanup) { try { activeVmCleanup.cleanup(); } catch (_) {} activeVmCleanup = null; }
-            if (!pendingKeys.length) { finishBg(); return; }
-            const heldIdx = (!unarmed && currentWeapon) ? pendingKeys.indexOf(currentWeapon) : -1;
-            const nextKey = heldIdx >= 0 ? pendingKeys.splice(heldIdx, 1)[0] : pendingKeys.shift();
-            curMeshes = [];
-            curIdx = 0;
-            if (nextKey !== issuedKey) collectTreeDrawables(weaponMeshes[nextKey], curMeshes);
-            collectTreeDrawables(offhandMeshes && offhandMeshes[nextKey], curMeshes);
-            if (ensureViewmodel() && typeof viewmodel.warmBgGun === 'function') {
-              activeVmCleanup = viewmodel.warmBgGun(nextKey);
-              if (activeVmCleanup && activeVmCleanup.meshes.length) curMeshes.push(...activeVmCleanup.meshes);
-            }
-          }
-          const batch = curMeshes.slice(curIdx, curIdx + sliceN);
-          curIdx += batch.length;
-          const t0 = performance.now();
-          inFlight = true;
-          let p;
-          try {
-            p = compileOnlyDrawables(batch, lightSpine, shadowLights);
-          } catch (_) {
-            p = Promise.resolve();
-          }
-          const ms = performance.now() - t0;
-          sliceN = Math.max(4, Math.min(20, Math.round(sliceN * Math.min(2, 4.2 / Math.max(0.4, ms)))));
-          Promise.resolve(p).catch(() => {}).finally(() => {
-            inFlight = false;
-            if (!cancelled) scheduleNext();
-          });
-        };
-
-        const scheduleNext = () => {
-          if (cancelled || rafId || timerId) return;
-          rafId = requestAnimationFrame(() => {
-            rafId = 0;
-            if (cancelled) return;
-            timerId = setTimeout(stepSlice, 0);
-          });
-        };
-        scheduleNext();
-      };
+      training.bgWarmPromise = Promise.resolve();
 
       let origPPRender = null;
       const restorePPRender = () => {
@@ -65031,6 +64966,33 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           postProcessing.render = origPPRender;
           origPPRender = null;
         }
+      };
+
+      const drawablePipelineSig = (o) => {
+        const g = o.geometry;
+        if (!g || !o.material || o.isSkinnedMesh || o.isInstancedMesh) return null;
+        const mats = Array.isArray(o.material) ? o.material : [o.material];
+        let mKey = '';
+        for (let i = 0; i < mats.length; i++) {
+          const m = mats[i];
+          if (!m) return null;
+          if (i) mKey += ',';
+          const prog = typeof m.customProgramCacheKey === 'function' ? m.customProgramCacheKey() : m.type;
+          mKey += prog + ':' + m.side + ':' + (m.transparent ? 1 : 0) + ':' + (m.depthWrite ? 1 : 0) + ':' + m.blending + ':' + (m.polygonOffset ? 1 : 0);
+        }
+        const attrObj = g.attributes;
+        if (!attrObj) return null;
+        const aKeys = Object.keys(attrObj).sort();
+        let attrs = '';
+        for (let i = 0; i < aKeys.length; i++) {
+          const k = aKeys[i], a = attrObj[k];
+          if (!a) continue;
+          if (i) attrs += '|';
+          attrs += k + ':' + a.itemSize + ':' + (a.normalized ? 1 : 0) + ':' + (a.isInterleavedBufferAttribute ? 'I' + a.stride : 'B') + ':' + (a.array ? a.array.constructor.name : '');
+        }
+        const morphN = g.morphAttributes ? Object.keys(g.morphAttributes).length : 0;
+        const grps = mats.length > 1 && g.groups ? g.groups.length : 0;
+        return o.type + '/' + (o.castShadow ? 1 : 0) + '/' + (o.receiveShadow ? 1 : 0) + '/' + o.layers.mask + '/' + (g.index ? 1 : 0) + '/' + morphN + '/' + grps + '/' + mKey + '/' + attrs;
       };
 
       const finish = () => {
@@ -65042,36 +65004,49 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         renderer.setAnimationLoop(tick);
         if (!training.wake) b.classList.remove('on');
         if (resolveWarmDone) { resolveWarmDone(); resolveWarmDone = null; }
-        startTrainingBgWarm();
       };
 
-      // AG-304: Phase 1 warms only what frame 1 needs (the room, carried gear, arms + issued pistol, and the ~75 changed
-      // cutaway/perimeter/marine-fade meshes) and restores ALL scene/weapon/material state synchronously inside finally so
-      // external callers (e.g. inspectHost().enterTraining()) never race with async restoration. Phase 2 compiles the other
-      // 11 guns in ~4 ms post-render slices over the first second after the blackout lifts.
+      // AG-304: Single parallel compileAsync pass over all unique pipeline signatures (~180-220 unique shaders instead of ~1,800
+      // redundant mesh iterations), warming room, cutaway/perimeter/marine solid & fade states, viewmodel weapons and carried gear.
+      // Deduplicating plain meshes by hiding duplicates drops Three.js main-thread CPU time to ~1 s, bringing blackout back to ~4.8-5.2 s,
+      // with zero background compilation slices needed after the blackout lifts.
       Promise.resolve()
         .then(() => {
           if (done || !training.active) return;
-          let pSolid = Promise.resolve(), pFade = Promise.resolve();
-          const unculledScene = [];
-          const walkUncull = (o) => {
-            if (!o || !o.visible) return;
-            if ((o.isMesh || o.isLine || o.isPoints || o.isSprite) && o.frustumCulled) {
-              o.frustumCulled = false;
-              unculledScene.push(o);
-            }
-            for (let i = 0; i < o.children.length; i++) walkUncull(o.children[i]);
+          let pCompile = Promise.resolve();
+          const meshes = [];
+          const uncullTree = (root) => {
+            if (!root) return;
+            root.traverse((o) => {
+              if (o.isMesh && o.frustumCulled) {
+                o.frustumCulled = false;
+                meshes.push(o);
+              }
+            });
           };
-          walkUncull(scene);
+          uncullTree(tg.group);
+          uncullTree(training.perimeter?.group);
+          uncullTree(training.containment?.group);
+
+          const cutawayKeepers = new THREE.Group();
+          cutawayKeepers.name = 'training-cutaway-warm-keepers';
+          cutawayKeepers.position.set(0, 0, 0);
+
+          let restoreImpacts = null, restoreChar = null, restoreWreck = null, restoreFlame = null;
+          let restoreCutaway = null, restoreMarineFade = null, restorePerimeter = null, restoreContainment = null;
+          let vmWarm = null;
+          const emptyInst = [], warmVis = [], seenVis = new Set(), dedupVis = [];
+
           try {
-            const restoreImpacts = training.impacts?.prepareWarmup();
-            const restoreChar = training.char?.prepareWarmup();
-            const restoreWreck = training.wreck?.prepareWarmup?.();
-            const restoreFlame = prepareFlameWarmup();
+            restoreImpacts = training.impacts?.prepareWarmup();
+            restoreChar = training.char?.prepareWarmup();
+            restoreWreck = training.wreck?.prepareWarmup?.();
+            restoreFlame = prepareFlameWarmup();
             syncRigSkins();
-            const vmWarm = ensureViewmodel() && typeof viewmodel.prepareWarmup === 'function' ? viewmodel.prepareWarmup([issuedKey]) : null;
+
+            vmWarm = ensureViewmodel() && typeof viewmodel.prepareWarmup === 'function' ? viewmodel.prepareWarmup(WEAPON_ORDER) : null;
             updateCarriedGear(0, true);
-            const emptyInst = [], warmVis = [], seenVis = new Set();
+
             const showWarm = (o) => {
               if (!o || seenVis.has(o)) return;
               seenVis.add(o);
@@ -65084,63 +65059,101 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
               for (let p = rootObj; p && p !== scene; p = p.parent) showWarm(p);
               rootObj.traverse((o) => showWarm(o));
             };
-            showWarmTree(weaponMeshes[issuedKey]);
+
+            for (const k of WEAPON_ORDER) {
+              showWarmTree(weaponMeshes[k]);
+              showWarmTree(offhandMeshes && offhandMeshes[k]);
+            }
             showWarmTree(knife);
             showWarmTree(grenadeHand);
+
             scene.traverse((o) => {
               if (o.isInstancedMesh && o.castShadow && o.count === 0 && o.instanceMatrix.count > 0) {
-                o.count = 1; emptyInst.push(o);
+                o.count = 1;
+                emptyInst.push(o);
                 for (let p = o; p && p !== scene; p = p.parent) showWarm(p);
               }
             });
-            try {
-              if (cullStats.hidden) { cullShowAll(); cullStats.hidden = 0; }
-              updateLightPool();
-              sunShadowCadence();
-              if (viewmodel) viewmodel.place();
-              updateSceneMatrices();
-              pSolid = compileForLiveTarget();
-            } finally {
-              restoreImpacts?.(); restoreChar?.(); restoreWreck?.(); restoreFlame?.(); vmWarm?.restore?.();
-              for (const o of emptyInst) o.count = 0;
-              for (let i = warmVis.length - 1; i >= 0; i--) { const s = warmVis[i]; s.o.visible = s.vis; s.o.frustumCulled = s.cull; }
-            }
 
-            // Delta-only fade pass: compile ONLY the ~75 meshes whose material swaps during cutaway/perimeter/marine-fade.
-            const preMats = new Map();
-            tg.group.traverse((o) => { if (o.isMesh && !o.isSkinnedMesh && o.material) preMats.set(o, o.material); });
-            let restoreCutaway = null, restoreMarineFade = null, restorePerimeter = null, restoreContainment = null;
-            try {
-              try { restoreCutaway = tg.cutaway?.prepareWarmup?.() || null; } catch (_) {}
-              try { restoreMarineFade = trainingMarineFade?.prepareWarmup?.() || null; } catch (_) {}
-              try { restorePerimeter = training.perimeter?.prepareWarmup?.() || null; } catch (_) {}
-              try { restoreContainment = training.containment?.prepareWarmup?.() || null; } catch (_) {}
-              const fadeDrawables = [];
-              for (const [o, mBefore] of preMats) {
-                if (o.material !== mBefore) fadeDrawables.push(o);
+            // Preserve one solid keeper mesh per unique pipeline signature before prepareWarmup swaps walls/fences to fade materials
+            const seenSolidSigs = new Set();
+            const addSolidKeepers = (rootObj) => {
+              if (!rootObj) return;
+              rootObj.traverse((o) => {
+                if (!o.isMesh || o.isSkinnedMesh || o.isInstancedMesh) return;
+                const sig = drawablePipelineSig(o);
+                if (!sig || seenSolidSigs.has(sig)) return;
+                seenSolidSigs.add(sig);
+                const km = new THREE.Mesh(o.geometry, o.material);
+                km.castShadow = o.castShadow;
+                km.receiveShadow = o.receiveShadow;
+                km.layers.mask = o.layers.mask;
+                km.frustumCulled = false;
+                cutawayKeepers.add(km);
+              });
+            };
+            addSolidKeepers(tg.group);
+            addSolidKeepers(training.perimeter?.group);
+            tg.group.add(cutawayKeepers);
+
+            try { restoreCutaway = tg.cutaway?.prepareWarmup?.() || null; } catch (_) {}
+            try { restorePerimeter = training.perimeter?.prepareWarmup?.() || null; } catch (_) {}
+            try { restoreContainment = training.containment?.prepareWarmup?.() || null; } catch (_) {}
+            try { restoreMarineFade = trainingMarineFade?.prepareWarmup?.() || null; } catch (_) {}
+
+            if (cullStats.hidden) { cullShowAll(); cullStats.hidden = 0; }
+            updateLightPool();
+            sunShadowCadence();
+            if (viewmodel) viewmodel.place();
+            updateSceneMatrices();
+
+            // Deduplicate meshes with identical pipeline signatures by hiding duplicates during compileForLiveTarget()
+            const seenCompileSigs = new Set();
+            const walkDedupe = (o) => {
+              if (!o || !o.visible) return;
+              if (o.isMesh && !o.isSkinnedMesh && !o.isInstancedMesh && o.layers.test(camera.layers)) {
+                const sig = drawablePipelineSig(o);
+                if (sig) {
+                  if (seenCompileSigs.has(sig)) {
+                    dedupVis.push({ o, vis: o.visible });
+                    o.visible = false;
+                  } else {
+                    seenCompileSigs.add(sig);
+                  }
+                }
               }
-              const keeperRoot = marine?.parent?.getObjectByName?.('training-marine-fade-pipeline-keepers');
-              if (keeperRoot) {
-                keeperRoot.traverse((o) => { if (o.isMesh && o.geometry && o.material) fadeDrawables.push(o); });
-              }
-              if (fadeDrawables.length) {
-                pFade = compileOnlyDrawables(fadeDrawables, collectLightSpine(), collectShadowLights());
-              }
-            } finally {
-              try { restoreCutaway?.(); } catch (_) {}
-              try { restoreMarineFade?.(); } catch (_) {}
-              try { restorePerimeter?.(); } catch (_) {}
-              try { restoreContainment?.(); } catch (_) {}
-            }
+              for (let i = 0; i < o.children.length; i++) walkDedupe(o.children[i]);
+            };
+            walkDedupe(scene);
+
+            pCompile = compileForLiveTarget();
           } finally {
-            for (let i = 0; i < unculledScene.length; i++) unculledScene[i].frustumCulled = true;
+            for (let i = dedupVis.length - 1; i >= 0; i--) dedupVis[i].o.visible = dedupVis[i].vis;
+            if (cutawayKeepers.parent) cutawayKeepers.parent.remove(cutawayKeepers);
+            while (cutawayKeepers.children.length) cutawayKeepers.remove(cutawayKeepers.children[cutawayKeepers.children.length - 1]);
+            try { restoreCutaway?.(); } catch (_) {}
+            try { restorePerimeter?.(); } catch (_) {}
+            try { restoreContainment?.(); } catch (_) {}
+            try { restoreMarineFade?.(); } catch (_) {}
+            restoreImpacts?.();
+            restoreChar?.();
+            restoreWreck?.();
+            restoreFlame?.();
+            vmWarm?.restore?.();
+            for (const o of emptyInst) o.count = 0;
+            for (let i = warmVis.length - 1; i >= 0; i--) {
+              const s = warmVis[i];
+              s.o.visible = s.vis;
+              s.o.frustumCulled = s.cull;
+            }
+            for (const m of meshes) m.frustumCulled = true;
           }
 
           if (postProcessing && !origPPRender) {
             origPPRender = postProcessing.render;
             postProcessing.render = () => {};
           }
-          return Promise.all([Promise.resolve(pSolid), Promise.resolve(pFade)]);
+          return Promise.resolve(pCompile);
         })
         .then(async () => {
           if (done || !training.active) { finish(); return; }
@@ -65160,7 +65173,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           try { await renderer.backend?.device?.queue?.onSubmittedWorkDone?.(); } catch (_) {}
           finish();
         }, finish);
-      setTimeout(finish, 15000);   // CL-118: a last resort only (a real GPU takes well under a second); without it a hung compile would freeze the game
+      setTimeout(finish, 15000);   // CL-118: a last resort only
     }
     function leaveTraining() {
       rangeFeature?.dispose();rangeFeature=null;rangeShotPacket=null;

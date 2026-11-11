@@ -2,6 +2,8 @@
 from pathlib import Path
 import json
 import sys
+from itertools import product
+from math import hypot
 from PIL import Image, ImageDraw
 
 model, baseline, after, index = sys.argv[1:5]
@@ -11,6 +13,13 @@ root=Path(__file__).parent
 folder=root/"visible-repairs"/model
 rank=json.loads((root/baseline/model/"rank.json").read_text(encoding="utf-8"))
 pair=next(p for p in rank["rows"] if p["index"]==index)
+cameras={s:json.loads((folder/s/"cameras.json").read_text(encoding="utf-8")) for s in ("before",after)}
+def project(frame,point,width,height):
+    basis=frame["points"]
+    x,y,w=[basis[0][i]+sum(point[j]*(basis[j+1][i]-basis[0][i]) for j in range(3)) for i in range(3)]
+    return ((1+x/w)*width/2,(1-y/w)*height/2) if w>0 else None
+
+drift={}
 for view,match in pair["views"].items():
     x0,y0,x1,y1=match["bounds"]
     # Keep enough of the surrounding outline to recognise which visible part is changing.
@@ -18,6 +27,13 @@ for view,match in pair["views"].items():
     cx=(x0+x1)//2;cy=(y0+y1)//2
     with Image.open(folder/"before"/(view+"-noon.png")) as before:
         width,height=before.size
+    errors=[]
+    for point in product((-.08,.08),(-.10,.10),(-.15,.15)):
+        a,b=(project(cameras[s][view],point,width,height) for s in ("before",after))
+        if a and b: errors.append(hypot(a[0]-b[0],a[1]-b[1]))
+    assert errors, "No projected camera anchors for "+view
+    drift[view]=max(errors)
+    assert drift[view]<1.0, (view,"camera drift in pixels",drift[view])
     left=min(max(0,cx-w//2),width-w);top=min(max(0,cy-h//2),height-h)
     display=410;dh=round(display*h/w)
     sheet=Image.new("RGB",(display*2,34+(dh+18)*4),"#20252a")
@@ -31,3 +47,5 @@ for view,match in pair["views"].items():
                 cut=frame.crop((left,top,left+w,top+h)).resize((display,dh),Image.Resampling.LANCZOS)
                 sheet.paste(cut,(display*col,yy+16))
     sheet.save(folder/(after+"-pair-"+str(index)+"-"+view+".jpg"),quality=94)
+(folder/(after+"-pair-"+str(index)+"-camera-drift.json")).write_text(json.dumps(drift,indent=2)+"\n",encoding="utf-8")
+print("Maximum matched-camera drift in pixels",drift)

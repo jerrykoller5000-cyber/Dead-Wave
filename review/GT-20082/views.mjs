@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {mkdir} from 'node:fs/promises';
+import {mkdir, readFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import {launch} from '../../tools/cdp.mjs';
 import {serve} from '../../tools/serve.mjs';
@@ -7,7 +7,9 @@ import {save} from '../GT-20076/save.mjs';
 
 const phase = process.argv[2];
 assert(process.env.DW_GAME_TEST_TOKEN && ['before','after','uv-probe','final'].includes(phase));
-const dir = new URL('./'+phase+'/',import.meta.url);
+const j128 = process.argv.includes('--j128');
+if (j128) assert.equal(phase,'final');
+const dir = new URL(j128 ? '../GT-20076/visible-repairs/ak/wood/' : './'+phase+'/',import.meta.url);
 await mkdir(dir,{recursive:true});
 const server = await serve(fileURLToPath(new URL('../../',import.meta.url)),0);
 const browser = await launch({headless:false});
@@ -97,6 +99,17 @@ try {
     for(const copy of Object.values(copies)){
       assert.equal(copy.hash,copies.art.hash,'Authored wood UVs changed on a displayed copy');
       assert.deepEqual(copy.paints,copies.art.paints);
+    }
+    if (j128) {
+      const baseline = JSON.parse(await readFile(new URL('./final/wood-uv.json',import.meta.url),'utf8'));
+      assert.deepEqual(copies,baseline,'Wood differs from the accepted J135 artwork');
+      console.log('PASS all five wood UV hashes and finishes match the accepted J135 capture');
+      const surface = await page.evaluate("import('/review/GT-20076/kr-cover-surface.mjs').then(m=>m.compareCover(TT.inspectHost().builders.weaponContext()))");
+      await save(new URL('metal-surface.json',dir),JSON.stringify(surface,null,2));
+      assert.equal(surface.islands,1); assert.equal(surface.closed,true,'Open metal surface');
+      assert(surface.before > 100);
+      assert.equal(surface.missing,0); assert.equal(surface.added,0);
+      console.log('PASS exposed metal positions, normals and texture coordinates:',surface.before,'distinct tuples');
     }
     console.log('PASS authored UVs and factory wood on all five representations:',copies.art.count,'vertices each');
   }

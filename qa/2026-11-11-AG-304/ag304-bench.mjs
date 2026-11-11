@@ -33,7 +33,27 @@ async function saveDual(relPath, buf) {
   for (const base of [OUT_QA, OUT_REV]) {
     const fp = path.join(base, relPath);
     fs.mkdirSync(path.dirname(fp), { recursive: true });
-    fs.writeFileSync(fp, buf);
+    let ok = false;
+    for (let attempt = 0; attempt < 10; attempt++) {
+      try {
+        const tmp = fp + '.' + Math.random().toString(36).slice(2) + '.tmp';
+        fs.writeFileSync(tmp, buf);
+        try { fs.unlinkSync(fp); } catch (_) {}
+        try {
+          fs.renameSync(tmp, fp);
+        } catch (_) {
+          fs.copyFileSync(tmp, fp);
+          try { fs.unlinkSync(tmp); } catch (_) {}
+        }
+        ok = true;
+        break;
+      } catch (e) {
+        await new Promise((r) => setTimeout(r, 200));
+      }
+    }
+    if (!ok) {
+      try { fs.writeFileSync(fp, buf); } catch (_) {}
+    }
   }
 }
 
@@ -528,6 +548,60 @@ async function runSyncEnterVisibilityCheck(browser, origin) {
   }
 }
 
+async function runInspectStartupCheck(browser, origin) {
+  const page = await browser.newPage({ width: 1280, height: 720 });
+  try {
+    await moveOffscreen(page);
+    await page.goto(`${origin}/index.html?inspect=&debug=1&raf=timer`, { timeout: 180000 });
+    await moveOffscreen(page);
+    assert(await page.waitFor(
+      'window.DWInspect && window.DWInspect.ready === true && window.TT && !TT.trainingDbg.state().warming && !document.getElementById("trainingBlackout")?.classList.contains("on")',
+      { timeout: 120000 }
+    ));
+    const res = await page.evaluate(`(async () => {
+      const measureUrl = async (dataUrl) => {
+        const img = new Image();
+        img.src = dataUrl;
+        await img.decode();
+        const c = document.createElement('canvas');
+        c.width = 160; c.height = 90;
+        const g = c.getContext('2d');
+        g.drawImage(img, 0, 0, 160, 90);
+        const d = g.getImageData(0, 0, 160, 90).data;
+        let nonBlack = 0, lumaSum = 0;
+        for (let i = 0; i < d.length; i += 4) {
+          const l = 0.2126 * d[i] + 0.7152 * d[i + 1] + 0.0722 * d[i + 2];
+          lumaSum += l;
+          if (d[i] > 6 || d[i + 1] > 6 || d[i + 2] > 6) nonBlack++;
+        }
+        const b64 = dataUrl.split(',')[1] || '';
+        const bytes = Math.floor(b64.length * 0.75);
+        return { bytes, nonBlackRatio: +(nonBlack / (160 * 90)).toFixed(4), meanLuma: +(lumaSum / (160 * 90)).toFixed(2) };
+      };
+      const subjects = {};
+      for (const id of ['weapon.pistol', 'weapon.aa12']) {
+        await DWInspect.show(id, { view: 'three', instant: true });
+        await DWInspect.light('noon');
+        await DWInspect.stepAsync(3);
+        const url = await DWInspect.shot({ type: 'image/jpeg', quality: 0.9 });
+        subjects[id] = await measureUrl(url);
+      }
+      const st = typeof DWInspect.status === 'function' ? DWInspect.status() : {};
+      return { subjects, inspectErrors: st.errors || [] };
+    })()`);
+    const gpuSyncWarnings = (page.console || []).filter((c) =>
+      /setPipeline|Invalid CommandBuffer|writable usage/i.test(c.text || '')
+    );
+    return {
+      ...res,
+      pageErrors: page.errors || [],
+      gpuSyncWarnings
+    };
+  } finally {
+    await page.close().catch(() => {});
+  }
+}
+
 async function main() {
   const server = await serve(ROOT, 0);
   const browser = await launch({
@@ -560,6 +634,10 @@ async function main() {
     const syncEnterCheck = await runSyncEnterVisibilityCheck(browser, server.origin);
     console.log(`[AG-304 ${TAG}] syncEnterCheck:`, JSON.stringify(syncEnterCheck));
 
+    console.log(`[AG-304 ${TAG}] Running ?inspect=&debug=1&raf=timer startup check...`);
+    const inspectCheck = await runInspectStartupCheck(browser, server.origin);
+    console.log(`[AG-304 ${TAG}] inspectCheck:`, JSON.stringify(inspectCheck));
+
     const out = {
       card: 'AG-304',
       tag: TAG,
@@ -567,7 +645,8 @@ async function main() {
       pass1P,
       pass3P,
       breakdown,
-      syncEnterCheck
+      syncEnterCheck,
+      inspectCheck
     };
     await saveDual(`trace-${TAG}.json`, Buffer.from(JSON.stringify(out, null, 2)));
     console.log(`[AG-304 ${TAG}] Saved trace-${TAG}.json`);

@@ -6,7 +6,7 @@ import {launch} from '../../tools/cdp.mjs';
 import {save} from './save.mjs';
 
 const [id,phase]=process.argv.slice(2);
-assert(process.env.DW_GAME_TEST_TOKEN && /^[a-z0-9]+$/.test(id) && ['before','after','trim','final-trim','joins','rear-join','side-inset','crown','contact-trim'].includes(phase));
+assert(process.env.DW_GAME_TEST_TOKEN && /^[a-z0-9]+$/.test(id) && ['before','after','trim','final-trim','joins','rear-join','side-inset','crown','contact-trim','relief','closed-relief'].includes(phase));
 const dir=new URL('./visible-repairs/'+id+'/'+phase+'/',import.meta.url);
 await mkdir(dir,{recursive:true});
 const server=await serve(fileURLToPath(new URL('../../',import.meta.url)),0),browser=await launch({headless:false});

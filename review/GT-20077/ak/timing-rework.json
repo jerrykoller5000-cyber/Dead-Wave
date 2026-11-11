@@ -1,0 +1,128 @@
+{
+  "weapon": "ak",
+  "readyMs": 11753,
+  "fps": 58.3,
+  "low": 43.3,
+  "samples": [
+    {
+      "weapon": "ak",
+      "eye": "ak",
+      "high": "high",
+      "fps": 41.62436548223351,
+      "low": 10.309278350515465,
+      "worst": 97,
+      "hitches": 21,
+      "frames": 41
+    },
+    {
+      "weapon": "ak",
+      "eye": "ak",
+      "high": "high",
+      "fps": 45.44536457336069,
+      "low": 10.090817356812774,
+      "worst": 99.09999999403954,
+      "hitches": 23,
+      "frames": 45
+    },
+    {
+      "weapon": "ak",
+      "eye": "ak",
+      "high": "high",
+      "fps": 47.8659752686771,
+      "low": 14.814814814814815,
+      "worst": 67.5,
+      "hitches": 26,
+      "frames": 48
+    },
+    {
+      "weapon": "ak",
+      "eye": "ak",
+      "high": "high",
+      "fps": 54.30489731373681,
+      "low": 14.326647568140121,
+      "worst": 69.7999999821186,
+      "hitches": 28,
+      "frames": 55
+    },
+    {
+      "weapon": "ak",
+      "eye": "ak",
+      "high": "high",
+      "fps": 60.81754735792622,
+      "low": 46.94835684692498,
+      "worst": 21.299999982118607,
+      "hitches": 28,
+      "frames": 61
+    },
+    {
+      "weapon": "ak",
+      "eye": "ak",
+      "high": "high",
+      "fps": 59.9837332234342,
+      "low": 48.30917870223017,
+      "worst": 20.700000017881393,
+      "hitches": 28,
+      "frames": 59
+    },
+    {
+      "weapon": "ak",
+      "eye": "ak",
+      "high": "high",
+      "fps": 60.10217369635853,
+      "low": 53.475935862967,
+      "worst": 18.69999998807907,
+      "hitches": 28,
+      "frames": 60
+    },
+    {
+      "weapon": "ak",
+      "eye": "ak",
+      "high": "high",
+      "fps": 59.92210126942125,
+      "low": 51.813471470587324,
+      "worst": 19.30000001192093,
+      "hitches": 28,
+      "frames": 60
+    },
+    {
+      "weapon": "ak",
+      "eye": "ak",
+      "high": "high",
+      "fps": 60.03001500750375,
+      "low": 49.01960782881472,
+      "worst": 20.400000005960464,
+      "hitches": 28,
+      "frames": 60
+    },
+    {
+      "weapon": "ak",
+      "eye": "ak",
+      "high": "high",
+      "fps": 60.006000601490804,
+      "low": 50.25125626635574,
+      "worst": 19.900000005960464,
+      "hitches": 28,
+      "frames": 60
+    },
+    {
+      "weapon": "ak",
+      "eye": "ak",
+      "high": "high",
+      "fps": 60.002033968344264,
+      "low": 48.78048780487805,
+      "worst": 20.5,
+      "hitches": 28,
+      "frames": 59
+    },
+    {
+      "weapon": "ak",
+      "eye": "ak",
+      "high": "high",
+      "fps": 60.00813669540985,
+      "low": 55.55555555555556,
+      "worst": 18,
+      "hitches": 28,
+      "frames": 59
+    }
+  ]
+}

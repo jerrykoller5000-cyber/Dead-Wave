@@ -159,8 +159,8 @@
         steps(30);   // the spring's turn, and the gun ready
         const L1 = T.getAmmo().launcher, top1 = topOf(G, ud.drum, ud.drumRounds, 0.065), turn = wrap(turnOf(ud.drum, ud.baseDrumRot) - t0);
         res.push(turn);
-        const good = L1 === L0 - 1 && top0 === L0 - 1 && (L1 === 0 ? true : top1 === L1 - 1) && Math.abs(Math.abs(turn) - 1) < 0.02 && ud.drumRounds[L0 - 1].visible;
-        if (!good) fails.push('shot ' + (k + 1) + ': live ' + L0 + '>' + L1 + ', top ' + top0 + '>' + top1 + ', turn ' + turn.toFixed(2) + ', fired case shown ' + ud.drumRounds[L0 - 1].visible);
+        const good = L1 === L0 - 1 && top0 === L0 - 1 && (L1 === 0 ? true : top1 === L1 - 1) && Math.abs(Math.abs(turn) - 1) < 0.02 && ud.drumRounds[L0 - 1].visible && !(ud.drumNoses && ud.drumNoses[L0 - 1] && ud.drumNoses[L0 - 1].visible) && !(ud.drumNoses && L1 > 0 && !ud.drumNoses[L1 - 1].visible);
+        if (!good) fails.push('shot ' + (k + 1) + ': live ' + L0 + '>' + L1 + ', top ' + top0 + '>' + top1 + ', turn ' + turn.toFixed(2) + ', fired case shown ' + ud.drumRounds[L0 - 1].visible + (ud.drumNoses ? ', its round shown ' + ud.drumNoses[L0 - 1].visible : ''));
         steps(60);
       }
       ok(!fails.length, 'the launcher, six shots: the round behind the barrel fires and the spring turns the next live one up, one chamber a shot, the fired case left in its chamber (turns ' + res.map((t) => t.toFixed(2)).join(' ') + ')' + (fails.length ? ' ' + fails.join('; ') : ''));

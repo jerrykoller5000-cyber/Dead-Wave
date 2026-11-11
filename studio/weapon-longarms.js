@@ -344,6 +344,71 @@ function krFinish(ctx) {
   return krFinishes.get(ctx.gunBody);
 }
 
+// Fold the concealed part of the curved artwork onto its neighbouring panel.
+// Vertices above the seam keep their authored normals and texture coordinates.
+function trimRoundedArtwork(T, geometry, profile, floorAt, segments) {
+  const {position, normal, uv} = geometry.attributes;
+  const row = new Map(), step = 2 * Math.PI / segments;
+  for (const [radius,z] of profile) {
+    if (!radius) continue;
+    const floor = floorAt(z);
+    const lower = (Math.ceil(Math.asin(floor / radius) / step - .5) - .5) * step;
+    const upper = lower + step;
+    const t = (floor / radius - Math.sin(lower)) / (Math.sin(upper) - Math.sin(lower));
+    const edge = radius * ((1 - t) * Math.cos(lower) + t * Math.cos(upper));
+    row.set(Math.fround(z), {radius, floor, edge});
+  }
+  const a = new T.Vector3(), b = new T.Vector3(), c = new T.Vector3();
+  const positions = [], normals = [], uvs = [];
+  for (let i = 0; i < position.count; i += 3) {
+    let onUnderside = true;
+    for (let j = i; j < i + 3; j++) {
+      const {radius, floor, edge} = row.get(position.getZ(j));
+      if (position.getY(j) > floor) { onUnderside = false; continue; }
+      const x = position.getX(j);
+      position.setXY(j, Math.abs(x) >= edge - 1e-7 ? Math.sign(x) * edge : x, floor);
+      uv.setY(j, floor * 4);
+      if (Math.abs(x) >= edge - 1e-7) {
+        const radial = Math.hypot(normal.getX(j), normal.getY(j));
+        normal.setXY(j, radial * Math.sign(x) * edge / radius, radial * floor / radius);
+      }
+    }
+    if (onUnderside) continue;
+    a.fromBufferAttribute(position, i);
+    b.fromBufferAttribute(position, i + 1).sub(a);
+    c.fromBufferAttribute(position, i + 2).sub(a);
+    b.cross(c);
+    if (b.lengthSq() < 1e-18) continue;
+    for (let j = i; j < i + 3; j++) {
+      positions.push(position.getX(j),position.getY(j),position.getZ(j));
+      normals.push(normal.getX(j),normal.getY(j),normal.getZ(j));
+      uvs.push(uv.getX(j),uv.getY(j));
+    }
+  }
+  // Close each pair of neighbouring rows. A centre vertex at both ends
+  // matches the original end-cap fans and avoids a subdivided edge opposite a long edge.
+  let previous;
+  for (const [z,{floor,edge}] of row) {
+    const ring = [[-edge,floor,z],[0,floor,z],[edge,floor,z]];
+    if (previous) {
+      const underside = a.set(0, previous[0][2] - z, floor - previous[0][1]).normalize();
+      for (let j = 0; j < 2; j++) {
+        for (const p of [previous[j],previous[j+1],ring[j+1],previous[j],ring[j+1],ring[j]]) {
+          positions.push(...p); normals.push(underside.x,underside.y,underside.z); uvs.push(p[2]*4,p[1]*4);
+        }
+      }
+    }
+    previous = ring;
+  }
+  const skin = new T.BufferGeometry();
+  skin.setAttribute('position',new T.Float32BufferAttribute(positions,3));
+  skin.setAttribute('normal',new T.Float32BufferAttribute(normals,3));
+  skin.setAttribute('uv',new T.Float32BufferAttribute(uvs,2));
+  skin.computeBoundingSphere();
+  geometry.dispose();
+  return skin;
+}
+
 export function makeAkModel(ctx) {
   const { THREE, gunKit, gunBand, gunEffects, gunSuppressor, finishGun, profileCurve, gunMid, gunDark, gunAccent, gunRubber, woodDark, gunMetal } = ctx;
   const {receiver: gunBody, bracket, birch: woodMat, cartridge} = krFinish(ctx);
@@ -387,14 +452,22 @@ export function makeAkModel(ctx) {
   gun.userData.ejectPort = [HW + 0.003, 0.016, 0.1875];
   // Dust cover: the stamped lid with its rounded top and the AKM's eight ribs across the rear half.
   // (CL-315 note: one parkerized finish on the cover and the receiver, as an AKM has; the ribs a shade lighter to read.)
-  K.slab([[-0.2, 0.027], [0.155, 0.027], [0.155, 0.04], [-0.18, 0.04], [-0.2, 0.036]], 2 * HW - 0.002, gunBody, { bevel: 0.002, segs: 2 });
-  const coverProfile = [[0,-.2],[.021,-.2],[.022,-.19]];
+  const rearCorner = [-.2, .036], topCorner = [-.18, .04];
+  K.slab([[-.2, .028], [.155, .028], [.155, topCorner[1]], topCorner, rearCorner],
+    2 * HW - .002, gunBody, { bevel: .002, segs: 2 });
+  const coverProfile = [[0, rearCorner[0]], [.021, rearCorner[0]], [.022, -.19], [.022, topCorner[0]]];
   for (let i = 0; i < 8; i++) {
     const z = -.167 + i * .013;
     coverProfile.push([.022,z],[.0231,z+.0016],[.0231,z+.0030],[.022,z+.0047]);
   }
   coverProfile.push([.022,.15],[.021,.155],[0,.155]);
-  K.lathe(coverProfile, gunBody, {y:.036,seg:20,phase:Math.PI/20}).name = 'KR-7 receiver cover';
+  // Stop the metal artwork at the neighbouring side panel's sloped upper edge.
+  const rise = topCorner[1] - rearCorner[1];
+  const slope = rise / (topCorner[0] - rearCorner[0]);
+  const cover = K.lathe(coverProfile, gunBody, {y:rearCorner[1], seg:20, phase:Math.PI/20});
+  cover.name = 'KR-7 receiver cover';
+  cover.geometry = trimRoundedArtwork(THREE, cover.geometry, coverProfile,
+    z => Math.min(rise, (z - rearCorner[0]) * slope), 20);
   // GP-20056, Century parts figure 1 and field strip: the recoil spring cam protrudes through the rear of the lid.
   const rearButtonFinish = gunMid.clone();
   rearButtonFinish.color.lerp(gunDark.color, .60);

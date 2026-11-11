@@ -440,8 +440,11 @@ const VM_STAGE3_RELOADS = Object.freeze({
 export const VM_BLADES = Object.freeze({
   knife: {   // a slash (0.22 s): the blade up out of the fist, swept from the right across the lower middle, back (a thrust
              // points the 30 cm blade at the eye's line and it vanishes behind the fist: fpshot p18)
-    keys: [[0, { p: [0.30, -0.34, -0.30], e: [0.2, -0.9, 0.3, -0.3] }], [0.30, { p: [0.20, -0.10, -0.45], e: [0.1, -1.1, 1.2, -0.2] }],
-      [0.60, { p: [-0.02, -0.14, -0.55], e: [0.0, -0.9, 1.5, 1.1] }], [0.80, { p: [0.10, -0.20, -0.45], e: [0.1, -0.7, 1.2, 0.8] }],
+    // CE-4 (J16, Claude 5; the cloud audit, 11 Nov: the slash was small and quick, no wind-up, and from 0.45 on the fist was
+    // below the view): a wind-up back and up at the right (the elbow cocked), the cut across to the left of the middle with
+    // the blade's edge leading, the follow-through low left still in sight, home
+    keys: [[0, { p: [0.30, -0.34, -0.30], e: [0.2, -0.9, 0.3, -0.3] }], [0.22, { p: [0.34, -0.10, -0.32], e: [0.3, -1.2, 0.9, -0.5] }],
+      [0.48, { p: [0.04, -0.08, -0.52], e: [0.0, -1.0, 1.4, 0.9] }], [0.70, { p: [-0.08, -0.06, -0.50], e: [-0.1, -0.8, 1.4, 0.95] }],
       [1, { p: [0.30, -0.34, -0.30], e: [0.2, -0.9, 0.3, -0.3] }]],
     hold: { pos: [0, -0.07, 0.0], rot: [0, 0.15, 0] },
     away: [-0.22, -0.46, -0.36]   // the support wrist, out of the view (view space)
@@ -470,12 +473,21 @@ export const VM_GRENADE = Object.freeze({
   times: { grab: 0.16, inHand: 0.11, raise: 0.14, whip: 0.08, follow: 0.14, back: 0.2 },
   places: {
     pouch: { p: [-0.26, -0.44, -0.30], e: [-0.4, 0.6, -0.3] },
-    lift: { p: [-0.30, -0.10, -0.42], e: [-0.5, -0.3, -0.5] },
-    cocked: { p: [-0.26, 0.06, -0.42], e: [-0.6, -0.9, -0.6] },   // was 30 cm from the eye: a fist the size of the view's corner
+    lift: { p: [-0.25, -0.10, -0.42], e: [-0.5, -0.3, -0.5] },
+    // CE-4: in from -0.26 (the fist and its grenade sat under the HUD's left panel, ndc x -0.53: never seen at the eye)
+    cocked: { p: [-0.18, 0.05, -0.44], e: [-0.6, -0.9, -0.6] },   // was 30 cm from the eye: a fist the size of the view's corner
     whip: { p: [-0.08, 0.06, -0.60], e: [-0.1, -0.2, -0.3] },
     follow: { p: [0.02, -0.16, -0.62], e: [0.1, 0.5, -0.1] }
   },
   hold: { pos: [0, -0.045, 0.01], rot: [0, 0, 0] },   // the grenade's top out of the fist
+  // CE-4 (J16, Claude 5): the fingers through the throw (the cloud audit, 11 Nov: the hand went from the grip flat open at
+  // the grab's first frame, the follow-through read as a pointing finger and a thumb up, and it snapped onto the grip at
+  // the end of 'back'). reach: the hand easing open on its way to the pouch until it closes on the grenade (inHand);
+  // release: the fingers spread loose as the grenade leaves (open in `open` s from the whip) and through the follow;
+  // 'back' eases from release into the support grip as the hand comes onto the gun.
+  fingers: { reach: { f: [[0.22, 0.3, 0.18, 0.06], [0.26, 0.36, 0.2, 0], [0.32, 0.42, 0.22, -0.05], [0.38, 0.48, 0.26, -0.1]], t: [0.3, 0.3, 0.15] },
+    release: { f: [[0.26, 0.34, 0.2, 0.1], [0.3, 0.38, 0.22, 0.02], [0.34, 0.44, 0.24, -0.06], [0.4, 0.5, 0.28, -0.14]], t: [0.3, 0.4, 0.15] },
+    open: 0.04 },
   bob: { y: 0.006, rate: 1.6 }   // the cocked hand's breathing
 });
 
