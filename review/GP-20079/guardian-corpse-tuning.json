@@ -1,0 +1,590 @@
+{
+  "result": [
+    {
+      "kind": "guardian",
+      "style": "topple",
+      "pose": "side",
+      "phases": {
+        "death": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 5,
+            "collisions": []
+          }
+        ]
+      }
+    },
+    {
+      "kind": "caveguard",
+      "style": "topple",
+      "pose": "twist",
+      "phases": {
+        "death": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 5,
+            "collisions": []
+          }
+        ]
+      }
+    },
+    {
+      "kind": "guardian",
+      "style": "topple",
+      "pose": "side",
+      "phases": {
+        "death": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": [
+              {
+                "pair": "legL/legR",
+                "a": "legL",
+                "b": "legR",
+                "hits": 1,
+                "total": 17,
+                "contact": [
+                  -28.164,
+                  -199.595,
+                  -632.465
+                ],
+                "contactMeta": {
+                  "skin": "guardian-skin",
+                  "index": 23922,
+                  "rgb": [
+                    0.58,
+                    0.57,
+                    0.45
+                  ]
+                },
+                "aCenter": [
+                  -28.448,
+                  -199.555,
+                  -632.559
+                ],
+                "bCenter": [
+                  -27.901,
+                  -199.728,
+                  -632.755
+                ],
+                "overlap": [
+                  0.101,
+                  0.812,
+                  0.835
+                ]
+              }
+            ],
+            "tune": {
+              "zero": [
+                {
+                  "shoulderOut": 0,
+                  "hipIn": 0.08,
+                  "shoulderRoll": 0,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "shoulderOut": 0,
+                  "hipIn": 0.08,
+                  "shoulderRoll": 0.1,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "shoulderOut": 0,
+                  "hipIn": 0.08,
+                  "shoulderRoll": 0.2,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "shoulderOut": 0,
+                  "hipIn": 0.08,
+                  "shoulderRoll": 0.3,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "shoulderOut": 0.08,
+                  "hipIn": 0.08,
+                  "shoulderRoll": 0,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "shoulderOut": 0.08,
+                  "hipIn": 0.08,
+                  "shoulderRoll": 0.1,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "shoulderOut": 0.08,
+                  "hipIn": 0.08,
+                  "shoulderRoll": 0.2,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "shoulderOut": 0.08,
+                  "hipIn": 0.08,
+                  "shoulderRoll": 0.3,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "shoulderOut": 0.16,
+                  "hipIn": 0.08,
+                  "shoulderRoll": 0,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "shoulderOut": 0.16,
+                  "hipIn": 0.08,
+                  "shoulderRoll": 0.1,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "shoulderOut": 0.16,
+                  "hipIn": 0.08,
+                  "shoulderRoll": 0.2,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "shoulderOut": 0.16,
+                  "hipIn": 0.08,
+                  "shoulderRoll": 0.3,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "shoulderOut": 0.24,
+                  "hipIn": 0.08,
+                  "shoulderRoll": 0,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "shoulderOut": 0.24,
+                  "hipIn": 0.08,
+                  "shoulderRoll": 0.1,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "shoulderOut": 0.24,
+                  "hipIn": 0.08,
+                  "shoulderRoll": 0.2,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "shoulderOut": 0.24,
+                  "hipIn": 0.08,
+                  "shoulderRoll": 0.3,
+                  "n": 0,
+                  "pairs": []
+                }
+              ],
+              "best": [
+                {
+                  "shoulderOut": 0,
+                  "hipIn": 0.08,
+                  "shoulderRoll": 0,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "shoulderOut": 0,
+                  "hipIn": 0.08,
+                  "shoulderRoll": 0.1,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "shoulderOut": 0,
+                  "hipIn": 0.08,
+                  "shoulderRoll": 0.2,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "shoulderOut": 0,
+                  "hipIn": 0.08,
+                  "shoulderRoll": 0.3,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "shoulderOut": 0.08,
+                  "hipIn": 0.08,
+                  "shoulderRoll": 0,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "shoulderOut": 0.08,
+                  "hipIn": 0.08,
+                  "shoulderRoll": 0.1,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "shoulderOut": 0.08,
+                  "hipIn": 0.08,
+                  "shoulderRoll": 0.2,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "shoulderOut": 0.08,
+                  "hipIn": 0.08,
+                  "shoulderRoll": 0.3,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "shoulderOut": 0.16,
+                  "hipIn": 0.08,
+                  "shoulderRoll": 0,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "shoulderOut": 0.16,
+                  "hipIn": 0.08,
+                  "shoulderRoll": 0.1,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "shoulderOut": 0.16,
+                  "hipIn": 0.08,
+                  "shoulderRoll": 0.2,
+                  "n": 0,
+                  "pairs": []
+                },
+                {
+                  "shoulderOut": 0.16,
+                  "hipIn": 0.08,
+                  "shoulderRoll": 0.3,
+                  "n": 0,
+                  "pairs": []
+                }
+              ]
+            }
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 5,
+            "collisions": []
+          }
+        ]
+      }
+    },
+    {
+      "kind": "caveguard",
+      "style": "topple",
+      "pose": "side",
+      "phases": {
+        "death": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": [
+              {
+                "pair": "legL/legR",
+                "a": "legL",
+                "b": "legR",
+                "hits": 1,
+                "total": 23,
+                "contact": [
+                  -27.936,
+                  -199.732,
+                  -632.608
+                ],
+                "contactMeta": {
+                  "skin": "guardian-skin",
+                  "index": 30426,
+                  "rgb": [
+                    0.44,
+                    0.43,
+                    0.36
+                  ]
+                },
+                "aCenter": [
+                  -28.152,
+                  -199.627,
+                  -632.693
+                ],
+                "bCenter": [
+                  -27.769,
+                  -199.981,
+                  -632.743
+                ],
+                "overlap": [
+                  0.3,
+                  0.429,
+                  0.869
+                ]
+              }
+            ],
+            "tune": {
+              "zero": [],
+              "best": [
+                {
+                  "shoulderOut": 0,
+                  "hipIn": 0,
+                  "shoulderRoll": 0,
+                  "n": 1,
+                  "pairs": [
+                    "legL/legR"
+                  ]
+                },
+                {
+                  "shoulderOut": 0,
+                  "hipIn": 0,
+                  "shoulderRoll": 0.1,
+                  "n": 1,
+                  "pairs": [
+                    "legL/legR"
+                  ]
+                },
+                {
+                  "shoulderOut": 0,
+                  "hipIn": 0,
+                  "shoulderRoll": 0.2,
+                  "n": 1,
+                  "pairs": [
+                    "legL/legR"
+                  ]
+                },
+                {
+                  "shoulderOut": 0,
+                  "hipIn": 0,
+                  "shoulderRoll": 0.3,
+                  "n": 1,
+                  "pairs": [
+                    "legL/legR"
+                  ]
+                },
+                {
+                  "shoulderOut": 0,
+                  "hipIn": 0.08,
+                  "shoulderRoll": 0,
+                  "n": 1,
+                  "pairs": [
+                    "legL/legR"
+                  ]
+                },
+                {
+                  "shoulderOut": 0,
+                  "hipIn": 0.08,
+                  "shoulderRoll": 0.1,
+                  "n": 1,
+                  "pairs": [
+                    "legL/legR"
+                  ]
+                },
+                {
+                  "shoulderOut": 0,
+                  "hipIn": 0.08,
+                  "shoulderRoll": 0.2,
+                  "n": 1,
+                  "pairs": [
+                    "legL/legR"
+                  ]
+                },
+                {
+                  "shoulderOut": 0,
+                  "hipIn": 0.08,
+                  "shoulderRoll": 0.3,
+                  "n": 1,
+                  "pairs": [
+                    "legL/legR"
+                  ]
+                },
+                {
+                  "shoulderOut": 0,
+                  "hipIn": 0.16,
+                  "shoulderRoll": 0,
+                  "n": 1,
+                  "pairs": [
+                    "legL/legR"
+                  ]
+                },
+                {
+                  "shoulderOut": 0,
+                  "hipIn": 0.16,
+                  "shoulderRoll": 0.1,
+                  "n": 1,
+                  "pairs": [
+                    "legL/legR"
+                  ]
+                },
+                {
+                  "shoulderOut": 0,
+                  "hipIn": 0.16,
+                  "shoulderRoll": 0.2,
+                  "n": 1,
+                  "pairs": [
+                    "legL/legR"
+                  ]
+                },
+                {
+                  "shoulderOut": 0,
+                  "hipIn": 0.16,
+                  "shoulderRoll": 0.3,
+                  "n": 1,
+                  "pairs": [
+                    "legL/legR"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 5,
+            "collisions": []
+          }
+        ]
+      }
+    }
+  ],
+  "errors": []
+}

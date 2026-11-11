@@ -1,0 +1,2743 @@
+{
+  "result": [
+    {
+      "kind": "shambler",
+      "phases": {
+        "walk": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "charge": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "attack": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 21,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "hit": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "death": [
+          {
+            "frame": 6,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 4,
+            "collisions": []
+          }
+        ]
+      }
+    },
+    {
+      "kind": "feral",
+      "phases": {
+        "walk": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "charge": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "attack": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 21,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "hit": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "death": [
+          {
+            "frame": 6,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 3,
+            "collisions": []
+          }
+        ]
+      }
+    },
+    {
+      "kind": "brute",
+      "phases": {
+        "walk": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "charge": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "attack": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 21,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "hit": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "death": [
+          {
+            "frame": 6,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 4,
+            "collisions": []
+          }
+        ]
+      }
+    },
+    {
+      "kind": "military",
+      "phases": {
+        "walk": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "charge": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "attack": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 21,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "hit": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "death": [
+          {
+            "frame": 6,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 3,
+            "collisions": []
+          }
+        ]
+      }
+    },
+    {
+      "kind": "spitter",
+      "phases": {
+        "walk": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "charge": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "attack": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 21,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "hit": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "death": [
+          {
+            "frame": 6,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 3,
+            "collisions": []
+          }
+        ]
+      }
+    },
+    {
+      "kind": "bomber",
+      "phases": {
+        "walk": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "charge": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "attack": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 21,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "hit": [
+          {
+            "frame": 3,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 4,
+            "collisions": []
+          }
+        ],
+        "death": [
+          {
+            "frame": 6,
+            "parts": 0,
+            "collisions": [],
+            "gone": true
+          },
+          {
+            "frame": 12,
+            "parts": 0,
+            "collisions": [],
+            "gone": true
+          },
+          {
+            "frame": 18,
+            "parts": 0,
+            "collisions": [],
+            "gone": true
+          },
+          {
+            "frame": 24,
+            "parts": 0,
+            "collisions": [],
+            "gone": true
+          },
+          {
+            "frame": 30,
+            "parts": 0,
+            "collisions": [],
+            "gone": true
+          },
+          {
+            "frame": 36,
+            "parts": 0,
+            "collisions": [],
+            "gone": true
+          },
+          {
+            "frame": 42,
+            "parts": 0,
+            "collisions": [],
+            "gone": true
+          },
+          {
+            "frame": 48,
+            "parts": 0,
+            "collisions": [],
+            "gone": true
+          }
+        ]
+      }
+    },
+    {
+      "kind": "screamer",
+      "phases": {
+        "walk": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "charge": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "attack": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 21,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "hit": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "death": [
+          {
+            "frame": 6,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 3,
+            "collisions": []
+          }
+        ]
+      }
+    },
+    {
+      "kind": "drowned",
+      "phases": {
+        "walk": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "charge": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "attack": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 21,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "hit": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "death": [
+          {
+            "frame": 6,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 3,
+            "collisions": []
+          }
+        ]
+      }
+    },
+    {
+      "kind": "leaper",
+      "phases": {
+        "walk": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "charge": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "attack": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 21,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "hit": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "death": [
+          {
+            "frame": 6,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 4,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 4,
+            "collisions": []
+          }
+        ]
+      }
+    },
+    {
+      "kind": "spider",
+      "phases": {
+        "walk": [
+          {
+            "frame": 6,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 1,
+            "collisions": []
+          }
+        ],
+        "charge": [
+          {
+            "frame": 6,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 1,
+            "collisions": []
+          }
+        ],
+        "attack": [
+          {
+            "frame": 3,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 21,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 1,
+            "collisions": []
+          }
+        ],
+        "hit": [
+          {
+            "frame": 3,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 1,
+            "collisions": []
+          }
+        ],
+        "death": [
+          {
+            "frame": 6,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 1,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 1,
+            "collisions": []
+          }
+        ]
+      }
+    },
+    {
+      "kind": "colossus",
+      "phases": {
+        "walk": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "charge": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "attack": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 21,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "hit": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "death": [
+          {
+            "frame": 6,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 3,
+            "collisions": []
+          }
+        ]
+      }
+    },
+    {
+      "kind": "demon",
+      "phases": {
+        "walk": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "charge": [
+          {
+            "frame": 6,
+            "parts": 0,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 0,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 0,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 0,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 0,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 0,
+            "collisions": []
+          }
+        ],
+        "attack": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 21,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "hit": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "death": [
+          {
+            "frame": 6,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 3,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 3,
+            "collisions": []
+          }
+        ]
+      }
+    },
+    {
+      "kind": "guardian",
+      "phases": {
+        "walk": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "charge": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "attack": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 21,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "hit": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "death": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 5,
+            "collisions": []
+          }
+        ]
+      }
+    },
+    {
+      "kind": "caveguard",
+      "phases": {
+        "walk": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "charge": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "attack": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 21,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "hit": [
+          {
+            "frame": 3,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 9,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 15,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          }
+        ],
+        "death": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 5,
+            "collisions": []
+          }
+        ]
+      }
+    }
+  ],
+  "errors": []
+}

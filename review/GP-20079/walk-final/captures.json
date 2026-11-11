@@ -1,0 +1,492 @@
+[
+  {
+    "kind": "shambler",
+    "view": "profile",
+    "attempts": 1,
+    "bytes": 176864,
+    "valid": true
+  },
+  {
+    "kind": "shambler",
+    "view": "gameplay",
+    "attempts": 1,
+    "bytes": 299979,
+    "valid": true
+  },
+  {
+    "kind": "shambler",
+    "view": "gameplay-overcast",
+    "attempts": 1,
+    "bytes": 281103,
+    "valid": true
+  },
+  {
+    "kind": "shambler",
+    "view": "gameplay-dusk",
+    "attempts": 1,
+    "bytes": 266270,
+    "valid": true
+  },
+  {
+    "kind": "shambler",
+    "view": "gameplay-night",
+    "attempts": 1,
+    "bytes": 148575,
+    "valid": true
+  },
+  {
+    "kind": "feral",
+    "view": "profile",
+    "attempts": 1,
+    "bytes": 203207,
+    "valid": true
+  },
+  {
+    "kind": "feral",
+    "view": "gameplay",
+    "attempts": 1,
+    "bytes": 294112,
+    "valid": true
+  },
+  {
+    "kind": "feral",
+    "view": "gameplay-overcast",
+    "attempts": 1,
+    "bytes": 279332,
+    "valid": true
+  },
+  {
+    "kind": "feral",
+    "view": "gameplay-dusk",
+    "attempts": 1,
+    "bytes": 247715,
+    "valid": true
+  },
+  {
+    "kind": "feral",
+    "view": "gameplay-night",
+    "attempts": 1,
+    "bytes": 171326,
+    "valid": true
+  },
+  {
+    "kind": "brute",
+    "view": "profile",
+    "attempts": 1,
+    "bytes": 193365,
+    "valid": true
+  },
+  {
+    "kind": "brute",
+    "view": "gameplay",
+    "attempts": 1,
+    "bytes": 316327,
+    "valid": true
+  },
+  {
+    "kind": "brute",
+    "view": "gameplay-overcast",
+    "attempts": 1,
+    "bytes": 304257,
+    "valid": true
+  },
+  {
+    "kind": "brute",
+    "view": "gameplay-dusk",
+    "attempts": 1,
+    "bytes": 287800,
+    "valid": true
+  },
+  {
+    "kind": "brute",
+    "view": "gameplay-night",
+    "attempts": 1,
+    "bytes": 146861,
+    "valid": true
+  },
+  {
+    "kind": "military",
+    "view": "profile",
+    "attempts": 1,
+    "bytes": 197176,
+    "valid": true
+  },
+  {
+    "kind": "military",
+    "view": "gameplay",
+    "attempts": 1,
+    "bytes": 314969,
+    "valid": true
+  },
+  {
+    "kind": "military",
+    "view": "gameplay-overcast",
+    "attempts": 1,
+    "bytes": 300025,
+    "valid": true
+  },
+  {
+    "kind": "military",
+    "view": "gameplay-dusk",
+    "attempts": 1,
+    "bytes": 281511,
+    "valid": true
+  },
+  {
+    "kind": "military",
+    "view": "gameplay-night",
+    "attempts": 1,
+    "bytes": 149017,
+    "valid": true
+  },
+  {
+    "kind": "spitter",
+    "view": "profile",
+    "attempts": 1,
+    "bytes": 186094,
+    "valid": true
+  },
+  {
+    "kind": "spitter",
+    "view": "gameplay",
+    "attempts": 1,
+    "bytes": 302319,
+    "valid": true
+  },
+  {
+    "kind": "spitter",
+    "view": "gameplay-overcast",
+    "attempts": 1,
+    "bytes": 285513,
+    "valid": true
+  },
+  {
+    "kind": "spitter",
+    "view": "gameplay-dusk",
+    "attempts": 1,
+    "bytes": 270456,
+    "valid": true
+  },
+  {
+    "kind": "spitter",
+    "view": "gameplay-night",
+    "attempts": 1,
+    "bytes": 148356,
+    "valid": true
+  },
+  {
+    "kind": "bomber",
+    "view": "profile",
+    "attempts": 1,
+    "bytes": 207468,
+    "valid": true
+  },
+  {
+    "kind": "bomber",
+    "view": "gameplay",
+    "attempts": 1,
+    "bytes": 312334,
+    "valid": true
+  },
+  {
+    "kind": "bomber",
+    "view": "gameplay-overcast",
+    "attempts": 1,
+    "bytes": 294624,
+    "valid": true
+  },
+  {
+    "kind": "bomber",
+    "view": "gameplay-dusk",
+    "attempts": 1,
+    "bytes": 276146,
+    "valid": true
+  },
+  {
+    "kind": "bomber",
+    "view": "gameplay-night",
+    "attempts": 1,
+    "bytes": 153091,
+    "valid": true
+  },
+  {
+    "kind": "screamer",
+    "view": "profile",
+    "attempts": 1,
+    "bytes": 179400,
+    "valid": true
+  },
+  {
+    "kind": "screamer",
+    "view": "gameplay",
+    "attempts": 1,
+    "bytes": 299277,
+    "valid": true
+  },
+  {
+    "kind": "screamer",
+    "view": "gameplay-overcast",
+    "attempts": 1,
+    "bytes": 287786,
+    "valid": true
+  },
+  {
+    "kind": "screamer",
+    "view": "gameplay-dusk",
+    "attempts": 1,
+    "bytes": 269093,
+    "valid": true
+  },
+  {
+    "kind": "screamer",
+    "view": "gameplay-night",
+    "attempts": 1,
+    "bytes": 152470,
+    "valid": true
+  },
+  {
+    "kind": "drowned",
+    "view": "profile",
+    "attempts": 1,
+    "bytes": 181540,
+    "valid": true
+  },
+  {
+    "kind": "drowned",
+    "view": "gameplay",
+    "attempts": 1,
+    "bytes": 304105,
+    "valid": true
+  },
+  {
+    "kind": "drowned",
+    "view": "gameplay-overcast",
+    "attempts": 1,
+    "bytes": 283643,
+    "valid": true
+  },
+  {
+    "kind": "drowned",
+    "view": "gameplay-dusk",
+    "attempts": 1,
+    "bytes": 268376,
+    "valid": true
+  },
+  {
+    "kind": "drowned",
+    "view": "gameplay-night",
+    "attempts": 1,
+    "bytes": 147981,
+    "valid": true
+  },
+  {
+    "kind": "leaper",
+    "view": "profile",
+    "attempts": 1,
+    "bytes": 174295,
+    "valid": true
+  },
+  {
+    "kind": "leaper",
+    "view": "gameplay",
+    "attempts": 1,
+    "bytes": 286885,
+    "valid": true
+  },
+  {
+    "kind": "leaper",
+    "view": "gameplay-overcast",
+    "attempts": 1,
+    "bytes": 252287,
+    "valid": true
+  },
+  {
+    "kind": "leaper",
+    "view": "gameplay-dusk",
+    "attempts": 1,
+    "bytes": 220357,
+    "valid": true
+  },
+  {
+    "kind": "leaper",
+    "view": "gameplay-night",
+    "attempts": 1,
+    "bytes": 165928,
+    "valid": true
+  },
+  {
+    "kind": "spider",
+    "view": "profile",
+    "attempts": 1,
+    "bytes": 149800,
+    "valid": true
+  },
+  {
+    "kind": "spider",
+    "view": "gameplay",
+    "attempts": 1,
+    "bytes": 250313,
+    "valid": true
+  },
+  {
+    "kind": "spider",
+    "view": "gameplay-overcast",
+    "attempts": 1,
+    "bytes": 225401,
+    "valid": true
+  },
+  {
+    "kind": "spider",
+    "view": "gameplay-dusk",
+    "attempts": 1,
+    "bytes": 203198,
+    "valid": true
+  },
+  {
+    "kind": "spider",
+    "view": "gameplay-night",
+    "attempts": 1,
+    "bytes": 156495,
+    "valid": true
+  },
+  {
+    "kind": "colossus",
+    "view": "profile",
+    "attempts": 1,
+    "bytes": 229643,
+    "valid": true
+  },
+  {
+    "kind": "colossus",
+    "view": "gameplay",
+    "attempts": 1,
+    "bytes": 295122,
+    "valid": true
+  },
+  {
+    "kind": "colossus",
+    "view": "gameplay-overcast",
+    "attempts": 1,
+    "bytes": 276775,
+    "valid": true
+  },
+  {
+    "kind": "colossus",
+    "view": "gameplay-dusk",
+    "attempts": 1,
+    "bytes": 271087,
+    "valid": true
+  },
+  {
+    "kind": "colossus",
+    "view": "gameplay-night",
+    "attempts": 1,
+    "bytes": 131910,
+    "valid": true
+  },
+  {
+    "kind": "demon",
+    "view": "profile",
+    "attempts": 1,
+    "bytes": 217173,
+    "valid": true
+  },
+  {
+    "kind": "demon",
+    "view": "gameplay",
+    "attempts": 1,
+    "bytes": 332319,
+    "valid": true
+  },
+  {
+    "kind": "demon",
+    "view": "gameplay-overcast",
+    "attempts": 1,
+    "bytes": 301041,
+    "valid": true
+  },
+  {
+    "kind": "demon",
+    "view": "gameplay-dusk",
+    "attempts": 1,
+    "bytes": 289138,
+    "valid": true
+  },
+  {
+    "kind": "demon",
+    "view": "gameplay-night",
+    "attempts": 1,
+    "bytes": 150051,
+    "valid": true
+  },
+  {
+    "kind": "guardian",
+    "view": "profile",
+    "attempts": 1,
+    "bytes": 214455,
+    "valid": true
+  },
+  {
+    "kind": "guardian",
+    "view": "gameplay",
+    "attempts": 1,
+    "bytes": 309009,
+    "valid": true
+  },
+  {
+    "kind": "guardian",
+    "view": "gameplay-overcast",
+    "attempts": 1,
+    "bytes": 294227,
+    "valid": true
+  },
+  {
+    "kind": "guardian",
+    "view": "gameplay-dusk",
+    "attempts": 1,
+    "bytes": 283972,
+    "valid": true
+  },
+  {
+    "kind": "guardian",
+    "view": "gameplay-night",
+    "attempts": 1,
+    "bytes": 152047,
+    "valid": true
+  },
+  {
+    "kind": "caveguard",
+    "view": "profile",
+    "attempts": 1,
+    "bytes": 227109,
+    "valid": true
+  },
+  {
+    "kind": "caveguard",
+    "view": "gameplay",
+    "attempts": 1,
+    "bytes": 308351,
+    "valid": true
+  },
+  {
+    "kind": "caveguard",
+    "view": "gameplay-overcast",
+    "attempts": 1,
+    "bytes": 296438,
+    "valid": true
+  },
+  {
+    "kind": "caveguard",
+    "view": "gameplay-dusk",
+    "attempts": 1,
+    "bytes": 285214,
+    "valid": true
+  },
+  {
+    "kind": "caveguard",
+    "view": "gameplay-night",
+    "attempts": 1,
+    "bytes": 149159,
+    "valid": true
+  }
+]

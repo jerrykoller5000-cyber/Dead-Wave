@@ -1,0 +1,41 @@
+{
+  "controls": {
+    "safety": {
+      "name": "controls-safety",
+      "meshes": {
+        "world": 1,
+        "eye": 1
+      }
+    },
+    "slideRelease": {
+      "name": "shotgun-slide-lock",
+      "meshes": {
+        "world": 2,
+        "eye": 2
+      }
+    },
+    "pump": {
+      "name": "controls-pump",
+      "meshes": {
+        "world": 2,
+        "eye": 2
+      }
+    }
+  },
+  "heatParts": {
+    "barrel": {
+      "name": "heatParts-barrel",
+      "meshes": {
+        "world": 1,
+        "eye": 1
+      }
+    },
+    "suppressor": {
+      "name": "suppressor",
+      "meshes": {
+        "world": 4,
+        "eye": 4
+      }
+    }
+  }
+}

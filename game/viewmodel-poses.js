@@ -89,6 +89,8 @@ export const VM_POSES = Object.freeze({
     ads: { rear: 0.38 },
     kick: { back: 0.032, up: 0.11, side: 0.025, ads: 0.55 },
     slideKick: 0.055,
+    // CE-1: the slide back and home on each shot (the 0.28 s interval leaves room)
+    action: { slide: { travel: 0.055, t: [0.018, 0.018, 0.075] } },
     elbows: { r: [0.36, -0.75, 0.06], l: [-0.34, -0.75, 0.06] },   // AG-168: low and wide, so the forearms leave the view down its corners
     // CL-293 (Jerry, 3 Nov: "elbow flared in the wrong direction... looks inverted": elbowFollow ran the forearms out flat
     // from the sides, elbows up): each elbow hangs below and behind its wrist, so the forearms come up from the bottom corners.
@@ -100,7 +102,9 @@ export const VM_POSES = Object.freeze({
     hip: { at: [0.27, -0.235, -0.41], yaw: 0.045, pitch: 0.039, roll: -0.11 },   // CL-324 (J76-J88): closer, the muzzle line on the crosshair at 6 m (was { at: [0.30, -0.26, -0.50], yaw: 0.37, pitch: 0.08, roll: -0.11 }); ads rear 0.24 (was 0.54): the sights close to the eye, shouldered
     ads: { rear: 0.24 },   // holographic window at a readable size once the shoulder stock is eye-hidden
     kick: { back: 0.044, up: 0.09, side: 0.018, ads: 0.50 },
-    workKick: 0.025,
+    // CE-1 (GT-20075): the carrier's stroke in the port (fitPortCarrier, 0.072), back and home inside the 0.1 s interval; the
+    // AR-pattern charging handle does not ride the carrier (it was kicked 0.025 each shot), so it stays put
+    action: { bolt: { travel: 'port', t: [0.028, 0.034, 0.085] } },
     elbows: { r: [0.33, -0.61, -0.10], l: [-0.36, -0.95, -0.26] },
     elbowRel: { r: [0.218, -0.083, 0.31], l: [-0.16, -0.26, 0.20] },   // CL-325 f: the wrists straighter, each elbow toward its hand's line (was r [0.16, -0.26, 0.24])
     reload: 'carbine'
@@ -109,7 +113,8 @@ export const VM_POSES = Object.freeze({
     hip: { at: [0.25, -0.235, -0.41], yaw: 0.042, pitch: 0.039, roll: -0.12 },   // CL-324 (J76-J88): closer, the muzzle line on the crosshair at 6 m (was { at: [0.27, -0.26, -0.50], yaw: 0.32, pitch: 0.09, roll: -0.12 }); ads rear 0.3 (was 0.70): the sights close to the eye, shouldered
     ads: { rear: 0.3 },   // KR-7 leaf sight; the shoulder stock shows at hip and is hidden down the sights
     kick: { back: 0.063, up: 0.15, side: 0.032, ads: 0.58 },
-    workKick: 0.035,
+    // CE-1 (GT-20075): the AK-pattern handle is the carrier's: both go back the port's 0.066 and home inside the 0.11 s interval
+    action: { bolt: { travel: 'port', t: [0.03, 0.036, 0.092] }, work: { travel: 0.066, t: [0.03, 0.036, 0.092] } },
     elbows: { r: [0.35, -0.63, -0.12], l: [-0.40, -1.10, -0.27] },
     elbowRel: { r: [0.22, -0.086, 0.308], l: [-0.16, -0.26, 0.20] },   // CL-325 f: the wrists straighter, each elbow toward its hand's line (was r [0.16, -0.26, 0.24])
     reload: 'ak'
@@ -118,7 +123,8 @@ export const VM_POSES = Object.freeze({
     hip: { at: [0.147, -0.156, -0.4], yaw: 0.024, pitch: 0.026, roll: -0.10 },   // CL-324 (J76-J88): closer, the muzzle line on the crosshair at 6 m (was { at: [0.16, -0.17, -0.40], yaw: 0.03, pitch: 0.025, roll: -0.10 }); ads rear 0.3 (was 0.43): the sights close to the eye, shouldered
     ads: { rear: 0.3 },   // the Wasp's tower stays legible without bringing the receiver into the face
     kick: { back: 0.025, up: 0.062, side: 0.016, ads: 0.45 },
-    workKick: 0.03,
+    // CE-1 (GT-20075): the carrier in the port (0.048) inside the 1/14 s interval; the top cocking knob does not reciprocate
+    action: { bolt: { travel: 'port', t: [0.02, 0.024, 0.062] } },
     elbows: { r: [0.27, -0.58, -0.08], l: [-0.23, -0.56, -0.18] },
     elbowRel: { r: [0.255, -0.091, 0.279], l: [-0.16, -0.26, 0.20] },   // CL-325 f: the wrists straighter, each elbow toward its hand's line (was r [0.16, -0.26, 0.24])
     sprint: { down: 0.025, across: 0, back: 0.015, yaw: 0.02, pitch: -0.12, roll: 0.06, in: 0.18, out: 0.14 }, runBob: 1.7,   // CL-325 (J74: "Running suffers from the same problem as the pistols")
@@ -137,6 +143,7 @@ export const VM_POSES = Object.freeze({
     ads: { rear: 0.26 },
     kick: { back: 0.032, up: 0.075, side: 0.015, ads: 0.48 },
     boltStroke: 0.10,   // CL-322: the constant-recoil bolt's stroke per shot (model units; recoilBoltPose)
+    action: { bolt: { travel: 0.10, t: [0.04, 0.04, 0.13] } },   // CE-1: the same, through actionCycle
     elbows: { r: [0.37, -0.66, -0.10], l: [-0.42, -1.18, -0.25] },
     elbowRel: { r: [0.216, -0.058, 0.318], l: [-0.16, -0.26, 0.20] },   // CL-325 f: the wrists straighter, each elbow toward its hand's line (was r [0.16, -0.26, 0.24])
     reload: 'drum'
@@ -145,6 +152,9 @@ export const VM_POSES = Object.freeze({
     hip: { at: [0.184, -0.175, -0.42], yaw: 0.031, pitch: 0.029, roll: 0.12 },   // CL-324 (J76-J88): closer, the muzzle line on the crosshair at 6 m (was { at: [0.20, -0.19, -0.49], yaw: 0.20, pitch: 0.025, roll: 0.12 }); ads rear 0.38 (was 0.43): the sights close to the eye, shouldered
     ads: { rear: 0.38 },
     kick: { back: 0.055, up: 0.20, side: 0.032, ads: 0.55 },
+    // CE-1 (GT-20075): the double action at the shot: the sear broken (the trigger fully back, the hammer down), the trigger
+    // held a moment and forward to its reset by 0.16 s, well inside the 0.45 s interval (doubleActionPose, resetting)
+    action: { doubleAction: { t: [0.001, 0.045, 0.16] } },
     elbows: { r: [0.37, -0.76, 0.07], l: [-0.35, -0.76, 0.07] },
     elbowRel: { r: [0.07, -0.025, 0.31], l: [-0.103, -0.077, 0.291] },   // CL-325 f: the wrists straighter, each elbow toward its hand's line (was r [0.07, -0.17, 0.26], l [-0.07, -0.17, 0.26])
     sprint: { down: 0.025, across: 0, back: 0.015, yaw: 0.02, pitch: -0.12, roll: 0.06, in: 0.18, out: 0.14 }, runBob: 1.7,   // CL-325 (J73)

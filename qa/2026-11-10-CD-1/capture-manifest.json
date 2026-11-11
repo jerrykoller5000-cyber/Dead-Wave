@@ -1,0 +1,434 @@
+[
+  {
+    "file": "uzi-hip-noon.png",
+    "title": "Uzi Submachine Gun · Hip · NOON",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "noon",
+    "bytes": 373324
+  },
+  {
+    "file": "uzi-hip-overcast.png",
+    "title": "Uzi Submachine Gun · Hip · OVERCAST",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "overcast",
+    "bytes": 345177
+  },
+  {
+    "file": "uzi-hip-dusk.png",
+    "title": "Uzi Submachine Gun · Hip · DUSK",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "dusk",
+    "bytes": 299324
+  },
+  {
+    "file": "uzi-hip-night.png",
+    "title": "Uzi Submachine Gun · Hip · NIGHT",
+    "weapon": "uzi",
+    "pose": "hip",
+    "light": "night",
+    "bytes": 229824
+  },
+  {
+    "file": "uzi-aimed-night.png",
+    "title": "Uzi Submachine Gun · Aimed (ADS) · NIGHT",
+    "weapon": "uzi",
+    "pose": "aimed",
+    "light": "night",
+    "bytes": 194753
+  },
+  {
+    "file": "m4-hip-noon.png",
+    "title": "GW-4 Carbine · Hip · NOON",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "noon",
+    "bytes": 386251
+  },
+  {
+    "file": "m4-hip-overcast.png",
+    "title": "GW-4 Carbine · Hip · OVERCAST",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "overcast",
+    "bytes": 354648
+  },
+  {
+    "file": "m4-hip-dusk.png",
+    "title": "GW-4 Carbine · Hip · DUSK",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "dusk",
+    "bytes": 310879
+  },
+  {
+    "file": "m4-hip-night.png",
+    "title": "GW-4 Carbine · Hip · NIGHT",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "night",
+    "bytes": 243851
+  },
+  {
+    "file": "m4-aimed-night.png",
+    "title": "GW-4 Carbine · Aimed (ADS) · NIGHT",
+    "weapon": "m4",
+    "pose": "aimed",
+    "light": "night",
+    "bytes": 189358
+  },
+  {
+    "file": "ak-hip-noon.png",
+    "title": "KR-7 Rifle · Hip · NOON",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "noon",
+    "bytes": 378283
+  },
+  {
+    "file": "ak-hip-overcast.png",
+    "title": "KR-7 Rifle · Hip · OVERCAST",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "overcast",
+    "bytes": 348264
+  },
+  {
+    "file": "ak-hip-dusk.png",
+    "title": "KR-7 Rifle · Hip · DUSK",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "dusk",
+    "bytes": 303558
+  },
+  {
+    "file": "ak-hip-night.png",
+    "title": "KR-7 Rifle · Hip · NIGHT",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "night",
+    "bytes": 236693
+  },
+  {
+    "file": "ak-aimed-night.png",
+    "title": "KR-7 Rifle · Aimed (ADS) · NIGHT",
+    "weapon": "ak",
+    "pose": "aimed",
+    "light": "night",
+    "bytes": 182746
+  },
+  {
+    "file": "shotgun-hip-noon.png",
+    "title": "Pump-Action Shotgun · Hip · NOON",
+    "weapon": "shotgun",
+    "pose": "hip",
+    "light": "noon",
+    "bytes": 363385
+  },
+  {
+    "file": "shotgun-hip-overcast.png",
+    "title": "Pump-Action Shotgun · Hip · OVERCAST",
+    "weapon": "shotgun",
+    "pose": "hip",
+    "light": "overcast",
+    "bytes": 337364
+  },
+  {
+    "file": "shotgun-hip-dusk.png",
+    "title": "Pump-Action Shotgun · Hip · DUSK",
+    "weapon": "shotgun",
+    "pose": "hip",
+    "light": "dusk",
+    "bytes": 288340
+  },
+  {
+    "file": "shotgun-hip-night.png",
+    "title": "Pump-Action Shotgun · Hip · NIGHT",
+    "weapon": "shotgun",
+    "pose": "hip",
+    "light": "night",
+    "bytes": 225383
+  },
+  {
+    "file": "shotgun-aimed-night.png",
+    "title": "Pump-Action Shotgun · Aimed (ADS) · NIGHT",
+    "weapon": "shotgun",
+    "pose": "aimed",
+    "light": "night",
+    "bytes": 201001
+  },
+  {
+    "file": "sniper-hip-noon.png",
+    "title": "Marksman Sniper Rifle · Hip · NOON",
+    "weapon": "sniper",
+    "pose": "hip",
+    "light": "noon",
+    "bytes": 375707
+  },
+  {
+    "file": "sniper-hip-overcast.png",
+    "title": "Marksman Sniper Rifle · Hip · OVERCAST",
+    "weapon": "sniper",
+    "pose": "hip",
+    "light": "overcast",
+    "bytes": 345188
+  },
+  {
+    "file": "sniper-hip-dusk.png",
+    "title": "Marksman Sniper Rifle · Hip · DUSK",
+    "weapon": "sniper",
+    "pose": "hip",
+    "light": "dusk",
+    "bytes": 301760
+  },
+  {
+    "file": "sniper-hip-night.png",
+    "title": "Marksman Sniper Rifle · Hip · NIGHT",
+    "weapon": "sniper",
+    "pose": "hip",
+    "light": "night",
+    "bytes": 239609
+  },
+  {
+    "file": "sniper-aimed-night.png",
+    "title": "Marksman Sniper Rifle · Aimed (ADS) · NIGHT",
+    "weapon": "sniper",
+    "pose": "aimed",
+    "light": "night",
+    "bytes": 170467
+  },
+  {
+    "file": "aa12-hip-noon.png",
+    "title": "AA-12 Combat Shotgun · Hip · NOON",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "noon",
+    "bytes": 369934
+  },
+  {
+    "file": "aa12-hip-overcast.png",
+    "title": "AA-12 Combat Shotgun · Hip · OVERCAST",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "overcast",
+    "bytes": 336890
+  },
+  {
+    "file": "aa12-hip-dusk.png",
+    "title": "AA-12 Combat Shotgun · Hip · DUSK",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "dusk",
+    "bytes": 293410
+  },
+  {
+    "file": "aa12-hip-night.png",
+    "title": "AA-12 Combat Shotgun · Hip · NIGHT",
+    "weapon": "aa12",
+    "pose": "hip",
+    "light": "night",
+    "bytes": 232135
+  },
+  {
+    "file": "aa12-aimed-night.png",
+    "title": "AA-12 Combat Shotgun · Aimed (ADS) · NIGHT",
+    "weapon": "aa12",
+    "pose": "aimed",
+    "light": "night",
+    "bytes": 177092
+  },
+  {
+    "file": "minigun-hip-noon.png",
+    "title": "Microgun / Minigun · Hip · NOON",
+    "weapon": "minigun",
+    "pose": "hip",
+    "light": "noon",
+    "bytes": 386166
+  },
+  {
+    "file": "minigun-hip-overcast.png",
+    "title": "Microgun / Minigun · Hip · OVERCAST",
+    "weapon": "minigun",
+    "pose": "hip",
+    "light": "overcast",
+    "bytes": 357966
+  },
+  {
+    "file": "minigun-hip-dusk.png",
+    "title": "Microgun / Minigun · Hip · DUSK",
+    "weapon": "minigun",
+    "pose": "hip",
+    "light": "dusk",
+    "bytes": 312615
+  },
+  {
+    "file": "minigun-hip-night.png",
+    "title": "Microgun / Minigun · Hip · NIGHT",
+    "weapon": "minigun",
+    "pose": "hip",
+    "light": "night",
+    "bytes": 250390
+  },
+  {
+    "file": "minigun-aimed-night.png",
+    "title": "Microgun / Minigun · Aimed (ADS) · NIGHT",
+    "weapon": "minigun",
+    "pose": "aimed",
+    "light": "night",
+    "bytes": 205908
+  },
+  {
+    "file": "pistol-hip-noon.png",
+    "title": "Issue Sidearm Pistol · Hip · NOON",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "noon",
+    "bytes": 411635
+  },
+  {
+    "file": "pistol-hip-overcast.png",
+    "title": "Issue Sidearm Pistol · Hip · OVERCAST",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "overcast",
+    "bytes": 376687
+  },
+  {
+    "file": "pistol-hip-dusk.png",
+    "title": "Issue Sidearm Pistol · Hip · DUSK",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "dusk",
+    "bytes": 326844
+  },
+  {
+    "file": "pistol-hip-night.png",
+    "title": "Issue Sidearm Pistol · Hip · NIGHT",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "night",
+    "bytes": 251946
+  },
+  {
+    "file": "pistol-aimed-night.png",
+    "title": "Issue Sidearm Pistol · Aimed (ADS) · NIGHT",
+    "weapon": "pistol",
+    "pose": "aimed",
+    "light": "night",
+    "bytes": 203888
+  },
+  {
+    "file": "revolver-hip-noon.png",
+    "title": ".44 Magnum Revolver · Hip · NOON",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "noon",
+    "bytes": 394561
+  },
+  {
+    "file": "revolver-hip-overcast.png",
+    "title": ".44 Magnum Revolver · Hip · OVERCAST",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "overcast",
+    "bytes": 360900
+  },
+  {
+    "file": "revolver-hip-dusk.png",
+    "title": ".44 Magnum Revolver · Hip · DUSK",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "dusk",
+    "bytes": 315750
+  },
+  {
+    "file": "revolver-hip-night.png",
+    "title": ".44 Magnum Revolver · Hip · NIGHT",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "night",
+    "bytes": 241848
+  },
+  {
+    "file": "revolver-aimed-night.png",
+    "title": ".44 Magnum Revolver · Aimed (ADS) · NIGHT",
+    "weapon": "revolver",
+    "pose": "aimed",
+    "light": "night",
+    "bytes": 200395
+  },
+  {
+    "file": "uzi-aimed-noon.png",
+    "title": "Uzi Submachine Gun · Aimed (ADS) · NOON",
+    "weapon": "uzi",
+    "pose": "aimed",
+    "light": "noon",
+    "bytes": 383955
+  },
+  {
+    "file": "m4-aimed-noon.png",
+    "title": "GW-4 Carbine · Aimed (ADS) · NOON",
+    "weapon": "m4",
+    "pose": "aimed",
+    "light": "noon",
+    "bytes": 388560
+  },
+  {
+    "file": "ak-aimed-noon.png",
+    "title": "KR-7 Rifle · Aimed (ADS) · NOON",
+    "weapon": "ak",
+    "pose": "aimed",
+    "light": "noon",
+    "bytes": 380223
+  },
+  {
+    "file": "shotgun-aimed-noon.png",
+    "title": "Pump-Action Shotgun · Aimed (ADS) · NOON",
+    "weapon": "shotgun",
+    "pose": "aimed",
+    "light": "noon",
+    "bytes": 371399
+  },
+  {
+    "file": "sniper-aimed-noon.png",
+    "title": "Marksman Sniper Rifle · Aimed (ADS) · NOON",
+    "weapon": "sniper",
+    "pose": "aimed",
+    "light": "noon",
+    "bytes": 390524
+  },
+  {
+    "file": "aa12-aimed-noon.png",
+    "title": "AA-12 Combat Shotgun · Aimed (ADS) · NOON",
+    "weapon": "aa12",
+    "pose": "aimed",
+    "light": "noon",
+    "bytes": 367493
+  },
+  {
+    "file": "minigun-aimed-noon.png",
+    "title": "Microgun / Minigun · Aimed (ADS) · NOON",
+    "weapon": "minigun",
+    "pose": "aimed",
+    "light": "noon",
+    "bytes": 374709
+  },
+  {
+    "file": "pistol-aimed-noon.png",
+    "title": "Issue Sidearm Pistol · Aimed (ADS) · NOON",
+    "weapon": "pistol",
+    "pose": "aimed",
+    "light": "noon",
+    "bytes": 406646
+  },
+  {
+    "file": "revolver-aimed-noon.png",
+    "title": ".44 Magnum Revolver · Aimed (ADS) · NOON",
+    "weapon": "revolver",
+    "pose": "aimed",
+    "light": "noon",
+    "bytes": 394933
+  }
+]

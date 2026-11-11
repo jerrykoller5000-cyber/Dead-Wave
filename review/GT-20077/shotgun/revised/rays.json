@@ -1,0 +1,598 @@
+{
+  "stockVisible": false,
+  "origin": [
+    0,
+    0.07294888333937875,
+    -0.5776537043754175
+  ],
+  "rays": {
+    "625,445": {
+      "point": [
+        -0.00911633192778574,
+        0.01686920704419414,
+        -0.08672371749542235
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:64076/studio/weapon-longarms.js:850:23)"
+    },
+    "640,445": {
+      "point": [
+        0,
+        0.01686920704419414,
+        -0.08672371749542229
+      ],
+      "node": "shotgun stock body"
+    },
+    "655,445": {
+      "point": [
+        0.00911633192778574,
+        0.01686920704419414,
+        -0.08672371749542235
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:64076/studio/weapon-longarms.js:850:23)"
+    },
+    "625,475": {
+      "point": [
+        -0.008136500299009865,
+        0.006624359963829887,
+        -0.13963576908420222
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:64076/studio/weapon-longarms.js:850:23)"
+    },
+    "640,475": {
+      "point": [
+        0,
+        0.006624359963829887,
+        -0.13963576908420222
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:64076/studio/weapon-longarms.js:850:23)"
+    },
+    "655,475": {
+      "point": [
+        0.008136500299009865,
+        0.006624359963829887,
+        -0.13963576908420222
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:64076/studio/weapon-longarms.js:850:23)"
+    },
+    "595,505": {
+      "point": [
+        -0.02209611439724545,
+        -0.0018199447757242804,
+        -0.18128106048709164
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:64076/studio/weapon-longarms.js:850:23)"
+    },
+    "625,505": {
+      "point": [
+        -0.00712408932762602,
+        0.0006294065973078827,
+        -0.1942658283912465
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:64076/studio/weapon-longarms.js:850:23)"
+    },
+    "640,505": {
+      "point": [
+        0,
+        0.0006294065973078827,
+        -0.1942658283912465
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:64076/studio/weapon-longarms.js:850:23)"
+    },
+    "655,505": {
+      "point": [
+        0.00712408932762602,
+        0.0006294065973078827,
+        -0.1942658283912465
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:64076/studio/weapon-longarms.js:850:23)"
+    },
+    "685,505": {
+      "point": [
+        0.022087652023729382,
+        -0.0017913097976691716,
+        -0.1814328633472611
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:64076/studio/weapon-longarms.js:850:23)"
+    },
+    "595,535": {
+      "point": [
+        -0.019148219686480988,
+        -0.004609821978506123,
+        -0.23427695397617138
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:64076/studio/weapon-longarms.js:850:23)"
+    },
+    "625,535": {
+      "point": [
+        -0.006335743416563993,
+        -0.004038752795057471,
+        -0.23680525662978108
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:64076/studio/weapon-longarms.js:850:23)"
+    },
+    "640,535": {
+      "point": [
+        0,
+        -0.004038752795057485,
+        -0.23680525662978108
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:64076/studio/weapon-longarms.js:850:23)"
+    },
+    "655,535": {
+      "point": [
+        0.006335743416563993,
+        -0.004038752795057471,
+        -0.23680525662978108
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:64076/studio/weapon-longarms.js:850:23)"
+    },
+    "685,535": {
+      "point": [
+        0.01914737300420063,
+        -0.004606392543156243,
+        -0.2342921371636848
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:64076/studio/weapon-longarms.js:850:23)"
+    },
+    "595,565": {
+      "point": [
+        -0.017124674929492673,
+        -0.00782956398544496,
+        -0.27066705169283395
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:64076/studio/weapon-longarms.js:850:23)"
+    },
+    "625,565": {
+      "point": [
+        -0.005691725642927785,
+        -0.007596077997568118,
+        -0.27155438097731954
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:64076/studio/weapon-longarms.js:850:23)"
+    },
+    "640,565": {
+      "point": [
+        0,
+        -0.007596077997568118,
+        -0.2715543809773196
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:64076/studio/weapon-longarms.js:850:23)"
+    },
+    "655,565": {
+      "point": [
+        0.005691725642927785,
+        -0.007596077997568118,
+        -0.27155438097731954
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:64076/studio/weapon-longarms.js:850:23)"
+    },
+    "685,565": {
+      "point": [
+        0.017123591153657282,
+        -0.007824451729031831,
+        -0.27068648007423884
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:64076/studio/weapon-longarms.js:850:23)"
+    },
+    "595,595": {
+      "point": [
+        -0.015460907342001758,
+        -0.010288294704553322,
+        -0.3005854564728171
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:64076/studio/weapon-longarms.js:850:23)"
+    },
+    "625,595": {
+      "point": [
+        -0.005153635780667255,
+        -0.010288294704553336,
+        -0.30058545647281704
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:64076/studio/weapon-longarms.js:850:23)"
+    },
+    "640,595": {
+      "point": [
+        0,
+        -0.010288294704553322,
+        -0.30058545647281704
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:64076/studio/weapon-longarms.js:850:23)"
+    },
+    "655,595": {
+      "point": [
+        0.005153635780667255,
+        -0.010288294704553336,
+        -0.30058545647281704
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:64076/studio/weapon-longarms.js:850:23)"
+    },
+    "685,595": {
+      "point": [
+        0.015460907342001756,
+        -0.010288294704553308,
+        -0.30058545647281715
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:64076/studio/weapon-longarms.js:850:23)"
+    },
+    "595,625": {
+      "point": [
+        -0.014124813245353337,
+        -0.012511300569548717,
+        -0.32461376759860106
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:64076/studio/weapon-longarms.js:850:23)"
+    },
+    "625,625": {
+      "point": [
+        -0.004708271081784447,
+        -0.012511300569548717,
+        -0.32461376759860106
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:64076/studio/weapon-longarms.js:850:23)"
+    },
+    "640,625": {
+      "point": [
+        0,
+        -0.012511300569548717,
+        -0.32461376759860106
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:64076/studio/weapon-longarms.js:850:23)"
+    },
+    "655,625": {
+      "point": [
+        0.004708271081784447,
+        -0.012511300569548717,
+        -0.32461376759860106
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:64076/studio/weapon-longarms.js:850:23)"
+    },
+    "685,625": {
+      "point": [
+        0.014124813245353337,
+        -0.012511300569548717,
+        -0.32461376759860106
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:64076/studio/weapon-longarms.js:850:23)"
+    },
+    "595,655": {
+      "point": [
+        -0.01299806607096477,
+        -0.01435910267750111,
+        -0.34487694246137507
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:64076/studio/weapon-longarms.js:850:23)"
+    },
+    "625,655": {
+      "point": [
+        -0.004332688690321591,
+        -0.01435910267750111,
+        -0.34487694246137507
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:64076/studio/weapon-longarms.js:850:23)"
+    },
+    "640,655": {
+      "point": [
+        0,
+        -0.01435910267750111,
+        -0.344876942461375
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:64076/studio/weapon-longarms.js:850:23)"
+    },
+    "655,655": {
+      "point": [
+        0.004332688690321591,
+        -0.014359102677501123,
+        -0.344876942461375
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:64076/studio/weapon-longarms.js:850:23)"
+    },
+    "685,655": {
+      "point": [
+        0.01299806607096477,
+        -0.01435910267750111,
+        -0.34487694246137507
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:64076/studio/weapon-longarms.js:850:23)"
+    },
+    "595,685": {
+      "point": [
+        -0.012037801428206119,
+        -0.015933882780273023,
+        -0.3621461318705402
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:64076/studio/weapon-longarms.js:850:23)"
+    },
+    "625,685": {
+      "point": [
+        -0.004012600476068708,
+        -0.01593388278027301,
+        -0.3621461318705402
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:64076/studio/weapon-longarms.js:850:23)"
+    },
+    "640,685": {
+      "point": [
+        0,
+        -0.015933882780273023,
+        -0.3621461318705402
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:64076/studio/weapon-longarms.js:850:23)"
+    },
+    "655,685": {
+      "point": [
+        0.004012600476068708,
+        -0.01593388278027301,
+        -0.3621461318705402
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:64076/studio/weapon-longarms.js:850:23)"
+    },
+    "685,685": {
+      "point": [
+        0.01203780142820612,
+        -0.015933882780273023,
+        -0.3621461318705401
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:64076/studio/weapon-longarms.js:850:23)"
+    },
+    "595,715": {
+      "point": [
+        -0.01120965977394004,
+        -0.017291988599589983,
+        -0.3770392503384402
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:64076/studio/weapon-longarms.js:850:23)"
+    },
+    "625,715": {
+      "point": [
+        -0.0037365532579800146,
+        -0.017291988599589983,
+        -0.3770392503384402
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:64076/studio/weapon-longarms.js:850:23)"
+    },
+    "640,715": {
+      "point": [
+        0,
+        -0.017291988599589983,
+        -0.3770392503384402
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:64076/studio/weapon-longarms.js:850:23)"
+    },
+    "655,715": {
+      "point": [
+        0.0037365532579800146,
+        -0.017291988599589983,
+        -0.3770392503384402
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:64076/studio/weapon-longarms.js:850:23)"
+    },
+    "685,715": {
+      "point": [
+        0.01120965977394004,
+        -0.017291988599589983,
+        -0.3770392503384402
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:64076/studio/weapon-longarms.js:850:23)"
+    },
+    "640,365": {
+      "point": [
+        0,
+        0.051260760541209566,
+        0.8506457510655088
+      ],
+      "node": ""
+    },
+    "640,369": {
+      "point": [
+        0,
+        0.05143785994004039,
+        0.49080641850491435
+      ],
+      "node": ""
+    },
+    "640,373": {
+      "point": [
+        0,
+        0.05126700428982896,
+        0.28680912569037376
+      ],
+      "node": ""
+    },
+    "640,377": {
+      "point": [
+        0,
+        0.050999999046325684,
+        0.1532358601549887
+      ],
+      "node": "shotgun receiver"
+    },
+    "640,381": {
+      "point": [
+        0,
+        0.053508076596977754,
+        -0.021882112385411732
+      ],
+      "node": "shotgun rear sight"
+    },
+    "640,385": {
+      "point": [
+        0,
+        0.050999999046325684,
+        -0.027966482008833893
+      ],
+      "node": "shotgun receiver"
+    },
+    "640,389": {
+      "point": [
+        0,
+        0.04837011332110247,
+        -0.029999999329447746
+      ],
+      "node": "shotgun receiver"
+    },
+    "640,393": {
+      "point": [
+        0,
+        0.04565878821808395,
+        -0.029999999329447857
+      ],
+      "node": "shotgun receiver"
+    },
+    "640,397": {
+      "point": [
+        0,
+        0.04307948000459031,
+        -0.032414259407449464
+      ],
+      "node": "shotgun stock body"
+    },
+    "640,401": {
+      "point": [
+        0,
+        0.04063880979081398,
+        -0.03675322777838996
+      ],
+      "node": "shotgun stock body"
+    },
+    "640,405": {
+      "point": [
+        0,
+        0.03823646585834706,
+        -0.04102406055221508
+      ],
+      "node": "shotgun stock body"
+    },
+    "640,409": {
+      "point": [
+        0,
+        0.03587164550088324,
+        -0.045229686005427205
+      ],
+      "node": "shotgun stock body"
+    },
+    "640,413": {
+      "point": [
+        0,
+        0.03354509259451498,
+        -0.04939299106224537
+      ],
+      "node": "shotgun stock body"
+    },
+    "640,417": {
+      "point": [
+        0,
+        0.03125443997652637,
+        -0.053492053499975434
+      ],
+      "node": "shotgun stock body"
+    },
+    "640,421": {
+      "point": [
+        0,
+        0.028998863060206825,
+        -0.05752834889478531
+      ],
+      "node": "shotgun stock body"
+    },
+    "640,425": {
+      "point": [
+        0,
+        0.026777562319998845,
+        -0.06150330797657033
+      ],
+      "node": "shotgun stock body"
+    },
+    "640,429": {
+      "point": [
+        0,
+        0.024653470826511557,
+        -0.06609313905967784
+      ],
+      "node": "shotgun stock body"
+    },
+    "640,433": {
+      "point": [
+        0,
+        0.022576124540759843,
+        -0.07069792456247281
+      ],
+      "node": "shotgun stock body"
+    },
+    "640,437": {
+      "point": [
+        0,
+        0.020535662654444203,
+        -0.07522094962457126
+      ],
+      "node": "shotgun stock body"
+    },
+    "640,441": {
+      "point": [
+        0,
+        0.018679955996195936,
+        -0.08102648264681422
+      ],
+      "node": "shotgun stock body"
+    }
+  },
+  "sight": {
+    "firstSurface": "shotgun bead",
+    "screen": [
+      0,
+      -0.006883870647290331
+    ],
+    "handInFront": [
+      {
+        "side": "l",
+        "node": "vm-hand-glove-main",
+        "parent": "vm-hand-glove",
+        "distance": 0.8038563002884724
+      }
+    ]
+  }
+}

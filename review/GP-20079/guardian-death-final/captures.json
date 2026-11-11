@@ -1,0 +1,72 @@
+[
+  {
+    "kind": "guardian",
+    "view": "profile",
+    "attempts": 1,
+    "bytes": 161739,
+    "valid": true
+  },
+  {
+    "kind": "guardian",
+    "view": "gameplay",
+    "attempts": 1,
+    "bytes": 291688,
+    "valid": true
+  },
+  {
+    "kind": "guardian",
+    "view": "gameplay-overcast",
+    "attempts": 1,
+    "bytes": 277468,
+    "valid": true
+  },
+  {
+    "kind": "guardian",
+    "view": "gameplay-dusk",
+    "attempts": 1,
+    "bytes": 265668,
+    "valid": true
+  },
+  {
+    "kind": "guardian",
+    "view": "gameplay-night",
+    "attempts": 1,
+    "bytes": 142071,
+    "valid": true
+  },
+  {
+    "kind": "caveguard",
+    "view": "profile",
+    "attempts": 1,
+    "bytes": 178555,
+    "valid": true
+  },
+  {
+    "kind": "caveguard",
+    "view": "gameplay",
+    "attempts": 1,
+    "bytes": 295062,
+    "valid": true
+  },
+  {
+    "kind": "caveguard",
+    "view": "gameplay-overcast",
+    "attempts": 1,
+    "bytes": 284975,
+    "valid": true
+  },
+  {
+    "kind": "caveguard",
+    "view": "gameplay-dusk",
+    "attempts": 1,
+    "bytes": 267792,
+    "valid": true
+  },
+  {
+    "kind": "caveguard",
+    "view": "gameplay-night",
+    "attempts": 1,
+    "bytes": 137256,
+    "valid": true
+  }
+]

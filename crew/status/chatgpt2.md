@@ -1,21 +1,23 @@
 # ChatGPT 2
 
 state: active
-model: GPT-6 Astra (High)
-task: GT-20079 Director approved painting the separate GW-4 RMR riser block and clamp foot. Preserve bare hardware and prove all three optics.
-touching: index.html (opticRiser), index.html (opticRiser call), index.html (weapon finish helper import), review/GT-20079
-since: 2026-11-10T23:23Z
-next: GT-20075 (Reviewed by CLAUDE DIRECTOR 20:45Z: accepted, two back: the
+model: GPT-6 (Codex, variant unsure)
+task: GT-20080 Three distinct live and spent shotgun shell props for CB-294 and proof in four lights
+touching: studio/weapon-casings.js, studio/weapon-longarms.js, review/GT-20080
+since: 2026-11-11T00:19Z
+next: GT-20080 shotgun shells while Director reviews the rack loan
 blocked-on: —
-last-report: handoffs/2026-11-10-chatgpt2-GT-20077.md
+last-report: handoffs/2026-11-11-chatgpt2-GT-20079.md
 
 ## Notes
 
-D-147: use chatgpt2; board notes and request checks at least every 15 minutes per Jerry’s 22:25Z heartbeat. If nothing can start, run standby again until STANDBY OFF. Director is claude; the hands belong to claude4. Only the crew slot can start the game.
+### Where things stand
 
-23:17Z GT-20077 shotgun active. Baseline eye pictures are in review/GT-20077/shotgun/before. Isolated model and hand contact sampling queued. GW-4 exterior accepted. GW-4 paint sheets and explicit coating checks are in the GT-20079 handoff; awaiting Director on the separate RMR riser. Claude 4 owns hands, Claude 5 consumes the cosmetic action names, Antigravity consumes heatParts. context nearly full, needs a new session
+Director accepted the GT-20077 shotgun revision and cleared the KR-7. See handoffs/2026-11-11-chatgpt2-GT-20077.md and the four revision sheets in review/GT-20077/shotgun/. The gun clears the bead. The posed support glove crosses it; Claude 1 has the measured fit and exact mesh. No gun contact moved except the comb (4.84 game mm). Inspector 1/0 broken. High 60.0 fps, low 55.1.
 
-GT-20075 accepted with GW-4 window and KR-7 optic support for their GT-20077 turns. GT-20078 reviewed. GT-20076 handed off pending catalog-wide raw intersections; see handoffs/2026-11-10-chatgpt2-GT-20076.md. All 56 GT-20076 builds had zero unseated or loose groups and all 36 slings passed. The Director told us to prioritize what the player can see.
+GT-20079 masks and optic rail are implemented. Both fitted optics and rack/eye/held 0.420 m tiles passed. The matched baseline is review/GT-20079/shotgun/pre-finish/. The real rack has white hardware and an exposed reload shell; I requested rackGunCopy/carryGunCopy from Director. Check that request before editing those sections. Keep the strict first-person material-ID check intact; the existing viewmodel cache recreates materials after swatch changes. See handoffs/2026-11-10-chatgpt2-GT-20079.md for pistol and GW-4.
+
+GT-20080 interface approved by Director and Claude 2: spentCaseGeometry(THREE, weapon, load?), roundGeometry(THREE, weapon, load?), setReloadShellType(load); birdshot/default, buckshot, slug, with std/buck/issued aliases. Next are the three shotgun props for CB-294, then KR-7. GT-20075 and GT-20076 stay open at catalog level. Claude 5 owns action motion; Claude 1 owns contact and hand fit. Crew notes every 15 minutes, game only in the slot, no git.
 
 ### Who you are (D-142, Jerry 10 Nov 2026)
 You are **ChatGPT 2**, the crew's second ChatGPT, on GPT-6 Astra (High) in Codex. You take the weapons from ChatGPT (who

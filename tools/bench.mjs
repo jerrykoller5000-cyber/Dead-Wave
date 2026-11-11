@@ -674,6 +674,11 @@ try {
       const order = TT.WEAPON_ORDER || [];
       const idx = order.indexOf(${JSON.stringify(FP)});
       if (idx < 0) return { error: 'no such weapon' };
+      // CB-296: setWeapon walks past a gun he does not own (the Training Ground issues the pistol), so --fp m4 measured the
+      // pistol. Issue the asked gun first, with its ammo (grantWeaponDbg; older trees: just mark it owned).
+      const owned = TT.getWeaponOwned ? TT.getWeaponOwned() : null;
+      const issued = !!(owned && !owned[${JSON.stringify(FP)}]);
+      if (issued) { if (TT.grantWeaponDbg) TT.grantWeaponDbg(${JSON.stringify(FP)}); else owned[${JSON.stringify(FP)}] = true; }
       if (TT.setWeapon) TT.setWeapon(idx);
       if (TT.isUnarmed && TT.isUnarmed() && TT.toggleHolster) TT.toggleHolster();
       TT.setViewFirstDbg(true);
@@ -694,6 +699,7 @@ try {
         first: !!fp.first,
         w: Math.round(fp.w * 100) / 100,
         weapon: TT.getCurrentWeapon ? TT.getCurrentWeapon() : null,
+        asked: ${JSON.stringify(FP)}, issued,   // CB-296
         unarmed: TT.isUnarmed ? !!TT.isUnarmed() : null,
         vm: !!(gun && gun.info && gun.info.active),
         vmFn
@@ -701,6 +707,8 @@ try {
     })()`, 30000);
     console.log('bench: first person ' + JSON.stringify(fpState));
     if (!fpState || fpState.error) throw new Error('first person: ' + (fpState && fpState.error));
+    // CB-296: never measure another gun than the one asked for
+    if (fpState.weapon !== FP) throw new Error('first person: asked for ' + FP + ' but the hand holds ' + fpState.weapon);
     if (!fpState.first || fpState.w < 0.9) throw new Error('first person did not settle (' + JSON.stringify(fpState) + ')');
     if (!VM_OFF && fpState.vmFn !== false && !fpState.vm) throw new Error('the view gun did not show');
     if (VM_OFF && fpState.vm) throw new Error('?vm=0 still showed the view gun');

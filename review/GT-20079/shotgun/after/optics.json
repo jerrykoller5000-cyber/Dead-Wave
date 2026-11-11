@@ -1,0 +1,151 @@
+{
+  "prism": {
+    "counts": {
+      "coated": 7,
+      "factory": 6,
+      "rail": 7
+    },
+    "leaks": [],
+    "roles": {
+      "barrel": 0,
+      "lightLens": 0,
+      "dial": 0,
+      "laserCavity": 0,
+      "bolt": 0,
+      "lifter": 0,
+      "trigger": 0,
+      "safety": 0,
+      "paddle": 0,
+      "shell": 0,
+      "bead": 0,
+      "rubber": 0
+    },
+    "riser": {},
+    "framing": {
+      "width": 0.05792466504822613,
+      "height": 0.08641090628313464,
+      "length": 0.1166428202784715,
+      "distance": 0.5200000000000001
+    }
+  },
+  "rmr": {
+    "counts": {
+      "coated": 8,
+      "factory": 7,
+      "rail": 7
+    },
+    "leaks": [],
+    "roles": {
+      "barrel": 0,
+      "lightLens": 0,
+      "dial": 0,
+      "laserCavity": 0,
+      "bolt": 0,
+      "lifter": 0,
+      "trigger": 0,
+      "safety": 0,
+      "paddle": 0,
+      "shell": 0,
+      "bead": 0,
+      "rubber": 0
+    },
+    "riser": {
+      "factory": {
+        "optic riser block": {
+          "role": "optic shell",
+          "map": false,
+          "color": 2566445,
+          "roughness": 0.68,
+          "metalness": 0.08
+        },
+        "optic riser foot": {
+          "role": "optic shell",
+          "map": false,
+          "color": 2566445,
+          "roughness": 0.68,
+          "metalness": 0.08
+        },
+        "optic riser fastener -1": {
+          "role": null,
+          "map": false,
+          "color": 3685185,
+          "roughness": 0.6,
+          "metalness": 0.1
+        },
+        "optic riser fastener 1": {
+          "role": null,
+          "map": false,
+          "color": 3685185,
+          "roughness": 0.6,
+          "metalness": 0.1
+        }
+      },
+      "camo": {
+        "optic riser block": {
+          "role": "optic shell",
+          "map": true,
+          "color": 15131350,
+          "roughness": 0.62,
+          "metalness": 0.05
+        },
+        "optic riser foot": {
+          "role": "optic shell",
+          "map": true,
+          "color": 15131350,
+          "roughness": 0.62,
+          "metalness": 0.05
+        },
+        "optic riser fastener -1": {
+          "role": null,
+          "map": false,
+          "color": 3685185,
+          "roughness": 0.6,
+          "metalness": 0.1
+        },
+        "optic riser fastener 1": {
+          "role": null,
+          "map": false,
+          "color": 3685185,
+          "roughness": 0.6,
+          "metalness": 0.1
+        }
+      },
+      "restored": {
+        "optic riser block": {
+          "role": "optic shell",
+          "map": false,
+          "color": 2566445,
+          "roughness": 0.68,
+          "metalness": 0.08
+        },
+        "optic riser foot": {
+          "role": "optic shell",
+          "map": false,
+          "color": 2566445,
+          "roughness": 0.68,
+          "metalness": 0.08
+        },
+        "optic riser fastener -1": {
+          "role": null,
+          "map": false,
+          "color": 3685185,
+          "roughness": 0.6,
+          "metalness": 0.1
+        },
+        "optic riser fastener 1": {
+          "role": null,
+          "map": false,
+          "color": 3685185,
+          "roughness": 0.6,
+          "metalness": 0.1
+        }
+      }
+    },
+    "framing": {
+      "width": 0.03412000883131583,
+      "height": 0.061892109016213226,
+      "length": 0.0595116431538969,
+      "distance": 0.5200000000000001
+    }
+  }
+}

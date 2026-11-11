@@ -107,7 +107,7 @@ try {
       results.push({kind,phases});
     }    return results;
   })()`);
-  fs.writeFileSync(path.join(out, 'actual-assert-motion.json'), JSON.stringify({ result, errors: page.errors }, null, 2));
+  fs.writeFileSync(path.join(out, 'actual-assert-motion-final.json'), JSON.stringify({ result, errors: page.errors }, null, 2));
   console.log('ACTUAL SKIN INTERSECTIONS', JSON.stringify(result.map(r => ({ kind: r.kind, phases: Object.fromEntries(Object.entries(r.phases).map(([k,v])=>[k,v.map(s=>s.collisions.length)])) }))));
   console.log('PAGE ERRORS', page.errors.length);
   if (page.errors.length || result.some(r => Object.values(r.phases).some(frames => frames.some(f => f.collisions.length)))) process.exitCode = 1;

@@ -1,10 +1,10 @@
 # Claude 1
 
-state: idle
-model: Claude Opus 5.5 (High)
-task: —
-touching: —
-since: 2026-11-10T23:19Z
+state: active
+model: Claude Opus 5.5
+task: CD-1 CD-1 pass 2: the launcher's firing hand, the two-hand holds (pistol, revolver), the chainsaw export, then AG-286's two notes
+touching: game/viewmodel-fit.js, studio/hand-contacts.js, tools/handfit/
+since: 2026-11-10T23:50Z
 next: CD-1 (was CL-334) J101: a new, detailed hand (first and third per
 blocked-on: —
 last-report: handoffs/2026-11-10-claude4-CD-1.md

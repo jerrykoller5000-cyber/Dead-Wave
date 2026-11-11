@@ -392,8 +392,9 @@ export function guardianStand(g, R, t, look, { open = 0.3, crouch = 0 } = {}) {
   g.updateWorldMatrix(true, false);
   for (const S of ['L', 'R']) {
     const side = S === 'L' ? -1 : 1;
+    R['shoulder' + S].position.x = side * (0.66 + 0.25 * crouch);
     const spread = 0.75 * crouch;
-    _tgt.set(side * (1.05 + spread), 0, 1.05 + 0.55 * crouch).applyMatrix4(g.matrixWorld);
+    _tgt.set(side * (1.05 + spread), S === 'R' ? 0.65 * crouch : 0, 1.05 + 0.55 * crouch).applyMatrix4(g.matrixWorld);
     _pole.set(side * (1.4 + 0.9 * crouch), 0.3, -1).transformDirection(g.matrixWorld);
     guardianHandTo(g, R, S, _tgt, _pole);
     levelHand(g, R, S);
@@ -401,7 +402,7 @@ export function guardianStand(g, R, t, look, { open = 0.3, crouch = 0 } = {}) {
   }
   for (const S of ['L', 'R']) {
     const side = S === 'L' ? -1 : 1;
-    _tgt.set(side * (0.42 - 0.17 * crouch), 0, -0.25).applyMatrix4(g.matrixWorld);
+    _tgt.set(side * (0.42 + 0.1 * crouch), 0, -0.25).applyMatrix4(g.matrixWorld);
     _pole.set(0, 0.2, 1).transformDirection(g.matrixWorld);
     ikLimb(R['hip' + S], R['knee' + S], R.leg.thigh, R.leg.shin, _tgt, _pole);
     levelFoot(g, R, S);

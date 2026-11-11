@@ -683,12 +683,89 @@ function shotgunFinish(base) {
     };
     shotgunFinishes.set(base, {
       blued: surface(0x39424d, 0.37, 0.57),
+      receiver: surface(0x555c65, 0.43, 0.32),
+      bolt: surface(0x4d5967, 0.27, 0.62),
+      lifter: surface(0x78838a, 0.38, 0.46),
       edge: surface(0x555d64, 0.46, 0.48),
       inlay: Object.assign(surface(0x858e93, 0.55, 0.38), { flatShading: true }),
-      furniture: surface(0x333438, 0.86, 0.04)
+      furniture: surface(0x38393b, 0.80, 0.04)
     });
   }
   return shotgunFinishes.get(base);
+}
+
+// A closed prop skin. The two windows are shallow blind recesses in its surface,
+// so their near lips occlude the artwork behind them as the camera moves.
+function shotgunReceiver(T, width, material) {
+  const rear = -0.03, front = 0.23, bottom = -0.030, shoulder = 0.031;
+  const section = [
+    [-width + 0.003, bottom], [width - 0.003, bottom],
+    [width, bottom + 0.003], [width, shoulder]
+  ];
+  const arcSteps = 14;
+  for (let i = 1; i <= arcSteps; i++) {
+    const a = Math.PI * i / arcSteps;
+    section.push([width * Math.cos(a), shoulder + 0.020 * Math.sin(a)]);
+  }
+  section.push([-width, bottom + 0.003]);
+  const positions = [], normals = [], uvs = [];
+  function triangle(a, b, c, smooth) {
+    const normal = new T.Vector3().subVectors(b, a).cross(new T.Vector3().subVectors(c, a)).normalize();
+    for (const [i, p] of [a, b, c].entries()) {
+      positions.push(p.x, p.y, p.z);
+      const n = smooth ? smooth[i] : normal;
+      normals.push(n.x, n.y, n.z);
+      if (Math.abs(n.z) > Math.max(Math.abs(n.x), Math.abs(n.y))) uvs.push(p.x, p.y);
+      else uvs.push(p.z, Math.abs(n.x) > Math.abs(n.y) ? p.y : p.x);
+    }
+  }
+  const quad = (a, b, c, d) => { triangle(a, b, c); triangle(a, c, d); };
+  const crownNormal = i => {
+    const a = Math.PI * (i - 3) / arcSteps;
+    return new T.Vector3(Math.cos(a) / width, Math.sin(a) / 0.020, 0).normalize();
+  };
+  function pocket(outer, outline, inward) {
+    const along = outer[1].clone().sub(outer[0]).normalize();
+    const map = p => new T.Vector2(p.clone().sub(outer[0]).dot(along), p.z);
+    const points = [...outer, ...outline];
+    const faces = T.ShapeUtils.triangulateShape(outer.map(map), [outline.map(map)]);
+    for (const [a,b,c] of faces) triangle(points[a], points[b], points[c]);
+    const back = outline.map(p => p.clone().add(inward));
+    for (let i = 0; i < outline.length; i++) {
+      const j = (i + 1) % outline.length;
+      quad(outline[i], outline[j], back[j], back[i]);
+    }
+    for (let i = 1; i < back.length - 1; i++) triangle(back[0], back[i], back[i + 1]);
+  }
+  for (let i = 0; i < section.length; i++) {
+    const j = (i + 1) % section.length;
+    const a = new T.Vector3(...section[i], rear), b = new T.Vector3(...section[j], rear);
+    const c = new T.Vector3(b.x, b.y, front), d = new T.Vector3(a.x, a.y, front);
+    if (i === 0) {
+      const opening = [[-.011,.102],[.011,.102],[.017,.109],[.017,.178],
+        [.012,.190],[-.012,.190],[-.017,.178],[-.017,.109]];
+      pocket([a,b,c,d], opening.map(([x,z]) => new T.Vector3(x,bottom,z)), new T.Vector3(0,.010,0));
+    } else if (i === 2) {
+      const opening = [[.004,.059],[.024,.059],[.030,.065],[.030,.135],
+        [.026,.144],[.005,.144],[.001,.139],[.001,.065]];
+      pocket([a,b,c,d], opening.map(([y,z]) => new T.Vector3(width,y,z)), new T.Vector3(-.009,0,0));
+    } else if (i >= 3 && i < 3 + arcSteps) {
+      const start = crownNormal(i), end = crownNormal(j);
+      triangle(a,b,c,[start,end,end]); triangle(a,c,d,[start,end,start]);
+    } else {
+      quad(a,b,c,d);
+    }
+    triangle(new T.Vector3(0,0,rear),b,a);
+    triangle(new T.Vector3(0,0,front),d,c);
+  }
+  const geo = new T.BufferGeometry();
+  geo.setAttribute('position', new T.Float32BufferAttribute(positions,3));
+  geo.setAttribute('normal', new T.Float32BufferAttribute(normals,3));
+  geo.setAttribute('uv', new T.Float32BufferAttribute(uvs,2));
+  const mesh = new T.Mesh(geo,material);
+  mesh.name = 'shotgun receiver';
+  mesh.castShadow = mesh.receiveShadow = true;
+  return mesh;
 }
 
 export function makeShotgunModel(ctx) {
@@ -707,25 +784,18 @@ export function makeShotgunModel(ctx) {
   // [z, y]. CL-319 (Jerry, 8 Nov, a picture of a tactical pump with a one-piece pistol-grip stock: "not satisfied with the
   // shotgun stock, needs to look like this"): the receiver ends just behind the trigger guard (z -0.03, it ran back to
   // -0.195 over the grip) and the stock's wrist starts there, as on the reference.
-  K.slab([[0.23, -0.03], [0.23, 0.027], [-0.03, 0.027], [-0.03, -0.03], [0.09, -0.03], [0.135, -0.032]], 2 * HW, finish.blued, { bevel: 0.003, segs: 2 }).name = 'shotgun receiver';
-  // the rolled top: a half-round the receiver's width, tangent to the flat sides
-  K.lathe([[0, -0.03], [0.0245, -0.03], [0.0255, -0.022], [0.0255, 0.225], [0.0245, 0.23], [0, 0.23]], finish.blued, { y: 0.026, seg: 20, phase: Math.PI / 20 }).name = 'shotgun receiver crown';
-  // The ejection port on the gun's real right, which is +x here: the mirrored first-person view shows +x on the right (docs/fps/fidelity.md).
-  // CL-318 (J29: "ejection port should be more believable"): a rimmed 65 x 26 mm opening (an 870's), the recess, the
-  // bolt's bright side in it with its face at the front and the extractor claw; the parts sat inside the wall before.
-  // Opaque face artwork. The backing, dark border and steel face are distinct under the game lights.
-  K.box(0.002, 0.036, 0.086, finish.edge, HW + 0.001, 0.018, 0.101, 0, 0, 0, null, 0);
-  K.box(0.001, 0.030, 0.080, gunRubber, HW + 0.0022, 0.018, 0.101, 0, 0, 0, null, 0);
-  // The bolt (GP-20053 made it its own group; CL-322 drives it). It rides back with the forend on the stroke. The receiver
-  // is solid and the port a recess drawn on its wall, so a bolt slid past the port's rear edge would show through the
-  // metal: gun.userData.pumpPoseHook (below) trims the bright side to the part of the bolt still in the opening instead.
-  // Closed it fills the port to the face (z 0.137); as the forend comes back the face retreats and the dark chamber opens
-  // ahead of it; past half the stroke the bolt has left the port.
+  gun.add(shotgunReceiver(THREE, HW, finish.receiver));
+  // The curved artwork sits behind the lip. The existing pose hook crops it
+  // to the visible part of the side recess throughout the animation.
   const PORT_R = 0.0625, PORT_F = 0.1395, BOLT_F = 0.137;   // the opening inside the rim (rear, front); the face, closed
   const shotgunBolt = K.group(0, 0, 0); shotgunBolt.name = 'shotgun-bolt';
-  const boltSide = K.box(0.004, 0.02, 0.1, finish.inlay, HW + 0.0017, 0.018, 0, 0, 0, 0, shotgunBolt, 0.001);   // its z scale set below
-  const boltFace = K.box(0.0042, 0.02, 0.006, finish.edge, HW + 0.0018, 0.018, 0, 0, 0, 0, shotgunBolt, 0.001);
-  const boltClaw = K.box(0.005, 0.006, 0.008, gunDark, HW + 0.0020, 0.027, 0, 0, 0, 0, shotgunBolt, 0.0008);   // the extractor
+  const boltSide = K.cyl(0.012, 0.012, 0.1, finish.bolt, HW - 0.010, 0.016, 0, shotgunBolt, 16);
+  // Bake the kit's cylinder orientation so poseBolt can scale its local Z.
+  boltSide.geometry.rotateX(boltSide.rotation.x);
+  boltSide.rotation.x = 0;
+  boltSide.geometry.scale(0.67, 1, 1);
+  const boltFace = K.box(0.007, 0.018, 0.006, finish.edge, HW - 0.006, 0.016, 0, 0, 0, 0, shotgunBolt, 0.002);
+  const boltClaw = K.box(0.005, 0.004, 0.008, gunDark, HW - 0.005, 0.023, 0, 0, 0, 0, shotgunBolt, 0.001);
   const poseBolt = (s) => {   // s: how far the forend is back (0 closed .. 0.12 open)
     const zf = BOLT_F - s, front = Math.min(zf - 0.006, PORT_F), len = front - PORT_R;
     boltSide.visible = len > 0.002;
@@ -734,14 +804,20 @@ export function makeShotgunModel(ctx) {
     boltFace.position.z = zf - 0.003; boltClaw.position.z = zf - 0.004;
   };
   poseBolt(0);
-  // A dark inset and a satin face pick up the light on the underside in the reload view.
-  K.box(0.035, 0.004, 0.087, gunRubber, 0, -0.032, 0.146, 0, 0, 0, null, 0.001);
-  K.box(0.024, 0.002, 0.063, finish.inlay, 0, -0.034, 0.148, 0, 0, 0, null, 0);
-  K.box(0.004, 0.002, 0.049, finish.edge, 0.013, -0.034, 0.148, 0, 0, 0, null, 0);
+  // A rounded, sloping tongue leaves visible shadow along both sides.
+  const lifter = K.slab([[.103,-.006],[.111,-.010],[.157,-.012],[.174,-.011],
+    [.183,-.009],[.185,-.007],[.184,-.005],[.177,-.003],[.175,0],
+    [.177,.003],[.184,.005],[.185,.007],[.183,.009],[.174,.011],
+    [.157,.012],[.111,.010],[.103,.006]], .003, finish.lifter,
+    {bevel:.001,segs:3,rz:Math.PI / 2,rx:.078,y:-.0115});
+  lifter.name = 'shotgun lifter';
   // The receiver's cross pins (two trigger-plate pins), the stamped lines, the serial band, the safety's cross bolt.
   for (const z of [-0.012, 0.05]) D.pin(gun, 0, -0.012, z, { axis: 'x', len: 2 * HW, r: 0.0035, mat: gunDark, caps: true });
   for (const sx of [-1, 1]) {
-    D.groove(gun, { x: sx * HW, y: 0.023, z: 0.1, axis: 'x', side: sx, along: 'z', len: 0.24, w: 0.0007 });     // the top edge's stamping line
+    const topLines = sx > 0 ? [[-.02,.058],[.145,.22]] : [[-.02,.22]];
+    for (const [start, end] of topLines) {
+      D.groove(gun, { x: sx * HW, y: .023, z: (start + end) / 2, axis: 'x', side: sx, along: 'z', len: end - start, w: .0007 });
+    }
     D.groove(gun, { x: sx * HW, y: -0.018, z: 0.1, axis: 'x', side: sx, along: 'z', len: 0.24, w: 0.0007 });   // the lower line
     D.screw(gun, sx * HW, 0.012, 0.19, { axis: 'x', side: sx, r: 0.0028, kind: 'slot' });                       // the barrel-band screw
   }
@@ -762,7 +838,7 @@ export function makeShotgunModel(ctx) {
   K.slab([[0.086, -0.028], [-0.036, -0.028], [-0.04, -0.04], [-0.03, -0.054], [0.08, -0.054], [0.088, -0.044]], 0.044, gunDark, { bevel: 0.004, segs: 2 });
   K.slab(gunBand([[0.072, -0.052], [0.076, -0.08], [0.064, -0.098], [0.012, -0.1], [-0.012, -0.09], [-0.02, -0.052]], 0.009), 0.034, gunDark, { bevel: 0.004, segs: 2 });
   // GB-175/180: the trigger's face toward the grip, the tip curling forward, a solid blade.
-  K.slab([[0.0384, -0.0471], [0.0303, -0.0589], [0.0319, -0.0699], [0.0405, -0.0795], [0.0355, -0.0845], [0.0241, -0.0741], [0.0197, -0.0571], [0.0276, -0.0409]], 0.012, gunAccent, { bevel: 0.002 });
+  K.slab([[0.0384, -0.0471], [0.0303, -0.0589], [0.0319, -0.0699], [0.0405, -0.0795], [0.0355, -0.0845], [0.0241, -0.0741], [0.0197, -0.0571], [0.0276, -0.0409]], 0.012, gunAccent, { bevel: 0.002 }).name = 'shotgun trigger';
   // Stock with a recoil pad; the pistol grip; the sling slot. GB-259: the stock group is gun.userData.fpStock ('fp-stock').
   const stock = K.group(0, 0, 0); stock.name = 'fp-stock';
   // CL-319 (Jerry's reference: a one-piece synthetic pistol-grip stock): its outline measured off the picture at the
@@ -791,7 +867,7 @@ export function makeShotgunModel(ctx) {
   // trim retain the usual first-person stock visibility switch.
   gun.add(stockBody);
   // the black rubber pad, a little proud of the butt all round
-  K.slab([[-0.4734, -0.0262], [-0.4935, -0.0268], [-0.4962, -0.034], [-0.4968, -0.19], [-0.4945, -0.1985], [-0.4734, -0.198]], 0.059, gunRubber, { bevel: 0.006, segs: 2, parent: stock });
+  K.slab([[-0.4734, -0.0262], [-0.4935, -0.0268], [-0.4962, -0.034], [-0.4968, -0.19], [-0.4945, -0.1985], [-0.4734, -0.198]], 0.059, gunRubber, { bevel: 0.006, segs: 2, parent: stock }).name = 'shotgun recoil pad';
   // the sling slot through the butt, in a shallow frame
   K.box(0.0572, 0.03, 0.01, gunRubber, 0, -0.088, -0.36, 0, 0, 0, stock, 0.001);
   for (const sx of [-1, 1]) K.slab(gunBand([[-0.388, -0.069], [-0.388, -0.107], [-0.342, -0.107], [-0.342, -0.069], [-0.388, -0.069]], 0.003), 0.002, gunPoly, { x: sx * 0.0281, bevel: 0.0006, parent: stock });
@@ -841,7 +917,7 @@ export function makeShotgunModel(ctx) {
   K.lathe([[0, 0.14], [0.02, 0.14], [0.02, 0.21], [0.0165, 0.215], [0, 0.215]], gunBody, { y: 0.03, seg: 16, parent: receiver });   // the chamber's step out of the receiver
   K.box(0.008, 0.005, 0.7, gunDark, 0, 0.049, 0.565, 0, 0, 0, receiver, 0.001);                     // the vent rib
   for (let i = 0; i < 13; i++) K.box(0.005, 0.006, 0.012, gunDark, 0, 0.0455, 0.24 + i * 0.05, 0, 0, 0, receiver, 0.001);   // its posts
-  K.sph(0.0045, brassMat, 0, 0.055, 0.91, receiver, 10);                                              // the bead
+  K.sph(0.0045, brassMat, 0, 0.055, 0.91, receiver, 10).name = 'shotgun bead';
   K.lathe([[0, 0.11], [0.0145, 0.11], [0.0145, 0.8], [0, 0.8]], gunDark, { y: -0.006, seg: 14, parent: receiver });   // the magazine tube
   K.lathe([[0, 0.795], [0.017, 0.795], [0.017, 0.83], [0.014, 0.84], [0.006, 0.842], [0, 0.842]], finish.edge, { y: -0.006, seg: 14, parent: receiver });   // its cap
   for (let i = -2; i <= 2; i++) {
@@ -879,6 +955,17 @@ export function makeShotgunModel(ctx) {
   });
   gunSuppressor(gun, K, 'shotgun');   // CL-95
   attachLaserLight(gun, 'shotgun', ctx);
+  gun.userData.partFinish = true;
+  gun.traverse(mesh => {
+    if (!mesh.isMesh) return;
+    if (mesh.material === finish.receiver) markPaintSurface(mesh, 'receiver');
+    else if (mesh.material === finish.furniture) markPaintSurface(mesh, 'furniture');
+    else if (mesh.parent === gun.userData.laserLightUnit && ['lightTube', 'laserTube', 'sideRail'].includes(mesh.name)) {
+      markPaintSurface(mesh, 'light shell');
+    } else if (mesh.parent === gun.userData.suppressor && (mesh.material === gunDark || mesh.material === gunAccent)) {
+      markPaintSurface(mesh, 'suppressor shell');
+    }
+  });
   bindModelArtwork(gun, 'controls', 'safety', groupArtwork(THREE, ...buttonFaces));
   bindModelArtwork(gun, 'controls', 'slideRelease', slideLock);
   bindModelArtwork(gun, 'controls', 'pump', pump);

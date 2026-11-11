@@ -1,0 +1,424 @@
+{
+  "stockVisible": false,
+  "origin": [
+    0,
+    0.07294888333937875,
+    -0.5776537043754163
+  ],
+  "rays": {
+    "625,445": {
+      "point": [
+        -0.009116331927785723,
+        0.01686920704419425,
+        -0.08672371749542207
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:4088/studio/weapon-longarms.js:775:23)"
+    },
+    "640,445": {
+      "point": [
+        0,
+        0.01686920704419425,
+        -0.08672371749542201
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:4088/studio/weapon-longarms.js:775:23)"
+    },
+    "655,445": {
+      "point": [
+        0.009116331927785723,
+        0.01686920704419425,
+        -0.08672371749542207
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:4088/studio/weapon-longarms.js:775:23)"
+    },
+    "625,475": {
+      "point": [
+        -0.007833407053575709,
+        0.009095018638077712,
+        -0.15595240064407923
+      ],
+      "node": "shotgun comb pad 1",
+      "line": "at makeShotgunModel (http://127.0.0.1:4088/studio/weapon-longarms.js:803:19)"
+    },
+    "640,475": {
+      "point": [
+        0,
+        0.009095018638077698,
+        -0.15595240064407917
+      ],
+      "node": "shotgun comb pad 1",
+      "line": "at makeShotgunModel (http://127.0.0.1:4088/studio/weapon-longarms.js:803:19)"
+    },
+    "655,475": {
+      "point": [
+        0.007833407053575709,
+        0.009095018638077712,
+        -0.15595240064407923
+      ],
+      "node": "shotgun comb pad 1",
+      "line": "at makeShotgunModel (http://127.0.0.1:4088/studio/weapon-longarms.js:803:19)"
+    },
+    "595,505": {
+      "point": [
+        -0.02209611439724542,
+        -0.001819944775724197,
+        -0.18128106048709092
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:4088/studio/weapon-longarms.js:775:23)"
+    },
+    "625,505": {
+      "point": [
+        -0.0067916210502770025,
+        0.004004424897258205,
+        -0.2121578424891976
+      ],
+      "node": "shotgun comb pad 1",
+      "line": "at makeShotgunModel (http://127.0.0.1:4088/studio/weapon-longarms.js:803:19)"
+    },
+    "640,505": {
+      "point": [
+        0,
+        0.004004424897258191,
+        -0.21215784248919745
+      ],
+      "node": "shotgun comb pad 1",
+      "line": "at makeShotgunModel (http://127.0.0.1:4088/studio/weapon-longarms.js:803:19)"
+    },
+    "655,505": {
+      "point": [
+        0.0067916210502770025,
+        0.004004424897258205,
+        -0.2121578424891976
+      ],
+      "node": "shotgun comb pad 1",
+      "line": "at makeShotgunModel (http://127.0.0.1:4088/studio/weapon-longarms.js:803:19)"
+    },
+    "685,505": {
+      "point": [
+        0.022087652023729355,
+        -0.0017913097976690745,
+        -0.1814328633472604
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:4088/studio/weapon-longarms.js:775:23)"
+    },
+    "595,535": {
+      "point": [
+        -0.019148219686480963,
+        -0.004609821978506026,
+        -0.23427695397617054
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:4088/studio/weapon-longarms.js:775:23)"
+    },
+    "625,535": {
+      "point": [
+        -0.006077842915465666,
+        -0.0009049216671210142,
+        -0.2506797114005287
+      ],
+      "node": "shotgun comb pad 2",
+      "line": "at makeShotgunModel (http://127.0.0.1:4088/studio/weapon-longarms.js:803:19)"
+    },
+    "640,535": {
+      "point": [
+        0,
+        -0.0009049216671210142,
+        -0.2506797114005287
+      ],
+      "node": "shotgun comb pad 2",
+      "line": "at makeShotgunModel (http://127.0.0.1:4088/studio/weapon-longarms.js:803:19)"
+    },
+    "655,535": {
+      "point": [
+        0.006077842915465666,
+        -0.0009049216671210142,
+        -0.2506797114005287
+      ],
+      "node": "shotgun comb pad 2",
+      "line": "at makeShotgunModel (http://127.0.0.1:4088/studio/weapon-longarms.js:803:19)"
+    },
+    "685,535": {
+      "point": [
+        0.01914737300420061,
+        -0.00460639254315616,
+        -0.23429213716368397
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:4088/studio/weapon-longarms.js:775:23)"
+    },
+    "595,565": {
+      "point": [
+        -0.016223766801464284,
+        -0.0035799090247476822,
+        -0.2868172426737813
+      ],
+      "node": "shotgun comb pad 2",
+      "line": "at makeShotgunModel (http://127.0.0.1:4088/studio/weapon-longarms.js:803:19)"
+    },
+    "625,565": {
+      "point": [
+        -0.0054079222671547635,
+        -0.0035799090247476822,
+        -0.28681724267378117
+      ],
+      "node": "shotgun comb pad 2",
+      "line": "at makeShotgunModel (http://127.0.0.1:4088/studio/weapon-longarms.js:803:19)"
+    },
+    "640,565": {
+      "point": [
+        0,
+        -0.0035799090247476822,
+        -0.2868172426737812
+      ],
+      "node": "shotgun comb pad 2",
+      "line": "at makeShotgunModel (http://127.0.0.1:4088/studio/weapon-longarms.js:803:19)"
+    },
+    "655,565": {
+      "point": [
+        0.0054079222671547635,
+        -0.0035799090247476822,
+        -0.28681724267378117
+      ],
+      "node": "shotgun comb pad 2",
+      "line": "at makeShotgunModel (http://127.0.0.1:4088/studio/weapon-longarms.js:803:19)"
+    },
+    "685,565": {
+      "point": [
+        0.016223766801464288,
+        -0.003579909024747696,
+        -0.2868172426737812
+      ],
+      "node": "shotgun comb pad 2",
+      "line": "at makeShotgunModel (http://127.0.0.1:4088/studio/weapon-longarms.js:803:19)"
+    },
+    "595,595": {
+      "point": [
+        -0.015460907342001744,
+        -0.010288294704553239,
+        -0.3005854564728161
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:4088/studio/weapon-longarms.js:775:23)"
+    },
+    "625,595": {
+      "point": [
+        -0.005141170546583713,
+        -0.010086966758045476,
+        -0.3012556087137209
+      ],
+      "node": "shotgun comb pad 2",
+      "line": "at makeShotgunModel (http://127.0.0.1:4088/studio/weapon-longarms.js:803:19)"
+    },
+    "640,595": {
+      "point": [
+        0,
+        -0.010086966758045476,
+        -0.3012556087137209
+      ],
+      "node": "shotgun comb pad 2",
+      "line": "at makeShotgunModel (http://127.0.0.1:4088/studio/weapon-longarms.js:803:19)"
+    },
+    "655,595": {
+      "point": [
+        0.005141170546583713,
+        -0.010086966758045476,
+        -0.3012556087137209
+      ],
+      "node": "shotgun comb pad 2",
+      "line": "at makeShotgunModel (http://127.0.0.1:4088/studio/weapon-longarms.js:803:19)"
+    },
+    "685,595": {
+      "point": [
+        0.01546090734200174,
+        -0.010288294704553225,
+        -0.30058545647281615
+      ],
+      "node": "shotgun stock body",
+      "line": "at makeShotgunModel (http://127.0.0.1:4088/studio/weapon-longarms.js:775:23)"
+    },
+    "595,625": {
+      "point": [
+        -0.013567136020964134,
+        -0.009137153433564457,
+        -0.3346043145283256
+      ],
+      "node": "shotgun comb pad 3",
+      "line": "at makeShotgunModel (http://127.0.0.1:4088/studio/weapon-longarms.js:803:19)"
+    },
+    "625,625": {
+      "point": [
+        -0.004522378673654714,
+        -0.009137153433564471,
+        -0.3346043145283255
+      ],
+      "node": "shotgun comb pad 3",
+      "line": "at makeShotgunModel (http://127.0.0.1:4088/studio/weapon-longarms.js:803:19)"
+    },
+    "640,625": {
+      "point": [
+        0,
+        -0.009137153433564471,
+        -0.3346043145283255
+      ],
+      "node": "shotgun comb pad 3",
+      "line": "at makeShotgunModel (http://127.0.0.1:4088/studio/weapon-longarms.js:803:19)"
+    },
+    "655,625": {
+      "point": [
+        0.004522378673654714,
+        -0.009137153433564471,
+        -0.3346043145283255
+      ],
+      "node": "shotgun comb pad 3",
+      "line": "at makeShotgunModel (http://127.0.0.1:4088/studio/weapon-longarms.js:803:19)"
+    },
+    "685,625": {
+      "point": [
+        0.013567136020964134,
+        -0.009137153433564457,
+        -0.3346043145283256
+      ],
+      "node": "shotgun comb pad 3",
+      "line": "at makeShotgunModel (http://127.0.0.1:4088/studio/weapon-longarms.js:803:19)"
+    },
+    "595,655": {
+      "point": [
+        -0.012465227447419574,
+        -0.010780026618051261,
+        -0.35441931966844553
+      ],
+      "node": "shotgun comb pad 3",
+      "line": "at makeShotgunModel (http://127.0.0.1:4088/studio/weapon-longarms.js:803:19)"
+    },
+    "625,655": {
+      "point": [
+        -0.004155075815806526,
+        -0.010780026618051261,
+        -0.35441931966844553
+      ],
+      "node": "shotgun comb pad 3",
+      "line": "at makeShotgunModel (http://127.0.0.1:4088/studio/weapon-longarms.js:803:19)"
+    },
+    "640,655": {
+      "point": [
+        0,
+        -0.010780026618051261,
+        -0.35441931966844553
+      ],
+      "node": "shotgun comb pad 3",
+      "line": "at makeShotgunModel (http://127.0.0.1:4088/studio/weapon-longarms.js:803:19)"
+    },
+    "655,655": {
+      "point": [
+        0.004155075815806526,
+        -0.010780026618051261,
+        -0.35441931966844553
+      ],
+      "node": "shotgun comb pad 3",
+      "line": "at makeShotgunModel (http://127.0.0.1:4088/studio/weapon-longarms.js:803:19)"
+    },
+    "685,655": {
+      "point": [
+        0.012465227447419574,
+        -0.010780026618051261,
+        -0.35441931966844553
+      ],
+      "node": "shotgun comb pad 3",
+      "line": "at makeShotgunModel (http://127.0.0.1:4088/studio/weapon-longarms.js:803:19)"
+    },
+    "595,685": {
+      "point": [
+        -0.011528865102414748,
+        -0.01217608126768814,
+        -0.371257399636915
+      ],
+      "node": "shotgun comb pad 3",
+      "line": "at makeShotgunModel (http://127.0.0.1:4088/studio/weapon-longarms.js:803:19)"
+    },
+    "625,685": {
+      "point": [
+        -0.0038429550341382507,
+        -0.01217608126768814,
+        -0.371257399636915
+      ],
+      "node": "shotgun comb pad 3",
+      "line": "at makeShotgunModel (http://127.0.0.1:4088/studio/weapon-longarms.js:803:19)"
+    },
+    "640,685": {
+      "point": [
+        0,
+        -0.01217608126768814,
+        -0.37125739963691506
+      ],
+      "node": "shotgun comb pad 3",
+      "line": "at makeShotgunModel (http://127.0.0.1:4088/studio/weapon-longarms.js:803:19)"
+    },
+    "655,685": {
+      "point": [
+        0.0038429550341382507,
+        -0.01217608126768814,
+        -0.371257399636915
+      ],
+      "node": "shotgun comb pad 3",
+      "line": "at makeShotgunModel (http://127.0.0.1:4088/studio/weapon-longarms.js:803:19)"
+    },
+    "685,685": {
+      "point": [
+        0.011528865102414748,
+        -0.01217608126768814,
+        -0.371257399636915
+      ],
+      "node": "shotgun comb pad 3",
+      "line": "at makeShotgunModel (http://127.0.0.1:4088/studio/weapon-longarms.js:803:19)"
+    },
+    "595,715": {
+      "point": [
+        -0.010723349090527582,
+        -0.013377052643514034,
+        -0.385742543231587
+      ],
+      "node": "shotgun comb pad 3",
+      "line": "at makeShotgunModel (http://127.0.0.1:4088/studio/weapon-longarms.js:803:19)"
+    },
+    "625,715": {
+      "point": [
+        -0.0035744496968425285,
+        -0.013377052643514048,
+        -0.385742543231587
+      ],
+      "node": "shotgun comb pad 3",
+      "line": "at makeShotgunModel (http://127.0.0.1:4088/studio/weapon-longarms.js:803:19)"
+    },
+    "640,715": {
+      "point": [
+        0,
+        -0.013377052643514034,
+        -0.385742543231587
+      ],
+      "node": "shotgun comb pad 3",
+      "line": "at makeShotgunModel (http://127.0.0.1:4088/studio/weapon-longarms.js:803:19)"
+    },
+    "655,715": {
+      "point": [
+        0.0035744496968425285,
+        -0.013377052643514048,
+        -0.385742543231587
+      ],
+      "node": "shotgun comb pad 3",
+      "line": "at makeShotgunModel (http://127.0.0.1:4088/studio/weapon-longarms.js:803:19)"
+    },
+    "685,715": {
+      "point": [
+        0.010723349090527582,
+        -0.013377052643514034,
+        -0.385742543231587
+      ],
+      "node": "shotgun comb pad 3",
+      "line": "at makeShotgunModel (http://127.0.0.1:4088/studio/weapon-longarms.js:803:19)"
+    }
+  }
+}

@@ -1,13 +1,13 @@
 # Antigravity
 
-state: idle
+state: active
 model: Gemini 4 Carbon
-task: —
-touching: —
-since: 2026-11-10T23:25Z
-next: AG-286 J126 rule 2: the hands on the guns, at the eye, on the RTX 5
+task: AG-291 CE-1 four lights on RTX 5080: gun action cycles across 6 weapons
+touching: review/CE-1/gpu, review/CE-1
+since: 2026-11-11T00:19Z
+next: —
 blocked-on: —
-last-report: handoffs/2026-11-10-antigravity-AG-290.md
+last-report: handoffs/2026-11-10-antigravity-AG-286.md
 
 ## Notes
 

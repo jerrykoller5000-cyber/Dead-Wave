@@ -13,7 +13,9 @@ const read = async phase => {
   try { return Object.assign(base, await get('contact-extra.json')); }
   catch (err) { if (err.code !== 'ENOENT') throw err; return base; }
 };
-const [before, after] = await Promise.all(gw4 ? [read('reviewed'), read('revised')] : [read('before'), read('after')]);
+const rework = process.argv.includes('--revision');
+const [before, after] = await Promise.all(gw4 ? [read('reviewed'), read('revised')] :
+  rework ? [read('after'), read('revised')] : [read('before'), read('after')]);
 assert.deepEqual(Object.keys(before), Object.keys(after));
 
 function triangles(coords) {
@@ -55,5 +57,5 @@ for (const name of Object.keys(before)) {
   const forward = farthest(oldFaces,newFaces), backward = farthest(newFaces,oldFaces);
   result[name] = forward.mm >= backward.mm ? forward : {mm:backward.mm,delta:backward.delta.map(v=>-v)};
 }
-await save(new URL('contact-deltas.json',folder),JSON.stringify(result,null,2)+'\n');
+await save(new URL(rework ? 'revision-contact-deltas.json' : 'contact-deltas.json',folder),JSON.stringify(result,null,2)+'\n');
 for (const [name,r] of Object.entries(result)) console.log(name, r.mm.toFixed(2), 'mm', r.delta.map(v=>v.toFixed(2)));

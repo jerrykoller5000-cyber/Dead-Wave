@@ -2,12 +2,12 @@
 
 state: active
 model: Claude Opus 5.5 (unsure of effort level)
-task: CE-1 GT-20075's actions in first person: revolver doubleActionPose and GW-4/KR-7/Wasp recoilBoltPose driven per shot in both view copies; tcl281
-touching: game/viewmodel.js (the action cycle in update: slide/work/bolt/cylinder per shot)
-since: 2026-11-10T23:16Z
-next: CE-2 the hands at work: the trigger finger each shot, the controls (J130), fire selection
+task: CE-2 the hands at work, the pistol then the GW-4: the trigger finger pulling each shot, the fire selector and controls worked by the fingers, the slide racked in view
+touching: game/viewmodel.js (the action cycle and the firing hand's finger motion in update), game/viewmodel-poses.js (action poses)
+since: 2026-11-11T00:06Z
+next: CE-2 (was CD-3) (was CL-336) J103, J110, J112, J114-J116, J119, J
 blocked-on: —
-last-report: —
+last-report: handoffs/2026-11-11-claude5-CE-1.md
 
 ## Notes
 

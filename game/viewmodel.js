@@ -344,6 +344,7 @@ export function createViewmodel(ctx) {
       work: map.get(direct(ud.work || ud.slide)) || null, mag: map.get(direct(ud.mag)) || null,
       pump: map.get(direct(ud.pump)) || null, bolt: map.get(direct(ud.bolt)) || null,
       cylinder: map.get(direct(ud.cylinder)) || null, shell: map.get(direct(ud.reloadShell)) || null,
+      trigger: map.get(ud.trigger) || null, hammer: map.get(ud.hammer) || null,   // CE-1: the revolver's double action (doubleActionPose)
       // GB-302: reload moving parts Claude drives (direct children of the gun root, as pump/slide).
       ammoBox: map.get(direct(ud.ammoBox)) || null,
       fuelCan: map.get(direct(ud.fuelCan)) || null,
@@ -871,6 +872,28 @@ export function createViewmodel(ctx) {
     G.q.premultiply(rq);
   }
 
+  // CE-1: a shot's stroke: 0 to 1 by tb, held to th, home (0) by te; 0 outside.
+  const stroke = (t, tb, th, te) => (t < 0 ? 0 : t < tb ? smooth(t / tb) : t < th ? 1 : t < te ? 1 - smooth((t - th) / (te - th)) : 0);
+  // CE-1 (GT-20075, Claude 5): the action on a view copy, t seconds after its last shot. Runs after mirrorParts, which
+  // puts every part back where his own gun has it, so a part left alone shows the third-person gun's own pose.
+  function actionCycle(g, P, t, st) {
+    const A = P.action || {}, ud = g.src.userData || {};
+    const slide = A.slide || (P.slideKick ? { travel: P.slideKick, t: [0.018, 0.018, 0.075] } : null);
+    if (g.slide && slide) g.slide.position.z -= slide.travel * stroke(t, slide.t[0], slide.t[1], slide.t[2]);
+    const work = A.work || (P.workKick ? { travel: P.workKick, t: [0.018, 0.018, 0.075] } : null);   // a handle that rides the carrier
+    if (g.work && g.work !== g.slide && work && work.travel) g.work.position.z -= work.travel * stroke(t, work.t[0], work.t[1], work.t[2]);
+    const bolt = A.bolt || (P.boltStroke ? { travel: P.boltStroke, t: [0.04, 0.04, 0.13] } : null);
+    if (g.recoilBolt && bolt && ud.recoilBoltPose) {
+      const travel = bolt.travel === 'port' ? ud.portStroke || 0 : bolt.travel;
+      ud.recoilBoltPose(g.recoilBolt, travel * stroke(t, bolt.t[0], bolt.t[1], bolt.t[2]));
+    }
+    // A double action: at the shot the sear has broken (the trigger back, the hammer down on the pin); the trigger
+    // goes forward again to its reset and the hammer stays down (resetting). Not in a reload: that has the hammer.
+    const da = A.doubleAction;
+    if (da && g.trigger && g.hammer && ud.doubleActionPose && st.reloadU == null && t < da.t[2]) {
+      ud.doubleActionPose(g.trigger, g.hammer, stroke(t, da.t[0], da.t[1], da.t[2]), true);
+    }
+  }
   // A shot's kick into a pair of springs (back, up, a random side), and the view's share of it (CL-293).
   function shotKick(K, k, a, mul = 1) {
     const m = (1 + (k.ads - 1) * a) * mul;
@@ -994,15 +1017,12 @@ export function createViewmodel(ctx) {
     gun.root.visible = !BL && !HN; if (gun2) gun2.root.visible = !BL && !HN;   // CL-307: put away for the blade; CL-317: for the empty hands
     // The copied action cycles on a shot; the original gun keeps its third-person animation.
     S.slideT += dt;
-    if (gun.slide && P.slideKick) { const t = S.slideT, k = t < 0.018 ? t / 0.018 : t < 0.075 ? 1 - (t - 0.018) / 0.057 : 0; gun.slide.position.z -= P.slideKick * k; }
-    if (gun.work && gun.work !== gun.slide && P.workKick) { const t = S.slideT, k = t < 0.018 ? t / 0.018 : t < 0.075 ? 1 - (t - 0.018) / 0.057 : 0; gun.work.position.z -= P.workKick * k; }
-    // CL-322: a constant-recoil bolt's long stroke (the Breacher: back in 0.04 s, home by 0.13 s), drawn by the model's own pose
-    if (gun.recoilBolt && P.boltStroke && gun.src.userData.recoilBoltPose) { const t = S.slideT, k = t < 0.04 ? t / 0.04 : t < 0.13 ? 1 - (t - 0.04) / 0.09 : 0; gun.src.userData.recoilBoltPose(gun.recoilBolt, P.boltStroke * k); }
-    if (gun2) {   // CL-301: the left gun's action on its own shots
-      S.slideT2 += dt; const t = S.slideT2, k = t < 0.018 ? t / 0.018 : t < 0.075 ? 1 - (t - 0.018) / 0.057 : 0;
-      if (gun2.slide && P.slideKick) gun2.slide.position.z -= P.slideKick * k;
-      if (gun2.work && gun2.work !== gun2.slide && P.workKick) gun2.work.position.z -= P.workKick * k;
-    }
+    // CE-1 (GT-20075): each gun's action on its own shot, the same in the pair's left copy. P.action (viewmodel-poses.js)
+    // names the moving part and its time: a slide or a reciprocating handle back and home, a carrier seen through its
+    // port (the model's recoilBoltPose, its stroke the model's portStroke), the revolver's trigger and hammer (the
+    // model's doubleActionPose). Each cycle ends before the next shot can come (the gun's interval).
+    actionCycle(gun, P, S.slideT, st);
+    if (gun2) { S.slideT2 += dt; actionCycle(gun2, P, S.slideT2, st); }
     // The reload's bolt/charging-handle pull follows the support hand after the magazine seats.
     { const Rr = reloadOf(P, st), rk = Rr && Rr.rack, ur = st.reloadU;
       if (gun.work && rk && ur != null) { const back = smooth((ur - rk[0]) / (rk[1] - rk[0])) * (1 - smooth((ur - rk[2]) / 0.03)); gun.work.position.z -= rk[3] * back; } }

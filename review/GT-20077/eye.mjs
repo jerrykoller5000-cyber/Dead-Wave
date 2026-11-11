@@ -65,7 +65,7 @@ try {
       return {pose,light,key:info.key,raised:info.raise,ads:T.fpDbg().ads,reloading:T.isReloading(),time:T.getWorldTime(),sun:H.sun.intensity};
     };
   })()`);
-  if(phase==='rear' || (phase==='revised' && id==='m4') || (phase==='after' && id==='shotgun')){
+  if(phase==='rear' || (phase==='revised' && ['m4','shotgun'].includes(id)) || (phase==='after' && id==='shotgun')){
     await page.evaluate("prepareEye('aimed','noon')");
     const result=await page.evaluate(`(async()=>{
       const T=TT.THREE, vm=TT.viewmodelDbg(), g=vm.frame, cameraToGun=g.q.clone().invert();
@@ -90,14 +90,49 @@ try {
         const hit=new T.Raycaster(origin,dir).intersectObjects(surfaces,false)[0];
         if(hit)rays[x+','+y]={point:hit.point.toArray(),node:hit.object.name,line:source.get(hit.object)||source.get(hit.object.parent)};
       }
-      return {stockVisible:vm.gun.stock.visible,origin:origin.toArray(),rays};
+      const bead=raw.getObjectByName('shotgun bead');
+      let sight;
+      if(bead){
+        const direction=bead.getWorldPosition(new T.Vector3()).sub(origin).normalize();
+        const hit=new T.Raycaster(origin,direction).intersectObjects(surfaces,false)[0];
+        const beadScreen=vm.ndc(vm.viewPoint(bead.getWorldPosition(new T.Vector3())));
+        sight={firstSurface:hit?.object.name||null,screen:[beadScreen.x,beadScreen.y]};
+        const eye=vm.space.localToWorld(new T.Vector3());
+        const toBead=vm.space.localToWorld(vm.viewPoint(bead.getWorldPosition(new T.Vector3()))).sub(eye);
+        const handRay=new T.Raycaster(eye,toBead.clone().normalize(),0,toBead.length());
+        const overlaps=[];
+        for(const [side,arm] of Object.entries(vm.arms)){
+          if(!arm?.root)continue;
+          const skin=[];
+          arm.root.traverseVisible(o=>{if(o.isMesh && o.material?.opacity!==0)skin.push(o)});
+          const nearest=handRay.intersectObjects(skin,false)[0];
+          if(nearest)overlaps.push({side,node:nearest.object.name,parent:nearest.object.parent?.name,distance:nearest.distance});
+        }
+        sight.handInFront=overlaps;
+        for(let y=365;y<=445;y+=4){
+          const dir=new T.Vector3(0,(1-y/360)/uy,-1).applyQuaternion(cameraToGun).normalize();
+          const face=new T.Raycaster(origin,dir).intersectObjects(surfaces,false)[0];
+          if(face)rays['640,'+y]={point:face.point.toArray(),node:face.object.name};
+        }
+      }
+      return {stockVisible:vm.gun.stock.visible,origin:origin.toArray(),rays,sight};
     })()`);
     await save(new URL('rays.json',folder),JSON.stringify(result,null,2));
-    if(phase==='revised'){
+    if(id==='m4' && phase==='revised'){
       const hits=Object.values(result.rays);
       for(const part of ['GW-4 rear face','GW-4 tube','GW-4 comb'])assert(hits.some(hit=>hit.node===part),'Aimed lower-frame sample misses '+part);
     }
-    console.log('Sampled '+Object.keys(result.rays).length+' occupied aimed pixels; stock visible: '+result.stockVisible);
+    if(id==='shotgun' && phase==='after'){
+      const seen=new Set(Object.values(result.rays).map(hit=>hit.node));
+      for(const part of ['shotgun stock body','shotgun comb pad 1','shotgun comb pad 2','shotgun comb pad 3'])assert(seen.has(part),'Aimed lower-frame sample misses '+part);
+    }
+    if(id==='shotgun' && phase==='revised'){
+      const seen=new Set(Object.values(result.rays).map(hit=>hit.node));
+      assert(seen.has('shotgun stock body') && seen.has('shotgun receiver'),'Aimed view needs both the comb and receiver');
+      assert.equal(result.sight.firstSurface,'shotgun bead','Gun artwork obscures bead centre');
+      assert(![...seen].some(name=>name.startsWith('shotgun comb pad')),'Stepped pad remains');
+    }
+    console.log('Sampled '+Object.keys(result.rays).length+' occupied aimed pixels; rear stock group visible: '+result.stockVisible);
   }
   if(phase==='rig' || (['after','revised'].includes(phase) && ['m4','shotgun'].includes(id))){
     const maps=await page.evaluate(`(()=>{
@@ -221,6 +256,16 @@ try {
       const shot=await page.send('Page.captureScreenshot',{format:'jpeg',quality:94});
       await save(new URL('mag-'+Math.round(u*100)+'.jpg',folder),Buffer.from(shot.data,'base64'));
       console.log('reload frame',u,state.place,state.mag);
+    }
+  }
+  if(id==='shotgun' && ['after','revised'].includes(phase)){
+    await page.evaluate('TT.reloadClipDbg.hold(null);TT.setViewFirstDbg(false);for(let i=0;i<280;i++)TT.stepFrame(1/30)');
+    for(const light of ['noon','overcast','dusk','night']){
+      await page.evaluate('prepareEye("hip",'+JSON.stringify(light)+')');
+      const context=await page.evaluate('({eye:TT.fpDbg().w,gun:TT.getCurrentWeapon()})');
+      assert(context.eye<.02 && context.gun===id,'Third-person context missing');
+      const shot=await page.send('Page.captureScreenshot',{format:'jpeg',quality:90,captureBeyondViewport:false});
+      await save(new URL('third-person-'+light+'.jpg',folder),Buffer.from(shot.data,'base64'));
     }
   }
   assert.deepEqual(page.errors,[]);

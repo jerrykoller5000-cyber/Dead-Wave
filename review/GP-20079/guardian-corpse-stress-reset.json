@@ -1,0 +1,625 @@
+{
+  "result": [
+    {
+      "kind": "guardian",
+      "style": "topple",
+      "pose": "twist",
+      "phases": {
+        "death": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": [
+              {
+                "pair": "armR/legR",
+                "a": "armR",
+                "b": "legR",
+                "hits": 1,
+                "total": 4,
+                "contact": [
+                  -27.23,
+                  -199.898,
+                  -632.801
+                ],
+                "contactMeta": {
+                  "skin": "guardian-skin",
+                  "index": 25794,
+                  "rgb": [
+                    0.58,
+                    0.57,
+                    0.45
+                  ]
+                },
+                "aCenter": [
+                  -26.06,
+                  -199.022,
+                  -632.794
+                ],
+                "bCenter": [
+                  -27.646,
+                  -199.648,
+                  -632.909
+                ],
+                "overlap": [
+                  0.081,
+                  1.14,
+                  0.847
+                ]
+              }
+            ],
+            "tune": {
+              "zero": [],
+              "best": [
+                {
+                  "roll": 0,
+                  "shift": 0,
+                  "headUp": 0,
+                  "n": 1,
+                  "pairs": [
+                    "armR/legR"
+                  ]
+                },
+                {
+                  "roll": 0,
+                  "shift": 0,
+                  "headUp": 0.05,
+                  "n": 1,
+                  "pairs": [
+                    "armR/legR"
+                  ]
+                },
+                {
+                  "roll": 0,
+                  "shift": 0,
+                  "headUp": 0.1,
+                  "n": 1,
+                  "pairs": [
+                    "armR/legR"
+                  ]
+                },
+                {
+                  "roll": 0,
+                  "shift": 0.04,
+                  "headUp": 0,
+                  "n": 1,
+                  "pairs": [
+                    "armR/legR"
+                  ]
+                },
+                {
+                  "roll": 0,
+                  "shift": 0.04,
+                  "headUp": 0.05,
+                  "n": 1,
+                  "pairs": [
+                    "armR/legR"
+                  ]
+                },
+                {
+                  "roll": 0,
+                  "shift": 0.04,
+                  "headUp": 0.1,
+                  "n": 1,
+                  "pairs": [
+                    "armR/legR"
+                  ]
+                },
+                {
+                  "roll": 0,
+                  "shift": 0.08,
+                  "headUp": 0,
+                  "n": 1,
+                  "pairs": [
+                    "armR/legR"
+                  ]
+                },
+                {
+                  "roll": 0,
+                  "shift": 0.08,
+                  "headUp": 0.05,
+                  "n": 1,
+                  "pairs": [
+                    "armR/legR"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 5,
+            "collisions": []
+          }
+        ]
+      }
+    },
+    {
+      "kind": "caveguard",
+      "style": "topple",
+      "pose": "side",
+      "phases": {
+        "death": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 5,
+            "collisions": []
+          }
+        ]
+      }
+    },
+    {
+      "kind": "guardian",
+      "style": "topple",
+      "pose": "side",
+      "phases": {
+        "death": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 5,
+            "collisions": []
+          }
+        ]
+      }
+    },
+    {
+      "kind": "caveguard",
+      "style": "topple",
+      "pose": "twist",
+      "phases": {
+        "death": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": [
+              {
+                "pair": "armR/legR",
+                "a": "armR",
+                "b": "legR",
+                "hits": 1,
+                "total": 12,
+                "contact": [
+                  -27.78,
+                  -199.919,
+                  -632.744
+                ],
+                "contactMeta": {
+                  "skin": "guardian-skin",
+                  "index": 34206,
+                  "rgb": [
+                    0.2,
+                    0.22,
+                    0.17
+                  ]
+                },
+                "aCenter": [
+                  -26.833,
+                  -199.154,
+                  -632.72
+                ],
+                "bCenter": [
+                  -28.007,
+                  -199.779,
+                  -632.847
+                ],
+                "overlap": [
+                  0.137,
+                  0.923,
+                  0.645
+                ]
+              }
+            ],
+            "tune": {
+              "zero": [],
+              "best": [
+                {
+                  "roll": 0,
+                  "shift": 0,
+                  "headUp": 0,
+                  "n": 1,
+                  "pairs": [
+                    "armR/legR"
+                  ]
+                },
+                {
+                  "roll": 0,
+                  "shift": 0,
+                  "headUp": 0.05,
+                  "n": 1,
+                  "pairs": [
+                    "armR/legR"
+                  ]
+                },
+                {
+                  "roll": 0,
+                  "shift": 0,
+                  "headUp": 0.1,
+                  "n": 1,
+                  "pairs": [
+                    "armR/legR"
+                  ]
+                },
+                {
+                  "roll": 0,
+                  "shift": 0.04,
+                  "headUp": 0,
+                  "n": 1,
+                  "pairs": [
+                    "armR/legR"
+                  ]
+                },
+                {
+                  "roll": 0,
+                  "shift": 0.04,
+                  "headUp": 0.05,
+                  "n": 1,
+                  "pairs": [
+                    "armR/legR"
+                  ]
+                },
+                {
+                  "roll": 0,
+                  "shift": 0.04,
+                  "headUp": 0.1,
+                  "n": 1,
+                  "pairs": [
+                    "armR/legR"
+                  ]
+                },
+                {
+                  "roll": 0,
+                  "shift": 0.08,
+                  "headUp": 0,
+                  "n": 1,
+                  "pairs": [
+                    "armR/legR"
+                  ]
+                },
+                {
+                  "roll": 0,
+                  "shift": 0.08,
+                  "headUp": 0.05,
+                  "n": 1,
+                  "pairs": [
+                    "armR/legR"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 5,
+            "collisions": []
+          }
+        ]
+      }
+    },
+    {
+      "kind": "guardian",
+      "style": "topple",
+      "pose": "twist",
+      "phases": {
+        "death": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 5,
+            "collisions": []
+          }
+        ]
+      }
+    },
+    {
+      "kind": "caveguard",
+      "style": "topple",
+      "pose": "side",
+      "phases": {
+        "death": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 5,
+            "collisions": []
+          }
+        ]
+      }
+    },
+    {
+      "kind": "guardian",
+      "style": "topple",
+      "pose": "side",
+      "phases": {
+        "death": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 5,
+            "collisions": []
+          }
+        ]
+      }
+    },
+    {
+      "kind": "caveguard",
+      "style": "topple",
+      "pose": "side",
+      "phases": {
+        "death": [
+          {
+            "frame": 6,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 12,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 18,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 24,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 30,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 36,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 42,
+            "parts": 5,
+            "collisions": []
+          },
+          {
+            "frame": 48,
+            "parts": 5,
+            "collisions": []
+          }
+        ]
+      }
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,37 @@
+[
+  {
+    "kind": "screamer",
+    "view": "profile",
+    "attempts": 1,
+    "bytes": 196312,
+    "valid": true
+  },
+  {
+    "kind": "screamer",
+    "view": "gameplay",
+    "attempts": 1,
+    "bytes": 305796,
+    "valid": true
+  },
+  {
+    "kind": "screamer",
+    "view": "gameplay-overcast",
+    "attempts": 1,
+    "bytes": 291959,
+    "valid": true
+  },
+  {
+    "kind": "screamer",
+    "view": "gameplay-dusk",
+    "attempts": 1,
+    "bytes": 279184,
+    "valid": true
+  },
+  {
+    "kind": "screamer",
+    "view": "gameplay-night",
+    "attempts": 1,
+    "bytes": 154693,
+    "valid": true
+  }
+]

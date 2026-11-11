@@ -6,7 +6,7 @@ import { launch } from '../../tools/cdp.mjs';
 
 if (!process.env.DW_GAME_TEST_TOKEN) throw Error('Run through crew.mjs slot run');
 const root = path.resolve(fileURLToPath(new URL('../..', import.meta.url)));
-const out = path.join(root, 'review/GP-20079/visual');
+const out = path.join(root, 'review/GP-20079/visual-final');
 fs.mkdirSync(out, { recursive: true });
 const server = await serve(root, 0);
 const browser = await launch({ headless: false, args: ['--window-size=1100,900'] });
@@ -60,7 +60,8 @@ try {
   // a fixed frame. Capture one demon corpse before/after at identical aim.
   await page.evaluate(`(async () => {
     await DWInspect.show('zombie.demon', { mode: 'live' });
-    DWInspect.zombie.kill(); await DWInspect.stepAsync(36); DWInspect.light('noon');
+    TT.killZombie(DWInspect.zombie.get(), false, {kind:'melee',dir:{x:0,z:0}});
+    await DWInspect.stepAsync(36); DWInspect.light('noon');
   })()`);
   await shotView(page, 'TT.getCorpses().at(-1).mesh');
   await page.evaluate(`(() => {

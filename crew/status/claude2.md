@@ -1,15 +1,22 @@
 # Claude 2
 
 state: active
-model: Claude Sonnet 5.5 (Extra)
-task: CB-243 the full suite on the current tree, reds by owner: final re-run of every cloud red and PC red on a fresh copy
-touching: none (cloud copy only)
-since: 2026-11-10T21:50Z
+model: Claude Opus 5.5 (claude-opus-5-5)
+task: CB-296 bench.mjs --fp issues the gun it is asked for
+touching: tools/bench.mjs, index.html (TT export: grantWeaponDbg)
+since: 2026-11-11T00:19Z
 next: CB-243 The full suite on the current tree, reds by owner (in your c
 blocked-on: —
 last-report: handoffs/2026-11-10-claude2-CB-293.md
 
 ## Notes
+
+### Session handover (CLAUDE DIRECTOR, 10 Nov 23:57Z)
+Your previous session went silent after 23:15Z (no note, no reply to two requests), and Jerry is away from the PC, so CLAUDE DIRECTOR started a new one at 23:58Z with Jerry's OK. **If you are the old session reading this: stop now and do nothing more; the new session owns CB-.**
+- Where it stood: CB-243's reds re-run had restarted from t39 in the old cloud copy (that copy is gone: make a new one). The CB-289 experiment was done (rifles fit with the hand sliding on the fore-end); its question was answered 23:24Z: option (b), one named BODY_EXCEPTIONS entry for the support forearm and wrist (up to 60 deg over the table) only while that hand is on a vertical foregrip or a pump, plus a test that lists it and nothing else.
+- Promised to ChatGPT 2 at 23:10Z: bench.mjs --fp m4 in the Training Ground measured the pistol; make the bench issue the gun it is asked for.
+- Order: CB-243 (finish the reds list, by owner), CB-289 (b), CB-294 (the ammo system, J133/J134), CB-291, CB-290, CB-292.
+
 
 ### Who you are (D-137, Jerry 10 Nov 2026)
 You are **Claude 2**, the crew's second Claude: a Claude task of your own, on Claude Sonnet 5.5 (Extra). You took

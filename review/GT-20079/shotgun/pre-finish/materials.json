@@ -1,0 +1,1622 @@
+{
+  "factory": {
+    "assembled": [
+      {
+        "part": "shotgun receiver",
+        "material": "0646287f-90a7-4e47-9297-c2ee6f1dd6c8",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 5594213,
+        "roughness": 0.43,
+        "metalness": 0.32
+      },
+      {
+        "part": "",
+        "material": "2f9594a9-4baa-4694-8c78-898a559f31fb",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 5069159,
+        "roughness": 0.27,
+        "metalness": 0.62
+      },
+      {
+        "part": "",
+        "material": "d8188d0e-3e15-497c-9626-dde56ff75870",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 5594468,
+        "roughness": 0.46,
+        "metalness": 0.48
+      },
+      {
+        "part": "",
+        "material": "9e2c72b6-6e8b-49f4-ae33-3c4fa9d89168",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "shotgun lifter",
+        "material": "ef24341c-31e2-4358-bd0f-a920ae8d4109",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 7897994,
+        "roughness": 0.38,
+        "metalness": 0.46
+      },
+      {
+        "part": "",
+        "material": "3557e244-7b7c-4176-af2f-6d71721cd8b7",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 6053992,
+        "roughness": 0.68,
+        "metalness": 0.06
+      },
+      {
+        "part": "",
+        "material": "781f4e26-05b1-40d8-9baf-2efecf0b66e6",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "material": "69c6d63c-a787-46de-9de6-50abc37c5fae",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1513498,
+        "roughness": 0.95,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "8ebc1d72-1947-4c3c-8b45-565884d19949",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3290167,
+        "roughness": 0.76,
+        "metalness": 0.03
+      },
+      {
+        "part": "",
+        "material": "0f6a5638-fed7-4bf0-b079-d18c7e05ee9d",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3684667,
+        "roughness": 0.8,
+        "metalness": 0.04
+      },
+      {
+        "part": "shotgun bead",
+        "material": "c110303c-259b-4261-b963-9a5517e70576",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 13015877,
+        "roughness": 0.3,
+        "metalness": 0.65
+      },
+      {
+        "part": "",
+        "material": "4aabaa39-6085-4442-b958-ea18c072c57f",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3817288,
+        "roughness": 0.42,
+        "metalness": 0.85
+      },
+      {
+        "part": "",
+        "material": "9d082608-46a8-424d-a640-28f84fcf53ac",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3752525,
+        "roughness": 0.37,
+        "metalness": 0.57
+      },
+      {
+        "part": "",
+        "material": "8de8ad12-d1ab-444a-ac45-506422c0dcb3",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 4737873,
+        "roughness": 0.66,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "material": "94dd835c-0b75-47f5-aea4-7f9c53025b9b",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 8752787,
+        "roughness": 0.55,
+        "metalness": 0.38
+      },
+      {
+        "part": "",
+        "material": "5e083f5f-8a2f-4e16-8c73-9ba2a6882603",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777113
+      },
+      {
+        "part": "",
+        "material": "c7e252cc-7d19-4ec8-bb83-f323682bd8cd",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16732497
+      },
+      {
+        "part": "",
+        "material": "b014d6a3-ac77-4122-8da3-3d92d84b81db",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 11740702,
+        "roughness": 0.55,
+        "metalness": 0.2
+      },
+      {
+        "part": "",
+        "material": "e315d1dc-ff2c-47b9-81da-ab9834263a6e",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "material": "982551ae-39a1-435e-980d-fa9f4beb65fc",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "material": "41b1b8e4-2cb8-4817-bb3f-b1e1e116e2ef",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "material": "98c1c6cf-2598-458e-8cb0-210b9798e091",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      }
+    ],
+    "firstPerson": [
+      {
+        "part": "shotgun receiver",
+        "material": "af06efa1-716e-4f7e-b72d-20b31c7864fd",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5594213,
+        "roughness": 0.43,
+        "metalness": 0.32
+      },
+      {
+        "part": "",
+        "material": "ce829247-838a-4110-8386-508dc9b8006e",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5069159,
+        "roughness": 0.27,
+        "metalness": 0.62
+      },
+      {
+        "part": "",
+        "material": "ee4e2102-8c17-49cf-a9c0-1bb5ff08836a",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5594468,
+        "roughness": 0.46,
+        "metalness": 0.48
+      },
+      {
+        "part": "",
+        "material": "eaabe0fd-eea5-4c35-b017-69f8cbeba3f2",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685184,
+        "roughness": 0.69,
+        "metalness": 0.08
+      },
+      {
+        "part": "shotgun lifter",
+        "material": "07e2e25a-9322-4fd8-872b-bb78310dcac5",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7897994,
+        "roughness": 0.38,
+        "metalness": 0.46
+      },
+      {
+        "part": "",
+        "material": "332b2841-be3d-4fa6-804a-c13a6dda276f",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 8751504,
+        "roughness": 0.61,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "material": "3e988b76-2d3d-42e9-93c6-baf54ce8d315",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5659490,
+        "roughness": 0.58,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "material": "e3244ac8-d348-4eb7-be6d-2e56820b8d95",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2303271,
+        "roughness": 0.92,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "60f7c974-7ca3-4768-8eaa-6909a9959283",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5264465,
+        "roughness": 0.84,
+        "metalness": 0.02
+      },
+      {
+        "part": "",
+        "material": "dee7b642-26ad-415f-bdc4-d83b2e38ee5b",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3684667,
+        "roughness": 0.8,
+        "metalness": 0.04
+      },
+      {
+        "part": "shotgun bead",
+        "material": "ffbd815c-332d-4b0c-9add-5717b5667d0b",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 13015877,
+        "roughness": 0.3,
+        "metalness": 0.65
+      },
+      {
+        "part": "",
+        "material": "e2e9d296-9546-45ea-bf7f-e6ced88f3cba",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 8094347,
+        "roughness": 0.42,
+        "metalness": 0.85
+      },
+      {
+        "part": "",
+        "material": "45526b77-03f4-4620-879d-75b140ef7712",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3752525,
+        "roughness": 0.37,
+        "metalness": 0.57
+      },
+      {
+        "part": "",
+        "material": "9dcdd791-8ddd-4209-af46-2bd7336facf1",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7172472,
+        "roughness": 0.63,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "material": "b7a41901-bd29-4f8d-ad23-8045d88e65d6",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 8752787,
+        "roughness": 0.55,
+        "metalness": 0.38
+      },
+      {
+        "part": "",
+        "material": "baacffb8-9df4-4f8c-ba70-be166e341c61",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777113
+      },
+      {
+        "part": "",
+        "material": "bbf7abb0-4602-41db-b141-2a07ae5ceedf",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11740702,
+        "roughness": 0.55,
+        "metalness": 0.2
+      },
+      {
+        "part": "",
+        "material": "691c6aa4-e35e-403e-a9ef-fe468c8e5fb1",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "material": "6e4d9b5e-5424-4ac0-9ce2-1c7f331ecab4",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "material": "706bf920-453b-4ce4-bfc8-464796bf2397",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "material": "5c482caf-1199-4ac6-ad85-10659611f6ea",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      }
+    ],
+    "light": [
+      {
+        "part": "",
+        "material": "e315d1dc-ff2c-47b9-81da-ab9834263a6e",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "material": "982551ae-39a1-435e-980d-fa9f4beb65fc",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "suppressor": [
+      {
+        "part": "",
+        "material": "4aabaa39-6085-4442-b958-ea18c072c57f",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3817288,
+        "roughness": 0.42,
+        "metalness": 0.85
+      },
+      {
+        "part": "",
+        "material": "69c6d63c-a787-46de-9de6-50abc37c5fae",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1513498,
+        "roughness": 0.95,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "781f4e26-05b1-40d8-9baf-2efecf0b66e6",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "material": "9e2c72b6-6e8b-49f4-ae33-3c4fa9d89168",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      }
+    ],
+    "optic": [
+      {
+        "part": "optic riser block",
+        "material": "9e2c72b6-6e8b-49f4-ae33-3c4fa9d89168",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "material": "781f4e26-05b1-40d8-9baf-2efecf0b66e6",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "material": "41b1b8e4-2cb8-4817-bb3f-b1e1e116e2ef",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "material": "98c1c6cf-2598-458e-8cb0-210b9798e091",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      },
+      {
+        "part": "",
+        "material": "982551ae-39a1-435e-980d-fa9f4beb65fc",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ]
+  },
+  "camo": {
+    "assembled": [
+      {
+        "part": "shotgun receiver",
+        "material": "0646287f-90a7-4e47-9297-c2ee6f1dd6c8",
+        "role": null,
+        "registered": true,
+        "map": "85f10285-668f-4f3f-b736-0731e1ef1882",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "2f9594a9-4baa-4694-8c78-898a559f31fb",
+        "role": null,
+        "registered": true,
+        "map": "85f10285-668f-4f3f-b736-0731e1ef1882",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "d8188d0e-3e15-497c-9626-dde56ff75870",
+        "role": null,
+        "registered": true,
+        "map": "85f10285-668f-4f3f-b736-0731e1ef1882",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "9e2c72b6-6e8b-49f4-ae33-3c4fa9d89168",
+        "role": null,
+        "registered": true,
+        "map": "85f10285-668f-4f3f-b736-0731e1ef1882",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "shotgun lifter",
+        "material": "ef24341c-31e2-4358-bd0f-a920ae8d4109",
+        "role": null,
+        "registered": true,
+        "map": "85f10285-668f-4f3f-b736-0731e1ef1882",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "3557e244-7b7c-4176-af2f-6d71721cd8b7",
+        "role": null,
+        "registered": true,
+        "map": "85f10285-668f-4f3f-b736-0731e1ef1882",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "781f4e26-05b1-40d8-9baf-2efecf0b66e6",
+        "role": null,
+        "registered": true,
+        "map": "85f10285-668f-4f3f-b736-0731e1ef1882",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "69c6d63c-a787-46de-9de6-50abc37c5fae",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1513498,
+        "roughness": 0.95,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "8ebc1d72-1947-4c3c-8b45-565884d19949",
+        "role": null,
+        "registered": true,
+        "map": "85f10285-668f-4f3f-b736-0731e1ef1882",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "0f6a5638-fed7-4bf0-b079-d18c7e05ee9d",
+        "role": null,
+        "registered": true,
+        "map": "85f10285-668f-4f3f-b736-0731e1ef1882",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "shotgun bead",
+        "material": "c110303c-259b-4261-b963-9a5517e70576",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 13015877,
+        "roughness": 0.3,
+        "metalness": 0.65
+      },
+      {
+        "part": "",
+        "material": "4aabaa39-6085-4442-b958-ea18c072c57f",
+        "role": null,
+        "registered": true,
+        "map": "85f10285-668f-4f3f-b736-0731e1ef1882",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "9d082608-46a8-424d-a640-28f84fcf53ac",
+        "role": null,
+        "registered": true,
+        "map": "85f10285-668f-4f3f-b736-0731e1ef1882",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "8de8ad12-d1ab-444a-ac45-506422c0dcb3",
+        "role": null,
+        "registered": true,
+        "map": "85f10285-668f-4f3f-b736-0731e1ef1882",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "94dd835c-0b75-47f5-aea4-7f9c53025b9b",
+        "role": null,
+        "registered": true,
+        "map": "85f10285-668f-4f3f-b736-0731e1ef1882",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "5e083f5f-8a2f-4e16-8c73-9ba2a6882603",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777113
+      },
+      {
+        "part": "",
+        "material": "c7e252cc-7d19-4ec8-bb83-f323682bd8cd",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16732497
+      },
+      {
+        "part": "",
+        "material": "b014d6a3-ac77-4122-8da3-3d92d84b81db",
+        "role": null,
+        "registered": true,
+        "map": "85f10285-668f-4f3f-b736-0731e1ef1882",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "e315d1dc-ff2c-47b9-81da-ab9834263a6e",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "material": "982551ae-39a1-435e-980d-fa9f4beb65fc",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "material": "41b1b8e4-2cb8-4817-bb3f-b1e1e116e2ef",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "material": "98c1c6cf-2598-458e-8cb0-210b9798e091",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      }
+    ],
+    "firstPerson": [
+      {
+        "part": "shotgun receiver",
+        "material": "f23a17db-50aa-468a-928b-85be16ee19e5",
+        "role": null,
+        "registered": false,
+        "map": "85f10285-668f-4f3f-b736-0731e1ef1882",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "44a064b9-07e9-49a2-9674-3d7666d0fc6b",
+        "role": null,
+        "registered": false,
+        "map": "85f10285-668f-4f3f-b736-0731e1ef1882",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "d4860ca1-2f2a-4b86-91e3-6a47555d3ae7",
+        "role": null,
+        "registered": false,
+        "map": "85f10285-668f-4f3f-b736-0731e1ef1882",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "7e8e3e53-216b-4af1-a586-5166825bc94e",
+        "role": null,
+        "registered": false,
+        "map": "85f10285-668f-4f3f-b736-0731e1ef1882",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "shotgun lifter",
+        "material": "3ae5122d-fcfa-4658-8525-48847093f27f",
+        "role": null,
+        "registered": false,
+        "map": "85f10285-668f-4f3f-b736-0731e1ef1882",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "4016f006-1ebe-49d5-8a5e-508bc201f87f",
+        "role": null,
+        "registered": false,
+        "map": "85f10285-668f-4f3f-b736-0731e1ef1882",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "625332b0-705b-42f8-80cd-b95aa213b34a",
+        "role": null,
+        "registered": false,
+        "map": "85f10285-668f-4f3f-b736-0731e1ef1882",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "e3244ac8-d348-4eb7-be6d-2e56820b8d95",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2303271,
+        "roughness": 0.92,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "019a4032-0eff-4a38-9182-ea1f5508fb44",
+        "role": null,
+        "registered": false,
+        "map": "85f10285-668f-4f3f-b736-0731e1ef1882",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "c327d4e3-c047-45b6-b83a-8d2518197754",
+        "role": null,
+        "registered": false,
+        "map": "85f10285-668f-4f3f-b736-0731e1ef1882",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "shotgun bead",
+        "material": "ffbd815c-332d-4b0c-9add-5717b5667d0b",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 13015877,
+        "roughness": 0.3,
+        "metalness": 0.65
+      },
+      {
+        "part": "",
+        "material": "9f2800f9-0514-424a-9919-36f704b05352",
+        "role": null,
+        "registered": false,
+        "map": "85f10285-668f-4f3f-b736-0731e1ef1882",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "d3a8a1a1-2419-4489-afe6-1e1e72c501a0",
+        "role": null,
+        "registered": false,
+        "map": "85f10285-668f-4f3f-b736-0731e1ef1882",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "41f8cee4-3764-4394-ad29-0ce32548f84d",
+        "role": null,
+        "registered": false,
+        "map": "85f10285-668f-4f3f-b736-0731e1ef1882",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "395ad067-f37f-4385-89d1-4a21db72d689",
+        "role": null,
+        "registered": false,
+        "map": "85f10285-668f-4f3f-b736-0731e1ef1882",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "baacffb8-9df4-4f8c-ba70-be166e341c61",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777113
+      },
+      {
+        "part": "",
+        "material": "db5332f8-3584-4736-8a45-c2e5f9f8c613",
+        "role": null,
+        "registered": false,
+        "map": "85f10285-668f-4f3f-b736-0731e1ef1882",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "691c6aa4-e35e-403e-a9ef-fe468c8e5fb1",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "material": "6e4d9b5e-5424-4ac0-9ce2-1c7f331ecab4",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "material": "706bf920-453b-4ce4-bfc8-464796bf2397",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "material": "5c482caf-1199-4ac6-ad85-10659611f6ea",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      }
+    ],
+    "light": [
+      {
+        "part": "",
+        "material": "e315d1dc-ff2c-47b9-81da-ab9834263a6e",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "material": "982551ae-39a1-435e-980d-fa9f4beb65fc",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "suppressor": [
+      {
+        "part": "",
+        "material": "4aabaa39-6085-4442-b958-ea18c072c57f",
+        "role": null,
+        "registered": true,
+        "map": "85f10285-668f-4f3f-b736-0731e1ef1882",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "69c6d63c-a787-46de-9de6-50abc37c5fae",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1513498,
+        "roughness": 0.95,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "781f4e26-05b1-40d8-9baf-2efecf0b66e6",
+        "role": null,
+        "registered": true,
+        "map": "85f10285-668f-4f3f-b736-0731e1ef1882",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "9e2c72b6-6e8b-49f4-ae33-3c4fa9d89168",
+        "role": null,
+        "registered": true,
+        "map": "85f10285-668f-4f3f-b736-0731e1ef1882",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      }
+    ],
+    "optic": [
+      {
+        "part": "optic riser block",
+        "material": "9e2c72b6-6e8b-49f4-ae33-3c4fa9d89168",
+        "role": null,
+        "registered": true,
+        "map": "85f10285-668f-4f3f-b736-0731e1ef1882",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "material": "781f4e26-05b1-40d8-9baf-2efecf0b66e6",
+        "role": null,
+        "registered": true,
+        "map": "85f10285-668f-4f3f-b736-0731e1ef1882",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "material": "41b1b8e4-2cb8-4817-bb3f-b1e1e116e2ef",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "material": "98c1c6cf-2598-458e-8cb0-210b9798e091",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      },
+      {
+        "part": "",
+        "material": "982551ae-39a1-435e-980d-fa9f4beb65fc",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ]
+  },
+  "restored": {
+    "assembled": [
+      {
+        "part": "shotgun receiver",
+        "material": "0646287f-90a7-4e47-9297-c2ee6f1dd6c8",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 5594213,
+        "roughness": 0.43,
+        "metalness": 0.32
+      },
+      {
+        "part": "",
+        "material": "2f9594a9-4baa-4694-8c78-898a559f31fb",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 5069159,
+        "roughness": 0.27,
+        "metalness": 0.62
+      },
+      {
+        "part": "",
+        "material": "d8188d0e-3e15-497c-9626-dde56ff75870",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 5594468,
+        "roughness": 0.46,
+        "metalness": 0.48
+      },
+      {
+        "part": "",
+        "material": "9e2c72b6-6e8b-49f4-ae33-3c4fa9d89168",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "shotgun lifter",
+        "material": "ef24341c-31e2-4358-bd0f-a920ae8d4109",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 7897994,
+        "roughness": 0.38,
+        "metalness": 0.46
+      },
+      {
+        "part": "",
+        "material": "3557e244-7b7c-4176-af2f-6d71721cd8b7",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 6053992,
+        "roughness": 0.68,
+        "metalness": 0.06
+      },
+      {
+        "part": "",
+        "material": "781f4e26-05b1-40d8-9baf-2efecf0b66e6",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "material": "69c6d63c-a787-46de-9de6-50abc37c5fae",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1513498,
+        "roughness": 0.95,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "8ebc1d72-1947-4c3c-8b45-565884d19949",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3290167,
+        "roughness": 0.76,
+        "metalness": 0.03
+      },
+      {
+        "part": "",
+        "material": "0f6a5638-fed7-4bf0-b079-d18c7e05ee9d",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3684667,
+        "roughness": 0.8,
+        "metalness": 0.04
+      },
+      {
+        "part": "shotgun bead",
+        "material": "c110303c-259b-4261-b963-9a5517e70576",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 13015877,
+        "roughness": 0.3,
+        "metalness": 0.65
+      },
+      {
+        "part": "",
+        "material": "4aabaa39-6085-4442-b958-ea18c072c57f",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3817288,
+        "roughness": 0.42,
+        "metalness": 0.85
+      },
+      {
+        "part": "",
+        "material": "9d082608-46a8-424d-a640-28f84fcf53ac",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3752525,
+        "roughness": 0.37,
+        "metalness": 0.57
+      },
+      {
+        "part": "",
+        "material": "8de8ad12-d1ab-444a-ac45-506422c0dcb3",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 4737873,
+        "roughness": 0.66,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "material": "94dd835c-0b75-47f5-aea4-7f9c53025b9b",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 8752787,
+        "roughness": 0.55,
+        "metalness": 0.38
+      },
+      {
+        "part": "",
+        "material": "5e083f5f-8a2f-4e16-8c73-9ba2a6882603",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777113
+      },
+      {
+        "part": "",
+        "material": "c7e252cc-7d19-4ec8-bb83-f323682bd8cd",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16732497
+      },
+      {
+        "part": "",
+        "material": "b014d6a3-ac77-4122-8da3-3d92d84b81db",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 11740702,
+        "roughness": 0.55,
+        "metalness": 0.2
+      },
+      {
+        "part": "",
+        "material": "e315d1dc-ff2c-47b9-81da-ab9834263a6e",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "material": "982551ae-39a1-435e-980d-fa9f4beb65fc",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "material": "41b1b8e4-2cb8-4817-bb3f-b1e1e116e2ef",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "material": "98c1c6cf-2598-458e-8cb0-210b9798e091",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      }
+    ],
+    "firstPerson": [
+      {
+        "part": "shotgun receiver",
+        "material": "daff4207-9acb-41ab-9c96-d1ecf751d32e",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5594213,
+        "roughness": 0.43,
+        "metalness": 0.32
+      },
+      {
+        "part": "",
+        "material": "cbf10ee4-c789-456b-980a-ffa4ed63f548",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5069159,
+        "roughness": 0.27,
+        "metalness": 0.62
+      },
+      {
+        "part": "",
+        "material": "284196ee-894d-4d53-8807-9144ad2ae816",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5594468,
+        "roughness": 0.46,
+        "metalness": 0.48
+      },
+      {
+        "part": "",
+        "material": "0a08e858-b651-4e57-9f2c-635f424e8f0e",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685184,
+        "roughness": 0.69,
+        "metalness": 0.08
+      },
+      {
+        "part": "shotgun lifter",
+        "material": "60668135-9751-4b34-a561-118ff46ea665",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7897994,
+        "roughness": 0.38,
+        "metalness": 0.46
+      },
+      {
+        "part": "",
+        "material": "4c588079-310a-4214-a392-656e319685bf",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 8751504,
+        "roughness": 0.61,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "material": "a4c40d1c-5a92-48d9-928f-47a3b7d88874",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5659490,
+        "roughness": 0.58,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "material": "e3244ac8-d348-4eb7-be6d-2e56820b8d95",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2303271,
+        "roughness": 0.92,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "a1b2a43a-c5ff-4527-855f-87d6d99588ca",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5264465,
+        "roughness": 0.84,
+        "metalness": 0.02
+      },
+      {
+        "part": "",
+        "material": "6ecae5ec-23a4-4a7f-8caf-32cae6d106f9",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3684667,
+        "roughness": 0.8,
+        "metalness": 0.04
+      },
+      {
+        "part": "shotgun bead",
+        "material": "ffbd815c-332d-4b0c-9add-5717b5667d0b",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 13015877,
+        "roughness": 0.3,
+        "metalness": 0.65
+      },
+      {
+        "part": "",
+        "material": "9aa144ab-1e41-46ec-b3c7-a7165ff0adab",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 8094347,
+        "roughness": 0.42,
+        "metalness": 0.85
+      },
+      {
+        "part": "",
+        "material": "0e02ec88-ea35-4c31-b768-6f4d844a5d3f",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3752525,
+        "roughness": 0.37,
+        "metalness": 0.57
+      },
+      {
+        "part": "",
+        "material": "b3d21a6b-4ac9-49c9-898d-19092add1870",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7172472,
+        "roughness": 0.63,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "material": "4983c8de-021a-49d8-8ff5-e6b8212742e2",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 8752787,
+        "roughness": 0.55,
+        "metalness": 0.38
+      },
+      {
+        "part": "",
+        "material": "baacffb8-9df4-4f8c-ba70-be166e341c61",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777113
+      },
+      {
+        "part": "",
+        "material": "deac1e90-0517-466a-a420-6ee258a34fb9",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11740702,
+        "roughness": 0.55,
+        "metalness": 0.2
+      },
+      {
+        "part": "",
+        "material": "691c6aa4-e35e-403e-a9ef-fe468c8e5fb1",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "material": "6e4d9b5e-5424-4ac0-9ce2-1c7f331ecab4",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "material": "706bf920-453b-4ce4-bfc8-464796bf2397",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "material": "5c482caf-1199-4ac6-ad85-10659611f6ea",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      }
+    ],
+    "light": [
+      {
+        "part": "",
+        "material": "e315d1dc-ff2c-47b9-81da-ab9834263a6e",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "material": "982551ae-39a1-435e-980d-fa9f4beb65fc",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "suppressor": [
+      {
+        "part": "",
+        "material": "4aabaa39-6085-4442-b958-ea18c072c57f",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3817288,
+        "roughness": 0.42,
+        "metalness": 0.85
+      },
+      {
+        "part": "",
+        "material": "69c6d63c-a787-46de-9de6-50abc37c5fae",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1513498,
+        "roughness": 0.95,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "material": "781f4e26-05b1-40d8-9baf-2efecf0b66e6",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "material": "9e2c72b6-6e8b-49f4-ae33-3c4fa9d89168",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      }
+    ],
+    "optic": [
+      {
+        "part": "optic riser block",
+        "material": "9e2c72b6-6e8b-49f4-ae33-3c4fa9d89168",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "material": "781f4e26-05b1-40d8-9baf-2efecf0b66e6",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "material": "41b1b8e4-2cb8-4817-bb3f-b1e1e116e2ef",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "material": "98c1c6cf-2598-458e-8cb0-210b9798e091",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      },
+      {
+        "part": "",
+        "material": "982551ae-39a1-435e-980d-fa9f4beb65fc",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ]
+  }
+}

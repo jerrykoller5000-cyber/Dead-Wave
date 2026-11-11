@@ -1,0 +1,38 @@
+{
+  "geometry": {
+    "missing": true,
+    "sample": [
+      {
+        "name": "",
+        "x": 0,
+        "y": 0.83,
+        "z": 0.336,
+        "geometry": "PlaneGeometry",
+        "parameters": {
+          "width": 1.62,
+          "height": 0.2,
+          "widthSegments": 1,
+          "heightSegments": 1
+        }
+      },
+      {
+        "name": "",
+        "x": 0,
+        "y": 0,
+        "z": 0,
+        "geometry": "BufferGeometry"
+      }
+    ],
+    "camera": {
+      "x": 5.380000000000001,
+      "y": -198.38,
+      "z": -650.2,
+      "tx": 7.66,
+      "ty": -199.05,
+      "tz": -650.2,
+      "fov": 43
+    }
+  },
+  "bytes": 153151,
+  "errors": []
+}

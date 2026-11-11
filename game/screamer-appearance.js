@@ -1,6 +1,6 @@
 // GP-19872: prepare the real concept surfaces before the rigid skin merge.
 import {screamerProtected} from './screamer-behavior.js';
-const dark=0x000000,tongueHex=[0xae6671,0xd89299];
+const dark=0x626961,tongueHex=[0xae6671,0xd89299];
 const VAPOR_PUFFS=36; // same instanced draw: half cling to the body, half trail behind
 export function prepareScreamerAppearance(T,g,s=1){
  const u=g.userData;if(u.typeKey!=='screamer'||u.screamerJaw)return;
@@ -21,8 +21,8 @@ export function prepareScreamerAppearance(T,g,s=1){
   if(C){for(let i=0;i<C.count;i++){
    if(mask[i])C.setXYZ(i,bruise.r,bruise.g,bruise.b);
    else if(face&&matches(i,toothColors))C.setXYZ(i,bone.r,bone.g,bone.b);
-   else if(face){const value=(C.getX(i)+C.getY(i)+C.getZ(i))/3*.045;C.setXYZ(i,value*.85,value,value*.93);}
-   else C.setXYZ(i,0,0,0);
+   else if(face){const value=(C.getX(i)+C.getY(i)+C.getZ(i))/3*.55;C.setXYZ(i,value*.85,value,value*.93);}
+   else C.setXYZ(i,C.getX(i)*.46,C.getY(i)*.48,C.getZ(i)*.5);
   }mat.color.setHex(0xffffff);mat.vertexColors=true;}
   else mat.color.setHex(mask[0]?0x8e6f77:dark);
   m.material=mat;
@@ -88,7 +88,7 @@ export function attachScreamerAppearance(T,N,g,s=1){
    p.copy(puff.origin);p.y+=age*.70*s;p.x+=Math.sin(age*3+puff.angle)*age*.2*s;p.z+=Math.cos(age*3+puff.angle)*age*.2*s;p.applyMatrix4(inv);
    const size=(.58+age*.85)*s;scale.set(size,size,1);M.compose(p,q,scale);smoke.setMatrixAt(i,M);
    const face=Math.max(0,1-Math.abs(p.y/s-1.72)/.25); // eyes still peek through the shroud
-   fades[i]=Math.sin(age*Math.PI)*.88*(1-.4*face);
+   fades[i]=Math.sin(age*Math.PI)*(i%2===0?.38:.72)*(1-.4*face);
   }
   smoke.instanceMatrix.needsUpdate=true;geo.attributes.mistOpacity.needsUpdate=true;
  }};g.userData.screamerFx=fx;

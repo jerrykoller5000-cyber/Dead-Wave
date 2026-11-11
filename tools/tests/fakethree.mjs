@@ -2,6 +2,8 @@
 // Math + scene graph are real enough; everything else is a permissive stub.
 // GP-19919: three/webgpu exposes this namespace; training containment reads THREE.TSL.
 export * as TSL from './faketsl.mjs';
+// CB-243: the real ShapeUtils (earcut), for the models that triangulate a face (studio/weapon-longarms.js pocket(), 11 Nov).
+export { ShapeUtils } from '../../vendor/three/three.core.js';
 const STUB_CACHE = Symbol('stubcache');
 function makeStub(name = 'stub') {
   const fn = function () {};
@@ -53,6 +55,7 @@ export class Vector2 {
   lerp(v, a) { this.x += (v.x - this.x) * a; this.y += (v.y - this.y) * a; return this; }
   setScalar(s) { this.x = this.y = s; return this; }
   fromBufferAttribute(at, i) { this.x = at.getX(i); this.y = at.getY(i); return this; }
+  equals(v) { return v.x === this.x && v.y === this.y; }   // CB-243: ShapeUtils drops a closing point equal to the first
 }
 export class Vector3 {
   constructor(x = 0, y = 0, z = 0) { this.x = x; this.y = y; this.z = z; this.isVector3 = true;  return permissive(this); }

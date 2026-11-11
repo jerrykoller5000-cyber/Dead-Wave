@@ -1,0 +1,32 @@
+{
+  "factory": {
+    "folds": [
+      11748,
+      15696
+    ],
+    "faults": [
+      "Missing vertex colours",
+      "Missing surface roughness/metalness"
+    ]
+  },
+  "camo": {
+    "folds": [
+      11748,
+      2844
+    ],
+    "faults": [
+      "Missing vertex colours",
+      "Missing surface roughness/metalness"
+    ]
+  },
+  "restored": {
+    "folds": [
+      11748,
+      15696
+    ],
+    "faults": [
+      "Missing vertex colours",
+      "Missing surface roughness/metalness"
+    ]
+  }
+}

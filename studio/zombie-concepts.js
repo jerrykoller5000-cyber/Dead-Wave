@@ -227,7 +227,7 @@ export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox,audit=null}
   }
   if(k==='colossus'){
     // Give the shoulder shield and hanging hand room for the skull and thigh.
-    const u=g.userData,shoulder=.2*s/2.3,hip=.08*s/2.3;
+    const u=g.userData,shoulder=.26*s/2.3,hip=.08*s/2.3;
     u.armLG.position.x-=shoulder;
     u.armRG.position.x+=shoulder;
     for(const arm of [u.armLG,u.armRG])arm.scale.set(.8,.9,1);

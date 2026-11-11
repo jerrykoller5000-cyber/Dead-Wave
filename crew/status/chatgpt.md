@@ -2,12 +2,12 @@
 
 state: active
 model: GPT-6.1 Sol
-task: GP-20079 J128 zombie motion intersection audit and fixes
-touching: studio/zombie-concepts.js, studio/zombie-guardian-detail.js, combat/demon-visual.js, combat/zombie-joins.js, combat/zombie-fidelity.js, game/spider-motion.js, studio/zombie-seating.test.mjs, index.html (zombie animation), world/cave-guardian.js (guardianGallop, guardianRearGrab, guardianStand)
-since: 2026-11-10T22:40Z
-next: GP-20079 J128 (standing, D-140): the zombies in motion, nothing throu
+task: GP-20083 Build the Armory and HUD presentation for typed shotgun rounds alongside CB-294
+touching: ui/armory.js, ui/armory.css, ui/strings.js, index.html (Armory ammo purchase handlers), index.html (HUD ammo line), review/GP-20083
+since: 2026-11-11T00:15Z
+next: GP-20083 J133 (Jerry, 10 Nov; D-149): the Armory and HUD for ammo typ
 blocked-on: —
-last-report: handoffs/2026-11-10-chatgpt-GP-20078.md
+last-report: handoffs/2026-11-10-chatgpt-GP-20082.md
 
 ## Notes
 

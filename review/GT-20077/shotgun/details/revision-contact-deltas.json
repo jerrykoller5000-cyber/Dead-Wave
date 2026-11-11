@@ -1,0 +1,55 @@
+{
+  "pump and fore-end": {
+    "mm": 0,
+    "delta": [
+      0,
+      0,
+      0
+    ],
+    "identical": true
+  },
+  "grip": {
+    "mm": 0,
+    "delta": [
+      0,
+      0,
+      0
+    ],
+    "identical": true
+  },
+  "stock body": {
+    "mm": 4.835847216236099,
+    "delta": [
+      0.7126710079056378,
+      -4.7631206968127255,
+      0.43611874628757263
+    ]
+  },
+  "light module": {
+    "mm": 0,
+    "delta": [
+      0,
+      0,
+      0
+    ],
+    "identical": true
+  },
+  "slide artwork": {
+    "mm": 0,
+    "delta": [
+      0,
+      0,
+      0
+    ],
+    "identical": true
+  },
+  "rear sight": {
+    "mm": 0,
+    "delta": [
+      0,
+      0,
+      0
+    ],
+    "identical": true
+  }
+}

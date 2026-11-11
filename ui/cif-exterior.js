@@ -23,8 +23,12 @@ export function dressCifExterior(THREE, root, text, lampMaterial) {
   box(1.76,.18,.40,steel,0,2.56,.25);
   box(1.92,.12,.67,steel,0,1.04,.37);
   box(1.79,.026,.58,edge,0,1.115,.38);
-  box(1.66,.30,.26,steel,0,.83,.20);
-  for(const x of [-.63,.63])box(.07,.28,.34,dark,x,.89,.30);
+  box(1.66,.34,.26,steel,0,.81,.20);
+  // Corbels meet the rail and jamb outside the return plaque's full width.
+  for(const x of [-.86,.86]){
+    const corbel=box(.07,.23,.18,dark,x,.865,.54);
+    corbel.name='cif-counter-corbel';
+  }
   // Rain hood and a warm strip, using emission rather than another world light.
   box(2.02,.10,.73,dark,0,3.14,.34);
   box(2.02,.085,.045,edge,0,3.075,.69);
@@ -154,7 +158,7 @@ export function dressCifExterior(THREE, root, text, lampMaterial) {
     for(let i=0;i<50;i++){c.fillStyle='#101a1740';c.fillRect((i*137)%1024,(i*71)%256,6+i%17,2);}
   },.45);
   sign.name='cif-exterior-sign';
-  plate(1.62,.20,0,.83,.336,c=>{
+  plate(1.62,.20,0,.75,.336,c=>{
     c.fillStyle='#26332b';c.fillRect(0,0,1024,256);
     c.fillStyle='#bfb287';
     for(let i=-1;i<15;i++){c.beginPath();c.moveTo(i*85,210);c.lineTo(i*85+35,210);c.lineTo(i*85+70,256);c.lineTo(i*85+35,256);c.fill();}
