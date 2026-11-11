@@ -1,0 +1,2784 @@
+{
+  "factory": {
+    "assembled": [
+      {
+        "part": "",
+        "materialName": "",
+        "material": "56038b76-950d-4c3d-99f5-6cdd48d7a944",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 4213077,
+        "roughness": 0.32,
+        "metalness": 0.68
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "e826f083-b285-437c-b7cc-80871a4f578c",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 6445133,
+        "roughness": 0.4,
+        "metalness": 0.68
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "9060a44a-c88b-424c-874a-2a4a7e1305a3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 13223613,
+        "roughness": 0.22,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "f689c3a5-c9e0-458d-b1f7-d70db12149e7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "b4304ef2-e757-451b-aa19-e7e2c0f2af93",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 13015877,
+        "roughness": 0.3,
+        "metalness": 0.65
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "ec37e4d5-3a75-4521-873d-fd3174b19813",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "cc4cd72f-e375-4cd4-94bc-3c417ff9a1b7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777113
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "7a5f8c4d-2409-4635-8e43-734081f0a3c2",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16732497
+      },
+      {
+        "part": "railClamp",
+        "materialName": "gunPaint:revolver",
+        "material": "ae73f3a0-3eae-403b-a345-9d81fe4516f2",
+        "role": "light shell",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "moduleShell",
+        "materialName": "gunPaint:revolver",
+        "material": "22f6a83c-8e54-4151-a5b8-b3434d1e446d",
+        "role": "light shell",
+        "registered": true,
+        "map": null,
+        "color": 3290167,
+        "roughness": 0.76,
+        "metalness": 0.03
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:revolver",
+        "material": "0db418f7-381d-4c59-bf6c-56d31b050b21",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 4213077,
+        "roughness": 0.32,
+        "metalness": 0.68
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "42d60739-97fb-4865-9e6d-1e70ea989d86",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:revolver",
+        "material": "c6dec5a9-f08e-4c6a-89f8-d8eef6075430",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:revolver",
+        "material": "a27cf89a-be6a-4ac3-a635-dc918854e59c",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:revolver",
+        "material": "01f5617a-7b7f-41e8-89b2-18c17a1e20f2",
+        "role": "frame",
+        "registered": true,
+        "map": null,
+        "color": 4213077,
+        "roughness": 0.32,
+        "metalness": 0.68
+      },
+      {
+        "part": "",
+        "materialName": "Revolver walnut",
+        "material": "07b53854-ee70-411f-8cd8-80a0ecb4e79b",
+        "role": null,
+        "registered": false,
+        "map": "32f94efb-1640-4691-8a9f-5fb0878f8c03",
+        "color": 7751983,
+        "roughness": 0.48,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "Revolver walnut inset",
+        "material": "f722c4cc-9203-4c42-82f8-90ae0b42c45d",
+        "role": null,
+        "registered": false,
+        "map": "32f94efb-1640-4691-8a9f-5fb0878f8c03",
+        "color": 5716258,
+        "roughness": 0.65,
+        "metalness": 0
+      },
+      {
+        "part": "chamfered alloy clamp foot",
+        "materialName": "gunPaint:revolver",
+        "material": "5c5a08a9-0dc7-4354-88fe-766cc8a3fd3d",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 3027508,
+        "roughness": 0.5,
+        "metalness": 0.55
+      },
+      {
+        "part": "painted riser",
+        "materialName": "gunPaint:revolver",
+        "material": "963e812a-ede3-4217-ac79-77e650a95c79",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 2369578,
+        "roughness": 0.74,
+        "metalness": 0.05
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "materialName": "",
+        "material": "66a56516-939c-4f14-b8dd-c2ca61f8dfec",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "materialName": "",
+        "material": "fdfe7be7-f98a-4e27-be8a-e6bfc27d4919",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      }
+    ],
+    "firstPerson": [
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "78091eb8-a02e-4e9a-bbd1-2e9b270c7344",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 4213077,
+        "roughness": 0.32,
+        "metalness": 0.68
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "aa720b89-df5f-49db-8ab4-47dab55f7bff",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 6445133,
+        "roughness": 0.4,
+        "metalness": 0.68
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "d81b6326-e21d-4314-b94e-921561dd7ff3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 13223613,
+        "roughness": 0.22,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "vm:fold-static",
+        "material": "5290fbcf-065a-4132-abdc-10cf4fe8f9d0",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "fbb871c3-22e3-4fda-82b6-4134936136ed",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 13015877,
+        "roughness": 0.3,
+        "metalness": 0.65
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "7223f867-211b-48ac-811b-8b024fb04aa9",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685184,
+        "roughness": 0.69,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshBasicMaterial",
+        "material": "5d89f23c-ff3c-493a-b3ef-43debb2022d1",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777113
+      },
+      {
+        "part": "railClamp",
+        "materialName": "vm:gunPaint:revolver",
+        "material": "b767c706-667f-43fb-a7fd-89d9ae1769f7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685184,
+        "roughness": 0.69,
+        "metalness": 0.08
+      },
+      {
+        "part": "moduleShell",
+        "materialName": "vm:gunPaint:revolver",
+        "material": "190ea289-9f63-46e5-84ff-2b9e8cf48819",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5264465,
+        "roughness": 0.84,
+        "metalness": 0.02
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:revolver",
+        "material": "d2d83fc2-bcdc-4c73-a3ca-8b4a0be69055",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 4213077,
+        "roughness": 0.32,
+        "metalness": 0.68
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "3606a9b7-4f7f-4786-963b-3d76511825f4",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:revolver",
+        "material": "9a192256-8bcc-4f72-b89a-7993bb04c8d2",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685184,
+        "roughness": 0.69,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:revolver",
+        "material": "525b3b69-b318-403a-940c-b8db65d33bd0",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5659490,
+        "roughness": 0.58,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:revolver",
+        "material": "f7392a9a-5889-432c-90c6-5373b356dbd5",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 4213077,
+        "roughness": 0.32,
+        "metalness": 0.68
+      },
+      {
+        "part": "",
+        "materialName": "vm:Revolver walnut",
+        "material": "66079423-1902-4620-a413-4332049367f1",
+        "role": null,
+        "registered": false,
+        "map": "32f94efb-1640-4691-8a9f-5fb0878f8c03",
+        "color": 7751983,
+        "roughness": 0.48,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "vm:Revolver walnut inset",
+        "material": "53ff7e67-b135-4b0b-8458-27c5897c0762",
+        "role": null,
+        "registered": false,
+        "map": "32f94efb-1640-4691-8a9f-5fb0878f8c03",
+        "color": 5716258,
+        "roughness": 0.65,
+        "metalness": 0
+      },
+      {
+        "part": "chamfered alloy clamp foot",
+        "materialName": "vm:gunPaint:revolver",
+        "material": "c3905898-5c47-4049-ad85-90dae9372c32",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3027508,
+        "roughness": 0.5,
+        "metalness": 0.55
+      },
+      {
+        "part": "painted riser",
+        "materialName": "vm:gunPaint:revolver",
+        "material": "d4aaf934-5c09-40b1-a578-d9e0b4b767ae",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2369578,
+        "roughness": 0.74,
+        "metalness": 0.05
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "materialName": "vm:MeshPhysicalMaterial",
+        "material": "7c21c953-faf6-4449-83d6-fb1e91e75823",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "materialName": "vm:MeshBasicMaterial",
+        "material": "f5f4b4c1-e629-4e27-943d-96556adc4448",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      }
+    ],
+    "magazine": [
+      {
+        "part": "",
+        "materialName": "",
+        "material": "9060a44a-c88b-424c-874a-2a4a7e1305a3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 13223613,
+        "roughness": 0.22,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "f689c3a5-c9e0-458d-b1f7-d70db12149e7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "light": [
+      {
+        "part": "railClamp",
+        "materialName": "gunPaint:revolver",
+        "material": "ae73f3a0-3eae-403b-a345-9d81fe4516f2",
+        "role": "light shell",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "moduleShell",
+        "materialName": "gunPaint:revolver",
+        "material": "22f6a83c-8e54-4151-a5b8-b3434d1e446d",
+        "role": "light shell",
+        "registered": true,
+        "map": null,
+        "color": 3290167,
+        "roughness": 0.76,
+        "metalness": 0.03
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:revolver",
+        "material": "0db418f7-381d-4c59-bf6c-56d31b050b21",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 4213077,
+        "roughness": 0.32,
+        "metalness": 0.68
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "42d60739-97fb-4865-9e6d-1e70ea989d86",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:revolver",
+        "material": "c6dec5a9-f08e-4c6a-89f8-d8eef6075430",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:revolver",
+        "material": "a27cf89a-be6a-4ac3-a635-dc918854e59c",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "f689c3a5-c9e0-458d-b1f7-d70db12149e7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "optic": [
+      {
+        "part": "chamfered alloy clamp foot",
+        "materialName": "gunPaint:revolver",
+        "material": "5c5a08a9-0dc7-4354-88fe-766cc8a3fd3d",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 3027508,
+        "roughness": 0.5,
+        "metalness": 0.55
+      },
+      {
+        "part": "painted riser",
+        "materialName": "gunPaint:revolver",
+        "material": "963e812a-ede3-4217-ac79-77e650a95c79",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 2369578,
+        "roughness": 0.74,
+        "metalness": 0.05
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "materialName": "",
+        "material": "66a56516-939c-4f14-b8dd-c2ca61f8dfec",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "materialName": "",
+        "material": "fdfe7be7-f98a-4e27-be8a-e6bfc27d4919",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "f689c3a5-c9e0-458d-b1f7-d70db12149e7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "offhand": [
+      {
+        "part": "",
+        "materialName": "",
+        "material": "56038b76-950d-4c3d-99f5-6cdd48d7a944",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 4213077,
+        "roughness": 0.32,
+        "metalness": 0.68
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "e826f083-b285-437c-b7cc-80871a4f578c",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 6445133,
+        "roughness": 0.4,
+        "metalness": 0.68
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "9060a44a-c88b-424c-874a-2a4a7e1305a3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 13223613,
+        "roughness": 0.22,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "f689c3a5-c9e0-458d-b1f7-d70db12149e7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "b4304ef2-e757-451b-aa19-e7e2c0f2af93",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 13015877,
+        "roughness": 0.3,
+        "metalness": 0.65
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "ec37e4d5-3a75-4521-873d-fd3174b19813",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "cd893116-0f6b-4e6b-8b5a-50f985fe17df",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16764006
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "ee7daf00-4e53-4333-af9c-4dc3a9e1240a",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16722731
+      },
+      {
+        "part": "railClamp",
+        "materialName": "gunPaint:revolver",
+        "material": "ae73f3a0-3eae-403b-a345-9d81fe4516f2",
+        "role": "light shell",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "moduleShell",
+        "materialName": "gunPaint:revolver",
+        "material": "22f6a83c-8e54-4151-a5b8-b3434d1e446d",
+        "role": "light shell",
+        "registered": true,
+        "map": null,
+        "color": 3290167,
+        "roughness": 0.76,
+        "metalness": 0.03
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:revolver",
+        "material": "0db418f7-381d-4c59-bf6c-56d31b050b21",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 4213077,
+        "roughness": 0.32,
+        "metalness": 0.68
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "42d60739-97fb-4865-9e6d-1e70ea989d86",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:revolver",
+        "material": "c6dec5a9-f08e-4c6a-89f8-d8eef6075430",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:revolver",
+        "material": "a27cf89a-be6a-4ac3-a635-dc918854e59c",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:revolver",
+        "material": "01f5617a-7b7f-41e8-89b2-18c17a1e20f2",
+        "role": "frame",
+        "registered": true,
+        "map": null,
+        "color": 4213077,
+        "roughness": 0.32,
+        "metalness": 0.68
+      },
+      {
+        "part": "",
+        "materialName": "Revolver walnut",
+        "material": "07b53854-ee70-411f-8cd8-80a0ecb4e79b",
+        "role": null,
+        "registered": false,
+        "map": "32f94efb-1640-4691-8a9f-5fb0878f8c03",
+        "color": 7751983,
+        "roughness": 0.48,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "Revolver walnut inset",
+        "material": "f722c4cc-9203-4c42-82f8-90ae0b42c45d",
+        "role": null,
+        "registered": false,
+        "map": "32f94efb-1640-4691-8a9f-5fb0878f8c03",
+        "color": 5716258,
+        "roughness": 0.65,
+        "metalness": 0
+      },
+      {
+        "part": "chamfered alloy clamp foot",
+        "materialName": "gunPaint:revolver",
+        "material": "5c5a08a9-0dc7-4354-88fe-766cc8a3fd3d",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 3027508,
+        "roughness": 0.5,
+        "metalness": 0.55
+      },
+      {
+        "part": "painted riser",
+        "materialName": "gunPaint:revolver",
+        "material": "963e812a-ede3-4217-ac79-77e650a95c79",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 2369578,
+        "roughness": 0.74,
+        "metalness": 0.05
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "materialName": "",
+        "material": "66a56516-939c-4f14-b8dd-c2ca61f8dfec",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "materialName": "",
+        "material": "fdfe7be7-f98a-4e27-be8a-e6bfc27d4919",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      }
+    ],
+    "rack": [
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "f689c3a5-c9e0-458d-b1f7-d70db12149e7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "42d60739-97fb-4865-9e6d-1e70ea989d86",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "Revolver walnut",
+        "material": "07b53854-ee70-411f-8cd8-80a0ecb4e79b",
+        "role": null,
+        "registered": false,
+        "map": "32f94efb-1640-4691-8a9f-5fb0878f8c03",
+        "color": 7751983,
+        "roughness": 0.48,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "Revolver walnut inset",
+        "material": "f722c4cc-9203-4c42-82f8-90ae0b42c45d",
+        "role": null,
+        "registered": false,
+        "map": "32f94efb-1640-4691-8a9f-5fb0878f8c03",
+        "color": 5716258,
+        "roughness": 0.65,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "66a56516-939c-4f14-b8dd-c2ca61f8dfec",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "fdfe7be7-f98a-4e27-be8a-e6bfc27d4919",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      }
+    ]
+  },
+  "camo": {
+    "assembled": [
+      {
+        "part": "",
+        "materialName": "",
+        "material": "56038b76-950d-4c3d-99f5-6cdd48d7a944",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 4213077,
+        "roughness": 0.32,
+        "metalness": 0.68
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "e826f083-b285-437c-b7cc-80871a4f578c",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 6445133,
+        "roughness": 0.4,
+        "metalness": 0.68
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "9060a44a-c88b-424c-874a-2a4a7e1305a3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 13223613,
+        "roughness": 0.22,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "f689c3a5-c9e0-458d-b1f7-d70db12149e7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "b4304ef2-e757-451b-aa19-e7e2c0f2af93",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 13015877,
+        "roughness": 0.3,
+        "metalness": 0.65
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "ec37e4d5-3a75-4521-873d-fd3174b19813",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "cc4cd72f-e375-4cd4-94bc-3c417ff9a1b7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777113
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "7a5f8c4d-2409-4635-8e43-734081f0a3c2",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16732497
+      },
+      {
+        "part": "railClamp",
+        "materialName": "gunPaint:revolver",
+        "material": "ae73f3a0-3eae-403b-a345-9d81fe4516f2",
+        "role": "light shell",
+        "registered": true,
+        "map": "43ecf55e-3bef-427e-b08f-774418f6b12c",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "moduleShell",
+        "materialName": "gunPaint:revolver",
+        "material": "22f6a83c-8e54-4151-a5b8-b3434d1e446d",
+        "role": "light shell",
+        "registered": true,
+        "map": "43ecf55e-3bef-427e-b08f-774418f6b12c",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:revolver",
+        "material": "0db418f7-381d-4c59-bf6c-56d31b050b21",
+        "role": "rail",
+        "registered": true,
+        "map": "43ecf55e-3bef-427e-b08f-774418f6b12c",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "42d60739-97fb-4865-9e6d-1e70ea989d86",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:revolver",
+        "material": "c6dec5a9-f08e-4c6a-89f8-d8eef6075430",
+        "role": "rail",
+        "registered": true,
+        "map": "43ecf55e-3bef-427e-b08f-774418f6b12c",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:revolver",
+        "material": "a27cf89a-be6a-4ac3-a635-dc918854e59c",
+        "role": "rail",
+        "registered": true,
+        "map": "43ecf55e-3bef-427e-b08f-774418f6b12c",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:revolver",
+        "material": "01f5617a-7b7f-41e8-89b2-18c17a1e20f2",
+        "role": "frame",
+        "registered": true,
+        "map": "43ecf55e-3bef-427e-b08f-774418f6b12c",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "Revolver walnut",
+        "material": "07b53854-ee70-411f-8cd8-80a0ecb4e79b",
+        "role": null,
+        "registered": false,
+        "map": "32f94efb-1640-4691-8a9f-5fb0878f8c03",
+        "color": 7751983,
+        "roughness": 0.48,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "Revolver walnut inset",
+        "material": "f722c4cc-9203-4c42-82f8-90ae0b42c45d",
+        "role": null,
+        "registered": false,
+        "map": "32f94efb-1640-4691-8a9f-5fb0878f8c03",
+        "color": 5716258,
+        "roughness": 0.65,
+        "metalness": 0
+      },
+      {
+        "part": "chamfered alloy clamp foot",
+        "materialName": "gunPaint:revolver",
+        "material": "5c5a08a9-0dc7-4354-88fe-766cc8a3fd3d",
+        "role": "optic shell",
+        "registered": true,
+        "map": "43ecf55e-3bef-427e-b08f-774418f6b12c",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "painted riser",
+        "materialName": "gunPaint:revolver",
+        "material": "963e812a-ede3-4217-ac79-77e650a95c79",
+        "role": "optic shell",
+        "registered": true,
+        "map": "43ecf55e-3bef-427e-b08f-774418f6b12c",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "materialName": "",
+        "material": "66a56516-939c-4f14-b8dd-c2ca61f8dfec",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "materialName": "",
+        "material": "fdfe7be7-f98a-4e27-be8a-e6bfc27d4919",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      }
+    ],
+    "firstPerson": [
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "78091eb8-a02e-4e9a-bbd1-2e9b270c7344",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 4213077,
+        "roughness": 0.32,
+        "metalness": 0.68
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "aa720b89-df5f-49db-8ab4-47dab55f7bff",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 6445133,
+        "roughness": 0.4,
+        "metalness": 0.68
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "d81b6326-e21d-4314-b94e-921561dd7ff3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 13223613,
+        "roughness": 0.22,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "vm:fold-static",
+        "material": "5290fbcf-065a-4132-abdc-10cf4fe8f9d0",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "fbb871c3-22e3-4fda-82b6-4134936136ed",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 13015877,
+        "roughness": 0.3,
+        "metalness": 0.65
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "7223f867-211b-48ac-811b-8b024fb04aa9",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685184,
+        "roughness": 0.69,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshBasicMaterial",
+        "material": "5d89f23c-ff3c-493a-b3ef-43debb2022d1",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777113
+      },
+      {
+        "part": "railClamp",
+        "materialName": "vm:gunPaint:revolver",
+        "material": "4a6ca95a-7504-40f5-be20-8e15a07facad",
+        "role": null,
+        "registered": false,
+        "map": "43ecf55e-3bef-427e-b08f-774418f6b12c",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "moduleShell",
+        "materialName": "vm:gunPaint:revolver",
+        "material": "91c25455-14c2-40cc-a7db-249591357ef8",
+        "role": null,
+        "registered": false,
+        "map": "43ecf55e-3bef-427e-b08f-774418f6b12c",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:revolver",
+        "material": "6b2e44f4-5d3d-4365-9026-463d4b292d8d",
+        "role": null,
+        "registered": false,
+        "map": "43ecf55e-3bef-427e-b08f-774418f6b12c",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "3606a9b7-4f7f-4786-963b-3d76511825f4",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:revolver",
+        "material": "8fe4f9fd-3dc7-49ab-83e9-d1a467679111",
+        "role": null,
+        "registered": false,
+        "map": "43ecf55e-3bef-427e-b08f-774418f6b12c",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:revolver",
+        "material": "67636937-22e3-4c96-a2f5-fd93e28134e5",
+        "role": null,
+        "registered": false,
+        "map": "43ecf55e-3bef-427e-b08f-774418f6b12c",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:revolver",
+        "material": "bf745c02-bb3e-4e8f-ae07-6b9613388244",
+        "role": null,
+        "registered": false,
+        "map": "43ecf55e-3bef-427e-b08f-774418f6b12c",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "vm:Revolver walnut",
+        "material": "66079423-1902-4620-a413-4332049367f1",
+        "role": null,
+        "registered": false,
+        "map": "32f94efb-1640-4691-8a9f-5fb0878f8c03",
+        "color": 7751983,
+        "roughness": 0.48,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "vm:Revolver walnut inset",
+        "material": "53ff7e67-b135-4b0b-8458-27c5897c0762",
+        "role": null,
+        "registered": false,
+        "map": "32f94efb-1640-4691-8a9f-5fb0878f8c03",
+        "color": 5716258,
+        "roughness": 0.65,
+        "metalness": 0
+      },
+      {
+        "part": "chamfered alloy clamp foot",
+        "materialName": "vm:gunPaint:revolver",
+        "material": "8e177b9c-688b-421a-9200-2c4c4e80ba1f",
+        "role": null,
+        "registered": false,
+        "map": "43ecf55e-3bef-427e-b08f-774418f6b12c",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "painted riser",
+        "materialName": "vm:gunPaint:revolver",
+        "material": "20d0a1b4-93d7-4657-af66-1a1ec279d6d6",
+        "role": null,
+        "registered": false,
+        "map": "43ecf55e-3bef-427e-b08f-774418f6b12c",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "materialName": "vm:MeshPhysicalMaterial",
+        "material": "7c21c953-faf6-4449-83d6-fb1e91e75823",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "materialName": "vm:MeshBasicMaterial",
+        "material": "f5f4b4c1-e629-4e27-943d-96556adc4448",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      }
+    ],
+    "magazine": [
+      {
+        "part": "",
+        "materialName": "",
+        "material": "9060a44a-c88b-424c-874a-2a4a7e1305a3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 13223613,
+        "roughness": 0.22,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "f689c3a5-c9e0-458d-b1f7-d70db12149e7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "light": [
+      {
+        "part": "railClamp",
+        "materialName": "gunPaint:revolver",
+        "material": "ae73f3a0-3eae-403b-a345-9d81fe4516f2",
+        "role": "light shell",
+        "registered": true,
+        "map": "43ecf55e-3bef-427e-b08f-774418f6b12c",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "moduleShell",
+        "materialName": "gunPaint:revolver",
+        "material": "22f6a83c-8e54-4151-a5b8-b3434d1e446d",
+        "role": "light shell",
+        "registered": true,
+        "map": "43ecf55e-3bef-427e-b08f-774418f6b12c",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:revolver",
+        "material": "0db418f7-381d-4c59-bf6c-56d31b050b21",
+        "role": "rail",
+        "registered": true,
+        "map": "43ecf55e-3bef-427e-b08f-774418f6b12c",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "42d60739-97fb-4865-9e6d-1e70ea989d86",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:revolver",
+        "material": "c6dec5a9-f08e-4c6a-89f8-d8eef6075430",
+        "role": "rail",
+        "registered": true,
+        "map": "43ecf55e-3bef-427e-b08f-774418f6b12c",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:revolver",
+        "material": "a27cf89a-be6a-4ac3-a635-dc918854e59c",
+        "role": "rail",
+        "registered": true,
+        "map": "43ecf55e-3bef-427e-b08f-774418f6b12c",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "f689c3a5-c9e0-458d-b1f7-d70db12149e7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "optic": [
+      {
+        "part": "chamfered alloy clamp foot",
+        "materialName": "gunPaint:revolver",
+        "material": "5c5a08a9-0dc7-4354-88fe-766cc8a3fd3d",
+        "role": "optic shell",
+        "registered": true,
+        "map": "43ecf55e-3bef-427e-b08f-774418f6b12c",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "painted riser",
+        "materialName": "gunPaint:revolver",
+        "material": "963e812a-ede3-4217-ac79-77e650a95c79",
+        "role": "optic shell",
+        "registered": true,
+        "map": "43ecf55e-3bef-427e-b08f-774418f6b12c",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "materialName": "",
+        "material": "66a56516-939c-4f14-b8dd-c2ca61f8dfec",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "materialName": "",
+        "material": "fdfe7be7-f98a-4e27-be8a-e6bfc27d4919",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "f689c3a5-c9e0-458d-b1f7-d70db12149e7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "offhand": [
+      {
+        "part": "",
+        "materialName": "",
+        "material": "56038b76-950d-4c3d-99f5-6cdd48d7a944",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 4213077,
+        "roughness": 0.32,
+        "metalness": 0.68
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "e826f083-b285-437c-b7cc-80871a4f578c",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 6445133,
+        "roughness": 0.4,
+        "metalness": 0.68
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "9060a44a-c88b-424c-874a-2a4a7e1305a3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 13223613,
+        "roughness": 0.22,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "f689c3a5-c9e0-458d-b1f7-d70db12149e7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "b4304ef2-e757-451b-aa19-e7e2c0f2af93",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 13015877,
+        "roughness": 0.3,
+        "metalness": 0.65
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "ec37e4d5-3a75-4521-873d-fd3174b19813",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "cd893116-0f6b-4e6b-8b5a-50f985fe17df",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16764006
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "ee7daf00-4e53-4333-af9c-4dc3a9e1240a",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16722731
+      },
+      {
+        "part": "railClamp",
+        "materialName": "gunPaint:revolver",
+        "material": "ae73f3a0-3eae-403b-a345-9d81fe4516f2",
+        "role": "light shell",
+        "registered": true,
+        "map": "43ecf55e-3bef-427e-b08f-774418f6b12c",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "moduleShell",
+        "materialName": "gunPaint:revolver",
+        "material": "22f6a83c-8e54-4151-a5b8-b3434d1e446d",
+        "role": "light shell",
+        "registered": true,
+        "map": "43ecf55e-3bef-427e-b08f-774418f6b12c",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:revolver",
+        "material": "0db418f7-381d-4c59-bf6c-56d31b050b21",
+        "role": "rail",
+        "registered": true,
+        "map": "43ecf55e-3bef-427e-b08f-774418f6b12c",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "42d60739-97fb-4865-9e6d-1e70ea989d86",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:revolver",
+        "material": "c6dec5a9-f08e-4c6a-89f8-d8eef6075430",
+        "role": "rail",
+        "registered": true,
+        "map": "43ecf55e-3bef-427e-b08f-774418f6b12c",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:revolver",
+        "material": "a27cf89a-be6a-4ac3-a635-dc918854e59c",
+        "role": "rail",
+        "registered": true,
+        "map": "43ecf55e-3bef-427e-b08f-774418f6b12c",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:revolver",
+        "material": "01f5617a-7b7f-41e8-89b2-18c17a1e20f2",
+        "role": "frame",
+        "registered": true,
+        "map": "43ecf55e-3bef-427e-b08f-774418f6b12c",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "Revolver walnut",
+        "material": "07b53854-ee70-411f-8cd8-80a0ecb4e79b",
+        "role": null,
+        "registered": false,
+        "map": "32f94efb-1640-4691-8a9f-5fb0878f8c03",
+        "color": 7751983,
+        "roughness": 0.48,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "Revolver walnut inset",
+        "material": "f722c4cc-9203-4c42-82f8-90ae0b42c45d",
+        "role": null,
+        "registered": false,
+        "map": "32f94efb-1640-4691-8a9f-5fb0878f8c03",
+        "color": 5716258,
+        "roughness": 0.65,
+        "metalness": 0
+      },
+      {
+        "part": "chamfered alloy clamp foot",
+        "materialName": "gunPaint:revolver",
+        "material": "5c5a08a9-0dc7-4354-88fe-766cc8a3fd3d",
+        "role": "optic shell",
+        "registered": true,
+        "map": "43ecf55e-3bef-427e-b08f-774418f6b12c",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "painted riser",
+        "materialName": "gunPaint:revolver",
+        "material": "963e812a-ede3-4217-ac79-77e650a95c79",
+        "role": "optic shell",
+        "registered": true,
+        "map": "43ecf55e-3bef-427e-b08f-774418f6b12c",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "materialName": "",
+        "material": "66a56516-939c-4f14-b8dd-c2ca61f8dfec",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "materialName": "",
+        "material": "fdfe7be7-f98a-4e27-be8a-e6bfc27d4919",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      }
+    ],
+    "rack": [
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "f689c3a5-c9e0-458d-b1f7-d70db12149e7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:revolver",
+        "material": "ae73f3a0-3eae-403b-a345-9d81fe4516f2",
+        "role": "light shell",
+        "registered": true,
+        "map": "43ecf55e-3bef-427e-b08f-774418f6b12c",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:revolver",
+        "material": "22f6a83c-8e54-4151-a5b8-b3434d1e446d",
+        "role": "light shell",
+        "registered": true,
+        "map": "43ecf55e-3bef-427e-b08f-774418f6b12c",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:revolver",
+        "material": "0db418f7-381d-4c59-bf6c-56d31b050b21",
+        "role": "rail",
+        "registered": true,
+        "map": "43ecf55e-3bef-427e-b08f-774418f6b12c",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "42d60739-97fb-4865-9e6d-1e70ea989d86",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:revolver",
+        "material": "c6dec5a9-f08e-4c6a-89f8-d8eef6075430",
+        "role": "rail",
+        "registered": true,
+        "map": "43ecf55e-3bef-427e-b08f-774418f6b12c",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:revolver",
+        "material": "a27cf89a-be6a-4ac3-a635-dc918854e59c",
+        "role": "rail",
+        "registered": true,
+        "map": "43ecf55e-3bef-427e-b08f-774418f6b12c",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:revolver",
+        "material": "01f5617a-7b7f-41e8-89b2-18c17a1e20f2",
+        "role": "frame",
+        "registered": true,
+        "map": "43ecf55e-3bef-427e-b08f-774418f6b12c",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "Revolver walnut",
+        "material": "07b53854-ee70-411f-8cd8-80a0ecb4e79b",
+        "role": null,
+        "registered": false,
+        "map": "32f94efb-1640-4691-8a9f-5fb0878f8c03",
+        "color": 7751983,
+        "roughness": 0.48,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "Revolver walnut inset",
+        "material": "f722c4cc-9203-4c42-82f8-90ae0b42c45d",
+        "role": null,
+        "registered": false,
+        "map": "32f94efb-1640-4691-8a9f-5fb0878f8c03",
+        "color": 5716258,
+        "roughness": 0.65,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:revolver",
+        "material": "5c5a08a9-0dc7-4354-88fe-766cc8a3fd3d",
+        "role": "optic shell",
+        "registered": true,
+        "map": "43ecf55e-3bef-427e-b08f-774418f6b12c",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:revolver",
+        "material": "963e812a-ede3-4217-ac79-77e650a95c79",
+        "role": "optic shell",
+        "registered": true,
+        "map": "43ecf55e-3bef-427e-b08f-774418f6b12c",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "66a56516-939c-4f14-b8dd-c2ca61f8dfec",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "fdfe7be7-f98a-4e27-be8a-e6bfc27d4919",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      }
+    ]
+  },
+  "restored": {
+    "assembled": [
+      {
+        "part": "",
+        "materialName": "",
+        "material": "56038b76-950d-4c3d-99f5-6cdd48d7a944",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 4213077,
+        "roughness": 0.32,
+        "metalness": 0.68
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "e826f083-b285-437c-b7cc-80871a4f578c",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 6445133,
+        "roughness": 0.4,
+        "metalness": 0.68
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "9060a44a-c88b-424c-874a-2a4a7e1305a3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 13223613,
+        "roughness": 0.22,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "f689c3a5-c9e0-458d-b1f7-d70db12149e7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "b4304ef2-e757-451b-aa19-e7e2c0f2af93",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 13015877,
+        "roughness": 0.3,
+        "metalness": 0.65
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "ec37e4d5-3a75-4521-873d-fd3174b19813",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "cc4cd72f-e375-4cd4-94bc-3c417ff9a1b7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777113
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "7a5f8c4d-2409-4635-8e43-734081f0a3c2",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16732497
+      },
+      {
+        "part": "railClamp",
+        "materialName": "gunPaint:revolver",
+        "material": "ae73f3a0-3eae-403b-a345-9d81fe4516f2",
+        "role": "light shell",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "moduleShell",
+        "materialName": "gunPaint:revolver",
+        "material": "22f6a83c-8e54-4151-a5b8-b3434d1e446d",
+        "role": "light shell",
+        "registered": true,
+        "map": null,
+        "color": 3290167,
+        "roughness": 0.76,
+        "metalness": 0.03
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:revolver",
+        "material": "0db418f7-381d-4c59-bf6c-56d31b050b21",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 4213077,
+        "roughness": 0.32,
+        "metalness": 0.68
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "42d60739-97fb-4865-9e6d-1e70ea989d86",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:revolver",
+        "material": "c6dec5a9-f08e-4c6a-89f8-d8eef6075430",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:revolver",
+        "material": "a27cf89a-be6a-4ac3-a635-dc918854e59c",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:revolver",
+        "material": "01f5617a-7b7f-41e8-89b2-18c17a1e20f2",
+        "role": "frame",
+        "registered": true,
+        "map": null,
+        "color": 4213077,
+        "roughness": 0.32,
+        "metalness": 0.68
+      },
+      {
+        "part": "",
+        "materialName": "Revolver walnut",
+        "material": "07b53854-ee70-411f-8cd8-80a0ecb4e79b",
+        "role": null,
+        "registered": false,
+        "map": "32f94efb-1640-4691-8a9f-5fb0878f8c03",
+        "color": 7751983,
+        "roughness": 0.48,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "Revolver walnut inset",
+        "material": "f722c4cc-9203-4c42-82f8-90ae0b42c45d",
+        "role": null,
+        "registered": false,
+        "map": "32f94efb-1640-4691-8a9f-5fb0878f8c03",
+        "color": 5716258,
+        "roughness": 0.65,
+        "metalness": 0
+      },
+      {
+        "part": "chamfered alloy clamp foot",
+        "materialName": "gunPaint:revolver",
+        "material": "5c5a08a9-0dc7-4354-88fe-766cc8a3fd3d",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 3027508,
+        "roughness": 0.5,
+        "metalness": 0.55
+      },
+      {
+        "part": "painted riser",
+        "materialName": "gunPaint:revolver",
+        "material": "963e812a-ede3-4217-ac79-77e650a95c79",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 2369578,
+        "roughness": 0.74,
+        "metalness": 0.05
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "materialName": "",
+        "material": "66a56516-939c-4f14-b8dd-c2ca61f8dfec",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "materialName": "",
+        "material": "fdfe7be7-f98a-4e27-be8a-e6bfc27d4919",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      }
+    ],
+    "firstPerson": [
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "78091eb8-a02e-4e9a-bbd1-2e9b270c7344",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 4213077,
+        "roughness": 0.32,
+        "metalness": 0.68
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "aa720b89-df5f-49db-8ab4-47dab55f7bff",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 6445133,
+        "roughness": 0.4,
+        "metalness": 0.68
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "d81b6326-e21d-4314-b94e-921561dd7ff3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 13223613,
+        "roughness": 0.22,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "vm:fold-static",
+        "material": "5290fbcf-065a-4132-abdc-10cf4fe8f9d0",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "fbb871c3-22e3-4fda-82b6-4134936136ed",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 13015877,
+        "roughness": 0.3,
+        "metalness": 0.65
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "7223f867-211b-48ac-811b-8b024fb04aa9",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685184,
+        "roughness": 0.69,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshBasicMaterial",
+        "material": "5d89f23c-ff3c-493a-b3ef-43debb2022d1",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777113
+      },
+      {
+        "part": "railClamp",
+        "materialName": "vm:gunPaint:revolver",
+        "material": "fea0a29f-8f0e-4b9c-ac44-81f0ed9d0bb1",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685184,
+        "roughness": 0.69,
+        "metalness": 0.08
+      },
+      {
+        "part": "moduleShell",
+        "materialName": "vm:gunPaint:revolver",
+        "material": "e8aae857-6670-43a2-b6e3-e5f0b2094813",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5264465,
+        "roughness": 0.84,
+        "metalness": 0.02
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:revolver",
+        "material": "b486730d-e5b6-497b-8c92-60c2c25db5c6",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 4213077,
+        "roughness": 0.32,
+        "metalness": 0.68
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "3606a9b7-4f7f-4786-963b-3d76511825f4",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:revolver",
+        "material": "ac04e860-ee55-4651-a5ad-361121c21b20",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685184,
+        "roughness": 0.69,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:revolver",
+        "material": "c18204a4-0744-43cb-aa3c-e48ad9033653",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5659490,
+        "roughness": 0.58,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:revolver",
+        "material": "0296d35d-4612-4ae0-83c7-ea72bb2209f8",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 4213077,
+        "roughness": 0.32,
+        "metalness": 0.68
+      },
+      {
+        "part": "",
+        "materialName": "vm:Revolver walnut",
+        "material": "66079423-1902-4620-a413-4332049367f1",
+        "role": null,
+        "registered": false,
+        "map": "32f94efb-1640-4691-8a9f-5fb0878f8c03",
+        "color": 7751983,
+        "roughness": 0.48,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "vm:Revolver walnut inset",
+        "material": "53ff7e67-b135-4b0b-8458-27c5897c0762",
+        "role": null,
+        "registered": false,
+        "map": "32f94efb-1640-4691-8a9f-5fb0878f8c03",
+        "color": 5716258,
+        "roughness": 0.65,
+        "metalness": 0
+      },
+      {
+        "part": "chamfered alloy clamp foot",
+        "materialName": "vm:gunPaint:revolver",
+        "material": "655ee1f8-9f85-461f-bc9f-e6ce5886c3d6",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3027508,
+        "roughness": 0.5,
+        "metalness": 0.55
+      },
+      {
+        "part": "painted riser",
+        "materialName": "vm:gunPaint:revolver",
+        "material": "b3fe49e3-a886-4fae-8988-758fe2175614",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2369578,
+        "roughness": 0.74,
+        "metalness": 0.05
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "materialName": "vm:MeshPhysicalMaterial",
+        "material": "7c21c953-faf6-4449-83d6-fb1e91e75823",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "materialName": "vm:MeshBasicMaterial",
+        "material": "f5f4b4c1-e629-4e27-943d-96556adc4448",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      }
+    ],
+    "magazine": [
+      {
+        "part": "",
+        "materialName": "",
+        "material": "9060a44a-c88b-424c-874a-2a4a7e1305a3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 13223613,
+        "roughness": 0.22,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "f689c3a5-c9e0-458d-b1f7-d70db12149e7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "light": [
+      {
+        "part": "railClamp",
+        "materialName": "gunPaint:revolver",
+        "material": "ae73f3a0-3eae-403b-a345-9d81fe4516f2",
+        "role": "light shell",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "moduleShell",
+        "materialName": "gunPaint:revolver",
+        "material": "22f6a83c-8e54-4151-a5b8-b3434d1e446d",
+        "role": "light shell",
+        "registered": true,
+        "map": null,
+        "color": 3290167,
+        "roughness": 0.76,
+        "metalness": 0.03
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:revolver",
+        "material": "0db418f7-381d-4c59-bf6c-56d31b050b21",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 4213077,
+        "roughness": 0.32,
+        "metalness": 0.68
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "42d60739-97fb-4865-9e6d-1e70ea989d86",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:revolver",
+        "material": "c6dec5a9-f08e-4c6a-89f8-d8eef6075430",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:revolver",
+        "material": "a27cf89a-be6a-4ac3-a635-dc918854e59c",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "f689c3a5-c9e0-458d-b1f7-d70db12149e7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "optic": [
+      {
+        "part": "chamfered alloy clamp foot",
+        "materialName": "gunPaint:revolver",
+        "material": "5c5a08a9-0dc7-4354-88fe-766cc8a3fd3d",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 3027508,
+        "roughness": 0.5,
+        "metalness": 0.55
+      },
+      {
+        "part": "painted riser",
+        "materialName": "gunPaint:revolver",
+        "material": "963e812a-ede3-4217-ac79-77e650a95c79",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 2369578,
+        "roughness": 0.74,
+        "metalness": 0.05
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "materialName": "",
+        "material": "66a56516-939c-4f14-b8dd-c2ca61f8dfec",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "materialName": "",
+        "material": "fdfe7be7-f98a-4e27-be8a-e6bfc27d4919",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "f689c3a5-c9e0-458d-b1f7-d70db12149e7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "offhand": [
+      {
+        "part": "",
+        "materialName": "",
+        "material": "56038b76-950d-4c3d-99f5-6cdd48d7a944",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 4213077,
+        "roughness": 0.32,
+        "metalness": 0.68
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "e826f083-b285-437c-b7cc-80871a4f578c",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 6445133,
+        "roughness": 0.4,
+        "metalness": 0.68
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "9060a44a-c88b-424c-874a-2a4a7e1305a3",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 13223613,
+        "roughness": 0.22,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "f689c3a5-c9e0-458d-b1f7-d70db12149e7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "b4304ef2-e757-451b-aa19-e7e2c0f2af93",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 13015877,
+        "roughness": 0.3,
+        "metalness": 0.65
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "ec37e4d5-3a75-4521-873d-fd3174b19813",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "cd893116-0f6b-4e6b-8b5a-50f985fe17df",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16764006
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "ee7daf00-4e53-4333-af9c-4dc3a9e1240a",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16722731
+      },
+      {
+        "part": "railClamp",
+        "materialName": "gunPaint:revolver",
+        "material": "ae73f3a0-3eae-403b-a345-9d81fe4516f2",
+        "role": "light shell",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "moduleShell",
+        "materialName": "gunPaint:revolver",
+        "material": "22f6a83c-8e54-4151-a5b8-b3434d1e446d",
+        "role": "light shell",
+        "registered": true,
+        "map": null,
+        "color": 3290167,
+        "roughness": 0.76,
+        "metalness": 0.03
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:revolver",
+        "material": "0db418f7-381d-4c59-bf6c-56d31b050b21",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 4213077,
+        "roughness": 0.32,
+        "metalness": 0.68
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "42d60739-97fb-4865-9e6d-1e70ea989d86",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:revolver",
+        "material": "c6dec5a9-f08e-4c6a-89f8-d8eef6075430",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:revolver",
+        "material": "a27cf89a-be6a-4ac3-a635-dc918854e59c",
+        "role": "rail",
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:revolver",
+        "material": "01f5617a-7b7f-41e8-89b2-18c17a1e20f2",
+        "role": "frame",
+        "registered": true,
+        "map": null,
+        "color": 4213077,
+        "roughness": 0.32,
+        "metalness": 0.68
+      },
+      {
+        "part": "",
+        "materialName": "Revolver walnut",
+        "material": "07b53854-ee70-411f-8cd8-80a0ecb4e79b",
+        "role": null,
+        "registered": false,
+        "map": "32f94efb-1640-4691-8a9f-5fb0878f8c03",
+        "color": 7751983,
+        "roughness": 0.48,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "Revolver walnut inset",
+        "material": "f722c4cc-9203-4c42-82f8-90ae0b42c45d",
+        "role": null,
+        "registered": false,
+        "map": "32f94efb-1640-4691-8a9f-5fb0878f8c03",
+        "color": 5716258,
+        "roughness": 0.65,
+        "metalness": 0
+      },
+      {
+        "part": "chamfered alloy clamp foot",
+        "materialName": "gunPaint:revolver",
+        "material": "5c5a08a9-0dc7-4354-88fe-766cc8a3fd3d",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 3027508,
+        "roughness": 0.5,
+        "metalness": 0.55
+      },
+      {
+        "part": "painted riser",
+        "materialName": "gunPaint:revolver",
+        "material": "963e812a-ede3-4217-ac79-77e650a95c79",
+        "role": "optic shell",
+        "registered": true,
+        "map": null,
+        "color": 2369578,
+        "roughness": 0.74,
+        "metalness": 0.05
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "materialName": "",
+        "material": "66a56516-939c-4f14-b8dd-c2ca61f8dfec",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "materialName": "",
+        "material": "fdfe7be7-f98a-4e27-be8a-e6bfc27d4919",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      }
+    ],
+    "rack": [
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "f689c3a5-c9e0-458d-b1f7-d70db12149e7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "42d60739-97fb-4865-9e6d-1e70ea989d86",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "Revolver walnut",
+        "material": "07b53854-ee70-411f-8cd8-80a0ecb4e79b",
+        "role": null,
+        "registered": false,
+        "map": "32f94efb-1640-4691-8a9f-5fb0878f8c03",
+        "color": 7751983,
+        "roughness": 0.48,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "Revolver walnut inset",
+        "material": "f722c4cc-9203-4c42-82f8-90ae0b42c45d",
+        "role": null,
+        "registered": false,
+        "map": "32f94efb-1640-4691-8a9f-5fb0878f8c03",
+        "color": 5716258,
+        "roughness": 0.65,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "66a56516-939c-4f14-b8dd-c2ca61f8dfec",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "fdfe7be7-f98a-4e27-be8a-e6bfc27d4919",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      }
+    ]
+  }
+}

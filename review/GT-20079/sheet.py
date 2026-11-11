@@ -13,7 +13,7 @@ gun = sys.argv[1]
 folder = Path(__file__).resolve().parent / gun
 states = ('factory', 'camo', 'restored')
 width, height = 360, 205
-angles = ('side', 'eye', 'rack') if gun in ('ak', 'shotgun') else ('side', 'eye')
+angles = ('side', 'eye', 'rack') if gun in ('ak', 'shotgun', 'revolver') else ('side', 'eye')
 baseline = 'pre-finish' if gun == 'shotgun' else 'before'
 final = 'rack-final' if (folder / 'rack-final' / 'checks.json').exists() else 'after'
 rows = [(angle, phase) for angle in angles for phase in (baseline, final)]
@@ -26,7 +26,11 @@ for row, (angle, phase) in enumerate(rows):
     draw.text((8, y), phase.capitalize() + ' / ' + angle, fill='#e6edf4')
     for col, state in enumerate(states):
         with Image.open(folder / phase / (angle + '-' + state + '.jpg')) as source:
-            if angle == 'rack' or (gun == 'shotgun' and angle == 'side'):
+            if gun == 'revolver' and angle == 'rack':
+                crop = (321, 168, 833, 456)
+            elif gun == 'revolver' and angle == 'eye':
+                crop = (550, 310, 1152, 648)
+            elif angle == 'rack' or (gun == 'shotgun' and angle == 'side'):
                 crop = (0, 0, source.width, source.height)
             elif angle == 'side':
                 crop = (215, 105, 1015, 555) if gun in ("m4", "ak") else (260, 134, 940, 516)
@@ -96,3 +100,18 @@ if (folder / 'lights' / 'camo-night.jpg').exists():
                 draw.text((left,y),finish,fill='white')
                 canvas.paste(tile,(left,y+14))
     save_sheet(canvas, folder / 'eye-four-lights.jpg')
+
+if gun == 'revolver' and (folder / 'lights' / 'camo-night.jpg').exists():
+    lights_sheet = Image.new('RGB', (4 * 306 + 8, 2 * 272 + 25), '#20242b')
+    labels = ImageDraw.Draw(lights_sheet)
+    for column, light in enumerate(lights):
+        x = 8 + column * 306
+        labels.text((x, 6), light.title(), fill='white')
+        for row, phase in enumerate(('lights-before', 'lights')):
+            y = 25 + row * 272
+            labels.text((x, y), 'M81 / ' + ('before' if row == 0 else 'after'), fill='white')
+            with Image.open(folder / phase / f'camo-{light}.jpg') as source:
+                tile = source.crop((670, 315, 990, 648))
+                tile.thumbnail((298, 249), Image.Resampling.LANCZOS)
+                lights_sheet.paste(tile, (x, y + 17))
+    save_sheet(lights_sheet, folder / 'camo-eye-pairs.jpg')

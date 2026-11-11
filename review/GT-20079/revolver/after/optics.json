@@ -1,0 +1,54 @@
+{
+  "prism": {
+    "optic": {
+      "coated": 7,
+      "factory": 6
+    },
+    "plate": {
+      "coated": 1,
+      "factory": 1
+    },
+    "trigger": {
+      "coated": 0,
+      "factory": 1
+    },
+    "hammer": {
+      "coated": 0,
+      "factory": 1
+    },
+    "drum": {
+      "coated": 0,
+      "factory": 13
+    },
+    "barrel": {
+      "coated": 0,
+      "factory": 1
+    }
+  },
+  "rmr": {
+    "optic": {
+      "coated": 6,
+      "factory": 3
+    },
+    "plate": {
+      "coated": 1,
+      "factory": 1
+    },
+    "trigger": {
+      "coated": 0,
+      "factory": 1
+    },
+    "hammer": {
+      "coated": 0,
+      "factory": 1
+    },
+    "drum": {
+      "coated": 0,
+      "factory": 13
+    },
+    "barrel": {
+      "coated": 0,
+      "factory": 1
+    }
+  }
+}

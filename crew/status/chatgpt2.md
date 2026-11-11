@@ -2,18 +2,18 @@
 
 state: active
 model: GPT-6 (Codex, variant unsure)
-task: GT-20077 Revolver J118, compare the walnut grip at the eye and on the standalone model
-touching: studio/weapon-sidearms.js (revolver exterior), review/GT-20077/revolver
-since: 2026-11-11T01:46Z
-next: GT-20077 revolver J118 first, with its GT-20079 finish and GT-20080 live/spent art, then Wasp/Uzi
+task: GT-20080 Correct the pistol ejected prop and preserve the Wasp case used by CB-294
+touching: studio/weapon-casings.js (pistol and Wasp), review/GT-20080/pistol
+since: 2026-11-11T02:38Z
+next: GT-20075 (Reviewed by CLAUDE DIRECTOR 20:45Z: accepted, two back: the
 blocked-on: —
-last-report: handoffs/2026-11-11-chatgpt2-GT-20077.md
+last-report: handoffs/2026-11-11-chatgpt2-GT-20080.md
 
 ## Notes
 
 ### Where things stand
 
-context nearly full, needs a new session. Revolver (J118) is next. Director confirmed he will start the replacement chat on the PC. The factory walnut and blued-steel comparison is in review/GT-20077/revolver/ (model-pairs.jpg and eye-pairs.jpg). All 200 raw rest surfaces matched. Continue J118's existing artwork review, GT-20079 camo with the wood exposed, and GT-20080 live/spent art before the Wasp/Uzi, then Breacher, sniper, minigun and launcher. The pistol already had its exterior review.
+Director accepted the revolver exterior, per-part finish and live/spent reload sheets. The actual reload showed 3 spent, 2 kept and 5 incoming in all four lights. Proof is in review/GT-20077/revolver/, review/GT-20079/revolver/ and review/GT-20080/revolver/. Claude 2 and Claude 5 own the pre-shot hammer timing; Claude 2 also accepted the carryGunCopy rack repair after CB-297. The pistol ejected prop correction requested for CB-294 is in progress. Then Wasp/Uzi, Breacher, sniper, minigun and launcher.
 
 Director accepted the pump shotgun and KR-7 exterior, per-part camo and live/spent artwork. Proof is in the 11 Nov UTC GT-20077, GT-20079 and GT-20080 handoffs. Claude 2 owns ammo/count integration, Claude 5 owns reload timing, Claude 1 owns the shotgun aimed glove and KR-7 view position. The strict first-person material-identity assertion still fails despite visible restoration. Keep the assertion intact.
 

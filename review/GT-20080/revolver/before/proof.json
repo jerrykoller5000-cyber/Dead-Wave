@@ -1,0 +1,253 @@
+{
+  "bounds": {
+    "loader": {
+      "min": [
+        -0.007799999788403511,
+        -0.0077999997884035145,
+        -0.017000000923871994
+      ],
+      "max": [
+        0.007799999788403511,
+        0.0077999997884035145,
+        0.017000000923871994
+      ]
+    },
+    "palm": {
+      "min": [
+        -0.008749719709157944,
+        -0.009200000204145908,
+        -0.02500000037252903
+      ],
+      "max": [
+        0.008749719709157944,
+        0.009200000204145908,
+        0.03500000014901161
+      ]
+    },
+    "empty": {
+      "min": [
+        -0.009170000068843364,
+        -0.009170000068843368,
+        -0.019974999897181992
+      ],
+      "max": [
+        0.009170000068843364,
+        0.009170000068843368,
+        0.01797499989718199
+      ]
+    }
+  },
+  "liveExport": false,
+  "spentCached": true,
+  "liveUsed": false,
+  "frames": [
+    {
+      "name": "empty",
+      "at": 0.205,
+      "key": "revolver",
+      "active": true,
+      "reloading": true,
+      "counts": {
+        "spent": 3,
+        "live": 2,
+        "load": 5
+      },
+      "empty": 3,
+      "palm": 0,
+      "loader": 0,
+      "light": "noon"
+    },
+    {
+      "name": "empty",
+      "at": 0.205,
+      "key": "revolver",
+      "active": true,
+      "reloading": true,
+      "counts": {
+        "spent": 3,
+        "live": 2,
+        "load": 5
+      },
+      "empty": 3,
+      "palm": 0,
+      "loader": 0,
+      "light": "overcast"
+    },
+    {
+      "name": "empty",
+      "at": 0.205,
+      "key": "revolver",
+      "active": true,
+      "reloading": true,
+      "counts": {
+        "spent": 3,
+        "live": 2,
+        "load": 5
+      },
+      "empty": 3,
+      "palm": 0,
+      "loader": 0,
+      "light": "dusk"
+    },
+    {
+      "name": "empty",
+      "at": 0.205,
+      "key": "revolver",
+      "active": true,
+      "reloading": true,
+      "counts": {
+        "spent": 3,
+        "live": 2,
+        "load": 5
+      },
+      "empty": 3,
+      "palm": 0,
+      "loader": 0,
+      "light": "night"
+    },
+    {
+      "name": "palm",
+      "at": 0.302,
+      "key": "revolver",
+      "active": true,
+      "reloading": true,
+      "counts": {
+        "spent": 3,
+        "live": 2,
+        "load": 5
+      },
+      "empty": 0,
+      "palm": 2,
+      "loader": 0,
+      "light": "noon"
+    },
+    {
+      "name": "palm",
+      "at": 0.302,
+      "key": "revolver",
+      "active": true,
+      "reloading": true,
+      "counts": {
+        "spent": 3,
+        "live": 2,
+        "load": 5
+      },
+      "empty": 0,
+      "palm": 2,
+      "loader": 0,
+      "light": "overcast"
+    },
+    {
+      "name": "palm",
+      "at": 0.302,
+      "key": "revolver",
+      "active": true,
+      "reloading": true,
+      "counts": {
+        "spent": 3,
+        "live": 2,
+        "load": 5
+      },
+      "empty": 0,
+      "palm": 2,
+      "loader": 0,
+      "light": "dusk"
+    },
+    {
+      "name": "palm",
+      "at": 0.302,
+      "key": "revolver",
+      "active": true,
+      "reloading": true,
+      "counts": {
+        "spent": 3,
+        "live": 2,
+        "load": 5
+      },
+      "empty": 0,
+      "palm": 2,
+      "loader": 0,
+      "light": "night"
+    },
+    {
+      "name": "loader",
+      "at": 0.47,
+      "key": "revolver",
+      "active": true,
+      "reloading": true,
+      "counts": {
+        "spent": 3,
+        "live": 2,
+        "load": 5
+      },
+      "empty": 0,
+      "palm": 0,
+      "loader": 5,
+      "light": "noon"
+    },
+    {
+      "name": "loader",
+      "at": 0.47,
+      "key": "revolver",
+      "active": true,
+      "reloading": true,
+      "counts": {
+        "spent": 3,
+        "live": 2,
+        "load": 5
+      },
+      "empty": 0,
+      "palm": 0,
+      "loader": 5,
+      "light": "overcast"
+    },
+    {
+      "name": "loader",
+      "at": 0.47,
+      "key": "revolver",
+      "active": true,
+      "reloading": true,
+      "counts": {
+        "spent": 3,
+        "live": 2,
+        "load": 5
+      },
+      "empty": 0,
+      "palm": 0,
+      "loader": 5,
+      "light": "dusk"
+    },
+    {
+      "name": "loader",
+      "at": 0.47,
+      "key": "revolver",
+      "active": true,
+      "reloading": true,
+      "counts": {
+        "spent": 3,
+        "live": 2,
+        "load": 5
+      },
+      "empty": 0,
+      "palm": 0,
+      "loader": 5,
+      "light": "night"
+    },
+    {
+      "name": "props",
+      "light": "noon"
+    },
+    {
+      "name": "props",
+      "light": "overcast"
+    },
+    {
+      "name": "props",
+      "light": "dusk"
+    },
+    {
+      "name": "props",
+      "light": "night"
+    }
+  ]
+}

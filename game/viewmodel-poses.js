@@ -572,6 +572,7 @@ export const VM_RELOADS = Object.freeze({
     ],
     mag: { grab: 0.10, swapOut: 0.305, swapIn: 0.375, seat: 0.60 },
     rack: [0.72, 0.76, 0.89, 0.07],   // AG-168: the slide back over [0], [1], forward at [2]; travel (gun units)
+    tacticalRack: true,   // CE-2 (J103, CLAUDE DIRECTOR 11 Nov): racked by the support hand with rounds left too
     places: {
       // gun-local (the model's own units): palm normal (z) and the forearm's way (y) as directions
       well: { z: [0, 0.955, 0.296], y: [-0.55, -0.45, -0.7] },       // the support forearm toward its own side, the gun's -x
@@ -600,5 +601,17 @@ export const VM_TRIGGER = Object.freeze({
   // the Wasp (J112: "the trigger finger is clipping through the trigger guard"): the fit's index ran through the guard and out
   // its side; now its pad lies on the trigger 68% down the blade (2 game mm off it), nothing through the guard. The trigger is
   // part of the frame's mesh (no control of its own yet: asked of ChatGPT 2), so no press until it can turn: pull = rest
-  uzi: { part: null, rest: [-0.278, 1.7, 1.084, -0.1], pull: [-0.278, 1.7, 1.084, -0.1], pivot: null, turn: 0, hold: 0.05, release: 0.07 }
+  uzi: { part: null, rest: [-0.278, 1.7, 1.084, -0.1], pull: [-0.278, 1.7, 1.084, -0.1], pivot: null, turn: 0, hold: 0.05, release: 0.07 },
+  // the GW-4: the pad on the trigger 55% down the blade, against ChatGPT 2's own trigger part (its pin at its top, userData.
+  // triggerPin). No press yet: the fit's middle finger is 0.8 mm into the trigger's tip at rest and any turn of the trigger
+  // drives it further in (1.6 mm at 0.04 rad); Claude 1 is moving it below the guard, then the pull is solved
+  m4: { part: 'trigger', rest: [-0.223, 1.86, 0.25, -0.093], pull: [-0.223, 1.86, 0.25, -0.093], pivot: null, turn: 0, hold: 0.05, release: 0.07 }
+});
+
+// CE-2 (J110: "Fire selection. Needs animation and manual manipulation by player fingers for each weapon"; J130): a gun's
+// controls that show its state. selector: the lever turned to the fire mode (st.fireMode, X), about its axle (gun space;
+// x null: the control's own x), turns (rad about the gun's x from the model's rest) per mode, in time s. The GW-4's lever
+// as modelled points forward and down: semi; a quarter turn back and down: auto (the AR's SAFE/SEMI/AUTO run, no SAFE here).
+export const VM_CONTROLS = Object.freeze({
+  m4: { selector: { axle: [null, -0.012, -0.11], turns: { semi: 0, auto: 1.5708 }, time: 0.12 } }
 });

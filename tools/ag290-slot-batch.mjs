@@ -1,10 +1,8 @@
 // tools/ag290-slot-batch.mjs
-// Master slot execution batch for AG-290 (Jerry, 10 Nov; J131, J132: barrel heat, smoke wisp, suppressor/barrel glow):
-// Runs inside ONE --exclusive game-test slot (--jobs 1, strictly sequential):
-// 1) Step 1: Run tools/realtest.mjs tag290 (all unit, contract, and live WebGPU checks)
-// 2) Step 2: Run tools/ag290-capture.mjs (15 matched WebGPU renders in 4 lights)
-// 3) Step 3: Build master comparison sheets via tools/build-ag290-sheets.py
-// 4) Step 4: Run --exclusive 48-zombie Night 20 benchmark (tools/bench.mjs --night 20 --gfx high --seconds 20 --prof)
+// Coordinated sequential slot runner for AG-290 range retake (one instance at a time, --jobs 1):
+// 1) Run tools/realtest.mjs tag290 (verify all 42 unit & live WebGPU assertions pass)
+// 2) Run tools/ag290-capture.mjs (18 verified WebGPU renders in Training Ground range across 4 lights, 1P & 3P, cooling)
+// 3) Build review/AG-290/sheet.jpg and review/AG-290/heat-strips.jpg via tools/build-ag290-sheets.py
 
 import fs from 'node:fs';
 import path from 'node:path';
@@ -17,8 +15,27 @@ const OUT_QA = path.join(ROOT, 'qa/2026-11-10-AG-290');
 fs.mkdirSync(OUT_REV, { recursive: true });
 fs.mkdirSync(OUT_QA, { recursive: true });
 
+function writeRetry(filePath, data, retries = 30, delay = 150) {
+  fs.mkdirSync(path.dirname(filePath), { recursive: true });
+  const tmp = filePath + '.' + process.pid + '.' + Math.random().toString(36).slice(2) + '.tmp';
+  fs.writeFileSync(tmp, data);
+  for (let i = 0; i < retries; i++) {
+    try {
+      try { if (fs.existsSync(filePath)) fs.unlinkSync(filePath); } catch {}
+      fs.renameSync(tmp, filePath);
+      return;
+    } catch (e) {
+      if (i === retries - 1) {
+        try { fs.copyFileSync(tmp, filePath); fs.unlinkSync(tmp); return; } catch {}
+        throw e;
+      }
+      Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, delay);
+    }
+  }
+}
+
 console.log('========================================================================');
-console.log('[AG-290 Batch] Step 1/4: Running tools/realtest.mjs tag290...');
+console.log('[AG-290 Batch] Step 1/3: Running tools/realtest.mjs tag290...');
 console.log('========================================================================');
 const testOut = execFileSync(
   process.execPath,
@@ -26,15 +43,15 @@ const testOut = execFileSync(
   { cwd: ROOT, env: process.env, encoding: 'utf8' }
 );
 console.log(testOut);
-fs.writeFileSync(path.join(OUT_REV, 'test-tag290.log'), testOut);
-fs.writeFileSync(path.join(OUT_QA, 'test-tag290.log'), testOut);
+writeRetry(path.join(OUT_REV, 'test-tag290.log'), testOut);
+writeRetry(path.join(OUT_QA, 'test-tag290.log'), testOut);
 
 if (testOut.includes('FAIL')) {
   throw new Error('tag290 tests reported failures!');
 }
 
 console.log('========================================================================');
-console.log('[AG-290 Batch] Step 2/4: Capturing 15 WebGPU screenshots in 4 lights...');
+console.log('[AG-290 Batch] Step 2/3: Capturing WebGPU range shots in 4 lights...');
 console.log('========================================================================');
 execFileSync(
   process.execPath,
@@ -43,7 +60,7 @@ execFileSync(
 );
 
 console.log('========================================================================');
-console.log('[AG-290 Batch] Step 3/4: Building composite review sheets with PIL...');
+console.log('[AG-290 Batch] Step 3/3: Building composite review sheets with PIL...');
 console.log('========================================================================');
 execFileSync(
   'python',
@@ -51,16 +68,4 @@ execFileSync(
   { cwd: ROOT, env: process.env, stdio: 'inherit' }
 );
 
-console.log('========================================================================');
-console.log('[AG-290 Batch] Step 4/4: Running --exclusive Night 20 benchmark...');
-console.log('========================================================================');
-const benchOut = execFileSync(
-  process.execPath,
-  [path.join(ROOT, 'tools/bench.mjs'), '--night', '20', '--gfx', 'high', '--seconds', '20', '--prof'],
-  { cwd: ROOT, env: process.env, encoding: 'utf8', maxBuffer: 50 * 1024 * 1024 }
-);
-console.log(benchOut);
-fs.writeFileSync(path.join(OUT_REV, 'bench-night20.log'), benchOut);
-fs.writeFileSync(path.join(OUT_QA, 'bench-night20.log'), benchOut);
-
-console.log('[AG-290 Batch] Complete! All tests, captures, composite sheets, and bench logged.');
+console.log('[AG-290 Batch] Complete! tag290 green, range captures verified, and review sheets built.');

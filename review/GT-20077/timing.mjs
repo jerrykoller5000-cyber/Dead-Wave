@@ -6,7 +6,7 @@ import {launch} from '../../tools/cdp.mjs';
 import {save} from '../GT-20076/save.mjs';
 
 const [id,phase='baseline']=process.argv.slice(2);
-assert(['baseline','revised','rework'].includes(phase));
+assert(['baseline','revised','rework','action'].includes(phase));
 assert(process.env.DW_GAME_TEST_TOKEN && /^[a-z0-9-]+$/.test(id));
 const server=await serve(fileURLToPath(new URL('../../',import.meta.url)),0);
 const browser=await launch({headless:false});

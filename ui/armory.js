@@ -152,10 +152,11 @@ export function mountArmory({ doc = document, bus = window, cif = doc.getElement
         ? text('armory.typed.carried', {count: carried})
         : text('armory.typed.carriedCap', {count: carried, cap: row.cap})));
       const full = row.canBuy === false || row.full === true;
-      const shortfall = Math.max(0, row.price - getCash());
+      const buyN = row.buyN ?? row.pack, buyPrice = row.buyPrice ?? row.price;
+      const shortfall = Math.max(0, buyPrice - getCash());
       const price = full ? text('armory.typed.full') : shortfall
-        ? text('armory.store.shortfall', {price: row.price, amount: shortfall})
-        : text('armory.typed.pack', {count: row.pack, price: row.price});
+        ? text('armory.store.shortfall', {price: buyPrice, amount: shortfall})
+        : text('armory.typed.pack', {count: buyN, price: buyPrice});
       copy.append(el('small', 'armory-typed-price', price));
       const buy = el('button', null, text('armory.typed.buy', {type: name}));
       buy.type = 'button'; buy.dataset.buyAmmoType = id;

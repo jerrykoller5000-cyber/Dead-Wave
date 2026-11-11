@@ -152,11 +152,13 @@
       { T.setAmmoDbg('pistol', 3); T.startReload();
         const started = await until(() => T.isReloading(), 3000); await until(() => vm.info.reloadKind != null, 2000);
         ok(started && vm.info.reloadKind === 'tactical', 'rounds left: the tactical reload (' + vm.info.reloadKind + ')');
-        const tp = new Set(), ts = new Set(); let slideMoved = 0; const srcSlide = src.userData.slide;
-        while (T.isReloading()) { tp.add(vm.info.handPlace); ts.add(vm.info.magState); if (vm.gun.slide && srcSlide) slideMoved = Math.max(slideMoved, Math.abs(vm.gun.slide.position.z - srcSlide.position.z)); await wait(30); }
-        ok(tp.has('well') && tp.has('pouch') && !tp.has('work'), 'tactical: the support hand goes to the well and the pouch and never to the slide (' + [...tp].join(' ') + ')');
+        const tp = new Set(), ts = new Set(); let slideMoved = 0; const base = vm.gun.workBase ? vm.gun.workBase.z : null;
+        while (T.isReloading()) { tp.add(vm.info.handPlace); ts.add(vm.info.magState); if (vm.gun.slide && base != null) slideMoved = Math.max(slideMoved, Math.abs(vm.gun.slide.position.z - base)); await wait(30); }
+        // CE-2 (J103: "Do not see hand racking slide for reload, need to see"; CLAUDE DIRECTOR 11 Nov): the pistol is racked by
+        // the support hand on every reload, rounds left or not, one rack of its own travel (VM_RELOADS.pistol.rack, 0.07)
+        ok(tp.has('well') && tp.has('pouch') && tp.has('work'), 'tactical: the support hand goes to the well, the pouch and the slide (' + [...tp].join(' ') + ')');
         ok(ts.has('hand') && ts.has('pouch') && ts.has('seated'), 'tactical: the magazine out, away and back (' + [...ts].join(' ') + ')');
-        ok(slideMoved < 0.005, 'tactical: the view racks no slide of its own (' + (slideMoved * 100).toFixed(2) + ' cm off the body\'s)'); }
+        ok(slideMoved > 0.055 && slideMoved < 0.085, 'tactical: one rack of the slide\'s own travel, not his body\'s on top of it (' + slideMoved.toFixed(3) + ' gun units; the rack 0.07)'); }
       ok(maxFit < 0.015, 'the magazine rides the support palm (its foot within ' + (maxFit * 100).toFixed(2) + ' cm)');
       ok(hidden, 'away in the pouch it is out of sight');
       (real ? ok : (c, m) => out.push('INFO ' + m + ' (the stand-in three)'))(rackSteep > 0.61 && rackSteep < Infinity, 'racking the slide, the support forearm runs down out of the view, at least 35 degrees below level on screen (' + (rackSteep * 180 / Math.PI).toFixed(0) + ')');

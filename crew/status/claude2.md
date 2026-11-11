@@ -2,12 +2,12 @@
 
 state: active
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: CB-294 J133 the ammo system: types per gun, X to change, unload then load, rounds kept; hull by type
-touching: combat/ammo-types.js (new), combat/ammo-types.test.mjs (new), index.html (the shotgun's loads and types, X, reload step, casings' hull, Armory hooks, HUD tag, updateViewmodel's ammo fields, TT export), tools/tests/tcb294.js (new), tools/tests/tcb248.js, docs/ammo.md (new)
-since: 2026-11-11T01:49Z
+task: CB-299 GT-20079: the rack and carry copies hide the revolver's reload-only parts
+touching: index.html (carryGunCopy, TT export: carryGunCopyDbg), tools/tests/tcb299.js (new)
+since: 2026-11-11T02:47Z
 next: CB-243 The full suite on the current tree, reds by owner (in your c
 blocked-on: —
-last-report: handoffs/2026-11-11-claude2-CB-296.md
+last-report: handoffs/2026-11-11-claude2-CB-297.md
 
 ## Notes
 

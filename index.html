@@ -1468,6 +1468,7 @@
     import { createTrainingInfirmary } from './game/training-infirmary.js'; // GP-19882
     import { createTrainingArmoryCollision } from './game/training-armory-collision.js'; // GP-19895
     import { createTrainingStationCollision } from './game/training-station-collision.js'; // GP-20085
+    import { createTrainingZombieCollision, trainingZombieClearance } from './game/training-zombie-collision.js'; // GP-20086
     import { createTrainingInfirmaryFence } from './game/training-infirmary-fence.js'; // GP-19893
     import { createTrainingRelease } from './ui/training-release.js';   // GP-191
     import { createHitPops, hitPopText } from './ui/training-hit-pops.js';   // CL-171
@@ -1533,6 +1534,8 @@ import { fetchBruteGetUp, createBruteGetUp } from './combat/brute-getup.js'; // 
     import { feralPose, createFeralMotion, resetFeralClaws, applyFeralClaws } from './game/feral-motion.js';   // GP-198: Jerry's Feral motion pass
     import { createSawStart, stepSawStart, sawStartPose } from './game/chainsaw-animation.js';
     import { SHOTGUN_LOADS, SHOTGUN_LOAD_IDS, isShotgunLoad, shotgunLoadStats, shotgunLoadParams, shotgunHitBase } from './combat/shotgun-loads.js';   // CB-248 (J114): the pump shotgun's 3.5-inch buckshot and slug
+    import { AMMO_TYPES, hasTypes as ammoHasTypes, typeIds as ammoTypeIds, issuedType as ammoIssuedType, canonType as ammoCanon, typeOf as ammoTypeOf, typeStats as ammoTypeStats, nextType as ammoNextType, createTypeSwitch, j134Breaches } from './combat/ammo-types.js';   // CB-294 (J133, J134): ammo types per gun, X to change, unload then load
+    import { spentCaseGeometry, roundGeometry } from './studio/weapon-casings.js';   // CB-294 (GT-20080): the shotgun's hull by type
     import { createTrainingWreck } from './combat/training-wreck.js';   // CB-250 (J120, J122): the flamer burns a plate to ash, a shell blows it apart; the range computer dies
     import { bladeColumn, bladePoint, trainingBladeHits, bladeHeading } from './combat/saw-blade.js';   // CB-251 (J121): the saw cuts where its chain is
     import { marineAimPoint, AIM_PERSONAL_SPACE } from './ui/marine-aim-safety.js';
@@ -16864,6 +16867,19 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       return ((0xb0 + (k * 0x18 | 0)) << 16) | ((0x8a + (k * 0x10 | 0)) << 8) | (0x3a + (Math.random() * 0x08 | 0));
     }
     const casingGeo = new THREE.CylinderGeometry(0.012, 0.013, 0.038, 6);
+    // CB-294 (J133: "The cartridges must reflect their real-world counterparts on all guns. Primarily the spent casings."):
+    // each gun's own spent case (GT-20075/GT-20080, studio/weapon-casings.js) at its real size, its colours in the geometry
+    // under a white vertex-colour material (a little tint rolled per case); the old cylinder only where the art has no case.
+    const caseMatPool = makeMatPool(MAX_CASINGS, () => new THREE.MeshStandardMaterial({
+      color: 0xffffff, vertexColors: true, metalness: 0.85, roughness: 0.32, transparent: true, opacity: 1
+    }));
+    function caseLook(w) {
+      let geo = null; try { geo = spentCaseGeometry(THREE, w); } catch (e) { geo = null; }
+      if (!geo) return null;
+      const mat = caseMatPool(), k = 0.9 + Math.random() * 0.1;
+      mat.color.setRGB(k, k * (0.97 + Math.random() * 0.03), k * (0.94 + Math.random() * 0.06));
+      return { geo, mat };
+    }
     const _casingPos = new THREE.Vector3();
     const _casingVel = new THREE.Vector3();
     const _casingQuat = new THREE.Quaternion();
@@ -16931,12 +16947,14 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       // Pooled, and the brass tint is re-rolled onto the pooled material rather than
       // baked into a new one: colour is a uniform, so changing it costs nothing, while
       // a new material would cost a pipeline on every shot.
-      const mat = casingMatPool();
-      mat.color.setHex(tint);
+      const look = caseLook(weaponId);   // CB-294: the gun's own case
+      const mat = look ? look.mat : casingMatPool();
+      if (!look) mat.color.setHex(tint);
       mat.opacity = 1;
-      const mesh = acquireEffectMesh(casingGeo, mat, MAX_CASINGS + 8);
+      const mesh = acquireEffectMesh(look ? look.geo : casingGeo, mat, MAX_CASINGS + 8);
       mesh.position.copy(_casingPos);
-      mesh.scale.set(cfg.sx, cfg.sy, cfg.sz);
+      if (look) mesh.scale.set(1, 1, 1); else mesh.scale.set(cfg.sx, cfg.sy, cfg.sz);
+      mesh.userData.caseOf = weaponId;
       gun.getWorldQuaternion(_casingQuat);
       mesh.quaternion.copy(_casingQuat);
       mesh.rotateZ(Math.PI * 0.5);
@@ -16997,12 +17015,14 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       // Pooled, and the brass tint is re-rolled onto the pooled material rather than
       // baked into a new one: colour is a uniform, so changing it costs nothing, while
       // a new material would cost a pipeline on every shot.
-      const mat = casingMatPool();
-      mat.color.setHex(tint);
+      const look = caseLook('revolver');   // CB-294: its own case
+      const mat = look ? look.mat : casingMatPool();
+      if (!look) mat.color.setHex(tint);
       mat.opacity = 1;
-      const mesh = new THREE.Mesh(casingGeo, mat);
+      const mesh = new THREE.Mesh(look ? look.geo : casingGeo, mat);
       mesh.position.copy(_casingPos);
-      mesh.scale.set(cfg.sx, cfg.sy, cfg.sz);
+      if (look) mesh.scale.set(1, 1, 1); else mesh.scale.set(cfg.sx, cfg.sy, cfg.sz);
+      mesh.userData.caseOf = 'revolver';
       mesh.castShadow = false;
       gun.getWorldQuaternion(_casingQuat);
       mesh.quaternion.copy(_casingQuat);
@@ -17061,12 +17081,14 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       // Pooled, and the brass tint is re-rolled onto the pooled material rather than
       // baked into a new one: colour is a uniform, so changing it costs nothing, while
       // a new material would cost a pipeline on every shot.
-      const mat = casingMatPool();
-      mat.color.setHex(tint);
+      const look = caseLook('launcher');   // CB-294: its own case
+      const mat = look ? look.mat : casingMatPool();
+      if (!look) mat.color.setHex(tint);
       mat.opacity = 1;
-      const mesh = new THREE.Mesh(casingGeo, mat);
+      const mesh = new THREE.Mesh(look ? look.geo : casingGeo, mat);
       mesh.position.copy(_casingPos);
-      mesh.scale.set(cfg.sx, cfg.sy, cfg.sz);
+      if (look) mesh.scale.set(1, 1, 1); else mesh.scale.set(cfg.sx, cfg.sy, cfg.sz);
+      mesh.userData.caseOf = 'launcher';
       mesh.castShadow = false;
       gun.getWorldQuaternion(_casingQuat);
       mesh.quaternion.copy(_casingQuat);
@@ -17102,6 +17124,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       color: 0xc62828, metalness: 0.22, roughness: 0.55, transparent: true, opacity: 1
     }));
     const shellRimGeo = new THREE.CylinderGeometry(0.0195, 0.0195, 0.006, 8);
+    const hullMatPool = makeMatPool(30, () => new THREE.MeshStandardMaterial({   // CB-294: GT-20080's hulls carry their colours
+      color: 0xffffff, vertexColors: true, metalness: 0.2, roughness: 0.6, transparent: true, opacity: 1
+    }));
     const shellRimMat = new THREE.MeshStandardMaterial({ color: 0xb08a3a, metalness: 0.9, roughness: 0.3 });
     const shellMeshPool = [];
 
@@ -17117,10 +17142,14 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       // Pooled like the brass: a fresh hull material, a fresh rim geometry and a fresh
       // rim material per shot was three allocations and, on the real GPU, a shader
       // variant compiled on the first pump of every match.
-      const red = 0xc62828 + (Math.random() * 0x0a0808 | 0);
-      const mat = shellMatPool();
-      mat.color.setHex(red);
+      // CB-294 (J133): the hull is the fired type's: ChatGPT 2's spent shell (GT-20080, its own colours, a white vertex-colour
+      // material) when it builds, else the old hull in the type's colour.
+      const ht = shotgunChamber.type || 'birdshot';
+      let hullGeo = null; try { hullGeo = spentCaseGeometry(THREE, 'shotgun', ht); } catch (e) { hullGeo = null; }
+      const mat = hullGeo ? hullMatPool() : shellMatPool();
+      if (!hullGeo) mat.color.setHex(ammoTypeOf('shotgun', ht).hullHex);
       mat.opacity = 1;
+      shotgunChamber.hulls.push(ht); if (shotgunChamber.hulls.length > 32) shotgunChamber.hulls.shift();
       let mesh = shellMeshPool.pop();
       if (!mesh) {
         mesh = new THREE.Mesh(shotgunShellGeo, mat);
@@ -17132,9 +17161,12 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         scene.add(mesh);
       }
       mesh.material = mat;
+      mesh.geometry = hullGeo || shotgunShellGeo;   // CB-294
+      for (const ch of mesh.children) ch.visible = !hullGeo;   // the old brass rim band only on the old hull
+      mesh.userData.hullType = ht;
       mesh.visible = true;
       mesh.position.copy(_casingPos);
-      mesh.scale.set(1.15, 1.0, 1.15);
+      if (hullGeo) mesh.scale.set(1, 1, 1); else mesh.scale.set(1.15, 1.0, 1.15);
       mesh.castShadow = false;
       gun.getWorldQuaternion(_casingQuat);
       mesh.quaternion.copy(_casingQuat);
@@ -24049,8 +24081,32 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // with: SHOTGUN_BASE with the fitted load laid over it (combat/shotgun-loads.js; every reader of the sheet - the shot, the
     // cone, the reach - sees it). The Breacher (aa12) takes none.
     const SHOTGUN_BASE = Object.freeze({ ...WEAPON_STATS.shotgun });
-    let shotLoad = 'std', shotLoadOwned = {};
-    function applyShotgunLoad() { Object.assign(WEAPON_STATS.shotgun, shotgunLoadStats(SHOTGUN_BASE, shotLoad)); }
+    // CB-294 (J133, Jerry 10 Nov; J134, D-150; combat/ammo-types.js, docs/ammo.md): ammo types. CB-248's fitted 3.5-inch loads gave
+    // way to them. A gun with types (the pump shotgun: birdshot, the issued round; buckshot; slug) holds one type at a time
+    // (ammoLoaded) and fires with that type's sheet; he carries each type in its own count (birdshot's is the 12ga reserve as it
+    // always was, the others typedCarry), bought by the pack at the Armory. X changes the type (startAmmoSwitch): every round in
+    // the gun comes out, one at a time, back into its own count (he keeps them), then the new type goes in, at a real pace
+    // (ammoSwitch; the view's hands follow st.ammoSwitch, CE-3). Firing, R or a weapon change stops it where it is.
+    const ammoLoaded = {}, typedCarry = {};
+    for (const g of Object.keys(AMMO_TYPES)) { ammoLoaded[g] = ammoIssuedType(g); typedCarry[g] = {}; }
+    const ammoSwitch = createTypeSwitch('shotgun');
+    let ammoSwitchGun = null, ammoSwitchCount = 0, ammoShellShown = null;
+    const shotgunChamber = { type: 'birdshot', hulls: [] };   // the type of the shell last fired: its hull goes out on the pump
+    function ammoCarried(g, t) { t = ammoCanon(g, t); if (!t) return 0; return t === ammoIssuedType(g) ? (reserveAmmo[caliberOf(g)] | 0) : (typedCarry[g][t] | 0); }
+    function ammoAddCarried(g, t, n) {
+      t = ammoCanon(g, t); if (!t || !n) return;
+      if (t === ammoIssuedType(g)) reserveAmmo[caliberOf(g)] = Math.max(0, (reserveAmmo[caliberOf(g)] | 0) + n);
+      else typedCarry[g][t] = Math.max(0, (typedCarry[g][t] | 0) + n);
+    }
+    function ammoCarriedAll(g) { const o = {}; for (const t of ammoTypeIds(g)) o[t] = ammoCarried(g, t); return o; }
+    function ammoTypeCap(g) { return reserveCap(caliberOf(g)); }   // each type up to the calibre's reserve cap
+    function applyShotgunLoad() { Object.assign(WEAPON_STATS.shotgun, ammoTypeStats(SHOTGUN_BASE, 'shotgun', ammoLoaded.shotgun)); }
+    function resetAmmoTypes() {
+      ammoSwitch.cancel(); ammoSwitchGun = null;
+      for (const g of Object.keys(AMMO_TYPES)) { ammoLoaded[g] = ammoIssuedType(g); typedCarry[g] = {}; }
+      shotgunChamber.type = ammoIssuedType('shotgun'); shotgunChamber.hulls.length = 0;
+      applyShotgunLoad();
+    }
     // Jerry's hit sheet scores a shell as a part of the body's health (game/hit-balance.js); this is the number a shot is tagged with so
     // that a load's own pellets and damage count in it (the issued shell tags 9, as before). See shotgunHitBase.
     function shellHitBase(weapon, st) { return weapon === 'shotgun' ? shotgunHitBase(SHOTGUN_BASE, st, HIT_SHELL.shotgun) : st.damage; }
@@ -24864,12 +24920,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         desc: dwText('armory.mod.laserLightHelp'), owned: !!gearOwned.laserLight, fitted: !!laserLightFitted[w],
         price: equipmentPrice(GEAR.find(g => g.key === 'laserLight').cost, pricingNight) });
       if (w === 'pistol') out.push({ id: 'auto', slot: 'trigger', name: dwText('armory.mod.auto'), desc: dwText('armory.mod.autoHelp'), owned: pistolAutoOwned, fitted: pistolAutoFitted, price: equipmentPrice(PISTOL_AUTO_PRICE, pricingNight) });
-      if (w === 'shotgun') for (const lid of SHOTGUN_LOAD_IDS) {   // CB-248 (J114): the pump's 3.5-inch loads; one in the tube at a time
-        const L = SHOTGUN_LOADS[lid];
-        out.push({ id: 'load:' + lid, slot: 'ammo', name: sayText('armory.mod.load.' + lid, {}, L.name),
-          desc: sayText('armory.mod.load.' + lid + 'Help', shotgunLoadParams(SHOTGUN_BASE, lid), L.help),
-          owned: !!shotLoadOwned[lid], fitted: shotLoad === lid, price: equipmentPrice(L.price, pricingNight) });
-      }
+      // CB-294: CB-248's 3.5-inch loads gave way to ammo types: rounds bought by type (getAmmoTypes / onBuyAmmoType), X changes them
       if (DUAL_CAPABLE[w]) out.push({ id: 'pair', slot: 'carry', name: dwText('armory.mod.pair', { weapon: WEAPON_STATS[w].name }),
         desc: dwText('armory.mod.pairHelp', { weapon: WEAPON_STATS[w].name }), owned: !!dualOwned[w],
         fitted: runArmory.loadout().secondary.includes(`${w}:second`),
@@ -24914,10 +24965,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         if (on) opticFitted[w] = kind;
         else if (opticFitted[w] === kind) delete opticFitted[w];
         syncOpticLooks();
-      } else if (id.startsWith('load:')) {   // CB-248: fitting one takes the other out; taking it off goes back to the issued shell
-        const lid = id.slice(5);
-        if (on) shotLoad = lid; else if (shotLoad === lid) shotLoad = 'std';
-        applyShotgunLoad();
+      } else if (id.startsWith('load:')) {   // CB-294: nothing to fit any more (ammo types; the workbench lists no loads)
       } else if (id === 'auto') {
         pistolAutoFitted = on;   // GB-127: unfitted it fires semi whatever fireMode says; fitted again, his last choice (AUTO by default)
       } else if (id === 'tank') {
@@ -25127,7 +25175,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       syncMagazine(w); return accepted;
     }
     issueWeaponMagazines('pistol', 12, START_RESERVE_45);
-    function reserveOf(w) { return isMagazineWeapon(w) && magazineStore[w] ? spareMagazineRounds(magazineStore, w) : reserveAmmo[caliberOf(w)] | 0; }
+    function reserveOf(w) { if (ammoHasTypes(w)) return ammoCarried(w, ammoLoaded[w]);   // CB-294: the type in the gun
+      return isMagazineWeapon(w) && magazineStore[w] ? spareMagazineRounds(magazineStore, w) : reserveAmmo[caliberOf(w)] | 0; }
     // Armour pieces carry an armor value; together they make the armor pool that
     // soaks part of every hit before health does (see damagePlayer). The helmet is
     // also the NVG mount, so night vision needs it first.
@@ -25216,7 +25265,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       extMag = {};
       extMagOwned = {}; heavyOwned = {}; heavyFitted = {};   // GB-84
       suppressor = {}; suppressorOwned = {};   // CL-113
-      shotLoad = 'std'; shotLoadOwned = {}; applyShotgunLoad();   // CB-248: a new run, the issued shell and nothing bought
+      resetAmmoTypes();   // CB-294: a new run: the issued type loaded, none of the others carried
       opticOwned = {}; opticFitted = {};
       opticTopWant = {}; opticTop = {}; opticLabelT = 0;   // CL-323
       syncOpticLooks();
@@ -29550,14 +29599,111 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       reportPurchase('suppressor:' + w, equipmentPrice(SUPPRESSOR_PRICE[w], day));
       renderShop();
     }
-    // CB-248 (J114): a 3.5-inch load for the pump shotgun. Bought once at the Armory's workbench, fitted there like the can.
-    function buyShotgunLoad(lid) {
-      const L = SHOTGUN_LOADS[lid];
-      if (!L || shotLoadOwned[lid] || !weaponOwned.shotgun || !spend(equipmentPrice(L.price, day))) return;
-      shotLoadOwned[lid] = true;
-      boughtForArmory(L.name);
-      reportPurchase('load:' + lid + ':shotgun', equipmentPrice(L.price, day));
-      renderShop();
+    // CB-294: a pack of one ammo type (combat/ammo-types.js: its pack and price), up to the calibre's reserve cap. Birdshot is the
+    // 12ga pack as it always was. The old workbench route (load:buck / load:slug) buys a pack of that type.
+    function buyShotgunLoad(lid) { return buyAmmoType('shotgun', lid); }
+    function buyAmmoType(g, t) {
+      t = ammoCanon(g, t);
+      if (!t || !weaponOwned[g]) return false;
+      const T = ammoTypeOf(g, t), cap = ammoTypeCap(g), have = ammoCarried(g, t);
+      if (have >= cap) return false;
+      const n = Math.min(T.pack, cap - have), price = Math.ceil(T.price * n / T.pack);   // a part pack up to the cap costs its part
+      if (!spend(price)) return false;
+      ammoAddCarried(g, t, n);
+      reportPurchase('ammo:' + t + ':' + g, price);
+      updateAmmoHud(); renderShop();
+      return { bought: n, price };
+    }
+    // What the Armory and the HUD read (GP-20083): null for a gun without types.
+    function ammoTypeState(g) {
+      if (!ammoHasTypes(g)) return null;
+      const cap = ammoTypeCap(g), carried = ammoCarriedAll(g), types = {};
+      for (const id of ammoTypeIds(g)) {
+        const t = ammoTypeOf(g, id);
+        types[id] = { id, name: t.name, tag: t.tag, real: t.real, pack: t.pack, price: t.price, hull: t.hull, hullHex: t.hullHex,
+          cap, room: Math.max(0, cap - carried[id]), canBuy: !!weaponOwned[g] && carried[id] < cap,
+          buyN: Math.max(0, Math.min(t.pack, cap - carried[id])), buyPrice: Math.ceil(t.price * Math.max(0, Math.min(t.pack, cap - carried[id])) / t.pack) };
+      }
+      const sw = ammoSwitch.active() && ammoSwitchGun === g ? ammoSwitch.state() : null;
+      const next = ammoNextType(g, ammoLoaded[g], carried);
+      return { kind: g, order: ammoTypeIds(g), types, loaded: ammoLoaded[g], inGun: ammoByWeapon[g] | 0, carried, next, switching: sw,
+        canSwitch: !sw && !!next && !reloading };
+    }
+    // X on a gun with types: the next type he carries (or `to`). Every round in the gun comes out first, then the new ones go in.
+    function startAmmoSwitch(to) {
+      const g = currentWeapon;
+      if (!ammoHasTypes(g) || ammoSwitch.active() || reloading || unarmed || vault || mortarMounted) return false;
+      if (g === 'shotgun' && shotgunPumping) return false;
+      const carried = ammoCarriedAll(g);
+      to = to ? ammoCanon(g, to) : ammoNextType(g, ammoLoaded[g], carried);
+      if (!to || to === ammoLoaded[g] || !(carried[to] > 0)) {
+        AudioSys.emptyClick();
+        showBanner(sayText('ammo.switch.none', {}, 'NO OTHER AMMO'), sayText('ammo.switch.noneHelp', {}, 'Buy buckshot or slugs at the Armory'), 1.4, '#ffb347');
+        return false;
+      }
+      if (!ammoSwitch.start(ammoLoaded[g], to, ammoByWeapon[g] | 0, carried[to], magSize(g))) return false;
+      ammoSwitchGun = g; ammoSwitchCount++;
+      AudioSys.reloadCue('grab', 0.6);
+      updateAmmoHud();
+      return true;
+    }
+    // Each frame: the rounds that moved, into and out of the counts; stopped by a shot, R, a weapon change or the hands' leaving.
+    function updateAmmoSwitch(dt) {
+      if (!ammoSwitch.active()) return;
+      const g = ammoSwitchGun;
+      if (g !== currentWeapon || unarmed || reloading || vault || mortarMounted || gameOver || (fireHeld && (ammoByWeapon[g] | 0) > 0)) {
+        ammoSwitch.cancel(); ammoSwitchGun = null; syncReloadShell(g); updateAmmoHud(); return;
+      }
+      const st0 = ammoSwitch.state();
+      const r = ammoSwitch.step(dt);
+      if (r.unload) {
+        const n = Math.min(r.unload, ammoByWeapon[g] | 0);
+        ammoByWeapon[g] -= n; ammoAddCarried(g, st0.from, n);
+        AudioSys.reloadCue('grab', 0.6);
+      }
+      if (r.load) {
+        if (ammoLoaded[g] !== st0.to) { ammoLoaded[g] = st0.to; if (g === 'shotgun') applyShotgunLoad(); }
+        const n = Math.max(0, Math.min(r.load, ammoCarried(g, st0.to), magSize(g) - (ammoByWeapon[g] | 0)));
+        ammoAddCarried(g, st0.to, -n); ammoByWeapon[g] += n;
+        AudioSys.reloadCue('shell');
+      }
+      if (r.done) {
+        if (st0.load > 0 && ammoLoaded[g] !== st0.to) { ammoLoaded[g] = st0.to; if (g === 'shotgun') applyShotgunLoad(); }
+        ammoSwitchGun = null;
+        AudioSys.reloadDone();
+      }
+      syncReloadShell(g);
+      if (r.unload || r.load || r.done) updateAmmoHud();
+    }
+    // GT-20080: the shell the hand holds is the one going in or coming out (the type in the gun otherwise).
+    function syncReloadShell(g) {
+      if (g !== 'shotgun') return;
+      const sw = ammoSwitch.active() ? ammoSwitch.state() : null;
+      const want = sw ? (sw.phase === 'unload' ? sw.from : sw.to) : ammoLoaded.shotgun;
+      if (want === ammoShellShown) return;
+      const set = weaponMeshes && weaponMeshes.shotgun && weaponMeshes.shotgun.userData.setReloadShellType;
+      if (typeof set === 'function') { try { set(want); ammoShellShown = want; } catch (e) { /* the art's call; a fault there leaves the shell as it was */ } }
+    }
+    // GT-20080 (ChatGPT 2): a gun whose model shows the top round in its magazine (gun.userData.setMagazineRounds, the KR-7 first)
+    // is told the rounds in it whenever they change: a shot, a reload's seat, a draw.
+    const _magArtShown = {};
+    function syncMagazineArt() {
+      const w = currentWeapon, g = weaponMeshes && weaponMeshes[w], set = g && g.userData && g.userData.setMagazineRounds;
+      if (typeof set !== 'function') return;
+      const n = Number.isFinite(ammoByWeapon[w]) ? Math.max(0, ammoByWeapon[w] | 0) : 0;
+      if (_magArtShown[w] === n) return;
+      _magArtShown[w] = n;
+      try { set(n); } catch (e) { /* the art's call */ }
+    }
+    // The HUD's tag for the gun's type, or the change as it runs.
+    function ammoHudTag(g) {
+      const sw = ammoSwitch.active() && ammoSwitchGun === g ? ammoSwitch.state() : null;
+      const tagOf = (id) => sayText('ammo.type.' + id + '.tag', {}, ammoTypeOf(g, id).tag);
+      if (sw && sw.phase !== 'settle') {   // ChatGPT's words (ui/strings.js hud.ammo.switching), the rounds as they go
+        const un = sw.phase === 'unload', ph = sayText('hud.ammo.switch.' + (un ? 'unload' : 'load'), {}, un ? 'unloading' : 'loading');
+        return sayText('hud.ammo.switching', { type: tagOf(sw.to), phase: ph }, 'Changing to ' + tagOf(sw.to) + ' · ' + ph) + ' ' + (un ? sw.unloaded + '/' + sw.unload : sw.loaded + '/' + sw.load);
+      }
+      return tagOf(ammoLoaded[g]);
     }
     function buyOptic(w, kind) {
       if (!OPTIC_OPTIONS[w]?.includes(kind) || opticOwned[w]?.[kind] || !spend(equipmentPrice(OPTIC_PRICE[kind], day))) return;
@@ -30235,6 +30381,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         else if (id === 'tank') buySawTank();
         return !!armoryMods(kind).find(m => m.id === id)?.owned;
       },
+      getAmmoTypes: (kind) => ammoTypeState(kind),   // CB-294 (GP-20083): the types, counts and the change as it runs
+      onBuyAmmoType: (kind, type) => { if (phase !== 'prep' || nightLockdown()) return false; return buyAmmoType(kind, type); },
       getAmmoOffer: (kind) => {
         if (!weaponOwned[kind]) return null;
         const quote = ammoRestockPlan(kind);
@@ -30246,9 +30394,6 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         if (kind === 'm240' || kind === 'mortar') return buyAmmo(kind === 'm240' ? '7.62 belt' : '60mm');
         return buyWeaponAmmo(kind).bought > 0;
       },
-      getAmmoTypes: (kind) => typeof ammoTypeState === 'function' ? ammoTypeState(kind) : null,
-      onBuyAmmoType: (kind, type) => phase === 'prep' && !nightLockdown() && typeof buyAmmoType === 'function'
-        ? buyAmmoType(kind, type) : false,
       getCash: () => bank,
       getGunOffers: () => WEAPON_ORDER.filter(w => !weaponOwned[w])
         .sort((a, b) => Number(training.active || equipmentStocked(b, day)) - Number(training.active || equipmentStocked(a, day)) || weaponPrice(a) - weaponPrice(b))
@@ -30285,7 +30430,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         const st = WEAPON_STATS[kind];
         if (!st) return '';
         if (st.melee) return Math.max(0, Math.ceil(sawFuel)) + 's of gas';
-        return (Number.isFinite(ammoByWeapon[kind]) ? Math.ceil(ammoByWeapon[kind]) : '∞') + ' loaded · ' + reserveOf(kind) + ' spare' + (kind === 'shotgun' && shotLoad !== 'std' ? ' · ' + SHOTGUN_LOADS[shotLoad].tag : '');   // CB-248
+        return (Number.isFinite(ammoByWeapon[kind]) ? Math.ceil(ammoByWeapon[kind]) : '∞') + ' loaded · ' + reserveOf(kind) + ' spare' + (ammoHasTypes(kind) ? ' · ' + ammoHudTag(kind) : '');   // CB-294: the type in the gun
       },
       onApply: applyArmoryLoadout,
       onReset: () => { armoryLive = false; return (runArmory = createArmory()); },
@@ -51851,7 +51996,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (e.code === 'KeyX') {
         if (!e.repeat && !typingInField(e.target)) {
           if (placeMode || buildMode) { if (placeMode && !mortarCarried) { scrapHeld = true; updateGhostPreview(); } else sellNearestBuild(); }
-          else if (gameStarted && !gameOver && !won) toggleFireMode();
+          else if (gameStarted && !gameOver && !won) { if (ammoHasTypes(currentWeapon)) startAmmoSwitch(); else toggleFireMode(); }   // CB-294 (J134): X changes the ammo on a gun with types, the selector otherwise
         }
         e.preventDefault();
       }
@@ -52129,7 +52274,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         if (ammoWeaponEl) ammoWeaponEl.textContent = st.name + ' · ' + sayText('hud.ammo.typeHint');
         if (ammoCountEl) ammoCountEl.textContent = String(loaded);
         if (ammoDetailEl) ammoDetailEl.textContent = typedAmmo.switching
-          ? sayText('hud.ammo.switching', { type: sayText('ammo.type.' + typedAmmo.switching.to + '.tag', {}, typedAmmo.switching.to), phase: sayText('hud.ammo.switch.' + typedAmmo.switching.phase) })
+          ? ammoHudTag(currentWeapon)
           : reloading ? sayText('hud.ammo.typedReloading', {type, reserve})
           : sayText('hud.ammo.typed', {loaded, capacity: magSize(currentWeapon), type, reserve});
         if (loaded <= 0 && !reloading && !typedAmmo.switching) ammoEl.classList.add('empty');
@@ -52152,7 +52297,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         const res = reserveOf(currentWeapon);
         if (ammoCountEl) ammoCountEl.textContent = String(ammoLabel);
         const mode = selectorGun(currentWeapon) ? ('  ·  ' + (weaponIsAuto(currentWeapon) ? 'AUTO' : 'SEMI')) : '';
-        const loadTag = currentWeapon === 'shotgun' && shotLoad !== 'std' ? '  ·  ' + sayText('shotgun.load.' + shotLoad, {}, SHOTGUN_LOADS[shotLoad].tag) : '';   // CB-248
+        const loadTag = ammoHasTypes(currentWeapon) ? '  ·  ' + ammoHudTag(currentWeapon) : '';   // CB-294: the type in the gun, or the change as it runs
         if (ammoDetailEl) ammoDetailEl.textContent = ammoLabel + ' / ' + magSize(currentWeapon) + '  ·  ' + res + ' Bullets' + mode + loadTag;
         if (Number.isFinite(ammo) && ammo <= 0) ammoEl.classList.add('empty');
         else ammoEl.classList.remove('empty');
@@ -52174,7 +52319,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     const AUTO_RELOAD_DELAY = 0.25;
     let autoReloadT = 0;
     function autoReloadDue(ammo, dt) {
-      if (ammo > 0 || reloading || !gameStarted || paused || gameOver || won || placeMode || buildMode || vault || unarmed || mortarMounted || playerSwimming) { autoReloadT = 0; return false; }
+      if (ammo > 0 || reloading || ammoSwitch.active() || !gameStarted || paused || gameOver || won || placeMode || buildMode || vault || unarmed || mortarMounted || playerSwimming) { autoReloadT = 0; return false; }
       const st = WEAPON_STATS[currentWeapon];
       if (!st || st.melee || !Number.isFinite(st.maxAmmo) || st.reload <= 0) return false;
       if (isMagazineWeapon(currentWeapon) ? !magazineStore[currentWeapon]?.spare.length : reserveOf(currentWeapon) <= 0) return false;
@@ -52191,6 +52336,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
     function startReload() {
       if (!gameStarted || paused || gameOver || won || placeMode || buildMode || vault) return;
+      if (ammoSwitch.active()) { ammoSwitch.cancel(); const g = ammoSwitchGun; ammoSwitchGun = null; syncReloadShell(g); updateAmmoHud(); }   // CB-294: R stops a change of type where it is
       if (mortarMounted && mortarMounted.type === 'm240') {   // GB-138: R on the Watchman changes its belt
         const b = mortarMounted;
         if (!feedM240(b) && !(b.feedT > 0) && (b.belt | 0) < (b.beltMax | 0)) m240BeltEmpty();
@@ -52315,13 +52461,13 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         // accounted for at its visible insertion beat in updateReloadAnim.
         reloading = false;
       } else if (w === 'shotgun') {
-        const c = caliberOf(w);
-        if ((reserveAmmo[c] | 0) > 0 && ammoByWeapon[w] < magSize(w)) {
+        const lt = ammoLoaded[w];   // CB-294: the tube holds one type; a reload tops it up with the same
+        if (ammoCarried(w, lt) > 0 && ammoByWeapon[w] < magSize(w)) {
           ammoByWeapon[w]++;
-          reserveAmmo[c]--;
+          ammoAddCarried(w, lt, -1);
           // GB-133: a shell going in adds no brass; launcherSpent counts the fired cases still in the drum.
         }
-        if (ammoByWeapon[w] < magSize(w) && (reserveAmmo[c] | 0) > 0 && !mouseFireHeld) {
+        if (ammoByWeapon[w] < magSize(w) && ammoCarried(w, lt) > 0 && !mouseFireHeld) {
           reloadTimer = reloadRoundTime;
           reloadAnimDuration = reloadRoundTime;
           reloadCueNext = 0;
@@ -52996,6 +53142,12 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       st.fireHeld = !!fireHeld && currentWeapon === st.weapon;
       st.fireMode = selectorGun(currentWeapon) ? (weaponIsAuto(currentWeapon) ? 'auto' : 'semi') : null;
       st.selector = selectorFlick.state;
+      // J118 (CB-297, Claude 5's CE-2): the revolver's double-action pull while it runs: u 0 at the click, 1 at the break (the shot)
+      st.triggerPull = currentWeapon === 'revolver' && revolverPullT >= 0 ? { weapon: 'revolver', u: Math.min(1, revolverPullT / REVOLVER_PULL) } : null;
+      // CB-294 (CE-3, Claude 5): the change of ammo type as it runs (from, to, phase 'unload' | 'load' | 'settle', u the round in
+      // hand 0..1, unloaded/unload, loaded/load) and the type in the gun; null on a gun without types.
+      st.ammoSwitch = ammoSwitch.active() && ammoSwitchGun === currentWeapon ? ammoSwitch.state() : null;
+      st.ammoType = ammoHasTypes(currentWeapon) ? ammoLoaded[currentWeapon] : null;
       viewmodel.update(dt, st);
     }
     // CL-247: the third-person aim zoom (AIMZ above). Not with the sniper (its scope, until CL-249), the mounted guns,
@@ -55824,6 +55976,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       }
     }
 
+    // J118 (CB-297): the revolver is double action: the trigger's long pull cocks and drops the hammer, so the shot goes at the
+    // break, REVOLVER_PULL after the click; revolverPullT is the pull under way (seconds, -1 when none).
+    const REVOLVER_PULL = 0.12;
+    let revolverPullT = -1, revolverPullShots = 0;
     function tryFire(dt) {
       if (fireLight.on) return;
       sprayHeat = Math.max(0, sprayHeat - dt * (fireHeld ? 2.4 : 9));
@@ -55963,12 +56119,18 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           const _bs = weaponMeshes.sniper && weaponMeshes.sniper.userData.boltCycle;
           if (_bs && _bs.active) return;
         }
+        if (currentWeapon !== 'revolver' || !fireHeld || ammo <= 0) revolverPullT = -1;   // J118: let go before the break, no shot
         if (ammo <= 0) {
           if (fireHeld && edge) AudioSys.emptyClick();
           return;
         }
         if (!fireHeld) return;
-        const canShoot = weaponIsAuto(currentWeapon) ? (fireCooldown <= 0) : (edge && fireCooldown <= 0);
+        let canShoot = weaponIsAuto(currentWeapon) ? (fireCooldown <= 0) : (edge && fireCooldown <= 0);
+        if (currentWeapon === 'revolver') {   // J118: the pull starts on the click (or, held, when the gun is ready again); the shot at the break
+          if (revolverPullT < 0) { if (fireCooldown > 0) return; revolverPullT = dt; } else revolverPullT += dt;   // the click's frame counts
+          if (revolverPullT < REVOLVER_PULL) return;
+          revolverPullT = -1; revolverPullShots++; canShoot = true;
+        }
         if (canShoot) {
           if(rangeFeature&&!rangeFeature.canAttack(currentWeapon))return;
           if (isMagazineWeapon(currentWeapon)) {
@@ -55996,6 +56158,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
               tagPlayerHit(currentWeapon, shellHitBase(currentWeapon, st), n);   // CB-248
             }
             curShotId = 0;
+            if (currentWeapon === 'shotgun') shotgunChamber.type = ammoLoaded.shotgun;   // CB-294: the hull the pump throws is this type's
             // Pump shotgun: red hull ejects on pump-back - no gold brass here.
             // The AA-12 has no pump to work, so it throws its hull on the shot.
             if (currentWeapon === 'aa12') { spawnCasing('aa12'); if (weaponMeshes.aa12) weaponMeshes.aa12.userData.strokeT = 0; }   // CL-322: the constant-recoil stroke (updateAa12Stroke)
@@ -63729,6 +63892,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       training.infirmaryFence.reset();
       if (!training.perimeter) training.perimeter = createTrainingPerimeter(THREE, training.tg);
       training.perimeter.reset();
+      if (!training.zombieCollision) training.zombieCollision = createTrainingZombieCollision(training.tg, training.stationCollision);
+      training.zombieCollision.reset();
       if (!training.danger) training.danger = createTrainingDanger(THREE, training.tg, training.copies.alarmBeacon);
       training.danger.reset();
       ensureTrainingContainment().reset(); // GP-19879: persistent mounted fixtures, fresh sweep state
@@ -64117,13 +64282,16 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         z.mesh.position.x = z.trainingEntry.x; z.mesh.position.z = z.trainingEntry.z;
         return;
       }
-      const p = z.mesh.position, m = (z.radius || 0.42) + 0.18;
+      const p = z.mesh.position, m = trainingZombieClearance(z);
       const minX = w ? Math.max(r.minX, w.minX + m) : r.minX, maxX = w ? Math.min(r.maxX, w.maxX - m) : r.maxX;
       const minZ = w ? Math.max(r.minZ, w.minZ + m) : r.minZ, maxZ = w ? Math.min(r.maxZ, w.maxZ - m) : r.maxZ;
       if (p.x < minX) p.x = minX; else if (p.x > maxX) p.x = maxX;
       if (p.z < minZ) p.z = minZ; else if (p.z > maxZ) p.z = maxZ;
       training.infirmaryFence?.keepZombie(z);
       training.perimeter?.keepZombie(z);
+      training.zombieCollision?.keep(z);
+      if (p.x < minX) p.x = minX; else if (p.x > maxX) p.x = maxX;
+      if (p.z < minZ) p.z = minZ; else if (p.z > maxZ) p.z = maxZ;
     }
     // A corpse in the build room: it falls and slides inside the walls too. (x, z) is where the body stands; (wx, wz)
     // the world direction it is about to fall; H the body's length. Returns the direction that keeps its head in
@@ -65801,6 +65969,8 @@ live++;
           if (reloadHoldU != null) reloadTimer = Math.max(0.001, (reloadAnimDuration || 1) * (1 - reloadHoldU));   // CL-84: a test holds a pose
           if (reloadTimer <= 0) completeReloadStep();
         }
+        updateAmmoSwitch(dt);   // CB-294
+        syncMagazineArt();   // CB-294 (GT-20080)
         updateReloadAnim(dt);
         updateKnifeAnim(dt);
         PROF.mark('m:reload+knife');
@@ -66538,7 +66708,7 @@ live++;
           // Debug-only: economy hooks. grantAllWeapons hands over the arsenal so the older
           // weapon probes keep working; the rest let probes drive the kiosk directly.
           grantAllWeapons, KIOSK, openShop, closeShop, buyWeapon, buyAmmo, buyGear, buyBuild, skullValueDbg: () => skullValueTotal, siegeNightDbg: () => siegeNightNow, LATE_CASH_NIGHT, LATE_CASH_FACTOR, LATE_CASH_STEP, lateCashMul, buyExtMag, buyHeavyBarrel, fitWeaponMod, weaponMods, HEAVY_BARREL_PRICE, EXT_MAG_RELOAD_MUL, HEAVY_CLIMB_MUL, HEAVY_SWAP_DUR, HEAVY_MOVE_SPREAD_MUL, recoilClimb, getReloadDbg: () => ({ timer: reloadTimer, anim: reloadAnimDuration, weapon: reloadWeapon }), /* CL-84 */ akimboDbg: { AKIMBO_CARRY, carry: () => akimboCarryW, retreat: () => akimboRetreat },   /* CL-188 */ airDbg: { AIR, pose: () => POSE.airPose, jumpNow: () => { if (!grounded) return false; vy = PHYS.jumpVel; grounded = false; coyoteT = 0; return true; } },   /* CL-210 */ rigSkinDbg: { info: (r) => rigSkinInfo(r || marine), count: () => rigSkinCount(), sync: () => syncRigSkins() },   /* CL-189 */ aoDbg: { AO_DEFAULTS, info: () => marine.userData.aoInfo, bake: (o) => (marine.userData.aoInfo = bakeMarineAO(THREE, marine, { ...marine.userData.ao, ...(o || {}) })) },   /* CL-186 */ zombieFeetDbg: { ZFEET, ZLEAN },   /* CL-187 */ gaitDbg: { GAIT, GAIT_FEEL, GAIT_WEIGHT, UNARMED_ARMS, UNARMED_RUN, WINDED, winded: () => POSE.winded || 0, setWinded: (v) => { POSE.winded = v; }, breaths: () => POSE.breaths || 0, pose: () => POSE, clips: () => MARINE_GAIT, w: () => POSE.gaitW || 0, run: () => POSE.gaitRun || 0, sample: (u, r) => { const g = marineGait(u, r); return g && { ...g }; } },   /* CL-84 */ smoothDbg: { MOVE_FEEL, GUN_LAG, xfade: () => XFADE, gunLag: () => gunLag, wish: () => ({ x: wishVX, z: wishVZ }), vel: () => ({ x: velX, z: velZ, y: vy }), lookY: () => camLookYS, pose: () => POSE, phase: () => walkPhase, lerpK: _lerpK, decayK: _decayK },   /* CL-133 */ handsDbg: { HANDS, roll: () => ({ r: handRollR, l: handRollL }), WRIST, HAND_R: _HAND_R, HAND_L: _HAND_L, wrist: () => ({ r: wristTurnR, l: wristTurnL, needR: wristNeedR, needL: wristNeedL }), gripPoint: (side, out = new THREE.Vector3()) => side === 'L' ? fistPointW(marine.userData.elbowLG, _HAND_L, gripAL, out) : fistPointW(marine.userData.elbowRG, _HAND_R, gripAR, out), gripA: () => ({ r: gripAR, l: gripAL }),   /* CU-100: where each hand closes now (the hand point while it isn't holding) */ knife: () => ({ u: knifeArmU, clip: KNIFE_CLIP, chop: MACHETE_CLIP, dur: knifeSwingDur, places: _kp }), FP_BLADE_PATH, FP_BLADE_AIM, FP_BLADE_DIP, fpBladeDip: () => fpBladeDip, BLADE_BODY, bladeTwist: (u, h) => bladeTwist(u, h),   /* CL-261 */ knifeHold: (u) => { knifeHoldU = u == null ? null : _clamp01(u); if (u != null) { knifeSwingDur = bladeSwingDur(); knifeAnimT = knifeSwingDur * (1 - knifeHoldU) || 0.0001; } }, drawHold: (t) => { drawHoldT = t == null ? null : Math.max(0, t); }, knifeClip: (on) => { if (!on) { _kc = KNIFE_CLIP || _kc; KNIFE_CLIP = null; } else if (_kc) KNIFE_CLIP = _kc; }, drawPlace, gripDownDir, foreChannelDir },   /* CL-122 */ fpReloadLiftDbg: () => FP_RELOAD_LIFT, fpReloadLiftGunDbg: () => FP_RELOAD_LIFT_GUN, fpReloadSetDbg: () => ({ ...fpReloadSet() }),   /* GB-245 */ reloadClipDbg: { clip: () => RELOAD_CLIP, places: () => _rlP, hold: (u) => { reloadHoldU = u == null ? null : _clamp01(u); if (reloading && u != null) reloadTimer = Math.max(0.001, (reloadAnimDuration || 1) * (1 - reloadHoldU)); }, mag: () => (RELOAD_CLIP ? Studio.magAt(RELOAD_CLIP, _clamp01(1 - reloadTimer / Math.max(0.05, reloadAnimDuration || 1))) : null) }, getSwapDbg: () => ({ swapT, swapDur, fireCooldown }), setSprayDbg: (h, n) => { sprayHeat = h; sprayShot = n | 0; sprayWeapon = currentWeapon; }, setVelDbg: (x, z) => { velX = x; velZ = z; }, resetEconomyDbg: () => resetEconomy(), WEAPON_ORDER, buySuppressor, SUPPRESSOR_PRICE, SHOT_HEARING, SUPPRESSED_HEARING_MUL, SUPPRESSED_DAMAGE_MUL, shotHearingRadius, suppressedDamageMul, heardShotDbg: () => ({ shotsHeard, lastShotNoise }), sawCutTick, sawCutDbg: () => ({ holdT: sawCutHoldT, hearT: sawCutHearT, fuel: sawFuel, heat: sawHeat, overheat: sawOverheat, biteT: sawBiteT }), buyPistolAuto, PISTOL_AUTO_PRICE, toggleFireMode, toggleHolster, isUnarmed: () => unarmed, setSpareMags, handInGun, takeOutGun, spareMagCount: (w) => (magazineStore[w] && magazineStore[w].spare ? magazineStore[w].spare.length : 0), magazinesDbg: (w) => (magazineStore[w] ? magazineSnapshot(magazineStore, w) : null), setMagazinesDbg: (w, loaded, spare, loaded2 = null) => { const e = magazineStore[w]; if (!e) return false; e.loaded[0].rounds = Math.min(e.size, loaded | 0); if (loaded2 != null && e.loaded[1]) e.loaded[1].rounds = Math.min(e.size, loaded2 | 0); e.spare = spare.slice(0, e.maxSpare).map((r) => ({ rounds: Math.min(e.size, r | 0), size: e.size })); syncMagazine(w); updateAmmoHud(); return true; }, reloadGainsMagazine, toggleDualWieldDbg: () => toggleDualWield(), setDualOwnedDbg: (w, on = true) => { dualOwned[w] = !!on; if (on && isMagazineWeapon(w) && magazineStore[w]) { issueSecondGun(magazineStore, w); syncMagazine(w); } return !!dualOwned[w]; },   /* CL-188 */   /* GB-137 */ stepFireDbg: (dt) => tryFire(dt), recoilSpan, GEAR, WEAPON_PRICE, AMMO_PACK, caliberOf, RESERVE_CAP, RESERVE_CAP_BASE, SPARE_CAP_MULT, START_RESERVE_45, reserveCap, BUILD_UNLOCK_PRICE,
-          getWeaponOwned: () => weaponOwned, armLimitsDbg: () => armLimitsNow(),   /* CB-289 */ grantWeaponDbg: (w) => { grantVaultWeapon(w); if (w !== 'pistol' && !weaponInReach(w)) takeOutGun(w); return weaponInReach(w); },   /* CB-296: one gun issued with its ammo (tools/bench.mjs --fp) */ toggleFlashlightDbg: () => { toggleFlashlight(); return flashlightOn; }, /* CL-327 */ getReserve: () => reserveAmmo, getGearOwned: () => gearOwned, getBuildUnlocked: () => buildUnlocked,
+          getWeaponOwned: () => weaponOwned, revolverPullDbg: () => ({ t: revolverPullT, pull: REVOLVER_PULL, shots: revolverPullShots }),   /* CB-297 */ ammoTypeState: (g) => ammoTypeState(g), buyAmmoType: (g, t) => buyAmmoType(g, t),   /* CB-294 */ ammoDbg: { start: (to) => startAmmoSwitch(to), state: () => ammoSwitch.state(), loaded: () => ({ ...ammoLoaded }), carried: (g = 'shotgun') => ammoCarriedAll(g), carry: (g, t, n) => ammoAddCarried(g, t, n), count: () => ammoSwitchCount, chamber: () => shotgunChamber.type, hulls: () => [...shotgunChamber.hulls], j134: () => j134Breaches((g) => !!((WEAPON_STATS[g] && WEAPON_STATS[g].auto) || FIRE_SELECT[g] || g === 'pistol')), shellShown: () => ammoShellShown, load: (t) => { const k = ammoCanon('shotgun', t); if (!k) return false; ammoLoaded.shotgun = k; applyShotgunLoad(); updateAmmoHud(); return true; } },armLimitsDbg: () => armLimitsNow(),   /* CB-289 */ grantWeaponDbg: (w) => { grantVaultWeapon(w); if (w !== 'pistol' && !weaponInReach(w)) takeOutGun(w); return weaponInReach(w); },   /* CB-296: one gun issued with its ammo (tools/bench.mjs --fp) */ toggleFlashlightDbg: () => { toggleFlashlight(); return flashlightOn; }, /* CL-327 */ getReserve: () => reserveAmmo, getGearOwned: () => gearOwned, getBuildUnlocked: () => buildUnlocked,
           sawPullDbg: SAW_PULL, /* CL-326 */ getAmmo: () => ammoByWeapon, getPhase: () => phase, setPhase: (p) => { phase = p; }, isShopOpen: () => shopOpen, requestViewToggleDbg: () => requestViewToggle(), viewSwapDbg: (k) => { if (k !== undefined) viewSwapHold = k; return { in: viewSwapIn, out: viewSwapOut, hold: viewSwapHold }; }, /* CL-328 */ getSawFuel: () => sawFuel, sawStartDbg: () => ({ ...sawStart, ...sawStartPose(sawStart) }),
           // Debug-only: survival-rules hooks (health cap, medkits, cash decay, self-damage).
           acidGlobs, pickWaterSpawn, waveComposition, nightPlanFor, NIGHT_PLAN, NIGHT_TIER, nightPushSizes, getWavePace: () => nightPace, pickZombieType, getWavePreview, getBounties, spawnBounties, expireBounties, bountyRewardFor, getSurvivors, survivorDbg, survivorHelpDbg, roofDbg, getHushState, hushDbg, spawnWanderer, wandererAllowed, wandererTrails, wandererReward, WANDERER_PACE, bountyGuardTypes, bountyDbg: () => ({ due: bountiesDue, seq: !!hq.seq, last: bountyLastKeys.slice() }), getWaveDirectorState, getActiveCaveIndices, spawnWaveBatch, beginWave, startPrep, clearZombies, isGuardianNight, getGuardianState, getGuardianAlive, GUARDIAN_KEYS, ZOMBIE_TYPES, MAX_ZOMBIES, spawnObjectiveDefenders, getRadioDefenderState, grantSupply, listOwnedAmmoPackChoices, grantBuildBlueprint, pulseGuardianFailsafeForTest, RADIO_DEFENDER, CAVE_ROLES, roleForCave, applyCaveRole, CLIMB_HEIGHT, climberCanVaultBuild, warnActiveCaves, getRendererBackend: () => rendererBackend, TSL,
@@ -66582,11 +66752,11 @@ live++;
             lights: () => ({ on: !training.lightsOff, night: isNight, room: training.tg ? training.tg.lightsOn() : null }), toggleLights: () => toggleTrainingLights() /* CU-94 */, char: () => training.char }, flameDbg: { particles: () => flameParticles, stages: FLAME_STAGES }, /* CL-114 */ stockNoticeDbg: { arrivals: (n) => stockArrivals(n), queue: (n) => queueStockNotice(n), state: () => ({ t: stockNotice.t, hold: stockNotice.hold, guns: stockNotice.guns.slice(), shown: stockNotice.shown.slice(), visible: !!(stockNotice.el && stockNotice.el.classList.contains('show')) }), tick: (dt) => updateStockNotice(dt), show: (guns) => showStockNotice(guns), setDay: (n) => { day = n; }, NIGHT: GUN_STOCK_NIGHT }, modsOwnAllDbg: () => { for (const w in OPTIC_OPTIONS) { opticOwned[w] = opticOwned[w] || {}; for (const k of OPTIC_OPTIONS[w]) opticOwned[w][k] = true; } for (const w in SUPPRESSOR_PRICE) suppressorOwned[w] = true; return true; }, /* CL-332 */ armoryFinishDbg: { list: (k) => armoryFinishes(k), paint: (k, key) => paintArmoryGun(k, key) }, /* CL-113 */ armoryDbg: { mods: (w) => armoryMods(w), fit: (w, id, on) => fitArmoryMod(w, id, on), inReach: () => weaponsInReach(), picture: (k) => armoryPicture(k), pics: () => ({ drawn: armoryPics.drawn, cached: armoryPics.cache.size, ok: !!armoryPics.r }), rack: () => (house.armoryRack ? house.armoryRack.children.map((g) => g.userData.rackKind).filter(Boolean) : null), refreshRack: () => refreshArmoryRack(true), stored: () => armoryStoredKinds(), bigtex: () => bigtexWheel, ui: () => armoryUI, owned: () => ({ suppressor: { ...suppressorOwned }, auto: pistolAutoOwned, tank: sawTankUpgraded }) }, /* CL-83 */ nightRimDbg, /* CL-108, CL-109 */ historyProps, storyPropInReach, /* CL-111 */ runeFinishDbg: { unlocked: () => runeFinishUnlocked(), unlock: () => unlockRuneFinish(), lock: () => { runeFinish.unlocked = false; try { localStorage.removeItem(RUNE_FINISH_STORE); } catch (_) {} }, isGunFinishKey: (k) => isGunFinishKey(k), tex: () => runeFinish.tex, glow: (l) => updateRuneFinishGlow(l), state: () => runeFinish, furniture: () => gunFurniture, readWardrobe: () => readWardrobe(), KEY: RUNE_FINISH_KEY }, /* CL-78 */ guardianBossDbg: { rigOf: (z) => (z && z.mesh && z.mesh.userData.bossRig) || null, update: (dt) => updateGuardianBossRigs(dt), BOSS_RIG }, /* CL-93 */ rabbitDbg: { ensure: () => ensureRabbitMound(), state: () => rabbitMound, update: (dt) => updateRabbitMound(dt), wake: () => wakeKillerRabbit(), hit: (a, b) => rabbitMoundHit(a.x, a.y, a.z, b.x, b.y, b.z), give: () => { ensureRabbitMound(); rabbitMound.holy = true; rabbitMound.reliquary.userData.grenade.visible = false; }, ready: () => holyGrenadeReady(), throwG: () => { grenadeCd = 0; throwGrenade(); }, reset: () => resetRabbitMound(), distToPath: (x, z) => distToPath(x, z), RABBIT }, /* CL-92 */ lightningDbg: { yank: () => bootsYankPress(), yankState: () => ({ ...bootsYank, inReach: bootsYankInReach() }), skeleton: () => POI.mast && POI.mast.skeleton, strike: (k) => strikeLightning(k || null), update: (dt) => updateLightning(dt), state: () => lightning, odds: (o) => { lightning.odds = o || null; }, boots: () => ensureInsulatedBoots(), wear: (p) => wearInsulatedBoots(p || localPlayer), /* CL-178 */ mast: () => ({ ladder: mastLadder(), climb: mastClimb, high: onMastHigh(), perch: POI.mast ? POI.mast.perch : null, PERCH: MAST_PERCH }), climbMast: (y) => { const L = mastLadder(); if (!L) return false; mastClimb.on = true; climbingTower = true; player.position.set(L.x, Math.min(L.top, L.foot + (y || 0)), L.z); velX = 0; velZ = 0; vy = 0; return true; }, leaveMast: () => letGoOfMast(), /* CL-179 */ fall: () => mastFall, smoke: () => zapSmoke, ladderNow: () => ladderNow(), holster: () => ({ ...ladderHolster, unarmed }), /* CL-180 */ limbs: () => _lad.st, handTargets: () => _lad.hand, LADDER_GRIP, worn: (p) => insulatedBootsOn(p || localPlayer), reset: () => resetLightning(), marine: () => worldMarine, bolt: (x, z, hold) => { showBolt({ x, y: sampleHeight(x, z), z }); if (hold) { lightning.boltT = 1e9; lightning.flashT = 0; lightning.flashEl.style.opacity = '0'; } }, LIGHTNING, BOOTS_HEX }, /* CL-76 */ fogNightDbg: { active: () => fogNightActive(), k: () => fogNightK, force: (v) => { fogNightForce = v; }, step: (dt) => updateDayNight(dt), apply: (dt) => applyFogNight(dt), FOG_NIGHT }, /* CL-75 */ makeSurvivorFigure, SURVIVOR_LOOK, resolveTreeCollisionsDbg: (dt) => resolveTreeCollisions(dt),   /* CL-80 */ boatRig, getExtractionBoat: () => extractionBoat, /* CL-143 */ trainingBuildDbg: { refusal: (x, z, gx, gz, kind) => { const was = placeMode; if (kind) placeMode = kind; try { return placeRefusal(x, z, gx, gz); } finally { placeMode = was; } }, area: () => training.tg && training.tg.build, gridIndex }, /* CL-142 */ makeCargoPlane, insertionDbg: { begin: () => beginMarineInsertion(), rig: () => marineInsertion, ordersEl: () => ordersCardEl }, BOARD_HOLD_S, boardingDbg: () => ({ holdT: boardHoldT, pending: !!boardPending, reach: boardingReach(), won, gameOver, hot: !!matchStats.hotExtraction, state: extractionState }),   /* CL-73 */ setGunSuppressor, SUPPRESSOR,   /* CL-95 */
           addDummyPlayer, removeDummyPlayer, nearestPlayer, playersNear, playerById, players, getPlayers: () => players, nightKindForDay: (d) => nightKindOf(d, nightPlanFor(d), isGuardianNight(d)),   /* CU-77 */
         });
-        window.TT.shotLoadDbg = { base: SHOTGUN_BASE,   // CB-248
-          owned: () => shotLoadOwned, fitted: () => shotLoad, stats: () => ({ ...WEAPON_STATS.shotgun }),
-          grant: (lid) => { if (!isShotgunLoad(lid)) return false; shotLoadOwned[lid] = true; return true; },
-          buy: (lid) => buyShotgunLoad(lid), fit: (lid) => fitArmoryMod('shotgun', 'load:' + lid, true),
-          clear: () => (shotLoad === 'std' ? true : fitArmoryMod('shotgun', 'load:' + shotLoad, false)),
+        window.TT.shotLoadDbg = { base: SHOTGUN_BASE,   // CB-248, CB-294: the types in place of the fitted loads
+          owned: () => ammoCarriedAll('shotgun'), fitted: () => ammoLoaded.shotgun, stats: () => ({ ...WEAPON_STATS.shotgun }),
+          grant: (t) => { const k = ammoCanon('shotgun', t); if (!k) return false; ammoAddCarried('shotgun', k, 20); return true; },
+          buy: (t) => buyAmmoType('shotgun', t), fit: (t) => { const k = ammoCanon('shotgun', t); if (!k) return false; ammoLoaded.shotgun = k; applyShotgunLoad(); updateAmmoHud(); return true; },
+          clear: () => { ammoLoaded.shotgun = ammoIssuedType('shotgun'); applyShotgunLoad(); updateAmmoHud(); return true; },
           mods: (w = 'shotgun') => armoryMods(w).filter((m) => m.id.startsWith('load:')).map((m) => ({ ...m })),
           reach: () => projectileLifeFor(WEAPON_STATS.shotgun) * WEAPON_STATS.shotgun.speed, hud: () => (ammoDetailEl ? ammoDetailEl.textContent : ''),
           flight: () => projectiles.filter((p) => !p.fromTurret && p.hitWeapon === 'shotgun').map((p) => ({ shot: p.shotId, dmg: p.damage, base: p.hitBase, of: p.pelletOf || 1, reach: p.life * p.speed, dir: [p.dir.x, p.dir.y, p.dir.z] })) };

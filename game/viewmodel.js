@@ -15,7 +15,7 @@
 //
 // index.html calls update(dt, state) each frame before it draws and place() in renderFrame; it asks muzzleWorld()
 // where the view gun's muzzle appears (the laser leaves from there).
-import { VM, VM_POSES, VM_RELOADS, VM_SOCKETS, VM_BLADES, VM_GRENADE, VM_HANDS, VM_TRIGGER } from './viewmodel-poses.js';
+import { VM, VM_POSES, VM_RELOADS, VM_SOCKETS, VM_BLADES, VM_GRENADE, VM_HANDS, VM_TRIGGER, VM_CONTROLS } from './viewmodel-poses.js';
 import { SIGHT } from './sight-points.js';
 import { buildViewArm, wristSpacePoint, HAND_SCALE } from '../studio/fp-arms.js';
 import { copyPose, lerpPose, HAND_POSES } from '../studio/marine-hand.js';
@@ -575,6 +575,9 @@ export function createViewmodel(ctx) {
   function tacticalOf(R) {
     if (!R || !R.mag || !R.rack) return R;   // no rack: a tube, a cylinder, a drum: the same reload either way
     let T2 = tacCache.get(R); if (T2) return T2;
+    // CE-2 (J103: "Do not see hand racking slide for reload, need to see"; CLAUDE DIRECTOR 11 Nov: one rack on every pistol
+    // reload): a path with tacticalRack keeps its whole path, the rack included, with rounds left too
+    if (R.tacticalRack) { T2 = Object.freeze({ ...R, tactical: true }); tacCache.set(R, T2); return T2; }
     const end = Math.min(0.9, (R.mag.seat || 0.6) + 0.1), k = 1 / end;
     const hand = R.hand.filter((h) => h[0] <= end && h[1] !== 'work').map((h) => [Math.min(1, h[0] * k), h[1], h[2]]);
     hand.push([1, 'fore', 'fore']);
@@ -898,6 +901,24 @@ export function createViewmodel(ctx) {
     for (let j = 0; j < 4; j++) c.pose.f[0][j] = pose.f[0][j];
     return c;
   }
+  // CE-2 (J110, J130): controls that show the gun's state (VM_CONTROLS): the selector's lever eased to the turn for
+  // st.fireMode about its axle. Runs after mirrorParts (his own gun's selector doesn't turn), so each frame from the rest.
+  const _ctlP = V3(), _ctlQ = Q(), ctlAng = {};
+  function controlStates(g, st, dt) {
+    const C = VM_CONTROLS[g.key]; if (!C) return;
+    const sel = C.selector, part = sel && g.ctrls.selector;
+    if (part && part.parent === g.root) {
+      const want = (st.fireMode && sel.turns[st.fireMode] != null) ? sel.turns[st.fireMode] : 0, id = g.key + '|sel';
+      let a = ctlAng[id]; if (a == null || g !== ctlAng.gun) { a = want; ctlAng.gun = g; }
+      const step = Math.abs(sel.turns.auto - sel.turns.semi || 1) * (dt / (sel.time || 0.12));
+      a += Math.max(-step, Math.min(step, want - a)); ctlAng[id] = a;
+      if (Math.abs(a) > 1e-5) {
+        _ctlP.set(sel.axle[0] == null ? part.position.x : sel.axle[0], sel.axle[1], sel.axle[2]); _ctlQ.setFromAxisAngle(AX_X, a);
+        part.position.sub(_ctlP).applyQuaternion(_ctlQ).add(_ctlP); part.quaternion.premultiply(_ctlQ);
+      }
+      info.selector = a;
+    }
+  }
   // CE-1: a shot's stroke: 0 to 1 by tb, held to th, home (0) by te; 0 outside.
   const stroke = (t, tb, th, te) => (t < 0 ? 0 : t < tb ? smooth(t / tb) : t < th ? 1 : t < te ? 1 - smooth((t - th) / (te - th)) : 0);
   // CE-1 (GT-20075, Claude 5): the action on a view copy, t seconds after its last shot. Runs after mirrorParts, which
@@ -916,8 +937,13 @@ export function createViewmodel(ctx) {
     // A double action: at the shot the sear has broken (the trigger back, the hammer down on the pin); the trigger
     // goes forward again to its reset and the hammer stays down (resetting). Not in a reload: that has the hammer.
     const da = A.doubleAction;
-    if (da && g.trigger && g.hammer && ud.doubleActionPose && st.reloadU == null && t < da.t[2]) {
-      ud.doubleActionPose(g.trigger, g.hammer, stroke(t, da.t[0], da.t[1], da.t[2]), true);
+    // J118 (CLAUDE DIRECTOR's (c), 11 Nov: "Hammer needs to pull back on trigger pull like it would in real double action"):
+    // while index.html's trigger lead runs (st.triggerPull.u, 0 at the click, 1 at the break) the pull draws the hammer up
+    // to full cock (.88 of the travel); the round goes at the break and the reset follows as above
+    const lead = st.triggerPull && st.triggerPull.weapon === g.key && st.triggerPull.u != null && g === gun ? clamp(st.triggerPull.u, 0, 1) : null;
+    if (da && g.trigger && g.hammer && ud.doubleActionPose && st.reloadU == null) {
+      if (lead != null) ud.doubleActionPose(g.trigger, g.hammer, 0.88 * lead, false);
+      else if (t < da.t[2]) ud.doubleActionPose(g.trigger, g.hammer, stroke(t, da.t[0], da.t[1], da.t[2]), true);
     }
   }
   // A shot's kick into a pair of springs (back, up, a random side), and the view's share of it (CL-293).
@@ -1048,9 +1074,13 @@ export function createViewmodel(ctx) {
     // port (the model's recoilBoltPose, its stroke the model's portStroke), the revolver's trigger and hammer (the
     // model's doubleActionPose). Each cycle ends before the next shot can come (the gun's interval).
     actionCycle(gun, P, S.slideT, st);
+    controlStates(gun, st, dt);   // CE-2 (J110): the selector shows the fire mode
     if (gun2) { S.slideT2 += dt; actionCycle(gun2, P, S.slideT2, st); }
     // The reload's bolt/charging-handle pull follows the support hand after the magazine seats.
     { const Rr = reloadOf(P, st), rk = Rr && Rr.rack, ur = st.reloadU;
+      // CE-2 (J103): through a reload the view's slide or handle is the view's own: his body's rack (mirrored from his gun
+      // by mirrorParts) moved it with no hand on it in a tactical reload and doubled the empty reload's (0.196 for 0.07)
+      if (gun.work && gun.workBase && ur != null && !AK) gun.work.position.z = gun.workBase.z;
       if (gun.work && rk && ur != null) { const back = smooth((ur - rk[0]) / (rk[1] - rk[0])) * (1 - smooth((ur - rk[2]) / 0.03)); gun.work.position.z -= rk[3] * back; } }
     // the hands (CL-301: a pair has no support hand: the left holds the left gun as the right holds its own, and no
     // reload hands; both guns dip in gunFrame)
@@ -1229,7 +1259,8 @@ export function createViewmodel(ctx) {
       poseR = _trigPose; trigOn = true; info.trigger = k;
       const tp = gun.ctrls[TR.part || 'trigger'];
       if (tp && tp.parent === gun.root && TR.turn) {
-        _trgP.set(TR.pivot[0], TR.pivot[1], TR.pivot[2]); _trgQ.setFromAxisAngle(AX_X, TR.turn * k);
+        if (TR.pivot) _trgP.set(TR.pivot[0], TR.pivot[1], TR.pivot[2]); else _trgP.copy(tp.position);   // no pivot: the control's own origin (its pin, userData.triggerPin)
+        _trgQ.setFromAxisAngle(AX_X, TR.turn * k);
         tp.position.sub(_trgP).applyQuaternion(_trgQ).add(_trgP); tp.quaternion.premultiply(_trgQ);
       }
     } else { S.trig = 0; info.trigger = null; }

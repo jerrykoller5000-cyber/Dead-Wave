@@ -1,0 +1,330 @@
+{
+  "controls": {
+    "trigger": {
+      "name": "revolver-trigger",
+      "resolves": true,
+      "independent": true,
+      "pin": [
+        0,
+        -0.008,
+        0.036
+      ]
+    },
+    "hammer": {
+      "name": "controls-hammer",
+      "resolves": true,
+      "independent": true,
+      "pin": [
+        0,
+        0.085,
+        -0.08
+      ]
+    }
+  },
+  "triggerPin": [
+    0,
+    -0.008,
+    0.036
+  ],
+  "independentBarrels": true,
+  "live": [
+    {
+      "frame": 0,
+      "shots": 1,
+      "blade": 0.36,
+      "hammer": 0
+    },
+    {
+      "frame": 1,
+      "shots": 1,
+      "blade": 0.36,
+      "hammer": 0
+    },
+    {
+      "frame": 2,
+      "shots": 1,
+      "blade": 0.36,
+      "hammer": 0
+    },
+    {
+      "frame": 3,
+      "shots": 1,
+      "blade": 0.36,
+      "hammer": 0
+    },
+    {
+      "frame": 4,
+      "shots": 1,
+      "blade": 0.36,
+      "hammer": 0
+    },
+    {
+      "frame": 5,
+      "shots": 1,
+      "blade": 0.35801758855921756,
+      "hammer": 0
+    },
+    {
+      "frame": 6,
+      "shots": 1,
+      "blade": 0.34660420262458563,
+      "hammer": 0
+    },
+    {
+      "frame": 7,
+      "shots": 1,
+      "blade": 0.3264787266102298,
+      "hammer": 0
+    },
+    {
+      "frame": 8,
+      "shots": 1,
+      "blade": 0.2992849510972302,
+      "hammer": 0
+    },
+    {
+      "frame": 9,
+      "shots": 1,
+      "blade": 0.26666666666666666,
+      "hammer": 0
+    },
+    {
+      "frame": 10,
+      "shots": 1,
+      "blade": 0.23026766389961925,
+      "hammer": 0
+    },
+    {
+      "frame": 11,
+      "shots": 1,
+      "blade": 0.1917317333771678,
+      "hammer": 0
+    },
+    {
+      "frame": 12,
+      "shots": 1,
+      "blade": 0.1527026656803924,
+      "hammer": 0
+    },
+    {
+      "frame": 13,
+      "shots": 1,
+      "blade": 0.11482425139037292,
+      "hammer": 0
+    },
+    {
+      "frame": 14,
+      "shots": 1,
+      "blade": 0.07974028108818945,
+      "hammer": 0
+    },
+    {
+      "frame": 15,
+      "shots": 1,
+      "blade": 0.049094545354921824,
+      "hammer": 0
+    },
+    {
+      "frame": 16,
+      "shots": 1,
+      "blade": 0.02453083477165007,
+      "hammer": 0
+    },
+    {
+      "frame": 17,
+      "shots": 1,
+      "blade": 0.0076929399194543,
+      "hammer": 0
+    },
+    {
+      "frame": 18,
+      "shots": 1,
+      "blade": 0.0002246513794142757,
+      "hammer": 0
+    },
+    {
+      "frame": 19,
+      "shots": 1,
+      "blade": 0,
+      "hammer": 0
+    },
+    {
+      "frame": 20,
+      "shots": 1,
+      "blade": 0,
+      "hammer": 0
+    },
+    {
+      "frame": 21,
+      "shots": 1,
+      "blade": 0,
+      "hammer": 0
+    },
+    {
+      "frame": 22,
+      "shots": 1,
+      "blade": 0,
+      "hammer": 0
+    },
+    {
+      "frame": 23,
+      "shots": 1,
+      "blade": 0,
+      "hammer": 0
+    },
+    {
+      "frame": 24,
+      "shots": 1,
+      "blade": 0,
+      "hammer": 0
+    },
+    {
+      "frame": 25,
+      "shots": 1,
+      "blade": 0,
+      "hammer": 0
+    },
+    {
+      "frame": 26,
+      "shots": 1,
+      "blade": 0,
+      "hammer": 0
+    },
+    {
+      "frame": 27,
+      "shots": 1,
+      "blade": 0,
+      "hammer": 0
+    },
+    {
+      "frame": 28,
+      "shots": 1,
+      "blade": 0,
+      "hammer": 0
+    },
+    {
+      "frame": 29,
+      "shots": 1,
+      "blade": 0,
+      "hammer": 0
+    },
+    {
+      "frame": 30,
+      "shots": 1,
+      "blade": 0,
+      "hammer": 0
+    },
+    {
+      "frame": 31,
+      "shots": 1,
+      "blade": 0,
+      "hammer": 0
+    },
+    {
+      "frame": 32,
+      "shots": 1,
+      "blade": 0,
+      "hammer": 0
+    },
+    {
+      "frame": 33,
+      "shots": 1,
+      "blade": 0,
+      "hammer": 0
+    },
+    {
+      "frame": 34,
+      "shots": 1,
+      "blade": 0,
+      "hammer": 0
+    },
+    {
+      "frame": 35,
+      "shots": 1,
+      "blade": 0,
+      "hammer": 0
+    }
+  ],
+  "art": {
+    "noon-rest": {
+      "eye": "revolver",
+      "blade": 0,
+      "hammer": 0
+    },
+    "noon-lift": {
+      "eye": "revolver",
+      "blade": 0.31679999999999997,
+      "hammer": -0.55
+    },
+    "noon-break": {
+      "eye": "revolver",
+      "blade": 0.36,
+      "hammer": 0
+    },
+    "noon-return": {
+      "eye": "revolver",
+      "blade": 0.18,
+      "hammer": 0
+    },
+    "overcast-rest": {
+      "eye": "revolver",
+      "blade": 0,
+      "hammer": 0
+    },
+    "overcast-lift": {
+      "eye": "revolver",
+      "blade": 0.31679999999999997,
+      "hammer": -0.55
+    },
+    "overcast-break": {
+      "eye": "revolver",
+      "blade": 0.36,
+      "hammer": 0
+    },
+    "overcast-return": {
+      "eye": "revolver",
+      "blade": 0.18,
+      "hammer": 0
+    },
+    "dusk-rest": {
+      "eye": "revolver",
+      "blade": 0,
+      "hammer": 0
+    },
+    "dusk-lift": {
+      "eye": "revolver",
+      "blade": 0.31679999999999997,
+      "hammer": -0.55
+    },
+    "dusk-break": {
+      "eye": "revolver",
+      "blade": 0.36,
+      "hammer": 0
+    },
+    "dusk-return": {
+      "eye": "revolver",
+      "blade": 0.18,
+      "hammer": 0
+    },
+    "night-rest": {
+      "eye": "revolver",
+      "blade": 0,
+      "hammer": 0
+    },
+    "night-lift": {
+      "eye": "revolver",
+      "blade": 0.31679999999999997,
+      "hammer": -0.55
+    },
+    "night-break": {
+      "eye": "revolver",
+      "blade": 0.36,
+      "hammer": 0
+    },
+    "night-return": {
+      "eye": "revolver",
+      "blade": 0.18,
+      "hammer": 0
+    }
+  }
+}

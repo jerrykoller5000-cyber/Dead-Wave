@@ -495,6 +495,10 @@ export function buildMarineBody(T, {root, put, rmesh: roundedMesh, cyl, part, dr
     addGear('pads',armG,plate(.09,.082,.019,plateW),0,-.261,-.076,0,Math.PI,0);
     const elbowG=new T.Group();elbowG.position.set(0,-.28,0);elbowG.rotation.set(side<0?-.35:-.2,0,0);armG.add(elbowG);
     const ox=side<0?.02:-.01,oz=side<0?.04:.03;
+    // CC-341 (J128): the glove's cuff (Claude's hand) is centred on the wrist's pivot, 2 cm in front of the sleeve's line,
+    // and the wrist rests turned 66 degrees, so the flat cuff stands 7 cm deep there and its front came 4-6 mm out through
+    // the sleeve's hem: the sleeve's end is centred on the wrist and a little rounder, over it.
+    const CUFF_FWD=.02;
     const sleeve=part(elbowG,dress.sleeveDown),bare=part(elbowG,dress.sleeveRolled);
     const joint=(mat,r)=>{const m=new T.Mesh(new T.SphereGeometry(1,22,16),mat);m.scale.set(r,r,r*1.02);m.castShadow=m.receiveShadow=true;return m;};
     put(part(armG,dress.sleeveDown),joint(uniformW,.0565*ARM_GIRTH),0,-.28,0);
@@ -514,7 +518,7 @@ export function buildMarineBody(T, {root, put, rmesh: roundedMesh, cyl, part, dr
         return [(1-a)*(1-e),a*(1-e),e];
       };
       const upper=girth([[.036,.043,.05,-side*.061],[.022,.069,.07,-side*.042,-.004],[-.018,.075,.078,-side*.027,-.003],[-.09,.068,.073,-side*.022],[-.175,.0635,.0675,-side*.008,.002],[-.215,.061,.065,-side*.004,.002],[-.25,.0585,.0625],[-.28,.0575,.0615]],ARM_GIRTH);
-      const fore=girth([[-.025,.059,.062,ox*.15,oz*.1],[-.05,.066,.07,ox*.35,oz*.3],[-.105,.063,.069,ox*.8,oz*.7],[-.135,.0575,.0615,ox*.92,oz*.86]],FORE_GIRTH).map(([y,rx,rz,,],i)=>[y,rx,rz,[ox*.15,ox*.35,ox*.8,ox*.92][i],[oz*.1,oz*.3,oz*.7,oz*.86][i]]).concat([[-.165,.047,.049,ox,oz],[-.2,.043,.038,ox,oz],[-.226,.041,.034,ox,oz]]);
+      const fore=girth([[-.025,.059,.062,ox*.15,oz*.1],[-.05,.066,.07,ox*.35,oz*.3],[-.105,.063,.069,ox*.8,oz*.7],[-.135,.0575,.0615,ox*.92,oz*.86]],FORE_GIRTH).map(([y,rx,rz,,],i)=>[y,rx,rz,[ox*.15,ox*.35,ox*.8,ox*.92][i],[oz*.1,oz*.3,oz*.7,oz*.86][i]]).concat([[-.165,.047,.049,ox,oz+CUFF_FWD*.6],[-.2,.043,.042,ox,oz+CUFF_FWD],[-.226,.042,.041,ox,oz+CUFF_FWD]]);
       const down=loftRings(T,[...ringsIn(T,root,armG,subdiv(upper,1),{e:.72}),...ringsIn(T,root,elbowG,subdiv(fore,1),{e:.72})],30,{caps:'first'});
       const seamGeo=(pts)=>geoIn(T,root,armG,new T.TubeGeometry(new T.CatmullRomCurve3(pts.map(q=>new T.Vector3(...q))),12,.0012,4,false));
       const capSeamG=seamGeo([[side*.0172,.022,.0328],[side*.0344,-.018,.0379],[side*.0332,-.09,.0378]]);
@@ -535,9 +539,9 @@ export function buildMarineBody(T, {root, put, rmesh: roundedMesh, cyl, part, dr
       liveCloth(T,{space:root,bones,geo:skinL.geo,weights:weigh(T,root,bones,skinL.geo,w3),material:skinW,name:'live-bare-arm',holder:rolled.parent});
       dress.sleeveRolled.push(rolled.parent);
     }
-    put(sleeve,rmesh(.088,.022,.076,uniformW,.008),ox,-.211,oz);   // GB-169: the cuff closes round the slimmer wrist
-    put(sleeve,rmesh(.04,.016,.007,uniformW,.003),ox+side*.02,-.211,oz+.04);
-    put(sleeve,cyl(.004,.004,.003,beltW,6),ox+side*.031,-.211,oz+.045,Math.PI/2);
+    put(sleeve,rmesh(.088,.022,.086,uniformW,.008),ox,-.211,oz+CUFF_FWD);   // GB-169: the cuff closes round the slimmer wrist (CC-341: round the glove's)
+    put(sleeve,rmesh(.04,.016,.007,uniformW,.003),ox+side*.02,-.211,oz+.045+CUFF_FWD);
+    put(sleeve,cyl(.004,.004,.003,beltW,6),ox+side*.031,-.211,oz+.05+CUFF_FWD,Math.PI/2);
     seam(sleeve,[[ox+side*.0445,-.17,oz+.0332],[ox*.8+side*.0497,-.105,oz*.7+.037],[ox*.55+side*.0528,-.075,oz*.5+.038]],uniformW,.0012);
     const gz=side<0?.08:.07;
     // CU-100: the hand turns at the wrist (the top of the palm, on the forearm), so a grip can lie in the fist's channel

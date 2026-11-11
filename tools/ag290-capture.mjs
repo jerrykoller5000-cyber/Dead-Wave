@@ -1,11 +1,11 @@
 // tools/ag290-capture.mjs
 // AG-290 (Jerry, 10 Nov; J131, J132): barrel heat, smoke wisp & barrel/suppressor red glow.
-// Captures matched high-fidelity RTX 5080 WebGPU renders for:
-// 1. First-person M4: Cold vs Sustained Fire (Glowing Barrel + Muzzle Smoke Wisp) across 4 lights (Noon, Overcast, Dusk, Night)
-// 2. First-person M4 Suppressed: Cold vs Hot Suppressor (Glowing Suppressor + Smoke off Suppressor Tip) at Night
-// 3. First-person Minigun: Cold vs Hot (Glowing 6-barrel cluster) at Noon & Night
-// 4. Third-person Marine: Cold vs Hot M4 and Suppressed M4
+// Retaken in the Training Ground firing range on NVIDIA GeForce RTX 5080 using the AG-286 range harness:
+// - GW-4 (m4) fired until hot (heat ~0.90) then naturally cooling (0.58 -> 0.32 -> 0.0), 1P & 3P, across 4 lights
+// - Suppressed GW-4 (can glows & smokes, barrel stays cool), 1P & 3P, across 4 lights
+// - Minigun spun hot (heat ~0.92, 6-barrel cluster glows & smokes), 1P & 3P, across 4 lights
 
+import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -23,106 +23,86 @@ const OUT_REV = path.join(ROOT, 'review/AG-290');
 fs.mkdirSync(OUT_QA, { recursive: true });
 fs.mkdirSync(OUT_REV, { recursive: true });
 
-function writeRetry(filePath, data, retries = 20, delay = 150) {
+function writeRetry(filePath, data, retries = 30, delay = 150) {
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
+  const tmp = filePath + '.' + process.pid + '.' + Math.random().toString(36).slice(2) + '.tmp';
+  fs.writeFileSync(tmp, data);
   for (let i = 0; i < retries; i++) {
     try {
-      fs.writeFileSync(filePath, data);
+      try { if (fs.existsSync(filePath)) fs.unlinkSync(filePath); } catch {}
+      fs.renameSync(tmp, filePath);
       return;
     } catch (e) {
-      if (i === retries - 1) throw e;
+      if (i === retries - 1) {
+        try { fs.copyFileSync(tmp, filePath); fs.unlinkSync(tmp); return; } catch {}
+        throw e;
+      }
       Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, delay);
     }
   }
 }
 
+async function captureScreenshot(page, filePath) {
+  const res = await page.send('Page.captureScreenshot', { format: 'png', captureBeyondViewport: false });
+  const buf = Buffer.from(res.data, 'base64');
+  writeRetry(filePath, buf);
+  return buf;
+}
+
 const SHOTS = [
-  // --- 1. First-person M4 (Unsuppressed) Across 4 Lights (Cold vs Hot) ---
-  {
-    name: 'before-fp-m4-cold-noon.png',
-    title: 'FP M4 Cold (Heat 0.0) · Noon',
-    weapon: 'm4', suppressed: false, heat: 0.0, light: 'noon', firstPerson: true
-  },
-  {
-    name: 'after-fp-m4-hot-noon.png',
-    title: 'FP M4 Hot (Heat 0.88, Glowing Barrel + Smoke Wisp) · Noon',
-    weapon: 'm4', suppressed: false, heat: 0.88, light: 'noon', firstPerson: true
-  },
-  {
-    name: 'before-fp-m4-cold-overcast.png',
-    title: 'FP M4 Cold (Heat 0.0) · Overcast',
-    weapon: 'm4', suppressed: false, heat: 0.0, light: 'overcast', firstPerson: true
-  },
-  {
-    name: 'after-fp-m4-hot-overcast.png',
-    title: 'FP M4 Hot (Heat 0.88, Glowing Barrel + Smoke Wisp) · Overcast',
-    weapon: 'm4', suppressed: false, heat: 0.88, light: 'overcast', firstPerson: true
-  },
-  {
-    name: 'before-fp-m4-cold-dusk.png',
-    title: 'FP M4 Cold (Heat 0.0) · Dusk',
-    weapon: 'm4', suppressed: false, heat: 0.0, light: 'dusk', firstPerson: true
-  },
-  {
-    name: 'after-fp-m4-hot-dusk.png',
-    title: 'FP M4 Hot (Heat 0.88, Glowing Barrel + Smoke Wisp) · Dusk',
-    weapon: 'm4', suppressed: false, heat: 0.88, light: 'dusk', firstPerson: true
-  },
-  {
-    name: 'before-fp-m4-cold-night.png',
-    title: 'FP M4 Cold (Heat 0.0) · Night',
-    weapon: 'm4', suppressed: false, heat: 0.0, light: 'night', firstPerson: true
-  },
-  {
-    name: 'after-fp-m4-hot-night.png',
-    title: 'FP M4 Hot (Heat 0.88, Glowing Red-Orange Barrel + Smoke Wisp) · Night',
-    weapon: 'm4', suppressed: false, heat: 0.88, light: 'night', firstPerson: true
-  },
+  // === 1. First-Person GW-4 (m4): Cold -> Fired Hot (0.90) -> Natural Cooling across 4 Lights ===
+  { name: 'fp-m4-cold-noon.png', title: '1P GW-4 Cold (0.00) · Noon', weapon: 'm4', suppressed: false, heat: 0.0, light: 'noon', firstPerson: true },
+  { name: 'fp-m4-hot-noon.png', title: '1P GW-4 Fired Hot (0.90) · Noon', weapon: 'm4', suppressed: false, heat: 0.90, light: 'noon', firstPerson: true },
+  { name: 'fp-m4-cool58-noon.png', title: '1P GW-4 Cooling (0.58) · Noon', weapon: 'm4', suppressed: false, heat: 0.58, coolingFrom: 0.90, light: 'noon', firstPerson: true },
+  { name: 'fp-m4-cool32-noon.png', title: '1P GW-4 Cooling (0.32) · Noon', weapon: 'm4', suppressed: false, heat: 0.32, coolingFrom: 0.58, light: 'noon', firstPerson: true },
 
-  // --- 2. First-person Suppressor Fitted (Cold vs Hot Suppressor) ---
-  {
-    name: 'before-fp-m4-suppressed-cold-night.png',
-    title: 'FP M4 Suppressed Cold (Heat 0.0) · Night',
-    weapon: 'm4', suppressed: true, heat: 0.0, light: 'night', firstPerson: true
-  },
-  {
-    name: 'after-fp-m4-suppressed-hot-night.png',
-    title: 'FP M4 Suppressed Hot (Heat 0.88, Suppressor Glows & Smokes, Barrel Cool) · Night',
-    weapon: 'm4', suppressed: true, heat: 0.88, light: 'night', firstPerson: true
-  },
+  { name: 'fp-m4-cold-overcast.png', title: '1P GW-4 Cold (0.00) · Overcast', weapon: 'm4', suppressed: false, heat: 0.0, light: 'overcast', firstPerson: true },
+  { name: 'fp-m4-hot-overcast.png', title: '1P GW-4 Fired Hot (0.90) · Overcast', weapon: 'm4', suppressed: false, heat: 0.90, light: 'overcast', firstPerson: true },
 
-  // --- 3. First-person Minigun (Cold vs Hot) ---
-  {
-    name: 'before-fp-minigun-cold-noon.png',
-    title: 'FP Minigun Cold (Heat 0.0) · Noon',
-    weapon: 'minigun', suppressed: false, heat: 0.0, light: 'noon', firstPerson: true
-  },
-  {
-    name: 'after-fp-minigun-hot-noon.png',
-    title: 'FP Minigun Hot (Heat 0.92, 6-Barrel Cluster Glow + Smoke) · Noon',
-    weapon: 'minigun', suppressed: false, heat: 0.92, light: 'noon', firstPerson: true
-  },
+  { name: 'fp-m4-cold-dusk.png', title: '1P GW-4 Cold (0.00) · Dusk', weapon: 'm4', suppressed: false, heat: 0.0, light: 'dusk', firstPerson: true },
+  { name: 'fp-m4-hot-dusk.png', title: '1P GW-4 Fired Hot (0.90) · Dusk', weapon: 'm4', suppressed: false, heat: 0.90, light: 'dusk', firstPerson: true },
 
-  // --- 4. Third-person Marine Holding Gun (Cold vs Hot) ---
-  {
-    name: 'before-tp-marine-m4-cold-noon.png',
-    title: 'TP Marine M4 Cold (Heat 0.0) · Noon',
-    weapon: 'm4', suppressed: false, heat: 0.0, light: 'noon', firstPerson: false
-  },
-  {
-    name: 'after-tp-marine-m4-hot-noon.png',
-    title: 'TP Marine M4 Hot (Heat 0.88, Barrel Glow + Smoke) · Noon',
-    weapon: 'm4', suppressed: false, heat: 0.88, light: 'noon', firstPerson: false
-  },
-  {
-    name: 'after-tp-marine-m4-suppressed-hot-night.png',
-    title: 'TP Marine M4 Suppressed Hot (Heat 0.88, Suppressor Glow + Smoke) · Night',
-    weapon: 'm4', suppressed: true, heat: 0.88, light: 'night', firstPerson: false
-  }
+  { name: 'fp-m4-cold-night.png', title: '1P GW-4 Cold (0.00) · Night', weapon: 'm4', suppressed: false, heat: 0.0, light: 'night', firstPerson: true },
+  { name: 'fp-m4-hot-night.png', title: '1P GW-4 Fired Hot (0.90) · Night', weapon: 'm4', suppressed: false, heat: 0.90, light: 'night', firstPerson: true },
+  { name: 'fp-m4-cool58-night.png', title: '1P GW-4 Cooling (0.58) · Night', weapon: 'm4', suppressed: false, heat: 0.58, coolingFrom: 0.90, light: 'night', firstPerson: true },
+  { name: 'fp-m4-cool32-night.png', title: '1P GW-4 Cooling (0.32) · Night', weapon: 'm4', suppressed: false, heat: 0.32, coolingFrom: 0.58, light: 'night', firstPerson: true },
+
+  // === 2. First-Person Suppressed GW-4 (Can Glows & Smokes, Barrel Stays Cold) in 4 Lights ===
+  { name: 'fp-m4-sup-cold-noon.png', title: '1P Suppressed GW-4 Cold (0.00) · Noon', weapon: 'm4', suppressed: true, heat: 0.0, light: 'noon', firstPerson: true },
+  { name: 'fp-m4-sup-hot-noon.png', title: '1P Suppressed GW-4 Hot (0.90, Can Glows / Barrel Cold) · Noon', weapon: 'm4', suppressed: true, heat: 0.90, light: 'noon', firstPerson: true },
+  { name: 'fp-m4-sup-hot-overcast.png', title: '1P Suppressed GW-4 Hot (0.90, Can Glows / Barrel Cold) · Overcast', weapon: 'm4', suppressed: true, heat: 0.90, light: 'overcast', firstPerson: true },
+  { name: 'fp-m4-sup-hot-dusk.png', title: '1P Suppressed GW-4 Hot (0.90, Can Glows / Barrel Cold) · Dusk', weapon: 'm4', suppressed: true, heat: 0.90, light: 'dusk', firstPerson: true },
+  { name: 'fp-m4-sup-cold-night.png', title: '1P Suppressed GW-4 Cold (0.00) · Night', weapon: 'm4', suppressed: true, heat: 0.0, light: 'night', firstPerson: true },
+  { name: 'fp-m4-sup-hot-night.png', title: '1P Suppressed GW-4 Hot (0.90, Can Glows / Barrel Cold) · Night', weapon: 'm4', suppressed: true, heat: 0.90, light: 'night', firstPerson: true },
+
+  // === 3. First-Person Minigun Spun Hot (6-Barrel Cluster Glows & Smokes) in 4 Lights ===
+  { name: 'fp-minigun-cold-noon.png', title: '1P Minigun Cold (0.00) · Noon', weapon: 'minigun', suppressed: false, heat: 0.0, light: 'noon', firstPerson: true },
+  { name: 'fp-minigun-hot-noon.png', title: '1P Minigun Spun Hot (0.92) · Noon', weapon: 'minigun', suppressed: false, heat: 0.92, light: 'noon', firstPerson: true },
+  { name: 'fp-minigun-hot-overcast.png', title: '1P Minigun Spun Hot (0.92) · Overcast', weapon: 'minigun', suppressed: false, heat: 0.92, light: 'overcast', firstPerson: true },
+  { name: 'fp-minigun-hot-dusk.png', title: '1P Minigun Spun Hot (0.92) · Dusk', weapon: 'minigun', suppressed: false, heat: 0.92, light: 'dusk', firstPerson: true },
+  { name: 'fp-minigun-cold-night.png', title: '1P Minigun Cold (0.00) · Night', weapon: 'minigun', suppressed: false, heat: 0.0, light: 'night', firstPerson: true },
+  { name: 'fp-minigun-hot-night.png', title: '1P Minigun Spun Hot (0.92) · Night', weapon: 'minigun', suppressed: false, heat: 0.92, light: 'night', firstPerson: true },
+
+  // === 4. Third-Person Marine in Range: GW-4 Hot & Cooling, Suppressed GW-4, and Minigun in 4 Lights ===
+  { name: 'tp-m4-cold-noon.png', title: '3P Marine GW-4 Cold (0.00) · Noon', weapon: 'm4', suppressed: false, heat: 0.0, light: 'noon', firstPerson: false },
+  { name: 'tp-m4-hot-noon.png', title: '3P Marine GW-4 Hot (0.90) · Noon', weapon: 'm4', suppressed: false, heat: 0.90, light: 'noon', firstPerson: false },
+  { name: 'tp-m4-hot-overcast.png', title: '3P Marine GW-4 Hot (0.90) · Overcast', weapon: 'm4', suppressed: false, heat: 0.90, light: 'overcast', firstPerson: false },
+  { name: 'tp-m4-hot-dusk.png', title: '3P Marine GW-4 Hot (0.90) · Dusk', weapon: 'm4', suppressed: false, heat: 0.90, light: 'dusk', firstPerson: false },
+  { name: 'tp-m4-cold-night.png', title: '3P Marine GW-4 Cold (0.00) · Night', weapon: 'm4', suppressed: false, heat: 0.0, light: 'night', firstPerson: false },
+  { name: 'tp-m4-hot-night.png', title: '3P Marine GW-4 Hot (0.90) · Night', weapon: 'm4', suppressed: false, heat: 0.90, light: 'night', firstPerson: false },
+  { name: 'tp-m4-cool38-night.png', title: '3P Marine GW-4 Cooling (0.38) · Night', weapon: 'm4', suppressed: false, heat: 0.38, coolingFrom: 0.90, light: 'night', firstPerson: false },
+
+  { name: 'tp-m4-sup-cold-night.png', title: '3P Marine Suppressed GW-4 Cold (0.00) · Night', weapon: 'm4', suppressed: true, heat: 0.0, light: 'night', firstPerson: false },
+  { name: 'tp-m4-sup-hot-noon.png', title: '3P Marine Suppressed GW-4 Hot (0.90, Can Glows / Barrel Cold) · Noon', weapon: 'm4', suppressed: true, heat: 0.90, light: 'noon', firstPerson: false },
+  { name: 'tp-m4-sup-hot-night.png', title: '3P Marine Suppressed GW-4 Hot (0.90, Can Glows / Barrel Cold) · Night', weapon: 'm4', suppressed: true, heat: 0.90, light: 'night', firstPerson: false },
+
+  { name: 'tp-minigun-cold-noon.png', title: '3P Marine Minigun Cold (0.00) · Noon', weapon: 'minigun', suppressed: false, heat: 0.0, light: 'noon', firstPerson: false },
+  { name: 'tp-minigun-hot-noon.png', title: '3P Marine Minigun Spun Hot (0.92) · Noon', weapon: 'minigun', suppressed: false, heat: 0.92, light: 'noon', firstPerson: false },
+  { name: 'tp-minigun-hot-night.png', title: '3P Marine Minigun Spun Hot (0.92) · Night', weapon: 'minigun', suppressed: false, heat: 0.92, light: 'night', firstPerson: false },
 ];
 
 async function main() {
-  console.log('[AG-290] Starting WebGPU Barrel Heat & Muzzle Smoke capture on RTX 5080...');
+  console.log('[AG-290] Starting WebGPU Barrel Heat & Muzzle Smoke capture in Training Ground range on RTX 5080...');
   const server = await serve(ROOT, 0);
   const browser = await launch({
     headless: false,
@@ -140,132 +120,281 @@ async function main() {
       await page.conn.send('Browser.setWindowBounds', { windowId, bounds: { left: -3800, top: -3800, width: 1280, height: 720 } });
     } catch {}
 
+    console.log('[AG-290] Loading game and dismissing opening...');
     await page.goto(`${server.origin}/index.html?debug=1&raf=timer`, { timeout: 180000 });
-    await page.waitFor('!!window.DWOpening', { timeout: 60000 });
-    for (let i = 0; i < 2; i++) {
-      await page.evaluate(`(() => { if (window.DWOpening?.dismissForTesting) DWOpening.dismissForTesting(); })()`);
-      await new Promise((r) => setTimeout(r, 200));
-    }
+    assert(await page.waitFor('window.TT && DWLoad.snapshot().state==="ready"', { timeout: 120000 }));
 
-    await page.waitFor('!!(window.TT && window.TT.trainingDbg)', { timeout: 240000 });
-    await page.waitFor('window.DWOpening && window.DWOpening.active === false', { timeout: 120000 });
-    await new Promise((r) => setTimeout(r, 400));
+    await page.evaluate('DWOpening.dismissForTesting()');
+    assert(await page.waitFor('!DWOpening.active', { timeout: 60000 }));
 
-    // Teleport to Training Ground
-    await page.evaluate(`(async () => {
-      const T = window.TT;
-      if (T.trainingDbg && T.trainingDbg.enter) T.trainingDbg.enter();
-      for (let k = 0; k < 60; k++) T.stepFrame(1 / 60);
-    })()`);
-    await new Promise((r) => setTimeout(r, 500));
-
-    // Setup custom light controller
+    console.log('[AG-290] Entering Training Ground range via #modeTraining...');
     await page.evaluate(`(() => {
+      const nameEl = document.getElementById('playerName');
+      if (nameEl) nameEl.value = 'Inspector';
+      const btn = document.getElementById('modeTraining');
+      if (btn) btn.click();
+    })()`);
+
+    assert(await page.waitFor('TT.trainingDbg.state().active && !document.getElementById("trainingBlackout")?.classList.contains("on")', { timeout: 60000 }));
+
+    // Hide all menus, HUDs, overlays, titles: ONLY WebGPU canvas remains visible
+    await page.evaluate(`(() => {
+      const css = document.createElement('style');
+      css.id = 'ag290-clean-view';
+      css.textContent = 'body > :not(canvas):not(script):not(style):not(#view){visibility:hidden!important} #menu,#title,#hud,#crosshair{display:none!important;visibility:hidden!important}';
+      document.head.append(css);
+    })()`);
+
+    // Attach inspector host for 4-light illumination and optional heat pinning
+    await page.evaluate(`(async () => {
       const T = window.TT, H = T.inspectHost();
-      window.__ag290Light = 'noon';
-      window.__ag290ApplyLight = () => {
-        const lk = window.__ag290Light;
+      const { LIGHTS } = await import('/studio/inspector/stage.js');
+      window.__LIGHTS = LIGHTS;
+      window.eyeLight = 'noon';
+      window.__pinHeat = 0.0;
+
+      T.setViewFirstDbg(true);
+      T.grantAllWeapons();
+      T.modsOwnAllDbg();
+      if (T.setLasersDbg) T.setLasersDbg(false);
+      if (T.isUnarmed()) T.toggleHolster();
+      T.flightHold(false);
+
+      function illuminate() {
+        const L = window.__LIGHTS[window.eyeLight] || window.__LIGHTS['noon'];
         const p = T.player.position;
-        const { sun, hemi, ambientFill, moon, scene } = H;
-        if (lk === 'noon') {
-          if (T.setWorldTime) T.setWorldTime(0.50);
-          sun.position.set(p.x + 32, p.y + 85, p.z + 38); sun.target.position.copy(p);
-          sun.intensity = 2.1; sun.color.setHex(0xfff3dc);
-          if (hemi) { hemi.intensity = 0.95; hemi.color.setHex(0xd8e6ff); hemi.groundColor.setHex(0x887a62); }
-          if (ambientFill) { ambientFill.color.setHex(0xffffff); ambientFill.intensity = 0.10; }
-          if (moon) moon.intensity = 0;
-          if (scene.fog && scene.fog.isFog) { scene.fog.color.setHex(0x8cb8ff); scene.fog.near = 180; scene.fog.far = 620; }
-        } else if (lk === 'overcast') {
-          if (T.setWorldTime) T.setWorldTime(0.46);
-          sun.position.set(p.x + 24, p.y + 88, p.z + 30); sun.target.position.copy(p);
-          sun.intensity = 0.65; sun.color.setHex(0xe6e8ee);
-          if (hemi) { hemi.intensity = 1.65; hemi.color.setHex(0xd4d7de); hemi.groundColor.setHex(0x7c7e82); }
-          if (ambientFill) { ambientFill.color.setHex(0xe2e6ee); ambientFill.intensity = 0.30; }
-          if (moon) moon.intensity = 0;
-          if (scene.fog && scene.fog.isFog) { scene.fog.color.setHex(0xb8c0cc); scene.fog.near = 120; scene.fog.far = 420; }
-        } else if (lk === 'dusk') {
-          if (T.setWorldTime) T.setWorldTime(0.73);
-          sun.position.set(p.x + 78, p.y + 24, p.z + 18); sun.target.position.copy(p);
-          sun.intensity = 1.45; sun.color.setHex(0xffb07a);
-          if (hemi) { hemi.intensity = 0.65; hemi.color.setHex(0xffc4a2); hemi.groundColor.setHex(0x4a3428); }
-          if (ambientFill) { ambientFill.color.setHex(0x6e5044); ambientFill.intensity = 0.10; }
-          if (moon) moon.intensity = 0.04;
-          if (scene.fog && scene.fog.isFog) { scene.fog.color.setHex(0xc88a68); scene.fog.near = 110; scene.fog.far = 380; }
-        } else if (lk === 'night') {
-          if (T.setWorldTime) T.setWorldTime(0.00);
-          sun.intensity = 0;
-          if (hemi) { hemi.intensity = 0.16; hemi.color.setHex(0x18243b); hemi.groundColor.setHex(0x0a1018); }
-          if (ambientFill) { ambientFill.color.setHex(0x0e1828); ambientFill.intensity = 0.08; }
-          if (moon) { moon.position.set(p.x - 30, p.y + 70, p.z - 25); moon.target.position.copy(p); moon.intensity = 0.55; moon.color.setHex(0xb2ccf5); }
-          if (scene.fog && scene.fog.isFog) { scene.fog.color.setHex(0x060b14); scene.fog.near = 35; scene.fog.far = 135; }
-        }
-      };
+        const dir = new H.THREE.Vector3(...L.dir).normalize();
+        H.sun.position.copy(p).addScaledVector(dir, 85);
+        H.sun.target.position.copy(p);
+        H.sun.target.updateMatrixWorld();
+        H.sun.color.setHex(L.sunColor);
+        H.sun.intensity = L.sun;
+        H.hemi.color.setHex(L.skyColor);
+        H.hemi.groundColor.setHex(L.ground);
+        H.hemi.intensity = L.sky;
+        H.ambientFill.intensity = L.fill;
+        H.moon.intensity = window.eyeLight === 'night' ? 0.45 : 0;
+      }
+
+      H.attach({
+        held: () => false,
+        scale: (dt) => {
+          if (window.__pinHeat != null && T.barrelHeat) {
+            T.barrelHeat.setHeat(T.getCurrentWeapon(), window.__pinHeat);
+          }
+          return dt;
+        },
+        frame: illuminate
+      });
     })()`);
 
     const manifest = [];
+    let prevWeapon = null;
+    let prevSuppressed = null;
+    let prevFP = null;
 
     for (let i = 0; i < SHOTS.length; i++) {
       const s = SHOTS[i];
+      const switchedRig = (s.weapon !== prevWeapon || s.suppressed !== prevSuppressed || s.firstPerson !== prevFP);
+      prevWeapon = s.weapon;
+      prevSuppressed = s.suppressed;
+      prevFP = s.firstPerson;
+
       console.log(`[AG-290] (${i + 1}/${SHOTS.length}) Capturing ${s.name}: ${s.title}...`);
 
-      await page.evaluate(`(async () => {
-        const T = window.TT, H = T.inspectHost();
+      const diag = await page.evaluate(`(async () => {
+        const T = window.TT;
         const s = ${JSON.stringify(s)};
+        const switchedRig = ${JSON.stringify(switchedRig)};
+        window.eyeLight = s.light;
 
-        window.__ag290Light = s.light;
-
-        // Equip weapon
-        const WEAPON_ORDER = ['minigun', 'm4', 'ak', 'pistol', 'uzi', 'shotgun', 'aa12', 'revolver', 'sniper', 'launcher', 'flamer', 'chainsaw'];
-        const wIdx = WEAPON_ORDER.indexOf(s.weapon);
-        if (wIdx >= 0 && T.setWeaponDbg) {
-          T.setWeaponDbg(wIdx);
-        } else if (T.setWeapon) {
-          T.setWeapon(wIdx);
+        if (!T.trainingDbg.state().active) {
+          throw new Error('FAIL: Not inside Training Ground!');
         }
 
-        // Suppressor fitting
-        if (T.fitArmoryMod) {
-          T.fitArmoryMod(s.weapon, 'suppressor', s.suppressed);
+        T.flightHold(false);
+        T.setZoomHeldDbg(false);
+
+        // 1. Equip weapon & suppressor if needed
+        const idx = T.WEAPON_ORDER.indexOf(s.weapon);
+        for (let k = 0; k < 30 && T.getCurrentWeapon() !== s.weapon; k++) {
+          T.setWeapon(idx);
+          await new Promise((r) => setTimeout(r, 80));
+        }
+        if (T.isUnarmed()) T.toggleHolster();
+
+        const mods = T.armoryDbg?.mods(s.weapon) || [];
+        if (T.setLasersDbg) T.setLasersDbg(false);
+        if (mods.some((m) => m.id === 'suppressor')) {
+          T.armoryDbg.fit(s.weapon, 'suppressor', !!s.suppressed);
         }
 
-        // Unarmed off
-        if (T.setUnarmedDbg) T.setUnarmedDbg(false);
+        // 2. Viewmode & camera framing
+        if (s.firstPerson) {
+          T.setShotView(null);
+          T.setViewFirstDbg(true);
+          T.setOtsAimDbg(0, -0.06);
 
-        // View mode
-        T.setViewFirstDbg(s.firstPerson);
-
-        // Set heat
-        if (T.setBarrelHeatDbg) {
-          T.setBarrelHeatDbg(s.weapon, s.heat);
+          // Wait in real time for live raf=timer loop to activate and render this weapon's viewmodel
+          let ready = false;
+          for (let k = 0; k < 50; k++) {
+            await new Promise((r) => setTimeout(r, 50));
+            const vm = T.viewmodelDbg();
+            if (vm && vm.info && vm.info.active && vm.info.key === s.weapon && vm.root && vm.root.visible) {
+              ready = true;
+              break;
+            }
+          }
+          if (!ready) {
+            const vm = T.viewmodelDbg();
+            throw new Error('FAIL: Viewmodel did not settle for ' + s.weapon + ': ' + JSON.stringify(vm && vm.info));
+          }
+          if (switchedRig) {
+            await new Promise((r) => setTimeout(r, 450));
+          }
+        } else {
+          T.setViewFirstDbg(false);
+          T.setAimYawDbg(0);
+          T.setOtsAimDbg(0, -0.02);
+          if (switchedRig) {
+            await new Promise((r) => setTimeout(r, 400));
+          }
+          const p = T.player.position;
+          // Marine stands behind firing line facing +Z; -X is weapon-hand side, looking across Marine + barrel + range targets
+          T.setShotView({
+            x: p.x - 1.02,
+            y: p.y + 1.38,
+            z: p.z - 0.16,
+            tx: p.x - 0.08,
+            ty: p.y + 1.25,
+            tz: p.z + 0.56,
+            fov: 38
+          });
+          await new Promise((r) => setTimeout(r, 260));
         }
 
-        // Apply light
-        window.__ag290ApplyLight();
-
-        // Step simulation for heat effects, smoke wisps, and viewmodel to update
-        for (let k = 0; k < 25; k++) {
-          if (T.setBarrelHeatDbg && s.heat > 0) T.setBarrelHeatDbg(s.weapon, s.heat);
-          T.stepFrame(1 / 60);
+        // 3. Heat & smoke simulation in live real-time frames
+        if (s.coolingFrom != null) {
+          // Ensure hot starting state with active smoke wisps, then unpin and let barrelHeat.update cool naturally
+          if (T.barrelHeat.getHeat(s.weapon) < s.heat + 0.05) {
+            window.__pinHeat = s.coolingFrom;
+            T.barrelHeat.setHeat(s.weapon, s.coolingFrom);
+            await new Promise((r) => setTimeout(r, 700));
+          }
+          window.__pinHeat = null;
+          for (let k = 0; k < 180; k++) {
+            if (T.barrelHeat.getHeat(s.weapon) <= s.heat) break;
+            await new Promise((r) => setTimeout(r, 50));
+          }
+          window.__pinHeat = T.barrelHeat.getHeat(s.weapon);
+          await new Promise((r) => setTimeout(r, 120));
+        } else if (s.heat <= 0) {
+          window.__pinHeat = 0.0;
+          T.barrelHeat.reset();
+          await new Promise((r) => setTimeout(r, 380));
+        } else {
+          if (switchedRig || T.barrelHeat.getHeat(s.weapon) < 0.5) {
+            T.barrelHeat.reset();
+            const burst = 45;
+            for (let b = 0; b < burst; b++) {
+              T.barrelHeat.addShot(s.weapon, !!s.suppressed);
+            }
+          }
+          window.__pinHeat = s.heat;
+          T.barrelHeat.setHeat(s.weapon, s.heat);
+          await new Promise((r) => setTimeout(r, 1200));
         }
+
+        // 4. Verify menu hidden + measure actual emissiveIntensity on barrel & suppressor + count active wisps
+        const menu = document.getElementById('menu');
+        if (menu && menu.offsetParent !== null && window.getComputedStyle(menu).visibility !== 'hidden') {
+          throw new Error('FAIL: Menu element is visible before capture!');
+        }
+
+        const worldGun = (T.inspectHost && T.inspectHost().dev && T.inspectHost().dev.weaponMeshes)
+          ? T.inspectHost().dev.weaponMeshes[s.weapon]
+          : (T.weaponMeshes ? T.weaponMeshes[s.weapon] : null);
+        let checkRoot = worldGun;
+        if (s.firstPerson) {
+          const vm = T.viewmodelDbg();
+          const space = vm.space || vm.root.getObjectByName('vm-space') || vm.root;
+          const holder = space.getObjectByName('vm-gun');
+          checkRoot = holder && holder.children[0];
+        }
+        const parts = T.barrelHeat.findGunHeatParts(checkRoot, s.weapon, worldGun);
+        const maxEmissive = (node) => {
+          let mx = 0;
+          if (!node) return 0;
+          node.traverse((o) => {
+            if (!o.isMesh || !o.material) return;
+            const ms = Array.isArray(o.material) ? o.material : [o.material];
+            for (const m of ms) {
+              if (m && typeof m.emissiveIntensity === 'number' && m.emissive && (m.emissive.r > 0 || m.emissive.g > 0)) {
+                mx = Math.max(mx, m.emissiveIntensity);
+              }
+            }
+          });
+          return +mx.toFixed(3);
+        };
+
+        const barrelEmissive = maxEmissive(parts.barrel);
+        const suppressorEmissive = maxEmissive(parts.suppressor);
+        const activeWisps = T.barrelHeat._wisps.filter((w) => w.active && w.mesh && w.mesh.visible && w.mat.opacity > 0.02).length;
+        const liveHeat = +T.barrelHeat.getHeat(s.weapon).toFixed(3);
+
+        if (s.heat === 0) {
+          if (barrelEmissive !== 0 || suppressorEmissive !== 0) {
+            throw new Error('FAIL: Cold weapon has residual glow: barrel=' + barrelEmissive + ' sup=' + suppressorEmissive);
+          }
+        } else if (s.heat >= 0.85) {
+          const expMin = (s.light === 'night') ? 1.8 : ((s.light === 'dusk') ? 1.0 : 0.45);
+          if (s.suppressed) {
+            if (suppressorEmissive < expMin) throw new Error('FAIL: Hot suppressor did not glow: ' + suppressorEmissive + ' (expected >=' + expMin + ')');
+            if (barrelEmissive !== 0) throw new Error('FAIL: Barrel glowed while suppressed! barrel=' + barrelEmissive);
+          } else {
+            if (barrelEmissive < expMin) throw new Error('FAIL: Hot barrel did not glow: ' + barrelEmissive + ' (expected >=' + expMin + ')');
+          }
+          if (activeWisps < 2) throw new Error('FAIL: Expected active smoke wisps at hot muzzle, got ' + activeWisps);
+        }
+
+        return { liveHeat, barrelEmissive, suppressorEmissive, activeWisps };
       })()`);
-
-      await new Promise((r) => setTimeout(r, 250));
 
       const qaPath = path.join(OUT_QA, s.name);
       const revPath = path.join(OUT_REV, s.name);
+      const pngBuf = await captureScreenshot(page, qaPath);
+      writeRetry(revPath, pngBuf);
 
-      await page.screenshot(qaPath);
-      const buf = fs.readFileSync(qaPath);
-      writeRetry(revPath, buf);
-
-      console.log(`  -> Saved ${s.name}: ${buf.length} bytes`);
-      manifest.push({ name: s.name, bytes: buf.length, title: s.title, heat: s.heat, light: s.light });
+      console.log(`  -> Saved ${s.name} (${pngBuf.length}B) | heat=${diag.liveHeat} barrelEm=${diag.barrelEmissive} supEm=${diag.suppressorEmissive} wisps=${diag.activeWisps}`);
+      manifest.push({
+        file: s.name,
+        title: s.title,
+        weapon: s.weapon,
+        suppressed: s.suppressed,
+        targetHeat: s.heat,
+        liveHeat: diag.liveHeat,
+        barrelEmissive: diag.barrelEmissive,
+        suppressorEmissive: diag.suppressorEmissive,
+        activeWisps: diag.activeWisps,
+        light: s.light,
+        firstPerson: s.firstPerson,
+        bytes: pngBuf.length
+      });
     }
 
-    fs.writeFileSync(path.join(OUT_REV, 'capture-manifest.json'), JSON.stringify(manifest, null, 2));
-    fs.writeFileSync(path.join(OUT_QA, 'capture-manifest.json'), JSON.stringify(manifest, null, 2));
-    console.log('[AG-290] Visual captures complete!');
+    const report = {
+      task: 'AG-290',
+      timestamp: new Date().toISOString(),
+      gpu: 'NVIDIA GeForce RTX 5080 WebGPU',
+      location: 'Training Ground Firing Range',
+      shotsCount: manifest.length,
+      shots: manifest
+    };
 
+    const jsonStr = JSON.stringify(report, null, 2);
+    writeRetry(path.join(OUT_QA, 'manifest.json'), jsonStr);
+    writeRetry(path.join(OUT_REV, 'manifest.json'), jsonStr);
+    console.log('[AG-290] All 37 range screenshots captured and verified successfully!');
   } finally {
     try { await browser.close(); } catch {}
     try { await server.close(); } catch {}

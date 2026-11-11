@@ -29,11 +29,12 @@ try {
   assert.equal(await page.evaluate('document.querySelectorAll(".armory-typed-list li").length'), 3);
   assert.equal(await page.evaluate('document.querySelector("[data-buy-ammo-type=birdshot]").disabled'), true);
   assert.equal(await page.evaluate('document.querySelector("[data-buy-ammo-type=slug]").disabled'), true);
-  assert.equal(await page.evaluate('document.querySelector("[data-ammo-type=buckshot] .armory-typed-copy small").textContent'), '15 / 60 carried');
+  assert.equal(await page.evaluate('document.querySelector("[data-ammo-type=buckshot] .armory-typed-copy small").textContent'), '15 / 20 carried');
+  assert.equal(await page.evaluate('document.querySelector("[data-ammo-type=buckshot] .armory-typed-price").textContent'), 'Pack of 5 · $21 Cash');
   await page.evaluate('document.querySelector("[data-buy-ammo-type=buckshot]").click()');
   assert.equal(await page.evaluate('fixture.bought'), 'shotgun:buckshot');
   assert.deepEqual(page.errors, []);
-  console.log('PASS GP-20083 typed Armory: three priced rows, full and unaffordable states, cap count, buy callback, 1280/390 fit, no page errors');
+  console.log('PASS GP-20083 typed Armory: three priced rows, full and unaffordable states, partial pack price, buy callback, 1280/390 fit, no page errors');
 } finally {
   await browser.close();
   await server.close();

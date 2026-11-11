@@ -1,0 +1,434 @@
+{
+  "initial": {
+    "shotgun": {
+      "kind": "shotgun",
+      "order": [
+        "birdshot",
+        "buckshot",
+        "slug"
+      ],
+      "types": {
+        "birdshot": {
+          "id": "birdshot",
+          "name": "Birdshot",
+          "tag": "BIRDSHOT",
+          "real": "12 ga 2 3/4\" #4 shot",
+          "pack": 20,
+          "price": 20,
+          "hull": "red",
+          "hullHex": 11019804,
+          "cap": 154,
+          "room": 0,
+          "canBuy": false,
+          "buyN": 0,
+          "buyPrice": 0
+        },
+        "buckshot": {
+          "id": "buckshot",
+          "name": "Buckshot",
+          "tag": "BUCKSHOT",
+          "real": "12 ga 2 3/4\" 00 buck",
+          "pack": 20,
+          "price": 30,
+          "hull": "blue",
+          "hullHex": 2903964,
+          "cap": 154,
+          "room": 154,
+          "canBuy": true,
+          "buyN": 20,
+          "buyPrice": 30
+        },
+        "slug": {
+          "id": "slug",
+          "name": "Slug",
+          "tag": "SLUG",
+          "real": "12 ga 2 3/4\" 1 oz rifled slug",
+          "pack": 20,
+          "price": 40,
+          "hull": "ivory",
+          "hullHex": 15129792,
+          "cap": 154,
+          "room": 154,
+          "canBuy": true,
+          "buyN": 20,
+          "buyPrice": 40
+        }
+      },
+      "loaded": "birdshot",
+      "inGun": 8,
+      "carried": {
+        "birdshot": 154,
+        "buckshot": 0,
+        "slug": 0
+      },
+      "next": null,
+      "switching": null,
+      "canSwitch": false
+    },
+    "m4": null,
+    "pistol": null
+  },
+  "armoryBefore": {
+    "rows": [
+      {
+        "type": "birdshot",
+        "text": "Birdshot\n154 / 154 carried\nShell supply full\nBUY BIRDSHOT",
+        "disabled": true
+      },
+      {
+        "type": "buckshot",
+        "text": "Buckshot\n0 / 154 carried\nPack of 20 · $30 Cash\nBUY BUCKSHOT",
+        "disabled": false
+      },
+      {
+        "type": "slug",
+        "text": "Slug\n0 / 154 carried\nPack of 20 · $40 Cash\nBUY SLUG",
+        "disabled": false
+      }
+    ]
+  },
+  "purchased": {
+    "kind": "shotgun",
+    "order": [
+      "birdshot",
+      "buckshot",
+      "slug"
+    ],
+    "types": {
+      "birdshot": {
+        "id": "birdshot",
+        "name": "Birdshot",
+        "tag": "BIRDSHOT",
+        "real": "12 ga 2 3/4\" #4 shot",
+        "pack": 20,
+        "price": 20,
+        "hull": "red",
+        "hullHex": 11019804,
+        "cap": 154,
+        "room": 0,
+        "canBuy": false,
+        "buyN": 0,
+        "buyPrice": 0
+      },
+      "buckshot": {
+        "id": "buckshot",
+        "name": "Buckshot",
+        "tag": "BUCKSHOT",
+        "real": "12 ga 2 3/4\" 00 buck",
+        "pack": 20,
+        "price": 30,
+        "hull": "blue",
+        "hullHex": 2903964,
+        "cap": 154,
+        "room": 134,
+        "canBuy": true,
+        "buyN": 20,
+        "buyPrice": 30
+      },
+      "slug": {
+        "id": "slug",
+        "name": "Slug",
+        "tag": "SLUG",
+        "real": "12 ga 2 3/4\" 1 oz rifled slug",
+        "pack": 20,
+        "price": 40,
+        "hull": "ivory",
+        "hullHex": 15129792,
+        "cap": 154,
+        "room": 154,
+        "canBuy": true,
+        "buyN": 20,
+        "buyPrice": 40
+      }
+    },
+    "loaded": "birdshot",
+    "inGun": 8,
+    "carried": {
+      "birdshot": 154,
+      "buckshot": 20,
+      "slug": 0
+    },
+    "next": "buckshot",
+    "switching": null,
+    "canSwitch": true
+  },
+  "panel1280": {
+    "cif": "none",
+    "armory": "block"
+  },
+  "panel390": {
+    "cif": "none",
+    "armory": "block"
+  },
+  "equip": {
+    "issued": true,
+    "before": "pistol",
+    "after": "shotgun",
+    "owned": true,
+    "inReach": [
+      "shotgun",
+      "pistol"
+    ],
+    "step": "shotgun",
+    "flight": {
+      "hold": true,
+      "frames": 4,
+      "snaps": 1,
+      "replaying": false,
+      "seed": 2983244181,
+      "xfade": "idle",
+      "xw": 0
+    },
+    "origin": 1794364947045.1
+  },
+  "hudBefore": {
+    "marker": "held",
+    "origin": 1794364947045.1,
+    "flight": {
+      "hold": true,
+      "frames": 4,
+      "snaps": 1,
+      "replaying": false,
+      "seed": 2983244181,
+      "xfade": "idle",
+      "xw": 0
+    },
+    "reach": [
+      "shotgun",
+      "pistol"
+    ],
+    "weapon": "shotgun",
+    "name": "Shotgun · X change shells",
+    "detail": "8 / 8 · BIRD · 154 spare",
+    "state": {
+      "kind": "shotgun",
+      "order": [
+        "birdshot",
+        "buckshot",
+        "slug"
+      ],
+      "types": {
+        "birdshot": {
+          "id": "birdshot",
+          "name": "Birdshot",
+          "tag": "BIRDSHOT",
+          "real": "12 ga 2 3/4\" #4 shot",
+          "pack": 20,
+          "price": 20,
+          "hull": "red",
+          "hullHex": 11019804,
+          "cap": 154,
+          "room": 0,
+          "canBuy": false,
+          "buyN": 0,
+          "buyPrice": 0
+        },
+        "buckshot": {
+          "id": "buckshot",
+          "name": "Buckshot",
+          "tag": "BUCKSHOT",
+          "real": "12 ga 2 3/4\" 00 buck",
+          "pack": 20,
+          "price": 30,
+          "hull": "blue",
+          "hullHex": 2903964,
+          "cap": 154,
+          "room": 134,
+          "canBuy": true,
+          "buyN": 20,
+          "buyPrice": 30
+        },
+        "slug": {
+          "id": "slug",
+          "name": "Slug",
+          "tag": "SLUG",
+          "real": "12 ga 2 3/4\" 1 oz rifled slug",
+          "pack": 20,
+          "price": 40,
+          "hull": "ivory",
+          "hullHex": 15129792,
+          "cap": 154,
+          "room": 154,
+          "canBuy": true,
+          "buyN": 20,
+          "buyPrice": 40
+        }
+      },
+      "loaded": "birdshot",
+      "inGun": 8,
+      "carried": {
+        "birdshot": 154,
+        "buckshot": 20,
+        "slug": 0
+      },
+      "next": "buckshot",
+      "switching": null,
+      "canSwitch": true
+    }
+  },
+  "switchStart": {
+    "count": 1,
+    "state": {
+      "kind": "shotgun",
+      "order": [
+        "birdshot",
+        "buckshot",
+        "slug"
+      ],
+      "types": {
+        "birdshot": {
+          "id": "birdshot",
+          "name": "Birdshot",
+          "tag": "BIRDSHOT",
+          "real": "12 ga 2 3/4\" #4 shot",
+          "pack": 20,
+          "price": 20,
+          "hull": "red",
+          "hullHex": 11019804,
+          "cap": 154,
+          "room": 0,
+          "canBuy": false,
+          "buyN": 0,
+          "buyPrice": 0
+        },
+        "buckshot": {
+          "id": "buckshot",
+          "name": "Buckshot",
+          "tag": "BUCKSHOT",
+          "real": "12 ga 2 3/4\" 00 buck",
+          "pack": 20,
+          "price": 30,
+          "hull": "blue",
+          "hullHex": 2903964,
+          "cap": 154,
+          "room": 134,
+          "canBuy": true,
+          "buyN": 20,
+          "buyPrice": 30
+        },
+        "slug": {
+          "id": "slug",
+          "name": "Slug",
+          "tag": "SLUG",
+          "real": "12 ga 2 3/4\" 1 oz rifled slug",
+          "pack": 20,
+          "price": 40,
+          "hull": "ivory",
+          "hullHex": 15129792,
+          "cap": 154,
+          "room": 154,
+          "canBuy": true,
+          "buyN": 20,
+          "buyPrice": 40
+        }
+      },
+      "loaded": "birdshot",
+      "inGun": 8,
+      "carried": {
+        "birdshot": 154,
+        "buckshot": 20,
+        "slug": 0
+      },
+      "next": "buckshot",
+      "switching": {
+        "gun": "shotgun",
+        "from": "birdshot",
+        "to": "buckshot",
+        "phase": "unload",
+        "u": 0.044444444444444446,
+        "unloaded": 0,
+        "unload": 8,
+        "loaded": 0,
+        "load": 8,
+        "t": 0.016,
+        "n": 1,
+        "total": 6.49
+      },
+      "canSwitch": false
+    },
+    "detail": "Changing to BUCK · unloading 0/8",
+    "flags": {
+      "fireHeld": false,
+      "mouseFireHeld": false,
+      "unarmed": false,
+      "placeMode": null,
+      "buildMode": false,
+      "blocked": false,
+      "reloading": false,
+      "fireCooldown": -0.132,
+      "dualActive": false,
+      "akimbo": false
+    },
+    "unarmed": false,
+    "mode": "training",
+    "phase": "prep"
+  },
+  "switchEnd": {
+    "state": {
+      "kind": "shotgun",
+      "order": [
+        "birdshot",
+        "buckshot",
+        "slug"
+      ],
+      "types": {
+        "birdshot": {
+          "id": "birdshot",
+          "name": "Birdshot",
+          "tag": "BIRDSHOT",
+          "real": "12 ga 2 3/4\" #4 shot",
+          "pack": 20,
+          "price": 20,
+          "hull": "red",
+          "hullHex": 11019804,
+          "cap": 154,
+          "room": 0,
+          "canBuy": false,
+          "buyN": 0,
+          "buyPrice": 0
+        },
+        "buckshot": {
+          "id": "buckshot",
+          "name": "Buckshot",
+          "tag": "BUCKSHOT",
+          "real": "12 ga 2 3/4\" 00 buck",
+          "pack": 20,
+          "price": 30,
+          "hull": "blue",
+          "hullHex": 2903964,
+          "cap": 154,
+          "room": 142,
+          "canBuy": true,
+          "buyN": 20,
+          "buyPrice": 30
+        },
+        "slug": {
+          "id": "slug",
+          "name": "Slug",
+          "tag": "SLUG",
+          "real": "12 ga 2 3/4\" 1 oz rifled slug",
+          "pack": 20,
+          "price": 40,
+          "hull": "ivory",
+          "hullHex": 15129792,
+          "cap": 154,
+          "room": 154,
+          "canBuy": true,
+          "buyN": 20,
+          "buyPrice": 40
+        }
+      },
+      "loaded": "buckshot",
+      "inGun": 8,
+      "carried": {
+        "birdshot": 162,
+        "buckshot": 12,
+        "slug": 0
+      },
+      "next": "birdshot",
+      "switching": null,
+      "canSwitch": true
+    },
+    "detail": "8 / 8 · BUCK · 12 spare"
+  }
+}

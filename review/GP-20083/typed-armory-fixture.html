@@ -13,8 +13,8 @@ let typed = true;
 let bought = '';
 const stock = { kind:'shotgun', order:['birdshot','buckshot','slug'], loaded:'birdshot', inGun:5,
   carried:{birdshot:42,buckshot:15,slug:2}, next:'birdshot', switching:null, canSwitch:true,
-  types:{birdshot:{name:'Birdshot',tag:'BIRD',pack:12,price:30,hull:'red',cap:60,canBuy:false,room:0},
-    buckshot:{name:'Buckshot',tag:'BUCK',pack:12,price:50,hull:'green',cap:60,canBuy:true,room:45},
+  types:{birdshot:{name:'Birdshot',tag:'BIRD',pack:12,price:30,hull:'red',cap:42,canBuy:false,room:0,buyN:0,buyPrice:0},
+    buckshot:{name:'Buckshot',tag:'BUCK',pack:12,price:50,hull:'green',cap:20,canBuy:true,room:5,buyN:5,buyPrice:21},
     slug:{name:'Slug',tag:'SLUG',pack:8,price:80,hull:'blue',cap:30,canBuy:true,room:28}} };
 const ui = mountArmory({ getAmmoTypes:kind=>typed && kind==='shotgun' ? stock : null,
   onBuyAmmoType:(kind,type)=>{ bought=kind+':'+type; return {bought:12,price:50}; }, getCash:()=>60,

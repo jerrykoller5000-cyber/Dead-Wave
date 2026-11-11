@@ -1,107 +1,192 @@
 [
   {
     "name": "before-fp-m4-cold-noon.png",
-    "bytes": 800262,
-    "title": "FP M4 Cold (Heat 0.0) · Noon",
+    "bytes": 386069,
+    "title": "FP GW-4 Cold (Heat 0.0) · Noon",
+    "weapon": "m4",
+    "suppressed": false,
     "heat": 0,
-    "light": "noon"
+    "light": "noon",
+    "firstPerson": true
   },
   {
     "name": "after-fp-m4-hot-noon.png",
-    "bytes": 800248,
-    "title": "FP M4 Hot (Heat 0.88, Glowing Barrel + Smoke Wisp) · Noon",
+    "bytes": 385113,
+    "title": "FP GW-4 Hot (Heat 0.88, Glowing Barrel + Smoke Wisp) · Noon",
+    "weapon": "m4",
+    "suppressed": false,
     "heat": 0.88,
-    "light": "noon"
+    "light": "noon",
+    "firstPerson": true
   },
   {
     "name": "before-fp-m4-cold-overcast.png",
-    "bytes": 793919,
-    "title": "FP M4 Cold (Heat 0.0) · Overcast",
+    "bytes": 351676,
+    "title": "FP GW-4 Cold (Heat 0.0) · Overcast",
+    "weapon": "m4",
+    "suppressed": false,
     "heat": 0,
-    "light": "overcast"
+    "light": "overcast",
+    "firstPerson": true
   },
   {
     "name": "after-fp-m4-hot-overcast.png",
-    "bytes": 793153,
-    "title": "FP M4 Hot (Heat 0.88, Glowing Barrel + Smoke Wisp) · Overcast",
+    "bytes": 353951,
+    "title": "FP GW-4 Hot (Heat 0.88, Glowing Barrel + Smoke Wisp) · Overcast",
+    "weapon": "m4",
+    "suppressed": false,
     "heat": 0.88,
-    "light": "overcast"
+    "light": "overcast",
+    "firstPerson": true
   },
   {
     "name": "before-fp-m4-cold-dusk.png",
-    "bytes": 641659,
-    "title": "FP M4 Cold (Heat 0.0) · Dusk",
+    "bytes": 310829,
+    "title": "FP GW-4 Cold (Heat 0.0) · Dusk",
+    "weapon": "m4",
+    "suppressed": false,
     "heat": 0,
-    "light": "dusk"
+    "light": "dusk",
+    "firstPerson": true
   },
   {
     "name": "after-fp-m4-hot-dusk.png",
-    "bytes": 637340,
-    "title": "FP M4 Hot (Heat 0.88, Glowing Barrel + Smoke Wisp) · Dusk",
+    "bytes": 310785,
+    "title": "FP GW-4 Hot (Heat 0.88, Glowing Barrel + Smoke Wisp) · Dusk",
+    "weapon": "m4",
+    "suppressed": false,
     "heat": 0.88,
-    "light": "dusk"
+    "light": "dusk",
+    "firstPerson": true
   },
   {
     "name": "before-fp-m4-cold-night.png",
-    "bytes": 629440,
-    "title": "FP M4 Cold (Heat 0.0) · Night",
+    "bytes": 242419,
+    "title": "FP GW-4 Cold (Heat 0.0) · Night",
+    "weapon": "m4",
+    "suppressed": false,
     "heat": 0,
-    "light": "night"
+    "light": "night",
+    "firstPerson": true
   },
   {
     "name": "after-fp-m4-hot-night.png",
-    "bytes": 361970,
-    "title": "FP M4 Hot (Heat 0.88, Glowing Red-Orange Barrel + Smoke Wisp) · Night",
+    "bytes": 244439,
+    "title": "FP GW-4 Hot (Heat 0.88, Glowing Red-Orange Barrel + Smoke Wisp) · Night",
+    "weapon": "m4",
+    "suppressed": false,
     "heat": 0.88,
-    "light": "night"
+    "light": "night",
+    "firstPerson": true
+  },
+  {
+    "name": "after-fp-m4-cooling-night.png",
+    "bytes": 244367,
+    "title": "FP GW-4 Cooling Down (Heat 0.38, Dull Red Fade + Faint Smoke) · Night",
+    "weapon": "m4",
+    "suppressed": false,
+    "heat": 0.38,
+    "light": "night",
+    "firstPerson": true
+  },
+  {
+    "name": "after-fp-m4-cooling-noon.png",
+    "bytes": 385275,
+    "title": "FP GW-4 Cooling Down (Heat 0.38, Fading Smoke Wisp) · Noon",
+    "weapon": "m4",
+    "suppressed": false,
+    "heat": 0.38,
+    "light": "noon",
+    "firstPerson": true
   },
   {
     "name": "before-fp-m4-suppressed-cold-night.png",
-    "bytes": 745940,
-    "title": "FP M4 Suppressed Cold (Heat 0.0) · Night",
+    "bytes": 244356,
+    "title": "FP GW-4 Suppressed Cold (Heat 0.0) · Night",
+    "weapon": "m4",
+    "suppressed": true,
     "heat": 0,
-    "light": "night"
+    "light": "night",
+    "firstPerson": true
   },
   {
     "name": "after-fp-m4-suppressed-hot-night.png",
-    "bytes": 895050,
-    "title": "FP M4 Suppressed Hot (Heat 0.88, Suppressor Glows & Smokes, Barrel Cool) · Night",
+    "bytes": 244466,
+    "title": "FP GW-4 Suppressed Hot (Heat 0.88, Can Glows & Smokes; Barrel Cool) · Night",
+    "weapon": "m4",
+    "suppressed": true,
     "heat": 0.88,
-    "light": "night"
+    "light": "night",
+    "firstPerson": true
+  },
+  {
+    "name": "after-fp-m4-suppressed-hot-noon.png",
+    "bytes": 385883,
+    "title": "FP GW-4 Suppressed Hot (Heat 0.88, Can Glows & Smokes) · Noon",
+    "weapon": "m4",
+    "suppressed": true,
+    "heat": 0.88,
+    "light": "noon",
+    "firstPerson": true
   },
   {
     "name": "before-fp-minigun-cold-noon.png",
-    "bytes": 1040946,
+    "bytes": 384633,
     "title": "FP Minigun Cold (Heat 0.0) · Noon",
+    "weapon": "minigun",
+    "suppressed": false,
     "heat": 0,
-    "light": "noon"
+    "light": "noon",
+    "firstPerson": true
   },
   {
     "name": "after-fp-minigun-hot-noon.png",
-    "bytes": 1041944,
-    "title": "FP Minigun Hot (Heat 0.92, 6-Barrel Cluster Glow + Smoke) · Noon",
+    "bytes": 384134,
+    "title": "FP Minigun Spun Hot (Heat 0.92, 6-Barrel Cluster Glow + Smoke) · Noon",
+    "weapon": "minigun",
+    "suppressed": false,
     "heat": 0.92,
-    "light": "noon"
+    "light": "noon",
+    "firstPerson": true
   },
   {
     "name": "before-tp-marine-m4-cold-noon.png",
-    "bytes": 1042549,
-    "title": "TP Marine M4 Cold (Heat 0.0) · Noon",
+    "bytes": 439426,
+    "title": "TP Marine GW-4 Cold (Heat 0.0) · Noon",
+    "weapon": "m4",
+    "suppressed": false,
     "heat": 0,
-    "light": "noon"
+    "light": "noon",
+    "firstPerson": false
   },
   {
     "name": "after-tp-marine-m4-hot-noon.png",
-    "bytes": 1043228,
-    "title": "TP Marine M4 Hot (Heat 0.88, Barrel Glow + Smoke) · Noon",
+    "bytes": 439201,
+    "title": "TP Marine GW-4 Hot (Heat 0.88, Barrel Glow + Smoke) · Noon",
+    "weapon": "m4",
+    "suppressed": false,
     "heat": 0.88,
-    "light": "noon"
+    "light": "noon",
+    "firstPerson": false
+  },
+  {
+    "name": "before-tp-marine-m4-suppressed-cold-night.png",
+    "bytes": 278021,
+    "title": "TP Marine GW-4 Suppressed Cold (Heat 0.0) · Night",
+    "weapon": "m4",
+    "suppressed": true,
+    "heat": 0,
+    "light": "night",
+    "firstPerson": false
   },
   {
     "name": "after-tp-marine-m4-suppressed-hot-night.png",
-    "bytes": 900968,
-    "title": "TP Marine M4 Suppressed Hot (Heat 0.88, Suppressor Glow + Smoke) · Night",
+    "bytes": 277990,
+    "title": "TP Marine GW-4 Suppressed Hot (Heat 0.88, Suppressor Glow + Smoke) · Night",
+    "weapon": "m4",
+    "suppressed": true,
     "heat": 0.88,
-    "light": "night"
+    "light": "night",
+    "firstPerson": false
   }
 ]

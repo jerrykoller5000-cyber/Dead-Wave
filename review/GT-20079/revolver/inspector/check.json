@@ -1,0 +1,20 @@
+{
+ "at": "2026-11-11T02:23:08.386Z",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "results": [
+  {
+   "id": "weapon.revolver",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 151,
+   "tris": 10786,
+   "size": [
+    0.075,
+    0.212,
+    0.37
+   ],
+   "error": null
+  }
+ ]
+}

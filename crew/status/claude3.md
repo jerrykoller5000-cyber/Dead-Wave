@@ -1,25 +1,28 @@
 # Claude 3
 
-state: active
+state: idle
 model: Claude Opus 5.5
-task: CC-341 J128: the marine's fabric, layer on layer: tcc341 (posed layer-pair clip check), then the fixes
-touching: studio/marine-body.js, studio/marine-cloth.js, studio/marine-hats.js, tools/tests/tcc341.js (new)
-since: 2026-11-11T01:47Z
+task: —
+touching: —
+since: 2026-11-11T02:48Z
 next: CC-341 J128 (Jerry, 10 Nov, standing, D-140; was CL-341): the marin
 blocked-on: —
-last-report: handoffs/2026-11-11-claude3-CC-343.md
+last-report: handoffs/2026-11-11-claude3-CC-341.md
 
 ## Notes
 
-### Where things stand (11 Nov ~01:50Z, session 3)
-- CC-343 done (checked out --done): in first person his body faces the view (index.html updateMouseAimBody, one line); tcc343.
-  Asked the Director about the eye inside the range console at 0.4 m pitched -60 (my pick: a solid for the console).
-- CC-341 (checked in 01:47Z): nothing of the fabric changed yet. Plan: tools/tests/tcc341.js poses him (stand armed and
-  unarmed, walk, run, crouch, crouch-walk, aim, reload, jump) and checks each layer pair (skin < shirt < vest/carrier,
-  shirt < belt/pouches, glove cuff < sleeve, head < balaclava < helmet, trousers < boots) for any vertex > 0.5 mm through,
-  reusing rayHits/distTri from tools/tests/clip-check.js. Most of the body is one baked 'rig-skin' SkinnedMesh per material
-  group (RIG_SKIN, bakeRigSkin): posed vertices with mesh.getVertexPosition(i, v) then localToWorld; open shells need the
-  nearest-face signed distance, not the ray parity. The in-game mesh list and its probe: Claude outputs/CC-341/.
+### Where things stand (11 Nov ~02:55Z, end of session 3: context nearly full, needs a new session)
+- CC-343 done (checked out --done): FP body faces the view (index.html updateMouseAimBody, one line); tcc343. Asked the
+  Director about the eye inside the range console at 0.4 m pitched -60 (my pick: a solid for the console).
+- CC-341 part 1 checked out NOT done (handoffs/2026-11-11-claude3-CC-341.md):
+  - LIVE on the PC: studio/marine-body.js arm(): CUFF_FWD=.02, the sleeve's end centred on the turned wrist, over the glove's
+    cuff (before copy: Claude outputs/CC-341/marine-body.before-cc341.js); tools/tests/tcc341.js (new, ~130 s).
+  - OWED: the after pictures of the wrists (before-wrist1/2.png are there; the cloud camera timed out). Spots: in a --match
+    camera, eval the wrist script (toggle to armed, 60 stepFrames, flightHold(false) after!), shot --cam/--look --time noon.
+  - OPEN (tcc341 red on them): (1) a headgear part 27.7 mm inside the balaclava at the side of the head, every pose (merged
+    mesh: ear protection or harness, studio/marine-headgear.js / makeMarine's helmet); (2) the sleeve through the plate
+    carrier's flank at the armpit and hip when running or crouching (18-27 mm).
+  - Waiting on the Director: boots vs trousers (my pick (a): keep the blousing; the test has ['boots','trousers']).
 - Then CC-342 (after CC-341).
 
 ### This VM's quirks (session 3)

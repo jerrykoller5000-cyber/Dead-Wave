@@ -7,7 +7,7 @@ import { serve } from '../../../tools/serve.mjs';
 import { save } from '../../GT-20076/save.mjs';
 
 const phase = process.argv[2];
-assert(process.env.DW_GAME_TEST_TOKEN && ['before', 'after'].includes(phase));
+assert(process.env.DW_GAME_TEST_TOKEN && ['before', 'after', 'action-model'].includes(phase));
 const folder = new URL('./' + phase + '/', import.meta.url);
 await mkdir(folder, { recursive: true });
 const server = await serve(fileURLToPath(new URL('../../../', import.meta.url)), 0);
@@ -41,7 +41,7 @@ try {
   const hashes = geometry.map(points => createHash('sha256').update(JSON.stringify(points)).digest('hex'));
   const report = { id: subject.id, info: subject.info, surfaces: hashes };
   await save(new URL('inspector.json', folder), JSON.stringify(report, null, 2));
-  if (phase === 'after') {
+  if (phase !== 'before') {
     const before = JSON.parse(await readFile(new URL('./before/inspector.json', import.meta.url), 'utf8'));
     assert.deepEqual(hashes, before.surfaces, 'Appearance edit changed a rest surface');
   }

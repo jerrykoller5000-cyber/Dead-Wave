@@ -2,7 +2,8 @@
 // The chamber model can scale the same mesh into its own gun-local units.
 const shapes = {
   // length, rim radius, body radius, mouth radius and start of the shoulder, in millimetres
-  pistol:   [19, 5.0, 4.95, 4.75],
+  pistol:   [22.8, 6.0, 6.0, 6.0],
+  uzi:      [19, 5.0, 4.95, 4.75],
   revolver: [33, 6.55, 5.80, 5.75],
   m4:       [45, 4.8, 4.78, 3.20, 35],
   ak:       [39, 5.7, 5.62, 4.30, 29],
@@ -11,7 +12,7 @@ const shapes = {
   shotgun:  [70, 11.3, 10.3, 10.2],
   launcher: [46, 21.9, 20.5, 20.1]
 };
-const sharedShape = { uzi: 'pistol', aa12: 'shotgun', m240: 'minigun' };
+const sharedShape = { aa12: 'shotgun', m240: 'minigun' };
 const geometryByThree = new WeakMap();
 
 // Visible portion of a carrier sliding behind the rear edge of a receiver window.
@@ -106,7 +107,7 @@ function shotgunShell(THREE, load, spent) {
 export function roundGeometry(THREE, weapon, load) {
   if (weapon === 'shotgun') return shotgunShell(THREE, load, false);
   if (weapon === 'aa12') return shotgunShell(THREE, 'birdshot', false);
-  if (weapon === 'ak') return metallicCartridge(THREE, weapon, true);
+  if (weapon === 'ak' || weapon === 'revolver') return metallicCartridge(THREE, weapon, true);
   return null;
 }
 
@@ -134,8 +135,12 @@ function metallicCartridge(THREE, kind, live) {
   if (!rimmed) profile.push([body * 0.83, length * 0.065], [body * 0.83, length * 0.086]);
   profile.push([body, length * 0.105]);
   if (shoulder) profile.push([body * 0.91, shoulder], [mouth, length * 0.86]);
-  const tip = live ? length * .43 : 0;
-  if (live) {
+  const tip = live ? (kind === 'revolver' ? mouth * 1.45 : length * .43) : 0;
+  if (live && kind === 'revolver') {
+    // Broad, rounded crown on the sidearm prop, legible when only its nose shows.
+    profile.push([mouth,length],[mouth*.96,length+tip*.12],[mouth*.91,length+tip*.46],
+      [mouth*.78,length+tip*.79],[mouth*.56,length+tip*.99],[0,length+tip]);
+  } else if (live) {
     // A closed, copper-coloured silhouette, continuous with the brass prop.
     profile.push([mouth,length],[mouth*.92,length+.12],[mouth*.91,length+tip*.18],
       [mouth*.75,length+tip*.48],[mouth*.43,length+tip*.77],[0,length+tip]);
@@ -152,7 +157,7 @@ function metallicCartridge(THREE, kind, live) {
     const y = position.getY(i) * 1000 + centre;
     const r = Math.hypot(position.getX(i), position.getZ(i)) * 1000;
     if (live && y > length + .05) colors.push(.58, .22, .105);
-    else if (kind === 'ak' && !live && y >= length*.19 && (r <= mouth-wall+.001 || (Math.abs(y-length*.2)<.001 && r<=body*.77))) colors.push(.15,.095,.048);
+    else if ((kind === 'ak' || kind === 'revolver') && !live && y >= length*.19 && (r <= mouth-wall+.001 || (Math.abs(y-length*.2)<.001 && r<=body*.77))) colors.push(.15,.095,.048);
     else if (kind === 'launcher') colors.push(0.78, 0.75, 0.70);
     else if (y < 0.4 && r <= primer * 1.06) colors.push(0.73, 0.63, 0.49);
     else colors.push(0.88, 0.60, 0.27);

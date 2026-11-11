@@ -100,6 +100,8 @@ const messages = {
   "armory.typed.pack": "Pack of {count} · ${price} Cash",
   "armory.typed.buy": "Buy {type}",
   "armory.typed.full": "Shell supply full",
+  "ammo.switch.none": "NO OTHER AMMO",
+  "ammo.switch.noneHelp": "Buy buckshot or slugs at the Armory",
   "armory.preview.label": "{gun}: drag or use arrow keys to turn; scroll, pinch or use plus and minus to zoom; Home faces front.",
   "armory.preview.hint": "Drag to turn · Scroll or pinch to zoom · Home faces front",
   "armory.preview.left": "Turn left",

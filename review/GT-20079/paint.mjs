@@ -6,7 +6,7 @@ import {serve} from '../../tools/serve.mjs';
 import {save} from '../GT-20076/save.mjs';
 
 const [id,phase]=process.argv.slice(2);
-assert(process.env.DW_GAME_TEST_TOKEN && /^[a-z0-9-]+$/.test(id) && ['before','pre-finish','after','lights','riser','rack-before','rack-after','rack-final'].includes(phase));
+assert(process.env.DW_GAME_TEST_TOKEN && /^[a-z0-9-]+$/.test(id) && ['before','pre-finish','after','lights','lights-before','riser','rack-before','rack-after','rack-final'].includes(phase));
 const folder=new URL('./'+id+'/'+phase+'/',import.meta.url);
 await mkdir(folder,{recursive:true});
 const server=await serve(fileURLToPath(new URL('../../',import.meta.url)),0);
@@ -87,6 +87,10 @@ async function capture() {
     };
     window.paintSnapshot=()=>{
       const out={},groups={assembled:g,firstPerson:vm.gun.root,slide:g.userData.slide,magazine:g.userData.mag,light:g.userData.laserLightUnit,suppressor:g.userData.suppressor,optic:g.userData.fittedOptic};
+      if(id==='revolver'){
+        groups.offhand=T.offhandMeshes[id];
+        groups.rack=T.house.armoryRack.children.find(o=>o.userData.rackKind===id);
+      }
       for(const [group,root] of Object.entries(groups)){
         if(!root)continue;
         const mats=new Map();
@@ -109,7 +113,7 @@ async function capture() {
         lamp.target.position.copy(copy.position);
         T.scene.add(lamp,lamp.target,new T.THREE.HemisphereLight(0xf3f7ff,0xc7bba9,1.5));window.reviewLamp=lamp;
       }
-      const centre=copy.localToWorld(new T.THREE.Vector3(0,0,id==='ak'?.12:id==='m4'?.32:.24));
+      const centre=copy.localToWorld(new T.THREE.Vector3(0,0,id==='ak'?.12:id==='m4'?.32:id==='revolver'?.09:.24));
       const eye=centre.clone().addScaledVector(new T.THREE.Vector3(-.64,.22,.31),['m4','ak'].includes(id)?2.05:1);
       T.setShotView({x:eye.x,y:eye.y,z:eye.z,tx:centre.x,ty:centre.y,tz:centre.z,fov:34});
       for(let i=0;i<5;i++){T.stepFrame(1/30);await new Promise(r=>setTimeout(r,80));}
@@ -158,7 +162,10 @@ async function capture() {
     console.log(id,phase,JSON.stringify(results));
     return;
   }
-  if(phase==='lights'){
+  const lightingOnly=phase==='lights' || phase==='lights-before';
+  if(lightingOnly || (id==='revolver' && ['before','after'].includes(phase))){
+    const lightFolder=lightingOnly?folder:new URL('../'+(phase==='before'?'lights-before':'lights')+'/',folder);
+    await mkdir(lightFolder,{recursive:true});
     await page.evaluate(`(async()=>{
       const H=TT.inspectHost(),{LIGHTS}=await import('/studio/inspector/stage.js');
       window.applyProofLight=name=>{
@@ -176,15 +183,16 @@ async function capture() {
       const state=await page.evaluate('({key:TT.viewmodelDbg().info.key,current:TT.armoryFinishDbg.list(reviewId).current,sun:TT.inspectHost().sun.intensity})');
       assert.equal(state.key,id);assert.equal(state.current,key);
       const shot=await page.send('Page.captureScreenshot',{format:'jpeg',quality:94});
-      await save(new URL(finish+'-'+light+'.jpg',folder),Buffer.from(shot.data,'base64'));
+      await save(new URL(finish+'-'+light+'.jpg',lightFolder),Buffer.from(shot.data,'base64'));
     }
     assert.deepEqual(page.errors,[]);
     console.log('PASS '+id+' factory and '+swatch+' from the player eye in all four lights');
-    return;
+    if(lightingOnly)return;
+    await page.evaluate("TT.inspectHost().attach(null);setPaint('')");
   }
   const states={};
   let tiles;
-  for(const angle of (['shotgun','ak'].includes(id)?['eye','side','rack']:['eye','side']))for(const [name,key] of [['factory',''],['camo',swatch],['restored','']]){
+  for(const angle of (['shotgun','ak','revolver'].includes(id)?['eye','side','rack']:['eye','side']))for(const [name,key] of [['factory',''],['camo',swatch],['restored','']]){
     const selected=await page.evaluate('setPaint('+JSON.stringify(key)+')');
     assert.equal(selected,key);
     if(angle==='eye'){
@@ -347,6 +355,47 @@ async function capture() {
     const required=id==='pistol'?{assembled:['frame','slide'],slide:['slide']}:
       {assembled:id==='ak'?['receiver','rail','optic shell']:['receiver','furniture','rail','optic shell']};
     Object.assign(required,{light:['light shell'],suppressor:['suppressor shell'],optic:['optic shell']});
+    if(id==='revolver'){
+      required.assembled=['frame','rail','optic shell'];
+      delete required.suppressor;
+      const woods=states.factory.assembled.filter(m=>m.materialName.startsWith('Revolver walnut'));
+      assert.equal(woods.length,2,'Expected both factory walnut finishes');
+      for(const material of woods){
+        assert(material.map && !material.registered && !material.role);
+        for(const state of Object.values(states)) for(const group of ['assembled','firstPerson','offhand','rack']){
+          assert(state[group].some(m=>m.color===material.color && m.map===material.map && m.roughness===material.roughness),
+            'Factory walnut changed on '+group);
+        }
+      }
+      const masks=await page.evaluate(`(async()=>{
+        const g=TT.weaponMeshes.revolver, result={};
+        for(const kind of TT.opticDbg.options.revolver){
+          if(!TT.armoryDbg.fit('revolver','optic:'+kind,true))throw Error('Failed to fit '+kind);
+          await setPaint('${swatch}');
+          const checks={};
+          const groups={optic:g.userData.fittedOptic,plate:g.userData.opticPlate,trigger:g.userData.trigger,
+            hammer:g.userData.hammer,drum:g.userData.cylinder,barrel:g.getObjectByName(g.userData.heatParts.barrel)};
+          for(const [part,root] of Object.entries(groups)){
+            let coated=0, factory=0;
+            root.traverse(o=>{
+              if(!o.isMesh)return;
+              if(o.material.userData.weaponFinishRole && o.material.map)coated++;
+              else if(!o.material.userData.gunPaintId)factory++;
+              else throw Error('Untagged paint on '+part);
+            });
+            checks[part]={coated,factory};
+          }
+          result[kind]=checks;
+        }
+        return result;
+      })()`);
+      assert.deepEqual(Object.keys(masks).sort(),['prism','rmr']);
+      await save(new URL('optics.json',folder),JSON.stringify(masks,null,2));
+      for(const checks of Object.values(masks)){
+        for(const part of ['optic','plate'])assert(checks[part].coated && checks[part].factory,part);
+        for(const part of ['trigger','hammer','drum','barrel'])assert(checks[part].factory && !checks[part].coated,part);
+      }
+    }
     for(const [group,roles] of Object.entries(required)){
       const parts=states.camo[group]||[];
       for(const role of roles)if(!parts.some(m=>m.role===role&&m.map))failures.push(group+' missing painted '+role);

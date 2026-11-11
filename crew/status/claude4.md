@@ -67,7 +67,11 @@ KR-7, then the rest. For each gun: fit, test (tcl334b/c/d), then ask Antigravity
   revolver r up/forward for the trigger (Claude 5's note); chainsaw r: really 15-20 mm in its rubber rear grip block (the
   test missed it by order: tcl334d takes it after the flamer), refit round the block. poseArm radial/ulnar sign fixed
   (Claude 2's proof) in the cloud copy only.
-- Left: pistol l and revolver l round the new firing hands; contacts (cont9.sh/encode9.mjs) for every refitted hand; tests;
+- 02:45Z: also refitted in the cloud: pistol l (round the new firing glove), m4 r+l (the revised GW-4: firing thumb was 14 mm
+  in, support palm 8 mm), ak r and sniper r and revolver r with the index pad pulled to the trigger face (c4/fitT.sh, tgt.py,
+  kojson.py; gun/gungrip3.mjs has KOGRID/TGT/NOX/XT): KR-7 0.8 mm, GW-4 0.5, sniper 5, revolver 10 (was 29). Breacher and
+  shotgun trigger-reach fits came out worse: kept. Cloud state: /home/claude/ex*/ (gone with the box), VM_FIT in the cloud copy.
+- Left: revolver l round its new firing hand; contacts (cont9.sh/encode9.mjs) for every refitted hand; tests;
   merge to the PC (VM_FIT hands only, hand-contacts, the poseArm 2-line change by a read-modify-write); sheet; tell Claude 5
   (re-solve VM_TRIGGER on pistol, revolver, shotgun, launcher, chainsaw). Then AG-286's two notes, CD-4 (aimed eye, stock).
 

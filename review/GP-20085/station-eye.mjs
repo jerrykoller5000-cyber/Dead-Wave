@@ -21,6 +21,11 @@ try {
   assert(await page.waitFor('TT.trainingDbg.state().active && TT.getPhase()==="prep"',{timeout:90000}));
   assert(await page.waitFor('!document.getElementById("trainingBlackout")?.classList.contains("on")',{timeout:30000}));
   await page.evaluate('document.getElementById("perf")?.classList.remove("on")');
+  // Reconstruct the previous collision behavior without altering the checked-in game.
+  if (mode==='before-contact') await page.evaluate(`(()=>{
+    TT.trainingDbg.state().stationCollision.constrain=()=>({moved:false});
+    TT.rangeDbg.feature().constrain=()=>({moved:false});
+  })()`);
   for(const station of ['cif','kiosk','armory','hqPanel','skullWindow','lightSwitch','rangeConsole']) {
     const row = await page.evaluate(`(()=>{
       const T=TT,tg=T.trainingDbg.tg(),s=tg.stations[${JSON.stringify(station)}],f=s.front;
@@ -37,7 +42,7 @@ try {
       T.stepFrame(.016);
       const range=tg.solids.find(q=>q.station==='rangeConsole')||null;
       const eye=T.fpDbg().eye;
-      return {station:${JSON.stringify(station)},front:f,at:{x:s.x,z:s.z},face,normal:{x:nx,z:nz},player:{x:p.x,z:p.z},eye:eye?{x:eye.x,y:eye.y,z:eye.z}:null,
+      return {station:${JSON.stringify(station)},front:f,at:{x:s.x,z:s.z},face,normal:{x:nx,z:nz},player:{x:p.x,z:p.z},eye:eye?{x:eye.x,y:eye.y,z:eye.z}:null,action:T.trainingDbg.action(),
         bounds:b?{minX:b.min.x,maxX:b.max.x,minY:b.min.y,maxY:b.max.y,minZ:b.min.z,maxZ:b.max.z}:null,
         rangeSolid:range?{minX:range.minX,maxX:range.maxX,minZ:range.minZ,maxZ:range.maxZ}:null,
         stationBoxes:T.trainingDbg.state().stationCollision?.boxes.map(v=>v.name)||[]};
@@ -46,4 +51,14 @@ try {
     await page.screenshot(path.join(out,`${mode}-${station}-eye.png`));
     rows.push(row);
     if(mode.startsWith('after') && row.face!=null) {
-      const axis
+      const axis=Math.abs(row.normal.x)>.5?'x':'z',normal=row.normal[axis];
+      assert((row.player[axis]-row.face)*normal>=.41,`${station}: player not at least radius from face`);
+      assert((row.eye[axis]-row.face)*normal>=.02,`${station}: eye inside the station`);
+    }
+  }
+  assert.deepEqual(page.errors,[]);
+  console.log(`PASS GP-20085 ${mode}: ${rows.length} station eye views, 0 page errors`);
+} finally {
+  fs.writeFileSync(path.join(out,`${mode}-eye.json`),JSON.stringify(rows,null,2));
+  await browser.close();await server.close();
+}
