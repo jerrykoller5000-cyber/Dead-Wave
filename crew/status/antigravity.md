@@ -1,13 +1,13 @@
 # Antigravity
 
-state: idle
+state: active
 model: Gemini 4 Carbon
-task: —
-touching: —
-since: 2026-11-11T08:26Z
+task: AG-299 The flamethrower's fire in fewer draws (instanced flame tongues, embers, nozzle jet)
+touching: index.html (updateFlameStream, instanced flame batches), combat/training-wreck.js, tools/tests/tag296.js, review/AG-299/, qa/2026-11-11-AG-299/
+since: 2026-11-11T09:41Z
 next: —
 blocked-on: —
-last-report: handoffs/2026-11-11-antigravity-AG-296.md
+last-report: handoffs/2026-11-11-antigravity-AG-298.md
 
 ## Notes
 

@@ -335,6 +335,7 @@ function krFinish(ctx) {
     birch.roughness = .46;
     birch.metalness = 0;
     birch.map = birchTexture(ctx.THREE);
+    birch.userData.preserveArtworkUV = true;
     const cartridge = ctx.brassMat.clone();
     cartridge.color.setHex(0xffffff); cartridge.vertexColors = true;
     cartridge.roughness = .38; cartridge.metalness = .42;

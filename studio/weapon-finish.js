@@ -57,6 +57,7 @@ export function birchTexture(T) {
   }
   const map = new T.DataTexture(data, width, half * 2);
   map.name = 'lacquered birch grain and cut edges';
+  map.anisotropy = 4;
   map.colorSpace = T.SRGBColorSpace;
   map.wrapS = T.RepeatWrapping;
   map.magFilter = T.LinearFilter;

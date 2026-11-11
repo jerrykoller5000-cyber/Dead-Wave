@@ -1,0 +1,248 @@
+{
+  "factory": {
+    "proof": "factory",
+    "mats": [
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16752704,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16777215,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16777215,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16777215,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16777215,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 3685185,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "receiver",
+        "registered": "flamer",
+        "color": 5792091,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16777215,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16777215,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16777215,
+        "map": "1ff2d29b-8822-4ddc-b353-efbb2c674841"
+      }
+    ],
+    "trigger": "controls-trigger",
+    "pin": [
+      0,
+      -0.034,
+      -0.094
+    ],
+    "perPart": true
+  },
+  "m81": {
+    "proof": "m81",
+    "mats": [
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16752704,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16777215,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16777215,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16777215,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16777215,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 3685185,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "receiver",
+        "registered": "flamer",
+        "color": 15131350,
+        "map": "bf2fee27-d221-4c4c-b6f3-92fd19f5269a"
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16777215,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16777215,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16777215,
+        "map": "1ff2d29b-8822-4ddc-b353-efbb2c674841"
+      }
+    ],
+    "trigger": "controls-trigger",
+    "pin": [
+      0,
+      -0.034,
+      -0.094
+    ],
+    "perPart": true
+  },
+  "restored": {
+    "proof": "restored",
+    "mats": [
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16752704,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16777215,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16777215,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16777215,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16777215,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 3685185,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "receiver",
+        "registered": "flamer",
+        "color": 5792091,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16777215,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16777215,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16777215,
+        "map": "1ff2d29b-8822-4ddc-b353-efbb2c674841"
+      }
+    ],
+    "trigger": "controls-trigger",
+    "pin": [
+      0,
+      -0.034,
+      -0.094
+    ],
+    "perPart": true
+  }
+}

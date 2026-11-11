@@ -157,7 +157,7 @@ export function dressTrainingWear(T, { R, B, bedAt, add, box, std, texture, lamp
       if (r() < 0.8) c.fillRect(u, v - 1, FS * (0.3 + r() * 0.7), 2.5);
     }
   });
-  decal('wear-floor', RW, RD, floorTex, (R.minX + R.maxX) / 2, 0.005, (R.minZ + R.maxZ) / 2, 0, -Math.PI / 2);
+  decal('wear-floor', RW, RD, floorTex, (R.minX + R.maxX) / 2, 0.001, (R.minZ + R.maxZ) / 2, 0, -Math.PI / 2);
 
   // The yellow line: faded unevenly, and chipped to the tile in ragged flakes where people stand (more where more do).
   const chipTex = tex(RW * 64, 32, (c, w, h) => {
@@ -177,7 +177,7 @@ export function dressTrainingWear(T, { R, B, bedAt, add, box, std, texture, lamp
     });
     for (let k = 0; k < 25; k++) { c.fillStyle = 'rgba(196,200,202,0.85)'; flake(r() * w, r() * h, 1 + r() * 3); }   // strays along it
   });
-  decal('wear-line-chips', RW, 0.27, chipTex, 0, 0.0132, 0, 0, -Math.PI / 2);
+  decal('wear-line-chips', RW, 0.27, chipTex, 0, 0.0015, 0, 0, -Math.PI / 2);
 
   // ---------- (2) the walls
   // Where the side walls' features go (range local): vents with corner bolts, a conduit's brackets with two bolts.

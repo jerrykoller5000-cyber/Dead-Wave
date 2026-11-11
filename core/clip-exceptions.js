@@ -39,6 +39,14 @@ export const CLIP_EXCEPTIONS = Object.freeze([
     until: 'The passage floor is rebuilt without a separate slab.'
   }),
   Object.freeze({
+    id: 'training-floor-paint-projection',
+    layers: Object.freeze(['training-floor-paint', 'training-floor']),
+    poses: Object.freeze(['training:decal']),
+    max: 0.002,
+    reason: 'Flat floor paint lies 1 mm over the tile with polygonOffset so the two surfaces do not z-fight; it has no physical volume.',
+    until: 'The floor paint is incorporated into the tile material.'
+  }),
+  Object.freeze({
     id: 'training-impact-mark-pool',
     layers: Object.freeze(['training-impact-marks', 'training-floor']),
     poses: Object.freeze(['training:effect']),

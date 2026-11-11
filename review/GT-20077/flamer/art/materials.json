@@ -1,0 +1,306 @@
+{
+  "factory": {
+    "proof": "factory",
+    "mats": [
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16752704,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 11581117,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 14263583,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 9518386,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 3290167,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 11581117,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 13015877,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 16777215,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 3553592,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 12237483,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 9518386,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 2566445,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 3685185,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 5792091,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 3290167,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 6450025,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 3685185,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 16777215,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16777215,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16777215,
+        "map": "96954368-49d0-4c2c-8b55-f8bb49c82720"
+      }
+    ],
+    "trigger": "controls-trigger",
+    "pin": [
+      0,
+      -0.034,
+      -0.094
+    ],
+    "perPart": false
+  },
+  "restored": {
+    "proof": "restored",
+    "mats": [
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16752704,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 11581117,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 14263583,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 9518386,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 3290167,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 11581117,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 13015877,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 16777215,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 3553592,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 12237483,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 9518386,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 2566445,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 3685185,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 5792091,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 3290167,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 6450025,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 3685185,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 16777215,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16777215,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16777215,
+        "map": "96954368-49d0-4c2c-8b55-f8bb49c82720"
+      }
+    ],
+    "trigger": "controls-trigger",
+    "pin": [
+      0,
+      -0.034,
+      -0.094
+    ],
+    "perPart": false
+  }
+}

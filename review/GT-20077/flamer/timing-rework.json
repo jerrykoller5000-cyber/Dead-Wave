@@ -1,0 +1,128 @@
+{
+  "weapon": "flamer",
+  "readyMs": 14605,
+  "fps": 60,
+  "low": 57.2,
+  "samples": [
+    {
+      "weapon": "flamer",
+      "eye": "flamer",
+      "high": "high",
+      "fps": 59.99400060029756,
+      "low": 43.8596491572049,
+      "worst": 22.799999982118607,
+      "hitches": 18,
+      "frames": 60
+    },
+    {
+      "weapon": "flamer",
+      "eye": "flamer",
+      "high": "high",
+      "fps": 60.03256003183186,
+      "low": 36.63003661404161,
+      "worst": 27.30000001192093,
+      "hitches": 18,
+      "frames": 59
+    },
+    {
+      "weapon": "flamer",
+      "eye": "flamer",
+      "high": "high",
+      "fps": 60.16847171973937,
+      "low": 59.52380948157267,
+      "worst": 16.80000001192093,
+      "hitches": 18,
+      "frames": 60
+    },
+    {
+      "weapon": "flamer",
+      "eye": "flamer",
+      "high": "high",
+      "fps": 59.60197999762072,
+      "low": 42.37288136663398,
+      "worst": 23.599999994039536,
+      "hitches": 18,
+      "frames": 59
+    },
+    {
+      "weapon": "flamer",
+      "eye": "flamer",
+      "high": "high",
+      "fps": 60.37432078997744,
+      "low": 56.49717508416677,
+      "worst": 17.700000017881393,
+      "hitches": 18,
+      "frames": 60
+    },
+    {
+      "weapon": "flamer",
+      "eye": "flamer",
+      "high": "high",
+      "fps": 59.99999999999999,
+      "low": 59.52380948157267,
+      "worst": 16.80000001192093,
+      "hitches": 18,
+      "frames": 60
+    },
+    {
+      "weapon": "flamer",
+      "eye": "flamer",
+      "high": "high",
+      "fps": 59.994000598509786,
+      "low": 58.47953218412662,
+      "worst": 17.099999994039536,
+      "hitches": 18,
+      "frames": 60
+    },
+    {
+      "weapon": "flamer",
+      "eye": "flamer",
+      "high": "high",
+      "fps": 60.00600059970231,
+      "low": 59.17159761226685,
+      "worst": 16.900000005960464,
+      "hitches": 18,
+      "frames": 60
+    },
+    {
+      "weapon": "flamer",
+      "eye": "flamer",
+      "high": "high",
+      "fps": 59.988002400235075,
+      "low": 58.47953218412662,
+      "worst": 17.099999994039536,
+      "hitches": 18,
+      "frames": 60
+    },
+    {
+      "weapon": "flamer",
+      "eye": "flamer",
+      "high": "high",
+      "fps": 60.00600059970231,
+      "low": 59.52380948157267,
+      "worst": 16.80000001192093,
+      "hitches": 18,
+      "frames": 60
+    },
+    {
+      "weapon": "flamer",
+      "eye": "flamer",
+      "high": "high",
+      "fps": 59.99400060029756,
+      "low": 59.52380948157267,
+      "worst": 16.80000001192093,
+      "hitches": 18,
+      "frames": 60
+    },
+    {
+      "weapon": "flamer",
+      "eye": "flamer",
+      "high": "high",
+      "fps": 59.99999999999999,
+      "low": 59.17159761226685,
+      "worst": 16.900000005960464,
+      "hitches": 18,
+      "frames": 60
+    }
+  ]
+}

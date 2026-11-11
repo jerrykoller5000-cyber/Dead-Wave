@@ -1,0 +1,306 @@
+[
+  {
+    "spot": "rangeBench",
+    "aim": "hip",
+    "light": "noon",
+    "yaw": 0,
+    "forwardDelta": 0.000371,
+    "aimTargetDeltaM": 0,
+    "camDeltaM": 0.004532,
+    "forward": [
+      0,
+      -0.7174,
+      0.6967
+    ],
+    "aimTarget": [
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "spot": "rangeBench",
+    "aim": "ads",
+    "light": "noon",
+    "yaw": 0,
+    "forwardDelta": 0,
+    "aimTargetDeltaM": 0,
+    "camDeltaM": 0,
+    "forward": [
+      0,
+      -0.7174,
+      0.6967
+    ],
+    "aimTarget": [
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "spot": "rangeConsole",
+    "aim": "hip",
+    "light": "noon",
+    "yaw": 0,
+    "forwardDelta": 0.000077,
+    "aimTargetDeltaM": 0,
+    "camDeltaM": 0.001001,
+    "forward": [
+      0,
+      -0.7174,
+      0.6967
+    ],
+    "aimTarget": [
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "spot": "rangeConsole",
+    "aim": "ads",
+    "light": "noon",
+    "yaw": 0,
+    "forwardDelta": 0,
+    "aimTargetDeltaM": 0,
+    "camDeltaM": 0,
+    "forward": [
+      0,
+      -0.7174,
+      0.6967
+    ],
+    "aimTarget": [
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "spot": "rangeBench",
+    "aim": "hip",
+    "light": "overcast",
+    "yaw": 0,
+    "forwardDelta": 0.000077,
+    "aimTargetDeltaM": 0,
+    "camDeltaM": 0.001001,
+    "forward": [
+      0,
+      -0.7174,
+      0.6967
+    ],
+    "aimTarget": [
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "spot": "rangeBench",
+    "aim": "ads",
+    "light": "overcast",
+    "yaw": 0,
+    "forwardDelta": 0,
+    "aimTargetDeltaM": 0,
+    "camDeltaM": 0,
+    "forward": [
+      0,
+      -0.7174,
+      0.6967
+    ],
+    "aimTarget": [
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "spot": "rangeConsole",
+    "aim": "hip",
+    "light": "overcast",
+    "yaw": 0,
+    "forwardDelta": 0.000077,
+    "aimTargetDeltaM": 0,
+    "camDeltaM": 0.001001,
+    "forward": [
+      0,
+      -0.7174,
+      0.6967
+    ],
+    "aimTarget": [
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "spot": "rangeConsole",
+    "aim": "ads",
+    "light": "overcast",
+    "yaw": 0,
+    "forwardDelta": 0,
+    "aimTargetDeltaM": 0,
+    "camDeltaM": 0,
+    "forward": [
+      0,
+      -0.7174,
+      0.6967
+    ],
+    "aimTarget": [
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "spot": "rangeBench",
+    "aim": "hip",
+    "light": "dusk",
+    "yaw": 0,
+    "forwardDelta": 0.000077,
+    "aimTargetDeltaM": 0,
+    "camDeltaM": 0.001001,
+    "forward": [
+      0,
+      -0.7174,
+      0.6967
+    ],
+    "aimTarget": [
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "spot": "rangeBench",
+    "aim": "ads",
+    "light": "dusk",
+    "yaw": 0,
+    "forwardDelta": 0,
+    "aimTargetDeltaM": 0,
+    "camDeltaM": 0,
+    "forward": [
+      0,
+      -0.7174,
+      0.6967
+    ],
+    "aimTarget": [
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "spot": "rangeConsole",
+    "aim": "hip",
+    "light": "dusk",
+    "yaw": 0,
+    "forwardDelta": 0.000077,
+    "aimTargetDeltaM": 0,
+    "camDeltaM": 0.001001,
+    "forward": [
+      0,
+      -0.7174,
+      0.6967
+    ],
+    "aimTarget": [
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "spot": "rangeConsole",
+    "aim": "ads",
+    "light": "dusk",
+    "yaw": 0,
+    "forwardDelta": 0,
+    "aimTargetDeltaM": 0,
+    "camDeltaM": 0,
+    "forward": [
+      0,
+      -0.7174,
+      0.6967
+    ],
+    "aimTarget": [
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "spot": "rangeBench",
+    "aim": "hip",
+    "light": "night",
+    "yaw": 0,
+    "forwardDelta": 0.000077,
+    "aimTargetDeltaM": 0,
+    "camDeltaM": 0.001001,
+    "forward": [
+      0,
+      -0.7174,
+      0.6967
+    ],
+    "aimTarget": [
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "spot": "rangeBench",
+    "aim": "ads",
+    "light": "night",
+    "yaw": 0,
+    "forwardDelta": 0,
+    "aimTargetDeltaM": 0,
+    "camDeltaM": 0,
+    "forward": [
+      0,
+      -0.7174,
+      0.6967
+    ],
+    "aimTarget": [
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "spot": "rangeConsole",
+    "aim": "hip",
+    "light": "night",
+    "yaw": 0,
+    "forwardDelta": 0.000077,
+    "aimTargetDeltaM": 0,
+    "camDeltaM": 0.001001,
+    "forward": [
+      0,
+      -0.7174,
+      0.6967
+    ],
+    "aimTarget": [
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "spot": "rangeConsole",
+    "aim": "ads",
+    "light": "night",
+    "yaw": 0,
+    "forwardDelta": 0,
+    "aimTargetDeltaM": 0,
+    "camDeltaM": 0,
+    "forward": [
+      0,
+      -0.7174,
+      0.6967
+    ],
+    "aimTarget": [
+      0,
+      0,
+      0
+    ]
+  }
+]

@@ -1,0 +1,362 @@
+{
+  "factory": {
+    "proof": "factory",
+    "mats": [
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16752704,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 14263583,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 11019804,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 3290167,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 11581117,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 13015877,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 16777215,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 15262936,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16724770,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 2566445,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 3290167,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 3685185,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 11581117,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 16777215,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16777215,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16777215,
+        "map": "775361b9-0c14-4190-b2d5-1021782f3725"
+      }
+    ],
+    "trigger": null,
+    "pin": null,
+    "perPart": false
+  },
+  "m81": {
+    "proof": "m81",
+    "mats": [
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16752704,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 15131350,
+        "map": "5675b82a-ca5f-43a1-b334-751c1c53b848"
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 15131350,
+        "map": "5675b82a-ca5f-43a1-b334-751c1c53b848"
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 15131350,
+        "map": "5675b82a-ca5f-43a1-b334-751c1c53b848"
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 15131350,
+        "map": "5675b82a-ca5f-43a1-b334-751c1c53b848"
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 13015877,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 15131350,
+        "map": "5675b82a-ca5f-43a1-b334-751c1c53b848"
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 15131350,
+        "map": "5675b82a-ca5f-43a1-b334-751c1c53b848"
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16724770,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 15131350,
+        "map": "5675b82a-ca5f-43a1-b334-751c1c53b848"
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 15131350,
+        "map": "5675b82a-ca5f-43a1-b334-751c1c53b848"
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 15131350,
+        "map": "5675b82a-ca5f-43a1-b334-751c1c53b848"
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 15131350,
+        "map": "5675b82a-ca5f-43a1-b334-751c1c53b848"
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 15131350,
+        "map": "5675b82a-ca5f-43a1-b334-751c1c53b848"
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16777215,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16777215,
+        "map": "775361b9-0c14-4190-b2d5-1021782f3725"
+      }
+    ],
+    "trigger": null,
+    "pin": null,
+    "perPart": false
+  },
+  "restored": {
+    "proof": "restored",
+    "mats": [
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16752704,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 14263583,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 11019804,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 3290167,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 11581117,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 13015877,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 16777215,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 15262936,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16724770,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 2566445,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 3290167,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 3685185,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 11581117,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "flamer",
+        "color": 16777215,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16777215,
+        "map": null
+      },
+      {
+        "name": "",
+        "role": "",
+        "registered": "",
+        "color": 16777215,
+        "map": "775361b9-0c14-4190-b2d5-1021782f3725"
+      }
+    ],
+    "trigger": null,
+    "pin": null,
+    "perPart": false
+  }
+}

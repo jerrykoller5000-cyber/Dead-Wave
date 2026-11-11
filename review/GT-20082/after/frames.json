@@ -1,0 +1,462 @@
+[
+  {
+    "view": "held",
+    "light": "noon",
+    "finish": "",
+    "wood": [
+      {
+        "name": "",
+        "color": 16777215,
+        "map": "lacquered birch grain and cut edges",
+        "paint": null
+      }
+    ],
+    "camera": [
+      -0.8559381876585526,
+      -198.54502384293065,
+      -639.9123848319152
+    ],
+    "dir": [
+      0.9558022032013299,
+      -0.2366545420888548,
+      -0.1744613884623134
+    ]
+  },
+  {
+    "view": "held",
+    "light": "overcast",
+    "finish": "",
+    "wood": [
+      {
+        "name": "",
+        "color": 16777215,
+        "map": "lacquered birch grain and cut edges",
+        "paint": null
+      }
+    ],
+    "camera": [
+      -0.8425868835556525,
+      -198.5361274806473,
+      -639.909120878678
+    ],
+    "dir": [
+      0.9536391274894152,
+      -0.24580979796350338,
+      -0.173637431869884
+    ]
+  },
+  {
+    "view": "held",
+    "light": "dusk",
+    "finish": "",
+    "wood": [
+      {
+        "name": "",
+        "color": 16777215,
+        "map": "lacquered birch grain and cut edges",
+        "paint": null
+      }
+    ],
+    "camera": [
+      -0.8583664655025247,
+      -198.56498870838277,
+      -639.8947091907486
+    ],
+    "dir": [
+      0.9579616933131342,
+      -0.22485678025100242,
+      -0.17818199269226132
+    ]
+  },
+  {
+    "view": "held",
+    "light": "night",
+    "finish": "",
+    "wood": [
+      {
+        "name": "",
+        "color": 16777215,
+        "map": "lacquered birch grain and cut edges",
+        "paint": null
+      }
+    ],
+    "camera": [
+      -0.8539871407621306,
+      -198.5384593537625,
+      -639.9056842005184
+    ],
+    "dir": [
+      0.9536353335916204,
+      -0.2452285984340409,
+      -0.17447803596921485
+    ]
+  },
+  {
+    "view": "hip",
+    "light": "noon",
+    "finish": "",
+    "wood": [
+      {
+        "name": "",
+        "color": 16777215,
+        "map": "lacquered birch grain and cut edges",
+        "paint": null
+      }
+    ],
+    "camera": [
+      0.011400769847772364,
+      -198.5791199005152,
+      -640.4355990431453
+    ],
+    "dir": [
+      0,
+      -0.07991469396917283,
+      0.9968017063026193
+    ]
+  },
+  {
+    "view": "hip",
+    "light": "overcast",
+    "finish": "",
+    "wood": [
+      {
+        "name": "",
+        "color": 16777215,
+        "map": "lacquered birch grain and cut edges",
+        "paint": null
+      }
+    ],
+    "camera": [
+      0.005234692404612066,
+      -198.57626598620868,
+      -640.4393594048494
+    ],
+    "dir": [
+      0,
+      -0.07991469396917283,
+      0.9968017063026193
+    ]
+  },
+  {
+    "view": "hip",
+    "light": "dusk",
+    "finish": "",
+    "wood": [
+      {
+        "name": "",
+        "color": 16777215,
+        "map": "lacquered birch grain and cut edges",
+        "paint": null
+      }
+    ],
+    "camera": [
+      -0.0040665572679210865,
+      -198.57886863877067,
+      -640.4360712165344
+    ],
+    "dir": [
+      0,
+      -0.07991469396917283,
+      0.9968017063026193
+    ]
+  },
+  {
+    "view": "hip",
+    "light": "night",
+    "finish": "",
+    "wood": [
+      {
+        "name": "",
+        "color": 16777215,
+        "map": "lacquered birch grain and cut edges",
+        "paint": null
+      }
+    ],
+    "camera": [
+      -0.015862858108764605,
+      -198.5758377939744,
+      -640.4425714650845
+    ],
+    "dir": [
+      0,
+      -0.07991469396917283,
+      0.9968017063026193
+    ]
+  },
+  {
+    "view": "aimed",
+    "light": "noon",
+    "finish": "",
+    "wood": [
+      {
+        "name": "",
+        "color": 16777215,
+        "map": "lacquered birch grain and cut edges",
+        "paint": null
+      }
+    ],
+    "camera": [
+      0.1146390811030134,
+      -198.6599776507348,
+      -640.356569607776
+    ],
+    "dir": [
+      0,
+      -0.07991469396917283,
+      0.9968017063026193
+    ]
+  },
+  {
+    "view": "aimed",
+    "light": "overcast",
+    "finish": "",
+    "wood": [
+      {
+        "name": "",
+        "color": 16777215,
+        "map": "lacquered birch grain and cut edges",
+        "paint": null
+      }
+    ],
+    "camera": [
+      0.1173331398859629,
+      -198.65807006649686,
+      -640.35751470265
+    ],
+    "dir": [
+      0,
+      -0.07991469396917283,
+      0.9968017063026193
+    ]
+  },
+  {
+    "view": "aimed",
+    "light": "dusk",
+    "finish": "",
+    "wood": [
+      {
+        "name": "",
+        "color": 16777215,
+        "map": "lacquered birch grain and cut edges",
+        "paint": null
+      }
+    ],
+    "camera": [
+      0.1162857932531853,
+      -198.66236116960772,
+      -640.3574057764629
+    ],
+    "dir": [
+      0,
+      -0.07991469396917283,
+      0.9968017063026193
+    ]
+  },
+  {
+    "view": "aimed",
+    "light": "night",
+    "finish": "",
+    "wood": [
+      {
+        "name": "",
+        "color": 16777215,
+        "map": "lacquered birch grain and cut edges",
+        "paint": null
+      }
+    ],
+    "camera": [
+      0.10767675744835944,
+      -198.65604744867093,
+      -640.3624095931815
+    ],
+    "dir": [
+      0,
+      -0.07991469396917283,
+      0.9968017063026193
+    ]
+  },
+  {
+    "view": "held",
+    "light": "noon",
+    "finish": "m81",
+    "wood": [
+      {
+        "name": "",
+        "color": 16777215,
+        "map": "lacquered birch grain and cut edges",
+        "paint": null
+      }
+    ],
+    "camera": [
+      -0.8478154337542284,
+      -198.60330773079872,
+      -639.8786086350614
+    ],
+    "dir": [
+      0.9548380017985686,
+      -0.21968739708081753,
+      -0.20005458726350672
+    ]
+  },
+  {
+    "view": "held",
+    "light": "overcast",
+    "finish": "m81",
+    "wood": [
+      {
+        "name": "",
+        "color": 16777215,
+        "map": "lacquered birch grain and cut edges",
+        "paint": null
+      }
+    ],
+    "camera": [
+      -0.8393971314146467,
+      -198.59451888816412,
+      -639.8746938817001
+    ],
+    "dir": [
+      0.952753644771432,
+      -0.228939990933639,
+      -0.19961706571848348
+    ]
+  },
+  {
+    "view": "held",
+    "light": "dusk",
+    "finish": "m81",
+    "wood": [
+      {
+        "name": "",
+        "color": 16777215,
+        "map": "lacquered birch grain and cut edges",
+        "paint": null
+      }
+    ],
+    "camera": [
+      -0.8575976448444361,
+      -198.62437481675465,
+      -639.86340911067
+    ],
+    "dir": [
+      0.9567640656517671,
+      -0.20743690242863722,
+      -0.20389324213497978
+    ]
+  },
+  {
+    "view": "held",
+    "light": "night",
+    "finish": "m81",
+    "wood": [
+      {
+        "name": "",
+        "color": 16777215,
+        "map": "lacquered birch grain and cut edges",
+        "paint": null
+      }
+    ],
+    "camera": [
+      -0.8488816240989141,
+      -198.5966193569087,
+      -639.8750507646074
+    ],
+    "dir": [
+      0.9527830673633771,
+      -0.2282240873376806,
+      -0.20029526331023706
+    ]
+  },
+  {
+    "view": "hip",
+    "light": "noon",
+    "finish": "m81",
+    "wood": [
+      {
+        "name": "",
+        "color": 16777215,
+        "map": "lacquered birch grain and cut edges",
+        "paint": null
+      }
+    ],
+    "camera": [
+      -0.0024167965998297784,
+      -198.57872730739052,
+      -640.4337890881003
+    ],
+    "dir": [
+      0,
+      -0.07991469396917283,
+      0.9968017063026193
+    ]
+  },
+  {
+    "view": "hip",
+    "light": "overcast",
+    "finish": "m81",
+    "wood": [
+      {
+        "name": "",
+        "color": 16777215,
+        "map": "lacquered birch grain and cut edges",
+        "paint": null
+      }
+    ],
+    "camera": [
+      0.004243506661737314,
+      -198.57802628340906,
+      -640.434583080863
+    ],
+    "dir": [
+      0,
+      -0.07991469396917283,
+      0.9968017063026193
+    ]
+  },
+  {
+    "view": "hip",
+    "light": "dusk",
+    "finish": "m81",
+    "wood": [
+      {
+        "name": "",
+        "color": 16777215,
+        "map": "lacquered birch grain and cut edges",
+        "paint": null
+      }
+    ],
+    "camera": [
+      0.0036297581825127604,
+      -198.578505288413,
+      -640.4355629726516
+    ],
+    "dir": [
+      0,
+      -0.07991469396917283,
+      0.9968017063026193
+    ]
+  },
+  {
+    "view": "hip",
+    "light": "night",
+    "finish": "m81",
+    "wood": [
+      {
+        "name": "",
+        "color": 16777215,
+        "map": "lacquered birch grain and cut edges",
+        "paint": null
+      }
+    ],
+    "camera": [
+      -0.0011566936273509027,
+      -198.57847605069838,
+      -640.4348853653715
+    ],
+    "dir": [
+      0,
+      -0.07991469396917283,
+      0.9968017063026193
+    ]
+  }
+]

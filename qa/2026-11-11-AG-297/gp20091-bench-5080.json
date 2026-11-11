@@ -1,0 +1,46 @@
+{
+  "capturedAt": "2026-11-11T09:15:03.401Z",
+  "loadReadyMs": 11505,
+  "cifBefore": {
+    "label": "cif_baseline_before",
+    "fps": 60,
+    "frameMs": 16.67,
+    "low1pct": 54.1,
+    "worstMs": 16.9,
+    "hitches": 0,
+    "draws": 163,
+    "triangles": 145585,
+    "prof": {
+      "frames": 243,
+      "tickMs": 7.96
+    }
+  },
+  "cifAfter": {
+    "label": "cif_gp20091_after",
+    "fps": 60,
+    "frameMs": 16.67,
+    "low1pct": 44.7,
+    "worstMs": 31.4,
+    "hitches": 0,
+    "draws": 140,
+    "triangles": 139945,
+    "prof": {
+      "frames": 243,
+      "tickMs": 7.73
+    }
+  },
+  "fadeAfter": {
+    "label": "close_wall_fade_after",
+    "fps": 60,
+    "frameMs": 16.67,
+    "low1pct": 58,
+    "worstMs": 16.8,
+    "hitches": 0,
+    "draws": 178,
+    "triangles": 87935,
+    "prof": {
+      "frames": 244,
+      "tickMs": 7.3
+    }
+  }
+}

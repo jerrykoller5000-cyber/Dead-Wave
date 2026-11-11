@@ -1,0 +1,218 @@
+{
+  "card": "AG-299",
+  "capturedAt": "2026-11-11T09:54:57.212Z",
+  "metrics": {
+    "noon": {
+      "idleDraws": 0,
+      "s1": {
+        "count": 57,
+        "minRelZ": 1.94,
+        "maxRelZ": 29.38,
+        "splashed": 26,
+        "target0Burned": true,
+        "draws": 240,
+        "triangles": 144965,
+        "flameBatches": 5,
+        "emberBatches": 1,
+        "burnBatches": 1,
+        "addedDraws": 240
+      },
+      "s2": {
+        "count": 85,
+        "minRelZ": 2.18,
+        "maxRelZ": 29.38,
+        "splashed": 25,
+        "target0Burned": true,
+        "draws": 236,
+        "triangles": 144977,
+        "flameBatches": 5,
+        "emberBatches": 1,
+        "burnBatches": 1,
+        "addedDraws": 236
+      },
+      "side1": {
+        "count": 57,
+        "minRelZ": 1.94,
+        "maxRelZ": 29.38,
+        "splashed": 26,
+        "target0Burned": true,
+        "draws": 386,
+        "triangles": 228899,
+        "flameBatches": 5,
+        "emberBatches": 1,
+        "burnBatches": 1
+      },
+      "side2": {
+        "count": 85,
+        "minRelZ": 2.18,
+        "maxRelZ": 29.38,
+        "splashed": 25,
+        "target0Burned": true,
+        "draws": 382,
+        "triangles": 228911,
+        "flameBatches": 5,
+        "emberBatches": 1,
+        "burnBatches": 1
+      }
+    },
+    "overcast": {
+      "idleDraws": 0,
+      "s1": {
+        "count": 56,
+        "minRelZ": 2.06,
+        "maxRelZ": 29.34,
+        "splashed": 23,
+        "target0Burned": true,
+        "draws": 250,
+        "triangles": 144981,
+        "flameBatches": 5,
+        "emberBatches": 1,
+        "burnBatches": 1,
+        "addedDraws": 250
+      },
+      "s2": {
+        "count": 89,
+        "minRelZ": 1.74,
+        "maxRelZ": 29.63,
+        "splashed": 28,
+        "target0Burned": true,
+        "draws": 236,
+        "triangles": 144977,
+        "flameBatches": 5,
+        "emberBatches": 1,
+        "burnBatches": 1,
+        "addedDraws": 236
+      },
+      "side1": {
+        "count": 56,
+        "minRelZ": 2.06,
+        "maxRelZ": 29.34,
+        "splashed": 23,
+        "target0Burned": true,
+        "draws": 396,
+        "triangles": 228915,
+        "flameBatches": 5,
+        "emberBatches": 1,
+        "burnBatches": 1
+      },
+      "side2": {
+        "count": 89,
+        "minRelZ": 1.74,
+        "maxRelZ": 29.63,
+        "splashed": 28,
+        "target0Burned": true,
+        "draws": 382,
+        "triangles": 228911,
+        "flameBatches": 5,
+        "emberBatches": 1,
+        "burnBatches": 1
+      }
+    },
+    "dusk": {
+      "idleDraws": 0,
+      "s1": {
+        "count": 59,
+        "minRelZ": 2.42,
+        "maxRelZ": 29.39,
+        "splashed": 25,
+        "target0Burned": true,
+        "draws": 259,
+        "triangles": 146425,
+        "flameBatches": 6,
+        "emberBatches": 1,
+        "burnBatches": 1,
+        "addedDraws": 259
+      },
+      "s2": {
+        "count": 88,
+        "minRelZ": 2.13,
+        "maxRelZ": 29.41,
+        "splashed": 28,
+        "target0Burned": true,
+        "draws": 236,
+        "triangles": 144969,
+        "flameBatches": 5,
+        "emberBatches": 1,
+        "burnBatches": 1,
+        "addedDraws": 236
+      },
+      "side1": {
+        "count": 59,
+        "minRelZ": 2.42,
+        "maxRelZ": 29.39,
+        "splashed": 25,
+        "target0Burned": true,
+        "draws": 405,
+        "triangles": 230359,
+        "flameBatches": 6,
+        "emberBatches": 1,
+        "burnBatches": 1
+      },
+      "side2": {
+        "count": 88,
+        "minRelZ": 2.13,
+        "maxRelZ": 29.41,
+        "splashed": 28,
+        "target0Burned": true,
+        "draws": 382,
+        "triangles": 228903,
+        "flameBatches": 5,
+        "emberBatches": 1,
+        "burnBatches": 1
+      }
+    },
+    "night": {
+      "idleDraws": 0,
+      "s1": {
+        "count": 56,
+        "minRelZ": 2.22,
+        "maxRelZ": 29.34,
+        "splashed": 20,
+        "target0Burned": true,
+        "draws": 259,
+        "triangles": 143573,
+        "flameBatches": 4,
+        "emberBatches": 1,
+        "burnBatches": 1,
+        "addedDraws": 259
+      },
+      "s2": {
+        "count": 89,
+        "minRelZ": 1.95,
+        "maxRelZ": 29.64,
+        "splashed": 26,
+        "target0Burned": true,
+        "draws": 238,
+        "triangles": 144981,
+        "flameBatches": 5,
+        "emberBatches": 1,
+        "burnBatches": 1,
+        "addedDraws": 238
+      },
+      "side1": {
+        "count": 56,
+        "minRelZ": 2.22,
+        "maxRelZ": 29.34,
+        "splashed": 20,
+        "target0Burned": true,
+        "draws": 405,
+        "triangles": 227507,
+        "flameBatches": 4,
+        "emberBatches": 1,
+        "burnBatches": 1
+      },
+      "side2": {
+        "count": 89,
+        "minRelZ": 1.95,
+        "maxRelZ": 29.64,
+        "splashed": 26,
+        "target0Burned": true,
+        "draws": 384,
+        "triangles": 228915,
+        "flameBatches": 5,
+        "emberBatches": 1,
+        "burnBatches": 1
+      }
+    }
+  }
+}

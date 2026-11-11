@@ -9,11 +9,17 @@ FIT = json.loads(subprocess.check_output(['node', '-e', f"import('{F}').then(m=>
 Gi = np.linalg.inv(np.array(D['info']['gunMw']).reshape(4, 4).T)
 T = np.frombuffer(base64.b64decode(D['parts'][pi]['b64']), dtype=np.float32).reshape(-1, 3).astype(float)
 m = trimesh.Trimesh(np.round(T * 1e5) / 1e5, np.arange(len(T)).reshape(-1, 3)); bs = [b for b in m.split(only_watertight=False) if b.is_watertight]
-B = max(bs, key=lambda b: len(b.faces)); V = (Gi @ np.c_[B.vertices, np.ones(len(B.vertices))].T).T[:, :3]
+B = max(bs, key=lambda b: len(b.faces))
+if os.environ.get('NEAR'):   # the closed body nearest the hand's grip point (a part holding several: the shotgun's stock and grip)
+    _p0 = np.array(FIT['p'], float); _G = lambda b: (Gi @ np.c_[b.vertices, np.ones(len(b.vertices))].T).T[:, :3]
+    B = min([b for b in bs if len(b.faces) >= int(os.environ.get('NEARMIN', '200'))], key=lambda b: np.linalg.norm(_G(b) - _p0, axis=1).min()); sys.stderr.write(f'body nearest the grip point: {len(B.faces)} faces of {len(bs)} bodies\n')
+V = (Gi @ np.c_[B.vertices, np.ones(len(B.vertices))].T).T[:, :3]
 # densify with surface samples so a slice is never empty
 S = (Gi @ np.c_[trimesh.sample.sample_surface(B, 20000)[0], np.ones(20000)].T).T[:, :3]; V = np.r_[V, S]
 bx = np.array(FIT['basis']['x'], float); bx /= np.linalg.norm(bx); by = np.array(FIT['basis']['y'], float); by -= bx * (by @ bx); by /= np.linalg.norm(by); bz = np.cross(bx, by)
 p0 = np.array(FIT['p'], float)
+RAD = float(os.environ.get('RAD', '0'))   # only the body within RAD m of the hand's grip point (a grip moulded into the stock)
+if RAD > 0: V = V[np.linalg.norm(V - p0, axis=1) < RAD]
 def centre(c, ax, nz):
     wv = np.cross(ax, nz); d = V - c; sel = np.abs(d @ ax) < 0.006
     if sel.sum() < 20: return None, None

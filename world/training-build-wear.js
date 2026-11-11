@@ -22,7 +22,7 @@
 import { containmentMounts } from '../game/training-containment.js';
 
 export const BUILD_WEAR = Object.freeze({
-  FLOOR_PX: 40, WALL_PX: 64, WALL_H: 5.9, FLOOR_Y: 0.003,
+  FLOOR_PX: 40, WALL_PX: 64, WALL_H: 5.9, FLOOR_Y: 0.001,
   KILL: Object.freeze([                                   // where they fall: [x, z, spread, weight] (room local, metres)
     Object.freeze([-26, 16.5, 3.4, 1.0]),                 // just past the gate's hazard paint, where they come through
     Object.freeze([-26, 13, 5.0, 0.8]),                   // the middle of the room

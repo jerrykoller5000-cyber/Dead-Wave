@@ -215,7 +215,17 @@ export function createTrainingWreck(T, tg, fx = {}) {
   const lanes = new Map();   // index -> a lane's record
   const shared = [];
   let flameMat = null, flameGeo = null, ashMat0 = null, ashGeo = null, pieceMat = null;
+  let burnFlameInst = null, burnFlameDrawn = 0;
+  const burnCap = Math.max(18, base * 18);
   const _v = new T.Vector3();
+  const _zeroM = T.Matrix4 ? new T.Matrix4().makeScale(0, 0, 0) : null;
+  const _localM = T.Matrix4 ? new T.Matrix4() : null;
+  const _groupM = T.Matrix4 ? new T.Matrix4() : null;
+  const _tgInv = T.Matrix4 ? new T.Matrix4() : null;
+  const _fPos = T.Vector3 ? new T.Vector3() : null;
+  const _fScl = T.Vector3 ? new T.Vector3() : null;
+  const _fQuat = T.Quaternion ? new T.Quaternion() : null;
+  const _fEuler = T.Euler ? new T.Euler() : null;
 
   // Keep reference to each original lane's solid so restore/clear brings it cleanly back if needed
   const laneSolids = tg.targets.slice(0, base).map((t, i) => tg.solids.find((s) => s.target === i) || { ...t.box, target: i });
@@ -224,8 +234,20 @@ export function createTrainingWreck(T, tg, fx = {}) {
     if (flameMat) return;
     const fTex = makeLickingFlameTexture(T);
     const { ashTex, emberTex } = makeAshTextures(T);
-    flameMat = new T.MeshBasicMaterial({ map: fTex, transparent: true, depthWrite: false, side: T.DoubleSide });
+    flameMat = new T.MeshBasicMaterial({ map: fTex, transparent: true, depthWrite: false, side: T.DoubleSide, forceSinglePass: true });
     flameGeo = new T.PlaneGeometry(1, 1);
+    if (typeof T.InstancedMesh === 'function' && _zeroM && tg.group?.add) {
+      burnFlameInst = new T.InstancedMesh(flameGeo, flameMat, burnCap);
+      burnFlameInst.name = 'training-burn-flames';
+      burnFlameInst.renderOrder = 4;
+      burnFlameInst.frustumCulled = false;
+      burnFlameInst.castShadow = false;
+      burnFlameInst.receiveShadow = false;
+      burnFlameInst.visible = false;
+      burnFlameInst.instanceMatrix?.setUsage?.(T.DynamicDrawUsage);
+      for (let i = 0; i < burnCap; i++) burnFlameInst.setMatrixAt(i, _zeroM);
+      tg.group.add(burnFlameInst);
+    }
     ashMat0 = new T.MeshStandardMaterial({
       color: 0xffffff,
       map: ashTex,
@@ -239,6 +261,35 @@ export function createTrainingWreck(T, tg, fx = {}) {
     ashGeo = buildAshHeapGeometry(T);
     pieceMat = new T.MeshStandardMaterial({ color: 0x2c2d2a, roughness: 0.7, metalness: 0.6, side: T.DoubleSide });
     for (const x of [fTex, ashTex, emberTex, flameMat, flameGeo, ashMat0, ashGeo, pieceMat]) if (x) shared.push(x);
+  }
+
+  function syncBurnFlames() {
+    if (!burnFlameInst) return;
+    let n = 0;
+    tg.group.updateWorldMatrix?.(true, false);
+    if (tg.group.matrixWorld) _tgInv.copy(tg.group.matrixWorld).invert();
+    else _tgInv.identity();
+    for (const lane of lanes.values()) {
+      if (lane.kind !== 'burn' || !lane.flames.length) continue;
+      lane.root.updateWorldMatrix?.(true, false);
+      if (lane.root.matrixWorld) _groupM.multiplyMatrices(_tgInv, lane.root.matrixWorld);
+      else _groupM.identity();
+      for (let k = 0; k < lane.flames.length; k++) {
+        if (n >= burnCap) break;
+        const m = lane.flames[k];
+        _fPos.set(m.position.x, m.position.y, m.position.z);
+        _fEuler.set(0, m.rotation.y, m.rotation.z);
+        _fQuat.setFromEuler(_fEuler);
+        _fScl.set(m.scale.x, m.scale.y, m.scale.z);
+        _localM.compose(_fPos, _fQuat, _fScl);
+        _localM.premultiply(_groupM);
+        burnFlameInst.setMatrixAt(n++, _localM);
+      }
+    }
+    for (let i = n; i < burnFlameDrawn; i++) burnFlameInst.setMatrixAt(i, _zeroM);
+    if (n || burnFlameDrawn) burnFlameInst.instanceMatrix.needsUpdate = true;
+    burnFlameDrawn = n;
+    burnFlameInst.visible = n > 0;
   }
 
   function worldXYZ(lane) { _v.set(lane.centre.x, lane.centre.y, lane.centre.z); lane.root.localToWorld(_v); return [_v.x, _v.y, _v.z]; }
@@ -285,14 +336,25 @@ export function createTrainingWreck(T, tg, fx = {}) {
       lane.mat = t.plate.material.clone(); lane.own.push(lane.mat); t.plate.material = lane.mat;
       for (let k = 0; k < 6; k++) {
         for (const ry of [0, Math.PI * 0.34, -Math.PI * 0.34]) {
-          const m = new T.Mesh(flameGeo, flameMat); m.rotation.y = ry; m.renderOrder = 4;
-          m.userData = {
+          const ud = {
             ox: ((k - 2.5) / 2.5) * w * 0.36 + (Math.random() - 0.5) * 0.06,
             oy: -h * 0.36 + (k % 3) * h * 0.24 + (Math.random() - 0.5) * 0.1,
             ph: Math.random() * 6.28,
             sz: 0.44 + Math.random() * 0.26
           };
-          root.add(m); lane.flames.push(m);
+          if (burnFlameInst) {
+            lane.flames.push({
+              position: new T.Vector3(),
+              rotation: { x: 0, y: ry, z: 0 },
+              scale: new T.Vector3(1, 1, 1),
+              renderOrder: 4,
+              userData: ud
+            });
+          } else {
+            const m = new T.Mesh(flameGeo, flameMat); m.rotation.y = ry; m.renderOrder = 4;
+            m.userData = ud;
+            root.add(m); lane.flames.push(m);
+          }
         }
       }
       const [wx, , wz] = worldXYZ(lane);
@@ -334,6 +396,7 @@ export function createTrainingWreck(T, tg, fx = {}) {
         lane.ashMat.emissiveIntensity = 0.65 * Math.pow(1 - clamp01(lane.ashT / ASH_GLOW_S), 1.6);
       }
     }
+    syncBurnFlames();
   }
 
   function burnStep(index, lane, dt, t) {
@@ -431,6 +494,7 @@ export function createTrainingWreck(T, tg, fx = {}) {
       if (t.state === 'wrecked') { t.state = 'up'; t.t = 0; t.pivot.rotation.x = 0; }
       ensureTargetSolid(index, true);
     }
+    syncBurnFlames();
   }
 
   function clear() {
@@ -439,20 +503,41 @@ export function createTrainingWreck(T, tg, fx = {}) {
       const t = tg.targets[i];
       if (t && (t.burned || t.state === 'wrecked')) restore(i);
     }
+    syncBurnFlames();
   }
 
   function prepareWarmup() {
     makeShared();
     const root = tg.group;
-    const f = new T.Mesh(flameGeo, flameMat); f.renderOrder = 4; f.scale.setScalar(0.01); f.position.set(0, -5, 0);
+    let f = null;
+    if (burnFlameInst && !burnFlameDrawn) {
+      _fPos.set(0, -5, 0); _fQuat.identity(); _fScl.setScalar(0.01);
+      _localM.compose(_fPos, _fQuat, _fScl);
+      burnFlameInst.setMatrixAt(0, _localM);
+      burnFlameDrawn = 1;
+      burnFlameInst.instanceMatrix.needsUpdate = true;
+      burnFlameInst.visible = true;
+    } else if (!burnFlameInst) {
+      f = new T.Mesh(flameGeo, flameMat); f.renderOrder = 4; f.scale.setScalar(0.01); f.position.set(0, -5, 0);
+      root.add(f);
+    }
     const a = new T.Mesh(ashGeo, ashMat0); a.scale.setScalar(0.01); a.position.set(0, -5, 0);
     const p = new T.Mesh(new T.BoxGeometry(0.05, 0.05, 0.02), pieceMat); p.position.set(0, -5, 0);
-    root.add(f); root.add(a); root.add(p);
-    return () => { root.remove(f); root.remove(a); root.remove(p); p.geometry.dispose?.(); };
+    root.add(a); root.add(p);
+    return () => {
+      if (f) root.remove(f);
+      syncBurnFlames();
+      root.remove(a); root.remove(p); p.geometry.dispose?.();
+    };
   }
 
   function dispose() {
     clear();
+    if (burnFlameInst) {
+      burnFlameInst.parent?.remove(burnFlameInst);
+      burnFlameInst.dispose?.();
+      burnFlameInst = null; burnFlameDrawn = 0;
+    }
     for (const o of shared) o.dispose?.();
     shared.length = 0; flameMat = flameGeo = ashMat0 = ashGeo = pieceMat = null;
   }

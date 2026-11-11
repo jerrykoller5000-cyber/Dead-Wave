@@ -1,0 +1,306 @@
+{
+  "revolver": {
+    "noon": {
+      "rMid": {
+        "pull": {
+          "t": 0.05,
+          "pull": 0.12,
+          "shots": 1
+        },
+        "ammo": 5
+      },
+      "rCock": {
+        "pull": {
+          "t": 0.11666666666666665,
+          "pull": 0.12,
+          "shots": 1
+        },
+        "ammo": 5
+      },
+      "rBreak": {
+        "pull": {
+          "t": -1,
+          "pull": 0.12,
+          "shots": 2
+        },
+        "ammo": 4
+      }
+    },
+    "overcast": {
+      "rMid": {
+        "pull": {
+          "t": 0.05,
+          "pull": 0.12,
+          "shots": 3
+        },
+        "ammo": 5
+      },
+      "rCock": {
+        "pull": {
+          "t": 0.11666666666666665,
+          "pull": 0.12,
+          "shots": 3
+        },
+        "ammo": 5
+      },
+      "rBreak": {
+        "pull": {
+          "t": -1,
+          "pull": 0.12,
+          "shots": 4
+        },
+        "ammo": 4
+      }
+    },
+    "dusk": {
+      "rMid": {
+        "pull": {
+          "t": 0.05,
+          "pull": 0.12,
+          "shots": 5
+        },
+        "ammo": 5
+      },
+      "rCock": {
+        "pull": {
+          "t": 0.11666666666666665,
+          "pull": 0.12,
+          "shots": 5
+        },
+        "ammo": 5
+      },
+      "rBreak": {
+        "pull": {
+          "t": -1,
+          "pull": 0.12,
+          "shots": 6
+        },
+        "ammo": 4
+      }
+    },
+    "night": {
+      "rMid": {
+        "pull": {
+          "t": 0.05,
+          "pull": 0.12,
+          "shots": 7
+        },
+        "ammo": 5
+      },
+      "rCock": {
+        "pull": {
+          "t": 0.11666666666666665,
+          "pull": 0.12,
+          "shots": 7
+        },
+        "ammo": 5
+      },
+      "rBreak": {
+        "pull": {
+          "t": -1,
+          "pull": 0.12,
+          "shots": 8
+        },
+        "ammo": 4
+      }
+    }
+  },
+  "pistol": {
+    "noon": {
+      "reloadU": 0.753
+    },
+    "overcast": {
+      "reloadU": 0.753
+    },
+    "dusk": {
+      "reloadU": 0.753
+    },
+    "night": {
+      "reloadU": 0.753
+    }
+  },
+  "kr7": {
+    "noon": {
+      "reloadU": 0.783
+    },
+    "overcast": {
+      "reloadU": 0.783
+    },
+    "dusk": {
+      "reloadU": 0.783
+    },
+    "night": {
+      "reloadU": 0.783
+    }
+  },
+  "shotgun": {
+    "noon": {
+      "sgUnload": {
+        "sw": {
+          "gun": "shotgun",
+          "from": "birdshot",
+          "to": "buckshot",
+          "phase": "unload",
+          "u": 0.3703703703703704,
+          "unloaded": 0,
+          "unload": 3,
+          "loaded": 0,
+          "load": 8,
+          "t": 0.13333333333333333,
+          "n": 1,
+          "total": 4.6899999999999995
+        },
+        "shellShown": "birdshot",
+        "hud": "Changing to BUCK · unloading 0/3"
+      },
+      "sgLoad": {
+        "sw": {
+          "gun": "shotgun",
+          "from": "birdshot",
+          "to": "buckshot",
+          "phase": "load",
+          "u": 0.484126984126984,
+          "unloaded": 3,
+          "unload": 3,
+          "loaded": 0,
+          "load": 8,
+          "t": 1.2833333333333337,
+          "n": 1,
+          "total": 4.6899999999999995
+        },
+        "shellShown": "buckshot",
+        "hud": "Changing to BUCK · loading 0/8"
+      },
+      "sgDone": {
+        "fitted": "buckshot",
+        "hud": "8 / 8 · BUCK · 28 spare"
+      }
+    },
+    "overcast": {
+      "sgUnload": {
+        "sw": {
+          "gun": "shotgun",
+          "from": "birdshot",
+          "to": "buckshot",
+          "phase": "unload",
+          "u": 0.3703703703703704,
+          "unloaded": 0,
+          "unload": 3,
+          "loaded": 0,
+          "load": 8,
+          "t": 0.13333333333333333,
+          "n": 2,
+          "total": 4.6899999999999995
+        },
+        "shellShown": "birdshot",
+        "hud": "Changing to BUCK · unloading 0/3"
+      },
+      "sgLoad": {
+        "sw": {
+          "gun": "shotgun",
+          "from": "birdshot",
+          "to": "buckshot",
+          "phase": "load",
+          "u": 0.484126984126984,
+          "unloaded": 3,
+          "unload": 3,
+          "loaded": 0,
+          "load": 8,
+          "t": 1.2833333333333337,
+          "n": 2,
+          "total": 4.6899999999999995
+        },
+        "shellShown": "buckshot",
+        "hud": "Changing to BUCK · loading 0/8"
+      },
+      "sgDone": {
+        "fitted": "buckshot",
+        "hud": "8 / 8 · BUCK · 56 spare"
+      }
+    },
+    "dusk": {
+      "sgUnload": {
+        "sw": {
+          "gun": "shotgun",
+          "from": "birdshot",
+          "to": "buckshot",
+          "phase": "unload",
+          "u": 0.3703703703703704,
+          "unloaded": 0,
+          "unload": 3,
+          "loaded": 0,
+          "load": 8,
+          "t": 0.13333333333333333,
+          "n": 3,
+          "total": 4.6899999999999995
+        },
+        "shellShown": "birdshot",
+        "hud": "Changing to BUCK · unloading 0/3"
+      },
+      "sgLoad": {
+        "sw": {
+          "gun": "shotgun",
+          "from": "birdshot",
+          "to": "buckshot",
+          "phase": "load",
+          "u": 0.484126984126984,
+          "unloaded": 3,
+          "unload": 3,
+          "loaded": 0,
+          "load": 8,
+          "t": 1.2833333333333337,
+          "n": 3,
+          "total": 4.6899999999999995
+        },
+        "shellShown": "buckshot",
+        "hud": "Changing to BUCK · loading 0/8"
+      },
+      "sgDone": {
+        "fitted": "buckshot",
+        "hud": "8 / 8 · BUCK · 84 spare"
+      }
+    },
+    "night": {
+      "sgUnload": {
+        "sw": {
+          "gun": "shotgun",
+          "from": "birdshot",
+          "to": "buckshot",
+          "phase": "unload",
+          "u": 0.3703703703703704,
+          "unloaded": 0,
+          "unload": 3,
+          "loaded": 0,
+          "load": 8,
+          "t": 0.13333333333333333,
+          "n": 4,
+          "total": 4.6899999999999995
+        },
+        "shellShown": "birdshot",
+        "hud": "Changing to BUCK · unloading 0/3"
+      },
+      "sgLoad": {
+        "sw": {
+          "gun": "shotgun",
+          "from": "birdshot",
+          "to": "buckshot",
+          "phase": "load",
+          "u": 0.484126984126984,
+          "unloaded": 3,
+          "unload": 3,
+          "loaded": 0,
+          "load": 8,
+          "t": 1.2833333333333337,
+          "n": 4,
+          "total": 4.6899999999999995
+        },
+        "shellShown": "buckshot",
+        "hud": "Changing to BUCK · loading 0/8"
+      },
+      "sgDone": {
+        "fitted": "buckshot",
+        "hud": "8 / 8 · BUCK · 112 spare"
+      }
+    }
+  }
+}

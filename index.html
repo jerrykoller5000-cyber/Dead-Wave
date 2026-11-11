@@ -20824,7 +20824,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         for (const [mat, byGear] of byMat) for (const [gk, list] of byGear) {
           if (list.length < 2) {
             // A lone camo part still gets the pattern at the same scale as the rest.
-            if (mat.map && list.length === 1) {
+            if (mat.map && !mat.userData.preserveArtworkUV && list.length === 1) {
               const c = list[0], src = c.geometry.index ? c.geometry.toNonIndexed() : c.geometry.clone();
               const P = src.attributes.position, uvA = new Float32Array(P.count * 2);
               // J71 (AG-269): project in the parent's space as the merged siblings do (a scaled lone part got ~42 repeats/m)
@@ -20852,7 +20852,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
             }
             o += P.count;
           }
-          if (mat.map) boxProjectUV(pos, uv);
+          if (mat.map && !mat.userData.preserveArtworkUV) boxProjectUV(pos, uv);
           const geo = new THREE.BufferGeometry();
           geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
           geo.setAttribute('normal', new THREE.BufferAttribute(nrm, 3));
@@ -28146,7 +28146,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         }
         // Painted UVs already live in the source gun's root space. Reprojecting
         // the flattened rack copy would shift the pattern at every material join.
-        if (mat.map && !gunFurniture?.[kind]?.includes(mat)) boxProjectUV(pos, uv);
+        if (mat.map && !mat.userData.preserveArtworkUV && !gunFurniture?.[kind]?.includes(mat)) boxProjectUV(pos, uv);
         const geo = new THREE.BufferGeometry();
         geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
         geo.setAttribute('normal', new THREE.BufferAttribute(nrm, 3));
@@ -55370,13 +55370,13 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     const _fTexSmoke = makeStreamFlameTex('smoke', 0x41a766);
     const _fTexSteam = makeStreamFlameTex('steam', 0x41a777);
 
-    const flameStreamCoreMat = glowMat(new THREE.MeshBasicMaterial({ map: _fTexCore, color: 0xffffff, transparent: true, opacity: 0.98, depthWrite: false, side: THREE.DoubleSide }), 1.48);
-    const flameStreamHotMat = glowMat(new THREE.MeshBasicMaterial({ map: _fTexHot, color: 0xffffff, transparent: true, opacity: 0.95, depthWrite: false, side: THREE.DoubleSide }), 1.55);
-    const flameStreamMidMat = glowMat(new THREE.MeshBasicMaterial({ map: _fTexMid, color: 0xffffff, transparent: true, opacity: 0.88, depthWrite: false, side: THREE.DoubleSide }), 1.6);
-    const flameStreamTipMat = glowMat(new THREE.MeshBasicMaterial({ map: _fTexTip, color: 0xffffff, transparent: true, opacity: 0.80, depthWrite: false, side: THREE.DoubleSide }), 1.35);
-    const flameEdgeMat = glowMat(new THREE.MeshBasicMaterial({ map: _fTexEdge, color: 0xffffff, transparent: true, opacity: 0.72, depthWrite: false, side: THREE.DoubleSide }), 1.15);
-    const flameSmokeMat = new THREE.MeshBasicMaterial({ map: _fTexSmoke, color: 0xffffff, transparent: true, opacity: 0.30, depthWrite: false, side: THREE.DoubleSide });
-    const flameSteamMat = new THREE.MeshBasicMaterial({ map: _fTexSteam, color: 0xffffff, transparent: true, opacity: 0.44, depthWrite: false, side: THREE.DoubleSide });
+    const flameStreamCoreMat = glowMat(new THREE.MeshBasicMaterial({ map: _fTexCore, color: 0xffffff, transparent: true, opacity: 0.98, depthWrite: false, side: THREE.DoubleSide, forceSinglePass: true }), 1.48);
+    const flameStreamHotMat = glowMat(new THREE.MeshBasicMaterial({ map: _fTexHot, color: 0xffffff, transparent: true, opacity: 0.95, depthWrite: false, side: THREE.DoubleSide, forceSinglePass: true }), 1.55);
+    const flameStreamMidMat = glowMat(new THREE.MeshBasicMaterial({ map: _fTexMid, color: 0xffffff, transparent: true, opacity: 0.88, depthWrite: false, side: THREE.DoubleSide, forceSinglePass: true }), 1.6);
+    const flameStreamTipMat = glowMat(new THREE.MeshBasicMaterial({ map: _fTexTip, color: 0xffffff, transparent: true, opacity: 0.80, depthWrite: false, side: THREE.DoubleSide, forceSinglePass: true }), 1.35);
+    const flameEdgeMat = glowMat(new THREE.MeshBasicMaterial({ map: _fTexEdge, color: 0xffffff, transparent: true, opacity: 0.72, depthWrite: false, side: THREE.DoubleSide, forceSinglePass: true }), 1.15);
+    const flameSmokeMat = new THREE.MeshBasicMaterial({ map: _fTexSmoke, color: 0xffffff, transparent: true, opacity: 0.30, depthWrite: false, side: THREE.DoubleSide, forceSinglePass: true });
+    const flameSteamMat = new THREE.MeshBasicMaterial({ map: _fTexSteam, color: 0xffffff, transparent: true, opacity: 0.44, depthWrite: false, side: THREE.DoubleSide, forceSinglePass: true });
 
     const FLAME_STAGES = [
       [0.09, flameStreamCoreMat],
@@ -55402,17 +55402,48 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       _targetFlameGrace.fill(0);
     }
 
-    // Nozzle flare on 3P weapon + world-space incandescent nozzle core tongue (visible in both 1P viewmodel and 3P)
-    const _nozzleJet = new THREE.Mesh(flameGeo, flameStreamCoreMat);
+    // AG-299: one InstancedMesh batch per material stage (ordered outer/cool -> inner/incandescent so white-hot core
+    // composites cleanly inside the orange/crimson envelope at renderOrder 3) + stand-in proxies for flame tongues & nozzle jet.
+    const FLAME_INST_CAP = MAX_FLAME + 4;
+    const _flameInst = new Map();
+    const _flZero = new THREE.Matrix4().makeScale(0, 0, 0), _flM = new THREE.Matrix4(), _flS = new THREE.Vector3(), _flP = new THREE.Vector3();
+    const _flameProxies = [];
+    for (const [stageKey, mat] of [
+      ['steam', flameSteamMat],
+      ['smoke', flameSmokeMat],
+      ['edge', flameEdgeMat],
+      ['tip', flameStreamTipMat],
+      ['mid', flameStreamMidMat],
+      ['hot', flameStreamHotMat],
+      ['core', flameStreamCoreMat]
+    ]) {
+      const mesh = new THREE.InstancedMesh(flameGeo, mat, FLAME_INST_CAP);
+      mesh.name = 'flames-instanced';
+      mesh.renderOrder = 3;
+      mesh.frustumCulled = false;
+      mesh.castShadow = false;
+      mesh.receiveShadow = false;
+      mesh.userData.noCull = true;
+      mesh.userData.flameStage = stageKey;
+      mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+      mesh.visible = false;
+      for (let i = 0; i < FLAME_INST_CAP; i++) mesh.setMatrixAt(i, _flZero);
+      scene.add(mesh);
+      _flameInst.set(mat, { key: stageKey, mesh, n: 0, drawn: 0 });
+    }
+
+    // Nozzle flare on 3P weapon + world-space incandescent nozzle core tongue (batched into core InstancedMesh, 0 extra draws)
+    const _nozzleJet = new THREE.Object3D();
     _nozzleJet.name = 'flamer-nozzle-jet';
+    _nozzleJet.geometry = flameGeo;
+    _nozzleJet.material = flameStreamCoreMat;
     _nozzleJet.visible = false;
     _nozzleJet.frustumCulled = false;
     _nozzleJet.renderOrder = 3;
-    _nozzleJet.userData.effectPooled = true;
-    scene.add(_nozzleJet);
+    _nozzleJet.userData.batches = _flameInst;
     {
       // Dedicated cloned material on the 3P weapon mesh so GP-20091's close-camera marine fade never zeroes world flameStreamCoreMat.opacity!
-      const flareMat = glowMat(new THREE.MeshBasicMaterial({ map: _fTexCore, color: 0xffffff, transparent: true, opacity: 0.97, depthWrite: false, side: THREE.DoubleSide }), 2.45);
+      const flareMat = glowMat(new THREE.MeshBasicMaterial({ map: _fTexCore, color: 0xffffff, transparent: true, opacity: 0.97, depthWrite: false, side: THREE.DoubleSide, forceSinglePass: true }), 2.45);
       const flare = new THREE.Mesh(new THREE.ConeGeometry(0.068, 0.36, 8, 1, true), flareMat);   // GB-233 r5
       flare.rotation.x = Math.PI / 2; // cone tip along the barrel (+z)
       flare.position.set(0, 0.05, 0.95);
@@ -55422,25 +55453,81 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       weaponMeshes.flamer.userData.flare = flare;
     }
 
-    function prepareFlameWarmup() {
-      const warmMeshes = [];
-      const mats = [flameStreamCoreMat, flameStreamHotMat, flameStreamMidMat, flameStreamTipMat, flameEdgeMat, flameSmokeMat, flameSteamMat];
-      const cx = camera.position.x, cy = camera.position.y - 0.5, cz = camera.position.z;
-      for (const m of mats) {
-        const mesh = acquireEffectMesh(flameGeo, m, MAX_FLAME);
-        mesh.renderOrder = 3;
-        mesh.frustumCulled = false;
-        mesh.position.set(cx, cy, cz);
-        mesh.scale.setScalar(0.02);
-        warmMeshes.push(mesh);
+    function drawFlameInst() {
+      for (const e of _flameInst.values()) e.n = 0;
+      for (let i = 0; i < flameParticles.length; i++) {
+        const m = flameParticles[i].mesh;
+        const e = _flameInst.get(m.material);
+        if (!e || e.n >= FLAME_INST_CAP) continue;
+        _flM.compose(m.position, m.quaternion, m.scale);
+        e.mesh.setMatrixAt(e.n++, _flM);
       }
-      const jetWas = _nozzleJet.visible;
-      _nozzleJet.visible = true;
-      _nozzleJet.position.set(cx, cy, cz);
-      _nozzleJet.scale.setScalar(0.02);
+      if (_nozzleJet.visible) {
+        const ec = _flameInst.get(flameStreamCoreMat);
+        if (ec && ec.n < FLAME_INST_CAP) {
+          _flM.compose(_nozzleJet.position, _nozzleJet.quaternion, _nozzleJet.scale);
+          ec.mesh.setMatrixAt(ec.n++, _flM);
+        }
+      }
+      for (const e of _flameInst.values()) {
+        for (let i = e.n; i < e.drawn; i++) e.mesh.setMatrixAt(i, _flZero);
+        if (e.n || e.drawn) e.mesh.instanceMatrix.needsUpdate = true;
+        e.drawn = e.n;
+        e.mesh.visible = e.n > 0;
+      }
+    }
+
+    function acquireFlameProxy(mat) {
+      let proxy = _flameProxies.pop();
+      if (!proxy) {
+        proxy = new THREE.Object3D();
+        proxy.geometry = flameGeo;
+        proxy._mat = mat;
+        Object.defineProperty(proxy, 'material', {
+          get() { return this._mat; },
+          set(v) {
+            this._mat = v;
+            if (!gameStarted && !training.active) drawFlameInst();
+          },
+          configurable: true
+        });
+      }
+      proxy._mat = mat;
+      proxy.visible = true;
+      proxy.renderOrder = 3;
+      proxy.frustumCulled = false;
+      proxy.scale.setScalar(1);
+      proxy.rotation.set(0, 0, 0);
+      return proxy;
+    }
+
+    function releaseFlameProxy(proxy) {
+      if (!proxy) return;
+      proxy.visible = false;
+      _flameProxies.push(proxy);
+    }
+
+    function prepareFlameWarmup() {
+      const cx = camera.position.x, cy = camera.position.y - 0.5, cz = camera.position.z;
+      _flP.set(cx, cy, cz); _flS.setScalar(0.02); _flM.compose(_flP, _nozzleJet.quaternion, _flS);
+      for (const e of _flameInst.values()) {
+        if (!e.n) {
+          e.mesh.setMatrixAt(0, _flM);
+          e.drawn = Math.max(e.drawn, 1);
+          e.mesh.instanceMatrix.needsUpdate = true;
+          e.mesh.visible = true;
+        }
+      }
+      const emberEntry = _moteInst.get(emberMat);
+      if (emberEntry && !emberEntry.n) {
+        emberEntry.mesh.setMatrixAt(0, _flM);
+        emberEntry.drawn = Math.max(emberEntry.drawn, 1);
+        emberEntry.mesh.instanceMatrix.needsUpdate = true;
+        emberEntry.mesh.visible = true;
+      }
       return () => {
-        for (const mesh of warmMeshes) { mesh.frustumCulled = true; releaseEffectMesh(mesh); }
-        _nozzleJet.visible = jetWas;
+        drawFlameInst();
+        drawMoteInst();
       };
     }
 
@@ -55465,7 +55552,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const spd = FLAME_SPEED * (edge ? 0.86 + Math.random() * 0.16 : 0.95 + Math.random() * 0.12);
       const initMat = edge ? flameStreamHotMat : flameStreamCoreMat;
       const p = {
-        mesh: acquireEffectMesh(flameGeo, initMat, MAX_FLAME), stage: edge ? 1 : 0,
+        mesh: acquireFlameProxy(initMat), stage: edge ? 1 : 0,
         ox, oy, oz,
         x: ox, y: oy, z: oz, rangePacket: rangeShotPacket,
         vx: (dx / dl) * spd + velX, vy: (dy / dl) * spd, vz: (dz / dl) * spd + velZ,
@@ -55479,10 +55566,12 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         splashed: false, splashAge: 0, splashLife: 0.7,
         grounded: false, quenched: false, edge, sootTip
       };
-      p.mesh.renderOrder = 3;
-      p.mesh.frustumCulled = false;
+      p.mesh.position.set(ox, oy, oz);
       flameParticles.push(p);
-      if (lead > 0) stepFlameBlob(p, lead);
+      if (lead > 0) {
+        stepFlameBlob(p, lead);
+        p.mesh.position.set(p.x, p.y, p.z);
+      }
     }
 
     function stepFlameBlob(p, dt) {
@@ -55526,10 +55615,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
 
     function clearFlameStream() {
-      for (const p of flameParticles) { p.mesh.frustumCulled = true; releaseEffectMesh(p.mesh); }
+      for (const p of flameParticles) releaseFlameProxy(p.mesh);
       flameParticles.length = 0;
       flameEmitAcc = 0;
       _nozzleJet.visible = false;
+      drawFlameInst();
     }
 
     function stepTargetFlameHeat(dt) {
@@ -55618,6 +55708,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       }
 
       if (!flameParticles.length) {
+        drawFlameInst();
         stepTargetFlameHeat(dt);
         return;
       }
@@ -55639,8 +55730,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         if(rangeFeature?.owns()&&!p.quenched&&!p.grounded&&p.age<p.life*.85){const index=rangeFeature.flame(rangePrev,p,p.rangePacket);if(index!=null){rangeContacts.add(index);rangeContactPacket=p.rangePacket;}}
         const t = p.age / p.life;
         if (t >= 1 || (p.splashed && p.splashAge >= p.splashLife)) {
-          p.mesh.frustumCulled = true;
-          releaseEffectMesh(p.mesh);
+          releaseFlameProxy(p.mesh);
           flameParticles.splice(i, 1);
           continue;
         }
@@ -55890,6 +55980,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         }
         p.mesh.position.set(p.x, p.y, p.z);
       }
+      drawFlameInst();
       if (splashCount > 0) {
         const inv = 1 / splashCount;
         requestEffectLight(splashSumX * inv, splashSumY * inv + 0.35, splashSumZ * inv - 0.35, 0xff6e1a, Math.min(3.8, 1.4 + splashCount * 0.08), 15.5);
@@ -64365,6 +64456,14 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         copy.rotation.set(0, st.yaw, 0);
         copy.visible = true;
         tg.group.add(copy);
+        // Seat each copied cabinet's actual rear face on its room wall. The
+        // source models have different depths; the kiosk otherwise crosses
+        // the Range wall by 27 cm even though their station roots match.
+        tg.group.updateMatrixWorld(true);
+        const west = k === 'hqPanel' || k === 'skullWindow';
+        const wallX = tg.origin.x + (west ? TRAINING.BUILD.minX : TRAINING.RANGE.maxX);
+        const rear = new THREE.Box3().setFromObject(copy);
+        copy.position.x += wallX - (west ? rear.min.x : rear.max.x);
         out[k] = { from, copy };
         // CL-158: the laser, the rounds and the aim stop on the terminals as on the room's own props.
         try { tg.group.updateMatrixWorld(true); for (const b of propSolids(THREE, copy, tg.origin.y)) tg.solids.push(b); } catch (_) {}

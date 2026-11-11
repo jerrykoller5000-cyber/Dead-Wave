@@ -28,6 +28,18 @@ import { updateArtworkInstances } from '../studio/weapon-model-hooks.js';
 const smooth = (t) => { t = t < 0 ? 0 : t > 1 ? 1 : t; return t * t * (3 - 2 * t); };
 const clamp = (v, a, b) => (v < a ? a : v > b ? b : v);
 const ARM_CLOTH = new Set(['live-sleeve', 'live-sleeve-rolled', 'live-bare-arm']);
+// CC-342 (J123): the sniper's view gun goes behind the scope's glass (index.html #scopeOverlay) at this much of the aim
+const SNIPER_GLASS = 0.6;
+// CC-342 (J121, the chainsaw: "The Fov should still be pulled in more and the chainsaw sit slightly lower ... Right now it
+// covering the crosshairs"): a gun's own view FOV (degrees, vertical) in place of VM.fov; J88 narrowed them all (60 to 54)
+const VIEW_FOV = Object.freeze({ chainsaw: 48 });
+// CC-342 (J119): how far into the aim a gun's stock is put away (GB-296: 0.08 for the rest, before it can sweep into the
+// sight picture); the Breacher's leaves the frame at the bottom right by itself, so it goes only once in the sights
+const STOCK_AWAY = Object.freeze({ aa12: 0.9 });
+// CC-342 (J123: "the transparent front end of the optic"): the NX8's two lenses (studio/weapon-optics.js, faint glass at
+// 0.28 for the third person) let the eye see through the whole scope at 40 cm, the world behind its objective. In the view
+// copy they are coated glass: dark, glossy, not see-through. Only the scope's; a red dot's window stays clear.
+const COATED_LENSES = new Set(['50 mm objective lens', 'ocular lens']);
 
 export function createViewmodel(ctx) {
   const { THREE: T, TSL, renderer, scene, camera, marine } = ctx;
@@ -334,12 +346,18 @@ export function createViewmodel(ctx) {
     const off = pair && ctx.offhand ? ctx.offhand(key) : null;
     if (off) gun2 = copyGun(key, off, gunHolder2);
   }
+  let _coated = null;
+  function coatedLens() {   // CC-342 (J123): blue-black coated glass with a hard sheen, as a scope's lenses look from outside
+    return _coated || (_coated = new T.MeshStandardMaterial({ name: 'cc342-coated-lens', color: 0x0b1416, metalness: 0.55, roughness: 0.07,
+      emissive: 0x03080a, side: T.DoubleSide }));
+  }
   function copyGun(key, src, holder) {
     // CL-293 (Jerry, 3 Nov: "there being no stocks"): the stock is in the copy now, shown at the hip and put away down the
     // sights (update, below), where it would fill the eye.
     const ud = src.userData || {}, pairs = [], skip = new Set([ud.laser].filter(Boolean));
     const r = cloneLean(src, pairs, skip);
     r.position.set(0, 0, 0); r.quaternion.set(0, 0, 0, 1); r.scale.set(1, 1, 1);
+    if (key === 'sniper') r.traverse((o) => { if (o.isMesh && COATED_LENSES.has(o.name)) { o.userData.vmOwnMat = vmMaterial(coatedLens()); o.material = o.userData.vmOwnMat; } });   // CC-342 (J123)
     holder.add(r);
     const map = new Map(pairs);
     // MU-11 (finding 3): the palm ride and the slide's grab work in the gun root's space: a magazine or slide deeper in the
@@ -1052,7 +1070,8 @@ export function createViewmodel(ctx) {
         o.userData.vmInstanceVersion = s.instanceMatrix.version;
       }
       if (o.isMesh) { const g = geoOf(s.geometry); if (o.geometry !== g) o.geometry = g; }   // MU-11 (finding 2): a part's shape swapped in place (its twin under the mirror on WebGPU)
-      if (o.isMesh && s.material && !Array.isArray(s.material)) {
+      if (o.isMesh && o.userData.vmOwnMat) { if (o.material !== o.userData.vmOwnMat) o.material = o.userData.vmOwnMat; }   // CC-342: the view's own (the scope's coated lenses)
+      else if (o.isMesh && s.material && !Array.isArray(s.material)) {
         const want = vmMaterial(s.material);
         if (o.material !== want) o.material = want;
         mirrorMaterial(s.material, o.material);
@@ -1094,8 +1113,10 @@ export function createViewmodel(ctx) {
     const active = !!gun && (S.raise > 0.001 || !!BL || !!HN);
     info.active = active; info.key = gun ? gun.key : null; info.raise = S.raise; info.akimbo = !!gun2; info.blade = BL ? st.blade.kind : null;
     info.hands = HN ? st.hands.kind : null;
-    // The world's scope mask owns the full sniper sight picture above 82% ADS.
-    root.visible = active && !(gun && ((gun.key === 'sniper' && (st.ads || 0) >= 0.82) || (st.opticGlass && (st.ads || 0) >= 0.88)));   // CL-323: a magnified optic's glass too (full at 88%)
+    // The world's scope mask owns the full sniper sight picture above SNIPER_GLASS of the aim (CC-342, J123: "the model
+    // stays visible for too long when transitioning to scope": it was 82%, the scope's eyepiece already centred and the
+    // glass's ring and reticle over it from about 60%).
+    root.visible = active && !(gun && ((gun.key === 'sniper' && (st.ads || 0) >= SNIPER_GLASS) || (st.opticGlass && (st.ads || 0) >= 0.88)));   // CL-323: a magnified optic's glass too (full at 88%)
     setEyeHide(active, active ? gun.src : null, active && gun2 ? gun2.src : null);
     if (!active) { S.camQ = null; S.lastPlace = null; if (blade) blade.root.visible = false; return; }
     syncArmMaterials();
@@ -1115,7 +1136,9 @@ export function createViewmodel(ctx) {
     // out it shows as soon as the view gun does (under 0.82); GB-296's early hide stays on the way in
     { const a = st.ads || 0, prev = S.adsPrevStock == null ? a : S.adsPrevStock;
       if (gun.key === 'sniper') { if (a < 0.08 || a > prev + 1e-5) S.stockOut = false; else if (a < prev - 1e-5) S.stockOut = true; }
-      if (gun.stock) gun.stock.visible = gun.key !== 'launcher' && (a < 0.08 || (gun.key === 'sniper' && S.stockOut && a < 0.82));
+      // CC-342 (J119, the Breacher: "Stock disappearing ... when going from hip-fire to ads"): its stock is in the frame's
+      // corner at the hip and leaves it by itself on the way up, so it is put away only once in the sights (STOCK_AWAY)
+      if (gun.stock) gun.stock.visible = gun.key !== 'launcher' && (a < (STOCK_AWAY[gun.key] || 0.08) || (gun.key === 'sniper' && S.stockOut && a < SNIPER_GLASS));
       S.adsPrevStock = a; }
     S.ads = st.ads || 0; info.ads = S.ads;
     const AK = gun2 ? (info.tune.akimbo && info.tune.akimbo[gun.key]) || VM.akimbo[gun.key] : null;   // live: info.tune.akimbo = { pistol: {...}, elbowRel }
@@ -1670,7 +1693,8 @@ export function createViewmodel(ctx) {
     camera.updateMatrixWorld();
     camera.matrixWorld.decompose(root.position, root.quaternion, _psc);
     root.scale.set(1, 1, 1);
-    { const F0 = info.tune.fov || VM.fov, F1 = info.tune.adsFov || VM.adsFov; updateProjection(F0 + (F1 - F0) * smooth(S.ads)); }   // CL-324: live tuning
+    { const own = gun && VIEW_FOV[gun.key], F0 = info.tune.fov || own || VM.fov, F1 = info.tune.adsFov || (own ? Math.min(own, VM.adsFov) : VM.adsFov);   // CC-342 (J121): a gun's own view FOV
+      updateProjection(F0 + (F1 - F0) * smooth(S.ads)); }   // CL-324: live tuning
     root.updateMatrixWorld(true);
   }
   // A point on the view gun (its own space) in view space.

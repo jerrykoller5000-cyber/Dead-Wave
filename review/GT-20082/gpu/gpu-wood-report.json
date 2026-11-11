@@ -1,0 +1,488 @@
+{
+  "backend": "WebGPUBackend",
+  "woodChecks": [
+    {
+      "finKey": "factory",
+      "view": "hip",
+      "light": "noon",
+      "woodCount": 1,
+      "woodMeshes": [
+        {
+          "name": "",
+          "matName": "vm:KR-7 walnut",
+          "mapName": "lacquered birch grain and cut edges",
+          "roughness": 0.46,
+          "metalness": 0,
+          "finishRole": null,
+          "gunPaintId": null
+        }
+      ]
+    },
+    {
+      "finKey": "factory",
+      "view": "hip",
+      "light": "overcast",
+      "woodCount": 1,
+      "woodMeshes": [
+        {
+          "name": "",
+          "matName": "vm:KR-7 walnut",
+          "mapName": "lacquered birch grain and cut edges",
+          "roughness": 0.46,
+          "metalness": 0,
+          "finishRole": null,
+          "gunPaintId": null
+        }
+      ]
+    },
+    {
+      "finKey": "factory",
+      "view": "hip",
+      "light": "dusk",
+      "woodCount": 1,
+      "woodMeshes": [
+        {
+          "name": "",
+          "matName": "vm:KR-7 walnut",
+          "mapName": "lacquered birch grain and cut edges",
+          "roughness": 0.46,
+          "metalness": 0,
+          "finishRole": null,
+          "gunPaintId": null
+        }
+      ]
+    },
+    {
+      "finKey": "factory",
+      "view": "hip",
+      "light": "night",
+      "woodCount": 1,
+      "woodMeshes": [
+        {
+          "name": "",
+          "matName": "vm:KR-7 walnut",
+          "mapName": "lacquered birch grain and cut edges",
+          "roughness": 0.46,
+          "metalness": 0,
+          "finishRole": null,
+          "gunPaintId": null
+        }
+      ]
+    },
+    {
+      "finKey": "factory",
+      "view": "aimed",
+      "light": "noon",
+      "woodCount": 1,
+      "woodMeshes": [
+        {
+          "name": "",
+          "matName": "vm:KR-7 walnut",
+          "mapName": "lacquered birch grain and cut edges",
+          "roughness": 0.46,
+          "metalness": 0,
+          "finishRole": null,
+          "gunPaintId": null
+        }
+      ]
+    },
+    {
+      "finKey": "factory",
+      "view": "aimed",
+      "light": "overcast",
+      "woodCount": 1,
+      "woodMeshes": [
+        {
+          "name": "",
+          "matName": "vm:KR-7 walnut",
+          "mapName": "lacquered birch grain and cut edges",
+          "roughness": 0.46,
+          "metalness": 0,
+          "finishRole": null,
+          "gunPaintId": null
+        }
+      ]
+    },
+    {
+      "finKey": "factory",
+      "view": "aimed",
+      "light": "dusk",
+      "woodCount": 1,
+      "woodMeshes": [
+        {
+          "name": "",
+          "matName": "vm:KR-7 walnut",
+          "mapName": "lacquered birch grain and cut edges",
+          "roughness": 0.46,
+          "metalness": 0,
+          "finishRole": null,
+          "gunPaintId": null
+        }
+      ]
+    },
+    {
+      "finKey": "factory",
+      "view": "aimed",
+      "light": "night",
+      "woodCount": 1,
+      "woodMeshes": [
+        {
+          "name": "",
+          "matName": "vm:KR-7 walnut",
+          "mapName": "lacquered birch grain and cut edges",
+          "roughness": 0.46,
+          "metalness": 0,
+          "finishRole": null,
+          "gunPaintId": null
+        }
+      ]
+    },
+    {
+      "finKey": "factory",
+      "view": "canted",
+      "light": "noon",
+      "woodCount": 1,
+      "woodMeshes": [
+        {
+          "name": "",
+          "matName": "vm:KR-7 walnut",
+          "mapName": "lacquered birch grain and cut edges",
+          "roughness": 0.46,
+          "metalness": 0,
+          "finishRole": null,
+          "gunPaintId": null
+        }
+      ]
+    },
+    {
+      "finKey": "factory",
+      "view": "canted",
+      "light": "overcast",
+      "woodCount": 1,
+      "woodMeshes": [
+        {
+          "name": "",
+          "matName": "vm:KR-7 walnut",
+          "mapName": "lacquered birch grain and cut edges",
+          "roughness": 0.46,
+          "metalness": 0,
+          "finishRole": null,
+          "gunPaintId": null
+        }
+      ]
+    },
+    {
+      "finKey": "factory",
+      "view": "canted",
+      "light": "dusk",
+      "woodCount": 1,
+      "woodMeshes": [
+        {
+          "name": "",
+          "matName": "vm:KR-7 walnut",
+          "mapName": "lacquered birch grain and cut edges",
+          "roughness": 0.46,
+          "metalness": 0,
+          "finishRole": null,
+          "gunPaintId": null
+        }
+      ]
+    },
+    {
+      "finKey": "factory",
+      "view": "canted",
+      "light": "night",
+      "woodCount": 1,
+      "woodMeshes": [
+        {
+          "name": "",
+          "matName": "vm:KR-7 walnut",
+          "mapName": "lacquered birch grain and cut edges",
+          "roughness": 0.46,
+          "metalness": 0,
+          "finishRole": null,
+          "gunPaintId": null
+        }
+      ]
+    },
+    {
+      "finKey": "factory",
+      "view": "held",
+      "light": "noon",
+      "woodCount": 1,
+      "woodMeshes": [
+        {
+          "name": "",
+          "matName": "KR-7 walnut",
+          "mapName": "lacquered birch grain and cut edges",
+          "roughness": 0.46,
+          "metalness": 0,
+          "finishRole": null,
+          "gunPaintId": null
+        }
+      ]
+    },
+    {
+      "finKey": "factory",
+      "view": "held",
+      "light": "overcast",
+      "woodCount": 1,
+      "woodMeshes": [
+        {
+          "name": "",
+          "matName": "KR-7 walnut",
+          "mapName": "lacquered birch grain and cut edges",
+          "roughness": 0.46,
+          "metalness": 0,
+          "finishRole": null,
+          "gunPaintId": null
+        }
+      ]
+    },
+    {
+      "finKey": "factory",
+      "view": "held",
+      "light": "dusk",
+      "woodCount": 1,
+      "woodMeshes": [
+        {
+          "name": "",
+          "matName": "KR-7 walnut",
+          "mapName": "lacquered birch grain and cut edges",
+          "roughness": 0.46,
+          "metalness": 0,
+          "finishRole": null,
+          "gunPaintId": null
+        }
+      ]
+    },
+    {
+      "finKey": "factory",
+      "view": "held",
+      "light": "night",
+      "woodCount": 1,
+      "woodMeshes": [
+        {
+          "name": "",
+          "matName": "KR-7 walnut",
+          "mapName": "lacquered birch grain and cut edges",
+          "roughness": 0.46,
+          "metalness": 0,
+          "finishRole": null,
+          "gunPaintId": null
+        }
+      ]
+    },
+    {
+      "finKey": "m81",
+      "view": "hip",
+      "light": "noon",
+      "woodCount": 1,
+      "woodMeshes": [
+        {
+          "name": "",
+          "matName": "vm:KR-7 walnut",
+          "mapName": "lacquered birch grain and cut edges",
+          "roughness": 0.46,
+          "metalness": 0,
+          "finishRole": null,
+          "gunPaintId": null
+        }
+      ]
+    },
+    {
+      "finKey": "m81",
+      "view": "hip",
+      "light": "overcast",
+      "woodCount": 1,
+      "woodMeshes": [
+        {
+          "name": "",
+          "matName": "vm:KR-7 walnut",
+          "mapName": "lacquered birch grain and cut edges",
+          "roughness": 0.46,
+          "metalness": 0,
+          "finishRole": null,
+          "gunPaintId": null
+        }
+      ]
+    },
+    {
+      "finKey": "m81",
+      "view": "hip",
+      "light": "dusk",
+      "woodCount": 1,
+      "woodMeshes": [
+        {
+          "name": "",
+          "matName": "vm:KR-7 walnut",
+          "mapName": "lacquered birch grain and cut edges",
+          "roughness": 0.46,
+          "metalness": 0,
+          "finishRole": null,
+          "gunPaintId": null
+        }
+      ]
+    },
+    {
+      "finKey": "m81",
+      "view": "hip",
+      "light": "night",
+      "woodCount": 1,
+      "woodMeshes": [
+        {
+          "name": "",
+          "matName": "vm:KR-7 walnut",
+          "mapName": "lacquered birch grain and cut edges",
+          "roughness": 0.46,
+          "metalness": 0,
+          "finishRole": null,
+          "gunPaintId": null
+        }
+      ]
+    },
+    {
+      "finKey": "m81",
+      "view": "aimed",
+      "light": "noon",
+      "woodCount": 1,
+      "woodMeshes": [
+        {
+          "name": "",
+          "matName": "vm:KR-7 walnut",
+          "mapName": "lacquered birch grain and cut edges",
+          "roughness": 0.46,
+          "metalness": 0,
+          "finishRole": null,
+          "gunPaintId": null
+        }
+      ]
+    },
+    {
+      "finKey": "m81",
+      "view": "aimed",
+      "light": "overcast",
+      "woodCount": 1,
+      "woodMeshes": [
+        {
+          "name": "",
+          "matName": "vm:KR-7 walnut",
+          "mapName": "lacquered birch grain and cut edges",
+          "roughness": 0.46,
+          "metalness": 0,
+          "finishRole": null,
+          "gunPaintId": null
+        }
+      ]
+    },
+    {
+      "finKey": "m81",
+      "view": "aimed",
+      "light": "dusk",
+      "woodCount": 1,
+      "woodMeshes": [
+        {
+          "name": "",
+          "matName": "vm:KR-7 walnut",
+          "mapName": "lacquered birch grain and cut edges",
+          "roughness": 0.46,
+          "metalness": 0,
+          "finishRole": null,
+          "gunPaintId": null
+        }
+      ]
+    },
+    {
+      "finKey": "m81",
+      "view": "aimed",
+      "light": "night",
+      "woodCount": 1,
+      "woodMeshes": [
+        {
+          "name": "",
+          "matName": "vm:KR-7 walnut",
+          "mapName": "lacquered birch grain and cut edges",
+          "roughness": 0.46,
+          "metalness": 0,
+          "finishRole": null,
+          "gunPaintId": null
+        }
+      ]
+    },
+    {
+      "finKey": "m81",
+      "view": "held",
+      "light": "noon",
+      "woodCount": 1,
+      "woodMeshes": [
+        {
+          "name": "",
+          "matName": "KR-7 walnut",
+          "mapName": "lacquered birch grain and cut edges",
+          "roughness": 0.46,
+          "metalness": 0,
+          "finishRole": null,
+          "gunPaintId": null
+        }
+      ]
+    },
+    {
+      "finKey": "m81",
+      "view": "held",
+      "light": "overcast",
+      "woodCount": 1,
+      "woodMeshes": [
+        {
+          "name": "",
+          "matName": "KR-7 walnut",
+          "mapName": "lacquered birch grain and cut edges",
+          "roughness": 0.46,
+          "metalness": 0,
+          "finishRole": null,
+          "gunPaintId": null
+        }
+      ]
+    },
+    {
+      "finKey": "m81",
+      "view": "held",
+      "light": "dusk",
+      "woodCount": 1,
+      "woodMeshes": [
+        {
+          "name": "",
+          "matName": "KR-7 walnut",
+          "mapName": "lacquered birch grain and cut edges",
+          "roughness": 0.46,
+          "metalness": 0,
+          "finishRole": null,
+          "gunPaintId": null
+        }
+      ]
+    },
+    {
+      "finKey": "m81",
+      "view": "held",
+      "light": "night",
+      "woodCount": 1,
+      "woodMeshes": [
+        {
+          "name": "",
+          "matName": "KR-7 walnut",
+          "mapName": "lacquered birch grain and cut edges",
+          "roughness": 0.46,
+          "metalness": 0,
+          "finishRole": null,
+          "gunPaintId": null
+        }
+      ]
+    }
+  ],
+  "rackCheck": {
+    "finKey": "m81",
+    "light": "night",
+    "foundRack": true,
+    "preservedCount": 1,
+    "camoBleed": 0
+  }
+}

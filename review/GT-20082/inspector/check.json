@@ -1,0 +1,20 @@
+{
+ "at": "2026-11-11T09:16:10.678Z",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "results": [
+  {
+   "id": "weapon.ak",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 151,
+   "tris": 10648,
+   "size": [
+    0.062,
+    0.271,
+    0.922
+   ],
+   "error": null
+  }
+ ]
+}

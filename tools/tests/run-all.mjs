@@ -178,7 +178,10 @@ async function runOne(name) {
     // game's loop to actually run.
     // CU-235: a first-lines `// query:` on the test, plus DW_TEST_QUERY for the whole run.
     const extra = queryForTest(code);
-    await page.goto(`${server.origin}/tools/tests/${PAGE_NAME}?debug=1&raf=timer${extra}`, { timeout: 120000 });
+    // D-152: t38 needs real submission counters. Give its real page the same fresh profile as the generated fixture.
+    const testPath = name === 't38' ? '/index.html' : '/tools/tests/' + PAGE_NAME;
+    if (name === 't38') await page.send('Page.addScriptToEvaluateOnNewDocument', { source: 'localStorage.clear()' });
+    await page.goto(`${server.origin}${testPath}?debug=1&raf=timer${extra}`, { timeout: 120000 });
     const ready = await page.waitFor('!!window.TT', { timeout: 120000 });
     if (!ready) {
       note = 'window.TT never appeared: ' + (page.errors[0] || 'no page error reported').split('\n')[0];

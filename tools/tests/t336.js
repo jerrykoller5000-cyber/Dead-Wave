@@ -18,6 +18,9 @@
     const label = b => `${b.min.x.toFixed(2)},${b.min.y.toFixed(2)},${b.min.z.toFixed(2)}`;
     const meshes = []; g.traverse(o => { if (o.isMesh && o.geometry) meshes.push(o); });
     ok(meshes.length >= 250, `walk covers ${meshes.length} placed/decorative meshes (at least 250)`);
+    const placed=g.children.filter(o=>o.isMesh||o.getObjectByProperty?.('isMesh',true));
+    const badPlaced=placed.filter(o=>{const b=bounds(o);return ![b.min.x,b.min.y,b.min.z,b.max.x,b.max.y,b.max.z].every(Number.isFinite);});
+    ok(placed.length>=70&&!badPlaced.length, `${placed.length} placed assemblies have finite world bounds${badPlaced.length ? ': '+badPlaced.map(o=>o.name||'(unnamed)').join('; ') : ''}`);
     const exceptions = [], penetrations = [], invalid = [];
     for (const m of meshes) {
       const b = bounds(m), coords = [b.min.x,b.min.y,b.min.z,b.max.x,b.max.y,b.max.z];
@@ -36,6 +39,12 @@
     ok(!invalid.length, `all ${meshes.length} mesh bounds finite${invalid.length ? ': '+invalid.join('; ') : ''}`);
     ok(!penetrations.length, `no visible mesh sunk below the walking floor beyond 0.5 mm${penetrations.length ? ': '+penetrations.join('; ') : ''}`);
     ok(exceptions.length === 5, `five named background/slab/effect exceptions: ${exceptions.join('; ')}`);
+    const floorOverlays=meshes.map(m=>({m,b:bounds(m)})).filter(({b})=>b.min.y>floor+.0005&&b.min.y<floor+.03&&b.max.y-b.min.y<.0005);
+    const raisedPaint=floorOverlays.filter(({m,b})=>{
+      const mats=Array.isArray(m.material)?m.material:[m.material],gap=b.min.y-floor;
+      return !mats.every(mat=>mat?.polygonOffset)||!clipException('training-floor-paint','training-floor','training:decal',gap);
+    });
+    ok(floorOverlays.length>=7&&!raisedPaint.length, 'floor paint: '+floorOverlays.length+' flat overlays within 2 mm and using polygonOffset'+(raisedPaint.length ? '; raised: '+raisedPaint.map(({m,b})=>(m.name||m.parent?.name||'(unnamed)')+' '+((b.min.y-floor)*1000).toFixed(1)+' mm').join('; ') : ''));
 
     // The direct floor contacts are independent fixtures; wall-mounted stations are
     // checked against their actual wall plane, not incorrectly called floating.
@@ -43,7 +52,13 @@
       const o = g.getObjectByName(n), b = o && bounds(o), gap = b ? b.min.y-floor : NaN;
       ok(!!b && Math.abs(gap) <= .0005, `${n} on floor at ${b ? label(b) : 'missing'} (gap ${gap.toFixed(4)} m)`);
     }
-    for (const [n,wallX,face] of [['training-cif',8,'max'],['training-armory',8,'max'],['training-kiosk',8,'max'],['training-skullWindow',-44,'min'],['training-range-console',-8,'min']]) {
+    const overlap=(a,b)=>a&&b&&['x','y','z'].every(axis=>Math.min(a.max[axis],b.max[axis])-Math.max(a.min[axis],b.min[axis])>.005);
+    const bench=bounds(g.getObjectByName('training-firing-bench'));
+    const monitor=g.getObjectByName('range-drill-monitor');
+    ok(!!monitor&&overlap(bounds(monitor),bench),'range drill monitor mounted into the firing bench, not floating');
+    const armory=g.getObjectByName('training-armory'),rack=g.getObjectByName('armoryRack');
+    ok(!!armory&&!!rack&&overlap(bounds(rack),bounds(armory)),'Armory rack mounted in the wall station, not floating');
+    for (const [n,wallX,face] of [['training-cif',8,'max'],['training-armory',8,'max'],['training-kiosk',8,'max'],['training-hqPanel',-44,'min'],['training-skullWindow',-44,'min'],['training-range-console',-8,'min']]) {
       const o = g.getObjectByName(n), b = o && bounds(o), gap = b ? b[face].x-wallX : NaN;
       ok(!!b && Math.abs(gap) <= .0005, `${n} seated on wall x=${wallX} at ${b ? label(b) : 'missing'} (face error ${gap.toFixed(4)} m)`);
     }

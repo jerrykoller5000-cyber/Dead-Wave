@@ -1,0 +1,10 @@
+GRANT chatgpt2 GT-20081: starting one game-test command
+check-players: 313 player.position reads, all in the allowed places
+ERROR t38      0 pass   0 fail  148.0s  — evaluate failed: Error: Could not equip minigun
+           recovering browser after t38: evaluate failed: Error: Could not equip minigun
+
+1 checks: 0 pass, 0 fail, 1 could not run
+
+by owner:
+  unassigned — triage
+    t38    0 fail  evaluate failed: Error: Could not equip minigun

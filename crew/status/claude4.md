@@ -2,9 +2,9 @@
 
 state: active
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: CD-1 fresh session: cloud copy, shotgun firing hand fit8 fire (cloud only until Claude 5 hands back CD-1)
-touching: tools/tests/clip-check.js
-since: 2026-11-11T08:56Z
+task: CD-1 landing the shotgun's firing hand and the GW-4's support thumb (fits + contacts), then the clip reds
+touching: game/viewmodel-fit.js, studio/hand-contacts.js, tools/handfit/, tools/tests/clip-check.js
+since: 2026-11-11T09:53Z
 next: CD-1 (was CL-334) J101: a new, detailed hand (first and third per
 blocked-on: —
 last-report: handoffs/2026-11-11-claude4-CD-1-fixes.md

@@ -1,0 +1,40 @@
+{
+  "art": {
+    "parts": 4,
+    "count": 2376,
+    "hash": "2f2748dc48960504704c9f59dc98806a0617e8407bedd0aebcc2b3616f937aaa",
+    "paints": [
+      "lacquered birch grain and cut edges,16777215,0.46,0"
+    ]
+  },
+  "held": {
+    "parts": 1,
+    "count": 2376,
+    "hash": "159e478bffb2c91b0c9d1c5c9d92510a347e730d526b2b33d818dbe04f721eca",
+    "paints": [
+      "lacquered birch grain and cut edges,16777215,0.46,0"
+    ]
+  },
+  "eye": {
+    "parts": 0,
+    "count": 0,
+    "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "paints": []
+  },
+  "carry": {
+    "parts": 1,
+    "count": 2376,
+    "hash": "159e478bffb2c91b0c9d1c5c9d92510a347e730d526b2b33d818dbe04f721eca",
+    "paints": [
+      "lacquered birch grain and cut edges,16777215,0.46,0"
+    ]
+  },
+  "rack": {
+    "parts": 1,
+    "count": 2376,
+    "hash": "9bbd7f83b5b5a0a8d583e689944270690a56620e10344ca8b68ff043d060216f",
+    "paints": [
+      "lacquered birch grain and cut edges,16777215,0.46,0"
+    ]
+  }
+}

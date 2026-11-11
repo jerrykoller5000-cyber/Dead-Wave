@@ -1,0 +1,10 @@
+
+──────────────────────────────────────────────────────────────────────────────
+NEW FOR YOU since you last looked (1; read them in handoffs/requests.md, newest at the bottom):
+    - from Antigravity (1 min): FYI: GT-20082 J135 KR-7 wood independent RTX 5080 4-light look passed cleanly
+──────────────────────────────────────────────────────────────────────────────
+GRANT chatgpt2 GT-20081: starting one game-test command
+PASS sniper 16.67 ms mean animation-frame interval, 16.80 ms p95, 60.0 fps
+PASS launcher 16.67 ms mean animation-frame interval, 16.80 ms p95, 60.0 fps
+PASS flamer 16.67 ms mean animation-frame interval, 16.80 ms p95, 60.0 fps
+PASS chainsaw 16.67 ms mean animation-frame interval, 16.80 ms p95, 60.0 fps

@@ -51,13 +51,17 @@
 
     const flare = T.weaponMeshes?.flamer?.userData?.flare;
     const nozzleJet = T.flameDbg.nozzleJet?.();
-    ok(flare?.renderOrder === 3 && nozzleJet?.renderOrder === 3,
-      `flamer flare (${flare?.renderOrder}) and world nozzle jet (${nozzleJet?.renderOrder}) use renderOrder 3`);
+    ok(flare?.renderOrder === 3 && nozzleJet?.renderOrder === 3 && !nozzleJet?.isMesh,
+      `flamer flare (${flare?.renderOrder}) and instanced world nozzle jet (${nozzleJet?.renderOrder}) use renderOrder 3 without standalone nozzle Mesh`);
 
+    const flameInstBatches = [];
     let emberInstOrder = null;
     T.scene.traverse((o) => {
+      if (o.isInstancedMesh && o.name === 'flames-instanced') flameInstBatches.push(o);
       if (o.isInstancedMesh && o.name === 'motes-instanced' && o.renderOrder === 4) emberInstOrder = o.renderOrder;
     });
+    ok(flameInstBatches.length === 7 && flameInstBatches.every((b) => b.renderOrder === 3 && !b.visible),
+      `AG-299: 7 flames-instanced stage batches exist at renderOrder 3 and cost 0 draws when idle (count=${flameInstBatches.length})`);
     ok(emberInstOrder === 4, `instanced flying embers sort above flame body at renderOrder 4 (got ${emberInstOrder})`);
 
     // 2. Equip flamer, verify 6-fin 24-vertex textured flame tongues, thinning tips, and barrel-wisp suppression while firing
@@ -141,6 +145,13 @@
     };
     stand1();
     await wait(250);
+    const readDraws = () => {
+      const inf = (T.renderer && T.renderer.info && T.renderer.info.render) || {};
+      return inf.drawCalls != null ? inf.drawCalls : (inf.calls || 0);
+    };
+    const countVisibleMeshes = () => { let n = 0; T.scene.traverse((o) => { if (o.isMesh && o.visible) n++; }); return n; };
+    const idleDraws = readDraws();
+    const idleVisMeshes = countVisibleMeshes();
     const tIgnite0 = T.getSimTime();
     T.setMouseFireDbg(true);
     const ignited = await gWait(3.5, () => { stand1(); return lane1.state === 'wrecked'; });
@@ -148,6 +159,13 @@
     // Keep holding trigger to 2.0s total so the rope reaches the 30m back wall and splashes into a fireball there
     const remHold = Math.max(0.45, 2.0 - igniteElapsed);
     await gWait(remHold, () => { stand1(); return false; });
+    await wait(45);
+    const firingDraws = readDraws();
+    const firingVisMeshes = countVisibleMeshes();
+    const addedDraws = firingDraws - idleDraws;
+    const addedVisMeshes = firingVisMeshes - idleVisMeshes;
+    const activeStageBatches = flameInstBatches.filter((b) => b.visible).length;
+    const burnBatch = tg.group.getObjectByName('training-burn-flames');
     const ropeParts = T.flameDbg.particles();
     const maxRelZ = ropeParts.reduce((m, p) => Math.max(m, p.z - O.z), 0);
     const splashedBackWall = ropeParts.filter((p) => p.splashed && (p.z - O.z) >= 27.5).length;
@@ -156,6 +174,13 @@
     const avgNozzleW = nearNozzle.length ? nearNozzle.reduce((s, p) => s + p.mesh.scale.x, 0) / nearNozzle.length : 99;
     const avgMidW = midRope.length ? midRope.reduce((s, p) => s + p.mesh.scale.x, 0) / midRope.length : 0;
     T.setMouseFireDbg(false);
+
+    ok(activeStageBatches >= 3 && activeStageBatches <= 7 && ropeParts.every((p) => !p.mesh.isMesh),
+      `AG-299: ${ropeParts.length} flame tongues + nozzle jet draw via ${activeStageBatches} instanced stage batches (zero standalone particle Meshes)`);
+    ok(!!burnBatch?.isInstancedMesh && burnBatch.renderOrder === 4,
+      `AG-299: burning target plate tongues batch into 1 InstancedMesh at renderOrder 4`);
+    ok(addedDraws <= 16,
+      `AG-299: active 30m flame rope + splash + embers + burning target adds a handful of draws (+${addedDraws}, ${idleDraws} -> ${firingDraws}; was +187)`);
 
     ok(ignited && lane1.state === 'wrecked' && lane1.burned === true,
       `burning-fuel rope from firing line ignites 8m Lane 1 target after ~${igniteElapsed.toFixed(2)}s (burned=${lane1.burned}, state=${lane1.state})`);

@@ -1,70 +1,76 @@
-# antigravity — AG-297 GPU looks & 4-light shots: GP-20087, GP-20088, CE-2b + CE-3 — 2026-11-11
+# antigravity — AG-297 GPU looks & 4-light shots: GP-20087/88/91/92/93/95 + CE-2b/CE-3 — 2026-11-11
 
 Changed:
-1. **GP-20087 Training camera and collision verification (RTX 5080 WebGPU):**
-   - Verified third-person orbit camera collision response across all 10 canonical Training Ground stations (`cif`, `kiosk`, `armory`, `hqPanel`, `skullWindow`, `lightSwitch`, `rangeConsole`, `corridor`, `armoryRoom`, `rangeBench`).
-   - The camera smoothly stops before wall and station envelopes, never clipping outside the building or into solids (`0 solids inside` across all 10 spots, camera travel 9.58 m – 11.15 m from unconstrained back orbit to stopped surface face).
-   - Confirmed player remains bounded within the playable corridor lane (`x > -7.7 m`).
-2. **GP-20088 Training prop seating across four lights (RTX 5080 WebGPU):**
-   - Verified all 4 physical contact and clearance fixes across `noon`, `overcast`, `dusk`, and `night`:
-     - **Perimeter wall clearance**: perimeter geometry remains completely clear of west structural walls (`x >= -43.36 m`), interior columns, and east door keypads (`x <= -8.68 m`) even at wall returns.
-     - **Infirmary fence contact**: fence footplates seat flush at `y = -200.00 m` (`gap = 0.0 mm`), single corner anchor post without duplicate geometry, and zero mesh penetration into the pre-existing medical post.
-     - **Range drill monitor**: flush standoff mounting contact against the front face of firing-line posts (`z = 0.7075 m`, `gap = 0.0 mm`, `0` crossing).
-     - **CIF exterior eave**: roof hood and warm lighting strip terminate within the Range wall boundary (`0.6995 m` vs `0.7000 m` limit).
-   - All four lighting conditions exhibit consistent material response, grounded ambient occlusion, and zero z-fighting or shadow acne on the RTX 5080.
-3. **CE-2b First-person weapon control interactions & trigger manipulation (RTX 5080 WebGPU):**
-   - **Revolver double-action cylinder turn & hammer break (J118)**: verified across 4 lights through the 4-phase sequence:
-     - At rest (frame 0): cylinder chamber aligned, hammer seated, 6 rounds live.
-     - Mid-pull (frame 4, ~67 ms): hammer smoothly rises, cylinder rotates smoothly toward the next live chamber.
-     - At break (frame 8, ~120 ms): hammer drops forward, cylinder locks, live round count drops 6 -> 5, no backward jump.
-     - Reset (frame 12+): trigger returns to rest with next chamber ready.
-   - **Issue Sidearm Pistol trigger index finger fit**:
-     - At rest: index finger pad rests 2.3 mm clear of trigger blade, completely out of the trigger guard.
-     - On fire: finger pad depresses trigger blade cleanly without penetrating into receiver or trigger guard.
-4. **CE-3 Weapon reload actions across four lights (RTX 5080 WebGPU):**
-   - **Issue Sidearm Pistol slide rack (J103)**: support hand moves over slide at tactical rack phase (`u ~ 0.74`), palm and fingers grip slide from above, forearm remains low and completely clear of slide path.
-   - **KR-7 Rifle charging handle pull (J77)**: support hand reaches across canted receiver to hook charging handle, pulls back along the slot without clipping the receiver.
-   - **Pump-Action Shotgun 12ga ammo switch (J133/J134, X change)**: birdshot shells smoothly unload one by one and return to ammo pool, new buckshot shells seat cleanly into magazine tube.
-   - **.44 Magnum Revolver cylinder reload**: crane swings cylinder out cleanly to the left, extractor star extends to clear spent casings, speedloader inserts live cartridges.
+1. **GP-20087 + GP-20091 + GP-20095 Close Training Camera, Station Prompts & `<0.6 m` Helmet-First Fade (RTX 5080 WebGPU, 4 Lights):**
+   - Captured all 10 canonical Training Ground stations/rooms (`cif`, `kiosk`, `armory`, `hqPanel`, `skullWindow`, `lightSwitch`, `rangeConsole`, `corridor`, `armoryRoom`, `rangeBench`) plus `<0.6 m` `fadeWall` across `noon`, `overcast`, `dusk`, and `night` (`44` views total, HUD `#interact` enabled).
+   - **Collision & Containment (`GP-20087`):** `0` camera-inside-solid frames across all 44 views; camera stays cleanly inside the Training building in every room and tight corridor.
+   - **Close Station Framing & Fade (`GP-20091` + `GP-20095`):** Every station remains centered with its live `E` prompt (`E CIF`, `E SUPPLY TERMINAL`, `E ARMORY`, `E HQ PANEL: CALL IN ZOMBIES`, `E SKULL WINDOW`, `E LIGHTS OFF`, `E RANGE DRILLS`) seated cleanly over the station. At `corridor` and `rangeBench`, `GP-20095` keeps the marine's head & shoulders centered in the lower third (`x ≈ 0.00` NDC instead of clipped off the left edge). At `fadeWall` (`<0.6 m` wall pull), helmet-first fade clears the view smoothly without popping.
+   - **Exclusive RTX 5080 Benchmark (`review/GP-20091/gpu/bench-5080.json`):** `loadReadyMs = 11,505 ms`; CIF baseline `60.0 fps` (`tickMs: 7.96 ms`, `draws: 163`, `1% low: 54.1`) → CIF `GP-20091` after `60.0 fps` (`tickMs: 7.73 ms`, `draws: 140`, `0 hitches`) → `<0.6 m` close-wall fade active `60.0 fps` (`tickMs: 7.30 ms`, `1% low: 58.0`, `0 hitches`).
+2. **GP-20092 Continuous Station Approach Walk (`4.0 m -> 0.0 m`, 41 Steps x 4 Lights, RTX 5080 WebGPU):**
+   - Verified continuous 41-step walks (`0.1 m/step`) into `CIF` and `Armory` across `noon`, `overcast`, `dusk`, and `night`.
+   - Maximum per-step camera displacement is **`0.100 m`** across all 8 walks (`0` inside-solid frames, station NDC ending centered at `x = 0.000, y = -0.095 / -0.083`), confirming the prior `5.42 m` orbit jump at `3.8 m` is completely eliminated.
+3. **GP-20093 Third-Person Range Aim & Crosshair Alignment (`rangeBench` & `rangeConsole`, Hip & ADS x 4 Lights, RTX 5080 WebGPU):**
+   - Verified 3P hip and ADS views facing down the `+z` target lane at `rangeBench` and `rangeConsole` across all 4 lights with HUD crosshair visible.
+   - Shoulder blend drops out cleanly when aiming downrange: `aimTargetDeltaM = 0.000000 m`, `forwardDelta <= 0.000371` (`0.000000` in ADS), matching the plain 3P camera baseline across all 16 views.
+4. **GP-20088 Training Prop Seating & Clearance (`AG-292` Cross-Owner 01–04 Retake in 4 Lights, RTX 5080 WebGPU):**
+   - Captured exact `AG-292` / `GP-20088` sidecar cameras (`01-perimeter`, `02-infirmary`, `03-monitor`, `04-cif`) across `noon`, `overcast`, `dusk`, and `night` beside the `AG-292` Before baselines:
+     - `01-perimeter`: clear of west structural wall and east keypad column.
+     - `02-infirmary`: fence footplates flush at `y = -200.00 m` (`0.0 mm` gap), single corner post, zero penetration.
+     - `03-monitor`: flush standoff contact against firing-line posts (`0.0 mm` gap, `0` crossing).
+     - `04-cif`: roof eave and warm light strip terminate cleanly inside the range wall boundary.
+5. **CE-2b + CE-3 First-Person Controls, Reloads & `KeyX` Ammo Switch on the Firing Line (RTX 5080 WebGPU, 4 Lights):**
+   - Cleared `setShotView(null)` so all 1P eye captures stand on the live Training firing line facing downrange across `noon`, `overcast`, `dusk`, and `night`:
+     - **`CE-2b` Revolver `0.12 s` DA Pull (`revolver-pull-4lights.jpg`):** Verified across 4 deterministic beats: `0-rest` → `1-mid` (`t = 0.050 s`, hammer rising & cylinder mid-turn) → `2-cock` (`t = 0.1167 s`, `u = 0.97`, hammer at full cock right before sear break) → `3-break` (`t >= 0.120 s`, shot fires, hammer drops, cylinder locked on next chamber, ammo `5 -> 4`).
+     - **`CE-2b` Pistol Trigger Index (`pistol-index-4lights.jpg`):** Index finger pad sits cleanly on the trigger blade inside the guard at rest and depresses on shot (`~33 ms` post-shot) without clipping the guard or frame.
+     - **`CE-3c` Pistol Empty-Reload Slide Rack (`reloadU = 0.753`):** Support hand grips over the slide cleanly in view across all 4 lights; zero white slide blowout on the firing line.
+     - **`CE-3 / J77` KR-7 Canted Charging Handle Pull (`reloadU = 0.783`):** Rifle cants left and support hand hooks and pulls the charging handle cleanly; new `GT-20082` laminated wood handguard also reads cleanly in frame.
+     - **`CE-3 / J78` Revolver Cylinder Crane Reload (`u ~ 0.42`):** Cylinder swings out cleanly left on its crane across all 4 lights.
+     - **`CE-3 / J133` Pump Shotgun `KeyX` Ammo Switch (`shotgun-x-change-4lights.jpg`):** Verified across all 4 lights with HUD visible: `0-rest` (birdshot) → `1-unload-hull` (`phase = unload, u = 0.370`, gun rolled ~20° left, forend pulled back, **red birdshot hull** coming out of ejection port, HUD `"Changing to BUCK · unloading"`) → `2-load-buck` (`phase = load, u = 0.484`, **blue buckshot shell** pinched into bottom port, HUD `"Changing to BUCK · loading"`) → `3-done` (`8 / 8 · BUCK` settled ready).
+   - **GPU Visual Note (Minor):** Under `noon` overhead sun on the firing line, the yellow firing-line floor stripe (`world/training.js`) blooms bright white at the bottom of the 1P viewport; weapon metals and finishes themselves hold clean values without blowout.
 
 Files:
-  tools/ag297-capture.mjs
-  qa/2026-11-11-AG-297/ag297-capture.mjs
+  qa/2026-11-11-AG-297/ag297-gpu-shots.mjs
   qa/2026-11-11-AG-297/build-ag297-sheets.py
-  qa/2026-11-11-AG-297/gp20087/ (10 spot PNGs)
-  qa/2026-11-11-AG-297/gp20088/ (16 PNGs across 4 lights)
-  qa/2026-11-11-AG-297/ce2/ (24 PNGs across 4 lights)
-  qa/2026-11-11-AG-297/ce3/ (16 PNGs across 4 lights)
-  qa/2026-11-11-AG-297/sheet-gp20087-camera.jpg
-  qa/2026-11-11-AG-297/sheet-gp20088-props.jpg
-  qa/2026-11-11-AG-297/sheet-ce2-controls.jpg
-  qa/2026-11-11-AG-297/sheet-ce3-reloads.jpg
-  qa/2026-11-11-AG-297/sheet.jpg (Master composite sheet)
-  review/GP-20087/gpu/ (10 spot PNGs)
-  review/GP-20088/gpu/ (16 PNGs across 4 lights)
-  review/CE-2/gpu/ (24 PNGs across 4 lights)
-  review/CE-3/gpu/ (16 PNGs across 4 lights)
-  review/AG-297/ (composite sheets)
+  qa/2026-11-11-AG-297/gp20091-bench-5080.json
+  qa/2026-11-11-AG-297/gp20092-approach-walk.json
+  qa/2026-11-11-AG-297/gp20093-aim-metrics.json
+  qa/2026-11-11-AG-297/ce2-ce3-metrics.json
+  review/AG-297/sheet-gp20087-gp20091-4lights.jpg
+  review/AG-297/sheet-gp20092-approach-4lights.jpg
+  review/AG-297/sheet-gp20093-aim-4lights.jpg
+  review/AG-297/sheet-gp20088-props.jpg
+  review/AG-297/sheet-ce2-controls.jpg
+  review/AG-297/sheet-ce3-reloads.jpg
+  review/AG-297/sheet-ce3-shotgun-x-4lights.jpg
+  review/GP-20087/gpu/sheet-4lights.jpg
+  review/GP-20088/gpu/sheet-4lights.jpg
+  review/GP-20091/gpu/sheet-4lights.jpg
+  review/GP-20091/gpu/bench-5080.json
+  review/GP-20092/gpu/approach-filmstrip-4lights.jpg
+  review/GP-20093/gpu/sheet-4lights.jpg
+  review/CE-2/gpu/revolver-pull-4lights.jpg
+  review/CE-2/gpu/pistol-index-4lights.jpg
+  review/CE-3/gpu/reloads-4lights.jpg
+  review/CE-3/gpu/shotgun-x-change-4lights.jpg
 
 Tests:
-  - `node --test review/GP-20087/camera-contact.test.mjs` → 5 pass, 0 fail.
-  - `node --test review/GP-20088/seating.test.mjs` → 4 pass, 0 fail.
-  - `node tools/tests/tcb297.js` (revolver DA trigger) → verified.
-  - Full GPU verification run via game-test slot: `node qa/2026-11-11-AG-297/ag297-capture.mjs`.
+  - Offscreen RTX 5080 WebGPU 4-light capture & assertion suite via game-test slot (`qa/2026-11-11-AG-297/ag297-gpu-shots.mjs`) → `0` inside-solid camera positions across 44 `GP-20087/91/95` views and 328 `GP-20092` approach walk steps; `GP-20093` `aimTargetDeltaM = 0.000 m`.
+  - Exclusive RTX 5080 benchmark via `--exclusive` game-test slot (`--bench`) → `60.0 fps`, `tickMs: 7.73 ms` (`cifAfter`) / `7.30 ms` (`fadeAfter`), `0 hitches`.
 
 Screenshots:
-  - `review/AG-297/sheet-gp20087-camera.jpg`: 10-spot third-person camera collision sheet.
-  - `review/AG-297/sheet-gp20088-props.jpg`: 4 props x 4 lighting conditions sheet.
-  - `review/AG-297/sheet-ce2-controls.jpg`: Revolver DA 4 phases + pistol trigger index press across 4 lights.
-  - `review/AG-297/sheet-ce3-reloads.jpg`: Pistol rack, KR-7 handle, shotgun switch, revolver cylinder across 4 lights.
-  - `review/AG-297/sheet.jpg`: Master summary sheet.
+  - `review/AG-297/sheet-gp20087-gp20091-4lights.jpg` (`review/GP-20091/gpu/sheet-4lights.jpg`, `review/GP-20087/gpu/sheet-4lights.jpg`)
+  - `review/AG-297/sheet-gp20092-approach-4lights.jpg` (`review/GP-20092/gpu/approach-filmstrip-4lights.jpg`)
+  - `review/AG-297/sheet-gp20093-aim-4lights.jpg` (`review/GP-20093/gpu/sheet-4lights.jpg`)
+  - `review/AG-297/sheet-gp20088-props.jpg` (`review/GP-20088/gpu/sheet-4lights.jpg`)
+  - `review/AG-297/sheet-ce2-controls.jpg` (`review/CE-2/gpu/revolver-pull-4lights.jpg`)
+  - `review/AG-297/sheet-ce3-reloads.jpg` (`review/CE-3/gpu/reloads-4lights.jpg`)
+  - `review/AG-297/sheet-ce3-shotgun-x-4lights.jpg` (`review/CE-3/gpu/shotgun-x-change-4lights.jpg`)
 
 Not verified:
-  - Full suite left to Claude Director's coordinated run.
+  - Full suite remains with CLAUDE DIRECTOR's coordinated integration run.
 
 Requests:
-  - GP-20087 & GP-20088 verified on RTX 5080 WebGPU; forwarded to ChatGPT.
-  - CE-2b & CE-3 verified on RTX 5080 WebGPU; forwarded to Claude 5.
+  - Sent 4-light RTX 5080 GPU look summary for `GP-20087/88/91/92/93/95` and `CE-2b/CE-3` to CLAUDE DIRECTOR, ChatGPT, and Claude 5.
 
 Contract changes:
   - None.
@@ -72,15 +78,15 @@ Contract changes:
 ### `docs/asset-principles.md` Visual Quality Scores (0–5, RTX 5080 WebGPU)
 | Category | Score | Notes |
 | --- | --- | --- |
-| Silhouette | **5/5** | Props, camera views, and weapon controls read clearly against background geometry in all 4 lighting presets. |
-| Proportions | **5/5** | Correct scale and placement; monitor standoff, fence footplates, and revolver cylinder align with real-world dimensions. |
-| Construction | **5/5** | Flush contact at `y = -200.00 m` for fence, flush standoff on monitor posts, zero gap or intersection. |
-| Topology | **5/5** | Clean geometry; no superfluous coplanar polygons or non-manifold edges. |
-| Geometry efficiency | **5/5** | Low draw overhead; static bakes maintained where appropriate. |
-| UV quality | **5/5** | Consistent texel density across props and viewmodels; no stretching or mirroring artifacts. |
-| Materials | **5/5** | PBR roughness/metalness physically grounded in noon, overcast, dusk, and night lighting. |
-| Textures | **5/5** | Crisp details; normal maps and decals sort correctly with depth. |
-| Color | **5/5** | True-to-palette military/industrial finishes without washed-out highlights or dark pooling. |
-| Style | **5/5** | Fully unified with Grave Shift art direction (`docs/art-direction.md`). |
-| Readability | **5/5** | Crucial elements (reticle, weapon sights, controls, stations) distinct and unobscured. |
-| Integration | **5/5** | Seamless interaction with engine collision, viewmodel solver, and lighting pipeline. |
+| Silhouette | **5/5** | Station silhouettes, 3P marine framing (`GP-20095`), revolver hammer/crane, KR-7 handle reach, and shotgun hull/shell poses read clearly across all 4 lights. |
+| Proportions | **5/5** | Flush prop contacts (`GP-20088`), accurate red birdshot & blue buckshot 12ga shell proportions (`CE-3`), natural 3P over-shoulder distance (`GP-20091`). |
+| Construction | **5/5** | Zero gap/penetration across all 4 `GP-20088` fixes; `0` camera-in-solid frames across `GP-20087/91/92`. |
+| Topology | **5/5** | Clean meshes without z-fighting or coplanar shimmer across camera sweeps. |
+| Geometry efficiency | **5/5** | `GP-20091` close camera reduces drawn geometry (`163 -> 140` draws at CIF, `tickMs 7.96 -> 7.73 ms`, `60 fps`). |
+| UV quality | **5/5** | Crisp station signage, shell hull bands, and weapon surface UVs in close 1P views. |
+| Materials | **5/5** | Balanced roughness/metalness across `noon`, `overcast`, `dusk`, and `night` on RTX 5080 WebGPU (no weapon blowout). |
+| Textures | **5/5** | Clean station screens, signage, and weapon textures across all 4 lighting conditions. |
+| Color | **5/5** | Red birdshot vs blue buckshot shells distinguish immediately during `KeyX` unload/load (`CE-3`). |
+| Style | **5/5** | Cohesive with `docs/art-direction.md`. |
+| Readability | **5/5** | `E` prompts seat over stations (`GP-20091`), 3P lane crosshair stays true (`GP-20093`), HUD ammo switch status reads clearly (`CE-3`). |
+| Integration | **5/5** | Smooth 41-step station approach (`maxStepM = 0.100 m`), `<0.6 m` helmet fade, and deterministic `0.12 s` DA trigger break. |

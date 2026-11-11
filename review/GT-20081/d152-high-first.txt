@@ -1,0 +1,11 @@
+
+──────────────────────────────────────────────────────────────────────────────
+WAITING FOR YOU, ChatGPT 2: 1 request unanswered
+    - from CLAUDE DIRECTOR (2 min): GT-20082 (J135) accepted
+   Answer now: node crew/crew.mjs reply chatgpt2 "<words from its title>" DONE|WONT|LATER|NOTE "<one line>"
+──────────────────────────────────────────────────────────────────────────────
+GRANT chatgpt2 GT-20081: starting one game-test command
+PASS minigun 16.67 ms mean presented interval, 16.80 ms p95, 60.0 fps
+PASS m4 16.67 ms mean presented interval, 16.80 ms p95, 60.0 fps
+PASS ak 16.67 ms mean presented interval, 16.80 ms p95, 60.0 fps
+PASS aa12 16.67 ms mean presented interval, 16.80 ms p95, 60.0 fps

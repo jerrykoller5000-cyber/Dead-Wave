@@ -1,0 +1,18 @@
+Game-test request b4792e14-94d5-4a2a-82c6-251cf944e393 queued at position 1. Waiting...
+GRANT chatgpt2 GT-20081: starting one game-test command
+check-players: 313 player.position reads, all in the allowed places
+           INFO minigun cold meshes 22, equipped draws 22
+           INFO m4 cold meshes 35, equipped draws 31
+           INFO ak cold meshes 23, equipped draws 19
+           INFO aa12 cold meshes 24, equipped draws 23
+           INFO pistol cold meshes 20, equipped draws 16
+           INFO uzi cold meshes 27, equipped draws 23
+           INFO shotgun cold meshes 24, equipped draws 19
+           INFO revolver cold meshes 23, equipped draws 19
+           INFO sniper cold meshes 34, equipped draws 31
+           INFO launcher cold meshes 22, equipped draws 20
+           INFO flamer cold meshes 16, equipped draws 15
+           INFO chainsaw cold meshes 17, equipped draws 17
+ok    t38     26 pass   0 fail  129.9s
+
+1 checks: 26 pass, 0 fail

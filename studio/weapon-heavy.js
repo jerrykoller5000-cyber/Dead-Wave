@@ -532,17 +532,43 @@ export function makeLauncherModel(ctx) {
 }
 
 export function makeFlamerModel(ctx) {
-  const { THREE, gunKit, gunBand, gripOutline, finishGun, gunBody, gunDark, gunMid, gunAccent, gunPoly, gunRubber, steelMat, brassMat, fuelRedMat, hazardYellow, gaugeFace, sightDotMat } = ctx;
+  const { THREE, gunKit, gunBand, gripOutline, finishGun, gunBody, gunDark, gunMid, gunAccent, gunPoly, gunRubber, steelMat, brassMat, fuelRedMat, hazardYellow, gaugeFace } = ctx;
   const gun = new THREE.Group();
   const K = gunKit(gun);
+  const fieldCoat = gunBody.clone();
+  gun.userData.partFinish = true;
+  fieldCoat.name = 'flamer field enamel';
+  fieldCoat.userData.weaponFinishRole = 'receiver';
+  fieldCoat.color.setHex(0x58615b);
+  fieldCoat.roughness = .65;
+  fieldCoat.metalness = .16;
+  const tankEnamel = fuelRedMat.clone();
+  tankEnamel.name = 'flamer red enamel';
+  tankEnamel.color.setHex(0x913d32);
+  tankEnamel.roughness = .63;
+  tankEnamel.metalness = .13;
+  const shroudSteel = gunMid.clone();
+  shroudSteel.name = 'flamer satin shroud';
+  shroudSteel.color.setHex(0x626b69);
+  shroudSteel.roughness = .61;
+  shroudSteel.metalness = .32;
+  const sleeve = gunRubber.clone();
+  sleeve.name = 'flamer hose rubber';
+  sleeve.color.setHex(0x363938);
+  sleeve.roughness = .86;
+  sleeve.metalness = 0;
+  const dial = gaugeFace.clone();
+  dial.name = 'flamer dial enamel';
+  dial.color.setHex(0xbabaab);
+  dial.roughness = .76;
   // Angular sheet-metal case and inset blank service panels: no rail or lettering.
-  K.slab([[-0.17, 0.076], [-0.17, -0.028], [-0.152, -0.035], [0.321, -0.035], [0.336, -0.022], [0.336, 0.078], [0.316, 0.095], [-0.142, 0.095]], 0.11, gunBody, { bevel: 0.007 });
-  K.box(0.074, 0.0015, 0.28, gunMid, 0, 0.096, 0.076, 0, 0, 0, null, 0.002); // inset top service skin
+  K.slab([[-0.17, 0.076], [-0.17, -0.028], [-0.152, -0.035], [0.321, -0.035], [0.336, -0.022], [0.336, 0.078], [0.316, 0.095], [-0.142, 0.095]], 0.11, fieldCoat, { bevel: 0.007 });
+  K.box(0.074, 0.0015, 0.28, fieldCoat, 0, 0.096, 0.076, 0, 0, 0, null, 0.002); // inset top service skin
   // Transverse pressed seams catch the light without changing the case silhouette.
-  for (const z of [-0.112, 0.268]) K.box(0.083, 0.0018, 0.003, gunMid, 0, 0.096, z, 0, 0, 0, null, 0.001);
+  for (const z of [-0.112, 0.268]) K.box(0.083, 0.0018, 0.003, fieldCoat, 0, 0.096, z, 0, 0, 0, null, 0.001);
   for (const sx of [-1, 1]) {
     K.slab([[-0.133, -0.022], [0.272, -0.022], [0.284, -0.01], [0.284, 0.055], [0.266, 0.072], [-0.115, 0.072], [-0.133, 0.058]], 0.007, gunDark, { x: sx * 0.0585, bevel: 0.002 });
-    K.slab([[-0.12, -0.013], [0.27, -0.013], [0.273, -0.004], [0.273, 0.052], [0.26, 0.062], [-0.105, 0.062], [-0.12, 0.05]], 0.003, gunMid, { x: sx * 0.0635, bevel: 0.001 });
+    K.slab([[-0.12, -0.013], [0.27, -0.013], [0.273, -0.004], [0.273, 0.052], [0.26, 0.062], [-0.105, 0.062], [-0.12, 0.05]], 0.003, fieldCoat, { x: sx * 0.0635, bevel: 0.001 });
     for (const [z, y] of [[-0.120, 0.050], [0.260, 0.050], [-0.120, -0.010], [0.260, -0.010], [-0.106, 0.047], [0.256, 0.047]]) bolt(K, gunDark, gunAccent, sx * 0.066, y, z, 0.0038);   // GB-297: corner bolts seated on the side panel face
   }
   // GP-20063: the compact tank/trigger body stays at its fitted hand points;
@@ -553,7 +579,7 @@ export function makeFlamerModel(ctx) {
   wand.scale.z = wandZ;
   wand.position.z = 0.29 * (1 - wandZ);
   W.lathe([[0, 0.29], [0.035, 0.29], [0.035, 0.71], [0, 0.71]], gunDark, { y: 0.05, seg: 12 });
-  part(THREE, ventTube(THREE, 0.046, 0.004, 0.29, 6, 6, 0.44, 0.60), gunMid, wand, 0, 0.05, 0.375);
+  part(THREE, ventTube(THREE, 0.046, 0.004, 0.29, 6, 6, 0.44, 0.60), shroudSteel, wand, 0, 0.05, 0.375);
   for (const z of [0.371, 0.667]) W.lathe([[0.034, z - 0.007], [0.05, z - 0.007], [0.052, z - 0.004], [0.052, z + 0.004], [0.034, z + 0.007], [0.034, z - 0.007]], gunAccent, { y: 0.05, seg: 24 });
   // Nozzle: a thick flared bell, the igniter housing under it, the pilot light.
   W.lathe([[0.034, 0.69], [0.038, 0.69], [0.062, 0.786], [0.062, 0.792], [0.054, 0.792], [0.032, 0.705], [0.034, 0.69]], gunAccent, { y: 0.05, seg: 16 });
@@ -584,8 +610,8 @@ export function makeFlamerModel(ctx) {
   const tanks = K.group(0, 0, 0);
   const tankKit = gunKit(tanks);
   const dome = (r, z0, z1) => [[0, z0], [r * 0.55, z0 + r * 0.06], [r * 0.85, z0 + r * 0.2], [r, z0 + r * 0.45], [r, z1 - r * 0.45], [r * 0.85, z1 - r * 0.2], [r * 0.55, z1 - r * 0.06], [0, z1]];
-  tankKit.lathe(dome(0.075, -0.048, 0.205), fuelRedMat, { y: -0.09, seg: 16 });
-  tankKit.lathe(dome(0.056, -0.038, 0.175), fuelRedMat, { x: 0.11, y: -0.05, seg: 14 });
+  tankKit.lathe(dome(0.075, -0.048, 0.205), tankEnamel, { y: -0.09, seg: 16 });
+  tankKit.lathe(dome(0.056, -0.038, 0.175), tankEnamel, { x: 0.11, y: -0.05, seg: 14 });
   for (const z of [0.005, 0.14]) {
     // Upper saddle bracket bolting the tanks into the underside of the receiver housing.
     tankKit.box(0.064, 0.032, 0.024, gunDark, 0.035, -0.036, z, 0, 0, 0, null, 0.003);
@@ -610,19 +636,22 @@ export function makeFlamerModel(ctx) {
     [0.102,0.017,0.197], [0.107,0.046,0.179], [0.085,0.062,0.135],
     [0.077,0.064,-0.098], [0.073,0.061,-0.138], [0.055,0.052,-0.146]
   ].map(p => new THREE.Vector3(...p)));
-  part(THREE, new THREE.TubeGeometry(route, 18, 0.008, 8, false), gunRubber, gun);
+  part(THREE, new THREE.TubeGeometry(route, 18, 0.008, 8, false), sleeve, gun);
   K.cyl(0.013, 0.013, 0.012, brassMat, 0.102, 0.023, 0.197, null, 8, 'y');
   K.cyl(0.013, 0.013, 0.014, brassMat, 0.062, 0.052, -0.146, null, 8, 'x');
   // Rear-facing gauge. Its dial sits on the flat rear bulkhead.
-  K.cyl(0.027, 0.027, 0.014, steelMat, 0, 0.044, -0.176, null, 24);
-  K.disc(0.022, gaugeFace, 0, 0.044, -0.1832, Math.PI, null, 24);
-  for (let i = 0; i < 7; i++) {
-    const a = (i - 3) * Math.PI / 4;
-    rod(THREE, K, [0.016 * Math.sin(a), 0.044 + 0.016 * Math.cos(a), -0.1835],
-      [0.020 * Math.sin(a), 0.044 + 0.020 * Math.cos(a), -0.1835], 0.0008, gunDark);
+  K.cyl(0.027, 0.027, 0.014, shroudSteel, 0, 0.044, -0.176, null, 24);
+  K.disc(0.022, dial, 0, 0.044, -0.1832, Math.PI, null, 24);
+  // Long and short ink strokes keep the small dial legible at the eye.
+  for (let i = -6; i <= 6; i++) {
+    const a = i * Math.PI / 8;
+    const major = i % 2 === 0;
+    const inner = major ? .0155 : .018;
+    rod(THREE, K, [inner * Math.sin(a), .044 + inner * Math.cos(a), -.1835],
+      [.020 * Math.sin(a), .044 + .020 * Math.cos(a), -.1835], major ? .0008 : .0005, gunDark);
   }
   const needle = K.group(0, 0.044, -0.184);
-  rod(THREE, K, [0,0,0], [0,0.015,0], 0.0013, sightDotMat, needle);
+  rod(THREE, K, [0,0,0], [0,0.015,0], 0.0013, tankEnamel, needle);
   K.cyl(0.0024, 0.0024, 0.002, gunDark, 0, 0, -0.001, needle, 10);
   needle.rotation.z = 3 * Math.PI / 4;
   needle.name = 'fuel-gauge-needle';
@@ -658,7 +687,7 @@ export function makeFlamerModel(ctx) {
   K.slab(gunBand([[-0.064, -0.034], [-0.064, -0.064], [-0.078, -0.076], [-0.128, -0.076], [-0.132, -0.062]], 0.007), 0.03, gunDark, { bevel: 0.004 });   // GB-180: a moulded guard, not a wire (pass 4: as wide as a real guard)
   // GB-175: trigger face toward the grip, tip curling forward (the convention Jerry set on the revolver and sniper).
   // GB-180: a solid trigger blade (wide at the root, tapering to the curled tip), not a wire, moved to mid-guard.
-  K.slab([[-0.088, -0.0357], [-0.0927, -0.0484], [-0.092, -0.056], [-0.0875, -0.0615], [-0.0925, -0.0665], [-0.1, -0.06], [-0.1033, -0.0476], [-0.1, -0.0323]], 0.011, gunAccent, { bevel: 0.002 });
+  addTriggerArtwork(gun, K, [[-0.088, -0.0357], [-0.0927, -0.0484], [-0.092, -0.056], [-0.0875, -0.0615], [-0.0925, -0.0665], [-0.1, -0.06], [-0.1033, -0.0476], [-0.1, -0.0323]], 0.011, gunAccent, { bevel: 0.002 });
   // Ergonomic angled front pistol foregrip with upper collar, finger grooves, side panels, and flared baseplate.
   K.box(0.056, 0.018, 0.068, gunDark, 0, -0.034, 0.282, 0, 0, 0, null, 0.003);
   // 36 mm wide, round-ended and 56 mm deep at the support palm. The socket

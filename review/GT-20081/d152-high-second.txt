@@ -1,0 +1,6 @@
+Game-test request f2be9dc1-546f-4e0a-b8d1-c1d71e59201e queued at position 1. Waiting...
+GRANT chatgpt2 GT-20081: starting one game-test command
+PASS pistol 16.67 ms mean presented interval, 16.80 ms p95, 60.0 fps
+PASS uzi 16.67 ms mean presented interval, 16.80 ms p95, 60.0 fps
+PASS shotgun 16.67 ms mean presented interval, 16.80 ms p95, 60.0 fps
+PASS revolver 16.72 ms mean presented interval, 16.80 ms p95, 59.8 fps

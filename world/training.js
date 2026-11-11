@@ -409,11 +409,14 @@ export function buildTrainingGround(T, opts = {}) {
 
 
   // --- the firing line, its stencil, and a lane number past it for each target
-  const line = add(new T.PlaneGeometry(R.maxX - R.minX, 0.26), yellow, 0, 0.012, TRAINING.LINE_Z); line.rotation.x = -Math.PI / 2; line.name = 'firing-line';
-  const lineText = sign('FIRING LINE', 4.2, 0.8, 0, 0.014, TRAINING.LINE_Z - 0.75, 0, { color: '#9c7600', size: 170 });
+  const floorPaintMaterial = m => { m.polygonOffset=true; m.polygonOffsetFactor=-1; m.polygonOffsetUnits=-1; return m; };
+  const line = add(new T.PlaneGeometry(R.maxX - R.minX, 0.26), floorPaintMaterial(std({ color: 0xe8b50c, roughness: 0.5 })), 0, 0.001, TRAINING.LINE_Z); line.rotation.x = -Math.PI / 2; line.name = 'firing-line';
+  const lineText = sign('FIRING LINE', 4.2, 0.8, 0, 0.001, TRAINING.LINE_Z - 0.75, 0, { color: '#9c7600', size: 170 });
+  floorPaintMaterial(lineText.material);
   lineText.rotation.set(-Math.PI / 2, 0, Math.PI);
   TRAINING.LANES.forEach((lx, i) => {
-    const n = sign(String(i + 1), 0.7, 0.7, lx, 0.014, TRAINING.LINE_Z + 1.1, 0, { w: 256, h: 256, color: '#9c7600', size: 200 });
+    const n = sign(String(i + 1), 0.7, 0.7, lx, 0.001, TRAINING.LINE_Z + 1.1, 0, { w: 256, h: 256, color: '#9c7600', size: 200 });
+    floorPaintMaterial(n.material);
     n.rotation.set(-Math.PI / 2, 0, Math.PI);
   });
   // GP-19907: continuous firing bench and upper mesh; the open middle is for weapons, not bodies.
@@ -674,7 +677,7 @@ export function buildTrainingGround(T, opts = {}) {
       if (!rect) continue;
       const x0=rect.x0-O.x,x1=rect.x1-O.x,z0=rect.z0-O.z,z1=rect.z1-O.z;
       const k = pos.length / 3;
-      for (const [x, z] of [[x0, z0], [x1, z0], [x1, z1], [x0, z1]]) { pos.push(x, 0.007, z); uv.push((x + O.x) / PERIOD, -(z + O.z) / PERIOD); }
+      for (const [x, z] of [[x0, z0], [x1, z0], [x1, z1], [x0, z1]]) { pos.push(x, 0.001, z); uv.push((x + O.x) / PERIOD, -(z + O.z) / PERIOD); }
       idx.push(k, k + 2, k + 1, k, k + 3, k + 2);
     }
     const geo = new T.BufferGeometry();
@@ -685,7 +688,7 @@ export function buildTrainingGround(T, opts = {}) {
     const paint = add(geo, std({ color: 0xffffff, map: stripeTex, roughness: 0.62, polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -1 }), 0, 0, 0);
     paint.receiveShadow = true; paint.name = 'training-no-build-paint'; (paint.userData || (paint.userData = {})).isDecal = true;
     // the outer edge: a yellow line along every side of a zone square that meets a buildable square
-    const edgeMat = std({ color: 0xf2c418, roughness: 0.55 });
+    const edgeMat = floorPaintMaterial(std({ color: 0xf2c418, roughness: 0.55 }));
     for (const [gx, gz] of paintCells) {
       const rect=trainingBorderPaintRect(paintGrid,gx,gz,isTrainingBorderCell(paintGrid,gx,gz)?medicalPaint:null,inset);
       if(!rect)continue;
@@ -693,13 +696,14 @@ export function buildTrainingGround(T, opts = {}) {
       for (const [dx, dz] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
         const ngx = gx + dx, ngz = gz + dz;
         if (inZone.has(ngx + ',' + ngz) || ngx < minGX || ngx > maxGX || ngz < minGZ || ngz > maxGZ) continue;
-        const e = add(new T.PlaneGeometry(dx ? Math.min(.1,w) : w, dx ? d : Math.min(.1,d)), edgeMat, cx + dx * Math.max(0,w/2-.05), 0.008, cz + dz * Math.max(0,d/2-.05));
+        const e = add(new T.PlaneGeometry(dx ? Math.min(.1,w) : w, dx ? d : Math.min(.1,d)), edgeMat, cx + dx * Math.max(0,w/2-.05), 0.001, cz + dz * Math.max(0,d/2-.05));
         e.rotation.x = -Math.PI / 2; e.receiveShadow = true;
       }
     }
     // the stencil, on the bare floor just in front of the zone's nearest row, read from the room
     let frontZ = Infinity; for (const [, gz] of gateCells) frontZ = Math.min(frontZ, gc(gz) - O.z - grid / 2);
-    const st = sign((opts.labels && opts.labels.noBuild) || 'NO BUILD ZONE', 5.2, 1.3, gate.x, 0.009, frontZ - 0.85, 0, { color: '#d9a90f', size: 170 });
+    const st = sign((opts.labels && opts.labels.noBuild) || 'NO BUILD ZONE', 5.2, 1.3, gate.x, 0.001, frontZ - 0.85, 0, { color: '#d9a90f', size: 170 });
+    floorPaintMaterial(st.material);
     st.rotation.set(-Math.PI / 2, 0, Math.PI);   // read from the room, as the firing line's stencil is from behind it
   }
 

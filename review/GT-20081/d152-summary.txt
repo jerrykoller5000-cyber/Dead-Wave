@@ -1,0 +1,13 @@
+minigun 22 meshes, 22 draws, 16.67 ms mean, 16.80 ms p95, 60.0 fps
+m4 35 meshes, 31 draws, 16.67 ms mean, 16.80 ms p95, 60.0 fps
+ak 23 meshes, 19 draws, 16.67 ms mean, 16.80 ms p95, 60.0 fps
+aa12 24 meshes, 23 draws, 16.67 ms mean, 16.80 ms p95, 60.0 fps
+pistol 20 meshes, 16 draws, 16.67 ms mean, 16.80 ms p95, 60.0 fps
+uzi 27 meshes, 23 draws, 16.67 ms mean, 16.80 ms p95, 60.0 fps
+shotgun 24 meshes, 19 draws, 16.67 ms mean, 16.80 ms p95, 60.0 fps
+revolver 23 meshes, 19 draws, 16.72 ms mean, 16.80 ms p95, 59.8 fps
+sniper 34 meshes, 31 draws, 16.67 ms mean, 16.80 ms p95, 60.0 fps
+launcher 22 meshes, 20 draws, 16.67 ms mean, 16.80 ms p95, 60.0 fps
+flamer 16 meshes, 15 draws, 16.67 ms mean, 16.80 ms p95, 60.0 fps
+chainsaw 17 meshes, 17 draws, 16.67 ms mean, 16.80 ms p95, 60.0 fps
+PASS twelve native and suite counts match; 287 cold meshes, 255 equipped draws; all twelve High frame samples present

@@ -6,7 +6,7 @@ import {serve} from '../../tools/serve.mjs';
 import {save} from '../GT-20076/save.mjs';
 
 const phase = process.argv[2];
-assert(process.env.DW_GAME_TEST_TOKEN && ['before','after'].includes(phase));
+assert(process.env.DW_GAME_TEST_TOKEN && ['before','after','uv-probe','final'].includes(phase));
 const dir = new URL('./'+phase+'/',import.meta.url);
 await mkdir(dir,{recursive:true});
 const server = await serve(fileURLToPath(new URL('../../',import.meta.url)),0);
@@ -55,12 +55,50 @@ try {
     };
   })()`);
   const frames=[];
-  for (const finish of ['', 'm81']) for (const view of (finish?['held','hip']:['held','hip','aimed'])) for (const light of ['noon','overcast','dusk','night']) {
+  const copiesOnly = phase==='uv-probe' || process.argv.includes('--copies');
+  for (const finish of (copiesOnly?[]:['', 'm81'])) for (const view of (finish?['held','hip']:['held','hip','aimed'])) for (const light of ['noon','overcast','dusk','night']) {
     const frame=await page.evaluate('prepareWood('+[view,light,finish].map(a=>JSON.stringify(a)).join(',')+')');
     frames.push(frame);
     const shot=await page.send('Page.captureScreenshot',{format:'jpeg',quality:94});
     await save(new URL([finish||'factory',view,light].join('-')+'.jpg',dir),Buffer.from(shot.data,'base64'));
   }
-  await save(new URL('frames.json',dir),JSON.stringify(frames,null,2));
-  assert.deepEqual(page.errors,[]);console.log('PASS',phase,frames.length,'KR-7 eye and actual held views');
+  if (!copiesOnly) await save(new URL('frames.json',dir),JSON.stringify(frames,null,2));
+  if (copiesOnly) await page.evaluate("prepareWood('hip','overcast','m81')");
+  if (phase === 'uv-probe' || phase === 'final') {
+    const copies = await page.evaluate(`(async()=>{
+      const ctx=TT.inspectHost().builders.weaponContext(), {makeAkModel}=await import('/studio/weapon-longarms.js');
+      const raw=makeAkModel({...ctx,finishGun:gun=>gun});
+      const arm=TT.armoryDbg.ui().armory;
+      if(!TT.armoryDbg.stored().includes('ak'))arm.buy({id:'wood-review-kr7',kind:'ak'},{store:true});
+      TT.armoryDbg.refreshRack(true);
+      await prepareWood('hip','overcast','m81');
+      const rack=TT.scene.getObjectByName('training-armory').getObjectByName('armoryRack');
+      const copies={art:raw,held:TT.weaponMeshes.ak,eye:TT.viewmodelDbg().gun.root,
+        carry:TT.carryGunCopyDbg('ak'),rack:rack.children.find(o=>o.userData.rackKind==='ak')};
+      const result={};
+      for(const [name,root] of Object.entries(copies)){
+        const coords=[];let parts=0;const paints=new Set();
+        root.traverse(o=>{
+          if(!o.isMesh || o.material?.name!==(name==='eye'?'vm:KR-7 walnut':'KR-7 walnut'))return;
+          const m=o.material, uv=o.geometry.attributes.uv;parts++;
+          if(m.userData.weaponFinishRole||m.userData.gunPaintId||m.map?.name!=='lacquered birch grain and cut edges')
+            throw Error('Finish lost on '+name);
+          paints.add([m.map.name,m.color.getHex(),m.roughness,m.metalness].join(','));
+          for(let i=0;i<uv.count;i++)coords.push(uv.getX(i)+','+uv.getY(i));
+        });
+        const data=new TextEncoder().encode(coords.sort().join(';'));
+        const hash=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',data))).map(n=>n.toString(16).padStart(2,'0')).join('');
+        result[name]={parts,count:coords.length,hash,paints:[...paints]};
+      }
+      return result;
+    })()`);
+    await save(new URL('wood-uv.json',dir),JSON.stringify(copies,null,2));
+    assert.equal(copies.art.parts,4);
+    for(const copy of Object.values(copies)){
+      assert.equal(copy.hash,copies.art.hash,'Authored wood UVs changed on a displayed copy');
+      assert.deepEqual(copy.paints,copies.art.paints);
+    }
+    console.log('PASS authored UVs and factory wood on all five representations:',copies.art.count,'vertices each');
+  }
+  assert.deepEqual(page.errors,[]);if (!copiesOnly) console.log('PASS',phase,frames.length,'KR-7 eye and actual held views');
 }finally{await browser.close();await server.close()}

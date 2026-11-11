@@ -1,0 +1,86 @@
+{
+  "cif": {
+    "noon": {
+      "maxStepM": 0.1,
+      "insideCount": 0,
+      "endStationNdc": {
+        "x": 0,
+        "y": -0.095,
+        "z": 0.964
+      },
+      "endPrompt": ""
+    },
+    "overcast": {
+      "maxStepM": 0.1,
+      "insideCount": 0,
+      "endStationNdc": {
+        "x": 0,
+        "y": -0.095,
+        "z": 0.964
+      },
+      "endPrompt": ""
+    },
+    "dusk": {
+      "maxStepM": 0.1,
+      "insideCount": 0,
+      "endStationNdc": {
+        "x": 0,
+        "y": -0.095,
+        "z": 0.964
+      },
+      "endPrompt": ""
+    },
+    "night": {
+      "maxStepM": 0.1,
+      "insideCount": 0,
+      "endStationNdc": {
+        "x": 0,
+        "y": -0.095,
+        "z": 0.964
+      },
+      "endPrompt": ""
+    }
+  },
+  "armory": {
+    "noon": {
+      "maxStepM": 0.1,
+      "insideCount": 0,
+      "endStationNdc": {
+        "x": 0,
+        "y": -0.083,
+        "z": 0.968
+      },
+      "endPrompt": ""
+    },
+    "overcast": {
+      "maxStepM": 0.1,
+      "insideCount": 0,
+      "endStationNdc": {
+        "x": 0,
+        "y": -0.083,
+        "z": 0.968
+      },
+      "endPrompt": ""
+    },
+    "dusk": {
+      "maxStepM": 0.1,
+      "insideCount": 0,
+      "endStationNdc": {
+        "x": 0,
+        "y": -0.083,
+        "z": 0.968
+      },
+      "endPrompt": ""
+    },
+    "night": {
+      "maxStepM": 0.1,
+      "insideCount": 0,
+      "endStationNdc": {
+        "x": 0,
+        "y": -0.083,
+        "z": 0.968
+      },
+      "endPrompt": ""
+    }
+  }
+}

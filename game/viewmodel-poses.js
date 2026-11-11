@@ -172,7 +172,10 @@ export const VM_POSES = Object.freeze({
   },
   // J60: the bar runs up the middle, with both hands on the two real handles.
   chainsaw: {
-    hip: { at: [0.30, -0.27, -0.60], yaw: 0.75, pitch: 0.40, roll: 0.55 },   // CL-322 (9c): the nose left, the bar and teeth out beside the engine (was [0.26,-0.23,-0.62] 0.25/0.58/0.4);   // CL-322: pitch 0.45 -> 0.58, GP-20063's shorter bar up out of the forearm;   // GB-292 redo: saw low right, nose up so the bar shows above the left forearm; both hands on their handles in view
+    // CC-342 (J121: "the chainsaw sit slightly lower ... Right now it covering the crosshairs"): 10 cm lower and 3 cm right
+    // (was at [0.30, -0.27, -0.60]), drawn at its own view FOV 48 (game/viewmodel.js VIEW_FOV): the crosshair and a margin
+    // round it clear (the saw's nearest point 0.17 of the half-height from the centre; it was on it)
+    hip: { at: [0.33, -0.37, -0.60], yaw: 0.75, pitch: 0.40, roll: 0.55 },   // CL-322 (9c): the nose left, the bar and teeth out beside the engine (was [0.26,-0.23,-0.62] 0.25/0.58/0.4);   // CL-322: pitch 0.45 -> 0.58, GP-20063's shorter bar up out of the forearm;   // GB-292 redo: saw low right, nose up so the bar shows above the left forearm; both hands on their handles in view
     ads: { rear: 0.90, pose: { at: [0.24, -0.26, -0.64], yaw: 0.40, pitch: 0.75, roll: 0.30 } },   // CL-322 (AG-261: the bar hidden down the sights): raised, centred, the bar up the middle (J60)
     kick: { back: 0, up: 0, side: 0, ads: 1 },
     elbows: { r: [0.35, -0.94, -0.10], l: [-0.35, -0.97, -0.24] },
