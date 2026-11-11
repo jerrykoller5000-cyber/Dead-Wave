@@ -1,0 +1,254 @@
+{
+  "info": {
+    "live": null,
+    "spent": [
+      0.01489999983459711,
+      0.07000000029802322,
+      0.01489999983459711
+    ],
+    "independentCounts": {},
+    "inventoryCounts": {},
+    "mouth": null,
+    "ejection": {
+      "source": "sniper",
+      "vertices": 357,
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "roundWasVisible": true
+    },
+    "hook": false
+  },
+  "frames": [
+    {
+      "mode": "eye",
+      "light": "noon",
+      "count": 5,
+      "gun": "sniper",
+      "reloading": true,
+      "magState": "seated",
+      "fraction": 0.74,
+      "clock": {
+        "timer": 0.6110000000000001,
+        "anim": 2.35,
+        "weapon": "sniper"
+      }
+    },
+    {
+      "mode": "eye",
+      "light": "noon",
+      "count": 5,
+      "gun": "sniper",
+      "reloading": true,
+      "magState": "seated",
+      "fraction": 0.1,
+      "clock": {
+        "timer": 2.115,
+        "anim": 2.35,
+        "weapon": "sniper"
+      }
+    },
+    {
+      "mode": "eye",
+      "light": "noon",
+      "count": 5,
+      "gun": "sniper",
+      "reloading": true,
+      "magState": "hand",
+      "fraction": 0.18,
+      "clock": {
+        "timer": 1.9270000000000003,
+        "anim": 2.35,
+        "weapon": "sniper"
+      }
+    },
+    {
+      "mode": "eye",
+      "light": "noon",
+      "count": 5,
+      "gun": "sniper",
+      "reloading": true,
+      "magState": "hand",
+      "fraction": 0.28,
+      "clock": {
+        "timer": 1.692,
+        "anim": 2.35,
+        "weapon": "sniper"
+      }
+    },
+    {
+      "mode": "eye",
+      "light": "noon",
+      "count": 5,
+      "gun": "sniper",
+      "reloading": true,
+      "magState": "hand",
+      "fraction": 0.38,
+      "clock": {
+        "timer": 1.457,
+        "anim": 2.35,
+        "weapon": "sniper"
+      }
+    },
+    {
+      "mode": "eye",
+      "light": "noon",
+      "count": 5,
+      "gun": "sniper",
+      "reloading": true,
+      "magState": "hand",
+      "fraction": 0.48,
+      "clock": {
+        "timer": 1.2220000000000002,
+        "anim": 2.35,
+        "weapon": "sniper"
+      }
+    },
+    {
+      "mode": "eye",
+      "light": "noon",
+      "count": 5,
+      "gun": "sniper",
+      "reloading": true,
+      "magState": "seated",
+      "fraction": 0.58,
+      "clock": {
+        "timer": 0.9870000000000001,
+        "anim": 2.35,
+        "weapon": "sniper"
+      }
+    },
+    {
+      "mode": "eye",
+      "light": "noon",
+      "count": 5,
+      "gun": "sniper",
+      "reloading": true,
+      "magState": "seated",
+      "fraction": 0.68,
+      "clock": {
+        "timer": 0.7519999999999999,
+        "anim": 2.35,
+        "weapon": "sniper"
+      }
+    },
+    {
+      "mode": "eye",
+      "light": "noon",
+      "count": 5,
+      "gun": "sniper",
+      "reloading": true,
+      "magState": "seated",
+      "fraction": 0.78,
+      "clock": {
+        "timer": 0.5169999999999999,
+        "anim": 2.35,
+        "weapon": "sniper"
+      }
+    },
+    {
+      "mode": "eye",
+      "light": "noon",
+      "count": 5,
+      "gun": "sniper",
+      "reloading": true,
+      "magState": "seated",
+      "fraction": 0.88,
+      "clock": {
+        "timer": 0.282,
+        "anim": 2.35,
+        "weapon": "sniper"
+      }
+    },
+    {
+      "mode": "eye",
+      "light": "noon",
+      "count": 5,
+      "gun": "sniper",
+      "reloading": true,
+      "magState": "seated",
+      "fraction": 0.96,
+      "clock": {
+        "timer": 0.09400000000000008,
+        "anim": 2.35,
+        "weapon": "sniper"
+      }
+    },
+    {
+      "mode": "eye",
+      "light": "overcast",
+      "count": 5,
+      "gun": "sniper",
+      "reloading": true,
+      "magState": "seated",
+      "fraction": 0.74,
+      "clock": {
+        "timer": 0.6110000000000001,
+        "anim": 2.35,
+        "weapon": "sniper"
+      }
+    },
+    {
+      "mode": "eye",
+      "light": "dusk",
+      "count": 5,
+      "gun": "sniper",
+      "reloading": true,
+      "magState": "seated",
+      "fraction": 0.74,
+      "clock": {
+        "timer": 0.6110000000000001,
+        "anim": 2.35,
+        "weapon": "sniper"
+      }
+    },
+    {
+      "mode": "eye",
+      "light": "night",
+      "count": 5,
+      "gun": "sniper",
+      "reloading": true,
+      "magState": "seated",
+      "fraction": 0.74,
+      "clock": {
+        "timer": 0.6110000000000001,
+        "anim": 2.35,
+        "weapon": "sniper"
+      }
+    },
+    {
+      "mode": "pair",
+      "light": "noon",
+      "count": 5
+    },
+    {
+      "mode": "pair",
+      "light": "overcast",
+      "count": 5
+    },
+    {
+      "mode": "pair",
+      "light": "dusk",
+      "count": 5
+    },
+    {
+      "mode": "pair",
+      "light": "night",
+      "count": 5
+    },
+    {
+      "mode": "mag",
+      "light": "noon",
+      "count": 0,
+      "topRoundVisible": false
+    },
+    {
+      "mode": "mag",
+      "light": "noon",
+      "count": 5,
+      "topRoundVisible": false
+    }
+  ]
+}

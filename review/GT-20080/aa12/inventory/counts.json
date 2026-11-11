@@ -1,0 +1,74 @@
+{
+  "standard": {
+    "size": 20,
+    "states": [
+      {
+        "f": 0.28,
+        "magState": "hand",
+        "visible": false
+      },
+      {
+        "f": 0.78,
+        "magState": "seated",
+        "visible": false
+      },
+      {
+        "f": 0.96,
+        "magState": "seated",
+        "visible": false
+      }
+    ],
+    "settled": {
+      "remaining": [
+        20
+      ],
+      "visible": true
+    },
+    "top": [
+      0,
+      0.1633218635343573,
+      0
+    ],
+    "pivot": [
+      0,
+      -0.26,
+      0.05
+    ]
+  },
+  "extended": {
+    "size": 30,
+    "states": [
+      {
+        "f": 0.28,
+        "magState": "hand",
+        "visible": false
+      },
+      {
+        "f": 0.78,
+        "magState": "seated",
+        "visible": false
+      },
+      {
+        "f": 0.96,
+        "magState": "seated",
+        "visible": false
+      }
+    ],
+    "settled": {
+      "remaining": [
+        30
+      ],
+      "visible": true
+    },
+    "top": [
+      0,
+      0.1633218635343573,
+      0
+    ],
+    "pivot": [
+      0,
+      -0.26,
+      0.05
+    ]
+  }
+}

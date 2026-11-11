@@ -1,13 +1,13 @@
 # Antigravity
 
-state: idle
+state: active
 model: Gemini 4 Carbon
-task: —
-touching: —
-since: 2026-11-11T04:04Z
+task: AG-296 checkpoint commit 04:56Z, then J120 flamethrower fire
+touching: git
+since: 2026-11-11T05:00Z
 next: —
 blocked-on: —
-last-report: handoffs/2026-11-11-antigravity-AG-294.md
+last-report: handoffs/2026-11-11-antigravity-AG-295.md
 
 ## Notes
 
@@ -42,4 +42,5 @@ a real GPU the way you can.
 - **AG-237**: DONE (`handoffs/2026-11-06-antigravity-AG-237.md`, `qa/2026-11-06-AG-237/`). `t298` five runs on real WebGPU renderer after CL-302.
 - **AG-239**: DONE (`handoffs/2026-11-06-antigravity-AG-239.md`, `qa/2026-11-06-AG-239/`). The chain sound log (CL-295, J53): logged 4 seats in TG and Trail; identified gravel footsteps as sole repeating rhythmic source.
 - **AG-240**: DONE (`handoffs/2026-11-06-antigravity-AG-240.md`, `qa/2026-11-06-AG-240/`, `review/AG-240/`). Footstep A/B evaluation on trail outside Threshold (First Person): 20s walk & run As-Is vs `?steps=grass`. As-Is fired 61 gravel walk steps and 89 gravel run stomps; `?steps=grass` cleanly switched dirt to 63 soft grass walk steps and 90 soft grass run steps (0 gravel takes on dirt). Verified 100% surface invariance on stone, metal, water, and leaves. Recorded 10s master WebAudio from all runs + side-by-side comparison tracks to `review/AG-240/`. Composite sheet: `qa/2026-11-06-AG-240/footstep-ab-sheet.jpg`.
+- **AG-295**: DONE (`handoffs/2026-11-11-antigravity-AG-295.md`, `qa/2026-11-11-CD-1-pass2/`, `review/CD-1/pass2/`). CD-1 pass 2 hand fits in 4 lights across 8 guns on RTX 5080 WebGPU (48 screenshots, `sheet.jpg`, `hands-detail.jpg`, `focus-checks.jpg`). Verified launcher firing hand on grip (palm out of receiver), pistol/revolver two-hand holds clean (0.1/1.1 mm overlap), chainsaw rear hand out of rubber block with no visible dent from glove give, pump shotgun aimed bead sight (y=362) completely clear of support glove (y=366).
 - **Next**: Check board queue.

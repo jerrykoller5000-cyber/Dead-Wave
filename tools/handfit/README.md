@@ -84,4 +84,4 @@ Make those (copies or symlinks), or change the three prefixes.
   field takes ~10 min). The firing hand's contact dents change the firing glove: fit the support hand after the contacts.
 - **Placing on a new grip**: `c4/transfer.js` / `mktransfer.py` (a hand's hold on one grip carried to another).
 - **Contacts**: `c4/cont10.sh <gun-side> <export>` then `node c4/encode9.mjs cont10 studio/hand-contacts.js` (`CLEAR=` in
-  gun/contact.mjs for a margin). Left after pass 2: the revolver's two hands 1.1 mm into each other (tcl334b).
+  gun/contact.mjs for a margin). After pass 2 tcl334b is green (the revolver's two hands 0.5 mm, right at the line).

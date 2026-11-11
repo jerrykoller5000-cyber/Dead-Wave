@@ -1,0 +1,480 @@
+[
+  {
+    "file": "pistol-hip-noon.png",
+    "title": "Issue Sidearm Pistol · Hip · NOON",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "noon",
+    "bytes": 391366
+  },
+  {
+    "file": "pistol-hip-overcast.png",
+    "title": "Issue Sidearm Pistol · Hip · OVERCAST",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "overcast",
+    "bytes": 354459
+  },
+  {
+    "file": "pistol-hip-dusk.png",
+    "title": "Issue Sidearm Pistol · Hip · DUSK",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "dusk",
+    "bytes": 310055
+  },
+  {
+    "file": "pistol-hip-night.png",
+    "title": "Issue Sidearm Pistol · Hip · NIGHT",
+    "weapon": "pistol",
+    "pose": "hip",
+    "light": "night",
+    "bytes": 239464
+  },
+  {
+    "file": "pistol-aimed-noon.png",
+    "title": "Issue Sidearm Pistol · Aimed (ADS) · NOON",
+    "weapon": "pistol",
+    "pose": "aimed",
+    "light": "noon",
+    "bytes": 389969,
+    "sightCheck": {
+      "gunKey": "pistol",
+      "ads": 1,
+      "ndcX": 0,
+      "ndcY": -0.4001
+    }
+  },
+  {
+    "file": "pistol-aimed-night.png",
+    "title": "Issue Sidearm Pistol · Aimed (ADS) · NIGHT",
+    "weapon": "pistol",
+    "pose": "aimed",
+    "light": "night",
+    "bytes": 210377,
+    "sightCheck": {
+      "gunKey": "pistol",
+      "ads": 1,
+      "ndcX": 0,
+      "ndcY": -0.4024
+    }
+  },
+  {
+    "file": "revolver-hip-noon.png",
+    "title": ".44 Magnum Revolver · Hip · NOON",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "noon",
+    "bytes": 410506
+  },
+  {
+    "file": "revolver-hip-overcast.png",
+    "title": ".44 Magnum Revolver · Hip · OVERCAST",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "overcast",
+    "bytes": 377668
+  },
+  {
+    "file": "revolver-hip-dusk.png",
+    "title": ".44 Magnum Revolver · Hip · DUSK",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "dusk",
+    "bytes": 326513
+  },
+  {
+    "file": "revolver-hip-night.png",
+    "title": ".44 Magnum Revolver · Hip · NIGHT",
+    "weapon": "revolver",
+    "pose": "hip",
+    "light": "night",
+    "bytes": 257217
+  },
+  {
+    "file": "revolver-aimed-noon.png",
+    "title": ".44 Magnum Revolver · Aimed (ADS) · NOON",
+    "weapon": "revolver",
+    "pose": "aimed",
+    "light": "noon",
+    "bytes": 396514,
+    "sightCheck": {
+      "gunKey": "revolver",
+      "ads": 1,
+      "ndcX": 0,
+      "ndcY": -0.6456
+    }
+  },
+  {
+    "file": "revolver-aimed-night.png",
+    "title": ".44 Magnum Revolver · Aimed (ADS) · NIGHT",
+    "weapon": "revolver",
+    "pose": "aimed",
+    "light": "night",
+    "bytes": 212382,
+    "sightCheck": {
+      "gunKey": "revolver",
+      "ads": 1,
+      "ndcX": 0,
+      "ndcY": -0.6465
+    }
+  },
+  {
+    "file": "launcher-hip-noon.png",
+    "title": "M79 Grenade Launcher · Hip · NOON",
+    "weapon": "launcher",
+    "pose": "hip",
+    "light": "noon",
+    "bytes": 379898
+  },
+  {
+    "file": "launcher-hip-overcast.png",
+    "title": "M79 Grenade Launcher · Hip · OVERCAST",
+    "weapon": "launcher",
+    "pose": "hip",
+    "light": "overcast",
+    "bytes": 345128
+  },
+  {
+    "file": "launcher-hip-dusk.png",
+    "title": "M79 Grenade Launcher · Hip · DUSK",
+    "weapon": "launcher",
+    "pose": "hip",
+    "light": "dusk",
+    "bytes": 301534
+  },
+  {
+    "file": "launcher-hip-night.png",
+    "title": "M79 Grenade Launcher · Hip · NIGHT",
+    "weapon": "launcher",
+    "pose": "hip",
+    "light": "night",
+    "bytes": 239362
+  },
+  {
+    "file": "launcher-aimed-noon.png",
+    "title": "M79 Grenade Launcher · Aimed (ADS) · NOON",
+    "weapon": "launcher",
+    "pose": "aimed",
+    "light": "noon",
+    "bytes": 340160,
+    "sightCheck": {
+      "gunKey": "launcher",
+      "ads": 1,
+      "ndcX": 0,
+      "ndcY": -0.6943
+    }
+  },
+  {
+    "file": "launcher-aimed-night.png",
+    "title": "M79 Grenade Launcher · Aimed (ADS) · NIGHT",
+    "weapon": "launcher",
+    "pose": "aimed",
+    "light": "night",
+    "bytes": 187626,
+    "sightCheck": {
+      "gunKey": "launcher",
+      "ads": 1,
+      "ndcX": 0,
+      "ndcY": -0.6967
+    }
+  },
+  {
+    "file": "shotgun-hip-noon.png",
+    "title": "Pump-Action Shotgun · Hip · NOON",
+    "weapon": "shotgun",
+    "pose": "hip",
+    "light": "noon",
+    "bytes": 364675
+  },
+  {
+    "file": "shotgun-hip-overcast.png",
+    "title": "Pump-Action Shotgun · Hip · OVERCAST",
+    "weapon": "shotgun",
+    "pose": "hip",
+    "light": "overcast",
+    "bytes": 339121
+  },
+  {
+    "file": "shotgun-hip-dusk.png",
+    "title": "Pump-Action Shotgun · Hip · DUSK",
+    "weapon": "shotgun",
+    "pose": "hip",
+    "light": "dusk",
+    "bytes": 290747
+  },
+  {
+    "file": "shotgun-hip-night.png",
+    "title": "Pump-Action Shotgun · Hip · NIGHT",
+    "weapon": "shotgun",
+    "pose": "hip",
+    "light": "night",
+    "bytes": 226366
+  },
+  {
+    "file": "shotgun-aimed-noon.png",
+    "title": "Pump-Action Shotgun · Aimed (ADS) · NOON",
+    "weapon": "shotgun",
+    "pose": "aimed",
+    "light": "noon",
+    "bytes": 371418,
+    "sightCheck": {
+      "gunKey": "shotgun",
+      "ads": 1,
+      "ndcX": 0,
+      "ndcY": -0.3394
+    }
+  },
+  {
+    "file": "shotgun-aimed-night.png",
+    "title": "Pump-Action Shotgun · Aimed (ADS) · NIGHT",
+    "weapon": "shotgun",
+    "pose": "aimed",
+    "light": "night",
+    "bytes": 204093,
+    "sightCheck": {
+      "gunKey": "shotgun",
+      "ads": 1,
+      "ndcX": 0,
+      "ndcY": -0.3402
+    }
+  },
+  {
+    "file": "chainsaw-hip-noon.png",
+    "title": "Chainsaw · Hip · NOON",
+    "weapon": "chainsaw",
+    "pose": "hip",
+    "light": "noon",
+    "bytes": 433245
+  },
+  {
+    "file": "chainsaw-hip-overcast.png",
+    "title": "Chainsaw · Hip · OVERCAST",
+    "weapon": "chainsaw",
+    "pose": "hip",
+    "light": "overcast",
+    "bytes": 388020
+  },
+  {
+    "file": "chainsaw-hip-dusk.png",
+    "title": "Chainsaw · Hip · DUSK",
+    "weapon": "chainsaw",
+    "pose": "hip",
+    "light": "dusk",
+    "bytes": 350745
+  },
+  {
+    "file": "chainsaw-hip-night.png",
+    "title": "Chainsaw · Hip · NIGHT",
+    "weapon": "chainsaw",
+    "pose": "hip",
+    "light": "night",
+    "bytes": 273500
+  },
+  {
+    "file": "chainsaw-aimed-noon.png",
+    "title": "Chainsaw · Aimed (ADS) · NOON",
+    "weapon": "chainsaw",
+    "pose": "aimed",
+    "light": "noon",
+    "bytes": 412749,
+    "sightCheck": {
+      "gunKey": "chainsaw",
+      "ads": 1,
+      "ndcX": 0.2673,
+      "ndcY": -0.0569
+    }
+  },
+  {
+    "file": "chainsaw-aimed-night.png",
+    "title": "Chainsaw · Aimed (ADS) · NIGHT",
+    "weapon": "chainsaw",
+    "pose": "aimed",
+    "light": "night",
+    "bytes": 248700,
+    "sightCheck": {
+      "gunKey": "chainsaw",
+      "ads": 1,
+      "ndcX": 0.2673,
+      "ndcY": -0.0569
+    }
+  },
+  {
+    "file": "m4-hip-noon.png",
+    "title": "GW-4 Carbine · Hip · NOON",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "noon",
+    "bytes": 382768
+  },
+  {
+    "file": "m4-hip-overcast.png",
+    "title": "GW-4 Carbine · Hip · OVERCAST",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "overcast",
+    "bytes": 349750
+  },
+  {
+    "file": "m4-hip-dusk.png",
+    "title": "GW-4 Carbine · Hip · DUSK",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "dusk",
+    "bytes": 307392
+  },
+  {
+    "file": "m4-hip-night.png",
+    "title": "GW-4 Carbine · Hip · NIGHT",
+    "weapon": "m4",
+    "pose": "hip",
+    "light": "night",
+    "bytes": 242578
+  },
+  {
+    "file": "m4-aimed-noon.png",
+    "title": "GW-4 Carbine · Aimed (ADS) · NOON",
+    "weapon": "m4",
+    "pose": "aimed",
+    "light": "noon",
+    "bytes": 342977,
+    "sightCheck": {
+      "gunKey": "m4",
+      "ads": 1,
+      "ndcX": 0,
+      "ndcY": -0.8148
+    }
+  },
+  {
+    "file": "m4-aimed-night.png",
+    "title": "GW-4 Carbine · Aimed (ADS) · NIGHT",
+    "weapon": "m4",
+    "pose": "aimed",
+    "light": "night",
+    "bytes": 193372,
+    "sightCheck": {
+      "gunKey": "m4",
+      "ads": 1,
+      "ndcX": 0,
+      "ndcY": -0.8175
+    }
+  },
+  {
+    "file": "ak-hip-noon.png",
+    "title": "KR-7 Rifle · Hip · NOON",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "noon",
+    "bytes": 381577
+  },
+  {
+    "file": "ak-hip-overcast.png",
+    "title": "KR-7 Rifle · Hip · OVERCAST",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "overcast",
+    "bytes": 351563
+  },
+  {
+    "file": "ak-hip-dusk.png",
+    "title": "KR-7 Rifle · Hip · DUSK",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "dusk",
+    "bytes": 306920
+  },
+  {
+    "file": "ak-hip-night.png",
+    "title": "KR-7 Rifle · Hip · NIGHT",
+    "weapon": "ak",
+    "pose": "hip",
+    "light": "night",
+    "bytes": 237036
+  },
+  {
+    "file": "ak-aimed-noon.png",
+    "title": "KR-7 Rifle · Aimed (ADS) · NOON",
+    "weapon": "ak",
+    "pose": "aimed",
+    "light": "noon",
+    "bytes": 335569,
+    "sightCheck": {
+      "gunKey": "ak",
+      "ads": 1,
+      "ndcX": 0,
+      "ndcY": -0.4909
+    }
+  },
+  {
+    "file": "ak-aimed-night.png",
+    "title": "KR-7 Rifle · Aimed (ADS) · NIGHT",
+    "weapon": "ak",
+    "pose": "aimed",
+    "light": "night",
+    "bytes": 186645,
+    "sightCheck": {
+      "gunKey": "ak",
+      "ads": 1,
+      "ndcX": 0,
+      "ndcY": -0.4917
+    }
+  },
+  {
+    "file": "sniper-hip-noon.png",
+    "title": "Marksman Sniper Rifle · Hip · NOON",
+    "weapon": "sniper",
+    "pose": "hip",
+    "light": "noon",
+    "bytes": 376058
+  },
+  {
+    "file": "sniper-hip-overcast.png",
+    "title": "Marksman Sniper Rifle · Hip · OVERCAST",
+    "weapon": "sniper",
+    "pose": "hip",
+    "light": "overcast",
+    "bytes": 349702
+  },
+  {
+    "file": "sniper-hip-dusk.png",
+    "title": "Marksman Sniper Rifle · Hip · DUSK",
+    "weapon": "sniper",
+    "pose": "hip",
+    "light": "dusk",
+    "bytes": 301979
+  },
+  {
+    "file": "sniper-hip-night.png",
+    "title": "Marksman Sniper Rifle · Hip · NIGHT",
+    "weapon": "sniper",
+    "pose": "hip",
+    "light": "night",
+    "bytes": 240309
+  },
+  {
+    "file": "sniper-aimed-noon.png",
+    "title": "Marksman Sniper Rifle · Aimed (ADS) · NOON",
+    "weapon": "sniper",
+    "pose": "aimed",
+    "light": "noon",
+    "bytes": 336775,
+    "sightCheck": {
+      "gunKey": "sniper",
+      "ads": 1,
+      "scopeActive": true
+    }
+  },
+  {
+    "file": "sniper-aimed-night.png",
+    "title": "Marksman Sniper Rifle · Aimed (ADS) · NIGHT",
+    "weapon": "sniper",
+    "pose": "aimed",
+    "light": "night",
+    "bytes": 170685,
+    "sightCheck": {
+      "gunKey": "sniper",
+      "ads": 1,
+      "scopeActive": true
+    }
+  }
+]

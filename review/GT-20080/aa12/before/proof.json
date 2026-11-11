@@ -1,0 +1,187 @@
+{
+  "info": {
+    "live": [
+      0.022600000724196434,
+      0.06300000101327896,
+      0.022600000724196434
+    ],
+    "spent": [
+      0.022600000724196434,
+      0.07000000029802322,
+      0.022600000724196434
+    ],
+    "independentCounts": {},
+    "inventoryCounts": {},
+    "mouth": null,
+    "ejection": {
+      "source": "aa12",
+      "vertices": 425,
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "hook": false
+  },
+  "frames": [
+    {
+      "mode": "eye",
+      "light": "noon",
+      "count": 20,
+      "gun": "aa12",
+      "reloading": true,
+      "magState": "hand",
+      "fraction": 0.74
+    },
+    {
+      "mode": "eye",
+      "light": "noon",
+      "count": 20,
+      "gun": "aa12",
+      "reloading": true,
+      "magState": "seated",
+      "fraction": 0.1
+    },
+    {
+      "mode": "eye",
+      "light": "noon",
+      "count": 20,
+      "gun": "aa12",
+      "reloading": true,
+      "magState": "hand",
+      "fraction": 0.18
+    },
+    {
+      "mode": "eye",
+      "light": "noon",
+      "count": 20,
+      "gun": "aa12",
+      "reloading": true,
+      "magState": "hand",
+      "fraction": 0.28
+    },
+    {
+      "mode": "eye",
+      "light": "noon",
+      "count": 20,
+      "gun": "aa12",
+      "reloading": true,
+      "magState": "hand",
+      "fraction": 0.38
+    },
+    {
+      "mode": "eye",
+      "light": "noon",
+      "count": 20,
+      "gun": "aa12",
+      "reloading": true,
+      "magState": "pouch",
+      "fraction": 0.48
+    },
+    {
+      "mode": "eye",
+      "light": "noon",
+      "count": 20,
+      "gun": "aa12",
+      "reloading": true,
+      "magState": "hand",
+      "fraction": 0.58
+    },
+    {
+      "mode": "eye",
+      "light": "noon",
+      "count": 20,
+      "gun": "aa12",
+      "reloading": true,
+      "magState": "hand",
+      "fraction": 0.68
+    },
+    {
+      "mode": "eye",
+      "light": "noon",
+      "count": 20,
+      "gun": "aa12",
+      "reloading": true,
+      "magState": "hand",
+      "fraction": 0.78
+    },
+    {
+      "mode": "eye",
+      "light": "noon",
+      "count": 20,
+      "gun": "aa12",
+      "reloading": true,
+      "magState": "seated",
+      "fraction": 0.88
+    },
+    {
+      "mode": "eye",
+      "light": "noon",
+      "count": 20,
+      "gun": "aa12",
+      "reloading": true,
+      "magState": "seated",
+      "fraction": 0.96
+    },
+    {
+      "mode": "eye",
+      "light": "overcast",
+      "count": 20,
+      "gun": "aa12",
+      "reloading": true,
+      "magState": "hand",
+      "fraction": 0.74
+    },
+    {
+      "mode": "eye",
+      "light": "dusk",
+      "count": 20,
+      "gun": "aa12",
+      "reloading": true,
+      "magState": "hand",
+      "fraction": 0.74
+    },
+    {
+      "mode": "eye",
+      "light": "night",
+      "count": 20,
+      "gun": "aa12",
+      "reloading": true,
+      "magState": "hand",
+      "fraction": 0.74
+    },
+    {
+      "mode": "pair",
+      "light": "noon",
+      "count": 20
+    },
+    {
+      "mode": "pair",
+      "light": "overcast",
+      "count": 20
+    },
+    {
+      "mode": "pair",
+      "light": "dusk",
+      "count": 20
+    },
+    {
+      "mode": "pair",
+      "light": "night",
+      "count": 20
+    },
+    {
+      "mode": "mag",
+      "light": "noon",
+      "count": 0,
+      "topRoundVisible": false
+    },
+    {
+      "mode": "mag",
+      "light": "noon",
+      "count": 20,
+      "topRoundVisible": false
+    }
+  ]
+}

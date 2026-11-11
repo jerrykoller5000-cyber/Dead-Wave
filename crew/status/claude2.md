@@ -2,20 +2,21 @@
 
 state: active
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: CB-243 the full suite on the current tree, reds by owner: the reds run resumes on a fresh copy
-touching: tools/tests/run-all.mjs (FAIL lines inline)
-since: 2026-11-11T02:49Z
+task: CB-303 fakethree: TubeGeometry follows its path (Frenet frames) for Claude 3's tcc341
+touching: tools/tests/fakethree.mjs (TubeGeometry)
+since: 2026-11-11T04:06Z
 next: CB-243 The full suite on the current tree, reds by owner (in your c
 blocked-on: —
 last-report: handoffs/2026-11-11-claude2-CB-299.md
 
 ## Notes
 
-### Where it stands (claude2, 11 Nov 02:55Z, the 00:05Z session)
-- Done and checked out tonight: CB-295 (CE-2 view fields), CB-296 (bench --fp issues the gun), CB-289 (b) (arm limits, core/body-limits.js), CB-294 (ammo types; tcb248 --review), CB-297 (J118 revolver pull), CB-299 (rack copy hides reload-only parts). Handoffs in handoffs/2026-11-11-claude2-*.md.
-- CB-243: reds run on the PC tree of 02:52Z in the cloud (/home/claude/cb9, runs/run4.log, 119 tests, FAIL lines now inline). Reds so far (PC tree 01:58Z): t106b, tag289, tcb248 (birdshot at 16 m lands nothing: pre-existing, old test fails too), tcl301, tcl334b/c/d; tcb294b's pistol case 19 mm (ChatGPT 2 asked). Fixed: tools/tests/fakethree.mjs lacked ShapeUtils (every test dead 00:01-00:22Z).
-- CB-291 next: core/body-limits.js in my cloud (/home/claude/w) has BODY_LIMITS for every joint + tools/tests/tcb291.js (audit, not on the PC yet); first audit: shoulders' twist and the spine read out of range, needs a rest-pose calibration before any clamp.
-- Cloud copy: tar in the PC shell (see Working notes) PLUS assets/intro/*.js, assets/soundtrack/*.json (music.json: tcb293 and the music tests need it); --exclude of a dir also drops explicitly named files under it. Set DW_CHECK_MS=420000 in the cloud.
+### Where it stands (claude2, 11 Nov 04:55Z, the 00:05Z session)
+- Done tonight (handoffs/2026-11-11-claude2-*.md): CB-295, CB-296, CB-289 (b), CB-294 (tcb248 --review), CB-297 (J118), CB-299; CB-303 (fakethree TubeGeometry = three's) is on the PC, checked in, its browser check pending.
+- Written, not on the PC yet (patches in /mnt/user-data/outputs in my cloud, copies in Claude outputs/): CB-301 (paired magazine art + the incoming magazine's count mid-reload, patch300.py/tcb301; ids shifted: CB-300 was taken), CB-302 (the forend worked through the ammo change's unload, patch301.py/tcb302), CB-291's trunk/leg hold (Claude outputs/cb291/patch291.py + body-limits.draft.js + tcb291.draft.js; CLAUDE DIRECTOR chose (b); carrierClearance call asked of Claude 3).
+- CB-243 reds run (cloud /home/claude/cb9, runs/run4.log, the 02:52Z tree): 72/119 at 04:54Z. Reds with owners so far: t106b (music.json kits: CLAUDE DIRECTOR), tag289 (its ./vendor import path: Antigravity, asked), tcl301 (FP akimbo view guns), tcl334b/c/d (hand through hand/gun: Claude 1 CD-1), tgb273, tgt20076 (missing fitted optic pistol rmr: ChatGPT 2), t17 (build reticle storey pick: green at 00:15Z, red now: to bisect), t38 (470 meshes), t39, t180, t184, t213/t217/t221 (GB-era gun geometry vs ChatGPT 2's models), t225, t262; cloud-only (no gh audio): t60 t61 t73 t172 t178. Green again: tcb248, tcb293, tcl275b/d, tcb289/294/294b/295/297/299.
+- Next on wake: read runs/run4.log end, the chained batch (/home/claude/chain.sh: runs/audit-raw.log and cb10/runs/batch5.log), land CB-301/302 if green, calibrate and land CB-291, write CB-243's reds handoff (reds by owner), land tools/tests/run-all.mjs (FAIL lines inline, DW_CHECK_MS) - already on the PC.
+- Cloud copy recipe: Working notes' tar PLUS assets/intro/*.js *.css and assets/soundtrack/*.json *.mid (an --exclude of a dir drops files named under it); DW_CHECK_MS=420000 in the cloud.
 
 ### Who you are (D-137, Jerry 10 Nov 2026)
 You are **Claude 2**, the crew's second Claude: a Claude task of your own, on Claude Sonnet 5.5 (Extra). You took

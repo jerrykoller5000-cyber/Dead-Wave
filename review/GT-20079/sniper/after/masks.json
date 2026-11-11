@@ -1,0 +1,46 @@
+{
+  "held": {
+    "coated": 12,
+    "factory": 20
+  },
+  "eye": {
+    "coated": 12,
+    "factory": 20
+  },
+  "barrel": {
+    "bare": 1
+  },
+  "lampGlass": {
+    "bare": 1
+  },
+  "trigger": {
+    "bare": 1
+  },
+  "magRelease": {
+    "bare": 1
+  },
+  "magazine": {
+    "bare": 8
+  },
+  "bolt": {
+    "bare": 11
+  },
+  "round": {
+    "bare": 2
+  },
+  "ocular lens": {
+    "bare": 1
+  },
+  "50 mm objective lens": {
+    "bare": 1
+  },
+  "left parallax and illumination dial": {
+    "bare": 1
+  },
+  "exposed ZeroStop elevation turret": {
+    "bare": 1
+  },
+  "right capped windage turret": {
+    "bare": 1
+  }
+}

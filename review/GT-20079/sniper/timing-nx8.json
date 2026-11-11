@@ -1,0 +1,421 @@
+{
+  "id": "sniper",
+  "optic": "nx8",
+  "readyMs": 11032,
+  "states": {
+    "factory": {
+      "fps": 60,
+      "low": 53.8,
+      "samples": [
+        {
+          "eye": "sniper",
+          "optic": "nx8",
+          "finish": "",
+          "gfx": "high",
+          "fps": 60.05652378582914,
+          "low": 58.13953482327815,
+          "worst": 17.200000017881393,
+          "hitches": 19,
+          "frames": 51
+        },
+        {
+          "eye": "sniper",
+          "optic": "nx8",
+          "finish": "",
+          "gfx": "high",
+          "fps": 61.28805385237555,
+          "low": 59.17159761226685,
+          "worst": 16.900000005960464,
+          "hitches": 20,
+          "frames": 61
+        },
+        {
+          "eye": "sniper",
+          "optic": "nx8",
+          "finish": "",
+          "gfx": "high",
+          "fps": 59.99999999999999,
+          "low": 57.471264348129,
+          "worst": 17.400000005960464,
+          "hitches": 20,
+          "frames": 60
+        },
+        {
+          "eye": "sniper",
+          "optic": "nx8",
+          "finish": "",
+          "gfx": "high",
+          "fps": 59.99999999999999,
+          "low": 54.64480879656423,
+          "worst": 18.299999982118607,
+          "hitches": 20,
+          "frames": 60
+        },
+        {
+          "eye": "sniper",
+          "optic": "nx8",
+          "finish": "",
+          "gfx": "high",
+          "fps": 59.99999999999999,
+          "low": 59.17159761226685,
+          "worst": 16.900000005960464,
+          "hitches": 20,
+          "frames": 60
+        },
+        {
+          "eye": "sniper",
+          "optic": "nx8",
+          "finish": "",
+          "gfx": "high",
+          "fps": 59.988002400235075,
+          "low": 59.17159761226685,
+          "worst": 16.900000005960464,
+          "hitches": 20,
+          "frames": 60
+        },
+        {
+          "eye": "sniper",
+          "optic": "nx8",
+          "finish": "",
+          "gfx": "high",
+          "fps": 59.9760095958042,
+          "low": 58.8235294117647,
+          "worst": 17,
+          "hitches": 20,
+          "frames": 60
+        },
+        {
+          "eye": "sniper",
+          "optic": "nx8",
+          "finish": "",
+          "gfx": "high",
+          "fps": 59.99999999999999,
+          "low": 32.25806451612903,
+          "worst": 31,
+          "hitches": 20,
+          "frames": 60
+        },
+        {
+          "eye": "sniper",
+          "optic": "nx8",
+          "finish": "",
+          "gfx": "high",
+          "fps": 60.01800540054696,
+          "low": 59.52380948157267,
+          "worst": 16.80000001192093,
+          "hitches": 20,
+          "frames": 60
+        },
+        {
+          "eye": "sniper",
+          "optic": "nx8",
+          "finish": "",
+          "gfx": "high",
+          "fps": 59.99999999999999,
+          "low": 59.17159761226685,
+          "worst": 16.900000005960464,
+          "hitches": 20,
+          "frames": 60
+        },
+        {
+          "eye": "sniper",
+          "optic": "nx8",
+          "finish": "",
+          "gfx": "high",
+          "fps": 60.012002399764555,
+          "low": 40.160642560667625,
+          "worst": 24.900000005960464,
+          "hitches": 20,
+          "frames": 60
+        },
+        {
+          "eye": "sniper",
+          "optic": "nx8",
+          "finish": "",
+          "gfx": "high",
+          "fps": 59.99999999999999,
+          "low": 57.80346816826179,
+          "worst": 17.30000001192093,
+          "hitches": 20,
+          "frames": 60
+        }
+      ]
+    },
+    "m81": {
+      "fps": 59.5,
+      "low": 50.5,
+      "samples": [
+        {
+          "eye": "sniper",
+          "optic": "nx8",
+          "finish": "m81",
+          "gfx": "high",
+          "fps": 59.99999999999999,
+          "low": 59.17159761226685,
+          "worst": 16.900000005960464,
+          "hitches": 22,
+          "frames": 60
+        },
+        {
+          "eye": "sniper",
+          "optic": "nx8",
+          "finish": "m81",
+          "gfx": "high",
+          "fps": 60.002033966525694,
+          "low": 53.76344087744382,
+          "worst": 18.599999994039536,
+          "hitches": 22,
+          "frames": 59
+        },
+        {
+          "eye": "sniper",
+          "optic": "nx8",
+          "finish": "m81",
+          "gfx": "high",
+          "fps": 60.00600059970231,
+          "low": 51.02040817878088,
+          "worst": 19.599999994039536,
+          "hitches": 22,
+          "frames": 60
+        },
+        {
+          "eye": "sniper",
+          "optic": "nx8",
+          "finish": "m81",
+          "gfx": "high",
+          "fps": 59.982005399452724,
+          "low": 48.78048780487805,
+          "worst": 20.5,
+          "hitches": 22,
+          "frames": 60
+        },
+        {
+          "eye": "sniper",
+          "optic": "nx8",
+          "finish": "m81",
+          "gfx": "high",
+          "fps": 60.01800540054696,
+          "low": 54.94505498104374,
+          "worst": 18.19999998807907,
+          "hitches": 22,
+          "frames": 60
+        },
+        {
+          "eye": "sniper",
+          "optic": "nx8",
+          "finish": "m81",
+          "gfx": "high",
+          "fps": 59.99999999999999,
+          "low": 55.86592176910688,
+          "worst": 17.900000005960464,
+          "hitches": 22,
+          "frames": 60
+        },
+        {
+          "eye": "sniper",
+          "optic": "nx8",
+          "finish": "m81",
+          "gfx": "high",
+          "fps": 59.99999999999999,
+          "low": 52.08333328482695,
+          "worst": 19.200000017881393,
+          "hitches": 22,
+          "frames": 60
+        },
+        {
+          "eye": "sniper",
+          "optic": "nx8",
+          "finish": "m81",
+          "gfx": "high",
+          "fps": 60.00600059970231,
+          "low": 58.13953492401612,
+          "worst": 17.19999998807907,
+          "hitches": 22,
+          "frames": 60
+        },
+        {
+          "eye": "sniper",
+          "optic": "nx8",
+          "finish": "m81",
+          "gfx": "high",
+          "fps": 56.01680504051049,
+          "low": 35.46099288531589,
+          "worst": 28.200000017881393,
+          "hitches": 22,
+          "frames": 56
+        },
+        {
+          "eye": "sniper",
+          "optic": "nx8",
+          "finish": "m81",
+          "gfx": "high",
+          "fps": 58.99999999999999,
+          "low": 38.610038601153136,
+          "worst": 25.900000005960464,
+          "hitches": 22,
+          "frames": 59
+        },
+        {
+          "eye": "sniper",
+          "optic": "nx8",
+          "finish": "m81",
+          "gfx": "high",
+          "fps": 60.00600059970231,
+          "low": 52.08333328482695,
+          "worst": 19.200000017881393,
+          "hitches": 22,
+          "frames": 60
+        },
+        {
+          "eye": "sniper",
+          "optic": "nx8",
+          "finish": "m81",
+          "gfx": "high",
+          "fps": 59.99999999999999,
+          "low": 58.13953492401612,
+          "worst": 17.19999998807907,
+          "hitches": 22,
+          "frames": 60
+        }
+      ]
+    },
+    "restored": {
+      "fps": 60,
+      "low": 59.2,
+      "samples": [
+        {
+          "eye": "sniper",
+          "optic": "nx8",
+          "finish": "",
+          "gfx": "high",
+          "fps": 59.99400060029756,
+          "low": 58.47953208220698,
+          "worst": 17.100000023841858,
+          "hitches": 22,
+          "frames": 60
+        },
+        {
+          "eye": "sniper",
+          "optic": "nx8",
+          "finish": "",
+          "gfx": "high",
+          "fps": 59.99999999999999,
+          "low": 59.17159761226685,
+          "worst": 16.900000005960464,
+          "hitches": 22,
+          "frames": 60
+        },
+        {
+          "eye": "sniper",
+          "optic": "nx8",
+          "finish": "",
+          "gfx": "high",
+          "fps": 60.03001500750375,
+          "low": 58.8235294117647,
+          "worst": 17,
+          "hitches": 22,
+          "frames": 60
+        },
+        {
+          "eye": "sniper",
+          "optic": "nx8",
+          "finish": "",
+          "gfx": "high",
+          "fps": 60.00600059970231,
+          "low": 59.52380948157267,
+          "worst": 16.80000001192093,
+          "hitches": 22,
+          "frames": 60
+        },
+        {
+          "eye": "sniper",
+          "optic": "nx8",
+          "finish": "",
+          "gfx": "high",
+          "fps": 59.99999999999999,
+          "low": 59.171597716613064,
+          "worst": 16.899999976158142,
+          "hitches": 22,
+          "frames": 60
+        },
+        {
+          "eye": "sniper",
+          "optic": "nx8",
+          "finish": "",
+          "gfx": "high",
+          "fps": 60.00600059970231,
+          "low": 59.52380948157267,
+          "worst": 16.80000001192093,
+          "hitches": 22,
+          "frames": 60
+        },
+        {
+          "eye": "sniper",
+          "optic": "nx8",
+          "finish": "",
+          "gfx": "high",
+          "fps": 59.99400060029756,
+          "low": 58.13953492401612,
+          "worst": 17.19999998807907,
+          "hitches": 22,
+          "frames": 60
+        },
+        {
+          "eye": "sniper",
+          "optic": "nx8",
+          "finish": "",
+          "gfx": "high",
+          "fps": 60.01800540233617,
+          "low": 59.52380948157267,
+          "worst": 16.80000001192093,
+          "hitches": 22,
+          "frames": 60
+        },
+        {
+          "eye": "sniper",
+          "optic": "nx8",
+          "finish": "",
+          "gfx": "high",
+          "fps": 59.99593247879031,
+          "low": 59.52380948157267,
+          "worst": 16.80000001192093,
+          "hitches": 22,
+          "frames": 59
+        },
+        {
+          "eye": "sniper",
+          "optic": "nx8",
+          "finish": "",
+          "gfx": "high",
+          "fps": 60.00600059970231,
+          "low": 59.17159761226685,
+          "worst": 16.900000005960464,
+          "hitches": 22,
+          "frames": 60
+        },
+        {
+          "eye": "sniper",
+          "optic": "nx8",
+          "finish": "",
+          "gfx": "high",
+          "fps": 60.006000601490804,
+          "low": 59.17159761226685,
+          "worst": 16.900000005960464,
+          "hitches": 22,
+          "frames": 60
+        },
+        {
+          "eye": "sniper",
+          "optic": "nx8",
+          "finish": "",
+          "gfx": "high",
+          "fps": 60.00600059970231,
+          "low": 59.17159761226685,
+          "worst": 16.900000005960464,
+          "hitches": 22,
+          "frames": 60
+        }
+      ]
+    }
+  }
+}

@@ -11,18 +11,20 @@ last-report: handoffs/2026-11-11-claude3-CC-341.md
 
 ## Notes
 
-### Where things stand (11 Nov ~02:55Z, end of session 3: context nearly full, needs a new session)
-- CC-343 done (checked out --done): FP body faces the view (index.html updateMouseAimBody, one line); tcc343. Asked the
-  Director about the eye inside the range console at 0.4 m pitched -60 (my pick: a solid for the console).
-- CC-341 part 1 checked out NOT done (handoffs/2026-11-11-claude3-CC-341.md):
-  - LIVE on the PC: studio/marine-body.js arm(): CUFF_FWD=.02, the sleeve's end centred on the turned wrist, over the glove's
-    cuff (before copy: Claude outputs/CC-341/marine-body.before-cc341.js); tools/tests/tcc341.js (new, ~130 s).
-  - OWED: the after pictures of the wrists (before-wrist1/2.png are there; the cloud camera timed out). Spots: in a --match
-    camera, eval the wrist script (toggle to armed, 60 stepFrames, flightHold(false) after!), shot --cam/--look --time noon.
-  - OPEN (tcc341 red on them): (1) a headgear part 27.7 mm inside the balaclava at the side of the head, every pose (merged
-    mesh: ear protection or harness, studio/marine-headgear.js / makeMarine's helmet); (2) the sleeve through the plate
-    carrier's flank at the armpit and hip when running or crouching (18-27 mm).
-  - Waiting on the Director: boots vs trousers (my pick (a): keep the blousing; the test has ['boots','trousers']).
+### Where things stand (11 Nov ~04:50Z, session 4)
+- CC-341 in work (checked in). Cloud copy: /home/claude/tt (from _DELETE ME/claude3-cloud-copy-CC-341b.tgz, 03:15Z).
+  - LIVE on the PC already: tools/tests/tcc341.js v2 (skips the fake-three balaclava hem by name: fakethree's TubeGeometry is
+    flat rings, the hem read inside out = the old 27.7 mm), studio/marine-lab/lab.js (build opt joints:{...} from the game,
+    shot at:'wristR', tx/tz). Wrists before|after (lab, game joints): Claude outputs/CC-341/sheet-CC-341-wrists-lab.jpg.
+  - IN THE CLOUD ONLY (not yet on the PC): tcc341 v3 = bends the live cloth before measuring (liveCloth bends in
+    onBeforeRender; the test page never draws, so sleeves/trousers sat in bind pose: big find); marine-body.js: seatW
+    smooth01(-.14,.0) (was -.1,.045: trouser tops through the belt when the thigh lifts, now clean), carrierClearance(ud) +
+    carrierIntrusion export (for Claude 2's CB-291; told him to hold: elbows are clear once the cloth is bent).
+  - Left: the support arm's sleeve through the chest radio (radioPart, x -.158) in every kit pose. Asked the Director:
+    my pick (b) the radio to the back panel upper left. Then the +x side: sleeve through the cummerbund webbing in kit run.
+  - Pictures: lab = /home/claude/... (cloud). The in-game soft camera loads in 7 min and times out on reload: prefer the lab
+    with the game's joints (probe: tools/tests/tcc3probe.js prints 'INFO joints <pose>'; /home/claude/poses.json).
+  - Checkout: --review (tcc341 changed twice: the stand-in tube skip, the cloth bend). Ready to commit list in the handoff.
 - Then CC-342 (after CC-341).
 
 ### This VM's quirks (session 3)

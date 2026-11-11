@@ -278,7 +278,7 @@ export function buildMarineBody(T, {root, put, rmesh: roundedMesh, cyl, part, dr
     // (shinShaft), so the cuff stays round the boot when the ankle bends. The knee has room in it, as trousers do.
     {
       const bones=[lowerBody,legG,knee,ankle];
-      const seatW=(y)=>smooth01(-.1,.045,y), kneeW=(y)=>smooth01(.05,-.05,y), shinW=(y)=>smooth01(-.04,.05,y);
+      const seatW=(y)=>smooth01(-.14,.0,y), kneeW=(y)=>smooth01(.05,-.05,y), shinW=(y)=>smooth01(-.04,.05,y);
       // [lowerBody, thigh, shin, foot] from a vertex's height in the thigh's, the knee's and the ankle's frames
       const w4=(L)=>{const p=seatW(L[1][1]),k=kneeW(L[2][1]),s=shinW(L[3][1]);return [p*(1-k),(1-p)*(1-k),k*s,k*(1-s)];};
       const thighR=[[.06,.088,.098,0,.007],[0,.097,.106,0,.007],[-.0657,.099,.108,0,.008],[-.1315,.095,.104,side*.004,.011],[-.2104,.088,.097,side*.003,.014],[-.2761,.081,.089,0,.016],[-.3287,.077,.086,0,.018],[-.355,.076,.085,0,.02]];
@@ -392,6 +392,9 @@ export function buildMarineBody(T, {root, put, rmesh: roundedMesh, cyl, part, dr
     for(let row=0;row<3;row++)v(rmesh(.008,.015,.2,webMat,.002),side*.185,.844+row*.04,0);
   }
   torsoSeam([[-.151,.876,.171],[-.154,1.055,.171],[-.10,1.126,.171],[.10,1.126,.171],[.154,1.055,.171],[.151,.876,.171]],carrierW,'vest',.002);
+  // CC-341 (J128): the carrier's outline round the torso, for carrierClearance below: the plates (.35 wide, a .008 bevel
+  // grown outside, .17 off the middle front and back) and the cummerbund's side panels (outer face .182), y as fitted.
+  torsoG.userData.carrierShape={rx:.183,cz:(.173-.170)/2,rz:(.173+.170)/2,y:[torsoY(.8055)-TORSO_Y,torsoY(1.1405)-TORSO_Y]};
   for(let row=0;row<4;row++){
     const y=.836+row*.054;
     v(rmesh(.31,.016,.008,webMat,.003),0,y,.174);
@@ -407,19 +410,24 @@ export function buildMarineBody(T, {root, put, rmesh: roundedMesh, cyl, part, dr
   }
   v(rmesh(.114,.055,.022,carrierPouchW,.008),.043,1.067,.18);
   v(rmesh(.113,.011,.023,webMat,.003),.043,1.09,.182);
-  radioPart(v(rmesh(.06,.112,.032,nvgMat,.009),-.158,1.055,.19));
-  radioPart(v(rmesh(.045,.015,.006,strapMat,.002),-.158,1.081,.209));
-  for(let k=0;k<4;k++)radioPart(v(rmesh(.026,.003,.005,webMat,.001),-.158,1.068-k*.008,.21));
-  for(const x of[-.173,-.149])radioPart(v(cyl(.006,.006,.014,nvgMat,8),x,1.117,.19));
-  radioPart(torsoSeam([[-.143,1.116,.19],[-.113,1.159,.144],[-.08,1.181,.113],[-.063,1.142,.144],[-.067,1.115,.186]],nvgMat,'vest',.003));
-  radioPart(v(rmesh(.022,.035,.012,nvgMat,.004),-.065,1.105,.189));
-  const antenna=radioPart(v(cyl(.0035,.0035,.17,nvgMat,5),-.158,1.185,.19));antenna.rotation.z=.1;
+  // CC-341 (J128): the radio and its push-to-talk came in from the plate's top outer corner (x -.158), where the support
+  // arm's sleeve crosses the chest to the grip in every hold (23-30 mm through it); now beside the admin pouch, the
+  // push-to-talk between them, the antenna leaning out over the shoulder. The ID patch moved to the right chest.
+  const RX=-.07;
+  radioPart(v(rmesh(.06,.112,.032,nvgMat,.009),RX,1.055,.19));
+  radioPart(v(rmesh(.045,.015,.006,strapMat,.002),RX,1.081,.209));
+  for(let k=0;k<4;k++)radioPart(v(rmesh(.026,.003,.005,webMat,.001),RX,1.068-k*.008,.21));
+  for(const x of[RX-.015,RX+.009])radioPart(v(cyl(.006,.006,.014,nvgMat,8),x,1.117,.19));
+  radioPart(torsoSeam([[RX+.015,1.116,.19],[RX+.024,1.15,.16],[-.034,1.16,.15],[-.028,1.14,.17],[-.027,1.122,.186]],nvgMat,'vest',.003));
+  radioPart(v(rmesh(.022,.035,.012,nvgMat,.004),-.027,1.105,.189));
+  const antenna=radioPart(v(cyl(.0035,.0035,.17,nvgMat,5),RX-.015,1.185,.19));antenna.rotation.z=.42;antenna.position.x-=.035;
   v(rmesh(.092,.025,.019,webMat,.006),0,1.138,-.179);
   const patchRed=new T.MeshStandardMaterial({color:0xb03030,roughness:.9});
-  for(const [fn,z] of [[at,.132],[v,.178]]) {
-    fn(rmesh(.083,.047,.009,patchMat,.003),-.084,1.092,z);
-    fn(rmesh(.029,.024,.006,patchInk,.002),-.108,1.1,z+.007);
-    fn(rmesh(.045,.009,.006,patchRed,.002),-.073,1.081,z+.007);
+  // (the shirt's own patch stays; the carrier's moved to the right chest with the radio, CC-341: x +.219 from the old place)
+  for(const [fn,z,dx,dy] of [[at,.132,0,0],[v,.178,.219,-.082]]) {
+    fn(rmesh(.083,.047,.009,patchMat,.003),-.084+dx,1.092+dy,z);
+    fn(rmesh(.029,.024,.006,patchInk,.002),-.108+dx,1.1+dy,z+.007);
+    fn(rmesh(.045,.009,.006,patchRed,.002),-.073+dx,1.081+dy,z+.007);
   }
   // Lower-profile pack hugs the back plate; shoulder webbing follows the top.
   at(form([[-.148,.09,.04],[-.13,.122,.058],[-.10,.127,.06],[.065,.133,.063],[.112,.124,.06],[.145,.104,.05],[.159,.058,.029],[.162,0,0]],packW,'soft-pack',16),0,.992,-.227);
@@ -475,6 +483,7 @@ export function buildMarineBody(T, {root, put, rmesh: roundedMesh, cyl, part, dr
   // the arm a man's girth in his blouse: the sleeve's rings at ARM_GIRTH of what they were above the forearm's end, the
   // wrist (where the hand and its glove, Claude's, take over) as it was.
   const SHOULDER_X=.235, ARM_GIRTH=.84, FORE_GIRTH=.87;   // (and SHOULDER_Y, above)
+  torsoG.userData.elbowRadius=.0595*ARM_GIRTH;   // CC-341: the sleeve's widest at the elbow (capRings at -.27), for carrierClearance
   const girth=(rings,k,keepBelow=-1)=>rings.map(([y,rx,rz,cx=0,cz=0])=>y<keepBelow?[y,rx,rz,cx,cz]:[y,rx*k,rz*k,cx*k,cz*k]);
   function arm(side) {
     const armG=new T.Group();armG.position.set(side*SHOULDER_X,SHOULDER_Y-TORSO_Y,.02);torsoG.add(armG);
@@ -574,4 +583,26 @@ export function buildMarineBody(T, {root, put, rmesh: roundedMesh, cyl, part, dr
   const gripR=new T.Group();gripR.position.set(-.01,-.26,.12);elbowRG.add(gripR);
   const weaponMount=new T.Group();weaponMount.position.set(.12826,.15981,-.10022);weaponMount.rotation.set(1.23359,.24103,.08361);gripR.add(weaponMount);
   return {torsoPivotY:TORSO_Y,hipY:HIP_Y,lowerBody,hip,hipGrip,gearParts,legLG,legRG,torsoG,armLG,armRG,elbowLG,elbowRG,wristLG,wristRG,gripL,gripR,weaponMount,patches};
+}
+
+// CC-341 (J128, D-140; for CB-291's third-person arm IK, Claude 2): with the plate carrier on, the region the elbow's point
+// must stay out of, so the sleeve never passes through the carrier's side (the cummerbund) or its plates' edges. null when
+// the carrier is off. Torso space (ud.torsoG's own frame, the body's units: +y up, +z forward). Per arm (r: armRG's side,
+// x > 0; l: armLG's, x < 0; each side value is the sign of x): an ellipse round the torso, centre [0, cz], radii [rx, rz], over
+// y [y0, y1], and the margin to keep the elbow's point outside it: the sleeve's radius at the elbow plus 3 mm of cloth.
+// The IK keeps the elbow at least `margin` outside the ellipse (choose the pole, lift the swing) before it reaches, so the
+// hands stay on the gun. The same numbers the carrier is built from (buildMarineBody), so they move with it.
+export function carrierClearance(ud){
+  const t=ud&&ud.torsoG,sh=t&&t.userData.carrierShape,gp=ud&&ud.gearParts;
+  if(!sh||!gp||!(gp.vest||[]).some((m)=>m.visible))return null;
+  const margin=(t.userData.elbowRadius||.05)+.003;
+  const one=(side)=>({side,centre:[0,sh.cz],radii:[sh.rx,sh.rz],y:sh.y.slice(),margin});
+  return {r:one(1),l:one(-1)};
+}
+// The same test the IK needs, for the checks and the review: how far (body units) a torso-space point lies inside the
+// ellipse grown by the margin (0 when it is clear or outside the y range).
+export function carrierIntrusion(c,p){
+  if(!c||p.y<c.y[0]||p.y>c.y[1])return 0;
+  const ax=c.radii[0]+c.margin,az=c.radii[1]+c.margin,dx=p.x-c.centre[0],dz=p.z-c.centre[1],k=Math.hypot(dx/ax,dz/az);
+  return k>=1?0:(1-k)*Math.min(ax,az);
 }

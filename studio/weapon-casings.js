@@ -107,7 +107,7 @@ function shotgunShell(THREE, load, spent) {
 export function roundGeometry(THREE, weapon, load) {
   if (weapon === 'shotgun') return shotgunShell(THREE, load, false);
   if (weapon === 'aa12') return shotgunShell(THREE, 'birdshot', false);
-  if (weapon === 'ak' || weapon === 'revolver' || weapon === 'uzi') return metallicCartridge(THREE, weapon, true);
+  if (weapon === 'ak' || weapon === 'revolver' || weapon === 'uzi' || weapon === 'sniper') return metallicCartridge(THREE, weapon, true);
   return null;
 }
 
@@ -162,7 +162,7 @@ function metallicCartridge(THREE, kind, live) {
     const y = position.getY(i) * 1000 + centre;
     const r = Math.hypot(position.getX(i), position.getZ(i)) * 1000;
     if (live && y > length + .05) colors.push(.58, .22, .105);
-    else if ((kind === 'ak' || kind === 'revolver') && !live && y >= length*.19 && (r <= mouth-wall+.001 || (Math.abs(y-length*.2)<.001 && r<=body*.77))) colors.push(.15,.095,.048);
+    else if ((kind === 'ak' || kind === 'revolver' || kind === 'sniper') && !live && y >= length*.19 && (r <= mouth-wall+.001 || (Math.abs(y-length*.2)<.001 && r<=body*.77))) colors.push(.15,.095,.048);
     else if (kind === 'launcher') colors.push(0.78, 0.75, 0.70);
     else if (y < 0.4 && r <= primer * 1.06) colors.push(0.73, 0.63, 0.49);
     else colors.push(0.88, 0.60, 0.27);

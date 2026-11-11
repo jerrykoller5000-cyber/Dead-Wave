@@ -1,0 +1,378 @@
+{
+  "info": {
+    "live": [
+      0.022600000724196434,
+      0.06300000101327896,
+      0.022600000724196434
+    ],
+    "spent": [
+      0.022600000724196434,
+      0.07000000029802322,
+      0.022600000724196434
+    ],
+    "independentCounts": {},
+    "inventoryCounts": {
+      "0": false,
+      "1": true,
+      "20": true
+    },
+    "mouth": {
+      "oldTop": 0.1785,
+      "emptyTop": 0.1765,
+      "loadedTop": 0.1785040592369063,
+      "mmPerLocal": 744.2928930366118
+    },
+    "ejection": {
+      "source": "aa12",
+      "vertices": 425,
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "hook": true
+  },
+  "frames": [
+    {
+      "mode": "eye",
+      "light": "noon",
+      "count": 20,
+      "gun": "aa12",
+      "reloading": true,
+      "magState": "hand",
+      "fraction": 0.74,
+      "clock": {
+        "timer": 0.676,
+        "anim": 2.6,
+        "weapon": "aa12"
+      }
+    },
+    {
+      "mode": "eye",
+      "light": "noon",
+      "count": 20,
+      "gun": "aa12",
+      "reloading": true,
+      "magState": "seated",
+      "fraction": 0.1,
+      "clock": {
+        "timer": 2.3400000000000003,
+        "anim": 2.6,
+        "weapon": "aa12"
+      }
+    },
+    {
+      "mode": "eye",
+      "light": "noon",
+      "count": 20,
+      "gun": "aa12",
+      "reloading": true,
+      "magState": "hand",
+      "fraction": 0.18,
+      "clock": {
+        "timer": 2.132,
+        "anim": 2.6,
+        "weapon": "aa12"
+      }
+    },
+    {
+      "mode": "eye",
+      "light": "noon",
+      "count": 20,
+      "gun": "aa12",
+      "reloading": true,
+      "magState": "hand",
+      "fraction": 0.28,
+      "clock": {
+        "timer": 1.8719999999999999,
+        "anim": 2.6,
+        "weapon": "aa12"
+      }
+    },
+    {
+      "mode": "eye",
+      "light": "noon",
+      "count": 20,
+      "gun": "aa12",
+      "reloading": true,
+      "magState": "hand",
+      "fraction": 0.38,
+      "clock": {
+        "timer": 1.612,
+        "anim": 2.6,
+        "weapon": "aa12"
+      }
+    },
+    {
+      "mode": "eye",
+      "light": "noon",
+      "count": 20,
+      "gun": "aa12",
+      "reloading": true,
+      "magState": "pouch",
+      "fraction": 0.48,
+      "clock": {
+        "timer": 1.352,
+        "anim": 2.6,
+        "weapon": "aa12"
+      }
+    },
+    {
+      "mode": "eye",
+      "light": "noon",
+      "count": 20,
+      "gun": "aa12",
+      "reloading": true,
+      "magState": "hand",
+      "fraction": 0.58,
+      "clock": {
+        "timer": 1.092,
+        "anim": 2.6,
+        "weapon": "aa12"
+      }
+    },
+    {
+      "mode": "eye",
+      "light": "noon",
+      "count": 20,
+      "gun": "aa12",
+      "reloading": true,
+      "magState": "hand",
+      "fraction": 0.68,
+      "clock": {
+        "timer": 0.8319999999999999,
+        "anim": 2.6,
+        "weapon": "aa12"
+      }
+    },
+    {
+      "mode": "eye",
+      "light": "noon",
+      "count": 20,
+      "gun": "aa12",
+      "reloading": true,
+      "magState": "hand",
+      "fraction": 0.78,
+      "clock": {
+        "timer": 0.572,
+        "anim": 2.6,
+        "weapon": "aa12"
+      }
+    },
+    {
+      "mode": "eye",
+      "light": "noon",
+      "count": 20,
+      "gun": "aa12",
+      "reloading": true,
+      "magState": "seated",
+      "fraction": 0.88,
+      "clock": {
+        "timer": 0.312,
+        "anim": 2.6,
+        "weapon": "aa12"
+      }
+    },
+    {
+      "mode": "eye",
+      "light": "noon",
+      "count": 20,
+      "gun": "aa12",
+      "reloading": true,
+      "magState": "seated",
+      "fraction": 0.96,
+      "clock": {
+        "timer": 0.10400000000000009,
+        "anim": 2.6,
+        "weapon": "aa12"
+      }
+    },
+    {
+      "mode": "eye",
+      "light": "overcast",
+      "count": 20,
+      "gun": "aa12",
+      "reloading": true,
+      "magState": "hand",
+      "fraction": 0.74,
+      "clock": {
+        "timer": 0.676,
+        "anim": 2.6,
+        "weapon": "aa12"
+      }
+    },
+    {
+      "mode": "eye",
+      "light": "dusk",
+      "count": 20,
+      "gun": "aa12",
+      "reloading": true,
+      "magState": "hand",
+      "fraction": 0.74,
+      "clock": {
+        "timer": 0.676,
+        "anim": 2.6,
+        "weapon": "aa12"
+      }
+    },
+    {
+      "mode": "eye",
+      "light": "night",
+      "count": 20,
+      "gun": "aa12",
+      "reloading": true,
+      "magState": "hand",
+      "fraction": 0.74,
+      "clock": {
+        "timer": 0.676,
+        "anim": 2.6,
+        "weapon": "aa12"
+      }
+    },
+    {
+      "mode": "eye",
+      "light": "noon",
+      "count": 20,
+      "gun": "aa12",
+      "reloading": true,
+      "magState": "hand",
+      "fraction": 0.58,
+      "clock": {
+        "timer": 1.092,
+        "anim": 2.6,
+        "weapon": "aa12"
+      }
+    },
+    {
+      "mode": "eye",
+      "light": "noon",
+      "count": 20,
+      "gun": "aa12",
+      "reloading": true,
+      "magState": "hand",
+      "fraction": 0.78,
+      "clock": {
+        "timer": 0.572,
+        "anim": 2.6,
+        "weapon": "aa12"
+      }
+    },
+    {
+      "mode": "eye",
+      "light": "overcast",
+      "count": 20,
+      "gun": "aa12",
+      "reloading": true,
+      "magState": "hand",
+      "fraction": 0.58,
+      "clock": {
+        "timer": 1.092,
+        "anim": 2.6,
+        "weapon": "aa12"
+      }
+    },
+    {
+      "mode": "eye",
+      "light": "overcast",
+      "count": 20,
+      "gun": "aa12",
+      "reloading": true,
+      "magState": "hand",
+      "fraction": 0.78,
+      "clock": {
+        "timer": 0.572,
+        "anim": 2.6,
+        "weapon": "aa12"
+      }
+    },
+    {
+      "mode": "eye",
+      "light": "dusk",
+      "count": 20,
+      "gun": "aa12",
+      "reloading": true,
+      "magState": "hand",
+      "fraction": 0.58,
+      "clock": {
+        "timer": 1.092,
+        "anim": 2.6,
+        "weapon": "aa12"
+      }
+    },
+    {
+      "mode": "eye",
+      "light": "dusk",
+      "count": 20,
+      "gun": "aa12",
+      "reloading": true,
+      "magState": "hand",
+      "fraction": 0.78,
+      "clock": {
+        "timer": 0.572,
+        "anim": 2.6,
+        "weapon": "aa12"
+      }
+    },
+    {
+      "mode": "eye",
+      "light": "night",
+      "count": 20,
+      "gun": "aa12",
+      "reloading": true,
+      "magState": "hand",
+      "fraction": 0.58,
+      "clock": {
+        "timer": 1.092,
+        "anim": 2.6,
+        "weapon": "aa12"
+      }
+    },
+    {
+      "mode": "eye",
+      "light": "night",
+      "count": 20,
+      "gun": "aa12",
+      "reloading": true,
+      "magState": "hand",
+      "fraction": 0.78,
+      "clock": {
+        "timer": 0.572,
+        "anim": 2.6,
+        "weapon": "aa12"
+      }
+    },
+    {
+      "mode": "pair",
+      "light": "noon",
+      "count": 20
+    },
+    {
+      "mode": "pair",
+      "light": "overcast",
+      "count": 20
+    },
+    {
+      "mode": "pair",
+      "light": "dusk",
+      "count": 20
+    },
+    {
+      "mode": "pair",
+      "light": "night",
+      "count": 20
+    },
+    {
+      "mode": "mag",
+      "light": "noon",
+      "count": 0,
+      "topRoundVisible": false
+    },
+    {
+      "mode": "mag",
+      "light": "noon",
+      "count": 20,
+      "topRoundVisible": true
+    }
+  ]
+}

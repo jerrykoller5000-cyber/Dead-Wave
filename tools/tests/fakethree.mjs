@@ -783,12 +783,37 @@ export const ShapeGeometry = geoClass((shapes) => {
   return g;
 });
 // CU-82: the HQ's damaged terminal and the balaclava's hem (ui/hq-damaged-terminal.js, ui/marine-face.js) sweep
-// tubes along a curve. A ring round each point of the path, not turned to follow it: the checks never read its shape.
+// tubes along a curve. CB-303 (Claude 3, tcc341): each ring is turned square to the path as three's is (Frenet frames,
+// parallel transported, as three.core.js computeFrenetFrames), so a test can read a tube's shape.
+function tubeFrames(path, n) {
+  const P = [], T = [], N = [], B = [];
+  const pt = (v) => { v = Math.max(0, Math.min(1, v)); const o = path && path.getPointAt ? path.getPointAt(v, new Vector3()) : path && path.getPoint ? path.getPoint(v, new Vector3()) : new Vector3(); return [o.x, o.y, o.z]; };   // by arc length, as three
+  const sub = (a, b) => [a[0] - b[0], a[1] - b[1], a[2] - b[2]], len = (a) => Math.hypot(a[0], a[1], a[2]) || 1;
+  const nrm = (a) => { const l = len(a); return [a[0] / l, a[1] / l, a[2] / l]; }, dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+  const cross = (a, b) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+  const rot = (v, k, t) => { const c = Math.cos(t), s2 = Math.sin(t), kv = cross(k, v), d = dot(k, v); return [v[0] * c + kv[0] * s2 + k[0] * d * (1 - c), v[1] * c + kv[1] * s2 + k[1] * d * (1 - c), v[2] * c + kv[2] * s2 + k[2] * d * (1 - c)]; };
+  for (let i = 0; i <= n; i++) {
+    const v = i / n, e = 1e-4;
+    P.push(pt(v));
+    T.push(path && path.getTangentAt ? (() => { const t = path.getTangentAt(Math.max(0, Math.min(1, v)), new Vector3()); return nrm([t.x, t.y, t.z]); })() : nrm(sub(pt(v + e), pt(v - e))));
+  }
+  // the first normal: square to the tangent, toward its smallest axis (as three)
+  const t0 = T[0], ax = Math.abs(t0[0]) <= Math.abs(t0[1]) && Math.abs(t0[0]) <= Math.abs(t0[2]) ? [1, 0, 0] : Math.abs(t0[1]) <= Math.abs(t0[2]) ? [0, 1, 0] : [0, 0, 1];
+  const v0 = nrm(cross(t0, ax));
+  N.push(nrm(cross(t0, v0))); B.push(nrm(cross(t0, N[0])));
+  for (let i = 1; i <= n; i++) {
+    let nn = N[i - 1];
+    const k = cross(T[i - 1], T[i]), kl = Math.hypot(k[0], k[1], k[2]);
+    if (kl > Number.EPSILON) { const th = Math.acos(Math.max(-1, Math.min(1, dot(T[i - 1], T[i])))); nn = rot(nn, nrm(k), th); }
+    N.push(nn); B.push(cross(T[i], nn));
+  }
+  return { P, N, B };
+}
 export const TubeGeometry = geoClass((path, tubularSegments = 64, radius = 1, radialSegments = 8) => {
-  const q = new Vector3();
-  return gridGeo(Math.max(3, radialSegments | 0), Math.max(1, tubularSegments | 0), (u, v) => {
-    const p = path && path.getPoint ? path.getPoint(v, q) : q.set(0, 0, 0);
-    const a = u * Math.PI * 2;
-    return [p.x + Math.cos(a) * radius, p.y + Math.sin(a) * radius, p.z];
+  const n = Math.max(1, tubularSegments | 0), F = tubeFrames(path, n);
+  return gridGeo(Math.max(3, radialSegments | 0), n, (u, v) => {
+    const i = Math.max(0, Math.min(n, Math.round(v * n))), P = F.P[i], N = F.N[i], B = F.B[i];
+    const a = u * Math.PI * 2, s2 = Math.sin(a), c = -Math.cos(a);   // three's ring: cos is negated
+    return [P[0] + radius * (c * N[0] + s2 * B[0]), P[1] + radius * (c * N[1] + s2 * B[1]), P[2] + radius * (c * N[2] + s2 * B[2])];
   });
 });

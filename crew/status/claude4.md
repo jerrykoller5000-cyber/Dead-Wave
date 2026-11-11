@@ -2,12 +2,12 @@
 
 state: active
 model: Claude Opus 5.5
-task: CD-1 CD-1 pass 2: launcher firing hand, two-hand holds, chainsaw export, shotgun bead, AG-286 notes; the wrist's radial/ulnar sign (poseArm)
-touching: game/viewmodel-fit.js, studio/hand-contacts.js, tools/handfit/, game/viewmodel.js (poseArm wrist)
-since: 2026-11-11T00:38Z
-next: CD-1 (was CL-334) J101: a new, detailed hand (first and third per
+task: CD-1 pass 2 fixes
+touching: game/viewmodel-fit.js, studio/hand-contacts.js, tools/handfit/
+since: 2026-11-11T05:00Z
+next: CD-4 (was CL-342) J129 (Jerry, 10 Nov): the weapons' second round
 blocked-on: —
-last-report: handoffs/2026-11-10-claude4-CD-1.md
+last-report: handoffs/2026-11-11-claude4-CD-1.md
 
 ## Notes
 
@@ -54,26 +54,18 @@ KR-7, then the rest. For each gun: fit, test (tcl334b/c/d), then ask Antigravity
   grip's own axis and side (studio/weapon-heavy.js ~366, 36 x 48 mm) or ask ChatGPT 2 (GT-20078) where the grip sits now.
 - Next: the launcher's firing hand; the two-hand holds (c4/augment.py: the firing hand as a part); then CD-2.
 
-### CD-1 pass 2 (11 Nov ~00-02Z, in progress; the cloud copy has it, nothing merged to the PC yet)
-- Why hands came out turned: the game rolls each hand round its grip channel toward its elbow (twistToward, up to 0.6 rad):
-  a fit's roll is the elbow's unless the twist is at its limit. tools/handfit/c4/applyoff.py applies a solve without the
-  page (the page OOMs iterating: ~4 GB, the cloud's limit ~6.2 GB: run exports alone, nothing beside them) and carries the
-  twist when it's at its limit (ROLL=1 holds a wanted roll there). drawn.py: hand as drawn vs VM_FIT (needs info.gunMw:
-  c4/g9-steps.json exports with it and only the parts near the hands). augment2.py: the firing glove made closed.
-  keepout.py / keepout_sight.py: keep-out boxes (trigger guard openings; the shotgun's sight line). transfer.js/mktransfer.py.
-- Done in the cloud: launcher r 17.7 -> 0.65 mm (set from the pistol's hold on the same grip moulding, then solved);
-  pistol r lower, middle finger out of the guard (Claude 5's CE-2 note), index straight for VM_TRIGGER; shotgun r clean
-  (the revised stock's grip is closed now: was 10.7 mm); shotgun l under the sight line aimed (bead; ChatGPT 2's note);
-  revolver r up/forward for the trigger (Claude 5's note); chainsaw r: really 15-20 mm in its rubber rear grip block (the
-  test missed it by order: tcl334d takes it after the flamer), refit round the block. poseArm radial/ulnar sign fixed
-  (Claude 2's proof) in the cloud copy only.
-- 02:45Z: also refitted in the cloud: pistol l (round the new firing glove), m4 r+l (the revised GW-4: firing thumb was 14 mm
-  in, support palm 8 mm), ak r and sniper r and revolver r with the index pad pulled to the trigger face (c4/fitT.sh, tgt.py,
-  kojson.py; gun/gungrip3.mjs has KOGRID/TGT/NOX/XT): KR-7 0.8 mm, GW-4 0.5, sniper 5, revolver 10 (was 29). Breacher and
-  shotgun trigger-reach fits came out worse: kept. Cloud state: /home/claude/ex*/ (gone with the box), VM_FIT in the cloud copy.
-- Left: revolver l round its new firing hand; contacts (cont9.sh/encode9.mjs) for every refitted hand; tests;
-  merge to the PC (VM_FIT hands only, hand-contacts, the poseArm 2-line change by a read-modify-write); sheet; tell Claude 5
-  (re-solve VM_TRIGGER on pistol, revolver, shotgun, launcher, chainsaw). Then AG-286's two notes, CD-4 (aimed eye, stock).
+### CD-1 pass 2 DONE (11 Nov 04:19Z, handoffs/2026-11-11-claude4-CD-1.md, sent to CLAUDE DIRECTOR with --review for poseArm)
+- On the PC: game/viewmodel-fit.js, studio/hand-contacts.js, game/viewmodel.js (poseArm sign only), tools/handfit/ (README
+  section "Claude 4's pass 2": the twist, applyoff/drawn/fixroll, fitT trigger reach, keep-outs, augment2, cont10), sheets in
+  Claude outputs/CD-1/pass2/. Cloud tests: tcl334, tcl334b/c/d, t240 green (revolver two hands 0.5 mm, right at the line).
+- Open: Antigravity's four lights of pass 2 (requested); Claude 5 re-solves VM_TRIGGER on the refitted firing hands
+  (Breacher and pump shotgun reach not improved: ask him what's left); chainsaw ring finger 3.3 mm press (glove's give).
+- Next: CD-4 (the eye pass): AG-286's notes (rifle support hands hidden at the hip; the revolver's grip below the hand),
+  CLAUDE DIRECTOR's (the stock fills the aimed view on the shotgun and KR-7: the aimed eye vs a cheek weld), ChatGPT 2's
+  (Wasp aimed view). tools/handfit/c4/vmfit-pass2-wip.js is a superseded copy: ready to delete (needs Jerry's OK).
+- **Context nearly full, needs a new session** (11 Nov 04:20Z). The cloud copy dies with this session: make it again (tar
+  from the PC into _DELETE ME/, exclude the soundtrack, ui/audio, assets/intro media; take crew/notes.mjs and the newest
+  tools/tests/fakethree.mjs).
 
 ### Jerry's rules for this work
 - J126 (D-138): no part of the hand through another, no part of the hand through any part of a weapon, no part of the

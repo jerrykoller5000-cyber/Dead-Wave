@@ -1,0 +1,421 @@
+{
+  "id": "aa12",
+  "optic": "rmr",
+  "readyMs": 12407,
+  "states": {
+    "factory": {
+      "fps": 60,
+      "low": 56.6,
+      "samples": [
+        {
+          "eye": "aa12",
+          "optic": "rmr",
+          "finish": "",
+          "gfx": "high",
+          "fps": 59.99999999999999,
+          "low": 59.17159761226685,
+          "worst": 16.900000005960464,
+          "hitches": 20,
+          "frames": 51
+        },
+        {
+          "eye": "aa12",
+          "optic": "rmr",
+          "finish": "",
+          "gfx": "high",
+          "fps": 60.86427267304558,
+          "low": 58.8235294117647,
+          "worst": 17,
+          "hitches": 21,
+          "frames": 60
+        },
+        {
+          "eye": "aa12",
+          "optic": "rmr",
+          "finish": "",
+          "gfx": "high",
+          "fps": 60.00600059970231,
+          "low": 59.17159761226685,
+          "worst": 16.900000005960464,
+          "hitches": 21,
+          "frames": 60
+        },
+        {
+          "eye": "aa12",
+          "optic": "rmr",
+          "finish": "",
+          "gfx": "high",
+          "fps": 59.99400060029756,
+          "low": 59.17159761226685,
+          "worst": 16.900000005960464,
+          "hitches": 21,
+          "frames": 60
+        },
+        {
+          "eye": "aa12",
+          "optic": "rmr",
+          "finish": "",
+          "gfx": "high",
+          "fps": 60.00600059970231,
+          "low": 58.8235294117647,
+          "worst": 17,
+          "hitches": 21,
+          "frames": 60
+        },
+        {
+          "eye": "aa12",
+          "optic": "rmr",
+          "finish": "",
+          "gfx": "high",
+          "fps": 60.00600059970231,
+          "low": 59.17159761226685,
+          "worst": 16.900000005960464,
+          "hitches": 21,
+          "frames": 60
+        },
+        {
+          "eye": "aa12",
+          "optic": "rmr",
+          "finish": "",
+          "gfx": "high",
+          "fps": 60.006000601490804,
+          "low": 58.8235294117647,
+          "worst": 17,
+          "hitches": 21,
+          "frames": 60
+        },
+        {
+          "eye": "aa12",
+          "optic": "rmr",
+          "finish": "",
+          "gfx": "high",
+          "fps": 59.99593247879031,
+          "low": 58.8235294117647,
+          "worst": 17,
+          "hitches": 21,
+          "frames": 59
+        },
+        {
+          "eye": "aa12",
+          "optic": "rmr",
+          "finish": "",
+          "gfx": "high",
+          "fps": 60.03602161260972,
+          "low": 58.13953492401612,
+          "worst": 17.19999998807907,
+          "hitches": 21,
+          "frames": 60
+        },
+        {
+          "eye": "aa12",
+          "optic": "rmr",
+          "finish": "",
+          "gfx": "high",
+          "fps": 59.99999999999999,
+          "low": 53.763440791299985,
+          "worst": 18.600000023841858,
+          "hitches": 21,
+          "frames": 60
+        },
+        {
+          "eye": "aa12",
+          "optic": "rmr",
+          "finish": "",
+          "gfx": "high",
+          "fps": 59.982005399452724,
+          "low": 58.8235294117647,
+          "worst": 17,
+          "hitches": 21,
+          "frames": 60
+        },
+        {
+          "eye": "aa12",
+          "optic": "rmr",
+          "finish": "",
+          "gfx": "high",
+          "fps": 59.826503140535856,
+          "low": 41.3223140190537,
+          "worst": 24.200000017881393,
+          "hitches": 21,
+          "frames": 60
+        }
+      ]
+    },
+    "m81": {
+      "fps": 60,
+      "low": 55.1,
+      "samples": [
+        {
+          "eye": "aa12",
+          "optic": "rmr",
+          "finish": "m81",
+          "gfx": "high",
+          "fps": 59.52981535703241,
+          "low": 42.5531914893617,
+          "worst": 23.5,
+          "hitches": 23,
+          "frames": 59
+        },
+        {
+          "eye": "aa12",
+          "optic": "rmr",
+          "finish": "m81",
+          "gfx": "high",
+          "fps": 60.42296072507553,
+          "low": 59.17159761226685,
+          "worst": 16.900000005960464,
+          "hitches": 23,
+          "frames": 60
+        },
+        {
+          "eye": "aa12",
+          "optic": "rmr",
+          "finish": "m81",
+          "gfx": "high",
+          "fps": 59.99999999999999,
+          "low": 51.282051282051285,
+          "worst": 19.5,
+          "hitches": 23,
+          "frames": 60
+        },
+        {
+          "eye": "aa12",
+          "optic": "rmr",
+          "finish": "m81",
+          "gfx": "high",
+          "fps": 60.012002399764555,
+          "low": 59.17159761226685,
+          "worst": 16.900000005960464,
+          "hitches": 23,
+          "frames": 60
+        },
+        {
+          "eye": "aa12",
+          "optic": "rmr",
+          "finish": "m81",
+          "gfx": "high",
+          "fps": 60.00600059970231,
+          "low": 58.8235294117647,
+          "worst": 17,
+          "hitches": 23,
+          "frames": 60
+        },
+        {
+          "eye": "aa12",
+          "optic": "rmr",
+          "finish": "m81",
+          "gfx": "high",
+          "fps": 59.988002400235075,
+          "low": 58.13953492401612,
+          "worst": 17.19999998807907,
+          "hitches": 23,
+          "frames": 60
+        },
+        {
+          "eye": "aa12",
+          "optic": "rmr",
+          "finish": "m81",
+          "gfx": "high",
+          "fps": 60.01800540054696,
+          "low": 58.47953218412662,
+          "worst": 17.099999994039536,
+          "hitches": 23,
+          "frames": 60
+        },
+        {
+          "eye": "aa12",
+          "optic": "rmr",
+          "finish": "m81",
+          "gfx": "high",
+          "fps": 59.99400060029756,
+          "low": 52.63157894736842,
+          "worst": 19,
+          "hitches": 23,
+          "frames": 60
+        },
+        {
+          "eye": "aa12",
+          "optic": "rmr",
+          "finish": "m81",
+          "gfx": "high",
+          "fps": 59.988002398447634,
+          "low": 58.13953482327815,
+          "worst": 17.200000017881393,
+          "hitches": 23,
+          "frames": 60
+        },
+        {
+          "eye": "aa12",
+          "optic": "rmr",
+          "finish": "m81",
+          "gfx": "high",
+          "fps": 59.7165991902834,
+          "low": 49.26108378723433,
+          "worst": 20.299999982118607,
+          "hitches": 23,
+          "frames": 59
+        },
+        {
+          "eye": "aa12",
+          "optic": "rmr",
+          "finish": "m81",
+          "gfx": "high",
+          "fps": 59.988002400235075,
+          "low": 46.29629630907164,
+          "worst": 21.599999994039536,
+          "hitches": 23,
+          "frames": 60
+        },
+        {
+          "eye": "aa12",
+          "optic": "rmr",
+          "finish": "m81",
+          "gfx": "high",
+          "fps": 60.006000601490804,
+          "low": 59.17159761226685,
+          "worst": 16.900000005960464,
+          "hitches": 23,
+          "frames": 60
+        }
+      ]
+    },
+    "restored": {
+      "fps": 60,
+      "low": 59.1,
+      "samples": [
+        {
+          "eye": "aa12",
+          "optic": "rmr",
+          "finish": "",
+          "gfx": "high",
+          "fps": 59.99999999999999,
+          "low": 59.52380948157267,
+          "worst": 16.80000001192093,
+          "hitches": 23,
+          "frames": 60
+        },
+        {
+          "eye": "aa12",
+          "optic": "rmr",
+          "finish": "",
+          "gfx": "high",
+          "fps": 59.99999999999999,
+          "low": 59.52380948157267,
+          "worst": 16.80000001192093,
+          "hitches": 23,
+          "frames": 60
+        },
+        {
+          "eye": "aa12",
+          "optic": "rmr",
+          "finish": "",
+          "gfx": "high",
+          "fps": 60.00600059970231,
+          "low": 59.52380948157267,
+          "worst": 16.80000001192093,
+          "hitches": 23,
+          "frames": 60
+        },
+        {
+          "eye": "aa12",
+          "optic": "rmr",
+          "finish": "",
+          "gfx": "high",
+          "fps": 59.99999999999999,
+          "low": 59.17159761226685,
+          "worst": 16.900000005960464,
+          "hitches": 23,
+          "frames": 60
+        },
+        {
+          "eye": "aa12",
+          "optic": "rmr",
+          "finish": "",
+          "gfx": "high",
+          "fps": 59.99400060029756,
+          "low": 57.80346816826179,
+          "worst": 17.30000001192093,
+          "hitches": 23,
+          "frames": 60
+        },
+        {
+          "eye": "aa12",
+          "optic": "rmr",
+          "finish": "",
+          "gfx": "high",
+          "fps": 59.99999999999999,
+          "low": 58.8235294117647,
+          "worst": 17,
+          "hitches": 23,
+          "frames": 60
+        },
+        {
+          "eye": "aa12",
+          "optic": "rmr",
+          "finish": "",
+          "gfx": "high",
+          "fps": 60.01800540233617,
+          "low": 59.52380948157267,
+          "worst": 16.80000001192093,
+          "hitches": 23,
+          "frames": 60
+        },
+        {
+          "eye": "aa12",
+          "optic": "rmr",
+          "finish": "",
+          "gfx": "high",
+          "fps": 59.99400060029756,
+          "low": 59.171597716613064,
+          "worst": 16.899999976158142,
+          "hitches": 23,
+          "frames": 60
+        },
+        {
+          "eye": "aa12",
+          "optic": "rmr",
+          "finish": "",
+          "gfx": "high",
+          "fps": 60.00600059970231,
+          "low": 59.17159761226685,
+          "worst": 16.900000005960464,
+          "hitches": 23,
+          "frames": 60
+        },
+        {
+          "eye": "aa12",
+          "optic": "rmr",
+          "finish": "",
+          "gfx": "high",
+          "fps": 59.99400060029756,
+          "low": 59.17159761226685,
+          "worst": 16.900000005960464,
+          "hitches": 23,
+          "frames": 60
+        },
+        {
+          "eye": "aa12",
+          "optic": "rmr",
+          "finish": "",
+          "gfx": "high",
+          "fps": 60.00600059970231,
+          "low": 59.171597716613064,
+          "worst": 16.899999976158142,
+          "hitches": 23,
+          "frames": 60
+        },
+        {
+          "eye": "aa12",
+          "optic": "rmr",
+          "finish": "",
+          "gfx": "high",
+          "fps": 59.99400060029756,
+          "low": 59.52380948157267,
+          "worst": 16.80000001192093,
+          "hitches": 23,
+          "frames": 60
+        }
+      ]
+    }
+  }
+}

@@ -599,21 +599,22 @@ export function makeAa12Model(ctx) {
   const plateSteel = new THREE.MeshStandardMaterial({color: 0x363c41, metalness: .26, roughness: .52});
   // Receiver: the tall slab-sided box with its rounded top, the pressed side plates on their bolts, the seam lines, the
   // vents along the top edge, the rear's stock seam.
-  K.slab([[-0.26, 0.1], [-0.26, -0.074], [-0.242, -0.09], [0.26, -0.09], [0.26, 0.07], [-0.26, 0.07]], RW, coverSteel, { bevel: 0.006, segs: 2 });
+  const receiver = K.slab([[-0.26, 0.1], [-0.26, -0.074], [-0.242, -0.09], [0.26, -0.09], [0.26, 0.07], [-0.26, 0.07]], RW, coverSteel, { bevel: 0.006, segs: 2 });
   // Form the rear seam in the rounded cover itself. A straight strip across
   // the crown previously stood clear of both sides when seen from the eye.
-  K.lathe([[0, -.258], [.043, -.258], [.045, -.250], [.045, -.2474], [.0442, -.2469],
+  const cover = K.lathe([[0, -.258], [.043, -.258], [.045, -.250], [.045, -.2474], [.0442, -.2469],
     [.0442, -.2458], [.045, -.2453], [.045, .252], [.043, .26], [0, .26]],
     coverSteel, {y: .07, seg: 28, phase: Math.PI / 28});
   for (const sx of [-1, 1]) {
-    K.slab([[-0.202, 0.062], [0.193, 0.062], [0.2, 0.054], [0.2, -0.053], [-0.202, -0.053]], 0.006, plateSteel, { x: sx * RW / 2, bevel: 0.0025 });   // the side plate
+    const plate = K.slab([[-0.202, 0.062], [0.193, 0.062], [0.2, 0.054], [0.2, -0.053], [-0.202, -0.053]], 0.006, plateSteel, { x: sx * RW / 2, bevel: 0.0025 });   // the side plate
+    markPaintSurface(plate, 'receiver');
     for (const [by, bz] of [[0.03, 0.177], [-0.04, 0.177], [0.03, -0.181], [-0.04, -0.181]]) D.screw(gun, sx * (RW / 2 + 0.003), by, bz, { axis: 'x', side: sx, r: 0.004, kind: 'hex' });
     D.groove(gun, { x: sx * RW / 2, y: -0.076, z: 0.0, axis: 'x', side: sx, along: 'z', len: 0.49, w: 0.0008 });                 // the fold line along the bottom
     D.vents(gun, { x: sx * RW / 2, y: 0.082, z: 0.12, axis: 'x', side: sx, along: 'z', count: 4, pitch: 0.02, w: 0.016, len: 0.006, deep: 0.002 });   // the vents
   }
   // The carry handle: one uninterrupted top and a clear opening under it; the rear sight's aperture ring at 0.168, the
   // sight line (GB-259/J20); two sling loops.
-  K.slab(gunBand([[-0.17, 0.09], [-0.153, 0.143], [-0.138, 0.151], [0.188, 0.151], [0.217, 0.13], [0.225, 0.09]], 0.009), 0.04, gunDark, { bevel: 0.003 });
+  const handle = K.slab(gunBand([[-0.17, 0.09], [-0.153, 0.143], [-0.138, 0.151], [0.188, 0.151], [0.217, 0.13], [0.225, 0.09]], 0.009), 0.04, gunDark, { bevel: 0.003 });
   for (const z of [-0.158, 0.211]) D.pin(gun, 0, 0.108, z, { axis: 'x', len: 0.04, r: 0.0035, proud: 0.001, caps: z === -0.158 });
   K.box(0.025, 0.007, 0.025, gunDark, 0, 0.156, -0.12, 0, 0, 0, null, 0.002);
   K.tor(0.009, 0.003, plateSteel, 0, 0.168, -0.12, 0, 0, 0, null, Math.PI * 2, 12);
@@ -717,8 +718,33 @@ export function makeAa12Model(ctx) {
     K.box(0.006, 0.028, 0.019, gunMid, sx * 0.149, -0.012, -0.032, 0, 0, 0, drumBody, 0.002);
     for (let i = 0; i < 4; i++) K.box(0.006, 0.002, 0.015, gunDark, sx * 0.152, -0.022 + i * 0.007, -0.032, 0, 0, 0, drumBody, 0);
   }
-  K.box(0.064, 0.033, 0.086, gunAccent, 0, 0.162, 0, 0, 0, 0, mag, 0.003);
-  K.box(0.071, 0.006, 0.093, gunDark, 0, 0.168, 0, 0, 0, 0, mag, 0.001);
+  // The reload briefly shows the top of the drum. Keep the displayed shell
+  // within the old cap silhouette by giving its unseen underside a shallow back.
+  const floorTop = .1615;
+  K.box(.071, .0065, .093, gunDark, 0, floorTop - .00325, 0, 0, 0, 0, mag, .001);
+  for (const side of [-1, 1]) {
+    K.box(.011, .015, .087, gunAccent, side * .0225, floorTop + .0075, 0, 0, 0, 0, mag, .002);
+  }
+  const shellArt = roundGeometry(THREE, 'aa12').clone();
+  const points = shellArt.attributes.position;
+  for (let i = 0; i < points.count; i++) {
+    if (points.getZ(i) > 0) points.setZ(i, points.getZ(i) * .12);
+  }
+  shellArt.computeVertexNormals();
+  shellArt.computeBoundingBox();
+  shellArt.computeBoundingSphere();
+  const topShell = new THREE.Mesh(shellArt, new THREE.MeshStandardMaterial({
+    color: 0xffffff, vertexColors: true, roughness: .48, metalness: .2
+  }));
+  const artScale = 1.393 / (.9 * .96 * 1.2);
+  topShell.name = 'magazine top round';
+  topShell.rotation.x = Math.PI / 2;
+  topShell.scale.setScalar(artScale);
+  topShell.position.y = floorTop + shellArt.boundingBox.max.z * artScale;
+  topShell.visible = false;
+  mag.add(topShell);
+  gun.userData.magazineTopRound = topShell;
+  gun.userData.setMagazineRounds = count => { topShell.visible = Number.isFinite(count) && count > 0; };
   mag.position.set(0, -0.26, 0.05);
   mag.rotation.set(0, 0, 0);
   gun.add(mag);
@@ -728,7 +754,7 @@ export function makeAa12Model(ctx) {
   // Handguard: the box flush with the receiver top, its side vents, the ribs under it for the support hand (its underside
   // -0.082 where the fist rides), its screws; the barrel-nut sleeve, the octagonal shroud with its collars, the front
   // sight on its clamp ring (the post's tip 0.168: the sight line), the barrel and the brake.
-  K.slab([[0.23, 0.105], [0.49, 0.105], [0.49, -0.074], [0.475, -0.082], [0.45, -0.082], [0.425, -0.07], [0.29, -0.07], [0.265, -0.082], [0.25, -0.082], [0.23, -0.068]], RW, gunBody, { bevel: 0.005, segs: 2 });
+  const forearm = K.slab([[0.23, 0.105], [0.49, 0.105], [0.49, -0.074], [0.475, -0.082], [0.45, -0.082], [0.425, -0.07], [0.29, -0.07], [0.265, -0.082], [0.25, -0.082], [0.23, -0.068]], RW, gunBody, { bevel: 0.005, segs: 2 });
   for (const sx of [-1, 1]) {
     for (const z of [0.29, 0.35, 0.41]) K.box(0.004, 0.03, 0.045, gunRubber, sx * (RW / 2 + 0.0003), 0.06, z + 0.02, 0, 0, 0, null, 0.002);   // the side vent slots
     for (const z of [0.253, 0.463]) for (const y of [-0.045, 0.019, 0.085]) D.screw(gun, sx * RW / 2, y, z, { axis: 'x', side: sx, r: 0.003, kind: 'hex' });
@@ -736,7 +762,7 @@ export function makeAa12Model(ctx) {
   }
   for (const z of [0.30, 0.33, 0.36, 0.39, 0.42]) K.box(0.07, 0.009, 0.01, gunPoly, 0, -0.0715, z, 0, 0, 0, null, 0.002);
   K.lathe([[0.02, 0.255], [0.04, 0.255], [0.042, 0.262], [0.042, 0.27], [0.039, 0.275], [0.039, 0.444], [0.02, 0.444]], gunMid, { y: 0.015, seg: 16 });   // GB-174: the barrel nut sleeve
-  ventedSleeve(THREE, gun, gunBody, { z0: 0.448, z1: 0.789, radius: 0.046, wall: 0.004, y: 0.015, faces: 8,
+  const shroud = ventedSleeve(THREE, gun, gunBody, { z0: 0.448, z1: 0.789, radius: 0.046, wall: 0.004, y: 0.015, faces: 8,
     slots: [[0.467, 0.496], [0.519, 0.548], [0.571, 0.6], [0.623, 0.652], [0.675, 0.704]], ventFaces: [0, 1, 2, 3, 5, 6, 7] });
   for (const z of [0.447, 0.787]) K.lathe([[0.02, z - 0.008], [0.05, z - 0.008], [0.05, z + 0.007], [0.02, z + 0.007]], gunMid, { y: 0.015, seg: 8, phase: Math.PI / 8 });
   K.lathe([[0.045, 0.737], [0.052, 0.737], [0.053, 0.74], [0.053, 0.76], [0.052, 0.763], [0.045, 0.763]], gunDark, { y: 0.015, seg: 18 });   // GB-174: the clamp ring
@@ -745,7 +771,7 @@ export function makeAa12Model(ctx) {
   for (const sx of [-1, 1]) K.box(0.005, 0.098, 0.018, gunDark, sx * 0.0145, 0.126, 0.75, 0, 0, 0, null, 0.0015);                         // the ears
   D.screw(gun, 0, 0.063, 0.75, { axis: 'z', side: 1, r: 0.003, kind: 'hex' });
   const barrel = K.lathe([[0, 0.25], [0.018, 0.25], [0.018, 0.74], [0.024, 0.75], [0.024, 0.905], [0, 0.905]], gunAccent, { y: 0.015, seg: 12 });   // GB-173/189: the barrel, mostly inside the shroud
-  K.lathe([[0, 0.902], [0.03, 0.902], [0.034, 0.91], [0.034, 0.97], [0.03, 0.976], [0.014, 0.976], [0.014, 0.966], [0, 0.966]], gunMid, { y: 0.015, seg: 14 });   // the brake
+  K.lathe([[0, 0.902], [0.03, 0.902], [0.034, 0.91], [0.034, 0.97], [0.03, 0.976], [0.014, 0.976], [0.014, 0.966], [0, 0.966]], gunMid, { y: 0.015, seg: 14 }).name = 'Breacher muzzle brake';   // the brake
   K.disc(0.0095, gunRubber, 0, 0.015, 0.9661, 0, null, 12);   // GB-173: the bore at the muzzle
   for (let i = 0; i < 3; i++) K.box(0.072, 0.008, 0.01, gunRubber, 0, 0.015, 0.92 + i * 0.018);
   for (const sx of [-1, 1]) D.vents(gun, { x: sx * 0.034, y: 0.015, z: 0.94, axis: 'x', side: sx, along: 'z', count: 3, pitch: 0.018, w: 0.008, len: 0.01, deep: 0.002 });
@@ -754,10 +780,21 @@ export function makeAa12Model(ctx) {
   gun.userData.laserBaseZ = 0.95;
   gun.userData.barrelAssembly = null;
   gun.userData.slide = null;
+  // The drum, sights, controls and exposed metal retain their factory finish.
+  gun.userData.partFinish = true;
+  // The integral forearm and shroud share their issue metal and paint draw.
+  for (const shell of [receiver, cover, forearm, shroud]) markPaintSurface(shell, 'receiver');
+  markPaintSurface(handle, 'rail');
+  gun.traverse(piece => {
+    if (piece.material === gunPoly) markPaintSurface(piece, 'furniture');
+  });
   attachLaserLight(gun, 'aa12', ctx);
   const lamp = gun.userData.laserLightUnit;
   for (const name of ['collarClamp','lampHead','lightBezel','laserBezel']) lamp.getObjectByName(name).material = coverSteel;
   lamp.getObjectByName('lampBand').material = plateSteel;
+  for (const name of ['collarClamp', 'lightTube', 'lampHead', 'laserBridge']) {
+    markPaintSurface(lamp.getObjectByName(name), 'light shell');
+  }
   const selector = K.group(...selectorHub.position.toArray());
   for (const part of [selectorHub, selectorLever]) {
     part.position.sub(selector.position);
@@ -1095,7 +1132,12 @@ export function makeSniperModel(ctx) {
   // Upper channel: two integral side walls carry the rail deck over the barrel.
   for (const side of [-1, 1]) K.box(0.010, 0.032, 0.448, gunTan, side * 0.026, 0.057, 0.422, 0, 0, 0, null, 0.002);
   K.box(0.060, 0.009, 0.457, gunTan, 0, 0.0765, 0.421, 0, 0, 0, null, 0.002);
-  K.rail(0.49, 0, 0.088, 0.405, null, 0.031);
+  function coatRail(length, y, z) {
+    const first = gun.children.length;
+    K.rail(length, 0, y, z, null, .031);
+    for (const piece of gun.children.slice(first)) markPaintSurface(piece, 'rail');
+  }
+  coatRail(.49, .088, .405);
   // Fore-end side slots have depth and open backgrounds, with a stiff bottom web.
   K.box(0.05, 0.012, 0.455, gunTan, 0, -0.035, 0.417, 0, 0, 0, null, 0.004);
   D.vents(gun, { x: 0, y: -0.041, z: 0.42, axis: 'y', side: -1, along: 'z', count: 5, pitch: 0.08, w: 0.012, len: 0.056, deep: 0.003 });   // 6-o'clock M-LOK
@@ -1139,7 +1181,46 @@ export function makeSniperModel(ctx) {
   }
   // CL-318 (J30: "the mag should have more width"): 36 mm (0.05) like a big-bore box, the floorplate 40, the ribs at its edges.
   const mag = K.group(0, -0.12, 0.02);
-  K.slab([[-0.04, 0.07], [0.04, 0.07], [0.04, -0.07], [-0.04, -0.07]], 0.05, gunAccent, { bevel: 0.005, parent: mag });
+  const issueArt = roundGeometry(THREE, 'sniper');
+  issueArt.computeBoundingBox();
+  const bounds = issueArt.boundingBox;
+  const displayScale = .098 / (bounds.max.y - bounds.min.y);
+  const issueFinish = new THREE.MeshStandardMaterial({color: 0xffffff, vertexColors: true, roughness: .39, metalness: .42});
+  const displayArt = issueArt.clone();
+  const positions = displayArt.attributes.position;
+  // Only the forward portion of the graphic is exposed in the existing box.
+  // Close the hidden end on its last colour ring and flatten the unseen back.
+  const rear = bounds.max.y - .069 / displayScale;
+  let lastRing = -Infinity;
+  for (let i = 0; i < positions.count; i++) {
+    const y = positions.getY(i);
+    if (y <= rear) lastRing = Math.max(lastRing, y);
+  }
+  for (let i = 0; i < positions.count; i++) {
+    const y = positions.getY(i);
+    if (y < lastRing) positions.setXYZ(i, 0, rear, 0);
+    else {
+      positions.setY(i, Math.max(rear, y));
+      if (positions.getZ(i) > 0) positions.setZ(i, positions.getZ(i) * .15);
+    }
+  }
+  displayArt.computeBoundingBox();
+  displayArt.computeBoundingSphere();
+  const displayBounds = displayArt.boundingBox;
+  const shelfTop = .070 - (displayBounds.max.z - displayBounds.min.z) * displayScale;
+  K.slab([[-.04,shelfTop],[.04,shelfTop],[.04,-.07],[-.04,-.07]], .05, gunAccent, {bevel:.003, parent:mag});
+  for (const side of [-1, 1]) {
+    K.box(.004, .070 - shelfTop, .073, gunDark, side * .019, (shelfTop + .070) / 2, 0, 0, 0, 0, mag, .001);
+  }
+  const topRound = new THREE.Mesh(displayArt, issueFinish);
+  topRound.name = 'magazine top round';
+  topRound.rotation.x = Math.PI / 2;
+  topRound.scale.setScalar(displayScale);
+  topRound.position.set(0, shelfTop + displayBounds.max.z * displayScale,
+    -(displayBounds.min.y + displayBounds.max.y) * displayScale / 2);
+  topRound.visible = false;
+  mag.add(topRound);
+  gun.userData.magazineTopRound = topRound;
   K.slab([[-0.043, -0.068], [0.043, -0.068], [0.043, -0.083], [-0.043, -0.083]], 0.056, gunDark, { bevel: 0.004, parent: mag });
   for (const sx of [-1, 1]) for (const z of [-0.026, 0.026]) K.box(0.0025, 0.113, 0.004, gunBody, sx * 0.025, -0.004, z, 0, 0, 0, mag, 0.001);
   for (const sx of [-1, 1]) K.box(0.002, 0.03, 0.05, gunDark, sx * 0.0255, -0.02, 0, 0, 0, 0, mag, 0.001);   // the witness window's frame
@@ -1207,7 +1288,7 @@ export function makeSniperModel(ctx) {
   for (const z of [-0.225, -0.144]) D.screw(gun, 0.0259, 0.035, z, { axis: 'x', side: 1, r: 0.0028, head: 0.0012, kind: 'hex' });   // the bridge's bedding screws
   K.lathe([[0, -0.3], [0.014, -0.3], [0.02, -0.29], [0.022, -0.27], [0, -0.27]], gunDark, { y: 0.045, seg: 14 });
   K.box(0.05, 0.03, 0.03, gunDark, 0, 0.012, 0.12, 0, 0, 0, null, 0.004);
-  K.rail(0.34, 0, 0.085, -0.02, null, 0.031);
+  coatRail(.34, .085, -.02);
   // Fluted heavy barrel, tapered, and a chunky ported brake.
   // GB-180 pass 5 (vs a real heavy-barrel bolt gun: ours was a pencil): a 30%-fatter contour barrel, deeper flutes, a
   // bigger brake with real side ports.
@@ -1277,8 +1358,15 @@ export function makeSniperModel(ctx) {
   // and up into the chamber by the bolt's face on the forward stroke. The case it replaces is thrown from the opening
   // (gun.userData.ejectPort, index.html's spawnCasing) on the back stroke.
   const round = K.group(0, 0.033, -0.022);
-  K.lathe([[0, 0], [0.0083, 0], [0.0083, 0.055], [0.0072, 0.062], [0.0056, 0.066], [0, 0.066]], brassMat, { seg: 12, parent: round });
-  K.lathe([[0, 0.066], [0.0056, 0.066], [0.0054, 0.075], [0.0032, 0.091], [0, 0.098]], gunAccent, { seg: 12, parent: round });
+  const movingArt = new THREE.Mesh(issueArt, issueFinish);
+  movingArt.rotation.x = Math.PI / 2;
+  movingArt.scale.setScalar(displayScale);
+  movingArt.position.z = -bounds.min.y * displayScale;
+  round.add(movingArt);
+  gun.userData.setMagazineRounds = count => {
+    topRound.visible = Number.isFinite(count) && count > 0;
+    if (!topRound.visible) round.visible = false;
+  };
   round.visible = false;
   gun.userData.boltRound = round;
   gun.userData.ejectPort = [0.03, 0.058, 0.01];
@@ -1292,10 +1380,10 @@ export function makeSniperModel(ctx) {
       if (back < 0.002) { round.visible = false; stroke = 0; return; }
       if (stroke >= 0) {   // 2: drawn back; the next round rises onto the lips once the face has passed it
         const up = Math.min(1, Math.max(0, (back - 0.75) / 0.25));
-        round.visible = up > 0; round.position.set(0, RB.y - 0.014 * (1 - up), RB.z);
+        round.visible = topRound.visible && up > 0; round.position.set(0, RB.y - 0.014 * (1 - up), RB.z);
       } else {             // 3: pushed forward; the face drives it up the ramp into the chamber
         const f = 1 - back;
-        round.visible = true; round.position.set(0, RB.y + (BY - RB.y) * f, RB.z + 0.09 * f);
+        round.visible = topRound.visible; round.position.set(0, RB.y + (BY - RB.y) * f, RB.z + 0.09 * f);
       }
     };
   }
@@ -1315,8 +1403,21 @@ export function makeSniperModel(ctx) {
   gun.userData.laser.position.set(0, 0.04, 6.2);
   gun.userData.laserBaseZ = 1.2;
   gun.userData.barrelAssembly = null;
+  gun.userData.partFinish = true;
+  gun.traverse(piece => {
+    if (piece.material === gunTan) {
+      markPaintSurface(piece, piece.parent === stock ? 'furniture' : 'receiver');
+    } else if (piece.material === gunPoly) {
+      markPaintSurface(piece, 'furniture');
+    }
+  });
   gunSuppressor(gun, K, 'sniper');   // CL-95
+  // Leave the front face, glass, buttons and dials in their factory finishes.
+  const suppressor = gun.userData.suppressor;
+  for (const piece of suppressor.children.slice(0, -2)) markPaintSurface(piece, 'suppressor shell');
   attachLaserLight(gun, 'sniper', ctx);
+  const lamp = gun.userData.laserLightUnit;
+  for (const name of ['moduleShell', 'topPlate']) markPaintSurface(lamp.getObjectByName(name), 'light shell');
   bindModelArtwork(gun, 'controls', 'magRelease', groupArtwork(THREE, magazineCatch));
   bindModelArtwork(gun, 'heatParts', 'barrel', groupArtwork(THREE, barrel));
   bindModelArtwork(gun, 'heatParts', 'suppressor', gun.userData.suppressor);

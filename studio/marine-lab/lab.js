@@ -104,16 +104,25 @@ export async function init() {
 export function build(opt = {}) {
   if (marine) scene.remove(marine);
   marine = buildLabMarine(opt); pose(marine, opt.pose || 'game'); scene.add(marine);
+  // CC-341: joints as the game posed them (a probe's numbers): { armRG: [rx, ry, rz], elbowRG: [...], wristR: [qx, qy, qz, qw], ... }
+  if (opt.joints) for (const [k, v] of Object.entries(opt.joints)) {
+    const u = marine.userData, o = k === 'wristR' ? u.elbowRG && u.elbowRG.userData.wrist : k === 'wristL' ? u.elbowLG && u.elbowLG.userData.wrist : k === 'torso' ? u.torsoG : u[k];
+    if (!o || !v) continue;
+    if (v.length === 4) o.quaternion.set(v[0], v[1], v[2], v[3]); else o.rotation.set(v[0], v[1], v[2]);
+  }
   marine.updateMatrixWorld(true);
   // cloth meshes follow their bones before each draw (liveCloth's onBeforeRender)
   return measure();
 }
 // views: yaw in degrees (0: his front), the look point's height, the distance
-export async function shot({ yaw = 0, pitch = 0, y = .85, dist = 3.6, fov = 30 } = {}) {
+export async function shot({ yaw = 0, pitch = 0, y = .85, dist = 3.6, fov = 30, tx = 0, tz = 0, at = null } = {}) {
   const a = yaw * Math.PI / 180, p = pitch * Math.PI / 180;
+  // CC-341: at: 'wristR' / 'wristL' looks at that wrist where it is posed (tx, y, tz are then offsets from it)
+  if (at && marine) { const u = marine.userData, e = at === 'wristL' ? u.elbowLG : u.elbowRG, w = e && (e.userData.wrist || e);
+    if (w) { marine.updateMatrixWorld(true); const v = w.getWorldPosition(new THREE.Vector3()); tx += v.x; y += v.y; tz += v.z; } }
   camera.fov = fov; camera.updateProjectionMatrix();
-  camera.position.set(Math.sin(a) * Math.cos(p) * dist, y + Math.sin(p) * dist, Math.cos(a) * Math.cos(p) * dist);
-  camera.lookAt(0, y, 0);
+  camera.position.set(tx + Math.sin(a) * Math.cos(p) * dist, y + Math.sin(p) * dist, tz + Math.cos(a) * Math.cos(p) * dist);
+  camera.lookAt(tx, y, tz);
   await renderer.renderAsync(scene, camera);
   await renderer.renderAsync(scene, camera);
   return renderer.domElement.toDataURL('image/png');

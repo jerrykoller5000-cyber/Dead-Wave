@@ -50086,7 +50086,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           B.deadT += dt;
           const u = Math.min(1, B.deadT / 0.9), e = u * u * (3 - 2 * u);
           CaveGuardian.guardianStand(g, R, B.t, null, { open: 0.85, crouch: 1 });
-          g.rotation.z = -1.25 * e;
+          // GP-20086: the Training copy has long forearms. Finish its roll
+          // onto the chest; the ordinary 1.25-radian stop balances on a wrist.
+          if (training.active) { g.rotation.x = -0.5 * e; g.rotation.z = -3.0 * e; }
+          else g.rotation.z = -1.25 * e;
           g.position.y = BOSS_RIG.LIFT - 0.35 * e;
         } else {
           g.rotation.z = 0; g.position.y = BOSS_RIG.LIFT;

@@ -291,6 +291,12 @@ function nx8(root) {
   }
   cylinder(root, 'low zoom index tab', alloy, 0.0035, 0.007, [0, 0.080, -0.131], 'y', 10);
   boredHousing(root, 'eyepiece lock ring', 0.0215, 0.0225, 0.054, -0.166, 0.006, true);
+  for (const piece of root.children) {
+    if (piece === tube || ['scope rail bridge', 'rail clamp jaw', 'scope ring saddle',
+      '30 mm scope ring', 'machined turret saddle'].includes(piece.name)) {
+      markPaintSurface(piece, 'optic shell');
+    }
+  }
   return { eye: [0, 0.054, -0.177], dot: [0, 0.054, 0.170] };
 }
 

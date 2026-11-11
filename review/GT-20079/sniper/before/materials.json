@@ -1,0 +1,2342 @@
+{
+  "factory": {
+    "assembled": [
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "1ab4b4a8-8099-4997-b178-f3b57b7c231b",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "e3a4d8ea-e25c-4033-9704-af56d81b973f",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3290167,
+        "roughness": 0.76,
+        "metalness": 0.03
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "450e0afc-0fb1-4e6e-b45d-865bdca15b2e",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 16777215,
+        "roughness": 0.66,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "6243f31b-ad61-415c-8ee4-61a63c967b75",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 6905415,
+        "roughness": 0.86,
+        "metalness": 0.02
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "12b59f4e-56f2-425b-80ba-61c603c12d1e",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1513498,
+        "roughness": 0.95,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "e2c22fc6-71f9-43e8-b548-8787ad9fd457",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 10126688,
+        "roughness": 0.74,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "1a1a3768-4458-48b0-8b91-7c9ac73659e2",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 11581117,
+        "roughness": 0.26,
+        "metalness": 0.62
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "75887750-e867-477b-a996-4f9cb2dab750",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "fe123a1e-8e00-4f57-b768-60cc960884b5",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3817288,
+        "roughness": 0.42,
+        "metalness": 0.85
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "ff619234-9146-4815-aec9-800d031d972a",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 4737873,
+        "roughness": 0.66,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "9fc1ce85-bebc-40a4-9e1b-8099e253a9e9",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "c904fc94-9d70-4c83-aaf3-0a6e1d26f208",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 13015877,
+        "roughness": 0.3,
+        "metalness": 0.65
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "413f15e0-9291-4ccd-9d35-8b7689fd5fd1",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777113
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "64871067-0302-49b3-8c78-1892d7572652",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16732497
+      },
+      {
+        "part": "moduleShell",
+        "materialName": "",
+        "material": "ec6c1d7d-e7a4-4623-a04a-f0c050905eca",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3290167,
+        "roughness": 0.76,
+        "metalness": 0.03
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "7249ea9e-50c0-4b05-9f72-13d45ae7e78a",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 0.66,
+        "metalness": 0.08
+      },
+      {
+        "part": "scope rail bridge",
+        "materialName": "gunPaint:sniper",
+        "material": "1f42491d-797d-4ba2-9cd1-5675078968af",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 2369578,
+        "roughness": 0.74,
+        "metalness": 0.05
+      },
+      {
+        "part": "50 mm objective lens",
+        "materialName": "",
+        "material": "4c6ff4f8-9eb1-46d6-864c-d841e2fe281c",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "7b137bc4-3791-4c2c-8d8a-1cf02dd942f0",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3027508,
+        "roughness": 0.5,
+        "metalness": 0.55
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "25b13360-e7eb-43b0-a02d-4bad1d28be88",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 4344399,
+        "roughness": 0.52,
+        "metalness": 0.24
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "3e30eb61-a066-4532-adae-a62907f17a67",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 1514524,
+        "roughness": 0.9,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "8c774a0d-34ba-413c-bad5-653ed384293d",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 7370362,
+        "roughness": 0.45,
+        "metalness": 0.7
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "393c3c57-c6fa-49b3-9f0d-6ddba4382484",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "firstPerson": [
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:sniper",
+        "material": "edeb313a-013c-49be-aa73-0b3091ea8440",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5659490,
+        "roughness": 0.58,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:sniper",
+        "material": "accd8a5d-d89d-459a-a5ea-dded8696b068",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5264465,
+        "roughness": 0.84,
+        "metalness": 0.02
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:sniper",
+        "material": "407231ef-f300-4dd5-ad0a-1c54647931b8",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 0.66,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:sniper",
+        "material": "6cf9a05b-f49a-4d4c-befb-d480c9584e91",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 6905415,
+        "roughness": 0.86,
+        "metalness": 0.02
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "472efb64-8eaf-45e5-96a7-e9328cb5fd4b",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2303271,
+        "roughness": 0.92,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:sniper",
+        "material": "616b482e-025c-49fe-840c-799b6500c7d7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 10126688,
+        "roughness": 0.74,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:sniper",
+        "material": "62399d01-6865-458e-982e-2c3870fea85e",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11581117,
+        "roughness": 0.26,
+        "metalness": 0.62
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:sniper",
+        "material": "7e3e1cdc-00eb-4cdf-99f6-eb4c4773d16f",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685184,
+        "roughness": 0.69,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:sniper",
+        "material": "8aa099f8-9f5a-475c-bbe4-5fc100a4b650",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 8094347,
+        "roughness": 0.42,
+        "metalness": 0.85
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:sniper",
+        "material": "82252ebb-dadd-45a2-afaa-48b33bfdce51",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7172472,
+        "roughness": 0.63,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "7a94c87f-0021-4290-bd8f-d15d5c1ddf50",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "70b12484-3e68-4bec-9e0d-5cb641ea4f9e",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 13015877,
+        "roughness": 0.3,
+        "metalness": 0.65
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshBasicMaterial",
+        "material": "cb1e03a3-d79c-438c-bbb3-fb5d2ab24c13",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777113
+      },
+      {
+        "part": "moduleShell",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "53054020-57d9-42ae-a543-96872774b516",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5264465,
+        "roughness": 0.84,
+        "metalness": 0.02
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "9dcb86e1-a8e4-4fb6-a760-7f57ef2f08fd",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 0.66,
+        "metalness": 0.08
+      },
+      {
+        "part": "scope rail bridge",
+        "materialName": "vm:gunPaint:sniper",
+        "material": "3d9eb01a-045c-472d-875c-a1cbddf58f4e",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2369578,
+        "roughness": 0.74,
+        "metalness": 0.05
+      },
+      {
+        "part": "50 mm objective lens",
+        "materialName": "vm:MeshPhysicalMaterial",
+        "material": "a46271e9-9f8a-42ee-8519-820fa602ebdf",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:sniper",
+        "material": "6dae0234-ccac-45a0-873f-10bd5d605c1e",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3027508,
+        "roughness": 0.5,
+        "metalness": 0.55
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:sniper",
+        "material": "527cdb2b-f5ec-4c3a-8c88-37d505aa3a78",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 4344399,
+        "roughness": 0.52,
+        "metalness": 0.24
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:sniper",
+        "material": "126004f3-a84f-4d55-9c26-a2b7d070f241",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1514524,
+        "roughness": 0.9,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:sniper",
+        "material": "b875a055-ed77-4c03-93bb-83c606c00e97",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7370362,
+        "roughness": 0.45,
+        "metalness": 0.7
+      },
+      {
+        "part": "",
+        "materialName": "vm:fold-static",
+        "material": "df79fbb0-dc32-47e0-9b1c-6e255d9d6932",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "magazine": [
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "1ab4b4a8-8099-4997-b178-f3b57b7c231b",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "450e0afc-0fb1-4e6e-b45d-865bdca15b2e",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 16777215,
+        "roughness": 0.66,
+        "metalness": 0.08
+      }
+    ],
+    "light": [
+      {
+        "part": "moduleShell",
+        "materialName": "",
+        "material": "ec6c1d7d-e7a4-4623-a04a-f0c050905eca",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3290167,
+        "roughness": 0.76,
+        "metalness": 0.03
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "9fc1ce85-bebc-40a4-9e1b-8099e253a9e9",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "7249ea9e-50c0-4b05-9f72-13d45ae7e78a",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 0.66,
+        "metalness": 0.08
+      }
+    ],
+    "suppressor": [
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "fe123a1e-8e00-4f57-b768-60cc960884b5",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3817288,
+        "roughness": 0.42,
+        "metalness": 0.85
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "12b59f4e-56f2-425b-80ba-61c603c12d1e",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1513498,
+        "roughness": 0.95,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "1ab4b4a8-8099-4997-b178-f3b57b7c231b",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "75887750-e867-477b-a996-4f9cb2dab750",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      }
+    ],
+    "optic": [
+      {
+        "part": "scope rail bridge",
+        "materialName": "gunPaint:sniper",
+        "material": "1f42491d-797d-4ba2-9cd1-5675078968af",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 2369578,
+        "roughness": 0.74,
+        "metalness": 0.05
+      },
+      {
+        "part": "50 mm objective lens",
+        "materialName": "",
+        "material": "4c6ff4f8-9eb1-46d6-864c-d841e2fe281c",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "7b137bc4-3791-4c2c-8d8a-1cf02dd942f0",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3027508,
+        "roughness": 0.5,
+        "metalness": 0.55
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "25b13360-e7eb-43b0-a02d-4bad1d28be88",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 4344399,
+        "roughness": 0.52,
+        "metalness": 0.24
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "3e30eb61-a066-4532-adae-a62907f17a67",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 1514524,
+        "roughness": 0.9,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "8c774a0d-34ba-413c-bad5-653ed384293d",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 7370362,
+        "roughness": 0.45,
+        "metalness": 0.7
+      }
+    ],
+    "rack": [
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "450e0afc-0fb1-4e6e-b45d-865bdca15b2e",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 16777215,
+        "roughness": 0.66,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "ff619234-9146-4815-aec9-800d031d972a",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 4737873,
+        "roughness": 0.66,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "9fc1ce85-bebc-40a4-9e1b-8099e253a9e9",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "7249ea9e-50c0-4b05-9f72-13d45ae7e78a",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 0.66,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "4c6ff4f8-9eb1-46d6-864c-d841e2fe281c",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "393c3c57-c6fa-49b3-9f0d-6ddba4382484",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ]
+  },
+  "camo": {
+    "assembled": [
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "1ab4b4a8-8099-4997-b178-f3b57b7c231b",
+        "role": null,
+        "registered": true,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "e3a4d8ea-e25c-4033-9704-af56d81b973f",
+        "role": null,
+        "registered": true,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "450e0afc-0fb1-4e6e-b45d-865bdca15b2e",
+        "role": null,
+        "registered": true,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "6243f31b-ad61-415c-8ee4-61a63c967b75",
+        "role": null,
+        "registered": true,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "12b59f4e-56f2-425b-80ba-61c603c12d1e",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1513498,
+        "roughness": 0.95,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "e2c22fc6-71f9-43e8-b548-8787ad9fd457",
+        "role": null,
+        "registered": true,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "1a1a3768-4458-48b0-8b91-7c9ac73659e2",
+        "role": null,
+        "registered": true,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "75887750-e867-477b-a996-4f9cb2dab750",
+        "role": null,
+        "registered": true,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "fe123a1e-8e00-4f57-b768-60cc960884b5",
+        "role": null,
+        "registered": true,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "ff619234-9146-4815-aec9-800d031d972a",
+        "role": null,
+        "registered": true,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "9fc1ce85-bebc-40a4-9e1b-8099e253a9e9",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "c904fc94-9d70-4c83-aaf3-0a6e1d26f208",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 13015877,
+        "roughness": 0.3,
+        "metalness": 0.65
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "413f15e0-9291-4ccd-9d35-8b7689fd5fd1",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777113
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "64871067-0302-49b3-8c78-1892d7572652",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16732497
+      },
+      {
+        "part": "moduleShell",
+        "materialName": "",
+        "material": "ec6c1d7d-e7a4-4623-a04a-f0c050905eca",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3290167,
+        "roughness": 0.76,
+        "metalness": 0.03
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "7249ea9e-50c0-4b05-9f72-13d45ae7e78a",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 0.66,
+        "metalness": 0.08
+      },
+      {
+        "part": "scope rail bridge",
+        "materialName": "gunPaint:sniper",
+        "material": "1f42491d-797d-4ba2-9cd1-5675078968af",
+        "role": null,
+        "registered": true,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "50 mm objective lens",
+        "materialName": "",
+        "material": "4c6ff4f8-9eb1-46d6-864c-d841e2fe281c",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "7b137bc4-3791-4c2c-8d8a-1cf02dd942f0",
+        "role": null,
+        "registered": true,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "25b13360-e7eb-43b0-a02d-4bad1d28be88",
+        "role": null,
+        "registered": true,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "3e30eb61-a066-4532-adae-a62907f17a67",
+        "role": null,
+        "registered": true,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "8c774a0d-34ba-413c-bad5-653ed384293d",
+        "role": null,
+        "registered": true,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "393c3c57-c6fa-49b3-9f0d-6ddba4382484",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "firstPerson": [
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:sniper",
+        "material": "2b1612bd-2044-4561-805f-2278a0228534",
+        "role": null,
+        "registered": false,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:sniper",
+        "material": "8bf2b6a1-eeda-46e6-bf3d-922f14ba18d6",
+        "role": null,
+        "registered": false,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:sniper",
+        "material": "ef0e5652-ce5b-4691-a552-1b19f53d1b43",
+        "role": null,
+        "registered": false,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:sniper",
+        "material": "aac7d1ab-a0c6-49e3-ae31-ef4fc4291c34",
+        "role": null,
+        "registered": false,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "472efb64-8eaf-45e5-96a7-e9328cb5fd4b",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2303271,
+        "roughness": 0.92,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:sniper",
+        "material": "56cbdac4-d9cf-4639-99a4-18d7293505c3",
+        "role": null,
+        "registered": false,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:sniper",
+        "material": "216cd61f-11eb-4f31-b4af-60fdae624d31",
+        "role": null,
+        "registered": false,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:sniper",
+        "material": "60db9248-d8d1-4cbc-a42d-c93236d8d304",
+        "role": null,
+        "registered": false,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:sniper",
+        "material": "c5d9f737-7942-46a3-8c6e-688bd10354d7",
+        "role": null,
+        "registered": false,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:sniper",
+        "material": "facc19f1-7498-42e1-b3ce-27d5895f63f5",
+        "role": null,
+        "registered": false,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "7a94c87f-0021-4290-bd8f-d15d5c1ddf50",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "70b12484-3e68-4bec-9e0d-5cb641ea4f9e",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 13015877,
+        "roughness": 0.3,
+        "metalness": 0.65
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshBasicMaterial",
+        "material": "cb1e03a3-d79c-438c-bbb3-fb5d2ab24c13",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777113
+      },
+      {
+        "part": "moduleShell",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "53054020-57d9-42ae-a543-96872774b516",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5264465,
+        "roughness": 0.84,
+        "metalness": 0.02
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "9dcb86e1-a8e4-4fb6-a760-7f57ef2f08fd",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 0.66,
+        "metalness": 0.08
+      },
+      {
+        "part": "scope rail bridge",
+        "materialName": "vm:gunPaint:sniper",
+        "material": "42532d80-9bba-46e2-824c-addcbb04123e",
+        "role": null,
+        "registered": false,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "50 mm objective lens",
+        "materialName": "vm:MeshPhysicalMaterial",
+        "material": "a46271e9-9f8a-42ee-8519-820fa602ebdf",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:sniper",
+        "material": "46a5e91d-6f65-429d-93bd-774304ebb491",
+        "role": null,
+        "registered": false,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:sniper",
+        "material": "018107a9-6515-4e3f-a2c8-748516ca4ac8",
+        "role": null,
+        "registered": false,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:sniper",
+        "material": "0bf5b417-6eee-469a-8bfb-955b6632bfbc",
+        "role": null,
+        "registered": false,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:sniper",
+        "material": "48aef42c-1262-493f-b959-bf48be0ca56b",
+        "role": null,
+        "registered": false,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "vm:fold-static",
+        "material": "df79fbb0-dc32-47e0-9b1c-6e255d9d6932",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "magazine": [
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "1ab4b4a8-8099-4997-b178-f3b57b7c231b",
+        "role": null,
+        "registered": true,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "450e0afc-0fb1-4e6e-b45d-865bdca15b2e",
+        "role": null,
+        "registered": true,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      }
+    ],
+    "light": [
+      {
+        "part": "moduleShell",
+        "materialName": "",
+        "material": "ec6c1d7d-e7a4-4623-a04a-f0c050905eca",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3290167,
+        "roughness": 0.76,
+        "metalness": 0.03
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "9fc1ce85-bebc-40a4-9e1b-8099e253a9e9",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "7249ea9e-50c0-4b05-9f72-13d45ae7e78a",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 0.66,
+        "metalness": 0.08
+      }
+    ],
+    "suppressor": [
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "fe123a1e-8e00-4f57-b768-60cc960884b5",
+        "role": null,
+        "registered": true,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "12b59f4e-56f2-425b-80ba-61c603c12d1e",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1513498,
+        "roughness": 0.95,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "1ab4b4a8-8099-4997-b178-f3b57b7c231b",
+        "role": null,
+        "registered": true,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "75887750-e867-477b-a996-4f9cb2dab750",
+        "role": null,
+        "registered": true,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      }
+    ],
+    "optic": [
+      {
+        "part": "scope rail bridge",
+        "materialName": "gunPaint:sniper",
+        "material": "1f42491d-797d-4ba2-9cd1-5675078968af",
+        "role": null,
+        "registered": true,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "50 mm objective lens",
+        "materialName": "",
+        "material": "4c6ff4f8-9eb1-46d6-864c-d841e2fe281c",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "7b137bc4-3791-4c2c-8d8a-1cf02dd942f0",
+        "role": null,
+        "registered": true,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "25b13360-e7eb-43b0-a02d-4bad1d28be88",
+        "role": null,
+        "registered": true,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "3e30eb61-a066-4532-adae-a62907f17a67",
+        "role": null,
+        "registered": true,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "8c774a0d-34ba-413c-bad5-653ed384293d",
+        "role": null,
+        "registered": true,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      }
+    ],
+    "rack": [
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "1ab4b4a8-8099-4997-b178-f3b57b7c231b",
+        "role": null,
+        "registered": true,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "e3a4d8ea-e25c-4033-9704-af56d81b973f",
+        "role": null,
+        "registered": true,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "450e0afc-0fb1-4e6e-b45d-865bdca15b2e",
+        "role": null,
+        "registered": true,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "6243f31b-ad61-415c-8ee4-61a63c967b75",
+        "role": null,
+        "registered": true,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "e2c22fc6-71f9-43e8-b548-8787ad9fd457",
+        "role": null,
+        "registered": true,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "1a1a3768-4458-48b0-8b91-7c9ac73659e2",
+        "role": null,
+        "registered": true,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "75887750-e867-477b-a996-4f9cb2dab750",
+        "role": null,
+        "registered": true,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "fe123a1e-8e00-4f57-b768-60cc960884b5",
+        "role": null,
+        "registered": true,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "ff619234-9146-4815-aec9-800d031d972a",
+        "role": null,
+        "registered": true,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "9fc1ce85-bebc-40a4-9e1b-8099e253a9e9",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "7249ea9e-50c0-4b05-9f72-13d45ae7e78a",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 0.66,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "1f42491d-797d-4ba2-9cd1-5675078968af",
+        "role": null,
+        "registered": true,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "4c6ff4f8-9eb1-46d6-864c-d841e2fe281c",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "7b137bc4-3791-4c2c-8d8a-1cf02dd942f0",
+        "role": null,
+        "registered": true,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "25b13360-e7eb-43b0-a02d-4bad1d28be88",
+        "role": null,
+        "registered": true,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "3e30eb61-a066-4532-adae-a62907f17a67",
+        "role": null,
+        "registered": true,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "8c774a0d-34ba-413c-bad5-653ed384293d",
+        "role": null,
+        "registered": true,
+        "map": "13f230f9-e887-46fe-a831-0bd8064a0247",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "393c3c57-c6fa-49b3-9f0d-6ddba4382484",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ]
+  },
+  "restored": {
+    "assembled": [
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "1ab4b4a8-8099-4997-b178-f3b57b7c231b",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "e3a4d8ea-e25c-4033-9704-af56d81b973f",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3290167,
+        "roughness": 0.76,
+        "metalness": 0.03
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "450e0afc-0fb1-4e6e-b45d-865bdca15b2e",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 16777215,
+        "roughness": 0.66,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "6243f31b-ad61-415c-8ee4-61a63c967b75",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 6905415,
+        "roughness": 0.86,
+        "metalness": 0.02
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "12b59f4e-56f2-425b-80ba-61c603c12d1e",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1513498,
+        "roughness": 0.95,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "e2c22fc6-71f9-43e8-b548-8787ad9fd457",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 10126688,
+        "roughness": 0.74,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "1a1a3768-4458-48b0-8b91-7c9ac73659e2",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 11581117,
+        "roughness": 0.26,
+        "metalness": 0.62
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "75887750-e867-477b-a996-4f9cb2dab750",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "fe123a1e-8e00-4f57-b768-60cc960884b5",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3817288,
+        "roughness": 0.42,
+        "metalness": 0.85
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "ff619234-9146-4815-aec9-800d031d972a",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 4737873,
+        "roughness": 0.66,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "9fc1ce85-bebc-40a4-9e1b-8099e253a9e9",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "c904fc94-9d70-4c83-aaf3-0a6e1d26f208",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 13015877,
+        "roughness": 0.3,
+        "metalness": 0.65
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "413f15e0-9291-4ccd-9d35-8b7689fd5fd1",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777113
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "64871067-0302-49b3-8c78-1892d7572652",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16732497
+      },
+      {
+        "part": "moduleShell",
+        "materialName": "",
+        "material": "ec6c1d7d-e7a4-4623-a04a-f0c050905eca",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3290167,
+        "roughness": 0.76,
+        "metalness": 0.03
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "7249ea9e-50c0-4b05-9f72-13d45ae7e78a",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 0.66,
+        "metalness": 0.08
+      },
+      {
+        "part": "scope rail bridge",
+        "materialName": "gunPaint:sniper",
+        "material": "1f42491d-797d-4ba2-9cd1-5675078968af",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 2369578,
+        "roughness": 0.74,
+        "metalness": 0.05
+      },
+      {
+        "part": "50 mm objective lens",
+        "materialName": "",
+        "material": "4c6ff4f8-9eb1-46d6-864c-d841e2fe281c",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "7b137bc4-3791-4c2c-8d8a-1cf02dd942f0",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3027508,
+        "roughness": 0.5,
+        "metalness": 0.55
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "25b13360-e7eb-43b0-a02d-4bad1d28be88",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 4344399,
+        "roughness": 0.52,
+        "metalness": 0.24
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "3e30eb61-a066-4532-adae-a62907f17a67",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 1514524,
+        "roughness": 0.9,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "8c774a0d-34ba-413c-bad5-653ed384293d",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 7370362,
+        "roughness": 0.45,
+        "metalness": 0.7
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "393c3c57-c6fa-49b3-9f0d-6ddba4382484",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "firstPerson": [
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:sniper",
+        "material": "1bc12db8-c07b-49ba-9594-823d71174f4c",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5659490,
+        "roughness": 0.58,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:sniper",
+        "material": "9b771521-e9c0-4d8a-9daf-dcd7e881fb78",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5264465,
+        "roughness": 0.84,
+        "metalness": 0.02
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:sniper",
+        "material": "4b622ef8-2860-4b8c-a117-2574cdaf9b69",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 0.66,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:sniper",
+        "material": "b16899d2-9347-4dfe-8179-13d8075a964b",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 6905415,
+        "roughness": 0.86,
+        "metalness": 0.02
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "472efb64-8eaf-45e5-96a7-e9328cb5fd4b",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2303271,
+        "roughness": 0.92,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:sniper",
+        "material": "6f5756a5-ca0e-48fb-8e54-b4548ecb91f9",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 10126688,
+        "roughness": 0.74,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:sniper",
+        "material": "acb08c31-0348-4a22-adb1-3b3d2949f4a4",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11581117,
+        "roughness": 0.26,
+        "metalness": 0.62
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:sniper",
+        "material": "863e64e2-5284-4b87-9617-c17a10867d70",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685184,
+        "roughness": 0.69,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:sniper",
+        "material": "c013722b-38eb-4ee5-9c71-214136f367e4",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 8094347,
+        "roughness": 0.42,
+        "metalness": 0.85
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:sniper",
+        "material": "f527c25a-5b55-4563-88ce-f083cbc5b66d",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7172472,
+        "roughness": 0.63,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "7a94c87f-0021-4290-bd8f-d15d5c1ddf50",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "70b12484-3e68-4bec-9e0d-5cb641ea4f9e",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 13015877,
+        "roughness": 0.3,
+        "metalness": 0.65
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshBasicMaterial",
+        "material": "cb1e03a3-d79c-438c-bbb3-fb5d2ab24c13",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777113
+      },
+      {
+        "part": "moduleShell",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "53054020-57d9-42ae-a543-96872774b516",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5264465,
+        "roughness": 0.84,
+        "metalness": 0.02
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "9dcb86e1-a8e4-4fb6-a760-7f57ef2f08fd",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 0.66,
+        "metalness": 0.08
+      },
+      {
+        "part": "scope rail bridge",
+        "materialName": "vm:gunPaint:sniper",
+        "material": "844d31b2-652e-44ce-a106-4d1a6113c815",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2369578,
+        "roughness": 0.74,
+        "metalness": 0.05
+      },
+      {
+        "part": "50 mm objective lens",
+        "materialName": "vm:MeshPhysicalMaterial",
+        "material": "a46271e9-9f8a-42ee-8519-820fa602ebdf",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:sniper",
+        "material": "d830edc3-1806-4e9f-9b60-a7683fb3233d",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3027508,
+        "roughness": 0.5,
+        "metalness": 0.55
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:sniper",
+        "material": "bd777d1b-cb15-4f97-98bb-70278508dd1e",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 4344399,
+        "roughness": 0.52,
+        "metalness": 0.24
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:sniper",
+        "material": "4261a4b3-082c-4c7d-9ec3-e3455b026399",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1514524,
+        "roughness": 0.9,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:sniper",
+        "material": "71762567-cb01-4006-abb4-d5c481a88be4",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7370362,
+        "roughness": 0.45,
+        "metalness": 0.7
+      },
+      {
+        "part": "",
+        "materialName": "vm:fold-static",
+        "material": "df79fbb0-dc32-47e0-9b1c-6e255d9d6932",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "magazine": [
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "1ab4b4a8-8099-4997-b178-f3b57b7c231b",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "450e0afc-0fb1-4e6e-b45d-865bdca15b2e",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 16777215,
+        "roughness": 0.66,
+        "metalness": 0.08
+      }
+    ],
+    "light": [
+      {
+        "part": "moduleShell",
+        "materialName": "",
+        "material": "ec6c1d7d-e7a4-4623-a04a-f0c050905eca",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3290167,
+        "roughness": 0.76,
+        "metalness": 0.03
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "9fc1ce85-bebc-40a4-9e1b-8099e253a9e9",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "7249ea9e-50c0-4b05-9f72-13d45ae7e78a",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 0.66,
+        "metalness": 0.08
+      }
+    ],
+    "suppressor": [
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "fe123a1e-8e00-4f57-b768-60cc960884b5",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3817288,
+        "roughness": 0.42,
+        "metalness": 0.85
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "12b59f4e-56f2-425b-80ba-61c603c12d1e",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1513498,
+        "roughness": 0.95,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "1ab4b4a8-8099-4997-b178-f3b57b7c231b",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "75887750-e867-477b-a996-4f9cb2dab750",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      }
+    ],
+    "optic": [
+      {
+        "part": "scope rail bridge",
+        "materialName": "gunPaint:sniper",
+        "material": "1f42491d-797d-4ba2-9cd1-5675078968af",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 2369578,
+        "roughness": 0.74,
+        "metalness": 0.05
+      },
+      {
+        "part": "50 mm objective lens",
+        "materialName": "",
+        "material": "4c6ff4f8-9eb1-46d6-864c-d841e2fe281c",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "7b137bc4-3791-4c2c-8d8a-1cf02dd942f0",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3027508,
+        "roughness": 0.5,
+        "metalness": 0.55
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "25b13360-e7eb-43b0-a02d-4bad1d28be88",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 4344399,
+        "roughness": 0.52,
+        "metalness": 0.24
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "3e30eb61-a066-4532-adae-a62907f17a67",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 1514524,
+        "roughness": 0.9,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "8c774a0d-34ba-413c-bad5-653ed384293d",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 7370362,
+        "roughness": 0.45,
+        "metalness": 0.7
+      }
+    ],
+    "rack": [
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "450e0afc-0fb1-4e6e-b45d-865bdca15b2e",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 16777215,
+        "roughness": 0.66,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:sniper",
+        "material": "ff619234-9146-4815-aec9-800d031d972a",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 4737873,
+        "roughness": 0.66,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "9fc1ce85-bebc-40a4-9e1b-8099e253a9e9",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "7249ea9e-50c0-4b05-9f72-13d45ae7e78a",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 0.66,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "4c6ff4f8-9eb1-46d6-864c-d841e2fe281c",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "393c3c57-c6fa-49b3-9f0d-6ddba4382484",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ]
+  }
+}

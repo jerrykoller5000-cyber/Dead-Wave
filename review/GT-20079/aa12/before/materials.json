@@ -1,0 +1,1575 @@
+{
+  "factory": {
+    "assembled": [
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "17f516e9-8046-4e9a-9192-bff8a26647de",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3817288,
+        "roughness": 0.42,
+        "metalness": 0.85
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "68c83be0-9ee9-4b77-8e07-1cf4baabbc18",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 6053992,
+        "roughness": 0.68,
+        "metalness": 0.06
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "7bb383a3-9e13-4f01-a9ce-3e146e9af370",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "917530fa-d482-487b-9474-af0a8cfcb9f9",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3290167,
+        "roughness": 0.76,
+        "metalness": 0.03
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "fb347516-be9e-4c76-9ccf-60a0fe061dc0",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1513498,
+        "roughness": 0.95,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "c586b527-7bfc-44aa-8fef-7b96b016954a",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "ce4575b0-7583-42b9-9e93-9561a554d0c7",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 4737873,
+        "roughness": 0.66,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "f128c24e-94d6-404f-b149-f31d536e35ef",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777113
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "bb98b9f0-aa15-46a5-8863-08659d2b6151",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16732497
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "01c72e31-0091-444e-ae46-cbda39ce1027",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "7268e101-e5e9-4c61-a33f-a82f75b4ebba",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "b32d4ed9-1479-410e-8b12-ff36d118cd4d",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 4804954,
+        "roughness": 0.43,
+        "metalness": 0.33
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "e13a460b-9b25-433d-a134-3413ff64bb6e",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3554369,
+        "roughness": 0.52,
+        "metalness": 0.26
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "materialName": "",
+        "material": "b327cc9c-c94f-4588-a6da-d21192f2fba4",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "materialName": "",
+        "material": "9782b225-163a-4cf8-a2f2-2c27fbb2ad65",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      }
+    ],
+    "firstPerson": [
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:aa12",
+        "material": "6a0703df-0931-4d33-add7-bed94db7fbe4",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 8094347,
+        "roughness": 0.42,
+        "metalness": 0.85
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:aa12",
+        "material": "27206999-9397-4682-b862-3a4d03b10400",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 8751504,
+        "roughness": 0.61,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:aa12",
+        "material": "4d7f834d-548e-488a-94c8-52ef6a2fff28",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685184,
+        "roughness": 0.69,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:aa12",
+        "material": "196c4f7c-cebc-4695-b95d-d38806da7d97",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5264465,
+        "roughness": 0.84,
+        "metalness": 0.02
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "cc5043c3-b1d3-477b-9dda-764e148d8d4b",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2303271,
+        "roughness": 0.92,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:aa12",
+        "material": "b89aa49a-86e4-4856-9f48-fc90b72e056a",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5659490,
+        "roughness": 0.58,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:aa12",
+        "material": "cee7328a-8cac-4bc0-a465-ea8d78c3ee20",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7172472,
+        "roughness": 0.63,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshBasicMaterial",
+        "material": "5a5a1fe9-8cbb-4695-8a72-9115819fcbca",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777113
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "45c722f9-2e91-4ee4-8c14-3600216cd362",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "vm:fold-static",
+        "material": "d73cafc8-3f62-45d1-8705-96a53518961c",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:aa12",
+        "material": "4d6cb17e-8176-487c-86ea-41eb505bdefd",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 4804954,
+        "roughness": 0.43,
+        "metalness": 0.33
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:aa12",
+        "material": "6a463105-4fe5-4d5c-98bc-29e5df14c2c6",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3554369,
+        "roughness": 0.52,
+        "metalness": 0.26
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "materialName": "vm:MeshPhysicalMaterial",
+        "material": "7e9f8ba3-e615-4352-a583-9fd619acdef7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "materialName": "vm:MeshBasicMaterial",
+        "material": "b8f18cde-6063-48ba-ae1b-c5667f702dad",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      }
+    ],
+    "magazine": [
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "c586b527-7bfc-44aa-8fef-7b96b016954a",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "ce4575b0-7583-42b9-9e93-9561a554d0c7",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 4737873,
+        "roughness": 0.66,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "68c83be0-9ee9-4b77-8e07-1cf4baabbc18",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 6053992,
+        "roughness": 0.68,
+        "metalness": 0.06
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "7bb383a3-9e13-4f01-a9ce-3e146e9af370",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "17f516e9-8046-4e9a-9192-bff8a26647de",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3817288,
+        "roughness": 0.42,
+        "metalness": 0.85
+      }
+    ],
+    "light": [
+      {
+        "part": "",
+        "materialName": "",
+        "material": "01c72e31-0091-444e-ae46-cbda39ce1027",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "7268e101-e5e9-4c61-a33f-a82f75b4ebba",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "optic": [
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "7bb383a3-9e13-4f01-a9ce-3e146e9af370",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "c586b527-7bfc-44aa-8fef-7b96b016954a",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "materialName": "",
+        "material": "b327cc9c-c94f-4588-a6da-d21192f2fba4",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "materialName": "",
+        "material": "9782b225-163a-4cf8-a2f2-2c27fbb2ad65",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "7268e101-e5e9-4c61-a33f-a82f75b4ebba",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "rack": [
+      {
+        "part": "",
+        "materialName": "",
+        "material": "01c72e31-0091-444e-ae46-cbda39ce1027",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "7268e101-e5e9-4c61-a33f-a82f75b4ebba",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "b327cc9c-c94f-4588-a6da-d21192f2fba4",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "9782b225-163a-4cf8-a2f2-2c27fbb2ad65",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      }
+    ]
+  },
+  "camo": {
+    "assembled": [
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "17f516e9-8046-4e9a-9192-bff8a26647de",
+        "role": null,
+        "registered": true,
+        "map": "40833e4b-b5e5-4730-947f-02735fc7742b",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "68c83be0-9ee9-4b77-8e07-1cf4baabbc18",
+        "role": null,
+        "registered": true,
+        "map": "40833e4b-b5e5-4730-947f-02735fc7742b",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "7bb383a3-9e13-4f01-a9ce-3e146e9af370",
+        "role": null,
+        "registered": true,
+        "map": "40833e4b-b5e5-4730-947f-02735fc7742b",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "917530fa-d482-487b-9474-af0a8cfcb9f9",
+        "role": null,
+        "registered": true,
+        "map": "40833e4b-b5e5-4730-947f-02735fc7742b",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "fb347516-be9e-4c76-9ccf-60a0fe061dc0",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1513498,
+        "roughness": 0.95,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "c586b527-7bfc-44aa-8fef-7b96b016954a",
+        "role": null,
+        "registered": true,
+        "map": "40833e4b-b5e5-4730-947f-02735fc7742b",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "ce4575b0-7583-42b9-9e93-9561a554d0c7",
+        "role": null,
+        "registered": true,
+        "map": "40833e4b-b5e5-4730-947f-02735fc7742b",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "f128c24e-94d6-404f-b149-f31d536e35ef",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777113
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "bb98b9f0-aa15-46a5-8863-08659d2b6151",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16732497
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "01c72e31-0091-444e-ae46-cbda39ce1027",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "7268e101-e5e9-4c61-a33f-a82f75b4ebba",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "b32d4ed9-1479-410e-8b12-ff36d118cd4d",
+        "role": null,
+        "registered": true,
+        "map": "40833e4b-b5e5-4730-947f-02735fc7742b",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "e13a460b-9b25-433d-a134-3413ff64bb6e",
+        "role": null,
+        "registered": true,
+        "map": "40833e4b-b5e5-4730-947f-02735fc7742b",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "materialName": "",
+        "material": "b327cc9c-c94f-4588-a6da-d21192f2fba4",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "materialName": "",
+        "material": "9782b225-163a-4cf8-a2f2-2c27fbb2ad65",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      }
+    ],
+    "firstPerson": [
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:aa12",
+        "material": "13a37c76-3981-4e2c-acac-2b42bf449306",
+        "role": null,
+        "registered": false,
+        "map": "40833e4b-b5e5-4730-947f-02735fc7742b",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:aa12",
+        "material": "7b78cbe4-88c6-421b-a4e0-9743483d0256",
+        "role": null,
+        "registered": false,
+        "map": "40833e4b-b5e5-4730-947f-02735fc7742b",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:aa12",
+        "material": "fb4e2f70-6ccd-40d6-90b0-f8b3ab02c5dd",
+        "role": null,
+        "registered": false,
+        "map": "40833e4b-b5e5-4730-947f-02735fc7742b",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:aa12",
+        "material": "e9851e9d-1c88-4e8b-8a08-9de3bd03da7d",
+        "role": null,
+        "registered": false,
+        "map": "40833e4b-b5e5-4730-947f-02735fc7742b",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "cc5043c3-b1d3-477b-9dda-764e148d8d4b",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2303271,
+        "roughness": 0.92,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:aa12",
+        "material": "c57649c2-2db6-40f5-b297-3d6810991e93",
+        "role": null,
+        "registered": false,
+        "map": "40833e4b-b5e5-4730-947f-02735fc7742b",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:aa12",
+        "material": "73e53d73-5a8c-483b-ada2-d5a5a5def972",
+        "role": null,
+        "registered": false,
+        "map": "40833e4b-b5e5-4730-947f-02735fc7742b",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshBasicMaterial",
+        "material": "5a5a1fe9-8cbb-4695-8a72-9115819fcbca",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777113
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "45c722f9-2e91-4ee4-8c14-3600216cd362",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "vm:fold-static",
+        "material": "d73cafc8-3f62-45d1-8705-96a53518961c",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:aa12",
+        "material": "ea91b7bd-9676-4a96-a5d8-0c55be0778f0",
+        "role": null,
+        "registered": false,
+        "map": "40833e4b-b5e5-4730-947f-02735fc7742b",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:aa12",
+        "material": "f137626d-7dca-4d69-881b-1b2ad46fd3c2",
+        "role": null,
+        "registered": false,
+        "map": "40833e4b-b5e5-4730-947f-02735fc7742b",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "materialName": "vm:MeshPhysicalMaterial",
+        "material": "7e9f8ba3-e615-4352-a583-9fd619acdef7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "materialName": "vm:MeshBasicMaterial",
+        "material": "b8f18cde-6063-48ba-ae1b-c5667f702dad",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      }
+    ],
+    "magazine": [
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "c586b527-7bfc-44aa-8fef-7b96b016954a",
+        "role": null,
+        "registered": true,
+        "map": "40833e4b-b5e5-4730-947f-02735fc7742b",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "ce4575b0-7583-42b9-9e93-9561a554d0c7",
+        "role": null,
+        "registered": true,
+        "map": "40833e4b-b5e5-4730-947f-02735fc7742b",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "68c83be0-9ee9-4b77-8e07-1cf4baabbc18",
+        "role": null,
+        "registered": true,
+        "map": "40833e4b-b5e5-4730-947f-02735fc7742b",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "7bb383a3-9e13-4f01-a9ce-3e146e9af370",
+        "role": null,
+        "registered": true,
+        "map": "40833e4b-b5e5-4730-947f-02735fc7742b",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "17f516e9-8046-4e9a-9192-bff8a26647de",
+        "role": null,
+        "registered": true,
+        "map": "40833e4b-b5e5-4730-947f-02735fc7742b",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      }
+    ],
+    "light": [
+      {
+        "part": "",
+        "materialName": "",
+        "material": "01c72e31-0091-444e-ae46-cbda39ce1027",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "7268e101-e5e9-4c61-a33f-a82f75b4ebba",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "optic": [
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "7bb383a3-9e13-4f01-a9ce-3e146e9af370",
+        "role": null,
+        "registered": true,
+        "map": "40833e4b-b5e5-4730-947f-02735fc7742b",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "c586b527-7bfc-44aa-8fef-7b96b016954a",
+        "role": null,
+        "registered": true,
+        "map": "40833e4b-b5e5-4730-947f-02735fc7742b",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "materialName": "",
+        "material": "b327cc9c-c94f-4588-a6da-d21192f2fba4",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "materialName": "",
+        "material": "9782b225-163a-4cf8-a2f2-2c27fbb2ad65",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "7268e101-e5e9-4c61-a33f-a82f75b4ebba",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "rack": [
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "17f516e9-8046-4e9a-9192-bff8a26647de",
+        "role": null,
+        "registered": true,
+        "map": "40833e4b-b5e5-4730-947f-02735fc7742b",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "68c83be0-9ee9-4b77-8e07-1cf4baabbc18",
+        "role": null,
+        "registered": true,
+        "map": "40833e4b-b5e5-4730-947f-02735fc7742b",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "7bb383a3-9e13-4f01-a9ce-3e146e9af370",
+        "role": null,
+        "registered": true,
+        "map": "40833e4b-b5e5-4730-947f-02735fc7742b",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "917530fa-d482-487b-9474-af0a8cfcb9f9",
+        "role": null,
+        "registered": true,
+        "map": "40833e4b-b5e5-4730-947f-02735fc7742b",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "c586b527-7bfc-44aa-8fef-7b96b016954a",
+        "role": null,
+        "registered": true,
+        "map": "40833e4b-b5e5-4730-947f-02735fc7742b",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "ce4575b0-7583-42b9-9e93-9561a554d0c7",
+        "role": null,
+        "registered": true,
+        "map": "40833e4b-b5e5-4730-947f-02735fc7742b",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "01c72e31-0091-444e-ae46-cbda39ce1027",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "7268e101-e5e9-4c61-a33f-a82f75b4ebba",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "b32d4ed9-1479-410e-8b12-ff36d118cd4d",
+        "role": null,
+        "registered": true,
+        "map": "40833e4b-b5e5-4730-947f-02735fc7742b",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "e13a460b-9b25-433d-a134-3413ff64bb6e",
+        "role": null,
+        "registered": true,
+        "map": "40833e4b-b5e5-4730-947f-02735fc7742b",
+        "color": 15131350,
+        "roughness": 0.62,
+        "metalness": 0.05
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "b327cc9c-c94f-4588-a6da-d21192f2fba4",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "9782b225-163a-4cf8-a2f2-2c27fbb2ad65",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      }
+    ]
+  },
+  "restored": {
+    "assembled": [
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "17f516e9-8046-4e9a-9192-bff8a26647de",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3817288,
+        "roughness": 0.42,
+        "metalness": 0.85
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "68c83be0-9ee9-4b77-8e07-1cf4baabbc18",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 6053992,
+        "roughness": 0.68,
+        "metalness": 0.06
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "7bb383a3-9e13-4f01-a9ce-3e146e9af370",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "917530fa-d482-487b-9474-af0a8cfcb9f9",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3290167,
+        "roughness": 0.76,
+        "metalness": 0.03
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "fb347516-be9e-4c76-9ccf-60a0fe061dc0",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1513498,
+        "roughness": 0.95,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "c586b527-7bfc-44aa-8fef-7b96b016954a",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "ce4575b0-7583-42b9-9e93-9561a554d0c7",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 4737873,
+        "roughness": 0.66,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "f128c24e-94d6-404f-b149-f31d536e35ef",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777113
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "bb98b9f0-aa15-46a5-8863-08659d2b6151",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16732497
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "01c72e31-0091-444e-ae46-cbda39ce1027",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "7268e101-e5e9-4c61-a33f-a82f75b4ebba",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "b32d4ed9-1479-410e-8b12-ff36d118cd4d",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 4804954,
+        "roughness": 0.43,
+        "metalness": 0.33
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "e13a460b-9b25-433d-a134-3413ff64bb6e",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3554369,
+        "roughness": 0.52,
+        "metalness": 0.26
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "materialName": "",
+        "material": "b327cc9c-c94f-4588-a6da-d21192f2fba4",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "materialName": "",
+        "material": "9782b225-163a-4cf8-a2f2-2c27fbb2ad65",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      }
+    ],
+    "firstPerson": [
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:aa12",
+        "material": "f8b843d7-f770-40b0-8b3e-36451eece957",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 8094347,
+        "roughness": 0.42,
+        "metalness": 0.85
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:aa12",
+        "material": "af281eb1-a3f0-49c7-b01b-723758067d19",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 8751504,
+        "roughness": 0.61,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:aa12",
+        "material": "6389cd59-aa5f-4945-a125-24a24ee0ee0d",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3685184,
+        "roughness": 0.69,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:aa12",
+        "material": "7dc167ed-136f-4de4-88b0-097de0e6d25e",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5264465,
+        "roughness": 0.84,
+        "metalness": 0.02
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "cc5043c3-b1d3-477b-9dda-764e148d8d4b",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 2303271,
+        "roughness": 0.92,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:aa12",
+        "material": "7e31ed7f-c4d4-49c1-9e35-47bcb0d2e230",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 5659490,
+        "roughness": 0.58,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:aa12",
+        "material": "da2ea035-9797-4f4f-84c7-871e9b6722dd",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7172472,
+        "roughness": 0.63,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshBasicMaterial",
+        "material": "5a5a1fe9-8cbb-4695-8a72-9115819fcbca",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777113
+      },
+      {
+        "part": "",
+        "materialName": "vm:MeshStandardMaterial",
+        "material": "45c722f9-2e91-4ee4-8c14-3600216cd362",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "vm:fold-static",
+        "material": "d73cafc8-3f62-45d1-8705-96a53518961c",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:aa12",
+        "material": "9a38a446-d428-4a60-b205-a34bfec3a2b7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 4804954,
+        "roughness": 0.43,
+        "metalness": 0.33
+      },
+      {
+        "part": "",
+        "materialName": "vm:gunPaint:aa12",
+        "material": "b9ccbef5-14a4-4393-805d-c08709087057",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 3554369,
+        "roughness": 0.52,
+        "metalness": 0.26
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "materialName": "vm:MeshPhysicalMaterial",
+        "material": "7e9f8ba3-e615-4352-a583-9fd619acdef7",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "materialName": "vm:MeshBasicMaterial",
+        "material": "b8f18cde-6063-48ba-ae1b-c5667f702dad",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      }
+    ],
+    "magazine": [
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "c586b527-7bfc-44aa-8fef-7b96b016954a",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "ce4575b0-7583-42b9-9e93-9561a554d0c7",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 4737873,
+        "roughness": 0.66,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "68c83be0-9ee9-4b77-8e07-1cf4baabbc18",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 6053992,
+        "roughness": 0.68,
+        "metalness": 0.06
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "7bb383a3-9e13-4f01-a9ce-3e146e9af370",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "17f516e9-8046-4e9a-9192-bff8a26647de",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3817288,
+        "roughness": 0.42,
+        "metalness": 0.85
+      }
+    ],
+    "light": [
+      {
+        "part": "",
+        "materialName": "",
+        "material": "01c72e31-0091-444e-ae46-cbda39ce1027",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "7268e101-e5e9-4c61-a33f-a82f75b4ebba",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "optic": [
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "7bb383a3-9e13-4f01-a9ce-3e146e9af370",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 2566445,
+        "roughness": 0.68,
+        "metalness": 0.08
+      },
+      {
+        "part": "",
+        "materialName": "gunPaint:aa12",
+        "material": "c586b527-7bfc-44aa-8fef-7b96b016954a",
+        "role": null,
+        "registered": true,
+        "map": null,
+        "color": 3685185,
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      {
+        "part": "faint blue-gray optical glass",
+        "materialName": "",
+        "material": "b327cc9c-c94f-4588-a6da-d21192f2fba4",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "low-intensity virtual dot",
+        "materialName": "",
+        "material": "9782b225-163a-4cf8-a2f2-2c27fbb2ad65",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "7268e101-e5e9-4c61-a33f-a82f75b4ebba",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      }
+    ],
+    "rack": [
+      {
+        "part": "",
+        "materialName": "",
+        "material": "01c72e31-0091-444e-ae46-cbda39ce1027",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 1323070,
+        "roughness": 0.08,
+        "metalness": 0.9
+      },
+      {
+        "part": "",
+        "materialName": "fold-static",
+        "material": "7268e101-e5e9-4c61-a33f-a82f75b4ebba",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "b327cc9c-c94f-4588-a6da-d21192f2fba4",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 7837850,
+        "roughness": 0.14,
+        "metalness": 0
+      },
+      {
+        "part": "",
+        "materialName": "",
+        "material": "9782b225-163a-4cf8-a2f2-2c27fbb2ad65",
+        "role": null,
+        "registered": false,
+        "map": null,
+        "color": 11614508
+      }
+    ]
+  }
+}

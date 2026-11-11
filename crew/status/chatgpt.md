@@ -2,12 +2,12 @@
 
 state: active
 model: GPT-6.1 Sol
-task: GP-20086 Continue per-kind Training zombie collision through poses, deaths, pictures and performance
-touching: index.html (Training zombie collision), game/training-zombie-collision.js, review/GP-20086/probe.mjs, handoffs/2026-11-11-chatgpt-GP-20086.md
-since: 2026-11-11T02:43Z
-next: GP-20086 J126 rule 3 / J128 (D-138, D-140): the zombies against the T
+task: GP-20086 Director follow-up: settle Training guardian corpse arm and leg
+touching: game/training-zombie-collision.js (Training corpse settle), review/GP-20086/, handoffs/2026-11-11-chatgpt-GP-20086-followup.md
+since: 2026-11-11T04:44Z
+next: GP-20087 GP-20085's other half: the third-person camera and the dive
 blocked-on: —
-last-report: handoffs/2026-11-10-chatgpt-GP-20083.md
+last-report: handoffs/2026-11-11-chatgpt-GP-20087-paused.md
 
 ## Notes
 

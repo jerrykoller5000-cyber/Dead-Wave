@@ -1,0 +1,104 @@
+{
+  "rows": [
+    {
+      "kind": "shambler",
+      "corpse": true,
+      "proxyMin": -200.04722660839641,
+      "exactMin": -199.98500000000004,
+      "floor": -200,
+      "lift": -0.0002311155329266512
+    },
+    {
+      "kind": "feral",
+      "corpse": true,
+      "proxyMin": -200.1574426221445,
+      "exactMin": -199.98500000220486,
+      "floor": -200,
+      "lift": 0.2959189789287393
+    },
+    {
+      "kind": "leaper",
+      "corpse": true,
+      "proxyMin": -200.06104347015935,
+      "exactMin": -199.98500000000007,
+      "floor": -200,
+      "lift": 0.5650606897901582
+    },
+    {
+      "kind": "spider",
+      "corpse": true,
+      "proxyMin": -200.11525613002132,
+      "exactMin": -199.985,
+      "floor": -200,
+      "lift": -0.01700951307878995
+    },
+    {
+      "kind": "drowned",
+      "corpse": true,
+      "proxyMin": -200.06037291662355,
+      "exactMin": -199.98500000000013,
+      "floor": -200,
+      "lift": 0.1943419963322981
+    },
+    {
+      "kind": "military",
+      "corpse": true,
+      "proxyMin": -200.05589914073414,
+      "exactMin": -199.985,
+      "floor": -200,
+      "lift": 0.5055987139888316
+    },
+    {
+      "kind": "brute",
+      "corpse": true,
+      "proxyMin": -199.99967619160057,
+      "exactMin": -199.98500000000004,
+      "floor": -200,
+      "lift": 0.705801375212161
+    },
+    {
+      "kind": "spitter",
+      "corpse": true,
+      "proxyMin": -200.04524931036516,
+      "exactMin": -199.985,
+      "floor": -200,
+      "lift": 0.15126082478758462
+    },
+    {
+      "kind": "screamer",
+      "corpse": true,
+      "proxyMin": -200.0156273095938,
+      "exactMin": -199.985,
+      "floor": -200,
+      "lift": 0.3380730558158973
+    },
+    {
+      "kind": "bomber",
+      "corpse": false
+    },
+    {
+      "kind": "demon",
+      "corpse": true,
+      "proxyMin": -200.08835407325375,
+      "exactMin": -199.98499999999999,
+      "floor": -200,
+      "lift": 0.8609634534080328
+    },
+    {
+      "kind": "colossus",
+      "corpse": true,
+      "proxyMin": -200.23360558691513,
+      "exactMin": -199.98500000000004,
+      "floor": -200,
+      "lift": 0.7706740007533028
+    },
+    {
+      "kind": "guardian",
+      "corpse": true,
+      "proxyMin": -200.32461252153436,
+      "exactMin": -199.98500000000004,
+      "floor": -200,
+      "lift": 2.1473211091901305
+    }
+  ]
+}
