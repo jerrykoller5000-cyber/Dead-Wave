@@ -1,0 +1,47 @@
+COMMAND node tools/realtest.mjs tcl334c tcl334d tgb255b t333 --all
+ok    tcl334c    5 pass   0 fail  34.7s  (real renderer)
+    PASS guns checked up in first person: 5 of 5
+    PASS no part of either hand inside any part of a gun (deepest per gun, mm: m4 0.3, ak 0.2, shotgun 0.5, aa12 0.2, sniper 0.5)
+    PASS neither hand through the other (D-140)
+    PASS the gloved wrists stay inside the sleeves at every gun's hip hold
+    PASS no page errors
+FAIL  tcl334d    4 pass   1 fail  37.4s  (real renderer)
+    PASS guns checked up in first person: 4 of 4
+    FAIL no part of either hand inside any part of a gun (deepest per gun, mm: minigun 0.0, launcher 0.0, flamer 0.3, chainsaw 6.4); through: chainsaw: 6.4 mm (r glove in ?)
+    PASS neither hand through the other (D-140)
+    PASS the gloved wrists stay inside the sleeves at every gun's hip hold
+    PASS no page errors
+FAIL  tgb255b   13 pass   1 fail  138.9s  (real renderer)
+    PASS the HQ house is there
+    PASS the spider starts with the house between them
+    PASS it comes round until the house is out of the line (clear after 4.5 s, in the line 100% of the time after; clear of the house)
+    PASS and it stays at range: never closer than 5.7 m
+    INFO spitter flankSide 1 tactics creep | 0.1:6.9,-1.0 1.0:6.4,-1.3 2.1:6.0,-1.9 3.1:5.8,-2.6 4.1:5.7,-3.3 5.0:5.7,-4.0 6.0:5.6,-4.7 7.0:5.6,-5.3 8.0:5.1,-5.5 9.0:4.4,-5.6 10.0:3.7,-5.6 11.0:3.0,-5.6 12.1:2.2,-5.6 13.0:1.6,-5.6 14.0:0.9,-5.6
+    PASS a spitter behind the house keeps creeping in (moved 7.7 m, 13.0 to 7.6 m)
+    PASS a spider in the open holds its band (11.0 to 14.2 m)
+    PASS a flanker behind the house comes round to him (closest 0.9 m in 30 s; ended at -4.7,-5.4)
+    PASS a spider blind inside its back-off range comes on round the corner (clear after 9.9 s; clear of the house; 5.3 to 5.3 m)
+    FAIL a spider on a line that grazes the corner takes one with room (start 0.29 m clear, end 0.76 m; tight 25% of the time after 3 s; closest 6.0 m)
+    PASS the night-12 spot, the line 0.91 m from the ammo kiosk: the spider reads a line and his AK kills it (line true, dead)
+    PASS three wall pieces between them stop his rounds (3 walls; 0 damage; trigger held 139 ticks, 0 with his gun not by him)
+    PASS a spider behind his wall reads no line (line false)
+    PASS and comes on round the wall instead of holding behind it (closest 6.9 m, ended at -13.7,-7.2)
+    PASS one 13 m step that spans his wall and the spider: the wall stops it (plain stopped, piercing stopped; control from past the wall hits)
+ok    t333     16 pass   0 fail  24.4s  (real renderer)
+    PASS pistol: every small part touches a bigger one (35 small)
+    PASS revolver: every small part touches a bigger one (40 small)
+    PASS uzi: every small part touches a bigger one (83 small)
+    PASS m4: every small part touches a bigger one (61 small)
+    PASS ak: every small part touches a bigger one (66 small)
+    PASS aa12: every small part touches a bigger one (115 small)
+    PASS shotgun: every small part touches a bigger one (32 small)
+    PASS sniper: every small part touches a bigger one (67 small)
+    PASS minigun: every small part touches a bigger one (67 small)
+    PASS launcher: every small part touches a bigger one (56 small)
+    PASS flamer: every small part touches a bigger one (58 small)
+    PASS chainsaw: every small part touches a bigger one (133 small)
+    PASS m240: every small part touches a bigger one (47 small)
+    PASS mortar: every small part touches a bigger one (7 small)
+    PASS checked all 14 guns (14)
+    PASS no floating hardware across the set (0)
+4 checks: 38 pass, 2 fail (real renderer)

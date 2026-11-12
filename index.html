@@ -20148,13 +20148,16 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       pos.needsUpdate = true;
       laser.geometry.computeBoundingSphere();
     }
+    // CB-324: the hidden flashes drawn (at opacity 0) while a warm-up compiles, hidden again after.
+    function setFlashWarm(on) { gunEffects.warm = !!on; for (const m of gunEffects.mats || []) m.visible = m.opacity > 0 || !!on; }
     function gunEffects(gun, mz, flashR, lightR, laserLen, laserR = 0.006, flashCol = 0xffcc66, lightCol = 0xffaa44) {
       // GB-227 (N12): the flash ball is always there at opacity 0; writing depth, it cut a disc out of the water behind the muzzle.
       const flash = new THREE.Mesh(new THREE.SphereGeometry(flashR, 6, 6), glowMat(new THREE.MeshBasicMaterial({ color: flashCol, transparent: true, opacity: 0, depthWrite: false })));
       flash.position.copy(mz); gun.add(flash);
       // CB-317 (t38's draw gate): at opacity 0 the flash still cost a draw every frame on every gun. Its material hides
       // itself while unlit, so whoever writes its opacity (the shot, the fade, a reset, the eye's mirror) shows or hides it.
-      { const fm = flash.material; let op = fm.opacity; Object.defineProperty(fm, 'opacity', { configurable: true, enumerable: true, get() { return op; }, set(v) { op = v; this.visible = v > 0; } }); fm.opacity = op; }
+      // CB-324: while a blackout warm runs (setFlashWarm) it stays drawn, so its pipelines build there, not on the first shot.
+      { const fm = flash.material; let op = fm.opacity; Object.defineProperty(fm, 'opacity', { configurable: true, enumerable: true, get() { return op; }, set(v) { op = v; this.visible = v > 0 || !!gunEffects.warm; } }); fm.opacity = op; (gunEffects.mats ||= []).push(fm); }
       const flashLight = new THREE.PointLight(lightCol, 0, lightR);
       flashLight.position.copy(flash.position); gun.add(flashLight);
       // A cone along the bore: thin at the muzzle, a little wider at the far end.
@@ -55281,6 +55284,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       gun.userData.cu100Drop = low === Infinity ? 0 : Math.max(0, Math.min(0.045, f.y - low - 0.012));
       return gun.userData.cu100Drop;
     }
+    // CD-10 (tcc341): the fit's frame (TP_FIT) is the hand on the gun; where it would bend the wrist far (the gun swung across his
+    // chest), the glove's cuff came out through the sleeve's end. Past TP_FLEX the fist rolls round the grip instead (a turn about the
+    // hand's own x, the channel, so the grip stays in the fist): the firing wrist never toward the palm, the support within 20 deg.
+    const TP_FLEX = { r: [-Infinity, 0], l: [-0.35, 0.35] }, _tpc = { v: new THREE.Vector3(), q: new THREE.Quaternion(), x: new THREE.Vector3(1, 0, 0) };
+    function tpCapFlex(q, elbowG) { const lim = elbowG === marine.userData.elbowLG ? TP_FLEX.l : TP_FLEX.r; const d = _tpc.v.set(0, 1, 0).applyQuaternion(_tpc.q.copy(q).invert()); const flex = Math.atan2(d.z, d.y), c = Math.max(lim[0], Math.min(lim[1], flex)); if (flex !== c) q.multiply(_tpc.q.setFromAxisAngle(_tpc.x, flex - c)); }
     // Put the hand's grip point on anchorW with its channel (+x times sign) along channelW (world), by k (the forearm's
     // roll by rollK); a as above. Returns the forearm's roll.
     function holdHand(armG, elbowG, hand, anchorW, channelW, sign, pole, k, a, rollK = k) {
@@ -55313,7 +55321,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         // CD-9: a wanted frame (TP_FIT) is the whole turn, k * a of the way from the forearm as the first pass leaves it and then
         // fixed in the world, so the passes close on it (limitWrist holds it inside the table)
         const want = _tpW.el === elbowG;
-        if (want) { if (i === 0) _tpW.t.copy(elbowG.getWorldQuaternion(_wr.e)).slerp(_tpW.q, Math.min(1, k * a)); _wr.q.copy(elbowG.getWorldQuaternion(_wr.e).invert()).multiply(_tpW.t); } else
+        if (want) { if (i === 0) _tpW.t.copy(elbowG.getWorldQuaternion(_wr.e)).slerp(_tpW.q, Math.min(1, k * a)); _wr.q.copy(elbowG.getWorldQuaternion(_wr.e).invert()).multiply(_tpW.t); tpCapFlex(_wr.q, elbowG); } else
         _wr.q.setFromUnitVectors(_wr.c.set(sign, 0, 0), d);
         const ang = 2 * Math.acos(Math.min(1, Math.abs(_wr.q.w)));
         const s = want ? 1 : (ang > WRIST.max ? WRIST.max / ang : 1) * k * a;
@@ -55874,7 +55882,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
             // is, and place the gun from where the hand is.
             holdFreeShoulders(); ud.elbowRG.updateMatrixWorld(true);
             const wr = wristOf(ud.elbowRG);
-            if (wr) { wr.quaternion.copy(ud.elbowRG.getWorldQuaternion(_wr.e).invert().multiply(_tpW.q)); limitWrist(ud.elbowRG, wr, handRollR); wr.updateMatrixWorld(true); fistPointW(ud.elbowRG, _HAND_R, 1, anchor); }
+            if (wr) { wr.quaternion.copy(ud.elbowRG.getWorldQuaternion(_wr.e).invert().multiply(_tpW.q)); tpCapFlex(wr.quaternion, ud.elbowRG); limitWrist(ud.elbowRG, wr, handRollR); wr.updateMatrixWorld(true); fistPointW(ud.elbowRG, _HAND_R, 1, anchor); }
           }
           _tpW.el = null;
         }   // CL-188: akimbo, the elbow in   // CL-122, CU-100; GB-151: a mirrored fist's index is at +x
@@ -65868,6 +65876,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       // CL-117 fix (ChatGPT, GP-133): the render loop stops while the pipelines build.
       renderer.setAnimationLoop(null);
       training.warming = true;
+      setFlashWarm(true);   // CB-324
       training.bgWarming = false;
       let done = false;
       let resolveWarmDone = null, resolveBgDone = null;
@@ -66042,6 +66051,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         done = true;
         restorePPRender();
         training.warming = false;
+        setFlashWarm(false);   // CB-324
         clock.getDelta();
         renderer.setAnimationLoop(tick);
         if (!training.wake) b.classList.remove('on');

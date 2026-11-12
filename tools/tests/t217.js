@@ -10,7 +10,10 @@
   const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const mm = (v) => (v * 1000).toFixed(1) + ' mm';
   // where to read the bore (gun-local z) and how far round it to look: just the barrel or muzzle device there
-  const PROBE = { m4: [0.95, 0.02], ak: [0.99, 0.025], pistol: [0.25, 0.016], uzi: [0.44, 0.02], sniper: [1.05, 0.025], shotgun: [0.93, 0.04] };
+  // CB-322 (Claude 6's CF-5, --review, CLAUDE DIRECTOR OK 22:2xZ): the KR-7's muzzle is at z 0.855, so 0.99 sliced air (an empty
+  // bore: '-0.00x', 'off by 5.0 mm'), and the pump gun's 0.93 cut its 17.5 mm crown, not the 15.5 mm barrel. Each probe is now a
+  // clean barrel slice just behind the can (scanned 12 Nov: the only parts within the probe radius there are the barrel's).
+  const PROBE = { m4: [0.95, 0.02], ak: [0.78, 0.025], pistol: [0.25, 0.016], uzi: [0.44, 0.02], sniper: [1.05, 0.025], shotgun: [0.92, 0.04] };
   try {
     for (const key of ['m4', 'ak', 'pistol', 'uzi', 'sniper', 'shotgun']) {
       const gun = T.weaponMeshes[key], ud = gun && gun.userData, S = T.SUPPRESSOR[key];

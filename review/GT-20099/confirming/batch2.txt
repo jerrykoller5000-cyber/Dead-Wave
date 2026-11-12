@@ -1,0 +1,88 @@
+COMMAND node tools/realtest.mjs tce7 tcl293 tcl301 tcl334 tcl334b --all
+ok    tce7     12 pass   0 fail  33.8s  (real renderer)
+    PASS the gun light found
+    PASS first person laser: a swing stepped (33 frames)
+    PASS first person laser: nothing while the view gun is put away (23 frames, on in 0)
+    PASS first person laser: on the view gun's lens whenever it is drawn (worst 0.00 cm; off the lens 0, dark 0)
+    PASS first person light: a swing stepped (33 frames)
+    PASS first person light: nothing while the view gun is put away (23 frames, on in 0)
+    PASS first person light: on the view gun's lens whenever it is drawn (worst 0.00 cm; off the lens 0, dark 0)
+    PASS third person laser: a swing stepped (25 frames)
+    PASS third person laser: on the body's gun's lens whenever it is drawn (worst 0.00 cm; off the lens 0, dark 0)
+    PASS third person light: a swing stepped (25 frames)
+    PASS third person light: on the body's gun's lens whenever it is drawn (worst 0.00 cm; off the lens 0, dark 0)
+    PASS no page errors
+ok    tcl293   24 pass   0 fail  49.6s  (real renderer)
+    PASS a pistol in hand
+    PASS first person: the view gun is up
+    INFO walk: across 2.35 cm at 1.50 Hz, up/down 0.95 cm at 3.00 Hz; above 6 Hz 0.0 % / 0.2 %
+    PASS walk: no vibration, the bob is the stride's (above 6 Hz: 0.0 % across, 0.2 % up/down)
+    PASS walk: it moves, side to side 2.4 cm (0.8-6.0)
+    INFO sprint: across 6.62 cm at 2.17 Hz, up/down 2.33 cm at 4.50 Hz; above 6 Hz 0.8 % / 0.8 %
+    PASS sprint: no vibration, the bob is the stride's (above 6 Hz: 0.8 % across, 0.8 % up/down)
+    PASS sprint: it moves, side to side 6.6 cm (0.8-10.2)
+    PASS the run is a jog: the gun a little lower, up and level, not into the middle, its bob bigger than the walk's (-3.2 cm, turned 0.12 rad, yaw -0.01, across 2.82x the walk)
+    INFO walk, own clock: across 2.35 cm at 1.50 Hz, up/down 0.95 cm at 3.00 Hz; above 6 Hz 0.0 % / 0.2 %
+    PASS walk, own clock: no vibration, the bob is the stride's (above 6 Hz: 0.0 % across, 0.2 % up/down)
+    PASS walk, own clock: it moves, side to side 2.4 cm (0.8-6.0)
+    INFO sprint, own clock: across 6.62 cm at 2.17 Hz, up/down 2.33 cm at 4.50 Hz; above 6 Hz 0.2 % / 0.7 %
+    PASS sprint, own clock: no vibration, the bob is the stride's (above 6 Hz: 0.2 % across, 0.7 % up/down)
+    PASS sprint, own clock: it moves, side to side 6.6 cm (0.8-10.2)
+    PASS aimed, the sprint pose stays out (-0.3 cm)
+    INFO the turn: the gun lags it by 4.9 degrees, home 0.30 s after the stop, overshoot 0 %
+    PASS a turn moves the gun (4.9 degrees)
+    PASS and it comes home within 0.45 s, overshoot under 15 % (0.30 s, 0 %)
+    INFO the stream: the gun back 3.2 cm; the most a frame accelerates 0.07 / 0.06 mm
+    PASS the flamer's stream pushes the gun back, smooth (3.2 cm; frame-to-frame acceleration at most 0.07 mm, under 0.3)
+    PASS and it comes back when the stream stops (0.0 cm)
+    INFO one pistol shot: the view up 0.44 deg at 50 ms; -1 % left at 0.35 s
+    PASS a shot turns the view up a little, peaking in under 0.1 s (0.44 deg at 50 ms)
+    PASS and it is home by 0.35 s (-1 % left), no overshoot worth the name
+    PASS the camera itself (what aims) is untouched between draws
+    PASS after real frames the aim is where it was (0.265 deg)
+    PASS eight shots at 10 a second hold a small climb (0.61 deg) under the cap and let it go (-0.00 deg 0.3 s after)
+    PASS he is in the Training Ground with the valley hidden
+    PASS in the Training Ground the view gun is not hidden with the valley (its matrix still follows his eye)
+    PASS no page errors
+ok    tcl301   23 pass   0 fail  37.3s  (real renderer)
+    PASS a pistol in hand
+    PASS the pistol pair is carried in an Armory secondary slot
+    PASS first person with the pair: the view guns are up (akimbo true)
+    PASS two view guns: the right hand's and the off hand's own copy
+    PASS the left gun the right one's mirror (-0.185,-0.111,-0.468 / 0.185,-0.111,-0.468)
+    PASS one each side of the view, low (ndc 0.44, -0.46 and -0.44)
+    INFO G -0.185,-0.111,-0.468,0.633 grip -0.188,-0.153,-0.459 WR -0.243,-0.186,-0.395 sock 0.077,-0.123,-0.123 s 1.863
+    PASS each hand on its own gun's grip (wrists 0.091, 0.091 m from the grips), mirrored
+    PASS the left hand holds its gun (pair), wrists within their bend (0.10, 0.10)
+    INFO forearm r -0.23,-0.20,0.95 l 0.23,-0.20,0.95, elbows z -0.201, -0.202
+    PASS the forearms run back toward him, below the hands (back 0.95, 0.95; down -0.20, -0.20)
+    PASS not out flat to the sides (across -0.23, 0.23)
+    PASS a left shot kicks the left gun only (0.01, 2.93 cm)
+    PASS a right shot kicks the right gun only (2.94, 0.00 cm)
+    PASS a left shot turns the drawn view up too (0.0093 rad)
+    PASS the reload dips both guns 42.5 cm and brings them back (0.06 cm off)
+    PASS one gun at a time: the right dips 42.5 cm while the left holds (0.11), then the left 42.4 cm while the right holds (0.20)
+    PASS the elbows stay well ahead of the eye through the reload (nearest -0.094 m)
+    PASS the left muzzle is left of the eye in the world (-0.20,-0.09,-0.67)
+    PASS the off hand's own gun is out of the eye's pass
+    PASS back to one gun: one view gun (false)
+    PASS the minigun in hand
+    PASS its view gun is up
+    PASS the minigun's right hand grips its rear grip (0.014,-0.002,-0.379; the grip's centre 0, -0.012, -0.364)
+    PASS no page errors ()
+ok    tcl334    5 pass   0 fail  27.4s  (real renderer)
+    PASS poses found: 35
+    PASS no pose has a part of the hand through another, bare or gloved (35 poses, 0 breaches)
+    PASS no blend between the hand poses passes a part through another
+    PASS closing, the thumb wraps after the fingers (half way: fingers 0.50, thumb 0.06); opening it lets go first (0.94)
+    PASS fingers asked past their limits stop at them (curled 0.000 mm, bent back 0.000 mm from the limit pose)
+ok    tcl334b    5 pass   0 fail  36.1s  (real renderer)
+    INFO pistol the hands into each other: 0.2 mm
+    INFO revolver the hands into each other: 0.3 mm
+    INFO uzi the hands into each other: 0.2 mm
+    PASS guns checked up in first person: 3 of 3
+    PASS no part of either hand inside any part of a gun (deepest per gun, mm: pistol 0.1, revolver 0.1, uzi 0.1)
+    PASS neither hand through the other (D-140)
+    PASS the gloved wrists stay inside the sleeves at every gun's hip hold
+    PASS no page errors
+5 checks: 69 pass, 0 fail (real renderer)

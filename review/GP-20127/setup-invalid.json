@@ -1,0 +1,407 @@
+[
+  {
+    "i": 1,
+    "gun": "pistol",
+    "at": "2026-11-12T22:23:55.493Z",
+    "instrument": {
+      "device": true,
+      "hooks": []
+    },
+    "before": {
+      "t": 35404.09999999404,
+      "gun": "pistol",
+      "ammo": 12,
+      "pipelines": 388,
+      "geometries": 3776,
+      "textures": 185,
+      "heap": 842775875,
+      "cases": [],
+      "parts": [
+        {
+          "space": "world",
+          "name": "pistol magazine top round",
+          "visible": true,
+          "geometry": 4341,
+          "material": 9508
+        }
+      ],
+      "devicePipelines": 0,
+      "deviceBuffers": 0
+    },
+    "shotAt": 35719.29999999702,
+    "shotEnd": 38029.79999999702,
+    "after": {
+      "t": 38030.79999999702,
+      "gun": "pistol",
+      "ammo": 12,
+      "pipelines": 388,
+      "geometries": 3776,
+      "textures": 185,
+      "heap": 848413432,
+      "cases": [],
+      "parts": [
+        {
+          "space": "world",
+          "name": "pistol magazine top round",
+          "visible": true,
+          "geometry": 4341,
+          "material": 9508
+        }
+      ],
+      "devicePipelines": 0,
+      "deviceBuffers": 0
+    },
+    "data": {
+      "stage": "after-shot",
+      "last": 38018,
+      "gaps": [],
+      "pipelines": [],
+      "buffers": [],
+      "errors": []
+    },
+    "errors": [],
+    "firstShotGaps": [],
+    "newPipelines": [],
+    "newBuffers": [],
+    "invalid": "Expected exactly one shot from selected gun"
+  },
+  {
+    "i": 2,
+    "gun": "pistol",
+    "at": "2026-11-12T22:24:34.433Z",
+    "instrument": {
+      "device": true,
+      "hooks": []
+    },
+    "before": {
+      "t": 42308.90000000596,
+      "gun": "pistol",
+      "ammo": 12,
+      "pipelines": 389,
+      "geometries": 3918,
+      "textures": 185,
+      "heap": 904247569,
+      "cases": [],
+      "parts": [
+        {
+          "space": "world",
+          "name": "pistol magazine top round",
+          "visible": true,
+          "geometry": 4341,
+          "material": 9508
+        }
+      ],
+      "devicePipelines": 0,
+      "deviceBuffers": 0
+    },
+    "shotAt": 42624.59999999404,
+    "shotEnd": 44906.40000000596,
+    "after": {
+      "t": 44907.29999999702,
+      "gun": "pistol",
+      "ammo": 12,
+      "pipelines": 389,
+      "geometries": 3918,
+      "textures": 185,
+      "heap": 882448142,
+      "cases": [],
+      "parts": [
+        {
+          "space": "world",
+          "name": "pistol magazine top round",
+          "visible": true,
+          "geometry": 4341,
+          "material": 9508
+        }
+      ],
+      "devicePipelines": 0,
+      "deviceBuffers": 0
+    },
+    "data": {
+      "stage": "after-shot",
+      "last": 44892,
+      "gaps": [],
+      "pipelines": [],
+      "buffers": [],
+      "errors": []
+    },
+    "errors": [],
+    "firstShotGaps": [],
+    "newPipelines": [],
+    "newBuffers": [],
+    "invalid": "Expected exactly one shot from selected gun"
+  },
+  {
+    "i": 3,
+    "gun": "pistol",
+    "at": "2026-11-12T22:25:20.134Z",
+    "instrument": {
+      "device": true,
+      "hooks": []
+    },
+    "before": {
+      "t": 37066.29999999702,
+      "gun": "pistol",
+      "ammo": 12,
+      "pipelines": 387,
+      "geometries": 3875,
+      "textures": 185,
+      "heap": 864545024,
+      "cases": [],
+      "parts": [
+        {
+          "space": "world",
+          "name": "pistol magazine top round",
+          "visible": true,
+          "geometry": 4341,
+          "material": 9508
+        }
+      ],
+      "devicePipelines": 0,
+      "deviceBuffers": 0
+    },
+    "shotAt": 37378.59999999404,
+    "shotEnd": 39665.20000000298,
+    "after": {
+      "t": 39665.79999999702,
+      "gun": "pistol",
+      "ammo": 12,
+      "pipelines": 387,
+      "geometries": 3875,
+      "textures": 185,
+      "heap": 869437257,
+      "cases": [],
+      "parts": [
+        {
+          "space": "world",
+          "name": "pistol magazine top round",
+          "visible": true,
+          "geometry": 4341,
+          "material": 9508
+        }
+      ],
+      "devicePipelines": 0,
+      "deviceBuffers": 0
+    },
+    "data": {
+      "stage": "after-shot",
+      "last": 39650.7,
+      "gaps": [],
+      "pipelines": [],
+      "buffers": [],
+      "errors": []
+    },
+    "errors": [],
+    "firstShotGaps": [],
+    "newPipelines": [],
+    "newBuffers": [],
+    "invalid": "Expected exactly one shot from selected gun"
+  },
+  {
+    "i": 4,
+    "gun": "uzi",
+    "at": "2026-11-12T22:26:00.573Z",
+    "purchase": {
+      "button": true,
+      "disabled": false,
+      "take": {
+        "ok": true,
+        "location": "secondary",
+        "index": 0,
+        "gun": {
+          "id": "uzi",
+          "kind": "uzi",
+          "loaded": 32,
+          "magazines": [
+            {
+              "rounds": 32
+            },
+            {
+              "rounds": 32
+            },
+            {
+              "rounds": 32
+            },
+            {
+              "rounds": 32
+            },
+            {
+              "rounds": 32
+            },
+            {
+              "rounds": 32
+            },
+            {
+              "rounds": 32
+            },
+            {
+              "rounds": 32
+            },
+            {
+              "rounds": 32
+            }
+          ],
+          "rounds": 0,
+          "upgrades": {}
+        },
+        "stowed": null
+      },
+      "owned": true
+    },
+    "instrument": {
+      "device": true,
+      "hooks": []
+    },
+    "before": {
+      "t": 34290.60000000894,
+      "gun": "uzi",
+      "ammo": 32,
+      "pipelines": 390,
+      "geometries": 3861,
+      "textures": 185,
+      "heap": 865946644,
+      "cases": [],
+      "parts": [
+        {
+          "space": "world",
+          "name": "magazine top round",
+          "visible": true,
+          "geometry": 4589,
+          "material": 9518
+        }
+      ],
+      "devicePipelines": 0,
+      "deviceBuffers": 0
+    },
+    "shotAt": 34607.10000000894,
+    "shotEnd": 36905,
+    "after": {
+      "t": 36905.80000001192,
+      "gun": "uzi",
+      "ammo": 32,
+      "pipelines": 390,
+      "geometries": 3861,
+      "textures": 185,
+      "heap": 872277249,
+      "cases": [],
+      "parts": [
+        {
+          "space": "world",
+          "name": "magazine top round",
+          "visible": true,
+          "geometry": 4589,
+          "material": 9518
+        }
+      ],
+      "devicePipelines": 0,
+      "deviceBuffers": 0
+    },
+    "data": {
+      "stage": "after-shot",
+      "last": 36890.6,
+      "gaps": [],
+      "pipelines": [],
+      "buffers": [],
+      "errors": []
+    },
+    "errors": [],
+    "firstShotGaps": [],
+    "newPipelines": [],
+    "newBuffers": [],
+    "invalid": "Expected exactly one shot from selected gun"
+  },
+  {
+    "i": 5,
+    "gun": "revolver",
+    "at": "2026-11-12T22:26:38.258Z",
+    "purchase": {
+      "button": true,
+      "disabled": false,
+      "take": {
+        "ok": true,
+        "location": "secondary",
+        "index": 0,
+        "gun": {
+          "id": "revolver",
+          "kind": "revolver",
+          "loaded": 6,
+          "magazines": [
+            {
+              "rounds": 6
+            },
+            {
+              "rounds": 6
+            },
+            {
+              "rounds": 6
+            },
+            {
+              "rounds": 6
+            },
+            {
+              "rounds": 6
+            },
+            {
+              "rounds": 6
+            },
+            {
+              "rounds": 6
+            },
+            {
+              "rounds": 6
+            }
+          ],
+          "rounds": 0,
+          "upgrades": {}
+        },
+        "stowed": null
+      },
+      "owned": true
+    },
+    "instrument": {
+      "device": true,
+      "hooks": []
+    },
+    "before": {
+      "t": 38557.20000000298,
+      "gun": "revolver",
+      "ammo": 6,
+      "pipelines": 391,
+      "geometries": 3788,
+      "textures": 185,
+      "heap": 1063692232,
+      "cases": [],
+      "parts": [],
+      "devicePipelines": 0,
+      "deviceBuffers": 0
+    },
+    "shotAt": 38885.39999999106,
+    "shotEnd": 41171.70000000298,
+    "after": {
+      "t": 41172.39999999106,
+      "gun": "revolver",
+      "ammo": 6,
+      "pipelines": 391,
+      "geometries": 3788,
+      "textures": 185,
+      "heap": 1044450789,
+      "cases": [],
+      "parts": [],
+      "devicePipelines": 0,
+      "deviceBuffers": 0
+    },
+    "data": {
+      "stage": "after-shot",
+      "last": 41159.6,
+      "gaps": [],
+      "pipelines": [],
+      "buffers": [],
+      "errors": []
+    },
+    "errors": [],
+    "firstShotGaps": [],
+    "newPipelines": [],
+    "newBuffers": [],
+    "invalid": "Expected exactly one shot from selected gun"
+  }
+]

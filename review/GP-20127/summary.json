@@ -1,0 +1,193 @@
+[
+  {
+    "run": 1,
+    "gun": "pistol",
+    "valid": true,
+    "ammo": [
+      12,
+      11
+    ],
+    "gaps": [
+      {
+        "stage": "first-shot",
+        "ms": 83.3,
+        "at": 32305.6
+      }
+    ],
+    "maxGap": 83.3,
+    "pipelinesDelta": 2,
+    "geometryDelta": 1,
+    "newPipelines": [
+      {
+        "name": "createRenderPipeline",
+        "stage": "first-shot",
+        "t": 32252.19999998808,
+        "label": "renderPipeline_vm:MeshBasicMaterial_19680",
+        "size": 0,
+        "usage": 0
+      },
+      {
+        "name": "createRenderPipeline",
+        "stage": "first-shot",
+        "t": 32302.89999999106,
+        "label": "renderPipeline_MeshStandardMaterial_22170",
+        "size": 0,
+        "usage": 0
+      }
+    ],
+    "newBuffers": 13,
+    "newBufferBytes": 3560,
+    "errors": []
+  },
+  {
+    "run": 2,
+    "gun": "pistol",
+    "valid": true,
+    "ammo": [
+      12,
+      11
+    ],
+    "gaps": [],
+    "maxGap": 0,
+    "pipelinesDelta": 2,
+    "geometryDelta": 1,
+    "newPipelines": [
+      {
+        "name": "createRenderPipeline",
+        "stage": "first-shot",
+        "t": 34005.20000000298,
+        "label": "renderPipeline_vm:MeshBasicMaterial_19683",
+        "size": 0,
+        "usage": 0
+      },
+      {
+        "name": "createRenderPipeline",
+        "stage": "first-shot",
+        "t": 34041.60000000894,
+        "label": "renderPipeline_MeshStandardMaterial_22173",
+        "size": 0,
+        "usage": 0
+      }
+    ],
+    "newBuffers": 13,
+    "newBufferBytes": 3560,
+    "errors": []
+  },
+  {
+    "run": 3,
+    "gun": "pistol",
+    "valid": true,
+    "ammo": [
+      12,
+      11
+    ],
+    "gaps": [
+      {
+        "stage": "first-shot",
+        "ms": 83.5,
+        "at": 34747.7
+      },
+      {
+        "stage": "first-shot",
+        "ms": 83.3,
+        "at": 34847.6
+      }
+    ],
+    "maxGap": 83.5,
+    "pipelinesDelta": 2,
+    "geometryDelta": 1,
+    "newPipelines": [
+      {
+        "name": "createRenderPipeline",
+        "stage": "first-shot",
+        "t": 34700.29999999702,
+        "label": "renderPipeline_vm:MeshBasicMaterial_19680",
+        "size": 0,
+        "usage": 0
+      },
+      {
+        "name": "createRenderPipeline",
+        "stage": "first-shot",
+        "t": 34751.40000000596,
+        "label": "renderPipeline_MeshStandardMaterial_22169",
+        "size": 0,
+        "usage": 0
+      }
+    ],
+    "newBuffers": 13,
+    "newBufferBytes": 3560,
+    "errors": []
+  },
+  {
+    "run": 4,
+    "gun": "uzi",
+    "valid": true,
+    "ammo": [
+      32,
+      31
+    ],
+    "gaps": [
+      {
+        "stage": "first-shot",
+        "ms": 66.6,
+        "at": 40649.4
+      },
+      {
+        "stage": "first-shot",
+        "ms": 66.8,
+        "at": 40716.2
+      }
+    ],
+    "maxGap": 66.8,
+    "pipelinesDelta": 2,
+    "geometryDelta": 1,
+    "newPipelines": [
+      {
+        "name": "createRenderPipeline",
+        "stage": "first-shot",
+        "t": 40617.09999999404,
+        "label": "renderPipeline_vm:MeshBasicMaterial_19767",
+        "size": 0,
+        "usage": 0
+      },
+      {
+        "name": "createRenderPipeline",
+        "stage": "first-shot",
+        "t": 40655.79999999702,
+        "label": "renderPipeline_MeshStandardMaterial_22297",
+        "size": 0,
+        "usage": 0
+      }
+    ],
+    "newBuffers": 13,
+    "newBufferBytes": 3560,
+    "errors": []
+  },
+  {
+    "run": 1,
+    "gun": "revolver",
+    "valid": true,
+    "ammo": [
+      6,
+      5
+    ],
+    "gaps": [],
+    "maxGap": 0,
+    "pipelinesDelta": 1,
+    "geometryDelta": 1,
+    "newPipelines": [
+      {
+        "name": "createRenderPipeline",
+        "stage": "first-shot",
+        "t": 39452.59999999404,
+        "label": "renderPipeline_vm:MeshBasicMaterial_19841",
+        "size": 0,
+        "usage": 0,
+        "activeCases": []
+      }
+    ],
+    "newBuffers": 9,
+    "newBufferBytes": 2344,
+    "errors": []
+  }
+]

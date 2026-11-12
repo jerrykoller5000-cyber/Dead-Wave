@@ -1,0 +1,62 @@
+COMMAND node tools/realtest.mjs tcb301 tce4 tce4b tce6 --all
+ok    tcb301    9 pass   0 fail  39.6s  (real renderer)
+    PASS the Wasp in hand
+    PASS the Wasp's model takes a magazine count
+    PASS one gun: the art shows the rounds in hand (32 / 32)
+    PASS a pair in hand (2 magazines loaded)
+    PASS the main gun shows its own magazine: 28 (mag 28)
+    INFO the offhand Wasp has no setMagazineRounds of its own (a clone drops userData functions): its count waits on the art
+    PASS after a burst from the pair (64 to 60)
+    PASS the Breacher's empty drum shows empty early in the reload (0)
+    PASS and the incoming drum its own count once out of the pouch (20 of 20)
+    PASS no page errors
+FAIL  tce4      3 pass   1 fail  58.3s  (real renderer)
+    PASS every handheld light has its press (pistol, revolver, uzi, shotgun, aa12, m4, ak, sniper, launcher, minigun)
+    INFO pistol: light on at 0.200 s (press at 0.195), pad off the switch 0.40 mm, switch in 1.00 mm, glove into the gun 1.82 mm glove in ?, sleeve into the gun 0.00 mm (on the hold 0.00) , hand home 0.21 mm
+    INFO revolver: light on at 0.200 s (press at 0.195), pad off the switch 0.40 mm, switch in 1.00 mm, glove into the gun 3.02 mm glove in moduleShell, sleeve into the gun 0.00 mm (on the hold 0.00) , hand home 0.00 mm
+    INFO uzi: light on at 0.200 s (press at 0.195), pad off the switch 0.12 mm, switch in 1.00 mm, glove into the gun 0.00 mm , sleeve into the gun 0.00 mm (on the hold 0.00) , hand home 0.00 mm
+    INFO shotgun: light on at 0.200 s (press at 0.195), pad off the switch 0.40 mm, switch in 1.00 mm, glove into the gun 0.00 mm , sleeve into the gun 0.00 mm (on the hold 0.00) , hand home 0.00 mm
+    INFO aa12: light on at 0.200 s (press at 0.195), pad off the switch 0.40 mm, switch in 1.00 mm, glove into the gun 0.14 mm glove in laserLightUnit, sleeve into the gun 0.00 mm (on the hold 2.38) , hand home 0.00 mm
+    INFO m4: light on at 0.200 s (press at 0.195), pad off the switch 0.40 mm, switch in 1.00 mm, glove into the gun 0.21 mm glove in moduleShell, sleeve into the gun 0.00 mm (on the hold 0.00) , hand home 0.00 mm
+    INFO ak: light on at 0.200 s (press at 0.195), pad off the switch 0.40 mm, switch in 1.00 mm, glove into the gun 0.58 mm glove in moduleShell, sleeve into the gun 0.39 mm (on the hold 1.28) fore in magazineBody, hand home 0.08 mm
+    INFO sniper: light on at 0.200 s (press at 0.195), pad off the switch 0.40 mm, switch in 1.00 mm, glove into the gun 0.00 mm , sleeve into the gun 0.00 mm (on the hold 0.00) , hand home 0.16 mm
+    INFO launcher: light on at 0.200 s (press at 0.195), pad off the switch 0.40 mm, switch in 1.00 mm, glove into the gun 0.16 mm glove in moduleShell, sleeve into the gun 0.00 mm (on the hold 0.00) , hand home 0.00 mm
+    INFO minigun: light on at 0.200 s (press at 0.195), pad off the switch 0.10 mm, switch in 1.00 mm, glove into the gun 0.31 mm glovePads in minigun-drum-latch, sleeve into the gun 0.00 mm (on the hold 0.00) , hand home 0.00 mm
+    FAIL every gun: 2 brings the support hand onto the light's switch, the light changes on the press, the pad is on the switch and in by its travel, nothing of the glove in the gun, the hand home after (pistol; revolver; ak)
+    PASS third person: 2 changes the light at once
+    PASS no page errors
+ok    tce4b    17 pass   0 fail  39.3s  (real renderer)
+    PASS pistol: a stab stepped (13 frames of the swing)
+    PASS pistol: never the gun and the blade at once
+    PASS pistol: the gun goes down before it is put away (raise 0.00 when it goes, after 1 frame(s) of drop)
+    PASS pistol: the blade comes in from below the view (first frame fist -1.93)
+    PASS pistol: the thrust: the tip in toward the middle below the crosshair (6 frames; tips 0.36,-1.38 0.24,-0.60 0.19,-0.25 0.10,-0.22 0.04,-0.19 0.03,-0.18 0.03,-0.18 0.09,-0.34 0.20,-0.58 0.24,-0.71 0.36,-1.25 0.48,-1.86)
+    PASS pistol: back down out of sight before the swing ends (fist -2.39)
+    PASS pistol: no jump of the fist in view (largest step 0.36 of the screen, at frame 3; fist 1:0.61,-1.93 2:0.46,-1.13 3:0.38,-0.77 4:0.26,-0.61 5:0.19,-0.48 6:0.17,-0.46 7:0.16,-0.44 8:0.22,-0.57 9:0.32,-0.78 10:0.36,-0.91 11:0.53,-1.58 12:0.74,-2.39)
+    PASS pistol: the gun comes back up from below after it (0.12 to 1.00)
+    PASS m4: a stab stepped (13 frames of the swing)
+    PASS m4: never the gun and the blade at once
+    PASS m4: the gun goes down before it is put away (raise 0.00 when it goes, after 1 frame(s) of drop)
+    PASS m4: the blade comes in from below the view (first frame fist -2.94)
+    PASS m4: the thrust: the tip in toward the middle below the crosshair (6 frames; tips 0.35,-1.37 0.22,-0.58 0.18,-0.24 0.09,-0.21 0.03,-0.18 0.03,-0.18 0.02,-0.17 0.09,-0.33 0.19,-0.58 0.23,-0.71 0.35,-1.25 0.47,-1.85)
+    PASS m4: back down out of sight before the swing ends (fist -3.36)
+    PASS m4: no jump of the fist in view (largest step 0.29 of the screen, at frame 5; fist 1:1.03,-2.94 2:0.70,-1.85 3:0.55,-1.37 4:0.44,-1.02 5:0.36,-0.74 6:0.35,-0.70 7:0.33,-0.67 8:0.41,-0.82 9:0.53,-1.05 10:0.59,-1.20 11:0.85,-2.12 12:1.21,-3.36)
+    PASS m4: the gun comes back up from below after it (0.12 to 1.00)
+    PASS no page errors
+ok    tce6     15 pass   0 fail  54.1s  (real renderer)
+    PASS the revolver in hand
+    PASS third person, six pulls: each brings a live chamber under the hammer by the break, fires it and leaves it there, one chamber (60 deg) a pull, the hammer up (6/6; turns 1.00 1.00 1.00 1.00 1.00 1.00; top 5>5 4>4 3>3 2>2 1>1 0>0)
+    PASS the same way every time (+1.00 +1.00 +1.00 +1.00 +1.00 +1.00)
+    PASS a dry pull with no rounds: no shot and no turn (0.00 chambers in 0 frames, then the reload)
+    PASS a revolver reload turns no more than half a chamber in a frame (worst 0.26 at frame 96 u 0.89)
+    PASS after it the chamber under the hammer is the one past the live ones (so the next pull brings live round 5 up): top 0, live 6
+    PASS first person, six pulls: the same (6/6; turns 1.00 1.00 1.00 1.00 1.00 1.00)
+    PASS the view's cylinder is the world gun's through every pull (worst 0 deg apart, 48 frames)
+    PASS the pair, six pulls (three each): each gun indexes on its own pull (6/6; top 5>5 5>5 4>4 4>4 3>3 3>3)
+    PASS the launcher in hand
+    PASS the launcher, six shots: the round behind the barrel fires and the spring turns the next live one up, one chamber a shot, the fired case left in its chamber (turns -1.00 -1.00 -1.00 -1.00 -1.00 -0.99)
+    PASS the drum turns the same way every time
+    PASS a launcher reload turns no more than half a chamber in a frame (worst 0.21 at frame 36)
+    PASS after it the next live round is behind the barrel: top 5, live 6
+    PASS no page errors
+4 checks: 44 pass, 1 fail (real renderer)

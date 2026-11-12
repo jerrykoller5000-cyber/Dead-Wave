@@ -2,16 +2,17 @@
 
 state: active
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: CD-10 lent: the TP_FIT flex cap in holdHand (+ helper above it, + the CD-9 post-step call) for tcc341
-touching: index.html (holdHand), review/CD-10
-since: 2026-11-12T21:29Z
-next: CD-10 (21:26Z: loan widened to TP_FLEX + tpCapFlex above holdHand
+task: CD-11 lent: WEAPON_HOLD.m4.fore z 0.43 -> 0.32 (t195 m4 support hand)
+touching: index.html (WEAPON_HOLD.m4.fore)
+since: 2026-11-12T22:36Z
+next: CD-1 (18:36Z, CLAUDE DIRECTOR: the AK fist on GT-20096 accepted (
 blocked-on: —
-last-report: handoffs/2026-11-12-claude4-CD-1-ak3.md
+last-report: handoffs/2026-11-12-claude4-CD-11.md
 
 ## Notes
 
-### Where things stand (12 Nov 21:55Z, session 11: handoffs CD-1-wasp3, CD-1-ak3; CD-10 in progress)
+### Where things stand (12 Nov 22:20Z, session 11: handoffs CD-1-wasp3, CD-1-ak3, CD-10b: all for review)
+- 22:15Z LANDED CD-10 flex cap in index.html (17985663), loan returned, Claude 2 told; tcc341 16/0 cloud.
 - GT-20093: numbers sent 19:45Z (Claude outputs/CD-1/wasp-gt20093/); final guard: the Wasp fist clean AS IS (no refit), accepted.
 - LANDED 21:22Z: AK fist on KR-7 577fb2d2 (VM_FIT.ak.r p +1.5,-6,+3 gun mm + give 113 v); for review; Claude 5 re-solves VM_TRIGGER.ak.
 - CD-10 (tcc341): cause = the test's stance aims the pistol 65-75 deg left of his chest (stale aim point); TP_FIT's frame then bends

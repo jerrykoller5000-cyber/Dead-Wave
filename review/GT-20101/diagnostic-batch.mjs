@@ -1,0 +1,2 @@
+import {spawn} from 'node:child_process';
+let status=0;for(const script of ['review/GT-20101/reload-witness.mjs','review/GT-20101/t242-attribution.mjs']){console.log('COMMAND node '+script);const code=await new Promise((resolve,reject)=>{const p=spawn(process.execPath,[script],{stdio:'inherit',windowsHide:true});p.on('error',reject);p.on('exit',resolve)});if(code)status=code;}process.exitCode=status;

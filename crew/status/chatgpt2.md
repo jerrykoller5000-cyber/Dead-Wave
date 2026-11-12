@@ -1,13 +1,13 @@
 # ChatGPT 2
 
-state: active
+state: idle
 model: GPT-6.1 Sol (Medium effort)
-task: GT-20101 Correct pistol spent case and live round to .45 ACP
-touching: studio/weapon-casings.js (pistol entry and live tip only), studio/weapon-sidearms.js (pistol top-round fit only), review/GT-20101, handoffs/2026-11-12-chatgpt2-GT-20101.md
-since: 2026-11-12T21:58Z
+task: —
+touching: —
+since: 2026-11-12T22:55Z
 next: GT-20079 (17:15Z, UN-PARKED (J149): each modeler does camo-per-part o
 blocked-on: —
-last-report: handoffs/2026-11-12-chatgpt2-GT-20100.md
+last-report: handoffs/2026-11-12-chatgpt2-GT-20099.md
 
 ## Notes
 
@@ -15,7 +15,7 @@ last-report: handoffs/2026-11-12-chatgpt2-GT-20100.md
 
 context nearly full, needs a new session
 
-NOW GT-20101: Director confirmed pistol is .45ACP (GB-23); my stale-fixture inference was wrong, NO test change. Narrow weapon-casings.js loan pistol profile+tip:22.8mm case, rim12.2mm, OAL32.4mm. Native prototype fits unchanged magazine; lift4.94micrometres, applied6micrometre allowance in top-round height. Production two profile/tip lines and top-round .002743→.002749 landed only after baseline photos. Need run review.mjs after, GT80 live/extension/hands copied to review/GT-20101 with verification/ outputs; reload also checks round-only glove contact. Then tcb294b green, four-light paired lips/case sheets, handoff/review/checkout. Final13 GT-20099 confirming follows this task (Director moved it after caliber correction). GT20100 accepted/pose branch with C5. All game runs through escalated slots; no git.
+GT-20099 FINAL confirming DONE22:49Z:13 native files151/3, raw review/GT-20099/confirming/, report appended (original preserved). Redstce4 P/R/AK lightpress(C5), tcl334d STILLnative chainsaw6.4mm(C6 request, despitecloudclear), tgb255b spidercorner(C2AI; first14/0now13/1). AKtcl334c now5/0; handguns5/0each.1mm; t33316/0. Indexdelta batch1 EXACTCB324Trainingflashwarmup provenbefore/posthash; other24fixed, batch2/3all25fixed; no immutabletreeclaim. GT20102done: dotnative46/0/4lights, modelunchanged; C2CB323fixedfakeflagcloud46/0. GT20101correct.45component report with Director, blockedC5reloadringat75%old9mm1.761/new.452.248mm; doNOTrestore9mm. Case22.8/live32.4/rim12.2, tcb294b25/0; lipgap<=.008mm, extension/count/settledhands pass, maggeometryunchanged. Model editsonlyloanedcaseentry/tip+roundheight.002749. C5acknowledgedreloadfixafterCE9b; privateclosed-roundcoveragefixflagged--review. t242topround-only confirmed/privateexclude15/0, officialtestunchangedC2review. Allownerartpartsaccepted exceptcomponentreviewpending; fleetumbrellasGT79/77Director. Standbyforreview/namedowntask; no hidden/proportionwork, no git; allgamesescalatedslots. Lastnote22:43Z.
 
 Earlier exterior, camo, casing, detail and CE-2 acceptances are in the 11 Nov GT-20076/77/79/80 handoffs. The KR-7 laminate and D-152 budget were accepted on GT-20082 and GT-20081. Keep previous test expectations and the crew slot.
 

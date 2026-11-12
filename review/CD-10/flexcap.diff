@@ -1,19 +1,18 @@
---- /home/claude/c1/index-prod.html	2026-11-12 19:44:38.600589590 +0000
-+++ /home/claude/c1/index-cap3.html	2026-11-12 20:33:40.257140489 +0000
-@@ -55052,6 +55052,12 @@
-     const _tpW = { el: null, q: new THREE.Quaternion(), m: new THREE.Matrix4(), x: new THREE.Vector3(), y: new THREE.Vector3(), z: new THREE.Vector3(), b: new THREE.Quaternion(), g: new THREE.Quaternion(), t: new THREE.Quaternion(), p: new THREE.Vector3() };
-     function tpWant(elbowG, F, gunQ) { if (!F || !F.basis) { _tpW.el = null; return; } const x = _tpW.x.set(F.basis.x[0], F.basis.x[1], F.basis.x[2]).normalize(), y = _tpW.y.set(F.basis.y[0], F.basis.y[1], F.basis.y[2]); y.addScaledVector(x, -y.dot(x)).normalize(); _tpW.z.crossVectors(x, y); _tpW.m.makeBasis(x, y, _tpW.z); _tpW.b.setFromRotationMatrix(_tpW.m); _tpW.q.copy(gunQ).multiply(_tpW.b); _tpW.el = elbowG; }
-     const _cd8 = { p: new THREE.Vector3(), x: new THREE.Vector3() };
-+    // CD-10 (tcc341): the fit's frame is the hand on the gun; where it would bend the wrist far (the gun swung across his
-+    // chest), the glove's cuff came out through the sleeve's end. Past TP_FLEX the fist rolls round the grip instead (a turn
-+    // about the hand's own x, the channel, so the grip stays in the fist): the firing wrist toward the palm, the support both ways.
-+    const TP_FLEX = { r: [-Infinity, 0], l: [-0.35, 0.35] };
-+    const _tpc = { v: new THREE.Vector3(), q: new THREE.Quaternion(), x: new THREE.Vector3(1, 0, 0) };
+--- /home/claude/c1/index-prod2050.html	2026-11-12 20:44:44.437850268 +0000
++++ index.html	2026-11-12 22:03:19.002031437 +0000
+@@ -55281,6 +55281,11 @@
+       gun.userData.cu100Drop = low === Infinity ? 0 : Math.max(0, Math.min(0.045, f.y - low - 0.012));
+       return gun.userData.cu100Drop;
+     }
++    // CD-10 (tcc341): the fit's frame (TP_FIT) is the hand on the gun; where it would bend the wrist far (the gun swung across his
++    // chest), the glove's cuff came out through the sleeve's end. Past TP_FLEX the fist rolls round the grip instead (a turn about the
++    // hand's own x, the channel, so the grip stays in the fist): the firing wrist never toward the palm, the support within 20 deg.
++    const TP_FLEX = { r: [-Infinity, 0], l: [-0.35, 0.35] }, _tpc = { v: new THREE.Vector3(), q: new THREE.Quaternion(), x: new THREE.Vector3(1, 0, 0) };
 +    function tpCapFlex(q, elbowG) { const lim = elbowG === marine.userData.elbowLG ? TP_FLEX.l : TP_FLEX.r; const d = _tpc.v.set(0, 1, 0).applyQuaternion(_tpc.q.copy(q).invert()); const flex = Math.atan2(d.z, d.y), c = Math.max(lim[0], Math.min(lim[1], flex)); if (flex !== c) q.multiply(_tpc.q.setFromAxisAngle(_tpc.x, flex - c)); }
-     const selectorFlick = createSelectorFlick();   // GB-167
-     function poseHands(ud, wR, wL) {
-       const wristR = wristOf(ud.elbowRG), wristL = wristOf(ud.elbowLG);
-@@ -55310,7 +55316,7 @@
+     // Put the hand's grip point on anchorW with its channel (+x times sign) along channelW (world), by k (the forearm's
+     // roll by rollK); a as above. Returns the forearm's roll.
+     function holdHand(armG, elbowG, hand, anchorW, channelW, sign, pole, k, a, rollK = k) {
+@@ -55313,7 +55318,7 @@
          // CD-9: a wanted frame (TP_FIT) is the whole turn, k * a of the way from the forearm as the first pass leaves it and then
          // fixed in the world, so the passes close on it (limitWrist holds it inside the table)
          const want = _tpW.el === elbowG;
@@ -22,7 +21,7 @@
          _wr.q.setFromUnitVectors(_wr.c.set(sign, 0, 0), d);
          const ang = 2 * Math.acos(Math.min(1, Math.abs(_wr.q.w)));
          const s = want ? 1 : (ang > WRIST.max ? WRIST.max / ang : 1) * k * a;
-@@ -55871,7 +55877,7 @@
+@@ -55874,7 +55879,7 @@
              // is, and place the gun from where the hand is.
              holdFreeShoulders(); ud.elbowRG.updateMatrixWorld(true);
              const wr = wristOf(ud.elbowRG);

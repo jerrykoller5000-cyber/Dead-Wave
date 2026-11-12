@@ -22,15 +22,15 @@ export function makeRoundContact(T){const THREE=T.THREE;
   const clipOf = (V, A, mks, parts0) => {
     V.root.updateMatrixWorld(true);
     const GI = V.gun.root.matrixWorld.clone().invert(), gs = V.gun.root.matrixWorld.getMaxScaleOnAxis();
-    let worst = 0, where = '';
+    let worst = 0, where = '', detail = null;
     for (const mk of mks) {
       const mm = A.meshes[mk]; if (!mm || !vis(mm) || !mm.geometry || !mm.geometry.attributes.position) continue;
       const M = GI.clone().multiply(mm.matrixWorld), pa = mm.geometry.attributes.position, v = new THREE.Vector3(), mb = new THREE.Box3();
       for (let i = 0; i < pa.count; i++) mb.expandByPoint(v.fromBufferAttribute(pa, i).applyMatrix4(M));
       const parts = parts0.filter((pt) => pt.box.intersectsBox(mb)); if (!parts.length) continue;
-      for (let i = 0; i < pa.count; i++) { v.fromBufferAttribute(pa, i).applyMatrix4(M); for (const pt of parts) { if (!pt.box.containsPoint(v)) continue; if ((rayHits(pt.P, v.x, v.y, v.z) & 1) === 0) continue; let d = 1; for (let tt = 0; tt < pt.P.length; tt += 9) { const e = distTri(pt.P, tt, v.x, v.y, v.z); if (e < d) d = e; } d *= gs; if (d > worst) { worst = d; where = mk + ' in ' + pt.name; } } }
+      for (let i = 0; i < pa.count; i++) { v.fromBufferAttribute(pa, i).applyMatrix4(M); for (const pt of parts) { if (!pt.box.containsPoint(v)) continue; if ((rayHits(pt.P, v.x, v.y, v.z) & 1) === 0) continue; let d = 1; for (let tt = 0; tt < pt.P.length; tt += 9) { const e = distTri(pt.P, tt, v.x, v.y, v.z); if (e < d) d = e; } d *= gs; if (d > worst) { worst = d; where = mk + ' in ' + pt.name; const skin=A.rig.skins.find(s=>s.mesh===mm),bone=skin?.seg[i];detail={vertex:i,bone,digit:bone===0?'palm':bone>=13?'thumb':['index','middle','ring','little'][Math.floor((bone-1)/3)],point:v.toArray(),depthMm:d*1000}; } } }
     }
-    return { worst, where };
+    return { worst, where, detail };
   };
 
 return (V,round)=>{const drawn=vis(round),parts=[],GI=V.gun.root.matrixWorld.clone().invert();if(drawn)for(const piece of visiblePieces(round)){if(!piece.closed)throw Error('Reload round surface is not closed');const values=[],points=[];for(const f of piece.faces)for(const p of f.p){const q=p.clone().applyMatrix4(GI);values.push(q.x,q.y,q.z);points.push(q);}parts.push({name:'pistol live round',P:new Float64Array(values),box:new THREE.Box3().setFromPoints(points)});}if(drawn&&parts.length!==1)throw Error('Expected one measured closed live round: '+parts.length);return {visible:round.visible,drawn,closedBodies:parts.length,triangles:parts.reduce((n,p)=>n+p.P.length/9,0),r:clipOf(V,V.arms.r,['glove','glovePads','bare','bareNails'],parts),l:clipOf(V,V.arms.l,['glove','glovePads','bare','bareNails'],parts)}};}

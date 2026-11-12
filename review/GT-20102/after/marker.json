@@ -1,0 +1,57 @@
+{
+  "marker": {
+    "exists": true,
+    "type": "Mesh",
+    "isMesh": true,
+    "visible": true,
+    "materialVisible": true,
+    "materialType": "MeshBasicMaterial",
+    "isMeshBasicMaterial": true,
+    "colour": 8777604,
+    "centre": [
+      -1.1102230246251568e-16,
+      0.12271999999995845,
+      0.31654783783778845
+    ],
+    "children": 0
+  },
+  "camera": {
+    "points": [
+      [
+        0,
+        -0.2092589830934627,
+        0.4185229658729662
+      ],
+      [
+        0.9797946778264586,
+        -0.2092589830934627,
+        0.4185229658729662
+      ],
+      [
+        0,
+        1.5325917784889331,
+        0.42063238550783194
+      ],
+      [
+        0,
+        -0.21399681716496669,
+        1.1940448904559686
+      ]
+    ],
+    "eye": true,
+    "glassHidden": false,
+    "fov": null,
+    "target": "isolated held artwork",
+    "recordedWallPose": false,
+    "spot": [
+      0,
+      -640.55
+    ],
+    "actualSpot": [
+      0,
+      -200,
+      -640.6700000000001
+    ],
+    "heldElevation": null
+  }
+}

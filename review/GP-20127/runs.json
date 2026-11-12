@@ -1,0 +1,2328 @@
+[
+  {
+    "i": 1,
+    "gun": "pistol",
+    "at": "2026-11-12T22:28:38.461Z",
+    "instrument": {
+      "device": true,
+      "hooks": []
+    },
+    "before": {
+      "t": 31886.79999999702,
+      "gun": "pistol",
+      "flags": {
+        "fireHeld": false,
+        "mouseFireHeld": false,
+        "unarmed": false,
+        "placeMode": null,
+        "buildMode": false,
+        "blocked": false,
+        "reloading": false,
+        "fireCooldown": -1.2167000000029806,
+        "dualActive": false,
+        "akimbo": false
+      },
+      "ammo": 12,
+      "pipelines": 388,
+      "geometries": 3761,
+      "textures": 186,
+      "heap": 1042774094,
+      "cases": [],
+      "parts": [
+        {
+          "space": "world",
+          "name": "pistol magazine top round",
+          "visible": true,
+          "geometry": 4341,
+          "material": 9508
+        },
+        {
+          "space": "world",
+          "name": "",
+          "visible": true,
+          "geometry": 4383,
+          "material": 9510
+        },
+        {
+          "space": "eye",
+          "name": "pistol magazine top round",
+          "visible": true,
+          "geometry": 87596,
+          "material": 19676
+        },
+        {
+          "space": "eye",
+          "name": "",
+          "visible": true,
+          "geometry": 87601,
+          "material": 19680
+        }
+      ],
+      "devicePipelines": 0,
+      "deviceBuffers": 4
+    },
+    "shotAt": 32204.59999999404,
+    "shotEnd": 34521.79999999702,
+    "after": {
+      "t": 34534.79999999702,
+      "gun": "pistol",
+      "flags": {
+        "fireHeld": false,
+        "mouseFireHeld": false,
+        "unarmed": false,
+        "placeMode": null,
+        "buildMode": false,
+        "blocked": false,
+        "reloading": false,
+        "fireCooldown": -1.9860000000000007,
+        "dualActive": false,
+        "akimbo": false
+      },
+      "ammo": 11,
+      "pipelines": 390,
+      "geometries": 3762,
+      "textures": 186,
+      "heap": 1060641022,
+      "cases": [],
+      "parts": [
+        {
+          "space": "world",
+          "name": "pistol magazine top round",
+          "visible": true,
+          "geometry": 4341,
+          "material": 9508
+        },
+        {
+          "space": "world",
+          "name": "",
+          "visible": true,
+          "geometry": 4383,
+          "material": 9510
+        },
+        {
+          "space": "eye",
+          "name": "pistol magazine top round",
+          "visible": true,
+          "geometry": 87596,
+          "material": 19676
+        },
+        {
+          "space": "eye",
+          "name": "",
+          "visible": true,
+          "geometry": 87601,
+          "material": 19680
+        }
+      ],
+      "devicePipelines": 2,
+      "deviceBuffers": 17
+    },
+    "data": {
+      "stage": "after-shot",
+      "last": 34522.2,
+      "gaps": [
+        {
+          "stage": "first-shot",
+          "ms": 83.3,
+          "at": 32305.6
+        }
+      ],
+      "pipelines": [
+        {
+          "name": "createRenderPipeline",
+          "stage": "first-shot",
+          "t": 32252.19999998808,
+          "label": "renderPipeline_vm:MeshBasicMaterial_19680",
+          "size": 0,
+          "usage": 0
+        },
+        {
+          "name": "createRenderPipeline",
+          "stage": "first-shot",
+          "t": 32302.89999999106,
+          "label": "renderPipeline_MeshStandardMaterial_22170",
+          "size": 0,
+          "usage": 0
+        }
+      ],
+      "buffers": [
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 30871.69999998808,
+          "label": "bindingBuffer_object",
+          "size": 48,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 30871.79999999702,
+          "label": "bindingBuffer_object",
+          "size": 176,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 30872.29999999702,
+          "label": "bindingBuffer_object",
+          "size": 48,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 30872.39999999106,
+          "label": "bindingBuffer_object",
+          "size": 176,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 32243.19999998808,
+          "label": "bindingBuffer_object",
+          "size": 16,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 32243.19999998808,
+          "label": "bindingBuffer_object",
+          "size": 112,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 32251.69999998808,
+          "label": "",
+          "size": 588,
+          "usage": 44
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 32251.79999999702,
+          "label": "",
+          "size": 588,
+          "usage": 44
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 32251.89999999106,
+          "label": "",
+          "size": 720,
+          "usage": 28
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 32251.89999999106,
+          "label": "bindingBuffer_render",
+          "size": 64,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 32251.89999999106,
+          "label": "bindingBuffer_render",
+          "size": 64,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 32252,
+          "label": "bindingBuffer_object",
+          "size": 16,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 32252,
+          "label": "bindingBuffer_object",
+          "size": 176,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 32302.59999999404,
+          "label": "bindingBuffer_render",
+          "size": 928,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 32302.59999999404,
+          "label": "bindingBuffer_render",
+          "size": 128,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 32302.69999998808,
+          "label": "bindingBuffer_object",
+          "size": 48,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 32302.69999998808,
+          "label": "bindingBuffer_object",
+          "size": 112,
+          "usage": 72
+        }
+      ],
+      "errors": []
+    },
+    "errors": [],
+    "firstShotGaps": [
+      {
+        "stage": "first-shot",
+        "ms": 83.3,
+        "at": 32305.6
+      }
+    ],
+    "newPipelines": [
+      {
+        "name": "createRenderPipeline",
+        "stage": "first-shot",
+        "t": 32252.19999998808,
+        "label": "renderPipeline_vm:MeshBasicMaterial_19680",
+        "size": 0,
+        "usage": 0
+      },
+      {
+        "name": "createRenderPipeline",
+        "stage": "first-shot",
+        "t": 32302.89999999106,
+        "label": "renderPipeline_MeshStandardMaterial_22170",
+        "size": 0,
+        "usage": 0
+      }
+    ],
+    "newBuffers": [
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 32243.19999998808,
+        "label": "bindingBuffer_object",
+        "size": 16,
+        "usage": 72
+      },
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 32243.19999998808,
+        "label": "bindingBuffer_object",
+        "size": 112,
+        "usage": 72
+      },
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 32251.69999998808,
+        "label": "",
+        "size": 588,
+        "usage": 44
+      },
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 32251.79999999702,
+        "label": "",
+        "size": 588,
+        "usage": 44
+      },
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 32251.89999999106,
+        "label": "",
+        "size": 720,
+        "usage": 28
+      },
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 32251.89999999106,
+        "label": "bindingBuffer_render",
+        "size": 64,
+        "usage": 72
+      },
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 32251.89999999106,
+        "label": "bindingBuffer_render",
+        "size": 64,
+        "usage": 72
+      },
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 32252,
+        "label": "bindingBuffer_object",
+        "size": 16,
+        "usage": 72
+      },
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 32252,
+        "label": "bindingBuffer_object",
+        "size": 176,
+        "usage": 72
+      },
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 32302.59999999404,
+        "label": "bindingBuffer_render",
+        "size": 928,
+        "usage": 72
+      },
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 32302.59999999404,
+        "label": "bindingBuffer_render",
+        "size": 128,
+        "usage": 72
+      },
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 32302.69999998808,
+        "label": "bindingBuffer_object",
+        "size": 48,
+        "usage": 72
+      },
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 32302.69999998808,
+        "label": "bindingBuffer_object",
+        "size": 112,
+        "usage": 72
+      }
+    ]
+  },
+  {
+    "i": 2,
+    "gun": "pistol",
+    "at": "2026-11-12T22:29:13.792Z",
+    "instrument": {
+      "device": true,
+      "hooks": []
+    },
+    "before": {
+      "t": 33661.60000000894,
+      "gun": "pistol",
+      "flags": {
+        "fireHeld": false,
+        "mouseFireHeld": false,
+        "unarmed": false,
+        "placeMode": null,
+        "buildMode": false,
+        "blocked": false,
+        "reloading": false,
+        "fireCooldown": -1.2167000000029797,
+        "dualActive": false,
+        "akimbo": false
+      },
+      "ammo": 12,
+      "pipelines": 390,
+      "geometries": 3786,
+      "textures": 185,
+      "heap": 1034426258,
+      "cases": [],
+      "parts": [
+        {
+          "space": "world",
+          "name": "pistol magazine top round",
+          "visible": true,
+          "geometry": 4341,
+          "material": 9508
+        },
+        {
+          "space": "world",
+          "name": "",
+          "visible": true,
+          "geometry": 4383,
+          "material": 9510
+        },
+        {
+          "space": "eye",
+          "name": "pistol magazine top round",
+          "visible": true,
+          "geometry": 87628,
+          "material": 19679
+        },
+        {
+          "space": "eye",
+          "name": "",
+          "visible": true,
+          "geometry": 87633,
+          "material": 19683
+        }
+      ],
+      "devicePipelines": 0,
+      "deviceBuffers": 4
+    },
+    "shotAt": 33965.20000000298,
+    "shotEnd": 36261,
+    "after": {
+      "t": 36261.90000000596,
+      "gun": "pistol",
+      "flags": {
+        "fireHeld": false,
+        "mouseFireHeld": false,
+        "unarmed": false,
+        "placeMode": null,
+        "buildMode": false,
+        "blocked": false,
+        "reloading": false,
+        "fireCooldown": -1.9746000000089416,
+        "dualActive": false,
+        "akimbo": false
+      },
+      "ammo": 11,
+      "pipelines": 392,
+      "geometries": 3787,
+      "textures": 185,
+      "heap": 1053582990,
+      "cases": [
+        {
+          "name": "",
+          "geometry": 80621,
+          "count": 336,
+          "caseOf": "pistol"
+        }
+      ],
+      "parts": [
+        {
+          "space": "world",
+          "name": "pistol magazine top round",
+          "visible": true,
+          "geometry": 4341,
+          "material": 9508
+        },
+        {
+          "space": "world",
+          "name": "",
+          "visible": true,
+          "geometry": 4383,
+          "material": 9510
+        },
+        {
+          "space": "eye",
+          "name": "pistol magazine top round",
+          "visible": true,
+          "geometry": 87628,
+          "material": 19679
+        },
+        {
+          "space": "eye",
+          "name": "",
+          "visible": true,
+          "geometry": 87633,
+          "material": 19683
+        }
+      ],
+      "devicePipelines": 2,
+      "deviceBuffers": 17
+    },
+    "data": {
+      "stage": "after-shot",
+      "last": 36249.2,
+      "gaps": [],
+      "pipelines": [
+        {
+          "name": "createRenderPipeline",
+          "stage": "first-shot",
+          "t": 34005.20000000298,
+          "label": "renderPipeline_vm:MeshBasicMaterial_19683",
+          "size": 0,
+          "usage": 0
+        },
+        {
+          "name": "createRenderPipeline",
+          "stage": "first-shot",
+          "t": 34041.60000000894,
+          "label": "renderPipeline_MeshStandardMaterial_22173",
+          "size": 0,
+          "usage": 0
+        }
+      ],
+      "buffers": [
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 32652.20000000298,
+          "label": "bindingBuffer_object",
+          "size": 48,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 32652.30000001192,
+          "label": "bindingBuffer_object",
+          "size": 176,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 32652.80000001192,
+          "label": "bindingBuffer_object",
+          "size": 48,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 32652.80000001192,
+          "label": "bindingBuffer_object",
+          "size": 176,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 33999.20000000298,
+          "label": "bindingBuffer_object",
+          "size": 16,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 33999.20000000298,
+          "label": "bindingBuffer_object",
+          "size": 112,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 34004.90000000596,
+          "label": "",
+          "size": 588,
+          "usage": 44
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 34005,
+          "label": "",
+          "size": 588,
+          "usage": 44
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 34005,
+          "label": "",
+          "size": 720,
+          "usage": 28
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 34005.10000000894,
+          "label": "bindingBuffer_render",
+          "size": 64,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 34005.10000000894,
+          "label": "bindingBuffer_render",
+          "size": 64,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 34005.10000000894,
+          "label": "bindingBuffer_object",
+          "size": 16,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 34005.10000000894,
+          "label": "bindingBuffer_object",
+          "size": 176,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 34041.30000001192,
+          "label": "bindingBuffer_render",
+          "size": 928,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 34041.30000001192,
+          "label": "bindingBuffer_render",
+          "size": 128,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 34041.30000001192,
+          "label": "bindingBuffer_object",
+          "size": 48,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 34041.30000001192,
+          "label": "bindingBuffer_object",
+          "size": 112,
+          "usage": 72
+        }
+      ],
+      "errors": []
+    },
+    "errors": [],
+    "firstShotGaps": [],
+    "newPipelines": [
+      {
+        "name": "createRenderPipeline",
+        "stage": "first-shot",
+        "t": 34005.20000000298,
+        "label": "renderPipeline_vm:MeshBasicMaterial_19683",
+        "size": 0,
+        "usage": 0
+      },
+      {
+        "name": "createRenderPipeline",
+        "stage": "first-shot",
+        "t": 34041.60000000894,
+        "label": "renderPipeline_MeshStandardMaterial_22173",
+        "size": 0,
+        "usage": 0
+      }
+    ],
+    "newBuffers": [
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 33999.20000000298,
+        "label": "bindingBuffer_object",
+        "size": 16,
+        "usage": 72
+      },
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 33999.20000000298,
+        "label": "bindingBuffer_object",
+        "size": 112,
+        "usage": 72
+      },
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 34004.90000000596,
+        "label": "",
+        "size": 588,
+        "usage": 44
+      },
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 34005,
+        "label": "",
+        "size": 588,
+        "usage": 44
+      },
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 34005,
+        "label": "",
+        "size": 720,
+        "usage": 28
+      },
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 34005.10000000894,
+        "label": "bindingBuffer_render",
+        "size": 64,
+        "usage": 72
+      },
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 34005.10000000894,
+        "label": "bindingBuffer_render",
+        "size": 64,
+        "usage": 72
+      },
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 34005.10000000894,
+        "label": "bindingBuffer_object",
+        "size": 16,
+        "usage": 72
+      },
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 34005.10000000894,
+        "label": "bindingBuffer_object",
+        "size": 176,
+        "usage": 72
+      },
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 34041.30000001192,
+        "label": "bindingBuffer_render",
+        "size": 928,
+        "usage": 72
+      },
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 34041.30000001192,
+        "label": "bindingBuffer_render",
+        "size": 128,
+        "usage": 72
+      },
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 34041.30000001192,
+        "label": "bindingBuffer_object",
+        "size": 48,
+        "usage": 72
+      },
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 34041.30000001192,
+        "label": "bindingBuffer_object",
+        "size": 112,
+        "usage": 72
+      }
+    ]
+  },
+  {
+    "i": 3,
+    "gun": "pistol",
+    "at": "2026-11-12T22:29:50.786Z",
+    "instrument": {
+      "device": true,
+      "hooks": []
+    },
+    "before": {
+      "t": 34326.79999999702,
+      "gun": "pistol",
+      "flags": {
+        "fireHeld": false,
+        "mouseFireHeld": false,
+        "unarmed": false,
+        "placeMode": null,
+        "buildMode": false,
+        "blocked": false,
+        "reloading": false,
+        "fireCooldown": -1.2377000000029803,
+        "dualActive": false,
+        "akimbo": false
+      },
+      "ammo": 12,
+      "pipelines": 387,
+      "geometries": 3786,
+      "textures": 185,
+      "heap": 1029125409,
+      "cases": [],
+      "parts": [
+        {
+          "space": "world",
+          "name": "pistol magazine top round",
+          "visible": true,
+          "geometry": 4341,
+          "material": 9508
+        },
+        {
+          "space": "world",
+          "name": "",
+          "visible": true,
+          "geometry": 4383,
+          "material": 9510
+        },
+        {
+          "space": "eye",
+          "name": "pistol magazine top round",
+          "visible": true,
+          "geometry": 87644,
+          "material": 19676
+        },
+        {
+          "space": "eye",
+          "name": "",
+          "visible": true,
+          "geometry": 87649,
+          "material": 19680
+        }
+      ],
+      "devicePipelines": 0,
+      "deviceBuffers": 4
+    },
+    "shotAt": 34651.09999999404,
+    "shotEnd": 36976.20000000298,
+    "after": {
+      "t": 37009.29999999702,
+      "gun": "pistol",
+      "flags": {
+        "fireHeld": false,
+        "mouseFireHeld": false,
+        "unarmed": false,
+        "placeMode": null,
+        "buildMode": false,
+        "blocked": false,
+        "reloading": false,
+        "fireCooldown": -1.9709000000059596,
+        "dualActive": false,
+        "akimbo": false
+      },
+      "ammo": 11,
+      "pipelines": 389,
+      "geometries": 3787,
+      "textures": 185,
+      "heap": 1025751989,
+      "cases": [
+        {
+          "name": "",
+          "geometry": 80628,
+          "count": 336,
+          "caseOf": "pistol"
+        }
+      ],
+      "parts": [
+        {
+          "space": "world",
+          "name": "pistol magazine top round",
+          "visible": true,
+          "geometry": 4341,
+          "material": 9508
+        },
+        {
+          "space": "world",
+          "name": "",
+          "visible": true,
+          "geometry": 4383,
+          "material": 9510
+        },
+        {
+          "space": "eye",
+          "name": "pistol magazine top round",
+          "visible": true,
+          "geometry": 87644,
+          "material": 19676
+        },
+        {
+          "space": "eye",
+          "name": "",
+          "visible": true,
+          "geometry": 87649,
+          "material": 19680
+        }
+      ],
+      "devicePipelines": 2,
+      "deviceBuffers": 17
+    },
+    "data": {
+      "stage": "after-shot",
+      "last": 36981.2,
+      "gaps": [
+        {
+          "stage": "first-shot",
+          "ms": 83.5,
+          "at": 34747.7
+        },
+        {
+          "stage": "first-shot",
+          "ms": 83.3,
+          "at": 34847.6
+        }
+      ],
+      "pipelines": [
+        {
+          "name": "createRenderPipeline",
+          "stage": "first-shot",
+          "t": 34700.29999999702,
+          "label": "renderPipeline_vm:MeshBasicMaterial_19680",
+          "size": 0,
+          "usage": 0
+        },
+        {
+          "name": "createRenderPipeline",
+          "stage": "first-shot",
+          "t": 34751.40000000596,
+          "label": "renderPipeline_MeshStandardMaterial_22169",
+          "size": 0,
+          "usage": 0
+        }
+      ],
+      "buffers": [
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33306,
+          "label": "bindingBuffer_object",
+          "size": 48,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33306,
+          "label": "bindingBuffer_object",
+          "size": 176,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33306.70000000298,
+          "label": "bindingBuffer_object",
+          "size": 48,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33306.70000000298,
+          "label": "bindingBuffer_object",
+          "size": 176,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 34693.40000000596,
+          "label": "bindingBuffer_object",
+          "size": 16,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 34693.40000000596,
+          "label": "bindingBuffer_object",
+          "size": 112,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 34700,
+          "label": "",
+          "size": 588,
+          "usage": 44
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 34700,
+          "label": "",
+          "size": 588,
+          "usage": 44
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 34700.09999999404,
+          "label": "",
+          "size": 720,
+          "usage": 28
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 34700.09999999404,
+          "label": "bindingBuffer_render",
+          "size": 64,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 34700.09999999404,
+          "label": "bindingBuffer_render",
+          "size": 64,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 34700.20000000298,
+          "label": "bindingBuffer_object",
+          "size": 16,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 34700.20000000298,
+          "label": "bindingBuffer_object",
+          "size": 176,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 34751,
+          "label": "bindingBuffer_render",
+          "size": 928,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 34751,
+          "label": "bindingBuffer_render",
+          "size": 128,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 34751.09999999404,
+          "label": "bindingBuffer_object",
+          "size": 48,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 34751.09999999404,
+          "label": "bindingBuffer_object",
+          "size": 112,
+          "usage": 72
+        }
+      ],
+      "errors": []
+    },
+    "errors": [],
+    "firstShotGaps": [
+      {
+        "stage": "first-shot",
+        "ms": 83.5,
+        "at": 34747.7
+      },
+      {
+        "stage": "first-shot",
+        "ms": 83.3,
+        "at": 34847.6
+      }
+    ],
+    "newPipelines": [
+      {
+        "name": "createRenderPipeline",
+        "stage": "first-shot",
+        "t": 34700.29999999702,
+        "label": "renderPipeline_vm:MeshBasicMaterial_19680",
+        "size": 0,
+        "usage": 0
+      },
+      {
+        "name": "createRenderPipeline",
+        "stage": "first-shot",
+        "t": 34751.40000000596,
+        "label": "renderPipeline_MeshStandardMaterial_22169",
+        "size": 0,
+        "usage": 0
+      }
+    ],
+    "newBuffers": [
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 34693.40000000596,
+        "label": "bindingBuffer_object",
+        "size": 16,
+        "usage": 72
+      },
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 34693.40000000596,
+        "label": "bindingBuffer_object",
+        "size": 112,
+        "usage": 72
+      },
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 34700,
+        "label": "",
+        "size": 588,
+        "usage": 44
+      },
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 34700,
+        "label": "",
+        "size": 588,
+        "usage": 44
+      },
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 34700.09999999404,
+        "label": "",
+        "size": 720,
+        "usage": 28
+      },
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 34700.09999999404,
+        "label": "bindingBuffer_render",
+        "size": 64,
+        "usage": 72
+      },
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 34700.09999999404,
+        "label": "bindingBuffer_render",
+        "size": 64,
+        "usage": 72
+      },
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 34700.20000000298,
+        "label": "bindingBuffer_object",
+        "size": 16,
+        "usage": 72
+      },
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 34700.20000000298,
+        "label": "bindingBuffer_object",
+        "size": 176,
+        "usage": 72
+      },
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 34751,
+        "label": "bindingBuffer_render",
+        "size": 928,
+        "usage": 72
+      },
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 34751,
+        "label": "bindingBuffer_render",
+        "size": 128,
+        "usage": 72
+      },
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 34751.09999999404,
+        "label": "bindingBuffer_object",
+        "size": 48,
+        "usage": 72
+      },
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 34751.09999999404,
+        "label": "bindingBuffer_object",
+        "size": 112,
+        "usage": 72
+      }
+    ]
+  },
+  {
+    "i": 4,
+    "gun": "uzi",
+    "at": "2026-11-12T22:30:28.788Z",
+    "purchase": {
+      "button": true,
+      "disabled": false,
+      "take": {
+        "ok": true,
+        "location": "secondary",
+        "index": 0,
+        "gun": {
+          "id": "uzi",
+          "kind": "uzi",
+          "loaded": 32,
+          "magazines": [
+            {
+              "rounds": 32
+            },
+            {
+              "rounds": 32
+            },
+            {
+              "rounds": 32
+            },
+            {
+              "rounds": 32
+            },
+            {
+              "rounds": 32
+            },
+            {
+              "rounds": 32
+            },
+            {
+              "rounds": 32
+            },
+            {
+              "rounds": 32
+            },
+            {
+              "rounds": 32
+            }
+          ],
+          "rounds": 0,
+          "upgrades": {}
+        },
+        "stowed": null
+      },
+      "owned": true
+    },
+    "instrument": {
+      "device": true,
+      "hooks": []
+    },
+    "before": {
+      "t": 40232.89999999106,
+      "gun": "uzi",
+      "flags": {
+        "fireHeld": false,
+        "mouseFireHeld": false,
+        "unarmed": false,
+        "placeMode": null,
+        "buildMode": false,
+        "blocked": false,
+        "reloading": false,
+        "fireCooldown": -1.2331999999880796,
+        "dualActive": false,
+        "akimbo": false
+      },
+      "ammo": 32,
+      "pipelines": 388,
+      "geometries": 3798,
+      "textures": 185,
+      "heap": 1030536685,
+      "cases": [],
+      "parts": [
+        {
+          "space": "world",
+          "name": "magazine top round",
+          "visible": true,
+          "geometry": 4589,
+          "material": 9518
+        },
+        {
+          "space": "world",
+          "name": "",
+          "visible": true,
+          "geometry": 4681,
+          "material": 9519
+        },
+        {
+          "space": "eye",
+          "name": "magazine top round",
+          "visible": true,
+          "geometry": 87801,
+          "material": 19765
+        },
+        {
+          "space": "eye",
+          "name": "",
+          "visible": true,
+          "geometry": 87807,
+          "material": 19767
+        }
+      ],
+      "devicePipelines": 0,
+      "deviceBuffers": 8
+    },
+    "shotAt": 40562.29999999702,
+    "shotEnd": 42882.79999999702,
+    "after": {
+      "t": 42900.29999999702,
+      "gun": "uzi",
+      "flags": {
+        "fireHeld": false,
+        "mouseFireHeld": false,
+        "unarmed": false,
+        "placeMode": null,
+        "buildMode": false,
+        "blocked": false,
+        "reloading": false,
+        "fireCooldown": -2.183971428577389,
+        "dualActive": false,
+        "akimbo": false
+      },
+      "ammo": 31,
+      "pipelines": 390,
+      "geometries": 3799,
+      "textures": 185,
+      "heap": 1030986885,
+      "cases": [],
+      "parts": [
+        {
+          "space": "world",
+          "name": "magazine top round",
+          "visible": true,
+          "geometry": 4589,
+          "material": 9518
+        },
+        {
+          "space": "world",
+          "name": "",
+          "visible": true,
+          "geometry": 4681,
+          "material": 9519
+        },
+        {
+          "space": "eye",
+          "name": "magazine top round",
+          "visible": true,
+          "geometry": 87801,
+          "material": 19765
+        },
+        {
+          "space": "eye",
+          "name": "",
+          "visible": true,
+          "geometry": 87807,
+          "material": 19767
+        }
+      ],
+      "devicePipelines": 2,
+      "deviceBuffers": 21
+    },
+    "data": {
+      "stage": "after-shot",
+      "last": 42899.4,
+      "gaps": [
+        {
+          "stage": "first-shot",
+          "ms": 66.6,
+          "at": 40649.4
+        },
+        {
+          "stage": "first-shot",
+          "ms": 66.8,
+          "at": 40716.2
+        }
+      ],
+      "pipelines": [
+        {
+          "name": "createRenderPipeline",
+          "stage": "first-shot",
+          "t": 40617.09999999404,
+          "label": "renderPipeline_vm:MeshBasicMaterial_19767",
+          "size": 0,
+          "usage": 0
+        },
+        {
+          "name": "createRenderPipeline",
+          "stage": "first-shot",
+          "t": 40655.79999999702,
+          "label": "renderPipeline_MeshStandardMaterial_22297",
+          "size": 0,
+          "usage": 0
+        }
+      ],
+      "buffers": [
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 39215.20000000298,
+          "label": "bindingBuffer_object",
+          "size": 48,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 39215.29999999702,
+          "label": "bindingBuffer_object",
+          "size": 176,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 39215.59999999404,
+          "label": "bindingBuffer_object",
+          "size": 48,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 39215.59999999404,
+          "label": "bindingBuffer_object",
+          "size": 176,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 39215.70000000298,
+          "label": "bindingBuffer_object",
+          "size": 48,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 39215.70000000298,
+          "label": "bindingBuffer_object",
+          "size": 176,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 39215.79999999702,
+          "label": "bindingBuffer_object",
+          "size": 48,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 39215.79999999702,
+          "label": "bindingBuffer_object",
+          "size": 176,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 40610,
+          "label": "bindingBuffer_object",
+          "size": 16,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 40610,
+          "label": "bindingBuffer_object",
+          "size": 112,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 40616.79999999702,
+          "label": "",
+          "size": 588,
+          "usage": 44
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 40616.89999999106,
+          "label": "",
+          "size": 588,
+          "usage": 44
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 40616.89999999106,
+          "label": "",
+          "size": 720,
+          "usage": 28
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 40617,
+          "label": "bindingBuffer_render",
+          "size": 64,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 40617,
+          "label": "bindingBuffer_render",
+          "size": 64,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 40617,
+          "label": "bindingBuffer_object",
+          "size": 16,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 40617,
+          "label": "bindingBuffer_object",
+          "size": 176,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 40655.5,
+          "label": "bindingBuffer_render",
+          "size": 928,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 40655.5,
+          "label": "bindingBuffer_render",
+          "size": 128,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 40655.59999999404,
+          "label": "bindingBuffer_object",
+          "size": 48,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "first-shot",
+          "t": 40655.59999999404,
+          "label": "bindingBuffer_object",
+          "size": 112,
+          "usage": 72
+        }
+      ],
+      "errors": []
+    },
+    "errors": [],
+    "firstShotGaps": [
+      {
+        "stage": "first-shot",
+        "ms": 66.6,
+        "at": 40649.4
+      },
+      {
+        "stage": "first-shot",
+        "ms": 66.8,
+        "at": 40716.2
+      }
+    ],
+    "newPipelines": [
+      {
+        "name": "createRenderPipeline",
+        "stage": "first-shot",
+        "t": 40617.09999999404,
+        "label": "renderPipeline_vm:MeshBasicMaterial_19767",
+        "size": 0,
+        "usage": 0
+      },
+      {
+        "name": "createRenderPipeline",
+        "stage": "first-shot",
+        "t": 40655.79999999702,
+        "label": "renderPipeline_MeshStandardMaterial_22297",
+        "size": 0,
+        "usage": 0
+      }
+    ],
+    "newBuffers": [
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 40610,
+        "label": "bindingBuffer_object",
+        "size": 16,
+        "usage": 72
+      },
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 40610,
+        "label": "bindingBuffer_object",
+        "size": 112,
+        "usage": 72
+      },
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 40616.79999999702,
+        "label": "",
+        "size": 588,
+        "usage": 44
+      },
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 40616.89999999106,
+        "label": "",
+        "size": 588,
+        "usage": 44
+      },
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 40616.89999999106,
+        "label": "",
+        "size": 720,
+        "usage": 28
+      },
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 40617,
+        "label": "bindingBuffer_render",
+        "size": 64,
+        "usage": 72
+      },
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 40617,
+        "label": "bindingBuffer_render",
+        "size": 64,
+        "usage": 72
+      },
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 40617,
+        "label": "bindingBuffer_object",
+        "size": 16,
+        "usage": 72
+      },
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 40617,
+        "label": "bindingBuffer_object",
+        "size": 176,
+        "usage": 72
+      },
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 40655.5,
+        "label": "bindingBuffer_render",
+        "size": 928,
+        "usage": 72
+      },
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 40655.5,
+        "label": "bindingBuffer_render",
+        "size": 128,
+        "usage": 72
+      },
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 40655.59999999404,
+        "label": "bindingBuffer_object",
+        "size": 48,
+        "usage": 72
+      },
+      {
+        "name": "createBuffer",
+        "stage": "first-shot",
+        "t": 40655.59999999404,
+        "label": "bindingBuffer_object",
+        "size": 112,
+        "usage": 72
+      }
+    ]
+  },
+  {
+    "i": 5,
+    "gun": "revolver",
+    "at": "2026-11-12T22:31:12.571Z",
+    "purchase": {
+      "button": true,
+      "disabled": false,
+      "take": {
+        "ok": true,
+        "location": "secondary",
+        "index": 0,
+        "gun": {
+          "id": "revolver",
+          "kind": "revolver",
+          "loaded": 6,
+          "magazines": [
+            {
+              "rounds": 6
+            },
+            {
+              "rounds": 6
+            },
+            {
+              "rounds": 6
+            },
+            {
+              "rounds": 6
+            },
+            {
+              "rounds": 6
+            },
+            {
+              "rounds": 6
+            },
+            {
+              "rounds": 6
+            },
+            {
+              "rounds": 6
+            }
+          ],
+          "rounds": 0,
+          "upgrades": {}
+        },
+        "stowed": null
+      },
+      "owned": true
+    },
+    "instrument": {
+      "device": true,
+      "hooks": []
+    },
+    "before": {
+      "t": 34124,
+      "gun": "revolver",
+      "flags": {
+        "fireHeld": false,
+        "mouseFireHeld": false,
+        "unarmed": false,
+        "placeMode": null,
+        "buildMode": false,
+        "blocked": false,
+        "reloading": false,
+        "fireCooldown": -0.6192000000178814,
+        "dualActive": false,
+        "akimbo": false
+      },
+      "ammo": 6,
+      "pipelines": 392,
+      "geometries": 3721,
+      "textures": 185,
+      "heap": 916068690,
+      "cases": [],
+      "parts": [
+        {
+          "space": "world",
+          "name": "",
+          "visible": true,
+          "geometry": 5142,
+          "material": 9553
+        },
+        {
+          "space": "eye",
+          "name": "",
+          "visible": true,
+          "geometry": 87649,
+          "material": 19835
+        }
+      ],
+      "devicePipelines": 0,
+      "deviceBuffers": 48
+    },
+    "shotAt": 34453.5,
+    "shotEnd": 36749.70000000298,
+    "after": {
+      "t": 36751.80000001192,
+      "gun": "revolver",
+      "flags": {
+        "fireHeld": false,
+        "mouseFireHeld": false,
+        "unarmed": false,
+        "placeMode": null,
+        "buildMode": false,
+        "blocked": false,
+        "reloading": false,
+        "fireCooldown": -3.2494000000059624,
+        "dualActive": false,
+        "akimbo": false
+      },
+      "ammo": 6,
+      "pipelines": 392,
+      "geometries": 3721,
+      "textures": 185,
+      "heap": 841093063,
+      "cases": [],
+      "parts": [
+        {
+          "space": "world",
+          "name": "",
+          "visible": true,
+          "geometry": 5142,
+          "material": 9553
+        },
+        {
+          "space": "eye",
+          "name": "",
+          "visible": true,
+          "geometry": 87649,
+          "material": 19835
+        }
+      ],
+      "devicePipelines": 0,
+      "deviceBuffers": 48
+    },
+    "data": {
+      "stage": "after-shot",
+      "last": 36737.7,
+      "gaps": [
+        {
+          "stage": "draw",
+          "ms": 100,
+          "at": 33121.1
+        },
+        {
+          "stage": "draw",
+          "ms": 116.7,
+          "at": 33237.8
+        },
+        {
+          "stage": "draw",
+          "ms": 550.1,
+          "at": 34021.2
+        }
+      ],
+      "pipelines": [],
+      "buffers": [
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33044.70000000298,
+          "label": "bindingBuffer_render",
+          "size": 128,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33044.70000000298,
+          "label": "bindingBuffer_object",
+          "size": 16,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33044.70000000298,
+          "label": "bindingBuffer_UniformBuffer_732",
+          "size": 384,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33044.70000000298,
+          "label": "bindingBuffer_object",
+          "size": 64,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33071.80000001192,
+          "label": "bindingBuffer_render",
+          "size": 928,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33071.80000001192,
+          "label": "bindingBuffer_render",
+          "size": 128,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33071.90000000596,
+          "label": "bindingBuffer_object",
+          "size": 48,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33071.90000000596,
+          "label": "bindingBuffer_UniformBuffer_734",
+          "size": 384,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33071.90000000596,
+          "label": "bindingBuffer_object",
+          "size": 112,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33122.20000000298,
+          "label": "bindingBuffer_render",
+          "size": 1024,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33122.20000000298,
+          "label": "bindingBuffer_render",
+          "size": 128,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33122.20000000298,
+          "label": "bindingBuffer_object",
+          "size": 32,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33122.20000000298,
+          "label": "bindingBuffer_UniformBuffer_736",
+          "size": 384,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33122.20000000298,
+          "label": "bindingBuffer_object",
+          "size": 112,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33151.5,
+          "label": "bindingBuffer_object",
+          "size": 16,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33151.5,
+          "label": "bindingBuffer_object",
+          "size": 176,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33194.20000000298,
+          "label": "bindingBuffer_render",
+          "size": 912,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33194.20000000298,
+          "label": "bindingBuffer_render",
+          "size": 64,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33194.20000000298,
+          "label": "bindingBuffer_object",
+          "size": 16,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33194.30000001192,
+          "label": "bindingBuffer_UniformBuffer_738",
+          "size": 384,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33194.30000001192,
+          "label": "bindingBuffer_object",
+          "size": 176,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33194.5,
+          "label": "bindingBuffer_object",
+          "size": 16,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33194.60000000894,
+          "label": "bindingBuffer_object",
+          "size": 176,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33194.70000000298,
+          "label": "bindingBuffer_object",
+          "size": 16,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33194.70000000298,
+          "label": "bindingBuffer_object",
+          "size": 176,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33194.90000000596,
+          "label": "bindingBuffer_object",
+          "size": 48,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33194.90000000596,
+          "label": "bindingBuffer_object",
+          "size": 176,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33195,
+          "label": "bindingBuffer_object",
+          "size": 48,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33195,
+          "label": "bindingBuffer_object",
+          "size": 176,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33195.10000000894,
+          "label": "bindingBuffer_object",
+          "size": 48,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33195.10000000894,
+          "label": "bindingBuffer_object",
+          "size": 176,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33195.30000001192,
+          "label": "bindingBuffer_object",
+          "size": 48,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33195.30000001192,
+          "label": "bindingBuffer_object",
+          "size": 176,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33195.30000001192,
+          "label": "bindingBuffer_object",
+          "size": 48,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33195.40000000596,
+          "label": "bindingBuffer_object",
+          "size": 176,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33238.10000000894,
+          "label": "bindingBuffer_render",
+          "size": 896,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33238.10000000894,
+          "label": "bindingBuffer_render",
+          "size": 64,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33238.20000000298,
+          "label": "bindingBuffer_object",
+          "size": 48,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33238.20000000298,
+          "label": "bindingBuffer_UniformBuffer_740",
+          "size": 384,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33238.20000000298,
+          "label": "bindingBuffer_object",
+          "size": 176,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33238.60000000894,
+          "label": "bindingBuffer_object",
+          "size": 16,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33238.60000000894,
+          "label": "bindingBuffer_object",
+          "size": 176,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33238.70000000298,
+          "label": "bindingBuffer_object",
+          "size": 48,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33238.70000000298,
+          "label": "bindingBuffer_object",
+          "size": 176,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33238.80000001192,
+          "label": "bindingBuffer_object",
+          "size": 96,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33238.80000001192,
+          "label": "bindingBuffer_object",
+          "size": 176,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33239,
+          "label": "bindingBuffer_object",
+          "size": 96,
+          "usage": 72
+        },
+        {
+          "name": "createBuffer",
+          "stage": "draw",
+          "t": 33239,
+          "label": "bindingBuffer_object",
+          "size": 176,
+          "usage": 72
+        }
+      ],
+      "errors": []
+    },
+    "errors": [],
+    "firstShotGaps": [],
+    "newPipelines": [],
+    "newBuffers": [],
+    "invalid": "Expected exactly one shot from selected gun"
+  }
+]

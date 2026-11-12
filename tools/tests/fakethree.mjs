@@ -565,7 +565,7 @@ class MaterialBase {
 }
 export class MeshStandardMaterial extends MaterialBase {}
 export class MeshPhysicalMaterial extends MeshStandardMaterial {}   // CL-323: GP-20065's optic glass
-export class MeshBasicMaterial extends MaterialBase {}
+export class MeshBasicMaterial extends MaterialBase { constructor(p) { super(p); this.isMeshBasicMaterial = true; } }   // CB-323: as three.js (t277's revolver dot; MaterialBase answers undefined for an unknown isX)
 export class MeshStandardNodeMaterial extends MaterialBase {}
 export class MeshBasicNodeMaterial extends MaterialBase {}
 export class LineBasicMaterial extends MaterialBase {}
