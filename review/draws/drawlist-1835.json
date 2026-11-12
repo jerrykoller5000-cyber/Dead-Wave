@@ -1,0 +1,1564 @@
+{
+ "tag": "1835",
+ "sum": 214,
+ "guns": {
+  "minigun": {
+   "draws": 23,
+   "rows": [
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "gunPaint:minigun paint:minigun role:receiver",
+     "detail": false,
+     "tris": 204
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "gunPaint:minigun paint:minigun role:furniture",
+     "detail": false,
+     "tris": 140
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "gunPaint:minigun paint:minigun role:optic shell",
+     "detail": false,
+     "tris": 48
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial transp",
+     "detail": false,
+     "tris": 48
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "gunPaint:minigun paint:minigun role:optic shell",
+     "detail": false,
+     "tris": 232
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 336
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 576
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 68
+    },
+    {
+     "part": "heatParts-barrel/·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 240
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 432
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial vc",
+     "detail": false,
+     "tris": 4120
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "gunPaint:minigun paint:minigun role:magazine",
+     "detail": false,
+     "tris": 176
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 2384
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "MeshBasicMaterial transp",
+     "detail": false,
+     "tris": 60
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 164
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 40
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial vc",
+     "detail": false,
+     "tris": 144
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "gunPaint:minigun paint:minigun role:receiver",
+     "detail": false,
+     "tris": 348
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "gunPaint:minigun paint:minigun role:receiver",
+     "detail": false,
+     "tris": 128
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "gunPaint:minigun paint:minigun role:receiver",
+     "detail": false,
+     "tris": 80
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "gunPaint:minigun paint:minigun role:rail",
+     "detail": false,
+     "tris": 144
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "MeshStandardMaterial vc",
+     "detail": false,
+     "tris": 3076
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 6608
+    }
+   ]
+  },
+  "m4": {
+   "draws": 27,
+   "rows": [
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 60
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 60
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 180
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 80
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 92
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "gunPaint:m4 paint:m4 role:furniture",
+     "detail": false,
+     "tris": 148
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 704
+    },
+    {
+     "part": "",
+     "mesh": "GW-4 rear collar",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 32
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "gunPaint:m4 paint:m4 role:rail",
+     "detail": false,
+     "tris": 96
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "gunPaint:m4 paint:m4 role:rail",
+     "detail": false,
+     "tris": 48
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial transp",
+     "detail": false,
+     "tris": 48
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "gunPaint:m4 paint:m4 role:optic shell",
+     "detail": false,
+     "tris": 348
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 336
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 548
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 2394
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "MeshBasicMaterial transp",
+     "detail": false,
+     "tris": 60
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 84
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 44
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 40
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 112
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "gunPaint:m4 paint:m4 role:receiver",
+     "detail": false,
+     "tris": 160
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "gunPaint:m4 paint:m4 role:rail",
+     "detail": false,
+     "tris": 1500
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "gunPaint:m4 paint:m4 role:rail",
+     "detail": false,
+     "tris": 4320
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "gunPaint:m4 paint:m4 role:receiver",
+     "detail": false,
+     "tris": 1204
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "gunPaint:m4 paint:m4 role:receiver",
+     "detail": false,
+     "tris": 172
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "gunPaint:m4 paint:m4 role:furniture",
+     "detail": false,
+     "tris": 1556
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 5642
+    }
+   ]
+  },
+  "ak": {
+   "draws": 14,
+   "rows": [
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 64
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 64
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 160
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 92
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "gunPaint:ak paint:ak role:receiver",
+     "detail": false,
+     "tris": 88
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 900
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 1440
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "MeshBasicMaterial transp",
+     "detail": false,
+     "tris": 60
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 240
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 48
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 96
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "gunPaint:ak paint:ak role:receiver",
+     "detail": false,
+     "tris": 1162
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "KR-7 walnut map",
+     "detail": false,
+     "tris": 792
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 5524
+    }
+   ]
+  },
+  "aa12": {
+   "draws": 18,
+   "rows": [
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "gunPaint:aa12 paint:aa12 role:rail",
+     "detail": false,
+     "tris": 140
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 48
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 48
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 48
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 96
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "gunPaint:aa12 paint:aa12 role:furniture",
+     "detail": false,
+     "tris": 356
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 524
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 92
+    },
+    {
+     "part": "magazineBody/·",
+     "mesh": "",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 5880
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 144
+    },
+    {
+     "part": "",
+     "mesh": "heatParts-barrel",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 96
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "MeshBasicMaterial transp",
+     "detail": false,
+     "tris": 60
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 88
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "gunPaint:aa12 paint:aa12 role:receiver",
+     "detail": false,
+     "tris": 406
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "gunPaint:aa12 paint:aa12 role:receiver",
+     "detail": false,
+     "tris": 112
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "gunPaint:aa12 paint:aa12 role:furniture",
+     "detail": false,
+     "tris": 664
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "gunPaint:aa12 paint:aa12 role:receiver",
+     "detail": false,
+     "tris": 1216
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 4812
+    }
+   ]
+  },
+  "pistol": {
+   "draws": 14,
+   "rows": [
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 12
+    },
+    {
+     "part": "controls-extractor",
+     "mesh": "controls-extractor",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 44
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "gunPaint:pistol paint:pistol role:slide",
+     "detail": false,
+     "tris": 380
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 1004
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 736
+    },
+    {
+     "part": "heatParts-barrel/·",
+     "mesh": "",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 318
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 160
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 520
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "MeshBasicMaterial transp",
+     "detail": false,
+     "tris": 60
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 148
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 68
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 56
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "gunPaint:pistol paint:pistol role:frame",
+     "detail": false,
+     "tris": 6200
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 3400
+    }
+   ]
+  },
+  "uzi": {
+   "draws": 17,
+   "rows": [
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 352
+    },
+    {
+     "part": "",
+     "mesh": "controls-safety",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 44
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 92
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": true,
+     "tris": 432
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 44
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 416
+    },
+    {
+     "part": "·/·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 44
+    },
+    {
+     "part": "·/·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 324
+    },
+    {
+     "part": "",
+     "mesh": "heatParts-barrel",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 144
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 64
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 64
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "MeshBasicMaterial transp",
+     "detail": false,
+     "tris": 60
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "gunPaint:uzi paint:uzi role:receiver",
+     "detail": false,
+     "tris": 560
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "gunPaint:uzi paint:uzi role:receiver",
+     "detail": false,
+     "tris": 1100
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "gunPaint:uzi paint:uzi role:furniture",
+     "detail": false,
+     "tris": 896
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "gunPaint:uzi paint:uzi role:furniture",
+     "detail": false,
+     "tris": 1784
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 5604
+    }
+   ]
+  },
+  "shotgun": {
+   "draws": 17,
+   "rows": [
+    {
+     "part": "",
+     "mesh": "shotgun receiver",
+     "mat": "gunPaint:shotgun paint:shotgun role:receiver",
+     "detail": false,
+     "tris": 140
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 74
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 48
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 48
+    },
+    {
+     "part": "",
+     "mesh": "shotgun lifter",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 268
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 104
+    },
+    {
+     "part": "shotgun trigger",
+     "mesh": "shotgun trigger",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 92
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 356
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "gunPaint:shotgun paint:shotgun role:furniture",
+     "detail": false,
+     "tris": 1512
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 96
+    },
+    {
+     "part": "heatParts-barrel/·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 64
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 240
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 1912
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "MeshBasicMaterial transp",
+     "detail": false,
+     "tris": 60
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 160
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "gunPaint:shotgun paint:shotgun role:furniture",
+     "detail": false,
+     "tris": 2070
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 1066
+    }
+   ]
+  },
+  "revolver": {
+   "draws": 15,
+   "rows": [
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 152
+    },
+    {
+     "part": "",
+     "mesh": "heatParts-barrel",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 336
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 156
+    },
+    {
+     "part": "revolver-chamber-layer-0",
+     "mesh": "revolver-chamber-layer-0",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 74
+    },
+    {
+     "part": "revolver-visible-tips",
+     "mesh": "revolver-visible-tips",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 84
+    },
+    {
+     "part": "controls-ejector/·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 104
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 1512
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 368
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "MeshBasicMaterial transp",
+     "detail": false,
+     "tris": 60
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 136
+    },
+    {
+     "part": "",
+     "mesh": "revolver-sight-dot",
+     "mat": "Revolver green front sight",
+     "detail": false,
+     "tris": 64
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "gunPaint:revolver paint:revolver role:frame",
+     "detail": false,
+     "tris": 1752
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "Revolver walnut map",
+     "detail": false,
+     "tris": 2248
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "Revolver walnut inset map",
+     "detail": false,
+     "tris": 328
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 5342
+    }
+   ]
+  },
+  "sniper": {
+   "draws": 24,
+   "rows": [
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 92
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "gunPaint:sniper paint:sniper role:furniture",
+     "detail": false,
+     "tris": 294
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 44
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial vc",
+     "detail": false,
+     "tris": 540
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "gunPaint:sniper paint:sniper role:furniture",
+     "detail": false,
+     "tris": 272
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial vc",
+     "detail": false,
+     "tris": 508
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 920
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 28
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial vc",
+     "detail": false,
+     "tris": 656
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 104
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "MeshBasicMaterial transp",
+     "detail": false,
+     "tris": 60
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 48
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 128
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "gunPaint:sniper paint:sniper role:receiver",
+     "detail": false,
+     "tris": 1302
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "gunPaint:sniper paint:sniper role:rail",
+     "detail": false,
+     "tris": 552
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "gunPaint:sniper paint:sniper role:rail",
+     "detail": false,
+     "tris": 1536
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "MeshStandardMaterial vc",
+     "detail": false,
+     "tris": 3176
+    },
+    {
+     "part": "scope rail bridge",
+     "mesh": "scope rail bridge",
+     "mat": "gunPaint:sniper paint:sniper role:optic shell",
+     "detail": false,
+     "tris": 28
+    },
+    {
+     "part": "NX8 tapered optical housing",
+     "mesh": "NX8 tapered optical housing",
+     "mat": "gunPaint:sniper paint:sniper role:optic shell",
+     "detail": false,
+     "tris": 768
+    },
+    {
+     "part": "50 mm objective lens",
+     "mesh": "50 mm objective lens",
+     "mat": "MeshPhysicalMaterial transp",
+     "detail": false,
+     "tris": 24
+    },
+    {
+     "part": "ocular lens",
+     "mesh": "ocular lens",
+     "mat": "MeshPhysicalMaterial transp",
+     "detail": false,
+     "tris": 24
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "gunPaint:sniper paint:sniper role:optic shell",
+     "detail": false,
+     "tris": 660
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 896
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 2266
+    }
+   ]
+  },
+  "launcher": {
+   "draws": 19,
+   "rows": [
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 480
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 192
+    },
+    {
+     "part": "launcher-stock-release/·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 48
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "gunPaint:launcher paint:launcher role:furniture",
+     "detail": false,
+     "tris": 196
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 584
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 92
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 448
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 48
+    },
+    {
+     "part": "·/·/·",
+     "mesh": "",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 96
+    },
+    {
+     "part": "·/launcher-loaded-inserts",
+     "mesh": "launcher-loaded-inserts",
+     "mat": "MeshStandardMaterial vc",
+     "detail": false,
+     "tris": 448
+    },
+    {
+     "part": "·/·",
+     "mesh": "",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 4176
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "MeshBasicMaterial transp",
+     "detail": false,
+     "tris": 60
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 128
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "gunPaint:launcher paint:launcher role:receiver",
+     "detail": false,
+     "tris": 136
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "gunPaint:launcher paint:launcher role:receiver",
+     "detail": false,
+     "tris": 136
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "gunPaint:launcher paint:launcher role:furniture",
+     "detail": false,
+     "tris": 616
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "gunPaint:launcher paint:launcher role:rail",
+     "detail": false,
+     "tris": 1188
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "gunPaint:launcher paint:launcher role:rail",
+     "detail": false,
+     "tris": 2640
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 3138
+    }
+   ]
+  },
+  "flamer": {
+   "draws": 15,
+   "rows": [
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 80
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial vc",
+     "detail": false,
+     "tris": 288
+    },
+    {
+     "part": "flamer-valve/·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 96
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial vc",
+     "detail": false,
+     "tris": 576
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 1032
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 72
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 92
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": true,
+     "tris": 360
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 96
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 48
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "gunPaint:flamer paint:flamer role:receiver",
+     "detail": false,
+     "tris": 646
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "gunPaint:flamer paint:flamer role:receiver",
+     "detail": false,
+     "tris": 160
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "gunPaint:flamer paint:flamer role:furniture",
+     "detail": false,
+     "tris": 418
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "MeshStandardMaterial vc",
+     "detail": false,
+     "tris": 1490
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 8572
+    }
+   ]
+  },
+  "chainsaw": {
+   "draws": 11,
+   "rows": [
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 72
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 92
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 116
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial",
+     "detail": false,
+     "tris": 48
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 120
+    },
+    {
+     "part": "·",
+     "mesh": "",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 96
+    },
+    {
+     "part": "·/·",
+     "mesh": "",
+     "mat": "chainsaw link finish vc",
+     "detail": false,
+     "tris": 76
+    },
+    {
+     "part": "saw-blood-overlay/·",
+     "mesh": "",
+     "mat": "MeshStandardMaterial transp",
+     "detail": false,
+     "tris": 28
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "chainsaw motor enamel",
+     "detail": false,
+     "tris": 276
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "gunPaint:chainsaw paint:chainsaw role:furniture map",
+     "detail": false,
+     "tris": 252
+    },
+    {
+     "part": "",
+     "mesh": "",
+     "mat": "fold-static vc",
+     "detail": false,
+     "tris": 17134
+    }
+   ]
+  }
+ }
+}

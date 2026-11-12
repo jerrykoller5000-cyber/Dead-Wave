@@ -1,0 +1,25 @@
+GRANT chatgpt2 GT-20080: starting one game-test command
+before {
+  lines: [
+    'INFO pistol the hands into each other: 0.2 mm',
+    'PASS guns checked up in first person: 1 of 1',
+    'PASS no part of either hand inside any part of a gun (deepest per gun, mm: pistol 0.1)',
+    'PASS neither hand through the other (D-140)',
+    "PASS the gloved wrists stay inside the sleeves at every gun's hip hold"
+  ],
+  worldRound: false,
+  viewRound: false
+}
+after {
+  lines: [
+    'INFO pistol the hands into each other: 0.2 mm',
+    'PASS guns checked up in first person: 1 of 1',
+    'PASS no part of either hand inside any part of a gun (deepest per gun, mm: pistol 0.1)',
+    'PASS neither hand through the other (D-140)',
+    "PASS the gloved wrists stay inside the sleeves at every gun's hip hold"
+  ],
+  worldRound: true,
+  viewRound: true
+}
+PASS identical native first-person pistol hand contacts
+PASS native pistol magazine and live round in four lights

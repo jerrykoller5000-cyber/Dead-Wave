@@ -1,15 +1,42 @@
 # Claude 1
 
-state: idle
-model: Claude Opus 5.5 (High)
-task: —
-touching: —
-since: 2026-11-12T14:46Z
-next: CD-1 (15:06Z: a fresh Claude 1 from 15:08Z: the GW-4 thumb with t
+state: active
+model: Claude Opus 5.5 (claude-opus-5-5)
+task: CD-10 lent: the TP_FIT flex cap in holdHand (+ helper above it, + the CD-9 post-step call) for tcc341
+touching: index.html (holdHand), review/CD-10
+since: 2026-11-12T21:29Z
+next: CD-10 (21:26Z: loan widened to TP_FLEX + tpCapFlex above holdHand
 blocked-on: —
-last-report: handoffs/2026-11-12-claude4-CD-9-wiring.md
+last-report: handoffs/2026-11-12-claude4-CD-1-ak3.md
 
 ## Notes
+
+### Where things stand (12 Nov 21:55Z, session 11: handoffs CD-1-wasp3, CD-1-ak3; CD-10 in progress)
+- GT-20093: numbers sent 19:45Z (Claude outputs/CD-1/wasp-gt20093/); final guard: the Wasp fist clean AS IS (no refit), accepted.
+- LANDED 21:22Z: AK fist on KR-7 577fb2d2 (VM_FIT.ak.r p +1.5,-6,+3 gun mm + give 113 v); for review; Claude 5 re-solves VM_TRIGGER.ak.
+- CD-10 (tcc341): cause = the test's stance aims the pistol 65-75 deg left of his chest (stale aim point); TP_FIT's frame then bends
+  the wrists 60+ deg and the cuffs leave the sleeves. Fix (approved loan: holdHand + TP_FLEX/tpCapFlex above it + the CD-9 post-step
+  call): /home/claude/c1/patch_cap3.py (copy in review/CD-10/patch_flexcap.py is the older placement). Cloud tcc341 16/0, t229 76/0.
+  Follow-ups parked after J149 (Director): aimed 29 deg UP the firing glove meets the sleeve 12.6 mm (hold point/channel: wrist twist
+  past the forearm roll limit, not the frame); aimed 34 deg right the vest 1.8 mm. tcc341z (aim sweep, review/CD-10/*.txt) shows them.
+- Open: tcl334d flamer 1.8 mm (l glove in flamer-igniter, a J149 part?) reported to the Director 21:15Z.
+- Tools new: c4/wasproom.py (index vs guard room, gun mm), c4/tpexp2.mjs (cloud: AIMYAWS, VIEWS2). Cloud rebuild: _DELETE ME
+  claude4-pc-tree-0935 + claude4-pc-code-1920 + claude4-delta-2050 (crew-1700 BEFORE code-1920); pip trimesh rtree scipy;
+  /home/claude/handfit-work/{hand,gun} links, /home/claude/work/{posedlabels,lm,posed}.mjs, /home/claude/look/v2 (view.html + vendor).
+
+### Where things stand (12 Nov 18:40Z, session 10: handoffs GT-20096 (no edit), CD-1-ak2)
+- GT-20096 was already landed by ChatGPT 2 13:41Z (blade group -0.010 z): no edit from me. LANDED 18:3xZ: VM_FIT.ak.r + its
+  glove give (index round the blade's front, clean; tcl334c green). For review; Claude 5 asked to re-solve VM_TRIGGER.ak.
+- CD-1 AK accepted 18:36Z. tcc341 (Director 18:23Z): reproduced 14/2 in the cloud, 16/0 with TP_FIT emptied: the hold turns the
+  fitted frame at the wrist (+-1.15 rad), the glove cuff rolls inside the sleeve. Asked the Director (a) roll onto the forearm in
+  holdHand (index.html, lend; my pick) / (b) Claude 3's cuff / (c) cap TP_FIT's roll. Director picked (a) as CD-10: tried, did NOT help
+  (the test's 'wrist rot -1.15' is not the hold's twist); nothing landed, handoff CD-10 has the A/Bs and next steps. Fresh session asked.
+- Open for the fresh session: CD-10 (tcc341), ChatGPT 2's GT-20093 request (Wasp index measurements), Claude 5's VM_TRIGGER.ak.
+- Tool bug fixed: sdf_c4 lumped open bodies ('/open') and they closed inside out (-16 mm across the AK guard): use c4/sdf_c5.py
+  (fitT5.sh, cont12.sh). Check a field against the test with c4/fieldmap.mjs vs c4/parmap.py. Merge one hold's give into
+  hand-contacts.js with c4/mergecontact.mjs (not encode9: it rewrites the file from a template).
+- Cloud rebuild: _DELETE ME/claude4-pc-tree-0935.tgz + claude4-pc-code-1652.tgz + claude4-crew-1700.tgz (crew/*.mjs for the slot);
+  pip trimesh rtree scipy; /home/claude/look/v2 (view.html + vendor link) for look/shoot2.mjs.
 
 ### Where things stand (12 Nov 12:40Z, session 9: handoff CD-9)
 - LANDED: game/tp-fit.js (TP_FIT, CD-9) for review; Claude 2 wires it (reference: Claude outputs/CD-9/cd9-trial-hold.diff). t229 reds left on

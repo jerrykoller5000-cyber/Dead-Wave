@@ -1,0 +1,102 @@
+{
+  "at": "2026-11-12T18:05:23.261Z",
+  "errors": [],
+  "audit": [
+    {
+      "id": "minigun",
+      "rootScale": 0.88,
+      "parts": 16,
+      "edges": 3124,
+      "medianRepeatsPerM": 2.380302775587821,
+      "tileMetres": 0.4201146216590231
+    },
+    {
+      "id": "m4",
+      "rootScale": 0.6740955727336614,
+      "parts": 19,
+      "edges": 4599,
+      "medianRepeatsPerM": 2.3807339994083194,
+      "tileMetres": 0.42003852603799025
+    },
+    {
+      "id": "ak",
+      "rootScale": 0.6864180327868853,
+      "parts": 11,
+      "edges": 1980,
+      "medianRepeatsPerM": 2.380951960774283,
+      "tileMetres": 0.4200000741194296
+    },
+    {
+      "id": "aa12",
+      "rootScale": 0.6843359655419957,
+      "parts": 8,
+      "edges": 2361,
+      "medianRepeatsPerM": 2.3809187715427655,
+      "tileMetres": 0.4200059287835466
+    },
+    {
+      "id": "pistol",
+      "rootScale": 0.633344692575406,
+      "parts": 5,
+      "edges": 1245,
+      "medianRepeatsPerM": 2.3809515915147474,
+      "tileMetres": 0.4200001392568447
+    },
+    {
+      "id": "uzi",
+      "rootScale": 0.6547558922558921,
+      "parts": 15,
+      "edges": 3394,
+      "medianRepeatsPerM": 2.3806800462404656,
+      "tileMetres": 0.42004804533863555
+    },
+    {
+      "id": "shotgun",
+      "rootScale": 0.7934885739664083,
+      "parts": 8,
+      "edges": 2225,
+      "medianRepeatsPerM": 2.380945509201286,
+      "tileMetres": 0.42000121218039166
+    },
+    {
+      "id": "revolver",
+      "rootScale": 0.7755247933884297,
+      "parts": 6,
+      "edges": 1058,
+      "medianRepeatsPerM": 2.3792349375220008,
+      "tileMetres": 0.42030317570971404
+    },
+    {
+      "id": "sniper",
+      "rootScale": 0.7233191680486456,
+      "parts": 12,
+      "edges": 4194,
+      "medianRepeatsPerM": 2.3803184768362615,
+      "tileMetres": 0.42011185046512095
+    },
+    {
+      "id": "launcher",
+      "rootScale": 0.6978001833180568,
+      "parts": 8,
+      "edges": 2307,
+      "medianRepeatsPerM": 2.3800384107366943,
+      "tileMetres": 0.4201612862585985
+    },
+    {
+      "id": "flamer",
+      "rootScale": 0.8383417123705056,
+      "parts": 3,
+      "edges": 1038,
+      "medianRepeatsPerM": 2.3809263457174348,
+      "tileMetres": 0.42000459266566437
+    },
+    {
+      "id": "chainsaw",
+      "rootScale": 0.8024782066276803,
+      "parts": 1,
+      "edges": 484,
+      "medianRepeatsPerM": 2.3794994835161236,
+      "tileMetres": 0.42025644759641906
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "controls": {
+    "trigger": "controls-trigger",
+    "lightSwitch": "controls-lightSwitch-m4",
+    "selector": "controls-selector",
+    "boltCatch": "controls-boltCatch",
+    "magRelease": "controls-magRelease",
+    "chargingHandle": "work",
+    "forwardAssist": "controls-forwardAssist",
+    "portCover": "controls-portCover"
+  },
+  "triggerPin": [
+    0,
+    -0.05,
+    -0.049
+  ]
+}

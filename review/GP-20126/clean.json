@@ -1,0 +1,3030 @@
+{
+  "at": "2026-11-12T21:53:33.688Z",
+  "actions": [
+    {
+      "tag": "first/eye/pistol",
+      "drawn": {
+        "gun": "pistol",
+        "first": true,
+        "ammo": 12,
+        "reloading": false,
+        "t": 42833.5
+      },
+      "fired": {
+        "gun": "pistol",
+        "first": true,
+        "ammo": 11,
+        "reloading": false,
+        "t": 44093.09999999404
+      },
+      "reloading": {
+        "gun": "pistol",
+        "first": true,
+        "ammo": 11,
+        "reloading": true,
+        "t": 44400.5
+      },
+      "settled": {
+        "gun": "pistol",
+        "first": true,
+        "ammo": 12,
+        "reloading": false,
+        "t": 46051.40000000596
+      }
+    },
+    {
+      "tag": "first/eye/revolver",
+      "drawn": {
+        "gun": "revolver",
+        "first": true,
+        "ammo": 6,
+        "reloading": false,
+        "t": 46907.90000000596
+      },
+      "fired": {
+        "gun": "revolver",
+        "first": true,
+        "ammo": 5,
+        "reloading": false,
+        "t": 47588.09999999404
+      },
+      "reloading": {
+        "gun": "revolver",
+        "first": true,
+        "ammo": 5,
+        "reloading": true,
+        "t": 47884.40000000596
+      },
+      "settled": {
+        "gun": "revolver",
+        "first": true,
+        "ammo": 6,
+        "reloading": false,
+        "t": 50053.90000000596
+      }
+    },
+    {
+      "tag": "first/eye/uzi",
+      "drawn": {
+        "gun": "uzi",
+        "first": true,
+        "ammo": 32,
+        "reloading": false,
+        "t": 50898.5
+      },
+      "fired": {
+        "gun": "uzi",
+        "first": true,
+        "ammo": 27,
+        "reloading": false,
+        "t": 51522.90000000596
+      },
+      "reloading": {
+        "gun": "uzi",
+        "first": true,
+        "ammo": 27,
+        "reloading": true,
+        "t": 51798.5
+      },
+      "settled": {
+        "gun": "uzi",
+        "first": true,
+        "ammo": 32,
+        "reloading": false,
+        "t": 53448.79999999702
+      }
+    },
+    {
+      "tag": "first/eye/m4",
+      "drawn": {
+        "gun": "m4",
+        "first": true,
+        "ammo": 30,
+        "reloading": false,
+        "t": 54264.59999999404
+      },
+      "fired": {
+        "gun": "m4",
+        "first": true,
+        "ammo": 26,
+        "reloading": false,
+        "t": 54883.90000000596
+      },
+      "reloading": {
+        "gun": "m4",
+        "first": true,
+        "ammo": 26,
+        "reloading": true,
+        "t": 55146.59999999404
+      },
+      "settled": {
+        "gun": "m4",
+        "first": true,
+        "ammo": 30,
+        "reloading": false,
+        "t": 56784.29999999702
+      }
+    },
+    {
+      "tag": "first/eye/ak",
+      "drawn": {
+        "gun": "ak",
+        "first": true,
+        "ammo": 30,
+        "reloading": false,
+        "t": 57631.40000000596
+      },
+      "fired": {
+        "gun": "ak",
+        "first": true,
+        "ammo": 26,
+        "reloading": false,
+        "t": 58283.40000000596
+      },
+      "reloading": {
+        "gun": "ak",
+        "first": true,
+        "ammo": 26,
+        "reloading": true,
+        "t": 58547.20000000298
+      },
+      "settled": {
+        "gun": "ak",
+        "first": true,
+        "ammo": 30,
+        "reloading": false,
+        "t": 60717.20000000298
+      }
+    },
+    {
+      "tag": "first/eye/shotgun",
+      "drawn": {
+        "gun": "shotgun",
+        "first": true,
+        "ammo": 8,
+        "reloading": false,
+        "t": 61549.40000000596
+      },
+      "fired": {
+        "gun": "shotgun",
+        "first": true,
+        "ammo": 7,
+        "reloading": false,
+        "t": 62167.40000000596
+      },
+      "reloading": {
+        "gun": "shotgun",
+        "first": true,
+        "ammo": 7,
+        "reloading": true,
+        "t": 62435.40000000596
+      },
+      "settled": {
+        "gun": "shotgun",
+        "first": true,
+        "ammo": 8,
+        "reloading": false,
+        "t": 63048.40000000596
+      }
+    },
+    {
+      "tag": "first/eye/aa12",
+      "drawn": {
+        "gun": "aa12",
+        "first": true,
+        "ammo": 20,
+        "reloading": false,
+        "t": 63863.20000000298
+      },
+      "fired": {
+        "gun": "aa12",
+        "first": true,
+        "ammo": 18,
+        "reloading": false,
+        "t": 64497
+      },
+      "reloading": {
+        "gun": "aa12",
+        "first": true,
+        "ammo": 18,
+        "reloading": true,
+        "t": 64746.70000000298
+      },
+      "settled": {
+        "gun": "aa12",
+        "first": true,
+        "ammo": 20,
+        "reloading": false,
+        "t": 67655.20000000298
+      }
+    },
+    {
+      "tag": "first/eye/sniper",
+      "drawn": {
+        "gun": "sniper",
+        "first": true,
+        "ammo": 5,
+        "reloading": false,
+        "t": 68499.59999999404
+      },
+      "fired": {
+        "gun": "sniper",
+        "first": true,
+        "ammo": 4,
+        "reloading": false,
+        "t": 69132.90000000596
+      },
+      "reloading": {
+        "gun": "sniper",
+        "first": true,
+        "ammo": 4,
+        "reloading": true,
+        "t": 69377.20000000298
+      },
+      "settled": {
+        "gun": "sniper",
+        "first": true,
+        "ammo": 5,
+        "reloading": false,
+        "t": 71799.20000000298
+      }
+    },
+    {
+      "tag": "first/eye/minigun",
+      "drawn": {
+        "gun": "minigun",
+        "first": true,
+        "ammo": 300,
+        "reloading": false,
+        "t": 72617.09999999404
+      },
+      "fired": {
+        "gun": "minigun",
+        "first": true,
+        "ammo": 280,
+        "reloading": false,
+        "t": 74210.90000000596
+      },
+      "reloading": {
+        "gun": "minigun",
+        "first": true,
+        "ammo": 280,
+        "reloading": true,
+        "t": 74451.09999999404
+      },
+      "settled": {
+        "gun": "minigun",
+        "first": true,
+        "ammo": 300,
+        "reloading": false,
+        "t": 75844.90000000596
+      }
+    },
+    {
+      "tag": "first/eye/launcher",
+      "drawn": {
+        "gun": "launcher",
+        "first": true,
+        "ammo": 6,
+        "reloading": false,
+        "t": 76669.90000000596
+      },
+      "fired": {
+        "gun": "launcher",
+        "first": true,
+        "ammo": 5,
+        "reloading": false,
+        "t": 77348.90000000596
+      },
+      "reloading": {
+        "gun": "launcher",
+        "first": true,
+        "ammo": 5,
+        "reloading": true,
+        "t": 77600.5
+      },
+      "settled": {
+        "gun": "launcher",
+        "first": true,
+        "ammo": 6,
+        "reloading": false,
+        "t": 78948.20000000298
+      }
+    },
+    {
+      "tag": "first/eye/flamer",
+      "drawn": {
+        "gun": "flamer",
+        "first": true,
+        "ammo": 60,
+        "reloading": false,
+        "t": 79767.20000000298
+      },
+      "fired": {
+        "gun": "flamer",
+        "first": true,
+        "ammo": 57.5,
+        "reloading": false,
+        "t": 80413.09999999404
+      },
+      "reloading": {
+        "gun": "flamer",
+        "first": true,
+        "ammo": 57.5,
+        "reloading": true,
+        "t": 80650.5
+      },
+      "settled": {
+        "gun": "flamer",
+        "first": true,
+        "ammo": 60,
+        "reloading": false,
+        "t": 83314.5
+      }
+    },
+    {
+      "tag": "first/eye/chainsaw",
+      "drawn": {
+        "gun": "chainsaw",
+        "first": true,
+        "ammo": null,
+        "reloading": false,
+        "t": 84131.59999999404
+      },
+      "fired": {
+        "gun": "chainsaw",
+        "first": true,
+        "ammo": null,
+        "reloading": false,
+        "t": 84777.59999999404
+      },
+      "reloading": {
+        "gun": "chainsaw",
+        "first": true,
+        "ammo": null,
+        "reloading": false,
+        "t": 85010.70000000298
+      },
+      "settled": {
+        "gun": "chainsaw",
+        "first": true,
+        "ammo": null,
+        "reloading": false,
+        "t": 85327.20000000298
+      }
+    },
+    {
+      "tag": "first/hip/pistol",
+      "drawn": {
+        "gun": "pistol",
+        "first": false,
+        "ammo": 12,
+        "reloading": false,
+        "t": 86148.09999999404
+      },
+      "fired": {
+        "gun": "pistol",
+        "first": false,
+        "ammo": 11,
+        "reloading": false,
+        "t": 86765.59999999404
+      },
+      "reloading": {
+        "gun": "pistol",
+        "first": false,
+        "ammo": 11,
+        "reloading": true,
+        "t": 87011.40000000596
+      },
+      "settled": {
+        "gun": "pistol",
+        "first": false,
+        "ammo": 12,
+        "reloading": false,
+        "t": 88660.59999999404
+      }
+    },
+    {
+      "tag": "first/hip/revolver",
+      "drawn": {
+        "gun": "revolver",
+        "first": false,
+        "ammo": 6,
+        "reloading": false,
+        "t": 89477.5
+      },
+      "fired": {
+        "gun": "revolver",
+        "first": false,
+        "ammo": 5,
+        "reloading": false,
+        "t": 90110.90000000596
+      },
+      "reloading": {
+        "gun": "revolver",
+        "first": false,
+        "ammo": 5,
+        "reloading": true,
+        "t": 90348.20000000298
+      },
+      "settled": {
+        "gun": "revolver",
+        "first": false,
+        "ammo": 6,
+        "reloading": false,
+        "t": 92245.79999999702
+      }
+    },
+    {
+      "tag": "first/hip/uzi",
+      "drawn": {
+        "gun": "uzi",
+        "first": false,
+        "ammo": 32,
+        "reloading": false,
+        "t": 93062.09999999404
+      },
+      "fired": {
+        "gun": "uzi",
+        "first": false,
+        "ammo": 27,
+        "reloading": false,
+        "t": 93695.79999999702
+      },
+      "reloading": {
+        "gun": "uzi",
+        "first": false,
+        "ammo": 27,
+        "reloading": true,
+        "t": 93933.5
+      },
+      "settled": {
+        "gun": "uzi",
+        "first": false,
+        "ammo": 32,
+        "reloading": false,
+        "t": 95548.90000000596
+      }
+    },
+    {
+      "tag": "first/hip/m4",
+      "drawn": {
+        "gun": "m4",
+        "first": false,
+        "ammo": 30,
+        "reloading": false,
+        "t": 96362.09999999404
+      },
+      "fired": {
+        "gun": "m4",
+        "first": false,
+        "ammo": 26,
+        "reloading": false,
+        "t": 96995.5
+      },
+      "reloading": {
+        "gun": "m4",
+        "first": false,
+        "ammo": 26,
+        "reloading": true,
+        "t": 97246.29999999702
+      },
+      "settled": {
+        "gun": "m4",
+        "first": false,
+        "ammo": 30,
+        "reloading": false,
+        "t": 98882.5
+      }
+    },
+    {
+      "tag": "first/hip/ak",
+      "drawn": {
+        "gun": "ak",
+        "first": false,
+        "ammo": 30,
+        "reloading": false,
+        "t": 99697
+      },
+      "fired": {
+        "gun": "ak",
+        "first": false,
+        "ammo": 27,
+        "reloading": false,
+        "t": 100312.90000000596
+      },
+      "reloading": {
+        "gun": "ak",
+        "first": false,
+        "ammo": 27,
+        "reloading": true,
+        "t": 100548.40000000596
+      },
+      "settled": {
+        "gun": "ak",
+        "first": false,
+        "ammo": 30,
+        "reloading": false,
+        "t": 102728.29999999702
+      }
+    },
+    {
+      "tag": "first/hip/shotgun",
+      "drawn": {
+        "gun": "shotgun",
+        "first": false,
+        "ammo": 8,
+        "reloading": false,
+        "t": 103548.40000000596
+      },
+      "fired": {
+        "gun": "shotgun",
+        "first": false,
+        "ammo": 7,
+        "reloading": false,
+        "t": 104166.70000000298
+      },
+      "reloading": {
+        "gun": "shotgun",
+        "first": false,
+        "ammo": 7,
+        "reloading": true,
+        "t": 104428.79999999702
+      },
+      "settled": {
+        "gun": "shotgun",
+        "first": false,
+        "ammo": 8,
+        "reloading": false,
+        "t": 104996.79999999702
+      }
+    },
+    {
+      "tag": "first/hip/aa12",
+      "drawn": {
+        "gun": "aa12",
+        "first": false,
+        "ammo": 20,
+        "reloading": false,
+        "t": 105812.09999999404
+      },
+      "fired": {
+        "gun": "aa12",
+        "first": false,
+        "ammo": 18,
+        "reloading": false,
+        "t": 106431.09999999404
+      },
+      "reloading": {
+        "gun": "aa12",
+        "first": false,
+        "ammo": 18,
+        "reloading": true,
+        "t": 106666.70000000298
+      },
+      "settled": {
+        "gun": "aa12",
+        "first": false,
+        "ammo": 20,
+        "reloading": false,
+        "t": 109579.40000000596
+      }
+    },
+    {
+      "tag": "first/hip/sniper",
+      "drawn": {
+        "gun": "sniper",
+        "first": false,
+        "ammo": 5,
+        "reloading": false,
+        "t": 110397
+      },
+      "fired": {
+        "gun": "sniper",
+        "first": false,
+        "ammo": 4,
+        "reloading": false,
+        "t": 111013.70000000298
+      },
+      "reloading": {
+        "gun": "sniper",
+        "first": false,
+        "ammo": 4,
+        "reloading": true,
+        "t": 111262.29999999702
+      },
+      "settled": {
+        "gun": "sniper",
+        "first": false,
+        "ammo": 5,
+        "reloading": false,
+        "t": 113929.29999999702
+      }
+    },
+    {
+      "tag": "first/hip/minigun",
+      "drawn": {
+        "gun": "minigun",
+        "first": false,
+        "ammo": 300,
+        "reloading": false,
+        "t": 114732.20000000298
+      },
+      "fired": {
+        "gun": "minigun",
+        "first": false,
+        "ammo": 280,
+        "reloading": false,
+        "t": 116312.5
+      },
+      "reloading": {
+        "gun": "minigun",
+        "first": false,
+        "ammo": 280,
+        "reloading": true,
+        "t": 116562.09999999404
+      },
+      "settled": {
+        "gun": "minigun",
+        "first": false,
+        "ammo": 300,
+        "reloading": false,
+        "t": 117928.20000000298
+      }
+    },
+    {
+      "tag": "first/hip/launcher",
+      "drawn": {
+        "gun": "launcher",
+        "first": false,
+        "ammo": 6,
+        "reloading": false,
+        "t": 118744.79999999702
+      },
+      "fired": {
+        "gun": "launcher",
+        "first": false,
+        "ammo": 5,
+        "reloading": false,
+        "t": 119378.59999999404
+      },
+      "reloading": {
+        "gun": "launcher",
+        "first": false,
+        "ammo": 5,
+        "reloading": true,
+        "t": 119628.29999999702
+      },
+      "settled": {
+        "gun": "launcher",
+        "first": false,
+        "ammo": 6,
+        "reloading": false,
+        "t": 120979.90000000596
+      }
+    },
+    {
+      "tag": "first/hip/flamer",
+      "drawn": {
+        "gun": "flamer",
+        "first": false,
+        "ammo": 60,
+        "reloading": false,
+        "t": 121794.5
+      },
+      "fired": {
+        "gun": "flamer",
+        "first": false,
+        "ammo": 57.5,
+        "reloading": false,
+        "t": 122430.09999999404
+      },
+      "reloading": {
+        "gun": "flamer",
+        "first": false,
+        "ammo": 57.5,
+        "reloading": true,
+        "t": 122678.70000000298
+      },
+      "settled": {
+        "gun": "flamer",
+        "first": false,
+        "ammo": 60,
+        "reloading": false,
+        "t": 125345.20000000298
+      }
+    },
+    {
+      "tag": "first/hip/chainsaw",
+      "drawn": {
+        "gun": "chainsaw",
+        "first": false,
+        "ammo": null,
+        "reloading": false,
+        "t": 126162.20000000298
+      },
+      "fired": {
+        "gun": "chainsaw",
+        "first": false,
+        "ammo": null,
+        "reloading": false,
+        "t": 126777.40000000596
+      },
+      "reloading": {
+        "gun": "chainsaw",
+        "first": false,
+        "ammo": null,
+        "reloading": false,
+        "t": 127026.20000000298
+      },
+      "settled": {
+        "gun": "chainsaw",
+        "first": false,
+        "ammo": null,
+        "reloading": false,
+        "t": 127343
+      }
+    },
+    {
+      "tag": "repeat/eye/pistol",
+      "drawn": {
+        "gun": "pistol",
+        "first": true,
+        "ammo": 12,
+        "reloading": false,
+        "t": 128161.29999999702
+      },
+      "fired": {
+        "gun": "pistol",
+        "first": true,
+        "ammo": 11,
+        "reloading": false,
+        "t": 128782.20000000298
+      },
+      "reloading": {
+        "gun": "pistol",
+        "first": true,
+        "ammo": 11,
+        "reloading": true,
+        "t": 129044.29999999702
+      },
+      "settled": {
+        "gun": "pistol",
+        "first": true,
+        "ammo": 12,
+        "reloading": false,
+        "t": 130645.09999999404
+      }
+    },
+    {
+      "tag": "repeat/eye/revolver",
+      "drawn": {
+        "gun": "revolver",
+        "first": true,
+        "ammo": 6,
+        "reloading": false,
+        "t": 131463.5
+      },
+      "fired": {
+        "gun": "revolver",
+        "first": true,
+        "ammo": 5,
+        "reloading": false,
+        "t": 132081.59999999404
+      },
+      "reloading": {
+        "gun": "revolver",
+        "first": true,
+        "ammo": 5,
+        "reloading": true,
+        "t": 132330.90000000596
+      },
+      "settled": {
+        "gun": "revolver",
+        "first": true,
+        "ammo": 6,
+        "reloading": false,
+        "t": 134229.29999999702
+      }
+    },
+    {
+      "tag": "repeat/eye/uzi",
+      "drawn": {
+        "gun": "uzi",
+        "first": true,
+        "ammo": 32,
+        "reloading": false,
+        "t": 135080.20000000298
+      },
+      "fired": {
+        "gun": "uzi",
+        "first": true,
+        "ammo": 27,
+        "reloading": false,
+        "t": 135696.59999999404
+      },
+      "reloading": {
+        "gun": "uzi",
+        "first": true,
+        "ammo": 27,
+        "reloading": true,
+        "t": 135948.79999999702
+      },
+      "settled": {
+        "gun": "uzi",
+        "first": true,
+        "ammo": 32,
+        "reloading": false,
+        "t": 137579.79999999702
+      }
+    },
+    {
+      "tag": "repeat/eye/m4",
+      "drawn": {
+        "gun": "m4",
+        "first": true,
+        "ammo": 30,
+        "reloading": false,
+        "t": 138391.70000000298
+      },
+      "fired": {
+        "gun": "m4",
+        "first": true,
+        "ammo": 26,
+        "reloading": false,
+        "t": 139062.40000000596
+      },
+      "reloading": {
+        "gun": "m4",
+        "first": true,
+        "ammo": 26,
+        "reloading": true,
+        "t": 139310.79999999702
+      },
+      "settled": {
+        "gun": "m4",
+        "first": true,
+        "ammo": 30,
+        "reloading": false,
+        "t": 140963.59999999404
+      }
+    },
+    {
+      "tag": "repeat/eye/ak",
+      "drawn": {
+        "gun": "ak",
+        "first": true,
+        "ammo": 30,
+        "reloading": false,
+        "t": 141778.70000000298
+      },
+      "fired": {
+        "gun": "ak",
+        "first": true,
+        "ammo": 26,
+        "reloading": false,
+        "t": 142452.40000000596
+      },
+      "reloading": {
+        "gun": "ak",
+        "first": true,
+        "ammo": 26,
+        "reloading": true,
+        "t": 142731.5
+      },
+      "settled": {
+        "gun": "ak",
+        "first": true,
+        "ammo": 30,
+        "reloading": false,
+        "t": 144965.20000000298
+      }
+    },
+    {
+      "tag": "repeat/eye/shotgun",
+      "drawn": {
+        "gun": "shotgun",
+        "first": true,
+        "ammo": 8,
+        "reloading": false,
+        "t": 145778.79999999702
+      },
+      "fired": {
+        "gun": "shotgun",
+        "first": true,
+        "ammo": 7,
+        "reloading": false,
+        "t": 146415.29999999702
+      },
+      "reloading": {
+        "gun": "shotgun",
+        "first": true,
+        "ammo": 7,
+        "reloading": true,
+        "t": 146665.90000000596
+      },
+      "settled": {
+        "gun": "shotgun",
+        "first": true,
+        "ammo": 8,
+        "reloading": false,
+        "t": 147245.90000000596
+      }
+    },
+    {
+      "tag": "repeat/eye/aa12",
+      "drawn": {
+        "gun": "aa12",
+        "first": true,
+        "ammo": 20,
+        "reloading": false,
+        "t": 148069.79999999702
+      },
+      "fired": {
+        "gun": "aa12",
+        "first": true,
+        "ammo": 18,
+        "reloading": false,
+        "t": 148727.5
+      },
+      "reloading": {
+        "gun": "aa12",
+        "first": true,
+        "ammo": 18,
+        "reloading": true,
+        "t": 148984.40000000596
+      },
+      "settled": {
+        "gun": "aa12",
+        "first": true,
+        "ammo": 20,
+        "reloading": false,
+        "t": 151666.20000000298
+      }
+    },
+    {
+      "tag": "repeat/eye/sniper",
+      "drawn": {
+        "gun": "sniper",
+        "first": true,
+        "ammo": 5,
+        "reloading": false,
+        "t": 152495.59999999404
+      },
+      "fired": {
+        "gun": "sniper",
+        "first": true,
+        "ammo": 4,
+        "reloading": false,
+        "t": 153131.29999999702
+      },
+      "reloading": {
+        "gun": "sniper",
+        "first": true,
+        "ammo": 4,
+        "reloading": true,
+        "t": 153382.5
+      },
+      "settled": {
+        "gun": "sniper",
+        "first": true,
+        "ammo": 5,
+        "reloading": false,
+        "t": 156064.29999999702
+      }
+    },
+    {
+      "tag": "repeat/eye/minigun",
+      "drawn": {
+        "gun": "minigun",
+        "first": true,
+        "ammo": 300,
+        "reloading": false,
+        "t": 156882.09999999404
+      },
+      "fired": {
+        "gun": "minigun",
+        "first": true,
+        "ammo": 280,
+        "reloading": false,
+        "t": 158459.40000000596
+      },
+      "reloading": {
+        "gun": "minigun",
+        "first": true,
+        "ammo": 280,
+        "reloading": true,
+        "t": 158715.29999999702
+      },
+      "settled": {
+        "gun": "minigun",
+        "first": true,
+        "ammo": 300,
+        "reloading": false,
+        "t": 160095.20000000298
+      }
+    },
+    {
+      "tag": "repeat/eye/launcher",
+      "drawn": {
+        "gun": "launcher",
+        "first": true,
+        "ammo": 6,
+        "reloading": false,
+        "t": 160928.20000000298
+      },
+      "fired": {
+        "gun": "launcher",
+        "first": true,
+        "ammo": 5,
+        "reloading": false,
+        "t": 161592.5
+      },
+      "reloading": {
+        "gun": "launcher",
+        "first": true,
+        "ammo": 5,
+        "reloading": true,
+        "t": 161848.20000000298
+      },
+      "settled": {
+        "gun": "launcher",
+        "first": true,
+        "ammo": 6,
+        "reloading": false,
+        "t": 163214.79999999702
+      }
+    },
+    {
+      "tag": "repeat/eye/flamer",
+      "drawn": {
+        "gun": "flamer",
+        "first": true,
+        "ammo": 60,
+        "reloading": false,
+        "t": 164038.09999999404
+      },
+      "fired": {
+        "gun": "flamer",
+        "first": true,
+        "ammo": 57.5,
+        "reloading": false,
+        "t": 164686.59999999404
+      },
+      "reloading": {
+        "gun": "flamer",
+        "first": true,
+        "ammo": 57.5,
+        "reloading": true,
+        "t": 164962
+      },
+      "settled": {
+        "gun": "flamer",
+        "first": true,
+        "ammo": 60,
+        "reloading": false,
+        "t": 167663.5
+      }
+    },
+    {
+      "tag": "repeat/eye/chainsaw",
+      "drawn": {
+        "gun": "chainsaw",
+        "first": true,
+        "ammo": null,
+        "reloading": false,
+        "t": 168476
+      },
+      "fired": {
+        "gun": "chainsaw",
+        "first": true,
+        "ammo": null,
+        "reloading": false,
+        "t": 169099.70000000298
+      },
+      "reloading": {
+        "gun": "chainsaw",
+        "first": true,
+        "ammo": null,
+        "reloading": false,
+        "t": 169352.40000000596
+      },
+      "settled": {
+        "gun": "chainsaw",
+        "first": true,
+        "ammo": null,
+        "reloading": false,
+        "t": 169670.79999999702
+      }
+    },
+    {
+      "tag": "repeat/hip/pistol",
+      "drawn": {
+        "gun": "pistol",
+        "first": false,
+        "ammo": 12,
+        "reloading": false,
+        "t": 170513.90000000596
+      },
+      "fired": {
+        "gun": "pistol",
+        "first": false,
+        "ammo": 11,
+        "reloading": false,
+        "t": 171145.20000000298
+      },
+      "reloading": {
+        "gun": "pistol",
+        "first": false,
+        "ammo": 11,
+        "reloading": true,
+        "t": 171383
+      },
+      "settled": {
+        "gun": "pistol",
+        "first": false,
+        "ammo": 12,
+        "reloading": false,
+        "t": 172998
+      }
+    },
+    {
+      "tag": "repeat/hip/revolver",
+      "drawn": {
+        "gun": "revolver",
+        "first": false,
+        "ammo": 6,
+        "reloading": false,
+        "t": 173814.20000000298
+      },
+      "fired": {
+        "gun": "revolver",
+        "first": false,
+        "ammo": 5,
+        "reloading": false,
+        "t": 174446
+      },
+      "reloading": {
+        "gun": "revolver",
+        "first": false,
+        "ammo": 5,
+        "reloading": true,
+        "t": 174695.29999999702
+      },
+      "settled": {
+        "gun": "revolver",
+        "first": false,
+        "ammo": 6,
+        "reloading": false,
+        "t": 176564.59999999404
+      }
+    },
+    {
+      "tag": "repeat/hip/uzi",
+      "drawn": {
+        "gun": "uzi",
+        "first": false,
+        "ammo": 32,
+        "reloading": false,
+        "t": 177395
+      },
+      "fired": {
+        "gun": "uzi",
+        "first": false,
+        "ammo": 27,
+        "reloading": false,
+        "t": 178016.09999999404
+      },
+      "reloading": {
+        "gun": "uzi",
+        "first": false,
+        "ammo": 27,
+        "reloading": true,
+        "t": 178278.70000000298
+      },
+      "settled": {
+        "gun": "uzi",
+        "first": false,
+        "ammo": 32,
+        "reloading": false,
+        "t": 179931.59999999404
+      }
+    },
+    {
+      "tag": "repeat/hip/m4",
+      "drawn": {
+        "gun": "m4",
+        "first": false,
+        "ammo": 30,
+        "reloading": false,
+        "t": 180764
+      },
+      "fired": {
+        "gun": "m4",
+        "first": false,
+        "ammo": 26,
+        "reloading": false,
+        "t": 181397.79999999702
+      },
+      "reloading": {
+        "gun": "m4",
+        "first": false,
+        "ammo": 26,
+        "reloading": true,
+        "t": 181648.20000000298
+      },
+      "settled": {
+        "gun": "m4",
+        "first": false,
+        "ammo": 30,
+        "reloading": false,
+        "t": 183518.20000000298
+      }
+    },
+    {
+      "tag": "repeat/hip/ak",
+      "drawn": {
+        "gun": "ak",
+        "first": false,
+        "ammo": 30,
+        "reloading": false,
+        "t": 184347.29999999702
+      },
+      "fired": {
+        "gun": "ak",
+        "first": false,
+        "ammo": 26,
+        "reloading": false,
+        "t": 184981.90000000596
+      },
+      "reloading": {
+        "gun": "ak",
+        "first": false,
+        "ammo": 26,
+        "reloading": true,
+        "t": 185246
+      },
+      "settled": {
+        "gun": "ak",
+        "first": false,
+        "ammo": 30,
+        "reloading": false,
+        "t": 187430.79999999702
+      }
+    },
+    {
+      "tag": "repeat/hip/shotgun",
+      "drawn": {
+        "gun": "shotgun",
+        "first": false,
+        "ammo": 8,
+        "reloading": false,
+        "t": 188248.79999999702
+      },
+      "fired": {
+        "gun": "shotgun",
+        "first": false,
+        "ammo": 7,
+        "reloading": false,
+        "t": 188879.20000000298
+      },
+      "reloading": {
+        "gun": "shotgun",
+        "first": false,
+        "ammo": 7,
+        "reloading": true,
+        "t": 189129
+      },
+      "settled": {
+        "gun": "shotgun",
+        "first": false,
+        "ammo": 8,
+        "reloading": false,
+        "t": 189714.70000000298
+      }
+    },
+    {
+      "tag": "repeat/hip/aa12",
+      "drawn": {
+        "gun": "aa12",
+        "first": false,
+        "ammo": 20,
+        "reloading": false,
+        "t": 190531.79999999702
+      },
+      "fired": {
+        "gun": "aa12",
+        "first": false,
+        "ammo": 18,
+        "reloading": false,
+        "t": 191177.90000000596
+      },
+      "reloading": {
+        "gun": "aa12",
+        "first": false,
+        "ammo": 18,
+        "reloading": true,
+        "t": 191413
+      },
+      "settled": {
+        "gun": "aa12",
+        "first": false,
+        "ammo": 20,
+        "reloading": false,
+        "t": 194311.5
+      }
+    },
+    {
+      "tag": "repeat/hip/sniper",
+      "drawn": {
+        "gun": "sniper",
+        "first": false,
+        "ammo": 5,
+        "reloading": false,
+        "t": 195128.29999999702
+      },
+      "fired": {
+        "gun": "sniper",
+        "first": false,
+        "ammo": 4,
+        "reloading": false,
+        "t": 195761.29999999702
+      },
+      "reloading": {
+        "gun": "sniper",
+        "first": false,
+        "ammo": 4,
+        "reloading": true,
+        "t": 196010.79999999702
+      },
+      "settled": {
+        "gun": "sniper",
+        "first": false,
+        "ammo": 5,
+        "reloading": false,
+        "t": 198678
+      }
+    },
+    {
+      "tag": "repeat/hip/minigun",
+      "drawn": {
+        "gun": "minigun",
+        "first": false,
+        "ammo": 300,
+        "reloading": false,
+        "t": 199498.79999999702
+      },
+      "fired": {
+        "gun": "minigun",
+        "first": false,
+        "ammo": 280,
+        "reloading": false,
+        "t": 201095.20000000298
+      },
+      "reloading": {
+        "gun": "minigun",
+        "first": false,
+        "ammo": 280,
+        "reloading": true,
+        "t": 201330.20000000298
+      },
+      "settled": {
+        "gun": "minigun",
+        "first": false,
+        "ammo": 300,
+        "reloading": false,
+        "t": 202681.59999999404
+      }
+    },
+    {
+      "tag": "repeat/hip/launcher",
+      "drawn": {
+        "gun": "launcher",
+        "first": false,
+        "ammo": 6,
+        "reloading": false,
+        "t": 203518.20000000298
+      },
+      "fired": {
+        "gun": "launcher",
+        "first": false,
+        "ammo": 5,
+        "reloading": false,
+        "t": 204161.40000000596
+      },
+      "reloading": {
+        "gun": "launcher",
+        "first": false,
+        "ammo": 5,
+        "reloading": true,
+        "t": 204412.40000000596
+      },
+      "settled": {
+        "gun": "launcher",
+        "first": false,
+        "ammo": 6,
+        "reloading": false,
+        "t": 205749.20000000298
+      }
+    },
+    {
+      "tag": "repeat/hip/flamer",
+      "drawn": {
+        "gun": "flamer",
+        "first": false,
+        "ammo": 60,
+        "reloading": false,
+        "t": 206576.59999999404
+      },
+      "fired": {
+        "gun": "flamer",
+        "first": false,
+        "ammo": 57.5,
+        "reloading": false,
+        "t": 207196
+      },
+      "reloading": {
+        "gun": "flamer",
+        "first": false,
+        "ammo": 57.5,
+        "reloading": true,
+        "t": 207428.79999999702
+      },
+      "settled": {
+        "gun": "flamer",
+        "first": false,
+        "ammo": 60,
+        "reloading": false,
+        "t": 210093.70000000298
+      }
+    },
+    {
+      "tag": "repeat/hip/chainsaw",
+      "drawn": {
+        "gun": "chainsaw",
+        "first": false,
+        "ammo": null,
+        "reloading": false,
+        "t": 210896.20000000298
+      },
+      "fired": {
+        "gun": "chainsaw",
+        "first": false,
+        "ammo": null,
+        "reloading": false,
+        "t": 211513.59999999404
+      },
+      "reloading": {
+        "gun": "chainsaw",
+        "first": false,
+        "ammo": null,
+        "reloading": false,
+        "t": 211748.5
+      },
+      "settled": {
+        "gun": "chainsaw",
+        "first": false,
+        "ammo": null,
+        "reloading": false,
+        "t": 212064.40000000596
+      }
+    }
+  ],
+  "errors": [],
+  "measure": {
+    "stage": "idle-final",
+    "last": 214065.7,
+    "gaps": [
+      {
+        "action": "first/eye/pistol/draw",
+        "ms": 116.8,
+        "raf": 42401.7,
+        "before": {
+          "t": 42411.09999999404,
+          "heap": 1058501959,
+          "pipelines": 395,
+          "geometries": 3707,
+          "textures": 185
+        },
+        "after": {
+          "t": 42430.20000000298,
+          "heap": 1060187419,
+          "pipelines": 395,
+          "geometries": 3707,
+          "textures": 185
+        }
+      },
+      {
+        "action": "first/eye/pistol/draw",
+        "ms": 66.6,
+        "raf": 42484.7,
+        "before": {
+          "t": 42457.40000000596,
+          "heap": 1061239003,
+          "pipelines": 395,
+          "geometries": 3707,
+          "textures": 185
+        },
+        "after": {
+          "t": 42508.59999999404,
+          "heap": 1062336291,
+          "pipelines": 395,
+          "geometries": 3707,
+          "textures": 185
+        }
+      },
+      {
+        "action": "first/eye/pistol/fire",
+        "ms": 100,
+        "raf": 42968,
+        "before": {
+          "t": 42979.5,
+          "heap": 1056109885,
+          "pipelines": 397,
+          "geometries": 3708,
+          "textures": 185
+        },
+        "after": {
+          "t": 43004.29999999702,
+          "heap": 1057886109,
+          "pipelines": 397,
+          "geometries": 3708,
+          "textures": 185
+        }
+      },
+      {
+        "action": "first/eye/pistol/fire",
+        "ms": 83.5,
+        "raf": 43051.5,
+        "before": {
+          "t": 43004.29999999702,
+          "heap": 1057886109,
+          "pipelines": 397,
+          "geometries": 3708,
+          "textures": 185
+        },
+        "after": {
+          "t": 43110.79999999702,
+          "heap": 1060058189,
+          "pipelines": 397,
+          "geometries": 3708,
+          "textures": 185
+        }
+      },
+      {
+        "action": "first/eye/pistol/fire",
+        "ms": 716.8,
+        "raf": 43818.3,
+        "before": {
+          "t": 43831.90000000596,
+          "heap": 913021072,
+          "pipelines": 397,
+          "geometries": 3708,
+          "textures": 185
+        },
+        "after": {
+          "t": 43863.5,
+          "heap": 918367304,
+          "pipelines": 397,
+          "geometries": 3708,
+          "textures": 185
+        }
+      },
+      {
+        "action": "first/eye/revolver/draw",
+        "ms": 133.4,
+        "raf": 46318,
+        "before": {
+          "t": 46332.29999999702,
+          "heap": 881232450,
+          "pipelines": 397,
+          "geometries": 3702,
+          "textures": 185
+        },
+        "after": {
+          "t": 46354.09999999404,
+          "heap": 850136062,
+          "pipelines": 397,
+          "geometries": 3702,
+          "textures": 185
+        }
+      },
+      {
+        "action": "first/eye/revolver/draw",
+        "ms": 149.9,
+        "raf": 46634.6,
+        "before": {
+          "t": 46637.59999999404,
+          "heap": 852968450,
+          "pipelines": 397,
+          "geometries": 3702,
+          "textures": 185
+        },
+        "after": {
+          "t": 46654.20000000298,
+          "heap": 854237986,
+          "pipelines": 397,
+          "geometries": 3702,
+          "textures": 185
+        }
+      },
+      {
+        "action": "first/eye/revolver/reload",
+        "ms": 116.6,
+        "raf": 48251.3,
+        "before": {
+          "t": 48157.5,
+          "heap": 873166566,
+          "pipelines": 398,
+          "geometries": 3703,
+          "textures": 185
+        },
+        "after": {
+          "t": 48275.79999999702,
+          "heap": 874391902,
+          "pipelines": 398,
+          "geometries": 3703,
+          "textures": 185
+        }
+      },
+      {
+        "action": "first/eye/launcher/draw",
+        "ms": 50.1,
+        "raf": 76017.6,
+        "before": {
+          "t": 76022.20000000298,
+          "heap": 898456743,
+          "pipelines": 397,
+          "geometries": 3711,
+          "textures": 185
+        },
+        "after": {
+          "t": 76050.70000000298,
+          "heap": 912165415,
+          "pipelines": 397,
+          "geometries": 3711,
+          "textures": 185
+        }
+      },
+      {
+        "action": "first/eye/launcher/draw",
+        "ms": 66.8,
+        "raf": 76267.6,
+        "before": {
+          "t": 76277.5,
+          "heap": 906959050,
+          "pipelines": 398,
+          "geometries": 3711,
+          "textures": 185
+        },
+        "after": {
+          "t": 76295.79999999702,
+          "heap": 907992354,
+          "pipelines": 398,
+          "geometries": 3711,
+          "textures": 185
+        }
+      },
+      {
+        "action": "first/eye/launcher/draw",
+        "ms": 83.4,
+        "raf": 76367.6,
+        "before": {
+          "t": 76311.79999999702,
+          "heap": 908930018,
+          "pipelines": 398,
+          "geometries": 3711,
+          "textures": 185
+        },
+        "after": {
+          "t": 76395,
+          "heap": 909932978,
+          "pipelines": 398,
+          "geometries": 3711,
+          "textures": 185
+        }
+      },
+      {
+        "action": "first/eye/chainsaw/draw",
+        "ms": 50.1,
+        "raf": 83450.9,
+        "before": {
+          "t": 83451.40000000596,
+          "heap": 932061257,
+          "pipelines": 398,
+          "geometries": 3733,
+          "textures": 185
+        },
+        "after": {
+          "t": 83467.79999999702,
+          "heap": 901648777,
+          "pipelines": 398,
+          "geometries": 3733,
+          "textures": 185
+        }
+      },
+      {
+        "action": "first/eye/chainsaw/draw",
+        "ms": 100,
+        "raf": 83567.5,
+        "before": {
+          "t": 83485.29999999702,
+          "heap": 903015911,
+          "pipelines": 398,
+          "geometries": 3733,
+          "textures": 185
+        },
+        "after": {
+          "t": 83594.40000000596,
+          "heap": 903961067,
+          "pipelines": 398,
+          "geometries": 3733,
+          "textures": 185
+        }
+      },
+      {
+        "action": "repeat/eye/ak/reload",
+        "ms": 66.7,
+        "raf": 144100,
+        "before": {
+          "t": 144110,
+          "heap": 882063071,
+          "pipelines": 395,
+          "geometries": 3742,
+          "textures": 185
+        },
+        "after": {
+          "t": 144123.5,
+          "heap": 882993040,
+          "pipelines": 395,
+          "geometries": 3742,
+          "textures": 185
+        }
+      },
+      {
+        "action": "repeat/eye/launcher/draw",
+        "ms": 50.1,
+        "raf": 160483.2,
+        "before": {
+          "t": 160491.79999999702,
+          "heap": 891060100,
+          "pipelines": 395,
+          "geometries": 3742,
+          "textures": 185
+        },
+        "after": {
+          "t": 160505,
+          "heap": 892105892,
+          "pipelines": 395,
+          "geometries": 3742,
+          "textures": 185
+        }
+      },
+      {
+        "action": "repeat/hip/pistol/draw",
+        "ms": 66.8,
+        "raf": 169766.4,
+        "before": {
+          "t": 169765.90000000596,
+          "heap": 905946594,
+          "pipelines": 395,
+          "geometries": 3742,
+          "textures": 185
+        },
+        "after": {
+          "t": 169779.90000000596,
+          "heap": 907169962,
+          "pipelines": 395,
+          "geometries": 3742,
+          "textures": 185
+        }
+      }
+    ],
+    "longtasks": [
+      {
+        "start": 42294.59999999404,
+        "duration": 117
+      },
+      {
+        "start": 42886.59999999404,
+        "duration": 95
+      },
+      {
+        "start": 43111.40000000596,
+        "duration": 720
+      },
+      {
+        "start": 46200.40000000596,
+        "duration": 132
+      },
+      {
+        "start": 46490.59999999404,
+        "duration": 147
+      },
+      {
+        "start": 75967.70000000298,
+        "duration": 55
+      },
+      {
+        "start": 76200.90000000596,
+        "duration": 77
+      },
+      {
+        "start": 83401,
+        "duration": 50
+      },
+      {
+        "start": 144035.79999999702,
+        "duration": 74
+      },
+      {
+        "start": 156068.40000000596,
+        "duration": 52
+      },
+      {
+        "start": 169699.79999999702,
+        "duration": 67
+      }
+    ],
+    "marks": [
+      {
+        "name": "first/eye/pistol/draw",
+        "t": 41972.59999999404,
+        "heap": 1048024276,
+        "pipelines": 393,
+        "geometries": 3698,
+        "textures": 185
+      },
+      {
+        "name": "first/eye/pistol/fire",
+        "t": 42860.40000000596,
+        "heap": 1072616627,
+        "pipelines": 395,
+        "geometries": 3707,
+        "textures": 185
+      },
+      {
+        "name": "first/eye/pistol/reload",
+        "t": 44116.59999999404,
+        "heap": 862382302,
+        "pipelines": 397,
+        "geometries": 3708,
+        "textures": 185
+      },
+      {
+        "name": "first/eye/revolver/draw",
+        "t": 46070.20000000298,
+        "heap": 881581419,
+        "pipelines": 397,
+        "geometries": 3708,
+        "textures": 185
+      },
+      {
+        "name": "first/eye/revolver/fire",
+        "t": 46928.40000000596,
+        "heap": 878675566,
+        "pipelines": 397,
+        "geometries": 3702,
+        "textures": 185
+      },
+      {
+        "name": "first/eye/revolver/reload",
+        "t": 47605.59999999404,
+        "heap": 861757801,
+        "pipelines": 397,
+        "geometries": 3703,
+        "textures": 185
+      },
+      {
+        "name": "first/eye/uzi/draw",
+        "t": 50070.5,
+        "heap": 874077694,
+        "pipelines": 398,
+        "geometries": 3703,
+        "textures": 185
+      },
+      {
+        "name": "first/eye/uzi/fire",
+        "t": 50899.29999999702,
+        "heap": 881927454,
+        "pipelines": 398,
+        "geometries": 3703,
+        "textures": 185
+      },
+      {
+        "name": "first/eye/uzi/reload",
+        "t": 51534.09999999404,
+        "heap": 882737451,
+        "pipelines": 398,
+        "geometries": 3704,
+        "textures": 185
+      },
+      {
+        "name": "first/eye/m4/draw",
+        "t": 53449.79999999702,
+        "heap": 881393791,
+        "pipelines": 398,
+        "geometries": 3704,
+        "textures": 185
+      },
+      {
+        "name": "first/eye/m4/fire",
+        "t": 54265.5,
+        "heap": 881356936,
+        "pipelines": 398,
+        "geometries": 3704,
+        "textures": 185
+      },
+      {
+        "name": "first/eye/m4/reload",
+        "t": 54898.29999999702,
+        "heap": 893822860,
+        "pipelines": 398,
+        "geometries": 3705,
+        "textures": 185
+      },
+      {
+        "name": "first/eye/ak/draw",
+        "t": 56803.20000000298,
+        "heap": 893306491,
+        "pipelines": 398,
+        "geometries": 3705,
+        "textures": 185
+      },
+      {
+        "name": "first/eye/ak/fire",
+        "t": 57632.09999999404,
+        "heap": 878617486,
+        "pipelines": 398,
+        "geometries": 3705,
+        "textures": 185
+      },
+      {
+        "name": "first/eye/ak/reload",
+        "t": 58284.29999999702,
+        "heap": 881379382,
+        "pipelines": 398,
+        "geometries": 3706,
+        "textures": 185
+      },
+      {
+        "name": "first/eye/shotgun/draw",
+        "t": 60732,
+        "heap": 885574057,
+        "pipelines": 398,
+        "geometries": 3706,
+        "textures": 185
+      },
+      {
+        "name": "first/eye/shotgun/fire",
+        "t": 61550.09999999404,
+        "heap": 887759553,
+        "pipelines": 398,
+        "geometries": 3706,
+        "textures": 185
+      },
+      {
+        "name": "first/eye/shotgun/reload",
+        "t": 62182.09999999404,
+        "heap": 885106239,
+        "pipelines": 398,
+        "geometries": 3707,
+        "textures": 185
+      },
+      {
+        "name": "first/eye/aa12/draw",
+        "t": 63049.40000000596,
+        "heap": 886427631,
+        "pipelines": 398,
+        "geometries": 3707,
+        "textures": 185
+      },
+      {
+        "name": "first/eye/aa12/fire",
+        "t": 63866.20000000298,
+        "heap": 900640886,
+        "pipelines": 398,
+        "geometries": 3707,
+        "textures": 185
+      },
+      {
+        "name": "first/eye/aa12/reload",
+        "t": 64497.90000000596,
+        "heap": 901767904,
+        "pipelines": 398,
+        "geometries": 3708,
+        "textures": 185
+      },
+      {
+        "name": "first/eye/sniper/draw",
+        "t": 67671.09999999404,
+        "heap": 897143577,
+        "pipelines": 398,
+        "geometries": 3708,
+        "textures": 185
+      },
+      {
+        "name": "first/eye/sniper/fire",
+        "t": 68500.5,
+        "heap": 904848098,
+        "pipelines": 397,
+        "geometries": 3708,
+        "textures": 185
+      },
+      {
+        "name": "first/eye/sniper/reload",
+        "t": 69133.79999999702,
+        "heap": 909228402,
+        "pipelines": 397,
+        "geometries": 3710,
+        "textures": 185
+      },
+      {
+        "name": "first/eye/minigun/draw",
+        "t": 71800.20000000298,
+        "heap": 896067521,
+        "pipelines": 397,
+        "geometries": 3710,
+        "textures": 185
+      },
+      {
+        "name": "first/eye/minigun/fire",
+        "t": 72631.40000000596,
+        "heap": 886107970,
+        "pipelines": 397,
+        "geometries": 3710,
+        "textures": 185
+      },
+      {
+        "name": "first/eye/minigun/reload",
+        "t": 74211.79999999702,
+        "heap": 898119178,
+        "pipelines": 397,
+        "geometries": 3711,
+        "textures": 185
+      },
+      {
+        "name": "first/eye/launcher/draw",
+        "t": 75845.79999999702,
+        "heap": 899553810,
+        "pipelines": 397,
+        "geometries": 3711,
+        "textures": 185
+      },
+      {
+        "name": "first/eye/launcher/fire",
+        "t": 76687.59999999404,
+        "heap": 918910590,
+        "pipelines": 398,
+        "geometries": 3711,
+        "textures": 185
+      },
+      {
+        "name": "first/eye/launcher/reload",
+        "t": 77349.59999999404,
+        "heap": 921376720,
+        "pipelines": 398,
+        "geometries": 3733,
+        "textures": 185
+      },
+      {
+        "name": "first/eye/flamer/draw",
+        "t": 78948.90000000596,
+        "heap": 899266413,
+        "pipelines": 398,
+        "geometries": 3733,
+        "textures": 185
+      },
+      {
+        "name": "first/eye/flamer/fire",
+        "t": 79780.40000000596,
+        "heap": 921409926,
+        "pipelines": 398,
+        "geometries": 3733,
+        "textures": 185
+      },
+      {
+        "name": "first/eye/flamer/reload",
+        "t": 80413.90000000596,
+        "heap": 924190555,
+        "pipelines": 398,
+        "geometries": 3733,
+        "textures": 185
+      },
+      {
+        "name": "first/eye/chainsaw/draw",
+        "t": 83315.5,
+        "heap": 911628742,
+        "pipelines": 398,
+        "geometries": 3733,
+        "textures": 185
+      },
+      {
+        "name": "first/eye/chainsaw/fire",
+        "t": 84134.20000000298,
+        "heap": 930064455,
+        "pipelines": 398,
+        "geometries": 3733,
+        "textures": 185
+      },
+      {
+        "name": "first/eye/chainsaw/reload",
+        "t": 84778.40000000596,
+        "heap": 927855362,
+        "pipelines": 398,
+        "geometries": 3733,
+        "textures": 185
+      },
+      {
+        "name": "first/hip/pistol/draw",
+        "t": 85328.09999999404,
+        "heap": 913599559,
+        "pipelines": 398,
+        "geometries": 3733,
+        "textures": 185
+      },
+      {
+        "name": "first/hip/pistol/fire",
+        "t": 86149,
+        "heap": 924384916,
+        "pipelines": 398,
+        "geometries": 3735,
+        "textures": 185
+      },
+      {
+        "name": "first/hip/pistol/reload",
+        "t": 86766.20000000298,
+        "heap": 932106177,
+        "pipelines": 398,
+        "geometries": 3736,
+        "textures": 185
+      },
+      {
+        "name": "first/hip/revolver/draw",
+        "t": 88661.40000000596,
+        "heap": 937270912,
+        "pipelines": 398,
+        "geometries": 3736,
+        "textures": 185
+      },
+      {
+        "name": "first/hip/revolver/fire",
+        "t": 89478.09999999404,
+        "heap": 949740751,
+        "pipelines": 398,
+        "geometries": 3736,
+        "textures": 185
+      },
+      {
+        "name": "first/hip/revolver/reload",
+        "t": 90111.70000000298,
+        "heap": 932982506,
+        "pipelines": 398,
+        "geometries": 3737,
+        "textures": 185
+      },
+      {
+        "name": "first/hip/uzi/draw",
+        "t": 92246.59999999404,
+        "heap": 945250943,
+        "pipelines": 398,
+        "geometries": 3737,
+        "textures": 185
+      },
+      {
+        "name": "first/hip/uzi/fire",
+        "t": 93062.90000000596,
+        "heap": 951785193,
+        "pipelines": 398,
+        "geometries": 3737,
+        "textures": 185
+      },
+      {
+        "name": "first/hip/uzi/reload",
+        "t": 93696.59999999404,
+        "heap": 942938995,
+        "pipelines": 398,
+        "geometries": 3738,
+        "textures": 185
+      },
+      {
+        "name": "first/hip/m4/draw",
+        "t": 95549.59999999404,
+        "heap": 939196795,
+        "pipelines": 398,
+        "geometries": 3738,
+        "textures": 185
+      },
+      {
+        "name": "first/hip/m4/fire",
+        "t": 96362.70000000298,
+        "heap": 954190840,
+        "pipelines": 397,
+        "geometries": 3738,
+        "textures": 185
+      },
+      {
+        "name": "first/hip/m4/reload",
+        "t": 96996.20000000298,
+        "heap": 945353837,
+        "pipelines": 397,
+        "geometries": 3739,
+        "textures": 185
+      },
+      {
+        "name": "first/hip/ak/draw",
+        "t": 98883.09999999404,
+        "heap": 943061080,
+        "pipelines": 397,
+        "geometries": 3739,
+        "textures": 185
+      },
+      {
+        "name": "first/hip/ak/fire",
+        "t": 99697.79999999702,
+        "heap": 943772681,
+        "pipelines": 397,
+        "geometries": 3739,
+        "textures": 185
+      },
+      {
+        "name": "first/hip/ak/reload",
+        "t": 100313.70000000298,
+        "heap": 937139086,
+        "pipelines": 397,
+        "geometries": 3740,
+        "textures": 185
+      },
+      {
+        "name": "first/hip/shotgun/draw",
+        "t": 102729.09999999404,
+        "heap": 948527341,
+        "pipelines": 397,
+        "geometries": 3740,
+        "textures": 185
+      },
+      {
+        "name": "first/hip/shotgun/fire",
+        "t": 103549.09999999404,
+        "heap": 943501339,
+        "pipelines": 397,
+        "geometries": 3740,
+        "textures": 185
+      },
+      {
+        "name": "first/hip/shotgun/reload",
+        "t": 104179.29999999702,
+        "heap": 934545133,
+        "pipelines": 397,
+        "geometries": 3741,
+        "textures": 185
+      },
+      {
+        "name": "first/hip/aa12/draw",
+        "t": 104997.5,
+        "heap": 956225385,
+        "pipelines": 397,
+        "geometries": 3741,
+        "textures": 185
+      },
+      {
+        "name": "first/hip/aa12/fire",
+        "t": 105812.90000000596,
+        "heap": 948926484,
+        "pipelines": 397,
+        "geometries": 3741,
+        "textures": 185
+      },
+      {
+        "name": "first/hip/aa12/reload",
+        "t": 106431.90000000596,
+        "heap": 939481523,
+        "pipelines": 396,
+        "geometries": 3741,
+        "textures": 185
+      },
+      {
+        "name": "first/hip/sniper/draw",
+        "t": 109580.09999999404,
+        "heap": 940224696,
+        "pipelines": 396,
+        "geometries": 3741,
+        "textures": 185
+      },
+      {
+        "name": "first/hip/sniper/fire",
+        "t": 110397.59999999404,
+        "heap": 936066505,
+        "pipelines": 396,
+        "geometries": 3741,
+        "textures": 185
+      },
+      {
+        "name": "first/hip/sniper/reload",
+        "t": 111014.29999999702,
+        "heap": 952758978,
+        "pipelines": 396,
+        "geometries": 3742,
+        "textures": 185
+      },
+      {
+        "name": "first/hip/minigun/draw",
+        "t": 113930.20000000298,
+        "heap": 938144805,
+        "pipelines": 396,
+        "geometries": 3742,
+        "textures": 185
+      },
+      {
+        "name": "first/hip/minigun/fire",
+        "t": 114732.79999999702,
+        "heap": 963174215,
+        "pipelines": 396,
+        "geometries": 3742,
+        "textures": 185
+      },
+      {
+        "name": "first/hip/minigun/reload",
+        "t": 116313.09999999404,
+        "heap": 955120034,
+        "pipelines": 396,
+        "geometries": 3743,
+        "textures": 185
+      },
+      {
+        "name": "first/hip/launcher/draw",
+        "t": 117929.09999999404,
+        "heap": 944744758,
+        "pipelines": 396,
+        "geometries": 3743,
+        "textures": 185
+      },
+      {
+        "name": "first/hip/launcher/fire",
+        "t": 118745.40000000596,
+        "heap": 947398017,
+        "pipelines": 396,
+        "geometries": 3743,
+        "textures": 185
+      },
+      {
+        "name": "first/hip/launcher/reload",
+        "t": 119379.40000000596,
+        "heap": 951303904,
+        "pipelines": 395,
+        "geometries": 3744,
+        "textures": 185
+      },
+      {
+        "name": "first/hip/flamer/draw",
+        "t": 120981.09999999404,
+        "heap": 940767169,
+        "pipelines": 395,
+        "geometries": 3744,
+        "textures": 185
+      },
+      {
+        "name": "first/hip/flamer/fire",
+        "t": 121795.40000000596,
+        "heap": 962130734,
+        "pipelines": 395,
+        "geometries": 3744,
+        "textures": 185
+      },
+      {
+        "name": "first/hip/flamer/reload",
+        "t": 122430.90000000596,
+        "heap": 960200163,
+        "pipelines": 395,
+        "geometries": 3744,
+        "textures": 185
+      },
+      {
+        "name": "first/hip/chainsaw/draw",
+        "t": 125346.09999999404,
+        "heap": 955834802,
+        "pipelines": 395,
+        "geometries": 3744,
+        "textures": 185
+      },
+      {
+        "name": "first/hip/chainsaw/fire",
+        "t": 126163,
+        "heap": 954464561,
+        "pipelines": 395,
+        "geometries": 3744,
+        "textures": 185
+      },
+      {
+        "name": "first/hip/chainsaw/reload",
+        "t": 126778.09999999404,
+        "heap": 948109884,
+        "pipelines": 395,
+        "geometries": 3744,
+        "textures": 185
+      },
+      {
+        "name": "repeat/eye/pistol/draw",
+        "t": 127343.90000000596,
+        "heap": 962380417,
+        "pipelines": 395,
+        "geometries": 3744,
+        "textures": 185
+      },
+      {
+        "name": "repeat/eye/pistol/fire",
+        "t": 128162.09999999404,
+        "heap": 963282003,
+        "pipelines": 395,
+        "geometries": 3743,
+        "textures": 185
+      },
+      {
+        "name": "repeat/eye/pistol/reload",
+        "t": 128782.79999999702,
+        "heap": 958747113,
+        "pipelines": 395,
+        "geometries": 3743,
+        "textures": 185
+      },
+      {
+        "name": "repeat/eye/revolver/draw",
+        "t": 130646,
+        "heap": 961676081,
+        "pipelines": 395,
+        "geometries": 3743,
+        "textures": 185
+      },
+      {
+        "name": "repeat/eye/revolver/fire",
+        "t": 131464.20000000298,
+        "heap": 957613037,
+        "pipelines": 395,
+        "geometries": 3742,
+        "textures": 185
+      },
+      {
+        "name": "repeat/eye/revolver/reload",
+        "t": 132082.40000000596,
+        "heap": 954576221,
+        "pipelines": 395,
+        "geometries": 3742,
+        "textures": 185
+      },
+      {
+        "name": "repeat/eye/uzi/draw",
+        "t": 134232.59999999404,
+        "heap": 954735035,
+        "pipelines": 395,
+        "geometries": 3742,
+        "textures": 185
+      },
+      {
+        "name": "repeat/eye/uzi/fire",
+        "t": 135081,
+        "heap": 978541798,
+        "pipelines": 395,
+        "geometries": 3742,
+        "textures": 185
+      },
+      {
+        "name": "repeat/eye/uzi/reload",
+        "t": 135697.29999999702,
+        "heap": 957216833,
+        "pipelines": 395,
+        "geometries": 3742,
+        "textures": 185
+      },
+      {
+        "name": "repeat/eye/m4/draw",
+        "t": 137580.59999999404,
+        "heap": 975635858,
+        "pipelines": 395,
+        "geometries": 3742,
+        "textures": 185
+      },
+      {
+        "name": "repeat/eye/m4/fire",
+        "t": 138405.09999999404,
+        "heap": 965562416,
+        "pipelines": 395,
+        "geometries": 3742,
+        "textures": 185
+      },
+      {
+        "name": "repeat/eye/m4/reload",
+        "t": 139063.09999999404,
+        "heap": 970722942,
+        "pipelines": 395,
+        "geometries": 3742,
+        "textures": 185
+      },
+      {
+        "name": "repeat/eye/ak/draw",
+        "t": 140964.5,
+        "heap": 967530162,
+        "pipelines": 395,
+        "geometries": 3742,
+        "textures": 185
+      },
+      {
+        "name": "repeat/eye/ak/fire",
+        "t": 141799.20000000298,
+        "heap": 976457648,
+        "pipelines": 395,
+        "geometries": 3742,
+        "textures": 185
+      },
+      {
+        "name": "repeat/eye/ak/reload",
+        "t": 142470.70000000298,
+        "heap": 988159102,
+        "pipelines": 395,
+        "geometries": 3742,
+        "textures": 185
+      },
+      {
+        "name": "repeat/eye/shotgun/draw",
+        "t": 144965.79999999702,
+        "heap": 883140104,
+        "pipelines": 395,
+        "geometries": 3742,
+        "textures": 185
+      },
+      {
+        "name": "repeat/eye/shotgun/fire",
+        "t": 145779.5,
+        "heap": 884105483,
+        "pipelines": 395,
+        "geometries": 3742,
+        "textures": 185
+      },
+      {
+        "name": "repeat/eye/shotgun/reload",
+        "t": 146416.20000000298,
+        "heap": 883752954,
+        "pipelines": 395,
+        "geometries": 3742,
+        "textures": 185
+      },
+      {
+        "name": "repeat/eye/aa12/draw",
+        "t": 147246.79999999702,
+        "heap": 883653399,
+        "pipelines": 395,
+        "geometries": 3742,
+        "textures": 185
+      },
+      {
+        "name": "repeat/eye/aa12/fire",
+        "t": 148087.40000000596,
+        "heap": 885272387,
+        "pipelines": 395,
+        "geometries": 3742,
+        "textures": 185
+      },
+      {
+        "name": "repeat/eye/aa12/reload",
+        "t": 148728.29999999702,
+        "heap": 884587463,
+        "pipelines": 395,
+        "geometries": 3742,
+        "textures": 185
+      },
+      {
+        "name": "repeat/eye/sniper/draw",
+        "t": 151679.20000000298,
+        "heap": 887786729,
+        "pipelines": 395,
+        "geometries": 3742,
+        "textures": 185
+      },
+      {
+        "name": "repeat/eye/sniper/fire",
+        "t": 152496.5,
+        "heap": 887430375,
+        "pipelines": 395,
+        "geometries": 3742,
+        "textures": 185
+      },
+      {
+        "name": "repeat/eye/sniper/reload",
+        "t": 153132.09999999404,
+        "heap": 886237393,
+        "pipelines": 395,
+        "geometries": 3742,
+        "textures": 185
+      },
+      {
+        "name": "repeat/eye/minigun/draw",
+        "t": 156065.09999999404,
+        "heap": 887260021,
+        "pipelines": 395,
+        "geometries": 3742,
+        "textures": 185
+      },
+      {
+        "name": "repeat/eye/minigun/fire",
+        "t": 156882.70000000298,
+        "heap": 892005367,
+        "pipelines": 395,
+        "geometries": 3742,
+        "textures": 185
+      },
+      {
+        "name": "repeat/eye/minigun/reload",
+        "t": 158460.29999999702,
+        "heap": 897802305,
+        "pipelines": 395,
+        "geometries": 3742,
+        "textures": 185
+      },
+      {
+        "name": "repeat/eye/launcher/draw",
+        "t": 160096.09999999404,
+        "heap": 895772332,
+        "pipelines": 395,
+        "geometries": 3742,
+        "textures": 185
+      },
+      {
+        "name": "repeat/eye/launcher/fire",
+        "t": 160944.20000000298,
+        "heap": 892587928,
+        "pipelines": 395,
+        "geometries": 3742,
+        "textures": 185
+      },
+      {
+        "name": "repeat/eye/launcher/reload",
+        "t": 161593.09999999404,
+        "heap": 892280728,
+        "pipelines": 395,
+        "geometries": 3742,
+        "textures": 185
+      },
+      {
+        "name": "repeat/eye/flamer/draw",
+        "t": 163215.79999999702,
+        "heap": 894883554,
+        "pipelines": 395,
+        "geometries": 3742,
+        "textures": 185
+      },
+      {
+        "name": "repeat/eye/flamer/fire",
+        "t": 164051.09999999404,
+        "heap": 901972280,
+        "pipelines": 395,
+        "geometries": 3742,
+        "textures": 185
+      },
+      {
+        "name": "repeat/eye/flamer/reload",
+        "t": 164703.20000000298,
+        "heap": 898487858,
+        "pipelines": 395,
+        "geometries": 3742,
+        "textures": 185
+      },
+      {
+        "name": "repeat/eye/chainsaw/draw",
+        "t": 167664.5,
+        "heap": 899166218,
+        "pipelines": 395,
+        "geometries": 3742,
+        "textures": 185
+      },
+      {
+        "name": "repeat/eye/chainsaw/fire",
+        "t": 168476.90000000596,
+        "heap": 901376646,
+        "pipelines": 395,
+        "geometries": 3742,
+        "textures": 185
+      },
+      {
+        "name": "repeat/eye/chainsaw/reload",
+        "t": 169112.29999999702,
+        "heap": 897474534,
+        "pipelines": 395,
+        "geometries": 3742,
+        "textures": 185
+      },
+      {
+        "name": "repeat/hip/pistol/draw",
+        "t": 169684.20000000298,
+        "heap": 896002372,
+        "pipelines": 395,
+        "geometries": 3742,
+        "textures": 185
+      },
+      {
+        "name": "repeat/hip/pistol/fire",
+        "t": 170514.59999999404,
+        "heap": 929445158,
+        "pipelines": 395,
+        "geometries": 3744,
+        "textures": 185
+      },
+      {
+        "name": "repeat/hip/pistol/reload",
+        "t": 171146,
+        "heap": 939936020,
+        "pipelines": 395,
+        "geometries": 3744,
+        "textures": 185
+      },
+      {
+        "name": "repeat/hip/revolver/draw",
+        "t": 172998.79999999702,
+        "heap": 913916516,
+        "pipelines": 395,
+        "geometries": 3744,
+        "textures": 185
+      },
+      {
+        "name": "repeat/hip/revolver/fire",
+        "t": 173814.90000000596,
+        "heap": 930946932,
+        "pipelines": 395,
+        "geometries": 3744,
+        "textures": 185
+      },
+      {
+        "name": "repeat/hip/revolver/reload",
+        "t": 174446.70000000298,
+        "heap": 912959188,
+        "pipelines": 395,
+        "geometries": 3744,
+        "textures": 185
+      },
+      {
+        "name": "repeat/hip/uzi/draw",
+        "t": 176565.79999999702,
+        "heap": 920920794,
+        "pipelines": 395,
+        "geometries": 3744,
+        "textures": 185
+      },
+      {
+        "name": "repeat/hip/uzi/fire",
+        "t": 177395.70000000298,
+        "heap": 925399233,
+        "pipelines": 395,
+        "geometries": 3744,
+        "textures": 185
+      },
+      {
+        "name": "repeat/hip/uzi/reload",
+        "t": 178028.09999999404,
+        "heap": 916173560,
+        "pipelines": 395,
+        "geometries": 3744,
+        "textures": 185
+      },
+      {
+        "name": "repeat/hip/m4/draw",
+        "t": 179932.40000000596,
+        "heap": 938205513,
+        "pipelines": 395,
+        "geometries": 3744,
+        "textures": 185
+      },
+      {
+        "name": "repeat/hip/m4/fire",
+        "t": 180764.70000000298,
+        "heap": 916036127,
+        "pipelines": 395,
+        "geometries": 3744,
+        "textures": 185
+      },
+      {
+        "name": "repeat/hip/m4/reload",
+        "t": 181398.5,
+        "heap": 934796341,
+        "pipelines": 395,
+        "geometries": 3744,
+        "textures": 185
+      },
+      {
+        "name": "repeat/hip/ak/draw",
+        "t": 183530.5,
+        "heap": 937316077,
+        "pipelines": 395,
+        "geometries": 3744,
+        "textures": 185
+      },
+      {
+        "name": "repeat/hip/ak/fire",
+        "t": 184348.09999999404,
+        "heap": 932210947,
+        "pipelines": 395,
+        "geometries": 3744,
+        "textures": 185
+      },
+      {
+        "name": "repeat/hip/ak/reload",
+        "t": 184982.5,
+        "heap": 923377993,
+        "pipelines": 395,
+        "geometries": 3744,
+        "textures": 185
+      },
+      {
+        "name": "repeat/hip/shotgun/draw",
+        "t": 187431.59999999404,
+        "heap": 931360993,
+        "pipelines": 395,
+        "geometries": 3744,
+        "textures": 185
+      },
+      {
+        "name": "repeat/hip/shotgun/fire",
+        "t": 188262.40000000596,
+        "heap": 925601668,
+        "pipelines": 395,
+        "geometries": 3744,
+        "textures": 185
+      },
+      {
+        "name": "repeat/hip/shotgun/reload",
+        "t": 188880,
+        "heap": 915646171,
+        "pipelines": 395,
+        "geometries": 3744,
+        "textures": 185
+      },
+      {
+        "name": "repeat/hip/aa12/draw",
+        "t": 189715.5,
+        "heap": 936935636,
+        "pipelines": 395,
+        "geometries": 3744,
+        "textures": 185
+      },
+      {
+        "name": "repeat/hip/aa12/fire",
+        "t": 190532.40000000596,
+        "heap": 928725460,
+        "pipelines": 395,
+        "geometries": 3744,
+        "textures": 185
+      },
+      {
+        "name": "repeat/hip/aa12/reload",
+        "t": 191178.70000000298,
+        "heap": 918911672,
+        "pipelines": 395,
+        "geometries": 3744,
+        "textures": 185
+      },
+      {
+        "name": "repeat/hip/sniper/draw",
+        "t": 194312.20000000298,
+        "heap": 942665410,
+        "pipelines": 395,
+        "geometries": 3744,
+        "textures": 185
+      },
+      {
+        "name": "repeat/hip/sniper/fire",
+        "t": 195128.90000000596,
+        "heap": 938337584,
+        "pipelines": 395,
+        "geometries": 3744,
+        "textures": 185
+      },
+      {
+        "name": "repeat/hip/sniper/reload",
+        "t": 195762.09999999404,
+        "heap": 928058426,
+        "pipelines": 395,
+        "geometries": 3744,
+        "textures": 185
+      },
+      {
+        "name": "repeat/hip/minigun/draw",
+        "t": 198678.70000000298,
+        "heap": 940621290,
+        "pipelines": 395,
+        "geometries": 3744,
+        "textures": 185
+      },
+      {
+        "name": "repeat/hip/minigun/fire",
+        "t": 199513,
+        "heap": 934419125,
+        "pipelines": 395,
+        "geometries": 3744,
+        "textures": 185
+      },
+      {
+        "name": "repeat/hip/minigun/reload",
+        "t": 201095.90000000596,
+        "heap": 926175294,
+        "pipelines": 395,
+        "geometries": 3744,
+        "textures": 185
+      },
+      {
+        "name": "repeat/hip/launcher/draw",
+        "t": 202682.40000000596,
+        "heap": 940123855,
+        "pipelines": 395,
+        "geometries": 3744,
+        "textures": 185
+      },
+      {
+        "name": "repeat/hip/launcher/fire",
+        "t": 203532.5,
+        "heap": 933846603,
+        "pipelines": 395,
+        "geometries": 3744,
+        "textures": 185
+      },
+      {
+        "name": "repeat/hip/launcher/reload",
+        "t": 204162.09999999404,
+        "heap": 925105599,
+        "pipelines": 395,
+        "geometries": 3744,
+        "textures": 185
+      },
+      {
+        "name": "repeat/hip/flamer/draw",
+        "t": 205760.59999999404,
+        "heap": 940408573,
+        "pipelines": 395,
+        "geometries": 3744,
+        "textures": 185
+      },
+      {
+        "name": "repeat/hip/flamer/fire",
+        "t": 206577.40000000596,
+        "heap": 933995135,
+        "pipelines": 395,
+        "geometries": 3744,
+        "textures": 185
+      },
+      {
+        "name": "repeat/hip/flamer/reload",
+        "t": 207196.79999999702,
+        "heap": 930740997,
+        "pipelines": 395,
+        "geometries": 3744,
+        "textures": 185
+      },
+      {
+        "name": "repeat/hip/chainsaw/draw",
+        "t": 210094.29999999702,
+        "heap": 926128005,
+        "pipelines": 395,
+        "geometries": 3744,
+        "textures": 185
+      },
+      {
+        "name": "repeat/hip/chainsaw/fire",
+        "t": 210896.90000000596,
+        "heap": 950469181,
+        "pipelines": 395,
+        "geometries": 3744,
+        "textures": 185
+      },
+      {
+        "name": "repeat/hip/chainsaw/reload",
+        "t": 211514.29999999702,
+        "heap": 943943269,
+        "pipelines": 395,
+        "geometries": 3744,
+        "textures": 185
+      },
+      {
+        "name": "idle-final",
+        "t": 212065.29999999702,
+        "heap": 930608279,
+        "pipelines": 395,
+        "geometries": 3744,
+        "textures": 185
+      }
+    ],
+    "frames": 10144,
+    "prev": {
+      "t": 214075.90000000596,
+      "heap": 952998537,
+      "pipelines": 395,
+      "geometries": 3744,
+      "textures": 185
+    }
+  },
+  "warnings": [
+    {
+      "type": "warning",
+      "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+    },
+    {
+      "type": "warning",
+      "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+    }
+  ]
+}

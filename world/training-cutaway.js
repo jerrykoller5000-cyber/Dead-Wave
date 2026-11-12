@@ -138,6 +138,7 @@ export function partitionTrainingShell(T, tgGroup, origin) {
     }
     syncMaterials();
   }
+  const ignoreBox = { min: { x: 0, y: 0, z: 0 }, max: { x: 0, y: 0, z: 0 } };
   return {
     update, syncMaterials,
     // Call after the opaque entry compile, compile the scene again, then restore.
@@ -153,9 +154,11 @@ export function partitionTrainingShell(T, tgGroup, origin) {
     // Only the third-person camera query uses this; rounds, laser and scoped aim remain solid.
     ignoreSolid(s) {
       if (!enabled || s.target != null || s.door || s.gate) return false;
-      const box = { min: { x: s.minX-origin.x, y: s.minY-origin.y, z: s.minZ-origin.z }, max: { x: s.maxX-origin.x, y: s.maxY-origin.y, z: s.maxZ-origin.z } };
-      const side = classify(box);
-      return entries.some(e => e.side === side && e.hidden);
+      ignoreBox.min.x = s.minX - origin.x; ignoreBox.min.y = s.minY - origin.y; ignoreBox.min.z = s.minZ - origin.z;
+      ignoreBox.max.x = s.maxX - origin.x; ignoreBox.max.y = s.maxY - origin.y; ignoreBox.max.z = s.maxZ - origin.z;
+      const side = classify(ignoreBox);
+      for (const e of entries) if (e.side === side && e.hidden) return true;
+      return false;
     },
     state: () => entries.map(e => ({ side: e.side, opacity: e.opacity, hidden: e.hidden })),
     dispose() { owned.forEach(m => m.dispose()); }

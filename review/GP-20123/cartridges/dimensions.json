@@ -1,0 +1,134 @@
+[
+  {
+    "id": "pistol",
+    "label": "Pistol 9 mm",
+    "live": {
+      "lengthMm": 29.69,
+      "diameterMm": 10
+    },
+    "case": {
+      "lengthMm": 19.15,
+      "diameterMm": 10
+    }
+  },
+  {
+    "id": "uzi",
+    "label": "Uzi 9 mm",
+    "live": {
+      "lengthMm": 29.7,
+      "diameterMm": 10
+    },
+    "case": {
+      "lengthMm": 19,
+      "diameterMm": 10
+    }
+  },
+  {
+    "id": "revolver",
+    "label": "Revolver .357",
+    "live": {
+      "lengthMm": 40.39,
+      "diameterMm": 13.1
+    },
+    "case": {
+      "lengthMm": 32.77,
+      "diameterMm": 13.1
+    }
+  },
+  {
+    "id": "m4",
+    "label": "GW-4 5.56",
+    "live": {
+      "lengthMm": 57.4,
+      "diameterMm": 9.6
+    },
+    "case": {
+      "lengthMm": 45,
+      "diameterMm": 9.6
+    }
+  },
+  {
+    "id": "ak",
+    "label": "KR-7 7.62×39",
+    "live": {
+      "lengthMm": 55.77,
+      "diameterMm": 11.4
+    },
+    "case": {
+      "lengthMm": 39,
+      "diameterMm": 11.4
+    }
+  },
+  {
+    "id": "minigun",
+    "label": "Rotary 7.62×51",
+    "live": {
+      "lengthMm": 71.12,
+      "diameterMm": 12
+    },
+    "case": {
+      "lengthMm": 51,
+      "diameterMm": 12
+    }
+  },
+  {
+    "id": "m240",
+    "label": "Watchman 7.62×51",
+    "live": {
+      "lengthMm": 71.12,
+      "diameterMm": 12
+    },
+    "case": {
+      "lengthMm": 51,
+      "diameterMm": 12
+    }
+  },
+  {
+    "id": "sniper",
+    "label": "Sniper .338",
+    "live": {
+      "lengthMm": 93.5,
+      "diameterMm": 14.9
+    },
+    "case": {
+      "lengthMm": 69.2,
+      "diameterMm": 14.9
+    }
+  },
+  {
+    "id": "shotgun",
+    "label": "Pump 12 ga",
+    "live": {
+      "lengthMm": 63,
+      "diameterMm": 22.6
+    },
+    "case": {
+      "lengthMm": 70,
+      "diameterMm": 22.6
+    }
+  },
+  {
+    "id": "aa12",
+    "label": "Breacher 12 ga",
+    "live": {
+      "lengthMm": 63,
+      "diameterMm": 22.6
+    },
+    "case": {
+      "lengthMm": 70,
+      "diameterMm": 22.6
+    }
+  },
+  {
+    "id": "launcher",
+    "label": "Launcher 40 mm",
+    "live": {
+      "lengthMm": 83.22,
+      "diameterMm": 43.8
+    },
+    "case": {
+      "lengthMm": 46,
+      "diameterMm": 43.8
+    }
+  }
+]

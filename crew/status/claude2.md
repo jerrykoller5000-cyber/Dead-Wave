@@ -1,32 +1,36 @@
 # Claude 2
 
-state: idle
+state: active
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: —
-touching: —
-since: 2026-11-12T09:51Z
-next: CB-314 The unarmed sleeve 2.8 mm into a hip pouch standing (from CC
+task: CB-243 J149 gate pass A (86 gun/hold/rack/eye/clip tests) on the PC tree of 20:21Z in the cloud; the long guns' tests rerun when Claude 3's land
+touching: tools/tests/run-all.mjs
+since: 2026-11-12T20:21Z
+next: CB-315 (15:05Z, CLAUDE DIRECTOR: vendor half bar met (899.7 to 449.
 blocked-on: —
-last-report: handoffs/2026-11-12-claude2-CD-8-interim.md
+last-report: handoffs/2026-11-12-claude2-CB-321.md
 
 ## Notes
 
-### Where things stand (claude2, session 03:55Z-10:5xZ, Opus 5.5)
-- Done: CB-310 stairs filmstrip (accepted, to Jerry). CB-312 test fixes (accepted, ready to commit): fakethree clone owns
-  userData, tag281, tag292, tcl281 (grip axis via TT.inspectHostDbg + makePistolModel without finishGun), t182, skin-merge
-  proxy normals. t221 fixture fix landed (scope housing by name, radius interpolated; md5 765c522f; FYI to Director).
-- CB-311 (Jerry's gear cage) OPEN: every gun missing in his 5080 shot; not reproducible on WebGL. ChatGPT runs
-  review/CB-311/watch311.mjs on the 5080 (GP-20117). Scripts in review/CB-311.
-- CD-8 3P: interim landed 10:0xZ (the pistol's support hand on VM_FIT; t229 thumb check rewritten; handoff CD-8-interim,
-  for review). Revolver + firing hands wait for CD-9 (Claude 1's third-person fit); then wire it as trial 2 does
-  (Claude outputs/CD-8-3p/cd8-3p-both-hands.diff: WEAPON_HOLD gripFit, holdWeapon G, poseHands r/l).
-- Next: t334 (Director OK, --review): bare AK eligible triangles 100% coated (world and eye), then fit an AK optic through
-  the Armory for the minima, thresholds/UV unchanged. Then t228 long-gun forend angles (51-90 deg vs 45; the wrist limits),
-  chainsaw firing hand 18 cm; CB-290 (tcb290c).
-- Cloud copy: Claude outputs/cb311/cloud-src2.tgz (PC 08:18Z) + intro.tgz. Run: CHROME=/usr/bin/google-chrome
-  CHROME_ARGS=--no-sandbox node tools/game-test-slot.mjs run claude2 <task> --checks <x> -- node <script> (load ~5 min).
-  review/CD-8/tp-hands.mjs (close cameras round the hands, TINT=1, LIGHTS=noon,overcast,dusk,night). Background long
-  runs with a nohup'd shell script (a foreground parenthesis waits and gets killed at 2 min).
+### Where things stand (claude2, session 16:19Z-22:xxZ, Opus 5.5)
+- Landed today, out for review (ready to commit): CB-316 studio/weapon-detail.js (+test; merge paths; carryGunCopy instance loop;
+  fakethree InstancedMesh clone, getMatrixAt returns nothing), CB-313 build floor boards to 0.25, CB-317 muzzle flash hides itself
+  at opacity 0, CB-318 the live top round out of the ext-mag stretch (tcb318), CB-321 t38 budgets + one per J149 control
+  (J149_CONTROLS in t38.js: add each modeler's new control names as their guns land).
+- weapon-detail.js API FROZEN (Director): changes only after a request to Claude 3, Claude 6, ChatGPT 2.
+- J149 gate pass A reported 22:0xZ (Claude outputs/j149-gate/gate-a.log): 41/53 green, no new red from tonight. ChatGPT 2 runs 13
+  sidearm/eye-hand tests on the PC slot (its reds come back to me); Claude 6 runs pass B (long/heavy guns) on the newer tree.
+- Mine still red: t228 (support fist along the forend 50-90 deg; shotgun anchor 1.6 cm; walking firing hand 1 cm), t242 (ext
+  mag 3.2 mm out of the grip; red before CB-318 too: gunExtLook or the pistol mag), tcb248 flaky once in the cloud.
+- CB-314 handed to Claude 3 (the carrier's side MOLLE bars, studio/marine-body.js ~402; ChatGPT's GP-20125 diagnosis).
+- GP-20124 (first-use eye-draw hitches on the 5080: Breacher 1450 ms) is mine, LATER: the Training blackout's warm (AG-304/309,
+  viewmodel.prepareWarmup) should cover every gun's eye copy and J149's new materials.
+- Overnight: the rest of the full suite (311 tests, 16 chunks of 20) runs in the cloud on the 20:21Z tree from 22:09Z
+  (night-chunks / night-N.log in the session's /home/claude/run). If this session ends, a fresh one rebuilds the tree and runs
+  the chunks not yet reported (see the last NOTE in crew/LOG.md for how far it got).
+- Cloud recipe: tar the PC tree (exclude gh-*, pk-*, assets/soundtrack, assets/disclaimer, assets/intro, ui/audio,
+  tools/tests/test-*.html, __pycache__), tar assets/intro/*.js *.css separately, stage, unpack; run-all with
+  CHROME=/usr/bin/google-chrome CHROME_ARGS=--no-sandbox DW_CHECK_MS=420000, nohup'd; one instance at a time. crew.mjs reply can
+  fail with EINVAL when requests.md is busy on Windows: retry after ~30 s.
 
 ### Who you are (D-137, Jerry 10 Nov 2026)
 You are **Claude 2**, the crew's second Claude: a Claude task of your own, on Claude Sonnet 5.5 (Extra). You took

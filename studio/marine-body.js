@@ -197,11 +197,13 @@ export function buildMarineBody(T, {root, put, rmesh: roundedMesh, cyl, part, dr
   putL(rmesh(.043,.022,.014,beltW,.003),0,.721,.141);
   putL(rmesh(.006,.03,.009,buckleMat,.002),.007,.721,.151);
   for(let j=0;j<10;j++){const a=j/10*Math.PI*2,s=Math.sin(a),c=Math.cos(a);putL(rmesh(.018,.054,.012,strapMat,.004),Math.sign(s)*Math.abs(s)**.7*.191,.721,Math.sign(c)*Math.abs(c)**.7*.132,0,a,0);}
+  // CC-344 (J128): the two front mag pouches ride on the belt (5 cm higher; they hung 6 cm below it, over the hip crease,
+  // where the running thigh went 17 mm into them)
   for(const side of [-1,1]) {
-    putL(rmesh(.082,.112,.038,beltW,.012),side*.125,.647,.135);
-    putL(plate(.079,.041,.008,beltW),side*.125,.684,.157);
-    putL(rmesh(.014,.028,.007,strapMat,.002),side*.125,.665,.164);
-    putL(rmesh(.021,.014,.008,buckleMat,.002),side*.125,.654,.164);
+    putL(rmesh(.082,.112,.038,beltW,.012),side*.125,.697,.135);
+    putL(plate(.079,.041,.008,beltW),side*.125,.734,.157);
+    putL(rmesh(.014,.028,.007,strapMat,.002),side*.125,.715,.164);
+    putL(rmesh(.021,.014,.008,buckleMat,.002),side*.125,.704,.164);
     putL(rmesh(.026,.055,.018,strapMat,.005),side*.161,.717,.082);
   }
   putL(rmesh(.125,.1,.047,beltW,.018),.08,.64,-.137);
@@ -220,13 +222,14 @@ export function buildMarineBody(T, {root, put, rmesh: roundedMesh, cyl, part, dr
     const tP=(pts)=>pts.map(([x,y,z])=>[x,tY(y),z]);
     // A thigh mount and retention band support the hollow carry holster.
     putT(rmesh(.012,.105,.082,holsterW,.004),side*.108,-.083,.035);
-    putT(form([[-.008,.101,.113],[.008,.101,.113]],strapMat,'holster-thigh-band',16,'high'),0,-.11,.012);
+    // CC-344: 1.5 cm lower (still across the mount): at -.11 its front went 6 mm into the belt's left mag pouch running
+    putT(form([[-.008,.101,.113],[.008,.101,.113]],strapMat,'holster-thigh-band',16,'high'),0,-.125,.012);
     // CL-198: the trouser leg itself is worn live (after the boot, below), from inside the seat to the boot.
     putT(rmesh(.021,.126,.112,trouserW,.009),side*.094,-.145,.004);
     putT(plate(.111,.04,.009,trouserW),side*.108,-.097,.004,0,side*Math.PI/2,0);
     for(const z of[-.032,.038])putT(cyl(.004,.004,.004,beltW,6),side*.114,-.105,z,0,0,Math.PI/2);
     seam(legG,tP([[side*.09,-.055,.047],[side*.098,-.145,.061],[side*.084,-.205,.051]]),trouserW);
-    seam(legG,tP([[side*.011,.014,.114],[side*.044,-.033,.114],[side*.074,-.069,.098]]),trouserW);
+    // (CC-344: the front seam is worn with the live leg now, below: rigid on the thigh it rose through the belt as the thigh came up)
     // One restrained fold at the pocket and knee, not a separate thigh block.
     let knee;
     knee=new T.Group();knee.position.set(0,-THIGH,0);legG.add(knee);
@@ -285,7 +288,14 @@ export function buildMarineBody(T, {root, put, rmesh: roundedMesh, cyl, part, dr
       const calfR=[[-.0396,.075,.084,0,.018],[-.0924,.075,.086,side*.002,.006],[-.1452,.077,.089,side*.003,-.002],[-.198,.073,.085,side*.002,-.002],[-.2376,.075,.088,0,.004],[-.2706,.081,.094,0,.009],[-.301,.079,.092,0,.01]];
       const longRings=[...ringsIn(T,root,legG,subdiv(thighR,1),{e:.82}),...ringsIn(T,root,knee,subdiv(calfR,1),{e:.82})];
       const long=loftRings(T,longRings,30,{caps:'first'});
-      const trousers=liveCloth(T,{space:root,bones,geo:long.geo,weights:weigh(T,root,bones,long.geo,w4),material:trouserW,name:'live-trouser-leg'});
+      // CC-344 (J128): the leg stays under the belt's band and under the two mag pouches on its front (above: the band at
+      // .721, the pouches at x +-.125, .697, z .135; lowerBody's frame, +LB), and out of the space in front of them, so no
+      // cloth hangs over them: it folds there as the thigh comes up (running it went 18 mm into them, crouched 11: tcc344)
+      const UNDER={k:0,gap:.002,boxes:[{x:[-.19,.19],y:[.696+LB,.8+LB],z:[-.13,.3]},
+        ...[-1,1].map(sd=>({x:sd<0?[-.167,-.083]:[.083,.167],y:[.641+LB,.753+LB],z:[.116,.3]}))]};
+      const frontSeam=geoIn(T,root,legG,new T.TubeGeometry(new T.CatmullRomCurve3(tP([[side*.011,.014,.114],[side*.044,-.033,.114],[side*.074,-.069,.098]]).map(q=>new T.Vector3(...q))),9,.0016,4,false));
+      const legGeo=joinGeos(T,[long.geo,frontSeam]);
+      const trousers=liveCloth(T,{space:root,bones,geo:legGeo,weights:weigh(T,root,bones,legGeo,w4),material:trouserW,name:'live-trouser-leg',under:UNDER});
       dress.legLong.push(trousers.parent);
       // Shorts (CU-145: not rolled): the same leg cut 6 cm above the knee, with a stitched hem, over a bare knee and shin
       // and a sock, all worn the same way so the knee bends in skin.
@@ -389,7 +399,8 @@ export function buildMarineBody(T, {root, put, rmesh: roundedMesh, cyl, part, dr
     v(strap([[0,1.075,.183],[0,1.13,.17],[0,1.172,.119],[0,1.195,.02],[0,1.176,-.101],[0,1.12,-.177]],.052,carrierW,.012),side*.12,0,0);   // CC-340: on the narrower shoulder
     v(rmesh(.036,.026,.017,buckleMat,.005),side*.12,1.123,.181);
     v(rmesh(.018,.013,.02,strapMat,.002),side*.12,1.123,.183);
-    for(let row=0;row<3;row++)v(rmesh(.008,.015,.2,webMat,.002),side*.185,.844+row*.04,0);
+    // Thin webbing sits on the .182 carrier side, clear of the resting sleeve.
+    for(let row=0;row<3;row++)v(rmesh(.001,.015,.2,webMat,.00025),side*.1825,.844+row*.04,0);
   }
   torsoSeam([[-.151,.876,.171],[-.154,1.055,.171],[-.10,1.126,.171],[.10,1.126,.171],[.154,1.055,.171],[.151,.876,.171]],carrierW,'vest',.002);
   // CC-341 (J128): the carrier's outline round the torso, for carrierClearance below: the plates (.35 wide, a .008 bevel

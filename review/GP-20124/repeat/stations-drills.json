@@ -1,0 +1,1111 @@
+{
+  "at": "2026-11-12T21:28:37.321Z",
+  "stages": [
+    {
+      "name": "01-entry-3p",
+      "data": {
+        "phase": "prep",
+        "training": true,
+        "view": {
+          "first": false,
+          "w": 0,
+          "ads": 0,
+          "headHidden": false,
+          "armHidden": false,
+          "eye": null,
+          "sight": {
+            "pos": {
+              "x": 0.2093459042388477,
+              "y": -198.873249397173,
+              "z": -640.5688303777878
+            },
+            "fwd": {
+              "x": -0.0002561847281145243,
+              "y": 0.009005523501030814,
+              "z": 0.9999594166344241
+            }
+          }
+        },
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ]
+      }
+    },
+    {
+      "name": "02-entry-1p",
+      "data": {
+        "phase": "prep",
+        "view": {
+          "first": true,
+          "w": 0,
+          "ads": 0,
+          "headHidden": false,
+          "armHidden": false,
+          "eye": null,
+          "sight": {
+            "pos": {
+              "x": 0.20215235827792805,
+              "y": -199.0240864728579,
+              "z": -640.5099245716291
+            },
+            "fwd": {
+              "x": 0.1080164653892455,
+              "y": -0.6854949087615008,
+              "z": 0.7200202589280914
+            }
+          }
+        },
+        "vm": false
+      }
+    },
+    {
+      "name": "03-armory-open",
+      "data": {
+        "open": true,
+        "action": "armory"
+      }
+    },
+    {
+      "name": "04-armory-buy",
+      "data": {
+        "m4Owned": true,
+        "buyButton": true,
+        "disabled": false
+      }
+    },
+    {
+      "name": "05-armory-fit",
+      "data": {
+        "fitButton": true,
+        "disabled": false,
+        "loadout": {
+          "primary": [
+            null,
+            null
+          ],
+          "secondary": [
+            null,
+            null
+          ],
+          "hip": "pistol:base"
+        }
+      }
+    },
+    {
+      "name": "06-armory-shelf",
+      "data": {
+        "button": true,
+        "disabled": true,
+        "loadout": {
+          "primary": [
+            null,
+            null
+          ],
+          "secondary": [
+            null,
+            null
+          ],
+          "hip": "pistol:base"
+        }
+      }
+    },
+    {
+      "name": "07-cif-open",
+      "data": {
+        "open": true,
+        "camo": "m81"
+      }
+    },
+    {
+      "name": "08-cif-camo-kit",
+      "data": {
+        "shirtOption": false,
+        "cifOpen": false
+      }
+    },
+    {
+      "name": "09-range-console",
+      "data": {
+        "open": true,
+        "action": "rangeConsole"
+      }
+    },
+    {
+      "name": "10-all-drills",
+      "data": [
+        {
+          "weapon": "pistol",
+          "id": "bullseye",
+          "weaponButton": true,
+          "card": true,
+          "start": true,
+          "disabled": false,
+          "state": "PREPARING",
+          "expected": "pistol"
+        },
+        {
+          "weapon": "pistol",
+          "id": "call-sign",
+          "weaponButton": true,
+          "card": true,
+          "start": true,
+          "disabled": false,
+          "state": "PREPARING",
+          "expected": "pistol"
+        },
+        {
+          "weapon": "pistol",
+          "id": "pop-patrol",
+          "weaponButton": true,
+          "card": true,
+          "start": true,
+          "disabled": false,
+          "state": "PREPARING",
+          "expected": "pistol"
+        },
+        {
+          "weapon": "pistol",
+          "id": "twelve-clean",
+          "weaponButton": true,
+          "card": true,
+          "start": true,
+          "disabled": false,
+          "state": "PREPARING",
+          "expected": "pistol"
+        },
+        {
+          "weapon": "pistol",
+          "id": "quickdraw",
+          "weaponButton": true,
+          "card": true,
+          "start": true,
+          "disabled": false,
+          "state": "PREPARING",
+          "expected": "pistol"
+        },
+        {
+          "weapon": "uzi",
+          "id": "three-taps",
+          "weaponButton": true,
+          "card": true,
+          "start": true,
+          "disabled": false,
+          "state": "PREPARING",
+          "expected": "uzi"
+        },
+        {
+          "weapon": "uzi",
+          "id": "crossfire",
+          "weaponButton": true,
+          "card": true,
+          "start": true,
+          "disabled": false,
+          "state": "PREPARING",
+          "expected": "uzi"
+        },
+        {
+          "weapon": "uzi",
+          "id": "one-mag",
+          "weaponButton": true,
+          "card": true,
+          "start": true,
+          "disabled": false,
+          "state": "PREPARING",
+          "expected": "uzi"
+        },
+        {
+          "weapon": "uzi",
+          "id": "blink",
+          "weaponButton": true,
+          "card": true,
+          "start": true,
+          "disabled": false,
+          "state": "PREPARING",
+          "expected": "uzi"
+        },
+        {
+          "weapon": "uzi",
+          "id": "swarm",
+          "weaponButton": true,
+          "card": true,
+          "start": true,
+          "disabled": false,
+          "state": "PREPARING",
+          "expected": "uzi"
+        },
+        {
+          "weapon": "m4",
+          "id": "near-far",
+          "weaponButton": true,
+          "card": true,
+          "start": true,
+          "disabled": false,
+          "state": "PREPARING",
+          "expected": "m4"
+        },
+        {
+          "weapon": "m4",
+          "id": "identify",
+          "weaponButton": true,
+          "card": true,
+          "start": true,
+          "disabled": false,
+          "state": "PREPARING",
+          "expected": "m4"
+        },
+        {
+          "weapon": "m4",
+          "id": "priority",
+          "weaponButton": true,
+          "card": true,
+          "start": true,
+          "disabled": false,
+          "state": "PREPARING",
+          "expected": "m4"
+        },
+        {
+          "weapon": "m4",
+          "id": "controlled-pairs",
+          "weaponButton": true,
+          "card": true,
+          "start": true,
+          "disabled": false,
+          "state": "PREPARING",
+          "expected": "m4"
+        },
+        {
+          "weapon": "m4",
+          "id": "five-wide",
+          "weaponButton": true,
+          "card": true,
+          "start": true,
+          "disabled": false,
+          "state": "PREPARING",
+          "expected": "m4"
+        },
+        {
+          "weapon": "ak",
+          "id": "four-count",
+          "weaponButton": true,
+          "card": true,
+          "start": true,
+          "disabled": false,
+          "state": "PREPARING",
+          "expected": "ak"
+        },
+        {
+          "weapon": "ak",
+          "id": "heavy-beat",
+          "weaponButton": true,
+          "card": true,
+          "start": true,
+          "disabled": false,
+          "state": "PREPARING",
+          "expected": "ak"
+        },
+        {
+          "weapon": "ak",
+          "id": "torso-ladder",
+          "weaponButton": true,
+          "card": true,
+          "start": true,
+          "disabled": false,
+          "state": "PREPARING",
+          "expected": "ak"
+        },
+        {
+          "weapon": "ak",
+          "id": "two-mags",
+          "weaponButton": true,
+          "card": true,
+          "start": true,
+          "disabled": false,
+          "state": "PREPARING",
+          "expected": "ak"
+        },
+        {
+          "weapon": "ak",
+          "id": "reset-and-read",
+          "weaponButton": true,
+          "card": true,
+          "start": true,
+          "disabled": false,
+          "state": "PREPARING",
+          "expected": "ak"
+        },
+        {
+          "weapon": "shotgun",
+          "id": "seven-on-steel",
+          "weaponButton": true,
+          "card": true,
+          "start": true,
+          "disabled": false,
+          "state": "PREPARING",
+          "expected": "shotgun"
+        },
+        {
+          "weapon": "shotgun",
+          "id": "pump-rhythm",
+          "weaponButton": true,
+          "card": true,
+          "start": true,
+          "disabled": false,
+          "state": "PREPARING",
+          "expected": "shotgun"
+        },
+        {
+          "weapon": "shotgun",
+          "id": "double-door",
+          "weaponButton": true,
+          "card": true,
+          "start": true,
+          "disabled": false,
+          "state": "PREPARING",
+          "expected": "shotgun"
+        },
+        {
+          "weapon": "shotgun",
+          "id": "eight-shells",
+          "weaponButton": true,
+          "card": true,
+          "start": true,
+          "disabled": false,
+          "state": "PREPARING",
+          "expected": "shotgun"
+        },
+        {
+          "weapon": "shotgun",
+          "id": "center-mass",
+          "weaponButton": true,
+          "card": true,
+          "start": true,
+          "disabled": false,
+          "state": "PREPARING",
+          "expected": "shotgun"
+        },
+        {
+          "weapon": "aa12",
+          "id": "breach-wave",
+          "weaponButton": true,
+          "card": true,
+          "start": true,
+          "disabled": false,
+          "state": "PREPARING",
+          "expected": "aa12"
+        },
+        {
+          "weapon": "aa12",
+          "id": "five-pellet-focus",
+          "weaponButton": true,
+          "card": true,
+          "start": true,
+          "disabled": false,
+          "state": "PREPARING",
+          "expected": "aa12"
+        },
+        {
+          "weapon": "aa12",
+          "id": "drum-discipline",
+          "weaponButton": true,
+          "card": true,
+          "start": true,
+          "disabled": false,
+          "state": "PREPARING",
+          "expected": "aa12"
+        },
+        {
+          "weapon": "aa12",
+          "id": "switchback",
+          "weaponButton": true,
+          "card": true,
+          "start": true,
+          "disabled": false,
+          "state": "PREPARING",
+          "expected": "aa12"
+        },
+        {
+          "weapon": "aa12",
+          "id": "stairwell",
+          "weaponButton": true,
+          "card": true,
+          "start": true,
+          "disabled": false,
+          "state": "PREPARING",
+          "expected": "aa12"
+        },
+        {
+          "weapon": "revolver",
+          "id": "six-certainties",
+          "weaponButton": true,
+          "card": true,
+          "start": true,
+          "disabled": false,
+          "state": "PREPARING",
+          "expected": "revolver"
+        },
+        {
+          "weapon": "revolver",
+          "id": "triple-stack",
+          "weaponButton": true,
+          "card": true,
+          "start": true,
+          "disabled": false,
+          "state": "PREPARING",
+          "expected": "revolver"
+        },
+        {
+          "weapon": "revolver",
+          "id": "keyhole",
+          "weaponButton": true,
+          "card": true,
+          "start": true,
+          "disabled": false,
+          "state": "PREPARING",
+          "expected": "revolver"
+        },
+        {
+          "weapon": "revolver",
+          "id": "duel",
+          "weaponButton": true,
+          "card": true,
+          "start": true,
+          "disabled": false,
+          "state": "PREPARING",
+          "expected": "revolver"
+        },
+        {
+          "weapon": "revolver",
+          "id": "ring-reader",
+          "weaponButton": true,
+          "card": true,
+          "start": true,
+          "disabled": false,
+          "state": "PREPARING",
+          "expected": "revolver"
+        },
+        {
+          "weapon": "sniper",
+          "id": "long-glass",
+          "weaponButton": true,
+          "card": true,
+          "start": true,
+          "disabled": false,
+          "state": "PREPARING",
+          "expected": "sniper"
+        },
+        {
+          "weapon": "sniper",
+          "id": "four-deep",
+          "weaponButton": true,
+          "card": true,
+          "start": true,
+          "disabled": false,
+          "state": "PREPARING",
+          "expected": "sniper"
+        },
+        {
+          "weapon": "sniper",
+          "id": "hold-your-breath",
+          "weaponButton": true,
+          "card": true,
+          "start": true,
+          "disabled": false,
+          "state": "PREPARING",
+          "expected": "sniper"
+        },
+        {
+          "weapon": "sniper",
+          "id": "head-body-echo",
+          "weaponButton": true,
+          "card": true,
+          "start": true,
+          "disabled": false,
+          "state": "PREPARING",
+          "expected": "sniper"
+        },
+        {
+          "weapon": "sniper",
+          "id": "five-round-test",
+          "weaponButton": true,
+          "card": true,
+          "start": true,
+          "disabled": false,
+          "state": "PREPARING",
+          "expected": "sniper"
+        },
+        {
+          "weapon": "pistol",
+          "id": "first-steps",
+          "weaponButton": true,
+          "card": true,
+          "start": true,
+          "disabled": false,
+          "state": "PREPARING",
+          "expected": "pistol"
+        },
+        {
+          "weapon": "pistol",
+          "id": "draw-ready",
+          "weaponButton": true,
+          "card": true,
+          "start": true,
+          "disabled": false,
+          "state": "PREPARING",
+          "expected": "pistol"
+        },
+        {
+          "weapon": "m4",
+          "id": "reload-ready",
+          "weaponButton": true,
+          "card": true,
+          "start": true,
+          "disabled": false,
+          "state": "PREPARING",
+          "expected": "m4"
+        },
+        {
+          "weapon": "pistol",
+          "id": "pistol-rifle",
+          "weaponButton": true,
+          "card": true,
+          "start": true,
+          "disabled": false,
+          "state": "PREPARING",
+          "expected": "pistol"
+        },
+        {
+          "weapon": "shotgun",
+          "id": "three-gun",
+          "weaponButton": true,
+          "card": true,
+          "start": true,
+          "disabled": false,
+          "state": "PREPARING",
+          "expected": "pistol"
+        }
+      ]
+    },
+    {
+      "name": "11-range-active",
+      "data": {
+        "start": {
+          "ok": true,
+          "id": "1794518958852-46"
+        },
+        "state": "PREPARING"
+      }
+    },
+    {
+      "name": "12-range-fire",
+      "data": {
+        "state": "ACTIVE",
+        "score": 0,
+        "action": "shoot"
+      }
+    },
+    {
+      "name": "13-range-after-shot",
+      "data": {
+        "state": "ACTIVE",
+        "score": 0,
+        "shots": 1
+      }
+    }
+  ],
+  "drills": [
+    {
+      "weapon": "pistol",
+      "id": "bullseye",
+      "weaponButton": true,
+      "card": true,
+      "start": true,
+      "disabled": false,
+      "state": "PREPARING",
+      "expected": "pistol"
+    },
+    {
+      "weapon": "pistol",
+      "id": "call-sign",
+      "weaponButton": true,
+      "card": true,
+      "start": true,
+      "disabled": false,
+      "state": "PREPARING",
+      "expected": "pistol"
+    },
+    {
+      "weapon": "pistol",
+      "id": "pop-patrol",
+      "weaponButton": true,
+      "card": true,
+      "start": true,
+      "disabled": false,
+      "state": "PREPARING",
+      "expected": "pistol"
+    },
+    {
+      "weapon": "pistol",
+      "id": "twelve-clean",
+      "weaponButton": true,
+      "card": true,
+      "start": true,
+      "disabled": false,
+      "state": "PREPARING",
+      "expected": "pistol"
+    },
+    {
+      "weapon": "pistol",
+      "id": "quickdraw",
+      "weaponButton": true,
+      "card": true,
+      "start": true,
+      "disabled": false,
+      "state": "PREPARING",
+      "expected": "pistol"
+    },
+    {
+      "weapon": "uzi",
+      "id": "three-taps",
+      "weaponButton": true,
+      "card": true,
+      "start": true,
+      "disabled": false,
+      "state": "PREPARING",
+      "expected": "uzi"
+    },
+    {
+      "weapon": "uzi",
+      "id": "crossfire",
+      "weaponButton": true,
+      "card": true,
+      "start": true,
+      "disabled": false,
+      "state": "PREPARING",
+      "expected": "uzi"
+    },
+    {
+      "weapon": "uzi",
+      "id": "one-mag",
+      "weaponButton": true,
+      "card": true,
+      "start": true,
+      "disabled": false,
+      "state": "PREPARING",
+      "expected": "uzi"
+    },
+    {
+      "weapon": "uzi",
+      "id": "blink",
+      "weaponButton": true,
+      "card": true,
+      "start": true,
+      "disabled": false,
+      "state": "PREPARING",
+      "expected": "uzi"
+    },
+    {
+      "weapon": "uzi",
+      "id": "swarm",
+      "weaponButton": true,
+      "card": true,
+      "start": true,
+      "disabled": false,
+      "state": "PREPARING",
+      "expected": "uzi"
+    },
+    {
+      "weapon": "m4",
+      "id": "near-far",
+      "weaponButton": true,
+      "card": true,
+      "start": true,
+      "disabled": false,
+      "state": "PREPARING",
+      "expected": "m4"
+    },
+    {
+      "weapon": "m4",
+      "id": "identify",
+      "weaponButton": true,
+      "card": true,
+      "start": true,
+      "disabled": false,
+      "state": "PREPARING",
+      "expected": "m4"
+    },
+    {
+      "weapon": "m4",
+      "id": "priority",
+      "weaponButton": true,
+      "card": true,
+      "start": true,
+      "disabled": false,
+      "state": "PREPARING",
+      "expected": "m4"
+    },
+    {
+      "weapon": "m4",
+      "id": "controlled-pairs",
+      "weaponButton": true,
+      "card": true,
+      "start": true,
+      "disabled": false,
+      "state": "PREPARING",
+      "expected": "m4"
+    },
+    {
+      "weapon": "m4",
+      "id": "five-wide",
+      "weaponButton": true,
+      "card": true,
+      "start": true,
+      "disabled": false,
+      "state": "PREPARING",
+      "expected": "m4"
+    },
+    {
+      "weapon": "ak",
+      "id": "four-count",
+      "weaponButton": true,
+      "card": true,
+      "start": true,
+      "disabled": false,
+      "state": "PREPARING",
+      "expected": "ak"
+    },
+    {
+      "weapon": "ak",
+      "id": "heavy-beat",
+      "weaponButton": true,
+      "card": true,
+      "start": true,
+      "disabled": false,
+      "state": "PREPARING",
+      "expected": "ak"
+    },
+    {
+      "weapon": "ak",
+      "id": "torso-ladder",
+      "weaponButton": true,
+      "card": true,
+      "start": true,
+      "disabled": false,
+      "state": "PREPARING",
+      "expected": "ak"
+    },
+    {
+      "weapon": "ak",
+      "id": "two-mags",
+      "weaponButton": true,
+      "card": true,
+      "start": true,
+      "disabled": false,
+      "state": "PREPARING",
+      "expected": "ak"
+    },
+    {
+      "weapon": "ak",
+      "id": "reset-and-read",
+      "weaponButton": true,
+      "card": true,
+      "start": true,
+      "disabled": false,
+      "state": "PREPARING",
+      "expected": "ak"
+    },
+    {
+      "weapon": "shotgun",
+      "id": "seven-on-steel",
+      "weaponButton": true,
+      "card": true,
+      "start": true,
+      "disabled": false,
+      "state": "PREPARING",
+      "expected": "shotgun"
+    },
+    {
+      "weapon": "shotgun",
+      "id": "pump-rhythm",
+      "weaponButton": true,
+      "card": true,
+      "start": true,
+      "disabled": false,
+      "state": "PREPARING",
+      "expected": "shotgun"
+    },
+    {
+      "weapon": "shotgun",
+      "id": "double-door",
+      "weaponButton": true,
+      "card": true,
+      "start": true,
+      "disabled": false,
+      "state": "PREPARING",
+      "expected": "shotgun"
+    },
+    {
+      "weapon": "shotgun",
+      "id": "eight-shells",
+      "weaponButton": true,
+      "card": true,
+      "start": true,
+      "disabled": false,
+      "state": "PREPARING",
+      "expected": "shotgun"
+    },
+    {
+      "weapon": "shotgun",
+      "id": "center-mass",
+      "weaponButton": true,
+      "card": true,
+      "start": true,
+      "disabled": false,
+      "state": "PREPARING",
+      "expected": "shotgun"
+    },
+    {
+      "weapon": "aa12",
+      "id": "breach-wave",
+      "weaponButton": true,
+      "card": true,
+      "start": true,
+      "disabled": false,
+      "state": "PREPARING",
+      "expected": "aa12"
+    },
+    {
+      "weapon": "aa12",
+      "id": "five-pellet-focus",
+      "weaponButton": true,
+      "card": true,
+      "start": true,
+      "disabled": false,
+      "state": "PREPARING",
+      "expected": "aa12"
+    },
+    {
+      "weapon": "aa12",
+      "id": "drum-discipline",
+      "weaponButton": true,
+      "card": true,
+      "start": true,
+      "disabled": false,
+      "state": "PREPARING",
+      "expected": "aa12"
+    },
+    {
+      "weapon": "aa12",
+      "id": "switchback",
+      "weaponButton": true,
+      "card": true,
+      "start": true,
+      "disabled": false,
+      "state": "PREPARING",
+      "expected": "aa12"
+    },
+    {
+      "weapon": "aa12",
+      "id": "stairwell",
+      "weaponButton": true,
+      "card": true,
+      "start": true,
+      "disabled": false,
+      "state": "PREPARING",
+      "expected": "aa12"
+    },
+    {
+      "weapon": "revolver",
+      "id": "six-certainties",
+      "weaponButton": true,
+      "card": true,
+      "start": true,
+      "disabled": false,
+      "state": "PREPARING",
+      "expected": "revolver"
+    },
+    {
+      "weapon": "revolver",
+      "id": "triple-stack",
+      "weaponButton": true,
+      "card": true,
+      "start": true,
+      "disabled": false,
+      "state": "PREPARING",
+      "expected": "revolver"
+    },
+    {
+      "weapon": "revolver",
+      "id": "keyhole",
+      "weaponButton": true,
+      "card": true,
+      "start": true,
+      "disabled": false,
+      "state": "PREPARING",
+      "expected": "revolver"
+    },
+    {
+      "weapon": "revolver",
+      "id": "duel",
+      "weaponButton": true,
+      "card": true,
+      "start": true,
+      "disabled": false,
+      "state": "PREPARING",
+      "expected": "revolver"
+    },
+    {
+      "weapon": "revolver",
+      "id": "ring-reader",
+      "weaponButton": true,
+      "card": true,
+      "start": true,
+      "disabled": false,
+      "state": "PREPARING",
+      "expected": "revolver"
+    },
+    {
+      "weapon": "sniper",
+      "id": "long-glass",
+      "weaponButton": true,
+      "card": true,
+      "start": true,
+      "disabled": false,
+      "state": "PREPARING",
+      "expected": "sniper"
+    },
+    {
+      "weapon": "sniper",
+      "id": "four-deep",
+      "weaponButton": true,
+      "card": true,
+      "start": true,
+      "disabled": false,
+      "state": "PREPARING",
+      "expected": "sniper"
+    },
+    {
+      "weapon": "sniper",
+      "id": "hold-your-breath",
+      "weaponButton": true,
+      "card": true,
+      "start": true,
+      "disabled": false,
+      "state": "PREPARING",
+      "expected": "sniper"
+    },
+    {
+      "weapon": "sniper",
+      "id": "head-body-echo",
+      "weaponButton": true,
+      "card": true,
+      "start": true,
+      "disabled": false,
+      "state": "PREPARING",
+      "expected": "sniper"
+    },
+    {
+      "weapon": "sniper",
+      "id": "five-round-test",
+      "weaponButton": true,
+      "card": true,
+      "start": true,
+      "disabled": false,
+      "state": "PREPARING",
+      "expected": "sniper"
+    },
+    {
+      "weapon": "pistol",
+      "id": "first-steps",
+      "weaponButton": true,
+      "card": true,
+      "start": true,
+      "disabled": false,
+      "state": "PREPARING",
+      "expected": "pistol"
+    },
+    {
+      "weapon": "pistol",
+      "id": "draw-ready",
+      "weaponButton": true,
+      "card": true,
+      "start": true,
+      "disabled": false,
+      "state": "PREPARING",
+      "expected": "pistol"
+    },
+    {
+      "weapon": "m4",
+      "id": "reload-ready",
+      "weaponButton": true,
+      "card": true,
+      "start": true,
+      "disabled": false,
+      "state": "PREPARING",
+      "expected": "m4"
+    },
+    {
+      "weapon": "pistol",
+      "id": "pistol-rifle",
+      "weaponButton": true,
+      "card": true,
+      "start": true,
+      "disabled": false,
+      "state": "PREPARING",
+      "expected": "pistol"
+    },
+    {
+      "weapon": "shotgun",
+      "id": "three-gun",
+      "weaponButton": true,
+      "card": true,
+      "start": true,
+      "disabled": false,
+      "state": "PREPARING",
+      "expected": "pistol"
+    }
+  ],
+  "errors": [],
+  "warnings": [
+    "warning: The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127",
+    "warning: The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127",
+    "info: Grave Shift renderer: WebGPU.",
+    "info: Grave Shift opening perf: {\"toMenu\":21.94,\"segments\":{\"boot\":{\"at\":0,\"seconds\":0.78,\"frames\":17,\"over50\":3,\"over100\":1,\"worst\":150},\"caracal\":{\"at\":0.78,\"seconds\":15.2,\"frames\":147,\"over50\":35,\"over100\":22,\"worst\":2033},\"loading\":{\"at\":15.98,\"seconds\":5.96,\"frames\":241,\"over50\":21,\"over100\":4,\"worst\":183},\"menu\":{\"at\":"
+  ],
+  "frames": {
+    "count": 1069,
+    "over100": [
+      {
+        "stage": "training entry",
+        "ms": 7099.8,
+        "at": 29138.2
+      },
+      {
+        "stage": "training entry",
+        "ms": 133.2,
+        "at": 29271.4
+      },
+      {
+        "stage": "training entry",
+        "ms": 1433.4,
+        "at": 30771.5
+      },
+      {
+        "stage": "training entry",
+        "ms": 283.4,
+        "at": 31371.4
+      },
+      {
+        "stage": "training entry",
+        "ms": 100.1,
+        "at": 32488.2
+      },
+      {
+        "stage": "11-range-active",
+        "ms": 149.9,
+        "at": 41021.2
+      }
+    ]
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "tag": "before",
+  "shots": [
+    "boot-side-noon-before.png",
+    "boot-rear-noon-before.png",
+    "boot-side-overcast-before.png",
+    "boot-rear-overcast-before.png",
+    "boot-side-dusk-before.png",
+    "boot-rear-dusk-before.png",
+    "boot-side-night-before.png",
+    "boot-rear-night-before.png"
+  ],
+  "setup": {
+    "ok": true,
+    "unarmed": true,
+    "deckY": 0.25,
+    "hw": 1.02,
+    "plankTop": 0.244,
+    "playerY": 0.25,
+    "soles": {
+      "L": {
+        "minGapMm": 6,
+        "maxGapMm": 6
+      },
+      "R": {
+        "minGapMm": 0,
+        "maxGapMm": 50
+      }
+    }
+  }
+}

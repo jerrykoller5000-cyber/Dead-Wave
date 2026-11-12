@@ -1,0 +1,64 @@
+{
+  "frontBandsPassed": 7,
+  "bottomSectionsPassed": 13,
+  "minimumFrontExcessMm": 3.1900896584591436,
+  "minimumBottomExcessMm": 0.4443969970693331,
+  "outerFrontMm": 119.76444721221924,
+  "guard": {
+    "vertices": 852,
+    "closedEdges": 426,
+    "unchangedUpperVertices": 50,
+    "movedVertices": 472,
+    "maxMoveMm": 35.52807209546657,
+    "maxNormalError": 2.9981123805811194e-8,
+    "pin": [
+      0,
+      -0.038,
+      0.052000000000000005
+    ],
+    "baselineBox": {
+      "isBox3": true,
+      "min": {
+        "x": -0.01600000075995922,
+        "y": -0.09676738828420639,
+        "z": 0.008557915687561035
+      },
+      "max": {
+        "x": 0.01600000075995922,
+        "y": -0.02869669906795025,
+        "z": 0.10748094320297241
+      }
+    },
+    "candidateBox": {
+      "isBox3": true,
+      "min": {
+        "x": -0.01600000075995922,
+        "y": -0.10181857645511627,
+        "z": 0.008557915687561035
+      },
+      "max": {
+        "x": 0.01600000075995922,
+        "y": -0.02869669906795025,
+        "z": 0.11976444721221924
+      }
+    },
+    "oldHits": [
+      "mesh#0",
+      "mesh#52",
+      "mesh#60"
+    ],
+    "newHits": [
+      "mesh#0",
+      "mesh#52",
+      "mesh#60"
+    ]
+  },
+  "handResult": [
+    "DIAG {\"vertex\":3107,\"point\":[0.05058127490762132,0.03260755224214407,0.12786443033883899],\"bodyBox\":{\"isBox3\":true,\"min\":{\"x\":0.047145602483468,\"y\":0.02128453780458628,\"z\":0.12425205393931193},\"max\":{\"x\":0.0520563259350908,\"y\":0.03471543430669399,\"z\":0.131745840444367}},\"hand\":\"l\",\"mesh\":\"glove\",\"depth\":0.0001445707830452013}",
+    "INFO uzi the hands into each other: 0.2 mm",
+    "PASS guns checked up in first person: 1 of 1",
+    "PASS no part of either hand inside any part of a gun (deepest per gun, mm: uzi 0.1)",
+    "PASS neither hand through the other (D-140)",
+    "PASS the gloved wrists stay inside the sleeves at every gun's hip hold"
+  ]
+}

@@ -1,0 +1,1 @@
+Baseline reused from the accepted GT-20097 Wasp after images. Wasp constructor matches pre-guard-source.txt exactly. Fresh capture attempt hit the shared carry-copy crash.

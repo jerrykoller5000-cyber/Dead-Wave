@@ -1,0 +1,699 @@
+{
+ "at": "2026-11-12T17:46:46.697Z",
+ "label": "cloud",
+ "errors": [],
+ "mem": {
+  "usedMB": 685.4,
+  "totalMB": 688.4,
+  "geometries": 3384,
+  "textures": 184,
+  "backend": "WebGLBackend"
+ },
+ "liveSampledMB": 123.5,
+ "byFile": [
+  {
+   "mb": 48.13,
+   "k": "vendor/three/three.core.js"
+  },
+  {
+   "mb": 33.32,
+   "k": "(native)"
+  },
+  {
+   "mb": 27.97,
+   "k": "vendor/three/three.webgpu.js"
+  },
+  {
+   "mb": 8.76,
+   "k": "index.html"
+  },
+  {
+   "mb": 0.39,
+   "k": "studio/marine-hand.js"
+  },
+  {
+   "mb": 0.33,
+   "k": "core/geometry.js"
+  },
+  {
+   "mb": 0.26,
+   "k": "assets/intro/opening-perf.js"
+  },
+  {
+   "mb": 0.2,
+   "k": "studio/weapon-sidearms.js"
+  },
+  {
+   "mb": 0.2,
+   "k": "world/coldwater.js"
+  },
+  {
+   "mb": 0.2,
+   "k": "studio/marine-skin.js"
+  },
+  {
+   "mb": 0.2,
+   "k": "game/viewmodel.js"
+  },
+  {
+   "mb": 0.2,
+   "k": "studio/marine-body.js"
+  },
+  {
+   "mb": 0.2,
+   "k": "studio/weapon-model-hooks.js"
+  },
+  {
+   "mb": 0.15,
+   "k": "game/trapper-path.js"
+  },
+  {
+   "mb": 0.13,
+   "k": "game/training-containment.js"
+  },
+  {
+   "mb": 0.13,
+   "k": "assets/world/objective-props.js"
+  },
+  {
+   "mb": 0.13,
+   "k": "ui/range-feature.js"
+  },
+  {
+   "mb": 0.13,
+   "k": "world/training.js"
+  },
+  {
+   "mb": 0.13,
+   "k": "studio/weapon-heavy.js"
+  },
+  {
+   "mb": 0.13,
+   "k": "studio/marine-dive.js"
+  },
+  {
+   "mb": 0.13,
+   "k": "ui/zombie-audio.js"
+  },
+  {
+   "mb": 0.13,
+   "k": "studio/clip.js"
+  },
+  {
+   "mb": 0.13,
+   "k": "assets/world/campsites.js"
+  },
+  {
+   "mb": 0.07,
+   "k": "world/history-props.js"
+  },
+  {
+   "mb": 0.07,
+   "k": "world/cargo-plane.js"
+  },
+  {
+   "mb": 0.07,
+   "k": "world/first-people.js"
+  },
+  {
+   "mb": 0.07,
+   "k": "ui/weapon-sling.js"
+  },
+  {
+   "mb": 0.07,
+   "k": "ui/marine-face.js"
+  },
+  {
+   "mb": 0.07,
+   "k": "ui/training-map.js"
+  },
+  {
+   "mb": 0.07,
+   "k": "core/audio.js"
+  }
+ ],
+ "bySite": [
+  {
+   "mb": 21.71,
+   "k": "Object3D vendor/three/three.core.js:12922"
+  },
+  {
+   "mb": 11.46,
+   "k": "set :0"
+  },
+  {
+   "mb": 8.9,
+   "k": "from :0"
+  },
+  {
+   "mb": 6.24,
+   "k": "Material vendor/three/three.core.js:15982"
+  },
+  {
+   "mb": 3.87,
+   "k": "MeshStandardMaterial vendor/three/three.core.js:37193"
+  },
+  {
+   "mb": 2.75,
+   "k": "getForRender vendor/three/three.webgpu.js:27168"
+  },
+  {
+   "mb": 2.63,
+   "k": "push :0"
+  },
+  {
+   "mb": 2.43,
+   "k": "WeakMap :0"
+  },
+  {
+   "mb": 2.1,
+   "k": "get buffer vendor/three/three.webgpu.js:52698"
+  },
+  {
+   "mb": 1.9,
+   "k": "getUniformFromNode vendor/three/three.webgpu.js:44310"
+  },
+  {
+   "mb": 1.84,
+   "k": "BufferGeometry vendor/three/three.core.js:18485"
+  },
+  {
+   "mb": 1.82,
+   "k": "get :0"
+  },
+  {
+   "mb": 1.71,
+   "k": "Float32BufferAttribute vendor/three/three.core.js:18437"
+  },
+  {
+   "mb": 1.64,
+   "k": "createBindings vendor/three/three.webgpu.js:41491"
+  },
+  {
+   "mb": 1.44,
+   "k": "getMaterialData vendor/three/three.webgpu.js:254"
+  },
+  {
+   "mb": 1.42,
+   "k": "(V8 API) :0"
+  },
+  {
+   "mb": 1.31,
+   "k": "createRenderObject vendor/three/three.webgpu.js:26092"
+  },
+  {
+   "mb": 1.31,
+   "k": "RenderObject vendor/three/three.webgpu.js:25176"
+  },
+  {
+   "mb": 1.18,
+   "k": "Matrix4 vendor/three/three.core.js:11088"
+  },
+  {
+   "mb": 1.18,
+   "k": "UniformBuffer vendor/three/three.webgpu.js:52528"
+  },
+  {
+   "mb": 1.11,
+   "k": "toLowerCase :0"
+  },
+  {
+   "mb": 1,
+   "k": "(anon) index.html:1360"
+  },
+  {
+   "mb": 0.92,
+   "k": "getRenderObjectData vendor/three/three.webgpu.js:143"
+  },
+  {
+   "mb": 0.85,
+   "k": "Float32Array :0"
+  },
+  {
+   "mb": 0.79,
+   "k": "get vendor/three/three.webgpu.js:26002"
+  },
+  {
+   "mb": 0.79,
+   "k": "setIndex vendor/three/three.core.js:18639"
+  },
+  {
+   "mb": 0.79,
+   "k": "generateUUID vendor/three/three.core.js:1790"
+  },
+  {
+   "mb": 0.79,
+   "k": "updateBindings vendor/three/three.webgpu.js:60750"
+  },
+  {
+   "mb": 0.72,
+   "k": "initGeometry vendor/three/three.webgpu.js:26479"
+  },
+  {
+   "mb": 0.66,
+   "k": "getUniformFromNode vendor/three/three.webgpu.js:54657"
+  },
+  {
+   "mb": 0.66,
+   "k": "buildPlane vendor/three/three.core.js:20440"
+  },
+  {
+   "mb": 0.59,
+   "k": "Node vendor/three/three.webgpu.js:1087"
+  },
+  {
+   "mb": 0.59,
+   "k": "tbSnapshot index.html:19477"
+  },
+  {
+   "mb": 0.59,
+   "k": "convertBufferAttribute vendor/three/three.core.js:19527"
+  },
+  {
+   "mb": 0.59,
+   "k": "createAttribute vendor/three/three.webgpu.js:55475"
+  },
+  {
+   "mb": 0.59,
+   "k": "getAttributesData vendor/three/three.webgpu.js:204"
+  },
+  {
+   "mb": 0.53,
+   "k": "tick index.html:68059"
+  },
+  {
+   "mb": 0.53,
+   "k": "makeTree index.html:18859"
+  },
+  {
+   "mb": 0.53,
+   "k": "add vendor/three/three.core.js:13574"
+  },
+  {
+   "mb": 0.52,
+   "k": "computeBoundingSphere vendor/three/three.core.js:19123"
+  },
+  {
+   "mb": 0.52,
+   "k": "Vector3NodeUniform vendor/three/three.webgpu.js:42368"
+  },
+  {
+   "mb": 0.52,
+   "k": "getForRender vendor/three/three.webgpu.js:27556"
+  },
+  {
+   "mb": 0.49,
+   "k": "copy vendor/three/three.core.js:14392"
+  },
+  {
+   "mb": 0.46,
+   "k": "BufferAttribute vendor/three/three.core.js:17443"
+  },
+  {
+   "mb": 0.46,
+   "k": "bakeFoliageChunks index.html:11865"
+  },
+  {
+   "mb": 0.46,
+   "k": "(anon) index.html:19856"
+  },
+  {
+   "mb": 0.43,
+   "k": "enterTraining index.html:65705"
+  },
+  {
+   "mb": 0.4,
+   "k": "makeGrassTuft index.html:11941"
+  },
+  {
+   "mb": 0.4,
+   "k": "(BYTECODE_COMPILER) :0"
+  },
+  {
+   "mb": 0.4,
+   "k": "slice :0"
+  },
+  {
+   "mb": 0.39,
+   "k": "BoxGeometry vendor/three/three.core.js:20382"
+  },
+  {
+   "mb": 0.39,
+   "k": "getAttributes vendor/three/three.webgpu.js:25554"
+  },
+  {
+   "mb": 0.39,
+   "k": "getNextRenderItem vendor/three/three.webgpu.js:28029"
+  },
+  {
+   "mb": 0.39,
+   "k": "updateAttributes vendor/three/three.webgpu.js:26528"
+  },
+  {
+   "mb": 0.39,
+   "k": "MeshBasicMaterial vendor/three/three.core.js:16987"
+  },
+  {
+   "mb": 0.39,
+   "k": "Box3 vendor/three/three.core.js:9225"
+  },
+  {
+   "mb": 0.33,
+   "k": "clone vendor/three/three.core.js:11181"
+  },
+  {
+   "mb": 0.33,
+   "k": "NodeUniformsGroup vendor/three/three.webgpu.js:53091"
+  },
+  {
+   "mb": 0.33,
+   "k": "SampledTexture vendor/three/three.webgpu.js:53138"
+  },
+  {
+   "mb": 0.33,
+   "k": "update vendor/three/three.webgpu.js:24925"
+  }
+ ],
+ "byOwner": [
+  {
+   "mb": 8.69,
+   "k": "compileForLiveTarget index.html:69954  >>  set :0"
+  },
+  {
+   "mb": 5.57,
+   "k": "makeTree index.html:18859  >>  Object3D vendor/three/three.core.js:12922"
+  },
+  {
+   "mb": 4.61,
+   "k": "compileForLiveTarget index.html:69954  >>  from :0"
+  },
+  {
+   "mb": 2.5,
+   "k": "renderFrame index.html:2522  >>  from :0"
+  },
+  {
+   "mb": 2.36,
+   "k": "add world/coldwater.js:22  >>  Object3D vendor/three/three.core.js:12922"
+  },
+  {
+   "mb": 2.3,
+   "k": "makeTree index.html:18859  >>  Material vendor/three/three.core.js:15982"
+  },
+  {
+   "mb": 2.21,
+   "k": "compileForLiveTarget index.html:69954  >>  getForRender vendor/three/three.webgpu.js:27168"
+  },
+  {
+   "mb": 1.9,
+   "k": "cloneLean index.html:16607  >>  Object3D vendor/three/three.core.js:12922"
+  },
+  {
+   "mb": 1.84,
+   "k": "makeTree index.html:18859  >>  MeshStandardMaterial vendor/three/three.core.js:37193"
+  },
+  {
+   "mb": 1.64,
+   "k": "matsFrom index.html:18079  >>  Material vendor/three/three.core.js:15982"
+  },
+  {
+   "mb": 1.57,
+   "k": "compileForLiveTarget index.html:69954  >>  getUniformFromNode vendor/three/three.webgpu.js:44310"
+  },
+  {
+   "mb": 1.49,
+   "k": "compileForLiveTarget index.html:69954  >>  get :0"
+  },
+  {
+   "mb": 1.44,
+   "k": "SNp.updateShadow index.html:2489  >>  set :0"
+  },
+  {
+   "mb": 1.42,
+   "k": "(V8 API) :0  >>  (V8 API) :0"
+  },
+  {
+   "mb": 1.38,
+   "k": "renderFrame index.html:2522  >>  getMaterialData vendor/three/three.webgpu.js:254"
+  },
+  {
+   "mb": 1.33,
+   "k": "handSurface studio/marine-hand.js:721  >>  push :0"
+  },
+  {
+   "mb": 1.11,
+   "k": "compileForLiveTarget index.html:69954  >>  WeakMap :0"
+  },
+  {
+   "mb": 1,
+   "k": "(anon) index.html:1360  >>  (anon) index.html:1360"
+  },
+  {
+   "mb": 0.92,
+   "k": "compileForLiveTarget index.html:69954  >>  get buffer vendor/three/three.webgpu.js:52698"
+  },
+  {
+   "mb": 0.85,
+   "k": "renderFrame index.html:2522  >>  getRenderObjectData vendor/three/three.webgpu.js:143"
+  },
+  {
+   "mb": 0.79,
+   "k": "SNp.updateShadow index.html:2489  >>  from :0"
+  },
+  {
+   "mb": 0.79,
+   "k": "cloneLean game/viewmodel.js:300  >>  Object3D vendor/three/three.core.js:12922"
+  },
+  {
+   "mb": 0.79,
+   "k": "compileForLiveTarget index.html:69954  >>  RenderObject vendor/three/three.webgpu.js:25176"
+  },
+  {
+   "mb": 0.75,
+   "k": "unbake studio/marine-hand.js:833  >>  from :0"
+  },
+  {
+   "mb": 0.72,
+   "k": "renderFrame index.html:2522  >>  set :0"
+  },
+  {
+   "mb": 0.66,
+   "k": "makeZombieMesh index.html:43821  >>  Object3D vendor/three/three.core.js:12922"
+  },
+  {
+   "mb": 0.66,
+   "k": "restore studio/zombie-concepts.js:64  >>  Object3D vendor/three/three.core.js:12922"
+  },
+  {
+   "mb": 0.66,
+   "k": "compileForLiveTarget index.html:69954  >>  createRenderObject vendor/three/three.webgpu.js:26092"
+  },
+  {
+   "mb": 0.66,
+   "k": "renderFrame index.html:2522  >>  get buffer vendor/three/three.webgpu.js:52698"
+  },
+  {
+   "mb": 0.66,
+   "k": "renderFrame index.html:2522  >>  WeakMap :0"
+  },
+  {
+   "mb": 0.59,
+   "k": "renderFrame index.html:2522  >>  Matrix4 vendor/three/three.core.js:11088"
+  },
+  {
+   "mb": 0.59,
+   "k": "Object3D vendor/three/three.core.js:12922  >>  Object3D vendor/three/three.core.js:12922"
+  },
+  {
+   "mb": 0.59,
+   "k": "tbSnapshot index.html:19477  >>  tbSnapshot index.html:19477"
+  },
+  {
+   "mb": 0.59,
+   "k": "renderFrame index.html:2522  >>  createBindings vendor/three/three.webgpu.js:41491"
+  },
+  {
+   "mb": 0.59,
+   "k": "compileForLiveTarget index.html:69954  >>  initGeometry vendor/three/three.webgpu.js:26479"
+  },
+  {
+   "mb": 0.59,
+   "k": "matsFrom index.html:18079  >>  MeshStandardMaterial vendor/three/three.core.js:37193"
+  },
+  {
+   "mb": 0.53,
+   "k": "tick index.html:68059  >>  tick index.html:68059"
+  },
+  {
+   "mb": 0.53,
+   "k": "makeTree index.html:18859  >>  makeTree index.html:18859"
+  },
+  {
+   "mb": 0.52,
+   "k": "add world/coldwater.js:22  >>  Material vendor/three/three.core.js:15982"
+  },
+  {
+   "mb": 0.52,
+   "k": "SNp.updateShadow index.html:2489  >>  createRenderObject vendor/three/three.webgpu.js:26092"
+  },
+  {
+   "mb": 0.52,
+   "k": "SNp.updateShadow index.html:2489  >>  createBindings vendor/three/three.webgpu.js:41491"
+  },
+  {
+   "mb": 0.52,
+   "k": "compileForLiveTarget index.html:69954  >>  createBindings vendor/three/three.webgpu.js:41491"
+  },
+  {
+   "mb": 0.52,
+   "k": "compileForLiveTarget index.html:69954  >>  getUniformFromNode vendor/three/three.webgpu.js:54657"
+  },
+  {
+   "mb": 0.52,
+   "k": "rbox core/geometry.js:94  >>  convertBufferAttribute vendor/three/three.core.js:19527"
+  },
+  {
+   "mb": 0.52,
+   "k": "compileForLiveTarget index.html:69954  >>  UniformBuffer vendor/three/three.webgpu.js:52528"
+  },
+  {
+   "mb": 0.52,
+   "k": "batchSurfaces studio/zombie-concepts.js:769  >>  Object3D vendor/three/three.core.js:12922"
+  },
+  {
+   "mb": 0.52,
+   "k": "SNp.updateShadow index.html:2489  >>  UniformBuffer vendor/three/three.webgpu.js:52528"
+  },
+  {
+   "mb": 0.52,
+   "k": "makeTree index.html:18859  >>  toLowerCase :0"
+  },
+  {
+   "mb": 0.52,
+   "k": "SNp.updateShadow index.html:2489  >>  WeakMap :0"
+  },
+  {
+   "mb": 0.52,
+   "k": "renderFrame index.html:2522  >>  getAttributesData vendor/three/three.webgpu.js:204"
+  },
+  {
+   "mb": 0.49,
+   "k": "warmEffectPools index.html:69462  >>  copy vendor/three/three.core.js:14392"
+  },
+  {
+   "mb": 0.46,
+   "k": "compileForLiveTarget index.html:69954  >>  get vendor/three/three.webgpu.js:26002"
+  },
+  {
+   "mb": 0.46,
+   "k": "SNp.updateShadow index.html:2489  >>  get buffer vendor/three/three.webgpu.js:52698"
+  },
+  {
+   "mb": 0.46,
+   "k": "bakeFoliageChunks index.html:11865  >>  bakeFoliageChunks index.html:11865"
+  },
+  {
+   "mb": 0.46,
+   "k": "buildForest index.html:19799  >>  (anon) index.html:19856"
+  },
+  {
+   "mb": 0.43,
+   "k": "enterTraining index.html:65705  >>  enterTraining index.html:65705"
+  },
+  {
+   "mb": 0.4,
+   "k": "makeGrassTuft index.html:11941  >>  makeGrassTuft index.html:11941"
+  },
+  {
+   "mb": 0.4,
+   "k": "(BYTECODE_COMPILER) :0  >>  (BYTECODE_COMPILER) :0"
+  },
+  {
+   "mb": 0.4,
+   "k": "compileForLiveTarget index.html:69954  >>  push :0"
+  },
+  {
+   "mb": 0.39,
+   "k": "compileForLiveTarget index.html:69954  >>  Node vendor/three/three.webgpu.js:1087"
+  },
+  {
+   "mb": 0.39,
+   "k": "put index.html:27424  >>  Object3D vendor/three/three.core.js:12922"
+  },
+  {
+   "mb": 0.39,
+   "k": "box world/training.js:231  >>  Float32BufferAttribute vendor/three/three.core.js:18437"
+  },
+  {
+   "mb": 0.39,
+   "k": "prepareWarmup game/training-camera-collision.js:100  >>  Object3D vendor/three/three.core.js:12922"
+  },
+  {
+   "mb": 0.39,
+   "k": "compileForLiveTarget index.html:69954  >>  updateAttributes vendor/three/three.webgpu.js:26528"
+  },
+  {
+   "mb": 0.39,
+   "k": "compileForLiveTarget index.html:69954  >>  Vector3NodeUniform vendor/three/three.webgpu.js:42368"
+  },
+  {
+   "mb": 0.39,
+   "k": "matsFrom index.html:18079  >>  toLowerCase :0"
+  },
+  {
+   "mb": 0.39,
+   "k": "compileForLiveTarget index.html:69954  >>  createAttribute vendor/three/three.webgpu.js:55475"
+  },
+  {
+   "mb": 0.39,
+   "k": "renderFrame index.html:2522  >>  RenderObject vendor/three/three.webgpu.js:25176"
+  },
+  {
+   "mb": 0.34,
+   "k": "warmArmoryPics index.html:30932  >>  set :0"
+  },
+  {
+   "mb": 0.33,
+   "k": "copy studio/zombie-concepts.js:66  >>  Material vendor/three/three.core.js:15982"
+  },
+  {
+   "mb": 0.33,
+   "k": "mergeRigidMeshes index.html:20822  >>  Object3D vendor/three/three.core.js:12922"
+  },
+  {
+   "mb": 0.33,
+   "k": "renderFrame index.html:2522  >>  clone vendor/three/three.core.js:11181"
+  },
+  {
+   "mb": 0.33,
+   "k": "fadeCopy game/training-camera-collision.js:67  >>  Material vendor/three/three.core.js:15982"
+  },
+  {
+   "mb": 0.33,
+   "k": "box world/training.js:231  >>  setIndex vendor/three/three.core.js:18639"
+  },
+  {
+   "mb": 0.33,
+   "k": "compileForLiveTarget index.html:69954  >>  getNextRenderItem vendor/three/three.webgpu.js:28029"
+  },
+  {
+   "mb": 0.33,
+   "k": "add world/coldwater.js:22  >>  MeshBasicMaterial vendor/three/three.core.js:16987"
+  },
+  {
+   "mb": 0.33,
+   "k": "update vendor/three/three.webgpu.js:24925  >>  update vendor/three/three.webgpu.js:24925"
+  },
+  {
+   "mb": 0.31,
+   "k": "wristTransition ui/marine-kit-fit.js:75  >>  push :0"
+  },
+  {
+   "mb": 0.3,
+   "k": "(IDLE_EXTERNAL) :0  >>  (IDLE_EXTERNAL) :0"
+  },
+  {
+   "mb": 0.27,
+   "k": "handSurface studio/marine-hand.js:721  >>  slice :0"
+  }
+ ]
+}

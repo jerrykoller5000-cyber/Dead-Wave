@@ -1,0 +1,228 @@
+{
+  "stages": [
+    {
+      "name": "cif-real-open",
+      "data": {
+        "open": true
+      }
+    },
+    {
+      "name": "cif-real-camo",
+      "data": {
+        "open": true,
+        "camo": "m81"
+      }
+    },
+    {
+      "name": "armory-real-rack",
+      "data": {
+        "open": true
+      }
+    },
+    {
+      "name": "camo-pistol",
+      "data": {
+        "gun": "pistol"
+      }
+    },
+    {
+      "name": "camo-revolver",
+      "data": {
+        "gun": "revolver"
+      }
+    },
+    {
+      "name": "camo-uzi",
+      "data": {
+        "gun": "uzi"
+      }
+    },
+    {
+      "name": "camo-m4",
+      "data": {
+        "gun": "m4"
+      }
+    },
+    {
+      "name": "camo-ak",
+      "data": {
+        "gun": "ak"
+      }
+    },
+    {
+      "name": "camo-shotgun",
+      "data": {
+        "gun": "shotgun"
+      }
+    },
+    {
+      "name": "camo-aa12",
+      "data": {
+        "gun": "aa12"
+      }
+    },
+    {
+      "name": "camo-sniper",
+      "data": {
+        "gun": "sniper"
+      }
+    },
+    {
+      "name": "camo-minigun",
+      "data": {
+        "gun": "minigun"
+      }
+    },
+    {
+      "name": "camo-launcher",
+      "data": {
+        "gun": "launcher"
+      }
+    },
+    {
+      "name": "camo-flamer",
+      "data": {
+        "gun": "flamer"
+      }
+    },
+    {
+      "name": "camo-chainsaw",
+      "data": {
+        "gun": "chainsaw"
+      }
+    },
+    {
+      "name": "blade-knife-eye",
+      "data": {
+        "t": 0.0263999999985099,
+        "machete": false,
+        "katana": false,
+        "gun": "m4"
+      }
+    },
+    {
+      "name": "blade-knife-hip",
+      "data": {
+        "t": 0
+      }
+    },
+    {
+      "name": "blade-machete-eye",
+      "data": {
+        "t": 0.2303999999985099,
+        "machete": true,
+        "katana": false,
+        "gun": "m4"
+      }
+    },
+    {
+      "name": "blade-machete-hip",
+      "data": {
+        "t": 0.19559999999403957
+      }
+    },
+    {
+      "name": "blade-katana-eye",
+      "data": {
+        "t": 0.10619999999552965,
+        "machete": false,
+        "katana": true,
+        "gun": "m4"
+      }
+    },
+    {
+      "name": "blade-katana-hip",
+      "data": {
+        "t": 0.1278999999985099
+      }
+    },
+    {
+      "name": "grenade-release",
+      "data": {
+        "phase": "throw",
+        "t": 0.035300000004470346,
+        "inHand": true,
+        "queued": false
+      }
+    },
+    {
+      "name": "watchman-mounted",
+      "data": {
+        "mounted": true,
+        "state": {
+          "belt": 500,
+          "feedT": 0,
+          "reserve": 0,
+          "flash": false,
+          "hud": "500 / 1000 · 0 spare · AUTO",
+          "hudName": "Watchman MG"
+        }
+      }
+    },
+    {
+      "name": "watchman-fired",
+      "data": {
+        "belt": 493,
+        "feedT": 0,
+        "reserve": 0,
+        "flash": false,
+        "hud": "493 / 1000 · 0 spare · AUTO",
+        "hudName": "Watchman MG"
+      }
+    },
+    {
+      "name": "watchman-carried",
+      "data": {
+        "carried": {
+          "hp": 120,
+          "kind": "m240",
+          "belt": 493,
+          "liftAge": 0
+        }
+      }
+    }
+  ],
+  "errors": [],
+  "spikes": [
+    {
+      "stage": "cif-real-open",
+      "ms": 116.40000000000146
+    },
+    {
+      "stage": "camo-pistol",
+      "ms": 166.6999999999971
+    },
+    {
+      "stage": "camo-pistol",
+      "ms": 383.09999999999854
+    },
+    {
+      "stage": "camo-revolver",
+      "ms": 249.90000000000146
+    },
+    {
+      "stage": "camo-launcher",
+      "ms": 166.29999999999563
+    },
+    {
+      "stage": "camo-chainsaw",
+      "ms": 200
+    },
+    {
+      "stage": "watchman-mounted",
+      "ms": 116.39999999999418
+    },
+    {
+      "stage": "watchman-mounted",
+      "ms": 116.39999999999418
+    },
+    {
+      "stage": "watchman-mounted",
+      "ms": 116.40000000000873
+    },
+    {
+      "stage": "watchman-carried",
+      "ms": 133.10000000000582
+    }
+  ]
+}

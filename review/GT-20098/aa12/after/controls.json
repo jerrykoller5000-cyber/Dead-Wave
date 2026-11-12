@@ -1,0 +1,16 @@
+{
+  "controls": {
+    "trigger": "controls-trigger",
+    "lightSwitch": "controls-lightSwitch-aa12",
+    "selector": "controls-selector",
+    "magRelease": "controls-magRelease",
+    "drumLatchLeft": "controls-drumLatchLeft",
+    "drumLatchRight": "controls-drumLatchRight",
+    "chargingHandle": "work"
+  },
+  "triggerPin": [
+    0,
+    -0.088,
+    -0.066
+  ]
+}

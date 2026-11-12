@@ -219,7 +219,7 @@ function mergeRigidMeshes(root, gearParts, keep) {
   for (const grp of groups) {
     const byMat = new Map();
     for (const c of grp.children) {
-      if (!c.isMesh || keep.has(c) || c.children.length || !c.geometry || !c.geometry.attributes.position || Array.isArray(c.material)) continue;
+      if (!c.isMesh || c.isInstancedMesh || keep.has(c) || c.children.length || !c.geometry || !c.geometry.attributes.position || Array.isArray(c.material)) continue;   // CB-316: an instanced batch is not one part
       let byGear = byMat.get(c.material); if (!byGear) { byGear = new Map(); byMat.set(c.material, byGear); }
       const gk = gearOf.get(c) || '';
       let list = byGear.get(gk); if (!list) { list = []; byGear.set(gk, list); }

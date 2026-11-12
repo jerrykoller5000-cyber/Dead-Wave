@@ -44,12 +44,12 @@ try {
     await page.waitForTimeout(3000);
     for (const light of LIGHTS) {
       await page.evaluate((l) => { window.eyeLight = l; }, light); await page.waitForTimeout(+process.env.SETTLE || 4000);
-      await page.screenshot({ path: path.join(out, `${key}-hip-${light}.png`) }); log(key, light);
+      await page.screenshot({ path: path.join(out, `${key}-hip-${light}.png`), timeout: 300000 }); log(key, light);
     }
     if (!process.env.NOAIM) {
       await page.evaluate(() => { window.eyeLight = 'noon'; TT.setZoomHeldDbg(true); TT.setOtsAimDbg(0, 0); });
       await page.waitForFunction(() => { const f = TT.fpDbg(); return f && f.ads >= 0.99; }, null, { timeout: 120000, polling: 500 });
-      await page.waitForTimeout(4000); await page.screenshot({ path: path.join(out, `${key}-aimed-noon.png`) }); log(key, 'aimed');
+      await page.waitForTimeout(4000); await page.screenshot({ path: path.join(out, `${key}-aimed-noon.png`), timeout: 300000 }); log(key, 'aimed');
       await page.evaluate(() => { TT.setZoomHeldDbg(false); TT.setOtsAimDbg(0, -0.08); });
     }
   }

@@ -1,0 +1,36 @@
+{
+  "onlyPistolProfileAndTipChanged": true,
+  "onlyPistolRoundHeightChanged": true,
+  "roundCenterDelta": [
+    0,
+    0.001006560716405147,
+    0.0003113657170171445
+  ],
+  "caseSize": [
+    0.012199999764561653,
+    0.02280000038444996,
+    0.012199999764561653
+  ],
+  "liveSize": [
+    0.012199999764561653,
+    0.03240000084042549,
+    0.012199999764561653
+  ],
+  "gap": {
+    "lowerMm": 0,
+    "upperMm": 0.0078125
+  },
+  "additionalLiftNeeded": 0,
+  "cameraDelta": 0,
+  "reloadSamples": 16,
+  "maximumRoundGloveMm": null,
+  "reloadCoverageValid": false,
+  "reloadCoverageNote": "Initial witness skipped degenerate lathe poles; zero is not clearance proof, stronger closed-body witness pending",
+  "closedBodyCounts": [
+    0
+  ],
+  "sourceHashes": {
+    "casings": "bbb863711356d6296ef16c2f334b90bbd4eab760aff60f5d5e2474785ce39de2",
+    "sidearms": "ef87cdfc5ec3fa5bf586668036c980997f24d6c390062193612b9d6646a2e162"
+  }
+}

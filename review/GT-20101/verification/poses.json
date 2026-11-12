@@ -1,0 +1,418 @@
+[
+  {
+    "phase": 0.15,
+    "light": "noon",
+    "state": {
+      "timer": 1.1475,
+      "anim": 1.35,
+      "weapon": "pistol"
+    },
+    "position": [
+      1.3877787807814457e-17,
+      -0.1919274052478136,
+      -0.025500000000000037
+    ],
+    "contact": {
+      "visible": true,
+      "closedBodies": 0,
+      "r": {
+        "worst": 0,
+        "where": ""
+      },
+      "l": {
+        "worst": 0,
+        "where": ""
+      }
+    }
+  },
+  {
+    "phase": 0.15,
+    "light": "overcast",
+    "state": {
+      "timer": 1.1475,
+      "anim": 1.35,
+      "weapon": "pistol"
+    },
+    "position": [
+      -1.3877787807814457e-17,
+      -0.19192740524781365,
+      -0.025500000000000037
+    ],
+    "contact": {
+      "visible": true,
+      "closedBodies": 0,
+      "r": {
+        "worst": 0,
+        "where": ""
+      },
+      "l": {
+        "worst": 0,
+        "where": ""
+      }
+    }
+  },
+  {
+    "phase": 0.15,
+    "light": "dusk",
+    "state": {
+      "timer": 1.1475,
+      "anim": 1.35,
+      "weapon": "pistol"
+    },
+    "position": [
+      -4.163336342344337e-17,
+      -0.19192740524781363,
+      -0.025500000000000148
+    ],
+    "contact": {
+      "visible": true,
+      "closedBodies": 0,
+      "r": {
+        "worst": 0,
+        "where": ""
+      },
+      "l": {
+        "worst": 0,
+        "where": ""
+      }
+    }
+  },
+  {
+    "phase": 0.15,
+    "light": "night",
+    "state": {
+      "timer": 1.1475,
+      "anim": 1.35,
+      "weapon": "pistol"
+    },
+    "position": [
+      -2.220446049250313e-16,
+      -0.19192740524781354,
+      -0.02550000000000019
+    ],
+    "contact": {
+      "visible": true,
+      "closedBodies": 0,
+      "r": {
+        "worst": 0,
+        "where": ""
+      },
+      "l": {
+        "worst": 0,
+        "where": ""
+      }
+    }
+  },
+  {
+    "phase": 0.35,
+    "light": "noon",
+    "state": {
+      "timer": 0.8775000000000001,
+      "anim": 1.35,
+      "weapon": "pistol"
+    },
+    "position": [
+      0,
+      -0.0877,
+      -0.0255
+    ],
+    "contact": {
+      "visible": true,
+      "closedBodies": 0,
+      "r": {
+        "worst": 0,
+        "where": ""
+      },
+      "l": {
+        "worst": 0,
+        "where": ""
+      }
+    }
+  },
+  {
+    "phase": 0.35,
+    "light": "overcast",
+    "state": {
+      "timer": 0.8775000000000001,
+      "anim": 1.35,
+      "weapon": "pistol"
+    },
+    "position": [
+      0,
+      -0.0877,
+      -0.0255
+    ],
+    "contact": {
+      "visible": true,
+      "closedBodies": 0,
+      "r": {
+        "worst": 0,
+        "where": ""
+      },
+      "l": {
+        "worst": 0,
+        "where": ""
+      }
+    }
+  },
+  {
+    "phase": 0.35,
+    "light": "dusk",
+    "state": {
+      "timer": 0.8775000000000001,
+      "anim": 1.35,
+      "weapon": "pistol"
+    },
+    "position": [
+      0,
+      -0.0877,
+      -0.0255
+    ],
+    "contact": {
+      "visible": true,
+      "closedBodies": 0,
+      "r": {
+        "worst": 0,
+        "where": ""
+      },
+      "l": {
+        "worst": 0,
+        "where": ""
+      }
+    }
+  },
+  {
+    "phase": 0.35,
+    "light": "night",
+    "state": {
+      "timer": 0.8775000000000001,
+      "anim": 1.35,
+      "weapon": "pistol"
+    },
+    "position": [
+      0,
+      -0.0877,
+      -0.0255
+    ],
+    "contact": {
+      "visible": true,
+      "closedBodies": 0,
+      "r": {
+        "worst": 0,
+        "where": ""
+      },
+      "l": {
+        "worst": 0,
+        "where": ""
+      }
+    }
+  },
+  {
+    "phase": 0.55,
+    "light": "noon",
+    "state": {
+      "timer": 0.6074999999999999,
+      "anim": 1.35,
+      "weapon": "pistol"
+    },
+    "position": [
+      -4.163336342344337e-17,
+      -0.1526999999999999,
+      -0.025500000000000092
+    ],
+    "contact": {
+      "visible": true,
+      "closedBodies": 0,
+      "r": {
+        "worst": 0,
+        "where": ""
+      },
+      "l": {
+        "worst": 0,
+        "where": ""
+      }
+    }
+  },
+  {
+    "phase": 0.55,
+    "light": "overcast",
+    "state": {
+      "timer": 0.6074999999999999,
+      "anim": 1.35,
+      "weapon": "pistol"
+    },
+    "position": [
+      -5.551115123125783e-17,
+      -0.15269999999999978,
+      -0.025500000000000203
+    ],
+    "contact": {
+      "visible": true,
+      "closedBodies": 0,
+      "r": {
+        "worst": 0,
+        "where": ""
+      },
+      "l": {
+        "worst": 0,
+        "where": ""
+      }
+    }
+  },
+  {
+    "phase": 0.55,
+    "light": "dusk",
+    "state": {
+      "timer": 0.6074999999999999,
+      "anim": 1.35,
+      "weapon": "pistol"
+    },
+    "position": [
+      -1.5265566588595902e-16,
+      -0.15269999999999984,
+      -0.025500000000000037
+    ],
+    "contact": {
+      "visible": true,
+      "closedBodies": 0,
+      "r": {
+        "worst": 0,
+        "where": ""
+      },
+      "l": {
+        "worst": 0,
+        "where": ""
+      }
+    }
+  },
+  {
+    "phase": 0.55,
+    "light": "night",
+    "state": {
+      "timer": 0.6074999999999999,
+      "anim": 1.35,
+      "weapon": "pistol"
+    },
+    "position": [
+      -6.938893903907228e-17,
+      -0.15269999999999975,
+      -0.025500000000000134
+    ],
+    "contact": {
+      "visible": true,
+      "closedBodies": 0,
+      "r": {
+        "worst": 0,
+        "where": ""
+      },
+      "l": {
+        "worst": 0,
+        "where": ""
+      }
+    }
+  },
+  {
+    "phase": 0.75,
+    "light": "noon",
+    "state": {
+      "timer": 0.3375,
+      "anim": 1.35,
+      "weapon": "pistol"
+    },
+    "position": [
+      0,
+      -0.0877,
+      -0.0255
+    ],
+    "contact": {
+      "visible": true,
+      "closedBodies": 0,
+      "r": {
+        "worst": 0,
+        "where": ""
+      },
+      "l": {
+        "worst": 0,
+        "where": ""
+      }
+    }
+  },
+  {
+    "phase": 0.75,
+    "light": "overcast",
+    "state": {
+      "timer": 0.3375,
+      "anim": 1.35,
+      "weapon": "pistol"
+    },
+    "position": [
+      0,
+      -0.0877,
+      -0.0255
+    ],
+    "contact": {
+      "visible": true,
+      "closedBodies": 0,
+      "r": {
+        "worst": 0,
+        "where": ""
+      },
+      "l": {
+        "worst": 0,
+        "where": ""
+      }
+    }
+  },
+  {
+    "phase": 0.75,
+    "light": "dusk",
+    "state": {
+      "timer": 0.3375,
+      "anim": 1.35,
+      "weapon": "pistol"
+    },
+    "position": [
+      0,
+      -0.0877,
+      -0.0255
+    ],
+    "contact": {
+      "visible": true,
+      "closedBodies": 0,
+      "r": {
+        "worst": 0,
+        "where": ""
+      },
+      "l": {
+        "worst": 0,
+        "where": ""
+      }
+    }
+  },
+  {
+    "phase": 0.75,
+    "light": "night",
+    "state": {
+      "timer": 0.3375,
+      "anim": 1.35,
+      "weapon": "pistol"
+    },
+    "position": [
+      0,
+      -0.0877,
+      -0.0255
+    ],
+    "contact": {
+      "visible": true,
+      "closedBodies": 0,
+      "r": {
+        "worst": 0,
+        "where": ""
+      },
+      "l": {
+        "worst": 0,
+        "where": ""
+      }
+    }
+  }
+]

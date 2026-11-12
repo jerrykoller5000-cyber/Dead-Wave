@@ -1,13 +1,13 @@
 # ChatGPT 2
 
 state: active
-model: GPT-6 (Codex, variant unsure)
-task: GT-20076 Pump stock-to-grip seam at photographed witness 12: retain the original exposed grip and stock fit and seat their hidden intersection
-touching: studio/weapon-longarms.js (pump stock grip seam), studio/weapon-pump-grip.js, review/GT-20076
-since: 2026-11-12T15:42Z
-next: GT-20087 CD-1's guard room (20:08Z): the GW-4, Wasp and AA-12 trigger
+model: GPT-6.1 Sol (Medium effort)
+task: GT-20101 Correct pistol spent case and live round to .45 ACP
+touching: studio/weapon-casings.js (pistol entry and live tip only), studio/weapon-sidearms.js (pistol top-round fit only), review/GT-20101, handoffs/2026-11-12-chatgpt2-GT-20101.md
+since: 2026-11-12T21:58Z
+next: GT-20079 (17:15Z, UN-PARKED (J149): each modeler does camo-per-part o
 blocked-on: —
-last-report: handoffs/2026-11-12-chatgpt2-GT-20076.md
+last-report: handoffs/2026-11-12-chatgpt2-GT-20100.md
 
 ## Notes
 
@@ -15,12 +15,12 @@ last-report: handoffs/2026-11-12-chatgpt2-GT-20076.md
 
 context nearly full, needs a new session
 
-Pump #12 full-mesh trial removes the grip/stock crossing in all four fits with no deeper/new pair. New export-pump-grip.mjs copies 263/300 original triangles from the live grip and emits only its seam patch. Verify compact export against trim-stock.json, run catalog-fix-pump-grip-web, four-light detail and hands/pump/frame tests. No stock or hand anchor moved.
+NOW GT-20101: Director confirmed pistol is .45ACP (GB-23); my stale-fixture inference was wrong, NO test change. Narrow weapon-casings.js loan pistol profile+tip:22.8mm case, rim12.2mm, OAL32.4mm. Native prototype fits unchanged magazine; lift4.94micrometres, applied6micrometre allowance in top-round height. Production two profile/tip lines and top-round .002743→.002749 landed only after baseline photos. Need run review.mjs after, GT80 live/extension/hands copied to review/GT-20101 with verification/ outputs; reload also checks round-only glove contact. Then tcb294b green, four-light paired lips/case sheets, handoff/review/checkout. Final13 GT-20099 confirming follows this task (Director moved it after caliber correction). GT20100 accepted/pose branch with C5. All game runs through escalated slots; no git.
 
 Earlier exterior, camo, casing, detail and CE-2 acceptances are in the 11 Nov GT-20076/77/79/80 handoffs. The KR-7 laminate and D-152 budget were accepted on GT-20082 and GT-20081. Keep previous test expectations and the crew slot.
 
 ### Who you are (D-142, Jerry 10 Nov 2026)
-You are **ChatGPT 2**, the crew's second ChatGPT, on GPT-6 Astra (High) in Codex. You take the weapons from ChatGPT (who
+You are **ChatGPT 2**, the crew's second ChatGPT, on the model named in this card’s header in Codex. You take the weapons from ChatGPT (who
 keeps the zombies, the words and the Armory). Claude leads and is in charge: he writes your cards, reviews your work, sends
 Jerry your sheets and, under D-81, answers your questions:
 `node crew/crew.mjs request chatgpt2 claude "<the question>" "<the choices and your pick>"`. Only Jerry's own files,
@@ -56,7 +56,7 @@ weapon, when Claude says). The notes in Jerry's words: `docs/jerry/2026-11-09-pl
 ### How you work
 - The repo is `C:\Users\Zero\Desktop\Tiny Trek` on Jerry's PC. Every file UTF-8 without BOM (AGENTS rule 4; in PowerShell
   never Set-Content/Out-File without -Encoding UTF8); keep a file's line endings (index.html is CRLF, the studio files LF).
-- Crew: `node crew/crew.mjs me chatgpt2` each session; check in with `--model "GPT-6 Astra (High)"` and `--touch` your
+- Crew: `node crew/crew.mjs me chatgpt2` each session; check in with `--model "<actual model this session>"` and `--touch` your
   files; out with `--report handoffs/YYYY-MM-DD-chatgpt2-<task>.md`. Rule 22: a card is one line, a handoff is short.
 - Game checks only through the queue: `node crew/crew.mjs slot run chatgpt2 <task> --checks "<what>" -- <command>`, one at
   a time. The slot is the only gate: Jerry's own hold goes first when he plays; don't wait on a guess that he is playing

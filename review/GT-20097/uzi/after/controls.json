@@ -1,0 +1,15 @@
+{
+  "controls": {
+    "trigger": "controls-trigger",
+    "lightSwitch": "controls-lightSwitch-uzi",
+    "magRelease": "controls-magRelease",
+    "selector": "controls-selector",
+    "safety": "controls-safety",
+    "chargingHandle": "work"
+  },
+  "triggerPin": [
+    0,
+    -0.038,
+    0.052000000000000005
+  ]
+}

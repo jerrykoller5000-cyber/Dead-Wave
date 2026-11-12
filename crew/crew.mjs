@@ -68,8 +68,8 @@ import { chooseReplyRequest, refindReplyRequest } from './reply-match.mjs';
 
 const CREW = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(CREW, '..');
-const AGENTS = { claude: 'CLAUDE DIRECTOR', claude2: 'Claude 2', claude3: 'Claude 3', claude4: 'Claude 1', claude5: 'Claude 5', chatgpt: 'ChatGPT', chatgpt2: 'ChatGPT 2', antigravity: 'Antigravity' };
-const PREFIX = { claude: 'CL', claude2: 'CB', claude3: 'CC', claude4: 'CD', claude5: 'CE', chatgpt: 'GP', chatgpt2: 'GT', antigravity: 'AG' };
+const AGENTS = { claude: 'CLAUDE DIRECTOR', claude2: 'Claude 2', claude3: 'Claude 3', claude4: 'Claude 1', claude5: 'Claude 5', claude6: 'Claude 6', chatgpt: 'ChatGPT', chatgpt2: 'ChatGPT 2', antigravity: 'Antigravity' };
+const PREFIX = { claude: 'CL', claude2: 'CB', claude3: 'CC', claude4: 'CD', claude5: 'CE', claude6: 'CF', chatgpt: 'GP', chatgpt2: 'GT', antigravity: 'AG' };
 const FIELDS = ['state', 'model', 'task', 'touching', 'since', 'next', 'blocked-on', 'last-report'];
 const STATES = ['active', 'idle', 'blocked', 'away'];
 // Append-only files everyone shares. Checking in on them never clashes with anyone.

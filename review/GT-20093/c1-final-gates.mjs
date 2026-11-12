@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import {readFile,writeFile} from 'node:fs/promises';
+const read=async name=>JSON.parse(await readFile(new URL(name,import.meta.url),'utf8'));
+const room=await read('cavity-measurements.json'),hands=await read('hands-diagnose.json'),guard=await read('guard-proof.json');
+assert(room.front.every(r=>r.passes),'C1 front room');
+assert(room.bottom.every(r=>r.passes),'C1 inner floor');
+assert(room.outerFrontBelowY88Mm<=120,'C1 support-palm envelope');
+assert(!hands.after.some(line=>line.startsWith('FAIL')),'Native hand gate');
+const result={frontBandsPassed:room.front.length,bottomSectionsPassed:room.bottom.length,minimumFrontExcessMm:Math.min(...room.front.map(r=>r.minInnerFrontMm-r.targetMm)),minimumBottomExcessMm:Math.min(...room.bottom.map(r=>-91-r.maxInnerBottomMm)),outerFrontMm:room.outerFrontBelowY88Mm,guard,handResult:hands.after};
+await writeFile(new URL('final-gates.json',import.meta.url),JSON.stringify(result,null,2));
+console.log('PASS C1 final cavity and native hand gates',result.frontBandsPassed,result.bottomSectionsPassed,result.minimumFrontExcessMm,result.minimumBottomExcessMm,result.outerFrontMm);

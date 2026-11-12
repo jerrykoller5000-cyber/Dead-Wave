@@ -20152,6 +20152,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       // GB-227 (N12): the flash ball is always there at opacity 0; writing depth, it cut a disc out of the water behind the muzzle.
       const flash = new THREE.Mesh(new THREE.SphereGeometry(flashR, 6, 6), glowMat(new THREE.MeshBasicMaterial({ color: flashCol, transparent: true, opacity: 0, depthWrite: false })));
       flash.position.copy(mz); gun.add(flash);
+      // CB-317 (t38's draw gate): at opacity 0 the flash still cost a draw every frame on every gun. Its material hides
+      // itself while unlit, so whoever writes its opacity (the shot, the fade, a reset, the eye's mirror) shows or hides it.
+      { const fm = flash.material; let op = fm.opacity; Object.defineProperty(fm, 'opacity', { configurable: true, enumerable: true, get() { return op; }, set(v) { op = v; this.visible = v > 0; } }); fm.opacity = op; }
       const flashLight = new THREE.PointLight(lightCol, 0, lightR);
       flashLight.position.copy(flash.position); gun.add(flashLight);
       // A cone along the bore: thin at the muzzle, a little wider at the far end.
@@ -20295,7 +20298,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       }
       const groups = []; gun.traverse((o) => { if (o.isGroup || o === gun) groups.push(o); });
       for (const grp of groups) {
-        const list = grp.children.filter((c) => c.isMesh && !keep.has(c) && !c.children.length && mats.has(c.material));
+        const list = grp.children.filter((c) => c.isMesh && !c.isInstancedMesh && !keep.has(c) && !c.children.length && mats.has(c.material));   // CB-316: an instanced batch (W.fasteners) is not one part
         if (list.length < 2) continue;
         const geos = list.map((c) => (c.geometry.index ? c.geometry.toNonIndexed() : c.geometry));
         const total = geos.reduce((s, g) => s + g.attributes.position.count, 0);
@@ -21005,7 +21008,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const picks = (state && state.guns) || {};
       const entries = onlyKind ? (gunFurniture[onlyKind] ? [[onlyKind, gunFurniture[onlyKind]]] : []) : Object.entries(gunFurniture);
       for (const [id, mats] of entries) {
-        const key = picks[id];
+        const key = picks[id === 'm240' ? 'minigun' : id];   // CF-1 (J149, D-177): the Watchman wears the player's minigun finish
         const tex = key && isGunFinishKey(key) ? camoTile(key) : null;   // CL-111: or the rune finish, once it is his
         const rune = tex && key === RUNE_FINISH_KEY;
         for (const mat of mats) {
@@ -24835,7 +24838,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       g.visible = true;
       g.position.set(0, 0, 0); g.rotation.set(0, 0, 0);
       // Centre it on its own middle, so a long gun and a short one hang from the same point.
-      const inv = new THREE.Matrix4(), m = new THREE.Matrix4(), v = new THREE.Vector3();
+      const inv = new THREE.Matrix4(), m = new THREE.Matrix4(), mi = new THREE.Matrix4(), mk = new THREE.Matrix4(), v = new THREE.Vector3();
       g.updateMatrixWorld(true);
       inv.copy(g.matrixWorld).invert();
       const lo = new THREE.Vector3(Infinity, Infinity, Infinity), hi = new THREE.Vector3(-Infinity, -Infinity, -Infinity);
@@ -24843,7 +24846,12 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         if (!o.isMesh || !o.visible || !o.geometry || !o.geometry.attributes || !o.geometry.attributes.position) return;
         m.multiplyMatrices(inv, o.matrixWorld);
         const P = o.geometry.attributes.position;
-        for (let i = 0; i < P.count; i++) { v.set(P.getX(i), P.getY(i), P.getZ(i)).applyMatrix4(m); lo.min(v); hi.max(v); }
+        // CB-316: an instanced batch counts each instance where it is drawn (its geometry alone sits at the batch's origin).
+        for (let k = 0, n = o.isInstancedMesh ? o.count : 1; k < n; k++) {
+          if (o.isInstancedMesh) o.getMatrixAt(k, mi);   // (three's getMatrixAt fills its argument and returns nothing)
+          const M = o.isInstancedMesh ? mk.multiplyMatrices(m, mi) : m;
+          for (let i = 0; i < P.count; i++) { v.set(P.getX(i), P.getY(i), P.getZ(i)).applyMatrix4(M); lo.min(v); hi.max(v); }
+        }
       });
       const wrap = new THREE.Group();
       if (Number.isFinite(lo.x)) g.position.set(-(lo.x + hi.x) / 2 * g.scale.x, -(lo.y + hi.y) / 2 * g.scale.y, -(lo.z + hi.z) / 2 * g.scale.z);
@@ -25437,7 +25445,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         const shape = new THREE.Group(), tilt = w === 'uzi' ? 0.22 : w === 'pistol' ? 0.3 : 0;   // GB-179: the pistol grip's rake is 0.30 (17 deg)
         shape.name = 'magazineBody'; shape.rotation.x = tilt;
         const unrotate = new THREE.Matrix4().makeRotationX(-tilt);
-        for (const part of [...mag.children]) { shape.add(part); part.applyMatrix4(unrotate); }
+        // GT-20080: the live top round stays at the feed lips under the outer mag, out of the stretch (and of feedY).
+        const topRound = ud.magazineTopRound;
+        if (topRound && topRound.parent && topRound.parent !== mag) { mag.updateWorldMatrix(true, true); mag.attach(topRound); }
+        for (const part of [...mag.children]) { if (part === topRound) continue; shape.add(part); part.applyMatrix4(unrotate); }
         mag.add(shape);
         const hi = new THREE.Vector3(-Infinity, -Infinity, -Infinity), v = new THREE.Vector3();
         shape.updateWorldMatrix(true, true);
@@ -28576,7 +28587,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const walk = (o) => {
         if (!o.visible) return;
         if (o.isMesh && o.geometry?.attributes.position && !Array.isArray(o.material) &&
-            (!o.isInstancedMesh || o.userData.artworkSlots)) {
+            (!o.isInstancedMesh || o.userData.artworkSlots || o.userData.weaponDetail)) {   // CB-316: W.fasteners heads go on the rack too
           let list = byMat.get(o.material); if (!list) byMat.set(o.material, (list = []));
           const base = new THREE.Matrix4().multiplyMatrices(_rkI, o.matrixWorld);
           if (o.isInstancedMesh) {
@@ -31202,6 +31213,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           if (needRebuild) mat.needsUpdate = true;
         }
       }
+      if (kind === 'minigun') dressGuns(wardrobeState, 'm240');   // CF-1 (J149): the Watchman wears the minigun's finish
       AudioSys.kioskTab();
       queueOrRefreshArmoryRack(false);
       publishUI('armory-finish', { gun: kind, finish: key || null });
@@ -39489,16 +39501,17 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const trim = matOverride || tierMats.woodCap;
       const subDeck = matOverride || tierMats.woodDark;
       const nailMat = matOverride || tierMats.iron;
-      // Corner post blocks (0.000..0.244) and buried -0.70m corner footings (-0.700..0.000).
+      // Corner post blocks (0.000..0.250) and buried -0.70m corner footings (-0.700..0.000).
+      // CB-313: the walk top (rule height 0.25) is the boards' top, so a boot stands on the planks, not 6 mm over them.
       for (const sx of [-1, 1]) for (const sz of [-1, 1]) {
-        g.add(_box(0.10, 0.244, 0.10, trim, sx * 0.95, 0.122, sz * 0.95));
+        g.add(_box(0.10, 0.250, 0.10, trim, sx * 0.95, 0.125, sz * 0.95));
         g.add(_box(0.10, 0.700, 0.10, trim, sx * 0.95, -0.350, sz * 0.95));
       }
-      // Perimeter rim trim (0.160..0.244), fascia (0.000..0.160), and buried skirt boards (-0.700..0.000) spanning between corner posts.
+      // Perimeter rim trim (0.160..0.250), fascia (0.000..0.160), and buried skirt boards (-0.700..0.000) spanning between corner posts.
       for (const [sx, sz] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
         g.add(_box(sx ? 0.056 : 1.80, 0.700, sz ? 0.056 : 1.80, bearer, sx * 0.972, -0.350, sz * 0.972));
         g.add(_box(sx ? 0.056 : 1.80, 0.160, sz ? 0.056 : 1.80, bearer, sx * 0.972, 0.080, sz * 0.972));
-        g.add(_box(sx ? 0.040 : 1.80, 0.084, sz ? 0.040 : 1.80, trim, sx * 0.980, 0.202, sz * 0.980));
+        g.add(_box(sx ? 0.040 : 1.80, 0.090, sz ? 0.040 : 1.80, trim, sx * 0.980, 0.205, sz * 0.980));
         g.add(_box(sx ? 0.060 : 1.80, 0.040, sz ? 0.060 : 1.80, subDeck, sx * 0.930, 0.180, sz * 0.930));
       }
       // Two longitudinal bearer stringers (0.000..0.080) and three cross-joists resting on top (0.080..0.160).
@@ -39522,12 +39535,12 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         boards.forEach(([x0, x1], bIdx) => {
           const bw = x1 - x0, cx = (x0 + x1) * 0.5;
           const pm = planks[Math.floor(_hash(i * 3 + bIdx, bIdx * 11 + 5) * planks.length) % planks.length];
-          g.add(_box(bw, 0.038, pd, pm, cx, 0.219, pz));
-          g.add(_box(bw - 0.02, 0.006, pd - 0.02, pm, cx, 0.241, pz));
-          // Countersunk iron nail pairs seated on the bevel table (0.244..0.250).
+          g.add(_box(bw, 0.044, pd, pm, cx, 0.222, pz));
+          g.add(_box(bw - 0.02, 0.006, pd - 0.02, pm, cx, 0.247, pz));
+          // Countersunk iron nail pairs in the bevel table, heads 0.5 mm proud (0.2445..0.2505) so they read without z-fighting.
           for (const nx of [x0 + 0.055, x1 - 0.055]) {
             for (const nz of [-pd * 0.26, pd * 0.26]) {
-              g.add(_box(0.024, 0.006, 0.024, nailMat, nx, 0.247, pz + nz));
+              g.add(_box(0.024, 0.006, 0.024, nailMat, nx, 0.2475, pz + nz));
             }
           }
         });
@@ -41804,7 +41817,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         made.deck = {
           // A hair PAST the cell edge, so two neighbouring decks leave no strip where
           // neither applies.
-          x: made.x, z: made.z, hw: BUILD_GRID / 2 + 0.02, hl: BUILD_GRID / 2 + 0.02,
+          // CB-313: a wooden floor's rect 1 mm past its boards (was 2 cm: a boot at a lone floor's edge stood on air).
+          x: made.x, z: made.z, hw: BUILD_GRID / 2 + (made.type === 'floor' ? 0.001 : 0.02), hl: BUILD_GRID / 2 + (made.type === 'floor' ? 0.001 : 0.02),
           yaw: made.yaw || 0, build: true,
           deckY: made.mesh.position.y + deckTopOf(rule2),
           under: made.mesh.position.y,
@@ -41840,6 +41854,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const optic = makeOptic('acog');
       optic.position.set(0, 0.055, -0.11);
       gun.userData.feedCover.add(optic); // standard ACOG follows the hinged cover
+      // CF-1 (J149, D-177): its painted parts (weapon-heavy.js roles) share one per-gun paint, the minigun's pick (dressGuns)
+      gunFurniture = registerGunFurniture({ m240: gun }); dressGuns(wardrobeState, 'm240');
       return gun;
     }
     function spawnBuild(kind, x, z) {

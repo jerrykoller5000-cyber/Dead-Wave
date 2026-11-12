@@ -370,7 +370,9 @@ export class Mesh extends Object3D {
 export class InstancedMesh extends Mesh {
   constructor(g, m, count) { super(g, m); this.isInstancedMesh = true; this.count = count; this.instanceMatrix = new InstancedBufferAttribute(new Float32Array(count * 16), 16); this.instanceColor = null; this._mats = []; this.boundingBox = null; }
   setMatrixAt(i, m) { this._mats[i] = m.clone(); }
-  getMatrixAt(i, m) { if (this._mats[i]) m.copy(this._mats[i]); return m; }
+  // CB-316: as three.js, a copy keeps its count, its instance matrices and colours (a gun's W.fasteners heads on its rack and eye copies).
+  clone(recursive = true) { const o = super.clone(recursive); o.count = this.count; o._mats = this._mats.map((m) => m && m.clone()); o.instanceMatrix = new InstancedBufferAttribute(new Float32Array(this.instanceMatrix.array), 16); o.instanceColor = this.instanceColor ? new InstancedBufferAttribute(new Float32Array(this.instanceColor.array), 3) : null; return o; }
+  getMatrixAt(i, m) { if (this._mats[i]) m.copy(this._mats[i]); }   // CB-316: as three.js, it fills m and returns nothing (a caller that used the return passed here and crashed in the game)
   setColorAt(i, c) { if (!this.instanceColor) this.instanceColor = new InstancedBufferAttribute(new Float32Array(this.count * 3), 3); c.toArray(this.instanceColor.array, i * 3); }
   getColorAt(i, c) { if (this.instanceColor) c.fromArray(this.instanceColor.array, i * 3); return c; }
   // GP-19919: the same local instance bounds as Three; the inspector must measure real instance transforms.

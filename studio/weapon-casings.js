@@ -2,13 +2,13 @@
 // The chamber model can scale the same mesh into its own gun-local units.
 const shapes = {
   // length, rim radius, body radius, mouth radius and start of the shoulder, in millimetres
-  pistol:   [22.8, 6.0, 6.0, 6.0],
+  pistol:   [22.8, 6.1, 6.05, 6.0],
   uzi:      [19, 5.0, 4.95, 4.75],
-  revolver: [33, 6.55, 5.80, 5.75],
+  revolver: [32.77, 6.55, 5.80, 5.75],
   m4:       [45, 4.8, 4.78, 3.20, 35],
   ak:       [39, 5.7, 5.62, 4.30, 29],
   minigun:  [51, 6.0, 5.95, 4.30, 39],
-  sniper:   [70, 7.45, 7.45, 4.75, 52],
+  sniper:   [69.2, 7.45, 7.45, 4.75, 52],
   shotgun:  [70, 11.3, 10.3, 10.2],
   launcher: [46, 21.9, 20.5, 20.1]
 };
@@ -61,7 +61,7 @@ function shotgunShell(THREE, load, spent) {
   const [openLength, rim, body, mouth] = shapes.shotgun;
   const head = openLength * art.headFraction;
   const length = spent ? openLength : openLength - 7;
-  const profile = [[0,spent ? .45 : 0],[body * .20,0],[body * .37,0],
+  const profile = [[0,spent ? .7 : 0],[body * .15,spent ? .62 : 0],[body * .20,0],[body * .37,0],
     [body * .40,.35],[body * .44,0],[rim,0],[rim,2],[body,3],
     [body,head],[body,head+.2],[body * .99,head+.4]];
   // Short moulded bands also distinguish the three colours under dim light.
@@ -83,7 +83,7 @@ function shotgunShell(THREE, load, spent) {
     const radius=Math.hypot(x,z)*1000;
     const crease=(1+Math.cos(6*Math.atan2(x,z)))/2;
     let color=hull, shade=1;
-    if (y < head+.3) color=y<.5 && radius<body*.42 ? base : brass;
+    if (y < head+.3) color=spent && y<.7 && radius<body*.2 ? interior : y<.5 && radius<body*.42 ? base : brass;
     else if (spent && radius < mouth*.91 && y>length-9) color=interior;
     else if (!spent && y>length-2 && radius<mouth*.9) {
       const relief=crease*(1-Math.abs(radius/mouth-.52));
@@ -136,7 +136,8 @@ export function roundGeometry(THREE, weapon, load) {
   if (weapon === 'launcher') return launcherRound(THREE);
   if (weapon === 'shotgun') return shotgunShell(THREE, load, false);
   if (weapon === 'aa12') return shotgunShell(THREE, 'birdshot', false);
-  if (weapon === 'ak' || weapon === 'revolver' || weapon === 'uzi' || weapon === 'sniper' || weapon === 'minigun') return metallicCartridge(THREE, weapon, true);
+  const kind = sharedShape[weapon] || weapon;
+  if (kind !== 'shotgun' && Object.hasOwn(shapes, kind)) return metallicCartridge(THREE, kind, true);
   return null;
 }
 
@@ -158,16 +159,21 @@ function metallicCartridge(THREE, kind, live) {
   const wall = mouth * 0.09;
   const primer = body * 0.38;
   const profile = [
-    [0, live ? 0 : 0.38], [primer * 0.27, 0], [primer, 0], [primer * 1.05, 0.28],
+    [0, live ? 0 : 0.7], [primer * 0.15, live ? 0 : 0.62], [primer * 0.27, 0], [primer, 0], [primer * 1.05, 0.28],
     [primer * 1.14, 0], [rim, 0], [rim, length * 0.045]
   ];
   if (!rimmed) profile.push([body * 0.83, length * 0.065], [body * 0.83, length * 0.086]);
   profile.push([body, length * 0.105]);
   if (shoulder) profile.push([body * 0.91, shoulder], [mouth, length * 0.86]);
-  const rounded = kind === 'revolver' || kind === 'uzi';
+  const rounded = kind === 'pistol' || kind === 'revolver' || kind === 'uzi';
   let tip = 0;
   if (live) {
     tip = rounded ? mouth * 1.45 : length * .43;
+    if (kind === 'pistol') tip = 32.4 - length;
+    if (kind === 'revolver') tip = 40.39 - length;
+    if (kind === 'm4') tip = 57.4 - length;
+    if (kind === 'sniper') tip = 93.5 - length;
+    if (kind === 'minigun') tip = 71.12 - length;
     if (kind === 'uzi') tip = 29.7 - length;
   }
   if (live && rounded) {
@@ -193,6 +199,7 @@ function metallicCartridge(THREE, kind, live) {
     const r = Math.hypot(position.getX(i), position.getZ(i)) * 1000;
     if (live && y > length + .05) colors.push(.58, .22, .105);
     else if ((kind === 'ak' || kind === 'revolver' || kind === 'sniper') && !live && y >= length*.19 && (r <= mouth-wall+.001 || (Math.abs(y-length*.2)<.001 && r<=body*.77))) colors.push(.15,.095,.048);
+    else if (!live && y < .71 && r <= primer * .27) colors.push(.11, .085, .065);
     else if (kind === 'launcher') {
       const inside = y >= length * .19 && r <= mouth - wall + .001;
       if (inside) colors.push(.075, .082, .080);

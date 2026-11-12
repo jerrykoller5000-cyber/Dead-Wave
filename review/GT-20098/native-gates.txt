@@ -1,0 +1,26 @@
+Game-test request 6c3742dd-aa65-4b11-bb9b-cef96e20edd2 queued at position 1. Waiting...
+GRANT chatgpt2 GT-20098: starting one game-test command
+ok    t333     16 pass   0 fail  30.3s  (real renderer)
+    PASS pistol: every small part touches a bigger one (35 small)
+    PASS revolver: every small part touches a bigger one (40 small)
+    PASS uzi: every small part touches a bigger one (83 small)
+    PASS m4: every small part touches a bigger one (61 small)
+    PASS ak: every small part touches a bigger one (68 small)
+    PASS aa12: every small part touches a bigger one (115 small)
+    PASS shotgun: every small part touches a bigger one (32 small)
+    PASS sniper: every small part touches a bigger one (67 small)
+    PASS minigun: every small part touches a bigger one (67 small)
+    PASS launcher: every small part touches a bigger one (56 small)
+    PASS flamer: every small part touches a bigger one (57 small)
+    PASS chainsaw: every small part touches a bigger one (133 small)
+    PASS m240: every small part touches a bigger one (47 small)
+    PASS mortar: every small part touches a bigger one (7 small)
+    PASS checked all 14 guns (14)
+    PASS no floating hardware across the set (0)
+ok    tcl334c    5 pass   0 fail  38.2s  (real renderer)
+    PASS guns checked up in first person: 5 of 5
+    PASS no part of either hand inside any part of a gun (deepest per gun, mm: m4 0.3, ak 0.2, shotgun 0.5, aa12 0.2, sniper 0.5)
+    PASS neither hand through the other (D-140)
+    PASS the gloved wrists stay inside the sleeves at every gun's hip hold
+    PASS no page errors
+2 checks: 21 pass, 0 fail (real renderer)

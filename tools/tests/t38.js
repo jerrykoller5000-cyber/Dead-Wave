@@ -14,7 +14,19 @@
   }));
   const attached = [...cold.values()].reduce((sum, n) => sum + n, 0);
   ok(guns.length === 12, 'all twelve equipped models represented (' + guns.length + ')');
-  ok(attached <= 300, 'cold attached mesh count ' + attached + ' / 300 (including hidden parts)');
+  // J149 (Jerry, D-177; CLAUDE DIRECTOR's OK 20:09Z, CB-321 --review): every real control is its own named moving part, so
+  // each one J149 added costs a mesh and, on the gun in hand, a draw: that is the requirement, not waste. The budgets are
+  // 300 cold meshes and 260 equipped draws plus one per control listed here, and every listed control must exist.
+  const J149_CONTROLS = { minigun: ['drumLatch', 'powerSwitch', 'safety'], aa12: ['magRelease', 'drumLatchLeft', 'drumLatchRight'],
+    pistol: ['extractor', 'takedown'], revolver: ['cylinderRelease', 'ejector'], launcher: ['drumLatch', 'safety', 'stockRelease'],
+    flamer: ['igniter', 'safety', 'valve'], chainsaw: ['chainBrake', 'stopSwitch', 'throttleLock'] };
+  let j149 = 0;
+  for (const [key, names] of Object.entries(J149_CONTROLS)) {
+    const controls = (T.weaponMeshes[key] && T.weaponMeshes[key].userData.controls) || {}, missing = names.filter((n) => !controls[n]);
+    ok(!missing.length, key + ': its J149 controls are named parts (' + (missing.length ? 'missing ' + missing.join(', ') : names.join(', ')) + ')');
+    j149 += names.length;
+  }
+  ok(attached <= 300 + j149, 'cold attached mesh count ' + attached + ' / ' + (300 + j149) + ' (300 + ' + j149 + ' J149 controls; including hidden parts)');
   // The software runner needs the simulation and the isolated model draws. Leave the full-scene frame timing to the GPU run.
   const host = T.inspectHost(), worldMask = host.camera.layers.mask;
   try {
@@ -72,7 +84,7 @@
     } finally {
       counter.autoReset = autoReset;
     }
-    ok(sum > 0 && sum < 260, 'equipped draws across twelve individual models ' + sum + ' < 260');
+    ok(sum > 0 && sum < 260 + j149, 'equipped draws across twelve individual models ' + sum + ' < ' + (260 + j149) + ' (260 + ' + j149 + ' J149 controls)');
     out.push('INFO twelve cold guns: ' + attached + ' attached meshes; equipped individually: ' + sum + ' actual draws');
     for (const k of ['ak', 'm4', 'pistol', 'shotgun', 'sniper', 'revolver', 'launcher', 'minigun']) {
       for (let i = 0; i < 20; i++) { T.setWeapon(i); if (T.getCurrentWeapon() === k) break; }

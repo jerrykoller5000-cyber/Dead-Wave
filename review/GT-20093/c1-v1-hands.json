@@ -1,0 +1,10 @@
+{
+  "after": [
+    "DIAG {\"vertex\":3107,\"point\":[0.05058127490762844,0.032607552242144074,0.12786443033884967],\"bodyBox\":{\"isBox3\":true,\"min\":{\"x\":0.047145341928569465,\"y\":0.02128480692804047,\"z\":0.12425326381776361},\"max\":{\"x\":0.05205599028870013,\"y\":0.03471499660195932,\"z\":0.13174688787867342}},\"hand\":\"l\",\"mesh\":\"glove\",\"depth\":0.0001443495603703258}",
+    "INFO uzi the hands into each other: 0.2 mm",
+    "PASS guns checked up in first person: 1 of 1",
+    "PASS no part of either hand inside any part of a gun (deepest per gun, mm: uzi 0.1)",
+    "PASS neither hand through the other (D-140)",
+    "PASS the gloved wrists stay inside the sleeves at every gun's hip hold"
+  ]
+}

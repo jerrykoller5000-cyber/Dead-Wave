@@ -1,0 +1,12 @@
+{
+  "factoryMaterials": 29,
+  "paintedMaterials": 12,
+  "controls": [
+    "trigger",
+    "lightSwitch",
+    "magRelease",
+    "selector",
+    "safety",
+    "chargingHandle"
+  ]
+}

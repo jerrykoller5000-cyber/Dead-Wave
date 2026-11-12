@@ -372,13 +372,20 @@ const VM_STAGE3_RELOADS = Object.freeze({
     // CL-326 (J83): lifted and rolled top-left, so the box on the gun's right comes up into the view and the swap is seen
     gun: [[0, null], [.16, { pos: [-.10, .17, .02], rot: [-.22, .16, .62] }],
       [.78, { pos: [-.10, .17, .02], rot: [-.22, .16, .62] }], [1, null]],
+    // CE-8 (GT-20076 #167, ChatGPT 2: the drum went from its seat on the right across the receiver to a pouch on the left,
+    // 3 of 48 phases through the fitted right plate): the drum keeps to its own side. The palm under it draws it straight
+    // out of its seat to the right and down (as the world drum goes), then drops it below the frame on the right; the
+    // fresh one comes up the same way and is pushed home (tce8: 0 of 48 crossing, never inboard of its seat)
     hand: [[0, 'fore', 'fore'], [.14, 'box', 'cup'], [.28, 'box', 'cup'],
-      [.38, 'pouch', 'pouch'], [.48, 'pouch', 'cup'], [.62, 'box', 'cup'],
+      [.32, 'out', 'cup'], [.36, 'drop', 'pouch'], [.49, 'drop', 'cup'], [.56, 'out', 'cup'], [.62, 'box', 'cup'],
       [.80, 'box', 'open'], [.90, 'fore', 'fore'], [1, 'fore', 'fore']],
     // CL-306 (the audit: nothing on the gun changed): the box comes off in the palm, goes to the pouch, a fresh one back on
     mag: { grab: .16, swapOut: .37, swapIn: .49, seat: .64 }, magPlace: 'box',
     places: { box: { part: 'mag', at: [-.015, -.13, -.005], z: [-.25, .88, -.37], y: [-.5, -.45, -.74] },   // CL-326: the palm up under the box's floor, the forearm from the lower left (it faced down, in the box)
-      pouch: { at: [-.32, -.52, -.35], z: [.25, .9, .3], y: [-.4, -.6, .65] } }
+      // CE-8: out: the drum clear of its seat, 6 cm out and 9 down in the gun's space (was: on to a pouch on the left, across
+      // the receiver); drop: 52 cm below it on the right, out of the frame, where the drums are swapped (same palm frame)
+      out: { part: 'mag', at: [.0547, -.2679, .0236], z: [-.25, .88, -.37], y: [-.5, -.45, -.74] },
+      drop: { part: 'mag', at: [.0663, -.888, -.005], z: [-.25, .88, -.37], y: [-.5, -.45, -.74] } }
   },
   flamerTank: {
     // CL-326 (J81): lifted and rolled top-right, so the tanks under the receiver come out to the left of the firing hand
@@ -668,7 +675,15 @@ export const VM_TRIGGER = Object.freeze({
   // the fit's straight finger down into the guard, its pad on the blade's front 64% down, 1.2 mm off it at rest, 0.8 mm
   // when the blade is back (82% down); the blade on its own pin (18 mm above: 0.2138 rad for 4 mm at the face); the glove
   // 0.24 mm at most into the blade (the pad's give), nothing in the guard
-  aa12: { part: 'trigger', rest: [-0.13, 1.03, -0.08, 0.35], pull: [-0.13, 1.06, 0.025, 0.29], pivot: null, turn: 0.2138, hold: 0.06, release: 0.09 }
+  aa12: { part: 'trigger', rest: [-0.13, 1.03, -0.08, 0.35], pull: [-0.13, 1.06, 0.025, 0.29], pivot: null, turn: 0.2138, hold: 0.06, release: 0.09 },
+  // the KR-7 (AK; CE-2, 12 Nov, on Claude 1's 18:30Z fist round GT-20096's moved blade): the index from the fit's (round the
+  // blade's front) a little straighter at the tip, its pad on the blade's front 61% down, 1.8 mm off it at rest, 2.5 mm when
+  // the blade is back; the blade on its own pin (0.1623 rad for 4 mm at the face); the glove 0.35 mm at most into the blade
+  // (the pad's give), nothing in the guard, the other hand clear
+  // CE-2 (J150, 12 Nov 22:1xZ): re-solved on Claude 1's 21:22Z fist on CF-3's softened grip (the hand 6 mm lower, 3 forward):
+  // the pad on the blade's front 77% down, 0.9 mm off it at rest and 0.8 mm pulled (0.1594 rad on its pin for 4 mm at the
+  // face), 0.27 mm at most into the blade (the pad's give), the other hand clear (was [-0.3, 1.1, -0.035, 0.21] / 0.1623)
+  ak: { part: 'trigger', rest: [-0.192, 0.8, 0.437, 0.19], pull: [-0.192, 0.86, 0.52, 0.198], pivot: null, turn: 0.1594, hold: 0.06, release: 0.09 }
 });
 
 // CE-4 (J16; ChatGPT 2's GT-20084 switch, the pad in 1 mm and back): the flashlight's switch pressed by the support thumb
@@ -700,6 +715,69 @@ export const VM_LIGHT = Object.freeze({
 // controls that show its state. selector: the lever turned to the fire mode (st.fireMode, X), about its axle (gun space;
 // x null: the control's own x), turns (rad about the gun's x from the model's rest) per mode, in time s. The GW-4's lever
 // as modelled points forward and down: semi; a quarter turn back and down: auto (the AR's SAFE/SEMI/AUTO run, no SAFE here).
+// CE-9 (J149, D-177: "safeties, selectors, charging handles and bolt catches as separate moving parts the hands can work"):
+// a row for each of the modelers' new controls (ChatGPT 2's sidearms, Claude 6's heavy guns and the sniper), keyed by its
+// userData.controls name. axis: 'x' | 'y' | 'z' or a direction, in the part's parent's space (the gun's for most); pivot:
+// the point it turns about there (null entries, or no pivot: the part's own origin, which the modelers put on its pin);
+// turn (rad) or slide (m, the model's units): its full travel from the rest as modelled; driven by turns (the selector per
+// st.fireMode; fixed: the one mode a single-mode gun shows), ready (the gun up: the safety off, the grip safety squeezed,
+// the switch armed; back as the gun goes down), fire (the trigger held), reload (beats [in, held, out, home] on the
+// authored reload's u, timed to index.html's RELOAD_CUES: the release's click, the latch, the valve; a list for two;
+// empty: only on an empty reload) or unload (an ammo change's unload, its u). time (s): a ready/fire/selector move's
+// travel time. Not in a row: the parts the gun's own action already moves (the charging handles that are the view's work,
+// the pump, the launcher's drum latch, the revolver's hammer), the triggers (VM_TRIGGER), the light switches (VM_LIGHT),
+// the parts that never move under a hand in the game (the pistol's takedown lever and extractor, the launcher's stock
+// release on the stock first person hides, the GW-4's forward assist (no reload taps it) and its port cover (modelled open,
+// as on a gun that has fired), the Breacher drum's two levers (the drum comes off whole)) and the Watchman MG (mounted or
+// carried: third person only).
 export const VM_CONTROLS = Object.freeze({
-  m4: { selector: { axle: [null, -0.012, -0.11], turns: { semi: 0, auto: 1.5708 }, time: 0.12 } }
+  m4: {
+    selector: { axle: [null, -0.012, -0.11], turns: { semi: 0, auto: 1.5708 }, time: 0.12 },
+    magRelease: { axis: 'x', slide: -0.0025, reload: [0.05, 0.08, 0.12, 0.15] },   // the button on the right pressed in at the release (cue .08)
+    boltCatch: { axis: 'x', slide: 0.002, reload: [0.74, 0.77, 0.81, 0.84], empty: true }   // the paddle on the left slapped in as the support hand comes to it (work .76-.82): the bolt home
+  },
+  ak: {
+    selector: { axis: 'x', turns: { semi: 0.1, auto: 0.05 }, time: 0.12 },   // the long lever from its rest at the top (safe) down a notch to auto (8 mm at the tab), two to semi (15 mm)
+    magRelease: { axis: 'z', slide: 0.003, reload: [0.07, 0.10, 0.16, 0.19] }   // the paddle pushed forward as the magazine rocks out (rock .12-.17)
+  },
+  pistol: {
+    magRelease: { axis: 'x', slide: 0.002, reload: [0.07, 0.10, 0.13, 0.16] }   // the button on the left pressed in (cue .10)
+  },
+  uzi: {
+    magRelease: { axis: 'x', slide: 0.0015, reload: [0.05, 0.08, 0.11, 0.14] },   // the heel paddle on the left pressed in (cue .08)
+    safety: { axis: [0, -0.218, 0.976], slide: 0.002, ready: true, time: 0.1 }   // the grip safety squeezed into the backstrap while he holds it up
+  },
+  shotgun: {
+    safety: { axis: 'x', slide: -0.004, ready: true, time: 0.1 },   // the cross-bolt pushed across to fire as the gun comes up
+    slideRelease: { axis: 'y', slide: 0.002, unload: [0.0, 0.03, 0.30, 0.34] }   // the action release pressed up to free the forend for the unload's first stroke (pump .04-.34)
+  },
+  aa12: {
+    selector: { axis: 'x', turns: { semi: 0, auto: 1.5708 }, time: 0.12 },   // the thumb lever forward on semi, a quarter turn down for auto
+    magRelease: { axis: 'x', turn: -0.3, reload: [0.07, 0.10, 0.14, 0.17] }   // GT-20098's catch paddle under the guard pushed forward on its axle as the drum drops (cue .10)
+  },
+  revolver: {
+    cylinderRelease: { axis: 'z', slide: 0.003, reload: [0.0, 0.03, 0.08, 0.12] },   // the thumbpiece pushed forward as the cylinder swings out (open .00-.16)
+    ejector: { axis: 'z', slide: -0.02, reload: [0.15, 0.20, 0.23, 0.27] }   // the rod pressed back under the support palm (hand on it .16-.225): the cases out
+  },
+  sniper: {
+    safety: { axis: 'x', turn: 0.35, ready: true, time: 0.12 },   // the tabs rocked forward-down off safe
+    magRelease: { axis: 'y', slide: 0.002, reload: [0.07, 0.10, 0.14, 0.17] }   // the button ahead of the magazine pressed up (cue .10)
+  },
+  minigun: {
+    safety: { axis: 'x', turn: -0.5, ready: true, time: 0.12 },   // the thumb lever's tail swept down off safe
+    powerSwitch: { axis: 'x', turn: 0.76, ready: true, time: 0.15 },   // the arming toggle thrown forward from its rest back (safe)
+    drumLatch: { axis: 'z', turn: 0.5, reload: [[0.12, 0.15, 0.18, 0.22], [0.66, 0.70, 0.74, 0.78]] }   // swung out as the palm comes under the drum (.14; cue .12) to free it, again to seat the fresh one (cue .74)
+  },
+  launcher: {
+    safety: { axis: 'x', turn: -0.45, ready: true, time: 0.12 }   // both levers on the cross-shaft rocked off safe
+  },
+  flamer: {
+    safety: { axis: 'x', turn: -0.5, ready: true, time: 0.12 },   // the thumb lever on the left cheek swept off safe
+    igniter: { axis: 'x', turn: 0.3, fire: true, reload: [0.85, 0.88, 0.90, 0.93], time: 0.06 },   // pulled back by the support fingers while it fires; clicked once after a tank (cue .88)
+    valve: { axis: 'z', turn: 3.0, reload: [0.13, 0.20, 0.68, 0.74] }   // the handwheel turned shut as the palm reaches the tanks (.20; cue .06), open on the fresh ones before the palm leaves (cue .72)
+  },
+  chainsaw: {
+    throttleLock: { axis: 'x', turn: 0.12, ready: true, time: 0.08 },   // the paddle pressed down by the palm on the rear handle
+    stopSwitch: { axis: 'x', turn: -0.4, ready: true, time: 0.1 }   // the rocker over to run
+  }
 });

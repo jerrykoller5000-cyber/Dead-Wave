@@ -1,0 +1,492 @@
+[
+  {
+    "action": "first/eye/pistol/draw",
+    "ms": 600.2,
+    "leafSamples": [
+      {
+        "ms": 583.07,
+        "functionName": "(program)",
+        "scriptId": "0",
+        "url": "",
+        "lineNumber": -1,
+        "columnNumber": -1
+      },
+      {
+        "ms": 3.21,
+        "functionName": "get",
+        "scriptId": "26",
+        "url": "http://127.0.0.1:24838/vendor/three/three.webgpu.js",
+        "lineNumber": 26001,
+        "columnNumber": 4
+      },
+      {
+        "ms": 1.68,
+        "functionName": "setIndexBuffer",
+        "scriptId": "0",
+        "url": "",
+        "lineNumber": -1,
+        "columnNumber": -1
+      },
+      {
+        "ms": 1.62,
+        "functionName": "heldWallDistance",
+        "scriptId": "16",
+        "url": "http://127.0.0.1:24838/index.html?debug=1&__gameTestToken=13b0b896-9cfc-4c01-b564-0259d3d0e59d",
+        "lineNumber": 54846,
+        "columnNumber": 29
+      },
+      {
+        "ms": 1.6,
+        "functionName": "multiplyMatrices",
+        "scriptId": "234",
+        "url": "http://127.0.0.1:24838/vendor/three/three.core.js",
+        "lineNumber": 11563,
+        "columnNumber": 17
+      },
+      {
+        "ms": 1.6,
+        "functionName": "submit",
+        "scriptId": "0",
+        "url": "",
+        "lineNumber": -1,
+        "columnNumber": -1
+      },
+      {
+        "ms": 1.59,
+        "functionName": "bend",
+        "scriptId": "224",
+        "url": "http://127.0.0.1:24838/studio/marine-waist.js",
+        "lineNumber": 38,
+        "columnNumber": 14
+      },
+      {
+        "ms": 1.57,
+        "functionName": "updateWorldAnimationsIndoors",
+        "scriptId": "16",
+        "url": "http://127.0.0.1:24838/index.html?debug=1&__gameTestToken=13b0b896-9cfc-4c01-b564-0259d3d0e59d",
+        "lineNumber": 67640,
+        "columnNumber": 41
+      }
+    ]
+  },
+  {
+    "action": "first/eye/pistol/draw",
+    "ms": 83.4,
+    "leafSamples": [
+      {
+        "ms": 9.19,
+        "functionName": "get",
+        "scriptId": "26",
+        "url": "http://127.0.0.1:24838/vendor/three/three.webgpu.js",
+        "lineNumber": 2989,
+        "columnNumber": 4
+      },
+      {
+        "ms": 6.2,
+        "functionName": "update",
+        "scriptId": "60",
+        "url": "http://127.0.0.1:24838/game/viewmodel.js",
+        "lineNumber": 1224,
+        "columnNumber": 17
+      },
+      {
+        "ms": 4.79,
+        "functionName": "getNodeType",
+        "scriptId": "26",
+        "url": "http://127.0.0.1:24838/vendor/three/three.webgpu.js",
+        "lineNumber": 4922,
+        "columnNumber": 12
+      },
+      {
+        "ms": 4.78,
+        "functionName": "getNodeChildren",
+        "scriptId": "26",
+        "url": "http://127.0.0.1:24838/vendor/three/three.webgpu.js",
+        "lineNumber": 657,
+        "columnNumber": 25
+      },
+      {
+        "ms": 4.58,
+        "functionName": "syncRigSkins",
+        "scriptId": "155",
+        "url": "http://127.0.0.1:24838/studio/marine-skin.js",
+        "lineNumber": 238,
+        "columnNumber": 28
+      },
+      {
+        "ms": 3.19,
+        "functionName": "getNodeType",
+        "scriptId": "26",
+        "url": "http://127.0.0.1:24838/vendor/three/three.webgpu.js",
+        "lineNumber": 1497,
+        "columnNumber": 12
+      },
+      {
+        "ms": 3.19,
+        "functionName": "getInputType",
+        "scriptId": "26",
+        "url": "http://127.0.0.1:24838/vendor/three/three.webgpu.js",
+        "lineNumber": 5666,
+        "columnNumber": 13
+      },
+      {
+        "ms": 3.15,
+        "functionName": "getTypeLength",
+        "scriptId": "26",
+        "url": "http://127.0.0.1:24838/vendor/three/three.webgpu.js",
+        "lineNumber": 44088,
+        "columnNumber": 14
+      }
+    ]
+  },
+  {
+    "action": "first/eye/pistol/fire",
+    "ms": 50.2,
+    "leafSamples": [
+      {
+        "ms": 6.53,
+        "functionName": "getTypeLength",
+        "scriptId": "26",
+        "url": "http://127.0.0.1:24838/vendor/three/three.webgpu.js",
+        "lineNumber": 44088,
+        "columnNumber": 14
+      },
+      {
+        "ms": 3.37,
+        "functionName": "getNodeType",
+        "scriptId": "26",
+        "url": "http://127.0.0.1:24838/vendor/three/three.webgpu.js",
+        "lineNumber": 4922,
+        "columnNumber": 12
+      },
+      {
+        "ms": 3.27,
+        "functionName": "build",
+        "scriptId": "26",
+        "url": "http://127.0.0.1:24838/vendor/three/three.webgpu.js",
+        "lineNumber": 1655,
+        "columnNumber": 6
+      },
+      {
+        "ms": 3.16,
+        "functionName": "updateMatrixWorld",
+        "scriptId": "234",
+        "url": "http://127.0.0.1:24838/vendor/three/three.core.js",
+        "lineNumber": 13979,
+        "columnNumber": 18
+      },
+      {
+        "ms": 3.15,
+        "functionName": "updateForRender",
+        "scriptId": "26",
+        "url": "http://127.0.0.1:24838/vendor/three/three.webgpu.js",
+        "lineNumber": 47226,
+        "columnNumber": 16
+      },
+      {
+        "ms": 1.7,
+        "functionName": "ShaderNodeObject",
+        "scriptId": "26",
+        "url": "http://127.0.0.1:24838/vendor/three/three.webgpu.js",
+        "lineNumber": 3098,
+        "columnNumber": 34
+      },
+      {
+        "ms": 1.68,
+        "functionName": "OperatorNode",
+        "scriptId": "26",
+        "url": "http://127.0.0.1:24838/vendor/three/three.webgpu.js",
+        "lineNumber": 4863,
+        "columnNumber": 12
+      },
+      {
+        "ms": 1.67,
+        "functionName": "getNodeType",
+        "scriptId": "26",
+        "url": "http://127.0.0.1:24838/vendor/three/three.webgpu.js",
+        "lineNumber": 7310,
+        "columnNumber": 12
+      }
+    ]
+  },
+  {
+    "action": "first/eye/pistol/fire",
+    "ms": 50.1,
+    "leafSamples": [
+      {
+        "ms": 7.52,
+        "functionName": "(idle)",
+        "scriptId": "0",
+        "url": "",
+        "lineNumber": -1,
+        "columnNumber": -1
+      },
+      {
+        "ms": 6.63,
+        "functionName": "(program)",
+        "scriptId": "0",
+        "url": "",
+        "lineNumber": -1,
+        "columnNumber": -1
+      },
+      {
+        "ms": 4.87,
+        "functionName": "updateMatrixWorld",
+        "scriptId": "234",
+        "url": "http://127.0.0.1:24838/vendor/three/three.core.js",
+        "lineNumber": 13979,
+        "columnNumber": 18
+      },
+      {
+        "ms": 3.33,
+        "functionName": "updateForRender",
+        "scriptId": "26",
+        "url": "http://127.0.0.1:24838/vendor/three/three.webgpu.js",
+        "lineNumber": 47226,
+        "columnNumber": 16
+      },
+      {
+        "ms": 2.41,
+        "functionName": "_renderObjectDirect",
+        "scriptId": "26",
+        "url": "http://127.0.0.1:24838/vendor/three/three.webgpu.js",
+        "lineNumber": 52262,
+        "columnNumber": 20
+      },
+      {
+        "ms": 1.77,
+        "functionName": "_projectObject",
+        "scriptId": "26",
+        "url": "http://127.0.0.1:24838/vendor/three/three.webgpu.js",
+        "lineNumber": 51928,
+        "columnNumber": 15
+      },
+      {
+        "ms": 1.67,
+        "functionName": "updateVector3",
+        "scriptId": "26",
+        "url": "http://127.0.0.1:24838/vendor/three/three.webgpu.js",
+        "lineNumber": 52866,
+        "columnNumber": 14
+      },
+      {
+        "ms": 1.66,
+        "functionName": "writeBuffer",
+        "scriptId": "0",
+        "url": "",
+        "lineNumber": -1,
+        "columnNumber": -1
+      }
+    ]
+  },
+  {
+    "action": "first/eye/revolver/draw",
+    "ms": 83.4,
+    "leafSamples": [
+      {
+        "ms": 14.07,
+        "functionName": "get",
+        "scriptId": "26",
+        "url": "http://127.0.0.1:24838/vendor/three/three.webgpu.js",
+        "lineNumber": 2989,
+        "columnNumber": 4
+      },
+      {
+        "ms": 9.46,
+        "functionName": "build",
+        "scriptId": "26",
+        "url": "http://127.0.0.1:24838/vendor/three/three.webgpu.js",
+        "lineNumber": 1655,
+        "columnNumber": 6
+      },
+      {
+        "ms": 4.9,
+        "functionName": "getNodeChildren",
+        "scriptId": "26",
+        "url": "http://127.0.0.1:24838/vendor/three/three.webgpu.js",
+        "lineNumber": 657,
+        "columnNumber": 25
+      },
+      {
+        "ms": 4.74,
+        "functionName": "getNodeType",
+        "scriptId": "26",
+        "url": "http://127.0.0.1:24838/vendor/three/three.webgpu.js",
+        "lineNumber": 4922,
+        "columnNumber": 12
+      },
+      {
+        "ms": 3.27,
+        "functionName": "(program)",
+        "scriptId": "0",
+        "url": "",
+        "lineNumber": -1,
+        "columnNumber": -1
+      },
+      {
+        "ms": 3.2,
+        "functionName": "getTypeLength",
+        "scriptId": "26",
+        "url": "http://127.0.0.1:24838/vendor/three/three.webgpu.js",
+        "lineNumber": 44088,
+        "columnNumber": 14
+      },
+      {
+        "ms": 3.2,
+        "functionName": "getInputType",
+        "scriptId": "26",
+        "url": "http://127.0.0.1:24838/vendor/three/three.webgpu.js",
+        "lineNumber": 5666,
+        "columnNumber": 13
+      },
+      {
+        "ms": 3.13,
+        "functionName": "getNodeFromHash",
+        "scriptId": "26",
+        "url": "http://127.0.0.1:24838/vendor/three/three.webgpu.js",
+        "lineNumber": 43436,
+        "columnNumber": 16
+      }
+    ]
+  },
+  {
+    "action": "first/eye/revolver/draw",
+    "ms": 83.3,
+    "leafSamples": [
+      {
+        "ms": 9.54,
+        "functionName": "getNodeChildren",
+        "scriptId": "26",
+        "url": "http://127.0.0.1:24838/vendor/three/three.webgpu.js",
+        "lineNumber": 657,
+        "columnNumber": 25
+      },
+      {
+        "ms": 8.02,
+        "functionName": "traverseVisible",
+        "scriptId": "234",
+        "url": "http://127.0.0.1:24838/vendor/three/three.core.js",
+        "lineNumber": 13919,
+        "columnNumber": 16
+      },
+      {
+        "ms": 7.96,
+        "functionName": "get",
+        "scriptId": "26",
+        "url": "http://127.0.0.1:24838/vendor/three/three.webgpu.js",
+        "lineNumber": 2989,
+        "columnNumber": 4
+      },
+      {
+        "ms": 4.68,
+        "functionName": "build",
+        "scriptId": "26",
+        "url": "http://127.0.0.1:24838/vendor/three/three.webgpu.js",
+        "lineNumber": 1655,
+        "columnNumber": 6
+      },
+      {
+        "ms": 4.63,
+        "functionName": "cloneLean",
+        "scriptId": "16",
+        "url": "http://127.0.0.1:24838/index.html?debug=1&__gameTestToken=13b0b896-9cfc-4c01-b564-0259d3d0e59d",
+        "lineNumber": 16606,
+        "columnNumber": 22
+      },
+      {
+        "ms": 3.28,
+        "functionName": "getTypeLength",
+        "scriptId": "26",
+        "url": "http://127.0.0.1:24838/vendor/three/three.webgpu.js",
+        "lineNumber": 44088,
+        "columnNumber": 14
+      },
+      {
+        "ms": 3.2,
+        "functionName": "getNodeType",
+        "scriptId": "26",
+        "url": "http://127.0.0.1:24838/vendor/three/three.webgpu.js",
+        "lineNumber": 1497,
+        "columnNumber": 12
+      },
+      {
+        "ms": 3.2,
+        "functionName": "fn",
+        "scriptId": "26",
+        "url": "http://127.0.0.1:24838/vendor/three/three.webgpu.js",
+        "lineNumber": 3208,
+        "columnNumber": 7
+      }
+    ]
+  },
+  {
+    "action": "first/hip/pistol/fire",
+    "ms": 433.2,
+    "leafSamples": [
+      {
+        "ms": 418.6,
+        "functionName": "(garbage collector)",
+        "scriptId": "0",
+        "url": "",
+        "lineNumber": -1,
+        "columnNumber": -1
+      },
+      {
+        "ms": 3.13,
+        "functionName": "updateWorldMatrix",
+        "scriptId": "234",
+        "url": "http://127.0.0.1:24838/vendor/three/three.core.js",
+        "lineNumber": 14026,
+        "columnNumber": 18
+      },
+      {
+        "ms": 2.3,
+        "functionName": "(program)",
+        "scriptId": "0",
+        "url": "",
+        "lineNumber": -1,
+        "columnNumber": -1
+      },
+      {
+        "ms": 1.61,
+        "functionName": "equals",
+        "scriptId": "26",
+        "url": "http://127.0.0.1:24838/vendor/three/three.webgpu.js",
+        "lineNumber": 293,
+        "columnNumber": 7
+      },
+      {
+        "ms": 1.6,
+        "functionName": "updateMatrixWorld",
+        "scriptId": "234",
+        "url": "http://127.0.0.1:24838/vendor/three/three.core.js",
+        "lineNumber": 13979,
+        "columnNumber": 18
+      },
+      {
+        "ms": 1.59,
+        "functionName": "_update",
+        "scriptId": "26",
+        "url": "http://127.0.0.1:24838/vendor/three/three.webgpu.js",
+        "lineNumber": 27680,
+        "columnNumber": 8
+      },
+      {
+        "ms": 1.57,
+        "functionName": "update",
+        "scriptId": "107",
+        "url": "http://127.0.0.1:24838/world/light-pool.js",
+        "lineNumber": 60,
+        "columnNumber": 17
+      },
+      {
+        "ms": 1.48,
+        "functionName": "multiplyMatrices",
+        "scriptId": "234",
+        "url": "http://127.0.0.1:24838/vendor/three/three.core.js",
+        "lineNumber": 11563,
+        "columnNumber": 17
+      }
+    ]
+  }
+]

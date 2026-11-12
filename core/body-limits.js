@@ -52,13 +52,6 @@ function qmul(a, b, out) {
   out.x = x; out.y = y; out.z = z; out.w = w; return out;
 }
 function qnorm(q) { const l = Math.hypot(q.x, q.y, q.z, q.w) || 1; q.x /= l; q.y /= l; q.z /= l; q.w /= l; return q; }
-// v rotated by the inverse of q
-function invRot(q, v) {
-  const x = -q.x, y = -q.y, z = -q.z, w = q.w;
-  const tx = 2 * (y * v[2] - z * v[1]), ty = 2 * (z * v[0] - x * v[2]), tz = 2 * (x * v[1] - y * v[0]);
-  return [v[0] + w * tx + (y * tz - z * ty), v[1] + w * ty + (z * tx - x * tz), v[2] + w * tz + (x * ty - y * tx)];
-}
-
 // A wrist's turn q (the hand on the forearm) as anatomy reads it, radians: flex (> 0 toward the palm, < 0 back), dev
 // (> 0 toward the thumb, < 0 toward the little finger), twist (about the forearm's line, as the forearm would turn it).
 // Bent toward the palm, the forearm leans toward the palm seen from the hand; bent toward the thumb (radial), it leans
@@ -66,7 +59,7 @@ function invRot(q, v) {
 // The turn is split as q = twist * swing: the swing bends the hand off the forearm's line, the twist turns it about it.
 export function wristAngles(q, side = 1) {
   const tw = 2 * Math.atan2(q.y, q.w);
-  const d = invRot(q, [0, 1, 0]);   // the forearm's line, seen from the hand (the twist does not move it)
+  const d = invRot(q, [0, 1, 0]);
   // dev as the lean out of the forearm's flexion plane (asin), so a bend past 90 deg toward the palm still reads no sideways bend
   return { flex: Math.atan2(d[2], d[1]), dev: Math.asin(Math.max(-1, Math.min(1, d[0] * side))), twist: wrapA(tw) };
 }
@@ -153,6 +146,7 @@ function rot(q, v) {
   const tx = 2 * (y * v[2] - z * v[1]), ty = 2 * (z * v[0] - x * v[2]), tz = 2 * (x * v[1] - y * v[0]);
   return [v[0] + w * tx + (y * tz - z * ty), v[1] + w * ty + (z * tx - x * tz), v[2] + w * tz + (x * ty - y * tx)];
 }
+function invRot(q, v) { return rot({ x: -q.x, y: -q.y, z: -q.z, w: q.w }, v); }
 // A limb joint (the shoulder, the hip): where the limb (-y at rest) points, as flex (forward of hanging, +) and abd (out to
 // its side, +), measured as angles in the planes they turn in; and its turn about its own line (the swing-twist twist).
 // Flex past 90 deg (an arm raised) is read on the full circle, so a raised arm reads 90..180, never wraps.

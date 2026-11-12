@@ -1,0 +1,16 @@
+first/eye/pistol/draw: 116.80 ms; pipelines delta 0; geometries delta 0; heap delta 1.69 MB
+first/eye/pistol/draw: 66.60 ms; pipelines delta 0; geometries delta 0; heap delta 1.10 MB
+first/eye/pistol/fire: 100.00 ms; pipelines delta 0; geometries delta 0; heap delta 1.78 MB
+first/eye/pistol/fire: 83.50 ms; pipelines delta 0; geometries delta 0; heap delta 2.17 MB
+first/eye/pistol/fire: 716.80 ms; pipelines delta 0; geometries delta 0; heap delta 5.35 MB
+first/eye/revolver/draw: 133.40 ms; pipelines delta 0; geometries delta 0; heap delta -31.10 MB
+first/eye/revolver/draw: 149.90 ms; pipelines delta 0; geometries delta 0; heap delta 1.27 MB
+first/eye/revolver/reload: 116.60 ms; pipelines delta 0; geometries delta 0; heap delta 1.23 MB
+first/eye/launcher/draw: 50.10 ms; pipelines delta 0; geometries delta 0; heap delta 13.71 MB
+first/eye/launcher/draw: 66.80 ms; pipelines delta 0; geometries delta 0; heap delta 1.03 MB
+first/eye/launcher/draw: 83.40 ms; pipelines delta 0; geometries delta 0; heap delta 1.00 MB
+first/eye/chainsaw/draw: 50.10 ms; pipelines delta 0; geometries delta 0; heap delta -30.41 MB
+first/eye/chainsaw/draw: 100.00 ms; pipelines delta 0; geometries delta 0; heap delta 0.95 MB
+repeat/eye/ak/reload: 66.70 ms; pipelines delta 0; geometries delta 0; heap delta 0.93 MB
+repeat/eye/launcher/draw: 50.10 ms; pipelines delta 0; geometries delta 0; heap delta 1.05 MB
+repeat/hip/pistol/draw: 66.80 ms; pipelines delta 0; geometries delta 0; heap delta 1.22 MB

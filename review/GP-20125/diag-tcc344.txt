@@ -1,0 +1,13 @@
+INFO measured: trunk 30, body 6, armL 12, armR 11, legL 18, legR 17
+INFO kit parts with no inside (open shells, not measured as solids): 12 of 30: wear:helmet:marine-fitted-helmet-cover, ?:?, ?:?, ?:?, ?:?, ?:?, wear:carrier:?, wear:carrier:?, ?:?, wear:pack:?, wear:pack:?, wear:pack:?
+INFO stand unarmed (mm in, first frame): armL 2.3, armR 2.3, legL 5.9, legR 3.5, legL<legR 0.0, legR<legL 0.0
+INFO excused (core/clip-exceptions.js): none
+INFO not measured (the test page's stand-in tubes): balaclava-hem
+FAIL the armL out of his kit in every stance (worst 2.3 mm, stand unarmed)
+FAIL the armR out of his kit in every stance (worst 2.3 mm, stand unarmed)
+FAIL the legL out of his kit in every stance (worst 5.9 mm, stand unarmed)
+FAIL the legR out of his kit in every stance (worst 3.5 mm, stand unarmed)
+PASS the legR out of the legL in every stance (worst 0.0 mm, stand unarmed)
+PASS the legL out of the legR in every stance (worst 0.0 mm, stand unarmed)
+INFO through: stand unarmed#0: armL 2.3 mm {wear:shirt:live-sleeve in ?:?} at (-0.19, 1.03, 0.07); stand unarmed#0: armR 2.3 mm {wear:shirt:live-sleeve in ?:?} at (0.18, 1.03, 0.06); stand unarmed#0: legL 5.9 mm {fold-static:? in wear:holster:rig-skin} at (-0.24, 0.69, 0.06); stand unarmed#0: legR 3.5 mm {wear:trousers:? in wear:holster:rig-skin} at (0.24, 0.66, 0.08); stand unarmed#1: armL 2.2 mm {wear:shirt:live-sleeve in ?:?} at (-0.19, 1.03, 0.07); stand unarmed#1: armR 2.2 mm {wear:shirt:live-sleeve in ?:?} at (0.18, 1.03, 0.06); stand unarmed#1: legL 5.9 mm {fold-static:? in wear:holster:rig-skin} at (-0.24, 0.69, 0.06); stand unarmed#1: legR 3.5 mm {wear:trousers:? in wear:holster:rig-skin} at (0.24, 0.66, 0.08); stand unarmed#2: armL 2.2 mm {wear:shirt:live-sleeve in ?:?} at (-0.19, 1.03, 0.07); stand unarmed#2: armR 2.2 mm {wear:shirt:live-sleeve in ?:?} at (0.18, 1.03, 0.07); stand unarmed#2: legL 5.9 mm {fold-static:? in wear:holster:rig-skin} at (-0.24, 0.69, 0.06); stand unarmed#2: legR 3.5 mm {wear:trousers:? in wear:holster:rig-skin} at (0.24, 0.66, 0.08); stand unarmed#3: armL 2.1 mm {wear:shirt:live-sleeve in ?:?} at (-0.19, 1.03, 0.07); stand unarmed#3: armR 2.1 mm {wear:shirt:live-sleeve in ?:?} at (0.18, 1.03, 0.07); stand unarmed#3: legL 5.9 mm {fold-static:? in wear:holster:rig-skin} at (-0.24, 0.69, 0.06); stand unarmed#3: legR 3.5 mm {wear:trousers:? in wear:holster:rig-skin} at (0.24, 0.66, 0.08)
+PASS no page errors

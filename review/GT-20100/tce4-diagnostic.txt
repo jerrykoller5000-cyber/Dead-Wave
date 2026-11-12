@@ -1,0 +1,14 @@
+PASS every handheld light has its press (pistol, revolver, uzi, shotgun, aa12, m4, ak, sniper, launcher, minigun)
+INFO pistol: light on at 0.200 s (press at 0.195), pad off the switch 0.40 mm, switch in 1.00 mm, glove into the gun 1.82 mm glove in ?, sleeve into the gun 0.00 mm (on the hold 0.00) , hand home 0.21 mm
+INFO revolver: light on at 0.200 s (press at 0.195), pad off the switch 0.40 mm, switch in 1.00 mm, glove into the gun 3.03 mm glove in moduleShell, sleeve into the gun 0.00 mm (on the hold 0.00) , hand home 0.00 mm
+INFO uzi: light on at 0.200 s (press at 0.195), pad off the switch 0.12 mm, switch in 1.00 mm, glove into the gun 0.00 mm , sleeve into the gun 0.00 mm (on the hold 0.00) , hand home 0.00 mm
+INFO shotgun: light on at 0.200 s (press at 0.195), pad off the switch 0.40 mm, switch in 1.00 mm, glove into the gun 0.00 mm , sleeve into the gun 0.00 mm (on the hold 0.00) , hand home 0.00 mm
+INFO aa12: light on at 0.200 s (press at 0.195), pad off the switch 0.40 mm, switch in 1.00 mm, glove into the gun 0.14 mm glove in laserLightUnit, sleeve into the gun 0.00 mm (on the hold 2.40) , hand home 0.00 mm
+INFO m4: light on at 0.200 s (press at 0.195), pad off the switch 0.40 mm, switch in 1.00 mm, glove into the gun 0.21 mm glove in moduleShell, sleeve into the gun 0.00 mm (on the hold 0.00) , hand home 0.00 mm
+INFO ak: light on at 0.200 s (press at 0.195), pad off the switch 0.40 mm, switch in 1.00 mm, glove into the gun 0.58 mm glove in moduleShell, sleeve into the gun 0.41 mm (on the hold 1.25) fore in magazineBody, hand home 0.10 mm
+INFO sniper: light on at 0.200 s (press at 0.195), pad off the switch 0.40 mm, switch in 1.00 mm, glove into the gun 0.00 mm , sleeve into the gun 0.00 mm (on the hold 0.00) , hand home 0.16 mm
+INFO launcher: light on at 0.200 s (press at 0.195), pad off the switch 0.40 mm, switch in 1.00 mm, glove into the gun 0.16 mm glove in moduleShell, sleeve into the gun 0.00 mm (on the hold 0.00) , hand home 0.00 mm
+INFO minigun: light on at 0.200 s (press at 0.195), pad off the switch 0.10 mm, switch in 1.00 mm, glove into the gun 0.31 mm glovePads in minigun-drum-latch, sleeve into the gun 0.00 mm (on the hold 0.00) , hand home 0.00 mm
+FAIL every gun: 2 brings the support hand onto the light's switch, the light changes on the press, the pad is on the switch and in by its travel, nothing of the glove in the gun, the hand home after (pistol; revolver; ak)
+PASS third person: 2 changes the light at once
+PASS no page errors

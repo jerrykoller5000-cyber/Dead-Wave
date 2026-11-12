@@ -6,6 +6,39 @@ import { markPaintSurface } from './weapon-finish.js';
 import { roundGeometry, spentCaseGeometry } from './weapon-casings.js';
 import { clipArtworkProfile, fitCollarFaces, trimPanelBack } from './weapon-longarms.js';
 import { boxProjectUV } from '../core/geometry.js';
+import { weaponDetail, fastenerGeometry } from './weapon-detail.js';
+
+// CF-1: screw heads and pin ends from the shared CB-316 geometry, as plain meshes. The batchers merge them by material
+// (one draw), and code that measures a part by geometry.boundingBox (the extended magazine's feed line, the carry fit,
+// the rack) sees each head at its own size, which a unit InstancedMesh does not give it.
+// The CB-316 builders cache their geometry per size; mark what this file draws with them as shared.
+function sharedDetail(ctx) {
+  const W = weaponDetail(ctx), keep = mesh => { mesh.geometry.userData.shared = true; return mesh; };
+  return { chamferBox: (...a) => keep(W.chamferBox(...a)), plate: (...a) => keep(W.plate(...a)), serrations: (...a) => keep(W.serrations(...a)) };
+}
+const HEAD_AXES = { x: [1, 0, 0], y: [0, 1, 0], z: [0, 0, 1] };
+function heads(T, parent, mat, kind, items) {
+  const geo = fastenerGeometry(T, kind, 0.4), up = new T.Vector3(0, 1, 0), roll = new T.Quaternion();
+  geo.userData.shared = true;   // cached and reused: a removed build must not dispose it
+  return items.map(it => {
+    const mesh = new T.Mesh(geo, mat), n = new T.Vector3(...HEAD_AXES[it.axis || 'x']).multiplyScalar(it.side || 1);
+    mesh.quaternion.setFromUnitVectors(up, n).multiply(roll.setFromAxisAngle(up, it.turn || 0));
+    mesh.position.set(it.x || 0, it.y || 0, it.z || 0);
+    mesh.scale.setScalar(it.r || 0.0016);
+    mesh.castShadow = false; mesh.receiveShadow = true;
+    mesh.userData.weaponDetail = { kind, item: { ...it } };
+    parent.add(mesh);
+    return mesh;
+  });
+}
+function pinEnds(T, parent, mat, items) {
+  const ends = [];
+  for (const it of items) {
+    const axis = it.axis || 'x', half = (it.span || 0.02) / 2, a = HEAD_AXES[axis];
+    for (const side of [-1, 1]) ends.push({ ...it, axis, side, x: (it.x || 0) + a[0] * side * half, y: (it.y || 0) + a[1] * side * half, z: (it.z || 0) + a[2] * side * half });
+  }
+  return heads(T, parent, mat, 'pin', ends);
+}
 
 // Small closed surface builders use BufferGeometry, also available in the test renderer.
 // Shared geometry contains no instance material, colour, animation or game state.
@@ -229,7 +262,9 @@ function launcherDrum(T) {
 export function makeMinigunModel(ctx) {
   const { THREE, gunKit, gunArc, gunBand, gunEffects, finishGun, gunBody, gunDark, gunMid, gunAccent, gunPoly, gunRubber, gunOlive, fuelRedMat, glassMat, sightDotMat } = ctx;
   const gun = new THREE.Group();
-  const K = gunKit(gun);
+  const K = gunKit(gun), W = sharedDetail(ctx);
+  // CF-1 (J149): screw heads with real drives, one draw a kind; gunAccent keeps them out of the body-metal merge.
+  const hexHeads = [], slotHeads = [];
   const panelSteel = new THREE.MeshStandardMaterial({color: 0x3b4245, metalness: .17, roughness: .72});
   const drumFinish = new THREE.MeshStandardMaterial({color: 0x545a3e, metalness: .15, roughness: .67});
   const lidFinish = new THREE.MeshStandardMaterial({color: 0x565e60, metalness: .33, roughness: .54});
@@ -252,7 +287,7 @@ export function makeMinigunModel(ctx) {
       seatBoxArt(rib, 'x', () => sideFace, sx);
       if (sx === 1 && i >= 2) rib.geometry = minigunSidePanelGeometry(THREE, i === 2 ? 'upperStrip' : 'lowerStrip');
     }
-    for (const [by, bz] of [[0.085, 0.13], [0.085, -0.24], [-0.085, 0.13], [-0.085, -0.24]]) K.cyl(0.011, 0.011, 0.003, gunAccent, sideFace + sx * .0015, by, bz, null, 6, 'x');
+    for (const [by, bz] of [[0.085, 0.13], [0.085, -0.24], [-0.085, 0.13], [-0.085, -0.24]]) hexHeads.push({ x: sideFace, y: by, z: bz, axis: 'x', side: sx, r: 0.009, turn: bz * 7 });
   }
   // Two removable top service panels break up the broad receiver shell without
   // crossing the centre sight line or shifting either hand's support point.
@@ -267,7 +302,7 @@ export function makeMinigunModel(ctx) {
     trimPanelBack(THREE, border, 1, .130, 'y');
     const lid = K.box(0.055, 0.008, 0.184, panelSteel, sx * 0.079, 0.134, -0.075, 0, 0, 0, null, 0.004);
     trimPanelBack(THREE, lid, 1, .1325, 'y');
-    for (const z of [-0.148, -0.002]) K.cyl(0.004, 0.004, 0.003, gunAccent, sx * 0.079, 0.139, z, null, 8, 'y');
+    for (const z of [-0.148, -0.002]) slotHeads.push({ x: sx * 0.079, y: 0.138, z, axis: 'y', side: 1, r: 0.0042, turn: 0.6 + z * 9 + sx });
   }
   // Only the two round ends show on the housing. The side panel covers the forward tip of each disc.
   const leftDisc = K.cyl(.07, .07, .01, gunDark, -.145, -.02, -.32, null, 12, 'x');
@@ -304,15 +339,17 @@ export function makeMinigunModel(ctx) {
   const handleBand = gunBand([[-0.36, 0.095], [-0.51, 0.095], [-0.55, 0.045], [-0.55, -0.11], [-0.46, -0.13], [-0.40, -0.09]], 0.018);
   // Terminate each arm of the drawing on its adjacent housing facet.
   const meet = (edge, facet) => outlineIntersection(handleBand[edge], handleBand[edge+1], rearShell[facet], rearShell[facet+1]);
-  K.slab([meet(0,2), ...handleBand.slice(1,5), meet(4,7),
+  const handleFrame = K.slab([meet(0,2), ...handleBand.slice(1,5), meet(4,7),
     meet(6,7), ...handleBand.slice(7,11), meet(10,2)], 0.065, gunPoly, { bevel: 0.008 });
+  markPaintSurface(handleFrame, 'furniture');   // CF-1 (c): the moulded spade frame takes the finish; its rubber grip does not
   K.box(0.074, 0.133, 0.054, gunRubber, 0, -0.017, -0.52, 0, 0, 0, null, 0.012);
   for (let i = 0; i < 5; i++) K.box(0.078, 0.008, 0.056, gunPoly, 0, -0.067 + i * 0.025, -0.52, 0, 0, 0, null, 0.002);
   // GP-20024: steel bracket projects from the -X housing plate; a 36 mm rubber peg hangs at its outer end.
   // Grip centre (-0.304, 0.012, 0.16), axis +Y, 116 mm long. The glove sits outside the side plate.
-  K.box(0.018, 0.12, 0.085, gunDark, -0.168, 0.055, 0.16, 0, 0, 0, null, 0.004);
-  K.box(0.14, 0.028, 0.05, gunMid, -0.236, 0.083, 0.16, 0, 0, 0, null, 0.006);
-  rod(THREE, K, [-0.17, -0.005, 0.16], [-0.255, 0.071, 0.16], 0.011, gunDark);
+  // CF-1 (c): the bracket is painted steel like the housing it bolts to.
+  for (const piece of [K.box(0.018, 0.12, 0.085, gunDark, -0.168, 0.055, 0.16, 0, 0, 0, null, 0.004),
+    K.box(0.14, 0.028, 0.05, gunMid, -0.236, 0.083, 0.16, 0, 0, 0, null, 0.006),
+    rod(THREE, K, [-0.17, -0.005, 0.16], [-0.255, 0.071, 0.16], 0.011, gunDark)]) markPaintSurface(piece, 'receiver');
   K.cyl(0.018, 0.018, 0.116, gunRubber, -0.304, 0.012, 0.16, null, 12, 'y');
   for (const y of [-0.043, 0.066]) K.cyl(0.024, 0.024, 0.01, gunMid, -0.304, y, 0.16, null, 12, 'y');
   for (const y of [-0.026, -0.007, 0.012, 0.031, 0.05]) K.cyl(0.0188, 0.0188, 0.003, gunDark, -0.304, y, 0.16, null, 12, 'y');
@@ -389,14 +426,17 @@ export function makeMinigunModel(ctx) {
   const ammoBox = new THREE.Group();
   ammoBox.position.set(0.2, -0.08, -0.02);
   ammoBox.rotation.z = 0.12;
-  K.cyl(0.125, 0.125, 0.155, drumFinish, 0, -0.045, 0, ammoBox, 32, 'x');
+  const drumShell = K.cyl(0.125, 0.125, 0.155, drumFinish, 0, -0.045, 0, ammoBox, 32, 'x');
   K.cyl(0.128, 0.124, 0.009, lidFinish, 0.082, -0.045, 0, ammoBox, 32, 'x');
   K.cyl(0.050, 0.056, 0.009, gunOlive, 0.091, -0.045, 0, ammoBox, 24, 'x');
-  for (let i = 0; i < 6; i++) {
+  // CF-1: the lid's six slotted screws move with the drum (their own draw on the drum).
+  heads(THREE, ammoBox, gunAccent, 'slot', Array.from({ length: 6 }, (_, i) => {
     const a = i * Math.PI / 3;
-    K.cyl(0.004, 0.004, 0.003, gunDark, 0.088, -0.045 + 0.108 * Math.cos(a), 0.108 * Math.sin(a), ammoBox, 8, 'x');
-  }
-  K.box(0.048, 0.072, 0.062, drumFinish, -0.018, 0.110, 0.028, 0, 0, 0, ammoBox, 0.004);
+    return { x: 0.0865, y: -0.045 + 0.108 * Math.cos(a), z: 0.108 * Math.sin(a), axis: 'x', side: 1, r: 0.0042, turn: a * 1.7 };
+  }));
+  const drumNeck = K.box(0.048, 0.072, 0.062, drumFinish, -0.018, 0.110, 0.028, 0, 0, 0, ammoBox, 0.004);
+  // CF-1 (c): the drum is a painted can; its steel lid and screws stay bare.
+  for (const piece of [drumShell, drumNeck]) markPaintSurface(piece, 'magazine');
   gun.add(ammoBox);
   // Fixed socket above the detachable drum neck.
   K.box(0.054, 0.030, 0.068, gunDark, 0.167, 0.071, 0.028, 0, 0, -0.12, null, 0.004);
@@ -420,6 +460,29 @@ export function makeMinigunModel(ctx) {
   for (const piece of gun.children) {
     if (piece.material === panelSteel) markPaintSurface(piece, 'receiver');
   }
+  // CF-1 (b, J149): the controls a hand works, each its own part with its origin on its pivot.
+  // Safety: a thumb lever on the spade frame's left face above the firing grip; turns about x on its boss.
+  const safety = K.group(-0.0335, 0.095, -0.478); safety.name = 'minigun-safety';
+  K.cyl(0.008, 0.008, 0.006, gunDark, -0.002, 0, 0, safety, 12, 'x');
+  K.box(0.004, 0.011, 0.032, gunDark, -0.0035, -0.004, -0.017, -0.18, 0, 0, safety, 0.0015);
+  W.serrations(safety, gunDark, { x: -0.0055, y: -0.0068, z: -0.024, axis: 'x', side: -1, along: 'z', count: 4, pitch: 0.004, w: 0.008, depth: 0.0007, profile: 'square' });
+  hexHeads.push({ x: -0.0385, y: 0.095, z: -0.478, axis: 'x', side: -1, r: 0.0035 });
+  // Arming switch: a guarded toggle on the housing's rear top-left; the lever rocks fore and aft about x.
+  W.chamferBox(gun, 0.032, 0.006, 0.028, 0.0015, gunDark, -0.079, 0.1325, -0.215);
+  for (const ex of [-0.0125, 0.0125]) W.chamferBox(gun, 0.004, 0.014, 0.022, 0.001, gunDark, -0.079 + ex, 0.141, -0.215);
+  const powerSwitch = K.group(-0.079, 0.1355, -0.215); powerSwitch.name = 'minigun-power-switch';
+  powerSwitch.rotation.x = -0.38;   // rest: thrown back (safe); the lever's root stays in the base through its travel
+  K.cyl(0.0045, 0.0026, 0.0235, gunAccent, 0, 0.0083, 0, powerSwitch, 10, 'y');   // a bat lever, widest at the thumb
+  pinEnds(THREE, gun, gunAccent, [{ x: -0.079, y: 0.1385, z: -0.215, axis: 'x', span: 0.029, r: 0.0018 }]);
+  // Drum latch: a lever hinged at its top on the feed socket's outboard face; pulled down it frees the drum.
+  const drumLatch = K.group(0.2058, 0.1240, 0.05); drumLatch.name = 'minigun-drum-latch';
+  drumLatch.rotation.z = -0.12;   // the socket's tilt
+  K.cyl(0.006, 0.006, 0.006, gunMid, 0.0015, 0, 0, drumLatch, 12, 'x');
+  K.box(0.004, 0.040, 0.014, gunMid, 0.0030, -0.019, 0, 0, 0, 0, drumLatch, 0.0015);
+  K.box(0.009, 0.006, 0.017, gunDark, 0.0055, -0.039, 0, 0, 0, 0, drumLatch, 0.002);
+  slotHeads.push({ x: 0.2058 + 0.0045 * Math.cos(-0.12), y: 0.1240 + 0.0045 * Math.sin(-0.12), z: 0.05, axis: 'x', side: 1, r: 0.0028 });
+  heads(THREE, gun, gunAccent, 'hex', hexHeads);
+  heads(THREE, gun, gunAccent, 'slot', slotHeads);
   attachLaserLight(gun, 'minigun', ctx);
   const lamp = gun.userData.laserLightUnit;
   for (const name of ['moduleShell', 'sideRailClamp']) markPaintSurface(lamp.getObjectByName(name), 'light shell');
@@ -433,6 +496,10 @@ export function makeMinigunModel(ctx) {
   }
   gun.userData.triggerPin = trigger.position.toArray();
   trigger.userData.restPosition = trigger.position.toArray();
+  // CF-1 (b): bound after the held scale so each rest pose is the scaled one.
+  bindModelArtwork(gun, 'controls', 'safety', safety);
+  bindModelArtwork(gun, 'controls', 'powerSwitch', powerSwitch);
+  bindModelArtwork(gun, 'controls', 'drumLatch', drumLatch);
   bindModelArtwork(gun, 'heatParts', 'barrel', groupArtwork(THREE, ...exposedTubes));
   gun.userData.muzzleLocal.multiplyScalar(heldScale);
   gun.userData.laserBaseZ *= heldScale;
@@ -509,6 +576,7 @@ export function makeLauncherModel(ctx) {
   const gun = new THREE.Group();
   const K = gunKit(gun);
   const receiverSteel = steelMat.clone();
+  const framePlates = [];   // CF-1 (c): the lower frame plates are painted frame steel
   receiverSteel.color.setHex(0x70797e);
   receiverSteel.roughness = .69;
   receiverSteel.metalness = .38;
@@ -544,10 +612,14 @@ export function makeLauncherModel(ctx) {
     for (const piece of plate.children) markPaintSurface(piece, 'rail');
   });
   for (const sx of [-1, 1]) {
-    K.slab([[-0.245, -0.017], [-0.112, -0.017], [-0.103, -0.024], [-0.103, -0.051], [-0.233, -0.051], [-0.245, -0.04]], 0.004, gunMid, { x: sx * 0.077, bevel: 0.002 });
+    framePlates.push(K.slab([[-0.245, -0.017], [-0.112, -0.017], [-0.103, -0.024], [-0.103, -0.051], [-0.233, -0.051], [-0.245, -0.04]], 0.004, gunMid, { x: sx * 0.077, bevel: 0.002 }));
     for (const [z, y, ox] of [[-0.229, 0.084, 0.0775], [0.023, 0.081, 0.0775], [-0.226, -0.035, 0.081], [-0.12, -0.035, 0.081]]) bolt(K, gunDark, gunAccent, sx * ox, y, z, 0.005);   // GB-297: upper bolts on the frame face, lower on the side panel
-    K.cyl(0.009, 0.009, 0.004, gunDark, sx * 0.077, -0.027, -0.054, null, 12, 'x');   // ambidextrous safety selector
-    K.box(0.004, 0.01, 0.025, gunDark, sx * 0.08, -0.032, -0.041, 0, 0, 0, null, 0.002);
+  }
+  // CF-1 (b): the ambidextrous safety is one part, both levers on their cross-shaft; it turns about x on the shaft.
+  const safety = K.group(0, -0.027, -0.054); safety.name = 'launcher-safety';
+  for (const sx of [-1, 1]) {
+    K.cyl(0.009, 0.009, 0.004, gunDark, sx * 0.077, 0, 0, safety, 12, 'x');   // ambidextrous safety selector
+    K.box(0.004, 0.01, 0.025, gunDark, sx * 0.08, -0.005, 0.013, 0, 0, 0, safety, 0.002);
   }
   // J80: the tall wire quadrant looked like an unattached arch beside the rear sight.
   // A low marked range plate carries
@@ -576,6 +648,9 @@ export function makeLauncherModel(ctx) {
     K.slab([[-0.462, 0.06], [-0.359, 0.056], [-0.37, -0.009], [-0.45, -0.042]], 0.002, gunOlive, { x: sx * 0.041, bevel: 0.001 });
     bolt(K, gunDark, gunMid, sx * 0.044, 0.036, -0.452, 0.006);
   }
+  // CF-1 (b): the stock's release lever under its front, hinged at the front (drawn at the gun's scale, so z / depth).
+  const stockRelease = K.group(0, -0.0115, -0.338); stockRelease.name = 'launcher-stock-release';
+  K.box(0.012, 0.005, 0.03, gunDark, 0, -0.0025, -0.015, 0.12, 0, 0, stockRelease, 0.0015);
   for (const p of gun.children.slice(stockStart)) stock.add(p);
   stock.position.set(0, 0.04, -0.25);
   for (const piece of stock.children) { piece.position.y -= 0.04; piece.position.z += 0.25; }   // at rest unchanged; X now tilts the stock
@@ -591,6 +666,7 @@ export function makeLauncherModel(ctx) {
     trimPanelBack(THREE, tab, -1, -bossZ, 'z');
   }
   gun.userData.fpStock = stock;
+  bindModelArtwork(gun, 'controls', 'stockRelease', stockRelease);
   // A2-style moulding on the same grip centre: one index-finger nub, shallow
   // lower grooves, a backstrap swell and a capped base. The 52 mm local width
   // is 36 mm at the launcher's game scale, so the glove can wrap the sides.
@@ -629,7 +705,10 @@ export function makeLauncherModel(ctx) {
   drumLatch.position.set(-0.076, 0.057, 0.043);
   K.box(0.031, 0.011, 0.064, gunDark, 0, 0, 0, 0, 0, 0, drumLatch, 0.003);
   K.cyl(0.007, 0.007, 0.035, gunAccent, 0, 0, -0.024, drumLatch, 10, 'x');
+  heads(THREE, drumLatch, gunAccent, 'slot', [{ x: 0, y: 0.0055, z: 0.014, axis: 'y', side: 1, r: 0.0035, turn: 0.4 }]);   // CF-1 (a)
   gun.add(drumLatch);
+  // CF-1 (a): the hinge pin's two heads, proud of the bracket at each end.
+  pinEnds(THREE, gun, gunAccent, [{ x: -0.14, y: -0.02, z: 0.12, axis: 'z', span: 0.150, r: 0.011 }]);
   const drum = new THREE.Group();
   drum.position.set(0.14, 0, 0);
   K.cyl(0.018, 0.018, 0.14, gunMid, 0, 0, 0, drum, 8);
@@ -756,6 +835,9 @@ export function makeLauncherModel(ctx) {
   for (const piece of stock.children) {
     if (piece.material === gunOlive) markPaintSurface(piece, 'furniture');
   }
+  for (const piece of framePlates) markPaintSurface(piece, 'receiver');
+  bindModelArtwork(gun, 'controls', 'safety', safety);
+  bindModelArtwork(gun, 'controls', 'drumLatch', drumLatch);
   attachLaserLight(gun, 'launcher', ctx);
   const lamp = gun.userData.laserLightUnit;
   for (const name of ['moduleShell', 'topPlate']) markPaintSurface(lamp.getObjectByName(name), 'light shell');
@@ -991,7 +1073,8 @@ export function makeFlamerModel(ctx) {
   // Transverse pressed seams catch the light without changing the case silhouette.
   for (const z of [-0.112, 0.268]) K.box(0.083, 0.0018, 0.003, fieldCoat, 0, 0.096, z, 0, 0, 0, null, 0.001);
   for (const sx of [-1, 1]) {
-    K.slab([[-0.133, -0.022], [0.272, -0.022], [0.284, -0.01], [0.284, 0.055], [0.266, 0.072], [-0.115, 0.072], [-0.133, 0.058]], 0.007, gunDark, { x: sx * 0.0585, bevel: 0.002 });
+    // CF-1 (c): the outer side plates are painted case steel.
+    markPaintSurface(K.slab([[-0.133, -0.022], [0.272, -0.022], [0.284, -0.01], [0.284, 0.055], [0.266, 0.072], [-0.115, 0.072], [-0.133, 0.058]], 0.007, gunDark, { x: sx * 0.0585, bevel: 0.002 }), 'receiver');
     K.slab([[-0.12, -0.013], [0.27, -0.013], [0.273, -0.004], [0.273, 0.052], [0.26, 0.062], [-0.105, 0.062], [-0.12, 0.05]], 0.003, fieldCoat, { x: sx * 0.0635, bevel: 0.001 });
     for (const [z, y] of [[-0.120, 0.050], [0.260, 0.050], [-0.120, -0.010], [0.260, -0.010], [-0.106, 0.047], [0.256, 0.047]]) bolt(K, gunDark, gunAccent, sx * 0.066, y, z, 0.0038);   // GB-297: corner bolts seated on the side panel face
   }
@@ -1058,7 +1141,10 @@ export function makeFlamerModel(ctx) {
     tankKit.cyl(0.021, 0.021, 0.030, gunDark, x, y, z, null, 12);
     tankKit.cyl(0.012, 0.012, -y - 0.003, brassMat, x, (y - 0.003) / 2, z, null, 8, 'y');
   }
-  tankKit.cyl(0.022, 0.012, 0.010, hazardYellow, 0.11, -0.05, 0.204, null, 12);
+  // CF-1 (b): the tank valve is its own part (the yellow handwheel and its bar), turning about the outlet's axis (z).
+  const valve = tankKit.group(0.11, -0.05, 0.204); valve.name = 'flamer-valve';
+  tankKit.cyl(0.022, 0.012, 0.010, hazardYellow, 0, 0, 0, valve, 12);
+  tankKit.box(0.034, 0.006, 0.005, hazardYellow, 0, 0, 0.0065, 0, 0, 0, valve, 0.0015);
   K.box(0.137, 0.020, 0.054, gunMid, 0.055, 0.007, 0.198, 0, 0, 0, null, 0.004);
   // A formed hose hugs the near shoulder of the casing, above the firing wrist.
   const route = new THREE.CatmullRomCurve3([
@@ -1108,6 +1194,7 @@ export function makeFlamerModel(ctx) {
     [-0.196, -0.158], [-0.208, -0.142], [-0.192, -0.092], [-0.202, -0.052]
   ]), 0.036, gunPoly, { bevel: 0.008, segs: 3 });
   trimPanelBack(THREE, rearGripBody, -1, .046, 'y');
+  markPaintSurface(rearGripBody, 'furniture');   // CF-1 (c)
   for (const sx of [-1, 1]) {
     const panel = K.slab(rearGrip([[-0.186, -0.052], [-0.136, -0.052], [-0.144, -0.144], [-0.19, -0.142]]),
       0.003, gunRubber, { x: sx * 0.018, bevel: 0.002 });
@@ -1122,16 +1209,29 @@ export function makeFlamerModel(ctx) {
   // GB-175: trigger face toward the grip, tip curling forward (the convention Jerry set on the revolver and sniper).
   // GB-180: a solid trigger blade (wide at the root, tapering to the curled tip), not a wire, moved to mid-guard.
   addTriggerArtwork(gun, K, [[-0.088, -0.0357], [-0.0927, -0.0484], [-0.092, -0.056], [-0.0875, -0.0615], [-0.0925, -0.0665], [-0.1, -0.06], [-0.1033, -0.0476], [-0.1, -0.0323]], 0.011, gunAccent, { bevel: 0.002 });
+  // CF-1 (a): the trigger pin's two ends in the grip mount's cheeks.
+  pinEnds(THREE, gun, gunAccent, [{ x: 0, y: gun.userData.triggerPin[1], z: gun.userData.triggerPin[2], axis: 'x', span: 0.054, r: 0.0026 }]);
+  // CF-1 (b): the safety, a thumb lever on the grip mount's left cheek; it turns about x on its boss.
+  const safety = K.group(-0.027, -0.034, -0.150); safety.name = 'flamer-safety';
+  K.cyl(0.0065, 0.0065, 0.005, gunDark, -0.0015, 0, 0, safety, 12, 'x');
+  K.box(0.004, 0.009, 0.028, gunDark, -0.0035, -0.004, -0.014, -0.25, 0, 0, safety, 0.0015);
+  heads(THREE, safety, gunAccent, 'slot', [{ x: -0.004, y: 0, z: 0, axis: 'x', side: -1, r: 0.0032, turn: 0.7 }]);
   // Ergonomic angled front pistol foregrip with upper collar, finger grooves, side panels, and flared baseplate.
   K.box(0.056, 0.018, 0.068, gunDark, 0, -0.034, 0.282, 0, 0, 0, null, 0.003);
+  // CF-1 (a): the collar's clamp screws, two a side.
+  heads(THREE, gun, gunAccent, 'hex', [-1, 1].flatMap(sx => [0.262, 0.302].map(z => ({ x: sx * 0.028, y: -0.034, z, axis: 'x', side: sx, r: 0.0038, turn: z * 11 }))));
   // 36 mm wide, round-ended and 56 mm deep at the support palm. The socket
   // remains (0,-0.07,0.28); the glove can close over the grooves on the front.
   const frontGrip = (outline) => outline.map(([z, y]) => [0.28 + (z - 0.28) * 0.8, y]);
-  K.slab(frontGrip([
+  markPaintSurface(K.slab(frontGrip([
     [0.252, -0.032], [0.312, -0.032], [0.304, -0.058], [0.31, -0.078],
     [0.302, -0.098], [0.307, -0.116], [0.296, -0.134], [0.25, -0.132],
     [0.242, -0.116], [0.254, -0.078], [0.246, -0.048]
-  ]), 0.036, gunPoly, { bevel: 0.01, segs: 3 });
+  ]), 0.036, gunPoly, { bevel: 0.01, segs: 3 }), 'furniture');   // CF-1 (c)
+  // CF-1 (b): the igniter, a short paddle on the front face of the grip's collar, hinged at its top: the support
+  // hand's index presses it back. It stays above the fingers' wrap of the grip (tcl334d: no glove inside it).
+  const igniter = K.group(0, -0.0265, 0.3160); igniter.name = 'flamer-igniter';
+  K.box(0.014, 0.013, 0.004, gunAccent, 0, -0.0065, 0.0015, -0.1, 0, 0, igniter, 0.0012);
   for (const sx of [-1, 1]) {
     const cheek = K.slab(frontGrip([[0.258, -0.048], [0.296, -0.048], [0.29, -0.12], [0.252, -0.118]]),
       0.003, gunRubber, { x: sx * 0.018, bevel: 0.002 });
@@ -1143,6 +1243,9 @@ export function makeFlamerModel(ctx) {
   }
   K.box(0.04, 0.011, 0.047, gunDark, 0, -0.135, 0.275, 0, 0, 0, null, 0.003);
   gun.userData.muzzleLocal = new THREE.Vector3(0, 0.05, 0.29 + (0.78 - 0.29) * wandZ);
+  bindModelArtwork(gun, 'controls', 'safety', safety);
+  bindModelArtwork(gun, 'controls', 'igniter', igniter);
+  bindModelArtwork(gun, 'controls', 'valve', valve);
   return finishGun(gun);
 }
 
@@ -1347,7 +1450,7 @@ function fitSawBoot(T, boot) {
 export function makeChainsawModel(ctx) {
   const { THREE, gunKit, gunArc, gunBand, gripOutline, finishGun, gunBody, gunDark, gunMid, gunAccent, gunPoly, gunRubber, steelMat, hazardYellow, bladeMat, layoutChainsawChain } = ctx;
   const gun = new THREE.Group();
-  const K = gunKit(gun);
+  const K = gunKit(gun), W = sharedDetail(ctx);
   // Engine body (glows when the saw runs hot) under a moulded top cover with vents.
   const bodyMat = gunBody.clone();
   bodyMat.name = 'chainsaw motor enamel';
@@ -1449,22 +1552,34 @@ export function makeChainsawModel(ctx) {
   K.box(0.074, 0.13, 0.055, gunRubber, 0, -0.014, -0.46, 0, 0, 0, null, 0.012);
   for (let i = 0; i < 5; i++) K.box(0.076, 0.007, 0.058, gunPoly, 0, -0.064 + i * 0.024, -0.46, 0, 0, 0, null, 0.002);
   addTriggerArtwork(gun, K, gunBand([[-0.395, 0.062], [-0.393, 0.045], [-0.375, 0.01], [-0.365, -0.03]], 0.006), 0.022, hazardYellow, { bevel: 0.002 });
+  // CF-1 (a): the throttle's pin, its two ends on the cheeks of the handle's top bar just above the blade's root.
+  pinEnds(THREE, gun, gunAccent, [{ x: 0, y: 0.078, z: gun.userData.triggerPin[2], axis: 'x', span: 0.07, r: 0.0028 }]);
   K.slab(gunBand([[-0.395, 0.062], [-0.34, 0.06], [-0.326, -0.065], [-0.42, -0.069]], 0.006), 0.033, gunDark, { bevel: 0.003 });
   const rearTrim = K.box(0.072, 0.02, 0.04, gunAccent, 0, 0.085, -0.445, 0, 0, 0, null, 0.004);
   trimPanelBack(THREE, rearTrim, 1, .094, 'y');
-  K.box(0.05, 0.009, 0.027, gunDark, 0, 0.0995, -0.444, 0, 0, 0, null, 0.003); // throttle lock paddle
+  // CF-1 (b): the throttle lock is its own part, hinged at its back edge; the palm presses it down.
+  const throttleLock = K.group(0, 0.0995, -0.4575); throttleLock.name = 'chainsaw-throttle-lock';
+  K.box(0.05, 0.009, 0.027, gunDark, 0, 0, 0.0135, 0, 0, 0, throttleLock, 0.003); // throttle lock paddle
+  W.serrations(throttleLock, gunDark, { x: 0, y: 0.0045, z: 0.0135, axis: 'y', side: 1, along: 'z', count: 4, pitch: 0.0045, w: 0.032, depth: 0.0007, profile: 'square' });
+  // CF-1 (b): the stop switch, a rocker on the rear handle's top bar ahead of the throttle lock.
+  W.chamferBox(gun, 0.022, 0.004, 0.018, 0.001, gunDark, 0, 0.0955, -0.300);
+  const stopSwitch = K.group(0, 0.0975, -0.300); stopSwitch.name = 'chainsaw-stop-switch';
+  stopSwitch.rotation.x = 0.2;   // rest: rocked to run
+  K.box(0.013, 0.005, 0.016, ctx.fuelRedMat, 0, 0.0015, 0, 0, 0, 0, stopSwitch, 0.0015);
   part(THREE,sawFrontHandle(THREE,'metal'),gunDark,gun).name='chainsaw front rail metal';
   part(THREE,sawFrontHandle(THREE,'rubber'),gunRubber,gun).name='chainsaw front rail rubber';
   part(THREE,sawFrontHandle(THREE,'caps'),gunMid,gun).name='chainsaw front rail caps';
   // Front hand guard stands ahead of the support hand, before the chain root.
+  // CF-1 (b): the guard is the chain brake: it and its two stays tip forward about the pivot bosses (x axis).
+  const chainBrake = K.group(0, 0.075, 0.104); chainBrake.name = 'chainsaw-chain-brake';
   const frontGuard = [[.075,.055],[.102,.055],[.135,.219],[.109,.225]], corner = [.11,.112];
   K.slab([outlineIntersection(frontGuard[1],frontGuard[2],[.11,-.038],corner),
     frontGuard[2],frontGuard[3],outlineIntersection(frontGuard[3],frontGuard[0],corner,[.09,.14]),corner],
-    .16, gunMid, { bevel: .007 });
+    .16, gunMid, { bevel: .007, y: -0.075, z: -0.104, parent: chainBrake });
   for (const sx of [-1, 1]) {
     K.cyl(0.012, 0.012, 0.008, gunDark, sx * 0.083, 0.075, 0.104, null, 10, 'x');
     bolt(K, gunDark, gunAccent, sx * 0.089, 0.075, 0.104, 0.005);
-    rod(THREE, K, [sx * 0.074, 0.078, 0.106], [sx * 0.074, 0.187, 0.123], 0.004, steelMat);
+    rod(THREE, K, [sx * 0.074, 0.003, 0.002], [sx * 0.074, 0.112, 0.019], 0.004, steelMat, chainBrake);
   }
   // GB-180 pass 6 (vs a real saw: toothed bucking spikes at the bar root, a chain catcher under it): both added.
   // GB-180 pass 7 (the pass-6 spikes read as a dark clump under the bar): steel spike plates flat on the housing face,
@@ -1589,6 +1704,9 @@ export function makeChainsawModel(ctx) {
   gun.userData.laser = null;
   gun.userData.barrelAssembly = null;
   gun.userData.muzzleLocal = new THREE.Vector3(0, 0.04, 0.1 + (0.94 - 0.1) * barZ);
+  bindModelArtwork(gun, 'controls', 'throttleLock', throttleLock);
+  bindModelArtwork(gun, 'controls', 'chainBrake', chainBrake);
+  bindModelArtwork(gun, 'controls', 'stopSwitch', stopSwitch);
   return finishGun(gun);
 }
 
@@ -1734,7 +1852,11 @@ export function makeMortarModel(ctx, matOverride = null, collapsed = false) {
 export function makeM240Model(ctx, folded = false) {
   const { THREE, gunKit, gunBand, gripOutline, finishGun, gunBody, gunDark, gunMid, gunAccent, gunPoly, gunRubber, brassMat, gunOlive, M240_PIVOT } = ctx;
   const g = new THREE.Group();
-  const K = gunKit(g);
+  const K = gunKit(g), W = sharedDetail(ctx);
+  // CF-1 (c, J149): only what is painted takes the finish (the receiver, cover, trigger housing, handguard, the
+  // furniture, the can and the tripod); the barrel, trigger, feed tray, bolts, pins, sights and the tan PEQ stay bare.
+  g.userData.partFinish = true;
+  const painted = [];
   // CU-81: a tripod with a traversing head, and an M240B on its cradle: the receiver and feed cover with its
   // rail, the butt stock and grip, the barrel with its carry handle, gas tube and flash hider, and the belt
   // feeding from an ammo can on the left. The barrel is userData.barrel (not .tube, which the mortar's aim tips).
@@ -1745,6 +1867,7 @@ export function makeM240Model(ctx, folded = false) {
       : new THREE.Vector3(...[[0, 0.035, 0.5], [-0.42, 0.035, -0.32], [0.42, 0.035, -0.32]][i]);
     const delta = hub.clone().sub(foot), mid = hub.clone().add(foot).multiplyScalar(0.5);
     const l = K.cyl(0.022, 0.028, delta.length(), gunDark, mid.x, mid.y, mid.z, null, 8, 'y');
+    painted.push(l);
     l.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), delta.normalize());
     for (const u of [0.23, 0.55, 0.84]) {
       const c = hub.clone().lerp(foot, u);
@@ -1756,8 +1879,8 @@ export function makeM240Model(ctx, folded = false) {
       rod(THREE, K, [0, 0.44, 0], hinge.toArray(), 0.009, gunMid);
       K.cyl(0.058, 0.045, 0.019, gunBody, foot.x, 0.021, foot.z, null, 14, 'y');
     }
-    if (folded) K.box(0.05, 0.03, 0.06, gunDark, foot.x, foot.y, foot.z, 0, 0, 0, null, 0.006);
-    else K.box(0.09, 0.025, 0.075, gunDark, foot.x, 0.022, foot.z, 0, -a, 0, null, 0.006);
+    if (folded) painted.push(K.box(0.05, 0.03, 0.06, gunDark, foot.x, foot.y, foot.z, 0, 0, 0, null, 0.006));
+    else painted.push(K.box(0.09, 0.025, 0.075, gunDark, foot.x, 0.022, foot.z, 0, -a, 0, null, 0.006));
   }
   const foldedLegArt = folded ? g.children.slice() : null;
   K.cyl(0.06, 0.075, 0.12, gunBody, 0, 0.74, 0, null, 14, 'y');
@@ -1778,7 +1901,7 @@ export function makeM240Model(ctx, folded = false) {
   }
   if (folded) {
     const firstWrap = g.children.length;
-    K.box(0.105, 0.016, 0.034, gunOlive, 0, 0.65, 0.46, 0, 0, 0, null, 0.004);
+    K.box(0.105, 0.016, 0.034, gunOlive, 0, 0.65, 0.46, 0, 0, 0, null, 0.004);   // the wraps: olive webbing, not painted
     K.box(0.105, 0.016, 0.034, gunOlive, 0, 0.713, 0.46, 0, 0, 0, null, 0.004);
     for (const sx of [-1, 1]) K.box(0.015, 0.077, 0.034, gunOlive, sx * 0.047, 0.6815, 0.46, 0, 0, 0, null, 0.004);
     K.box(0.032, 0.013, 0.043, gunMid, 0, 0.724, 0.46, 0, 0, 0, null, 0.003);
@@ -1791,10 +1914,10 @@ export function makeM240Model(ctx, folded = false) {
     }
   }
   const firstGunPart = g.children.length;   // CL-131: from here on, the parts that elevate
-  K.box(0.096, 0.026, 0.25, gunDark, 0, 0.805, 0.077, 0, 0, 0, null, 0.005);
+  painted.push(K.box(0.096, 0.026, 0.25, gunDark, 0, 0.805, 0.077, 0, 0, 0, null, 0.005));
   K.slab([[-0.22, 0.82], [0.2, 0.82], [0.2, 0.9], [0.18, 0.915], [-0.2, 0.915], [-0.22, 0.9]], 0.11, gunBody, { bevel: 0.01 });
   for (const sx of [-1, 1]) {
-    K.slab([[-0.204, 0.831], [0.176, 0.831], [0.182, 0.846], [0.182, 0.893], [-0.204, 0.899]], 0.011, gunMid, { x: sx * 0.0605, bevel: 0.002 });
+    painted.push(K.slab([[-0.204, 0.831], [0.176, 0.831], [0.182, 0.846], [0.182, 0.893], [-0.204, 0.899]], 0.011, gunMid, { x: sx * 0.0605, bevel: 0.002 }));
     K.box(0.006, 0.007, 0.161, gunDark, sx * 0.067, 0.861, 0.034, 0, 0, 0, null, 0.002);
     for (const [z, y] of [[-0.185, 0.883], [0.158, 0.883], [-0.183, 0.844], [0.154, 0.844], [-0.049, 0.882]]) bolt(K, gunDark, gunAccent, sx * 0.068, y, z, 0.003);
     for (const z of [-0.146, 0.128]) K.box(0.008, 0.052, 0.008, gunAccent, sx * 0.068, 0.864, z, 0, 0, 0, null, 0.001);
@@ -1810,9 +1933,12 @@ export function makeM240Model(ctx, folded = false) {
   for (const sx of [-1, 1]) K.box(0.006, 0.009, 0.2, gunDark, sx * 0.049, 0.006, 0, 0, 0, 0, feedTray, 0.001);
   K.box(0.01, 0.014, 0.014, gunDark, -0.044, 0.012, -0.088, 0, 0, 0, feedTray, 0.002); // cartridge stop
   const feedCover = K.group(0, 0.912, 0.14); feedCover.name = 'm240-feed-cover';
-  K.slab([[-0.22, 0], [0, 0], [0, 0.033], [-0.2, 0.04]], 0.105, gunMid, { bevel: 0.01, parent: feedCover });
+  painted.push(K.slab([[-0.22, 0], [0, 0], [0, 0.033], [-0.2, 0.04]], 0.105, gunMid, { bevel: 0.01, parent: feedCover }));
   K.rail(0.2, 0, 0.045, -0.11, feedCover);
-  K.box(0.018, 0.016, 0.02, gunDark, 0, 0.018, -0.21, 0, 0, 0, feedCover, 0.003); // rear cover catch
+  // CF-1 (b): the rear cover catch is its own latch, hinged at its front lower edge; pressed it frees the cover.
+  const feedCoverLatch = K.group(0, 0.010, -0.200, feedCover); feedCoverLatch.name = 'm240-feed-cover-latch';
+  K.box(0.018, 0.016, 0.02, gunDark, 0, 0.008, -0.010, 0, 0, 0, feedCoverLatch, 0.003); // rear cover catch
+  W.serrations(feedCoverLatch, gunDark, { x: 0, y: 0.008, z: -0.020, axis: 'z', side: -1, along: 'y', count: 3, pitch: 0.004, w: 0.013, depth: 0.0007, profile: 'square' });
   K.cyl(0.008, 0.008, 0.135, gunAccent, 0, 0.919, 0.14, null, 12, 'x');
   g.userData.feedCover = feedCover;
   g.userData.feedTray = feedTray;
@@ -1827,34 +1953,49 @@ export function makeM240Model(ctx, folded = false) {
   g.userData.baseRearSightLeafRot = rearSightLeaf.rotation.clone();
   // 0.19 m buttstock brings the complete M240B to its 48.5-inch handout length
   // without moving the receiver, rear grip, muzzle or elevation pivot.
-  K.slab([[-0.22, 0.9], [-0.4, 0.89], [-0.42, 0.9], [-0.425, 0.78], [-0.4, 0.77], [-0.3, 0.81], [-0.22, 0.83]], 0.07, gunPoly, { bevel: 0.016, segs: 3 });
+  const furniture = [K.slab([[-0.22, 0.9], [-0.4, 0.89], [-0.42, 0.9], [-0.425, 0.78], [-0.4, 0.77], [-0.3, 0.81], [-0.22, 0.83]], 0.07, gunPoly, { bevel: 0.016, segs: 3 })];
   K.slab([[-0.44, 0.904], [-0.420, 0.904], [-0.424, 0.776], [-0.442, 0.772]], 0.076, gunRubber, { bevel: 0.006 });
-  K.slab(gripOutline(-0.166, 0.76, 0.14, 0.066, 0.28), 0.056, gunPoly, { bevel: 0.013, segs: 3 });
-  K.slab([[-0.246, 0.829], [-0.068, 0.829], [-0.068, 0.807], [-0.124, 0.803], [-0.224, 0.795]], 0.071, gunMid, { bevel: 0.005 }); // pinned trigger housing
-  K.cyl(0.008, 0.008, 0.077, gunAccent, 0, 0.813, -0.219, null, 12, 'x');
-  K.cyl(0.006, 0.006, 0.074, gunDark, 0, 0.783, -0.151, null, 12, 'x'); // safety bolt passes through grip
+  // CF-1 (a): the butt pad's rubber ribs, across the shoulder face.
+  W.serrations(g, gunRubber, { x: 0, y: 0.838, z: -0.4405, axis: 'z', side: -1, along: 'y', count: 11, pitch: 0.0095, w: 0.052, depth: 0.0012, profile: 'round' });
+  furniture.push(K.slab(gripOutline(-0.166, 0.76, 0.14, 0.066, 0.28), 0.056, gunPoly, { bevel: 0.013, segs: 3 }));
+  // CF-1 (a): moulded grip grooves on both cheeks, square to the grip's rake.
   for (const sx of [-1, 1]) {
-    K.cyl(0.009, 0.009, 0.005, gunDark, sx * 0.03, 0.783, -0.151, null, 12, 'x'); // cross-bolt safety, embedded in grip
-    K.cyl(0.005, 0.005, 0.004, gunAccent, sx * 0.033, 0.783, -0.151, null, 10, 'x');
+    const grooves = W.serrations(g, gunPoly, { x: sx * 0.028, y: 0.7504, z: -0.1688, axis: 'x', side: sx, along: 'y', count: 13, pitch: 0.0062, w: 0.026, depth: 0.0009, profile: 'v' });
+    grooves.quaternion.premultiply(new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1, 0, 0), 0.28));
+    furniture.push(grooves);
+  }
+  painted.push(K.slab([[-0.246, 0.829], [-0.068, 0.829], [-0.068, 0.807], [-0.124, 0.803], [-0.224, 0.795]], 0.071, gunMid, { bevel: 0.005 })); // pinned trigger housing
+  K.cyl(0.008, 0.008, 0.077, gunAccent, 0, 0.813, -0.219, null, 12, 'x');
+  // CF-1 (b): the cross-bolt safety is one part: the bolt through the grip and its two buttons slide along x together.
+  const safety = K.group(0, 0.783, -0.151); safety.name = 'm240-safety';
+  K.cyl(0.006, 0.006, 0.074, gunDark, 0, 0, 0, safety, 12, 'x'); // safety bolt passes through grip
+  for (const sx of [-1, 1]) {
+    K.cyl(0.009, 0.009, 0.005, gunDark, sx * 0.03, 0, 0, safety, 12, 'x'); // cross-bolt safety, embedded in grip
+    K.cyl(0.005, 0.005, 0.004, gunAccent, sx * 0.033, 0, 0, safety, 10, 'x');
   }
   const chargingHandle = K.group(0.077, 0.852, 0.06); chargingHandle.name = 'm240-charging-handle';
   K.box(0.017, 0.018, 0.25, gunDark, -0.003, 0, -0.08, 0, 0, 0, chargingHandle, 0.003);
   K.cyl(0.008, 0.008, 0.055, gunAccent, 0.024, 0, 0, chargingHandle, 12, 'x');
   K.cyl(0.013, 0.013, 0.029, gunRubber, 0.057, 0, 0, chargingHandle, 12, 'x');
+  for (const x of [0.049, 0.057, 0.065]) K.tor(0.0129, 0.0009, gunDark, x, 0, 0, 0, Math.PI / 2, 0, chargingHandle, Math.PI * 2, 16);   // CF-1 (a): knurl bands
   g.userData.chargingHandle = chargingHandle;
   g.userData.baseChargingHandlePos = chargingHandle.position.clone();
   K.slab(gunBand([[-0.078, 0.82], [-0.078, 0.788], [-0.092, 0.776], [-0.132, 0.778], [-0.135, 0.795]], 0.007), 0.03, gunDark, { bevel: 0.004 });   // GB-180: a moulded guard, not a wire (pass 4: as wide as a real guard)
   // GB-175: trigger face toward the grip, tip curling forward (the convention Jerry set on the revolver and sniper).
   // GB-180: a solid trigger blade (wide at the root, tapering to the curled tip), not a wire, moved to mid-guard.
-  K.slab([[-0.098, 0.8183], [-0.1027, 0.8056], [-0.102, 0.7979], [-0.0973, 0.7913], [-0.1027, 0.7867], [-0.11, 0.7941], [-0.1133, 0.8064], [-0.11, 0.8217]], 0.011, gunAccent, { bevel: 0.002 });
+  // CF-1 (b): the trigger is its own part turning on its pin (addTriggerArtwork puts its origin on the pin).
+  const trigger = addTriggerArtwork(g, K, [[-0.098, 0.8183], [-0.1027, 0.8056], [-0.102, 0.7979], [-0.0973, 0.7913], [-0.1027, 0.7867], [-0.11, 0.7941], [-0.1133, 0.8064], [-0.11, 0.8217]], 0.011, gunAccent, { bevel: 0.002 }).parent;
+  pinEnds(THREE, g, gunAccent, [{ x: 0, y: trigger.position.y - 0.002, z: trigger.position.z, axis: 'x', span: 0.071, r: 0.0026 }]);   // the trigger pin's two ends
   const barrel = K.lathe([[0, 0.2], [0.024, 0.2], [0.024, 0.24], [0.019, 0.25], [0.019, 0.72], [0, 0.72]], gunAccent, { y: 0.875, seg: 12 });
-  part(THREE, ventTube(THREE, 0.028, 0.003, 0.24, 8, 7, 0.52, 0.56, 6), gunBody, g, 0, 0.875, 0.227);   // GB-189: 10-point holes (were 16)
+  painted.push(part(THREE, ventTube(THREE, 0.028, 0.003, 0.24, 8, 7, 0.52, 0.56, 6), gunBody, g, 0, 0.875, 0.227));   // GB-189: 10-point holes (were 16)
   K.rail(0.205, 0.039, 0.875, 0.355, null, 0.026, 1); // right handguard rail for standard PEQ-16
   K.box(0.014, 0.014, 0.085, gunDark, 0.057, 0.875, 0.42, 0, 0, 0, null, 0.002); // PEQ mount shelf
   K.box(0.02, 0.012, 0.016, gunDark, 0.109, 0.875, 0.366, 0, 0, 0, null, 0.003); // PEQ rear lanyard bracket
   for (const z of [0.226, 0.469]) K.cyl(0.032, 0.032, 0.012, gunMid, 0, 0.875, z, null, 16);
-  K.box(0.028, 0.026, 0.017, gunDark, -0.059, 0.872, 0.203, 0, 0, 0, null, 0.003); // barrel-locking latch, left
-  K.box(0.014, 0.009, 0.028, gunAccent, -0.075, 0.872, 0.203, 0, 0, 0, null, 0.002);
+  // CF-1 (b): the barrel-locking latch, left, its own part pivoting about y at its inner end.
+  const barrelLatch = K.group(-0.045, 0.872, 0.203); barrelLatch.name = 'm240-barrel-latch';
+  K.box(0.028, 0.026, 0.017, gunDark, -0.014, 0, 0, 0, 0, 0, barrelLatch, 0.003); // barrel-locking latch, left
+  K.box(0.014, 0.009, 0.028, gunAccent, -0.030, 0, 0, 0, 0, 0, barrelLatch, 0.002);
   K.lathe([[0, 0.715], [0.024, 0.72], [0.024, 0.79], [0.012, 0.792], [0.012, 0.785], [0, 0.785]], gunDark, { y: 0.875, seg: 12 });
   K.lathe([[0, 0.2], [0.014, 0.2], [0.014, 0.56], [0, 0.56]], gunDark, { y: 0.835, seg: 10 });
   K.box(0.04, 0.05, 0.05, gunDark, 0, 0.85, 0.57, 0, 0, 0, null, 0.006);
@@ -1879,20 +2020,34 @@ export function makeM240Model(ctx, folded = false) {
   }
   g.userData.bipod = bipod;
   if (!folded) {
-    K.box(0.09, 0.145, 0.2, gunOlive, -0.12, 0.7875, 0, 0, 0, 0, null, 0.008);
-    K.box(0.096, 0.013, 0.206, gunMid, -0.12, 0.866, 0, 0, 0, 0, null, 0.003);
+    const can = [K.box(0.09, 0.145, 0.2, gunOlive, -0.12, 0.7875, 0, 0, 0, 0, null, 0.008),
+      K.box(0.096, 0.013, 0.206, gunMid, -0.12, 0.866, 0, 0, 0, 0, null, 0.003)];
+    for (const piece of can) markPaintSurface(piece, 'magazine');
     for (const z of [-0.087, 0.087]) K.box(0.006, 0.126, 0.006, gunMid, -0.166, 0.79, z, 0, 0, 0, null, 0.001);
     K.box(0.009, 0.059, 0.043, gunDark, -0.169, 0.809, -0.003, 0, 0, 0, null, 0.002);
     K.box(0.011, 0.029, 0.034, gunMid, -0.176, 0.818, -0.003, 0, 0, 0, null, 0.003);
     // Linked cartridges turn continuously from the can's mouth into the feed port.
-    for (let i = 0; i < 10; i++) {
-      const u = i / 9, x = -0.122 + 0.074 * u, y = 0.873 + 0.037 * Math.sin(u * Math.PI / 2), z = 0.045;
-      K.cyl(0.0043, 0.0043, 0.042, brassMat, x, y, z, null, 8);
-      K.cyl(0.001, 0.0043, 0.013, brassMat, x, y, z + 0.0275, null, 8);
-      K.box(0.009, 0.009, 0.011, gunDark, x, y - 0.001, z - 0.009, 0, 0, 0, null, 0.001);
+    // CF-1 / GP-20123 (J133): true 7.62 x 51 live rounds (the shared roundGeometry: 71 mm long, 12 mm across), noses
+    // forward, each in its link, at a 12.3 mm link pitch on the same path (7 rounds; the 10 before were 8.6 mm thin).
+    const beltRound = roundGeometry(THREE, 'm240');
+    beltRound.userData.shared = true;   // cached and reused: a removed Watchman must not dispose it
+    const beltFinish = new THREE.MeshStandardMaterial({ color: 0xffffff, vertexColors: true, roughness: .42, metalness: .55 });
+    beltFinish.name = 'm240 belt rounds';
+    for (let i = 0; i < 7; i++) {
+      const u = i / 6, x = -0.122 + 0.074 * u, y = 0.873 + 0.037 * Math.sin(u * Math.PI / 2);
+      const round = new THREE.Mesh(beltRound, beltFinish);
+      round.rotation.x = Math.PI / 2;   // the round's +Y nose to the gun's +Z
+      round.position.set(x, y, 0.052);
+      round.castShadow = round.receiveShadow = true;
+      g.add(round);
+      K.box(0.0131, 0.0138, 0.012, gunDark, x, y, 0.030, 0, 0, 0, null, 0.0015);   // its link round the case body, hooked into the next (the belt hangs together)
     }
   }
   g.userData.barrel = barrel;
+  // gunBody is only ever painted steel on this gun: the receiver, the handguard, the tripod's sleeves, hub and feet.
+  g.traverse(o => { if (o.isMesh && o.material === gunBody) painted.push(o); });
+  for (const piece of painted) markPaintSurface(piece, 'receiver');
+  for (const piece of furniture) markPaintSurface(piece, 'furniture');
   // J52: the Watchman's PEQ-16 comes with the gun. It follows the elevating
   // gun parts, so mount it before those parts are moved into their pivot.
   attachLaserLight(g, 'm240', ctx);
@@ -1901,5 +2056,15 @@ export function makeM240Model(ctx, folded = false) {
   for (const part of g.children.slice(firstGunPart)) { part.position.sub(M240_PIVOT); elev.add(part); }
   g.add(elev);
   g.userData.elev = elev;
+  // CF-1 (b, J149): every control a hand works on the Watchman, each its own part with its origin on its pivot
+  // (in m240-elev, which tips with the aim; the feed cover's latch rides the cover). Bound after the move into elev.
+  g.userData.triggerPin = trigger.position.toArray();
+  bindModelArtwork(g, 'controls', 'trigger', trigger);
+  bindModelArtwork(g, 'controls', 'safety', safety);
+  bindModelArtwork(g, 'controls', 'chargingHandle', chargingHandle);
+  bindModelArtwork(g, 'controls', 'feedCover', feedCover);
+  bindModelArtwork(g, 'controls', 'feedCoverLatch', feedCoverLatch);
+  bindModelArtwork(g, 'controls', 'barrelLatch', barrelLatch);
+  bindModelArtwork(g, 'controls', 'barrelHandle', barrelHandle);
   return finishGun(g);
 }

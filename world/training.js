@@ -136,16 +136,19 @@ export function propSolids(T, root, floorY, { skip = () => false, maxTop = 3.2, 
 }
 
 export function segmentBox(a, b, box) {
-  let t0 = 0, t1 = 1;
-  for (const [p, q, lo, hi] of [[a.x, b.x, box.minX, box.maxX], [a.y, b.y, box.minY, box.maxY], [a.z, b.z, box.minZ, box.maxZ]]) {
-    const d = q - p;
-    if (Math.abs(d) < 1e-9) { if (p < lo || p > hi) return null; continue; }
-    let u = (lo - p) / d, v = (hi - p) / d;
-    if (u > v) { const s = u; u = v; v = s; }
-    if (u > t0) t0 = u;
-    if (v < t1) t1 = v;
-    if (t0 > t1) return null;
-  }
+  let t0 = 0, t1 = 1, p, q, lo, hi, d, u, v, s;
+  p = a.x; q = b.x; lo = box.minX; hi = box.maxX;
+  d = q - p;
+  if (Math.abs(d) < 1e-9) { if (p < lo || p > hi) return null; }
+  else { u = (lo - p) / d; v = (hi - p) / d; if (u > v) { s = u; u = v; v = s; } if (u > t0) t0 = u; if (v < t1) t1 = v; if (t0 > t1) return null; }
+  p = a.y; q = b.y; lo = box.minY; hi = box.maxY;
+  d = q - p;
+  if (Math.abs(d) < 1e-9) { if (p < lo || p > hi) return null; }
+  else { u = (lo - p) / d; v = (hi - p) / d; if (u > v) { s = u; u = v; v = s; } if (u > t0) t0 = u; if (v < t1) t1 = v; if (t0 > t1) return null; }
+  p = a.z; q = b.z; lo = box.minZ; hi = box.maxZ;
+  d = q - p;
+  if (Math.abs(d) < 1e-9) { if (p < lo || p > hi) return null; }
+  else { u = (lo - p) / d; v = (hi - p) / d; if (u > v) { s = u; u = v; v = s; } if (u > t0) t0 = u; if (v < t1) t1 = v; if (t0 > t1) return null; }
   return t0;
 }
 

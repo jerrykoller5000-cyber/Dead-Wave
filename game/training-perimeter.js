@@ -121,7 +121,12 @@ export function createTrainingPerimeter(T,tg) {
   // Reuse the shell's camera-only query: faded wire must not catch the aim cursor.
   // The ordinary bullet, laser and body queries continue to hit the physical fence.
   const oldIgnore=tg.cutaway?.ignoreSolid;
-  const ignore=s=>s.perimeterFence?entries.some(e=>e.group.name==='training-perimeter-'+s.perimeterSide&&e.opacity<.5):oldIgnore?.(s)||false;
+  const entryBySide=new Map();
+  for(const e of entries)entryBySide.set(e.group.name.slice('training-perimeter-'.length),e);
+  const ignore=s=>{
+    if(s.perimeterFence)return (entryBySide.get(s.perimeterSide)?.opacity??1)<.5;
+    return oldIgnore?.(s)||false;
+  };
   if(tg.cutaway)tg.cutaway.ignoreSolid=ignore;
   return {
     group:root,layout,solids,renderSpans,constrain:blocker.constrain,

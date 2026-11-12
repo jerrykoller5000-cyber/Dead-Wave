@@ -1,0 +1,58 @@
+
+──────────────────────────────────────────────────────────────────────────────
+NEW FOR YOU since you last looked (1; read them in handoffs/requests.md, newest at the bottom):
+    - from Claude 2 (1 min): FYI: J149 gate pass A: your reds (cloud, 20:21Z tree)
+──────────────────────────────────────────────────────────────────────────────
+GRANT chatgpt2 GT-20101: starting one game-test command
+COMMAND node review/GT-20101/pistol-hands.mjs
+before {
+  lines: [
+    'INFO pistol the hands into each other: 0.2 mm',
+    'PASS guns checked up in first person: 1 of 1',
+    'PASS no part of either hand inside any part of a gun (deepest per gun, mm: pistol 0.1)',
+    'PASS neither hand through the other (D-140)',
+    "PASS the gloved wrists stay inside the sleeves at every gun's hip hold"
+  ],
+  worldRound: false,
+  viewRound: false
+}
+after {
+  lines: [
+    'INFO pistol the hands into each other: 0.2 mm',
+    'PASS guns checked up in first person: 1 of 1',
+    'PASS no part of either hand inside any part of a gun (deepest per gun, mm: pistol 0.1)',
+    'PASS neither hand through the other (D-140)',
+    "PASS the gloved wrists stay inside the sleeves at every gun's hip hold"
+  ],
+  worldRound: true,
+  viewRound: true
+}
+PASS identical native first-person pistol hand contacts
+COMMAND node tools/realtest.mjs tcb294b --all
+ok    tcb294b   25 pass   0 fail  37.5s  (real renderer)
+    PASS pistol: a case of its own leaves (pistol, 1 new)
+    PASS pistol: its colours are in the geometry (vertex colours)
+    PASS pistol: 22.8 mm long (the real 23 mm)
+    PASS uzi: a case of its own leaves (uzi, 1 new)
+    PASS uzi: its colours are in the geometry (vertex colours)
+    PASS uzi: 19.0 mm long (the real 19 mm)
+    PASS m4: a case of its own leaves (m4, 1 new)
+    PASS m4: its colours are in the geometry (vertex colours)
+    PASS m4: 45.0 mm long (the real 45 mm)
+    PASS ak: a case of its own leaves (ak, 1 new)
+    PASS ak: its colours are in the geometry (vertex colours)
+    PASS ak: 39.0 mm long (the real 39 mm)
+    PASS aa12: a case of its own leaves (aa12, 1 new)
+    PASS aa12: its colours are in the geometry (vertex colours)
+    PASS aa12: 70.0 mm long (the real 70 mm)
+    PASS minigun: a case of its own leaves (minigun, 1 new)
+    PASS minigun: its colours are in the geometry (vertex colours)
+    PASS minigun: 51.0 mm long (the real 51 mm)
+    PASS sniper: a case of its own leaves (sniper, 1 new)
+    PASS sniper: its colours are in the geometry (vertex colours)
+    PASS sniper: 69.2 mm long (the real 70 mm)
+    PASS shotgun: a case of its own leaves (shotgun, 1 new)
+    PASS shotgun: its colours are in the geometry (vertex colours)
+    PASS shotgun: 70.0 mm long (the real 70 mm)
+    PASS no page errors
+1 checks: 25 pass, 0 fail (real renderer)

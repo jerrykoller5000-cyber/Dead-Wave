@@ -1,0 +1,14 @@
+node review/GT-20076/final-visible-capture.mjs after pistol revolver uzi aa12
+GRANT chatgpt2 GT-20076: starting one game-test command
+PASS native pistol after aimed hip rack standard third-person and two held sides, four lights
+PASS native revolver after aimed hip rack standard third-person and two held sides, four lights
+PASS native uzi after aimed hip rack standard third-person and two held sides, four lights
+PASS native aa12 after aimed hip rack standard third-person and two held sides, four lights
+
+
+node review/GT-20076/final-visible-reloads.mjs after pistol revolver uzi aa12
+GRANT chatgpt2 GT-20076: starting one game-test command
+PASS pistol after native reload25/55%, four lights
+PASS revolver after native reload25/55%, four lights
+PASS uzi after native reload25/55%, four lights
+PASS aa12 after native reload25/55%, four lights

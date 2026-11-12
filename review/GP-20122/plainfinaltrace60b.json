@@ -1,0 +1,501 @@
+{
+  "at": "2026-11-12T17:55:40.232Z",
+  "label": "plainfinaltrace60b",
+  "duration": 60000,
+  "errors": [],
+  "context": {
+    "solids": 293,
+    "hiddenWorld": 574,
+    "children": 910,
+    "renderCalls": 3425
+  },
+  "samples": [
+    {
+      "t": 37470.69999999553,
+      "heapMB": 849.1,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 4325
+    },
+    {
+      "t": 38480.19999999553,
+      "heapMB": 834.1,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 5240
+    },
+    {
+      "t": 39497.19999999553,
+      "heapMB": 849,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 6155
+    },
+    {
+      "t": 40502.89999999851,
+      "heapMB": 836.8,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 7055
+    },
+    {
+      "t": 41514.29999999702,
+      "heapMB": 851.2,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 7970
+    },
+    {
+      "t": 42530,
+      "heapMB": 838.8,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 8885
+    },
+    {
+      "t": 43545.79999999702,
+      "heapMB": 853,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 9800
+    },
+    {
+      "t": 44553.60000000149,
+      "heapMB": 839.5,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 10700
+    },
+    {
+      "t": 45581.19999999553,
+      "heapMB": 853,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 11630
+    },
+    {
+      "t": 46595.89999999851,
+      "heapMB": 839.5,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 12545
+    },
+    {
+      "t": 47612.39999999851,
+      "heapMB": 852.6,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 13460
+    },
+    {
+      "t": 48628.39999999851,
+      "heapMB": 838.6,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 14375
+    },
+    {
+      "t": 49646.10000000149,
+      "heapMB": 851.2,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 15290
+    },
+    {
+      "t": 50662.19999999553,
+      "heapMB": 836.9,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 16205
+    },
+    {
+      "t": 51679.39999999851,
+      "heapMB": 849.4,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 17120
+    },
+    {
+      "t": 52695.69999999553,
+      "heapMB": 835,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 18035
+    },
+    {
+      "t": 53711.39999999851,
+      "heapMB": 847.4,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 18950
+    },
+    {
+      "t": 54730,
+      "heapMB": 859.8,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 19865
+    },
+    {
+      "t": 55744.89999999851,
+      "heapMB": 845.2,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 20780
+    },
+    {
+      "t": 56762,
+      "heapMB": 857.5,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 21695
+    },
+    {
+      "t": 57782.5,
+      "heapMB": 842.9,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 22610
+    },
+    {
+      "t": 58797,
+      "heapMB": 855.1,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 23525
+    },
+    {
+      "t": 59812.79999999702,
+      "heapMB": 843.3,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 24440
+    },
+    {
+      "t": 60819,
+      "heapMB": 856.2,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 25340
+    },
+    {
+      "t": 61829.5,
+      "heapMB": 842.2,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 26255
+    },
+    {
+      "t": 62844.89999999851,
+      "heapMB": 855.2,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 27170
+    },
+    {
+      "t": 63863.19999999553,
+      "heapMB": 841.4,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 28085
+    },
+    {
+      "t": 64879.10000000149,
+      "heapMB": 855.3,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 29000
+    },
+    {
+      "t": 65895.79999999702,
+      "heapMB": 841.8,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 29915
+    },
+    {
+      "t": 66912.60000000149,
+      "heapMB": 855,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 30830
+    },
+    {
+      "t": 67929.19999999553,
+      "heapMB": 841.4,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 31745
+    },
+    {
+      "t": 68945.60000000149,
+      "heapMB": 854.2,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 32660
+    },
+    {
+      "t": 69962.60000000149,
+      "heapMB": 840.2,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 33575
+    },
+    {
+      "t": 70979.79999999702,
+      "heapMB": 853,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 34490
+    },
+    {
+      "t": 71995.10000000149,
+      "heapMB": 865,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 35405
+    },
+    {
+      "t": 73012.29999999702,
+      "heapMB": 850.3,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 36320
+    },
+    {
+      "t": 74029,
+      "heapMB": 862.3,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 37235
+    },
+    {
+      "t": 75044.79999999702,
+      "heapMB": 847.6,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 38150
+    },
+    {
+      "t": 76052.29999999702,
+      "heapMB": 859.4,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 39050
+    },
+    {
+      "t": 77062.60000000149,
+      "heapMB": 844.6,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 39965
+    },
+    {
+      "t": 78079.39999999851,
+      "heapMB": 856.6,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 40880
+    },
+    {
+      "t": 79095.79999999702,
+      "heapMB": 841.7,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 41795
+    },
+    {
+      "t": 80101.60000000149,
+      "heapMB": 853.4,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 42695
+    },
+    {
+      "t": 81112.19999999553,
+      "heapMB": 865.3,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 43610
+    },
+    {
+      "t": 82128.89999999851,
+      "heapMB": 850.3,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 44525
+    },
+    {
+      "t": 83131.60000000149,
+      "heapMB": 862,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 45425
+    },
+    {
+      "t": 84144.79999999702,
+      "heapMB": 847.1,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 46340
+    },
+    {
+      "t": 85162.10000000149,
+      "heapMB": 859,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 47255
+    },
+    {
+      "t": 86169,
+      "heapMB": 843.9,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 48155
+    },
+    {
+      "t": 87178.89999999851,
+      "heapMB": 855.9,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 49070
+    },
+    {
+      "t": 88196.5,
+      "heapMB": 867.7,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 49985
+    },
+    {
+      "t": 89212.5,
+      "heapMB": 852.8,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 50900
+    },
+    {
+      "t": 90228.89999999851,
+      "heapMB": 864.7,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 51815
+    },
+    {
+      "t": 91245.39999999851,
+      "heapMB": 849.9,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 52730
+    },
+    {
+      "t": 92262,
+      "heapMB": 861.8,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 53645
+    },
+    {
+      "t": 93279.5,
+      "heapMB": 846.9,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 54560
+    },
+    {
+      "t": 94285.79999999702,
+      "heapMB": 858.6,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 55460
+    },
+    {
+      "t": 95294.79999999702,
+      "heapMB": 870.5,
+      "textures": 184,
+      "geometries": 3788,
+      "programs": 393,
+      "calls": 56375
+    },
+    {
+      "t": 96312.39999999851,
+      "heapMB": 855.5,
+      "textures": 184,
+      "geometries": 3787,
+      "programs": 392,
+      "calls": 57290
+    },
+    {
+      "t": 97328.10000000149,
+      "heapMB": 867.4,
+      "textures": 184,
+      "geometries": 3787,
+      "programs": 392,
+      "calls": 58205
+    }
+  ],
+  "frames": {
+    "frames": 3652,
+    "spikes": [],
+    "prof": []
+  },
+  "top": [],
+  "totalSampledMB": 0
+}

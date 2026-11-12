@@ -1,0 +1,9 @@
+{
+  "time": "2026-11-12T19:17:49.926Z",
+  "productionMatchesOriginal": true,
+  "productionWaspSha256": "6ac6e4723fbd2f8f6d9e8bc6cac4ce2056755bc862cdabe5b8a523f04f02b079",
+  "originalWaspSha256": "6ac6e4723fbd2f8f6d9e8bc6cac4ce2056755bc862cdabe5b8a523f04f02b079",
+  "knownBaselineHandPenetrationMm": 5.3,
+  "candidateNativeHandPenetrationMm": 0.4,
+  "promotionCondition": "Claude1 cavity measurements agree with native render, Director19:08Z"
+}

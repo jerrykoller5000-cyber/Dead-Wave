@@ -1,0 +1,10 @@
+{
+  "time": "2026-11-12T20:31:09.905Z",
+  "sources": {
+    "studio/weapon-sidearms.js": "d0a5a1870622e57f98859a9c0726031d40a0a570a4690c67ee87480fc1db0d4a",
+    "studio/weapon-longarms.js": "170bda4500d4a6101065ccdd28963c05b56e44d35928868cedf0250f1e79c670",
+    "game/viewmodel.js": "dfc327dc6e54409b874f4f2eccc1065bf8b98154ad39e617ae1f5721aeb4af4c",
+    "game/viewmodel-fit.js": "5027d22e03a6a9658e7f10d70947752e7b65be4bb02a5d4e170724ff2d9d45b8",
+    "game/viewmodel-poses.js": "5aa1ea07603ee0928bad7c34aa4301be577973a1b05f03a61f24b0139d9193bc"
+  }
+}

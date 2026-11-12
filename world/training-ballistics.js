@@ -16,7 +16,7 @@ export function traceTraining(tg, a, b, opts) {
   // The range walls face inward. From outside, the camera looks through the near one;
   // that face is not an aim surface. A round fired from inside still hits it.
   const glass=opts&&opts.throughGlass;
-  let hit=null, fraction=Infinity;
+  let hitSolid=null, fraction=Infinity;
   for(const solid of tg.solids) {
     if(glass && (solid.firingFence||solid.firingFrame||tg.cutaway?.ignoreSolid(solid)))continue;
     if(solid.target!=null && (opts?.ignoreTargets?.has(solid.target)||tg.targets[solid.target].state!=='up'))continue;
@@ -33,21 +33,30 @@ export function traceTraining(tg, a, b, opts) {
     }else t=segmentBox(a,b,solid);
     // CL-144: a plate is hit only on its silhouette; through the cut-away corners the round goes on
     if(t!==null && solid.target!=null && tg.onPlate && !tg.onPlate(solid.target,{x:a.x+d.x*t,y:a.y+d.y*t,z:a.z+d.z*t}))continue;
-    if(t!==null && t<fraction){fraction=t;hit={solid,t};}
+    if(t!==null && t<fraction){fraction=t;hitSolid=solid;}
   }
   const floor=trainingFloorHit(tg,a,d);
-  if(floor && floor.distance<=1 && floor.distance<fraction){fraction=floor.distance;hit={solid:{floor:true},t:fraction};}
-  if(!hit)return null;
+  if(floor && floor.distance<=1 && floor.distance<fraction){fraction=floor.distance;hitSolid={floor:true};}
+  if(!hitSolid)return null;
+  const hit={solid:hitSolid,t:fraction};
   hit.point={x:a.x+d.x*fraction,y:a.y+d.y*fraction,z:a.z+d.z*fraction};
   hit.normal={x:0,y:0,z:0};
   if(hit.solid.floor)hit.normal.y=1;
   else if(hit.solid.target!=null)hit.normal.z=d.z>0?-1:1;
   else {
     let nearest=Infinity;
-    for(const [axis,lo,hi]of [['x','minX','maxX'],['y','minY','maxY'],['z','minZ','maxZ']])for(const[key,sign]of [[lo,-1],[hi,1]]){
-      const distance=Math.abs(hit.point[axis]-hit.solid[key]);
-      if(distance<nearest){nearest=distance;hit.normal={x:0,y:0,z:0};hit.normal[axis]=sign;}
-    }
+    let distance=Math.abs(hit.point.x-hit.solid.minX);
+    if(distance<nearest){nearest=distance;hit.normal.x=-1;hit.normal.y=0;hit.normal.z=0;}
+    distance=Math.abs(hit.point.x-hit.solid.maxX);
+    if(distance<nearest){nearest=distance;hit.normal.x=1;hit.normal.y=0;hit.normal.z=0;}
+    distance=Math.abs(hit.point.y-hit.solid.minY);
+    if(distance<nearest){nearest=distance;hit.normal.x=0;hit.normal.y=-1;hit.normal.z=0;}
+    distance=Math.abs(hit.point.y-hit.solid.maxY);
+    if(distance<nearest){nearest=distance;hit.normal.x=0;hit.normal.y=1;hit.normal.z=0;}
+    distance=Math.abs(hit.point.z-hit.solid.minZ);
+    if(distance<nearest){nearest=distance;hit.normal.x=0;hit.normal.y=0;hit.normal.z=-1;}
+    distance=Math.abs(hit.point.z-hit.solid.maxZ);
+    if(distance<nearest){nearest=distance;hit.normal.x=0;hit.normal.y=0;hit.normal.z=1;}
   }
   return hit;
 }

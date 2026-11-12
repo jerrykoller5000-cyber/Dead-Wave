@@ -4,30 +4,28 @@ state: idle
 model: Claude Opus 5.5 (claude-opus-5-5)
 task: —
 touching: —
-since: 2026-11-12T09:11Z
-next: CC-344 J128 (D-140): the kit's measure: every kit part (vest, pads,
+since: 2026-11-12T19:24Z
+next: CC-344 (18:30Z, CLAUDE DIRECTOR: part 2 accepted (pouches on the be
 blocked-on: —
-last-report: handoffs/2026-11-12-claude3-CC-344.md
+last-report: handoffs/2026-11-12-claude3-CC-346-gw4.md
 
 ## Notes
 
-### Session 10 (fresh, 07:28Z-, Opus 5.5)
-- LANDED 08:50Z CC-343's last red (handoffs/2026-11-12-claude3-CC-343h.md, Claude outputs/CC-343h/patch343m.py): deck edge
-  crouched. marine-turn's ankle pivot draws a boot back when its turn point is over a drop (apply's new surface(x,z));
-  crouched, footStepIn reaches FOOT_STEPIN_CROUCH 0.24. tcc343b 37/0; regressions as before (t187/t229 = old gun reds).
-- Found: a build floor's deckY (0.25) is 6 mm over its planks (0.244), platform 2 cm past the boards: every boot on a build
-  floor floats 6 mm; sent to the Director to route (not my lane). tcc341 is 16/0 (vest red landed 00:54Z).
-- CC-344 part 1 (handoffs/2026-11-12-claude3-CC-344.md): tools/tests/tcc344.js landed (PC tree: 3/4 reds).
-- CC-344 part 2, WIP NOT LANDED (Claude outputs/CC-344/wip-not-landed.diff, on top of the PC's marine-body.js/-cloth.js):
-  liveCloth option 'under' (boxes on lowerBody: the belt band from marine-body's own belt at .721+LB, the two front mag
-  pouches at x+-.125 .647+LB z .135, 'back' exit); trouser leg + its FRONT SEAM worn live (rigid on the thigh it rose
-  through the band); holster-thigh-band -.11 -> -.125. Result: tcc344 legs 17.9 -> 0 (5/2, the sleeves left) BUT tcc341
-  15/1: "belt 15.5 mm under trousers" running (a belt-mesh vertex at the hip front, x -.04, now under a trousers face;
-  suspect the seam tube, newly measured as live cloth, or the widened band box z .3 / y .8+LB). Bisect that first.
-- Sleeves 2.8 mm into a hip-level pouch/keeper standing unarmed (x +-.18, the belt's side keepers at r .191?): open.
-- Cloud: tar the code dirs on the PC to $HOME/w (exclude assets/soundtrack, *.mp4, tools/*.png|jpg, tools/tests/test-*.html),
-  cp into "_DELETE ME/claude3-tt-HHMM.tgz", stage, untar in /home/claude/tt. Probe: tools/tests/tzc3dedump.js (cloud only,
-  c3render dumps). PC writes: write <file>.tmp-claude3 then os.replace (the mount refuses truncating some files).
+### Session 11 (fresh, 16:17Z-, Opus 5.5)
+- CC-344 part 2 LANDED 18:18Z, accepted (handoffs/2026-11-12-claude3-CC-344b.md): mag pouches up 5 cm onto the belt + the trouser
+  leg kept under the band and the pouches (marine-cloth liveCloth `under`); tcc344 legs 0, tcc341 belt 0. The WIP's red was the
+  pouch 'keep behind' exit (cloth wrapped round the pouch side). Left in tcc344: armed sleeves 4.1-4.3 into kit (queue item 2) and
+  the unarmed 2.8 (CB-314, Claude 2: it is a webMat band in index.html, told him). tcc341's gloves 10.6/vest 4.4 reds are NOT mine
+  (on the untouched tree since ~12:38Z, the third-person hold): sent to the Director.
+- CC-346 (J149) checked in 18:23Z: audit posted (Claude outputs/CC-346/audit.md); GW-4 first, then KR-7, sniper, Breacher, pump.
+- CC-346 GW-4 LANDED 19:23Z (handoffs/2026-11-12-claude3-CC-346-gw4.md; merged onto Claude 6's CF-2 sniper safety, md5 30dfeba8):
+  forwardAssist + portCover controls, selector on its axle, trigger/hammer pins, catch/latch ribs; t333/t229/t38 as before.
+- CC-346 narrowed by the Director (19:20Z): GW-4 only (done, in review); KR-7 -> Claude 6, Breacher -> ChatGPT 2.
+- NEXT (fresh session): queue item 2, CC-344's remaining kit-vs-limb rows in my files: tcc344 armed sleeves 3.9-4.3 mm into kit
+  (stand armed/aim/reload, y ~1.03-1.12); the unarmed 2.8 is Claude 2's CB-314 (a webMat band in index.html). Then standby.
+- Checks per gun: cloud tests t333 tgt20076 t217 t228 t229 t38 (baseline first; tgt20076's sling rows are noisy); sheet: review/CC-346/
+  capture.mjs <ak|aa12> before|after (CC346_HEADLESS=1, through tools/game-test-slot.mjs run) + sheet.py; it needs review/GT-20076/
+  {visibility-camera,display-depth,visibility-buffer}.mjs and review/GT-20097/finish.mjs in the cloud copy.
 
 ### This VM's quirks (session 3)
 - The PC mount refuses writing over some existing files (EINVAL on open with O_CREAT, sometimes on ftruncate): crew.mjs fails

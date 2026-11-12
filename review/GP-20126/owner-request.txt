@@ -1,0 +1,20 @@
+Exclusive PC RTX5080, no screenshots:48 gun/view/pass trials (12 guns × eye/hip × first/repeat),10144 frames,16 gaps>50ms,0page errors. All gap-window pipeline/geometry count deltas0. All normal reloads settled full; saw has no magazine reload. Complete clean list follows.
+
+first/eye/pistol/draw: 116.80 ms; pipelines delta 0; geometries delta 0; heap delta 1.69 MB
+first/eye/pistol/draw: 66.60 ms; pipelines delta 0; geometries delta 0; heap delta 1.10 MB
+first/eye/pistol/fire: 100.00 ms; pipelines delta 0; geometries delta 0; heap delta 1.78 MB
+first/eye/pistol/fire: 83.50 ms; pipelines delta 0; geometries delta 0; heap delta 2.17 MB
+first/eye/pistol/fire: 716.80 ms; pipelines delta 0; geometries delta 0; heap delta 5.35 MB
+first/eye/revolver/draw: 133.40 ms; pipelines delta 0; geometries delta 0; heap delta -31.10 MB
+first/eye/revolver/draw: 149.90 ms; pipelines delta 0; geometries delta 0; heap delta 1.27 MB
+first/eye/revolver/reload: 116.60 ms; pipelines delta 0; geometries delta 0; heap delta 1.23 MB
+first/eye/launcher/draw: 50.10 ms; pipelines delta 0; geometries delta 0; heap delta 13.71 MB
+first/eye/launcher/draw: 66.80 ms; pipelines delta 0; geometries delta 0; heap delta 1.03 MB
+first/eye/launcher/draw: 83.40 ms; pipelines delta 0; geometries delta 0; heap delta 1.00 MB
+first/eye/chainsaw/draw: 50.10 ms; pipelines delta 0; geometries delta 0; heap delta -30.41 MB
+first/eye/chainsaw/draw: 100.00 ms; pipelines delta 0; geometries delta 0; heap delta 0.95 MB
+repeat/eye/ak/reload: 66.70 ms; pipelines delta 0; geometries delta 0; heap delta 0.93 MB
+repeat/eye/launcher/draw: 50.10 ms; pipelines delta 0; geometries delta 0; heap delta 1.05 MB
+repeat/hip/pistol/draw: 66.80 ms; pipelines delta 0; geometries delta 0; heap delta 1.22 MB
+
+Targeted trace: first revolver draw107.9/120.3ms renderer animation-frame callback; minorGC only2.25ms there. Launcher GPU decoder command flush108.8ms; chainsaw GPU decoder flush135.8ms. CPU sample follow-up shows first-draw shader-node build/traversal in vendor/three/three.webgpu.js and a separate majorGC418.8ms on first hip pistol fire. CPU-profiler startup itself caused600.2ms: EXCLUDE that instrumentation artefact. Clean first pistol fire716.8ms did not recur in trace and remains unattributed. No new J149 part, shader compilation or geometry upload is proven as its cause. Trace/profile overhead means do not substitute their timings for clean.json. No dominant own-file path identified, so no game-code edits. Evidence review/GP-20126/{clean,trace,cpu-trace,cpu-attribution}.json and gaps.txt. Please take renderer/warmup/GC follow-up in your lane.

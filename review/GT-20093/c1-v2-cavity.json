@@ -1,0 +1,209 @@
+{
+  "samplesXmm": [
+    -14.5,
+    -10,
+    0,
+    10,
+    14.5
+  ],
+  "front": [
+    {
+      "y": [
+        -52,
+        -48
+      ],
+      "targetMm": 83,
+      "minInnerFrontMm": 111.41006027867567,
+      "worst": {
+        "x": -0.01,
+        "y": -48.4
+      },
+      "passes": true
+    },
+    {
+      "y": [
+        -56,
+        -52
+      ],
+      "targetMm": 92,
+      "minInnerFrontMm": 113.53783498691095,
+      "worst": {
+        "x": 0.01,
+        "y": -52.4
+      },
+      "passes": true
+    },
+    {
+      "y": [
+        -60,
+        -56
+      ],
+      "targetMm": 99,
+      "minInnerFrontMm": 115.66560969514623,
+      "worst": {
+        "x": -0.01,
+        "y": -56.4
+      },
+      "passes": true
+    },
+    {
+      "y": [
+        -68,
+        -60
+      ],
+      "targetMm": 105,
+      "minInnerFrontMm": 115.59035585038599,
+      "worst": {
+        "x": -0.01,
+        "y": -67.9
+      },
+      "passes": true
+    },
+    {
+      "y": [
+        -72,
+        -68
+      ],
+      "targetMm": 110,
+      "minInnerFrontMm": 115.29108895920825,
+      "worst": {
+        "x": -0.01,
+        "y": -71.9
+      },
+      "passes": true
+    },
+    {
+      "y": [
+        -80,
+        -72
+      ],
+      "targetMm": 111.5,
+      "minInnerFrontMm": 114.69255517685276,
+      "worst": {
+        "x": -0.01,
+        "y": -79.9
+      },
+      "passes": true
+    },
+    {
+      "y": [
+        -88,
+        -80
+      ],
+      "targetMm": 109,
+      "minInnerFrontMm": 112.5959525382477,
+      "worst": {
+        "x": 0,
+        "y": -87.9
+      },
+      "passes": true
+    }
+  ],
+  "bottom": [
+    {
+      "zMm": 86,
+      "maxInnerBottomMm": -93.84666186077723,
+      "worst": {
+        "x": 0.01
+      },
+      "passes": true
+    },
+    {
+      "zMm": 88,
+      "maxInnerBottomMm": -94.57996385720107,
+      "worst": {
+        "x": 0
+      },
+      "passes": true
+    },
+    {
+      "zMm": 90,
+      "maxInnerBottomMm": -95.31326585362487,
+      "worst": {
+        "x": 0
+      },
+      "passes": true
+    },
+    {
+      "zMm": 92,
+      "maxInnerBottomMm": -96.0465678500487,
+      "worst": {
+        "x": -0.01
+      },
+      "passes": true
+    },
+    {
+      "zMm": 94,
+      "maxInnerBottomMm": -96.7798698464725,
+      "worst": {
+        "x": 0.01
+      },
+      "passes": true
+    },
+    {
+      "zMm": 96,
+      "maxInnerBottomMm": -97.51317184289633,
+      "worst": {
+        "x": 0.01
+      },
+      "passes": true
+    },
+    {
+      "zMm": 98,
+      "maxInnerBottomMm": -98.24647383932016,
+      "worst": {
+        "x": 0
+      },
+      "passes": true
+    },
+    {
+      "zMm": 100,
+      "maxInnerBottomMm": -98.97977583574396,
+      "worst": {
+        "x": 0.01
+      },
+      "passes": true
+    },
+    {
+      "zMm": 102,
+      "maxInnerBottomMm": -99.71307783216777,
+      "worst": {
+        "x": 0
+      },
+      "passes": true
+    },
+    {
+      "zMm": 104,
+      "maxInnerBottomMm": -100.4463798285916,
+      "worst": {
+        "x": -0.01
+      },
+      "passes": true
+    },
+    {
+      "zMm": 106,
+      "maxInnerBottomMm": -101.17968182501542,
+      "worst": {
+        "x": -0.01
+      },
+      "passes": true
+    },
+    {
+      "zMm": 108,
+      "maxInnerBottomMm": -97.75136776908516,
+      "worst": {
+        "x": -0.01
+      },
+      "passes": true
+    },
+    {
+      "zMm": 110,
+      "maxInnerBottomMm": -93.46439235447778,
+      "worst": {
+        "x": -0.01
+      },
+      "passes": true
+    }
+  ],
+  "outerFrontBelowY88Mm": 124.51033370242243
+}

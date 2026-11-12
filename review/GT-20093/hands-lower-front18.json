@@ -1,0 +1,18 @@
+{
+  "before": [
+    "DIAG {\"vertex\":1371,\"point\":[-0.0005243607999503297,-0.07872896313256206,0.08990125150290496],\"bodyBox\":{\"isBox3\":true,\"min\":{\"x\":-0.02187901735779718,\"y\":-0.11078973839832429,\"z\":0.005567016704983274},\"max\":{\"x\":0.02187042725038424,\"y\":-0.02346731253997092,\"z\":0.11470553339376366}},\"hand\":\"r\",\"mesh\":\"glove\",\"depth\":0.005299807555107032}",
+    "INFO uzi the hands into each other: 0.2 mm",
+    "PASS guns checked up in first person: 1 of 1",
+    "FAIL no part of either hand inside any part of a gun (deepest per gun, mm: uzi 5.3); through: uzi: 5.3 mm (r glove in ?)",
+    "PASS neither hand through the other (D-140)",
+    "PASS the gloved wrists stay inside the sleeves at every gun's hip hold"
+  ],
+  "after": [
+    "DIAG {\"vertex\":317,\"point\":[0.010078012971199259,-0.08326679493358215,0.10321090668371016],\"bodyBox\":{\"isBox3\":true,\"min\":{\"x\":-0.023223097024654752,\"y\":-0.12394260082082911,\"z\":0.004156821795678668},\"max\":{\"x\":0.023226759204945328,\"y\":-0.019671992486639315,\"z\":0.1343486519481694}},\"hand\":\"r\",\"mesh\":\"glovePads\",\"depth\":0.003506358842753718}",
+    "INFO uzi the hands into each other: 0.2 mm",
+    "PASS guns checked up in first person: 1 of 1",
+    "FAIL no part of either hand inside any part of a gun (deepest per gun, mm: uzi 3.5); through: uzi: 3.5 mm (r glovePads in ?)",
+    "PASS neither hand through the other (D-140)",
+    "PASS the gloved wrists stay inside the sleeves at every gun's hip hold"
+  ]
+}

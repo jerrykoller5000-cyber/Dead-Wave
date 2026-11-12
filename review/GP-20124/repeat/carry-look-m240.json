@@ -1,0 +1,1573 @@
+{
+  "camera": {
+    "overhead": {
+      "x": 2,
+      "y": -195,
+      "z": -653.1,
+      "tx": 0,
+      "ty": -198.8,
+      "tz": -650,
+      "fov": 48
+    },
+    "rear": {
+      "x": 1.5,
+      "y": -197.8,
+      "z": -654.2,
+      "tx": 0,
+      "ty": -198.9,
+      "tz": -650,
+      "fov": 55
+    },
+    "close": {
+      "x": -0.8,
+      "y": -196.8,
+      "z": -651.4,
+      "tx": 0,
+      "ty": -198.95,
+      "tz": -650,
+      "fov": 32
+    },
+    "backClose": {
+      "x": 0.8,
+      "y": -196.8,
+      "z": -648.6,
+      "tx": 0,
+      "ty": -198.95,
+      "tz": -650,
+      "fov": 32
+    }
+  },
+  "start": {
+    "player": [
+      0,
+      -200,
+      -650
+    ],
+    "hp": 100,
+    "wake": null,
+    "carrying": null,
+    "carry": {
+      "plan": {
+        "primary": [
+          null,
+          null
+        ],
+        "secondary": [
+          null,
+          null
+        ],
+        "paired": [
+          null,
+          null
+        ],
+        "hip": "pistol",
+        "hipPair": null,
+        "hipPairOn": false,
+        "pairOn": [
+          false,
+          false
+        ],
+        "holsterOn": [
+          false,
+          false
+        ],
+        "packPair": -1,
+        "secondaryKinds": [
+          null,
+          null
+        ],
+        "mags": 1,
+        "grenades": 0,
+        "shells": 0,
+        "rounds40": 0,
+        "boxes": 0,
+        "tanks": 0,
+        "bandolier": false,
+        "belt40": false,
+        "vest": false,
+        "cans": [],
+        "looks": [
+          "pistol|||"
+        ]
+      },
+      "slung": [
+        null,
+        null
+      ],
+      "holstered": [
+        null,
+        null
+      ],
+      "hip": "pistol",
+      "counts": {
+        "mags": 1,
+        "grenades": 0,
+        "shells": 0,
+        "rounds40": 0,
+        "boxes": 0,
+        "tanks": 0
+      },
+      "bands": {
+        "bandolier": false,
+        "belt40": false
+      }
+    },
+    "slots": [
+      [
+        "sling0",
+        null
+      ],
+      [
+        "sling1",
+        null
+      ],
+      [
+        "holster0",
+        null
+      ],
+      [
+        "holster1",
+        null
+      ],
+      [
+        "pair0",
+        null
+      ],
+      [
+        "pair1",
+        null
+      ],
+      [
+        "hip",
+        "pistol"
+      ],
+      [
+        "hipPair",
+        null
+      ]
+    ],
+    "meshKinds": [
+      {
+        "kind": "pistol",
+        "shown": true,
+        "pos": [
+          -0.2604915250329036,
+          -199.1924017015915,
+          -649.9392084377803
+        ]
+      }
+    ],
+    "carriedVisible": false,
+    "carriedMortarVisible": false,
+    "carriedGun": {
+      "name": "carried-m240",
+      "parent": "",
+      "pos": [
+        0.41,
+        1.14,
+        0.05
+      ],
+      "world": [
+        0.41,
+        -198.86,
+        -649.95
+      ],
+      "scale": [
+        0.86,
+        0.86,
+        0.86
+      ],
+      "children": 1
+    },
+    "CARRY_M240": {
+      "scale": 0.86,
+      "at": [
+        0.41,
+        1.14,
+        0.05
+      ],
+      "rot": [
+        -0.26,
+        0,
+        -0.13
+      ],
+      "hold": [
+        0,
+        0.84,
+        -0.16
+      ]
+    },
+    "CARRY_ARM": {
+      "x": -1,
+      "y": -0.2,
+      "z": 0.25,
+      "elbow": -2,
+      "w": 0
+    },
+    "fence": {
+      "raised": true,
+      "amount": 1,
+      "awaitExit": false
+    },
+    "placed": [],
+    "fuel": "at-pump",
+    "fuelSlow": 1,
+    "bed": {
+      "x": -40.25,
+      "z": -648.7,
+      "yaw": 0
+    },
+    "bay": {
+      "minX": -44,
+      "maxX": -36.300000000000004,
+      "minZ": -652,
+      "maxZ": -647.85,
+      "minY": -200,
+      "maxY": -197,
+      "exitFaces": [
+        "maxX",
+        "maxZ"
+      ]
+    },
+    "phase": "prep"
+  },
+  "allWeapons": {
+    "player": [
+      0,
+      -200,
+      -650
+    ],
+    "hp": 100,
+    "wake": null,
+    "carrying": null,
+    "carry": {
+      "plan": {
+        "primary": [
+          "minigun",
+          "m4"
+        ],
+        "secondary": [
+          "uzi",
+          "revolver"
+        ],
+        "paired": [
+          "uzi",
+          "revolver"
+        ],
+        "hip": "pistol",
+        "hipPair": "pistol",
+        "hipPairOn": true,
+        "pairOn": [
+          true,
+          true
+        ],
+        "holsterOn": [
+          true,
+          true
+        ],
+        "packPair": 0,
+        "secondaryKinds": [
+          "uzi",
+          "revolver"
+        ],
+        "mags": 5,
+        "grenades": 0,
+        "shells": 0,
+        "rounds40": 0,
+        "boxes": 2,
+        "tanks": 0,
+        "bandolier": false,
+        "belt40": false,
+        "vest": true,
+        "cans": [],
+        "looks": [
+          "minigun|l||",
+          "m4|l||",
+          "uzi|l||",
+          "revolver|l||",
+          "pistol|l||"
+        ]
+      },
+      "slung": [
+        "minigun",
+        "m4"
+      ],
+      "holstered": [
+        "uzi",
+        "revolver"
+      ],
+      "hip": "pistol",
+      "counts": {
+        "mags": 5,
+        "grenades": 0,
+        "shells": 0,
+        "rounds40": 0,
+        "boxes": 2,
+        "tanks": 0
+      },
+      "bands": {
+        "bandolier": false,
+        "belt40": false
+      }
+    },
+    "slots": [
+      [
+        "sling0",
+        "minigun"
+      ],
+      [
+        "sling1",
+        "m4"
+      ],
+      [
+        "holster0",
+        "uzi"
+      ],
+      [
+        "holster1",
+        "revolver"
+      ],
+      [
+        "pair0",
+        "uzi"
+      ],
+      [
+        "pair1",
+        "revolver"
+      ],
+      [
+        "hip",
+        "pistol"
+      ],
+      [
+        "hipPair",
+        "pistol"
+      ]
+    ],
+    "meshKinds": [
+      {
+        "kind": "pistol",
+        "shown": true,
+        "pos": [
+          -0.25972991450616195,
+          -199.19222933967103,
+          -649.9391230896706
+        ]
+      },
+      {
+        "kind": "pistol",
+        "shown": true,
+        "pos": [
+          0.24201933042696205,
+          -199.19194075536038,
+          -649.9371379571465
+        ]
+      },
+      {
+        "kind": "minigun",
+        "shown": true,
+        "pos": [
+          0.3667829282407646,
+          -199.0499396301511,
+          -650.2270552677389
+        ]
+      },
+      {
+        "kind": "m4",
+        "shown": true,
+        "pos": [
+          -0.2587536192250411,
+          -199.088591546926,
+          -650.2948917238418
+        ]
+      },
+      {
+        "kind": "uzi",
+        "shown": true,
+        "pos": [
+          0.07019576125931346,
+          -198.94778850214232,
+          -650.3754465412035
+        ]
+      },
+      {
+        "kind": "uzi",
+        "shown": true,
+        "pos": [
+          -0.05691975582810166,
+          -198.94490534212295,
+          -650.3852617318842
+        ]
+      },
+      {
+        "kind": "revolver",
+        "shown": true,
+        "pos": [
+          0.1313704709211938,
+          -199.05343552716693,
+          -650.3795747539659
+        ]
+      },
+      {
+        "kind": "revolver",
+        "shown": true,
+        "pos": [
+          -0.1221547945124617,
+          -199.04945103057756,
+          -650.3816039524548
+        ]
+      }
+    ],
+    "carriedVisible": false,
+    "carriedMortarVisible": false,
+    "carriedGun": {
+      "name": "carried-m240",
+      "parent": "",
+      "pos": [
+        0.41,
+        1.14,
+        0.05
+      ],
+      "world": [
+        0.41,
+        -198.86,
+        -649.95
+      ],
+      "scale": [
+        0.86,
+        0.86,
+        0.86
+      ],
+      "children": 1
+    },
+    "CARRY_M240": {
+      "scale": 0.86,
+      "at": [
+        0.41,
+        1.14,
+        0.05
+      ],
+      "rot": [
+        -0.26,
+        0,
+        -0.13
+      ],
+      "hold": [
+        0,
+        0.84,
+        -0.16
+      ]
+    },
+    "CARRY_ARM": {
+      "x": -1,
+      "y": -0.2,
+      "z": 0.25,
+      "elbow": -2,
+      "w": 0
+    },
+    "fence": {
+      "raised": true,
+      "amount": 1,
+      "awaitExit": false
+    },
+    "placed": [],
+    "fuel": "at-pump",
+    "fuelSlow": 1,
+    "bed": {
+      "x": -40.25,
+      "z": -648.7,
+      "yaw": 0
+    },
+    "bay": {
+      "minX": -44,
+      "maxX": -36.300000000000004,
+      "minZ": -652,
+      "maxZ": -647.85,
+      "minY": -200,
+      "maxY": -197,
+      "exitFaces": [
+        "maxX",
+        "maxZ"
+      ]
+    },
+    "phase": "prep"
+  },
+  "shouldered": {
+    "player": [
+      0,
+      -200,
+      -650
+    ],
+    "hp": 100,
+    "wake": null,
+    "carrying": {
+      "kind": "m240",
+      "hp": 120,
+      "belt": 500
+    },
+    "carry": {
+      "plan": {
+        "primary": [
+          "minigun",
+          "m4"
+        ],
+        "secondary": [
+          "uzi",
+          "revolver"
+        ],
+        "paired": [
+          "uzi",
+          "revolver"
+        ],
+        "hip": "pistol",
+        "hipPair": "pistol",
+        "hipPairOn": true,
+        "pairOn": [
+          true,
+          true
+        ],
+        "holsterOn": [
+          true,
+          true
+        ],
+        "packPair": 0,
+        "secondaryKinds": [
+          "uzi",
+          "revolver"
+        ],
+        "mags": 5,
+        "grenades": 0,
+        "shells": 0,
+        "rounds40": 0,
+        "boxes": 2,
+        "tanks": 0,
+        "bandolier": false,
+        "belt40": false,
+        "vest": true,
+        "cans": [],
+        "looks": [
+          "minigun|l||",
+          "m4|l||",
+          "uzi|l||",
+          "revolver|l||",
+          "pistol|l||"
+        ]
+      },
+      "slung": [
+        "minigun",
+        "m4"
+      ],
+      "holstered": [
+        "uzi",
+        "revolver"
+      ],
+      "hip": "pistol",
+      "counts": {
+        "mags": 5,
+        "grenades": 0,
+        "shells": 0,
+        "rounds40": 0,
+        "boxes": 2,
+        "tanks": 0
+      },
+      "bands": {
+        "bandolier": false,
+        "belt40": false
+      }
+    },
+    "slots": [
+      [
+        "sling0",
+        "minigun"
+      ],
+      [
+        "sling1",
+        "m4"
+      ],
+      [
+        "holster0",
+        "uzi"
+      ],
+      [
+        "holster1",
+        "revolver"
+      ],
+      [
+        "pair0",
+        "uzi"
+      ],
+      [
+        "pair1",
+        "revolver"
+      ],
+      [
+        "hip",
+        "pistol"
+      ],
+      [
+        "hipPair",
+        "pistol"
+      ]
+    ],
+    "meshKinds": [
+      {
+        "kind": "pistol",
+        "shown": true,
+        "pos": [
+          -0.2574850109295471,
+          -199.19500168842964,
+          -649.9379618796647
+        ]
+      },
+      {
+        "kind": "pistol",
+        "shown": true,
+        "pos": [
+          0.2451760344371091,
+          -199.19766300490514,
+          -649.9363322448733
+        ]
+      },
+      {
+        "kind": "minigun",
+        "shown": true,
+        "pos": [
+          0.3634002117062442,
+          -199.04753899471586,
+          -650.2283796164478
+        ]
+      },
+      {
+        "kind": "m4",
+        "shown": true,
+        "pos": [
+          -0.2618532274017129,
+          -199.09216650601863,
+          -650.2951497428593
+        ]
+      },
+      {
+        "kind": "uzi",
+        "shown": true,
+        "pos": [
+          0.06584353210722024,
+          -198.94958425191498,
+          -650.3776567459781
+        ]
+      },
+      {
+        "kind": "uzi",
+        "shown": true,
+        "pos": [
+          -0.061300172362201345,
+          -198.94787034919963,
+          -650.3873802338023
+        ]
+      },
+      {
+        "kind": "revolver",
+        "shown": true,
+        "pos": [
+          0.12789032912604414,
+          -199.05476081732806,
+          -650.3806175240837
+        ]
+      },
+      {
+        "kind": "revolver",
+        "shown": true,
+        "pos": [
+          -0.1256609857273619,
+          -199.05290422427407,
+          -650.3824445082455
+        ]
+      }
+    ],
+    "carriedVisible": true,
+    "carriedMortarVisible": false,
+    "carriedGun": {
+      "name": "carried-m240",
+      "parent": "",
+      "pos": [
+        0.41,
+        0.8328341806161651,
+        0.3280954150792303
+      ],
+      "world": [
+        0.41,
+        -199.16716581938383,
+        -649.6719045849208
+      ],
+      "scale": [
+        0.86,
+        0.86,
+        0.86
+      ],
+      "children": 1
+    },
+    "CARRY_M240": {
+      "scale": 0.86,
+      "at": [
+        0.41,
+        1.14,
+        0.05
+      ],
+      "rot": [
+        -0.26,
+        0,
+        -0.13
+      ],
+      "hold": [
+        0,
+        0.84,
+        -0.16
+      ]
+    },
+    "CARRY_ARM": {
+      "x": -1,
+      "y": -0.2,
+      "z": 0.25,
+      "elbow": -2,
+      "w": 0
+    },
+    "fence": {
+      "raised": true,
+      "amount": 1,
+      "awaitExit": false
+    },
+    "placed": [],
+    "fuel": "at-pump",
+    "fuelSlow": 1,
+    "bed": {
+      "x": -40.25,
+      "z": -648.7,
+      "yaw": 0
+    },
+    "bay": {
+      "minX": -44,
+      "maxX": -36.300000000000004,
+      "minZ": -652,
+      "maxZ": -647.85,
+      "minY": -200,
+      "maxY": -197,
+      "exitFaces": [
+        "maxX",
+        "maxZ"
+      ]
+    },
+    "phase": "prep"
+  },
+  "downed": {
+    "player": [
+      -40.970000000000006,
+      -199.92,
+      -650
+    ],
+    "hp": 100,
+    "wake": "lying",
+    "carrying": null,
+    "carry": {
+      "plan": {
+        "primary": [
+          "minigun",
+          "m4"
+        ],
+        "secondary": [
+          "uzi",
+          "revolver"
+        ],
+        "paired": [
+          "uzi",
+          "revolver"
+        ],
+        "hip": "pistol",
+        "hipPair": "pistol",
+        "hipPairOn": true,
+        "pairOn": [
+          true,
+          true
+        ],
+        "holsterOn": [
+          true,
+          true
+        ],
+        "packPair": 0,
+        "secondaryKinds": [
+          "uzi",
+          "revolver"
+        ],
+        "mags": 5,
+        "grenades": 0,
+        "shells": 0,
+        "rounds40": 0,
+        "boxes": 2,
+        "tanks": 0,
+        "bandolier": false,
+        "belt40": false,
+        "vest": true,
+        "cans": [],
+        "looks": [
+          "minigun|l||",
+          "m4|l||",
+          "uzi|l||",
+          "revolver|l||",
+          "pistol|l||"
+        ]
+      },
+      "slung": [
+        "minigun",
+        "m4"
+      ],
+      "holstered": [
+        "uzi",
+        "revolver"
+      ],
+      "hip": "pistol",
+      "counts": {
+        "mags": 5,
+        "grenades": 0,
+        "shells": 0,
+        "rounds40": 0,
+        "boxes": 2,
+        "tanks": 0
+      },
+      "bands": {
+        "bandolier": false,
+        "belt40": false
+      }
+    },
+    "slots": [
+      [
+        "sling0",
+        "minigun"
+      ],
+      [
+        "sling1",
+        "m4"
+      ],
+      [
+        "holster0",
+        "uzi"
+      ],
+      [
+        "holster1",
+        "revolver"
+      ],
+      [
+        "pair0",
+        "uzi"
+      ],
+      [
+        "pair1",
+        "revolver"
+      ],
+      [
+        "hip",
+        "pistol"
+      ],
+      [
+        "hipPair",
+        "pistol"
+      ]
+    ],
+    "meshKinds": [
+      {
+        "kind": "pistol",
+        "shown": true,
+        "pos": [
+          -41.071992034789304,
+          -199.15651964147452,
+          -649.7491424325664
+        ]
+      },
+      {
+        "kind": "pistol",
+        "shown": true,
+        "pos": [
+          -41.071992034789304,
+          -199.15651964147452,
+          -650.2508575674336
+        ]
+      },
+      {
+        "kind": "minigun",
+        "shown": true,
+        "pos": [
+          -41.22052499602729,
+          -199.45658658485007,
+          -650.3587360170964
+        ]
+      },
+      {
+        "kind": "m4",
+        "shown": true,
+        "pos": [
+          -41.170877237799935,
+          -199.51122708871512,
+          -649.7326839081607
+        ]
+      },
+      {
+        "kind": "uzi",
+        "shown": true,
+        "pos": [
+          -41.315245652524226,
+          -199.60090179602773,
+          -650.0577046438684
+        ]
+      },
+      {
+        "kind": "uzi",
+        "shown": true,
+        "pos": [
+          -41.31596565252423,
+          -199.6082350595847,
+          -649.93039121131
+        ]
+      },
+      {
+        "kind": "revolver",
+        "shown": true,
+        "pos": [
+          -41.21050452525736,
+          -199.60429706370115,
+          -650.1204617116431
+        ]
+      },
+      {
+        "kind": "revolver",
+        "shown": true,
+        "pos": [
+          -41.21050452525736,
+          -199.60135006871434,
+          -649.8669141435354
+        ]
+      }
+    ],
+    "carriedVisible": false,
+    "carriedMortarVisible": false,
+    "carriedGun": {
+      "name": "carried-m240",
+      "parent": "",
+      "pos": [
+        0.41,
+        1.0056198993089147,
+        0.1461660704837491
+      ],
+      "world": [
+        -40.823833929516255,
+        -198.91438010069106,
+        -650.41
+      ],
+      "scale": [
+        0.86,
+        0.86,
+        0.86
+      ],
+      "children": 1
+    },
+    "CARRY_M240": {
+      "scale": 0.86,
+      "at": [
+        0.41,
+        1.14,
+        0.05
+      ],
+      "rot": [
+        -0.26,
+        0,
+        -0.13
+      ],
+      "hold": [
+        0,
+        0.84,
+        -0.16
+      ]
+    },
+    "CARRY_ARM": {
+      "x": -1,
+      "y": -0.2,
+      "z": 0.25,
+      "elbow": -2,
+      "w": 0
+    },
+    "fence": {
+      "raised": false,
+      "amount": 0,
+      "awaitExit": true
+    },
+    "placed": [
+      {
+        "hp": 120,
+        "belt": 500
+      }
+    ],
+    "fuel": "at-pump",
+    "fuelSlow": 1,
+    "bed": {
+      "x": -40.25,
+      "z": -648.7,
+      "yaw": 0
+    },
+    "bay": {
+      "minX": -44,
+      "maxX": -36.300000000000004,
+      "minZ": -652,
+      "maxZ": -647.85,
+      "minY": -200,
+      "maxY": -197,
+      "exitFaces": [
+        "maxX",
+        "maxZ"
+      ]
+    },
+    "phase": "prep"
+  },
+  "recovered": {
+    "player": [
+      -40.25,
+      -200,
+      -648.7
+    ],
+    "hp": 100,
+    "wake": null,
+    "carrying": null,
+    "carry": {
+      "plan": {
+        "primary": [
+          "minigun",
+          "m4"
+        ],
+        "secondary": [
+          "uzi",
+          "revolver"
+        ],
+        "paired": [
+          "uzi",
+          "revolver"
+        ],
+        "hip": "pistol",
+        "hipPair": "pistol",
+        "hipPairOn": true,
+        "pairOn": [
+          true,
+          true
+        ],
+        "holsterOn": [
+          true,
+          true
+        ],
+        "packPair": 0,
+        "secondaryKinds": [
+          "uzi",
+          "revolver"
+        ],
+        "mags": 5,
+        "grenades": 0,
+        "shells": 0,
+        "rounds40": 0,
+        "boxes": 2,
+        "tanks": 0,
+        "bandolier": false,
+        "belt40": false,
+        "vest": true,
+        "cans": [],
+        "looks": [
+          "minigun|l||",
+          "m4|l||",
+          "uzi|l||",
+          "revolver|l||",
+          "pistol|l||"
+        ]
+      },
+      "slung": [
+        "minigun",
+        "m4"
+      ],
+      "holstered": [
+        "uzi",
+        "revolver"
+      ],
+      "hip": "pistol",
+      "counts": {
+        "mags": 5,
+        "grenades": 0,
+        "shells": 0,
+        "rounds40": 0,
+        "boxes": 2,
+        "tanks": 0
+      },
+      "bands": {
+        "bandolier": false,
+        "belt40": false
+      }
+    },
+    "slots": [
+      [
+        "sling0",
+        "minigun"
+      ],
+      [
+        "sling1",
+        "m4"
+      ],
+      [
+        "holster0",
+        "uzi"
+      ],
+      [
+        "holster1",
+        "revolver"
+      ],
+      [
+        "pair0",
+        "uzi"
+      ],
+      [
+        "pair1",
+        "revolver"
+      ],
+      [
+        "hip",
+        "pistol"
+      ],
+      [
+        "hipPair",
+        "pistol"
+      ]
+    ],
+    "meshKinds": [
+      {
+        "kind": "pistol",
+        "shown": true,
+        "pos": [
+          -40.49923477481828,
+          -199.1948323324759,
+          -648.6369412629108
+        ]
+      },
+      {
+        "kind": "pistol",
+        "shown": true,
+        "pos": [
+          -39.99729686467635,
+          -199.1937100934986,
+          -648.6376055923519
+        ]
+      },
+      {
+        "kind": "minigun",
+        "shown": true,
+        "pos": [
+          -39.88600790138524,
+          -199.04284760700023,
+          -648.9408462984818
+        ]
+      },
+      {
+        "kind": "m4",
+        "shown": true,
+        "pos": [
+          -40.51292568513434,
+          -199.0919774880703,
+          -648.9850285898165
+        ]
+      },
+      {
+        "kind": "uzi",
+        "shown": true,
+        "pos": [
+          -40.18966081729643,
+          -198.94566824873698,
+          -649.0778493991698
+        ]
+      },
+      {
+        "kind": "uzi",
+        "shown": true,
+        "pos": [
+          -40.31708690336327,
+          -198.94491627815913,
+          -649.0828526375342
+        ]
+      },
+      {
+        "kind": "revolver",
+        "shown": true,
+        "pos": [
+          -40.12692428259628,
+          -199.050273969026,
+          -649.0843648911704
+        ]
+      },
+      {
+        "kind": "revolver",
+        "shown": true,
+        "pos": [
+          -40.380376284709996,
+          -199.0505417506907,
+          -649.0768107538727
+        ]
+      }
+    ],
+    "carriedVisible": false,
+    "carriedMortarVisible": false,
+    "carriedGun": {
+      "name": "carried-m240",
+      "parent": "",
+      "pos": [
+        0.41,
+        1.0056198993089147,
+        0.1461660704837491
+      ],
+      "world": [
+        -39.84,
+        -198.99438010069107,
+        -648.5538339295163
+      ],
+      "scale": [
+        0.86,
+        0.86,
+        0.86
+      ],
+      "children": 1
+    },
+    "CARRY_M240": {
+      "scale": 0.86,
+      "at": [
+        0.41,
+        1.14,
+        0.05
+      ],
+      "rot": [
+        -0.26,
+        0,
+        -0.13
+      ],
+      "hold": [
+        0,
+        0.84,
+        -0.16
+      ]
+    },
+    "CARRY_ARM": {
+      "x": -1,
+      "y": -0.2,
+      "z": 0.25,
+      "elbow": -2,
+      "w": 0
+    },
+    "fence": {
+      "raised": false,
+      "amount": 0,
+      "awaitExit": true
+    },
+    "placed": [
+      {
+        "hp": 120,
+        "belt": 500
+      }
+    ],
+    "fuel": "at-pump",
+    "fuelSlow": 1,
+    "bed": {
+      "x": -40.25,
+      "z": -648.7,
+      "yaw": 0
+    },
+    "bay": {
+      "minX": -44,
+      "maxX": -36.300000000000004,
+      "minZ": -652,
+      "maxZ": -647.85,
+      "minY": -200,
+      "maxY": -197,
+      "exitFaces": [
+        "maxX",
+        "maxZ"
+      ]
+    },
+    "phase": "prep"
+  },
+  "walked": {
+    "player": [
+      -40.25,
+      -200,
+      -635.7044442283443
+    ],
+    "hp": 100,
+    "wake": null,
+    "carrying": null,
+    "carry": {
+      "plan": {
+        "primary": [
+          "minigun",
+          "m4"
+        ],
+        "secondary": [
+          "uzi",
+          "revolver"
+        ],
+        "paired": [
+          "uzi",
+          "revolver"
+        ],
+        "hip": "pistol",
+        "hipPair": "pistol",
+        "hipPairOn": true,
+        "pairOn": [
+          true,
+          true
+        ],
+        "holsterOn": [
+          true,
+          true
+        ],
+        "packPair": 0,
+        "secondaryKinds": [
+          "uzi",
+          "revolver"
+        ],
+        "mags": 5,
+        "grenades": 0,
+        "shells": 0,
+        "rounds40": 0,
+        "boxes": 2,
+        "tanks": 0,
+        "bandolier": false,
+        "belt40": false,
+        "vest": true,
+        "cans": [],
+        "looks": [
+          "minigun|l||",
+          "m4|l||",
+          "uzi|l||",
+          "revolver|l||",
+          "pistol|l||"
+        ]
+      },
+      "slung": [
+        "minigun",
+        "m4"
+      ],
+      "holstered": [
+        "uzi",
+        "revolver"
+      ],
+      "hip": "pistol",
+      "counts": {
+        "mags": 5,
+        "grenades": 0,
+        "shells": 0,
+        "rounds40": 0,
+        "boxes": 2,
+        "tanks": 0
+      },
+      "bands": {
+        "bandolier": false,
+        "belt40": false
+      }
+    },
+    "slots": [
+      [
+        "sling0",
+        "minigun"
+      ],
+      [
+        "sling1",
+        "m4"
+      ],
+      [
+        "holster0",
+        "uzi"
+      ],
+      [
+        "holster1",
+        "revolver"
+      ],
+      [
+        "pair0",
+        "uzi"
+      ],
+      [
+        "pair1",
+        "revolver"
+      ],
+      [
+        "hip",
+        "pistol"
+      ],
+      [
+        "hipPair",
+        "pistol"
+      ]
+    ],
+    "meshKinds": [
+      {
+        "kind": "pistol",
+        "shown": true,
+        "pos": [
+          -40.47973365073284,
+          -199.21712967612922,
+          -635.6496133731453
+        ]
+      },
+      {
+        "kind": "pistol",
+        "shown": true,
+        "pos": [
+          -39.977798478029676,
+          -199.18097437066223,
+          -635.6393221919143
+        ]
+      },
+      {
+        "kind": "minigun",
+        "shown": true,
+        "pos": [
+          -39.850101044800915,
+          -199.03852620989719,
+          -635.9160906495773
+        ]
+      },
+      {
+        "kind": "m4",
+        "shown": true,
+        "pos": [
+          -40.47107509256201,
+          -199.0966300354638,
+          -636.0077798262784
+        ]
+      },
+      {
+        "kind": "uzi",
+        "shown": true,
+        "pos": [
+          -40.14408979606564,
+          -198.9445684692978,
+          -636.0747138752513
+        ]
+      },
+      {
+        "kind": "uzi",
+        "shown": true,
+        "pos": [
+          -40.270775542418185,
+          -198.94568164120176,
+          -636.0892908359635
+        ]
+      },
+      {
+        "kind": "revolver",
+        "shown": true,
+        "pos": [
+          -40.07940365610999,
+          -199.0481501379273,
+          -636.07740132031
+        ]
+      },
+      {
+        "kind": "revolver",
+        "shown": true,
+        "pos": [
+          -40.332670973537994,
+          -199.05230074624842,
+          -636.0889552134272
+        ]
+      }
+    ],
+    "carriedVisible": false,
+    "carriedMortarVisible": false,
+    "carriedGun": {
+      "name": "carried-m240",
+      "parent": "",
+      "pos": [
+        0.41,
+        1.0056198993089147,
+        0.1461660704837491
+      ],
+      "world": [
+        -39.84,
+        -198.99438010069107,
+        -635.5582781578605
+      ],
+      "scale": [
+        0.86,
+        0.86,
+        0.86
+      ],
+      "children": 1
+    },
+    "CARRY_M240": {
+      "scale": 0.86,
+      "at": [
+        0.41,
+        1.14,
+        0.05
+      ],
+      "rot": [
+        -0.26,
+        0,
+        -0.13
+      ],
+      "hold": [
+        0,
+        0.84,
+        -0.16
+      ]
+    },
+    "CARRY_ARM": {
+      "x": -1,
+      "y": -0.2,
+      "z": 0.25,
+      "elbow": -2,
+      "w": 0
+    },
+    "fence": {
+      "raised": true,
+      "amount": 1,
+      "awaitExit": false
+    },
+    "placed": [
+      {
+        "hp": 120,
+        "belt": 500
+      }
+    ],
+    "fuel": "at-pump",
+    "fuelSlow": 1,
+    "bed": {
+      "x": -40.25,
+      "z": -648.7,
+      "yaw": 0
+    },
+    "bay": {
+      "minX": -44,
+      "maxX": -36.300000000000004,
+      "minZ": -652,
+      "maxZ": -647.85,
+      "minY": -200,
+      "maxY": -197,
+      "exitFaces": [
+        "maxX",
+        "maxZ"
+      ]
+    },
+    "phase": "prep"
+  },
+  "spikes": [
+    {
+      "stage": "all weapons carry copies",
+      "ms": 283.5
+    },
+    {
+      "stage": "death and infirmary wake",
+      "ms": 533.4
+    },
+    {
+      "stage": "walk out of infirmary",
+      "ms": 199.9
+    }
+  ],
+  "errors": []
+}

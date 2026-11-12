@@ -24,12 +24,18 @@ export function relMatrix(T, space, bone, out) {
   return out;
 }
 
-export function liveCloth(T, { space, bones, geo, weights, material, name = 'live-cloth', aoOwners = null, holder = null }) {
+// under (optional, CC-344, J128): { k, gap, boxes: [{ x: [x0, x1], y: [y0, y1], z: [z0, z1], back }] } - kit worn on bone k
+// (a belt's band, the pouches on it: boxes in that bone's frame) that this cloth stays under: a vertex the other joints
+// carry into one is put back out under it (gap below its underside), or behind it (gap behind its back face, `back`: a
+// pouch standing off the belt) when that is nearer, so the cloth folds there (a trouser leg at the hip crease as the thigh
+// comes up) instead of going through it.
+export function liveCloth(T, { space, bones, geo, weights, material, name = 'live-cloth', aoOwners = null, holder = null, under = null }) {
   const B = bones.length, count = geo.attributes.position.count;
   if (weights.length !== count * B) throw new Error('liveCloth: weights need ' + count * B + ' values');
   const bindInv = bones.map((b) => relMatrix(T, space, b, new T.Matrix4()).invert());
   if (!geo.attributes.normal) geo.computeVertexNormals();
   const rest = Float32Array.from(geo.attributes.position.array), nrm = Float32Array.from(geo.attributes.normal.array);
+  const bandM = new T.Matrix4(), bandInv = new T.Matrix4();
   // What is drawn is one triangle per three vertices, with the camo box-projected at the body's scale (core/geometry.js),
   // as the rest of the marine is; the skin moves the shared vertices once and copies them out (map).
   const idx = geo.index ? geo.index.array : Uint32Array.from({ length: count }, (_, i) => i), drawn = idx.length;
@@ -85,6 +91,21 @@ export function liveCloth(T, { space, bones, geo, weights, material, name = 'liv
       // CL-220: Math.sqrt, not Math.hypot: V8 allocates for a three-argument hypot, and this ran per vertex per bend (131 kB a frame at night 20, GP-19940's allocation profile).
       const nx = m[0] * a + m[3] * b + m[6] * c, ny = m[1] * a + m[4] * b + m[7] * c, nz = m[2] * a + m[5] * b + m[8] * c, l = Math.sqrt(nx * nx + ny * ny + nz * nz) || 1;
       Q[o] = nx / l; Q[o + 1] = ny / l; Q[o + 2] = nz / l;
+    }
+    if (under) {   // CC-344: kept under the kit on bone k
+      relMatrix(T, space, bones[under.k], bandM); bandInv.copy(bandM).invert();
+      const f = bandInv.elements, g = bandM.elements, gap = under.gap || 0;
+      for (let i = 0; i < count; i++) {
+        const o = i * 3, x = P[o], y = P[o + 1], z = P[o + 2];
+        let lx = f[0] * x + f[4] * y + f[8] * z + f[12], ly = f[1] * x + f[5] * y + f[9] * z + f[13], lz = f[2] * x + f[6] * y + f[10] * z + f[14], moved = false;
+        for (const b of under.boxes) {
+          if (lx <= b.x[0] || lx >= b.x[1] || ly <= b.y[0] - gap || ly >= b.y[1] || lz <= b.z[0] - gap || lz >= b.z[1]) continue;
+          const down = ly - (b.y[0] - gap), behind = b.back ? lz - (b.z[0] - gap) : Infinity;
+          if (behind < down) lz = b.z[0] - gap; else ly = b.y[0] - gap;
+          moved = true;
+        }
+        if (moved) { P[o] = g[0] * lx + g[4] * ly + g[8] * lz + g[12]; P[o + 1] = g[1] * lx + g[5] * ly + g[9] * lz + g[13]; P[o + 2] = g[2] * lx + g[6] * ly + g[10] * lz + g[14]; }
+      }
     }
     const pa = PA.array, na = NA.array;
     for (let i = 0; i < drawn; i++) { const o = i * 3, s = map[i] * 3; pa[o] = P[s]; pa[o + 1] = P[s + 1]; pa[o + 2] = P[s + 2]; na[o] = Q[s]; na[o + 1] = Q[s + 1]; na[o + 2] = Q[s + 2]; }

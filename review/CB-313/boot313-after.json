@@ -1,0 +1,31 @@
+{
+  "tag": "after",
+  "shots": [
+    "boot-side-noon-after.png",
+    "boot-rear-noon-after.png",
+    "boot-side-overcast-after.png",
+    "boot-rear-overcast-after.png",
+    "boot-side-dusk-after.png",
+    "boot-rear-dusk-after.png",
+    "boot-side-night-after.png",
+    "boot-rear-night-after.png"
+  ],
+  "setup": {
+    "ok": true,
+    "unarmed": true,
+    "deckY": 0.25,
+    "hw": 1.001,
+    "plankTop": 0.25,
+    "playerY": 0.25,
+    "soles": {
+      "L": {
+        "minGapMm": 0,
+        "maxGapMm": 0
+      },
+      "R": {
+        "minGapMm": 0,
+        "maxGapMm": 50
+      }
+    }
+  }
+}

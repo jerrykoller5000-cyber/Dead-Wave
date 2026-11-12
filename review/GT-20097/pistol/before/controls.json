@@ -1,0 +1,8 @@
+{
+  "controls": {
+    "lightSwitch": "controls-lightSwitch-pistol",
+    "trigger": "controls-trigger",
+    "magRelease": "controls-magRelease",
+    "slideStop": "controls-slideStop"
+  }
+}

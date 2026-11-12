@@ -1,0 +1,13 @@
+{
+  "factoryMaterials": 24,
+  "paintedMaterials": 7,
+  "controls": [
+    "trigger",
+    "lightSwitch",
+    "selector",
+    "magRelease",
+    "drumLatchLeft",
+    "drumLatchRight",
+    "chargingHandle"
+  ]
+}

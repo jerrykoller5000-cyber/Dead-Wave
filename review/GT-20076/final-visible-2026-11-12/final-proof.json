@@ -1,0 +1,659 @@
+{
+  "guns": {
+    "pistol": {
+      "images": {
+        "before": 32,
+        "after": 32
+      },
+      "projectionMaxAbsDifference": {
+        "aimed": 2.220446049250313e-16,
+        "hip": 2.220446049250313e-16,
+        "rack": 0.0,
+        "standard-open": 9.845457782375888e-13,
+        "held-left-open": 3.1374902675906924e-13,
+        "held-right-open": 3.717026686445024e-13
+      },
+      "imageMaxRgbDifference": {
+        "aimed-noon.png": 113,
+        "aimed-overcast.png": 103,
+        "aimed-dusk.png": 121,
+        "aimed-night.png": 140,
+        "hip-noon.png": 155,
+        "hip-overcast.png": 101,
+        "hip-dusk.png": 128,
+        "hip-night.png": 145,
+        "rack-noon.png": 0,
+        "rack-overcast.png": 0,
+        "rack-dusk.png": 0,
+        "rack-night.png": 0,
+        "standard-open-noon.png": 40,
+        "standard-open-overcast.png": 21,
+        "standard-open-dusk.png": 23,
+        "standard-open-night.png": 16,
+        "held-left-open-noon.png": 113,
+        "held-left-open-overcast.png": 66,
+        "held-left-open-dusk.png": 104,
+        "held-left-open-night.png": 43,
+        "held-right-open-noon.png": 84,
+        "held-right-open-overcast.png": 61,
+        "held-right-open-dusk.png": 63,
+        "held-right-open-night.png": 22
+      },
+      "reloadFractions": {
+        "before": [
+          {
+            "fraction": 0.25,
+            "light": "noon",
+            "round": {
+              "world": false,
+              "eye": false
+            }
+          },
+          {
+            "fraction": 0.25,
+            "light": "overcast",
+            "round": {
+              "world": false,
+              "eye": false
+            }
+          },
+          {
+            "fraction": 0.25,
+            "light": "dusk",
+            "round": {
+              "world": false,
+              "eye": false
+            }
+          },
+          {
+            "fraction": 0.25,
+            "light": "night",
+            "round": {
+              "world": false,
+              "eye": false
+            }
+          },
+          {
+            "fraction": 0.55,
+            "light": "noon",
+            "round": {
+              "world": true,
+              "eye": true
+            }
+          },
+          {
+            "fraction": 0.55,
+            "light": "overcast",
+            "round": {
+              "world": true,
+              "eye": true
+            }
+          },
+          {
+            "fraction": 0.55,
+            "light": "dusk",
+            "round": {
+              "world": true,
+              "eye": true
+            }
+          },
+          {
+            "fraction": 0.55,
+            "light": "night",
+            "round": {
+              "world": true,
+              "eye": true
+            }
+          }
+        ],
+        "after": [
+          {
+            "fraction": 0.25,
+            "light": "noon",
+            "round": {
+              "world": false,
+              "eye": false
+            }
+          },
+          {
+            "fraction": 0.25,
+            "light": "overcast",
+            "round": {
+              "world": false,
+              "eye": false
+            }
+          },
+          {
+            "fraction": 0.25,
+            "light": "dusk",
+            "round": {
+              "world": false,
+              "eye": false
+            }
+          },
+          {
+            "fraction": 0.25,
+            "light": "night",
+            "round": {
+              "world": false,
+              "eye": false
+            }
+          },
+          {
+            "fraction": 0.55,
+            "light": "noon",
+            "round": {
+              "world": true,
+              "eye": true
+            }
+          },
+          {
+            "fraction": 0.55,
+            "light": "overcast",
+            "round": {
+              "world": true,
+              "eye": true
+            }
+          },
+          {
+            "fraction": 0.55,
+            "light": "dusk",
+            "round": {
+              "world": true,
+              "eye": true
+            }
+          },
+          {
+            "fraction": 0.55,
+            "light": "night",
+            "round": {
+              "world": true,
+              "eye": true
+            }
+          }
+        ]
+      }
+    },
+    "revolver": {
+      "images": {
+        "before": 32,
+        "after": 32
+      },
+      "projectionMaxAbsDifference": {
+        "aimed": 3.9968028886505635e-15,
+        "hip": 4.440892098500626e-15,
+        "rack": 0.0,
+        "standard-open": 3.9390712913700554e-13,
+        "held-left-open": 2.091660178393795e-13,
+        "held-right-open": 4.183389745726629e-13
+      },
+      "imageMaxRgbDifference": {
+        "aimed-noon.png": 124,
+        "aimed-overcast.png": 103,
+        "aimed-dusk.png": 127,
+        "aimed-night.png": 144,
+        "hip-noon.png": 140,
+        "hip-overcast.png": 99,
+        "hip-dusk.png": 127,
+        "hip-night.png": 145,
+        "rack-noon.png": 0,
+        "rack-overcast.png": 0,
+        "rack-dusk.png": 0,
+        "rack-night.png": 0,
+        "standard-open-noon.png": 16,
+        "standard-open-overcast.png": 16,
+        "standard-open-dusk.png": 16,
+        "standard-open-night.png": 16,
+        "held-left-open-noon.png": 130,
+        "held-left-open-overcast.png": 64,
+        "held-left-open-dusk.png": 85,
+        "held-left-open-night.png": 40,
+        "held-right-open-noon.png": 82,
+        "held-right-open-overcast.png": 58,
+        "held-right-open-dusk.png": 60,
+        "held-right-open-night.png": 22
+      },
+      "reloadFractions": {
+        "before": [
+          {
+            "fraction": 0.25,
+            "light": "noon",
+            "round": null
+          },
+          {
+            "fraction": 0.25,
+            "light": "overcast",
+            "round": null
+          },
+          {
+            "fraction": 0.25,
+            "light": "dusk",
+            "round": null
+          },
+          {
+            "fraction": 0.25,
+            "light": "night",
+            "round": null
+          },
+          {
+            "fraction": 0.55,
+            "light": "noon",
+            "round": null
+          },
+          {
+            "fraction": 0.55,
+            "light": "overcast",
+            "round": null
+          },
+          {
+            "fraction": 0.55,
+            "light": "dusk",
+            "round": null
+          },
+          {
+            "fraction": 0.55,
+            "light": "night",
+            "round": null
+          }
+        ],
+        "after": [
+          {
+            "fraction": 0.25,
+            "light": "noon",
+            "round": null
+          },
+          {
+            "fraction": 0.25,
+            "light": "overcast",
+            "round": null
+          },
+          {
+            "fraction": 0.25,
+            "light": "dusk",
+            "round": null
+          },
+          {
+            "fraction": 0.25,
+            "light": "night",
+            "round": null
+          },
+          {
+            "fraction": 0.55,
+            "light": "noon",
+            "round": null
+          },
+          {
+            "fraction": 0.55,
+            "light": "overcast",
+            "round": null
+          },
+          {
+            "fraction": 0.55,
+            "light": "dusk",
+            "round": null
+          },
+          {
+            "fraction": 0.55,
+            "light": "night",
+            "round": null
+          }
+        ]
+      }
+    },
+    "uzi": {
+      "images": {
+        "before": 32,
+        "after": 32
+      },
+      "projectionMaxAbsDifference": {
+        "aimed": 6.727951529228449e-14,
+        "hip": 0.004716925197314786,
+        "rack": 7.815970093361102e-14,
+        "standard-open": 3.9390712913700554e-13,
+        "held-left-open": 1.1368683772161603e-13,
+        "held-right-open": 2.788880237858393e-13
+      },
+      "imageMaxRgbDifference": {
+        "aimed-noon.png": 129,
+        "aimed-overcast.png": 103,
+        "aimed-dusk.png": 119,
+        "aimed-night.png": 118,
+        "hip-noon.png": 205,
+        "hip-overcast.png": 114,
+        "hip-dusk.png": 157,
+        "hip-night.png": 146,
+        "rack-noon.png": 37,
+        "rack-overcast.png": 18,
+        "rack-dusk.png": 35,
+        "rack-night.png": 9,
+        "standard-open-noon.png": 35,
+        "standard-open-overcast.png": 16,
+        "standard-open-dusk.png": 25,
+        "standard-open-night.png": 16,
+        "held-left-open-noon.png": 168,
+        "held-left-open-overcast.png": 72,
+        "held-left-open-dusk.png": 100,
+        "held-left-open-night.png": 53,
+        "held-right-open-noon.png": 93,
+        "held-right-open-overcast.png": 66,
+        "held-right-open-dusk.png": 64,
+        "held-right-open-night.png": 24
+      },
+      "reloadFractions": {
+        "before": [
+          {
+            "fraction": 0.25,
+            "light": "noon",
+            "round": {
+              "world": false,
+              "eye": false
+            }
+          },
+          {
+            "fraction": 0.25,
+            "light": "overcast",
+            "round": {
+              "world": false,
+              "eye": false
+            }
+          },
+          {
+            "fraction": 0.25,
+            "light": "dusk",
+            "round": {
+              "world": false,
+              "eye": false
+            }
+          },
+          {
+            "fraction": 0.25,
+            "light": "night",
+            "round": {
+              "world": false,
+              "eye": false
+            }
+          },
+          {
+            "fraction": 0.55,
+            "light": "noon",
+            "round": {
+              "world": true,
+              "eye": true
+            }
+          },
+          {
+            "fraction": 0.55,
+            "light": "overcast",
+            "round": {
+              "world": true,
+              "eye": true
+            }
+          },
+          {
+            "fraction": 0.55,
+            "light": "dusk",
+            "round": {
+              "world": true,
+              "eye": true
+            }
+          },
+          {
+            "fraction": 0.55,
+            "light": "night",
+            "round": {
+              "world": true,
+              "eye": true
+            }
+          }
+        ],
+        "after": [
+          {
+            "fraction": 0.25,
+            "light": "noon",
+            "round": {
+              "world": false,
+              "eye": false
+            }
+          },
+          {
+            "fraction": 0.25,
+            "light": "overcast",
+            "round": {
+              "world": false,
+              "eye": false
+            }
+          },
+          {
+            "fraction": 0.25,
+            "light": "dusk",
+            "round": {
+              "world": false,
+              "eye": false
+            }
+          },
+          {
+            "fraction": 0.25,
+            "light": "night",
+            "round": {
+              "world": false,
+              "eye": false
+            }
+          },
+          {
+            "fraction": 0.55,
+            "light": "noon",
+            "round": {
+              "world": true,
+              "eye": true
+            }
+          },
+          {
+            "fraction": 0.55,
+            "light": "overcast",
+            "round": {
+              "world": true,
+              "eye": true
+            }
+          },
+          {
+            "fraction": 0.55,
+            "light": "dusk",
+            "round": {
+              "world": true,
+              "eye": true
+            }
+          },
+          {
+            "fraction": 0.55,
+            "light": "night",
+            "round": {
+              "world": true,
+              "eye": true
+            }
+          }
+        ]
+      }
+    },
+    "aa12": {
+      "images": {
+        "before": 32,
+        "after": 32
+      },
+      "projectionMaxAbsDifference": {
+        "aimed": 3.3084646133829665e-14,
+        "hip": 0.01220960378418598,
+        "rack": 0.0,
+        "standard-open": 3.9390712913700554e-13,
+        "held-left-open": 3.1374902675906924e-13,
+        "held-right-open": 3.7185532431038837e-13
+      },
+      "imageMaxRgbDifference": {
+        "aimed-noon.png": 204,
+        "aimed-overcast.png": 165,
+        "aimed-dusk.png": 211,
+        "aimed-night.png": 226,
+        "hip-noon.png": 190,
+        "hip-overcast.png": 142,
+        "hip-dusk.png": 139,
+        "hip-night.png": 164,
+        "rack-noon.png": 0,
+        "rack-overcast.png": 0,
+        "rack-dusk.png": 0,
+        "rack-night.png": 0,
+        "standard-open-noon.png": 16,
+        "standard-open-overcast.png": 16,
+        "standard-open-dusk.png": 16,
+        "standard-open-night.png": 16,
+        "held-left-open-noon.png": 73,
+        "held-left-open-overcast.png": 64,
+        "held-left-open-dusk.png": 68,
+        "held-left-open-night.png": 35,
+        "held-right-open-noon.png": 77,
+        "held-right-open-overcast.png": 69,
+        "held-right-open-dusk.png": 59,
+        "held-right-open-night.png": 17
+      },
+      "reloadFractions": {
+        "before": [
+          {
+            "fraction": 0.25,
+            "light": "noon",
+            "round": {
+              "world": false,
+              "eye": false
+            }
+          },
+          {
+            "fraction": 0.25,
+            "light": "overcast",
+            "round": {
+              "world": false,
+              "eye": false
+            }
+          },
+          {
+            "fraction": 0.25,
+            "light": "dusk",
+            "round": {
+              "world": false,
+              "eye": false
+            }
+          },
+          {
+            "fraction": 0.25,
+            "light": "night",
+            "round": {
+              "world": false,
+              "eye": false
+            }
+          },
+          {
+            "fraction": 0.55,
+            "light": "noon",
+            "round": {
+              "world": true,
+              "eye": true
+            }
+          },
+          {
+            "fraction": 0.55,
+            "light": "overcast",
+            "round": {
+              "world": true,
+              "eye": true
+            }
+          },
+          {
+            "fraction": 0.55,
+            "light": "dusk",
+            "round": {
+              "world": true,
+              "eye": true
+            }
+          },
+          {
+            "fraction": 0.55,
+            "light": "night",
+            "round": {
+              "world": true,
+              "eye": true
+            }
+          }
+        ],
+        "after": [
+          {
+            "fraction": 0.25,
+            "light": "noon",
+            "round": {
+              "world": false,
+              "eye": false
+            }
+          },
+          {
+            "fraction": 0.25,
+            "light": "overcast",
+            "round": {
+              "world": false,
+              "eye": false
+            }
+          },
+          {
+            "fraction": 0.25,
+            "light": "dusk",
+            "round": {
+              "world": false,
+              "eye": false
+            }
+          },
+          {
+            "fraction": 0.25,
+            "light": "night",
+            "round": {
+              "world": false,
+              "eye": false
+            }
+          },
+          {
+            "fraction": 0.55,
+            "light": "noon",
+            "round": {
+              "world": true,
+              "eye": true
+            }
+          },
+          {
+            "fraction": 0.55,
+            "light": "overcast",
+            "round": {
+              "world": true,
+              "eye": true
+            }
+          },
+          {
+            "fraction": 0.55,
+            "light": "dusk",
+            "round": {
+              "world": true,
+              "eye": true
+            }
+          },
+          {
+            "fraction": 0.55,
+            "light": "night",
+            "round": {
+              "world": true,
+              "eye": true
+            }
+          }
+        ]
+      }
+    }
+  },
+  "modelChanges": {
+    "sidearmsUnchanged": true,
+    "breacherUnchanged": true
+  },
+  "note": "No model edit. Hip native idle breathing phase may vary. Third-person actor/camera replays recorded matrices.",
+  "sidearmsSha256": "d0a5a1870622e57f98859a9c0726031d40a0a570a4690c67ee87480fc1db0d4a",
+  "breacherSha256": "4043af54a3e905dfc199825ea7c973f63eb2f047c7726fe1cf765183cc39888b"
+}

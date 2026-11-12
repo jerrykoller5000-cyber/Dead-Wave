@@ -30,6 +30,7 @@ const batches={
   '--port-sight':['clear-port-sight-',true,[['uzi',['hip','held-right-open']],['m4',['hip','aimed','held-right-open']]]],
   '--scope-eye':['clear-scope-eye-',true,[['sniper',['hip','aim-entry']]]],
   '--pump-port':['clear-pump-port-',true,[['shotgun',['hip','aimed','held-right-open']]]],
+  '--sniper-rail-seat':['clear-sniper-rail-seat-',true,[['sniper',['hip','aim-entry','held-right-open','rack']]]],
   '--pump-grip-web':['clear-pump-grip-web-',true,[['shotgun',['hip','aimed','held-left-open','rack']]]],
   '--breacher-vents':['clear-breacher-vents-',true,[['aa12',['hip','aimed','held-right-open','rack']]]],
   '--minigun-panel':['clear-minigun-panel-',true,[['minigun',['hip','aimed','held-right-open','rack']]]],

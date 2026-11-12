@@ -2,6 +2,7 @@
 
 // Millimetre-scale knurl teeth do not need the rounded box helper's subdivisions.
 // Same centre line as gripOutline. u runs down the grip, v+ is the front strap.
+import { weaponDetail } from './weapon-detail.js';
 import { gunDetail } from './gun-detail.js';
 import { waspGripTrimGeometry } from './weapon-wasp-trim.js';
 import { clipArtworkProfile, clipArtworkUnderside, fitCollarFaces, profileEdgeSplits as frameEdgeSplits, splitArtworkRows, trimPanelBack } from './weapon-longarms.js';
@@ -475,6 +476,7 @@ export function makePistolModel(ctx) {
   const gun = new THREE.Group();
   const K = gunKit(gun);
   const D = gunDetail(ctx);   // GB-307 / CL-309 helpers
+  const W = weaponDetail(ctx);
   const { slideSteel, rearPlate, bareSteel } = pistolFinish(gunBody);
   // The rear and top occupy most of the first-person silhouette.
   const slide = K.group(0, 0.05, 0.05);
@@ -491,8 +493,10 @@ export function makePistolModel(ctx) {
   for (const [y, width] of [[-.007, .026], [-.014, .026], [-.021, .022]]) {
     K.box(width, .0022, .0008, gunDark, 0, y, -.1424, 0, 0, 0, slide, .0003);
   }
-  for (let i = 0; i < 8; i++) for (const sx of [-1, 1]) K.slab([[-.128 + i * .009, -.024], [-.123 + i * .009, -.024], [-.123 + i * .009, .016], [-.128 + i * .009, .016]], .0014, gunDark, { x: sx * .0232, bevel: .0005, parent: slide });
-  for (let i = 0; i < 5; i++) for (const sx of [-1, 1]) K.slab([[.2 + i * .009, -.022], [.205 + i * .009, -.022], [.205 + i * .009, .014], [.2 + i * .009, .014]], .0014, gunDark, { x: sx * .0232, bevel: .0005, parent: slide });
+  for (const side of [-1, 1]) {
+    W.serrations(slide, slideSteel, {x:side*.0232,y:-.004,z:-.094,axis:'x',side,along:'z',count:8,pitch:.009,w:.040,depth:.00065});
+    W.serrations(slide, slideSteel, {x:side*.0232,y:-.004,z:.2205,axis:'x',side,along:'z',count:5,pitch:.009,w:.036,depth:.00065});
+  }
   // GB-180: dovetailed sights. Rear: a dovetail base across the slide and a U notch (two ears), not a bare block.
   K.slab([[-0.1286, 0.024], [-0.0974, 0.024], [-0.098, 0.026], [-0.128, 0.026]], 0.030, gunMid, { bevel: 0.0004, parent: slide });
   K.slab([[-0.1275, 0.026], [-0.0995, 0.026], [-0.101, 0.032], [-0.126, 0.032]], 0.024, gunDark, { bevel: 0.0010, parent: slide });
@@ -583,6 +587,25 @@ export function makePistolModel(ctx) {
   // line and rake as GB-154/GB-180, so the well, the hand hold and gunExtLook's own growth are untouched.
   const magBody = K.slab([[-0.015, 0.081], [0.015, 0.081], [0.015, -0.081], [-0.015, -0.081]], 0.040, magPoly, { bevel: 0.003, rx: 0.3, parent: mag });
   magazineTop(THREE, magBody);
+  const topArt = roundGeometry(THREE, 'pistol');
+  topArt.computeBoundingBox();
+  const topRound = new THREE.Mesh(topArt, new THREE.MeshStandardMaterial({
+    color:0xffffff,vertexColors:true,metalness:.55,roughness:.33
+  }));
+  const roundScale = 1 / 1.05;
+  topRound.name = 'pistol magazine top round';
+  topRound.scale.setScalar(roundScale);
+  topRound.rotation.x = Math.PI / 2 + .3;
+  // The feed lips retain the top round above the magazine's recessed floor.
+  const roundHeight = .0818 + topArt.boundingBox.max.x * roundScale + .002749;
+  topRound.position.set(0,roundHeight*Math.cos(.3),roundHeight*Math.sin(.3));
+  topRound.visible = false;
+  mag.add(topRound);
+  gun.userData.magazineTopRound = topRound;
+  gun.userData.setMagazineRounds = function(count) {
+    const mesh = this?.magazineTopRound || topRound;
+    mesh.visible = Number.isFinite(count) && count > 0;
+  };
   K.slab([[-.022,-.081], [.019,-.081], [.025,-.084], [.026,-.089], [.023,-.092],
     [-.025,-.092], [-.028,-.089], [-.027,-.085]], .052, rearPlate, {bevel:.003, rx:.3, parent:mag});
   gun.userData.slide = slide;
@@ -635,13 +658,13 @@ export function makePistolModel(ctx) {
   // Slide-stop lever (left): a recognisable paddle over the existing stop post, sunk into the frame face.
   const slideStop = K.slab([[-0.014, -0.003], [0.020, -0.003], [0.022, 0.003], [0.016, 0.007], [-0.012, 0.005]], 0.0020, rearPlate, { x: -0.0228, y: 0.004, z: 0.055, bevel: 0.0007 });
   D.screw(gun, -0.0226, 0.004, 0.040, { axis: 'x', side: -1, r: 0.0022, head: 0.0011, kind: 'slot' });
-  // Takedown lever: keyed tabs both sides + one through-pin (base inside the frame).
-  for (const sx of [-1, 1]) {
-    K.slab([[-0.009, -0.0035], [0.009, -0.0035], [0.009, 0.0035], [-0.009, 0.0035]], 0.0016, ctx.gunMetal, { x: sx * 0.0228, y: -0.018, z: 0.018, bevel: 0.0005 });
+  const takedown = K.group(0, -.018, .018);
+  for (const side of [-1,1]) {
+    W.chamferBox(takedown,.0016,.007,.018,.0005,ctx.gunMetal,side*.0228,0,0);
   }
-  D.pin(gun, 0, -0.018, 0.018, { axis: 'x', len: 0.0472, r: 0.0013, proud: 0.0008, caps: true });
+  for (const side of [-1,1]) W.fasteners(takedown,ctx.gunMetal,'pin',[{x:side*.0236,axis:'x',side,r:.0013}]);
   // Extractor claw in the port's right wall (attached to the slide).
-  K.slab([[0.000, -0.003], [0.011, -0.001], [0.013, 0.003], [0.001, 0.005]], 0.00035, gunMid, { x: 0.024175, y: 0.010, z: -0.004, parent: slide, bevel: 0.0001 });
+  const extractor = K.slab([[0.000, -0.003], [0.011, -0.001], [0.013, 0.003], [0.001, 0.005]], 0.00035, gunMid, { x: 0.024175, y: 0.010, z: -0.004, parent: slide, bevel: 0.0001 });
   // Panel lines on the slide top and the dust-cover seam (yardstick: no bare >3 cm face).
   // The longitudinal graphic ends on either side of the transverse dark band.
   for (const [start, end] of [[-0.05, -0.0075], [-0.0045, 0.15]]) {
@@ -655,16 +678,13 @@ export function makePistolModel(ctx) {
     K.box(0.022, 0.012, 0.008, gunDark, 0, -0.08 - uu * cr - vv * sr, -0.02 - uu * sr + vv * cr, 0.3, 0, 0, null, 0.002);
   }
   // Grip-panel screws (attached; CL-309 sink).
-  for (const sx of [-1, 1]) {
-    D.screw(gun, sx * 0.0271, -0.052, -0.018, { axis: 'x', side: sx, r: 0.0025, head: 0.0009, kind: 'slot' });
-    D.screw(gun, sx * 0.0271, -0.108, -0.026, { axis: 'x', side: sx, r: 0.0025, head: 0.0009, kind: 'slot' });
+  for (const side of [-1, 1]) {
+    W.fasteners(gun, bareSteel, 'slot', [{x:side*.0271,y:-.052,z:-.018,axis:'x',side,r:.0025}]);
+    W.fasteners(gun, bareSteel, 'slot', [{x:side*.0271,y:-.108,z:-.026,axis:'x',side,r:.0025}]);
   }
   // J72: the extra ribs sit in the gaps between the existing serrations; their old
   // centre was almost coplanar with every dark strip and shimmered at the rear.
-  for (const sx of [-1, 1]) {
-    D.ribs(slide, { x: sx * 0.023, y: -0.004, z: -0.0905, axis: 'x', side: sx, along: 'z', count: 8, pitch: 0.009, w: 0.017, h: 0.0006, t: 0.0011, mat: D.mats.dark });
-    D.ribs(slide, { x: sx * 0.023, y: -0.004, z: 0.2245, axis: 'x', side: sx, along: 'z', count: 5, pitch: 0.009, w: 0.015, h: 0.0006, t: 0.0011, mat: D.mats.dark });
-  }
+
 
   gunEffects(gun, new THREE.Vector3(0, 0.05, 0.32), 0.045, 2.5, 6, 0.005);
   gun.userData.laser.position.set(0, 0.05, 3.3);
@@ -685,9 +705,17 @@ export function makePistolModel(ctx) {
     } else if (mesh.material === slideSteel) markPaintSurface(mesh, 'slide');
     else if (mesh.material === gunPoly) markPaintSurface(mesh, 'frame');
   });
-  bindModelArtwork(gun, 'controls', 'trigger', groupArtwork(THREE, trigger, triggerInset));
+  const triggerControl = K.group(0, -.014, .0725);
+  for (const part of [trigger, triggerInset]) {
+    part.position.sub(triggerControl.position);
+    triggerControl.add(part);
+  }
+  gun.userData.triggerPin = triggerControl.position.toArray();
+  bindModelArtwork(gun, 'controls', 'trigger', triggerControl);
   bindModelArtwork(gun, 'controls', 'magRelease', groupArtwork(THREE, release));
   bindModelArtwork(gun, 'controls', 'slideStop', groupArtwork(THREE, slideStop));
+  bindModelArtwork(gun, 'controls', 'takedown', takedown);
+  bindModelArtwork(gun, 'controls', 'extractor', extractor);
   bindModelArtwork(gun, 'heatParts', 'barrel', groupArtwork(THREE, barrel, barrelPanel, crown, innerCrown, bore));
   bindModelArtwork(gun, 'heatParts', 'suppressor', can);
   return finishGun(gun);
@@ -846,6 +874,7 @@ export function makeRevolverModel(ctx) {
   const gun = new THREE.Group();
   const K = gunKit(gun);
   const D = gunDetail(ctx);
+  const W = weaponDetail(ctx);
   // The fixed frame takes the armory coating. The action and walnut retain their factory finishes.
   const blued = new THREE.MeshStandardMaterial({ color: 0x404955, metalness: 0.68, roughness: 0.32 });
   const frameFinish = blued.clone();
@@ -910,12 +939,14 @@ export function makeRevolverModel(ctx) {
   gun.userData.crane = crane;
   gun.userData.baseCraneRot = crane.rotation.clone();
   // the side plate's outline and its screws on the gun's right (+x); the thumbpiece latch on its left (-x)
-  for (const [y, z, x] of [[0.088, -0.061, 0.032], [0.028, -0.064, 0.032], [0.006, -0.034, 0.032], [0.006, 0.07, 0.030]]) D.screw(gun, x, y, z, { axis: 'x', side: 1, r: 0.0027, head: 0.0014, kind: 'slot' });
+  for (const [y,z,x] of [[.088,-.061,.032],[.028,-.064,.032],[.006,-.034,.032],[.006,.07,.030]]) {
+    W.fasteners(gun, blued, 'slot', [{x,y,z,axis:'x',side:1,r:.0027}]);
+  }
   D.groove(gun, { x: 0.032, y: 0.093, z: -0.044, axis: 'x', side: 1, along: 'z', len: 0.036, w: 0.0007 });
   D.groove(gun, { x: 0.032, y: 0.054, z: -0.075, axis: 'x', side: 1, along: 'y', len: 0.07, w: 0.0007 });
   const thumbpiece = K.slab([[-.064, .062], [-.036, .062], [-.032, .058], [-.032, .049], [-.036, .045], [-.064, .045], [-.067, .0535]], .005, blued, { x: -.0335, bevel: .0015 });
   trimSlabBack(thumbpiece, 0, -.032 - thumbpiece.position.x, -1);
-  for (let i = 0; i < 6; i++) K.box(0.0012, 0.013, 0.0016, gunDark, -0.0362, 0.0535, -0.061 + i * 0.0045, 0, 0, 0, null, 0.0003);   // its grooves
+  const thumbGrooves = W.serrations(gun, blued, {x:-.0362,y:.0535,z:-.04975,axis:'x',side:-1,along:'z',count:6,pitch:.0045,w:.013,depth:.0005});
   // The rear sight on the top strap (GB-308/313's adjustable sight, kept: the sight line runs through its notch).
   K.slab([[-0.013, 0.112], [0.013, 0.112], [0.013, 0.120], [-0.013, 0.120]], 0.026, gunDark, { bevel: 0.001, z: -0.050 });
   for (const sx of [-1, 1]) K.box(0.0045, 0.008, 0.012, gunDark, sx * 0.0085, 0.118, -0.050, 0, 0, 0, null, 0.0006);
@@ -930,7 +961,7 @@ export function makeRevolverModel(ctx) {
   // The decorative strip follows the curved artwork below it, with its original top edge.
   const stripBase = upperProfile.map(([radius, z]) => [z, BY + radius]);
   K.slab([...stripBase, [.329, .1015], [.326, .1045], [.09, .1045]], .0115, blued, { bevel: .0012, segs: 2 });
-  for (let i = 0; i < 26; i++) K.box(0.0096, 0.0006, 0.0012, gunDark, 0, 0.1048, 0.112 + i * 0.0068, 0, 0, 0, null, 0);   // its serrations
+  W.serrations(gun, blued, {x:0,y:.1045,z:.197,axis:'y',along:'z',count:26,pitch:.0066,w:.0096,depth:.00025});
   K.slab([[0.292, 0.104], [0.312, 0.117], [0.318, revolverPostTop], [0.326, revolverPostTop], [0.328, 0.104]], 0.0048, gunDark, { bevel: 0.0008 });   // raised crown carries the luminous point above the rear notch
   const lug = K.slab([[.234, .0735], [.31, .0735], [.3185, .068], [.3185, .057], [.311, .0485], [.252, .0485], [.240, .051], [.234, .058]], .021, blued, { bevel: .006, segs: 3 });   // the shroud lug
   fitRevolverLug(THREE, lug, BY, upperProfile[2][0]);
@@ -1035,8 +1066,8 @@ export function makeRevolverModel(ctx) {
   }
   gun.add(palmRounds);
   gun.userData.palmRounds = palmRounds;
-  K.cyl(0.0042, 0.0042, 0.182, blued, 0, 0, 0.121, cylinder, 12);   // the ejector rod (local 0.030 to 0.212)
-  K.cyl(0.0058, 0.0058, 0.014, blued, 0, 0, 0.219, cylinder, 14);   // its head: the front at gun z 0.246, two inches short of the muzzle
+  const ejectorRod = K.cyl(0.0042, 0.0042, 0.182, blued, 0, 0, 0.121, cylinder, 12);   // the ejector rod (local 0.030 to 0.212)
+  const ejectorHead = K.cyl(0.0058, 0.0058, 0.014, blued, 0, 0, 0.219, cylinder, 14);   // its head: the front at gun z 0.246, two inches short of the muzzle
   for (const z of [0.215, 0.219, 0.223]) K.cyl(0.0060, 0.0060, 0.0012, gunDark, 0, 0, z, cylinder, 14);   // the knurl
   gun.userData.cylinder = cylinder;
   gun.userData.baseCylinderRot = cylinder.rotation.clone();
@@ -1109,7 +1140,7 @@ export function makeRevolverModel(ctx) {
     [-0.041, 0.007], [-0.036, 0.002], [-0.026, 0.003], [-0.016, 0.000], [-0.011, -0.010], [-0.008, -0.028]], 0.0135, caseCol, { bevel: 0.0035, segs: 3, parent: hammer });
   const spur = K.slab([[-.008,.016],[-.038,.015],[-.040,.008],[-.010,.010]], .0175, caseCol, { bevel: .003, segs: 2, parent: hammer });
   fitCollarFaces(THREE, spur, .0135 / 2);
-  for (let i = 0; i < 6; i++) K.box(0.016, 0.0012, 0.0013, gunDark, 0, 0.0164, -0.012 - i * 0.0048, 0, 0, 0, hammer);   // its checkering
+  W.serrations(hammer, gunDark, {x:0,y:.0164,z:-.024,axis:'y',along:'z',count:6,pitch:.0048,w:.016,depth:.0005});
   K.cyl(0.0019, 0.0019, 0.009, nickel, 0, 0.004, 0.019, hammer, 8, 'z');   // the firing pin
   gun.userData.hammer = hammer;
   gun.userData.baseHammerRot = hammer.rotation.clone();
@@ -1202,6 +1233,8 @@ export function makeRevolverModel(ctx) {
   gun.userData.triggerPin = trigger.position.toArray();
   bindModelArtwork(gun, 'controls', 'trigger', trigger);
   bindModelArtwork(gun, 'controls', 'hammer', hammer);
+  bindModelArtwork(gun, 'controls', 'cylinderRelease', groupArtwork(THREE,thumbpiece,thumbGrooves));
+  bindModelArtwork(gun, 'controls', 'ejector', groupArtwork(THREE,ejectorRod,ejectorHead));
   bindModelArtwork(gun, 'heatParts', 'barrel', barrel);
   addRevolverSightMarker(THREE, gun);
   return finishGun(gun);
@@ -1355,6 +1388,7 @@ export function makeUziModel(ctx) {
   const gun = new THREE.Group();
   const K = gunKit(gun);
   const D = gunDetail(ctx);   // GB-309 / CL-309 helpers
+  const W = weaponDetail(ctx);
   const stamped = new THREE.MeshStandardMaterial({color: 0x495157, metalness: .28, roughness: .48});
   const coverSteel = new THREE.MeshStandardMaterial({color: 0x555e64, metalness: .36, roughness: .38});
   const loopSteel = new THREE.MeshStandardMaterial({color: 0x555a59, metalness: .65, roughness: .35});
@@ -1385,6 +1419,7 @@ export function makeUziModel(ctx) {
   const work = K.group(0, 0.098, 0.11); work.name = 'work';
   K.cyl(0.014, 0.014, 0.03, gunDark, 0, 0, 0, work, 8, 'y');
   K.cyl(.016, .016, .014, gunDark, 0, .017, 0, work, 20, 'y');
+  W.serrations(work, gunDark, {x:0,y:.024,z:0,axis:'y',along:'z',count:5,pitch:.004,w:.018,depth:.0003});
   for (let j = 0; j < 16; j++) {const a = j / 16 * Math.PI * 2; flatDetail(THREE, work, gunAccent, .002, .011, .002, Math.cos(a) * .0157, .017, Math.sin(a) * .0157);}
   gun.userData.work = work;
   // Sights: slim ears, a rear aperture you can look through, a hooded front post.
@@ -1422,7 +1457,7 @@ export function makeUziModel(ctx) {
     [1.02, 0.008], [1.02, -0.008], [0.98, -0.024], [0.75, -0.026], [0.45, -0.026], [0.18, -0.026],
     [-0.02, -0.026], [-0.06, -0.010], [-0.05, 0.010]
   ]), 0.062, gunPoly, { bevel: 0.007, segs: 2 });
-  const gripSafety = K.box(0.040, 0.047, 0.006, gunDark, 0, -0.087, -0.065, UZI_RAKE, 0, 0, null, 0.0015);  // backstrap grip safety, proud enough to squeeze
+  const gripSafety = W.chamferBox(gun,.040,.047,.006,.0015,gunDark,0,-.087,-.065,UZI_RAKE);  // backstrap grip safety, proud enough to squeeze
   const strapRibs = gripRidges(K, gunDark, UZI_GZ, UZI_GY, UZI_GH, UZI_GD, UZI_RAKE, [0.42, 0.52, 0.62, 0.72, 0.82], 0.025, 0.048, 0.0028, 0.0022);   // front-strap serrations
   for (const rib of strapRibs) markPaintSurface(rib, 'furniture');
   // Flat base cap (mag floorplate reads flush with it).
@@ -1433,10 +1468,37 @@ export function makeUziModel(ctx) {
     const geometry = gloveGuard.geometry, vertices = geometry.attributes.position;
     geometry.computeBoundingBox();
     const {min, max} = geometry.boundingBox, height = max.y - min.y;
+    const smooth = value => { const t = Math.max(0, Math.min(1, value)); return t * t * (3 - 2 * t); };
+    const mapGuard = (y, z) => {
+      const depth = (max.y - y) / height, low = smooth((depth - .34) / (.80 - .34));
+      const rearFade = smooth((z - .055) / .020);
+      let fittedY = y - height * (.12 + .18 * rearFade) * low;
+      let fittedZ = z + .0355 * smooth((z - .052) / .048) * smooth((depth - .12) / .25);
+      fittedZ -= .010 * smooth((-.043 - fittedY) / .012) * (1 - smooth((-.068 - fittedY) / .012)) * smooth((z - .052) / .048);
+      // C1's cavity: room at the inner toe, original height beside the middle finger.
+      fittedY -= .012 * smooth((z - .060) / .018) * smooth((depth - .50) / .15);
+      const floor = smooth((z - .055) / .020) * smooth((-fittedY - .080) / .010);
+      const shallowFloor = -.0945 + (fittedY + .090) * (.008 / .030);
+      fittedY += floor * (shallowFloor - fittedY);
+      // Thin the lower-front wall inward so its outer face stays behind the support palm.
+      const lower = smooth((-fittedY - .036) / .007), front = smooth((fittedZ - .072) / .028);
+      const compressed = .1103 + (fittedZ - .100) * (.010 / .037);
+      fittedZ += lower * front * (compressed - fittedZ);
+      return [fittedY, fittedZ];
+    };
+    const normals = geometry.attributes.normal, epsilon = 1e-6;
     for (let i = 0; i < vertices.count; i++) {
-      const y = vertices.getY(i), depth = (max.y - y) / height;
-      const t = Math.max(0, Math.min(1, (depth - .34) / (.80 - .34)));
-      vertices.setY(i, y - height * .12 * t * t * (3 - 2 * t));
+      const y = vertices.getY(i), z = vertices.getZ(i), point = mapGuard(y, z);
+      const yp = mapGuard(y + epsilon, z), ym = mapGuard(y - epsilon, z);
+      const zp = mapGuard(y, z + epsilon), zm = mapGuard(y, z - epsilon);
+      const a = (yp[0] - ym[0]) / (2 * epsilon), b = (zp[0] - zm[0]) / (2 * epsilon);
+      const c = (yp[1] - ym[1]) / (2 * epsilon), d = (zp[1] - zm[1]) / (2 * epsilon), det = a * d - b * c;
+      if (!(det > .01)) throw Error('Wasp guard deformation folds its surface');
+      const nx = normals.getX(i), oldY = normals.getY(i), oldZ = normals.getZ(i);
+      const ny = (d * oldY - c * oldZ) / det, nz = (-b * oldY + a * oldZ) / det;
+      const length = Math.hypot(nx, ny, nz);
+      normals.setXYZ(i, nx / length, ny / length, nz / length);
+      vertices.setY(i, point[0]); vertices.setZ(i, point[1]);
     }
     geometry.computeBoundingBox();
     geometry.computeBoundingSphere();
@@ -1453,9 +1515,13 @@ export function makeUziModel(ctx) {
     K.slab(panel, 0.0016, gunPoly, { x: sx * 0.0315, bevel: 0.0006 });
   }
   // FN manual: the thumb-operated magazine catch is at the left heel of the grip.
-  const releasePaddle = K.box(0.0045, 0.014, 0.022, gunDark, -0.0335, -0.159, -0.068, 0, 0, 0, null, 0.001);   // paddle
-  const release = D.screw(gun, -0.03575, -0.159, -0.068, { axis: 'x', side: -1, r: 0.0036, head: 0.00155, kind: 'button', mat: D.mats.bright });
-  const selector = D.screw(gun, -0.0494, 0.033, 0.006, { axis: 'x', side: -1, r: 0.0085, head: 0.0022, kind: 'slot', mat: D.mats.dark });   // GB-309: selector dial (attached)
+  const releasePaddle = W.chamferBox(gun,.0045,.014,.022,.001,gunDark,-.0335,-.159,-.068);   // paddle
+  const release = K.group(-.03575,-.159,-.068);
+  const releaseHead = W.fasteners(release,D.mats.bright,'button',[{axis:'x',side:-1,r:.0036}]);
+  releaseHead.geometry = releaseHead.geometry.clone().scale(1, .00155 / (.45 * .0036), 1);
+  const selector = K.group(-.0494,.033,.006);
+  const selectorHead = W.fasteners(selector,D.mats.dark,'slot',[{axis:'x',side:-1,r:.0085}]);
+  selectorHead.geometry = selectorHead.geometry.clone().scale(1, .0022 / (.45 * .0085), 1);   // GB-309: selector dial (attached)
   const selectorLever = K.slab([[-.001, .027], [.026, .025], [.026, .031], [.009, .038], [.004, .044]], .003, gunDark, {x: -.0523, bevel: .001});
   for (const z of [-0.018, 0.006, 0.030]) K.box(0.0015, 0.004, 0.005, gunAccent, -0.04975, 0.055, z, 0, 0, 0, null, 0); // S / R / A marks pressed into the left receiver face
   // The narrow magazine passes through the grip. Bake its rake into the inner

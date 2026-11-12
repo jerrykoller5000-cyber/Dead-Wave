@@ -1,0 +1,70 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>CB-316 weapon-detail example</title>
+<script type="importmap">{"imports":{"three":"/vendor/three/three.webgpu.js","three/webgpu":"/vendor/three/three.webgpu.js","three/tsl":"/vendor/three/three.tsl.js","three/addons/":"/vendor/three/addons/"}}</script>
+<style>html,body{margin:0;background:#000;overflow:hidden}</style></head>
+<body><script type="module">
+// CB-316: one stand-in sidearm built only from studio/weapon-detail.js helpers, in four lights and two views.
+import * as THREE from 'three';
+import { weaponDetail } from '/studio/weapon-detail.js';
+const renderer = new THREE.WebGPURenderer({ antialias: true });
+renderer.setSize(800, 560); renderer.setPixelRatio(1); renderer.shadowMap.enabled = true;
+document.body.appendChild(renderer.domElement);
+await renderer.init();
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(30, 800 / 560, 0.01, 10);
+const steel = new THREE.MeshStandardMaterial({ color: 0x3a3f48, metalness: 0.85, roughness: 0.42 });
+const body = new THREE.MeshStandardMaterial({ color: 0x484b51, metalness: 0.08, roughness: 0.66 });
+const poly = new THREE.MeshStandardMaterial({ color: 0x323437, metalness: 0.03, roughness: 0.76 });
+const dark = new THREE.MeshStandardMaterial({ color: 0x27292d, metalness: 0.3, roughness: 0.5 });
+const bright = new THREE.MeshStandardMaterial({ color: 0xb0b6bd, metalness: 0.62, roughness: 0.26 });
+const W = weaponDetail({ THREE });
+const gun = new THREE.Group(); scene.add(gun);
+// the slide (moves on its own: its own group, its own screw batch) and the frame, along +z (muzzle)
+const slide = new THREE.Group(); gun.add(slide);
+W.chamferBox(slide, 0.025, 0.028, 0.19, 0.003, body, 0, 0.064, 0.0);
+W.serrations(slide, body, { x: 0.0125, y: 0.064, z: -0.07, axis: 'x', side: 1, along: 'z', count: 10, pitch: 0.0032, w: 0.02, depth: 0.0009, profile: 'v' });
+W.serrations(slide, body, { x: -0.0125, y: 0.064, z: -0.07, axis: 'x', side: -1, along: 'z', count: 10, pitch: 0.0032, w: 0.02, depth: 0.0009, profile: 'v' });
+W.serrations(slide, body, { x: 0, y: 0.078, z: 0.055, axis: 'y', side: 1, along: 'z', count: 6, pitch: 0.004, w: 0.012, depth: 0.0007, profile: 'square' });
+W.fasteners(slide, dark, 'hex', [{ x: 0.0125, y: 0.07, z: 0.03, axis: 'x', side: 1, r: 0.0017 }]);
+W.chamferBox(gun, 0.023, 0.022, 0.17, 0.002, poly, 0, 0.04, 0.005);
+// the grip: a plate each side on a chamfered core, two torx screws a side, the frame pins
+W.chamferBox(gun, 0.026, 0.11, 0.05, 0.004, poly, 0, -0.02, -0.06, 0.22, 0, 0);
+const panel = [[-0.02, -0.045], [0.02, -0.045], [0.022, 0.035], [0.0, 0.045], [-0.022, 0.035]];
+for (const s of [-1, 1]) W.plate(gun, panel, 0.003, 0.0008, poly, { axis: 'x', x: s * 0.0137, y: -0.02, z: -0.06, rx: 0.22 });
+W.fasteners(gun, dark, 'torx', [-1, 1].flatMap((s) => [-0.025, 0.02].map((v) => ({ x: s * 0.0152, y: -0.02 + v * Math.cos(0.22), z: -0.06 + v * Math.sin(0.22), axis: 'x', side: s, r: 0.0018 }))));
+W.pins(gun, bright, [{ x: 0, y: 0.04, z: 0.03, axis: 'x', span: 0.023, r: 0.0015 }, { x: 0, y: 0.038, z: -0.045, axis: 'x', span: 0.023, r: 0.0014 }]);
+// a side plate showing every head kind
+W.plate(gun, [[-0.03, -0.006], [0.03, -0.006], [0.03, 0.006], [-0.03, 0.006]], 0.002, 0.0005, steel, { axis: 'x', x: 0.0125, y: 0.033, z: 0.04 });
+W.fasteners(gun, dark, 'slot', [{ x: 0.0135, y: 0.033, z: 0.016, axis: 'x', side: 1, r: 0.0019, turn: 0.5 }]);
+W.fasteners(gun, dark, 'cross', [{ x: 0.0135, y: 0.033, z: 0.028, axis: 'x', side: 1, r: 0.0019 }]);
+W.fasteners(gun, dark, 'hex', [{ x: 0.0135, y: 0.033, z: 0.040, axis: 'x', side: 1, r: 0.0019 }]);
+W.fasteners(gun, dark, 'torx', [{ x: 0.0135, y: 0.033, z: 0.052, axis: 'x', side: 1, r: 0.0019 }]);
+W.fasteners(gun, steel, 'button', [{ x: 0.0135, y: 0.033, z: 0.064, axis: 'x', side: 1, r: 0.0019 }]);
+let draws = 0; gun.traverse((o) => { if (o.isMesh) draws++; });
+const ground = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), new THREE.MeshStandardMaterial({ color: 0x55594f, roughness: 0.95 }));
+ground.rotation.x = -Math.PI / 2; ground.position.y = -0.09; ground.receiveShadow = true; scene.add(ground);
+gun.traverse((o) => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
+const sun = new THREE.DirectionalLight(0xffffff, 3); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048);
+Object.assign(sun.shadow.camera, { left: -0.3, right: 0.3, top: 0.3, bottom: -0.3, near: 0.1, far: 5 });
+scene.add(sun, sun.target);
+const hemi = new THREE.HemisphereLight(0xbfd4ff, 0x40382c, 1); scene.add(hemi);
+const torch = new THREE.SpotLight(0xfff1d8, 0, 3, 0.5, 0.6); scene.add(torch, torch.target);
+const LIGHTS = {
+  noon: { sky: 0x9cc4e8, sun: [0xffffff, 3.2, [0.6, 1.4, 0.5]], hemi: [0xbfd4ff, 0x40382c, 1.0], torch: 0 },
+  overcast: { sky: 0x8a9096, sun: [0xdde3ea, 0.5, [0.2, 1.5, 0.3]], hemi: [0xc8ccd2, 0x4a4a46, 1.6], torch: 0 },
+  dusk: { sky: 0xd08a5c, sun: [0xffa060, 1.6, [1.2, 0.35, -0.4]], hemi: [0x8c6c88, 0x2c2420, 0.6], torch: 0 },
+  night: { sky: 0x0a0e18, sun: [0x7d93c6, 0.25, [-0.4, 1.2, 0.6]], hemi: [0x26324a, 0x0a0a0c, 0.25], torch: 6 },
+};
+const VIEWS = { side: { p: [0.42, 0.06, 0.0], t: [0, 0.03, 0] }, quarter: { p: [0.26, 0.2, 0.26], t: [0, 0.03, 0] } };
+window.shoot = async (light, view) => {
+  const L = LIGHTS[light], V = VIEWS[view];
+  scene.background = new THREE.Color(L.sky);
+  sun.color.setHex(L.sun[0]); sun.intensity = L.sun[1]; sun.position.set(...L.sun[2]); sun.target.position.set(0, 0, 0);
+  hemi.color.setHex(L.hemi[0]); hemi.groundColor.setHex(L.hemi[1]); hemi.intensity = L.hemi[2];
+  torch.intensity = L.torch; torch.position.set(V.p[0] * 1.1, V.p[1] + 0.05, V.p[2] * 1.1); torch.target.position.set(...V.t);
+  camera.position.set(...V.p); camera.lookAt(...V.t);
+  await renderer.renderAsync(scene, camera);
+  return true;
+};
+window.ready = { draws, backend: renderer.backend.constructor.name };
+</script></body></html>

@@ -999,21 +999,54 @@ export function createViewmodel(ctx) {
   }
   // CE-2 (J110, J130): controls that show the gun's state (VM_CONTROLS): the selector's lever eased to the turn for
   // st.fireMode about its axle. Runs after mirrorParts (his own gun's selector doesn't turn), so each frame from the rest.
-  const _ctlP = V3(), _ctlQ = Q(), ctlAng = {};
+  // CE-9 (J149, D-177): every row of VM_CONTROLS[key] (a userData.controls name) the same way: a turn (rad) about its
+  // axis or a slide (m) along it, from the part's rest, k of the way (0..1) by what drives it: turns (the selector per
+  // st.fireMode, or fixed), ready (the gun up: a safety off, a grip safety squeezed, a switch armed), fire (the trigger
+  // held), reload (beats [in, held, out, home] of the authored reload, or a list of them; the empty one only with empty)
+  // or unload (beats of an ammo change's unload, S.unloadW). A part the
+  // gun's own action already moves (the view's work, pump or the launcher's latch) is never in a row.
+  const _ctlP = V3(), _ctlQ = Q(), _ctlA = V3(), ctlAng = {};
+  const ctlAxis = (a, out) => (Array.isArray(a) ? out.set(a[0], a[1], a[2]).normalize() : out.copy(a === 'y' ? AX_Y : a === 'z' ? AX_Z : AX_X));
+  const beats = (u, b) => (u == null || u < b[0] || u > b[3] ? 0 : u < b[1] ? smooth((u - b[0]) / Math.max(1e-4, b[1] - b[0])) : u <= b[2] ? 1 : 1 - smooth((u - b[2]) / Math.max(1e-4, b[3] - b[2])));
+  function reloadBeatU(g, st) {   // the reload's u on its authored beats (a tactical path is cut after the seat and stretched)
+    if (st.reloadU == null) return null;
+    const P = VM_POSES[g.key], R0 = P && P.reload && VM_RELOADS[P.reload], R = P && reloadOf(P, st), u = clamp(st.reloadU, 0, 1);
+    if (!R0 || !R || !R.tactical || R0.tacticalRack || !R0.mag) return u;
+    return u * Math.min(0.9, (R0.mag.seat || 0.6) + 0.1);
+  }
   function controlStates(g, st, dt) {
-    const C = VM_CONTROLS[g.key]; if (!C) return;
-    const sel = C.selector, part = sel && g.ctrls.selector;
-    if (part && part.parent === g.root) {
-      const want = (st.fireMode && sel.turns[st.fireMode] != null) ? sel.turns[st.fireMode] : 0, id = g.key + '|sel';
-      let a = ctlAng[id]; if (a == null || g !== ctlAng.gun) { a = want; ctlAng.gun = g; }
-      const step = Math.abs(sel.turns.auto - sel.turns.semi || 1) * (dt / (sel.time || 0.12));
-      a += Math.max(-step, Math.min(step, want - a)); ctlAng[id] = a;
-      if (Math.abs(a) > 1e-5) {
-        _ctlP.set(sel.axle[0] == null ? part.position.x : sel.axle[0], sel.axle[1], sel.axle[2]); _ctlQ.setFromAxisAngle(AX_X, a);
-        part.position.sub(_ctlP).applyQuaternion(_ctlQ).add(_ctlP); part.quaternion.premultiply(_ctlQ);
+    const C = (info.tune.controls && info.tune.controls[g.key]) || VM_CONTROLS[g.key]; if (!C) return;   // live: info.tune.controls = { <key>: rows }
+    if (ctlAng.gun !== g) { for (const k in ctlAng) delete ctlAng[k]; ctlAng.gun = g; }
+    const ub = reloadBeatU(g, st), out = info.controls = {};
+    for (const name in C) {
+      const R = C[name], part = g.ctrls[name];
+      if (!R || !part || part.parent == null) continue;
+      let want = 0;
+      if (R.turns) want = st.fireMode && R.turns[st.fireMode] != null ? R.turns[st.fireMode] : R.fixed && R.turns[R.fixed] != null ? R.turns[R.fixed] : 0;
+      else {
+        let k = 0;
+        if (R.ready) k = Math.max(k, smooth(S.raise));
+        if (R.fire && st.fireHeld && S.raise > 0.98) k = Math.max(k, 1);
+        if (R.reload && !(R.empty && st.reloadEmpty === false)) for (const b of (Array.isArray(R.reload[0]) ? R.reload : [R.reload])) k = Math.max(k, beats(ub, b));
+        if (R.unload && S.unloadW) k = Math.max(k, beats(clamp(S.unloadW.u, 0, 1), R.unload));
+        want = k * (R.turn != null ? R.turn : R.slide || 0);
       }
-      info.selector = a;
+      const id = name; let a = ctlAng[id];
+      if (a == null) a = want;
+      else if ((R.reload || R.unload) && !R.ready && !R.fire && !R.turns) a = want;   // a reload's beats are their own easing
+      else if (R.ready && !R.fire && !R.turns && Math.abs(want) < Math.abs(a) && !(R.reload && ub != null)) a = want;   // back on safe with the gun as it goes down (the raise is the easing)
+      else { const span = Math.abs(R.turns ? (R.turns.auto != null && R.turns.semi != null ? R.turns.auto - R.turns.semi : want) : (R.turn != null ? R.turn : R.slide || 0)) || 1;
+        const step = span * (dt / (R.time || 0.12)); a += Math.max(-step, Math.min(step, want - a)); }
+      ctlAng[id] = a; out[name] = a;
+      if (Math.abs(a) < 1e-6) continue;
+      ctlAxis(R.axis, _ctlA);
+      if (R.slide != null && R.turn == null && !R.turns) { part.position.addScaledVector(_ctlA, a); continue; }
+      const pv = R.axle || R.pivot, rp = part.position;
+      _ctlP.set(pv && pv[0] != null ? pv[0] : rp.x, pv && pv[1] != null ? pv[1] : rp.y, pv && pv[2] != null ? pv[2] : rp.z);
+      _ctlQ.setFromAxisAngle(_ctlA, a);
+      part.position.sub(_ctlP).applyQuaternion(_ctlQ).add(_ctlP); part.quaternion.premultiply(_ctlQ);
     }
+    if (out.selector != null) info.selector = out.selector;
   }
   // CE-4 (J16; ChatGPT 2's GT-20084 switch): 2 in first person, the light's switch pressed by the support thumb (index.html
   // st.lightPress: t s since the key; the light changes at VM_LIGHT's 'at', the pad fully in). The hand leaves its hold,

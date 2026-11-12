@@ -1,0 +1,904 @@
+{
+  "at": "2026-11-12T21:23:19.206Z",
+  "stages": [
+    {
+      "name": "action-setup",
+      "data": {
+        "gun": "m4",
+        "first": true,
+        "laser": null,
+        "gear": true
+      }
+    },
+    {
+      "name": "action-knife-m4-1p",
+      "data": {
+        "knifeT": 0.22240000000596052,
+        "gun": "m4",
+        "laser": null,
+        "first": true
+      }
+    },
+    {
+      "name": "action-knife-m4-3p",
+      "data": {
+        "knifeT": 0,
+        "gun": "m4",
+        "first": false
+      }
+    },
+    {
+      "name": "action-akimbo-pistol-3p",
+      "data": {
+        "gun": "pistol",
+        "equip": [
+          {
+            "ok": true,
+            "location": "secondary",
+            "index": 0,
+            "gun": {
+              "id": "pistol:second",
+              "kind": "pistol",
+              "loaded": 0,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            "stowed": null
+          }
+        ],
+        "slots": {
+          "primary": [
+            null,
+            null
+          ],
+          "secondary": [
+            "pistol:second",
+            null
+          ],
+          "hip": "pistol:base"
+        },
+        "flags": {
+          "fireHeld": false,
+          "mouseFireHeld": false,
+          "unarmed": false,
+          "placeMode": null,
+          "buildMode": false,
+          "blocked": false,
+          "reloading": false,
+          "fireCooldown": 0,
+          "dualActive": true,
+          "akimbo": true
+        },
+        "first": false
+      }
+    },
+    {
+      "name": "action-akimbo-pistol-1p",
+      "data": {
+        "gun": "pistol",
+        "flags": {
+          "fireHeld": false,
+          "mouseFireHeld": false,
+          "unarmed": false,
+          "placeMode": null,
+          "buildMode": false,
+          "blocked": false,
+          "reloading": false,
+          "fireCooldown": -0.7705000000000001,
+          "dualActive": true,
+          "akimbo": true
+        },
+        "vm": false,
+        "first": true
+      }
+    },
+    {
+      "name": "action-akimbo-uzi-3p",
+      "data": {
+        "gun": "uzi",
+        "equip": [
+          {
+            "ok": true,
+            "location": "secondary",
+            "index": 0,
+            "gun": {
+              "id": "uzi",
+              "kind": "uzi",
+              "loaded": 0,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            "stowed": null
+          },
+          {
+            "ok": true,
+            "location": "secondary",
+            "index": 1,
+            "gun": {
+              "id": "uzi:second",
+              "kind": "uzi",
+              "loaded": 0,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            "stowed": null
+          }
+        ],
+        "slots": {
+          "primary": [
+            null,
+            null
+          ],
+          "secondary": [
+            "uzi",
+            "uzi:second"
+          ],
+          "hip": "pistol:base"
+        },
+        "flags": {
+          "fireHeld": false,
+          "mouseFireHeld": false,
+          "unarmed": false,
+          "placeMode": null,
+          "buildMode": false,
+          "blocked": false,
+          "reloading": false,
+          "fireCooldown": 0,
+          "dualActive": true,
+          "akimbo": true
+        },
+        "first": false
+      }
+    },
+    {
+      "name": "action-akimbo-uzi-1p",
+      "data": {
+        "gun": "uzi",
+        "flags": {
+          "fireHeld": false,
+          "mouseFireHeld": false,
+          "unarmed": false,
+          "placeMode": null,
+          "buildMode": false,
+          "blocked": false,
+          "reloading": false,
+          "fireCooldown": -0.7688000000119206,
+          "dualActive": true,
+          "akimbo": true
+        },
+        "vm": false,
+        "first": true
+      }
+    },
+    {
+      "name": "action-saw-draw-1p",
+      "data": {
+        "gun": "chainsaw",
+        "saw": {
+          "holdT": 0,
+          "hearT": 0,
+          "fuel": 60,
+          "heat": 0,
+          "overheat": false,
+          "biteT": 0
+        }
+      }
+    },
+    {
+      "name": "action-saw-running-1p",
+      "data": {
+        "saw": {
+          "holdT": 0,
+          "hearT": 0,
+          "fuel": 59.923799999997016,
+          "heat": 0.001905000000074506,
+          "overheat": false,
+          "biteT": 0
+        },
+        "knifeT": 0
+      }
+    },
+    {
+      "name": "action-saw-knife-1p",
+      "data": {
+        "saw": {
+          "holdT": 0,
+          "hearT": 0,
+          "fuel": 59.46740000000596,
+          "heat": 0.013314999999850988,
+          "overheat": false,
+          "biteT": 0
+        },
+        "knifeT": 0.22640000000596047
+      }
+    },
+    {
+      "name": "action-saw-back-3p",
+      "data": {
+        "saw": {
+          "holdT": 0,
+          "hearT": 0,
+          "fuel": 59.08679999999702,
+          "heat": 0.01859666667071482,
+          "overheat": false,
+          "biteT": 0
+        },
+        "gun": "chainsaw"
+      }
+    },
+    {
+      "name": "action-launcher-draw-1p",
+      "data": {
+        "gun": "launcher",
+        "ammo": 6
+      }
+    },
+    {
+      "name": "action-launcher-fired-1p",
+      "data": {
+        "gun": "launcher",
+        "ammo": 5
+      }
+    },
+    {
+      "name": "sweep-pistol-eye-draw",
+      "data": {
+        "gun": "pistol",
+        "first": true,
+        "ammo": 12
+      }
+    },
+    {
+      "name": "sweep-pistol-eye-fired",
+      "data": {
+        "gun": "pistol",
+        "ammo": 11,
+        "cases": 1
+      }
+    },
+    {
+      "name": "sweep-pistol-eye-reload",
+      "data": {
+        "gun": "pistol",
+        "reloading": true,
+        "ammo": 11
+      }
+    },
+    {
+      "name": "sweep-pistol-hip-draw",
+      "data": {
+        "gun": "pistol",
+        "first": false,
+        "ammo": 12
+      }
+    },
+    {
+      "name": "sweep-pistol-hip-fired",
+      "data": {
+        "gun": "pistol",
+        "ammo": 11,
+        "cases": 1
+      }
+    },
+    {
+      "name": "sweep-pistol-hip-reload",
+      "data": {
+        "gun": "pistol",
+        "reloading": true,
+        "ammo": 11
+      }
+    },
+    {
+      "name": "sweep-revolver-eye-draw",
+      "data": {
+        "gun": "revolver",
+        "first": true,
+        "ammo": 6
+      }
+    },
+    {
+      "name": "sweep-revolver-eye-fired",
+      "data": {
+        "gun": "revolver",
+        "ammo": 5,
+        "cases": 0
+      }
+    },
+    {
+      "name": "sweep-revolver-eye-reload",
+      "data": {
+        "gun": "revolver",
+        "reloading": true,
+        "ammo": 5
+      }
+    },
+    {
+      "name": "sweep-revolver-hip-draw",
+      "data": {
+        "gun": "revolver",
+        "first": false,
+        "ammo": 6
+      }
+    },
+    {
+      "name": "sweep-revolver-hip-fired",
+      "data": {
+        "gun": "revolver",
+        "ammo": 5,
+        "cases": 0
+      }
+    },
+    {
+      "name": "sweep-revolver-hip-reload",
+      "data": {
+        "gun": "revolver",
+        "reloading": true,
+        "ammo": 5
+      }
+    },
+    {
+      "name": "sweep-uzi-eye-draw",
+      "data": {
+        "gun": "uzi",
+        "first": true,
+        "ammo": 32
+      }
+    },
+    {
+      "name": "sweep-uzi-eye-fired",
+      "data": {
+        "gun": "uzi",
+        "ammo": 28,
+        "cases": 4
+      }
+    },
+    {
+      "name": "sweep-uzi-eye-reload",
+      "data": {
+        "gun": "uzi",
+        "reloading": true,
+        "ammo": 28
+      }
+    },
+    {
+      "name": "sweep-uzi-hip-draw",
+      "data": {
+        "gun": "uzi",
+        "first": false,
+        "ammo": 32
+      }
+    },
+    {
+      "name": "sweep-uzi-hip-fired",
+      "data": {
+        "gun": "uzi",
+        "ammo": 28,
+        "cases": 4
+      }
+    },
+    {
+      "name": "sweep-uzi-hip-reload",
+      "data": {
+        "gun": "uzi",
+        "reloading": true,
+        "ammo": 28
+      }
+    },
+    {
+      "name": "sweep-m4-eye-draw",
+      "data": {
+        "gun": "m4",
+        "first": true,
+        "ammo": 30
+      }
+    },
+    {
+      "name": "sweep-m4-eye-fired",
+      "data": {
+        "gun": "m4",
+        "ammo": 27,
+        "cases": 3
+      }
+    },
+    {
+      "name": "sweep-m4-eye-reload",
+      "data": {
+        "gun": "m4",
+        "reloading": true,
+        "ammo": 27
+      }
+    },
+    {
+      "name": "sweep-m4-hip-draw",
+      "data": {
+        "gun": "m4",
+        "first": false,
+        "ammo": 30
+      }
+    },
+    {
+      "name": "sweep-m4-hip-fired",
+      "data": {
+        "gun": "m4",
+        "ammo": 27,
+        "cases": 3
+      }
+    },
+    {
+      "name": "sweep-m4-hip-reload",
+      "data": {
+        "gun": "m4",
+        "reloading": true,
+        "ammo": 27
+      }
+    },
+    {
+      "name": "sweep-ak-eye-draw",
+      "data": {
+        "gun": "ak",
+        "first": true,
+        "ammo": 30
+      }
+    },
+    {
+      "name": "sweep-ak-eye-fired",
+      "data": {
+        "gun": "ak",
+        "ammo": 27,
+        "cases": 3
+      }
+    },
+    {
+      "name": "sweep-ak-eye-reload",
+      "data": {
+        "gun": "ak",
+        "reloading": true,
+        "ammo": 27
+      }
+    },
+    {
+      "name": "sweep-ak-hip-draw",
+      "data": {
+        "gun": "ak",
+        "first": false,
+        "ammo": 30
+      }
+    },
+    {
+      "name": "sweep-ak-hip-fired",
+      "data": {
+        "gun": "ak",
+        "ammo": 27,
+        "cases": 3
+      }
+    },
+    {
+      "name": "sweep-ak-hip-reload",
+      "data": {
+        "gun": "ak",
+        "reloading": true,
+        "ammo": 27
+      }
+    },
+    {
+      "name": "sweep-shotgun-eye-draw",
+      "data": {
+        "gun": "shotgun",
+        "first": true,
+        "ammo": 8
+      }
+    },
+    {
+      "name": "sweep-shotgun-eye-fired",
+      "data": {
+        "gun": "shotgun",
+        "ammo": 7,
+        "cases": 1
+      }
+    },
+    {
+      "name": "sweep-shotgun-eye-reload",
+      "data": {
+        "gun": "shotgun",
+        "reloading": true,
+        "ammo": 7
+      }
+    },
+    {
+      "name": "sweep-shotgun-hip-draw",
+      "data": {
+        "gun": "shotgun",
+        "first": false,
+        "ammo": 8
+      }
+    },
+    {
+      "name": "sweep-shotgun-hip-fired",
+      "data": {
+        "gun": "shotgun",
+        "ammo": 7,
+        "cases": 1
+      }
+    },
+    {
+      "name": "sweep-shotgun-hip-reload",
+      "data": {
+        "gun": "shotgun",
+        "reloading": true,
+        "ammo": 7
+      }
+    },
+    {
+      "name": "sweep-aa12-eye-draw",
+      "data": {
+        "gun": "aa12",
+        "first": true,
+        "ammo": 20
+      }
+    },
+    {
+      "name": "sweep-aa12-eye-fired",
+      "data": {
+        "gun": "aa12",
+        "ammo": 18,
+        "cases": 2
+      }
+    },
+    {
+      "name": "sweep-aa12-eye-reload",
+      "data": {
+        "gun": "aa12",
+        "reloading": true,
+        "ammo": 18
+      }
+    },
+    {
+      "name": "sweep-aa12-hip-draw",
+      "data": {
+        "gun": "aa12",
+        "first": false,
+        "ammo": 20
+      }
+    },
+    {
+      "name": "sweep-aa12-hip-fired",
+      "data": {
+        "gun": "aa12",
+        "ammo": 18,
+        "cases": 2
+      }
+    },
+    {
+      "name": "sweep-aa12-hip-reload",
+      "data": {
+        "gun": "aa12",
+        "reloading": true,
+        "ammo": 18
+      }
+    },
+    {
+      "name": "sweep-sniper-eye-draw",
+      "data": {
+        "gun": "sniper",
+        "first": true,
+        "ammo": 5
+      }
+    },
+    {
+      "name": "sweep-sniper-eye-fired",
+      "data": {
+        "gun": "sniper",
+        "ammo": 4,
+        "cases": 0
+      }
+    },
+    {
+      "name": "sweep-sniper-eye-reload",
+      "data": {
+        "gun": "sniper",
+        "reloading": true,
+        "ammo": 4
+      }
+    },
+    {
+      "name": "sweep-sniper-hip-draw",
+      "data": {
+        "gun": "sniper",
+        "first": false,
+        "ammo": 5
+      }
+    },
+    {
+      "name": "sweep-sniper-hip-fired",
+      "data": {
+        "gun": "sniper",
+        "ammo": 4,
+        "cases": 1
+      }
+    },
+    {
+      "name": "sweep-sniper-hip-reload",
+      "data": {
+        "gun": "sniper",
+        "reloading": true,
+        "ammo": 4
+      }
+    },
+    {
+      "name": "sweep-minigun-eye-draw",
+      "data": {
+        "gun": "minigun",
+        "first": true,
+        "ammo": 300
+      }
+    },
+    {
+      "name": "sweep-minigun-eye-fired",
+      "data": {
+        "gun": "minigun",
+        "ammo": 280,
+        "cases": 20
+      }
+    },
+    {
+      "name": "sweep-minigun-eye-reload",
+      "data": {
+        "gun": "minigun",
+        "reloading": true,
+        "ammo": 280
+      }
+    },
+    {
+      "name": "sweep-minigun-hip-draw",
+      "data": {
+        "gun": "minigun",
+        "first": false,
+        "ammo": 300
+      }
+    },
+    {
+      "name": "sweep-minigun-hip-fired",
+      "data": {
+        "gun": "minigun",
+        "ammo": 280,
+        "cases": 20
+      }
+    },
+    {
+      "name": "sweep-minigun-hip-reload",
+      "data": {
+        "gun": "minigun",
+        "reloading": true,
+        "ammo": 280
+      }
+    },
+    {
+      "name": "sweep-launcher-eye-draw",
+      "data": {
+        "gun": "launcher",
+        "first": true,
+        "ammo": 5
+      }
+    },
+    {
+      "name": "sweep-launcher-eye-fired",
+      "data": {
+        "gun": "launcher",
+        "ammo": 4,
+        "cases": 0
+      }
+    },
+    {
+      "name": "sweep-launcher-eye-reload",
+      "data": {
+        "gun": "launcher",
+        "reloading": true,
+        "ammo": 4
+      }
+    },
+    {
+      "name": "sweep-launcher-hip-draw",
+      "data": {
+        "gun": "launcher",
+        "first": false,
+        "ammo": 6
+      }
+    },
+    {
+      "name": "sweep-launcher-hip-fired",
+      "data": {
+        "gun": "launcher",
+        "ammo": 5,
+        "cases": 0
+      }
+    },
+    {
+      "name": "sweep-launcher-hip-reload",
+      "data": {
+        "gun": "launcher",
+        "reloading": true,
+        "ammo": 5
+      }
+    },
+    {
+      "name": "sweep-flamer-eye-draw",
+      "data": {
+        "gun": "flamer",
+        "first": true,
+        "ammo": 60
+      }
+    },
+    {
+      "name": "sweep-flamer-eye-fired",
+      "data": {
+        "gun": "flamer",
+        "ammo": 57.5,
+        "cases": 0
+      }
+    },
+    {
+      "name": "sweep-flamer-eye-reload",
+      "data": {
+        "gun": "flamer",
+        "reloading": true,
+        "ammo": 57.5
+      }
+    },
+    {
+      "name": "sweep-flamer-hip-draw",
+      "data": {
+        "gun": "flamer",
+        "first": false,
+        "ammo": 60
+      }
+    },
+    {
+      "name": "sweep-flamer-hip-fired",
+      "data": {
+        "gun": "flamer",
+        "ammo": 57.5,
+        "cases": 0
+      }
+    },
+    {
+      "name": "sweep-flamer-hip-reload",
+      "data": {
+        "gun": "flamer",
+        "reloading": true,
+        "ammo": 57.5
+      }
+    },
+    {
+      "name": "sweep-chainsaw-eye-draw",
+      "data": {
+        "gun": "chainsaw",
+        "first": true,
+        "ammo": null
+      }
+    },
+    {
+      "name": "sweep-chainsaw-eye-fired",
+      "data": {
+        "gun": "chainsaw",
+        "ammo": null,
+        "cases": 0
+      }
+    },
+    {
+      "name": "sweep-chainsaw-eye-reload",
+      "data": {
+        "gun": "chainsaw",
+        "reloading": false,
+        "ammo": null
+      }
+    },
+    {
+      "name": "sweep-chainsaw-hip-draw",
+      "data": {
+        "gun": "chainsaw",
+        "first": false,
+        "ammo": null
+      }
+    },
+    {
+      "name": "sweep-chainsaw-hip-fired",
+      "data": {
+        "gun": "chainsaw",
+        "ammo": null,
+        "cases": 0
+      }
+    },
+    {
+      "name": "sweep-chainsaw-hip-reload",
+      "data": {
+        "gun": "chainsaw",
+        "reloading": false,
+        "ammo": null
+      }
+    }
+  ],
+  "spikes": [
+    {
+      "stage": "entry",
+      "ms": 7583.3
+    },
+    {
+      "stage": "entry",
+      "ms": 116.6
+    },
+    {
+      "stage": "entry",
+      "ms": 1133.3
+    },
+    {
+      "stage": "entry",
+      "ms": 299.9
+    },
+    {
+      "stage": "action-setup",
+      "ms": 133.2
+    },
+    {
+      "stage": "action-setup",
+      "ms": 416.7
+    },
+    {
+      "stage": "action-setup",
+      "ms": 500
+    },
+    {
+      "stage": "action-setup",
+      "ms": 116.6
+    },
+    {
+      "stage": "action-knife-m4-3p",
+      "ms": 100.1
+    },
+    {
+      "stage": "action-knife-m4-3p",
+      "ms": 367
+    },
+    {
+      "stage": "action-saw-draw-1p",
+      "ms": 200
+    },
+    {
+      "stage": "action-launcher-draw-1p",
+      "ms": 233.4
+    },
+    {
+      "stage": "sweep-revolver-eye-draw",
+      "ms": 166.5
+    },
+    {
+      "stage": "sweep-revolver-eye-draw",
+      "ms": 133.3
+    },
+    {
+      "stage": "sweep-revolver-eye-reload",
+      "ms": 266.6
+    },
+    {
+      "stage": "sweep-launcher-eye-draw",
+      "ms": 133.3
+    },
+    {
+      "stage": "sweep-launcher-eye-fired",
+      "ms": 250.3
+    },
+    {
+      "stage": "sweep-launcher-eye-reload",
+      "ms": 100.9
+    }
+  ],
+  "errors": [],
+  "warnings": [
+    "warning: The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127",
+    "warning: The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127",
+    "info: Grave Shift renderer: WebGPU.",
+    "info: Grave Shift opening perf: {\"toMenu\":22.1,\"segments\":{\"boot\":{\"at\":0,\"seconds\":0.41,\"frames\":3,\"over50\":2,\"over100\":1,\"worst\":167},\"caracal\":{\"at\":0.41,\"seconds\":13.35,\"frames\":103,\"over50\":34,\"over100\":21,\"worst\":1733},\"loading\":{\"at\":13.76"
+  ]
+}

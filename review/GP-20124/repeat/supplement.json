@@ -1,0 +1,307 @@
+{
+  "stages": [
+    {
+      "name": "cif-real-open",
+      "data": {
+        "open": true
+      }
+    },
+    {
+      "name": "cif-real-camo",
+      "data": {
+        "open": true,
+        "camo": "m81"
+      }
+    },
+    {
+      "name": "armory-real-rack",
+      "data": {
+        "open": true
+      }
+    },
+    {
+      "name": "camo-pistol",
+      "data": {
+        "gun": "pistol"
+      }
+    },
+    {
+      "name": "camo-revolver",
+      "data": {
+        "gun": "revolver"
+      }
+    },
+    {
+      "name": "camo-uzi",
+      "data": {
+        "gun": "uzi"
+      }
+    },
+    {
+      "name": "camo-m4",
+      "data": {
+        "gun": "m4"
+      }
+    },
+    {
+      "name": "camo-ak",
+      "data": {
+        "gun": "ak"
+      }
+    },
+    {
+      "name": "camo-shotgun",
+      "data": {
+        "gun": "shotgun"
+      }
+    },
+    {
+      "name": "camo-aa12",
+      "data": {
+        "gun": "aa12"
+      }
+    },
+    {
+      "name": "camo-sniper",
+      "data": {
+        "gun": "sniper"
+      }
+    },
+    {
+      "name": "camo-minigun",
+      "data": {
+        "gun": "minigun"
+      }
+    },
+    {
+      "name": "camo-launcher",
+      "data": {
+        "gun": "launcher"
+      }
+    },
+    {
+      "name": "camo-flamer",
+      "data": {
+        "gun": "flamer"
+      }
+    },
+    {
+      "name": "camo-chainsaw",
+      "data": {
+        "gun": "chainsaw"
+      }
+    },
+    {
+      "name": "blade-knife-eye",
+      "data": {
+        "t": 0.12760000000000002,
+        "machete": false,
+        "katana": false,
+        "gun": "m4",
+        "blade": "knife",
+        "raise": 0,
+        "gunVisible": false,
+        "u": 0.41999999999999993
+      }
+    },
+    {
+      "name": "blade-knife-hip",
+      "data": {
+        "t": 0.12760000000000002,
+        "u": 0.41999999999999993
+      }
+    },
+    {
+      "name": "blade-machete-eye",
+      "data": {
+        "t": 0.23200000000000004,
+        "machete": true,
+        "katana": false,
+        "gun": "m4",
+        "blade": "machete",
+        "raise": 0,
+        "gunVisible": false,
+        "u": 0.41999999999999993
+      }
+    },
+    {
+      "name": "blade-machete-hip",
+      "data": {
+        "t": 0.23200000000000004,
+        "u": 0.41999999999999993
+      }
+    },
+    {
+      "name": "blade-katana-eye",
+      "data": {
+        "t": 0.195,
+        "machete": false,
+        "katana": true,
+        "gun": "m4",
+        "blade": "katana",
+        "raise": 0,
+        "gunVisible": false,
+        "u": 0.35
+      }
+    },
+    {
+      "name": "blade-katana-hip",
+      "data": {
+        "t": 0.17400000000000002,
+        "u": 0.41999999999999993
+      }
+    },
+    {
+      "name": "grenade-release",
+      "data": {
+        "phase": "throw",
+        "t": 0.048200000002980234,
+        "inHand": true,
+        "queued": false
+      }
+    },
+    {
+      "name": "watchman-mounted",
+      "data": {
+        "mounted": true,
+        "state": {
+          "belt": 500,
+          "feedT": 0,
+          "reserve": 0,
+          "flash": false,
+          "hud": "500 / 1000 · 0 spare · AUTO",
+          "hudName": "Watchman MG"
+        }
+      }
+    },
+    {
+      "name": "watchman-fired",
+      "data": {
+        "belt": 495,
+        "feedT": 0,
+        "reserve": 0,
+        "flash": false,
+        "hud": "495 / 1000 · 0 spare · AUTO",
+        "hudName": "Watchman MG"
+      }
+    },
+    {
+      "name": "watchman-carried",
+      "data": {
+        "carried": {
+          "hp": 120,
+          "kind": "m240",
+          "belt": 495,
+          "liftAge": 0
+        }
+      }
+    }
+  ],
+  "errors": [],
+  "spikes": [
+    {
+      "stage": "cif-real-open",
+      "ms": 499.8999999999942
+    },
+    {
+      "stage": "armory-real-rack",
+      "ms": 283.09999999999854
+    },
+    {
+      "stage": "camo-pistol",
+      "ms": 233.60000000000582
+    },
+    {
+      "stage": "camo-pistol",
+      "ms": 149.59999999999854
+    },
+    {
+      "stage": "camo-pistol",
+      "ms": 133.29999999999563
+    },
+    {
+      "stage": "camo-pistol",
+      "ms": 116.70000000000437
+    },
+    {
+      "stage": "camo-revolver",
+      "ms": 150
+    },
+    {
+      "stage": "camo-revolver",
+      "ms": 533.3000000000029
+    },
+    {
+      "stage": "camo-shotgun",
+      "ms": 550
+    },
+    {
+      "stage": "camo-aa12",
+      "ms": 283.29999999999563
+    },
+    {
+      "stage": "camo-launcher",
+      "ms": 266.59999999999854
+    },
+    {
+      "stage": "camo-launcher",
+      "ms": 116.90000000000146
+    },
+    {
+      "stage": "camo-chainsaw",
+      "ms": 200
+    },
+    {
+      "stage": "camo-chainsaw",
+      "ms": 100.09999999999854
+    },
+    {
+      "stage": "camo-chainsaw",
+      "ms": 100.09999999999854
+    },
+    {
+      "stage": "camo-chainsaw",
+      "ms": 100.09999999999854
+    },
+    {
+      "stage": "blade-knife-eye",
+      "ms": 183.1999999999971
+    },
+    {
+      "stage": "blade-knife-hip",
+      "ms": 133.40000000000146
+    },
+    {
+      "stage": "blade-katana-hip",
+      "ms": 100.10000000000582
+    },
+    {
+      "stage": "watchman-mounted",
+      "ms": 133.3000000000029
+    },
+    {
+      "stage": "watchman-mounted",
+      "ms": 150
+    },
+    {
+      "stage": "watchman-mounted",
+      "ms": 100.10000000000582
+    },
+    {
+      "stage": "watchman-mounted",
+      "ms": 100.29999999998836
+    },
+    {
+      "stage": "watchman-carried",
+      "ms": 166.5
+    },
+    {
+      "stage": "watchman-carried",
+      "ms": 100.09999999999127
+    },
+    {
+      "stage": "watchman-carried",
+      "ms": 100.19999999999709
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "factoryMaterials": 29,
+  "paintedMaterials": 8,
+  "controls": [
+    "lightSwitch",
+    "trigger",
+    "hammer",
+    "cylinderRelease",
+    "ejector"
+  ]
+}

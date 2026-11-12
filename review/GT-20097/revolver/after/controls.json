@@ -1,0 +1,14 @@
+{
+  "controls": {
+    "lightSwitch": "controls-lightSwitch-revolver",
+    "trigger": "revolver-trigger",
+    "hammer": "controls-hammer",
+    "cylinderRelease": "controls-cylinderRelease",
+    "ejector": "controls-ejector"
+  },
+  "triggerPin": [
+    0,
+    -0.008,
+    0.036
+  ]
+}
