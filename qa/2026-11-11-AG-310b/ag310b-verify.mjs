@@ -310,7 +310,7 @@ async function runBenchmarkView(origin, viewName, runIdx) {
         };
       };
 
-      await waitFrames(12);
+      await waitFrames(75);
       const perItem = [];
 
       for (const item of items) {

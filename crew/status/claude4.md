@@ -2,9 +2,9 @@
 
 state: active
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: CD-1 fresh session 00:00Z: rebuilding the cloud copy; the revolver fist toward the bore on GT-20088's slimmer grip (J136), then the AA-12 fist roll after GT-20087b
+task: CD-1 fresh session 02:36Z: rebuilding the cloud copy; Claude 5's CE-2 ask: raise the GW-4 and Wasp fists so the index knuckle reaches the guard bar's top (cloud only, PC paused)
 touching: game/viewmodel-fit.js, studio/hand-contacts.js, tools/handfit/
-since: 2026-11-11T23:59Z
+since: 2026-11-12T02:34Z
 next: CD-1 (08:52Z: back to Claude 1, a fresh session from 08:55Z (Jerr
 blocked-on: —
 last-report: handoffs/2026-11-11-claude4-CD-1-fixes2.md
@@ -12,11 +12,20 @@ last-report: handoffs/2026-11-11-claude4-CD-1-fixes2.md
 ## Notes
 - **FIRST, from CLAUDE DIRECTOR (16:07Z):** two Claude 1 sessions are running. The OLD one (checked out, 'answering requests only'): stop, answer nothing, schedule no more check-ins. The FRESH one (IN 15:12Z): you take every request, incl. vmMat (low) and Claude 5's CE-2 fists (middle/ring fingers through the GW-4/Wasp grips), and note every 15 min.
 
-### Where things stand (12 Nov 00:10Z, session 7, fresh)
-- Cloud copy rebuilt (1d + img + extra + deltas 1515/1840/2030/2112 + new claude4-delta-0005.tgz; fit files match the PC).
-- Queue: (1) the revolver fist toward the bore on GT-20088's slimmer firing-side walnut (J136, for Claude 5's DA trigger), a roll if
-  a slide puts the palm in the grip; (2) the AA-12 fist: a roll round the front strap after GT-20087b; (3) what Claude 5 still lists.
-- AG is out of quota until 13 Nov: four lights from my cloud copy.
+### Where things stand (12 Nov 02:00Z, session 7: handoffs/2026-11-12-claude4-CD-1-fixes5.md)
+- LANDED 01:50Z: the revolver fist on GT-20088/88b (fit's index pad 2.7 gun mm right of the blade's centre, clean), the AA-12 fist
+  rolled round the grip (index root 9 mm clear; tcl334c aa12 0.0), the AA-12 support thumb. Claude 5 told. Ready to commit.
+- **Context nearly full, needs a new session** (02:25Z). PAUSE PC since 02:20Z (Jerry playing): no PC game-file edits/slot runs until RESUME.
+  Open: tcl281 pistol (asked the director: (a) the test reads VM_FIT.pistol.r.p, my pick, or (b) raise the fist 2.7 cm); Claude 5's
+  list of blocking fists (asked 02:00Z); then the GW-4 index on GT-20087b (tcl334c m4 5.5), the AK fist. Delta 0220 in _DELETE ME.
+- 02:35Z for the fresh session: tcl281 decided (Claude 2 changes the test; do NOT move the pistol fist). Next card: Claude 5's
+  request (02:3xZ): raise/roll the GW-4 and Wasp fists so the index MCP sits ~(0.03,-0.08,-0.06) / ~(0.03,-0.065,0.03) gun units,
+  i.e. ~20-30 mm off centre at the guard bar's top, behind the blade (its interim VM_TRIGGER lands after RESUME). Wait for RESUME to land.
+- 02:20Z: handoff written, sent to the director; asked Claude 5 which fists still block CE-2. Next (my pick): GW-4 refit on
+  GT-20087b's longer opening (tcl334c m4 5.5), then the AK fist ~8-10 mm right/lower. Tools: gun/idxmove3.mjs + c4/mv2res.py.
+- Open: the AA-12's guard is ~21 gun mm in front of the blade (asked Claude 5 if it wants a GT like 88b); old reds: uzi/m4/ak index.
+- Cloud: tars 1d + img + extra + deltas 1515/1840/2030/2112/0005/0110 in _DELETE ME; mkpage.mjs after each delta; posedlabels/lm/posed
+  copied to /home/claude/work; viewer: /home/claude/look/v2 (view.html + vendor link). Four lights: c4/lights4.mjs via the slot.
 
 ### Where things stand (11 Nov 21:00Z, session 6: handoffs/2026-11-11-claude4-CD-1-fixes4.md)
 - LANDED 20:53Z: GW-4 and Wasp firing fists under the guards (with GT-20087's opened guards), pistol support hand round the
@@ -27,28 +36,6 @@ last-report: handoffs/2026-11-11-claude4-CD-1-fixes2.md
 - Cloud: tars "_DELETE ME/claude4-cloud-copy-CD-1d.tgz" + -img- + claude4-delta-1840.tgz + -2030.tgz (keep my two fit files);
   exports with c4/expr5.sh (ex6 step files: run mkst3.py, mkst4.py, then c4/mkst6.py); c4/after.sh
   serialises them. Fields with PAD=0.035. NO pretwist after applyoff ("carried").
-
-### Where things stand (11 Nov 18:10Z, session 5, CD-1 fixes part 3: handoffs/2026-11-11-claude4-CD-1-fixes3.md)
-- LANDED: the GW-4 support thumb forward (VM_FIT.m4.l + contacts, ~16:28Z), ChatGPT 2's vmMat identity (vmMaterial updates
-  in place, 16:37Z), the revolver support cup (VM_FIT.revolver.l + VM_SUPPORT_ELBOW in viewmodel.js, 18:06Z). Antigravity
-  asked for the four lights of both; ChatGPT 2 to run paint.mjs.
-- Also LANDED 18:23Z: the revolver's firing index within the trigger's reach (pad 2.8 mm; Claude 5 adds VM_TRIGGER).
-- **Context nearly full, needs a new session** (18:35Z). This session answers requests only until CLAUDE DIRECTOR starts the next.
-- Started (4), the GW-4 fist: in the 16:2xZ export the firing hand's deepest (5.2 mm, part 43; 2.2 in controls-trigger) sits by the
-  index tip, where the fist's thumb rests too: find which bone first (c4/posechk2.py SD=r with a pose, or label by bone via
-  c4/posedlabels.mjs, which slide2.py needs at /home/claude/work/). slide2.py read 0 mm for every bone set (its part list is
-  shift3.py's, not the export's numbering: check before trusting it).
-- Next: (4) the GW-4 and Wasp firing fists down under their guards (Claude 5's CE-2 note: middle/ring through the guard; slide2 + fit8
-  fire), the flamer firing hand, m4 r 5.2, uzi r 4.6, the pistol's 3.7 mm two-hand floor. Then CD-4.
-- How (cloud): the PC tree tar ("_DELETE ME/claude4-cloud-copy-CD-1d.tgz" + -img- + a delta of files newer than it) into
-  /home/claude/gs306; symlinks /home/claude/handfit-work/{hand,gun,c4} -> tools/handfit/*; fpshot step files from
-  c4/mkst3.py + mkst4.py; viewer in /home/claude/look/v2 (view.html + vendor link). Export with
-  CHROME_ARGS="--js-flags=--max-old-space-size=7000 --disable-dev-shm-usage" (else the page crashes at the raise).
-  Loop: setfit -> expr.sh export -> lm.py (landmarks, forearm line) / depth3 -> look2.sh (cam + 5 views) -> fit8 (augment2 for
-  a hand round the other) -> applyoff -> pretwist.py (the game's twist saturates at 0.6 rad: turn the fit back by it).
-  Tests: run-all.mjs <tests> --jobs 1 --agent claude4 --task CD-1 (cloud slot); full messages need the raw output.
-- Lessons: judge every hold in the 'cam' view with the arms; the forearm follows the elbow hint only inside the wrist's
-  ellipse, so turn the hand toward the hint (or give the gun its own support elbow) before fitting the fingers.
 
 ### Who you are (D-145, Jerry 10 Nov 2026)
 You are **Claude 1** on the board (agent `claude4`, task ids `CD-`; Jerry named you, D-146), the crew's fourth Claude: a Claude task of your own on Claude Opus 5.5 (High). Jerry made CLAUDE DIRECTOR (agent `claude`) the game
@@ -80,31 +67,6 @@ then CD-5 (the reloads), CD-6 (the other actions: blades, the throw, the mortar,
 CD-7 (no gun: unarmed, the ladder). Guns in this order unless Jerry says: the pistol, the GW-4, the shotgun, the
 KR-7, then the rest. For each gun: fit, test (tcl334b/c/d), then ask Antigravity (AG-286) for the four lights on the RTX
 5080, then a sheet to Claude.
-
-### Where the hands stand (Claude 4, 10 Nov ~23Z, CD-1 pass 1: handoffs/2026-11-10-claude4-CD-1.md)
-- Rule 2 passes for every gun but the launcher (17.7 mm: the firing hand's back is in the receiver; my wrap start, c4/wrap2.js
-  on part 43, put the palm the wrong side). Support hands wrap the handguards now. Two-hand holds still overlap: pistol 23.8,
-  revolver 9.1 mm (tcl334b). Chainsaw: the test is clean but my export reads 20.9 mm (find why). tcl301 fails before and after.
-- Tools: tools/handfit/README.md, section "Claude 4's pass": export from the suite page (c4/mkpage.mjs + c4/fptune4.mjs, fast),
-  fields c4/sdf_c4.py (fixed: multi-body parts, 10 um corners), check c4/depth2.py (= clip-check.js), wraps, apply7, merge.
-  Looking: tools/handfit/look/shoot.mjs. The cloud copy has to be made again each session (tar from the PC, ~50 MB).
-- Launcher tried again (23Z): the hand has to move ~32 mm back off the grip before the palm is clear, and then the fingers
-  close on nothing (30+ mm from any part): the hand is turned wrong for that grip, not just placed wrong. Start from the
-  grip's own axis and side (studio/weapon-heavy.js ~366, 36 x 48 mm) or ask ChatGPT 2 (GT-20078) where the grip sits now.
-- Next: the launcher's firing hand; the two-hand holds (c4/augment.py: the firing hand as a part); then CD-2.
-
-### CD-1 pass 2 DONE (11 Nov 04:19Z, handoffs/2026-11-11-claude4-CD-1.md, sent to CLAUDE DIRECTOR with --review for poseArm)
-- On the PC: game/viewmodel-fit.js, studio/hand-contacts.js, game/viewmodel.js (poseArm sign only), tools/handfit/ (README
-  section "Claude 4's pass 2": the twist, applyoff/drawn/fixroll, fitT trigger reach, keep-outs, augment2, cont10), sheets in
-  Claude outputs/CD-1/pass2/. Cloud tests: tcl334, tcl334b/c/d, t240 green (revolver two hands 0.5 mm, right at the line).
-- Open: Antigravity's four lights of pass 2 (requested); Claude 5 re-solves VM_TRIGGER on the refitted firing hands
-  (Breacher and pump shotgun reach not improved: ask him what's left); chainsaw ring finger 3.3 mm press (glove's give).
-- Next: CD-4 (the eye pass): AG-286's notes (rifle support hands hidden at the hip; the revolver's grip below the hand),
-  CLAUDE DIRECTOR's (the stock fills the aimed view on the shotgun and KR-7: the aimed eye vs a cheek weld), ChatGPT 2's
-  (Wasp aimed view). tools/handfit/c4/vmfit-pass2-wip.js is a superseded copy: ready to delete (needs Jerry's OK).
-- **Context nearly full, needs a new session** (11 Nov 04:20Z). The cloud copy dies with this session: make it again (tar
-  from the PC into _DELETE ME/, exclude the soundtrack, ui/audio, assets/intro media; take crew/notes.mjs and the newest
-  tools/tests/fakethree.mjs).
 
 ### Jerry's rules for this work
 - J126 (D-138): no part of the hand through another, no part of the hand through any part of a weapon, no part of the

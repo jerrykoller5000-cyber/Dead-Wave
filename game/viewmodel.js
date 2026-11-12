@@ -1461,7 +1461,8 @@ export function createViewmodel(ctx) {
     // trigger's face (solved against the gun with the hand where VM_FIT puts it), and presses it back on each shot and while
     // the trigger is held; the trigger turns on its pin with it. Claude 1's fit keeps the hand, the other fingers and the
     // thumb (agreed 11 Nov). Not on a pair yet (their hands sit on the hold's grip, not the fit).
-    const TR = !AK && VM_TRIGGER[gun.key];
+    // CE-2 (12 Nov): info.tune.trigger[key] tries an entry live (the solver's pick before it goes into VM_TRIGGER)
+    const TR = !AK && ((info.tune.trigger && info.tune.trigger[gun.key]) || VM_TRIGGER[gun.key]);
     let trigOn = false;
     if (TR && poseR === gripP && !BL && !HN) {
       const want = (st.fireHeld || (S.slideT < TR.hold && S.shots > 0)) ? 1 : 0;

@@ -1,0 +1,57 @@
+{
+  "hash": "28995435",
+  "outer": [
+    18,
+    92,
+    20,
+    19,
+    19,
+    19,
+    20,
+    19,
+    19,
+    19
+  ],
+  "checks": [
+    {
+      "lowerMm": 0,
+      "upperMm": 0.0078125
+    },
+    {
+      "lowerMm": 0.21093750000000003,
+      "upperMm": 0.21875
+    },
+    {
+      "lowerMm": 0,
+      "upperMm": 0.0078125
+    },
+    {
+      "lowerMm": 0,
+      "upperMm": 0.0078125
+    },
+    {
+      "lowerMm": 0,
+      "upperMm": 0.0078125
+    },
+    {
+      "lowerMm": 0,
+      "upperMm": 0.0078125
+    },
+    {
+      "lowerMm": 0,
+      "upperMm": 0.0078125
+    },
+    {
+      "lowerMm": 0,
+      "upperMm": 0.0078125
+    },
+    {
+      "lowerMm": 0,
+      "upperMm": 0.0078125
+    },
+    {
+      "lowerMm": 0,
+      "upperMm": 0.0078125
+    }
+  ]
+}

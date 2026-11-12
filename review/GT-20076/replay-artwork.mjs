@@ -2,6 +2,28 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 
 // Only the selected local studio asset is supplied to this review page.
+
+export async function originalFlamerMount(page,origin){
+  const path='/studio/weapon-heavy.js',live=await readFile(new URL('../../studio/weapon-heavy.js',import.meta.url),'utf8');
+  const start=live.indexOf('  const gripMount ='),end=live.indexOf('  K.box(0.04, 0.012, 0.05',start);
+  assert(start>0&&end>start);
+  let section=live.slice(start,end);
+  for(const cut of ['fitFlamerMount(THREE, gripMount);',"trimPanelBack(THREE, rearGripBody, -1, .046, 'y');",
+    'trimPanelBack(THREE, panel, sx, .018);','trimPanelBack(THREE, rib, sx, .0195);']){
+    assert.equal(section.split(cut).length,2);section=section.replace(cut,'');
+  }
+  const served=await replayArtwork(page,origin,path,live.slice(0,start)+section+live.slice(end));
+  return async()=>{
+    const hash=await page.evaluate(`(async()=>{
+      const {currentModel}=await import('/review/GT-20076/rank-visibility.mjs');
+      const {artworkFingerprint}=await import('/tools/tests/weapon-seating.js');
+      return artworkFingerprint(currentModel(TT,'flamer'));
+    })()`);
+    const prior=JSON.parse(await readFile(new URL('./catalog-fix-rotating-frame-swept/audit.json',import.meta.url),'utf8'));
+    assert.equal(hash,prior.flamer.artworkFingerprint);served();
+  };
+}
+
 export async function replayArtwork(page,origin,path,source) {
   assert(['/studio/weapon-heavy.js','/studio/weapon-longarms.js','/studio/weapon-sidearms.js'].includes(path));
   const body=Buffer.from(source).toString('base64');

@@ -4,11 +4,12 @@ import { addArtworkInstances, addTriggerArtwork, bindModelArtwork, groupArtwork,
 import { markPaintSurface } from './weapon-finish.js';
 import { roundGeometry, spentCaseGeometry } from './weapon-casings.js';
 import { trimPanelBack } from './weapon-longarms.js';
+import { boxProjectUV } from '../core/geometry.js';
 
 // Small closed surface builders use BufferGeometry, also available in the test renderer.
 // Shared geometry contains no instance material, colour, animation or game state.
 const geometryCaches = new WeakMap();
-function geometry(T, key, build) {
+function geometry(T, key, build, projectUV = false) {
   let cache = geometryCaches.get(T); if (!cache) geometryCaches.set(T, cache = new Map());
   if (cache.has(key)) return cache.get(key);
   const p = [], n = [], uv = [];
@@ -24,7 +25,9 @@ function geometry(T, key, build) {
   const geo = new T.BufferGeometry();
   geo.setAttribute('position', new T.BufferAttribute(new Float32Array(p), 3));
   geo.setAttribute('normal', new T.BufferAttribute(new Float32Array(n), 3));
-  geo.setAttribute('uv', new T.BufferAttribute(new Float32Array(uv), 2));
+  const texcoords = new Float32Array(uv);
+  if (projectUV) boxProjectUV(geo.attributes.position.array, texcoords);
+  geo.setAttribute('uv', new T.BufferAttribute(texcoords, 2));
   geo.computeBoundingSphere(); geo.userData.shared = true; geo.userData.heavyGeometry = key; cache.set(key, geo); return geo;
 }
 function part(T, geo, mat, parent, x = 0, y = 0, z = 0) {
@@ -365,6 +368,41 @@ export function makeMinigunModel(ctx) {
   return finishGun(gun);
 }
 
+// The visible tube keeps its original twelve-sided outline. Only its end follows
+// the round graphic on the case. Intermediate points lie on the old edges.
+function launcherStockGraphic(T, pivotZ, pivotRadius, depthScale) {
+  const key = ['launcher-stock-end', pivotZ, pivotRadius, depthScale].join(',');
+  return geometry(T, key, quad => {
+    const radius = .024, rear = -.46;
+    const clearance = pivotRadius + .00008;
+    const rows = [];
+    for (let i = 0; i <= 24; i++) {
+      const edge = Math.min(5, Math.floor(i / 4)), t = i / 4 - edge;
+      const a = -Math.PI / 2 + edge * Math.PI / 6, b = a + Math.PI / 6;
+      const nx = (1 - t) * Math.cos(a) + t * Math.cos(b);
+      const ny = (1 - t) * Math.sin(a) + t * Math.sin(b);
+      const x = radius * nx, y = radius * ny;
+      const reach = Math.sqrt(clearance * clearance - y * y);
+      const front = pivotZ - reach / depthScale;
+      const slope = y / (reach * depthScale), faceLength = Math.hypot(1, slope);
+      const sideLength = Math.hypot(nx, ny);
+      rows.push({x, y, front, face: [0, -slope / faceLength, 1 / faceLength],
+        right: [nx / sideLength, ny / sideLength, 0], left: [-nx / sideLength, ny / sideLength, 0]});
+    }
+    for (let i = 1; i < rows.length; i++) {
+      const a = rows[i - 1], b = rows[i];
+      for (const side of [-1, 1]) {
+        const face = side > 0 ? 'right' : 'left';
+        quad([side * a.x, a.y, rear], [side * b.x, b.y, rear],
+          [side * b.x, b.y, b.front], [side * a.x, a.y, a.front], a[face], b[face], b[face], a[face]);
+      }
+      quad([-a.x, a.y, rear], [a.x, a.y, rear], [b.x, b.y, rear], [-b.x, b.y, rear], [0, 0, -1]);
+      quad([-a.x, a.y, a.front], [a.x, a.y, a.front], [b.x, b.y, b.front], [-b.x, b.y, b.front],
+        a.face, a.face, b.face, b.face);
+    }
+  }, true);
+}
+
 export function makeLauncherModel(ctx) {
   const { THREE, gunKit, gunBand, gripOutline, gunEffects, finishGun, gunBody, gunDark, gunMid, gunAccent, gunPoly, gunRubber, gunOlive, steelMat } = ctx;
   const gun = new THREE.Group();
@@ -427,7 +465,8 @@ export function makeLauncherModel(ctx) {
   // gun.userData.fpStock ('fp-stock'), for the view gun to leave out of the eye; third person and the shadow keep it.
   // Every part is where it was (the group sits at the gun's origin).
   const stock = K.group(0, 0, 0), stockStart = gun.children.length; stock.name = 'fp-stock';
-  K.lathe([[0, -0.46], [0.024, -0.46], [0.024, -0.25], [0, -0.25]], gunDark, { y: 0.04, seg: 12 });
+  const stockDepthScale = .7;
+  part(THREE, launcherStockGraphic(THREE, bossZ, bossRadius, stockDepthScale), gunDark, gun, 0, bossY, 0);
   for (const sx of [-1, 1]) for (const z of [-0.425, -0.395, -0.365])
     K.cyl(0.004, 0.004, 0.007, gunMid, sx * 0.022, 0.04, z, null, 8, 'x'); // telescoping tube stops
   K.slab([[-0.33, 0.08], [-0.47, 0.084], [-0.48, 0.08], [-0.48, -0.06], [-0.44, -0.065], [-0.37, -0.02], [-0.33, -0.01]], 0.08, gunOlive, { bevel: 0.016, segs: 3 });
@@ -439,7 +478,7 @@ export function makeLauncherModel(ctx) {
   for (const p of gun.children.slice(stockStart)) stock.add(p);
   stock.position.set(0, 0.04, -0.25);
   for (const piece of stock.children) { piece.position.y -= 0.04; piece.position.z += 0.25; }   // at rest unchanged; X now tilts the stock
-  stock.scale.z = 0.7;   // collapsed M32A1 stock; pivot and firing grip stay fixed
+  stock.scale.z = stockDepthScale;   // collapsed M32A1 stock; pivot and firing grip stay fixed
   const pivot = K.cyl(bossRadius, bossRadius, .11, gunDark, 0, bossY, bossZ, null, bossSegments, 'x');
   // Only the rear halves of these graphics project from the case.
   trimPanelBack(THREE, pivot, -1, -bossZ, 'z');
@@ -732,6 +771,86 @@ function fitFlamerCase(T, housing, tank) {
   flamerCaseSkins.set(T,skin); housing.geometry=skin; original.dispose();
 }
 
+// Keep the exposed tail of the rear grip mount where it passes behind the case.
+// Cut only its roof. The three heights follow the end and underside of the drawn case.
+const flamerMountSkins = new WeakMap();
+function fitFlamerMount(T, mount) {
+  const source = mount.geometry;
+  if (flamerMountSkins.has(T)) {
+    mount.geometry = flamerMountSkins.get(T);
+    source.dispose();
+    return;
+  }
+  const {position, normal, uv} = source.attributes;
+  const points = [], normals = [], texcoords = [];
+  const cuts = [-.1704, -.17, -.152];
+  const heights = [-.022, -.028, -.035];
+  function split(polygon, distance) {
+    const below = [], above = [];
+    for (let i = 0; i < polygon.length; i++) {
+      const a = polygon[i], b = polygon[(i + 1) % polygon.length];
+      const da = distance(a), db = distance(b);
+      if (da <= 1e-10) below.push(a);
+      if (da >= -1e-10) above.push(a);
+      if ((da < -1e-10 && db > 1e-10) || (da > 1e-10 && db < -1e-10)) {
+        const t = da / (da - db);
+        const v = {p: a.p.clone().lerp(b.p, t), n: a.n.clone().lerp(b.n, t), uv: a.uv.clone().lerp(b.uv, t)};
+        below.push(v);
+        above.push(v);
+      }
+    }
+    return [below, above];
+  }
+  function emit(poly) {
+    for (let j = 2; j < poly.length; j++) {
+      const a = poly[0].p, b = poly[j-1].p, c = poly[j].p;
+      if (b.clone().sub(a).cross(c.clone().sub(a)).lengthSq() < 1e-24) continue;
+      for (const v of [poly[0], poly[j-1], poly[j]]) {
+        points.push(v.p.x, v.p.y, v.p.z);
+        normals.push(v.n.x, v.n.y, v.n.z);
+        texcoords.push(v.uv.x, v.uv.y);
+      }
+    }
+  }
+  function roof(poly, startZ, startY, slope) {
+    const height = z => startY + slope * (z + mount.position.z - startZ) - mount.position.y;
+    const distance = v => v.p.y - height(v.p.z);
+    if (poly.every(v => distance(v) <= 1e-10)) { emit(poly); return; }
+    const [kept, raised] = split(poly, distance);
+    emit(kept);
+    const n = new T.Vector3(0, 1, -slope).normalize();
+    emit(raised.map(v => {
+      const p = new T.Vector3(v.p.x, height(v.p.z), v.p.z);
+      return {p, n, uv: new T.Vector2(p.x / .42, (Math.abs(slope) > 1 ? p.y : p.z) / .42)};
+    }));
+  }
+  const index = source.index, count = index ? index.count : position.count;
+  for (let i = 0; i < count; i += 3) {
+    let remaining = [0, 1, 2].map(j => {
+      const k = index ? index.getX(i+j) : i+j;
+      return {p: new T.Vector3().fromBufferAttribute(position, k), n: new T.Vector3().fromBufferAttribute(normal, k),
+        uv: new T.Vector2().fromBufferAttribute(uv, k)};
+    });
+    // The tail behind the case is entirely exposed.
+    if (remaining.every(v => v.p.z + mount.position.z < cuts[0])) { emit(remaining); continue; }
+    for (let j = 0; j < cuts.length && remaining.length; j++) {
+      const [left, right] = split(remaining, v => v.p.z + mount.position.z - cuts[j]);
+      if (!j) emit(left);
+      else roof(left, cuts[j-1], heights[j-1], (heights[j] - heights[j-1]) / (cuts[j] - cuts[j-1]));
+      remaining = right;
+    }
+    roof(remaining, cuts[2], heights[2], 0);
+  }
+  const skin = new T.BufferGeometry();
+  skin.setAttribute('position', new T.Float32BufferAttribute(points, 3));
+  skin.setAttribute('normal', new T.Float32BufferAttribute(normals, 3));
+  skin.setAttribute('uv', new T.Float32BufferAttribute(texcoords, 2));
+  skin.computeBoundingSphere();
+  flamerMountSkins.set(T, skin);
+  mount.geometry = skin;
+  source.dispose();
+}
+
 export function makeFlamerModel(ctx) {
   const { THREE, gunKit, gunBand, gripOutline, finishGun, gunBody, gunDark, gunMid, gunAccent, gunPoly, gunRubber, steelMat, brassMat, fuelRedMat, hazardYellow, gaugeFace } = ctx;
   const gun = new THREE.Group();
@@ -873,21 +992,26 @@ export function makeFlamerModel(ctx) {
     fuelCan: { restPos: [0, 0, 0], restRot: [0, 0, 0], visibleAtRest: true, note: 'whole tank bank; pull down/away, fresh on with a twist' }
   });
   // Rear pistol grip (now completely clear of the fuel tanks!), grip housing mount, closed trigger guard, and curved trigger.
-  K.box(0.054, 0.024, 0.115, gunDark, 0, -0.034, -0.125, 0, 0, 0, null, 0.004);
+  const gripMount = K.box(0.054, 0.024, 0.115, gunDark, 0, -0.034, -0.125, 0, 0, 0, null, 0.004);
+  fitFlamerMount(THREE, gripMount);
   // Narrow the palm swell to 36 x 59 mm without moving the grip's centre or rake.
   // The moulded finger notches stay in the front edge; rubber side panels carry
   // shallow cross ribs so neither close-up face is an empty rectangle.
   const rearGrip = (outline) => outline.map(([z, y]) => [-0.16 + (z + 0.16) * 0.65, y]);
-  K.slab(rearGrip([
+  const rearGripBody = K.slab(rearGrip([
     [-0.195, -0.032], [-0.122, -0.032], [-0.126, -0.062], [-0.118, -0.082],
     [-0.128, -0.105], [-0.122, -0.126], [-0.132, -0.148], [-0.142, -0.162],
     [-0.196, -0.158], [-0.208, -0.142], [-0.192, -0.092], [-0.202, -0.052]
   ]), 0.036, gunPoly, { bevel: 0.008, segs: 3 });
+  trimPanelBack(THREE, rearGripBody, -1, .046, 'y');
   for (const sx of [-1, 1]) {
-    K.slab(rearGrip([[-0.186, -0.052], [-0.136, -0.052], [-0.144, -0.144], [-0.19, -0.142]]),
+    const panel = K.slab(rearGrip([[-0.186, -0.052], [-0.136, -0.052], [-0.144, -0.144], [-0.19, -0.142]]),
       0.003, gunRubber, { x: sx * 0.018, bevel: 0.002 });
-    for (const y of [-0.078, -0.101, -0.124])
-      K.box(0.0015, 0.0025, 0.025, gunPoly, sx * 0.0195, y, -0.16, 0.22, 0, 0, null, 0.0005);
+    trimPanelBack(THREE, panel, sx, .018);
+    for (const y of [-0.078, -0.101, -0.124]) {
+      const rib = K.box(0.0015, 0.0025, 0.025, gunPoly, sx * 0.0195, y, -0.16, 0.22, 0, 0, null, 0.0005);
+      trimPanelBack(THREE, rib, sx, .0195);
+    }
   }
   K.box(0.04, 0.012, 0.05, gunDark, 0, -0.162, -0.165, 0, 0, -0.06, null, 0.003);
   K.slab(gunBand([[-0.064, -0.034], [-0.064, -0.064], [-0.078, -0.076], [-0.128, -0.076], [-0.132, -0.062]], 0.007), 0.03, gunDark, { bevel: 0.004 });   // GB-180: a moulded guard, not a wire (pass 4: as wide as a real guard)

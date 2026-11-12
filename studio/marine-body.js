@@ -424,7 +424,7 @@ export function buildMarineBody(T, {root, put, rmesh: roundedMesh, cyl, part, dr
   v(rmesh(.092,.025,.019,webMat,.006),0,1.138,-.179);
   const patchRed=new T.MeshStandardMaterial({color:0xb03030,roughness:.9});
   // (the shirt's own patch stays; the carrier's moved to the right chest with the radio, CC-341: x +.219 from the old place)
-  for(const [fn,z,dx,dy] of [[at,.132,0,0],[v,.178,.219,-.082]]) {
+  for(const [fn,z,dx,dy] of [[at,.132,0,0],[v,.178,.196,-.082]]) {   // tcc341 (J128): the carrier's patch 2.3 cm in from the plate's corner, clear of the support arm's sleeve
     fn(rmesh(.083,.047,.009,patchMat,.003),-.084+dx,1.092+dy,z);
     fn(rmesh(.029,.024,.006,patchInk,.002),-.108+dx,1.1+dy,z+.007);
     fn(rmesh(.045,.009,.006,patchRed,.002),-.073+dx,1.081+dy,z+.007);
@@ -455,10 +455,10 @@ export function buildMarineBody(T, {root, put, rmesh: roundedMesh, cyl, part, dr
     // the shirt and loaded carrier each get their own surface fit.
     for(const [attach,armored] of [[b,false],[v,true]]) {
       const p=(x,y,z)=>[side*x,y,z];
-      const join=p(armored?.148:.14,.995,armored?.233:.15);
+      const join=p(armored?.128:.14,.995,armored?.233:.15);   // tcc341 (J128): armoured, the buckle 2 cm in from the plate's corner, clear of the support arm's sleeve
       attach(strap([p(.1,1.11,-.263),p(.128,1.158,-.13),p(.13,1.19,-.03),
         p(.129,1.188,.043),p(.131,1.153,.119),p(.136,1.112,armored?.18:.139),
-        p(.144,1.055,armored?.224:.149),join],.033,packW,.008),0,0,0);
+        p(armored?.134:.144,1.055,armored?.224:.149),join],.033,packW,.008),0,0,0);
       // CC-340: round the narrower ribs (bare: the shirt; armoured: just outside the side plates)
       const rx=armored?[.168,.19,.192,.17]:[.152,.162,.162,.15];
       attach(strap([join,p(rx[0],.936,armored?.228:.15),p(rx[1],.891,armored?.13:.107),

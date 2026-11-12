@@ -635,17 +635,18 @@ export const VM_TRIGGER = Object.freeze({
   // fit, the pad 2.3 mm off the face at rest, nothing through the gun (tcl334b); clean of itself, gloved. (A closer solve,
   // [0, 0.73, 0.977, 0.155], measured clean in the solver but 2.8 mm into the gun in tcl334b.)
   pistol: { part: 'trigger', rest: [-0.216, 1.262, 0.075, 0.125], pull: [-0.216, 1.322, 0.098, 0.133], pivot: [0, 0.016, 0.075], turn: 0.0853, hold: 0.06, release: 0.09 },
-  // the Wasp (J112: "the trigger finger is clipping through the trigger guard"): the fit's index ran through the guard and out
-  // its side; now its pad lies on the trigger 68% down the blade (2 game mm off it), nothing through the guard. The trigger is
-  // part of the frame's mesh (no control of its own yet: asked of ChatGPT 2), so no press until it can turn: pull = rest
-  uzi: { part: null, rest: [-0.278, 1.7, 1.084, -0.1], pull: [-0.278, 1.7, 1.084, -0.1], pivot: null, turn: 0, hold: 0.05, release: 0.07 },
+  // the Wasp (J112: "the trigger finger is clipping through the trigger guard"): CE-2 (12 Nov) on Claude 1's CD-1 part-4 fist
+  // (under ChatGPT 2's opened guard, GT-20087): the index rises from the fist into the guard, its pad on the blade's front
+  // 0.8 mm off it 80% down, presses it back 4 mm at the face on each shot, the blade turning on its pin; nothing of the
+  // glove in the guard, the blade or the frame at rest or pulled (0.12 mm at most, the solver's pad give)
+  uzi: { part: 'trigger', rest: [-0.2, 1.9, -0.012, 0.29], pull: [-0.132, 1.96, 0.018, 0.29], pivot: null, turn: 0.2085, hold: 0.05, release: 0.07 },
   // the pump gun (CE-2, 11 Nov, on Claude 1's 10:00Z refit of its firing hand): the pad 5 mm off the face 43% down the blade,
   // nothing of the index in the guard or the blade, at rest or pulled; 4 mm at the face, the blade on its pin
-  shotgun: { part: 'trigger', rest: [-0.2, 0.585, 0.895, 0.17], pull: [-0.2, 0.645, 0.985, 0.17], pivot: null, turn: 0.18, hold: 0.06, release: 0.1 }
-  // the GW-4: off (11 Nov): from Claude 1's CD-1 pass-2 fit the index's pad can't come within 7.5 mm of the trigger's face
-  // (it sits 19 mm to the side, below the blade; asked of Claude 1). The old pose ([-0.223, 1.86, 0.25, -0.093]) is 1.1 mm
-  // into the magazine body there, and the nearest clean solve ([0.74, 0.8, 1.278, 0.35]) puts its pads 1.2 mm into it in
-  // tcl334c: the fit's own index stands until the fit lets it reach.
+  shotgun: { part: 'trigger', rest: [-0.2, 0.585, 0.895, 0.17], pull: [-0.2, 0.645, 0.985, 0.17], pivot: null, turn: 0.18, hold: 0.06, release: 0.1 },
+  // the GW-4 (CE-2, 12 Nov, on Claude 1's CD-1 part-4 fist under the guard GT-20087b lengthened): the index up into the
+  // guard over its bottom bar, the pad on the blade's front 1.3 mm off it two thirds down, pressing it back 4 mm at the
+  // face each shot (the blade on its pin); the glove 0.19 mm at most into the blade (the pad's give), nothing in the guard
+  m4: { part: 'trigger', rest: [0.5, 0.815, 0.925, 0.35], pull: [0.5, 0.93, 0.828, 0.35], pivot: null, turn: 0.1494, hold: 0.06, release: 0.09 }
 });
 
 // CE-4 (J16; ChatGPT 2's GT-20084 switch, the pad in 1 mm and back): the flashlight's switch pressed by the support thumb

@@ -1,0 +1,839 @@
+[
+  {
+    "id": "m4",
+    "gateBad": 6,
+    "gateCount": 72,
+    "rows": [
+      {
+        "ordinal": 0,
+        "path": "root/recoil-bolt[1]/Mesh[0]",
+        "role": "furniture",
+        "tag": "m4",
+        "triangles": 60,
+        "ax": 1,
+        "af": 2,
+        "bad": 3,
+        "data": {
+          "firstPositions": [
+            [
+              0.031239999983273377,
+              0.019120000205933522,
+              0.07747999929428108
+            ],
+            [
+              0.03179999999823042,
+              0.019000000223516892,
+              0.07735999838054188
+            ],
+            [
+              0.031710716314893146,
+              0.019120000205933522,
+              0.07747999929428108
+            ]
+          ],
+          "relative": [
+            1,
+            0,
+            -1.3877787807814457e-17,
+            0,
+            -8.470329472543003e-22,
+            1.0000000000000002,
+            0,
+            0,
+            -1.3877787807814457e-17,
+            -6.776263578034403e-21,
+            1,
+            0,
+            0.03244999999999992,
+            0.02899999999999947,
+            0.04724000000000006,
+            0.9999999999999999
+          ],
+          "scale": 0.6740955727336614,
+          "n": [
+            0,
+            5.6486389906338676e-8,
+            5.64859515175928e-8
+          ],
+          "nf": [
+            0,
+            5.648575759908958e-8,
+            5.6486634380376044e-8
+          ],
+          "actual": [
+            [
+              0.05013986676931381,
+              0.030687399208545685
+            ],
+            [
+              0.05103866755962372,
+              0.030494797974824905
+            ],
+            [
+              0.050895366817712784,
+              0.030687399208545685
+            ]
+          ],
+          "expected": [
+            [
+              0.050139870668867235,
+              0.1243545821421002
+            ],
+            [
+              0.05103866478985135,
+              0.12416198194049165
+            ],
+            [
+              0.05089536541924418,
+              0.1243545821421002
+            ]
+          ]
+        }
+      },
+      {
+        "ordinal": 1,
+        "path": "root/recoil-bolt[1]/Mesh[1]",
+        "role": "furniture",
+        "tag": "m4",
+        "triangles": 60,
+        "ax": 1,
+        "af": 2,
+        "bad": 3,
+        "data": {
+          "firstPositions": [
+            [
+              0.031239999983273377,
+              0.019120000205933078,
+              0.08900000008732091
+            ],
+            [
+              0.03179999999823042,
+              0.019000000223516448,
+              0.08888000010490428
+            ],
+            [
+              0.031710716314893146,
+              0.019120000205933078,
+              0.08900000008732091
+            ]
+          ],
+          "relative": [
+            1,
+            0,
+            -1.3877787807814457e-17,
+            0,
+            -8.470329472543003e-22,
+            1.0000000000000002,
+            0,
+            0,
+            -1.3877787807814457e-17,
+            -6.776263578034403e-21,
+            1,
+            0,
+            0.03244999999999992,
+            0.028999999999999027,
+            0.08324000000000009,
+            0.9999999999999999
+          ],
+          "scale": 0.6740955727336614,
+          "n": [
+            0,
+            5.64859515175928e-8,
+            5.64859515175928e-8
+          ],
+          "nf": [
+            0,
+            5.648575759908958e-8,
+            5.6486634380376044e-8
+          ],
+          "actual": [
+            [
+              0.05013986676931381,
+              0.030687399208545685
+            ],
+            [
+              0.05103866755962372,
+              0.030494797974824905
+            ],
+            [
+              0.050895366817712784,
+              0.030687399208545685
+            ]
+          ],
+          "expected": [
+            [
+              0.050139870668867235,
+              0.14284406198132976
+            ],
+            [
+              0.05103866478985135,
+              0.14265146327448414
+            ],
+            [
+              0.05089536541924418,
+              0.14284406198132976
+            ]
+          ]
+        }
+      },
+      {
+        "ordinal": 2,
+        "path": "root/work[3]/Mesh[0]",
+        "role": "furniture",
+        "tag": "m4",
+        "triangles": 48,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 3,
+        "path": "root/work[3]/Group[1]/Mesh[0]",
+        "role": "light shell",
+        "tag": "m4",
+        "triangles": 36,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 4,
+        "path": "root/work[3]/Mesh[2]",
+        "role": "furniture",
+        "tag": "m4",
+        "triangles": 96,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 5,
+        "path": "root/Group[4]/Mesh[0]",
+        "role": "furniture",
+        "tag": "m4",
+        "triangles": 80,
+        "ax": 2,
+        "af": 2,
+        "bad": 0
+      },
+      {
+        "ordinal": 6,
+        "path": "root/Mesh[9]",
+        "role": "furniture",
+        "tag": "m4",
+        "triangles": 144,
+        "ax": 2,
+        "af": 2,
+        "bad": 0
+      },
+      {
+        "ordinal": 7,
+        "path": "root/controls-trigger[10]/Mesh[0]",
+        "role": "furniture",
+        "tag": "m4",
+        "triangles": 92,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 8,
+        "path": "root/fp-stock[12]/Mesh[5]",
+        "role": "furniture",
+        "tag": "m4",
+        "triangles": 148,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 9,
+        "path": "root/fp-stock[12]/Mesh[6]",
+        "role": "furniture",
+        "tag": "m4",
+        "triangles": 424,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 10,
+        "path": "root/GW-4 rear collar[13]",
+        "role": "furniture",
+        "tag": "m4",
+        "triangles": 32,
+        "ax": 2,
+        "af": 2,
+        "bad": 0
+      },
+      {
+        "ordinal": 11,
+        "path": "root/Mesh[14]",
+        "role": "furniture",
+        "tag": "m4",
+        "triangles": 96,
+        "ax": 2,
+        "af": 2,
+        "bad": 0
+      },
+      {
+        "ordinal": 12,
+        "path": "root/Mesh[15]",
+        "role": "light shell",
+        "tag": "m4",
+        "triangles": 48,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 13,
+        "path": "root/m4-default-holo[22]/Mesh[3]",
+        "role": "light shell",
+        "tag": "m4",
+        "triangles": 40,
+        "ax": 2,
+        "af": 2,
+        "bad": 0
+      },
+      {
+        "ordinal": 14,
+        "path": "root/m4-default-holo[22]/Mesh[6]",
+        "role": "furniture",
+        "tag": "m4",
+        "triangles": 332,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 15,
+        "path": "root/m4-default-holo[22]/Mesh[9]",
+        "role": "furniture",
+        "triangles": 268,
+        "ax": 2,
+        "af": 2,
+        "bad": 0
+      },
+      {
+        "ordinal": 16,
+        "path": "root/m4-default-holo[22]/Mesh[10]",
+        "role": "suppressor shell",
+        "triangles": 144,
+        "ax": 2,
+        "af": 2,
+        "bad": 0
+      },
+      {
+        "ordinal": 17,
+        "path": "root/Group[23]/Mesh[0]",
+        "role": "furniture",
+        "tag": "m4",
+        "triangles": 164,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 18,
+        "path": "root/Group[23]/Mesh[1]",
+        "role": "furniture",
+        "tag": "m4",
+        "triangles": 44,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 19,
+        "path": "root/Group[23]/Mesh[2]",
+        "role": "furniture",
+        "tag": "m4",
+        "triangles": 168,
+        "ax": 2,
+        "af": 2,
+        "bad": 0
+      },
+      {
+        "ordinal": 20,
+        "path": "root/Group[23]/Mesh[4]",
+        "role": "furniture",
+        "tag": "m4",
+        "triangles": 144,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 21,
+        "path": "root/suppressor[26]/Mesh[0]",
+        "role": "furniture",
+        "tag": "m4",
+        "triangles": 56,
+        "ax": 1,
+        "af": 1,
+        "bad": 0
+      },
+      {
+        "ordinal": 22,
+        "path": "root/suppressor[26]/Mesh[1]",
+        "role": "suppressor shell",
+        "tag": "m4",
+        "triangles": 56,
+        "ax": 1,
+        "af": 1,
+        "bad": 0
+      },
+      {
+        "ordinal": 23,
+        "path": "root/suppressor[26]/Mesh[3]",
+        "role": "suppressor shell",
+        "tag": "m4",
+        "triangles": 216,
+        "ax": 1,
+        "af": 1,
+        "bad": 0
+      },
+      {
+        "ordinal": 24,
+        "path": "root/laserLightUnit[27]/moduleShell[0]",
+        "role": "frame",
+        "tag": "m4",
+        "triangles": 12,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 25,
+        "path": "root/laserLightUnit[27]/topPlate[1]",
+        "role": "furniture",
+        "tag": "m4",
+        "triangles": 12,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 26,
+        "path": "root/laserLightUnit[27]/Mesh[3]",
+        "role": "furniture",
+        "tag": "m4",
+        "triangles": 184,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 27,
+        "path": "root/laserLightUnit[27]/Mesh[4]",
+        "role": "light shell",
+        "tag": "m4",
+        "triangles": 464,
+        "ax": 1,
+        "af": 1,
+        "bad": 0
+      },
+      {
+        "ordinal": 28,
+        "path": "root/controls-selector[28]/Mesh[0]",
+        "role": "furniture",
+        "tag": "m4",
+        "triangles": 84,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 29,
+        "path": "root/controls-boltCatch[29]/Mesh[0]",
+        "role": "furniture",
+        "tag": "m4",
+        "triangles": 44,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 30,
+        "path": "root/controls-magRelease[30]/Mesh[0]",
+        "role": "furniture",
+        "tag": "m4",
+        "triangles": 40,
+        "ax": 2,
+        "af": 2,
+        "bad": 0
+      },
+      {
+        "ordinal": 31,
+        "path": "root/heatParts-barrel[31]/Mesh[0]",
+        "role": "furniture",
+        "tag": "m4",
+        "triangles": 112,
+        "ax": 2,
+        "af": 2,
+        "bad": 0
+      },
+      {
+        "ordinal": 32,
+        "path": "root/Mesh[32]",
+        "role": "furniture",
+        "tag": "m4",
+        "triangles": 160,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 33,
+        "path": "root/Mesh[33]",
+        "role": "furniture",
+        "tag": "m4",
+        "triangles": 1500,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 34,
+        "path": "root/Mesh[34]",
+        "role": "suppressor shell",
+        "tag": "m4",
+        "triangles": 4320,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 35,
+        "path": "root/Mesh[35]",
+        "role": "furniture",
+        "tag": "m4",
+        "triangles": 1204,
+        "ax": 1,
+        "af": 1,
+        "bad": 0
+      },
+      {
+        "ordinal": 36,
+        "path": "root/Mesh[37]",
+        "role": "furniture",
+        "tag": "m4",
+        "triangles": 172,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 37,
+        "path": "root/Mesh[38]",
+        "role": "furniture",
+        "tag": "m4",
+        "triangles": 200,
+        "ax": 2,
+        "af": 2,
+        "bad": 0
+      },
+      {
+        "ordinal": 38,
+        "path": "root/Mesh[39]",
+        "role": "furniture",
+        "tag": "m4",
+        "triangles": 900,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 39,
+        "path": "root/Mesh[40]",
+        "role": "suppressor shell",
+        "triangles": 288,
+        "ax": 1,
+        "af": 1,
+        "bad": 0
+      },
+      {
+        "ordinal": 40,
+        "path": "root/Mesh[41]",
+        "role": "light shell",
+        "triangles": 768,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 41,
+        "path": "root/Mesh[42]",
+        "role": "furniture",
+        "triangles": 2004,
+        "ax": 2,
+        "af": 2,
+        "bad": 0
+      }
+    ]
+  },
+  {
+    "id": "ak",
+    "gateBad": 0,
+    "gateCount": 72,
+    "rows": [
+      {
+        "ordinal": 0,
+        "path": "root/Mesh[3]",
+        "role": "light shell",
+        "tag": "ak",
+        "triangles": 48,
+        "ax": 1,
+        "af": 1,
+        "bad": 0
+      },
+      {
+        "ordinal": 1,
+        "path": "root/recoil-bolt[5]/Mesh[0]",
+        "role": "suppressor shell",
+        "tag": "ak",
+        "triangles": 48,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 2,
+        "path": "root/recoil-bolt[5]/Mesh[1]",
+        "role": "light shell",
+        "tag": "ak",
+        "triangles": 48,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 3,
+        "path": "root/work[6]/Mesh[0]",
+        "role": "furniture",
+        "tag": "ak",
+        "triangles": 180,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 4,
+        "path": "root/controls-trigger[7]/Mesh[0]",
+        "role": "furniture",
+        "tag": "ak",
+        "triangles": 92,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 5,
+        "path": "root/fp-stock[9]/Mesh[0]",
+        "role": "furniture",
+        "tag": "ak",
+        "triangles": 88,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 6,
+        "path": "root/fp-stock[9]/Mesh[3]",
+        "role": "furniture",
+        "triangles": 876,
+        "ax": 1,
+        "af": 1,
+        "bad": 0
+      },
+      {
+        "ordinal": 7,
+        "path": "root/fp-stock[9]/Mesh[4]",
+        "role": "suppressor shell",
+        "triangles": 24,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 8,
+        "path": "root/Group[19]/Mesh[0]",
+        "role": "suppressor shell",
+        "tag": "ak",
+        "triangles": 188,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 9,
+        "path": "root/Group[19]/Mesh[2]",
+        "role": "furniture",
+        "tag": "ak",
+        "triangles": 552,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 10,
+        "path": "root/Group[19]/Mesh[3]",
+        "role": "furniture",
+        "tag": "ak",
+        "triangles": 700,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 11,
+        "path": "root/suppressor[22]/Mesh[0]",
+        "role": "suppressor shell",
+        "tag": "ak",
+        "triangles": 56,
+        "ax": 1,
+        "af": 1,
+        "bad": 0
+      },
+      {
+        "ordinal": 12,
+        "path": "root/suppressor[22]/Mesh[2]",
+        "role": "suppressor shell",
+        "tag": "ak",
+        "triangles": 216,
+        "ax": 1,
+        "af": 1,
+        "bad": 0
+      },
+      {
+        "ordinal": 13,
+        "path": "root/suppressor[22]/Mesh[3]",
+        "role": "suppressor shell",
+        "tag": "ak",
+        "triangles": 112,
+        "ax": 1,
+        "af": 1,
+        "bad": 0
+      },
+      {
+        "ordinal": 14,
+        "path": "root/laserLightUnit[23]/railClamp[0]",
+        "role": "furniture",
+        "tag": "ak",
+        "triangles": 12,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 15,
+        "path": "root/laserLightUnit[23]/moduleShell[1]",
+        "role": "frame",
+        "tag": "ak",
+        "triangles": 12,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 16,
+        "path": "root/laserLightUnit[23]/Mesh[3]",
+        "role": "furniture",
+        "tag": "ak",
+        "triangles": 172,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 17,
+        "path": "root/laserLightUnit[23]/Mesh[4]",
+        "role": "light shell",
+        "tag": "ak",
+        "triangles": 240,
+        "ax": 1,
+        "af": 1,
+        "bad": 0
+      },
+      {
+        "ordinal": 18,
+        "path": "root/controls-selector[24]/Mesh[0]",
+        "role": "furniture",
+        "tag": "ak",
+        "triangles": 240,
+        "ax": 2,
+        "af": 2,
+        "bad": 0
+      },
+      {
+        "ordinal": 19,
+        "path": "root/controls-magRelease[25]/Mesh[0]",
+        "role": "furniture",
+        "tag": "ak",
+        "triangles": 48,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 20,
+        "path": "root/heatParts-barrel[26]/Mesh[0]",
+        "role": "suppressor shell",
+        "tag": "ak",
+        "triangles": 96,
+        "ax": 2,
+        "af": 2,
+        "bad": 0
+      },
+      {
+        "ordinal": 21,
+        "path": "root/Mesh[27]",
+        "role": "furniture",
+        "tag": "ak",
+        "triangles": 1162,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 22,
+        "path": "root/Mesh[28]",
+        "role": "light shell",
+        "tag": "ak",
+        "triangles": 360,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 23,
+        "path": "root/Mesh[29]",
+        "role": "suppressor shell",
+        "tag": "ak",
+        "triangles": 256,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 24,
+        "path": "root/Mesh[31]",
+        "role": "furniture",
+        "triangles": 3724,
+        "ax": 2,
+        "af": 2,
+        "bad": 0
+      },
+      {
+        "ordinal": 25,
+        "path": "root/Mesh[32]",
+        "role": "suppressor shell",
+        "triangles": 128,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      }
+    ]
+  }
+]

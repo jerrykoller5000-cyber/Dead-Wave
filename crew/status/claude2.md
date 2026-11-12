@@ -1,13 +1,13 @@
 # Claude 2
 
-state: idle
+state: active
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: —
-touching: —
-since: 2026-11-11T22:02Z
-next: CB-290 J126 rule 3 (Jerry, 10 Nov, standing, D-138): "No part of th
+task: CB-310 J141: half pace on stairs (STAIR_SPEED_SCALE 0.5, one knob), eased at the foot and the top; tcb310 (new)
+touching: index.html (movement: stairs pace, PHYS), tools/tests/tcb310.js (new)
+since: 2026-11-12T01:37Z
+next: CB-309 the gate's reds in my lane: t218 (carrier pouch fixture; the
 blocked-on: —
-last-report: handoffs/2026-11-11-claude2-CB-290b.md
+last-report: handoffs/2026-11-12-claude2-CB-309.md
 
 ## Notes
 

@@ -3,7 +3,7 @@
 
 // A thin, faceted sleeve with actual through-slots. Each cut has an inner wall;
 // the bore and background show through at every viewing angle. No CSG or new mats.
-import { slab } from '../core/geometry.js';
+import { boxProjectUV, slab } from '../core/geometry.js';
 import { gunDetail } from './gun-detail.js';
 import { attachLaserLight } from './weapon-attachments.js';
 import { fitPortCarrier, roundGeometry } from './weapon-casings.js';
@@ -77,12 +77,19 @@ function gw4Finish(base) {
       mat.metalness = metalness;
       return mat;
     };
+    const tube = surface(0x505255, 0.41, 0.54);
+    const panel = Object.assign(surface(0x747e85, 0.52, 0.40), { flatShading: true });
+    // The moving steel is visible through the port even when the exterior has a camo finish.
+    const factorySteel = exterior => {
+      const metal = exterior.clone();
+      metal.userData = { ...exterior.userData, weaponFinishRole: null };
+      return metal;
+    };
     gw4Finishes.set(base, {
       upper: surface(0x404247, 0.44, 0.50),
       lower: surface(0x303236, 0.53, 0.36),
       furniture: surface(0x37383a, 0.83, 0.02),
-      tube: surface(0x505255, 0.41, 0.54),
-      panel: Object.assign(surface(0x747e85, 0.52, 0.40), { flatShading: true }),
+      tube, panel, carrier: factorySteel(tube), carrierFace: factorySteel(panel),
       rib: surface(0x454649, 0.71, 0.06),
       seam: surface(0x2f3539, 0.61, 0.28),
       magazine: surface(0x303133, 0.78, 0.04)
@@ -128,7 +135,7 @@ function gw4Window(T, gun, K, x, finish, dark) {
   gun.add(rim);
   K.slab(floor, .00287, dark, {x:x + .00287 / 2, y:.029, z:.059, bevel:0}).name = 'GW-4 window inset';
 
-  fitPortCarrier(gun, K, {x:x + .0042, y:.029, rear:.017, front:.089, height:.020}, finish.tube, finish.panel);
+  fitPortCarrier(gun, K, {x:x + .0042, y:.029, rear:.017, front:.089, height:.020}, finish.carrier, finish.carrierFace);
   // A gently crowned face gives the moving artwork a gradient even at rest.
   for (const part of gun.userData.recoilBoltParts) {
     part.geometry.computeBoundingBox();
@@ -190,7 +197,9 @@ export function makeM4Model(ctx) {
   rearFace.name = 'GW-4 rear face';
   rearFace.scale.y = 1 / 3;
   rearFace.position.y = .057 * (1 - rearFace.scale.y);
-  K.slab([[-0.165, 0.092], [-0.115, 0.092], [-0.12, 0.108], [-0.16, 0.108]], 0.03, gunDark, { bevel: 0.003 });          // the folded rear sight
+  const foldedSight = K.slab([[-0.165, 0.092], [-0.115, 0.092], [-0.12, 0.108], [-0.16, 0.108]], 0.03, gunDark, { bevel: 0.003 });
+  // Keep the folded silhouette where it is and seat its underside on the two raised rail bands.
+  trimPanelBack(THREE, foldedSight, 1, .096, 'y');
   // Lower receiver: the trigger housing, the flared mag well, the two pins through, the selector and bolt catch on -x,
   // the mag release button in its fence on +x, the trigger guard, the A2 grip (CL-312 b).
   K.slab([[-0.172, -0.006], [0.13, -0.006], [0.13, -0.028], [0.118, -0.042], [0.117, -0.112], [0.132, -0.13], [-0.016, -0.13], [-0.004, -0.112],
@@ -839,7 +848,7 @@ export function trimPanelBack(T, panel, side, supportFace, axis = 'x') {
 }
 
 // Clip each outside face on its true bevel. The short centre patch is used only at an exposed join.
-function fitCollarFaces(T, panel, halfWidth, centre = null) {
+export function fitCollarFaces(T, panel, halfWidth, centre = null) {
   const other = panel.clone();
   other.geometry = panel.geometry.clone();
   trimPanelBack(T, panel, -1, halfWidth);
@@ -1289,6 +1298,40 @@ function shotgunReceiver(T, width, material) {
   return mesh;
 }
 
+// A single closed frame on each side of the stock. The old closed centreline
+// doubled back through itself at the top rear corner of the sling trim.
+function pumpSlingRim(T, side, band) {
+  const zs = band.map(point => point[0]), ys = band.map(point => point[1]);
+  const positions = [];
+  const order = side > 0 ? [0, 2, 1, 0, 3, 2] : [0, 1, 2, 0, 2, 3];
+  function loop(x, inset) {
+    const left = Math.min(...zs) + inset, right = Math.max(...zs) - inset;
+    const bottom = Math.min(...ys) + inset, top = Math.max(...ys) - inset;
+    const corner = .0016;
+    return [[left + corner, bottom], [right - corner, bottom], [right, bottom + corner],
+      [right, top - corner], [right - corner, top], [left + corner, top], [left, top - corner],
+      [left, bottom + corner]].map(([z, y]) => [side * (x - .0281), y, z]);
+  }
+  const rows = [loop(.028, 0), loop(.0287, 0), loop(.0291, .0004),
+    loop(.0291, .0046), loop(.0287, .005), loop(.028, .005)];
+  for (let row = 0; row < rows.length; row++) {
+    const current = rows[row], next = rows[(row + 1) % rows.length];
+    for (let i = 0; i < current.length; i++) {
+      const j = (i + 1) % current.length;
+      const corners = [current[i], current[j], next[j], next[i]];
+      for (const index of order) positions.push(...corners[index]);
+    }
+  }
+  const geometry = new T.BufferGeometry();
+  const points = new Float32Array(positions), uv = new Float32Array(points.length / 3 * 2);
+  boxProjectUV(points, uv);
+  geometry.setAttribute('position', new T.BufferAttribute(points, 3));
+  geometry.setAttribute('uv', new T.BufferAttribute(uv, 2));
+  geometry.computeVertexNormals();
+  geometry.computeBoundingSphere();
+  return geometry;
+}
+
 export function makeShotgunModel(ctx) {
   const { THREE, gunKit, gunBand, gunEffects, gunSuppressor, finishGun, profileCurve, gunBody, gunMid, gunDark, gunAccent, gunPoly, gunRubber, brassMat } = ctx;
   const gun = new THREE.Group();
@@ -1390,8 +1433,15 @@ export function makeShotgunModel(ctx) {
   // the black rubber pad, a little proud of the butt all round
   K.slab([[-0.4734, -0.0262], [-0.4935, -0.0268], [-0.4962, -0.034], [-0.4968, -0.19], [-0.4945, -0.1985], [-0.4734, -0.198]], 0.059, gunRubber, { bevel: 0.006, segs: 2, parent: stock }).name = 'shotgun recoil pad';
   // the sling slot through the butt, in a shallow frame
-  K.box(0.0572, 0.03, 0.01, gunRubber, 0, -0.088, -0.36, 0, 0, 0, stock, 0.001);
-  for (const sx of [-1, 1]) K.slab(gunBand([[-0.388, -0.069], [-0.388, -0.107], [-0.342, -0.107], [-0.342, -0.069], [-0.388, -0.069]], 0.003), 0.002, gunPoly, { x: sx * 0.0281, bevel: 0.0006, parent: stock });
+  const slot = K.box(.0572, .03, .01, gunRubber, 0, -.088, -.36, 0, 0, 0, stock, .001);
+  fitCollarFaces(THREE, slot, .028);
+  const slingBand = gunBand([[-.388,-.069],[-.388,-.107],[-.342,-.107],[-.342,-.069],[-.388,-.069]], .003);
+  for (const side of [-1, 1]) {
+    const rim = new THREE.Mesh(pumpSlingRim(THREE,side,slingBand),gunPoly);
+    rim.position.x = side * .0281;
+    rim.castShadow = rim.receiveShadow = true;
+    stock.add(rim);
+  }
   // Grip centre line is still gripOutline(-0.06, -0.1, 0.16, ..., 0.28): the palm stays at the hold (GB-178).
   // CL-312 b (Jerry: "skinny and ugly"): a tactical pump's rubber-feel polymer grip, 5 cm deep at the palm swell, 3.3 cm
   // wide, with its heel flared and its base a rounded cap, not a point; the finger grooves down the front strap. The

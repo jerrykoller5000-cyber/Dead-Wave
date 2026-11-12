@@ -1,0 +1,26 @@
+{
+  "crop": [
+    613,
+    413,
+    779,
+    523
+  ],
+  "lights": {
+    "noon": {
+      "exposed_by_flat_trim": 126,
+      "still_exposed_in_final": 0
+    },
+    "overcast": {
+      "exposed_by_flat_trim": 126,
+      "still_exposed_in_final": 0
+    },
+    "dusk": {
+      "exposed_by_flat_trim": 128,
+      "still_exposed_in_final": 0
+    },
+    "night": {
+      "exposed_by_flat_trim": 119,
+      "still_exposed_in_final": 0
+    }
+  }
+}

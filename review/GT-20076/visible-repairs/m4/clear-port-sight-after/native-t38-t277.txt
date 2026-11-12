@@ -1,0 +1,74 @@
+ok    t38      26 pass   0 fail  62.6s  (real renderer)
+    PASS off-hand pistol animates its own parts (slide, mag, flash, laser)
+    PASS off-hand uzi animates its own parts (mag, flash, laser)
+    PASS off-hand revolver animates its own parts (mag, flash, laser, cylinder, hammer)
+    PASS all twelve equipped models represented (12)
+    PASS cold attached mesh count 273 / 300 (including hidden parts)
+    PASS minigun submitted 22 draws / 35
+    PASS m4 submitted 31 draws / 35
+    PASS ak submitted 19 draws / 35
+    PASS aa12 submitted 23 draws / 35
+    PASS pistol submitted 15 draws / 35
+    PASS uzi submitted 23 draws / 35
+    PASS shotgun submitted 19 draws / 35
+    PASS revolver submitted 19 draws / 35
+    PASS sniper submitted 31 draws / 35
+    PASS launcher submitted 20 draws / 35
+    PASS flamer submitted 9 draws / 35
+    PASS chainsaw submitted 9 draws / 35
+    PASS equipped draws across twelve individual models 240 < 260
+    PASS ak: reload moves the magazine
+    PASS m4: reload moves the magazine
+    PASS pistol: reload moves the magazine
+    PASS shotgun: reload moves the pump
+    PASS sniper: reload moves the magazine
+    PASS revolver: reload moves the magazine
+    PASS launcher: reload moves the magazine
+    PASS minigun: reload moves the magazine
+ok    t277     45 pass   0 fail  42.3s  (real renderer)
+    PASS minigun: has a sight point
+    PASS minigun: eye above the bore, behind the muzzle, on its centre line, along it (0.00 deg)
+    PASS minigun: eye clears the top line and stays near it (eye y 0.231, top 0.266)
+    PASS m4: has a sight point
+    PASS m4: eye above the bore, behind the muzzle, on its centre line, along it (0.00 deg)
+    PASS m4: eye clears the top line and stays near it (eye y 0.134, top 0.170)
+    PASS ak: has a sight point
+    PASS ak: eye above the bore, behind the muzzle, on its centre line, along it (0.00 deg)
+    PASS ak: eye clears the top line and stays near it (eye y 0.074, top 0.084)
+    PASS aa12: has a sight point
+    PASS aa12: eye above the bore, behind the muzzle, on its centre line, along it (0.00 deg)
+    PASS aa12: eye clears the top line and stays near it (eye y 0.168, top 0.180)
+    PASS pistol: has a sight point
+    PASS pistol: eye above the bore, behind the muzzle, on its centre line, along it (0.00 deg)
+    PASS pistol: notch and tip are on the gun (notch found, tip y 0.092)
+    PASS pistol: eye on the notch-to-tip line within 3 mm (eye y 0.0920, line 0.0920)
+    PASS uzi: has a sight point
+    PASS uzi: eye above the bore, behind the muzzle, on its centre line, along it (0.00 deg)
+    PASS uzi: eye on the ring centre within 3 mm (eye y 0.1260, ring 0.1260)
+    PASS shotgun: has a sight point
+    PASS shotgun: eye above the bore, behind the muzzle, on its centre line, along it (0.52 deg)
+    PASS shotgun: eye clears the top line and stays near it (eye y 0.070, top 0.060)
+    PASS revolver: has a sight point
+    PASS revolver: eye above the bore, behind the muzzle, on its centre line, along it (0.16 deg)
+    PASS revolver: notch and tip are on the gun (notch found, tip y 0.121)
+    PASS revolver: eye on the notch-to-tip line within 3 mm (eye y 0.1190, line 0.1190)
+    PASS sniper: has a sight point
+    PASS sniper: eye above the bore, behind the muzzle, on its centre line, along it (0.00 deg)
+    PASS sniper: the two lenses' centres are the tube's centre line (its section centre 0.00 mm off)
+    PASS sniper: eye on the scope's centre line within 3 mm (1.00 mm off), looking along it (0.00 deg)
+    PASS launcher: has a sight point
+    PASS launcher: eye above the bore, behind the muzzle, on its centre line, along it (0.00 deg)
+    PASS launcher: eye on the ring centre within 3 mm (eye y 0.1700, ring 0.1700)
+    PASS flamer: has a sight point
+    PASS flamer: eye above the bore, behind the muzzle, on its centre line, along it (0.00 deg)
+    PASS flamer: eye clears the top line and stays near it (eye y 0.150, top 0.112)
+    PASS chainsaw: has a sight point
+    PASS chainsaw: eye above the bore, behind the muzzle, on its centre line, along it (0.00 deg)
+    PASS chainsaw: eye clears the top line and stays near it (eye y 0.275, top 0.266)
+    PASS sniper: in hand for the view check
+    PASS sniper: first person, the view gun up
+    PASS sniper: the view gun carries the scope's tube (NX8 tapered optical housing)
+    PASS sniper: right-click: aimed (ads 1.00)
+    PASS sniper: aimed in first person, the eye on the scope's real centre line within 3 mm (1.00 mm)
+    PASS sniper: and the line runs to the screen's centre (0.001 deg; -0.0, -0.0 px)
+2 checks: 71 pass, 0 fail (real renderer)

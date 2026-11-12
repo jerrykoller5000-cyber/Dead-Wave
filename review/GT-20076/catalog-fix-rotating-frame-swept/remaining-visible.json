@@ -1,0 +1,128 @@
+{
+  "basis": "Earlier photographed pixel counts; both part identities, host, witness point and penetration depth match the new strict audit. No new fleet capture.",
+  "reference": "catalog-fix-launcher-rear",
+  "current": "catalog-fix-rotating-frame-swept",
+  "top": [
+    {
+      "model": "launcher",
+      "currentPair": 29,
+      "recordedPair": 30,
+      "view": "hip",
+      "recordedPixels": 67,
+      "cameraSource": "visibility-fix-launcher-rear",
+      "a": "root/BufferGeometry[39]",
+      "b": "root/fp-stock[38]/BufferGeometry[0]"
+    },
+    {
+      "model": "flamer",
+      "currentPair": 144,
+      "recordedPair": 154,
+      "view": "hip",
+      "recordedPixels": 67,
+      "cameraSource": "visibility-fix-fleet-poses-final",
+      "a": "root/BufferGeometry[54]",
+      "b": "root/BufferGeometry[0]"
+    },
+    {
+      "model": "uzi",
+      "currentPair": 106,
+      "recordedPair": 125,
+      "view": "held-right-open",
+      "recordedPixels": 66,
+      "cameraSource": "visibility-fix-wasp-covers",
+      "a": "root/recoil-bolt[114]/BufferGeometry[0]",
+      "b": "root/BufferGeometry[113]"
+    },
+    {
+      "model": "m4",
+      "currentPair": 13,
+      "recordedPair": 17,
+      "view": "aimed",
+      "recordedPixels": 66,
+      "cameraSource": "visibility-fix-fleet-poses",
+      "a": "root/BufferGeometry[42]",
+      "b": "root/BufferGeometry[2]"
+    },
+    {
+      "model": "flamer",
+      "currentPair": 146,
+      "recordedPair": 156,
+      "view": "hip",
+      "recordedPixels": 66,
+      "cameraSource": "visibility-fix-fleet-poses-final",
+      "a": "root/BufferGeometry[55]",
+      "b": "root/BufferGeometry[54]"
+    },
+    {
+      "model": "aa12",
+      "currentPair": 38,
+      "recordedPair": 40,
+      "view": "held-right",
+      "recordedPixels": 65,
+      "cameraSource": "visibility-fix-fleet-poses",
+      "a": "root/group[46]/magazineBody[0]/CylinderGeometry[14]",
+      "b": "root/group[46]/magazineBody[0]/BufferGeometry[0]"
+    },
+    {
+      "model": "m4",
+      "currentPair": 289,
+      "recordedPair": 341,
+      "view": "aimed",
+      "recordedPixels": 64,
+      "cameraSource": "visibility-fix-fleet-poses",
+      "a": "root/m4-default-holo[306]/BufferGeometry[2]",
+      "b": "root/m4-default-holo[306]/BufferGeometry[1]"
+    },
+    {
+      "model": "chainsaw",
+      "currentPair": 47,
+      "recordedPair": 62,
+      "view": "aimed",
+      "recordedPixels": 64,
+      "cameraSource": "visibility-fix-sniper-seated",
+      "a": "root/BufferGeometry[72]",
+      "b": "root/BufferGeometry[0]"
+    },
+    {
+      "model": "sniper",
+      "currentPair": 203,
+      "recordedPair": 227,
+      "view": "rack",
+      "recordedPixels": 62,
+      "cameraSource": "visibility-fix-sniper-seated",
+      "a": "root/optic.nx8[171]/rail clamp jaw[1]",
+      "b": "root/optic.nx8[171]/scope rail bridge[0]"
+    },
+    {
+      "model": "revolver",
+      "currentPair": 29,
+      "recordedPair": 30,
+      "view": "held-right-open",
+      "recordedPixels": 60,
+      "cameraSource": "visibility-fix-revolver-walnut",
+      "a": "root/BufferGeometry[62]",
+      "b": "root/heatParts-barrel[33]"
+    },
+    {
+      "model": "flamer",
+      "currentPair": 147,
+      "recordedPair": 157,
+      "view": "hip",
+      "recordedPixels": 60,
+      "cameraSource": "visibility-fix-fleet-poses-final",
+      "a": "root/BufferGeometry[56]",
+      "b": "root/BufferGeometry[55]"
+    },
+    {
+      "model": "chainsaw",
+      "currentPair": 18,
+      "recordedPair": 28,
+      "view": "held-right-open",
+      "recordedPixels": 60,
+      "cameraSource": "visibility-fix-sniper-seated",
+      "a": "root/BufferGeometry[38]",
+      "b": "root/BufferGeometry[37]"
+    }
+  ],
+  "remainingWitnesses": 1181
+}

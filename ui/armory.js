@@ -205,8 +205,8 @@ export function mountArmory({ doc = document, bus = window, cif = doc.getElement
       const b = el('button', null, !m.owned ? t('armory.store.buy', {}, 'Buy') : m.fitted ? t('armory.remove', {}, 'Take off') : t('armory.fit', {}, 'Put on')); b.type = 'button';
       b.disabled = !m.owned && !m.affordable;
       b.addEventListener('click', () => {
-        if (m.owned) { if (onFit(kind, m.id, !m.fitted)) render(); }
-        else if (onBuyMod(kind, m.id)) { onFit(kind, m.id, true); syncOwned(); render(); }
+        if (m.owned) { if (onFit(kind, m.id, !m.fitted)) scheduleRender(); }
+        else if (onBuyMod(kind, m.id)) { onFit(kind, m.id, true); syncOwned(); scheduleRender(); }
       });
       li.append(txt, state, b);
       list.append(li);
@@ -235,7 +235,7 @@ export function mountArmory({ doc = document, bus = window, cif = doc.getElement
       b.setAttribute('aria-pressed', String(f.id === data.current));
       b.style.background = f.hex || '#ff2b2b';
       if (f.locked) b.disabled = true;
-      b.addEventListener('click', () => { if (!f.locked && onLaser(gun.id, f.id)) render(); });
+      b.addEventListener('click', () => { if (!f.locked && onLaser(gun.id, f.id)) scheduleRender(); });
       grid.append(b);
     }
     wrap.append(grid);
@@ -261,7 +261,7 @@ export function mountArmory({ doc = document, bus = window, cif = doc.getElement
       if (f.swatch) { if (typeof f.swatch === 'string') { const img = doc.createElement('img'); img.alt = ''; img.src = f.swatch; b.append(img); } else b.append(typeof f.swatch === 'function' ? f.swatch(doc) : f.swatch); }
       else b.append(el('span', 'armory-swatch-plain'));
       if (f.locked) b.disabled = true;
-      b.addEventListener('click', () => { if (!f.locked && onFinish(kind, f.key)) render(); });
+      b.addEventListener('click', () => { if (!f.locked && onFinish(kind, f.key)) scheduleRender(); });
       grid.append(b);
     }
     wrap.append(grid);
@@ -272,6 +272,12 @@ export function mountArmory({ doc = document, bus = window, cif = doc.getElement
       wrap.append(more);
     }
     benchEl.append(wrap);
+  }
+  let renderScheduled = false;
+  function scheduleRender() {
+    if (renderScheduled) return;
+    renderScheduled = true;
+    queueMicrotask(() => { renderScheduled = false; if (open) render(); });
   }
   function render() {
     button.disabled = getPhase() !== 'prep';
@@ -369,9 +375,90 @@ export function mountArmory({ doc = document, bus = window, cif = doc.getElement
     onApply(armory.loadout(), armory.read());
     button.focus({ preventScroll: true });
   }
+  let warmState = null, skipObserverRender = false;
+  const stateKey = () => JSON.stringify(armory.read());
+  const offerKey = offers => offers.map(o => `${o.kind}:${o.available ? 1 : 0}`).join('|');
+  const buildKey = builds => builds.map(o => `${o.kind}:${o.owned ? 1 : 0}:${o.ammo?.full ? 1 : 0}`).join('|');
+  function useWarmPanel() {
+    if (!warmState || bench !== null || stateKey() !== warmState.state) return false;
+    const offers = getGunOffers(), builds = getBuildOffers();
+    if (offerKey(offers) !== warmState.offers || buildKey(builds) !== warmState.builds || builds.some(o => o.owned)) return false;
+    for (const offer of offers) {
+      const row = gunOffers.querySelector(`[data-offer-gun="${offer.kind}"]`);
+      if (!row) return false;
+      const cost = offer.available && !offer.affordable
+        ? t('armory.store.shortfall', { price: offer.price, amount: offer.shortfall }, '${price} Cash · Need {amount} more')
+        : t('armory.store.price', { price: offer.price }, '${price} Cash') + (offer.available ? '' : ' · ' + t('armory.unlockNight', { night: offer.night }, 'Night {night}'));
+      row.querySelector('small').textContent = cost;
+      row.querySelector('button').disabled = !offer.available || !offer.affordable;
+    }
+    for (const plan of builds) {
+      const row = buildOffers.querySelector(`[data-offer-build="${plan.kind}"]`);
+      if (!row) return false;
+      row.querySelector('small').textContent = plan.affordable
+        ? t('armory.store.price', { price: plan.price }, '${price} Cash')
+        : t('armory.store.shortfall', { price: plan.price, amount: plan.shortfall }, '${price} Cash · Need {amount} more');
+      row.querySelector('button').disabled = !plan.affordable;
+    }
+    for (const kind of new Set([...panel.querySelectorAll('[data-pic]')].map(e => e.dataset.pic))) {
+      if (pics.has(kind)) continue;
+      Promise.resolve().then(() => picture(kind)).then(url => {
+        if (!url) return;
+        pics.set(kind, url);
+        for (const box of panel.querySelectorAll(`[data-pic="${kind}"]`)) setPic(box, url);
+      }).catch(() => {});
+    }
+    return true;
+  }
+  // Build the first shelf, offers and bench under the Training blackout. Keep the
+  // panel hidden, then refresh only changing prices on its first live open.
+  function warm() {
+    if (open || getPhase() !== 'prep') return false;
+    syncOwned();
+    open = true;
+    try { render(); }
+    finally { previewer?.hide(); open = false; panel.hidden = true; }
+    warmState = { state: stateKey(), offers: offerKey(getGunOffers()), builds: buildKey(getBuildOffers()) };
+    return true;
+  }
+  async function warmLayout() {
+    if (!warmState) return;
+    const style = cif.getAttribute('style'), hadOnly = cif.classList.contains('armory-only'), hadShow = cif.classList.contains('armory-show');
+    const covered = !!doc.getElementById('trainingBlackout')?.classList.contains('on');
+    try {
+      cif.classList.add('armory-only', 'armory-show');
+      cif.style.display = 'flex'; cif.style.visibility = covered ? 'visible' : 'hidden'; panel.hidden = false;
+      panel.getBoundingClientRect();
+      if (covered) await new Promise(resolve => requestAnimationFrame(() => setTimeout(resolve, 0)));
+    } finally {
+      panel.hidden = true;
+      if (!hadShow) cif.classList.remove('armory-show');
+      if (!hadOnly) cif.classList.remove('armory-only');
+      if (style == null) cif.removeAttribute('style'); else cif.setAttribute('style', style);
+    }
+  }
+  async function warmPictures(fetch) {
+    if (!warmState) return;
+    for (const kind of new Set([...panel.querySelectorAll('[data-pic]')].map(e => e.dataset.pic))) {
+      const url = await fetch(kind);
+      if (!url) continue;
+      pics.set(kind, url);
+      const images = [];
+      for (const box of panel.querySelectorAll(`[data-pic="${kind}"]`)) {
+        setPic(box, url);
+        images.push(box.querySelector('img'));
+      }
+      await Promise.all(images.map(img => img.decode?.().catch(() => {})));
+    }
+  }
   button.addEventListener('click', () => {
     if (getPhase() !== 'prep' || !cif.classList.contains('show')) return;
-    syncOwned(); open = true; panel.hidden = false; cif.classList.add('armory-show'); render(); onOpenCatalogue(catalogue);
+    syncOwned();
+    const reused = useWarmPanel(); warmState = null;
+    panel.dataset.warmReuse = reused ? 'yes' : 'no';
+    open = true; panel.hidden = false; skipObserverRender = true; cif.classList.add('armory-show');
+    if (!reused) render();
+    onOpenCatalogue(catalogue);
     panel.querySelector('button')?.focus({ preventScroll: true });
   });
   stow.addEventListener('click', () => {
@@ -380,17 +467,22 @@ export function mountArmory({ doc = document, bus = window, cif = doc.getElement
   });
   done.addEventListener('click', close);
   const observer = new MutationObserver(() => {
+    if (skipObserverRender) {
+      skipObserverRender = false;
+      if (open && cif.classList.contains('show') && cif.classList.contains('armory-show')) return;
+    }
     if (!cif.classList.contains('show')) close();
     else render();
   });
   observer.observe(cif, { attributes: true, attributeFilter: ['class'] });
   const listener = event => {
     if (event.detail?.type === 'run-reset') {
+      warmState = null;
       armory = (typeof onReset === 'function' ? onReset() : null) || createArmory(); selected = { type: 'primary', index: 0 }; bench = null; close();
     }
   };
   bus.addEventListener('dw-game', listener);
-  return { get armory() { return armory; }, element: panel, open: () => button.click(), close, render,
+  return { get armory() { return armory; }, element: panel, open: () => button.click(), close, render, warm, warmPictures, warmLayout,
     bench: (kind) => { bench = kind; render(); },
     dispose() { bus.removeEventListener('dw-game', listener); observer.disconnect(); close(); previewer?.dispose(); panel.remove(); button.remove(); } };
 }

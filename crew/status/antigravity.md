@@ -1,13 +1,13 @@
 # Antigravity
 
 state: active
-model: Claude Opus 5.5 (high)
-task: AG-310b AG-310's leftovers: bring every Armory buy, mod & close action under 50 ms in 1P and 3P
-touching: index.html (warmArmoryPics, armoryPics, syncGunModLooks, fitWeaponMod, fitArmoryMod, dressGuns, rackGunCopy, trainingWarmCompile), qa/2026-11-11-AG-310b, review/AG-310b
-since: 2026-11-11T21:48Z
-next: AG-310b AG-310's leftovers: the Armory actions still over 50 ms. Aft
+model: Claude Sonnet 5.5 (medium)
+task: AG-309b AG-309 follow-ups: blackout-lift frame, first-equip warm, 3P cold entry, faded-marine pictures
+touching: index.html (trainingWarmCompile, Training entry), qa/2026-11-11-AG-309b, review/AG-309b
+since: 2026-11-12T00:46Z
+next: AG-309b (21:31Z: unparked (D-164), after AG-310b.) (20:02Z: parked f
 blocked-on: —
-last-report: handoffs/2026-11-11-antigravity-AG-312.md
+last-report: handoffs/2026-11-11-antigravity-AG-310b.md
 
 ## Notes
 

@@ -76,8 +76,10 @@ export function createTrainingImpacts(T,tg) {
     positions.setUsage(T.DynamicDrawUsage);
     for(let i=0;i<capacity;i++)for(const[x,y]of corners)uv.push(x+.5,y+.5);
     geo.setAttribute('position',positions);geo.setAttribute('uv',new T.Float32BufferAttribute(uv,2));geo.setDrawRange(0,0);
+    const normals=new Float32Array(capacity*18);for(let i=0;i<capacity*6;i++)normals[i*3+1]=1;
+    geo.setAttribute('normal',new T.Float32BufferAttribute(normals,3));
     const colors=new T.Float32BufferAttribute(new Float32Array(capacity*24).fill(1),4);colors.setUsage(T.DynamicDrawUsage);geo.setAttribute('color',colors);
-    const mesh=new T.Mesh(geo,mat);mesh.name='training-impact-marks';mesh.renderOrder=1.1;mesh.frustumCulled=false;mesh.raycast=()=>{};parent.add(mesh);
+    const mesh=new T.Mesh(geo,mat);mesh.name='training-impact-marks';mesh.renderOrder=1.1;mesh.frustumCulled=false;mesh.visible=false;mesh.raycast=()=>{};parent.add(mesh);
     return{mesh,parent,capacity,next:0,count:0,positions,colors,life:new Float32Array(capacity)};
   };
   const batches=[make(tg.group,128),...tg.targets.map(t=>make(t.pivot,16))];
@@ -87,12 +89,13 @@ export function createTrainingImpacts(T,tg) {
     // blacked out. Restore draw ranges before play; no artificial hits or ammo use.
     prepareWarmup(){
       const ranges=batches.map(b=>b.mesh.geometry.drawRange.count);
+      const visible=batches.map(b=>b.mesh.visible);
       for(const b of batches){
         if(b.count)continue;
         corners.forEach(([x,y],i)=>b.positions.setXYZ(i,x*.06,y*.06,0));
-        b.positions.needsUpdate=true;b.mesh.geometry.setDrawRange(0,6);
+        b.positions.needsUpdate=true;b.mesh.geometry.setDrawRange(0,6);b.mesh.visible=true;
       }
-      return()=>batches.forEach((b,i)=>b.mesh.geometry.setDrawRange(0,ranges[i]));
+      return()=>batches.forEach((b,i)=>{b.mesh.geometry.setDrawRange(0,ranges[i]);b.mesh.visible=visible[i];});
     },
     add(hit){
       const target=hit.solid.target, batch=batches[target==null?0:target+1];
@@ -110,7 +113,7 @@ export function createTrainingImpacts(T,tg) {
       for(let i=0;i<6;i++)batch.colors.setW(batch.next*6+i,1);
       batch.colors.needsUpdate=true;
       batch.next=(batch.next+1)%batch.capacity;batch.count=Math.min(batch.capacity,batch.count+1);
-      batch.positions.needsUpdate=true;batch.mesh.geometry.setDrawRange(0,batch.count*6);
+      batch.positions.needsUpdate=true;batch.mesh.geometry.setDrawRange(0,batch.count*6);batch.mesh.visible=true;
     },
     update(dt){
       if(!(dt>0))return;
@@ -120,10 +123,10 @@ export function createTrainingImpacts(T,tg) {
           if(b.life[j]<IMPACT_FADE){for(let i=0;i<6;i++)b.colors.setW(j*6+i,b.life[j]/IMPACT_FADE);dirty=true;}
         }
         if(dirty)b.colors.needsUpdate=true;
-        if(!alive){b.mesh.geometry.setDrawRange(0,0);b.count=0;b.next=0;}
+        if(!alive){b.mesh.geometry.setDrawRange(0,0);b.mesh.visible=false;b.count=0;b.next=0;}
       }
     },
-    clear(){for(const b of batches){b.mesh.geometry.setDrawRange(0,0);b.count=0;b.next=0;b.life.fill(0);}},
+    clear(){for(const b of batches){b.mesh.geometry.setDrawRange(0,0);b.mesh.visible=false;b.count=0;b.next=0;b.life.fill(0);}},
     count:()=>batches.reduce((n,b)=>n+b.life.reduce((a,t)=>a+(t>0?1:0),0),0),
     dispose(){for(const b of batches){b.mesh.removeFromParent();b.mesh.geometry.dispose();}mat.dispose();map?.dispose();}
   };
@@ -196,8 +199,10 @@ export function createTrainingChar(T, tg) {
     for (let i = 0; i < capacity; i++) for (let k = 0; k < 6; k++) { const [x, y] = corners[k]; uvArr[(i * 6 + k) * 2] = (x + .5) * 0.43 + 0.035; uvArr[(i * 6 + k) * 2 + 1] = (y + .5) * 0.43 + 0.035; }
     const uvs = new T.Float32BufferAttribute(uvArr, 2); uvs.setUsage(T.DynamicDrawUsage);
     geo.setAttribute('position', positions); geo.setAttribute('uv', uvs); geo.setDrawRange(0, 0);
+    const normals = new Float32Array(capacity * 18); for (let i = 0; i < capacity * 6; i++) normals[i * 3 + 1] = 1;
+    geo.setAttribute('normal', new T.Float32BufferAttribute(normals, 3));
     const colors = new T.Float32BufferAttribute(new Float32Array(capacity * 24).fill(1), 4); colors.setUsage(T.DynamicDrawUsage); geo.setAttribute('color', colors);
-    const mesh = new T.Mesh(geo, mat); mesh.name = 'training-char-marks'; mesh.renderOrder = 1.2; mesh.frustumCulled = false; mesh.raycast = () => {}; parent.add(mesh);
+    const mesh = new T.Mesh(geo, mat); mesh.name = 'training-char-marks'; mesh.renderOrder = 1.2; mesh.frustumCulled = false; mesh.visible = false; mesh.raycast = () => {}; parent.add(mesh);
     return { mesh, parent, capacity, next: 0, count: 0, positions, uvs, colors, life: new Float32Array(capacity), alpha: new Float32Array(capacity), lastPos: new Float32Array(capacity * 3) };
   };
   const batches = [make(tg.group, 256), ...tg.targets.map(t => make(t.pivot, 24))];
@@ -206,12 +211,13 @@ export function createTrainingChar(T, tg) {
   return {
     prepareWarmup() {
       const ranges = batches.map(b => b.mesh.geometry.drawRange.count);
+      const visible = batches.map(b => b.mesh.visible);
       for (const b of batches) {
         if (b.count) continue;
         corners.forEach(([x, y], i) => b.positions.setXYZ(i, x * .2, y * .2, 0));
-        b.positions.needsUpdate = true; b.mesh.geometry.setDrawRange(0, 6);
+        b.positions.needsUpdate = true; b.mesh.geometry.setDrawRange(0, 6); b.mesh.visible = true;
       }
-      return () => batches.forEach((b, i) => b.mesh.geometry.setDrawRange(0, ranges[i]));
+      return () => batches.forEach((b, i) => { b.mesh.geometry.setDrawRange(0, ranges[i]); b.mesh.visible = visible[i]; });
     },
     add(hit, strength = 0.82) {
       const target = hit.solid?.target;
@@ -269,7 +275,7 @@ export function createTrainingChar(T, tg) {
       for (let i = 0; i < 6; i++) batch.colors.setW(slot * 6 + i, a0);
       batch.colors.needsUpdate = true;
       batch.next = (slot + 1) % batch.capacity; batch.count = Math.min(batch.capacity, batch.count + 1);
-      batch.positions.needsUpdate = true; batch.mesh.geometry.setDrawRange(0, batch.count * 6);
+      batch.positions.needsUpdate = true; batch.mesh.geometry.setDrawRange(0, batch.count * 6); batch.mesh.visible = true;
     },
     update(dt) {
       if (!(dt > 0)) return;
@@ -284,15 +290,15 @@ export function createTrainingChar(T, tg) {
           }
         }
         if (dirty) b.colors.needsUpdate = true;
-        if (!alive && b.count > 0) { b.mesh.geometry.setDrawRange(0, 0); b.count = 0; b.next = 0; }
+        if (!alive && b.count > 0) { b.mesh.geometry.setDrawRange(0, 0); b.mesh.visible = false; b.count = 0; b.next = 0; }
       }
     },
     clearTarget(targetIndex) {
       const b = batches[targetIndex + 1];
       if (!b) return;
-      b.mesh.geometry.setDrawRange(0, 0); b.count = 0; b.next = 0; b.life.fill(0); b.alpha.fill(0);
+      b.mesh.geometry.setDrawRange(0, 0); b.mesh.visible = false; b.count = 0; b.next = 0; b.life.fill(0); b.alpha.fill(0);
     },
-    clear() { for (const b of batches) { b.mesh.geometry.setDrawRange(0, 0); b.count = 0; b.next = 0; b.life.fill(0); b.alpha.fill(0); } },
+    clear() { for (const b of batches) { b.mesh.geometry.setDrawRange(0, 0); b.mesh.visible = false; b.count = 0; b.next = 0; b.life.fill(0); b.alpha.fill(0); } },
     count: () => batches.reduce((n, b) => n + b.life.reduce((a, t) => a + (t > 0 ? 1 : 0), 0), 0),
     dispose() { for (const b of batches) { b.mesh.removeFromParent(); b.mesh.geometry.dispose(); } mat.dispose(); map?.dispose(); }
   };

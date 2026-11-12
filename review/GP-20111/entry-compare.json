@@ -1,0 +1,30 @@
+[
+  {
+    "phase": "before",
+    "run": 1,
+    "ms": 11051,
+    "errors": [],
+    "panelSlots": 0
+  },
+  {
+    "phase": "before",
+    "run": 2,
+    "ms": 11144,
+    "errors": [],
+    "panelSlots": 0
+  },
+  {
+    "phase": "after",
+    "run": 1,
+    "ms": 15723,
+    "errors": [],
+    "panelSlots": 4
+  },
+  {
+    "phase": "after",
+    "run": 2,
+    "ms": 10382,
+    "errors": [],
+    "panelSlots": 4
+  }
+]

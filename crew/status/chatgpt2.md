@@ -2,9 +2,9 @@
 
 state: active
 model: GPT-6 (Codex, variant unsure)
-task: GT-20076 Fit the KR-7 side stamp and sculpt the flamer case underside around the existing tank artwork
-touching: studio/weapon-longarms.js (KR-7 side stamp), studio/weapon-heavy.js (flamer case underside), review/GT-20076
-since: 2026-11-12T00:05Z
+task: GT-20089 Read and plan independent akimbo barrel heat and wisps while Jerry plays; landing and testing after RESUME
+touching: game/barrel-heat.js, index.html (barrel heat creation, shot and update calls only), review/GT-20089
+since: 2026-11-12T02:35Z
 next: GT-20087 CD-1's guard room (20:08Z): the GW-4, Wasp and AA-12 trigger
 blocked-on: —
 last-report: handoffs/2026-11-12-chatgpt2-GT-20076.md
@@ -15,7 +15,7 @@ last-report: handoffs/2026-11-12-chatgpt2-GT-20076.md
 
 context nearly full, needs a new session
 
-New daily handoff handoffs/2026-11-12-chatgpt2-GT-20076.md. Launcher pivot and flamer rings/grip complete at catalog-fix-rings-grip with 19 fewer base pairs. Active KR-7 stamp + flamer fixed-case underside: Director approved A to keep removable tank fully round. Code in studio/weapon-longarms.js and studio/weapon-heavy.js. Native catalog-fix-case-stamp = AK 126→124, flamer 166→165, no new pairs/open/loose. Before: clear-case-stamp-before, including native first-person flamer pack-off t=.40. Running final geometry/FPS-eye checks: case-stamp-proof samples surfaces, baseline fingerprint, 4617 vertical rays; --case-stamp flamer then ak and t38. Need matched crops, daily handoff and out. Next inherited revolver hammer face and adjoining cylinder frame, pump etc; use queue-from-witnesses.mjs <catalog> --wasp-nine-stripes. Stay running; heartbeat last 00:15Z.
+Director PC hold per 02:20Z while Jerry plays. NO game editing, slot runs or game/browser launches until explicit RESUME. NEW PRIORITY GT-20089 J142c: paired pistol/Wasp/revolver each need independent barrel/suppressor heat and smoke in both views. game/barrel-heat.js + index.html heat call sites lent, checked in. Read trace: chooseMagazineHand picks actual hand before shots, old addShot currently after akimboHand flips. viewmodel exposes gun.root, gun2.root and muzzleWorld(out,1/2). offhandMeshes created later than createBarrelHeat, real suppressor muzzles update on each world copy. Plan optional hand=0 API and one existing 48-wisp pool, independent cooldowns/emission, no new lights. Asked Director A/B. Need before captures, unequal-hand tests + 3 pair × 2 views × bare/supported cans × 4 lights, native t38 and tag290; never change single-hand thresholds. Existing art batches handed off. Breacher/GW-4 optic queued after this.
 
 Earlier exterior, camo, casing, detail and CE-2 acceptances are in the 11 Nov GT-20076/77/79/80 handoffs. The KR-7 laminate and D-152 budget were accepted on GT-20082 and GT-20081. Keep previous test expectations and the crew slot.
 

@@ -1,0 +1,80 @@
+{
+  "hash": "cea5cda9",
+  "spurFaces": 2,
+  "spurGaps": [
+    {
+      "lowerMm": 0,
+      "upperMm": 0.0078125
+    },
+    {
+      "lowerMm": 0,
+      "upperMm": 0.0078125
+    }
+  ],
+  "cylinderGaps": [
+    {
+      "lowerMm": 0.125,
+      "upperMm": 0.1328125
+    },
+    {
+      "lowerMm": 1.3515625,
+      "upperMm": 1.359375
+    }
+  ],
+  "hammerPoses": [
+    {
+      "pull": 0,
+      "reset": false,
+      "angle": 0,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "pull": 0.5,
+      "reset": false,
+      "angle": -0.31250000000000006,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "pull": 0.88,
+      "reset": false,
+      "angle": -0.55,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "pull": 0.95,
+      "reset": false,
+      "angle": -0.2291666666666669,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "pull": 1,
+      "reset": false,
+      "angle": 0,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "pull": 0.5,
+      "reset": true,
+      "angle": 0,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    }
+  ]
+}

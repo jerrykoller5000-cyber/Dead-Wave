@@ -1,0 +1,14 @@
+{
+  "hash": "1163f527",
+  "exterior": 20,
+  "supports": [
+    {
+      "lowerMm": 0,
+      "upperMm": 0.0078125
+    },
+    {
+      "lowerMm": 0,
+      "upperMm": 0.0078125
+    }
+  ]
+}

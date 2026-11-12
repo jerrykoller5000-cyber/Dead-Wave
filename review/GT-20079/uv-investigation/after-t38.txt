@@ -1,0 +1,41 @@
+ok    t38      26 pass   0 fail  62.0s  (real renderer)
+    PASS off-hand pistol animates its own parts (slide, mag, flash, laser)
+    PASS off-hand uzi animates its own parts (mag, flash, laser)
+    PASS off-hand revolver animates its own parts (mag, flash, laser, cylinder, hammer)
+    PASS all twelve equipped models represented (12)
+    PASS cold attached mesh count 273 / 300 (including hidden parts)
+    PASS minigun submitted 22 draws / 35
+    INFO minigun cold meshes 22, equipped draws 22
+    PASS m4 submitted 31 draws / 35
+    INFO m4 cold meshes 35, equipped draws 31
+    PASS ak submitted 19 draws / 35
+    INFO ak cold meshes 23, equipped draws 19
+    PASS aa12 submitted 23 draws / 35
+    INFO aa12 cold meshes 24, equipped draws 23
+    PASS pistol submitted 15 draws / 35
+    INFO pistol cold meshes 19, equipped draws 15
+    PASS uzi submitted 23 draws / 35
+    INFO uzi cold meshes 27, equipped draws 23
+    PASS shotgun submitted 19 draws / 35
+    INFO shotgun cold meshes 24, equipped draws 19
+    PASS revolver submitted 19 draws / 35
+    INFO revolver cold meshes 23, equipped draws 19
+    PASS sniper submitted 31 draws / 35
+    INFO sniper cold meshes 34, equipped draws 31
+    PASS launcher submitted 20 draws / 35
+    INFO launcher cold meshes 23, equipped draws 20
+    PASS flamer submitted 9 draws / 35
+    INFO flamer cold meshes 10, equipped draws 9
+    PASS chainsaw submitted 9 draws / 35
+    INFO chainsaw cold meshes 9, equipped draws 9
+    PASS equipped draws across twelve individual models 240 < 260
+    INFO twelve cold guns: 273 attached meshes; equipped individually: 240 actual draws
+    PASS ak: reload moves the magazine
+    PASS m4: reload moves the magazine
+    PASS pistol: reload moves the magazine
+    PASS shotgun: reload moves the pump
+    PASS sniper: reload moves the magazine
+    PASS revolver: reload moves the magazine
+    PASS launcher: reload moves the magazine
+    PASS minigun: reload moves the magazine
+1 checks: 26 pass, 0 fail (real renderer)

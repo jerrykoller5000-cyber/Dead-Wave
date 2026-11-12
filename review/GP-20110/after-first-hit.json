@@ -1,0 +1,183 @@
+{
+  "phase": "after",
+  "at": "2026-11-12T00:45:18.902Z",
+  "empty": {
+    "impact": [
+      {
+        "visible": false,
+        "draw": 0
+      },
+      {
+        "visible": false,
+        "draw": 0
+      },
+      {
+        "visible": false,
+        "draw": 0
+      },
+      {
+        "visible": false,
+        "draw": 0
+      },
+      {
+        "visible": false,
+        "draw": 0
+      },
+      {
+        "visible": false,
+        "draw": 0
+      }
+    ],
+    "char": [
+      {
+        "visible": false,
+        "draw": 0
+      },
+      {
+        "visible": false,
+        "draw": 0
+      },
+      {
+        "visible": false,
+        "draw": 0
+      },
+      {
+        "visible": false,
+        "draw": 0
+      },
+      {
+        "visible": false,
+        "draw": 0
+      },
+      {
+        "visible": false,
+        "draw": 0
+      }
+    ],
+    "impacts": 0,
+    "chars": 0
+  },
+  "firstHit": {
+    "impact": [
+      {
+        "visible": false,
+        "draw": 0
+      },
+      {
+        "visible": false,
+        "draw": 0
+      },
+      {
+        "visible": false,
+        "draw": 0
+      },
+      {
+        "visible": false,
+        "draw": 0
+      },
+      {
+        "visible": false,
+        "draw": 0
+      },
+      {
+        "visible": true,
+        "draw": 6
+      }
+    ],
+    "char": [
+      {
+        "visible": false,
+        "draw": 0
+      },
+      {
+        "visible": false,
+        "draw": 0
+      },
+      {
+        "visible": false,
+        "draw": 0
+      },
+      {
+        "visible": false,
+        "draw": 0
+      },
+      {
+        "visible": false,
+        "draw": 0
+      },
+      {
+        "visible": true,
+        "draw": 6
+      }
+    ],
+    "impacts": 1,
+    "chars": 1
+  },
+  "pipelineWarmup": {
+    "pipelines": [],
+    "programs": []
+  },
+  "warnings": [
+    {
+      "type": "warning",
+      "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+    },
+    {
+      "type": "warning",
+      "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"position\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"position\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+  ],
+  "pageErrors": []
+}

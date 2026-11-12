@@ -1,0 +1,44 @@
+ok    t38      26 pass   0 fail  64.0s  (real renderer)
+    PASS off-hand pistol animates its own parts (slide, mag, flash, laser)
+    PASS off-hand uzi animates its own parts (mag, flash, laser)
+    PASS off-hand revolver animates its own parts (mag, flash, laser, cylinder, hammer)
+    PASS all twelve equipped models represented (12)
+    PASS cold attached mesh count 273 / 300 (including hidden parts)
+    PASS minigun submitted 22 draws / 35
+    PASS m4 submitted 31 draws / 35
+    PASS ak submitted 19 draws / 35
+    PASS aa12 submitted 23 draws / 35
+    PASS pistol submitted 15 draws / 35
+    PASS uzi submitted 23 draws / 35
+    PASS shotgun submitted 19 draws / 35
+    PASS revolver submitted 19 draws / 35
+    PASS sniper submitted 31 draws / 35
+    PASS launcher submitted 20 draws / 35
+    PASS flamer submitted 9 draws / 35
+    PASS chainsaw submitted 9 draws / 35
+    PASS equipped draws across twelve individual models 240 < 260
+    PASS ak: reload moves the magazine
+    PASS m4: reload moves the magazine
+    PASS pistol: reload moves the magazine
+    PASS shotgun: reload moves the pump
+    PASS sniper: reload moves the magazine
+    PASS revolver: reload moves the magazine
+    PASS launcher: reload moves the magazine
+    PASS minigun: reload moves the magazine
+ok    tce6     15 pass   0 fail  55.6s  (real renderer)
+    PASS the revolver in hand
+    PASS third person, six pulls: each brings a live chamber under the hammer by the break, fires it and leaves it there, one chamber (60 deg) a pull, the hammer up (6/6; turns 1.00 1.00 1.00 1.00 1.00 1.00; top 5>5 4>4 3>3 2>2 1>1 0>0)
+    PASS the same way every time (+1.00 +1.00 +1.00 +1.00 +1.00 +1.00)
+    PASS a dry pull with no rounds: no shot and no turn (0.00 chambers in 0 frames, then the reload)
+    PASS a revolver reload turns no more than half a chamber in a frame (worst 0.26 at frame 96 u 0.89)
+    PASS after it the chamber under the hammer is the one past the live ones (so the next pull brings live round 5 up): top 0, live 6
+    PASS first person, six pulls: the same (6/6; turns 1.00 1.00 1.00 1.00 1.00 1.00)
+    PASS the view's cylinder is the world gun's through every pull (worst 0 deg apart, 48 frames)
+    PASS the pair, six pulls (three each): each gun indexes on its own pull (6/6; top 5>5 5>5 4>4 4>4 3>3 3>3)
+    PASS the launcher in hand
+    PASS the launcher, six shots: the round behind the barrel fires and the spring turns the next live one up, one chamber a shot, the fired case left in its chamber (turns -1.00 -1.00 -1.00 -1.00 -1.00 -0.99)
+    PASS the drum turns the same way every time
+    PASS a launcher reload turns no more than half a chamber in a frame (worst 0.21 at frame 36)
+    PASS after it the next live round is behind the barrel: top 5, live 6
+    PASS no page errors
+2 checks: 41 pass, 0 fail (real renderer)

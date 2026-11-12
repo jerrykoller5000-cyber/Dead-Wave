@@ -1,0 +1,216 @@
+[
+  {
+    "id": "m4",
+    "gateBad": 0,
+    "gateCount": 42,
+    "rows": [
+      {
+        "ordinal": 0,
+        "path": "root/fp-stock[11]/Mesh[5]",
+        "role": "furniture",
+        "tag": "m4",
+        "triangles": 148,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 1,
+        "path": "root/Mesh[13]",
+        "role": "rail",
+        "tag": "m4",
+        "triangles": 96,
+        "ax": 2,
+        "af": 2,
+        "bad": 0
+      },
+      {
+        "ordinal": 2,
+        "path": "root/Mesh[14]",
+        "role": "rail",
+        "tag": "m4",
+        "triangles": 48,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 3,
+        "path": "root/m4-default-holo[21]/Mesh[5]",
+        "role": "optic shell",
+        "tag": "m4",
+        "triangles": 332,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 4,
+        "path": "root/suppressor[25]/Mesh[0]",
+        "role": "suppressor shell",
+        "tag": "m4",
+        "triangles": 56,
+        "ax": 1,
+        "af": 1,
+        "bad": 0
+      },
+      {
+        "ordinal": 5,
+        "path": "root/suppressor[25]/Mesh[1]",
+        "role": "suppressor shell",
+        "tag": "m4",
+        "triangles": 216,
+        "ax": 1,
+        "af": 1,
+        "bad": 0
+      },
+      {
+        "ordinal": 6,
+        "path": "root/laserLightUnit[26]/moduleShell[0]",
+        "role": "light shell",
+        "tag": "m4",
+        "triangles": 12,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 7,
+        "path": "root/laserLightUnit[26]/topPlate[1]",
+        "role": "light shell",
+        "tag": "m4",
+        "triangles": 12,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 8,
+        "path": "root/Mesh[31]",
+        "role": "receiver",
+        "tag": "m4",
+        "triangles": 160,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 9,
+        "path": "root/Mesh[32]",
+        "role": "rail",
+        "tag": "m4",
+        "triangles": 1500,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 10,
+        "path": "root/Mesh[33]",
+        "role": "rail",
+        "tag": "m4",
+        "triangles": 4320,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 11,
+        "path": "root/Mesh[34]",
+        "role": "receiver",
+        "tag": "m4",
+        "triangles": 1204,
+        "ax": 1,
+        "af": 1,
+        "bad": 0
+      },
+      {
+        "ordinal": 12,
+        "path": "root/Mesh[35]",
+        "role": "receiver",
+        "tag": "m4",
+        "triangles": 172,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 13,
+        "path": "root/Mesh[36]",
+        "role": "furniture",
+        "tag": "m4",
+        "triangles": 900,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      }
+    ]
+  },
+  {
+    "id": "ak",
+    "gateBad": 0,
+    "gateCount": 18,
+    "rows": [
+      {
+        "ordinal": 0,
+        "path": "root/fp-stock[8]/Mesh[0]",
+        "role": "receiver",
+        "tag": "ak",
+        "triangles": 88,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 1,
+        "path": "root/suppressor[21]/Mesh[0]",
+        "role": "suppressor shell",
+        "tag": "ak",
+        "triangles": 216,
+        "ax": 1,
+        "af": 1,
+        "bad": 0
+      },
+      {
+        "ordinal": 2,
+        "path": "root/suppressor[21]/Mesh[1]",
+        "role": "suppressor shell",
+        "tag": "ak",
+        "triangles": 112,
+        "ax": 1,
+        "af": 1,
+        "bad": 0
+      },
+      {
+        "ordinal": 3,
+        "path": "root/laserLightUnit[22]/railClamp[0]",
+        "role": "light shell",
+        "tag": "ak",
+        "triangles": 12,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 4,
+        "path": "root/laserLightUnit[22]/moduleShell[1]",
+        "role": "light shell",
+        "tag": "ak",
+        "triangles": 12,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      },
+      {
+        "ordinal": 5,
+        "path": "root/Mesh[26]",
+        "role": "receiver",
+        "tag": "ak",
+        "triangles": 1162,
+        "ax": 0,
+        "af": 0,
+        "bad": 0
+      }
+    ]
+  }
+]

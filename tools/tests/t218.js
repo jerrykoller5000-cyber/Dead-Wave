@@ -44,7 +44,7 @@
     const holds = T.getShoulderDbg().holds;
     const pouchOf = (sx) => {
       const vest = ud.gearParts && ud.gearParts.vest && ud.gearParts.vest.some((o) => o.visible), piv = ud.torsoPivotY || 0.7;
-      return ud.torsoG.localToWorld(vest ? V().set(0.12 * sx, 0.965 - piv, 0.25) : V().set(0.115 * sx, 0.68 - piv, 0.19));
+      return ud.torsoG.localToWorld(vest ? V().set(0.12 * sx, 0.235, 0.25) : V().set(0.115 * sx, 0.68 - piv, 0.19));   // the carrier's pouch: CB-304's CARRIER_POUCH_Y
     };
     // The seated foot, measured before the reload: gun space and magazine space.
     const seatOf = (gun) => {
@@ -114,10 +114,12 @@
           const grab = part && part.userData.gb145Grab;
           ok(!!grab, w + ': the ' + (w === 'pistol' ? 'slide' : 'bolt') + ' has a grab point');
           const tgt = part ? part.localToWorld(grab ? grab.clone() : V()) : V();
-          const d = part ? palmL().distanceTo(tgt) : 9, sh = ud.armLG.getWorldPosition(V()).distanceTo(tgt);
+          // the sniper's bolt: the firing hand (its fist's grip point); the pistol's slide: the support hand
+          const d = part ? (w === 'sniper' ? palmR() : palmL()).distanceTo(tgt) : 9, sh = (w === 'sniper' ? ud.armRG : ud.armLG).getWorldPosition(V()).distanceTo(tgt);
           ikOk(d < 0.05, w + ': the hand on the ' + (w === 'pistol' ? 'slide as it racks' : 'bolt as it cycles') + ' (' + f3(d) + ' m; ' + f3(sh) + ' m from that shoulder)');
         }
       }
+      if (w === 'sniper') await at(seatU);   // the firing hand holds the grip through the magazine; it leaves it for the bolt after
       const gripD = palmR().distanceTo(gun.localToWorld(V().fromArray(holds[w].grip)));
       ikOk(gripD < 0.03, w + ': the firing hand stays on the grip (' + f3(gripD) + ' m)');
       await end();

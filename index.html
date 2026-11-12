@@ -10189,7 +10189,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     let wildlifeWarmReady = false;
     function wildlifeBatch(root, count, basic, roughness, label) {
       const makeMaterial = (wing) => {
-        const params = { side: THREE.DoubleSide, transparent: wing, depthWrite: !wing, roughness, color: 0xffffff };
+        const params = { side: THREE.DoubleSide, transparent: wing, depthWrite: !wing, color: 0xffffff, ...(!basic ? { roughness } : {}) };
         const mat = basic ? new THREE.MeshBasicNodeMaterial(params) : new THREE.MeshStandardNodeMaterial(params);
         const vc = TSL.attribute('color', 'vec4');
         if (wing) {
@@ -19214,6 +19214,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         sap: paintUnderGeo(new THREE.ConeGeometry(0.28, 1.7, 5), 0x2d5c30),
         log: paintUnderGeo(new THREE.CylinderGeometry(0.11, 0.13, 1.7, 5), 0x6b4e32)
       };
+      for (const geo of Object.values(geos)) geo.setAttribute('ember', new THREE.BufferAttribute(new Float32Array(geo.attributes.position.count), 1));
       geos.log.rotateZ(Math.PI / 2);
       for (const kind of ['brush', 'sap', 'log']) {
         const list = items.filter((it) => it.kind === kind);
@@ -21496,7 +21497,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // rebuild with more or fewer parts is the same shader; and an old proxy is disposed only after the new one has been
     // drawn, not before, so three keeps the node build both use (it drops it when its last user is disposed). A rebuild
     // in play (a hat bought, the sleeves) is the bake alone, and it redraws the night's shadow map, which shows it.
-    const MARINE_SHADOW_PAD = [96, 128];
+    const MARINE_SHADOW_PAD = [128];
     const marineShadowRetired = [];
     function buildMarineShadowProxy(sig) {
       const t0 = performance.now();
@@ -21551,6 +21552,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     function updateMarineShadowProxy() {
       if (!SHADOW_PROXY || !sun.castShadow) { if (marineShadowProxy) { skinUnmerge(marine); marineShadowProxy = null; marineShadowSig = null; } if (marineShadowRetired.length) flushMarineShadowRetired(true); return; }
       if (marineShadowRetired.length) flushMarineShadowRetired(false);
+      if (paused || cifOpen || shopOpen) return;   // AG-310b: no rebuild (a shader compile) while a menu is up
       if ((perfFrame & 15) !== 0) return;
       const sig = skinSignature(marine, marineSigSkip);
       if (sig !== marineShadowSeen) { marineShadowSeen = sig; marineShadowSeenAt = perfFrame; return; }
@@ -21860,7 +21862,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     { const an = marine.userData.ankleLG; if (an) { marine.updateMatrixWorld(true);
       const inv = new THREE.Matrix4().copy(an.matrixWorld).invert(), m = new THREE.Matrix4(), bb = new THREE.Box3(), all = new THREE.Box3();
       an.traverse((o) => { if (!o.isMesh || !o.geometry) return; if (!o.geometry.boundingBox) o.geometry.computeBoundingBox(); all.union(bb.copy(o.geometry.boundingBox).applyMatrix4(m.multiplyMatrices(inv, o.matrixWorld))); });
-      if (!all.isEmpty() && all.min.y < -0.05) { CROUCH.ankleH = -all.min.y; CROUCH.toe = all.max.z; CROUCH.heel = -all.min.z; } } }
+      if (!all.isEmpty() && all.min.y < -0.05) { CROUCH.ankleH = -all.min.y; CROUCH.toe = all.max.z; CROUCH.heel = -all.min.z; CROUCH.soleX = [all.min.x, all.max.x]; } } }   // CC-343 (part 3): soleX, footGuard
     // CL-120: scratch for the feet-on-the-ground pass in updateMarinePose (footGround).
     let _fgVa = null, _fgWa = null;
     const FOOT_FLAT = Object.freeze({ dy: 0, slope: 0, dz: 0 }), FOOT_G = { dy: 0, slope: 0, dz: 0 };   // CC-343: dz, a step back (or on) off an edge
@@ -21872,6 +21874,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // from rootY: a deck more than FOOT_REACH over it is overhead (a storey is 2 m; at the walk's 7.4 m/s a boot reaches a
     // tread 0.6 m over his root on the stairs).
     const FOOT_REACH = 1.0, FOOT_DROP = 0.3, FOOT_LIFT = 0.36;   // FOOT_LIFT: how far over the hips' ground a leg lifts its boot
+    // CC-343 (part 3): on a flight of stairs his root rides the walk's ramp, up to a tread under the tread he stands on; a drop
+    // is measured from that tread (footDrop: FOOT_DROP plus how far the tread under his root is over his root, set each frame).
+    let footDropX = 0; const footDrop = () => FOOT_DROP + footDropX;
     const ANKLE_FLEX = [BODY_LIMITS.ankle.flex[0] + 0.01, BODY_LIMITS.ankle.flex[1] - 0.01];   // a hair inside the table's ankle row   // a foot more than FOOT_DROP over what is under it is out over a drop, not on it
     const _footTreads = new WeakMap();
     function footTreadY(d, lz) {
@@ -21968,7 +21973,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       FOOT_E.y = FOOT_E.hi = Math.max(gH, gB, gT); FOOT_E.shift = 0;
       if (Math.abs(gT - gH) < 0.03) return FOOT_E;
       const toeHigh = gT > gH, lowY = toeHigh ? gH : gT;
-      if (lowY < rootY - FOOT_DROP) return FOOT_E;   // the lower side is a drop: stand on the higher, out over it
+      if (lowY < rootY - footDrop()) return FOOT_E;   // the lower side is a drop: stand on the higher, out over it
       const e = toeHigh ? footEdge(x, z, fx, fz, rootY, -hb, tb, gH) : footEdge(x, z, fx, fz, rootY, tb, -hb, gT);
       const over = toeHigh ? tb - e : e + hb;
       if (over > FOOT_SHIFT) return FOOT_E;
@@ -22011,8 +22016,58 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         const S = footStepIn(x + FOOT_F.dx, z + FOOT_F.dz, rootY, fx, fz);
         if (S) { FOOT_F.y = S.y; FOOT_F.slope = 0; FOOT_F.roll = 0; FOOT_F.dx += S.dx; FOOT_F.dz += S.dz; }
       }
-      if (FOOT_F.y < rootY - FOOT_DROP) { FOOT_F.y = rootY; FOOT_F.slope = 0; FOOT_F.roll = 0; }
+      if (FOOT_F.y < rootY - footDrop()) { FOOT_F.y = rootY; FOOT_F.slope = 0; FOOT_F.roll = 0; }
       return FOOT_F;
+    }
+
+    // CC-343 (part 3): the boots' last guard (updateMarinePose calls it after every pass that poses the legs: the gait,
+    // the crouch, the cross-fade between pose states, the turn on the spot). A boot whose sole is in what is under it
+    // (footSurfaceY: the ground, a deck, a stair's tread) is lifted out (the knee takes it up, the sole keeps its pitch);
+    // walking, with both boots off the ground, the nearer one is put down on it if the leg reaches. Sole points as the
+    // built boot has them (CROUCH: heel, toe, soleX), 8 mm in from its edges.
+    const _fgP = new THREE.Vector3(), _fgQ = new THREE.Vector3(), FOOT_GAP = [0, 0];
+    function footSoleGap(an, rootY, lag) {
+      an.updateWorldMatrix(true, false);
+      const xs = CROUCH.soleX || [-0.05, 0.05], hb = CROUCH.heel - 0.008, tb = CROUCH.toe - 0.008, y = -CROUCH.ankleH;
+      let lo = Infinity;
+      for (const x of [xs[0] + 0.008, xs[1] - 0.008]) for (const f of [0, 0.36, 0.68, 1]) {
+        _fgP.set(x, y, -hb + (hb + tb) * f).applyMatrix4(an.matrixWorld);
+        lo = Math.min(lo, _fgP.y + lag - footSurfaceY(_fgP.x, _fgP.z, rootY));
+      }
+      return lo;
+    }
+    // Move leg s's ankle up by dy (world, + up) with the two-bone IK in the leg's plane; the sole's pitch is kept.
+    function footLegBy(ud, s, dy) {
+      const leg = s ? ud.legRG : ud.legLG, kn = s ? ud.kneeRG : ud.kneeLG, an = s ? ud.ankleRG : ud.ankleLG, par = leg.parent;
+      if (!par) return;
+      const L1 = CROUCH.L1, L2 = CROUCH.L2, a0 = leg.rotation.x, k0 = kn.rotation.x, p0 = a0 + k0 + an.rotation.x;
+      an.getWorldPosition(_fgP); _fgQ.copy(_fgP); _fgQ.y += dy;
+      par.worldToLocal(_fgP); par.worldToLocal(_fgQ);
+      const sy = -(L1 * Math.cos(a0) + L2 * Math.cos(a0 + k0)), sz = -(L1 * Math.sin(a0) + L2 * Math.sin(a0 + k0));
+      const ty = sy + (_fgQ.y - _fgP.y), tz = sz + (_fgQ.z - _fgP.z);
+      const d = Math.min(L1 + L2 - 0.002, Math.max(0.06, hypot(ty, tz)));
+      const k = Math.acos(Math.max(-1, Math.min(1, (d * d - L1 * L1 - L2 * L2) / (2 * L1 * L2))));
+      const a = Math.atan2(-tz, -ty) - Math.atan2(L2 * Math.sin(k), L1 + L2 * Math.cos(k));
+      leg.rotation.x = a; kn.rotation.x = k;
+      an.rotation.x = Math.max(ANKLE_FLEX[0], Math.min(ANKLE_FLEX[1], p0 - a - k));
+    }
+    // lag: how far the frame's ground snap (after the pose) will still move his root: the soles are judged where they will be.
+    function footGuard(marine, ud, rootY, walking, running, crouch, lag) {
+      for (let s = 0; s < 2; s++) FOOT_GAP[s] = footSoleGap(s ? ud.ankleRG : ud.ankleLG, rootY, lag);
+      for (let s = 0; s < 2; s++) for (let it = 0; it < 3 && FOOT_GAP[s] < -0.0015; it++) { footLegBy(ud, s, -FOOT_GAP[s] + 0.001); FOOT_GAP[s] = footSoleGap(s ? ud.ankleRG : ud.ankleLG, rootY, lag); }
+      // standing (not stepping in the turn on the spot): a planted boot over its ground is put down on it
+      if (!walking && crouch < 0.5) for (let s = 0; s < 2; s++) if (FOOT_GAP[s] > 0.004 && FOOT_GAP[s] < 0.4 && !(ud.turn && ud.turn.active && ud.turn.swing === s)) {
+        footLegBy(ud, s, -(FOOT_GAP[s] - 0.001)); FOOT_GAP[s] = footSoleGap(s ? ud.ankleRG : ud.ankleLG, rootY, lag);
+      }
+      if (walking && !running && FOOT_GAP[0] > 0.008 && FOOT_GAP[1] > 0.008) {   // a run has its moments in the air
+        const s = FOOT_GAP[0] < FOOT_GAP[1] ? 0 : 1;
+        footLegBy(ud, s, -(FOOT_GAP[s] - 0.003));
+        FOOT_GAP[s] = footSoleGap(s ? ud.ankleRG : ud.ankleLG, rootY, lag);
+        // the leg at its full reach (the hips a step over the lower tread): the hips come down the rest, 6 cm at most
+        const m = Math.min(FOOT_GAP[0], FOOT_GAP[1]) - 0.003;
+        if (m > 0.005) { const d = Math.min(0.06, m); marine.position.y -= d; FOOT_GAP[0] -= d; FOOT_GAP[1] -= d; }
+      }
+      ud.feet.guard = FOOT_GAP;
     }
 
     function updateTacticalHud() {
@@ -23395,6 +23450,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const rootGY = feetOnTerrain ? playerGroundY(root.x, root.z, root.y + STEP_UP) : root ? root.y : 0;   // CC-343: where his root lands this frame
       if (!ud.feet) ud.feet = [0, 0];
       footStill = feetOnTerrain && !moving && hypot(velX, velZ) < 0.08;   // CC-343 (part 2): see footStepIn
+      footDropX = feetOnTerrain ? Math.max(0, Math.min(0.3, footSurfaceY(root.x, root.z, rootGY) - rootGY)) : 0;   // CC-343 (part 3): see footDrop
       if (feetOnTerrain && legL && legL.parent) legL.parent.updateWorldMatrix(true, false);
       ud.feet.on = feetOnTerrain; ud.feet.lift = POSE.feetLift || 0; ud.feet[0] = ud.feet[1] = null;
       const footGround = (leg, ty, tz) => {
@@ -23417,11 +23473,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           const E = footAcrossEdge(wx, wz, fx, fz, ry, gH, gB, gT); gy = E.y; slope = 0; FOOT_G.dz = E.shift; FOOT_G.hi = E.hi;
         } else gy = gH + (gT - gH) * hb / span;
         if (footStill && gy < ry - 0.03) { const S = footStepIn(wx, wz, ry, fx, fz); if (S) { gy = S.y; slope = 0; } }   // CC-343 (part 2): steps in (footFooting)
-        if (gy < ry - FOOT_DROP) { gy = ry; slope = 0; }   // out over a drop (a deck's edge, a stairwell): not stood on
+        if (gy < ry - footDrop()) { gy = ry; slope = 0; }   // out over a drop (a deck's edge, a stairwell): not stood on
         // Up from the body's ground to this foot's ground, in the parent's units.
         const hi = par.worldToLocal(_fgV.set(wx, gy, wz)).y, lo = par.worldToLocal(_fgW.set(wx, ry, wz)).y;
-        FOOT_G.dy = Math.max(-FOOT_DROP, Math.min(0.6, hi - lo));
-        FOOT_G.dyHi = FOOT_G.dz ? Math.max(-FOOT_DROP, Math.min(0.6, par.worldToLocal(_fgV.set(wx, FOOT_G.hi, wz)).y - lo)) : FOOT_G.dy;
+        FOOT_G.dy = Math.max(-footDrop(), Math.min(0.6, hi - lo));
+        FOOT_G.dyHi = FOOT_G.dz ? Math.max(-footDrop(), Math.min(0.6, par.worldToLocal(_fgV.set(wx, FOOT_G.hi, wz)).y - lo)) : FOOT_G.dy;
         FOOT_G.slope = slope;
         return FOOT_G;
       };
@@ -23443,7 +23499,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           // to the next, and the hips must follow that at once while the ground under his feet changes smoothly.
           // CC-343: eased against his root now (see above); a step's height either way (it was -0.08 .. 0.12, a hill's).
           POSE.feetGroundW = rootGY + lo * marine.scale.y;
-          POSE.feetLift = _ease(POSE.feetLift || 0, Math.max(-FOOT_DROP, Math.min(0.3, lo)), dt, 14);
+          POSE.feetLift = _ease(POSE.feetLift || 0, Math.max(-footDrop(), Math.min(0.3, lo)), dt, 14);
         } else {
           POSE.feetGroundW = null;
           POSE.feetLift = _ease(POSE.feetLift || 0, 0, dt, 12);
@@ -23634,6 +23690,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         !diving() && !climbingTower && !mortarMounted && !mortarCarried && !marineDown() &&
         !scriptedKill && !marineInsertion && !menuCamera.deploying && !vault && GAIT.holdU == null &&
         hitReaction.time <= 0 && hitStumble.kneeT <= 0 && POSE.landT <= 0 });
+      if (feetOnTerrain && !diving() && !vault && legL && legR && kneeL && kneeR && ud.ankleLG && ud.ankleRG) footGuard(marine, ud, rootGY, moving, running, POSE.crouch || 0, rootGY - root.y);   // CC-343 (part 3)
     }
 
     const minigun = makeMinigun();
@@ -26396,6 +26453,18 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // world first and only then expressed under the hand (holdShoulderGun), so the hand can go while the gun stays shouldered.
     // The knob's grab point in the world for a gun placed at (origin, q, s) this frame (the bolt's pose already applied), or null.
     const _bkM = new THREE.Matrix4(), _bkG = new THREE.Matrix4(), SNIPER_KNOB_HAND = [0.010, -0.004];   // gun units: out from the bore, down
+    // How much of the firing hand is on the sniper's bolt (0..1): the cycle between shots (boltCycle.hand) and the reload's
+    // 'work' beats (RELOAD_PLAN.sniper), the same weight the first person's st.boltHand rides.
+    function sniperBoltHandW() {
+      const g = currentWeapon === 'sniper' ? weaponMeshes.sniper : null; if (!g) return 0;
+      if (!reloading) { const bc = g.userData.boltCycle; return bc && bc.active ? bc.hand || 0 : 0; }
+      const P = RELOAD_PLAN.sniper; if (!P) return 0;
+      const u = _clamp01(1 - reloadTimer / Math.max(0.05, reloadAnimDuration || 1)), K = P.keys;
+      let i = 0; while (i < K.length - 1 && u >= K[i + 1][0]) i++;
+      const a = K[i][1], b = K[Math.min(K.length - 1, i + 1)][1]; if (a !== 'work' && b !== 'work') return 0;
+      const t = i < K.length - 1 ? _smooth((u - K[i][0]) / Math.max(1e-4, K[i + 1][0] - K[i][0])) : 0;
+      return a === 'work' && b === 'work' ? 1 : a === 'work' ? 1 - t : t;
+    }
     function sniperKnobWorld(gun, origin, q, s, out) {
       const bolt = gun && gun.userData.bolt; if (!bolt) return null;
       if (!bolt.userData.gb145Grab) bolt.userData.gb145Grab = reloadGrabPoint(bolt, 'bolt');
@@ -30720,7 +30789,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
     async function warmArmoryPics() {
       if (armoryPics.warmed || INSPECT || window.DWInspect || window.DWInspectHost) return;
-      if (!(await armoryPicsReady()) || !armoryPics.r) return;
+      if (!(await armoryPicsReady()) || !armoryPics.r) { armoryUI.warm(); return; }
       armoryPics.warmed = true;
       let holder = null, dummyGeo = null, dummyNonIdx = null, dummyMat = null;
       const warmPaintMats = [];
@@ -30800,6 +30869,40 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         try { await armoryPicture(wk, true); } catch (_) {}
         try { await armoryPreview(wk, {}, true); } catch (_) {}
       }
+      try { await armoryPreview('pistol', { yaw: 0, pitch: 0, zoom: 1 }, true); } catch (_) {}
+      armoryUI.warm();
+      await armoryUI.warmPictures((wk) => armoryPicture(wk, true));
+      await armoryUI.warmLayout();
+      warmArmoryMods();
+    }
+    // Fit and unfit one attachment per gun under the blackout to prepare its geometry.
+    function warmArmoryMods() {
+      for (const wk of WEAPON_ORDER) {
+        const mod = armoryMods(wk).find(m => m.id === 'ext' || m.id === 'heavy' ||
+          m.id.startsWith('optic:') || m.id === 'suppressor' || m.id === 'tank');
+        if (!mod || !weaponMeshes[wk]) continue;
+        const oldExt = !!extMag[wk], oldHeavy = !!heavyFitted[wk], oldOptic = opticFitted[wk] || null;
+        const oldSuppressor = !!suppressor[wk], oldTank = sawTankFitted;
+        try {
+          if (mod.id === 'ext') { extMag[wk] = true; delete heavyFitted[wk]; syncGunModLooks(wk); }
+          else if (mod.id === 'heavy') { heavyFitted[wk] = true; delete extMag[wk]; syncGunModLooks(wk); }
+          else if (mod.id.startsWith('optic:')) {
+            if (oldOptic) continue;
+            opticFitted[wk] = mod.id.slice(6); syncOpticLooks(); syncGunModLooks(wk);
+          } else if (mod.id === 'suppressor') { suppressor[wk] = true; fitSuppressors(); }
+          else if (mod.id === 'tank') sawTankFitted = true;
+        } catch (_) {}
+        finally {
+          if (oldExt) extMag[wk] = true; else delete extMag[wk];
+          if (oldHeavy) heavyFitted[wk] = true; else delete heavyFitted[wk];
+          if (oldOptic) opticFitted[wk] = oldOptic; else delete opticFitted[wk];
+          if (oldSuppressor) suppressor[wk] = true; else delete suppressor[wk];
+          sawTankFitted = oldTank;
+          if (mod.id === 'ext' || mod.id === 'heavy') syncGunModLooks(wk);
+          else if (mod.id.startsWith('optic:') && !oldOptic) { syncOpticLooks(); syncGunModLooks(wk); }
+          else if (mod.id === 'suppressor') fitSuppressors();
+        }
+      }
     }
     async function armoryPicture(kind, forceOpen = false) {
       if (!weaponMeshes[kind]) return null;
@@ -30809,6 +30912,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (armoryPics.cache.has(key)) return okNow() ? armoryPics.cache.get(key) : null;
       if (!okNow()) return null;
       return runArmoryPicJob(forceOpen, sess, async (okOpen) => {
+        if (!forceOpen && gunLookKey(kind) !== key) return null;   // AG-310b: the look moved on while this waited
         if (armoryPics.cache.has(key)) return okOpen() ? armoryPics.cache.get(key) : null;
         let holder = null;
         try {
@@ -30845,6 +30949,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const okNow = () => forceOpen || (armoryPics.session === sess && armoryOpenNow());
       if (armoryPics.prevCache.has(pKey)) return okNow() ? armoryPics.prevCache.get(pKey) : null;
       return runArmoryPicJob(forceOpen, sess, async (okOpen) => {
+        if (!forceOpen && !pKey.startsWith(gunLookKey(kind) + '|')) return null;   // AG-310b: stale look
         if (armoryPics.prevCache.has(pKey)) return okOpen() ? armoryPics.prevCache.get(pKey) : null;
         let holder = null;
         try {
@@ -55252,7 +55357,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       }
       tuckDiveGun(origin,gun,_hq.gun,_hScale);
       grip.set(H.grip[0], H.grip[1], H.grip[2]).multiplyScalar(s).applyQuaternion(_hq.gun).add(origin);
-      { const bc = currentWeapon === 'sniper' && !reloading && gun.userData.boltCycle, bw = bc && bc.active ? bc.hand : 0;   // CB-307: the bolt
+      { const bw = sniperBoltHandW();   // CB-307: the bolt (between shots and the reload's bolt beat)
         if (bw > 0 && sniperKnobWorld(gun, origin, _hq.gun, _hScale, _bkKnob)) grip.lerp(_bkKnob, bw * bw * (3 - 2 * bw)); }
       const poleR = heldWallPole(_POLE_R, _wallHold.poleR, _wallHold.r);
       if (HANDS.skip[currentWeapon]) { solveArmIK(armR, ud.elbowRG, _HAND_R, grip, poleR, k); handRollR = 0; }
@@ -64854,6 +64959,21 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // Velocity-based rather than teleport-per-frame: the marine now carries momentum,
     // loses pace climbing, picks it up descending, wades through water and loses his
     // footing on anything genuinely steep.
+    // CB-310 (J141, Jerry 12 Nov: "slow him to half on stairs and see how it plays"): his pace on a flight of stairs (any
+    // platform with a rise: the build stairs, the cellar's; not ladders), walking and sprinting, as a share of his pace on
+    // the flat (1 = full speed). The one knob to tune. It eases in and out over STAIR_EASE_S at the foot and the top, starting STAIR_EASE_S before he reaches them.
+    const STAIR_SPEED_SCALE = 0.5, STAIR_EASE_S = 0.15;
+    let stairW = 0;   // 0 off the stairs, 1 on a flight
+    const _stairAhead = new THREE.Vector3();
+    function onStairFlight(P, tol = 0.6) {   // P: where he stands (tol: how far off the flight's height he may be)
+      for (const d of platforms) {
+        if (!d.rise) continue;
+        const dx = P.x - d.x, dz = P.z - d.z, c = Math.cos(d.yaw), sn = Math.sin(d.yaw), lx = dx * c - dz * sn, lz = dx * sn + dz * c;
+        if (Math.abs(lx) > d.hw || Math.abs(lz) > d.hl) continue;
+        if (Math.abs(d.deckY + d.rise * (lz / d.hl * 0.5 + 0.5) - P.y) < tol) return true;   // on it, not under or over it
+      }
+      return false;
+    }
     const PHYS = {
       walk: 7.4,
       run: 11.8,
@@ -67975,6 +68095,12 @@ live++;
             * Math.min(playerWebT > 0 ? SPIDER_WEB.pace : 1, 1 - OTS_SLOW * Math.max(OTS.w * (viewFirst ? fpAdsW : 1), AIMZ.w));   // GP-19857/CL-176: stronger slow; web and shoulder do not stack (CL-247: the aim zoom too)
         }
 
+        // CB-310: half pace on a flight of stairs (STAIR_SPEED_SCALE), eased at the foot and the top
+        // (looked for where he will be STAIR_EASE_S from now too, so he has slowed by the foot: a flight is only 2 m long)
+        _stairAhead.set(player.position.x + velX * STAIR_EASE_S, player.position.y, player.position.z + velZ * STAIR_EASE_S);
+        { const ahead = Math.hypot(velX, velZ) * STAIR_EASE_S, want = !swimming && grounded && (onStairFlight(player.position) || onStairFlight(_stairAhead, 0.6 + ahead)) ? 1 : 0;
+          stairW = _clamp01(stairW + (want ? 1 : -1) * dt / STAIR_EASE_S); }   // all the way in STAIR_EASE_S
+        targetSpeed *= 1 - (1 - STAIR_SPEED_SCALE) * stairW;
         targetSpeed *= drownedPace(localPlayer); // GP-19860: movement remains available during the brief grip
 
         // Spawn swimming water ripples
@@ -68838,7 +68964,7 @@ live++;
           otsDbg: () => ({ on: OTS.on, w: OTS.w, yaw: OTS.yaw, pitch: OTS.pitch, locked: document.pointerLockElement === renderer.domElement, fov: aimFov, tilt: aimTiltDeg }),
           aimZoomDbg: () => ({ on: AIMZ.on, w: AIMZ.w, relX: AIMZ.relX, relZ: AIMZ.relZ, ndcX: AIMZ.ndcX, ndcY: AIMZ.ndcY, panX: AIMZ.appliedX, panZ: AIMZ.appliedZ, fov: camera.fov, baseFov: camFovCurrent, first: viewFirst }),   /* CL-247 */
           setViewFirstDbg: (on) => toggleViewFirst(on), viewmodelDbg: () => viewmodel || null, vmStateDbg: () => _vmState,   /* CL-281 */ fpHeavyHipDbg: () => FP_HEAVY_HIP, setOtsAimDbg: (yaw, pitch) => { if (yaw != null) OTS.yaw = yaw; if (pitch != null) OTS.pitch = pitch; },   /* CL-271: the view's aim, for probes */ setFirstPersonFov: (deg) => setFirstPersonFov(deg), applyPictureSettings: () => applyPictureSettings(), pictureDbg: () => pictureState(), stepFrame: (dt) => stepFrame(dt), flightHold: (on) => { flightHold = !!on; }, flightReset: () => flightReset(), flightClip: (note) => flightClip(note), flightRestore: (clip) => flightRestore(clip), flightInput: (spec) => flightInput(spec), flightDbg: () => ({ hold: flightHold, frames: flightLog.frames().length, snaps: flightLog.snaps.length, replaying: flightReplaying, seed: flightRng.seed, xfade: XFADE.key, xw: XFADE.w }), fpTuneDbg: (o = {}) => { if (o.ready != null) FP_READY = o.ready; if (o.lift != null) FP_LIFT = o.lift; if (o.hip) Object.assign(FP_HIP, o.hip); if (o.hipHand) Object.assign(FP_HIP_HAND, o.hipHand); return { ready: FP_READY, lift: FP_LIFT, hip: { ...FP_HIP }, hipHand: { ...FP_HIP_HAND } }; },   /* CL-250 */ fpDbg: () => ({ first: viewFirst, w: OTS.w, ads: fpAdsW, headHidden: fpHeadHidden, armHidden: fpArmHidden, eye: OTS.eye ? OTS.eye.clone() : null, sight: firstPersonSight() ? { pos: _fpSight.clone(), fwd: _fpFwd.clone() } : null }),   /* CL-249 */ aimKindDbg: () => aimKind, aimAssistDbg: () => ({ ...aimAssistLast }), shotAimDbg: () => shotAimTarget().clone(), AIM_ASSIST_NDC, AIM_CHEST,   /* CL-247 */ otsLook: (dx, dy) => otsMouse({ movementX: dx, movementY: dy }),   /* CL-174 */
-          rotateBuildDbg: () => rotateBuild(), toggleStairs, nearestFoldStairs, emplacementRate, platforms, updateFoldingStairs, weaponMeshes, offhandMeshes, knifeMesh: () => knife, nightLockdown, lockdownState: () => ({ on: nightLockdown(), placeMode, buildMode, wheel: wheelKind, briefing: hqBriefingOpen, shop: shopOpen, cif: cifOpen }),   /* CU-82 */ setRevolverSpentDbg: (n) => { revolverSpent = Math.max(0, Math.min(6, n | 0)); updateAmmoHud(); return revolverSpent; }, /* CL-326: the fired cases in the cylinder */ setAmmoDbg: (k, n) => { if (isMagazineWeapon(k)) { if (!magazineStore[k]) issueWeaponMagazines(k, 0, 0); setLoadedMagazineRounds(magazineStore, k, n, dualActive && !!DUAL_CAPABLE[k] && !!dualOwned[k]); syncMagazine(k); } else ammoByWeapon[k] = n; }, getPlaceHint: () => placeHint, findRepairCandidate, findScrapCandidate, onMyStorey, refusalText, fireRoundDbg: (ox, oy, oz, dx, dy, dz, damage, speed, pierce) => { spawnProjectile(false, new THREE.Vector3(ox, oy, oz), new THREE.Vector3(dx, dy, dz), damage, 2, null, speed, 'bullet', pierce | 0); return projectiles[projectiles.length - 1]; }, stepProjectilesDbg: (dt) => { updateProjectiles(dt); flushShotHits(); }, /* GB-58 follow-up: one round, stepped by hand */ session, startDeathCine, skipDeathCine, endDeathCine, getCine: () => cine, plotSpot, nearestGrave, getCrew: () => cineCrew, tagWallDbg: { refresh: () => refreshTagWall(), wall: () => house.tagWall, tags: () => hollowTags.read().tags.slice(), TAG_TOTAL },   /* CL-206 */ burialDbg: { setRunTags: (ids) => { runTagIds = ids.slice(); }, runTags: () => runTagIds.slice(), whos: () => burialWhos(), MOUND },   /* CL-205 */ poseCrew, DIG_LEAN, drawPlaque, moundHeight, placeShovel, GRAVE_PLOTS, endGame, playerNameEl, hq, house, getSkullBag: () => skullBag, getSkullLedger: () => skullLedger, awardCash, skullSafeSpot, getSkullLife: () => ({ life: SKULL_LIFE, zipR: SKULL_ZIP_R, zipMax: SKULL_ZIP_MAX }), getSkullRecall: () => skullRecallUntil, updateHQ, HQ_WINDOW_FRONT, HQ_PANEL_FRONT, HQ_DUTY_BOARD_FRONT, HQ_DUTY_BOARD_REACH, HQ_RADIO_FRONT, HQ_RADIO_REACH, cashDrops, killZombie, KIOSK, SKULL_LOOK, makeSkullMesh, getGestureT: () => gestureT, mortarArcBlocked, mortarSolve, mountMortar, updateMortarArc, fireMortar, mortarCrewSpot, getMortarNoRoom: () => mortarNoRoom, onStairsRamp, dismountMortar, fireShellDbg, flushShotHits, setMotionEnabledDbg: () => {}, getCorpses: () => corpses, marineDown, bomberBlast, updateCorpsesDbg: (dt) => updateCorpses(dt), freezeCorpse, getMortarAim: () => mortarAimState, setAimTargetDbg: (x, z) => { aimTarget.x = x; aimTarget.z = z; aimTarget.y = sampleHeight(x, z); aimKind = 'none'; }, setZoomHeldDbg: (v) => { zoomHeld = !!v; }, /* CL-317 */ setUnarmedDbg: (v) => { if (v && !unarmed) { holsteredKey = currentWeapon; unarmed = true; } else if (!v && unarmed) unarmed = false; return unarmed; }, getAimCamDbg: () => ({ ads: aimCamAds, pose: aimCamPose, elev: AIM_CAM_ELEV, shoulder: AIM_SHOULDER }) /* CU-114 */, getShoulderDbg: () => ({ aimF: _shAimDbg.f.clone(), aimT: _shAimDbg.t.clone(), kick: { ...recoilKick }, tilt: { ...reloadMountOff }, w: shoulderHoldW, ads: shoulderAdsW, rawAds: shoulderAds(), cheek: shoulderCheekAng, hold: SHOULDER_HOLD, holds: WEAPON_HOLD }), /* GB-129 */ getWeaponSizeDbg: () => ({ upm: MARINE_UPM, sizes: WEAPON_SIZE, blades: BLADE_SIZE, carry: CARRY_FIT, factors: Object.fromEntries(Object.keys(weaponMeshes).map((k) => [k, weaponSizeFactor(k)])) }), /* GB-130 */ resolveSoftBarricades, resolveHardBuildCollisions, PLAYER_RADIUS_DBG: PLAYER_RADIUS, upgradeBoxPieces, commitUpgradeDbg: (gx, gz) => { commitUpgradeDrag({ gx, gz }); }, beginUpgradeDragDbg: (gx, gz) => { upgradeDrag = { gx, gz }; }, landmarks, nearestAttackableBuild, buildsNear, getGameMode: () => gameMode, devBench, buildsNearDbg: (x, z, r) => buildsNear(x, z, r, []), upgradePlan, applyUpgrade, tryUpgrade, getRepairTarget, getRepairSnapshot, repairNearestBuild, getObjectiveProps, getObjectiveInteraction, buyUpgradeBlueprint, getUpgradeOwned: () => upgradeOwned, tierOf, buildBetween, UPGRADE_TRACKS, setShopTabDbg: (t) => { shopTab = t; renderShop(); }, pushOutOfBuild, upgradeTarget, getUpgradeHint: () => upgradeHint,
+          rotateBuildDbg: () => rotateBuild(), toggleStairs, nearestFoldStairs, emplacementRate, platforms, updateFoldingStairs, weaponMeshes, offhandMeshes, knifeMesh: () => knife, nightLockdown, lockdownState: () => ({ on: nightLockdown(), placeMode, buildMode, wheel: wheelKind, briefing: hqBriefingOpen, shop: shopOpen, cif: cifOpen }),   /* CU-82 */ setRevolverSpentDbg: (n) => { revolverSpent = Math.max(0, Math.min(6, n | 0)); updateAmmoHud(); return revolverSpent; }, /* CL-326: the fired cases in the cylinder */ setAmmoDbg: (k, n) => { if (isMagazineWeapon(k)) { if (!magazineStore[k]) issueWeaponMagazines(k, 0, 0); setLoadedMagazineRounds(magazineStore, k, n, dualActive && !!DUAL_CAPABLE[k] && !!dualOwned[k]); syncMagazine(k); } else ammoByWeapon[k] = n; }, getPlaceHint: () => placeHint, findRepairCandidate, findScrapCandidate, onMyStorey, refusalText, fireRoundDbg: (ox, oy, oz, dx, dy, dz, damage, speed, pierce) => { spawnProjectile(false, new THREE.Vector3(ox, oy, oz), new THREE.Vector3(dx, dy, dz), damage, 2, null, speed, 'bullet', pierce | 0); return projectiles[projectiles.length - 1]; }, stepProjectilesDbg: (dt) => { updateProjectiles(dt); flushShotHits(); }, /* GB-58 follow-up: one round, stepped by hand */ session, startDeathCine, skipDeathCine, endDeathCine, getCine: () => cine, plotSpot, nearestGrave, getCrew: () => cineCrew, tagWallDbg: { refresh: () => refreshTagWall(), wall: () => house.tagWall, tags: () => hollowTags.read().tags.slice(), TAG_TOTAL },   /* CL-206 */ burialDbg: { setRunTags: (ids) => { runTagIds = ids.slice(); }, runTags: () => runTagIds.slice(), whos: () => burialWhos(), MOUND },   /* CL-205 */ poseCrew, DIG_LEAN, drawPlaque, moundHeight, placeShovel, GRAVE_PLOTS, endGame, playerNameEl, hq, house, getSkullBag: () => skullBag, getSkullLedger: () => skullLedger, awardCash, skullSafeSpot, getSkullLife: () => ({ life: SKULL_LIFE, zipR: SKULL_ZIP_R, zipMax: SKULL_ZIP_MAX }), getSkullRecall: () => skullRecallUntil, updateHQ, HQ_WINDOW_FRONT, HQ_PANEL_FRONT, HQ_DUTY_BOARD_FRONT, HQ_DUTY_BOARD_REACH, HQ_RADIO_FRONT, HQ_RADIO_REACH, cashDrops, killZombie, KIOSK, SKULL_LOOK, makeSkullMesh, getGestureT: () => gestureT, mortarArcBlocked, mortarSolve, mountMortar, updateMortarArc, fireMortar, mortarCrewSpot, getMortarNoRoom: () => mortarNoRoom, onStairsRamp, dismountMortar, fireShellDbg, flushShotHits, setMotionEnabledDbg: () => {}, getCorpses: () => corpses, marineDown, bomberBlast, updateCorpsesDbg: (dt) => updateCorpses(dt), freezeCorpse, getMortarAim: () => mortarAimState, setAimTargetDbg: (x, z) => { aimTarget.x = x; aimTarget.z = z; aimTarget.y = sampleHeight(x, z); aimKind = 'none'; }, setZoomHeldDbg: (v) => { zoomHeld = !!v; }, /* CL-317 */ stairSpeedDbg: () => ({ scale: STAIR_SPEED_SCALE, ease: STAIR_EASE_S, w: stairW, on: onStairFlight(nearestPlayer(0, 0).position) }), /* CB-310 */ setUnarmedDbg: (v) => { if (v && !unarmed) { holsteredKey = currentWeapon; unarmed = true; } else if (!v && unarmed) unarmed = false; return unarmed; }, getAimCamDbg: () => ({ ads: aimCamAds, pose: aimCamPose, elev: AIM_CAM_ELEV, shoulder: AIM_SHOULDER }) /* CU-114 */, getShoulderDbg: () => ({ aimF: _shAimDbg.f.clone(), aimT: _shAimDbg.t.clone(), kick: { ...recoilKick }, tilt: { ...reloadMountOff }, w: shoulderHoldW, ads: shoulderAdsW, rawAds: shoulderAds(), cheek: shoulderCheekAng, hold: SHOULDER_HOLD, holds: WEAPON_HOLD }), /* GB-129 */ getWeaponSizeDbg: () => ({ upm: MARINE_UPM, sizes: WEAPON_SIZE, blades: BLADE_SIZE, carry: CARRY_FIT, factors: Object.fromEntries(Object.keys(weaponMeshes).map((k) => [k, weaponSizeFactor(k)])) }), /* GB-130 */ resolveSoftBarricades, resolveHardBuildCollisions, PLAYER_RADIUS_DBG: PLAYER_RADIUS, upgradeBoxPieces, commitUpgradeDbg: (gx, gz) => { commitUpgradeDrag({ gx, gz }); }, beginUpgradeDragDbg: (gx, gz) => { upgradeDrag = { gx, gz }; }, landmarks, nearestAttackableBuild, buildsNear, getGameMode: () => gameMode, devBench, buildsNearDbg: (x, z, r) => buildsNear(x, z, r, []), upgradePlan, applyUpgrade, tryUpgrade, getRepairTarget, getRepairSnapshot, repairNearestBuild, getObjectiveProps, getObjectiveInteraction, buyUpgradeBlueprint, getUpgradeOwned: () => upgradeOwned, tierOf, buildBetween, UPGRADE_TRACKS, setShopTabDbg: (t) => { shopTab = t; renderShop(); }, pushOutOfBuild, upgradeTarget, getUpgradeHint: () => upgradeHint,
           knifeAttack, BLADE_STATS, bladeStats, landmarkInSquare, levelGroundRect, startReload, isReloading: () => reloading, toggleNvgDbg: () => toggleNvg(), setGearDbg: (k) => { gearOwned[k] = true; }, laserSteadies, STREAK_HEAL_CAP_FRAC, streakHealHp: () => streakHealHp(), fogCullDbg: () => ({ on: fogCullOn, far: _fcFar, margin: FOG_CULL_MARGIN, back: FOG_CULL_BACK, hidden: zombies.filter((z) => z.alive && z.fogHidden).length }), setFogCullDbg: (on) => { fogCullOn = !!on; if (!fogCullOn) for (const z of zombies) if (z.fogHidden) { z.fogHidden = false; if (z.mesh) z.mesh.visible = true; } }, fogCullDepthDbg: (z) => { fogCullPrep(); return fogCullDepth(z); }, LASER_SPREAD_MUL, setLasersDbg: (on) => { lasersEnabled = !!on; updateLasers(); }, laserAimDbg: () => laserAimReport, toggleLasers, aimDirWithSpreadDbg: (s) => aimDirWithSpread(s), getAimDirDbg: () => getAimDir().clone(), resetSprayDbg: () => { sprayHeat = 0; sprayShot = 0; }, onBoards, setAimYawDbg: (y) => { aimYaw = y; }, getKnifeCd: () => knifeCd, setKnifeCd: (v) => { knifeCd = v; },
           openWheel, openMenuDbg: (name) => {
             if (name === 'shop') openShop(true);

@@ -16,7 +16,13 @@ folder=root/"visible-repairs"/model
 rank=json.loads((root/baseline/model/"rank.json").read_text(encoding="utf-8"))
 rank_cameras=json.loads((root/baseline/model/"cameras.json").read_text(encoding="utf-8"))
 pair=next(p for p in rank["rows"] if p["index"]==index)
-cameras={s:json.loads((folder/s/"cameras.json").read_text(encoding="utf-8")) for s in (old_phase,after)}
+folders={s:folder/s for s in (old_phase,after)}
+alternate=next((a.split('=',1)[1] for a in sys.argv[6:] if a.startswith('--before-source=')),None)
+if alternate:
+    source=(root.parent/alternate).resolve()
+    assert source.is_relative_to(root.parent.resolve()) and source.is_dir()
+    folders[old_phase]=source
+cameras={s:json.loads((d/"cameras.json").read_text(encoding="utf-8")) for s,d in folders.items()}
 def project(frame,point,width,height):
     basis=frame["points"]
     x,y,w=[basis[0][i]+sum(point[j]*(basis[j+1][i]-basis[0][i]) for j in range(3)) for i in range(3)]
@@ -31,7 +37,7 @@ for view,match in pair["views"].items():
     # Keep enough of the surrounding outline to recognise which visible part is changing.
     w=min(650,max(244,x1-x0+64));h=min(380,max(124,y1-y0+56))
     cx=(x0+x1)//2;cy=(y0+y1)//2
-    with Image.open(folder/old_phase/(view+"-noon.png")) as before:
+    with Image.open(folders[old_phase]/(view+"-noon.png")) as before:
         width,height=before.size
     errors=[]
     rank_drift=[]
@@ -54,7 +60,7 @@ for view,match in pair["views"].items():
         for row,light in enumerate(("noon","overcast","dusk","night")):
             yy=30+row*(dh+18)
             pen.text((display*col+7,yy),light,fill="#dddcd3")
-            with Image.open(folder/phase/(view+"-"+light+".png")) as frame:
+            with Image.open(folders[phase]/(view+"-"+light+".png")) as frame:
                 cut=frame.crop((left,top,left+w,top+h)).resize((display,dh),Image.Resampling.LANCZOS)
                 sheet.paste(cut,(display*col,yy+16))
     sheet.save(folder/(after+"-pair-"+str(index)+"-"+view+".jpg"),quality=94)

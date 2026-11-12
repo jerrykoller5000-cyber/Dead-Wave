@@ -1,42 +1,35 @@
 # Claude 3
 
-state: active
+state: idle
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: CC-343 tcc341's vest-over-shirt red (7.5 mm), then part 3 stairs gait + marine-turn boot + sandbags, then the kit's J128
-touching: studio/marine-body.js, studio/marine-cloth.js, index.html (legs + CROUCH/FOOT scratch), studio/marine-turn.js (apply, turnBoot, crouchSole: loan)
-since: 2026-11-12T00:13Z
-next: CC-343 (15:06Z: Jerry OK'd fresh sessions (15:03Z): back to Claude
+task: —
+touching: —
+since: 2026-11-12T02:35Z
+next: CC-343 (15:06Z: Jerry OK'd fresh sessions (15:03Z): back to Claude 
 blocked-on: —
-last-report: handoffs/2026-11-11-claude3-CC-343d.md
+last-report: handoffs/2026-11-12-claude3-CC-343f.md
 
 ## Notes
 
-### Where things stand (11 Nov 21:45Z, end of session 7: context nearly full, needs a new session)
-- CC-343 part 2 LANDED 21:30Z (handoffs/2026-11-11-claude3-CC-343c.md; Claude outputs/CC-343c/patch343c2.py + patch343e2.py;
-  the plain patch343c.py/e.py there are stale). tcc343b 30/7, t184 29/0. AG asked for the 5080 after-shots (review/CC-343c): review them.
-- tcc341 sleeve over the glove LANDED 21:43Z (handoffs/2026-11-11-claude3-CC-343d.md, patch341s.py): tcc341 15/1.
-- NEXT: the vest-over-shirt red (7.5 mm kit crouch; 4-6 mm other kit poses) at the front plate's outer corner x .16-.18, z .17-.25:
-  the shirt shows in the gap between the plate (.35 wide at z .151) and the cummerbund panel (x .169, depth .22). Widen the plate
-  or deepen the panel AND move torsoG.userData.carrierShape (carrierClearance: Claude 2's hold) with it; tell Claude 2.
-- Then CC-343 part 3 (a stair-stepping gait; marine-turn's boot one tread up at stairs 0.2 facing down; deck edge crouched;
-  sandbags 5.2 mm) and the kit's J128. Asked the Director 21:35Z which first (my pick: tcc341, then part 3).
-- The cloud camera --match --soft never loads (twice): pictures from Antigravity (D-164).
-- 21:55Z: AG's review/CC-343c sheets reviewed: deck edge standing OK in 4 lights; crouched facing off the edge, the front boot steps down onto the ground below the deck (looks like a step down; part 3).
-
-### Session 6 notes (18:12Z)
-- CC-343 (CB-290's legs) PART 1 LANDED 18:05Z, card open: handoffs/2026-11-11-claude3-CC-343b.md. index.html (legs + CROUCH/FOOT
-  scratch) and studio/marine-turn.js (lent) patched by Claude outputs/CC-343b/patch343.py + patch343turn.py (anchored; the
-  files before are beside them). New tools/tests/tcc343b.js: 29/37 (was 10/37). Regressions clean (tcb291 3/0, tcb289 5/0,
-  t184 28/1 better, t187/t229/tcc341 the same reds as before).
-- Left on CC-343: stairs walking DOWN 228 mm in; stairs 0.2 standing facing down 298 mm over (marine-turn footing);
-  crouch-walk up 45 mm; deck edge crouched 36 mm over/56 off flat; deck edge side-on 26 off flat; stairs 0.7 crouched
-  17 mm over; flat crouch-walk 8.6 mm; t184 slide 40%. PICTURES NOT TAKEN: the cloud camera (--match --soft) never finished
-  loading in 20 min; batch maker Claude outputs/CC-343b/mkbatch.py (target player, yaw 65, pitch 18, dist 2.7; overcast
-  = T.weather.raining). Try --training or ask Antigravity for the 5080 shots.
-- Test tips: tcc343b holds the game (T.flightHold) and steps T.stepFrame(1/30); face with T.setAimYawDbg (the mouse aim is
-  off with no pointer); marine.userData.feet = {on, lift, [L,R] offsets} from the feet pass. In fakethree the Euler does
-  not follow quaternion writes (read quaternions). Cloud: DW_CHECK_MS=1500000 (the test is ~450 s there).
-- Then: tcc341's two cloth reds, then the J128 kit card.
+### Where things stand (12 Nov 02:40Z, session 8, Opus 5.5)
+- LANDED 00:54Z tcc341's last red (handoffs/2026-11-12-claude3-CC-343e.md): tcc341 16/0.
+- LANDED 02:38Z CC-343 part 3 (A) the boots' last guard + stairs drop (handoffs/2026-11-12-claude3-CC-343f.md, patch343f/g.py):
+  tcc343b 35/2. Left: stairs crouch-walking up 18.5 mm in; deck edge crouched facing off 35.6 over / 56.3 not flat.
+- KEY FINDING: the legs are posed BEFORE the frame's ground snap (index.html ~68364, after updateMarinePose): anything that
+  measures the soles at pose time must add lag = rootGY - root.y (footGuard does). Moving the body by the lag is WRONG (tried).
+- NEXT (Jerry chose C, J141): when Claude 2's CB-310 (STAIR_SPEED_SCALE 0.5) lands, tune the step so a boot lands on each
+  tread (stride = tread 0.286 m), tcc343b up/down at walk and sprint, side filmstrip for Jerry. Meanwhile the kit's J128
+  (item 3): found unarmed kit run: arm swing sleeve 4.7 mm into the cummerbund side (x -.18), the swing is Claude 2's.
+- PAUSE (02:20Z, Jerry playing): no PC game-file edits or runs until the Director's RESUME. I edited index.html at 02:26Z
+  by mistake (told the Director, request 'I edited index.html during PAUSE'; my pick: leave it).
+- Crouch-walk up 18.5-20 mm: tzc3cw.js (cloud) shows the guard's soles on the treads at pose time but the lead boot 20 mm
+  in after the frame: suspect clampBodyPose (CB-291) clamping hip flex (125 deg) after the pose; ankle sits at -0.86.
+- Probes (cloud only, never to the PC): tools/tests/tzc3st2.js (tcc343b with per-frame log for the stairs),
+  tzc3probe.js (tcc341 shirt<vest with part names). Pictures: Claude outputs/CC-343e/c3render/ (tzc3dump.js /
+  tzc3stdump.js dump the posed geometry; c3render-index.html + -shoot.mjs into <tree>/_c3render/ as index.html, shoot.mjs:
+  node _c3render/shoot.mjs <log> <outdir> b|a '<views json>' (cam.rel = target relative to the dumped root); sheet.py).
+- Cloud copy: tar on the PC to $HOME/w, cp into "_DELETE ME/", stage, untar in /home/claude/tt; include assets/intro (no mp4)
+  or TT never boots. node imports of studio/*.js need a 'three' shim in node_modules. A full tcc343b is ~8 min here.
 
 ### This VM's quirks (session 3)
 - The PC mount refuses writing over some existing files (EINVAL on open with O_CREAT, sometimes on ftruncate): crew.mjs fails

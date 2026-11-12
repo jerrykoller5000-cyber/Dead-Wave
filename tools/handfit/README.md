@@ -115,3 +115,21 @@ Make those (copies or symlinks), or change the three prefixes.
   distance; `CLR=-100` for all), `idxgrid2.mjs` (RG ranges), `idxmove.mjs` (hand moves x index; B2/A1 turns).
 - **The loop that held**: fitT/fitS -> `applyoff.py` -> setfit -> re-export -> diag/depth3. NOT pretwist after applyoff here: with
   the twist at its limit ("carried") applyoff's fit already draws as solved (pretwist turned it 34 deg off).
+
+## Claude 1's fixes, part 5 (CD-1, 12 Nov ~00-02Z): the revolver fist on GT-20088/88b, the AA-12 fist rolled
+- **The index's reach, the fist moving**: `gun/idxmove3.mjs <field> '<pose>' '<target>'` (idxmove with turns about all three hand
+  axes through the grip channel: A1 about y, B2 about z, C3 about x = the twist's axis; the rest of the hand allowed the glove's
+  give: PALM, REST, the k-th deepest (KTH) so a lone field vertex doesn't veto; KOGRID; CLR the index's clearance; MCPMIN;
+  FIX one placement). With `C2G` (`c4/c2gmat.py <export> r`: canonical hand -> gun mm) the target and the reported pad are in
+  gun mm. The pad is Claude 5's point: `c4/pad.mjs` (the distal frame's (0, -0.55 len, 0.007)), not the nearest tip vertex.
+- `c4/mv2res.py '<placement>' '<pose>' [index]`: idxmove3's placement (field = R(p - C) + C + d) as applyoff's RES (m = -R^T d).
+- `c4/idxprobe.mjs`: the index configs whose pad lands in a box (PADBOX, gun mm) and what each index bone hits there.
+- `c4/topmap.mjs <field> <c2g> '<pose>' <gun y>`: an ascii map from above at one height (gun '#', the glove's bones by letter;
+  X0 X1 Z0 Z1 for the window). It showed the guard's length was the limit (a gloved index ~28 gun mm thick, 21-22 mm between
+  the blade's face and the guard's inner front): GT-20088b moved the revolver guard's front +8.
+- `c4/hhpose.py <export> r '<pose>'...`: a hand re-posed in place against the other glove as drawn (two-hand holds).
+- `c4/lights4.mjs <out> <guns>`: the real game in the cloud (Training Ground, first person, the arms), each gun at the hip in
+  the four lights (AG-295's recipe: the inspector's LIGHTS on the sun, sky and fill) and aimed at noon. Slow (software).
+- The twist: a turn about the hand's x (the grip channel) is undone where the twist is free (the revolver's firing hand: drawn y
+  = fit y) and carried where it is at its limit (the AA-12's: 0.6 rad). A roll about y or z changes x, and the free twist then
+  re-rolls a little (1.4 deg on the revolver): measure on a re-export, then move by translations only (they keep the twist).

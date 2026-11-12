@@ -1,0 +1,7 @@
+Error: UNKNOWN: unknown error, open 'C:\Users\Zero\Desktop\Tiny Trek\review\AG-310b\after-armory-bench.png'
+    at async open (node:internal/fs/promises:637:25)
+    at async Object.writeFile (node:internal/fs/promises:1239:14)
+    at async Page.screenshot (file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/cdp.mjs:183:5)
+    at async file:///C:/Users/Zero/Desktop/Tiny%20Trek/qa/2026-11-11-AG-310b/ag310b-verify.mjs:195:5
+    at async withFreshPage (file:///C:/Users/Zero/Desktop/Tiny%20Trek/qa/2026-11-11-AG-310b/ag310b-verify.mjs:86:12)
+    at async main (file:///C:/Users/Zero/Desktop/Tiny%20Trek/qa/2026-11-11-AG-310b/ag310b-verify.mjs:399:21)

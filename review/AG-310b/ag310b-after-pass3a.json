@@ -1,0 +1,2351 @@
+{
+  "card": "AG-310b",
+  "phase": "after",
+  "timestamp": "2026-11-12T00:23:45.971Z",
+  "runsCount": 1,
+  "visualsRuntimeErrors": [],
+  "visualsPageErrors": [],
+  "summaryByView": {
+    "1P": {
+      "allActionWorstFrameMs": 233.6,
+      "beforeWorstFrameMs": 166.6,
+      "allUnder50Ms": false,
+      "over50Count": 15,
+      "over50Actions": [
+        {
+          "id": "pistol",
+          "action": "open",
+          "ms": 149.8
+        },
+        {
+          "id": "pistol",
+          "action": "mod",
+          "ms": 50
+        },
+        {
+          "id": "uzi",
+          "action": "mod",
+          "ms": 66.7
+        },
+        {
+          "id": "shotgun",
+          "action": "open",
+          "ms": 50
+        },
+        {
+          "id": "shotgun",
+          "action": "mod",
+          "ms": 66.6
+        },
+        {
+          "id": "revolver",
+          "action": "mod",
+          "ms": 83.3
+        },
+        {
+          "id": "m4",
+          "action": "open",
+          "ms": 116.7
+        },
+        {
+          "id": "m4",
+          "action": "close",
+          "ms": 50
+        },
+        {
+          "id": "sniper",
+          "action": "open",
+          "ms": 50
+        },
+        {
+          "id": "launcher",
+          "action": "buy",
+          "ms": 233.6
+        },
+        {
+          "id": "launcher",
+          "action": "mod",
+          "ms": 66.6
+        },
+        {
+          "id": "minigun",
+          "action": "open",
+          "ms": 50.2
+        },
+        {
+          "id": "minigun",
+          "action": "mod",
+          "ms": 50.1
+        },
+        {
+          "id": "flamer",
+          "action": "open",
+          "ms": 67
+        },
+        {
+          "id": "flamer",
+          "action": "mod",
+          "ms": 100
+        }
+      ],
+      "cifMarineBootedInArmoryOnly": false,
+      "totalRuntimeErrors": 0,
+      "totalPageErrors": 0,
+      "items": [
+        {
+          "id": "pistol",
+          "kind": "gun",
+          "openWorstMs": 149.8,
+          "beforeOpenWorstMs": 16.8,
+          "buyWorstMs": null,
+          "beforeBuyWorstMs": null,
+          "modWorstMs": 50,
+          "beforeModWorstMs": 166.6,
+          "closeWorstMs": 16.9,
+          "beforeCloseWorstMs": 83.2
+        },
+        {
+          "id": "uzi",
+          "kind": "gun",
+          "openWorstMs": 33.4,
+          "beforeOpenWorstMs": 16.8,
+          "buyWorstMs": 16.8,
+          "beforeBuyWorstMs": 33.6,
+          "modWorstMs": 66.7,
+          "beforeModWorstMs": 16.7,
+          "closeWorstMs": 33.3,
+          "beforeCloseWorstMs": 16.8
+        },
+        {
+          "id": "shotgun",
+          "kind": "gun",
+          "openWorstMs": 50,
+          "beforeOpenWorstMs": 16.7,
+          "buyWorstMs": 16.9,
+          "beforeBuyWorstMs": 66.7,
+          "modWorstMs": 66.6,
+          "beforeModWorstMs": 16.7,
+          "closeWorstMs": 16.8,
+          "beforeCloseWorstMs": 33.4
+        },
+        {
+          "id": "revolver",
+          "kind": "gun",
+          "openWorstMs": 16.7,
+          "beforeOpenWorstMs": 16.7,
+          "buyWorstMs": 16.8,
+          "beforeBuyWorstMs": 133.3,
+          "modWorstMs": 83.3,
+          "beforeModWorstMs": 132.2,
+          "closeWorstMs": 16.8,
+          "beforeCloseWorstMs": 21.1
+        },
+        {
+          "id": "m4",
+          "kind": "gun",
+          "openWorstMs": 116.7,
+          "beforeOpenWorstMs": 33.3,
+          "buyWorstMs": 33.4,
+          "beforeBuyWorstMs": 50.1,
+          "modWorstMs": 49.9,
+          "beforeModWorstMs": 16.7,
+          "closeWorstMs": 50,
+          "beforeCloseWorstMs": 66.7
+        },
+        {
+          "id": "ak",
+          "kind": "gun",
+          "openWorstMs": 33.4,
+          "beforeOpenWorstMs": 16.8,
+          "buyWorstMs": 16.7,
+          "beforeBuyWorstMs": 16.7,
+          "modWorstMs": 16.7,
+          "beforeModWorstMs": 16.8,
+          "closeWorstMs": 33.4,
+          "beforeCloseWorstMs": 33.4
+        },
+        {
+          "id": "sniper",
+          "kind": "gun",
+          "openWorstMs": 50,
+          "beforeOpenWorstMs": 16.7,
+          "buyWorstMs": 33.3,
+          "beforeBuyWorstMs": 66.6,
+          "modWorstMs": 33.2,
+          "beforeModWorstMs": 16.8,
+          "closeWorstMs": 33.4,
+          "beforeCloseWorstMs": 116.7
+        },
+        {
+          "id": "launcher",
+          "kind": "gun",
+          "openWorstMs": 16.9,
+          "beforeOpenWorstMs": 16.8,
+          "buyWorstMs": 233.6,
+          "beforeBuyWorstMs": 66.7,
+          "modWorstMs": 66.6,
+          "beforeModWorstMs": 66.7,
+          "closeWorstMs": 33.5,
+          "beforeCloseWorstMs": 33.4
+        },
+        {
+          "id": "aa12",
+          "kind": "gun",
+          "openWorstMs": 33.4,
+          "beforeOpenWorstMs": 16.7,
+          "buyWorstMs": 16.7,
+          "beforeBuyWorstMs": 16.8,
+          "modWorstMs": 49.9,
+          "beforeModWorstMs": 16.7,
+          "closeWorstMs": 33.5,
+          "beforeCloseWorstMs": 23.5
+        },
+        {
+          "id": "minigun",
+          "kind": "gun",
+          "openWorstMs": 50.2,
+          "beforeOpenWorstMs": 16.8,
+          "buyWorstMs": 16.9,
+          "beforeBuyWorstMs": 16.8,
+          "modWorstMs": 50.1,
+          "beforeModWorstMs": 16.8,
+          "closeWorstMs": 16.8,
+          "beforeCloseWorstMs": 50
+        },
+        {
+          "id": "flamer",
+          "kind": "gun",
+          "openWorstMs": 67,
+          "beforeOpenWorstMs": 16.7,
+          "buyWorstMs": 16.7,
+          "beforeBuyWorstMs": 16.7,
+          "modWorstMs": 100,
+          "beforeModWorstMs": 16.7,
+          "closeWorstMs": 33.4,
+          "beforeCloseWorstMs": 26.2
+        },
+        {
+          "id": "chainsaw",
+          "kind": "gun",
+          "openWorstMs": 16.7,
+          "beforeOpenWorstMs": 16.8,
+          "buyWorstMs": 16.7,
+          "beforeBuyWorstMs": 50.1,
+          "modWorstMs": 16.7,
+          "beforeModWorstMs": 16.7,
+          "closeWorstMs": 33.4,
+          "beforeCloseWorstMs": 16.9
+        },
+        {
+          "id": "m240",
+          "kind": "build",
+          "openWorstMs": 16.7,
+          "beforeOpenWorstMs": 16.8,
+          "buyWorstMs": 16.7,
+          "beforeBuyWorstMs": 16.8,
+          "modWorstMs": 16.7,
+          "beforeModWorstMs": 16.8,
+          "closeWorstMs": 33.5,
+          "beforeCloseWorstMs": 16.9
+        },
+        {
+          "id": "mortar",
+          "kind": "build",
+          "openWorstMs": 33.4,
+          "beforeOpenWorstMs": 33.3,
+          "buyWorstMs": 16.7,
+          "beforeBuyWorstMs": 16.8,
+          "modWorstMs": 16.7,
+          "beforeModWorstMs": 33.3,
+          "closeWorstMs": 16.9,
+          "beforeCloseWorstMs": 66.6
+        }
+      ]
+    },
+    "3P": {
+      "allActionWorstFrameMs": 166.6,
+      "beforeWorstFrameMs": 433.4,
+      "allUnder50Ms": false,
+      "over50Count": 12,
+      "over50Actions": [
+        {
+          "id": "pistol",
+          "action": "open",
+          "ms": 166.6
+        },
+        {
+          "id": "pistol",
+          "action": "mod",
+          "ms": 50
+        },
+        {
+          "id": "pistol",
+          "action": "close",
+          "ms": 50
+        },
+        {
+          "id": "uzi",
+          "action": "mod",
+          "ms": 66.7
+        },
+        {
+          "id": "shotgun",
+          "action": "mod",
+          "ms": 50
+        },
+        {
+          "id": "revolver",
+          "action": "mod",
+          "ms": 83.3
+        },
+        {
+          "id": "revolver",
+          "action": "close",
+          "ms": 50.1
+        },
+        {
+          "id": "m4",
+          "action": "mod",
+          "ms": 50
+        },
+        {
+          "id": "ak",
+          "action": "mod",
+          "ms": 50.1
+        },
+        {
+          "id": "sniper",
+          "action": "mod",
+          "ms": 50
+        },
+        {
+          "id": "aa12",
+          "action": "mod",
+          "ms": 66.7
+        },
+        {
+          "id": "chainsaw",
+          "action": "mod",
+          "ms": 83.1
+        }
+      ],
+      "cifMarineBootedInArmoryOnly": false,
+      "totalRuntimeErrors": 0,
+      "totalPageErrors": 0,
+      "items": [
+        {
+          "id": "pistol",
+          "kind": "gun",
+          "openWorstMs": 166.6,
+          "beforeOpenWorstMs": 16.7,
+          "buyWorstMs": null,
+          "beforeBuyWorstMs": null,
+          "modWorstMs": 50,
+          "beforeModWorstMs": 183.2,
+          "closeWorstMs": 50,
+          "beforeCloseWorstMs": 100
+        },
+        {
+          "id": "uzi",
+          "kind": "gun",
+          "openWorstMs": 16.8,
+          "beforeOpenWorstMs": 16.7,
+          "buyWorstMs": 33.4,
+          "beforeBuyWorstMs": 33.3,
+          "modWorstMs": 66.7,
+          "beforeModWorstMs": 33.3,
+          "closeWorstMs": 16.9,
+          "beforeCloseWorstMs": 50.1
+        },
+        {
+          "id": "shotgun",
+          "kind": "gun",
+          "openWorstMs": 16.8,
+          "beforeOpenWorstMs": 50.1,
+          "buyWorstMs": 16.7,
+          "beforeBuyWorstMs": 66.7,
+          "modWorstMs": 50,
+          "beforeModWorstMs": 16.7,
+          "closeWorstMs": 17,
+          "beforeCloseWorstMs": 133.3
+        },
+        {
+          "id": "revolver",
+          "kind": "gun",
+          "openWorstMs": 20.8,
+          "beforeOpenWorstMs": 16.8,
+          "buyWorstMs": 33.5,
+          "beforeBuyWorstMs": 150,
+          "modWorstMs": 83.3,
+          "beforeModWorstMs": 133.4,
+          "closeWorstMs": 50.1,
+          "beforeCloseWorstMs": 133.3
+        },
+        {
+          "id": "m4",
+          "kind": "gun",
+          "openWorstMs": 33.4,
+          "beforeOpenWorstMs": 33.4,
+          "buyWorstMs": 33.3,
+          "beforeBuyWorstMs": 66.7,
+          "modWorstMs": 50,
+          "beforeModWorstMs": 16.8,
+          "closeWorstMs": 33.2,
+          "beforeCloseWorstMs": 33.4
+        },
+        {
+          "id": "ak",
+          "kind": "gun",
+          "openWorstMs": 33.3,
+          "beforeOpenWorstMs": 16.7,
+          "buyWorstMs": 16.9,
+          "beforeBuyWorstMs": 16.7,
+          "modWorstMs": 50.1,
+          "beforeModWorstMs": 16.7,
+          "closeWorstMs": 16.8,
+          "beforeCloseWorstMs": 20.5
+        },
+        {
+          "id": "sniper",
+          "kind": "gun",
+          "openWorstMs": 16.7,
+          "beforeOpenWorstMs": 17.4,
+          "buyWorstMs": 16.8,
+          "beforeBuyWorstMs": 83.2,
+          "modWorstMs": 50,
+          "beforeModWorstMs": 33.4,
+          "closeWorstMs": 16.9,
+          "beforeCloseWorstMs": 100
+        },
+        {
+          "id": "launcher",
+          "kind": "gun",
+          "openWorstMs": 16.8,
+          "beforeOpenWorstMs": 16.7,
+          "buyWorstMs": 16.8,
+          "beforeBuyWorstMs": 433.4,
+          "modWorstMs": 33.4,
+          "beforeModWorstMs": 22,
+          "closeWorstMs": 16.9,
+          "beforeCloseWorstMs": 33.2
+        },
+        {
+          "id": "aa12",
+          "kind": "gun",
+          "openWorstMs": 16.7,
+          "beforeOpenWorstMs": 33.4,
+          "buyWorstMs": 16.7,
+          "beforeBuyWorstMs": 16.7,
+          "modWorstMs": 66.7,
+          "beforeModWorstMs": 16.8,
+          "closeWorstMs": 16.8,
+          "beforeCloseWorstMs": 27.9
+        },
+        {
+          "id": "minigun",
+          "kind": "gun",
+          "openWorstMs": 16.7,
+          "beforeOpenWorstMs": 33.4,
+          "buyWorstMs": 16.8,
+          "beforeBuyWorstMs": 33.3,
+          "modWorstMs": 33.3,
+          "beforeModWorstMs": 16.8,
+          "closeWorstMs": 16.8,
+          "beforeCloseWorstMs": 49.9
+        },
+        {
+          "id": "flamer",
+          "kind": "gun",
+          "openWorstMs": 16.8,
+          "beforeOpenWorstMs": 16.7,
+          "buyWorstMs": 16.7,
+          "beforeBuyWorstMs": 33.2,
+          "modWorstMs": 33.3,
+          "beforeModWorstMs": 16.8,
+          "closeWorstMs": 16.9,
+          "beforeCloseWorstMs": 33.4
+        },
+        {
+          "id": "chainsaw",
+          "kind": "gun",
+          "openWorstMs": 19.4,
+          "beforeOpenWorstMs": 16.8,
+          "buyWorstMs": 33.4,
+          "beforeBuyWorstMs": 66.9,
+          "modWorstMs": 83.1,
+          "beforeModWorstMs": 33.4,
+          "closeWorstMs": 16.9,
+          "beforeCloseWorstMs": 16.9
+        },
+        {
+          "id": "m240",
+          "kind": "build",
+          "openWorstMs": 16.7,
+          "beforeOpenWorstMs": 16.8,
+          "buyWorstMs": 16.8,
+          "beforeBuyWorstMs": 16.8,
+          "modWorstMs": 16.7,
+          "beforeModWorstMs": 16.8,
+          "closeWorstMs": 33.3,
+          "beforeCloseWorstMs": 16.8
+        },
+        {
+          "id": "mortar",
+          "kind": "build",
+          "openWorstMs": 19,
+          "beforeOpenWorstMs": 16.8,
+          "buyWorstMs": 33.3,
+          "beforeBuyWorstMs": 17,
+          "modWorstMs": 16.8,
+          "beforeModWorstMs": 17.1,
+          "closeWorstMs": 33.6,
+          "beforeCloseWorstMs": 33.4
+        }
+      ]
+    }
+  },
+  "runs": [
+    {
+      "view": "1P",
+      "run": 1,
+      "runtimeErrors": [],
+      "pageErrors": [],
+      "diag": {
+        "inits": [
+          {
+            "tag": "400x200",
+            "ms": 162.9
+          }
+        ],
+        "renders": [
+          {
+            "tag": "main",
+            "ms": 22.7,
+            "at": 22785
+          },
+          {
+            "tag": "main",
+            "ms": 88,
+            "at": 28894.3
+          },
+          {
+            "tag": "main",
+            "ms": 1231.5,
+            "at": 28854.7
+          },
+          {
+            "tag": "main",
+            "ms": 1233.1,
+            "at": 28854.4
+          },
+          {
+            "tag": "main",
+            "ms": 35.2,
+            "at": 30218.2
+          },
+          {
+            "tag": "main",
+            "ms": 36.3,
+            "at": 30218
+          },
+          {
+            "tag": "400x200",
+            "ms": 243.2,
+            "at": 30465.5
+          },
+          {
+            "tag": "400x200",
+            "ms": 2.1,
+            "at": 31112.5
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.4,
+            "at": 31124.2
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.9,
+            "at": 31138.1
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.9,
+            "at": 31151.3
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.6,
+            "at": 31167.2
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.2,
+            "at": 31184
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.3,
+            "at": 31199.9
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.2,
+            "at": 31216.5
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.2,
+            "at": 31235.6
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.3,
+            "at": 31252.9
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.6,
+            "at": 31270.8
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.2,
+            "at": 31288.1
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.6,
+            "at": 31300.6
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.6,
+            "at": 31315.6
+          },
+          {
+            "tag": "400x200",
+            "ms": 16.3,
+            "at": 31335.7
+          },
+          {
+            "tag": "400x200",
+            "ms": 15.4,
+            "at": 31362.5
+          },
+          {
+            "tag": "400x200",
+            "ms": 2,
+            "at": 31386.5
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.8,
+            "at": 31400.7
+          },
+          {
+            "tag": "400x200",
+            "ms": 8.6,
+            "at": 31415.2
+          },
+          {
+            "tag": "400x200",
+            "ms": 8.8,
+            "at": 31432.1
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.1,
+            "at": 31447.7
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.2,
+            "at": 31464.3
+          },
+          {
+            "tag": "400x200",
+            "ms": 8.2,
+            "at": 31481.6
+          },
+          {
+            "tag": "400x200",
+            "ms": 8.8,
+            "at": 31498.5
+          },
+          {
+            "tag": "main",
+            "ms": 361.4,
+            "at": 31557
+          },
+          {
+            "tag": "main",
+            "ms": 362.8,
+            "at": 31556.9
+          },
+          {
+            "tag": "main",
+            "ms": 40.7,
+            "at": 32606
+          },
+          {
+            "tag": "main",
+            "ms": 41.8,
+            "at": 32605.8
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.1,
+            "at": 35238.7
+          },
+          {
+            "tag": "400x200",
+            "ms": 0.9,
+            "at": 35372
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.2,
+            "at": 36506.1
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.2,
+            "at": 36673.9
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.9,
+            "at": 37917.9
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.2,
+            "at": 38064.1
+          },
+          {
+            "tag": "400x200",
+            "ms": 24.8,
+            "at": 39157.9
+          },
+          {
+            "tag": "400x200",
+            "ms": 17.4,
+            "at": 39323.5
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.9,
+            "at": 40591
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.9,
+            "at": 40723.3
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.1,
+            "at": 41933.5
+          },
+          {
+            "tag": "400x200",
+            "ms": 1,
+            "at": 42056.8
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.8,
+            "at": 43255.4
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.6,
+            "at": 43389.4
+          },
+          {
+            "tag": "400x200",
+            "ms": 26.4,
+            "at": 44862.1
+          },
+          {
+            "tag": "400x200",
+            "ms": 9.9,
+            "at": 45020
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.9,
+            "at": 46180.5
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.3,
+            "at": 46336
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.4,
+            "at": 47512.7
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.5,
+            "at": 47653.1
+          },
+          {
+            "tag": "400x200",
+            "ms": 0.9,
+            "at": 48851.4
+          },
+          {
+            "tag": "400x200",
+            "ms": 0.9,
+            "at": 49021.5
+          },
+          {
+            "tag": "400x200",
+            "ms": 8,
+            "at": 50136.2
+          },
+          {
+            "tag": "400x200",
+            "ms": 8.9,
+            "at": 50269
+          }
+        ],
+        "toDataURLs": [
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.3
+          },
+          {
+            "size": "256x256",
+            "ms": 1.6
+          },
+          {
+            "size": "256x256",
+            "ms": 1.5
+          },
+          {
+            "size": "256x256",
+            "ms": 1.5
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.3
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.5
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.3
+          },
+          {
+            "size": "256x256",
+            "ms": 1.4
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.3
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.3
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.3
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          }
+        ],
+        "toBlobs": 48
+      },
+      "marineShadowBuilds": 2,
+      "cifMarineReadyDuringArmoryOnly": false,
+      "perItem": [
+        {
+          "id": "pistol",
+          "kind": "gun",
+          "openMs": 149.8,
+          "buyMs": null,
+          "modMs": 50,
+          "closeMs": 16.9,
+          "detail": {
+            "open": {
+              "worstFrameMs": 149.8,
+              "maxRafGapMs": 149.8,
+              "syncMs": 24.6
+            },
+            "buy": null,
+            "mod": {
+              "worstFrameMs": 50,
+              "maxRafGapMs": 50,
+              "syncMs": 12.6
+            },
+            "close": {
+              "worstFrameMs": 16.9,
+              "maxRafGapMs": 16.9,
+              "syncMs": 2
+            }
+          }
+        },
+        {
+          "id": "uzi",
+          "kind": "gun",
+          "openMs": 33.4,
+          "buyMs": 16.8,
+          "modMs": 66.7,
+          "closeMs": 33.3,
+          "detail": {
+            "open": {
+              "worstFrameMs": 33.4,
+              "maxRafGapMs": 33.4,
+              "syncMs": 8.4
+            },
+            "buy": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 4.1
+            },
+            "mod": {
+              "worstFrameMs": 66.7,
+              "maxRafGapMs": 66.7,
+              "syncMs": 5.4
+            },
+            "close": {
+              "worstFrameMs": 33.3,
+              "maxRafGapMs": 33.3,
+              "syncMs": 2.8
+            }
+          }
+        },
+        {
+          "id": "shotgun",
+          "kind": "gun",
+          "openMs": 50,
+          "buyMs": 16.9,
+          "modMs": 66.6,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 50,
+              "maxRafGapMs": 50,
+              "syncMs": 9.2
+            },
+            "buy": {
+              "worstFrameMs": 16.9,
+              "maxRafGapMs": 16.9,
+              "syncMs": 3
+            },
+            "mod": {
+              "worstFrameMs": 66.6,
+              "maxRafGapMs": 66.6,
+              "syncMs": 7
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 3.4
+            }
+          }
+        },
+        {
+          "id": "revolver",
+          "kind": "gun",
+          "openMs": 16.7,
+          "buyMs": 16.8,
+          "modMs": 83.3,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 8.7
+            },
+            "buy": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 2.5
+            },
+            "mod": {
+              "worstFrameMs": 83.3,
+              "maxRafGapMs": 83.3,
+              "syncMs": 10.2
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 3.2
+            }
+          }
+        },
+        {
+          "id": "m4",
+          "kind": "gun",
+          "openMs": 116.7,
+          "buyMs": 33.4,
+          "modMs": 49.9,
+          "closeMs": 50,
+          "detail": {
+            "open": {
+              "worstFrameMs": 116.7,
+              "maxRafGapMs": 116.7,
+              "syncMs": 11.4
+            },
+            "buy": {
+              "worstFrameMs": 33.4,
+              "maxRafGapMs": 33.4,
+              "syncMs": 2.8
+            },
+            "mod": {
+              "worstFrameMs": 49.9,
+              "maxRafGapMs": 49.9,
+              "syncMs": 4.9
+            },
+            "close": {
+              "worstFrameMs": 50,
+              "maxRafGapMs": 50,
+              "syncMs": 3.8
+            }
+          }
+        },
+        {
+          "id": "ak",
+          "kind": "gun",
+          "openMs": 33.4,
+          "buyMs": 16.7,
+          "modMs": 16.7,
+          "closeMs": 33.4,
+          "detail": {
+            "open": {
+              "worstFrameMs": 33.4,
+              "maxRafGapMs": 33.4,
+              "syncMs": 10.6
+            },
+            "buy": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 2.6
+            },
+            "mod": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 4.9
+            },
+            "close": {
+              "worstFrameMs": 33.4,
+              "maxRafGapMs": 33.4,
+              "syncMs": 4.6
+            }
+          }
+        },
+        {
+          "id": "sniper",
+          "kind": "gun",
+          "openMs": 50,
+          "buyMs": 33.3,
+          "modMs": 33.2,
+          "closeMs": 33.4,
+          "detail": {
+            "open": {
+              "worstFrameMs": 50,
+              "maxRafGapMs": 50,
+              "syncMs": 9.1
+            },
+            "buy": {
+              "worstFrameMs": 33.3,
+              "maxRafGapMs": 33.3,
+              "syncMs": 2.7
+            },
+            "mod": {
+              "worstFrameMs": 33.2,
+              "maxRafGapMs": 33.2,
+              "syncMs": 5.8
+            },
+            "close": {
+              "worstFrameMs": 33.4,
+              "maxRafGapMs": 33.4,
+              "syncMs": 4.4
+            }
+          }
+        },
+        {
+          "id": "launcher",
+          "kind": "gun",
+          "openMs": 16.9,
+          "buyMs": 233.6,
+          "modMs": 66.6,
+          "closeMs": 33.5,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.9,
+              "maxRafGapMs": 16.9,
+              "syncMs": 12.3
+            },
+            "buy": {
+              "worstFrameMs": 233.6,
+              "maxRafGapMs": 233.6,
+              "syncMs": 3.7
+            },
+            "mod": {
+              "worstFrameMs": 66.6,
+              "maxRafGapMs": 66.6,
+              "syncMs": 12
+            },
+            "close": {
+              "worstFrameMs": 33.5,
+              "maxRafGapMs": 33.5,
+              "syncMs": 4.7
+            }
+          }
+        },
+        {
+          "id": "aa12",
+          "kind": "gun",
+          "openMs": 33.4,
+          "buyMs": 16.7,
+          "modMs": 49.9,
+          "closeMs": 33.5,
+          "detail": {
+            "open": {
+              "worstFrameMs": 33.4,
+              "maxRafGapMs": 33.4,
+              "syncMs": 8.7
+            },
+            "buy": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 2.5
+            },
+            "mod": {
+              "worstFrameMs": 49.9,
+              "maxRafGapMs": 49.9,
+              "syncMs": 5.1
+            },
+            "close": {
+              "worstFrameMs": 33.5,
+              "maxRafGapMs": 33.5,
+              "syncMs": 4.7
+            }
+          }
+        },
+        {
+          "id": "minigun",
+          "kind": "gun",
+          "openMs": 50.2,
+          "buyMs": 16.9,
+          "modMs": 50.1,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 50.2,
+              "maxRafGapMs": 50.2,
+              "syncMs": 8.2
+            },
+            "buy": {
+              "worstFrameMs": 16.9,
+              "maxRafGapMs": 16.9,
+              "syncMs": 2.4
+            },
+            "mod": {
+              "worstFrameMs": 50.1,
+              "maxRafGapMs": 50.1,
+              "syncMs": 5.1
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 5
+            }
+          }
+        },
+        {
+          "id": "flamer",
+          "kind": "gun",
+          "openMs": 67,
+          "buyMs": 16.7,
+          "modMs": 100,
+          "closeMs": 33.4,
+          "detail": {
+            "open": {
+              "worstFrameMs": 67,
+              "maxRafGapMs": 67,
+              "syncMs": 9
+            },
+            "buy": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 3
+            },
+            "mod": {
+              "worstFrameMs": 100,
+              "maxRafGapMs": 100,
+              "syncMs": 6.8
+            },
+            "close": {
+              "worstFrameMs": 33.4,
+              "maxRafGapMs": 33.4,
+              "syncMs": 5.4
+            }
+          }
+        },
+        {
+          "id": "chainsaw",
+          "kind": "gun",
+          "openMs": 16.7,
+          "buyMs": 16.7,
+          "modMs": 16.7,
+          "closeMs": 33.4,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 8.7
+            },
+            "buy": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 2.8
+            },
+            "mod": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 5
+            },
+            "close": {
+              "worstFrameMs": 33.4,
+              "maxRafGapMs": 33.4,
+              "syncMs": 1.8
+            }
+          }
+        },
+        {
+          "id": "m240",
+          "kind": "build",
+          "openMs": 16.7,
+          "buyMs": 16.7,
+          "modMs": 16.7,
+          "closeMs": 33.5,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 10.9
+            },
+            "buy": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 2.5
+            },
+            "mod": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 3.1
+            },
+            "close": {
+              "worstFrameMs": 33.5,
+              "maxRafGapMs": 33.5,
+              "syncMs": 1.9
+            }
+          }
+        },
+        {
+          "id": "mortar",
+          "kind": "build",
+          "openMs": 33.4,
+          "buyMs": 16.7,
+          "modMs": 16.7,
+          "closeMs": 16.9,
+          "detail": {
+            "open": {
+              "worstFrameMs": 33.4,
+              "maxRafGapMs": 33.4,
+              "syncMs": 8.6
+            },
+            "buy": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 2.3
+            },
+            "mod": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 2.4
+            },
+            "close": {
+              "worstFrameMs": 16.9,
+              "maxRafGapMs": 16.9,
+              "syncMs": 1.8
+            }
+          }
+        }
+      ]
+    },
+    {
+      "view": "3P",
+      "run": 1,
+      "runtimeErrors": [],
+      "pageErrors": [],
+      "diag": {
+        "inits": [
+          {
+            "tag": "400x200",
+            "ms": 228.1
+          }
+        ],
+        "renders": [
+          {
+            "tag": "main",
+            "ms": 30,
+            "at": 19489.5
+          },
+          {
+            "tag": "main",
+            "ms": 126.7,
+            "at": 27592.6
+          },
+          {
+            "tag": "main",
+            "ms": 1624.5,
+            "at": 27531.1
+          },
+          {
+            "tag": "main",
+            "ms": 1626.4,
+            "at": 27530.8
+          },
+          {
+            "tag": "main",
+            "ms": 43.3,
+            "at": 29347
+          },
+          {
+            "tag": "main",
+            "ms": 44.9,
+            "at": 29346.8
+          },
+          {
+            "tag": "400x200",
+            "ms": 424.8,
+            "at": 29690.4
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.9,
+            "at": 30636.2
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.5,
+            "at": 30651.9
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.9,
+            "at": 30669.3
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.9,
+            "at": 30683.8
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.3,
+            "at": 30699
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.7,
+            "at": 30718
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.6,
+            "at": 30732.2
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.7,
+            "at": 30750.3
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.6,
+            "at": 30770.4
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.6,
+            "at": 30784.1
+          },
+          {
+            "tag": "400x200",
+            "ms": 3,
+            "at": 30805.5
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.7,
+            "at": 30824.3
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.5,
+            "at": 30833.4
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.9,
+            "at": 30848.6
+          },
+          {
+            "tag": "400x200",
+            "ms": 24.9,
+            "at": 30869.9
+          },
+          {
+            "tag": "400x200",
+            "ms": 25.8,
+            "at": 30907.4
+          },
+          {
+            "tag": "400x200",
+            "ms": 3,
+            "at": 30943.7
+          },
+          {
+            "tag": "400x200",
+            "ms": 2.9,
+            "at": 30955.1
+          },
+          {
+            "tag": "400x200",
+            "ms": 10.9,
+            "at": 30966.6
+          },
+          {
+            "tag": "400x200",
+            "ms": 14,
+            "at": 30985.4
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.2,
+            "at": 31004.2
+          },
+          {
+            "tag": "400x200",
+            "ms": 1,
+            "at": 31013.7
+          },
+          {
+            "tag": "400x200",
+            "ms": 8.1,
+            "at": 31031
+          },
+          {
+            "tag": "400x200",
+            "ms": 9.6,
+            "at": 31049.4
+          },
+          {
+            "tag": "main",
+            "ms": 574.9,
+            "at": 31113.3
+          },
+          {
+            "tag": "main",
+            "ms": 576.6,
+            "at": 31113.1
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.3,
+            "at": 35015.4
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.3,
+            "at": 35138.6
+          },
+          {
+            "tag": "400x200",
+            "ms": 2.1,
+            "at": 36324.7
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.7,
+            "at": 36462.6
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.4,
+            "at": 37556
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.6,
+            "at": 37679
+          },
+          {
+            "tag": "400x200",
+            "ms": 43.5,
+            "at": 39331.9
+          },
+          {
+            "tag": "400x200",
+            "ms": 22.8,
+            "at": 39475.5
+          },
+          {
+            "tag": "400x200",
+            "ms": 2.8,
+            "at": 40822.6
+          },
+          {
+            "tag": "400x200",
+            "ms": 2.7,
+            "at": 40941.7
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.5,
+            "at": 42093.7
+          },
+          {
+            "tag": "400x200",
+            "ms": 1,
+            "at": 42239.7
+          },
+          {
+            "tag": "400x200",
+            "ms": 2.2,
+            "at": 43328.1
+          },
+          {
+            "tag": "400x200",
+            "ms": 2.1,
+            "at": 43442.2
+          },
+          {
+            "tag": "400x200",
+            "ms": 12.9,
+            "at": 44555.1
+          },
+          {
+            "tag": "400x200",
+            "ms": 10.6,
+            "at": 44687.6
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.8,
+            "at": 45772.6
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.2,
+            "at": 45938.3
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.7,
+            "at": 47035.8
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.7,
+            "at": 47170.1
+          },
+          {
+            "tag": "400x200",
+            "ms": 0.9,
+            "at": 48249.6
+          },
+          {
+            "tag": "400x200",
+            "ms": 0.7,
+            "at": 48384.5
+          },
+          {
+            "tag": "400x200",
+            "ms": 13,
+            "at": 49556.5
+          },
+          {
+            "tag": "400x200",
+            "ms": 9.3,
+            "at": 49737.9
+          }
+        ],
+        "toDataURLs": [
+          {
+            "size": "256x256",
+            "ms": 2.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.6
+          },
+          {
+            "size": "256x256",
+            "ms": 1.5
+          },
+          {
+            "size": "256x256",
+            "ms": 2.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.4
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.6
+          },
+          {
+            "size": "256x256",
+            "ms": 1.4
+          },
+          {
+            "size": "256x256",
+            "ms": 1.5
+          },
+          {
+            "size": "256x256",
+            "ms": 1.3
+          },
+          {
+            "size": "256x256",
+            "ms": 2.5
+          },
+          {
+            "size": "256x256",
+            "ms": 1.4
+          },
+          {
+            "size": "256x256",
+            "ms": 1.4
+          },
+          {
+            "size": "256x256",
+            "ms": 1.7
+          },
+          {
+            "size": "256x256",
+            "ms": 1.6
+          },
+          {
+            "size": "256x256",
+            "ms": 1.4
+          },
+          {
+            "size": "256x256",
+            "ms": 1.4
+          },
+          {
+            "size": "256x256",
+            "ms": 1.3
+          },
+          {
+            "size": "256x256",
+            "ms": 1.4
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.4
+          },
+          {
+            "size": "256x256",
+            "ms": 1.6
+          },
+          {
+            "size": "256x256",
+            "ms": 1.4
+          },
+          {
+            "size": "256x256",
+            "ms": 1.4
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.4
+          },
+          {
+            "size": "256x256",
+            "ms": 1.4
+          },
+          {
+            "size": "256x256",
+            "ms": 1.4
+          },
+          {
+            "size": "256x256",
+            "ms": 1.5
+          },
+          {
+            "size": "256x256",
+            "ms": 1.5
+          },
+          {
+            "size": "256x256",
+            "ms": 1.4
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.6
+          },
+          {
+            "size": "256x256",
+            "ms": 1.3
+          },
+          {
+            "size": "256x256",
+            "ms": 1.4
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.4
+          },
+          {
+            "size": "256x256",
+            "ms": 1.7
+          },
+          {
+            "size": "256x256",
+            "ms": 1.4
+          },
+          {
+            "size": "256x256",
+            "ms": 1.5
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.3
+          },
+          {
+            "size": "256x256",
+            "ms": 1.5
+          },
+          {
+            "size": "256x256",
+            "ms": 1.5
+          },
+          {
+            "size": "256x256",
+            "ms": 1.5
+          }
+        ],
+        "toBlobs": 48
+      },
+      "marineShadowBuilds": 2,
+      "cifMarineReadyDuringArmoryOnly": false,
+      "perItem": [
+        {
+          "id": "pistol",
+          "kind": "gun",
+          "openMs": 166.6,
+          "buyMs": null,
+          "modMs": 50,
+          "closeMs": 50,
+          "detail": {
+            "open": {
+              "worstFrameMs": 166.6,
+              "maxRafGapMs": 166.6,
+              "syncMs": 30.3
+            },
+            "buy": null,
+            "mod": {
+              "worstFrameMs": 50,
+              "maxRafGapMs": 50,
+              "syncMs": 15.3
+            },
+            "close": {
+              "worstFrameMs": 50,
+              "maxRafGapMs": 50,
+              "syncMs": 3.1
+            }
+          }
+        },
+        {
+          "id": "uzi",
+          "kind": "gun",
+          "openMs": 16.8,
+          "buyMs": 33.4,
+          "modMs": 66.7,
+          "closeMs": 16.9,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 11.4
+            },
+            "buy": {
+              "worstFrameMs": 33.4,
+              "maxRafGapMs": 33.4,
+              "syncMs": 4.2
+            },
+            "mod": {
+              "worstFrameMs": 66.7,
+              "maxRafGapMs": 66.7,
+              "syncMs": 6.4
+            },
+            "close": {
+              "worstFrameMs": 16.9,
+              "maxRafGapMs": 16.9,
+              "syncMs": 3.6
+            }
+          }
+        },
+        {
+          "id": "shotgun",
+          "kind": "gun",
+          "openMs": 16.8,
+          "buyMs": 16.7,
+          "modMs": 50,
+          "closeMs": 17,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 11.4
+            },
+            "buy": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 3.8
+            },
+            "mod": {
+              "worstFrameMs": 50,
+              "maxRafGapMs": 50,
+              "syncMs": 7
+            },
+            "close": {
+              "worstFrameMs": 17,
+              "maxRafGapMs": 17,
+              "syncMs": 3.7
+            }
+          }
+        },
+        {
+          "id": "revolver",
+          "kind": "gun",
+          "openMs": 20.8,
+          "buyMs": 33.5,
+          "modMs": 83.3,
+          "closeMs": 50.1,
+          "detail": {
+            "open": {
+              "worstFrameMs": 20.8,
+              "maxRafGapMs": 20.8,
+              "syncMs": 12.6
+            },
+            "buy": {
+              "worstFrameMs": 33.5,
+              "maxRafGapMs": 33.5,
+              "syncMs": 3.1
+            },
+            "mod": {
+              "worstFrameMs": 83.3,
+              "maxRafGapMs": 83.3,
+              "syncMs": 15.8
+            },
+            "close": {
+              "worstFrameMs": 50.1,
+              "maxRafGapMs": 50.1,
+              "syncMs": 4.6
+            }
+          }
+        },
+        {
+          "id": "m4",
+          "kind": "gun",
+          "openMs": 33.4,
+          "buyMs": 33.3,
+          "modMs": 50,
+          "closeMs": 33.2,
+          "detail": {
+            "open": {
+              "worstFrameMs": 33.4,
+              "maxRafGapMs": 33.4,
+              "syncMs": 15.4
+            },
+            "buy": {
+              "worstFrameMs": 33.3,
+              "maxRafGapMs": 33.3,
+              "syncMs": 3.2
+            },
+            "mod": {
+              "worstFrameMs": 50,
+              "maxRafGapMs": 50,
+              "syncMs": 6.5
+            },
+            "close": {
+              "worstFrameMs": 33.2,
+              "maxRafGapMs": 33.2,
+              "syncMs": 5.1
+            }
+          }
+        },
+        {
+          "id": "ak",
+          "kind": "gun",
+          "openMs": 33.3,
+          "buyMs": 16.9,
+          "modMs": 50.1,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 33.3,
+              "maxRafGapMs": 33.3,
+              "syncMs": 12.5
+            },
+            "buy": {
+              "worstFrameMs": 16.9,
+              "maxRafGapMs": 16.9,
+              "syncMs": 4.1
+            },
+            "mod": {
+              "worstFrameMs": 50.1,
+              "maxRafGapMs": 50.1,
+              "syncMs": 5.2
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 5.2
+            }
+          }
+        },
+        {
+          "id": "sniper",
+          "kind": "gun",
+          "openMs": 16.7,
+          "buyMs": 16.8,
+          "modMs": 50,
+          "closeMs": 16.9,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 11.7
+            },
+            "buy": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 3.8
+            },
+            "mod": {
+              "worstFrameMs": 50,
+              "maxRafGapMs": 50,
+              "syncMs": 6.4
+            },
+            "close": {
+              "worstFrameMs": 16.9,
+              "maxRafGapMs": 16.9,
+              "syncMs": 4.9
+            }
+          }
+        },
+        {
+          "id": "launcher",
+          "kind": "gun",
+          "openMs": 16.8,
+          "buyMs": 16.8,
+          "modMs": 33.4,
+          "closeMs": 16.9,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 11.5
+            },
+            "buy": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 3.6
+            },
+            "mod": {
+              "worstFrameMs": 33.4,
+              "maxRafGapMs": 33.4,
+              "syncMs": 8.3
+            },
+            "close": {
+              "worstFrameMs": 16.9,
+              "maxRafGapMs": 16.9,
+              "syncMs": 6.5
+            }
+          }
+        },
+        {
+          "id": "aa12",
+          "kind": "gun",
+          "openMs": 16.7,
+          "buyMs": 16.7,
+          "modMs": 66.7,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 11
+            },
+            "buy": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 2.6
+            },
+            "mod": {
+              "worstFrameMs": 66.7,
+              "maxRafGapMs": 66.7,
+              "syncMs": 5.4
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 6
+            }
+          }
+        },
+        {
+          "id": "minigun",
+          "kind": "gun",
+          "openMs": 16.7,
+          "buyMs": 16.8,
+          "modMs": 33.3,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 10.7
+            },
+            "buy": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 3.2
+            },
+            "mod": {
+              "worstFrameMs": 33.3,
+              "maxRafGapMs": 33.3,
+              "syncMs": 6.8
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 6.1
+            }
+          }
+        },
+        {
+          "id": "flamer",
+          "kind": "gun",
+          "openMs": 16.8,
+          "buyMs": 16.7,
+          "modMs": 33.3,
+          "closeMs": 16.9,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 12.3
+            },
+            "buy": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 3.5
+            },
+            "mod": {
+              "worstFrameMs": 33.3,
+              "maxRafGapMs": 33.3,
+              "syncMs": 6.3
+            },
+            "close": {
+              "worstFrameMs": 16.9,
+              "maxRafGapMs": 16.9,
+              "syncMs": 5.8
+            }
+          }
+        },
+        {
+          "id": "chainsaw",
+          "kind": "gun",
+          "openMs": 19.4,
+          "buyMs": 33.4,
+          "modMs": 83.1,
+          "closeMs": 16.9,
+          "detail": {
+            "open": {
+              "worstFrameMs": 19.4,
+              "maxRafGapMs": 19.4,
+              "syncMs": 15.7
+            },
+            "buy": {
+              "worstFrameMs": 33.4,
+              "maxRafGapMs": 33.4,
+              "syncMs": 4.1
+            },
+            "mod": {
+              "worstFrameMs": 83.1,
+              "maxRafGapMs": 83.1,
+              "syncMs": 8.3
+            },
+            "close": {
+              "worstFrameMs": 16.9,
+              "maxRafGapMs": 16.9,
+              "syncMs": 2.7
+            }
+          }
+        },
+        {
+          "id": "m240",
+          "kind": "build",
+          "openMs": 16.7,
+          "buyMs": 16.8,
+          "modMs": 16.7,
+          "closeMs": 33.3,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 9.9
+            },
+            "buy": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 3.3
+            },
+            "mod": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 3.2
+            },
+            "close": {
+              "worstFrameMs": 33.3,
+              "maxRafGapMs": 33.3,
+              "syncMs": 2.4
+            }
+          }
+        },
+        {
+          "id": "mortar",
+          "kind": "build",
+          "openMs": 19,
+          "buyMs": 33.3,
+          "modMs": 16.8,
+          "closeMs": 33.6,
+          "detail": {
+            "open": {
+              "worstFrameMs": 19,
+              "maxRafGapMs": 19,
+              "syncMs": 16
+            },
+            "buy": {
+              "worstFrameMs": 33.3,
+              "maxRafGapMs": 33.3,
+              "syncMs": 2.6
+            },
+            "mod": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 2.9
+            },
+            "close": {
+              "worstFrameMs": 33.6,
+              "maxRafGapMs": 33.6,
+              "syncMs": 2.2
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

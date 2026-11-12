@@ -77,8 +77,16 @@
     }
     for (const w of [...Object.keys(RANGE), 'uzi-akimbo']) {
       const [gw, mode] = w.split('-'); const aki = mode === 'akimbo';
+      if (aki) {   // akimbo needs the pair in the loadout (pairInLoadout, since GP-20074): as t262's carryPair
+        const armory = T.armoryDbg && T.armoryDbg.ui() && T.armoryDbg.ui().armory;
+        if (armory) { for (let i = 0; i < 2; i++) if (armory.read().slots.secondary[i]) armory.stow('secondary', i);
+          if (gw !== 'pistol') { if (!armory.has(gw)) armory.buy({ id: gw, kind: gw, loaded: 0 }, { store: true }); armory.take(gw, 'secondary', 0); }
+          if (!armory.has(gw + ':second')) armory.buy({ id: gw + ':second', kind: gw, loaded: null }, { store: true });
+          armory.take(gw + ':second', 'secondary', gw === 'pistol' ? 0 : 1); } }
       if (!await take(gw)) { ok(false, gw + ': could not take it'); continue; }
       if (aki) { document.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyY', key: 'y', bubbles: true })); document.dispatchEvent(new KeyboardEvent('keyup', { code: 'KeyY', key: 'y', bubbles: true })); { const s0 = T.getSimTime(), w0 = Date.now(); while (T.getSimTime() - s0 < 1.5 && Date.now() - w0 < 15000) await wait(30); } }   // GB-188: game time
+      if (aki && !(T.offhandMeshes[gw] && T.offhandMeshes[gw].visible) && T.toggleDualWieldDbg) { T.toggleDualWieldDbg(); const s0 = T.getSimTime(), w0 = Date.now(); while (T.getSimTime() - s0 < 1.5 && Date.now() - w0 < 15000) await new Promise((r) => setTimeout(r, 50)); }
+      if (aki) ok(!!T.offhandMeshes[gw] && T.offhandMeshes[gw].visible, w + ': both guns in his hands (the pair carried)');
       const gun = T.weaponMeshes[gw], H = T.getShoulderDbg().holds[gw];
       marine.updateMatrixWorld(true);
       const pts = vertsOf(gun), b = bbox(pts), ws = gun.getWorldScale(V()).x / mScale;

@@ -1,0 +1,242 @@
+{
+  "hash": "42d1c1d6",
+  "originalRim": 12,
+  "maxOutlineError": 9.163277046864149e-10,
+  "frontZ": [
+    -0.2915428578853607,
+    -0.27345845103263855
+  ],
+  "samples": [
+    {
+      "degrees": -80,
+      "gap": {
+        "lowerMm": 0.03125,
+        "upperMm": 0.0390625
+      }
+    },
+    {
+      "degrees": -75,
+      "gap": {
+        "lowerMm": 0.0234375,
+        "upperMm": 0.03125
+      }
+    },
+    {
+      "degrees": -70,
+      "gap": {
+        "lowerMm": 0.03125,
+        "upperMm": 0.0390625
+      }
+    },
+    {
+      "degrees": -65,
+      "gap": {
+        "lowerMm": 0.03125,
+        "upperMm": 0.0390625
+      }
+    },
+    {
+      "degrees": -60,
+      "gap": {
+        "lowerMm": 0.0234375,
+        "upperMm": 0.03125
+      }
+    },
+    {
+      "degrees": -55,
+      "gap": {
+        "lowerMm": 0.03125,
+        "upperMm": 0.0390625
+      }
+    },
+    {
+      "degrees": -50,
+      "gap": {
+        "lowerMm": 0.0390625,
+        "upperMm": 0.046875
+      }
+    },
+    {
+      "degrees": -45,
+      "gap": {
+        "lowerMm": 0.03125,
+        "upperMm": 0.0390625
+      }
+    },
+    {
+      "degrees": -40,
+      "gap": {
+        "lowerMm": 0.0390625,
+        "upperMm": 0.046875
+      }
+    },
+    {
+      "degrees": -35,
+      "gap": {
+        "lowerMm": 0.03125,
+        "upperMm": 0.0390625
+      }
+    },
+    {
+      "degrees": -30,
+      "gap": {
+        "lowerMm": 0.0234375,
+        "upperMm": 0.03125
+      }
+    },
+    {
+      "degrees": -25,
+      "gap": {
+        "lowerMm": 0.03125,
+        "upperMm": 0.0390625
+      }
+    },
+    {
+      "degrees": -20,
+      "gap": {
+        "lowerMm": 0.03125,
+        "upperMm": 0.0390625
+      }
+    },
+    {
+      "degrees": -15,
+      "gap": {
+        "lowerMm": 0.0234375,
+        "upperMm": 0.03125
+      }
+    },
+    {
+      "degrees": -10,
+      "gap": {
+        "lowerMm": 0.03125,
+        "upperMm": 0.0390625
+      }
+    },
+    {
+      "degrees": -5,
+      "gap": {
+        "lowerMm": 0.0390625,
+        "upperMm": 0.046875
+      }
+    },
+    {
+      "degrees": 0,
+      "gap": {
+        "lowerMm": 0.03125,
+        "upperMm": 0.0390625
+      }
+    },
+    {
+      "degrees": 5,
+      "gap": {
+        "lowerMm": 0.0390625,
+        "upperMm": 0.046875
+      }
+    },
+    {
+      "degrees": 10,
+      "gap": {
+        "lowerMm": 0.03125,
+        "upperMm": 0.0390625
+      }
+    },
+    {
+      "degrees": 15,
+      "gap": {
+        "lowerMm": 0.0234375,
+        "upperMm": 0.03125
+      }
+    },
+    {
+      "degrees": 20,
+      "gap": {
+        "lowerMm": 0.03125,
+        "upperMm": 0.0390625
+      }
+    },
+    {
+      "degrees": 25,
+      "gap": {
+        "lowerMm": 0.03125,
+        "upperMm": 0.0390625
+      }
+    },
+    {
+      "degrees": 30,
+      "gap": {
+        "lowerMm": 0.0234375,
+        "upperMm": 0.03125
+      }
+    },
+    {
+      "degrees": 35,
+      "gap": {
+        "lowerMm": 0.03125,
+        "upperMm": 0.0390625
+      }
+    },
+    {
+      "degrees": 40,
+      "gap": {
+        "lowerMm": 0.0390625,
+        "upperMm": 0.046875
+      }
+    },
+    {
+      "degrees": 45,
+      "gap": {
+        "lowerMm": 0.03125,
+        "upperMm": 0.0390625
+      }
+    },
+    {
+      "degrees": 50,
+      "gap": {
+        "lowerMm": 0.0390625,
+        "upperMm": 0.046875
+      }
+    },
+    {
+      "degrees": 55,
+      "gap": {
+        "lowerMm": 0.03125,
+        "upperMm": 0.0390625
+      }
+    },
+    {
+      "degrees": 60,
+      "gap": {
+        "lowerMm": 0.0234375,
+        "upperMm": 0.03125
+      }
+    },
+    {
+      "degrees": 65,
+      "gap": {
+        "lowerMm": 0.03125,
+        "upperMm": 0.0390625
+      }
+    },
+    {
+      "degrees": 70,
+      "gap": {
+        "lowerMm": 0.03125,
+        "upperMm": 0.0390625
+      }
+    },
+    {
+      "degrees": 75,
+      "gap": {
+        "lowerMm": 0.0234375,
+        "upperMm": 0.03125
+      }
+    },
+    {
+      "degrees": 80,
+      "gap": {
+        "lowerMm": 0.03125,
+        "upperMm": 0.0390625
+      }
+    }
+  ]
+}

@@ -3,6 +3,8 @@
 // Millimetre-scale knurl teeth do not need the rounded box helper's subdivisions.
 // Same centre line as gripOutline. u runs down the grip, v+ is the front strap.
 import { gunDetail } from './gun-detail.js';
+import { fitCollarFaces, trimPanelBack } from './weapon-longarms.js';
+import { boxProjectUV } from '../core/geometry.js';
 import * as TSL from 'three/tsl';
 import { foldStatic } from '../world/bake.js';
 import { addArtworkInstances, addTriggerArtwork, bindModelArtwork, groupArtwork, optionalArtworkGroup } from './weapon-model-hooks.js';
@@ -501,9 +503,12 @@ export function makePistolModel(ctx) {
 // firing pin and a wide smooth trigger in a round guard; the walnut target grip with its border, checkered panels, a
 // plain medallion and the grip screw. The bore, the muzzle, the sight line (SIGHT.revolver's notch and post), the
 // grip's palm (VM_SOCKETS.revolver) and every part the reloads drive are where they were.
+const revolverRim = {rearScale:.88, frontScale:.86, rearBevel:.005, frontBevel:.007};
+
 function revolverCylinder(T, parent, mat, R, z0, z1, depth) {
   const p = [], uv = [], ix = [], n = 72;
-  const rings = [[z0, R * 0.88, 0], [z0 + 0.005, R, 0], [z0 + 0.013, R, 1], [z1 - 0.016, R, 1], [z1 - 0.007, R, 0], [z1, R * 0.86, 0]];
+  const rings = [[z0, R * revolverRim.rearScale, 0], [z0 + revolverRim.rearBevel, R, 0],
+    [z0 + .013, R, 1], [z1 - .016, R, 1], [z1 - revolverRim.frontBevel, R, 0], [z1, R * revolverRim.frontScale, 0]];
   for (const [z, r, fade] of rings) for (let j = 0; j <= n; j++) {
     const a = j / n * Math.PI * 2, radius = r - depth * fade * Math.max(0, Math.cos(6 * a)) ** 4;
     p.push(Math.cos(a) * radius, Math.sin(a) * radius, z); uv.push(j / n, (z - z0) / (z1 - z0));
@@ -601,12 +606,22 @@ export function makeRevolverModel(ctx) {
     [-.078857, .027886], [-.072, .032], [-.060, .020], [-.042, .005], [-.021, -.0010098]],
     .064, frameFinish, { bevel: .006, segs: 4 });
   K.lathe([[0, -.028], [.044, -.028], [.046, -.025], [.044, -.0205], [0, -.0205]], blued, { y: CY, z: 0, seg: 32 });   // the recoil shield behind the cylinder
+  // Only the two inward-facing edges follow the turning artwork. The end blocks keep their original joins.
+  function cylinderEdge(height, side) {
+    // At the start of the reload, the drum is still between these edges as it drops and moves forward.
+    const rear = CZ - CH, front = CZ + CH;
+    const inner = side > 0 ? CY + CR + .00015 : CY - CR - .0032;
+    return [[rear - .001, height], [rear + revolverRim.rearBevel - .001, inner],
+      [front - revolverRim.frontBevel + .008, inner], [front + .009, height]];
+  }
   // the top strap over the cylinder, from the rear sight to the barrel's frame
-  K.slab([[-.056, .1095], [-.044, .1145], [.064, .1145], [.074, .112], [.074, .0975], [-.044, .0975]], .036, frameFinish, { bevel: .003, segs: 3 });
+  K.slab([[-.056, .1095], [-.044, .1145], [.064, .1145], [.074, .112], [.074, .0975],
+    ...cylinderEdge(.0975, 1).reverse(), [-.044, .0975]], .036, frameFinish, { bevel: .003, segs: 3 });
   // the frame's front, round the barrel's shank, and its lug down to the crane's seat
   K.slab([[.059, .113], [.078, .112], [.093, .102], [.099, .089], [.099, .066], [.094, .052], [.086, .034], [.078, .018], [.066, .012], [.059, .012]], .056, frameFinish, { bevel: .009, segs: 4 });
   // the frame's bottom under the cylinder, from the recoil shield to the crane's seat
-  K.slab([[-.026, .017], [.072, .017], [.082, .011], [.080, .001], [.062, -.006], [.020, -.008], [-.012, -.007], [-.026, .002]], .060, frameFinish, { bevel: .006, segs: 3 });
+  K.slab([[-.026, .017], ...cylinderEdge(.017, -1), [.072, .017], [.082, .011], [.080, .001],
+    [.062, -.006], [.020, -.008], [-.012, -.007], [-.026, .002]], .060, frameFinish, { bevel: .006, segs: 3 });
   K.lathe([[0, .058], [.0105, .058], [.0145, .066], [.0145, .092], [0, .092]], blued, { y: BY, seg: 18 });   // the forcing cone in the gap
   // the crane on the gun's left (-x), at the window's front, and its screw
   K.slab([[.058, .040], [.072, .040], [.072, .012], [.058, .016]], .006, blued, { x: -.0305, bevel: .0015 });
@@ -657,7 +672,29 @@ export function makeRevolverModel(ctx) {
   K.disc(0.0118, gunRubber, 0, BY, 0.3325, 0, null, 14);   // the bore
 
   // --- Trigger guard (blued, a round loop into the grip's front) and the trigger (case-coloured, wide and smooth).
-  K.slab(gunBand([[.062, -.005], [.066, -.022], [.060, -.040], [.046, -.052], [.026, -.054], [.012, -.046], [.006, -.030], [.005, -.012]], .0058), .013, frameFinish, { bevel: .0035, segs: 3 });
+  const guard = K.slab(gunBand([[.062, -.005], [.066, -.022], [.060, -.040], [.046, -.052], [.026, -.054], [.012, -.046], [.006, -.030], [.005, -.012]], .0058), .013, frameFinish, { bevel: .0035, segs: 3 });
+  // Fit the game glove at the front of the loop, blending into the old rear and upper attachment.
+  {
+    const geometry = guard.geometry, {position, normal, uv} = geometry.attributes;
+    const clamp = value => Math.max(0, Math.min(1, value));
+    const ease = t => t * t * (3 - 2*t), n = new THREE.Vector3();
+    for (let i = 0; i < position.count; i++) {
+      const y = position.getY(i), z = position.getZ(i);
+      const front = clamp((z - .029) / .023), below = clamp((-.006 - y) / .010);
+      const f = ease(front), b = ease(below);
+      if (f * b === 0) continue;
+      position.setZ(i, z + .008 * f * b);
+      // Transform the existing smooth bevel normals by the same local deformation.
+      const dz = .008 * b * 6 * front * (1-front) / .023;
+      const dy = -.008 * f * 6 * below * (1-below) / .010;
+      if (dz || dy) {
+        n.fromBufferAttribute(normal,i); n.z /= 1+dz; n.y -= dy*n.z; n.normalize();
+        normal.setXYZ(i,n.x,n.y,n.z);
+      }
+    }
+    boxProjectUV(position.array,uv.array);
+    geometry.computeBoundingBox(); geometry.computeBoundingSphere();
+  }
   const trigger = K.group(0, -0.008, 0.036);
   trigger.name = 'revolver-trigger';
   const triggerProfile = [[.0420, -.0060], [.0360, -.0210], [.0350, -.0340], [.0385, -.0430], [.0450, -.0480], [.0420, -.0520], [.0330, -.0470], [.0255, -.0380], [.0250, -.0230], [.0300, -.0080]];
@@ -805,7 +842,8 @@ export function makeRevolverModel(ctx) {
   const hammer = K.group(0, 0.085, -0.08);
   K.slab([[0.013, -0.028], [0.015, -0.006], [0.012, 0.007], [0.005, 0.014], [-0.006, 0.018], [-0.020, 0.0190], [-0.030, 0.0185], [-0.038, 0.014],
     [-0.041, 0.007], [-0.036, 0.002], [-0.026, 0.003], [-0.016, 0.000], [-0.011, -0.010], [-0.008, -0.028]], 0.0135, caseCol, { bevel: 0.0035, segs: 3, parent: hammer });
-  K.slab([[-0.008, 0.016], [-0.038, 0.015], [-0.040, 0.008], [-0.010, 0.010]], 0.0175, caseCol, { bevel: 0.003, segs: 2, parent: hammer });   // the target spur, wider than the body
+  const spur = K.slab([[-.008,.016],[-.038,.015],[-.040,.008],[-.010,.010]], .0175, caseCol, { bevel: .003, segs: 2, parent: hammer });
+  fitCollarFaces(THREE, spur, .0135 / 2);
   for (let i = 0; i < 6; i++) K.box(0.016, 0.0012, 0.0013, gunDark, 0, 0.0164, -0.012 - i * 0.0048, 0, 0, 0, hammer);   // its checkering
   K.cyl(0.0019, 0.0019, 0.009, nickel, 0, 0.004, 0.019, hammer, 8, 'z');   // the firing pin
   gun.userData.hammer = hammer;
@@ -1083,8 +1121,11 @@ export function makeUziModel(ctx) {
   K.box(0.016, 0.006, 0.10, gunMid, 0, 0.093, 0.06, 0, 0, 0, null, 0.0004);   // bolt body visible in the slot
   gun.userData.ejectPort = [0.052, 0.030, 0.085];
   K.box(0.004, 0.030, 0.058, gunDark, 0.0492, 0.030, 0.085, 0, 0, 0, null, 0.0008);   // GB-316 (J25): right ejection port
-  K.box(0.002, 0.024, 0.050, gunRubber, 0.0506, 0.030, 0.085, 0, 0, 0, null, 0.0004);   // port interior
+  const portInterior = K.box(0.002, 0.024, 0.050, gunRubber, 0.0506, 0.030, 0.085, 0, 0, 0, null, 0.0004);
+  trimPanelBack(THREE, portInterior, 1, .0512);
   fitPortCarrier(gun, K, {x: 0.0517, y: 0.030, rear: 0.061, front: 0.109, height: 0.021}, gunMid, gunAccent);
+  // Only the exposed side of each moving strip is visible through this window.
+  for (const strip of gun.userData.recoilBoltParts) trimPanelBack(THREE, strip, 1, .0516);
   // Strap / sling loop at the rear of the receiver (yardstick).
   K.tor(0.010, 0.0022, loopSteel, 0, 0.022, -0.145, Math.PI / 2, 0, 0, null, Math.PI * 2, 14);   // GB-316 (J25): loop on the rear face
   K.box(0.018, 0.010, 0.008, gunMid, 0, 0.022, -0.136, 0, 0, 0, null, 0.001);   // loop mount seated on the butt

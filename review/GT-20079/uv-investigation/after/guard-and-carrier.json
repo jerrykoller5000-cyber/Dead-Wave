@@ -1,0 +1,36 @@
+{
+  "expectedGuardFaces": 140,
+  "copies": {
+    "world": {
+      "faces": 140,
+      "painted": 0
+    },
+    "eye": {
+      "faces": 140,
+      "painted": 0
+    },
+    "carry": {
+      "faces": 140,
+      "painted": 0
+    }
+  },
+  "factoryCarrier": [
+    [
+      5263957,
+      0.41,
+      0.54,
+      false,
+      false,
+      null
+    ],
+    [
+      7634565,
+      0.52,
+      0.4,
+      true,
+      false,
+      null
+    ]
+  ],
+  "exteriorMaterials": 15
+}

@@ -1,0 +1,11 @@
+check-players: 314 player.position reads, all in the allowed places
+           FAIL m4: sampled UVs match the gun-root 0.42 m box projection (72, bad 6)
+FAIL  t334    25 pass   1 fail  77.4s
+           recovering browser after t334: 1 fail
+
+1 checks: 25 pass, 1 fail
+
+by owner:
+  unassigned
+    t334   1 fail  FAIL m4: sampled UVs match the gun-root 0.42 m box projection (72, bad 6)
+           FAIL m4: sampled UVs match the gun-root 0.42 m box projection (72, bad 6)

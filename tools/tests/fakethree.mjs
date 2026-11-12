@@ -399,7 +399,7 @@ class LightBase extends Object3D {
   }
 }
 export class PointLight extends LightBase { constructor(...args) { super(...args); this.isPointLight = true; this.type = 'PointLight'; } }
-export class SpotLight extends LightBase { constructor(...args) { super(...args); this.isSpotLight = true; this.type = 'SpotLight'; } }
+export class SpotLight extends LightBase { constructor(color, intensity, distance, angle, penumbra, decay) { super(color, intensity, distance); if (angle !== undefined) this.angle = angle; if (penumbra !== undefined) this.penumbra = penumbra; if (decay !== undefined) this.decay = decay; this.isSpotLight = true; this.type = 'SpotLight'; } }   // AG-309b: the real constructor's angle, penumbra and decay (tag289 read penumbra 0)
 export class DirectionalLight extends LightBase { constructor(...args) { super(...args); this.isDirectionalLight = true; this.type = 'DirectionalLight'; } }
 export class HemisphereLight extends LightBase { constructor(a, b, i) { super(a, i); this.groundColor = new Color(b); } }
 export class AmbientLight extends LightBase {}
