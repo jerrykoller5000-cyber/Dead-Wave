@@ -1,0 +1,98 @@
+[
+  {
+    "binding": {
+      "barrel": "heatParts-barrel",
+      "suppressor": "suppressor"
+    },
+    "nodes": [
+      [
+        "heatParts-barrel",
+        "Mesh",
+        0,
+        null
+      ],
+      [
+        "suppressor",
+        "Group",
+        3,
+        null
+      ],
+      [
+        "heavyBarrelLook",
+        "Group",
+        5,
+        null
+      ]
+    ]
+  },
+  {
+    "binding": {
+      "barrel": "heatParts-barrel",
+      "suppressor": "suppressor"
+    },
+    "nodes": [
+      [
+        "heatParts-barrel",
+        "Mesh",
+        0,
+        null
+      ],
+      [
+        "suppressor",
+        "Group",
+        3,
+        null
+      ],
+      [
+        "heavyBarrelLook",
+        "Group",
+        5,
+        null
+      ]
+    ]
+  },
+  {
+    "nodes": [
+      [
+        "heatParts-barrel",
+        "Mesh",
+        0,
+        null
+      ],
+      [
+        "suppressor",
+        "Group",
+        3,
+        null
+      ],
+      [
+        "heavyBarrelLook",
+        "Group",
+        5,
+        null
+      ]
+    ]
+  },
+  {
+    "nodes": [
+      [
+        "heatParts-barrel",
+        "Mesh",
+        0,
+        null
+      ],
+      [
+        "suppressor",
+        "Group",
+        3,
+        null
+      ],
+      [
+        "heavyBarrelLook",
+        "Group",
+        5,
+        null
+      ]
+    ]
+  }
+]

@@ -1,13 +1,13 @@
 # ChatGPT
 
-state: blocked
-model: GPT-6
-task: GP-20111 Warm Armory panel and weapon mods; verify 1P/3P action frames and visuals
-touching: —
-since: 2026-11-12T02:15Z
-next: waits on GP-20111
-blocked-on: Strict <50ms 1P/3P RAF action and +0.5s Training budgets remain red; need Director threshold decision or loan of Armory rack prewarm/refresh sections for further work.
-last-report: handoffs/2026-11-12-chatgpt-GP-20111.md
+state: active
+model: GPT-6.1 Codex
+task: GP-20116 CB-311 close 5080 carry retake at Jerry's distance
+touching: review/GP-20116, handoffs/2026-11-12-chatgpt-GP-20116.md
+since: 2026-11-12T05:28Z
+next: GP-20110 (00:55Z, CLAUDE DIRECTOR: parts 1-2 accepted: entry console
+blocked-on: —
+last-report: handoffs/2026-11-12-chatgpt-GP-20110-part3.md
 
 ## Notes
 

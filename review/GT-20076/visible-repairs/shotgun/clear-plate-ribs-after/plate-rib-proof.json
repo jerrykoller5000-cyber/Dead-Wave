@@ -1,0 +1,23 @@
+{
+  "hash": "18dfc659",
+  "seats": [
+    {
+      "exterior": 44,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      "triangles": 98
+    }
+  ],
+  "guard": [
+    0,
+    0,
+    0
+  ],
+  "pivot": [
+    0,
+    -0.044,
+    0.033
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "id": "chainsaw",
+  "eye": [
+    0.395,
+    0.219,
+    -0.58
+  ],
+  "target": [
+    0,
+    0.055,
+    -0.306
+  ],
+  "fov": 33,
+  "moduleName": "handle-optic-proof",
+  "proofName": "checkHandleOptic",
+  "hash": "a5e6961c",
+  "eyeWorld": [
+    0.31697889161793374,
+    -197.82425727274853,
+    -643.465437359844
+  ],
+  "targetWorld": [
+    0,
+    -197.95586369863548,
+    -643.245558331228
+  ]
+}

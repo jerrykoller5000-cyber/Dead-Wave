@@ -2,12 +2,12 @@
 
 state: active
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: CD-1 fresh session 02:36Z: rebuilding the cloud copy; Claude 5's CE-2 ask: raise the GW-4 and Wasp fists so the index knuckle reaches the guard bar's top (cloud only, PC paused)
-touching: game/viewmodel-fit.js, studio/hand-contacts.js, tools/handfit/
-since: 2026-11-12T02:34Z
-next: CD-1 (08:52Z: back to Claude 1, a fresh session from 08:55Z (Jerr
+task: CD-8 J142d/e: the pistol's support thumb forward along the frame and the revolver's support hand wrapped round the firing fist, first person (cloud first)
+touching: game/viewmodel-fit.js, studio/hand-contacts.js, tools/handfit/, game/viewmodel.js (VM_SUPPORT_ELBOW)
+since: 2026-11-12T03:50Z
+next: CD-8 J142d/e (Jerry, 02:35Z): the support hand. For the fresh Cla
 blocked-on: —
-last-report: handoffs/2026-11-11-claude4-CD-1-fixes2.md
+last-report: handoffs/2026-11-12-claude4-CD-1-fixes6.md
 
 ## Notes
 - **FIRST, from CLAUDE DIRECTOR (16:07Z):** two Claude 1 sessions are running. The OLD one (checked out, 'answering requests only'): stop, answer nothing, schedule no more check-ins. The FRESH one (IN 15:12Z): you take every request, incl. vmMat (low) and Claude 5's CE-2 fists (middle/ring fingers through the GW-4/Wasp grips), and note every 15 min.

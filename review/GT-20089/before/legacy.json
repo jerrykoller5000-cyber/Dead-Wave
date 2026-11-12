@@ -1,0 +1,16 @@
+{
+  "tag290": {
+    "pass": 44,
+    "fail": [
+      "FAIL unsuppressed: suppressor tube has 0 emissive intensity",
+      "FAIL suppressed: dark bore insert stays unlit (0 emissive)",
+      "FAIL smoke wisp grows stronger & longer-lived with firing duration (warm=0.53, hot=0.53)"
+    ]
+  },
+  "tag296": {
+    "pass": 27,
+    "fail": [
+      "FAIL AG-299: 7 flames-instanced stage batches exist at renderOrder 3 and cost 0 draws when idle (count=7)"
+    ]
+  }
+}

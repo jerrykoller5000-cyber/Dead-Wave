@@ -51,7 +51,10 @@
     const wallRound = { prev: { x: tg.origin.x - 7, y: tg.floorY + 1, z: tg.origin.z - 5 }, pos: { x: tg.origin.x - 9, y: tg.floorY + 1, z: tg.origin.z - 5 }, hit: false };
     ok(D.round(wallRound) && wallRound.hit, 'the walls stop rounds');
     // --- he stays in the rooms
-    p.set(tg.origin.x + 20, tg.floorY, tg.origin.z); await wait(150);
+    p.set(tg.origin.x + 20, tg.floorY, tg.origin.z);
+    // CB-311 (t182 red 12 Nov): 0.3 s of game time, not 150 ms of wall clock: a slow page (the Training Ground under a busy
+    // slot, the cloud) ran no frame in 150 ms and he was still where he was put.
+    { const s0 = T.getSimTime(), w0 = Date.now(); while (T.getSimTime() - s0 < 0.3 && Date.now() - w0 < 20000) await wait(30); }
     ok(p.x < tg.origin.x + 8, 'he can\'t walk through the walls (' + (p.x - tg.origin.x).toFixed(2) + ')');
     // --- the HQ panel calls zombies in (CL-171, GP-155, GP-167): a five-second countdown with the security shutter down,
     // then they walk out of the dark tunnel behind the release gate into the build room and come for him.

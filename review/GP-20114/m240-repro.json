@@ -1,0 +1,205 @@
+{
+  "start": {
+    "player": [
+      0,
+      -200,
+      -640.6700000000001
+    ],
+    "hp": 100,
+    "wake": null,
+    "carrying": null,
+    "carriedVisible": true,
+    "fence": {
+      "raised": true,
+      "amount": 1,
+      "awaitExit": false
+    },
+    "placed": [],
+    "fuel": "at-pump",
+    "fuelSlow": 1,
+    "bed": {
+      "x": -40.25,
+      "z": -648.7,
+      "yaw": 0
+    },
+    "bay": {
+      "minX": -44,
+      "maxX": -36.300000000000004,
+      "minZ": -652,
+      "maxZ": -647.85,
+      "minY": -200,
+      "maxY": -197,
+      "exitFaces": [
+        "maxX",
+        "maxZ"
+      ]
+    },
+    "phase": "prep"
+  },
+  "shouldered": {
+    "player": [
+      -14,
+      -200,
+      -648
+    ],
+    "hp": 100,
+    "wake": null,
+    "carrying": {
+      "kind": "m240",
+      "hp": 120,
+      "belt": 500
+    },
+    "carriedVisible": true,
+    "fence": {
+      "raised": true,
+      "amount": 1,
+      "awaitExit": false
+    },
+    "placed": [],
+    "fuel": "at-pump",
+    "fuelSlow": 1,
+    "bed": {
+      "x": -40.25,
+      "z": -648.7,
+      "yaw": 0
+    },
+    "bay": {
+      "minX": -44,
+      "maxX": -36.300000000000004,
+      "minZ": -652,
+      "maxZ": -647.85,
+      "minY": -200,
+      "maxY": -197,
+      "exitFaces": [
+        "maxX",
+        "maxZ"
+      ]
+    },
+    "phase": "prep"
+  },
+  "downed": {
+    "player": [
+      -14,
+      -200,
+      -648
+    ],
+    "hp": 0,
+    "wake": "pending",
+    "carrying": {
+      "kind": "m240",
+      "hp": 120,
+      "belt": 500
+    },
+    "carriedVisible": true,
+    "fence": {
+      "raised": true,
+      "amount": 1,
+      "awaitExit": false
+    },
+    "placed": [],
+    "fuel": "at-pump",
+    "fuelSlow": 1,
+    "bed": {
+      "x": -40.25,
+      "z": -648.7,
+      "yaw": 0
+    },
+    "bay": {
+      "minX": -44,
+      "maxX": -36.300000000000004,
+      "minZ": -652,
+      "maxZ": -647.85,
+      "minY": -200,
+      "maxY": -197,
+      "exitFaces": [
+        "maxX",
+        "maxZ"
+      ]
+    },
+    "phase": "prep"
+  },
+  "recovered": {
+    "player": [
+      -40.25,
+      -200,
+      -648.7
+    ],
+    "hp": 100,
+    "wake": null,
+    "carrying": null,
+    "carriedVisible": false,
+    "fence": {
+      "raised": false,
+      "amount": 0,
+      "awaitExit": true
+    },
+    "placed": [
+      {
+        "hp": 120,
+        "belt": 500
+      }
+    ],
+    "fuel": "at-pump",
+    "fuelSlow": 1,
+    "bed": {
+      "x": -40.25,
+      "z": -648.7,
+      "yaw": 0
+    },
+    "bay": {
+      "minX": -44,
+      "maxX": -36.300000000000004,
+      "minZ": -652,
+      "maxZ": -647.85,
+      "minY": -200,
+      "maxY": -197,
+      "exitFaces": [
+        "maxX",
+        "maxZ"
+      ]
+    },
+    "phase": "prep"
+  },
+  "walked": {
+    "player": [
+      -40.25,
+      -200,
+      -634.6959069512809
+    ],
+    "hp": 100,
+    "wake": null,
+    "carrying": null,
+    "carriedVisible": false,
+    "fence": {
+      "raised": true,
+      "amount": 1,
+      "awaitExit": false
+    },
+    "placed": [
+      {
+        "hp": 120,
+        "belt": 500
+      }
+    ],
+    "fuel": "at-pump",
+    "fuelSlow": 1,
+    "bed": {
+      "x": -40.25,
+      "z": -648.7,
+      "yaw": 0
+    },
+    "bay": {
+      "minX": -44,
+      "maxX": -36.300000000000004,
+      "minZ": -652,
+      "maxZ": -647.85,
+      "minY": -200,
+      "maxY": -197,
+      "exitFaces": [
+        "maxX",
+        "maxZ"
+      ]
+    },
+    "phase": "prep"
+  }
+}

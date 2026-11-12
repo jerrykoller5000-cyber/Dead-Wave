@@ -4,6 +4,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {launch} from '../../tools/cdp.mjs';
 import {serve} from '../../tools/serve.mjs';
+import {originalDrumOptic} from './replay-artwork.mjs';
 
 assert(process.env.DW_GAME_TEST_TOKEN,'Use crew slot run');
 const root=fileURLToPath(new URL('../../',import.meta.url));
@@ -15,6 +16,11 @@ const server=await serve(root,0);
 const browser=await launch({headless:false});
 try {
   const p=await browser.newPage({width:960,height:540});
+  let verifyOriginal;
+  if(process.argv.includes('--original-drum-optic')){
+    assert.equal(phase,'catalog-fix-drum-optic-original');
+    verifyOriginal=await originalDrumOptic(p,server.origin);
+  }
   await p.goto(server.origin+'/index.html?debug=1&raf=timer');
   assert(await p.waitFor('window.TT && DWLoad.snapshot().state==="ready"'));
   await p.evaluate('window.DWOpening?.dismissForTesting?.()');
@@ -25,6 +31,11 @@ try {
   const lines=await p.evaluate(code,480000);
   const data=await p.evaluate('window.weaponSeatAudit');
   const slings=await p.evaluate('window.weaponSlingAudit');
+  if(verifyOriginal){
+    verifyOriginal();
+    const original=JSON.parse(await fs.readFile(path.join(root,'review/GT-20076/catalog-fix-gw4-trigger-fit/audit.json'),'utf8'));
+    for(const id of ['aa12','m4'])assert.equal(data[id].artworkFingerprint,original[id].artworkFingerprint);
+  }
   if(observe)await fs.writeFile(path.join(out,'source-visibility.json'),JSON.stringify(await p.evaluate('window.visibilityTrace'),null,2)+'\n');
   await fs.writeFile(path.join(out,'slings.json'),JSON.stringify(slings,null,2)+'\n');
   await fs.writeFile(path.join(out,'audit.json'),JSON.stringify(data,null,2)+'\n');

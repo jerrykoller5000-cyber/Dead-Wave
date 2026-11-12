@@ -252,13 +252,52 @@ function acog(root) {
   return { eye: [0, 0.057, -0.095], dot: [0, 0.057, 0.082], topEye: [0, topSight.eye[1] + 0.100, topSight.eye[2] - 0.033], topDot: [0, topSight.dot[1] + 0.100, topSight.dot[2] - 0.033] };
 }
 
+// The side plate has a narrow outer lip alongside the bridge. The inside edge
+// sits below it. Keep the original box projection on the painted exterior.
+function scopeSidePlate(root, side) {
+  const outline = [[-.0015,-.006],[.0015,-.006],[.0015,.006],[.001,.006],[.001,.004],[-.0015,.004]];
+  const vertices = [];
+  const triangle = (a, b, c) => vertices.push(...a, ...(side > 0 ? b : c), ...(side > 0 ? c : b));
+  const end = z => outline.map(([x,y]) => [side * x, y, z]);
+  const front = end(.0605), back = end(-.0605);
+  // Split at the inside corner of the L. A diagonal across both legs passes
+  // straight through that vertex and leaves an open T-junction on each end.
+  for (const [a,b,c] of [[0,1,4],[0,4,5],[1,2,4],[2,3,4]]) {
+    triangle(front[a], front[b], front[c]);
+    triangle(back[c], back[b], back[a]);
+  }
+  for (let i = 0; i < outline.length; i++) {
+    const j = (i + 1) % outline.length;
+    triangle(back[i], back[j], front[j]);
+    triangle(back[i], front[j], front[i]);
+  }
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+  geometry.computeVertexNormals();
+  const {position, normal} = geometry.attributes;
+  const uv = new THREE.Float32BufferAttribute(new Float32Array(position.count * 2), 2);
+  geometry.setAttribute('uv', uv);
+  for (let i = 0; i < position.count; i++) {
+    const x = position.getX(i) / .003, y = position.getY(i) / .012, z = position.getZ(i) / .121;
+    const nx = normal.getX(i), ny = normal.getY(i), nz = normal.getZ(i);
+    if (Math.abs(nx) > .5) uv.setXY(i, .5 - nx*z, .5 + y);
+    else if (Math.abs(ny) > .5) uv.setXY(i, .5 + x, .5 - ny*z);
+    else uv.setXY(i, .5 + nz*x, .5 + y);
+  }
+  const plate = new THREE.Mesh(geometry, alloy);
+  plate.name = 'rail clamp jaw';
+  plate.position.set(side * .020, .007, 0);
+  plate.castShadow = plate.receiveShadow = true;
+  root.add(plate);
+}
+
 // 4-32x50 NX8: 340 mm, 30 mm tube, 59 mm objective, exposed ZeroStop and side parallax control.
 function nx8(root) {
   const graphite = new THREE.MeshStandardMaterial({color: 0x424a4f, metalness: .24, roughness: .52});
   // On the issued rifle the root is the rail centre. The teeth rise 11 mm above it.
   beveledBox(root, 'scope rail bridge', paint, [0.042, 0.006, 0.132], [0, 0.014, 0]);
   for (const side of [-1,1]) {
-    box(root, 'rail clamp jaw', alloy, [0.003, 0.012, 0.121], [side * 0.020, 0.007, 0]);
+    scopeSidePlate(root, side);
   }
   for (const z of [-0.052, 0.052]) {
     cradle(root, 'scope ring saddle', 0.019, 0.054, 0.017, z, 0.012);

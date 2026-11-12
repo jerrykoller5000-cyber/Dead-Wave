@@ -7,7 +7,7 @@ import { launch } from '../../tools/cdp.mjs';
 if (!process.env.DW_GAME_TEST_TOKEN) throw Error('Run through crew game-test slot');
 const root = path.resolve(fileURLToPath(new URL('../..', import.meta.url)));
 const out = path.join(root, 'review/GP-20110');
-const phase = ['before', 'after', 'final'].includes(process.argv[2]) ? process.argv[2] : 'before';
+const phase = ['before', 'after', 'final', 'part3-before', 'part3-after'].includes(process.argv[2]) ? process.argv[2] : 'before';
 const server = await serve(root, 0);
 const browser = await launch({ headless: false, args: ['--window-size=1280,720'] });
 const coreFile = fs.readFileSync(path.join(root, 'vendor/three/three.core.js'), 'utf8');
@@ -65,7 +65,7 @@ try {
   if (!await page.waitFor('TT.trainingDbg.state().active', { timeout: 90000 })) throw Error('Training not active');
   if (!await page.waitFor('!document.getElementById("trainingBlackout")?.classList.contains("on")', { timeout: 20000 })) throw Error('blackout stuck');
   await page.screenshot(path.join(out, `${phase}-entry.png`));
-  await new Promise(r => setTimeout(r, phase === 'final' ? 60000 : 10000));
+  await new Promise(r => setTimeout(r, phase === 'final' || phase.startsWith('part3-') ? 60000 : 10000));
   report.console = page.console.filter(c => ['error', 'warning', 'warn'].includes(c.type));
   report.stacks = await page.evaluate('window.__warnStacks || []');
   report.inventory = await page.evaluate(`(() => {

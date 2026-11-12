@@ -1470,7 +1470,7 @@ export function createViewmodel(ctx) {
       // J118: a double action's finger follows its trigger (the model's doubleActionPose turns it through the pull and the
       // reset, actionCycle above): TR.follow is the trigger's turn at full travel
       if (TR.follow && gun.trigger) S.trig = clamp(gun.trigger.rotation.x / TR.follow, 0, 1);
-      const k = smooth(S.trig), f = (_trigPose = copyPose(gripP, _trigPose)).f[0];
+      const k = TR.follow ? S.trig : smooth(S.trig), f = (_trigPose = copyPose(gripP, _trigPose)).f[0];   // a following finger keeps to its trigger's own travel
       for (let j = 0; j < 4; j++) f[j] = TR.rest[j] + (TR.pull[j] - TR.rest[j]) * k;
       poseR = _trigPose; trigOn = true; info.trigger = k;
       const tp = gun.ctrls[TR.part || 'trigger'];
@@ -1848,6 +1848,10 @@ export function createViewmodel(ctx) {
     return pointWorld(g?.src.userData.muzzleLocal, out, which);
   }
   function showing(key) { return info.active && !!gun && gun.key === key && S.raise > 0.5; }
+  // CE-7 (J144c): the laser's and the light's line: null when the view isn't on this gun (third person: the body's gun);
+  // true while the view gun is drawn at any raise (a swap or a reload dips it); false while it is put away for a blade
+  // swing or the empty hands (not drawn: no line). which 2: the pair's left gun.
+  function holding(key, which = 1) { const g = which === 2 ? gun2 : gun; if (!info.active || !gun || gun.key !== key || !g) return null; return !!g.root.visible; }
   // CC-342 (J109): where a red dot's dot is drawn (ndc, the screen's centre 0, 0; y up): along the optic's own line from the
   // view gun's dot (its RMR, or the ACOG's RMR on top), so it rides the gun's kick and sway as the window round it does.
   // null without a fitted optic's line.
@@ -1991,7 +1995,7 @@ export function createViewmodel(ctx) {
     if (root.parent) root.parent.remove(root);
   }
   return {
-    root, space, update, place, muzzleWorld, pointWorld, showing, viewPoint, ndc, dispose, prepareWarmup, warmBgGun, info, opticDotOffset /* CC-342 */, retune: () => { sockets.key = null; for (const k in sockCache) delete sockCache[k]; },
+    root, space, update, place, muzzleWorld, pointWorld, showing, holding, viewPoint, ndc, dispose, prepareWarmup, warmBgGun, info, opticDotOffset /* CC-342 */, retune: () => { sockets.key = null; for (const k in sockCache) delete sockCache[k]; },
     // CL-293: the view's turn for this shot's spring (radians: p up, y left); 0 unless the view gun is up.
     // CL-327: how far the view gun is turned off its rest pose (the sway, the kick, the sprint's carry, a reload, the
     // raise), in the eye's space (the mirror undone), for the laser's and the light's line. which 2: the pair's left gun.

@@ -1,15 +1,21 @@
 # Claude 3
 
-state: idle
+state: active
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: —
-touching: —
-since: 2026-11-12T02:35Z
-next: CC-343 (15:06Z: Jerry OK'd fresh sessions (15:03Z): back to Claude 
+task: CC-343 part 3: stairs crouch-walk up, deck edge crouched, step tuned to treads at half speed (J141)
+touching: index.html (legs + CROUCH/FOOT), studio/marine-body.js, studio/marine-turn.js
+since: 2026-11-12T03:21Z
+next: CC-343 (15:06Z: Jerry OK'd fresh sessions (15:03Z): back to Claude
 blocked-on: —
 last-report: handoffs/2026-11-12-claude3-CC-343f.md
 
 ## Notes
+
+### Session 8: context nearly full, needs a new session (03:12Z)
+- Fresh session: build a NEW cloud copy (the PC now has CB-310 STAIR_SPEED_SCALE 0.5 and my CC-343f guard), then
+  (1) the crouch-walk-up 18.5-20 mm red: the clampBodyPose (CB-291) hip-flex suspect (see below); (2) the stairs step
+  tuned to the treads at half speed, tcc343b at walk and sprint, a side filmstrip for Jerry; (3) the kit's J128 measure.
+- Claude 2 FYI (requests.md 14616): with CB-310 alone tcc343b stays 30/7 (values moved); mine was measured without it.
 
 ### Where things stand (12 Nov 02:40Z, session 8, Opus 5.5)
 - LANDED 00:54Z tcc341's last red (handoffs/2026-11-12-claude3-CC-343e.md): tcc341 16/0.

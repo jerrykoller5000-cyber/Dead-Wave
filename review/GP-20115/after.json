@@ -1,0 +1,17 @@
+{
+  "drawn": {
+    "phase": "ready",
+    "audio": true,
+    "hud": "Gas 60 / 60 · Running",
+    "weapon": "chainsaw",
+    "unarmed": false
+  },
+  "stopped": {
+    "phase": "off",
+    "audio": false,
+    "hud": "Gas 60 / 60",
+    "weapon": "chainsaw",
+    "unarmed": true
+  },
+  "pageErrors": []
+}

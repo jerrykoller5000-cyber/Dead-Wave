@@ -1,0 +1,1065 @@
+{
+  "sources": {
+    "/index.html": "f3de62327cff6665c6bef3ca4aa36875b8b2357b176f43bf9c1a30c75868317f",
+    "/studio/weapon-longarms.js": "8fee0eec0cd03da259ce33287e618b9558565943d2ccbf047f7871f2bcbda43f",
+    "/ui/weapon-sling.js": "5b652c5c7866d241a555378ef07fcf846dcbfd90b86e828121cd1e1eac8c97a1",
+    "/ui/marine-kit-fit.js": "efda9a23b24009a4a06cbe6126386d3753adfad572b286b58b2cff84821870db",
+    "/tools/tests/weapon-seating.js": "3d6267b403c14c5358b134c4d4106bfa2001c75aec0aa7aeca0b9070d42dcde5"
+  },
+  "before": {
+    "modelHash": "52f54c0a",
+    "fits": [
+      {
+        "seed": 17,
+        "vest": false,
+        "slot": 1,
+        "webHash": "cb839e50",
+        "audit": {
+          "ends": [
+            {
+              "gunGapMm": 0.01,
+              "gunContact": true,
+              "webContact": true
+            },
+            {
+              "gunGapMm": 0.01,
+              "gunContact": true,
+              "webContact": true
+            }
+          ],
+          "overlaps": [],
+          "nearWeb": false
+        },
+        "detail": {
+          "raw": [],
+          "witness": [
+            0.26409,
+            0.96465,
+            -0.11547
+          ],
+          "local": [
+            -0.1048971139773619,
+            -0.09609881137651505,
+            -0.09050858946615836
+          ],
+          "nearest": [
+            {
+              "label": "root/TorusGeometry[2]",
+              "closed": true,
+              "gapMm": 15.596283831682817,
+              "winding": -3.709956903833855e-19
+            },
+            {
+              "label": "root/CylinderGeometry[1]",
+              "closed": true,
+              "gapMm": 17.644723361140912,
+              "winding": 8.627806753101988e-18
+            },
+            {
+              "label": "root/BufferGeometry[0]",
+              "closed": true,
+              "gapMm": 18.993738488942597,
+              "winding": -3.9532610542713306e-17
+            }
+          ],
+          "inside": []
+        },
+        "suspectBox": [
+          [
+            -0.1550000011920929,
+            -0.4150000011920929,
+            -0.014999997615814387
+          ],
+          [
+            0.15500000119209295,
+            -0.10499999880790711,
+            0.11499999761581425
+          ]
+        ]
+      },
+      {
+        "seed": 17,
+        "vest": false,
+        "slot": 2,
+        "webHash": "bf26e45d",
+        "audit": {
+          "ends": [
+            {
+              "gunGapMm": 0.01,
+              "gunContact": true,
+              "webContact": true
+            },
+            {
+              "gunGapMm": 0.01,
+              "gunContact": true,
+              "webContact": true
+            }
+          ],
+          "overlaps": [],
+          "nearWeb": false
+        },
+        "detail": {
+          "raw": []
+        },
+        "suspectBox": [
+          [
+            -0.1550000011920929,
+            -0.4150000011920929,
+            -0.014999997615814387
+          ],
+          [
+            0.15500000119209295,
+            -0.10499999880790711,
+            0.11499999761581448
+          ]
+        ]
+      },
+      {
+        "seed": 17,
+        "vest": true,
+        "slot": 1,
+        "webHash": "c3b5bf0c",
+        "audit": {
+          "ends": [
+            {
+              "gunGapMm": 0.01,
+              "gunContact": true,
+              "webContact": true
+            },
+            {
+              "gunGapMm": 0.01,
+              "gunContact": true,
+              "webContact": true
+            }
+          ],
+          "overlaps": [],
+          "nearWeb": false
+        },
+        "detail": {
+          "raw": [],
+          "witness": [
+            0.26382,
+            0.96727,
+            -0.11607
+          ],
+          "local": [
+            -0.10567866693886371,
+            -0.09529267711725578,
+            -0.08705721117946164
+          ],
+          "nearest": [
+            {
+              "label": "root/TorusGeometry[2]",
+              "closed": true,
+              "gapMm": 13.064443161537469,
+              "winding": 5.832397365096944e-18
+            },
+            {
+              "label": "root/CylinderGeometry[1]",
+              "closed": true,
+              "gapMm": 15.183656678166548,
+              "winding": 3.913573143207062e-17
+            },
+            {
+              "label": "root/BufferGeometry[0]",
+              "closed": true,
+              "gapMm": 16.42857676877107,
+              "winding": 2.962788839015223e-17
+            }
+          ],
+          "inside": []
+        },
+        "suspectBox": [
+          [
+            -0.1550000011920929,
+            -0.4150000011920929,
+            -0.014999997615814387
+          ],
+          [
+            0.15500000119209295,
+            -0.10499999880790711,
+            0.11499999761581425
+          ]
+        ]
+      },
+      {
+        "seed": 17,
+        "vest": true,
+        "slot": 2,
+        "webHash": "3e9da2ce",
+        "audit": {
+          "ends": [
+            {
+              "gunGapMm": 0.01,
+              "gunContact": true,
+              "webContact": true
+            },
+            {
+              "gunGapMm": 0.01,
+              "gunContact": true,
+              "webContact": true
+            }
+          ],
+          "overlaps": [],
+          "nearWeb": false
+        },
+        "detail": {
+          "raw": []
+        },
+        "suspectBox": [
+          [
+            -0.1550000011920929,
+            -0.4150000011920929,
+            -0.014999997615814387
+          ],
+          [
+            0.15500000119209295,
+            -0.10499999880790711,
+            0.11499999761581448
+          ]
+        ]
+      },
+      {
+        "seed": 311,
+        "vest": false,
+        "slot": 1,
+        "webHash": "cb839e50",
+        "audit": {
+          "ends": [
+            {
+              "gunGapMm": 0.01,
+              "gunContact": true,
+              "webContact": true
+            },
+            {
+              "gunGapMm": 0.01,
+              "gunContact": true,
+              "webContact": true
+            }
+          ],
+          "overlaps": [],
+          "nearWeb": false
+        },
+        "detail": null,
+        "suspectBox": [
+          [
+            -0.1550000011920929,
+            -0.4150000011920929,
+            -0.014999997615814387
+          ],
+          [
+            0.15500000119209295,
+            -0.10499999880790711,
+            0.11499999761581425
+          ]
+        ]
+      },
+      {
+        "seed": 311,
+        "vest": false,
+        "slot": 2,
+        "webHash": "bf26e45d",
+        "audit": {
+          "ends": [
+            {
+              "gunGapMm": 0.01,
+              "gunContact": true,
+              "webContact": true
+            },
+            {
+              "gunGapMm": 0.01,
+              "gunContact": true,
+              "webContact": true
+            }
+          ],
+          "overlaps": [],
+          "nearWeb": false
+        },
+        "detail": null,
+        "suspectBox": [
+          [
+            -0.1550000011920929,
+            -0.4150000011920929,
+            -0.014999997615814387
+          ],
+          [
+            0.15500000119209295,
+            -0.10499999880790711,
+            0.11499999761581448
+          ]
+        ]
+      },
+      {
+        "seed": 311,
+        "vest": true,
+        "slot": 1,
+        "webHash": "c3b5bf0c",
+        "audit": {
+          "ends": [
+            {
+              "gunGapMm": 0.01,
+              "gunContact": true,
+              "webContact": true
+            },
+            {
+              "gunGapMm": 0.01,
+              "gunContact": true,
+              "webContact": true
+            }
+          ],
+          "overlaps": [],
+          "nearWeb": false
+        },
+        "detail": null,
+        "suspectBox": [
+          [
+            -0.1550000011920929,
+            -0.4150000011920929,
+            -0.014999997615814387
+          ],
+          [
+            0.15500000119209295,
+            -0.10499999880790711,
+            0.11499999761581425
+          ]
+        ]
+      },
+      {
+        "seed": 311,
+        "vest": true,
+        "slot": 2,
+        "webHash": "3e9da2ce",
+        "audit": {
+          "ends": [
+            {
+              "gunGapMm": 0.01,
+              "gunContact": true,
+              "webContact": true
+            },
+            {
+              "gunGapMm": 0.01,
+              "gunContact": true,
+              "webContact": true
+            }
+          ],
+          "overlaps": [],
+          "nearWeb": false
+        },
+        "detail": null,
+        "suspectBox": [
+          [
+            -0.1550000011920929,
+            -0.4150000011920929,
+            -0.014999997615814387
+          ],
+          [
+            0.15500000119209295,
+            -0.10499999880790711,
+            0.11499999761581448
+          ]
+        ]
+      },
+      {
+        "seed": 1906,
+        "vest": false,
+        "slot": 1,
+        "webHash": "cb839e50",
+        "audit": {
+          "ends": [
+            {
+              "gunGapMm": 0.01,
+              "gunContact": true,
+              "webContact": true
+            },
+            {
+              "gunGapMm": 0.01,
+              "gunContact": true,
+              "webContact": true
+            }
+          ],
+          "overlaps": [],
+          "nearWeb": false
+        },
+        "detail": null,
+        "suspectBox": [
+          [
+            -0.1550000011920929,
+            -0.4150000011920929,
+            -0.014999997615814387
+          ],
+          [
+            0.15500000119209295,
+            -0.10499999880790711,
+            0.11499999761581425
+          ]
+        ]
+      },
+      {
+        "seed": 1906,
+        "vest": false,
+        "slot": 2,
+        "webHash": "bf26e45d",
+        "audit": {
+          "ends": [
+            {
+              "gunGapMm": 0.01,
+              "gunContact": true,
+              "webContact": true
+            },
+            {
+              "gunGapMm": 0.01,
+              "gunContact": true,
+              "webContact": true
+            }
+          ],
+          "overlaps": [],
+          "nearWeb": false
+        },
+        "detail": null,
+        "suspectBox": [
+          [
+            -0.1550000011920929,
+            -0.4150000011920929,
+            -0.014999997615814387
+          ],
+          [
+            0.15500000119209295,
+            -0.10499999880790711,
+            0.11499999761581448
+          ]
+        ]
+      },
+      {
+        "seed": 1906,
+        "vest": true,
+        "slot": 1,
+        "webHash": "c3b5bf0c",
+        "audit": {
+          "ends": [
+            {
+              "gunGapMm": 0.01,
+              "gunContact": true,
+              "webContact": true
+            },
+            {
+              "gunGapMm": 0.01,
+              "gunContact": true,
+              "webContact": true
+            }
+          ],
+          "overlaps": [],
+          "nearWeb": false
+        },
+        "detail": null,
+        "suspectBox": [
+          [
+            -0.1550000011920929,
+            -0.4150000011920929,
+            -0.014999997615814387
+          ],
+          [
+            0.15500000119209295,
+            -0.10499999880790711,
+            0.11499999761581425
+          ]
+        ]
+      },
+      {
+        "seed": 1906,
+        "vest": true,
+        "slot": 2,
+        "webHash": "3e9da2ce",
+        "audit": {
+          "ends": [
+            {
+              "gunGapMm": 0.01,
+              "gunContact": true,
+              "webContact": true
+            },
+            {
+              "gunGapMm": 0.01,
+              "gunContact": true,
+              "webContact": true
+            }
+          ],
+          "overlaps": [],
+          "nearWeb": false
+        },
+        "detail": null,
+        "suspectBox": [
+          [
+            -0.1550000011920929,
+            -0.4150000011920929,
+            -0.014999997615814387
+          ],
+          [
+            0.15500000119209295,
+            -0.10499999880790711,
+            0.11499999761581448
+          ]
+        ]
+      }
+    ]
+  },
+  "after": {
+    "modelHash": "7a8ba658",
+    "fits": [
+      {
+        "seed": 17,
+        "vest": false,
+        "slot": 1,
+        "webHash": "cb839e50",
+        "audit": {
+          "ends": [
+            {
+              "gunGapMm": 0.01,
+              "gunContact": true,
+              "webContact": true
+            },
+            {
+              "gunGapMm": 0.01,
+              "gunContact": true,
+              "webContact": true
+            }
+          ],
+          "overlaps": [
+            {
+              "sling": "web",
+              "gun": "root/group[0]/group[21]/magazineBody[0]/BufferGeometry[16]~0",
+              "at": [
+                0.26409,
+                0.96465,
+                -0.11547
+              ],
+              "strapU": 1.929
+            }
+          ],
+          "nearWeb": false
+        },
+        "detail": {
+          "raw": [],
+          "witness": [
+            0.26409,
+            0.96465,
+            -0.11547
+          ],
+          "local": [
+            -0.1048971139773619,
+            -0.09609881137651505,
+            -0.09050858946615836
+          ],
+          "nearest": [
+            {
+              "label": "root/TorusGeometry[2]",
+              "closed": true,
+              "gapMm": 15.596283831682817,
+              "winding": -3.709956903833855e-19
+            },
+            {
+              "label": "root/CylinderGeometry[1]",
+              "closed": true,
+              "gapMm": 17.644723340958027,
+              "winding": -2.8195672469137294e-17
+            },
+            {
+              "label": "root/BufferGeometry[0]",
+              "closed": true,
+              "gapMm": 18.993738488942597,
+              "winding": -3.9532610542713306e-17
+            }
+          ],
+          "inside": []
+        },
+        "suspectBox": [
+          [
+            -0.1550000011920929,
+            -0.4150000011920929,
+            -0.036499996483326136
+          ],
+          [
+            0.15500000119209295,
+            -0.10499999880790711,
+            0.136499996483326
+          ]
+        ]
+      },
+      {
+        "seed": 17,
+        "vest": false,
+        "slot": 2,
+        "webHash": "bf26e45d",
+        "audit": {
+          "ends": [
+            {
+              "gunGapMm": 0.01,
+              "gunContact": true,
+              "webContact": true
+            },
+            {
+              "gunGapMm": 0.01,
+              "gunContact": true,
+              "webContact": true
+            }
+          ],
+          "overlaps": [],
+          "nearWeb": false
+        },
+        "detail": {
+          "raw": []
+        },
+        "suspectBox": [
+          [
+            -0.1550000011920929,
+            -0.4150000011920929,
+            -0.036499996483325914
+          ],
+          [
+            0.15500000119209295,
+            -0.10499999880790711,
+            0.136499996483326
+          ]
+        ]
+      },
+      {
+        "seed": 17,
+        "vest": true,
+        "slot": 1,
+        "webHash": "c3b5bf0c",
+        "audit": {
+          "ends": [
+            {
+              "gunGapMm": 0.01,
+              "gunContact": true,
+              "webContact": true
+            },
+            {
+              "gunGapMm": 0.01,
+              "gunContact": true,
+              "webContact": true
+            }
+          ],
+          "overlaps": [
+            {
+              "sling": "web",
+              "gun": "root/group[0]/group[21]/magazineBody[0]/BufferGeometry[16]~0",
+              "at": [
+                0.26382,
+                0.96727,
+                -0.11607
+              ],
+              "strapU": 1.821
+            }
+          ],
+          "nearWeb": false
+        },
+        "detail": {
+          "raw": [],
+          "witness": [
+            0.26382,
+            0.96727,
+            -0.11607
+          ],
+          "local": [
+            -0.10567866693886371,
+            -0.09529267711725578,
+            -0.08705721117946164
+          ],
+          "nearest": [
+            {
+              "label": "root/TorusGeometry[2]",
+              "closed": true,
+              "gapMm": 13.064443161537469,
+              "winding": 5.832397365096944e-18
+            },
+            {
+              "label": "root/CylinderGeometry[1]",
+              "closed": true,
+              "gapMm": 15.183656658230515,
+              "winding": -1.1242032199291891e-17
+            },
+            {
+              "label": "root/BufferGeometry[0]",
+              "closed": true,
+              "gapMm": 16.42857676877107,
+              "winding": 2.962788839015223e-17
+            }
+          ],
+          "inside": []
+        },
+        "suspectBox": [
+          [
+            -0.1550000011920929,
+            -0.4150000011920929,
+            -0.036499996483326136
+          ],
+          [
+            0.15500000119209295,
+            -0.10499999880790711,
+            0.136499996483326
+          ]
+        ]
+      },
+      {
+        "seed": 17,
+        "vest": true,
+        "slot": 2,
+        "webHash": "3e9da2ce",
+        "audit": {
+          "ends": [
+            {
+              "gunGapMm": 0.01,
+              "gunContact": true,
+              "webContact": true
+            },
+            {
+              "gunGapMm": 0.01,
+              "gunContact": true,
+              "webContact": true
+            }
+          ],
+          "overlaps": [],
+          "nearWeb": false
+        },
+        "detail": {
+          "raw": []
+        },
+        "suspectBox": [
+          [
+            -0.1550000011920929,
+            -0.4150000011920929,
+            -0.036499996483325914
+          ],
+          [
+            0.15500000119209295,
+            -0.10499999880790711,
+            0.136499996483326
+          ]
+        ]
+      },
+      {
+        "seed": 311,
+        "vest": false,
+        "slot": 1,
+        "webHash": "cb839e50",
+        "audit": {
+          "ends": [
+            {
+              "gunGapMm": 0.01,
+              "gunContact": true,
+              "webContact": true
+            },
+            {
+              "gunGapMm": 0.01,
+              "gunContact": true,
+              "webContact": true
+            }
+          ],
+          "overlaps": [
+            {
+              "sling": "web",
+              "gun": "root/group[0]/group[21]/magazineBody[0]/BufferGeometry[16]~0",
+              "at": [
+                0.26409,
+                0.96465,
+                -0.11547
+              ],
+              "strapU": 1.929
+            }
+          ],
+          "nearWeb": false
+        },
+        "detail": null,
+        "suspectBox": [
+          [
+            -0.1550000011920929,
+            -0.4150000011920929,
+            -0.036499996483326136
+          ],
+          [
+            0.15500000119209295,
+            -0.10499999880790711,
+            0.136499996483326
+          ]
+        ]
+      },
+      {
+        "seed": 311,
+        "vest": false,
+        "slot": 2,
+        "webHash": "bf26e45d",
+        "audit": {
+          "ends": [
+            {
+              "gunGapMm": 0.01,
+              "gunContact": true,
+              "webContact": true
+            },
+            {
+              "gunGapMm": 0.01,
+              "gunContact": true,
+              "webContact": true
+            }
+          ],
+          "overlaps": [],
+          "nearWeb": false
+        },
+        "detail": null,
+        "suspectBox": [
+          [
+            -0.1550000011920929,
+            -0.4150000011920929,
+            -0.036499996483325914
+          ],
+          [
+            0.15500000119209295,
+            -0.10499999880790711,
+            0.136499996483326
+          ]
+        ]
+      },
+      {
+        "seed": 311,
+        "vest": true,
+        "slot": 1,
+        "webHash": "c3b5bf0c",
+        "audit": {
+          "ends": [
+            {
+              "gunGapMm": 0.01,
+              "gunContact": true,
+              "webContact": true
+            },
+            {
+              "gunGapMm": 0.01,
+              "gunContact": true,
+              "webContact": true
+            }
+          ],
+          "overlaps": [
+            {
+              "sling": "web",
+              "gun": "root/group[0]/group[21]/magazineBody[0]/BufferGeometry[16]~0",
+              "at": [
+                0.26382,
+                0.96727,
+                -0.11607
+              ],
+              "strapU": 1.821
+            }
+          ],
+          "nearWeb": false
+        },
+        "detail": null,
+        "suspectBox": [
+          [
+            -0.1550000011920929,
+            -0.4150000011920929,
+            -0.036499996483326136
+          ],
+          [
+            0.15500000119209295,
+            -0.10499999880790711,
+            0.136499996483326
+          ]
+        ]
+      },
+      {
+        "seed": 311,
+        "vest": true,
+        "slot": 2,
+        "webHash": "3e9da2ce",
+        "audit": {
+          "ends": [
+            {
+              "gunGapMm": 0.01,
+              "gunContact": true,
+              "webContact": true
+            },
+            {
+              "gunGapMm": 0.01,
+              "gunContact": true,
+              "webContact": true
+            }
+          ],
+          "overlaps": [],
+          "nearWeb": false
+        },
+        "detail": null,
+        "suspectBox": [
+          [
+            -0.1550000011920929,
+            -0.4150000011920929,
+            -0.036499996483325914
+          ],
+          [
+            0.15500000119209295,
+            -0.10499999880790711,
+            0.136499996483326
+          ]
+        ]
+      },
+      {
+        "seed": 1906,
+        "vest": false,
+        "slot": 1,
+        "webHash": "cb839e50",
+        "audit": {
+          "ends": [
+            {
+              "gunGapMm": 0.01,
+              "gunContact": true,
+              "webContact": true
+            },
+            {
+              "gunGapMm": 0.01,
+              "gunContact": true,
+              "webContact": true
+            }
+          ],
+          "overlaps": [
+            {
+              "sling": "web",
+              "gun": "root/group[0]/group[21]/magazineBody[0]/BufferGeometry[16]~0",
+              "at": [
+                0.26409,
+                0.96465,
+                -0.11547
+              ],
+              "strapU": 1.929
+            }
+          ],
+          "nearWeb": false
+        },
+        "detail": null,
+        "suspectBox": [
+          [
+            -0.1550000011920929,
+            -0.4150000011920929,
+            -0.036499996483326136
+          ],
+          [
+            0.15500000119209295,
+            -0.10499999880790711,
+            0.136499996483326
+          ]
+        ]
+      },
+      {
+        "seed": 1906,
+        "vest": false,
+        "slot": 2,
+        "webHash": "bf26e45d",
+        "audit": {
+          "ends": [
+            {
+              "gunGapMm": 0.01,
+              "gunContact": true,
+              "webContact": true
+            },
+            {
+              "gunGapMm": 0.01,
+              "gunContact": true,
+              "webContact": true
+            }
+          ],
+          "overlaps": [],
+          "nearWeb": false
+        },
+        "detail": null,
+        "suspectBox": [
+          [
+            -0.1550000011920929,
+            -0.4150000011920929,
+            -0.036499996483325914
+          ],
+          [
+            0.15500000119209295,
+            -0.10499999880790711,
+            0.136499996483326
+          ]
+        ]
+      },
+      {
+        "seed": 1906,
+        "vest": true,
+        "slot": 1,
+        "webHash": "c3b5bf0c",
+        "audit": {
+          "ends": [
+            {
+              "gunGapMm": 0.01,
+              "gunContact": true,
+              "webContact": true
+            },
+            {
+              "gunGapMm": 0.01,
+              "gunContact": true,
+              "webContact": true
+            }
+          ],
+          "overlaps": [
+            {
+              "sling": "web",
+              "gun": "root/group[0]/group[21]/magazineBody[0]/BufferGeometry[16]~0",
+              "at": [
+                0.26382,
+                0.96727,
+                -0.11607
+              ],
+              "strapU": 1.821
+            }
+          ],
+          "nearWeb": false
+        },
+        "detail": null,
+        "suspectBox": [
+          [
+            -0.1550000011920929,
+            -0.4150000011920929,
+            -0.036499996483326136
+          ],
+          [
+            0.15500000119209295,
+            -0.10499999880790711,
+            0.136499996483326
+          ]
+        ]
+      },
+      {
+        "seed": 1906,
+        "vest": true,
+        "slot": 2,
+        "webHash": "3e9da2ce",
+        "audit": {
+          "ends": [
+            {
+              "gunGapMm": 0.01,
+              "gunContact": true,
+              "webContact": true
+            },
+            {
+              "gunGapMm": 0.01,
+              "gunContact": true,
+              "webContact": true
+            }
+          ],
+          "overlaps": [],
+          "nearWeb": false
+        },
+        "detail": null,
+        "suspectBox": [
+          [
+            -0.1550000011920929,
+            -0.4150000011920929,
+            -0.036499996483325914
+          ],
+          [
+            0.15500000119209295,
+            -0.10499999880790711,
+            0.136499996483326
+          ]
+        ]
+      }
+    ]
+  }
+}

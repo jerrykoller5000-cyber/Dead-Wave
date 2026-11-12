@@ -20122,13 +20122,17 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // Eight-sided cone along +Z. poseLaserBeam fills the rings: index 0..7 at the
     // muzzle, 8..15 at the far end.
     function makeLaserBeamGeo() {
-      const N = 8, pos = new Float32Array(N * 2 * 3), idx = [];
+      const N = 8, pos = new Float32Array(N * 2 * 3), normals = new Float32Array(pos.length), idx = [];
       for (let i = 0; i < N; i++) {
         const b = (i + 1) % N;
+        const a = (i / N) * Math.PI * 2;
+        normals[i * 3] = normals[(N + i) * 3] = Math.cos(a);
+        normals[i * 3 + 1] = normals[(N + i) * 3 + 1] = Math.sin(a);
         idx.push(i, N + i, b, b, N + i, N + b);
       }
       const geo = new THREE.BufferGeometry();
       geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+      geo.setAttribute('normal', new THREE.BufferAttribute(normals, 3));
       geo.setIndex(idx);
       return geo;
     }
@@ -22123,7 +22127,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       } else {
         // CL-327 (J87): the cone leaves the unit's white lens along the gun's own line (unitBeam), so it swings with the gun
         const gun = weaponMeshes[currentWeapon], lens = gun?.userData.lightLensLocal;
-        if (lens) { gun.updateMatrixWorld(true); unitBeam(currentWeapon, gun, false, lens, flashlight.position, _flashDir); }
+        if (lens) { gun.updateMatrixWorld(true); if (unitBeam(currentWeapon, gun, false, lens, flashlight.position, _flashDir) === null) { flashlight.intensity = 0; updateReadablePaperMats(); return; } }   // CE-7: the view gun put away
         else { flashlight.position.copy(getMuzzleWorld()); _flashDir.copy(getAimDir()); }
       }
       flashlight.target.position.copy(flashlight.position).addScaledVector(_flashDir, 10);
@@ -22202,8 +22206,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       stepSawStart(sawStart, dt, {
         equipped: gameStarted && !gameOver && !won && currentWeapon === 'chainsaw' && !unarmed &&
           !playerSwimming && !mortarMounted && !mortarCarried && !marineDown(),
-        available: sawFuel > 0 && !marineDraw.state.active && !reloading &&
-          knifeAnimT <= 0 && !vault && !diving() && swapT <= 0,
+        available: sawFuel > 0,
+        interrupted: marineDraw.state.active || reloading || knifeAnimT > 0 ||
+          !!vault || diving() || swapT > 0,
         suspended: paused || shopOpen
       });
       const gun = weaponMeshes.chainsaw;
@@ -22216,7 +22221,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const live = gameStarted && !gameOver && !won;
       const hold = paused || shopOpen;
       const sawWant = live && currentWeapon === 'chainsaw' && sawStart.phase !== 'off';
+      const sawWasRunning = AudioSys.isChainsawRunning();
       AudioSys.chainsawEngine(sawWant && !hold, hold || !live);
+      if (sawWasRunning !== AudioSys.isChainsawRunning()) updateAmmoHud();
       AudioSys.nvgHum(live && nvgDown && !hold);
       if (AudioSys.minigunSpin) AudioSys.minigunSpin(live && !hold && currentWeapon === 'minigun' ? barrelSpinVel / SPIN_MAX : 0);   // CL-134: the motor
       if (hold || !live) { AudioSys.turretServos(null); AudioSys.stopFlames(); }
@@ -24781,7 +24788,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         g.rotation.set(-Math.PI / 2, 0, -sx * 0.12, 'ZXY');
         g.scale.setScalar(0.85);
         torso.add(g);
-        const sling = addCast(new THREE.Mesh(new THREE.BufferGeometry(), webMat));
+        // Pipeline warm-up sees this mesh before fitWeaponSling replaces the
+        // placeholder. Give it the real strap's position/normal/uv attributes.
+        const sling = addCast(new THREE.Mesh(new THREE.PlaneGeometry(0.001, 0.001), webMat));
+        sling.visible = false;
         sling.userData.torsoPivotY = tp;
         g.add(sling);
         rig.slings.push({ g, sling, kind: null });
@@ -45965,6 +45975,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       }
       const geo = new THREE.BufferGeometry();
       geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(count * 3), 3));
+      const normals = new Float32Array(count * 3);
+      for (let i = 0; i < count; i++) normals[i * 3 + 1] = 1;
+      geo.setAttribute('normal', new THREE.BufferAttribute(normals, 3));
       geo.setIndex(idx);
       const mesh = new THREE.Mesh(geo, bloodPoolMat);
       mesh.userData.unit = unit;
@@ -54478,9 +54491,12 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // CL-327 (J74, J87): the line a unit on the gun points along, from its lens (a point in the gun's own space). First
     // person: from the view gun's lens to the aim point (the crosshair's, the rounds') when the gun is at rest, turned by
     // the view gun's own turn off its rest (sway, kick, the sprint's carry, a reload). Third person: the body's gun's bore.
+    // CE-7 (J144c): returns null while the view gun is put away (a blade swing): no line from a gun that isn't drawn.
     function unitBeam(name, gun, offhand, lens, origin, dir) {
       const which = offhand ? 2 : 1;
-      const vm = !!viewmodel && viewmodel.showing(name) && !!viewmodel.pointWorld(lens, origin, which);
+      const held = viewmodel ? (viewmodel.holding ? viewmodel.holding(name, which) : (viewmodel.showing(name) ? true : null)) : null;
+      if (held === false) return null;
+      const vm = held === true && !!viewmodel.pointWorld(lens, origin, which);
       if (vm) {
         weaponAimPoint(_ubAim);
         dir.subVectors(_ubAim, origin);
@@ -54524,6 +54540,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           // CL-327 (J74): unitBeam's line (first person: to the aim point at rest, turned with the view gun; CL-301: the
           // pair's left beam from the left view gun)
           const vmLaser = unitBeam(name, gun, offhand, mz, _laserOrigin, _laserDir);
+          if (vmLaser === null) { laser.visible = false; laser.material.opacity = 0; continue; }   // CE-7: the view gun put away
           weaponAimPoint(_laserAim);
           const reach = _laserAim.distanceTo(_laserOrigin);
           if (reach < 0.05) { laser.visible = false; continue; }
@@ -57768,9 +57785,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
             launcherSpent = Math.min(6, (launcherSpent | 0) + 1);   // GB-133: one case per shot
           }
           triggerMuzzleFlash();
+          // The magazine choice above can skip an empty hand. Charge the gun that actually fired.
+          if (barrelHeat) barrelHeat.addShot(currentWeapon, !!suppressor[currentWeapon], 1, akimboOn() ? akimboHand : 0);
           if (akimboOn()) akimboHand ^= 1;
           AudioSys.fireWeapon(currentWeapon, { suppressed: !!suppressor[currentWeapon], hand: akimboOn() ? akimboHand : -1 });   // CL-134: the can, and a pair each to its side
-          if (barrelHeat) barrelHeat.addShot(currentWeapon, !!suppressor[currentWeapon]);   // AG-290
           if (currentWeapon === 'pistol') kickPistolRecoil();
           if (currentWeapon === 'sniper') kickSniperRecoil();
           if (currentWeapon === 'uzi') kickUziRecoil();
@@ -58113,7 +58131,12 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const AOE = 4.5 * ((g.damage == null) ? grenadeRadiusMult() : 1) * (g.blastMul || 1);
       const baseDmg = (g.damage != null) ? g.damage : 55 * dmgMult();
       if(rangeFeature?.owns())rangeFeature.blast(g,AOE);
-      else if (!g.rangePacket&&training.active && training.tg) for (const hit of trainingBlastHits(training.tg, g.pos, AOE)) trainingHitTarget(hit.index, hit.point, false, localPlayer.position.z, g.isShell ? { kind: 'blow', from: g.pos } : null);   // CB-250 (J122): a launcher shell blows a plate apart
+      else if (!g.rangePacket&&training.active && training.tg) {
+        // A shell can detonate on the target stand's front face. Trace the blast from
+        // just before impact so that stand does not occlude its own upright plate.
+        const blastLookFrom = g.isShell && g.prev ? g.pos.clone().lerp(g.prev, Math.min(1, 0.2 / Math.max(1e-6, g.pos.distanceTo(g.prev)))) : g.pos;
+        for (const hit of trainingBlastHits(training.tg, blastLookFrom, AOE)) trainingHitTarget(hit.index, hit.point, false, localPlayer.position.z, g.isShell ? { kind: 'blow', from: g.pos } : null);   // CB-250 (J122): a launcher shell blows a plate apart
+      }
       // Your own blast hurts you too. Stand back, or roll.
       if (shakeDist < AOE && Math.abs(localPlayer.position.y - y) < 3) damagePlayer(Math.round(Math.max(6, baseDmg * 0.55 * (1 - shakeDist / AOE))), g.cause || 'blast');
       for (const lm of landmarks) {
@@ -66769,6 +66792,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       enemyAbilities.clear();   // GP-179
       feralMotion.clear();   // GP-198
       if (!training.tg || training.wake) return;
+      clearCarriedOnDeath(); // GP-20114: release gear at the death site before moving him to the bed
       training.deployment?.cancel(); training.release?.reset();
       training.security?.sync(false, 0);
       abortScriptedKill();
@@ -67034,6 +67058,19 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     if (modeTrainingBtn) {
       modeTrainingBtn.textContent = sayText('menu.training', {}, 'Training Ground');
       modeTrainingBtn.addEventListener('click', () => startTraining());
+    }
+    // GP-20114: a carried Watchman defers ordinary set-down. Recovery must finish it
+    // immediately at the death site; otherwise build mode survives on the bed and pins him there.
+    function clearCarriedOnDeath() {
+      if (mortarCarried) {
+        const p = localPlayer.position, fx = Math.sin(aimYaw), fz = Math.cos(aimYaw);
+        const queued = mortarCarried.drop;
+        let x = queued?.x ?? p.x + fx * 1.4, z = queued?.z ?? p.z + fz * 1.4;
+        if (!validatePlace(x, z)) { x = p.x - fx * 1.4; z = p.z - fz * 1.4; }
+        setDownMortar(x, z, true);
+      }
+      // The valley fuel mission has no can drop site in the underground range.
+      if (fuelCarried()) { fuelRun.reset(); fuelPendingCause = null; fuelLast = null; }
     }
     function resetGame() {
       leaveTraining();   // CL-115
@@ -68931,6 +68968,7 @@ live++;
           isSuppressed: !!suppressor[currentWeapon],
           viewmodel: viewmodel || null,
           weaponMesh: weaponMeshes[currentWeapon] || null,
+          offhandMesh: akimboOn() ? offhandMeshes[currentWeapon] : null,
           suppressWisp: !!(flamerOn && currentWeapon === 'flamer' && !paused),
           camera
         });
@@ -68959,7 +68997,7 @@ live++;
       if ((showPerf || INSPECT) && !window.TT) {
         window.TT = stampDebugHooks({
       graceActiveDbg: () => zombieGraceActive(), restartGraceDbg: () => { hoursSinceMatchStart = 0; },   // GB-51 (t76)
-      getSawHeat: () => ({ heat: sawHeat, overheat: sawOverheat, biteT: sawBiteT }), setSawHeatDbg: (v) => { sawHeat = v; sawOverheat = false; }, setMouseFireDbg: (v) => { mouseFireHeld = !!v; }, barrelHeat, getBarrelHeat: (k) => (barrelHeat ? barrelHeat.getHeat(k) : 0), setBarrelHeatDbg: (k, v) => { if (barrelHeat) barrelHeat.setHeat(k, v); }, MELEE_SIZE_MUL, meleeSizeMul, WEAPON_STATS,   // GB-52, AG-290
+      getSawHeat: () => ({ heat: sawHeat, overheat: sawOverheat, biteT: sawBiteT }), setSawHeatDbg: (v) => { sawHeat = v; sawOverheat = false; }, setMouseFireDbg: (v) => { mouseFireHeld = !!v; }, barrelHeat, getBarrelHeat: (k, hand = 0) => (barrelHeat ? barrelHeat.getHeat(k, hand) : 0), setBarrelHeatDbg: (k, v, hand = 0) => { if (barrelHeat) barrelHeat.setHeat(k, v, hand); }, MELEE_SIZE_MUL, meleeSizeMul, WEAPON_STATS,   // GB-52, AG-290
       getHitStumble: () => ({ ...hitStumble, speedK: hitStumbleSpeedK(), react: hitReaction.strength * Math.pow(hitReaction.time / hitReaction.duration, 2) }), HIT_KNEE_S, HIT_AIM_S,   // GB-50
           otsDbg: () => ({ on: OTS.on, w: OTS.w, yaw: OTS.yaw, pitch: OTS.pitch, locked: document.pointerLockElement === renderer.domElement, fov: aimFov, tilt: aimTiltDeg }),
           aimZoomDbg: () => ({ on: AIMZ.on, w: AIMZ.w, relX: AIMZ.relX, relZ: AIMZ.relZ, ndcX: AIMZ.ndcX, ndcY: AIMZ.ndcY, panX: AIMZ.appliedX, panZ: AIMZ.appliedZ, fov: camera.fov, baseFov: camFovCurrent, first: viewFirst }),   /* CL-247 */

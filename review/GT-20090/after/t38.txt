@@ -1,0 +1,28 @@
+ok    t38      26 pass   0 fail  57.7s  (real renderer)
+    PASS off-hand pistol animates its own parts (slide, mag, flash, laser)
+    PASS off-hand uzi animates its own parts (mag, flash, laser)
+    PASS off-hand revolver animates its own parts (mag, flash, laser, cylinder, hammer)
+    PASS all twelve equipped models represented (12)
+    PASS cold attached mesh count 273 / 300 (including hidden parts)
+    PASS minigun submitted 22 draws / 35
+    PASS m4 submitted 31 draws / 35
+    PASS ak submitted 19 draws / 35
+    PASS aa12 submitted 23 draws / 35
+    PASS pistol submitted 15 draws / 35
+    PASS uzi submitted 23 draws / 35
+    PASS shotgun submitted 19 draws / 35
+    PASS revolver submitted 19 draws / 35
+    PASS sniper submitted 31 draws / 35
+    PASS launcher submitted 20 draws / 35
+    PASS flamer submitted 9 draws / 35
+    PASS chainsaw submitted 9 draws / 35
+    PASS equipped draws across twelve individual models 240 < 260
+    PASS ak: reload moves the magazine
+    PASS m4: reload moves the magazine
+    PASS pistol: reload moves the magazine
+    PASS shotgun: reload moves the pump
+    PASS sniper: reload moves the magazine
+    PASS revolver: reload moves the magazine
+    PASS launcher: reload moves the magazine
+    PASS minigun: reload moves the magazine
+1 checks: 26 pass, 0 fail (real renderer)

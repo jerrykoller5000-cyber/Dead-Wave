@@ -1,0 +1,5179 @@
+{
+  "card": "GP-20111",
+  "phase": "resumed-full",
+  "timestamp": "2026-11-12T04:36:53.129Z",
+  "runsCount": 2,
+  "visualsRuntimeErrors": [],
+  "visualsPageErrors": [],
+  "summaryByView": {
+    "1P": {
+      "allActionWorstFrameMs": 49.8,
+      "beforeWorstFrameMs": 100.1,
+      "allUnder50Ms": true,
+      "over50Count": 0,
+      "over50Actions": [],
+      "cifMarineBootedInArmoryOnly": false,
+      "totalRuntimeErrors": 0,
+      "totalPageErrors": 0,
+      "items": [
+        {
+          "id": "pistol",
+          "kind": "gun",
+          "openWorstMs": 17,
+          "beforeOpenWorstMs": 100.1,
+          "buyWorstMs": null,
+          "beforeBuyWorstMs": null,
+          "modWorstMs": 33.3,
+          "beforeModWorstMs": 33.4,
+          "closeWorstMs": 16.8,
+          "beforeCloseWorstMs": 33.3
+        },
+        {
+          "id": "uzi",
+          "kind": "gun",
+          "openWorstMs": 16.8,
+          "beforeOpenWorstMs": 16.7,
+          "buyWorstMs": 16.9,
+          "beforeBuyWorstMs": 16.8,
+          "modWorstMs": 33.4,
+          "beforeModWorstMs": 16.7,
+          "closeWorstMs": 16.8,
+          "beforeCloseWorstMs": 16.8
+        },
+        {
+          "id": "shotgun",
+          "kind": "gun",
+          "openWorstMs": 16.7,
+          "beforeOpenWorstMs": 16.8,
+          "buyWorstMs": 16.7,
+          "beforeBuyWorstMs": 16.7,
+          "modWorstMs": 33.4,
+          "beforeModWorstMs": 100,
+          "closeWorstMs": 16.8,
+          "beforeCloseWorstMs": 16.9
+        },
+        {
+          "id": "revolver",
+          "kind": "gun",
+          "openWorstMs": 16.8,
+          "beforeOpenWorstMs": 16.8,
+          "buyWorstMs": 16.8,
+          "beforeBuyWorstMs": 16.8,
+          "modWorstMs": 49.8,
+          "beforeModWorstMs": 50.1,
+          "closeWorstMs": 16.8,
+          "beforeCloseWorstMs": 33.4
+        },
+        {
+          "id": "m4",
+          "kind": "gun",
+          "openWorstMs": 16.8,
+          "beforeOpenWorstMs": 50,
+          "buyWorstMs": 16.8,
+          "beforeBuyWorstMs": 16.7,
+          "modWorstMs": 16.8,
+          "beforeModWorstMs": 66.6,
+          "closeWorstMs": 16.8,
+          "beforeCloseWorstMs": 16.8
+        },
+        {
+          "id": "ak",
+          "kind": "gun",
+          "openWorstMs": 16.7,
+          "beforeOpenWorstMs": 16.8,
+          "buyWorstMs": 16.8,
+          "beforeBuyWorstMs": 16.8,
+          "modWorstMs": 16.8,
+          "beforeModWorstMs": 16.8,
+          "closeWorstMs": 16.8,
+          "beforeCloseWorstMs": 16.9
+        },
+        {
+          "id": "sniper",
+          "kind": "gun",
+          "openWorstMs": 16.8,
+          "beforeOpenWorstMs": 33.3,
+          "buyWorstMs": 16.8,
+          "beforeBuyWorstMs": 16.7,
+          "modWorstMs": 16.8,
+          "beforeModWorstMs": 49.9,
+          "closeWorstMs": 16.8,
+          "beforeCloseWorstMs": 33.4
+        },
+        {
+          "id": "launcher",
+          "kind": "gun",
+          "openWorstMs": 16.7,
+          "beforeOpenWorstMs": 50,
+          "buyWorstMs": 16.7,
+          "beforeBuyWorstMs": 16.8,
+          "modWorstMs": 16.8,
+          "beforeModWorstMs": 33.3,
+          "closeWorstMs": 16.9,
+          "beforeCloseWorstMs": 16.9
+        },
+        {
+          "id": "aa12",
+          "kind": "gun",
+          "openWorstMs": 16.7,
+          "beforeOpenWorstMs": 33.4,
+          "buyWorstMs": 16.8,
+          "beforeBuyWorstMs": 33.4,
+          "modWorstMs": 16.8,
+          "beforeModWorstMs": 99.9,
+          "closeWorstMs": 16.8,
+          "beforeCloseWorstMs": 50.1
+        },
+        {
+          "id": "minigun",
+          "kind": "gun",
+          "openWorstMs": 16.8,
+          "beforeOpenWorstMs": 16.7,
+          "buyWorstMs": 16.8,
+          "beforeBuyWorstMs": 16.8,
+          "modWorstMs": 16.8,
+          "beforeModWorstMs": 16.8,
+          "closeWorstMs": 16.8,
+          "beforeCloseWorstMs": 33.3
+        },
+        {
+          "id": "flamer",
+          "kind": "gun",
+          "openWorstMs": 16.7,
+          "beforeOpenWorstMs": 50,
+          "buyWorstMs": 16.8,
+          "beforeBuyWorstMs": 16.8,
+          "modWorstMs": 16.7,
+          "beforeModWorstMs": 50.1,
+          "closeWorstMs": 16.8,
+          "beforeCloseWorstMs": 16.8
+        },
+        {
+          "id": "chainsaw",
+          "kind": "gun",
+          "openWorstMs": 16.8,
+          "beforeOpenWorstMs": 33.3,
+          "buyWorstMs": 16.8,
+          "beforeBuyWorstMs": 16.7,
+          "modWorstMs": 16.7,
+          "beforeModWorstMs": 16.7,
+          "closeWorstMs": 16.8,
+          "beforeCloseWorstMs": 16.8
+        },
+        {
+          "id": "m240",
+          "kind": "build",
+          "openWorstMs": 16.8,
+          "beforeOpenWorstMs": 16.7,
+          "buyWorstMs": 16.9,
+          "beforeBuyWorstMs": 16.7,
+          "modWorstMs": 16.7,
+          "beforeModWorstMs": 16.7,
+          "closeWorstMs": 17,
+          "beforeCloseWorstMs": 50
+        },
+        {
+          "id": "mortar",
+          "kind": "build",
+          "openWorstMs": 16.8,
+          "beforeOpenWorstMs": 66.6,
+          "buyWorstMs": 16.7,
+          "beforeBuyWorstMs": 16.8,
+          "modWorstMs": 16.7,
+          "beforeModWorstMs": 17,
+          "closeWorstMs": 16.8,
+          "beforeCloseWorstMs": 33.3
+        }
+      ]
+    },
+    "3P": {
+      "allActionWorstFrameMs": 50,
+      "beforeWorstFrameMs": 300.1,
+      "allUnder50Ms": false,
+      "over50Count": 1,
+      "over50Actions": [
+        {
+          "id": "revolver",
+          "action": "mod",
+          "ms": 50
+        }
+      ],
+      "cifMarineBootedInArmoryOnly": false,
+      "totalRuntimeErrors": 0,
+      "totalPageErrors": 0,
+      "items": [
+        {
+          "id": "pistol",
+          "kind": "gun",
+          "openWorstMs": 16.8,
+          "beforeOpenWorstMs": 133.3,
+          "buyWorstMs": null,
+          "beforeBuyWorstMs": null,
+          "modWorstMs": 49.9,
+          "beforeModWorstMs": 33.4,
+          "closeWorstMs": 16.8,
+          "beforeCloseWorstMs": 16.8
+        },
+        {
+          "id": "uzi",
+          "kind": "gun",
+          "openWorstMs": 16.7,
+          "beforeOpenWorstMs": 16.8,
+          "buyWorstMs": 16.8,
+          "beforeBuyWorstMs": 16.8,
+          "modWorstMs": 33.4,
+          "beforeModWorstMs": 33.4,
+          "closeWorstMs": 16.9,
+          "beforeCloseWorstMs": 300.1
+        },
+        {
+          "id": "shotgun",
+          "kind": "gun",
+          "openWorstMs": 16.7,
+          "beforeOpenWorstMs": 16.8,
+          "buyWorstMs": 16.7,
+          "beforeBuyWorstMs": 16.7,
+          "modWorstMs": 33.3,
+          "beforeModWorstMs": 50,
+          "closeWorstMs": 16.8,
+          "beforeCloseWorstMs": 16.9
+        },
+        {
+          "id": "revolver",
+          "kind": "gun",
+          "openWorstMs": 16.8,
+          "beforeOpenWorstMs": 16.8,
+          "buyWorstMs": 16.8,
+          "beforeBuyWorstMs": 16.7,
+          "modWorstMs": 50,
+          "beforeModWorstMs": 66.8,
+          "closeWorstMs": 16.9,
+          "beforeCloseWorstMs": 16.8
+        },
+        {
+          "id": "m4",
+          "kind": "gun",
+          "openWorstMs": 16.8,
+          "beforeOpenWorstMs": 16.8,
+          "buyWorstMs": 16.7,
+          "beforeBuyWorstMs": 16.7,
+          "modWorstMs": 16.8,
+          "beforeModWorstMs": 16.7,
+          "closeWorstMs": 16.8,
+          "beforeCloseWorstMs": 16.8
+        },
+        {
+          "id": "ak",
+          "kind": "gun",
+          "openWorstMs": 16.7,
+          "beforeOpenWorstMs": 16.8,
+          "buyWorstMs": 16.7,
+          "beforeBuyWorstMs": 16.8,
+          "modWorstMs": 16.8,
+          "beforeModWorstMs": 16.8,
+          "closeWorstMs": 16.9,
+          "beforeCloseWorstMs": 16.8
+        },
+        {
+          "id": "sniper",
+          "kind": "gun",
+          "openWorstMs": 16.9,
+          "beforeOpenWorstMs": 16.7,
+          "buyWorstMs": 33.2,
+          "beforeBuyWorstMs": 16.7,
+          "modWorstMs": 16.8,
+          "beforeModWorstMs": 16.7,
+          "closeWorstMs": 16.8,
+          "beforeCloseWorstMs": 16.8
+        },
+        {
+          "id": "launcher",
+          "kind": "gun",
+          "openWorstMs": 16.7,
+          "beforeOpenWorstMs": 16.8,
+          "buyWorstMs": 16.9,
+          "beforeBuyWorstMs": 16.7,
+          "modWorstMs": 16.8,
+          "beforeModWorstMs": 33.3,
+          "closeWorstMs": 16.9,
+          "beforeCloseWorstMs": 16.8
+        },
+        {
+          "id": "aa12",
+          "kind": "gun",
+          "openWorstMs": 16.8,
+          "beforeOpenWorstMs": 16.7,
+          "buyWorstMs": 16.7,
+          "beforeBuyWorstMs": 16.8,
+          "modWorstMs": 16.7,
+          "beforeModWorstMs": 50.1,
+          "closeWorstMs": 16.8,
+          "beforeCloseWorstMs": 33.3
+        },
+        {
+          "id": "minigun",
+          "kind": "gun",
+          "openWorstMs": 16.7,
+          "beforeOpenWorstMs": 16.8,
+          "buyWorstMs": 16.7,
+          "beforeBuyWorstMs": 16.8,
+          "modWorstMs": 16.8,
+          "beforeModWorstMs": 33.4,
+          "closeWorstMs": 16.9,
+          "beforeCloseWorstMs": 16.7
+        },
+        {
+          "id": "flamer",
+          "kind": "gun",
+          "openWorstMs": 16.8,
+          "beforeOpenWorstMs": 16.7,
+          "buyWorstMs": 16.8,
+          "beforeBuyWorstMs": 16.7,
+          "modWorstMs": 16.8,
+          "beforeModWorstMs": 16.7,
+          "closeWorstMs": 16.8,
+          "beforeCloseWorstMs": 16.8
+        },
+        {
+          "id": "chainsaw",
+          "kind": "gun",
+          "openWorstMs": 16.7,
+          "beforeOpenWorstMs": 16.7,
+          "buyWorstMs": 16.7,
+          "beforeBuyWorstMs": 16.7,
+          "modWorstMs": 16.7,
+          "beforeModWorstMs": 16.7,
+          "closeWorstMs": 16.8,
+          "beforeCloseWorstMs": 33.4
+        },
+        {
+          "id": "m240",
+          "kind": "build",
+          "openWorstMs": 16.8,
+          "beforeOpenWorstMs": 16.8,
+          "buyWorstMs": 16.8,
+          "beforeBuyWorstMs": 16.8,
+          "modWorstMs": 16.7,
+          "beforeModWorstMs": 16.8,
+          "closeWorstMs": 16.8,
+          "beforeCloseWorstMs": 16.8
+        },
+        {
+          "id": "mortar",
+          "kind": "build",
+          "openWorstMs": 16.7,
+          "beforeOpenWorstMs": 16.7,
+          "buyWorstMs": 16.7,
+          "beforeBuyWorstMs": 16.7,
+          "modWorstMs": 16.8,
+          "beforeModWorstMs": 16.7,
+          "closeWorstMs": 16.8,
+          "beforeCloseWorstMs": 16.8
+        }
+      ]
+    }
+  },
+  "runs": [
+    {
+      "view": "1P",
+      "run": 1,
+      "runtimeErrors": [],
+      "pageErrors": [],
+      "diag": {
+        "inits": [
+          {
+            "tag": "400x200",
+            "ms": 143
+          }
+        ],
+        "renders": [
+          {
+            "tag": "main",
+            "ms": 113.3,
+            "at": 24403.9
+          },
+          {
+            "tag": "main",
+            "ms": 1178.6,
+            "at": 24340.2
+          },
+          {
+            "tag": "main",
+            "ms": 1180.6,
+            "at": 24339.1
+          },
+          {
+            "tag": "main",
+            "ms": 38.3,
+            "at": 25995.3
+          },
+          {
+            "tag": "main",
+            "ms": 41.7,
+            "at": 25992.6
+          },
+          {
+            "tag": "400x200",
+            "ms": 213.1,
+            "at": 26223.7
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.6,
+            "at": 26825.3
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.3,
+            "at": 26837.7
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.6,
+            "at": 26851.1
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.5,
+            "at": 26867.5
+          },
+          {
+            "tag": "400x200",
+            "ms": 0.9,
+            "at": 26883.1
+          },
+          {
+            "tag": "400x200",
+            "ms": 0.9,
+            "at": 26899.8
+          },
+          {
+            "tag": "400x200",
+            "ms": 0.9,
+            "at": 26915.6
+          },
+          {
+            "tag": "400x200",
+            "ms": 0.8,
+            "at": 26932.2
+          },
+          {
+            "tag": "400x200",
+            "ms": 0.9,
+            "at": 26951.8
+          },
+          {
+            "tag": "400x200",
+            "ms": 1,
+            "at": 26967.7
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.2,
+            "at": 26986.6
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.1,
+            "at": 27003.1
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.1,
+            "at": 27015
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.1,
+            "at": 27031.5
+          },
+          {
+            "tag": "400x200",
+            "ms": 14.2,
+            "at": 27051.5
+          },
+          {
+            "tag": "400x200",
+            "ms": 14.9,
+            "at": 27073.8
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.6,
+            "at": 27096.4
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.4,
+            "at": 27105
+          },
+          {
+            "tag": "400x200",
+            "ms": 7.8,
+            "at": 27114.7
+          },
+          {
+            "tag": "400x200",
+            "ms": 7.3,
+            "at": 27131.2
+          },
+          {
+            "tag": "400x200",
+            "ms": 0.9,
+            "at": 27146.6
+          },
+          {
+            "tag": "400x200",
+            "ms": 0.8,
+            "at": 27163.5
+          },
+          {
+            "tag": "400x200",
+            "ms": 7.4,
+            "at": 27180.9
+          },
+          {
+            "tag": "400x200",
+            "ms": 7,
+            "at": 27197.3
+          },
+          {
+            "tag": "main",
+            "ms": 289.1,
+            "at": 27402.2
+          },
+          {
+            "tag": "main",
+            "ms": 290.1,
+            "at": 27402.1
+          },
+          {
+            "tag": "main",
+            "ms": 39.9,
+            "at": 28439.3
+          },
+          {
+            "tag": "main",
+            "ms": 40.7,
+            "at": 28439.2
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.1,
+            "at": 30774.2
+          },
+          {
+            "tag": "400x200",
+            "ms": 0.9,
+            "at": 30854.6
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.2,
+            "at": 31987.3
+          },
+          {
+            "tag": "400x200",
+            "ms": 1,
+            "at": 32073.2
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.1,
+            "at": 33206.9
+          },
+          {
+            "tag": "400x200",
+            "ms": 1,
+            "at": 33309.2
+          },
+          {
+            "tag": "400x200",
+            "ms": 21.9,
+            "at": 34418.5
+          },
+          {
+            "tag": "400x200",
+            "ms": 14.5,
+            "at": 34522
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.6,
+            "at": 35652.4
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.5,
+            "at": 35754.8
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.1,
+            "at": 36848.4
+          },
+          {
+            "tag": "400x200",
+            "ms": 0.9,
+            "at": 36922.6
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.6,
+            "at": 38048
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.4,
+            "at": 38120.8
+          },
+          {
+            "tag": "400x200",
+            "ms": 9.1,
+            "at": 39242.9
+          },
+          {
+            "tag": "400x200",
+            "ms": 8.3,
+            "at": 39334.6
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.4,
+            "at": 40445.2
+          },
+          {
+            "tag": "400x200",
+            "ms": 1,
+            "at": 40518.5
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.3,
+            "at": 41641.3
+          },
+          {
+            "tag": "400x200",
+            "ms": 1,
+            "at": 41716.9
+          },
+          {
+            "tag": "400x200",
+            "ms": 0.8,
+            "at": 42839
+          },
+          {
+            "tag": "400x200",
+            "ms": 0.8,
+            "at": 42916.4
+          },
+          {
+            "tag": "400x200",
+            "ms": 7.1,
+            "at": 44034.9
+          },
+          {
+            "tag": "400x200",
+            "ms": 6.9,
+            "at": 44117.2
+          }
+        ],
+        "toDataURLs": [
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.3
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 0.9
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.3
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.3
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.4
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.4
+          }
+        ],
+        "toBlobs": 48,
+        "trainingEntryMs": 9984,
+        "warmPanel": {
+          "hidden": true,
+          "slots": 4,
+          "offers": 11
+        },
+        "firstOpenWarmReuse": "yes"
+      },
+      "picDraws": [],
+      "marineShadowBuilds": 2,
+      "cifMarineReadyDuringArmoryOnly": false,
+      "perItem": [
+        {
+          "id": "pistol",
+          "kind": "gun",
+          "openMs": 17,
+          "buyMs": null,
+          "modMs": 33.2,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 17,
+              "maxRafGapMs": 16.8,
+              "syncMs": 17,
+              "at": 30601.8,
+              "end": 30701.7,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            },
+            "buy": null,
+            "mod": {
+              "worstFrameMs": 33.2,
+              "maxRafGapMs": 33.2,
+              "syncMs": 13.7,
+              "at": 30732.4,
+              "end": 30884.1,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 2.5,
+              "at": 30915.4,
+              "end": 31619.6,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "uzi",
+          "kind": "gun",
+          "openMs": 16.8,
+          "buyMs": 16.8,
+          "modMs": 33.3,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 7,
+              "at": 31652.8,
+              "end": 31751.7,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 3.6,
+              "at": 31783.6,
+              "end": 31916.5,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 33.3,
+              "maxRafGapMs": 33.3,
+              "syncMs": 4,
+              "at": 31949.5,
+              "end": 32099.7,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 2.3,
+              "at": 32133.7,
+              "end": 32835.4,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "shotgun",
+          "kind": "gun",
+          "openMs": 16.7,
+          "buyMs": 16.7,
+          "modMs": 33.4,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 7.6,
+              "at": 32869,
+              "end": 32966.7,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 3.5,
+              "at": 32999.2,
+              "end": 33133.2,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 33.4,
+              "maxRafGapMs": 33.4,
+              "syncMs": 3.7,
+              "at": 33166.4,
+              "end": 33317.2,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 2.5,
+              "at": 33349.9,
+              "end": 34051.4,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "revolver",
+          "kind": "gun",
+          "openMs": 16.8,
+          "buyMs": 16.8,
+          "modMs": 49.8,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 7.2,
+              "at": 34086.2,
+              "end": 34182.9,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 3.3,
+              "at": 34216,
+              "end": 34349.1,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 49.8,
+              "maxRafGapMs": 49.8,
+              "syncMs": 7,
+              "at": 34382.8,
+              "end": 34549.3,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 3.2,
+              "at": 34583.2,
+              "end": 35285.1,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "m4",
+          "kind": "gun",
+          "openMs": 16.8,
+          "buyMs": 16.8,
+          "modMs": 16.8,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 6.7,
+              "at": 35318.1,
+              "end": 35415.3,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 3.1,
+              "at": 35449.3,
+              "end": 35582.9,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 4.1,
+              "at": 35616.6,
+              "end": 35749.5,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 3.9,
+              "at": 35783.5,
+              "end": 36487,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "ak",
+          "kind": "gun",
+          "openMs": 16.7,
+          "buyMs": 16.8,
+          "modMs": 16.7,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 8.3,
+              "at": 36522.9,
+              "end": 36616.4,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 3.8,
+              "at": 36650,
+              "end": 36782.6,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 4,
+              "at": 36816.9,
+              "end": 36949.6,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 3.7,
+              "at": 36982.6,
+              "end": 37691.8,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "sniper",
+          "kind": "gun",
+          "openMs": 16.8,
+          "buyMs": 16.8,
+          "modMs": 16.8,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 9,
+              "at": 37719.1,
+              "end": 37815.7,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 3.8,
+              "at": 37850.8,
+              "end": 37982.8,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 4.9,
+              "at": 38016.6,
+              "end": 38149.8,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 4.2,
+              "at": 38182.9,
+              "end": 38884.4,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "launcher",
+          "kind": "gun",
+          "openMs": 16.7,
+          "buyMs": 16.7,
+          "modMs": 16.8,
+          "closeMs": 16.9,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 8.4,
+              "at": 38917.9,
+              "end": 39015.8,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 4.4,
+              "at": 39049.5,
+              "end": 39183.2,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 4.8,
+              "at": 39216.4,
+              "end": 39351.2,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.9,
+              "maxRafGapMs": 16.9,
+              "syncMs": 3.9,
+              "at": 39384,
+              "end": 40086.6,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "aa12",
+          "kind": "gun",
+          "openMs": 16.7,
+          "buyMs": 16.7,
+          "modMs": 16.8,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 12,
+              "at": 40119.9,
+              "end": 40217.2,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 4.3,
+              "at": 40250.5,
+              "end": 40382.9,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 4,
+              "at": 40416.2,
+              "end": 40550,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 4.5,
+              "at": 40582.5,
+              "end": 41284.8,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "minigun",
+          "kind": "gun",
+          "openMs": 16.8,
+          "buyMs": 16.7,
+          "modMs": 16.8,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 6.5,
+              "at": 41318.6,
+              "end": 41415.6,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 3.3,
+              "at": 41449.4,
+              "end": 41582.3,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 3.7,
+              "at": 41615.6,
+              "end": 41749,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 4.7,
+              "at": 41782,
+              "end": 42484,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "flamer",
+          "kind": "gun",
+          "openMs": 16.7,
+          "buyMs": 16.7,
+          "modMs": 16.7,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 6.9,
+              "at": 42518,
+              "end": 42615.2,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 4,
+              "at": 42648.7,
+              "end": 42782.1,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 4.1,
+              "at": 42815.1,
+              "end": 42949,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 4.4,
+              "at": 42982,
+              "end": 43684.2,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "chainsaw",
+          "kind": "gun",
+          "openMs": 16.7,
+          "buyMs": 16.8,
+          "modMs": 16.7,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 6.8,
+              "at": 43717.1,
+              "end": 43815.5,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 3.4,
+              "at": 43848.4,
+              "end": 43981.5,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 4.1,
+              "at": 44015.5,
+              "end": 44149.1,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 1.6,
+              "at": 44182.1,
+              "end": 44884.7,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "m240",
+          "kind": "build",
+          "openMs": 16.8,
+          "buyMs": 16.7,
+          "modMs": 16.7,
+          "closeMs": 16.7,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 6.4,
+              "at": 44917.6,
+              "end": 45015.5,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 3.3,
+              "at": 45049.2,
+              "end": 45181.8,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 2.8,
+              "at": 45215.1,
+              "end": 45315.3,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 1.9,
+              "at": 45348.6,
+              "end": 46050.7,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "mortar",
+          "kind": "build",
+          "openMs": 16.8,
+          "buyMs": 16.7,
+          "modMs": 16.7,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 7,
+              "at": 46084.1,
+              "end": 46182.3,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 3.2,
+              "at": 46215.1,
+              "end": 46348.7,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 2.9,
+              "at": 46382.7,
+              "end": 46481.6,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 2,
+              "at": 46515.1,
+              "end": 47217.6,
+              "pipelineCacheBefore": 376,
+              "pipelineCacheAfter": 376,
+              "newPipelineCount": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "view": "1P",
+      "run": 2,
+      "runtimeErrors": [],
+      "pageErrors": [],
+      "diag": {
+        "inits": [
+          {
+            "tag": "400x200",
+            "ms": 144.6
+          }
+        ],
+        "renders": [
+          {
+            "tag": "main",
+            "ms": 68.2,
+            "at": 23246.6
+          },
+          {
+            "tag": "main",
+            "ms": 1321.2,
+            "at": 23209.6
+          },
+          {
+            "tag": "main",
+            "ms": 1322.5,
+            "at": 23209.4
+          },
+          {
+            "tag": "main",
+            "ms": 31.1,
+            "at": 24682.7
+          },
+          {
+            "tag": "main",
+            "ms": 32.1,
+            "at": 24682.5
+          },
+          {
+            "tag": "400x200",
+            "ms": 227,
+            "at": 24905.6
+          },
+          {
+            "tag": "400x200",
+            "ms": 2,
+            "at": 25515.1
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.3,
+            "at": 25529.5
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.7,
+            "at": 25543
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.7,
+            "at": 25553.9
+          },
+          {
+            "tag": "400x200",
+            "ms": 1,
+            "at": 25567.2
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.1,
+            "at": 25583.9
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.2,
+            "at": 25600
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.4,
+            "at": 25618.5
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.2,
+            "at": 25636.5
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.1,
+            "at": 25652.3
+          },
+          {
+            "tag": "400x200",
+            "ms": 2.3,
+            "at": 25671.4
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.1,
+            "at": 25687.9
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.3,
+            "at": 25699.1
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.4,
+            "at": 25716.5
+          },
+          {
+            "tag": "400x200",
+            "ms": 16,
+            "at": 25736.1
+          },
+          {
+            "tag": "400x200",
+            "ms": 15.7,
+            "at": 25761.4
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.8,
+            "at": 25786.1
+          },
+          {
+            "tag": "400x200",
+            "ms": 2.7,
+            "at": 25803.6
+          },
+          {
+            "tag": "400x200",
+            "ms": 8.2,
+            "at": 25815.6
+          },
+          {
+            "tag": "400x200",
+            "ms": 7.5,
+            "at": 25832.1
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.1,
+            "at": 25847.7
+          },
+          {
+            "tag": "400x200",
+            "ms": 0.9,
+            "at": 25864.6
+          },
+          {
+            "tag": "400x200",
+            "ms": 7.3,
+            "at": 25881.5
+          },
+          {
+            "tag": "400x200",
+            "ms": 7.3,
+            "at": 25898.1
+          },
+          {
+            "tag": "main",
+            "ms": 294.2,
+            "at": 26119.3
+          },
+          {
+            "tag": "main",
+            "ms": 295.3,
+            "at": 26119.1
+          },
+          {
+            "tag": "main",
+            "ms": 38.8,
+            "at": 27173.5
+          },
+          {
+            "tag": "main",
+            "ms": 40.3,
+            "at": 27173.4
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.1,
+            "at": 29520
+          },
+          {
+            "tag": "400x200",
+            "ms": 0.9,
+            "at": 29605.7
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.2,
+            "at": 30735.5
+          },
+          {
+            "tag": "400x200",
+            "ms": 0.9,
+            "at": 30822.6
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.1,
+            "at": 31955.8
+          },
+          {
+            "tag": "400x200",
+            "ms": 0.9,
+            "at": 32043.3
+          },
+          {
+            "tag": "400x200",
+            "ms": 21.9,
+            "at": 33149.9
+          },
+          {
+            "tag": "400x200",
+            "ms": 15.6,
+            "at": 33254.4
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.5,
+            "at": 34368.4
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.4,
+            "at": 34454.9
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.1,
+            "at": 35564.3
+          },
+          {
+            "tag": "400x200",
+            "ms": 0.9,
+            "at": 35624.9
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.5,
+            "at": 36765.4
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.5,
+            "at": 36839.5
+          },
+          {
+            "tag": "400x200",
+            "ms": 8.8,
+            "at": 37960.4
+          },
+          {
+            "tag": "400x200",
+            "ms": 8.3,
+            "at": 38052.3
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.2,
+            "at": 39161.3
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.1,
+            "at": 39237.1
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.2,
+            "at": 40360.5
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.3,
+            "at": 40435.8
+          },
+          {
+            "tag": "400x200",
+            "ms": 0.9,
+            "at": 41556.2
+          },
+          {
+            "tag": "400x200",
+            "ms": 0.7,
+            "at": 41620.4
+          },
+          {
+            "tag": "400x200",
+            "ms": 7.2,
+            "at": 42752.7
+          },
+          {
+            "tag": "400x200",
+            "ms": 7,
+            "at": 42834.5
+          }
+        ],
+        "toDataURLs": [
+          {
+            "size": "256x256",
+            "ms": 1.3
+          },
+          {
+            "size": "256x256",
+            "ms": 1.5
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.9
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.3
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 0.9
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.5
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.5
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          }
+        ],
+        "toBlobs": 48,
+        "trainingEntryMs": 9966,
+        "warmPanel": {
+          "hidden": true,
+          "slots": 4,
+          "offers": 11
+        },
+        "firstOpenWarmReuse": "yes"
+      },
+      "picDraws": [],
+      "marineShadowBuilds": 2,
+      "cifMarineReadyDuringArmoryOnly": false,
+      "perItem": [
+        {
+          "id": "pistol",
+          "kind": "gun",
+          "openMs": 16.8,
+          "buyMs": null,
+          "modMs": 33.3,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 15.4,
+              "at": 29353.4,
+              "end": 29451,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "buy": null,
+            "mod": {
+              "worstFrameMs": 33.3,
+              "maxRafGapMs": 33.3,
+              "syncMs": 11.9,
+              "at": 29483.8,
+              "end": 29634,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 2.5,
+              "at": 29667.9,
+              "end": 30368.6,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "uzi",
+          "kind": "gun",
+          "openMs": 16.8,
+          "buyMs": 16.9,
+          "modMs": 33.4,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 7.3,
+              "at": 30403.4,
+              "end": 30503.2,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.9,
+              "maxRafGapMs": 16.9,
+              "syncMs": 4.7,
+              "at": 30535.3,
+              "end": 30672.6,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 33.4,
+              "maxRafGapMs": 33.4,
+              "syncMs": 3.7,
+              "at": 30700.4,
+              "end": 30851.3,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 2.8,
+              "at": 30883.7,
+              "end": 31586.1,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "shotgun",
+          "kind": "gun",
+          "openMs": 16.7,
+          "buyMs": 16.7,
+          "modMs": 16.7,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 7.9,
+              "at": 31623.6,
+              "end": 31717.3,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 3.6,
+              "at": 31750.1,
+              "end": 31883.8,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 3.5,
+              "at": 31916.5,
+              "end": 32051.3,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 2.8,
+              "at": 32083.4,
+              "end": 32786,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "revolver",
+          "kind": "gun",
+          "openMs": 16.8,
+          "buyMs": 16.7,
+          "modMs": 33.2,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 6.7,
+              "at": 32819.5,
+              "end": 32916.8,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 3.4,
+              "at": 32949.7,
+              "end": 33083.7,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 33.2,
+              "maxRafGapMs": 33.2,
+              "syncMs": 6.7,
+              "at": 33116.4,
+              "end": 33277.9,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 2.9,
+              "at": 33300.2,
+              "end": 34003.8,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "m4",
+          "kind": "gun",
+          "openMs": 16.7,
+          "buyMs": 16.8,
+          "modMs": 16.7,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 6.2,
+              "at": 34035.6,
+              "end": 34134.6,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 3.7,
+              "at": 34167.2,
+              "end": 34299.9,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 3.6,
+              "at": 34333.1,
+              "end": 34466.9,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 3.4,
+              "at": 34500.5,
+              "end": 35203.8,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "ak",
+          "kind": "gun",
+          "openMs": 16.7,
+          "buyMs": 16.7,
+          "modMs": 16.8,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 7.9,
+              "at": 35238.5,
+              "end": 35333.7,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 3.7,
+              "at": 35366.4,
+              "end": 35500.6,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 3.8,
+              "at": 35533.5,
+              "end": 35667.6,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 3.8,
+              "at": 35701.1,
+              "end": 36403.6,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "sniper",
+          "kind": "gun",
+          "openMs": 16.8,
+          "buyMs": 16.8,
+          "modMs": 16.7,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 7,
+              "at": 36437.4,
+              "end": 36533.5,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 3.3,
+              "at": 36567.3,
+              "end": 36701.3,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 3.6,
+              "at": 36734.3,
+              "end": 36866.8,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 4.1,
+              "at": 36901.1,
+              "end": 37602.5,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "launcher",
+          "kind": "gun",
+          "openMs": 16.7,
+          "buyMs": 16.7,
+          "modMs": 16.8,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 6.7,
+              "at": 37636.7,
+              "end": 37733.1,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 3.6,
+              "at": 37766.6,
+              "end": 37900.2,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 5.3,
+              "at": 37933.3,
+              "end": 38068.9,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 4.6,
+              "at": 38100.7,
+              "end": 38803.5,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "aa12",
+          "kind": "gun",
+          "openMs": 16.7,
+          "buyMs": 16.8,
+          "modMs": 16.7,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 8.4,
+              "at": 38839.4,
+              "end": 38933.7,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 3.3,
+              "at": 38967.7,
+              "end": 39100.4,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 3.9,
+              "at": 39133.5,
+              "end": 39267.1,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 4.9,
+              "at": 39300.7,
+              "end": 40002.8,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "minigun",
+          "kind": "gun",
+          "openMs": 16.7,
+          "buyMs": 16.8,
+          "modMs": 16.7,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 6.9,
+              "at": 40036.8,
+              "end": 40134.2,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 3.3,
+              "at": 40167.9,
+              "end": 40300.8,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 4.2,
+              "at": 40333.8,
+              "end": 40467.5,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 5,
+              "at": 40501.3,
+              "end": 41202.7,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "flamer",
+          "kind": "gun",
+          "openMs": 16.7,
+          "buyMs": 16.8,
+          "modMs": 16.7,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 6.9,
+              "at": 41235.9,
+              "end": 41334,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 3.4,
+              "at": 41367.2,
+              "end": 41500.3,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 4.3,
+              "at": 41533.6,
+              "end": 41667.2,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 4.8,
+              "at": 41699.6,
+              "end": 42402.6,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "chainsaw",
+          "kind": "gun",
+          "openMs": 16.8,
+          "buyMs": 16.8,
+          "modMs": 16.7,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 6.9,
+              "at": 42437.3,
+              "end": 42533.9,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 3.5,
+              "at": 42566.7,
+              "end": 42700.4,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 4.2,
+              "at": 42734.6,
+              "end": 42866.9,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 1.8,
+              "at": 42900.6,
+              "end": 43603,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "m240",
+          "kind": "build",
+          "openMs": 16.7,
+          "buyMs": 16.9,
+          "modMs": 16.7,
+          "closeMs": 17,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 8.4,
+              "at": 43637.6,
+              "end": 43733.4,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.9,
+              "maxRafGapMs": 16.9,
+              "syncMs": 3.3,
+              "at": 43768.5,
+              "end": 43900.6,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 2.4,
+              "at": 43934.8,
+              "end": 44033.6,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 17,
+              "maxRafGapMs": 17,
+              "syncMs": 2.1,
+              "at": 44068.3,
+              "end": 44769.5,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "mortar",
+          "kind": "build",
+          "openMs": 16.7,
+          "buyMs": 16.7,
+          "modMs": 16.7,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 7.3,
+              "at": 44802.4,
+              "end": 44900,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 3,
+              "at": 44932.9,
+              "end": 45067.4,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 3.2,
+              "at": 45101.8,
+              "end": 45201,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 2.3,
+              "at": 45234.2,
+              "end": 45935.9,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "view": "3P",
+      "run": 1,
+      "runtimeErrors": [],
+      "pageErrors": [],
+      "diag": {
+        "inits": [
+          {
+            "tag": "400x200",
+            "ms": 131.5
+          }
+        ],
+        "renders": [
+          {
+            "tag": "main",
+            "ms": 69.2,
+            "at": 24577.1
+          },
+          {
+            "tag": "main",
+            "ms": 1280.6,
+            "at": 24541.3
+          },
+          {
+            "tag": "main",
+            "ms": 1281.7,
+            "at": 24541.1
+          },
+          {
+            "tag": "main",
+            "ms": 28.4,
+            "at": 25935.5
+          },
+          {
+            "tag": "main",
+            "ms": 29.3,
+            "at": 25935.4
+          },
+          {
+            "tag": "400x200",
+            "ms": 215.4,
+            "at": 26142.5
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.6,
+            "at": 26754.4
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.4,
+            "at": 26769.1
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.7,
+            "at": 26787.1
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.8,
+            "at": 26803
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.1,
+            "at": 26819
+          },
+          {
+            "tag": "400x200",
+            "ms": 1,
+            "at": 26836.1
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.2,
+            "at": 26851.5
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.1,
+            "at": 26869.8
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.4,
+            "at": 26887.4
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.3,
+            "at": 26904.2
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.5,
+            "at": 26923.1
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.2,
+            "at": 26939.4
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.2,
+            "at": 26950.7
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.1,
+            "at": 26967.6
+          },
+          {
+            "tag": "400x200",
+            "ms": 14.9,
+            "at": 26987.4
+          },
+          {
+            "tag": "400x200",
+            "ms": 14.4,
+            "at": 27011.2
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.9,
+            "at": 27035.5
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.8,
+            "at": 27052.6
+          },
+          {
+            "tag": "400x200",
+            "ms": 8.7,
+            "at": 27066.8
+          },
+          {
+            "tag": "400x200",
+            "ms": 7.7,
+            "at": 27083.8
+          },
+          {
+            "tag": "400x200",
+            "ms": 1,
+            "at": 27099.1
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.1,
+            "at": 27116.2
+          },
+          {
+            "tag": "400x200",
+            "ms": 7.2,
+            "at": 27133.6
+          },
+          {
+            "tag": "400x200",
+            "ms": 8.1,
+            "at": 27149.9
+          },
+          {
+            "tag": "main",
+            "ms": 301.4,
+            "at": 27373
+          },
+          {
+            "tag": "main",
+            "ms": 302.4,
+            "at": 27372.8
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.2,
+            "at": 30756.6
+          },
+          {
+            "tag": "400x200",
+            "ms": 0.9,
+            "at": 30839.2
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.5,
+            "at": 31969.3
+          },
+          {
+            "tag": "400x200",
+            "ms": 0.9,
+            "at": 32057.3
+          },
+          {
+            "tag": "400x200",
+            "ms": 1,
+            "at": 33191.4
+          },
+          {
+            "tag": "400x200",
+            "ms": 0.9,
+            "at": 33277.6
+          },
+          {
+            "tag": "400x200",
+            "ms": 19.8,
+            "at": 34385.2
+          },
+          {
+            "tag": "400x200",
+            "ms": 15.1,
+            "at": 34490.1
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.4,
+            "at": 35603.8
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.6,
+            "at": 35691.3
+          },
+          {
+            "tag": "400x200",
+            "ms": 1,
+            "at": 36799.5
+          },
+          {
+            "tag": "400x200",
+            "ms": 0.8,
+            "at": 36873.4
+          },
+          {
+            "tag": "400x200",
+            "ms": 2.7,
+            "at": 38000.7
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.4,
+            "at": 38088.9
+          },
+          {
+            "tag": "400x200",
+            "ms": 9.2,
+            "at": 39196.3
+          },
+          {
+            "tag": "400x200",
+            "ms": 8,
+            "at": 39286.9
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.2,
+            "at": 40397
+          },
+          {
+            "tag": "400x200",
+            "ms": 0.9,
+            "at": 40470.6
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.3,
+            "at": 41595.1
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.1,
+            "at": 41670
+          },
+          {
+            "tag": "400x200",
+            "ms": 0.7,
+            "at": 42792
+          },
+          {
+            "tag": "400x200",
+            "ms": 0.8,
+            "at": 42871.2
+          },
+          {
+            "tag": "400x200",
+            "ms": 8.3,
+            "at": 43990.9
+          },
+          {
+            "tag": "400x200",
+            "ms": 8.7,
+            "at": 44088
+          }
+        ],
+        "toDataURLs": [
+          {
+            "size": "256x256",
+            "ms": 1.4
+          },
+          {
+            "size": "256x256",
+            "ms": 1.4
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.3
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.3
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.4
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.3
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.5
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 0.9
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          }
+        ],
+        "toBlobs": 48,
+        "trainingEntryMs": 9912,
+        "warmPanel": {
+          "hidden": true,
+          "slots": 4,
+          "offers": 11
+        },
+        "firstOpenWarmReuse": "yes"
+      },
+      "picDraws": [],
+      "marineShadowBuilds": 2,
+      "cifMarineReadyDuringArmoryOnly": false,
+      "perItem": [
+        {
+          "id": "pistol",
+          "kind": "gun",
+          "openMs": 16.8,
+          "buyMs": null,
+          "modMs": 33.3,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 15.5,
+              "at": 30586.7,
+              "end": 30684.8,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "buy": null,
+            "mod": {
+              "worstFrameMs": 33.3,
+              "maxRafGapMs": 33.3,
+              "syncMs": 10.9,
+              "at": 30718.1,
+              "end": 30870.2,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 2.5,
+              "at": 30901.6,
+              "end": 31603.2,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "uzi",
+          "kind": "gun",
+          "openMs": 16.7,
+          "buyMs": 16.8,
+          "modMs": 33.4,
+          "closeMs": 16.9,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 6.6,
+              "at": 31636.4,
+              "end": 31734.4,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 3.9,
+              "at": 31767.7,
+              "end": 31901.2,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 33.4,
+              "maxRafGapMs": 33.4,
+              "syncMs": 3.8,
+              "at": 31934.5,
+              "end": 32085.1,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.9,
+              "maxRafGapMs": 16.9,
+              "syncMs": 2.5,
+              "at": 32117.9,
+              "end": 32820.4,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "shotgun",
+          "kind": "gun",
+          "openMs": 16.7,
+          "buyMs": 16.7,
+          "modMs": 16.8,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 6.9,
+              "at": 32852.9,
+              "end": 32951,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 3.6,
+              "at": 32984.3,
+              "end": 33117.8,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 3.4,
+              "at": 33150.9,
+              "end": 33287.5,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 2.4,
+              "at": 33318.2,
+              "end": 34020.2,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "revolver",
+          "kind": "gun",
+          "openMs": 16.7,
+          "buyMs": 16.7,
+          "modMs": 33.3,
+          "closeMs": 16.9,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 7.1,
+              "at": 34053.2,
+              "end": 34151.7,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 3.1,
+              "at": 34184.6,
+              "end": 34317.8,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 33.3,
+              "maxRafGapMs": 33.3,
+              "syncMs": 6.4,
+              "at": 34350.8,
+              "end": 34513,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.9,
+              "maxRafGapMs": 16.9,
+              "syncMs": 3.2,
+              "at": 34534.8,
+              "end": 35236.7,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "m4",
+          "kind": "gun",
+          "openMs": 16.7,
+          "buyMs": 16.7,
+          "modMs": 16.8,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 6.5,
+              "at": 35270.2,
+              "end": 35368,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 3.2,
+              "at": 35401.1,
+              "end": 35534.8,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 3.4,
+              "at": 35568.4,
+              "end": 35702.1,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 3.5,
+              "at": 35735.5,
+              "end": 36441.8,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "ak",
+          "kind": "gun",
+          "openMs": 16.7,
+          "buyMs": 16.7,
+          "modMs": 16.8,
+          "closeMs": 16.9,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 7.3,
+              "at": 36470.6,
+              "end": 36568.8,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 3.3,
+              "at": 36601.3,
+              "end": 36734.5,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 3.8,
+              "at": 36768.5,
+              "end": 36902.2,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.9,
+              "maxRafGapMs": 16.9,
+              "syncMs": 4,
+              "at": 36935,
+              "end": 37636.6,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "sniper",
+          "kind": "gun",
+          "openMs": 16.7,
+          "buyMs": 16.8,
+          "modMs": 16.8,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 6.9,
+              "at": 37670.2,
+              "end": 37768.3,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 3.1,
+              "at": 37801.7,
+              "end": 37934.8,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 3.8,
+              "at": 37968.7,
+              "end": 38102.1,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 3.9,
+              "at": 38135.3,
+              "end": 38837.2,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "launcher",
+          "kind": "gun",
+          "openMs": 16.7,
+          "buyMs": 16.7,
+          "modMs": 16.8,
+          "closeMs": 16.9,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 7.2,
+              "at": 38873.3,
+              "end": 38968.8,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 3.4,
+              "at": 39001.3,
+              "end": 39134.8,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 4.8,
+              "at": 39168.2,
+              "end": 39303.6,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.9,
+              "maxRafGapMs": 16.9,
+              "syncMs": 4.2,
+              "at": 39335.2,
+              "end": 40037.1,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "aa12",
+          "kind": "gun",
+          "openMs": 16.8,
+          "buyMs": 16.7,
+          "modMs": 16.7,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 6.7,
+              "at": 40070.6,
+              "end": 40168.5,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 3,
+              "at": 40201.6,
+              "end": 40334.7,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 4.1,
+              "at": 40368.4,
+              "end": 40502.3,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 4.4,
+              "at": 40535.6,
+              "end": 41237.7,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "minigun",
+          "kind": "gun",
+          "openMs": 16.7,
+          "buyMs": 16.7,
+          "modMs": 16.7,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 7.1,
+              "at": 41272.3,
+              "end": 41369.9,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 3.6,
+              "at": 41402.2,
+              "end": 41536,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 3.9,
+              "at": 41570,
+              "end": 41702.3,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 4.7,
+              "at": 41736.2,
+              "end": 42439.1,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "flamer",
+          "kind": "gun",
+          "openMs": 16.7,
+          "buyMs": 16.8,
+          "modMs": 16.7,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 7.3,
+              "at": 42470.9,
+              "end": 42570.1,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 3.4,
+              "at": 42602.3,
+              "end": 42735.8,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 3.7,
+              "at": 42768.5,
+              "end": 42902,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 4.4,
+              "at": 42934.8,
+              "end": 43637.8,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "chainsaw",
+          "kind": "gun",
+          "openMs": 16.7,
+          "buyMs": 16.7,
+          "modMs": 16.7,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 8.3,
+              "at": 43672.2,
+              "end": 43769.9,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 3.5,
+              "at": 43803.1,
+              "end": 43935.1,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 4.3,
+              "at": 43969.6,
+              "end": 44105.1,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 1.7,
+              "at": 44136.4,
+              "end": 44837.7,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "m240",
+          "kind": "build",
+          "openMs": 16.7,
+          "buyMs": 16.8,
+          "modMs": 16.7,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 7.5,
+              "at": 44873.4,
+              "end": 44969.7,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 3.4,
+              "at": 45002.7,
+              "end": 45135.9,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 2.9,
+              "at": 45169.4,
+              "end": 45268.9,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 1.7,
+              "at": 45303.3,
+              "end": 46006.1,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "mortar",
+          "kind": "build",
+          "openMs": 16.7,
+          "buyMs": 16.7,
+          "modMs": 16.7,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 7.1,
+              "at": 46038.8,
+              "end": 46136.1,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 3.1,
+              "at": 46168.9,
+              "end": 46303.5,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 2.5,
+              "at": 46335.8,
+              "end": 46435.4,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 1.8,
+              "at": 46470.5,
+              "end": 47172.6,
+              "pipelineCacheBefore": 377,
+              "pipelineCacheAfter": 377,
+              "newPipelineCount": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "view": "3P",
+      "run": 2,
+      "runtimeErrors": [],
+      "pageErrors": [],
+      "diag": {
+        "inits": [
+          {
+            "tag": "400x200",
+            "ms": 146.9
+          }
+        ],
+        "renders": [
+          {
+            "tag": "main",
+            "ms": 21,
+            "at": 17975.2
+          },
+          {
+            "tag": "main",
+            "ms": 78.5,
+            "at": 23882.3
+          },
+          {
+            "tag": "main",
+            "ms": 1469.1,
+            "at": 23448.8
+          },
+          {
+            "tag": "main",
+            "ms": 1471.9,
+            "at": 23447.3
+          },
+          {
+            "tag": "main",
+            "ms": 26.9,
+            "at": 25063.6
+          },
+          {
+            "tag": "main",
+            "ms": 27.9,
+            "at": 25063.4
+          },
+          {
+            "tag": "400x200",
+            "ms": 223.6,
+            "at": 25285
+          },
+          {
+            "tag": "400x200",
+            "ms": 4.1,
+            "at": 25897.4
+          },
+          {
+            "tag": "400x200",
+            "ms": 3,
+            "at": 25932.6
+          },
+          {
+            "tag": "400x200",
+            "ms": 4,
+            "at": 25955.8
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.9,
+            "at": 25974.1
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.2,
+            "at": 25984
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.2,
+            "at": 26000.1
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.1,
+            "at": 26016.1
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.2,
+            "at": 26032.9
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.3,
+            "at": 26052.9
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.1,
+            "at": 26068
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.4,
+            "at": 26086.8
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.3,
+            "at": 26103.8
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.6,
+            "at": 26115
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.6,
+            "at": 26132.3
+          },
+          {
+            "tag": "400x200",
+            "ms": 15.6,
+            "at": 26152
+          },
+          {
+            "tag": "400x200",
+            "ms": 15.1,
+            "at": 26177.4
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.8,
+            "at": 26204
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.9,
+            "at": 26216.4
+          },
+          {
+            "tag": "400x200",
+            "ms": 9.6,
+            "at": 26231.2
+          },
+          {
+            "tag": "400x200",
+            "ms": 8.2,
+            "at": 26247.9
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.2,
+            "at": 26263.4
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.1,
+            "at": 26280.7
+          },
+          {
+            "tag": "400x200",
+            "ms": 8.2,
+            "at": 26297.9
+          },
+          {
+            "tag": "400x200",
+            "ms": 8.1,
+            "at": 26314.2
+          },
+          {
+            "tag": "main",
+            "ms": 296.9,
+            "at": 26537.8
+          },
+          {
+            "tag": "main",
+            "ms": 297.9,
+            "at": 26537.7
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.3,
+            "at": 29948.1
+          },
+          {
+            "tag": "400x200",
+            "ms": 0.8,
+            "at": 30038.6
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.1,
+            "at": 31167.6
+          },
+          {
+            "tag": "400x200",
+            "ms": 1,
+            "at": 31256.2
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.3,
+            "at": 32374.9
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.2,
+            "at": 32460.3
+          },
+          {
+            "tag": "400x200",
+            "ms": 25.3,
+            "at": 33587.9
+          },
+          {
+            "tag": "400x200",
+            "ms": 16.2,
+            "at": 33690.1
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.6,
+            "at": 34818.9
+          },
+          {
+            "tag": "400x200",
+            "ms": 4.3,
+            "at": 34913.2
+          },
+          {
+            "tag": "400x200",
+            "ms": 2.5,
+            "at": 36015.9
+          },
+          {
+            "tag": "400x200",
+            "ms": 0.8,
+            "at": 36104.1
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.5,
+            "at": 37232.7
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.4,
+            "at": 37321.9
+          },
+          {
+            "tag": "400x200",
+            "ms": 9.2,
+            "at": 38429.2
+          },
+          {
+            "tag": "400x200",
+            "ms": 8.8,
+            "at": 38518.1
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.3,
+            "at": 39627.6
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.3,
+            "at": 39702.2
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.3,
+            "at": 40825
+          },
+          {
+            "tag": "400x200",
+            "ms": 1.1,
+            "at": 40901.6
+          },
+          {
+            "tag": "400x200",
+            "ms": 0.8,
+            "at": 42023.9
+          },
+          {
+            "tag": "400x200",
+            "ms": 0.7,
+            "at": 42100.4
+          },
+          {
+            "tag": "400x200",
+            "ms": 6.9,
+            "at": 43218.6
+          },
+          {
+            "tag": "400x200",
+            "ms": 6.8,
+            "at": 43300.7
+          }
+        ],
+        "toDataURLs": [
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.3
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.3
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.6
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.3
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.2
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1.1
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          },
+          {
+            "size": "256x256",
+            "ms": 1
+          }
+        ],
+        "toBlobs": 48,
+        "trainingEntryMs": 10209,
+        "warmPanel": {
+          "hidden": true,
+          "slots": 4,
+          "offers": 11
+        },
+        "firstOpenWarmReuse": "yes"
+      },
+      "picDraws": [],
+      "marineShadowBuilds": 2,
+      "cifMarineReadyDuringArmoryOnly": false,
+      "perItem": [
+        {
+          "id": "pistol",
+          "kind": "gun",
+          "openMs": 16.8,
+          "buyMs": null,
+          "modMs": 49.9,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 15.4,
+              "at": 29769.1,
+              "end": 29868.9,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            },
+            "buy": null,
+            "mod": {
+              "worstFrameMs": 49.9,
+              "maxRafGapMs": 49.9,
+              "syncMs": 14.8,
+              "at": 29905.4,
+              "end": 30066.8,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 2,
+              "at": 30100.6,
+              "end": 30802.5,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "uzi",
+          "kind": "gun",
+          "openMs": 16.7,
+          "buyMs": 16.7,
+          "modMs": 16.8,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 6.8,
+              "at": 30835.4,
+              "end": 30935.1,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 4.3,
+              "at": 30967.4,
+              "end": 31100.3,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 3.7,
+              "at": 31132.7,
+              "end": 31265.8,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 2.6,
+              "at": 31300.3,
+              "end": 32002.1,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "shotgun",
+          "kind": "gun",
+          "openMs": 16.7,
+          "buyMs": 16.7,
+          "modMs": 33.3,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 7.5,
+              "at": 32034.4,
+              "end": 32132.9,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 3.8,
+              "at": 32166.6,
+              "end": 32300.1,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 33.3,
+              "maxRafGapMs": 33.3,
+              "syncMs": 3.6,
+              "at": 32332.7,
+              "end": 32483.2,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 3.5,
+              "at": 32518.4,
+              "end": 33221.1,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "revolver",
+          "kind": "gun",
+          "openMs": 16.8,
+          "buyMs": 16.8,
+          "modMs": 50,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 7.5,
+              "at": 33252,
+              "end": 33350.5,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 3.6,
+              "at": 33383.3,
+              "end": 33517,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 50,
+              "maxRafGapMs": 50,
+              "syncMs": 7.6,
+              "at": 33550.7,
+              "end": 33723,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 3.3,
+              "at": 33750.2,
+              "end": 34453.4,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "m4",
+          "kind": "gun",
+          "openMs": 16.8,
+          "buyMs": 16.7,
+          "modMs": 16.8,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 6.8,
+              "at": 34486.6,
+              "end": 34583.3,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 3.3,
+              "at": 34617.6,
+              "end": 34749.5,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 4.2,
+              "at": 34784.3,
+              "end": 34935.7,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 3.7,
+              "at": 34955.1,
+              "end": 35652.4,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "ak",
+          "kind": "gun",
+          "openMs": 16.7,
+          "buyMs": 16.7,
+          "modMs": 16.7,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 7.9,
+              "at": 35685,
+              "end": 35783.3,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 3.6,
+              "at": 35816.7,
+              "end": 35949.6,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 3.9,
+              "at": 35983.7,
+              "end": 36116.3,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 3.7,
+              "at": 36148.9,
+              "end": 36854,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "sniper",
+          "kind": "gun",
+          "openMs": 16.9,
+          "buyMs": 33.2,
+          "modMs": 16.7,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.9,
+              "maxRafGapMs": 16.9,
+              "syncMs": 7.4,
+              "at": 36885.9,
+              "end": 36982.8,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 33.2,
+              "maxRafGapMs": 33.2,
+              "syncMs": 11.8,
+              "at": 37020.4,
+              "end": 37166.2,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 4.2,
+              "at": 37200,
+              "end": 37333.7,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 4,
+              "at": 37366.4,
+              "end": 38068.1,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "launcher",
+          "kind": "gun",
+          "openMs": 16.7,
+          "buyMs": 16.9,
+          "modMs": 16.7,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 7.3,
+              "at": 38105.1,
+              "end": 38199.1,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.9,
+              "maxRafGapMs": 16.9,
+              "syncMs": 3.4,
+              "at": 38233.2,
+              "end": 38366.1,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 4.8,
+              "at": 38399.6,
+              "end": 38535.7,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 4.6,
+              "at": 38566,
+              "end": 39267.8,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "aa12",
+          "kind": "gun",
+          "openMs": 16.7,
+          "buyMs": 16.7,
+          "modMs": 16.7,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 6.7,
+              "at": 39301.4,
+              "end": 39399.4,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 3,
+              "at": 39432.4,
+              "end": 39565.7,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 3.6,
+              "at": 39599.5,
+              "end": 39733.3,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 4.2,
+              "at": 39766.4,
+              "end": 40468.3,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "minigun",
+          "kind": "gun",
+          "openMs": 16.7,
+          "buyMs": 16.7,
+          "modMs": 16.8,
+          "closeMs": 16.9,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 6.4,
+              "at": 40501.2,
+              "end": 40601.1,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 3,
+              "at": 40632.4,
+              "end": 40765.7,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 3.8,
+              "at": 40799,
+              "end": 40932.8,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.9,
+              "maxRafGapMs": 16.9,
+              "syncMs": 4.3,
+              "at": 40965.8,
+              "end": 41667.9,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "flamer",
+          "kind": "gun",
+          "openMs": 16.8,
+          "buyMs": 16.7,
+          "modMs": 16.8,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 6.9,
+              "at": 41701.2,
+              "end": 41800,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 3,
+              "at": 41833.1,
+              "end": 41966.1,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 3.6,
+              "at": 41999.1,
+              "end": 42133.2,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 4.3,
+              "at": 42165.9,
+              "end": 42867.9,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "chainsaw",
+          "kind": "gun",
+          "openMs": 16.7,
+          "buyMs": 16.7,
+          "modMs": 16.7,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 6.4,
+              "at": 42901.5,
+              "end": 42999.4,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 3.3,
+              "at": 43032.2,
+              "end": 43165.8,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 4.7,
+              "at": 43199.5,
+              "end": 43333.1,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 1.7,
+              "at": 43365.9,
+              "end": 44067.7,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "m240",
+          "kind": "build",
+          "openMs": 16.8,
+          "buyMs": 16.7,
+          "modMs": 16.7,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 6.9,
+              "at": 44101.5,
+              "end": 44199.4,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 2.8,
+              "at": 44232.2,
+              "end": 44365.7,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 2.2,
+              "at": 44399,
+              "end": 44500,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 2,
+              "at": 44532.8,
+              "end": 45234.7,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            }
+          }
+        },
+        {
+          "id": "mortar",
+          "kind": "build",
+          "openMs": 16.7,
+          "buyMs": 16.7,
+          "modMs": 16.8,
+          "closeMs": 16.8,
+          "detail": {
+            "open": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 6.8,
+              "at": 45268.1,
+              "end": 45365.8,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            },
+            "buy": {
+              "worstFrameMs": 16.7,
+              "maxRafGapMs": 16.7,
+              "syncMs": 3.3,
+              "at": 45399,
+              "end": 45532.4,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            },
+            "mod": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 3,
+              "at": 45565.9,
+              "end": 45665.8,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            },
+            "close": {
+              "worstFrameMs": 16.8,
+              "maxRafGapMs": 16.8,
+              "syncMs": 2.6,
+              "at": 45700,
+              "end": 46400.7,
+              "pipelineCacheBefore": 375,
+              "pipelineCacheAfter": 375,
+              "newPipelineCount": 0
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

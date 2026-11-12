@@ -1,9 +1,14 @@
 // GP-188: one starter pull per draw. Interrupted starts must finish a fresh pull.
 export const SAW_START = Object.freeze({ reach: 0.22, pull: 0.48, retract: 0.67, return: 1.02 });
 export function createSawStart() { return { phase: 'off', t: 0, starts: 0 }; }
-export function stepSawStart(s, dt, { equipped, available = true, suspended = false }) {
+export function stepSawStart(s, dt, { equipped, available = true, interrupted = false, suspended = false }) {
   if (!equipped || !available) { s.phase = 'off'; s.t = 0; return s; }
   if (suspended) return s;
+  // A running engine idles while the hands are busy; a partly pulled cord resets.
+  if (interrupted) {
+    if (s.phase === 'starting') { s.phase = 'off'; s.t = 0; }
+    return s;
+  }
   if (s.phase === 'off') { s.phase = 'starting'; s.t = 0; s.starts++; }
   else if (s.phase === 'starting') {
     s.t = Math.min(SAW_START.return, s.t + Math.max(0, Math.min(0.1, dt)));

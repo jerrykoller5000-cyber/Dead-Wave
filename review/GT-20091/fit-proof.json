@@ -1,0 +1,30 @@
+{
+  "revolver": {
+    "original": "ad87c3e0",
+    "final": "0f1f97d0",
+    "parts": 932,
+    "overlapCount": 116,
+    "openSurfaces": 811
+  },
+  "revolver-equipped": {
+    "original": "3ff90593",
+    "final": "f2cdd895",
+    "parts": 954,
+    "overlapCount": 194,
+    "openSurfaces": 817
+  },
+  "revolver-prism": {
+    "original": "2baa2fa5",
+    "final": "79f27c74",
+    "parts": 991,
+    "overlapCount": 210,
+    "openSurfaces": 833
+  },
+  "revolver-rmr": {
+    "original": "41c2c62e",
+    "final": "af6b6fc5",
+    "parts": 979,
+    "overlapCount": 209,
+    "openSurfaces": 819
+  }
+}

@@ -1,0 +1,236 @@
+{
+  "hip-noon": {
+    "screen": [
+      979.8515332049577,
+      475.31070906691275
+    ],
+    "cameraDriftPx": 4.582862941503293e-13,
+    "visibleGreenPixels": 10,
+    "pixelsChangedWithin25pxSquare": 10,
+    "largestSurroundChange": 0,
+    "centreRGB": [
+      133,
+      239,
+      132
+    ],
+    "bounds": [
+      -2,
+      -2,
+      1,
+      1
+    ],
+    "brightest": [
+      133,
+      239,
+      132
+    ]
+  },
+  "hip-overcast": {
+    "screen": [
+      979.8515332049577,
+      475.31070906691275
+    ],
+    "cameraDriftPx": 4.582862941503293e-13,
+    "visibleGreenPixels": 10,
+    "pixelsChangedWithin25pxSquare": 10,
+    "largestSurroundChange": 0,
+    "centreRGB": [
+      133,
+      239,
+      132
+    ],
+    "bounds": [
+      -2,
+      -2,
+      1,
+      1
+    ],
+    "brightest": [
+      133,
+      239,
+      132
+    ]
+  },
+  "hip-dusk": {
+    "screen": [
+      979.8515332049577,
+      475.31070906691275
+    ],
+    "cameraDriftPx": 4.582862941503293e-13,
+    "visibleGreenPixels": 10,
+    "pixelsChangedWithin25pxSquare": 10,
+    "largestSurroundChange": 0,
+    "centreRGB": [
+      133,
+      239,
+      132
+    ],
+    "bounds": [
+      -2,
+      -2,
+      1,
+      1
+    ],
+    "brightest": [
+      133,
+      239,
+      132
+    ]
+  },
+  "hip-night": {
+    "screen": [
+      979.8515332049577,
+      475.31070906691275
+    ],
+    "cameraDriftPx": 4.582862941503293e-13,
+    "visibleGreenPixels": 10,
+    "pixelsChangedWithin25pxSquare": 10,
+    "largestSurroundChange": 0,
+    "centreRGB": [
+      133,
+      239,
+      132
+    ],
+    "bounds": [
+      -2,
+      -2,
+      1,
+      1
+    ],
+    "brightest": [
+      133,
+      239,
+      132
+    ]
+  },
+  "aimed-noon": {
+    "screen": [
+      800.0,
+      447.96689183886804
+    ],
+    "cameraDriftPx": 0.0,
+    "visibleGreenPixels": 16,
+    "pixelsChangedWithin25pxSquare": 16,
+    "largestSurroundChange": 0,
+    "centreRGB": [
+      140,
+      242,
+      138
+    ],
+    "bounds": [
+      -2,
+      -2,
+      1,
+      1
+    ],
+    "brightest": [
+      140,
+      242,
+      138
+    ]
+  },
+  "aimed-overcast": {
+    "screen": [
+      800.0,
+      447.96689183886804
+    ],
+    "cameraDriftPx": 0.0,
+    "visibleGreenPixels": 16,
+    "pixelsChangedWithin25pxSquare": 16,
+    "largestSurroundChange": 0,
+    "centreRGB": [
+      133,
+      239,
+      132
+    ],
+    "bounds": [
+      -2,
+      -2,
+      1,
+      1
+    ],
+    "brightest": [
+      133,
+      239,
+      132
+    ]
+  },
+  "aimed-dusk": {
+    "screen": [
+      800.0,
+      447.96689183886804
+    ],
+    "cameraDriftPx": 0.0,
+    "visibleGreenPixels": 16,
+    "pixelsChangedWithin25pxSquare": 16,
+    "largestSurroundChange": 0,
+    "centreRGB": [
+      133,
+      239,
+      132
+    ],
+    "bounds": [
+      -2,
+      -2,
+      1,
+      1
+    ],
+    "brightest": [
+      133,
+      239,
+      132
+    ]
+  },
+  "aimed-night": {
+    "screen": [
+      800.0,
+      447.96689183886804
+    ],
+    "cameraDriftPx": 0.0,
+    "visibleGreenPixels": 16,
+    "pixelsChangedWithin25pxSquare": 16,
+    "largestSurroundChange": 0,
+    "centreRGB": [
+      133,
+      239,
+      132
+    ],
+    "bounds": [
+      -2,
+      -2,
+      1,
+      1
+    ],
+    "brightest": [
+      133,
+      239,
+      132
+    ]
+  },
+  "aimed-dark-room": {
+    "screen": [
+      800.0,
+      447.96689183886804
+    ],
+    "cameraDriftPx": 0.0,
+    "visibleGreenPixels": 16,
+    "pixelsChangedWithin25pxSquare": 16,
+    "largestSurroundChange": 0,
+    "centreRGB": [
+      133,
+      239,
+      132
+    ],
+    "bounds": [
+      -2,
+      -2,
+      1,
+      1
+    ],
+    "brightest": [
+      133,
+      239,
+      132
+    ]
+  }
+}

@@ -1,13 +1,13 @@
 # Antigravity
 
-state: active
+state: idle
 model: Claude Sonnet 5.5 (medium)
-task: AG-309b AG-309 follow-ups: blackout-lift frame, first-equip warm, 3P cold entry, faded-marine pictures
-touching: index.html (trainingWarmCompile, Training entry), qa/2026-11-11-AG-309b, review/AG-309b
-since: 2026-11-12T00:46Z
-next: AG-309b (21:31Z: unparked (D-164), after AG-310b.) (20:02Z: parked f
+task: —
+touching: —
+since: 2026-11-12T03:10Z
+next: AG-309b (00:59Z, CLAUDE DIRECTOR: add tag289: the flashlight reads p
 blocked-on: —
-last-report: handoffs/2026-11-11-antigravity-AG-310b.md
+last-report: handoffs/2026-11-12-antigravity-AG-313.md
 
 ## Notes
 

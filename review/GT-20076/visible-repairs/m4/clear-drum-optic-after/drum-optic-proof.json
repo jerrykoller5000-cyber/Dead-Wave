@@ -1,0 +1,19 @@
+{
+  "hash": "71da4928",
+  "exterior": 18,
+  "role": "optic shell",
+  "gap": {
+    "lowerMm": 0,
+    "upperMm": 0.0078125
+  },
+  "glass": [
+    0,
+    0.1395,
+    0.045
+  ],
+  "dot": [
+    0,
+    0.134,
+    0.0455
+  ]
+}

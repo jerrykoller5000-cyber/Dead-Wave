@@ -1,0 +1,211 @@
+{
+  "eye": [
+    -7.597144648605321e-31,
+    0.11866723000303818,
+    -0.5399889694712737
+  ],
+  "plateVisible": false,
+  "rows": [
+    {
+      "y": 0.117,
+      "live": {
+        "label": "BufferGeometry[27]",
+        "point": [
+          0,
+          0.1176881730691548,
+          -0.03700000047683716
+        ],
+        "material": "vm:fold-static"
+      },
+      "raw": {
+        "label": "BufferGeometry[25]",
+        "point": [
+          -3.366440067200238e-31,
+          0.11773878149529461,
+          -0.06300000026822096
+        ],
+        "material": ""
+      }
+    },
+    {
+      "y": 0.11800000000000001,
+      "live": {
+        "label": "BufferGeometry[27]",
+        "point": [
+          0,
+          0.1182754087427611,
+          -0.037000000476950845
+        ],
+        "material": "vm:fold-static"
+      },
+      "raw": {
+        "label": "BufferGeometry[25]",
+        "point": [
+          -3.366440067200238e-31,
+          0.11829566237318889,
+          -0.0630000002682209
+        ],
+        "material": ""
+      }
+    },
+    {
+      "y": 0.11900000000000001,
+      "live": {
+        "label": "BufferGeometry[27]",
+        "point": [
+          0,
+          0.1188626444163674,
+          -0.03700000047683716
+        ],
+        "material": "vm:fold-static"
+      },
+      "raw": {
+        "label": "BufferGeometry[25]",
+        "point": [
+          -3.366440067200238e-31,
+          0.11885254325108316,
+          -0.06300000026822096
+        ],
+        "material": ""
+      }
+    },
+    {
+      "y": 0.12000000000000001,
+      "live": {
+        "label": "BufferGeometry[27]",
+        "point": [
+          0,
+          0.1194498800899737,
+          -0.03700000047683716
+        ],
+        "material": "vm:fold-static"
+      },
+      "raw": {
+        "label": "BufferGeometry[25]",
+        "point": [
+          -3.366440067200238e-31,
+          0.11940942412897743,
+          -0.0630000002682209
+        ],
+        "material": ""
+      }
+    },
+    {
+      "y": 0.12100000000000001,
+      "live": {
+        "label": "BufferGeometry[27]",
+        "point": [
+          0,
+          0.11999999731779099,
+          -0.05062899735776227
+        ],
+        "material": "vm:fold-static"
+      },
+      "raw": {
+        "label": "BufferGeometry[25]",
+        "point": [
+          -3.366440067200238e-31,
+          0.11996630500687169,
+          -0.0630000002682209
+        ],
+        "material": ""
+      }
+    },
+    {
+      "y": 0.12200000000000001,
+      "live": {
+        "label": "revolver-sight-dot[23]",
+        "point": [
+          0,
+          0.12199807261515616,
+          0.316052491285177
+        ],
+        "material": "vm:Revolver green front sight"
+      },
+      "raw": {
+        "label": "revolver-sight-dot[96]",
+        "point": [
+          -5.995110999956301e-34,
+          0.12199737002163402,
+          0.3158719216255133
+        ],
+        "material": "Revolver green front sight"
+      }
+    },
+    {
+      "y": 0.12300000000000001,
+      "live": null,
+      "raw": {
+        "label": "revolver-sight-dot[96]",
+        "point": [
+          1.220381273491637e-34,
+          0.1230006960024603,
+          0.31668542919986203
+        ],
+        "material": "Revolver green front sight"
+      }
+    },
+    {
+      "y": 0.12400000000000001,
+      "live": null,
+      "raw": null
+    },
+    {
+      "y": 0.125,
+      "live": null,
+      "raw": null
+    },
+    {
+      "y": 0.126,
+      "live": null,
+      "raw": null
+    },
+    {
+      "y": 0.127,
+      "live": null,
+      "raw": null
+    },
+    {
+      "y": 0.128,
+      "live": null,
+      "raw": null
+    },
+    {
+      "y": 0.129,
+      "live": null,
+      "raw": null
+    },
+    {
+      "y": 0.13,
+      "live": null,
+      "raw": null
+    },
+    {
+      "y": 0.131,
+      "live": null,
+      "raw": null
+    },
+    {
+      "y": 0.132,
+      "live": null,
+      "raw": null
+    },
+    {
+      "y": 0.133,
+      "live": null,
+      "raw": null
+    },
+    {
+      "y": 0.134,
+      "live": null,
+      "raw": null
+    },
+    {
+      "y": 0.135,
+      "live": null,
+      "raw": null
+    }
+  ],
+  "markerSamples": 17,
+  "covered": []
+}

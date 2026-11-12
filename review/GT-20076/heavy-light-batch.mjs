@@ -4,7 +4,7 @@ import {fileURLToPath} from 'node:url';
 import {serve} from '../../tools/serve.mjs';
 import {launch} from '../../tools/cdp.mjs';
 import {save} from './save.mjs';
-import {originalFlamerMount,originalHandleWrist} from './replay-artwork.mjs';
+import {originalFlamerMount,originalHandleWrist,originalScopePlates} from './replay-artwork.mjs';
 const phase=process.argv[2];assert(process.env.DW_GAME_TEST_TOKEN && ['before','after'].includes(phase));
 const batch=process.argv[3]||'--trim';
 const batches={
@@ -27,7 +27,12 @@ const batches={
   '--stock-mount':['clear-stock-mount-',true,[['launcher',['hip','held-left']],['flamer',['hip','rack']]]],
   '--stock-tail':['clear-stock-mount-tail-',true,[['flamer',['hip','rack']]]],
   '--tail-views':['clear-tail-views-',true,[['flamer',['hip','aimed','held-right-open']]]],
-  '--port-sight':['clear-port-sight-',true,[['uzi',['hip','held-right-open']],['m4',['hip','aimed','held-right-open']]]]
+  '--port-sight':['clear-port-sight-',true,[['uzi',['hip','held-right-open']],['m4',['hip','aimed','held-right-open']]]],
+  '--scope-eye':['clear-scope-eye-',true,[['sniper',['hip','aim-entry']]]],
+  '--plate-ribs':['clear-plate-ribs-',true,[['shotgun',['hip','held-right-open']],['sniper',['hip','held-left-open','rack']]]],
+  '--lug-vents':['clear-lug-vents-',true,[['revolver',['hip','held-right-open']],['chainsaw',['hip','held-right-open','held-left-open']]]],
+  '--handle-optic':['clear-handle-optic-',true,[['chainsaw',['aimed','hip','held-right-open']],['sniper',['rack','aimed','held-right-open']]]],
+  '--drum-optic':['clear-drum-optic-',true,[['aa12',['hip','held-right']],['m4',['hip','aimed','held-right-open']]]]
 };
 assert(Object.hasOwn(batches,batch));
 const [label,tracked,selections]=batches[batch];
@@ -38,7 +43,7 @@ if(sweepOnly)assert(batch==='--rotating-frame'&&phase==='after'&&only==='revolve
 const server=await serve(fileURLToPath(new URL('../../',import.meta.url)),0),browser=await launch({headless:false});
 try{
   const page=await browser.newPage({width:960,height:540});
-  const originals={'--neutral-wrist':originalHandleWrist,'--tail-views':originalFlamerMount};
+  const originals={'--scope-eye':originalScopePlates,'--neutral-wrist':originalHandleWrist,'--tail-views':originalFlamerMount};
   const verifyOriginal=phase==='before'&&originals[batch]?await originals[batch](page,server.origin):null;
   await page.goto(server.origin+'/index.html?debug=1&raf=timer');assert(await page.waitFor('window.TT && DWLoad.snapshot().state==="ready"'));
   await page.evaluate('DWOpening.dismissForTesting()');assert(await page.waitFor('!DWOpening.active'));
@@ -57,6 +62,30 @@ try{
       await page.evaluate('fetch('+JSON.stringify(source)+').then(r=>r.json()).then(c=>{window.recordedArtViews=c;return true})');
     }
     await page.evaluate('views.equip('+JSON.stringify(id)+')');
+    if(batch==='--plate-ribs' && phase==='after'){
+      const previous=JSON.parse(await readFile(new URL('./catalog-fix-breacher-front-guard-blend/audit.json',import.meta.url),'utf8'));
+      const result=await page.evaluate("import('/review/GT-20076/plate-rib-proof.mjs').then(m=>m.checkPlateRibs(TT,"+JSON.stringify(id)+","+JSON.stringify(previous[id].artworkFingerprint)+"))",120000);
+      await save(new URL('plate-rib-proof.json',dir),JSON.stringify(result,null,2)+'\n');
+      console.log('PASS restored complete prior artwork and native joins',id,result);
+    }
+    if(batch==='--lug-vents' && phase==='after'){
+      const previous=JSON.parse(await readFile(new URL('./catalog-fix-revolver-dot-seated/audit.json',import.meta.url),'utf8'));
+      const result=await page.evaluate("import('/review/GT-20076/lug-vent-proof.mjs').then(m=>m.checkLugVents(TT,"+JSON.stringify(id)+","+JSON.stringify(previous[id].artworkFingerprint)+"))",120000);
+      await save(new URL('lug-vent-proof.json',dir),JSON.stringify(result,null,2)+'\n');
+      console.log('PASS complete baseline, visible skins and closed seats',id,result);
+    }
+    if(batch==='--handle-optic' && phase==='after'){
+      const previous=JSON.parse(await readFile(new URL('./catalog-fix-drum-optic-final/audit.json',import.meta.url),'utf8'));
+      const result=await page.evaluate("import('/review/GT-20076/handle-optic-proof.mjs').then(m=>m.checkHandleOptic(TT,"+JSON.stringify(id)+","+JSON.stringify(previous[id].artworkFingerprint)+"))",120000);
+      await save(new URL('handle-optic-proof.json',dir),JSON.stringify(result,null,2)+'\n');
+      console.log('PASS original model, exterior samples and joins',id,result);
+    }
+    if(batch==='--drum-optic' && phase==='after'){
+      const previous=JSON.parse(await readFile(new URL('./catalog-fix-gw4-trigger-fit/audit.json',import.meta.url),'utf8'));
+      const result=await page.evaluate("import('/review/GT-20076/drum-optic-proof.mjs').then(m=>m.checkDrumOptic(TT,"+JSON.stringify(id)+","+JSON.stringify(previous[id].artworkFingerprint)+"))",120000);
+      await save(new URL('drum-optic-proof.json',dir),JSON.stringify(result,null,2)+'\n');
+      console.log('PASS complete prior artwork, exposed faces and support',id,result);
+    }
     if(batch==='--port-sight' && phase==='after'){
       const previous=JSON.parse(await readFile(new URL('./catalog-fix-stock-mount-tail/audit.json',import.meta.url),'utf8'));
       const result=await page.evaluate("import('/review/GT-20076/port-sight-proof.mjs').then(m=>m.portSightProof(TT,"+JSON.stringify(id)+","+JSON.stringify(previous[id].artworkFingerprint)+"))",120000);

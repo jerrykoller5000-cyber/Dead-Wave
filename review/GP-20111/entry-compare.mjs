@@ -16,7 +16,7 @@ if (withoutWarm === source || /await armoryUI\.warmPictures\(/.test(withoutWarm)
 const server = await serve(root, 0);
 const rows = [];
 try {
-  for (const phase of ['before', 'after']) for (let run = 1; run <= 2; run++) {
+  for (let run = 1; run <= 3; run++) for (const phase of ['before', 'after']) {
     const browser = await launch({ headless: false, args: ['--window-position=-3800,-3800', '--window-size=1280,720', '--disable-features=CalculateNativeWinOcclusion', '--disable-background-timer-throttling', '--disable-renderer-backgrounding'] });
     try {
       const page = await browser.newPage({ width: 1280, height: 720 });
@@ -43,6 +43,6 @@ try {
     } finally { await browser.close(); }
   }
 } finally {
-  fs.writeFileSync(path.join(root, 'review/GP-20111/entry-compare.json'), JSON.stringify(rows, null, 2) + '\n');
+  fs.writeFileSync(path.join(root, 'review/GP-20111/entry-compare-resumed.json'), JSON.stringify(rows, null, 2) + '\n');
   await server.close();
 }

@@ -1,0 +1,12 @@
+FAIL  tag290   44 pass   3 fail  20.4s  (real renderer)
+    FAIL unsuppressed: suppressor tube has 0 emissive intensity
+    FAIL suppressed: dark bore insert stays unlit (0 emissive)
+    FAIL smoke wisp grows stronger & longer-lived with firing duration (warm=0.53, hot=0.53)
+FAIL  tag296   27 pass   1 fail  51.0s  (real renderer)
+    FAIL AG-299: 7 flames-instanced stage batches exist at renderOrder 3 and cost 0 draws when idle (count=7)
+ok    t38      26 pass   0 fail  66.4s  (real renderer)
+    PASS pistol submitted 15 draws / 35
+    PASS uzi submitted 23 draws / 35
+    PASS revolver submitted 19 draws / 35
+    PASS equipped draws across twelve individual models 240 < 260
+3 checks: 97 pass, 4 fail (real renderer)

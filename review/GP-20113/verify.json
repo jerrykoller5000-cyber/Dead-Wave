@@ -1,0 +1,138 @@
+[
+  {
+    "phase": "before",
+    "view": "1P",
+    "initial": {
+      "phase": "ready",
+      "t": 1.02,
+      "starts": 1,
+      "take": 0,
+      "cord": 0
+    },
+    "during": {
+      "phase": "off",
+      "t": 0,
+      "starts": 1,
+      "take": 0,
+      "cord": 0
+    },
+    "after": {
+      "phase": "starting",
+      "t": 0.08910000000009313,
+      "starts": 2,
+      "take": 0.3592147500006121,
+      "cord": 0
+    },
+    "settled": {
+      "phase": "ready",
+      "t": 1.02,
+      "starts": 2,
+      "take": 0,
+      "cord": 0
+    },
+    "shot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\review\\GP-20113\\before-1P-after-stab.png",
+    "pageErrors": []
+  },
+  {
+    "phase": "before",
+    "view": "3P",
+    "initial": {
+      "phase": "ready",
+      "t": 1.02,
+      "starts": 1,
+      "take": 0,
+      "cord": 0
+    },
+    "during": {
+      "phase": "off",
+      "t": 0,
+      "starts": 1,
+      "take": 0,
+      "cord": 0
+    },
+    "after": {
+      "phase": "starting",
+      "t": 0.0166999999997206,
+      "starts": 2,
+      "take": 0.016411765025761502,
+      "cord": 0
+    },
+    "settled": {
+      "phase": "ready",
+      "t": 1.02,
+      "starts": 2,
+      "take": 0,
+      "cord": 0
+    },
+    "shot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\review\\GP-20113\\before-3P-after-stab.png",
+    "pageErrors": []
+  },
+  {
+    "phase": "after",
+    "view": "1P",
+    "initial": {
+      "phase": "ready",
+      "t": 1.02,
+      "starts": 1,
+      "take": 0,
+      "cord": 0
+    },
+    "during": {
+      "phase": "ready",
+      "t": 1.02,
+      "starts": 1,
+      "take": 0,
+      "cord": 0
+    },
+    "after": {
+      "phase": "ready",
+      "t": 1.02,
+      "starts": 1,
+      "take": 0,
+      "cord": 0
+    },
+    "settled": {
+      "phase": "ready",
+      "t": 1.02,
+      "starts": 1,
+      "take": 0,
+      "cord": 0
+    },
+    "shot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\review\\GP-20113\\after-1P-after-stab.png",
+    "pageErrors": []
+  },
+  {
+    "phase": "after",
+    "view": "3P",
+    "initial": {
+      "phase": "ready",
+      "t": 1.02,
+      "starts": 1,
+      "take": 0,
+      "cord": 0
+    },
+    "during": {
+      "phase": "ready",
+      "t": 1.02,
+      "starts": 1,
+      "take": 0,
+      "cord": 0
+    },
+    "after": {
+      "phase": "ready",
+      "t": 1.02,
+      "starts": 1,
+      "take": 0,
+      "cord": 0
+    },
+    "settled": {
+      "phase": "ready",
+      "t": 1.02,
+      "starts": 1,
+      "take": 0,
+      "cord": 0
+    },
+    "shot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\review\\GP-20113\\after-3P-after-stab.png",
+    "pageErrors": []
+  }
+]

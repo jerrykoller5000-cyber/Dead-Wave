@@ -1,0 +1,105 @@
+{
+  "hash": "3c818066",
+  "results": [
+    {
+      "part": 22,
+      "exterior": 19,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      "trianglesBefore": 48,
+      "trianglesAfter": 48
+    },
+    {
+      "part": 23,
+      "exterior": 19,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      "trianglesBefore": 48,
+      "trianglesAfter": 48
+    },
+    {
+      "part": 24,
+      "exterior": 19,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      "trianglesBefore": 48,
+      "trianglesAfter": 48
+    },
+    {
+      "part": 25,
+      "exterior": 19,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      "trianglesBefore": 48,
+      "trianglesAfter": 48
+    },
+    {
+      "part": 26,
+      "exterior": 19,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      "trianglesBefore": 48,
+      "trianglesAfter": 48
+    },
+    {
+      "part": 38,
+      "exterior": 19,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      "trianglesBefore": 48,
+      "trianglesAfter": 48
+    },
+    {
+      "part": 39,
+      "exterior": 19,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      "trianglesBefore": 48,
+      "trianglesAfter": 48
+    },
+    {
+      "part": 40,
+      "exterior": 19,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      "trianglesBefore": 48,
+      "trianglesAfter": 48
+    },
+    {
+      "part": 41,
+      "exterior": 19,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      "trianglesBefore": 48,
+      "trianglesAfter": 48
+    },
+    {
+      "part": 42,
+      "exterior": 19,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      "trianglesBefore": 48,
+      "trianglesAfter": 48
+    }
+  ]
+}

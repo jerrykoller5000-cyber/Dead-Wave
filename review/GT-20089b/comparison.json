@@ -1,0 +1,82 @@
+{
+  "eye-trail": {
+    "old_life": 2.5389034073832972,
+    "new_life": 1.6756762488729762,
+    "old_remaining": [
+      28,
+      17,
+      6
+    ],
+    "new_remaining": [
+      19,
+      8,
+      0
+    ],
+    "walk_distance": 0,
+    "nearest_player_xz": 0.7585380041562524,
+    "nearest_camera": 0.695373067134424
+  },
+  "eye-walk": {
+    "old_life": 2.5389034073832972,
+    "new_life": 1.6756762488729762,
+    "old_remaining": [
+      28,
+      27,
+      25,
+      22,
+      17,
+      6
+    ],
+    "new_remaining": [
+      19,
+      17,
+      16,
+      12,
+      8,
+      0
+    ],
+    "walk_distance": 5.329999999999927,
+    "nearest_player_xz": 0.15602856232705184,
+    "nearest_camera": 0.12333300451893553
+  },
+  "third-trail": {
+    "old_life": 2.5389034073832972,
+    "new_life": 1.6756762488729762,
+    "old_remaining": [
+      28,
+      17,
+      6
+    ],
+    "new_remaining": [
+      19,
+      8,
+      0
+    ],
+    "walk_distance": 0,
+    "nearest_player_xz": 0.6457831667876701,
+    "nearest_camera": 11.194250282920956
+  },
+  "third-walk": {
+    "old_life": 2.5389034073832972,
+    "new_life": 1.6756762488729762,
+    "old_remaining": [
+      28,
+      27,
+      25,
+      22,
+      17,
+      6
+    ],
+    "new_remaining": [
+      19,
+      17,
+      16,
+      12,
+      8,
+      0
+    ],
+    "walk_distance": 8.36728150866565,
+    "nearest_player_xz": 0.03531257032532116,
+    "nearest_camera": 7.104898758635157
+  }
+}

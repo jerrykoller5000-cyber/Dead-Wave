@@ -1,0 +1,242 @@
+{
+  "pistol": {
+    "eye": {
+      "shots": 110,
+      "before_wisps": [
+        223,
+        0
+      ],
+      "after_wisps": [
+        72,
+        70
+      ],
+      "after_max_gap_frames": [
+        8,
+        12
+      ],
+      "after_peak_material_intensity": [
+        0.0809,
+        0.0845
+      ],
+      "muzzle_world_drift": [
+        0.00092,
+        0.001593
+      ]
+    },
+    "held": {
+      "shots": 110,
+      "before_wisps": [
+        223,
+        0
+      ],
+      "after_wisps": [
+        72,
+        70
+      ],
+      "after_max_gap_frames": [
+        8,
+        12
+      ],
+      "after_peak_material_intensity": [
+        0.3238,
+        0.3381
+      ],
+      "muzzle_world_drift": [
+        0.000722,
+        0.000367
+      ]
+    }
+  },
+  "pistol-suppressed": {
+    "eye": {
+      "shots": 110,
+      "before_wisps": [
+        223,
+        0
+      ],
+      "after_wisps": [
+        72,
+        70
+      ],
+      "after_max_gap_frames": [
+        8,
+        12
+      ],
+      "after_peak_material_intensity": [
+        0.3238,
+        0.3381
+      ],
+      "muzzle_world_drift": [
+        0.000529,
+        0.012862
+      ]
+    },
+    "held": {
+      "shots": 110,
+      "before_wisps": [
+        223,
+        0
+      ],
+      "after_wisps": [
+        72,
+        70
+      ],
+      "after_max_gap_frames": [
+        8,
+        12
+      ],
+      "after_peak_material_intensity": [
+        0.3238,
+        0.3381
+      ],
+      "muzzle_world_drift": [
+        0.002938,
+        0.002908
+      ]
+    }
+  },
+  "uzi": {
+    "eye": {
+      "shots": 210,
+      "before_wisps": [
+        137,
+        0
+      ],
+      "after_wisps": [
+        47,
+        47
+      ],
+      "after_max_gap_frames": [
+        7,
+        7
+      ],
+      "after_peak_material_intensity": [
+        0.4033,
+        0.4083
+      ],
+      "muzzle_world_drift": [
+        0.00117,
+        0.006674
+      ]
+    },
+    "held": {
+      "shots": 210,
+      "before_wisps": [
+        137,
+        0
+      ],
+      "after_wisps": [
+        47,
+        47
+      ],
+      "after_max_gap_frames": [
+        7,
+        7
+      ],
+      "after_peak_material_intensity": [
+        0.4033,
+        0.4083
+      ],
+      "muzzle_world_drift": [
+        0.000842,
+        0.006117
+      ]
+    }
+  },
+  "uzi-suppressed": {
+    "eye": {
+      "shots": 210,
+      "before_wisps": [
+        137,
+        0
+      ],
+      "after_wisps": [
+        47,
+        47
+      ],
+      "after_max_gap_frames": [
+        7,
+        7
+      ],
+      "after_peak_material_intensity": [
+        0.4033,
+        0.4083
+      ],
+      "muzzle_world_drift": [
+        0.00442,
+        0.007273
+      ]
+    },
+    "held": {
+      "shots": 210,
+      "before_wisps": [
+        137,
+        0
+      ],
+      "after_wisps": [
+        47,
+        47
+      ],
+      "after_max_gap_frames": [
+        7,
+        7
+      ],
+      "after_peak_material_intensity": [
+        0.4033,
+        0.4083
+      ],
+      "muzzle_world_drift": [
+        0.00144,
+        0.021182
+      ]
+    }
+  },
+  "revolver": {
+    "eye": {
+      "shots": 110,
+      "before_wisps": [
+        413,
+        0
+      ],
+      "after_wisps": [
+        129,
+        127
+      ],
+      "after_max_gap_frames": [
+        12,
+        12
+      ],
+      "after_peak_material_intensity": [
+        0.3218,
+        0.3457
+      ],
+      "muzzle_world_drift": [
+        0.001951,
+        0.005056
+      ]
+    },
+    "held": {
+      "shots": 110,
+      "before_wisps": [
+        413,
+        0
+      ],
+      "after_wisps": [
+        129,
+        127
+      ],
+      "after_max_gap_frames": [
+        12,
+        12
+      ],
+      "after_peak_material_intensity": [
+        0.3218,
+        0.3457
+      ],
+      "muzzle_world_drift": [
+        0.001701,
+        0.00156
+      ]
+    }
+  }
+}

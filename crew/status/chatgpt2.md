@@ -2,12 +2,12 @@
 
 state: active
 model: GPT-6 (Codex, variant unsure)
-task: GT-20089 Read and plan independent akimbo barrel heat and wisps while Jerry plays; landing and testing after RESUME
-touching: game/barrel-heat.js, index.html (barrel heat creation, shot and update calls only), review/GT-20089
-since: 2026-11-12T02:35Z
+task: GT-20076 Seat the pump shotgun lower plate and the sniper magazine side ribs
+touching: studio/weapon-longarms.js (shotgun lower plate and sniper magazine side ribs), review/GT-20076
+since: 2026-11-12T05:33Z
 next: GT-20087 CD-1's guard room (20:08Z): the GW-4, Wasp and AA-12 trigger
 blocked-on: —
-last-report: handoffs/2026-11-12-chatgpt2-GT-20076.md
+last-report: handoffs/2026-11-12-chatgpt2-GT-20092.md
 
 ## Notes
 
@@ -15,7 +15,7 @@ last-report: handoffs/2026-11-12-chatgpt2-GT-20076.md
 
 context nearly full, needs a new session
 
-Director PC hold per 02:20Z while Jerry plays. NO game editing, slot runs or game/browser launches until explicit RESUME. NEW PRIORITY GT-20089 J142c: paired pistol/Wasp/revolver each need independent barrel/suppressor heat and smoke in both views. game/barrel-heat.js + index.html heat call sites lent, checked in. Read trace: chooseMagazineHand picks actual hand before shots, old addShot currently after akimboHand flips. viewmodel exposes gun.root, gun2.root and muzzleWorld(out,1/2). offhandMeshes created later than createBarrelHeat, real suppressor muzzles update on each world copy. Plan optional hand=0 API and one existing 48-wisp pool, independent cooldowns/emission, no new lights. Asked Director A/B. Need before captures, unequal-hand tests + 3 pair × 2 views × bare/supported cans × 4 lights, native t38 and tag290; never change single-hand thresholds. Existing art batches handed off. Breacher/GW-4 optic queued after this.
+GT-20091 green revolver point and GT-20092 Breacher guard ready to commit. All hand and motion owners notified, both Nov 12 reports and sheets complete. Continuing standing GT-20076 in studio/weapon-longarms.js, pump lower plate #6 and sniper magazine side ribs #62. Baseline catalog-fix-breacher-front-guard-blend.
 
 Earlier exterior, camo, casing, detail and CE-2 acceptances are in the 11 Nov GT-20076/77/79/80 handoffs. The KR-7 laminate and D-152 budget were accepted on GT-20082 and GT-20081. Keep previous test expectations and the crew slot.
 

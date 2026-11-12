@@ -73,8 +73,23 @@
         const nBlock = near(s.notch[0], 0.02, 0.003).some((q) => q.y > s.notch[1] + 0.003);
         const tY = near(s.tip[0], 0.008, 0.006).reduce((m, q) => Math.max(m, q.y), -1);
         ok(nHit && !nBlock && Math.abs(tY - s.tip[1]) <= 0.003, k + ': notch and tip are on the gun (notch ' + (nHit ? 'found' : 'missing') + (nBlock ? ', blocked' : '') + ', tip y ' + tY.toFixed(3) + ')');
-        const lineY = s.notch[1] + (p.z - s.notch[0]) * (s.tip[1] - s.notch[1]) / (s.tip[0] - s.notch[0]);
-        ok(Math.abs(p.y - lineY) <= 0.003, k + ': eye on the notch-to-tip line within 3 mm (eye y ' + p.y.toFixed(4) + ', line ' + lineY.toFixed(4) + ')');
+        let aimingPoint = s.tip, label = 'notch-to-tip';
+        if (k === 'revolver') {
+          // J146: the crown defines the post outline. The green face is the visible aiming point.
+          const marker = gun.getObjectByName('revolver-sight-dot');
+          const recorded = s.aimPoint;
+          const matches = marker?.isMesh && marker.visible && marker.material.visible && marker.material.isMeshBasicMaterial && recorded?.length === 2;
+          if (!matches) { ok(false, 'revolver: visible luminous sight datum and artwork'); continue; }
+          const matrix = inv.clone().multiply(marker.matrixWorld);
+          const points = marker.geometry.attributes.position, box = new THREE.Box3();
+          for (let i = 0; i < points.count; i++) box.expandByPoint(V().fromBufferAttribute(points, i).applyMatrix4(matrix));
+          const centre = box.getCenter(V());
+          ok(centre.distanceTo(V(0, recorded[1], recorded[0])) <= .003 && centre.y < tY,
+            'revolver: rendered green point matches its datum below the physical crown (' + f3(centre) + ')');
+          aimingPoint = recorded; label = 'notch-to-dot';
+        }
+        const lineY = s.notch[1] + (p.z - s.notch[0]) * (aimingPoint[1] - s.notch[1]) / (aimingPoint[0] - s.notch[0]);
+        ok(Math.abs(p.y - lineY) <= 0.003, k + ': eye on the ' + label + ' line within 3 mm (eye y ' + p.y.toFixed(4) + ', line ' + lineY.toFixed(4) + ')');
         continue;
       }
       // GB-259 (Claude 2026-11-02): aperture / ring sights — eye within 3 mm of the ring centre; nothing on the centre line inside the hole blocks it.

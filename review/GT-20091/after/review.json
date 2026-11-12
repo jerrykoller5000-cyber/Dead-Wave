@@ -1,0 +1,206 @@
+{
+  "phase": "after",
+  "geometry": {
+    "world": {
+      "present": true,
+      "triangles": 64,
+      "position": [
+        0,
+        0.12272,
+        0.31654783783783785
+      ],
+      "colour": "85ef84",
+      "quaternion": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "lightChildren": 0
+    },
+    "view": {
+      "present": true,
+      "triangles": 64,
+      "position": [
+        0,
+        0.12272,
+        0.31654783783783785
+      ],
+      "colour": "85ef84",
+      "quaternion": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "lightChildren": 0
+    },
+    "carry": {
+      "present": true,
+      "triangles": 64,
+      "position": [
+        0,
+        0.12272,
+        0.31654783783783785
+      ],
+      "colour": "85ef84",
+      "quaternion": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "lightChildren": 0
+    },
+    "rack": {
+      "present": true,
+      "triangles": 64,
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "colour": "85ef84",
+      "quaternion": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "lightChildren": 0
+    }
+  },
+  "shots": {
+    "hip": {
+      "camera": {
+        "points": [
+          [
+            0.17898212601905958,
+            -0.23830114985454293,
+            0.46097610419792107
+          ],
+          [
+            1.0286637986311236,
+            -0.056221226240562513,
+            0.4822653242362586
+          ],
+          [
+            0.0773030986827729,
+            1.2722312387634382,
+            0.43674066356930596
+          ],
+          [
+            0.152456733554289,
+            -0.1960582306495678,
+            1.2358297146869073
+          ]
+        ],
+        "eye": true,
+        "glassHidden": false,
+        "fov": null,
+        "target": "isolated held artwork",
+        "recordedWallPose": false,
+        "spot": [
+          0,
+          -640.55
+        ],
+        "actualSpot": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "heldElevation": null
+      },
+      "lights": {
+        "noon": {
+          "on": true,
+          "night": false,
+          "room": true
+        },
+        "overcast": {
+          "on": true,
+          "night": false,
+          "room": true
+        },
+        "dusk": {
+          "on": true,
+          "night": false,
+          "room": true
+        },
+        "night": {
+          "on": true,
+          "night": false,
+          "room": true
+        }
+      }
+    },
+    "aimed": {
+      "camera": {
+        "points": [
+          [
+            0,
+            -0.2092589830934602,
+            0.4185229658729658
+          ],
+          [
+            0.979794677826447,
+            -0.2092589830934602,
+            0.4185229658729658
+          ],
+          [
+            8.342896582913262e-31,
+            1.532591778488915,
+            0.4206323855078315
+          ],
+          [
+            -1.1951380177272963e-30,
+            -0.21399681716496427,
+            1.194044890455959
+          ]
+        ],
+        "eye": true,
+        "glassHidden": false,
+        "fov": null,
+        "target": "isolated held artwork",
+        "recordedWallPose": false,
+        "spot": [
+          0,
+          -640.55
+        ],
+        "actualSpot": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "heldElevation": null
+      },
+      "lights": {
+        "noon": {
+          "on": true,
+          "night": false,
+          "room": true
+        },
+        "overcast": {
+          "on": true,
+          "night": false,
+          "room": true
+        },
+        "dusk": {
+          "on": true,
+          "night": false,
+          "room": true
+        },
+        "night": {
+          "on": true,
+          "night": false,
+          "room": true
+        },
+        "dark-room": {
+          "on": false,
+          "night": true,
+          "room": false
+        }
+      }
+    }
+  }
+}

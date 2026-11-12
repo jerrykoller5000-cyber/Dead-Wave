@@ -24,7 +24,8 @@ const phaseArgIdx = process.argv.indexOf('--phase');
 const PHASE = phaseArgIdx >= 0 && process.argv[phaseArgIdx + 1] ? process.argv[phaseArgIdx + 1] : 'after';
 const VISUALS_ONLY = process.argv.includes('--visuals-only');
 const QUICK = process.argv.includes('--quick');
-const RUNS = Number(process.env.AG310_RUNS || 1);
+const runsArgIdx = process.argv.indexOf('--runs');
+const RUNS = runsArgIdx >= 0 ? Number(process.argv[runsArgIdx + 1]) : Number(process.env.AG310_RUNS || 1);
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -289,6 +290,8 @@ async function runBenchmarkView(origin, viewName, runIdx) {
 
       const measureAction = async (fn, settleFrames) => {
         await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+        const pipelineCache = T.renderer._pipelines?.caches;
+        const pipelineKeysBefore = pipelineCache ? new Set(pipelineCache.keys()) : null;
         const gaps = [];
         let last = performance.now();
         let active = true;
@@ -315,7 +318,10 @@ async function runBenchmarkView(origin, viewName, runIdx) {
         return {
           worstFrameMs: +Math.max(maxGap, syncMs).toFixed(1),
           maxRafGapMs: +maxGap.toFixed(1),
-          syncMs, at: +t0.toFixed(1), end: +performance.now().toFixed(1)
+          syncMs, at: +t0.toFixed(1), end: +performance.now().toFixed(1),
+          pipelineCacheBefore: pipelineKeysBefore?.size ?? null,
+          pipelineCacheAfter: pipelineCache?.size ?? null,
+          newPipelineCount: pipelineKeysBefore ? [...pipelineCache.keys()].filter((key) => !pipelineKeysBefore.has(key)).length : null
         };
       };
 

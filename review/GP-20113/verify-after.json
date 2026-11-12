@@ -1,0 +1,36 @@
+[
+  {
+    "phase": "after",
+    "view": "3P",
+    "initial": {
+      "phase": "ready",
+      "t": 1.02,
+      "starts": 1,
+      "take": 0,
+      "cord": 0
+    },
+    "during": {
+      "phase": "ready",
+      "t": 1.02,
+      "starts": 1,
+      "take": 0,
+      "cord": 0
+    },
+    "after": {
+      "phase": "ready",
+      "t": 1.02,
+      "starts": 1,
+      "take": 0,
+      "cord": 0
+    },
+    "settled": {
+      "phase": "ready",
+      "t": 1.02,
+      "starts": 1,
+      "take": 0,
+      "cord": 0
+    },
+    "shot": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\review\\GP-20113\\after-3P-after-stab.png",
+    "pageErrors": []
+  }
+]

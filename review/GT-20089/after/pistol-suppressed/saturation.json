@@ -1,0 +1,55 @@
+{
+  "peak": 48,
+  "fullFrames": 413,
+  "counts": [
+    58,
+    58
+  ],
+  "gaps": [
+    28,
+    28
+  ],
+  "packed": [
+    {
+      "dark": 96,
+      "metal": 168,
+      "wrong": 0
+    },
+    {
+      "dark": 96,
+      "metal": 168,
+      "wrong": 0
+    },
+    {
+      "dark": 96,
+      "metal": 168,
+      "wrong": 0
+    },
+    {
+      "dark": 96,
+      "metal": 168,
+      "wrong": 0
+    }
+  ],
+  "cooling": 0.9732615035245136,
+  "isolated": [
+    [
+      3,
+      0
+    ],
+    [
+      0,
+      3
+    ]
+  ],
+  "switched": [
+    [
+      1,
+      0
+    ],
+    [
+      1,
+      0
+    ]
+  ]
+}

@@ -39,6 +39,9 @@ export const GLOW_HEAT_THRESHOLD = 0.25;
 // Heat threshold above which thin smoke wisps begin rising off the muzzle.
 export const SMOKE_HEAT_THRESHOLD = 0.12;
 
+// J145: scale the whole warm-to-hot lifetime curve together.
+const WISP_LIFETIME_SCALE = 0.66;
+
 function clamp01(v) {
   return v <= 0 ? 0 : (v >= 1 ? 1 : v);
 }
@@ -115,7 +118,7 @@ export function getHeatGradientTexture(T, kind = 'barrel') {
   return getHeatGradientTex(T, kind);
 }
 
-function getHeatGradientTex(T, kind = 'barrel') {
+function getHeatGradientTex(T, kind = 'barrel', maskRubber = false) {
   if (!T || typeof T.DataTexture !== 'function') return null;
   let entry = _gradTexCache.get(T);
   if (!entry) {
@@ -123,7 +126,8 @@ function getHeatGradientTex(T, kind = 'barrel') {
     _gradTexCache.set(T, entry);
   }
   const slot = kind === 'suppressor' ? 'suppressor' : 'barrel';
-  if (entry[slot]) return entry[slot];
+  const key = maskRubber ? slot + '-masked' : slot;
+  if (entry[key]) return entry[key];
 
   const W = 64, H = 4;
   const data = new Uint8Array(W * H * 4);
@@ -138,9 +142,11 @@ function getHeatGradientTex(T, kind = 'barrel') {
     const bByte = Math.round(255 * Math.pow(p, 4.00));
     for (let y = 0; y < H; y++) {
       const idx = (y * W + x) * 4;
-      data[idx] = rByte;
-      data[idx + 1] = gByte;
-      data[idx + 2] = bByte;
+      // Packed rubber and bore inserts sample the dark row. Hot metal samples the middle rows.
+      const dark = maskRubber && y === 0;
+      data[idx] = dark ? 0 : rByte;
+      data[idx + 1] = dark ? 0 : gByte;
+      data[idx + 2] = dark ? 0 : bByte;
       data[idx + 3] = 255;
     }
   }
@@ -158,13 +164,30 @@ function getHeatGradientTex(T, kind = 'barrel') {
   }
   if (T.SRGBColorSpace) tex.colorSpace = T.SRGBColorSpace;
   tex.needsUpdate = true;
-  entry[slot] = tex;
+  entry[key] = tex;
   return tex;
 }
 
-function shouldMeshGlow(obj, mat, hasNonVC) {
+// A folded draw keeps each original surface's roughness and metalness in foldRM.
+const pairedFinishes = new Set(['pistol', 'uzi', 'revolver']);
+const packedHeatSurfaces = new WeakMap();
+function isPackedMetal(rm, i) {
+  return rm.getX(i) < 0.84999 || rm.getY(i) > 0.05001;
+}
+function hasPackedMetal(rm) {
+  const cached = packedHeatSurfaces.get(rm);
+  if (cached && cached.version === rm.version) return cached.hot;
+  let hot = false;
+  for (let i = 0; i < rm.count && !hot; i++) hot = isPackedMetal(rm, i);
+  packedHeatSurfaces.set(rm, {version: rm.version, hot});
+  return hot;
+}
+
+function shouldMeshGlow(obj, mat, hasNonVC, usePackedFinish) {
   if (!obj || !obj.isMesh || !mat || !mat.emissive) return false;
   if (obj.name === 'bore') return false;
+  const rm = usePackedFinish && obj.geometry?.attributes?.foldRM;
+  if (rm) return hasPackedMetal(rm);
   // Exclude dark rubber / matte bore-hole discs (e.g. suppressor front bore insert, roughness >= 0.85, metalness <= 0.05)
   if (typeof mat.roughness === 'number' && typeof mat.metalness === 'number' && mat.roughness >= 0.85 && mat.metalness <= 0.05) {
     return false;
@@ -175,7 +198,7 @@ function shouldMeshGlow(obj, mat, hasNonVC) {
   return true;
 }
 
-function ensureAxialUv1OnTarget(T, targetNode) {
+function ensureAxialUv1OnTarget(T, targetNode, usePackedFinish) {
   if (!T || !targetNode || typeof T.Matrix4 !== 'function' || typeof T.Vector3 !== 'function' || typeof T.BufferAttribute !== 'function') return;
   let hasNonVC = false;
   targetNode.traverse((o) => {
@@ -191,7 +214,7 @@ function ensureAxialUv1OnTarget(T, targetNode) {
   targetNode.traverse((o) => {
     if (!allReady || !o.isMesh || !o.geometry || !o.material) return;
     const m0 = Array.isArray(o.material) ? o.material[0] : o.material;
-    if (!shouldMeshGlow(o, m0, hasNonVC)) return;
+    if (!shouldMeshGlow(o, m0, hasNonVC, usePackedFinish)) return;
     if (!o.geometry.attributes || !o.geometry.attributes.uv1) allReady = false;
   });
   if (allReady) return;
@@ -204,7 +227,7 @@ function ensureAxialUv1OnTarget(T, targetNode) {
   targetNode.traverse((o) => {
     if (!o.isMesh || !o.geometry || !o.geometry.attributes || !o.geometry.attributes.position || !o.material) return;
     const m0 = Array.isArray(o.material) ? o.material[0] : o.material;
-    if (!shouldMeshGlow(o, m0, hasNonVC)) return;
+    if (!shouldMeshGlow(o, m0, hasNonVC, usePackedFinish)) return;
 
     relMat.identity();
     let p = o;
@@ -234,10 +257,11 @@ function ensureAxialUv1OnTarget(T, targetNode) {
     if (!uvAttr) {
       const pos = baseGeo.attributes.position;
       const uv1 = new Float32Array(pos.count * 2);
+      const rm = usePackedFinish && baseGeo.attributes.foldRM;
       for (let i = 0; i < pos.count; i++) {
         v.set(pos.getX(i), pos.getY(i), pos.getZ(i)).applyMatrix4(mat);
         uv1[i * 2] = clamp01((v.z - zMin) / span);
-        uv1[i * 2 + 1] = 0.5;
+        uv1[i * 2 + 1] = rm && !isPackedMetal(rm, i) ? 0 : 0.5;
       }
       uvAttr = new T.BufferAttribute(uv1, 2);
       if (typeof baseGeo.clone === 'function' && !(srcGeo.userData && srcGeo.userData.vmFlipOf)) {
@@ -374,9 +398,8 @@ export function applyGlowToNode(T, targetNode, glow, clearOtherNode = null, opts
   });
 
   if (glow.intensity > 0) {
-    ensureAxialUv1OnTarget(T, targetNode);
+    ensureAxialUv1OnTarget(T, targetNode, opts?.usePackedFinish);
   }
-  const gradTex = glow.intensity > 0 ? getHeatGradientTex(T, kind) : null;
 
   targetNode.traverse((obj) => {
     if (!obj.isMesh || !obj.material) return;
@@ -385,7 +408,7 @@ export function applyGlowToNode(T, targetNode, glow, clearOtherNode = null, opts
       let m = mats[i];
       if (!m || !m.emissive) continue;
 
-      if (!shouldMeshGlow(obj, m, hasNonVC)) {
+      if (!shouldMeshGlow(obj, m, hasNonVC, opts?.usePackedFinish)) {
         // Ensure excluded parts (bore disc, rotary clamp collars) stay dark if ever touched
         if (m.userData && m.userData._barrelHeatIsolated && m.emissiveIntensity !== 0) {
           m.emissive.setHex(0x000000);
@@ -417,7 +440,8 @@ export function applyGlowToNode(T, targetNode, glow, clearOtherNode = null, opts
           m.emissiveNode = null;
           m.needsUpdate = true;
         }
-        if (gradTex && obj.geometry && obj.geometry.attributes && obj.geometry.attributes.uv1 && m.emissiveMap !== gradTex) {
+        const gradTex = getHeatGradientTex(T, kind, !!(opts?.usePackedFinish && obj.geometry?.attributes.foldRM));
+        if (gradTex && obj.geometry?.attributes?.uv1 && m.emissiveMap !== gradTex) {
           m.emissiveMap = gradTex;
           m.needsUpdate = true;
         }
@@ -550,7 +574,7 @@ export function createBarrelHeat(ctx = {}) {
   let wispGroup = null;
   let wispGeo = null;
   let wispTex = null;
-  let wispSpawnTimer = 0;
+  const wispSpawnTimer = [0, 0];
   let simTime = 0;
 
   if (T && scene) {
@@ -601,6 +625,7 @@ export function createBarrelHeat(ctx = {}) {
   }
 
   const _scratchMuzzle = T ? new T.Vector3() : null;
+  const _wispEye = T ? new T.Vector3() : null;
   const _rollQ = T ? new T.Quaternion() : null;
   const _zAxis = T ? new T.Vector3(0, 0, 1) : null;
   const _coldGlow = { colorHex: 0x000000, r: 0, g: 0, b: 0, intensity: 0 };
@@ -608,33 +633,75 @@ export function createBarrelHeat(ctx = {}) {
   function clearGunMeshGlow(gunMesh, weaponKey = '') {
     if (!T || !gunMesh) return;
     const parts = findGunHeatParts(gunMesh, weaponKey, null);
-    if (parts.barrel) applyGlowToNode(T, parts.barrel, _coldGlow, null, { kind: 'barrel' });
-    if (parts.suppressor) applyGlowToNode(T, parts.suppressor, _coldGlow, null, { kind: 'suppressor' });
+    const usePackedFinish = pairedFinishes.has(weaponKey);
+    if (parts.barrel) applyGlowToNode(T, parts.barrel, _coldGlow, null, { kind: 'barrel', usePackedFinish });
+    if (parts.suppressor) applyGlowToNode(T, parts.suppressor, _coldGlow, null, { kind: 'suppressor', usePackedFinish });
   }
 
-  function getHeat(weaponKey) {
-    return heatByWeapon[weaponKey] || 0.0;
+  // Shot and magazine code use hand 0 for the main gun and 1 for the offhand.
+  // Existing callers that omit the hand continue to address the main gun.
+  const heatByHand = [heatByWeapon, Object.create(null)];
+  const worldByHand = [weaponMeshes || Object.create(null), Object.create(null)];
+  const lastView = [null, null];
+  const painted = new WeakSet();
+
+  function getHeat(weaponKey, hand = 0) {
+    return heatByHand[hand === 1 ? 1 : 0][weaponKey] || 0;
   }
 
-  function setHeat(weaponKey, val) {
-    const clamped = clamp01(+val || 0.0);
-    heatByWeapon[weaponKey] = clamped;
-    if (clamped <= GLOW_HEAT_THRESHOLD && weaponMeshes && weaponMeshes[weaponKey]) {
-      clearGunMeshGlow(weaponMeshes[weaponKey], weaponKey);
+  function setHeat(weaponKey, val, hand = 0) {
+    const side = hand === 1 ? 1 : 0;
+    const clamped = clamp01(+val || 0);
+    heatByHand[side][weaponKey] = clamped;
+    if (clamped <= GLOW_HEAT_THRESHOLD) {
+      clearGunMeshGlow(worldByHand[side][weaponKey], weaponKey);
+      if (lastView[side]?.key === weaponKey) clearGunMeshGlow(lastView[side].root, weaponKey);
     }
   }
 
-  function addShot(weaponKey = 'm4', isSuppressed = false, deltaMul = 1.0) {
+  function addShot(weaponKey = 'm4', isSuppressed = false, deltaMul = 1, hand = 0) {
     if (!weaponKey) return;
+    const table = heatByHand[hand === 1 ? 1 : 0];
     const inc = (HEAT_PER_SHOT[weaponKey] || HEAT_PER_SHOT.default) * deltaMul;
-    const cur = heatByWeapon[weaponKey] || 0.0;
-    heatByWeapon[weaponKey] = Math.min(1.0, cur + inc);
+    table[weaponKey] = Math.min(1, (table[weaponKey] || 0) + inc);
   }
 
-  function spawnSmokeWisp(pos, heat, daylight) {
+  function paint(gun, key, source, glow, suppressed, viewCopy = false, worldCloned = false) {
+    if (!T || !gun || (!glow.intensity && !painted.has(gun))) return false;
+    const parts = findGunHeatParts(gun, key, source);
+    const can = !!parts.suppressor && (suppressed ?? parts.suppressor.visible);
+    const target = can ? parts.suppressor : parts.barrel;
+    if (!target) return false;
+    const result = applyGlowToNode(T, target, glow, can ? parts.barrel : parts.suppressor,
+      { kind: can ? 'suppressor' : 'barrel', isVmCopy: viewCopy, worldClonedThisFrame: worldCloned,
+        usePackedFinish: pairedFinishes.has(key) });
+    if (glow.intensity) painted.add(gun);
+    else painted.delete(gun);
+    return result.clonedCount > 0;
+  }
+
+  function emit(hand, pairedSmoke, gun, vm, heat, dt, daylight) {
+    wispSpawnTimer[hand] -= dt;
+    if (wispSpawnTimer[hand] > 0) return;
+    let point = null;
+    if (vm?.info?.active && vm.muzzleWorld) {
+      point = vm.muzzleWorld(_scratchMuzzle, hand + 1);
+    } else if (gun) {
+      gun.updateWorldMatrix?.(true, false);
+      point = gun.userData?.muzzleLocal ? gun.localToWorld(_scratchMuzzle.copy(gun.userData.muzzleLocal))
+        : gun.getWorldPosition?.(_scratchMuzzle);
+    }
+    if (!point) return;
+    const strength = clamp01((heat - SMOKE_HEAT_THRESHOLD) / (1 - SMOKE_HEAT_THRESHOLD));
+    wispSpawnTimer[hand] = (0.115 - strength * 0.060) * (pairedSmoke ? 2 : 1);
+    spawnSmokeWisp(point, heat, daylight, hand, pairedSmoke);
+  }
+
+  function spawnSmokeWisp(pos, heat, daylight, hand, pairedSmoke) {
     if (!wisps.length || heat <= SMOKE_HEAT_THRESHOLD) return;
     let w = null;
-    for (let i = 0; i < wisps.length; i++) {
+    // Two emitting hands share the original pool evenly. A lone emitter can use all slots.
+    for (let i = pairedSmoke ? hand : 0; i < wisps.length; i += pairedSmoke ? 2 : 1) {
       if (!wisps[i].active) { w = wisps[i]; break; }
     }
     if (!w) return;
@@ -646,7 +713,7 @@ export function createBarrelHeat(ctx = {}) {
     w.active = true;
     w.age = 0;
     w.hNorm = hNorm;
-    w.life = 1.45 + hNorm * 1.45;           // 1.45s (faint short wisp) .. 2.90s (tall lingering wisp)
+    w.life = (1.45 + hNorm * 1.45) * WISP_LIFETIME_SCALE;
     w.width = 0.022 + hNorm * 0.018;        // thin 2.2-4.0 cm filament at the muzzle
     w.height = 0.055 + hNorm * 0.045;       // 5.5-10 cm overlapping vertical segment
     w.growW = 0.022 + hNorm * 0.026;
@@ -693,96 +760,49 @@ export function createBarrelHeat(ctx = {}) {
       ? clamp01(+state.daylight)
       : measureSceneDaylight(scene, cachedLights);
 
-    // 1. Cool all weapons over time (and update/clear non-active slung weapons so a slung gun never freezes glowing)
-    const keys = Object.keys(heatByWeapon);
-    for (let i = 0; i < keys.length; i++) {
-      const k = keys[i];
-      const h = heatByWeapon[k];
-      if (h > 0) {
-        const decay = (COOLING_BASE + COOLING_EXP * h) * stepDt;
-        const nextH = Math.max(0.0, h - decay);
-        heatByWeapon[k] = nextH;
-        if (k !== curW && T && weaponMeshes && weaponMeshes[k]) {
-          const otherMesh = weaponMeshes[k];
-          const otherParts = findGunHeatParts(otherMesh, k, null);
-          const otherGlow = getHeatGlow(nextH, daylight);
-          const otherSup = !!(otherParts.suppressor && otherParts.suppressor.visible);
-          if (otherSup && otherParts.suppressor) {
-            applyGlowToNode(T, otherParts.suppressor, otherGlow, otherParts.barrel, { kind: 'suppressor' });
-          } else if (otherParts.barrel) {
-            applyGlowToNode(T, otherParts.barrel, otherGlow, otherParts.suppressor, { kind: 'barrel' });
-          }
+    const offhand = state.offhandMesh || null;
+    if (offhand) worldByHand[1][curW] = offhand;
+    for (let hand = 0; hand < 2; hand++) {
+      const table = heatByHand[hand];
+      for (const key in table) {
+        const heat = table[key];
+        if (heat <= 0) continue;
+        const next = Math.max(0, heat - (COOLING_BASE + COOLING_EXP * heat) * stepDt);
+        table[key] = next;
+        if (key !== curW || (hand === 1 && !offhand)) {
+          paint(worldByHand[hand][key], key, null, getHeatGlow(next, daylight));
         }
       }
     }
 
-    const curHeat = getHeat(curW);
-    const glow = getHeatGlow(curHeat, daylight);
-
-    // 2. Apply glow to third-person world gun first (isolates source materials & prepares axial uv1 once)
-    let worldClonedThisFrame = false;
-    if (T && worldGun) {
-      const parts = findGunHeatParts(worldGun, curW, null);
-      let res;
-      if (isSup && parts.suppressor) {
-        res = applyGlowToNode(T, parts.suppressor, glow, parts.barrel, { kind: 'suppressor' });
-      } else if (parts.barrel) {
-        res = applyGlowToNode(T, parts.barrel, glow, parts.suppressor, { kind: 'barrel' });
-      }
-      if (res && res.clonedCount > 0) worldClonedThisFrame = true;
-    }
-
-    // 3. Apply glow to first-person viewmodel gun (if active)
-    if (T && vm && vm.info && vm.info.active) {
-      let vmGun = null;
-      if (vm.root) {
-        const space = vm.space || vm.root.getObjectByName('vm-space') || vm.root;
-        const holder = space.getObjectByName('vm-gun');
-        if (holder && holder.children.length > 0) vmGun = holder.children[0];
-      }
-      if (vmGun) {
-        const parts = findGunHeatParts(vmGun, curW, worldGun);
-        if (isSup && parts.suppressor) {
-          applyGlowToNode(T, parts.suppressor, glow, parts.barrel, { isVmCopy: true, worldClonedThisFrame, kind: 'suppressor' });
-        } else if (parts.barrel) {
-          applyGlowToNode(T, parts.barrel, glow, parts.suppressor, { isVmCopy: true, worldClonedThisFrame, kind: 'barrel' });
+    const pairedSmoke = offhand && getHeat(curW) > SMOKE_HEAT_THRESHOLD && getHeat(curW, 1) > SMOKE_HEAT_THRESHOLD;
+    for (let hand = 0; hand < (offhand ? 2 : 1); hand++) {
+      const gun = hand ? offhand : worldGun;
+      const heat = getHeat(curW, hand);
+      const glow = heat > GLOW_HEAT_THRESHOLD ? getHeatGlow(heat, daylight) : _coldGlow;
+      const suppressed = hand ? (gun.userData?.suppressed ?? isSup) : isSup;
+      const cloned = paint(gun, curW, null, glow, suppressed);
+      if (vm?.info?.active) {
+        const copy = hand ? vm.gun2 : vm.gun;
+        if (copy?.key === curW) {
+          lastView[hand] = copy;
+          paint(copy.root, curW, gun, glow, suppressed, true, cloned);
+        } else if (!hand && !vm.gun && vm.root) {
+          // Simple view hosts expose the gun holder without a runtime gun record.
+          const holder = (vm.space || vm.root).getObjectByName('vm-gun');
+          paint(holder?.children[0], curW, gun, glow, suppressed, true, cloned);
         }
       }
-    }
-
-    // 4. Spawn rising thin smoke wisps off the muzzle (suppressed while flamer stream is actively roaring)
-    if (T && wispGroup && curHeat > SMOKE_HEAT_THRESHOLD && !state.suppressWisp) {
-      wispSpawnTimer -= stepDt;
-      if (wispSpawnTimer <= 0) {
-        const hNorm = clamp01((curHeat - SMOKE_HEAT_THRESHOLD) / (1.0 - SMOKE_HEAT_THRESHOLD));
-        wispSpawnTimer = 0.115 - hNorm * 0.060; // 0.115s when warm -> 0.055s when hot
-
-        let muzzlePoint = null;
-        if (vm && vm.info && vm.info.active && typeof vm.muzzleWorld === 'function') {
-          muzzlePoint = vm.muzzleWorld(_scratchMuzzle);
-        } else if (worldGun) {
-          if (typeof worldGun.updateWorldMatrix === 'function') {
-            worldGun.updateWorldMatrix(true, false);
-          }
-          const ml = worldGun.userData && worldGun.userData.muzzleLocal;
-          if (ml) {
-            _scratchMuzzle.copy(ml);
-            muzzlePoint = worldGun.localToWorld(_scratchMuzzle);
-          } else if (typeof worldGun.getWorldPosition === 'function') {
-            muzzlePoint = worldGun.getWorldPosition(_scratchMuzzle);
-          } else {
-            muzzlePoint = _scratchMuzzle.set(0, 0, 0);
-          }
-        }
-
-        if (muzzlePoint) {
-          spawnSmokeWisp(muzzlePoint, curHeat, daylight);
-        }
+      if (wispGroup && heat > SMOKE_HEAT_THRESHOLD && !state.suppressWisp) {
+        emit(hand, pairedSmoke, gun, vm, heat, stepDt, daylight);
+      } else {
+        wispSpawnTimer[hand] = 0;
       }
     }
 
     // 5. Simulate active smoke wisps along a coherent curling ribbon
     if (wisps.length > 0) {
+      let eye;
       for (let i = 0; i < wisps.length; i++) {
         const w = wisps[i];
         if (!w.active) continue;
@@ -822,10 +842,19 @@ export function createBarrelHeat(ctx = {}) {
         w.mesh.scale.set(curWSize, curHSize, 1);
 
         let alpha = 0;
-        if (prog < 0.14) {
-          alpha = (prog / 0.14) * w.maxOpacity;
+        if (prog < 0.10) {
+          alpha = (prog / 0.10) * w.maxOpacity;
         } else {
-          alpha = Math.pow(1.0 - (prog - 0.14) / 0.86, 1.25) * w.maxOpacity;
+          alpha = Math.pow((1.0 - prog) / 0.90, 1.45) * w.maxOpacity;
+        }
+        if (eye === undefined) eye = cam?.getWorldPosition ? cam.getWorldPosition(_wispEye) : (cam?.position ?? null);
+        if (eye) {
+          const d2 = w.mesh.position.distanceToSquared(eye);
+          if (d2 < 1) {
+            // Fade the billboard before it can fill the view as the eye crosses the trail.
+            const near = smoothstep(0.08, 1, Math.sqrt(d2));
+            alpha *= near * (2 - near);
+          }
         }
         w.mat.opacity = Math.max(0.0, alpha);
       }
@@ -833,16 +862,15 @@ export function createBarrelHeat(ctx = {}) {
   }
 
   function reset() {
-    for (const k in heatByWeapon) {
-      if (weaponMeshes && weaponMeshes[k]) clearGunMeshGlow(weaponMeshes[k], k);
-      delete heatByWeapon[k];
+    for (let hand = 0; hand < 2; hand++) {
+      const table = heatByHand[hand];
+      for (const key in table) delete table[key];
+      for (const key in worldByHand[hand]) clearGunMeshGlow(worldByHand[hand][key], key);
+      const copy = lastView[hand];
+      if (copy) clearGunMeshGlow(copy.root, copy.key);
+      lastView[hand] = null;
+      wispSpawnTimer[hand] = 0;
     }
-    if (weaponMeshes) {
-      for (const k of Object.keys(weaponMeshes)) {
-        clearGunMeshGlow(weaponMeshes[k], k);
-      }
-    }
-    wispSpawnTimer = 0;
     for (let i = 0; i < wisps.length; i++) {
       wisps[i].active = false;
       if (wisps[i].mesh) wisps[i].mesh.visible = false;

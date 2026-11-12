@@ -1,0 +1,514 @@
+{
+  "noon": [
+    {
+      "barrel": {
+        "hot": 1,
+        "peak": 0.1002129072163769,
+        "node": "heatParts-barrel",
+        "meshes": [
+          {
+            "name": "heatParts-barrel",
+            "foldRM": null,
+            "type": "MeshStandardMaterial",
+            "em": 7145216,
+            "intensity": 0.1002129072163769,
+            "vc": false,
+            "rough": 0.6,
+            "metal": 0.1,
+            "active": true
+          }
+        ]
+      },
+      "suppressor": {
+        "hot": 0,
+        "peak": 0,
+        "node": "suppressor",
+        "meshes": [
+          {
+            "name": "",
+            "foldRM": null,
+            "type": "MeshStandardMaterial",
+            "em": 0,
+            "intensity": 1,
+            "vc": false,
+            "rough": 0.68,
+            "metal": 0.08,
+            "active": true
+          },
+          {
+            "name": "",
+            "foldRM": null,
+            "type": "MeshStandardMaterial",
+            "em": 0,
+            "intensity": 1,
+            "vc": false,
+            "rough": 0.6,
+            "metal": 0.1,
+            "active": true
+          },
+          {
+            "name": "",
+            "foldRM": [
+              0.41999998688697815,
+              0.8500000238418579
+            ],
+            "type": "MeshStandardNodeMaterial",
+            "em": 0,
+            "intensity": 1,
+            "vc": true,
+            "rough": 1,
+            "metal": 0,
+            "active": true
+          }
+        ]
+      }
+    },
+    {
+      "barrel": {
+        "hot": 1,
+        "peak": 0.10145744961870803,
+        "node": "heatParts-barrel",
+        "meshes": [
+          {
+            "name": "heatParts-barrel",
+            "foldRM": null,
+            "type": "MeshStandardMaterial",
+            "em": 7145216,
+            "intensity": 0.10145744961870803,
+            "vc": false,
+            "rough": 0.6,
+            "metal": 0.1,
+            "active": true
+          }
+        ]
+      },
+      "suppressor": {
+        "hot": 0,
+        "peak": 0,
+        "node": "suppressor",
+        "meshes": [
+          {
+            "name": "",
+            "foldRM": null,
+            "type": "MeshStandardMaterial",
+            "em": 0,
+            "intensity": 1,
+            "vc": false,
+            "rough": 0.68,
+            "metal": 0.08,
+            "active": true
+          },
+          {
+            "name": "",
+            "foldRM": null,
+            "type": "MeshStandardMaterial",
+            "em": 0,
+            "intensity": 1,
+            "vc": false,
+            "rough": 0.6,
+            "metal": 0.1,
+            "active": true
+          },
+          {
+            "name": "",
+            "foldRM": [
+              0.41999998688697815,
+              0.8500000238418579
+            ],
+            "type": "MeshStandardNodeMaterial",
+            "em": 0,
+            "intensity": 1,
+            "vc": true,
+            "rough": 1,
+            "metal": 0,
+            "active": true
+          }
+        ]
+      }
+    }
+  ],
+  "overcast": [
+    {
+      "barrel": {
+        "hot": 1,
+        "peak": 0.23645763401959705,
+        "node": "heatParts-barrel",
+        "meshes": [
+          {
+            "name": "heatParts-barrel",
+            "foldRM": null,
+            "type": "MeshStandardMaterial",
+            "em": 7079680,
+            "intensity": 0.23645763401959705,
+            "vc": false,
+            "rough": 0.6,
+            "metal": 0.1,
+            "active": true
+          }
+        ]
+      },
+      "suppressor": {
+        "hot": 0,
+        "peak": 0,
+        "node": "suppressor",
+        "meshes": [
+          {
+            "name": "",
+            "foldRM": null,
+            "type": "MeshStandardMaterial",
+            "em": 0,
+            "intensity": 1,
+            "vc": false,
+            "rough": 0.68,
+            "metal": 0.08,
+            "active": true
+          },
+          {
+            "name": "",
+            "foldRM": null,
+            "type": "MeshStandardMaterial",
+            "em": 0,
+            "intensity": 1,
+            "vc": false,
+            "rough": 0.6,
+            "metal": 0.1,
+            "active": true
+          },
+          {
+            "name": "",
+            "foldRM": [
+              0.41999998688697815,
+              0.8500000238418579
+            ],
+            "type": "MeshStandardNodeMaterial",
+            "em": 0,
+            "intensity": 1,
+            "vc": true,
+            "rough": 1,
+            "metal": 0,
+            "active": true
+          }
+        ]
+      }
+    },
+    {
+      "barrel": {
+        "hot": 1,
+        "peak": 0.23940837029808468,
+        "node": "heatParts-barrel",
+        "meshes": [
+          {
+            "name": "heatParts-barrel",
+            "foldRM": null,
+            "type": "MeshStandardMaterial",
+            "em": 7145216,
+            "intensity": 0.23940837029808468,
+            "vc": false,
+            "rough": 0.6,
+            "metal": 0.1,
+            "active": true
+          }
+        ]
+      },
+      "suppressor": {
+        "hot": 0,
+        "peak": 0,
+        "node": "suppressor",
+        "meshes": [
+          {
+            "name": "",
+            "foldRM": null,
+            "type": "MeshStandardMaterial",
+            "em": 0,
+            "intensity": 1,
+            "vc": false,
+            "rough": 0.68,
+            "metal": 0.08,
+            "active": true
+          },
+          {
+            "name": "",
+            "foldRM": null,
+            "type": "MeshStandardMaterial",
+            "em": 0,
+            "intensity": 1,
+            "vc": false,
+            "rough": 0.6,
+            "metal": 0.1,
+            "active": true
+          },
+          {
+            "name": "",
+            "foldRM": [
+              0.41999998688697815,
+              0.8500000238418579
+            ],
+            "type": "MeshStandardNodeMaterial",
+            "em": 0,
+            "intensity": 1,
+            "vc": true,
+            "rough": 1,
+            "metal": 0,
+            "active": true
+          }
+        ]
+      }
+    }
+  ],
+  "dusk": [
+    {
+      "barrel": {
+        "hot": 1,
+        "peak": 0.27340972759570864,
+        "node": "heatParts-barrel",
+        "meshes": [
+          {
+            "name": "heatParts-barrel",
+            "foldRM": null,
+            "type": "MeshStandardMaterial",
+            "em": 7079680,
+            "intensity": 0.27340972759570864,
+            "vc": false,
+            "rough": 0.6,
+            "metal": 0.1,
+            "active": true
+          }
+        ]
+      },
+      "suppressor": {
+        "hot": 0,
+        "peak": 0,
+        "node": "suppressor",
+        "meshes": [
+          {
+            "name": "",
+            "foldRM": null,
+            "type": "MeshStandardMaterial",
+            "em": 0,
+            "intensity": 1,
+            "vc": false,
+            "rough": 0.68,
+            "metal": 0.08,
+            "active": true
+          },
+          {
+            "name": "",
+            "foldRM": null,
+            "type": "MeshStandardMaterial",
+            "em": 0,
+            "intensity": 1,
+            "vc": false,
+            "rough": 0.6,
+            "metal": 0.1,
+            "active": true
+          },
+          {
+            "name": "",
+            "foldRM": [
+              0.41999998688697815,
+              0.8500000238418579
+            ],
+            "type": "MeshStandardNodeMaterial",
+            "em": 0,
+            "intensity": 1,
+            "vc": true,
+            "rough": 1,
+            "metal": 0,
+            "active": true
+          }
+        ]
+      }
+    },
+    {
+      "barrel": {
+        "hot": 1,
+        "peak": 0.2768381561852412,
+        "node": "heatParts-barrel",
+        "meshes": [
+          {
+            "name": "heatParts-barrel",
+            "foldRM": null,
+            "type": "MeshStandardMaterial",
+            "em": 7145216,
+            "intensity": 0.2768381561852412,
+            "vc": false,
+            "rough": 0.6,
+            "metal": 0.1,
+            "active": true
+          }
+        ]
+      },
+      "suppressor": {
+        "hot": 0,
+        "peak": 0,
+        "node": "suppressor",
+        "meshes": [
+          {
+            "name": "",
+            "foldRM": null,
+            "type": "MeshStandardMaterial",
+            "em": 0,
+            "intensity": 1,
+            "vc": false,
+            "rough": 0.68,
+            "metal": 0.08,
+            "active": true
+          },
+          {
+            "name": "",
+            "foldRM": null,
+            "type": "MeshStandardMaterial",
+            "em": 0,
+            "intensity": 1,
+            "vc": false,
+            "rough": 0.6,
+            "metal": 0.1,
+            "active": true
+          },
+          {
+            "name": "",
+            "foldRM": [
+              0.41999998688697815,
+              0.8500000238418579
+            ],
+            "type": "MeshStandardNodeMaterial",
+            "em": 0,
+            "intensity": 1,
+            "vc": true,
+            "rough": 1,
+            "metal": 0,
+            "active": true
+          }
+        ]
+      }
+    }
+  ],
+  "night": [
+    {
+      "barrel": {
+        "hot": 1,
+        "peak": 0.39341047936348666,
+        "node": "heatParts-barrel",
+        "meshes": [
+          {
+            "name": "heatParts-barrel",
+            "foldRM": null,
+            "type": "MeshStandardMaterial",
+            "em": 7079680,
+            "intensity": 0.39341047936348666,
+            "vc": false,
+            "rough": 0.6,
+            "metal": 0.1,
+            "active": true
+          }
+        ]
+      },
+      "suppressor": {
+        "hot": 0,
+        "peak": 0,
+        "node": "suppressor",
+        "meshes": [
+          {
+            "name": "",
+            "foldRM": null,
+            "type": "MeshStandardMaterial",
+            "em": 0,
+            "intensity": 1,
+            "vc": false,
+            "rough": 0.68,
+            "metal": 0.08,
+            "active": true
+          },
+          {
+            "name": "",
+            "foldRM": null,
+            "type": "MeshStandardMaterial",
+            "em": 0,
+            "intensity": 1,
+            "vc": false,
+            "rough": 0.6,
+            "metal": 0.1,
+            "active": true
+          },
+          {
+            "name": "",
+            "foldRM": [
+              0.41999998688697815,
+              0.8500000238418579
+            ],
+            "type": "MeshStandardNodeMaterial",
+            "em": 0,
+            "intensity": 1,
+            "vc": true,
+            "rough": 1,
+            "metal": 0,
+            "active": true
+          }
+        ]
+      }
+    },
+    {
+      "barrel": {
+        "hot": 1,
+        "peak": 0.39836776991842926,
+        "node": "heatParts-barrel",
+        "meshes": [
+          {
+            "name": "heatParts-barrel",
+            "foldRM": null,
+            "type": "MeshStandardMaterial",
+            "em": 7079680,
+            "intensity": 0.39836776991842926,
+            "vc": false,
+            "rough": 0.6,
+            "metal": 0.1,
+            "active": true
+          }
+        ]
+      },
+      "suppressor": {
+        "hot": 0,
+        "peak": 0,
+        "node": "suppressor",
+        "meshes": [
+          {
+            "name": "",
+            "foldRM": null,
+            "type": "MeshStandardMaterial",
+            "em": 0,
+            "intensity": 1,
+            "vc": false,
+            "rough": 0.68,
+            "metal": 0.08,
+            "active": true
+          },
+          {
+            "name": "",
+            "foldRM": null,
+            "type": "MeshStandardMaterial",
+            "em": 0,
+            "intensity": 1,
+            "vc": false,
+            "rough": 0.6,
+            "metal": 0.1,
+            "active": true
+          },
+          {
+            "name": "",
+            "foldRM": [
+              0.41999998688697815,
+              0.8500000238418579
+            ],
+            "type": "MeshStandardNodeMaterial",
+            "em": 0,
+            "intensity": 1,
+            "vc": true,
+            "rough": 1,
+            "metal": 0,
+            "active": true
+          }
+        ]
+      }
+    }
+  ]
+}

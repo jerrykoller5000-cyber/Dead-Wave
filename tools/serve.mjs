@@ -59,6 +59,32 @@ function handleClipSave(req, res, base) {
   });
 }
 
+// Match the Python play server's opening recorder. The browser posts once after
+// the title settles; keep it bounded and write only into the fixed perf folder.
+function handleOpeningPerf(req, res, base) {
+  const chunks = [];
+  let size = 0;
+  req.on('data', chunk => {
+    size += chunk.length;
+    if (size > 2_000_000) { req.destroy(); return; }
+    chunks.push(chunk);
+  });
+  req.on('end', () => {
+    if (req.destroyed) return;
+    try {
+      const body = Buffer.concat(chunks);
+      JSON.parse(body.toString('utf8'));
+      const dir = path.join(base, 'qa', 'perf');
+      fs.mkdirSync(dir, { recursive: true });
+      const stamp = new Date().toISOString().replace(/[-:]/g, '').replace('T', '-').replace(/\.\d+Z$/, '');
+      fs.writeFileSync(path.join(dir, `opening-${stamp}.json`), body);
+      res.writeHead(204, { 'Cache-Control': 'no-store' }).end();
+    } catch (_) {
+      if (!res.destroyed) res.writeHead(400, { 'Content-Type': 'text/plain; charset=utf-8' }).end('bad perf log');
+    }
+  });
+}
+
 const TYPES = {
   '.html': 'text/html; charset=utf-8',
   '.js': 'text/javascript; charset=utf-8',
@@ -115,6 +141,7 @@ export function serve(root, port = 0) {
     if (req.method === 'POST' && pathname === '/__studio/note') { handleStudioNote(req, res, base); return; }
     if (req.method === 'POST' && pathname === '/__inspect/note') { handleInspectNote(req, res, base); return; }
     if (req.method === 'POST' && pathname === '/__clip') { handleClipSave(req, res, base); return; }
+    if (req.method === 'POST' && pathname === '/__perflog') { handleOpeningPerf(req, res, base); return; }
     // GP-19919: launchers probe this identity before reusing a port. A foreign listener is never killed.
     if (req.method === 'GET' && pathname === '/__inspect/health') {
       const body = JSON.stringify({ ok: true, service: 'dead-wave-inspector', version: 1, root: base, pid: process.pid, fingerprint: INSPECTOR_SERVER_FINGERPRINT });
@@ -176,6 +203,21 @@ export function serve(root, port = 0) {
     fs.stat(file, (err, stat) => {
       if (res.destroyed) return;
       if (err || !stat.isFile()) {
+        // Optional local resources: the packaged build has version.json, while
+        // this source folder has package.json. Levels may be absent by design.
+        if (req.method === 'GET' && pathname === '/version.json') {
+          try {
+            const { version } = JSON.parse(fs.readFileSync(path.join(base, 'package.json'), 'utf8'));
+            if (typeof version === 'string') {
+              res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' }).end(JSON.stringify({ version }));
+              return;
+            }
+          } catch (_) { /* ordinary 404 below */ }
+        }
+        if (req.method === 'GET' && pathname === '/z-sounds/levels.json') {
+          res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' }).end('{}');
+          return;
+        }
         res.writeHead(404, { 'Content-Type': 'text/plain' }).end('not found: ' + pathname);
         return;
       }

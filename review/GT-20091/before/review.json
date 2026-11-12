@@ -1,0 +1,150 @@
+{
+  "phase": "before",
+  "geometry": {
+    "world": {
+      "present": false
+    },
+    "view": {
+      "present": false
+    },
+    "carry": {
+      "present": false
+    },
+    "rack": {
+      "present": false
+    }
+  },
+  "shots": {
+    "hip": {
+      "camera": {
+        "points": [
+          [
+            0.1789821260190596,
+            -0.23830114985454312,
+            0.460976104197921
+          ],
+          [
+            1.028663798631122,
+            -0.056221226240563055,
+            0.4822653242362585
+          ],
+          [
+            0.07730309868277314,
+            1.272231238763435,
+            0.43674066356930596
+          ],
+          [
+            0.15245673355428907,
+            -0.19605823064956807,
+            1.2358297146869057
+          ]
+        ],
+        "eye": true,
+        "glassHidden": false,
+        "fov": null,
+        "target": "isolated held artwork",
+        "recordedWallPose": false,
+        "spot": [
+          0,
+          -640.55
+        ],
+        "actualSpot": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "heldElevation": null
+      },
+      "lights": {
+        "noon": {
+          "on": true,
+          "night": false,
+          "room": true
+        },
+        "overcast": {
+          "on": true,
+          "night": false,
+          "room": true
+        },
+        "dusk": {
+          "on": true,
+          "night": false,
+          "room": true
+        },
+        "night": {
+          "on": true,
+          "night": false,
+          "room": true
+        }
+      }
+    },
+    "aimed": {
+      "camera": {
+        "points": [
+          [
+            0,
+            -0.20925898309346008,
+            0.4185229658729657
+          ],
+          [
+            0.9797946778264465,
+            -0.20925898309346008,
+            0.4185229658729657
+          ],
+          [
+            8.364977987112568e-31,
+            1.5325917784889138,
+            0.42063238550783144
+          ],
+          [
+            -1.1988410449592311e-30,
+            -0.21399681716496416,
+            1.1940448904559584
+          ]
+        ],
+        "eye": true,
+        "glassHidden": false,
+        "fov": null,
+        "target": "isolated held artwork",
+        "recordedWallPose": false,
+        "spot": [
+          0,
+          -640.55
+        ],
+        "actualSpot": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "heldElevation": null
+      },
+      "lights": {
+        "noon": {
+          "on": true,
+          "night": false,
+          "room": true
+        },
+        "overcast": {
+          "on": true,
+          "night": false,
+          "room": true
+        },
+        "dusk": {
+          "on": true,
+          "night": false,
+          "room": true
+        },
+        "night": {
+          "on": true,
+          "night": false,
+          "room": true
+        },
+        "dark-room": {
+          "on": false,
+          "night": true,
+          "room": false
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "hash": "0f1f97d0",
+  "results": [
+    {
+      "part": 62,
+      "exterior": 60,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      "trianglesBefore": 124,
+      "trianglesAfter": 348
+    }
+  ]
+}

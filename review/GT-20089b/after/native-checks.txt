@@ -1,0 +1,7 @@
+FAIL  tag290   44 pass   3 fail  18.7s  (real renderer)
+    FAIL unsuppressed: suppressor tube has 0 emissive intensity
+    FAIL suppressed: dark bore insert stays unlit (0 emissive)
+    FAIL smoke wisp grows stronger & longer-lived with firing duration (warm=0.53, hot=0.53)
+ok    t38      26 pass   0 fail  55.8s  (real renderer)
+    PASS equipped draws across twelve individual models 240 < 260
+2 checks: 70 pass, 3 fail (real renderer)

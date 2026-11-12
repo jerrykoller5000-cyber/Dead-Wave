@@ -3,6 +3,30 @@ import {readFile} from 'node:fs/promises';
 
 // Only the selected local studio asset is supplied to this review page.
 
+export async function originalDrumOptic(page,origin){
+  const path='/studio/weapon-longarms.js';
+  let source=await readFile(new URL('../../studio/weapon-longarms.js',import.meta.url),'utf8');
+  for(const [now,prior] of [
+    ['    seatDrumPlate(faceLayer(.137, .137, .065, .0675, gunBody, 32), sz);',
+     '    K.cyl(0.137, 0.137, 0.005, gunBody, 0, 0, sz * 0.065, drumBody, 32);'],
+    ["  trimPanelBack(THREE, emitterCover, 1, .118, 'y');",'']
+  ]){
+    assert.equal(source.split(now).length,2);source=source.replace(now,prior);
+  }
+  return replayArtwork(page,origin,path,source);
+}
+
+export async function originalScopePlates(page,origin){
+  const path='/studio/weapon-optics.js',source=await readFile(new URL('../..'+path,import.meta.url),'utf8');
+  const now='    scopeSidePlate(root, side);';
+  assert.equal(source.split(now).length,2);
+  const verify=await replayArtwork(page,origin,path,source.replace(now,"    box(root, 'rail clamp jaw', alloy, [0.003, 0.012, 0.121], [side * 0.020, 0.007, 0]);"));
+  return async()=>{
+    const hash=await page.evaluate("import('/review/GT-20076/rank-visibility.mjs').then(async m=>(await import('/tools/tests/weapon-seating.js')).artworkFingerprint(m.currentModel(TT,'sniper')))");
+    assert.equal(hash,'33dd3d44');verify();
+  };
+}
+
 export async function originalFlamerMount(page,origin){
   const path='/studio/weapon-heavy.js',live=await readFile(new URL('../../studio/weapon-heavy.js',import.meta.url),'utf8');
   const start=live.indexOf('  const gripMount ='),end=live.indexOf('  K.box(0.04, 0.012, 0.05',start);
@@ -25,7 +49,7 @@ export async function originalFlamerMount(page,origin){
 }
 
 export async function replayArtwork(page,origin,path,source) {
-  assert(['/studio/weapon-heavy.js','/studio/weapon-longarms.js','/studio/weapon-sidearms.js'].includes(path));
+  assert(['/studio/weapon-heavy.js','/studio/weapon-longarms.js','/studio/weapon-sidearms.js','/studio/weapon-optics.js'].includes(path));
   const body=Buffer.from(source).toString('base64');
   let served=0;
   page.conn.onEvent(msg=>{

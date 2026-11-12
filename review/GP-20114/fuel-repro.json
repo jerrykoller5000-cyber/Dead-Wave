@@ -1,0 +1,35 @@
+{
+  "before": {
+    "fuel": {
+      "phase": "carried",
+      "fill": 3,
+      "fillShare": 1,
+      "done": false,
+      "drips": 0,
+      "booms": 0,
+      "down": null,
+      "carried": true,
+      "slow": 0.62
+    },
+    "slow": 0.62
+  },
+  "after": {
+    "fuel": {
+      "phase": "at-pump",
+      "fill": 0,
+      "fillShare": 0,
+      "done": false,
+      "drips": 0,
+      "booms": 0,
+      "down": null,
+      "carried": false,
+      "slow": 1
+    },
+    "slow": 1,
+    "fence": {
+      "raised": false,
+      "amount": 0,
+      "awaitExit": true
+    }
+  }
+}

@@ -1,0 +1,274 @@
+{
+  "key": "uzi",
+  "view": "eye",
+  "shots": 210,
+  "frames": 419,
+  "seen": [
+    137,
+    0
+  ],
+  "last": [
+    418,
+    -1
+  ],
+  "maxGap": [
+    4,
+    0
+  ],
+  "history": [
+    {
+      "hand": 0,
+      "old": [
+        0,
+        0
+      ],
+      "after": [
+        0.008,
+        0.008
+      ]
+    },
+    {
+      "hand": 0,
+      "old": [
+        0.006378735680000001,
+        0.006378735680000001
+      ],
+      "after": [
+        0.014378735680000001,
+        0.014378735680000001
+      ]
+    },
+    {
+      "hand": 0,
+      "old": [
+        0.012739623402417933,
+        0.012739623402417933
+      ],
+      "after": [
+        0.02073962340241793,
+        0.02073962340241793
+      ]
+    },
+    {
+      "hand": 0,
+      "old": [
+        0.019082713106553028,
+        0.019082713106553028
+      ],
+      "after": [
+        0.027082713106553028,
+        0.027082713106553028
+      ]
+    },
+    {
+      "hand": 0,
+      "old": [
+        0.02540805459197237,
+        0.02540805459197237
+      ],
+      "after": [
+        0.033408054591972366,
+        0.033408054591972366
+      ]
+    },
+    {
+      "hand": 0,
+      "old": [
+        0.031715697518901846,
+        0.031715697518901846
+      ],
+      "after": [
+        0.039715697518901846,
+        0.039715697518901846
+      ]
+    },
+    {
+      "hand": 0,
+      "old": [
+        0.03800569140861606,
+        0.03800569140861606
+      ],
+      "after": [
+        0.04600569140861606,
+        0.04600569140861606
+      ]
+    },
+    {
+      "hand": 0,
+      "old": [
+        0.0442780856438271,
+        0.0442780856438271
+      ],
+      "after": [
+        0.0522780856438271,
+        0.0522780856438271
+      ]
+    },
+    {
+      "hand": 0,
+      "old": [
+        0.050532929469072244,
+        0.050532929469072244
+      ],
+      "after": [
+        0.058532929469072244,
+        0.058532929469072244
+      ]
+    },
+    {
+      "hand": 0,
+      "old": [
+        0.0567702719911006,
+        0.0567702719911006
+      ],
+      "after": [
+        0.06477027199110061,
+        0.06477027199110061
+      ]
+    }
+  ],
+  "temperatures": [
+    0.9978,
+    0.9978
+  ],
+  "parts": [
+    {
+      "barrel": {
+        "hot": 1,
+        "peak": 1.793888888888889,
+        "node": "heatParts-barrel",
+        "meshes": [
+          {
+            "name": "heatParts-barrel",
+            "foldRM": null,
+            "type": "MeshStandardNodeMaterial",
+            "em": 16144140,
+            "intensity": 1.793888888888889,
+            "vc": false,
+            "rough": 0.58,
+            "metal": 0.1,
+            "active": true
+          }
+        ]
+      },
+      "suppressor": {
+        "hot": 0,
+        "peak": 0,
+        "node": "suppressor",
+        "meshes": [
+          {
+            "name": "",
+            "foldRM": null,
+            "type": "MeshStandardNodeMaterial",
+            "em": 0,
+            "intensity": 1,
+            "vc": false,
+            "rough": 0.69,
+            "metal": 0.08,
+            "active": true
+          },
+          {
+            "name": "",
+            "foldRM": null,
+            "type": "MeshStandardNodeMaterial",
+            "em": 0,
+            "intensity": 1,
+            "vc": false,
+            "rough": 0.58,
+            "metal": 0.1,
+            "active": true
+          },
+          {
+            "name": "",
+            "foldRM": [
+              0.41999998688697815,
+              0.8500000238418579
+            ],
+            "type": "MeshStandardNodeMaterial",
+            "em": 0,
+            "intensity": 1,
+            "vc": false,
+            "rough": 1,
+            "metal": 0,
+            "active": true
+          }
+        ]
+      }
+    },
+    {
+      "barrel": {
+        "hot": 0,
+        "peak": 0,
+        "node": "heatParts-barrel",
+        "meshes": [
+          {
+            "name": "heatParts-barrel",
+            "foldRM": null,
+            "type": "MeshStandardNodeMaterial",
+            "em": 0,
+            "intensity": 1,
+            "vc": false,
+            "rough": 0.58,
+            "metal": 0.1,
+            "active": true
+          }
+        ]
+      },
+      "suppressor": {
+        "hot": 0,
+        "peak": 0,
+        "node": "suppressor",
+        "meshes": [
+          {
+            "name": "",
+            "foldRM": null,
+            "type": "MeshStandardNodeMaterial",
+            "em": 0,
+            "intensity": 1,
+            "vc": false,
+            "rough": 0.69,
+            "metal": 0.08,
+            "active": true
+          },
+          {
+            "name": "",
+            "foldRM": null,
+            "type": "MeshStandardNodeMaterial",
+            "em": 0,
+            "intensity": 1,
+            "vc": false,
+            "rough": 0.58,
+            "metal": 0.1,
+            "active": true
+          },
+          {
+            "name": "",
+            "foldRM": [
+              0.41999998688697815,
+              0.8500000238418579
+            ],
+            "type": "MeshStandardNodeMaterial",
+            "em": 0,
+            "intensity": 1,
+            "vc": false,
+            "rough": 1,
+            "metal": 0,
+            "active": true
+          }
+        ]
+      }
+    }
+  ],
+  "muzzles": [
+    [
+      -0.19780632989508315,
+      -198.65975610601984,
+      -639.8975632723946
+    ],
+    [
+      0.2143147022749761,
+      -198.64311650337947,
+      -639.9172859810388
+    ]
+  ]
+}

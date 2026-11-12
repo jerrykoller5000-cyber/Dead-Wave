@@ -1,0 +1,137 @@
+{
+  "hip-noon": {
+    "screen": [
+      980.4978898982032,
+      478.68249668538357
+    ],
+    "cameraDriftPx": 1.2773969646243717e-12,
+    "visibleGreenPixels": 13,
+    "pixelsChangedWithin25pxSquare": 13,
+    "bounds": [
+      -2,
+      -2,
+      2,
+      1
+    ],
+    "brightest": [
+      133,
+      239,
+      132
+    ]
+  },
+  "hip-overcast": {
+    "screen": [
+      980.4978898982032,
+      478.68249668538357
+    ],
+    "cameraDriftPx": 1.2773969646243717e-12,
+    "visibleGreenPixels": 13,
+    "pixelsChangedWithin25pxSquare": 13,
+    "bounds": [
+      -2,
+      -2,
+      2,
+      1
+    ],
+    "brightest": [
+      133,
+      239,
+      132
+    ]
+  },
+  "hip-dusk": {
+    "screen": [
+      980.4978898982032,
+      478.68249668538357
+    ],
+    "cameraDriftPx": 1.2773969646243717e-12,
+    "visibleGreenPixels": 13,
+    "pixelsChangedWithin25pxSquare": 13,
+    "bounds": [
+      -2,
+      -2,
+      2,
+      1
+    ],
+    "brightest": [
+      133,
+      239,
+      132
+    ]
+  },
+  "hip-night": {
+    "screen": [
+      980.4978898982032,
+      478.68249668538357
+    ],
+    "cameraDriftPx": 1.2773969646243717e-12,
+    "visibleGreenPixels": 13,
+    "pixelsChangedWithin25pxSquare": 13,
+    "bounds": [
+      -2,
+      -2,
+      2,
+      1
+    ],
+    "brightest": [
+      133,
+      239,
+      132
+    ]
+  },
+  "aimed-noon": {
+    "screen": [
+      800.0,
+      452.001437171134
+    ],
+    "cameraDriftPx": 0.0,
+    "visibleGreenPixels": 0,
+    "pixelsChangedWithin25pxSquare": 0,
+    "bounds": null,
+    "brightest": null
+  },
+  "aimed-overcast": {
+    "screen": [
+      800.0,
+      452.001437171134
+    ],
+    "cameraDriftPx": 0.0,
+    "visibleGreenPixels": 0,
+    "pixelsChangedWithin25pxSquare": 0,
+    "bounds": null,
+    "brightest": null
+  },
+  "aimed-dusk": {
+    "screen": [
+      800.0,
+      452.001437171134
+    ],
+    "cameraDriftPx": 0.0,
+    "visibleGreenPixels": 0,
+    "pixelsChangedWithin25pxSquare": 0,
+    "bounds": null,
+    "brightest": null
+  },
+  "aimed-night": {
+    "screen": [
+      800.0,
+      452.001437171134
+    ],
+    "cameraDriftPx": 0.0,
+    "visibleGreenPixels": 0,
+    "pixelsChangedWithin25pxSquare": 0,
+    "bounds": null,
+    "brightest": null
+  },
+  "aimed-dark-room": {
+    "screen": [
+      800.0,
+      452.001437171134
+    ],
+    "cameraDriftPx": 0.0,
+    "visibleGreenPixels": 0,
+    "pixelsChangedWithin25pxSquare": 0,
+    "bounds": null,
+    "brightest": null
+  }
+}

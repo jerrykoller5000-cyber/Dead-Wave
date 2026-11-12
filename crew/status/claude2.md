@@ -2,9 +2,9 @@
 
 state: active
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: CB-310 J141: half pace on stairs (STAIR_SPEED_SCALE 0.5, one knob), eased at the foot and the top; tcb310 (new)
-touching: index.html (movement: stairs pace, PHYS), tools/tests/tcb310.js (new)
-since: 2026-11-12T01:37Z
+task: CB-311 J142a: the gear on his back (the shouldered Watchman MG?): find it and fix it with its art owner
+touching: index.html (showCarried, CARRY_M240, carried-m240)
+since: 2026-11-12T03:55Z
 next: CB-309 the gate's reds in my lane: t218 (carrier pouch fixture; the
 blocked-on: —
 last-report: handoffs/2026-11-12-claude2-CB-309.md

@@ -1,0 +1,13 @@
+{
+  "hash": "a5e6961c",
+  "seats": [
+    {
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      "grip": 56,
+      "bottom": 40
+    }
+  ]
+}

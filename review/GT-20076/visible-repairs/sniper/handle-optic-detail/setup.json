@@ -1,0 +1,27 @@
+{
+  "id": "sniper",
+  "eye": [
+    0.43,
+    0.22,
+    -0.31
+  ],
+  "target": [
+    0,
+    0.1,
+    -0.12
+  ],
+  "fov": 23,
+  "moduleName": "handle-optic-proof",
+  "proofName": "checkHandleOptic",
+  "hash": "33dd3d44",
+  "eyeWorld": [
+    0.3110272422609176,
+    -197.8408697830293,
+    -638.8942289420952
+  ],
+  "targetWorld": [
+    0,
+    -197.92766808319513,
+    -638.7567983001659
+  ]
+}

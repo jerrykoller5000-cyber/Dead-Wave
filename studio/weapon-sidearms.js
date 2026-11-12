@@ -528,28 +528,47 @@ function revolverCylinder(T, parent, mat, R, z0, z1, depth) {
 // The grip occupies fewer UVs than the longarm furniture. Sample a finer,
 // slightly sloped cut on its smooth back and both checkered panels.
 let revolverGrain;
-// Add two rows to the render mesh so a tapered cheek cannot bow a large flat triangle
-// through the separate checkering. Shared edges get identical interpolated vertices.
-function splitWalnutRows(T, source, levels) {
+let revolverSightMarker;
+const revolverPostTop = .1244;
+const revolverPostSlope = (.318 - .312) / (revolverPostTop - .117);
+
+function addRevolverSightMarker(T, gun) {
+  if (!revolverSightMarker) {
+    // The visible face follows the post's slope while projecting a circle at the eye.
+    const geometry = new T.CylinderGeometry(.00155, .00155, .00018, 16);
+    geometry.rotateX(Math.PI / 2);
+    geometry.applyMatrix4(new T.Matrix4().makeShear(0, 0, 0, revolverPostSlope, 0, 0));
+    const material = new T.MeshBasicMaterial({ color: 0x85ef84, toneMapped: false, fog: false });
+    material.name = 'Revolver green front sight';
+    revolverSightMarker = {geometry, material};
+  }
+  const dot = new T.Mesh(revolverSightMarker.geometry, revolverSightMarker.material);
+  dot.name = 'revolver-sight-dot';
+  const centreY = revolverPostTop - .00168;
+  dot.position.set(0, centreY, .312 + (centreY - .117) * revolverPostSlope - .00009);
+  gun.add(dot);
+}
+// Split the artwork at each change of surface slope, using the same interpolated vertex on adjacent faces.
+function splitArtworkRows(T, source, levels, axis = 1) {
   const {position, normal, uv} = source.attributes, positions = [], normals = [], uvs = [];
   const vertex = i => [position.getX(i), position.getY(i), position.getZ(i),
     normal.getX(i), normal.getY(i), normal.getZ(i), uv.getX(i), uv.getY(i)];
   for (let i = 0; i < position.count; i += 3) {
     let polygons = [[vertex(i), vertex(i + 1), vertex(i + 2)]];
-    for (const y of levels) {
+    for (const level of levels) {
       const next = [];
       for (const poly of polygons) {
-        if (!poly.some(p => p[1] < y) || !poly.some(p => p[1] > y)) { next.push(poly); continue; }
+        if (!poly.some(p => p[axis] < level) || !poly.some(p => p[axis] > level)) { next.push(poly); continue; }
         const lower = [], upper = [];
         for (let j = 0; j < poly.length; j++) {
           const p = poly[j], q = poly[(j + 1) % poly.length];
-          if (p[1] <= y) lower.push(p);
-          if (p[1] >= y) upper.push(p);
-          if ((p[1] - y) * (q[1] - y) >= 0) continue;
-          const [a, b] = p[1] < q[1] ? [p, q] : [q, p];
-          const fraction = (y - a[1]) / (b[1] - a[1]);
+          if (p[axis] <= level) lower.push(p);
+          if (p[axis] >= level) upper.push(p);
+          if ((p[axis] - level) * (q[axis] - level) >= 0) continue;
+          const [a, b] = p[axis] < q[axis] ? [p, q] : [q, p];
+          const fraction = (level - a[axis]) / (b[axis] - a[axis]);
           const cut = a.map((v, k) => v + (b[k] - v) * fraction);
-          cut[1] = y; lower.push(cut); upper.push(cut);
+          cut[axis] = level; lower.push(cut); upper.push(cut);
         }
         next.push(lower, upper);
       }
@@ -566,6 +585,33 @@ function splitWalnutRows(T, source, levels) {
   geometry.setAttribute('normal', new T.Float32BufferAttribute(normals, 3));
   geometry.setAttribute('uv', new T.Float32BufferAttribute(uvs, 2));
   return geometry;
+}
+
+const revolverLugSkins = new WeakMap();
+function fitRevolverLug(T, lug, axisY, radius) {
+  const source = lug.geometry;
+  let skin = revolverLugSkins.get(T);
+  if (!skin) {
+    // The round shell has 28 facets. Split at the seven edges that cross this drawing.
+    const rim = Array.from({length: 5}, (_, i) => {
+      const angle = i * Math.PI / 14;
+      return [radius * Math.sin(angle), axisY - radius * Math.cos(angle)];
+    });
+    const right = rim.slice(1, 4).map(([x]) => x);
+    skin = splitArtworkRows(T, source, [...right.map(x => -x).reverse(), 0, ...right], 0);
+    const p = skin.attributes.position;
+    for (let i = 0; i < p.count; i++) {
+      const x = Math.abs(p.getX(i));
+      const edge = rim.findIndex(([end], j) => j > 0 && end >= x);
+      const [x0, y0] = rim[edge - 1], [x1, y1] = rim[edge];
+      const roof = y0 + (y1 - y0) * (x - x0) / (x1 - x0);
+      if (p.getY(i) > roof) p.setY(i, roof);
+    }
+    skin.computeBoundingSphere();
+    revolverLugSkins.set(T, skin);
+  }
+  lug.geometry = skin;
+  source.dispose();
 }
 
 function revolverWalnutTexture(T) {
@@ -667,8 +713,9 @@ export function makeRevolverModel(ctx) {
   const stripBase = upperProfile.map(([radius, z]) => [z, BY + radius]);
   K.slab([...stripBase, [.329, .1015], [.326, .1045], [.09, .1045]], .0115, blued, { bevel: .0012, segs: 2 });
   for (let i = 0; i < 26; i++) K.box(0.0096, 0.0006, 0.0012, gunDark, 0, 0.1048, 0.112 + i * 0.0068, 0, 0, 0, null, 0);   // its serrations
-  K.slab([[0.292, 0.104], [0.312, 0.117], [0.318, 0.121], [0.326, 0.121], [0.328, 0.104]], 0.0048, gunDark, { bevel: 0.0008 });   // the ramp front sight (its top at the sighted tip)
-  K.slab([[.234, .0735], [.31, .0735], [.3185, .068], [.3185, .057], [.311, .0485], [.252, .0485], [.240, .051], [.234, .058]], .021, blued, { bevel: .006, segs: 3 });   // the shroud lug
+  K.slab([[0.292, 0.104], [0.312, 0.117], [0.318, revolverPostTop], [0.326, revolverPostTop], [0.328, 0.104]], 0.0048, gunDark, { bevel: 0.0008 });   // raised crown carries the luminous point above the rear notch
+  const lug = K.slab([[.234, .0735], [.31, .0735], [.3185, .068], [.3185, .057], [.311, .0485], [.252, .0485], [.240, .051], [.234, .058]], .021, blued, { bevel: .006, segs: 3 });   // the shroud lug
+  fitRevolverLug(THREE, lug, BY, upperProfile[2][0]);
   K.disc(0.0118, gunRubber, 0, BY, 0.3325, 0, null, 14);   // the bore
 
   // --- Trigger guard (blued, a round loop into the grip's front) and the trigger (case-coloured, wide and smooth).
@@ -870,7 +917,7 @@ export function makeRevolverModel(ctx) {
     [-.086, .010], [-.082, .026], [-.072, .032], [-.060, .020], [-.042, .005], [-.017, -.002]].map(sh), gripWidth, walnut, { bevel: .010, segs: 4 });
   // Seat the painted crown under the frame while tapering into the glove's lower contact.
   const stockSource = stock.geometry;
-  stock.geometry = splitWalnutRows(THREE, stockSource, [-.022, .006]);
+  stock.geometry = splitArtworkRows(THREE, stockSource, [-.022, .006]);
   stockSource.dispose();
   const woodVertices = stock.geometry.attributes.position, woodNormals = stock.geometry.attributes.normal;
   const faceNormal = new THREE.Vector3();
@@ -938,6 +985,7 @@ export function makeRevolverModel(ctx) {
   bindModelArtwork(gun, 'controls', 'trigger', trigger);
   bindModelArtwork(gun, 'controls', 'hammer', hammer);
   bindModelArtwork(gun, 'heatParts', 'barrel', barrel);
+  addRevolverSightMarker(THREE, gun);
   return finishGun(gun);
 }
 

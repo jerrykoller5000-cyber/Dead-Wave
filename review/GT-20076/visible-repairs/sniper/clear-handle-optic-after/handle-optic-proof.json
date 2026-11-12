@@ -1,0 +1,40 @@
+{
+  "hash": "33dd3d44",
+  "seats": [
+    {
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      "outer": 12,
+      "bottom": 12,
+      "role": "optic shell"
+    },
+    {
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      "outer": 12,
+      "bottom": 12,
+      "role": "optic shell"
+    }
+  ],
+  "landmarks": {
+    "position": [
+      0,
+      0.085,
+      -0.12
+    ],
+    "eye": [
+      0,
+      0.054,
+      -0.177
+    ],
+    "dot": [
+      0,
+      0.054,
+      0.17
+    ]
+  }
+}

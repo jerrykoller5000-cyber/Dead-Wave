@@ -1,0 +1,74 @@
+[
+  {
+    "binding": {
+      "barrel": "heatParts-barrel",
+      "suppressor": "suppressor"
+    },
+    "nodes": [
+      [
+        "heatParts-barrel",
+        "Group",
+        1,
+        null
+      ],
+      [
+        "suppressor",
+        "Group",
+        3,
+        null
+      ]
+    ]
+  },
+  {
+    "binding": {
+      "barrel": "heatParts-barrel",
+      "suppressor": "suppressor"
+    },
+    "nodes": [
+      [
+        "heatParts-barrel",
+        "Group",
+        1,
+        null
+      ],
+      [
+        "suppressor",
+        "Group",
+        3,
+        null
+      ]
+    ]
+  },
+  {
+    "nodes": [
+      [
+        "heatParts-barrel",
+        "Group",
+        1,
+        null
+      ],
+      [
+        "suppressor",
+        "Group",
+        3,
+        null
+      ]
+    ]
+  },
+  {
+    "nodes": [
+      [
+        "heatParts-barrel",
+        "Group",
+        1,
+        null
+      ],
+      [
+        "suppressor",
+        "Group",
+        3,
+        null
+      ]
+    ]
+  }
+]

@@ -1,0 +1,28 @@
+PASS entered Training Ground
+PASS AG-301: bullet impact (1.1) and char (1.2) sort strictly above wear (1) & below wisps (2) with polygonOffset + forceSinglePass
+PASS barrel-heat smoke wisps use renderOrder 2 < flame renderOrder 3 (got 2)
+PASS flamer flare (3) and instanced world nozzle jet (3) use renderOrder 3 without standalone nozzle Mesh
+FAIL AG-299: 7 flames-instanced stage batches exist at renderOrder 3 and cost 0 draws when idle (count=7)
+PASS instanced flying embers sort above flame body at renderOrder 4 (got 4)
+PASS flamethrower emits cohesive stream particles
+PASS pale barrel-heat smoke wisps suppressed while firing flamethrower (active=0)
+PASS active flame particles keep renderOrder 3
+PASS flameGeo is 24-vertex 6-fin volumetric tongue geometry with UVs (verts=24)
+PASS flame stream materials use multi-tongue procedural CanvasTexture
+PASS flame rope & wall splash swell organically within controlled bounds (maxWidthScale=7.16)
+PASS flames stamp deduplicated organic carbon char marks on Training Ground surfaces (count=1)
+PASS brief 0.15s flame burst heats Lane 2 (peak=0.37s < 0.75s) without burning it down (state=up)
+PASS AG-299: 86 flame tongues + nozzle jet draw via 4 instanced stage batches (zero standalone particle Meshes)
+PASS AG-299: burning target plate tongues batch into 1 InstancedMesh at renderOrder 4
+PASS AG-299: active 30m flame rope + splash + embers + burning target adds a handful of draws (+-43, 677 -> 634; was +187)
+PASS burning-fuel rope from firing line ignites 8m Lane 1 target after ~0.96s (burned=true, state=wrecked)
+PASS ignition required sustained flame contact (0.96s >= 0.65s)
+PASS held trigger reaches 30m back wall and splashes into fireball (maxRelZ=29.39m, backWallSplashed=22)
+PASS rope leaves nozzle thin and widens downrange (nozzleW=0.87, midRopeW=3.15)
+PASS range console refuses to open once a target is burned
+PASS after 2.8s burn, target plate is gone and training-target-ash heap sits on stand
+PASS ash pile uses vertex-colored multi-mound geometry flush on stand top (y=0.24)
+PASS unburned Lane 2 still free-shoots normally while Lane 1 is ash (Lane 2 state=falling)
+PASS re-entered Training Ground
+PASS new visit clears t.burned and restores all 5 targets upright
+PASS no page errors

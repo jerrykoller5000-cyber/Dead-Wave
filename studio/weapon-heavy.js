@@ -1246,7 +1246,15 @@ export function makeChainsawModel(ctx) {
     cover.geometry.computeBoundingSphere();
     for (const [z, y] of [[-0.227, 0.101], [0.06, 0.1], [-0.226, -0.012], [0.058, -0.012]]) bolt(K, gunDark, gunAccent, sx * 0.1455, y, z, 0.0055);   // GB-297: seated on the outer cowling face (x 0.1435)
     K.box(0.012, 0.068, 0.064, gunDark, sx * 0.15, 0.004, -0.195, 0, 0, 0, null, 0.009);
-    for (let i = 0; i < 5; i++) K.box(0.014, 0.004, 0.058, gunMid, sx * 0.152, -0.018 + i * 0.011, -0.195, 0, 0, 0, null, 0.001);
+    for (let i = 0; i < 5; i++) {
+      const ventRib = K.box(0.014, 0.004, 0.058, gunMid, sx * 0.152, -0.018 + i * 0.011, -0.195, 0, 0, 0, null, 0.001);
+      // The outermost face of the rounded case slopes away from the centre.
+      // Seat each rib at the highest support reached by its inner edge.
+      const radius = .012 * .49;
+      const edgeDrop = radius * (1 - Math.SQRT1_2);
+      const innerY = Math.max(0, Math.abs(ventRib.position.y - .004) - .002);
+      trimPanelBack(THREE, ventRib, sx, .156 - innerY * edgeDrop / (.034 - edgeDrop));
+    }
   }
   // Exhaust muffler with a dark vent, fuel and oil caps, spark-plug boot at rear of cowling.
   const ventHousing = K.box(0.05, 0.09, 0.1, gunDark, 0.14, 0.02, 0.05, 0, 0, 0, null, 0.012);
@@ -1281,7 +1289,13 @@ export function makeChainsawModel(ctx) {
   K.cyl(0.02, 0.02, 0.02, gunRubber, -0.12, 0.02, -0.03, null, 10, 'x');
   K.box(0.028, 0.024, 0.036, gunRubber, 0.045, 0.168, -0.232, -0.35, 0, 0, null, 0.008);
   // Rear throttle grip is in line with the bar, beyond the engine housing.
-  K.slab(gunBand([[-0.245, 0.08], [-0.445, 0.08], [-0.49, 0.025], [-0.49, -0.095], [-0.27, -0.095]], 0.014), 0.07, gunPoly, { bevel: 0.007 });
+  const rearBand = gunBand([[-0.245, 0.08], [-0.445, 0.08], [-0.49, 0.025], [-0.49, -0.095], [-0.27, -0.095]], 0.014);
+  // Fit just the upper end against the two facets of the orange case.
+  const caseCorner = [-.28, .083];
+  rearBand[0] = outlineIntersection(rearBand[0], rearBand[1], caseCorner, [-.28, -.024]);
+  rearBand[rearBand.length - 1] = outlineIntersection(rearBand.at(-1), rearBand.at(-2), caseCorner, [-.27, .105]);
+  rearBand.push(caseCorner);
+  K.slab(rearBand, .07, gunPoly, { bevel: .007 });
   K.box(0.074, 0.13, 0.055, gunRubber, 0, -0.014, -0.46, 0, 0, 0, null, 0.012);
   for (let i = 0; i < 5; i++) K.box(0.076, 0.007, 0.058, gunPoly, 0, -0.064 + i * 0.024, -0.46, 0, 0, 0, null, 0.002);
   addTriggerArtwork(gun, K, gunBand([[-0.395, 0.062], [-0.393, 0.045], [-0.375, 0.01], [-0.365, -0.03]], 0.006), 0.022, hazardYellow, { bevel: 0.002 });

@@ -235,7 +235,11 @@ export function makeM4Model(ctx) {
     geometry.computeBoundingBox();
     geometry.computeBoundingSphere();
   }   // the trigger guard
-  addTriggerArtwork(gun, K, [[-0.0283, -0.0525], [-0.0367, -0.0689], [-0.0359, -0.0843], [-0.0272, -0.0957], [-0.0328, -0.1003], [-0.0441, -0.0877], [-0.0473, -0.0671], [-0.0397, -0.0475]], 0.012, gunDark, { bevel: 0.002 });   // GB-175/180: the trigger
+  const triggerPivot = addTriggerArtwork(gun, K, [[-0.0283, -0.0525], [-0.0367, -0.0689], [-0.0359, -0.0843], [-0.0272, -0.0957], [-0.0328, -0.1003], [-0.0441, -0.0877], [-0.0473, -0.0671], [-0.0397, -0.0475]], 0.012, gunDark, { bevel: 0.002 }).parent;
+  // The glove needs more room at the front of the loop. Translate the whole artwork and its animation origin together.
+  triggerPivot.position.z -= .015;
+  triggerPivot.position.toArray(gun.userData.triggerPin);
+  triggerPivot.position.toArray(triggerPivot.userData.restPosition);
   const collarOutline = shapedGrip(-0.12, -0.12, 0.18, 0.08, 0.3, [[-0.12, 0.04], [0.04, 0.04], [0.04, -0.046], [-0.12, -0.046]]);
   const collar = K.slab(collarOutline, 0.048, finish.lower, { bevel: 0.006, segs: 2 });
   fitCollarFaces(THREE, collar, LW / 2);
@@ -331,7 +335,9 @@ export function makeM4Model(ctx) {
   // glass with the dot and its ring on the same line (0, 0.134, 0.0455).
   K.box(0.05, 0.018, 0.112, gunDark, 0, 0.099, 0.0, 0, 0, 0, null, 0.004);                   // the base
   K.slab([[-0.052, 0.108], [0.054, 0.108], [0.054, 0.118], [-0.052, 0.118]], 0.05, gunDark, { bevel: 0.003 });   // the housing's floor
-  K.box(0.046, 0.016, 0.04, gunDark, 0, 0.118, -0.03, 0, 0, 0, null, 0.003);                  // the rear housing (the emitter); CL-332 d: under the dot's line (was 0.02 tall at 0.126: it hid the dot)
+  const emitterCover = K.box(0.046, 0.016, 0.04, gunDark, 0, 0.118, -0.03, 0, 0, 0, null, 0.003);
+  // The cover meets the painted floor. Its top stays below the dot.
+  trimPanelBack(THREE, emitterCover, 1, .118, 'y');
   for (const sx of [-1, 1]) K.box(0.007, 0.05, 0.03, gunDark, sx * 0.0235, 0.14, 0.046, 0, 0, 0, null, 0.0025);   // the hood's uprights
   K.box(0.054, 0.007, 0.03, gunDark, 0, 0.1665, 0.046, 0, 0, 0, null, 0.0025);                                  // the hood's top bar
   K.box(0.054, 0.006, 0.03, gunDark, 0, 0.1125, 0.046, 0, 0, 0, null, 0.002);                                   // its bottom bar
@@ -908,6 +914,17 @@ function roundedCoverSkin(T, profile, cutHeight) {
   return geometry;
 }
 
+// The stamped plate sits on its rim. Give its concealed cap a shallow dish so
+// the two coincident cap centres do not weld the shells when the renderer batches them.
+function seatDrumPlate(plate, side) {
+  const p = plate.geometry.attributes.position;
+  for (let i = 0; i < p.count; i++) {
+    if (side * p.getY(i) < 0 && p.getX(i) === 0 && p.getZ(i) === 0) {
+      p.setY(i, p.getY(i) + side * .001);
+    }
+  }
+}
+
 export function makeAa12Model(ctx) {
   const { THREE, gunKit, gunBand, gripOutline, gunEffects, finishGun, gunBody, gunMid, gunDark, gunAccent, gunPoly, gunRubber, gunMetal } = ctx;
   const gun = new THREE.Group();
@@ -1067,7 +1084,8 @@ export function makeAa12Model(ctx) {
   const gloveGuard = K.slab(gunBand([[-0.03, -0.088], [-0.034, -0.13], [-0.05, -0.142], [-0.1, -0.142], [-0.118, -0.128], [-0.116, -0.1]], 0.009), 0.03, gunPoly, { bevel: 0.0035, segs: 2 });
   // The oversized virtual index root sits beside the rear of this drawn loop.
   {
-    const geometry = gloveGuard.geometry, vertices = geometry.attributes.position;
+    const geometry = gloveGuard.geometry, {position: vertices, normal, uv} = geometry.attributes;
+    const n = new THREE.Vector3();
     geometry.computeBoundingBox();
     const {min, max} = geometry.boundingBox, height = max.y - min.y, length = max.z - min.z;
     for (let i = 0; i < vertices.count; i++) {
@@ -1075,7 +1093,24 @@ export function makeAa12Model(ctx) {
       const rear = (max.z - z) / length;
       const u = Math.max(0, Math.min(1, (rear - .59) / (.90 - .59)));
       const v = Math.max(0, Math.min(1, (depth - .13) / (.53 - .13)));
-      vertices.setZ(i, z + length * .068 * u * u * (3 - 2 * u) * v * v * (3 - 2 * v));
+      const fittedZ = z + length * .068 * u * u * (3 - 2 * u) * v * v * (3 - 2 * v);
+      // Open the front for the glove. The rear and the upper joint keep their fitted positions.
+      const front = Math.max(0, Math.min(1, (fittedZ + .085) / .035));
+      const below = Math.max(0, Math.min(1, (-.092 - vertices.getY(i)) / .012));
+      const f = front * front * (3 - 2 * front), b = below * below * (3 - 2 * below);
+      // Return to the original lower rim where the extended drum passes the corner.
+      const toe = Math.max(0, Math.min(1, (vertices.getY(i) + .131) / .004));
+      const lowerBlend = toe * toe * (3 - 2 * toe);
+      const forward = .004 * f * b * lowerBlend;
+      vertices.setZ(i, fittedZ + forward);
+      if (forward) {
+        const dz = .004 * b * lowerBlend * 6 * front * (1 - front) / .035;
+        const dy = .004 * f * (b * 6 * toe * (1 - toe) / .004 - lowerBlend * 6 * below * (1 - below) / .012);
+        n.fromBufferAttribute(normal, i);
+        n.z /= 1 + dz; n.y -= dy * n.z; n.normalize();
+        normal.setXYZ(i, n.x, n.y, n.z);
+        uv.setX(i, uv.getX(i) + forward * 4);
+      }
     }
     geometry.computeBoundingBox();
     geometry.computeBoundingSphere();
@@ -1096,7 +1131,7 @@ export function makeAa12Model(ctx) {
     // Matching the bead's angular divisions keeps its border continuous.
     const faceLayer = (rt, rb, back, front, material, sides) =>
       K.cyl(rt, rb, front - back, material, 0, 0, sz * (front + back) / 2, drumBody, sides);
-    K.cyl(0.137, 0.137, 0.005, gunBody, 0, 0, sz * 0.065, drumBody, 32);
+    seatDrumPlate(faceLayer(.137, .137, .065, .0675, gunBody, 32), sz);
     K.tor(0.139, 0.002, gunDark, 0, 0, sz * 0.068, 0, 0, 0, drumBody, Math.PI * 2, 32);
     faceLayer(0.059, 0.062, 0.0675, 0.0755, gunDark, 24);
     faceLayer(0.05, 0.052, 0.0755, 0.079, gunBody, 24);
@@ -1399,7 +1434,8 @@ export function makeShotgunModel(ctx) {
   gun.userData.slideLock = slideLock;
   K.box(0.018, 0.006, 0.02, gunDark, 0, 0.052, -0.012, 0.15, 0, 0, null, 0.002).name = 'shotgun rear sight';      // the receiver's rear top: the notch block for the sight line
   // Trigger plate, guard, trigger and the pistol grip: the plate hangs below the receiver's new bottom (-0.03).
-  K.slab([[0.086, -0.028], [-0.036, -0.028], [-0.04, -0.04], [-0.03, -0.054], [0.08, -0.054], [0.088, -0.044]], 0.044, gunDark, { bevel: 0.004, segs: 2 });
+  const lowerPlate = K.slab([[0.086, -0.028], [-0.036, -0.028], [-0.04, -0.04], [-0.03, -0.054], [0.08, -0.054], [0.088, -0.044]], 0.044, gunDark, { bevel: 0.004, segs: 2 });
+  trimPanelBack(THREE, lowerPlate, -1, .030, 'y');
   K.slab(gunBand([[0.072, -0.052], [0.076, -0.08], [0.064, -0.098], [0.012, -0.1], [-0.012, -0.09], [-0.02, -0.052]], 0.009), 0.034, gunDark, { bevel: 0.004, segs: 2 });
   // GB-175/180: the trigger's face toward the grip, the tip curling forward, a solid blade.
   addTriggerArtwork(gun, K, [[0.0384, -0.0471], [0.0303, -0.0589], [0.0319, -0.0699], [0.0405, -0.0795], [0.0355, -0.0845], [0.0241, -0.0741], [0.0197, -0.0571], [0.0276, -0.0409]], 0.012, gunAccent, { bevel: 0.002 }).name = 'shotgun trigger';
@@ -1761,7 +1797,10 @@ export function makeSniperModel(ctx) {
   mag.add(topRound);
   gun.userData.magazineTopRound = topRound;
   K.slab([[-0.043, -0.068], [0.043, -0.068], [0.043, -0.083], [-0.043, -0.083]], 0.056, gunDark, { bevel: 0.004, parent: mag });
-  for (const sx of [-1, 1]) for (const z of [-0.026, 0.026]) K.box(0.0025, 0.113, 0.004, gunBody, sx * 0.025, -0.004, z, 0, 0, 0, mag, 0.001);
+  for (const sx of [-1, 1]) for (const z of [-0.026, 0.026]) {
+    const sideRib = K.box(0.0025, 0.113, 0.004, gunBody, sx * 0.025, -0.004, z, 0, 0, 0, mag, 0.001);
+    trimPanelBack(THREE, sideRib, sx, .025);
+  }
   for (const sx of [-1, 1]) K.box(0.002, 0.03, 0.05, gunDark, sx * 0.0255, -0.02, 0, 0, 0, 0, mag, 0.001);   // the witness window's frame
   K.box(0.021, 0.017, 0.007, gunDark, 0, -0.064, -0.031, 0, 0, 0, null, 0.002);
   const magazineCatch = K.box(0.024, 0.012, 0.01, gunDark, 0, -0.06, 0.047, 0, 0, 0, null, 0.002);   // forward-pressed magazine catch

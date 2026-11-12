@@ -1,0 +1,47 @@
+{
+  "hash": "cf65a0ce",
+  "seats": [
+    {
+      "exterior": 19,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      "triangles": 64
+    },
+    {
+      "exterior": 19,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      "triangles": 64
+    },
+    {
+      "exterior": 19,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      "triangles": 64
+    },
+    {
+      "exterior": 19,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      "triangles": 64
+    }
+  ],
+  "magazine": [
+    0,
+    -0.12,
+    0.02
+  ],
+  "top": [
+    0,
+    0.06270629401917874,
+    -0.014500000111647059
+  ]
+}

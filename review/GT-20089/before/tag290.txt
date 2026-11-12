@@ -1,0 +1,47 @@
+PASS createBarrelHeat is exported
+PASS getHeatGlow is exported
+PASS findGunHeatParts is exported
+PASS applyGlowToNode is exported
+PASS GLOW_HEAT_THRESHOLD is 0.25 (was 0.25)
+PASS SMOKE_HEAT_THRESHOLD is 0.12 (was 0.12)
+PASS cooling constants are positive
+PASS GW-4 after 1 full 30-rd magazine smokes (>0.12) without glowing (<0.25): heat=0.208
+PASS GW-4 starts dull-red glow in 2nd magazine around round 44 (got round 44)
+PASS Minigun reaches glow quickest (28 rds / 1.80s < 2.2s)
+PASS Minigun reaches hot glow (>0.85) within 120 rounds (got 0.956)
+PASS initial heat is 0
+PASS sustained fire clamps heat to 1.0 (was 1)
+PASS setHeat sets heat accurately
+PASS setHeat clamps values > 1.0 to 1.0
+PASS setHeat clamps values < 0.0 to 0.0
+PASS 1s cooldown reduces heat smoothly (was 0.934)
+PASS extended cooldown returns heat to 0.0 (was 0)
+PASS cold barrel (heat 0.0) has 0 glow intensity
+PASS 1-mag warm barrel (heat 0.20) has 0 glow intensity
+PASS heat 0.35 gives dull red glow (intensity 0.35)
+PASS heat 0.35 color is dull blood red (101, 6, 0)
+PASS heat 0.68 gives cherry red glow (intensity 1.00)
+PASS heat 0.68 color is rich cherry red, not orange (184, 20, 1)
+PASS heat 0.92 reaches hot cherry-orange (234, 62, 8)
+PASS daylight (Noon) glow intensity (0.39) is much fainter (<0.35x) than Night (1.58)
+PASS findGunHeatParts finds barrel node by userData.heatParts
+PASS findGunHeatParts finds suppressor node by userData.heatParts
+PASS unsuppressed: barrel glows (emissiveIntensity=1.58)
+PASS barrel uses axial emissiveMap on channel 1 (uv1)
+PASS barrel geometry receives normalized axial uv1 attribute
+FAIL unsuppressed: suppressor tube has 0 emissive intensity
+PASS suppressed: suppressor tube glows (emissiveIntensity=1.58)
+FAIL suppressed: dark bore insert stays unlit (0 emissive)
+PASS suppressed: barrel behind suppressor stays at 0 emissive
+PASS cooled down: both barrel & suppressor return to 0 emissive
+PASS smoke wisp pool initialized with 48 pooled tendrils (got 48)
+PASS wispGroup marked effectPooled so trainingHideWorld keeps wisps visible in Training Ground
+FAIL smoke wisp grows stronger & longer-lived with firing duration (warm=0.53, hot=0.53)
+PASS reset() clears residual glow on weaponMeshes so slung weapons stay cold
+PASS window.TT.barrelHeat is exposed on live game
+PASS window.TT.getBarrelHeat is exposed
+PASS window.TT.setBarrelHeatDbg is exposed
+PASS live game barrel heat debug setter works (got 0.72)
+PASS live M4 resolves real barrel node (not laser)
+PASS live Pistol resolves barrel node
+PASS live Minigun resolves barrelAssembly

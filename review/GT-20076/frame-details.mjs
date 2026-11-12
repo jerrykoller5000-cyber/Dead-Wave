@@ -14,7 +14,15 @@ const series={
     ['launcher',[.25,.115,-.415],[0,.041,-.265],30],flamer]],
   '--stock-tail':['catalog-fix-rotating-frame-swept','stock-mount-tail-detail','stock-mount-proof','stockMountProof',[flamer]],
   '--port-sight':['catalog-fix-stock-mount-tail','port-sight-detail','port-sight-proof','portSightProof',[
-    ['uzi',[.226,.043,.151],[.05,.029,.083],32],['m4',[.211,.139,-.213],[0,.094,-.14],29]]]
+    ['uzi',[.226,.043,.151],[.05,.029,.083],32],['m4',[.211,.139,-.213],[0,.094,-.14],29]]],
+  '--plate-ribs':['catalog-fix-breacher-front-guard-blend','plate-rib-detail','plate-rib-proof','checkPlateRibs',[
+    ['shotgun',[.38,-.17,-.06],[0,-.035,.026],25],['sniper',[.40,-.14,.18],[0,-.123,.020],23]]],
+  '--lug-vents':['catalog-fix-revolver-dot-seated','lug-vent-detail','lug-vent-proof','checkLugVents',[
+    ['revolver',[.28,-.04,.43],[0,.074,.268],25],['chainsaw',[.49,.126,-.35],[.14,.012,-.19],25]]],
+  '--handle-optic':['catalog-fix-drum-optic-final','handle-optic-detail','handle-optic-proof','checkHandleOptic',[
+    ['chainsaw',[.395,.219,-.58],[0,.055,-.306],33],['sniper',[.43,.22,-.31],[0,.10,-.12],23]]],
+  '--drum-optic':['catalog-fix-gw4-trigger-fit','drum-optic-detail','drum-optic-proof','checkDrumOptic',[
+    ['aa12',[.28,-.16,.46],[0,-.26,.105],42],['m4',[.15,.173,-.173],[0,.118,-.018],32]]]
 };
 const run=process.argv[2]||'--frame';
 assert(Object.hasOwn(series,run));
@@ -30,10 +38,14 @@ try {
   await page.evaluate("document.getElementById('playerName').value='Model review';document.getElementById('modeTraining').click()");
   assert(await page.waitFor("TT.trainingDbg.state().active && !TT.trainingDbg.state().warming && !document.getElementById('trainingBlackout')?.classList.contains('on')"));
   await page.evaluate("import('/review/GT-20076/visibility-camera.mjs').then(m=>{window.views=m.makeViews(TT);return true})");
+  const only=process.argv[3];
+  if(only)assert(shots.some(([id])=>id===only));
   for(const [id,eye,target,fov] of shots){
+    if(only&&id!==only)continue;
     const dir=new URL('./visible-repairs/'+id+'/'+folder+'/',import.meta.url);
     await mkdir(dir,{recursive:true});
-    await page.evaluate('views.equip('+JSON.stringify(id)+').then(()=>views.pose("rack"))');
+    const pose=id==='chainsaw'?'held-right-open':'rack';
+    await page.evaluate('views.equip('+JSON.stringify(id)+').then(()=>views.pose('+JSON.stringify(pose)+'))');
     const config={id,eye,target,fov,moduleName,proofName,hash:baseline[id].artworkFingerprint};
     const setup=await page.evaluate('('+install.toString()+')('+JSON.stringify(config)+')');
     assert.equal(setup.hash,config.hash);

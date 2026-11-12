@@ -640,6 +640,11 @@ export const VM_TRIGGER = Object.freeze({
   // 0.8 mm off it 80% down, presses it back 4 mm at the face on each shot, the blade turning on its pin; nothing of the
   // glove in the guard, the blade or the frame at rest or pulled (0.12 mm at most, the solver's pad give)
   uzi: { part: 'trigger', rest: [-0.2, 1.9, -0.012, 0.29], pull: [-0.132, 1.96, 0.018, 0.29], pivot: null, turn: 0.2085, hold: 0.05, release: 0.07 },
+  // the revolver (CE-2, 12 Nov, J136, on Claude 1's 01:50Z fist on GT-20088b's slimmer grip): the pad on the blade's front
+  // 1.6 mm off it two thirds down; the double action's pull (index.html's st.triggerPull) turns the blade back its 0.36 rad
+  // as the hammer rises and the cylinder turns, and the finger follows it (follow: the blade's turn at full travel); the
+  // glove 0.13 mm at most into the blade (the pad's give), nothing else of the hand in the gun
+  revolver: { part: 'trigger', rest: [0, 0.7, 0.01, -0.06], pull: [0, 0.8, 0.16, 0], pivot: null, turn: 0, follow: 0.36, hold: 0.06, release: 0.09 },
   // the pump gun (CE-2, 11 Nov, on Claude 1's 10:00Z refit of its firing hand): the pad 5 mm off the face 43% down the blade,
   // nothing of the index in the guard or the blade, at rest or pulled; 4 mm at the face, the blade on its pin
   shotgun: { part: 'trigger', rest: [-0.2, 0.585, 0.895, 0.17], pull: [-0.2, 0.645, 0.985, 0.17], pivot: null, turn: 0.18, hold: 0.06, release: 0.1 },
