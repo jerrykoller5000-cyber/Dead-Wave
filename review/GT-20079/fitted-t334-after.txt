@@ -22,5 +22,5 @@ PASS ak: first-person fitted can carries camo
 PASS slung copy shares M4 paint materials (16)
 PASS rack copy shares M4 paint and root UVs (13)
 PASS new fitted M4 heavy sleeve is registered for camo (5)
-FAIL new fitted shotgun tube is registered for camo (1)
+PASS new fitted shotgun tube is registered for camo (1)
 PASS unselecting camo restores issue colours and surface response

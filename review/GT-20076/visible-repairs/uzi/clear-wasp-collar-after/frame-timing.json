@@ -1,0 +1,42 @@
+{
+  "renderer": "WebGPU",
+  "indexSha": "f993f13340f23a612728c9de2defae15ef2d57e316107953b65762aca7958d7f",
+  "reverse": false,
+  "before": {
+    "hash": "1056c784",
+    "gun": "uzi",
+    "eye": true,
+    "backend": "WebGPUBackend",
+    "frames": {
+      "count": 150,
+      "p50": 16.69999999999709,
+      "p95": 16.799999999999272
+    },
+    "gpu": {
+      "count": 0,
+      "p50": null,
+      "p95": null
+    },
+    "seamBuildMs": []
+  },
+  "after": {
+    "hash": "36405d44",
+    "gun": "uzi",
+    "eye": true,
+    "backend": "WebGPUBackend",
+    "frames": {
+      "count": 150,
+      "p50": 16.69999999999709,
+      "p95": 16.900000000001455
+    },
+    "gpu": {
+      "count": 0,
+      "p50": null,
+      "p95": null
+    },
+    "seamBuildMs": [
+      1.7000000029802322,
+      0
+    ]
+  }
+}

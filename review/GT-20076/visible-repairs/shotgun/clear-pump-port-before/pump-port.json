@@ -1,0 +1,158 @@
+{
+  "hash": "2e5a935b",
+  "closed": [
+    true
+  ],
+  "exposed": 28,
+  "sweep": [
+    {
+      "back": 0,
+      "visible": true,
+      "z": 0.09675,
+      "scale": 0.685,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      }
+    },
+    {
+      "back": 0.003,
+      "visible": true,
+      "z": 0.09525,
+      "scale": 0.655,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      }
+    },
+    {
+      "back": 0.01,
+      "visible": true,
+      "z": 0.09175,
+      "scale": 0.585,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      }
+    },
+    {
+      "back": 0.02,
+      "visible": true,
+      "z": 0.08675,
+      "scale": 0.4849999999999999,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      }
+    },
+    {
+      "back": 0.04,
+      "visible": true,
+      "z": 0.07675000000000001,
+      "scale": 0.28500000000000025,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      }
+    },
+    {
+      "back": 0.06,
+      "visible": true,
+      "z": 0.06675,
+      "scale": 0.08500000000000008,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      }
+    },
+    {
+      "back": 0.065,
+      "visible": true,
+      "z": 0.06425,
+      "scale": 0.03500000000000003,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      }
+    },
+    {
+      "back": 0.067,
+      "visible": false,
+      "z": 0.0635,
+      "scale": 0.02,
+      "gap": null
+    },
+    {
+      "back": 0.068,
+      "visible": false,
+      "z": 0.0635,
+      "scale": 0.02,
+      "gap": null
+    },
+    {
+      "back": 0.0684,
+      "visible": false,
+      "z": 0.0635,
+      "scale": 0.02,
+      "gap": null
+    },
+    {
+      "back": 0.069,
+      "visible": false,
+      "z": 0.0635,
+      "scale": 0.02,
+      "gap": null
+    },
+    {
+      "back": 0.072,
+      "visible": false,
+      "z": 0.0635,
+      "scale": 0.02,
+      "gap": null
+    },
+    {
+      "back": 0.078,
+      "visible": false,
+      "z": 0.0635,
+      "scale": 0.02,
+      "gap": null
+    },
+    {
+      "back": 0.11,
+      "visible": false,
+      "z": 0.0635,
+      "scale": 0.02,
+      "gap": null
+    },
+    {
+      "back": 0.12,
+      "visible": false,
+      "z": 0.0635,
+      "scale": 0.02,
+      "gap": null
+    },
+    {
+      "back": 0,
+      "visible": true,
+      "z": 0.09675,
+      "scale": 0.685,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      }
+    }
+  ],
+  "pump": [
+    0,
+    -0.006,
+    0.375
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "r": {
+    "hash": "36405d44",
+    "gap": {
+      "lowerMm": 0,
+      "upperMm": 0.0078125
+    },
+    "sectionGaps": [
+      {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    ],
+    "gripUnchanged": true,
+    "closed": [
+      true
+    ],
+    "bandClosed": [
+      true
+    ],
+    "surfaces": {
+      "x1": {
+        "occupied": 6911,
+        "lost": 0,
+        "added": 0,
+        "maxIn": 1.1810375784987448e-8,
+        "maxOut": 1.3609632414091077e-8
+      },
+      "x-1": {
+        "occupied": 6911,
+        "lost": 0,
+        "added": 0,
+        "maxIn": 5.925807608497813e-9,
+        "maxOut": 1.2489146647420846e-8
+      },
+      "z1": {
+        "occupied": 7910,
+        "lost": 0,
+        "added": 0,
+        "maxIn": 1.872039822464755e-8,
+        "maxOut": 2.0917972857331657e-8
+      },
+      "z-1": {
+        "occupied": 7910,
+        "lost": 0,
+        "added": 0,
+        "maxIn": 1.3419325619462574e-8,
+        "maxOut": 1.8928698490572327e-8
+      },
+      "y-1": {
+        "occupied": 9666,
+        "lost": 0,
+        "added": 0,
+        "maxIn": 1.844902659461911e-10,
+        "maxOut": 1.6638004515789895e-10
+      },
+      "y1": {
+        "occupied": 9666,
+        "lost": 0,
+        "added": 0,
+        "maxIn": 2.0547288957090126e-10,
+        "maxOut": 1.9917549380632504e-10
+      }
+    },
+    "magBase": [
+      0,
+      -0.205,
+      -0.0435
+    ],
+    "grip": [
+      0,
+      0,
+      0
+    ],
+    "bell": [
+      0,
+      -0.1749489241085905,
+      -0.04676003505261076
+    ],
+    "cap": [
+      0,
+      -0.18119466778430637,
+      -0.04815670464032833
+    ]
+  },
+  "finish": {
+    "worldMaterials": 3,
+    "eyeMaterials": 3,
+    "coatedMaterials": 12
+  }
+}

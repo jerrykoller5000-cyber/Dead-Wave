@@ -1,0 +1,22 @@
+{
+  "exposed-noon": {
+    "changed": 88667,
+    "over8": 39564,
+    "max": 149
+  },
+  "exposed-overcast": {
+    "changed": 88325,
+    "over8": 72602,
+    "max": 58
+  },
+  "exposed-dusk": {
+    "changed": 88372,
+    "over8": 22827,
+    "max": 93
+  },
+  "exposed-night": {
+    "changed": 82599,
+    "over8": 20542,
+    "max": 48
+  }
+}

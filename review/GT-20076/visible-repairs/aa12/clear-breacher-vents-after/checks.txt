@@ -1,0 +1,116 @@
+node review/GT-20076/heavy-light-batch.mjs before --breacher-vents
+Game-test request b9764a85-2c4a-46be-8ddd-deda63ec81b0 queued at position 1. Waiting...
+GRANT chatgpt2 GT-20076: starting one game-test command
+before {
+  hash: 'f62123e5',
+  seats: [
+    { closed: [Array], gap: [Object], side: -1, z: 0.31, exterior: 29 },
+    { closed: [Array], gap: [Object], side: -1, z: 0.37, exterior: 29 },
+    { closed: [Array], gap: [Object], side: -1, z: 0.43, exterior: 29 },
+    { closed: [Array], gap: [Object], side: 1, z: 0.31, exterior: 29 },
+    { closed: [Array], gap: [Object], side: 1, z: 0.37, exterior: 29 },
+    { closed: [Array], gap: [Object], side: 1, z: 0.43, exterior: 29 }
+  ],
+  profiles: [
+    { sign: -1, occupied: 8601, lost: 0, added: 0, maxDepth: 0 },
+    { sign: 1, occupied: 8601, lost: 0, added: 0, maxDepth: 0 }
+  ],
+  trigger: [ 0, -0.088, -0.066 ],
+  drum: [ 0, -0.26, 0.05 ],
+  casing: [ 0, 0, 0 ],
+  muzzle: [ 0, 0.015, 0.98 ]
+}
+PASS before aa12 hip, aimed, held-right-open, rack in four lights
+
+
+node review/GT-20076/heavy-light-batch.mjs after --breacher-vents
+GRANT chatgpt2 GT-20076: starting one game-test command
+after {
+  hash: 'f62123e5',
+  seats: [
+    { closed: [Array], gap: [Object], side: -1, z: 0.31, exterior: 29 },
+    { closed: [Array], gap: [Object], side: -1, z: 0.37, exterior: 29 },
+    { closed: [Array], gap: [Object], side: -1, z: 0.43, exterior: 29 },
+    { closed: [Array], gap: [Object], side: 1, z: 0.31, exterior: 29 },
+    { closed: [Array], gap: [Object], side: 1, z: 0.37, exterior: 29 },
+    { closed: [Array], gap: [Object], side: 1, z: 0.43, exterior: 29 }
+  ],
+  profiles: [
+    { sign: -1, occupied: 8601, lost: 0, added: 0, maxDepth: 0 },
+    { sign: 1, occupied: 8601, lost: 0, added: 0, maxDepth: 0 }
+  ],
+  skins: 2,
+  ventMaterial: '',
+  paint: null,
+  casingPaint: 'receiver',
+  trigger: [ 0, -0.088, -0.066 ],
+  drum: [ 0, -0.26, 0.05 ],
+  casing: [ 0, 0, 0 ],
+  muzzle: [ 0, 0.015, 0.98 ]
+}
+PASS after aa12 hip, aimed, held-right-open, rack in four lights
+
+
+node review/GT-20076/frame-details.mjs --breacher-vents
+GRANT chatgpt2 GT-20076: starting one game-test command
+PASS six original exterior tuples sets, shared surfaces, M81 and factory drum appearance { worldMaterials: 3, eyeMaterials: 3, coatedMaterials: 7 }
+PASS native before/after side detail in all four lights aa12 f62123e5
+
+
+node tools/realtest.mjs t38 t333 t277 --all
+ok    t38      26 pass   0 fail  58.4s  (real renderer)
+ok    t333     16 pass   0 fail  20.2s  (real renderer)
+ok    t277     46 pass   0 fail  35.1s  (real renderer)
+3 checks: 88 pass, 0 fail (real renderer)
+
+node review/GT-20076/pistol-frame-perf.mjs --breacher-vents --hands
+GRANT chatgpt2 GT-20076: starting one game-test command
+real before [
+  'PASS guns checked up in first person: 1 of 1',
+  'PASS no part of either hand inside any part of a gun (deepest per gun, mm: aa12 0.2)',
+  'PASS neither hand through the other (D-140)',
+  "PASS the gloved wrists stay inside the sleeves at every gun's hip hold"
+]
+real after [
+  'PASS guns checked up in first person: 1 of 1',
+  'PASS no part of either hand inside any part of a gun (deepest per gun, mm: aa12 0.2)',
+  'PASS neither hand through the other (D-140)',
+  "PASS the gloved wrists stay inside the sleeves at every gun's hip hold"
+]
+
+
+node review/GT-20076/pistol-frame-perf.mjs --breacher-vents
+GRANT chatgpt2 GT-20076: starting one game-test command
+before {
+  hash: 'f62123e5',
+  gun: 'aa12',
+  eye: true,
+  backend: 'WebGPUBackend',
+  frames: { count: 150, p50: 16.69999999999709, p95: 16.80000000000291 },
+  gpu: { count: 0, p50: null, p95: null },
+  seamBuildMs: []
+} reload 48 phases
+after {
+  hash: 'cbf10cb1',
+  gun: 'aa12',
+  eye: true,
+  backend: 'WebGPUBackend',
+  frames: { count: 150, p50: 16.69999999999709, p95: 16.80000000000291 },
+  gpu: { count: 0, p50: null, p95: null },
+  seamBuildMs: [
+    0.19999999552965164,
+    0,
+    0,
+    0.10000000149011612,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ]
+} reload 48 phases
+PASS original and revised world/eye magazine transforms through 48 reload phases 0.506541858790358
+

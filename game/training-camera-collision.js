@@ -166,13 +166,23 @@ export function createTrainingMarineFade(marine){
   };
 }
 
-export function trainingCameraContact(from,to,boxes,margin=CAMERA_MARGIN){
+export function trainingCameraContact(from,to,boxes,margin=CAMERA_MARGIN,extra=null,raised=true){
   const dx=to.x-from.x,dy=to.y-from.y,dz=to.z-from.z;
   const length=Math.hypot(dx,dy,dz);
   if(length<1e-6)return null;
+  const rayMinX=Math.min(from.x,to.x)-margin,rayMaxX=Math.max(from.x,to.x)+margin;
+  const rayMinY=Math.min(from.y,to.y)-margin,rayMaxY=Math.max(from.y,to.y)+margin;
+  const rayMinZ=Math.min(from.z,to.z)-margin,rayMaxZ=Math.max(from.z,to.z)+margin;
   let nearest=1,found=null;
-  for(const b of boxes){
-    if(!b||b.target!=null||b.floor||!Number.isFinite(b.minX)||!Number.isFinite(b.maxX)||
+  const baseCount=boxes.length,count=baseCount+(extra?.length||0);
+  for(let i=0;i<count;i++){
+    const b=i<baseCount?boxes[i]:extra[i-baseCount];
+    // Most Training fixtures are nowhere near the short head-to-eye segment.
+    if(!b||b.target!=null||b.floor||(extra&&i<baseCount&&
+      (b.ceiling||(b.infirmaryFence&&!raised)))||
+      b.maxX<rayMinX||b.minX>rayMaxX||
+      b.maxY<rayMinY||b.minY>rayMaxY||b.maxZ<rayMinZ||b.minZ>rayMaxZ||
+      !Number.isFinite(b.minX)||!Number.isFinite(b.maxX)||
       !Number.isFinite(b.minY)||!Number.isFinite(b.maxY)||!Number.isFinite(b.minZ)||!Number.isFinite(b.maxZ))continue;
     const minX=b.minX-margin,maxX=b.maxX+margin,minY=b.minY-margin,maxY=b.maxY+margin,minZ=b.minZ-margin,maxZ=b.maxZ+margin;
     // The head can start inside a high fixture. Its own collider handles that;
@@ -204,15 +214,11 @@ export function createTrainingCameraCollision(THREE,tg,stations,armoryCopy,raise
     visit(armoryCopy);
     if(!bounds.isEmpty())extra.push({name:'armory',minX:bounds.min.x,maxX:bounds.max.x,minY:bounds.min.y,maxY:bounds.max.y,minZ:bounds.min.z,maxZ:bounds.max.z});
   }
-  const candidates=[];
   return {diveSolids:extra,boxes:extra,
     pull(from,eye){
-      candidates.length=0;
       // The down-facing range ceiling is a bullet solid, but the overhead
       // third-person eye must keep its existing view into the room.
-      for(const b of tg.solids)if(!b.floor&&!b.ceiling&&b.target==null&&(!b.infirmaryFence||raisedFence()))candidates.push(b);
-      candidates.push(...extra);
-      const hit=trainingCameraContact(from,eye,candidates);
+      const hit=trainingCameraContact(from,eye,tg.solids,CAMERA_MARGIN,extra,raisedFence());
       if(!hit)return null;
       eye.x=from.x+(eye.x-from.x)*hit.t;
       eye.y=from.y+(eye.y-from.y)*hit.t;

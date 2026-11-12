@@ -1,0 +1,41 @@
+{
+  "indexSha": "e2d185960215a938cc835022b6b5ff0ebae007514f20bb3156bc8e4dbb63b18a",
+  "reverse": false,
+  "before": {
+    "hash": "333c9946",
+    "gun": "revolver",
+    "eye": true,
+    "backend": "WebGPUBackend",
+    "frames": {
+      "count": 150,
+      "p50": 16.700000000000728,
+      "p95": 16.80000000000291
+    },
+    "gpu": {
+      "count": 0,
+      "p50": null,
+      "p95": null
+    },
+    "seamBuildMs": []
+  },
+  "after": {
+    "hash": "cfedb44b",
+    "gun": "revolver",
+    "eye": true,
+    "backend": "WebGPUBackend",
+    "frames": {
+      "count": 150,
+      "p50": 16.69999999999709,
+      "p95": 16.799999999995634
+    },
+    "gpu": {
+      "count": 0,
+      "p50": null,
+      "p95": null
+    },
+    "seamBuildMs": [
+      8.400000002235174,
+      0
+    ]
+  }
+}

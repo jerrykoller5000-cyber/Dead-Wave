@@ -1,0 +1,27 @@
+{
+  "original": 715906,
+  "final": 715906,
+  "lost": 0,
+  "gained": 0,
+  "maxOut": 1.7183730664088737e-08,
+  "maxIn": 0.001039615302862066,
+  "peakZY": [
+    -0.038211999999999996,
+    -0.016357999999999998
+  ],
+  "overPointFive": 31,
+  "cover": {
+    "samples": 223468,
+    "recession": 0.001039615302862066,
+    "expansion": 2.424840026687969e-09
+  },
+  "grip": {
+    "samples": 457154,
+    "recession": 0.0007238357642373947,
+    "expansion": 1.7183730664088737e-08
+  },
+  "lowerGrip": {
+    "originalSamples": 126,
+    "maxComponentError": 7.450580596923828e-09
+  }
+}

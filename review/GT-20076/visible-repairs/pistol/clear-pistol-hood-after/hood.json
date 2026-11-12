@@ -1,0 +1,604 @@
+{
+  "hash": "3a33c227",
+  "cells": [
+    true
+  ],
+  "exposed": {
+    "samples": 4551,
+    "maxY": 3.329539354293698e-9,
+    "maxNormal": 3.566508210983699e-7,
+    "maxUV": 2.908217925368106e-7
+  },
+  "sweep": [
+    {
+      "travel": 0,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      "grooves": [
+        {
+          "lowerMm": 3.6953125,
+          "upperMm": 3.703125
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        }
+      ],
+      "barrel": {
+        "lowerMm": 6.546875000000001,
+        "upperMm": 6.554687500000001
+      }
+    },
+    {
+      "travel": 0.005,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      "grooves": [
+        {
+          "lowerMm": 7.140624999999999,
+          "upperMm": 7.148437499999999
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        }
+      ],
+      "barrel": {
+        "lowerMm": 6.546875000000001,
+        "upperMm": 6.554687500000001
+      }
+    },
+    {
+      "travel": 0.01,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      "grooves": [
+        {
+          "lowerMm": 10.5859375,
+          "upperMm": 10.593749999999998
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        }
+      ],
+      "barrel": {
+        "lowerMm": 6.546875000000001,
+        "upperMm": 6.554687500000001
+      }
+    },
+    {
+      "travel": 0.015,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      "grooves": [
+        {
+          "lowerMm": 14.031249999999998,
+          "upperMm": 14.039062499999998
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        }
+      ],
+      "barrel": {
+        "lowerMm": 6.546875000000001,
+        "upperMm": 6.554687500000001
+      }
+    },
+    {
+      "travel": 0.02,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      "grooves": [
+        {
+          "lowerMm": 17.4765625,
+          "upperMm": 17.484375000000004
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        }
+      ],
+      "barrel": {
+        "lowerMm": 6.546875000000001,
+        "upperMm": 6.554687500000001
+      }
+    },
+    {
+      "travel": 0.025,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      "grooves": [
+        {
+          "lowerMm": 20.921875,
+          "upperMm": 20.9296875
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        }
+      ],
+      "barrel": {
+        "lowerMm": 6.546875000000001,
+        "upperMm": 6.554687500000001
+      }
+    },
+    {
+      "travel": 0.03,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      "grooves": [
+        {
+          "lowerMm": 24.3671875,
+          "upperMm": 24.375
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        }
+      ],
+      "barrel": {
+        "lowerMm": 6.546875000000001,
+        "upperMm": 6.554687500000001
+      }
+    },
+    {
+      "travel": 0.035,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      "grooves": [
+        {
+          "lowerMm": 27.804687500000004,
+          "upperMm": 27.812500000000004
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        }
+      ],
+      "barrel": {
+        "lowerMm": 6.546875000000001,
+        "upperMm": 6.554687500000001
+      }
+    },
+    {
+      "travel": 0.04,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      "grooves": [
+        {
+          "lowerMm": 31.25,
+          "upperMm": 31.257812499999996
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        }
+      ],
+      "barrel": {
+        "lowerMm": 6.546875000000001,
+        "upperMm": 6.554687500000001
+      }
+    },
+    {
+      "travel": 0.045,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      "grooves": [
+        {
+          "lowerMm": 34.69531250000001,
+          "upperMm": 34.703125
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        }
+      ],
+      "barrel": {
+        "lowerMm": 6.546875000000001,
+        "upperMm": 6.554687500000001
+      }
+    },
+    {
+      "travel": 0.05,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      "grooves": [
+        {
+          "lowerMm": 38.14062500000001,
+          "upperMm": 38.14843750000001
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        }
+      ],
+      "barrel": {
+        "lowerMm": 6.546875000000001,
+        "upperMm": 6.554687500000001
+      }
+    },
+    {
+      "travel": 0.055,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      "grooves": [
+        {
+          "lowerMm": 41.58593749999999,
+          "upperMm": 41.59375
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        }
+      ],
+      "barrel": {
+        "lowerMm": 6.546875000000001,
+        "upperMm": 6.554687500000001
+      }
+    },
+    {
+      "travel": 0.06,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      "grooves": [
+        {
+          "lowerMm": 45.03124999999999,
+          "upperMm": 45.0390625
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        }
+      ],
+      "barrel": {
+        "lowerMm": 6.546875000000001,
+        "upperMm": 6.554687500000001
+      }
+    },
+    {
+      "travel": 0.065,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      "grooves": [
+        {
+          "lowerMm": 48.4765625,
+          "upperMm": 48.484375
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        }
+      ],
+      "barrel": {
+        "lowerMm": 6.546875000000001,
+        "upperMm": 6.554687500000001
+      }
+    },
+    {
+      "travel": 0.07,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      "grooves": [
+        {
+          "lowerMm": 51.91406250000001,
+          "upperMm": 51.92187500000001
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        }
+      ],
+      "barrel": {
+        "lowerMm": 6.546875000000001,
+        "upperMm": 6.554687500000001
+      }
+    },
+    {
+      "travel": 0.075,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      "grooves": [
+        {
+          "lowerMm": 55.35937500000001,
+          "upperMm": 55.367187500000014
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        }
+      ],
+      "barrel": {
+        "lowerMm": 6.546875000000001,
+        "upperMm": 6.554687500000001
+      }
+    },
+    {
+      "travel": 0.08,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      "grooves": [
+        {
+          "lowerMm": 58.80468749999999,
+          "upperMm": 58.8125
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        }
+      ],
+      "barrel": {
+        "lowerMm": 6.546875000000001,
+        "upperMm": 6.554687500000001
+      }
+    },
+    {
+      "travel": 0.085,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      "grooves": [
+        {
+          "lowerMm": 62.25,
+          "upperMm": 62.25781249999999
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        }
+      ],
+      "barrel": {
+        "lowerMm": 6.546875000000001,
+        "upperMm": 6.554687500000001
+      }
+    },
+    {
+      "travel": 0.09,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      "grooves": [
+        {
+          "lowerMm": 65.6953125,
+          "upperMm": 65.703125
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        }
+      ],
+      "barrel": {
+        "lowerMm": 6.546875000000001,
+        "upperMm": 6.554687500000001
+      }
+    },
+    {
+      "travel": 0.095,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      "grooves": [
+        {
+          "lowerMm": 69.14062500000001,
+          "upperMm": 69.1484375
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        }
+      ],
+      "barrel": {
+        "lowerMm": 6.546875000000001,
+        "upperMm": 6.554687500000001
+      }
+    },
+    {
+      "travel": 0.1,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      "grooves": [
+        {
+          "lowerMm": 72.57812500000001,
+          "upperMm": 72.5859375
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        }
+      ],
+      "barrel": {
+        "lowerMm": 6.546875000000001,
+        "upperMm": 6.554687500000001
+      }
+    },
+    {
+      "travel": 0.105,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      "grooves": [
+        {
+          "lowerMm": 76.02343750000001,
+          "upperMm": 76.03125000000001
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        }
+      ],
+      "barrel": {
+        "lowerMm": 6.546875000000001,
+        "upperMm": 6.554687500000001
+      }
+    },
+    {
+      "travel": 0.11,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      "grooves": [
+        {
+          "lowerMm": 79.46875000000001,
+          "upperMm": 79.47656250000001
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        }
+      ],
+      "barrel": {
+        "lowerMm": 6.546875000000001,
+        "upperMm": 6.554687500000001
+      }
+    },
+    {
+      "travel": 0.115,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      "grooves": [
+        {
+          "lowerMm": 82.9140625,
+          "upperMm": 82.92187499999999
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        }
+      ],
+      "barrel": {
+        "lowerMm": 6.546875000000001,
+        "upperMm": 6.554687500000001
+      }
+    },
+    {
+      "travel": 0.12,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      "grooves": [
+        {
+          "lowerMm": 86.35937499999999,
+          "upperMm": 86.3671875
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        }
+      ],
+      "barrel": {
+        "lowerMm": 6.546875000000001,
+        "upperMm": 6.554687500000001
+      }
+    },
+    {
+      "travel": 0.125,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      "grooves": [
+        {
+          "lowerMm": 89.8046875,
+          "upperMm": 89.81249999999999
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        }
+      ],
+      "barrel": {
+        "lowerMm": 6.546875000000001,
+        "upperMm": 6.554687500000001
+      }
+    },
+    {
+      "travel": 0.13,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      "grooves": [
+        {
+          "lowerMm": 93.25,
+          "upperMm": 93.2578125
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        }
+      ],
+      "barrel": {
+        "lowerMm": 6.546875000000001,
+        "upperMm": 6.554687500000001
+      }
+    }
+  ],
+  "profile": {
+    "occupied": 56721,
+    "lost": 0,
+    "added": 0,
+    "maxIn": 0.0004992006617182132,
+    "maxOut": 1.8545910640543894e-10
+  },
+  "slide": [
+    0,
+    0.05,
+    0.05
+  ],
+  "muzzle": [
+    0,
+    0.05,
+    0.32
+  ],
+  "heat": [
+    0,
+    0.05525000031664968,
+    0.14577500022677706
+  ],
+  "triangles": 124
+}

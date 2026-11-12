@@ -1,0 +1,35 @@
+{
+  "hash": "2cbe3e0d",
+  "closed": [
+    [
+      true,
+      true
+    ],
+    [
+      true
+    ]
+  ],
+  "gap": {
+    "lowerMm": 0,
+    "upperMm": 0,
+    "penetrating": true
+  },
+  "exposed": 99,
+  "profile": {
+    "occupied": 35777,
+    "lost": 0,
+    "added": 0,
+    "maxIn": 0,
+    "maxOut": 0
+  },
+  "anchor": [
+    0,
+    0.04000000000000001,
+    0.43000001460313797
+  ],
+  "muzzle": null,
+  "triangles": [
+    128,
+    128
+  ]
+}

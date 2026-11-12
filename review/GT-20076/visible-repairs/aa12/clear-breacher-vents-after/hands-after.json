@@ -1,0 +1,9 @@
+{
+  "indexSha": "f66b914eca26fb6ab6578b0941fa3c82bc2b81a2facf95e5d1d7945b60fbf00d",
+  "lines": [
+    "PASS guns checked up in first person: 1 of 1",
+    "PASS no part of either hand inside any part of a gun (deepest per gun, mm: aa12 0.2)",
+    "PASS neither hand through the other (D-140)",
+    "PASS the gloved wrists stay inside the sleeves at every gun's hip hold"
+  ]
+}

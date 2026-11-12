@@ -1,0 +1,23 @@
+$ node review/GT-20076/heavy-light-batch.mjs after --rear-shield
+Rear shield after cfedb44b [ true ] [
+PASS after revolver hip, aimed, held-left-open, held-right-open in four lights
+Measured native reload phases 72 crossings []
+
+$ node review/GT-20076/frame-details.mjs --rear-shield
+PASS 24 drum orientations and 72 reload phases against frame and rear shield
+PASS native before/after side detail in all four lights revolver cfedb44b
+
+$ node tools/realtest.mjs t38 t333 t277 tcb299 --all
+ok    t38      26 pass   0 fail  58.5s  (real renderer)
+ok    t333     16 pass   0 fail  19.8s  (real renderer)
+ok    t277     46 pass   0 fail  35.5s  (real renderer)
+ok    tcb299    9 pass   0 fail  32.8s  (real renderer)
+4 checks: 97 pass, 0 fail (real renderer)
+
+$ node review/GT-20076/pistol-frame-perf.mjs --rear-shield
+  hash: 'cfedb44b',
+  frames: { count: 150, p50: 16.69999999999709, p95: 16.900000000001455 },
+  seamBuildMs: []
+  hash: 'c8a0f961',
+  frames: { count: 150, p50: 16.69999999999709, p95: 16.80000000000291 },
+  seamBuildMs: [ 7.699999999254942, 0 ]

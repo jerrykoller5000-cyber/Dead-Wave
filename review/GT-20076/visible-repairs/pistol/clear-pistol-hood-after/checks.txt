@@ -1,0 +1,27 @@
+node tools/realtest.mjs t38 t333 t277 tcb295 --all
+ok    t38      26 pass   0 fail  57.9s  (real renderer)
+ok    t333     16 pass   0 fail  24.9s  (real renderer)
+ok    t277     46 pass   0 fail  39.3s  (real renderer)
+ok    tcb295   21 pass   0 fail  38.4s  (real renderer)
+4 checks: 109 pass, 0 fail (real renderer)
+node review/GT-20076/pistol-frame-perf.mjs --pistol-hood
+GRANT chatgpt2 GT-20076: starting one game-test command
+before {
+  hash: '3a33c227',
+  gun: 'pistol',
+  eye: true,
+  backend: 'WebGPUBackend',
+  frames: { count: 150, p50: 16.69999999999709, p95: 16.799999999999272 },
+  gpu: { count: 0, p50: null, p95: null },
+  seamBuildMs: []
+} 
+after {
+  hash: '8a6d5bab',
+  gun: 'pistol',
+  eye: true,
+  backend: 'WebGPUBackend',
+  frames: { count: 150, p50: 16.69999999999709, p95: 16.900000000001455 },
+  gpu: { count: 0, p50: null, p95: null },
+  seamBuildMs: [ 1.8999999985098839, 0 ]
+} 
+

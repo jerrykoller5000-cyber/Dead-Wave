@@ -1,9 +1,10 @@
 // GP-164: heavy-weapon cosmetic constructors. Existing animation and grip contracts remain in the caller.
+import { minigunSidePanelGeometry } from './weapon-minigun-panel.js';
 import { attachLaserLight } from './weapon-attachments.js';
-import { addArtworkInstances, addTriggerArtwork, bindModelArtwork, groupArtwork, optionalArtworkGroup } from './weapon-model-hooks.js';
+import { addArtworkInstances, addTriggerArtwork, bindModelArtwork, groupArtwork, optionalArtworkGroup, setArtworkHeatRange } from './weapon-model-hooks.js';
 import { markPaintSurface } from './weapon-finish.js';
 import { roundGeometry, spentCaseGeometry } from './weapon-casings.js';
-import { fitCollarFaces, trimPanelBack } from './weapon-longarms.js';
+import { clipArtworkProfile, fitCollarFaces, trimPanelBack } from './weapon-longarms.js';
 import { boxProjectUV } from '../core/geometry.js';
 
 // Small closed surface builders use BufferGeometry, also available in the test renderer.
@@ -243,11 +244,13 @@ export function makeMinigunModel(ctx) {
   const panelRearBottom = [-.255, -.092], panelRearTop = [-.247, .098];
   for (const sx of [-1, 1]) {
     const plate = K.slab([panelRearBottom, [0.152, -0.092], [0.161, -0.08], [0.161, 0.087], [0.148, 0.098], panelRearTop], 0.020, gunMid, { x: sx * 0.150, bevel: 0.003 });
+    if (sx === 1) plate.geometry = minigunSidePanelGeometry(THREE);
     markPaintSurface(plate, 'receiver');
     const sideFace = plate.position.x + sx * .010;
     for (let i = 0; i < 4; i++) {
       const rib = K.box(0.012, 0.009, 0.26, gunDark, sx * 0.158, 0.065 - i * 0.039, -0.064, 0, 0, 0, null, 0.003);
       seatBoxArt(rib, 'x', () => sideFace, sx);
+      if (sx === 1 && i >= 2) rib.geometry = minigunSidePanelGeometry(THREE, i === 2 ? 'upperStrip' : 'lowerStrip');
     }
     for (const [by, bz] of [[0.085, 0.13], [0.085, -0.24], [-0.085, 0.13], [-0.085, -0.24]]) K.cyl(0.011, 0.011, 0.003, gunAccent, sideFace + sx * .0015, by, bz, null, 6, 'x');
   }
@@ -484,6 +487,21 @@ function launcherStockGraphic(T, pivotZ, pivotRadius, depthScale) {
         a.face, a.face, b.face, b.face);
     }
   }, true);
+}
+
+function fitLauncherNose(T, barrel, endZ) {
+  const geometry = barrel.geometry;
+  geometry.computeBoundingBox();
+  const minZ = geometry.boundingBox.min.z, maxZ = geometry.boundingBox.max.z;
+  const {position, uv} = geometry.attributes;
+  for (let i = 0; i < position.count; i++) {
+    if (position.getZ(i) !== maxZ) continue;
+    position.setZ(i, endZ);
+    uv.setX(i, position.getZ(i) * 4);
+  }
+  setArtworkHeatRange(T, geometry, minZ, maxZ);
+  geometry.computeBoundingBox();
+  geometry.computeBoundingSphere();
 }
 
 export function makeLauncherModel(ctx) {
@@ -724,7 +742,8 @@ export function makeLauncherModel(ctx) {
   for (const piece of gun.children.slice(firstRailPart)) markPaintSurface(piece, 'rail');
   K.slab([[0.395, -0.02], [0.445, -0.02], [0.44, -0.148], [0.43, -0.156], [0.405, -0.156], [0.398, -0.148]], 0.048, gunPoly, { bevel: 0.014, segs: 3 });
   for (const sx of [-1, 1]) for (let i = 0; i < 7; i++) K.box(0.002, 0.006, 0.033, gunDark, sx * 0.025, -0.05 - i * 0.014, 0.419, 0, 0, 0, null, 0.001);
-  K.lathe([[0, 0.65], [0.062, 0.65], [0.062, 0.68], [0.042, 0.682], [0.042, 0.672], [0, 0.672]], gunDark, { y: 0.04, seg: 16 });
+  const noseBack = .65;
+  K.lathe([[0, noseBack], [0.062, noseBack], [0.062, 0.68], [0.042, 0.682], [0.042, 0.672], [0, 0.672]], gunDark, { y: 0.04, seg: 16 });
   gunEffects(gun, new THREE.Vector3(0, 0.04, 0.72), 0.07, 3, 6, 0.006, 0xff9966, 0xff8844);
   gun.userData.laser.position.set(0, 0.04, 3.7);
   gun.userData.laserBaseZ = 0.72;
@@ -741,6 +760,8 @@ export function makeLauncherModel(ctx) {
   const lamp = gun.userData.laserLightUnit;
   for (const name of ['moduleShell', 'topPlate']) markPaintSurface(lamp.getObjectByName(name), 'light shell');
   bindModelArtwork(gun, 'heatParts', 'barrel', groupArtwork(THREE, barrel));
+  // Set the shared face after grouping so the heat anchor keeps its original transform.
+  fitLauncherNose(THREE, barrel, noseBack);
   return finishGun(gun);
 }
 
@@ -1278,6 +1299,51 @@ function sawFrontHandle(T, finish) {
   });
 }
 
+const sawBootSkins = new WeakMap();
+function fitSawBoot(T, boot) {
+  let skin = sawBootSkins.get(T);
+  if (!skin) {
+    // Work in the plane of the orange roof, then in the plane of the intake's rear edge.
+    const roofPitch = Math.atan2(.025, .036);
+    const roofY = .155 + Math.tan(roofPitch) * (boot.position.z + .250);
+    const source = boot.geometry.clone().rotateX(boot.rotation.x + roofPitch);
+    source.userData = {...source.userData, shared: false};
+    const part = new T.Mesh(source, null);
+    trimPanelBack(T, part, 1, (roofY - boot.position.y) * Math.cos(roofPitch), 'y');
+    // Rotate both attributes linearly. Normalizing newly interpolated edge normals
+    // here would also change the shading on the original rubber face.
+    const rotate = (geometry, matrix) => {
+      const point = new T.Vector3();
+      for (const attribute of [geometry.attributes.position, geometry.attributes.normal]) {
+        for (let i=0; i<attribute.count; i++) {
+          point.fromBufferAttribute(attribute,i).applyMatrix4(matrix);
+          attribute.setXYZ(i,point.x,point.y,point.z);
+        }
+      }
+    };
+    const drawing = new T.Matrix4().makeRotationZ(Math.PI / 2)
+      .multiply(new T.Matrix4().makeRotationX(-roofPitch));
+    rotate(part.geometry, drawing);
+    // The rounded intake reaches furthest back at its centre. Both adjacent
+    // facets are visible where the rubber meets the thin grey border.
+    const radius = .003 * .49;
+    const bevel = radius * (1 - Math.SQRT1_2);
+    const centre = .035 - boot.position.x;
+    const half = .105 / 2 - bevel;
+    const edge = -.2205 - boot.position.z;
+    const rows = [[centre-half, edge+bevel], [centre, edge], [centre+half, edge+bevel]];
+    skin = clipArtworkProfile(T, part.geometry, rows, -1, 'z');
+    part.geometry.dispose();
+    rotate(skin, new T.Matrix4().makeRotationX(-boot.rotation.x)
+      .multiply(new T.Matrix4().makeRotationZ(-Math.PI / 2)));
+    skin.computeBoundingBox();
+    skin.computeBoundingSphere();
+    skin.userData.shared = true;
+    sawBootSkins.set(T, skin);
+  }
+  boot.geometry = skin;
+}
+
 export function makeChainsawModel(ctx) {
   const { THREE, gunKit, gunArc, gunBand, gripOutline, finishGun, gunBody, gunDark, gunMid, gunAccent, gunPoly, gunRubber, steelMat, hazardYellow, bladeMat, layoutChainsawChain } = ctx;
   const gun = new THREE.Group();
@@ -1370,7 +1436,8 @@ export function makeChainsawModel(ctx) {
     fuelCap: { restPos: [-0.12, 0.1, -0.15], restRot: [0, 0, 0], visibleAtRest: true, note: 'unscrew, pour, screw back' }
   });
   K.cyl(0.02, 0.02, 0.02, gunRubber, -0.12, 0.02, -0.03, null, 10, 'x');
-  K.box(0.028, 0.024, 0.036, gunRubber, 0.045, 0.168, -0.232, -0.35, 0, 0, null, 0.008);
+  const boot = K.box(0.028, 0.024, 0.036, gunRubber, 0.045, 0.168, -0.232, -0.35, 0, 0, null, 0.008);
+  fitSawBoot(THREE, boot);
   // Rear throttle grip is in line with the bar, beyond the engine housing.
   const rearBand = gunBand([[-0.245, 0.08], [-0.445, 0.08], [-0.49, 0.025], [-0.49, -0.095], [-0.27, -0.095]], 0.014);
   // Fit just the upper end against the two facets of the orange case.

@@ -1,0 +1,82 @@
+{
+  "at": "2026-11-12T15:53:43.145Z",
+  "label": "plainuniformtypes5",
+  "duration": 5000,
+  "errors": [],
+  "context": {
+    "solids": 293,
+    "hiddenWorld": 568,
+    "children": 904,
+    "renderCalls": 3755
+  },
+  "samples": [
+    {
+      "t": 32392.5,
+      "heapMB": 1017.9,
+      "textures": 184,
+      "geometries": 3554,
+      "programs": 385,
+      "calls": 4670
+    },
+    {
+      "t": 33397.5,
+      "heapMB": 1032.3,
+      "textures": 184,
+      "geometries": 3554,
+      "programs": 385,
+      "calls": 5570
+    },
+    {
+      "t": 34410.90000000596,
+      "heapMB": 1019.9,
+      "textures": 184,
+      "geometries": 3554,
+      "programs": 385,
+      "calls": 6485
+    },
+    {
+      "t": 35430.40000000596,
+      "heapMB": 1033.9,
+      "textures": 184,
+      "geometries": 3554,
+      "programs": 385,
+      "calls": 7400
+    },
+    {
+      "t": 36441.5,
+      "heapMB": 1021,
+      "textures": 184,
+      "geometries": 3554,
+      "programs": 385,
+      "calls": 8315
+    }
+  ],
+  "frames": {
+    "frames": 304,
+    "spikes": [],
+    "prof": []
+  },
+  "uniformTypes": {
+    "groups": 707,
+    "calls": [
+      892930,
+      22129,
+      569640,
+      0,
+      426893,
+      64708,
+      147559
+    ],
+    "changed": [
+      10,
+      3035,
+      139074,
+      0,
+      10,
+      7101,
+      48730
+    ]
+  },
+  "top": [],
+  "totalSampledMB": 0
+}

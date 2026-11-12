@@ -3,11 +3,12 @@
 // Millimetre-scale knurl teeth do not need the rounded box helper's subdivisions.
 // Same centre line as gripOutline. u runs down the grip, v+ is the front strap.
 import { gunDetail } from './gun-detail.js';
-import { fitCollarFaces, trimPanelBack } from './weapon-longarms.js';
+import { waspGripTrimGeometry } from './weapon-wasp-trim.js';
+import { clipArtworkProfile, clipArtworkUnderside, fitCollarFaces, profileEdgeSplits as frameEdgeSplits, splitArtworkRows, trimPanelBack } from './weapon-longarms.js';
 import { boxProjectUV } from '../core/geometry.js';
 import * as TSL from 'three/tsl';
 import { foldStatic } from '../world/bake.js';
-import { addArtworkInstances, addTriggerArtwork, bindModelArtwork, groupArtwork, optionalArtworkGroup } from './weapon-model-hooks.js';
+import { addArtworkInstances, addTriggerArtwork, bindModelArtwork, groupArtwork, optionalArtworkGroup, setArtworkHeatRange } from './weapon-model-hooks.js';
 import { markPaintSurface, walnutTexture } from './weapon-finish.js';
 import { attachLaserLight } from './weapon-attachments.js';
 import { fitPortCarrier, roundGeometry, spentCaseGeometry } from './weapon-casings.js';
@@ -346,49 +347,47 @@ function fitPistolFrameSeam(T, cover, tang) {
     const rows = [[-.0152,-.0508],[-.0127,-.0524],[-.012,-.05515],[-.0097,-.06895],
       [-.00235,-.0851],[.002,-.0852],[.00445,-.0871],[.00495,-.0886]]
       .map(([y,z]) => [Math.fround(y), Math.fround(z)]);
-    const heights = rows.map(r => r[0]);
-    function seam(y) {
-      if (y <= heights[0]) return rows[0][1];
-      for (let i = 1; i < rows.length; i++) {
-        const [y1,z1] = rows[i];
-        if (y <= y1) {
-          const [y0,z0] = rows[i-1];
-          return z0 + (z1-z0) * (y-y0) / (y1-y0);
-        }
-      }
-      return rows.at(-1)[1];
-    }
     repairPistolCoverBevel(T, cover);
-    skins = [cover, tang].map((mesh, i) => {
-      const sliced = splitArtworkRows(T, mesh.geometry, heights);
-      const p = sliced.attributes.position;
-      for (let j = 0; j < p.count; j++) p.setZ(j, p.getZ(j) - seam(p.getY(j)));
-      // In these coordinates the joint is planar. Split the new closing faces
-      // at the original rows before mapping them back onto the curved joint.
-      const proxy = new T.Mesh(sliced, mesh.material);
-      trimPanelBack(T, proxy, i === 0 ? 1 : -1, 0, 'z');
-      const result = splitArtworkRows(T, proxy.geometry, heights);
-      proxy.geometry.dispose();
-      const {position: pos, normal} = result.attributes;
-      for (let j = 0; j < pos.count; j += 3) {
-        const cap = pos.getZ(j) === 0 && pos.getZ(j+1) === 0 && pos.getZ(j+2) === 0;
-        if (cap) {
-          const ys = [pos.getY(j), pos.getY(j+1), pos.getY(j+2)];
-          const lo = Math.min(...ys), hi = Math.max(...ys);
-          if (hi > lo) {
-            const slope = (seam(hi) - seam(lo)) / (hi - lo);
-            const nz = (i === 0 ? -1 : 1) / Math.hypot(1,slope);
-            for (let k = j; k < j+3; k++) normal.setXYZ(k, 0, -slope*nz, nz);
-          }
-        }
-        for (let k = j; k < j+3; k++) pos.setZ(k, pos.getZ(k) + seam(pos.getY(k)));
-      }
-      result.computeBoundingBox(); result.computeBoundingSphere();
-      return result;
-    });
+    skins = [cover, tang].map((mesh, i) => clipArtworkProfile(T, mesh.geometry, rows, i === 0 ? 1 : -1, 'z'));
     pistolFrameSkins.set(T, skins);
   }
   [cover,tang].forEach((mesh, i) => { mesh.geometry.dispose(); mesh.geometry = skins[i]; });
+}
+
+const pistolGripSkins = new WeakMap();
+function fitPistolGripSeam(T, cover, grip) {
+  let skins = pistolGripSkins.get(T);
+  if (!skins) {
+    // Depths of the two visible material boundaries along the upper grip,
+    // sampled in horizontal rows of the original rounded artwork.
+    const rear = [[-.0401,-.089],[-.020,-.039585053],[-.0166,-.0384145575],[-.0145,-.03675],
+      [-.011,-.03589],[0,-.03572],[.00355,-.03628],[.0038,-.03606],[.0051,-.02964],
+      [.00551,-.029675],[.006,-.026378],[.00625,-.0255]];
+    const front = [[-.0401,.046],[-.018,.0402638263],[-.0155,.0398084503],[-.013,.03834],
+      [-.008,.03685],[-.0052,.0363],[-.0006,.00772],[.00465,-.0182],
+      [.00551,-.020075],[.006,-.023170],[.00625,-.024]];
+    for (const profile of [rear, front]) for (const row of profile) {
+      row[0] = Math.fround(row[0]); row[1] = Math.fround(row[1]);
+    }
+    const tail = clipArtworkProfile(T, cover.geometry, rear, -1, 'z', frameEdgeSplits);
+    const nose = clipArtworkProfile(T, cover.geometry, front, 1, 'z', frameEdgeSplits);
+    const frame = new T.BufferGeometry();
+    for (const name of ['position','normal','uv']) {
+      const a = tail.attributes[name], b = nose.attributes[name];
+      const values = new Float32Array(a.array.length + b.array.length);
+      values.set(a.array); values.set(b.array, a.array.length);
+      frame.setAttribute(name, new T.BufferAttribute(values, a.itemSize));
+    }
+    frame.computeBoundingSphere();
+    const rearCut = clipArtworkProfile(T, grip.geometry, rear, 1, 'z', frameEdgeSplits);
+    const shell = clipArtworkProfile(T, rearCut, front, -1, 'z', frameEdgeSplits);
+    tail.dispose(); nose.dispose(); rearCut.dispose();
+    skins = [frame, shell];
+    pistolGripSkins.set(T, skins);
+  }
+  // The accepted rear-frame geometry is cached separately.
+  cover.geometry = skins[0];
+  grip.geometry.dispose(); grip.geometry = skins[1];
 }
 
 const pistolFinishes = new WeakMap();
@@ -408,6 +407,67 @@ function pistolFinish(body) {
     });
   }
   return pistolFinishes.get(body);
+}
+
+const pistolTopPanels = new WeakMap();
+function fitPistolTopPanel(T, panel, roofY) {
+  let skin = pistolTopPanels.get(T);
+  if (!skin) {
+    // The fixed panel sits on the roof. Leave the centre stripe room to pass
+    // underneath during the slide animation, retaining the exposed steel bevel.
+    const floor = roofY - panel.position.y;
+    const inner = Math.fround(.00035), outer = Math.fround(.00036);
+    const levels = [-outer,-inner,inner,outer];
+    const support = x => floor + .0005 * Math.max(0,Math.min(1,(outer-Math.abs(x))/(outer-inner)));
+    const sliced = splitArtworkRows(T,panel.geometry,levels,0);
+    const coords = sliced.attributes.position;
+    for (let i=0; i<coords.count; i++) coords.setY(i,coords.getY(i)-support(coords.getX(i)));
+    const proxy = new T.Mesh(sliced);
+    trimPanelBack(T,proxy,1,0,'y');
+    const {position:p,normal:n,uv}=proxy.geometry.attributes;
+    const positions=[], normals=[], uvs=[], strips=Array.from({length:5},()=>new Map());
+    for (let i=0; i<p.count; i+=3) {
+      if (p.getY(i)===0 && p.getY(i+1)===0 && p.getY(i+2)===0) continue;
+      for (let j=i; j<i+3; j++) {
+        positions.push(p.getX(j),p.getY(j)+support(p.getX(j)),p.getZ(j));
+        normals.push(n.getX(j),n.getY(j),n.getZ(j)); uvs.push(uv.getX(j),uv.getY(j));
+        const k=i+(j-i+1)%3;
+        if (p.getY(j)!==0 || p.getY(k)!==0) continue;
+        const mid=(p.getX(j)+p.getX(k))/2;
+        const strip=strips[levels.filter(x=>x<mid).length];
+        for (const index of [j,k]) {
+          const x=p.getX(index),z=p.getZ(index);
+          strip.set(x+','+z,new T.Vector2(x,z));
+        }
+      }
+    }
+    // Each strip cuts a convex section. Closing its own perimeter keeps the
+    // cap inside the two narrow notches at the ends of the centre stripe.
+    for (const [i,strip] of strips.entries()) {
+      const loop=[...strip.values()];
+      if (loop.length<3) continue;
+      const centre=new T.Vector2();
+      for (const v of loop) centre.add(v);
+      centre.multiplyScalar(1/loop.length);
+      loop.sort((a,b)=>Math.atan2(a.y-centre.y,a.x-centre.x)-Math.atan2(b.y-centre.y,b.x-centre.x));
+      const slope=i===1?.0005/(outer-inner):i===3?-.0005/(outer-inner):0;
+      const normal=new T.Vector3(slope,-1,0).normalize();
+      for (let j=0; j<loop.length; j++) {
+        for (const v of [centre,loop[j],loop[(j+1)%loop.length]]) {
+          positions.push(v.x,support(v.x),v.y); normals.push(normal.x,normal.y,0); uvs.push(v.y*4,v.x*4);
+        }
+      }
+    }
+    proxy.geometry.dispose();
+    skin=new T.BufferGeometry();
+    skin.setAttribute('position',new T.Float32BufferAttribute(positions,3));
+    skin.setAttribute('normal',new T.Float32BufferAttribute(normals,3));
+    skin.setAttribute('uv',new T.Float32BufferAttribute(uvs,2));
+    skin.computeBoundingBox(); skin.computeBoundingSphere();
+    skin.userData.shared = true;
+    pistolTopPanels.set(T,skin);
+  }
+  panel.geometry = skin;
 }
 
 export function makePistolModel(ctx) {
@@ -501,7 +561,9 @@ export function makePistolModel(ctx) {
   // deeper (d 0.084) and 52 mm wide, full depth at the bottom, finger swells down the front strap. t242 copies these.
   // GB-180 v2 (close-ups: still too thin front to back, a gap to the guard): d 0.1, the front strap 10 mm further forward.
   const pistolGrip = [[0.00, 0.026], [0.08, 0.032], [0.20, 0.030], [0.30, 0.035], [0.42, 0.029], [0.54, 0.034], [0.68, 0.030], [0.84, 0.031], [0.96, 0.029], [1.00, 0.024], [1.00, -0.026], [0.96, -0.030], [0.70, -0.031], [0.40, -0.030], [0.18, -0.029], [0.08, -0.033], [0.05, -0.024]];
-  K.slab(shapedGrip(-0.02, -0.08, 0.18, 0.1, 0.3, pistolGrip), 0.052, gunPoly, { bevel: 0.009, segs: 3 }).name = 'pistol grip';
+  const grip = K.slab(shapedGrip(-0.02, -0.08, 0.18, 0.1, 0.3, pistolGrip), 0.052, gunPoly, { bevel: 0.009, segs: 3 });
+  grip.name = 'pistol grip';
+  fitPistolGripSeam(THREE, cover, grip);
   const gripPanel = shapedGrip(-0.02, -0.08, 0.18, 0.1, 0.3, [[0.16, 0.018], [0.42, 0.018], [0.70, 0.020], [0.90, 0.016], [0.90, -0.020], [0.62, -0.022], [0.34, -0.020], [0.16, -0.016]]);
   for (const sx of [-1, 1]) {
     K.slab(gripPanel, .0018, gunPoly, { x: sx * .0262, bevel: .001 });
@@ -539,6 +601,7 @@ export function makePistolModel(ctx) {
   K.box(0.022, 0.014, 0.06, gunAccent, 0.0, 0.042, 0.09, 0, 0, 0, frame, 0.004);
   // GB-180: the barrel hood shows in the ejection port, flush with the slide's top, sitting on the barrel.
   const barrelPanel = K.box(0.026, 0.014, 0.05, bareSteel, 0, 0.068, 0.072, 0, 0, 0, frame, 0.003);
+  fitPistolTopPanel(THREE, barrelPanel, slide.position.y + .024);
   // GB-154: the barrel runs to its crown 1.5 mm proud of the slide's new front face; the compensator that stood out
   // in front of the short slide is gone (the slide is the front of the gun now, like a real pistol).
   const barrel = K.lathe([[0, -0.02], [0.0145, -0.02], [0.0145, 0.311], [0, 0.311]], gunAccent, { y: 0.05, seg: 12, parent: frame });
@@ -686,43 +749,58 @@ function addRevolverSightMarker(T, gun) {
   dot.position.set(0, centreY, .312 + (centreY - .117) * revolverPostSlope - .00009);
   gun.add(dot);
 }
-// Split the artwork at each change of surface slope, using the same interpolated vertex on adjacent faces.
-function splitArtworkRows(T, source, levels, axis = 1) {
-  const {position, normal, uv} = source.attributes, positions = [], normals = [], uvs = [];
-  const vertex = i => [position.getX(i), position.getY(i), position.getZ(i),
-    normal.getX(i), normal.getY(i), normal.getZ(i), uv.getX(i), uv.getY(i)];
-  for (let i = 0; i < position.count; i += 3) {
-    let polygons = [[vertex(i), vertex(i + 1), vertex(i + 2)]];
-    for (const level of levels) {
-      const next = [];
-      for (const poly of polygons) {
-        if (!poly.some(p => p[axis] < level) || !poly.some(p => p[axis] > level)) { next.push(poly); continue; }
-        const lower = [], upper = [];
-        for (let j = 0; j < poly.length; j++) {
-          const p = poly[j], q = poly[(j + 1) % poly.length];
-          if (p[axis] <= level) lower.push(p);
-          if (p[axis] >= level) upper.push(p);
-          if ((p[axis] - level) * (q[axis] - level) >= 0) continue;
-          const [a, b] = p[axis] < q[axis] ? [p, q] : [q, p];
-          const fraction = (level - a[axis]) / (b[axis] - a[axis]);
-          const cut = a.map((v, k) => v + (b[k] - v) * fraction);
-          cut[axis] = level; lower.push(cut); upper.push(cut);
-        }
-        next.push(lower, upper);
-      }
-      polygons = next;
-    }
-    for (const poly of polygons) for (let j = 1; j < poly.length - 1; j++) {
-      for (const p of [poly[0], poly[j], poly[j + 1]]) {
-        positions.push(p[0],p[1],p[2]); normals.push(p[3],p[4],p[5]); uvs.push(p[6],p[7]);
-      }
-    }
+const revolverJointSkins = new WeakMap();
+function seatRevolverBridge(T, shield, bridge) {
+  let skins = revolverJointSkins.get(T);
+  if (!skins) {
+    // The rear frame has two roof faces and a vertical end. Across the narrow
+    // exposed lip, the joint follows the intersection of the round shield
+    // and the bridge bevel. A tilted section keeps that outline continuous.
+    const tilt = Math.PI / 3, cosine = Math.cos(tilt), sine = Math.sin(tilt);
+    const common = [[-.064,.104],[-.050,.109],[-.021,.100],[-.021,.0979652],
+      [-.02075,.0978864],[-.0205,.0978322]];
+    skins = [shield, bridge].map((mesh,i) => {
+      // Only the bridge continues past the shield. Its return meets the end
+      // face already present on the shield, which retains its own closed cap.
+      const tail = i === 0 ? [[.080,.0978322]] : [[-.0205,.09748],[.080,.09748]];
+      const rows = common.concat(tail).map(([z,y]) => [Math.fround(y*cosine-z*sine), y*sine+z*cosine]).reverse();
+      const {x,y,z} = mesh.position;
+      const section = mesh.geometry.clone().translate(x,y,z).rotateX(tilt);
+      const skin = clipArtworkProfile(T, section, rows, i === 0 ? -1 : 1, 'z', frameEdgeSplits);
+      skin.rotateX(-tilt).translate(-x,-y,-z);
+      section.dispose();
+      skin.userData.shared = true;
+      return skin;
+    });
+    revolverJointSkins.set(T, skins);
   }
-  const geometry = new T.BufferGeometry();
-  geometry.setAttribute('position', new T.Float32BufferAttribute(positions, 3));
-  geometry.setAttribute('normal', new T.Float32BufferAttribute(normals, 3));
-  geometry.setAttribute('uv', new T.Float32BufferAttribute(uvs, 2));
-  return geometry;
+  for (const [i,mesh] of [shield, bridge].entries()) {
+    if (!mesh.geometry.userData.shared) mesh.geometry.dispose();
+    mesh.geometry = skins[i];
+  }
+}
+
+const revolverShieldBacks = new WeakMap();
+function fitShieldToRearFrame(T, shield) {
+  const original = shield.geometry;
+  let skin = revolverShieldBacks.get(original);
+  if (!skin) {
+    // Follow the four bevel faces of the existing rear frame across its width.
+    // Beyond the frame, the exposed sides of the shield retain their original rim.
+    const corner = Array.from({length: 5}, (_, i) => {
+      const angle = i * Math.PI / 8;
+      return [Math.fround(.026 + .006 * Math.sin(angle)), -.021 - .006 * (1 - Math.cos(angle))];
+    });
+    corner.push([.03204, -.02805]);
+    const rows = corner.map(([x,z]) => [-x,z]).reverse().concat(corner);
+    const section = original.clone().rotateZ(Math.PI / 2);
+    skin = clipArtworkProfile(T, section, rows, 1, 'z', frameEdgeSplits);
+    skin.rotateZ(-Math.PI / 2);
+    section.dispose();
+    skin.userData.shared = true;
+    revolverShieldBacks.set(original, skin);
+  }
+  shield.geometry = skin;
 }
 
 const revolverLugSkins = new WeakMap();
@@ -789,7 +867,7 @@ export function makeRevolverModel(ctx) {
   K.slab([[-.021, .100], [-.050, .109], [-.064, .104], [-.074, .093], [-.080, .076], [-.082, .054], [-.080, .032],
     [-.078857, .027886], [-.072, .032], [-.060, .020], [-.042, .005], [-.021, -.0010098]],
     .064, frameFinish, { bevel: .006, segs: 4 });
-  K.lathe([[0, -.028], [.044, -.028], [.046, -.025], [.044, -.0205], [0, -.0205]], blued, { y: CY, z: 0, seg: 32 });   // the recoil shield behind the cylinder
+  const shield = K.lathe([[0, -.028], [.044, -.028], [.046, -.025], [.044, -.0205], [0, -.0205]], blued, { y: CY, z: 0, seg: 32 });   // the recoil shield behind the cylinder
   // Only the two inward-facing edges follow the turning artwork. The end blocks keep their original joins.
   function cylinderEdge(height, side) {
     // At the start of the reload, the drum is still between these edges as it drops and moves forward.
@@ -799,8 +877,10 @@ export function makeRevolverModel(ctx) {
       [front - revolverRim.frontBevel + .008, inner], [front + .009, height]];
   }
   // the top strap over the cylinder, from the rear sight to the barrel's frame
-  K.slab([[-.056, .1095], [-.044, .1145], [.064, .1145], [.074, .112], [.074, .0975],
+  const bridge = K.slab([[-.056, .1095], [-.044, .1145], [.064, .1145], [.074, .112], [.074, .0975],
     ...cylinderEdge(.0975, 1).reverse(), [-.044, .0975]], .036, frameFinish, { bevel: .003, segs: 3 });
+  seatRevolverBridge(THREE, shield, bridge);
+  fitShieldToRearFrame(THREE, shield);
   // the frame's front, round the barrel's shank, and its lug down to the crane's seat
   K.slab([[.059, .113], [.078, .112], [.093, .102], [.099, .089], [.099, .066], [.094, .052], [.086, .034], [.078, .018], [.066, .012], [.059, .012]], .056, frameFinish, { bevel: .009, segs: 4 });
   // the frame's bottom under the cylinder, from the recoil shield to the crane's seat
@@ -1127,6 +1207,149 @@ export function makeRevolverModel(ctx) {
   return finishGun(gun);
 }
 
+const waspFrontSkins = new WeakMap();
+function fitWaspFrontArt(T, foreEnd, collar, barrel) {
+  let skins = waspFrontSkins.get(T);
+  if (!skins) {
+    // The collar's back is the portion of the fore-end's bevel within its
+    // original sixteen-sided outline. The exposed side and front stay in place.
+    const radius = .035, front = .355, facets = 16;
+    const rim = Array.from({length: facets}, (_, i) => {
+      const a = i * 2 * Math.PI / facets;
+      return new T.Vector2(Math.fround(radius * Math.cos(a)), Math.fround(radius * Math.sin(a)));
+    });
+    function insideEdge(poly, a, b) {
+      const distance = p => (b.x-a.x)*(p.y-a.y) - (b.y-a.y)*(p.x-a.x);
+      const kept = [];
+      for (let i = 0; i < poly.length; i++) {
+        const p = poly[i], q = poly[(i+1)%poly.length], dp = distance(p), dq = distance(q);
+        if (dp >= -1e-13) kept.push(p);
+        if ((dp < -1e-13 && dq > 1e-13) || (dq < -1e-13 && dp > 1e-13)) {
+          kept.push(p.clone().lerp(q, dp/(dp-dq)));
+        }
+      }
+      return kept;
+    }
+    const positions = [], normals = [], uvs = [], perimeter = new Map();
+    function vertex(p, n) {
+      positions.push(p.x,p.y,p.z); normals.push(n.x,n.y,n.z); uvs.push(p.z*4,p.y*4);
+    }
+    const key = p => [p.x,p.y,p.z].map(v => Math.round(v*1e8)).join(',');
+    const source = foreEnd.geometry.attributes.position;
+    for (let i = 0; i < source.count; i += 3) {
+      let poly = [0,1,2].map(j => new T.Vector3().fromBufferAttribute(source,i+j).add(foreEnd.position).sub(collar.position));
+      const [a,b,c] = poly;
+      const inward = c.clone().sub(a).cross(b.clone().sub(a));
+      if (inward.z >= -1e-12 || Math.max(a.z,b.z,c.z) < .325) continue;
+      inward.normalize();
+      for (let j = 0; j < rim.length && poly.length; j++) poly = insideEdge(poly,rim[j],rim[(j+1)%facets]);
+      if (poly.length < 3) continue;
+      for (let j = 1; j+1 < poly.length; j++) {
+        const p=poly[0], q=poly[j], r=poly[j+1];
+        if (Math.abs((q.x-p.x)*(r.y-p.y)-(q.y-p.y)*(r.x-p.x)) < 1e-15) continue;
+        vertex(p,inward); vertex(r,inward); vertex(q,inward);
+        for (const [a,b] of [[p,q],[q,r],[r,p]]) {
+          const u=key(a), v=key(b), edge=u<v?u+'|'+v:v+'|'+u;
+          if (perimeter.has(edge)) perimeter.delete(edge);
+          else perimeter.set(edge,[a,b]);
+        }
+      }
+    }
+    // Interpolate the original lathe's corner normals along each straight facet.
+    const cornerNormals = rim.map((_,i) => new T.Vector2(Math.cos(i*2*Math.PI/facets),Math.sin(i*2*Math.PI/facets)));
+    function sideNormal(p) {
+      const n = new T.Vector3();
+      let nearest = Infinity;
+      for (let i = 0; i < facets; i++) {
+        const j=(i+1)%facets, a=rim[i], b=rim[j], dx=b.x-a.x, dy=b.y-a.y;
+        const t=Math.max(0,Math.min(1,((p.x-a.x)*dx+(p.y-a.y)*dy)/(dx*dx+dy*dy)));
+        const distance=Math.hypot(p.x-a.x-t*dx,p.y-a.y-t*dy);
+        if (distance >= nearest) continue;
+        nearest=distance;
+        const v=cornerNormals[i].clone().lerp(cornerNormals[j],t);
+        n.set(v.x,v.y,0);
+      }
+      return n;
+    }
+    const frontNormal = new T.Vector3(0,0,1), centre = new T.Vector3(0,0,front);
+    for (const [a,b] of perimeter.values()) {
+      const af = new T.Vector3(a.x,a.y,front), bf = new T.Vector3(b.x,b.y,front);
+      const na = sideNormal(a), nb = sideNormal(b);
+      vertex(a,na); vertex(b,nb); vertex(bf,nb);
+      vertex(a,na); vertex(bf,nb); vertex(af,na);
+      vertex(centre,frontNormal); vertex(af,frontNormal); vertex(bf,frontNormal);
+    }
+    const shell = new T.BufferGeometry();
+    shell.setAttribute('position',new T.Float32BufferAttribute(positions,3));
+    shell.setAttribute('normal',new T.Float32BufferAttribute(normals,3));
+    shell.setAttribute('uv',new T.Float32BufferAttribute(uvs,2));
+    shell.computeBoundingSphere();
+    // The barrel artwork begins at the collar's front face. Only its hidden tail is cut.
+    barrel.geometry.computeBoundingBox();
+    const span = barrel.geometry.boundingBox;
+    trimPanelBack(T,barrel,1,front,'z');
+    // Keep the glow gradient in its original position on the exposed metal.
+    setArtworkHeatRange(T, barrel.geometry, span.min.z, span.max.z);
+    skins = [shell,barrel.geometry];
+    skins.forEach(g => { g.userData.shared = true; });
+    waspFrontSkins.set(T,skins);
+  }
+  for (const [i,m] of [collar,barrel].entries()) {
+    if (!m.geometry.userData.shared) m.geometry.dispose();
+    m.geometry = skins[i];
+  }
+}
+
+const waspPadSkins = new WeakMap();
+function fitWaspSidePad(T, pad, receiverWidth) {
+  let skin = waspPadSkins.get(T);
+  if (!skin) {
+    // Follow the three bevel faces at the receiver's rear corner. Beyond the
+    // corner the pad returns to its original back, preserving the stowed fit.
+    const rows = [[-.14004, -.01405]];
+    for (let i = 0; i <= 3; i++) {
+      const angle = i * Math.PI / 6;
+      const z = -.140 + .009 * (1 - Math.cos(angle));
+      const x = receiverWidth / 2 - .009 + .009 * Math.sin(angle);
+      rows.push([Math.fround(z - pad.position.z), x - pad.position.x]);
+    }
+    // In section coordinates Y runs along the receiver and Z points out of its
+    // side. Permute the components exactly so interpolated normals keep their length.
+    function turnSection(geometry, back) {
+      for (const a of [geometry.attributes.position, geometry.attributes.normal]) {
+        for (let i = 0; i < a.count; i++) {
+          const x = a.getX(i), y = a.getY(i), z = a.getZ(i);
+          if (back) a.setXYZ(i, z, x, y);
+          else a.setXYZ(i, y, z, x);
+        }
+      }
+    }
+    const section = pad.geometry.clone();
+    turnSection(section, false);
+    skin = clipArtworkProfile(T, section, rows, 1, 'z', frameEdgeSplits);
+    turnSection(skin, true);
+    skin.computeBoundingBox();
+    skin.computeBoundingSphere();
+    section.dispose();
+    skin.userData.shared = true;
+    waspPadSkins.set(T, skin);
+  }
+  if (!pad.geometry.userData.shared) pad.geometry.dispose();
+  pad.geometry = skin;
+}
+
+const waspCatchSkins = new WeakMap();
+function fitWaspCoverCatch(T, button) {
+  let skin = waspCatchSkins.get(T);
+  if (!skin) {
+    const roof = [[-.130, .092], [-.123, .100], [-.110, .104], [.192, .098]];
+    const profile = roof.map(([z,y]) => [z - button.position.z, y - button.position.y]);
+    skin = clipArtworkUnderside(T, button.geometry.clone(), profile);
+    waspCatchSkins.set(T, skin);
+  }
+  button.geometry = skin;
+}
+
 export function makeUziModel(ctx) {
   const { THREE, gunKit, gunBand, gunEffects, gunSuppressor, finishGun, gunMid, gunDark, gunAccent, gunPoly, gunRubber } = ctx;
   const gun = new THREE.Group();
@@ -1153,7 +1376,8 @@ export function makeUziModel(ctx) {
   const topCover = K.slab([[-.13, .074], [.2, .074], [.2, .09], [.192, .098], [-.11, .104], [-.123, .1], [-.13, .092]], .09, coverSteel, {bevel: .009, segs: 3});
   trimSlabBack(topCover, 1, receiverTop, 1);
   // GP-20054 (FN manual): the catch at the rear of the top cover is pushed back before the cover lifts.
-  K.box(0.026, 0.008, 0.016, gunDark, 0, 0.100, -0.118, 0, 0, 0, null, 0.0015);
+  const coverCatch = K.box(0.026, 0.008, 0.016, gunDark, 0, 0.100, -0.118, 0, 0, 0, null, 0.0015);
+  fitWaspCoverCatch(THREE, coverCatch);
   for (const x of [-0.007, 0, 0.007]) K.box(0.002, 0.001, 0.011, gunAccent, x, 0.1045, -0.118, 0, 0, 0, null, 0);
   // GB-235 (Jerry: "Uzi sights need to be usable, right now the charging handle gets in the way"): the knob sits low in the
   // top cover's groove like the real one, its top at y .122, 7 mm under the line from the rear aperture to the post (.129 here); was .138.
@@ -1186,7 +1410,8 @@ export function makeUziModel(ctx) {
   });
   // The stowed-weapon fitting uses this side support envelope when another
   // gun rests against the Wasp; the stock struts, pivots and butt are gone.
-  K.slab([[-.150, .016], [-.118, .016], [-.114, .034], [-.124, .050], [-.148, .052], [-.156, .036]], .028, stamped, {x: .051, bevel: .005, segs: 3});   // GB-316 (J25): side pad seated on the receiver (was a floating rear blob)
+  const sidePad = K.slab([[-.150, .016], [-.118, .016], [-.114, .034], [-.124, .050], [-.148, .052], [-.156, .036]], .028, stamped, {x: .051, bevel: .005, segs: 3});
+  fitWaspSidePad(THREE, sidePad, receiverWidth);
   // Grip. GB-309b / GB-314 (Jerry: check and fix all pistol grips; fidelity.md line 11): a MAC-10 rectangular
   // box round its magazine — 33 mm wide x 55 deep at the game scale (builder 0.062 x 0.104), square-cornered
   // 6-8 mm bevels, front-strap serrations, flat backstrap, floorplate flush with the base. Centre line / h /
@@ -1217,7 +1442,8 @@ export function makeUziModel(ctx) {
     geometry.computeBoundingSphere();
   }   // GB-316 (J25): smoother moulded guard
   K.slab([[0.012, -0.030], [0.036, -0.032], [0.040, -0.050], [0.024, -0.058], [0.008, -0.046]], 0.028, gunPoly, { bevel: 0.005, segs: 3 });   // guard root into the front strap
-  K.box(0.068, 0.010, 0.108, gunPoly, 0, UZI_GY - 0.48 * UZI_GH * Math.cos(UZI_RAKE), UZI_GZ - 0.48 * UZI_GH * Math.sin(UZI_RAKE), UZI_RAKE, 0, 0, null, 0.003);   // GB-316 (J25): clean magwell flare at the base
+  const gripTrim = K.box(0.068, 0.010, 0.108, gunPoly, 0, UZI_GY - 0.48 * UZI_GH * Math.cos(UZI_RAKE), UZI_GZ - 0.48 * UZI_GH * Math.sin(UZI_RAKE), UZI_RAKE, 0, 0, null, 0.003);
+  gripTrim.geometry = waspGripTrimGeometry(THREE);
   // GB-175: trigger face toward the grip, tip curling forward (the convention Jerry set on the revolver and sniper).
   // GB-180: a solid trigger blade (wide at the root, tapering to the curled tip), not a wire, moved to mid-guard.
   addTriggerArtwork(gun, K, [[0.0574, -0.0411], [0.0492, -0.0532], [0.0498, -0.0617], [0.0582, -0.0692], [0.0538, -0.0748], [0.0422, -0.0663], [0.0388, -0.0508], [0.0466, -0.0349]], 0.011, gunAccent, { bevel: 0.002 });
@@ -1283,9 +1509,10 @@ export function makeUziModel(ctx) {
     markPaintSurface(rib, 'furniture');
   }
   for (const sx of [-1, 1]) for (const z of [.198, .324]) K.cyl(.0038, .0038, .0016, gunDark, sx * .0407, .002, z, null, 12, 'x');
-  K.lathe([[0, 0.325], [0.035, 0.325], [0.035, 0.355], [0, 0.355]], gunDark, { y: 0.03, seg: 16 });
+  const collar = K.lathe([[0, 0.325], [0.035, 0.325], [0.035, 0.355], [0, 0.355]], gunDark, { y: 0.03, seg: 16 });
   for (let i = 0; i < 20; i++) { const a = i / 20 * Math.PI * 2; flatDetail(THREE, gun, gunAccent, .0025, .0025, .027, Math.cos(a) * .0358, .03 + Math.sin(a) * .0358, .34, a); }
   const barrel = K.lathe([[0, 0.34], [0.017, 0.34], [0.017, 0.455], [0.02, 0.458], [0.02, 0.475], [0.012, 0.478], [0, 0.478]], gunAccent, { y: 0.03, seg: 12 });
+  fitWaspFrontArt(THREE, foreEnd, collar, barrel);
   const threads = [[.0194, .4585]];
   for (let i = 0; i < 5; i++) {const z = .459 + i * .0034; threads.push([.02055, z], [.02055, z + .001], [.0194, z + .0017]);}
   K.lathe(threads, gunDark, {y: .03, seg: 16});

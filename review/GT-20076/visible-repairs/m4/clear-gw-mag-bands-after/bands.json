@@ -1,0 +1,218 @@
+{
+  "hash": "903086c7",
+  "closed": [
+    [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ]
+  ],
+  "gaps": [
+    [
+      {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    ],
+    [
+      {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    ],
+    [
+      {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    ]
+  ],
+  "marks": [
+    [
+      {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    ],
+    [
+      {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    ],
+    [
+      {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    ]
+  ],
+  "profile": {
+    "right": {
+      "occupied": 14798,
+      "lost": 0,
+      "added": 0,
+      "maxIn": 2.532178176653521e-7,
+      "maxOut": 0,
+      "worst": [
+        -0.026893,
+        -0.019493,
+        0.018513167577573146,
+        0.01851291435975548
+      ]
+    },
+    "left": {
+      "occupied": 14798,
+      "lost": 0,
+      "added": 0,
+      "maxIn": 3.195118100304817e-7,
+      "maxOut": 0,
+      "worst": [
+        -0.017592999999999998,
+        -0.081493,
+        0.01790181298838508,
+        0.01790149347657505
+      ]
+    },
+    "front": {
+      "occupied": 10362,
+      "lost": 0,
+      "added": 0,
+      "maxIn": 6.073442061840795e-7,
+      "maxOut": 0,
+      "worst": [
+        0.019177,
+        -0.019293,
+        0.040700770178006836,
+        0.04070016283380065
+      ]
+    },
+    "rear": {
+      "occupied": 10362,
+      "lost": 0,
+      "added": 0,
+      "maxIn": 0.00013016911245044074,
+      "maxOut": 0,
+      "worst": [
+        0.017647000000000003,
+        -0.081493,
+        0.017603222058921526,
+        0.017473052946471085
+      ]
+    }
+  },
+  "triangles": [
+    776,
+    426,
+    552
+  ]
+}

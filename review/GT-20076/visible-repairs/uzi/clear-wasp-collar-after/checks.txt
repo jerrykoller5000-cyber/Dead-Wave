@@ -1,0 +1,26 @@
+$ node review/GT-20076/wasp-collar-isolated.mjs
+triangles [ 158, 144 ] closed [ [ true ], [ true ] ] gaps [
+exterior 33 85
+
+$ node review/GT-20076/heavy-light-batch.mjs after --wasp-collar
+PASS after uzi hip, aimed, held-left-open, rack in four lights
+
+$ node review/GT-20076/frame-details.mjs --wasp-collar
+PASS original heat mapping on world and eye {
+PASS native before/after side detail in all four lights uzi 1056c784
+
+$ node tools/realtest.mjs t38 t333 t277 tag290 --all
+ok    t38      26 pass   0 fail  57.5s  (real renderer)
+ok    t333     16 pass   0 fail  25.0s  (real renderer)
+ok    t277     46 pass   0 fail  38.0s  (real renderer)
+FAIL  tag290   44 pass   3 fail  22.1s  (real renderer)
+    FAIL unsuppressed: suppressor tube has 0 emissive intensity
+    FAIL suppressed: dark bore insert stays unlit (0 emissive)
+    FAIL smoke wisp grows stronger & longer-lived with firing duration (warm=0.53, hot=0.53)
+4 checks: 132 pass, 3 fail (real renderer)
+
+$ node review/GT-20076/pistol-frame-perf.mjs --wasp-collar --reverse
+  frames: { count: 150, p50: 16.69999999999709, p95: 16.80000000000291 },
+  seamBuildMs: [ 1.5, 0 ]
+  frames: { count: 150, p50: 16.69999999999709, p95: 16.80000000000291 },
+  seamBuildMs: []

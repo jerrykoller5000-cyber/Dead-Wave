@@ -1,0 +1,10 @@
+{
+  "indexSha": "f66b914eca26fb6ab6578b0941fa3c82bc2b81a2facf95e5d1d7945b60fbf00d",
+  "lines": [
+    "INFO uzi the hands into each other: 0.2 mm",
+    "PASS guns checked up in first person: 1 of 1",
+    "FAIL no part of either hand inside any part of a gun (deepest per gun, mm: uzi 5.3); through: uzi: 5.3 mm (r glove in ?)",
+    "PASS neither hand through the other (D-140)",
+    "PASS the gloved wrists stay inside the sleeves at every gun's hip hold"
+  ]
+}

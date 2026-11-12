@@ -1,0 +1,62 @@
+{
+  "noon": {
+    "changed": 2350,
+    "over8": 249,
+    "max": 56
+  },
+  "overcast": {
+    "changed": 935,
+    "over8": 229,
+    "max": 37
+  },
+  "dusk": {
+    "changed": 1642,
+    "over8": 197,
+    "max": 34
+  },
+  "night": {
+    "changed": 958,
+    "over8": 40,
+    "max": 17
+  },
+  "held-noon": {
+    "changed": 25,
+    "over8": 2,
+    "max": 14
+  },
+  "held-overcast": {
+    "changed": 14,
+    "over8": 1,
+    "max": 11
+  },
+  "held-dusk": {
+    "changed": 25,
+    "over8": 0,
+    "max": 8
+  },
+  "held-night": {
+    "changed": 9,
+    "over8": 0,
+    "max": 5
+  },
+  "racked-noon": {
+    "changed": 2556,
+    "over8": 439,
+    "max": 77
+  },
+  "racked-overcast": {
+    "changed": 1143,
+    "over8": 432,
+    "max": 36
+  },
+  "racked-dusk": {
+    "changed": 1842,
+    "over8": 397,
+    "max": 49
+  },
+  "racked-night": {
+    "changed": 1159,
+    "over8": 80,
+    "max": 22
+  }
+}

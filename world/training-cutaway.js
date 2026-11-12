@@ -10,7 +10,8 @@ export function viewCrossesPlane(camera, focus, axis, at, bounds, margin = .6) {
     if (Math.abs(camera[axis] - at) > margin) return false;
     t = 0; // The camera itself is in the wall's thickness/near plane.
   }
-  for (const [key, lo, hi] of bounds) {
+  for (let i = 0; i < bounds.length; i++) {
+    const span = bounds[i], key = span[0], lo = span[1], hi = span[2];
     const p = camera[key] + (focus[key] - camera[key]) * t;
     if (p < lo - margin || p > hi + margin) return false;
   }
@@ -50,7 +51,7 @@ export function partitionTrainingShell(T, tgGroup, origin) {
   }
   for (const [side, group] of groups) {
     bakeStatic(T, group);
-    const mats = new Map();
+    const mats = new Map(), pairs = [];
     group.traverse(mesh => {
       if (!mesh.isMesh || Array.isArray(mesh.material)) return;
       const source = mesh.material;
@@ -66,6 +67,7 @@ export function partitionTrainingShell(T, tgGroup, origin) {
         if (!source.transparent) fade.opacity = Math.min(source.opacity, .999);
         pair = { solid, fade, meshes: [], usingFade: !!source.transparent };
         mats.set(source, pair);
+        pairs.push({ source, pair });
         owned.push(solid, fade);
       }
       pair.meshes.push(mesh);
@@ -73,9 +75,10 @@ export function partitionTrainingShell(T, tgGroup, origin) {
       // Blended solid bases must precede their transparent decal overlays.
       if (!source.transparent) mesh.renderOrder = -1;
     });
-    entries.push({ side, group, mats, opacity: 1, hidden: false });
+    entries.push({ side, group, mats, pairs, opacity: 1, hidden: false });
   }
   let enabled = false;
+  const c = { x: 0, y: 0, z: 0 }, focus = { x: 0, y: 0, z: 0 };
   const walls = {
     west: ['x', -44, [['z', -12, 28], ['y', 0, 24]]],
     east: ['x', -8, [['z', -12, 30], ['y', 0, 24]]],
@@ -89,12 +92,17 @@ export function partitionTrainingShell(T, tgGroup, origin) {
     for (const mesh of pair.meshes) mesh.material = fade ? pair.fade : pair.solid;
   }
   function syncMaterials() {
-    for (const e of entries) for (const [source, pair] of e.mats) {
+    for (const e of entries) for (let i = 0; i < e.pairs.length; i++) {
+      const { source, pair } = e.pairs[i];
       pair.solid.opacity = source.opacity;
       pair.fade.opacity = source.transparent ? source.opacity * e.opacity : Math.min(source.opacity * e.opacity, .999);
-      for (const mat of [pair.solid, pair.fade]) {
-        mat.color?.copy(source.color);
-        if (source.emissive) { mat.emissive.copy(source.emissive); mat.emissiveIntensity = source.emissiveIntensity; }
+      pair.solid.color?.copy(source.color);
+      pair.fade.color?.copy(source.color);
+      if (source.emissive) {
+        pair.solid.emissive.copy(source.emissive);
+        pair.solid.emissiveIntensity = source.emissiveIntensity;
+        pair.fade.emissive.copy(source.emissive);
+        pair.fade.emissiveIntensity = source.emissiveIntensity;
       }
       // Keep both render states compiled. A fade only swaps the mesh's material;
       // changing transparent on a live WebGPU material rebuilds its pipeline.
@@ -106,8 +114,8 @@ export function partitionTrainingShell(T, tgGroup, origin) {
     const inBuild = x >= -44 && x <= -8 && z >= -12 && z <= 28;
     const inRange = x >= -8 && x <= 8 && z >= -12 && z <= 30;
     enabled = inBuild || inRange;
-    const c = { x: camera.x - origin.x, y: camera.y - origin.y, z: camera.z - origin.z };
-    const focus = { x, y: player.y - origin.y, z };
+    c.x = camera.x - origin.x; c.y = camera.y - origin.y; c.z = camera.z - origin.z;
+    focus.x = x; focus.y = player.y - origin.y; focus.z = z;
     const shared = enabled && viewCrossesPlane(c, focus, ...walls.east);
     for (const e of entries) {
       if (e.side === 'rangeSouth') {

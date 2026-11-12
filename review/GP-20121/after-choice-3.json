@@ -1,0 +1,141 @@
+{
+  "at": "2026-11-12T09:09:55.987Z",
+  "rows": [
+    {
+      "open": true,
+      "openSyncMs": 17.600000001490116,
+      "mainBefore": 381,
+      "mainAfter": 381,
+      "dressAfter": 19,
+      "choice": {
+        "tab": true,
+        "shirt": true,
+        "option": true,
+        "selected": "Sleeves rolled"
+      },
+      "close": {
+        "syncMs": 0.8000000007450581,
+        "open": false,
+        "main": 383
+      }
+    },
+    {
+      "open": true,
+      "openSyncMs": 5.699999999254942,
+      "mainBefore": 383,
+      "mainAfter": 383,
+      "dressAfter": 22,
+      "close": {
+        "syncMs": 0.6000000014901161,
+        "open": false,
+        "main": 383
+      }
+    }
+  ],
+  "spikes": [
+    {
+      "stage": "entry",
+      "ms": 6849.9
+    },
+    {
+      "stage": "entry",
+      "ms": 116.6
+    },
+    {
+      "stage": "entry",
+      "ms": 1116.6
+    },
+    {
+      "stage": "entry",
+      "ms": 116.8
+    },
+    {
+      "stage": "entry",
+      "ms": 266.8
+    },
+    {
+      "stage": "open 1",
+      "ms": 133.3
+    },
+    {
+      "stage": "choice",
+      "ms": 199.9
+    },
+    {
+      "stage": "close 1",
+      "ms": 266.8
+    },
+    {
+      "stage": "close 2",
+      "ms": 283.5
+    }
+  ],
+  "profile": [
+    {
+      "tag": "items",
+      "ms": 0.19999999925494194
+    },
+    {
+      "tag": "menu refresh",
+      "ms": 6.599999997764826
+    },
+    {
+      "tag": "choices",
+      "ms": 7.399999998509884
+    },
+    {
+      "tag": "start dress view",
+      "ms": 0
+    },
+    {
+      "tag": "first dress frame",
+      "ms": 5.5
+    },
+    {
+      "tag": "menu refresh",
+      "ms": 3.100000001490116
+    },
+    {
+      "tag": "menu refresh",
+      "ms": 0.19999999925494194
+    },
+    {
+      "tag": "menu refresh",
+      "ms": 0.30000000074505806
+    },
+    {
+      "tag": "dress render",
+      "ms": 19.399999998509884
+    },
+    {
+      "tag": "items",
+      "ms": 0.19999999925494194
+    },
+    {
+      "tag": "menu refresh",
+      "ms": 0.30000000074505806
+    },
+    {
+      "tag": "choices",
+      "ms": 0.6000000014901161
+    },
+    {
+      "tag": "start dress view",
+      "ms": 0
+    },
+    {
+      "tag": "first dress frame",
+      "ms": 1.5
+    }
+  ],
+  "errors": [],
+  "entryMs": 9854.199999999255,
+  "beforeOpen": {
+    "ready": "true",
+    "pipes": 19
+  },
+  "paint": {
+    "count": 153,
+    "ms": 279.2000000104308
+  }
+}

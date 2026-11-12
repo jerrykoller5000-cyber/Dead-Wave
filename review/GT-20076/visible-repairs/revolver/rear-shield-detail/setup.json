@@ -1,0 +1,27 @@
+{
+  "id": "revolver",
+  "eye": [
+    0.265,
+    0.122,
+    -0.134
+  ],
+  "target": [
+    0,
+    0.057,
+    -0.024
+  ],
+  "fov": 27,
+  "moduleName": "rear-shield-proof",
+  "proofName": "checkRearShield",
+  "hash": "cfedb44b",
+  "eyeWorld": [
+    0.2055140702479339,
+    -197.9053859752066,
+    -638.7739203223141
+  ],
+  "targetWorld": [
+    0,
+    -197.95579508677685,
+    -638.6886125950414
+  ]
+}

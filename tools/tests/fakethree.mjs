@@ -429,6 +429,10 @@ export class BufferAttribute {
   copyArray(a) { this.array.set(a); return this; }
   set(a, o) { this.array.set(a, o); return this; }
   addUpdateRange() {} clearUpdateRanges() {}
+  // CD-9 (lent, 12 Nov): three.js's in-place transforms of an attribute (studio/weapon-sidearms.js fitWaspGripBase uses them)
+  applyMatrix4(m) { const e = m.elements; for (let i = 0; i < this.count; i++) { const x = this.getX(i), y = this.getY(i), z = this.getZ(i), w = 1 / ((e[3] * x + e[7] * y + e[11] * z + e[15]) || 1); this.setXYZ(i, (e[0] * x + e[4] * y + e[8] * z + e[12]) * w, (e[1] * x + e[5] * y + e[9] * z + e[13]) * w, (e[2] * x + e[6] * y + e[10] * z + e[14]) * w); } return this; }
+  applyMatrix3(m) { const e = m.elements; if (!e || e.length < 9) return this; for (let i = 0; i < this.count; i++) { const x = this.getX(i), y = this.getY(i), z = this.getZ(i); this.setXYZ(i, e[0] * x + e[3] * y + e[6] * z, e[1] * x + e[4] * y + e[7] * z, e[2] * x + e[5] * y + e[8] * z); } return this; }
+  applyNormalMatrix(m) { this.applyMatrix3(m); for (let i = 0; i < this.count; i++) { const x = this.getX(i), y = this.getY(i), z = this.getZ(i), l = Math.hypot(x, y, z) || 1; this.setXYZ(i, x / l, y / l, z / l); } return this; }
 }
 export class Float32BufferAttribute extends BufferAttribute { constructor(a, s, n) { super(a instanceof Float32Array ? a : new Float32Array(a), s, n); } }
 export class Uint16BufferAttribute extends BufferAttribute { constructor(a, s) { super(new Uint16Array(a), s); } }

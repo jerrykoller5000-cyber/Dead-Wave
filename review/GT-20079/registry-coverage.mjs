@@ -50,7 +50,11 @@ export function tubeCoverage(T){
     report.faces++;
     if(carryPoints.has(key))report.carryFaces++;
     if(eligible(part.material))report.world++;
-    if(eligible(copies.get(part)?.material))report.eye++;
+    const view=copies.get(part);
+    // The view builds its own material and intentionally owns its userData.
+    // Check the texture actually bound on that draw and the mirrored UV array.
+    const uv=part.geometry.attributes.uv,viewUV=view?.geometry.attributes.uv;
+    if(map&&view?.material.map===map&&viewUV&&uv&&viewUV.count===uv.count)report.eye++;
     const hits=rack.get(key);
     if(hits){report.rackPresent++;if([...hits].some(h=>eligible(h.material)))report.rack++;}
   }

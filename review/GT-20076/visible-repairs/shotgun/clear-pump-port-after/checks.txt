@@ -1,0 +1,25 @@
+$ node review/GT-20076/pump-port-isolated.mjs
+  exposed: 28,
+  capVertices: 12,
+  maxOutsideOriginal: 7.450580569168253e-10
+PASS complete graphic sweep { visible: 145, hidden: 115, maxGap: 0.0078125 }
+
+$ node review/GT-20076/heavy-light-batch.mjs after --pump-port
+PASS after shotgun hip, aimed, held-right-open in four lights
+PASS live pump and eye-copy display 0.12 200
+
+$ node tools/realtest.mjs t38 t333 t277 tcb302 --all
+ok    t38      26 pass   0 fail  60.1s  (real renderer)
+    INFO shotgun cold meshes 26, equipped draws 21
+ok    t333     16 pass   0 fail  22.6s  (real renderer)
+ok    t277     46 pass   0 fail  38.3s  (real renderer)
+ok    tcb302   10 pass   0 fail  36.4s  (real renderer)
+4 checks: 98 pass, 0 fail (real renderer)
+
+$ node review/GT-20076/pistol-frame-perf.mjs --pump-port
+before {
+  frames: { count: 150, p50: 16.69999999999709, p95: 16.799999999999272 },
+  seamBuildMs: []
+after {
+  frames: { count: 150, p50: 16.69999999999709, p95: 16.80000000000291 },
+  seamBuildMs: [ 0.20000000298023224, 0.4000000022351742 ]

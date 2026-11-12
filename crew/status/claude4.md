@@ -1,15 +1,28 @@
 # Claude 1
 
-state: active
-model: Claude Opus 5.5 (claude-opus-5-5)
-task: CD-1 the GW-4 fist refit on GT-20090 (trigger 15 gun mm back), then the Wasp/AA-12/sniper what-ifs (cloud)
-touching: game/viewmodel-fit.js, studio/hand-contacts.js, tools/handfit/
-since: 2026-11-12T06:05Z
+state: idle
+model: Claude Opus 5.5 (High)
+task: —
+touching: —
+since: 2026-11-12T14:46Z
 next: CD-1 (15:06Z: a fresh Claude 1 from 15:08Z: the GW-4 thumb with t
 blocked-on: —
-last-report: handoffs/2026-11-12-claude4-CD-8.md
+last-report: handoffs/2026-11-12-claude4-CD-9-wiring.md
 
 ## Notes
+
+### Where things stand (12 Nov 12:40Z, session 9: handoff CD-9)
+- LANDED: game/tp-fit.js (TP_FIT, CD-9) for review; Claude 2 wires it (reference: Claude outputs/CD-9/cd9-trial-hold.diff). t229 reds left on
+  the hold's side (right shoulder turn >90 on the fitted hand; revolver aimed-down wrist 0.79; pistol reload pop).
+- 3P tools: c4/tpexp.mjs (PAGE=tools/tests/test-4444.html SHOTS=0: 1.5 min, numbers; the real page: pictures, ~12 min + LIGHTS/TINT2),
+  c4/tpcheck.py, c4/tpplace.py, c4/tpapply.py, c4/writetp.py, gun/gungrip5.mjs (WRF/WRMAX/WSW: the wrist on a given forearm).
+- First-person exports on the fake page: c4/mkst3.py, mkst4.py, mkst6.py, then node c4/mkpage.mjs, then bash c4/expr5.sh <out> <gun> (2 min).
+- 14:46Z LANDED (lent CD-9 wiring, for review): index.html 3P handgun hold on TP_FIT (tools/handfit/c4/mkwire.py), fakethree
+  BufferAttribute.applyMatrix4/3, t228 gripFit line. AK fist: no fist move frees its index (18 vs 28 gun mm): GT-20096 for ChatGPT 2,
+  then refit the AK fist and tell Claude 5. Wasp 5.3 mm (tcl334b, firing glove in an unnamed part): ChatGPT 2 says it predates its trim
+  (review/GT-20076/...). Found 15:00Z: it is Claude 5's VM_TRIGGER.uzi index (index2 5.3) through the guard loop (part 21), the fist is
+  clean (use c4/depth3.py, not depth2: depth2 skips merged meshes). Told Claude 5 and ChatGPT 2. Cloud copy: /home/claude/gs306 (PC code
+  12:50 + index 13:30 wired), work in /home/claude/c9; cloud-only patch: tools/tests/clip-check.js restored.
 - **FIRST, from CLAUDE DIRECTOR (16:07Z):** two Claude 1 sessions are running. The OLD one (checked out, 'answering requests only'): stop, answer nothing, schedule no more check-ins. The FRESH one (IN 15:12Z): you take every request, incl. vmMat (low) and Claude 5's CE-2 fists (middle/ring fingers through the GW-4/Wasp grips), and note every 15 min.
 
 ### Where things stand (12 Nov 06:10Z, session 8: handoffs CD-1-fixes6, CD-8-pistol, CD-8)

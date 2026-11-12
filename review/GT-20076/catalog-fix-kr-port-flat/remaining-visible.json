@@ -1,0 +1,128 @@
+{
+  "basis": "Earlier photographed pixel counts; both part identities, host, witness point and penetration depth match the new strict audit. No new fleet capture.",
+  "reference": "catalog-fix-launcher-rear",
+  "current": "catalog-fix-kr-port-flat",
+  "top": [
+    {
+      "model": "revolver",
+      "currentPair": 1,
+      "recordedPair": 1,
+      "view": "aimed",
+      "recordedPixels": 50,
+      "cameraSource": "visibility-fix-revolver-walnut",
+      "a": "root/BufferGeometry[2]",
+      "b": "root/BufferGeometry[0]"
+    },
+    {
+      "model": "shotgun",
+      "currentPair": 0,
+      "recordedPair": 0,
+      "view": "held-right",
+      "recordedPixels": 50,
+      "cameraSource": "visibility-fix-fleet-poses-final",
+      "a": "root/shotgun-bolt[1]/CylinderGeometry[0]",
+      "b": "root/shotgun receiver[0]"
+    },
+    {
+      "model": "revolver",
+      "currentPair": 0,
+      "recordedPair": 0,
+      "view": "hip",
+      "recordedPixels": 48,
+      "cameraSource": "visibility-fix-revolver-walnut",
+      "a": "root/BufferGeometry[1]",
+      "b": "root/BufferGeometry[0]"
+    },
+    {
+      "model": "uzi",
+      "currentPair": 29,
+      "recordedPair": 31,
+      "view": "hip",
+      "recordedPixels": 48,
+      "cameraSource": "visibility-fix-wasp-covers",
+      "a": "root/BufferGeometry[34]",
+      "b": "root/BufferGeometry[0]"
+    },
+    {
+      "model": "uzi",
+      "currentPair": 64,
+      "recordedPair": 83,
+      "view": "held-left-open",
+      "recordedPixels": 48,
+      "cameraSource": "visibility-fix-wasp-covers",
+      "a": "root/BufferGeometry[69]",
+      "b": "root/BufferGeometry[55]"
+    },
+    {
+      "model": "m4",
+      "currentPair": 305,
+      "recordedPair": 373,
+      "view": "held-right",
+      "recordedPixels": 48,
+      "cameraSource": "visibility-fix-fleet-poses",
+      "a": "root/group[307]/BufferGeometry[13]",
+      "b": "root/group[307]/BufferGeometry[0]"
+    },
+    {
+      "model": "launcher",
+      "currentPair": 209,
+      "recordedPair": 224,
+      "view": "rack",
+      "recordedPixels": 48,
+      "cameraSource": "visibility-fix-launcher-rear",
+      "a": "root/heatParts-barrel[201]/BufferGeometry[0]~1",
+      "b": "root/BufferGeometry[196]"
+    },
+    {
+      "model": "pistol",
+      "currentPair": 43,
+      "recordedPair": 49,
+      "view": "held-left-open",
+      "recordedPixels": 47,
+      "cameraSource": "visibility-fix-pistol-cover",
+      "a": "root/group[30]/heatParts-barrel[3]/BufferGeometry[1]",
+      "b": "root/group[0]/BufferGeometry[0]"
+    },
+    {
+      "model": "aa12",
+      "currentPair": 45,
+      "recordedPair": 49,
+      "view": "hip",
+      "recordedPixels": 47,
+      "cameraSource": "visibility-fix-fleet-poses",
+      "a": "root/group[46]/magazineBody[0]/BufferGeometry[49]",
+      "b": "root/group[46]/magazineBody[0]/BufferGeometry[0]"
+    },
+    {
+      "model": "chainsaw",
+      "currentPair": 33,
+      "recordedPair": 60,
+      "view": "aimed",
+      "recordedPixels": 47,
+      "cameraSource": "visibility-fix-sniper-seated",
+      "a": "root/BufferGeometry[71]",
+      "b": "root/BufferGeometry[1]"
+    },
+    {
+      "model": "uzi",
+      "currentPair": 42,
+      "recordedPair": 44,
+      "view": "held-right",
+      "recordedPixels": 46,
+      "cameraSource": "visibility-fix-wasp-covers",
+      "a": "root/BufferGeometry[45]",
+      "b": "root/BufferGeometry[35]"
+    },
+    {
+      "model": "m4",
+      "currentPair": 16,
+      "recordedPair": 25,
+      "view": "hip",
+      "recordedPixels": 46,
+      "cameraSource": "visibility-fix-fleet-poses",
+      "a": "root/BufferGeometry[56]",
+      "b": "root/BufferGeometry[43]"
+    }
+  ],
+  "remainingWitnesses": 1111
+}

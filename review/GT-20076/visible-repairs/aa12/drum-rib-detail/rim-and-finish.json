@@ -1,0 +1,257 @@
+{
+  "rim": {
+    "hash": "33424312",
+    "ribs": [
+      {
+        "closed": true,
+        "gap": {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        },
+        "latchGaps": []
+      },
+      {
+        "closed": true,
+        "gap": {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        },
+        "latchGaps": []
+      },
+      {
+        "closed": true,
+        "gap": {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        },
+        "latchGaps": []
+      },
+      {
+        "closed": true,
+        "gap": {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        },
+        "latchGaps": []
+      },
+      {
+        "closed": true,
+        "gap": {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        },
+        "latchGaps": []
+      },
+      {
+        "closed": true,
+        "gap": {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        },
+        "latchGaps": []
+      },
+      {
+        "closed": true,
+        "gap": {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        },
+        "latchGaps": [
+          {
+            "lowerMm": 0.16406249999999997,
+            "upperMm": 0.171875
+          },
+          {
+            "lowerMm": 0.1328125,
+            "upperMm": 0.14062500000000003
+          }
+        ]
+      },
+      {
+        "closed": true,
+        "gap": {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        },
+        "latchGaps": []
+      },
+      {
+        "closed": true,
+        "gap": {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        },
+        "latchGaps": []
+      },
+      {
+        "closed": true,
+        "gap": {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        },
+        "latchGaps": []
+      },
+      {
+        "closed": true,
+        "gap": {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        },
+        "latchGaps": []
+      },
+      {
+        "closed": true,
+        "gap": {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        },
+        "latchGaps": []
+      },
+      {
+        "closed": true,
+        "gap": {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        },
+        "latchGaps": []
+      },
+      {
+        "closed": true,
+        "gap": {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        },
+        "latchGaps": []
+      },
+      {
+        "closed": true,
+        "gap": {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        },
+        "latchGaps": []
+      },
+      {
+        "closed": true,
+        "gap": {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        },
+        "latchGaps": []
+      },
+      {
+        "closed": true,
+        "gap": {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        },
+        "latchGaps": []
+      },
+      {
+        "closed": true,
+        "gap": {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        },
+        "latchGaps": []
+      },
+      {
+        "closed": true,
+        "gap": {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        },
+        "latchGaps": [
+          {
+            "lowerMm": 0.125,
+            "upperMm": 0.1328125
+          },
+          {
+            "lowerMm": 0.14843750000000003,
+            "upperMm": 0.15625
+          }
+        ]
+      },
+      {
+        "closed": true,
+        "gap": {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        },
+        "latchGaps": []
+      },
+      {
+        "closed": true,
+        "gap": {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        },
+        "latchGaps": []
+      },
+      {
+        "closed": true,
+        "gap": {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        },
+        "latchGaps": []
+      },
+      {
+        "closed": true,
+        "gap": {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        },
+        "latchGaps": []
+      },
+      {
+        "closed": true,
+        "gap": {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        },
+        "latchGaps": []
+      }
+    ],
+    "exterior": {
+      "samples": 19467,
+      "maxY": 1.1640766714275663e-10,
+      "maxNormal": 2.220446049250313e-16,
+      "maxUV": 2.220446049250313e-16
+    },
+    "latchProfiles": [
+      {
+        "samples": 7750,
+        "lost": 0,
+        "maxIn": 0.0019315994600184643,
+        "maxOut": 8.243839506210476e-10
+      },
+      {
+        "samples": 7750,
+        "lost": 0,
+        "maxIn": 0.0019317456377855322,
+        "maxOut": 8.243839506210476e-10
+      }
+    ],
+    "shell": [
+      0,
+      0.1633218635343573,
+      0
+    ],
+    "base": [
+      0,
+      -0.26,
+      0.05
+    ],
+    "scale": [
+      0.6843359655419957,
+      0.6843359655419957,
+      0.6843359655419957
+    ]
+  },
+  "finish": {
+    "worldMaterials": 3,
+    "eyeMaterials": 3,
+    "coatedMaterials": 7
+  }
+}

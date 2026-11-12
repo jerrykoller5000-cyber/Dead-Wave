@@ -133,3 +133,26 @@ Make those (copies or symlinks), or change the three prefixes.
 - The twist: a turn about the hand's x (the grip channel) is undone where the twist is free (the revolver's firing hand: drawn y
   = fit y) and carried where it is at its limit (the AA-12's: 0.6 rad). A roll about y or z changes x, and the free twist then
   re-rolls a little (1.4 deg on the revolver): measure on a re-export, then move by translations only (they keep the twist).
+
+## Claude 1's CD-9 (12 Nov ~09:30-12:40Z): the third-person fit (game/tp-fit.js, TP_FIT)
+- **What it is**: per handgun and hand the 3P wrist group's grip point `p` and frame `basis.x/y` in the gun's space, and the
+  finger `pose` (the same shape as VM_FIT; the 3P hand mesh's local frame is the layout's, like first person's). Claude 2's
+  hold puts the whole frame on (roll included); the firing index then lies along the frame instead of off the side.
+- **Where it came from**: the firing hands are VM_FIT.r as written (index straight along the frame); the support hands are
+  first person's support hands AS DRAWN (VM_FIT.l re-rolled by first person's twist, 11.5 deg pistol / 34 deg revolver: take
+  them from a first-person export, `c4/expr5.sh`), the pistol's re-solved on the 3P forearm (`gun/gungrip5.mjs`).
+- **3P exports**: `c4/tpexp.mjs <out> pistol,revolver` (through the slot; `PAGE=tools/tests/test-4444.html SHOTS=0` = the suite's
+  fakethree page, 1.5 min, numbers only; the real page renders Claude 2's four close cameras, `LIGHTS=noon,overcast,dusk,night`,
+  `TINT2=1` adds tinted noon views; software GL: ~12 min + 15 s a picture). Same JSON as the first-person exports, plus
+  `info.arms` (arm/elbow/wrist frames), `info.limits` (armLimitsDbg), `info.roll`, `info.wristTurn`.
+- **Checks**: `c4/tpcheck.py <export> <fit json>` (each hand as drawn vs its fit, mm and deg, and its wrist in ARM_LIMITS),
+  `c4/depth2.py <export>` (rule 2 and the hands into each other, as clip-check.js), `c4/tpplace.py <export> <fit> <out>` (a fit
+  put on the exported gun at the 3P scale, the canonical gloved hand, and its wrist on the exported forearm, before any game run).
+- **Solve**: `gun/gungrip5.mjs` = gungrip4 + `WRF='[x,y,z]'` (the forearm's line toward the elbow seen from the start hand,
+  canonical, the left mirrored) with `WRMAX` (ARM_LIMITS' wrist ellipse kept under it) and `WSW` (the swing off the forearm's
+  line, rad). `c4/tpapply.py <export> <side> '<RESULT>'` -> {basis, p, pose}; `c4/writetp.py <fits.json> game/tp-fit.js`.
+- **The trial hold** (cloud only, Claude 2's file): `c4/mktrial_clean.py` patches index.html (Claude 2's CD-8 both-hands trial
+  + the wanted frame in holdHand + the right shoulder held inside the table before the gun is placed). Diff in
+  Claude outputs/CD-9/cd9-trial-hold.diff.
+- Lesson: holdFreeShoulders (end of frame) turns the fitted right arm 4-5 deg back inside the shoulder's turn (94 -> 90 deg):
+  the gun rides the forearm, so a support hand placed before it ends ~2 cm off. Hold the shoulder before placing the gun.

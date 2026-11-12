@@ -1,0 +1,25 @@
+$ node review/GT-20076/heavy-light-batch.mjs after --launcher-nose
+Launcher nose after 2cbe3e0d [ [ true, true ], [ true ] ] { lowerMm: 0, upperMm: 0.0078125 } {
+PASS after launcher hip, aimed, held-right-open, rack in four lights
+
+$ node review/GT-20076/frame-details.mjs --launcher-nose
+PASS original launcher and Wasp heat patterns on world and eye
+PASS native before/after side detail in all four lights launcher 2cbe3e0d
+
+$ node review/GT-20076/pistol-frame-perf.mjs --launcher-nose
+  frames: { count: 150, p50: 16.69999999999709, p95: 16.900000000001455 },
+  seamBuildMs: [],
+    heat: [ 0, 0.04000000000000001, 0.43000001460313797 ],
+    muzzle: [ 0, 0.04, 0.72 ],
+    flash: [ 0, 0.04, 0.72 ]
+  frames: { count: 150, p50: 16.69999999999709, p95: 16.900000000001455 },
+  seamBuildMs: [ 0, 0.19999999925494194 ],
+    heat: [ 0, 0.04000000000000001, 0.43000001460313797 ],
+    muzzle: [ 0, 0.04, 0.72 ],
+    flash: [ 0, 0.04, 0.72 ]
+
+$ node tools/realtest.mjs t38 t333 t277 --all
+ok    t38      26 pass   0 fail  57.9s  (real renderer)
+ok    t333     16 pass   0 fail  23.9s  (real renderer)
+ok    t277     46 pass   0 fail  40.3s  (real renderer)
+3 checks: 88 pass, 0 fail (real renderer)

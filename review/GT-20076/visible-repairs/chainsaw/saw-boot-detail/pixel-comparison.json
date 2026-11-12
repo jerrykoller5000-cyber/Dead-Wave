@@ -1,0 +1,42 @@
+{
+  "noon": {
+    "changed": 1100,
+    "over8": 37,
+    "max": 108
+  },
+  "held-noon": {
+    "changed": 0,
+    "over8": 0,
+    "max": 0
+  },
+  "overcast": {
+    "changed": 377,
+    "over8": 37,
+    "max": 102
+  },
+  "held-overcast": {
+    "changed": 0,
+    "over8": 0,
+    "max": 0
+  },
+  "dusk": {
+    "changed": 755,
+    "over8": 37,
+    "max": 78
+  },
+  "held-dusk": {
+    "changed": 0,
+    "over8": 0,
+    "max": 0
+  },
+  "night": {
+    "changed": 174,
+    "over8": 18,
+    "max": 13
+  },
+  "held-night": {
+    "changed": 0,
+    "over8": 0,
+    "max": 0
+  }
+}

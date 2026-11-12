@@ -1,0 +1,23 @@
+$ node review/GT-20076/gw-mag-band-isolated.mjs
+
+
+$ node review/GT-20076/heavy-light-batch.mjs after --gw-mag-bands
+PASS after m4 hip, aimed, held-right, rack in four lights
+
+$ node review/GT-20076/frame-details.mjs --gw-mag-bands
+PASS all 24 band patches seated on the body, existing six ribs and six witness marks seated
+PASS native before/after side detail in all four lights m4 903086c7
+
+$ node tools/realtest.mjs t38 t333 t277 --all
+ok    t38      26 pass   0 fail  58.8s  (real renderer)
+    PASS all twelve equipped models represented (12)
+ok    t333     16 pass   0 fail  23.1s  (real renderer)
+ok    t277     46 pass   0 fail  37.4s  (real renderer)
+3 checks: 88 pass, 0 fail (real renderer)
+
+$ node review/GT-20076/pistol-frame-perf.mjs --gw-mag-bands --reverse
+  frames: { count: 150, p50: 16.69999999999709, p95: 16.80000000000291 },
+  seamBuildMs: [ 5.200000002980232, 2.7999999970197678, 2.100000001490116, 0, 0, 0 ]
+  frames: { count: 150, p50: 16.69999999999709, p95: 16.799999999995634 },
+  seamBuildMs: []
+PASS original and revised world/eye magazine transforms through 48 reload phases 0.5290462084562146

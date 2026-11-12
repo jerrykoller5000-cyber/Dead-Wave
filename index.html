@@ -1397,6 +1397,8 @@
     import { buildMarineEyewear } from './ui/marine-eyewear.js';   // CL-139: the eyewear, fitted to that head
     import { buildMarineBody, carrierClearance, carrierIntrusion } from './studio/marine-body.js';   // CB-291: the arm IK keeps off the carrier
     import { createViewmodel } from './game/viewmodel.js';   // CL-281: the first-person view gun
+    import { VM_FIT } from './game/viewmodel-fit.js';   // CD-8: first person's fitted support hand on the pistol, for third person too
+    import { TP_FIT } from './game/tp-fit.js';   // CD-9: the third-person fit of the one-handgun hold (both hands, their whole frames)
     import { HAND_POSES, lerpPose } from './studio/marine-hand.js';   // GB-152
     import { createSelectorFlick } from './game/selector-flick.js';   // GB-167: the thumb on the fire selector
     import { ARM_LIMITS, BODY_EXCEPTIONS, clampWrist, clampElbowHinge, wristInside, BODY_LIMITS, clampTrunk, clampLimb, clampHinge, shoulderAngles, shoulderPast, shoulderHold } from './core/body-limits.js';   // CB-289: the arm table
@@ -20474,6 +20476,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     const PGB_PATCH_PX_W = 192, PGB_PATCH_PX_H = 224;
     const pgbPatchCanvas = document.createElement('canvas');
     pgbPatchCanvas.width = PGB_PATCH_PX_W; pgbPatchCanvas.height = PGB_PATCH_PX_H;
+    // WebGPU can upload the transparent patch before the image finishes loading.
+    const pgbPatchCtx = pgbPatchCanvas.getContext('2d');
+    if (pgbPatchCtx) pgbPatchCtx.clearRect(0, 0, PGB_PATCH_PX_W, PGB_PATCH_PX_H);
     const pgbPatchTex = new THREE.CanvasTexture(pgbPatchCanvas);
     if (THREE.SRGBColorSpace) pgbPatchTex.colorSpace = THREE.SRGBColorSpace;   // colour art, as the camo and mural maps
     const pgbPatchMat = new THREE.MeshStandardMaterial({ map: pgbPatchTex, roughness: 0.95, metalness: 0, alphaTest: 0.5 });
@@ -20483,10 +20488,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     {
       const img = new Image();
       img.onload = () => {
-        const c = pgbPatchCanvas.getContext && pgbPatchCanvas.getContext('2d');
-        if (!c) return;
-        c.clearRect(0, 0, PGB_PATCH_PX_W, PGB_PATCH_PX_H);
-        c.drawImage(img, 0, 0, PGB_PATCH_PX_W, PGB_PATCH_PX_H);
+        if (!pgbPatchCtx) return;
+        pgbPatchCtx.drawImage(img, 0, 0, PGB_PATCH_PX_W, PGB_PATCH_PX_H);
         pgbPatchTex.needsUpdate = true;
         pgbPatchMat.userData.loaded = true;
       };
@@ -21974,7 +21977,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // CC-343 (part 2): standing still, a boot out past the side of what he stands on (a deck's edge beside him) steps in
     // toward his middle, as far as FOOT_STEPIN, onto the level his root is on: he stands on the deck, not in a squat with
     // one boot down on the ground. footStill is set each frame before the feet (updateMarinePose).
-    const FOOT_STEPIN = 0.16, FOOT_S = { y: 0, dx: 0, dz: 0 };
+    const FOOT_STEPIN = 0.16, FOOT_STEPIN_CROUCH = 0.24, FOOT_S = { y: 0, dx: 0, dz: 0 };
     let footStill = false;
     // Can a boot at (x, z) facing (fx, fz) stand flat at y: its heel and ball (and either side of the ball) on y, and
     // nothing over y under any of it (its toe may reach out over something lower: a deck's edge)?
@@ -21992,7 +21995,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       let ux = r.x - x, uz = r.z - z; const l = hypot(ux, uz);
       if (l < 0.02) return null;
       ux /= l; uz /= l;
-      const far = Math.min(FOOT_STEPIN, l);
+      // CC-343: crouched, the front boot stands further out (CROUCH.frontZ): it steps in as far as FOOT_STEPIN_CROUCH (a crouch
+      // at a deck's edge facing off keeps both boots on the deck, the front one's toe over the edge, not one down a step)
+      const far = Math.min((POSE.crouch || 0) > 0.5 ? FOOT_STEPIN_CROUCH : FOOT_STEPIN, l);
       for (let t = 0.01; t <= far + 1e-6; t += 0.01) {
         if (footSurfaceY(x + ux * t, z + uz * t, rootY) < rootY - 0.02) continue;
         const s = Math.min(far, t + 0.06);   // the boot's half width and a little more onto it
@@ -23777,7 +23782,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       poseVault();   // GP-19900: weighted push, staggered tucked legs and landing
       marineTurn.apply(dt, { yaw: player.rotation.y, aimLocked: !unarmed, crouch: POSE.crouch,
         ground: root ? (x, z) => feetOnTerrain ? footFooting(x, z, player.rotation.y, rootGY).y : root.y : undefined,   // CC-343: the decks and the stairs' treads too
-        footing: root && feetOnTerrain ? (x, z, yaw) => footFooting(x, z, yaw, rootGY) : null, ankleH: CROUCH.ankleH, sole: [-CROUCH.heel, CROUCH.toe], flex: BODY_LIMITS.ankle.flex,   // CC-343
+        footing: root && feetOnTerrain ? (x, z, yaw) => footFooting(x, z, yaw, rootGY) : null, surface: root && feetOnTerrain ? (x, z) => footSurfaceY(x, z, rootGY) : null, ankleH: CROUCH.ankleH, sole: [-CROUCH.heel, CROUCH.toe], flex: BODY_LIMITS.ankle.flex,   // CC-343
         eligible: gameStarted && !gameOver && !won && grounded && XFADE.w <= 0 &&
         !moving && hypot(velX, velZ) < .08 && !swimming && (POSE.crouch < .03 || POSE.crouch > .97) &&
         !diving() && !climbingTower && !mortarMounted && !mortarCarried && !marineDown() &&
@@ -30543,6 +30548,37 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (focusTab) [...cifTabsEl.children].find(b=>b.dataset.cifTab===focusTab)?.focus({preventScroll:true});
       if (focusItem) [...cifItemsEl.children].find(b=>b.dataset.cifItem===focusItem)?.focus({preventScroll:true});
     }
+    // GP-20121: the pattern pixels are fixed, so reuse their canvases between
+    // CIF visits. The buttons, locks and selection labels are still rebuilt.
+    const cifSwatches = new Map();
+    let cifSwatchList = '', cifSwatchCurrent = '';
+    function prepareCifSwatches(finishes, current) {
+      const kit = ['helmet', 'vest', 'pads', 'nvg'].map(k => gearOwned[k] ? '1' : '0').join('');
+      const list = [dressTab, dressItem, camoKey, kit, finishes.join(',')].join('|');
+      if (list !== cifSwatchList) { cifSwatches.clear(); cifSwatchList = list; }
+      if (current !== cifSwatchCurrent) {
+        cifSwatches.delete(current);
+        cifSwatches.delete(cifSwatchCurrent);
+        cifSwatchCurrent = current;
+      }
+    }
+    function cifSwatch(key) {
+      if (key !== RUNE_FINISH_KEY && cifSwatches.has(key)) return cifSwatches.get(key);
+      const sw = document.createElement('canvas'); sw.width = 128; sw.height = 64;
+      if (key === RUNE_FINISH_KEY) sw.getContext('2d').drawImage(runeFinishTex().image, 0, 0, sw.width, sw.height);
+      else {
+        const tile = document.createElement('canvas'); tile.width = tile.height = 64;
+        if (paintCamoTile(key, tile)) { const c = sw.getContext('2d'); c.drawImage(tile, 0, 0); c.drawImage(tile, 64, 0); }
+        cifSwatches.set(key, sw);
+      }
+      return sw;
+    }
+    function warmCifSwatches() {
+      const current = dressTab === 'guns' ? (wardrobeState.guns[dressItem] || '') : wardrobeState.items[dressItem]?.camo;
+      const finishes = dressTab === 'guns' && runeFinishUnlocked() ? [...CAMO_KEYS, RUNE_FINISH_KEY] : CAMO_KEYS;
+      prepareCifSwatches(finishes, current);
+      for (const key of finishes) if (key !== RUNE_FINISH_KEY) cifSwatch(key);
+    }
     function renderDressChoices() {
       cifMenu.prepare();
       cifListEl.replaceChildren();
@@ -30618,16 +30654,14 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         return;
       }
       const current = dressTab === 'guns' ? (wardrobeState.guns[dressItem] || '') : (wardrobeState.items[dressItem] && wardrobeState.items[dressItem].camo);
-      const tile = document.createElement('canvas'); tile.width = tile.height = 64;
       const finishes = dressTab === 'guns' && runeFinishUnlocked() ? [...CAMO_KEYS, RUNE_FINISH_KEY] : CAMO_KEYS;
+      prepareCifSwatches(finishes, current);
       for (const key of finishes) {
         if (key === RUNE_FINISH_KEY) { const h = document.createElement('div'); h.className = 'cif-group'; h.textContent = dwText('cif.menu.special'); cifListEl.append(h); }
         if (key === CAMO_SOLID_KEYS[0]) { const h = document.createElement('div'); h.className = 'cif-group'; h.textContent = dwText('cif.solids'); cifListEl.append(h); }
         const b = document.createElement('button');
         b.type = 'button'; b.dataset.camo = key;
-        const sw = document.createElement('canvas'); sw.width = 128; sw.height = 64;
-        if (key === RUNE_FINISH_KEY) sw.getContext('2d').drawImage(runeFinishTex().image, 0, 0, sw.width, sw.height);
-        else if (paintCamoTile(key, tile)) { const c = sw.getContext('2d'); c.drawImage(tile, 0, 0); c.drawImage(tile, 64, 0); }
+        const sw = cifSwatch(key);
         const name = document.createElement('span'); name.textContent = dwText('cif.pattern.' + key);
         const mark = document.createElement('b');
         const locked = key === RUNE_FINISH_KEY ? !runeFinishUnlocked() : !camoUnlocks.isUnlocked(key);
@@ -30653,7 +30687,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     async function ensureDressView() {
       if (dressRenderer || !cifMarineEl) return;
       try {
-        dressRenderer = new THREE.WebGPURenderer({ canvas: cifMarineEl, antialias: true, forceWebGL: FORCE_WEBGL });
+        dressRenderer = new THREE.WebGPURenderer({ canvas: cifMarineEl, antialias: true, forceWebGL: FORCE_WEBGL, device: renderer.backend?.device });
         await dressRenderer.init();
         dressRenderer.setSize(240, 360, false);
         dressScene = new THREE.Scene();
@@ -30674,6 +30708,18 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         cifMarineEl.dataset.ready = 'true';
       } catch (_) { dressRenderer = null; }
     }
+    // GP-20121: build and draw the separate CIF renderer while the opening still
+    // covers the game. Opening the wardrobe then reuses its marine and pipelines.
+    function warmDressView() {
+      if (dressRenderer) return;
+      void ensureDressView().then(() => {
+        if (!dressRenderer || !dressScene || !dressCam || !dressPreview) return;
+        poseDressPreview(performance.now() / 1000);
+        dressRenderer.render(dressScene, dressCam);
+      });
+    }
+    setTimeout(warmDressView, 0);
+    setTimeout(warmCifSwatches, 0);
     // CL-125 (Jerry: "arms by his side instead of sticking out in front of him"): the figure stands as he does unarmed in the
     // world (GB-124's UNARMED_ARMS), with a breath of sway, not in the empty gun hold the rig is built in.
     function poseDressPreview(t) {
@@ -54697,8 +54743,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // sat ~1 m from the left shoulder against a 0.57 m reach. Twisted ~40°, a rifle's
     // butt lands in the right shoulder and the support hand sits just ahead of the mag.
     const WEAPON_HOLD = {
-      pistol:   { twist: 0.1, hold: [-0.32, -0.08, 0.4], grip: [0, -0.066, -0.016], trig: [0, -0.05, 0.073], fore: [-0.058, -0.09, 0.012] },   // GB-151: fore = the support fist round the firing fingers
-      revolver: { twist: 0.1, hold: [-0.32, -0.08, 0.4], grip: [0, -0.07, -0.059], trig: [0, -0.02, 0.035], fore: [-0.058, -0.1, -0.041] },   // GB-318 (CL-320): grip/fore followed the raked S&W grip (z -0.059 / -0.041; VM_SOCKETS grip/support); trig unchanged
+      pistol:   { twist: 0.1, hold: [-0.29, -0.08, 0.4], grip: [0, -0.066, -0.016], trig: [0, -0.05, 0.073], fore: [-0.04782, -0.11451, -0.0153] },   // GB-151: fore = the support fist round the firing fingers; CD-8: first person's fit (VM_FIT.pistol.l.p, was [-0.058, -0.09, 0.012])
+      revolver: { twist: 0.1, hold: [-0.28, -0.08, 0.4], grip: [0, -0.07, -0.059], trig: [0, -0.02, 0.035], fore: [-0.058, -0.1, -0.041] },   // GB-318 (CL-320): grip/fore followed the raked S&W grip (z -0.059 / -0.041; VM_SOCKETS grip/support); trig unchanged
       uzi:      { twist: 0.2, hold: [-0.3, -0.16, 0.34], grip: [0, -0.088, -0.027], trig: [0, -0.056, 0.05], fore: [0, -0.03, 0.18] },   // GB-236: grip on the thicker grip's centre line (was -0.017)
       m4:       { twist: 0.8, hold: [-0.24, -0.12, 0.28], grip: [0, -0.106, -0.116], trig: [0, -0.078, -0.029], fore: [0, -0.01, 0.43], sh: { butt: [0, -0.003, -0.569], eye: [0, 0.134, -0.20] } },   // CL-322: fore on GP-20055's quad rail (was [0, 0, 0.36], the old tube)   // GB-317 (CL-318): grip followed the A2 4 cm back (cz -0.12, z -0.116); trig on the new blade (z -0.029)
       ak:       { twist: 0.8, hold: [-0.24, -0.12, 0.28], grip: [0, -0.123, -0.126], trig: [0, -0.052, -0.026], fore: [0, -0.02, 0.37], sh: { butt: [0, -0.078, -0.597], eye: [0, 0.074, -0.30] } },   // GB-317 (CL-318): palm u 0.42 on cz -0.13 / h 0.165 (z -0.126, y -0.123 = VM_SOCKETS.ak); trig on the new blade; GB-311: cover 2.6 cm lower (SIGHT.ak 0.074)
@@ -54710,6 +54756,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       flamer:   { twist: 0.6, hold: [-0.26, -0.26, 0.22], grip: [0, -0.078, -0.157], trig: [0, -0.048, -0.09], fore: [0, -0.07, 0.28] },
       chainsaw: { twist: 0.5, hold: [-0.24, -0.34, 0.22], grip: [0, -0.014, -0.46], trig: [0, -0.01, -0.39], fore: [-0.01, 0.246, -0.035], level: true }   // GB-275: onto GP-20022's handles: the rear throttle grip (0,-0.014,-0.46), the front hoop's top bar (-0.01,0.246,-0.035)
     };
+    // CD-9 (J142d/e in third person): with one pistol or revolver in his hands the firing fist's grip point goes on TP_FIT r.p
+    // (gripFit; the akimbo pair keeps grip) and the support fist's on TP_FIT l.p (fore). Their hold points sit 3-4 cm toward the gun
+    // side (below) so the fitted arm stays inside the shoulder's table and the firing wrist under 0.75 rad at every pitch (t229).
+    for (const k of ['pistol', 'revolver']) { const F = TP_FIT[k]; if (F && F.r && F.l && F.r.p && F.l.p) { WEAPON_HOLD[k].gripFit = F.r.p.slice(); WEAPON_HOLD[k].fore = F.l.p.slice(); } }
     // GB-130 (Jerry): the grip and support points are read off each model, not guessed (gun space,
     // so they hold at any WEAPON_SIZE). The hand point (gripR/gripL, the front of the palm where the
     // curled fingers close) goes on:
@@ -54977,7 +55027,18 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // edge, the other edge from the mitt's, so holdHand turns every hand's channel the other way round (its sign) and the
     // index finger points where it always did, for every gun.
     // Phase A of the fingers: each hand that holds closes to a fist round its grip, blended with the hold; relaxed otherwise.
-    const _hp = { r: null, l: null, rest: null };
+    const _hp = { r: null, l: null, rest: null, fitL: null };
+    // CD-8 interim (CLAUDE DIRECTOR (c), 12 Nov) became CD-9: both hands on the third-person fit (first person's poses, as they
+    // were, rolled the firing index off the gun on the third-person arm).
+    // CD-9: the firing and support hands on one pistol or revolver take TP_FIT's whole frame (its roll included, so the firing
+    // index lies along the frame) and its finger pose; the forearm's roll takes its share and the wrist the rest (holdHand).
+    function handgunFitR() { return HANDS.fore[currentWeapon] === 'grip' && !akimboOn() && TP_FIT[currentWeapon] && TP_FIT[currentWeapon].r && TP_FIT[currentWeapon].r.pose ? TP_FIT[currentWeapon].r : null; }
+    function supportFitL() { return HANDS.fore[currentWeapon] === 'grip' && !akimboOn() && TP_FIT[currentWeapon] && TP_FIT[currentWeapon].l && TP_FIT[currentWeapon].l.pose ? TP_FIT[currentWeapon].l : null; }
+    // The wanted world turn of a hand: the gun's world quaternion times the fit's frame (basis x, y in the gun's space); holdHand
+    // reads it for the hand whose elbow is _tpW.el (set just before that hand's hold, cleared after).
+    const _tpW = { el: null, q: new THREE.Quaternion(), m: new THREE.Matrix4(), x: new THREE.Vector3(), y: new THREE.Vector3(), z: new THREE.Vector3(), b: new THREE.Quaternion(), g: new THREE.Quaternion(), t: new THREE.Quaternion(), p: new THREE.Vector3() };
+    function tpWant(elbowG, F, gunQ) { if (!F || !F.basis) { _tpW.el = null; return; } const x = _tpW.x.set(F.basis.x[0], F.basis.x[1], F.basis.x[2]).normalize(), y = _tpW.y.set(F.basis.y[0], F.basis.y[1], F.basis.y[2]); y.addScaledVector(x, -y.dot(x)).normalize(); _tpW.z.crossVectors(x, y); _tpW.m.makeBasis(x, y, _tpW.z); _tpW.b.setFromRotationMatrix(_tpW.m); _tpW.q.copy(gunQ).multiply(_tpW.b); _tpW.el = elbowG; }
+    const _cd8 = { p: new THREE.Vector3(), x: new THREE.Vector3() };
     const selectorFlick = createSelectorFlick();   // GB-167
     function poseHands(ud, wR, wL) {
       const wristR = wristOf(ud.elbowRG), wristL = wristOf(ud.elbowLG);
@@ -54992,8 +55053,13 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         if (wristL) wristL.rotation.set(0.05 * hang, 1.15 * hang, 0);
         if (wristR) wristR.rotation.set(0.05 * hang, -1.15 * hang, 0);
       }
-      if (rr) { _hp.r = lerpPose(rest, HAND_POSES.fist, _clamp01(Math.max(wR, climbGrip)), _hp.r); selectorFlick.apply(_hp.r, currentWeapon); rr.set(_hp.r).update(); }   // GB-167: the thumb flick rides on top
-      if (rl) { _hp.l = lerpPose(rest, HAND_POSES.fist, _clamp01(Math.max(wL, climbGrip)), _hp.l); rl.set(_hp.l).update(); }
+      const fitR = handgunFitR();   // CD-9: the firing fist in the fit's pose on one handgun
+      if (rr) { _hp.r = lerpPose(rest, fitR ? fitR.pose : HAND_POSES.fist, _clamp01(Math.max(wR, climbGrip)), _hp.r); selectorFlick.apply(_hp.r, currentWeapon); rr.set(_hp.r).update(); }   // GB-167: the thumb flick rides on top
+      // CD-8 (J142d/e), CD-9: on the pistol and the revolver the support hand takes the fit's pose (TP_FIT l: the thumb forward along the
+      // frame under the slide), easing back to the fist as it lets go for a reload.
+      const fitL = supportFitL(), fitW = fitL ? _clamp01(handRollLW) : 0;
+      if (fitW > 0.001) _hp.fitL = lerpPose(HAND_POSES.fist, fitL.pose, fitW, _hp.fitL);
+      if (rl) { _hp.l = lerpPose(rest, fitW > 0.001 ? _hp.fitL : HAND_POSES.fist, _clamp01(Math.max(wL, climbGrip)), _hp.l); rl.set(_hp.l).update(); }
     }
     const _rl = { a: new THREE.Vector3(), c: new THREE.Vector3(), d: new THREE.Vector3(), e: new THREE.Vector3(), w: new THREE.Vector3(),
       q: new THREE.Quaternion(), m: new THREE.Quaternion(), g: new THREE.Quaternion() };
@@ -55216,7 +55282,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       let roll = 0, turn = 0, need = 0;
       // The wrist's first aim: where the fist, turned as the forearm holds it now, puts the grip point on the anchor.
       wr.updateMatrixWorld(true); wr.getWorldQuaternion(_wr.q);
-      const t = _wr.t.copy(g).applyQuaternion(_wr.q).negate().add(anchorW);
+      // CD-9: a wanted frame (tpWant) aims the wrist so that frame puts the grip point on the anchor
+      // (as far as the hold has come in, k * a of the way; the passes below settle it)
+      const t = _tpW.el === elbowG ? _wr.t.copy(g).multiply(wr.getWorldScale(_wr.c)).applyQuaternion(_tpW.t.copy(_wr.q).slerp(_tpW.q, Math.min(1, k * a))).negate().add(anchorW) : _wr.t.copy(g).applyQuaternion(_wr.q).negate().add(anchorW);
       for (let i = 0; i < WRIST.passes; i++) {
         // From the pose as it came, so a blend in (k < 1) stays a blend; each pass moves the wrist's aim by what the
         // last one missed.
@@ -55226,9 +55294,13 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         roll = rollForearm(elbowG, wr.position, channelW, sign, rollK);
         // The rest of the turn at the wrist: the least that lays the channel along the grip.
         const d = _wr.d.copy(channelW).applyQuaternion(elbowG.getWorldQuaternion(_wr.e).invert()).normalize();
+        // CD-9: a wanted frame (TP_FIT) is the whole turn, k * a of the way from the forearm as the first pass leaves it and then
+        // fixed in the world, so the passes close on it (limitWrist holds it inside the table)
+        const want = _tpW.el === elbowG;
+        if (want) { if (i === 0) _tpW.t.copy(elbowG.getWorldQuaternion(_wr.e)).slerp(_tpW.q, Math.min(1, k * a)); _wr.q.copy(elbowG.getWorldQuaternion(_wr.e).invert()).multiply(_tpW.t); } else
         _wr.q.setFromUnitVectors(_wr.c.set(sign, 0, 0), d);
         const ang = 2 * Math.acos(Math.min(1, Math.abs(_wr.q.w)));
-        const s = (ang > WRIST.max ? WRIST.max / ang : 1) * k * a;
+        const s = want ? 1 : (ang > WRIST.max ? WRIST.max / ang : 1) * k * a;
         wr.quaternion.copy(_wr.id).slerp(_wr.q, s);
         limitWrist(elbowG, wr, roll);   // CB-289: inside the table before the arm reaches to make up what it misses
         turn = ang * s; need = ang;
@@ -55708,6 +55780,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           off.y += Math.sin(t * 83) * 0.0015;
           off.z += Math.sin(t * 67) * 0.001;
         }
+        const G = !aki && H.gripFit ? H.gripFit : H.grip;   // CD-9: the firing fist's place on the gun (one handgun: TP_FIT)
         const anchor = _hv.anchor.copy(armR.position).add(off);
         torso.localToWorld(anchor);
         // CL-260 part 2 (its shots: a hip carry pushed out past the arm left the pistol floating ahead of both hands): in
@@ -55739,7 +55812,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
             _hm.a.makeBasis(x, y, f);
             _hq.gun.setFromRotationMatrix(_hm.a);
             if (!mzL || it === 3) break;
-            const m = _agv.m.set(mzL.x - H.grip[0], mzL.y - H.grip[1], mzL.z - H.grip[2]).multiply(_agv.s).applyQuaternion(_hq.gun).add(anchor);
+            const m = _agv.m.set(mzL.x - G[0], mzL.y - G[1], mzL.z - G[2]).multiply(_agv.s).applyQuaternion(_hq.gun).add(anchor);
             const nf = _agv.f.subVectors(target, m);
             if (nf.lengthSq() < 0.04) break;
             f.copy(nf).normalize();
@@ -55760,7 +55833,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           gun.getWorldScale(_hScale);
           const shL = _hv.b.copy(armL.position); torso.localToWorld(shL);
           for (let i = 0; i < 2; i++) {   // CU-100: twice, so the aim's own turn can't take it back out of reach
-            const fw = _hv.g.set(H.fore[0] - H.grip[0], H.fore[1] - H.grip[1], H.fore[2] - H.grip[2]).multiply(_hScale).applyQuaternion(_hq.gun).add(anchor);
+            const fw = _hv.g.set(H.fore[0] - G[0], H.fore[1] - G[1], H.fore[2] - G[2]).multiply(_hScale).applyQuaternion(_hq.gun).add(anchor);
             const over = fw.distanceTo(shL) - HANDS.reachL;
             if (over <= 0) break;
             anchor.addScaledVector(fw.sub(shL).normalize(), -over); aimGun();
@@ -55770,18 +55843,31 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         if (dipR > 0.001) akimboWellFix(anchor, gun, currentWeapon, _hq.gun, dipR);   // GB-188: the turn it now has
         tuckDiveGrip(anchor,gun,H,_hq.gun);
         torso.localToWorld(_wallHold.shoulderR.copy(armR.position));
-        heldWallPull(gun, H, _wallHold.shoulderR, anchor, H.grip, _hq.gun, 'r', dt);
+        heldWallPull(gun, H, _wallHold.shoulderR, anchor, G, _hq.gun, 'r', dt);
         const poleR = heldWallPole(diving() ? diveDualPole(aki ? _akPoleR : _POLE_R) : aki ? _akPoleR : _POLE_R, _wallHold.poleR, _wallHold.r);
         // Solve the right arm onto the grip before placing the gun, so the gun's parent
         // chain is where it will be drawn.
         if (HANDS.skip[currentWeapon]) { solveArmIK(armR, ud.elbowRG, _HAND_R, anchor, poleR, k); handRollR = 0; }
-        else handRollR = holdDiveHand(armR, ud.elbowRG, _HAND_R, anchor, gripDownDir(_rl.w).applyQuaternion(_hq.gun), 1, poleR, k, 1);   // CL-188: akimbo, the elbow in   // CL-122, CU-100; GB-151: a mirrored fist's index is at +x
+        else {
+          const FR = G !== H.grip ? handgunFitR() : null;
+          tpWant(ud.elbowRG, FR, _hq.gun);
+          handRollR = holdDiveHand(armR, ud.elbowRG, _HAND_R, anchor, (FR ? _cd8.x.set(-FR.basis.x[0], -FR.basis.x[1], -FR.basis.x[2]) : gripDownDir(_rl.w)).applyQuaternion(_hq.gun), 1, poleR, k, 1);
+          if (FR) {
+            // CD-9: holdFreeShoulders (last in the frame) would turn this shoulder back inside the table after the gun and the
+            // support hand are placed, and the gun rides the forearm: hold it now, put the fit's frame back on the forearm as it
+            // is, and place the gun from where the hand is.
+            holdFreeShoulders(); ud.elbowRG.updateMatrixWorld(true);
+            const wr = wristOf(ud.elbowRG);
+            if (wr) { wr.quaternion.copy(ud.elbowRG.getWorldQuaternion(_wr.e).invert().multiply(_tpW.q)); limitWrist(ud.elbowRG, wr, handRollR); wr.updateMatrixWorld(true); fistPointW(ud.elbowRG, _HAND_R, 1, anchor); }
+          }
+          _tpW.el = null;
+        }   // CL-188: akimbo, the elbow in   // CL-122, CU-100; GB-151: a mirrored fist's index is at +x
         armR.updateMatrixWorld(true);
 
         // Place the gun so its grip point sits on the anchor (plus recoil pushback), then
         // express that as the mount's local transform under the hand.
         gun.getWorldScale(_hScale);
-        const grip = _hv.f.set(H.grip[0], H.grip[1], H.grip[2]).multiply(_hScale).applyQuaternion(_hq.gun);
+        const grip = _hv.f.set(G[0], G[1], G[2]).multiply(_hScale).applyQuaternion(_hq.gun);
         const origin = _hv.origin.copy(anchor).sub(grip);
         origin.addScaledVector(f, recoilKick.z * mainKick); // negative = kicked back along the barrel
         _hm.a.compose(origin, _hq.gun, _hScale);                            // desired gun world
@@ -55946,11 +56032,20 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         // (index first toward the muzzle wanted 100-115 degrees at the wrist, past any wrist, and the forearm's roll
         // flipped side to side round 180, throwing the hand 9 cm off the gun); up a vertical foregrip, index first.
         const sgL = HANDS.fore[currentWeapon] === 'up' || wrapG || aL <= 0.001 ? 1 : -1;   // GB-152: the wrap as GB-151 had it
+        // CD-8: the pistol's support fist on first person's fit: its channel's point (VM_FIT l.p) and line (l.basis.x points index
+        // to little finger, down the grip; chL here is index first, so its negative), by the wrist's turn's weight (it lets go for a reload).
+        { const FL = wrapG && supportFitL();
+          if (FL && aL > 0.001) {
+            fore.lerp(gun.localToWorld(_cd8.p.set(FL.p[0], FL.p[1], FL.p[2])), aL);
+            chL.lerp(_cd8.x.set(-FL.basis.x[0], -FL.basis.x[1], -FL.basis.x[2]).transformDirection(gun.matrixWorld), aL).normalize();
+          } }
         if (aL > 0.001 && (!HANDS.fore[currentWeapon] || H.fore === 'pump')) {
           const drop = foreDrop(gun, H);
           if (drop > 0) fore.addScaledVector(_wr.d.set(0, 1, 0).transformDirection(gun.matrixWorld), -drop * gun.getWorldScale(_hScale).y * aL);
         }
+        tpWant(ud.elbowLG, wrapG ? supportFitL() : null, gun.getWorldQuaternion(_tpW.g));   // CD-9: the support hand on its whole frame
         handRollL = holdHand(armL, ud.elbowLG, _HAND_L, fore, chL, sgL, poleL, holdWL * k, aL, holdWL * k * handRollLW);
+        _tpW.el = null;
         // A long gun's forend out of the arm's reach (the gun is in his shoulder; the fist's channel middle sits deeper
         // in the hand than the hand point did): the hand goes back along it toward the receiver by what it fell short,
         // still on the gun, as a short-armed shooter holds it. Not the pump: the hand works it.

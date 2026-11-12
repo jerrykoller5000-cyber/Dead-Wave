@@ -1,0 +1,5 @@
+minigun 189->186 e70f29b6 6194259f
+minigun-equipped 204->201 ac792024 4c120d3b
+minigun-heavy 257->254 a67667ef 35e0b49a
+minigun-rmr 251->248 8dd989ad f1ad4582
+unaffected 52 slings 36

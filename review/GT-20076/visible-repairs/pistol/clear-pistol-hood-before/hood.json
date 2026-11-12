@@ -1,0 +1,685 @@
+{
+  "hash": "3a33c227",
+  "cells": [
+    true
+  ],
+  "exposed": {
+    "samples": 4551,
+    "maxY": 0,
+    "maxNormal": 0,
+    "maxUV": 0
+  },
+  "sweep": [
+    {
+      "travel": 0,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      "grooves": [
+        {
+          "lowerMm": 3.6484374999999996,
+          "upperMm": 3.65625
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0,
+          "penetrating": true
+        }
+      ],
+      "barrel": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      }
+    },
+    {
+      "travel": 0.005,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      "grooves": [
+        {
+          "lowerMm": 7.062499999999999,
+          "upperMm": 7.070312499999999
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0,
+          "penetrating": true
+        }
+      ],
+      "barrel": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      }
+    },
+    {
+      "travel": 0.01,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      "grooves": [
+        {
+          "lowerMm": 10.468749999999998,
+          "upperMm": 10.476562499999998
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0,
+          "penetrating": true
+        }
+      ],
+      "barrel": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      }
+    },
+    {
+      "travel": 0.015,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      "grooves": [
+        {
+          "lowerMm": 13.882812500000002,
+          "upperMm": 13.890625000000002
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0,
+          "penetrating": true
+        }
+      ],
+      "barrel": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      }
+    },
+    {
+      "travel": 0.02,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      "grooves": [
+        {
+          "lowerMm": 17.2890625,
+          "upperMm": 17.296875000000004
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0,
+          "penetrating": true
+        }
+      ],
+      "barrel": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      }
+    },
+    {
+      "travel": 0.025,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      "grooves": [
+        {
+          "lowerMm": 20.695312499999996,
+          "upperMm": 20.703124999999996
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0,
+          "penetrating": true
+        }
+      ],
+      "barrel": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      }
+    },
+    {
+      "travel": 0.03,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      "grooves": [
+        {
+          "lowerMm": 24.109375000000004,
+          "upperMm": 24.1171875
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0,
+          "penetrating": true
+        }
+      ],
+      "barrel": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      }
+    },
+    {
+      "travel": 0.035,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      "grooves": [
+        {
+          "lowerMm": 27.515625000000004,
+          "upperMm": 27.523437500000004
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0,
+          "penetrating": true
+        }
+      ],
+      "barrel": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      }
+    },
+    {
+      "travel": 0.04,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      "grooves": [
+        {
+          "lowerMm": 30.9296875,
+          "upperMm": 30.9375
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0,
+          "penetrating": true
+        }
+      ],
+      "barrel": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      }
+    },
+    {
+      "travel": 0.045,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      "grooves": [
+        {
+          "lowerMm": 34.34375000000001,
+          "upperMm": 34.3515625
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0,
+          "penetrating": true
+        }
+      ],
+      "barrel": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      }
+    },
+    {
+      "travel": 0.05,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      "grooves": [
+        {
+          "lowerMm": 37.76562500000001,
+          "upperMm": 37.77343750000001
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0,
+          "penetrating": true
+        }
+      ],
+      "barrel": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      }
+    },
+    {
+      "travel": 0.055,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      "grooves": [
+        {
+          "lowerMm": 41.18749999999999,
+          "upperMm": 41.1953125
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0,
+          "penetrating": true
+        }
+      ],
+      "barrel": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      }
+    },
+    {
+      "travel": 0.06,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      "grooves": [
+        {
+          "lowerMm": 44.6171875,
+          "upperMm": 44.625
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0,
+          "penetrating": true
+        }
+      ],
+      "barrel": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      }
+    },
+    {
+      "travel": 0.065,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      "grooves": [
+        {
+          "lowerMm": 48.046875,
+          "upperMm": 48.0546875
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0,
+          "penetrating": true
+        }
+      ],
+      "barrel": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      }
+    },
+    {
+      "travel": 0.07,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      "grooves": [
+        {
+          "lowerMm": 51.4765625,
+          "upperMm": 51.48437500000001
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0,
+          "penetrating": true
+        }
+      ],
+      "barrel": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      }
+    },
+    {
+      "travel": 0.075,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      "grooves": [
+        {
+          "lowerMm": 54.91406250000001,
+          "upperMm": 54.92187500000001
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0,
+          "penetrating": true
+        }
+      ],
+      "barrel": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      }
+    },
+    {
+      "travel": 0.08,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      "grooves": [
+        {
+          "lowerMm": 58.35156249999999,
+          "upperMm": 58.359375
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0,
+          "penetrating": true
+        }
+      ],
+      "barrel": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      }
+    },
+    {
+      "travel": 0.085,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      "grooves": [
+        {
+          "lowerMm": 61.78124999999999,
+          "upperMm": 61.7890625
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0,
+          "penetrating": true
+        }
+      ],
+      "barrel": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      }
+    },
+    {
+      "travel": 0.09,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      "grooves": [
+        {
+          "lowerMm": 65.21875,
+          "upperMm": 65.2265625
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0,
+          "penetrating": true
+        }
+      ],
+      "barrel": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      }
+    },
+    {
+      "travel": 0.095,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      "grooves": [
+        {
+          "lowerMm": 68.65625,
+          "upperMm": 68.66406250000001
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0,
+          "penetrating": true
+        }
+      ],
+      "barrel": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      }
+    },
+    {
+      "travel": 0.1,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      "grooves": [
+        {
+          "lowerMm": 72.10156250000001,
+          "upperMm": 72.109375
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0,
+          "penetrating": true
+        }
+      ],
+      "barrel": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      }
+    },
+    {
+      "travel": 0.105,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      "grooves": [
+        {
+          "lowerMm": 75.5390625,
+          "upperMm": 75.54687500000001
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0,
+          "penetrating": true
+        }
+      ],
+      "barrel": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      }
+    },
+    {
+      "travel": 0.11,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      "grooves": [
+        {
+          "lowerMm": 78.97656250000001,
+          "upperMm": 78.98437500000003
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0,
+          "penetrating": true
+        }
+      ],
+      "barrel": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      }
+    },
+    {
+      "travel": 0.115,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      "grooves": [
+        {
+          "lowerMm": 82.4140625,
+          "upperMm": 82.42187499999999
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0,
+          "penetrating": true
+        }
+      ],
+      "barrel": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      }
+    },
+    {
+      "travel": 0.12,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      "grooves": [
+        {
+          "lowerMm": 85.85937499999999,
+          "upperMm": 85.8671875
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0,
+          "penetrating": true
+        }
+      ],
+      "barrel": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      }
+    },
+    {
+      "travel": 0.125,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      "grooves": [
+        {
+          "lowerMm": 89.296875,
+          "upperMm": 89.3046875
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0,
+          "penetrating": true
+        }
+      ],
+      "barrel": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      }
+    },
+    {
+      "travel": 0.13,
+      "roof": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      "grooves": [
+        {
+          "lowerMm": 92.73437500000001,
+          "upperMm": 92.7421875
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0,
+          "penetrating": true
+        }
+      ],
+      "barrel": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      }
+    }
+  ],
+  "profile": {
+    "occupied": 56721,
+    "lost": 0,
+    "added": 0,
+    "maxIn": 0,
+    "maxOut": 0
+  },
+  "slide": [
+    0,
+    0.05,
+    0.05
+  ],
+  "muzzle": [
+    0,
+    0.05,
+    0.32
+  ],
+  "heat": [
+    0,
+    0.05525000031664968,
+    0.14577500022677706
+  ],
+  "triangles": 48
+}

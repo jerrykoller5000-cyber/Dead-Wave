@@ -22,14 +22,15 @@ const browser = await launch({ headless: true, args: ['--window-size=1280,720'] 
 const res = [];
 try {
   const page = await browser.newPage({ width: 1280, height: 720 });
-  await page.goto(`${server.origin}/index.html?debug=1&raf=timer`, { timeout: 400000 });
+  const PAGE = process.env.PAGE || 'index.html';
+  await page.goto(`${server.origin}/${PAGE}?debug=1&raf=timer`, { timeout: 400000 });
   if (!await page.waitFor('!!window.TT && window.DWLoad?.snapshot().state === "ready"', { timeout: 400000 })) throw Error('load failed');
   await page.evaluate('DWOpening.dismissForTesting()');
   if (!await page.waitFor('!window.DWOpening || window.DWOpening.active === false', { timeout: 500000 })) throw Error('opening stayed up');
   await page.evaluate(`(()=>{document.getElementById('playerName').value='CD-8';document.getElementById('modeTraining').click();})()`);
   if (!await page.waitFor('TT.trainingDbg.state().active && TT.getPhase() === "prep"', { timeout: 400000 })) throw Error('Training failed');
   await page.waitFor('!document.getElementById("trainingBlackout")?.classList.contains("on")', { timeout: 60000 });
-  await page.evaluate(`(()=>{ const T=TT; T.grantAllWeapons(); T.setUnarmedDbg(false); T.setViewFirstDbg(false); T.setWorldTime(${LIGHT});
+  await page.evaluate(`(()=>{ const T=TT; T.grantAllWeapons(); T.setUnarmedDbg(false); T.setViewFirstDbg(false); T.setWorldTime(${LIGHT}); if (${!!process.env.TINT}) { const ud=(T.getMarine?T.getMarine():window.worldMarine).userData; const red=new T.THREE.MeshBasicMaterial({color:0xff2020}); const blu=new T.THREE.MeshBasicMaterial({color:0x2060ff}); const wl=ud.elbowLG.userData.wrist, wr=ud.elbowRG.userData.wrist; if(wl) wl.traverse(o=>{ if(o.isMesh) o.material=red; }); if(wr) wr.traverse(o=>{ if(o.isMesh) o.material=blu; }); }
     const y=T.trainingDbg.tg().floorY; window.__home={x:0,y,z:-645}; window.__zoom=false;
     window.__sim=async(s)=>{const s0=T.getSimTime(),w0=Date.now(); while(T.getSimTime()-s0<s&&Date.now()-w0<90000) await new Promise(r=>setTimeout(r,40));};
     setInterval(()=>{ const h=window.__home; T.player.position.set(h.x,h.y,h.z); T.setVelDbg(0,0); T.aimTarget.set(h.x, h.y+1.25, h.z+10); T.setZoomHeldDbg(window.__zoom); }, 5); })()`);

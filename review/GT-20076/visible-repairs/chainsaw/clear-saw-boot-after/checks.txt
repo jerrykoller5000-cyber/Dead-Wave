@@ -1,0 +1,66 @@
+node review/GT-20076/saw-boot-isolated.mjs
+GRANT chatgpt2 GT-20076: starting one game-test command
+{
+  cells: [ true ],
+  contacts: [
+    { lowerMm: 0, upperMm: 0.0078125 },
+    { lowerMm: 0, upperMm: 0.0078125 }
+  ],
+  preserved: 11465,
+  visible: 11479,
+  missing: 0,
+  maxIn: 0.00030829369970281073,
+  maxOut: 1.1915829822850554e-8,
+  maxNormal: 0.07785323507047903,
+  maxUV: 9.548748572951737e-7,
+  worst: [
+    0.041507,
+    -0.220445,
+    0.18131127338527803,
+    0.18100297968557522,
+    0.18100297968557522
+  ]
+}
+
+node review/GT-20076/pistol-frame-perf.mjs --saw-boot
+GRANT chatgpt2 GT-20076: starting one game-test command
+before {
+  hash: 'c8a2abc2',
+  gun: 'chainsaw',
+  eye: true,
+  backend: 'WebGPUBackend',
+  frames: { count: 150, p50: 16.69999999999709, p95: 16.900000000001455 },
+  gpu: { count: 0, p50: null, p95: null },
+  seamBuildMs: [],
+  chain: {
+    count: 42,
+    cap: [ -0.12, 0.1, -0.15 ],
+    starter: [ 0.19, 0.12, -0.22 ],
+    exit: [ 0.16, 0.12, -0.22 ],
+    chainCount: 42,
+    links: [ 0, 0.04, 0.48 ]
+  }
+} 
+after {
+  hash: '71027a19',
+  gun: 'chainsaw',
+  eye: true,
+  backend: 'WebGPUBackend',
+  frames: { count: 150, p50: 16.69999999999709, p95: 16.80000000000291 },
+  gpu: { count: 0, p50: null, p95: null },
+  seamBuildMs: [ 0.5, 0.10000000149011612 ],
+  chain: {
+    count: 42,
+    cap: [ -0.12, 0.1, -0.15 ],
+    starter: [ 0.19, 0.12, -0.22 ],
+    exit: [ 0.16, 0.12, -0.22 ],
+    chainCount: 42,
+    links: [ 0, 0.04, 0.48 ]
+  }
+} 
+
+node tools/realtest.mjs t38 t333 t277 --all
+ok    t38      26 pass   0 fail  57.7s  (real renderer)
+ok    t333     16 pass   0 fail  23.2s  (real renderer)
+ok    t277     46 pass   0 fail  38.8s  (real renderer)
+3 checks: 88 pass, 0 fail (real renderer)

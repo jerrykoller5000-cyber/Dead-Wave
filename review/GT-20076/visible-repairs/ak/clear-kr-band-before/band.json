@@ -1,0 +1,95 @@
+{
+  "hash": "9edebc68",
+  "closed": [
+    true
+  ],
+  "gaps": [
+    {
+      "lowerMm": 0,
+      "upperMm": 0,
+      "penetrating": true
+    },
+    {
+      "lowerMm": 0,
+      "upperMm": 0,
+      "penetrating": true
+    },
+    {
+      "lowerMm": 0,
+      "upperMm": 0,
+      "penetrating": true
+    },
+    {
+      "lowerMm": 0,
+      "upperMm": 0,
+      "penetrating": true
+    },
+    {
+      "lowerMm": 0,
+      "upperMm": 0,
+      "penetrating": true
+    }
+  ],
+  "profiles": {
+    "x1": {
+      "occupied": 9073,
+      "lost": 0,
+      "added": 0,
+      "maxIn": 0,
+      "maxOut": 0
+    },
+    "x-1": {
+      "occupied": 9073,
+      "lost": 0,
+      "added": 0,
+      "maxIn": 0,
+      "maxOut": 0
+    },
+    "y1": {
+      "occupied": 8829,
+      "lost": 0,
+      "added": 0,
+      "maxIn": 0,
+      "maxOut": 0
+    },
+    "y-1": {
+      "occupied": 8829,
+      "lost": 0,
+      "added": 0,
+      "maxIn": 0,
+      "maxOut": 0
+    },
+    "z1": {
+      "occupied": 8463,
+      "lost": 0,
+      "added": 0,
+      "maxIn": 0,
+      "maxOut": 0
+    },
+    "z-1": {
+      "occupied": 8463,
+      "lost": 0,
+      "added": 0,
+      "maxIn": 0,
+      "maxOut": 0
+    }
+  },
+  "wood": [
+    {
+      "name": "KR-7 walnut",
+      "paint": null,
+      "map": true
+    },
+    {
+      "name": "KR-7 walnut",
+      "paint": null,
+      "map": true
+    }
+  ],
+  "vertices": 144,
+  "muzzle": [
+    0,
+    -0.005,
+    0.855
+  ]
+}

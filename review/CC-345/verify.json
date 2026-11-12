@@ -1,0 +1,35 @@
+{
+  "at": "2026-11-12T15:19:52.467Z",
+  "errors": [],
+  "before": {
+    "rigs": 11,
+    "sources": 123,
+    "skins": 10,
+    "bakes": 11,
+    "source": "fitted-pelvis"
+  },
+  "hidden": {
+    "bakes": 12,
+    "visible": false,
+    "baked": false
+  },
+  "restored": {
+    "bakes": 13,
+    "visible": true,
+    "baked": false
+  },
+  "colorBefore": {
+    "bakes": 13,
+    "red": 0.0343398068028541,
+    "source": "Mesh"
+  },
+  "colorChanged": {
+    "bakes": 14,
+    "red": 0.10433980680285411
+  },
+  "colorRestored": {
+    "bakes": 15,
+    "red": 0.0343398068028541
+  },
+  "pass": true
+}

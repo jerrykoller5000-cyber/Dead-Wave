@@ -1,0 +1,21 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import {registerHooks} from 'node:module';
+import * as G from '../../vendor/three/three.core.js';
+import {visiblePieces,visibleSurfaceGap} from '../../tools/tests/weapon-seating.js';
+assert(process.env.DW_GAME_TEST_TOKEN);
+registerHooks({resolve(s,c,next){return s==='three'?{url:new URL('../../vendor/three/three.core.js',import.meta.url).href,shortCircuit:true}:next(s,c);}});
+const {clipArtworkUnderside}=await import('../../studio/weapon-longarms.js');
+const read=f=>fs.readFileSync(new URL(f,import.meta.url),'utf8'),ref=JSON.parse(read('visible-repairs/uzi/clear-wasp-catch-before/reference.json'));
+const root=new G.Group(),loader=new G.BufferGeometryLoader();
+const [button,cover,...ribs]=ref.parts.map(({p,q,g})=>{
+ const geo=g.type==='BoxGeometry'?G.BoxGeometry.fromJSON(g):loader.parse(g);
+ const m=new G.Mesh(geo);m.position.fromArray(p);m.quaternion.fromArray(q);root.add(m);return m;
+});
+root.scale.fromArray(ref.scale);root.updateMatrixWorld(true);
+const old=button.geometry,roof=[[-.13,.092],[-.123,.100],[-.11,.104],[.192,.098]];
+const contour=roof.map(([z,y])=>[z-button.position.z,y-button.position.y]);
+button.geometry=clipArtworkUnderside(G,old.clone(),contour);
+const cells=visiblePieces(button,1.8/1.655),gap=visibleSurfaceGap(button,cover,1.8/1.655);
+console.log('closed',cells.map(p=>p.closed),'contact',gap,'ribs',ribs.map(r=>visibleSurfaceGap(button,r,1.8/1.655)),'faces',button.geometry.attributes.position.count/3);
+assert(cells.length===1&&cells[0].closed&&!gap.penetrating&&gap.upperMm<.02);

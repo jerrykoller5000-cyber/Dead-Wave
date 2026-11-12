@@ -1,0 +1,107 @@
+{
+  "at": "2026-11-12T09:00:45.924Z",
+  "rows": [
+    {
+      "open": true,
+      "openSyncMs": 104.30000000074506,
+      "mainBefore": 383,
+      "mainAfter": 383,
+      "dressAfter": 19,
+      "close": {
+        "syncMs": 0.5999999977648258,
+        "open": false,
+        "main": 383
+      }
+    },
+    {
+      "open": true,
+      "openSyncMs": 83,
+      "mainBefore": 383,
+      "mainAfter": 383,
+      "dressAfter": 19,
+      "close": {
+        "syncMs": 0.5,
+        "open": false,
+        "main": 383
+      }
+    }
+  ],
+  "spikes": [
+    {
+      "stage": "entry",
+      "ms": 6949.9
+    },
+    {
+      "stage": "entry",
+      "ms": 133.4
+    },
+    {
+      "stage": "entry",
+      "ms": 1100
+    },
+    {
+      "stage": "entry",
+      "ms": 266.6
+    },
+    {
+      "stage": "entry",
+      "ms": 316.7
+    },
+    {
+      "stage": "entry",
+      "ms": 116.6
+    }
+  ],
+  "profile": [
+    {
+      "tag": "items",
+      "ms": 0.19999999925494194
+    },
+    {
+      "tag": "menu refresh",
+      "ms": 6.600000001490116
+    },
+    {
+      "tag": "choices",
+      "ms": 94.80000000074506
+    },
+    {
+      "tag": "start dress view",
+      "ms": 0
+    },
+    {
+      "tag": "first dress frame",
+      "ms": 4.800000000745058
+    },
+    {
+      "tag": "items",
+      "ms": 0.19999999925494194
+    },
+    {
+      "tag": "menu refresh",
+      "ms": 0.5
+    },
+    {
+      "tag": "choices",
+      "ms": 77.80000000074506
+    },
+    {
+      "tag": "start dress view",
+      "ms": 0
+    },
+    {
+      "tag": "first dress frame",
+      "ms": 1.1000000014901161
+    }
+  ],
+  "errors": [],
+  "entryMs": 10433.800000000745,
+  "beforeOpen": {
+    "ready": "true",
+    "pipes": 19
+  },
+  "paint": {
+    "count": 153,
+    "ms": 297.2999999783933
+  }
+}

@@ -1,0 +1,7 @@
+ak 119->117 9edebc68 4b977ace
+ak-equipped 136->134 4a4e0dee 2566cc94
+ak-heavy 162->160 fe29e488 6ec1c74e
+ak-acog 181->179 770baadf e9f7f4fd
+ak-prism 181->179 fb2e88ac 2abc870a
+ak-rmr 176->174 99a9a6a0 13e97bc6
+unaffected 50 slings 36

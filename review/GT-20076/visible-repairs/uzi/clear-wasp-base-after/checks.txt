@@ -1,0 +1,82 @@
+node tools/tests/run-all.mjs t38 --jobs 1 --no-retry --all-fails
+ok    t38     26 pass   0 fail  122.7s
+1 checks: 26 pass, 0 fail
+
+node tools/realtest.mjs t333 t277 tcb301 --all
+ok    t333     16 pass   0 fail  20.4s  (real renderer)
+ok    t277     46 pass   0 fail  37.9s  (real renderer)
+ok    tcb301    9 pass   0 fail  40.2s  (real renderer)
+    PASS the Wasp's model takes a magazine count
+    PASS and the incoming drum its own count once out of the pouch (20 of 20)
+3 checks: 71 pass, 0 fail (real renderer)
+
+node review/GT-20076/check-wasp-trim-data.mjs
+GRANT chatgpt2 GT-20076: starting one game-test command
+PASS WebGPU mesh 332 triangles, all attributes and cached mesh identity
+PASS lightweight mesh 332 triangles, all attributes and cached mesh identity
+
+
+node review/GT-20076/frame-details.mjs --wasp-base
+GRANT chatgpt2 GT-20076: starting one game-test command
+PASS complete original fixed grip and closed factory trim [ { lowerMm: 0, upperMm: 0.0078125 } ] { worldMaterials: 3, eyeMaterials: 3, coatedMaterials: 12 }
+PASS native before/after side detail in all four lights uzi 36405d44
+
+
+node review/GT-20076/pistol-frame-perf.mjs --wasp-base
+GRANT chatgpt2 GT-20076: starting one game-test command
+before {
+  hash: '36405d44',
+  gun: 'uzi',
+  eye: true,
+  backend: 'WebGPUBackend',
+  frames: { count: 150, p50: 16.700000000000728, p95: 16.799999999999272 },
+  gpu: { count: 0, p50: null, p95: null },
+  seamBuildMs: []
+} reload 48 phases
+after {
+  hash: 'ac9903bf',
+  gun: 'uzi',
+  eye: true,
+  backend: 'WebGPUBackend',
+  frames: { count: 150, p50: 16.69999999999709, p95: 16.80000000000291 },
+  gpu: { count: 0, p50: null, p95: null },
+  seamBuildMs: [ 0.5, 0 ]
+} reload 48 phases
+PASS original and revised world/eye magazine transforms through 48 reload phases 0.38252003488954206
+
+
+node review/GT-20076/pistol-frame-perf.mjs --wasp-base --hands
+GRANT chatgpt2 GT-20076: starting one game-test command
+before [
+  'INFO uzi the hands into each other: 0.2 mm',
+  'PASS guns checked up in first person: 1 of 1',
+  'FAIL no part of either hand inside any part of a gun (deepest per gun, mm: uzi 5.3); through: uzi: 5.3 mm (r glove in ?)',
+  'PASS neither hand through the other (D-140)',
+  "PASS the gloved wrists stay inside the sleeves at every gun's hip hold"
+]
+after [
+  'INFO uzi the hands into each other: 0.2 mm',
+  'PASS guns checked up in first person: 1 of 1',
+  'FAIL no part of either hand inside any part of a gun (deepest per gun, mm: uzi 5.3); through: uzi: 5.3 mm (r glove in ?)',
+  'PASS neither hand through the other (D-140)',
+  "PASS the gloved wrists stay inside the sleeves at every gun's hip hold"
+]
+
+
+node review/GT-20076/pistol-frame-perf.mjs --wasp-base --hands --light
+GRANT chatgpt2 GT-20076: starting one game-test command
+lightweight before [
+  'INFO uzi the hands into each other: 0.2 mm',
+  'PASS guns checked up in first person: 1 of 1',
+  'FAIL no part of either hand inside any part of a gun (deepest per gun, mm: uzi 5.3); through: uzi: 5.3 mm (r glove in ?)',
+  'PASS neither hand through the other (D-140)',
+  "PASS the gloved wrists stay inside the sleeves at every gun's hip hold"
+]
+lightweight after [
+  'INFO uzi the hands into each other: 0.2 mm',
+  'PASS guns checked up in first person: 1 of 1',
+  'FAIL no part of either hand inside any part of a gun (deepest per gun, mm: uzi 5.3); through: uzi: 5.3 mm (r glove in ?)',
+  'PASS neither hand through the other (D-140)',
+  "PASS the gloved wrists stay inside the sleeves at every gun's hip hold"
+]
+

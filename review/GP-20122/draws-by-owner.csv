@@ -1,0 +1,9 @@
+Owner,Scene component,Submissions per frame,Source,Notes
+Claude Director,Training ground excluding listed components,158,world/training.js and world/training-*.js,Includes target plates and cutaway walls
+ChatGPT,Containment turrets,30,game/training-containment.js,Already instances four turrets across common gun surfaces
+ChatGPT,Armory rack,11,index.html refreshArmoryRack,Already folded by material
+ChatGPT,Range drill monitor,3,ui/range-monitor.js,Already baked into dark frame steel trim and canvas screen
+Claude 3 and Claude 1,Marine body and worn gear,52,studio/marine-*.js,40 main-camera and 12 shadow submissions
+Claude 2,Postprocessing render meshes,13,vendor/three/three.webgpu.js and effect passes,No main-camera submissions
+Unclassified,index.html motes instanced mesh,1,index.html,Instanced effect
+Total,All captured submissions,268,review/GP-20122/draws2.json,19296 submissions over 72 idle CIF frames

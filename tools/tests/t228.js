@@ -68,7 +68,7 @@
         for (let i = 0; i < 12; i++) {
           await wait(40);
           T.getMarine().updateMatrixWorld(true);
-          R = Math.max(R, D.gripPoint('R', V()).distanceTo(gun.localToWorld(V(...h.grip))));
+          R = Math.max(R, D.gripPoint('R', V()).distanceTo(gun.localToWorld(V(...(h.gripFit || h.grip)))));   // CD-9 (--review, CLAUDE DIRECTOR OK 14:20Z): one handgun, the third-person fit's grip (TP_FIT r.p)
           const fl = h.fore === 'pump' ? gun.userData.pump.position.clone().add(V(0, h.pumpDy, 0)) : V(...h.fore);
           if (!kind) fl.y -= gun.userData.cu100Drop || 0;   // the fist closes round the forend's (the pump's) lower edge
           const fw = gun.localToWorld(fl), rel = D.gripPoint('L', V()).sub(fw);

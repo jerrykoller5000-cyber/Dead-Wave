@@ -124,7 +124,10 @@ export function createMarineTurn({ THREE: T, marine }) {
   // crouched boot is pitched only as far as the ankle can (the heel up, the ball on the ground) and the clamp after the
   // pose changes nothing (it used to hold the ankle at -50 deg and put the toe 20 mm into the ground); sole: [heel, toe],
   // the sole's ends along the boot (ankle space z), the points it turns on there.
-  function apply(dt, { eligible, yaw, ground, footing = null, ankleH = .104, sole = null, flex = null, aimLocked = false, crouch = 0 }) {
+  // surface(x, z) (optional, CC-343): the height of what is under one point (the ground, a deck, a tread), for the point a
+  // boot turns on past its ankle's range: off an edge (a crouched rear boot's toe out over a deck's edge) it has nothing
+  // to stand on, so the boot is drawn back along its sole until that point is on what it stood on.
+  function apply(dt, { eligible, yaw, ground, footing = null, surface = null, ankleH = .104, sole = null, flex = null, aimLocked = false, crouch = 0 }) {
     crouch = Math.max(0, Math.min(1, crouch));
     const lift = .065 - .03 * crouch;
     marine.getWorldPosition(center);
@@ -267,7 +270,9 @@ export function createMarineTurn({ THREE: T, marine }) {
     sink = Math.min(.08 * sc, sink);
     if (sink > 0) { marine.position.y -= sink / (marine.parent ? marine.parent.getWorldScale(a).y : 1); marine.updateWorldMatrix(true, true); }
     let worst = 0;
-    for (let i = 0; i < 2; i++) for (let pass = 0; pass < (flex ? 3 : 1); pass++) {
+    // CC-343: five passes (three left a rear boot on its ball up to 1.7 deg past the ankle's range, which the clamp after the
+    // pose then turned back about the ankle, lifting its toe 5 mm)
+    for (let i = 0; i < 2; i++) for (let pass = 0; pass < (flex ? 5 : 1); pass++) {
       const leg = legs[i], kn = knees[i], ankle = ankles[i], f0 = feet[i];
       const f = pass ? held : f0;
       // Two-bone 3D IK preserves the support ankle in world space, including its sole orientation.
@@ -299,6 +304,21 @@ export function createMarineTurn({ THREE: T, marine }) {
       if (!pass) { held.p.copy(f0.p); held.q.copy(f0.q); }
       const pz = (over > 0 ? (sole ? sole[1] : PIVOT.ball) : (sole ? sole[0] : PIVOT.heel)) * sc;   // the toe's tip (or the heel's) stays on the ground, ankle space (z)
       pivotPt.set(0, -ankleHeight, pz).applyQuaternion(held.q).add(held.p);
+      if (!pass && surface) {
+        // CC-343: that point (and the boot's last 12 mm past it) out over a drop: draw the boot back along its sole, towards
+        // its ankle, until the point is on what the sole stood on (at most the sole's length from it to the ankle).
+        fwd.set(0, 0, Math.sign(pz)).applyQuaternion(held.q); fwd.y = 0;
+        const fl = Math.hypot(fwd.x, fwd.z);
+        if (fl > 1e-4) {
+          fwd.multiplyScalar(1 / fl);
+          const tip = .012 * sc, on = (t) => surface(pivotPt.x + fwd.x * (tip - t), pivotPt.z + fwd.z * (tip - t)) > pivotPt.y - .01;
+          if (!on(0)) {
+            let t = .005;
+            while (t < Math.abs(pz) && !on(t)) t += .005;
+            if (t < Math.abs(pz)) { const back = t + .006 * sc; held.p.x -= fwd.x * back; held.p.z -= fwd.z * back; pivotPt.x -= fwd.x * back; pivotPt.z -= fwd.z * back; }
+          }
+        }
+      }
       held.q.multiply(bootQ.setFromAxisAngle(xAxis, over * 1.0005));
       held.p.copy(pivotPt).sub(a.set(0, -ankleHeight, pz).applyQuaternion(held.q));
     }

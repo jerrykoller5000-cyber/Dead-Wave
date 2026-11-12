@@ -1,0 +1,38 @@
+{
+  "at": "2026-11-12T10:09:49.386Z",
+  "sourceHash": "68a4134dc2193efab86e981591c5fe0188792e2e0e863693047934da13a9b990",
+  "rows": [],
+  "spikes": [
+    {
+      "stage": "entry",
+      "ms": 6716.7
+    },
+    {
+      "stage": "entry",
+      "ms": 116.6
+    },
+    {
+      "stage": "entry",
+      "ms": 1083.3
+    },
+    {
+      "stage": "entry",
+      "ms": 116.6
+    },
+    {
+      "stage": "entry",
+      "ms": 283.3
+    }
+  ],
+  "profile": [],
+  "errors": [],
+  "entryMs": 9745,
+  "beforeOpen": {
+    "ready": "true",
+    "pipes": 19
+  },
+  "paint": {
+    "count": 104,
+    "ms": 201.6000000052154
+  }
+}

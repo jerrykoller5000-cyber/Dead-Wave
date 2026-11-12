@@ -1,0 +1,130 @@
+node tools/tests/run-all.mjs t38 --jobs 1 --no-retry --all-fails
+ok    t38     26 pass   0 fail  133.9s
+1 checks: 26 pass, 0 fail
+
+node tools/realtest.mjs t333 t277 tcb301 --all
+ok    t333     16 pass   0 fail  20.9s  (real renderer)
+ok    t277     46 pass   0 fail  41.6s  (real renderer)
+ok    tcb301    9 pass   0 fail  43.8s  (real renderer)
+3 checks: 71 pass, 0 fail (real renderer)
+
+node review/GT-20076/pump-stock-isolated.mjs --plate --localized --shared
+GRANT chatgpt2 GT-20076: starting one game-test command
+PASS shared helper preserved all stock vertices, normals and UVs 2046
+closed [ true ] receiver { lowerMm: 0, upperMm: 0.0078125 } plate { lowerMm: 0, upperMm: 0.0078125 } triangles 556 682
+x 1 {
+  lost: 0,
+  added: 0,
+  maxIn: 1.157635526674583e-8,
+  maxOut: 1.7721662366743107e-9,
+  worst: [
+    -0.03129,
+    0.04370999999999999,
+    0.012586025490498847,
+    0.01258601391414358
+  ]
+}
+x -1 {
+  lost: 0,
+  added: 0,
+  maxIn: 1.1865677837855082e-8,
+  maxOut: 1.1060499217896425e-9,
+  worst: [ -0.03021, 0.04427, 0.012747863724571781, 0.012747851858893943 ]
+}
+z 1 {
+  lost: 0,
+  added: 0,
+  maxIn: 4.110826525849376e-7,
+  maxOut: 1.2585393455166738e-7,
+  worst: [
+    -0.02674,
+    -0.016770000000000004,
+    -0.24401041433820936,
+    -0.24401082542086194
+  ]
+}
+z -1 {
+  lost: 0,
+  added: 0,
+  maxIn: 6.159985379561306e-7,
+  maxOut: 2.0716336167347915e-7,
+  worst: [
+    0.02701,
+    -0.017890000000000003,
+    0.25878896151802866,
+    0.2587883455194907
+  ]
+}
+y 1 {
+  lost: 0,
+  added: 0,
+  maxIn: 3.721008660917402e-9,
+  maxOut: 1.1193252713592727e-9,
+  worst: [ -0.03621, -0.018313, 0.03783098768633341, 0.03783098396532475 ]
+}
+y -1 {
+  lost: 0,
+  added: 0,
+  maxIn: 4.8592321139073746e-11,
+  maxOut: 0,
+  worst: [
+    -0.03717,
+    0.021467000000000003,
+    -0.030681402808804537,
+    -0.03068140285739686
+  ]
+}
+
+
+node review/GT-20076/frame-details.mjs --wasp-catch
+GRANT chatgpt2 GT-20076: starting one game-test command
+PASS fixed upper catch, three external ridges and factory finish {
+  visible: 4061,
+  retained: 4061,
+  maxHeight: 4.603961019063532e-9,
+  maxNormal: 8.021391622037299e-7,
+  maxUV: 6.995197293635513e-7
+} { worldMaterials: 3, eyeMaterials: 3, coatedMaterials: 12 }
+PASS native before/after side detail in all four lights uzi ac9903bf
+
+
+node review/GT-20076/pistol-frame-perf.mjs --wasp-catch
+GRANT chatgpt2 GT-20076: starting one game-test command
+before {
+  hash: 'ac9903bf',
+  gun: 'uzi',
+  eye: true,
+  backend: 'WebGPUBackend',
+  frames: { count: 150, p50: 16.69999999999709, p95: 16.80000000000291 },
+  gpu: { count: 0, p50: null, p95: null },
+  seamBuildMs: []
+} reload 48 phases
+after {
+  hash: '88c66f59',
+  gun: 'uzi',
+  eye: true,
+  backend: 'WebGPUBackend',
+  frames: { count: 150, p50: 16.69999999999709, p95: 16.80000000000291 },
+  gpu: { count: 0, p50: null, p95: null },
+  seamBuildMs: [ 2.600000001490116, 0 ]
+} reload 48 phases
+PASS original and revised world/eye magazine transforms through 48 reload phases 0.3825200345759136
+
+
+node review/GT-20076/pistol-frame-perf.mjs --wasp-catch --hands
+GRANT chatgpt2 GT-20076: starting one game-test command
+real before [
+  'INFO uzi the hands into each other: 0.2 mm',
+  'PASS guns checked up in first person: 1 of 1',
+  'FAIL no part of either hand inside any part of a gun (deepest per gun, mm: uzi 5.3); through: uzi: 5.3 mm (r glove in ?)',
+  'PASS neither hand through the other (D-140)',
+  "PASS the gloved wrists stay inside the sleeves at every gun's hip hold"
+]
+real after [
+  'INFO uzi the hands into each other: 0.2 mm',
+  'PASS guns checked up in first person: 1 of 1',
+  'FAIL no part of either hand inside any part of a gun (deepest per gun, mm: uzi 5.3); through: uzi: 5.3 mm (r glove in ?)',
+  'PASS neither hand through the other (D-140)',
+  "PASS the gloved wrists stay inside the sleeves at every gun's hip hold"
+]
+

@@ -1,0 +1,68 @@
+{
+  "r": {
+    "hash": "ac9903bf",
+    "closed": [
+      true
+    ],
+    "gap": {
+      "lowerMm": 0,
+      "upperMm": 0.0078125
+    },
+    "ribGaps": [
+      {
+        "lowerMm": 0.14843750000000003,
+        "upperMm": 0.15625
+      },
+      {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      {
+        "lowerMm": 0.14843750000000003,
+        "upperMm": 0.15625
+      }
+    ],
+    "profiles": {
+      "x1": {
+        "occupied": 5805,
+        "lost": 0,
+        "added": 0,
+        "maxIn": 6.9914124945121e-9,
+        "maxOut": 1.0658981320840755e-8
+      },
+      "x-1": {
+        "occupied": 5805,
+        "lost": 0,
+        "added": 0,
+        "maxIn": 2.4076712189713065e-9,
+        "maxOut": 5.530391957754566e-9
+      },
+      "y1": {
+        "occupied": 7931,
+        "lost": 0,
+        "added": 0,
+        "maxIn": 2.3872725185558608e-9,
+        "maxOut": 2.311791869047397e-10
+      },
+      "z-1": {
+        "occupied": 6880,
+        "lost": 0,
+        "added": 0,
+        "maxIn": 6.56363602358212e-9,
+        "maxOut": 6.864499052516848e-9
+      }
+    },
+    "finish": {
+      "visible": 4061,
+      "retained": 4061,
+      "maxHeight": 4.603961019063532e-9,
+      "maxNormal": 8.021391622037299e-7,
+      "maxUV": 6.995197293635513e-7
+    }
+  },
+  "paint": {
+    "worldMaterials": 3,
+    "eyeMaterials": 3,
+    "coatedMaterials": 12
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "hash": "e70f29b6",
+  "profiles": {
+    "x-1": {
+      "occupied": 6793,
+      "lost": 0,
+      "added": 0,
+      "maxDepth": 0
+    },
+    "x1": {
+      "occupied": 6793,
+      "lost": 0,
+      "added": 0,
+      "maxDepth": 1.7759806958395075e-9
+    },
+    "y-1": {
+      "occupied": 5150,
+      "lost": 0,
+      "added": 0,
+      "maxDepth": 1.6678116665502785e-9
+    },
+    "y1": {
+      "occupied": 5150,
+      "lost": 0,
+      "added": 0,
+      "maxDepth": 0
+    },
+    "z-1": {
+      "occupied": 4962,
+      "lost": 0,
+      "added": 0,
+      "maxDepth": 2.7755575615628914e-17
+    },
+    "z1": {
+      "occupied": 4962,
+      "lost": 0,
+      "added": 0,
+      "maxDepth": 1.3877787807814457e-17
+    }
+  },
+  "closed": [
+    true
+  ],
+  "gap": {
+    "lowerMm": 0,
+    "upperMm": 0.0078125
+  },
+  "vertices": 696,
+  "paint": "receiver",
+  "drumRest": [
+    0.13999999999999999,
+    -0.055999999999999994,
+    -0.013999999999999999
+  ],
+  "hold": [
+    0,
+    0.049,
+    -0.308
+  ]
+}

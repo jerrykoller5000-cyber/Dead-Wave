@@ -1,0 +1,128 @@
+{
+  "basis": "Earlier photographed pixel counts; both part identities, host, witness point and penetration depth match the new strict audit. No new fleet capture.",
+  "reference": "catalog-fix-launcher-rear",
+  "current": "catalog-fix-wasp-collar-final",
+  "top": [
+    {
+      "model": "m4",
+      "currentPair": 305,
+      "recordedPair": 373,
+      "view": "held-right",
+      "recordedPixels": 48,
+      "cameraSource": "visibility-fix-fleet-poses",
+      "a": "root/group[307]/BufferGeometry[13]",
+      "b": "root/group[307]/BufferGeometry[0]"
+    },
+    {
+      "model": "launcher",
+      "currentPair": 209,
+      "recordedPair": 224,
+      "view": "rack",
+      "recordedPixels": 48,
+      "cameraSource": "visibility-fix-launcher-rear",
+      "a": "root/heatParts-barrel[201]/BufferGeometry[0]~1",
+      "b": "root/BufferGeometry[196]"
+    },
+    {
+      "model": "pistol",
+      "currentPair": 43,
+      "recordedPair": 49,
+      "view": "held-left-open",
+      "recordedPixels": 47,
+      "cameraSource": "visibility-fix-pistol-cover",
+      "a": "root/group[30]/heatParts-barrel[3]/BufferGeometry[1]",
+      "b": "root/group[0]/BufferGeometry[0]"
+    },
+    {
+      "model": "aa12",
+      "currentPair": 45,
+      "recordedPair": 49,
+      "view": "hip",
+      "recordedPixels": 47,
+      "cameraSource": "visibility-fix-fleet-poses",
+      "a": "root/group[46]/magazineBody[0]/BufferGeometry[49]",
+      "b": "root/group[46]/magazineBody[0]/BufferGeometry[0]"
+    },
+    {
+      "model": "chainsaw",
+      "currentPair": 33,
+      "recordedPair": 60,
+      "view": "aimed",
+      "recordedPixels": 47,
+      "cameraSource": "visibility-fix-sniper-seated",
+      "a": "root/BufferGeometry[71]",
+      "b": "root/BufferGeometry[1]"
+    },
+    {
+      "model": "uzi",
+      "currentPair": 41,
+      "recordedPair": 44,
+      "view": "held-right",
+      "recordedPixels": 46,
+      "cameraSource": "visibility-fix-wasp-covers",
+      "a": "root/BufferGeometry[45]",
+      "b": "root/BufferGeometry[35]"
+    },
+    {
+      "model": "m4",
+      "currentPair": 16,
+      "recordedPair": 25,
+      "view": "hip",
+      "recordedPixels": 46,
+      "cameraSource": "visibility-fix-fleet-poses",
+      "a": "root/BufferGeometry[56]",
+      "b": "root/BufferGeometry[43]"
+    },
+    {
+      "model": "shotgun",
+      "currentPair": 8,
+      "recordedPair": 10,
+      "view": "hip",
+      "recordedPixels": 46,
+      "cameraSource": "visibility-fix-fleet-poses-final",
+      "a": "root/shotgun stock body[21]",
+      "b": "root/shotgun receiver[0]"
+    },
+    {
+      "model": "uzi",
+      "currentPair": 0,
+      "recordedPair": 2,
+      "view": "hip",
+      "recordedPixels": 45,
+      "cameraSource": "visibility-fix-wasp-covers",
+      "a": "root/BufferGeometry[16]",
+      "b": "root/BufferGeometry[15]"
+    },
+    {
+      "model": "ak",
+      "currentPair": 36,
+      "recordedPair": 46,
+      "view": "hip",
+      "recordedPixels": 45,
+      "cameraSource": "visibility-fix-kr-ribs",
+      "a": "root/BufferGeometry[63]",
+      "b": "root/BufferGeometry[53]"
+    },
+    {
+      "model": "minigun",
+      "currentPair": 167,
+      "recordedPair": 195,
+      "view": "held-right-open",
+      "recordedPixels": 45,
+      "cameraSource": "visibility-fix-fleet-poses-final",
+      "a": "root/group[90]/CylinderGeometry[0]",
+      "b": "root/BufferGeometry[10]"
+    },
+    {
+      "model": "aa12",
+      "currentPair": 69,
+      "recordedPair": 74,
+      "view": "hip",
+      "recordedPixels": 44,
+      "cameraSource": "visibility-fix-fleet-poses",
+      "a": "root/BufferGeometry[48]",
+      "b": "root/BufferGeometry[47]"
+    }
+  ],
+  "remainingWitnesses": 1104
+}

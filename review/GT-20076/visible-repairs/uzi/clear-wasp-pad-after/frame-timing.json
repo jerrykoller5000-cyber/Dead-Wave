@@ -1,0 +1,41 @@
+{
+  "indexSha": "e09e1991c5ff140ef8ab9a570c9571d91b8727635fdb46da207864e5da2de3c0",
+  "reverse": false,
+  "before": {
+    "hash": "acb7c158",
+    "gun": "uzi",
+    "eye": true,
+    "backend": "WebGPUBackend",
+    "frames": {
+      "count": 150,
+      "p50": 16.69999999999709,
+      "p95": 16.799999999995634
+    },
+    "gpu": {
+      "count": 0,
+      "p50": null,
+      "p95": null
+    },
+    "seamBuildMs": []
+  },
+  "after": {
+    "hash": "1056c784",
+    "gun": "uzi",
+    "eye": true,
+    "backend": "WebGPUBackend",
+    "frames": {
+      "count": 150,
+      "p50": 16.69999999999709,
+      "p95": 16.89999999999418
+    },
+    "gpu": {
+      "count": 0,
+      "p50": null,
+      "p95": null
+    },
+    "seamBuildMs": [
+      3.300000000745058,
+      0.09999999776482582
+    ]
+  }
+}

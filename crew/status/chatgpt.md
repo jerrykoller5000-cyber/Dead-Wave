@@ -2,19 +2,15 @@
 
 state: active
 model: GPT-6
-task: GP-20119 Resolve tag292 firing-line base kick rail and capture proof
-touching: world/training-firing-line.js (kick rail), tools/tests/tag292.js (rail assertion), review/GP-20119/ (new), handoffs/2026-11-12-chatgpt-GP-20119.md (new)
-since: 2026-11-12T07:23Z
+task: GP-20122 Director resumed GC hitch with temporary loans for vendor, index tick/pose, world cutaway, core body limits
+touching: vendor/three/three.webgpu.js (updateByType, get, equals), index.html (tick, updateMarinePose), world/training-cutaway.js, core/body-limits.js, review/GP-20122, handoffs/2026-11-12-chatgpt-GP-20122.md
+since: 2026-11-12T15:46Z
 next: —
 blocked-on: —
-last-report: handoffs/2026-11-12-chatgpt-GP-20118.md
+last-report: handoffs/2026-11-12-chatgpt-GP-20122.md
 
 ## Notes
 
-GP-20111 BLOCKED at 02:15Z: hidden Armory DOM/image/layout warm and one mod fit/unfit per gun landed; first pistol open fell from ~183 ms to 17–33 ms, targeted t38/t181/t215 54/0 and four-row visual sheet unchanged. Strict two-run 1P/3P RAF target still fails (worst 366.8/266.9 ms); matched Training entry variance could not prove +0.5 s. Full evidence and experiment outcomes: handoffs/2026-11-12-chatgpt-GP-20111.md. Requested Director threshold decision and named rack prewarm/refresh loan. Next GP-20112 waits on GP-20111. Director PAUSE PC at 02:20Z while Jerry plays: no PC game tests or game-file edits until RESUME. Replied DONE. Keep standby polling.
+GP-20122: Camera broadphase saved 141 MB sampled allocations/minute; direct solids pull saved another ~14 MB/min (10,000 ray equivalence PASS). Loaned CB-315 vendor and CC-345 marine-skin fixes completed in separate handoffs; Director informed. Unprofiled direct-solids CIF still had 416.7 ms GC/render frame, 160.5 MB freed, zero page errors (review/GP-20122/plaindirectsolids60.json). Remaining allocation leaders: vendor 446, index 114, world cutaway 24, core body-limits 12 MB/min; requested Director route owners. Handoff handoffs/2026-11-12-chatgpt-GP-20122.md. Corrected draw count 268/frame; owner table review/GP-20122/draws-by-owner.csv. Frozen CIF occlusion test 0/921600 pixels from 30 containment meshes, no dynamic culling proof. No git.
 
-GP-20110 parts 1–2 ACCEPTED by Director: entry console 22→15 after crow/spitter normals, bird Basic roughness, understory ember, Training impact/char visibility+normals. First-hit and entry same-camera visuals match; first hit made 0 new pipelines; targeted tests 33/0 and 6/0. Reports handoffs/2026-11-11-chatgpt-GP-20110.md and handoffs/2026-11-12-chatgpt-GP-20110.md; proof review/GP-20110/final-console.json. Part 3 waits after GP-20111.
-
-GP-20109 ACCEPTED by Director at 00:55Z from AG-311 matched 5080 closeups. Report handoffs/2026-11-11-chatgpt-GP-20109.md.
-
-CB-292 Training walking ACCEPTED by Director: 54 approaches, 216 walk/run/crouch/turn cases, 0 capsule/mesh hits. Report handoffs/2026-11-11-chatgpt-CB-292.md. Keep same loadout in before/after pictures.
+GP-20121 DONE at 10:17Z: CIF preview shared main WebGPU device; first open 23–24 ms synchronous, repeat 6–8 ms, entry median 0.522 s faster. Handoff handoffs/2026-11-12-chatgpt-GP-20121.md. GP-20111 also remains blocked separately; see its 2026-11-12 handoff. Earlier accepted work is in prior handoffs.

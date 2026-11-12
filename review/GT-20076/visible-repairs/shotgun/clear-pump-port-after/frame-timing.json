@@ -1,0 +1,41 @@
+{
+  "indexSha": "08c26558fe528dca40b77a057ce0d577bc4087ed683d861f98c00d137d9b9875",
+  "reverse": false,
+  "before": {
+    "hash": "2e5a935b",
+    "gun": "shotgun",
+    "eye": true,
+    "backend": "WebGPUBackend",
+    "frames": {
+      "count": 150,
+      "p50": 16.69999999999709,
+      "p95": 16.799999999999272
+    },
+    "gpu": {
+      "count": 0,
+      "p50": null,
+      "p95": null
+    },
+    "seamBuildMs": []
+  },
+  "after": {
+    "hash": "c5a6ac82",
+    "gun": "shotgun",
+    "eye": true,
+    "backend": "WebGPUBackend",
+    "frames": {
+      "count": 150,
+      "p50": 16.69999999999709,
+      "p95": 16.80000000000291
+    },
+    "gpu": {
+      "count": 0,
+      "p50": null,
+      "p95": null
+    },
+    "seamBuildMs": [
+      0.20000000298023224,
+      0.4000000022351742
+    ]
+  }
+}

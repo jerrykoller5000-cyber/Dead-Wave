@@ -4,16 +4,16 @@ import {artworkFingerprint,visiblePieces,visibleSurfaceGap} from '../../tools/te
 import {exteriorSamples} from './stock-mount-proof.mjs';
 
 
-export function firstPersonPortCycle(T){
+export function firstPersonPortCycle(T,id='uzi',back=.0516){
   const frames=[],parts=T.viewmodelDbg().gun.recoilBolt?.children;
-  if(T.getCurrentWeapon()!=='uzi'||parts?.length!==2)throw Error('Missing equipped Wasp artwork');
-  T.setAmmoDbg('uzi',8);
+  if(T.getCurrentWeapon()!==id||parts?.length!==2)throw Error('Missing equipped port artwork '+id);
+  T.setAmmoDbg(id,8);
   function read(){
     return parts.map(m=>{
       const p=m.geometry.attributes.position;
       let minX=Infinity;
       for(let i=0;i<p.count;i++)minX=Math.min(minX,m.position.x+p.getX(i)*m.scale.x);
-      if(Math.abs(minX-.0516)>1e-6)throw Error('View copy has a different back surface '+minX);
+      if(Math.abs(minX-back)>1e-6)throw Error('View copy has a different back surface '+minX);
       return {visible:m.visible,scaleZ:m.scale.z,z:m.position.z,minX};
     });
   }
@@ -22,14 +22,14 @@ export function firstPersonPortCycle(T){
     T.setMouseFireDbg(true);
     for(let i=0;i<100;i++){
       T.stepFrame(1/120);frames.push(read());
-      if(shotFrame===null&&T.getAmmo().uzi<8){shotFrame=i;T.setMouseFireDbg(false);}
+      if(shotFrame===null&&T.getAmmo()[id]<8){shotFrame=i;T.setMouseFireDbg(false);}
       if(shotFrame!==null&&i>shotFrame+40)break;
     }
   }finally{T.setMouseFireDbg(false);}
   const end=frames.at(-1);
-  if(shotFrame===null||T.getAmmo().uzi!==7||!frames.some(r=>r.some(p=>p.scaleZ<.55))||
+  if(shotFrame===null||T.getAmmo()[id]!==7||!frames.some(r=>r.some(p=>p.scaleZ<.55))||
     end.some((p,i)=>!p.visible||Math.abs(p.scaleZ-rest[i].scaleZ)>1e-6||Math.abs(p.z-rest[i].z)>1e-6))
-    throw Error('Incomplete fired Wasp viewmodel cycle '+JSON.stringify({shotFrame,ammo:T.getAmmo().uzi,rest,end,min:Math.min(...frames.flatMap(r=>r.map(p=>p.scaleZ)))}));
+    throw Error('Incomplete fired '+id+' viewmodel cycle '+JSON.stringify({shotFrame,ammo:T.getAmmo()[id],rest,end,min:Math.min(...frames.flatMap(r=>r.map(p=>p.scaleZ)))}));
   return {shotFrame,rest,end,frames};
 }
 

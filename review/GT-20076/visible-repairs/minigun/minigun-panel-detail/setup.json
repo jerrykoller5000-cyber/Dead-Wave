@@ -1,0 +1,27 @@
+{
+  "id": "minigun",
+  "eye": [
+    0.251,
+    0.028,
+    0.185
+  ],
+  "target": [
+    0.104,
+    -0.052,
+    0.059
+  ],
+  "fov": 28,
+  "moduleName": "minigun-side-panel-proof",
+  "proofName": "checkMinigunPanel",
+  "hash": "e70f29b6",
+  "eyeWorld": [
+    0.22088,
+    -197.97536,
+    -638.5072000000001
+  ],
+  "targetWorld": [
+    0.09151999999999999,
+    -198.04576,
+    -638.6180800000001
+  ]
+}

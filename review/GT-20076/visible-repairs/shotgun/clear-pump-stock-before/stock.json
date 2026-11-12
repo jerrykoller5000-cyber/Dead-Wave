@@ -1,0 +1,60 @@
+{
+  "hash": "c5a6ac82",
+  "closed": [
+    true
+  ],
+  "gap": {
+    "lowerMm": 0,
+    "upperMm": 0,
+    "penetrating": true
+  },
+  "plateGap": {
+    "lowerMm": 0,
+    "upperMm": 0,
+    "penetrating": true
+  },
+  "surfaces": {
+    "x1": {
+      "occupied": 16934,
+      "lost": 0,
+      "added": 0,
+      "maxIn": 0,
+      "maxOut": 0
+    },
+    "x-1": {
+      "occupied": 16934,
+      "lost": 0,
+      "added": 0,
+      "maxIn": 0,
+      "maxOut": 0
+    },
+    "y1": {
+      "occupied": 16377,
+      "lost": 0,
+      "added": 0,
+      "maxIn": 0,
+      "maxOut": 0
+    },
+    "y-1": {
+      "occupied": 16377,
+      "lost": 0,
+      "added": 0,
+      "maxIn": 0,
+      "maxOut": 0
+    },
+    "z1": {
+      "occupied": 16625,
+      "lost": 0,
+      "added": 0,
+      "maxIn": 0,
+      "maxOut": 0
+    },
+    "z-1": {
+      "occupied": 16625,
+      "lost": 0,
+      "added": 0,
+      "maxIn": 0,
+      "maxOut": 0
+    }
+  }
+}

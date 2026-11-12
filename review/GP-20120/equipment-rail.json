@@ -1,0 +1,188 @@
+{
+  "at": "2026-11-12T08:15:58.162Z",
+  "stages": [
+    {
+      "name": "rail-context",
+      "data": {
+        "marine": [
+          0,
+          -200,
+          -640.67
+        ],
+        "bench": true,
+        "steelMeshes": 1
+      }
+    },
+    {
+      "name": "armory-open-real",
+      "data": {
+        "open": true,
+        "loadout": {
+          "primary": [
+            null,
+            null
+          ],
+          "secondary": [
+            null,
+            null
+          ],
+          "hip": "pistol:base"
+        }
+      }
+    },
+    {
+      "name": "armory-buy-real",
+      "data": {
+        "owned": true,
+        "loadout": {
+          "primary": [
+            null,
+            null
+          ],
+          "secondary": [
+            null,
+            null
+          ],
+          "hip": "pistol:base"
+        },
+        "disabled": false
+      }
+    },
+    {
+      "name": "armory-take-real",
+      "data": {
+        "tile": true,
+        "loadout": {
+          "primary": [
+            "m4",
+            null
+          ],
+          "secondary": [
+            null,
+            null
+          ],
+          "hip": "pistol:base"
+        },
+        "shelf": []
+      }
+    },
+    {
+      "name": "armory-stow-real",
+      "data": {
+        "before": {
+          "loadout": {
+            "primary": [
+              "m4",
+              null
+            ],
+            "secondary": [
+              null,
+              null
+            ],
+            "hip": "pistol:base"
+          },
+          "button": "Move to shelf",
+          "disabled": false
+        },
+        "after": {
+          "primary": [
+            null,
+            null
+          ],
+          "secondary": [
+            null,
+            null
+          ],
+          "hip": "pistol:base"
+        },
+        "shelf": [
+          "m4"
+        ]
+      }
+    },
+    {
+      "name": "armory-close-real",
+      "data": {
+        "armoryHidden": true,
+        "cif": true
+      }
+    },
+    {
+      "name": "cif-open-real",
+      "data": {
+        "open": true,
+        "action": "cif",
+        "player": [
+          6.98,
+          -200,
+          -650.2
+        ]
+      }
+    },
+    {
+      "name": "cif-camo-real",
+      "data": {
+        "open": true,
+        "button": true,
+        "selected": "",
+        "camo": "m81"
+      }
+    },
+    {
+      "name": "cif-shirt-real",
+      "data": {
+        "open": true,
+        "shirtOption": true,
+        "button": "Sleeves rolled"
+      }
+    }
+  ],
+  "errors": [],
+  "cifAfterWait": {
+    "open": true
+  },
+  "spikes": [
+    {
+      "stage": "entry",
+      "ms": 7450
+    },
+    {
+      "stage": "entry",
+      "ms": 183.3
+    },
+    {
+      "stage": "entry",
+      "ms": 1099.9
+    },
+    {
+      "stage": "entry",
+      "ms": 266.7
+    },
+    {
+      "stage": "cif-open-real",
+      "ms": 466.7
+    },
+    {
+      "stage": "cif-open-real",
+      "ms": 600
+    },
+    {
+      "stage": "cif-camo-real",
+      "ms": 149.9
+    },
+    {
+      "stage": "cif-shirt-real",
+      "ms": 383.6
+    },
+    {
+      "stage": "cif-shirt-real",
+      "ms": 300.2
+    }
+  ],
+  "warnings": [
+    "warning: The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127",
+    "warning: The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127",
+    "info: Grave Shift renderer: WebGPU.",
+    "info: Grave Shift opening perf: {\"toMenu\":18.48,\"segments\":{\"boot\":{\"at\":0,\"seconds\":0.52,\"frames\":9,\"over50\":2,\"over100\":1,\"worst\":150},\"caracal\":{\"at\":0.52,\"seconds\":11.9,\"frames\":157,\"over50\":30,\"over100\":17,\"worst\":1667},\"loading\":{\"at\":12.42,\"seconds\""
+  ]
+}

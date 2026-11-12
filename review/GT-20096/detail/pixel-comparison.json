@@ -1,0 +1,117 @@
+{
+  "noon": {
+    "changed": 8789,
+    "over8": 8729,
+    "bbox": [
+      431,
+      213,
+      545,
+      336
+    ]
+  },
+  "overcast": {
+    "changed": 8789,
+    "over8": 8289,
+    "bbox": [
+      431,
+      216,
+      545,
+      336
+    ]
+  },
+  "dusk": {
+    "changed": 8789,
+    "over8": 8394,
+    "bbox": [
+      431,
+      214,
+      545,
+      336
+    ]
+  },
+  "night": {
+    "changed": 8787,
+    "over8": 8187,
+    "bbox": [
+      432,
+      216,
+      544,
+      335
+    ]
+  },
+  "held-left-open-noon": {
+    "changed": 60,
+    "over8": 59,
+    "bbox": [
+      417,
+      248,
+      426,
+      256
+    ]
+  },
+  "held-left-open-overcast": {
+    "changed": 60,
+    "over8": 59,
+    "bbox": [
+      417,
+      248,
+      426,
+      256
+    ]
+  },
+  "held-left-open-dusk": {
+    "changed": 60,
+    "over8": 59,
+    "bbox": [
+      417,
+      248,
+      426,
+      256
+    ]
+  },
+  "held-left-open-night": {
+    "changed": 60,
+    "over8": 59,
+    "bbox": [
+      417,
+      248,
+      426,
+      256
+    ]
+  },
+  "held-right-open-noon": {
+    "changed": 62,
+    "over8": 52,
+    "bbox": [
+      532,
+      246,
+      540,
+      254
+    ]
+  },
+  "held-right-open-overcast": {
+    "changed": 62,
+    "over8": 47,
+    "bbox": [
+      532,
+      247,
+      540,
+      254
+    ]
+  },
+  "held-right-open-dusk": {
+    "changed": 62,
+    "over8": 48,
+    "bbox": [
+      532,
+      247,
+      540,
+      254
+    ]
+  },
+  "held-right-open-night": {
+    "changed": 62,
+    "over8": 0,
+    "bbox": null
+  }
+}

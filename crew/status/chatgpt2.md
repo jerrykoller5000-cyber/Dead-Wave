@@ -2,12 +2,12 @@
 
 state: active
 model: GPT-6 (Codex, variant unsure)
-task: GT-20079 Fit the approved exterior finish to the shotgun extension and verify the bracket and tube on actual game copies
-touching: index.html (gunExtLook fitted shotgun tube creation), studio/weapon-model-hooks.js (optional artwork first-fit matrices), review/GT-20079, review/GT-20076/replay-artwork.mjs (weapon model hooks)
-since: 2026-11-12T07:22Z
+task: GT-20076 Pump stock-to-grip seam at photographed witness 12: retain the original exposed grip and stock fit and seat their hidden intersection
+touching: studio/weapon-longarms.js (pump stock grip seam), studio/weapon-pump-grip.js, review/GT-20076
+since: 2026-11-12T15:42Z
 next: GT-20087 CD-1's guard room (20:08Z): the GW-4, Wasp and AA-12 trigger
 blocked-on: —
-last-report: handoffs/2026-11-12-chatgpt2-GT-20094.md
+last-report: handoffs/2026-11-12-chatgpt2-GT-20076.md
 
 ## Notes
 
@@ -15,7 +15,7 @@ last-report: handoffs/2026-11-12-chatgpt2-GT-20094.md
 
 context nearly full, needs a new session
 
-GT-20079. Corrected fresh optional meshes’ world matrices before the first paint projection, and marked the fitted shotgun tube exterior on Director’s one-statement loan in index.html. The KR-7 fitted bracket now passes all 72 UV samples; all 792 wood faces keep their grain in world, eye and rack. Running after checks. The official t334 optic-fixture adjustment belongs to Claude 2. GT-20094 checked out per its magazine stop condition; GT-20076 heavy nose/arch went to Director.
+Pump #12 full-mesh trial removes the grip/stock crossing in all four fits with no deeper/new pair. New export-pump-grip.mjs copies 263/300 original triangles from the live grip and emits only its seam patch. Verify compact export against trim-stock.json, run catalog-fix-pump-grip-web, four-light detail and hands/pump/frame tests. No stock or hand anchor moved.
 
 Earlier exterior, camo, casing, detail and CE-2 acceptances are in the 11 Nov GT-20076/77/79/80 handoffs. The KR-7 laminate and D-152 budget were accepted on GT-20082 and GT-20081. Keep previous test expectations and the crew slot.
 

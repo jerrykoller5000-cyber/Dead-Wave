@@ -1,0 +1,53 @@
+{
+  "hash": "65bd2ab7",
+  "gap": {
+    "lowerMm": 0,
+    "upperMm": 0.0078125
+  },
+  "guardGap": {
+    "lowerMm": 0,
+    "upperMm": 0,
+    "penetrating": true
+  },
+  "closed": [
+    true
+  ],
+  "surfaces": {
+    "x1": {
+      "occupied": 8129,
+      "added": 0,
+      "lost": 0,
+      "maxIn": 1.7402740564581576e-8,
+      "maxOut": 5.012405705773215e-9
+    },
+    "x-1": {
+      "occupied": 8129,
+      "added": 0,
+      "lost": 0,
+      "maxIn": 1.7423828449492085e-8,
+      "maxOut": 7.334473854647694e-9
+    },
+    "z1": {
+      "occupied": 10340,
+      "added": 0,
+      "lost": 0,
+      "maxIn": 0,
+      "maxOut": 0
+    },
+    "z-1": {
+      "occupied": 10340,
+      "added": 0,
+      "lost": 0,
+      "maxIn": 8.256680755769352e-9,
+      "maxOut": 7.63098187417377e-9
+    }
+  },
+  "finish": {
+    "exposed": 15508,
+    "retained": 15508,
+    "maxHeight": 1.6053482661260166e-8,
+    "maxNormal": 0.000001478747434502381,
+    "maxUV": 5.44501668198194e-8
+  },
+  "role": "furniture"
+}

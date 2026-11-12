@@ -1,0 +1,130 @@
+{
+  "at": "2026-11-12T08:51:47.151Z",
+  "rows": [
+    {
+      "open": true,
+      "openSyncMs": 137.5,
+      "mainBefore": 380,
+      "mainAfter": 380,
+      "dressAfter": 19,
+      "close": {
+        "syncMs": 0.3999999985098839,
+        "open": false,
+        "main": 380
+      }
+    },
+    {
+      "open": true,
+      "openSyncMs": 95.80000000074506,
+      "mainBefore": 380,
+      "mainAfter": 380,
+      "dressAfter": 19,
+      "close": {
+        "syncMs": 0.5,
+        "open": false,
+        "main": 380
+      }
+    }
+  ],
+  "spikes": [
+    {
+      "stage": "entry",
+      "ms": 8599.7
+    },
+    {
+      "stage": "entry",
+      "ms": 133.4
+    },
+    {
+      "stage": "entry",
+      "ms": 1500
+    },
+    {
+      "stage": "entry",
+      "ms": 116.7
+    },
+    {
+      "stage": "entry",
+      "ms": 116.7
+    },
+    {
+      "stage": "entry",
+      "ms": 383.4
+    },
+    {
+      "stage": "open 1",
+      "ms": 133.4
+    },
+    {
+      "stage": "open 1",
+      "ms": 733.5
+    },
+    {
+      "stage": "open 1",
+      "ms": 516.5
+    }
+  ],
+  "profile": [
+    {
+      "tag": "items",
+      "ms": 0.30000000074505806
+    },
+    {
+      "tag": "menu refresh",
+      "ms": 7.899999998509884
+    },
+    {
+      "tag": "choices",
+      "ms": 130.09999999776483
+    },
+    {
+      "tag": "start dress view",
+      "ms": 0.4000000022351742
+    },
+    {
+      "tag": "first dress frame",
+      "ms": 0.19999999925494194
+    },
+    {
+      "tag": "renderer init",
+      "ms": 93.20000000298023
+    },
+    {
+      "tag": "make marine",
+      "ms": 441.9000000022352
+    },
+    {
+      "tag": "kit synced",
+      "ms": 442.1000000014901
+    },
+    {
+      "tag": "dress render",
+      "ms": 189.60000000149012
+    },
+    {
+      "tag": "items",
+      "ms": 0
+    },
+    {
+      "tag": "menu refresh",
+      "ms": 0.5
+    },
+    {
+      "tag": "choices",
+      "ms": 91.10000000149012
+    },
+    {
+      "tag": "start dress view",
+      "ms": 0
+    },
+    {
+      "tag": "first dress frame",
+      "ms": 1.1000000014901161
+    }
+  ],
+  "errors": [],
+  "paint": {
+    "count": 153,
+    "ms": 364.79999999701977
+  }
+}

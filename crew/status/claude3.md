@@ -4,43 +4,30 @@ state: idle
 model: Claude Opus 5.5 (claude-opus-5-5)
 task: —
 touching: —
-since: 2026-11-12T06:13Z
-next: CC-343 (15:06Z: Jerry OK'd fresh sessions (15:03Z): back to Claude 
+since: 2026-11-12T09:11Z
+next: CC-344 J128 (D-140): the kit's measure: every kit part (vest, pads,
 blocked-on: —
-last-report: handoffs/2026-11-12-claude3-CC-343g.md
+last-report: handoffs/2026-11-12-claude3-CC-344.md
 
 ## Notes
 
-### Session 9 (fresh, 03:20Z-06:15Z, Opus 5.5)
-- LANDED 06:12Z CC-343 part 3 / J141 (handoffs/2026-11-12-claude3-CC-343g.md; Claude outputs/CC-343g/patch343h,j,k,l.py):
-  tcc343b 34/3 -> 36/1. The stairs step locked to the treads (stairStep, STAIR_CADENCE_MAX 22: 2 treads a step walking,
-  3 sprinting, 1 crouched); kneeRoom/hipRoom after footGuard (crouch-walk up was the KNEE 150 deg clamp, not the hip);
-  sprint on a flight keeps a boot down; footSoleGap 12 points (a toe on a nosing).
-- LEFT: tcc343b "deck edge, crouched, facing off" (rear ball boot, toe past the edge, heel 3.5 cm up). A step-back in the
-  crouch IK (FOOT_G.toeBack, patch343i, NOT landed) barely moved it: suspect studio/marine-turn.js (crouched still, it
-  re-lays the boots); probe it there next. Then the kit's J128 (item 2).
-- Cloud: tzc3b2.js (tcc343b + per-frame log), tzc3film.js (stairs dumps for c3render), tzc3all/cw/dk/wd probes. Run with
-  DW_CHECK_MS=900000 (180 s limit times out tcc343b). Kill the old run-all (PID) before a new one or the slot refuses.
-
-### Where things stand (12 Nov 02:40Z, session 8, Opus 5.5)
-- LANDED 00:54Z tcc341's last red (handoffs/2026-11-12-claude3-CC-343e.md): tcc341 16/0.
-- LANDED 02:38Z CC-343 part 3 (A) the boots' last guard + stairs drop (handoffs/2026-11-12-claude3-CC-343f.md, patch343f/g.py):
-  tcc343b 35/2. Left: stairs crouch-walking up 18.5 mm in; deck edge crouched facing off 35.6 over / 56.3 not flat.
-- KEY FINDING: the legs are posed BEFORE the frame's ground snap (index.html ~68364, after updateMarinePose): anything that
-  measures the soles at pose time must add lag = rootGY - root.y (footGuard does). Moving the body by the lag is WRONG (tried).
-- NEXT (Jerry chose C, J141): when Claude 2's CB-310 (STAIR_SPEED_SCALE 0.5) lands, tune the step so a boot lands on each
-  tread (stride = tread 0.286 m), tcc343b up/down at walk and sprint, side filmstrip for Jerry. Meanwhile the kit's J128
-  (item 3): found unarmed kit run: arm swing sleeve 4.7 mm into the cummerbund side (x -.18), the swing is Claude 2's.
-- PAUSE (02:20Z, Jerry playing): no PC game-file edits or runs until the Director's RESUME. I edited index.html at 02:26Z
-  by mistake (told the Director, request 'I edited index.html during PAUSE'; my pick: leave it).
-- Crouch-walk up 18.5-20 mm: tzc3cw.js (cloud) shows the guard's soles on the treads at pose time but the lead boot 20 mm
-  in after the frame: suspect clampBodyPose (CB-291) clamping hip flex (125 deg) after the pose; ankle sits at -0.86.
-- Probes (cloud only, never to the PC): tools/tests/tzc3st2.js (tcc343b with per-frame log for the stairs),
-  tzc3probe.js (tcc341 shirt<vest with part names). Pictures: Claude outputs/CC-343e/c3render/ (tzc3dump.js /
-  tzc3stdump.js dump the posed geometry; c3render-index.html + -shoot.mjs into <tree>/_c3render/ as index.html, shoot.mjs:
-  node _c3render/shoot.mjs <log> <outdir> b|a '<views json>' (cam.rel = target relative to the dumped root); sheet.py).
-- Cloud copy: tar on the PC to $HOME/w, cp into "_DELETE ME/", stage, untar in /home/claude/tt; include assets/intro (no mp4)
-  or TT never boots. node imports of studio/*.js need a 'three' shim in node_modules. A full tcc343b is ~8 min here.
+### Session 10 (fresh, 07:28Z-, Opus 5.5)
+- LANDED 08:50Z CC-343's last red (handoffs/2026-11-12-claude3-CC-343h.md, Claude outputs/CC-343h/patch343m.py): deck edge
+  crouched. marine-turn's ankle pivot draws a boot back when its turn point is over a drop (apply's new surface(x,z));
+  crouched, footStepIn reaches FOOT_STEPIN_CROUCH 0.24. tcc343b 37/0; regressions as before (t187/t229 = old gun reds).
+- Found: a build floor's deckY (0.25) is 6 mm over its planks (0.244), platform 2 cm past the boards: every boot on a build
+  floor floats 6 mm; sent to the Director to route (not my lane). tcc341 is 16/0 (vest red landed 00:54Z).
+- CC-344 part 1 (handoffs/2026-11-12-claude3-CC-344.md): tools/tests/tcc344.js landed (PC tree: 3/4 reds).
+- CC-344 part 2, WIP NOT LANDED (Claude outputs/CC-344/wip-not-landed.diff, on top of the PC's marine-body.js/-cloth.js):
+  liveCloth option 'under' (boxes on lowerBody: the belt band from marine-body's own belt at .721+LB, the two front mag
+  pouches at x+-.125 .647+LB z .135, 'back' exit); trouser leg + its FRONT SEAM worn live (rigid on the thigh it rose
+  through the band); holster-thigh-band -.11 -> -.125. Result: tcc344 legs 17.9 -> 0 (5/2, the sleeves left) BUT tcc341
+  15/1: "belt 15.5 mm under trousers" running (a belt-mesh vertex at the hip front, x -.04, now under a trousers face;
+  suspect the seam tube, newly measured as live cloth, or the widened band box z .3 / y .8+LB). Bisect that first.
+- Sleeves 2.8 mm into a hip-level pouch/keeper standing unarmed (x +-.18, the belt's side keepers at r .191?): open.
+- Cloud: tar the code dirs on the PC to $HOME/w (exclude assets/soundtrack, *.mp4, tools/*.png|jpg, tools/tests/test-*.html),
+  cp into "_DELETE ME/claude3-tt-HHMM.tgz", stage, untar in /home/claude/tt. Probe: tools/tests/tzc3dedump.js (cloud only,
+  c3render dumps). PC writes: write <file>.tmp-claude3 then os.replace (the mount refuses truncating some files).
 
 ### This VM's quirks (session 3)
 - The PC mount refuses writing over some existing files (EINVAL on open with O_CREAT, sometimes on ftruncate): crew.mjs fails

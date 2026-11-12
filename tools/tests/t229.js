@@ -61,7 +61,7 @@
     const frame = (w) => {
       m.updateMatrixWorld(true);
       const gun = T.weaponMeshes[w], H = T.getShoulderDbg().holds[w]; gun.updateMatrixWorld(true);
-      const inv = gun.getWorldQuaternion(new THREE.Quaternion()).invert(), a = gun.localToWorld(V(...H.grip));
+      const inv = gun.getWorldQuaternion(new THREE.Quaternion()).invert(), a = gun.localToWorld(V(...(H.gripFit || H.grip)));   // CD-8: one handgun, first person's fitted grip
       return { gun, H, a, loc: (v) => v.clone().sub(a).applyQuaternion(inv), fore: gun.localToWorld(V(...H.fore)) };
     };
     const f3 = (v) => v.toArray().map((x) => x.toFixed(3)).join(',');
@@ -84,8 +84,13 @@
         // GB-152: with fingered hands, "no air" is the meshes themselves: the support hand's glove within 1 cm of the firing hand's.
         const gap = handsGap();
         handOk(gap < 0.01, tag + ': support hand on the firing fingers, no air (gloves ' + gap.toFixed(3) + ' m apart; palm to firing fingertips ' + palmL.distanceTo(knR).toFixed(3) + ' m)');
-        handOk(tL.x < -0.005 && tL.distanceTo(tR) < 0.05, tag + ': thumbs stacked on the support side (' + f3(tL) + ', ' + tL.distanceTo(tR).toFixed(3) + ' m apart)');
-        if (w === 'revolver') handOk(tL.y < 0.03, tag + ': the support thumb low, under the cylinder (' + tL.y.toFixed(3) + ' m above the grip anchor)');
+        // CD-8 (J142d/e, CLAUDE DIRECTOR 12 Nov, --review): the thumbs as first person's fit holds them (Jerry: 'Left thumb on pistol
+        // is wrong'): the support thumb forward along the frame on the support side, under the slide (the pistol) or under the
+        // cylinder and behind its gap (the revolver); never over the top of the gun. (GB-151 had them stacked within 5 cm.)
+        const partLoc = (part) => { const lo = V(Infinity, Infinity, Infinity), hi = V(-Infinity, -Infinity, -Infinity); if (part) { part.updateMatrixWorld(true); part.traverse((o) => { const pa = o.isMesh && o.geometry && o.geometry.attributes.position; if (!pa) return; for (let i = 0; i < pa.count; i++) { const q = F.loc(o.localToWorld(V().fromBufferAttribute(pa, i))); lo.min(q); hi.max(q); } }); } return { lo, hi }; };
+        const top = partLoc(w === 'revolver' ? F.gun.userData.cylinder : F.gun.userData.slide);
+        handOk(tL.x < -0.005 && tL.y < top.lo.y && tL.z > 0, tag + ': the support thumb forward along the frame on the support side, under the ' + (w === 'revolver' ? 'cylinder' : 'slide') + ' (' + f3(tL) + '; its underside at ' + top.lo.y.toFixed(3) + ')');
+        if (w === 'revolver') handOk(tL.z < top.hi.z, tag + ': the support thumb behind the cylinder gap (tip ' + tL.z.toFixed(3) + ', the cylinder\'s front ' + top.hi.z.toFixed(3) + ')');
         handOk(wt.r < 0.75, tag + ': firing wrist nearly straight, gun in line with the forearm (' + wt.r.toFixed(2) + ' rad)');
         // The gun where the hold alone puts it: no slide toward the support shoulder (aim and muzzle as before GB-151).
         const shW = ud.armRG.getWorldPosition(V()), aT = T.aimTarget;
@@ -131,7 +136,8 @@
     { const F = frame('pistol'), og = T.offhandMeshes.pistol, H = F.H; og.updateMatrixWorld(true);
       const gR = HD.gripPoint('R', V()), gL = HD.gripPoint('L', V()), wt = HD.wrist(), gA = HD.gripA();
       ok(!mirrored(ud.elbowRG) && !mirrored(ud.elbowLG), 'akimbo: hands not mirrored');
-      handOk(gR.distanceTo(F.a) < 0.025 && gA.r > 0.9, 'akimbo: right fist on its grip (' + gR.distanceTo(F.a).toFixed(3) + ')');
+      const aR = F.gun.localToWorld(V(...F.H.grip));   // CD-8: the pair keeps the grip anchor (gripFit is for one gun)
+      handOk(gR.distanceTo(aR) < 0.025 && gA.r > 0.9, 'akimbo: right fist on its grip (' + gR.distanceTo(aR).toFixed(3) + ')');
       handOk(gL.distanceTo(og.localToWorld(V(...H.grip))) < 0.025 && gA.l > 0.9, 'akimbo: left fist on its own grip (' + gL.distanceTo(og.localToWorld(V(...H.grip))).toFixed(3) + ')');
       // GB-223: the wrist's whole turn (HD.wrist) includes the roll GB-152's fingered hands take round the forearm, which bends
     // nothing; 'in line with the forearm' is the gun's bore against the forearm's line. Close-ups qa/2026-10-23-GB-220/before/

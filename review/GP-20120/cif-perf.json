@@ -1,0 +1,64 @@
+{
+  "at": "2026-11-12T08:35:37.628Z",
+  "spikes": [
+    {
+      "stage": "entry",
+      "ms": 9799.7
+    },
+    {
+      "stage": "entry",
+      "ms": 100.2
+    },
+    {
+      "stage": "entry",
+      "ms": 1583.2
+    },
+    {
+      "stage": "entry",
+      "ms": 116.6
+    },
+    {
+      "stage": "entry",
+      "ms": 416.5
+    },
+    {
+      "stage": "entry",
+      "ms": 116.8
+    },
+    {
+      "stage": "CIF open 1",
+      "ms": 199.9
+    },
+    {
+      "stage": "CIF open 1",
+      "ms": 466.8
+    },
+    {
+      "stage": "CIF open 1",
+      "ms": 733.4
+    },
+    {
+      "stage": "CIF close 1",
+      "ms": 599.8
+    },
+    {
+      "stage": "CIF open 2",
+      "ms": 133.4
+    }
+  ],
+  "rows": [
+    {
+      "i": 1,
+      "open": true,
+      "visible": true,
+      "duration": 1544.199999999255
+    },
+    {
+      "i": 2,
+      "open": true,
+      "visible": true,
+      "duration": 1248.800000000745
+    }
+  ],
+  "errors": []
+}

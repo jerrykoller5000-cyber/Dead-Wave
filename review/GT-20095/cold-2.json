@@ -1,0 +1,22 @@
+{
+  "phase": "cold-2",
+  "state": "ready",
+  "loadId": "mwdfb0yy-j9vmm",
+  "browserPid": 8484,
+  "held": false,
+  "initialUpload": null,
+  "info": {
+    "backend": "WebGPUBackend",
+    "width": 192,
+    "height": 224,
+    "loaded": true,
+    "visiblePixels": 35576
+  },
+  "texture": {
+    "hash": "4829a40e",
+    "visible": 35576
+  },
+  "pose": null,
+  "errors": [],
+  "consoleErrors": []
+}

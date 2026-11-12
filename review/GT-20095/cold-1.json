@@ -1,0 +1,23 @@
+{
+  "phase": "cold-1",
+  "state": "ready",
+  "held": true,
+  "initialUpload": {
+    "count": 2,
+    "hadContext": true
+  },
+  "info": {
+    "backend": "WebGPUBackend",
+    "width": 192,
+    "height": 224,
+    "loaded": false,
+    "visiblePixels": 0
+  },
+  "texture": {
+    "hash": "4829a40e",
+    "visible": 35576
+  },
+  "pose": null,
+  "errors": [],
+  "consoleErrors": []
+}

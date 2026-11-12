@@ -194,6 +194,18 @@ export function addTriggerArtwork(gun, kit, outline, width, material, options) {
   return blade;
 }
 
+// A trimmed display mesh keeps the original heat gradient along its local Z.
+export function setArtworkHeatRange(T, geometry, minZ, maxZ) {
+  const position = geometry.attributes.position;
+  const uv = new Float32Array(position.count * 2);
+  const span = maxZ - minZ;
+  for (let i = 0; i < position.count; i++) {
+    uv[i * 2] = (position.getZ(i) - minZ) / span;
+    uv[i * 2 + 1] = .5;
+  }
+  geometry.setAttribute('uv1', new T.BufferAttribute(uv, 2));
+}
+
 // Place an art pivot at the centre of these sibling meshes without changing the
 // rendered surface. Bounds are measured in their shared parent's coordinates.
 export function groupArtwork(T, ...meshes) {

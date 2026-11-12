@@ -1,0 +1,23 @@
+{
+  "moving": [
+    {
+      "world": null,
+      "map": false,
+      "eyeMap": false,
+      "drawn": true
+    },
+    {
+      "world": null,
+      "map": false,
+      "eyeMap": false,
+      "drawn": true
+    }
+  ],
+  "wood": [
+    {
+      "map": true,
+      "painted": false
+    }
+  ],
+  "coatedMaterials": 7
+}

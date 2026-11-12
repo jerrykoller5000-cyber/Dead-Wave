@@ -368,8 +368,9 @@ class NodeMaterialObserver {
 		const attributes = geometry.attributes;
 		const storedAttributes = storedGeometryData.attributes;
 
-		const storedAttributeNames = Object.keys( storedAttributes );
-		const currentAttributeNames = Object.keys( attributes );
+		let storedAttributeCount = 0, currentAttributeCount = 0;
+		for ( const name in storedAttributes ) if ( Object.hasOwn( storedAttributes, name ) ) storedAttributeCount ++;
+		for ( const name in attributes ) if ( Object.hasOwn( attributes, name ) ) currentAttributeCount ++;
 
 		if ( storedGeometryData.id !== geometry.id ) {
 
@@ -378,7 +379,7 @@ class NodeMaterialObserver {
 
 		}
 
-		if ( storedAttributeNames.length !== currentAttributeNames.length ) {
+		if ( storedAttributeCount !== currentAttributeCount ) {
 
 			renderObjectData.geometry.attributes = this.getAttributesData( attributes );
 			return false;
@@ -387,7 +388,9 @@ class NodeMaterialObserver {
 
 		// compare each attribute
 
-		for ( const name of storedAttributeNames ) {
+		for ( const name in storedAttributes ) {
+
+			if ( Object.hasOwn( storedAttributes, name ) === false ) continue;
 
 			const storedAttributeData = storedAttributes[ name ];
 			const attribute = attributes[ name ];
@@ -581,6 +584,15 @@ const hashArray = ( array ) => cyrb53( array );
  */
 const hash$1 = ( ...params ) => cyrb53( params );
 
+// The render-object cache key hashes two numbers for every shadow receiver.
+// Reuse their array so the steady render loop does not allocate one per draw.
+const _hashPairValues = [ 0, 0 ];
+const hashPair = ( first, second ) => {
+	_hashPairValues[ 0 ] = first;
+	_hashPairValues[ 1 ] = second;
+	return cyrb53( _hashPairValues );
+};
+
 /**
  * Computes a cache key for the given node.
  *
@@ -589,9 +601,19 @@ const hash$1 = ( ...params ) => cyrb53( params );
  * @param {boolean} [force=false] - Whether to force a cache key computation or not.
  * @return {number} The hash.
  */
+
+// Cache-key traversal visits the same node graph on every render call. Keep a
+// scratch list per node so recursive calls do not allocate a new array each time.
+const _cacheKeyScratch = new WeakMap();
 function getCacheKey$1( object, force = false ) {
 
-	const values = [];
+	const owner = object;
+	let values = _cacheKeyScratch.get( owner );
+	if ( values === undefined ) {
+		values = [];
+		_cacheKeyScratch.set( owner, values );
+	}
+	values.length = 0;
 
 	if ( object.isNode === true ) {
 
@@ -600,10 +622,24 @@ function getCacheKey$1( object, force = false ) {
 
 	}
 
-	for ( const { property, childNode } of getNodeChildren( object ) ) {
-
-		values.push( cyrb53( property.slice( 0, -4 ) ), childNode.getCacheKey( force ) );
-
+	// Match getNodeChildren's property/array/subobject order, without creating a
+	// generator and a temporary descriptor for every child on every draw.
+	for ( const property in object ) {
+		if ( property.startsWith( '_' ) === true ) continue;
+		const item = object[ property ];
+		if ( Array.isArray( item ) === true ) {
+			for ( let i = 0; i < item.length; i ++ ) {
+				const child = item[ i ];
+				if ( child && child.isNode === true ) values.push( cyrb53( property.slice( 0, -4 ) ), child.getCacheKey( force ) );
+			}
+		} else if ( item && item.isNode === true ) {
+			values.push( cyrb53( property.slice( 0, -4 ) ), item.getCacheKey( force ) );
+		} else if ( typeof item === 'object' ) {
+			for ( const subProperty in item ) {
+				const child = item[ subProperty ];
+				if ( child && child.isNode === true ) values.push( cyrb53( property.slice( 0, -4 ) ), child.getCacheKey( force ) );
+			}
+		}
 	}
 
 	return cyrb53( values );
@@ -25839,13 +25875,13 @@ class RenderObject {
 
 		if ( this.camera.isArrayCamera ) {
 
-			cacheKey = hash$1( cacheKey, this.camera.cameras.length );
+			cacheKey = hashPair( cacheKey, this.camera.cameras.length );
 
 		}
 
 		if ( this.object.receiveShadow ) {
 
-			cacheKey = hash$1( cacheKey, 1 );
+			cacheKey = hashPair( cacheKey, 1 );
 
 		}
 
@@ -26009,7 +26045,8 @@ class RenderObjects {
 
 		}
 
-		_chainKeys$5.length = 0;
+		// Keep the four-slot backing store for the next draw's lookup.
+		_chainKeys$5.length = 4;
 
 		return renderObject;
 
@@ -28217,7 +28254,7 @@ class RenderLists {
 
 		}
 
-		_chainKeys$4.length = 0;
+		_chainKeys$4.length = 2;
 
 		return list;
 
@@ -28561,7 +28598,7 @@ class RenderContexts {
 
 		}
 
-		_chainKeys$3.length = 0;
+		_chainKeys$3.length = 2;
 
 		if ( renderTarget !== null ) renderState.sampleCount = renderTarget.samples === 0 ? 1 : renderTarget.samples;
 
@@ -36805,6 +36842,53 @@ class LightsNode extends Node {
 		}
 
 		return hashArray( lightIDs );
+
+	}
+
+	// The renderer asks for a forced key on every draw. Standard light values
+	// update uniforms, while the node graph changes only when the light set,
+	// shadow setup, or one of this node's children changes. Avoid walking and
+	// hashing that entire graph again for a steady scene.
+	getCacheKey( force = false ) {
+
+		if ( force !== true ) return super.getCacheKey( force );
+
+		const lights = this._lights;
+		const cached = this._steadyCacheKey;
+		let same = cached !== undefined && cached.version === this.version &&
+			cached.diffuse === this.totalDiffuseNode && cached.diffuseVersion === this.totalDiffuseNode.version &&
+			cached.specular === this.totalSpecularNode && cached.specularVersion === this.totalSpecularNode.version &&
+			cached.outgoing === this.outgoingLightNode && cached.outgoingVersion === this.outgoingLightNode.version &&
+			cached.lights.length === lights.length;
+
+		for ( let i = 0; i < lights.length; i ++ ) {
+
+			const light = lights[ i ];
+			if ( light.isNode === true ) { same = false; break; }
+			if ( same ) {
+				const prior = cached.lights[ i ];
+				if ( prior.light !== light || prior.castShadow !== light.castShadow ||
+					prior.shadow !== light.shadow || prior.shadowMap !== light.shadow?.map ||
+					prior.map !== light.map || prior.version !== light.version ) same = false;
+			}
+
+		}
+
+		if ( same ) return cached.key;
+
+		const key = super.getCacheKey( true );
+		this._steadyCacheKey = {
+			key, version: this.version,
+			diffuse: this.totalDiffuseNode, diffuseVersion: this.totalDiffuseNode.version,
+			specular: this.totalSpecularNode, specularVersion: this.totalSpecularNode.version,
+			outgoing: this.outgoingLightNode, outgoingVersion: this.outgoingLightNode.version,
+			lights: lights.map( light => ({
+				light, castShadow: light.castShadow, shadow: light.shadow,
+				shadowMap: light.shadow?.map, map: light.map, version: light.version
+			}) )
+		};
+
+		return key;
 
 	}
 
@@ -46515,7 +46599,7 @@ class Nodes extends DataMap {
 		let groupData = this.groupsData.get( _chainKeys$2 );
 		if ( groupData === undefined ) this.groupsData.set( _chainKeys$2, groupData = {} );
 
-		_chainKeys$2.length = 0;
+		_chainKeys$2.length = 2;
 
 		if ( groupData.version !== groupNode.version ) {
 
@@ -46758,10 +46842,13 @@ class Nodes extends DataMap {
 	 */
 	getCacheKey( scene, lightsNode ) {
 
+		const callId = this.renderer.info.calls;
+		if ( this._lastKeyCallId === callId && this._lastKeyScene === scene && this._lastKeyLights === lightsNode ) {
+			return this._lastKeyValue;
+		}
+
 		_chainKeys$2[ 0 ] = scene;
 		_chainKeys$2[ 1 ] = lightsNode;
-
-		const callId = this.renderer.info.calls;
 
 		const cacheKeyData = this.callHashCache.get( _chainKeys$2 ) || {};
 
@@ -46785,7 +46872,11 @@ class Nodes extends DataMap {
 
 		}
 
-		_chainKeys$2.length = 0;
+		_chainKeys$2.length = 2;
+		this._lastKeyCallId = callId;
+		this._lastKeyScene = scene;
+		this._lastKeyLights = lightsNode;
+		this._lastKeyValue = cacheKeyData.cacheKey;
 
 		return cacheKeyData.cacheKey;
 
@@ -47502,7 +47593,7 @@ class RenderBundles {
 
 		}
 
-		_chainKeys$1.length = 0;
+		_chainKeys$1.length = 2;
 
 		return bundle;
 
@@ -52724,23 +52815,16 @@ class UniformsGroup extends UniformBuffer {
 	 */
 	updateNumber( uniform ) {
 
-		let updated = false;
-
 		const a = this.values;
-		const v = uniform.getValue();
 		const offset = uniform.offset;
-		const type = uniform.getType();
+		const v = uniform.getValue();
 
-		if ( a[ offset ] !== v ) {
+		if ( a[ offset ] === v ) return false;
 
-			const b = this._getBufferForType( type );
+		const b = this._getBufferForType( uniform.getType() );
+		b[ offset ] = a[ offset ] = v;
 
-			b[ offset ] = a[ offset ] = v;
-			updated = true;
-
-		}
-
-		return updated;
+		return true;
 
 	}
 
@@ -69380,7 +69464,71 @@ class WebGPUBackend extends Backend {
 
 		// draw
 
-		const draw = () => {
+
+
+		if ( renderObject.camera.isArrayCamera && renderObject.camera.cameras.length > 0 ) {
+
+			const cameraData = this.get( renderObject.camera );
+			const cameras = renderObject.camera.cameras;
+			const cameraIndex = renderObject.getBindingGroup( 'cameraIndex' );
+
+			if ( cameraData.indexesGPU === undefined || cameraData.indexesGPU.length !== cameras.length ) {
+
+				const bindingsData = this.get( cameraIndex );
+				const indexesGPU = [];
+
+				const data = new Uint32Array( [ 0, 0, 0, 0 ] );
+
+				for ( let i = 0, len = cameras.length; i < len; i ++ ) {
+
+					data[ 0 ] = i;
+
+					const bindGroupIndex = this.bindingUtils.createBindGroupIndex( data, bindingsData.layout );
+
+					indexesGPU.push( bindGroupIndex );
+
+				}
+
+				cameraData.indexesGPU = indexesGPU; // TODO: Create a global library for this
+
+			}
+
+			const pixelRatio = this.renderer.getPixelRatio();
+
+			for ( let i = 0, len = cameras.length; i < len; i ++ ) {
+
+				const subCamera = cameras[ i ];
+
+				if ( object.layers.test( subCamera.layers ) ) {
+
+					const vp = subCamera.viewport;
+
+					passEncoderGPU.setViewport(
+						Math.floor( vp.x * pixelRatio ),
+						Math.floor( vp.y * pixelRatio ),
+						Math.floor( vp.width * pixelRatio ),
+						Math.floor( vp.height * pixelRatio ),
+						context.viewportValue.minDepth,
+						context.viewportValue.maxDepth
+					);
+
+					passEncoderGPU.setBindGroup( cameraIndex.index, cameraData.indexesGPU[ i ] );
+
+					this._drawPrimitive( renderObject, info, passEncoderGPU, drawParams, hasIndex, index, object );
+
+				}
+
+			}
+
+		} else {
+
+			this._drawPrimitive( renderObject, info, passEncoderGPU, drawParams, hasIndex, index, object );
+
+		}
+
+	}
+
+	_drawPrimitive( renderObject, info, passEncoderGPU, drawParams, hasIndex, index, object ) {
 
 			if ( object.isBatchedMesh === true ) {
 
@@ -69456,68 +69604,6 @@ class WebGPUBackend extends Backend {
 				info.update( object, vertexCount, instanceCount );
 
 			}
-
-		};
-
-		if ( renderObject.camera.isArrayCamera && renderObject.camera.cameras.length > 0 ) {
-
-			const cameraData = this.get( renderObject.camera );
-			const cameras = renderObject.camera.cameras;
-			const cameraIndex = renderObject.getBindingGroup( 'cameraIndex' );
-
-			if ( cameraData.indexesGPU === undefined || cameraData.indexesGPU.length !== cameras.length ) {
-
-				const bindingsData = this.get( cameraIndex );
-				const indexesGPU = [];
-
-				const data = new Uint32Array( [ 0, 0, 0, 0 ] );
-
-				for ( let i = 0, len = cameras.length; i < len; i ++ ) {
-
-					data[ 0 ] = i;
-
-					const bindGroupIndex = this.bindingUtils.createBindGroupIndex( data, bindingsData.layout );
-
-					indexesGPU.push( bindGroupIndex );
-
-				}
-
-				cameraData.indexesGPU = indexesGPU; // TODO: Create a global library for this
-
-			}
-
-			const pixelRatio = this.renderer.getPixelRatio();
-
-			for ( let i = 0, len = cameras.length; i < len; i ++ ) {
-
-				const subCamera = cameras[ i ];
-
-				if ( object.layers.test( subCamera.layers ) ) {
-
-					const vp = subCamera.viewport;
-
-					passEncoderGPU.setViewport(
-						Math.floor( vp.x * pixelRatio ),
-						Math.floor( vp.y * pixelRatio ),
-						Math.floor( vp.width * pixelRatio ),
-						Math.floor( vp.height * pixelRatio ),
-						context.viewportValue.minDepth,
-						context.viewportValue.maxDepth
-					);
-
-					passEncoderGPU.setBindGroup( cameraIndex.index, cameraData.indexesGPU[ i ] );
-
-					draw();
-
-				}
-
-			}
-
-		} else {
-
-			draw();
-
-		}
 
 	}
 

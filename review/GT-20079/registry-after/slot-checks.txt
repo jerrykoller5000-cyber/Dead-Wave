@@ -1,0 +1,149 @@
+node tools/realtest.mjs t334 --all
+GRANT chatgpt2 GT-20079: starting one game-test command
+FAIL  t334     21 pass   5 fail  30.5s  (real renderer)
+    PASS m4: several distinct painted surfaces (13)
+    PASS m4: paint map and dielectric finish on every registered material
+    PASS m4: eligible gun meshes share one camo map and UVs (14, leaks 0)
+    PASS m4: excluded surfaces stay out of the paint registry (21)
+    PASS m4: fitted can shell and trim take the same camo (2)
+    PASS m4: suppressor bore remains bare
+    PASS m4: sampled UVs match the gun-root 0.42 m box projection (42, bad 0)
+    FAIL ak: several distinct painted surfaces (5)
+    PASS ak: paint map and dielectric finish on every registered material
+    FAIL ak: eligible gun meshes share one camo map and UVs (6, leaks 0)
+    PASS ak: excluded surfaces stay out of the paint registry (17)
+    PASS ak: fitted can shell and trim take the same camo (2)
+    PASS ak: suppressor bore remains bare
+    FAIL ak: sampled UVs match the gun-root 0.42 m box projection (18, bad 0)
+    PASS offhand copy shares the Uzi paint materials (15)
+    PASS m4: first-person gun settled
+    PASS m4: first-person copy mirrors the whole-gun camo (19)
+    PASS m4: first-person fitted can carries camo
+    PASS ak: first-person gun settled
+    FAIL ak: first-person copy mirrors the whole-gun camo (11)
+    PASS ak: first-person fitted can carries camo
+    PASS slung copy shares M4 paint materials (16)
+    PASS rack copy shares M4 paint and root UVs (13)
+    PASS new fitted M4 heavy sleeve is registered for camo (5)
+    FAIL new fitted shotgun tube is registered for camo (1)
+    PASS unselecting camo restores issue colours and surface response
+1 checks: 21 pass, 5 fail (real renderer)
+
+node tools/realtest.mjs t38 t334 --all
+GRANT chatgpt2 GT-20079: starting one game-test command
+ok    t38      26 pass   0 fail  56.9s  (real renderer)
+    PASS off-hand pistol animates its own parts (slide, mag, flash, laser)
+    PASS off-hand uzi animates its own parts (mag, flash, laser)
+    PASS off-hand revolver animates its own parts (mag, flash, laser, cylinder, hammer)
+    PASS all twelve equipped models represented (12)
+    PASS cold attached mesh count 274 / 300 (including hidden parts)
+    PASS minigun submitted 22 draws / 35
+    INFO minigun cold meshes 22, equipped draws 22
+    PASS m4 submitted 31 draws / 35
+    INFO m4 cold meshes 35, equipped draws 31
+    PASS ak submitted 19 draws / 35
+    INFO ak cold meshes 23, equipped draws 19
+    PASS aa12 submitted 23 draws / 35
+    INFO aa12 cold meshes 24, equipped draws 23
+    PASS pistol submitted 15 draws / 35
+    INFO pistol cold meshes 19, equipped draws 15
+    PASS uzi submitted 23 draws / 35
+    INFO uzi cold meshes 27, equipped draws 23
+    PASS shotgun submitted 19 draws / 35
+    INFO shotgun cold meshes 24, equipped draws 19
+    PASS revolver submitted 20 draws / 35
+    INFO revolver cold meshes 24, equipped draws 20
+    PASS sniper submitted 31 draws / 35
+    INFO sniper cold meshes 34, equipped draws 31
+    PASS launcher submitted 20 draws / 35
+    INFO launcher cold meshes 23, equipped draws 20
+    PASS flamer submitted 9 draws / 35
+    INFO flamer cold meshes 10, equipped draws 9
+    PASS chainsaw submitted 9 draws / 35
+    INFO chainsaw cold meshes 9, equipped draws 9
+    PASS equipped draws across twelve individual models 241 < 260
+    INFO twelve cold guns: 274 attached meshes; equipped individually: 241 actual draws
+    PASS ak: reload moves the magazine
+    PASS m4: reload moves the magazine
+    PASS pistol: reload moves the magazine
+    PASS shotgun: reload moves the pump
+    PASS sniper: reload moves the magazine
+    PASS revolver: reload moves the magazine
+    PASS launcher: reload moves the magazine
+    PASS minigun: reload moves the magazine
+FAIL  t334     22 pass   4 fail  39.2s  (real renderer)
+    PASS m4: several distinct painted surfaces (13)
+    PASS m4: paint map and dielectric finish on every registered material
+    PASS m4: eligible gun meshes share one camo map and UVs (14, leaks 0)
+    PASS m4: excluded surfaces stay out of the paint registry (21)
+    PASS m4: fitted can shell and trim take the same camo (2)
+    PASS m4: suppressor bore remains bare
+    PASS m4: sampled UVs match the gun-root 0.42 m box projection (42, bad 0)
+    FAIL ak: several distinct painted surfaces (5)
+    PASS ak: paint map and dielectric finish on every registered material
+    FAIL ak: eligible gun meshes share one camo map and UVs (6, leaks 0)
+    PASS ak: excluded surfaces stay out of the paint registry (17)
+    PASS ak: fitted can shell and trim take the same camo (2)
+    PASS ak: suppressor bore remains bare
+    FAIL ak: sampled UVs match the gun-root 0.42 m box projection (18, bad 0)
+    PASS offhand copy shares the Uzi paint materials (15)
+    PASS m4: first-person gun settled
+    PASS m4: first-person copy mirrors the whole-gun camo (19)
+    PASS m4: first-person fitted can carries camo
+    PASS ak: first-person gun settled
+    FAIL ak: first-person copy mirrors the whole-gun camo (11)
+    PASS ak: first-person fitted can carries camo
+    PASS slung copy shares M4 paint materials (16)
+    PASS rack copy shares M4 paint and root UVs (13)
+    PASS new fitted M4 heavy sleeve is registered for camo (5)
+    PASS new fitted shotgun tube is registered for camo (1)
+    PASS unselecting camo restores issue colours and surface response
+2 checks: 48 pass, 4 fail (real renderer)
+
+node tools/tests/run-all.mjs t38 t333 t334 --jobs 1 --agent chatgpt2 --task GT-20079 --all-fails
+Game-test request 1f1e93a1-ede0-40b7-9908-72892e45ff47 queued at position 1. Waiting...
+GRANT chatgpt2 GT-20079: starting one game-test command
+check-players: 316 player.position reads, all in the allowed places
+           INFO minigun cold meshes 22, equipped draws 22
+           INFO m4 cold meshes 35, equipped draws 31
+           INFO ak cold meshes 23, equipped draws 19
+           INFO aa12 cold meshes 24, equipped draws 23
+           INFO pistol cold meshes 19, equipped draws 15
+           INFO uzi cold meshes 27, equipped draws 23
+           INFO shotgun cold meshes 24, equipped draws 19
+           INFO revolver cold meshes 24, equipped draws 20
+           INFO sniper cold meshes 34, equipped draws 31
+           INFO launcher cold meshes 23, equipped draws 20
+           INFO flamer cold meshes 10, equipped draws 9
+           INFO chainsaw cold meshes 9, equipped draws 9
+           INFO twelve cold guns: 274 attached meshes; equipped individually: 241 actual draws
+ok    t38     26 pass   0 fail  127.3s
+           FAIL m4: every small part touches a bigger one (60 small) FLOAT 2 at -0.024,0.002,-0.126 | -0.024,0.002,-0.094
+           FAIL no floating hardware across the set (2)
+FAIL  t333    14 pass   2 fail  42.1s
+           recovering browser after t333: 2 fail
+           FAIL ak: several distinct painted surfaces (5)
+           FAIL ak: eligible gun meshes share one camo map and UVs (6, leaks 0)
+           FAIL ak: sampled UVs match the gun-root 0.42 m box projection (18, bad 0)
+           FAIL ak: first-person copy mirrors the whole-gun camo (11)
+FAIL  t334    22 pass   4 fail  69.7s
+           recovering browser after t334: 4 fail
+
+3 checks: 62 pass, 6 fail
+
+by owner:
+  unassigned
+    t333   2 fail  FAIL m4: every small part touches a bigger one (60 small) FLOAT 2 at -0.024,0.002,-0.126 | -0.02
+           FAIL m4: every small part touches a bigger one (60 small) FLOAT 2 at -0.024,0.002,-0.126 | -0.024,0.002,-0.094
+           FAIL no floating hardware across the set (2)
+    t334   4 fail  FAIL ak: several distinct painted surfaces (5)
+           FAIL ak: several distinct painted surfaces (5)
+           FAIL ak: eligible gun meshes share one camo map and UVs (6, leaks 0)
+           FAIL ak: sampled UVs match the gun-root 0.42 m box projection (18, bad 0)
+           FAIL ak: first-person copy mirrors the whole-gun camo (11)
+
+node review/GT-20079/registry-capture.mjs after shotgun
+Game-test request 46bfa737-d90f-43dd-8b0e-ac5d3cfb093d queued at position 1. Waiting...
+GRANT chatgpt2 GT-20079: starting one game-test command
+shotgun-issue {"visible":false,"faces":0,"world":0,"eye":0,"rack":0,"rackPresent":0}
+shotgun-fitted {"visible":true,"faces":96,"world":96,"eye":96,"rack":96,"rackPresent":96,"carryTubeVisible":true,"sharedModelFaces":9022,"totalModelFaces":10467,"carryFaces":96}

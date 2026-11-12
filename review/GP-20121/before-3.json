@@ -1,0 +1,123 @@
+{
+  "at": "2026-11-12T08:58:16.576Z",
+  "rows": [
+    {
+      "open": true,
+      "openSyncMs": 106.29999999701977,
+      "mainBefore": 380,
+      "mainAfter": 380,
+      "dressAfter": 19,
+      "close": {
+        "syncMs": 0.3999999985098839,
+        "open": false,
+        "main": 380
+      }
+    },
+    {
+      "open": true,
+      "openSyncMs": 94.5,
+      "mainBefore": 380,
+      "mainAfter": 380,
+      "dressAfter": 19,
+      "close": {
+        "syncMs": 0.3999999985098839,
+        "open": false,
+        "main": 380
+      }
+    }
+  ],
+  "spikes": [
+    {
+      "stage": "entry",
+      "ms": 6699.9
+    },
+    {
+      "stage": "entry",
+      "ms": 116.8
+    },
+    {
+      "stage": "entry",
+      "ms": 1066.6
+    },
+    {
+      "stage": "entry",
+      "ms": 250.1
+    },
+    {
+      "stage": "open 1",
+      "ms": 116.5
+    },
+    {
+      "stage": "open 1",
+      "ms": 549.8
+    },
+    {
+      "stage": "open 1",
+      "ms": 400.2
+    }
+  ],
+  "profile": [
+    {
+      "tag": "items",
+      "ms": 0.09999999776482582
+    },
+    {
+      "tag": "menu refresh",
+      "ms": 9.199999999254942
+    },
+    {
+      "tag": "choices",
+      "ms": 100.60000000149012
+    },
+    {
+      "tag": "start dress view",
+      "ms": 0.19999999925494194
+    },
+    {
+      "tag": "first dress frame",
+      "ms": 0.19999999925494194
+    },
+    {
+      "tag": "renderer init",
+      "ms": 131.79999999701977
+    },
+    {
+      "tag": "make marine",
+      "ms": 415.0999999977648
+    },
+    {
+      "tag": "kit synced",
+      "ms": 415.19999999925494
+    },
+    {
+      "tag": "dress render",
+      "ms": 123.69999999925494
+    },
+    {
+      "tag": "items",
+      "ms": 0.10000000149011612
+    },
+    {
+      "tag": "menu refresh",
+      "ms": 0.6000000014901161
+    },
+    {
+      "tag": "choices",
+      "ms": 86.80000000074506
+    },
+    {
+      "tag": "start dress view",
+      "ms": 0
+    },
+    {
+      "tag": "first dress frame",
+      "ms": 2.100000001490116
+    }
+  ],
+  "errors": [],
+  "entryMs": 9586.10000000149,
+  "paint": {
+    "count": 153,
+    "ms": 298.3000000268221
+  }
+}

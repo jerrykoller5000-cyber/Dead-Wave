@@ -1,0 +1,27 @@
+{
+  "id": "revolver",
+  "eye": [
+    0.32,
+    0.195,
+    -0.223
+  ],
+  "target": [
+    0,
+    0.103,
+    -0.025
+  ],
+  "fov": 23,
+  "moduleName": "revolver-bridge-proof",
+  "proofName": "checkRevolverBridge",
+  "hash": "333c9946",
+  "eyeWorld": [
+    0.2481679338842975,
+    -197.84877266528926,
+    -638.8429420289257
+  ],
+  "targetWorld": [
+    0,
+    -197.920120946281,
+    -638.6893881198348
+  ]
+}

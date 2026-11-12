@@ -1,0 +1,19 @@
+node tools/tests/run-all.mjs t38 --jobs 1 --no-retry --all-fails
+ GT-20076: starting one game-test command
+check-players: 316 player.position reads, all in the allowed places
+           INFO minigun cold meshes 22, equipped draws 22
+           INFO m4 cold meshes 35, equipped draws 31
+           INFO ak cold meshes 23, equipped draws 19
+           INFO aa12 cold meshes 24, equipped draws 23
+           INFO pistol cold meshes 19, equipped draws 15
+           INFO uzi cold meshes 27, equipped draws 23
+           INFO shotgun cold meshes 26, equipped draws 21
+           INFO revolver cold meshes 24, equipped draws 20
+           INFO sniper cold meshes 34, equipped draws 31
+           INFO launcher cold meshes 23, equipped draws 20
+           INFO flamer cold meshes 10, equipped draws 9
+           INFO chainsaw cold meshes 9, equipped draws 9
+           INFO twelve cold guns: 276 attached meshes; equipped individually: 243 actual draws
+ok    t38     26 pass   0 fail  120.5s
+
+1 checks: 26 pass, 0 fail

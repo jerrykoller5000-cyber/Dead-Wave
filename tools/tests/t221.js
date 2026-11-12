@@ -36,12 +36,20 @@
       const g = T.weaponMeshes.sniper; let oc = null, ob = null, tube = null, n = 0;
       g.traverse((o) => { if (!o.isMesh) return; if (/^ocular lens$/i.test(o.name || '')) oc = o; else if (/objective lens$/i.test(o.name || '')) ob = o; });
       if (!oc || !ob) return null;
-      for (const o of ob.parent.children) if (o.isMesh && o !== oc && o !== ob && o.geometry && o.geometry.attributes.position.count > n) { tube = o; n = o.geometry.attributes.position.count; }
+      // CB-312: the optic's own housing by its name (GT-20076's NX8: 'NX8 tapered optical housing'); the biggest mesh beside the lenses
+      // only when none is named (that is now an unnamed batch of the turrets and rings, 45 mm round the line, not the tube).
+      for (const o of ob.parent.children) if (o.isMesh && /housing|tube/i.test(o.name || '') && o.geometry) { tube = o; n = o.geometry.attributes.position.count; }
+      if (!tube) for (const o of ob.parent.children) if (o.isMesh && o !== oc && o !== ob && o.geometry && o.geometry.attributes.position.count > n) { tube = o; n = o.geometry.attributes.position.count; }
       g.updateMatrixWorld(true); const inv = g.matrixWorld.clone().invert(), c = (o) => new THREE.Box3().setFromObject(o).getCenter(V()).applyMatrix4(inv);
       const A = c(oc), B = c(ob), d = B.clone().sub(A).normalize(), len = A.distanceTo(B), R = new Map();
       const m = inv.clone().multiply(tube.matrixWorld), pa = tube.geometry.attributes.position;
       for (let i = 0; i < pa.count; i++) { const q = V().fromBufferAttribute(pa, i).applyMatrix4(m).sub(A), t = q.dot(d), r = q.sub(d.clone().multiplyScalar(t)).length(), k = Math.round(t * 100); R.set(k, Math.max(R.get(k) || 0, r)); }
-      const rAt = (t) => { let r = 0; for (let k = Math.floor(t * 100) - 1; k <= Math.ceil(t * 100) + 1; k++) r = Math.max(r, R.get(k) || 0); return r; };
+      // the tube's radius at t: the widest within a centimetre, or (a long straight run with no rings of vertices in it, as the NX8's
+      // housing has) the line between the nearest rings either side
+      const keys = [...R.keys()].sort((x, y) => x - y);
+      const rAt = (t) => { let r = 0; for (let k = Math.floor(t * 100) - 1; k <= Math.ceil(t * 100) + 1; k++) r = Math.max(r, R.get(k) || 0); if (r > 0) return r;
+        const tk = t * 100; let lo = null, hi = null; for (const k of keys) { if (k <= tk) lo = k; else { hi = k; break; } }
+        if (lo == null || hi == null) return 0; const u = (tk - lo) / (hi - lo); return R.get(lo) + (R.get(hi) - R.get(lo)) * u; };
       return () => {
         g.updateMatrixWorld(true); const gi = g.matrixWorld.clone().invert(), wr = ud.elbowRG.getObjectByName('wrist'); let deep = 0;
         if (wr) wr.traverse((o) => { if (!o.isMesh || !o.geometry || !o.geometry.attributes.position) return; const mm = gi.clone().multiply(o.matrixWorld), p2 = o.geometry.attributes.position;

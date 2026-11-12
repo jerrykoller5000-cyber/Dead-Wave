@@ -1,0 +1,300 @@
+{
+  "at": "2026-11-12T08:40:28.100Z",
+  "stages": [
+    {
+      "name": "action-setup",
+      "data": {
+        "gun": "m4",
+        "first": true,
+        "laser": null,
+        "gear": true
+      }
+    },
+    {
+      "name": "action-knife-m4-1p",
+      "data": {
+        "knifeT": 0.25589999999850993,
+        "gun": "m4",
+        "laser": null,
+        "first": true
+      }
+    },
+    {
+      "name": "action-knife-m4-3p",
+      "data": {
+        "knifeT": 0,
+        "gun": "m4",
+        "first": false
+      }
+    },
+    {
+      "name": "action-akimbo-pistol-3p",
+      "data": {
+        "gun": "pistol",
+        "equip": [
+          {
+            "ok": true,
+            "location": "secondary",
+            "index": 0,
+            "gun": {
+              "id": "pistol:second",
+              "kind": "pistol",
+              "loaded": 0,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            "stowed": null
+          }
+        ],
+        "slots": {
+          "primary": [
+            null,
+            null
+          ],
+          "secondary": [
+            "pistol:second",
+            null
+          ],
+          "hip": "pistol:base"
+        },
+        "flags": {
+          "fireHeld": false,
+          "mouseFireHeld": false,
+          "unarmed": false,
+          "placeMode": null,
+          "buildMode": false,
+          "blocked": false,
+          "reloading": false,
+          "fireCooldown": 0,
+          "dualActive": true,
+          "akimbo": true
+        },
+        "first": false
+      }
+    },
+    {
+      "name": "action-akimbo-pistol-1p",
+      "data": {
+        "gun": "pistol",
+        "flags": {
+          "fireHeld": false,
+          "mouseFireHeld": false,
+          "unarmed": false,
+          "placeMode": null,
+          "buildMode": false,
+          "blocked": false,
+          "reloading": false,
+          "fireCooldown": -0.7813000000007451,
+          "dualActive": true,
+          "akimbo": true
+        },
+        "vm": false,
+        "first": true
+      }
+    },
+    {
+      "name": "action-akimbo-uzi-3p",
+      "data": {
+        "gun": "uzi",
+        "equip": [
+          {
+            "ok": true,
+            "location": "secondary",
+            "index": 0,
+            "gun": {
+              "id": "uzi",
+              "kind": "uzi",
+              "loaded": 0,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            "stowed": null
+          },
+          {
+            "ok": true,
+            "location": "secondary",
+            "index": 1,
+            "gun": {
+              "id": "uzi:second",
+              "kind": "uzi",
+              "loaded": 0,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            "stowed": null
+          }
+        ],
+        "slots": {
+          "primary": [
+            null,
+            null
+          ],
+          "secondary": [
+            "uzi",
+            "uzi:second"
+          ],
+          "hip": "pistol:base"
+        },
+        "flags": {
+          "fireHeld": false,
+          "mouseFireHeld": false,
+          "unarmed": false,
+          "placeMode": null,
+          "buildMode": false,
+          "blocked": false,
+          "reloading": false,
+          "fireCooldown": 0,
+          "dualActive": true,
+          "akimbo": true
+        },
+        "first": false
+      }
+    },
+    {
+      "name": "action-akimbo-uzi-1p",
+      "data": {
+        "gun": "uzi",
+        "flags": {
+          "fireHeld": false,
+          "mouseFireHeld": false,
+          "unarmed": false,
+          "placeMode": null,
+          "buildMode": false,
+          "blocked": false,
+          "reloading": false,
+          "fireCooldown": -0.5179000000022351,
+          "dualActive": true,
+          "akimbo": true
+        },
+        "vm": false,
+        "first": true
+      }
+    },
+    {
+      "name": "action-saw-draw-1p",
+      "data": {
+        "gun": "chainsaw",
+        "saw": {
+          "holdT": 0,
+          "hearT": 0,
+          "fuel": 60,
+          "heat": 0,
+          "overheat": false,
+          "biteT": 0
+        }
+      }
+    },
+    {
+      "name": "action-saw-running-1p",
+      "data": {
+        "saw": {
+          "holdT": 0,
+          "hearT": 0,
+          "fuel": 59.945800000000744,
+          "heat": 0.0013549999999813737,
+          "overheat": false,
+          "biteT": 0
+        },
+        "knifeT": 0
+      }
+    },
+    {
+      "name": "action-saw-knife-1p",
+      "data": {
+        "saw": {
+          "holdT": 0,
+          "hearT": 0,
+          "fuel": 59.419100000001485,
+          "heat": 0.014522499999962747,
+          "overheat": false,
+          "biteT": 0
+        },
+        "knifeT": 0.2173000000007451
+      }
+    },
+    {
+      "name": "action-saw-back-3p",
+      "data": {
+        "saw": {
+          "holdT": 0,
+          "hearT": 0,
+          "fuel": 59.01100000000001,
+          "heat": 0.017825000000248354,
+          "overheat": false,
+          "biteT": 0
+        },
+        "gun": "chainsaw"
+      }
+    },
+    {
+      "name": "action-launcher-draw-1p",
+      "data": {
+        "gun": "launcher",
+        "ammo": 6
+      }
+    },
+    {
+      "name": "action-launcher-fired-1p",
+      "data": {
+        "gun": "launcher",
+        "ammo": 5
+      }
+    }
+  ],
+  "spikes": [
+    {
+      "stage": "entry",
+      "ms": 6816.5
+    },
+    {
+      "stage": "entry",
+      "ms": 133.3
+    },
+    {
+      "stage": "entry",
+      "ms": 1100
+    },
+    {
+      "stage": "entry",
+      "ms": 266.7
+    },
+    {
+      "stage": "action-setup",
+      "ms": 116.7
+    },
+    {
+      "stage": "action-setup",
+      "ms": 316.6
+    },
+    {
+      "stage": "action-setup",
+      "ms": 249.9
+    },
+    {
+      "stage": "action-akimbo-uzi-3p",
+      "ms": 366.6
+    },
+    {
+      "stage": "action-saw-draw-1p",
+      "ms": 100.1
+    },
+    {
+      "stage": "action-saw-draw-1p",
+      "ms": 199.9
+    },
+    {
+      "stage": "action-launcher-draw-1p",
+      "ms": 216.7
+    }
+  ],
+  "errors": [],
+  "warnings": [
+    "warning: The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127",
+    "warning: The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127",
+    "info: Grave Shift renderer: WebGPU.",
+    "info: Grave Shift opening perf: {\"toMenu\":17.21,\"segments\":{\"boot\":{\"at\":0,\"seconds\":0.41,\"frames\":2,\"over50\":1,\"over100\":1,\"worst\":133},\"caracal\":{\"at\":0.41,\"seconds\":10.8,\"frames\":178,\"over50\":36,\"over100\":21,\"worst\":1517},\"loading\":{\"at\":11.21"
+  ]
+}

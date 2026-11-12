@@ -1216,7 +1216,11 @@ export function createViewmodel(ctx) {
     } else if (key) { S.upT = S.raise >= 1 ? (S.upT || 0) + dt : 0; S.raise = Math.min(1, S.raise + dt * VM.raise); S.rising = true; }
     // CL-307: a blade swing (index.html st.blade) keeps the view on with the gun put away below it
     const BL = gun && st && st.blade && VM_BLADES[st.blade.kind] ? VM_BLADES[st.blade.kind] : null;
-    if (BL) S.raise = Math.max(0, S.raise - dt * VM.raise * 2.5);
+    if (BL) S.raise = Math.max(0, S.raise - dt * VM.raise * (BL.lower || 2.5));
+    // CE-4 (J16, the knife's stab): the blade comes out once the gun is down out of sight (its raise under BL.out, or at
+    // the latest BL.put of the swing): until then the hand stays on the gun as it drops (it vanished on the swing's first
+    // frame and the blade stood in its place)
+    const BLON = !!BL && (BL.put == null || S.raise <= (BL.out || 0.15) || clamp(st.blade.u || 0, 0, 1) >= BL.put);
     const active = !!gun && (S.raise > 0.001 || !!BL || !!HN);
     info.active = active; info.key = gun ? gun.key : null; info.raise = S.raise; info.akimbo = !!gun2; info.blade = BL ? st.blade.kind : null;
     info.hands = HN ? st.hands.kind : null;
@@ -1261,7 +1265,7 @@ export function createViewmodel(ctx) {
       gun2.root.position.copy(G2.p); gun2.root.quaternion.copy(G2.q); gun2.root.scale.setScalar(G2.s);
     }
     gun.root.position.copy(G.p); gun.root.quaternion.copy(G.q); gun.root.scale.setScalar(G.s);
-    gun.root.visible = !BL && !HN; if (gun2) gun2.root.visible = !BL && !HN;   // CL-307: put away for the blade; CL-317: for the empty hands
+    gun.root.visible = !BLON && !HN; if (gun2) gun2.root.visible = !BLON && !HN;   // CL-307: put away for the blade (CE-4: once it is down); CL-317: for the empty hands
     // The copied action cycles on a shot; the original gun keeps its third-person animation.
     S.slideT += dt;
     // CE-1 (GT-20075): each gun's action on its own shot, the same in the pair's left copy. P.action (viewmodel-poses.js)
@@ -1440,7 +1444,7 @@ export function createViewmodel(ctx) {
     const GRN = !AK && st.grenade && st.grenade.phase ? st.grenade : null;   // CL-307: the throw
     if (GRN) poseL = grenadeFrame(GRN, WL, eL, dt) || poseL;
     else if (grenadeC) grenadeC.root.visible = false;
-    if (BL) { poseR = sockets.poseR; poseL = POSE_RELAXED; bladeFrame(BL, st.blade, WR, WL, eR, eL); }
+    if (BLON) { poseR = sockets.poseR; poseL = POSE_RELAXED; bladeFrame(BL, st.blade, WR, WL, eR, eL); }
     else if (blade) blade.root.visible = false;
     if (HN) { const hp = handsFrame(HN, st.hands, WR, WL, eR, eL, dt); poseR = hp.r; poseL = hp.l; }
     mirrorWorn(arms.r, 1); mirrorWorn(arms.l, -1);
@@ -1792,7 +1796,10 @@ export function createViewmodel(ctx) {
         C.root.visible = true;
       } else C.root.visible = false;
     }
-    eL[0] = WL.p.x - 0.12 * MX; eL[1] = WL.p.y - 0.30; eL[2] = WL.p.z + 0.16;
+    // CE-4 (12 Nov): the elbow from each place's own offset off the wrist (elb, view space as the eye sees it; the default
+    // below and behind the hand): up and out to the side at the cock, so the wind-up reads as an overhand throw
+    { const E0 = VM_GRENADE.elbow || [-0.12, -0.30, 0.16], ea = (a !== 'fore' && P[a].elb) || E0, eb = (b !== 'fore' && P[b].elb) || E0;
+      eL[0] = WL.p.x + (ea[0] + (eb[0] - ea[0]) * k) * MX; eL[1] = WL.p.y + ea[1] + (eb[1] - ea[1]) * k; eL[2] = WL.p.z + ea[2] + (eb[2] - ea[2]) * k; }
     twistToward(arms.l, WL, eL);
     info.handPlace = 'grenade';
     // CE-4: the fingers eased through it (VM_GRENADE.fingers), the fist while the grenade is in hand

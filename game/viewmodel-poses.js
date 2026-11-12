@@ -438,14 +438,18 @@ const VM_STAGE3_RELOADS = Object.freeze({
 // which the gun's yaw/pitch/roll cannot do (a blade turned from up to down through them passes through pointing away
 // from the eye and vanishes behind the fist: the first cloud strip).
 export const VM_BLADES = Object.freeze({
-  knife: {   // a slash (0.22 s): the blade up out of the fist, swept from the right across the lower middle, back (a thrust
-             // points the 30 cm blade at the eye's line and it vanishes behind the fist: fpshot p18)
-    // CE-4 (J16, Claude 5; the cloud audit, 11 Nov: the slash was small and quick, no wind-up, and from 0.45 on the fist was
-    // below the view): a wind-up back and up at the right (the elbow cocked), the cut across to the left of the middle with
-    // the blade's edge leading, the follow-through low left still in sight, home
-    keys: [[0, { p: [0.30, -0.34, -0.30], e: [0.2, -0.9, 0.3, -0.3] }], [0.22, { p: [0.34, -0.10, -0.32], e: [0.3, -1.2, 0.9, -0.5] }],
-      [0.48, { p: [0.04, -0.08, -0.52], e: [0.0, -1.0, 1.4, 0.9] }], [0.70, { p: [-0.08, -0.06, -0.50], e: [-0.1, -0.8, 1.4, 0.95] }],
-      [1, { p: [0.30, -0.34, -0.30], e: [0.2, -0.9, 0.3, -0.3] }]],
+  knife: {   // a stab (0.22 s): the gun dropped out of sight, the fist up from below at the right, a thrust in toward the middle, back down
+    // CE-4 (J16, Claude 5, 12 Nov; CLAUDE DIRECTOR: "the knife stab first, Jerry uses it a lot"): it was a slash, and the
+    // gun vanished on its first frame with the blade standing in its place. Now the hand takes the gun down out of sight
+    // (lowered fast, then the blade out: lower, out, put), the fist comes up from below the right with the blade
+    // pointing ahead and drawn back a little (0.28), drives forward and in toward the middle below the crosshair (0.48,
+    // held to 0.60), the wrist turned so the blade's flat is to the eye (a blade pointed along the eye's line hides behind
+    // the fist: fpshot p18; turned the other way at the draw-back, where the flat caught the sky in a white flare), and
+    // drops back down out of sight (1); the gun comes up after it. Places as the eye sees them.
+    keys: [[0.14, { p: [0.20, -0.274, -0.346], e: [0.15, 0.1, 0.2, 0] }], [0.28, { p: [0.166, -0.108, -0.375], e: [0.30, -0.60, 0.3, 0] }],
+      [0.48, { p: [0.086, -0.088, -0.56], e: [0.55, -0.45, -0.5, 0] }], [0.60, { p: [0.080, -0.083, -0.58], e: [0.55, -0.43, -0.5, 0] }],
+      [0.80, { p: [0.15, -0.16, -0.52], e: [0.2, 0.0, -0.3, 0] }], [1, { p: [0.236, -0.37, -0.367], e: [0.1, 0.3, 0, 0] }]],
+    lower: 4.9, out: 0.15, put: 0.2,   // the gun down out of sight (its raise under 0.15) in about two frames at 60 fps: the view's raise down at 4.9 x its rate (net 27/s); the blade out at the latest at 0.2
     hold: { pos: [0, -0.07, 0.0], rot: [0, 0.15, 0] },
     away: [-0.22, -0.46, -0.36]   // the support wrist, out of the view (view space)
   },
@@ -453,6 +457,7 @@ export const VM_BLADES = Object.freeze({
     keys: [[0, { p: [0.30, -0.34, -0.30], e: [0.2, -0.3, 0.2, 0] }], [0.30, { p: [0.26, 0.06, -0.42], e: [0.1, -1.35, 0.3, -0.3] }],
       [0.58, { p: [0.03, -0.18, -0.58], e: [0.0, -1.0, 1.5, 1.5] }], [0.80, { p: [-0.10, -0.27, -0.46], e: [-0.1, -0.6, 1.4, 1.25] }],
       [1, { p: [0.30, -0.34, -0.30], e: [0.2, -0.3, 0.2, 0] }]],   // CE-4: the follow-through goes on down and left past the cut (it swung back right along the view's bottom), then drops away below; the fist stays right of the middle (the forearm was a log across the view at -0.06); the flat to the eye in the chop (roll)
+    lower: 4.9, out: 0.15, put: 0.15,   // CE-4 (12 Nov): the gun down out of sight before the blade comes out, as the knife (it vanished on the swing's first frame)
     hold: { pos: [0, -0.07, 0.0], rot: [0, 0.15, 0] },
     away: [-0.22, -0.46, -0.36]
   },
@@ -460,6 +465,7 @@ export const VM_BLADES = Object.freeze({
     keys: [[0, { p: [0.30, -0.34, -0.30], e: [0.2, -0.3, 0.2, 0] }], [0.28, { p: [0.24, 0.08, -0.44], e: [0.1, -1.4, 0.3, -0.3] }],
       [0.56, { p: [0.02, -0.18, -0.60], e: [0.0, -1.0, 1.5, 1.5] }], [0.80, { p: [-0.10, -0.27, -0.48], e: [-0.1, -0.6, 1.4, 1.25] }],   // CE-4: the follow-through on down and left
       [1, { p: [0.30, -0.34, -0.30], e: [0.2, -0.3, 0.2, 0] }]],
+    lower: 4.9, out: 0.15, put: 0.2,   // CE-4 (12 Nov): the gun down out of sight before the blade comes out, as the knife
     hold: { pos: [0, -0.07, 0.0], rot: [0, 0.15, 0] },
     away: [-0.22, -0.46, -0.36]
   }
@@ -475,9 +481,14 @@ export const VM_GRENADE = Object.freeze({
     pouch: { p: [-0.26, -0.44, -0.30], e: [-0.4, 0.6, -0.3] },
     lift: { p: [-0.25, -0.10, -0.42], e: [-0.5, -0.3, -0.5] },
     // CE-4: in from -0.26 (the fist and its grenade sat under the HUD's left panel, ndc x -0.53: never seen at the eye)
-    cocked: { p: [-0.18, 0.05, -0.44], e: [-0.6, -0.9, -0.6] },   // was 30 cm from the eye: a fist the size of the view's corner
-    whip: { p: [-0.08, 0.06, -0.60], e: [-0.1, -0.2, -0.3] },
-    follow: { p: [0.02, -0.16, -0.62], e: [0.1, 0.5, -0.1] }
+    // CE-4 (12 Nov, Claude 5; CLAUDE DIRECTOR: "a throw that winds up and follows through"): the cock was a fist held up in
+    // front of the face, and the whip a push forward from there. Now an overhand throw: cocked up and back by the head at
+    // the top left (the grenade above the fist, the elbow up and out: elb, the elbow's offset off the wrist), the whip
+    // over and forward to above the middle (the grenade leaves there), the follow-through down and across to the lower
+    // middle, clear of the gun, and out below the view on its way back to the gun
+    cocked: { p: [-0.21, 0.12, -0.32], e: [-0.6, -1.3, -0.6], elb: [-0.20, -0.10, 0.12] },
+    whip: { p: [-0.06, 0.13, -0.60], e: [-0.1, -0.4, -0.3], elb: [-0.12, -0.18, 0.2] },
+    follow: { p: [0.04, -0.27, -0.50], e: [0.1, 0.6, -0.1] }
   },
   hold: { pos: [0, -0.045, 0.01], rot: [0, 0, 0] },   // the grenade's top out of the fist
   // CE-4 (J16, Claude 5): the fingers through the throw (the cloud audit, 11 Nov: the hand went from the grip flat open at
@@ -648,10 +659,16 @@ export const VM_TRIGGER = Object.freeze({
   // the pump gun (CE-2, 11 Nov, on Claude 1's 10:00Z refit of its firing hand): the pad 5 mm off the face 43% down the blade,
   // nothing of the index in the guard or the blade, at rest or pulled; 4 mm at the face, the blade on its pin
   shotgun: { part: 'trigger', rest: [-0.2, 0.585, 0.895, 0.17], pull: [-0.2, 0.645, 0.985, 0.17], pivot: null, turn: 0.18, hold: 0.06, release: 0.1 },
-  // the GW-4 (CE-2, 12 Nov, on Claude 1's CD-1 part-4 fist under the guard GT-20087b lengthened): the index up into the
-  // guard over its bottom bar, the pad on the blade's front 1.3 mm off it two thirds down, pressing it back 4 mm at the
-  // face each shot (the blade on its pin); the glove 0.19 mm at most into the blade (the pad's give), nothing in the guard
-  m4: { part: 'trigger', rest: [0.5, 0.815, 0.925, 0.35], pull: [0.5, 0.93, 0.828, 0.35], pivot: null, turn: 0.1494, hold: 0.06, release: 0.09 }
+  // the GW-4 (CE-2, 12 Nov, re-solved on Claude 1's fixes7 fist for ChatGPT 2's trigger 15 gun mm back, GT-20090): the
+  // index up into the guard, its pad on the blade's front 72% down, 2.7 mm off it at rest (no closer without its middle
+  // bone on the blade's top), 1.9 mm when the blade is back; the blade turns on its own pin (33 mm above the pad's
+  // height: 0.1186 rad for 4 mm at the face); the glove 0.3 mm at most into the blade (the pad's give)
+  m4: { part: 'trigger', rest: [0.3, 1.2, 0.272, 0.35], pull: [0.36, 1.2, 0.257, 0.282], pivot: null, turn: 0.1186, hold: 0.06, release: 0.09 },
+  // the Breacher (AA-12; CE-2, 12 Nov, on Claude 1's 01:50Z fist under ChatGPT 2's longer guard, GT-20092): the index from
+  // the fit's straight finger down into the guard, its pad on the blade's front 64% down, 1.2 mm off it at rest, 0.8 mm
+  // when the blade is back (82% down); the blade on its own pin (18 mm above: 0.2138 rad for 4 mm at the face); the glove
+  // 0.24 mm at most into the blade (the pad's give), nothing in the guard
+  aa12: { part: 'trigger', rest: [-0.13, 1.03, -0.08, 0.35], pull: [-0.13, 1.06, 0.025, 0.29], pivot: null, turn: 0.2138, hold: 0.06, release: 0.09 }
 });
 
 // CE-4 (J16; ChatGPT 2's GT-20084 switch, the pad in 1 mm and back): the flashlight's switch pressed by the support thumb

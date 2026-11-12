@@ -1,0 +1,46 @@
+{
+  "hash": "65bd2ab7",
+  "gap": {
+    "lowerMm": 0,
+    "upperMm": 0,
+    "penetrating": true
+  },
+  "guardGap": {
+    "lowerMm": 0,
+    "upperMm": 0,
+    "penetrating": true
+  },
+  "closed": [
+    true
+  ],
+  "surfaces": {
+    "x1": {
+      "occupied": 8129,
+      "added": 0,
+      "lost": 0,
+      "maxIn": 0,
+      "maxOut": 0
+    },
+    "x-1": {
+      "occupied": 8129,
+      "added": 0,
+      "lost": 0,
+      "maxIn": 0,
+      "maxOut": 0
+    },
+    "z1": {
+      "occupied": 10340,
+      "added": 0,
+      "lost": 0,
+      "maxIn": 0,
+      "maxOut": 0
+    },
+    "z-1": {
+      "occupied": 10340,
+      "added": 0,
+      "lost": 0,
+      "maxIn": 0,
+      "maxOut": 0
+    }
+  }
+}

@@ -1,0 +1,37 @@
+$ node review/GT-20076/heavy-light-batch.mjs after --wasp-pad
+Wasp pad after acb7c158 { lowerMm: 0, upperMm: 0.0078125 } 42 {
+PASS after uzi hip, aimed, held-right-open, rack in four lights
+
+$ node review/GT-20076/frame-details.mjs --wasp-pad
+PASS native before/after side detail in all four lights uzi acb7c158
+
+$ node tools/realtest.mjs t189 t38 t333 --all
+FAIL  t189     39 pass   8 fail  71.6s  (real renderer)
+    PASS uzi@holster+: stowed at 1.000 x its in-hand size (CARRY_FIT 1)
+    PASS uzi@holster+: snug, gap 0.000 m, clipping 0.000 m
+    PASS uzi@pair-: stowed at 1.000 x its in-hand size (CARRY_FIT 1)
+    PASS uzi@pair-: snug, gap 0.000 m, clipping 0.000 m
+    FAIL shotgun@sling-: snug, gap 0.025 m, clipping 0.000 m (bar from qa/2026-10-23-GB-220/before/ shots: gap 0.012, clip 0.049)
+    FAIL ak@sling+: snug, gap 0.021 m, clipping 0.000 m (bar from qa/2026-10-23-GB-220/before/ shots: gap 0.012, clip 0.045)
+    FAIL shotgun@sling+: snug, gap 0.033 m, clipping 0.000 m (bar from qa/2026-10-23-GB-220/before/ shots: gap 0.012, clip 0.05)
+    FAIL aa12@sling-: snug, gap 0.000 m, clipping 0.074 m (bar from qa/2026-10-23-GB-220/before/ shots: gap 0.012, clip 0.038)
+    FAIL launcher@sling+: snug, gap 0.018 m, clipping 0.000 m
+    FAIL sniper@sling-: snug, gap 0.067 m, clipping 0.000 m
+    FAIL chainsaw@sling+: snug, gap 0.033 m, clipping 0.000 m (bar from qa/2026-10-23-GB-220/before/ shots: gap 0.025, clip 0.015)
+    FAIL flamer@sling-: snug, gap 0.123 m, clipping 0.000 m (bar from qa/2026-10-23-GB-220/before/ shots: gap 0.032, clip 0.015)
+FAIL  t38       0 pass   1 fail  60.7s  (real renderer)
+ok    t333     16 pass   0 fail  47.7s  (real renderer)
+3 checks: 55 pass, 9 fail (real renderer)
+
+$ node tools/realtest.mjs t38 --all
+ok    t38      26 pass   0 fail  58.6s  (real renderer)
+    INFO uzi cold meshes 27, equipped draws 23
+1 checks: 26 pass, 0 fail (real renderer)
+
+$ node review/GT-20076/pistol-frame-perf.mjs --wasp-pad
+  hash: 'acb7c158',
+  frames: { count: 150, p50: 16.69999999999709, p95: 16.799999999995634 },
+  seamBuildMs: []
+  hash: '1056c784',
+  frames: { count: 150, p50: 16.69999999999709, p95: 16.89999999999418 },
+  seamBuildMs: [ 3.300000000745058, 0.09999999776482582 ]

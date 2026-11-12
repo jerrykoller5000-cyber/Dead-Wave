@@ -1,0 +1,4530 @@
+{
+  "at": "2026-11-12T11:24:44.831Z",
+  "label": "draws-bound",
+  "errors": [],
+  "audit": {
+    "frames": 73,
+    "objects": 238,
+    "totalCalls": 19564,
+    "byRoot": [
+      {
+        "key": "training-ground",
+        "objects": 195,
+        "calls": 14746,
+        "main": 14746,
+        "other": 0
+      },
+      {
+        "key": "Group#5707",
+        "objects": 40,
+        "calls": 3796,
+        "main": 2920,
+        "other": 876
+      },
+      {
+        "key": "Mesh#72743",
+        "objects": 1,
+        "calls": 876,
+        "main": 0,
+        "other": 876
+      },
+      {
+        "key": "Mesh#72742",
+        "objects": 1,
+        "calls": 73,
+        "main": 0,
+        "other": 73
+      },
+      {
+        "key": "motes-instanced",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      }
+    ],
+    "byBranch": [
+      {
+        "key": "Group#5707/Group#6465/Group#5708",
+        "objects": 40,
+        "calls": 3796,
+        "main": 2920,
+        "other": 876
+      },
+      {
+        "key": "training-ground/training-containment/training-containment-gun",
+        "objects": 22,
+        "calls": 1679,
+        "main": 1679,
+        "other": 0
+      },
+      {
+        "key": "Mesh#72743",
+        "objects": 1,
+        "calls": 876,
+        "main": 0,
+        "other": 876
+      },
+      {
+        "key": "training-ground/training-armory/armoryRack",
+        "objects": 11,
+        "calls": 803,
+        "main": 803,
+        "other": 0
+      },
+      {
+        "key": "training-ground/Group#84541/Group#84546",
+        "objects": 8,
+        "calls": 657,
+        "main": 657,
+        "other": 0
+      },
+      {
+        "key": "training-ground/Group#84555/Group#84560",
+        "objects": 8,
+        "calls": 657,
+        "main": 657,
+        "other": 0
+      },
+      {
+        "key": "training-ground/Group#84569/Group#84574",
+        "objects": 8,
+        "calls": 657,
+        "main": 657,
+        "other": 0
+      },
+      {
+        "key": "training-ground/Group#84583/Group#84588",
+        "objects": 8,
+        "calls": 657,
+        "main": 657,
+        "other": 0
+      },
+      {
+        "key": "training-ground/Group#84597/Group#84602",
+        "objects": 8,
+        "calls": 657,
+        "main": 657,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-gate-frame/training-gate-beacon",
+        "objects": 2,
+        "calls": 146,
+        "main": 146,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-razor-perimeter/training-perimeter-east",
+        "objects": 2,
+        "calls": 146,
+        "main": 146,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-cutaway-east/Mesh#85534",
+        "objects": 1,
+        "calls": 146,
+        "main": 146,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-containment/training-containment-rotor",
+        "objects": 2,
+        "calls": 146,
+        "main": 146,
+        "other": 0
+      },
+      {
+        "key": "Mesh#72742",
+        "objects": 1,
+        "calls": 73,
+        "main": 0,
+        "other": 73
+      },
+      {
+        "key": "training-ground/training-cutaway-rangeSouth/Mesh#84367",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-cutaway-rangeSouth/Mesh#84368",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-cutaway-rangeSouth/Mesh#84369",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-cutaway-rangeSouth/Mesh#85515",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-cutaway-east/Mesh#85048",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-cutaway-east/Mesh#85520",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-cutaway-east/Mesh#85521",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-cutaway-east/Mesh#85522",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-cutaway-east/Mesh#85523",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-cutaway-east/Mesh#85524",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-cutaway-east/Mesh#85525",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-cutaway-east/Mesh#85528",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-cutaway-east/Mesh#85530",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-cutaway-east/Mesh#85531",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-cutaway-east/Mesh#85532",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-cutaway-north/Mesh#85539",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-cutaway-north/Mesh#85540",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-cutaway-north/Mesh#85541",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-cutaway-north/Mesh#85542",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-cutaway-north/Mesh#85543",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-cutaway-west/Mesh#84434",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-cutaway-west/Mesh#85544",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-cutaway-west/Mesh#85545",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-cutaway-overhead/Mesh#85408",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-cutaway-overhead/Mesh#85549",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-cutaway-overhead/Mesh#85550",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-gate-frame/Mesh#84746",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-gate-frame/Mesh#84934",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-gate-frame/Mesh#84935",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-gate-frame/Mesh#84936",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-gate-frame/Mesh#84937",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-gate-frame/Mesh#84938",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-gate-frame/Mesh#84939",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-gate-leaf--1/Mesh#84650",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-gate-leaf--1/Mesh#84748",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-gate-leaf--1/Mesh#84940",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-gate-leaf--1/Mesh#84941",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-gate-leaf--1/Mesh#84942",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-gate-leaf--1/Mesh#84943",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-gate-leaf-1/Mesh#84695",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-gate-leaf-1/Mesh#84710",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-gate-leaf-1/Mesh#84944",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-gate-leaf-1/Mesh#84945",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-gate-leaf-1/Mesh#84946",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-cif/Mesh#85576",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-armory/Mesh#85589",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-cif/Mesh#85573",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-cif/cif-counter-corbel",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-cif/cif-exterior-sign",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-cif/Mesh#85575",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-armory/Mesh#85578",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-armory/armory-frame-bolts",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-armory/Mesh#85579",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-armory/armory-wall-surround",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-armory/armory-security-mesh",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-armory/armory-sign",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-kiosk/Mesh#85625",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-kiosk/Mesh#85626",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-kiosk/Mesh#85628",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-kiosk/Mesh#85624",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-kiosk/Mesh#85618",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-kiosk/Mesh#85619",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/Mesh#85551",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-firing-bench/Mesh#84537",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/Mesh#85554",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-firing-bench/Mesh#84538",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-firing-bench/Mesh#84498",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/Mesh#85555",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/Mesh#85553",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/Mesh#85552",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-void",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/Mesh#84364",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-range-floor",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-build-floor",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-gate-header",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/firing-line",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-firing-bench/Mesh#84495",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-firing-bench/Mesh#84494",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-firing-bench/Mesh#84539",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/Mesh#84540",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/Mesh#85563",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/Mesh#85565",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/Mesh#85564",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/Mesh#85049",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-wear-flicker",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-no-build-paint",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/Mesh#85569",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/range-drill-monitor/Mesh#86301",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/range-drill-monitor/Mesh#86313",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/range-drill-monitor/range-monitor-screen",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "motes-instanced",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-cutaway-north/Mesh#85151",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-cutaway-north/Mesh#85150",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/Mesh#85499",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-cutaway-east/Mesh#85148",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/Mesh#85146",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-cutaway-east/Mesh#85533",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/Mesh#85566",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/Mesh#84488",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/Mesh#84489",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/Mesh#84490",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/Mesh#84491",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/Mesh#84492",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-containment/training-containment-mount",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-containment/training-containment-arm",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-containment/training-containment-swivel",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-containment/training-containment-status",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-containment/training-containment-flash",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/Mesh#84487",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-cutaway-rangeSouth/Mesh#85516",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/Mesh#85045",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/Mesh#85044",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/Mesh#85046",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/training-cutaway-east/Mesh#85047",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/Mesh#84947",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      },
+      {
+        "key": "training-ground/Mesh#84948",
+        "objects": 1,
+        "calls": 73,
+        "main": 73,
+        "other": 0
+      }
+    ],
+    "rows": [
+      {
+        "path": "Mesh#72743",
+        "root": "Mesh#72743",
+        "branch": "Mesh#72743",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "NodeMaterial",
+        "userData": [],
+        "calls": 876,
+        "main": 0,
+        "other": 876,
+        "passIds": []
+      },
+      {
+        "path": "Group#5707/Group#6465/Group#5708/live-sleeve-live/live-sleeve",
+        "root": "Group#5707",
+        "branch": "Group#5707/Group#6465/Group#5708",
+        "name": "live-sleeve",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "liveShape",
+          "aoOwners",
+          "cloth"
+        ],
+        "calls": 146,
+        "main": 73,
+        "other": 73,
+        "passIds": []
+      },
+      {
+        "path": "Group#5707/Group#6465/Group#5708/marine-waist-live/marine-flexible-shirt",
+        "root": "Group#5707",
+        "branch": "Group#5707/Group#6465/Group#5708",
+        "name": "marine-flexible-shirt",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "liveShape",
+          "aoOwners"
+        ],
+        "calls": 146,
+        "main": 73,
+        "other": 73,
+        "passIds": []
+      },
+      {
+        "path": "Group#5707/Group#6465/Group#5708/live-sleeve-live/live-sleeve",
+        "root": "Group#5707",
+        "branch": "Group#5707/Group#6465/Group#5708",
+        "name": "live-sleeve",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "liveShape",
+          "aoOwners",
+          "cloth"
+        ],
+        "calls": 146,
+        "main": 73,
+        "other": 73,
+        "passIds": []
+      },
+      {
+        "path": "Group#5707/Group#6465/Group#5708/live-trouser-leg-live/live-trouser-leg",
+        "root": "Group#5707",
+        "branch": "Group#5707/Group#6465/Group#5708",
+        "name": "live-trouser-leg",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "liveShape",
+          "aoOwners",
+          "cloth"
+        ],
+        "calls": 146,
+        "main": 73,
+        "other": 73,
+        "passIds": []
+      },
+      {
+        "path": "Group#5707/Group#6465/Group#5708/live-trouser-leg-live/live-trouser-leg",
+        "root": "Group#5707",
+        "branch": "Group#5707/Group#6465/Group#5708",
+        "name": "live-trouser-leg",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "liveShape",
+          "aoOwners",
+          "cloth"
+        ],
+        "calls": 146,
+        "main": 73,
+        "other": 73,
+        "passIds": []
+      },
+      {
+        "path": "Group#5707/Group#6465/Group#5708/live-seat-live/live-seat",
+        "root": "Group#5707",
+        "branch": "Group#5707/Group#6465/Group#5708",
+        "name": "live-seat",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "liveShape",
+          "aoOwners",
+          "cloth"
+        ],
+        "calls": 146,
+        "main": 73,
+        "other": 73,
+        "passIds": []
+      },
+      {
+        "path": "Group#5707/Group#6465/Group#5708/Group#5918/Mesh#79519",
+        "root": "Group#5707",
+        "branch": "Group#5707/Group#6465/Group#5708",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 146,
+        "main": 73,
+        "other": 73,
+        "passIds": []
+      },
+      {
+        "path": "Group#5707/Group#6465/Group#5708/Group#5918/Group#79523/Mesh#79554",
+        "root": "Group#5707",
+        "branch": "Group#5707/Group#6465/Group#5708",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "CylinderGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 146,
+        "main": 73,
+        "other": 73,
+        "passIds": []
+      },
+      {
+        "path": "Group#5707/Group#6465/Group#5708/Group#5918/Group#79556/Mesh#79587",
+        "root": "Group#5707",
+        "branch": "Group#5707/Group#6465/Group#5708",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "CylinderGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 146,
+        "main": 73,
+        "other": 73,
+        "passIds": []
+      },
+      {
+        "path": "Group#5707/Group#6465/Group#5708/Group#5709/Mesh#79521",
+        "root": "Group#5707",
+        "branch": "Group#5707/Group#6465/Group#5708",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "SphereGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 146,
+        "main": 73,
+        "other": 73,
+        "passIds": []
+      },
+      {
+        "path": "Group#5707/Group#6465/Group#5708/Group#5918/Mesh#79589",
+        "root": "Group#5707",
+        "branch": "Group#5707/Group#6465/Group#5708",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 146,
+        "main": 73,
+        "other": 73,
+        "passIds": []
+      },
+      {
+        "path": "Group#5707/Group#6465/Group#5708/Group#5918/Mesh#79591",
+        "root": "Group#5707",
+        "branch": "Group#5707/Group#6465/Group#5708",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "CylinderGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 146,
+        "main": 73,
+        "other": 73,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Group#84597/Group#84602/target-plate",
+        "root": "training-ground",
+        "branch": "training-ground/Group#84597/Group#84602",
+        "name": "target-plate",
+        "type": "Mesh",
+        "geometry": "PlaneGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 146,
+        "main": 146,
+        "other": 0,
+        "passIds": [
+          "backSide"
+        ]
+      },
+      {
+        "path": "training-ground/Group#84583/Group#84588/target-plate",
+        "root": "training-ground",
+        "branch": "training-ground/Group#84583/Group#84588",
+        "name": "target-plate",
+        "type": "Mesh",
+        "geometry": "PlaneGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 146,
+        "main": 146,
+        "other": 0,
+        "passIds": [
+          "backSide"
+        ]
+      },
+      {
+        "path": "training-ground/Group#84569/Group#84574/target-plate",
+        "root": "training-ground",
+        "branch": "training-ground/Group#84569/Group#84574",
+        "name": "target-plate",
+        "type": "Mesh",
+        "geometry": "PlaneGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 146,
+        "main": 146,
+        "other": 0,
+        "passIds": [
+          "backSide"
+        ]
+      },
+      {
+        "path": "training-ground/Group#84555/Group#84560/target-plate",
+        "root": "training-ground",
+        "branch": "training-ground/Group#84555/Group#84560",
+        "name": "target-plate",
+        "type": "Mesh",
+        "geometry": "PlaneGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 146,
+        "main": 146,
+        "other": 0,
+        "passIds": [
+          "backSide"
+        ]
+      },
+      {
+        "path": "training-ground/training-cutaway-east/Mesh#85534",
+        "root": "training-ground",
+        "branch": "training-ground/training-cutaway-east/Mesh#85534",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 146,
+        "main": 146,
+        "other": 0,
+        "passIds": [
+          "backSide"
+        ]
+      },
+      {
+        "path": "training-ground/Group#84541/Group#84546/target-plate",
+        "root": "training-ground",
+        "branch": "training-ground/Group#84541/Group#84546",
+        "name": "target-plate",
+        "type": "Mesh",
+        "geometry": "PlaneGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 146,
+        "main": 146,
+        "other": 0,
+        "passIds": [
+          "backSide"
+        ]
+      },
+      {
+        "path": "training-ground/training-containment/training-containment-gun",
+        "root": "training-ground",
+        "branch": "training-ground/training-containment/training-containment-gun",
+        "name": "training-containment-gun",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardNodeMaterial",
+        "userData": [],
+        "calls": 146,
+        "main": 146,
+        "other": 0,
+        "passIds": [
+          "backSide"
+        ]
+      },
+      {
+        "path": "Mesh#72742",
+        "root": "Mesh#72742",
+        "branch": "Mesh#72742",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "NodeMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 0,
+        "other": 73,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-cutaway-rangeSouth/Mesh#84367",
+        "root": "training-ground",
+        "branch": "training-ground/training-cutaway-rangeSouth/Mesh#84367",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "PlaneGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-cutaway-rangeSouth/Mesh#84368",
+        "root": "training-ground",
+        "branch": "training-ground/training-cutaway-rangeSouth/Mesh#84368",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "PlaneGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-cutaway-rangeSouth/Mesh#84369",
+        "root": "training-ground",
+        "branch": "training-ground/training-cutaway-rangeSouth/Mesh#84369",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "PlaneGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-cutaway-rangeSouth/Mesh#85515",
+        "root": "training-ground",
+        "branch": "training-ground/training-cutaway-rangeSouth/Mesh#85515",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-cutaway-east/Mesh#85048",
+        "root": "training-ground",
+        "branch": "training-ground/training-cutaway-east/Mesh#85048",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "PlaneGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-cutaway-east/Mesh#85520",
+        "root": "training-ground",
+        "branch": "training-ground/training-cutaway-east/Mesh#85520",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-cutaway-east/Mesh#85521",
+        "root": "training-ground",
+        "branch": "training-ground/training-cutaway-east/Mesh#85521",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-cutaway-east/Mesh#85522",
+        "root": "training-ground",
+        "branch": "training-ground/training-cutaway-east/Mesh#85522",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-cutaway-east/Mesh#85523",
+        "root": "training-ground",
+        "branch": "training-ground/training-cutaway-east/Mesh#85523",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-cutaway-east/Mesh#85524",
+        "root": "training-ground",
+        "branch": "training-ground/training-cutaway-east/Mesh#85524",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-cutaway-east/Mesh#85525",
+        "root": "training-ground",
+        "branch": "training-ground/training-cutaway-east/Mesh#85525",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-cutaway-east/Mesh#85528",
+        "root": "training-ground",
+        "branch": "training-ground/training-cutaway-east/Mesh#85528",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-cutaway-east/Mesh#85530",
+        "root": "training-ground",
+        "branch": "training-ground/training-cutaway-east/Mesh#85530",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-cutaway-east/Mesh#85531",
+        "root": "training-ground",
+        "branch": "training-ground/training-cutaway-east/Mesh#85531",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-cutaway-east/Mesh#85532",
+        "root": "training-ground",
+        "branch": "training-ground/training-cutaway-east/Mesh#85532",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-cutaway-north/Mesh#85539",
+        "root": "training-ground",
+        "branch": "training-ground/training-cutaway-north/Mesh#85539",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-cutaway-north/Mesh#85540",
+        "root": "training-ground",
+        "branch": "training-ground/training-cutaway-north/Mesh#85540",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-cutaway-north/Mesh#85541",
+        "root": "training-ground",
+        "branch": "training-ground/training-cutaway-north/Mesh#85541",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-cutaway-north/Mesh#85542",
+        "root": "training-ground",
+        "branch": "training-ground/training-cutaway-north/Mesh#85542",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-cutaway-north/Mesh#85543",
+        "root": "training-ground",
+        "branch": "training-ground/training-cutaway-north/Mesh#85543",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-cutaway-west/Mesh#84434",
+        "root": "training-ground",
+        "branch": "training-ground/training-cutaway-west/Mesh#84434",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "PlaneGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-cutaway-west/Mesh#85544",
+        "root": "training-ground",
+        "branch": "training-ground/training-cutaway-west/Mesh#85544",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-cutaway-west/Mesh#85545",
+        "root": "training-ground",
+        "branch": "training-ground/training-cutaway-west/Mesh#85545",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-cutaway-overhead/Mesh#85408",
+        "root": "training-ground",
+        "branch": "training-ground/training-cutaway-overhead/Mesh#85408",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "PlaneGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-cutaway-overhead/Mesh#85549",
+        "root": "training-ground",
+        "branch": "training-ground/training-cutaway-overhead/Mesh#85549",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-cutaway-overhead/Mesh#85550",
+        "root": "training-ground",
+        "branch": "training-ground/training-cutaway-overhead/Mesh#85550",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-gate-frame/training-gate-beacon",
+        "root": "training-ground",
+        "branch": "training-ground/training-gate-frame/training-gate-beacon",
+        "name": "training-gate-beacon",
+        "type": "Mesh",
+        "geometry": "ExtrudeGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-gate-frame/training-gate-beacon",
+        "root": "training-ground",
+        "branch": "training-ground/training-gate-frame/training-gate-beacon",
+        "name": "training-gate-beacon",
+        "type": "Mesh",
+        "geometry": "ExtrudeGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-gate-frame/Mesh#84746",
+        "root": "training-ground",
+        "branch": "training-ground/training-gate-frame/Mesh#84746",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "PlaneGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-gate-frame/Mesh#84934",
+        "root": "training-ground",
+        "branch": "training-ground/training-gate-frame/Mesh#84934",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-gate-frame/Mesh#84935",
+        "root": "training-ground",
+        "branch": "training-ground/training-gate-frame/Mesh#84935",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-gate-frame/Mesh#84936",
+        "root": "training-ground",
+        "branch": "training-ground/training-gate-frame/Mesh#84936",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-gate-frame/Mesh#84937",
+        "root": "training-ground",
+        "branch": "training-ground/training-gate-frame/Mesh#84937",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-gate-frame/Mesh#84938",
+        "root": "training-ground",
+        "branch": "training-ground/training-gate-frame/Mesh#84938",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-gate-frame/Mesh#84939",
+        "root": "training-ground",
+        "branch": "training-ground/training-gate-frame/Mesh#84939",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-gate-leaf--1/Mesh#84650",
+        "root": "training-ground",
+        "branch": "training-ground/training-gate-leaf--1/Mesh#84650",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "ExtrudeGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-gate-leaf--1/Mesh#84748",
+        "root": "training-ground",
+        "branch": "training-ground/training-gate-leaf--1/Mesh#84748",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "PlaneGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-gate-leaf--1/Mesh#84940",
+        "root": "training-ground",
+        "branch": "training-ground/training-gate-leaf--1/Mesh#84940",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-gate-leaf--1/Mesh#84941",
+        "root": "training-ground",
+        "branch": "training-ground/training-gate-leaf--1/Mesh#84941",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-gate-leaf--1/Mesh#84942",
+        "root": "training-ground",
+        "branch": "training-ground/training-gate-leaf--1/Mesh#84942",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-gate-leaf--1/Mesh#84943",
+        "root": "training-ground",
+        "branch": "training-ground/training-gate-leaf--1/Mesh#84943",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-gate-leaf-1/Mesh#84695",
+        "root": "training-ground",
+        "branch": "training-ground/training-gate-leaf-1/Mesh#84695",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "ExtrudeGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-gate-leaf-1/Mesh#84710",
+        "root": "training-ground",
+        "branch": "training-ground/training-gate-leaf-1/Mesh#84710",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-gate-leaf-1/Mesh#84944",
+        "root": "training-ground",
+        "branch": "training-ground/training-gate-leaf-1/Mesh#84944",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-gate-leaf-1/Mesh#84945",
+        "root": "training-ground",
+        "branch": "training-ground/training-gate-leaf-1/Mesh#84945",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-gate-leaf-1/Mesh#84946",
+        "root": "training-ground",
+        "branch": "training-ground/training-gate-leaf-1/Mesh#84946",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "Group#5707/Group#6465/Group#5708/Group#5918/Group#6110/pgb-patch",
+        "root": "Group#5707",
+        "branch": "Group#5707/Group#6465/Group#5708",
+        "name": "pgb-patch",
+        "type": "Mesh",
+        "geometry": "PlaneGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "skinShadowSrc",
+          "_castBefore"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "Group#5707/Group#6465/Group#5708/Group#5918/Group#79556/Group#79557/Mesh#79571",
+        "root": "Group#5707",
+        "branch": "Group#5707/Group#6465/Group#5708",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "Group#5707/Group#6465/Group#5708/Group#5918/Group#79523/Group#79524/Mesh#79538",
+        "root": "Group#5707",
+        "branch": "Group#5707/Group#6465/Group#5708",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "Group#5707/Group#6465/Group#5708/Group#5918/Mesh#79515",
+        "root": "Group#5707",
+        "branch": "Group#5707/Group#6465/Group#5708",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "proxySkip"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "Group#5707/Group#6465/Group#5708/Group#5918/Mesh#6398",
+        "root": "Group#5707",
+        "branch": "Group#5707/Group#6465/Group#5708",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "skinShadowSrc",
+          "_castBefore"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "Group#5707/Group#6465/Group#5708/rig-skin",
+        "root": "Group#5707",
+        "branch": "Group#5707/Group#6465/Group#5708",
+        "name": "rig-skin",
+        "type": "SkinnedMesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "rigSkin",
+          "noRigSkin",
+          "rigSplit"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "Group#5707/Group#6465/Group#5708/rig-skin",
+        "root": "Group#5707",
+        "branch": "Group#5707/Group#6465/Group#5708",
+        "name": "rig-skin",
+        "type": "SkinnedMesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "rigSkin",
+          "noRigSkin"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "Group#5707/Group#6465/Group#5708/rig-skin",
+        "root": "Group#5707",
+        "branch": "Group#5707/Group#6465/Group#5708",
+        "name": "rig-skin",
+        "type": "SkinnedMesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "rigSkin",
+          "noRigSkin"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "Group#5707/Group#6465/Group#5708/rig-skin",
+        "root": "Group#5707",
+        "branch": "Group#5707/Group#6465/Group#5708",
+        "name": "rig-skin",
+        "type": "SkinnedMesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "rigSkin",
+          "noRigSkin"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "Group#5707/Group#6465/Group#5708/rig-skin",
+        "root": "Group#5707",
+        "branch": "Group#5707/Group#6465/Group#5708",
+        "name": "rig-skin",
+        "type": "SkinnedMesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "rigSkin",
+          "noRigSkin"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "Group#5707/Group#6465/Group#5708/rig-skin",
+        "root": "Group#5707",
+        "branch": "Group#5707/Group#6465/Group#5708",
+        "name": "rig-skin",
+        "type": "SkinnedMesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "rigSkin",
+          "noRigSkin",
+          "rigSplit"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "Group#5707/Group#6465/Group#5708/rig-skin",
+        "root": "Group#5707",
+        "branch": "Group#5707/Group#6465/Group#5708",
+        "name": "rig-skin",
+        "type": "SkinnedMesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "rigSkin",
+          "noRigSkin"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "Group#5707/Group#6465/Group#5708/Group#5918/Group#6149/balaclava/balaclava-hem",
+        "root": "Group#5707",
+        "branch": "Group#5707/Group#6465/Group#5708",
+        "name": "balaclava-hem",
+        "type": "Mesh",
+        "geometry": "TubeGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "liveShape"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "Group#5707/Group#6465/Group#5708/Group#5918/Group#6149/balaclava/cloth-balaclava",
+        "root": "Group#5707",
+        "branch": "Group#5707/Group#6465/Group#5708",
+        "name": "cloth-balaclava",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "liveShape"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "Group#5707/Group#6465/Group#5708/Group#5918/Group#6149/Group#6155/Group#6156/Mesh#6427",
+        "root": "Group#5707",
+        "branch": "Group#5707/Group#6465/Group#5708",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "skinShadowSrc",
+          "_castBefore"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "Group#5707/Group#6465/Group#5708/rig-skin",
+        "root": "Group#5707",
+        "branch": "Group#5707/Group#6465/Group#5708",
+        "name": "rig-skin",
+        "type": "SkinnedMesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "rigSkin",
+          "noRigSkin"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "Group#5707/Group#6465/Group#5708/Group#5918/Mesh#6416",
+        "root": "Group#5707",
+        "branch": "Group#5707/Group#6465/Group#5708",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "skinShadowSrc",
+          "_castBefore"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "Group#5707/Group#6465/Group#5708/Group#5918/Group#6149/marine-facial-features/head-metres/eye-1/eye-glint-1",
+        "root": "Group#5707",
+        "branch": "Group#5707/Group#6465/Group#5708",
+        "name": "eye-glint-1",
+        "type": "Mesh",
+        "geometry": "SphereGeometry",
+        "material": "MeshBasicMaterial",
+        "userData": [
+          "skinShadowSrc",
+          "_castBefore"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "Group#5707/Group#6465/Group#5708/Group#5918/Group#6149/marine-facial-features/head-metres/eye--1/eye-glint--1",
+        "root": "Group#5707",
+        "branch": "Group#5707/Group#6465/Group#5708",
+        "name": "eye-glint--1",
+        "type": "Mesh",
+        "geometry": "SphereGeometry",
+        "material": "MeshBasicMaterial",
+        "userData": [
+          "skinShadowSrc",
+          "_castBefore"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "Group#5707/Group#6465/Group#5708/Group#5918/Group#6149/marine-facial-features/head-metres/eye-1/Mesh#6444",
+        "root": "Group#5707",
+        "branch": "Group#5707/Group#6465/Group#5708",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshBasicMaterial",
+        "userData": [
+          "skinShadowSrc",
+          "_castBefore"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "Group#5707/Group#6465/Group#5708/Group#5918/Group#6149/marine-facial-features/head-metres/Mesh#6439",
+        "root": "Group#5707",
+        "branch": "Group#5707/Group#6465/Group#5708",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshBasicMaterial",
+        "userData": [
+          "skinShadowSrc",
+          "_castBefore"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "Group#5707/Group#6465/Group#5708/Group#5918/Group#6149/marine-facial-features/head-metres/eye--1/Mesh#6442",
+        "root": "Group#5707",
+        "branch": "Group#5707/Group#6465/Group#5708",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshBasicMaterial",
+        "userData": [
+          "skinShadowSrc",
+          "_castBefore"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "Group#5707/Group#6465/Group#5708/rig-skin",
+        "root": "Group#5707",
+        "branch": "Group#5707/Group#6465/Group#5708",
+        "name": "rig-skin",
+        "type": "SkinnedMesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardNodeMaterial",
+        "userData": [
+          "rigSkin",
+          "noRigSkin"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "Group#5707/Group#6465/Group#5708/rig-skin",
+        "root": "Group#5707",
+        "branch": "Group#5707/Group#6465/Group#5708",
+        "name": "rig-skin",
+        "type": "SkinnedMesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardNodeMaterial",
+        "userData": [
+          "rigSkin",
+          "noRigSkin",
+          "rigSplit"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-cif/Mesh#85576",
+        "root": "training-ground",
+        "branch": "training-ground/training-cif/Mesh#85576",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardNodeMaterial",
+        "userData": [
+          "folded"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-armory/Mesh#85589",
+        "root": "training-ground",
+        "branch": "training-ground/training-armory/Mesh#85589",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardNodeMaterial",
+        "userData": [
+          "folded"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "Group#5707/Group#6465/Group#5708/Group#5918/Group#79503/Mesh#79504/Mesh#89256",
+        "root": "Group#5707",
+        "branch": "Group#5707/Group#6465/Group#5708",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "TorusGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-armory/armoryRack/Mesh#90375",
+        "root": "training-ground",
+        "branch": "training-ground/training-armory/armoryRack",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-cif/Mesh#85573",
+        "root": "training-ground",
+        "branch": "training-ground/training-cif/Mesh#85573",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-cif/cif-counter-corbel",
+        "root": "training-ground",
+        "branch": "training-ground/training-cif/cif-counter-corbel",
+        "name": "cif-counter-corbel",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-cif/cif-exterior-sign",
+        "root": "training-ground",
+        "branch": "training-ground/training-cif/cif-exterior-sign",
+        "name": "cif-exterior-sign",
+        "type": "Mesh",
+        "geometry": "PlaneGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-cif/Mesh#85575",
+        "root": "training-ground",
+        "branch": "training-ground/training-cif/Mesh#85575",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "PlaneGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-armory/Mesh#85578",
+        "root": "training-ground",
+        "branch": "training-ground/training-armory/Mesh#85578",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-armory/armory-frame-bolts",
+        "root": "training-ground",
+        "branch": "training-ground/training-armory/armory-frame-bolts",
+        "name": "armory-frame-bolts",
+        "type": "Mesh",
+        "geometry": "CylinderGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-armory/Mesh#85579",
+        "root": "training-ground",
+        "branch": "training-ground/training-armory/Mesh#85579",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshBasicMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-armory/armory-wall-surround",
+        "root": "training-ground",
+        "branch": "training-ground/training-armory/armory-wall-surround",
+        "name": "armory-wall-surround",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-armory/armory-security-mesh",
+        "root": "training-ground",
+        "branch": "training-ground/training-armory/armory-security-mesh",
+        "name": "armory-security-mesh",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-armory/armory-sign",
+        "root": "training-ground",
+        "branch": "training-ground/training-armory/armory-sign",
+        "name": "armory-sign",
+        "type": "Mesh",
+        "geometry": "PlaneGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-kiosk/Mesh#85625",
+        "root": "training-ground",
+        "branch": "training-ground/training-kiosk/Mesh#85625",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-kiosk/Mesh#85626",
+        "root": "training-ground",
+        "branch": "training-ground/training-kiosk/Mesh#85626",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-kiosk/Mesh#85628",
+        "root": "training-ground",
+        "branch": "training-ground/training-kiosk/Mesh#85628",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-kiosk/Mesh#85624",
+        "root": "training-ground",
+        "branch": "training-ground/training-kiosk/Mesh#85624",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-kiosk/Mesh#85618",
+        "root": "training-ground",
+        "branch": "training-ground/training-kiosk/Mesh#85618",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-kiosk/Mesh#85619",
+        "root": "training-ground",
+        "branch": "training-ground/training-kiosk/Mesh#85619",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "SphereGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Mesh#85551",
+        "root": "training-ground",
+        "branch": "training-ground/Mesh#85551",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-firing-bench/Mesh#84537",
+        "root": "training-ground",
+        "branch": "training-ground/training-firing-bench/Mesh#84537",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Mesh#85554",
+        "root": "training-ground",
+        "branch": "training-ground/Mesh#85554",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-firing-bench/Mesh#84538",
+        "root": "training-ground",
+        "branch": "training-ground/training-firing-bench/Mesh#84538",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Group#84541/Group#84546/target-backing-side",
+        "root": "training-ground",
+        "branch": "training-ground/Group#84541/Group#84546",
+        "name": "target-backing-side",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Group#84541/Group#84546/target-backing-side",
+        "root": "training-ground",
+        "branch": "training-ground/Group#84541/Group#84546",
+        "name": "target-backing-side",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Group#84541/Group#84546/target-backing-center",
+        "root": "training-ground",
+        "branch": "training-ground/Group#84541/Group#84546",
+        "name": "target-backing-center",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Group#84541/Group#84546/target-lower-stem",
+        "root": "training-ground",
+        "branch": "training-ground/Group#84541/Group#84546",
+        "name": "target-lower-stem",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Group#84541/Group#84546/Mesh#84547",
+        "root": "training-ground",
+        "branch": "training-ground/Group#84541/Group#84546",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Group#84541/Group#84546/target-backing-crossbar",
+        "root": "training-ground",
+        "branch": "training-ground/Group#84541/Group#84546",
+        "name": "target-backing-crossbar",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Group#84541/Group#84546/target-backing-crossbar",
+        "root": "training-ground",
+        "branch": "training-ground/Group#84541/Group#84546",
+        "name": "target-backing-crossbar",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Group#84555/Group#84560/target-backing-side",
+        "root": "training-ground",
+        "branch": "training-ground/Group#84555/Group#84560",
+        "name": "target-backing-side",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Group#84555/Group#84560/target-backing-side",
+        "root": "training-ground",
+        "branch": "training-ground/Group#84555/Group#84560",
+        "name": "target-backing-side",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Group#84555/Group#84560/target-backing-center",
+        "root": "training-ground",
+        "branch": "training-ground/Group#84555/Group#84560",
+        "name": "target-backing-center",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Group#84555/Group#84560/target-lower-stem",
+        "root": "training-ground",
+        "branch": "training-ground/Group#84555/Group#84560",
+        "name": "target-lower-stem",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Group#84555/Group#84560/Mesh#84561",
+        "root": "training-ground",
+        "branch": "training-ground/Group#84555/Group#84560",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Group#84555/Group#84560/target-backing-crossbar",
+        "root": "training-ground",
+        "branch": "training-ground/Group#84555/Group#84560",
+        "name": "target-backing-crossbar",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Group#84555/Group#84560/target-backing-crossbar",
+        "root": "training-ground",
+        "branch": "training-ground/Group#84555/Group#84560",
+        "name": "target-backing-crossbar",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Group#84569/Group#84574/target-backing-side",
+        "root": "training-ground",
+        "branch": "training-ground/Group#84569/Group#84574",
+        "name": "target-backing-side",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Group#84569/Group#84574/target-backing-side",
+        "root": "training-ground",
+        "branch": "training-ground/Group#84569/Group#84574",
+        "name": "target-backing-side",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Group#84569/Group#84574/target-backing-center",
+        "root": "training-ground",
+        "branch": "training-ground/Group#84569/Group#84574",
+        "name": "target-backing-center",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Group#84569/Group#84574/target-lower-stem",
+        "root": "training-ground",
+        "branch": "training-ground/Group#84569/Group#84574",
+        "name": "target-lower-stem",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Group#84569/Group#84574/Mesh#84575",
+        "root": "training-ground",
+        "branch": "training-ground/Group#84569/Group#84574",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Group#84569/Group#84574/target-backing-crossbar",
+        "root": "training-ground",
+        "branch": "training-ground/Group#84569/Group#84574",
+        "name": "target-backing-crossbar",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Group#84569/Group#84574/target-backing-crossbar",
+        "root": "training-ground",
+        "branch": "training-ground/Group#84569/Group#84574",
+        "name": "target-backing-crossbar",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Group#84583/Group#84588/target-backing-side",
+        "root": "training-ground",
+        "branch": "training-ground/Group#84583/Group#84588",
+        "name": "target-backing-side",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Group#84583/Group#84588/target-backing-side",
+        "root": "training-ground",
+        "branch": "training-ground/Group#84583/Group#84588",
+        "name": "target-backing-side",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Group#84583/Group#84588/target-backing-center",
+        "root": "training-ground",
+        "branch": "training-ground/Group#84583/Group#84588",
+        "name": "target-backing-center",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Group#84583/Group#84588/target-lower-stem",
+        "root": "training-ground",
+        "branch": "training-ground/Group#84583/Group#84588",
+        "name": "target-lower-stem",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Group#84583/Group#84588/Mesh#84589",
+        "root": "training-ground",
+        "branch": "training-ground/Group#84583/Group#84588",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Group#84583/Group#84588/target-backing-crossbar",
+        "root": "training-ground",
+        "branch": "training-ground/Group#84583/Group#84588",
+        "name": "target-backing-crossbar",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Group#84583/Group#84588/target-backing-crossbar",
+        "root": "training-ground",
+        "branch": "training-ground/Group#84583/Group#84588",
+        "name": "target-backing-crossbar",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Group#84597/Group#84602/target-backing-side",
+        "root": "training-ground",
+        "branch": "training-ground/Group#84597/Group#84602",
+        "name": "target-backing-side",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Group#84597/Group#84602/target-backing-side",
+        "root": "training-ground",
+        "branch": "training-ground/Group#84597/Group#84602",
+        "name": "target-backing-side",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Group#84597/Group#84602/target-backing-center",
+        "root": "training-ground",
+        "branch": "training-ground/Group#84597/Group#84602",
+        "name": "target-backing-center",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Group#84597/Group#84602/target-lower-stem",
+        "root": "training-ground",
+        "branch": "training-ground/Group#84597/Group#84602",
+        "name": "target-lower-stem",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Group#84597/Group#84602/Mesh#84603",
+        "root": "training-ground",
+        "branch": "training-ground/Group#84597/Group#84602",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Group#84597/Group#84602/target-backing-crossbar",
+        "root": "training-ground",
+        "branch": "training-ground/Group#84597/Group#84602",
+        "name": "target-backing-crossbar",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Group#84597/Group#84602/target-backing-crossbar",
+        "root": "training-ground",
+        "branch": "training-ground/Group#84597/Group#84602",
+        "name": "target-backing-crossbar",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-firing-bench/Mesh#84498",
+        "root": "training-ground",
+        "branch": "training-ground/training-firing-bench/Mesh#84498",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Mesh#85555",
+        "root": "training-ground",
+        "branch": "training-ground/Mesh#85555",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Mesh#85553",
+        "root": "training-ground",
+        "branch": "training-ground/Mesh#85553",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Mesh#85552",
+        "root": "training-ground",
+        "branch": "training-ground/Mesh#85552",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-void",
+        "root": "training-ground",
+        "branch": "training-ground/training-void",
+        "name": "training-void",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshBasicMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Mesh#84364",
+        "root": "training-ground",
+        "branch": "training-ground/Mesh#84364",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "PlaneGeometry",
+        "material": "MeshBasicMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-range-floor",
+        "root": "training-ground",
+        "branch": "training-ground/training-range-floor",
+        "name": "training-range-floor",
+        "type": "Mesh",
+        "geometry": "PlaneGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-build-floor",
+        "root": "training-ground",
+        "branch": "training-ground/training-build-floor",
+        "name": "training-build-floor",
+        "type": "Mesh",
+        "geometry": "PlaneGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-gate-header",
+        "root": "training-ground",
+        "branch": "training-ground/training-gate-header",
+        "name": "training-gate-header",
+        "type": "Mesh",
+        "geometry": "PlaneGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/firing-line",
+        "root": "training-ground",
+        "branch": "training-ground/firing-line",
+        "name": "firing-line",
+        "type": "Mesh",
+        "geometry": "PlaneGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-firing-bench/Mesh#84495",
+        "root": "training-ground",
+        "branch": "training-ground/training-firing-bench/Mesh#84495",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-firing-bench/Mesh#84494",
+        "root": "training-ground",
+        "branch": "training-ground/training-firing-bench/Mesh#84494",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-firing-bench/Mesh#84539",
+        "root": "training-ground",
+        "branch": "training-ground/training-firing-bench/Mesh#84539",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Mesh#84540",
+        "root": "training-ground",
+        "branch": "training-ground/Mesh#84540",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Mesh#85563",
+        "root": "training-ground",
+        "branch": "training-ground/Mesh#85563",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Mesh#85565",
+        "root": "training-ground",
+        "branch": "training-ground/Mesh#85565",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Mesh#85564",
+        "root": "training-ground",
+        "branch": "training-ground/Mesh#85564",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Mesh#85049",
+        "root": "training-ground",
+        "branch": "training-ground/Mesh#85049",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "PlaneGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-wear-flicker",
+        "root": "training-ground",
+        "branch": "training-ground/training-wear-flicker",
+        "name": "training-wear-flicker",
+        "type": "Mesh",
+        "geometry": "PlaneGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-no-build-paint",
+        "root": "training-ground",
+        "branch": "training-ground/training-no-build-paint",
+        "name": "training-no-build-paint",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "isDecal"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Mesh#85569",
+        "root": "training-ground",
+        "branch": "training-ground/Mesh#85569",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-razor-perimeter/training-perimeter-east/Mesh#85924",
+        "root": "training-ground",
+        "branch": "training-ground/training-razor-perimeter/training-perimeter-east",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-razor-perimeter/training-perimeter-east/Mesh#85923",
+        "root": "training-ground",
+        "branch": "training-ground/training-razor-perimeter/training-perimeter-east",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/range-drill-monitor/Mesh#86301",
+        "root": "training-ground",
+        "branch": "training-ground/range-drill-monitor/Mesh#86301",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/range-drill-monitor/Mesh#86313",
+        "root": "training-ground",
+        "branch": "training-ground/range-drill-monitor/Mesh#86313",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/range-drill-monitor/range-monitor-screen",
+        "root": "training-ground",
+        "branch": "training-ground/range-drill-monitor/range-monitor-screen",
+        "name": "range-monitor-screen",
+        "type": "Mesh",
+        "geometry": "PlaneGeometry",
+        "material": "MeshBasicMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "Group#5707/Group#6465/Group#5708/Group#5918/Group#79503/Mesh#79504",
+        "root": "Group#5707",
+        "branch": "Group#5707/Group#6465/Group#5708",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "torsoPivotY",
+          "signature",
+          "slingMaterial",
+          "clips",
+          "fit"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "Group#5707/Group#6465/Group#5708/Group#5918/Group#79505/Mesh#79506",
+        "root": "Group#5707",
+        "branch": "Group#5707/Group#6465/Group#5708",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "torsoPivotY",
+          "signature",
+          "slingMaterial",
+          "clips",
+          "fit"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "motes-instanced",
+        "root": "motes-instanced",
+        "branch": "motes-instanced",
+        "name": "motes-instanced",
+        "type": "Mesh",
+        "geometry": "SphereGeometry",
+        "material": "MeshBasicMaterial",
+        "userData": [
+          "noCull",
+          "_shadowCaster"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-cutaway-north/Mesh#85151",
+        "root": "training-ground",
+        "branch": "training-ground/training-cutaway-north/Mesh#85151",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "PlaneGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-cutaway-north/Mesh#85150",
+        "root": "training-ground",
+        "branch": "training-ground/training-cutaway-north/Mesh#85150",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "PlaneGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Mesh#85499",
+        "root": "training-ground",
+        "branch": "training-ground/Mesh#85499",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "PlaneGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-cutaway-east/Mesh#85148",
+        "root": "training-ground",
+        "branch": "training-ground/training-cutaway-east/Mesh#85148",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "PlaneGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Mesh#85146",
+        "root": "training-ground",
+        "branch": "training-ground/Mesh#85146",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "PlaneGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-cutaway-east/Mesh#85533",
+        "root": "training-ground",
+        "branch": "training-ground/training-cutaway-east/Mesh#85533",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Mesh#85566",
+        "root": "training-ground",
+        "branch": "training-ground/Mesh#85566",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Mesh#84488",
+        "root": "training-ground",
+        "branch": "training-ground/Mesh#84488",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "PlaneGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Mesh#84489",
+        "root": "training-ground",
+        "branch": "training-ground/Mesh#84489",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "PlaneGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Mesh#84490",
+        "root": "training-ground",
+        "branch": "training-ground/Mesh#84490",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "PlaneGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Mesh#84491",
+        "root": "training-ground",
+        "branch": "training-ground/Mesh#84491",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "PlaneGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Mesh#84492",
+        "root": "training-ground",
+        "branch": "training-ground/Mesh#84492",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "PlaneGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-containment/training-containment-rotor",
+        "root": "training-ground",
+        "branch": "training-ground/training-containment/training-containment-rotor",
+        "name": "training-containment-rotor",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardNodeMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-containment/training-containment-rotor",
+        "root": "training-ground",
+        "branch": "training-ground/training-containment/training-containment-rotor",
+        "name": "training-containment-rotor",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardNodeMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-containment/training-containment-gun",
+        "root": "training-ground",
+        "branch": "training-ground/training-containment/training-containment-gun",
+        "name": "training-containment-gun",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardNodeMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-containment/training-containment-gun",
+        "root": "training-ground",
+        "branch": "training-ground/training-containment/training-containment-gun",
+        "name": "training-containment-gun",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardNodeMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-containment/training-containment-gun",
+        "root": "training-ground",
+        "branch": "training-ground/training-containment/training-containment-gun",
+        "name": "training-containment-gun",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardNodeMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-containment/training-containment-gun",
+        "root": "training-ground",
+        "branch": "training-ground/training-containment/training-containment-gun",
+        "name": "training-containment-gun",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardNodeMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-containment/training-containment-gun",
+        "root": "training-ground",
+        "branch": "training-ground/training-containment/training-containment-gun",
+        "name": "training-containment-gun",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardNodeMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-containment/training-containment-gun",
+        "root": "training-ground",
+        "branch": "training-ground/training-containment/training-containment-gun",
+        "name": "training-containment-gun",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardNodeMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-containment/training-containment-gun",
+        "root": "training-ground",
+        "branch": "training-ground/training-containment/training-containment-gun",
+        "name": "training-containment-gun",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardNodeMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-containment/training-containment-gun",
+        "root": "training-ground",
+        "branch": "training-ground/training-containment/training-containment-gun",
+        "name": "training-containment-gun",
+        "type": "Mesh",
+        "geometry": "CylinderGeometry",
+        "material": "MeshStandardNodeMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-containment/training-containment-gun",
+        "root": "training-ground",
+        "branch": "training-ground/training-containment/training-containment-gun",
+        "name": "training-containment-gun",
+        "type": "Mesh",
+        "geometry": "CylinderGeometry",
+        "material": "MeshStandardNodeMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-containment/training-containment-gun",
+        "root": "training-ground",
+        "branch": "training-ground/training-containment/training-containment-gun",
+        "name": "training-containment-gun",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardNodeMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-containment/training-containment-gun",
+        "root": "training-ground",
+        "branch": "training-ground/training-containment/training-containment-gun",
+        "name": "training-containment-gun",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardNodeMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-containment/training-containment-mount",
+        "root": "training-ground",
+        "branch": "training-ground/training-containment/training-containment-mount",
+        "name": "training-containment-mount",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardNodeMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-containment/training-containment-arm",
+        "root": "training-ground",
+        "branch": "training-ground/training-containment/training-containment-arm",
+        "name": "training-containment-arm",
+        "type": "Mesh",
+        "geometry": "BoxGeometry",
+        "material": "MeshStandardNodeMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-containment/training-containment-swivel",
+        "root": "training-ground",
+        "branch": "training-ground/training-containment/training-containment-swivel",
+        "name": "training-containment-swivel",
+        "type": "Mesh",
+        "geometry": "CylinderGeometry",
+        "material": "MeshStandardNodeMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-containment/training-containment-status",
+        "root": "training-ground",
+        "branch": "training-ground/training-containment/training-containment-status",
+        "name": "training-containment-status",
+        "type": "Mesh",
+        "geometry": "SphereGeometry",
+        "material": "MeshBasicNodeMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-containment/training-containment-flash",
+        "root": "training-ground",
+        "branch": "training-ground/training-containment/training-containment-flash",
+        "name": "training-containment-flash",
+        "type": "Mesh",
+        "geometry": "SphereGeometry",
+        "material": "MeshBasicNodeMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-containment/training-containment-gun",
+        "root": "training-ground",
+        "branch": "training-ground/training-containment/training-containment-gun",
+        "name": "training-containment-gun",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardNodeMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-containment/training-containment-gun",
+        "root": "training-ground",
+        "branch": "training-ground/training-containment/training-containment-gun",
+        "name": "training-containment-gun",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardNodeMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-containment/training-containment-gun",
+        "root": "training-ground",
+        "branch": "training-ground/training-containment/training-containment-gun",
+        "name": "training-containment-gun",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardNodeMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-containment/training-containment-gun",
+        "root": "training-ground",
+        "branch": "training-ground/training-containment/training-containment-gun",
+        "name": "training-containment-gun",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardNodeMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-containment/training-containment-gun",
+        "root": "training-ground",
+        "branch": "training-ground/training-containment/training-containment-gun",
+        "name": "training-containment-gun",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardNodeMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-containment/training-containment-gun",
+        "root": "training-ground",
+        "branch": "training-ground/training-containment/training-containment-gun",
+        "name": "training-containment-gun",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardNodeMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-containment/training-containment-gun",
+        "root": "training-ground",
+        "branch": "training-ground/training-containment/training-containment-gun",
+        "name": "training-containment-gun",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardNodeMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-containment/training-containment-gun",
+        "root": "training-ground",
+        "branch": "training-ground/training-containment/training-containment-gun",
+        "name": "training-containment-gun",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardNodeMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-containment/training-containment-gun",
+        "root": "training-ground",
+        "branch": "training-ground/training-containment/training-containment-gun",
+        "name": "training-containment-gun",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardNodeMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-containment/training-containment-gun",
+        "root": "training-ground",
+        "branch": "training-ground/training-containment/training-containment-gun",
+        "name": "training-containment-gun",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardNodeMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Mesh#84487",
+        "root": "training-ground",
+        "branch": "training-ground/Mesh#84487",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "PlaneGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-armory/armoryRack/Group#90364/Mesh#90368",
+        "root": "training-ground",
+        "branch": "training-ground/training-armory/armoryRack",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-armory/armoryRack/Group#90364/Mesh#90369",
+        "root": "training-ground",
+        "branch": "training-ground/training-armory/armoryRack",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-armory/armoryRack/Group#90364/Mesh#90371",
+        "root": "training-ground",
+        "branch": "training-ground/training-armory/armoryRack",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-armory/armoryRack/Group#90364/Mesh#90366",
+        "root": "training-ground",
+        "branch": "training-ground/training-armory/armoryRack",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-armory/armoryRack/Group#90364/Mesh#90367",
+        "root": "training-ground",
+        "branch": "training-ground/training-armory/armoryRack",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardNodeMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-armory/armoryRack/Group#90364/Mesh#90370",
+        "root": "training-ground",
+        "branch": "training-ground/training-armory/armoryRack",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-armory/armoryRack/Group#90364/Mesh#90365",
+        "root": "training-ground",
+        "branch": "training-ground/training-armory/armoryRack",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-armory/armoryRack/Group#90364/Mesh#90374",
+        "root": "training-ground",
+        "branch": "training-ground/training-armory/armoryRack",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-armory/armoryRack/Group#90364/Mesh#90373",
+        "root": "training-ground",
+        "branch": "training-ground/training-armory/armoryRack",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-armory/armoryRack/Group#90364/Mesh#90372",
+        "root": "training-ground",
+        "branch": "training-ground/training-armory/armoryRack",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "Group#5707/Group#6465/Group#5708/Group#5918/Group#6149/Group#6151/medium-fade/hair-fade",
+        "root": "Group#5707",
+        "branch": "Group#5707/Group#6465/Group#5708",
+        "name": "hair-fade",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "skinShadowSrc",
+          "_castBefore"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-cutaway-rangeSouth/Mesh#85516",
+        "root": "training-ground",
+        "branch": "training-ground/training-cutaway-rangeSouth/Mesh#85516",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "BufferGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [
+          "baked"
+        ],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Mesh#85045",
+        "root": "training-ground",
+        "branch": "training-ground/Mesh#85045",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "PlaneGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Mesh#85044",
+        "root": "training-ground",
+        "branch": "training-ground/Mesh#85044",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "PlaneGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Mesh#85046",
+        "root": "training-ground",
+        "branch": "training-ground/Mesh#85046",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "PlaneGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/training-cutaway-east/Mesh#85047",
+        "root": "training-ground",
+        "branch": "training-ground/training-cutaway-east/Mesh#85047",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "PlaneGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Mesh#84947",
+        "root": "training-ground",
+        "branch": "training-ground/Mesh#84947",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "PlaneGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      },
+      {
+        "path": "training-ground/Mesh#84948",
+        "root": "training-ground",
+        "branch": "training-ground/Mesh#84948",
+        "name": "",
+        "type": "Mesh",
+        "geometry": "PlaneGeometry",
+        "material": "MeshStandardMaterial",
+        "userData": [],
+        "calls": 73,
+        "main": 73,
+        "other": 0,
+        "passIds": []
+      }
+    ]
+  }
+}

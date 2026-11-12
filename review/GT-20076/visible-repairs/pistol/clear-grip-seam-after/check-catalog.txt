@@ -1,0 +1,21 @@
+pistol 81 76 added [] deepened [] removed [
+  'root/pistol dust cover[1]|root/pistol grip[24]',
+  'root/group[29]/BufferGeometry[0]|root/pistol dust cover[1]',
+  'root/BufferGeometry[39]|root/pistol dust cover[1]',
+  'root/BufferGeometry[40]|root/pistol dust cover[1]',
+  'root/controls-magRelease[59]/BufferGeometry[0]|root/pistol dust cover[1]'
+] open 341 341 loose 0 unsupported 0 detail 0 hash 3a33c227
+pistol-equipped 120 115 added [] deepened [] removed [
+  'root/pistol dust cover[1]|root/pistol grip[24]',
+  'root/group[29]/magazineBody[0]/BufferGeometry[0]|root/pistol dust cover[1]',
+  'root/BufferGeometry[39]|root/pistol dust cover[1]',
+  'root/BufferGeometry[40]|root/pistol dust cover[1]',
+  'root/controls-magRelease[59]/BufferGeometry[0]|root/pistol dust cover[1]'
+] open 347 347 loose 0 unsupported 0 detail 0 hash 14ac3812
+pistol-rmr 128 123 added [] deepened [] removed [
+  'root/pistol dust cover[1]|root/pistol grip[24]',
+  'root/group[29]/magazineBody[0]/BufferGeometry[0]|root/pistol dust cover[1]',
+  'root/BufferGeometry[39]|root/pistol dust cover[1]',
+  'root/BufferGeometry[40]|root/pistol dust cover[1]',
+  'root/controls-magRelease[59]/BufferGeometry[0]|root/pistol dust cover[1]'
+] open 349 349 loose 0 unsupported 0 detail 0 hash 93b25261

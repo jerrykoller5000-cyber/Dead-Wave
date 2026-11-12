@@ -1,0 +1,33 @@
+{
+  "hash": "c8a2abc2",
+  "contacts": [
+    {
+      "lowerMm": 0,
+      "upperMm": 0,
+      "penetrating": true
+    },
+    {
+      "lowerMm": 0,
+      "upperMm": 0,
+      "penetrating": true
+    }
+  ],
+  "closed": [
+    true
+  ],
+  "exterior": {
+    "occupied": 7474,
+    "exposedBoot": 4468,
+    "missing": 0,
+    "maxIn": 0,
+    "maxOut": 0,
+    "maxNormal": 0,
+    "maxUV": 0
+  },
+  "cap": [
+    -0.12,
+    0.1,
+    -0.15
+  ],
+  "chain": 42
+}

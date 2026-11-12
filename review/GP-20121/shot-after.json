@@ -1,0 +1,116 @@
+{
+  "at": "2026-11-12T10:15:43.835Z",
+  "sourceHash": "e09e1991c5ff140ef8ab9a570c9571d91b8727635fdb46da207864e5da2de3c0",
+  "rows": [
+    {
+      "open": true,
+      "openSyncMs": 21.5,
+      "mainBefore": 383,
+      "mainAfter": 383,
+      "dressBefore": 19,
+      "dressAfter": 19,
+      "profOpen": [],
+      "close": {
+        "syncMs": 1.3999999985098839,
+        "open": false,
+        "mainBefore": 383,
+        "mainAfter": 383,
+        "dressBefore": 19,
+        "dressAfter": 19
+      },
+      "profClose": []
+    },
+    {
+      "open": true,
+      "openSyncMs": 6.5,
+      "mainBefore": 383,
+      "mainAfter": 383,
+      "dressBefore": 19,
+      "dressAfter": 19,
+      "profOpen": [],
+      "close": {
+        "syncMs": 0.6999999992549419,
+        "open": false,
+        "mainBefore": 383,
+        "mainAfter": 383,
+        "dressBefore": 19,
+        "dressAfter": 19
+      },
+      "profClose": []
+    }
+  ],
+  "spikes": [
+    {
+      "stage": "entry",
+      "ms": 8416.7
+    },
+    {
+      "stage": "entry",
+      "ms": 1466.7
+    },
+    {
+      "stage": "entry",
+      "ms": 350
+    },
+    {
+      "stage": "entry",
+      "ms": 466.7
+    },
+    {
+      "stage": "open 1",
+      "ms": 116.7
+    }
+  ],
+  "profile": [
+    {
+      "tag": "items",
+      "ms": 0.30000000074505806
+    },
+    {
+      "tag": "menu refresh",
+      "ms": 7.5
+    },
+    {
+      "tag": "choices",
+      "ms": 8.600000001490116
+    },
+    {
+      "tag": "start dress view",
+      "ms": 0
+    },
+    {
+      "tag": "first dress frame",
+      "ms": 5.300000000745058
+    },
+    {
+      "tag": "items",
+      "ms": 0.19999999925494194
+    },
+    {
+      "tag": "menu refresh",
+      "ms": 0.5
+    },
+    {
+      "tag": "choices",
+      "ms": 1.1000000014901161
+    },
+    {
+      "tag": "start dress view",
+      "ms": 0
+    },
+    {
+      "tag": "first dress frame",
+      "ms": 1
+    }
+  ],
+  "errors": [],
+  "entryMs": 12190.699999999255,
+  "beforeOpen": {
+    "ready": "true",
+    "pipes": 19
+  },
+  "paint": {
+    "count": 104,
+    "ms": 213.30000001564622
+  }
+}

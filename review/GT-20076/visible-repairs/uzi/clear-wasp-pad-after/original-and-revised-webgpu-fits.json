@@ -1,0 +1,31 @@
+{
+  "note": "Original Wasp control before the second page failed to start, compared with the successful official real-renderer revised run. Same twelve result lines.",
+  "before": [
+    "PASS uzi@holster+: stowed at 1.000 x its in-hand size (CARRY_FIT 1)",
+    "PASS uzi@holster+: snug, gap 0.000 m, clipping 0.000 m",
+    "PASS uzi@pair-: stowed at 1.000 x its in-hand size (CARRY_FIT 1)",
+    "PASS uzi@pair-: snug, gap 0.000 m, clipping 0.000 m",
+    "FAIL shotgun@sling-: snug, gap 0.025 m, clipping 0.000 m (bar from qa/2026-10-23-GB-220/before/ shots: gap 0.012, clip 0.049)",
+    "FAIL ak@sling+: snug, gap 0.021 m, clipping 0.000 m (bar from qa/2026-10-23-GB-220/before/ shots: gap 0.012, clip 0.045)",
+    "FAIL shotgun@sling+: snug, gap 0.033 m, clipping 0.000 m (bar from qa/2026-10-23-GB-220/before/ shots: gap 0.012, clip 0.05)",
+    "FAIL aa12@sling-: snug, gap 0.000 m, clipping 0.074 m (bar from qa/2026-10-23-GB-220/before/ shots: gap 0.012, clip 0.038)",
+    "FAIL launcher@sling+: snug, gap 0.018 m, clipping 0.000 m",
+    "FAIL sniper@sling-: snug, gap 0.067 m, clipping 0.000 m",
+    "FAIL chainsaw@sling+: snug, gap 0.033 m, clipping 0.000 m (bar from qa/2026-10-23-GB-220/before/ shots: gap 0.025, clip 0.015)",
+    "FAIL flamer@sling-: snug, gap 0.123 m, clipping 0.000 m (bar from qa/2026-10-23-GB-220/before/ shots: gap 0.032, clip 0.015)"
+  ],
+  "after": [
+    "PASS uzi@holster+: stowed at 1.000 x its in-hand size (CARRY_FIT 1)",
+    "PASS uzi@holster+: snug, gap 0.000 m, clipping 0.000 m",
+    "PASS uzi@pair-: stowed at 1.000 x its in-hand size (CARRY_FIT 1)",
+    "PASS uzi@pair-: snug, gap 0.000 m, clipping 0.000 m",
+    "FAIL shotgun@sling-: snug, gap 0.025 m, clipping 0.000 m (bar from qa/2026-10-23-GB-220/before/ shots: gap 0.012, clip 0.049)",
+    "FAIL ak@sling+: snug, gap 0.021 m, clipping 0.000 m (bar from qa/2026-10-23-GB-220/before/ shots: gap 0.012, clip 0.045)",
+    "FAIL shotgun@sling+: snug, gap 0.033 m, clipping 0.000 m (bar from qa/2026-10-23-GB-220/before/ shots: gap 0.012, clip 0.05)",
+    "FAIL aa12@sling-: snug, gap 0.000 m, clipping 0.074 m (bar from qa/2026-10-23-GB-220/before/ shots: gap 0.012, clip 0.038)",
+    "FAIL launcher@sling+: snug, gap 0.018 m, clipping 0.000 m",
+    "FAIL sniper@sling-: snug, gap 0.067 m, clipping 0.000 m",
+    "FAIL chainsaw@sling+: snug, gap 0.033 m, clipping 0.000 m (bar from qa/2026-10-23-GB-220/before/ shots: gap 0.025, clip 0.015)",
+    "FAIL flamer@sling-: snug, gap 0.123 m, clipping 0.000 m (bar from qa/2026-10-23-GB-220/before/ shots: gap 0.032, clip 0.015)"
+  ]
+}

@@ -1,0 +1,180 @@
+node review/GT-20076/minigun-extension-isolated.mjs
+GRANT chatgpt2 GT-20076: starting one game-test command
+upper strip [ { closed: true, faces: 50 }, { closed: true, faces: 64 } ] contact with extended neck { lowerMm: 0, upperMm: 0.0078125 } profiles {
+  'x-1': { lost: 0, added: 0, maxDepth: 0, over: 0 },
+  x1: { lost: 0, added: 0, maxDepth: 5.723409343683095e-9, over: 0 },
+  'y-1': { lost: 0, added: 0, maxDepth: 2.505041965528143e-9, over: 0 },
+  y1: { lost: 0, added: 0, maxDepth: 0, over: 0 },
+  'z-1': { lost: 0, added: 0, maxDepth: 4.3250176412490404e-8, over: 0 },
+  z1: { lost: 0, added: 0, maxDepth: 1.3877787807814457e-17, over: 0 }
+}
+
+
+node review/GT-20076/heavy-light-batch.mjs after --minigun-panel
+GRANT chatgpt2 GT-20076: starting one game-test command
+after {
+  hash: 'e70f29b6',
+  profiles: {
+    'x-1': { occupied: 6793, lost: 0, added: 0, maxDepth: 0 },
+    x1: {
+      occupied: 6793,
+      lost: 0,
+      added: 0,
+      maxDepth: 5.723409343683095e-9
+    },
+    'y-1': {
+      occupied: 5150,
+      lost: 0,
+      added: 0,
+      maxDepth: 2.505041965528143e-9
+    },
+    y1: { occupied: 5150, lost: 0, added: 0, maxDepth: 0 },
+    'z-1': {
+      occupied: 4962,
+      lost: 0,
+      added: 0,
+      maxDepth: 4.3250176412490404e-8
+    },
+    z1: {
+      occupied: 4962,
+      lost: 0,
+      added: 0,
+      maxDepth: 1.3877787807814457e-17
+    }
+  },
+  closed: [ true ],
+  strips: [
+    {
+      islands: [Array],
+      closed: [Array],
+      drum: [Object],
+      plate: [Object]
+    },
+    {
+      islands: [Array],
+      closed: [Array],
+      drum: [Object],
+      plate: [Object]
+    }
+  ],
+  gap: { lowerMm: 0, upperMm: 0.0078125 },
+  vertices: 696,
+  paint: 'receiver',
+  drumRest: [ 0.13999999999999999, -0.055999999999999994, -0.013999999999999999 ],
+  hold: [ 0, 0.049, -0.308 ]
+}
+PASS after minigun hip, aimed, held-right-open, rack in four lights
+world crossed before/after [
+                     0, 0.020833333333333332,
+  0.041666666666666664,               0.0625,
+   0.08333333333333333,  0.10416666666666667,
+                 0.125,  0.14583333333333334,
+   0.16666666666666666,               0.1875,
+   0.20833333333333334,   0.7708333333333334,
+    0.7916666666666666,               0.8125,
+    0.8333333333333334,   0.8541666666666666,
+                 0.875,   0.8958333333333334,
+    0.9166666666666666,               0.9375,
+    0.9583333333333334,   0.9791666666666666
+] []
+eye crossed before/after [
+                     0, 0.020833333333333332,
+  0.041666666666666664,               0.0625,
+   0.08333333333333333,  0.10416666666666667,
+                 0.125,  0.14583333333333334,
+   0.16666666666666666,               0.1875,
+   0.20833333333333334,  0.22916666666666666,
+                  0.25,   0.2708333333333333,
+    0.2916666666666667,   0.5833333333333334,
+    0.6041666666666666,                0.625,
+    0.6458333333333334,   0.6666666666666666,
+                0.6875,   0.7083333333333334,
+    0.7291666666666666,                 0.75,
+    0.7708333333333334,   0.7916666666666666,
+                0.8125,   0.8333333333333334,
+    0.8541666666666666,                0.875,
+    0.8958333333333334,   0.9166666666666666,
+                0.9375,   0.9583333333333334,
+    0.9791666666666666
+] [ 0.2916666666666667, 0.5833333333333334, 0.6041666666666666 ]
+
+
+node review/GT-20076/frame-details.mjs --minigun-panel
+GRANT chatgpt2 GT-20076: starting one game-test command
+PASS minigun M81 receiver and factory rotating and drum artwork { factoryWorldAndEyeMeshes: 4, coatedMaterials: 10 }
+PASS native before/after side detail in all four lights minigun e70f29b6
+
+
+node review/GT-20076/check-wasp-trim-data.mjs --minigun-panel
+GRANT chatgpt2 GT-20076: starting one game-test command
+PASS WebGPU mesh panel 232 triangles, all attributes and cached mesh identity
+PASS lightweight mesh panel 232 triangles, all attributes and cached mesh identity
+PASS WebGPU mesh upperStrip 114 triangles, all attributes and cached mesh identity
+PASS lightweight mesh upperStrip 114 triangles, all attributes and cached mesh identity
+PASS WebGPU mesh lowerStrip 50 triangles, all attributes and cached mesh identity
+PASS lightweight mesh lowerStrip 50 triangles, all attributes and cached mesh identity
+
+
+node review/GT-20076/kr-handguard-band-isolated.mjs drum --minigun-panel --strips
+Game-test request 13809f9f-120c-4f75-92b4-9df17654b71a queued at position 1. Waiting...
+GRANT chatgpt2 GT-20076: starting one game-test command
+drum triangles 232 closed [ true ] contacts [
+  { lowerMm: 0, upperMm: 0.0078125 },
+  { lowerMm: 0, upperMm: 0.0078125 },
+  { lowerMm: 0, upperMm: 0.0078125 },
+  { lowerMm: 0, upperMm: 0.0078125 },
+  { lowerMm: 0, upperMm: 0.0078125 },
+  { lowerMm: 0, upperMm: 0.0078125 },
+  { lowerMm: 0, upperMm: 0.0078125 },
+  { lowerMm: 0, upperMm: 0.0078125 },
+  { lowerMm: 0, upperMm: 0.0078125 },
+  { lowerMm: 0, upperMm: 0.0078125 }
+]
+upperStrip 50 faces closed true seat { lowerMm: 0, upperMm: 0.0078125 } drum { lowerMm: 1.453125, upperMm: 1.4609375 }
+upperStrip 64 faces closed true seat { lowerMm: 0, upperMm: 0.0078125 } drum { lowerMm: 0, upperMm: 0.0078125 }
+lowerStrip 50 faces closed true seat { lowerMm: 0, upperMm: 0.0078125 } drum { lowerMm: 0, upperMm: 0.0078125 }
+
+
+node tools/realtest.mjs t38 t333 --all
+ok    t38      26 pass   0 fail  59.8s  (real renderer)
+ok    t333     16 pass   0 fail  20.3s  (real renderer)
+2 checks: 42 pass, 0 fail (real renderer)
+
+node review/GT-20076/pistol-frame-perf.mjs --minigun-panel --hands
+GRANT chatgpt2 GT-20076: starting one game-test command
+real before [
+  'PASS guns checked up in first person: 1 of 1',
+  'PASS no part of either hand inside any part of a gun (deepest per gun, mm: minigun 0.0)',
+  'PASS neither hand through the other (D-140)',
+  "PASS the gloved wrists stay inside the sleeves at every gun's hip hold"
+]
+real after [
+  'PASS guns checked up in first person: 1 of 1',
+  'PASS no part of either hand inside any part of a gun (deepest per gun, mm: minigun 0.0)',
+  'PASS neither hand through the other (D-140)',
+  "PASS the gloved wrists stay inside the sleeves at every gun's hip hold"
+]
+
+
+node review/GT-20076/pistol-frame-perf.mjs --minigun-panel
+GRANT chatgpt2 GT-20076: starting one game-test command
+before {
+  hash: 'e70f29b6',
+  gun: 'minigun',
+  eye: true,
+  backend: 'WebGPUBackend',
+  frames: { count: 150, p50: 16.69999999999709, p95: 16.80000000000291 },
+  gpu: { count: 0, p50: null, p95: null },
+  seamBuildMs: []
+} reload 48 phases
+after {
+  hash: '6194259f',
+  gun: 'minigun',
+  eye: true,
+  backend: 'WebGPUBackend',
+  frames: { count: 150, p50: 16.69999999999709, p95: 16.799999999995634 },
+  gpu: { count: 0, p50: null, p95: null },
+  seamBuildMs: [ 0.5, 0.29999999701976776, 0.10000000149011612, 0, 0, 0, 0, 0, 0 ]
+} reload 48 phases
+PASS original and revised world/eye magazine transforms through 48 reload phases 0.09643650760992957
+

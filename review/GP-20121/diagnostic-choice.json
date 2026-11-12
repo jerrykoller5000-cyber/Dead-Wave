@@ -1,0 +1,151 @@
+{
+  "at": "2026-11-12T09:11:48.415Z",
+  "rows": [
+    {
+      "open": true,
+      "openSyncMs": 16.5,
+      "mainBefore": 380,
+      "mainAfter": 380,
+      "dressAfter": 19,
+      "profOpen": [],
+      "choice": {
+        "tab": true,
+        "shirt": true,
+        "option": true,
+        "selected": "Sleeves rolled"
+      },
+      "profChoice": [
+        {
+          "frame": 1,
+          "ms": 97.3,
+          "top": [
+            "r:render 67.2",
+            "r:rigSkin 29.2",
+            "r:matrices 0.8",
+            "hud+audio 0.1"
+          ],
+          "heapMB": 1029.6,
+          "freedMB": -14.2
+        }
+      ],
+      "close": {
+        "syncMs": 0.5,
+        "open": false,
+        "main": 382
+      },
+      "profClose": []
+    },
+    {
+      "open": true,
+      "openSyncMs": 5.399999998509884,
+      "mainBefore": 382,
+      "mainAfter": 382,
+      "dressAfter": 22,
+      "profOpen": [],
+      "close": {
+        "syncMs": 0.3999999985098839,
+        "open": false,
+        "main": 382
+      },
+      "profClose": []
+    }
+  ],
+  "spikes": [
+    {
+      "stage": "entry",
+      "ms": 6533.2
+    },
+    {
+      "stage": "entry",
+      "ms": 133.5
+    },
+    {
+      "stage": "entry",
+      "ms": 1066.6
+    },
+    {
+      "stage": "entry",
+      "ms": 250.1
+    },
+    {
+      "stage": "open 1",
+      "ms": 116.7
+    },
+    {
+      "stage": "choice",
+      "ms": 200
+    },
+    {
+      "stage": "choice",
+      "ms": 266.8
+    }
+  ],
+  "profile": [
+    {
+      "tag": "items",
+      "ms": 0.19999999925494194
+    },
+    {
+      "tag": "menu refresh",
+      "ms": 6.599999997764826
+    },
+    {
+      "tag": "choices",
+      "ms": 7.399999998509884
+    },
+    {
+      "tag": "start dress view",
+      "ms": 0
+    },
+    {
+      "tag": "first dress frame",
+      "ms": 4.299999997019768
+    },
+    {
+      "tag": "menu refresh",
+      "ms": 3.099999997764826
+    },
+    {
+      "tag": "menu refresh",
+      "ms": 0.30000000074505806
+    },
+    {
+      "tag": "menu refresh",
+      "ms": 0.19999999925494194
+    },
+    {
+      "tag": "dress render",
+      "ms": 22.5
+    },
+    {
+      "tag": "items",
+      "ms": 0.10000000149011612
+    },
+    {
+      "tag": "menu refresh",
+      "ms": 0.29999999701976776
+    },
+    {
+      "tag": "choices",
+      "ms": 0.5999999977648258
+    },
+    {
+      "tag": "start dress view",
+      "ms": 0
+    },
+    {
+      "tag": "first dress frame",
+      "ms": 1.300000000745058
+    }
+  ],
+  "errors": [],
+  "entryMs": 9420.199999999255,
+  "beforeOpen": {
+    "ready": "true",
+    "pipes": 19
+  },
+  "paint": {
+    "count": 153,
+    "ms": 276.5000000037253
+  }
+}

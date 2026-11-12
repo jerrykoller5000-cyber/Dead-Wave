@@ -1,0 +1,48 @@
+{
+  "before": {
+    "visible": true,
+    "faces": 96,
+    "world": 0,
+    "eye": 0,
+    "rack": 0,
+    "rackPresent": 96,
+    "carryTubeVisible": true,
+    "sharedModelFaces": 9022,
+    "totalModelFaces": 10467,
+    "carryFaces": 96,
+    "cameraEye": [
+      7.117830890686165,
+      -197.89991563251465,
+      -642.3744963156757
+    ],
+    "cameraTarget": [
+      7.498705406190042,
+      -197.9911668185208,
+      -642.274516755356
+    ],
+    "swatch": "m81"
+  },
+  "after": {
+    "visible": true,
+    "faces": 96,
+    "world": 96,
+    "eye": 96,
+    "rack": 96,
+    "rackPresent": 96,
+    "carryTubeVisible": true,
+    "sharedModelFaces": 9022,
+    "totalModelFaces": 10467,
+    "carryFaces": 96,
+    "cameraEye": [
+      7.117830890686165,
+      -197.89991563251465,
+      -642.3744963156757
+    ],
+    "cameraTarget": [
+      7.498705406190042,
+      -197.9911668185208,
+      -642.274516755356
+    ],
+    "swatch": "m81"
+  }
+}

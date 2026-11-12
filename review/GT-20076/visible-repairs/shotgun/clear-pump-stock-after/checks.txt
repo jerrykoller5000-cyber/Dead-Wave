@@ -1,0 +1,69 @@
+node tools/tests/run-all.mjs t38 --jobs 1 --no-retry --all-fails
+ok    t38     26 pass   0 fail  132.9s
+1 checks: 26 pass, 0 fail
+node tools/realtest.mjs t333 t277 tcb302 --all
+ok    t333     16 pass   0 fail  20.9s  (real renderer)
+ok    t277     46 pass   0 fail  37.1s  (real renderer)
+ok    tcb302   10 pass   0 fail  41.1s  (real renderer)
+    PASS the forend goes back by the pump's travel (0.120 m)
+    PASS once a shell: three strokes for three shells (3)
+3 checks: 72 pass, 0 fail (real renderer)
+node review/GT-20076/pistol-frame-perf.mjs --pump-stock
+Game-test request 6544faae-cc97-442a-9af9-185909f86e1a queued at position 1. Waiting...
+GRANT chatgpt2 GT-20076: starting one game-test command
+pump cycle before 0 0.12 200
+before {
+  hash: 'c5a6ac82',
+  gun: 'shotgun',
+  eye: true,
+  backend: 'WebGPUBackend',
+  frames: { count: 150, p50: 16.69999999999709, p95: 16.80000000000291 },
+  gpu: { count: 0, p50: null, p95: null },
+  seamBuildMs: []
+} 
+pump cycle after 0 0.12 200
+after {
+  hash: '9e19842b',
+  gun: 'shotgun',
+  eye: true,
+  backend: 'WebGPUBackend',
+  frames: { count: 150, p50: 16.69999999999709, p95: 16.80000000000291 },
+  gpu: { count: 0, p50: null, p95: null },
+  seamBuildMs: [ 5.800000004470348, 0 ]
+} 
+
+node review/GT-20076/pistol-frame-perf.mjs --pump-stock --hands
+GRANT chatgpt2 GT-20076: starting one game-test command
+real before [
+  'PASS guns checked up in first person: 1 of 1',
+  'PASS no part of either hand inside any part of a gun (deepest per gun, mm: shotgun 0.5)',
+  'PASS neither hand through the other (D-140)',
+  "PASS the gloved wrists stay inside the sleeves at every gun's hip hold"
+]
+real after [
+  'PASS guns checked up in first person: 1 of 1',
+  'PASS no part of either hand inside any part of a gun (deepest per gun, mm: shotgun 0.5)',
+  'PASS neither hand through the other (D-140)',
+  "PASS the gloved wrists stay inside the sleeves at every gun's hip hold"
+]
+
+node review/GT-20076/rear-shield-isolated.mjs
+GRANT chatgpt2 GT-20076: starting one game-test command
+{
+  triangles: 1552,
+  oldTriangles: 392,
+  closed: [ true ],
+  gaps: [
+    { lowerMm: 0, upperMm: 0.0078125 },
+    { lowerMm: 0, upperMm: 0.0078125 }
+  ],
+  profile: {
+    samples: 33337,
+    lost: 0,
+    added: 0,
+    recession: 0.00001208750297348321,
+    expansion: 1.2599829755932657e-8,
+    deepest: [ -0.02793, 0.02691, 0.032012089022891925, 0.03200000151991844 ]
+  }
+}
+

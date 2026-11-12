@@ -1,0 +1,57 @@
+node review/GT-20076/frame-details.mjs --drum-ribs
+GRANT chatgpt2 GT-20076: starting one game-test command
+PASS all rim contacts, exterior color coordinates and drum finish {
+  samples: 19467,
+  maxY: 1.1640766714275663e-10,
+  maxNormal: 2.220446049250313e-16,
+  maxUV: 2.220446049250313e-16
+} { worldMaterials: 3, eyeMaterials: 3, coatedMaterials: 7 }
+PASS native before/after side detail in all four lights aa12 33424312
+
+node review/GT-20076/pistol-frame-perf.mjs --drum-ribs
+GRANT chatgpt2 GT-20076: starting one game-test command
+before {
+  hash: '33424312',
+  gun: 'aa12',
+  eye: true,
+  backend: 'WebGPUBackend',
+  frames: { count: 150, p50: 16.700000000000728, p95: 16.799999999999272 },
+  gpu: { count: 0, p50: null, p95: null },
+  seamBuildMs: []
+} reload 48 phases
+after {
+  hash: 'f62123e5',
+  gun: 'aa12',
+  eye: true,
+  backend: 'WebGPUBackend',
+  frames: { count: 150, p50: 16.69999999999709, p95: 16.80000000000291 },
+  gpu: { count: 0, p50: null, p95: null },
+  seamBuildMs: [
+    0.7000000029802322, 0.29999999701976776, 0.30000000447034836,
+                     0,                   0,                   0,
+    0.3999999985098839,                   0,                   0,
+                     0,                   0,                   0,
+                     0,                   0,                   0,
+                     0,                   0,                   0,
+                     0,                   0,                   0,
+                     0,                   0,                   0,
+                     0,                   0,                   0,
+                     0,                   0,                   0,
+                     0,                   0,                   0,
+                     0,                   0,                   0,
+                     0,                   0,                   0,
+                     0,                   0,                   0,
+                     0,                   0,                   0,
+                     0,                   0,                   0
+  ]
+} reload 48 phases
+PASS original and revised world/eye magazine transforms through 48 reload phases 0.506541858790358
+
+node tools/realtest.mjs t38 t333 t277 tcb301 --all
+ok    t38      26 pass   0 fail  58.2s  (real renderer)
+ok    t333     16 pass   0 fail  20.2s  (real renderer)
+ok    t277     46 pass   0 fail  35.0s  (real renderer)
+ok    tcb301    9 pass   0 fail  39.4s  (real renderer)
+    PASS the Breacher's empty drum shows empty early in the reload (0)
+    PASS and the incoming drum its own count once out of the pouch (20 of 20)
+4 checks: 97 pass, 0 fail (real renderer)

@@ -1,0 +1,22 @@
+{
+  "before": {
+    "hip-noon": 4,
+    "hip-overcast": 4,
+    "hip-dusk": 4,
+    "hip-night": 4,
+    "aimed-noon": 5,
+    "aimed-overcast": 5,
+    "aimed-dusk": 5,
+    "aimed-night": 5
+  },
+  "after": {
+    "hip-noon": 4,
+    "hip-overcast": 4,
+    "hip-dusk": 4,
+    "hip-night": 4,
+    "aimed-noon": 5,
+    "aimed-overcast": 5,
+    "aimed-dusk": 5,
+    "aimed-night": 5
+  }
+}

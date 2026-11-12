@@ -1,0 +1,13 @@
+{
+  "at": "2026-11-12T11:20:35.175Z",
+  "label": "draws",
+  "errors": [],
+  "audit": {
+    "frames": 73,
+    "objects": 0,
+    "totalCalls": 0,
+    "byRoot": [],
+    "byBranch": [],
+    "rows": []
+  }
+}

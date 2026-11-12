@@ -1,29 +1,32 @@
 # Claude 2
 
-state: active
+state: idle
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: CD-8 third-person check: the support thumb on the pistol and the support hand on the revolver (J142d/e)
-touching: review/CD-8/tp-hands.mjs (new)
-since: 2026-11-12T07:00Z
-next: CB-311 J142a (Jerry, 02:35Z, with a picture): the gear on his back.
+task: —
+touching: —
+since: 2026-11-12T09:51Z
+next: CB-314 The unarmed sleeve 2.8 mm into a hip pouch standing (from CC
 blocked-on: —
-last-report: handoffs/2026-11-12-claude2-CB-312.md
+last-report: handoffs/2026-11-12-claude2-CD-8-interim.md
 
 ## Notes
 
-### Where things stand (claude2, fresh session from 03:55Z, Opus 5.5; 07:2xZ)
-- Done: CB-310 filmstrip (review/CB-310/strip-*.jpg, accepted, sent to Jerry). CB-312 test fixes landed, out for review:
-  fakethree material clone owns its userData (t334 now 21/5: ChatGPT 2's AK/shotgun-tube paint, GT-20079), tag281, tag292
-  (43/1 real firing-line red: Antigravity), tcl281 (grip axis via TT.inspectHostDbg + makePistolModel without finishGun),
-  t182 (game-time wait), core/skin-merge.js proxy normals. Handoffs CB-310, CB-312.
-- CB-311 (Jerry's gear cage) OPEN: every gun missing in his 5080 shot (straps, pack, shells left). Not reproducible in the
-  cloud (WebGL) by any carry path; ChatGPT runs review/CB-311/watch311.mjs on the 5080 (lent, GP-20117). Scripts in review/CB-311.
-- CD-8 3P check done: review/CD-8/tp-hands-before.jpg (pistol thumb over the frame top, revolver fist low on the heel);
-  asked the Director whether to fix now (index.html support-hand holds) or after Claude 1's 1P lands.
-- Queue after: t228 (support fist along forends, chainsaw hand), CB-290 (tcb290c).
-- Cloud copy: Claude outputs/cb311/cloud-src.tgz + intro.tgz (PC tree 03:55Z) in /home/claude/cb. Run: CHROME=/usr/bin/google-chrome
-  CHROME_ARGS=--no-sandbox node tools/game-test-slot.mjs run claude2 <task> --checks <x> -- node <script> (a page load ~5 min).
-  Stepped pictures (flightHold + stepFrame) draw fine for legs (review/CB-310/stairs310.mjs). WebGPU in the cloud draws nothing.
+### Where things stand (claude2, session 03:55Z-10:5xZ, Opus 5.5)
+- Done: CB-310 stairs filmstrip (accepted, to Jerry). CB-312 test fixes (accepted, ready to commit): fakethree clone owns
+  userData, tag281, tag292, tcl281 (grip axis via TT.inspectHostDbg + makePistolModel without finishGun), t182, skin-merge
+  proxy normals. t221 fixture fix landed (scope housing by name, radius interpolated; md5 765c522f; FYI to Director).
+- CB-311 (Jerry's gear cage) OPEN: every gun missing in his 5080 shot; not reproducible on WebGL. ChatGPT runs
+  review/CB-311/watch311.mjs on the 5080 (GP-20117). Scripts in review/CB-311.
+- CD-8 3P: interim landed 10:0xZ (the pistol's support hand on VM_FIT; t229 thumb check rewritten; handoff CD-8-interim,
+  for review). Revolver + firing hands wait for CD-9 (Claude 1's third-person fit); then wire it as trial 2 does
+  (Claude outputs/CD-8-3p/cd8-3p-both-hands.diff: WEAPON_HOLD gripFit, holdWeapon G, poseHands r/l).
+- Next: t334 (Director OK, --review): bare AK eligible triangles 100% coated (world and eye), then fit an AK optic through
+  the Armory for the minima, thresholds/UV unchanged. Then t228 long-gun forend angles (51-90 deg vs 45; the wrist limits),
+  chainsaw firing hand 18 cm; CB-290 (tcb290c).
+- Cloud copy: Claude outputs/cb311/cloud-src2.tgz (PC 08:18Z) + intro.tgz. Run: CHROME=/usr/bin/google-chrome
+  CHROME_ARGS=--no-sandbox node tools/game-test-slot.mjs run claude2 <task> --checks <x> -- node <script> (load ~5 min).
+  review/CD-8/tp-hands.mjs (close cameras round the hands, TINT=1, LIGHTS=noon,overcast,dusk,night). Background long
+  runs with a nohup'd shell script (a foreground parenthesis waits and gets killed at 2 min).
 
 ### Who you are (D-137, Jerry 10 Nov 2026)
 You are **Claude 2**, the crew's second Claude: a Claude task of your own, on Claude Sonnet 5.5 (Extra). You took

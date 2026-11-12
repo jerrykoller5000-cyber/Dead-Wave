@@ -4,7 +4,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {launch} from '../../tools/cdp.mjs';
 import {serve} from '../../tools/serve.mjs';
-import {originalDrumOptic} from './replay-artwork.mjs';
+import {originalDrumOptic,replayArtwork} from './replay-artwork.mjs';
 
 assert(process.env.DW_GAME_TEST_TOKEN,'Use crew slot run');
 const root=fileURLToPath(new URL('../../',import.meta.url));
@@ -16,10 +16,22 @@ const server=await serve(root,0);
 const browser=await launch({headless:false});
 try {
   const p=await browser.newPage({width:960,height:540});
-  let verifyOriginal;
+  let verifyOriginal,verifyGripTrial;
   if(process.argv.includes('--original-drum-optic')){
     assert.equal(phase,'catalog-fix-drum-optic-original');
     verifyOriginal=await originalDrumOptic(p,server.origin);
+  }
+  if(process.argv.includes('--gw-grip-trial')){
+    const source=await fs.readFile(path.join(root,'studio/weapon-longarms.js'),'utf8');
+    const grip='  K.slab(shapedGrip(-0.12, -0.12, 0.18, 0.08, 0.3, [';
+    const ribs='  gripRidges(K, finish.furniture, -0.12';
+    const call='  fitGwGrip(THREE,gripBody,splitArtworkRows,clipArtworkProfile);';
+    const current='  fitM4GripHousing(THREE, gripBody);';
+    const fitted=source.includes(current)?source.replace(current,call):
+      source.replace(grip,grip.replace('K.slab','const gripBody = K.slab')).replace(ribs,call+'\n'+ribs);
+    assert.equal(fitted.split(call).length,2);
+    const trial="import {fitGwGrip} from '/review/GT-20076/gw-grip-fit.mjs';\n"+fitted;
+    verifyGripTrial=await replayArtwork(p,server.origin,'/studio/weapon-longarms.js',trial);
   }
   await p.goto(server.origin+'/index.html?debug=1&raf=timer');
   assert(await p.waitFor('window.TT && DWLoad.snapshot().state==="ready"'));
@@ -37,6 +49,7 @@ try {
     for(const id of ['aa12','m4'])assert.equal(data[id].artworkFingerprint,original[id].artworkFingerprint);
   }
   if(observe)await fs.writeFile(path.join(out,'source-visibility.json'),JSON.stringify(await p.evaluate('window.visibilityTrace'),null,2)+'\n');
+  verifyGripTrial?.();
   await fs.writeFile(path.join(out,'slings.json'),JSON.stringify(slings,null,2)+'\n');
   await fs.writeFile(path.join(out,'audit.json'),JSON.stringify(data,null,2)+'\n');
   await fs.writeFile(path.join(out,'audit.txt'),lines+'\n');

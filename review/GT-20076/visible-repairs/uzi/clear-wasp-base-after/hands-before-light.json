@@ -1,0 +1,47 @@
+{
+  "indexSha": "f993f13340f23a612728c9de2defae15ef2d57e316107953b65762aca7958d7f",
+  "lines": [
+    "INFO uzi the hands into each other: 0.2 mm",
+    "PASS guns checked up in first person: 1 of 1",
+    "FAIL no part of either hand inside any part of a gun (deepest per gun, mm: uzi 5.3); through: uzi: 5.3 mm (r glove in ?)",
+    "PASS neither hand through the other (D-140)",
+    "PASS the gloved wrists stay inside the sleeves at every gun's hip hold"
+  ],
+  "diagnostic": {
+    "out": [
+      "INFO uzi the hands into each other: 0.2 mm",
+      "PASS guns checked up in first person: 1 of 1",
+      "FAIL no part of either hand inside any part of a gun (deepest per gun, mm: uzi 5.3); through: uzi: 5.3 mm (r glove in ?)",
+      "PASS neither hand through the other (D-140)",
+      "PASS the gloved wrists stay inside the sleeves at every gun's hip hold"
+    ],
+    "hand": "r glove",
+    "vertex": 1371,
+    "depthMm": 5.300007589790308,
+    "gunLocalPoint": [
+      -0.0005243607999716462,
+      -0.0787289631325692,
+      0.08990125150291566
+    ],
+    "triangles": 284,
+    "bounds": [
+      [
+        -0.016002737776034344,
+        -0.09676798196683838,
+        0.008556749442028892
+      ],
+      [
+        0.016002731514731756,
+        -0.02869643409181323,
+        0.1074818553321784
+      ]
+    ],
+    "nearest": [
+      {
+        "label": "root/group[43]",
+        "boundsError": 0.000003033783892146648,
+        "vertexError": 0.0000031527763881179777
+      }
+    ]
+  }
+}

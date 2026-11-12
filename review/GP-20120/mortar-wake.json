@@ -1,0 +1,75 @@
+{
+  "at": "2026-11-12T08:38:45.652Z",
+  "spikes": [
+    {
+      "stage": "entry",
+      "ms": 8666.6
+    },
+    {
+      "stage": "entry",
+      "ms": 166.8
+    },
+    {
+      "stage": "entry",
+      "ms": 1616.6
+    },
+    {
+      "stage": "entry",
+      "ms": 116.6
+    },
+    {
+      "stage": "entry",
+      "ms": 400.1
+    },
+    {
+      "stage": "entry",
+      "ms": 116.6
+    },
+    {
+      "stage": "mortar shoulder",
+      "ms": 166.9
+    }
+  ],
+  "errors": [],
+  "shoulder": {
+    "player": [
+      1.2,
+      -200,
+      -651.05
+    ],
+    "spawned": true,
+    "mounted": true,
+    "carried": "mortar"
+  },
+  "wake": {
+    "player": [
+      -40.25,
+      -200,
+      -648.7
+    ],
+    "carried": null,
+    "placed": [
+      {
+        "hp": 80,
+        "belt": 0
+      }
+    ],
+    "fence": {
+      "raised": false,
+      "amount": 0,
+      "awaitExit": true
+    }
+  },
+  "exit": {
+    "player": [
+      -40.25,
+      -200,
+      -634.5745503258091
+    ],
+    "fence": {
+      "raised": true,
+      "amount": 1,
+      "awaitExit": false
+    }
+  }
+}

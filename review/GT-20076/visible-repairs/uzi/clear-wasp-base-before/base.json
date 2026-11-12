@@ -1,0 +1,75 @@
+{
+  "hash": "36405d44",
+  "gap": {
+    "lowerMm": 0,
+    "upperMm": 0,
+    "penetrating": true
+  },
+  "closed": [
+    true
+  ],
+  "surfaces": {
+    "x1": {
+      "occupied": 6911,
+      "lost": 0,
+      "added": 0,
+      "maxIn": 0,
+      "maxOut": 0
+    },
+    "x-1": {
+      "occupied": 6911,
+      "lost": 0,
+      "added": 0,
+      "maxIn": 0,
+      "maxOut": 0
+    },
+    "z1": {
+      "occupied": 7910,
+      "lost": 0,
+      "added": 0,
+      "maxIn": 0,
+      "maxOut": 0
+    },
+    "z-1": {
+      "occupied": 7910,
+      "lost": 0,
+      "added": 0,
+      "maxIn": 0,
+      "maxOut": 0
+    },
+    "y-1": {
+      "occupied": 9666,
+      "lost": 0,
+      "added": 0,
+      "maxIn": 0,
+      "maxOut": 0
+    },
+    "y1": {
+      "occupied": 9666,
+      "lost": 0,
+      "added": 0,
+      "maxIn": 0,
+      "maxOut": 0
+    }
+  },
+  "magBase": [
+    0,
+    -0.205,
+    -0.0435
+  ],
+  "grip": [
+    0,
+    0,
+    0
+  ],
+  "bell": [
+    0,
+    -0.1749489241085905,
+    -0.04676003505261076
+  ],
+  "cap": [
+    0,
+    -0.18119466778430637,
+    -0.04815670464032833
+  ]
+}

@@ -1,0 +1,5 @@
+shotgun 82->81 9e19842b 4d6e5670
+shotgun-equipped 126->125 f6589e48 eab1968f
+shotgun-prism 151->150 fe9ab5b8 18b80811
+shotgun-rmr 148->147 9f1f7b86 8c1378a3
+unaffected 52 slings 36

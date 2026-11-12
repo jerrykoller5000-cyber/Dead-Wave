@@ -1,0 +1,155 @@
+node review/GT-20076/kr-handguard-band-isolated.mjs lower
+GRANT chatgpt2 GT-20076: starting one game-test command
+lower triangles 202 closed [ true ] contacts [
+  { lowerMm: 0, upperMm: 0.0078125 },
+  { lowerMm: 0, upperMm: 0, penetrating: true },
+  { lowerMm: 0, upperMm: 0, penetrating: true },
+  { lowerMm: 0, upperMm: 0, penetrating: true },
+  { lowerMm: 3.3593750000000004, upperMm: 3.3671875000000004 }
+]
+
+
+node review/GT-20076/heavy-light-batch.mjs after --kr-band
+Game-test request 6a3c6016-9f7e-4736-b907-dfc6eb855d50 queued at position 1. Waiting...
+GRANT chatgpt2 GT-20076: starting one game-test command
+after {
+  hash: '9edebc68',
+  closed: [ true ],
+  gaps: [
+    { lowerMm: 0, upperMm: 0.0078125 },
+    { lowerMm: 0, upperMm: 0, penetrating: true },
+    { lowerMm: 0, upperMm: 0, penetrating: true },
+    { lowerMm: 0, upperMm: 0, penetrating: true },
+    { lowerMm: 3.3593750000000004, upperMm: 3.3671875000000004 }
+  ],
+  profiles: {
+    x1: {
+      occupied: 9073,
+      lost: 0,
+      added: 0,
+      maxIn: 9.574936954415136e-8,
+      maxOut: 0.0000014203171237459067,
+      worst: [Array]
+    },
+    'x-1': {
+      occupied: 9073,
+      lost: 0,
+      added: 0,
+      maxIn: 2.973696773093948e-7,
+      maxOut: 0.0000013848382429092199,
+      worst: [Array]
+    },
+    y1: {
+      occupied: 8829,
+      lost: 0,
+      added: 0,
+      maxIn: 4.621608804822319e-7,
+      maxOut: 0.0000022091448016623924,
+      worst: [Array]
+    },
+    'y-1': {
+      occupied: 8829,
+      lost: 0,
+      added: 0,
+      maxIn: 8.6990076253457e-10,
+      maxOut: 3.13931492461339e-7,
+      worst: [Array]
+    },
+    z1: {
+      occupied: 8463,
+      lost: 0,
+      added: 0,
+      maxIn: 1.4257385050342464e-8,
+      maxOut: 4.242360773787368e-8,
+      worst: [Array]
+    },
+    'z-1': {
+      occupied: 8463,
+      lost: 0,
+      added: 0,
+      maxIn: 1.051074571822852e-8,
+      maxOut: 3.274165749633795e-8,
+      worst: [Array]
+    }
+  },
+  wood: [
+    { name: 'KR-7 walnut', paint: null, map: true },
+    { name: 'KR-7 walnut', paint: null, map: true }
+  ],
+  vertices: 606,
+  muzzle: [ 0, -0.005, 0.855 ]
+}
+PASS after ak hip, aimed, held-right-open, rack in four lights
+
+
+node review/GT-20076/frame-details.mjs --kr-band
+Game-test request a08c7989-d99b-48c2-8a3c-09a270bdc98a queued at position 1. Waiting...
+GRANT chatgpt2 GT-20076: starting one game-test command
+PASS KR-7 M81 registry and factory wood {
+  moving: [
+    { world: null, map: false, eyeMap: false, drawn: true },
+    { world: null, map: false, eyeMap: false, drawn: true }
+  ],
+  wood: [ { map: true, painted: false } ],
+  coatedMaterials: 7
+}
+PASS native before/after side detail in all four lights ak 9edebc68
+
+
+node review/GT-20076/check-wasp-trim-data.mjs --kr-band
+Game-test request 5740b11e-90b3-40d1-a3f5-6cde74560fbc queued at position 1. Waiting...
+GRANT chatgpt2 GT-20076: starting one game-test command
+PASS WebGPU mesh 202 triangles, all attributes and cached mesh identity
+PASS lightweight mesh 202 triangles, all attributes and cached mesh identity
+
+
+node tools/realtest.mjs t38 t333 tcb295 --all
+ok    t38      26 pass   0 fail  58.5s  (real renderer)
+ok    t333     16 pass   0 fail  25.8s  (real renderer)
+ok    tcb295   21 pass   0 fail  41.3s  (real renderer)
+3 checks: 63 pass, 0 fail (real renderer)
+
+node review/GT-20076/pistol-frame-perf.mjs --kr-band --hands
+GRANT chatgpt2 GT-20076: starting one game-test command
+real before [
+  'PASS guns checked up in first person: 1 of 1',
+  'FAIL no part of either hand inside any part of a gun (deepest per gun, mm: ak 2.1); through: ak: 2.1 mm (r glove in controls-trigger)',
+  'PASS neither hand through the other (D-140)',
+  "PASS the gloved wrists stay inside the sleeves at every gun's hip hold"
+]
+real after [
+  'PASS guns checked up in first person: 1 of 1',
+  'FAIL no part of either hand inside any part of a gun (deepest per gun, mm: ak 2.1); through: ak: 2.1 mm (r glove in controls-trigger)',
+  'PASS neither hand through the other (D-140)',
+  "PASS the gloved wrists stay inside the sleeves at every gun's hip hold"
+]
+
+
+node review/GT-20076/pistol-frame-perf.mjs --kr-band
+
+──────────────────────────────────────────────────────────────────────────────
+NEW FOR YOU since you last looked (1; read them in handoffs/requests.md, newest at the bottom):
+    - from Claude 1 (2 min): FYI: the Wasp 5.3 mm is Claude 5's trigger index through the guard loop, not your trim
+──────────────────────────────────────────────────────────────────────────────
+Game-test request b088b0ac-ad3b-40bf-b16e-04a8cd943bad queued at position 1. Waiting...
+GRANT chatgpt2 GT-20076: starting one game-test command
+before {
+  hash: '9edebc68',
+  gun: 'ak',
+  eye: true,
+  backend: 'WebGPUBackend',
+  frames: { count: 150, p50: 16.69999999999709, p95: 16.80000000000291 },
+  gpu: { count: 0, p50: null, p95: null },
+  seamBuildMs: []
+} reload 48 phases
+after {
+  hash: '4b977ace',
+  gun: 'ak',
+  eye: true,
+  backend: 'WebGPUBackend',
+  frames: { count: 150, p50: 16.69999999999709, p95: 16.799999999995634 },
+  gpu: { count: 0, p50: null, p95: null },
+  seamBuildMs: [ 0.6000000014901161, 0 ]
+} reload 48 phases
+PASS original and revised world/eye magazine transforms through 48 reload phases 0.5245049649146585
+

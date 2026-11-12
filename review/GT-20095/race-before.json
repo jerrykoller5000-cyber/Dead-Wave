@@ -1,0 +1,8 @@
+{
+  "state": "failed",
+  "held": true,
+  "errors": [
+    "OperationError: Failed to execute 'copyExternalImageToTexture' on 'GPUQueue': CopyExternalImageToTexture doesn't support canvas without rendering context\n    at GPUQueue.copyExternalImageToTexture (<anonymous>:16:17)\n    at WebGPUTextureUtils._copyImageToTexture (http://127.0.0.1:12180/vendor/three/three.webgpu.js:62935:16)\n    at WebGPUTextureUtils.updateTexture (http://127.0.0.1:12180/vendor/three/three.webgpu.js:62721:9)\n    at WebGPUBackend.updateTexture (http://127.0.0.1:12180/vendor/three/three.webgpu.js:69676:21)\n    at Textures.updateTexture (http://127.0.0.1:12180/vendor/three/three.webgpu.js:28896:55)"
+  ],
+  "consoleErrors": []
+}

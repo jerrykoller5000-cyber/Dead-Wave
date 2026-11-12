@@ -1,0 +1,94 @@
+{
+  "hash": "9e19842b",
+  "profiles": {
+    "x-1": {
+      "occupied": 6529,
+      "lost": 0,
+      "added": 0,
+      "maxDepth": 6.2285140274565e-9
+    },
+    "x1": {
+      "occupied": 6529,
+      "lost": 0,
+      "added": 0,
+      "maxDepth": 1.1084055883195387e-8
+    },
+    "y-1": {
+      "occupied": 8860,
+      "lost": 0,
+      "added": 0,
+      "maxDepth": 0
+    },
+    "y1": {
+      "occupied": 8860,
+      "lost": 0,
+      "added": 0,
+      "maxDepth": 1.2191315908183231e-9
+    },
+    "z-1": {
+      "occupied": 9685,
+      "lost": 0,
+      "added": 0,
+      "maxDepth": 0
+    },
+    "z1": {
+      "occupied": 9685,
+      "lost": 0,
+      "added": 0,
+      "maxDepth": 0
+    }
+  },
+  "exterior": {
+    "visible": 10472,
+    "retained": 10472,
+    "maxHeight": 1.0427346911270896e-8,
+    "maxNormal": 0.0000011180215599981835,
+    "maxUV": 2.498001805406602e-16
+  },
+  "gaps": [
+    {
+      "lowerMm": 0,
+      "upperMm": 0.0078125
+    },
+    {
+      "lowerMm": 0,
+      "upperMm": 0,
+      "penetrating": true
+    },
+    {
+      "lowerMm": 0,
+      "upperMm": 0,
+      "penetrating": true
+    }
+  ],
+  "stockSeat": {
+    "lowerMm": 0,
+    "upperMm": 0.0078125
+  },
+  "closed": [
+    true
+  ],
+  "vertices": 1860,
+  "grip": [
+    0,
+    0,
+    0
+  ],
+  "stock": [
+    0,
+    0,
+    0
+  ],
+  "pump": [
+    0,
+    -0.006,
+    0.375
+  ],
+  "trigger": [
+    0,
+    -0.044,
+    0.033
+  ],
+  "finish": "furniture",
+  "stockFinish": "furniture"
+}

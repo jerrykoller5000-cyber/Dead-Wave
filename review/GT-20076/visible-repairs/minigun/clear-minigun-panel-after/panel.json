@@ -1,0 +1,114 @@
+{
+  "hash": "e70f29b6",
+  "profiles": {
+    "x-1": {
+      "occupied": 6793,
+      "lost": 0,
+      "added": 0,
+      "maxDepth": 0
+    },
+    "x1": {
+      "occupied": 6793,
+      "lost": 0,
+      "added": 0,
+      "maxDepth": 5.723409343683095e-9
+    },
+    "y-1": {
+      "occupied": 5150,
+      "lost": 0,
+      "added": 0,
+      "maxDepth": 2.505041965528143e-9
+    },
+    "y1": {
+      "occupied": 5150,
+      "lost": 0,
+      "added": 0,
+      "maxDepth": 0
+    },
+    "z-1": {
+      "occupied": 4962,
+      "lost": 0,
+      "added": 0,
+      "maxDepth": 4.3250176412490404e-8
+    },
+    "z1": {
+      "occupied": 4962,
+      "lost": 0,
+      "added": 0,
+      "maxDepth": 1.3877787807814457e-17
+    }
+  },
+  "closed": [
+    true
+  ],
+  "strips": [
+    {
+      "islands": [
+        {
+          "closed": true,
+          "plate": {
+            "lowerMm": 0,
+            "upperMm": 0.0078125
+          }
+        },
+        {
+          "closed": true,
+          "plate": {
+            "lowerMm": 0,
+            "upperMm": 0.0078125
+          }
+        }
+      ],
+      "closed": [
+        true,
+        true
+      ],
+      "drum": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      "plate": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "islands": [
+        {
+          "closed": true,
+          "plate": {
+            "lowerMm": 0,
+            "upperMm": 0.0078125
+          }
+        }
+      ],
+      "closed": [
+        true
+      ],
+      "drum": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      },
+      "plate": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    }
+  ],
+  "gap": {
+    "lowerMm": 0,
+    "upperMm": 0.0078125
+  },
+  "vertices": 696,
+  "paint": "receiver",
+  "drumRest": [
+    0.13999999999999999,
+    -0.055999999999999994,
+    -0.013999999999999999
+  ],
+  "hold": [
+    0,
+    0.049,
+    -0.308
+  ]
+}

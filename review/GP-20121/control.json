@@ -1,0 +1,59 @@
+{
+  "at": "2026-11-12T09:45:21.056Z",
+  "rows": [],
+  "spikes": [
+    {
+      "stage": "entry",
+      "ms": 7983.1
+    },
+    {
+      "stage": "entry",
+      "ms": 100.1
+    },
+    {
+      "stage": "entry",
+      "ms": 133.2
+    },
+    {
+      "stage": "entry",
+      "ms": 1699.6
+    },
+    {
+      "stage": "entry",
+      "ms": 383.4
+    },
+    {
+      "stage": "control",
+      "ms": 116.7
+    },
+    {
+      "stage": "control",
+      "ms": 333.3
+    }
+  ],
+  "profile": [],
+  "errors": [],
+  "entryMs": 11986,
+  "beforeOpen": {
+    "ready": "true",
+    "pipes": 19
+  },
+  "controlProf": [
+    {
+      "frame": 8,
+      "ms": 336.6,
+      "top": [
+        "r:render 331.6",
+        "m:hold 1.1",
+        "m:pose 1.0",
+        "effects 0.7"
+      ],
+      "heapMB": 878.1,
+      "freedMB": 156.8
+    }
+  ],
+  "paint": {
+    "count": 104,
+    "ms": 209.90000004321337
+  }
+}

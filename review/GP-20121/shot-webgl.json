@@ -1,0 +1,120 @@
+{
+  "at": "2026-11-12T10:00:50.263Z",
+  "sourceHash": "68a4134dc2193efab86e981591c5fe0188792e2e0e863693047934da13a9b990",
+  "rows": [
+    {
+      "open": true,
+      "openSyncMs": 21.300000000745058,
+      "mainBefore": 381,
+      "mainAfter": 381,
+      "dressAfter": 17,
+      "profOpen": [],
+      "close": {
+        "syncMs": 0.5,
+        "open": false,
+        "main": 381
+      },
+      "profClose": []
+    },
+    {
+      "open": true,
+      "openSyncMs": 6.700000002980232,
+      "mainBefore": 381,
+      "mainAfter": 381,
+      "dressAfter": 17,
+      "profOpen": [],
+      "close": {
+        "syncMs": 0.5,
+        "open": false,
+        "main": 381
+      },
+      "profClose": []
+    }
+  ],
+  "spikes": [
+    {
+      "stage": "entry",
+      "ms": 7433.4
+    },
+    {
+      "stage": "entry",
+      "ms": 149.9
+    },
+    {
+      "stage": "entry",
+      "ms": 1666.3
+    },
+    {
+      "stage": "entry",
+      "ms": 100.2
+    },
+    {
+      "stage": "entry",
+      "ms": 116.7
+    },
+    {
+      "stage": "entry",
+      "ms": 283.4
+    },
+    {
+      "stage": "entry",
+      "ms": 100.2
+    },
+    {
+      "stage": "entry",
+      "ms": 116.8
+    }
+  ],
+  "profile": [
+    {
+      "tag": "items",
+      "ms": 0.09999999776482582
+    },
+    {
+      "tag": "menu refresh",
+      "ms": 8.099999997764826
+    },
+    {
+      "tag": "choices",
+      "ms": 9.199999999254942
+    },
+    {
+      "tag": "start dress view",
+      "ms": 0
+    },
+    {
+      "tag": "first dress frame",
+      "ms": 6.199999999254942
+    },
+    {
+      "tag": "items",
+      "ms": 0.10000000149011612
+    },
+    {
+      "tag": "menu refresh",
+      "ms": 0.3999999985098839
+    },
+    {
+      "tag": "choices",
+      "ms": 0.7999999970197678
+    },
+    {
+      "tag": "start dress view",
+      "ms": 0
+    },
+    {
+      "tag": "first dress frame",
+      "ms": 1
+    }
+  ],
+  "errors": [],
+  "entryMs": 11362,
+  "beforeOpen": {
+    "ready": "true",
+    "pipes": 17
+  },
+  "paint": {
+    "count": 104,
+    "ms": 198.90000000968575
+  }
+}

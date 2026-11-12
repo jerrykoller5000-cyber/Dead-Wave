@@ -1,0 +1,4 @@
+aa12 102->96 f62123e5 cbf10cb1
+aa12-equipped 126->120 81b75266 c5d330e6
+aa12-rmr 146->140 19b81ba8 d6204e28
+unaffected 53 slings 36

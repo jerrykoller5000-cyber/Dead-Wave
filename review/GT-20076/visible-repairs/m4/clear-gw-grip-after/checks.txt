@@ -1,0 +1,67 @@
+node tools/tests/run-all.mjs t38 --jobs 1 --no-retry --all-fails
+           INFO m4 cold meshes 35, equipped draws 31
+           INFO twelve cold guns: 276 attached meshes; equipped individually: 243 actual draws
+ok    t38     26 pass   0 fail  129.5s
+1 checks: 26 pass, 0 fail
+node tools/realtest.mjs t333 t277 t334 --all
+ok    t333     16 pass   0 fail  23.2s  (real renderer)
+    PASS m4: every small part touches a bigger one (60 small)
+ok    t277     46 pass   0 fail  40.0s  (real renderer)
+    PASS m4: has a sight point
+    PASS m4: eye above the bore, behind the muzzle, on its centre line, along it (0.00 deg)
+    PASS m4: eye clears the top line and stays near it (eye y 0.134, top 0.170)
+FAIL  t334     22 pass   4 fail  38.7s  (real renderer)
+    PASS m4: several distinct painted surfaces (13)
+    PASS m4: paint map and dielectric finish on every registered material
+    PASS m4: eligible gun meshes share one camo map and UVs (14, leaks 0)
+    PASS m4: excluded surfaces stay out of the paint registry (21)
+    PASS m4: fitted can shell and trim take the same camo (2)
+    PASS m4: suppressor bore remains bare
+    PASS m4: sampled UVs match the gun-root 0.42 m box projection (42, bad 0)
+    FAIL ak: several distinct painted surfaces (5)
+    FAIL ak: eligible gun meshes share one camo map and UVs (6, leaks 0)
+    FAIL ak: sampled UVs match the gun-root 0.42 m box projection (18, bad 0)
+    PASS m4: first-person gun settled
+    PASS m4: first-person copy mirrors the whole-gun camo (19)
+    PASS m4: first-person fitted can carries camo
+    FAIL ak: first-person copy mirrors the whole-gun camo (11)
+3 checks: 84 pass, 4 fail (real renderer)
+All four bare KR-7 failures match review/GT-20079/registry-after/slot-checks.txt verbatim.
+node review/GT-20076/pistol-frame-perf.mjs --gw-grip
+Game-test request 40f78f4d-8818-40f7-9c0a-9ae9f4a6d9a7 queued at position 1. Waiting...
+GRANT chatgpt2 GT-20076: starting one game-test command
+before {
+  hash: '65bd2ab7',
+  gun: 'm4',
+  eye: true,
+  backend: 'WebGPUBackend',
+  frames: { count: 150, p50: 16.69999999999709, p95: 16.80000000000291 },
+  gpu: { count: 0, p50: null, p95: null },
+  seamBuildMs: []
+} reload 48 phases
+after {
+  hash: '8c53a634',
+  gun: 'm4',
+  eye: true,
+  backend: 'WebGPUBackend',
+  frames: { count: 150, p50: 16.69999999999709, p95: 16.80000000000291 },
+  gpu: { count: 0, p50: null, p95: null },
+  seamBuildMs: [ 10, 0 ]
+} reload 48 phases
+PASS original and revised world/eye magazine transforms through 48 reload phases 0.5290462261753267
+
+node review/GT-20076/pistol-frame-perf.mjs --gw-grip --hands
+GRANT chatgpt2 GT-20076: starting one game-test command
+real before [
+  'PASS guns checked up in first person: 1 of 1',
+  'PASS no part of either hand inside any part of a gun (deepest per gun, mm: m4 0.4)',
+  'PASS neither hand through the other (D-140)',
+  "PASS the gloved wrists stay inside the sleeves at every gun's hip hold"
+]
+real after [
+  'PASS guns checked up in first person: 1 of 1',
+  'PASS no part of either hand inside any part of a gun (deepest per gun, mm: m4 0.3)',
+  'PASS neither hand through the other (D-140)',
+  "PASS the gloved wrists stay inside the sleeves at every gun's hip hold"
+]
+

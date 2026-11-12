@@ -1,0 +1,19 @@
+ak 4969b06c 9edebc68 120 119 changed crossings [] removed [
+  'root/controls-trigger[44]/BufferGeometry[0]|root/group[95]/BufferGeometry[8]'
+]
+ak-equipped 9b2bcd8a 4a4e0dee 137 136 changed crossings [] removed [
+  'root/controls-trigger[44]/BufferGeometry[0]|root/group[95]/magazineBody[0]/BufferGeometry[8]'
+]
+ak-heavy 43161314 fe29e488 163 162 changed crossings [] removed [
+  'root/controls-trigger[44]/BufferGeometry[0]|root/group[95]/magazineBody[0]/BufferGeometry[8]'
+]
+ak-acog 681c2543 770baadf 182 181 changed crossings [] removed [
+  'root/controls-trigger[44]/BufferGeometry[0]|root/group[95]/magazineBody[0]/BufferGeometry[8]'
+]
+ak-prism e5dca250 fb2e88ac 182 181 changed crossings [] removed [
+  'root/controls-trigger[44]/BufferGeometry[0]|root/group[95]/magazineBody[0]/BufferGeometry[8]'
+]
+ak-rmr 434a1904 99a9a6a0 177 176 changed crossings [] removed [
+  'root/controls-trigger[44]/BufferGeometry[0]|root/group[95]/magazineBody[0]/BufferGeometry[8]'
+]
+unaffected 50 identical slings 36

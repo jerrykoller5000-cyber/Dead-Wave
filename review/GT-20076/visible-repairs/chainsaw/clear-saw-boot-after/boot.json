@@ -1,0 +1,35 @@
+{
+  "hash": "c8a2abc2",
+  "currentHash": "71027a19",
+  "sourceShared": true,
+  "contacts": [
+    {
+      "lowerMm": 0,
+      "upperMm": 0.0078125
+    },
+    {
+      "lowerMm": 0,
+      "upperMm": 0.0078125
+    }
+  ],
+  "closed": [
+    true
+  ],
+  "exterior": {
+    "maxRawNormal": 0.0000010076665937774898,
+    "occupied": 7474,
+    "originalExposed": 4468,
+    "exposedBoot": 4468,
+    "missing": 0,
+    "maxIn": 2.470675988797133e-8,
+    "maxOut": 1.0967833863340104e-8,
+    "maxNormal": 0.07927490910622381,
+    "maxUV": 9.854329717784438e-7
+  },
+  "cap": [
+    -0.12,
+    0.1,
+    -0.15
+  ],
+  "chain": 42
+}

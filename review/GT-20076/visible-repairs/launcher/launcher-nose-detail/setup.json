@@ -1,0 +1,27 @@
+{
+  "id": "launcher",
+  "eye": [
+    0.32,
+    0.16,
+    0.88
+  ],
+  "target": [
+    0,
+    0.04,
+    0.64
+  ],
+  "fov": 25,
+  "moduleName": "launcher-nose-proof",
+  "proofName": "checkLauncherNose",
+  "hash": "2cbe3e0d",
+  "eyeWorld": [
+    0.22329605866177818,
+    -197.8883519706691,
+    -638.0559358386802
+  ],
+  "targetWorld": [
+    0,
+    -197.97208799266727,
+    -638.2234078826765
+  ]
+}

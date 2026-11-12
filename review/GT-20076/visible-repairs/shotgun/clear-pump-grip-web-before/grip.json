@@ -1,0 +1,88 @@
+{
+  "hash": "9e19842b",
+  "profiles": {
+    "x-1": {
+      "occupied": 6529,
+      "lost": 0,
+      "added": 0,
+      "maxDepth": 0
+    },
+    "x1": {
+      "occupied": 6529,
+      "lost": 0,
+      "added": 0,
+      "maxDepth": 0
+    },
+    "y-1": {
+      "occupied": 8860,
+      "lost": 0,
+      "added": 0,
+      "maxDepth": 0
+    },
+    "y1": {
+      "occupied": 8860,
+      "lost": 0,
+      "added": 0,
+      "maxDepth": 0
+    },
+    "z-1": {
+      "occupied": 9685,
+      "lost": 0,
+      "added": 0,
+      "maxDepth": 0
+    },
+    "z1": {
+      "occupied": 9685,
+      "lost": 0,
+      "added": 0,
+      "maxDepth": 0
+    }
+  },
+  "gaps": [
+    {
+      "lowerMm": 0,
+      "upperMm": 0,
+      "penetrating": true
+    },
+    {
+      "lowerMm": 0,
+      "upperMm": 0,
+      "penetrating": true
+    },
+    {
+      "lowerMm": 0,
+      "upperMm": 0,
+      "penetrating": true
+    }
+  ],
+  "stockSeat": {
+    "lowerMm": 0,
+    "upperMm": 0.0078125
+  },
+  "closed": [
+    true
+  ],
+  "vertices": 900,
+  "grip": [
+    0,
+    0,
+    0
+  ],
+  "stock": [
+    0,
+    0,
+    0
+  ],
+  "pump": [
+    0,
+    -0.006,
+    0.375
+  ],
+  "trigger": [
+    0,
+    -0.044,
+    0.033
+  ],
+  "finish": "furniture",
+  "stockFinish": "furniture"
+}

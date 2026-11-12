@@ -59,7 +59,34 @@ function stateOf(rig, o, out) {
   if (out.length !== STATE_N) out.length = STATE_N;
   return out;
 }
-function same(a, b) { if (a.length !== b.length) return false; for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) return false; return true; }
+// The steady path compares directly with the last baked state. Writing a new
+// array of fractional colour/transform numbers for every source every frame
+// boxes those numbers even when the source has not changed.
+function sameState(rig, o, s) {
+  const m = o.material, g = o.geometry;
+  if (s.length !== STATE_N || s[1] !== o.parent || s[2] !== m || s[3] !== g) return false;
+  // A source can lose its material or geometry after baking. Keep the original
+  // snapshot comparison for that exceptional state so it settles after a rebake.
+  if (!m || !g) {
+    const current = stateOf(rig, o, rig._st);
+    for (let i = 0; i < STATE_N; i++) if (current[i] !== s[i]) return false;
+    return true;
+  }
+  const c = m.color, e = m.emissive;
+  if (s[4] !== g.attributes.position.version ||
+    s[5] !== (g.attributes.color ? g.attributes.color.version : -1) ||
+    s[6] !== m.version || s[7] !== (c ? c.r : 0) || s[8] !== (c ? c.g : 0) || s[9] !== (c ? c.b : 0) ||
+    s[10] !== m.roughness || s[11] !== m.metalness ||
+    s[12] !== (e ? e.getHex() : 0) || s[13] !== m.emissiveIntensity ||
+    s[14] !== m.transparent || s[15] !== m.opacity || s[16] !== m.side ||
+    s[17] !== m.flatShading || s[18] !== m.vertexColors ||
+    s[19] !== o.position.x || s[20] !== o.position.y || s[21] !== o.position.z ||
+    s[22] !== o.quaternion.x || s[23] !== o.quaternion.y || s[24] !== o.quaternion.z || s[25] !== o.quaternion.w ||
+    s[26] !== o.scale.x || s[27] !== o.scale.y || s[28] !== o.scale.z) return false;
+  let shown = o.visible && !!o.parent;
+  for (let p = o.parent; shown && p && p !== rig.root; p = p.parent) shown = p.visible;
+  return s[0] === (shown ? 1 : 0);
+}
 
 // Live cloth (studio/marine-cloth.js, marine-waist.js) bends before its own draw; baked, it is asked here instead. A
 // figure that stands still (a survivor at his post) never bends it and it stays baked; one that moves bends it every
@@ -219,7 +246,7 @@ export function syncRigSkins() {
     for (const src of rig.sources) {
       if (rig.out.has(src.o)) continue;
       if (src.bend) src.bend();   // live cloth off the render layers bends only when asked
-      if (!same(stateOf(rig, src.o, rig._st), src.state)) { changed = changed || []; changed.push(src); }
+      if (!sameState(rig, src.o, src.state)) { changed = changed || []; changed.push(src); }
     }
     if (!changed) continue;
     for (const src of changed) {

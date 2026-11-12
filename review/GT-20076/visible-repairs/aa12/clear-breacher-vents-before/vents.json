@@ -1,0 +1,119 @@
+{
+  "hash": "f62123e5",
+  "seats": [
+    {
+      "closed": [
+        true
+      ],
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      "side": -1,
+      "z": 0.31,
+      "exterior": 29
+    },
+    {
+      "closed": [
+        true
+      ],
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      "side": -1,
+      "z": 0.37,
+      "exterior": 29
+    },
+    {
+      "closed": [
+        true
+      ],
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      "side": -1,
+      "z": 0.43,
+      "exterior": 29
+    },
+    {
+      "closed": [
+        true
+      ],
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      "side": 1,
+      "z": 0.31,
+      "exterior": 29
+    },
+    {
+      "closed": [
+        true
+      ],
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      "side": 1,
+      "z": 0.37,
+      "exterior": 29
+    },
+    {
+      "closed": [
+        true
+      ],
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0,
+        "penetrating": true
+      },
+      "side": 1,
+      "z": 0.43,
+      "exterior": 29
+    }
+  ],
+  "profiles": [
+    {
+      "sign": -1,
+      "occupied": 8601,
+      "lost": 0,
+      "added": 0,
+      "maxDepth": 0
+    },
+    {
+      "sign": 1,
+      "occupied": 8601,
+      "lost": 0,
+      "added": 0,
+      "maxDepth": 0
+    }
+  ],
+  "trigger": [
+    0,
+    -0.088,
+    -0.066
+  ],
+  "drum": [
+    0,
+    -0.26,
+    0.05
+  ],
+  "casing": [
+    0,
+    0,
+    0
+  ],
+  "muzzle": [
+    0,
+    0.015,
+    0.98
+  ]
+}

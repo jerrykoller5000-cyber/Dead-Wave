@@ -1,0 +1,113 @@
+{
+  "hash": "57a26d67",
+  "gap": {
+    "lowerMm": 0,
+    "upperMm": 0.0078125
+  },
+  "closed": [
+    [
+      true
+    ],
+    [
+      true
+    ],
+    [
+      true
+    ]
+  ],
+  "exposed": [
+    29,
+    29
+  ],
+  "sweep": [
+    {
+      "fraction": 0,
+      "parts": [
+        {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        }
+      ]
+    },
+    {
+      "fraction": 0.15,
+      "parts": [
+        {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        }
+      ]
+    },
+    {
+      "fraction": 0.4,
+      "parts": [
+        {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        }
+      ]
+    },
+    {
+      "fraction": 0.65,
+      "parts": [
+        {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        }
+      ]
+    },
+    {
+      "fraction": 0.9,
+      "parts": [
+        {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        }
+      ]
+    },
+    {
+      "fraction": 0.99,
+      "parts": [
+        {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        }
+      ]
+    },
+    {
+      "fraction": 1,
+      "parts": []
+    },
+    {
+      "fraction": 0,
+      "parts": [
+        {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        }
+      ]
+    }
+  ],
+  "retainedPanelEdges": 21,
+  "maxFaceRecession": 0.00035000009499490045
+}

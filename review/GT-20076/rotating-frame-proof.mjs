@@ -73,9 +73,10 @@ export function checkRotatingFrame(T,id,baseline,forPictures=false){
   return {hash,spurFaces:shells.length,spurGaps:gaps,cylinderGaps,hammerPoses};
 }
 
-export function checkReloadSweep(T){
+export function checkReloadSweep(T,includeShield=false){
   const ctx=T.inspectHost().builders.weaponContext();
   const model=makeRevolverModel({...ctx,finishGun:g=>g,mergeRigidMeshes:()=>{}}),c=model.userData.cylinder,parts=[model.children[2],model.children[4]];
+  if(includeShield)parts.push(model.children[1]);
   model.visible=true;model.scale.copy(T.weaponMeshes.revolver.scale);model.updateMatrixWorld(true);
   const defaults=c.rotation.clone(),rotations=[];
   for(let i=0;i<24;i++){

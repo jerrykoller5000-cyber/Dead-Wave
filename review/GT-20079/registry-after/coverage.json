@@ -489,7 +489,7 @@
     "visible": true,
     "faces": 96,
     "world": 96,
-    "eye": 0,
+    "eye": 96,
     "rack": 96,
     "rackPresent": 96,
     "carryTubeVisible": true,

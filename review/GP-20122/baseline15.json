@@ -1,0 +1,764 @@
+{
+  "at": "2026-11-12T10:21:06.527Z",
+  "label": "baseline15",
+  "duration": 15000,
+  "errors": [],
+  "samples": [
+    {
+      "t": 33816.5,
+      "heapMB": 1036.4,
+      "textures": 184,
+      "geometries": 3586,
+      "programs": 382
+    },
+    {
+      "t": 34818.800000000745,
+      "heapMB": 1035.8,
+      "textures": 184,
+      "geometries": 3586,
+      "programs": 382
+    },
+    {
+      "t": 35837.10000000149,
+      "heapMB": 1030.3,
+      "textures": 184,
+      "geometries": 3586,
+      "programs": 382
+    },
+    {
+      "t": 36850.60000000149,
+      "heapMB": 1029.3,
+      "textures": 184,
+      "geometries": 3586,
+      "programs": 382
+    },
+    {
+      "t": 37852.400000002235,
+      "heapMB": 1026.2,
+      "textures": 184,
+      "geometries": 3586,
+      "programs": 382
+    },
+    {
+      "t": 38865.900000002235,
+      "heapMB": 1024.5,
+      "textures": 184,
+      "geometries": 3586,
+      "programs": 382
+    },
+    {
+      "t": 39867.900000002235,
+      "heapMB": 1022.6,
+      "textures": 184,
+      "geometries": 3586,
+      "programs": 382
+    },
+    {
+      "t": 40869,
+      "heapMB": 1020,
+      "textures": 184,
+      "geometries": 3586,
+      "programs": 382
+    },
+    {
+      "t": 41886.300000000745,
+      "heapMB": 1044.6,
+      "textures": 184,
+      "geometries": 3586,
+      "programs": 382
+    },
+    {
+      "t": 42901.70000000298,
+      "heapMB": 1042.5,
+      "textures": 184,
+      "geometries": 3586,
+      "programs": 382
+    },
+    {
+      "t": 43915.20000000298,
+      "heapMB": 1040.1,
+      "textures": 184,
+      "geometries": 3586,
+      "programs": 382
+    },
+    {
+      "t": 44918.400000002235,
+      "heapMB": 1036.7,
+      "textures": 184,
+      "geometries": 3586,
+      "programs": 382
+    },
+    {
+      "t": 45931.400000002235,
+      "heapMB": 1033.4,
+      "textures": 184,
+      "geometries": 3586,
+      "programs": 382
+    },
+    {
+      "t": 46935.70000000298,
+      "heapMB": 1029.8,
+      "textures": 184,
+      "geometries": 3586,
+      "programs": 382
+    },
+    {
+      "t": 47948.70000000298,
+      "heapMB": 1026.6,
+      "textures": 184,
+      "geometries": 3586,
+      "programs": 382
+    }
+  ],
+  "profile": {
+    "head": {
+      "callFrame": {
+        "functionName": "(root)",
+        "scriptId": "0",
+        "url": "",
+        "lineNumber": -1,
+        "columnNumber": -1
+      },
+      "selfSize": 0,
+      "id": 1,
+      "children": [
+        {
+          "callFrame": {
+            "functionName": "update",
+            "scriptId": "28",
+            "url": "http://127.0.0.1:6143/vendor/three/three.webgpu.js",
+            "lineNumber": 24888,
+            "columnNumber": 17
+          },
+          "selfSize": 0,
+          "id": 2,
+          "children": [
+            {
+              "callFrame": {
+                "functionName": "tick",
+                "scriptId": "16",
+                "url": "http://127.0.0.1:6143/index.html?debug=1&__gameTestToken=e1de2daa-3d12-4c2c-a959-18da5314751d",
+                "lineNumber": 68023,
+                "columnNumber": 17
+              },
+              "selfSize": 0,
+              "id": 3,
+              "children": [
+                {
+                  "callFrame": {
+                    "functionName": "renderFrame",
+                    "scriptId": "16",
+                    "url": "http://127.0.0.1:6143/index.html?debug=1&__gameTestToken=e1de2daa-3d12-4c2c-a959-18da5314751d",
+                    "lineNumber": 2520,
+                    "columnNumber": 24
+                  },
+                  "selfSize": 0,
+                  "id": 25,
+                  "children": [
+                    {
+                      "callFrame": {
+                        "functionName": "render",
+                        "scriptId": "28",
+                        "url": "http://127.0.0.1:6143/vendor/three/three.webgpu.js",
+                        "lineNumber": 70583,
+                        "columnNumber": 7
+                      },
+                      "selfSize": 0,
+                      "id": 28,
+                      "children": [
+                        {
+                          "callFrame": {
+                            "functionName": "render",
+                            "scriptId": "28",
+                            "url": "http://127.0.0.1:6143/vendor/three/three.webgpu.js",
+                            "lineNumber": 31205,
+                            "columnNumber": 7
+                          },
+                          "selfSize": 0,
+                          "id": 29,
+                          "children": [
+                            {
+                              "callFrame": {
+                                "functionName": "_renderScene",
+                                "scriptId": "28",
+                                "url": "http://127.0.0.1:6143/vendor/three/three.webgpu.js",
+                                "lineNumber": 50525,
+                                "columnNumber": 13
+                              },
+                              "selfSize": 0,
+                              "id": 30,
+                              "children": [
+                                {
+                                  "callFrame": {
+                                    "functionName": "_renderObjects",
+                                    "scriptId": "28",
+                                    "url": "http://127.0.0.1:6143/vendor/three/three.webgpu.js",
+                                    "lineNumber": 52036,
+                                    "columnNumber": 15
+                                  },
+                                  "selfSize": 0,
+                                  "id": 31,
+                                  "children": [
+                                    {
+                                      "callFrame": {
+                                        "functionName": "renderObject",
+                                        "scriptId": "28",
+                                        "url": "http://127.0.0.1:6143/vendor/three/three.webgpu.js",
+                                        "lineNumber": 52062,
+                                        "columnNumber": 13
+                                      },
+                                      "selfSize": 0,
+                                      "id": 32,
+                                      "children": [
+                                        {
+                                          "callFrame": {
+                                            "functionName": "_renderObjectDirect",
+                                            "scriptId": "28",
+                                            "url": "http://127.0.0.1:6143/vendor/three/three.webgpu.js",
+                                            "lineNumber": 52171,
+                                            "columnNumber": 20
+                                          },
+                                          "selfSize": 0,
+                                          "id": 33,
+                                          "children": [
+                                            {
+                                              "callFrame": {
+                                                "functionName": "updateBefore",
+                                                "scriptId": "28",
+                                                "url": "http://127.0.0.1:6143/vendor/three/three.webgpu.js",
+                                                "lineNumber": 47076,
+                                                "columnNumber": 13
+                                              },
+                                              "selfSize": 0,
+                                              "id": 34,
+                                              "children": [
+                                                {
+                                                  "callFrame": {
+                                                    "functionName": "updateBefore",
+                                                    "scriptId": "299",
+                                                    "url": "http://127.0.0.1:6143/vendor/three/addons/tsl/display/BloomNode.js",
+                                                    "lineNumber": 286,
+                                                    "columnNumber": 13
+                                                  },
+                                                  "selfSize": 0,
+                                                  "id": 1378,
+                                                  "children": [
+                                                    {
+                                                      "callFrame": {
+                                                        "functionName": "_renderScene",
+                                                        "scriptId": "28",
+                                                        "url": "http://127.0.0.1:6143/vendor/three/three.webgpu.js",
+                                                        "lineNumber": 50525,
+                                                        "columnNumber": 13
+                                                      },
+                                                      "selfSize": 0,
+                                                      "id": 1379,
+                                                      "children": [
+                                                        {
+                                                          "callFrame": {
+                                                            "functionName": "_renderObjects",
+                                                            "scriptId": "28",
+                                                            "url": "http://127.0.0.1:6143/vendor/three/three.webgpu.js",
+                                                            "lineNumber": 52036,
+                                                            "columnNumber": 15
+                                                          },
+                                                          "selfSize": 0,
+                                                          "id": 1380,
+                                                          "children": [
+                                                            {
+                                                              "callFrame": {
+                                                                "functionName": "renderObject",
+                                                                "scriptId": "28",
+                                                                "url": "http://127.0.0.1:6143/vendor/three/three.webgpu.js",
+                                                                "lineNumber": 52062,
+                                                                "columnNumber": 13
+                                                              },
+                                                              "selfSize": 0,
+                                                              "id": 1381,
+                                                              "children": [
+                                                                {
+                                                                  "callFrame": {
+                                                                    "functionName": "_renderObjectDirect",
+                                                                    "scriptId": "28",
+                                                                    "url": "http://127.0.0.1:6143/vendor/three/three.webgpu.js",
+                                                                    "lineNumber": 52171,
+                                                                    "columnNumber": 20
+                                                                  },
+                                                                  "selfSize": 0,
+                                                                  "id": 1382,
+                                                                  "children": [
+                                                                    {
+                                                                      "callFrame": {
+                                                                        "functionName": "_update",
+                                                                        "scriptId": "28",
+                                                                        "url": "http://127.0.0.1:6143/vendor/three/three.webgpu.js",
+                                                                        "lineNumber": 27643,
+                                                                        "columnNumber": 8
+                                                                      },
+                                                                      "selfSize": 0,
+                                                                      "id": 1597,
+                                                                      "children": [
+                                                                        {
+                                                                          "callFrame": {
+                                                                            "functionName": "updateByType",
+                                                                            "scriptId": "28",
+                                                                            "url": "http://127.0.0.1:6143/vendor/three/three.webgpu.js",
+                                                                            "lineNumber": 52704,
+                                                                            "columnNumber": 13
+                                                                          },
+                                                                          "selfSize": 0,
+                                                                          "id": 1769,
+                                                                          "children": [
+                                                                            {
+                                                                              "callFrame": {
+                                                                                "functionName": "get values",
+                                                                                "scriptId": "28",
+                                                                                "url": "http://127.0.0.1:6143/vendor/three/three.webgpu.js",
+                                                                                "lineNumber": 52589,
+                                                                                "columnNumber": 11
+                                                                              },
+                                                                              "selfSize": 16416,
+                                                                              "id": 1770,
+                                                                              "children": []
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "callFrame": {
+                            "functionName": "_renderScene",
+                            "scriptId": "28",
+                            "url": "http://127.0.0.1:6143/vendor/three/three.webgpu.js",
+                            "lineNumber": 50525,
+                            "columnNumber": 13
+                          },
+                          "selfSize": 0,
+                          "id": 2373,
+                          "children": [
+                            {
+                              "callFrame": {
+                                "functionName": "_renderObjects",
+                                "scriptId": "28",
+                                "url": "http://127.0.0.1:6143/vendor/three/three.webgpu.js",
+                                "lineNumber": 52036,
+                                "columnNumber": 15
+                              },
+                              "selfSize": 0,
+                              "id": 2374,
+                              "children": [
+                                {
+                                  "callFrame": {
+                                    "functionName": "renderObject",
+                                    "scriptId": "28",
+                                    "url": "http://127.0.0.1:6143/vendor/three/three.webgpu.js",
+                                    "lineNumber": 52062,
+                                    "columnNumber": 13
+                                  },
+                                  "selfSize": 0,
+                                  "id": 2375,
+                                  "children": [
+                                    {
+                                      "callFrame": {
+                                        "functionName": "_renderObjectDirect",
+                                        "scriptId": "28",
+                                        "url": "http://127.0.0.1:6143/vendor/three/three.webgpu.js",
+                                        "lineNumber": 52171,
+                                        "columnNumber": 20
+                                      },
+                                      "selfSize": 0,
+                                      "id": 2376,
+                                      "children": [
+                                        {
+                                          "callFrame": {
+                                            "functionName": "updateBefore",
+                                            "scriptId": "28",
+                                            "url": "http://127.0.0.1:6143/vendor/three/three.webgpu.js",
+                                            "lineNumber": 47076,
+                                            "columnNumber": 13
+                                          },
+                                          "selfSize": 0,
+                                          "id": 2377,
+                                          "children": [
+                                            {
+                                              "callFrame": {
+                                                "functionName": "updateBefore",
+                                                "scriptId": "28",
+                                                "url": "http://127.0.0.1:6143/vendor/three/three.webgpu.js",
+                                                "lineNumber": 33665,
+                                                "columnNumber": 13
+                                              },
+                                              "selfSize": 0,
+                                              "id": 2378,
+                                              "children": [
+                                                {
+                                                  "callFrame": {
+                                                    "functionName": "_renderScene",
+                                                    "scriptId": "28",
+                                                    "url": "http://127.0.0.1:6143/vendor/three/three.webgpu.js",
+                                                    "lineNumber": 50525,
+                                                    "columnNumber": 13
+                                                  },
+                                                  "selfSize": 0,
+                                                  "id": 2379,
+                                                  "children": [
+                                                    {
+                                                      "callFrame": {
+                                                        "functionName": "_projectObject",
+                                                        "scriptId": "28",
+                                                        "url": "http://127.0.0.1:6143/vendor/three/three.webgpu.js",
+                                                        "lineNumber": 51837,
+                                                        "columnNumber": 15
+                                                      },
+                                                      "selfSize": 0,
+                                                      "id": 2447,
+                                                      "children": [
+                                                        {
+                                                          "callFrame": {
+                                                            "functionName": "_projectObject",
+                                                            "scriptId": "28",
+                                                            "url": "http://127.0.0.1:6143/vendor/three/three.webgpu.js",
+                                                            "lineNumber": 51837,
+                                                            "columnNumber": 15
+                                                          },
+                                                          "selfSize": 0,
+                                                          "id": 2448,
+                                                          "children": [
+                                                            {
+                                                              "callFrame": {
+                                                                "functionName": "_projectObject",
+                                                                "scriptId": "28",
+                                                                "url": "http://127.0.0.1:6143/vendor/three/three.webgpu.js",
+                                                                "lineNumber": 51837,
+                                                                "columnNumber": 15
+                                                              },
+                                                              "selfSize": 0,
+                                                              "id": 2449,
+                                                              "children": [
+                                                                {
+                                                                  "callFrame": {
+                                                                    "functionName": "_projectObject",
+                                                                    "scriptId": "28",
+                                                                    "url": "http://127.0.0.1:6143/vendor/three/three.webgpu.js",
+                                                                    "lineNumber": 51837,
+                                                                    "columnNumber": 15
+                                                                  },
+                                                                  "selfSize": 0,
+                                                                  "id": 2450,
+                                                                  "children": [
+                                                                    {
+                                                                      "callFrame": {
+                                                                        "functionName": "_projectObject",
+                                                                        "scriptId": "28",
+                                                                        "url": "http://127.0.0.1:6143/vendor/three/three.webgpu.js",
+                                                                        "lineNumber": 51837,
+                                                                        "columnNumber": 15
+                                                                      },
+                                                                      "selfSize": 16392,
+                                                                      "id": 2451,
+                                                                      "children": []
+                                                                    },
+                                                                    {
+                                                                      "callFrame": {
+                                                                        "functionName": "push",
+                                                                        "scriptId": "0",
+                                                                        "url": "",
+                                                                        "lineNumber": -1,
+                                                                        "columnNumber": -1
+                                                                      },
+                                                                      "selfSize": 16464,
+                                                                      "id": 4886,
+                                                                      "children": []
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "callFrame": {
+                    "functionName": "updateMarinePose",
+                    "scriptId": "16",
+                    "url": "http://127.0.0.1:6143/index.html?debug=1&__gameTestToken=e1de2daa-3d12-4c2c-a959-18da5314751d",
+                    "lineNumber": 22846,
+                    "columnNumber": 29
+                  },
+                  "selfSize": 0,
+                  "id": 2117,
+                  "children": [
+                    {
+                      "callFrame": {
+                        "functionName": "apply",
+                        "scriptId": "151",
+                        "url": "http://127.0.0.1:6143/studio/marine-turn.js",
+                        "lineNumber": 129,
+                        "columnNumber": 16
+                      },
+                      "selfSize": 0,
+                      "id": 2118,
+                      "children": [
+                        {
+                          "callFrame": {
+                            "functionName": "multiplyScalar",
+                            "scriptId": "233",
+                            "url": "http://127.0.0.1:6143/vendor/three/three.core.js",
+                            "lineNumber": 8307,
+                            "columnNumber": 15
+                          },
+                          "selfSize": 16408,
+                          "id": 3534,
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "callFrame": {
+                    "functionName": "updateChainsawBlood",
+                    "scriptId": "16",
+                    "url": "http://127.0.0.1:6143/index.html?debug=1&__gameTestToken=e1de2daa-3d12-4c2c-a959-18da5314751d",
+                    "lineNumber": 24026,
+                    "columnNumber": 32
+                  },
+                  "selfSize": 16408,
+                  "id": 2490,
+                  "children": []
+                },
+                {
+                  "callFrame": {
+                    "functionName": "updateWorldAnimations",
+                    "scriptId": "16",
+                    "url": "http://127.0.0.1:6143/index.html?debug=1&__gameTestToken=e1de2daa-3d12-4c2c-a959-18da5314751d",
+                    "lineNumber": 67610,
+                    "columnNumber": 34
+                  },
+                  "selfSize": 0,
+                  "id": 4845,
+                  "children": [
+                    {
+                      "callFrame": {
+                        "functionName": "updateWorldAnimationsIndoors",
+                        "scriptId": "16",
+                        "url": "http://127.0.0.1:6143/index.html?debug=1&__gameTestToken=e1de2daa-3d12-4c2c-a959-18da5314751d",
+                        "lineNumber": 67589,
+                        "columnNumber": 41
+                      },
+                      "selfSize": 0,
+                      "id": 4846,
+                      "children": [
+                        {
+                          "callFrame": {
+                            "functionName": "updateFlameStream",
+                            "scriptId": "16",
+                            "url": "http://127.0.0.1:6143/index.html?debug=1&__gameTestToken=e1de2daa-3d12-4c2c-a959-18da5314751d",
+                            "lineNumber": 56793,
+                            "columnNumber": 30
+                          },
+                          "selfSize": 16392,
+                          "id": 4847,
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "callFrame": {
+                    "functionName": "flightRecord",
+                    "scriptId": "16",
+                    "url": "http://127.0.0.1:6143/index.html?debug=1&__gameTestToken=e1de2daa-3d12-4c2c-a959-18da5314751d",
+                    "lineNumber": 67915,
+                    "columnNumber": 25
+                  },
+                  "selfSize": 0,
+                  "id": 4337,
+                  "children": [
+                    {
+                      "callFrame": {
+                        "functionName": "flightTakeSnap",
+                        "scriptId": "16",
+                        "url": "http://127.0.0.1:6143/index.html?debug=1&__gameTestToken=e1de2daa-3d12-4c2c-a959-18da5314751d",
+                        "lineNumber": 67767,
+                        "columnNumber": 27
+                      },
+                      "selfSize": 0,
+                      "id": 4338,
+                      "children": [
+                        {
+                          "callFrame": {
+                            "functionName": "flightBones",
+                            "scriptId": "16",
+                            "url": "http://127.0.0.1:6143/index.html?debug=1&__gameTestToken=e1de2daa-3d12-4c2c-a959-18da5314751d",
+                            "lineNumber": 67817,
+                            "columnNumber": 24
+                          },
+                          "selfSize": 16800,
+                          "id": 4339,
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "callFrame": {
+            "functionName": "(IDLE_EXTERNAL)",
+            "scriptId": "0",
+            "url": "",
+            "lineNumber": -1,
+            "columnNumber": -1
+          },
+          "selfSize": 229460,
+          "id": 4888,
+          "children": []
+        }
+      ]
+    },
+    "samples": [
+      {
+        "size": 229460,
+        "nodeId": 4888,
+        "ordinal": 22650
+      },
+      {
+        "size": 16464,
+        "nodeId": 4886,
+        "ordinal": 22635
+      },
+      {
+        "size": 16392,
+        "nodeId": 2451,
+        "ordinal": 22634
+      },
+      {
+        "size": 16392,
+        "nodeId": 4847,
+        "ordinal": 22629
+      },
+      {
+        "size": 16800,
+        "nodeId": 4339,
+        "ordinal": 19496
+      },
+      {
+        "size": 16408,
+        "nodeId": 3534,
+        "ordinal": 15670
+      },
+      {
+        "size": 16408,
+        "nodeId": 2490,
+        "ordinal": 10155
+      },
+      {
+        "size": 16416,
+        "nodeId": 1770,
+        "ordinal": 7448
+      }
+    ]
+  },
+  "frames": {
+    "frames": 910,
+    "spikes": [],
+    "prof": []
+  },
+  "top": [
+    {
+      "mb": 0.23,
+      "bytes": 229460,
+      "site": "(IDLE_EXTERNAL) :0",
+      "stack": "(root) :0 <- (IDLE_EXTERNAL) :0"
+    },
+    {
+      "mb": 0.02,
+      "bytes": 16800,
+      "site": "flightBones http://127.0.0.1:6143/index.html?debug=1&__gameTestToken=e1de2daa-3d12-4c2c-a959-18da5314751d:67818",
+      "stack": "(root) :0 <- update http://127.0.0.1:6143/vendor/three/three.webgpu.js:24889 <- tick http://127.0.0.1:6143/index.html?debug=1&__gameTestToken=e1de2daa-3d12-4c2c-a959-18da5314751d:68024 <- flightRecord http://127.0.0.1:6143/index.html?debug=1&__gameTestToken=e1de2daa-3d12-4c2c-a959-18da5314751d:67916 <- flightTakeSnap http://127.0.0.1:6143/index.html?debug=1&__gameTestToken=e1de2daa-3d12-4c2c-a959-18da5314751d:67768 <- flightBones http://127.0.0.1:6143/index.html?debug=1&__gameTestToken=e1de2daa-3d12-4c2c-a959-18da5314751d:67818"
+    },
+    {
+      "mb": 0.02,
+      "bytes": 16464,
+      "site": "push :0",
+      "stack": "updateBefore http://127.0.0.1:6143/vendor/three/three.webgpu.js:47077 <- updateBefore http://127.0.0.1:6143/vendor/three/three.webgpu.js:33666 <- _renderScene http://127.0.0.1:6143/vendor/three/three.webgpu.js:50526 <- _projectObject http://127.0.0.1:6143/vendor/three/three.webgpu.js:51838 <- _projectObject http://127.0.0.1:6143/vendor/three/three.webgpu.js:51838 <- _projectObject http://127.0.0.1:6143/vendor/three/three.webgpu.js:51838 <- _projectObject http://127.0.0.1:6143/vendor/three/three.webgpu.js:51838 <- push :0"
+    },
+    {
+      "mb": 0.02,
+      "bytes": 16416,
+      "site": "get values http://127.0.0.1:6143/vendor/three/three.webgpu.js:52590",
+      "stack": "updateBefore http://127.0.0.1:6143/vendor/three/addons/tsl/display/BloomNode.js:287 <- _renderScene http://127.0.0.1:6143/vendor/three/three.webgpu.js:50526 <- _renderObjects http://127.0.0.1:6143/vendor/three/three.webgpu.js:52037 <- renderObject http://127.0.0.1:6143/vendor/three/three.webgpu.js:52063 <- _renderObjectDirect http://127.0.0.1:6143/vendor/three/three.webgpu.js:52172 <- _update http://127.0.0.1:6143/vendor/three/three.webgpu.js:27644 <- updateByType http://127.0.0.1:6143/vendor/three/three.webgpu.js:52705 <- get values http://127.0.0.1:6143/vendor/three/three.webgpu.js:52590"
+    },
+    {
+      "mb": 0.02,
+      "bytes": 16408,
+      "site": "multiplyScalar http://127.0.0.1:6143/vendor/three/three.core.js:8308",
+      "stack": "(root) :0 <- update http://127.0.0.1:6143/vendor/three/three.webgpu.js:24889 <- tick http://127.0.0.1:6143/index.html?debug=1&__gameTestToken=e1de2daa-3d12-4c2c-a959-18da5314751d:68024 <- updateMarinePose http://127.0.0.1:6143/index.html?debug=1&__gameTestToken=e1de2daa-3d12-4c2c-a959-18da5314751d:22847 <- apply http://127.0.0.1:6143/studio/marine-turn.js:130 <- multiplyScalar http://127.0.0.1:6143/vendor/three/three.core.js:8308"
+    },
+    {
+      "mb": 0.02,
+      "bytes": 16408,
+      "site": "updateChainsawBlood http://127.0.0.1:6143/index.html?debug=1&__gameTestToken=e1de2daa-3d12-4c2c-a959-18da5314751d:24027",
+      "stack": "(root) :0 <- update http://127.0.0.1:6143/vendor/three/three.webgpu.js:24889 <- tick http://127.0.0.1:6143/index.html?debug=1&__gameTestToken=e1de2daa-3d12-4c2c-a959-18da5314751d:68024 <- updateChainsawBlood http://127.0.0.1:6143/index.html?debug=1&__gameTestToken=e1de2daa-3d12-4c2c-a959-18da5314751d:24027"
+    },
+    {
+      "mb": 0.02,
+      "bytes": 16392,
+      "site": "_projectObject http://127.0.0.1:6143/vendor/three/three.webgpu.js:51838",
+      "stack": "updateBefore http://127.0.0.1:6143/vendor/three/three.webgpu.js:47077 <- updateBefore http://127.0.0.1:6143/vendor/three/three.webgpu.js:33666 <- _renderScene http://127.0.0.1:6143/vendor/three/three.webgpu.js:50526 <- _projectObject http://127.0.0.1:6143/vendor/three/three.webgpu.js:51838 <- _projectObject http://127.0.0.1:6143/vendor/three/three.webgpu.js:51838 <- _projectObject http://127.0.0.1:6143/vendor/three/three.webgpu.js:51838 <- _projectObject http://127.0.0.1:6143/vendor/three/three.webgpu.js:51838 <- _projectObject http://127.0.0.1:6143/vendor/three/three.webgpu.js:51838"
+    },
+    {
+      "mb": 0.02,
+      "bytes": 16392,
+      "site": "updateFlameStream http://127.0.0.1:6143/index.html?debug=1&__gameTestToken=e1de2daa-3d12-4c2c-a959-18da5314751d:56794",
+      "stack": "(root) :0 <- update http://127.0.0.1:6143/vendor/three/three.webgpu.js:24889 <- tick http://127.0.0.1:6143/index.html?debug=1&__gameTestToken=e1de2daa-3d12-4c2c-a959-18da5314751d:68024 <- updateWorldAnimations http://127.0.0.1:6143/index.html?debug=1&__gameTestToken=e1de2daa-3d12-4c2c-a959-18da5314751d:67611 <- updateWorldAnimationsIndoors http://127.0.0.1:6143/index.html?debug=1&__gameTestToken=e1de2daa-3d12-4c2c-a959-18da5314751d:67590 <- updateFlameStream http://127.0.0.1:6143/index.html?debug=1&__gameTestToken=e1de2daa-3d12-4c2c-a959-18da5314751d:56794"
+    }
+  ],
+  "totalSampledMB": 0.34
+}
