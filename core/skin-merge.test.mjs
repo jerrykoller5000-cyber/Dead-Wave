@@ -64,6 +64,10 @@ test('a shadow-only proxy answers only to the shadow camera, and the parts stop 
   assert.equal(R.body.castShadow, false); assert.equal(R.body.visible, true, 'the part still draws itself');
   assert.ok(s.castShadow);
   assert.equal(out.parts.length, 5, 'the glowing part casts a shadow too');
+  // GP-20110 part 3: TSL's shadow pass reads the normal attribute ('missing normal' at the Training entry without one)
+  const N = s.geometry.attributes.normal;
+  assert.ok(N && N.count === s.geometry.attributes.position.count, 'the proxy has a normal per vertex');
+  for (let i = 0; i < N.count; i++) assert.ok(Math.abs(Math.hypot(N.getX(i), N.getY(i), N.getZ(i)) - 1) < 1e-4, 'unit normals');
   skinUnmerge(R.g);
   assert.equal(R.body.castShadow, true); assert.equal(R.g.children.includes(s), false);
 });

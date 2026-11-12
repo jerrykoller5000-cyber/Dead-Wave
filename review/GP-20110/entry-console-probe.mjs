@@ -7,7 +7,7 @@ import { launch } from '../../tools/cdp.mjs';
 if (!process.env.DW_GAME_TEST_TOKEN) throw Error('Run through crew game-test slot');
 const root = path.resolve(fileURLToPath(new URL('../..', import.meta.url)));
 const out = path.join(root, 'review/GP-20110');
-const phase = ['before', 'after', 'final', 'part3-before', 'part3-after'].includes(process.argv[2]) ? process.argv[2] : 'before';
+const phase = ['before', 'after', 'final', 'part3-before', 'part3-after', 'part3-final'].includes(process.argv[2]) ? process.argv[2] : 'before';
 const server = await serve(root, 0);
 const browser = await launch({ headless: false, args: ['--window-size=1280,720'] });
 const coreFile = fs.readFileSync(path.join(root, 'vendor/three/three.core.js'), 'utf8');

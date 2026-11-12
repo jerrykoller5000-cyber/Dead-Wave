@@ -15,6 +15,10 @@ const series={
   '--stock-tail':['catalog-fix-rotating-frame-swept','stock-mount-tail-detail','stock-mount-proof','stockMountProof',[flamer]],
   '--port-sight':['catalog-fix-stock-mount-tail','port-sight-detail','port-sight-proof','portSightProof',[
     ['uzi',[.226,.043,.151],[.05,.029,.083],32],['m4',[.211,.139,-.213],[0,.094,-.14],29]]],
+  '--nose-arch':['catalog-fix-tang-cheek-final-caps','nose-arch-detail','nose-arch-proof','checkNoseArch',[
+    ['chainsaw',[.40,.109,.80],[0,.04,.655],23],['minigun',[.46,.26,-.36],[0,.172,-.105],27]]],
+  '--tang-cheek':['catalog-fix-plate-ribs','tang-cheek-detail','tang-cheek-proof','checkTangCheek',[
+    ['pistol',[.30,.077,-.268],[0,-.006,-.076],28],['sniper',[.49,.18,-.64],[0,.074,-.45],27]]],
   '--plate-ribs':['catalog-fix-breacher-front-guard-blend','plate-rib-detail','plate-rib-proof','checkPlateRibs',[
     ['shotgun',[.38,-.17,-.06],[0,-.035,.026],25],['sniper',[.40,-.14,.18],[0,-.123,.020],23]]],
   '--lug-vents':['catalog-fix-revolver-dot-seated','lug-vent-detail','lug-vent-proof','checkLugVents',[

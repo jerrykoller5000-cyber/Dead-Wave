@@ -20,10 +20,10 @@
     const Box3 = THREE.Box3;
     const Vector3 = THREE.Vector3;
 
-    const { TRAINING, buildTrainingGround } = await import(new URL('./world/training.js', location.href).href);
-    const { dressTrainingProps } = await import(new URL('./world/training-props.js', location.href).href);
-    const { dressTrainingWear, WEAR } = await import(new URL('./world/training-wear.js', location.href).href);
-    const { buildFiringLine } = await import(new URL('./world/training-firing-line.js', location.href).href);
+    const { TRAINING, buildTrainingGround } = await import(new URL('/world/training.js', location.origin).href);
+    const { dressTrainingProps } = await import(new URL('/world/training-props.js', location.origin).href);
+    const { dressTrainingWear, WEAR } = await import(new URL('/world/training-wear.js', location.origin).href);
+    const { buildFiringLine, FIRING_LINE } = await import(new URL('/world/training-firing-line.js', location.origin).href);
 
     const GAP_MAX = 0.0005; // 0.5 mm tolerance (J128 / D-140)
 
@@ -129,7 +129,13 @@
       height: TRAINING.WALL_H,
       box: (w, h, d, mat, x, y, z, parent) => {
         const m = box(w, h, d, mat, x, y, z, parent);
-        if (w > 15.0 && h >= 0.08 && h <= 0.10 && Math.abs(z - 0.24) < 0.05) {
+        // GP-20119: the current base strip is a 75 mm steel rail at the front of the
+        // panel. Match its full span, 75 mm section and exact front-face seat; the
+        // old 80–100 mm / z=.24 selector described the retired bench geometry.
+        if (Math.abs(w - (R.maxX - R.minX)) < 1e-6 &&
+            Math.abs(h - 0.075) < 1e-6 && Math.abs(d - 0.075) < 1e-6 &&
+            Math.abs(x - (R.minX + R.maxX) / 2) < 1e-6 &&
+            Math.abs(z - (FIRING_LINE.front + d / 2)) < 1e-6) {
           kickRailBox = { w, h, d, x, y, z, minY: y - h / 2 };
         }
         return m;

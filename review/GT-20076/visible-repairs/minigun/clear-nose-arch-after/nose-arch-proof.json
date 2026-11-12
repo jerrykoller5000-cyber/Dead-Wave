@@ -1,0 +1,35 @@
+{
+  "hash": "c78f3c7f",
+  "results": [
+    {
+      "exterior": 44,
+      "gaps": [
+        {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        }
+      ],
+      "maxOutsideOriginal": 1.0227171887144948e-10,
+      "triangles": 120
+    },
+    {
+      "exterior": 44,
+      "gaps": [
+        {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        },
+        {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        }
+      ],
+      "maxOutsideOriginal": 1.0227171887144948e-10,
+      "triangles": 120
+    }
+  ]
+}

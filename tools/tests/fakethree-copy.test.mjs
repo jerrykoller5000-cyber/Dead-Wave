@@ -47,3 +47,16 @@ test('foldStatic folds two plain meshes into one, and leaves a transparent one',
   const out = g.children.find((o) => o.userData.folded === 2);
   assert.ok(out, 'one folded mesh holds both');
 });
+
+test('a cloned or copied material has its own userData, as three.js (t334: a tag on the copy showed on the original)', () => {
+  const src = new THREE.MeshStandardMaterial(); src.userData.gunPaintId = 'm4'; src.userData.deep = { a: 1 };
+  const c = src.clone();
+  assert.deepEqual(c.userData, { gunPaintId: 'm4', deep: { a: 1 } });
+  c.userData.gunPaintId = 'carrier'; c.userData.deep.a = 2;
+  assert.equal(src.userData.gunPaintId, 'm4');
+  assert.equal(src.userData.deep.a, 1);
+  const d = new THREE.MeshStandardMaterial().copy(src);
+  d.userData.extra = true;
+  assert.equal(src.userData.extra, undefined);
+  assert.equal(d.userData.gunPaintId, 'm4');
+});

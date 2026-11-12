@@ -5,7 +5,7 @@ import { serve } from '../../tools/serve.mjs';
 import { launch } from '../../tools/cdp.mjs';
 
 if (!process.env.DW_GAME_TEST_TOKEN) throw Error('Use the game-test slot');
-const phase = process.argv[2] === 'after' ? 'after' : 'before';
+const phase = ['after', 'part3-after'].includes(process.argv[2]) ? process.argv[2] : 'before';
 const root = path.resolve(fileURLToPath(new URL('../..', import.meta.url)));
 const out = path.join(root, 'review/GP-20110');
 const server = await serve(root, 0);
@@ -24,7 +24,7 @@ try {
   await new Promise(r => setTimeout(r, 500));
   const state = `(() => { const tg=TT.trainingDbg.tg(); return {impact:tg.group.getObjectsByProperty('name','training-impact-marks').map(m=>({visible:m.visible,draw:m.geometry.drawRange.count})),char:tg.group.getObjectsByProperty('name','training-char-marks').map(m=>({visible:m.visible,draw:m.geometry.drawRange.count})),impacts:TT.trainingDbg.state().impacts.count(),chars:TT.trainingDbg.char().count()}; })()`;
   report.empty = await page.evaluate(state);
-  if (phase === 'after') await page.evaluate(`(() => {
+  if (phase !== 'before') await page.evaluate(`(() => {
     window.__markPipelines=[];window.__markPrograms=[];
     const b=TT.renderer.backend,oldPipeline=b.createRenderPipeline.bind(b),oldProgram=b.createProgram.bind(b);
     b.createRenderPipeline=(o,...a)=>{window.__markPipelines.push(o.object?.name||'');return oldPipeline(o,...a);};
@@ -36,7 +36,7 @@ try {
   })()`);
   await new Promise(r => setTimeout(r, 700));
   report.firstHit = await page.evaluate(state);
-  if (phase === 'after') {
+  if (phase !== 'before') {
     report.pipelineWarmup = await page.evaluate(`({pipelines:window.__markPipelines,programs:window.__markPrograms})`);
     if (report.pipelineWarmup.pipelines.some(n => n === 'training-impact-marks' || n === 'training-char-marks')) throw Error('first mark compiled a new draw pipeline');
   }

@@ -206,8 +206,19 @@
           });
           ok(backingUprights.length > 0, 'target has backing frame uprights supporting silhouette plate (found ' + backingUprights.length + ')');
           if (backingUprights.length > 0) {
-            const maxBackingZ = Math.max(...backingUprights.map(u => u.position.z));
-            ok(maxBackingZ <= -0.015, 'target backing uprights sit behind the silhouette plate without penetration (z ' + maxBackingZ.toFixed(3) + ' <= -0.015)');
+            // CB-311 item (Director OK, --review): 'behind' is down the lane, away from the firing line, whichever way the plate
+            // is built to face (GP-20102 turned it: the line looks along +z, the backing is on +z). The lane runs from the firing
+            // line to this target; in the pivot's own frame each upright must sit at least 15 mm past the plate along it.
+            const V3 = T.THREE.Vector3, line = tg.group.getObjectByName('firing-line'), plate = t0.plate || t0.pivot.getObjectByName('target-plate');
+            tg.group.updateMatrixWorld(true);
+            const pw = t0.pivot.getWorldPosition(new V3()), lw = line ? line.getWorldPosition(new V3()) : null;
+            ok(!!line && !!plate, 'the firing line and the target plate are there to measure from');
+            if (line && plate) {
+              const lane = new V3(0, 0, pw.z - lw.z).normalize();   // the line runs across the lanes (along x); downrange is along z
+              const dir = lane.clone().transformDirection(t0.pivot.matrixWorld.clone().invert());   // down the lane, in the pivot's frame
+              const depth = Math.min(...backingUprights.map(u => u.position.clone().sub(plate.position).dot(dir)));
+              ok(depth >= 0.015, 'target backing uprights sit behind the silhouette plate, down the lane, without penetration (' + depth.toFixed(3) + ' m past the plate >= 0.015)');
+            }
           }
         }
 

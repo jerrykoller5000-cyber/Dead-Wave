@@ -1815,11 +1815,17 @@ export function makeSniperModel(ctx) {
   // GB-259 (GP-20014): the stock body, cheek riser, butt, pad and monopod are one group, gun.userData.fpStock ('fp-stock'),
   // for the view gun to leave out of the eye; third person and the shadow keep it. Every part is where it was.
   const stock = K.group(0, 0, 0); stock.name = 'fp-stock';
-  K.slab(gunBand([[-0.245, 0.03], [-0.405, 0.05], [-0.592, 0.052]], 0.018), 0.058, gunTan, { bevel: 0.007, segs: 3, parent: stock });   // MRAD's open upper strut
+  const upperStrut = gunBand([[-0.245, 0.03], [-0.405, 0.05], [-0.592, 0.052]], 0.018);
+  K.slab(upperStrut, 0.058, gunTan, { bevel: 0.007, segs: 3, parent: stock });
   K.slab(gunBand([[-0.257, 0.026], [-0.285, -0.025], [-0.315, -0.06]], 0.016), 0.057, gunTan, { bevel: 0.006, parent: stock });   // front diagonal strut
   K.cyl(0.021, 0.021, 0.105, gunDark, 0, -0.005, -0.26, stock, 14, 'y');   // vertical fold hinge for port-side swing
   K.cyl(0.008, 0.008, 0.006, gunMid, 0.031, -0.002, -0.26, stock, 12, 'x');   // hinge release button
-  K.slab([[-0.32, 0.058], [-0.535, 0.058], [-0.535, 0.122], [-0.37, 0.128], [-0.32, 0.106]], 0.054, cheekFinish, { bevel: 0.009, segs: 3, parent: stock });   // GB-180: a tall cheek riser
+  // The cheek's lower edge follows the two slopes of the upper stock rail.
+  const [rearEdge, crest, frontEdge] = upperStrut.slice(3);
+  const rearY = crest[1] + (-.535 - crest[0]) * (rearEdge[1] - crest[1]) / (rearEdge[0] - crest[0]);
+  const contactZ = crest[0] + (.058 - crest[1]) * (frontEdge[0] - crest[0]) / (frontEdge[1] - crest[1]);
+  K.slab([[-.32,.058], [contactZ,.058], crest, [-.535,rearY], [-.535,.122], [-.37,.128], [-.32,.106]],
+    .054, cheekFinish, {bevel:.009, segs:3, parent:stock});
   for (const z of [-0.36, -0.48]) for (const sx of [-1, 1]) K.cyl(0.008, 0.008, 0.004, steelMat, sx * 0.028, 0.09, z, stock, 8, 'x');   // riser clamp knobs
   for (const z of [-0.38, -0.5]) K.cyl(0.007, 0.007, 0.05, gunMid, 0, 0.065, z, stock, 10, 'y');   // cheek-height posts
   K.cyl(0.014, 0.014, 0.008, gunDark, 0.031, 0.09, -0.48, stock, 16, 'x');   // cheek-height knob

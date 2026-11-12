@@ -1,0 +1,1553 @@
+[
+  {
+    "step": "00-start",
+    "during": {
+      "phase": "prep",
+      "wake": false,
+      "weapon": "pistol",
+      "held": 0,
+      "stowed": 0,
+      "slots": [
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        }
+      ],
+      "watchman": 0,
+      "loadout": {
+        "primary": [
+          null,
+          null
+        ],
+        "secondary": [
+          null,
+          null
+        ],
+        "hip": "pistol:base"
+      },
+      "armoryOpen": false,
+      "cifOpen": false
+    },
+    "after": {
+      "phase": "prep",
+      "wake": false,
+      "weapon": "pistol",
+      "held": 12,
+      "stowed": 0,
+      "slots": [
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        }
+      ],
+      "watchman": 0,
+      "loadout": {
+        "primary": [
+          null,
+          null
+        ],
+        "secondary": [
+          null,
+          null
+        ],
+        "hip": "pistol:base"
+      },
+      "armoryOpen": false,
+      "cifOpen": false
+    },
+    "warnings": [
+      "warning: The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127",
+      "warning: The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127",
+      "info: Grave Shift renderer: WebGPU.",
+      "info: Grave Shift opening perf: {\"toMenu\":17.87,\"segments\":{\"boot\":{\"at\":0,\"seconds\":0.46,\"frames\":3,\"over50\":1,\"over100\":1,\"worst\":167},\"caracal\":{\"at\":0.46,\"seconds\":11.24,\"frames\":114,\"over50\":31,\"over100\":19,\"worst\":1567},\"loading\":{\"at\":11.7,\"seconds\":6.17,\"frames\":240,\"over50\":18,\"over100\":5,\"worst\""
+    ]
+  },
+  {
+    "step": "01-armory-open",
+    "during": {
+      "phase": "prep",
+      "wake": false,
+      "weapon": "pistol",
+      "held": 12,
+      "stowed": 0,
+      "slots": [
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        }
+      ],
+      "watchman": 0,
+      "loadout": {
+        "primary": [
+          null,
+          null
+        ],
+        "secondary": [
+          null,
+          null
+        ],
+        "hip": "pistol:base"
+      },
+      "armoryOpen": true,
+      "cifOpen": true
+    },
+    "after": {
+      "phase": "prep",
+      "wake": false,
+      "weapon": "pistol",
+      "held": 12,
+      "stowed": 0,
+      "slots": [
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        }
+      ],
+      "watchman": 0,
+      "loadout": {
+        "primary": [
+          null,
+          null
+        ],
+        "secondary": [
+          null,
+          null
+        ],
+        "hip": "pistol:base"
+      },
+      "armoryOpen": false,
+      "cifOpen": false
+    },
+    "warnings": [
+      "warning: The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127",
+      "warning: The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127",
+      "info: Grave Shift renderer: WebGPU.",
+      "info: Grave Shift opening perf: {\"toMenu\":17.87,\"segments\":{\"boot\":{\"at\":0,\"seconds\":0.46,\"frames\":3,\"over50\":1,\"over100\":1,\"worst\":167},\"caracal\":{\"at\":0.46,\"seconds\":11.24,\"frames\":114,\"over50\":31,\"over100\":19,\"worst\":1567},\"loading\":{\"at\":11.7,\"seconds\":6.17,\"frames\":240,\"over50\":18,\"over100\":5,\"worst\""
+    ]
+  },
+  {
+    "step": "02-preview-turn",
+    "during": {
+      "phase": "prep",
+      "wake": false,
+      "weapon": "pistol",
+      "held": 12,
+      "stowed": 0,
+      "slots": [
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        }
+      ],
+      "watchman": 0,
+      "loadout": {
+        "primary": [
+          null,
+          null
+        ],
+        "secondary": [
+          null,
+          null
+        ],
+        "hip": "pistol:base"
+      },
+      "armoryOpen": true,
+      "cifOpen": true
+    },
+    "after": {
+      "phase": "prep",
+      "wake": false,
+      "weapon": "pistol",
+      "held": 12,
+      "stowed": 0,
+      "slots": [
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        }
+      ],
+      "watchman": 0,
+      "loadout": {
+        "primary": [
+          null,
+          null
+        ],
+        "secondary": [
+          null,
+          null
+        ],
+        "hip": "pistol:base"
+      },
+      "armoryOpen": false,
+      "cifOpen": false
+    },
+    "warnings": [
+      "warning: The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127",
+      "warning: The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127",
+      "info: Grave Shift renderer: WebGPU.",
+      "info: Grave Shift opening perf: {\"toMenu\":17.87,\"segments\":{\"boot\":{\"at\":0,\"seconds\":0.46,\"frames\":3,\"over50\":1,\"over100\":1,\"worst\":167},\"caracal\":{\"at\":0.46,\"seconds\":11.24,\"frames\":114,\"over50\":31,\"over100\":19,\"worst\":1567},\"loading\":{\"at\":11.7,\"seconds\":6.17,\"frames\":240,\"over50\":18,\"over100\":5,\"worst\""
+    ]
+  },
+  {
+    "step": "03-buy-m4",
+    "during": {
+      "phase": "prep",
+      "wake": false,
+      "weapon": "pistol",
+      "held": 12,
+      "stowed": 0,
+      "slots": [
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        }
+      ],
+      "watchman": 0,
+      "loadout": {
+        "primary": [
+          null,
+          null
+        ],
+        "secondary": [
+          null,
+          null
+        ],
+        "hip": "pistol:base"
+      },
+      "armoryOpen": true,
+      "cifOpen": true
+    },
+    "after": {
+      "phase": "prep",
+      "wake": false,
+      "weapon": "pistol",
+      "held": 12,
+      "stowed": 0,
+      "slots": [
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        }
+      ],
+      "watchman": 0,
+      "loadout": {
+        "primary": [
+          null,
+          null
+        ],
+        "secondary": [
+          null,
+          null
+        ],
+        "hip": "pistol:base"
+      },
+      "armoryOpen": false,
+      "cifOpen": false
+    },
+    "warnings": [
+      "warning: The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127",
+      "warning: The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127",
+      "info: Grave Shift renderer: WebGPU.",
+      "info: Grave Shift opening perf: {\"toMenu\":17.87,\"segments\":{\"boot\":{\"at\":0,\"seconds\":0.46,\"frames\":3,\"over50\":1,\"over100\":1,\"worst\":167},\"caracal\":{\"at\":0.46,\"seconds\":11.24,\"frames\":114,\"over50\":31,\"over100\":19,\"worst\":1567},\"loading\":{\"at\":11.7,\"seconds\":6.17,\"frames\":240,\"over50\":18,\"over100\":5,\"worst\""
+    ]
+  },
+  {
+    "step": "04-all-guns",
+    "during": {
+      "phase": "prep",
+      "wake": false,
+      "weapon": "pistol",
+      "held": 15,
+      "stowed": 0,
+      "slots": [
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        }
+      ],
+      "watchman": 0,
+      "loadout": {
+        "primary": [
+          "m4",
+          "ak"
+        ],
+        "secondary": [
+          "uzi",
+          "revolver"
+        ],
+        "hip": "pistol:base"
+      },
+      "armoryOpen": true,
+      "cifOpen": true
+    },
+    "after": {
+      "phase": "prep",
+      "wake": false,
+      "weapon": "pistol",
+      "held": 15,
+      "stowed": 99,
+      "slots": [
+        {
+          "kind": "m4",
+          "gun": 24,
+          "object": true
+        },
+        {
+          "kind": "ak",
+          "gun": 11,
+          "object": true
+        },
+        {
+          "kind": "uzi",
+          "gun": 15,
+          "object": true
+        },
+        {
+          "kind": "revolver",
+          "gun": 17,
+          "object": true
+        },
+        {
+          "kind": "uzi",
+          "gun": 15,
+          "object": true
+        },
+        {
+          "kind": "revolver",
+          "gun": 17,
+          "object": true
+        }
+      ],
+      "watchman": 0,
+      "loadout": {
+        "primary": [
+          "m4",
+          "ak"
+        ],
+        "secondary": [
+          "uzi",
+          "revolver"
+        ],
+        "hip": "pistol:base"
+      },
+      "armoryOpen": false,
+      "cifOpen": false
+    },
+    "warnings": [
+      "warning: The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127",
+      "warning: The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127",
+      "info: Grave Shift renderer: WebGPU.",
+      "info: Grave Shift opening perf: {\"toMenu\":17.87,\"segments\":{\"boot\":{\"at\":0,\"seconds\":0.46,\"frames\":3,\"over50\":1,\"over100\":1,\"worst\":167},\"caracal\":{\"at\":0.46,\"seconds\":11.24,\"frames\":114,\"over50\":31,\"over100\":19,\"worst\":1567},\"loading\":{\"at\":11.7,\"seconds\":6.17,\"frames\":240,\"over50\":18,\"over100\":5,\"worst\""
+    ]
+  },
+  {
+    "step": "05-fit-m4",
+    "during": {
+      "phase": "prep",
+      "wake": false,
+      "weapon": "pistol",
+      "held": 15,
+      "stowed": 99,
+      "slots": [
+        {
+          "kind": "m4",
+          "gun": 24,
+          "object": true
+        },
+        {
+          "kind": "ak",
+          "gun": 11,
+          "object": true
+        },
+        {
+          "kind": "uzi",
+          "gun": 15,
+          "object": true
+        },
+        {
+          "kind": "revolver",
+          "gun": 17,
+          "object": true
+        },
+        {
+          "kind": "uzi",
+          "gun": 15,
+          "object": true
+        },
+        {
+          "kind": "revolver",
+          "gun": 17,
+          "object": true
+        }
+      ],
+      "watchman": 0,
+      "loadout": {
+        "primary": [
+          "m4",
+          "ak"
+        ],
+        "secondary": [
+          "uzi",
+          "revolver"
+        ],
+        "hip": "pistol:base"
+      },
+      "armoryOpen": true,
+      "cifOpen": true
+    },
+    "after": {
+      "phase": "prep",
+      "wake": false,
+      "weapon": "pistol",
+      "held": 15,
+      "stowed": 99,
+      "slots": [
+        {
+          "kind": "m4",
+          "gun": 24,
+          "object": true
+        },
+        {
+          "kind": "ak",
+          "gun": 11,
+          "object": true
+        },
+        {
+          "kind": "uzi",
+          "gun": 15,
+          "object": true
+        },
+        {
+          "kind": "revolver",
+          "gun": 17,
+          "object": true
+        },
+        {
+          "kind": "uzi",
+          "gun": 15,
+          "object": true
+        },
+        {
+          "kind": "revolver",
+          "gun": 17,
+          "object": true
+        }
+      ],
+      "watchman": 0,
+      "loadout": {
+        "primary": [
+          "m4",
+          "ak"
+        ],
+        "secondary": [
+          "uzi",
+          "revolver"
+        ],
+        "hip": "pistol:base"
+      },
+      "armoryOpen": false,
+      "cifOpen": false
+    },
+    "warnings": [
+      "warning: The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127",
+      "warning: The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127",
+      "info: Grave Shift renderer: WebGPU.",
+      "info: Grave Shift opening perf: {\"toMenu\":17.87,\"segments\":{\"boot\":{\"at\":0,\"seconds\":0.46,\"frames\":3,\"over50\":1,\"over100\":1,\"worst\":167},\"caracal\":{\"at\":0.46,\"seconds\":11.24,\"frames\":114,\"over50\":31,\"over100\":19,\"worst\":1567},\"loading\":{\"at\":11.7,\"seconds\":6.17,\"frames\":240,\"over50\":18,\"over100\":5,\"worst\""
+    ]
+  },
+  {
+    "step": "06-move-to-shelf",
+    "during": {
+      "phase": "prep",
+      "wake": false,
+      "weapon": "pistol",
+      "held": 15,
+      "stowed": 99,
+      "slots": [
+        {
+          "kind": "m4",
+          "gun": 24,
+          "object": true
+        },
+        {
+          "kind": "ak",
+          "gun": 11,
+          "object": true
+        },
+        {
+          "kind": "uzi",
+          "gun": 15,
+          "object": true
+        },
+        {
+          "kind": "revolver",
+          "gun": 17,
+          "object": true
+        },
+        {
+          "kind": "uzi",
+          "gun": 15,
+          "object": true
+        },
+        {
+          "kind": "revolver",
+          "gun": 17,
+          "object": true
+        }
+      ],
+      "watchman": 0,
+      "loadout": {
+        "primary": [
+          null,
+          "ak"
+        ],
+        "secondary": [
+          "uzi",
+          "revolver"
+        ],
+        "hip": "pistol:base"
+      },
+      "armoryOpen": true,
+      "cifOpen": true
+    },
+    "after": {
+      "phase": "prep",
+      "wake": false,
+      "weapon": "pistol",
+      "held": 15,
+      "stowed": 75,
+      "slots": [
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": "ak",
+          "gun": 11,
+          "object": true
+        },
+        {
+          "kind": "uzi",
+          "gun": 15,
+          "object": true
+        },
+        {
+          "kind": "revolver",
+          "gun": 17,
+          "object": true
+        },
+        {
+          "kind": "uzi",
+          "gun": 15,
+          "object": true
+        },
+        {
+          "kind": "revolver",
+          "gun": 17,
+          "object": true
+        }
+      ],
+      "watchman": 0,
+      "loadout": {
+        "primary": [
+          null,
+          "ak"
+        ],
+        "secondary": [
+          "uzi",
+          "revolver"
+        ],
+        "hip": "pistol:base"
+      },
+      "armoryOpen": false,
+      "cifOpen": false
+    },
+    "warnings": [
+      "warning: The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127",
+      "warning: The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127",
+      "info: Grave Shift renderer: WebGPU.",
+      "info: Grave Shift opening perf: {\"toMenu\":17.87,\"segments\":{\"boot\":{\"at\":0,\"seconds\":0.46,\"frames\":3,\"over50\":1,\"over100\":1,\"worst\":167},\"caracal\":{\"at\":0.46,\"seconds\":11.24,\"frames\":114,\"over50\":31,\"over100\":19,\"worst\":1567},\"loading\":{\"at\":11.7,\"seconds\":6.17,\"frames\":240,\"over50\":18,\"over100\":5,\"worst\""
+    ]
+  },
+  {
+    "step": "07-cif-open",
+    "during": {
+      "phase": "prep",
+      "wake": false,
+      "weapon": "pistol",
+      "held": 15,
+      "stowed": 75,
+      "slots": [
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": "ak",
+          "gun": 11,
+          "object": true
+        },
+        {
+          "kind": "uzi",
+          "gun": 15,
+          "object": true
+        },
+        {
+          "kind": "revolver",
+          "gun": 17,
+          "object": true
+        },
+        {
+          "kind": "uzi",
+          "gun": 15,
+          "object": true
+        },
+        {
+          "kind": "revolver",
+          "gun": 17,
+          "object": true
+        }
+      ],
+      "watchman": 0,
+      "loadout": {
+        "primary": [
+          null,
+          "ak"
+        ],
+        "secondary": [
+          "uzi",
+          "revolver"
+        ],
+        "hip": "pistol:base"
+      },
+      "armoryOpen": false,
+      "cifOpen": true
+    },
+    "after": {
+      "phase": "prep",
+      "wake": false,
+      "weapon": "pistol",
+      "held": 15,
+      "stowed": 75,
+      "slots": [
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": "ak",
+          "gun": 11,
+          "object": true
+        },
+        {
+          "kind": "uzi",
+          "gun": 15,
+          "object": true
+        },
+        {
+          "kind": "revolver",
+          "gun": 17,
+          "object": true
+        },
+        {
+          "kind": "uzi",
+          "gun": 15,
+          "object": true
+        },
+        {
+          "kind": "revolver",
+          "gun": 17,
+          "object": true
+        }
+      ],
+      "watchman": 0,
+      "loadout": {
+        "primary": [
+          null,
+          "ak"
+        ],
+        "secondary": [
+          "uzi",
+          "revolver"
+        ],
+        "hip": "pistol:base"
+      },
+      "armoryOpen": false,
+      "cifOpen": false
+    },
+    "warnings": [
+      "warning: The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127",
+      "warning: The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127",
+      "info: Grave Shift renderer: WebGPU.",
+      "info: Grave Shift opening perf: {\"toMenu\":17.87,\"segments\":{\"boot\":{\"at\":0,\"seconds\":0.46,\"frames\":3,\"over50\":1,\"over100\":1,\"worst\":167},\"caracal\":{\"at\":0.46,\"seconds\":11.24,\"frames\":114,\"over50\":31,\"over100\":19,\"worst\":1567},\"loading\":{\"at\":11.7,\"seconds\":6.17,\"frames\":240,\"over50\":18,\"over100\":5,\"worst\""
+    ]
+  },
+  {
+    "step": "08-cif-camo",
+    "during": {
+      "phase": "prep",
+      "wake": false,
+      "weapon": "pistol",
+      "held": 15,
+      "stowed": 75,
+      "slots": [
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": "ak",
+          "gun": 11,
+          "object": true
+        },
+        {
+          "kind": "uzi",
+          "gun": 15,
+          "object": true
+        },
+        {
+          "kind": "revolver",
+          "gun": 17,
+          "object": true
+        },
+        {
+          "kind": "uzi",
+          "gun": 15,
+          "object": true
+        },
+        {
+          "kind": "revolver",
+          "gun": 17,
+          "object": true
+        }
+      ],
+      "watchman": 0,
+      "loadout": {
+        "primary": [
+          null,
+          "ak"
+        ],
+        "secondary": [
+          "uzi",
+          "revolver"
+        ],
+        "hip": "pistol:base"
+      },
+      "armoryOpen": false,
+      "cifOpen": true
+    },
+    "after": {
+      "phase": "prep",
+      "wake": false,
+      "weapon": "pistol",
+      "held": 15,
+      "stowed": 75,
+      "slots": [
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": "ak",
+          "gun": 11,
+          "object": true
+        },
+        {
+          "kind": "uzi",
+          "gun": 15,
+          "object": true
+        },
+        {
+          "kind": "revolver",
+          "gun": 17,
+          "object": true
+        },
+        {
+          "kind": "uzi",
+          "gun": 15,
+          "object": true
+        },
+        {
+          "kind": "revolver",
+          "gun": 17,
+          "object": true
+        }
+      ],
+      "watchman": 0,
+      "loadout": {
+        "primary": [
+          null,
+          "ak"
+        ],
+        "secondary": [
+          "uzi",
+          "revolver"
+        ],
+        "hip": "pistol:base"
+      },
+      "armoryOpen": false,
+      "cifOpen": false
+    },
+    "warnings": [
+      "warning: The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127",
+      "warning: The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127",
+      "info: Grave Shift renderer: WebGPU.",
+      "info: Grave Shift opening perf: {\"toMenu\":17.87,\"segments\":{\"boot\":{\"at\":0,\"seconds\":0.46,\"frames\":3,\"over50\":1,\"over100\":1,\"worst\":167},\"caracal\":{\"at\":0.46,\"seconds\":11.24,\"frames\":114,\"over50\":31,\"over100\":19,\"worst\":1567},\"loading\":{\"at\":11.7,\"seconds\":6.17,\"frames\":240,\"over50\":18,\"over100\":5,\"worst\""
+    ]
+  },
+  {
+    "step": "09-cif-kit-change",
+    "during": {
+      "phase": "prep",
+      "wake": false,
+      "weapon": "pistol",
+      "held": 15,
+      "stowed": 75,
+      "slots": [
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": "ak",
+          "gun": 11,
+          "object": true
+        },
+        {
+          "kind": "uzi",
+          "gun": 15,
+          "object": true
+        },
+        {
+          "kind": "revolver",
+          "gun": 17,
+          "object": true
+        },
+        {
+          "kind": "uzi",
+          "gun": 15,
+          "object": true
+        },
+        {
+          "kind": "revolver",
+          "gun": 17,
+          "object": true
+        }
+      ],
+      "watchman": 0,
+      "loadout": {
+        "primary": [
+          null,
+          "ak"
+        ],
+        "secondary": [
+          "uzi",
+          "revolver"
+        ],
+        "hip": "pistol:base"
+      },
+      "armoryOpen": false,
+      "cifOpen": true
+    },
+    "after": {
+      "phase": "prep",
+      "wake": false,
+      "weapon": "pistol",
+      "held": 15,
+      "stowed": 75,
+      "slots": [
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": "ak",
+          "gun": 11,
+          "object": true
+        },
+        {
+          "kind": "uzi",
+          "gun": 15,
+          "object": true
+        },
+        {
+          "kind": "revolver",
+          "gun": 17,
+          "object": true
+        },
+        {
+          "kind": "uzi",
+          "gun": 15,
+          "object": true
+        },
+        {
+          "kind": "revolver",
+          "gun": 17,
+          "object": true
+        }
+      ],
+      "watchman": 0,
+      "loadout": {
+        "primary": [
+          null,
+          "ak"
+        ],
+        "secondary": [
+          "uzi",
+          "revolver"
+        ],
+        "hip": "pistol:base"
+      },
+      "armoryOpen": false,
+      "cifOpen": false
+    },
+    "warnings": [
+      "warning: The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127",
+      "warning: The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127",
+      "info: Grave Shift renderer: WebGPU.",
+      "info: Grave Shift opening perf: {\"toMenu\":17.87,\"segments\":{\"boot\":{\"at\":0,\"seconds\":0.46,\"frames\":3,\"over50\":1,\"over100\":1,\"worst\":167},\"caracal\":{\"at\":0.46,\"seconds\":11.24,\"frames\":114,\"over50\":31,\"over100\":19,\"worst\":1567},\"loading\":{\"at\":11.7,\"seconds\":6.17,\"frames\":240,\"over50\":18,\"over100\":5,\"worst\""
+    ]
+  },
+  {
+    "step": "10-cif-close",
+    "during": {
+      "phase": "prep",
+      "wake": false,
+      "weapon": "pistol",
+      "held": 15,
+      "stowed": 75,
+      "slots": [
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": "ak",
+          "gun": 11,
+          "object": true
+        },
+        {
+          "kind": "uzi",
+          "gun": 15,
+          "object": true
+        },
+        {
+          "kind": "revolver",
+          "gun": 17,
+          "object": true
+        },
+        {
+          "kind": "uzi",
+          "gun": 15,
+          "object": true
+        },
+        {
+          "kind": "revolver",
+          "gun": 17,
+          "object": true
+        }
+      ],
+      "watchman": 0,
+      "loadout": {
+        "primary": [
+          null,
+          "ak"
+        ],
+        "secondary": [
+          "uzi",
+          "revolver"
+        ],
+        "hip": "pistol:base"
+      },
+      "armoryOpen": false,
+      "cifOpen": false
+    },
+    "after": {
+      "phase": "prep",
+      "wake": false,
+      "weapon": "pistol",
+      "held": 15,
+      "stowed": 75,
+      "slots": [
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": "ak",
+          "gun": 11,
+          "object": true
+        },
+        {
+          "kind": "uzi",
+          "gun": 15,
+          "object": true
+        },
+        {
+          "kind": "revolver",
+          "gun": 17,
+          "object": true
+        },
+        {
+          "kind": "uzi",
+          "gun": 15,
+          "object": true
+        },
+        {
+          "kind": "revolver",
+          "gun": 17,
+          "object": true
+        }
+      ],
+      "watchman": 0,
+      "loadout": {
+        "primary": [
+          null,
+          "ak"
+        ],
+        "secondary": [
+          "uzi",
+          "revolver"
+        ],
+        "hip": "pistol:base"
+      },
+      "armoryOpen": false,
+      "cifOpen": false
+    },
+    "warnings": [
+      "warning: The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127",
+      "warning: The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127",
+      "info: Grave Shift renderer: WebGPU.",
+      "info: Grave Shift opening perf: {\"toMenu\":17.87,\"segments\":{\"boot\":{\"at\":0,\"seconds\":0.46,\"frames\":3,\"over50\":1,\"over100\":1,\"worst\":167},\"caracal\":{\"at\":0.46,\"seconds\":11.24,\"frames\":114,\"over50\":31,\"over100\":19,\"worst\":1567},\"loading\":{\"at\":11.7,\"seconds\":6.17,\"frames\":240,\"over50\":18,\"over100\":5,\"worst\""
+    ]
+  },
+  {
+    "step": "11-death",
+    "during": {
+      "phase": "prep",
+      "wake": true,
+      "weapon": "pistol",
+      "held": 0,
+      "stowed": 75,
+      "slots": [
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": "ak",
+          "gun": 11,
+          "object": true
+        },
+        {
+          "kind": "uzi",
+          "gun": 15,
+          "object": true
+        },
+        {
+          "kind": "revolver",
+          "gun": 17,
+          "object": true
+        },
+        {
+          "kind": "uzi",
+          "gun": 15,
+          "object": true
+        },
+        {
+          "kind": "revolver",
+          "gun": 17,
+          "object": true
+        }
+      ],
+      "watchman": 0,
+      "loadout": {
+        "primary": [
+          null,
+          "ak"
+        ],
+        "secondary": [
+          "uzi",
+          "revolver"
+        ],
+        "hip": "pistol:base"
+      },
+      "armoryOpen": false,
+      "cifOpen": false
+    }
+  },
+  {
+    "step": "12-wake",
+    "during": {
+      "phase": "prep",
+      "wake": false,
+      "weapon": "pistol",
+      "held": 15,
+      "stowed": 75,
+      "slots": [
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": "ak",
+          "gun": 11,
+          "object": true
+        },
+        {
+          "kind": "uzi",
+          "gun": 15,
+          "object": true
+        },
+        {
+          "kind": "revolver",
+          "gun": 17,
+          "object": true
+        },
+        {
+          "kind": "uzi",
+          "gun": 15,
+          "object": true
+        },
+        {
+          "kind": "revolver",
+          "gun": 17,
+          "object": true
+        }
+      ],
+      "watchman": 0,
+      "loadout": {
+        "primary": [
+          null,
+          "ak"
+        ],
+        "secondary": [
+          "uzi",
+          "revolver"
+        ],
+        "hip": "pistol:base"
+      },
+      "armoryOpen": false,
+      "cifOpen": false
+    },
+    "after": {
+      "phase": "prep",
+      "wake": false,
+      "weapon": "pistol",
+      "held": 15,
+      "stowed": 75,
+      "slots": [
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": "ak",
+          "gun": 11,
+          "object": true
+        },
+        {
+          "kind": "uzi",
+          "gun": 15,
+          "object": true
+        },
+        {
+          "kind": "revolver",
+          "gun": 17,
+          "object": true
+        },
+        {
+          "kind": "uzi",
+          "gun": 15,
+          "object": true
+        },
+        {
+          "kind": "revolver",
+          "gun": 17,
+          "object": true
+        }
+      ],
+      "watchman": 0,
+      "loadout": {
+        "primary": [
+          null,
+          "ak"
+        ],
+        "secondary": [
+          "uzi",
+          "revolver"
+        ],
+        "hip": "pistol:base"
+      },
+      "armoryOpen": false,
+      "cifOpen": false
+    },
+    "warnings": [
+      "warning: The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127",
+      "warning: The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127",
+      "info: Grave Shift renderer: WebGPU.",
+      "info: Grave Shift opening perf: {\"toMenu\":17.87,\"segments\":{\"boot\":{\"at\":0,\"seconds\":0.46,\"frames\":3,\"over50\":1,\"over100\":1,\"worst\":167},\"caracal\":{\"at\":0.46,\"seconds\":11.24,\"frames\":114,\"over50\":31,\"over100\":19,\"worst\":1567},\"loading\":{\"at\":11.7,\"seconds\":6.17,\"frames\":240,\"over50\":18,\"over100\":5,\"worst\""
+    ]
+  },
+  {
+    "step": "13-post-wake",
+    "during": {
+      "phase": "prep",
+      "wake": false,
+      "weapon": "pistol",
+      "held": 15,
+      "stowed": 75,
+      "slots": [
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": "ak",
+          "gun": 11,
+          "object": true
+        },
+        {
+          "kind": "uzi",
+          "gun": 15,
+          "object": true
+        },
+        {
+          "kind": "revolver",
+          "gun": 17,
+          "object": true
+        },
+        {
+          "kind": "uzi",
+          "gun": 15,
+          "object": true
+        },
+        {
+          "kind": "revolver",
+          "gun": 17,
+          "object": true
+        }
+      ],
+      "watchman": 0,
+      "loadout": {
+        "primary": [
+          null,
+          "ak"
+        ],
+        "secondary": [
+          "uzi",
+          "revolver"
+        ],
+        "hip": "pistol:base"
+      },
+      "armoryOpen": false,
+      "cifOpen": false
+    },
+    "after": {
+      "phase": "prep",
+      "wake": false,
+      "weapon": "pistol",
+      "held": 15,
+      "stowed": 75,
+      "slots": [
+        {
+          "kind": null,
+          "gun": 0,
+          "object": false
+        },
+        {
+          "kind": "ak",
+          "gun": 11,
+          "object": true
+        },
+        {
+          "kind": "uzi",
+          "gun": 15,
+          "object": true
+        },
+        {
+          "kind": "revolver",
+          "gun": 17,
+          "object": true
+        },
+        {
+          "kind": "uzi",
+          "gun": 15,
+          "object": true
+        },
+        {
+          "kind": "revolver",
+          "gun": 17,
+          "object": true
+        }
+      ],
+      "watchman": 0,
+      "loadout": {
+        "primary": [
+          null,
+          "ak"
+        ],
+        "secondary": [
+          "uzi",
+          "revolver"
+        ],
+        "hip": "pistol:base"
+      },
+      "armoryOpen": false,
+      "cifOpen": false
+    },
+    "warnings": [
+      "warning: The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127",
+      "warning: The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127",
+      "info: Grave Shift renderer: WebGPU.",
+      "info: Grave Shift opening perf: {\"toMenu\":17.87,\"segments\":{\"boot\":{\"at\":0,\"seconds\":0.46,\"frames\":3,\"over50\":1,\"over100\":1,\"worst\":167},\"caracal\":{\"at\":0.46,\"seconds\":11.24,\"frames\":114,\"over50\":31,\"over100\":19,\"worst\":1567},\"loading\":{\"at\":11.7,\"seconds\":6.17,\"frames\":240,\"over50\":18,\"over100\":5,\"worst\""
+    ]
+  }
+]

@@ -1,0 +1,144 @@
+node review/GT-20076/frame-details.mjs --nose-arch
+GRANT chatgpt2 GT-20076: starting one game-test command
+PASS native before/after side detail in all four lights chainsaw 3f6cffa2
+PASS native before/after side detail in all four lights minigun c78f3c7f
+
+node tools/realtest.mjs t38 t277 --all
+Game-test request 12f00481-78c3-4415-9695-78b32a77ab62 queued at position 1. Waiting...
+GRANT chatgpt2 GT-20076: starting one game-test command
+ok    t38      26 pass   0 fail  71.6s  (real renderer)
+    PASS off-hand pistol animates its own parts (slide, mag, flash, laser)
+    PASS off-hand uzi animates its own parts (mag, flash, laser)
+    PASS off-hand revolver animates its own parts (mag, flash, laser, cylinder, hammer)
+    PASS all twelve equipped models represented (12)
+    PASS cold attached mesh count 274 / 300 (including hidden parts)
+    PASS minigun submitted 22 draws / 35
+    INFO minigun cold meshes 22, equipped draws 22
+    PASS m4 submitted 31 draws / 35
+    INFO m4 cold meshes 35, equipped draws 31
+    PASS ak submitted 19 draws / 35
+    INFO ak cold meshes 23, equipped draws 19
+    PASS aa12 submitted 23 draws / 35
+    INFO aa12 cold meshes 24, equipped draws 23
+    PASS pistol submitted 15 draws / 35
+    INFO pistol cold meshes 19, equipped draws 15
+    PASS uzi submitted 23 draws / 35
+    INFO uzi cold meshes 27, equipped draws 23
+    PASS shotgun submitted 19 draws / 35
+    INFO shotgun cold meshes 24, equipped draws 19
+    PASS revolver submitted 20 draws / 35
+    INFO revolver cold meshes 24, equipped draws 20
+    PASS sniper submitted 31 draws / 35
+    INFO sniper cold meshes 34, equipped draws 31
+    PASS launcher submitted 20 draws / 35
+    INFO launcher cold meshes 23, equipped draws 20
+    PASS flamer submitted 9 draws / 35
+    INFO flamer cold meshes 10, equipped draws 9
+    PASS chainsaw submitted 9 draws / 35
+    INFO chainsaw cold meshes 9, equipped draws 9
+    PASS equipped draws across twelve individual models 241 < 260
+    INFO twelve cold guns: 274 attached meshes; equipped individually: 241 actual draws
+    PASS ak: reload moves the magazine
+    PASS m4: reload moves the magazine
+    PASS pistol: reload moves the magazine
+    PASS shotgun: reload moves the pump
+    PASS sniper: reload moves the magazine
+    PASS revolver: reload moves the magazine
+    PASS launcher: reload moves the magazine
+    PASS minigun: reload moves the magazine
+ok    t277     46 pass   0 fail  37.1s  (real renderer)
+    INFO minigun muzzle 0.000,0.000,0.791 box -0.231,-0.183,-0.397 / 0.215,0.266,0.784
+    INFO minigun dir 1 rearTop -0.000,0.266,0.003 frontTop -0.000,0.076,0.741
+    PASS minigun: has a sight point
+    PASS minigun: eye above the bore, behind the muzzle, on its centre line, along it (0.00 deg)
+    PASS minigun: eye clears the top line and stays near it (eye y 0.231, top 0.266)
+    INFO m4 muzzle 0.000,0.020,0.980 box -0.053,-0.278,-0.569 / 0.053,0.170,0.978
+    INFO m4 dir 1 rearTop -0.000,0.170,0.046 frontTop -0.000,0.138,0.671
+    PASS m4: has a sight point
+    PASS m4: eye above the bore, behind the muzzle, on its centre line, along it (0.00 deg)
+    PASS m4: eye clears the top line and stays near it (eye y 0.134, top 0.170)
+    INFO ak muzzle 0.000,-0.005,0.855 box -0.031,-0.311,-0.515 / 0.059,0.084,0.829
+    INFO ak dir 1 rearTop -0.005,0.074,0.214 frontTop -0.000,0.084,0.723
+    PASS ak: has a sight point
+    PASS ak: eye above the bore, behind the muzzle, on its centre line, along it (0.00 deg)
+    PASS ak: eye clears the top line and stays near it (eye y 0.074, top 0.084)
+    INFO aa12 muzzle 0.000,0.015,0.980 box -0.155,-0.415,-0.580 / 0.155,0.180,0.976
+    INFO aa12 dir 1 rearTop -0.000,0.180,-0.120 frontTop -0.014,0.175,0.750
+    PASS aa12: has a sight point
+    PASS aa12: eye above the bore, behind the muzzle, on its centre line, along it (0.00 deg)
+    PASS aa12: eye clears the top line and stays near it (eye y 0.168, top 0.180)
+    INFO pistol muzzle 0.000,0.050,0.320 box -0.028,-0.182,-0.100 / 0.028,0.092,0.312
+    INFO pistol dir 1 rearTop -0.014,0.075,0.072 frontTop -0.002,0.092,0.287
+    PASS pistol: has a sight point
+    PASS pistol: eye above the bore, behind the muzzle, on its centre line, along it (0.00 deg)
+    PASS pistol: notch and tip are on the gun (notch found, tip y 0.092)
+    PASS pistol: eye on the notch-to-tip line within 3 mm (eye y 0.0920, line 0.0920)
+    INFO uzi muzzle 0.000,0.030,0.480 box -0.054,-0.327,-0.157 / 0.065,0.158,0.479
+    INFO uzi dir 1 rearTop -0.014,0.150,0.190 frontTop -0.001,0.067,0.354
+    PASS uzi: has a sight point
+    PASS uzi: eye above the bore, behind the muzzle, on its centre line, along it (0.00 deg)
+    PASS uzi: eye on the ring centre within 3 mm (eye y 0.1260, ring 0.1260)
+    INFO shotgun muzzle 0.000,0.030,0.970 box -0.030,-0.199,-0.497 / 0.030,0.060,0.952
+    INFO shotgun dir 1 rearTop -0.000,0.056,-0.021 frontTop -0.000,0.060,0.910
+    PASS shotgun: has a sight point
+    PASS shotgun: eye above the bore, behind the muzzle, on its centre line, along it (0.52 deg)
+    PASS shotgun: eye clears the top line and stays near it (eye y 0.070, top 0.060)
+    INFO revolver muzzle 0.000,0.083,0.350 box -0.050,-0.151,-0.145 / 0.046,0.124,0.333
+    INFO revolver dir 1 rearTop -0.015,0.115,0.064 frontTop -0.002,0.124,0.318
+    PASS revolver: has a sight point
+    PASS revolver: eye above the bore, behind the muzzle, on its centre line, along it (0.16 deg)
+    PASS revolver: notch and tip are on the gun (notch found, tip y 0.124)
+    PASS revolver: rendered green point matches its datum below the physical crown (0.000,0.123,0.317)
+    PASS revolver: eye on the notch-to-dot line within 3 mm (eye y 0.1190, line 0.1174)
+    INFO sniper muzzle 0.000,0.040,1.220 box -0.037,-0.203,-0.640 / 0.147,0.182,1.205
+    INFO sniper dir 1 rearTop 0.014,0.182,-0.125 frontTop 0.000,0.064,1.133
+    PASS sniper: has a sight point
+    PASS sniper: eye above the bore, behind the muzzle, on its centre line, along it (0.00 deg)
+    INFO sniper scope axis: ocular 0.000,0.139,-0.290, objective 0.000,0.139,0.044, tube section centre 0.000,0.139,-0.122 (0.00 mm off the lens line)
+    PASS sniper: the two lenses' centres are the tube's centre line (its section centre 0.00 mm off)
+    PASS sniper: eye on the scope's centre line within 3 mm (1.00 mm off), looking along it (0.00 deg)
+    INFO launcher muzzle 0.000,0.040,0.720 box -0.156,-0.188,-0.428 / 0.112,0.192,0.682
+    INFO launcher dir 1 rearTop -0.010,0.192,-0.085 frontTop -0.013,0.174,0.638
+    PASS launcher: has a sight point
+    PASS launcher: eye above the bore, behind the muzzle, on its centre line, along it (0.00 deg)
+    PASS launcher: eye on the ring centre within 3 mm (eye y 0.1700, ring 0.1700)
+    INFO flamer muzzle 0.000,0.050,0.998 box -0.085,-0.175,-0.191 / 0.178,0.112,1.015
+    INFO flamer dir 1 rearTop 0.000,0.102,0.401 frontTop 0.000,0.112,1.007
+    PASS flamer: has a sight point
+    PASS flamer: eye above the bore, behind the muzzle, on its centre line, along it (0.00 deg)
+    PASS flamer: eye clears the top line and stays near it (eye y 0.150, top 0.112)
+    INFO chainsaw muzzle 0.000,0.040,0.696 box -0.198,-0.109,-0.504 / 0.218,0.265,0.703
+    INFO chainsaw dir 1 rearTop -0.010,0.265,-0.040 frontTop 0.015,0.089,0.676
+    PASS chainsaw: has a sight point
+    PASS chainsaw: eye above the bore, behind the muzzle, on its centre line, along it (0.00 deg)
+    PASS chainsaw: eye clears the top line and stays near it (eye y 0.275, top 0.265)
+    PASS sniper: in hand for the view check
+    PASS sniper: first person, the view gun up
+    PASS sniper: the view gun carries the scope's tube (NX8 tapered optical housing)
+    PASS sniper: right-click: aimed (ads 1.00)
+    INFO sniper aimed: eye 1.00 mm off the scope's centre line (worst 1.00 of 12 frames); the line runs 0.001 deg off the view, -0.0, -0.0 px from the centre at 1280x720
+    PASS sniper: aimed in first person, the eye on the scope's real centre line within 3 mm (1.00 mm)
+    PASS sniper: and the line runs to the screen's centre (0.001 deg; -0.0, -0.0 px)
+2 checks: 72 pass, 0 fail (real renderer)
+
+node tools/tests/run-all.mjs t334 --jobs 1 --agent chatgpt2 --task GT-20076 --all-fails
+GRANT chatgpt2 GT-20076: starting one game-test command
+check-players: 316 player.position reads, all in the allowed places
+           FAIL ak: several distinct painted surfaces (5)
+           FAIL ak: eligible gun meshes share one camo map and UVs (6, leaks 0)
+           FAIL ak: sampled UVs match the gun-root 0.42 m box projection (18, bad 0)
+           FAIL ak: first-person copy mirrors the whole-gun camo (11)
+           FAIL new fitted shotgun tube is registered for camo (1)
+FAIL  t334    21 pass   5 fail  68.9s
+           recovering browser after t334: 5 fail
+
+1 checks: 21 pass, 5 fail
+
+by owner:
+  unassigned
+    t334   5 fail  FAIL ak: several distinct painted surfaces (5)
+           FAIL ak: several distinct painted surfaces (5)
+           FAIL ak: eligible gun meshes share one camo map and UVs (6, leaks 0)
+           FAIL ak: sampled UVs match the gun-root 0.42 m box projection (18, bad 0)
+           FAIL ak: first-person copy mirrors the whole-gun camo (11)
+           FAIL new fitted shotgun tube is registered for camo (1)

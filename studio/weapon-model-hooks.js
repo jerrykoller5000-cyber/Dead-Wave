@@ -35,6 +35,9 @@ export function optionalArtworkGroup(ctx, gun, name, build, fallbackFor = null) 
         state.build(stage);
         this.add(...stage.children.slice());
         state.build = null;
+        // Paint registration can be the traversal that first builds the artwork.
+        // Its root-space UV projection reads each new mesh's world matrix.
+        this.updateWorldMatrix(true, true);
       }
 
       traverse(callback) {

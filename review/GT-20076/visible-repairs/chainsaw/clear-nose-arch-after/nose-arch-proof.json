@@ -1,0 +1,17 @@
+{
+  "hash": "3f6cffa2",
+  "results": [
+    {
+      "exterior": 38,
+      "gaps": [
+        {
+          "lowerMm": 0,
+          "upperMm": 0.0078125
+        }
+      ],
+      "maxOutsideOriginal": 1.6510824790705314e-9,
+      "triangles": 116
+    }
+  ],
+  "chainTeeth": 42
+}

@@ -1,0 +1,1010 @@
+[
+  {
+    "what": "armed",
+    "k": 0,
+    "name": "00-armed-0.png",
+    "weapon": "pistol",
+    "held": 15,
+    "offhand": 0,
+    "stowed": 106,
+    "mg": 0,
+    "vmFilter": false,
+    "akimbo": false,
+    "loadout": {
+      "primary": [
+        null,
+        null
+      ],
+      "secondary": [
+        null,
+        null
+      ],
+      "hip": "pistol:base"
+    },
+    "warnings": []
+  },
+  {
+    "what": "armed",
+    "k": 1,
+    "name": "01-armed-1.png",
+    "weapon": "pistol",
+    "held": 15,
+    "offhand": 0,
+    "stowed": 106,
+    "mg": 0,
+    "vmFilter": false,
+    "akimbo": false,
+    "loadout": {
+      "primary": [
+        null,
+        null
+      ],
+      "secondary": [
+        null,
+        null
+      ],
+      "hip": "pistol:base"
+    },
+    "warnings": []
+  },
+  {
+    "what": "armed",
+    "k": 2,
+    "name": "02-armed-2.png",
+    "weapon": "pistol",
+    "held": 15,
+    "offhand": 0,
+    "stowed": 106,
+    "mg": 0,
+    "vmFilter": false,
+    "akimbo": false,
+    "loadout": {
+      "primary": [
+        null,
+        null
+      ],
+      "secondary": [
+        null,
+        null
+      ],
+      "hip": "pistol:base"
+    },
+    "warnings": []
+  },
+  {
+    "what": "pair-pistol",
+    "k": 0,
+    "name": "03-pair-pistol-0.png",
+    "weapon": "pistol",
+    "held": 15,
+    "offhand": 15,
+    "stowed": 0,
+    "mg": 0,
+    "vmFilter": false,
+    "akimbo": true,
+    "loadout": {
+      "primary": [
+        null,
+        null
+      ],
+      "secondary": [
+        "pistol:second",
+        null
+      ],
+      "hip": "pistol:base"
+    },
+    "warnings": []
+  },
+  {
+    "what": "pair-pistol",
+    "k": 1,
+    "name": "04-pair-pistol-1.png",
+    "weapon": "pistol",
+    "held": 15,
+    "offhand": 15,
+    "stowed": 0,
+    "mg": 0,
+    "vmFilter": false,
+    "akimbo": true,
+    "loadout": {
+      "primary": [
+        null,
+        null
+      ],
+      "secondary": [
+        "pistol:second",
+        null
+      ],
+      "hip": "pistol:base"
+    },
+    "warnings": []
+  },
+  {
+    "what": "pair-pistol",
+    "k": 2,
+    "name": "05-pair-pistol-2.png",
+    "weapon": "pistol",
+    "held": 15,
+    "offhand": 15,
+    "stowed": 0,
+    "mg": 0,
+    "vmFilter": false,
+    "akimbo": true,
+    "loadout": {
+      "primary": [
+        null,
+        null
+      ],
+      "secondary": [
+        "pistol:second",
+        null
+      ],
+      "hip": "pistol:base"
+    },
+    "warnings": []
+  },
+  {
+    "what": "fire-pair",
+    "k": 0,
+    "name": "06-fire-pair-0.png",
+    "weapon": "pistol",
+    "held": 15,
+    "offhand": 15,
+    "stowed": 0,
+    "mg": 0,
+    "vmFilter": false,
+    "akimbo": true,
+    "loadout": {
+      "primary": [
+        null,
+        null
+      ],
+      "secondary": [
+        "pistol:second",
+        null
+      ],
+      "hip": "pistol:base"
+    },
+    "warnings": []
+  },
+  {
+    "what": "fire-pair",
+    "k": 1,
+    "name": "07-fire-pair-1.png",
+    "weapon": "pistol",
+    "held": 15,
+    "offhand": 15,
+    "stowed": 0,
+    "mg": 0,
+    "vmFilter": false,
+    "akimbo": true,
+    "loadout": {
+      "primary": [
+        null,
+        null
+      ],
+      "secondary": [
+        "pistol:second",
+        null
+      ],
+      "hip": "pistol:base"
+    },
+    "warnings": []
+  },
+  {
+    "what": "fire-pair",
+    "k": 2,
+    "name": "08-fire-pair-2.png",
+    "weapon": "pistol",
+    "held": 15,
+    "offhand": 15,
+    "stowed": 0,
+    "mg": 0,
+    "vmFilter": false,
+    "akimbo": true,
+    "loadout": {
+      "primary": [
+        null,
+        null
+      ],
+      "secondary": [
+        "pistol:second",
+        null
+      ],
+      "hip": "pistol:base"
+    },
+    "warnings": []
+  },
+  {
+    "what": "1p",
+    "k": 0,
+    "name": "09-1p-0.png",
+    "weapon": "pistol",
+    "held": 15,
+    "offhand": 15,
+    "stowed": 0,
+    "mg": 0,
+    "vmFilter": true,
+    "akimbo": true,
+    "loadout": {
+      "primary": [
+        null,
+        null
+      ],
+      "secondary": [
+        "pistol:second",
+        null
+      ],
+      "hip": "pistol:base"
+    },
+    "warnings": []
+  },
+  {
+    "what": "1p",
+    "k": 1,
+    "name": "10-1p-1.png",
+    "weapon": "pistol",
+    "held": 15,
+    "offhand": 15,
+    "stowed": 0,
+    "mg": 0,
+    "vmFilter": true,
+    "akimbo": true,
+    "loadout": {
+      "primary": [
+        null,
+        null
+      ],
+      "secondary": [
+        "pistol:second",
+        null
+      ],
+      "hip": "pistol:base"
+    },
+    "warnings": []
+  },
+  {
+    "what": "1p",
+    "k": 2,
+    "name": "11-1p-2.png",
+    "weapon": "pistol",
+    "held": 15,
+    "offhand": 15,
+    "stowed": 0,
+    "mg": 0,
+    "vmFilter": true,
+    "akimbo": true,
+    "loadout": {
+      "primary": [
+        null,
+        null
+      ],
+      "secondary": [
+        "pistol:second",
+        null
+      ],
+      "hip": "pistol:base"
+    },
+    "warnings": []
+  },
+  {
+    "what": "fire-pair-1p",
+    "k": 0,
+    "name": "12-fire-pair-1p-0.png",
+    "weapon": "pistol",
+    "held": 15,
+    "offhand": 15,
+    "stowed": 0,
+    "mg": 0,
+    "vmFilter": true,
+    "akimbo": true,
+    "loadout": {
+      "primary": [
+        null,
+        null
+      ],
+      "secondary": [
+        "pistol:second",
+        null
+      ],
+      "hip": "pistol:base"
+    },
+    "warnings": []
+  },
+  {
+    "what": "fire-pair-1p",
+    "k": 1,
+    "name": "13-fire-pair-1p-1.png",
+    "weapon": "pistol",
+    "held": 15,
+    "offhand": 15,
+    "stowed": 0,
+    "mg": 0,
+    "vmFilter": true,
+    "akimbo": true,
+    "loadout": {
+      "primary": [
+        null,
+        null
+      ],
+      "secondary": [
+        "pistol:second",
+        null
+      ],
+      "hip": "pistol:base"
+    },
+    "warnings": []
+  },
+  {
+    "what": "fire-pair-1p",
+    "k": 2,
+    "name": "14-fire-pair-1p-2.png",
+    "weapon": "pistol",
+    "held": 15,
+    "offhand": 15,
+    "stowed": 0,
+    "mg": 0,
+    "vmFilter": true,
+    "akimbo": true,
+    "loadout": {
+      "primary": [
+        null,
+        null
+      ],
+      "secondary": [
+        "pistol:second",
+        null
+      ],
+      "hip": "pistol:base"
+    },
+    "warnings": []
+  },
+  {
+    "what": "3p",
+    "k": 0,
+    "name": "15-3p-0.png",
+    "weapon": "pistol",
+    "held": 15,
+    "offhand": 15,
+    "stowed": 0,
+    "mg": 0,
+    "vmFilter": false,
+    "akimbo": true,
+    "loadout": {
+      "primary": [
+        null,
+        null
+      ],
+      "secondary": [
+        "pistol:second",
+        null
+      ],
+      "hip": "pistol:base"
+    },
+    "warnings": []
+  },
+  {
+    "what": "3p",
+    "k": 1,
+    "name": "16-3p-1.png",
+    "weapon": "pistol",
+    "held": 15,
+    "offhand": 15,
+    "stowed": 0,
+    "mg": 0,
+    "vmFilter": false,
+    "akimbo": true,
+    "loadout": {
+      "primary": [
+        null,
+        null
+      ],
+      "secondary": [
+        "pistol:second",
+        null
+      ],
+      "hip": "pistol:base"
+    },
+    "warnings": []
+  },
+  {
+    "what": "3p",
+    "k": 2,
+    "name": "17-3p-2.png",
+    "weapon": "pistol",
+    "held": 15,
+    "offhand": 15,
+    "stowed": 0,
+    "mg": 0,
+    "vmFilter": false,
+    "akimbo": true,
+    "loadout": {
+      "primary": [
+        null,
+        null
+      ],
+      "secondary": [
+        "pistol:second",
+        null
+      ],
+      "hip": "pistol:base"
+    },
+    "warnings": []
+  },
+  {
+    "what": "pair-wasp",
+    "k": 0,
+    "name": "18-pair-wasp-0.png",
+    "weapon": "uzi",
+    "held": 23,
+    "offhand": 22,
+    "stowed": 0,
+    "mg": 0,
+    "vmFilter": false,
+    "akimbo": true,
+    "loadout": {
+      "primary": [
+        null,
+        null
+      ],
+      "secondary": [
+        "uzi",
+        "uzi:second"
+      ],
+      "hip": "pistol:base"
+    },
+    "warnings": []
+  },
+  {
+    "what": "pair-wasp",
+    "k": 1,
+    "name": "19-pair-wasp-1.png",
+    "weapon": "uzi",
+    "held": 23,
+    "offhand": 22,
+    "stowed": 0,
+    "mg": 0,
+    "vmFilter": false,
+    "akimbo": true,
+    "loadout": {
+      "primary": [
+        null,
+        null
+      ],
+      "secondary": [
+        "uzi",
+        "uzi:second"
+      ],
+      "hip": "pistol:base"
+    },
+    "warnings": []
+  },
+  {
+    "what": "pair-wasp",
+    "k": 2,
+    "name": "20-pair-wasp-2.png",
+    "weapon": "uzi",
+    "held": 23,
+    "offhand": 22,
+    "stowed": 0,
+    "mg": 0,
+    "vmFilter": false,
+    "akimbo": true,
+    "loadout": {
+      "primary": [
+        null,
+        null
+      ],
+      "secondary": [
+        "uzi",
+        "uzi:second"
+      ],
+      "hip": "pistol:base"
+    },
+    "warnings": []
+  },
+  {
+    "what": "fire-wasp",
+    "k": 0,
+    "name": "21-fire-wasp-0.png",
+    "weapon": "uzi",
+    "held": 23,
+    "offhand": 22,
+    "stowed": 0,
+    "mg": 0,
+    "vmFilter": false,
+    "akimbo": true,
+    "loadout": {
+      "primary": [
+        null,
+        null
+      ],
+      "secondary": [
+        "uzi",
+        "uzi:second"
+      ],
+      "hip": "pistol:base"
+    },
+    "warnings": []
+  },
+  {
+    "what": "fire-wasp",
+    "k": 1,
+    "name": "22-fire-wasp-1.png",
+    "weapon": "uzi",
+    "held": 23,
+    "offhand": 22,
+    "stowed": 0,
+    "mg": 0,
+    "vmFilter": false,
+    "akimbo": true,
+    "loadout": {
+      "primary": [
+        null,
+        null
+      ],
+      "secondary": [
+        "uzi",
+        "uzi:second"
+      ],
+      "hip": "pistol:base"
+    },
+    "warnings": []
+  },
+  {
+    "what": "fire-wasp",
+    "k": 2,
+    "name": "23-fire-wasp-2.png",
+    "weapon": "uzi",
+    "held": 23,
+    "offhand": 22,
+    "stowed": 0,
+    "mg": 0,
+    "vmFilter": false,
+    "akimbo": true,
+    "loadout": {
+      "primary": [
+        null,
+        null
+      ],
+      "secondary": [
+        "uzi",
+        "uzi:second"
+      ],
+      "hip": "pistol:base"
+    },
+    "warnings": []
+  },
+  {
+    "what": "wasp-1p",
+    "k": 0,
+    "name": "24-wasp-1p-0.png",
+    "weapon": "uzi",
+    "held": 23,
+    "offhand": 22,
+    "stowed": 0,
+    "mg": 0,
+    "vmFilter": true,
+    "akimbo": true,
+    "loadout": {
+      "primary": [
+        null,
+        null
+      ],
+      "secondary": [
+        "uzi",
+        "uzi:second"
+      ],
+      "hip": "pistol:base"
+    },
+    "warnings": []
+  },
+  {
+    "what": "wasp-1p",
+    "k": 1,
+    "name": "25-wasp-1p-1.png",
+    "weapon": "uzi",
+    "held": 23,
+    "offhand": 22,
+    "stowed": 0,
+    "mg": 0,
+    "vmFilter": true,
+    "akimbo": true,
+    "loadout": {
+      "primary": [
+        null,
+        null
+      ],
+      "secondary": [
+        "uzi",
+        "uzi:second"
+      ],
+      "hip": "pistol:base"
+    },
+    "warnings": []
+  },
+  {
+    "what": "wasp-1p",
+    "k": 2,
+    "name": "26-wasp-1p-2.png",
+    "weapon": "uzi",
+    "held": 23,
+    "offhand": 22,
+    "stowed": 0,
+    "mg": 0,
+    "vmFilter": true,
+    "akimbo": true,
+    "loadout": {
+      "primary": [
+        null,
+        null
+      ],
+      "secondary": [
+        "uzi",
+        "uzi:second"
+      ],
+      "hip": "pistol:base"
+    },
+    "warnings": []
+  },
+  {
+    "what": "fire-wasp-1p",
+    "k": 0,
+    "name": "27-fire-wasp-1p-0.png",
+    "weapon": "uzi",
+    "held": 23,
+    "offhand": 22,
+    "stowed": 0,
+    "mg": 0,
+    "vmFilter": true,
+    "akimbo": true,
+    "loadout": {
+      "primary": [
+        null,
+        null
+      ],
+      "secondary": [
+        "uzi",
+        "uzi:second"
+      ],
+      "hip": "pistol:base"
+    },
+    "warnings": []
+  },
+  {
+    "what": "fire-wasp-1p",
+    "k": 1,
+    "name": "28-fire-wasp-1p-1.png",
+    "weapon": "uzi",
+    "held": 23,
+    "offhand": 22,
+    "stowed": 0,
+    "mg": 0,
+    "vmFilter": true,
+    "akimbo": true,
+    "loadout": {
+      "primary": [
+        null,
+        null
+      ],
+      "secondary": [
+        "uzi",
+        "uzi:second"
+      ],
+      "hip": "pistol:base"
+    },
+    "warnings": []
+  },
+  {
+    "what": "fire-wasp-1p",
+    "k": 2,
+    "name": "29-fire-wasp-1p-2.png",
+    "weapon": "uzi",
+    "held": 23,
+    "offhand": 22,
+    "stowed": 0,
+    "mg": 0,
+    "vmFilter": true,
+    "akimbo": true,
+    "loadout": {
+      "primary": [
+        null,
+        null
+      ],
+      "secondary": [
+        "uzi",
+        "uzi:second"
+      ],
+      "hip": "pistol:base"
+    },
+    "warnings": []
+  },
+  {
+    "what": "wasp-3p",
+    "k": 0,
+    "name": "30-wasp-3p-0.png",
+    "weapon": "uzi",
+    "held": 23,
+    "offhand": 22,
+    "stowed": 0,
+    "mg": 0,
+    "vmFilter": false,
+    "akimbo": true,
+    "loadout": {
+      "primary": [
+        null,
+        null
+      ],
+      "secondary": [
+        "uzi",
+        "uzi:second"
+      ],
+      "hip": "pistol:base"
+    },
+    "warnings": []
+  },
+  {
+    "what": "wasp-3p",
+    "k": 1,
+    "name": "31-wasp-3p-1.png",
+    "weapon": "uzi",
+    "held": 23,
+    "offhand": 22,
+    "stowed": 0,
+    "mg": 0,
+    "vmFilter": false,
+    "akimbo": true,
+    "loadout": {
+      "primary": [
+        null,
+        null
+      ],
+      "secondary": [
+        "uzi",
+        "uzi:second"
+      ],
+      "hip": "pistol:base"
+    },
+    "warnings": []
+  },
+  {
+    "what": "wasp-3p",
+    "k": 2,
+    "name": "32-wasp-3p-2.png",
+    "weapon": "uzi",
+    "held": 23,
+    "offhand": 22,
+    "stowed": 0,
+    "mg": 0,
+    "vmFilter": false,
+    "akimbo": true,
+    "loadout": {
+      "primary": [
+        null,
+        null
+      ],
+      "secondary": [
+        "uzi",
+        "uzi:second"
+      ],
+      "hip": "pistol:base"
+    },
+    "warnings": []
+  },
+  {
+    "what": "watchman",
+    "k": 0,
+    "name": "33-watchman-0.png",
+    "weapon": "uzi",
+    "held": 0,
+    "offhand": 0,
+    "stowed": 31,
+    "mg": 78,
+    "vmFilter": false,
+    "akimbo": false,
+    "loadout": {
+      "primary": [
+        null,
+        null
+      ],
+      "secondary": [
+        "uzi",
+        "uzi:second"
+      ],
+      "hip": "pistol:base"
+    },
+    "warnings": []
+  },
+  {
+    "what": "watchman",
+    "k": 1,
+    "name": "34-watchman-1.png",
+    "weapon": "uzi",
+    "held": 0,
+    "offhand": 0,
+    "stowed": 31,
+    "mg": 78,
+    "vmFilter": false,
+    "akimbo": false,
+    "loadout": {
+      "primary": [
+        null,
+        null
+      ],
+      "secondary": [
+        "uzi",
+        "uzi:second"
+      ],
+      "hip": "pistol:base"
+    },
+    "warnings": []
+  },
+  {
+    "what": "watchman",
+    "k": 2,
+    "name": "35-watchman-2.png",
+    "weapon": "uzi",
+    "held": 0,
+    "offhand": 0,
+    "stowed": 31,
+    "mg": 78,
+    "vmFilter": false,
+    "akimbo": false,
+    "loadout": {
+      "primary": [
+        null,
+        null
+      ],
+      "secondary": [
+        "uzi",
+        "uzi:second"
+      ],
+      "hip": "pistol:base"
+    },
+    "warnings": []
+  },
+  {
+    "what": "watchman-1p",
+    "k": 0,
+    "name": "36-watchman-1p-0.png",
+    "weapon": "uzi",
+    "held": 0,
+    "offhand": 0,
+    "stowed": 31,
+    "mg": 78,
+    "vmFilter": false,
+    "akimbo": false,
+    "loadout": {
+      "primary": [
+        null,
+        null
+      ],
+      "secondary": [
+        "uzi",
+        "uzi:second"
+      ],
+      "hip": "pistol:base"
+    },
+    "warnings": []
+  },
+  {
+    "what": "watchman-1p",
+    "k": 1,
+    "name": "37-watchman-1p-1.png",
+    "weapon": "uzi",
+    "held": 0,
+    "offhand": 0,
+    "stowed": 31,
+    "mg": 78,
+    "vmFilter": false,
+    "akimbo": false,
+    "loadout": {
+      "primary": [
+        null,
+        null
+      ],
+      "secondary": [
+        "uzi",
+        "uzi:second"
+      ],
+      "hip": "pistol:base"
+    },
+    "warnings": []
+  },
+  {
+    "what": "watchman-1p",
+    "k": 2,
+    "name": "38-watchman-1p-2.png",
+    "weapon": "uzi",
+    "held": 0,
+    "offhand": 0,
+    "stowed": 31,
+    "mg": 78,
+    "vmFilter": false,
+    "akimbo": false,
+    "loadout": {
+      "primary": [
+        null,
+        null
+      ],
+      "secondary": [
+        "uzi",
+        "uzi:second"
+      ],
+      "hip": "pistol:base"
+    },
+    "warnings": []
+  },
+  {
+    "what": "watchman-3p",
+    "k": 0,
+    "name": "39-watchman-3p-0.png",
+    "weapon": "uzi",
+    "held": 0,
+    "offhand": 0,
+    "stowed": 31,
+    "mg": 78,
+    "vmFilter": false,
+    "akimbo": false,
+    "loadout": {
+      "primary": [
+        null,
+        null
+      ],
+      "secondary": [
+        "uzi",
+        "uzi:second"
+      ],
+      "hip": "pistol:base"
+    },
+    "warnings": []
+  },
+  {
+    "what": "watchman-3p",
+    "k": 1,
+    "name": "40-watchman-3p-1.png",
+    "weapon": "uzi",
+    "held": 0,
+    "offhand": 0,
+    "stowed": 31,
+    "mg": 78,
+    "vmFilter": false,
+    "akimbo": false,
+    "loadout": {
+      "primary": [
+        null,
+        null
+      ],
+      "secondary": [
+        "uzi",
+        "uzi:second"
+      ],
+      "hip": "pistol:base"
+    },
+    "warnings": []
+  },
+  {
+    "what": "watchman-3p",
+    "k": 2,
+    "name": "41-watchman-3p-2.png",
+    "weapon": "uzi",
+    "held": 0,
+    "offhand": 0,
+    "stowed": 31,
+    "mg": 78,
+    "vmFilter": false,
+    "akimbo": false,
+    "loadout": {
+      "primary": [
+        null,
+        null
+      ],
+      "secondary": [
+        "uzi",
+        "uzi:second"
+      ],
+      "hip": "pistol:base"
+    },
+    "warnings": []
+  }
+]

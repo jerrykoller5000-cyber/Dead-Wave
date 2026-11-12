@@ -55,8 +55,35 @@
     ok(eR < 0.01 && eL < 0.01, 'both wrists on their sockets (' + (eR * 100).toFixed(2) + ', ' + (eL * 100).toFixed(2) + ' cm)');
     // the firing hand's grip channel on the pistol's grip (WEAPON_HOLD.pistol.grip)
     const L = A.r.layout, chan = inView(A.r.wrist, new THREE.Vector3(L.grip[0] - L.wrist[0], L.grip[1] - L.wrist[1], L.grip[2] - L.wrist[2]));
-    const gp = gunAt([0, -0.066, -0.016]);
-    const dc = chan.distanceTo(gp);
+    // CB-311 item (Director OK, --review): the reference is the pistol's grip itself, not a point written down from an old hold
+    // ([0, -0.066, -0.016], which CD-1 pass 2's lower fist sits 2.7 cm under by design). The grip part's axis from its own mesh
+    // (the long axis of its vertices, in the gun's frame), cut to the grip's length; the channel must be within 2 cm of the
+    // nearest point on it (at the hand's height): off the grip, through its side or below its foot still fails. Not VM_FIT.
+    // The held pistol's parts are merged by material when it is built (finishGun), so the grip part is read off a pistol built by
+    // the same builder (studio/weapon-sidearms.js makePistolModel) with the game's own weapon context, only without that merge,
+    // in the model frame gunAt reads (before the in-hand sizing). TT.inspectHostDbg: the inspector's door to the context.
+    const ctx0 = T.inspectHostDbg && T.inspectHostDbg().builders.weaponContext;
+    const { makePistolModel } = await import(new URL('/studio/weapon-sidearms.js', location.origin).href);
+    const freshPistol = ctx0 ? makePistolModel({ ...ctx0(), finishGun: (g) => g }) : null, gripMesh = freshPistol && freshPistol.getObjectByName('pistol grip');
+    let gp = null;
+    if (gripMesh && gripMesh.geometry && gripMesh.geometry.attributes.position) {
+      freshPistol.updateMatrixWorld(true);
+      const toGun = new THREE.Matrix4().multiplyMatrices(new THREE.Matrix4().copy(freshPistol.matrixWorld).invert(), gripMesh.matrixWorld);
+      const P = gripMesh.geometry.attributes.position, pts = [], c = new THREE.Vector3();
+      for (let i = 0; i < P.count; i++) { const v = new THREE.Vector3().fromBufferAttribute(P, i).applyMatrix4(toGun); pts.push(v); c.add(v); }
+      c.multiplyScalar(1 / pts.length);
+      const C = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+      for (const v of pts) { const d = [v.x - c.x, v.y - c.y, v.z - c.z]; for (let r = 0; r < 3; r++) for (let k = 0; k < 3; k++) C[r * 3 + k] += d[r] * d[k]; }
+      let ax = new THREE.Vector3(0, 1, 0);
+      for (let it = 0; it < 50; it++) ax = new THREE.Vector3(C[0] * ax.x + C[1] * ax.y + C[2] * ax.z, C[3] * ax.x + C[4] * ax.y + C[5] * ax.z, C[6] * ax.x + C[7] * ax.y + C[8] * ax.z).normalize();
+      let lo = Infinity, hi = -Infinity; for (const v of pts) { const t = v.clone().sub(c).dot(ax); lo = Math.min(lo, t); hi = Math.max(hi, t); }
+      const A0 = gunAt(c.clone().addScaledVector(ax, lo).toArray()), A1 = gunAt(c.clone().addScaledVector(ax, hi).toArray());
+      const seg = A1.clone().sub(A0), u = Math.max(0, Math.min(1, chan.clone().sub(A0).dot(seg) / seg.lengthSq()));
+      gp = A0.clone().addScaledVector(seg, u);
+      out.push('INFO the pistol grip\'s axis ' + (seg.length() * 100).toFixed(1) + ' cm long; the hand at ' + (u * 100).toFixed(0) + '% of it from ' + (ax.y < 0 ? 'the top' : 'the foot'));
+    }
+    ok(!!gp, 'the pistol\'s grip part is there to measure against (pistol grip)');
+    const dc = gp ? chan.distanceTo(gp) : Infinity;
     // Real renderer only: the stand-in three's arm poses are wrong (tools/realtest.mjs), its own hand 38-46 cm off the grip.
     const real = (() => { const m = new THREE.Matrix4().makeRotationX(0.3), e = m.elements.slice(); m.transpose(); return m.elements[6] === e[9] && e[6] !== e[9]; })();
     (real ? ok : (c, m) => out.push('INFO ' + m + ' (the stand-in three)'))(dc < 0.02, 'the firing hand\'s grip through the pistol\'s grip (' + (dc * 100).toFixed(2) + ' cm)');
@@ -90,7 +117,7 @@
     ok(onScreen > 0 && minD > near * 1.5, 'nothing on screen in front of the near plane (nearest ' + (minD * 100).toFixed(1) + ' cm, ' + meshes + ' meshes)');
     out.push('INFO view gun draws: ' + meshes + ' meshes');
     // at the hip: low right, canted
-    const n1 = vm.ndc(gp), mz = vm.ndc(vm.viewPoint(src.userData.muzzleLocal.clone()));
+    const n1 = vm.ndc(gunAt([0, -0.066, -0.016])), mz = vm.ndc(vm.viewPoint(src.userData.muzzleLocal.clone()));
     ok(n1.x > 0.15 && n1.x < 0.75 && n1.y < -0.3 && n1.y > -0.95 && mz.x > 0.05 && mz.y < 0, 'at the hip the pistol is low right (grip ndc ' + n1.x.toFixed(2) + ', ' + n1.y.toFixed(2) + '; muzzle ' + mz.x.toFixed(2) + ', ' + mz.y.toFixed(2) + ')');
     // AG-168: the firing forearm leaves the view at the right, the support one at the left (they crossed before).
     { const er = vm.ndc(inView(A.r.root, new THREE.Vector3(A.r.layout.wrist[0], 0, A.r.layout.wrist[2]))), el = vm.ndc(inView(A.l.root, new THREE.Vector3(A.l.layout.wrist[0], 0, A.l.layout.wrist[2])));

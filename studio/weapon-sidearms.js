@@ -256,6 +256,141 @@ function magazineTop(T, mesh) {
   src.dispose();
 }
 
+// Across the rear joint the two original rounded skins cross at a different
+// depth in each horizontal row. Split the solids on a common surface there.
+const pistolFrameSkins = new WeakMap();
+function repairPistolCoverBevel(T, cover) {
+  // At the narrow rear end the full bevel crosses itself. Stop its last
+  // ring on the original sidewall, before its top and bottom reverse order.
+  const stop = Math.fround(-.04);
+  const unchanged = splitArtworkRows(T, cover.geometry, [stop], 2);
+  const corner = cover.geometry.attributes.position, tex = cover.geometry.attributes.uv;
+  const outer = .022, bevel = .007, lastX = outer - bevel + bevel*Math.sin(Math.PI/3);
+  const inset = bevel * (1 - .5 * (outer - .0216) / (outer - lastX));
+  for (let k = 0; k < corner.count; k++) {
+    const x = corner.getX(k), y = corner.getY(k);
+    if (Math.abs(Math.abs(x) - outer) > 1e-7 || corner.getZ(k) > -.078) continue;
+    const originY = y < 0 ? .006 : -.004;
+    const height = originY + (y - originY)*inset/bevel, depth = -.0875 + inset;
+    corner.setXYZ(k, Math.sign(x)*.0216, height, depth);
+    tex.setXY(k, depth*4, height*4);
+  }
+  // Keep the long forward bevel and paint coordinates exactly where they were.
+  // The flat side uses the repaired triangulation, matched to the original
+  // bevel edge at the end of the rear joint.
+  const joined = splitArtworkRows(T, cover.geometry, [stop], 2);
+  const p = joined.attributes.position, nrm = joined.attributes.normal, uv = joined.attributes.uv;
+  const oldP = unchanged.attributes.position, oldN = unchanged.attributes.normal, oldUV = unchanged.attributes.uv;
+  const rings = [new Map(), new Map()], positions = [], normals = [], uvs = [];
+  const flat = k => Math.abs(nrm.getY(k)) + Math.abs(nrm.getZ(k)) < 1e-8;
+  for (let i = 0; i < p.count; i += 3) {
+    if (flat(i) && flat(i+1) && flat(i+2)) continue; // the old folded cap
+    for (let k = i; k < i+3; k++) {
+      if (p.getZ(k) >= stop) {
+        p.setXYZ(k,oldP.getX(k),oldP.getY(k),oldP.getZ(k));
+        nrm.setXYZ(k,oldN.getX(k),oldN.getY(k),oldN.getZ(k));
+        uv.setXY(k,oldUV.getX(k),oldUV.getY(k));
+      }
+      positions.push(p.getX(k),p.getY(k),p.getZ(k));
+      normals.push(nrm.getX(k),nrm.getY(k),nrm.getZ(k));
+      uvs.push(uv.getX(k),uv.getY(k));
+    }
+    for (let j = 0; j < 3; j++) {
+      const a = i+j, b = i+(j+1)%3;
+      if (!flat(a) || !flat(b)) continue;
+      const ring = rings[p.getX(a) > 0 ? 1 : 0];
+      const vertex = k => {
+        const xyz = [p.getX(k),p.getY(k),p.getZ(k)], key = xyz.join(',');
+        if (!ring.has(key)) ring.set(key, {xyz, neighbours:[]});
+        return ring.get(key);
+      };
+      const v = vertex(a), w = vertex(b);
+      v.neighbours.push(w); w.neighbours.push(v);
+    }
+  }
+  // The broad side stays flat ahead of the join. Each new endcap follows
+  // the bevel's actual perimeter instead of the two formerly crossing faces.
+  for (const [index, ring] of rings.entries()) {
+    const side = index ? 1 : -1, perimeter = [];
+    const first = ring.values().next().value;
+    let previous, node = first;
+    for (let i = 0; i < ring.size; i++) {
+      if (node.neighbours.length !== 2) throw new Error('Open pistol bevel perimeter');
+      perimeter.push(node.xyz);
+      const next = node.neighbours[0] === previous ? node.neighbours[1] : node.neighbours[0];
+      previous = node; node = next;
+    }
+    if (node !== first) throw new Error('Incomplete pistol bevel perimeter');
+    for (const polygon of [perimeter.filter(v => v[2] <= stop), perimeter.filter(v => v[2] >= stop)]) {
+      const faces = T.ShapeUtils.triangulateShape(polygon.map(v => new T.Vector2(v[2],v[1])), []);
+      for (const ids of faces) {
+        const [a,b,c] = ids.map(i => polygon[i]);
+        const crossX = (b[1]-a[1])*(c[2]-a[2]) - (b[2]-a[2])*(c[1]-a[1]);
+        for (const v of side*crossX > 0 ? [a,b,c] : [a,c,b]) {
+          positions.push(...v); normals.push(side,0,0); uvs.push(v[2]*4,v[1]*4);
+        }
+      }
+    }
+  }
+  unchanged.dispose(); joined.dispose(); cover.geometry.dispose();
+  cover.geometry = new T.BufferGeometry();
+  cover.geometry.setAttribute('position', new T.Float32BufferAttribute(positions,3));
+  cover.geometry.setAttribute('normal', new T.Float32BufferAttribute(normals,3));
+  cover.geometry.setAttribute('uv', new T.Float32BufferAttribute(uvs,2));
+}
+
+function fitPistolFrameSeam(T, cover, tang) {
+  let skins = pistolFrameSkins.get(T);
+  if (!skins) {
+    // [height, depth] along the meeting line of the existing side contours.
+    const rows = [[-.0152,-.0508],[-.0127,-.0524],[-.012,-.05515],[-.0097,-.06895],
+      [-.00235,-.0851],[.002,-.0852],[.00445,-.0871],[.00495,-.0886]]
+      .map(([y,z]) => [Math.fround(y), Math.fround(z)]);
+    const heights = rows.map(r => r[0]);
+    function seam(y) {
+      if (y <= heights[0]) return rows[0][1];
+      for (let i = 1; i < rows.length; i++) {
+        const [y1,z1] = rows[i];
+        if (y <= y1) {
+          const [y0,z0] = rows[i-1];
+          return z0 + (z1-z0) * (y-y0) / (y1-y0);
+        }
+      }
+      return rows.at(-1)[1];
+    }
+    repairPistolCoverBevel(T, cover);
+    skins = [cover, tang].map((mesh, i) => {
+      const sliced = splitArtworkRows(T, mesh.geometry, heights);
+      const p = sliced.attributes.position;
+      for (let j = 0; j < p.count; j++) p.setZ(j, p.getZ(j) - seam(p.getY(j)));
+      // In these coordinates the joint is planar. Split the new closing faces
+      // at the original rows before mapping them back onto the curved joint.
+      const proxy = new T.Mesh(sliced, mesh.material);
+      trimPanelBack(T, proxy, i === 0 ? 1 : -1, 0, 'z');
+      const result = splitArtworkRows(T, proxy.geometry, heights);
+      proxy.geometry.dispose();
+      const {position: pos, normal} = result.attributes;
+      for (let j = 0; j < pos.count; j += 3) {
+        const cap = pos.getZ(j) === 0 && pos.getZ(j+1) === 0 && pos.getZ(j+2) === 0;
+        if (cap) {
+          const ys = [pos.getY(j), pos.getY(j+1), pos.getY(j+2)];
+          const lo = Math.min(...ys), hi = Math.max(...ys);
+          if (hi > lo) {
+            const slope = (seam(hi) - seam(lo)) / (hi - lo);
+            const nz = (i === 0 ? -1 : 1) / Math.hypot(1,slope);
+            for (let k = j; k < j+3; k++) normal.setXYZ(k, 0, -slope*nz, nz);
+          }
+        }
+        for (let k = j; k < j+3; k++) pos.setZ(k, pos.getZ(k) + seam(pos.getY(k)));
+      }
+      result.computeBoundingBox(); result.computeBoundingSphere();
+      return result;
+    });
+    pistolFrameSkins.set(T, skins);
+  }
+  [cover,tang].forEach((mesh, i) => { mesh.geometry.dispose(); mesh.geometry = skins[i]; });
+}
+
 const pistolFinishes = new WeakMap();
 function pistolFinish(body) {
   if (!pistolFinishes.has(body)) {
@@ -329,11 +464,14 @@ export function makePistolModel(ctx) {
   // GB-154: the dust cover runs on under the longer slide to 40 mm short of its front (was 0.17).
   // The cover meets the underside of the upper artwork along one continuous seam.
   // CL-331 (J95): the frame's back 2.5 mm inside the slide's (they were one plane at z -0.09: the flicker on the back)
-  K.slab([[-0.0875, 0.006], [0.294, 0.006], [0.298, 0.000], [0.294, -0.020], [0.112, -0.020], [0.104, -0.016], [0.04, -0.016], [0.026, -0.030], [-0.004, -0.036], [-0.022, -0.020], [-0.07, -0.012], [-0.0875, -0.004]], 0.044, gunPoly, { bevel: 0.007, segs: 3 }).name = 'pistol dust cover';
+  const cover = K.slab([[-0.0875, 0.006], [0.294, 0.006], [0.298, 0.000], [0.294, -0.020], [0.112, -0.020], [0.104, -0.016], [0.04, -0.016], [0.026, -0.030], [-0.004, -0.036], [-0.022, -0.020], [-0.07, -0.012], [-0.0875, -0.004]], 0.044, gunPoly, { bevel: 0.007, segs: 3 });
+  cover.name = 'pistol dust cover';
   // GB-180: a beavertail / tang that sweeps back under the slide's rear and blends down into the grip's back strap.
-  K.slab([[-.060,.006], [-.085,.005], [-.097,.003], [-.100,.002], [-.100,-.002],
+  const tang = K.slab([[-.060,.006], [-.085,.005], [-.097,.003], [-.100,.002], [-.100,-.002],
     [-.096,-.006], [-.084,-.009], [-.073,-.013], [-.062,-.020], [-.048,-.014],
-    [-.036,-.008], [-.026,-.002]], .040, gunPoly, {bevel:.004, segs:3}).name = 'pistol rear tang';
+    [-.036,-.008], [-.026,-.002]], .040, gunPoly, {bevel:.004, segs:3});
+  tang.name = 'pistol rear tang';
+  fitPistolFrameSeam(THREE, cover, tang);
   K.rail(0.1, 0, -0.025, 0.2, null, 0.03);   // GB-180: the accessory rail along the dust cover, its top in the frame
   // GB-177 (pass 2: the guard read as a thin wire): a moulded guard, thicker and wider, its front squared, its back
   // running up into the frame.

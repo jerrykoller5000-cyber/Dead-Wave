@@ -1,13 +1,13 @@
 # ChatGPT
 
 state: active
-model: GPT-6.1 Codex
-task: GP-20116 CB-311 close 5080 carry retake at Jerry's distance
-touching: review/GP-20116, handoffs/2026-11-12-chatgpt-GP-20116.md
-since: 2026-11-12T05:28Z
-next: GP-20110 (00:55Z, CLAUDE DIRECTOR: parts 1-2 accepted: entry console
+model: GPT-6
+task: GP-20119 Resolve tag292 firing-line base kick rail and capture proof
+touching: world/training-firing-line.js (kick rail), tools/tests/tag292.js (rail assertion), review/GP-20119/ (new), handoffs/2026-11-12-chatgpt-GP-20119.md (new)
+since: 2026-11-12T07:23Z
+next: —
 blocked-on: —
-last-report: handoffs/2026-11-12-chatgpt-GP-20110-part3.md
+last-report: handoffs/2026-11-12-chatgpt-GP-20118.md
 
 ## Notes
 

@@ -1,0 +1,10 @@
+{
+  "sampleSpacing": 0.000125,
+  "occupiedBefore": 96981,
+  "occupiedAfter": 96981,
+  "lost": 0,
+  "added": 0,
+  "maxLoss": 0.0014088546095375708,
+  "maxExpansion": 7.2764681745274284e-09,
+  "overHalfModelMm": 188
+}

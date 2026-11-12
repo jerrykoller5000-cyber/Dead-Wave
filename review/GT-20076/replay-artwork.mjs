@@ -49,7 +49,7 @@ export async function originalFlamerMount(page,origin){
 }
 
 export async function replayArtwork(page,origin,path,source) {
-  assert(['/studio/weapon-heavy.js','/studio/weapon-longarms.js','/studio/weapon-sidearms.js','/studio/weapon-optics.js'].includes(path));
+  assert(['/studio/weapon-heavy.js','/studio/weapon-longarms.js','/studio/weapon-sidearms.js','/studio/weapon-optics.js','/studio/weapon-model-hooks.js'].includes(path));
   const body=Buffer.from(source).toString('base64');
   let served=0;
   page.conn.onEvent(msg=>{

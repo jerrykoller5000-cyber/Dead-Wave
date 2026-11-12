@@ -1,0 +1,500 @@
+{
+  "ak-issue": {
+    "rawCoverage": {
+      "receiver": {
+        "faces": 1250,
+        "world": 1250,
+        "eye": 1250,
+        "rack": 1250,
+        "rackPresent": 1250,
+        "absent": 0,
+        "wrong": 0
+      },
+      "factory wood": {
+        "faces": 792,
+        "world": 792,
+        "eye": 792,
+        "rack": 792,
+        "rackPresent": 792,
+        "absent": 0,
+        "wrong": 0
+      },
+      "suppressor shell": {
+        "faces": 328,
+        "world": 328,
+        "eye": 328,
+        "rack": 328,
+        "rackPresent": 328,
+        "absent": 0,
+        "wrong": 0
+      },
+      "light shell": {
+        "faces": 24,
+        "world": 24,
+        "eye": 24,
+        "rack": 24,
+        "rackPresent": 24,
+        "absent": 0,
+        "wrong": 0
+      }
+    },
+    "missing": [],
+    "materials": [
+      {
+        "role": "receiver",
+        "id": "ak",
+        "mapped": true
+      },
+      {
+        "role": "suppressor shell",
+        "id": "ak",
+        "mapped": true
+      },
+      {
+        "role": "suppressor shell",
+        "id": "ak",
+        "mapped": true
+      },
+      {
+        "role": "light shell",
+        "id": "ak",
+        "mapped": true
+      },
+      {
+        "role": "light shell",
+        "id": "ak",
+        "mapped": true
+      },
+      {
+        "role": "heavy barrel",
+        "id": "ak",
+        "mapped": true
+      },
+      {
+        "role": "heavy barrel",
+        "id": "ak",
+        "mapped": true
+      }
+    ],
+    "tags": [
+      [
+        "",
+        "fp-stock",
+        "receiver",
+        264
+      ],
+      [
+        "",
+        "suppressor",
+        "suppressor shell",
+        648
+      ],
+      [
+        "",
+        "suppressor",
+        "suppressor shell",
+        336
+      ],
+      [
+        "railClamp",
+        "laserLightUnit",
+        "light shell",
+        36
+      ],
+      [
+        "moduleShell",
+        "laserLightUnit",
+        "light shell",
+        36
+      ],
+      [
+        "",
+        "",
+        "receiver",
+        3486
+      ],
+      [
+        "",
+        "heavyBarrelLook",
+        "heavy barrel",
+        168
+      ],
+      [
+        "",
+        "heavyBarrelLook",
+        "heavy barrel",
+        168
+      ],
+      [
+        "",
+        "heavyBarrelLook",
+        "heavy barrel",
+        168
+      ],
+      [
+        "",
+        "heavyBarrelLook",
+        "heavy barrel",
+        168
+      ],
+      [
+        "",
+        "heavyBarrelLook",
+        "heavy barrel",
+        168
+      ]
+    ],
+    "hasOptic": false
+  },
+  "ak-fitted": {
+    "rawCoverage": {
+      "receiver": {
+        "faces": 1250,
+        "world": 1250,
+        "eye": 1250,
+        "rack": 1250,
+        "rackPresent": 1250,
+        "absent": 0,
+        "wrong": 0
+      },
+      "rail": {
+        "faces": 284,
+        "world": 284,
+        "eye": 284,
+        "rack": 284,
+        "rackPresent": 284,
+        "absent": 0,
+        "wrong": 0
+      },
+      "factory wood": {
+        "faces": 792,
+        "world": 792,
+        "eye": 792,
+        "rack": 792,
+        "rackPresent": 792,
+        "absent": 0,
+        "wrong": 0
+      },
+      "suppressor shell": {
+        "faces": 328,
+        "world": 328,
+        "eye": 328,
+        "rack": 328,
+        "rackPresent": 328,
+        "absent": 0,
+        "wrong": 0
+      },
+      "light shell": {
+        "faces": 24,
+        "world": 24,
+        "eye": 24,
+        "rack": 24,
+        "rackPresent": 24,
+        "absent": 0,
+        "wrong": 0
+      }
+    },
+    "missing": [],
+    "materials": [
+      {
+        "role": "receiver",
+        "id": "ak",
+        "mapped": true
+      },
+      {
+        "role": "suppressor shell",
+        "id": "ak",
+        "mapped": true
+      },
+      {
+        "role": "suppressor shell",
+        "id": "ak",
+        "mapped": true
+      },
+      {
+        "role": "light shell",
+        "id": "ak",
+        "mapped": true
+      },
+      {
+        "role": "light shell",
+        "id": "ak",
+        "mapped": true
+      },
+      {
+        "role": "heavy barrel",
+        "id": "ak",
+        "mapped": true
+      },
+      {
+        "role": "heavy barrel",
+        "id": "ak",
+        "mapped": true
+      },
+      {
+        "role": "rail",
+        "id": "ak",
+        "mapped": true
+      },
+      {
+        "role": "rail",
+        "id": "ak",
+        "mapped": true
+      },
+      {
+        "role": "rail",
+        "id": "ak",
+        "mapped": true
+      },
+      {
+        "role": "optic shell",
+        "id": "ak",
+        "mapped": true
+      },
+      {
+        "role": "optic shell",
+        "id": "ak",
+        "mapped": true
+      }
+    ],
+    "tags": [
+      [
+        "KR-7 bracket web",
+        "side optic bracket",
+        "rail",
+        564
+      ],
+      [
+        "",
+        "side optic bracket",
+        "rail",
+        288
+      ],
+      [
+        "",
+        "fp-stock",
+        "receiver",
+        264
+      ],
+      [
+        "",
+        "suppressor",
+        "suppressor shell",
+        648
+      ],
+      [
+        "",
+        "suppressor",
+        "suppressor shell",
+        336
+      ],
+      [
+        "railClamp",
+        "laserLightUnit",
+        "light shell",
+        36
+      ],
+      [
+        "moduleShell",
+        "laserLightUnit",
+        "light shell",
+        36
+      ],
+      [
+        "",
+        "",
+        "receiver",
+        3486
+      ],
+      [
+        "",
+        "heavyBarrelLook",
+        "heavy barrel",
+        168
+      ],
+      [
+        "",
+        "heavyBarrelLook",
+        "heavy barrel",
+        168
+      ],
+      [
+        "",
+        "heavyBarrelLook",
+        "heavy barrel",
+        168
+      ],
+      [
+        "",
+        "heavyBarrelLook",
+        "heavy barrel",
+        168
+      ],
+      [
+        "",
+        "heavyBarrelLook",
+        "heavy barrel",
+        168
+      ],
+      [
+        "",
+        "fitted-optic-acog",
+        "rail",
+        144
+      ],
+      [
+        "",
+        "fitted-optic-acog",
+        "rail",
+        144
+      ],
+      [
+        "",
+        "fitted-optic-acog",
+        "rail",
+        36
+      ],
+      [
+        "",
+        "fitted-optic-acog",
+        "rail",
+        144
+      ],
+      [
+        "",
+        "fitted-optic-acog",
+        "rail",
+        36
+      ],
+      [
+        "",
+        "fitted-optic-acog",
+        "rail",
+        144
+      ],
+      [
+        "",
+        "fitted-optic-acog",
+        "rail",
+        36
+      ],
+      [
+        "",
+        "fitted-optic-acog",
+        "rail",
+        144
+      ],
+      [
+        "",
+        "fitted-optic-acog",
+        "rail",
+        144
+      ],
+      [
+        "chamfered alloy clamp foot",
+        "optic.acog",
+        "optic shell",
+        84
+      ],
+      [
+        "painted riser",
+        "optic.acog",
+        "optic shell",
+        84
+      ],
+      [
+        "TA51 clamp and interface studs",
+        "optic.acog",
+        "optic shell",
+        84
+      ],
+      [
+        "forged lower saddle",
+        "optic.acog",
+        "optic shell",
+        66
+      ],
+      [
+        "forged four-power optical body",
+        "optic.acog",
+        "optic shell",
+        144
+      ],
+      [
+        "squared front objective",
+        "optic.acog",
+        "optic shell",
+        144
+      ],
+      [
+        "piggyback sight saddle",
+        "optic.acog",
+        "optic shell",
+        66
+      ],
+      [
+        "top RMR mounting plate",
+        "optic.acog",
+        "optic shell",
+        84
+      ],
+      [
+        "chamfered alloy clamp foot",
+        "top RMR",
+        "optic shell",
+        84
+      ],
+      [
+        "painted riser",
+        "top RMR",
+        "optic shell",
+        84
+      ],
+      [
+        "bottom battery compartment and forged base",
+        "top RMR",
+        "optic shell",
+        84
+      ],
+      [
+        "sloped protective ear",
+        "top RMR",
+        "optic shell",
+        84
+      ],
+      [
+        "sloped protective ear",
+        "top RMR",
+        "optic shell",
+        84
+      ],
+      [
+        "thick front hood bridge",
+        "top RMR",
+        "optic shell",
+        84
+      ]
+    ],
+    "hasOptic": true
+  },
+  "shotgun-issue": {
+    "visible": false,
+    "faces": 0,
+    "world": 0,
+    "eye": 0,
+    "rack": 0,
+    "rackPresent": 0
+  },
+  "shotgun-fitted": {
+    "visible": true,
+    "faces": 96,
+    "world": 96,
+    "eye": 0,
+    "rack": 96,
+    "rackPresent": 96,
+    "carryTubeVisible": true,
+    "sharedModelFaces": 9022,
+    "totalModelFaces": 10467,
+    "carryFaces": 96
+  }
+}

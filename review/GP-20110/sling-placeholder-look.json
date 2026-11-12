@@ -1,0 +1,71 @@
+{
+  "camera": {
+    "x": -24.2,
+    "y": -196.8,
+    "z": -638.6,
+    "tx": -25,
+    "ty": -198.95,
+    "tz": -640,
+    "fov": 32
+  },
+  "noGuns": {
+    "slung": [
+      null,
+      null
+    ],
+    "slings": [
+      {
+        "index": 0,
+        "kind": null,
+        "gun": false,
+        "visible": false,
+        "signature": null,
+        "type": "BufferGeometry",
+        "positions": 228,
+        "placeholder": false,
+        "clips": 2
+      },
+      {
+        "index": 1,
+        "kind": null,
+        "gun": false,
+        "visible": false,
+        "signature": null,
+        "type": "BufferGeometry",
+        "positions": 228,
+        "placeholder": false,
+        "clips": 2
+      }
+    ]
+  },
+  "allGuns": {
+    "slung": [
+      "minigun",
+      "m4"
+    ],
+    "slings": [
+      {
+        "index": 0,
+        "kind": "minigun",
+        "gun": true,
+        "visible": true,
+        "signature": "minigun:true:0.460424932963589,-0.055517733252309236,0,0,9.653944310628049e-18,5.148770299001626e-17,-0.46376,0,0.055517733252309236,0.46042493296358905,5.148770299001626e-17,0,0.3650480895071415,0.08556349911310299,-0.23591065670096875,1",
+        "type": "BufferGeometry",
+        "positions": 228,
+        "placeholder": false,
+        "clips": 2
+      },
+      {
+        "index": 1,
+        "kind": "m4",
+        "gun": true,
+        "visible": true,
+        "signature": "m4:true:0.6692479060008355,0.0806974689356347,0,0,-1.403243298087733e-17,7.483964256467911e-17,-0.6740955727336599,0,-0.0806974689356347,0.6692479060008356,7.483964256467911e-17,0,-0.2610040194285125,0.0359012223553517,-0.2905511605660046,1",
+        "type": "BufferGeometry",
+        "positions": 228,
+        "placeholder": false,
+        "clips": 2
+      }
+    ]
+  }
+}

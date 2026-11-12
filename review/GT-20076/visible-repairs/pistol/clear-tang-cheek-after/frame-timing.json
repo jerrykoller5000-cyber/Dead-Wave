@@ -1,0 +1,41 @@
+{
+  "indexSha": "bdb277a2fe20179569263f090d41fe9291527ac4f1482f8674aac638669b0821",
+  "reverse": false,
+  "before": {
+    "hash": "66282447",
+    "gun": "pistol",
+    "eye": true,
+    "backend": "WebGPUBackend",
+    "frames": {
+      "count": 150,
+      "p50": 16.69999999999709,
+      "p95": 16.80000000000291
+    },
+    "gpu": {
+      "count": 0,
+      "p50": null,
+      "p95": null
+    },
+    "seamBuildMs": []
+  },
+  "after": {
+    "hash": "1d85c08e",
+    "gun": "pistol",
+    "eye": true,
+    "backend": "WebGPUBackend",
+    "frames": {
+      "count": 150,
+      "p50": 16.69999999999709,
+      "p95": 16.80000000000291
+    },
+    "gpu": {
+      "count": 0,
+      "p50": null,
+      "p95": null
+    },
+    "seamBuildMs": [
+      18,
+      0
+    ]
+  }
+}

@@ -2,15 +2,27 @@
 
 state: active
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: CD-8 J142d/e: the pistol's support thumb forward along the frame and the revolver's support hand wrapped round the firing fist, first person (cloud first)
-touching: game/viewmodel-fit.js, studio/hand-contacts.js, tools/handfit/, game/viewmodel.js (VM_SUPPORT_ELBOW)
-since: 2026-11-12T03:50Z
-next: CD-8 J142d/e (Jerry, 02:35Z): the support hand. For the fresh Cla
+task: CD-1 the GW-4 fist refit on GT-20090 (trigger 15 gun mm back), then the Wasp/AA-12/sniper what-ifs (cloud)
+touching: game/viewmodel-fit.js, studio/hand-contacts.js, tools/handfit/
+since: 2026-11-12T06:05Z
+next: CD-1 (15:06Z: a fresh Claude 1 from 15:08Z: the GW-4 thumb with t
 blocked-on: —
-last-report: handoffs/2026-11-12-claude4-CD-1-fixes6.md
+last-report: handoffs/2026-11-12-claude4-CD-8.md
 
 ## Notes
 - **FIRST, from CLAUDE DIRECTOR (16:07Z):** two Claude 1 sessions are running. The OLD one (checked out, 'answering requests only'): stop, answer nothing, schedule no more check-ins. The FRESH one (IN 15:12Z): you take every request, incl. vmMat (low) and Claude 5's CE-2 fists (middle/ring fingers through the GW-4/Wasp grips), and note every 15 min.
+
+### Where things stand (12 Nov 06:10Z, session 8: handoffs CD-1-fixes6, CD-8-pistol, CD-8)
+- LANDED: CD-8 (VM_FIT.pistol.l 05:20Z, revolver.l 06:05Z), for review. CD-1 fixes6: GW-4/Wasp fists can't rise (analysis only).
+- 06:25Z LANDED + accepted: GW-4 fist on GT-20090 (fixes7; Claude 5 to re-solve VM_TRIGGER.m4, suggested rest [0.45,1,0.2,0.35]).
+- 06:50Z sent to the director: Wasp (no small GT works: knuckle level with the guard bar; layout/display-scale call), AA-12 guard
+  GT (Claude 5's 2-4 mm), sniper (9 gun mm in front of the blade vs ~28: layout GT). Waiting on the director for those.
+- AK (tcl334c ak 2.3): the fit's index tip in the trigger; between the blade and the magazine every manual index tweak stays 1.5+ mm
+  in one or the other (c4/posechk3.py). Best handled as Claude 5's VM_TRIGGER.ak (no entry yet) or a fist move; not done.
+- Tools new: gun/gungrip4.mjs (THT/THM/THDIR thumb targets, MCPT, GMARG margin, FREE, B2S/B2L/AL), gun/thumbfwd.mjs, gun/idxmove4.mjs, c4/movechk.py.
+- Lessons: gungrip "move" moves the hand by -move (the field is sampled at p - d). A free twist (pistol l) re-rolls the drawn hand to the
+  elbow: re-export, then solve the fingers only (FREE, no move) on a field from the drawn export. sdf jobs >10 min: run with nohup.
+- Cloud rebuild: tars in _DELETE ME (extra, 1d, img, deltas ... 0236) into /home/claude/gs306; links per README layout; pip trimesh rtree.
 
 ### Where things stand (12 Nov 02:00Z, session 7: handoffs/2026-11-12-claude4-CD-1-fixes5.md)
 - LANDED 01:50Z: the revolver fist on GT-20088/88b (fit's index pad 2.7 gun mm right of the blade's centre, clean), the AA-12 fist

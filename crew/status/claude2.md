@@ -2,31 +2,28 @@
 
 state: active
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: CB-311 J142a: the gear on his back (the shouldered Watchman MG?): find it and fix it with its art owner
-touching: index.html (showCarried, CARRY_M240, carried-m240)
-since: 2026-11-12T03:55Z
-next: CB-309 the gate's reds in my lane: t218 (carrier pouch fixture; the
+task: CD-8 third-person check: the support thumb on the pistol and the support hand on the revolver (J142d/e)
+touching: review/CD-8/tp-hands.mjs (new)
+since: 2026-11-12T07:00Z
+next: CB-311 J142a (Jerry, 02:35Z, with a picture): the gear on his back.
 blocked-on: —
-last-report: handoffs/2026-11-12-claude2-CB-309.md
+last-report: handoffs/2026-11-12-claude2-CB-312.md
 
 ## Notes
 
-### Where things stand (claude2, fresh session from 18:40Z, Opus 5.5; 21:3xZ)
-- Done this session: t277 (the scope's real centre line from its lenses; aimed, the eye 1.00 mm off it, the line at screen
-  centre; 45/0). CB-308 (t213: the shouldered check waits for the 0.58 s lift, 0.17 m settled; case colour read as shown,
-  sRGB) accepted. CB-307's bolt hand: in third person the firing hand works the sniper's bolt (index.html holdShoulderGun +
-  sniperKnobWorld, SNIPER_KNOB_HAND keeps the fist out of the scope); t221 32/0 (firing hand on the knob, support on the
-  forend, 0 mm into the scope). Landed on the PC 21:2xZ. Pictures: review/CB-307/sheet-bolt-*.jpg (after re-rendered final).
-- 22:1xZ: CB-307 accepted; CB-290's arms half out (tcb290/tcb290b + arms-clip.js, 13/0 each). NOW: the Director's full
-  suite on the PC tree of 22:03Z in the cloud (one worker, ~391 tests, ~13 h): /home/claude/full/drive.sh, resumable,
-  results per test in /home/claude/full/res/<name>.log (a lost container means re-staging Claude outputs/gate2211/*.tgz
-  into /home/claude/g). Compare each red with the PC's crew/tests.json as of 22:08Z (baseline: 5972 pass / 44 fail),
-  list the NEW reds with the card and owner that caused each, send each owner its own, tests-to-fix vs game. Then CB-290's rest.
-- Pictures in the cloud: real time only (a shot each, the cycle held at its moment from inside the page). Frame-stepped
-  pictures (flightHold + stepFrame) draw the arms from before the hold. review/CB-307/bolt307.mjs is the pattern.
-  timeout >= 3000 s for a two-phase set (each phase ~25 min at 4 fps); the turn must stay alive while it runs.
-- Cloud copy: Claude outputs/cb307s2/cloud-src*.tgz (PC 18:39Z) in /home/claude/cb; patches in Claude outputs/cb307s2/.
-- No 5080 looks from Antigravity (D-162): cloud captures, four lights, same cameras.
+### Where things stand (claude2, fresh session from 03:55Z, Opus 5.5; 07:2xZ)
+- Done: CB-310 filmstrip (review/CB-310/strip-*.jpg, accepted, sent to Jerry). CB-312 test fixes landed, out for review:
+  fakethree material clone owns its userData (t334 now 21/5: ChatGPT 2's AK/shotgun-tube paint, GT-20079), tag281, tag292
+  (43/1 real firing-line red: Antigravity), tcl281 (grip axis via TT.inspectHostDbg + makePistolModel without finishGun),
+  t182 (game-time wait), core/skin-merge.js proxy normals. Handoffs CB-310, CB-312.
+- CB-311 (Jerry's gear cage) OPEN: every gun missing in his 5080 shot (straps, pack, shells left). Not reproducible in the
+  cloud (WebGL) by any carry path; ChatGPT runs review/CB-311/watch311.mjs on the 5080 (lent, GP-20117). Scripts in review/CB-311.
+- CD-8 3P check done: review/CD-8/tp-hands-before.jpg (pistol thumb over the frame top, revolver fist low on the heel);
+  asked the Director whether to fix now (index.html support-hand holds) or after Claude 1's 1P lands.
+- Queue after: t228 (support fist along forends, chainsaw hand), CB-290 (tcb290c).
+- Cloud copy: Claude outputs/cb311/cloud-src.tgz + intro.tgz (PC tree 03:55Z) in /home/claude/cb. Run: CHROME=/usr/bin/google-chrome
+  CHROME_ARGS=--no-sandbox node tools/game-test-slot.mjs run claude2 <task> --checks <x> -- node <script> (a page load ~5 min).
+  Stepped pictures (flightHold + stepFrame) draw fine for legs (review/CB-310/stairs310.mjs). WebGPU in the cloud draws nothing.
 
 ### Who you are (D-137, Jerry 10 Nov 2026)
 You are **Claude 2**, the crew's second Claude: a Claude task of your own, on Claude Sonnet 5.5 (Extra). You took

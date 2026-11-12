@@ -1,21 +1,26 @@
 # Claude 3
 
-state: active
+state: idle
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: CC-343 part 3: stairs crouch-walk up, deck edge crouched, step tuned to treads at half speed (J141)
-touching: index.html (legs + CROUCH/FOOT), studio/marine-body.js, studio/marine-turn.js
-since: 2026-11-12T03:21Z
-next: CC-343 (15:06Z: Jerry OK'd fresh sessions (15:03Z): back to Claude
+task: —
+touching: —
+since: 2026-11-12T06:13Z
+next: CC-343 (15:06Z: Jerry OK'd fresh sessions (15:03Z): back to Claude 
 blocked-on: —
-last-report: handoffs/2026-11-12-claude3-CC-343f.md
+last-report: handoffs/2026-11-12-claude3-CC-343g.md
 
 ## Notes
 
-### Session 8: context nearly full, needs a new session (03:12Z)
-- Fresh session: build a NEW cloud copy (the PC now has CB-310 STAIR_SPEED_SCALE 0.5 and my CC-343f guard), then
-  (1) the crouch-walk-up 18.5-20 mm red: the clampBodyPose (CB-291) hip-flex suspect (see below); (2) the stairs step
-  tuned to the treads at half speed, tcc343b at walk and sprint, a side filmstrip for Jerry; (3) the kit's J128 measure.
-- Claude 2 FYI (requests.md 14616): with CB-310 alone tcc343b stays 30/7 (values moved); mine was measured without it.
+### Session 9 (fresh, 03:20Z-06:15Z, Opus 5.5)
+- LANDED 06:12Z CC-343 part 3 / J141 (handoffs/2026-11-12-claude3-CC-343g.md; Claude outputs/CC-343g/patch343h,j,k,l.py):
+  tcc343b 34/3 -> 36/1. The stairs step locked to the treads (stairStep, STAIR_CADENCE_MAX 22: 2 treads a step walking,
+  3 sprinting, 1 crouched); kneeRoom/hipRoom after footGuard (crouch-walk up was the KNEE 150 deg clamp, not the hip);
+  sprint on a flight keeps a boot down; footSoleGap 12 points (a toe on a nosing).
+- LEFT: tcc343b "deck edge, crouched, facing off" (rear ball boot, toe past the edge, heel 3.5 cm up). A step-back in the
+  crouch IK (FOOT_G.toeBack, patch343i, NOT landed) barely moved it: suspect studio/marine-turn.js (crouched still, it
+  re-lays the boots); probe it there next. Then the kit's J128 (item 2).
+- Cloud: tzc3b2.js (tcc343b + per-frame log), tzc3film.js (stairs dumps for c3render), tzc3all/cw/dk/wd probes. Run with
+  DW_CHECK_MS=900000 (180 s limit times out tcc343b). Kill the old run-all (PID) before a new one or the slot refuses.
 
 ### Where things stand (12 Nov 02:40Z, session 8, Opus 5.5)
 - LANDED 00:54Z tcc341's last red (handoffs/2026-11-12-claude3-CC-343e.md): tcc341 16/0.

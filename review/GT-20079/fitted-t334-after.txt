@@ -1,0 +1,26 @@
+PASS m4: several distinct painted surfaces (13)
+PASS m4: paint map and dielectric finish on every registered material
+PASS m4: eligible gun meshes share one camo map and UVs (14, leaks 0)
+PASS m4: excluded surfaces stay out of the paint registry (21)
+PASS m4: fitted can shell and trim take the same camo (2)
+PASS m4: suppressor bore remains bare
+PASS m4: sampled UVs match the gun-root 0.42 m box projection (42, bad 0)
+PASS ak: several distinct painted surfaces (12)
+PASS ak: paint map and dielectric finish on every registered material
+PASS ak: eligible gun meshes share one camo map and UVs (36, leaks 0)
+PASS ak: excluded surfaces stay out of the paint registry (37)
+PASS ak: fitted can shell and trim take the same camo (2)
+PASS ak: suppressor bore remains bare
+PASS ak: sampled UVs match the gun-root 0.42 m box projection (72, bad 0)
+PASS offhand copy shares the Uzi paint materials (15)
+PASS m4: first-person gun settled
+PASS m4: first-person copy mirrors the whole-gun camo (19)
+PASS m4: first-person fitted can carries camo
+PASS ak: first-person gun settled
+PASS ak: first-person copy mirrors the whole-gun camo (13)
+PASS ak: first-person fitted can carries camo
+PASS slung copy shares M4 paint materials (16)
+PASS rack copy shares M4 paint and root UVs (13)
+PASS new fitted M4 heavy sleeve is registered for camo (5)
+FAIL new fitted shotgun tube is registered for camo (1)
+PASS unselecting camo restores issue colours and surface response

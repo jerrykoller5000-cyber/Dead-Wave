@@ -29,6 +29,8 @@ const batches={
   '--tail-views':['clear-tail-views-',true,[['flamer',['hip','aimed','held-right-open']]]],
   '--port-sight':['clear-port-sight-',true,[['uzi',['hip','held-right-open']],['m4',['hip','aimed','held-right-open']]]],
   '--scope-eye':['clear-scope-eye-',true,[['sniper',['hip','aim-entry']]]],
+  '--nose-arch':['clear-nose-arch-',true,[['chainsaw',['hip','held-right-open','held-left-open']],['minigun',['aimed','hip','held-left-open']]]],
+  '--tang-cheek':['clear-tang-cheek-',true,[['pistol',['hip','aimed','held-right-open']],['sniper',['hip','rack','held-left-open']]]],
   '--plate-ribs':['clear-plate-ribs-',true,[['shotgun',['hip','held-right-open']],['sniper',['hip','held-left-open','rack']]]],
   '--lug-vents':['clear-lug-vents-',true,[['revolver',['hip','held-right-open']],['chainsaw',['hip','held-right-open','held-left-open']]]],
   '--handle-optic':['clear-handle-optic-',true,[['chainsaw',['aimed','hip','held-right-open']],['sniper',['rack','aimed','held-right-open']]]],
@@ -62,6 +64,27 @@ try{
       await page.evaluate('fetch('+JSON.stringify(source)+').then(r=>r.json()).then(c=>{window.recordedArtViews=c;return true})');
     }
     await page.evaluate('views.equip('+JSON.stringify(id)+')');
+    if(batch==='--nose-arch' && phase==='after'){
+      const previous=JSON.parse(await readFile(new URL('./catalog-fix-tang-cheek-final-caps/audit.json',import.meta.url),'utf8'));
+      const result=await page.evaluate("import('/review/GT-20076/nose-arch-proof.mjs').then(m=>m.checkNoseArch(TT,"+JSON.stringify(id)+","+JSON.stringify(previous[id].artworkFingerprint)+"))",120000);
+      await save(new URL('nose-arch-proof.json',dir),JSON.stringify(result,null,2)+'\n');
+      console.log('PASS complete prior artwork, exposed circular surfaces and supports',id,result);
+    }
+    if(batch==='--tang-cheek' && id==='pistol' && process.argv.includes('--inspect-curve')){
+      const meshes=await page.evaluate("import('/review/GT-20076/tang-cheek-proof.mjs').then(m=>m.inspectFrameMeshes(TT))");
+      await save(new URL('frame-curve.json',dir),JSON.stringify(meshes)+'\n');
+    }
+    if(batch==='--tang-cheek' && id==='pistol' && process.argv.includes('--inspect-partition')){
+      const report=await page.evaluate("import('/review/GT-20076/tang-cheek-proof.mjs').then(m=>m.inspectFramePartition(TT))");
+      await save(new URL('frame-partition.json',dir),JSON.stringify(report)+'\n');
+      console.log('Native frame samples and candidate join planes',report.count,report.shortlist.map(rows=>rows[0]));continue;
+    }
+    if(batch==='--tang-cheek' && phase==='after'){
+      const previous=JSON.parse(await readFile(new URL('./catalog-fix-plate-ribs/audit.json',import.meta.url),'utf8'));
+      const result=await page.evaluate("import('/review/GT-20076/tang-cheek-proof.mjs').then(m=>m.checkTangCheek(TT,"+JSON.stringify(id)+","+JSON.stringify(previous[id].artworkFingerprint)+"))",120000);
+      await save(new URL('tang-cheek-proof.json',dir),JSON.stringify(result,null,2)+'\n');
+      console.log('PASS restored baseline and fitted join',id,result);
+    }
     if(batch==='--plate-ribs' && phase==='after'){
       const previous=JSON.parse(await readFile(new URL('./catalog-fix-breacher-front-guard-blend/audit.json',import.meta.url),'utf8'));
       const result=await page.evaluate("import('/review/GT-20076/plate-rib-proof.mjs').then(m=>m.checkPlateRibs(TT,"+JSON.stringify(id)+","+JSON.stringify(previous[id].artworkFingerprint)+"))",120000);

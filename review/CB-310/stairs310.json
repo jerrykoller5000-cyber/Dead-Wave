@@ -1,0 +1,1676 @@
+{
+  "before": {
+    "setup": {
+      "ok": true,
+      "cx": 12,
+      "cz": 12,
+      "half": 1.02,
+      "g": -3.0229110717773438,
+      "scale": 1
+    },
+    "runs": {
+      "walk-up": {
+        "start": {
+          "z0": 8.58,
+          "y": -3.0229110717773438,
+          "cam": 0.02
+        },
+        "rows": [
+          {
+            "t": 0.1,
+            "x": 0.045,
+            "y": 0,
+            "z": -3.128,
+            "v": 4.5,
+            "w": 0,
+            "on": false,
+            "name": "before-walk-up-00.png"
+          },
+          {
+            "t": 0.2,
+            "x": 0.066,
+            "y": 0,
+            "z": -2.547,
+            "v": 6.62,
+            "w": 0,
+            "on": false,
+            "name": "before-walk-up-01.png"
+          },
+          {
+            "t": 0.3,
+            "x": 0.072,
+            "y": 0,
+            "z": -1.873,
+            "v": 7.21,
+            "w": 0,
+            "on": false,
+            "name": "before-walk-up-02.png"
+          },
+          {
+            "t": 0.4,
+            "x": 0.074,
+            "y": 0,
+            "z": -1.174,
+            "v": 7.36,
+            "w": 0.67,
+            "on": false,
+            "name": "before-walk-up-03.png"
+          },
+          {
+            "t": 0.5,
+            "x": 0.074,
+            "y": 0.589,
+            "z": -0.47,
+            "v": 7.39,
+            "w": 1,
+            "on": true,
+            "name": "before-walk-up-04.png"
+          },
+          {
+            "t": 0.6,
+            "x": 0.074,
+            "y": 1.28,
+            "z": 0.235,
+            "v": 7.4,
+            "w": 1,
+            "on": true,
+            "name": "before-walk-up-05.png"
+          },
+          {
+            "t": 0.7,
+            "x": 0.074,
+            "y": 1.972,
+            "z": 0.94,
+            "v": 7.4,
+            "w": 1,
+            "on": true,
+            "name": "before-walk-up-06.png"
+          },
+          {
+            "t": 0.8,
+            "x": 0.074,
+            "y": 0,
+            "z": 1.675,
+            "v": 7.4,
+            "w": 0.56,
+            "on": false,
+            "name": "before-walk-up-07.png"
+          },
+          {
+            "t": 0.9,
+            "x": 0.074,
+            "y": 0,
+            "z": 2.381,
+            "v": 7.4,
+            "w": 0,
+            "on": false,
+            "name": "before-walk-up-08.png"
+          },
+          {
+            "t": 1,
+            "x": 0.074,
+            "y": 0,
+            "z": 3.087,
+            "v": 7.4,
+            "w": 0,
+            "on": false,
+            "name": "before-walk-up-09.png"
+          },
+          {
+            "t": 1.1,
+            "x": 0.074,
+            "y": 0,
+            "z": 3.792,
+            "v": 7.4,
+            "w": 0,
+            "on": false,
+            "name": "before-walk-up-10.png"
+          },
+          {
+            "t": 1.2,
+            "x": 0.074,
+            "y": 0,
+            "z": 4.498,
+            "v": 7.4,
+            "w": 0,
+            "on": false,
+            "name": "before-walk-up-11.png"
+          },
+          {
+            "t": 1.3,
+            "x": 0.074,
+            "y": 0,
+            "z": 5.203,
+            "v": 7.4,
+            "w": 0,
+            "on": false,
+            "name": "before-walk-up-12.png"
+          },
+          {
+            "t": 1.4,
+            "x": 0.074,
+            "y": 0,
+            "z": 5.909,
+            "v": 7.4,
+            "w": 0,
+            "on": false,
+            "name": "before-walk-up-13.png"
+          },
+          {
+            "t": 1.5,
+            "x": 0.074,
+            "y": 0,
+            "z": 6.615,
+            "v": 7.4,
+            "w": 0,
+            "on": false,
+            "name": "before-walk-up-14.png"
+          },
+          {
+            "t": 1.6,
+            "x": 0.074,
+            "y": 0,
+            "z": 7.32,
+            "v": 7.4,
+            "w": 0,
+            "on": false,
+            "name": "before-walk-up-15.png"
+          },
+          {
+            "t": 1.7,
+            "x": 0.074,
+            "y": 0,
+            "z": 8.026,
+            "v": 7.4,
+            "w": 0,
+            "on": false,
+            "name": "before-walk-up-16.png"
+          },
+          {
+            "t": 1.8,
+            "x": 0.074,
+            "y": 0,
+            "z": 8.732,
+            "v": 7.4,
+            "w": 0,
+            "on": false,
+            "name": "before-walk-up-17.png"
+          }
+        ]
+      },
+      "walk-down": {
+        "start": {
+          "z0": 12.87,
+          "y": -1.1199698953067565,
+          "cam": 3.11
+        },
+        "rows": [
+          {
+            "t": 0.1,
+            "x": 0,
+            "y": 1.603,
+            "z": 0.564,
+            "v": 4.5,
+            "w": 1,
+            "on": true,
+            "name": "before-walk-down-00.png"
+          },
+          {
+            "t": 0.2,
+            "x": 0,
+            "y": 1.006,
+            "z": -0.045,
+            "v": 6.62,
+            "w": 1,
+            "on": true,
+            "name": "before-walk-down-01.png"
+          },
+          {
+            "t": 0.3,
+            "x": 0,
+            "y": 0.313,
+            "z": -0.752,
+            "v": 7.21,
+            "w": 1,
+            "on": true,
+            "name": "before-walk-down-02.png"
+          },
+          {
+            "t": 0.4,
+            "x": 0,
+            "y": 0,
+            "z": -1.484,
+            "v": 7.36,
+            "w": 0.78,
+            "on": false,
+            "name": "before-walk-down-03.png"
+          },
+          {
+            "t": 0.5,
+            "x": 0,
+            "y": 0,
+            "z": -2.222,
+            "v": 7.39,
+            "w": 0.11,
+            "on": false,
+            "name": "before-walk-down-04.png"
+          },
+          {
+            "t": 0.6,
+            "x": 0,
+            "y": 0,
+            "z": -2.962,
+            "v": 7.4,
+            "w": 0,
+            "on": false,
+            "name": "before-walk-down-05.png"
+          },
+          {
+            "t": 0.7,
+            "x": 0,
+            "y": 0,
+            "z": -3.702,
+            "v": 7.4,
+            "w": 0,
+            "on": false,
+            "name": "before-walk-down-06.png"
+          },
+          {
+            "t": 0.8,
+            "x": 0,
+            "y": 0,
+            "z": -4.442,
+            "v": 7.4,
+            "w": 0,
+            "on": false,
+            "name": "before-walk-down-07.png"
+          },
+          {
+            "t": 0.9,
+            "x": 0,
+            "y": 0,
+            "z": -5.182,
+            "v": 7.4,
+            "w": 0,
+            "on": false,
+            "name": "before-walk-down-08.png"
+          },
+          {
+            "t": 1,
+            "x": 0,
+            "y": 0,
+            "z": -5.922,
+            "v": 7.4,
+            "w": 0,
+            "on": false,
+            "name": "before-walk-down-09.png"
+          },
+          {
+            "t": 1.1,
+            "x": 0,
+            "y": 0,
+            "z": -6.662,
+            "v": 7.4,
+            "w": 0,
+            "on": false,
+            "name": "before-walk-down-10.png"
+          },
+          {
+            "t": 1.2,
+            "x": 0,
+            "y": 0,
+            "z": -7.402,
+            "v": 7.4,
+            "w": 0,
+            "on": false,
+            "name": "before-walk-down-11.png"
+          },
+          {
+            "t": 1.3,
+            "x": 0,
+            "y": -0.004,
+            "z": -8.142,
+            "v": 7.4,
+            "w": 0,
+            "on": false,
+            "name": "before-walk-down-12.png"
+          },
+          {
+            "t": 1.4,
+            "x": 0,
+            "y": -0.015,
+            "z": -8.883,
+            "v": 7.41,
+            "w": 0,
+            "on": false,
+            "name": "before-walk-down-13.png"
+          },
+          {
+            "t": 1.5,
+            "x": 0,
+            "y": -0.035,
+            "z": -9.624,
+            "v": 7.42,
+            "w": 0,
+            "on": false,
+            "name": "before-walk-down-14.png"
+          },
+          {
+            "t": 1.6,
+            "x": 0,
+            "y": -0.06,
+            "z": -10.367,
+            "v": 7.43,
+            "w": 0,
+            "on": false,
+            "name": "before-walk-down-15.png"
+          }
+        ]
+      },
+      "sprint-up": {
+        "start": {
+          "z0": 8.58,
+          "y": -3.0229110717773438,
+          "cam": -0.03
+        },
+        "rows": [
+          {
+            "t": 0.1,
+            "x": 0,
+            "y": 0,
+            "z": -2.932,
+            "v": 7.18,
+            "w": 0,
+            "on": false,
+            "name": "before-sprint-up-00.png"
+          },
+          {
+            "t": 0.2,
+            "x": 0,
+            "y": 0,
+            "z": -1.961,
+            "v": 10.55,
+            "w": 0.22,
+            "on": false,
+            "name": "before-sprint-up-01.png"
+          },
+          {
+            "t": 0.3,
+            "x": 0,
+            "y": 0.233,
+            "z": -0.834,
+            "v": 11.5,
+            "w": 0.89,
+            "on": true,
+            "name": "before-sprint-up-02.png"
+          },
+          {
+            "t": 0.4,
+            "x": 0,
+            "y": 1.377,
+            "z": 0.334,
+            "v": 11.73,
+            "w": 1,
+            "on": true,
+            "name": "before-sprint-up-03.png"
+          },
+          {
+            "t": 0.5,
+            "x": 0,
+            "y": 0,
+            "z": 1.511,
+            "v": 11.78,
+            "w": 0.78,
+            "on": false,
+            "name": "before-sprint-up-04.png"
+          },
+          {
+            "t": 0.6,
+            "x": 0,
+            "y": 0,
+            "z": 2.69,
+            "v": 11.8,
+            "w": 0.11,
+            "on": false,
+            "name": "before-sprint-up-05.png"
+          },
+          {
+            "t": 0.7,
+            "x": 0,
+            "y": 0,
+            "z": 3.87,
+            "v": 11.8,
+            "w": 0,
+            "on": false,
+            "name": "before-sprint-up-06.png"
+          },
+          {
+            "t": 0.8,
+            "x": 0,
+            "y": 0,
+            "z": 5.05,
+            "v": 11.8,
+            "w": 0,
+            "on": false,
+            "name": "before-sprint-up-07.png"
+          },
+          {
+            "t": 0.9,
+            "x": 0,
+            "y": 0,
+            "z": 6.23,
+            "v": 11.8,
+            "w": 0,
+            "on": false,
+            "name": "before-sprint-up-08.png"
+          },
+          {
+            "t": 1,
+            "x": 0,
+            "y": 0,
+            "z": 7.41,
+            "v": 11.8,
+            "w": 0,
+            "on": false,
+            "name": "before-sprint-up-09.png"
+          },
+          {
+            "t": 1.1,
+            "x": 0,
+            "y": 0,
+            "z": 8.59,
+            "v": 11.8,
+            "w": 0,
+            "on": false,
+            "name": "before-sprint-up-10.png"
+          },
+          {
+            "t": 1.2,
+            "x": 0,
+            "y": 0,
+            "z": 9.77,
+            "v": 11.8,
+            "w": 0,
+            "on": false,
+            "name": "before-sprint-up-11.png"
+          },
+          {
+            "t": 1.3,
+            "x": 0,
+            "y": 0,
+            "z": 10.95,
+            "v": 11.8,
+            "w": 0,
+            "on": false,
+            "name": "before-sprint-up-12.png"
+          },
+          {
+            "t": 1.4,
+            "x": 0,
+            "y": 0,
+            "z": 12.13,
+            "v": 11.8,
+            "w": 0,
+            "on": false,
+            "name": "before-sprint-up-13.png"
+          }
+        ]
+      },
+      "sprint-down": {
+        "start": {
+          "z0": 12.87,
+          "y": -1.1199698953067565,
+          "cam": -3.12
+        },
+        "rows": [
+          {
+            "t": 0.1,
+            "x": 0,
+            "y": 1.425,
+            "z": 0.382,
+            "v": 7.18,
+            "w": 1,
+            "on": true,
+            "name": "before-sprint-down-00.png"
+          },
+          {
+            "t": 0.2,
+            "x": 0,
+            "y": 0.473,
+            "z": -0.589,
+            "v": 10.55,
+            "w": 1,
+            "on": true,
+            "name": "before-sprint-down-01.png"
+          },
+          {
+            "t": 0.3,
+            "x": 0,
+            "y": 0,
+            "z": -1.716,
+            "v": 11.5,
+            "w": 0.78,
+            "on": false,
+            "name": "before-sprint-down-02.png"
+          },
+          {
+            "t": 0.4,
+            "x": 0,
+            "y": 0,
+            "z": -2.884,
+            "v": 11.73,
+            "w": 0.11,
+            "on": false,
+            "name": "before-sprint-down-03.png"
+          },
+          {
+            "t": 0.5,
+            "x": 0,
+            "y": 0,
+            "z": -4.061,
+            "v": 11.78,
+            "w": 0,
+            "on": false,
+            "name": "before-sprint-down-04.png"
+          },
+          {
+            "t": 0.6,
+            "x": 0,
+            "y": 0,
+            "z": -5.24,
+            "v": 11.8,
+            "w": 0,
+            "on": false,
+            "name": "before-sprint-down-05.png"
+          },
+          {
+            "t": 0.7,
+            "x": 0,
+            "y": 0,
+            "z": -6.42,
+            "v": 11.8,
+            "w": 0,
+            "on": false,
+            "name": "before-sprint-down-06.png"
+          },
+          {
+            "t": 0.8,
+            "x": 0,
+            "y": 0,
+            "z": -7.6,
+            "v": 11.8,
+            "w": 0,
+            "on": false,
+            "name": "before-sprint-down-07.png"
+          },
+          {
+            "t": 0.9,
+            "x": 0,
+            "y": -0.012,
+            "z": -8.781,
+            "v": 11.81,
+            "w": 0,
+            "on": false,
+            "name": "before-sprint-down-08.png"
+          },
+          {
+            "t": 1,
+            "x": 0,
+            "y": -0.046,
+            "z": -9.963,
+            "v": 11.83,
+            "w": 0,
+            "on": false,
+            "name": "before-sprint-down-09.png"
+          },
+          {
+            "t": 1.1,
+            "x": 0,
+            "y": -0.087,
+            "z": -11.148,
+            "v": 11.86,
+            "w": 0,
+            "on": false,
+            "name": "before-sprint-down-10.png"
+          },
+          {
+            "t": 1.2,
+            "x": 0,
+            "y": -0.124,
+            "z": -12.334,
+            "v": 11.87,
+            "w": 0,
+            "on": false,
+            "name": "before-sprint-down-11.png"
+          }
+        ]
+      },
+      "fp-walk-up": {
+        "start": {
+          "z0": 8.58,
+          "y": -3.0229110717773438,
+          "cam": 0
+        },
+        "rows": [
+          {
+            "t": 0.1,
+            "x": 0,
+            "y": 0,
+            "z": -3.114,
+            "v": 4.5,
+            "w": 0,
+            "on": false,
+            "name": "before-fp-walk-up-00.png"
+          },
+          {
+            "t": 0.2,
+            "x": 0,
+            "y": 0,
+            "z": -2.505,
+            "v": 6.62,
+            "w": 0,
+            "on": false,
+            "name": "before-fp-walk-up-01.png"
+          },
+          {
+            "t": 0.3,
+            "x": 0,
+            "y": 0,
+            "z": -1.798,
+            "v": 7.21,
+            "w": 0.22,
+            "on": false,
+            "name": "before-fp-walk-up-02.png"
+          },
+          {
+            "t": 0.4,
+            "x": 0,
+            "y": 0,
+            "z": -1.066,
+            "v": 7.36,
+            "w": 0.89,
+            "on": false,
+            "name": "before-fp-walk-up-03.png"
+          },
+          {
+            "t": 0.5,
+            "x": 0,
+            "y": 0.729,
+            "z": -0.328,
+            "v": 7.39,
+            "w": 1,
+            "on": true,
+            "name": "before-fp-walk-up-04.png"
+          },
+          {
+            "t": 0.6,
+            "x": 0,
+            "y": 1.454,
+            "z": 0.412,
+            "v": 7.4,
+            "w": 1,
+            "on": true,
+            "name": "before-fp-walk-up-05.png"
+          },
+          {
+            "t": 0.7,
+            "x": 0,
+            "y": 0,
+            "z": 1.152,
+            "v": 7.4,
+            "w": 1,
+            "on": false,
+            "name": "before-fp-walk-up-06.png"
+          },
+          {
+            "t": 0.8,
+            "x": 0,
+            "y": 0,
+            "z": 1.933,
+            "v": 7.4,
+            "w": 0.33,
+            "on": false,
+            "name": "before-fp-walk-up-07.png"
+          },
+          {
+            "t": 0.9,
+            "x": 0,
+            "y": 0,
+            "z": 2.673,
+            "v": 7.4,
+            "w": 0,
+            "on": false,
+            "name": "before-fp-walk-up-08.png"
+          },
+          {
+            "t": 1,
+            "x": 0,
+            "y": 0,
+            "z": 3.413,
+            "v": 7.4,
+            "w": 0,
+            "on": false,
+            "name": "before-fp-walk-up-09.png"
+          },
+          {
+            "t": 1.1,
+            "x": 0,
+            "y": 0,
+            "z": 4.153,
+            "v": 7.4,
+            "w": 0,
+            "on": false,
+            "name": "before-fp-walk-up-10.png"
+          },
+          {
+            "t": 1.2,
+            "x": 0,
+            "y": 0,
+            "z": 4.893,
+            "v": 7.4,
+            "w": 0,
+            "on": false,
+            "name": "before-fp-walk-up-11.png"
+          },
+          {
+            "t": 1.3,
+            "x": 0,
+            "y": 0,
+            "z": 5.633,
+            "v": 7.4,
+            "w": 0,
+            "on": false,
+            "name": "before-fp-walk-up-12.png"
+          },
+          {
+            "t": 1.4,
+            "x": 0,
+            "y": 0,
+            "z": 6.373,
+            "v": 7.4,
+            "w": 0,
+            "on": false,
+            "name": "before-fp-walk-up-13.png"
+          },
+          {
+            "t": 1.5,
+            "x": 0,
+            "y": 0,
+            "z": 7.113,
+            "v": 7.4,
+            "w": 0,
+            "on": false,
+            "name": "before-fp-walk-up-14.png"
+          },
+          {
+            "t": 1.6,
+            "x": 0,
+            "y": 0,
+            "z": 7.853,
+            "v": 7.4,
+            "w": 0,
+            "on": false,
+            "name": "before-fp-walk-up-15.png"
+          },
+          {
+            "t": 1.7,
+            "x": 0,
+            "y": 0,
+            "z": 8.593,
+            "v": 7.4,
+            "w": 0,
+            "on": false,
+            "name": "before-fp-walk-up-16.png"
+          },
+          {
+            "t": 1.8,
+            "x": 0,
+            "y": 0,
+            "z": 9.333,
+            "v": 7.4,
+            "w": 0,
+            "on": false,
+            "name": "before-fp-walk-up-17.png"
+          }
+        ]
+      }
+    }
+  },
+  "after": {
+    "setup": {
+      "ok": true,
+      "cx": 12,
+      "cz": 12,
+      "half": 1.02,
+      "g": -3.0229110717773438,
+      "scale": 0.5
+    },
+    "runs": {
+      "walk-up": {
+        "start": {
+          "z0": 8.58,
+          "y": -3.0229110717773438,
+          "cam": 0.02
+        },
+        "rows": [
+          {
+            "t": 0.1,
+            "x": 0.045,
+            "y": 0,
+            "z": -3.128,
+            "v": 4.5,
+            "w": 0,
+            "on": false,
+            "name": "after-walk-up-00.png"
+          },
+          {
+            "t": 0.2,
+            "x": 0.066,
+            "y": 0,
+            "z": -2.547,
+            "v": 6.62,
+            "w": 0,
+            "on": false,
+            "name": "after-walk-up-01.png"
+          },
+          {
+            "t": 0.3,
+            "x": 0.072,
+            "y": 0,
+            "z": -1.873,
+            "v": 7.21,
+            "w": 0,
+            "on": false,
+            "name": "after-walk-up-02.png"
+          },
+          {
+            "t": 0.4,
+            "x": 0.064,
+            "y": 0,
+            "z": -1.229,
+            "v": 6.34,
+            "w": 0.67,
+            "on": false,
+            "name": "after-walk-up-03.png"
+          },
+          {
+            "t": 0.5,
+            "x": 0.047,
+            "y": 0.331,
+            "z": -0.733,
+            "v": 4.68,
+            "w": 1,
+            "on": true,
+            "name": "after-walk-up-04.png"
+          },
+          {
+            "t": 0.6,
+            "x": 0.04,
+            "y": 0.718,
+            "z": -0.339,
+            "v": 3.96,
+            "w": 1,
+            "on": true,
+            "name": "after-walk-up-05.png"
+          },
+          {
+            "t": 0.7,
+            "x": 0.038,
+            "y": 1.074,
+            "z": 0.025,
+            "v": 3.76,
+            "w": 1,
+            "on": true,
+            "name": "after-walk-up-06.png"
+          },
+          {
+            "t": 0.8,
+            "x": 0.037,
+            "y": 1.423,
+            "z": 0.38,
+            "v": 3.71,
+            "w": 1,
+            "on": true,
+            "name": "after-walk-up-07.png"
+          },
+          {
+            "t": 0.9,
+            "x": 0.037,
+            "y": 1.769,
+            "z": 0.734,
+            "v": 3.7,
+            "w": 1,
+            "on": true,
+            "name": "after-walk-up-08.png"
+          },
+          {
+            "t": 1,
+            "x": 0.037,
+            "y": 0,
+            "z": 1.086,
+            "v": 3.7,
+            "w": 1,
+            "on": false,
+            "name": "after-walk-up-09.png"
+          },
+          {
+            "t": 1.1,
+            "x": 0.047,
+            "y": 0,
+            "z": 1.724,
+            "v": 4.72,
+            "w": 0.33,
+            "on": false,
+            "name": "after-walk-up-10.png"
+          },
+          {
+            "t": 1.2,
+            "x": 0.064,
+            "y": 0,
+            "z": 2.286,
+            "v": 6.41,
+            "w": 0,
+            "on": false,
+            "name": "after-walk-up-11.png"
+          },
+          {
+            "t": 1.3,
+            "x": 0.072,
+            "y": 0,
+            "z": 2.949,
+            "v": 7.13,
+            "w": 0,
+            "on": false,
+            "name": "after-walk-up-12.png"
+          },
+          {
+            "t": 1.4,
+            "x": 0.074,
+            "y": 0,
+            "z": 3.644,
+            "v": 7.34,
+            "w": 0,
+            "on": false,
+            "name": "after-walk-up-13.png"
+          },
+          {
+            "t": 1.5,
+            "x": 0.074,
+            "y": 0,
+            "z": 4.347,
+            "v": 7.39,
+            "w": 0,
+            "on": false,
+            "name": "after-walk-up-14.png"
+          },
+          {
+            "t": 1.6,
+            "x": 0.074,
+            "y": 0,
+            "z": 5.052,
+            "v": 7.4,
+            "w": 0,
+            "on": false,
+            "name": "after-walk-up-15.png"
+          },
+          {
+            "t": 1.7,
+            "x": 0.074,
+            "y": 0,
+            "z": 5.757,
+            "v": 7.4,
+            "w": 0,
+            "on": false,
+            "name": "after-walk-up-16.png"
+          },
+          {
+            "t": 1.8,
+            "x": 0.074,
+            "y": 0,
+            "z": 6.463,
+            "v": 7.4,
+            "w": 0,
+            "on": false,
+            "name": "after-walk-up-17.png"
+          }
+        ]
+      },
+      "walk-down": {
+        "start": {
+          "z0": 12.87,
+          "y": -1.1199698953067565,
+          "cam": 3.11
+        },
+        "rows": [
+          {
+            "t": 0.1,
+            "x": 0.002,
+            "y": 1.753,
+            "z": 0.717,
+            "v": 2.25,
+            "w": 1,
+            "on": true,
+            "name": "after-walk-down-00.png"
+          },
+          {
+            "t": 0.2,
+            "x": 0.003,
+            "y": 1.455,
+            "z": 0.413,
+            "v": 3.31,
+            "w": 1,
+            "on": true,
+            "name": "after-walk-down-01.png"
+          },
+          {
+            "t": 0.3,
+            "x": 0.003,
+            "y": 1.108,
+            "z": 0.059,
+            "v": 3.6,
+            "w": 1,
+            "on": true,
+            "name": "after-walk-down-02.png"
+          },
+          {
+            "t": 0.4,
+            "x": 0.004,
+            "y": 0.749,
+            "z": -0.307,
+            "v": 3.68,
+            "w": 1,
+            "on": true,
+            "name": "after-walk-down-03.png"
+          },
+          {
+            "t": 0.5,
+            "x": 0.004,
+            "y": 0.388,
+            "z": -0.676,
+            "v": 3.69,
+            "w": 1,
+            "on": true,
+            "name": "after-walk-down-04.png"
+          },
+          {
+            "t": 0.6,
+            "x": 0.004,
+            "y": 0,
+            "z": -1.045,
+            "v": 3.7,
+            "w": 1,
+            "on": false,
+            "name": "after-walk-down-05.png"
+          },
+          {
+            "t": 0.7,
+            "x": 0.005,
+            "y": 0,
+            "z": -1.472,
+            "v": 4.72,
+            "w": 0.33,
+            "on": false,
+            "name": "after-walk-down-06.png"
+          },
+          {
+            "t": 0.8,
+            "x": 0.006,
+            "y": 0,
+            "z": -2.06,
+            "v": 6.41,
+            "w": 0,
+            "on": false,
+            "name": "after-walk-down-07.png"
+          },
+          {
+            "t": 0.9,
+            "x": 0.007,
+            "y": 0,
+            "z": -2.756,
+            "v": 7.13,
+            "w": 0,
+            "on": false,
+            "name": "after-walk-down-08.png"
+          },
+          {
+            "t": 1,
+            "x": 0.007,
+            "y": 0,
+            "z": -3.484,
+            "v": 7.34,
+            "w": 0,
+            "on": false,
+            "name": "after-walk-down-09.png"
+          },
+          {
+            "t": 1.1,
+            "x": 0.007,
+            "y": 0,
+            "z": -4.221,
+            "v": 7.39,
+            "w": 0,
+            "on": false,
+            "name": "after-walk-down-10.png"
+          },
+          {
+            "t": 1.2,
+            "x": 0.007,
+            "y": 0,
+            "z": -4.96,
+            "v": 7.4,
+            "w": 0,
+            "on": false,
+            "name": "after-walk-down-11.png"
+          },
+          {
+            "t": 1.3,
+            "x": 0.007,
+            "y": 0,
+            "z": -5.7,
+            "v": 7.4,
+            "w": 0,
+            "on": false,
+            "name": "after-walk-down-12.png"
+          },
+          {
+            "t": 1.4,
+            "x": 0.007,
+            "y": 0,
+            "z": -6.439,
+            "v": 7.4,
+            "w": 0,
+            "on": false,
+            "name": "after-walk-down-13.png"
+          },
+          {
+            "t": 1.5,
+            "x": 0.007,
+            "y": 0,
+            "z": -7.179,
+            "v": 7.4,
+            "w": 0,
+            "on": false,
+            "name": "after-walk-down-14.png"
+          },
+          {
+            "t": 1.6,
+            "x": 0.007,
+            "y": -0.002,
+            "z": -7.919,
+            "v": 7.4,
+            "w": 0,
+            "on": false,
+            "name": "after-walk-down-15.png"
+          }
+        ]
+      },
+      "sprint-up": {
+        "start": {
+          "z0": 8.58,
+          "y": -3.0229110717773438,
+          "cam": 0.03
+        },
+        "rows": [
+          {
+            "t": 0.1,
+            "x": 0.001,
+            "y": 0,
+            "z": -2.932,
+            "v": 7.18,
+            "w": 0,
+            "on": false,
+            "name": "after-sprint-up-00.png"
+          },
+          {
+            "t": 0.2,
+            "x": 0.001,
+            "y": 0,
+            "z": -1.97,
+            "v": 10.28,
+            "w": 0.22,
+            "on": false,
+            "name": "after-sprint-up-01.png"
+          },
+          {
+            "t": 0.3,
+            "x": 0.001,
+            "y": 0.059,
+            "z": -1.011,
+            "v": 8.9,
+            "w": 0.89,
+            "on": true,
+            "name": "after-sprint-up-02.png"
+          },
+          {
+            "t": 0.4,
+            "x": 0.001,
+            "y": 0.787,
+            "z": -0.268,
+            "v": 6.87,
+            "w": 1,
+            "on": true,
+            "name": "after-sprint-up-03.png"
+          },
+          {
+            "t": 0.5,
+            "x": 0,
+            "y": 1.407,
+            "z": 0.365,
+            "v": 6.15,
+            "w": 1,
+            "on": true,
+            "name": "after-sprint-up-04.png"
+          },
+          {
+            "t": 0.6,
+            "x": 0,
+            "y": 1.996,
+            "z": 0.965,
+            "v": 5.96,
+            "w": 1,
+            "on": true,
+            "name": "after-sprint-up-05.png"
+          },
+          {
+            "t": 0.7,
+            "x": 0.001,
+            "y": 0,
+            "z": 1.665,
+            "v": 6.74,
+            "w": 0.56,
+            "on": false,
+            "name": "after-sprint-up-06.png"
+          },
+          {
+            "t": 0.8,
+            "x": 0.001,
+            "y": 0,
+            "z": 2.515,
+            "v": 9.46,
+            "w": 0,
+            "on": false,
+            "name": "after-sprint-up-07.png"
+          },
+          {
+            "t": 0.9,
+            "x": 0.001,
+            "y": 0,
+            "z": 3.585,
+            "v": 11.13,
+            "w": 0,
+            "on": false,
+            "name": "after-sprint-up-08.png"
+          },
+          {
+            "t": 1,
+            "x": 0.001,
+            "y": 0,
+            "z": 4.736,
+            "v": 11.63,
+            "w": 0,
+            "on": false,
+            "name": "after-sprint-up-09.png"
+          },
+          {
+            "t": 1.1,
+            "x": 0.001,
+            "y": 0,
+            "z": 5.91,
+            "v": 11.76,
+            "w": 0,
+            "on": false,
+            "name": "after-sprint-up-10.png"
+          },
+          {
+            "t": 1.2,
+            "x": 0.001,
+            "y": 0,
+            "z": 7.088,
+            "v": 11.79,
+            "w": 0,
+            "on": false,
+            "name": "after-sprint-up-11.png"
+          },
+          {
+            "t": 1.3,
+            "x": 0.001,
+            "y": 0,
+            "z": 8.268,
+            "v": 11.8,
+            "w": 0,
+            "on": false,
+            "name": "after-sprint-up-12.png"
+          },
+          {
+            "t": 1.4,
+            "x": 0.001,
+            "y": 0,
+            "z": 9.448,
+            "v": 11.8,
+            "w": 0,
+            "on": false,
+            "name": "after-sprint-up-13.png"
+          }
+        ]
+      },
+      "sprint-down": {
+        "start": {
+          "z0": 12.87,
+          "y": -1.1199698953067565,
+          "cam": 3.12
+        },
+        "rows": [
+          {
+            "t": 0.1,
+            "x": 0,
+            "y": 1.664,
+            "z": 0.626,
+            "v": 3.59,
+            "w": 1,
+            "on": true,
+            "name": "after-sprint-down-00.png"
+          },
+          {
+            "t": 0.2,
+            "x": 0,
+            "y": 1.188,
+            "z": 0.141,
+            "v": 5.27,
+            "w": 1,
+            "on": true,
+            "name": "after-sprint-down-01.png"
+          },
+          {
+            "t": 0.3,
+            "x": 0,
+            "y": 0.635,
+            "z": -0.423,
+            "v": 5.75,
+            "w": 1,
+            "on": true,
+            "name": "after-sprint-down-02.png"
+          },
+          {
+            "t": 0.4,
+            "x": 0,
+            "y": 0.063,
+            "z": -1.007,
+            "v": 5.86,
+            "w": 1,
+            "on": true,
+            "name": "after-sprint-down-03.png"
+          },
+          {
+            "t": 0.5,
+            "x": 0,
+            "y": 0,
+            "z": -1.632,
+            "v": 6.72,
+            "w": 0.56,
+            "on": false,
+            "name": "after-sprint-down-04.png"
+          },
+          {
+            "t": 0.6,
+            "x": 0,
+            "y": 0,
+            "z": -2.481,
+            "v": 9.45,
+            "w": 0,
+            "on": false,
+            "name": "after-sprint-down-05.png"
+          },
+          {
+            "t": 0.7,
+            "x": 0,
+            "y": 0,
+            "z": -3.551,
+            "v": 11.13,
+            "w": 0,
+            "on": false,
+            "name": "after-sprint-down-06.png"
+          },
+          {
+            "t": 0.8,
+            "x": 0,
+            "y": 0,
+            "z": -4.703,
+            "v": 11.63,
+            "w": 0,
+            "on": false,
+            "name": "after-sprint-down-07.png"
+          },
+          {
+            "t": 0.9,
+            "x": 0,
+            "y": 0,
+            "z": -5.876,
+            "v": 11.76,
+            "w": 0,
+            "on": false,
+            "name": "after-sprint-down-08.png"
+          },
+          {
+            "t": 1,
+            "x": 0,
+            "y": 0,
+            "z": -7.054,
+            "v": 11.79,
+            "w": 0,
+            "on": false,
+            "name": "after-sprint-down-09.png"
+          },
+          {
+            "t": 1.1,
+            "x": 0,
+            "y": -0.005,
+            "z": -8.234,
+            "v": 11.8,
+            "w": 0,
+            "on": false,
+            "name": "after-sprint-down-10.png"
+          },
+          {
+            "t": 1.2,
+            "x": 0,
+            "y": -0.029,
+            "z": -9.415,
+            "v": 11.82,
+            "w": 0,
+            "on": false,
+            "name": "after-sprint-down-11.png"
+          }
+        ]
+      },
+      "fp-walk-up": {
+        "start": {
+          "z0": 8.58,
+          "y": -3.0229110717773438,
+          "cam": 0
+        },
+        "rows": [
+          {
+            "t": 0.1,
+            "x": 0,
+            "y": 0,
+            "z": -3.114,
+            "v": 4.5,
+            "w": 0,
+            "on": false,
+            "name": "after-fp-walk-up-00.png"
+          },
+          {
+            "t": 0.2,
+            "x": 0,
+            "y": 0,
+            "z": -2.505,
+            "v": 6.62,
+            "w": 0,
+            "on": false,
+            "name": "after-fp-walk-up-01.png"
+          },
+          {
+            "t": 0.3,
+            "x": 0,
+            "y": 0,
+            "z": -1.804,
+            "v": 7.04,
+            "w": 0.22,
+            "on": false,
+            "name": "after-fp-walk-up-02.png"
+          },
+          {
+            "t": 0.4,
+            "x": 0,
+            "y": 0,
+            "z": -1.177,
+            "v": 5.73,
+            "w": 0.89,
+            "on": false,
+            "name": "after-fp-walk-up-03.png"
+          },
+          {
+            "t": 0.5,
+            "x": 0,
+            "y": 0.359,
+            "z": -0.705,
+            "v": 4.34,
+            "w": 1,
+            "on": true,
+            "name": "after-fp-walk-up-04.png"
+          },
+          {
+            "t": 0.6,
+            "x": 0,
+            "y": 0.749,
+            "z": -0.307,
+            "v": 3.86,
+            "w": 1,
+            "on": true,
+            "name": "after-fp-walk-up-05.png"
+          },
+          {
+            "t": 0.7,
+            "x": 0,
+            "y": 1.118,
+            "z": 0.07,
+            "v": 3.74,
+            "w": 1,
+            "on": true,
+            "name": "after-fp-walk-up-06.png"
+          },
+          {
+            "t": 0.8,
+            "x": 0,
+            "y": 1.483,
+            "z": 0.441,
+            "v": 3.71,
+            "w": 1,
+            "on": true,
+            "name": "after-fp-walk-up-07.png"
+          },
+          {
+            "t": 0.9,
+            "x": 0,
+            "y": 1.846,
+            "z": 0.812,
+            "v": 3.7,
+            "w": 1,
+            "on": true,
+            "name": "after-fp-walk-up-08.png"
+          },
+          {
+            "t": 1,
+            "x": 0,
+            "y": 0,
+            "z": 1.44,
+            "v": 3.87,
+            "w": 0.78,
+            "on": false,
+            "name": "after-fp-walk-up-09.png"
+          },
+          {
+            "t": 1.1,
+            "x": 0,
+            "y": 0,
+            "z": 1.916,
+            "v": 5.33,
+            "w": 0.11,
+            "on": false,
+            "name": "after-fp-walk-up-10.png"
+          },
+          {
+            "t": 1.2,
+            "x": 0,
+            "y": 0,
+            "z": 2.552,
+            "v": 6.75,
+            "w": 0,
+            "on": false,
+            "name": "after-fp-walk-up-11.png"
+          },
+          {
+            "t": 1.3,
+            "x": 0,
+            "y": 0,
+            "z": 3.263,
+            "v": 7.23,
+            "w": 0,
+            "on": false,
+            "name": "after-fp-walk-up-12.png"
+          },
+          {
+            "t": 1.4,
+            "x": 0,
+            "y": 0,
+            "z": 3.996,
+            "v": 7.36,
+            "w": 0,
+            "on": false,
+            "name": "after-fp-walk-up-13.png"
+          },
+          {
+            "t": 1.5,
+            "x": 0,
+            "y": 0,
+            "z": 4.735,
+            "v": 7.39,
+            "w": 0,
+            "on": false,
+            "name": "after-fp-walk-up-14.png"
+          },
+          {
+            "t": 1.6,
+            "x": 0,
+            "y": 0,
+            "z": 5.474,
+            "v": 7.4,
+            "w": 0,
+            "on": false,
+            "name": "after-fp-walk-up-15.png"
+          },
+          {
+            "t": 1.7,
+            "x": 0,
+            "y": 0,
+            "z": 6.214,
+            "v": 7.4,
+            "w": 0,
+            "on": false,
+            "name": "after-fp-walk-up-16.png"
+          },
+          {
+            "t": 1.8,
+            "x": 0,
+            "y": 0,
+            "z": 6.954,
+            "v": 7.4,
+            "w": 0,
+            "on": false,
+            "name": "after-fp-walk-up-17.png"
+          }
+        ]
+      }
+    }
+  }
+}

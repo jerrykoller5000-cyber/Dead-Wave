@@ -1,0 +1,27 @@
+{
+  "id": "minigun",
+  "eye": [
+    0.46,
+    0.26,
+    -0.36
+  ],
+  "target": [
+    0,
+    0.172,
+    -0.105
+  ],
+  "fov": 27,
+  "moduleName": "nose-arch-proof",
+  "proofName": "checkNoseArch",
+  "hash": "c78f3c7f",
+  "eyeWorld": [
+    0.4048,
+    -197.7712,
+    -638.9868
+  ],
+  "targetWorld": [
+    0,
+    -197.84864,
+    -638.7624000000001
+  ]
+}

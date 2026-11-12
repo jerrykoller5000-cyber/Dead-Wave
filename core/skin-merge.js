@@ -53,9 +53,11 @@ export function skinMergeGroup(T, g, opts = {}) {
       const geo = o.geometry.index ? o.geometry.toNonIndexed() : o.geometry;
       prep.push({ o, geo, b }); total += geo.attributes.position.count;
     }
+    // GP-20110 part 3 (CB-311 run): the shadow-only proxy keeps its normals too: TSL's shadow and depth passes read the normal
+    // attribute and logged 'missing normal' at the Training entry for every proxy without one.
     const first = list[0].material;
     const textured = !shadowOnly && !!(first.map || first.normalMap || first.roughnessMap || first.aoMap || first.bumpMap || first.metalnessMap || first.alphaMap);
-    const pos = new Float32Array(total * 3), nrm = shadowOnly ? null : new Float32Array(total * 3), col = shadowOnly ? null : new Float32Array(total * 3);
+    const pos = new Float32Array(total * 3), nrm = new Float32Array(total * 3), col = shadowOnly ? null : new Float32Array(total * 3);
     const uvs = textured ? new Float32Array(total * 2) : null;
     const si = new Uint16Array(total * 4), sw = new Float32Array(total * 4);
     let k = 0, rough = 0, metal = 0;

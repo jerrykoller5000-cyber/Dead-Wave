@@ -3,7 +3,7 @@ import { attachLaserLight } from './weapon-attachments.js';
 import { addArtworkInstances, addTriggerArtwork, bindModelArtwork, groupArtwork, optionalArtworkGroup } from './weapon-model-hooks.js';
 import { markPaintSurface } from './weapon-finish.js';
 import { roundGeometry, spentCaseGeometry } from './weapon-casings.js';
-import { trimPanelBack } from './weapon-longarms.js';
+import { fitCollarFaces, trimPanelBack } from './weapon-longarms.js';
 import { boxProjectUV } from '../core/geometry.js';
 
 // Small closed surface builders use BufferGeometry, also available in the test renderer.
@@ -66,6 +66,81 @@ function ventTube(T, r, wall, length, rows, columns, holeA = 0.5, holeZ = 0.58, 
     }
   });
 }
+// Only the crescent outside the guide-bar nose is visible. Its outer contour
+// follows the original fourteen-sided drawing; its inner edge follows the eight bar facets.
+function chainsawNoseInsert(T) {
+  const insert = geometry(T, 'chainsaw-nose-insert', quad => {
+    const radius = .05, halfWidth = .015;
+    const wheel = Array.from({length:14}, (_, i) => {
+      const a = i * Math.PI / 7;
+      return [radius*Math.sin(a), radius*Math.cos(a)];
+    });
+    const bar = Array.from({length:9}, (_, i) => {
+      const a = -Math.PI/2 + i*Math.PI/8;
+      return [radius*Math.sin(a), -.020 + radius*Math.cos(a)];
+    });
+    function edges(points, h, closed) {
+      const values = [];
+      for (let i = 1; i < points.length + Number(closed); i++) {
+        const [a,z] = points[i-1], [b,w] = points[i%points.length];
+        if (Math.abs(a-b)<1e-10 || h<Math.min(a,b)-1e-10 || h>Math.max(a,b)+1e-10) continue;
+        values.push(z + (w-z)*(h-a)/(b-a));
+      }
+      return [Math.min(...values), Math.max(...values)];
+    }
+    const limit = Math.max(...wheel.map(p => p[0]));
+    const heights = [...new Set([...wheel,...bar].map(p => +p[0].toFixed(11)).filter(h => Math.abs(h)<=limit+1e-10))].sort((a,b) => a-b);
+    const row = h => {
+      const [left,right] = edges(wheel,h,true), support = edges(bar,h,false)[0];
+      return {h,left,right,support,back:Math.max(left,support)};
+    };
+    const breaks = heights.map(row);
+    for (let i = 1; i < breaks.length; i++) {
+      const a=breaks[i-1], b=breaks[i], d=a.left-a.support, e=b.left-b.support;
+      if (d*e<0) heights.push(a.h+(b.h-a.h)*d/(d-e));
+    }
+    const rows = heights.sort((a,b)=>a-b).map(row);
+    const pt = (r,side,z) => [r.h,side*halfWidth,r[z]];
+    const rim = (r,z) => [r.h/radius,0,r[z]/radius];
+    for (let i = 1; i < rows.length; i++) {
+      const a=rows[i-1],b=rows[i];
+      for (const side of [-1,1]) quad(pt(a,side,'back'),pt(a,side,'right'),pt(b,side,'right'),pt(b,side,'back'),[0,side,0]);
+      quad(pt(a,-1,'right'),pt(a,1,'right'),pt(b,1,'right'),pt(b,-1,'right'),rim(a,'right'),rim(a,'right'),rim(b,'right'),rim(b,'right'));
+      const dz=b.back-a.back, dh=b.h-a.h, length=Math.hypot(dz,dh);
+      const seat=[dz/length,0,-dh/length], onWheel=(a.left+b.left)>=(a.support+b.support)-1e-10;
+      const na=onWheel?rim(a,'back'):seat, nb=onWheel?rim(b,'back'):seat;
+      quad(pt(a,-1,'back'),pt(a,1,'back'),pt(b,1,'back'),pt(b,-1,'back'),na,na,nb,nb);
+    }
+    for (const r of [rows[0],rows.at(-1)]) {
+      quad(pt(r,-1,'back'),pt(r,1,'back'),pt(r,1,'right'),pt(r,-1,'right'),rim(r,'back'),rim(r,'back'),rim(r,'right'),rim(r,'right'));
+    }
+  });
+  if (!insert.userData.noseUV) {
+    // Preserve the circular graphic’s planar cap UVs and its original facet-by-facet rim mapping.
+    const {position:p, normal:n, uv} = insert.attributes, step = Math.PI/7;
+    for (let i = 0; i < p.count; i += 3) {
+      const cap = Math.abs(n.getY(i)) > .5;
+      for (let k = i; k < i+3; k++) {
+        const x = p.getX(k), y = p.getY(k), z = p.getZ(k);
+        if (cap) { uv.setXY(k, .5 + z/.1, .5 + n.getY(k)*x/.1); continue; }
+        const a = (Math.atan2(x,z) + Math.PI*2) % (Math.PI*2);
+        const j = Math.floor(a/step), u = Math.sin(j*step), v = Math.cos(j*step);
+        const du = Math.sin((j+1)*step)-u, dv = Math.cos((j+1)*step)-v;
+        const f = Math.max(0, Math.min(1, ((x/.05-u)*du+(z/.05-v)*dv)/(du*du+dv*dv)));
+        uv.setXY(k, (j+f)/14, .5+y/.03);
+      }
+      if (!cap) {
+        const us = [uv.getX(i),uv.getX(i+1),uv.getX(i+2)];
+        if (Math.max(...us)-Math.min(...us)>.5) {
+          for (let k=i;k<i+3;k++) if (uv.getX(k)<.5) uv.setX(k,uv.getX(k)+1);
+        }
+      }
+    }
+    insert.userData.noseUV = true;
+  }
+  return insert;
+}
+
 // Keep the exposed bevels of a painted box and seat its hidden back on the adjacent artwork.
 // The rounded boxes come from a shared cache, so only this drawing gets the fitted vertices.
 function seatBoxArt(mesh, axis, faceAt, side = 1) {
@@ -242,7 +317,15 @@ export function makeMinigunModel(ctx) {
   for (const z of [-0.12, 0.12]) K.box(0.03, 0.12, 0.03, gunDark, 0, 0.18, z);
   K.box(0.03, 0.021, 0.27, gunDark, 0, 0.238, 0);
   for (const piece of gun.children.slice(archStart)) markPaintSurface(piece, 'rail');
-  for (const z of [-0.12, 0.12]) { K.cyl(0.018, 0.018, 0.047, gunMid, 0, 0.155, z, null, 10, 'x'); bolt(K, gunDark, gunAccent, -0.025, 0.155, z); }
+  for (const z of [-0.12, 0.12]) {
+    const pin = K.cyl(.018, .018, .047, gunMid, 0, .155, z, null, 10, 'x');
+    pin.geometry.rotateZ(pin.rotation.z); pin.rotation.z = 0;
+    // The top of the ten-sided disc meets the sloping side of the rounded post.
+    const rounding = .03 * .18, edgeDrop = rounding * (1 - Math.SQRT1_2);
+    const shoulder = .015 - (.025 - .018*Math.sin(2*Math.PI/5)) * edgeDrop / (.06 - edgeDrop);
+    fitCollarFaces(THREE, pin, shoulder);
+    bolt(K, gunDark, gunAccent, -.025, .155, z);
+  }
   const reflexStart = gun.children.length;
   K.box(0.05, 0.029, 0.18, gunRubber, 0, 0.263, 0);
   for (let i = 0; i < 8; i++) K.box(0.051, 0.003, 0.007, gunPoly, 0, 0.278, -0.072 + i * 0.020, 0, 0, 0, null, 0.001);
@@ -1358,7 +1441,9 @@ export function makeChainsawModel(ctx) {
     for (const y of [0.006, 0.074]) for (let i = 0; i < 22; i++) B.cyl(0.0028, 0.0028, 0.002, steelMat, sx * 0.022, y, 0.155 + i * 0.032, null, 6, 'x');
   }
   for (const z of [0.1, 0.16]) B.cyl(0.014, 0.014, 0.05, gunDark, 0, 0.04, z, null, 6, 'x');
-  B.cyl(0.05, 0.05, 0.03, gunDark, 0, 0.04, 0.90, null, 14, 'x');
+  const nose = B.cyl(.05, .05, .03, gunDark, 0, .04, .90, null, 14, 'x');
+  nose.geometry.dispose();
+  nose.geometry = chainsawNoseInsert(THREE);
   B.cyl(0.02, 0.02, 0.034, steelMat, 0, 0.04, 0.90, null, 8, 'x');
   // Chain teeth ride a racetrack path around the guide-bar perimeter (YZ plane).
   // Do NOT rigid-spin this group — advanceChainsawChain moves each tooth along the path.

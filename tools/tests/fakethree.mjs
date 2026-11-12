@@ -548,8 +548,11 @@ class MaterialBase {
     return permissive(this);
   }
   setValues(p) { for (const k in p) { const v = p[k]; if ((k === 'color' || k === 'emissive') && v !== undefined && !(v && v.isNode)) this[k] = new Color(v); else this[k] = v; } }
-  clone() { const m = new this.constructor(); for (const k of Object.keys(this)) { const v = this[k]; m[k] = (v && v.isColor) ? v.clone() : v; } return m; }
-  copy(o) { for (const k of Object.keys(o)) this[k] = o[k]; return this; }
+  // CB-311 item (t334): a clone or copy gets its own userData, as three.js's Material.copy does (JSON round trip): a shared one
+  // let a tag set on the copy (the GW-4's moving carrier's paint id) show on the original too. Not JSON-safe: a shallow copy.
+  static ownUserData(u) { try { return JSON.parse(JSON.stringify(u || {})); } catch (e) { return { ...(u || {}) }; } }
+  clone() { const m = new this.constructor(); for (const k of Object.keys(this)) { const v = this[k]; m[k] = (v && v.isColor) ? v.clone() : v; } m.userData = MaterialBase.ownUserData(this.userData); return m; }
+  copy(o) { for (const k of Object.keys(o)) this[k] = o[k]; this.userData = MaterialBase.ownUserData(o.userData); return this; }
   dispose() {}
   onBeforeCompile() {}
   customProgramCacheKey() { return ''; }

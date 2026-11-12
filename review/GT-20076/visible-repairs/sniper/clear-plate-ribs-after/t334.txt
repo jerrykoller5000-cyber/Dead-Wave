@@ -1,0 +1,6 @@
+node tools/tests/run-all.mjs t334 --jobs 1 --agent chatgpt2 --task GT-20076 --all-fails
+GRANT chatgpt2 GT-20076: starting one game-test command
+check-players: 316 player.position reads, all in the allowed places
+ok    t334    26 pass   0 fail  83.9s
+
+1 checks: 26 pass, 0 fail

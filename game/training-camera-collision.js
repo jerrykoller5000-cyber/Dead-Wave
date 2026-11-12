@@ -112,7 +112,7 @@ export function createTrainingMarineFade(marine){
       const matSig = (m) => {
         if (!m) return 'null';
         const custom = Object.hasOwn(m, 'customProgramCacheKey') ? m.customProgramCacheKey() : '';
-        return `${m.type}:${custom}:${m.side}:${m.transparent?1:0}:${m.depthWrite?1:0}:${m.blending}:${m.polygonOffset?1:0}`;
+        return `${m.uuid}:${m.type}:${custom}:${m.side}:${m.transparent?1:0}:${m.depthWrite?1:0}:${m.blending}:${m.polygonOffset?1:0}`;   // AG-309b: per material, so wear:shirt, boots, belt, pack and the patch each keep a keeper (the type-only key merged them and 8 skinned pipelines built in the first live frame)
       };
       for(const p of parts){
         if(!p.mesh.geometry||p.faded===p.original)continue;

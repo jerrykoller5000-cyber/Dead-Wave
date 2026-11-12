@@ -1,12 +1,12 @@
 # Claude 5
 
-state: blocked
+state: active
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: CE-2 the Wasp index with its middle crease on the blade (Director 03:19Z), then the AA-12 index on Claude 1's 01:50Z fist
-touching: —
-since: 2026-11-12T05:13Z
+task: CE-4 the knife stab at the eye first (real thrust, gun away and back clean), then the machete/katana swings, then the grenade throw
+touching: game/viewmodel.js (motion sections), game/viewmodel-poses.js (VM_HANDS)
+since: 2026-11-12T05:43Z
 next: CE-4 (16:57Z, CLAUDE DIRECTOR: part 3 accepted at the eye: the HQ
-blocked-on: the rest of CE-2 waits on gun-side work (GT-20090, GT-20092, the Wasp/sniper/AK fists); session context nearly full
+blocked-on: —
 last-report: handoffs/2026-11-12-claude5-CE-2b.md
 
 ## Notes

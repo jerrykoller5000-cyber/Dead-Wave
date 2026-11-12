@@ -36,3 +36,11 @@ Blackout-lift frame under 50 ms (item 1); before/after faded-marine pictures (it
 - So the stall is intermittent and is 3 pipelines the warm-up misses when some async piece has not finished by the lift. It is not the marine shadow proxy: with MARINE_SHADOW_PAD=[128] the rebuild after the lift costs about 13 ms and is no longer a shader compile.
 - Not yet found: which 3 shaders they are (the cache keys are hashes; the vertex/fragment text was meant to classify them but the one run that could classify them had none to show).
 - Next step: run the classification probe repeatedly until it catches the 3 new shaders, then add what they belong to into trainingWarmCompile (or hold the lift until the same async piece is done).
+
+## Update 06:15Z (Sonnet 5.5): item 1 fixed, item 3 first-use diagnosed
+- **Item 1 fixed.** The 1.16 s / 0.33 s frame at the lift was the marine's skinned wear pipelines (wear:shirt, boots, belt, pack, pgb-patch, rig-skin-plain): 8 pipelines, about 630 ms in the first live frame. game/training-camera-collision.js prepareWarmup deduped its keeper meshes by material type only, so most wear materials got no keeper. matSig now starts with the material uuid (1 line). After it, 2 of 3 attempts had no slow frame at all and the third had one 58-60 ms frame (one material: rig-skin-plain, still built live). t38 26/0, t215 4/0.
+- **3P first-equip hitch (idle 400 ms, equip 367 ms): not a real first-use hitch.** In both attempts the cost was the revolver's instanced parts (revolver-visible-tips, revolver-chamber-layer-0, 4 pipelines, 130-165 ms) 5 groups deep, i.e. a display copy, not the equipped gun. It appears after TT.grantAllWeapons(): the Armory rack builds its display guns then. Real play buys guns through the Armory, and AG-310b already showed 3P buy at 33 ms max. Warming the marine's instanced parts did not change it (tried, reverted), so I left the code alone.
+- **Not done:** overlapping the 3.2 s tail (warmArmoryPics during compileAsync), the faded-marine before/after pictures (item 4), the remaining 58-60 ms rig-skin-plain frame. 1P is untouched and stays warm.
+
+## Changed (this update):
+game/training-camera-collision.js (matSig: material uuid). qa/2026-11-11-AG-309b/probe-lift5.mjs, probe-3p-first.mjs.
