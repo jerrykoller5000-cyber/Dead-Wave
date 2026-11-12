@@ -528,7 +528,7 @@ export function buildMarineBody(T, {root, put, rmesh: roundedMesh, cyl, part, dr
         return [(1-a)*(1-e),a*(1-e),e];
       };
       const upper=girth([[.036,.043,.05,-side*.061],[.022,.069,.07,-side*.042,-.004],[-.018,.075,.078,-side*.027,-.003],[-.09,.068,.073,-side*.022],[-.175,.0635,.0675,-side*.008,.002],[-.215,.061,.065,-side*.004,.002],[-.25,.0585,.0625],[-.28,.0575,.0615]],ARM_GIRTH);
-      const fore=girth([[-.025,.059,.062,ox*.15,oz*.1],[-.05,.066,.07,ox*.35,oz*.3],[-.105,.063,.069,ox*.8,oz*.7],[-.135,.0575,.0615,ox*.92,oz*.86]],FORE_GIRTH).map(([y,rx,rz,,],i)=>[y,rx,rz,[ox*.15,ox*.35,ox*.8,ox*.92][i],[oz*.1,oz*.3,oz*.7,oz*.86][i]]).concat([[-.165,.047,.049,ox,oz+CUFF_FWD*.6],[-.2,.043,.042,ox,oz+CUFF_FWD],[-.226,.042,.041,ox,oz+CUFF_FWD]]);
+      const fore=girth([[-.025,.059,.062,ox*.15,oz*.1],[-.05,.066,.07,ox*.35,oz*.3],[-.105,.063,.069,ox*.8,oz*.7],[-.135,.0575,.0615,ox*.92,oz*.86]],FORE_GIRTH).map(([y,rx,rz,,],i)=>[y,rx,rz,[ox*.15,ox*.35,ox*.8,ox*.92][i],[oz*.1,oz*.3,oz*.7,oz*.86][i]]).concat([[-.165,.047,.049,ox,oz+CUFF_FWD*.6],[-.2,.051,.042,ox,oz+CUFF_FWD],[-.226,.05,.041,ox,oz+CUFF_FWD]]);   // tcc341: 8 mm wider across at the end, over the cuff's outer edge (4.5 mm through)
       const down=loftRings(T,[...ringsIn(T,root,armG,subdiv(upper,1),{e:.72}),...ringsIn(T,root,elbowG,subdiv(fore,1),{e:.72})],30,{caps:'first'});
       const seamGeo=(pts)=>geoIn(T,root,armG,new T.TubeGeometry(new T.CatmullRomCurve3(pts.map(q=>new T.Vector3(...q))),12,.0012,4,false));
       const capSeamG=seamGeo([[side*.0172,.022,.0328],[side*.0344,-.018,.0379],[side*.0332,-.09,.0378]]);
@@ -549,7 +549,7 @@ export function buildMarineBody(T, {root, put, rmesh: roundedMesh, cyl, part, dr
       liveCloth(T,{space:root,bones,geo:skinL.geo,weights:weigh(T,root,bones,skinL.geo,w3),material:skinW,name:'live-bare-arm',holder:rolled.parent});
       dress.sleeveRolled.push(rolled.parent);
     }
-    put(sleeve,rmesh(.088,.022,.086,uniformW,.008),ox,-.211,oz+CUFF_FWD);   // GB-169: the cuff closes round the slimmer wrist (CC-341: round the glove's)
+    put(sleeve,rmesh(.104,.022,.086,uniformW,.008),ox,-.211,oz+CUFF_FWD);   // tcc341: as wide as the sleeve's end   // GB-169: the cuff closes round the slimmer wrist (CC-341: round the glove's)
     put(sleeve,rmesh(.04,.016,.007,uniformW,.003),ox+side*.02,-.211,oz+.045+CUFF_FWD);
     put(sleeve,cyl(.004,.004,.003,beltW,6),ox+side*.031,-.211,oz+.05+CUFF_FWD,Math.PI/2);
     seam(sleeve,[[ox+side*.0445,-.17,oz+.0332],[ox*.8+side*.0497,-.105,oz*.7+.037],[ox*.55+side*.0528,-.075,oz*.5+.038]],uniformW,.0012);

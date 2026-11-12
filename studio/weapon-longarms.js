@@ -168,7 +168,8 @@ export function makeM4Model(ctx) {
     for (const piece of plate.children) markPaintSurface(piece, 'optic shell');
   });
   gun.userData.ejectPort = [UW / 2 + 0.008, 0.029, 0.062];
-  K.slab([[-0.11, 0.0], [0.16, 0.0], [0.16, 0.058], [-0.06, 0.058], [-0.11, 0.04]], 0.012, finish.upper, { x: UW / 2, bevel: 0.004 });   // the bulge round the port
+  const windowPanel = K.slab([[-0.11, 0.0], [0.16, 0.0], [0.16, 0.058], [-0.06, 0.058], [-0.11, 0.04]], 0.012, finish.upper, { x: UW / 2, bevel: 0.004 });
+  trimPanelBack(THREE, windowPanel, 1, UW / 2);
   gw4Window(THREE, gun, K, UW / 2 + .006, finish, gunRubber);
   K.slab([[0.014, -0.022], [0.104, -0.022], [0.104, 0.011], [0.014, 0.011]], 0.004, finish.seam, { x: LW / 2 + 0.005, bevel: 0.0015 });   // the port cover, open: hinged under the port, hanging down the lower's side
   D.pin(gun, LW / 2 + 0.004, 0.012, 0.0604, { axis: 'z', len: 0.094, r: 0.0016 });                                                     // its hinge pin along the port's bottom edge
@@ -226,7 +227,9 @@ export function makeM4Model(ctx) {
     geometry.computeBoundingSphere();
   }   // the trigger guard
   addTriggerArtwork(gun, K, [[-0.0283, -0.0525], [-0.0367, -0.0689], [-0.0359, -0.0843], [-0.0272, -0.0957], [-0.0328, -0.1003], [-0.0441, -0.0877], [-0.0473, -0.0671], [-0.0397, -0.0475]], 0.012, gunDark, { bevel: 0.002 });   // GB-175/180: the trigger
-  K.slab(shapedGrip(-0.12, -0.12, 0.18, 0.08, 0.3, [[-0.12, 0.04], [0.04, 0.04], [0.04, -0.046], [-0.12, -0.046]]), 0.048, finish.lower, { bevel: 0.006, segs: 2 });   // the lower's grip mount, the grip grows out of it
+  const collarOutline = shapedGrip(-0.12, -0.12, 0.18, 0.08, 0.3, [[-0.12, 0.04], [0.04, 0.04], [0.04, -0.046], [-0.12, -0.046]]);
+  const collar = K.slab(collarOutline, 0.048, finish.lower, { bevel: 0.006, segs: 2 });
+  fitCollarFaces(THREE, collar, LW / 2);
   // CL-312 b (Jerry: "check and fix all pistol grips"): an A2 grip at an A2's size (32 mm wide, 53 mm deep under the
   // beavertail, 46 at the palm): the finger nub on the front strap and the four ridges under it, the backstrap's swell,
   // a flat base with its trapdoor and screw. The centre line, h and rake are as before, so the palm point stays.
@@ -257,7 +260,8 @@ export function makeM4Model(ctx) {
   K.slab([[-0.569, 0.077], [-0.552, 0.077], [-0.552, -0.08], [-0.567, -0.083]], 0.06, gunRubber, { bevel: 0.006, parent: stock });                              // the pad
   K.slab([[-0.34, 0.005], [-0.402, -0.01], [-0.401, -0.021], [-0.36, -0.018], [-0.34, -0.008]], 0.026, gunDark, { bevel: 0.003, parent: stock });              // the release lever
   for (const sx of [-1, 1]) {
-    K.slab([[-0.365, 0.053], [-0.505, 0.06], [-0.522, 0.047], [-0.37, 0.04]], 0.004, finish.furniture, { x: sx * 0.029, bevel: 0.002 });                  // the cheek's side panel line
+    const cheekStripe = K.slab([[-0.365, 0.053], [-0.505, 0.06], [-0.522, 0.047], [-0.37, 0.04]], 0.004, finish.furniture, { x: sx * 0.029, bevel: 0.002 });
+    trimPanelBack(THREE, cheekStripe, sx, .029);
     K.cyl(0.011, 0.011, 0.004, gunDark, sx * 0.028, -0.045, -0.516, stock, 12, 'x');                                                                           // the QD socket
     K.cyl(0.0065, 0.0065, 0.005, gunRubber, sx * 0.03, -0.045, -0.516, stock, 10, 'x');
     K.box(0.003, 0.012, 0.03, gunRubber, sx * 0.029, 0.01, -0.46, 0, 0, 0, stock, 0.001);                                                                      // the sling slot
@@ -343,11 +347,23 @@ export function makeM4Model(ctx) {
   const mag = K.group(0, -0.16, 0.05);
   K.slab([[-0.046, 0.108], ...profileCurve([-0.046, 0.03], [-0.04, -0.05], [-0.01, -0.104], 5), ...profileCurve([0.086, -0.096], [0.054, -0.04], [0.046, 0.03], 5), [0.046, 0.108]],
     0.036, finish.magazine, { bevel: 0.004, parent: mag });
+  const bandHalfWidth = .0195, bandHalfLength = .041, bandBevel = .001;
+  const bandCentreZ = y => .011 - y * .15;
+  // In the rounded box's middle row the 45-degree end facet recedes in both X and Z.
+  const edgeDrop = (1 - Math.SQRT1_2) * bandBevel;
+  const bandSideSlope = edgeDrop / (bandHalfLength - edgeDrop);
   for (const sx of [-1, 1]) {
-    for (const z of [-0.027, 0, 0.027]) K.slab(gunBand([[z, 0.053], [z + 0.004, -0.012], [z + 0.012, -0.07], [z + 0.019, -0.095]], 0.003), 0.003, finish.rib, { x: sx * 0.0185, bevel: 0, parent: mag });
-    for (const [z, y] of [[0.035, -0.02], [0.04, -0.05], [0.046, -0.08]]) K.box(0.002, 0.006, 0.006, gunRubber, sx * 0.0185, y, z, 0, 0, 0, mag, 0.0006);   // the witness windows
+    for (const z of [-0.027, 0, 0.027]) K.slab(gunBand([[z, 0.053], [z + 0.004, -0.012], [z + 0.012, -0.07], [z + 0.019, -0.095]], 0.003), 0.002, finish.rib, { x: sx * 0.019, bevel: 0, parent: mag });
+    // The small dark marks sit on the cross bands just beyond the last raised rib.
+    for (const [z, y] of [[.039, -.018], [.044, -.049], [.050, -.080]]) {
+      const backX = bandHalfWidth - (z - .0028 - bandCentreZ(y)) * bandSideSlope;
+      const frontX = .020;
+      K.slab([[z-.0028,y-.0016],[z+.0028,y-.0016],[z+.0028,y+.0016],[z-.0028,y+.0016]],
+        frontX - backX, gunRubber, { x: sx * (frontX + backX) / 2, bevel: .00015, parent: mag });
+    }
   }
-  for (const y of [-0.018, -0.049, -0.08]) K.box(0.039, 0.004, 0.082, finish.furniture, 0, y, 0.011 - y * 0.15, 0, 0, 0, mag, 0.001);   // the grip rings
+  for (const y of [-.018, -.049, -.08]) K.box(2*bandHalfWidth, .004, 2*bandHalfLength,
+    finish.furniture, 0, y, bandCentreZ(y), 0, 0, 0, mag, bandBevel);
   K.slab([[-0.016, -0.1], [0.092, -0.092], [0.094, -0.11], [-0.016, -0.118]], 0.042, finish.seam, { bevel: 0.004, parent: mag });   // the floorplate, proud of the body
   gun.userData.mag = mag;
   gun.userData.baseMagPos = mag.position.clone();
@@ -495,7 +511,8 @@ export function makeAkModel(ctx) {
     for (const [ry, rz] of [[0.012, 0.19], [-0.012, 0.19], [0.0, 0.232], [-0.012, -0.165], [0.012, -0.205]]) D.rivet(gun, sx * HW, ry, rz, { axis: 'x', side: sx, r: 0.0032 });   // the trunnions' rivets
     for (const rz of [-0.04, 0.02]) D.rivet(gun, sx * HW, -0.02, rz, { axis: 'x', side: sx, r: 0.0028 });   // the trigger guard's
     D.groove(gun, { x: sx * HW, y: 0.004, z: 0.2, axis: 'x', side: sx, along: 'y', len: 0.05, w: 0.0007 });   // the front trunnion's seam
-    K.box(0.003, 0.016, 0.07, gunBody, sx * (HW + 0.0005), 0.0, 0.07, 0, 0, 0, null, 0.0012);                 // the dimple over the magazine well, as a pressed boss
+    const stamp = K.box(.003, .016, .07, gunBody, sx * (HW + .0005), 0, .07, 0, 0, 0, null, .0012);
+    trimPanelBack(THREE, stamp, sx, HW);
   }
   D.pin(gun, 0, 0.0, -0.12, { axis: 'x', len: 2 * HW, r: 0.003, mat: gunDark, caps: true });   // the hammer pin
   D.pin(gun, 0, -0.006, -0.06, { axis: 'x', len: 2 * HW, r: 0.003, mat: gunDark, caps: true });  // the trigger pin
@@ -600,7 +617,10 @@ export function makeAkModel(ctx) {
     ...profileCurve([-0.412, 0.012], [-0.515, 0.017], [-0.571, -0.009], 5), [-0.579, -0.145], [-0.57, -0.153],
     ...profileCurve([-0.57, -0.153], [-0.414, -0.084], [-0.337, -0.069], 5),
     ...profileCurve([-0.337, -0.069], [-0.27, -0.044], [-0.232, -0.028], 4)], 0.046, woodMat, { bevel: 0.01, segs: 3, parent: stock });
-  K.slab([[-0.252, 0.029], [-0.218, 0.029], [-0.218, -0.029], [-0.252, -0.029]], 2 * HW + 0.001, gunBody, { bevel: 0.0025, parent: stock });   // the rear trunnion's sleeve
+  const stockCollar = K.slab([[-0.252, 0.029], [-0.218, 0.029], [-0.218, -0.029], [-0.252, -0.029]], 2 * HW + 0.001, gunBody, { bevel: 0.0025, parent: stock });
+  // Keep the original birch visible from the eye. Fill just the gap between it and the body.
+  const joint = slab([[-.232,.029],[-.225,.029],[-.225,-.018],[-.232,-.028]],2 * HW,.001,2);
+  fitCollarFaces(THREE, stockCollar, HW, joint);
   for (const sx of [-1, 1]) for (const ry of [0.014, -0.014]) D.rivet(stock, sx * (HW + 0.0005), ry, -0.236, { axis: 'x', side: sx, r: 0.0032 });
   K.slab([[-0.592, 0.0], [-0.573, -0.004], [-0.579, -0.152], [-0.597, -0.156]], 0.056, gunDark, { bevel: 0.003, parent: stock });   // the buttplate
   for (const y of [-0.03, -0.125]) {
@@ -655,15 +675,17 @@ export function makeAkModel(ctx) {
   // Banana mag: the deep curve, three pressed ribs down each side, the floorplate; 27 mm across now, its top at the well.
   const mag = K.group(0, -0.04, 0.04);
   const magB = profileCurve([-0.046, 0.012], [-0.04, -0.13], [0.052, -0.258], 7), magF = profileCurve([0.056, 0.012], [0.066, -0.11], [0.156, -0.232], 7);
-  K.slab([...magB, ...magF.slice().reverse()], 0.034, gunAccent, { bevel: 0.004, parent: mag });
+  const backBorder = gunBand(magB, .002), frontBorder = gunBand(magF, .002);
+  // The centre paint ends at the inner edges of the two dark border graphics.
+  K.slab([...backBorder.slice(0,magB.length), ...frontBorder.slice(magF.length)], 0.034, gunAccent, { bevel: 0.004, parent: mag });
   for (const w of [0.23, 0.5, 0.77]) {
     const line = magB.map(([z,y], i) => [z * (1-w) + magF[i][0] * w, y * (1-w) + magF[i][1] * w]);
     const outline = gunBand(line.slice(1, 7), 0.003);
     const relief = K.slab(outline, 0.037, gunBody, { bevel: 0.0012, parent: mag });
     separateBandFaces(THREE, relief.geometry, outline, 0.034 / 2);
   }
-  K.slab(gunBand(magB.slice(0, 8), 0.002), 0.035, gunDark, { bevel: 0.001, parent: mag });
-  K.slab(gunBand(magF.slice(0, 8), 0.002), 0.035, gunDark, { bevel: 0.001, parent: mag });
+  K.slab(backBorder, 0.035, gunDark, { bevel: 0.001, parent: mag });
+  K.slab(frontBorder, 0.035, gunDark, { bevel: 0.001, parent: mag });
   K.box(0.036, 0.018, 0.1, gunDark, 0, -0.01, 0.007, 0, 0, 0, mag, 0.002);                                // the well's lips
   // The front lug seats first; the rear locking lug catches when the magazine rocks back into the well.
   K.box(0.018, 0.009, 0.018, gunDark, 0, 0.01, 0.06, 0, 0, 0, mag, 0.001);
@@ -756,11 +778,11 @@ function separateBandFaces(T, geometry, outline, faceX) {
 
 // Clip the back of a convex decorative panel against its support. All original
 // exposed positions, normals and UVs remain in the same local coordinates.
-function trimPanelBack(T, panel, side, supportFace) {
+export function trimPanelBack(T, panel, side, supportFace, axis = 'x') {
   const source = panel.geometry;
   const {position, normal, uv} = source.attributes;
-  const planeX = side * supportFace - panel.position.x;
-  const distance = vertex => side * (vertex.point.x - planeX);
+  const plane = side * supportFace - panel.position[axis];
+  const distance = vertex => side * (vertex.point[axis] - plane);
   const vertices = Array.from({length: position.count}, (_, i) => ({
     point: new T.Vector3().fromBufferAttribute(position, i),
     normal: new T.Vector3().fromBufferAttribute(normal, i),
@@ -784,7 +806,7 @@ function trimPanelBack(T, panel, side, supportFace) {
       if ((da < 0) === (db < 0)) continue;
       const t = da / (da - db);
       const v = {point: a.point.clone().lerp(b.point, t), normal: a.normal.clone().lerp(b.normal, t), uv: a.uv.clone().lerp(b.uv, t)};
-      v.point.x = planeX;
+      v.point[axis] = plane;
       kept.push(v); ends.push(v.point);
     }
     for (let j = 2; j < kept.length; j++) triangle(kept[0], kept[j - 1], kept[j]);
@@ -796,12 +818,15 @@ function trimPanelBack(T, panel, side, supportFace) {
   const centre = new T.Vector3();
   for (const [a, b] of edges) centre.add(a).add(b);
   centre.multiplyScalar(1 / (2 * edges.length));
-  const backNormal = new T.Vector3(-side, 0, 0);
-  const back = point => ({point, normal: backNormal, uv: new T.Vector2(point.z * 4, point.y * 4)});
+  const backNormal = new T.Vector3();
+  backNormal[axis] = -side;
+  const back = point => ({point, normal: backNormal, uv: new T.Vector2(
+    (axis === 'z' ? point.x : point.z) * 4, (axis === 'y' ? point.x : point.y) * 4)});
+  const [u, v] = {x: ['y','z'], y: ['z','x'], z: ['x','y']}[axis];
   const middle = back(centre);
   for (const [a, b] of edges) {
-    const crossX = (a.y - centre.y) * (b.z - centre.z) - (a.z - centre.z) * (b.y - centre.y);
-    if (side * crossX > 0) triangle(middle, back(b), back(a));
+    const cross = (a[u] - centre[u]) * (b[v] - centre[v]) - (a[v] - centre[v]) * (b[u] - centre[u]);
+    if (side * cross > 0) triangle(middle, back(b), back(a));
     else triangle(middle, back(a), back(b));
   }
   const trimmed = new T.BufferGeometry();
@@ -810,7 +835,26 @@ function trimPanelBack(T, panel, side, supportFace) {
   trimmed.setAttribute('uv', new T.Float32BufferAttribute(uvs, 2));
   trimmed.computeBoundingSphere();
   panel.geometry = trimmed;
-  source.dispose();
+  if (!source.userData.shared) source.dispose();
+}
+
+// Clip each outside face on its true bevel. The short centre patch is used only at an exposed join.
+function fitCollarFaces(T, panel, halfWidth, centre = null) {
+  const other = panel.clone();
+  other.geometry = panel.geometry.clone();
+  trimPanelBack(T, panel, -1, halfWidth);
+  trimPanelBack(T, other, 1, halfWidth);
+  const pieces = centre ? [panel.geometry,other.geometry,centre] : [panel.geometry,other.geometry];
+  for (const key of ['position','normal','uv']) {
+    const attributes = pieces.map(g => g.attributes[key]);
+    const values = new Float32Array(attributes.reduce((n,a) => n + a.array.length, 0));
+    let offset = 0;
+    for (const attr of attributes) { values.set(attr.array, offset); offset += attr.array.length; }
+    panel.geometry.setAttribute(key, new T.BufferAttribute(values,attributes[0].itemSize));
+  }
+  panel.geometry.computeBoundingSphere();
+  other.geometry.dispose();
+  if (centre) centre.dispose();
 }
 
 // A closed rounded skin with a flat underside. The ring's cut height follows
@@ -901,7 +945,19 @@ export function makeAa12Model(ctx) {
   }
   // The carry handle: one uninterrupted top and a clear opening under it; the rear sight's aperture ring at 0.168, the
   // sight line (GB-259/J20); two sling loops.
-  const handle = K.slab(gunBand([[-0.17, 0.09], [-0.153, 0.143], [-0.138, 0.151], [0.188, 0.151], [0.217, 0.13], [0.225, 0.09]], 0.009), 0.04, gunDark, { bevel: 0.003 });
+  const band = gunBand([[-0.17, 0.09], [-0.153, 0.143], [-0.138, 0.151], [0.188, 0.151], [0.217, 0.13], [0.225, 0.09]], 0.009);
+  // End each foot at the central facet of the painted cover.
+  const crown = topCorner[1] + .045 * Math.cos(Math.PI / 28);
+  const handleOutline = [];
+  for (let i = 0; i < band.length; i++) {
+    const a = band[i], b = band[(i + 1) % band.length];
+    if (a[1] >= crown) handleOutline.push(a);
+    if ((a[1] < crown) !== (b[1] < crown)) {
+      const t = (crown - a[1]) / (b[1] - a[1]);
+      handleOutline.push([a[0] + t * (b[0] - a[0]), crown]);
+    }
+  }
+  const handle = K.slab(handleOutline, 0.04, gunDark, { bevel: 0.003 });
   for (const z of [-0.158, 0.211]) D.pin(gun, 0, 0.108, z, { axis: 'x', len: 0.04, r: 0.0035, proud: 0.001, caps: z === -0.158 });
   K.box(0.025, 0.007, 0.025, gunDark, 0, 0.156, -0.12, 0, 0, 0, null, 0.002);
   K.tor(0.009, 0.003, plateSteel, 0, 0.168, -0.12, 0, 0, 0, null, Math.PI * 2, 12);
@@ -1366,7 +1422,18 @@ export function makeShotgunModel(ctx) {
     pumpOutline.push([0.028, z], [0.030, z + 0.003], [0.030, z + 0.010], [0.028, z + 0.014]);
   }
   pumpOutline.push([0.028, 0.19], [0.026, 0.20], [0.020, 0.21], [0, 0.21]);
-  K.lathe(pumpOutline, finish.furniture, { seg: 18, parent: pump });
+  const pumpSkin = K.lathe(pumpOutline, finish.furniture, { seg: 18, parent: pump });
+  // Keep the moulded sides and lower hand contact. Only the upper display seam is flat.
+  const pumpVertices = pumpSkin.geometry.attributes.position, pumpNormals = pumpSkin.geometry.attributes.normal;
+  const seamY = .0145 - pump.position.y;
+  for (let i = 0; i < pumpVertices.count; i += 3) {
+    const flat = [i, i + 1, i + 2].every(j => pumpVertices.getY(j) >= seamY);
+    for (let j = i; j < i + 3; j++) {
+      if (pumpVertices.getY(j) > seamY) pumpVertices.setY(j, seamY);
+      if (flat) pumpNormals.setXYZ(j, 0, 1, 0);
+    }
+  }
+  pumpSkin.geometry.computeBoundingSphere();
   for (const sx of [-1, 1]) K.box(0.004, 0.011, 0.26, finish.edge, sx * 0.017, 0.0, -0.1, 0, 0, 0, pump, 0.001);   // the action bars (out of the forend's back into the receiver)
   gun.userData.shotgunBolt = shotgunBolt;
   gun.userData.pump = pump;
@@ -1559,7 +1626,7 @@ export function makeSniperModel(ctx) {
   K.box(0.05, 0.012, 0.455, gunTan, 0, -0.035, 0.417, 0, 0, 0, null, 0.004);
   D.vents(gun, { x: 0, y: -0.041, z: 0.42, axis: 'y', side: -1, along: 'z', count: 5, pitch: 0.08, w: 0.012, len: 0.056, deep: 0.003 });   // 6-o'clock M-LOK
   for (const sx of [-1, 1]) {
-    K.slab([[0.197, 0.042], [0.635, 0.042], [0.647, 0.029], [0.64, 0.012], [0.197, 0.012]], 0.009, gunTan, { x: sx * 0.027, bevel: 0.003 });
+    K.slab([[0.197, 0.041], [0.635, 0.041], [0.647, 0.029], [0.64, 0.012], [0.197, 0.012]], 0.009, gunTan, { x: sx * 0.027, bevel: 0.003 });
     K.slab([[0.197, -0.014], [0.64, -0.014], [0.65, -0.024], [0.635, -0.042], [0.197, -0.042]], 0.009, gunTan, { x: sx * 0.027, bevel: 0.003 });
     for (let i = 0; i <= 5; i++) {
       const z = 0.208 + i * 0.083;
@@ -1588,12 +1655,15 @@ export function makeSniperModel(ctx) {
   // CL-312 b (Jerry: "check and fix all pistol grips"): the thumbhole stock's grip as a moulded grip (34 mm wide, 54 deep
   // at the swell; it was a 45 mm plank), the finger grooves on its front strap, a flared heel and a flat base; the
   // rubber panels and their screw on its sides. The centre line, h and rake are gripOutline's, so the palm point stays.
-  K.slab(shapedGrip(-0.12, -0.1, 0.16, 0.08, 0.25, [
+  const palm = K.slab(shapedGrip(-0.12, -0.1, 0.16, 0.08, 0.25, [
     [-0.06, 0.036], [0.1, 0.032], [0.22, 0.026], [0.32, 0.03], [0.42, 0.025], [0.52, 0.029], [0.62, 0.024], [0.72, 0.027], [0.86, 0.026], [0.98, 0.03],
     [1.04, 0.016], [1.04, -0.02], [0.99, -0.04], [0.82, -0.043], [0.55, -0.042], [0.3, -0.038], [0.1, -0.036], [-0.06, -0.038]
   ]).map(([z, y]) => [z, Math.min(y, -0.04)]), 0.048, gunPoly, { bevel: 0.011, segs: 3 });
+  trimPanelBack(THREE, palm, -1, .052, 'y');
   for (const sx of [-1, 1]) {
-    K.slab(shapedGrip(-0.12, -0.1, 0.16, 0.08, 0.25, [[0.2, 0.012], [0.95, 0.014], [0.95, -0.026], [0.2, -0.022]]), 0.003, gunRubber, { x: sx * 0.0235, bevel: 0.002 });
+    const cheek = K.slab(shapedGrip(-0.12, -0.1, 0.16, 0.08, 0.25, [[0.2, 0.012], [0.95, 0.014], [0.95, -0.026], [0.2, -0.022]]), 0.003, gunRubber, { x: sx * 0.0235, bevel: 0.002 });
+    trimPanelBack(THREE, cheek, sx, .024);
+    trimPanelBack(THREE, cheek, -1, .052, 'y');
     D.screw(gun, sx * 0.025, -0.1 - 0.1 * 0.16 * Math.cos(0.25), -0.12 - 0.1 * 0.16 * Math.sin(0.25), { axis: 'x', side: sx, r: 0.003, kind: 'slot' });   // the panel screw at the palm point
   }
   // CL-318 (J30: "the mag should have more width"): 36 mm (0.05) like a big-bore box, the floorplate 40, the ribs at its edges.
@@ -1674,7 +1744,8 @@ export function makeSniperModel(ctx) {
       const diagonal = z === -0.29 && y < 0;
       D.screw(stock, sx * (diagonal ? 0.0285 : 0.028), y, z, { axis: 'x', side: sx, r: 0.004, head: diagonal ? 0.0011 : 0.0016, kind: 'hex' });
     }
-    K.slab(gunBand([[-0.309, -0.05], [-0.444, -0.076], [-0.564, -0.098]], 0.002), 0.003, gunBody, { x: sx * 0.025, bevel: 0.001, parent: stock });
+    const stripe = K.slab(gunBand([[-0.309, -0.05], [-0.444, -0.076], [-0.564, -0.098]], 0.002), 0.003, gunBody, { x: sx * 0.025, bevel: 0.001, parent: stock });
+    trimPanelBack(THREE, stripe, sx, .025);
   }
   stock.position.z = -0.26;
   for (const piece of stock.children) piece.position.z += 0.26;   // rest pose unchanged; rotate about the fold hinge
@@ -1682,7 +1753,8 @@ export function makeSniperModel(ctx) {
   K.box(0.04, 0.02, 0.1, gunTan, 0, -0.03, -0.26, 0, 0, 0, null, 0.006);
   // GB-173 (Jerry: a gap in the stock above the grip): the chassis is solid through the wrist, rear block to magwell,
   // under the action and above the grip and trigger.
-  K.slab([[-0.245, 0.014], [-0.026, 0.014], [-0.026, -0.04], [-0.245, -0.04]], 0.056, gunTan, { bevel: 0.006 });
+  const wrist = K.slab([[-.239, .014], [-.026, .014], [-.026, -.04], [-.239, -.04]], .056, gunTan, { bevel: .006 });
+  trimPanelBack(THREE, wrist, 1, -.034, 'y');
   // Round action with its bolt shroud, and the rail.
   // GB-180 pass 6: a beefier round action (r 0.036 -> 0.042), a big bolt shroud and a recoil lug under it.
   // CL-318 (J30: "the bolt and its recess need to look a little better"; Jerry, 8 Nov: "a bolt action sniper does not
@@ -1702,7 +1774,8 @@ export function makeSniperModel(ctx) {
     shell.position.set(0, 0.045, 0.016); shell.rotation.x = Math.PI / 2; shell.castShadow = true; shell.receiveShadow = true; gun.add(shell);
     for (const a of [-0.349, 1.047]) K.box(0.0045, 0.002, 0.102, gunBody, 0.0248 * Math.cos(a), 0.045 + 0.0248 * Math.sin(a), 0.016, 0, 0, a);   // the wall's thickness at the cut's edges
   }
-  K.box(0.031, 0.014, 0.34, gunDark, 0, 0.074, -0.02, 0, 0, 0, null, 0.002);   // the rail's base on the action's flat
+  const railBase = K.box(0.031, 0.014, 0.34, gunDark, 0, 0.074, -0.02, 0, 0, 0, null, 0.002);
+  trimPanelBack(THREE, railBase, 1, .045 + rearRadius, 'y');
   const cladding=new THREE.Mesh(squareCladding(THREE,rearRadius,.104,.005,rearFacets),gunBody);
   cladding.position.set(0,.045,-.184);
   cladding.castShadow=cladding.receiveShadow=true;

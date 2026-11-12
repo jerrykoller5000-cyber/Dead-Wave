@@ -1,0 +1,1009 @@
+{
+  "task": "AG-311",
+  "timestamp": "2026-11-11T21:18:12.120Z",
+  "gpu": "NVIDIA GeForce RTX 5080 (WebGPU)",
+  "lights": {
+    "noon": {
+      "lights": {
+        "on": true,
+        "night": false,
+        "room": true
+      },
+      "ceiling": {
+        "visible": true,
+        "on": true,
+        "firstPerson": true,
+        "baked": {
+          "merged": 4,
+          "removed": 57
+        },
+        "lightCount": 4
+      },
+      "draws": 246,
+      "playerPos": [
+        0,
+        -200,
+        -643
+      ],
+      "cameraPos": [
+        0.0001626411910103027,
+        -195.21860760224476,
+        -645.8162017298602
+      ],
+      "shot": {
+        "filename": "light-noon.png",
+        "bytes": 143941,
+        "sha": "b883b970c48c"
+      }
+    },
+    "overcast": {
+      "lights": {
+        "on": true,
+        "night": false,
+        "room": true
+      },
+      "ceiling": {
+        "visible": true,
+        "on": true,
+        "firstPerson": true,
+        "baked": {
+          "merged": 4,
+          "removed": 57
+        },
+        "lightCount": 4
+      },
+      "draws": 147,
+      "playerPos": [
+        0,
+        -200,
+        -643
+      ],
+      "cameraPos": [
+        0.0012174998765643343,
+        -198.55749929276539,
+        -642.9071039413247
+      ],
+      "shot": {
+        "filename": "light-overcast.png",
+        "bytes": 147409,
+        "sha": "7e2c15d9c275"
+      }
+    },
+    "dusk": {
+      "lights": {
+        "on": true,
+        "night": false,
+        "room": true
+      },
+      "ceiling": {
+        "visible": true,
+        "on": true,
+        "firstPerson": true,
+        "baked": {
+          "merged": 4,
+          "removed": 57
+        },
+        "lightCount": 4
+      },
+      "draws": 147,
+      "playerPos": [
+        0,
+        -200,
+        -643
+      ],
+      "cameraPos": [
+        0.0014850782613678006,
+        -198.5776043801657,
+        -642.8859784684436
+      ],
+      "shot": {
+        "filename": "light-dusk.png",
+        "bytes": 147930,
+        "sha": "ee90b2054afc"
+      }
+    },
+    "night": {
+      "lights": {
+        "on": true,
+        "night": false,
+        "room": true
+      },
+      "ceiling": {
+        "visible": true,
+        "on": true,
+        "firstPerson": true,
+        "baked": {
+          "merged": 4,
+          "removed": 57
+        },
+        "lightCount": 4
+      },
+      "draws": 147,
+      "playerPos": [
+        0,
+        -200,
+        -643
+      ],
+      "cameraPos": [
+        0.0016621694328181756,
+        -198.57794267230958,
+        -642.8860376226436
+      ],
+      "shot": {
+        "filename": "light-night.png",
+        "bytes": 147922,
+        "sha": "a4d9bd8941e0"
+      }
+    },
+    "lights-off": {
+      "lights": {
+        "on": false,
+        "night": true,
+        "room": false
+      },
+      "ceiling": {
+        "visible": true,
+        "on": false,
+        "firstPerson": true,
+        "baked": {
+          "merged": 4,
+          "removed": 57
+        },
+        "lightCount": 4
+      },
+      "draws": 147,
+      "playerPos": [
+        0,
+        -200,
+        -643
+      ],
+      "cameraPos": [
+        0.0018305353598812738,
+        -198.5783024101233,
+        -642.8868091276464
+      ],
+      "shot": {
+        "filename": "light-lights-off.png",
+        "bytes": 125528,
+        "sha": "cd9ea33c5e12"
+      }
+    }
+  },
+  "laneViews": {
+    "lane-from-line-noon": {
+      "view": {
+        "x": 0,
+        "y": -198.4,
+        "z": -643,
+        "tx": 0,
+        "ty": -188.4,
+        "tz": -633,
+        "fov": 84
+      },
+      "lights": {
+        "on": true,
+        "night": false,
+        "room": true
+      },
+      "ceiling": {
+        "visible": true,
+        "on": true,
+        "firstPerson": true,
+        "baked": {
+          "merged": 4,
+          "removed": 57
+        },
+        "lightCount": 4
+      },
+      "draws": 147,
+      "shot": {
+        "filename": "lane-from-line-noon.png",
+        "bytes": 391905,
+        "sha": "10b2a94295c2"
+      }
+    },
+    "lane-from-line-off": {
+      "view": {
+        "x": 0,
+        "y": -198.4,
+        "z": -643,
+        "tx": 0,
+        "ty": -188.4,
+        "tz": -633,
+        "fov": 84
+      },
+      "lights": {
+        "on": false,
+        "night": true,
+        "room": false
+      },
+      "ceiling": {
+        "visible": true,
+        "on": false,
+        "firstPerson": true,
+        "baked": {
+          "merged": 4,
+          "removed": 57
+        },
+        "lightCount": 4
+      },
+      "draws": 202,
+      "shot": {
+        "filename": "lane-from-line-off.png",
+        "bytes": 289774,
+        "sha": "e3b62ecd154b"
+      }
+    },
+    "lane-mid-back-noon": {
+      "view": {
+        "x": 0,
+        "y": -198.4,
+        "z": -626,
+        "tx": 0,
+        "ty": -186.4,
+        "tz": -638,
+        "fov": 84
+      },
+      "lights": {
+        "on": true,
+        "night": false,
+        "room": true
+      },
+      "ceiling": {
+        "visible": true,
+        "on": true,
+        "firstPerson": true,
+        "baked": {
+          "merged": 4,
+          "removed": 57
+        },
+        "lightCount": 4
+      },
+      "draws": 195,
+      "shot": {
+        "filename": "lane-mid-back-noon.png",
+        "bytes": 349900,
+        "sha": "7be61c042dbc"
+      }
+    },
+    "lane-mid-back-off": {
+      "view": {
+        "x": 0,
+        "y": -198.4,
+        "z": -626,
+        "tx": 0,
+        "ty": -186.4,
+        "tz": -638,
+        "fov": 84
+      },
+      "lights": {
+        "on": false,
+        "night": true,
+        "room": false
+      },
+      "ceiling": {
+        "visible": true,
+        "on": false,
+        "firstPerson": true,
+        "baked": {
+          "merged": 4,
+          "removed": 57
+        },
+        "lightCount": 4
+      },
+      "draws": 195,
+      "shot": {
+        "filename": "lane-mid-back-off.png",
+        "bytes": 213274,
+        "sha": "f5441284fbc6"
+      }
+    }
+  },
+  "walkSpots": [
+    {
+      "name": "range-firing",
+      "room": "Firing Line",
+      "x": 0,
+      "z": -3,
+      "up": {
+        "player": [
+          0,
+          -200,
+          -643
+        ],
+        "camera": [
+          0.0012094106747191837,
+          -198.58105257302708,
+          -642.8797427542094
+        ],
+        "aim": {
+          "on": true,
+          "w": 1,
+          "yaw": 0,
+          "pitch": 1.24,
+          "locked": true,
+          "fov": 38,
+          "tilt": 0
+        },
+        "draws": 147,
+        "ceilingState": {
+          "visible": true,
+          "on": true,
+          "firstPerson": true,
+          "baked": {
+            "merged": 4,
+            "removed": 57
+          },
+          "lightCount": 4
+        },
+        "shot": {
+          "filename": "walk-range-firing-up.png",
+          "bytes": 112478,
+          "sha": "c3735179084d"
+        }
+      },
+      "ahead": {
+        "player": [
+          0,
+          -200,
+          -643
+        ],
+        "camera": [
+          0.0005618564439024738,
+          -198.57959764441824,
+          -642.8832910131222
+        ],
+        "aim": {
+          "on": true,
+          "w": 1,
+          "yaw": 0,
+          "pitch": 0.06,
+          "locked": true,
+          "fov": 38,
+          "tilt": 0
+        },
+        "draws": 145,
+        "ceilingState": {
+          "visible": true,
+          "on": true,
+          "firstPerson": true,
+          "baked": {
+            "merged": 4,
+            "removed": 57
+          },
+          "lightCount": 4
+        },
+        "shot": {
+          "filename": "walk-range-firing-ahead.png",
+          "bytes": 377810,
+          "sha": "bbb2baf09028"
+        }
+      }
+    },
+    {
+      "name": "range-lanes",
+      "room": "Downrange Lanes",
+      "x": 0,
+      "z": 13,
+      "up": {
+        "player": [
+          -8.42,
+          -200,
+          -627
+        ],
+        "camera": [
+          -8.420383906448832,
+          -198.5774426374213,
+          -626.8893806840977
+        ],
+        "aim": {
+          "on": true,
+          "w": 1,
+          "yaw": 0,
+          "pitch": 1.24,
+          "locked": true,
+          "fov": 38,
+          "tilt": 0
+        },
+        "draws": 227,
+        "ceilingState": {
+          "visible": true,
+          "on": true,
+          "firstPerson": true,
+          "baked": {
+            "merged": 4,
+            "removed": 57
+          },
+          "lightCount": 4
+        },
+        "shot": {
+          "filename": "walk-range-lanes-up.png",
+          "bytes": 268900,
+          "sha": "20f247d0ef56"
+        }
+      },
+      "ahead": {
+        "player": [
+          -8.42,
+          -200,
+          -627
+        ],
+        "camera": [
+          -8.42140133354552,
+          -198.57624465878573,
+          -626.8923776509586
+        ],
+        "aim": {
+          "on": true,
+          "w": 1,
+          "yaw": 0,
+          "pitch": 0.06,
+          "locked": true,
+          "fov": 38,
+          "tilt": 0
+        },
+        "draws": 140,
+        "ceilingState": {
+          "visible": true,
+          "on": true,
+          "firstPerson": true,
+          "baked": {
+            "merged": 4,
+            "removed": 57
+          },
+          "lightCount": 4
+        },
+        "shot": {
+          "filename": "walk-range-lanes-ahead.png",
+          "bytes": 351676,
+          "sha": "843ab4223adc"
+        }
+      }
+    },
+    {
+      "name": "range-stations",
+      "room": "Workbench / Stations",
+      "x": 5,
+      "z": -7,
+      "up": {
+        "player": [
+          5,
+          -200,
+          -647
+        ],
+        "camera": [
+          4.908349154082503,
+          -198.5764347247393,
+          -646.984686762549
+        ],
+        "aim": {
+          "on": true,
+          "w": 1,
+          "yaw": -1.5707963267948966,
+          "pitch": 1.24,
+          "locked": true,
+          "fov": 38,
+          "tilt": 0
+        },
+        "draws": 176,
+        "ceilingState": {
+          "visible": true,
+          "on": true,
+          "firstPerson": true,
+          "baked": {
+            "merged": 4,
+            "removed": 57
+          },
+          "lightCount": 4
+        },
+        "shot": {
+          "filename": "walk-range-stations-up.png",
+          "bytes": 136212,
+          "sha": "ced437f466b2"
+        }
+      },
+      "ahead": {
+        "player": [
+          5,
+          -200,
+          -647
+        ],
+        "camera": [
+          4.885990371478008,
+          -198.57774149599118,
+          -647.0041081156123
+        ],
+        "aim": {
+          "on": true,
+          "w": 1,
+          "yaw": -1.5707963267948966,
+          "pitch": 0.06,
+          "locked": true,
+          "fov": 38,
+          "tilt": 0
+        },
+        "draws": 147,
+        "ceilingState": {
+          "visible": true,
+          "on": true,
+          "firstPerson": true,
+          "baked": {
+            "merged": 4,
+            "removed": 57
+          },
+          "lightCount": 4
+        },
+        "shot": {
+          "filename": "walk-range-stations-ahead.png",
+          "bytes": 327662,
+          "sha": "30915f62f9d6"
+        }
+      }
+    },
+    {
+      "name": "apron-door",
+      "room": "Armory Apron",
+      "x": -11,
+      "z": -8,
+      "up": {
+        "player": [
+          -11,
+          -200,
+          -648
+        ],
+        "camera": [
+          -10.923348950924424,
+          -198.57868433244957,
+          -647.9958489813404
+        ],
+        "aim": {
+          "on": true,
+          "w": 1,
+          "yaw": 1.5707963267948966,
+          "pitch": 1.24,
+          "locked": true,
+          "fov": 38,
+          "tilt": 0
+        },
+        "draws": 261,
+        "ceilingState": {
+          "visible": true,
+          "on": true,
+          "firstPerson": true,
+          "baked": {
+            "merged": 4,
+            "removed": 57
+          },
+          "lightCount": 4
+        },
+        "shot": {
+          "filename": "walk-apron-door-up.png",
+          "bytes": 299237,
+          "sha": "3b80344fe046"
+        }
+      },
+      "ahead": {
+        "player": [
+          -11,
+          -200,
+          -648
+        ],
+        "camera": [
+          -10.88602933390636,
+          -198.57935943391507,
+          -647.9936959128966
+        ],
+        "aim": {
+          "on": true,
+          "w": 1,
+          "yaw": 1.5707963267948966,
+          "pitch": 0.06,
+          "locked": true,
+          "fov": 38,
+          "tilt": 0
+        },
+        "draws": 151,
+        "ceilingState": {
+          "visible": true,
+          "on": true,
+          "firstPerson": true,
+          "baked": {
+            "merged": 4,
+            "removed": 57
+          },
+          "lightCount": 4
+        },
+        "shot": {
+          "filename": "walk-apron-door-ahead.png",
+          "bytes": 319332,
+          "sha": "ca3a97fb83ad"
+        }
+      }
+    },
+    {
+      "name": "infirmary",
+      "room": "Infirmary Bay",
+      "x": -38,
+      "z": -9,
+      "up": {
+        "player": [
+          -38,
+          -200,
+          -647.4300000000001
+        ],
+        "camera": [
+          -37.98737920936736,
+          -198.5800902484199,
+          -647.3332893480348
+        ],
+        "aim": {
+          "on": true,
+          "w": 1,
+          "yaw": 0,
+          "pitch": 1.24,
+          "locked": true,
+          "fov": 38,
+          "tilt": 0
+        },
+        "draws": 220,
+        "ceilingState": {
+          "visible": true,
+          "on": true,
+          "firstPerson": true,
+          "baked": {
+            "merged": 4,
+            "removed": 57
+          },
+          "lightCount": 4
+        },
+        "shot": {
+          "filename": "walk-infirmary-up.png",
+          "bytes": 304903,
+          "sha": "3f8576ab6cce"
+        }
+      },
+      "ahead": {
+        "player": [
+          -38,
+          -200,
+          -647.4300000000001
+        ],
+        "camera": [
+          -38.007110063823546,
+          -198.5805489577034,
+          -647.3134631788193
+        ],
+        "aim": {
+          "on": true,
+          "w": 1,
+          "yaw": 0,
+          "pitch": 0.06,
+          "locked": true,
+          "fov": 38,
+          "tilt": 0
+        },
+        "draws": 145,
+        "ceilingState": {
+          "visible": true,
+          "on": true,
+          "firstPerson": true,
+          "baked": {
+            "merged": 4,
+            "removed": 57
+          },
+          "lightCount": 4
+        },
+        "shot": {
+          "filename": "walk-infirmary-ahead.png",
+          "bytes": 383645,
+          "sha": "26db437b7054"
+        }
+      }
+    },
+    {
+      "name": "hq-ladder",
+      "room": "HQ Ladder",
+      "x": -41,
+      "z": 1,
+      "up": {
+        "player": [
+          -41,
+          -200,
+          -639
+        ],
+        "camera": [
+          -40.90160757854889,
+          -198.58077357795437,
+          -638.975092129846
+        ],
+        "aim": {
+          "on": true,
+          "w": 1,
+          "yaw": 1.5707963267948966,
+          "pitch": 1.24,
+          "locked": true,
+          "fov": 38,
+          "tilt": 0
+        },
+        "draws": 204,
+        "ceilingState": {
+          "visible": true,
+          "on": true,
+          "firstPerson": true,
+          "baked": {
+            "merged": 4,
+            "removed": 57
+          },
+          "lightCount": 4
+        },
+        "shot": {
+          "filename": "walk-hq-ladder-up.png",
+          "bytes": 292981,
+          "sha": "87db1f1c7d31"
+        }
+      },
+      "ahead": {
+        "player": [
+          -41,
+          -200,
+          -639
+        ],
+        "camera": [
+          -40.88236425387301,
+          -198.57953824420758,
+          -638.9941492557695
+        ],
+        "aim": {
+          "on": true,
+          "w": 1,
+          "yaw": 1.5707963267948966,
+          "pitch": 0.06,
+          "locked": true,
+          "fov": 38,
+          "tilt": 0
+        },
+        "draws": 131,
+        "ceilingState": {
+          "visible": true,
+          "on": true,
+          "firstPerson": true,
+          "baked": {
+            "merged": 4,
+            "removed": 57
+          },
+          "lightCount": 4
+        },
+        "shot": {
+          "filename": "walk-hq-ladder-ahead.png",
+          "bytes": 342897,
+          "sha": "30ed300c4882"
+        }
+      }
+    },
+    {
+      "name": "hangar-center",
+      "room": "Hangar Center",
+      "x": -25,
+      "z": 7,
+      "up": {
+        "player": [
+          -25,
+          -200,
+          -633
+        ],
+        "camera": [
+          -24.985443267043,
+          -198.57787678381533,
+          -632.9050707604755
+        ],
+        "aim": {
+          "on": true,
+          "w": 1,
+          "yaw": 0,
+          "pitch": 1.24,
+          "locked": true,
+          "fov": 38,
+          "tilt": 0
+        },
+        "draws": 288,
+        "ceilingState": {
+          "visible": true,
+          "on": true,
+          "firstPerson": true,
+          "baked": {
+            "merged": 4,
+            "removed": 57
+          },
+          "lightCount": 4
+        },
+        "shot": {
+          "filename": "walk-hangar-center-up.png",
+          "bytes": 350994,
+          "sha": "ab06b8b4c809"
+        }
+      },
+      "ahead": {
+        "player": [
+          -25,
+          -200,
+          -633
+        ],
+        "camera": [
+          -25.002587667898744,
+          -198.57612109326973,
+          -632.8924986727641
+        ],
+        "aim": {
+          "on": true,
+          "w": 1,
+          "yaw": 0,
+          "pitch": 0.06,
+          "locked": true,
+          "fov": 38,
+          "tilt": 0
+        },
+        "draws": 144,
+        "ceilingState": {
+          "visible": true,
+          "on": true,
+          "firstPerson": true,
+          "baked": {
+            "merged": 4,
+            "removed": 57
+          },
+          "lightCount": 4
+        },
+        "shot": {
+          "filename": "walk-hangar-center-ahead.png",
+          "bytes": 339626,
+          "sha": "9d97c164a6d6"
+        }
+      }
+    },
+    {
+      "name": "passage-gate",
+      "room": "Holding Passage",
+      "x": -26,
+      "z": 25,
+      "up": {
+        "player": [
+          -26,
+          -200,
+          -615
+        ],
+        "camera": [
+          -25.999340334456225,
+          -198.576556735015,
+          -614.8897224601982
+        ],
+        "aim": {
+          "on": true,
+          "w": 1,
+          "yaw": 0,
+          "pitch": 1.24,
+          "locked": true,
+          "fov": 38,
+          "tilt": 0
+        },
+        "draws": 174,
+        "ceilingState": {
+          "visible": true,
+          "on": true,
+          "firstPerson": true,
+          "baked": {
+            "merged": 4,
+            "removed": 57
+          },
+          "lightCount": 4
+        },
+        "shot": {
+          "filename": "walk-passage-gate-up.png",
+          "bytes": 322312,
+          "sha": "2aec19569733"
+        }
+      },
+      "ahead": {
+        "player": [
+          -26,
+          -200,
+          -615
+        ],
+        "camera": [
+          -25.99587310675692,
+          -198.57885335174456,
+          -614.8837705778158
+        ],
+        "aim": {
+          "on": true,
+          "w": 1,
+          "yaw": 0,
+          "pitch": 0.06,
+          "locked": true,
+          "fov": 38,
+          "tilt": 0
+        },
+        "draws": 154,
+        "ceilingState": {
+          "visible": true,
+          "on": true,
+          "firstPerson": true,
+          "baked": {
+            "merged": 4,
+            "removed": 57
+          },
+          "lightCount": 4
+        },
+        "shot": {
+          "filename": "walk-passage-gate-ahead.png",
+          "bytes": 105647,
+          "sha": "a0854000232c"
+        }
+      }
+    }
+  ],
+  "thirdPerson": {
+    "ceilingVisibleIn3P": false,
+    "ignoredForCameraAim": true,
+    "cameraCollisionContact": false,
+    "draws": 129,
+    "shot": {
+      "filename": "third-person-overhead.png",
+      "bytes": 551318,
+      "sha": "7470980538d5"
+    }
+  },
+  "ballistics": {
+    "hitSolidCeiling": true,
+    "normal": {
+      "x": 0,
+      "y": -1,
+      "z": 0
+    },
+    "point": {
+      "x": 0,
+      "y": -194.025,
+      "z": -643
+    },
+    "marksBefore": 0,
+    "marksAfter": 1,
+    "draws": 138,
+    "shot": {
+      "filename": "ballistic-ceiling-impact.png",
+      "bytes": 122676,
+      "sha": "b48dea8eb1c4"
+    }
+  },
+  "draws": {
+    "drawsAhead": 146,
+    "drawsUp": 154,
+    "delta": 8,
+    "info": {
+      "triangles": 95727,
+      "geometries": 3291,
+      "textures": 182
+    }
+  },
+  "j128": {
+    "meshCount": 5,
+    "baked": {
+      "merged": 4,
+      "removed": 57
+    },
+    "solidCeiling": {
+      "minX": -8,
+      "maxX": 8,
+      "minY": -194.025,
+      "maxY": -193.975,
+      "minZ": -652,
+      "maxZ": -610
+    },
+    "tgOrigin": {
+      "x": 0,
+      "y": -200,
+      "z": -640
+    },
+    "floorY": -200,
+    "wallH": 6
+  },
+  "errors": []
+}

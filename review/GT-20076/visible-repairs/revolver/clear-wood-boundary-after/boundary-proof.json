@@ -1,0 +1,13 @@
+{
+  "gap": {
+    "lowerMm": 0,
+    "upperMm": 0.0078125
+  },
+  "frameTriangles": 236,
+  "stockTriangles": 688,
+  "contactSamples": 4160,
+  "matched": 2734,
+  "maxIn": 0.00900000102646252,
+  "maxOut": 0.005000016088631973,
+  "identicalOtherMeshes": 156
+}

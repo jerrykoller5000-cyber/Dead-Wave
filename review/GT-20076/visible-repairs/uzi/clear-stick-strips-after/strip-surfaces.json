@@ -1,0 +1,16 @@
+[
+  {
+    "side": -1,
+    "outside": 96,
+    "hidden": 48,
+    "min": 0.017999999976251273,
+    "closed": true
+  },
+  {
+    "side": 1,
+    "outside": 96,
+    "hidden": 48,
+    "min": 0.017999999976251273,
+    "closed": true
+  }
+]

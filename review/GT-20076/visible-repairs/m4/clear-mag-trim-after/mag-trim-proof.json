@@ -1,0 +1,102 @@
+{
+  "ribs": [
+    {
+      "side": -1,
+      "exterior": 8,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "side": -1,
+      "exterior": 8,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "side": -1,
+      "exterior": 8,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "side": 1,
+      "exterior": 8,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "side": 1,
+      "exterior": 8,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "side": 1,
+      "exterior": 8,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    }
+  ],
+  "marks": [
+    {
+      "index": 4,
+      "band": 13,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "index": 5,
+      "band": 14,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "index": 6,
+      "band": 15,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "index": 10,
+      "band": 13,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "index": 11,
+      "band": 14,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "index": 12,
+      "band": 15,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    }
+  ]
+}

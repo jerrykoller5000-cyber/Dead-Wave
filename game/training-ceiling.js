@@ -28,39 +28,70 @@ export function createTrainingCeiling(T, tg, layout) {
     return m;
   };
   const box = (w, h, d, mat, x, y, z, rx = 0) => mesh(new T.BoxGeometry(w, h, d), mat, x, y, z, rx);
+  // Shear the hanging plate rather than rotating a box: its top stays level
+  // against the deck, while its lower edge leans toward the firing line.
+  const slantedBox = (w, h, d, mat, x, y, topZ, topY, lean) => {
+    const geo = new T.BoxGeometry(w, h, d);
+    const points = geo.getAttribute('position');
+    for (let i = 0; i < points.count; i++) points.setZ(i, points.getZ(i) + lean * points.getY(i));
+    geo.computeVertexNormals();
+    return mesh(geo, mat, x, y, topZ + lean * (y - topY));
+  };
 
   // The underside has no top face: the overhead third-person camera sees into
   // the range. These full-span panels seat on the wall tops at y=6.
   const deck = mesh(new T.PlaneGeometry(R.maxX - R.minX, R.maxZ - R.minZ), concrete,
     (R.minX + R.maxX) / 2, H - .015, (R.minZ + R.maxZ) / 2, Math.PI / 2);
   deck.receiveShadow = false;
-  for (const z of [-9, -3, 3, 9, 15, 21, 27]) {
-    box(15.8, .07, .12, steel, 0, H - .06, z);
-  }
+  // Shallow panel joints touch the deck and end before the two service runs.
+  // Structural cross-beams here would slice through the duct and pipe.
+  for (const z of [-9, -3, 3, 9, 15, 21, 27]) box(13.6, .01, .025, steel, 0, H - .02, z);
 
   // Across-lane safety baffles hang from the deck; the thick rubber face is
   // toward the firing line. Both long service runs sit outside the plate lanes.
+  const baffleSolids = [];
+  const addPanelSolids = (z, width, height, thickness, topZ, topY, lean, slices) => {
+    const bottomY = topY - height;
+    for (let i = 0; i < slices; i++) {
+      const low = bottomY + height * i / slices, high = bottomY + height * (i + 1) / slices;
+      const solid = {
+        minX: tg.origin.x - width / 2, maxX: tg.origin.x + width / 2,
+        minY: tg.origin.y + low, maxY: tg.origin.y + high,
+        minZ: tg.origin.z + topZ + lean * (low - topY) - thickness / 2,
+        maxZ: tg.origin.z + topZ + lean * (high - topY) + thickness / 2,
+        ceiling: true, baffle: true, baffleZ: z
+      };
+      tg.solids.push(solid);
+      baffleSolids.push(solid);
+    }
+  };
   for (const z of [-.2, 5.4, 11, 16.6, 22.2, 27.8]) {
-    box(13.7, .26, .20, steel, 0, H - .145, z);
-    box(13.7, 1.00, .18, steel, 0, H - .66, z, -.12);
-    box(13.5, .82, .07, rubber, 0, H - .67, z - .115, -.12);
+    const topY = H - .015, centerY = topY - .57, lean = .12;
+    slantedBox(13.7, 1.14, .18, steel, 0, centerY, z, topY, lean);
+    slantedBox(13.5, 1.04, .07, rubber, 0, centerY, z - .125, topY, lean);
+    // Short AABB slices follow the lean to within 12 mm, so the rubber face
+    // and exposed steel both stop rounds before the deck behind them.
+    addPanelSolids(z, 13.7, 1.14, .18, z, topY, lean, 12);
+    addPanelSolids(z, 13.5, 1.04, .07, z - .125 - lean * .05, topY - .05, lean, 12);
   }
 
   // Caged linear fixtures sit between baffles, with lenses kept on one shared
   // material so the wall switch can extinguish all of them together.
   for (const z of [-8, -4.1, 2.5, 8.1, 13.7, 19.3, 24.9]) {
     box(7.4, .13, .56, steel, 0, H - .08, z);
-    box(7.1, .018, .43, lens, 0, H - .155, z);
+    box(7.1, .018, .43, lens, 0, H - .154, z);
   }
 
   // Galvanized supply duct and sprinkler pipe have an actual ceiling contact.
   box(.58, .46, 41.5, pipe, 7.12, H - .245, 9);
-  box(.68, .07, 41.5, steel, 7.12, H - .045, 9);
   mesh(new T.CylinderGeometry(.045, .045, 41.5, 8), pipe, -7.25, H - .16, 9, Math.PI / 2);
   for (const z of [-7, 1, 9, 17, 25]) {
-    box(.16, .24, .15, pipe, -7.25, H - .12, z);
-    mesh(new T.CylinderGeometry(.018, .052, .20, 8), pipe, -7.25, H - .36, z);
-    mesh(new T.ConeGeometry(.14, .05, 8), pipe, -7.25, H - .49, z, Math.PI);
+    // A U-shaped clamp supports the pipe without a solid bracket through it.
+    box(.16, .01, .15, steel, -7.25, H - .02, z);
+    for (const side of [-1, 1]) box(.025, .18, .15, steel, -7.25 + side * .0575, H - .115, z);
+    box(.115, .01, .15, steel, -7.25, H - .21, z);
+    mesh(new T.CylinderGeometry(.018, .052, .20, 8), pipe, -7.25, H - .315, z);
+    mesh(new T.ConeGeometry(.14, .05, 8), pipe, -7.25, H - .44, z, Math.PI);
   }
 
   const lights = [];
@@ -108,6 +139,9 @@ export function createTrainingCeiling(T, tg, layout) {
     state: () => ({ visible: root.visible, on, firstPerson, baked, lightCount: lights.length }),
     dispose() {
       const index = tg.solids.indexOf(solid); if (index >= 0) tg.solids.splice(index, 1);
+      for (const baffle of baffleSolids) {
+        const i = tg.solids.indexOf(baffle); if (i >= 0) tg.solids.splice(i, 1);
+      }
       root.removeFromParent();
       for (const geometry of ownedGeometries) geometry.dispose();
       for (const mat of ownedMaterials) mat.dispose();

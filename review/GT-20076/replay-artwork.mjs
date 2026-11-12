@@ -65,3 +65,77 @@ export async function originalSniperCover(page,origin) {
   return replayArtwork(page,origin,path,originalSniperSource(live));
 }
 
+
+export async function originalWaspFurniture(page,origin) {
+  const path='/studio/weapon-sidearms.js';
+  const live=await readFile(new URL('../../studio/weapon-sidearms.js',import.meta.url),'utf8');
+  const start=live.indexOf('  const foreEnd = K.slab('),end=live.indexOf('  for (const sx of [-1, 1]) for (const z of [.198, .324])',start);
+  assert(start>0 && end>start);
+  const original=`  K.slab([[.18, -.002], [.187, -.013], [.319, -.016], [.334, -.009], [.34, .001], [.34, .058], [.331, .067], [.185, .07], [.18, .061]], .08, gunPoly, {bevel:.016,segs:4});
+  for(let j=0;j<12;j++){
+    const z=.19+j*.012;
+    const rib=K.slab([[z,-.007],[z+.003,-.007],[z+.003,.061],[z,.061]],.0808,gunDark,{bevel:.0015,segs:2});
+    markPaintSurface(rib,'furniture');
+  }
+`;
+  const trim='    trimSlabBack(lowerTrim, 0, sx * receiverWidth / 2 - lowerTrim.position.x, sx);';
+  assert.equal(live.split(trim).length,2);
+  const prior=(live.slice(0,start)+original+live.slice(end)).replace(trim,'');
+  const served=await replayArtwork(page,origin,path,prior);
+  return async()=>{
+    const actual=await page.evaluate("import('/review/GT-20076/rank-visibility.mjs').then(async m=>(await import('/tools/tests/weapon-seating.js')).artworkFingerprint(m.currentModel(TT,'uzi')))");
+    const baseline=JSON.parse(await readFile(new URL('./catalog-fix-revolver-walnut-fit/audit.json',import.meta.url),'utf8'));
+    assert.equal(actual,baseline.uzi.artworkFingerprint);served();
+  };
+}
+
+export async function originalSawFrontPlates(page,origin) {
+  const path='/studio/weapon-heavy.js';
+  const live=await readFile(new URL('../..'+path,import.meta.url),'utf8');
+  const cut="    trimPanelBack(THREE, plate, 1, .11, 'z');";
+  assert.equal(live.split(cut).length,2);
+  const verifyServed=await replayArtwork(page,origin,path,live.replace(cut,''));
+  return async()=>{
+    const hash=await page.evaluate("import('/review/GT-20076/rank-visibility.mjs').then(async m=>(await import('/tools/tests/weapon-seating.js')).artworkFingerprint(m.currentModel(TT,'chainsaw')))");
+    const baseline=JSON.parse(await readFile(new URL('./catalog-fix-heavy-outline-facets/audit.json',import.meta.url),'utf8'));
+    assert.equal(hash,baseline.chainsaw.artworkFingerprint);
+    verifyServed();
+  };
+}
+
+export async function originalHandleWrist(page,origin) {
+  const path='/studio/weapon-longarms.js';
+  let source=await readFile(new URL('../..'+path,import.meta.url),'utf8');
+  const edits=[
+  [
+    "  const band = gunBand([[-0.17, 0.09], [-0.153, 0.143], [-0.138, 0.151], [0.188, 0.151], [0.217, 0.13], [0.225, 0.09]], 0.009);\n  // End each foot at the central facet of the painted cover.\n  const crown = topCorner[1] + .045 * Math.cos(Math.PI / 28);\n  const handleOutline = [];\n  for (let i = 0; i < band.length; i++) {\n    const a = band[i], b = band[(i + 1) % band.length];\n    if (a[1] >= crown) handleOutline.push(a);\n    if ((a[1] < crown) !== (b[1] < crown)) {\n      const t = (crown - a[1]) / (b[1] - a[1]);\n      handleOutline.push([a[0] + t * (b[0] - a[0]), crown]);\n    }\n  }\n  const handle = K.slab(handleOutline, 0.04, gunDark, { bevel: 0.003 });",
+    "  const handle = K.slab(gunBand([[-0.17, 0.09], [-0.153, 0.143], [-0.138, 0.151], [0.188, 0.151], [0.217, 0.13], [0.225, 0.09]], 0.009), 0.04, gunDark, { bevel: 0.003 });"
+  ],
+  [
+    "  trimPanelBack(THREE, palm, -1, .052, 'y');",
+    ""
+  ],
+  [
+    "    trimPanelBack(THREE, cheek, sx, .024);\n    trimPanelBack(THREE, cheek, -1, .052, 'y');",
+    ""
+  ],
+  [
+    "  const wrist = K.slab([[-.239, .014], [-.026, .014], [-.026, -.04], [-.239, -.04]], .056, gunTan, { bevel: .006 });\n  trimPanelBack(THREE, wrist, 1, -.034, 'y');",
+    "  K.slab([[-0.245, 0.014], [-0.026, 0.014], [-0.026, -0.04], [-0.245, -0.04]], 0.056, gunTan, { bevel: 0.006 });"
+  ]
+];
+  for(const [current,old] of edits){
+    assert.equal(source.split(current).length,2,'Expected the reviewed art change once');
+    source=source.replace(current,old);
+  }
+  const served=await replayArtwork(page,origin,path,source);
+  return async()=>{
+    const hashes=await page.evaluate(`(async()=>{
+      const {currentModel}=await import('/review/GT-20076/rank-visibility.mjs');
+      const {artworkFingerprint}=await import('/tools/tests/weapon-seating.js');
+      return ['aa12','sniper'].map(id=>artworkFingerprint(currentModel(TT,id)));
+    })()`);
+    const prior=JSON.parse(await readFile(new URL('./catalog-fix-front-plates/audit.json',import.meta.url),'utf8'));
+    assert.deepEqual(hashes,[prior.aa12.artworkFingerprint,prior.sniper.artworkFingerprint]);served();
+  };
+}

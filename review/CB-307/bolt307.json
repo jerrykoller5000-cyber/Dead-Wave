@@ -1,0 +1,292 @@
+{
+ "before": [
+  {
+   "name": "bolt-side-noon-c10",
+   "reached": true,
+   "c": 0.17,
+   "open": 0,
+   "back": 0,
+   "hand": 0.94,
+   "firingToKnob": 0.133,
+   "supportToFore": 0.043,
+   "hits": {}
+  },
+  {
+   "name": "bolt-side-noon-c30",
+   "reached": true,
+   "c": 0.37,
+   "open": 1,
+   "back": 0.04,
+   "hand": 1,
+   "firingToKnob": 0.185,
+   "supportToFore": 0.037,
+   "hits": {}
+  },
+  {
+   "name": "bolt-side-noon-c50",
+   "reached": true,
+   "c": 0.57,
+   "open": 1,
+   "back": 0.99,
+   "hand": 1,
+   "firingToKnob": 0.206,
+   "supportToFore": 0.045,
+   "hits": {}
+  },
+  {
+   "name": "bolt-side-noon-c70",
+   "reached": true,
+   "c": 0.77,
+   "open": 0.66,
+   "back": 0,
+   "hand": 1,
+   "firingToKnob": 0.172,
+   "supportToFore": 0.04,
+   "hits": {}
+  },
+  {
+   "name": "bolt-side-noon-c85",
+   "reached": false,
+   "c": 0.92,
+   "open": 0,
+   "back": 0,
+   "hand": 0.54,
+   "firingToKnob": 0.133,
+   "supportToFore": 0.043,
+   "hits": {}
+  },
+  {
+   "name": "bolt-side-noon-c95",
+   "reached": false,
+   "c": 0,
+   "open": 0,
+   "back": 0,
+   "hand": 0,
+   "firingToKnob": 0.133,
+   "supportToFore": 0.045,
+   "hits": {}
+  },
+  {
+   "name": "bolt-rear-noon-c50",
+   "reached": true,
+   "c": 0.57,
+   "open": 1,
+   "back": 0.99,
+   "hand": 1,
+   "firingToKnob": 0.206,
+   "supportToFore": 0.045,
+   "hits": {}
+  },
+  {
+   "name": "bolt-side-overcast-c50",
+   "reached": true,
+   "c": 0.57,
+   "open": 1,
+   "back": 0.99,
+   "hand": 1,
+   "firingToKnob": 0.206,
+   "supportToFore": 0.043,
+   "hits": {}
+  },
+  {
+   "name": "bolt-rear-overcast-c50",
+   "reached": true,
+   "c": 0.57,
+   "open": 1,
+   "back": 0.99,
+   "hand": 1,
+   "firingToKnob": 0.206,
+   "supportToFore": 0.04,
+   "hits": {}
+  },
+  {
+   "name": "bolt-side-dusk-c50",
+   "reached": true,
+   "c": 0.57,
+   "open": 1,
+   "back": 0.99,
+   "hand": 1,
+   "firingToKnob": 0.206,
+   "supportToFore": 0.037,
+   "hits": {}
+  },
+  {
+   "name": "bolt-rear-dusk-c50",
+   "reached": true,
+   "c": 0.57,
+   "open": 1,
+   "back": 0.99,
+   "hand": 1,
+   "firingToKnob": 0.206,
+   "supportToFore": 0.037,
+   "hits": {}
+  },
+  {
+   "name": "bolt-side-night-c50",
+   "reached": true,
+   "c": 0.57,
+   "open": 1,
+   "back": 0.99,
+   "hand": 1,
+   "firingToKnob": 0.206,
+   "supportToFore": 0.037,
+   "hits": {}
+  },
+  {
+   "name": "bolt-rear-night-c50",
+   "reached": true,
+   "c": 0.57,
+   "open": 1,
+   "back": 0.99,
+   "hand": 1,
+   "firingToKnob": 0.206,
+   "supportToFore": 0.041,
+   "hits": {}
+  }
+ ],
+ "after": [
+  {
+   "name": "bolt-side-noon-c10",
+   "reached": true,
+   "c": 0.17,
+   "open": 0,
+   "back": 0,
+   "hand": 0.94,
+   "firingToKnob": 0.02,
+   "supportToFore": 0.044,
+   "hits": {}
+  },
+  {
+   "name": "bolt-side-noon-c30",
+   "reached": true,
+   "c": 0.37,
+   "open": 1,
+   "back": 0.04,
+   "hand": 1,
+   "firingToKnob": 0.022,
+   "supportToFore": 0.037,
+   "hits": {}
+  },
+  {
+   "name": "bolt-side-noon-c50",
+   "reached": true,
+   "c": 0.57,
+   "open": 1,
+   "back": 0.99,
+   "hand": 1,
+   "firingToKnob": 0.038,
+   "supportToFore": 0.045,
+   "hits": {}
+  },
+  {
+   "name": "bolt-side-noon-c70",
+   "reached": true,
+   "c": 0.77,
+   "open": 0.66,
+   "back": 0,
+   "hand": 1,
+   "firingToKnob": 0.026,
+   "supportToFore": 0.04,
+   "hits": {}
+  },
+  {
+   "name": "bolt-side-noon-c85",
+   "reached": false,
+   "c": 0.92,
+   "open": 0,
+   "back": 0,
+   "hand": 0.54,
+   "firingToKnob": 0.058,
+   "supportToFore": 0.043,
+   "hits": {}
+  },
+  {
+   "name": "bolt-side-noon-c95",
+   "reached": false,
+   "c": 0,
+   "open": 0,
+   "back": 0,
+   "hand": 0,
+   "firingToKnob": 0.133,
+   "supportToFore": 0.045,
+   "hits": {}
+  },
+  {
+   "name": "bolt-rear-noon-c50",
+   "reached": true,
+   "c": 0.57,
+   "open": 1,
+   "back": 0.99,
+   "hand": 1,
+   "firingToKnob": 0.039,
+   "supportToFore": 0.045,
+   "hits": {}
+  },
+  {
+   "name": "bolt-side-overcast-c50",
+   "reached": true,
+   "c": 0.57,
+   "open": 1,
+   "back": 0.99,
+   "hand": 1,
+   "firingToKnob": 0.039,
+   "supportToFore": 0.043,
+   "hits": {}
+  },
+  {
+   "name": "bolt-rear-overcast-c50",
+   "reached": true,
+   "c": 0.57,
+   "open": 1,
+   "back": 0.99,
+   "hand": 1,
+   "firingToKnob": 0.038,
+   "supportToFore": 0.04,
+   "hits": {}
+  },
+  {
+   "name": "bolt-side-dusk-c50",
+   "reached": true,
+   "c": 0.57,
+   "open": 1,
+   "back": 0.99,
+   "hand": 1,
+   "firingToKnob": 0.037,
+   "supportToFore": 0.037,
+   "hits": {}
+  },
+  {
+   "name": "bolt-rear-dusk-c50",
+   "reached": true,
+   "c": 0.57,
+   "open": 1,
+   "back": 0.99,
+   "hand": 1,
+   "firingToKnob": 0.035,
+   "supportToFore": 0.037,
+   "hits": {}
+  },
+  {
+   "name": "bolt-side-night-c50",
+   "reached": true,
+   "c": 0.57,
+   "open": 1,
+   "back": 0.99,
+   "hand": 1,
+   "firingToKnob": 0.036,
+   "supportToFore": 0.037,
+   "hits": {}
+  },
+  {
+   "name": "bolt-rear-night-c50",
+   "reached": true,
+   "c": 0.57,
+   "open": 1,
+   "back": 0.99,
+   "hand": 1,
+   "firingToKnob": 0.036,
+   "supportToFore": 0.039,
+   "hits": {}
+  }
+ ]
+}

@@ -1,0 +1,18 @@
+[
+  {
+    "side": -1,
+    "outsideSamples": 29,
+    "gap": {
+      "lowerMm": 0,
+      "upperMm": 0.0078125
+    }
+  },
+  {
+    "side": 1,
+    "outsideSamples": 29,
+    "gap": {
+      "lowerMm": 0,
+      "upperMm": 0.0078125
+    }
+  }
+]

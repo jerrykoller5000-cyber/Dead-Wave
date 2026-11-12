@@ -1,0 +1,1109 @@
+{
+  "card": "AG-311",
+  "targetCard": "GP-20108",
+  "at": "2026-11-11T21:35:32.357Z",
+  "gpu": {
+    "backend": "WebGPU",
+    "canvas": [
+      328,
+      328
+    ],
+    "ceilingState": {
+      "visible": true,
+      "on": true,
+      "firstPerson": true,
+      "baked": {
+        "merged": 4,
+        "removed": 57
+      },
+      "lightCount": 4
+    }
+  },
+  "drawDelta1P": {
+    "drawsWithoutCeiling": 169,
+    "drawsWithCeiling": 174,
+    "addedDraws": 5,
+    "trisWithoutCeiling": 85343,
+    "trisWithCeiling": 86169,
+    "addedTris": 826,
+    "baked": {
+      "merged": 4,
+      "removed": 57
+    }
+  },
+  "shots": {
+    "lane-from-line-noon.png": {
+      "file": "lane-from-line-noon.png",
+      "bytes": 352214,
+      "sha": "fe1ff3cd93ab",
+      "lumaMean": 44.69,
+      "lumaStd": 15.63,
+      "maxLum": 149.6,
+      "blownPct": 0.0,
+      "nearBlackPct": 0.0
+    },
+    "lane-from-line-overcast.png": {
+      "file": "lane-from-line-overcast.png",
+      "bytes": 315257,
+      "sha": "ac31912cdf6b",
+      "lumaMean": 34.8,
+      "lumaStd": 15.17,
+      "maxLum": 144.6,
+      "blownPct": 0.0,
+      "nearBlackPct": 0.0
+    },
+    "lane-from-line-dusk.png": {
+      "file": "lane-from-line-dusk.png",
+      "bytes": 307767,
+      "sha": "4aa7e2704456",
+      "lumaMean": 29.53,
+      "lumaStd": 14.85,
+      "maxLum": 144.6,
+      "blownPct": 0.0,
+      "nearBlackPct": 0.0
+    },
+    "lane-from-line-night.png": {
+      "file": "lane-from-line-night.png",
+      "bytes": 294187,
+      "sha": "75f3ae679108",
+      "lumaMean": 25.02,
+      "lumaStd": 16.08,
+      "maxLum": 144.6,
+      "blownPct": 0.0,
+      "nearBlackPct": 3.95
+    },
+    "lane-from-line-lights-off.png": {
+      "file": "lane-from-line-lights-off.png",
+      "bytes": 255231,
+      "sha": "5e7a629915c2",
+      "lumaMean": 22.05,
+      "lumaStd": 15.3,
+      "maxLum": 144.6,
+      "blownPct": 0.0,
+      "nearBlackPct": 9.22
+    },
+    "lane-from-line-lights-off-torch.png": {
+      "file": "lane-from-line-lights-off-torch.png",
+      "bytes": 300838,
+      "sha": "c1a000290f2a",
+      "lumaMean": 24.09,
+      "lumaStd": 15.11,
+      "maxLum": 144.6,
+      "blownPct": 0.0,
+      "nearBlackPct": 5.62
+    },
+    "lane-mid-back-noon.png": {
+      "file": "lane-mid-back-noon.png",
+      "bytes": 315912,
+      "sha": "077cfa8a1440",
+      "lumaMean": 46.01,
+      "lumaStd": 21.75,
+      "maxLum": 149.6,
+      "blownPct": 0.0,
+      "nearBlackPct": 0.21
+    },
+    "lane-mid-back-overcast.png": {
+      "file": "lane-mid-back-overcast.png",
+      "bytes": 259020,
+      "sha": "bd0db8e4898a",
+      "lumaMean": 37.53,
+      "lumaStd": 20.18,
+      "maxLum": 144.6,
+      "blownPct": 0.0,
+      "nearBlackPct": 0.14
+    },
+    "lane-mid-back-dusk.png": {
+      "file": "lane-mid-back-dusk.png",
+      "bytes": 254857,
+      "sha": "3b4bf791da71",
+      "lumaMean": 31.86,
+      "lumaStd": 20.59,
+      "maxLum": 144.6,
+      "blownPct": 0.0,
+      "nearBlackPct": 0.68
+    },
+    "lane-mid-back-night.png": {
+      "file": "lane-mid-back-night.png",
+      "bytes": 229092,
+      "sha": "f9d4c8be98c1",
+      "lumaMean": 27.91,
+      "lumaStd": 21.2,
+      "maxLum": 144.6,
+      "blownPct": 0.0,
+      "nearBlackPct": 9.7
+    },
+    "lane-mid-back-lights-off.png": {
+      "file": "lane-mid-back-lights-off.png",
+      "bytes": 160612,
+      "sha": "7ace182ae27b",
+      "lumaMean": 20.39,
+      "lumaStd": 15.58,
+      "maxLum": 144.6,
+      "blownPct": 0.0,
+      "nearBlackPct": 22.22
+    },
+    "lane-mid-back-lights-off-torch.png": {
+      "file": "lane-mid-back-lights-off-torch.png",
+      "bytes": 217246,
+      "sha": "aa6157a3d7c5",
+      "lumaMean": 23.38,
+      "lumaStd": 16.18,
+      "maxLum": 144.6,
+      "blownPct": 0.0,
+      "nearBlackPct": 13.85
+    },
+    "area-1p-firing-up-on.png": {
+      "file": "area-1p-firing-up-on.png",
+      "bytes": 262013,
+      "sha": "a40fd52313d9",
+      "lumaMean": 38.85,
+      "lumaStd": 16.7,
+      "maxLum": 144.7,
+      "blownPct": 0.0,
+      "nearBlackPct": 0.0
+    },
+    "area-1p-firing-up-off.png": {
+      "file": "area-1p-firing-up-off.png",
+      "bytes": 234457,
+      "sha": "c8e2b0fb7ee1",
+      "lumaMean": 21.93,
+      "lumaStd": 16.51,
+      "maxLum": 144.6,
+      "blownPct": 0.0,
+      "nearBlackPct": 11.33
+    },
+    "area-1p-stations-up.png": {
+      "file": "area-1p-stations-up.png",
+      "bytes": 126816,
+      "sha": "ac964b1b82e5",
+      "lumaMean": 47.85,
+      "lumaStd": 17.99,
+      "maxLum": 144.7,
+      "blownPct": 0.0,
+      "nearBlackPct": 0.0
+    },
+    "area-1p-apron-up.png": {
+      "file": "area-1p-apron-up.png",
+      "bytes": 142076,
+      "sha": "bd1c9f317f37",
+      "lumaMean": 10.88,
+      "lumaStd": 16.55,
+      "maxLum": 142.7,
+      "blownPct": 0.0,
+      "nearBlackPct": 37.38
+    },
+    "area-1p-infirmary-up.png": {
+      "file": "area-1p-infirmary-up.png",
+      "bytes": 297029,
+      "sha": "e90d8681c097",
+      "lumaMean": 22.5,
+      "lumaStd": 18.58,
+      "maxLum": 168.7,
+      "blownPct": 0.0,
+      "nearBlackPct": 0.58
+    },
+    "area-1p-hq-ladder-up.png": {
+      "file": "area-1p-hq-ladder-up.png",
+      "bytes": 254152,
+      "sha": "e97ef61186e0",
+      "lumaMean": 22.3,
+      "lumaStd": 20.24,
+      "maxLum": 168.7,
+      "blownPct": 0.0,
+      "nearBlackPct": 12.17
+    },
+    "area-1p-hangar-up.png": {
+      "file": "area-1p-hangar-up.png",
+      "bytes": 348153,
+      "sha": "af4128eb1100",
+      "lumaMean": 28.44,
+      "lumaStd": 22.02,
+      "maxLum": 168.7,
+      "blownPct": 0.0,
+      "nearBlackPct": 1.65
+    },
+    "area-1p-passage-up.png": {
+      "file": "area-1p-passage-up.png",
+      "bytes": 311336,
+      "sha": "6138396e9dbf",
+      "lumaMean": 39.0,
+      "lumaStd": 19.46,
+      "maxLum": 163.6,
+      "blownPct": 0.0,
+      "nearBlackPct": 0.0
+    },
+    "closeup-ceiling-bullet-impacts.png": {
+      "file": "closeup-ceiling-bullet-impacts.png",
+      "bytes": 233274,
+      "sha": "33a37a3e6577",
+      "lumaMean": 80.22,
+      "lumaStd": 23.79,
+      "maxLum": 145.7,
+      "blownPct": 0.0,
+      "nearBlackPct": 0.0
+    },
+    "closeup-sprinkler-floating-z1.png": {
+      "file": "closeup-sprinkler-floating-z1.png",
+      "bytes": 311377,
+      "sha": "2c30a1b161d7",
+      "lumaMean": 90.56,
+      "lumaStd": 36.63,
+      "maxLum": 168.7,
+      "blownPct": 0.0,
+      "nearBlackPct": 0.0
+    },
+    "closeup-sprinkler-beam-clash-z9.png": {
+      "file": "closeup-sprinkler-beam-clash-z9.png",
+      "bytes": 248583,
+      "sha": "c48ba920037a",
+      "lumaMean": 83.36,
+      "lumaStd": 35.05,
+      "maxLum": 168.7,
+      "blownPct": 0.0,
+      "nearBlackPct": 0.0
+    },
+    "closeup-duct-beam-clash-z3.png": {
+      "file": "closeup-duct-beam-clash-z3.png",
+      "bytes": 186020,
+      "sha": "a176fddf1952",
+      "lumaMean": 54.32,
+      "lumaStd": 19.04,
+      "maxLum": 145.6,
+      "blownPct": 0.0,
+      "nearBlackPct": 0.0
+    },
+    "closeup-baffle-end-z5_4.png": {
+      "file": "closeup-baffle-end-z5_4.png",
+      "bytes": 158370,
+      "sha": "194f7939f102",
+      "lumaMean": 45.27,
+      "lumaStd": 14.22,
+      "maxLum": 143.7,
+      "blownPct": 0.0,
+      "nearBlackPct": 0.0
+    },
+    "3p-gameplay-firing-line.png": {
+      "file": "3p-gameplay-firing-line.png",
+      "bytes": 462018,
+      "sha": "f30e55e502a7",
+      "lumaMean": 29.48,
+      "lumaStd": 20.05,
+      "maxLum": 153.7,
+      "blownPct": 0.0,
+      "nearBlackPct": 0.08
+    },
+    "3p-overhead-range-wide.png": {
+      "file": "3p-overhead-range-wide.png",
+      "bytes": 394663,
+      "sha": "407209a0fd02",
+      "lumaMean": 23.1,
+      "lumaStd": 17.86,
+      "maxLum": 142.7,
+      "blownPct": 0.0,
+      "nearBlackPct": 0.24
+    }
+  },
+  "lane4Lights": [
+    {
+      "cam": "from-line",
+      "light": "noon",
+      "lights": {
+        "on": true,
+        "night": false,
+        "room": true
+      },
+      "ceiling": {
+        "visible": true,
+        "on": true,
+        "firstPerson": true,
+        "baked": {
+          "merged": 4,
+          "removed": 57
+        },
+        "lightCount": 4
+      },
+      "file": "lane-from-line-noon.png",
+      "bytes": 352214,
+      "sha": "fe1ff3cd93ab",
+      "lumaMean": 44.69,
+      "lumaStd": 15.63,
+      "maxLum": 149.6,
+      "blownPct": 0.0,
+      "nearBlackPct": 0.0
+    },
+    {
+      "cam": "from-line",
+      "light": "overcast",
+      "lights": {
+        "on": true,
+        "night": false,
+        "room": true
+      },
+      "ceiling": {
+        "visible": true,
+        "on": true,
+        "firstPerson": true,
+        "baked": {
+          "merged": 4,
+          "removed": 57
+        },
+        "lightCount": 4
+      },
+      "file": "lane-from-line-overcast.png",
+      "bytes": 315257,
+      "sha": "ac31912cdf6b",
+      "lumaMean": 34.8,
+      "lumaStd": 15.17,
+      "maxLum": 144.6,
+      "blownPct": 0.0,
+      "nearBlackPct": 0.0
+    },
+    {
+      "cam": "from-line",
+      "light": "dusk",
+      "lights": {
+        "on": true,
+        "night": false,
+        "room": true
+      },
+      "ceiling": {
+        "visible": true,
+        "on": true,
+        "firstPerson": true,
+        "baked": {
+          "merged": 4,
+          "removed": 57
+        },
+        "lightCount": 4
+      },
+      "file": "lane-from-line-dusk.png",
+      "bytes": 307767,
+      "sha": "4aa7e2704456",
+      "lumaMean": 29.53,
+      "lumaStd": 14.85,
+      "maxLum": 144.6,
+      "blownPct": 0.0,
+      "nearBlackPct": 0.0
+    },
+    {
+      "cam": "from-line",
+      "light": "night",
+      "lights": {
+        "on": true,
+        "night": false,
+        "room": true
+      },
+      "ceiling": {
+        "visible": true,
+        "on": true,
+        "firstPerson": true,
+        "baked": {
+          "merged": 4,
+          "removed": 57
+        },
+        "lightCount": 4
+      },
+      "file": "lane-from-line-night.png",
+      "bytes": 294187,
+      "sha": "75f3ae679108",
+      "lumaMean": 25.02,
+      "lumaStd": 16.08,
+      "maxLum": 144.6,
+      "blownPct": 0.0,
+      "nearBlackPct": 3.95
+    },
+    {
+      "cam": "from-line",
+      "light": "lights-off",
+      "lights": {
+        "on": false,
+        "night": true,
+        "room": false
+      },
+      "ceiling": {
+        "visible": true,
+        "on": false,
+        "firstPerson": true,
+        "baked": {
+          "merged": 4,
+          "removed": 57
+        },
+        "lightCount": 4
+      },
+      "file": "lane-from-line-lights-off.png",
+      "bytes": 255231,
+      "sha": "5e7a629915c2",
+      "lumaMean": 22.05,
+      "lumaStd": 15.3,
+      "maxLum": 144.6,
+      "blownPct": 0.0,
+      "nearBlackPct": 9.22
+    },
+    {
+      "cam": "from-line",
+      "light": "lights-off-torch",
+      "lights": {
+        "on": false,
+        "night": true,
+        "room": false
+      },
+      "ceiling": {
+        "visible": true,
+        "on": false,
+        "firstPerson": true,
+        "baked": {
+          "merged": 4,
+          "removed": 57
+        },
+        "lightCount": 4
+      },
+      "file": "lane-from-line-lights-off-torch.png",
+      "bytes": 300838,
+      "sha": "c1a000290f2a",
+      "lumaMean": 24.09,
+      "lumaStd": 15.11,
+      "maxLum": 144.6,
+      "blownPct": 0.0,
+      "nearBlackPct": 5.62
+    },
+    {
+      "cam": "mid-back",
+      "light": "noon",
+      "lights": {
+        "on": true,
+        "night": false,
+        "room": true
+      },
+      "ceiling": {
+        "visible": true,
+        "on": true,
+        "firstPerson": true,
+        "baked": {
+          "merged": 4,
+          "removed": 57
+        },
+        "lightCount": 4
+      },
+      "file": "lane-mid-back-noon.png",
+      "bytes": 315912,
+      "sha": "077cfa8a1440",
+      "lumaMean": 46.01,
+      "lumaStd": 21.75,
+      "maxLum": 149.6,
+      "blownPct": 0.0,
+      "nearBlackPct": 0.21
+    },
+    {
+      "cam": "mid-back",
+      "light": "overcast",
+      "lights": {
+        "on": true,
+        "night": false,
+        "room": true
+      },
+      "ceiling": {
+        "visible": true,
+        "on": true,
+        "firstPerson": true,
+        "baked": {
+          "merged": 4,
+          "removed": 57
+        },
+        "lightCount": 4
+      },
+      "file": "lane-mid-back-overcast.png",
+      "bytes": 259020,
+      "sha": "bd0db8e4898a",
+      "lumaMean": 37.53,
+      "lumaStd": 20.18,
+      "maxLum": 144.6,
+      "blownPct": 0.0,
+      "nearBlackPct": 0.14
+    },
+    {
+      "cam": "mid-back",
+      "light": "dusk",
+      "lights": {
+        "on": true,
+        "night": false,
+        "room": true
+      },
+      "ceiling": {
+        "visible": true,
+        "on": true,
+        "firstPerson": true,
+        "baked": {
+          "merged": 4,
+          "removed": 57
+        },
+        "lightCount": 4
+      },
+      "file": "lane-mid-back-dusk.png",
+      "bytes": 254857,
+      "sha": "3b4bf791da71",
+      "lumaMean": 31.86,
+      "lumaStd": 20.59,
+      "maxLum": 144.6,
+      "blownPct": 0.0,
+      "nearBlackPct": 0.68
+    },
+    {
+      "cam": "mid-back",
+      "light": "night",
+      "lights": {
+        "on": true,
+        "night": false,
+        "room": true
+      },
+      "ceiling": {
+        "visible": true,
+        "on": true,
+        "firstPerson": true,
+        "baked": {
+          "merged": 4,
+          "removed": 57
+        },
+        "lightCount": 4
+      },
+      "file": "lane-mid-back-night.png",
+      "bytes": 229092,
+      "sha": "f9d4c8be98c1",
+      "lumaMean": 27.91,
+      "lumaStd": 21.2,
+      "maxLum": 144.6,
+      "blownPct": 0.0,
+      "nearBlackPct": 9.7
+    },
+    {
+      "cam": "mid-back",
+      "light": "lights-off",
+      "lights": {
+        "on": false,
+        "night": true,
+        "room": false
+      },
+      "ceiling": {
+        "visible": true,
+        "on": false,
+        "firstPerson": true,
+        "baked": {
+          "merged": 4,
+          "removed": 57
+        },
+        "lightCount": 4
+      },
+      "file": "lane-mid-back-lights-off.png",
+      "bytes": 160612,
+      "sha": "7ace182ae27b",
+      "lumaMean": 20.39,
+      "lumaStd": 15.58,
+      "maxLum": 144.6,
+      "blownPct": 0.0,
+      "nearBlackPct": 22.22
+    },
+    {
+      "cam": "mid-back",
+      "light": "lights-off-torch",
+      "lights": {
+        "on": false,
+        "night": true,
+        "room": false
+      },
+      "ceiling": {
+        "visible": true,
+        "on": false,
+        "firstPerson": true,
+        "baked": {
+          "merged": 4,
+          "removed": 57
+        },
+        "lightCount": 4
+      },
+      "file": "lane-mid-back-lights-off-torch.png",
+      "bytes": 217246,
+      "sha": "aa6157a3d7c5",
+      "lumaMean": 23.38,
+      "lumaStd": 16.18,
+      "maxLum": 144.6,
+      "blownPct": 0.0,
+      "nearBlackPct": 13.85
+    }
+  ],
+  "gameplayAreas": [
+    {
+      "id": "1p-firing-up-on",
+      "player": [
+        0,
+        -200,
+        -642.8
+      ],
+      "camera": [
+        -0.00038676058500018115,
+        -198.57779596776905,
+        -642.6893934202976
+      ],
+      "ceiling": {
+        "visible": true,
+        "on": true,
+        "firstPerson": true,
+        "baked": {
+          "merged": 4,
+          "removed": 57
+        },
+        "lightCount": 4
+      },
+      "file": "area-1p-firing-up-on.png",
+      "bytes": 262013,
+      "sha": "a40fd52313d9",
+      "lumaMean": 38.85,
+      "lumaStd": 16.7,
+      "maxLum": 144.7,
+      "blownPct": 0.0,
+      "nearBlackPct": 0.0
+    },
+    {
+      "id": "1p-firing-up-off",
+      "player": [
+        0,
+        -200,
+        -642.8
+      ],
+      "camera": [
+        -0.0005316643610538156,
+        -198.57730810251368,
+        -642.6900985733065
+      ],
+      "ceiling": {
+        "visible": true,
+        "on": false,
+        "firstPerson": true,
+        "baked": {
+          "merged": 4,
+          "removed": 57
+        },
+        "lightCount": 4
+      },
+      "file": "area-1p-firing-up-off.png",
+      "bytes": 234457,
+      "sha": "c8e2b0fb7ee1",
+      "lumaMean": 21.93,
+      "lumaStd": 16.51,
+      "maxLum": 144.6,
+      "blownPct": 0.0,
+      "nearBlackPct": 11.33
+    },
+    {
+      "id": "1p-stations-up",
+      "player": [
+        5,
+        -200,
+        -646.8
+      ],
+      "camera": [
+        4.919414505760302,
+        -198.5770113973395,
+        -646.7724582887314
+      ],
+      "ceiling": {
+        "visible": true,
+        "on": true,
+        "firstPerson": true,
+        "baked": {
+          "merged": 4,
+          "removed": 57
+        },
+        "lightCount": 4
+      },
+      "file": "area-1p-stations-up.png",
+      "bytes": 126816,
+      "sha": "ac964b1b82e5",
+      "lumaMean": 47.85,
+      "lumaStd": 17.99,
+      "maxLum": 144.7,
+      "blownPct": 0.0,
+      "nearBlackPct": 0.0
+    },
+    {
+      "id": "1p-apron-up",
+      "player": [
+        -11,
+        -200,
+        -648
+      ],
+      "camera": [
+        -10.941124946191653,
+        -198.57689605697792,
+        -647.9912560631459
+      ],
+      "ceiling": {
+        "visible": true,
+        "on": true,
+        "firstPerson": true,
+        "baked": {
+          "merged": 4,
+          "removed": 57
+        },
+        "lightCount": 4
+      },
+      "file": "area-1p-apron-up.png",
+      "bytes": 142076,
+      "sha": "bd1c9f317f37",
+      "lumaMean": 10.88,
+      "lumaStd": 16.55,
+      "maxLum": 142.7,
+      "blownPct": 0.0,
+      "nearBlackPct": 37.38
+    },
+    {
+      "id": "1p-infirmary-up",
+      "player": [
+        -38,
+        -200,
+        -647.4300000000001
+      ],
+      "camera": [
+        -37.986507356097164,
+        -198.5768410569624,
+        -647.3482655167992
+      ],
+      "ceiling": {
+        "visible": true,
+        "on": true,
+        "firstPerson": true,
+        "baked": {
+          "merged": 4,
+          "removed": 57
+        },
+        "lightCount": 4
+      },
+      "file": "area-1p-infirmary-up.png",
+      "bytes": 297029,
+      "sha": "e90d8681c097",
+      "lumaMean": 22.5,
+      "lumaStd": 18.58,
+      "maxLum": 168.7,
+      "blownPct": 0.0,
+      "nearBlackPct": 0.58
+    },
+    {
+      "id": "1p-hq-ladder-up",
+      "player": [
+        -41,
+        -200,
+        -639
+      ],
+      "camera": [
+        -40.91699591631586,
+        -198.57665893946165,
+        -638.9777637203649
+      ],
+      "ceiling": {
+        "visible": true,
+        "on": true,
+        "firstPerson": true,
+        "baked": {
+          "merged": 4,
+          "removed": 57
+        },
+        "lightCount": 4
+      },
+      "file": "area-1p-hq-ladder-up.png",
+      "bytes": 254152,
+      "sha": "e97ef61186e0",
+      "lumaMean": 22.3,
+      "lumaStd": 20.24,
+      "maxLum": 168.7,
+      "blownPct": 0.0,
+      "nearBlackPct": 12.17
+    },
+    {
+      "id": "1p-hangar-up",
+      "player": [
+        -25,
+        -200,
+        -633
+      ],
+      "camera": [
+        -24.979947716760016,
+        -198.57646459088855,
+        -632.9149003720665
+      ],
+      "ceiling": {
+        "visible": true,
+        "on": true,
+        "firstPerson": true,
+        "baked": {
+          "merged": 4,
+          "removed": 57
+        },
+        "lightCount": 4
+      },
+      "file": "area-1p-hangar-up.png",
+      "bytes": 348153,
+      "sha": "af4128eb1100",
+      "lumaMean": 28.44,
+      "lumaStd": 22.02,
+      "maxLum": 168.7,
+      "blownPct": 0.0,
+      "nearBlackPct": 1.65
+    },
+    {
+      "id": "1p-passage-up",
+      "player": [
+        -26,
+        -200,
+        -615
+      ],
+      "camera": [
+        -25.996224581884643,
+        -198.5763565757989,
+        -614.8985259890013
+      ],
+      "ceiling": {
+        "visible": true,
+        "on": true,
+        "firstPerson": true,
+        "baked": {
+          "merged": 4,
+          "removed": 57
+        },
+        "lightCount": 4
+      },
+      "file": "area-1p-passage-up.png",
+      "bytes": 311336,
+      "sha": "6138396e9dbf",
+      "lumaMean": 39.0,
+      "lumaStd": 19.46,
+      "maxLum": 163.6,
+      "blownPct": 0.0,
+      "nearBlackPct": 0.0
+    }
+  ],
+  "thirdPerson": {
+    "ceilingVisible": false,
+    "ceilingState": {
+      "visible": false,
+      "on": true,
+      "firstPerson": false,
+      "baked": {
+        "merged": 4,
+        "removed": 57
+      },
+      "lightCount": 4
+    },
+    "ignoredForCutawayAim": true,
+    "cameraPullHitCeiling": false,
+    "cameraPos": [
+      -3.1013710453485306,
+      -196.7079220919254,
+      -645.5988182317212
+    ],
+    "liveShot": {
+      "file": "3p-gameplay-firing-line.png",
+      "bytes": 462018,
+      "sha": "f30e55e502a7"
+    },
+    "wideShot": {
+      "file": "3p-overhead-range-wide.png",
+      "bytes": 394663,
+      "sha": "407209a0fd02"
+    }
+  },
+  "ballistics": {
+    "marksBefore": 0,
+    "marksAfterDeckShots": 5,
+    "liveBulletsAddedMarks": 5,
+    "baffleRayFromLocal": [
+      0,
+      1.6,
+      2
+    ],
+    "baffleRayAtZ5_4Y": 5.511,
+    "baffleSolidStopYLocal": 5.975,
+    "baffleHitWasDeckOnly": true,
+    "baffleHasOwnSolid": false,
+    "impactShot": {
+      "file": "closeup-ceiling-bullet-impacts.png",
+      "bytes": 233274,
+      "sha": "33a37a3e6577"
+    }
+  },
+  "j128Audit": {
+    "closeups": [
+      {
+        "id": "closeup-sprinkler-floating-z1",
+        "file": "closeup-sprinkler-floating-z1.png",
+        "bytes": 311377,
+        "sha": "2c30a1b161d7"
+      },
+      {
+        "id": "closeup-sprinkler-beam-clash-z9",
+        "file": "closeup-sprinkler-beam-clash-z9.png",
+        "bytes": 248583,
+        "sha": "c48ba920037a"
+      },
+      {
+        "id": "closeup-duct-beam-clash-z3",
+        "file": "closeup-duct-beam-clash-z3.png",
+        "bytes": 186020,
+        "sha": "a176fddf1952"
+      },
+      {
+        "id": "closeup-baffle-end-z5_4",
+        "file": "closeup-baffle-end-z5_4.png",
+        "bytes": 158370,
+        "sha": "194f7939f102"
+      }
+    ],
+    "findings": [
+      {
+        "part": "Sprinkler drop nozzles (x=-7.25, z=-7,1,9,17,25)",
+        "detail": "Nozzle CylinderGeometry(.018,.052,.20) at y=5.64 spans y=[5.540..5.740]; bracket above spans y=[5.760..6.000] -> 20.0 mm mid-air gap (floating)",
+        "gapMm": 20
+      },
+      {
+        "part": "Sprinkler deflector cones (x=-7.25, z=-7,1,9,17,25)",
+        "detail": "ConeGeometry(.14,.05) at y=5.51 spans y=[5.485..5.535]; nozzle bottom is y=5.540 -> 5.0 mm mid-air gap (floating)",
+        "gapMm": 5
+      },
+      {
+        "part": "Cross-beams vs ceiling deck & side walls (z=-9,-3,3,9,15,21,27)",
+        "detail": "box(15.8,.07,.12) at y=5.94 spans y=[5.905..5.975] below deck y=5.985 (10.0 mm vertical gap) and x=[-7.90..+7.90] inside x=+-8.00 walls (100.0 mm end gap each side)",
+        "gapMm": 10,
+        "wallEndGapMm": 100
+      },
+      {
+        "part": "Cross-beams vs galvanized supply duct (x=+7.12, all 7 beams)",
+        "detail": "All 7 cross-beams (x=[-7.9..+7.9], y=[5.905..5.975]) pass straight through the supply duct (x=[6.83..7.41], y=[5.525..5.985]); duct also overlaps its own steel rail y=[5.920..5.990] by 65 mm",
+        "penetrationMm": 70
+      },
+      {
+        "part": "Sprinkler bracket at z=9 vs cross-beam at z=9",
+        "detail": "Sprinkler bracket at (-7.25, y=[5.76..6.00], z=[8.925..9.075]) intersects steel cross-beam at z=[8.94..9.06], y=[5.905..5.975]",
+        "penetrationMm": 70
+      },
+      {
+        "part": "Fixture lenses vs fixture cages (7 linear fixtures)",
+        "detail": "Lens box(7.1,.018,.43) at y=5.845 has maxY=5.854 vs cage minY=5.855 -> 1.0 mm gap (> 0.5 mm J128 rule)",
+        "gapMm": 1
+      },
+      {
+        "part": "Safety baffle rubber facing vs steel baffle plate (6 baffles)",
+        "detail": "Rotated rx=-0.12 rad: rubber back face sits 12.0 mm inside the 0.18 m steel baffle plate; steel baffle top also penetrates its 0.26 m ceiling hanger by ~122 mm",
+        "penetrationMm": 12
+      },
+      {
+        "part": "Safety baffle ballistics (6 baffles hanging to y=4.84 m)",
+        "detail": "Only the y=6.0 deck has a solid in tg.solids; rounds fired upward into a hanging safety baffle (y=4.84..5.85) pass straight through the steel/rubber baffle and mark the deck behind it",
+        "baffleHasOwnSolid": false
+      }
+    ]
+  },
+  "pageErrors": [],
+  "consoleWarnings": [
+    {
+      "type": "warning",
+      "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+    },
+    {
+      "type": "warning",
+      "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+    },
+    {
+      "type": "warning",
+      "text": "THREE.Material: 'roughness' is not a property of THREE.MeshBasicNodeMaterial."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.Material: 'roughness' is not a property of THREE.MeshBasicNodeMaterial."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"ember\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"ember\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"ember\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"position\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"position\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"position\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "warning",
+      "text": "Calling [RenderPassEncoder (unlabeled)].Draw with a vertex count of 0 is unusual."
+    }
+  ]
+}

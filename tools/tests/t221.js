@@ -1,13 +1,14 @@
 // t221 - GB-146 (Jerry, 2026-10-09: "The sniper bolt is on the wrong side. Move it to the other side of the gun and make
 // an animation for the bolt action in-between shots").
 //  - the model: every part of the bolt handle is on the gun's right (gun-local -x), the knob furthest out, and the
-//    support hand's grab point is the knob;
+//    hand's grab point is the knob;
 //  - a shot that leaves a round works the bolt: up (the knob rises), back, forward, down, all inside the wait the gun
 //    already has between shots: it starts after the shot, is over while fireCooldown is still running, and the next
 //    shot still comes at the gun's interval (shotInterval('sniper'), unchanged); no round is fired during it;
 //  - the case comes out on the pull, on the gun's right, moving right;
 //  - the last round: no cycle (the reload's bolt beat works it);
-//  - the support hand on the knob mid-cycle: needs the arm IK, SKIP on the test page (Matrix4.transpose stub), measured
+//  - the firing hand on the knob mid-cycle (GB-301 / J18; CB-307, CLAUDE DIRECTOR 11 Nov: a bolt gun is worked by the firing hand,
+//    the support stays on the forend), in third person: needs the arm IK, SKIP on the test page (Matrix4.transpose stub), measured
 //    on the real renderer (handoffs/2026-10-09-grokbot-GB-146/sniper-real.mjs t221).
 (async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
@@ -27,6 +28,29 @@
     const pin = () => { const p = T.player.position; T.aimTarget.set(p.x, T.sampleHeight(p.x, p.z) + 1.25, p.z + 10); };
     aimer = setInterval(pin, 5); pin();
     const palmL = () => ud.elbowLG.localToWorld(V().set(0.02, -0.27, 0.13));
+    // CB-307: the firing hand's grip point: its fist's channel (wrist.userData.grip, what holdHand lays on the anchor); gripR without one
+    const wrR = ud.elbowRG.getObjectByName('wrist');
+    // CB-307 (J126 rule 2): the scope's tube in the gun's space (its lenses' line, its outer radius in 1 cm steps along it), and
+    // how deep the firing hand (its glove, the meshes under its wrist) goes into it, in metres (0 when clear).
+    const scopeIn = (() => {
+      const g = T.weaponMeshes.sniper; let oc = null, ob = null, tube = null, n = 0;
+      g.traverse((o) => { if (!o.isMesh) return; if (/^ocular lens$/i.test(o.name || '')) oc = o; else if (/objective lens$/i.test(o.name || '')) ob = o; });
+      if (!oc || !ob) return null;
+      for (const o of ob.parent.children) if (o.isMesh && o !== oc && o !== ob && o.geometry && o.geometry.attributes.position.count > n) { tube = o; n = o.geometry.attributes.position.count; }
+      g.updateMatrixWorld(true); const inv = g.matrixWorld.clone().invert(), c = (o) => new THREE.Box3().setFromObject(o).getCenter(V()).applyMatrix4(inv);
+      const A = c(oc), B = c(ob), d = B.clone().sub(A).normalize(), len = A.distanceTo(B), R = new Map();
+      const m = inv.clone().multiply(tube.matrixWorld), pa = tube.geometry.attributes.position;
+      for (let i = 0; i < pa.count; i++) { const q = V().fromBufferAttribute(pa, i).applyMatrix4(m).sub(A), t = q.dot(d), r = q.sub(d.clone().multiplyScalar(t)).length(), k = Math.round(t * 100); R.set(k, Math.max(R.get(k) || 0, r)); }
+      const rAt = (t) => { let r = 0; for (let k = Math.floor(t * 100) - 1; k <= Math.ceil(t * 100) + 1; k++) r = Math.max(r, R.get(k) || 0); return r; };
+      return () => {
+        g.updateMatrixWorld(true); const gi = g.matrixWorld.clone().invert(), wr = ud.elbowRG.getObjectByName('wrist'); let deep = 0;
+        if (wr) wr.traverse((o) => { if (!o.isMesh || !o.geometry || !o.geometry.attributes.position) return; const mm = gi.clone().multiply(o.matrixWorld), p2 = o.geometry.attributes.position;
+          for (let i = 0; i < p2.count; i++) { const q = V().fromBufferAttribute(p2, i).applyMatrix4(mm).sub(A), t = q.dot(d); if (t < 0 || t > len) continue;
+            const r = q.sub(d.clone().multiplyScalar(t)).length(), out = rAt(t); if (out > 0 && r < out) deep = Math.max(deep, out - r); } });
+        return deep;
+      };
+    })();
+    const palmR = () => wrR && wrR.userData.grip ? wrR.localToWorld(V().copy(wrR.userData.grip).sub(wrR.position)) : ud.gripR.getWorldPosition(V());
     for (let i = 0; i < 16 && T.getCurrentWeapon() !== 'sniper'; i++) T.setWeapon(i);
     await new Promise((r) => { const t0 = Date.now(); const f = () => (T.getCurrentWeapon() === 'sniper' && T.getSwapDbg().swapT <= 0 && !(T.drawDbg && T.drawDbg().active)) || Date.now() - t0 > 6000 ? r() : setTimeout(f, 50); f(); });
     await wait(1500);
@@ -80,7 +104,7 @@
     const log = [], shotAt = [];
     // Game time (TT.getSimTime, GB-131), not the wall clock: the real renderer runs slow and the sim's dt is capped.
     const now = () => (T.getSimTime ? T.getSimTime() * 1000 : performance.now());
-    let last = ammo(), held = true, kUp = 0, kBack = 0, handWorst = 0, handN = 0;
+    let last = ammo(), held = true, kUp = 0, kBack = 0, handWorst = 0, handN = 0, foreWorst = 0, scopeDeep = 0;
     const t0 = now(), w0 = Date.now();
     T.setMouseFireDbg(true);
     while (Date.now() - w0 < 40000 && now() - t0 < 4000 && shotAt.length < 2) {
@@ -92,7 +116,9 @@
       log.push({ t, active: !!S.active, c: S.c || 0, open: S.open || 0, back: S.back || 0, hand: S.hand || 0, cd: T.getSwapDbg().fireCooldown, a });
       if (S.active && knob0) {
         const k = knobL(); kUp = Math.max(kUp, k.y - knob0.y); kBack = Math.max(kBack, knob0.z - k.z);
-        if (S.hand > 0.95) { m.updateMatrixWorld(true); handWorst = Math.max(handWorst, palmL().distanceTo(bolt.localToWorld(grab.clone()))); handN++; }
+        if (S.hand > 0.95) { m.updateMatrixWorld(true); handWorst = Math.max(handWorst, palmR().distanceTo(bolt.localToWorld(grab.clone()))); handN++;
+          const H = T.getShoulderDbg().holds.sniper; foreWorst = Math.max(foreWorst, palmL().distanceTo(gun.localToWorld(V().set(...H.fore))));
+          if (scopeIn) scopeDeep = Math.max(scopeDeep, scopeIn()); }
       }
       if (held && shotAt.length === 1) { held = false; T.setMouseFireDbg(false); }
       // Semi-automatic: a fresh pull once the gun will take it (fireCooldown run out, the bolt long home).
@@ -120,7 +146,10 @@
     ok(kUp > 0.03, 'the knob rises as the bolt is turned up (' + f3(kUp) + ' m)');
     ok(kBack > 0.07, 'and comes back with the bolt (' + f3(kBack) + ' m)');
     if (t2 != null) ok(t2 - t1 >= I * 1000 * 0.95 - 20 && t2 - t1 <= I * 1000 + 300, 'the next shot comes at the gun\'s interval (' + ((t2 - t1) / 1000).toFixed(3) + ' s, interval ' + I + ' s)');
-    ikOk(handN > 0 && handWorst < 0.06, 'the support hand is on the knob through the cycle (' + handN + ' frames, worst ' + f3(handWorst) + ' m)');
+    ikOk(handN > 0 && handWorst < 0.06, 'the firing hand is on the knob through the cycle (' + handN + ' frames, worst ' + f3(handWorst) + ' m)');
+    ikOk(handN > 0 && foreWorst < 0.08, 'and the support hand stays on the forend meanwhile (worst ' + f3(foreWorst) + ' m from it)');
+    ikOk(handN > 0 && !!scopeIn && scopeDeep <= 0.001, 'the firing hand on the knob stays out of the scope (deepest ' + (scopeDeep * 1000).toFixed(1) + ' mm into its tube)');
+    info('the bolt cycle in third person (' + handN + ' frames, hand on): the firing hand ' + f3(handWorst) + ' m from the knob at worst, the support ' + f3(foreWorst) + ' m from the forend, ' + (scopeDeep * 1000).toFixed(1) + ' mm into the scope');
     const c1 = newCases.find((n) => n.t >= t1 && (t2 == null || n.t < t2));
     ok(!!c1, 'the first shot\'s case comes out');
     if (c1) {

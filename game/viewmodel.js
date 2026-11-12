@@ -15,7 +15,7 @@
 //
 // index.html calls update(dt, state) each frame before it draws and place() in renderFrame; it asks muzzleWorld()
 // where the view gun's muzzle appears (the laser leaves from there).
-import { VM, VM_POSES, VM_RELOADS, VM_SOCKETS, VM_BLADES, VM_GRENADE, VM_HANDS, VM_TRIGGER, VM_CONTROLS } from './viewmodel-poses.js';
+import { VM, VM_POSES, VM_RELOADS, VM_SOCKETS, VM_BLADES, VM_GRENADE, VM_HANDS, VM_TRIGGER, VM_CONTROLS, VM_LIGHT } from './viewmodel-poses.js';
 import { SIGHT } from './sight-points.js';
 import { buildViewArm, wristSpacePoint, HAND_SCALE } from '../studio/fp-arms.js';
 import { copyPose, lerpPose, HAND_POSES } from '../studio/marine-hand.js';
@@ -1015,6 +1015,66 @@ export function createViewmodel(ctx) {
       info.selector = a;
     }
   }
+  // CE-4 (J16; ChatGPT 2's GT-20084 switch): 2 in first person, the light's switch pressed by the support thumb (index.html
+  // st.lightPress: t s since the key; the light changes at VM_LIGHT's 'at', the pad fully in). The hand leaves its hold,
+  // turned about the palm by the gun's E.r and slid (gun space) so the pressing digit's pad or tip (E.pad on its end bone
+  // E.k: the thumb's or a finger's) comes onto the switch's contact from VM_LIGHT.gap out along its axis, presses it in its
+  // travel (the eye copy's pad moves with it: the switch's node), lifts off and goes home. That digit's own values E.v (E.fi
+  // the finger, -1 the thumb), the rest of the hand eased toward relaxed by E.o (solved in the cloud against the gun as
+  // drawn, nothing of the glove in it: Claude 5's solve-light). Null when there is no press to show.
+  const LIGHT_RELAX = { f: VM_LIGHT.curl, t: HAND_POSES.relaxed.t };
+  const _lpFull = copyPose(HAND_POSES.relaxed), _lpPose = copyPose(HAND_POSES.relaxed), _lpGi = F(), _lpH = F(), _lpW = F(), _lpM = M4(), _lpM2 = M4(),
+    _lpC = V3(), _lpA = V3(), _lpPad = V3(), _lpPiv = V3(), _lpQ = Q(), _lpV = V3(), _lpHold = V3();
+  function lightTimes() { const T0 = VM_LIGHT.times, t1 = T0.reach, t2 = t1 + T0.press, t3 = t2 + T0.hold, t4 = t3 + T0.lift; return { t1, t2, t3, t4, t5: t4 + T0.back, at: t1 + T0.press * 0.5 }; }
+  function lightRest(sw) {
+    const r = sw.userData.restPosition || sw.userData.vmLightRest || (sw.userData.vmLightRest = sw.position.toArray());
+    sw.position.fromArray(r); return r;
+  }
+  function lightPressFrame(WL, hold, st) {
+    const TL = info.tune.light, LP = st.lightPress || (TL && typeof TL.t === 'number' ? { t: TL.t } : null);   // live: info.tune.light = { t, <key>: { r, t, o } }
+    const E = (TL && TL[gun.key]) || VM_LIGHT[gun.key], sw = gun.ctrls.lightSwitch, ls = gun.src.userData.lightSwitch;
+    info.light = null;
+    if (!sw || !ls) return null;
+    const rest = lightRest(sw);
+    if (!LP || !E || gun2 || LP.t == null || LP.t < 0) return null;
+    const TT = lightTimes(), t = LP.t;
+    if (t >= TT.t5) return null;
+    const k = t < TT.t4 ? smooth(t / TT.t1) : 1 - smooth((t - TT.t4) / VM_LIGHT.times.back);
+    const press = t < TT.t1 ? 0 : t < TT.t2 ? smooth((t - TT.t1) / VM_LIGHT.times.press) : t < TT.t3 ? 1 : 1 - smooth((t - TT.t3) / VM_LIGHT.times.lift);
+    const gap = VM_LIGHT.gap * (t < TT.t1 ? 1 - smooth(t / TT.t1) : t < TT.t3 ? 0 : smooth((t - TT.t3) / VM_LIGHT.times.lift));
+    // the switch's node in the gun's space (its parents' own frames up to the gun's root), its contact and inward axis
+    _lpM.identity(); for (let o = sw.parent; o && o !== gun.root; o = o.parent) { o.updateMatrix(); _lpM.premultiply(o.matrix); }
+    _lpC.fromArray(rest).applyMatrix4(_lpM);
+    _lpA.fromArray(ls.axis).transformDirection(_lpM);
+    // the press pose and its pad (hand space)
+    for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++) _lpFull.f[i][j] = hold.f[i][j] + (LIGHT_RELAX.f[i][j] - hold.f[i][j]) * E.o;
+    for (let j = 0; j < 6; j++) _lpFull.t[j] = (hold.t[j] || 0) + ((LIGHT_RELAX.t[j] || 0) - (hold.t[j] || 0)) * E.o;
+    if (E.fi < 0) for (let j = 0; j < 6; j++) _lpFull.t[j] = E.v[j]; else for (let j = 0; j < 4; j++) _lpFull.f[E.fi][j] = E.v[j];
+    const rig = arms.l.rig, Lw = arms.l.layout.wrist;
+    rig.set(_lpFull); const m = rig.matrices()[E.k];
+    const px = E.pad[0], py = E.pad[1], pz = E.pad[2];
+    _lpPad.set(m[0] * px + m[1] * py + m[2] * pz + m[3], m[4] * px + m[5] * py + m[6] * pz + m[7], m[8] * px + m[9] * py + m[10] * pz + m[11]);
+    const palm = rig.point('palm', _lpPiv);
+    // the wrist on its hold in the gun's space, turned about the palm by E.r
+    _lpGi.q.copy(G.q).invert(); _lpGi.s = 1 / G.s; _lpGi.p.copy(G.p).multiplyScalar(-_lpGi.s).applyQuaternion(_lpGi.q);
+    mul(_lpGi, WL, _lpH);
+    const hp = (x, out) => out.copy(x).sub(_lpV.fromArray(Lw)).multiplyScalar(_lpH.s).applyQuaternion(_lpH.q).add(_lpH.p);
+    hp(palm, _lpPiv);
+    const ang = Math.hypot(E.r[0], E.r[1], E.r[2]);
+    if (ang > 1e-9) {
+      _lpQ.setFromAxisAngle(_lpV.set(E.r[0] / ang, E.r[1] / ang, E.r[2] / ang), ang);
+      _lpH.p.sub(_lpPiv).applyQuaternion(_lpQ).add(_lpPiv); _lpH.q.premultiply(_lpQ);
+    }
+    // slid so the pad is on the contact (out by the gap, in by the press)
+    const padG = _lpPad.sub(_lpV.fromArray(Lw)).multiplyScalar(_lpH.s).applyQuaternion(_lpH.q).add(_lpH.p);
+    _lpH.p.add(_lpV.copy(_lpC).addScaledVector(_lpA, -(VM_LIGHT.face + gap) + ls.travel * press).sub(padG));
+    mul(G, _lpH, _lpW);
+    lerpF(WL, _lpW, k, WL);
+    // the eye copy's pad in by the thumb (the switch's node; studio/weapon-light-switch.js moves the pad's vertices)
+    if (press > 0) { sw.position.x += ls.axis[0] * ls.travel * press; sw.position.y += ls.axis[1] * ls.travel * press; sw.position.z += ls.axis[2] * ls.travel * press; }
+    info.light = { t, k, press, gap };
+    return lerpPose(hold, _lpFull, k, _lpPose);
+  }
   // CE-1: a shot's stroke: 0 to 1 by tb, held to th, home (0) by te; 0 outside.
   const stroke = (t, tb, th, te) => (t < 0 ? 0 : t < tb ? smooth(t / tb) : t < th ? 1 : t < te ? 1 - smooth((t - th) / (te - th)) : 0);
   // CE-1 (GT-20075, Claude 5): the action on a view copy, t seconds after its last shot. Runs after mirrorParts, which
@@ -1229,6 +1289,7 @@ export function createViewmodel(ctx) {
     // reload hands; both guns dip in gunFrame)
     const R = AK ? null : reloadOf(P, st);
     const u = R && st.reloadU != null ? clamp(st.reloadU, 0, 1) : null;
+    S.lightFree = !AK && u == null && st.reloadU == null && !(st.grenade && st.grenade.phase) && !BL && !HN && !st.ammoSwitch && !st.sprint;   // CE-4: the support hand free for the light's switch
     info.reloadKind = u != null ? (R.tactical ? 'tactical' : 'empty') : null;   // CL-306
     info.reloadU = AK && st.reloadU != null ? clamp(st.reloadU, 0, 1) : u;
     const eR = _eR, eL = _eL;
@@ -1368,6 +1429,12 @@ export function createViewmodel(ctx) {
       else if (FOL) follow(WL, eL);
       else if (REL) rel(WL, REL.l, eL);
       twistToward(arms.l, WL, eL); info.handPlace = boltW > 0 ? 'bolt' : 'fore';
+      // CE-4: the light's switch, from the hold as it stands (turned toward the elbow); the elbow goes with the wrist (its
+      // rise only by VM_LIGHT.elbowUp, so a reach up over the gun keeps the forearm below the view)
+      if (!st.grenade && !BL && !HN && !boltW && !sawW) {
+        _lpHold.copy(WL.p); const lp = lightPressFrame(WL, poseL, st);
+        if (lp) { poseL = lp; info.handPlace = 'light'; eL[0] += WL.p.x - _lpHold.x; eL[1] += (WL.p.y - _lpHold.y) * VM_LIGHT.elbowUp; eL[2] += WL.p.z - _lpHold.z; }
+      }
     }
     // (CL-306: the reload's elbow is set above, from the hold's wrist)
     const GRN = !AK && st.grenade && st.grenade.phase ? st.grenade : null;   // CL-307: the throw
@@ -1939,6 +2006,9 @@ export function createViewmodel(ctx) {
       out.p = on ? cs.x[0] + ok.x[1] * gw : 0; out.y = on ? cs.x[1] + ok.x[0] * MX * gw : 0; return out; },
     get gun() { return gun; }, get gun2() { return gun2; }, get frame2() { return G2; }, get arms() { return arms; }, get sockets() { return sockets; }, get frame() { return G; },
     get wrists() { return { r: WR, l: WL }; }, get proj() { return proj; }, get hidden() { return hidden; }, get filtering() { return filterOn; },
-    isEyeHidden: (o) => hideOn && !!(o && o.userData && o.userData.vmEyeHide)
+    isEyeHidden: (o) => hideOn && !!(o && o.userData && o.userData.vmEyeHide),
+    // CE-4: when the support thumb can press the light's switch on the gun in hand (key) now: the press's times (at: the
+    // pad fully in, when index.html changes the light; total: the hand home), else null (index.html changes it at once)
+    lightPressTimes: (key) => (info.active && gun && gun.key === key && !gun2 && S.raise > 0.98 && S.lightFree && (VM_LIGHT[key] || (info.tune.light && info.tune.light[key])) && gun.ctrls.lightSwitch && gun.src.userData.lightSwitch ? (() => { const T0 = lightTimes(); return { at: T0.at, total: T0.t5 }; })() : null)
   };
 }

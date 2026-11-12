@@ -1,0 +1,128 @@
+{
+  "basis": "Earlier photographed pixel counts; both part identities, host, witness point and penetration depth match the new strict audit. No new fleet capture.",
+  "reference": "catalog-fix-launcher-rear",
+  "current": "catalog-fix-wasp-nine-stripes",
+  "top": [
+    {
+      "model": "ak",
+      "currentPair": 29,
+      "recordedPair": 31,
+      "view": "hip",
+      "recordedPixels": 102,
+      "cameraSource": "visibility-fix-kr-ribs",
+      "a": "root/KR-7 stock[52]",
+      "b": "root/fp-stock[51]/BufferGeometry[0]"
+    },
+    {
+      "model": "ak",
+      "currentPair": 97,
+      "recordedPair": 99,
+      "view": "hip",
+      "recordedPixels": 101,
+      "cameraSource": "visibility-fix-kr-ribs",
+      "a": "root/group[95]/BufferGeometry[5]",
+      "b": "root/group[95]/BufferGeometry[0]"
+    },
+    {
+      "model": "sniper",
+      "currentPair": 9,
+      "recordedPair": 9,
+      "view": "rack",
+      "recordedPixels": 101,
+      "cameraSource": "visibility-fix-sniper-seated",
+      "a": "root/BufferGeometry[47]",
+      "b": "root/BufferGeometry[3]"
+    },
+    {
+      "model": "sniper",
+      "currentPair": 26,
+      "recordedPair": 26,
+      "view": "held-right",
+      "recordedPixels": 99,
+      "cameraSource": "visibility-fix-sniper-seated",
+      "a": "root/BufferGeometry[61]",
+      "b": "root/BufferGeometry[4]"
+    },
+    {
+      "model": "chainsaw",
+      "currentPair": 40,
+      "recordedPair": 50,
+      "view": "held-right",
+      "recordedPixels": 96,
+      "cameraSource": "visibility-fix-sniper-seated",
+      "a": "root/CylinderGeometry[53]",
+      "b": "root/CylinderGeometry[52]"
+    },
+    {
+      "model": "launcher",
+      "currentPair": 39,
+      "recordedPair": 39,
+      "view": "rack",
+      "recordedPixels": 94,
+      "cameraSource": "visibility-fix-launcher-rear",
+      "a": "root/BufferGeometry[45]",
+      "b": "root/BufferGeometry[44]"
+    },
+    {
+      "model": "revolver",
+      "currentPair": 87,
+      "recordedPair": 87,
+      "view": "hip",
+      "recordedPixels": 92,
+      "cameraSource": "visibility-fix-revolver-walnut",
+      "a": "root/BufferGeometry[76]",
+      "b": "root/BufferGeometry[0]"
+    },
+    {
+      "model": "m4",
+      "currentPair": 56,
+      "recordedPair": 65,
+      "view": "rack",
+      "recordedPixels": 91,
+      "cameraSource": "visibility-fix-fleet-poses",
+      "a": "root/BufferGeometry[68]",
+      "b": "root/GW-4 comb[67]"
+    },
+    {
+      "model": "minigun",
+      "currentPair": 7,
+      "recordedPair": 23,
+      "view": "aimed",
+      "recordedPixels": 87,
+      "cameraSource": "visibility-fix-fleet-poses-final",
+      "a": "root/BufferGeometry[25]",
+      "b": "root/BufferGeometry[0]"
+    },
+    {
+      "model": "flamer",
+      "currentPair": 148,
+      "recordedPair": 152,
+      "view": "hip",
+      "recordedPixels": 87,
+      "cameraSource": "visibility-fix-fleet-poses-final",
+      "a": "root/CylinderGeometry[38]",
+      "b": "root/BufferGeometry[0]"
+    },
+    {
+      "model": "minigun",
+      "currentPair": 9,
+      "recordedPair": 25,
+      "view": "aimed",
+      "recordedPixels": 86,
+      "cameraSource": "visibility-fix-fleet-poses-final",
+      "a": "root/BufferGeometry[29]",
+      "b": "root/BufferGeometry[0]"
+    },
+    {
+      "model": "chainsaw",
+      "currentPair": 26,
+      "recordedPair": 36,
+      "view": "held-right",
+      "recordedPixels": 85,
+      "cameraSource": "visibility-fix-sniper-seated",
+      "a": "root/BufferGeometry[43]",
+      "b": "root/BufferGeometry[28]"
+    }
+  ],
+  "remainingWitnesses": 1309
+}

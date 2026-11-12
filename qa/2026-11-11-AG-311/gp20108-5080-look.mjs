@@ -53,7 +53,7 @@ async function captureValidated(page, fileName) {
   fs.writeFileSync(fullRev, buf);
   const sha = crypto.createHash('sha1').update(buf).digest('hex').slice(0, 12);
   // Sample canvas luminance via small 160x90 2D copy to prove non-blank & distinct lighting
-  const stats = await page.evaluate(() => {
+  const stats = await page.evaluate(`(() => {
     const src = document.querySelector('canvas');
     const c = document.createElement('canvas');
     c.width = 160;
@@ -80,7 +80,7 @@ async function captureValidated(page, fileName) {
       blownPct: +((100 * blown) / n).toFixed(2),
       nearBlackPct: +((100 * nearBlack) / n).toFixed(2)
     };
-  });
+  })()`);
   return { file: fileName, bytes: buf.length, sha, ...stats };
 }
 
@@ -244,7 +244,7 @@ async function main() {
             lights: T.trainingDbg.lights(),
             ceiling: tg.ceiling.state()
           };
-        })`, cam, lm);
+        })(${JSON.stringify(cam)}, ${JSON.stringify(lm)})`);
         await pause(80);
         const fileName = `lane-${cam.id}-${lm.id}.png`;
         const shot = await captureValidated(page, fileName);

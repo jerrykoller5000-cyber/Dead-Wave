@@ -1,0 +1,66 @@
+[
+  {
+    "side": 1,
+    "before": 18,
+    "after": 18,
+    "missing": 0,
+    "added": 0,
+    "innerBefore": 0.08679999989196657,
+    "inner": 0.09130000004749744,
+    "outer": 0.09380000010803341,
+    "outerMotion": 0,
+    "closed": true,
+    "gap": {
+      "lowerMm": 0,
+      "upperMm": 0.0078125
+    }
+  },
+  {
+    "side": 1,
+    "before": 30,
+    "after": 30,
+    "missing": 0,
+    "added": 0,
+    "innerBefore": 0.08979999981001019,
+    "inner": 0.09229999998696148,
+    "outer": 0.0978000001899898,
+    "outerMotion": 0,
+    "closed": true,
+    "gap": {
+      "lowerMm": 0,
+      "upperMm": 0.0078125
+    }
+  },
+  {
+    "side": 1,
+    "before": 18,
+    "after": 18,
+    "missing": 0,
+    "added": 0,
+    "innerBefore": 0.08679999989196657,
+    "inner": 0.09130000004749744,
+    "outer": 0.09380000010803341,
+    "outerMotion": 0,
+    "closed": true,
+    "gap": {
+      "lowerMm": 0,
+      "upperMm": 0.0078125
+    }
+  },
+  {
+    "side": 1,
+    "before": 30,
+    "after": 30,
+    "missing": 0,
+    "added": 0,
+    "innerBefore": 0.08979999981001019,
+    "inner": 0.09229999998696148,
+    "outer": 0.0978000001899898,
+    "outerMotion": 0,
+    "closed": true,
+    "gap": {
+      "lowerMm": 0,
+      "upperMm": 0.0078125
+    }
+  }
+]

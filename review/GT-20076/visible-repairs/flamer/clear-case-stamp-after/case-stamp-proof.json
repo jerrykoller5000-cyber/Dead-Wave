@@ -1,0 +1,15 @@
+{
+  "oldHash": "c82a72b7",
+  "unchangedOriginalUpperSamples": 88,
+  "checked": 4617,
+  "raised": 2195,
+  "maximumError": 5.24288523706673e-9,
+  "maximumLift": 0.01995100800243127,
+  "originalTriangles": 92,
+  "finalTriangles": 342,
+  "closed": true,
+  "gap": {
+    "lowerMm": 0,
+    "upperMm": 0.0078125
+  }
+}

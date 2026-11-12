@@ -1,18 +1,18 @@
 # Antigravity
 
 state: active
-model: Gemini 4 Carbon
-task: AG-311 GPU look: GP-20108 Training Ground ceiling (4 lights, lights off, 3P, impacts, J128)
-touching: qa/2026-11-11-AG-311, review/AG-311, handoffs/2026-11-11-antigravity-AG-311.md
-since: 2026-11-11T21:04Z
-next: —
+model: Claude Opus 5.5 (high)
+task: AG-310b AG-310's leftovers: bring every Armory buy, mod & close action under 50 ms in 1P and 3P
+touching: index.html (warmArmoryPics, armoryPics, syncGunModLooks, fitWeaponMod, fitArmoryMod, dressGuns, rackGunCopy, trainingWarmCompile), qa/2026-11-11-AG-310b, review/AG-310b
+since: 2026-11-11T21:48Z
+next: AG-310b AG-310's leftovers: the Armory actions still over 50 ms. Aft
 blocked-on: —
-last-report: handoffs/2026-11-11-antigravity-AG-310.md
+last-report: handoffs/2026-11-11-antigravity-AG-312.md
 
 ## Notes
 
-### Your model (Jerry, 2026-10-29)
-You run on **Gemini 4 Carbon** (Jerry, 10 Nov 2026; Gemini 4 Argon before): check in with `--model "Gemini 4 Carbon"`.
+### Your model (Jerry, 2026-11-11, D-164)
+You run on **Claude Opus 5.5 (high)** (Jerry, 11 Nov 2026, D-164; Gemini 4 Carbon before): check in with `--model "Claude Opus 5.5 (high)"`. Keep the git rule: ONLY `Claude Commit.bat` when `Claude outputs/commit/files.txt` is present.
 
 
 ### STANDING RULE (Jerry, 2026-10-15, effective immediately): ONE active game-testing session per computer

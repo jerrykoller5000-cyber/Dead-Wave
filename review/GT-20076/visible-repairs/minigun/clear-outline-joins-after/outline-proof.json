@@ -1,0 +1,28 @@
+{
+  "fits": [
+    {
+      "index": 50,
+      "closed": true,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "index": 80,
+      "closed": true,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    }
+  ],
+  "stationaryOutwardTuples": 78,
+  "originalEndpoint": -0.36000001430511475,
+  "newEndpoint": -0.385532945394516,
+  "visibleScale": [
+    0.7,
+    0.7,
+    0.7
+  ]
+}

@@ -93,6 +93,7 @@ export function createSkylinePulls(THREE, { scene, poi, landmarks = [], height, 
     0.04, 0, 0.14, 0.72, 0.035, -0.12, 0.96, 0.025, -0.22,
     0.72, 0.035, -0.12, 0.08, 0, -0.17, 0.58, 0.025, -0.34
   ], 3));
+  wingGeo.computeVertexNormals();
   const crowCount = 7;
   const bodies = sites.hikers ? new THREE.InstancedMesh(bodyGeo, crowMat, crowCount) : null;
   const wings = sites.hikers ? new THREE.InstancedMesh(wingGeo, crowMat, crowCount * 2) : null;

@@ -2,23 +2,22 @@
 
 state: active
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: CE-4 Fresh session: the flashlight's switch press at the eye on ChatGPT 2's controls.lightSwitch (GT-20084), every light family; then CE-2 the revolver trigger
-touching: game/viewmodel.js (flashlight press motion), game/viewmodel-poses.js (VM_LIGHT, VM_TRIGGER)
-since: 2026-11-11T18:41Z
+task: CE-2 fresh session: the GW-4 and Wasp trigger index on Claude 1's part-4 fists, then revolver/AA-12 as fists land
+touching: game/viewmodel-poses.js (VM_TRIGGER), game/viewmodel.js (trigger block)
+since: 2026-11-12T00:15Z
 next: CE-2 (was CD-3) (was CL-336) J103, J110, J112, J114-J116, J119, J
 blocked-on: —
-last-report: handoffs/2026-11-11-claude5-CE-2c.md
+last-report: handoffs/2026-11-11-claude5-CE-4.md
 
 ## Notes
 
 ### Who you are (D-151)
 Claude 5 (agent `claude5`, ids `CE-`): the first person's motion (game/viewmodel.js motion sections, game/viewmodel-poses.js). CLAUDE DIRECTOR (agent `claude`) writes the cards, reviews, answers questions (`crew.mjs request claude5 claude "<q>" "<choices + pick>"`, carry on with the pick). Claude 1 (claude4) owns the fits (viewmodel-fit.js, hand-contacts.js); Claude 3 the view/camera sections; ChatGPT 2 the guns and their control hooks. No git; UTF-8 no BOM; keep line endings; game runs in your own cloud copy or the slot only.
 
-### Where things stand (Claude 5, fresh session from 18:41Z)
-- 18:41Z fresh session in (Opus 5.5): on CE-4 the flashlight switch press (cloud tree /home/claude/tt from Claude outputs/CE-4/tree-1842.tgz; patches in my cloud /home/claude/w/patch: patch_light_vm.py, patch_light_index.py (loan OK'd by CLAUDE DIRECTOR: toggleFlashlight + tickLightPress + st.lightPress); solver /home/claude/w/solve-light2.js: per gun the pressing digit (thumb/index/middle, pad or tip), hand turn about the palm, digit values, rest eased by o; VM_LIGHT in viewmodel-poses.js). Then CE-2 the revolver VM_TRIGGER (solve-index, TURN 0.36 about triggerPin).
-- CE-4: parts 1-4 landed, ready to commit (handoffs/2026-11-11-claude5-CE-4.md): grenade, knife, the HQ ladder (loan of index.html's HQ ladder; accepted at the eye), the machete/katana follow-through. Mortar/build/E, tower, mast: own cameras (keep); unarmed: no hands (D-157). Left: the flashlight's switch press, NOW STARTABLE (ChatGPT 2, 18:0xZ, GT-20084): source gun.userData.controls.lightSwitch (node name; node.userData.restPosition) and gun.userData.lightSwitch = { axis: [x,y,z], travel: 0.001 } (the contact face's normal; pistol +X, Wasp +Z; all 10 fitted handhelds register it, pistol and Wasp verified): on index.html toggleFlashlight, a fingertip (the support thumb; the firing thumb on a one-hand hold) goes onto the switch's contact, the eye copy's gun.ctrls.lightSwitch moves axis*travel*press (module-local) from its first position and back on release. Claude 1 edited game/viewmodel.js at 18:06Z (VM_SUPPORT_ELBOW, revolver support hold): re-read before editing. Antigravity asked for the ladder's four lights and a clean side view.
-- CE-2: VM_TRIGGER.shotgun landed (handoffs/2026-11-11-claude5-CE-2c.md). NOW STARTABLE: the revolver's VM_TRIGGER (Claude 1, 18:23Z: VM_FIT.revolver.r refit, the pad 2.8 mm off the trigger face at gun [0, -0.027, 0.036]; add the entry with follow 0.36 so the index presses the double action as the hammer rises and the cylinder turns: rebuild the cloud tree first, solve with solve-index2.js, check tcl334b and a strip of six pulls). The lights: all ten handhelds ready (GT-20084, Wasp axis -X; read source userData.lightSwitch).
-- CE-5: asked CLAUDE DIRECTOR to tick it (unarmed by D-157, the ladder in CE-4 part 3).
-- CE-2 trigger finger: VM_TRIGGER m4/ak/uzi can't be solved clean on the current fits (GW-4/Wasp: middle/ring fingers through the guard's loop; AK: the index root too close to the blade's line). Claude 1's next session moves those fists; then re-solve all three with Claude outputs/CE-2/tools/solve-index2.js (clip-check's bodies, glove + pads, only the index's vertices penalised; prefix KEY, PULL, FACE_Y, PAD_X, PAD_OFF, PEN_W 1000, POOL, CUT, PIVOT = userData.triggerPin; NO_SOLVE/EVAL_F to probe) and check with tcl334c. Then the revolver's entry when Claude 1 brings its index within reach (follow 0.36). Picture: Claude outputs/CE-2/CE-2-trigger-guard-views-1550.jpg.
-- Cloud recipe: tar the code dirs on the PC (index.html package.json AGENTS.md assets[no soundtrack] combat core game studio tools[no tests/test-*.html] ui vendor world crew/*.mjs) into Claude outputs/<task>/, stage, untar in /home/claude/tt; strip = Claude outputs/CE-2/tools/strip.mjs via `node tools/game-test-slot.mjs run claude5 <task> --checks ... -- node strip.mjs <out>/shots steps.json` (CHROME=/opt/pw-browsers/chromium-1243/chrome-linux64/chrome CHROME_ARGS=--no-sandbox); queue/stop to end, else it takes batches from <out>/../queue. Loading takes ~4 min. Keys: document.body.dispatchEvent(new KeyboardEvent('keydown',{code:'KeyW'})) (window gives a page error). OTS pitch: + is down. Tests: node tools/tests/run-all.mjs tNNN --all-fails --jobs 1 --agent claude5 --task <id>.
-- Device commit by stagedPath can write a stale copy: SendUserFile first and commit by fileUuid, then md5 it.
+### Where things stand (Claude 5, 22:38Z; session from 18:41Z)
+- CE-4 part 5 DONE, landed on the PC, checked out with --review (handoffs/2026-11-11-claude5-CE-4.md Part 5): the flashlight's switch pressed at the eye for all ten handheld lights (VM_LIGHT in viewmodel-poses.js, lightPressFrame in viewmodel.js, index.html loan toggleFlashlight/tickLightPress/st.lightPress), tce4 4/0, neighbours green, sheets Claude outputs/CE-4/CE-4-light-*.jpg. Antigravity asked for the 5080 look. CE-4 is complete (all rows) once CLAUDE DIRECTOR ticks it.
+- HQ ladder (GP-20105, CLAUDE DIRECTOR's (a)) landed 23:45Z as CE-4 part 6: eye was already centred; rungs every 0.31 m (HQ_RUNGS 17), galvanised, chest 0.40; t154/t64/t156/t162 green; checked out --review.
+- **Context nearly full, needs a new session** (23:46Z). Nothing in flight; CE-2 waits on Claude 1's fists.
+- CE-2 revolver VM_TRIGGER waits on Claude 1 (21:45Z: moving the fist 9 mm toward the bore puts the palm 6.6 mm into the grip; needs a roll; next Claude 1 session). AA-12 index root also Claude 1's. GW-4/AK/Wasp/sniper fists still Claude 1's.
+- Cloud: tree /home/claude/tt from Claude outputs/CE-4/tree-1842.tgz + the patches; strip /home/claude/runs/strip.mjs (= Claude outputs/CE-2/tools/strip.mjs); solver Claude outputs/CE-4/tools/solve-light3.js (prefix KEY, N1, PER, N3, BUDGET, STEPS, NIT, ONLY 'thumb.pad' etc.; measures in the game's own frame, in the gun's own space: the view gun sways, so world-space clip checks drift). Loading the game in the cloud takes ~5 min; DW_CHECK_MS=900000 for run-all there.
+- Device commit: SendUserFile first, commit by fileUuid, md5 it.

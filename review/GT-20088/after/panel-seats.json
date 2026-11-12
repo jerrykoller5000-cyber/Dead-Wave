@@ -1,0 +1,30 @@
+[
+  {
+    "side": -1,
+    "before": 71,
+    "after": 71,
+    "missing": 0,
+    "added": 0,
+    "innerBefore": 0.03229999997150153,
+    "inner": 0.032999999997473786,
+    "outer": 0.03350000002849847,
+    "outerMotion": 0,
+    "closed": true,
+    "woodTexture": true,
+    "paintRole": null
+  },
+  {
+    "side": 1,
+    "before": 71,
+    "after": 71,
+    "missing": 0,
+    "added": 0,
+    "innerBefore": 0.028299999971501528,
+    "inner": 0.028999999997473786,
+    "outer": 0.02950000002849847,
+    "outerMotion": 0,
+    "closed": true,
+    "woodTexture": true,
+    "paintRole": null
+  }
+]

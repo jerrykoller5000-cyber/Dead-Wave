@@ -757,10 +757,14 @@ export function buildTrainingGround(T, opts = {}) {
     lightSwitch: station(SW.x + 0.02, SW.z, Math.PI / 2, 0.8)
   };
   const inset = 0.42;
+  // CB-292 / J126: the wall solids project 0.3 m into these two rooms. A 0.8 m
+  // centre inset leaves 0.5 m from the solid face for the marine's 0.42 m body
+  // and his moving limbs. Keep a small overlap through the actual door opening.
+  const wallWalkInset = 0.8, doorwayOverlap = 0.05;
   const walk = [
-    { minX: O.x + R.minX + inset, maxX: O.x + R.maxX - 0.8, minZ: O.z + R.minZ + inset, maxZ: O.z + firingLine.front - inset },
-    { minX: O.x + B.maxX - inset - 0.05, maxX: O.x + R.minX + inset + 0.05, minZ: O.z + D.minZ + inset, maxZ: O.z + D.maxZ - inset },
-    { minX: O.x + B.minX + 0.8, maxX: O.x + B.maxX - inset, minZ: O.z + B.minZ + inset, maxZ: O.z + B.maxZ - 0.75 }
+    { minX: O.x + R.minX + wallWalkInset, maxX: O.x + R.maxX - 0.8, minZ: O.z + R.minZ + wallWalkInset, maxZ: O.z + firingLine.front - 0.85 },
+    { minX: O.x + B.maxX - wallWalkInset - doorwayOverlap, maxX: O.x + R.minX + wallWalkInset + doorwayOverlap, minZ: O.z + D.minZ + inset, maxZ: O.z + D.maxZ - inset },
+    { minX: O.x + B.minX + 0.8, maxX: O.x + B.maxX - wallWalkInset, minZ: O.z + B.minZ + wallWalkInset, maxZ: O.z + B.maxZ - 1.15 }
   ];
   const zombieRect = { minX: O.x + B.minX + 0.95, maxX: O.x + B.maxX - 0.75, minZ: O.z + B.minZ + 0.6, maxZ: O.z + B.maxZ - 0.9 };
   // CL-136: the room's inner wall faces, for a body to keep its own radius off (trainingKeepZombie, the corpses).

@@ -20992,24 +20992,28 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       }
       return out;
     }
-    function dressGuns(state) {
+    function dressGuns(state, onlyKind = null) {
       if (!gunFurniture) return;
       const picks = (state && state.guns) || {};
-      for (const [id, mats] of Object.entries(gunFurniture)) {
+      const entries = onlyKind ? (gunFurniture[onlyKind] ? [[onlyKind, gunFurniture[onlyKind]]] : []) : Object.entries(gunFurniture);
+      for (const [id, mats] of entries) {
         const key = picks[id];
         const tex = key && isGunFinishKey(key) ? camoTile(key) : null;   // CL-111: or the rune finish, once it is his
         const rune = tex && key === RUNE_FINISH_KEY;
         for (const mat of mats) {
-          mat.map = tex || mat.userData.issueMap;
+          const nextMap = tex || mat.userData.issueMap;
+          const nextEmissiveMap = mat.emissive ? (rune ? runeFinish.glowTex : null) : mat.emissiveMap;
+          const needRebuild = !!mat.map !== !!nextMap || !!mat.emissiveMap !== !!nextEmissiveMap;
+          mat.map = nextMap;
           if (mat.emissive) {   // the rune finish's faint light at night; every other finish has none
-            mat.emissiveMap = rune ? runeFinish.glowTex : null;
+            mat.emissiveMap = nextEmissiveMap;
             mat.emissive.setHex(rune ? 0xffffff : 0x000000);
             mat.emissiveIntensity = rune ? 0.55 * Math.max(0, runeFinish.level) : 1;
           }
           mat.color.setHex(tex ? 0xe6e2d6 : mat.userData.issueColor);
           mat.roughness = tex ? 0.62 : mat.userData.issueRoughness;
           mat.metalness = tex ? 0.05 : mat.userData.issueMetalness;
-          mat.needsUpdate = true;
+          if (needRebuild) mat.needsUpdate = true;
         }
       }
     }
@@ -21897,14 +21901,27 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const s = Math.abs(footSurfaceY(r.x + ux, r.z + uz, r.y + 0.35) - footSurfaceY(r.x - ux, r.z - uz, r.y)) / 0.7;
       return 1 / (1 + 1.5 * Math.min(1.5, s));
     }
+    // CC-343 (part 2): where the crouch puts boot s (0 the left) along the leg, from the hip pivot: still, the staggered
+    // stance (frontZ, rearZ); moving (moveK 1), the crouch-walk's step at walkPhase. As in "Crouch legs" (updateMarinePose).
+    function crouchFootZ(s, moveK) {
+      const Q = CROUCH, k = POSE.strideK == null ? 1 : POSE.strideK;
+      const u = (((walkPhase + (s ? Math.PI : 0) - 1.5 * Math.PI) / (Math.PI * 2)) % 1 + 1) % 1;
+      let wz;
+      if (u < Q.stance) wz = Q.step * k * (1 - 2 * u / Q.stance);
+      else { const q = (u - Q.stance) / (1 - Q.stance), e = q * q * (3 - 2 * q); wz = (-Q.step + 2 * Q.step * e) * k; }
+      const iz = s ? Q.rearZ : Q.frontZ;
+      return iz + (wz - iz) * moveK;
+    }
     // The ground for the step glide (CL-133): a ramp (a flight of stairs) under (x, z) near height y, else the ground.
+    let rampHit = false;   // CC-343 (part 2): the last rampGroundY was on a ramp's footprint
     function rampGroundY(x, z, y) {
+      rampHit = false;
       for (const d of platforms) {
         if (!d.rise) continue;
         const dx = x - d.x, dz = z - d.z, c = Math.cos(d.yaw), sn = Math.sin(d.yaw), lx = dx * c - dz * sn, lz = dx * sn + dz * c;
         if (Math.abs(lx) > d.hw || Math.abs(lz) > d.hl) continue;
         const h = d.deckY + d.rise * (lz / d.hl * 0.5 + 0.5);
-        if (Math.abs(h - y) < 0.8) return h;
+        if (Math.abs(h - y) < 0.8) { rampHit = true; return Math.max(h, sampleHeight(x, z)); }   // CC-343 (part 2): never under the ground
       }
       return sampleHeight(x, z);
     }
@@ -21914,6 +21931,36 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       return (a + b) * 0.5;
     }
     const FOOT_SHIFT = 0.1;   // the most a boot steps off a higher edge it only tips onto
+    // CC-343 (part 2): standing still, a boot out past the side of what he stands on (a deck's edge beside him) steps in
+    // toward his middle, as far as FOOT_STEPIN, onto the level his root is on: he stands on the deck, not in a squat with
+    // one boot down on the ground. footStill is set each frame before the feet (updateMarinePose).
+    const FOOT_STEPIN = 0.16, FOOT_S = { y: 0, dx: 0, dz: 0 };
+    let footStill = false;
+    // Can a boot at (x, z) facing (fx, fz) stand flat at y: its heel and ball (and either side of the ball) on y, and
+    // nothing over y under any of it (its toe may reach out over something lower: a deck's edge)?
+    function footFlatAt(x, z, fx, fz, rootY, y) {
+      const hb = CROUCH.heel, tb = CROUCH.toe, w = 0.05;
+      for (const [a, c] of [[-hb, 0], [0.04, 0], [tb, 0], [0.04, -w], [0.04, w]]) {
+        const g = footSurfaceY(x + fx * a - fz * c, z + fz * a + fx * c, rootY);
+        if (g > y + 0.02 || (a !== tb && g < y - 0.02)) return false;
+      }
+      return true;
+    }
+    function footStepIn(x, z, rootY, fx, fz) {
+      const r = rollPivot.parent ? rollPivot.parent.position : null;
+      if (!r) return null;
+      let ux = r.x - x, uz = r.z - z; const l = hypot(ux, uz);
+      if (l < 0.02) return null;
+      ux /= l; uz /= l;
+      const far = Math.min(FOOT_STEPIN, l);
+      for (let t = 0.01; t <= far + 1e-6; t += 0.01) {
+        if (footSurfaceY(x + ux * t, z + uz * t, rootY) < rootY - 0.02) continue;
+        const s = Math.min(far, t + 0.06);   // the boot's half width and a little more onto it
+        FOOT_S.y = footSurfaceY(x + ux * s, z + uz * s, rootY); FOOT_S.dx = ux * s; FOOT_S.dz = uz * s;
+        return fx == null || footFlatAt(x + ux * s, z + uz * s, fx, fz, rootY, FOOT_S.y) ? FOOT_S : null;   // room for the whole boot there
+      }
+      return null;
+    }
     // A boot (ankle at x, z, facing fx, fz) over a step's edge: { y, shift } - stand at y, moved shift along its facing.
     const FOOT_E = { y: 0, shift: 0, hi: 0 };
     function footAcrossEdge(x, z, fx, fz, rootY, gH, gB, gT) {
@@ -21956,9 +22003,14 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       FOOT_F.dx = FOOT_F.dz = 0;
       if (Math.abs(gB - (gH + (gT - gH) * (hb + 0.04) / span)) > 0.012 || Math.abs(gT - gH) > 0.5 * span ||
           Math.abs((gL + gR) * 0.5 - gM) > 0.012 || Math.abs(gR - gL) > 0.5 * 2 * w) {
-        const E = footAcrossEdge(x, z, fx, fz, rootY, gH, gB, gT);
-        FOOT_F.y = Math.max(E.y, E.shift ? E.y : Math.max(gL, gR)); FOOT_F.slope = 0; FOOT_F.roll = 0; FOOT_F.dx = fx * E.shift; FOOT_F.dz = fz * E.shift;
+        const E = footAcrossEdge(x, z, fx, fz, rootY, gH, gB, gT), side = Math.max(gL, gR);
+        FOOT_F.y = E.y; FOOT_F.slope = 0; FOOT_F.roll = 0; FOOT_F.dx = fx * E.shift; FOOT_F.dz = fz * E.shift;
+        if (!E.shift && side > E.y && !(footStill && side > E.y + 0.03 && E.y < rootY - 0.03)) FOOT_F.y = side;   // CC-343 (part 2): standing still, a boot half off a side edge steps in (below)
       } else { FOOT_F.y = gM; FOOT_F.slope = Math.atan2(gT - gH, span); FOOT_F.roll = Math.atan2(gR - gL, 2 * w); }
+      if (footStill && FOOT_F.y < rootY - 0.03) {   // CC-343 (part 2): out past the side of what he stands on: step in
+        const S = footStepIn(x + FOOT_F.dx, z + FOOT_F.dz, rootY, fx, fz);
+        if (S) { FOOT_F.y = S.y; FOOT_F.slope = 0; FOOT_F.roll = 0; FOOT_F.dx += S.dx; FOOT_F.dz += S.dz; }
+      }
       if (FOOT_F.y < rootY - FOOT_DROP) { FOOT_F.y = rootY; FOOT_F.slope = 0; FOOT_F.roll = 0; }
       return FOOT_F;
     }
@@ -22040,13 +22092,29 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       flashlight.intensity = targetIntensity;
       updateReadablePaperMats();
     }
-    function toggleFlashlight() {
-      if (!gameStarted || gameOver || won || (unarmed && mortarMounted?.type !== 'm240')) return;
-      if (mortarMounted?.type !== 'm240' && !needGear('laserLight', dwText('gear.laserLight.name'))) return;
+    // CE-4 (J16, Claude 5): in first person with the view gun up, 2 is the support thumb's press on the light's switch
+    // (game/viewmodel.js lightPressTimes: the pad fully in at 'at' s, the hand home by 'total'): the light changes and clicks
+    // on the press; a second 2 during one does nothing more. Third person, the M240 and a busy hand: at once, as before.
+    let lightPress = { t: -1, at: 0, total: 0, flip: false };
+    function flipFlashlight() {
       flashlightOn = !flashlightOn;
       AudioSys.nvgClick();
       updateFlashlight();
       updateTacticalHud();
+    }
+    function toggleFlashlight(now = false) {   // now: at once (the debug hook)
+      if (!gameStarted || gameOver || won || (unarmed && mortarMounted?.type !== 'm240')) return;
+      if (mortarMounted?.type !== 'm240' && !needGear('laserLight', dwText('gear.laserLight.name'))) return;
+      if (lightPress.t >= 0 && !now) return;   // a second 2 during the press: nothing more (CLAUDE DIRECTOR)
+      const lp = now || mortarMounted ? null : viewmodel?.lightPressTimes?.(currentWeapon);
+      if (lp) { lightPress = { t: 0, at: lp.at, total: lp.total, flip: true }; return; }
+      flipFlashlight();
+    }
+    function tickLightPress(dt) {   // CE-4: from updateViewmodel, every frame
+      if (lightPress.t < 0) return;
+      lightPress.t += dt;
+      if (lightPress.flip && (lightPress.t >= lightPress.at || !gameStarted || gameOver || won)) { lightPress.flip = false; flipFlashlight(); }
+      if (lightPress.t >= lightPress.total) lightPress.t = -1;
     }
 
     function updateNvgVisual() {
@@ -22331,7 +22399,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (climbingTower && tower) return { key: 'tower', yaw: 0, rung: 0, r0: tower.gy + 0.35, step: 0.36, n: 15, half: 0.24, foot: tower.gy };
       if (climbingHq && house.present) {
         const L = hqLadderAt();
-        return { key: 'hq', yaw: Math.atan2(house.group.position.x - L.x, house.group.position.z - L.z), rung: 0, r0: L.y + 0.3, step: (HQ_H - 0.5) / 11, n: 12, half: 0.12, foot: L.y, hand: HQ_LADDER_GRIP.hand, chest: HQ_LADDER_GRIP.chest };   // CE-4: the hands inside the rails (0.19 m off the middle); its own grip (HQ_LADDER_GRIP)
+        return { key: 'hq', yaw: Math.atan2(house.group.position.x - L.x, house.group.position.z - L.z), rung: 0, r0: L.y + 0.3, step: (HQ_H - 0.5) / (HQ_RUNGS - 1), n: HQ_RUNGS, half: 0.12, foot: L.y, hand: HQ_LADDER_GRIP.hand, chest: HQ_LADDER_GRIP.chest };   // CE-4: the hands inside the rails (0.19 m off the middle); its own grip (HQ_LADDER_GRIP)
       }
       return null;
     }
@@ -22858,9 +22926,23 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         // Direction of travel relative to the aim line. The legs face along it
         // (clamped - knees don't rotate 180°), the cycle reverses for a backpedal,
         // and the torso counter-twists a little so the shoulders stay on target.
-        const spd = hypot(velX, velZ);
+        // CC-343 (part 2): crouched, the planted boot moves back at his real pace and along his real heading: walked into
+        // a slanted wall or a crowd he slides along it or is held up (the push-out comes after the pose), and the boots,
+        // paced from velX/velZ, slid by the difference (t184: 40% of his travel). His root from pose to pose says where he went.
+        let gvx = velX, gvz = velZ;
+        const gRoot = rollPivot.parent;
+        const gW = Math.max(0, Math.min(1, ((POSE.crouch || 0) - 0.6) / 0.4));   // only well down in the crouch
+        if (gRoot && gW > 0 && dt > 1e-4 && POSE.gRX != null) {
+          const ax = (gRoot.position.x - POSE.gRX) / dt, az = (gRoot.position.z - POSE.gRZ) / dt;
+          if (hypot(ax, az) < 12) {   // not a teleport
+            POSE.actVX = POSE.actVX == null ? ax : _ease(POSE.actVX, ax, dt, 20); POSE.actVZ = POSE.actVZ == null ? az : _ease(POSE.actVZ, az, dt, 20);
+            gvx += (POSE.actVX - velX) * gW; gvz += (POSE.actVZ - velZ) * gW;
+          }
+        } else POSE.actVX = POSE.actVZ = null;
+        if (gRoot) { POSE.gRX = gRoot.position.x; POSE.gRZ = gRoot.position.z; }
+        const spd = hypot(gvx, gvz);
         let rel = 0;
-        if (spd > 0.3) rel = _wrapAngle(Math.atan2(velX, velZ) - aimYaw);
+        if (spd > 0.3) rel = _wrapAngle(Math.atan2(gvx, gvz) - aimYaw);
         let backpedal = false;
         if (Math.abs(rel) > Math.PI * 0.55) { rel = _wrapAngle(rel + Math.PI); backpedal = true; }
         POSE.strideDir = _ease(POSE.strideDir, backpedal ? -1 : 1, dt, 10);
@@ -23283,8 +23365,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         const ry = rootObj ? rootObj.position.y : 0;
         if (POSE.rootY != null && rootObj && grounded && !airborne && POSE.wasGroundedPose && !diving() && !climbingTower && !swimming) {
           const d = ry - POSE.rootY;
-          const pred = rampGroundY(rootObj.position.x, rootObj.position.z, ry) - rampGroundY(playerFrameStart.x, playerFrameStart.z, POSE.rootY);
-          const jump = d - pred;
+          const gNow = rampGroundY(rootObj.position.x, rootObj.position.z, ry), onRamp = rampHit;
+          const pred = gNow - rampGroundY(playerFrameStart.x, playerFrameStart.z, POSE.rootY);
+          const jump = onRamp || rampHit ? 0 : d - pred;   // CC-343 (part 2): on or off a ramp's foot it is continuous
           if (Math.abs(jump) > MOVE_FEEL.stepMin && Math.abs(jump) < MOVE_FEEL.stepMax) { POSE.stepGlide = (POSE.stepGlide || 0) - jump; POSE.steps = (POSE.steps || 0) + 1; }
         }
         POSE.rootY = ry; POSE.wasGroundedPose = !airborne;
@@ -23311,6 +23394,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const feetOnTerrain = !!root && grounded && !swimming && !diving() && !onHqRoof && !onTowerDeck && !climbingTower && !vault;
       const rootGY = feetOnTerrain ? playerGroundY(root.x, root.z, root.y + STEP_UP) : root ? root.y : 0;   // CC-343: where his root lands this frame
       if (!ud.feet) ud.feet = [0, 0];
+      footStill = feetOnTerrain && !moving && hypot(velX, velZ) < 0.08;   // CC-343 (part 2): see footStepIn
       if (feetOnTerrain && legL && legL.parent) legL.parent.updateWorldMatrix(true, false);
       ud.feet.on = feetOnTerrain; ud.feet.lift = POSE.feetLift || 0; ud.feet[0] = ud.feet[1] = null;
       const footGround = (leg, ty, tz) => {
@@ -23332,6 +23416,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         if (Math.abs(gB - (gH + (gT - gH) * (hb + 0.04) / span)) > 0.012 || Math.abs(slope) > 0.5) {
           const E = footAcrossEdge(wx, wz, fx, fz, ry, gH, gB, gT); gy = E.y; slope = 0; FOOT_G.dz = E.shift; FOOT_G.hi = E.hi;
         } else gy = gH + (gT - gH) * hb / span;
+        if (footStill && gy < ry - 0.03) { const S = footStepIn(wx, wz, ry, fx, fz); if (S) { gy = S.y; slope = 0; } }   // CC-343 (part 2): steps in (footFooting)
         if (gy < ry - FOOT_DROP) { gy = ry; slope = 0; }   // out over a drop (a deck's edge, a stairwell): not stood on
         // Up from the body's ground to this foot's ground, in the parent's units.
         const hi = par.worldToLocal(_fgV.set(wx, gy, wz)).y, lo = par.worldToLocal(_fgW.set(wx, ry, wz)).y;
@@ -23348,7 +23433,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           let lo = Infinity, hi = -Infinity;
           for (const leg of [legL, legR]) {
             const kn = leg === legL ? kneeL : kneeR, a0 = leg.rotation.x, k0 = kn.rotation.x;
-            const sz = -(CROUCH.L1 * Math.sin(a0) + CROUCH.L2 * Math.sin(a0 + k0));
+            const sz0 = -(CROUCH.L1 * Math.sin(a0) + CROUCH.L2 * Math.sin(a0 + k0)), cr = POSE.crouch || 0;
+            const sz = cr > 0.001 ? sz0 + (crouchFootZ(leg === legL ? 0 : 1, POSE.crouchMove || 0) - sz0) * cr : sz0;   // CC-343 (part 2)
             const dy = footGround(leg, -(CROUCH.hipY + POSE.bodyDip - CROUCH.ankleH), sz).dy;
             lo = Math.min(lo, dy); hi = Math.max(hi, dy);
           }
@@ -24748,6 +24834,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       torso.add(rig.boxes);
       rig.tanks = carryInstanced(new THREE.CylinderGeometry(0.05, 0.05, 0.26, 12), carryMats.tank, CARRY_SLOTS.tanks, (o, i) => { o.position.copy(T(0, 1.235, -0.28 + i * 0.1)); o.rotation.z = Math.PI / 2; });
       torso.add(rig.tanks);
+      for (const part of [rig.harness, rig.bandolier, rig.belt40]) if (part) part.userData.proxySkip = true;
       if (ud.hipGrip) ud.hipGrip.visible = false;   // the real pistol sits in the holster now
       ud.carry = rig;
       return rig;
@@ -25077,7 +25164,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       else if (kind === 'heavy') { delete extMag[w]; heavyFitted[w] = true; }
       else { delete extMag[w]; delete heavyFitted[w]; }
       if (hadExt !== !!extMag[w]) refitMagazine(w, hadExt);
-      if (typeof syncGunModLooks === 'function') syncGunModLooks();   // CL-113
+      if (typeof syncGunModLooks === 'function') syncGunModLooks(w);   // CL-113
       updateAmmoHud();
       return true;
     }
@@ -25158,8 +25245,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         sawTankFitted = on;
         sawFuel = Math.min(sawFuel, sawFuelMax());
       }
-      syncGunModLooks();
-      updateAmmoHud();
+      if (id !== 'ext' && id !== 'heavy') {
+        syncGunModLooks(w);
+        updateAmmoHud();
+      }
       publishUI('armory-fit', { weapon: w, mod: id, fitted: on });
       return true;
     }
@@ -25231,16 +25320,26 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       }
       if (ud.heavyLook) ud.heavyLook.visible = !!on;
     }
-    function syncGunModLooks() {
-      for (const w of WEAPON_ORDER) for (const gun of [weaponMeshes[w], offhandMeshes && offhandMeshes[w]]) {
+    function syncGunModLooks(onlyW = null) {
+      const ws = onlyW ? [onlyW] : WEAPON_ORDER;
+      let addedNew = false;
+      for (const w of ws) for (const gun of [weaponMeshes[w], offhandMeshes && offhandMeshes[w]]) {
         if (!gun) continue;
+        const hadTube = !!gun.userData.tubeExt;
+        const hadHeavy = gun.userData.heavyLook !== undefined;
         if (EXT_MAG_PRICE[w]) gunExtLook(gun, w, !!extMag[w]);
         if (HEAVY_LOOK[w]) gunHeavyLook(gun, w, !!heavyFitted[w]);
+        const opt = gun.userData.fittedOptic;
+        const newOpt = !!(opt && !opt.userData._furnReg);
+        if (newOpt) opt.userData._furnReg = true;
         // New heavy sleeves and extended tubes are created on first fit, after
         // the initial paint registration and sometimes on an offhand copy.
-        if (gunFurniture) registerGunFurniture({ [w]: gun });
+        if (gunFurniture && ((!hadTube && !!gun.userData.tubeExt) || (!hadHeavy && !!gun.userData.heavyLook) || newOpt || !onlyW)) {
+          registerGunFurniture({ [w]: gun });
+          addedNew = true;
+        }
       }
-      if (gunFurniture) dressGuns(wardrobeState);
+      if (gunFurniture && (addedNew || !onlyW)) dressGuns(wardrobeState, onlyW);
     }
     function syncLaserLightLooks() {
       for (const w of WEAPON_ORDER) for (const gun of [weaponMeshes[w], offhandMeshes && offhandMeshes[w]]) {
@@ -26291,6 +26390,20 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       gd.bolt.position.set(bp.x, bp.y + 0.01 * open, bp.z - 0.09 * back);
       gd.bolt.rotation.set(br.x, br.y, (br.z || 0) + side * 1.05 * open);
       if (gd.boltPoseHook) gd.boltPoseHook(open, back);   // CL-319: the model's own bolt mechanics (the axis, the next round)
+    }
+    // CB-307 (J18 / GB-301, CLAUDE DIRECTOR 11 Nov): the firing hand works the bolt in third person too: between shots it leaves
+    // the grip for the knob (up, back, forward, down) and comes back; the support stays on the forend. The gun is placed in the
+    // world first and only then expressed under the hand (holdShoulderGun), so the hand can go while the gun stays shouldered.
+    // The knob's grab point in the world for a gun placed at (origin, q, s) this frame (the bolt's pose already applied), or null.
+    const _bkM = new THREE.Matrix4(), _bkG = new THREE.Matrix4(), SNIPER_KNOB_HAND = [0.010, -0.004];   // gun units: out from the bore, down
+    function sniperKnobWorld(gun, origin, q, s, out) {
+      const bolt = gun && gun.userData.bolt; if (!bolt) return null;
+      if (!bolt.userData.gb145Grab) bolt.userData.gb145Grab = reloadGrabPoint(bolt, 'bolt');
+      _bkM.identity(); for (let o = bolt; o && o !== gun; o = o.parent) { o.updateMatrix(); _bkM.premultiply(o.matrix); }
+      out.copy(bolt.userData.gb145Grab).applyMatrix4(_bkM);   // the knob in the gun's space
+      // the fist round the knob from its outer side and a little below, so its top stays out of the scope above (J126 rule 2)
+      out.x += (gun.userData.boltSide || 1) * SNIPER_KNOB_HAND[0]; out.y += SNIPER_KNOB_HAND[1];
+      return out.applyMatrix4(_bkG.compose(origin, q, s));
     }
     function sniperBoltEject() {
       // GB-181: thrown at the start of the next frame (updateCasings), from the gun as it was drawn. Spawned here, mid-frame,
@@ -28251,7 +28364,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     function armoryStoredKinds() {
       return runArmory.read().shelf.map((gun) => gun.kind).filter((kind) => weaponMeshes[kind]);
     }
+    let armoryDisplayKindsOverride = null;
     function armoryDisplayKinds() {
+      if (armoryDisplayKindsOverride) return armoryDisplayKindsOverride();
       const carried = runArmory.loadout();
       const kinds = new Set([...armoryStoredKinds(), 'pistol']);
       for (const id of [...carried.primary, ...carried.secondary]) if (id) kinds.add(id.split(':')[0]);
@@ -28261,7 +28376,12 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     const _rkV = new THREE.Vector3(), _rkN = new THREE.Vector3(), _rkNM = new THREE.Matrix3(), _rkM = new THREE.Matrix4(), _rkI = new THREE.Matrix4();
     const _rkCache = new Map();
     function clearRackGunCache() {
-      for (const entry of _rkCache.values()) for (const p of entry.parts) p.geo.dispose();
+      for (const entry of _rkCache.values()) {
+        for (const p of entry.parts) {
+          if (p.geo?.userData) p.geo.userData._rkCached = false;
+          p.geo.dispose();
+        }
+      }
       _rkCache.clear();
     }
     function rackGunCopy(kind) {
@@ -28270,11 +28390,12 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (cached) {
         const flat = new THREE.Group();
         for (const p of cached.parts) {
-          const mesh = new THREE.Mesh(p.geo.clone(), p.mat);
+          const mesh = new THREE.Mesh(p.geo, p.mat);
           mesh.castShadow = false; mesh.receiveShadow = false; mesh.raycast = rackNoRay;
           flat.add(mesh);
         }
         flat.userData.length = cached.length;
+        flat.userData.rkBounds = cached.rkBounds;
         return flat;
       }
       const wrap = carryGunCopy(kind);
@@ -28311,9 +28432,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         const pos = new Float32Array(total * 3), nrm = new Float32Array(total * 3), uv = new Float32Array(total * 2);
         // foldStatic's shared material reads its factory colour and surface
         // finish from these attributes. They follow the vertices into the rack.
-        const colorSize = prep.reduce((size, p) => Math.max(size, p.geo.attributes.color?.itemSize || 0), 0);
+        const needColor = !!(mat.vertexColors || mat.name === 'fold-static');
+        const colorSize = needColor ? prep.reduce((size, p) => Math.max(size, p.geo.attributes.color?.itemSize || 0), 0) : 0;
         const colors = colorSize ? new THREE.BufferAttribute(new Float32Array(total * colorSize), colorSize) : null;
-        const finish = prep.some(p => p.geo.attributes.foldRM) ? new THREE.BufferAttribute(new Float32Array(total * 2), 2) : null;
+        const finish = (mat.name === 'fold-static' && prep.some(p => p.geo.attributes.foldRM)) ? new THREE.BufferAttribute(new Float32Array(total * 2), 2) : null;
         let at = 0;
         for (const { geo, m } of prep) {
           _rkNM.getNormalMatrix(m);
@@ -28344,25 +28466,52 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         if (!prep.some(({ geo: g2 }) => g2.attributes.normal)) geo.computeVertexNormals();
         for (const p of prep) if (p.temporary) p.geo.dispose();
         geo.computeBoundingSphere();
+        geo.computeBoundingBox();
+        geo.userData._rkCached = true;
         const mesh = new THREE.Mesh(geo, mat);
         mesh.castShadow = false; mesh.receiveShadow = false; mesh.raycast = rackNoRay;   // looked at, never shot at or stood on: a raycast through 66 baked meshes halved the frame rate
         flat.add(mesh);
       }
       flat.userData.length = wrap.userData.length;
-      if (_rkCache.size >= 48) {
+      flat.rotation.set(-Math.PI / 2, 0, Math.PI / 2);
+      const bLarge = new THREE.Box3().setFromObject(flat);
+      flat.rotation.set(0, Math.PI / 2, 0);
+      const bSmall = new THREE.Box3().setFromObject(flat);
+      flat.rotation.set(0, 0, 0);
+      const rkBounds = { large: bLarge, small: bSmall };
+      flat.userData.rkBounds = rkBounds;
+      if (_rkCache.size >= 96) {
         const oldest = _rkCache.keys().next().value;
         const oldEntry = _rkCache.get(oldest);
-        if (oldEntry) for (const p of oldEntry.parts) p.geo.dispose();
+        if (oldEntry) {
+          const liveGeos = new Set();
+          house.armoryRack?.traverse((o) => { if (o.isMesh && o.geometry) liveGeos.add(o.geometry); });
+          for (const p of oldEntry.parts) {
+            if (p.geo?.userData) p.geo.userData._rkCached = false;
+            if (!liveGeos.has(p.geo)) p.geo.dispose();
+          }
+        }
         _rkCache.delete(oldest);
       }
-      _rkCache.set(cacheKey, { length: flat.userData.length, parts: flat.children.map((m) => ({ geo: m.geometry.clone(), mat: m.material })) });
+      _rkCache.set(cacheKey, { length: flat.userData.length, rkBounds, parts: flat.children.map((m) => ({ geo: m.geometry, mat: m.material })) });
       return flat;
     }
     function rackNoRay() {}
-    function disposeRackCopy(g) { g.traverse((o) => { if (o.isMesh && o.geometry && o.geometry !== RACK_PEG_GEO) o.geometry.dispose(); }); }
-    let armoryRackDirty = false;
+    function disposeRackCopy(g) { g.traverse((o) => { if (o.isMesh && o.geometry && o.geometry !== RACK_PEG_GEO && !o.geometry.userData?._rkCached) o.geometry.dispose(); }); }
+    let armoryRackDirty = false, armoryRackPrewarmRaf = 0;
+    function scheduleRackPrewarm() {
+      if (armoryRackPrewarmRaf || typeof requestAnimationFrame !== 'function') return;
+      armoryRackPrewarmRaf = requestAnimationFrame(() => {
+        armoryRackPrewarmRaf = 0;
+        if (!armoryRackDirty || !(typeof armoryOpenNow === 'function' && armoryOpenNow())) return;
+        for (const k of armoryDisplayKinds()) {
+          const ck = gunLookKey(k) + '|' + (gunFurniture?.[k]?.[0]?.map ? 'p' : '');
+          if (!_rkCache.has(ck)) { rackGunCopy(k); scheduleRackPrewarm(); return; }
+        }
+      });
+    }
     function queueOrRefreshArmoryRack(force = false) {
-      if (!force && typeof armoryOpenNow === 'function' && armoryOpenNow()) { armoryRackDirty = true; return; }
+      if (!force && typeof armoryOpenNow === 'function' && armoryOpenNow()) { armoryRackDirty = true; scheduleRackPrewarm(); return; }
       refreshArmoryRack(force);
     }
     function refreshArmoryRack(force) {
@@ -28379,7 +28528,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         const copies = row.map((k) => {
           const g = rackGunCopy(k); if (!g) return null;
           g.rotation.set(small ? 0 : -Math.PI / 2, small ? Math.PI / 2 : 0, small ? 0 : Math.PI / 2);
-          const b = new THREE.Box3().setFromObject(g);
+          const b = g.userData.rkBounds ? g.userData.rkBounds[small ? 'small' : 'large'] : new THREE.Box3().setFromObject(g);
           return { k, g, b, w: b.max.x - b.min.x };
         }).filter(Boolean);
         const bodyWidth = copies.reduce((s, c) => s + c.w, 0), spaces = Math.max(0, copies.length - 1);
@@ -28402,7 +28551,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       // unfold (a gun picked off comes off the live copies), then the plain parts fold together again.
       if (urlParams.get('fold') !== '0') {
         const doomed = [];
-        rack.traverse((o) => { if (o.isMesh && o.geometry && o.geometry !== RACK_PEG_GEO) doomed.push(o.geometry); });
+        rack.traverse((o) => { if (o.isMesh && o.geometry && o.geometry !== RACK_PEG_GEO && !o.geometry.userData?._rkCached) doomed.push(o.geometry); });
         try { foldStatic(THREE, TSL, rack); }
         catch (e) { console.warn('Grave Shift: armory rack fold skipped.', e); doomed.length = 0; }
         const keep = new Set();
@@ -28821,14 +28970,15 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     const HQ_LADDER_X = -HQ_HALF - 0.40;
     // CE-4: the one ladder climbed in first person: his hands from his chest to a reach over his head (the body's window,
     // LADDER_GRIP.hand [0.7, 1.5], kept them 0.1-0.7 m under his eye, out of sight) and his face a forearm off the rungs
-    const HQ_LADDER_GRIP = { hand: [0.9, 1.7], chest: 0.32 };
+    // GP-20105: chest 0.40 (was 0.32: the eye 0.19 m off the rungs saw only the pier ahead); HQ_RUNGS rungs every 0.31 m
+    const HQ_LADDER_GRIP = { hand: [0.9, 1.7], chest: 0.40 }, HQ_RUNGS = 17;
     let climbingHq = false;
     function hqRoofY() { return house.group.position.y + HQ_H; }
     function hqLadderAt() {
       return { x: house.group.position.x + HQ_LADDER_X, z: house.group.position.z, y: house.group.position.y, roof: hqRoofY() };
     }
     {
-      const rails = new THREE.MeshStandardMaterial({ color: 0x6a6248, roughness: 0.7, metalness: 0.25 });
+      const rails = new THREE.MeshStandardMaterial({ color: 0x9a9890, roughness: 0.5, metalness: 0.45 });   // GP-20105: galvanised, against the dark pier (was 0x6a6248)
       const lad = new THREE.Group();
       lad.name = 'hq-ladder';
       const RAIL_TOP = HQ_H + 0.95, PIER_FACE = -HQ_HALF - 0.25;   // the rails 0.4 m over the parapet; the pier's face (house space)
@@ -28842,7 +28992,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       }
       // round rungs (3.6 cm) between the rails' inner faces: something to close a hand round
       const rungGeo = new THREE.CylinderGeometry(0.018, 0.018, 0.38, 12); rungGeo.rotateX(Math.PI / 2);
-      for (let i = 0; i < 12; i++) put(rungGeo, 0, 0.3 + i * (HQ_H - 0.5) / 11, 0);
+      for (let i = 0; i < HQ_RUNGS; i++) put(rungGeo, 0, 0.3 + i * (HQ_H - 0.5) / (HQ_RUNGS - 1), 0);
       lad.position.set(HQ_LADDER_X, 0, 0);
       house.group.add(lad);
     }
@@ -30492,7 +30642,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // CL-113: pictures of the real guns for the Armory's shelves: a copy of the gun as it is now (its attachments, its
     // finish), lit on its own and drawn side on, muzzle to the right. One small renderer, made on first use; each
     // picture is kept until the gun's look changes.
-    const armoryPics = { r: null, scene: null, cam: null, canvas: null, ready: null, cache: new Map(), drawn: 0, queue: Promise.resolve(), lastDrawAt: 0, session: 0, warmed: false };
+    const armoryPics = { r: null, scene: null, cam: null, canvas: null, snap: null, ready: null, cache: new Map(), prevCache: new Map(), drawn: 0, queue: Promise.resolve(), lastDrawAt: 0, session: 0, warmed: false };
     function armoryOpenNow() {
       const p = document.getElementById('armoryPanel');
       return !!(cifOpen && cifEl.classList.contains('armory-show') && p && !p.hidden);
@@ -30572,16 +30722,65 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (armoryPics.warmed || INSPECT || window.DWInspect || window.DWInspectHost) return;
       if (!(await armoryPicsReady()) || !armoryPics.r) return;
       armoryPics.warmed = true;
-      let holder = null, dummyGeo = null, dummyMat = null;
+      let holder = null, dummyGeo = null, dummyNonIdx = null, dummyMat = null;
+      const warmPaintMats = [];
       try {
         holder = new THREE.Group();
-        const g = carryGunCopy('pistol');
-        if (g) holder.add(g);
+        const pmBySrc = new Map(), seenPaintCombos = new Set();
+        const m81Tex = camoTile('m81');
+        const geoAttrSig = (g) => Object.keys(g.attributes).sort().map((k) => {
+          const a = g.attributes[k];
+          return k + ':' + a.itemSize + ':' + (a.normalized ? 1 : 0) + ':' + (a.array ? a.array.constructor.name : '');
+        }).join('|') + (g.index ? '|idx' : '|non');
+        for (const wk of WEAPON_ORDER) {
+          const g = carryGunCopy(wk);
+          if (!g) continue;
+          const furn = gunFurniture && gunFurniture[wk];
+          g.traverse((o) => {
+            if (o.name === 'suppressor' || o.name === 'heavyBarrelLook' || o.name === 'extendedTube' || o.name === 'laserLightUnit') o.visible = true;
+            if (o.isMesh) {
+              o.frustumCulled = false;
+              if (o.isInstancedMesh && o.count === 0 && o.instanceMatrix?.count > 0) o.count = 1;
+              if (furn && o.geometry && !Array.isArray(o.material) && furn.includes(o.material)) {
+                let pm = pmBySrc.get(o.material);
+                if (!pm) {
+                  pm = o.material.clone();
+                  pm.map = m81Tex;
+                  if (pm.emissive) { pm.emissiveMap = null; pm.emissive.setHex(0x000000); pm.emissiveIntensity = 1; }
+                  pm.color.setHex(0xe6e2d6); pm.roughness = 0.62; pm.metalness = 0.05;
+                  pmBySrc.set(o.material, pm);
+                  warmPaintMats.push(pm);
+                }
+                const ck = pm.uuid + '|' + geoAttrSig(o.geometry);
+                if (!seenPaintCombos.has(ck)) {
+                  seenPaintCombos.add(ck);
+                  const pmMesh = new THREE.Mesh(o.geometry, pm);
+                  pmMesh.frustumCulled = false;
+                  holder.add(pmMesh);
+                }
+              }
+            }
+          });
+          holder.add(g);
+        }
+        for (const ok of ['rmr', 'prism', 'acog']) {
+          try {
+            const opt = makeOptic(ok);
+            foldStatic(THREE, TSL, opt, { enter: (o) => o.isMesh });
+            opt.traverse((o) => { if (o.isMesh) o.frustumCulled = false; });
+            holder.add(opt);
+          } catch (_) {}
+        }
         dummyGeo = new THREE.BoxGeometry(0.02, 0.02, 0.02);
+        dummyNonIdx = dummyGeo.toNonIndexed();
         dummyMat = new THREE.MeshStandardMaterial({ color: 0xe6e2d6, map: camoTile('m81'), roughness: 0.62, metalness: 0.05 });
-        const dm = new THREE.Mesh(dummyGeo, dummyMat);
-        dm.position.set(0, 0, 0);
-        holder.add(dm);
+        for (const geo of [dummyGeo, dummyNonIdx]) {
+          for (const mat of [dummyMat, MOD_LOOK_MAT, MOD_LOOK_RING]) {
+            const dm = new THREE.Mesh(geo, mat);
+            dm.frustumCulled = false;
+            holder.add(dm);
+          }
+        }
         armoryPics.scene.add(holder);
         const cam = armoryPics.cam;
         cam.position.set(-1.2, 0.14, 0); cam.far = 30; cam.updateProjectionMatrix(); cam.lookAt(0, 0, 0);
@@ -30591,9 +30790,16 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       finally {
         if (holder && armoryPics.scene) armoryPics.scene.remove(holder);
         if (dummyGeo) dummyGeo.dispose();
+        if (dummyNonIdx) dummyNonIdx.dispose();
         if (dummyMat) dummyMat.dispose();
+        for (const m of warmPaintMats) m.dispose();
       }
-      try { await armoryPicture('pistol', true); } catch (_) {}
+      try { for (const ck of CAMO_KEYS) finishSwatch(ck); } catch (_) {}
+      try { rackGunCopy('pistol'); } catch (_) {}
+      for (const wk of WEAPON_ORDER) {
+        try { await armoryPicture(wk, true); } catch (_) {}
+        try { await armoryPreview(wk, {}, true); } catch (_) {}
+      }
     }
     async function armoryPicture(kind, forceOpen = false) {
       if (!weaponMeshes[kind]) return null;
@@ -30617,8 +30823,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           const dist = (len * 0.58) / Math.tan((cam.fov * Math.PI / 180) / 2) / cam.aspect;
           cam.position.set(-dist, dist * 0.12, 0); cam.far = 30; cam.updateProjectionMatrix(); cam.lookAt(0, 0, 0);
           armoryPics.r.render(armoryPics.scene, cam);
-          const out = document.createElement('canvas'); out.width = 400; out.height = 200;
-          out.getContext('2d').drawImage(armoryPics.canvas, 0, 0);
+          const out = armoryPics.snap || (armoryPics.snap = Object.assign(document.createElement('canvas'), { width: 400, height: 200 }));
+          const ctx = out.getContext('2d'); ctx.clearRect(0, 0, 400, 200); ctx.drawImage(armoryPics.canvas, 0, 0);
           armoryPics.scene.remove(holder); holder = null;
           const url = await canvasToPngUrl(out);
           if (!url) return null;
@@ -30628,11 +30834,18 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         finally { if (holder) armoryPics.scene.remove(holder); }
       });
     }
-    // GP-141: real model at the requested angle. Share the thumbnail renderer; no frame loop or angle cache.
-    async function armoryPreview(kind, view = {}) {
-      if (!weaponMeshes[kind] || !armoryOpenNow()) return null;
+    // GP-141: real model at the requested angle. Share the thumbnail renderer; bounded LRU cache avoids duplicate renders on UI refresh.
+    async function armoryPreview(kind, view = {}, forceOpen = false) {
+      if (!weaponMeshes[kind] || (!forceOpen && !armoryOpenNow())) return null;
+      const yaw = Number.isFinite(view?.yaw) ? view.yaw : 0;
+      const pitch = Number.isFinite(view?.pitch) ? Math.max(-Math.PI/3, Math.min(Math.PI/3, view.pitch)) : 0;
+      const zoom = Math.max(1, Math.min(2.5, Number.isFinite(view?.zoom) ? view.zoom : 1));
+      const pKey = gunLookKey(kind) + '|' + (yaw % (Math.PI * 2)).toFixed(4) + '|' + pitch.toFixed(4) + '|' + zoom.toFixed(3);
       const sess = armoryPics.session;
-      return runArmoryPicJob(false, sess, async (okOpen) => {
+      const okNow = () => forceOpen || (armoryPics.session === sess && armoryOpenNow());
+      if (armoryPics.prevCache.has(pKey)) return okNow() ? armoryPics.prevCache.get(pKey) : null;
+      return runArmoryPicJob(forceOpen, sess, async (okOpen) => {
+        if (armoryPics.prevCache.has(pKey)) return okOpen() ? armoryPics.prevCache.get(pKey) : null;
         let holder = null;
         try {
           const gun = carryGunCopy(kind);
@@ -30642,7 +30855,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           gun.traverseVisible(o => {
             const points = o.isMesh && o.geometry?.attributes?.position;
             if (!points) return;
-            const local = new THREE.Box3().setFromBufferAttribute(points);
+            if (!o.geometry.boundingBox) o.geometry.computeBoundingBox();
+            const local = o.geometry.boundingBox;
+            if (!local) return;
             if (o.isInstancedMesh) {
               for (let i = 0; i < o.count; i++) {
                 o.getMatrixAt(i, matrix); matrix.premultiply(o.matrixWorld);
@@ -30655,21 +30870,22 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           const radius = Math.max(.05, bounds.getSize(new THREE.Vector3()).length() / 2);
           gun.position.sub(centre);
           holder = new THREE.Group(); holder.add(gun);
-          const yaw = Number.isFinite(view?.yaw) ? view.yaw : 0;
-          const pitch = Number.isFinite(view?.pitch) ? Math.max(-Math.PI/3, Math.min(Math.PI/3, view.pitch)) : 0;
           holder.rotation.set(0, yaw % (Math.PI*2), pitch);
           armoryPics.scene.add(holder);
           const cam = armoryPics.cam, halfY = cam.fov * Math.PI / 360;
           const halfAngle = Math.min(halfY, Math.atan(Math.tan(halfY) * cam.aspect));
-          const distance = radius * 1.08 / Math.sin(halfAngle) / Math.max(1, Math.min(2.5, Number.isFinite(view?.zoom) ? view.zoom : 1));
+          const distance = radius * 1.08 / Math.sin(halfAngle) / zoom;
           cam.position.set(-distance, 0, 0); cam.lookAt(0, 0, 0);
           cam.far = Math.max(30, distance + radius * 2); cam.updateProjectionMatrix();
           armoryPics.r.render(armoryPics.scene, cam);
-          const out = document.createElement('canvas'); out.width = 400; out.height = 200;
-          out.getContext('2d').drawImage(armoryPics.canvas, 0, 0);
+          const out = armoryPics.snap || (armoryPics.snap = Object.assign(document.createElement('canvas'), { width: 400, height: 200 }));
+          const ctx = out.getContext('2d'); ctx.clearRect(0, 0, 400, 200); ctx.drawImage(armoryPics.canvas, 0, 0);
           armoryPics.scene.remove(holder); holder = null;
           const url = await canvasToPngUrl(out);
-          return (!url || !okOpen()) ? null : url;
+          if (!url) return null;
+          if (armoryPics.prevCache.size >= 32) armoryPics.prevCache.delete(armoryPics.prevCache.keys().next().value);
+          armoryPics.prevCache.set(pKey, url);
+          return okOpen() ? url : null;
         } catch (_) { return null; }
         finally { if (holder) armoryPics.scene.remove(holder); } // Geometry/materials belong to gameplay.
       });
@@ -30702,7 +30918,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const keys = runeFinishUnlocked() ? [RUNE_FINISH_KEY, ...CAMO_KEYS] : CAMO_KEYS;
       for (const key of keys) {
         const locked = key === RUNE_FINISH_KEY ? !runeFinishUnlocked() : !camoUnlocks.isUnlocked(key);
-        list.push({ key, name: sayText('cif.pattern.' + key, {}, key), locked, hint: locked ? (camoUnlockHint(key) || '') : '', swatch: finishSwatch(key) });
+        list.push({ key, name: sayText('cif.pattern.' + key, {}, key), locked, hint: locked ? (camoUnlockHint(key) || '') : '', swatch: () => finishSwatch(key) });
       }
       list.sort((a, b) => Number(a.locked) - Number(b.locked));
       return { current: wardrobeState.guns[kind] || '', list };
@@ -53574,6 +53790,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       return viewmodel;
     }
     function updateViewmodel(dt) {
+      tickLightPress(dt);   // CE-4
       if (!ensureViewmodel()) return;
       const st = _vmState;
       // CL-301 (Jerry, 3 Nov): a pair too (st.akimbo): the view's two guns, one in each hand (it fell back to the old view)
@@ -53634,6 +53851,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       // hand 0..1, unloaded/unload, loaded/load) and the type in the gun; null on a gun without types.
       st.ammoSwitch = ammoSwitch.active() && ammoSwitchGun === currentWeapon ? ammoSwitch.state() : null;
       st.ammoType = ammoHasTypes(currentWeapon) ? ammoLoaded[currentWeapon] : null;
+      st.lightPress = lightPress.t >= 0 ? { t: lightPress.t } : null;   // CE-4: the thumb on the light's switch
       viewmodel.update(dt, st);
     }
     // CL-247: the third-person aim zoom (AIMZ above). Not with the sniper (its scope, until CL-249), the mounted guns,
@@ -54964,6 +55182,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
     const _shAimDbg = { f: new THREE.Vector3(), t: new THREE.Vector3() };
     const _agv = { m: new THREE.Vector3(), s: new THREE.Vector3(), f: new THREE.Vector3() };   // GB-188: aimGun's muzzle pass
+    const _bkKnob = new THREE.Vector3();   // CB-307
     function holdShoulderGun(ud, gun, H, k, dt) {
       const S = SHOULDER_HOLD, sh = H.sh, torso = ud.torsoG, armR = ud.armRG;
       const ads = shoulderAds(), a = ads * ads * (3 - 2 * ads);
@@ -55033,6 +55252,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       }
       tuckDiveGun(origin,gun,_hq.gun,_hScale);
       grip.set(H.grip[0], H.grip[1], H.grip[2]).multiplyScalar(s).applyQuaternion(_hq.gun).add(origin);
+      { const bc = currentWeapon === 'sniper' && !reloading && gun.userData.boltCycle, bw = bc && bc.active ? bc.hand : 0;   // CB-307: the bolt
+        if (bw > 0 && sniperKnobWorld(gun, origin, _hq.gun, _hScale, _bkKnob)) grip.lerp(_bkKnob, bw * bw * (3 - 2 * bw)); }
       const poleR = heldWallPole(_POLE_R, _wallHold.poleR, _wallHold.r);
       if (HANDS.skip[currentWeapon]) { solveArmIK(armR, ud.elbowRG, _HAND_R, grip, poleR, k); handRollR = 0; }
       else handRollR = holdHand(armR, ud.elbowRG, _HAND_R, grip, gripDownDir(_rl.w).applyQuaternion(_hq.gun), 1, poleR, k, 1);   // CL-122, CU-100
@@ -55481,8 +55702,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           palmItem = reloadSupportTarget(currentWeapon, u, gun, fore, ud, torso);
         }
       } else if (!reloading && currentWeapon === 'sniper' && gun.userData.bolt && gun.userData.boltCycle && gun.userData.boltCycle.hand > 0) {
-        // GB-301: bolt animates; FP firing hand rides it via st.boltHand. 3P RH leave-grip skipped (gun is parented
-        // to gripR — not cheap). Support stays on the forend.
+        // GB-301: bolt animates; FP firing hand rides it via st.boltHand; in third person holdShoulderGun takes the firing
+        // hand onto the knob (CB-307). Support stays on the forend.
         boltWork = 0;
       } else if (reloading && gun.userData.mag !== undefined) {
         const st = WEAPON_STATS[currentWeapon];
@@ -65339,8 +65560,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
             mKey += m.uuid;
           } else {
             const custom = Object.hasOwn(m, 'customProgramCacheKey') ? m.customProgramCacheKey() : '';
+            const hasNodes = m.isNodeMaterial && (m.colorNode || m.opacityNode || m.roughnessNode || m.metalnessNode || m.emissiveNode || m.positionNode || m.normalNode || m.maskNode) ? m.uuid : '';
             const texFlags = (m.map ? 1 : 0) | (m.normalMap ? 2 : 0) | (m.roughnessMap ? 4 : 0) | (m.metalnessMap ? 8 : 0) | (m.aoMap ? 16 : 0) | (m.alphaMap ? 32 : 0) | (m.emissiveMap ? 64 : 0);
-            mKey += m.type + ':' + custom + ':' + texFlags + ':' + m.side + ':' + (m.transparent ? 1 : 0) + ':' + (m.depthWrite ? 1 : 0) + ':' + (m.depthTest ? 1 : 0) + ':' + m.blending + ':' + (m.polygonOffset ? 1 : 0) + ':' + (m.vertexColors ? 1 : 0);
+            const physFlags = (m.flatShading ? 1 : 0) | (m.alphaTest > 0 ? 2 : 0) | (m.transmission > 0 ? 4 : 0) | (m.clearcoat > 0 ? 8 : 0);
+            mKey += m.type + ':' + custom + ':' + hasNodes + ':' + texFlags + ':' + physFlags + ':' + m.side + ':' + (m.transparent ? 1 : 0) + ':' + (m.depthWrite ? 1 : 0) + ':' + (m.depthTest ? 1 : 0) + ':' + m.blending + ':' + (m.polygonOffset ? 1 : 0) + ':' + (m.vertexColors ? 1 : 0);
           }
         }
         const attrObj = g.attributes;
@@ -65496,7 +65719,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       // Deduplicating plain meshes by hiding duplicates drops Three.js main-thread CPU time to ~1 s, bringing blackout back to ~4.8-5.2 s,
       // with zero background compilation slices needed after the blackout lifts.
       Promise.resolve()
-        .then(() => {
+        .then(async () => {
           if (done || !training.active) return;
           let pCompile = Promise.resolve();
           const meshes = [];
@@ -65519,7 +65742,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
 
           let restoreImpacts = null, restoreChar = null, restoreWreck = null, restoreFlame = null, restoreDummy = null;
           let restoreCutaway = null, restoreMarineFade = null, restorePerimeter = null, restoreContainment = null;
-          let vmWarm = null;
+          let vmWarm = null, restoreCarryWarm = false;
+          const vmPaintMeshes = [], vmPaintGeos = [], vmPaintMats = [];
           const emptyInst = [], warmVis = [], seenVis = new Set(), dedupVis = [];
 
           try {
@@ -65528,9 +65752,114 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
             restoreWreck = training.wreck?.prepareWarmup?.();
             restoreFlame = prepareFlameWarmup();
             syncRigSkins();
+            syncGunModLooks();
+            try { dressGuns({ guns: Object.fromEntries(WEAPON_ORDER.map((k) => [k, 'm81'])) }); } catch (_) {}
+            try {
+              for (const wk of WEAPON_ORDER) {
+                try { rackGunCopy(wk); } catch (_) {}
+              }
+              if (house?.armoryRack) {
+                armoryDisplayKindsOverride = () => WEAPON_ORDER.filter((k) => k !== 'chainsaw');
+                refreshArmoryRack(true);
+              }
+            } catch (_) {}
 
             vmWarm = ensureViewmodel() && typeof viewmodel.prepareWarmup === 'function' ? (AG309_BG ? viewmodel.prepareWarmup([activeWk]) : viewmodel.prepareWarmup()) : null;
+            if (vmWarm && viewmodel?.space) {
+              try {
+                let sampleVmMat = null;
+                viewmodel.space.traverse((o) => {
+                  if (!sampleVmMat && o.isMesh && o.material?.userData?.vm281 && o.material.isNodeMaterial && !o.material.map && !o.material.colorNode && !o.material.transparent) {
+                    sampleVmMat = o.material;
+                  }
+                });
+                if (sampleVmMat && renderer.library?.fromMaterial) {
+                  const vmNeedsIdx = !!(renderer.backend && renderer.backend.isWebGPUBackend);
+                  const m81Tex = camoTile('m81');
+                  const vmGeoBySig = new Map(), vpmBySrc = new Map(), seenVmCombos = new Set();
+                  const toVmMat = (baseMat) => {
+                    let vpm = vpmBySrc.get(baseMat);
+                    if (vpm) return vpm;
+                    const pm = baseMat.clone();
+                    if (baseMat !== MOD_LOOK_MAT && baseMat !== MOD_LOOK_RING) {
+                      pm.map = m81Tex;
+                      if (pm.emissive) { pm.emissiveMap = null; pm.emissive.setHex(0x000000); pm.emissiveIntensity = 1; }
+                      pm.color.setHex(0xe6e2d6); pm.roughness = 0.62; pm.metalness = 0.05;
+                    }
+                    vmPaintMats.push(pm);
+                    vpm = renderer.library.fromMaterial(pm) || pm;
+                    if (vpm !== pm) vmPaintMats.push(vpm);
+                    if (vpm.isNodeMaterial) {
+                      vpm.setupModelViewProjection = sampleVmMat.setupModelViewProjection;
+                      const baseKey = vpm.customProgramCacheKey;
+                      vpm.customProgramCacheKey = function () { return (baseKey ? baseKey.call(this) : '') + '|vm281'; };
+                    }
+                    vpm.fog = false;
+                    vpm.userData = { vm281: true };
+                    vpmBySrc.set(baseMat, vpm);
+                    return vpm;
+                  };
+                  const vmGeoFor = (srcGeo) => {
+                    const keys = Object.keys(srcGeo.attributes).sort();
+                    const sig = keys.map((k) => {
+                      const a = srcGeo.attributes[k];
+                      return k + ':' + a.itemSize + ':' + (a.normalized ? 1 : 0) + ':' + (a.array ? a.array.constructor.name : '');
+                    }).join('|');
+                    let g = vmGeoBySig.get(sig);
+                    if (g) return g;
+                    g = new THREE.BufferGeometry();
+                    for (const k of keys) {
+                      const a = srcGeo.attributes[k];
+                      if (!a || !a.array) continue;
+                      const arr = new a.array.constructor(3 * a.itemSize);
+                      if (k === 'position') { arr[3] = 0.004; arr[7] = 0.004; }
+                      else if (k === 'normal' && a.itemSize >= 3) { arr[2] = 1; arr[5] = 1; arr[8] = 1; }
+                      g.setAttribute(k, new THREE.BufferAttribute(arr, a.itemSize, a.normalized));
+                    }
+                    if (vmNeedsIdx) g.setIndex(new THREE.BufferAttribute(new Uint16Array([0, 2, 1]), 1));
+                    g.computeBoundingSphere();
+                    g.computeBoundingBox();
+                    vmPaintGeos.push(g);
+                    vmGeoBySig.set(sig, g);
+                    return g;
+                  };
+                  const addVmCombo = (srcGeo, baseMat) => {
+                    if (!srcGeo?.attributes?.position || !baseMat || Array.isArray(baseMat)) return;
+                    const vg = vmGeoFor(srcGeo);
+                    const vm = toVmMat(baseMat);
+                    const ck = vg.uuid + '|' + vm.uuid;
+                    if (seenVmCombos.has(ck)) return;
+                    seenVmCombos.add(ck);
+                    const mesh = new THREE.Mesh(vg, vm);
+                    mesh.castShadow = false; mesh.receiveShadow = false; mesh.frustumCulled = false;
+                    viewmodel.space.add(mesh);
+                    vmPaintMeshes.push(mesh);
+                  };
+                  for (const wk of WEAPON_ORDER) {
+                    const furn = gunFurniture && gunFurniture[wk];
+                    weaponMeshes[wk]?.traverse((so) => {
+                      if (!so.isMesh || !so.geometry || Array.isArray(so.material)) return;
+                      if (furn && furn.includes(so.material)) addVmCombo(so.geometry, so.material);
+                      if (so.material === MOD_LOOK_MAT || so.material === MOD_LOOK_RING) addVmCombo(so.geometry, so.material);
+                    });
+                  }
+                }
+              } catch (_) {}
+            }
             updateCarriedGear(0, true);
+            if (carryRig && !AG309_BG) {
+              try {
+                applyCarryPlan(carryRig, {
+                  primary: ['shotgun', 'launcher'], secondary: ['revolver', 'uzi'],
+                  paired: ['revolver', 'uzi'], hip: 'pistol', hipPair: 'pistol',
+                  hipPairOn: true, pairOn: [true, true], holsterOn: [true, true],
+                  packPair: 0, secondaryKinds: ['revolver', 'uzi'],
+                  mags: 1, grenades: 1, shells: 1, rounds40: 1, boxes: 1, tanks: 1,
+                  bandolier: true, belt40: true, vest: false, cans: [], looks: []
+                });
+                restoreCarryWarm = true;
+              } catch (_) {}
+            }
 
             const showWarm = (o) => {
               if (!o || seenVis.has(o)) return;
@@ -65553,6 +65882,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
                 showWarmTree(weaponMeshes[wk]);
                 if (offhandMeshes && offhandMeshes[wk]) showWarmTree(offhandMeshes[wk]);
               }
+              showWarmTree(marine);
+              showWarmTree(carriedMortarMesh);
+              showWarmTree(carriedM240Mesh);
             }
             showWarmTree(knife);
             showWarmTree(grenadeHand);
@@ -65584,16 +65916,137 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
             };
             addSolidKeepers(tg.group);
             addSolidKeepers(training.perimeter?.group);
-            let paintWarmGeo = null, paintWarmMat = null;
+            const warmDisposeGeos = [], warmDisposeMats = [];
             try {
-              paintWarmGeo = new THREE.BoxGeometry(0.01, 0.01, 0.01);
-              paintWarmMat = new THREE.MeshStandardMaterial({ color: 0xe6e2d6, map: camoTile('m81'), roughness: 0.62, metalness: 0.05 });
-              for (const sh of [false, true]) {
-                const pm = new THREE.Mesh(paintWarmGeo, paintWarmMat);
-                pm.castShadow = sh; pm.receiveShadow = sh; pm.frustumCulled = false;
-                cutawayKeepers.add(pm);
+              const m81Tex = camoTile('m81');
+              const paintWarmGeo = new THREE.BoxGeometry(0.01, 0.01, 0.01);
+              const paintWarmNonIdx = paintWarmGeo.toNonIndexed();
+              const paintWarmMat = new THREE.MeshStandardMaterial({ color: 0xe6e2d6, map: m81Tex, roughness: 0.62, metalness: 0.05 });
+              warmDisposeGeos.push(paintWarmGeo, paintWarmNonIdx);
+              warmDisposeMats.push(paintWarmMat);
+              for (const g of [paintWarmGeo, paintWarmNonIdx]) {
+                for (const [cs, rs] of [[false, false], [true, false], [true, true]]) {
+                  const pm = new THREE.Mesh(g, paintWarmMat);
+                  pm.castShadow = cs; pm.receiveShadow = rs; pm.frustumCulled = false;
+                  cutawayKeepers.add(pm);
+                }
+                for (const modMat of [MOD_LOOK_MAT, MOD_LOOK_RING]) {
+                  for (const cs of [false, true]) {
+                    const mm = new THREE.Mesh(g, modMat);
+                    mm.castShadow = cs; mm.receiveShadow = false; mm.frustumCulled = false;
+                    cutawayKeepers.add(mm);
+                  }
+                }
               }
-              cutawayKeepers.userData._ag310WarmDispose = () => { paintWarmGeo?.dispose(); paintWarmMat?.dispose(); };
+              // Non-indexed castShadow:false rack keepers (rackGunCopy + foldStatic on armoryRack)
+              const mkRkGeo = (withUv, withColor, withRM) => {
+                const rg = new THREE.BufferGeometry();
+                rg.setAttribute('position', new THREE.BufferAttribute(new Float32Array([0, 0, 0, 0.004, 0, 0, 0, 0.004, 0]), 3));
+                rg.setAttribute('normal', new THREE.BufferAttribute(new Float32Array([0, 0, 1, 0, 0, 1, 0, 0, 1]), 3));
+                if (withUv) rg.setAttribute('uv', new THREE.BufferAttribute(new Float32Array([0, 0, 1, 0, 0, 1]), 2));
+                if (withColor) rg.setAttribute('color', new THREE.BufferAttribute(new Float32Array([1, 1, 1, 1, 1, 1, 1, 1, 1]), 3));
+                if (withRM) rg.setAttribute('foldRM', new THREE.BufferAttribute(new Float32Array([0.5, 0.2, 0.5, 0.2, 0.5, 0.2]), 2));
+                rg.computeBoundingSphere();
+                rg.computeBoundingBox();
+                warmDisposeGeos.push(rg);
+                return rg;
+              };
+              const rkPlain = mkRkGeo(true, false, false);
+              const rkVc = mkRkGeo(true, true, false);
+              const rkFoldUv = mkRkGeo(true, true, true);
+              const rkFoldNoUv = mkRkGeo(false, true, true);
+              const seenRkMats = new Set();
+              const addRkMat = (m) => {
+                if (!m || Array.isArray(m) || seenRkMats.has(m)) return;
+                seenRkMats.add(m);
+                if (m.name === 'fold-static') {
+                  for (const rg of [rkFoldUv, rkFoldNoUv]) {
+                    const rm = new THREE.Mesh(rg, m);
+                    rm.castShadow = false; rm.receiveShadow = false; rm.frustumCulled = false;
+                    cutawayKeepers.add(rm);
+                  }
+                } else {
+                  const rm = new THREE.Mesh(m.vertexColors ? rkVc : rkPlain, m);
+                  rm.castShadow = false; rm.receiveShadow = false; rm.frustumCulled = false;
+                  cutawayKeepers.add(rm);
+                }
+              };
+              // Actual gunFurniture m81 material + weapon geometry attribute-layout variants for 3P, shadows, and rack
+              const worldGeoBySig = new Map(), worldPmBySrc = new Map(), seenWorldCombos = new Set();
+              const worldGeoFor = (srcGeo) => {
+                const keys = Object.keys(srcGeo.attributes).sort();
+                const sig = keys.map((k) => {
+                  const a = srcGeo.attributes[k];
+                  return k + ':' + a.itemSize + ':' + (a.normalized ? 1 : 0) + ':' + (a.array ? a.array.constructor.name : '');
+                }).join('|') + (srcGeo.index ? '|idx' : '|non');
+                let g = worldGeoBySig.get(sig);
+                if (g) return g;
+                g = new THREE.BufferGeometry();
+                for (const k of keys) {
+                  const a = srcGeo.attributes[k];
+                  if (!a || !a.array) continue;
+                  const arr = new a.array.constructor(3 * a.itemSize);
+                  if (k === 'position') { arr[3] = 0.004; arr[7] = 0.004; }
+                  else if (k === 'normal' && a.itemSize >= 3) { arr[2] = 1; arr[5] = 1; arr[8] = 1; }
+                  g.setAttribute(k, new THREE.BufferAttribute(arr, a.itemSize, a.normalized));
+                }
+                if (srcGeo.index) g.setIndex(new THREE.BufferAttribute(new Uint16Array([0, 1, 2]), 1));
+                g.computeBoundingSphere();
+                g.computeBoundingBox();
+                warmDisposeGeos.push(g);
+                worldGeoBySig.set(sig, g);
+                return g;
+              };
+              for (const wk of WEAPON_ORDER) {
+                const furn = gunFurniture && gunFurniture[wk];
+                weaponMeshes[wk]?.traverse((o) => {
+                  if (!o.isMesh) return;
+                  addRkMat(o.material);
+                  if (furn && o.geometry?.attributes?.position && !Array.isArray(o.material) && furn.includes(o.material)) {
+                    let pm = worldPmBySrc.get(o.material);
+                    if (!pm) {
+                      pm = o.material.clone();
+                      pm.map = m81Tex;
+                      if (pm.emissive) { pm.emissiveMap = null; pm.emissive.setHex(0x000000); pm.emissiveIntensity = 1; }
+                      pm.color.setHex(0xe6e2d6); pm.roughness = 0.62; pm.metalness = 0.05;
+                      worldPmBySrc.set(o.material, pm);
+                      warmDisposeMats.push(pm);
+                      addRkMat(pm);
+                    }
+                    const wg = worldGeoFor(o.geometry);
+                    const ck = wg.uuid + '|' + pm.uuid;
+                    if (!seenWorldCombos.has(ck)) {
+                      seenWorldCombos.add(ck);
+                      for (const [cs, rs] of [[false, false], [true, false], [true, true]]) {
+                        const wm = new THREE.Mesh(wg, pm);
+                        wm.castShadow = cs; wm.receiveShadow = rs; wm.frustumCulled = false;
+                        cutawayKeepers.add(wm);
+                      }
+                    }
+                  }
+                });
+              }
+              for (const ok of ['rmr', 'prism', 'acog']) {
+                try {
+                  const opt = makeOptic(ok);
+                  foldStatic(THREE, TSL, opt, { enter: (o) => o.isMesh });
+                  opt.traverse((o) => {
+                    if (o.isMesh) {
+                      addRkMat(o.material);
+                      for (const [cs, rs] of [[true, false], [false, false]]) {
+                        const om = new THREE.Mesh(o.geometry, o.material);
+                        om.castShadow = cs; om.receiveShadow = rs; om.frustumCulled = false;
+                        cutawayKeepers.add(om);
+                      }
+                    }
+                  });
+                } catch (_) {}
+              }
+              addRkMat(RACK_PEG_MAT);
+              cutawayKeepers.userData._ag310WarmDispose = () => {
+                for (const g of warmDisposeGeos) g.dispose();
+                for (const m of warmDisposeMats) m.dispose();
+              };
             } catch (_) {}
             tg.group.add(cutawayKeepers);
 
@@ -65629,15 +66082,33 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
             walkDedupe(scene);
 
             pCompile = compileForLiveTarget();
+            try { await pCompile; } catch (_) {}
+            for (let i = dedupVis.length - 1; i >= 0; i--) dedupVis[i].o.visible = dedupVis[i].vis;
+            dedupVis.length = 0;
+            warmFrame('training-staged');
+            try { await renderer.backend?.device?.queue?.onSubmittedWorkDone?.(); } catch (_) {}
           } finally {
+            try { dressGuns(wardrobeState); } catch (_) {}
+            if (armoryDisplayKindsOverride) {
+              try {
+                armoryDisplayKindsOverride = null;
+                refreshArmoryRack(false);
+              } catch (_) {}
+            }
             for (let i = dedupVis.length - 1; i >= 0; i--) dedupVis[i].o.visible = dedupVis[i].vis;
             if (cutawayKeepers.parent) cutawayKeepers.parent.remove(cutawayKeepers);
-            while (cutawayKeepers.children.length) cutawayKeepers.remove(cutawayKeepers.children[cutawayKeepers.children.length - 1]);
+            while (cutawayKeepers.children.length) cutawayKeepers.remove(cutawayKeepers.children.length - 1 ? cutawayKeepers.children[cutawayKeepers.children.length - 1] : cutawayKeepers.children[0]);
             try { cutawayKeepers.userData._ag310WarmDispose?.(); } catch (_) {}
+            for (const vpm of vmPaintMeshes) if (vpm.parent) vpm.parent.remove(vpm);
+            for (const g of vmPaintGeos) g.dispose();
+            for (const m of vmPaintMats) m.dispose?.();
             try { restoreCutaway?.(); } catch (_) {}
             try { restorePerimeter?.(); } catch (_) {}
             try { restoreContainment?.(); } catch (_) {}
             try { restoreMarineFade?.(); } catch (_) {}
+            if (restoreCarryWarm && carryRig) {
+              try { carryRig.sig = ''; updateCarriedGear(0, true); } catch (_) {}
+            }
             try { restoreDummy?.(); } catch (_) {}
             restoreImpacts?.();
             restoreChar?.();
@@ -68431,7 +68902,7 @@ live++;
           // Debug-only: economy hooks. grantAllWeapons hands over the arsenal so the older
           // weapon probes keep working; the rest let probes drive the kiosk directly.
           grantAllWeapons, KIOSK, openShop, closeShop, buyWeapon, buyAmmo, buyGear, buyBuild, skullValueDbg: () => skullValueTotal, siegeNightDbg: () => siegeNightNow, LATE_CASH_NIGHT, LATE_CASH_FACTOR, LATE_CASH_STEP, lateCashMul, buyExtMag, buyHeavyBarrel, fitWeaponMod, weaponMods, HEAVY_BARREL_PRICE, EXT_MAG_RELOAD_MUL, HEAVY_CLIMB_MUL, HEAVY_SWAP_DUR, HEAVY_MOVE_SPREAD_MUL, recoilClimb, getReloadDbg: () => ({ timer: reloadTimer, anim: reloadAnimDuration, weapon: reloadWeapon }), /* CL-84 */ akimboDbg: { AKIMBO_CARRY, carry: () => akimboCarryW, retreat: () => akimboRetreat },   /* CL-188 */ airDbg: { AIR, pose: () => POSE.airPose, jumpNow: () => { if (!grounded) return false; vy = PHYS.jumpVel; grounded = false; coyoteT = 0; return true; } },   /* CL-210 */ rigSkinDbg: { info: (r) => rigSkinInfo(r || marine), count: () => rigSkinCount(), sync: () => syncRigSkins() },   /* CL-189 */ aoDbg: { AO_DEFAULTS, info: () => marine.userData.aoInfo, bake: (o) => (marine.userData.aoInfo = bakeMarineAO(THREE, marine, { ...marine.userData.ao, ...(o || {}) })) },   /* CL-186 */ zombieFeetDbg: { ZFEET, ZLEAN },   /* CL-187 */ gaitDbg: { GAIT, GAIT_FEEL, GAIT_WEIGHT, UNARMED_ARMS, UNARMED_RUN, WINDED, winded: () => POSE.winded || 0, setWinded: (v) => { POSE.winded = v; }, breaths: () => POSE.breaths || 0, pose: () => POSE, clips: () => MARINE_GAIT, w: () => POSE.gaitW || 0, run: () => POSE.gaitRun || 0, sample: (u, r) => { const g = marineGait(u, r); return g && { ...g }; } },   /* CL-84 */ smoothDbg: { MOVE_FEEL, GUN_LAG, xfade: () => XFADE, gunLag: () => gunLag, wish: () => ({ x: wishVX, z: wishVZ }), vel: () => ({ x: velX, z: velZ, y: vy }), lookY: () => camLookYS, pose: () => POSE, phase: () => walkPhase, lerpK: _lerpK, decayK: _decayK },   /* CL-133 */ handsDbg: { HANDS, roll: () => ({ r: handRollR, l: handRollL }), WRIST, HAND_R: _HAND_R, HAND_L: _HAND_L, wrist: () => ({ r: wristTurnR, l: wristTurnL, needR: wristNeedR, needL: wristNeedL }), gripPoint: (side, out = new THREE.Vector3()) => side === 'L' ? fistPointW(marine.userData.elbowLG, _HAND_L, gripAL, out) : fistPointW(marine.userData.elbowRG, _HAND_R, gripAR, out), gripA: () => ({ r: gripAR, l: gripAL }),   /* CU-100: where each hand closes now (the hand point while it isn't holding) */ knife: () => ({ u: knifeArmU, clip: KNIFE_CLIP, chop: MACHETE_CLIP, dur: knifeSwingDur, places: _kp }), FP_BLADE_PATH, FP_BLADE_AIM, FP_BLADE_DIP, fpBladeDip: () => fpBladeDip, BLADE_BODY, bladeTwist: (u, h) => bladeTwist(u, h),   /* CL-261 */ knifeHold: (u) => { knifeHoldU = u == null ? null : _clamp01(u); if (u != null) { knifeSwingDur = bladeSwingDur(); knifeAnimT = knifeSwingDur * (1 - knifeHoldU) || 0.0001; } }, drawHold: (t) => { drawHoldT = t == null ? null : Math.max(0, t); }, knifeClip: (on) => { if (!on) { _kc = KNIFE_CLIP || _kc; KNIFE_CLIP = null; } else if (_kc) KNIFE_CLIP = _kc; }, drawPlace, gripDownDir, foreChannelDir },   /* CL-122 */ fpReloadLiftDbg: () => FP_RELOAD_LIFT, fpReloadLiftGunDbg: () => FP_RELOAD_LIFT_GUN, fpReloadSetDbg: () => ({ ...fpReloadSet() }),   /* GB-245 */ reloadClipDbg: { clip: () => RELOAD_CLIP, places: () => _rlP, hold: (u) => { reloadHoldU = u == null ? null : _clamp01(u); if (reloading && u != null) reloadTimer = Math.max(0.001, (reloadAnimDuration || 1) * (1 - reloadHoldU)); }, mag: () => (RELOAD_CLIP ? Studio.magAt(RELOAD_CLIP, _clamp01(1 - reloadTimer / Math.max(0.05, reloadAnimDuration || 1))) : null) }, getSwapDbg: () => ({ swapT, swapDur, fireCooldown }), setSprayDbg: (h, n) => { sprayHeat = h; sprayShot = n | 0; sprayWeapon = currentWeapon; }, setVelDbg: (x, z) => { velX = x; velZ = z; }, resetEconomyDbg: () => resetEconomy(), WEAPON_ORDER, buySuppressor, SUPPRESSOR_PRICE, SHOT_HEARING, SUPPRESSED_HEARING_MUL, SUPPRESSED_DAMAGE_MUL, shotHearingRadius, suppressedDamageMul, heardShotDbg: () => ({ shotsHeard, lastShotNoise }), sawCutTick, sawCutDbg: () => ({ holdT: sawCutHoldT, hearT: sawCutHearT, fuel: sawFuel, heat: sawHeat, overheat: sawOverheat, biteT: sawBiteT }), buyPistolAuto, PISTOL_AUTO_PRICE, toggleFireMode, toggleHolster, isUnarmed: () => unarmed, setSpareMags, handInGun, takeOutGun, spareMagCount: (w) => (magazineStore[w] && magazineStore[w].spare ? magazineStore[w].spare.length : 0), magazinesDbg: (w) => (magazineStore[w] ? magazineSnapshot(magazineStore, w) : null), setMagazinesDbg: (w, loaded, spare, loaded2 = null) => { const e = magazineStore[w]; if (!e) return false; e.loaded[0].rounds = Math.min(e.size, loaded | 0); if (loaded2 != null && e.loaded[1]) e.loaded[1].rounds = Math.min(e.size, loaded2 | 0); e.spare = spare.slice(0, e.maxSpare).map((r) => ({ rounds: Math.min(e.size, r | 0), size: e.size })); syncMagazine(w); updateAmmoHud(); return true; }, reloadGainsMagazine, toggleDualWieldDbg: () => toggleDualWield(), setDualOwnedDbg: (w, on = true) => { dualOwned[w] = !!on; if (on && isMagazineWeapon(w) && magazineStore[w]) { issueSecondGun(magazineStore, w); syncMagazine(w); } return !!dualOwned[w]; },   /* CL-188 */   /* GB-137 */ stepFireDbg: (dt) => tryFire(dt), recoilSpan, GEAR, WEAPON_PRICE, AMMO_PACK, caliberOf, RESERVE_CAP, RESERVE_CAP_BASE, SPARE_CAP_MULT, START_RESERVE_45, reserveCap, BUILD_UNLOCK_PRICE,
-          getWeaponOwned: () => weaponOwned, magArtDbg: () => ({ ..._magArtShown }),   /* CB-301 */ carryGunCopyDbg: (k) => carryGunCopy(k),   /* CB-299 */ revolverPullDbg: () => ({ t: revolverPullT, pull: REVOLVER_PULL, shots: revolverPullShots }),   /* CB-297 */ ammoTypeState: (g) => ammoTypeState(g), buyAmmoType: (g, t) => buyAmmoType(g, t),   /* CB-294 */ ammoDbg: { start: (to) => startAmmoSwitch(to), state: () => ammoSwitch.state(), loaded: () => ({ ...ammoLoaded }), carried: (g = 'shotgun') => ammoCarriedAll(g), carry: (g, t, n) => ammoAddCarried(g, t, n), count: () => ammoSwitchCount, chamber: () => shotgunChamber.type, hulls: () => [...shotgunChamber.hulls], j134: () => j134Breaches((g) => !!((WEAPON_STATS[g] && WEAPON_STATS[g].auto) || FIRE_SELECT[g] || g === 'pistol')), shellShown: () => ammoShellShown, load: (t) => { const k = ammoCanon('shotgun', t); if (!k) return false; ammoLoaded.shotgun = k; applyShotgunLoad(); updateAmmoHud(); return true; } },armLimitsDbg: () => armLimitsNow(), bodyLimitsDbg: () => ({ hits: { ...bodyLimitHits } }),   /* CB-289 */ grantWeaponDbg: (w) => { grantVaultWeapon(w); if (w !== 'pistol' && !weaponInReach(w)) takeOutGun(w); return weaponInReach(w); },   /* CB-296: one gun issued with its ammo (tools/bench.mjs --fp) */ toggleFlashlightDbg: () => { toggleFlashlight(); return flashlightOn; }, /* CL-327 */ getReserve: () => reserveAmmo, getGearOwned: () => gearOwned, getBuildUnlocked: () => buildUnlocked,
+          getWeaponOwned: () => weaponOwned, magArtDbg: () => ({ ..._magArtShown }),   /* CB-301 */ carryGunCopyDbg: (k) => carryGunCopy(k),   /* CB-299 */ revolverPullDbg: () => ({ t: revolverPullT, pull: REVOLVER_PULL, shots: revolverPullShots }),   /* CB-297 */ ammoTypeState: (g) => ammoTypeState(g), buyAmmoType: (g, t) => buyAmmoType(g, t),   /* CB-294 */ ammoDbg: { start: (to) => startAmmoSwitch(to), state: () => ammoSwitch.state(), loaded: () => ({ ...ammoLoaded }), carried: (g = 'shotgun') => ammoCarriedAll(g), carry: (g, t, n) => ammoAddCarried(g, t, n), count: () => ammoSwitchCount, chamber: () => shotgunChamber.type, hulls: () => [...shotgunChamber.hulls], j134: () => j134Breaches((g) => !!((WEAPON_STATS[g] && WEAPON_STATS[g].auto) || FIRE_SELECT[g] || g === 'pistol')), shellShown: () => ammoShellShown, load: (t) => { const k = ammoCanon('shotgun', t); if (!k) return false; ammoLoaded.shotgun = k; applyShotgunLoad(); updateAmmoHud(); return true; } },armLimitsDbg: () => armLimitsNow(), bodyLimitsDbg: () => ({ hits: { ...bodyLimitHits } }),   /* CB-289 */ grantWeaponDbg: (w) => { grantVaultWeapon(w); if (w !== 'pistol' && !weaponInReach(w)) takeOutGun(w); return weaponInReach(w); },   /* CB-296: one gun issued with its ammo (tools/bench.mjs --fp) */ toggleFlashlightDbg: () => { toggleFlashlight(true); return flashlightOn; }, /* CL-327 */ getReserve: () => reserveAmmo, getGearOwned: () => gearOwned, getBuildUnlocked: () => buildUnlocked,
           sawPullDbg: SAW_PULL, /* CL-326 */ getAmmo: () => ammoByWeapon, getPhase: () => phase, setPhase: (p) => { phase = p; }, isShopOpen: () => shopOpen, requestViewToggleDbg: () => requestViewToggle(), viewSwapDbg: (k) => { if (k !== undefined) viewSwapHold = k; return { in: viewSwapIn, out: viewSwapOut, hold: viewSwapHold }; }, /* CL-328 */ getSawFuel: () => sawFuel, sawStartDbg: () => ({ ...sawStart, ...sawStartPose(sawStart) }),
           // Debug-only: survival-rules hooks (health cap, medkits, cash decay, self-damage).
           acidGlobs, pickWaterSpawn, waveComposition, nightPlanFor, NIGHT_PLAN, NIGHT_TIER, nightPushSizes, getWavePace: () => nightPace, pickZombieType, getWavePreview, getBounties, spawnBounties, expireBounties, bountyRewardFor, getSurvivors, survivorDbg, survivorHelpDbg, roofDbg, getHushState, hushDbg, spawnWanderer, wandererAllowed, wandererTrails, wandererReward, WANDERER_PACE, bountyGuardTypes, bountyDbg: () => ({ due: bountiesDue, seq: !!hq.seq, last: bountyLastKeys.slice() }), getWaveDirectorState, getActiveCaveIndices, spawnWaveBatch, beginWave, startPrep, clearZombies, isGuardianNight, getGuardianState, getGuardianAlive, GUARDIAN_KEYS, ZOMBIE_TYPES, MAX_ZOMBIES, spawnObjectiveDefenders, getRadioDefenderState, grantSupply, listOwnedAmmoPackChoices, grantBuildBlueprint, pulseGuardianFailsafeForTest, RADIO_DEFENDER, CAVE_ROLES, roleForCave, applyCaveRole, CLIMB_HEIGHT, climberCanVaultBuild, warnActiveCaves, getRendererBackend: () => rendererBackend, TSL,

@@ -2,9 +2,9 @@
 
 state: active
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: CD-1 fresh session 18:38Z: rebuilding the cloud copy, then the firing fists under the guards (GW-4, Wasp, AA-12, sniper)
+task: CD-1 fresh session 00:00Z: rebuilding the cloud copy; the revolver fist toward the bore on GT-20088's slimmer grip (J136), then the AA-12 fist roll after GT-20087b
 touching: game/viewmodel-fit.js, studio/hand-contacts.js, tools/handfit/
-since: 2026-11-11T18:38Z
+since: 2026-11-11T23:59Z
 next: CD-1 (08:52Z: back to Claude 1, a fresh session from 08:55Z (Jerr
 blocked-on: —
 last-report: handoffs/2026-11-11-claude4-CD-1-fixes2.md
@@ -12,13 +12,18 @@ last-report: handoffs/2026-11-11-claude4-CD-1-fixes2.md
 ## Notes
 - **FIRST, from CLAUDE DIRECTOR (16:07Z):** two Claude 1 sessions are running. The OLD one (checked out, 'answering requests only'): stop, answer nothing, schedule no more check-ins. The FRESH one (IN 15:12Z): you take every request, incl. vmMat (low) and Claude 5's CE-2 fists (middle/ring fingers through the GW-4/Wasp grips), and note every 15 min.
 
+### Where things stand (12 Nov 00:10Z, session 7, fresh)
+- Cloud copy rebuilt (1d + img + extra + deltas 1515/1840/2030/2112 + new claude4-delta-0005.tgz; fit files match the PC).
+- Queue: (1) the revolver fist toward the bore on GT-20088's slimmer firing-side walnut (J136, for Claude 5's DA trigger), a roll if
+  a slide puts the palm in the grip; (2) the AA-12 fist: a roll round the front strap after GT-20087b; (3) what Claude 5 still lists.
+- AG is out of quota until 13 Nov: four lights from my cloud copy.
+
 ### Where things stand (11 Nov 21:00Z, session 6: handoffs/2026-11-11-claude4-CD-1-fixes4.md)
 - LANDED 20:53Z: GW-4 and Wasp firing fists under the guards (with GT-20087's opened guards), pistol support hand round the
   firing glove (hands 3.8 -> 0). Flamer 0.3 and sniper 0.14 need nothing. Ready to commit.
-- Next now: the revolver fist ~8-10 mm toward the bore (gun -x) so Claude 5's index enters the guard (his 18:19Z note; my
-  18:23Z 'pad 2.8 mm' was the field-box bug): export revolver, PAD field, gun/idxgrid.mjs, fitT/fitS, land, tell Claude 5.
-- Waiting: GT-20087b (ChatGPT 2: GW-4 front post forward ~8 gun mm, AA-12 rear post forward ~7). Then refit the AA-12 fist
-  (fitS.sh, PAD=0.035) and check the GW-4 index's reach (gun/idxgrid.mjs); Claude 5 re-solves VM_TRIGGER (uzi, m4).
+- **Context nearly full, needs a new session** (21:45Z). Open (addendum 21:45Z in the fixes4 handoff): the AA-12 fist (index root
+  inside the grip's front strap even after GT-20087b: needs a different roll, try applyoff ROLL=1 / gungrip3 XT), the revolver
+  fist toward the bore (9 mm in puts the palm 6.6 mm into the grip: needs a roll or a narrower grip; ask the director).
 - Cloud: tars "_DELETE ME/claude4-cloud-copy-CD-1d.tgz" + -img- + claude4-delta-1840.tgz + -2030.tgz (keep my two fit files);
   exports with c4/expr5.sh (ex6 step files: run mkst3.py, mkst4.py, then c4/mkst6.py); c4/after.sh
   serialises them. Fields with PAD=0.035. NO pretwist after applyoff ("carried").

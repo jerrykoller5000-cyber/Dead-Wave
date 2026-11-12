@@ -1,0 +1,19 @@
+{
+  "woodVertices": 1092,
+  "woodMap": true,
+  "collarPieces": 3,
+  "gaps": [
+    {
+      "lowerMm": 0,
+      "upperMm": 0.0078125
+    },
+    {
+      "lowerMm": 0,
+      "upperMm": 0.0078125
+    },
+    {
+      "lowerMm": 0,
+      "upperMm": 0.0078125
+    }
+  ]
+}

@@ -2,25 +2,26 @@
 
 state: active
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: CC-343 CC-343 part 2: the 8 reds left in tcc343b (stairs down, deck edges, crouch-walk) and t184's crouch-walk slide
-touching: index.html (legs + CROUCH/FOOT scratch), studio/marine-turn.js (apply, turnBoot, crouchSole: lent), tools/tests/tcc343b.js
-since: 2026-11-11T18:40Z
+task: CC-343 tcc341's vest-over-shirt red (7.5 mm), then part 3 stairs gait + marine-turn boot + sandbags, then the kit's J128
+touching: studio/marine-body.js, studio/marine-cloth.js, index.html (legs + CROUCH/FOOT scratch), studio/marine-turn.js (apply, turnBoot, crouchSole: loan)
+since: 2026-11-12T00:13Z
 next: CC-343 (15:06Z: Jerry OK'd fresh sessions (15:03Z): back to Claude
 blocked-on: —
-last-report: handoffs/2026-11-11-claude3-CC-343b.md
+last-report: handoffs/2026-11-11-claude3-CC-343d.md
 
 ## Notes
 
-### Where things stand (11 Nov 20:31Z, session 7)
-- CC-343 part 2, in my cloud only (not on the PC yet). Patches (anchored, re-runnable on the PC's part-1 index.html, in order):
-  cloud /home/claude/w/p2/patch343c.py (deck edges standing still: a boot steps back/in onto the deck he stands on, only where the
-  whole boot fits (footFlatAt) - fixes the squat AG's 5080 sheet showed; crouched hips from crouchFootZ; rampGroundY never under the
-  ground + no glide on/off a ramp); patch343d.py (ankle solve iterations + a "last word" sole pass) and patch343e.py (crouch pace from
-  his real travel, t184) are EXPERIMENTS: d gave walking-up no-foot regressions; e untested. Copy them to Claude outputs/CC-343c/.
-- Results: base tcc343b 29/8; c+d 31/6..32/5. t184 slide ~41% unchanged: the body is pushed sideways (slides along something) in
-  t184's real-time run while the crouch paces from velX/velZ (patch e targets it). Stairs at a sprint (7.4 m/s = a tread a frame)
-  need a stair-stepping gait (part 3), not a patch. Stairs 0.2 facing down (298 over) is marine-turn: a foot one tread high.
-- D-162: no 5080 looks; pictures from my cloud camera: /home/claude/w/mkbatch2.py makes pics2/batch-{b,a}.json (4 scenes x 4 lights).
+### Where things stand (11 Nov 21:45Z, end of session 7: context nearly full, needs a new session)
+- CC-343 part 2 LANDED 21:30Z (handoffs/2026-11-11-claude3-CC-343c.md; Claude outputs/CC-343c/patch343c2.py + patch343e2.py;
+  the plain patch343c.py/e.py there are stale). tcc343b 30/7, t184 29/0. AG asked for the 5080 after-shots (review/CC-343c): review them.
+- tcc341 sleeve over the glove LANDED 21:43Z (handoffs/2026-11-11-claude3-CC-343d.md, patch341s.py): tcc341 15/1.
+- NEXT: the vest-over-shirt red (7.5 mm kit crouch; 4-6 mm other kit poses) at the front plate's outer corner x .16-.18, z .17-.25:
+  the shirt shows in the gap between the plate (.35 wide at z .151) and the cummerbund panel (x .169, depth .22). Widen the plate
+  or deepen the panel AND move torsoG.userData.carrierShape (carrierClearance: Claude 2's hold) with it; tell Claude 2.
+- Then CC-343 part 3 (a stair-stepping gait; marine-turn's boot one tread up at stairs 0.2 facing down; deck edge crouched;
+  sandbags 5.2 mm) and the kit's J128. Asked the Director 21:35Z which first (my pick: tcc341, then part 3).
+- The cloud camera --match --soft never loads (twice): pictures from Antigravity (D-164).
+- 21:55Z: AG's review/CC-343c sheets reviewed: deck edge standing OK in 4 lights; crouched facing off the edge, the front boot steps down onto the ground below the deck (looks like a step down; part 3).
 
 ### Session 6 notes (18:12Z)
 - CC-343 (CB-290's legs) PART 1 LANDED 18:05Z, card open: handoffs/2026-11-11-claude3-CC-343b.md. index.html (legs + CROUCH/FOOT

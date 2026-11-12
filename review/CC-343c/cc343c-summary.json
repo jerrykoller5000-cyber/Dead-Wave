@@ -1,0 +1,465 @@
+{
+  "card": "CC-343c",
+  "capturedAt": "2026-11-11T21:45:22.959Z",
+  "backend": "WebGPUBackend",
+  "poses": {
+    "a:stairs-crouched": {
+      "cam": {
+        "x": 14.327264801901665,
+        "y": -0.8366044026512601,
+        "z": 12.985221399681322,
+        "tx": 12,
+        "ty": -1.6709502874636182,
+        "tz": 11.9,
+        "fov": 35
+      },
+      "playerPos": [
+        12,
+        -2.071,
+        11.9
+      ],
+      "feet": {
+        "lift": 0.168,
+        "f0": null,
+        "f1": null
+      },
+      "boots": {
+        "hipsWorld": [
+          0,
+          0,
+          0
+        ],
+        "ankleLWorld": [
+          11.868,
+          -1.8,
+          11.957
+        ],
+        "ankleRWorld": [
+          12.128,
+          -1.774,
+          11.853
+        ],
+        "deckY": null
+      }
+    },
+    "a:stairs-standing": {
+      "cam": {
+        "x": 14.327264801901665,
+        "y": -0.8366044026512601,
+        "z": 12.985221399681322,
+        "tx": 12,
+        "ty": -1.6709502874636182,
+        "tz": 11.9,
+        "fov": 35
+      },
+      "playerPos": [
+        12,
+        -2.071,
+        11.9
+      ],
+      "feet": {
+        "lift": 0.168,
+        "f0": 0,
+        "f1": 0
+      },
+      "boots": {
+        "hipsWorld": [
+          0,
+          0,
+          0
+        ],
+        "ankleLWorld": [
+          11.87,
+          -1.8,
+          11.925
+        ],
+        "ankleRWorld": [
+          12.13,
+          -1.8,
+          11.892
+        ],
+        "deckY": null
+      }
+    },
+    "a:stairs-down": {
+      "cam": {
+        "x": 9.672735198098335,
+        "y": -0.34640832421988754,
+        "z": 11.314778600318679,
+        "tx": 12,
+        "ty": -1.1807542090322456,
+        "tz": 12.4,
+        "fov": 35
+      },
+      "playerPos": [
+        12,
+        -1.581,
+        12.4
+      ],
+      "feet": {
+        "lift": -0.036,
+        "f0": 0.286,
+        "f1": 0.286
+      },
+      "boots": {
+        "hipsWorld": [
+          0,
+          0,
+          0
+        ],
+        "ankleLWorld": [
+          12.122,
+          -1.514,
+          12.315
+        ],
+        "ankleRWorld": [
+          11.865,
+          -1.514,
+          12.315
+        ],
+        "deckY": null
+      }
+    },
+    "a:stairs-walking": {
+      "cam": {
+        "x": 14.327264801901665,
+        "y": -0.5948015997150881,
+        "z": 13.231860258676218,
+        "tx": 12,
+        "ty": -1.429147484527446,
+        "tz": 12.146638858994896,
+        "fov": 35
+      },
+      "playerPos": [
+        12,
+        -1.818,
+        12.158
+      ],
+      "feet": {
+        "lift": 0.139,
+        "f0": 0.148,
+        "f1": 0.148
+      },
+      "boots": {
+        "hipsWorld": [
+          0,
+          0,
+          0
+        ],
+        "ankleLWorld": [
+          11.858,
+          -1.506,
+          12.231
+        ],
+        "ankleRWorld": [
+          12.112,
+          -1.474,
+          12.029
+        ],
+        "deckY": null
+      }
+    },
+    "a:deck-edge": {
+      "cam": {
+        "x": 7.3772648019016644,
+        "y": -1.538565186964986,
+        "z": 19.268211035199755,
+        "tx": 5.05,
+        "ty": -2.372911071777344,
+        "tz": 18.18298963551843,
+        "fov": 35
+      },
+      "playerPos": [
+        5.05,
+        -2.773,
+        18.183
+      ],
+      "feet": {
+        "lift": 0,
+        "f0": 0,
+        "f1": 0
+      },
+      "boots": {
+        "hipsWorld": [
+          0,
+          0,
+          0
+        ],
+        "ankleLWorld": [
+          5.04,
+          -2.67,
+          18.179
+        ],
+        "ankleRWorld": [
+          5.182,
+          -2.67,
+          18.18
+        ],
+        "deckY": null
+      }
+    },
+    "a:deck-edge-crouched": {
+      "cam": {
+        "x": 3.9647786003186782,
+        "y": -1.788565186964986,
+        "z": 20.327264801901663,
+        "tx": 5.05,
+        "ty": -2.622911071777344,
+        "tz": 18,
+        "fov": 35
+      },
+      "playerPos": [
+        5.05,
+        -2.773,
+        18
+      ],
+      "feet": {
+        "lift": 0,
+        "f0": null,
+        "f1": null
+      },
+      "boots": {
+        "hipsWorld": [
+          0,
+          0,
+          0
+        ],
+        "ankleLWorld": [
+          4.867,
+          -2.92,
+          17.872
+        ],
+        "ankleRWorld": [
+          5.074,
+          -2.618,
+          18.131
+        ],
+        "deckY": null
+      }
+    }
+  },
+  "shots": {
+    "b-stairs-crouched-noon": {
+      "file": "review/CC-343c/shots/b-stairs-crouched-noon.png",
+      "bytes": 407705,
+      "sha": "fcfad716ab82"
+    },
+    "b-stairs-crouched-overcast": {
+      "file": "review/CC-343c/shots/b-stairs-crouched-overcast.png",
+      "bytes": 375261,
+      "sha": "3639d387bb07"
+    },
+    "b-stairs-crouched-dusk": {
+      "file": "review/CC-343c/shots/b-stairs-crouched-dusk.png",
+      "bytes": 307420,
+      "sha": "85e448273531"
+    },
+    "b-stairs-crouched-night": {
+      "file": "review/CC-343c/shots/b-stairs-crouched-night.png",
+      "bytes": 275044,
+      "sha": "cf08efdc5ef4"
+    },
+    "b-stairs-standing-noon": {
+      "file": "review/CC-343c/shots/b-stairs-standing-noon.png",
+      "bytes": 392204,
+      "sha": "b15129d560fe"
+    },
+    "b-stairs-standing-overcast": {
+      "file": "review/CC-343c/shots/b-stairs-standing-overcast.png",
+      "bytes": 355945,
+      "sha": "fad37d63c3ee"
+    },
+    "b-stairs-standing-dusk": {
+      "file": "review/CC-343c/shots/b-stairs-standing-dusk.png",
+      "bytes": 289780,
+      "sha": "44fc8ba69340"
+    },
+    "b-stairs-standing-night": {
+      "file": "review/CC-343c/shots/b-stairs-standing-night.png",
+      "bytes": 262821,
+      "sha": "7b1c6883e832"
+    },
+    "b-stairs-down-noon": {
+      "file": "review/CC-343c/shots/b-stairs-down-noon.png",
+      "bytes": 482351,
+      "sha": "d30e1d370a54"
+    },
+    "b-stairs-down-overcast": {
+      "file": "review/CC-343c/shots/b-stairs-down-overcast.png",
+      "bytes": 416543,
+      "sha": "37bc46794e78"
+    },
+    "b-stairs-down-dusk": {
+      "file": "review/CC-343c/shots/b-stairs-down-dusk.png",
+      "bytes": 363224,
+      "sha": "7cc512557c28"
+    },
+    "b-stairs-down-night": {
+      "file": "review/CC-343c/shots/b-stairs-down-night.png",
+      "bytes": 334366,
+      "sha": "c2f8e40e9596"
+    },
+    "b-stairs-walking-noon": {
+      "file": "review/CC-343c/shots/b-stairs-walking-noon.png",
+      "bytes": 416018,
+      "sha": "5b3391e0180a"
+    },
+    "b-stairs-walking-overcast": {
+      "file": "review/CC-343c/shots/b-stairs-walking-overcast.png",
+      "bytes": 376565,
+      "sha": "9d2ac90c4e60"
+    },
+    "b-stairs-walking-dusk": {
+      "file": "review/CC-343c/shots/b-stairs-walking-dusk.png",
+      "bytes": 318512,
+      "sha": "11d40467eb3a"
+    },
+    "b-stairs-walking-night": {
+      "file": "review/CC-343c/shots/b-stairs-walking-night.png",
+      "bytes": 290112,
+      "sha": "811ca527b610"
+    },
+    "b-deck-edge-noon": {
+      "file": "review/CC-343c/shots/b-deck-edge-noon.png",
+      "bytes": 484657,
+      "sha": "0b9c3a6549ce"
+    },
+    "b-deck-edge-overcast": {
+      "file": "review/CC-343c/shots/b-deck-edge-overcast.png",
+      "bytes": 441332,
+      "sha": "1bfcd472d601"
+    },
+    "b-deck-edge-dusk": {
+      "file": "review/CC-343c/shots/b-deck-edge-dusk.png",
+      "bytes": 359773,
+      "sha": "a46c0c8b540d"
+    },
+    "b-deck-edge-night": {
+      "file": "review/CC-343c/shots/b-deck-edge-night.png",
+      "bytes": 336650,
+      "sha": "8cde836d14b3"
+    },
+    "a-stairs-crouched-noon": {
+      "file": "review/CC-343c/shots/a-stairs-crouched-noon.png",
+      "bytes": 407881,
+      "sha": "b3f8f8102c62"
+    },
+    "a-stairs-crouched-overcast": {
+      "file": "review/CC-343c/shots/a-stairs-crouched-overcast.png",
+      "bytes": 374172,
+      "sha": "fba3c1808cfe"
+    },
+    "a-stairs-crouched-dusk": {
+      "file": "review/CC-343c/shots/a-stairs-crouched-dusk.png",
+      "bytes": 304245,
+      "sha": "cd1fe546c07d"
+    },
+    "a-stairs-crouched-night": {
+      "file": "review/CC-343c/shots/a-stairs-crouched-night.png",
+      "bytes": 276977,
+      "sha": "679949184731"
+    },
+    "a-stairs-standing-noon": {
+      "file": "review/CC-343c/shots/a-stairs-standing-noon.png",
+      "bytes": 391812,
+      "sha": "c7810e8e1f89"
+    },
+    "a-stairs-standing-overcast": {
+      "file": "review/CC-343c/shots/a-stairs-standing-overcast.png",
+      "bytes": 356607,
+      "sha": "c6775fc1c187"
+    },
+    "a-stairs-standing-dusk": {
+      "file": "review/CC-343c/shots/a-stairs-standing-dusk.png",
+      "bytes": 291300,
+      "sha": "b7e310d1bbb0"
+    },
+    "a-stairs-standing-night": {
+      "file": "review/CC-343c/shots/a-stairs-standing-night.png",
+      "bytes": 267054,
+      "sha": "b07cb8657ab2"
+    },
+    "a-stairs-down-noon": {
+      "file": "review/CC-343c/shots/a-stairs-down-noon.png",
+      "bytes": 482788,
+      "sha": "d0ecde7af72f"
+    },
+    "a-stairs-down-overcast": {
+      "file": "review/CC-343c/shots/a-stairs-down-overcast.png",
+      "bytes": 415087,
+      "sha": "ed189580076f"
+    },
+    "a-stairs-down-dusk": {
+      "file": "review/CC-343c/shots/a-stairs-down-dusk.png",
+      "bytes": 363978,
+      "sha": "866ba56a4bf5"
+    },
+    "a-stairs-down-night": {
+      "file": "review/CC-343c/shots/a-stairs-down-night.png",
+      "bytes": 334846,
+      "sha": "66fb4f42e3a8"
+    },
+    "a-stairs-walking-noon": {
+      "file": "review/CC-343c/shots/a-stairs-walking-noon.png",
+      "bytes": 424724,
+      "sha": "47c0da829fb8"
+    },
+    "a-stairs-walking-overcast": {
+      "file": "review/CC-343c/shots/a-stairs-walking-overcast.png",
+      "bytes": 386598,
+      "sha": "5cee51c774f2"
+    },
+    "a-stairs-walking-dusk": {
+      "file": "review/CC-343c/shots/a-stairs-walking-dusk.png",
+      "bytes": 322647,
+      "sha": "5c447fab86c2"
+    },
+    "a-stairs-walking-night": {
+      "file": "review/CC-343c/shots/a-stairs-walking-night.png",
+      "bytes": 296237,
+      "sha": "76a3a5c1ff0e"
+    },
+    "a-deck-edge-noon": {
+      "file": "review/CC-343c/shots/a-deck-edge-noon.png",
+      "bytes": 465249,
+      "sha": "e9f1709941e0"
+    },
+    "a-deck-edge-overcast": {
+      "file": "review/CC-343c/shots/a-deck-edge-overcast.png",
+      "bytes": 427796,
+      "sha": "3cf346fb0510"
+    },
+    "a-deck-edge-dusk": {
+      "file": "review/CC-343c/shots/a-deck-edge-dusk.png",
+      "bytes": 347633,
+      "sha": "059ea69685fd"
+    },
+    "a-deck-edge-night": {
+      "file": "review/CC-343c/shots/a-deck-edge-night.png",
+      "bytes": 324945,
+      "sha": "1fb8f4973391"
+    },
+    "a-deck-edge-crouched-noon": {
+      "file": "review/CC-343c/shots/a-deck-edge-crouched-noon.png",
+      "bytes": 395732,
+      "sha": "40816420cf7f"
+    },
+    "a-deck-edge-crouched-overcast": {
+      "file": "review/CC-343c/shots/a-deck-edge-crouched-overcast.png",
+      "bytes": 360599,
+      "sha": "58bf2920f690"
+    },
+    "a-deck-edge-crouched-dusk": {
+      "file": "review/CC-343c/shots/a-deck-edge-crouched-dusk.png",
+      "bytes": 294741,
+      "sha": "aaec4baba652"
+    },
+    "a-deck-edge-crouched-night": {
+      "file": "review/CC-343c/shots/a-deck-edge-crouched-night.png",
+      "bytes": 274613,
+      "sha": "6e772a2389c2"
+    }
+  },
+  "pageErrors": [],
+  "gpuWarnings": []
+}

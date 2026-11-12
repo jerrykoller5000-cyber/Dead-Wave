@@ -111,13 +111,13 @@ try {
   ];
 
   for (const lp of lightPresets) {
-    const data = await page.evaluate(`(({ time, off }) => {
+    const data = await page.evaluate(`(()=>{
       const T = TT, tg = T.trainingDbg.tg();
       T.player.position.set(tg.origin.x, tg.floorY, tg.origin.z - 3);
       T.setVelDbg(0, 0);
-      T.setOtsAimDbg(0, 1.15); // Look up at ceiling
-      T.setWorldTime(time);
-      if (T.trainingDbg.lights().on === off) T.trainingDbg.toggleLights();
+      T.setOtsAimDbg(0, 1.15);
+      T.setWorldTime(${lp.time});
+      if (T.trainingDbg.lights().on === ${lp.off}) T.trainingDbg.toggleLights();
       for (let i = 0; i < 8; i++) T.stepFrame(0.016);
       return {
         lights: T.trainingDbg.lights(),
@@ -126,7 +126,7 @@ try {
         playerPos: T.player.position.toArray(),
         cameraPos: T.camera.position.toArray()
       };
-    })`, { time: lp.time, off: lp.off });
+    })()`);
 
     await pause(200);
     const shot = await saveScreenshot(page, `light-${lp.name}.png`);
@@ -142,17 +142,17 @@ try {
   // =========================================================================
   console.log('--- 2. Testing Downrange Lane Views ---');
   const laneViews = [
-    { name: 'lane-from-line', desc: 'Firing line looking downrange and up', off: false },
-    { name: 'lane-from-line', desc: 'Firing line looking downrange and up (lights off)', off: true },
-    { name: 'lane-mid-back', desc: 'Mid-range looking back towards firing line up', off: false },
-    { name: 'lane-mid-back', desc: 'Mid-range looking back towards firing line up (lights off)', off: true }
+    { name: 'lane-from-line', off: false },
+    { name: 'lane-from-line', off: true },
+    { name: 'lane-mid-back', off: false },
+    { name: 'lane-mid-back', off: true }
   ];
 
   for (const lv of laneViews) {
-    const data = await page.evaluate(`(({ name, off }) => {
+    const data = await page.evaluate(`(()=>{
       const T = TT, tg = T.trainingDbg.tg(), o = tg.origin, y = tg.floorY;
-      if (T.trainingDbg.lights().on === off) T.trainingDbg.toggleLights();
-      const v = name === 'lane-from-line'
+      if (T.trainingDbg.lights().on === ${lv.off}) T.trainingDbg.toggleLights();
+      const v = ${JSON.stringify(lv.name)} === 'lane-from-line'
         ? { x: o.x, y: y + 1.6, z: o.z - 3, tx: o.x, ty: y + 11.6, tz: o.z + 7, fov: 84 }
         : { x: o.x, y: y + 1.6, z: o.z + 14, tx: o.x, ty: y + 13.6, tz: o.z + 2, fov: 84 };
       T.setShotView(v);
@@ -163,7 +163,7 @@ try {
         ceiling: tg.ceiling.state(),
         draws: T.renderer.info.render.drawCalls ?? T.renderer.info.render.calls ?? 0
       };
-    })`, { name: lv.name, off: lv.off });
+    })()`);
 
     await pause(200);
     const shotName = `${lv.name}-${lv.off ? 'off' : 'noon'}.png`;
@@ -196,11 +196,11 @@ try {
   for (const s of spots) {
     const entry = { name: s.name, room: s.room, x: s.x, z: s.z };
     for (const [dir, pitch] of [['up', 1.24], ['ahead', 0.06]]) {
-      const data = await page.evaluate(`(({ x, z, yaw, pitch }) => {
+      const data = await page.evaluate(`(()=>{
         const T = TT, tg = T.trainingDbg.tg();
-        T.player.position.set(x + tg.origin.x, tg.floorY, z + tg.origin.z);
+        T.player.position.set(${s.x} + tg.origin.x, tg.floorY, ${s.z} + tg.origin.z);
         T.setVelDbg(0, 0);
-        T.setOtsAimDbg(yaw, pitch);
+        T.setOtsAimDbg(${s.yaw}, ${pitch});
         for (let i = 0; i < 8; i++) T.stepFrame(0.016);
         return {
           player: T.player.position.toArray(),
@@ -209,7 +209,7 @@ try {
           draws: T.renderer.info.render.drawCalls ?? T.renderer.info.render.calls ?? 0,
           ceilingState: tg.ceiling?.state?.() || null
         };
-      })`, { x: s.x, z: s.z, yaw: s.yaw, pitch });
+      })()`);
 
       await pause(180);
       const shot = await saveScreenshot(page, `walk-${s.name}-${dir}.png`);
@@ -225,7 +225,7 @@ try {
   console.log('--- 4. Testing Third-Person View & Camera Collision ---');
   const tpData = await page.evaluate(`(()=>{
     const T = TT, tg = T.trainingDbg.tg(), tr = T.trainingDbg.state();
-    T.setViewFirstDbg(false); // Switch to 3P
+    T.setViewFirstDbg(false);
     T.setOtsAimDbg(0, 0);
     for (let i = 0; i < 8; i++) T.stepFrame(0.016);
 
@@ -233,7 +233,6 @@ try {
     const head = new T.THREE.Vector3(tg.origin.x, tg.floorY + 1.6, tg.origin.z - 3);
     const contact = tr.cameraCollision.pull(head, eye);
 
-    // Elevated overhead camera looking down into the range
     T.setShotView({
       x: tg.origin.x, y: tg.floorY + 10, z: tg.origin.z - 18,
       tx: tg.origin.x, ty: tg.floorY + 1, tz: tg.origin.z + 12,
@@ -273,7 +272,7 @@ try {
     const T = TT, tg = T.trainingDbg.tg(), tr = T.trainingDbg.state();
     T.player.position.set(tg.origin.x, tg.floorY, tg.origin.z - 3);
     T.setVelDbg(0, 0);
-    T.setOtsAimDbg(0, 1.2); // Aim up
+    T.setOtsAimDbg(0, 1.2);
     for (let i = 0; i < 8; i++) T.stepFrame(0.016);
 
     const { traceTraining } = await import('/world/training-ballistics.js');
@@ -315,7 +314,6 @@ try {
     const ceiling = tg.ceiling;
     const root = ceiling.root;
     
-    // Inspect children and hierarchy
     const meshes = [];
     root.traverse(o => {
       if (o.isMesh) {
@@ -356,7 +354,6 @@ try {
   console.log('--- 7. Performance & Draw Count Attribution ---');
   const perfData = await page.evaluate(`(()=>{
     const T = TT, tg = T.trainingDbg.tg();
-    // Measure at firing line looking ahead vs up
     T.player.position.set(tg.origin.x, tg.floorY, tg.origin.z - 3);
     T.setVelDbg(0, 0);
     

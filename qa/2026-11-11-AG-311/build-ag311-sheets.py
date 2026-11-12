@@ -7,7 +7,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 ROOT = "C:/Users/Zero/Desktop/Tiny Trek"
 SHOTS_DIR = os.path.join(ROOT, "qa/2026-11-11-AG-311/shots")
-SUMMARY_PATH = os.path.join(ROOT, "qa/2026-11-11-AG-311/ag311-summary.json")
+SUMMARY_PATH = os.path.join(ROOT, "qa/2026-11-11-AG-311/shots/ag311-summary.json")
 OUT_QA = os.path.join(ROOT, "qa/2026-11-11-AG-311")
 OUT_REV = os.path.join(ROOT, "review/AG-311")
 

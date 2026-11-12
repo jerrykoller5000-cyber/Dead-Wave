@@ -648,6 +648,31 @@ export const VM_TRIGGER = Object.freeze({
   // tcl334c: the fit's own index stands until the fit lets it reach.
 });
 
+// CE-4 (J16; ChatGPT 2's GT-20084 switch, the pad in 1 mm and back): the flashlight's switch pressed by the support thumb
+// at the eye. times (s): the reach onto it, the press in, held, the lift off, the hand home (index.html changes the light
+// half way in); gap: the pad comes in from this far out along the switch's axis; face: the pad's surface off the contact
+// when it touches. Per gun, solved in the cloud against the gun as drawn with the hand where VM_FIT puts it (Claude 5's
+// solve-light, Claude outputs/CE-4/): the digit that presses (fi: the finger, -1 the thumb; k its end bone; pad: the point
+// on it that touches, that bone's frame), r the hand's turn about its palm (gun space, axis * angle), v that digit's values,
+// o the rest of the hand eased from the hold toward curl (the thumb toward relaxed) (0..1); the slide that puts it on the switch is worked out each
+// frame. Re-solve when the gun, its light or the fit changes.
+export const VM_LIGHT = Object.freeze({
+  times: { reach: 0.17, press: 0.05, hold: 0.05, lift: 0.04, back: 0.2 }, gap: 0.004, face: 0.0004,
+  // curl: the fingers' loose fist the rest of the hand eases toward (o) while a digit presses
+  curl: [[0.85, 1.05, 0.65, 0.02], [0.95, 1.15, 0.7, 0], [1.0, 1.2, 0.75, -0.03], [1.05, 1.25, 0.8, -0.06]],
+  elbowUp: 0.3,
+  pistol: { k: 15, fi: -1, pad: [0, -0.0138, 0.009], r: [0.4906, -0.429, 0.1204], v: [0, 0.0051, -0.17, -0.3, -0.1, -0.1], o: 1 },   // the pistol: the thumb's pad
+  revolver: { k: 15, fi: -1, pad: [0, -0.0254, 0], r: [-0.2054, -0.5304, 0.2436], v: [0, 0.2131, 0.7499, 0.9432, 0.5273, 0.7729], o: 1 },   // the revolver: the thumb's tip
+  uzi: { k: 6, fi: 1, pad: [0, -0.021, 0], r: [0.0288, 0.0276, -0.0489], v: [1.2595, 1.1558, 0, 0.04], o: 1 },   // the Wasp: the middle finger's tip
+  shotgun: { k: 3, fi: 0, pad: [0, -0.0202, 0], r: [-0.2384, 1.3166, 0.0476], v: [1.4069, 0.8004, 0.6906, -0.08], o: 1 },   // the pump gun: the index finger's tip
+  aa12: { k: 15, fi: -1, pad: [0, -0.0138, 0.009], r: [-0.0572, 0.4507, -0.1727], v: [0, -0.6, 0.4171, -0.3, -0.1, 0.2213], o: 1 },   // the Breacher: the thumb's pad
+  m4: { k: 15, fi: -1, pad: [0, -0.0138, 0.009], r: [-1.0148, 1.0393, 0.463], v: [0.5704, 0.2843, 0.5415, 0.3252, 0.451, 0.532], o: 1 },   // the GW-4: the thumb's pad
+  ak: { k: 15, fi: -1, pad: [0, -0.0254, 0], r: [0.3096, 0.1447, -0.7025], v: [0.1287, 1, -0.17, -0.3, 0.2212, -0.1], o: 0.673 },   // the KR-7: the thumb's tip
+  sniper: { k: 15, fi: -1, pad: [0, -0.0254, 0], r: [-0.8455, 0.1155, 0.0035], v: [0.442, -0.6, 1.3, 0.3351, 0.3385, 0.2845], o: 1 },   // the sniper: the thumb's tip
+  launcher: { k: 3, fi: 0, pad: [0, -0.0106, 0.0085], r: [-0.906, 0.5725, 0.9886], v: [0.2766, 0.6497, 0.12, 0.3], o: 1 },   // the launcher: the index finger's pad
+  minigun: { k: 3, fi: 0, pad: [0, -0.0202, 0], r: [0.2808, -1.2729, 0.067], v: [-0.2, 0, 0.3136, 0.1295], o: 1 }   // the rotary gun: the index finger's tip
+});
+
 // CE-2 (J110: "Fire selection. Needs animation and manual manipulation by player fingers for each weapon"; J130): a gun's
 // controls that show its state. selector: the lever turned to the fire mode (st.fireMode, X), about its axle (gun space;
 // x null: the control's own x), turns (rad about the gun's x from the model's rest) per mode, in time s. The GW-4's lever

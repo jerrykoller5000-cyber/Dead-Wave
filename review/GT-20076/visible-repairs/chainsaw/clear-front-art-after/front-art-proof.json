@@ -1,0 +1,18 @@
+[
+  {
+    "outerSamples": 86,
+    "capTriangles": 30,
+    "gap": {
+      "lowerMm": 0,
+      "upperMm": 0.0078125
+    }
+  },
+  {
+    "outerSamples": 86,
+    "capTriangles": 30,
+    "gap": {
+      "lowerMm": 0,
+      "upperMm": 0.0078125
+    }
+  }
+]

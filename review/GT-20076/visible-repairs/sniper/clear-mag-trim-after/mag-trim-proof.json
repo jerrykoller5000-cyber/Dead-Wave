@@ -1,0 +1,7 @@
+{
+  "exterior": 30,
+  "claddingGap": {
+    "lowerMm": 0,
+    "upperMm": 0.0078125
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "stripes": [
+    {
+      "interval": 3,
+      "closed": 2,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "interval": 4,
+      "closed": 2,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "interval": 5,
+      "closed": 2,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "interval": 6,
+      "closed": 2,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "interval": 7,
+      "closed": 2,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "interval": 8,
+      "closed": 2,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "interval": 9,
+      "closed": 2,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "interval": 10,
+      "closed": 2,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    },
+    {
+      "interval": 11,
+      "closed": 2,
+      "gap": {
+        "lowerMm": 0,
+        "upperMm": 0.0078125
+      }
+    }
+  ],
+  "enclosed": [
+    0,
+    1,
+    2
+  ],
+  "flat": 1094,
+  "samples": 3618,
+  "maxIn": 0.0005837997642071865,
+  "maxOut": 0.00041421774573290743,
+  "casingIn": 1.3877787807814457e-17,
+  "casingOut": 0.002442993834070005,
+  "extreme": {
+    "side": 1,
+    "y": -0.005,
+    "z": 0.3235,
+    "oldAbsX": 0.040399995365017885,
+    "newAbsX": 0.0398161956008107
+  }
+}

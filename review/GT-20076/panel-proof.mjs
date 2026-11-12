@@ -4,7 +4,7 @@ import {fileURLToPath} from 'node:url';
 import {serve} from '../../tools/serve.mjs';
 import {launch} from '../../tools/cdp.mjs';
 import {save} from './save.mjs';
-import {originalSawCovers,originalWasp} from './replay-artwork.mjs';
+import {originalSawCovers,originalSawFrontPlates,originalWasp,originalWaspFurniture} from './replay-artwork.mjs';
 
 const [id,phase]=process.argv.slice(2);
 const wallFolder=process.argv.find(arg=>arg.startsWith('--wall-source='))?.slice('--wall-source='.length);
@@ -23,7 +23,10 @@ try {
   const matchKr=phase.startsWith('clear-emboss-');
   const matched=phase.startsWith('clear-lift-') || matchKr || !!wallFolder;
   if(matched && !wallFolder)assert.equal(id,matchKr?'ak':'uzi');
-  const verify=replay?await originalSawCovers(page,server.origin):phase==='clear-lift-before'?await originalWasp(page,server.origin):null;
+  const sawFront=process.argv.includes('--original-saw-front-plates');
+  if(sawFront)assert(id==='chainsaw'&&phase==='clear-front-plate-eye-before');
+  const verify=sawFront?await originalSawFrontPlates(page,server.origin):process.argv.includes('--original-wasp-furniture')?await originalWaspFurniture(page,server.origin):
+    replay?await originalSawCovers(page,server.origin):phase==='clear-lift-before'?await originalWasp(page,server.origin):null;
   await page.goto(server.origin+'/index.html?debug=1&raf=timer');
   assert(await page.waitFor('window.TT && DWLoad.snapshot().state==="ready"'));
   await page.evaluate('DWOpening.dismissForTesting()');assert(await page.waitFor('!DWOpening.active'));
@@ -42,6 +45,11 @@ try {
       window.vis=makeViews(TT,mode,${!!(recordPose || poseFrom)});return true;
     })()`);
   await page.evaluate('vis.equip('+JSON.stringify(id)+')');
+  if(process.argv.includes('--check-wasp-furniture')){
+    const proof=await page.evaluate("import('/review/GT-20076/wasp-furniture-proof.mjs').then(m=>m.sampleWaspFurniture(TT))",120000);
+    await save(new URL('furniture-surfaces.json',dir),JSON.stringify(proof,null,2)+'\n');
+    console.log('PASS',proof.stripes.length,'two-sided seated stripes, three original concealed; rendered side displacement',proof.maxIn,proof.maxOut);
+  }
   const cameras={};
   const views=['hip','aimed','held-left','held-right',...(id==='chainsaw'?[]:['rack'])];
   if(id==='sniper')views.splice(2,0,'aim-entry');
@@ -60,6 +68,11 @@ try {
     }
   }
   if(verify)await verify();
+  if(process.argv.includes('--check-collars')){
+    const result=await page.evaluate("import('/review/GT-20076/collar-proof.mjs').then(m=>m.checkCollars(TT.inspectHost().builders.weaponContext(),"+JSON.stringify(id)+"))");
+    await save(new URL('exterior-samples.json',dir),JSON.stringify(result,null,2)+'\n');
+    console.log('PASS retained exterior surface tuples',id,result);
+  }
   if(process.argv.includes('--check-longarm-seam')){
     const receipt=await page.evaluate("import('/review/GT-20076/longarm-seam-proof.mjs').then(m=>m.checkLongarmSeam(TT,"+JSON.stringify(id)+"))");
     await save(new URL('seam-clearance.json',dir),JSON.stringify(receipt,null,2)+'\n');
@@ -134,7 +147,7 @@ try {
     assert.equal(result.length,2);
     for(const panel of result){
       assert(panel.closed && panel.before>10 && panel.woodTexture && !panel.paintRole);
-      assert.equal(panel.missing+panel.added,0);assert.equal(panel.outerMotion,0);assert(Math.abs(panel.inner-.033)<1e-7);
+      assert.equal(panel.missing+panel.added,0);assert.equal(panel.outerMotion,0);assert(Math.abs(panel.inner-(panel.side>0?.029:.033))<1e-7);
     }
     console.log('PASS both walnut panels retain their complete exposed artwork, wood maps and contact planes');
   }

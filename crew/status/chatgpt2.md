@@ -2,12 +2,12 @@
 
 state: active
 model: GPT-6 (Codex, variant unsure)
-task: GT-20076 Next four surviving visible seams: Wasp magazine side artwork, chainsaw housing and top intake
-touching: studio/weapon-sidearms.js (Wasp side strips), studio/weapon-heavy.js (chainsaw top housing artwork), review/GT-20076
-since: 2026-11-11T21:11Z
+task: GT-20076 Fit the KR-7 side stamp and sculpt the flamer case underside around the existing tank artwork
+touching: studio/weapon-longarms.js (KR-7 side stamp), studio/weapon-heavy.js (flamer case underside), review/GT-20076
+since: 2026-11-12T00:05Z
 next: GT-20087 CD-1's guard room (20:08Z): the GW-4, Wasp and AA-12 trigger
 blocked-on: —
-last-report: handoffs/2026-11-11-chatgpt2-GT-20076.md
+last-report: handoffs/2026-11-12-chatgpt2-GT-20076.md
 
 ## Notes
 
@@ -15,7 +15,7 @@ last-report: handoffs/2026-11-11-chatgpt2-GT-20076.md
 
 context nearly full, needs a new session
 
-GT-20087b finished: both revised outlines match all 140 triangles on eye/world/carry, zero new crossings on nine builds, t38 26/26; Claude 1 and 5 have numerical landmarks. GT-20075 finished: director closed J116; J107 eye/side comparison, unchanged four animation states, raw 374→373 no new crossings. Now GT-20076 at the next inherited witnesses: original GW-4 rear cap #15 (new #14), aimed; KR-7 upper/lower exterior seam #0, hip. Baseline catalog-fix-gw-window. Before views named clear-rear-scallop-before and clear-lower-seam-before in visible-repairs/. Next ranked group is Wasp #60/#56, then chainsaw #0/#1. D-162 one four-light A/B per affected view, no repeat High if no draws added.
+New daily handoff handoffs/2026-11-12-chatgpt2-GT-20076.md. Launcher pivot and flamer rings/grip complete at catalog-fix-rings-grip with 19 fewer base pairs. Active KR-7 stamp + flamer fixed-case underside: Director approved A to keep removable tank fully round. Code in studio/weapon-longarms.js and studio/weapon-heavy.js. Native catalog-fix-case-stamp = AK 126→124, flamer 166→165, no new pairs/open/loose. Before: clear-case-stamp-before, including native first-person flamer pack-off t=.40. Running final geometry/FPS-eye checks: case-stamp-proof samples surfaces, baseline fingerprint, 4617 vertical rays; --case-stamp flamer then ak and t38. Need matched crops, daily handoff and out. Next inherited revolver hammer face and adjoining cylinder frame, pump etc; use queue-from-witnesses.mjs <catalog> --wasp-nine-stripes. Stay running; heartbeat last 00:15Z.
 
 Earlier exterior, camo, casing, detail and CE-2 acceptances are in the 11 Nov GT-20076/77/79/80 handoffs. The KR-7 laminate and D-152 budget were accepted on GT-20082 and GT-20081. Keep previous test expectations and the crew slot.
 

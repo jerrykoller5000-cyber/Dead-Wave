@@ -1,0 +1,22 @@
+[
+  {
+    "side": -1,
+    "exterior": 34,
+    "tipSamples": 4,
+    "tipRetreat": 0.0019684210419654846,
+    "gap": {
+      "lowerMm": 0,
+      "upperMm": 0.0078125
+    }
+  },
+  {
+    "side": 1,
+    "exterior": 34,
+    "tipSamples": 4,
+    "tipRetreat": 0.0019684210419654846,
+    "gap": {
+      "lowerMm": 0,
+      "upperMm": 0.0078125
+    }
+  }
+]

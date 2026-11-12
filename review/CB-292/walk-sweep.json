@@ -1,0 +1,4326 @@
+{
+  "candidateCount": 24,
+  "spotCount": 54,
+  "results": [
+    {
+      "name": "station:cif",
+      "face": "west",
+      "mode": "walk",
+      "from": [
+        6.464500007033348,
+        -200,
+        -650.2
+      ],
+      "to": [
+        4.413401151984,
+        -200,
+        -650.2
+      ],
+      "distance": 2.851098855049348,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:cif",
+      "face": "west",
+      "mode": "run",
+      "from": [
+        6.464500007033348,
+        -200,
+        -650.2
+      ],
+      "to": [
+        3.1938288597924935,
+        -200,
+        -650.2
+      ],
+      "distance": 4.070671147240855,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:cif",
+      "face": "west",
+      "mode": "crouch",
+      "from": [
+        6.464500007033348,
+        -200,
+        -650.2
+      ],
+      "to": [
+        5.854713860937597,
+        -200,
+        -650.2
+      ],
+      "distance": 1.409786146095751,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:cif",
+      "face": "west",
+      "mode": "turn",
+      "from": [
+        6.464500007033348,
+        -200,
+        -650.2
+      ],
+      "to": [
+        6.464500007033348,
+        -200,
+        -650.2
+      ],
+      "distance": 0.7999999999999998,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:kiosk",
+      "face": "west",
+      "mode": "walk",
+      "from": [
+        6.402016085386276,
+        -200,
+        -646.6
+      ],
+      "to": [
+        4.350917230336928,
+        -200,
+        -646.6
+      ],
+      "distance": 2.851098855049348,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:kiosk",
+      "face": "west",
+      "mode": "run",
+      "from": [
+        6.402016085386276,
+        -200,
+        -646.6
+      ],
+      "to": [
+        3.131344938145422,
+        -200,
+        -646.6
+      ],
+      "distance": 4.070671147240854,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:kiosk",
+      "face": "west",
+      "mode": "crouch",
+      "from": [
+        6.402016085386276,
+        -200,
+        -646.6
+      ],
+      "to": [
+        5.792229939290525,
+        -200,
+        -646.6
+      ],
+      "distance": 1.409786146095751,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:kiosk",
+      "face": "west",
+      "mode": "turn",
+      "from": [
+        6.402016085386276,
+        -200,
+        -646.6
+      ],
+      "to": [
+        6.402016085386276,
+        -200,
+        -646.6
+      ],
+      "distance": 0.7999999999999998,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:hqPanel",
+      "face": "east",
+      "mode": "walk",
+      "from": [
+        -42.57750000879169,
+        -200,
+        -637
+      ],
+      "to": [
+        -40.526401153742334,
+        -200,
+        -637
+      ],
+      "distance": 2.851098855049351,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:hqPanel",
+      "face": "east",
+      "mode": "run",
+      "from": [
+        -42.57750000879169,
+        -200,
+        -637
+      ],
+      "to": [
+        -39.306828861550834,
+        -200,
+        -637
+      ],
+      "distance": 4.070671147240851,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:hqPanel",
+      "face": "east",
+      "mode": "crouch",
+      "from": [
+        -42.57750000879169,
+        -200,
+        -637
+      ],
+      "to": [
+        -41.96771386269594,
+        -200,
+        -637
+      ],
+      "distance": 1.4097861460957475,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:hqPanel",
+      "face": "east",
+      "mode": "turn",
+      "from": [
+        -42.57750000879169,
+        -200,
+        -637
+      ],
+      "to": [
+        -42.57750000879169,
+        -200,
+        -637
+      ],
+      "distance": 0.7999999999999972,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:skullWindow",
+      "face": "east",
+      "mode": "walk",
+      "from": [
+        -42.37426815032959,
+        -200,
+        -643.0013500198841
+      ],
+      "to": [
+        -40.32316929528024,
+        -200,
+        -643.0013500198841
+      ],
+      "distance": 2.851098855049351,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:skullWindow",
+      "face": "east",
+      "mode": "run",
+      "from": [
+        -42.37426815032959,
+        -200,
+        -643.0013500198841
+      ],
+      "to": [
+        -39.10359700308874,
+        -200,
+        -643.0013500198841
+      ],
+      "distance": 4.070671147240851,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:skullWindow",
+      "face": "east",
+      "mode": "crouch",
+      "from": [
+        -42.37426815032959,
+        -200,
+        -643.0013500198841
+      ],
+      "to": [
+        -41.76448200423384,
+        -200,
+        -643.0013500198841
+      ],
+      "distance": 1.4097861460957475,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:skullWindow",
+      "face": "east",
+      "mode": "turn",
+      "from": [
+        -42.37426815032959,
+        -200,
+        -643.0013500198841
+      ],
+      "to": [
+        -42.37426815032959,
+        -200,
+        -643.0013500198841
+      ],
+      "distance": 0.7999999999999972,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:lightSwitch",
+      "face": "west",
+      "mode": "walk",
+      "from": [
+        -8.8,
+        -200,
+        -645.5350000000001
+      ],
+      "to": [
+        -9.535,
+        -200,
+        -645.5350000000001
+      ],
+      "distance": 1.535400000335276,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:lightSwitch",
+      "face": "west",
+      "mode": "run",
+      "from": [
+        -8.8,
+        -200,
+        -645.5350000000001
+      ],
+      "to": [
+        -9.535,
+        -200,
+        -645.5350000000001
+      ],
+      "distance": 1.535400000335276,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:lightSwitch",
+      "face": "west",
+      "mode": "crouch",
+      "from": [
+        -8.8,
+        -200,
+        -645.5350000000001
+      ],
+      "to": [
+        -9.409786146095756,
+        -200,
+        -645.5350000000001
+      ],
+      "distance": 1.4101861464310321,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:lightSwitch",
+      "face": "west",
+      "mode": "turn",
+      "from": [
+        -8.8,
+        -200,
+        -645.5350000000001
+      ],
+      "to": [
+        -8.8,
+        -200,
+        -645.5350000000001
+      ],
+      "distance": 0.8004000003352765,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:lightSwitch",
+      "face": "east",
+      "mode": "walk",
+      "from": [
+        -7.055151991033825,
+        -200,
+        -645.95
+      ],
+      "to": [
+        -5.004053135984477,
+        -200,
+        -645.95
+      ],
+      "distance": 2.851098855049348,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:lightSwitch",
+      "face": "east",
+      "mode": "run",
+      "from": [
+        -7.055151991033825,
+        -200,
+        -645.95
+      ],
+      "to": [
+        -3.7844808437929705,
+        -200,
+        -645.95
+      ],
+      "distance": 4.070671147240855,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:lightSwitch",
+      "face": "east",
+      "mode": "crouch",
+      "from": [
+        -7.055151991033825,
+        -200,
+        -645.95
+      ],
+      "to": [
+        -6.445365844938074,
+        -200,
+        -645.95
+      ],
+      "distance": 1.409786146095751,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:lightSwitch",
+      "face": "east",
+      "mode": "turn",
+      "from": [
+        -7.055151991033825,
+        -200,
+        -645.95
+      ],
+      "to": [
+        -7.055151991033825,
+        -200,
+        -645.95
+      ],
+      "distance": 0.7999999999999998,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:lightSwitch",
+      "face": "south",
+      "mode": "walk",
+      "from": [
+        -7.927375995349275,
+        -200,
+        -646.92
+      ],
+      "to": [
+        -7.927375995349275,
+        -200,
+        -648.9710988550493
+      ],
+      "distance": 2.871098849088753,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:lightSwitch",
+      "face": "south",
+      "mode": "run",
+      "from": [
+        -7.927375995349275,
+        -200,
+        -646.92
+      ],
+      "to": [
+        -7.927375995349275,
+        -200,
+        -649.08
+      ],
+      "distance": 2.979999994039531,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:lightSwitch",
+      "face": "south",
+      "mode": "crouch",
+      "from": [
+        -7.927375995349275,
+        -200,
+        -646.92
+      ],
+      "to": [
+        -7.927375995349275,
+        -200,
+        -647.5297861460958
+      ],
+      "distance": 1.4297861401353202,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:lightSwitch",
+      "face": "south",
+      "mode": "turn",
+      "from": [
+        -7.927375995349275,
+        -200,
+        -646.92
+      ],
+      "to": [
+        -7.927375995349275,
+        -200,
+        -646.92
+      ],
+      "distance": 0.8199999940394491,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:lightSwitch",
+      "face": "north",
+      "mode": "walk",
+      "from": [
+        -8.8,
+        -200,
+        -644.9999999940396
+      ],
+      "to": [
+        -8.8,
+        -200,
+        -642.9489011389903
+      ],
+      "distance": 2.8510988550492584,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:lightSwitch",
+      "face": "north",
+      "mode": "run",
+      "from": [
+        -8.8,
+        -200,
+        -644.9999999940396
+      ],
+      "to": [
+        -8.8,
+        -200,
+        -641.7293288467988
+      ],
+      "distance": 4.070671147240773,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:lightSwitch",
+      "face": "north",
+      "mode": "crouch",
+      "from": [
+        -8.8,
+        -200,
+        -644.9999999940396
+      ],
+      "to": [
+        -8.8,
+        -200,
+        -644.3902138479438
+      ],
+      "distance": 1.4097861460958256,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:lightSwitch",
+      "face": "north",
+      "mode": "turn",
+      "from": [
+        -8.8,
+        -200,
+        -644.9999999940396
+      ],
+      "to": [
+        -8.8,
+        -200,
+        -644.9999999940396
+      ],
+      "distance": 0.8004000003352765,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:armory",
+      "face": "west",
+      "mode": "walk",
+      "from": [
+        6.069999988004565,
+        -200,
+        -642.2400000095367
+      ],
+      "to": [
+        4.018901132955217,
+        -200,
+        -642.2400000095367
+      ],
+      "distance": 2.851098855049348,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:armory",
+      "face": "west",
+      "mode": "run",
+      "from": [
+        6.069999988004565,
+        -200,
+        -642.2400000095367
+      ],
+      "to": [
+        2.799328840763711,
+        -200,
+        -642.2400000095367
+      ],
+      "distance": 4.070671147240854,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:armory",
+      "face": "west",
+      "mode": "crouch",
+      "from": [
+        6.069999988004565,
+        -200,
+        -642.2400000095367
+      ],
+      "to": [
+        5.460213841908814,
+        -200,
+        -642.2400000095367
+      ],
+      "distance": 1.409786146095751,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:armory",
+      "face": "west",
+      "mode": "turn",
+      "from": [
+        6.069999988004565,
+        -200,
+        -642.2400000095367
+      ],
+      "to": [
+        6.069999988004565,
+        -200,
+        -642.2400000095367
+      ],
+      "distance": 0.7999999999999998,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:rangeConsole",
+      "face": "west",
+      "mode": "walk",
+      "from": [
+        -8.800500000000001,
+        -200,
+        -644.6
+      ],
+      "to": [
+        -9.535,
+        -200,
+        -644.6
+      ],
+      "distance": 1.5344999999999995,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:rangeConsole",
+      "face": "west",
+      "mode": "run",
+      "from": [
+        -8.800500000000001,
+        -200,
+        -644.6
+      ],
+      "to": [
+        -9.535,
+        -200,
+        -644.6
+      ],
+      "distance": 1.5344999999999995,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:rangeConsole",
+      "face": "west",
+      "mode": "crouch",
+      "from": [
+        -8.800500000000001,
+        -200,
+        -644.6
+      ],
+      "to": [
+        -9.410286146095757,
+        -200,
+        -644.6
+      ],
+      "distance": 1.4097861460957564,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:rangeConsole",
+      "face": "west",
+      "mode": "turn",
+      "from": [
+        -8.800500000000001,
+        -200,
+        -644.6
+      ],
+      "to": [
+        -8.800500000000001,
+        -200,
+        -644.6
+      ],
+      "distance": 0.8000000000000007,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:rangeConsole",
+      "face": "east",
+      "mode": "walk",
+      "from": [
+        -6.924500000000001,
+        -200,
+        -644.6
+      ],
+      "to": [
+        -4.873401144950653,
+        -200,
+        -644.6
+      ],
+      "distance": 2.851098855049348,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:rangeConsole",
+      "face": "east",
+      "mode": "run",
+      "from": [
+        -6.924500000000001,
+        -200,
+        -644.6
+      ],
+      "to": [
+        -3.6538288527591463,
+        -200,
+        -644.6
+      ],
+      "distance": 4.070671147240855,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:rangeConsole",
+      "face": "east",
+      "mode": "crouch",
+      "from": [
+        -6.924500000000001,
+        -200,
+        -644.6
+      ],
+      "to": [
+        -6.31471385390425,
+        -200,
+        -644.6
+      ],
+      "distance": 1.409786146095751,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:rangeConsole",
+      "face": "east",
+      "mode": "turn",
+      "from": [
+        -6.924500000000001,
+        -200,
+        -644.6
+      ],
+      "to": [
+        -6.924500000000001,
+        -200,
+        -644.6
+      ],
+      "distance": 0.7999999999999998,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:rangeConsole",
+      "face": "south",
+      "mode": "walk",
+      "from": [
+        -7.1076519910338245,
+        -200,
+        -646.0749999999999
+      ],
+      "to": [
+        -7.1076519910338245,
+        -200,
+        -648.1260988550492
+      ],
+      "distance": 2.8510988550492584,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:rangeConsole",
+      "face": "south",
+      "mode": "run",
+      "from": [
+        -7.1076519910338245,
+        -200,
+        -646.0749999999999
+      ],
+      "to": [
+        -7.1076519910338245,
+        -200,
+        -649.3456711472408
+      ],
+      "distance": 4.070671147240773,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:rangeConsole",
+      "face": "south",
+      "mode": "crouch",
+      "from": [
+        -7.1076519910338245,
+        -200,
+        -646.0749999999999
+      ],
+      "to": [
+        -7.1076519910338245,
+        -200,
+        -646.6847861460958
+      ],
+      "distance": 1.4097861460958256,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:rangeConsole",
+      "face": "south",
+      "mode": "turn",
+      "from": [
+        -7.1076519910338245,
+        -200,
+        -646.0749999999999
+      ],
+      "to": [
+        -7.1076519910338245,
+        -200,
+        -646.0749999999999
+      ],
+      "distance": 0.7999999999999545,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:rangeConsole",
+      "face": "north",
+      "mode": "walk",
+      "from": [
+        -7.2,
+        -200,
+        -643.1250000000001
+      ],
+      "to": [
+        -7.2,
+        -200,
+        -641.0739011449508
+      ],
+      "distance": 2.8510988550492584,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:rangeConsole",
+      "face": "north",
+      "mode": "run",
+      "from": [
+        -7.2,
+        -200,
+        -643.1250000000001
+      ],
+      "to": [
+        -7.2,
+        -200,
+        -640.6700000000001
+      ],
+      "distance": 3.2549999999999955,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:rangeConsole",
+      "face": "north",
+      "mode": "crouch",
+      "from": [
+        -7.2,
+        -200,
+        -643.1250000000001
+      ],
+      "to": [
+        -7.2,
+        -200,
+        -642.5152138539042
+      ],
+      "distance": 1.4097861460958256,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "station:rangeConsole",
+      "face": "north",
+      "mode": "turn",
+      "from": [
+        -7.2,
+        -200,
+        -643.1250000000001
+      ],
+      "to": [
+        -7.2,
+        -200,
+        -643.1250000000001
+      ],
+      "distance": 0.7999999999999545,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:0",
+      "face": "north",
+      "mode": "walk",
+      "from": [
+        0,
+        -200,
+        -650.9000000000001
+      ],
+      "to": [
+        0,
+        -200,
+        -648.8489011449508
+      ],
+      "distance": 2.8510988550492584,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:0",
+      "face": "north",
+      "mode": "run",
+      "from": [
+        0,
+        -200,
+        -650.9000000000001
+      ],
+      "to": [
+        0,
+        -200,
+        -647.6293288527593
+      ],
+      "distance": 4.070671147240773,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:0",
+      "face": "north",
+      "mode": "crouch",
+      "from": [
+        0,
+        -200,
+        -650.9000000000001
+      ],
+      "to": [
+        0,
+        -200,
+        -650.2902138539042
+      ],
+      "distance": 1.4097861460958256,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:0",
+      "face": "north",
+      "mode": "turn",
+      "from": [
+        0,
+        -200,
+        -650.9000000000001
+      ],
+      "to": [
+        0,
+        -200,
+        -650.9000000000001
+      ],
+      "distance": 0.7999999999999545,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:2",
+      "face": "west",
+      "mode": "walk",
+      "from": [
+        6.449999988004565,
+        -200,
+        -640.6700000000001
+      ],
+      "to": [
+        4.398901132955217,
+        -200,
+        -640.6700000000001
+      ],
+      "distance": 3.301098867044783,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:2",
+      "face": "west",
+      "mode": "run",
+      "from": [
+        6.449999988004565,
+        -200,
+        -640.6700000000001
+      ],
+      "to": [
+        3.1793288407637115,
+        -200,
+        -640.6700000000001
+      ],
+      "distance": 4.520671159236288,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:2",
+      "face": "west",
+      "mode": "crouch",
+      "from": [
+        6.449999988004565,
+        -200,
+        -640.6700000000001
+      ],
+      "to": [
+        5.840213841908814,
+        -200,
+        -640.6700000000001
+      ],
+      "distance": 1.859786158091186,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:2",
+      "face": "west",
+      "mode": "turn",
+      "from": [
+        6.449999988004565,
+        -200,
+        -640.6700000000001
+      ],
+      "to": [
+        6.449999988004565,
+        -200,
+        -640.6700000000001
+      ],
+      "distance": 1.2500000119954349,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:3",
+      "face": "west",
+      "mode": "walk",
+      "from": [
+        -8.8,
+        -200,
+        -650.75
+      ],
+      "to": [
+        -10.851098855049349,
+        -200,
+        -650.75
+      ],
+      "distance": 2.851098855049349,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:3",
+      "face": "west",
+      "mode": "run",
+      "from": [
+        -8.8,
+        -200,
+        -650.75
+      ],
+      "to": [
+        -12.070671147240855,
+        -200,
+        -650.75
+      ],
+      "distance": 4.070671147240855,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:3",
+      "face": "west",
+      "mode": "crouch",
+      "from": [
+        -8.8,
+        -200,
+        -650.75
+      ],
+      "to": [
+        -9.409786146095756,
+        -200,
+        -650.75
+      ],
+      "distance": 1.4097861460957564,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:3",
+      "face": "west",
+      "mode": "turn",
+      "from": [
+        -8.8,
+        -200,
+        -650.75
+      ],
+      "to": [
+        -8.8,
+        -200,
+        -650.75
+      ],
+      "distance": 0.8000000000000007,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:3",
+      "face": "east",
+      "mode": "walk",
+      "from": [
+        -6.9,
+        -200,
+        -650.75
+      ],
+      "to": [
+        -4.848901144950652,
+        -200,
+        -650.75
+      ],
+      "distance": 2.851098855049348,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:3",
+      "face": "east",
+      "mode": "run",
+      "from": [
+        -6.9,
+        -200,
+        -650.75
+      ],
+      "to": [
+        -3.6293288527591465,
+        -200,
+        -650.75
+      ],
+      "distance": 4.070671147240853,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:3",
+      "face": "east",
+      "mode": "crouch",
+      "from": [
+        -6.9,
+        -200,
+        -650.75
+      ],
+      "to": [
+        -6.290213853904249,
+        -200,
+        -650.75
+      ],
+      "distance": 1.409786146095751,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:3",
+      "face": "east",
+      "mode": "turn",
+      "from": [
+        -6.9,
+        -200,
+        -650.75
+      ],
+      "to": [
+        -6.9,
+        -200,
+        -650.75
+      ],
+      "distance": 0.7999999999999998,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:3",
+      "face": "north",
+      "mode": "walk",
+      "from": [
+        -7.85,
+        -200,
+        -648.7
+      ],
+      "to": [
+        -7.85,
+        -200,
+        -646.92
+      ],
+      "distance": 2.580000000000041,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:3",
+      "face": "north",
+      "mode": "run",
+      "from": [
+        -7.85,
+        -200,
+        -648.7
+      ],
+      "to": [
+        -7.85,
+        -200,
+        -646.92
+      ],
+      "distance": 2.580000000000041,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:3",
+      "face": "north",
+      "mode": "crouch",
+      "from": [
+        -7.85,
+        -200,
+        -648.7
+      ],
+      "to": [
+        -7.85,
+        -200,
+        -648.0902138539042
+      ],
+      "distance": 1.4097861460958256,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:3",
+      "face": "north",
+      "mode": "turn",
+      "from": [
+        -7.85,
+        -200,
+        -648.7
+      ],
+      "to": [
+        -7.85,
+        -200,
+        -648.7
+      ],
+      "distance": 0.7999999999999545,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:4",
+      "face": "west",
+      "mode": "walk",
+      "from": [
+        -8.8,
+        -200,
+        -628.25
+      ],
+      "to": [
+        -9.535,
+        -200,
+        -628.25
+      ],
+      "distance": 1.5350000000000001,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:4",
+      "face": "west",
+      "mode": "run",
+      "from": [
+        -8.8,
+        -200,
+        -628.25
+      ],
+      "to": [
+        -9.535,
+        -200,
+        -628.25
+      ],
+      "distance": 1.5350000000000001,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:4",
+      "face": "west",
+      "mode": "crouch",
+      "from": [
+        -8.8,
+        -200,
+        -628.25
+      ],
+      "to": [
+        -9.409786146095756,
+        -200,
+        -628.25
+      ],
+      "distance": 1.4097861460957564,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:4",
+      "face": "west",
+      "mode": "turn",
+      "from": [
+        -8.8,
+        -200,
+        -628.25
+      ],
+      "to": [
+        -8.8,
+        -200,
+        -628.25
+      ],
+      "distance": 0.8000000000000007,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:4",
+      "face": "east",
+      "mode": "walk",
+      "from": [
+        -8.8,
+        -200,
+        -628.25
+      ],
+      "to": [
+        -8.8,
+        -200,
+        -628.25
+      ],
+      "distance": 0.8000000000000007,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:4",
+      "face": "east",
+      "mode": "run",
+      "from": [
+        -8.8,
+        -200,
+        -628.25
+      ],
+      "to": [
+        -8.8,
+        -200,
+        -628.25
+      ],
+      "distance": 0.8000000000000007,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:4",
+      "face": "east",
+      "mode": "crouch",
+      "from": [
+        -8.8,
+        -200,
+        -628.25
+      ],
+      "to": [
+        -8.8,
+        -200,
+        -628.25
+      ],
+      "distance": 0.8000000000000007,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:4",
+      "face": "east",
+      "mode": "turn",
+      "from": [
+        -8.8,
+        -200,
+        -628.25
+      ],
+      "to": [
+        -8.8,
+        -200,
+        -628.25
+      ],
+      "distance": 0.8000000000000007,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:4",
+      "face": "south",
+      "mode": "walk",
+      "from": [
+        -7.85,
+        -200,
+        -647.3
+      ],
+      "to": [
+        -7.85,
+        -200,
+        -649.08
+      ],
+      "distance": 2.580000000000041,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:4",
+      "face": "south",
+      "mode": "run",
+      "from": [
+        -7.85,
+        -200,
+        -647.3
+      ],
+      "to": [
+        -7.85,
+        -200,
+        -649.08
+      ],
+      "distance": 2.580000000000041,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:4",
+      "face": "south",
+      "mode": "crouch",
+      "from": [
+        -7.85,
+        -200,
+        -647.3
+      ],
+      "to": [
+        -7.85,
+        -200,
+        -647.9097861460958
+      ],
+      "distance": 1.4097861460958256,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:4",
+      "face": "south",
+      "mode": "turn",
+      "from": [
+        -7.85,
+        -200,
+        -647.3
+      ],
+      "to": [
+        -7.85,
+        -200,
+        -647.3
+      ],
+      "distance": 0.7999999999999545,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:5",
+      "face": "west",
+      "mode": "walk",
+      "from": [
+        -9.100000000000001,
+        -200,
+        -650.75
+      ],
+      "to": [
+        -11.15109885504935,
+        -200,
+        -650.75
+      ],
+      "distance": 2.851098855049349,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:5",
+      "face": "west",
+      "mode": "run",
+      "from": [
+        -9.100000000000001,
+        -200,
+        -650.75
+      ],
+      "to": [
+        -12.370671147240856,
+        -200,
+        -650.75
+      ],
+      "distance": 4.070671147240855,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:5",
+      "face": "west",
+      "mode": "crouch",
+      "from": [
+        -9.100000000000001,
+        -200,
+        -650.75
+      ],
+      "to": [
+        -9.709786146095757,
+        -200,
+        -650.75
+      ],
+      "distance": 1.4097861460957564,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:5",
+      "face": "west",
+      "mode": "turn",
+      "from": [
+        -9.100000000000001,
+        -200,
+        -650.75
+      ],
+      "to": [
+        -9.100000000000001,
+        -200,
+        -650.75
+      ],
+      "distance": 0.8000000000000007,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:5",
+      "face": "east",
+      "mode": "walk",
+      "from": [
+        -7.2,
+        -200,
+        -650.75
+      ],
+      "to": [
+        -5.148901144950652,
+        -200,
+        -650.75
+      ],
+      "distance": 2.851098855049348,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:5",
+      "face": "east",
+      "mode": "run",
+      "from": [
+        -7.2,
+        -200,
+        -650.75
+      ],
+      "to": [
+        -3.9293288527591455,
+        -200,
+        -650.75
+      ],
+      "distance": 4.070671147240855,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:5",
+      "face": "east",
+      "mode": "crouch",
+      "from": [
+        -7.2,
+        -200,
+        -650.75
+      ],
+      "to": [
+        -6.590213853904249,
+        -200,
+        -650.75
+      ],
+      "distance": 1.409786146095751,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:5",
+      "face": "east",
+      "mode": "turn",
+      "from": [
+        -7.2,
+        -200,
+        -650.75
+      ],
+      "to": [
+        -7.2,
+        -200,
+        -650.75
+      ],
+      "distance": 0.7999999999999998,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:5",
+      "face": "north",
+      "mode": "walk",
+      "from": [
+        -8.15,
+        -200,
+        -648.7
+      ],
+      "to": [
+        -8.15,
+        -200,
+        -646.92
+      ],
+      "distance": 2.580000000000041,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:5",
+      "face": "north",
+      "mode": "run",
+      "from": [
+        -8.15,
+        -200,
+        -648.7
+      ],
+      "to": [
+        -8.15,
+        -200,
+        -646.92
+      ],
+      "distance": 2.580000000000041,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:5",
+      "face": "north",
+      "mode": "crouch",
+      "from": [
+        -8.15,
+        -200,
+        -648.7
+      ],
+      "to": [
+        -8.15,
+        -200,
+        -648.0902138539042
+      ],
+      "distance": 1.4097861460958256,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:5",
+      "face": "north",
+      "mode": "turn",
+      "from": [
+        -8.15,
+        -200,
+        -648.7
+      ],
+      "to": [
+        -8.15,
+        -200,
+        -648.7
+      ],
+      "distance": 0.7999999999999545,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:6",
+      "face": "west",
+      "mode": "walk",
+      "from": [
+        -9.100000000000001,
+        -200,
+        -629.25
+      ],
+      "to": [
+        -9.535,
+        -200,
+        -629.25
+      ],
+      "distance": 1.2349999999999994,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:6",
+      "face": "west",
+      "mode": "run",
+      "from": [
+        -9.100000000000001,
+        -200,
+        -629.25
+      ],
+      "to": [
+        -9.535,
+        -200,
+        -629.25
+      ],
+      "distance": 1.2349999999999994,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:6",
+      "face": "west",
+      "mode": "crouch",
+      "from": [
+        -9.100000000000001,
+        -200,
+        -629.25
+      ],
+      "to": [
+        -9.535,
+        -200,
+        -629.25
+      ],
+      "distance": 1.2349999999999994,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:6",
+      "face": "west",
+      "mode": "turn",
+      "from": [
+        -9.100000000000001,
+        -200,
+        -629.25
+      ],
+      "to": [
+        -9.100000000000001,
+        -200,
+        -629.25
+      ],
+      "distance": 0.8000000000000007,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:6",
+      "face": "east",
+      "mode": "walk",
+      "from": [
+        -8.8,
+        -200,
+        -629.25
+      ],
+      "to": [
+        -8.8,
+        -200,
+        -629.25
+      ],
+      "distance": 0.5,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:6",
+      "face": "east",
+      "mode": "run",
+      "from": [
+        -8.8,
+        -200,
+        -629.25
+      ],
+      "to": [
+        -8.8,
+        -200,
+        -629.25
+      ],
+      "distance": 0.5,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:6",
+      "face": "east",
+      "mode": "crouch",
+      "from": [
+        -8.8,
+        -200,
+        -629.25
+      ],
+      "to": [
+        -8.8,
+        -200,
+        -629.25
+      ],
+      "distance": 0.5,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:6",
+      "face": "east",
+      "mode": "turn",
+      "from": [
+        -8.8,
+        -200,
+        -629.25
+      ],
+      "to": [
+        -8.8,
+        -200,
+        -629.25
+      ],
+      "distance": 0.5,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:6",
+      "face": "south",
+      "mode": "walk",
+      "from": [
+        -8.15,
+        -200,
+        -647.3
+      ],
+      "to": [
+        -8.15,
+        -200,
+        -649.08
+      ],
+      "distance": 2.580000000000041,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:6",
+      "face": "south",
+      "mode": "run",
+      "from": [
+        -8.15,
+        -200,
+        -647.3
+      ],
+      "to": [
+        -8.15,
+        -200,
+        -649.08
+      ],
+      "distance": 2.580000000000041,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:6",
+      "face": "south",
+      "mode": "crouch",
+      "from": [
+        -8.15,
+        -200,
+        -647.3
+      ],
+      "to": [
+        -8.15,
+        -200,
+        -647.9097861460958
+      ],
+      "distance": 1.4097861460958256,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:6",
+      "face": "south",
+      "mode": "turn",
+      "from": [
+        -8.15,
+        -200,
+        -647.3
+      ],
+      "to": [
+        -8.15,
+        -200,
+        -647.3
+      ],
+      "distance": 0.7999999999999545,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:7",
+      "face": "north",
+      "mode": "walk",
+      "from": [
+        -26,
+        -200,
+        -650.9000000000001
+      ],
+      "to": [
+        -26,
+        -200,
+        -650.4649999999999
+      ],
+      "distance": 1.2350000000001273,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:7",
+      "face": "north",
+      "mode": "run",
+      "from": [
+        -26,
+        -200,
+        -650.9000000000001
+      ],
+      "to": [
+        -26,
+        -200,
+        -650.4649999999999
+      ],
+      "distance": 1.2350000000001273,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:7",
+      "face": "north",
+      "mode": "crouch",
+      "from": [
+        -26,
+        -200,
+        -650.9000000000001
+      ],
+      "to": [
+        -26,
+        -200,
+        -650.4649999999999
+      ],
+      "distance": 1.2350000000001273,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:7",
+      "face": "north",
+      "mode": "turn",
+      "from": [
+        -26,
+        -200,
+        -650.9000000000001
+      ],
+      "to": [
+        -26,
+        -200,
+        -650.9000000000001
+      ],
+      "distance": 0.7999999999999545,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:8",
+      "face": "south",
+      "mode": "walk",
+      "from": [
+        -36.65,
+        -200,
+        -613.15
+      ],
+      "to": [
+        -36.65,
+        -200,
+        -615.2010988550493
+      ],
+      "distance": 2.9010988550493266,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:8",
+      "face": "south",
+      "mode": "run",
+      "from": [
+        -36.65,
+        -200,
+        -613.15
+      ],
+      "to": [
+        -36.65,
+        -200,
+        -616.4206711472408
+      ],
+      "distance": 4.1206711472408415,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:8",
+      "face": "south",
+      "mode": "crouch",
+      "from": [
+        -36.65,
+        -200,
+        -613.15
+      ],
+      "to": [
+        -36.65,
+        -200,
+        -613.7597861460958
+      ],
+      "distance": 1.4597861460958939,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:8",
+      "face": "south",
+      "mode": "turn",
+      "from": [
+        -36.65,
+        -200,
+        -613.15
+      ],
+      "to": [
+        -36.65,
+        -200,
+        -613.15
+      ],
+      "distance": 0.8500000000000227,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:9",
+      "face": "south",
+      "mode": "walk",
+      "from": [
+        -15.35,
+        -200,
+        -613.15
+      ],
+      "to": [
+        -15.35,
+        -200,
+        -615.2010988550493
+      ],
+      "distance": 2.9010988550493266,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:9",
+      "face": "south",
+      "mode": "run",
+      "from": [
+        -15.35,
+        -200,
+        -613.15
+      ],
+      "to": [
+        -15.35,
+        -200,
+        -616.4206711472408
+      ],
+      "distance": 4.1206711472408415,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:9",
+      "face": "south",
+      "mode": "crouch",
+      "from": [
+        -15.35,
+        -200,
+        -613.15
+      ],
+      "to": [
+        -15.35,
+        -200,
+        -613.7597861460958
+      ],
+      "distance": 1.4597861460958939,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:9",
+      "face": "south",
+      "mode": "turn",
+      "from": [
+        -15.35,
+        -200,
+        -613.15
+      ],
+      "to": [
+        -15.35,
+        -200,
+        -613.15
+      ],
+      "distance": 0.8500000000000227,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:10",
+      "face": "south",
+      "mode": "walk",
+      "from": [
+        -29.15,
+        -200,
+        -613.15
+      ],
+      "to": [
+        -29.15,
+        -200,
+        -615.2010988550493
+      ],
+      "distance": 3.201098855049281,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:10",
+      "face": "south",
+      "mode": "run",
+      "from": [
+        -29.15,
+        -200,
+        -613.15
+      ],
+      "to": [
+        -29.15,
+        -200,
+        -616.4206711472408
+      ],
+      "distance": 4.420671147240796,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:10",
+      "face": "south",
+      "mode": "crouch",
+      "from": [
+        -29.15,
+        -200,
+        -613.15
+      ],
+      "to": [
+        -29.15,
+        -200,
+        -613.7597861460958
+      ],
+      "distance": 1.7597861460958484,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:10",
+      "face": "south",
+      "mode": "turn",
+      "from": [
+        -29.15,
+        -200,
+        -613.15
+      ],
+      "to": [
+        -29.15,
+        -200,
+        -613.15
+      ],
+      "distance": 1.1499999999999773,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:11",
+      "face": "south",
+      "mode": "walk",
+      "from": [
+        -22.85,
+        -200,
+        -613.15
+      ],
+      "to": [
+        -22.85,
+        -200,
+        -615.2010988550493
+      ],
+      "distance": 3.201098855049281,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:11",
+      "face": "south",
+      "mode": "run",
+      "from": [
+        -22.85,
+        -200,
+        -613.15
+      ],
+      "to": [
+        -22.85,
+        -200,
+        -616.4206711472408
+      ],
+      "distance": 4.420671147240796,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:11",
+      "face": "south",
+      "mode": "crouch",
+      "from": [
+        -22.85,
+        -200,
+        -613.15
+      ],
+      "to": [
+        -22.85,
+        -200,
+        -613.7597861460958
+      ],
+      "distance": 1.7597861460958484,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:11",
+      "face": "south",
+      "mode": "turn",
+      "from": [
+        -22.85,
+        -200,
+        -613.15
+      ],
+      "to": [
+        -22.85,
+        -200,
+        -613.15
+      ],
+      "distance": 1.1499999999999773,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "bench:0",
+      "face": "west",
+      "mode": "walk",
+      "from": [
+        -8.8,
+        -200,
+        -639.5
+      ],
+      "to": [
+        -9.535,
+        -200,
+        -639.5
+      ],
+      "distance": 1.5350000000000001,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "bench:0",
+      "face": "west",
+      "mode": "run",
+      "from": [
+        -8.8,
+        -200,
+        -639.5
+      ],
+      "to": [
+        -9.535,
+        -200,
+        -639.5
+      ],
+      "distance": 1.5350000000000001,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "bench:0",
+      "face": "west",
+      "mode": "crouch",
+      "from": [
+        -8.8,
+        -200,
+        -639.5
+      ],
+      "to": [
+        -9.409786146095756,
+        -200,
+        -639.5
+      ],
+      "distance": 1.4097861460957564,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "bench:0",
+      "face": "west",
+      "mode": "turn",
+      "from": [
+        -8.8,
+        -200,
+        -639.5
+      ],
+      "to": [
+        -8.8,
+        -200,
+        -639.5
+      ],
+      "distance": 0.8000000000000007,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "bench:0",
+      "face": "south",
+      "mode": "walk",
+      "from": [
+        0,
+        -200,
+        -640.6700000000001
+      ],
+      "to": [
+        0,
+        -200,
+        -642.7210988550494
+      ],
+      "distance": 2.9010988550493266,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "bench:0",
+      "face": "south",
+      "mode": "run",
+      "from": [
+        0,
+        -200,
+        -640.6700000000001
+      ],
+      "to": [
+        0,
+        -200,
+        -643.9406711472409
+      ],
+      "distance": 4.1206711472408415,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "bench:0",
+      "face": "south",
+      "mode": "crouch",
+      "from": [
+        0,
+        -200,
+        -640.6700000000001
+      ],
+      "to": [
+        0,
+        -200,
+        -641.279786146096
+      ],
+      "distance": 1.4597861460958939,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "bench:0",
+      "face": "south",
+      "mode": "turn",
+      "from": [
+        0,
+        -200,
+        -640.6700000000001
+      ],
+      "to": [
+        0,
+        -200,
+        -640.6700000000001
+      ],
+      "distance": 0.8500000000000227,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "bench:0",
+      "face": "north",
+      "mode": "walk",
+      "from": [
+        0,
+        -200,
+        -640.6700000000001
+      ],
+      "to": [
+        0,
+        -200,
+        -640.6700000000001
+      ],
+      "distance": 0.8500000000000227,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "bench:0",
+      "face": "north",
+      "mode": "run",
+      "from": [
+        0,
+        -200,
+        -640.6700000000001
+      ],
+      "to": [
+        0,
+        -200,
+        -640.6700000000001
+      ],
+      "distance": 0.8500000000000227,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "bench:0",
+      "face": "north",
+      "mode": "crouch",
+      "from": [
+        0,
+        -200,
+        -640.6700000000001
+      ],
+      "to": [
+        0,
+        -200,
+        -640.6700000000001
+      ],
+      "distance": 0.8500000000000227,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "bench:0",
+      "face": "north",
+      "mode": "turn",
+      "from": [
+        0,
+        -200,
+        -640.6700000000001
+      ],
+      "to": [
+        0,
+        -200,
+        -640.6700000000001
+      ],
+      "distance": 0.8500000000000227,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "dummy:0",
+      "face": "west",
+      "mode": "walk",
+      "from": [
+        -6.12,
+        -200,
+        -642.8
+      ],
+      "to": [
+        -7.2,
+        -200,
+        -642.8
+      ],
+      "distance": 1.88,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "dummy:0",
+      "face": "west",
+      "mode": "run",
+      "from": [
+        -6.12,
+        -200,
+        -642.8
+      ],
+      "to": [
+        -7.2,
+        -200,
+        -642.8
+      ],
+      "distance": 1.88,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "dummy:0",
+      "face": "west",
+      "mode": "crouch",
+      "from": [
+        -6.12,
+        -200,
+        -642.8
+      ],
+      "to": [
+        -6.729786146095751,
+        -200,
+        -642.8
+      ],
+      "distance": 1.409786146095751,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "dummy:0",
+      "face": "west",
+      "mode": "turn",
+      "from": [
+        -6.12,
+        -200,
+        -642.8
+      ],
+      "to": [
+        -6.12,
+        -200,
+        -642.8
+      ],
+      "distance": 0.7999999999999998,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "dummy:0",
+      "face": "east",
+      "mode": "walk",
+      "from": [
+        -3.88,
+        -200,
+        -642.8
+      ],
+      "to": [
+        -1.8289011449506516,
+        -200,
+        -642.8
+      ],
+      "distance": 2.851098855049348,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "dummy:0",
+      "face": "east",
+      "mode": "run",
+      "from": [
+        -3.88,
+        -200,
+        -642.8
+      ],
+      "to": [
+        -0.6093288527591456,
+        -200,
+        -642.8
+      ],
+      "distance": 4.070671147240854,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "dummy:0",
+      "face": "east",
+      "mode": "crouch",
+      "from": [
+        -3.88,
+        -200,
+        -642.8
+      ],
+      "to": [
+        -3.2702138539042482,
+        -200,
+        -642.8
+      ],
+      "distance": 1.4097861460957515,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "dummy:0",
+      "face": "east",
+      "mode": "turn",
+      "from": [
+        -3.88,
+        -200,
+        -642.8
+      ],
+      "to": [
+        -3.88,
+        -200,
+        -642.8
+      ],
+      "distance": 0.7999999999999998,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "dummy:0",
+      "face": "south",
+      "mode": "walk",
+      "from": [
+        -5,
+        -200,
+        -643.92
+      ],
+      "to": [
+        -5,
+        -200,
+        -645.9710988550493
+      ],
+      "distance": 2.8510988550492584,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "dummy:0",
+      "face": "south",
+      "mode": "run",
+      "from": [
+        -5,
+        -200,
+        -643.92
+      ],
+      "to": [
+        -5,
+        -200,
+        -647.1906711472408
+      ],
+      "distance": 4.070671147240773,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "dummy:0",
+      "face": "south",
+      "mode": "crouch",
+      "from": [
+        -5,
+        -200,
+        -643.92
+      ],
+      "to": [
+        -5,
+        -200,
+        -644.5297861460958
+      ],
+      "distance": 1.4097861460958256,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "dummy:0",
+      "face": "south",
+      "mode": "turn",
+      "from": [
+        -5,
+        -200,
+        -643.92
+      ],
+      "to": [
+        -5,
+        -200,
+        -643.92
+      ],
+      "distance": 0.7999999999999545,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "dummy:0",
+      "face": "north",
+      "mode": "walk",
+      "from": [
+        -5,
+        -200,
+        -641.68
+      ],
+      "to": [
+        -5,
+        -200,
+        -640.6700000000001
+      ],
+      "distance": 1.8099999999998317,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "dummy:0",
+      "face": "north",
+      "mode": "run",
+      "from": [
+        -5,
+        -200,
+        -641.68
+      ],
+      "to": [
+        -5,
+        -200,
+        -640.6700000000001
+      ],
+      "distance": 1.8099999999998317,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "dummy:0",
+      "face": "north",
+      "mode": "crouch",
+      "from": [
+        -5,
+        -200,
+        -641.68
+      ],
+      "to": [
+        -5,
+        -200,
+        -641.0702138539041
+      ],
+      "distance": 1.4097861460958256,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "dummy:0",
+      "face": "north",
+      "mode": "turn",
+      "from": [
+        -5,
+        -200,
+        -641.68
+      ],
+      "to": [
+        -5,
+        -200,
+        -641.68
+      ],
+      "distance": 0.7999999999999545,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "block:0",
+      "face": "north",
+      "mode": "walk",
+      "from": [
+        -5.78,
+        -200,
+        -650.71
+      ],
+      "to": [
+        -5.78,
+        -200,
+        -648.6589011449507
+      ],
+      "distance": 2.8510988550492584,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "block:0",
+      "face": "north",
+      "mode": "run",
+      "from": [
+        -5.78,
+        -200,
+        -650.71
+      ],
+      "to": [
+        -5.78,
+        -200,
+        -647.4393288527592
+      ],
+      "distance": 4.070671147240773,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "block:0",
+      "face": "north",
+      "mode": "crouch",
+      "from": [
+        -5.78,
+        -200,
+        -650.71
+      ],
+      "to": [
+        -5.78,
+        -200,
+        -650.1002138539042
+      ],
+      "distance": 1.4097861460958256,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "block:0",
+      "face": "north",
+      "mode": "turn",
+      "from": [
+        -5.78,
+        -200,
+        -650.71
+      ],
+      "to": [
+        -5.78,
+        -200,
+        -650.71
+      ],
+      "distance": 0.7999999999999545,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:0",
+      "face": "walkEdge0",
+      "mode": "walk",
+      "from": [
+        0,
+        -200,
+        -651.2
+      ],
+      "to": [
+        0,
+        -200,
+        -649.1489011449507
+      ],
+      "distance": 2.551098855049304,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:0",
+      "face": "walkEdge0",
+      "mode": "run",
+      "from": [
+        0,
+        -200,
+        -651.2
+      ],
+      "to": [
+        0,
+        -200,
+        -647.9293288527592
+      ],
+      "distance": 3.7706711472408188,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:0",
+      "face": "walkEdge0",
+      "mode": "crouch",
+      "from": [
+        0,
+        -200,
+        -651.2
+      ],
+      "to": [
+        0,
+        -200,
+        -650.5902138539042
+      ],
+      "distance": 1.1097861460958711,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:0",
+      "face": "walkEdge0",
+      "mode": "turn",
+      "from": [
+        0,
+        -200,
+        -651.2
+      ],
+      "to": [
+        0,
+        -200,
+        -651.2
+      ],
+      "distance": 0.5,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:2",
+      "face": "walkEdge0",
+      "mode": "walk",
+      "from": [
+        6.782016085386276,
+        -200,
+        -645.9350000000001
+      ],
+      "to": [
+        6.782016085386276,
+        -200,
+        -645.9350000000001
+      ],
+      "distance": 0.9179839146137239,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:2",
+      "face": "walkEdge0",
+      "mode": "run",
+      "from": [
+        6.782016085386276,
+        -200,
+        -645.9350000000001
+      ],
+      "to": [
+        6.782016085386276,
+        -200,
+        -645.9350000000001
+      ],
+      "distance": 0.9179839146137239,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:2",
+      "face": "walkEdge0",
+      "mode": "crouch",
+      "from": [
+        6.782016085386276,
+        -200,
+        -645.9350000000001
+      ],
+      "to": [
+        6.782016085386276,
+        -200,
+        -645.9350000000001
+      ],
+      "distance": 0.9179839146137239,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:2",
+      "face": "walkEdge0",
+      "mode": "turn",
+      "from": [
+        6.782016085386276,
+        -200,
+        -645.9350000000001
+      ],
+      "to": [
+        6.782016085386276,
+        -200,
+        -645.9350000000001
+      ],
+      "distance": 0.9179839146137239,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:3",
+      "face": "walkEdge0",
+      "mode": "walk",
+      "from": [
+        -7.2,
+        -200,
+        -650.1
+      ],
+      "to": [
+        -5.148901144950652,
+        -200,
+        -650.1
+      ],
+      "distance": 2.5510988550493483,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:3",
+      "face": "walkEdge0",
+      "mode": "run",
+      "from": [
+        -7.2,
+        -200,
+        -650.1
+      ],
+      "to": [
+        -3.9293288527591455,
+        -200,
+        -650.1
+      ],
+      "distance": 3.7706711472408547,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:3",
+      "face": "walkEdge0",
+      "mode": "crouch",
+      "from": [
+        -7.2,
+        -200,
+        -650.1
+      ],
+      "to": [
+        -6.590213853904249,
+        -200,
+        -650.1
+      ],
+      "distance": 1.1097861460957512,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:3",
+      "face": "walkEdge0",
+      "mode": "turn",
+      "from": [
+        -7.2,
+        -200,
+        -650.1
+      ],
+      "to": [
+        -7.2,
+        -200,
+        -650.1
+      ],
+      "distance": 0.5,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:3",
+      "face": "walkEdge2",
+      "mode": "walk",
+      "from": [
+        -8.8,
+        -200,
+        -650.4649999999999
+      ],
+      "to": [
+        -8.8,
+        -200,
+        -650.4649999999999
+      ],
+      "distance": 0.8000000000000007,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:3",
+      "face": "walkEdge2",
+      "mode": "run",
+      "from": [
+        -8.8,
+        -200,
+        -650.4649999999999
+      ],
+      "to": [
+        -8.8,
+        -200,
+        -650.4649999999999
+      ],
+      "distance": 0.8000000000000007,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:3",
+      "face": "walkEdge2",
+      "mode": "crouch",
+      "from": [
+        -8.8,
+        -200,
+        -650.4649999999999
+      ],
+      "to": [
+        -8.8,
+        -200,
+        -650.4649999999999
+      ],
+      "distance": 0.8000000000000007,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:3",
+      "face": "walkEdge2",
+      "mode": "turn",
+      "from": [
+        -8.8,
+        -200,
+        -650.4649999999999
+      ],
+      "to": [
+        -8.8,
+        -200,
+        -650.4649999999999
+      ],
+      "distance": 0.8000000000000007,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:4",
+      "face": "walkEdge0",
+      "mode": "walk",
+      "from": [
+        -7.2,
+        -200,
+        -643.835
+      ],
+      "to": [
+        -5.148901144950652,
+        -200,
+        -643.835
+      ],
+      "distance": 2.5510988550493483,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:4",
+      "face": "walkEdge0",
+      "mode": "run",
+      "from": [
+        -7.2,
+        -200,
+        -643.835
+      ],
+      "to": [
+        -3.9293288527591455,
+        -200,
+        -643.835
+      ],
+      "distance": 3.7706711472408547,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:4",
+      "face": "walkEdge0",
+      "mode": "crouch",
+      "from": [
+        -7.2,
+        -200,
+        -643.835
+      ],
+      "to": [
+        -6.590213853904249,
+        -200,
+        -643.835
+      ],
+      "distance": 1.1097861460957512,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:4",
+      "face": "walkEdge0",
+      "mode": "turn",
+      "from": [
+        -7.2,
+        -200,
+        -643.835
+      ],
+      "to": [
+        -7.2,
+        -200,
+        -643.835
+      ],
+      "distance": 0.5,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:4",
+      "face": "walkEdge2",
+      "mode": "walk",
+      "from": [
+        -8.8,
+        -200,
+        -630.075
+      ],
+      "to": [
+        -8.8,
+        -200,
+        -630.075
+      ],
+      "distance": 0.8000000000000007,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:4",
+      "face": "walkEdge2",
+      "mode": "run",
+      "from": [
+        -8.8,
+        -200,
+        -630.075
+      ],
+      "to": [
+        -8.8,
+        -200,
+        -630.075
+      ],
+      "distance": 0.8000000000000007,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:4",
+      "face": "walkEdge2",
+      "mode": "crouch",
+      "from": [
+        -8.8,
+        -200,
+        -630.075
+      ],
+      "to": [
+        -8.8,
+        -200,
+        -630.075
+      ],
+      "distance": 0.8000000000000007,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:4",
+      "face": "walkEdge2",
+      "mode": "turn",
+      "from": [
+        -8.8,
+        -200,
+        -630.075
+      ],
+      "to": [
+        -8.8,
+        -200,
+        -630.075
+      ],
+      "distance": 0.8000000000000007,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:5",
+      "face": "walkEdge0",
+      "mode": "walk",
+      "from": [
+        -7.2,
+        -200,
+        -650.1
+      ],
+      "to": [
+        -5.148901144950652,
+        -200,
+        -650.1
+      ],
+      "distance": 2.851098855049348,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:5",
+      "face": "walkEdge0",
+      "mode": "run",
+      "from": [
+        -7.2,
+        -200,
+        -650.1
+      ],
+      "to": [
+        -3.9293288527591455,
+        -200,
+        -650.1
+      ],
+      "distance": 4.070671147240855,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:5",
+      "face": "walkEdge0",
+      "mode": "crouch",
+      "from": [
+        -7.2,
+        -200,
+        -650.1
+      ],
+      "to": [
+        -6.590213853904249,
+        -200,
+        -650.1
+      ],
+      "distance": 1.409786146095751,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:5",
+      "face": "walkEdge0",
+      "mode": "turn",
+      "from": [
+        -7.2,
+        -200,
+        -650.1
+      ],
+      "to": [
+        -7.2,
+        -200,
+        -650.1
+      ],
+      "distance": 0.7999999999999998,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:5",
+      "face": "walkEdge2",
+      "mode": "walk",
+      "from": [
+        -8.8,
+        -200,
+        -650.4649999999999
+      ],
+      "to": [
+        -8.8,
+        -200,
+        -650.4649999999999
+      ],
+      "distance": 0.5,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:5",
+      "face": "walkEdge2",
+      "mode": "run",
+      "from": [
+        -8.8,
+        -200,
+        -650.4649999999999
+      ],
+      "to": [
+        -8.8,
+        -200,
+        -650.4649999999999
+      ],
+      "distance": 0.5,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:5",
+      "face": "walkEdge2",
+      "mode": "crouch",
+      "from": [
+        -8.8,
+        -200,
+        -650.4649999999999
+      ],
+      "to": [
+        -8.8,
+        -200,
+        -650.4649999999999
+      ],
+      "distance": 0.5,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:5",
+      "face": "walkEdge2",
+      "mode": "turn",
+      "from": [
+        -8.8,
+        -200,
+        -650.4649999999999
+      ],
+      "to": [
+        -8.8,
+        -200,
+        -650.4649999999999
+      ],
+      "distance": 0.5,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:6",
+      "face": "walkEdge0",
+      "mode": "walk",
+      "from": [
+        -7.2,
+        -200,
+        -643.835
+      ],
+      "to": [
+        -5.148901144950652,
+        -200,
+        -643.835
+      ],
+      "distance": 2.851098855049348,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:6",
+      "face": "walkEdge0",
+      "mode": "run",
+      "from": [
+        -7.2,
+        -200,
+        -643.835
+      ],
+      "to": [
+        -3.9293288527591455,
+        -200,
+        -643.835
+      ],
+      "distance": 4.070671147240855,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:6",
+      "face": "walkEdge0",
+      "mode": "crouch",
+      "from": [
+        -7.2,
+        -200,
+        -643.835
+      ],
+      "to": [
+        -6.590213853904249,
+        -200,
+        -643.835
+      ],
+      "distance": 1.409786146095751,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:6",
+      "face": "walkEdge0",
+      "mode": "turn",
+      "from": [
+        -7.2,
+        -200,
+        -643.835
+      ],
+      "to": [
+        -7.2,
+        -200,
+        -643.835
+      ],
+      "distance": 0.7999999999999998,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:6",
+      "face": "walkEdge2",
+      "mode": "walk",
+      "from": [
+        -8.8,
+        -200,
+        -630.075
+      ],
+      "to": [
+        -8.8,
+        -200,
+        -630.075
+      ],
+      "distance": 0.5,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:6",
+      "face": "walkEdge2",
+      "mode": "run",
+      "from": [
+        -8.8,
+        -200,
+        -630.075
+      ],
+      "to": [
+        -8.8,
+        -200,
+        -630.075
+      ],
+      "distance": 0.5,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:6",
+      "face": "walkEdge2",
+      "mode": "crouch",
+      "from": [
+        -8.8,
+        -200,
+        -630.075
+      ],
+      "to": [
+        -8.8,
+        -200,
+        -630.075
+      ],
+      "distance": 0.5,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:6",
+      "face": "walkEdge2",
+      "mode": "turn",
+      "from": [
+        -8.8,
+        -200,
+        -630.075
+      ],
+      "to": [
+        -8.8,
+        -200,
+        -630.075
+      ],
+      "distance": 0.5,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:7",
+      "face": "walkEdge2",
+      "mode": "walk",
+      "from": [
+        -26,
+        -200,
+        -651.2
+      ],
+      "to": [
+        -26,
+        -200,
+        -650.4649999999999
+      ],
+      "distance": 1.2350000000001273,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:7",
+      "face": "walkEdge2",
+      "mode": "run",
+      "from": [
+        -26,
+        -200,
+        -651.2
+      ],
+      "to": [
+        -26,
+        -200,
+        -650.4649999999999
+      ],
+      "distance": 1.2350000000001273,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:7",
+      "face": "walkEdge2",
+      "mode": "crouch",
+      "from": [
+        -26,
+        -200,
+        -651.2
+      ],
+      "to": [
+        -26,
+        -200,
+        -650.5902138539042
+      ],
+      "distance": 1.1097861460958711,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:7",
+      "face": "walkEdge2",
+      "mode": "turn",
+      "from": [
+        -26,
+        -200,
+        -651.2
+      ],
+      "to": [
+        -26,
+        -200,
+        -651.2
+      ],
+      "distance": 0.5,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:8",
+      "face": "walkEdge2",
+      "mode": "walk",
+      "from": [
+        -36,
+        -200,
+        -613.15
+      ],
+      "to": [
+        -36,
+        -200,
+        -613.15
+      ],
+      "distance": 0.8500000000000227,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:8",
+      "face": "walkEdge2",
+      "mode": "run",
+      "from": [
+        -36,
+        -200,
+        -613.15
+      ],
+      "to": [
+        -36,
+        -200,
+        -613.15
+      ],
+      "distance": 0.8500000000000227,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:8",
+      "face": "walkEdge2",
+      "mode": "crouch",
+      "from": [
+        -36,
+        -200,
+        -613.15
+      ],
+      "to": [
+        -36,
+        -200,
+        -613.15
+      ],
+      "distance": 0.8500000000000227,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:8",
+      "face": "walkEdge2",
+      "mode": "turn",
+      "from": [
+        -36,
+        -200,
+        -613.15
+      ],
+      "to": [
+        -36,
+        -200,
+        -613.15
+      ],
+      "distance": 0.8500000000000227,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:9",
+      "face": "walkEdge2",
+      "mode": "walk",
+      "from": [
+        -16,
+        -200,
+        -613.15
+      ],
+      "to": [
+        -16,
+        -200,
+        -613.15
+      ],
+      "distance": 0.8500000000000227,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:9",
+      "face": "walkEdge2",
+      "mode": "run",
+      "from": [
+        -16,
+        -200,
+        -613.15
+      ],
+      "to": [
+        -16,
+        -200,
+        -613.15
+      ],
+      "distance": 0.8500000000000227,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:9",
+      "face": "walkEdge2",
+      "mode": "crouch",
+      "from": [
+        -16,
+        -200,
+        -613.15
+      ],
+      "to": [
+        -16,
+        -200,
+        -613.15
+      ],
+      "distance": 0.8500000000000227,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:9",
+      "face": "walkEdge2",
+      "mode": "turn",
+      "from": [
+        -16,
+        -200,
+        -613.15
+      ],
+      "to": [
+        -16,
+        -200,
+        -613.15
+      ],
+      "distance": 0.8500000000000227,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:13",
+      "face": "walkEdge2",
+      "mode": "walk",
+      "from": [
+        -43.2,
+        -200,
+        -632.175
+      ],
+      "to": [
+        -42.465,
+        -200,
+        -632.175
+      ],
+      "distance": 1.2349999999999994,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:13",
+      "face": "walkEdge2",
+      "mode": "run",
+      "from": [
+        -43.2,
+        -200,
+        -632.175
+      ],
+      "to": [
+        -42.465,
+        -200,
+        -632.175
+      ],
+      "distance": 1.2349999999999994,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:13",
+      "face": "walkEdge2",
+      "mode": "crouch",
+      "from": [
+        -43.2,
+        -200,
+        -632.175
+      ],
+      "to": [
+        -42.59021385390425,
+        -200,
+        -632.175
+      ],
+      "distance": 1.1097861460957503,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    },
+    {
+      "name": "wall:13",
+      "face": "walkEdge2",
+      "mode": "turn",
+      "from": [
+        -43.2,
+        -200,
+        -632.175
+      ],
+      "to": [
+        -43.2,
+        -200,
+        -632.175
+      ],
+      "distance": 0.5,
+      "hits": [],
+      "hitCount": 0,
+      "vertices": []
+    }
+  ],
+  "doorway": {
+    "toRange": [
+      -3.485689579407537,
+      -200,
+      -648
+    ],
+    "toBuild": [
+      -8.930980975555986,
+      -200,
+      -648
+    ],
+    "walk": [
+      {
+        "minX": -7.2,
+        "maxX": 7.2,
+        "minZ": -651.2,
+        "maxZ": -640.6700000000001
+      },
+      {
+        "minX": -8.850000000000001,
+        "maxX": -7.15,
+        "minZ": -649.08,
+        "maxZ": -646.92
+      },
+      {
+        "minX": -43.2,
+        "maxX": -8.8,
+        "minZ": -651.2,
+        "maxZ": -613.15
+      }
+    ]
+  },
+  "errors": [],
+  "playerRadius": 0.42,
+  "shots": [
+    {
+      "name": "build-east-wall",
+      "first": false,
+      "marineVisible": true,
+      "marinePosition": [
+        0,
+        -0.7000220363080728,
+        0
+      ],
+      "camera": [
+        -12,
+        -198,
+        -629.25
+      ],
+      "player": [
+        -8.8,
+        -200,
+        -629.25
+      ]
+    },
+    {
+      "name": "build-east-wall-range-side",
+      "first": false,
+      "marineVisible": true,
+      "marinePosition": [
+        0,
+        -0.6979845215948892,
+        0
+      ],
+      "camera": [
+        -5,
+        -198,
+        -629.25
+      ],
+      "player": [
+        -8.8,
+        -200,
+        -629.25
+      ]
+    },
+    {
+      "name": "build-south-wall",
+      "first": false,
+      "marineVisible": true,
+      "marinePosition": [
+        0,
+        -0.6978497279812179,
+        0
+      ],
+      "camera": [
+        -18.5,
+        -198,
+        -648
+      ],
+      "player": [
+        -20,
+        -200,
+        -651.2
+      ]
+    },
+    {
+      "name": "range-west-wall",
+      "first": false,
+      "marineVisible": true,
+      "marinePosition": [
+        0,
+        -0.6978455349673339,
+        0
+      ],
+      "camera": [
+        -4,
+        -198,
+        -644
+      ],
+      "player": [
+        -7.2,
+        -200,
+        -644
+      ]
+    },
+    {
+      "name": "range-south-wall",
+      "first": false,
+      "marineVisible": true,
+      "marinePosition": [
+        0,
+        -0.6978425959680341,
+        0
+      ],
+      "camera": [
+        0,
+        -198,
+        -648
+      ],
+      "player": [
+        0,
+        -200,
+        -651.2
+      ]
+    },
+    {
+      "name": "bench-run",
+      "first": false,
+      "marineVisible": true,
+      "marinePosition": [
+        0,
+        -0.745223899247827,
+        0
+      ],
+      "camera": [
+        1.2,
+        -198,
+        -642.5
+      ],
+      "player": [
+        0,
+        -200,
+        -640.6700000000001
+      ]
+    },
+    {
+      "name": "bench-crouch",
+      "first": false,
+      "marineVisible": true,
+      "marinePosition": [
+        0,
+        -0.879698299526173,
+        0
+      ],
+      "camera": [
+        1.2,
+        -198,
+        -642.5
+      ],
+      "player": [
+        0,
+        -200,
+        -640.6700000000001
+      ]
+    },
+    {
+      "name": "build-north-wall-run",
+      "first": false,
+      "marineVisible": true,
+      "marinePosition": [
+        0,
+        -0.6990666274680983,
+        0
+      ],
+      "camera": [
+        -34.5,
+        -198,
+        -615
+      ],
+      "player": [
+        -36,
+        -200,
+        -612.75
+      ]
+    },
+    {
+      "name": "build-north-wall-run",
+      "first": false,
+      "marineVisible": true,
+      "marinePosition": [
+        0,
+        -0.7494509703745293,
+        0
+      ],
+      "camera": [
+        -34.5,
+        -198,
+        -615
+      ],
+      "player": [
+        -36,
+        -200,
+        -613.15
+      ]
+    }
+  ]
+}

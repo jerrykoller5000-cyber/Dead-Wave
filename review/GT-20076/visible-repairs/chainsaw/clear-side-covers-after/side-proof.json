@@ -1,0 +1,28 @@
+{
+  "rows": [
+    {
+      "side": 1,
+      "outerSamples": 19,
+      "open": false,
+      "innerShift": 0.02850000048056245
+    }
+  ],
+  "gaps": [
+    {
+      "lowerMm": 0,
+      "upperMm": 0.0078125
+    },
+    {
+      "lowerMm": 0,
+      "upperMm": 0.0078125
+    },
+    {
+      "lowerMm": 0,
+      "upperMm": 0.0078125
+    }
+  ],
+  "outward": [
+    0.1659999998882413,
+    0.1769999999701977
+  ]
+}

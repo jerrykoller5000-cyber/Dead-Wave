@@ -34,6 +34,9 @@ export function createZombieAbilityRuntime(env){
     }
     geometry.setAttribute('position',positions);geometry.setAttribute('color',colors);
     geometry.setAttribute('uv',new T.Float32BufferAttribute(uv,2));
+    // A basic node shader still asks WebGPU for this during pipeline warm-up.
+    const normals=new Float32Array(capacity*18);for(let i=0;i<capacity*6;i++)normals[i*3+1]=1;
+    geometry.setAttribute('normal',new T.Float32BufferAttribute(normals,3));
     const caps=new T.Float32BufferAttribute(new Float32Array(capacity*12),2);caps.setUsage(T.DynamicDrawUsage);geometry.setAttribute('acidCaps',caps);
     const ages=new T.Float32BufferAttribute(new Float32Array(capacity*6),1);ages.setUsage(T.DynamicDrawUsage);geometry.setAttribute('acidAge',ages);geometry.setDrawRange(0,0);
     const Material=T.MeshBasicNodeMaterial&&env.TSL?T.MeshBasicNodeMaterial:T.MeshBasicMaterial;

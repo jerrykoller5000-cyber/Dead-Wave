@@ -41,6 +41,85 @@ function trimSlabBack(mesh, component, localPlane, direction) {
   mesh.geometry.computeBoundingSphere();
 }
 
+// The side stripes are thin patches on the moulded surface. Intersect the drawn stripe
+// bounds with the actual surface triangles so the backing follows every rounded edge.
+const waspStripeCache = new WeakMap();
+function waspStripeGeometry(T, shell, number) {
+  let cache = waspStripeCache.get(T);
+  if (!cache) { cache = []; waspStripeCache.set(T, cache); }
+  if (cache[number]) return cache[number];
+
+  const z = .19 + number * .012, source = shell.attributes;
+  const limits = [[2,z,1], [2,z+.003,-1], [1,-.007,1], [1,.061,-1]];
+  function clip(poly, axis, limit, sign) {
+    const result = [];
+    for (let i = 0; i < poly.length; i++) {
+      const a = poly[i], b = poly[(i + 1) % poly.length];
+      const da = sign * (a[axis] - limit), db = sign * (b[axis] - limit);
+      if (da >= 0) result.push(a);
+      if (da * db < 0) {
+        const [lo,hi] = a[axis] < b[axis] ? [a,b] : [b,a];
+        const f = (limit - lo[axis]) / (hi[axis] - lo[axis]);
+        const cut = lo.map((n,k) => n + (hi[k] - n) * f);
+        cut[axis] = limit;
+        result.push(cut);
+      }
+    }
+    return result;
+  }
+  const points = [], ids = new Map(), triangles = [], boundary = new Map();
+  function pointId(p) {
+    const key = p.slice(0,3).map(n => Math.round(n * 1e8)).join(',');
+    if (!ids.has(key)) { ids.set(key, points.length); points.push(p); }
+    return ids.get(key);
+  }
+  const pos = source.position, norm = source.normal;
+  for (let i = 0; i < pos.count; i += 3) {
+    if (Math.max(pos.getZ(i),pos.getZ(i+1),pos.getZ(i+2)) < z ||
+        Math.min(pos.getZ(i),pos.getZ(i+1),pos.getZ(i+2)) > z+.003) continue;
+    let poly = [i,i+1,i+2].map(j => [pos.getX(j),pos.getY(j),pos.getZ(j),norm.getX(j),norm.getY(j),norm.getZ(j)]);
+    const [a,b,c] = poly;
+    const facing = (b[1]-a[1])*(c[2]-a[2]) - (b[2]-a[2])*(c[1]-a[1]);
+    if (Math.abs(facing) <= 1e-14) continue;
+    const side = Math.sign(facing);
+    for (const limit of limits) poly = clip(poly, ...limit);
+    for (let j = 1; j + 1 < poly.length; j++) {
+      const face = [poly[0],poly[j],poly[j+1]].map(pointId);
+      if (new Set(face).size < 3) continue;
+      triangles.push([face,side]);
+      for (let k = 0; k < 3; k++) {
+        const a = face[k], b = face[(k+1)%3], key = a<b ? a+','+b : b+','+a;
+        if (boundary.has(key)) boundary.delete(key); else boundary.set(key,[a,b,side]);
+      }
+    }
+  }
+  const positions = [], normals = [], uvs = [];
+  const backOffset = .000006, frontOffset = .0004;
+  function write(index, side, offset, nx, ny, nz) {
+    const p = points[index];
+    positions.push(p[0]+side*offset,p[1],p[2]); normals.push(nx,ny,nz); uvs.push(p[2]*4,p[1]*4);
+  }
+  for (const [face,side] of triangles) for (const front of [true,false]) {
+    const indices = front ? face : [face[0],face[2],face[1]];
+    for (const index of indices) {
+      const p = points[index], sign = front ? 1 : -1;
+      write(index,side,front ? frontOffset : backOffset,sign*p[3],sign*p[4],sign*p[5]);
+    }
+  }
+  for (const [i,j,side] of boundary.values()) {
+    const a = points[i], b = points[j], dy=b[1]-a[1], dz=b[2]-a[2], len=Math.hypot(dy,dz);
+    if (!len) continue;
+    const corners = [[i,backOffset],[j,backOffset],[j,frontOffset],[i,backOffset],[j,frontOffset],[i,frontOffset]];
+    for (const [id,offset] of corners) write(id,side,offset,0,side*dz/len,-side*dy/len);
+  }
+  const geo = new T.BufferGeometry();
+  geo.setAttribute('position',new T.Float32BufferAttribute(positions,3));
+  geo.setAttribute('normal',new T.Float32BufferAttribute(normals,3));
+  geo.setAttribute('uv',new T.Float32BufferAttribute(uvs,2));
+  geo.computeBoundingSphere(); geo.userData.shared=true; cache[number]=geo;
+  return geo;
+}
+
 // Shallow checkering is one small mesh per panel, then folded into the caller's
 // material batch. It uses the existing furniture material, so camo still works.
 function checkeredPanel(T, parent, mat, outline, x, spacing = .007, radius = .0012, exposed = () => true) {
@@ -444,6 +523,46 @@ function revolverCylinder(T, parent, mat, R, z0, z1, depth) {
 // The grip occupies fewer UVs than the longarm furniture. Sample a finer,
 // slightly sloped cut on its smooth back and both checkered panels.
 let revolverGrain;
+// Add two rows to the render mesh so a tapered cheek cannot bow a large flat triangle
+// through the separate checkering. Shared edges get identical interpolated vertices.
+function splitWalnutRows(T, source, levels) {
+  const {position, normal, uv} = source.attributes, positions = [], normals = [], uvs = [];
+  const vertex = i => [position.getX(i), position.getY(i), position.getZ(i),
+    normal.getX(i), normal.getY(i), normal.getZ(i), uv.getX(i), uv.getY(i)];
+  for (let i = 0; i < position.count; i += 3) {
+    let polygons = [[vertex(i), vertex(i + 1), vertex(i + 2)]];
+    for (const y of levels) {
+      const next = [];
+      for (const poly of polygons) {
+        if (!poly.some(p => p[1] < y) || !poly.some(p => p[1] > y)) { next.push(poly); continue; }
+        const lower = [], upper = [];
+        for (let j = 0; j < poly.length; j++) {
+          const p = poly[j], q = poly[(j + 1) % poly.length];
+          if (p[1] <= y) lower.push(p);
+          if (p[1] >= y) upper.push(p);
+          if ((p[1] - y) * (q[1] - y) >= 0) continue;
+          const [a, b] = p[1] < q[1] ? [p, q] : [q, p];
+          const fraction = (y - a[1]) / (b[1] - a[1]);
+          const cut = a.map((v, k) => v + (b[k] - v) * fraction);
+          cut[1] = y; lower.push(cut); upper.push(cut);
+        }
+        next.push(lower, upper);
+      }
+      polygons = next;
+    }
+    for (const poly of polygons) for (let j = 1; j < poly.length - 1; j++) {
+      for (const p of [poly[0], poly[j], poly[j + 1]]) {
+        positions.push(p[0],p[1],p[2]); normals.push(p[3],p[4],p[5]); uvs.push(p[6],p[7]);
+      }
+    }
+  }
+  const geometry = new T.BufferGeometry();
+  geometry.setAttribute('position', new T.Float32BufferAttribute(positions, 3));
+  geometry.setAttribute('normal', new T.Float32BufferAttribute(normals, 3));
+  geometry.setAttribute('uv', new T.Float32BufferAttribute(uvs, 2));
+  return geometry;
+}
+
 function revolverWalnutTexture(T) {
   if (!revolverGrain) {
     revolverGrain = walnutTexture(T).clone();
@@ -477,8 +596,10 @@ export function makeRevolverModel(ctx) {
   const CY = 0.057, CZ = 0.02, CR = 0.044, CH = 0.039, RC = 0.026;   // larger J78 cylinder; the chamber circle still meets the bore
 
   // --- Frame (blued). The rear: the recoil-shield block and the hammer's housing, its back running down into the grip.
-  K.slab([[-.021, .100], [-.050, .109], [-.064, .104], [-.074, .093], [-.080, .076], [-.082, .054], [-.080, .032], [-.075, .014], [-.066, .001],
-    [-.046, -.005], [-.021, -.004]], .064, frameFinish, { bevel: .011, segs: 4 });
+  // The lower outline meets the existing walnut crown at the visible material seam.
+  K.slab([[-.021, .100], [-.050, .109], [-.064, .104], [-.074, .093], [-.080, .076], [-.082, .054], [-.080, .032],
+    [-.078857, .027886], [-.072, .032], [-.060, .020], [-.042, .005], [-.021, -.0010098]],
+    .064, frameFinish, { bevel: .006, segs: 4 });
   K.lathe([[0, -.028], [.044, -.028], [.046, -.025], [.044, -.0205], [0, -.0205]], blued, { y: CY, z: 0, seg: 32 });   // the recoil shield behind the cylinder
   // the top strap over the cylinder, from the rear sight to the barrel's frame
   K.slab([[-.056, .1095], [-.044, .1145], [.064, .1145], [.074, .112], [.074, .0975], [-.044, .0975]], .036, frameFinish, { bevel: .003, segs: 3 });
@@ -513,7 +634,8 @@ export function makeRevolverModel(ctx) {
   for (const [y, z, x] of [[0.088, -0.061, 0.032], [0.028, -0.064, 0.032], [0.006, -0.034, 0.032], [0.006, 0.07, 0.030]]) D.screw(gun, x, y, z, { axis: 'x', side: 1, r: 0.0027, head: 0.0014, kind: 'slot' });
   D.groove(gun, { x: 0.032, y: 0.093, z: -0.044, axis: 'x', side: 1, along: 'z', len: 0.036, w: 0.0007 });
   D.groove(gun, { x: 0.032, y: 0.054, z: -0.075, axis: 'x', side: 1, along: 'y', len: 0.07, w: 0.0007 });
-  K.slab([[-.064, .062], [-.036, .062], [-.032, .058], [-.032, .049], [-.036, .045], [-.064, .045], [-.067, .0535]], .005, blued, { x: -.0335, bevel: .0015 });   // the thumbpiece
+  const thumbpiece = K.slab([[-.064, .062], [-.036, .062], [-.032, .058], [-.032, .049], [-.036, .045], [-.064, .045], [-.067, .0535]], .005, blued, { x: -.0335, bevel: .0015 });
+  trimSlabBack(thumbpiece, 0, -.032 - thumbpiece.position.x, -1);
   for (let i = 0; i < 6; i++) K.box(0.0012, 0.013, 0.0016, gunDark, -0.0362, 0.0535, -0.061 + i * 0.0045, 0, 0, 0, null, 0.0003);   // its grooves
   // The rear sight on the top strap (GB-308/313's adjustable sight, kept: the sight line runs through its notch).
   K.slab([[-0.013, 0.112], [0.013, 0.112], [0.013, 0.120], [-0.013, 0.120]], 0.026, gunDark, { bevel: 0.001, z: -0.050 });
@@ -704,25 +826,46 @@ export function makeRevolverModel(ctx) {
   // J78: keep the upper palm and trigger reach where the hands meet it, but shorten the
   // oversized lower target stock. The cylinder/frame now read as the dominant mass.
   const RK = 0.27, sh = ([z, y]) => [z + Math.min(0, y) * RK, y < -0.07 ? -0.07 + (y + 0.07) * 0.72 : y];
-  const gripWidth=.066;
-  K.slab([[.014, -.006], [.010, -.030], [.004, -.060], [-.002, -.090], [-.006, -.118], [-.006, -.140], [-.002, -.158], [-.006, -.172], [-.018, -.180],
+  const gripWidth = .066, palmInset = .004;
+  const stock = K.slab([[.014, -.006], [.010, -.030], [.004, -.060], [-.002, -.090], [-.006, -.118], [-.006, -.140], [-.002, -.158], [-.006, -.172], [-.018, -.180],
     [-.045, -.183], [-.075, -.181], [-.094, -.174], [-.102, -.160], [-.100, -.135], [-.094, -.105], [-.088, -.075], [-.084, -.045], [-.084, -.015],
     [-.086, .010], [-.082, .026], [-.072, .032], [-.060, .020], [-.042, .005], [-.017, -.002]].map(sh), gripWidth, walnut, { bevel: .010, segs: 4 });
+  // Seat the painted crown under the frame while tapering into the glove's lower contact.
+  const stockSource = stock.geometry;
+  stock.geometry = splitWalnutRows(THREE, stockSource, [-.022, .006]);
+  stockSource.dispose();
+  const woodVertices = stock.geometry.attributes.position, woodNormals = stock.geometry.attributes.normal;
+  const faceNormal = new THREE.Vector3();
+  for (let i = 0; i < woodVertices.count; i++) {
+    const x = woodVertices.getX(i), y = woodVertices.getY(i);
+    if (x <= 0 || y >= .006) continue;
+    const t = Math.max(0, (y + .022) / .028);
+    const side = Math.min(1, x / .020), inset = palmInset * (1 - t * t * (3 - 2 * t));
+    woodVertices.setX(i, x - side * inset);
+    if (t > 0 || side < 1) {
+      faceNormal.fromBufferAttribute(woodNormals, i);
+      if (side < 1) faceNormal.x /= 1 - inset / .020;
+      faceNormal.y -= faceNormal.x * side * palmInset * 6 * t * (1 - t) / .028;
+      faceNormal.normalize();
+      woodNormals.setXYZ(i, faceNormal.x, faceNormal.y, faceNormal.z);
+    }
+  }
+  stock.geometry.computeBoundingBox();
+  stock.geometry.computeBoundingSphere();
   const panel = [[-.004, -.040], [-.010, -.080], [-.016, -.115], [-.018, -.140], [-.022, -.160], [-.045, -.168], [-.075, -.166], [-.086, -.152], [-.084, -.120],
     [-.078, -.088], [-.074, -.055], [-.072, -.035], [-.060, -.026], [-.020, -.028]].map(sh);
   const med = sh([-.058, -.031]), scr = sh([-.046, -.074]);
   for (const sx of [-1, 1]) {
-    const inset = K.slab(panel, .0012, walnutDark, { x: sx * .0329, bevel: .0004 });
-    // The side touching the glove keeps its original grain and bevel.
-    trimSlabBack(inset, 0, sx * gripWidth / 2 - inset.position.x, sx);
-    checkeredPanel(THREE, gun, walnut, panel, sx * .0336, .0042, .0013);
-    K.cyl(0.0072, 0.0072, 0.0016, nickel, sx * 0.0338, med[1], med[0], null, 18, 'x');   // the medallion
-    K.cyl(0.0058, 0.0058, 0.0018, gunDark, sx * 0.0339, med[1], med[0], null, 18, 'x');
-    K.cyl(0.0044, 0.0044, 0.002, nickel, sx * 0.034, med[1], med[0], null, 16, 'x');
-    // Keep the silver trim nearly flush with the flat grip panel. The slotted
-    // head sits on its outer face, so the drive mark follows the same stack.
-    K.cyl(0.0042, 0.0042, 0.0006, nickel, sx * 0.0336, scr[1], scr[0], null, 14, 'x');
-    D.screw(gun, sx * 0.0339, scr[1], scr[0], { axis: 'x', side: sx, r: 0.0026, head: 0.0012, kind: 'slot' });
+    // Move the artwork together on the firing glove's side, including its inset trim.
+    const faceX = distance => sx * distance - (sx > 0 ? palmInset : 0);
+    const inset = K.slab(panel, .0012, walnutDark, { x: faceX(.0329), bevel: .0004 });
+    trimSlabBack(inset, 0, faceX(gripWidth / 2) - inset.position.x, sx);
+    checkeredPanel(THREE, gun, walnut, panel, faceX(.0336), .0042, .0013);
+    K.cyl(0.0072, 0.0072, 0.0016, nickel, faceX(.0338), med[1], med[0], null, 18, 'x');
+    K.cyl(0.0058, 0.0058, 0.0018, gunDark, faceX(.0339), med[1], med[0], null, 18, 'x');
+    K.cyl(0.0044, 0.0044, 0.002, nickel, faceX(.034), med[1], med[0], null, 16, 'x');
+    K.cyl(0.0042, 0.0042, 0.0006, nickel, faceX(.0336), scr[1], scr[0], null, 14, 'x');
+    D.screw(gun, faceX(.0339), scr[1], scr[0], { axis: 'x', side: sx, r: 0.0026, head: 0.0012, kind: 'slot' });
   }
 
   gunEffects(gun, new THREE.Vector3(0, BY, 0.35), 0.045, 2.8, 6, 0.005);
@@ -779,7 +922,8 @@ export function makeUziModel(ctx) {
         trimSlabBack(rib, 0, sx * receiverWidth / 2 - rib.position.x, sx);
       }
     }
-    K.slab([[-.116, -.035], [.077, -.035], [.081, -.017], [-.116, -.017]], .003, gunDark, {x: sx * .0494, bevel: .001});
+    const lowerTrim = K.slab([[-.116, -.035], [.077, -.035], [.081, -.017], [-.116, -.017]], .003, gunDark, {x: sx * .0494, bevel: .001});
+    trimSlabBack(lowerTrim, 0, sx * receiverWidth / 2 - lowerTrim.position.x, sx);
     for (const z of [-.112, .073]) D.rivet(gun, sx * .0509, -.025, z, { axis: 'x', side: sx, r: 0.0032, mat: D.mats.dark });   // GB-309: spot welds (was floating accent cyl)
   }
   const topCover = K.slab([[-.13, .074], [.2, .074], [.2, .09], [.192, .098], [-.11, .104], [-.123, .1], [-.13, .092]], .09, coverSteel, {bevel: .009, segs: 3});
@@ -906,10 +1050,12 @@ export function makeUziModel(ctx) {
   gun.userData.baseMagPos = mag.position.clone();
   gun.userData.baseMagRot = mag.rotation.clone();
   // Front of the receiver, the knurled barrel nut, the threaded barrel.
-  K.slab([[.18, -.002], [.187, -.013], [.319, -.016], [.334, -.009], [.34, .001], [.34, .058], [.331, .067], [.185, .07], [.18, .061]], .08, gunPoly, {bevel: .016, segs: 4});
-  for (let j = 0; j < 12; j++) {
-    const z = .19 + j * .012;
-    const rib = K.slab([[z, -.007], [z + .003, -.007], [z + .003, .061], [z, .061]], .0808, gunDark, {bevel: .0015, segs: 2});
+  const foreEnd = K.slab([[.18, -.002], [.187, -.013], [.319, -.016], [.334, -.009], [.34, .001], [.34, .058], [.331, .067], [.185, .07], [.18, .061]], .08, gunPoly, {bevel: .011, segs: 4});
+  // The first three painted intervals are fully hidden inside the opaque body.
+  for (let j = 3; j < 12; j++) {
+    const rib = new THREE.Mesh(waspStripeGeometry(THREE, foreEnd.geometry, j), gunDark);
+    rib.castShadow = rib.receiveShadow = true;
+    gun.add(rib);
     markPaintSurface(rib, 'furniture');
   }
   for (const sx of [-1, 1]) for (const z of [.198, .324]) K.cyl(.0038, .0038, .0016, gunDark, sx * .0407, .002, z, null, 12, 'x');

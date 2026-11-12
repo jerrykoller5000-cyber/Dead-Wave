@@ -1,32 +1,32 @@
 # Claude 2
 
-state: active
+state: idle
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: CB-307 t221's last red (Director's (a), 19:1xZ): the third-person firing hand leaves the grip and works the sniper's bolt between shots, the gun held where it is; t221 checks the firing palm on the knob (--review); pictures after
-touching: index.html (holdShoulderGun, sniper bolt cycle), tools/tests/t221.js
-since: 2026-11-11T19:19Z
-next: CB-307 GT-20081's returns to me: fakethree Group.copy keeps name/vi
+task: —
+touching: —
+since: 2026-11-11T22:02Z
+next: CB-290 J126 rule 3 (Jerry, 10 Nov, standing, D-138): "No part of th
 blocked-on: —
-last-report: handoffs/2026-11-11-claude2-CB-308.md
+last-report: handoffs/2026-11-11-claude2-CB-290b.md
 
 ## Notes
 
-### context nearly full, needs a new session (claude2, 11 Nov 17:5xZ; session from 15:13Z, Opus 5.5)
-- Done: GP-20100 gate PASS. CB-290 (CB-291's reds) out 17:04Z --review: holdFreeShoulders keeps a held gun's aim (heldGunOn);
-  t229's akimbo carries the pair. CB-306 done (t213 burst, t225: game-time waits). CB-307 out --review, NOT done: fakethree
-  copy + material defaults (+ tools/tests/fakethree-copy.test.mjs), t334 rack seed, gunHeavyLook sleeve painted (markPaintSurface).
-- NEXT (in order): (1) CB-307's pictures DONE (review/CB-307/ sheets, 18:3xZ). (2) t221/t277 under CB-307 (Director OK'd,
-  --review): t221 the bolt knob on the shooter's right in first person AND on the marine's right in third, the case thrown
-  right (views disagree = report a mirrored-eye defect); t277 the scope tube's real centre line at screen centre when aimed
-  (3 mm), never the camera's own anchor. Then CB-307 --done.
-  (3) t213 (a) approved by the Director: re-seat CARRY_M240.at [0.41,1.14,0.05] (updateCarryPose) on CC-340's shoulder (receiver
-  < 0.3 m from armRG), nothing into his head or pack, before/after pictures; (b) the folded legs went to ChatGPT.
-  (4) caseLook for the launcher (metalness 0.18/roughness 0.78, reset pool defaults on reuse; ChatGPT 2's request, my LATER).
-- A background job in the cloud dies when the turn ends: keep long runs inside one turn (poll with sleeps).
-- Cloud pictures WORK now: review/CB-290/lights290.mjs pattern (real index.html via tools/cdp launch headless, ?debug=1&raf=timer,
-  wait for DWOpening.active === false up to 500 s; ~6 min load, ~30 s a shot). Run it with crew.mjs slot run in the cloud.
-- Cloud recipe: tar on the PC into Claude outputs/<task>/cloud-src.tgz (Working notes below) + cloud-src2.tgz (assets/intro
-  *.js *.css, assets/soundtrack *.json *.mid); CHROME_ARGS=--no-sandbox DW_CHECK_MS=420000; ~2-4 min a test.
+### Where things stand (claude2, fresh session from 18:40Z, Opus 5.5; 21:3xZ)
+- Done this session: t277 (the scope's real centre line from its lenses; aimed, the eye 1.00 mm off it, the line at screen
+  centre; 45/0). CB-308 (t213: the shouldered check waits for the 0.58 s lift, 0.17 m settled; case colour read as shown,
+  sRGB) accepted. CB-307's bolt hand: in third person the firing hand works the sniper's bolt (index.html holdShoulderGun +
+  sniperKnobWorld, SNIPER_KNOB_HAND keeps the fist out of the scope); t221 32/0 (firing hand on the knob, support on the
+  forend, 0 mm into the scope). Landed on the PC 21:2xZ. Pictures: review/CB-307/sheet-bolt-*.jpg (after re-rendered final).
+- 22:1xZ: CB-307 accepted; CB-290's arms half out (tcb290/tcb290b + arms-clip.js, 13/0 each). NOW: the Director's full
+  suite on the PC tree of 22:03Z in the cloud (one worker, ~391 tests, ~13 h): /home/claude/full/drive.sh, resumable,
+  results per test in /home/claude/full/res/<name>.log (a lost container means re-staging Claude outputs/gate2211/*.tgz
+  into /home/claude/g). Compare each red with the PC's crew/tests.json as of 22:08Z (baseline: 5972 pass / 44 fail),
+  list the NEW reds with the card and owner that caused each, send each owner its own, tests-to-fix vs game. Then CB-290's rest.
+- Pictures in the cloud: real time only (a shot each, the cycle held at its moment from inside the page). Frame-stepped
+  pictures (flightHold + stepFrame) draw the arms from before the hold. review/CB-307/bolt307.mjs is the pattern.
+  timeout >= 3000 s for a two-phase set (each phase ~25 min at 4 fps); the turn must stay alive while it runs.
+- Cloud copy: Claude outputs/cb307s2/cloud-src*.tgz (PC 18:39Z) in /home/claude/cb; patches in Claude outputs/cb307s2/.
+- No 5080 looks from Antigravity (D-162): cloud captures, four lights, same cameras.
 
 ### Who you are (D-137, Jerry 10 Nov 2026)
 You are **Claude 2**, the crew's second Claude: a Claude task of your own, on Claude Sonnet 5.5 (Extra). You took

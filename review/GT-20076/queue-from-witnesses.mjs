@@ -5,7 +5,16 @@ const phase=process.argv[2];assert(/^catalog-fix-[a-z0-9-]+$/.test(phase));
 const evidence='visibility-fix-launcher-rear',reference='catalog-fix-launcher-rear';
 const read=async f=>JSON.parse(await readFile(new URL('./'+f,import.meta.url),'utf8'));
 const [recorded,old,now]=await Promise.all([read(evidence+'/ranked.json'),read(reference+'/audit.json'),read(phase+'/audit.json')]);
+const nineWaspStripes=process.argv.includes('--wasp-nine-stripes');
 function originalLabel(model,name){
+  if(model==='uzi' && nineWaspStripes){
+    return name.replace(/^(root\/[^/\[]+)\[(\d+)\]/,(all,prefix,n)=>Number(n)>=56?prefix+'['+(Number(n)+3)+']':all);
+  }
+  // Both closed ends of the launcher graphic inherit its original identity. The
+  // partner, position and penetration depth still have to match the old picture.
+  if(model==='launcher')return name
+    .replace(/^(root\/heatParts-barrel\[\d+\]\/BufferGeometry\[0\])~[01]$/,'$1')
+    .replace(/^root\/BufferGeometry\[(39|40|42)\]$/,'root/CylinderGeometry[$1]');
   if(model!=='pistol')return name;
   // Removing the duplicate first child shifted the other children down by one.
   return name.replace(/^(root\/group\[30\]\/[^/\[]+)\[(\d+)\]/,(all,prefix,n)=>prefix+'['+(Number(n)+1)+']');

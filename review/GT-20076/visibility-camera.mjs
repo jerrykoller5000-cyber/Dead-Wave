@@ -101,7 +101,7 @@ export function makeViews(T,wallPoseMode=false,includeOpenFloor=false) {
   async function pose(view, testSpot=null) {
     const openFloor=view.endsWith('-open');
     if(openFloor)view=view.slice(0,-5);
-    const eye=['hip','aimed','aim-entry'].includes(view), rackView=view==='rack';
+    const eye=['hip','aimed','aim-entry','pack-off'].includes(view), rackView=view==='rack';
     frozen=false; T.setShotView(null); T.setViewFirstDbg(eye); T.setZoomHeldDbg(view==='aimed');
     const range=T.trainingDbg.tg();
     // Downrange positions are clamped at the firing line. The floor five units
@@ -113,7 +113,10 @@ export function makeViews(T,wallPoseMode=false,includeOpenFloor=false) {
     let saved;
     if(wall && wallPoseMode==='replay'){
       const reference=window.recordedArtViews?.[openFloor?view+'-open':view];
-      if(!reference || Math.hypot(reference.actualSpot[0]-spot[0],reference.actualSpot[2]-spot[1])>.001)throw Error('Original wall pose is at another spot');
+      if(!reference || Math.hypot(reference.spot[0]-spot[0],reference.spot[1]-spot[1])>.001)
+        throw Error('Original wall pose requested another spot');
+      if(Math.hypot(reference.actualSpot[0]-T.player.position.x,reference.actualSpot[1]-T.player.position.y,reference.actualSpot[2]-T.player.position.z)>.001)
+        throw Error('Resolved wall pose is at another spot');
       saved=reference.nativePose;restoreActorPose(saved);
     }
     if(openFloor && !testSpot){
@@ -121,6 +124,16 @@ export function makeViews(T,wallPoseMode=false,includeOpenFloor=false) {
       const boxes=[...range.solids.filter(b=>!b.floor && b.target==null),...(T.trainingDbg.state().cameraCollision?.boxes||[])];
       const near=b=>b.maxY>p.y+.4 && b.minY<p.y+2.2 && p.x>b.minX-1.8 && p.x<b.maxX+1.8 && p.z>b.minZ-1.8 && p.z<b.maxZ+1.8;
       if(Math.hypot(p.x-spot[0],p.z-spot[1])>.05 || boxes.some(near))throw Error('Clear-floor artwork position is obstructed or clamped');
+    }
+    let packPose;
+    if(view==='pack-off'){
+      if(id!=='flamer')throw Error('Fuel pack view requires the flamer');
+      T.setAmmoDbg(id,0);T.startReload();T.reloadClipDbg.hold(.40);step(4);
+      const state=T.getReloadDbg(),drawn=T.viewmodelDbg().gun,part=drawn.fuelCan,base=drawn.fuelCanBase?.pos;
+      const elapsed=1-state.timer/state.anim;
+      if(state.weapon!==id||Math.abs(elapsed-.40)>.002||!part||part.position.distanceTo(base)<.01)
+        throw Error('Fuel pack did not detach '+JSON.stringify({state,elapsed,part:part?.position.toArray(),rest:base?.toArray()}));
+      packPose={phase:elapsed,position:part.position.toArray(),rest:base.toArray()};
     }
     if(view==='aim-entry') {
       T.setZoomHeldDbg(true);
@@ -181,7 +194,7 @@ export function makeViews(T,wallPoseMode=false,includeOpenFloor=false) {
       nativePose.eye=eyePoint.toArray();nativePose.target=eyePoint.clone().add(camera.getWorldDirection(new G.Vector3())).toArray();nativePose.fov=camera.fov;
     }
     return {points,eye,glassHidden,fov:eye?null:camera.fov,target:rackView?'whole displayed rack':'isolated held artwork',
-      nativePose,recordedWallPose:!!saved,spot,actualSpot:T.player.position.toArray(),heldElevation:eye||rackView?null:Math.asin(Math.max(-1,Math.min(1,forward.y)))*180/Math.PI};
+      nativePose,packPose,recordedWallPose:!!saved,spot,actualSpot:T.player.position.toArray(),heldElevation:eye||rackView?null:Math.asin(Math.max(-1,Math.min(1,forward.y)))*180/Math.PI};
   }
   async function mask(normal,repeat,hidden) {
     const decode=async str=>{

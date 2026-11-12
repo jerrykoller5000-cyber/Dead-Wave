@@ -1,0 +1,116 @@
+{
+  "sourceMeshes": 157,
+  "stationary": 148,
+  "changed": [
+    {
+      "mesh": 116,
+      "name": "",
+      "mat": "Revolver walnut",
+      "count": 1428,
+      "taper": {
+        "fixed": 831,
+        "lower": 466,
+        "blend": 131,
+        "missing": 0,
+        "normalError": 2.8847449704608415e-8,
+        "dxMin": -0.004,
+        "dxMax": 0,
+        "sourceCount": 1428,
+        "finalCount": 2064,
+        "sourceUV": "9cfbf1653e5356963c39172291cd2fce34430edf120ffa469f6e2d170dde8e56",
+        "sourceNormals": "ec74ccb9822c63a3b87060e392195e81ddd4a7abd1203ffd5ee5162b52bddc2b",
+        "originalSurfaceKeysOffRows": 240
+      }
+    },
+    {
+      "mesh": 125,
+      "name": "",
+      "mat": "Revolver walnut inset",
+      "count": 492,
+      "side": "right",
+      "dx": -0.004,
+      "minBefore": 0.032999999997473786,
+      "minAfter": 0.028999999997473786
+    },
+    {
+      "mesh": 126,
+      "name": "",
+      "mat": "Revolver walnut",
+      "count": 1560,
+      "side": "right",
+      "dx": -0.003999998793005943,
+      "minBefore": 0.03359999880194664,
+      "minAfter": 0.029600000008940697
+    },
+    {
+      "mesh": 127,
+      "name": "",
+      "mat": "",
+      "count": 112,
+      "side": "right",
+      "dx": -0.004,
+      "minBefore": 0.0330000000202097,
+      "minAfter": 0.029000000020209696
+    },
+    {
+      "mesh": 128,
+      "name": "",
+      "mat": "",
+      "count": 112,
+      "side": "right",
+      "dx": -0.004,
+      "minBefore": 0.033000000015459954,
+      "minAfter": 0.029000000015459954
+    },
+    {
+      "mesh": 129,
+      "name": "",
+      "mat": "",
+      "count": 100,
+      "side": "right",
+      "dx": -0.004,
+      "minBefore": 0.03299999995250255,
+      "minAfter": 0.02899999995250255
+    },
+    {
+      "mesh": 130,
+      "name": "",
+      "mat": "",
+      "count": 88,
+      "side": "right",
+      "dx": -0.004,
+      "minBefore": 0.03329999998575076,
+      "minAfter": 0.029299999985750762
+    },
+    {
+      "mesh": 131,
+      "name": "",
+      "mat": "",
+      "count": 88,
+      "side": "right",
+      "dx": -0.004,
+      "minBefore": 0.033300000015459956,
+      "minAfter": 0.029300000015459956
+    },
+    {
+      "mesh": 132,
+      "name": "",
+      "mat": "",
+      "count": 24,
+      "side": "right",
+      "dx": -0.003999999999999997,
+      "minBefore": 0.03489999999287538,
+      "minAfter": 0.030899999992875384
+    }
+  ],
+  "texture": "fa4832e567719dc3eb837c90bdfd12657e8c73a588ef2393366c41e422af9242",
+  "textureRepeat": [
+    6.8,
+    3.1
+  ],
+  "triggerPin": [
+    0,
+    -0.008,
+    0.036
+  ]
+}
