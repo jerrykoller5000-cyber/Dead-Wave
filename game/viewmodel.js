@@ -15,7 +15,7 @@
 //
 // index.html calls update(dt, state) each frame before it draws and place() in renderFrame; it asks muzzleWorld()
 // where the view gun's muzzle appears (the laser leaves from there).
-import { VM, VM_POSES, VM_RELOADS, VM_SOCKETS, VM_BLADES, VM_GRENADE, VM_HANDS, VM_TRIGGER, VM_CONTROLS, VM_LIGHT } from './viewmodel-poses.js';
+import { VM, VM_POSES, VM_RELOADS, VM_SOCKETS, VM_BLADES, VM_GRENADE, VM_HANDS, VM_TRIGGER, VM_CONTROLS, VM_SELECT, VM_LIGHT } from './viewmodel-poses.js';
 import { SIGHT } from './sight-points.js';
 import { buildViewArm, wristSpacePoint, HAND_SCALE } from '../studio/fp-arms.js';
 import { copyPose, lerpPose, HAND_POSES } from '../studio/marine-hand.js';
@@ -1014,29 +1014,47 @@ export function createViewmodel(ctx) {
     if (!R0 || !R || !R.tactical || R0.tacticalRack || !R0.mag) return u;
     return u * Math.min(0.9, (R0.mag.seat || 0.6) + 0.1);
   }
+  // CE-9b (J149: "... as separate moving parts the hands can work"): a row with a hand in VM_SELECT (game/viewmodel-poses.js)
+  // waits for its digit: on a change (X, or the gun coming up past VM_SELECT.upAt) the firing thumb (or index) goes onto
+  // the lever in H.reach s, the lever turns under it (the row's time), the digit stays H.hold s, then goes back to the grip
+  // in H.back s; ctlHand[name].e is how far the digit is on (0..1). Going down (or the gun put away for a blade) the
+  // safety goes back with the raise as before. The digit's values follow the lever's angle (H.at/H.v, handCtlPose).
+  const ctlHand = {};
   function controlStates(g, st, dt) {
     const C = (info.tune.controls && info.tune.controls[g.key]) || VM_CONTROLS[g.key]; if (!C) return;   // live: info.tune.controls = { <key>: rows }
-    if (ctlAng.gun !== g) { for (const k in ctlAng) delete ctlAng[k]; ctlAng.gun = g; }
+    if (ctlAng.gun !== g) { for (const k in ctlAng) delete ctlAng[k]; for (const k in ctlHand) delete ctlHand[k]; ctlAng.gun = g; }
+    const HS = (info.tune.select && info.tune.select[g.key]) || VM_SELECT[g.key];   // live: info.tune.select = { <key>: { <control>: H } }
     const ub = reloadBeatU(g, st), out = info.controls = {};
     for (const name in C) {
       const R = C[name], part = g.ctrls[name];
       if (!R || !part || part.parent == null) continue;
+      const H = HS && HS[name] && !gun2 ? HS[name] : null;
       let want = 0;
       if (R.turns) want = st.fireMode && R.turns[st.fireMode] != null ? R.turns[st.fireMode] : R.fixed && R.turns[R.fixed] != null ? R.turns[R.fixed] : 0;
       else {
         let k = 0;
-        if (R.ready) k = Math.max(k, smooth(S.raise));
+        if (R.ready && H) k = Math.max(k, S.rising && S.raise > VM_SELECT.upAt ? 1 : Math.min(smooth(S.raise), ctlAng[name] != null && (R.turn || R.slide) ? Math.abs(ctlAng[name] / (R.turn || R.slide)) : 1));
+        else if (R.ready) k = Math.max(k, smooth(S.raise));
         if (R.fire && st.fireHeld && S.raise > 0.98) k = Math.max(k, 1);
         if (R.reload && !(R.empty && st.reloadEmpty === false)) for (const b of (Array.isArray(R.reload[0]) ? R.reload : [R.reload])) k = Math.max(k, beats(ub, b));
         if (R.unload && S.unloadW) k = Math.max(k, beats(clamp(S.unloadW.u, 0, 1), R.unload));
         want = k * (R.turn != null ? R.turn : R.slide || 0);
       }
       const id = name; let a = ctlAng[id];
-      if (a == null) a = want;
+      const hd = H ? (ctlHand[id] || (ctlHand[id] = { e: 0, h: 0 })) : null;
+      if (a == null) a = H && R.ready ? 0 : want;   // with a hand the safety starts on (the gun comes up from below)
       else if ((R.reload || R.unload) && !R.ready && !R.fire && !R.turns) a = want;   // a reload's beats are their own easing
       else if (R.ready && !R.fire && !R.turns && Math.abs(want) < Math.abs(a) && !(R.reload && ub != null)) a = want;   // back on safe with the gun as it goes down (the raise is the easing)
+      else if (hd && Math.abs(want - a) > 1e-5 && hd.e < 1) { /* the lever waits for the digit */ }
       else { const span = Math.abs(R.turns ? (R.turns.auto != null && R.turns.semi != null ? R.turns.auto - R.turns.semi : want) : (R.turn != null ? R.turn : R.slide || 0)) || 1;
         const step = span * (dt / (R.time || 0.12)); a += Math.max(-step, Math.min(step, want - a)); }
+      const HH = info.tune.handHold;   // the cloud's strips: { control, a, e } holds a lever (and its digit) still
+      if (HH && HH.control === name) { a = HH.a; if (hd) { hd.e = HH.e; hd.h = 0; } }
+      else if (hd) {
+        if (Math.abs(want - a) > 1e-5 && !(R.ready && Math.abs(want) < Math.abs(a))) { hd.h = 0; hd.e = Math.min(1, hd.e + dt / H.reach); }
+        else if ((hd.h += dt) > H.hold) hd.e = Math.max(0, hd.e - dt / H.back);
+      }
+      if (hd) hd.a = a;
       ctlAng[id] = a; out[name] = a;
       if (Math.abs(a) < 1e-6) continue;
       ctlAxis(R.axis, _ctlA);
@@ -1047,6 +1065,44 @@ export function createViewmodel(ctx) {
       part.position.sub(_ctlP).applyQuaternion(_ctlQ).add(_ctlP); part.quaternion.premultiply(_ctlQ);
     }
     if (out.selector != null) info.selector = out.selector;
+  }
+  // CE-9b: the busiest VM_SELECT control (the digit most of the way on), its row's values at the lever's angle: the hand's
+  // move (x: [dx, dy, dz] in the gun's space and a roll phi about the gun's z through the palm H.palm, so the digit can
+  // reach) and the digit's values, eased in by e. handCtlMove moves the firing wrist before the arm is posed; handCtlPose
+  // puts the digit's values on the hand's pose after the trigger finger has been set.
+  let _hcPose = copyPose(HAND_POSES.relaxed);
+  const _hc = { H: null, name: null, e: 0, a: 0, k: 0, i: 0, u: 0 }, _hcM = F(), _hcGi = F(), _hcW = F(), _hcV = V3(), _hcP0 = V3();
+  function handCtlPick(g) {
+    _hc.H = null; info.handCtl = null;
+    const HS = (info.tune.select && info.tune.select[g.key]) || VM_SELECT[g.key];
+    if (!HS || ctlAng.gun !== g || gun2) return null;
+    let best = null, bn = null;
+    for (const n in ctlHand) if (HS[n] && ctlHand[n].e > 1e-4 && (!best || ctlHand[n].e > best.e)) { best = ctlHand[n]; bn = n; }
+    if (!best) return null;
+    const H = HS[bn], at = H.at, a = best.a;
+    let i = 0; while (i < at.length - 2 && (at[1] > at[0] ? a > at[i + 1] : a < at[i + 1])) i++;
+    _hc.H = H; _hc.name = bn; _hc.e = best.e; _hc.a = a; _hc.k = smooth(best.e); _hc.i = i; _hc.u = clamp((a - at[i]) / ((at[i + 1] - at[i]) || 1), 0, 1);
+    info.handCtl = { control: bn, digit: H.digit || 'thumb', e: best.e, a };
+    return _hc;
+  }
+  function handCtlMove(W, e) {
+    const H = _hc.H; if (!H || !H.x) return;
+    const A = H.x[_hc.i], B = H.x[_hc.i + 1], u = _hc.u, lx = (j) => A[j] + (B[j] - A[j]) * u;
+    const phi = lx(3), c = Math.cos(phi), sn = Math.sin(phi), P = H.palm;
+    _hcM.q.set(0, 0, Math.sin(phi / 2), Math.cos(phi / 2)); _hcM.s = 1;
+    _hcM.p.set(P[0] + lx(0) - (c * P[0] - sn * P[1]), P[1] + lx(1) - (sn * P[0] + c * P[1]), P[2] + lx(2) - P[2]);
+    _hcGi.q.copy(G.q).invert(); _hcGi.s = 1 / G.s; _hcGi.p.copy(G.p).multiplyScalar(-_hcGi.s).applyQuaternion(_hcGi.q);
+    mul(_hcGi, W, _hcW); mul(_hcM, _hcW, _hcW); mul(G, _hcW, _hcW);
+    _hcP0.copy(W.p); lerpF(W, _hcW, _hc.k, W);
+    _hcV.copy(W.p).sub(_hcP0); e[0] += _hcV.x; e[1] += _hcV.y; e[2] += _hcV.z;
+  }
+  function handCtlPose(g, pose) {
+    const H = _hc.H; if (!H) return null;
+    const A = H.v[_hc.i], B = H.v[_hc.i + 1], u = _hc.u, k = _hc.k;
+    _hcPose = copyPose(pose, _hcPose);
+    const dst = H.digit === 'index' ? _hcPose.f[0] : _hcPose.t;
+    for (let j = 0; j < A.length; j++) { const v = A[j] + (B[j] - A[j]) * u; dst[j] = dst[j] + (v - dst[j]) * k; }
+    return _hcPose;
   }
   // CE-4 (J16; ChatGPT 2's GT-20084 switch): 2 in first person, the light's switch pressed by the support thumb (index.html
   // st.lightPress: t s since the key; the light changes at VM_LIGHT's 'at', the pad fully in). The hand leaves its hold,
@@ -1480,6 +1536,9 @@ export function createViewmodel(ctx) {
     if (BLON) { poseR = sockets.poseR; poseL = POSE_RELAXED; bladeFrame(BL, st.blade, WR, WL, eR, eL); }
     else if (blade) blade.root.visible = false;
     if (HN) { const hp = handsFrame(HN, st.hands, WR, WL, eR, eL, dt); poseR = hp.r; poseL = hp.l; }
+    // CE-9b: the firing hand onto a selector or safety (VM_SELECT): the wrist's move first, the digit after the trigger
+    _hc.H = null; info.handCtl = null;
+    if (!BLON && !HN && !GRN && u == null && handCtlPick(gun)) handCtlMove(WR, eR);
     mirrorWorn(arms.r, 1); mirrorWorn(arms.l, -1);
     info.wrist.r = poseArm(arms.r, WR, eR, VM.wristMax);
     info.wrist.l = poseArm(arms.l, WL, eL, VM.wristMax);
@@ -1517,6 +1576,8 @@ export function createViewmodel(ctx) {
         tp.position.sub(_trgP).applyQuaternion(_trgQ).add(_trgP); tp.quaternion.premultiply(_trgQ);
       }
     } else { S.trig = 0; info.trigger = null; }
+    // CE-9b: the firing thumb (or index) on a selector or safety while VM_SELECT's row has it there (controlStates above)
+    if (_hc.H && (poseR === gripP || poseR === _trigPose)) { const hp = handCtlPose(gun, poseR); if (hp) poseR = hp; }
     // CL-334 h (J126 rule 2: "No part of the hand may clip through any part of a weapon"): where this gun's hold presses the
     // hand into its grip, the hand gives (studio/hand-contacts.js); it fades as the hand's pose leaves the hold's.
     // CE-2: with the index on the trigger, the give without the index's own (the rest of the hand keeps its give)

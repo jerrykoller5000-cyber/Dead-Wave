@@ -1,0 +1,137 @@
+{
+  "pairs": [
+    {
+      "phase": "before",
+      "view": "side",
+      "light": "noon",
+      "cameraMatched": true,
+      "lightMatched": true,
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "phase": "after",
+      "view": "side",
+      "light": "noon",
+      "cameraMatched": true,
+      "lightMatched": true,
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "phase": "before",
+      "view": "three",
+      "light": "noon",
+      "cameraMatched": true,
+      "lightMatched": true,
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "phase": "after",
+      "view": "three",
+      "light": "noon",
+      "cameraMatched": true,
+      "lightMatched": true,
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "phase": "before",
+      "view": "side",
+      "light": "overcast",
+      "cameraMatched": true,
+      "lightMatched": true,
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "phase": "after",
+      "view": "side",
+      "light": "overcast",
+      "cameraMatched": true,
+      "lightMatched": true,
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "phase": "before",
+      "view": "three",
+      "light": "overcast",
+      "cameraMatched": true,
+      "lightMatched": true,
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "phase": "after",
+      "view": "three",
+      "light": "overcast",
+      "cameraMatched": true,
+      "lightMatched": true,
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "phase": "before",
+      "view": "side",
+      "light": "dusk",
+      "cameraMatched": true,
+      "lightMatched": true,
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "phase": "after",
+      "view": "side",
+      "light": "dusk",
+      "cameraMatched": true,
+      "lightMatched": true,
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "phase": "before",
+      "view": "three",
+      "light": "dusk",
+      "cameraMatched": true,
+      "lightMatched": true,
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "phase": "after",
+      "view": "three",
+      "light": "dusk",
+      "cameraMatched": true,
+      "lightMatched": true,
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "phase": "before",
+      "view": "side",
+      "light": "night",
+      "cameraMatched": true,
+      "lightMatched": true,
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "phase": "after",
+      "view": "side",
+      "light": "night",
+      "cameraMatched": true,
+      "lightMatched": true,
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "phase": "before",
+      "view": "three",
+      "light": "night",
+      "cameraMatched": true,
+      "lightMatched": true,
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "phase": "after",
+      "view": "three",
+      "light": "night",
+      "cameraMatched": true,
+      "lightMatched": true,
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    }
+  ],
+  "cameraAndBoundsIdentical": true,
+  "nativeSize": [
+    1280,
+    720
+  ]
+}

@@ -781,3 +781,33 @@ export const VM_CONTROLS = Object.freeze({
     stopSwitch: { axis: 'x', turn: -0.4, ready: true, time: 0.1 }   // the rocker over to run
   }
 });
+
+// CE-9b (J149, D-177: "safeties, selectors, charging handles and bolt catches as separate moving parts the hands can
+// work"; J130): the firing hand works a VM_CONTROLS row: its thumb (digit 'thumb', the six thumb values) or index
+// ('index', the four of f[0]) goes onto the lever before it moves, rides it and goes back to the grip (game/viewmodel.js
+// controlStates, handCtlPick/handCtlMove/handCtlPose). at: the lever's turns (rad, as the row's) where the hand was solved
+// in the cloud (Claude 5's solve-node on the gun's exported triangles: the digit's pad (VM_LIGHT's) onto the lever's outer
+// half, the hand where VM_FIT puts it moved as little as it can, the digit and fingers kept out of the gun's closed parts);
+// between them the values follow the lever. palm: the palm's point (gun space) the hand turns about; x[i]: the hand's
+// move at at[i] (dx, dy, dz in the gun's space, phi about the gun's z through the palm); v[i]: the digit's values there.
+// reach / hold / back (s): onto the lever, kept on it after it stops, back to the grip. upAt: a safety with a hand comes
+// off once the raise is past this (the digit reaches it on the way up).
+// The KR-7's index leaves the trigger for the long lever's tab and pushes it down (auto) or up (semi); the sniper's thumb
+// rocks its safety off as the gun comes up. Left without a hand for now (the parts move as in CE-9): the GW-4's selector
+// and the rotary gun's safety (solved, but the glove as drawn stays 7-14 mm off the GW-4's lever and goes 2-9 mm into the
+// guns: next), the Breacher's selector (the thumb or index is 19-41 mm short of it, or 12-15 mm into the receiver,
+// without the hand leaving the grip), the flamer's and the launcher's safeties (12-50 mm short, or the thumb through the
+// grip), the pump gun's cross-bolt, the rotary gun's arming switch, the Wasp's grip safety (the palm squeezes it).
+export const VM_SELECT = Object.freeze({
+  upAt: 0.3,
+  ak: {
+    selector: { digit: 'index', reach: 0.09, hold: 0.06, back: 0.14, palm: [0.0285, -0.1532, -0.1285], at: [0.05, 0.075, 0.1],
+      x: [[-0.0057, 0.0125, 0.0192, 0.0276], [-0.0047, 0.0121, 0.0147, -0.0312], [-0.0061, 0.0096, 0.0114, 0.0344]],
+      v: [[-0.186, 0, 0.042, 0.254], [-0.086, 0, -0.08, 0.168], [-0.18, 0, -0.08, 0.18]] }   // the pad 0.01 mm off the lever, the hand moved 16.2 mm; 0.05 mm off the lever, the hand moved 13.5 mm; 0.01 mm off the lever, the hand moved 11 mm
+  },
+  sniper: {
+    safety: { digit: 'thumb', reach: 0.1, hold: 0.05, back: 0.14, palm: [0.0539, -0.1275, -0.1043], at: [0, 0.175, 0.35],
+      x: [[0.002, -0.0022, 0.0046, -0.0327], [0.002, -0.0022, 0.0046, -0.0327], [0.002, -0.0022, 0.0046, -0.0527]],
+      v: [[0.76, 0.758, 0.118, -0.775, 0.66, -0.339], [0.76, 0.758, 0.118, -0.775, 0.66, -0.339], [0.78, 0.753, 0.118, -0.78, 0.65, -0.339]] }   // the pad 0.01 mm off the lever, the hand moved 4 mm; 0.02 mm off the lever, the hand moved 4 mm; 0 mm off the lever, the hand moved 4 mm
+  },
+});

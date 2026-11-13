@@ -1,0 +1,63 @@
+{
+  "shots": [
+    {
+      "target": "weapon.rune-pistol",
+      "view": "side",
+      "pre": "await DWInspect.light('noon')",
+      "size": "1280x720",
+      "out": "review/GT-20103/before-native/side-noon.png"
+    },
+    {
+      "target": "weapon.rune-pistol",
+      "view": "three",
+      "pre": "await DWInspect.light('noon')",
+      "size": "1280x720",
+      "out": "review/GT-20103/before-native/three-noon.png"
+    },
+    {
+      "target": "weapon.rune-pistol",
+      "view": "side",
+      "pre": "await DWInspect.light('overcast')",
+      "size": "1280x720",
+      "out": "review/GT-20103/before-native/side-overcast.png"
+    },
+    {
+      "target": "weapon.rune-pistol",
+      "view": "three",
+      "pre": "await DWInspect.light('overcast')",
+      "size": "1280x720",
+      "out": "review/GT-20103/before-native/three-overcast.png"
+    },
+    {
+      "target": "weapon.rune-pistol",
+      "view": "side",
+      "pre": "await DWInspect.light('dusk')",
+      "size": "1280x720",
+      "out": "review/GT-20103/before-native/side-dusk.png"
+    },
+    {
+      "target": "weapon.rune-pistol",
+      "view": "three",
+      "pre": "await DWInspect.light('dusk')",
+      "size": "1280x720",
+      "out": "review/GT-20103/before-native/three-dusk.png"
+    },
+    {
+      "target": "weapon.rune-pistol",
+      "view": "side",
+      "pre": "await DWInspect.light('night')",
+      "size": "1280x720",
+      "out": "review/GT-20103/before-native/side-night.png"
+    },
+    {
+      "target": "weapon.rune-pistol",
+      "view": "three",
+      "pre": "await DWInspect.light('night')",
+      "size": "1280x720",
+      "out": "review/GT-20103/before-native/three-night.png"
+    }
+  ],
+  "out": "review/GT-20103/before-native",
+  "cols": 2,
+  "tile": 480
+}

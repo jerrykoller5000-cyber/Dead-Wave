@@ -1,13 +1,13 @@
 # ChatGPT 2
 
-state: idle
+state: active
 model: GPT-6.1 Sol (Medium effort)
-task: —
-touching: —
-since: 2026-11-12T22:55Z
-next: GT-20079 (17:15Z, UN-PARKED (J149): each modeler does camo-per-part o
+task: GT-20104 J151 pistol separable slide/barrel mechanism, then revolver scale/grip/hammer/cylinder
+touching: studio/weapon-sidearms.js, review/GT-20104
+since: 2026-11-13T00:51Z
+next: GT-20104 J151 P3 (D-179), notes 2, 7: the pistol's slide locks back a
 blocked-on: —
-last-report: handoffs/2026-11-12-chatgpt2-GT-20099.md
+last-report: handoffs/2026-11-13-chatgpt2-GT-20103.md
 
 ## Notes
 
@@ -15,7 +15,7 @@ last-report: handoffs/2026-11-12-chatgpt2-GT-20099.md
 
 context nearly full, needs a new session
 
-GT-20099 FINAL confirming DONE22:49Z:13 native files151/3, raw review/GT-20099/confirming/, report appended (original preserved). Redstce4 P/R/AK lightpress(C5), tcl334d STILLnative chainsaw6.4mm(C6 request, despitecloudclear), tgb255b spidercorner(C2AI; first14/0now13/1). AKtcl334c now5/0; handguns5/0each.1mm; t33316/0. Indexdelta batch1 EXACTCB324Trainingflashwarmup provenbefore/posthash; other24fixed, batch2/3all25fixed; no immutabletreeclaim. GT20102done: dotnative46/0/4lights, modelunchanged; C2CB323fixedfakeflagcloud46/0. GT20101correct.45component report with Director, blockedC5reloadringat75%old9mm1.761/new.452.248mm; doNOTrestore9mm. Case22.8/live32.4/rim12.2, tcb294b25/0; lipgap<=.008mm, extension/count/settledhands pass, maggeometryunchanged. Model editsonlyloanedcaseentry/tip+roundheight.002749. C5acknowledgedreloadfixafterCE9b; privateclosed-roundcoveragefixflagged--review. t242topround-only confirmed/privateexclude15/0, officialtestunchangedC2review. Allownerartpartsaccepted exceptcomponentreviewpending; fleetumbrellasGT79/77Director. Standbyforreview/namedowntask; no hidden/proportionwork, no git; allgamesescalatedslots. Lastnote22:43Z.
+GT-20103 ACTIVE: Director00:11Z split confirmed: C2 #3 owns CB-325 index.html makeRunePistol fix in cloud; I own native four-light before/after and unchanged t173 after RESUME. Root cause: markPaintSurface clones gunPoly/tagged weaponFinishRole=frame; old FUR identity-only rune swap misses clone. NO sidearms/model edit needed, NO index loan to me. C2 notified to let me capture BEFORE before landing after RESUME. PAUSE since23:04Z: no PC edits/game runs until Jerry releases MANUAL-GAME or DirectorRESUME. Catalog weapon.rune-pistol exists; native camera recipe ready. Prior J149 components accepted, final13 GT20099 151/3 (C5 lightpress, C6 native chainsaw6.4mm, C2 spider). GT20101 .45 caliber accepted; C5 owns75%reloadring2.248mm. GT79/77 fleet umbrellas Director-owned; no hidden/proportion work. No git; escalated slot only for games. Standby2.5min repeat, heartbeat<=15min.
 
 Earlier exterior, camo, casing, detail and CE-2 acceptances are in the 11 Nov GT-20076/77/79/80 handoffs. The KR-7 laminate and D-152 budget were accepted on GT-20082 and GT-20081. Keep previous test expectations and the crew slot.
 

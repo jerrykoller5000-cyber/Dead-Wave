@@ -1,0 +1,143 @@
+{
+  "shots": [
+    {
+      "target": "weapon.rune-pistol",
+      "view": "side",
+      "cam": {
+        "x": -25.634315384763926,
+        "y": -198.8872300118447,
+        "z": -631.9330079656127,
+        "tx": -26,
+        "ty": -198.90000000000003,
+        "tz": -631.9330079656127,
+        "fov": 35
+      },
+      "pre": "await DWInspect.light(\"noon\")",
+      "wait": 500,
+      "size": "1280x720",
+      "out": "review/GT-20103/after-verified/side-noon.png"
+    },
+    {
+      "target": "weapon.rune-pistol",
+      "view": "three",
+      "cam": {
+        "x": -25.65191731038099,
+        "y": -198.65889952459835,
+        "z": -631.5181791697394,
+        "tx": -26,
+        "ty": -198.90000000000003,
+        "tz": -631.9330079656127,
+        "fov": 35
+      },
+      "pre": "await DWInspect.light(\"noon\")",
+      "wait": 500,
+      "size": "1280x720",
+      "out": "review/GT-20103/after-verified/three-noon.png"
+    },
+    {
+      "target": "weapon.rune-pistol",
+      "view": "side",
+      "cam": {
+        "x": -25.634315384763926,
+        "y": -198.8872300118447,
+        "z": -631.9330079656127,
+        "tx": -26,
+        "ty": -198.90000000000003,
+        "tz": -631.9330079656127,
+        "fov": 35
+      },
+      "pre": "await DWInspect.light(\"overcast\")",
+      "wait": 500,
+      "size": "1280x720",
+      "out": "review/GT-20103/after-verified/side-overcast.png"
+    },
+    {
+      "target": "weapon.rune-pistol",
+      "view": "three",
+      "cam": {
+        "x": -25.65191731038099,
+        "y": -198.65889952459835,
+        "z": -631.5181791697394,
+        "tx": -26,
+        "ty": -198.90000000000003,
+        "tz": -631.9330079656127,
+        "fov": 35
+      },
+      "pre": "await DWInspect.light(\"overcast\")",
+      "wait": 500,
+      "size": "1280x720",
+      "out": "review/GT-20103/after-verified/three-overcast.png"
+    },
+    {
+      "target": "weapon.rune-pistol",
+      "view": "side",
+      "cam": {
+        "x": -25.634315384763926,
+        "y": -198.8872300118447,
+        "z": -631.9330079656127,
+        "tx": -26,
+        "ty": -198.90000000000003,
+        "tz": -631.9330079656127,
+        "fov": 35
+      },
+      "pre": "await DWInspect.light(\"dusk\")",
+      "wait": 500,
+      "size": "1280x720",
+      "out": "review/GT-20103/after-verified/side-dusk.png"
+    },
+    {
+      "target": "weapon.rune-pistol",
+      "view": "three",
+      "cam": {
+        "x": -25.65191731038099,
+        "y": -198.65889952459835,
+        "z": -631.5181791697394,
+        "tx": -26,
+        "ty": -198.90000000000003,
+        "tz": -631.9330079656127,
+        "fov": 35
+      },
+      "pre": "await DWInspect.light(\"dusk\")",
+      "wait": 500,
+      "size": "1280x720",
+      "out": "review/GT-20103/after-verified/three-dusk.png"
+    },
+    {
+      "target": "weapon.rune-pistol",
+      "view": "side",
+      "cam": {
+        "x": -25.634315384763926,
+        "y": -198.8872300118447,
+        "z": -631.9330079656127,
+        "tx": -26,
+        "ty": -198.90000000000003,
+        "tz": -631.9330079656127,
+        "fov": 35
+      },
+      "pre": "await DWInspect.light(\"night\")",
+      "wait": 500,
+      "size": "1280x720",
+      "out": "review/GT-20103/after-verified/side-night.png"
+    },
+    {
+      "target": "weapon.rune-pistol",
+      "view": "three",
+      "cam": {
+        "x": -25.65191731038099,
+        "y": -198.65889952459835,
+        "z": -631.5181791697394,
+        "tx": -26,
+        "ty": -198.90000000000003,
+        "tz": -631.9330079656127,
+        "fov": 35
+      },
+      "pre": "await DWInspect.light(\"night\")",
+      "wait": 500,
+      "size": "1280x720",
+      "out": "review/GT-20103/after-verified/three-night.png"
+    }
+  ],
+  "out": "review/GT-20103/after-verified",
+  "cols": 2,
+  "tile": 480
+}

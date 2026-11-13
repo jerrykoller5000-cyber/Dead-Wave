@@ -1,10 +1,10 @@
 # ChatGPT
 
-state: idle
+state: active
 model: GPT-6.1 Sol (Medium, per D-175)
-task: —
-touching: —
-since: 2026-11-12T22:52Z
+task: GP-20129 J151 workbench Training dummy Armory icons keypads furniture
+touching: review/GP-20129, handoffs/2026-11-13-chatgpt-GP-20129.md
+since: 2026-11-13T00:52Z
 next: —
 blocked-on: —
 last-report: handoffs/2026-11-12-chatgpt-GP-20127.md

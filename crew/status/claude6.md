@@ -1,10 +1,10 @@
 # Claude 6
 
-state: idle
-model: Claude Opus 5.5
-task: —
-touching: —
-since: 2026-11-12T22:35Z
+state: active
+model: Claude Opus 5.5 (claude-opus-5-5)
+task: CF-8 J151 P1: chainsaw glow on trigger (34), flamer sizzle lingering (53)
+touching: studio/weapon-heavy.js (chainsaw, flamer)
+since: 2026-11-13T00:47Z
 next: —
 blocked-on: —
 last-report: handoffs/2026-11-12-claude6-CF-6.md

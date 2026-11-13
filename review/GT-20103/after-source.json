@@ -1,0 +1,5 @@
+{
+  "at": "2026-11-13T00:49:11.248Z",
+  "indexSha256": "3ced2024c447c9e55efedfb0728df6e229965f9e80599ed6696dd72bbfc28c27",
+  "runeBuilder": "    function makeRunePistol() {\r\n      const g = makePistol();\r\n      const FUR = new Set([woodMat, woodDark, gunPoly, gunOlive, gunTan]);\r\n      const tex = camoTile(RUNE_FINISH_KEY);\r\n      const mat = new THREE.MeshStandardMaterial({ color: 0xe6e2d6, map: tex, roughness: 0.6, metalness: 0.03, emissive: 0xffffff, emissiveMap: runeFinish.glowTex || null, emissiveIntensity: 0.3 });\r\n      // CB-325: since J149 the pistol's coat is its own finish per part (partFinish, a weaponFinishRole on each coated\r\n      // material, as the paint registry reads it), not the shared furniture; those parts take the rune finish too.\r\n      g.traverse((o) => { if (o.isMesh && (FUR.has(o.material) || (g.userData.partFinish && o.material?.userData?.weaponFinishRole))) o.material = mat; });\r\n      g.name = 'rune-pistol';\r\n      return g;\r\n    }\r\n"
+}

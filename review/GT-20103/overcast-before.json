@@ -1,0 +1,20 @@
+{
+  "shots": [
+    {
+      "target": "weapon.rune-pistol",
+      "view": "side",
+      "pre": "await DWInspect.light('overcast')",
+      "size": "1280x720",
+      "out": "review/GT-20103/before/side-overcast.png"
+    },
+    {
+      "target": "weapon.rune-pistol",
+      "view": "three",
+      "pre": "await DWInspect.light('overcast')",
+      "size": "1280x720",
+      "out": "review/GT-20103/before/three-overcast.png"
+    }
+  ],
+  "out": "review/GT-20103/before-overcast",
+  "cols": 2
+}

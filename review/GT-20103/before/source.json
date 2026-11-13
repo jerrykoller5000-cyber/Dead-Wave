@@ -1,0 +1,5 @@
+{
+  "at": "2026-11-13T00:38:11.419Z",
+  "indexSha256": "416bb67ef03c4f1a74adeda792a7d6629089392b728006aac1300a51371892e5",
+  "runeBuilder": "    function makeRunePistol() {\r\n      const g = makePistol();\r\n      const FUR = new Set([woodMat, woodDark, gunPoly, gunOlive, gunTan]);\r\n      const tex = camoTile(RUNE_FINISH_KEY);\r\n      const mat = new THREE.MeshStandardMaterial({ color: 0xe6e2d6, map: tex, roughness: 0.6, metalness: 0.03, emissive: 0xffffff, emissiveMap: runeFinish.glowTex || null, emissiveIntensity: 0.3 });\r\n      g.traverse((o) => { if (o.isMesh && FUR.has(o.material)) o.material = mat; });\r\n      g.name = 'rune-pistol';\r\n      return g;\r\n    }\r\n"
+}

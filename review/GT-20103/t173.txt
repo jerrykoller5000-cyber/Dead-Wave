@@ -1,0 +1,2 @@
+ok    t173     12 pass   0 fail  55.0s  (real renderer)
+1 checks: 12 pass, 0 fail (real renderer)

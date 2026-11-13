@@ -1,10 +1,10 @@
 # Claude 2
 
-state: idle
+state: active
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: —
-touching: —
-since: 2026-11-12T22:40Z
+task: CB-325 t173: the ending's rune pistol takes the rune finish on its J149 per-part coat
+touching: index.html (makeRunePistol)
+since: 2026-11-13T00:46Z
 next: CB-315 (15:05Z, CLAUDE DIRECTOR: vendor half bar met (899.7 to 449.
 blocked-on: —
 last-report: handoffs/2026-11-12-claude2-CB-324.md
@@ -27,6 +27,9 @@ last-report: handoffs/2026-11-12-claude2-CB-324.md
 - Also landed late (for review): CB-322 t217 probes (KR-7 0.78, pump 0.92; the pump can is really 3.87x its barrel: Director's
   call), CB-323 fakethree MeshBasicMaterial flag (t277 46/0), CB-324 the unlit flash compiles in the Training warm again
   (setFlashWarm; CB-317 had made its pipeline build at the first shot). ChatGPT reruns GP-20127's first-shot probe on the 5080.
+- Overnight suite progress (00:2xZ 13 Nov): chunks 1-5 of 16 done (100 tests, from t0 to ~t18x in name order): all green except the
+  cloud's missing gh music (t106, t106b, t172, t178) and t173 11/1 "its furniture is the rune finish" (new tonight; likely the
+  pistol's J149 paint roles, ChatGPT 2). Chunks 6-16 (211 tests) still to run: a fresh session reruns them on the current tree.
 - Overnight suite: 311 tests in 16 chunks on the 20:21Z tree (+ tonight's index.html and fakethree); chunk 1 green except the
   cloud's gh music (t106, t106b); chunk 2 restarted ~22:4xZ. A fresh session: rebuild a cloud copy and run the chunks after the
   last reported one (the 311 = every t*.js minus gate pass A's 53, ChatGPT 2's 13 and Claude 6's pass B list).

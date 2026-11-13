@@ -1,10 +1,10 @@
 # Claude 3
 
-state: idle
+state: active
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: —
-touching: —
-since: 2026-11-12T19:24Z
+task: CC-347 J151 note 8: floating holsters/pouches/gear off the body on a fresh reload, every kit+weapon combination seated; with CB-314's side MOLLE bars
+touching: studio/marine-body.js, index.html (buildCarryRig and the carry plan/mount section), tools/tests/tcc347.js (new)
+since: 2026-11-13T00:50Z
 next: CC-344 (18:30Z, CLAUDE DIRECTOR: part 2 accepted (pouches on the be
 blocked-on: —
 last-report: handoffs/2026-11-12-claude3-CC-346-gw4.md
