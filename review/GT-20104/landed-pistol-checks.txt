@@ -1,0 +1,23 @@
+ok    tce11    13 pass   0 fail  33.8s  (real renderer)
+    INFO the shot: slide back 54.1 gun mm; the barrel back 4.0, down 10.0, turned -0.050 rad
+    INFO empty reload (u: slide gun mm / barrel down mm): 0.05:70.0/10.0 0.3:70.0/10.0 0.6:70.0/10.0 0.7:70.0/10.0 0.8:75.6/10.0 0.88:75.6/10.0 0.95:0.0/0.0 0.99:0.0/0.0
+    INFO tactical reload: 0.3:0.0 0.6:0.0 0.8:70.0 0.95:0.0
+ok    tcb333    5 pass   0 fail  32.3s  (real renderer)
+ok    tce10    29 pass   0 fail  44.0s  (real renderer)
+    INFO shotgun frame 0: dot y 56.3, window y 45.1, half-height 32.3 x0.001 ndc
+    INFO shotgun frame 1: dot y 51.0, window y 39.9, half-height 31.9 x0.001 ndc
+    INFO shotgun frame 2: dot y 45.3, window y 34.4, half-height 31.4 x0.001 ndc
+    INFO shotgun frame 8: dot y 19.6, window y 9.2, half-height 29.6 x0.001 ndc
+    INFO shotgun frame 16: dot y 1.4, window y 0.3, half-height 29.0 x0.001 ndc
+    INFO shotgun frame 24: dot y -0.9, window y -0.2, half-height 29.0 x0.001 ndc
+    INFO shotgun frame 32: dot y -0.2, window y -0.0, half-height 29.0 x0.001 ndc
+    INFO m4 frame 0: dot y 38.8, window y 25.0, half-height 39.6 x0.001 ndc
+    INFO m4 frame 1: dot y 35.8, window y 22.1, half-height 39.2 x0.001 ndc
+    INFO m4 frame 2: dot y 32.5, window y 19.0, half-height 38.8 x0.001 ndc
+    INFO m4 frame 8: dot y 15.2, window y 5.1, half-height 37.0 x0.001 ndc
+    INFO m4 frame 16: dot y 0.6, window y 0.2, half-height 36.5 x0.001 ndc
+    INFO m4 frame 24: dot y -0.4, window y -0.1, half-height 36.4 x0.001 ndc
+    INFO m4 frame 32: dot y -0.1, window y -0.0, half-height 36.4 x0.001 ndc
+    INFO note 12: 86 unload frames; paddle travel per shell (gun mm): 0:2.00 1:0.00 2:0.00 3:0.00
+    INFO GT-20101 rack (u: round/gun view mm, slide shape gun mm): 0.65:0.0/0.0/0.0 0.66:0.0/0.0/0.0 0.67:0.0/0.0/0.0 0.68:0.0/0.0/0.0 0.69:0.0/0.0/0.0 0.70:0.0/0.0/0.0 0.71:0.0/0.0/0.0 0.72:0.0/0.0/0.9 0.76:0.0/0.0/0.9 0.84:0.0/0.0/0.9 0.88:0.0/0.0/0.9 0.91:0.0/0.0/0.0 0.93:0.0/0.0/0.0 0.95:0.0/0.0/0.0 0.97:0.0/0.0/0.0 0.98:0.0/0.0/0.0
+3 checks: 47 pass, 0 fail (real renderer)

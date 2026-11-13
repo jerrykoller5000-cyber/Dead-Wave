@@ -219,13 +219,19 @@ const VM_STAGE2_RELOADS = Object.freeze({
       [.54, { pos: [-.055, .065, .015], rot: [.12, .23, -.28] }],
       [.62, { pos: [-.052, .075, .012], rot: [.10, .20, -.25] }],
       [.78, { pos: [-.032, .045, 0], rot: [.18, .08, -.08] }], [1, null]],
-    hand: [[0, 'fore', 'fore'], [.08, 'well', 'mag'], [.19, 'below', 'mag'],
+    // CE-10 (note 17): from the hold down under the magazine and up to it, and out to the lower's left before the bolt catch
+    // (it went straight through the magazine and the magazine well both ways)
+    hand: [[0, 'fore', 'fore'], [.045, 'below', 'open'], [.08, 'well', 'mag'], [.19, 'below', 'mag'],
       [.34, 'pouch', 'mag'], [.38, 'pouch', 'pouch'], [.52, 'below', 'mag'],
-      [.62, 'well', 'mag'], [.66, 'well', 'cup'], [.76, 'work', 'open'],
+      [.62, 'well', 'mag'], [.66, 'well', 'cup'], [.71, 'out', 'open'], [.76, 'work', 'open'],
       [.82, 'work', 'open'], [.88, 'fore', 'fore'], [1, 'fore', 'fore']],
     mag: { grab: .12, swapOut: .335, swapIn: .385, seat: .62 },
-    places: { well: { z: [0, .94, .34], y: [-.55, -.34, -.76] }, below: { drop: .14 },
-      work: { at: [-.03, -.03, .105], z: [-1, .05, .1], y: [-.35, -.65, -.65] },   // CL-310: the bolt catch on the slim lower
+    // CE-10 (J151 note 17, Jerry: "GW-4: the arm clips throughout the reload"): the palm 20 gun mm under the magazine's foot
+    // and a looser hold round it (its thumb up the side), so the hand carries the magazine instead of going through it (6-12 mm)
+    poses: { mag: { f: [0.55, 0.6, 0.65, 0.7], t: [0.2, 0.3, 0.1] } },
+    places: { well: { z: [0, .94, .34], y: [-.55, -.34, -.76], off: [0, -0.02, 0] }, below: { drop: .14 },
+      work: { at: [-.09, 0, .105], z: [-1, .05, .1], y: [-.35, -.65, -.65] },   // CL-310: the bolt catch on the slim lower (CE-10: was [-.03, -.03]: the hand 16 mm in the lower; now beside it, 2.8 mm left)
+      out: { at: [-.11, -.06, .1], z: [1, 0, .1], y: [-.35, -.65, -.65] },   // CE-10: beside the magazine well's left, on the way up to the catch
       pouch: { at: [-.29, -.51, -.32], z: [.25, .9, .3], y: [-.4, -.6, .65] } }
   },
   ak: {
@@ -241,7 +247,7 @@ const VM_STAGE2_RELOADS = Object.freeze({
     // CL-322 (the AK manual, GP-20056's lugs): out, the catch pressed, the magazine rocks forward on its front lug at the
     // well (.12-.17) and only then comes down; in, it arrives tilted with the front lug in the well (.555) and rocks back
     // on it until the rear lug catches (.585-.64). The palm turns about the lug with it (rock.pivot, mag-local).
-    hand: [[0, 'fore', 'fore'], [.10, 'well', 'mag'], [.17, 'well', 'mag'], [.22, 'below', 'mag'],
+    hand: [[0, 'fore', 'fore'], [.05, 'below', 'open'], [.10, 'well', 'mag'], [.17, 'well', 'mag'], [.22, 'below', 'mag'],   // CE-10: [.05] up from under the magazine, not through it
       [.34, 'pouch', 'mag'], [.38, 'pouch', 'pouch'], [.50, 'below', 'mag'],
       [.555, 'well', 'mag'], [.64, 'well', 'mag'], [.67, 'well', 'cup'], [.76, 'work', 'pinch'],
       [.83, 'work', 'pinch'], [.90, 'fore', 'fore'], [1, 'fore', 'fore']],
@@ -249,7 +255,10 @@ const VM_STAGE2_RELOADS = Object.freeze({
     elbowL: [-0.28, -0.30, 0.04],   // CE-3: the support elbow low and out to the left as the hand leaves the hold
     rock: { out: [.12, .17], in: [.585, .64], angle: .27, pivot: [0, .012, .066] },
     rack: [.76, .80, .83, .045],
-    places: { well: { z: [.15, .90, .41], y: [-.60, -.28, -.75] }, below: { drop: .16 },
+    // CE-10 (J151 notes 23, 28: the forearm through the KR-7's magazine, the arm through its reload): the palm under the
+    // magazine's foot and to its left, a looser hold round it (was 9-12 mm of thumb and palm inside it)
+    poses: { mag: { f: [0.55, 0.6, 0.65, 0.7], t: [0.2, 0.3, 0.1] } },
+    places: { well: { z: [.15, .90, .41], y: [-.60, -.28, -.75], off: [-0.006, -0.018, 0] }, below: { drop: .16 },
       work: { at: [.041, .02, .13], z: [.65, .25, -.72], y: [-.7, .15, -.4] },   // CL-311: the knob on the slim receiver
       pouch: { at: [-.31, -.54, -.35], z: [.25, .9, .3], y: [-.4, -.6, .65] } }
   },
@@ -304,13 +313,16 @@ const VM_STAGE3_RELOADS = Object.freeze({
       [.62, { pos: [-.045, .07, .02], rot: [.08, .16, -.20] }],
       [.78, { pos: [-.035, .055, .02], rot: [.17, .06, -.10] }],
       [.94, { pos: [-.025, .035, .01], rot: [.11, .03, -.05] }], [1, null]],
-    hand: [[0, 'fore', 'fore'], [.10, 'well', 'mag'], [.17, 'below', 'mag'],
+    hand: [[0, 'fore', 'fore'], [.05, 'below', 'open'], [.10, 'well', 'mag'], [.17, 'below', 'mag'],   // CE-10: [.05] up from under the magazine, not through it
       [.30, 'pouch', 'mag'], [.34, 'pouch', 'pouch'], [.45, 'below', 'mag'],
       [.54, 'well', 'mag'], [.58, 'well', 'cup'], [.62, 'work', 'pinch'],
       [.72, 'work', 'pinch'], [.83, 'work', 'pinch'], [.94, 'work', 'pinch'],
       [1, 'fore', 'fore']],
     mag: { grab: .10, swapOut: .295, swapIn: .345, seat: .54 },
-    places: { well: { z: [0, .96, .28], y: [.60, -.28, -.75] }, below: { drop: .14 },
+    // CE-10 (J151 note 43: "the left hand does something weird when reloading"): the palm 30 gun mm under the magazine's
+    // foot, a looser hold round it (its thumb was 18 mm inside the magazine)
+    poses: { mag: { f: [0.55, 0.6, 0.65, 0.7], t: [0.2, 0.3, 0.1] } },
+    places: { well: { z: [0, .96, .28], y: [.60, -.28, -.75], off: [0, -0.03, 0] }, below: { drop: .14 },
       work: { part: 'bolt', grab: [-.075, .012, .02], z: [-.8, .1, -.6], y: [.6, -.25, -.76] },
       pouch: { at: [-.32, -.54, -.34], z: [.25, .9, .3], y: [-.4, -.6, .65] } }
   },
@@ -623,13 +635,14 @@ export const VM_RELOADS = Object.freeze({
     hand: [
       [0.00, 'fore', 'fore'], [0.10, 'well', 'mag'], [0.17, 'below', 'mag'], [0.31, 'pouch', 'mag'], [0.36, 'pouch', 'pouch'],
       [0.50, 'below', 'mag'], [0.60, 'well', 'mag'], [0.64, 'well', 'cup'], [0.655, 'low', 'open'], [0.675, 'side', 'open'], [0.695, 'over', 'open'], [0.715, 'work', 'rack'],
-      [0.89, 'work', 'rack'], [0.925, 'work', 'open'], [0.94, 'over', 'open'], [0.955, 'side', 'open'], [0.975, 'low', 'open'], [1.00, 'fore', 'fore']
+      [0.89, 'work', 'rack'], [0.925, 'work', 'open'], [0.94, 'over', 'loose'], [0.955, 'side', 'loose'], [0.975, 'low', 'open'], [1.00, 'fore', 'fore']
     ],
     // CE-9 (GT-20101, ChatGPT 2's witness: the support ring finger 2.2 mm into the .45 live round at 75%; and, measured
     // against the slide's whole outer shape, the palm and the pinch's curled fingers went right through the slide all
     // through the rack): the overhand rack grip, the fingers laid along the slide's right side behind the port, the thumb
     // along its left, the palm on the top of its rear serrations (was 'pinch', a shell's grip, palm 17 mm into the slide)
-    poses: { rack: { f: [0.45, 0.45, 0.45, 0.45], t: [0.3, 0, 0.2] } },
+    // (CLAUDE DIRECTOR 13 Nov: the open hand's index and middle read as a V at .96; on the way round it is a relaxed hand)
+    poses: { rack: { f: [0.45, 0.45, 0.45, 0.45], t: [0.3, 0, 0.2] }, loose: { f: [0.12, 0.14, 0.16, 0.18], t: [0.3, 0, 0.2] } },
     mag: { grab: 0.10, swapOut: 0.305, swapIn: 0.375, seat: 0.60 },
     elbowL: [-0.28, -0.30, 0.04],   // CE-3: the support elbow low and out to the left as the hand leaves the hold
     rack: [0.72, 0.76, 0.89, 0.07],   // AG-168: the slide back over [0], [1], forward at [2]; travel (gun units)
@@ -679,7 +692,11 @@ export const VM_TRIGGER = Object.freeze({
   // 1.6 mm off it two thirds down; the double action's pull (index.html's st.triggerPull) turns the blade back its 0.36 rad
   // as the hammer rises and the cylinder turns, and the finger follows it (follow: the blade's turn at full travel); the
   // glove 0.13 mm at most into the blade (the pad's give), nothing else of the hand in the gun
-  revolver: { part: 'trigger', rest: [0, 0.7, 0.01, -0.06], pull: [0, 0.8, 0.16, 0], pivot: null, turn: 0, follow: 0.36, hold: 0.06, release: 0.09 },
+  // CG-5 (13 Nov, Claude 7 on the Director's loan; GT-20104's last blocker: on Claude 1's 04:45Z refit for ChatGPT 2's FINAL
+  // revolver the index lay 2.6 mm in the new guard at rest): from Claude 1's idxgrid start, re-solved in the cloud against
+  // the gun as drawn: at rest the pad 0.5 mm off the blade, nothing in the guard; through the double action's pull (the
+  // blade back its 0.36 rad) it follows within 1.5 mm, 0.06 mm at most into the gun (was 2.7-3.1 mm at rest and pulled)
+  revolver: { part: 'trigger', rest: [-0.3, 1.5, 1.2, 0.1], pull: [-0.25, 1.6, 1.25, 0.1], pivot: null, turn: 0, follow: 0.36, hold: 0.06, release: 0.09 },
   // the pump gun (CE-2, 11 Nov, on Claude 1's 10:00Z refit of its firing hand): the pad 5 mm off the face 43% down the blade,
   // nothing of the index in the guard or the blade, at rest or pulled; 4 mm at the face, the blade on its pin
   shotgun: { part: 'trigger', rest: [-0.2, 0.585, 0.895, 0.17], pull: [-0.2, 0.645, 0.985, 0.17], pivot: null, turn: 0.18, hold: 0.06, release: 0.1 },

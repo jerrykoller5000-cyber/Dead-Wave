@@ -1,23 +1,23 @@
 {
   "start": {
-    "index.html": "ead4decb29a1cd01951fe797f5bdcbaec35924aad8d797b93f683ad07683e014",
+    "index.html": "0bd9d65d9a68628c7befb76c54cc58ed248620b4c848d247a3dfcc6972a835e0",
     "studio/weapon-sidearms.js": "281ac598e70bcc35f7aa524e6cfc6946a0637212155d86b36ac1b5bbe6ba4808",
-    "studio/hand-contacts.js": "a2bc5ee2aba5090a8bb3cbe2bacff71f887642f91cb9d5bf6b0a417d1117bf2f",
+    "studio/hand-contacts.js": "0dd1bc329916581ece0c6fa9a179daa80e0800c6abee8eb99a6fea03a86daa89",
     "studio/hand-grips.js": "a5831642a623d266168dbdaeab4af27adaa04f32a80e53176d16e180e885f2bf",
-    "game/viewmodel.js": "f0e5e2db60969620eb204c377dadb53c88ff7adc4291428afaed1d306bbfac22",
-    "game/viewmodel-poses.js": "889572ec1e0786e5fd1f80152a472fefbae624275257d3d3a84ad86092e80d27",
-    "game/viewmodel-fit.js": "094131796bdfb0d0bf941cb93bf2c8bff4a0a5972adde438bbe54c56ffaed77f",
+    "game/viewmodel.js": "a5c6c7858804428faf5177a16f7b7bbdbb3718472a0ea93d04b819a4d3f5a790",
+    "game/viewmodel-poses.js": "2d69a764204632f84ad7aba0353aafc64644301a2e166fc5c78d71827ebb85d1",
+    "game/viewmodel-fit.js": "f1dac3893c06c12cc261f4823f3355e0a25f2836259bc89d674f4e3c8c486e78",
     "tools/tests/tcl334b.js": "50903890cccd3144a1ee67f5ada012fe3025eda0a7f0037c9fc847f3f8240b7d",
     "tools/tests/clip-check.js": "20b266bccc53e5ccdd66605fa42adcc88f546da78faf3fe25b71b2d63cdacb5d"
   },
   "end": {
-    "index.html": "ead4decb29a1cd01951fe797f5bdcbaec35924aad8d797b93f683ad07683e014",
+    "index.html": "0bd9d65d9a68628c7befb76c54cc58ed248620b4c848d247a3dfcc6972a835e0",
     "studio/weapon-sidearms.js": "281ac598e70bcc35f7aa524e6cfc6946a0637212155d86b36ac1b5bbe6ba4808",
-    "studio/hand-contacts.js": "a2bc5ee2aba5090a8bb3cbe2bacff71f887642f91cb9d5bf6b0a417d1117bf2f",
+    "studio/hand-contacts.js": "0dd1bc329916581ece0c6fa9a179daa80e0800c6abee8eb99a6fea03a86daa89",
     "studio/hand-grips.js": "a5831642a623d266168dbdaeab4af27adaa04f32a80e53176d16e180e885f2bf",
-    "game/viewmodel.js": "f0e5e2db60969620eb204c377dadb53c88ff7adc4291428afaed1d306bbfac22",
-    "game/viewmodel-poses.js": "889572ec1e0786e5fd1f80152a472fefbae624275257d3d3a84ad86092e80d27",
-    "game/viewmodel-fit.js": "094131796bdfb0d0bf941cb93bf2c8bff4a0a5972adde438bbe54c56ffaed77f",
+    "game/viewmodel.js": "a5c6c7858804428faf5177a16f7b7bbdbb3718472a0ea93d04b819a4d3f5a790",
+    "game/viewmodel-poses.js": "2d69a764204632f84ad7aba0353aafc64644301a2e166fc5c78d71827ebb85d1",
+    "game/viewmodel-fit.js": "f1dac3893c06c12cc261f4823f3355e0a25f2836259bc89d674f4e3c8c486e78",
     "tools/tests/tcl334b.js": "50903890cccd3144a1ee67f5ada012fe3025eda0a7f0037c9fc847f3f8240b7d",
     "tools/tests/clip-check.js": "20b266bccc53e5ccdd66605fa42adcc88f546da78faf3fe25b71b2d63cdacb5d"
   },
@@ -25,8 +25,8 @@
   "rows": [
     {
       "test": "tcl334b",
-      "pass": 4,
-      "fail": 1
+      "pass": 5,
+      "fail": 0
     }
   ],
   "exit": 0

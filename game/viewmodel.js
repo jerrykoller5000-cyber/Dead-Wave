@@ -617,6 +617,7 @@ export function createViewmodel(ctx) {
     } else {
       if (!gun.foot) footOf();
       if (gun.foot) at.copy(gun.foot); else at.set(0, 0, 0);
+      if (pl.well.off) at.add(_pg.set(pl.well.off[0], pl.well.off[1], pl.well.off[2]));   // CE-10 (J151 notes 17, 23, 28, 43): the palm off the magazine's foot, so the hand holds it instead of going through it
       if (name === 'below') at.y -= pl.below.drop;
       z.set(...pl.well.z); y.set(...pl.well.y);
       if (rockNow && R.rock && R.rock.pivot && gun.magBase) {
@@ -962,6 +963,15 @@ export function createViewmodel(ctx) {
     off.x += psw * MX; off.y += PB.up * pu;
     const rq = eulerQ(sp.rot.x[0] + (bs * mixRun(b.yaw) * bk + PS.yaw * spr) * MX, sp.rot.x[1] + bth * br.pitch + PS.pitch * spr + PB.pitch * pu,
       sp.rot.x[2] + (bs * mixRun(b.roll) * bk + PS.roll * spr) * MX, _rqq);
+    // CI-2 (J151 note 32): the running chainsaw's engine shake (index.html's sawShake: 0 off, 0.4 idling, 1 on the
+    // throttle), the same small shake as in third person on two beating engine frequencies; the view gun and the hands on
+    // it shake, the camera does not.
+    { const sk = st.sawShake || 0;
+      if (sk > 0.001) {
+        const t = S.time * Math.PI * 2, s1 = Math.sin(t * 23.3), s2 = Math.sin(t * 37.1 + 0.7), s3 = Math.sin(t * 29.7 + 2.1);
+        off.x += s2 * 0.0010 * sk * MX; off.y += (s1 * 0.0012 + s3 * 0.0006) * sk;
+        rq.multiply(eulerQ((s1 * 0.0035 + s2 * 0.0015) * sk, 0, s3 * 0.0045 * sk * MX, _rq));
+      } }
     // the reload's own moves (CL-301: a pair dips out of the view and comes back up loaded)
     const R = reloadOf(P, st);   // CL-306: the tactical path when rounds are left
     S.pairDip = null;
@@ -1426,11 +1436,13 @@ export function createViewmodel(ctx) {
     // barrel follows its slide as a Browning tilting barrel does: back with it its first P.barrel.joint, then unlocked over
     // the next P.barrel.unlock its chamber drops P.barrel.drop and it tilts P.barrel.tilt (rad about x), the hood leaving
     // the port; home with it. On every shot's kick and through the reload's rack.
-    { const B = P.barrel, br = gun.barrel, bb = gun.barrelBase;
-      if (B && br && bb && gun.work && gun.workBase) {
-        const s = Math.max(0, gun.workBase.z - gun.work.position.z), j = Math.min(s, B.joint), u2 = clamp((s - B.joint) / B.unlock, 0, 1);
+    // CG-4 (ChatGPT 2's native pair probe: the left pistol's barrel stayed put while its slide worked): the same for the
+    // pair's other gun (gun2), its own slide.
+    for (const g of gun2 ? [gun, gun2] : [gun]) { const B = P.barrel, br = g.barrel, bb = g.barrelBase;
+      if (B && br && bb && g.work && g.workBase) {
+        const s = Math.max(0, g.workBase.z - g.work.position.z), j = Math.min(s, B.joint), u2 = clamp((s - B.joint) / B.unlock, 0, 1);
         br.position.set(bb.x, bb.y - B.drop * u2, bb.z - j); br.rotation.x = bb.rx + B.tilt * u2;
-        info.barrel = { s, j, u: u2 };
+        if (g === gun) info.barrel = { s, j, u: u2 }; else info.barrel2 = { s, j, u: u2 };
       } }
     // CE-3 (J133): an ammo change's unload works the forend back and home once a shell (R.unload.pump); the support hand
     // rides it as on a shot. The view's own stroke while his gun's forend is at rest (index.html may stroke its own: then

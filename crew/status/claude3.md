@@ -2,12 +2,12 @@
 
 state: active
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: CC-347 part 2: seat the real gear (pack holster, slings, pouches) in every kit+weapon combination
-touching: index.html (carry section: placeSecondary, sling/holster/pouch placement), tools/tests/tcc347.js, review/CC-347/
-since: 2026-11-13T05:56Z
-next: CC-347 (02:15Z: part 1 ACCEPTED: the warm-up stand-in gear no longe
+task: CC-348 note 42 option A: the sniper bolt's root in a raceway cut in the rear bridge, the body back to the root, the rail from z -0.14
+touching: studio/weapon-longarms.js (makeSniperModel: rear bridge, cladding, rail base/rail, the bolt's root/stem/body; squareCladding + new racewayLathe helpers), review/CC-348/
+since: 2026-11-13T10:03Z
+next: CC-348 J151 P3 (D-179), notes 11, 20, 42, 44 (the pump and the snip
 blocked-on: —
-last-report: handoffs/2026-11-13-claude3-CC-349.md
+last-report: handoffs/2026-11-13-claude3-CC-347b.md
 
 ## Notes
 

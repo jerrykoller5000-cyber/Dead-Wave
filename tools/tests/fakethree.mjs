@@ -339,6 +339,9 @@ export class Object3D {
   rotateX(a) { this.rotation.x += a; return this; } rotateY(a) { this.rotation.y += a; return this; } rotateZ(a) { this.rotation.z += a; return this; }
   translateZ(d) { this.position.z += d; return this; } translateX(d) { this.position.x += d; return this; } translateY(d) { this.position.y += d; return this; }
   getObjectByName(n) { let r = null; this.traverse(o => { if (!r && o.name === n) r = o; }); return r; }
+  // CB-332 (GP-20132, ChatGPT): as three.js, the first object (this or below) whose property k is v, or undefined; the
+  // permissive stub returned the root itself for any query, so a light-only group read as holding a mesh (t336).
+  getObjectByProperty(k, v) { let r; this.traverse(o => { if (r === undefined && o[k] === v) r = o; }); return r; }
   clone(recursive = true) {
     const o = new this.constructor(this.geometry, this.material);
     o.position.copy(this.position); o.rotation.copy(this.rotation); o.scale.copy(this.scale);

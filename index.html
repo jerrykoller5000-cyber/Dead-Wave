@@ -24304,6 +24304,12 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const set = (band && f[cls + 'Band']) || f[cls], o = set && set[spot.g.position.x < 0 ? 1 : 0];
       if (o) gun.position.set(o[0], o[1], o[2]); else gun.position.set(0, 0, 0);
     }
+    // CC-347: a low holster's belt loop: a strap flat on the shell's back (the side against him), from below its mouth up to the belt.
+    function beltLoop(h){
+      const k=String(h.shell.userData.fitKey).split(':').map(Number),cx=k[1],cy=k[2],ry=k[4],mouth=k[5],len=.13;
+      h.loop.quaternion.identity();h.loop.scale.set(1,.3,len/.258);
+      h.loop.position.set(cx,cy+ry+.004+.003+.003,mouth+.035-len/2);
+    }
     function fitCarriedGuns(rig) {
       const band=!!rig.bandolier?.visible||!!rig.belt40?.visible;
       function station(h,cls){
@@ -24316,8 +24322,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           if(cls==='holster')copy.rotation.z=(kind==='uzi'?1:-1)*(h.g.position.x>0?Math.PI/2:-Math.PI/2);
         }
         fitCarriedGun(h,cls,band);
-        if(cls==='holster')clearCarryPack(THREE,h);
+        if(cls==='holster'&&!h.onHips)clearCarryPack(THREE,h);
         if(kind!=='uzi')fitCarryHolster(THREE,h,leatherMat);
+        if(h.onHips&&h.loop&&h.shell&&h.shell.userData.fittedHolster)beltLoop(h);
         if(h.shell)h.shell.visible=kind!=='uzi';
         if(empty){h.g.remove(h.gun);h.gun=null;h.kind=original;}
       }
@@ -24472,6 +24479,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           b[key].quaternion.copy(a[key].quaternion);
           b[key].visible = a[key].visible;
         }
+        if (name === 'pistol') pistolBarrelFollow(offhandMeshes[name]);   // CG-4: the left pistol's barrel follows its synced slide
       }
     }
 
@@ -25003,8 +25011,32 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       // the slung rifles (the old low spot cut into them by up to 6 cm). Measured in the game by ray (camera eval).
       const PACK_FIT = { pistol: { x: 0.105, y: 0.87, z: -0.35, tilt: -0.08 }, revolver: { x: 0.105, y: 0.87, z: -0.35, tilt: 0 } };
       rig.packFit = PACK_FIT;
+      // CC-347 (J151 note 8, Jerry 13 Nov: "holsters and gear hang, floaty and not properly secured"): the low row hung under the
+      // pack, its shell 17-25 cm behind his seat (the pack ends at y .93; below it his back is at z -.10 to -.15, and the CL-160
+      // spot was set against the pack's face at -.35). The low row now rides his belt at the back, on the hips (it moves with
+      // them, not the torso): muzzle down over the seat, tipped 14 degrees to follow it (t224: the barrel stays upright, > .95),
+      // the grip in toward the spine at the belt, 1-15 mm of air to the seat ahead of it, 7 mm or more from his legs in every
+      // stance (walk, run, crouch, aim, jump; running swings the seat ~1.3 cm toward it), 1 cm and more from a slung shotgun's
+      // stock beside it (measured in the game, Training). z per side ([+x, -x]): his seat sits 1 cm further back on the left.
+      // The upper row stays on the pack as it was.
+      const LOW_FIT = { pistol: { x: 0.085, y: 0.75, z: [-0.165, -0.155], rx: -0.25, tilt: 0.12 }, revolver: { x: 0.085, y: 0.75, z: [-0.165, -0.155], rx: -0.25, tilt: 0.12 } };
+      rig.lowFit = LOW_FIT;
       // GP-19894: each Wasp sits against its own half of the pack, rather than the second copy floating behind the first.
-      rig.placeSecondary = (spot, side, lower = false) => {
+      rig.placeSecondary = (spot, side, lower = false, low = false) => {
+        const lf = low && lower && LOW_FIT[spot.fitKind || spot.kind];
+        spot.onHips = !!lf;
+        const home = lf ? hipsG : torso;
+        if (spot.g.parent !== home) home.add(spot.g);
+        if (lf) {
+          spot.g.position.set(side * lf.x, lf.y, lf.z[side > 0 ? 0 : 1]);
+          spot.g.rotation.set(Math.PI / 2 + lf.rx, 0, side * -lf.tilt, 'ZXY');
+          spot.g.scale.setScalar(0.68);
+          if (spot.gun) spot.gun.rotation.z = -(side > 0 ? Math.PI / 2 : -Math.PI / 2);
+          if (!spot.shell.userData.fittedHolster) { spot.shell.scale.set(1, 1, 1); spot.shell.position.set(-side * 0.055, 0, 0.11); }
+          if (!spot.loop) { spot.loop = rmesh(.032, .02, .258, leatherMat, .006); spot.g.add(spot.loop); }
+          spot.loop.visible = true;   // the belt loop: fitCarriedGuns lays it on the shell's back, up to the belt
+          return;
+        }
         const fit = lower && PACK_FIT[spot.fitKind || spot.kind], rev = !!fit, gripIn = rev ? -1 : 1;
         spot.g.position.copy(T(lower ? side * (rev ? fit.x : 0.19) : side * 0.12, lower ? (rev ? fit.y : 0.76) : 1.15, lower ? (rev ? fit.z : -0.39) : -0.35));
         spot.g.rotation.set(lower ? Math.PI / 2 + (rev ? fit.tilt : 0) : -Math.PI / 2, 0, lower ? side * -.12 : 0, 'ZXY');
@@ -25013,7 +25045,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         if(!spot.shell.userData.fittedHolster){spot.shell.scale.set(lower?1:.8,lower?1:.28,lower?1:.3);
         spot.shell.position.set(lower?-gripIn*side*.055:0,lower?0:.025,lower?.11:-.03);}
         if(!spot.loop){spot.loop=rmesh(.032,.02,.258,leatherMat,.006);spot.loop.quaternion.setFromUnitVectors(new THREE.Vector3(0,0,1),new THREE.Vector3(0,.15,-.21).normalize());spot.g.add(spot.loop);}
-        spot.loop.visible=lower;spot.loop.position.set(-gripIn*side*.055,.075,-.105);
+        spot.loop.visible=lower;spot.loop.position.set(-gripIn*side*.055,.075,-.105);spot.loop.scale.set(1,1,1);
+        spot.loop.quaternion.setFromUnitVectors(new THREE.Vector3(0,0,1),new THREE.Vector3(0,.15,-.21).normalize());
       };
       const harness = addCast(new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.032, 0.014), leatherMat));
       harness.position.copy(T(0, 0.95, -0.19));
@@ -25038,8 +25071,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const MAG_AT = [[-0.125, 0.705, 0.142], [0.125, 0.705, 0.142], [-0.098, 0.975, 0.191], [0, 0.975, 0.191], [0.098, 0.975, 0.191]];
       rig.mags = carryInstanced(new THREE.BoxGeometry(0.045, 0.05, 0.024), carryMats.mag, CARRY_SLOTS.mags, (o, i) => o.position.copy(T(...MAG_AT[i])));
       torso.add(rig.mags);
-      // Grenades on the right hip, below the belt.
-      rig.grenades = carryInstanced(new THREE.SphereGeometry(0.034, 10, 8), carryMats.grenade, CARRY_SLOTS.grenades, (o, i) => { const a=.84+i*.39; o.position.set(Math.cos(a)*.235,.69,-Math.sin(a)*.187); o.scale.set(1,1.2,1); });
+      // Grenades on the hips' sides, below the belt: right, left, right, left. CC-347: they wrapped round the back of his right
+      // hip (to x -.1), where the low holsters ride now; two a side between the drop-leg holster and the low holster.
+      const GREN_A = [0.2, Math.PI - 0.2, 0.56, Math.PI - 0.56];
+      rig.grenades = carryInstanced(new THREE.SphereGeometry(0.034, 10, 8), carryMats.grenade, CARRY_SLOTS.grenades, (o, i) => { const a=GREN_A[i]; o.position.set(Math.cos(a)*.235,.69,-Math.sin(a)*.187); o.scale.set(1,1.2,1); });
       hipsG.add(rig.grenades);
       // The shell bandolier (left shoulder to right hip) and the 40 mm belt (the other way): bands across the chest.
       const band = (dir) => {
@@ -25176,18 +25211,18 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       // A holster stays on him, empty, while its gun is in his hands.
       rig.holsters.forEach((h, i) => { mountCarryGun(rig, h, 'holster' + i, p.secondary[i]); h.g.visible = !!p.holsterOn[i] && (p.secondaryKinds[i] !== "uzi" || !!p.secondary[i]); });
       rig.pairs.forEach((h, i) => { mountCarryGun(rig, h, 'pair' + i, p.paired[i]); h.g.visible = !!p.pairOn[i] && (p.secondaryKinds[i] !== "uzi" || !!p.paired[i]); });
+      const twoRows=p.secondaryKinds.every(k=>k&&k!=='uzi');
+      // GB-276 (Claude, 4 Nov): by height, not slot: the taller handgun (the revolver) rides the lower row, the shorter above at +0.27.
+      const up=twoRows?((p.secondaryKinds[0]==='revolver'&&p.secondaryKinds[1]!=='revolver')?1:0):-1;
       for (let i = 0; i < 2; i++) {
         const kind=p.secondaryKinds[i],side=p.secondaryKinds.indexOf(kind)===i?1:-1;
         rig.holsters[i].fitKind=kind;rig.pairs[i].fitKind=kind;
-        rig.placeSecondary(rig.holsters[i],side,kind!=='uzi');
-        rig.placeSecondary(rig.pairs[i],-side,kind!=='uzi');
+        // CC-347: the low row (one handgun type, or the taller of two) rides the belt (LOW_FIT); the upper row stays on the pack.
+        const low=i!==up;
+        rig.placeSecondary(rig.holsters[i],side,kind!=='uzi',low);
+        rig.placeSecondary(rig.pairs[i],-side,kind!=='uzi',low);
         // Two handgun types occupy separate rows, including their akimbo copies.
-        if(p.secondaryKinds.every(k=>k&&k!=='uzi')){
-          // GB-276 (Claude, 4 Nov): by height, not slot: the taller handgun (the revolver) rides the lower row, the shorter above at +0.27.
-          const up=(p.secondaryKinds[0]==='revolver'&&p.secondaryKinds[1]!=='revolver')?1:0;
-          const rise=i===up?.27:-.02;
-          rig.holsters[i].g.position.y+=rise;rig.pairs[i].g.position.y+=rise;
-        }
+        if(twoRows&&i===up){rig.holsters[i].g.position.y+=.27;rig.pairs[i].g.position.y+=.27;}
       }
       rig.harness.visible = p.holsterOn.some(Boolean);
       mountCarryGun(rig, rig.hip, 'hip', p.hip);
@@ -25958,6 +25993,16 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
     // The minigun: no buck per round; a fine tremor (about 20 Hz, under 1 deg) and a slow push-back while it fires.
     let minigunPush = 0, minigunTremorT = 0, minigunTremorLast = { rx: 0, ry: 0, z: 0 };
+    // CI-2 (J151 note 32: "The chainsaw should vibrate slightly when running"): the running engine shakes the saw in his
+    // hands, a little idling and more on the throttle or in a cut, none when it is off. A small shake of the gun mount on
+    // two beating engine frequencies (the hands' IK follows the saw; the camera never moves). sawShake is the eased level
+    // (0 off, SAW_SHAKE.idle running, 1 on the throttle); the first-person view gun reads it too (st.sawShake).
+    const SAW_SHAKE = { idle: 0.4, ease: 10, eye: 1.8, f: [23.3, 37.1, 29.7], y: [0.0012, 0.0006], x: 0.0010, rx: [0.0035, 0.0015], rz: 0.0045 };   // eye: the view gun's share (it sits at arm's length from the eye, where the same buzz reads smaller than on the body)
+    let sawShake = 0, sawTremorT = 0, sawTremorLast = { x: 0, y: 0, rx: 0, rz: 0 };
+    function sawShakeWant() {
+      if (currentWeapon !== 'chainsaw' || unarmed || paused || !sawEngineCaught()) return 0;
+      return fireHeld || sawCutHoldT > 0 ? 1 : SAW_SHAKE.idle;
+    }
 
     function applyWeaponMountPose() {
       const mb = getWeaponMountBase();
@@ -26003,7 +26048,22 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         if (!gun?.userData.slide) continue;
         const bp = gun.userData.baseSlidePos;
         gun.userData.slide.position.set(bp.x, bp.y, bp.z - (gun.userData.slideKick || 0));
+        pistolBarrelFollow(gun);
       }
+    }
+    // CB-331 (J151 note 2, Claude 5's CE-11 ask; ChatGPT 2's GT-20104 contract): the third-person pistol's barrel follows
+    // its slide as the view's does: back with it its first 4 mm (gun units), then over the next 4 mm its chamber drops
+    // 10 mm and it tilts 0.05 rad. Called wherever the body's pistol slide is moved or put back. Only a barrel inside this
+    // gun is moved (a copy whose userData still names the source's barrel is left alone).
+    function pistolBarrelFollow(gun) {
+      const ud = gun && gun.userData, b = ud && ud.barrelAssembly, sb = ud && ud.baseSlidePos;
+      if (!b || !b.isObject3D || !ud.slide || !sb) return;
+      let p = b.parent; while (p && p !== gun) p = p.parent;
+      if (!p) return;
+      if (!ud.baseBarrelPos) ud.baseBarrelPos = b.position.clone();
+      const s = Math.max(0, sb.z - ud.slide.position.z), j = Math.min(s, 0.004), u = Math.min(1, Math.max(0, (s - 0.004) / 0.004));
+      b.position.set(ud.baseBarrelPos.x, ud.baseBarrelPos.y - 0.010 * u, ud.baseBarrelPos.z - j);
+      b.rotation.x = (ud.baseBarrelRotX || 0) - 0.05 * u;
     }
 
     function recoilRate() {   // GB-233: lifted out of decayRecoil so deferKick() can see it
@@ -26027,6 +26087,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const bf = _lerpK(RECOIL_FEED, dt);
       for (const key in bodyPending) { const d = bodyPending[key] * bf; bodyRecoil[key] += d; bodyPending[key] -= d; }
       recoilKick.rx -= minigunTremorLast.rx; recoilKick.ry -= minigunTremorLast.ry; recoilKick.z -= minigunTremorLast.z;
+      recoilKick.x -= sawTremorLast.x; recoilKick.y -= sawTremorLast.y; recoilKick.rx -= sawTremorLast.rx; recoilKick.rz -= sawTremorLast.rz;   // CI-2: last frame's saw shake off
       minigunPush *= _decayK(2, dt);
       if (minigunPush < 1e-3) minigunPush = 0;
       minigunTremorT += dt;
@@ -26040,6 +26101,13 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       recoilKick.rx *= (1 - k);
       recoilKick.ry *= (1 - k);
       recoilKick.rz *= (1 - k);
+      // CI-2 (note 32): this frame's saw shake on, after the decay, so it never builds up or drifts
+      sawShake += (sawShakeWant() - sawShake) * Math.min(1, dt * SAW_SHAKE.ease);
+      if (sawShake < 1e-3) sawShake = 0;
+      sawTremorT += dt;
+      { const F = SAW_SHAKE.f, t = sawTremorT * Math.PI * 2, s1 = Math.sin(t * F[0]), s2 = Math.sin(t * F[1] + 0.7), s3 = Math.sin(t * F[2] + 2.1), k = sawShake;
+        sawTremorLast = k ? { x: s2 * SAW_SHAKE.x * k, y: (s1 * SAW_SHAKE.y[0] + s3 * SAW_SHAKE.y[1]) * k, rx: (s1 * SAW_SHAKE.rx[0] + s2 * SAW_SHAKE.rx[1]) * k, rz: s3 * SAW_SHAKE.rz * k } : { x: 0, y: 0, rx: 0, rz: 0 }; }
+      recoilKick.x += sawTremorLast.x; recoilKick.y += sawTremorLast.y; recoilKick.rx += sawTremorLast.rx; recoilKick.rz += sawTremorLast.rz;
       pistolSlideKick *= _decayK(13, dt);
       for (const gun of [pistol, offhandMeshes.pistol]) gun.userData.slideKick = (gun.userData.slideKick || 0) * Math.exp(-22 * dt);
       // Body settles a touch slower than the gun mount so the kick reads as absorbed.
@@ -26083,7 +26151,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       pistolSlideKick = 0;
       for (const g of [pistol, offhandMeshes.pistol]) {
         if (g) g.userData.slideKick = 0;
-        if (g?.userData.slide && g.userData.baseSlidePos) g.userData.slide.position.copy(g.userData.baseSlidePos);
+        if (g?.userData.slide && g.userData.baseSlidePos) { g.userData.slide.position.copy(g.userData.baseSlidePos); pistolBarrelFollow(g); }   // CB-331
       }
       punchBodyRecoil(0.55);
       deferKick(_rb);   // GB-233: ramps in over 20-40 ms
@@ -26367,6 +26435,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         }
         if (gun.userData.slide && gun.userData.baseSlidePos) {
           gun.userData.slide.position.copy(gun.userData.baseSlidePos);
+          if (name === 'pistol') pistolBarrelFollow(gun);   // CB-331
         }
         if (gun.userData.bolt && gun.userData.baseBoltPos) {
           gun.userData.bolt.position.copy(gun.userData.baseBoltPos);
@@ -27033,6 +27102,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
             gun.userData.baseSlidePos.y,
             gun.userData.baseSlidePos.z - 0.13 * slideAmt
           );
+          pistolBarrelFollow(gun);   // CB-331
         }
         reloadMagPose(gun, 'pistol', progress);   // GB-145: seated, in the palm (holdWeapon) or in the pouch; never in midair
       } else if (currentWeapon === 'shotgun') {
@@ -54210,6 +54280,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       st.phase = walkPhase; st.run = POSE.gaitRun || 0; st.sprint = !!(keys.ShiftLeft || keys.ShiftRight) && hypot(velX, velZ) > 0.5;
       st.pitch = OTS.pitch || 0;   // CL-324 (J70): the empty hands hang in his body's frame
       st.stream = flamerOn && currentWeapon === 'flamer';   // CL-293 (J59): the flamer's steady pushback
+      st.sawShake = currentWeapon === 'chainsaw' ? sawShake * SAW_SHAKE.eye : 0;   // CI-2 (note 32): the running saw's engine shake, eased (0 off), at the view gun's share
       st.reloadU = reloading ? _clamp01(1 - reloadTimer / Math.max(0.05, reloadAnimDuration || 1)) : null;
       // CL-328 (D-125): the hand-over's progress for the view (1: none)
       if (st.want && viewSwapIn < 1) viewSwapIn = Math.min(1, viewSwapIn + dt / VIEW_SWAP.time);
@@ -54899,11 +54970,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       pistol:   { twist: 0.1, hold: [-0.29, -0.08, 0.4], grip: [0, -0.066, -0.016], trig: [0, -0.05, 0.073], fore: [-0.04782, -0.11451, -0.0153] },   // GB-151: fore = the support fist round the firing fingers; CD-8: first person's fit (VM_FIT.pistol.l.p, was [-0.058, -0.09, 0.012])
       revolver: { twist: 0.1, hold: [-0.28, -0.08, 0.4], grip: [0, -0.07, -0.059], trig: [0, -0.02, 0.035], fore: [-0.058, -0.1, -0.041] },   // GB-318 (CL-320): grip/fore followed the raked S&W grip (z -0.059 / -0.041; VM_SOCKETS grip/support); trig unchanged
       uzi:      { twist: 0.2, hold: [-0.3, -0.16, 0.34], grip: [0, -0.088, -0.027], trig: [0, -0.056, 0.05], fore: [0, -0.03, 0.18] },   // GB-236: grip on the thicker grip's centre line (was -0.017)
-      m4:       { twist: 0.8, hold: [-0.24, -0.12, 0.28], grip: [0, -0.106, -0.116], trig: [0, -0.078, -0.029], fore: [0, -0.01, 0.32], sh: { butt: [0, -0.003, -0.569], eye: [0, 0.134, -0.20] } },   // CL-322: fore on GP-20055's quad rail (was [0, 0, 0.36], the old tube)   // GB-317 (CL-318): grip followed the A2 4 cm back (cz -0.12, z -0.116); trig on the new blade (z -0.029)   // CD-11: fore z 0.43 -> 0.32, still on the handguard (t195: from 0.43 the support arm was straight along the gun, the fist 57 deg off the forend)
-      ak:       { twist: 0.8, hold: [-0.24, -0.12, 0.28], grip: [0, -0.123, -0.126], trig: [0, -0.052, -0.026], fore: [0, -0.02, 0.37], sh: { butt: [0, -0.078, -0.597], eye: [0, 0.074, -0.30] } },   // GB-317 (CL-318): palm u 0.42 on cz -0.13 / h 0.165 (z -0.126, y -0.123 = VM_SOCKETS.ak); trig on the new blade; GB-311: cover 2.6 cm lower (SIGHT.ak 0.074)
-      aa12:     { twist: 0.8, hold: [-0.24, -0.13, 0.203], grip: [0, -0.145, -0.166], trig: [0, -0.104, -0.086], fore: [0, -0.035, 0.36], sh: { butt: [0, -0.005, -0.572], eye: [0, 0.16, -0.30] } },   // GB-173: the grip moved 70 mm back on the model; hold -0.057 (x0.82) keeps the gun where it was; GB-188: fore 20 mm lower, the fist round the underside of GB-180's box handguard
+      m4:       { twist: 0.8, hold: [-0.24, -0.12, 0.28], grip: [0, -0.106, -0.116], trig: [0, -0.078, -0.029], fore: [0, -0.01, 0.29], sh: { butt: [0, -0.003, -0.569], eye: [0, 0.134, -0.20] } },   // CL-322: fore on GP-20055's quad rail (was [0, 0, 0.36], the old tube)   // GB-317 (CL-318): grip followed the A2 4 cm back (cz -0.12, z -0.116); trig on the new blade (z -0.029)   // CD-11: fore z 0.43 -> 0.32, still on the handguard (t195: from 0.43 the support arm was straight along the gun, the fist 57 deg off the forend)
+      ak:       { twist: 0.8, hold: [-0.24, -0.12, 0.28], grip: [0, -0.123, -0.126], trig: [0, -0.052, -0.026], fore: [0, -0.02, 0.30], sh: { butt: [0, -0.078, -0.597], eye: [0, 0.074, -0.30] } },   // GB-317 (CL-318): palm u 0.42 on cz -0.13 / h 0.165 (z -0.126, y -0.123 = VM_SOCKETS.ak); trig on the new blade; GB-311: cover 2.6 cm lower (SIGHT.ak 0.074)
+      aa12:     { twist: 0.8, hold: [-0.24, -0.13, 0.203], grip: [0, -0.145, -0.166], trig: [0, -0.104, -0.086], fore: [0, -0.035, 0.26], sh: { butt: [0, -0.005, -0.572], eye: [0, 0.16, -0.30] } },   // GB-173: the grip moved 70 mm back on the model; hold -0.057 (x0.82) keeps the gun where it was; GB-188: fore 20 mm lower, the fist round the underside of GB-180's box handguard
       shotgun:  { twist: 0.8, hold: [-0.24, -0.12, 0.24], grip: [0, -0.088, -0.056], trig: [0, -0.058, 0.023], fore: 'pump', pumpDy: -0.015, sh: { butt: [0, -0.02, -0.496], eye: [0, 0.08, -0.28] } },
-      sniper:   { twist: 0.8, hold: [-0.24, -0.12, 0.28], grip: [0, -0.088, -0.117], trig: [0, -0.064, -0.052], fore: [0, -0.005, 0.35], sh: { butt: [0, -0.018, -0.622], eye: [0, 0.15, -0.40] } },
+      sniper:   { twist: 0.8, hold: [-0.24, -0.12, 0.28], grip: [0, -0.088, -0.117], trig: [0, -0.064, -0.052], fore: [0, -0.005, 0.20], sh: { butt: [0, -0.018, -0.622], eye: [0, 0.15, -0.40] } },
       launcher: { twist: 0.8, hold: [-0.24, -0.14, 0.26], grip: [0, -0.088, -0.046], trig: [0, -0.074, 0.014], fore: [0, -0.075, 0.42], sh: { butt: [0, 0.008, -0.504], eye: [0, 0.19, -0.18] } },
       minigun:  { twist: 1.0, hold: [-0.3, -0.25, 0.34], grip: [0, -0.0119, -0.364], fore: [-0.2128, 0.0084, 0.112] },   // CL-322: GP-20063's 0.70 rotary gun (the grip and peg scaled; AG-261: the hand 10 cm off the peg).   // GB-275: onto GP-20022's rear grip (0,-0.017,-0.52) and GP-20024's -X side peg (-0.304,0.012,0.16); was the top carry handle (grip [0,0.2,-0.28], fore [0,0.14,-0.05], twist 0.6, hold [-0.3,-0.3,0.2]). The grip is 0.5 m behind the old one, so the hold moves with it: twist 1.0 and hold 0.34 forward keep the housing out of his belly (31 cm in, now ~6) with the left fist round the peg
       flamer:   { twist: 0.6, hold: [-0.26, -0.26, 0.22], grip: [0, -0.078, -0.157], trig: [0, -0.048, -0.09], fore: [0, -0.07, 0.28] },

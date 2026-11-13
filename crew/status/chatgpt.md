@@ -1,24 +1,22 @@
 # ChatGPT
 
-state: blocked
+state: idle
 model: GPT-6.1 Sol (Medium, per D-175)
-task: GP-20129 KR7 adapter verified and OUT; refresh own-model icons against current C6/C3 models and finish evidence
+task: —
 touching: —
-since: 2026-11-13T04:27Z
+since: 2026-11-13T07:10Z
 next: —
-blocked-on: All assigned notes implemented/tested; Director disposition requested for C2 ordinary3P aim follow-up, deferred after his J151 cards. Files/loans released.
-last-report: handoffs/2026-11-13-chatgpt-GP-20129.md
+blocked-on: —
+last-report: handoffs/2026-11-13-chatgpt-GP-20132.md
 
 ## Notes
 
-GP-20130 HELD BY DIRECTOR: design review/GP-20130/design.md goes to Jerry; build after tomorrow's playtest, no owner integration until Jerry approves. Own unwired game/training-integrity.js +test8/0 already prepared (idempotent damage, physical cover surfaces, obstruction/deployment, travel30/60/120Hz, visitreset). Handoff2026-11-13-chatgpt-GP-20130.md. GP-20131 urgent follow-up is now DONE, handoff2026-11-13-chatgpt-GP-20131.md.
+STAND DOWN until after playtest per Director07:20Z (requests.md GP-20129 ACCEPTED). GP-20130 waits for Jerry design OK, then 3P aim follow-up; do not start parked work. GP-20130 HELD until that approval. Design review/GP-20130/design.md; own unwired game/training-integrity.js/tests8/0 prepared. No owner integration or duplicate rebuild.
 
-GP-20129 ALL SIX NOTES IMPLEMENTED: C6 API landed, approved index adapter integrated/OUT. Native furniture/carry/eye identity/camo/Training isolation/restore/profile+fresh-load pass0errors; wardrobe4/0, preview3/0, latest12icons/full+carried wheels0errors. Handoff2026-11-13-chatgpt-GP-20129.md. Director disposition requested for C2-owned ordinary3P aim follow-up; do not repeat blind shots.
+GP-20129 ACCEPTED by Director07:20Z: all six notes implemented. Note27 final review posted06:53Z with three decoded Armory wood/plain-synthetic/camo pictures; source/eye/rack/slung and save/isolation/reload verified. furniture-copies.json:18,408polymer vertices,0errors; furniture-native-after.json0errors. Factory standalone Inspector stays independent per Director; 3P aim follow-up after playtest. Final handoff2026-11-13-chatgpt-GP-20129.md.
 
-GP-20129 validation: UI3/0,dummy6/0,CL1461/0; final4light30frames0errors. Eye pistol+6blade actions bothviews hit;bothdoorEpass. 3Pcursor-shot misses despite canvas input; aim turns away. C2 received mouseMoved100ms and pin-aim failing repro; no further blind retakes, await diagnosis. Failed receipts retained. Exclusive20s1142frames median16.7ms,p9516.9,0over50. Old UIextractor2fail; spawn1fail proven identical with original keypad block in memory; no expectations changed.
+GP-20132 DONE diagnosis: unchanged native t33629/0; routed two cloud findings are fakethree API parity defects. Draft tests0/2 +parity-before.json/native.json underreview/GP-20132. Director froze ALL shim/vendor changes before playtest; C2 notified to record known false-reds. No production/model changes. C2 FYI07:32Z: CB-332 getObjectByProperty landed; instance-aware Box3 remains parked (tgt20076 side effects). Prior0/2 parity baseline is historical, not rerun during stand-down. Handoff2026-11-13-chatgpt-GP-20132.md.
 
-Loans OUT: index icon import+12entries and furniture adapter6blocks (4fa1bed2->069f0b5a, exact reverse proof), C2 notified. C10 keypad/flicker and C8 eye-hide/ballistics preserved. Latesticons refreshed5of12 from live ownmodels; originalsheet inearly-icons. No files held.
+Loans OUT: index icons and furniture adapter (4fa1bed2->069f0b5a, exact reverse proof). C3 active loans: ui/weapon-sling.js body path only (stud mounts untouched), ui/marine-kit-fit.js clearCarryPack secondary rule if needed; keep out. C8 eye-hide/ballistics and C2 camera changes preserved.
 
-GP-20131 DONE/review: all6shotgun drills max18, Eighteen on Steel copy; stableids/config-separated old records. Unit35/0; native7->18/base14->36, duplicates/19th rejected,accuracy100,errors0. Same-view before/after review/GP-20131. GP30 remains Director-held; no git.
-
-Prior GP-20124/25/26/27 accepted/done, evidence in their2026-11-12handoffs. GP-20127:717ms cold shot not reproduced, GPU first-shot pipelines handed C2. GP-20123 was WORLD UV audit only, no camo code changed; CG-1 has exact limits.
+GP-20131 DONE/review35/0 plus native18callbacks/duplicates/19th/accuracy proof; prior GP-20124–27 done, details in their handoffs. Read current requests and next before acting; when no eligible work, standby. No git.

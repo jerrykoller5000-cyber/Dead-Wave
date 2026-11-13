@@ -1,0 +1,16 @@
+{
+  "scope": "Real Armory choices, held/slung/rack; standalone Inspector factory boundary recorded separately",
+  "choices": [
+    {
+      "key": "wood",
+      "paint": false,
+      "name": "furniture-armory-wood.png",
+      "choice": "wood",
+      "source": "wood",
+      "rack": "wood",
+      "finish": "",
+      "preview": 14518
+    }
+  ],
+  "failure": "AssertionError [ERR_ASSERTION]: actual rack copy\n+ actual - expected\n\n+ 'wood'\n- 'synthetic'\n\n    at file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/GP-20129/furniture-copies.mjs:17:72"
+}

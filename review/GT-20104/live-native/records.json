@@ -1,0 +1,3415 @@
+{
+  "mode": "Actual production reload only. World .13 legacy rack preserved by CB331; first-person .07 lock +8% off-stop overpull by CE11. Own prior live-integration.mjs was an unrun draft with wrong shared-stroke assumptions, retained unchanged. World BEFORE explicitly reconstructs only the old fixed barrel at the same native slide/actor/camera/light pose; eye has no private pose override. Existing native flashlight used for night readability.",
+  "start": {
+    "index.html": "1b36e7498ce57731f85fbba9f054a64ddeccc2248bdb4a50de31ab98315fb2a5",
+    "game/viewmodel.js": "5742920b9f4e6c3d9ad6743a9e4a2064568e54f4c64f6de587406fee49066acf",
+    "game/viewmodel-poses.js": "7deaca52a07573b5c3cd3d996a0825d3d7e557328443204894cc7220120f5196",
+    "game/viewmodel-fit.js": "457b60f96c7663ace1416664ef5cfa9b0d79ac7cb7c62a68f2e37b8c8af78322",
+    "studio/hand-contacts.js": "6ad723325ed2cd53695e245d6e528726f3d91e11402b29d8a8a4756b673e8bbb",
+    "studio/hand-grips.js": "a5831642a623d266168dbdaeab4af27adaa04f32a80e53176d16e180e885f2bf",
+    "studio/weapon-sidearms.js": "281ac598e70bcc35f7aa524e6cfc6946a0637212155d86b36ac1b5bbe6ba4808",
+    "studio/weapon-pistol-action.js": "24d7aee3e7706a31b7e4a71c68a8b362b552c411924dc45f6c169d25c5118f8c"
+  },
+  "end": {
+    "index.html": "1b36e7498ce57731f85fbba9f054a64ddeccc2248bdb4a50de31ab98315fb2a5",
+    "game/viewmodel.js": "5742920b9f4e6c3d9ad6743a9e4a2064568e54f4c64f6de587406fee49066acf",
+    "game/viewmodel-poses.js": "7deaca52a07573b5c3cd3d996a0825d3d7e557328443204894cc7220120f5196",
+    "game/viewmodel-fit.js": "457b60f96c7663ace1416664ef5cfa9b0d79ac7cb7c62a68f2e37b8c8af78322",
+    "studio/hand-contacts.js": "6ad723325ed2cd53695e245d6e528726f3d91e11402b29d8a8a4756b673e8bbb",
+    "studio/hand-grips.js": "a5831642a623d266168dbdaeab4af27adaa04f32a80e53176d16e180e885f2bf",
+    "studio/weapon-sidearms.js": "281ac598e70bcc35f7aa524e6cfc6946a0637212155d86b36ac1b5bbe6ba4808",
+    "studio/weapon-pistol-action.js": "24d7aee3e7706a31b7e4a71c68a8b362b552c411924dc45f6c169d25c5118f8c"
+  },
+  "changed": [],
+  "records": [
+    {
+      "fraction": 0.05,
+      "view": "hip",
+      "light": "noon",
+      "file": "hip-0.05-noon.png",
+      "state": {
+        "timer": 1.2825,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": true,
+      "worldTravel": 0,
+      "worldExpected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "eyeTravel": 0.07,
+      "eyeExpected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "eyeBarrel": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "actualLight": {
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "taskLamp": 0
+      },
+      "camera": {
+        "position": [
+          -0.00025188932794668374,
+          -198.57823724176004,
+          -640.5570153629553
+        ],
+        "direction": [
+          0,
+          -0.07991469396917283,
+          0.9968017063026193
+        ],
+        "fov": 59.99999999999999
+      }
+    },
+    {
+      "fraction": 0.05,
+      "view": "hip",
+      "light": "overcast",
+      "file": "hip-0.05-overcast.png",
+      "state": {
+        "timer": 1.2825,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": true,
+      "worldTravel": 0,
+      "worldExpected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "eyeTravel": 0.07,
+      "eyeExpected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "eyeBarrel": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "actualLight": {
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "taskLamp": 0
+      },
+      "camera": {
+        "position": [
+          -0.00025188932794668374,
+          -198.57823724176004,
+          -640.5570153629553
+        ],
+        "direction": [
+          0,
+          -0.07991469396917283,
+          0.9968017063026193
+        ],
+        "fov": 59.99999999999999
+      }
+    },
+    {
+      "fraction": 0.05,
+      "view": "hip",
+      "light": "dusk",
+      "file": "hip-0.05-dusk.png",
+      "state": {
+        "timer": 1.2825,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": true,
+      "worldTravel": 0,
+      "worldExpected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "eyeTravel": 0.07,
+      "eyeExpected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "eyeBarrel": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "actualLight": {
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "taskLamp": 0
+      },
+      "camera": {
+        "position": [
+          -0.00025188932794668374,
+          -198.57823724176004,
+          -640.5570153629553
+        ],
+        "direction": [
+          0,
+          -0.07991469396917283,
+          0.9968017063026193
+        ],
+        "fov": 59.99999999999999
+      }
+    },
+    {
+      "fraction": 0.05,
+      "view": "hip",
+      "light": "night",
+      "file": "hip-0.05-night.png",
+      "state": {
+        "timer": 1.2825,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": true,
+      "worldTravel": 0,
+      "worldExpected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "eyeTravel": 0.07,
+      "eyeExpected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "eyeBarrel": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "actualLight": {
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "taskLamp": 1.0343878593920743
+      },
+      "camera": {
+        "position": [
+          -0.00025188932794668374,
+          -198.57823724176004,
+          -640.5570153629553
+        ],
+        "direction": [
+          0,
+          -0.07991469396917283,
+          0.9968017063026193
+        ],
+        "fov": 59.99999999999999
+      }
+    },
+    {
+      "fraction": 0.05,
+      "view": "held-right",
+      "light": "noon",
+      "file": "held-right-0.05-noon.png",
+      "state": {
+        "timer": 1.2825,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": false,
+      "worldTravel": 0,
+      "worldExpected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "eyeTravel": null,
+      "eyeExpected": null,
+      "eyeBarrel": null,
+      "actualLight": {
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "taskLamp": 0
+      },
+      "camera": {
+        "position": [
+          0.7503352456254426,
+          -198.73293456372411,
+          -639.9981093075442
+        ],
+        "direction": [
+          -0.9604272193468306,
+          -0.18859520578288563,
+          -0.20496683803343907
+        ],
+        "fov": 34
+      },
+      "beforeFile": "world-rest-reconstruction-0.05-noon.png"
+    },
+    {
+      "fraction": 0.05,
+      "view": "held-right",
+      "light": "overcast",
+      "file": "held-right-0.05-overcast.png",
+      "state": {
+        "timer": 1.2825,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": false,
+      "worldTravel": 0,
+      "worldExpected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "eyeTravel": null,
+      "eyeExpected": null,
+      "eyeBarrel": null,
+      "actualLight": {
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "taskLamp": 0
+      },
+      "camera": {
+        "position": [
+          0.7503352456254426,
+          -198.73293456372411,
+          -639.9981093075442
+        ],
+        "direction": [
+          -0.9604272193468306,
+          -0.18859520578288563,
+          -0.20496683803343907
+        ],
+        "fov": 34
+      },
+      "beforeFile": "world-rest-reconstruction-0.05-overcast.png"
+    },
+    {
+      "fraction": 0.05,
+      "view": "held-right",
+      "light": "dusk",
+      "file": "held-right-0.05-dusk.png",
+      "state": {
+        "timer": 1.2825,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": false,
+      "worldTravel": 0,
+      "worldExpected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "eyeTravel": null,
+      "eyeExpected": null,
+      "eyeBarrel": null,
+      "actualLight": {
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "taskLamp": 0
+      },
+      "camera": {
+        "position": [
+          0.7503352456254426,
+          -198.73293456372411,
+          -639.9981093075442
+        ],
+        "direction": [
+          -0.9604272193468306,
+          -0.18859520578288563,
+          -0.20496683803343907
+        ],
+        "fov": 34
+      },
+      "beforeFile": "world-rest-reconstruction-0.05-dusk.png"
+    },
+    {
+      "fraction": 0.05,
+      "view": "held-right",
+      "light": "night",
+      "file": "held-right-0.05-night.png",
+      "state": {
+        "timer": 1.2825,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": false,
+      "worldTravel": 0,
+      "worldExpected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "eyeTravel": null,
+      "eyeExpected": null,
+      "eyeBarrel": null,
+      "actualLight": {
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "taskLamp": 1.8242565186191804
+      },
+      "camera": {
+        "position": [
+          0.7503352456254426,
+          -198.73293456372411,
+          -639.9981093075442
+        ],
+        "direction": [
+          -0.9604272193468306,
+          -0.18859520578288563,
+          -0.20496683803343907
+        ],
+        "fov": 34
+      },
+      "beforeFile": "world-rest-reconstruction-0.05-night.png"
+    },
+    {
+      "fraction": 0.25,
+      "view": "hip",
+      "light": "noon",
+      "file": "hip-0.25-noon.png",
+      "state": {
+        "timer": 1.0125000000000002,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": true,
+      "worldTravel": 0,
+      "worldExpected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "eyeTravel": 0.07,
+      "eyeExpected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "eyeBarrel": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "actualLight": {
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "taskLamp": 0
+      },
+      "camera": {
+        "position": [
+          -0.007382618356292614,
+          -198.59232890269482,
+          -640.5541331472288
+        ],
+        "direction": [
+          -0.00435922767564681,
+          0,
+          0.999990498521897
+        ],
+        "fov": 59.99999999999999
+      }
+    },
+    {
+      "fraction": 0.25,
+      "view": "hip",
+      "light": "overcast",
+      "file": "hip-0.25-overcast.png",
+      "state": {
+        "timer": 1.0125000000000002,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": true,
+      "worldTravel": 0,
+      "worldExpected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "eyeTravel": 0.07,
+      "eyeExpected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "eyeBarrel": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "actualLight": {
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "taskLamp": 0
+      },
+      "camera": {
+        "position": [
+          -0.007382618356292614,
+          -198.59232890269482,
+          -640.5541331472288
+        ],
+        "direction": [
+          -0.00435922767564681,
+          0,
+          0.999990498521897
+        ],
+        "fov": 59.99999999999999
+      }
+    },
+    {
+      "fraction": 0.25,
+      "view": "hip",
+      "light": "dusk",
+      "file": "hip-0.25-dusk.png",
+      "state": {
+        "timer": 1.0125000000000002,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": true,
+      "worldTravel": 0,
+      "worldExpected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "eyeTravel": 0.07,
+      "eyeExpected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "eyeBarrel": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "actualLight": {
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "taskLamp": 0
+      },
+      "camera": {
+        "position": [
+          -0.007382618356292614,
+          -198.59232890269482,
+          -640.5541331472288
+        ],
+        "direction": [
+          -0.00435922767564681,
+          0,
+          0.999990498521897
+        ],
+        "fov": 59.99999999999999
+      }
+    },
+    {
+      "fraction": 0.25,
+      "view": "hip",
+      "light": "night",
+      "file": "hip-0.25-night.png",
+      "state": {
+        "timer": 1.0125000000000002,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": true,
+      "worldTravel": 0,
+      "worldExpected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "eyeTravel": 0.07,
+      "eyeExpected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "eyeBarrel": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "actualLight": {
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "taskLamp": 0.9473169497142538
+      },
+      "camera": {
+        "position": [
+          -0.007382618356292614,
+          -198.59232890269482,
+          -640.5541331472288
+        ],
+        "direction": [
+          -0.00435922767564681,
+          0,
+          0.999990498521897
+        ],
+        "fov": 59.99999999999999
+      }
+    },
+    {
+      "fraction": 0.25,
+      "view": "held-right",
+      "light": "noon",
+      "file": "held-right-0.25-noon.png",
+      "state": {
+        "timer": 1.0125000000000002,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": false,
+      "worldTravel": 0,
+      "worldExpected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "eyeTravel": null,
+      "eyeExpected": null,
+      "eyeBarrel": null,
+      "actualLight": {
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "taskLamp": 0
+      },
+      "camera": {
+        "position": [
+          0.9610795445766083,
+          -198.66110316421756,
+          -640.755204023263
+        ],
+        "direction": [
+          -0.7814047534754963,
+          -0.2607660213731592,
+          0.5669282964741766
+        ],
+        "fov": 34
+      },
+      "beforeFile": "world-rest-reconstruction-0.25-noon.png"
+    },
+    {
+      "fraction": 0.25,
+      "view": "held-right",
+      "light": "overcast",
+      "file": "held-right-0.25-overcast.png",
+      "state": {
+        "timer": 1.0125000000000002,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": false,
+      "worldTravel": 0,
+      "worldExpected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "eyeTravel": null,
+      "eyeExpected": null,
+      "eyeBarrel": null,
+      "actualLight": {
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "taskLamp": 0
+      },
+      "camera": {
+        "position": [
+          0.9610795445766083,
+          -198.66110316421756,
+          -640.755204023263
+        ],
+        "direction": [
+          -0.7814047534754963,
+          -0.2607660213731592,
+          0.5669282964741766
+        ],
+        "fov": 34
+      },
+      "beforeFile": "world-rest-reconstruction-0.25-overcast.png"
+    },
+    {
+      "fraction": 0.25,
+      "view": "held-right",
+      "light": "dusk",
+      "file": "held-right-0.25-dusk.png",
+      "state": {
+        "timer": 1.0125000000000002,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": false,
+      "worldTravel": 0,
+      "worldExpected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "eyeTravel": null,
+      "eyeExpected": null,
+      "eyeBarrel": null,
+      "actualLight": {
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "taskLamp": 0
+      },
+      "camera": {
+        "position": [
+          0.9610795445766083,
+          -198.66110316421756,
+          -640.755204023263
+        ],
+        "direction": [
+          -0.7814047534754963,
+          -0.2607660213731592,
+          0.5669282964741766
+        ],
+        "fov": 34
+      },
+      "beforeFile": "world-rest-reconstruction-0.25-dusk.png"
+    },
+    {
+      "fraction": 0.25,
+      "view": "held-right",
+      "light": "night",
+      "file": "held-right-0.25-night.png",
+      "state": {
+        "timer": 1.0125000000000002,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": false,
+      "worldTravel": 0,
+      "worldExpected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "eyeTravel": null,
+      "eyeExpected": null,
+      "eyeBarrel": null,
+      "actualLight": {
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "taskLamp": 1.8242565186189916
+      },
+      "camera": {
+        "position": [
+          0.9610795445766083,
+          -198.66110316421756,
+          -640.755204023263
+        ],
+        "direction": [
+          -0.7814047534754963,
+          -0.2607660213731592,
+          0.5669282964741766
+        ],
+        "fov": 34
+      },
+      "beforeFile": "world-rest-reconstruction-0.25-night.png"
+    },
+    {
+      "fraction": 0.7,
+      "view": "hip",
+      "light": "noon",
+      "file": "hip-0.7-noon.png",
+      "state": {
+        "timer": 0.4050000000000001,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": true,
+      "worldTravel": 0,
+      "worldExpected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "eyeTravel": 0.07,
+      "eyeExpected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "eyeBarrel": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "actualLight": {
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "taskLamp": 0
+      },
+      "camera": {
+        "position": [
+          0.0860164869047777,
+          -198.57946154328565,
+          -640.5921983605663
+        ],
+        "direction": [
+          0.720248814179221,
+          0,
+          0.6937158248688191
+        ],
+        "fov": 59.99999999999999
+      }
+    },
+    {
+      "fraction": 0.7,
+      "view": "hip",
+      "light": "overcast",
+      "file": "hip-0.7-overcast.png",
+      "state": {
+        "timer": 0.4050000000000001,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": true,
+      "worldTravel": 0,
+      "worldExpected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "eyeTravel": 0.07,
+      "eyeExpected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "eyeBarrel": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "actualLight": {
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "taskLamp": 0
+      },
+      "camera": {
+        "position": [
+          0.0860164869047777,
+          -198.57946154328565,
+          -640.5921983605663
+        ],
+        "direction": [
+          0.720248814179221,
+          0,
+          0.6937158248688191
+        ],
+        "fov": 59.99999999999999
+      }
+    },
+    {
+      "fraction": 0.7,
+      "view": "hip",
+      "light": "dusk",
+      "file": "hip-0.7-dusk.png",
+      "state": {
+        "timer": 0.4050000000000001,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": true,
+      "worldTravel": 0,
+      "worldExpected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "eyeTravel": 0.07,
+      "eyeExpected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "eyeBarrel": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "actualLight": {
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "taskLamp": 0
+      },
+      "camera": {
+        "position": [
+          0.0860164869047777,
+          -198.57946154328565,
+          -640.5921983605663
+        ],
+        "direction": [
+          0.720248814179221,
+          0,
+          0.6937158248688191
+        ],
+        "fov": 59.99999999999999
+      }
+    },
+    {
+      "fraction": 0.7,
+      "view": "hip",
+      "light": "night",
+      "file": "hip-0.7-night.png",
+      "state": {
+        "timer": 0.4050000000000001,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": true,
+      "worldTravel": 0,
+      "worldExpected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "eyeTravel": 0.07,
+      "eyeExpected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "eyeBarrel": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "actualLight": {
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "taskLamp": 1.189345551468087
+      },
+      "camera": {
+        "position": [
+          0.0860164869047777,
+          -198.57946154328565,
+          -640.5921983605663
+        ],
+        "direction": [
+          0.720248814179221,
+          0,
+          0.6937158248688191
+        ],
+        "fov": 59.99999999999999
+      }
+    },
+    {
+      "fraction": 0.7,
+      "view": "held-right",
+      "light": "noon",
+      "file": "held-right-0.7-noon.png",
+      "state": {
+        "timer": 0.4050000000000001,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": false,
+      "worldTravel": 0,
+      "worldExpected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "eyeTravel": null,
+      "eyeExpected": null,
+      "eyeBarrel": null,
+      "actualLight": {
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "taskLamp": 0
+      },
+      "camera": {
+        "position": [
+          0.9748267684174817,
+          -198.6619699203153,
+          -640.7682230879941
+        ],
+        "direction": [
+          -0.7815066949855991,
+          -0.2607672590642538,
+          0.566787193127017
+        ],
+        "fov": 34
+      },
+      "beforeFile": "world-rest-reconstruction-0.7-noon.png"
+    },
+    {
+      "fraction": 0.7,
+      "view": "held-right",
+      "light": "overcast",
+      "file": "held-right-0.7-overcast.png",
+      "state": {
+        "timer": 0.4050000000000001,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": false,
+      "worldTravel": 0,
+      "worldExpected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "eyeTravel": null,
+      "eyeExpected": null,
+      "eyeBarrel": null,
+      "actualLight": {
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "taskLamp": 0
+      },
+      "camera": {
+        "position": [
+          0.9748267684174817,
+          -198.6619699203153,
+          -640.7682230879941
+        ],
+        "direction": [
+          -0.7815066949855991,
+          -0.2607672590642538,
+          0.566787193127017
+        ],
+        "fov": 34
+      },
+      "beforeFile": "world-rest-reconstruction-0.7-overcast.png"
+    },
+    {
+      "fraction": 0.7,
+      "view": "held-right",
+      "light": "dusk",
+      "file": "held-right-0.7-dusk.png",
+      "state": {
+        "timer": 0.4050000000000001,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": false,
+      "worldTravel": 0,
+      "worldExpected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "eyeTravel": null,
+      "eyeExpected": null,
+      "eyeBarrel": null,
+      "actualLight": {
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "taskLamp": 0
+      },
+      "camera": {
+        "position": [
+          0.9748267684174817,
+          -198.6619699203153,
+          -640.7682230879941
+        ],
+        "direction": [
+          -0.7815066949855991,
+          -0.2607672590642538,
+          0.566787193127017
+        ],
+        "fov": 34
+      },
+      "beforeFile": "world-rest-reconstruction-0.7-dusk.png"
+    },
+    {
+      "fraction": 0.7,
+      "view": "held-right",
+      "light": "night",
+      "file": "held-right-0.7-night.png",
+      "state": {
+        "timer": 0.4050000000000001,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": false,
+      "worldTravel": 0,
+      "worldExpected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "eyeTravel": null,
+      "eyeExpected": null,
+      "eyeBarrel": null,
+      "actualLight": {
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "taskLamp": 1.8242565186189756
+      },
+      "camera": {
+        "position": [
+          0.9748267684174817,
+          -198.6619699203153,
+          -640.7682230879941
+        ],
+        "direction": [
+          -0.7815066949855991,
+          -0.2607672590642538,
+          0.566787193127017
+        ],
+        "fov": 34
+      },
+      "beforeFile": "world-rest-reconstruction-0.7-night.png"
+    },
+    {
+      "fraction": 0.76,
+      "view": "hip",
+      "light": "noon",
+      "file": "hip-0.76-noon.png",
+      "state": {
+        "timer": 0.324,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": true,
+      "worldTravel": 0.02031250000000002,
+      "worldExpected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "eyeTravel": 0.07560000000000001,
+      "eyeExpected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "eyeBarrel": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "actualLight": {
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "taskLamp": 0
+      },
+      "camera": {
+        "position": [
+          0.08495192383213546,
+          -198.57726134891416,
+          -640.6011774070756
+        ],
+        "direction": [
+          0.7202488141792209,
+          0,
+          0.6937158248688191
+        ],
+        "fov": 59.99999999999999
+      }
+    },
+    {
+      "fraction": 0.76,
+      "view": "hip",
+      "light": "overcast",
+      "file": "hip-0.76-overcast.png",
+      "state": {
+        "timer": 0.324,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": true,
+      "worldTravel": 0.02031250000000002,
+      "worldExpected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "eyeTravel": 0.07560000000000001,
+      "eyeExpected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "eyeBarrel": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "actualLight": {
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "taskLamp": 0
+      },
+      "camera": {
+        "position": [
+          0.08495192383213546,
+          -198.57726134891416,
+          -640.6011774070756
+        ],
+        "direction": [
+          0.7202488141792209,
+          0,
+          0.6937158248688191
+        ],
+        "fov": 59.99999999999999
+      }
+    },
+    {
+      "fraction": 0.76,
+      "view": "hip",
+      "light": "dusk",
+      "file": "hip-0.76-dusk.png",
+      "state": {
+        "timer": 0.324,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": true,
+      "worldTravel": 0.02031250000000002,
+      "worldExpected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "eyeTravel": 0.07560000000000001,
+      "eyeExpected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "eyeBarrel": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "actualLight": {
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "taskLamp": 0
+      },
+      "camera": {
+        "position": [
+          0.08495192383213546,
+          -198.57726134891416,
+          -640.6011774070756
+        ],
+        "direction": [
+          0.7202488141792209,
+          0,
+          0.6937158248688191
+        ],
+        "fov": 59.99999999999999
+      }
+    },
+    {
+      "fraction": 0.76,
+      "view": "hip",
+      "light": "night",
+      "file": "hip-0.76-night.png",
+      "state": {
+        "timer": 0.324,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": true,
+      "worldTravel": 0.02031250000000002,
+      "worldExpected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "eyeTravel": 0.07560000000000001,
+      "eyeExpected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "eyeBarrel": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "actualLight": {
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "taskLamp": 1.1732582781450025
+      },
+      "camera": {
+        "position": [
+          0.08495192383213546,
+          -198.57726134891416,
+          -640.6011774070756
+        ],
+        "direction": [
+          0.7202488141792209,
+          0,
+          0.6937158248688191
+        ],
+        "fov": 59.99999999999999
+      }
+    },
+    {
+      "fraction": 0.76,
+      "view": "held-right",
+      "light": "noon",
+      "file": "held-right-0.76-noon.png",
+      "state": {
+        "timer": 0.324,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": false,
+      "worldTravel": 0.02031250000000002,
+      "worldExpected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "eyeTravel": null,
+      "eyeExpected": null,
+      "eyeBarrel": null,
+      "actualLight": {
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "taskLamp": 0
+      },
+      "camera": {
+        "position": [
+          0.9793643710039244,
+          -198.66529019599525,
+          -640.7703239678407
+        ],
+        "direction": [
+          -0.7815266611005127,
+          -0.26077222079362644,
+          0.566757379176879
+        ],
+        "fov": 34
+      },
+      "beforeFile": "world-rest-reconstruction-0.76-noon.png"
+    },
+    {
+      "fraction": 0.76,
+      "view": "held-right",
+      "light": "overcast",
+      "file": "held-right-0.76-overcast.png",
+      "state": {
+        "timer": 0.324,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": false,
+      "worldTravel": 0.02031250000000002,
+      "worldExpected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "eyeTravel": null,
+      "eyeExpected": null,
+      "eyeBarrel": null,
+      "actualLight": {
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "taskLamp": 0
+      },
+      "camera": {
+        "position": [
+          0.9793643710039244,
+          -198.66529019599525,
+          -640.7703239678407
+        ],
+        "direction": [
+          -0.7815266611005127,
+          -0.26077222079362644,
+          0.566757379176879
+        ],
+        "fov": 34
+      },
+      "beforeFile": "world-rest-reconstruction-0.76-overcast.png"
+    },
+    {
+      "fraction": 0.76,
+      "view": "held-right",
+      "light": "dusk",
+      "file": "held-right-0.76-dusk.png",
+      "state": {
+        "timer": 0.324,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": false,
+      "worldTravel": 0.02031250000000002,
+      "worldExpected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "eyeTravel": null,
+      "eyeExpected": null,
+      "eyeBarrel": null,
+      "actualLight": {
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "taskLamp": 0
+      },
+      "camera": {
+        "position": [
+          0.9793643710039244,
+          -198.66529019599525,
+          -640.7703239678407
+        ],
+        "direction": [
+          -0.7815266611005127,
+          -0.26077222079362644,
+          0.566757379176879
+        ],
+        "fov": 34
+      },
+      "beforeFile": "world-rest-reconstruction-0.76-dusk.png"
+    },
+    {
+      "fraction": 0.76,
+      "view": "held-right",
+      "light": "night",
+      "file": "held-right-0.76-night.png",
+      "state": {
+        "timer": 0.324,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": false,
+      "worldTravel": 0.02031250000000002,
+      "worldExpected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "eyeTravel": null,
+      "eyeExpected": null,
+      "eyeBarrel": null,
+      "actualLight": {
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "taskLamp": 1.8276814167084345
+      },
+      "camera": {
+        "position": [
+          0.9793643710039244,
+          -198.66529019599525,
+          -640.7703239678407
+        ],
+        "direction": [
+          -0.7815266611005127,
+          -0.26077222079362644,
+          0.566757379176879
+        ],
+        "fov": 34
+      },
+      "beforeFile": "world-rest-reconstruction-0.76-night.png"
+    },
+    {
+      "fraction": 0.8,
+      "view": "hip",
+      "light": "noon",
+      "file": "hip-0.8-noon.png",
+      "state": {
+        "timer": 0.26999999999999996,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": true,
+      "worldTravel": 0.06500000000000006,
+      "worldExpected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "eyeTravel": 0.07560000000000001,
+      "eyeExpected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "eyeBarrel": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "actualLight": {
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "taskLamp": 0
+      },
+      "camera": {
+        "position": [
+          0.07724851642088204,
+          -198.58073388683803,
+          -640.583718745556
+        ],
+        "direction": [
+          0.7202488141792209,
+          0,
+          0.6937158248688191
+        ],
+        "fov": 59.99999999999999
+      }
+    },
+    {
+      "fraction": 0.8,
+      "view": "hip",
+      "light": "overcast",
+      "file": "hip-0.8-overcast.png",
+      "state": {
+        "timer": 0.26999999999999996,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": true,
+      "worldTravel": 0.06500000000000006,
+      "worldExpected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "eyeTravel": 0.07560000000000001,
+      "eyeExpected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "eyeBarrel": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "actualLight": {
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "taskLamp": 0
+      },
+      "camera": {
+        "position": [
+          0.07724851642088204,
+          -198.58073388683803,
+          -640.583718745556
+        ],
+        "direction": [
+          0.7202488141792209,
+          0,
+          0.6937158248688191
+        ],
+        "fov": 59.99999999999999
+      }
+    },
+    {
+      "fraction": 0.8,
+      "view": "hip",
+      "light": "dusk",
+      "file": "hip-0.8-dusk.png",
+      "state": {
+        "timer": 0.26999999999999996,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": true,
+      "worldTravel": 0.06500000000000006,
+      "worldExpected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "eyeTravel": 0.07560000000000001,
+      "eyeExpected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "eyeBarrel": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "actualLight": {
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "taskLamp": 0
+      },
+      "camera": {
+        "position": [
+          0.07724851642088204,
+          -198.58073388683803,
+          -640.583718745556
+        ],
+        "direction": [
+          0.7202488141792209,
+          0,
+          0.6937158248688191
+        ],
+        "fov": 59.99999999999999
+      }
+    },
+    {
+      "fraction": 0.8,
+      "view": "hip",
+      "light": "night",
+      "file": "hip-0.8-night.png",
+      "state": {
+        "timer": 0.26999999999999996,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": true,
+      "worldTravel": 0.06500000000000006,
+      "worldExpected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "eyeTravel": 0.07560000000000001,
+      "eyeExpected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "eyeBarrel": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "actualLight": {
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "taskLamp": 1.1654825310446457
+      },
+      "camera": {
+        "position": [
+          0.07724851642088204,
+          -198.58073388683803,
+          -640.583718745556
+        ],
+        "direction": [
+          0.7202488141792209,
+          0,
+          0.6937158248688191
+        ],
+        "fov": 59.99999999999999
+      }
+    },
+    {
+      "fraction": 0.8,
+      "view": "held-right",
+      "light": "noon",
+      "file": "held-right-0.8-noon.png",
+      "state": {
+        "timer": 0.26999999999999996,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": false,
+      "worldTravel": 0.06500000000000006,
+      "worldExpected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "eyeTravel": null,
+      "eyeExpected": null,
+      "eyeBarrel": null,
+      "actualLight": {
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "taskLamp": 0
+      },
+      "camera": {
+        "position": [
+          0.9653167426120781,
+          -198.66057480852245,
+          -640.7596725232642
+        ],
+        "direction": [
+          -0.7814393105922866,
+          -0.2607651912402591,
+          0.566881044751439
+        ],
+        "fov": 34
+      },
+      "beforeFile": "world-rest-reconstruction-0.8-noon.png"
+    },
+    {
+      "fraction": 0.8,
+      "view": "held-right",
+      "light": "overcast",
+      "file": "held-right-0.8-overcast.png",
+      "state": {
+        "timer": 0.26999999999999996,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": false,
+      "worldTravel": 0.06500000000000006,
+      "worldExpected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "eyeTravel": null,
+      "eyeExpected": null,
+      "eyeBarrel": null,
+      "actualLight": {
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "taskLamp": 0
+      },
+      "camera": {
+        "position": [
+          0.9653167426120781,
+          -198.66057480852245,
+          -640.7596725232642
+        ],
+        "direction": [
+          -0.7814393105922866,
+          -0.2607651912402591,
+          0.566881044751439
+        ],
+        "fov": 34
+      },
+      "beforeFile": "world-rest-reconstruction-0.8-overcast.png"
+    },
+    {
+      "fraction": 0.8,
+      "view": "held-right",
+      "light": "dusk",
+      "file": "held-right-0.8-dusk.png",
+      "state": {
+        "timer": 0.26999999999999996,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": false,
+      "worldTravel": 0.06500000000000006,
+      "worldExpected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "eyeTravel": null,
+      "eyeExpected": null,
+      "eyeBarrel": null,
+      "actualLight": {
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "taskLamp": 0
+      },
+      "camera": {
+        "position": [
+          0.9653167426120781,
+          -198.66057480852245,
+          -640.7596725232642
+        ],
+        "direction": [
+          -0.7814393105922866,
+          -0.2607651912402591,
+          0.566881044751439
+        ],
+        "fov": 34
+      },
+      "beforeFile": "world-rest-reconstruction-0.8-dusk.png"
+    },
+    {
+      "fraction": 0.8,
+      "view": "held-right",
+      "light": "night",
+      "file": "held-right-0.8-night.png",
+      "state": {
+        "timer": 0.26999999999999996,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": false,
+      "worldTravel": 0.06500000000000006,
+      "worldExpected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "eyeTravel": null,
+      "eyeExpected": null,
+      "eyeBarrel": null,
+      "actualLight": {
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "taskLamp": 1.8276814167084905
+      },
+      "camera": {
+        "position": [
+          0.9653167426120781,
+          -198.66057480852245,
+          -640.7596725232642
+        ],
+        "direction": [
+          -0.7814393105922866,
+          -0.2607651912402591,
+          0.566881044751439
+        ],
+        "fov": 34
+      },
+      "beforeFile": "world-rest-reconstruction-0.8-night.png"
+    },
+    {
+      "fraction": 0.9,
+      "view": "hip",
+      "light": "noon",
+      "file": "hip-0.9-noon.png",
+      "state": {
+        "timer": 0.13499999999999998,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": true,
+      "worldTravel": 0.10968749999999997,
+      "worldExpected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "eyeTravel": 0.05185185185185182,
+      "eyeExpected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "eyeBarrel": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "actualLight": {
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "taskLamp": 0
+      },
+      "camera": {
+        "position": [
+          0.08299253067945056,
+          -198.58142134636535,
+          -640.5839738388229
+        ],
+        "direction": [
+          0.7202488141792209,
+          0,
+          0.6937158248688191
+        ],
+        "fov": 59.99999999999999
+      }
+    },
+    {
+      "fraction": 0.9,
+      "view": "hip",
+      "light": "overcast",
+      "file": "hip-0.9-overcast.png",
+      "state": {
+        "timer": 0.13499999999999998,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": true,
+      "worldTravel": 0.10968749999999997,
+      "worldExpected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "eyeTravel": 0.05185185185185182,
+      "eyeExpected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "eyeBarrel": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "actualLight": {
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "taskLamp": 0
+      },
+      "camera": {
+        "position": [
+          0.08299253067945056,
+          -198.58142134636535,
+          -640.5839738388229
+        ],
+        "direction": [
+          0.7202488141792209,
+          0,
+          0.6937158248688191
+        ],
+        "fov": 59.99999999999999
+      }
+    },
+    {
+      "fraction": 0.9,
+      "view": "hip",
+      "light": "dusk",
+      "file": "hip-0.9-dusk.png",
+      "state": {
+        "timer": 0.13499999999999998,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": true,
+      "worldTravel": 0.10968749999999997,
+      "worldExpected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "eyeTravel": 0.05185185185185182,
+      "eyeExpected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "eyeBarrel": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "actualLight": {
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "taskLamp": 0
+      },
+      "camera": {
+        "position": [
+          0.08299253067945056,
+          -198.58142134636535,
+          -640.5839738388229
+        ],
+        "direction": [
+          0.7202488141792209,
+          0,
+          0.6937158248688191
+        ],
+        "fov": 59.99999999999999
+      }
+    },
+    {
+      "fraction": 0.9,
+      "view": "hip",
+      "light": "night",
+      "file": "hip-0.9-night.png",
+      "state": {
+        "timer": 0.13499999999999998,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": true,
+      "worldTravel": 0.10968749999999997,
+      "worldExpected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "eyeTravel": 0.05185185185185182,
+      "eyeExpected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "eyeBarrel": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "actualLight": {
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "taskLamp": 1.0402414216051425
+      },
+      "camera": {
+        "position": [
+          0.08299253067945056,
+          -198.58142134636535,
+          -640.5839738388229
+        ],
+        "direction": [
+          0.7202488141792209,
+          0,
+          0.6937158248688191
+        ],
+        "fov": 59.99999999999999
+      }
+    },
+    {
+      "fraction": 0.9,
+      "view": "held-right",
+      "light": "noon",
+      "file": "held-right-0.9-noon.png",
+      "state": {
+        "timer": 0.13499999999999998,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": false,
+      "worldTravel": 0.10968749999999997,
+      "worldExpected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "eyeTravel": null,
+      "eyeExpected": null,
+      "eyeBarrel": null,
+      "actualLight": {
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "taskLamp": 0
+      },
+      "camera": {
+        "position": [
+          0.9686157133793396,
+          -198.66295664663454,
+          -640.7618207236869
+        ],
+        "direction": [
+          -0.7814562265625098,
+          -0.2607688388210224,
+          0.5668560475699445
+        ],
+        "fov": 34
+      },
+      "beforeFile": "world-rest-reconstruction-0.9-noon.png"
+    },
+    {
+      "fraction": 0.9,
+      "view": "held-right",
+      "light": "overcast",
+      "file": "held-right-0.9-overcast.png",
+      "state": {
+        "timer": 0.13499999999999998,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": false,
+      "worldTravel": 0.10968749999999997,
+      "worldExpected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "eyeTravel": null,
+      "eyeExpected": null,
+      "eyeBarrel": null,
+      "actualLight": {
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "taskLamp": 0
+      },
+      "camera": {
+        "position": [
+          0.9686157133793396,
+          -198.66295664663454,
+          -640.7618207236869
+        ],
+        "direction": [
+          -0.7814562265625098,
+          -0.2607688388210224,
+          0.5668560475699445
+        ],
+        "fov": 34
+      },
+      "beforeFile": "world-rest-reconstruction-0.9-overcast.png"
+    },
+    {
+      "fraction": 0.9,
+      "view": "held-right",
+      "light": "dusk",
+      "file": "held-right-0.9-dusk.png",
+      "state": {
+        "timer": 0.13499999999999998,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": false,
+      "worldTravel": 0.10968749999999997,
+      "worldExpected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "eyeTravel": null,
+      "eyeExpected": null,
+      "eyeBarrel": null,
+      "actualLight": {
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "taskLamp": 0
+      },
+      "camera": {
+        "position": [
+          0.9686157133793396,
+          -198.66295664663454,
+          -640.7618207236869
+        ],
+        "direction": [
+          -0.7814562265625098,
+          -0.2607688388210224,
+          0.5668560475699445
+        ],
+        "fov": 34
+      },
+      "beforeFile": "world-rest-reconstruction-0.9-dusk.png"
+    },
+    {
+      "fraction": 0.9,
+      "view": "held-right",
+      "light": "night",
+      "file": "held-right-0.9-night.png",
+      "state": {
+        "timer": 0.13499999999999998,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": false,
+      "worldTravel": 0.10968749999999997,
+      "worldExpected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rotationX": -0.05
+      },
+      "eyeTravel": null,
+      "eyeExpected": null,
+      "eyeBarrel": null,
+      "actualLight": {
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "taskLamp": 1.8276814167083848
+      },
+      "camera": {
+        "position": [
+          0.9686157133793396,
+          -198.66295664663454,
+          -640.7618207236869
+        ],
+        "direction": [
+          -0.7814562265625098,
+          -0.2607688388210224,
+          0.5668560475699445
+        ],
+        "fov": 34
+      },
+      "beforeFile": "world-rest-reconstruction-0.9-night.png"
+    },
+    {
+      "fraction": 0.96,
+      "view": "hip",
+      "light": "noon",
+      "file": "hip-0.96-noon.png",
+      "state": {
+        "timer": 0.054000000000000055,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": true,
+      "worldTravel": 0,
+      "worldExpected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "eyeTravel": 0,
+      "eyeExpected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "eyeBarrel": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "actualLight": {
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "taskLamp": 0
+      },
+      "camera": {
+        "position": [
+          0.08176606710757683,
+          -198.57702300062684,
+          -640.5992697594046
+        ],
+        "direction": [
+          0.7202488141792209,
+          0,
+          0.6937158248688191
+        ],
+        "fov": 59.99999999999999
+      }
+    },
+    {
+      "fraction": 0.96,
+      "view": "hip",
+      "light": "overcast",
+      "file": "hip-0.96-overcast.png",
+      "state": {
+        "timer": 0.054000000000000055,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": true,
+      "worldTravel": 0,
+      "worldExpected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "eyeTravel": 0,
+      "eyeExpected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "eyeBarrel": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "actualLight": {
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "taskLamp": 0
+      },
+      "camera": {
+        "position": [
+          0.08176606710757683,
+          -198.57702300062684,
+          -640.5992697594046
+        ],
+        "direction": [
+          0.7202488141792209,
+          0,
+          0.6937158248688191
+        ],
+        "fov": 59.99999999999999
+      }
+    },
+    {
+      "fraction": 0.96,
+      "view": "hip",
+      "light": "dusk",
+      "file": "hip-0.96-dusk.png",
+      "state": {
+        "timer": 0.054000000000000055,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": true,
+      "worldTravel": 0,
+      "worldExpected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "eyeTravel": 0,
+      "eyeExpected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "eyeBarrel": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "actualLight": {
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "taskLamp": 0
+      },
+      "camera": {
+        "position": [
+          0.08176606710757683,
+          -198.57702300062684,
+          -640.5992697594046
+        ],
+        "direction": [
+          0.7202488141792209,
+          0,
+          0.6937158248688191
+        ],
+        "fov": 59.99999999999999
+      }
+    },
+    {
+      "fraction": 0.96,
+      "view": "hip",
+      "light": "night",
+      "file": "hip-0.96-night.png",
+      "state": {
+        "timer": 0.054000000000000055,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": true,
+      "worldTravel": 0,
+      "worldExpected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "eyeTravel": 0,
+      "eyeExpected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "eyeBarrel": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "actualLight": {
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "taskLamp": 1.079028180606318
+      },
+      "camera": {
+        "position": [
+          0.08176606710757683,
+          -198.57702300062684,
+          -640.5992697594046
+        ],
+        "direction": [
+          0.7202488141792209,
+          0,
+          0.6937158248688191
+        ],
+        "fov": 59.99999999999999
+      }
+    },
+    {
+      "fraction": 0.96,
+      "view": "held-right",
+      "light": "noon",
+      "file": "held-right-0.96-noon.png",
+      "state": {
+        "timer": 0.054000000000000055,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": false,
+      "worldTravel": 0,
+      "worldExpected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "eyeTravel": null,
+      "eyeExpected": null,
+      "eyeBarrel": null,
+      "actualLight": {
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "taskLamp": 0
+      },
+      "camera": {
+        "position": [
+          1.0003022755422455,
+          -198.72289204170823,
+          -640.7459003120047
+        ],
+        "direction": [
+          -0.8108778264947814,
+          -0.20313288936325258,
+          0.5488298276861746
+        ],
+        "fov": 34
+      },
+      "beforeFile": "world-rest-reconstruction-0.96-noon.png"
+    },
+    {
+      "fraction": 0.96,
+      "view": "held-right",
+      "light": "overcast",
+      "file": "held-right-0.96-overcast.png",
+      "state": {
+        "timer": 0.054000000000000055,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": false,
+      "worldTravel": 0,
+      "worldExpected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "eyeTravel": null,
+      "eyeExpected": null,
+      "eyeBarrel": null,
+      "actualLight": {
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "taskLamp": 0
+      },
+      "camera": {
+        "position": [
+          1.0003022755422455,
+          -198.72289204170823,
+          -640.7459003120047
+        ],
+        "direction": [
+          -0.8108778264947814,
+          -0.20313288936325258,
+          0.5488298276861746
+        ],
+        "fov": 34
+      },
+      "beforeFile": "world-rest-reconstruction-0.96-overcast.png"
+    },
+    {
+      "fraction": 0.96,
+      "view": "held-right",
+      "light": "dusk",
+      "file": "held-right-0.96-dusk.png",
+      "state": {
+        "timer": 0.054000000000000055,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": false,
+      "worldTravel": 0,
+      "worldExpected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "eyeTravel": null,
+      "eyeExpected": null,
+      "eyeBarrel": null,
+      "actualLight": {
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "taskLamp": 0
+      },
+      "camera": {
+        "position": [
+          1.0003022755422455,
+          -198.72289204170823,
+          -640.7459003120047
+        ],
+        "direction": [
+          -0.8108778264947814,
+          -0.20313288936325258,
+          0.5488298276861746
+        ],
+        "fov": 34
+      },
+      "beforeFile": "world-rest-reconstruction-0.96-dusk.png"
+    },
+    {
+      "fraction": 0.96,
+      "view": "held-right",
+      "light": "night",
+      "file": "held-right-0.96-night.png",
+      "state": {
+        "timer": 0.054000000000000055,
+        "anim": 1.35,
+        "weapon": "pistol"
+      },
+      "eyeActive": false,
+      "worldTravel": 0,
+      "worldExpected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "worldBarrel": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rotationX": 0
+      },
+      "eyeTravel": null,
+      "eyeExpected": null,
+      "eyeBarrel": null,
+      "actualLight": {
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "taskLamp": 1.824256518619149
+      },
+      "camera": {
+        "position": [
+          1.0003022755422455,
+          -198.72289204170823,
+          -640.7459003120047
+        ],
+        "direction": [
+          -0.8108778264947814,
+          -0.20313288936325258,
+          0.5488298276861746
+        ],
+        "fov": 34
+      },
+      "beforeFile": "world-rest-reconstruction-0.96-night.png"
+    }
+  ],
+  "errors": []
+}

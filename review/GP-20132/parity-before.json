@@ -1,0 +1,40 @@
+{
+  "at": "2026-11-13T06:52:09.379Z",
+  "real": {
+    "lightOnlyLookupIsUndefined": true,
+    "lightOnlyLookupReturnsRoot": false,
+    "bounds": {
+      "min": [
+        -43.3400007635355,
+        -194.53000009059906,
+        -632.4399999976158
+      ],
+      "max": [
+        -8.660000190138817,
+        -191.26999962329865,
+        -619.5600000023842
+      ]
+    },
+    "floorGap": 5.46999990940094
+  },
+  "fake": {
+    "lightOnlyLookupIsUndefined": false,
+    "lightOnlyLookupReturnsRoot": true,
+    "bounds": {
+      "min": [
+        -0.14000000059604645,
+        -200.12999999523163,
+        -640.4399999976158
+      ],
+      "max": [
+        0.14000000059604645,
+        -199.87000000476837,
+        -639.5600000023842
+      ]
+    },
+    "floorGap": -0.12999999523162842
+  },
+  "test": "node --test review/GP-20132/fakethree-parity.test.mjs",
+  "pass": 0,
+  "fail": 2
+}

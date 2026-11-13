@@ -1,10 +1,10 @@
-FAIL  tcl334b    4 pass   1 fail  36.4s  (real renderer)
+ok    tcl334b    5 pass   0 fail  39.3s  (real renderer)
     INFO pistol the hands into each other: 0.0 mm
     INFO revolver the hands into each other: 0.0 mm
     INFO uzi the hands into each other: 0.0 mm
     PASS guns checked up in first person: 3 of 3
-    FAIL no part of either hand inside any part of a gun (deepest per gun, mm: pistol 0.1, revolver 2.6, uzi 0.1); through: revolver: 2.6 mm (r glove in ?)
+    PASS no part of either hand inside any part of a gun (deepest per gun, mm: pistol 0.1, revolver 0.0, uzi 0.1)
     PASS neither hand through the other (D-140)
     PASS the gloved wrists stay inside the sleeves at every gun's hip hold
     PASS no page errors
-1 checks: 4 pass, 1 fail (real renderer)
+1 checks: 5 pass, 0 fail (real renderer)

@@ -8,6 +8,10 @@
 //  - CL-160 (Jerry, 2026-10-10: "The secondary pistol when akimbo is stored it protrudes off of the player's back and does not
 //    sit flush"): both the pistol and the revolver ride higher now, beside the pack against the flat of his back
 //    (rig.packFit), grip in; the same checks hold for the pistol as for the revolver.
+//  - CC-347 (J151 note 8, Jerry 13 Nov: "holsters and gear hang, floaty and not properly secured"; CLAUDE DIRECTOR's OK
+//    13 Nov): the low row hung under the pack, 17-25 cm behind his seat. It rides his belt at the back now (rig.lowFit, on
+//    his hips): its spots are read there with the same bars (|x| <= 0.13 m, grip in, barrel upright, inside his outline,
+//    air to his body along his front-back axis <= 1.5 cm, clipping <= 1.5 cm); the upper row on the pack as before.
 //  - The wheel's tick (the pointer crossing a gun) is soft: gunsynth's wheelTick is a dull knock over a muted click,
 //    level <= 0.035 (it was 0.0548), no static layer, under 10% of its energy above 2 kHz (it was 81%), done in 50 ms.
 //    It plays at most once per 50 ms however fast the pointer sweeps, and a quick run of ticks is heard softer.
@@ -44,35 +48,37 @@
       for (const sp of spots) {
         if (!sp.gun || !sp.g.visible) continue;
         const side = sp.g.position.x >= 0 ? 1 : -1, tag = [a, b, c, d].join('/') + ' ' + sp.kind + (side > 0 ? '+' : '-');
-        const fit = rig.packFit && rig.packFit[sp.kind];
+        const fit = rig.packFit && rig.packFit[sp.kind], low = !!(sp.onHips && rig.lowFit && rig.lowFit[sp.kind]);   // CC-347: the low row on his belt
         // GB-190: since GP-19894 two handgun kinds ride in two rows (applyCarryPlan: the shorter +0.27 m, the taller -0.02 m; GB-276).
-        if (!fit || ![0, 0.27, -0.02].some((row) => Math.abs(sp.g.position.y - (fit.y - tp + row)) < 1e-6)) continue;   // CL-160: the pistol rides there too
+        if (!low && (!fit || ![0, 0.27, -0.02].some((row) => Math.abs(sp.g.position.y - (fit.y - tp + row)) < 1e-6))) continue;   // CL-160: the pistol rides there too
+        const home = low ? sp.g.parent : torso, hinv = low ? new THREE.Matrix4().copy(home.matrixWorld).invert() : inv;
         if (sp.kind === 'pistol') pistolSeen++; else seen++;
         const P = sp.g.position;
         // GB-177: GP-19920's clearCarryPack (ui/marine-kit-fit.js) now fits the gun's nearest surface to the pack's back face
         // (z -0.345, the pack ends at -0.333), not its origin; so check that surface: on the pack, not floating behind it.
         const sb = new THREE.Box3(), sinv = new THREE.Matrix4().copy(sp.g.parent.matrixWorld).invert();
         sp.gun.traverseVisible((o) => { const pa = o.geometry && o.geometry.attributes && o.geometry.attributes.position; if (!o.isMesh || !pa) return; const sm = new THREE.Matrix4().multiplyMatrices(sinv, o.matrixWorld); for (let q = 0; q < pa.count; q++) sb.expandByPoint(V(pa.getX(q), pa.getY(q), pa.getZ(q)).applyMatrix4(sm)); });
-        ok(Math.abs(P.x) <= 0.13 && sb.max.z >= -0.36 && sb.max.z <= -0.333, tag + ': in beside the pack (x ' + P.x.toFixed(3) + ', front surface z ' + sb.max.z.toFixed(3) + ', origin z ' + P.z.toFixed(3) + ')');
+        if (low) ok(Math.abs(P.x) <= 0.13, tag + ': in on his belt at the back (x ' + P.x.toFixed(3) + ', on his hips)');
+        else ok(Math.abs(P.x) <= 0.13 && sb.max.z >= -0.36 && sb.max.z <= -0.333, tag + ': in beside the pack (x ' + P.x.toFixed(3) + ', front surface z ' + sb.max.z.toFixed(3) + ', origin z ' + P.z.toFixed(3) + ')');
         // Grip = the gun's -y; muzzle = its -z or +z: the grip points in (toward his spine), the barrel down.
-        const gq = sp.gun.getWorldQuaternion(new THREE.Quaternion()), tq = torso.getWorldQuaternion(new THREE.Quaternion()).invert();
+        const gq = sp.gun.getWorldQuaternion(new THREE.Quaternion()), tq = home.getWorldQuaternion(new THREE.Quaternion()).invert();
         const grip = V(0, -1, 0).applyQuaternion(gq).applyQuaternion(tq), barrel = V(0, 0, 1).applyQuaternion(gq).applyQuaternion(tq);
         ok(grip.x * side < -0.9 && Math.abs(barrel.y) > 0.95, tag + ': grip turned in (' + grip.x.toFixed(2) + ' along his side-to-side), barrel upright (' + barrel.y.toFixed(2) + ')');
         // Real renderer: the outline at that height and the air to the pack in front of it.
         // GB-220: the whole stowed copy (GB-200 folds its still parts into one mesh on the copy's root, outside children[0]), a folded mesh sampled denser.
         const pts = []; sp.gun.updateMatrixWorld(true);
         sp.gun.traverse((o) => { if (!o.isMesh || !o.geometry || !o.geometry.attributes.position) return; for (let q = o; q && q !== sp.gun; q = q.parent) if (!q.visible) return; const pa = o.geometry.attributes.position, st = Math.max(1, Math.floor(pa.count / Math.max(80, Math.min(1200, pa.count / 20)))); for (let i = 0; i < pa.count; i += st) pts.push(vp(o, pa, i, V())); });
-        const loc = pts.map((p) => p.clone().applyMatrix4(inv));
+        const loc = pts.map((p) => p.clone().applyMatrix4(hinv));
         const y0 = Math.min(...loc.map((p) => p.y)) - 0.02, y1 = Math.max(...loc.map((p) => p.y)) + 0.02;
-        const bodyPts = []; for (const o of body) { const pa = o.geometry && o.geometry.attributes.position; if (!pa) continue; for (let i = 0; i < pa.count; i++) { const q = vp(o, pa, i, V()).applyMatrix4(inv); if (q.y >= y0 && q.y <= y1) bodyPts.push(q.x * side); } }
+        const bodyPts = []; for (const o of body) { const pa = o.geometry && o.geometry.attributes.position; if (!pa) continue; for (let i = 0; i < pa.count; i++) { const q = vp(o, pa, i, V()).applyMatrix4(hinv); if (q.y >= y0 && q.y <= y1) bodyPts.push(q.x * side); } }   // (in its own frame: the torso's, or the hips' for the low row)
         const outline = Math.max(...bodyPts), far = Math.max(...loc.map((p) => p.x * side));
         realOk(far - outline <= 0.01, tag + ': inside his outline (' + ((far - outline) * 100).toFixed(1) + ' cm past it)');
         if (!bodyT) bodyT = allTris(body);
-        const dir = V(0, 0, 1).transformDirection(torso.matrixWorld);
+        const dir = V(0, 0, 1).transformDirection(home.matrixWorld);
         let minClear = Infinity, maxPen = 0, hits = 0;
         for (const p of pts) { const g = rayHit(bodyT, p.clone().addScaledVector(dir, -0.25), dir, 0.6) - 0.25; if (g === Infinity) continue; hits++; minClear = Math.min(minClear, g); maxPen = Math.max(maxPen, -g); }
-        const spotKey = tag.split(' ').pop(), PACK_BAR = { 'revolver+': 0.094, 'revolver-': 0.082, 'pistol+': 0.050 }, airBar = PACK_BAR[spotKey] || 0.015;   // GB-220 (Claude, D-87): air as the before shots show it (qa/2026-10-23-GB-220/before/stow-*-back.png) + 1 cm, until '1.x: measure the drawn stows'
-        realOk(hits >= 5 && minClear <= airBar && maxPen <= 0.015, tag + ': snug on the pack (air bar ' + airBar + ' m from the GB-220 before shots), air ' + (hits ? Math.max(0, minClear).toFixed(3) : '?') + ' m, clipping ' + maxPen.toFixed(3) + ' m (' + hits + ' of ' + pts.length + ' points over the pack)');
+        const spotKey = tag.split(' ').pop(), PACK_BAR = { 'revolver+': 0.094, 'revolver-': 0.082, 'pistol+': 0.050 }, airBar = low ? 0.015 : (PACK_BAR[spotKey] || 0.015);   // GB-220 (Claude, D-87): air as the before shots show it (qa/2026-10-23-GB-220/before/stow-*-back.png) + 1 cm, until '1.x: measure the drawn stows'
+        realOk(hits >= 5 && minClear <= airBar && maxPen <= 0.015, tag + (low ? ': snug on his seat (air bar ' : ': snug on the pack (air bar ') + airBar + ' m from the GB-220 before shots), air ' + (hits ? Math.max(0, minClear).toFixed(3) : '?') + ' m, clipping ' + maxPen.toFixed(3) + ' m (' + hits + ' of ' + pts.length + ' points over the pack)');
       }
     }
     ok(seen >= 6, 'revolvers on the pack checked: ' + seen);

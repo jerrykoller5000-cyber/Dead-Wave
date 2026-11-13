@@ -1,0 +1,786 @@
+{
+  "start": {
+    "index.html": "4efc929f9af47049b1435dbbcfbd88d4f59b5605d9525933fdb6929bcc5409c9",
+    "game/viewmodel.js": "a5c6c7858804428faf5177a16f7b7bbdbb3718472a0ea93d04b819a4d3f5a790",
+    "game/viewmodel-poses.js": "74194ef42a8c18d72b59d9ff6954f8ad8dd81b4bbaf7b5b2a949204214b3d830",
+    "studio/weapon-sidearms.js": "281ac598e70bcc35f7aa524e6cfc6946a0637212155d86b36ac1b5bbe6ba4808"
+  },
+  "end": {
+    "index.html": "4efc929f9af47049b1435dbbcfbd88d4f59b5605d9525933fdb6929bcc5409c9",
+    "game/viewmodel.js": "a5c6c7858804428faf5177a16f7b7bbdbb3718472a0ea93d04b819a4d3f5a790",
+    "game/viewmodel-poses.js": "74194ef42a8c18d72b59d9ff6954f8ad8dd81b4bbaf7b5b2a949204214b3d830",
+    "studio/weapon-sidearms.js": "281ac598e70bcc35f7aa524e6cfc6946a0637212155d86b36ac1b5bbe6ba4808"
+  },
+  "changed": [],
+  "setup": {
+    "current": "pistol",
+    "offhandVisible": true,
+    "eyePairVisible": true,
+    "info": true
+  },
+  "shots": {
+    "main": 3,
+    "off": 3
+  },
+  "worst": {
+    "world-main": {
+      "stage": "firing",
+      "u": null,
+      "key": "world-main",
+      "travel": 0,
+      "position": [
+        0,
+        0.05,
+        0.075
+      ],
+      "rx": 0,
+      "expected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rx": 0
+      },
+      "error": 0
+    },
+    "world-off": {
+      "stage": "firing",
+      "u": null,
+      "key": "world-off",
+      "travel": 0,
+      "position": [
+        0,
+        0.05,
+        0.075
+      ],
+      "rx": 0,
+      "expected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rx": 0
+      },
+      "error": 0
+    },
+    "eye-main": {
+      "stage": "firing",
+      "u": null,
+      "key": "eye-main",
+      "travel": 0.0074769074201087235,
+      "position": [
+        0,
+        0.04130773144972819,
+        0.071
+      ],
+      "rx": -0.043461342751359044,
+      "expected": {
+        "position": [
+          0,
+          0.04130773144972819,
+          0.071
+        ],
+        "rx": -0.043461342751359044
+      },
+      "error": 0
+    },
+    "eye-off": {
+      "stage": "firing",
+      "u": null,
+      "key": "eye-off",
+      "travel": 0,
+      "position": [
+        0,
+        0.05,
+        0.075
+      ],
+      "rx": 0,
+      "expected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rx": 0
+      },
+      "error": 0
+    }
+  },
+  "rows": [
+    {
+      "stage": "reload",
+      "u": 0.05,
+      "key": "world-main",
+      "travel": 0,
+      "position": [
+        0,
+        0.05,
+        0.075
+      ],
+      "rx": 0,
+      "expected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rx": 0
+      },
+      "error": 0
+    },
+    {
+      "stage": "reload",
+      "u": 0.05,
+      "key": "world-off",
+      "travel": 0,
+      "position": [
+        0,
+        0.05,
+        0.075
+      ],
+      "rx": 0,
+      "expected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rx": 0
+      },
+      "error": 0
+    },
+    {
+      "stage": "reload",
+      "u": 0.05,
+      "key": "eye-main",
+      "travel": 0.07,
+      "position": [
+        0,
+        0.04,
+        0.071
+      ],
+      "rx": -0.05,
+      "expected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rx": -0.05
+      },
+      "error": 0
+    },
+    {
+      "stage": "reload",
+      "u": 0.05,
+      "key": "eye-off",
+      "travel": 0,
+      "position": [
+        0,
+        0.05,
+        0.075
+      ],
+      "rx": 0,
+      "expected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rx": 0
+      },
+      "error": 0
+    },
+    {
+      "stage": "reload",
+      "u": 0.3,
+      "key": "world-main",
+      "travel": 0,
+      "position": [
+        0,
+        0.05,
+        0.075
+      ],
+      "rx": 0,
+      "expected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rx": 0
+      },
+      "error": 0
+    },
+    {
+      "stage": "reload",
+      "u": 0.3,
+      "key": "world-off",
+      "travel": 0,
+      "position": [
+        0,
+        0.05,
+        0.075
+      ],
+      "rx": 0,
+      "expected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rx": 0
+      },
+      "error": 0
+    },
+    {
+      "stage": "reload",
+      "u": 0.3,
+      "key": "eye-main",
+      "travel": 0.07,
+      "position": [
+        0,
+        0.04,
+        0.071
+      ],
+      "rx": -0.05,
+      "expected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rx": -0.05
+      },
+      "error": 0
+    },
+    {
+      "stage": "reload",
+      "u": 0.3,
+      "key": "eye-off",
+      "travel": 0,
+      "position": [
+        0,
+        0.05,
+        0.075
+      ],
+      "rx": 0,
+      "expected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rx": 0
+      },
+      "error": 0
+    },
+    {
+      "stage": "reload",
+      "u": 0.7,
+      "key": "world-main",
+      "travel": 0,
+      "position": [
+        0,
+        0.05,
+        0.075
+      ],
+      "rx": 0,
+      "expected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rx": 0
+      },
+      "error": 0
+    },
+    {
+      "stage": "reload",
+      "u": 0.7,
+      "key": "world-off",
+      "travel": 0,
+      "position": [
+        0,
+        0.05,
+        0.075
+      ],
+      "rx": 0,
+      "expected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rx": 0
+      },
+      "error": 0
+    },
+    {
+      "stage": "reload",
+      "u": 0.7,
+      "key": "eye-main",
+      "travel": 0.07,
+      "position": [
+        0,
+        0.04,
+        0.071
+      ],
+      "rx": -0.05,
+      "expected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rx": -0.05
+      },
+      "error": 0
+    },
+    {
+      "stage": "reload",
+      "u": 0.7,
+      "key": "eye-off",
+      "travel": 0,
+      "position": [
+        0,
+        0.05,
+        0.075
+      ],
+      "rx": 0,
+      "expected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rx": 0
+      },
+      "error": 0
+    },
+    {
+      "stage": "reload",
+      "u": 0.76,
+      "key": "world-main",
+      "travel": 0.02031250000000002,
+      "position": [
+        0,
+        0.04,
+        0.071
+      ],
+      "rx": -0.05,
+      "expected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rx": -0.05
+      },
+      "error": 0
+    },
+    {
+      "stage": "reload",
+      "u": 0.76,
+      "key": "world-off",
+      "travel": 0.02031250000000002,
+      "position": [
+        0,
+        0.04,
+        0.071
+      ],
+      "rx": -0.05,
+      "expected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rx": -0.05
+      },
+      "error": 0
+    },
+    {
+      "stage": "reload",
+      "u": 0.76,
+      "key": "eye-main",
+      "travel": 0.09591250000000004,
+      "position": [
+        0,
+        0.04,
+        0.071
+      ],
+      "rx": -0.05,
+      "expected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rx": -0.05
+      },
+      "error": 0
+    },
+    {
+      "stage": "reload",
+      "u": 0.76,
+      "key": "eye-off",
+      "travel": 0.02031250000000002,
+      "position": [
+        0,
+        0.04,
+        0.071
+      ],
+      "rx": -0.05,
+      "expected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rx": -0.05
+      },
+      "error": 0
+    },
+    {
+      "stage": "reload",
+      "u": 0.8,
+      "key": "world-main",
+      "travel": 0.06500000000000006,
+      "position": [
+        0,
+        0.04,
+        0.071
+      ],
+      "rx": -0.05,
+      "expected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rx": -0.05
+      },
+      "error": 0
+    },
+    {
+      "stage": "reload",
+      "u": 0.8,
+      "key": "world-off",
+      "travel": 0.06500000000000006,
+      "position": [
+        0,
+        0.04,
+        0.071
+      ],
+      "rx": -0.05,
+      "expected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rx": -0.05
+      },
+      "error": 0
+    },
+    {
+      "stage": "reload",
+      "u": 0.8,
+      "key": "eye-main",
+      "travel": 0.14060000000000006,
+      "position": [
+        0,
+        0.04,
+        0.071
+      ],
+      "rx": -0.05,
+      "expected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rx": -0.05
+      },
+      "error": 0
+    },
+    {
+      "stage": "reload",
+      "u": 0.8,
+      "key": "eye-off",
+      "travel": 0.06500000000000006,
+      "position": [
+        0,
+        0.04,
+        0.071
+      ],
+      "rx": -0.05,
+      "expected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rx": -0.05
+      },
+      "error": 0
+    },
+    {
+      "stage": "reload",
+      "u": 0.88,
+      "key": "world-main",
+      "travel": 0.13,
+      "position": [
+        0,
+        0.04,
+        0.071
+      ],
+      "rx": -0.05,
+      "expected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rx": -0.05
+      },
+      "error": 0
+    },
+    {
+      "stage": "reload",
+      "u": 0.88,
+      "key": "world-off",
+      "travel": 0.13,
+      "position": [
+        0,
+        0.04,
+        0.071
+      ],
+      "rx": -0.05,
+      "expected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rx": -0.05
+      },
+      "error": 0
+    },
+    {
+      "stage": "reload",
+      "u": 0.88,
+      "key": "eye-main",
+      "travel": 0.2056,
+      "position": [
+        0,
+        0.04,
+        0.071
+      ],
+      "rx": -0.05,
+      "expected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rx": -0.05
+      },
+      "error": 0
+    },
+    {
+      "stage": "reload",
+      "u": 0.88,
+      "key": "eye-off",
+      "travel": 0.13,
+      "position": [
+        0,
+        0.04,
+        0.071
+      ],
+      "rx": -0.05,
+      "expected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rx": -0.05
+      },
+      "error": 0
+    },
+    {
+      "stage": "reload",
+      "u": 0.9,
+      "key": "world-main",
+      "travel": 0.10968749999999997,
+      "position": [
+        0,
+        0.04,
+        0.071
+      ],
+      "rx": -0.05,
+      "expected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rx": -0.05
+      },
+      "error": 0
+    },
+    {
+      "stage": "reload",
+      "u": 0.9,
+      "key": "world-off",
+      "travel": 0.10968749999999997,
+      "position": [
+        0,
+        0.04,
+        0.071
+      ],
+      "rx": -0.05,
+      "expected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rx": -0.05
+      },
+      "error": 0
+    },
+    {
+      "stage": "reload",
+      "u": 0.9,
+      "key": "eye-main",
+      "travel": 0.1615393518518518,
+      "position": [
+        0,
+        0.04,
+        0.071
+      ],
+      "rx": -0.05,
+      "expected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rx": -0.05
+      },
+      "error": 0
+    },
+    {
+      "stage": "reload",
+      "u": 0.9,
+      "key": "eye-off",
+      "travel": 0.10968749999999997,
+      "position": [
+        0,
+        0.04,
+        0.071
+      ],
+      "rx": -0.05,
+      "expected": {
+        "position": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rx": -0.05
+      },
+      "error": 0
+    },
+    {
+      "stage": "reload",
+      "u": 0.96,
+      "key": "world-main",
+      "travel": 0,
+      "position": [
+        0,
+        0.05,
+        0.075
+      ],
+      "rx": 0,
+      "expected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rx": 0
+      },
+      "error": 0
+    },
+    {
+      "stage": "reload",
+      "u": 0.96,
+      "key": "world-off",
+      "travel": 0,
+      "position": [
+        0,
+        0.05,
+        0.075
+      ],
+      "rx": 0,
+      "expected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rx": 0
+      },
+      "error": 0
+    },
+    {
+      "stage": "reload",
+      "u": 0.96,
+      "key": "eye-main",
+      "travel": 0,
+      "position": [
+        0,
+        0.05,
+        0.075
+      ],
+      "rx": 0,
+      "expected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rx": 0
+      },
+      "error": 0
+    },
+    {
+      "stage": "reload",
+      "u": 0.96,
+      "key": "eye-off",
+      "travel": 0,
+      "position": [
+        0,
+        0.05,
+        0.075
+      ],
+      "rx": 0,
+      "expected": {
+        "position": [
+          0,
+          0.05,
+          0.075
+        ],
+        "rx": 0
+      },
+      "error": 0
+    }
+  ],
+  "errors": []
+}

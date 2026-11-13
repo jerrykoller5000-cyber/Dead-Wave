@@ -1,0 +1,8 @@
+# claude4 — CD-13 revolver third person, part 2: the firing fist onto GT-20104's grip — 2026-11-13
+Changed:          TP_FIT.revolver.r's grip point moved to the new grip (p from first person's refit VM_FIT.revolver.r, the third-person fist's own turn kept): the firing palm was 23.5 gun mm off the new, lower, slimmer grip in third person, now 4.1 (fingers 1.6-1.7). WEAPON_HOLD.revolver was not changed (the loan unused: TP_FIT sets the hold's frame for the handguns).
+Files:            game/tp-fit.js (TP_FIT.revolver.r p only).
+Tests:            Cloud copy of the PC tree, cloud slot, one instance (rule 16): t229 76/0, tcc341 16/0 (part 1), t228 85/10 = no revolver red (ak walking 45 deg sits on the line and flips run to run; m4 walking firing grip 1.1 cm; uzi/shotgun/chainsaw/launcher as CD-12), t188 118/4 = ak, flamer, launcher, uzi lengths (other owners' models, not the revolver). Porting first person's whole fist (its turn too) made t229 'revolver aiming down: firing wrist nearly straight' fail (0.75 rad): not done.
+Screenshots:      Claude outputs/CD-13/revolver-tp/tp-revolver2.jpg (third person, four close cameras at noon, PC 08:40Z over after).
+Not verified:     Four lights (cloud light loop loses the gun; asked Antigravity). Looking at it: the change is small on screen; most of the 'gun above the hands' look is the support hand open under the fist (TP_FIT.revolver.l, the CD-9 pose) and the dark grip inside dark gloves. A full 3P two-hand refit of the revolver was not attempted before the freeze.
+Requests:         CLAUDE DIRECTOR for review; Antigravity: 3P revolver four lights.
+Contract changes: none

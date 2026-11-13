@@ -1,29 +1,26 @@
 # Claude 1
 
-state: active
+state: idle
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: CD-13 J151 P2 hands: pistol (note 3) first, then Wasp, GW-4, KR-7, Breacher, sniper, flamer, chainsaw
-touching: game/viewmodel-fit.js, studio/hand-contacts.js, studio/hand-grips.js, tools/handfit/, Claude outputs/CD-13, handoffs/2026-11-13-claude4-CD-13*
-since: 2026-11-13T01:01Z
-next: CD-13 J151 P2 hands (D-179), notes 3, 5, 16, 29, 39, 40, 54, 58: p
+task: —
+touching: —
+since: 2026-11-13T09:52Z
+next: CD-1 (18:36Z, CLAUDE DIRECTOR: the AK fist on GT-20096 accepted (
 blocked-on: —
-last-report: handoffs/2026-11-13-claude4-CD-11.md
+last-report: handoffs/2026-11-13-claude4-CD-13-revolver-tp3.md
 
 ## Notes
 
-### FOR THE FRESH SESSION (13 Nov ~01:15Z): CD-13 (J151 P2 hands, 8 guns), nothing of it landed yet
-- Order (ETA sent to the Director): pistol (note 3) -> Wasp (5) -> GW-4 (16) -> KR-7 (29) -> Breacher (58) -> sniper (40) -> flamer (54)
-  -> chainsaw (39, with Claude 5's trigger). One handoff per gun (handoffs/2026-11-13-claude4-CD-13-<gun>.md), four-light first person
-  before/after (c4/lights4.mjs + look/lights_ba.py), export sheets (c4/lookr.sh), tcl334/b/c/d + t240 green. Jerry's words:
-  handoffs/2026-11-13-jerry-J151-playtest-notes.md (rows 3,5,16,29,39,40,54,58).
-- Pistol baseline (cloud, PC tree 00:40Z; Claude outputs/CD-13/pistol-before.jpg): c4/gaps.py (new: per bone nearest gun distance,
-  gun mm, x0.633 = world) says the firing palm/middle..little touch (0.4-2.6 nearest, 5th pct 1.5-5.4: the "tighter" is closing
-  those few mm), the firing thumb tip 22 gun mm off the gun; the support thumb tip touches (0.1) but thumb2 is 23.5 off (Jerry:
-  its top half should wrap more). Plan: fit8.sh-style all-pads-touch on the firing hand (keep the index/VM_TRIGGER), then the
-  support thumb (gun/thumbside.mjs / gungrip4 THT) wrapping the frame below the slide; then contacts (cont12.sh SKIPB='[1,2,3]'
-  + mergecontact.mjs). Landing: md5-check the PC file, commit only my two files.
-- Also for review (landed): CD-1 Wasp (no change), AK fist (21:22Z), CD-10 flex cap (22:15Z), CD-11 m4 fore (00:35Z). CD-12 is
-  NEXT ROUND (asked the Director whether to start it in the cloud).
+### Session #5 (13 Nov 01:02Z-): CD-13 DONE (landed, for review), CD-12 in progress
+- LANDED (each by entry merge onto the PC's latest, handoffs/2026-11-13-claude4-CD-13-<gun>.md, pictures Claude outputs/CD-13/<gun>/):
+  pistol (support thumb top half on the frame, firing fingers re-closed), Wasp (thumb up the receiver's far side), revolver refit on
+  GT-20104 FINAL, pump refit on CC-348, KR-7 on CF-9's fore end, GW-4 (thumb up the quad rail), Breacher (thumb up the fore end).
+  Sniper/flamer/chainsaw moved to Claude 7 (CG-3, director's loan of those entries).
+- Reds not mine: tcl334b revolver index + tcl334c shotgun index = Claude 5's VM_TRIGGER rests (asked); t240 'holstered relaxed'.
+- CD-12 LANDED 08:40Z (fore z: m4 .29, ak .30, aa12 .26, sniper .20; t228 87/8). Revolver 3P: TP_FIT.revolver r+l two-hand refit
+  LANDED ~09:55Z (t229 76/0, tcc341 16/0). Antigravity asked for 3P four lights (CD-12 guns + revolver). Queue empty at 10:00Z.
+- Tools new (tools/handfit): c4/sdf_c6.py (OPENSIGN), c4/cont13.sh, c4/openchk.py, c4/where_t.py, gun/thumbwrap.mjs, gun/thumbtgt.mjs.
+  Landing: stage the PC fit files, merge only my entries (setfit format) + mergecontact.mjs, commit with expectedMtimeMs.
 
 ### Where things stand (12 Nov 22:20Z, session 11: handoffs CD-1-wasp3, CD-1-ak3, CD-10b: all for review)
 - 22:15Z LANDED CD-10 flex cap in index.html (17985663), loan returned, Claude 2 told; tcc341 16/0 cloud.

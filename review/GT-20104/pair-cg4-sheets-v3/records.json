@@ -1,0 +1,955 @@
+{
+  "start": {
+    "index.html": "4efc929f9af47049b1435dbbcfbd88d4f59b5605d9525933fdb6929bcc5409c9",
+    "game/viewmodel.js": "a5c6c7858804428faf5177a16f7b7bbdbb3718472a0ea93d04b819a4d3f5a790",
+    "game/viewmodel-poses.js": "74194ef42a8c18d72b59d9ff6954f8ad8dd81b4bbaf7b5b2a949204214b3d830",
+    "studio/weapon-sidearms.js": "281ac598e70bcc35f7aa524e6cfc6946a0637212155d86b36ac1b5bbe6ba4808"
+  },
+  "end": {
+    "index.html": "4efc929f9af47049b1435dbbcfbd88d4f59b5605d9525933fdb6929bcc5409c9",
+    "game/viewmodel.js": "a5c6c7858804428faf5177a16f7b7bbdbb3718472a0ea93d04b819a4d3f5a790",
+    "game/viewmodel-poses.js": "74194ef42a8c18d72b59d9ff6954f8ad8dd81b4bbaf7b5b2a949204214b3d830",
+    "studio/weapon-sidearms.js": "281ac598e70bcc35f7aa524e6cfc6946a0637212155d86b36ac1b5bbe6ba4808"
+  },
+  "changed": [],
+  "records": [
+    {
+      "producer": "world-off",
+      "angle": "port",
+      "light": "noon",
+      "before": "world-off-port-noon-before.png",
+      "after": "world-off-port-noon-after.png",
+      "chain": [
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Scene",
+          "visible": true
+        }
+      ],
+      "ndc": [
+        0,
+        1.0288964538931765e-14,
+        0.7601278837217278
+      ],
+      "travel": 0.13,
+      "barrel": {
+        "p": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rx": -0.05,
+        "m": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0.9987502603949663,
+          -0.04997916927067833,
+          0,
+          0,
+          0.04997916927067833,
+          0.9987502603949663,
+          0,
+          0,
+          0.04,
+          0.071,
+          1
+        ]
+      },
+      "matrixError": 0,
+      "actualLight": {
+        "key": "noon",
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "ground": 9272162,
+        "moon": 0,
+        "taskLamp": 0
+      },
+      "camera": {
+        "position": [
+          42.373968049522034,
+          -6.321401619776838,
+          -19.548443677398865
+        ],
+        "direction": [
+          -0.9943878688409548,
+          -0.10164923153650221,
+          -0.029329166881841062
+        ],
+        "fov": 45
+      },
+      "mode": "Native off-hand reload .88; geometry inspection with other meshes hidden; view space rotated only for eye inspection"
+    },
+    {
+      "producer": "world-off",
+      "angle": "port",
+      "light": "overcast",
+      "before": "world-off-port-overcast-before.png",
+      "after": "world-off-port-overcast-after.png",
+      "chain": [
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Scene",
+          "visible": true
+        }
+      ],
+      "ndc": [
+        0,
+        1.0288964538931765e-14,
+        0.7601278837217278
+      ],
+      "travel": 0.13,
+      "barrel": {
+        "p": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rx": -0.05,
+        "m": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0.9987502603949663,
+          -0.04997916927067833,
+          0,
+          0,
+          0.04997916927067833,
+          0.9987502603949663,
+          0,
+          0,
+          0.04,
+          0.071,
+          1
+        ]
+      },
+      "matrixError": 0,
+      "actualLight": {
+        "key": "overcast",
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "ground": 8158850,
+        "moon": 0,
+        "taskLamp": 0
+      },
+      "camera": {
+        "position": [
+          42.373968049522034,
+          -6.321401619776838,
+          -19.548443677398865
+        ],
+        "direction": [
+          -0.9943878688409548,
+          -0.10164923153650221,
+          -0.029329166881841062
+        ],
+        "fov": 45
+      },
+      "mode": "Native off-hand reload .88; geometry inspection with other meshes hidden; view space rotated only for eye inspection"
+    },
+    {
+      "producer": "world-off",
+      "angle": "port",
+      "light": "dusk",
+      "before": "world-off-port-dusk-before.png",
+      "after": "world-off-port-dusk-after.png",
+      "chain": [
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Scene",
+          "visible": true
+        }
+      ],
+      "ndc": [
+        0,
+        1.0288964538931765e-14,
+        0.7601278837217278
+      ],
+      "travel": 0.13,
+      "barrel": {
+        "p": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rx": -0.05,
+        "m": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0.9987502603949663,
+          -0.04997916927067833,
+          0,
+          0,
+          0.04997916927067833,
+          0.9987502603949663,
+          0,
+          0,
+          0.04,
+          0.071,
+          1
+        ]
+      },
+      "matrixError": 0,
+      "actualLight": {
+        "key": "dusk",
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "ground": 4863016,
+        "moon": 0,
+        "taskLamp": 0
+      },
+      "camera": {
+        "position": [
+          42.373968049522034,
+          -6.321401619776838,
+          -19.548443677398865
+        ],
+        "direction": [
+          -0.9943878688409548,
+          -0.10164923153650221,
+          -0.029329166881841062
+        ],
+        "fov": 45
+      },
+      "mode": "Native off-hand reload .88; geometry inspection with other meshes hidden; view space rotated only for eye inspection"
+    },
+    {
+      "producer": "world-off",
+      "angle": "port",
+      "light": "night",
+      "before": "world-off-port-night-before.png",
+      "after": "world-off-port-night-after.png",
+      "chain": [
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Scene",
+          "visible": true
+        }
+      ],
+      "ndc": [
+        0,
+        1.0288964538931765e-14,
+        0.7601278837217278
+      ],
+      "travel": 0.13,
+      "barrel": {
+        "p": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rx": -0.05,
+        "m": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0.9987502603949663,
+          -0.04997916927067833,
+          0,
+          0,
+          0.04997916927067833,
+          0.9987502603949663,
+          0,
+          0,
+          0.04,
+          0.071,
+          1
+        ]
+      },
+      "matrixError": 0,
+      "actualLight": {
+        "key": "night",
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "ground": 1382172,
+        "moon": 0,
+        "taskLamp": 0.8974195213232791
+      },
+      "camera": {
+        "position": [
+          42.373968049522034,
+          -6.321401619776838,
+          -19.548443677398865
+        ],
+        "direction": [
+          -0.9943878688409548,
+          -0.10164923153650221,
+          -0.029329166881841062
+        ],
+        "fov": 45
+      },
+      "mode": "Native off-hand reload .88; geometry inspection with other meshes hidden; view space rotated only for eye inspection"
+    },
+    {
+      "producer": "world-off",
+      "angle": "port-top",
+      "light": "noon",
+      "before": "world-off-port-top-noon-before.png",
+      "after": "world-off-port-top-noon-after.png",
+      "chain": [
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Scene",
+          "visible": true
+        }
+      ],
+      "ndc": [
+        0,
+        2.0854220319741217e-14,
+        0.7569063819889993
+      ],
+      "travel": 0.13,
+      "barrel": {
+        "p": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rx": -0.05,
+        "m": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0.9987502603949663,
+          -0.04997916927067833,
+          0,
+          0,
+          0.04997916927067833,
+          0.9987502603949663,
+          0,
+          0,
+          0.04,
+          0.071,
+          1
+        ]
+      },
+      "matrixError": 0,
+      "actualLight": {
+        "key": "noon",
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "ground": 9272162,
+        "moon": 0,
+        "taskLamp": 0
+      },
+      "camera": {
+        "position": [
+          42.259057282380404,
+          -6.0839792344976384,
+          -19.52693463753736
+        ],
+        "direction": [
+          -0.7283439968432519,
+          -0.6802850161455856,
+          -0.08202023573605288
+        ],
+        "fov": 45
+      },
+      "mode": "Native off-hand reload .88; geometry inspection with other meshes hidden; view space rotated only for eye inspection"
+    },
+    {
+      "producer": "world-off",
+      "angle": "port-top",
+      "light": "overcast",
+      "before": "world-off-port-top-overcast-before.png",
+      "after": "world-off-port-top-overcast-after.png",
+      "chain": [
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Scene",
+          "visible": true
+        }
+      ],
+      "ndc": [
+        0,
+        2.0854220319741217e-14,
+        0.7569063819889993
+      ],
+      "travel": 0.13,
+      "barrel": {
+        "p": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rx": -0.05,
+        "m": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0.9987502603949663,
+          -0.04997916927067833,
+          0,
+          0,
+          0.04997916927067833,
+          0.9987502603949663,
+          0,
+          0,
+          0.04,
+          0.071,
+          1
+        ]
+      },
+      "matrixError": 0,
+      "actualLight": {
+        "key": "overcast",
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "ground": 8158850,
+        "moon": 0,
+        "taskLamp": 0
+      },
+      "camera": {
+        "position": [
+          42.259057282380404,
+          -6.0839792344976384,
+          -19.52693463753736
+        ],
+        "direction": [
+          -0.7283439968432519,
+          -0.6802850161455856,
+          -0.08202023573605288
+        ],
+        "fov": 45
+      },
+      "mode": "Native off-hand reload .88; geometry inspection with other meshes hidden; view space rotated only for eye inspection"
+    },
+    {
+      "producer": "world-off",
+      "angle": "port-top",
+      "light": "dusk",
+      "before": "world-off-port-top-dusk-before.png",
+      "after": "world-off-port-top-dusk-after.png",
+      "chain": [
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Scene",
+          "visible": true
+        }
+      ],
+      "ndc": [
+        0,
+        2.0854220319741217e-14,
+        0.7569063819889993
+      ],
+      "travel": 0.13,
+      "barrel": {
+        "p": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rx": -0.05,
+        "m": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0.9987502603949663,
+          -0.04997916927067833,
+          0,
+          0,
+          0.04997916927067833,
+          0.9987502603949663,
+          0,
+          0,
+          0.04,
+          0.071,
+          1
+        ]
+      },
+      "matrixError": 0,
+      "actualLight": {
+        "key": "dusk",
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "ground": 4863016,
+        "moon": 0,
+        "taskLamp": 0
+      },
+      "camera": {
+        "position": [
+          42.259057282380404,
+          -6.0839792344976384,
+          -19.52693463753736
+        ],
+        "direction": [
+          -0.7283439968432519,
+          -0.6802850161455856,
+          -0.08202023573605288
+        ],
+        "fov": 45
+      },
+      "mode": "Native off-hand reload .88; geometry inspection with other meshes hidden; view space rotated only for eye inspection"
+    },
+    {
+      "producer": "world-off",
+      "angle": "port-top",
+      "light": "night",
+      "before": "world-off-port-top-night-before.png",
+      "after": "world-off-port-top-night-after.png",
+      "chain": [
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Group",
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "Scene",
+          "visible": true
+        }
+      ],
+      "ndc": [
+        0,
+        2.0854220319741217e-14,
+        0.7569063819889993
+      ],
+      "travel": 0.13,
+      "barrel": {
+        "p": [
+          0,
+          0.04,
+          0.071
+        ],
+        "rx": -0.05,
+        "m": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0.9987502603949663,
+          -0.04997916927067833,
+          0,
+          0,
+          0.04997916927067833,
+          0.9987502603949663,
+          0,
+          0,
+          0.04,
+          0.071,
+          1
+        ]
+      },
+      "matrixError": 0,
+      "actualLight": {
+        "key": "night",
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "ground": 1382172,
+        "moon": 0,
+        "taskLamp": 0.8843496166510015
+      },
+      "camera": {
+        "position": [
+          42.259057282380404,
+          -6.0839792344976384,
+          -19.52693463753736
+        ],
+        "direction": [
+          -0.7283439968432519,
+          -0.6802850161455856,
+          -0.08202023573605288
+        ],
+        "fov": 45
+      },
+      "mode": "Native off-hand reload .88; geometry inspection with other meshes hidden; view space rotated only for eye inspection"
+    }
+  ],
+  "errors": [],
+  "before": "Explicit old fixed off-hand barrel reconstruction only; after actual CG4 production"
+}

@@ -1,0 +1,7 @@
+ok    tce11    16 pass   0 fail  33.6s  (real renderer)
+    INFO the shot: slide back 54.1 gun mm; the barrel back 4.0, down 10.0, turned -0.050 rad
+    INFO empty reload (u: slide gun mm / barrel down mm): 0.05:70.0/10.0 0.3:70.0/10.0 0.6:70.0/10.0 0.7:70.0/10.0 0.8:75.6/10.0 0.88:75.6/10.0 0.95:0.0/0.0 0.99:0.0/0.0
+    INFO tactical reload: 0.3:0.0 0.6:0.0 0.8:70.0 0.95:0.0
+    INFO the pair's left gun: slide back up to 54.1 gun mm over 4 left shots
+ok    tcg4     12 pass   0 fail  32.3s  (real renderer)
+2 checks: 28 pass, 0 fail (real renderer)

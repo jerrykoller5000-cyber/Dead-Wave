@@ -57,6 +57,31 @@
     out.push('INFO tactical reload: ' + tac.map(([u, p]) => u + ':' + mm(p.s)).join(' '));
     ok(tac[0][1].s < 1e-4 && tac[1][1].s < 1e-4 && tac[2][1].s > 0.06 && tac[3][1].s < 0.001, 'rounds left: the slide at rest until the rack, one rack, home');
     T.reloadClipDbg.hold(null); st(60);
+    // the pair (ChatGPT 2's GT-20104 pair probe): the left gun's barrel on its own slide, every frame of a few shots
+    if (T.setDualOwnedDbg && T.toggleDualWieldDbg) {
+      T.flightHold(false); T.setDualOwnedDbg('pistol', true);
+      const armory = T.armoryDbg.ui().armory;
+      if (!armory.has('pistol:second')) armory.buy({ id: 'pistol:second', kind: 'pistol', loaded: null }, { store: true });
+      armory.take('pistol:second', 'secondary', 0);
+      for (let i = 0; i < 3 && !(V.info.akimbo); i++) { T.toggleDualWieldDbg(); await until(() => V.info.akimbo, 3000); }
+      ok(await until(() => V.info.active && V.info.akimbo && V.info.raise > 0.99 && !!V.gun2, 20000), 'the pair in hand');
+      T.flightHold(true);
+      const g2 = V.gun2, b2 = g2 && g2.barrel, bb2 = g2 && g2.barrelBase;
+      ok(!!b2 && !!bb2 && !!g2.work, 'the left gun has its barrel and slide');
+      if (b2 && bb2 && g2.work) {
+        T.setAmmoDbg('pistol', 10); st(5);
+        let peak = 0, off = 0, n2 = 0;
+        for (let shot = 0; shot < 4; shot++) {
+          g2.src.userData.shots = (g2.src.userData.shots | 0) + 1; T.stepFrame(1 / 120);   // a left shot, as tcl301 makes one
+          for (let i = 0; i < 40; i++) { T.stepFrame(1 / 120); const s2 = g2.workBase.z - g2.work.position.z, j = Math.min(Math.max(s2, 0), 0.004), u = Math.min(1, Math.max(0, (s2 - 0.004) / 0.004)); n2++;
+            peak = Math.max(peak, s2); if (Math.abs((bb2.z - b2.position.z) - j) > 1e-5 || Math.abs((bb2.y - b2.position.y) - 0.010 * u) > 1e-5 || Math.abs((b2.rotation.x - bb2.rx) + 0.05 * u) > 1e-5) off++; }
+          st(10);
+        }
+        out.push('INFO the pair\'s left gun: slide back up to ' + (peak * 1000).toFixed(1) + ' gun mm over 4 left shots');
+        ok(peak > 0.008 && off === 0, 'the pair: the left gun\'s barrel follows its own slide every frame (' + off + ' of ' + n2 + ' off, slide ' + (peak * 1000).toFixed(1) + ' mm)');
+      }
+      T.flightHold(false); T.toggleDualWieldDbg(); await until(() => !V.info.akimbo, 8000); T.flightHold(true);
+    }
     ok(errs.length === 0, 'no page errors (' + errs.slice(0, 2).join(' | ') + ')');
   } catch (e) { ok(false, 'threw: ' + (e && e.stack || e)); }
   finally { try { if (held) T.flightHold(false); T.reloadClipDbg && T.reloadClipDbg.hold(null); } catch (_) {} }

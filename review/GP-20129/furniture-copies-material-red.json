@@ -1,0 +1,32 @@
+{
+  "scope": "Real Armory choices, held/slung/rack; standalone Inspector factory boundary recorded separately",
+  "choices": [
+    {
+      "key": "wood",
+      "paint": false,
+      "name": "furniture-armory-wood.png",
+      "choice": "wood",
+      "source": "wood",
+      "rack": {
+        "wood": true,
+        "synthetic": false
+      },
+      "finish": "",
+      "preview": 14518
+    },
+    {
+      "key": "synthetic",
+      "paint": false,
+      "name": "furniture-armory-synthetic.png",
+      "choice": "synthetic",
+      "source": "synthetic",
+      "rack": {
+        "wood": false,
+        "synthetic": false
+      },
+      "finish": "",
+      "preview": 12002
+    }
+  ],
+  "failure": "AssertionError [ERR_ASSERTION]: actual baked rack materials\n+ actual - expected\n\n  {\n+   synthetic: false,\n-   synthetic: true,\n    wood: false\n  }\n\n    at file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/GP-20129/furniture-copies.mjs:18:119"
+}

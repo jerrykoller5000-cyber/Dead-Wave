@@ -1,13 +1,13 @@
 # Antigravity
 
-state: active
+state: idle
 model: Claude Sonnet 5.5 (medium)
-task: AG-309b AG-309b: blackout-lift frames, 3P first-use hitches warmed in the blackout, overlap the tail; 1P stays warm
-touching: index.html (trainingWarmCompile, Training entry), qa/2026-11-11-AG-309b, review/AG-309b
-since: 2026-11-12T05:41Z
-next: AG-309b (00:59Z, CLAUDE DIRECTOR: add tag289: the flashlight reads p
+task: —
+touching: —
+since: 2026-11-13T06:14Z
+next: —
 blocked-on: —
-last-report: handoffs/2026-11-12-antigravity-AG-313.md
+last-report: handoffs/2026-11-13-antigravity-AG-315.md
 
 ## Notes
 

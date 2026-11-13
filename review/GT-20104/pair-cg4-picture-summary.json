@@ -1,0 +1,98 @@
+[
+  {
+    "producer": "eye-off",
+    "angle": "port",
+    "light": "noon",
+    "changedPixels": 675
+  },
+  {
+    "producer": "eye-off",
+    "angle": "port",
+    "light": "overcast",
+    "changedPixels": 478
+  },
+  {
+    "producer": "eye-off",
+    "angle": "port",
+    "light": "dusk",
+    "changedPixels": 421
+  },
+  {
+    "producer": "eye-off",
+    "angle": "port",
+    "light": "night",
+    "changedPixels": 396
+  },
+  {
+    "producer": "eye-off",
+    "angle": "port-top",
+    "light": "noon",
+    "changedPixels": 14889
+  },
+  {
+    "producer": "eye-off",
+    "angle": "port-top",
+    "light": "overcast",
+    "changedPixels": 530
+  },
+  {
+    "producer": "eye-off",
+    "angle": "port-top",
+    "light": "dusk",
+    "changedPixels": 499
+  },
+  {
+    "producer": "eye-off",
+    "angle": "port-top",
+    "light": "night",
+    "changedPixels": 455
+  },
+  {
+    "producer": "world-off",
+    "angle": "port",
+    "light": "noon",
+    "changedPixels": 3246
+  },
+  {
+    "producer": "world-off",
+    "angle": "port",
+    "light": "overcast",
+    "changedPixels": 1507
+  },
+  {
+    "producer": "world-off",
+    "angle": "port",
+    "light": "dusk",
+    "changedPixels": 2260
+  },
+  {
+    "producer": "world-off",
+    "angle": "port",
+    "light": "night",
+    "changedPixels": 1959
+  },
+  {
+    "producer": "world-off",
+    "angle": "port-top",
+    "light": "noon",
+    "changedPixels": 3033
+  },
+  {
+    "producer": "world-off",
+    "angle": "port-top",
+    "light": "overcast",
+    "changedPixels": 1436
+  },
+  {
+    "producer": "world-off",
+    "angle": "port-top",
+    "light": "dusk",
+    "changedPixels": 1607
+  },
+  {
+    "producer": "world-off",
+    "angle": "port-top",
+    "light": "night",
+    "changedPixels": 1855
+  }
+]

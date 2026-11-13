@@ -1,0 +1,49 @@
+{
+  "start": {
+    "index.html": "5d0eb53711f95be743421b5003c2a767a084d23ad62a8ef1277775badd5f33b0",
+    "studio/weapon-sidearms.js": "281ac598e70bcc35f7aa524e6cfc6946a0637212155d86b36ac1b5bbe6ba4808",
+    "studio/weapon-pistol-action.js": "24d7aee3e7706a31b7e4a71c68a8b362b552c411924dc45f6c169d25c5118f8c",
+    "game/viewmodel.js": "130f7a130bc3e84a5133671128c303229b49d90eda2c80e07a80428956095223",
+    "game/viewmodel-poses.js": "7deaca52a07573b5c3cd3d996a0825d3d7e557328443204894cc7220120f5196",
+    "game/viewmodel-fit.js": "457b60f96c7663ace1416664ef5cfa9b0d79ac7cb7c62a68f2e37b8c8af78322",
+    "studio/hand-contacts.js": "6ad723325ed2cd53695e245d6e528726f3d91e11402b29d8a8a4756b673e8bbb",
+    "studio/hand-grips.js": "a5831642a623d266168dbdaeab4af27adaa04f32a80e53176d16e180e885f2bf",
+    "tools/tests/tce11.js": "2573c0831b3eed887116ed3f2fb47e3a7af56ccf9379ccc87f81550bf4867892",
+    "tools/tests/tcb333.js": "094cb36e10c1827ceea27f21da64a409438bfbe89414a2e23da4d97b4e03e886",
+    "tools/tests/tce10.js": "76c83c84abc5d34a0b4f2ad05661d78129b3c410eb776eff3a007f058f354d20",
+    "tools/tests/tce10-contact.js": "de6f1a3ceda6da5f636a70471f76b65ed391466858af92eb2d789a9cc750528c"
+  },
+  "end": {
+    "index.html": "5d0eb53711f95be743421b5003c2a767a084d23ad62a8ef1277775badd5f33b0",
+    "studio/weapon-sidearms.js": "281ac598e70bcc35f7aa524e6cfc6946a0637212155d86b36ac1b5bbe6ba4808",
+    "studio/weapon-pistol-action.js": "24d7aee3e7706a31b7e4a71c68a8b362b552c411924dc45f6c169d25c5118f8c",
+    "game/viewmodel.js": "130f7a130bc3e84a5133671128c303229b49d90eda2c80e07a80428956095223",
+    "game/viewmodel-poses.js": "7deaca52a07573b5c3cd3d996a0825d3d7e557328443204894cc7220120f5196",
+    "game/viewmodel-fit.js": "457b60f96c7663ace1416664ef5cfa9b0d79ac7cb7c62a68f2e37b8c8af78322",
+    "studio/hand-contacts.js": "6ad723325ed2cd53695e245d6e528726f3d91e11402b29d8a8a4756b673e8bbb",
+    "studio/hand-grips.js": "a5831642a623d266168dbdaeab4af27adaa04f32a80e53176d16e180e885f2bf",
+    "tools/tests/tce11.js": "2573c0831b3eed887116ed3f2fb47e3a7af56ccf9379ccc87f81550bf4867892",
+    "tools/tests/tcb333.js": "094cb36e10c1827ceea27f21da64a409438bfbe89414a2e23da4d97b4e03e886",
+    "tools/tests/tce10.js": "76c83c84abc5d34a0b4f2ad05661d78129b3c410eb776eff3a007f058f354d20",
+    "tools/tests/tce10-contact.js": "de6f1a3ceda6da5f636a70471f76b65ed391466858af92eb2d789a9cc750528c"
+  },
+  "changed": [],
+  "rows": [
+    {
+      "test": "tce11",
+      "pass": 13,
+      "fail": 0
+    },
+    {
+      "test": "tcb333",
+      "pass": 5,
+      "fail": 0
+    },
+    {
+      "test": "tce10",
+      "pass": 29,
+      "fail": 0
+    }
+  ],
+  "exit": 0
+}

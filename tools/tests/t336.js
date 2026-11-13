@@ -6,7 +6,7 @@
   const wait = ms => new Promise(r => setTimeout(r, ms));
   const until = async (f, ms = 30000) => { const t = performance.now(); while (performance.now() - t < ms) { if (f()) return true; await wait(40); } return !!f(); };
   try {
-    const {clipException} = await import(new URL('./core/clip-exceptions.js', location.href).href);
+    const {clipException} = await import(new URL((/\/tools\/tests\//.test(location.pathname) ? '../../' : './') + 'core/clip-exceptions.js', location.href).href);   // the suite's page lives in tools/tests/
     if (window.DWOpening?.dismissForTesting) DWOpening.dismissForTesting();
     const name = document.getElementById('playerName'); if (name) name.value = 'CB-292';
     if (!T.trainingDbg.state().active) document.getElementById('modeTraining').click();

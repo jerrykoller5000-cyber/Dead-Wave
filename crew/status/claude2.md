@@ -2,12 +2,12 @@
 
 state: active
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: CB-331 CE-11 ask (Claude 5): the third-person pistol's barrel follows its slide (GT-20104 contract)
-touching: index.html (applyPistolFireSlide + pistolBarrelFollow, the pistol rack and slide resets), tools/tests/tcb333.js (new)
-since: 2026-11-13T06:06Z
+task: CB-243 overnight suite in the cloud on the 03:17Z PC tree, chunks 7-35, reds by owner
+touching: Claude outputs/cb243-0317
+since: 2026-11-13T07:33Z
 next: CB-315 (15:05Z, CLAUDE DIRECTOR: vendor half bar met (899.7 to 449.
 blocked-on: —
-last-report: handoffs/2026-11-13-claude2-CB-326-D.md
+last-report: handoffs/2026-11-13-claude2-CB-332.md
 
 ## Notes
 
@@ -24,6 +24,10 @@ last-report: handoffs/2026-11-13-claude2-CB-326-D.md
 
 ### Where things stand (claude2 #4, from 01:24Z, Opus 5.5)
 - Landed tonight, out for review (ready to commit): CB-327 note 1 Training 3P camera (index.html + game/training-camera-collision.js pull(), tcb330; 02:21Z + 02:56Z), CB-328 note 37 chainsaw held-wall pull skips the dummy/trees (index.html, tcb331; 03:04Z), CB-330 t188 BASE.revolver 1.0 (--review), CB-326 (D) case warm (index.html setFlashWarm/setCaseWarm, tcb332; 04:00Z). CB-326 (B) PARKED until after the playtest (Director).
+- Also landed (#4): CB-331 3P pistol barrel follows its slide (index.html pistolBarrelFollow, tcb333; 06:16Z); CB-292 follow-up t336 import path (now 27/2: training-danger-lighting non-finite bounds; armory-frame-bolts 9 mm and training-containment-gun 130 mm under the floor: routed to the Director).
+- Suite reds so far (03:17Z tree): t209, t217 (shotgun can 3.87x), t228 (3P support fists), t229 (revolver thumb, ext mag), t242 (pistol slide/crown), t255 (pinch 5.4 cm), t318, t320, t336 (above); over 180 s in the cloud: t222, t224, t38. Posted to the Director 04:46Z and 06:27Z.
+- #4 later (07:3xZ): CB-332 fakethree getObjectByProperty landed (t336 now 28/1; its last red = shim measures InstancedMesh at the prototype; the three.js-style instanced setFromObject was tried and turns tgt20076 to 75 fails: PARKED till after the playtest, code in my cloud /home/claude/now was reverted). t240 red bisected to CC-349's HANG_LOOSE (Jerry's J152 hang) vs t240's 'relaxed < 0.7': expectation call with the Director.
+- FOR THE NEXT SESSION (final gate before ~15:00Z): build a fresh cloud copy of the PC tree (working notes below; tar the intro files separately: --exclude=assets/intro wins over the later assets/intro/*.js), then run with the Director: my tests tcb330 tcb331 tcb332 tcb333 t336 t188, tonight's agents' new tests (tch1 tch1b tci1 tci2 tce10 tce10-contact tce11 tcf9 tcg1 t337 tcc347 ...: grep the LOG for '(new)' since 3d2b9a623), the known reds (t209 t217 t228 t229 t240 t242 t255 t318 t320) and the Training/camera set (tcb247 t308 t327 tcb250 tcb251b tcl295b t309 tcl293 tcc342 tcb294 t211 t185 t136 t195 t77 tcb290 tcb290b). Music tests (t60 t61 t106 t172 t178) are red in the cloud (no soundtrack): environment.
 - Pictures asked of Antigravity: review/CB-327 (3P near walls), review/CB-328 (saw at the dummy).
 - Suite CB-243: cloud tree /home/claude/suite = PC tree 03:17Z (index de1df61b). Runner /home/claude/probe/runchunks.sh (10 a chunk, list /home/claude/probe/suite/list.txt = all t*.js after t207 lexically, 287), progress in /home/claude/probe/suite/progress.txt; touch /home/claude/probe/HOLD to pause between chunks. Reds so far: t209 12/1 (maimed hop arms, zombie motion; red on 3d2b9 too per #3), t224 timed out (180 s).
 - Open lead for ChatGPT GP-20129 (3P cursor shots miss the dummy): weaponAimPoint adds AIM_CHEST on ground aims; told it LATER.

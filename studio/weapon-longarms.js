@@ -2444,13 +2444,19 @@ export function makeSniperModel(ctx) {
   }
   K.box(0.056, 0.058, 0.017, gunTan, 0, -0.001, 0.645, 0, 0, 0, null, 0.005);
   // The MRAD handguard uses underside slots here instead of a continuous lower Picatinny rail.
-  // Folded bipod under the fore-end.
-  K.box(0.04, 0.03, 0.04, gunDark, 0, -0.055, 0.6);
+  // Folded bipod. CG-3 (J151 note 40, Jerry: "Sniper: the left hand isn't fully around the grip"): it ran back under the
+  // fore-end (z 0.35-0.60) exactly where the support palm wraps it, so the hand hung below it. Now a barrel-clamp bipod
+  // just ahead of the fore-end's front cap, folded forward like a real one: the legs lie parallel and close under the
+  // barrel (~6 mm), nothing behind the cap where the hand is (CLAUDE DIRECTOR 07:20Z: no 10-degree hang, no gap). Same
+  // legs, adjusters and feet at their old distances from the hinge.
+  K.box(0.036, 0.02, 0.03, gunDark, 0, 0.0095, 0.67);   // the clamp block, its top on the barrel's underside
+  K.cyl(0.004, 0.004, 0.044, gunBody, 0, 0.009, 0.682, null, 10, 'x');   // the hinge pin
   for (const sx of [-1, 1]) {
-    K.cyl(0.008, 0.008, 0.24, gunDark, sx * 0.02, -0.07, 0.48, null, 8);
-    K.box(0.02, 0.014, 0.02, gunRubber, sx * 0.02, -0.07, 0.35, 0, 0, 0, null, 0.003);
-    K.cyl(0.011, 0.011, 0.025, gunBody, sx * 0.02, -0.07, 0.393, null, 10);
-    K.cyl(0.013, 0.013, 0.012, gunBody, sx * 0.029, -0.056, 0.593, null, 12, 'x');
+    const leg = K.group(sx * 0.012, 0.009, 0.682);
+    K.cyl(0.008, 0.008, 0.24, gunDark, 0, 0, 0.113, leg, 8);
+    K.box(0.02, 0.014, 0.02, gunRubber, 0, 0, 0.243, 0, 0, 0, leg, 0.003);
+    K.cyl(0.011, 0.011, 0.025, gunBody, 0, 0, 0.2, leg, 10);
+    K.cyl(0.009, 0.009, 0.012, gunBody, sx * 0.012, 0.009, 0.682, null, 12, 'x');   // the leg's knuckle on the pin
   }
   // Trigger guard, trigger, grip, magazine.
   K.slab(gunBand([[-0.03, -0.05], [-0.031, -0.075], [-0.042, -0.086], [-0.072, -0.083], [-0.082, -0.07]], 0.007), 0.03, gunDark, { bevel: 0.004 });   // GB-180: a moulded guard, not a wire (pass 4: as wide as a real guard)

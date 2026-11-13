@@ -31,6 +31,11 @@ const lowerTurns={
   flamer: {right:[.222,.89,-.14],rightVest:[.222,.82,-.115]}
 };
 const slingMaterials=new WeakMap();
+// CC-347: the strap's path over his body after the lower turn (torso frame, +x side; mirrored on -x).
+const BODY_SHIRT=[[.172,.91,-.08],[.161,.95,-.002],[.148,1.0,.11],[.151,1.05,.17],[.162,1.125,.165],[.175,1.16,.135],[.169,1.205,.094],[.17,1.247,0]];
+const BODY_VEST=[[.174,.91,-.08],[.162,.95,-.002],[.18,1.0,.15],[.171,1.05,.215],[.171,1.125,.19],[.19,1.16,.148],[.169,1.205,.094],[.17,1.247,0]];
+// and where it comes off the shoulder's back toward the upper stud (was .205,1.155,-.135: inside the deltoid, its top at 1.177)
+const SHOULDER_BACK=[.174,1.21,-.066];
 
 // Flat webbing whose cross-section turns with the path. Projecting the width
 // onto each tangent's plane avoids a zero-width twist on the shoulder bend.
@@ -90,7 +95,7 @@ export function fitWeaponSling(T, spot, vest, clipMaterial) {
   const at=(x,y,z)=>new T.Vector3(side*x,y-tp,z);
   const lane=side>0?'right':'left',guides=lowerTurns[spot.kind];
   const guide=(vest?guides?.[lane+'Vest']:null)??guides?.[lane]??guides?.both;
-  const lower=guide?at(...guide):at(.222,.89,-.19), shoulder=at(.205,1.155,-.135);
+  const lower=guide?at(...guide):at(.222,.89,-.19), shoulder=at(...SHOULDER_BACK);
   const inverse=spot.g.matrix.clone().invert();
   const modelToSpot=spot.gun.matrix.clone().multiply(model.matrix);
   const major=.015, minor=.0035;
@@ -110,8 +115,13 @@ export function fitWeaponSling(T, spot, vest, clipMaterial) {
   });
   const web=frames.map(f=>f.web.clone().applyMatrix4(spot.g.matrix));
   const leads=frames.map(f=>f.web.clone().addScaledVector(f.out,.045).applyMatrix4(spot.g.matrix));
-  const points=[web[0],leads[0],lower,at(.235,.98,.115),
-    at(.19,1.09,vest?.224:.158),at(.205,1.151,.105),at(.212,1.177,-.015),
+  // CC-347 (J151 note 8, Jerry 13 Nov: "slings ... floaty and not properly secured"): from the lower turn the strap ran 6-12 cm
+  // off his side (x .22-.235 where his trunk is .15-.18), looped round the front of the hanging arm and went over the shoulder
+  // through the deltoid (y 1.177; its top is 1.24). It now lies on him: the back corner of his trunk above the belt, between his
+  // trunk and the upper arm, the front of the chest, the shoulder's front, top and back (measured on the game's body, shirt and
+  // plate carrier, Training; 7 mm over the surface at each point).
+  const body=(vest?BODY_VEST:BODY_SHIRT).map(p=>at(...p));
+  const points=[web[0],leads[0],lower,...body,
     shoulder,leads[1],web[1]];
   const geometry=ribbon(T,points);geometry.applyMatrix4(inverse);
   strap.geometry.dispose();strap.geometry=geometry;
@@ -127,5 +137,5 @@ export function fitWeaponSling(T, spot, vest, clipMaterial) {
     clip.quaternion.setFromRotationMatrix(new T.Matrix4().makeBasis(f.out,f.tangent,f.normal));
   });
   strap.userData.signature=signature;
-  strap.userData.fit={anchors,ends:frames.map(f=>f.center.toArray()),attachments:mountsInSpot.map(p=>p.toArray())};
+  strap.userData.fit={anchors,ends:frames.map(f=>f.center.toArray()),attachments:mountsInSpot.map(p=>p.toArray()),body:body.map(p=>p.clone().applyMatrix4(inverse).toArray())};   // CC-347: body, the path over him in the strap's frame (tcc347)
 }

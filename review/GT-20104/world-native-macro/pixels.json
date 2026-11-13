@@ -1,0 +1,90 @@
+[
+  {
+    "light": "noon",
+    "view": "right",
+    "changedPixelsAbove8": 1261,
+    "bbox": [
+      331,
+      259,
+      695,
+      342
+    ]
+  },
+  {
+    "light": "noon",
+    "view": "port-top",
+    "changedPixelsAbove8": 1440,
+    "bbox": [
+      308,
+      304,
+      510,
+      366
+    ]
+  },
+  {
+    "light": "overcast",
+    "view": "right",
+    "changedPixelsAbove8": 1258,
+    "bbox": [
+      331,
+      259,
+      695,
+      342
+    ]
+  },
+  {
+    "light": "overcast",
+    "view": "port-top",
+    "changedPixelsAbove8": 1196,
+    "bbox": [
+      308,
+      304,
+      510,
+      366
+    ]
+  },
+  {
+    "light": "dusk",
+    "view": "right",
+    "changedPixelsAbove8": 1172,
+    "bbox": [
+      331,
+      259,
+      695,
+      342
+    ]
+  },
+  {
+    "light": "dusk",
+    "view": "port-top",
+    "changedPixelsAbove8": 1310,
+    "bbox": [
+      308,
+      304,
+      510,
+      366
+    ]
+  },
+  {
+    "light": "night",
+    "view": "right",
+    "changedPixelsAbove8": 2271,
+    "bbox": [
+      331,
+      259,
+      695,
+      342
+    ]
+  },
+  {
+    "light": "night",
+    "view": "port-top",
+    "changedPixelsAbove8": 2075,
+    "bbox": [
+      308,
+      304,
+      510,
+      366
+    ]
+  }
+]

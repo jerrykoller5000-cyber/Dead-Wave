@@ -1,0 +1,476 @@
+{
+  "scope": "Real Armory choices, held/slung/rack; standalone Inspector factory boundary recorded separately",
+  "choices": [
+    {
+      "key": "wood",
+      "paint": false,
+      "name": "furniture-armory-wood.png",
+      "choice": "wood",
+      "source": "wood",
+      "rack": {
+        "wood": true,
+        "synthetic": false
+      },
+      "polymerGeometry": {
+        "expected": 18408,
+        "baked": 0
+      },
+      "diagnostic": {
+        "synthetic": [
+          {
+            "id": "6c9083c7-2ea4-4237-9d51-2a1eaf9d38e6",
+            "name": "gunPaint:ak",
+            "role": "furniture"
+          }
+        ],
+        "sourceNodes": [
+          {
+            "name": "KR-7 furniture synthetic",
+            "visible": false
+          },
+          {
+            "name": "",
+            "visible": true,
+            "id": "6c9083c7-2ea4-4237-9d51-2a1eaf9d38e6",
+            "vertices": 18408
+          }
+        ],
+        "visibleCopy": [
+          {
+            "id": "e18e7379-5e7c-491d-a385-c6a9fa6b4225",
+            "name": ""
+          },
+          {
+            "id": "8adee7e3-256e-4bd3-a6c2-cd4034eee6f3",
+            "name": ""
+          },
+          {
+            "id": "a4598fb7-635d-4224-86de-1b2df5753d72",
+            "name": ""
+          },
+          {
+            "id": "a4598fb7-635d-4224-86de-1b2df5753d72",
+            "name": ""
+          },
+          {
+            "id": "cbfe403b-ad65-4c28-9a5a-4e956fbce289",
+            "name": "gunPaint:ak",
+            "role": "receiver"
+          },
+          {
+            "id": "ea7d1bb5-6586-40a9-808e-415f870958db",
+            "name": "fold-static"
+          },
+          {
+            "id": "8ef18fc4-d8aa-4e06-be5c-ea771f6cf238",
+            "name": "gunPaint:ak",
+            "role": "magazine"
+          },
+          {
+            "id": "cc81de64-a368-4c6b-9ff2-1b30458cfc11",
+            "name": "gunPaint:ak",
+            "role": "magazine"
+          },
+          {
+            "id": "14846c12-9e7d-46fb-8bb0-4e1fc7efa646",
+            "name": "gunPaint:ak",
+            "role": "magazine"
+          },
+          {
+            "id": "a4598fb7-635d-4224-86de-1b2df5753d72",
+            "name": ""
+          },
+          {
+            "id": "3d698181-29b2-4c97-8e17-7ec4702f44ae",
+            "name": "gunPaint:ak",
+            "role": "light shell"
+          },
+          {
+            "id": "0b23dcfc-d406-48c1-a269-6b181f6d59b5",
+            "name": "gunPaint:ak",
+            "role": "light shell"
+          },
+          {
+            "id": "26ec0e18-6313-4e23-8452-3ab2ce811baa",
+            "name": ""
+          },
+          {
+            "id": "ea7d1bb5-6586-40a9-808e-415f870958db",
+            "name": "fold-static"
+          },
+          {
+            "id": "a07bcf31-e488-4ecb-b572-4ae88ad31cfe",
+            "name": "KR-7 walnut"
+          },
+          {
+            "id": "5cffd31d-44e4-4a11-ad91-0913ff23ebd1",
+            "name": "KR-7 grip stipple"
+          },
+          {
+            "id": "a4598fb7-635d-4224-86de-1b2df5753d72",
+            "name": ""
+          },
+          {
+            "id": "a4598fb7-635d-4224-86de-1b2df5753d72",
+            "name": ""
+          },
+          {
+            "id": "75b747aa-6d18-4801-beb4-5d59275c6a63",
+            "name": ""
+          },
+          {
+            "id": "cbfe403b-ad65-4c28-9a5a-4e956fbce289",
+            "name": "gunPaint:ak",
+            "role": "receiver"
+          },
+          {
+            "id": "ea7d1bb5-6586-40a9-808e-415f870958db",
+            "name": "fold-static"
+          }
+        ],
+        "rackMaterials": [
+          {
+            "id": "ea7d1bb5-6586-40a9-808e-415f870958db",
+            "name": "fold-static"
+          },
+          {
+            "id": "26ec0e18-6313-4e23-8452-3ab2ce811baa",
+            "name": ""
+          },
+          {
+            "id": "a07bcf31-e488-4ecb-b572-4ae88ad31cfe",
+            "name": "KR-7 walnut"
+          },
+          {
+            "id": "5cffd31d-44e4-4a11-ad91-0913ff23ebd1",
+            "name": "KR-7 grip stipple"
+          }
+        ]
+      },
+      "finish": "",
+      "preview": 14518
+    },
+    {
+      "key": "synthetic",
+      "paint": false,
+      "name": "furniture-armory-synthetic.png",
+      "choice": "synthetic",
+      "source": "synthetic",
+      "rack": {
+        "wood": false,
+        "synthetic": false
+      },
+      "polymerGeometry": {
+        "expected": 18408,
+        "baked": 18408
+      },
+      "diagnostic": {
+        "synthetic": [
+          {
+            "id": "6c9083c7-2ea4-4237-9d51-2a1eaf9d38e6",
+            "name": "gunPaint:ak",
+            "role": "furniture"
+          }
+        ],
+        "sourceNodes": [
+          {
+            "name": "KR-7 furniture synthetic",
+            "visible": true
+          },
+          {
+            "name": "",
+            "visible": true,
+            "id": "6c9083c7-2ea4-4237-9d51-2a1eaf9d38e6",
+            "vertices": 18408
+          }
+        ],
+        "visibleCopy": [
+          {
+            "id": "e18e7379-5e7c-491d-a385-c6a9fa6b4225",
+            "name": ""
+          },
+          {
+            "id": "8adee7e3-256e-4bd3-a6c2-cd4034eee6f3",
+            "name": ""
+          },
+          {
+            "id": "a4598fb7-635d-4224-86de-1b2df5753d72",
+            "name": ""
+          },
+          {
+            "id": "a4598fb7-635d-4224-86de-1b2df5753d72",
+            "name": ""
+          },
+          {
+            "id": "cbfe403b-ad65-4c28-9a5a-4e956fbce289",
+            "name": "gunPaint:ak",
+            "role": "receiver"
+          },
+          {
+            "id": "ea7d1bb5-6586-40a9-808e-415f870958db",
+            "name": "fold-static"
+          },
+          {
+            "id": "8ef18fc4-d8aa-4e06-be5c-ea771f6cf238",
+            "name": "gunPaint:ak",
+            "role": "magazine"
+          },
+          {
+            "id": "cc81de64-a368-4c6b-9ff2-1b30458cfc11",
+            "name": "gunPaint:ak",
+            "role": "magazine"
+          },
+          {
+            "id": "14846c12-9e7d-46fb-8bb0-4e1fc7efa646",
+            "name": "gunPaint:ak",
+            "role": "magazine"
+          },
+          {
+            "id": "a4598fb7-635d-4224-86de-1b2df5753d72",
+            "name": ""
+          },
+          {
+            "id": "3d698181-29b2-4c97-8e17-7ec4702f44ae",
+            "name": "gunPaint:ak",
+            "role": "light shell"
+          },
+          {
+            "id": "0b23dcfc-d406-48c1-a269-6b181f6d59b5",
+            "name": "gunPaint:ak",
+            "role": "light shell"
+          },
+          {
+            "id": "26ec0e18-6313-4e23-8452-3ab2ce811baa",
+            "name": ""
+          },
+          {
+            "id": "ea7d1bb5-6586-40a9-808e-415f870958db",
+            "name": "fold-static"
+          },
+          {
+            "id": "6c9083c7-2ea4-4237-9d51-2a1eaf9d38e6",
+            "name": "gunPaint:ak",
+            "role": "furniture"
+          },
+          {
+            "id": "a4598fb7-635d-4224-86de-1b2df5753d72",
+            "name": ""
+          },
+          {
+            "id": "a4598fb7-635d-4224-86de-1b2df5753d72",
+            "name": ""
+          },
+          {
+            "id": "75b747aa-6d18-4801-beb4-5d59275c6a63",
+            "name": ""
+          },
+          {
+            "id": "cbfe403b-ad65-4c28-9a5a-4e956fbce289",
+            "name": "gunPaint:ak",
+            "role": "receiver"
+          },
+          {
+            "id": "ea7d1bb5-6586-40a9-808e-415f870958db",
+            "name": "fold-static"
+          }
+        ],
+        "rackMaterials": [
+          {
+            "id": "ea7d1bb5-6586-40a9-808e-415f870958db",
+            "name": "fold-static"
+          },
+          {
+            "id": "26ec0e18-6313-4e23-8452-3ab2ce811baa",
+            "name": ""
+          }
+        ]
+      },
+      "finish": "",
+      "preview": 12002
+    },
+    {
+      "key": "synthetic",
+      "paint": true,
+      "name": "furniture-armory-synthetic-camo.png",
+      "choice": "synthetic",
+      "source": "synthetic",
+      "rack": {
+        "wood": false,
+        "synthetic": true
+      },
+      "polymerGeometry": {
+        "expected": 18408,
+        "baked": 0
+      },
+      "diagnostic": {
+        "synthetic": [
+          {
+            "id": "6c9083c7-2ea4-4237-9d51-2a1eaf9d38e6",
+            "name": "gunPaint:ak",
+            "role": "furniture"
+          }
+        ],
+        "sourceNodes": [
+          {
+            "name": "KR-7 furniture synthetic",
+            "visible": true
+          },
+          {
+            "name": "",
+            "visible": true,
+            "id": "6c9083c7-2ea4-4237-9d51-2a1eaf9d38e6",
+            "vertices": 18408
+          }
+        ],
+        "visibleCopy": [
+          {
+            "id": "e18e7379-5e7c-491d-a385-c6a9fa6b4225",
+            "name": ""
+          },
+          {
+            "id": "8adee7e3-256e-4bd3-a6c2-cd4034eee6f3",
+            "name": ""
+          },
+          {
+            "id": "a4598fb7-635d-4224-86de-1b2df5753d72",
+            "name": ""
+          },
+          {
+            "id": "a4598fb7-635d-4224-86de-1b2df5753d72",
+            "name": ""
+          },
+          {
+            "id": "cbfe403b-ad65-4c28-9a5a-4e956fbce289",
+            "name": "gunPaint:ak",
+            "role": "receiver"
+          },
+          {
+            "id": "ea7d1bb5-6586-40a9-808e-415f870958db",
+            "name": "fold-static"
+          },
+          {
+            "id": "8ef18fc4-d8aa-4e06-be5c-ea771f6cf238",
+            "name": "gunPaint:ak",
+            "role": "magazine"
+          },
+          {
+            "id": "cc81de64-a368-4c6b-9ff2-1b30458cfc11",
+            "name": "gunPaint:ak",
+            "role": "magazine"
+          },
+          {
+            "id": "14846c12-9e7d-46fb-8bb0-4e1fc7efa646",
+            "name": "gunPaint:ak",
+            "role": "magazine"
+          },
+          {
+            "id": "a4598fb7-635d-4224-86de-1b2df5753d72",
+            "name": ""
+          },
+          {
+            "id": "3d698181-29b2-4c97-8e17-7ec4702f44ae",
+            "name": "gunPaint:ak",
+            "role": "light shell"
+          },
+          {
+            "id": "0b23dcfc-d406-48c1-a269-6b181f6d59b5",
+            "name": "gunPaint:ak",
+            "role": "light shell"
+          },
+          {
+            "id": "26ec0e18-6313-4e23-8452-3ab2ce811baa",
+            "name": ""
+          },
+          {
+            "id": "ea7d1bb5-6586-40a9-808e-415f870958db",
+            "name": "fold-static"
+          },
+          {
+            "id": "6c9083c7-2ea4-4237-9d51-2a1eaf9d38e6",
+            "name": "gunPaint:ak",
+            "role": "furniture"
+          },
+          {
+            "id": "a4598fb7-635d-4224-86de-1b2df5753d72",
+            "name": ""
+          },
+          {
+            "id": "a4598fb7-635d-4224-86de-1b2df5753d72",
+            "name": ""
+          },
+          {
+            "id": "75b747aa-6d18-4801-beb4-5d59275c6a63",
+            "name": ""
+          },
+          {
+            "id": "cbfe403b-ad65-4c28-9a5a-4e956fbce289",
+            "name": "gunPaint:ak",
+            "role": "receiver"
+          },
+          {
+            "id": "ea7d1bb5-6586-40a9-808e-415f870958db",
+            "name": "fold-static"
+          }
+        ],
+        "rackMaterials": [
+          {
+            "id": "cbfe403b-ad65-4c28-9a5a-4e956fbce289",
+            "name": "gunPaint:ak",
+            "role": "receiver"
+          },
+          {
+            "id": "ea7d1bb5-6586-40a9-808e-415f870958db",
+            "name": "fold-static"
+          },
+          {
+            "id": "8ef18fc4-d8aa-4e06-be5c-ea771f6cf238",
+            "name": "gunPaint:ak",
+            "role": "magazine"
+          },
+          {
+            "id": "cc81de64-a368-4c6b-9ff2-1b30458cfc11",
+            "name": "gunPaint:ak",
+            "role": "magazine"
+          },
+          {
+            "id": "14846c12-9e7d-46fb-8bb0-4e1fc7efa646",
+            "name": "gunPaint:ak",
+            "role": "magazine"
+          },
+          {
+            "id": "3d698181-29b2-4c97-8e17-7ec4702f44ae",
+            "name": "gunPaint:ak",
+            "role": "light shell"
+          },
+          {
+            "id": "0b23dcfc-d406-48c1-a269-6b181f6d59b5",
+            "name": "gunPaint:ak",
+            "role": "light shell"
+          },
+          {
+            "id": "26ec0e18-6313-4e23-8452-3ab2ce811baa",
+            "name": ""
+          },
+          {
+            "id": "6c9083c7-2ea4-4237-9d51-2a1eaf9d38e6",
+            "name": "gunPaint:ak",
+            "role": "furniture"
+          }
+        ]
+      },
+      "finish": "m81",
+      "preview": 16854
+    }
+  ],
+  "slung": {
+    "kind": "ak",
+    "wood": false,
+    "synthetic": true
+  },
+  "standalone": {
+    "selected": "synthetic",
+    "built": "wood",
+    "scope": "standalone catalog factory builder"
+  },
+  "errors": []
+}
