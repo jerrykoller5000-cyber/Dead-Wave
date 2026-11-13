@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';import {spawn} from 'node:child_process';import {readFile,writeFile} from 'node:fs/promises';import {createHash} from 'node:crypto';
+assert(process.env.DW_GAME_TEST_TOKEN);const phase=process.argv[2];assert(['before','after'].includes(phase));
+const tests=phase==='before'?['tcb317','t283']:['tcb317','t283','t38'];
+const files=['index.html','studio/weapon-effects.js','studio/weapon-sidearms.js','studio/weapon-heavy.js','game/viewmodel.js'];
+const snap=async()=>Object.fromEntries(await Promise.all(files.map(async p=>[p,createHash('sha256').update(await readFile(p)).digest('hex')])));
+const start=await snap();let output='';const p=spawn(process.execPath,['tools/realtest.mjs',...tests],{env:process.env,stdio:['ignore','pipe','pipe']});
+for(const s of [p.stdout,p.stderr])s.on('data',d=>{output+=d;process.stdout.write(d);});const code=await new Promise(r=>p.on('close',r));
+const end=await snap(),changed=files.filter(f=>start[f]!==end[f]),rows=[...output.matchAll(/^\s*(?:ok|FAIL)\s+(\S+)\s+(\d+) pass\s+(\d+) fail/gm)].map(m=>({test:m[1],pass:+m[2],fail:+m[3]}));
+await writeFile(new URL('flash-'+phase+'-checks.txt',import.meta.url),output);
+await writeFile(new URL('flash-'+phase+'-checks.json',import.meta.url),JSON.stringify({tests,rows,start,end,changed,exit:code},null,2));
+assert.equal(code,0);assert.equal(rows.length,tests.length);assert(rows.every(r=>r.fail===0),'Original flash/draw gate failed');
+console.log('PASS original '+phase+'flash checks '+JSON.stringify(rows)+' sourcechanges '+JSON.stringify(changed));

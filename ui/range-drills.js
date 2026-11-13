@@ -23,11 +23,11 @@ drill('ak','heavy-beat','groups',{group:2,waves:8,exposure:2.2,gap:.8,order:[0,1
 drill('ak','torso-ladder','ladder',{zone:'ring',waves:6,exposure:4.2,duration:35});
 drill('ak','two-mags','budget',{budget:60,minHits:3,maxEvents:3,waves:15,exposure:2.4,duration:45,efficiencyBonus:50});
 drill('ak','reset-and-read','calls',{waves:10,zoneCycle:['head','bull','bull'],exposure:2.5,gap:.9,speedBonus:5});
-drill('shotgun','seven-on-steel','precision',{layout:'close',maxEvents:7,duration:25,pelletBonus:2});
-drill('shotgun','pump-rhythm','sequence',{layout:'close',maxEvents:7,waves:10,exposure:2.3,gap:.8,pelletBonus:2});
-drill('shotgun','double-door','groups',{layout:'pairs',group:2,maxEvents:7,waves:5,exposure:3.2,duration:30});
-drill('shotgun','eight-shells','budget',{layout:'close',budget:8,maxEvents:7,waves:8,exposure:3.2,efficiencyBonus:50});
-drill('shotgun','center-mass','calls',{layout:'close',zoneCycle:['bull','ring'],maxEvents:7,waves:8,exposure:2.8,pelletBonus:3});
+drill('shotgun','seven-on-steel','precision',{layout:'close',maxEvents:18,duration:25,pelletBonus:2});
+drill('shotgun','pump-rhythm','sequence',{layout:'close',maxEvents:18,waves:10,exposure:2.3,gap:.8,pelletBonus:2});
+drill('shotgun','double-door','groups',{layout:'pairs',group:2,maxEvents:18,waves:5,exposure:3.2,duration:30});
+drill('shotgun','eight-shells','budget',{layout:'close',budget:8,maxEvents:18,waves:8,exposure:3.2,efficiencyBonus:50});
+drill('shotgun','center-mass','calls',{layout:'close',zoneCycle:['bull','ring'],maxEvents:18,waves:8,exposure:2.8,pelletBonus:3});
 drill('aa12','breach-wave','groups',{layout:'close',group:3,waves:6,maxEvents:5,exposure:2.3});
 drill('aa12','five-pellet-focus','precision',{layout:'close',zone:'ring',maxEvents:5,duration:25,pelletBonus:4});
 drill('aa12','drum-discipline','budget',{layout:'close',budget:20,waves:12,maxEvents:5,exposure:2.4,efficiencyBonus:60});
@@ -48,7 +48,7 @@ drill('pistol','first-steps','sequence',{layout:'close',waves:5,exposure:6,gap:1
 drill('pistol','draw-ready','sequence',{layout:'close',waves:1,exposure:8,duration:12,startHolstered:true,clearBonus:20});
 drill('m4','reload-ready','sequence',{layout:'close',waves:1,minHits:2,maxEvents:2,exposure:12,duration:18,initialRounds:0,requireReload:true});
 drill('pistol','pistol-rifle','sequence',{waves:6,exposure:6,gap:1,duration:50,weaponCycle:['pistol','m4']});
-drill('shotgun','three-gun','sequence',{layout:'close',waves:9,exposure:5,gap:1,duration:65,maxEvents:7,weaponCycle:['pistol','m4','shotgun']});
+drill('shotgun','three-gun','sequence',{layout:'close',waves:9,exposure:5,gap:1,duration:65,maxEvents:18,weaponCycle:['pistol','m4','shotgun']});
 export const RANGE_DRILLS=Object.freeze(rows);
 export const drillsFor=w=>RANGE_DRILLS.filter(d=>d.weapon===w);
 export const findDrill=(w,id)=>RANGE_DRILLS.find(d=>d.weapon===w&&d.id===id)||null;

@@ -1,0 +1,8 @@
+ok    tcl334b    5 pass   0 fail  51.5s  (real renderer)
+    INFO pistol the hands into each other: 0.2 mm
+    INFO revolver the hands into each other: 0.3 mm
+    INFO uzi the hands into each other: 0.2 mm
+ok    tcb301    9 pass   0 fail  47.1s  (real renderer)
+    INFO the offhand Wasp has no setMagazineRounds of its own (a clone drops userData functions): its count waits on the art
+2 checks: 14 pass, 0 fail (real renderer)
+SOURCE CHANGES []

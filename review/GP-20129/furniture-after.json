@@ -1,0 +1,26 @@
+{
+  "phase": "after",
+  "scope": "UI fixture, not model/persistence proof",
+  "before": {
+    "buttons": 2,
+    "current": "wood"
+  },
+  "changes": [
+    {
+      "kind": "ak",
+      "key": "synthetic",
+      "accepted": true
+    },
+    {
+      "kind": "ak",
+      "key": "wood",
+      "accepted": true
+    },
+    {
+      "kind": "ak",
+      "key": "synthetic",
+      "accepted": false
+    }
+  ],
+  "errors": []
+}

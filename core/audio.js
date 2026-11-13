@@ -614,7 +614,7 @@ export const AudioSys = (() => {
       if (b && !b.h.stopped) b.h.stop(0.4);
       if (!(want > 0.00002)) { beds.delete(key); return takes.ready(id) && !muted; }
       let h = null;
-      try { h = takes.loop(id, { bus: o.bus || ambBus || sfxGain, pan: o.pan || 0 }); } catch (_) { h = null; }
+      try { h = takes.loop(id, { bus: o.bus || ambBus || sfxGain, pan: o.pan || 0, from: o.from, to: o.to }); } catch (_) { h = null; }   // CI-1: from/to, a stretch of the take
       if (!h) { beds.delete(key); return false; }
       b = { h, id, quietAt: 0, last: c.currentTime }; beds.set(key, b);
     }
@@ -2006,7 +2006,7 @@ export const AudioSys = (() => {
   }
   // Called every frame by the game loop with the current state.
   function updateMusic(dt, state) {
-    if(trainingMode){trainingSound?.update(muted?0:(motif&&sec?0.35:1),!!state.paused);trainingFacility?.tick(muted||!!state.paused);motifUpdate(dt,state);return;}
+    if(trainingMode){trainingSound?.update(muted?0:(motif&&sec?0.35:1),!!state.paused);trainingFacility?.tick(muted||!!state.paused);motifUpdate(dt,state);pulseBeds();return;}   // CF-8 (J151 note 53): updateAmbience is off in Training, so its pulse beds (a burning plate's hiss, a ground fire's crackle) stop here once nothing keeps them
     lastState = state;
     const started = !!state.started;
     const phaseNow = state.phase;
@@ -2941,15 +2941,24 @@ export const AudioSys = (() => {
     return sawLoop;
   }
   // CL-161: Jerry's idle take as the engine: looped, pitched and pushed up with the revs; the synth engine goes quiet under it.
+  // CI-1 (J151 note 33: "The sound is still wrong when the chainsaw is running and the trigger is pulled with no
+  // contact"): on the throttle the idle take was sped up to 1.85x, a chipmunked idle rather than a saw at full throttle.
+  // Jerry's full-throttle takes (weapon-foley/chainsaw-rev, "revving to full throttle and holding") now carry the revs:
+  // the two beds crossfade with rev, the idle only a little faster under it; a cut still lays chainsaw-cut over the top.
+  // The rev bed loops the steady middle of each take (one of them dies away in its last half second).
+  const SAW_REV_TAKE = 'weapon-foley/chainsaw-rev';
   function sawBed(rev) {
     const on = !!sawLoop && !muted;
-    const ok = on && bed('saw', 'weapon-foley/chainsaw-idle', 0.6 + 0.9 * rev, { bus: weapBus || sfxGain, rate: 1 + 0.85 * rev, tc: 0.07 });
+    const revTake = on && takes.ready(SAW_REV_TAKE);
+    const ok = on && bed('saw', 'weapon-foley/chainsaw-idle', (0.6 + 0.9 * rev) * (revTake ? 1 - 0.55 * rev : 1), { bus: weapBus || sfxGain, rate: 1 + (revTake ? 0.2 : 0.85) * rev, tc: 0.07 });
+    if (on && (revTake || beds.has('sawRev'))) bed('sawRev', SAW_REV_TAKE, revTake ? 2 * rev : 0, { bus: weapBus || sfxGain, tc: 0.07, from: 0.1, to: 0.62 });
     if (sawLoop) sawLoop.recorded = ok;
     if (ok && sawLoop) { try { sawLoop.gain.gain.cancelScheduledValues(ctx.currentTime); sawLoop.gain.gain.setTargetAtTime(0.0001, ctx.currentTime, 0.05); } catch (_) {} }
     return ok;
   }
   function killSawLoop(slow) {
     stopBed('saw', slow ? 0.6 : 0.12);   // CL-161
+    stopBed('sawRev', slow ? 0.4 : 0.12);   // CI-1 (note 33): the full-throttle bed
     if (!sawLoop) return;
     const n = sawLoop; sawLoop = null;
     const c = ctx; if (!c) return;

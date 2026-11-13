@@ -1,0 +1,150 @@
+{
+  "mode": "Current tree only: eight-second High first-person M4 Training sanity; no before FPS baseline and no sustained hot-FX benchmark",
+  "result": {
+    "scenario": "training",
+    "seconds": 8,
+    "fps": 60,
+    "low": 54.8,
+    "worst": 17.7,
+    "hitches": 0,
+    "draws": 239,
+    "triangles": 175433,
+    "zombies": 0,
+    "gfx": "high",
+    "windows": 7,
+    "viewmodelMs": 0.32,
+    "fp": {
+      "first": true,
+      "w": 0.92,
+      "weapon": "m4",
+      "asked": "m4",
+      "issued": true,
+      "unarmed": false,
+      "vm": true,
+      "vmFn": true
+    },
+    "prof": {
+      "frames": 488,
+      "frameMs": 16.67,
+      "tickMs": 11.36,
+      "outsideMs": 5.31,
+      "last10": null,
+      "top": [
+        {
+          "k": "r:render",
+          "avg": 5.41,
+          "max": 10.6
+        },
+        {
+          "k": "m:hold",
+          "avg": 2.2,
+          "max": 5.8
+        },
+        {
+          "k": "m:pose",
+          "avg": 0.93,
+          "max": 2.9
+        },
+        {
+          "k": "r:matrices",
+          "avg": 0.68,
+          "max": 1.5
+        },
+        {
+          "k": "aim+climb",
+          "avg": 0.57,
+          "max": 1.4
+        },
+        {
+          "k": "viewmodel",
+          "avg": 0.32,
+          "max": 0.8
+        },
+        {
+          "k": "effects",
+          "avg": 0.27,
+          "max": 0.7
+        },
+        {
+          "k": "r:rigSkin",
+          "avg": 0.14,
+          "max": 0.7
+        },
+        {
+          "k": "drops+hud",
+          "avg": 0.12,
+          "max": 0.8
+        },
+        {
+          "k": "w:rest",
+          "avg": 0.12,
+          "max": 0.4
+        },
+        {
+          "k": "daynight",
+          "avg": 0.09,
+          "max": 0.3
+        },
+        {
+          "k": "hud+audio",
+          "avg": 0.08,
+          "max": 0.3
+        }
+      ],
+      "spikes": [],
+      "spikeCauses": {
+        "spikes": 0,
+        "pipelines": 0,
+        "builds": 0,
+        "uploads": 0,
+        "sunShadow": 0,
+        "gc": 0,
+        "code": 0
+      },
+      "gpuMs": 0.23,
+      "gpuSamples": 387,
+      "pipelines": {
+        "made": 0,
+        "released": 0,
+        "withNewShaders": 0,
+        "top": [],
+        "first": []
+      },
+      "builds": {
+        "made": 0,
+        "top": [],
+        "zombieAndEcho": []
+      },
+      "renderObjects": {
+        "made": 0,
+        "perFrame": 0,
+        "top": [],
+        "spikes": []
+      },
+      "gc": null
+    },
+    "light": {
+      "time": 0.5,
+      "lightsOff": false,
+      "room": true,
+      "active": true,
+      "wake": false,
+      "hidden": 574,
+      "blackout": false,
+      "fogNear": 190,
+      "fogFar": 640,
+      "background": "87b7ff",
+      "sun": 1.73,
+      "hemi": 0.68,
+      "ambient": 0.04,
+      "pointOn": 4,
+      "pointAll": 27,
+      "pool": 1,
+      "standIns": 23,
+      "brightness": 1,
+      "exposure": 1,
+      "graded": false,
+      "danger": 0
+    }
+  }
+}

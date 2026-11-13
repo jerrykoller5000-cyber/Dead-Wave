@@ -1,0 +1,16 @@
+{
+  "phase": "before",
+  "scope": "Native game UI and KR-7 copies",
+  "initial": {
+    "buttons": 0,
+    "state": {
+      "ak": "wood"
+    },
+    "copy": [
+      true,
+      false
+    ],
+    "stored": null
+  },
+  "errors": []
+}

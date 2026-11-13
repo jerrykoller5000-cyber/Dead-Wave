@@ -37,8 +37,10 @@ const gauss = (r) => Math.sqrt(-2 * Math.log(r() + 1e-9)) * Math.cos(6.2832 * r(
 export function dressBuildWear(T, { B, D, gate, add, std, texture }) {
   const parts = [], decals = [];
   const tex = (w, h, draw) => (texture ? texture(w, h, draw) : null);
+  // CJ-1 (J151 note 63): the floor's wear lies on the same plane as the no-build paint (-1) and its yellow edge (-2);
+  // one polygonOffset step above both, or the depth buffer picks a winner pixel by pixel and the marks flicker.
   const mat = (map) => std({ color: 0xffffff, map, transparent: true, depthWrite: false, roughness: 0.92, metalness: 0,
-    polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -1 });
+    polygonOffset: true, polygonOffsetFactor: -3, polygonOffsetUnits: -3 });
   const mounts = containmentMounts(B, 0);
   const W = B.maxX - B.minX, L = B.maxZ - B.minZ, FS = BUILD_WEAR.FLOOR_PX, WS = BUILD_WEAR.WALL_PX, WH = BUILD_WEAR.WALL_H;
 

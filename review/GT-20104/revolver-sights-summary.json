@@ -1,0 +1,23 @@
+{
+  "tests": [
+    "t188",
+    "t277"
+  ],
+  "rows": [
+    {
+      "test": "t188",
+      "pass": 117,
+      "fail": 5
+    },
+    {
+      "test": "t277",
+      "pass": 46,
+      "fail": 0
+    }
+  ],
+  "changed": [
+    "studio/hand-contacts.js",
+    "game/viewmodel-fit.js"
+  ],
+  "exit": 0
+}

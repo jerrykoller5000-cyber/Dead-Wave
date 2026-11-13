@@ -1,10 +1,10 @@
 # Claude 1
 
-state: idle
+state: active
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: —
-touching: —
-since: 2026-11-13T00:43Z
+task: CD-13 J151 P2 hands: pistol (note 3) first, then Wasp, GW-4, KR-7, Breacher, sniper, flamer, chainsaw
+touching: game/viewmodel-fit.js, studio/hand-contacts.js, studio/hand-grips.js, tools/handfit/, Claude outputs/CD-13, handoffs/2026-11-13-claude4-CD-13*
+since: 2026-11-13T01:01Z
 next: CD-13 J151 P2 hands (D-179), notes 3, 5, 16, 29, 39, 40, 54, 58: p
 blocked-on: —
 last-report: handoffs/2026-11-13-claude4-CD-11.md

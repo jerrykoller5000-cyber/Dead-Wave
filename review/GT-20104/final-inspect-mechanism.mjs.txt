@@ -1,0 +1,1 @@
+PASS native model-contract before/candidate32stills, fixed cameras,4actual lights, no black frames

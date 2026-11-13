@@ -798,6 +798,78 @@ function akGripCheeks(T, gun, wood, stipple) {
   return parts;
 }
 
+// CF-9 (J151 note 21, Jerry: "The KR-7 needs a fat fore end like a Draco's so the left hand fits and grips it"; his
+// reference, look-only: a classic thick, rounded wood lower handguard the hand wraps). A lofted, rounded body: each
+// cross-section a full superellipse under a flat top at the gas tube's line (y 0.012), fat and deep through the grip
+// (z 0.29-0.45: 0.078 across, down to y -0.068), easing in at both ends to sit inside the steel bands (z 0.236, 0.512).
+const AK_FORE = { z0: 0.244, z1: 0.536, top: 0.012, w: [0.031, 0.039, 0.0305], d: [-0.036, -0.068, -0.034], n: 2.7 };
+const akForeCache = new WeakMap();
+function akForeEndGeometry(T) {
+  if (akForeCache.has(T)) return akForeCache.get(T);
+  const F = AK_FORE, ease = (t) => t * t * (3 - 2 * t);
+  const along = (z) => {
+    // rear ramp 0.244 -> 0.30, the plateau to 0.44, the front ramp to 0.50, then the band's size to the nose
+    if (z <= 0.30) { const t = ease(Math.max(0, (z - F.z0) / 0.056)); return [F.w[0] + (F.w[1] - F.w[0]) * t, F.d[0] + (F.d[1] - F.d[0]) * t]; }
+    if (z <= 0.44) return [F.w[1], F.d[1]];
+    const t = ease(Math.min(1, (z - 0.44) / 0.06));
+    return [F.w[1] + (F.w[2] - F.w[1]) * t, F.d[1] + (F.d[2] - F.d[1]) * t];
+  };
+  const zs = [];
+  for (let z = F.z0; z < F.z1 - 1e-6; z += 0.008) zs.push(z);
+  zs.push(F.z1);
+  const M = 36, pos = [], idx = [];
+  const ring = (z, k = 1) => {
+    const [w, d] = along(z), yc = (F.top + d) / 2, hh = (F.top - d) / 2;
+    for (let i = 0; i < M; i++) {
+      const a = i / M * Math.PI * 2, c = Math.cos(a), s = Math.sin(a);
+      const x = Math.sign(c) * Math.pow(Math.abs(c), 2 / F.n) * w * k;
+      const y = yc + Math.sign(s) * Math.pow(Math.abs(s), 2 / F.n) * hh * k;
+      pos.push(x, Math.min(F.top, y), z);
+    }
+  };
+  // the ends: a short rounded shoulder (two inset rings) so the faces meet the bands without a sharp lip
+  ring(F.z0 - 0.002, 0.82); ring(F.z0, 0.96);
+  for (const z of zs) ring(z);
+  ring(F.z1 + 0.003, 0.9); ring(F.z1 + 0.005, 0.7);
+  const R = pos.length / 3 / M;
+  for (let r = 0; r < R - 1; r++) for (let i = 0; i < M; i++) {
+    const a = r * M + i, b = r * M + (i + 1) % M, c = (r + 1) * M + i, e = (r + 1) * M + (i + 1) % M;
+    idx.push(a, c, b, b, c, e);
+  }
+  for (const [r, back] of [[0, true], [R - 1, false]]) {
+    const z = pos[(r * M) * 3 + 2], cen = pos.length / 3;
+    let cy = 0; for (let i = 0; i < M; i++) cy += pos[(r * M + i) * 3 + 1]; cy /= M;
+    pos.push(0, cy, z);
+    for (let i = 0; i < M; i++) { const a = r * M + i, b = r * M + (i + 1) % M; if (back) idx.push(cen, a, b); else idx.push(cen, b, a); }
+  }
+  let g = new T.BufferGeometry();
+  g.setAttribute('position', new T.Float32BufferAttribute(pos, 3));
+  g.setIndex(idx);
+  g.computeVertexNormals();
+  g = g.toNonIndexed();
+  g.setAttribute('uv', new T.Float32BufferAttribute(new Float32Array(g.attributes.position.count * 2), 2));
+  g.computeBoundingBox(); g.computeBoundingSphere();
+  akForeCache.set(T, g);
+  return g;
+}
+
+// CF-9 (note 27): the KR-7's furniture choice. The Armory (ChatGPT, GP-20129) calls this on every copy of the gun.
+export const KR7_FURNITURE = Object.freeze({ wood: 'KR-7 furniture wood', synthetic: 'KR-7 furniture synthetic' });
+export function setKr7Furniture(gun, kind) {
+  const synthetic = kind === 'synthetic';
+  let found = false;
+  gun?.traverse?.((o) => {
+    if (o.name === KR7_FURNITURE.wood) { o.visible = !synthetic; found = true; }
+    else if (o.name === KR7_FURNITURE.synthetic) { o.visible = synthetic; found = true; }
+  });
+  return found ? (synthetic ? 'synthetic' : 'wood') : null;
+}
+export function kr7Furniture(gun) {
+  let kind = null;
+  gun?.traverse?.((o) => { if (o.name === KR7_FURNITURE.synthetic) kind = o.visible ? 'synthetic' : 'wood'; });
+  return kind;
+}
+
 export function makeAkModel(ctx) {
   const { THREE, gunKit, gunBand, gunEffects, gunSuppressor, finishGun, profileCurve, gunMid, gunDark, gunAccent, gunRubber, woodDark, gunMetal } = ctx;
   const {receiver: gunBody, bracket, birch: woodMat, cartridge} = krFinish(ctx);
@@ -826,8 +898,33 @@ export function makeAkModel(ctx) {
   D.pin(gun, 0, 0.0, -0.12, { axis: 'x', len: 2 * HW, r: 0.003, mat: gunDark, caps: true });   // the hammer pin
   D.pin(gun, 0, -0.006, -0.06, { axis: 'x', len: 2 * HW, r: 0.003, mat: gunDark, caps: true });  // the trigger pin
   // Removable side bracket. Its shelf supports the short optic rail at y=.085.
+  // CF-9 (J151 note 22, Jerry: the rectangle on the left side "looks like an ejection port. Remove it, or if it's the
+  // ACOG mount point, make it more detailed and obvious"): the left wall carries an AK's riveted dovetail side rail, the
+  // optic's mount point, on every KR-7: a slim base plate, the two dovetail lips (bevelled toward the wall), three
+  // lightening windows and three rivets, in the bracket's lighter parkerized grey so it reads as a fitted rail. The removable bracket below clamps over it when an optic is fitted (its base
+  // box hides the rail then) and now shows its clamp: the jaws, the throw lever and the tension nut.
+  {
+    const railX = -HW - 0.00175, rail = K.box(0.0035, 0.016, 0.106, bracket, railX, 0.008, 0.063, 0, 0, 0, null, 0.0008);
+    rail.name = 'KR-7 side rail';
+    trimPanelBack(THREE, rail, -1, HW);
+    for (const y of [0.0172, -0.0012]) {
+      const lip = K.box(0.0045, 0.0034, 0.106, bracket, -HW - 0.00225, y, 0.063, 0, 0, 0, null, 0.0011);
+      lip.name = 'KR-7 side rail lip';
+      trimPanelBack(THREE, lip, -1, HW);
+    }
+    for (const z of [0.03, 0.063, 0.096]) {
+      const win = K.box(0.0008, 0.0075, 0.016, gunRubber, -HW - 0.0035 - 0.0003, 0.008, z, 0, 0, 0, null, 0.0003);
+      win.name = 'KR-7 side rail window';
+    }
+    for (const z of [0.0155, 0.0465, 0.0795, 0.1105].filter((_, i) => i !== 1)) D.rivet(gun, -HW - 0.0035, 0.008, z, { axis: 'x', side: -1, r: 0.0026 });
+  }
   gun.userData.opticPlate = optionalArtworkGroup(ctx, gun, 'side optic bracket', plate => {
     K.box(0.010, 0.025, 0.111, gunDark, -HW - 0.005, 0.008, 0.063, 0, 0, 0, plate, 0.002);
+    // the clamp on the bracket's outer face: two jaws over the rail's lips, the throw lever and its tension nut
+    for (const y of [0.0185, -0.0025]) K.box(0.0025, 0.004, 0.104, bracket, -HW - 0.0112, y, 0.063, 0, 0, 0, plate, 0.0008).name = 'KR-7 bracket jaw';
+    K.cyl(0.0062, 0.0062, 0.004, gunMid, -HW - 0.0118, 0.008, 0.088, plate, 12, 'x').name = 'KR-7 bracket nut';
+    K.slab([[0.088, 0.0035], [0.088, 0.0125], [0.052, 0.0105], [0.030, 0.0085], [0.030, 0.0065], [0.052, 0.0055]], 0.0028, gunDark,
+      { x: -HW - 0.0134, bevel: 0.0008, segs: 2, parent: plate }).name = 'KR-7 bracket throw lever';
     // A flared side plate carries the visual weight of the sight. The scallop
     // leaves a strip of the rounded cover visible below the rail in profile.
     K.slab([[.009,.020],[.109,.020],[.114,.026],[.097,.041],[.093,.054],
@@ -837,7 +934,7 @@ export function makeAkModel(ctx) {
       [.056,.014],[.026,.006]], .003, gunDark,
       {x:-HW-.011,bevel:.0009,segs:2,parent:plate}).name = 'KR-7 bracket latch';
     K.box(HW + 0.027, 0.008, 0.100, gunDark, (0.007 - HW) / 2, 0.081, 0.064, 0, 0, 0, plate, 0.0015);
-    for (const piece of plate.children) if (piece.name !== 'KR-7 bracket latch') markPaintSurface(piece, 'rail');
+    for (const piece of plate.children) if (!['KR-7 bracket latch', 'KR-7 bracket throw lever', 'KR-7 bracket nut'].includes(piece.name)) markPaintSurface(piece, 'rail');
   });
   gun.userData.ejectPort = [HW + 0.003, 0.016, 0.1875];
   // Dust cover: the stamped lid with its rounded top and the AKM's eight ribs across the rear half.
@@ -905,6 +1002,11 @@ export function makeAkModel(ctx) {
   // CL-318 (J27: the guard squeezed between the grip and the magazine; the grip shortened): the guard a real loop from
   // the mag release's rear to the grip's front, 36 units long; the grip 3 units back and 2.5 shorter.
   K.slab(gunBand([[0.002, -0.028], [0.0, -0.072], [-0.016, -0.084], [-0.06, -0.084], [-0.076, -0.068], [-0.074, -0.04]], 0.0055), 0.022, gunDark, { bevel: 0.003 });
+  // CF-9 (J151 note 26, screenshot 03): the guard's rear tang carried back to the grip's front face, so no light shows
+  // through the slit between the guard's rear leg and the grip; it stops at the guard's rear corner (the middle finger's
+  // place on the grip below stays clear). Narrower than both, bedded 0.5 mm into the grip.
+  const guardTang = K.slab([[-0.0750, -0.0352], [-0.0806, -0.0352], [-0.0797, -0.0676], [-0.0801, -0.0712], [-0.0772, -0.0708], [-0.0752, -0.0680]], 0.016, gunDark, { bevel: 0.0012 });
+  guardTang.name = 'KR-7 guard tang';
   const magRelease = K.box(0.016, 0.018, 0.006, gunDark, 0, -0.04, 0.004);   // the mag release paddle
   // GB-175: trigger face toward the grip, tip curling forward; GB-180: a solid blade.
   const triggerBlade = addTriggerArtwork(gun, K, [[-0.0165, -0.0329], [-0.0248, -0.046], [-0.024, -0.0581], [-0.0155, -0.0675], [-0.0205, -0.0725], [-0.032, -0.0619], [-0.0352, -0.044], [-0.0275, -0.0271]], 0.009, gunDark, { bevel: 0.002 });
@@ -925,7 +1027,7 @@ export function makeAkModel(ctx) {
   mapBirchSlab(gripWood, Math.PI / 2 - AK_GRIP_RAKE, .36);
   const gripStipple = new THREE.MeshStandardMaterial({ color: 0xa4643c, map: akStippleTexture(THREE), roughness: 0.93, metalness: 0 });
   gripStipple.name = 'KR-7 grip stipple';
-  akGripCheeks(THREE, gun, woodMat, gripStipple);
+  const gripCheeks = akGripCheeks(THREE, gun, woodMat, gripStipple);
   // Stock: the dropped wooden butt with its wrist, a steel buttplate, the tang, a sling loop. GB-269: one group, fpStock.
   const stock = K.group(0, 0, 0); stock.name = 'fp-stock';
   // CL-318 (J27: "the stock needs to transition better to the receiver"): the wood runs into a steel rear-trunnion sleeve
@@ -957,7 +1059,11 @@ export function makeAkModel(ctx) {
   gun.add(stockBody);
   gun.userData.fpStock = stock;
   // Handguards: the lower with its palm swell and finger grooves, the upper over the gas tube, the steel bands and their latches.
-  const lowerWood = K.slab([[0.244, 0.012], [0.53, 0.012], [0.535, -0.01], [0.53, -0.04], [0.45, -0.052], [0.33, -0.053], [0.262, -0.047], [0.244, -0.034]], 0.062, woodMat, { bevel: 0.01, segs: 3 });
+  // CF-9 (note 21): the fat, rounded Draco-style lower (akForeEndGeometry); the support hand wraps it.
+  const lowerWood = new THREE.Mesh(akForeEndGeometry(THREE).clone(), woodMat);
+  lowerWood.name = 'KR-7 lower handguard';
+  lowerWood.castShadow = lowerWood.receiveShadow = true;
+  gun.add(lowerWood);
   mapBirchSlab(lowerWood, 0, .63);
   const upperWood = K.slab([[0.248, 0.012], [0.505, 0.012], [0.512, 0.026], [0.49, 0.04], [0.26, 0.04], [0.248, 0.03]], 0.044, woodMat, { bevel: 0.004, segs: 2 });   // the upper handguard
   mapBirchSlab(upperWood, 0, .21);
@@ -998,20 +1104,24 @@ export function makeAkModel(ctx) {
   const magB = profileCurve([-0.046, 0.012], [-0.04, -0.13], [0.052, -0.258], 7), magF = profileCurve([0.056, 0.012], [0.066, -0.11], [0.156, -0.232], 7);
   const backBorder = gunBand(magB, .002), frontBorder = gunBand(magF, .002);
   // The centre paint ends at the inner edges of the two dark border graphics.
-  K.slab([...backBorder.slice(0,magB.length), ...frontBorder.slice(magF.length)], 0.034, gunAccent, { bevel: 0.004, parent: mag });
+  // CF-9 (J151 note 25, "The KR-7 magazine should get camo"): its body, ribs, borders and floorplate carry the paint
+  // role 'magazine' (the lips, the lugs and the top round stay bare metal and brass).
+  const magPaint = [];
+  magPaint.push(K.slab([...backBorder.slice(0,magB.length), ...frontBorder.slice(magF.length)], 0.034, gunAccent, { bevel: 0.004, parent: mag }));
   for (const w of [0.23, 0.5, 0.77]) {
     const line = magB.map(([z,y], i) => [z * (1-w) + magF[i][0] * w, y * (1-w) + magF[i][1] * w]);
     const outline = gunBand(line.slice(1, 7), 0.003);
     const relief = K.slab(outline, 0.037, gunBody, { bevel: 0.0012, parent: mag });
+    magPaint.push(relief);
     separateBandFaces(THREE, relief.geometry, outline, 0.034 / 2);
   }
-  K.slab(backBorder, 0.035, gunDark, { bevel: 0.001, parent: mag });
-  K.slab(frontBorder, 0.035, gunDark, { bevel: 0.001, parent: mag });
+  magPaint.push(K.slab(backBorder, 0.035, gunDark, { bevel: 0.001, parent: mag }));
+  magPaint.push(K.slab(frontBorder, 0.035, gunDark, { bevel: 0.001, parent: mag }));
   K.box(0.036, 0.018, 0.1, gunDark, 0, -0.01, 0.007, 0, 0, 0, mag, 0.002);                                // the well's lips
   // The front lug seats first; the rear locking lug catches when the magazine rocks back into the well.
   K.box(0.018, 0.009, 0.018, gunDark, 0, 0.01, 0.06, 0, 0, 0, mag, 0.001);
   K.box(0.022, 0.007, 0.012, gunDark, 0, 0.009, -0.057, 0, 0, 0, mag, 0.001);
-  K.slab([[0.048, -0.254], [0.16, -0.226], [0.164, -0.241], [0.05, -0.271]], 0.038, gunDark, { bevel: 0.003, parent: mag });   // the floorplate
+  magPaint.push(K.slab([[0.048, -0.254], [0.16, -0.226], [0.164, -0.241], [0.05, -0.271]], 0.038, gunDark, { bevel: 0.003, parent: mag }));   // the floorplate
   // The top prop follows this specific magazine into the support hand. Its
   // visibility belongs to the ammo count of the magazine being displayed.
   const roundArt = roundGeometry(THREE, 'ak');
@@ -1040,6 +1150,26 @@ export function makeAkModel(ctx) {
   gun.userData.slide = null;
   gunSuppressor(gun, K, 'ak');   // CL-95
   attachLaserLight(gun, 'ak', ctx);
+  // CF-9 (J151 note 27, Jerry: "Let the player switch the KR-7 furniture between wood and synthetic; synthetic can take
+  // camo"): the wood (grip and its panels, stock, both handguards) in one group, the same shapes in black polymer in a
+  // second, hidden one. Only the polymer carries a paint role ('furniture'), so a finish lands on synthetic furniture
+  // and never on the wood. setKr7Furniture(gun, 'wood' | 'synthetic') switches any copy (it finds the groups by name).
+  const woodSet = K.group(0, 0, 0); woodSet.name = KR7_FURNITURE.wood;
+  const synSet = K.group(0, 0, 0); synSet.name = KR7_FURNITURE.synthetic;
+  const polymer = (ctx.gunPoly || gunMid).clone();
+  polymer.name = 'KR-7 polymer'; polymer.color.setHex(0x1f2120); polymer.roughness = .8; polymer.metalness = 0; polymer.map = null;
+  for (const part of [gripWood, ...gripCheeks, stockBody, lowerWood, upperWood]) {
+    woodSet.add(part);   // all are direct children of the gun, and the set sits at its origin
+    const twin = new THREE.Mesh(part.geometry.clone(), polymer);   // its own geometry: a finish re-maps the twin's UVs
+    twin.name = part.name + ' (synthetic)';
+    twin.position.copy(part.position); twin.quaternion.copy(part.quaternion); twin.scale.copy(part.scale);
+    twin.castShadow = twin.receiveShadow = true;
+    synSet.add(twin);
+    markPaintSurface(twin, 'furniture');
+  }
+  synSet.visible = false;
+  gun.userData.furnitureWood = woodSet;
+  gun.userData.furnitureSynthetic = synSet;
   gun.userData.partFinish = true;
   gun.traverse(mesh => {
     if (!mesh.isMesh || mesh.parent === mag) return;
@@ -1051,6 +1181,7 @@ export function makeAkModel(ctx) {
   });
   // gunSuppressor appends the end-face insert and the bore after the outer sleeve.
   for (const mesh of gun.userData.suppressor?.children.slice(0,-2) || []) markPaintSurface(mesh, 'suppressor shell');
+  for (const mesh of magPaint) markPaintSurface(mesh, 'magazine');   // CF-9 note 25
   const selector = K.group(selectorHub.position.x, selectorHub.position.y, selectorHub.position.z);
   for (const part of [selectorHub, selectorBlade, selectorTab, selectorLip]) {
     part.position.sub(selector.position);
@@ -2087,12 +2218,15 @@ export function makeShotgunModel(ctx) {
   // over the tube between them, as on the real gun. The hands follow (VM_SOCKETS.shotgun.support; WEAPON_HOLD's 'pump').
   const pump = K.group(0, -0.006, 0.375);
   // One continuous shell produces a broad highlight on each moulded ridge.
-  const pumpOutline = [[0, -0.02], [0.02, -0.02], [0.026, -0.012], [0.028, 0]];
+  // CC-348 (J151 note 11, Jerry: "The pump needs to be thicker so the hand can get a proper grip"): 68 mm across its
+  // ridges (was 60), the body 34 in radius (28); the flat top seam under the barrel and the length are as they were.
+  const PR = 0.034, PRR = 0.036;
+  const pumpOutline = [[0, -0.02], [0.024, -0.02], [0.031, -0.012], [PR, 0]];
   for (let i = 0; i < 9; i++) {
     const z = 0.008 + i * 0.020;
-    pumpOutline.push([0.028, z], [0.030, z + 0.003], [0.030, z + 0.010], [0.028, z + 0.014]);
+    pumpOutline.push([PR, z], [PRR, z + 0.003], [PRR, z + 0.010], [PR, z + 0.014]);
   }
-  pumpOutline.push([0.028, 0.19], [0.026, 0.20], [0.020, 0.21], [0, 0.21]);
+  pumpOutline.push([PR, 0.19], [0.031, 0.20], [0.024, 0.21], [0, 0.21]);
   const pumpSkin = K.lathe(pumpOutline, finish.furniture, { seg: 18, parent: pump });
   // Keep the moulded sides and lower hand contact. Only the upper display seam is flat.
   const pumpVertices = pumpSkin.geometry.attributes.position, pumpNormals = pumpSkin.geometry.attributes.normal;
@@ -2598,7 +2732,7 @@ export function makeSniperModel(ctx) {
   gun.traverse(piece => {
     if (piece.material === gunTan) {
       markPaintSurface(piece, piece.parent === stock ? 'furniture' : 'receiver');
-    } else if (piece.material === gunPoly) {
+    } else if (piece.material === gunPoly || piece.material === cheekFinish) {   // CC-348 (J151 note 44): the cheek riser, the stock's top, too
       markPaintSurface(piece, 'furniture');
     }
   });

@@ -1,0 +1,30 @@
+{
+  "before": "4fa1bed2b7463e582221fbd059b849cf",
+  "after": "069f0b5a8190a9ed08a1fa0b9cf47466",
+  "edits": [
+    {
+      "from": "import { makeM4Model, makeAkModel, makeAa12Model, makeShotgunModel, makeSniperModel } from './studio/weapon-longarms.js';",
+      "to": "import { makeM4Model, makeAkModel, makeAa12Model, makeShotgunModel, makeSniperModel, setKr7Furniture } from './studio/weapon-longarms.js';"
+    },
+    {
+      "from": "    function dressGuns(state, onlyKind = null) {\r\n      if (!gunFurniture) return;",
+      "to": "    function dressGuns(state, onlyKind = null) {\r\n      if (!gunFurniture) return;\r\n      if (!onlyKind || onlyKind === 'ak') setKr7Furniture(weaponMeshes.ak, state?.furniture?.ak);   // GP-20129: saved or Training-only furniture"
+    },
+    {
+      "from": "      const g = cloneLean(src);   // CL-136",
+      "to": "      const g = cloneLean(src);   // CL-136\r\n      if (kind === 'ak') setKr7Furniture(g, wardrobeState?.furniture?.ak);   // GP-20129: rack/carry/preview copies"
+    },
+    {
+      "from": " + '|' + fin;\r\n    }\r\n    function armoryPicsReady()",
+      "to": " + '|' + fin + (kind === 'ak' ? '|f:' + (wardrobeState?.furniture?.ak || 'wood') : '');\r\n    }\r\n    function armoryPicsReady()"
+    },
+    {
+      "from": "    const withArmoryBuy = (fn) => { armoryBuying = true;",
+      "to": "    // GP-20129: Director-approved factory furniture adapter; Training never writes the profile.\r\n    function armoryFurniture(kind) {\r\n      if (kind !== 'ak') return null;\r\n      return { current: wardrobeState?.furniture?.ak || 'wood', list: ['wood', 'synthetic'].map(key => ({ key, name: dwText('armory.furniture.' + key) })) };\r\n    }\r\n    function setArmoryFurniture(kind, key) {\r\n      if (kind !== 'ak' || !['wood', 'synthetic'].includes(key) || phase !== 'prep' || nightLockdown() || !weaponOwned.ak) return false;\r\n      wardrobeState = normalizeWardrobe({ ...wardrobeState, furniture: { ak: key } }, camoKey, isGunFinishKey);\r\n      writeWardrobe();\r\n      dressGuns(wardrobeState, 'ak');\r\n      updateCarriedGear(0, true);\r\n      queueOrRefreshArmoryRack(false);\r\n      AudioSys.kioskTab();\r\n      return true;\r\n    }\r\n    const withArmoryBuy = (fn) => { armoryBuying = true;"
+    },
+    {
+      "from": "      armory: runArmory,\r\n      getFinishes:",
+      "to": "      armory: runArmory,\r\n      getFurniture: armoryFurniture,\r\n      onFurniture: setArmoryFurniture,\r\n      getFinishes:"
+    }
+  ]
+}

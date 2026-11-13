@@ -379,18 +379,23 @@ export function createTakeBank({ getCtx, connect, track = () => {}, fetchJson, f
 
   // CL-161: a looping take (a bed: wind, rain, an engine). Null until the folder is ready (asking starts it loading).
   // The handle: set(v, tc) its level (v as for play), rate(r, tc), stop(fade s). One take, picked at random, loops.
-  function loop(id, { pan = 0, rev = 0, bus = null, v = 0 } = {}) {
+  // CI-1 (J151 note 33): `from`/`to` (fractions of the take, default the whole take) loop only that stretch of it, for a
+  // take that fades in or out at its ends (the chainsaw's full-throttle takes).
+  function loop(id, { pan = 0, rev = 0, bus = null, v = 0, from = 0, to = 1 } = {}) {
     const list = ready(id);
     if (!list) return null;
     const ctx = getCtx(); if (!ctx) return null;
     const t = pick(id, list);
     const src = ctx.createBufferSource(); src.buffer = t.buf; src.loop = true;
+    const a = Math.max(0, Math.min(1, +from || 0)), z = Math.max(a, Math.min(1, to == null ? 1 : +to));
+    const part = z - a > 0.05 && (a > 0 || z < 1);
+    if (part) { src.loopStart = a * t.seconds; src.loopEnd = z * t.seconds; }
     const g = ctx.createGain(); g.gain.value = 0;
     src.connect(g);
     connect(g, pan, rev, bus);
     const base = t.gain * levelFor(id, levels);
     const now = ctx.currentTime;
-    src.start(now, Math.random() * Math.max(0, t.seconds - 0.1));   // start anywhere in it, so two beds of one folder don't phase
+    src.start(now, part ? (a + Math.random() * (z - a)) * t.seconds : Math.random() * Math.max(0, t.seconds - 0.1));   // start anywhere in it, so two beds of one folder don't phase
     if (v > 0) g.gain.setTargetAtTime(base * v, now, 0.3);
     plays[id] = (plays[id] || 0) + 1;
     let stopped = false;

@@ -1,0 +1,6 @@
+           FAIL after the warm-up nothing shows on him that his loadout does not carry: sling strap 0 without its gun, sling strap 1 without its gun, shell bandolier, 40 mm belt, holster 0, holster 1, pair holster 0, pair holster 1, right-hip pair shell, holster harness, grenades row, shells row, rounds40 row, boxes row, tanks row
+           FAIL flipped on behind the plan (bandolier, hip pair shell, a strap), the next refresh hides them again: sling strap 0 without its gun, shell bandolier, right-hip pair shell
+FAIL  tcc347   9 pass   2 fail  56.0s
+           recovering browser after tcc347: 2 fail
+    tcc347 2 fail  FAIL after the warm-up nothing shows on him that his loadout does not carry: sling strap 0 witho
+           FAIL after the warm-up nothing shows on him that his loadout does not carry: sling strap 0 without its gun, sling strap 1 without its gun, shell bandolier, 40 mm belt, holster 0, holster 1, pair holster 0, pair holster 1, right-hip pair shell, holster harness, grenades row, shells row, rounds40 row, boxes row, tanks row

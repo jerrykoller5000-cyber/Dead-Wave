@@ -1,0 +1,300 @@
+{
+  "phase": "after",
+  "probe": {
+    "mode": "native emitted particle conditioned immediately before contact; production flame collision path",
+    "solid": {
+      "minX": -7.17,
+      "maxX": -6.529999999999999,
+      "minY": -200,
+      "maxY": -198.21,
+      "minZ": -642.4200000000001,
+      "maxZ": -641.78,
+      "cx": -6.85,
+      "cz": -642.1,
+      "radius": 0.32,
+      "prop": true,
+      "dummy": true
+    },
+    "states": [
+      {
+        "x": -6.563860038112699,
+        "y": -198.75027307025113,
+        "z": -642.1000272655448,
+        "charred": false,
+        "splashed": false,
+        "charCount": 0,
+        "dummy": {
+          "hits": 0,
+          "damage": 0,
+          "byKind": {
+            "knife": 0,
+            "machete": 0,
+            "katana": 0,
+            "chainsaw": 0,
+            "scorch": 0,
+            "bullet": 0
+          },
+          "markCount": 1,
+          "tiltX": 0,
+          "tiltZ": 0,
+          "twistY": 0,
+          "tiltRad": 0,
+          "angularSpeed": 0
+        }
+      },
+      {
+        "x": -6.622231154604675,
+        "y": -198.75017217535367,
+        "z": -642.0988128222216,
+        "charred": true,
+        "splashed": true,
+        "charCount": 0,
+        "dummy": {
+          "hits": 0,
+          "damage": 0,
+          "byKind": {
+            "knife": 0,
+            "machete": 0,
+            "katana": 0,
+            "chainsaw": 0,
+            "scorch": 0,
+            "bullet": 0
+          },
+          "markCount": 1,
+          "tiltX": 0,
+          "tiltZ": 0,
+          "twistY": 0,
+          "tiltRad": 0,
+          "angularSpeed": 0
+        }
+      },
+      {
+        "x": -6.607015837220762,
+        "y": -198.71808133241706,
+        "z": -642.1088228778635,
+        "charred": true,
+        "splashed": true,
+        "charCount": 0,
+        "dummy": {
+          "hits": 0,
+          "damage": 0,
+          "byKind": {
+            "knife": 0,
+            "machete": 0,
+            "katana": 0,
+            "chainsaw": 0,
+            "scorch": 0,
+            "bullet": 0
+          },
+          "markCount": 1,
+          "tiltX": 0,
+          "tiltZ": 0,
+          "twistY": 0,
+          "tiltRad": 0,
+          "angularSpeed": 0
+        }
+      },
+      {
+        "x": -6.592575288329913,
+        "y": -198.68613593490852,
+        "z": -642.1186684359272,
+        "charred": true,
+        "splashed": true,
+        "charCount": 0,
+        "dummy": {
+          "hits": 0,
+          "damage": 0,
+          "byKind": {
+            "knife": 0,
+            "machete": 0,
+            "katana": 0,
+            "chainsaw": 0,
+            "scorch": 0,
+            "bullet": 0
+          },
+          "markCount": 1,
+          "tiltX": 0,
+          "tiltZ": 0,
+          "twistY": 0,
+          "tiltRad": 0,
+          "angularSpeed": 0
+        }
+      },
+      {
+        "x": -6.578640854639149,
+        "y": -198.65433912552885,
+        "z": -642.128281178592,
+        "charred": true,
+        "splashed": true,
+        "charCount": 0,
+        "dummy": {
+          "hits": 0,
+          "damage": 0,
+          "byKind": {
+            "knife": 0,
+            "machete": 0,
+            "katana": 0,
+            "chainsaw": 0,
+            "scorch": 0,
+            "bullet": 0
+          },
+          "markCount": 1,
+          "tiltX": 0,
+          "tiltZ": 0,
+          "twistY": 0,
+          "tiltRad": 0,
+          "angularSpeed": 0
+        }
+      },
+      {
+        "x": -6.565093894328823,
+        "y": -198.62269395664052,
+        "z": -642.1377369770389,
+        "charred": true,
+        "splashed": true,
+        "charCount": 0,
+        "dummy": {
+          "hits": 0,
+          "damage": 0,
+          "byKind": {
+            "knife": 0,
+            "machete": 0,
+            "katana": 0,
+            "chainsaw": 0,
+            "scorch": 0,
+            "bullet": 0
+          },
+          "markCount": 1,
+          "tiltX": 0,
+          "tiltZ": 0,
+          "twistY": 0,
+          "tiltRad": 0,
+          "angularSpeed": 0
+        }
+      }
+    ],
+    "camera": {
+      "x": -5.199999999999999,
+      "y": -198.7,
+      "z": -640.8000000000001,
+      "tx": -6.85,
+      "ty": -198.9,
+      "tz": -642.1,
+      "fov": 46
+    },
+    "char": 0,
+    "dummy": {
+      "hits": 0,
+      "damage": 0,
+      "byKind": {
+        "knife": 0,
+        "machete": 0,
+        "katana": 0,
+        "chainsaw": 0,
+        "scorch": 0,
+        "bullet": 0
+      },
+      "markCount": 1,
+      "tiltX": 0,
+      "tiltZ": 0,
+      "twistY": 0,
+      "tiltRad": 0,
+      "angularSpeed": 0
+    }
+  },
+  "records": [
+    {
+      "file": "dummy-noon.png",
+      "actualLight": {
+        "key": "noon",
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "ground": 9272162,
+        "moon": 0
+      },
+      "light": "noon",
+      "camera": {
+        "x": -5.199999999999999,
+        "y": -198.7,
+        "z": -640.8000000000001,
+        "tx": -5.981955394630333,
+        "ty": -198.7947824720764,
+        "tz": -641.4160860684967,
+        "fov": 46
+      }
+    },
+    {
+      "file": "dummy-overcast.png",
+      "actualLight": {
+        "key": "overcast",
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "ground": 8158850,
+        "moon": 0
+      },
+      "light": "overcast",
+      "camera": {
+        "x": -5.199999999999999,
+        "y": -198.7,
+        "z": -640.8000000000001,
+        "tx": -5.981955394630333,
+        "ty": -198.7947824720764,
+        "tz": -641.4160860684967,
+        "fov": 46
+      }
+    },
+    {
+      "file": "dummy-dusk.png",
+      "actualLight": {
+        "key": "dusk",
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "ground": 4863016,
+        "moon": 0
+      },
+      "light": "dusk",
+      "camera": {
+        "x": -5.199999999999999,
+        "y": -198.7,
+        "z": -640.8000000000001,
+        "tx": -5.981955394630333,
+        "ty": -198.7947824720764,
+        "tz": -641.4160860684967,
+        "fov": 46
+      }
+    },
+    {
+      "file": "dummy-night.png",
+      "actualLight": {
+        "key": "night",
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "ground": 1382172,
+        "moon": 0
+      },
+      "light": "night",
+      "camera": {
+        "x": -5.199999999999999,
+        "y": -198.7,
+        "z": -640.8000000000001,
+        "tx": -5.981955394630333,
+        "ty": -198.7947824720764,
+        "tz": -641.4160860684967,
+        "fov": 46
+      }
+    }
+  ],
+  "errors": []
+}

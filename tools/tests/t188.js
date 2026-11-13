@@ -49,7 +49,7 @@
   // Real overall lengths (m) per class: generic references, the names in the game are fictional.
   const RANGE = { pistol: [0.18, 0.21], revolver: [0.24, 0.31], uzi: [0.42, 0.52], m4: [0.80, 0.90], ak: [0.84, 0.93], aa12: [0.92, 1.0],
     shotgun: [0.95, 1.06], sniper: [1.08, 1.22], launcher: [0.68, 0.82], flamer: [0.85, 1.05], chainsaw: [0.75, 0.95] };
-  const BASE = { pistol: 1.05, revolver: 1.08, uzi: 1.0, m4: 0.92, ak: 0.92, aa12: 0.9, shotgun: 0.95, sniper: 0.88, launcher: 0.92, flamer: 1, chainsaw: 1.18 };
+  const BASE = { pistol: 1.05, revolver: 1.0, uzi: 1.0, m4: 0.92, ak: 0.92, aa12: 0.9, shotgun: 0.95, sniper: 0.88, launcher: 0.92, flamer: 1, chainsaw: 1.18 };
   try {
     await startMatch(T, 'Sizes');
     T.clearZombies && T.clearZombies(); T.setHp(100000); T.grantAllWeapons();

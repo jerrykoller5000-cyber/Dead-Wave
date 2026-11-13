@@ -1,0 +1,1583 @@
+[
+ {
+  "id": "fresh",
+  "d": {
+   "slung": [
+    null,
+    null
+   ],
+   "holstered": [
+    null,
+    null
+   ],
+   "hip": "pistol",
+   "counts": {
+    "mags": 1,
+    "grenades": 0,
+    "shells": 0,
+    "rounds40": 0,
+    "boxes": 0,
+    "tanks": 0
+   },
+   "bands": {
+    "bandolier": false,
+    "belt40": false
+   }
+  },
+  "parts": [
+   {
+    "k": "sling0",
+    "visible": true,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "sling1",
+    "visible": true,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "holster0",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "holster1",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "pair0",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "pair1",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "hip",
+    "visible": true,
+    "meshes": 11,
+    "box": [
+     [
+      -0.28,
+      -199.398,
+      -640.729
+     ],
+     [
+      -0.222,
+      -199.128,
+      -640.525
+     ]
+    ],
+    "gun": "pistol"
+   },
+   {
+    "k": "hipPair",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "harness",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "bandolier",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "belt40",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "mags",
+    "visible": true,
+    "meshes": 1,
+    "box": [
+     [
+      -0.145,
+      -199.318,
+      -640.533
+     ],
+     [
+      -0.099,
+      -199.268,
+      -640.506
+     ]
+    ],
+    "gun": null
+   },
+   {
+    "k": "grenades",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "boxes",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "tanks",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   }
+  ]
+ },
+ {
+  "id": "rifles-vest",
+  "d": {
+   "slung": [
+    "m4",
+    "shotgun"
+   ],
+   "holstered": [
+    "revolver",
+    "uzi"
+   ],
+   "hip": null,
+   "counts": {
+    "mags": 1,
+    "grenades": 3,
+    "shells": 0,
+    "rounds40": 0,
+    "boxes": 0,
+    "tanks": 0
+   },
+   "bands": {
+    "bandolier": true,
+    "belt40": false
+   }
+  },
+  "parts": [
+   {
+    "k": "sling0",
+    "visible": true,
+    "meshes": 25,
+    "box": [
+     [
+      0.085,
+      -199.477,
+      -641.056
+     ],
+     [
+      0.375,
+      -198.433,
+      -640.441
+     ]
+    ],
+    "gun": "m4"
+   },
+   {
+    "k": "sling1",
+    "visible": true,
+    "meshes": 12,
+    "box": [
+     [
+      -0.328,
+      -199.53,
+      -641.009
+     ],
+     [
+      -0.07,
+      -198.381,
+      -640.432
+     ]
+    ],
+    "gun": "shotgun"
+   },
+   {
+    "k": "holster0",
+    "visible": true,
+    "meshes": 12,
+    "box": [
+     [
+      -0.003,
+      -199.328,
+      -641.099
+     ],
+     [
+      0.22,
+      -198.927,
+      -640.938
+     ]
+    ],
+    "gun": "revolver"
+   },
+   {
+    "k": "holster1",
+    "visible": true,
+    "meshes": 7,
+    "box": [
+     [
+      -0.05,
+      -199.055,
+      -641.094
+     ],
+     [
+      0.27,
+      -198.637,
+      -641.009
+     ]
+    ],
+    "gun": "uzi"
+   },
+   {
+    "k": "pair0",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "pair1",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "hip",
+    "visible": true,
+    "meshes": 1,
+    "box": [
+     [
+      -0.28,
+      -199.398,
+      -640.654
+     ],
+     [
+      -0.223,
+      -199.226,
+      -640.525
+     ]
+    ],
+    "gun": null
+   },
+   {
+    "k": "hipPair",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "harness",
+    "visible": true,
+    "meshes": 1,
+    "box": [
+     [
+      -0.259,
+      -199.063,
+      -640.871
+     ],
+     [
+      0.241,
+      -199.029,
+      -640.847
+     ]
+    ],
+    "gun": null
+   },
+   {
+    "k": "bandolier",
+    "visible": true,
+    "meshes": 2,
+    "box": [
+     [
+      -0.245,
+      -199.328,
+      -641.004
+     ],
+     [
+      0.175,
+      -198.789,
+      -640.408
+     ]
+    ],
+    "gun": null
+   },
+   {
+    "k": "belt40",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "mags",
+    "visible": true,
+    "meshes": 1,
+    "box": [
+     [
+      -0.151,
+      -199.32,
+      -640.54
+     ],
+     [
+      -0.105,
+      -199.269,
+      -640.515
+     ]
+    ],
+    "gun": null
+   },
+   {
+    "k": "grenades",
+    "visible": true,
+    "meshes": 1,
+    "box": [
+     [
+      -0.046,
+      -199.349,
+      -640.889
+     ],
+     [
+      0.191,
+      -199.267,
+      -640.777
+     ]
+    ],
+    "gun": null
+   },
+   {
+    "k": "boxes",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "tanks",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   }
+  ]
+ },
+ {
+  "id": "rifles-novest",
+  "d": {
+   "slung": [
+    "m4",
+    "shotgun"
+   ],
+   "holstered": [
+    "revolver",
+    "uzi"
+   ],
+   "hip": null,
+   "counts": {
+    "mags": 1,
+    "grenades": 3,
+    "shells": 0,
+    "rounds40": 0,
+    "boxes": 0,
+    "tanks": 0
+   },
+   "bands": {
+    "bandolier": true,
+    "belt40": false
+   }
+  },
+  "parts": [
+   {
+    "k": "sling0",
+    "visible": true,
+    "meshes": 25,
+    "box": [
+     [
+      0.09,
+      -199.478,
+      -641.056
+     ],
+     [
+      0.377,
+      -198.436,
+      -640.506
+     ]
+    ],
+    "gun": "m4"
+   },
+   {
+    "k": "sling1",
+    "visible": true,
+    "meshes": 12,
+    "box": [
+     [
+      -0.325,
+      -199.532,
+      -641.005
+     ],
+     [
+      -0.066,
+      -198.385,
+      -640.501
+     ]
+    ],
+    "gun": "shotgun"
+   },
+   {
+    "k": "holster0",
+    "visible": true,
+    "meshes": 12,
+    "box": [
+     [
+      0.002,
+      -199.331,
+      -641.097
+     ],
+     [
+      0.224,
+      -198.931,
+      -640.94
+     ]
+    ],
+    "gun": "revolver"
+   },
+   {
+    "k": "holster1",
+    "visible": true,
+    "meshes": 7,
+    "box": [
+     [
+      -0.045,
+      -199.059,
+      -641.094
+     ],
+     [
+      0.274,
+      -198.642,
+      -641.015
+     ]
+    ],
+    "gun": "uzi"
+   },
+   {
+    "k": "pair0",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "pair1",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "hip",
+    "visible": true,
+    "meshes": 1,
+    "box": [
+     [
+      -0.28,
+      -199.398,
+      -640.654
+     ],
+     [
+      -0.223,
+      -199.226,
+      -640.525
+     ]
+    ],
+    "gun": null
+   },
+   {
+    "k": "hipPair",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "harness",
+    "visible": true,
+    "meshes": 1,
+    "box": [
+     [
+      -0.254,
+      -199.064,
+      -640.872
+     ],
+     [
+      0.246,
+      -199.032,
+      -640.848
+     ]
+    ],
+    "gun": null
+   },
+   {
+    "k": "bandolier",
+    "visible": true,
+    "meshes": 2,
+    "box": [
+     [
+      -0.239,
+      -199.325,
+      -641.007
+     ],
+     [
+      0.178,
+      -198.792,
+      -640.444
+     ]
+    ],
+    "gun": null
+   },
+   {
+    "k": "belt40",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "mags",
+    "visible": true,
+    "meshes": 1,
+    "box": [
+     [
+      -0.146,
+      -199.318,
+      -640.538
+     ],
+     [
+      -0.101,
+      -199.268,
+      -640.513
+     ]
+    ],
+    "gun": null
+   },
+   {
+    "k": "grenades",
+    "visible": true,
+    "meshes": 1,
+    "box": [
+     [
+      -0.046,
+      -199.349,
+      -640.889
+     ],
+     [
+      0.191,
+      -199.267,
+      -640.777
+     ]
+    ],
+    "gun": null
+   },
+   {
+    "k": "boxes",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "tanks",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   }
+  ]
+ },
+ {
+  "id": "heavy-vest",
+  "d": {
+   "slung": [
+    "minigun",
+    "flamer"
+   ],
+   "holstered": [
+    "pistol",
+    "revolver"
+   ],
+   "hip": "pistol",
+   "counts": {
+    "mags": 1,
+    "grenades": 0,
+    "shells": 0,
+    "rounds40": 0,
+    "boxes": 0,
+    "tanks": 0
+   },
+   "bands": {
+    "bandolier": false,
+    "belt40": false
+   }
+  },
+  "parts": [
+   {
+    "k": "sling0",
+    "visible": true,
+    "meshes": 21,
+    "box": [
+     [
+      0.147,
+      -199.229,
+      -641.033
+     ],
+     [
+      0.473,
+      -198.677,
+      -640.427
+     ]
+    ],
+    "gun": "minigun"
+   },
+   {
+    "k": "sling1",
+    "visible": true,
+    "meshes": 14,
+    "box": [
+     [
+      -0.528,
+      -199.469,
+      -641.055
+     ],
+     [
+      -0.102,
+      -198.444,
+      -640.428
+     ]
+    ],
+    "gun": "flamer"
+   },
+   {
+    "k": "holster0",
+    "visible": true,
+    "meshes": 13,
+    "box": [
+     [
+      0.008,
+      -199,
+      -641.063
+     ],
+     [
+      0.206,
+      -198.704,
+      -640.939
+     ]
+    ],
+    "gun": "pistol"
+   },
+   {
+    "k": "holster1",
+    "visible": true,
+    "meshes": 12,
+    "box": [
+     [
+      0.008,
+      -199.346,
+      -641.098
+     ],
+     [
+      0.23,
+      -198.946,
+      -640.939
+     ]
+    ],
+    "gun": "revolver"
+   },
+   {
+    "k": "pair0",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "pair1",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "hip",
+    "visible": true,
+    "meshes": 11,
+    "box": [
+     [
+      -0.28,
+      -199.399,
+      -640.729
+     ],
+     [
+      -0.223,
+      -199.128,
+      -640.525
+     ]
+    ],
+    "gun": "pistol"
+   },
+   {
+    "k": "hipPair",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "harness",
+    "visible": true,
+    "meshes": 1,
+    "box": [
+     [
+      -0.248,
+      -199.062,
+      -640.869
+     ],
+     [
+      0.252,
+      -199.029,
+      -640.849
+     ]
+    ],
+    "gun": null
+   },
+   {
+    "k": "bandolier",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "belt40",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "mags",
+    "visible": true,
+    "meshes": 1,
+    "box": [
+     [
+      -0.142,
+      -199.32,
+      -640.541
+     ],
+     [
+      -0.096,
+      -199.27,
+      -640.516
+     ]
+    ],
+    "gun": null
+   },
+   {
+    "k": "grenades",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "boxes",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "tanks",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   }
+  ]
+ },
+ {
+  "id": "sniper-launch",
+  "d": {
+   "slung": [
+    null,
+    "launcher"
+   ],
+   "holstered": [
+    "uzi",
+    null
+   ],
+   "hip": "pistol",
+   "counts": {
+    "mags": 1,
+    "grenades": 2,
+    "shells": 0,
+    "rounds40": 0,
+    "boxes": 0,
+    "tanks": 0
+   },
+   "bands": {
+    "bandolier": false,
+    "belt40": true
+   }
+  },
+  "parts": [
+   {
+    "k": "sling0",
+    "visible": true,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "sling1",
+    "visible": true,
+    "meshes": 17,
+    "box": [
+     [
+      -0.415,
+      -199.342,
+      -641.045
+     ],
+     [
+      -0.09,
+      -198.561,
+      -640.495
+     ]
+    ],
+    "gun": "launcher"
+   },
+   {
+    "k": "holster0",
+    "visible": true,
+    "meshes": 7,
+    "box": [
+     [
+      -0.03,
+      -199.058,
+      -641.092
+     ],
+     [
+      0.291,
+      -198.639,
+      -641.011
+     ]
+    ],
+    "gun": "uzi"
+   },
+   {
+    "k": "holster1",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "pair0",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "pair1",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "hip",
+    "visible": true,
+    "meshes": 11,
+    "box": [
+     [
+      -0.289,
+      -199.401,
+      -640.732
+     ],
+     [
+      -0.229,
+      -199.126,
+      -640.516
+     ]
+    ],
+    "gun": "pistol"
+   },
+   {
+    "k": "hipPair",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "harness",
+    "visible": true,
+    "meshes": 1,
+    "box": [
+     [
+      -0.243,
+      -199.066,
+      -640.867
+     ],
+     [
+      0.257,
+      -199.029,
+      -640.851
+     ]
+    ],
+    "gun": null
+   },
+   {
+    "k": "bandolier",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "belt40",
+    "visible": true,
+    "meshes": 2,
+    "box": [
+     [
+      -0.166,
+      -199.33,
+      -641.037
+     ],
+     [
+      0.238,
+      -198.789,
+      -640.424
+     ]
+    ],
+    "gun": null
+   },
+   {
+    "k": "mags",
+    "visible": true,
+    "meshes": 1,
+    "box": [
+     [
+      -0.142,
+      -199.32,
+      -640.541
+     ],
+     [
+      -0.097,
+      -199.269,
+      -640.517
+     ]
+    ],
+    "gun": null
+   },
+   {
+    "k": "grenades",
+    "visible": true,
+    "meshes": 1,
+    "box": [
+     [
+      -0.054,
+      -199.351,
+      -640.889
+     ],
+     [
+      0.183,
+      -199.266,
+      -640.777
+     ]
+    ],
+    "gun": null
+   },
+   {
+    "k": "boxes",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "tanks",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   }
+  ]
+ },
+ {
+  "id": "aa12-saw-dual",
+  "d": {
+   "slung": [
+    "aa12",
+    "chainsaw"
+   ],
+   "holstered": [
+    null,
+    "uzi"
+   ],
+   "hip": null,
+   "counts": {
+    "mags": 1,
+    "grenades": 3,
+    "shells": 0,
+    "rounds40": 0,
+    "boxes": 0,
+    "tanks": 0
+   },
+   "bands": {
+    "bandolier": false,
+    "belt40": false
+   }
+  },
+  "parts": [
+   {
+    "k": "sling0",
+    "visible": true,
+    "meshes": 18,
+    "box": [
+     [
+      0.112,
+      -199.483,
+      -641.143
+     ],
+     [
+      0.442,
+      -198.414,
+      -640.425
+     ]
+    ],
+    "gun": "aa12"
+   },
+   {
+    "k": "sling1",
+    "visible": true,
+    "meshes": 11,
+    "box": [
+     [
+      -0.594,
+      -199.459,
+      -641.097
+     ],
+     [
+      -0.122,
+      -198.453,
+      -640.427
+     ]
+    ],
+    "gun": "chainsaw"
+   },
+   {
+    "k": "holster0",
+    "visible": true,
+    "meshes": 2,
+    "box": [
+     [
+      0.08,
+      -199.267,
+      -641.062
+     ],
+     [
+      0.208,
+      -198.972,
+      -640.939
+     ]
+    ],
+    "gun": null
+   },
+   {
+    "k": "holster1",
+    "visible": true,
+    "meshes": 7,
+    "box": [
+     [
+      -0.033,
+      -199.049,
+      -641.091
+     ],
+     [
+      0.286,
+      -198.631,
+      -641.003
+     ]
+    ],
+    "gun": "uzi"
+   },
+   {
+    "k": "pair0",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "pair1",
+    "visible": true,
+    "meshes": 7,
+    "box": [
+     [
+      -0.271,
+      -199.049,
+      -641.093
+     ],
+     [
+      0.049,
+      -198.63,
+      -641.009
+     ]
+    ],
+    "gun": "uzi"
+   },
+   {
+    "k": "hip",
+    "visible": true,
+    "meshes": 1,
+    "box": [
+     [
+      -0.343,
+      -199.399,
+      -640.665
+     ],
+     [
+      -0.226,
+      -199.232,
+      -640.595
+     ]
+    ],
+    "gun": null
+   },
+   {
+    "k": "hipPair",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "harness",
+    "visible": true,
+    "meshes": 1,
+    "box": [
+     [
+      -0.243,
+      -199.062,
+      -640.868
+     ],
+     [
+      0.257,
+      -199.027,
+      -640.849
+     ]
+    ],
+    "gun": null
+   },
+   {
+    "k": "bandolier",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "belt40",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "mags",
+    "visible": true,
+    "meshes": 1,
+    "box": [
+     [
+      -0.142,
+      -199.322,
+      -640.545
+     ],
+     [
+      -0.097,
+      -199.271,
+      -640.519
+     ]
+    ],
+    "gun": null
+   },
+   {
+    "k": "grenades",
+    "visible": true,
+    "meshes": 1,
+    "box": [
+     [
+      -0.045,
+      -199.349,
+      -640.889
+     ],
+     [
+      0.191,
+      -199.267,
+      -640.777
+     ]
+    ],
+    "gun": null
+   },
+   {
+    "k": "boxes",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "tanks",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   }
+  ]
+ },
+ {
+  "id": "empty",
+  "d": {
+   "slung": [
+    null,
+    null
+   ],
+   "holstered": [
+    null,
+    null
+   ],
+   "hip": "pistol",
+   "counts": {
+    "mags": 1,
+    "grenades": 0,
+    "shells": 0,
+    "rounds40": 0,
+    "boxes": 0,
+    "tanks": 0
+   },
+   "bands": {
+    "bandolier": false,
+    "belt40": false
+   }
+  },
+  "parts": [
+   {
+    "k": "sling0",
+    "visible": true,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "sling1",
+    "visible": true,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "holster0",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "holster1",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "pair0",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "pair1",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "hip",
+    "visible": true,
+    "meshes": 11,
+    "box": [
+     [
+      -0.272,
+      -199.397,
+      -640.729
+     ],
+     [
+      -0.213,
+      -199.126,
+      -640.525
+     ]
+    ],
+    "gun": "pistol"
+   },
+   {
+    "k": "hipPair",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "harness",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "bandolier",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "belt40",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "mags",
+    "visible": true,
+    "meshes": 1,
+    "box": [
+     [
+      -0.146,
+      -199.324,
+      -640.544
+     ],
+     [
+      -0.1,
+      -199.273,
+      -640.519
+     ]
+    ],
+    "gun": null
+   },
+   {
+    "k": "grenades",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "boxes",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "tanks",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   }
+  ]
+ },
+ {
+  "id": "empty-vest",
+  "d": {
+   "slung": [
+    null,
+    null
+   ],
+   "holstered": [
+    null,
+    null
+   ],
+   "hip": null,
+   "counts": {
+    "mags": 1,
+    "grenades": 0,
+    "shells": 0,
+    "rounds40": 0,
+    "boxes": 0,
+    "tanks": 0
+   },
+   "bands": {
+    "bandolier": false,
+    "belt40": false
+   }
+  },
+  "parts": [
+   {
+    "k": "sling0",
+    "visible": true,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "sling1",
+    "visible": true,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "holster0",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "holster1",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "pair0",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "pair1",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "hip",
+    "visible": true,
+    "meshes": 1,
+    "box": [
+     [
+      -0.34,
+      -199.398,
+      -640.665
+     ],
+     [
+      -0.223,
+      -199.232,
+      -640.595
+     ]
+    ],
+    "gun": null
+   },
+   {
+    "k": "hipPair",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "harness",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "bandolier",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "belt40",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "mags",
+    "visible": true,
+    "meshes": 1,
+    "box": [
+     [
+      -0.153,
+      -199.321,
+      -640.546
+     ],
+     [
+      -0.107,
+      -199.271,
+      -640.52
+     ]
+    ],
+    "gun": null
+   },
+   {
+    "k": "grenades",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "boxes",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   },
+   {
+    "k": "tanks",
+    "visible": false,
+    "meshes": 0,
+    "box": null,
+    "gun": null
+   }
+  ]
+ }
+]

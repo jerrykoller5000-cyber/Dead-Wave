@@ -45,6 +45,7 @@ export function defaultWardrobe(seedCamo = 'm81') {
     version: 1,
     items,
     guns: {},
+    furniture: { ak: 'wood' },
     body: { hair: 'darkBrown', eyes: 'brown', skin: 3 },
   };
 }
@@ -80,7 +81,9 @@ export function normalizeWardrobe(raw, seedCamo = 'm81', isCamo = () => true) {
     if (BODY_CHOICES.eyes.includes(raw.body.eyes)) body.eyes = raw.body.eyes;
     if (BODY_CHOICES.skin.includes(raw.body.skin)) body.skin = raw.body.skin;
   }
-  return { version: 1, items, guns, body };
+  // GP-20129: old profiles keep the factory wood; arbitrary saved keys never reach the model setter.
+  const furniture = { ak: raw.furniture?.ak === 'synthetic' ? 'synthetic' : 'wood' };
+  return { version: 1, items, guns, furniture, body };
 }
 
 function copy(state) {
@@ -155,7 +158,7 @@ export function resetTab(state, tabId, seedCamo = 'm81') {
   const next = copy(state);
   const fresh = defaultWardrobe(seedCamo);
   if (tabId === 'him') next.body = fresh.body;
-  else if (tabId === 'guns') next.guns = {};
+  else if (tabId === 'guns') { next.guns = {}; next.furniture = fresh.furniture; }
   else for (const id of tab.items) next.items[id] = fresh.items[id];
   return next;
 }

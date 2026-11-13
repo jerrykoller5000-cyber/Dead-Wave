@@ -1,0 +1,90 @@
+{
+  "grip": {
+    "vertices": 2064,
+    "maxAbsDx": 0.0040000006556510925,
+    "maxAbsDy": 0,
+    "maxAbsDz": 0,
+    "upperMoved": 0
+  },
+  "hammerBefore": {
+    "vertices": 168,
+    "unsupported": 48,
+    "bedMin": null,
+    "bedMax": null,
+    "visibleMax": 0.002993334765975287,
+    "allNormalsFinite": true,
+    "pieces": [
+      {
+        "closed": true,
+        "faces": 56
+      }
+    ]
+  },
+  "hammerAfter": {
+    "vertices": 1911,
+    "unsupported": 0,
+    "bedMin": -0.0006000009345589127,
+    "bedMax": -0.0005999991342828387,
+    "visibleMax": 0.0005500008371589621,
+    "allNormalsFinite": true,
+    "pieces": [
+      {
+        "closed": true,
+        "faces": 634
+      }
+    ]
+  },
+  "cylinder": {
+    "triangles": 2136,
+    "pieces": [
+      {
+        "closed": true,
+        "faces": 2136
+      }
+    ],
+    "rays": [
+      {
+        "index": 0,
+        "hits": 0
+      },
+      {
+        "index": 1,
+        "hits": 0
+      },
+      {
+        "index": 2,
+        "hits": 0
+      },
+      {
+        "index": 3,
+        "hits": 0
+      },
+      {
+        "index": 4,
+        "hits": 0
+      },
+      {
+        "index": 5,
+        "hits": 0
+      },
+      {
+        "index": 6,
+        "hits": 0
+      },
+      {
+        "index": 7,
+        "hits": 2
+      }
+    ]
+  },
+  "triggerBefore": [
+    0,
+    -0.008,
+    0.036
+  ],
+  "triggerAfter": [
+    0,
+    -0.008,
+    0.036
+  ]
+}

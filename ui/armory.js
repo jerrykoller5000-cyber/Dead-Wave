@@ -1,4 +1,5 @@
 import { createArmoryPreview } from './armory-preview.js';
+import { WEAPON_ICONS } from './weapon-icons.js';
 import { createArmory, slotType } from '../game/armory.js';
 import { text, hasText } from './strings.js';
 
@@ -16,6 +17,9 @@ import { text, hasText } from './strings.js';
 // CL-114 (Jerry, 2026-10-02): a gun's camo is chosen here too, not in the CIF.
 //   getFinishes(kind)    -> { current, list: [{ key, name, locked, hint, swatch }] }   key '' is the factory finish
 //   onFinish(kind, key)  -> boolean                                     paint it
+// GP-20129 (Director approved 2026-11-13): optional factory furniture choice.
+//   getFurniture(kind)  -> null | { current, list: [{ key, name }] }
+//   onFurniture(kind, key) -> boolean                                  apply/persist the choice
 // GP-141 (Claude approved 2026-10-06): preview(kind, {yaw,pitch}) -> Promise<dataURL|null>.
 // Called only for a visible workbench and an interaction/refresh; angles are radians.
 export function mountArmory({ doc = document, bus = window, cif = doc.getElementById('cif'),
@@ -25,6 +29,7 @@ export function mountArmory({ doc = document, bus = window, cif = doc.getElement
   getGunOffers = () => [], onBuyGun = () => false, getBuildOffers = () => [], onBuyBuild = () => false,
   onOpenCatalogue = () => {}, onCloseCatalogue = () => {}, picture = async () => null, icon = () => '', describe = () => '',
   getFinishes = () => null, onFinish = () => false, preview = null,
+  getFurniture = () => null, onFurniture = () => false,
   getLaser = () => null, onLaser = () => false } = {}) {
   if (!cif?.querySelector('.card > .modes')) throw new Error('CIF window is missing');
   // A line ChatGPT hasn't written yet falls back to its English (CL-113: the strings are hers to word).
@@ -73,7 +78,8 @@ export function mountArmory({ doc = document, bus = window, cif = doc.getElement
   const stow = el('button', null, text('armory.stow')); stow.type = 'button';
   const done = el('button', null, text('armory.done')); done.type = 'button';
   const catalogue = el('section', 'armory-catalogue'); catalogue.setAttribute('aria-label', text('armory.store.title'));
-  actions.append(stow, done); panel.append(head, body, catalogue, actions); cif.append(panel);
+  // Resupply belongs in the main menu, before browsing the weapon racks.
+  actions.append(stow, done); panel.append(head, catalogue, body, actions); cif.append(panel);
 
   // The second of an akimbo pair is its own gun in the Armory (GP-78); say so.
   const labelGun = gun => /:second$/.test(gun.id) ? t('armory.pair', { gun: text(`weapon.${gun.kind}.name`) }, '{gun} · pair') : text(`weapon.${gun.kind}.name`);
@@ -89,7 +95,7 @@ export function mountArmory({ doc = document, bus = window, cif = doc.getElement
   const pics = new Map();
   function gunIcon(kind, cls = 'armory-pic') {
     const box = el('span', cls);
-    const svg = icon(kind);
+    const svg = WEAPON_ICONS[kind] || icon(kind);
     if (svg) box.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true">' + svg + '</svg>';
     return box;
   }
@@ -193,6 +199,7 @@ export function mountArmory({ doc = document, bus = window, cif = doc.getElement
       buy.addEventListener('click', () => { if (onBuyAmmo(kind)) render(); });
       refill.append(buy); benchEl.append(refill);
     }
+    renderFurniture(kind);
     const mods = modsOf(kind).filter(m => !typed?.order?.length || !m.id.startsWith('load:'));
     if (!mods.length) { benchEl.append(el('p', 'armory-bench-empty', t('armory.noMods', {}, 'This gun takes no attachments.'))); renderFinishes(kind); renderLaser(benchGun()); return; }
     const list = el('ul', 'armory-mods');
@@ -214,6 +221,23 @@ export function mountArmory({ doc = document, bus = window, cif = doc.getElement
     benchEl.append(list);
     renderFinishes(kind);
     renderLaser(benchGun());
+  }
+  function renderFurniture(kind) {
+    let data = null;
+    try { data = getFurniture(kind); } catch (_) { return; }
+    if (!data?.list?.length) return;
+    const wrap = el('section', 'armory-finish armory-furniture');
+    const title = t('armory.furniture');
+    wrap.append(el('h4', null, title), el('p', 'hint', t('armory.furniture.hint')));
+    const choices = el('div', 'armory-furniture-choices');
+    choices.setAttribute('role', 'group'); choices.setAttribute('aria-label', title);
+    for (const f of data.list) {
+      const b = el('button', null, f.name); b.type = 'button'; b.dataset.furniture = f.key;
+      b.setAttribute('aria-pressed', String(f.key === data.current));
+      b.addEventListener('click', () => { if (f.key !== data.current && onFurniture(kind, f.key)) scheduleRender(); });
+      choices.append(b);
+    }
+    wrap.append(choices); benchEl.append(wrap);
   }
   // CU-108: one colour per gun, including the second of an akimbo pair.
   function renderLaser(gun) {

@@ -1,0 +1,47 @@
+ok    tce10    29 pass   0 fail  42.1s  (real renderer)
+    PASS the Training Ground is up
+    PASS first person
+    PASS shotgun in hand
+    PASS shotgun rmr fitted
+    PASS shotgun: at rest the dot is on the sight line (-0.0, 0.0 x0.001 ndc)
+    INFO shotgun frame 0: dot y 56.3, window y 45.0, half-height 32.3 x0.001 ndc
+    INFO shotgun frame 1: dot y 51.0, window y 39.9, half-height 31.9 x0.001 ndc
+    INFO shotgun frame 2: dot y 45.4, window y 34.4, half-height 31.4 x0.001 ndc
+    INFO shotgun frame 8: dot y 19.6, window y 9.2, half-height 29.6 x0.001 ndc
+    INFO shotgun frame 16: dot y 1.4, window y 0.3, half-height 29.0 x0.001 ndc
+    INFO shotgun frame 24: dot y -0.9, window y -0.2, half-height 29.0 x0.001 ndc
+    INFO shotgun frame 32: dot y -0.2, window y -0.0, half-height 29.0 x0.001 ndc
+    PASS shotgun: a round fired down the sights
+    PASS shotgun: every frame of the kick the dot stays in its window, within 0.4 of its half-height of the centre (worst 0.35 over 36 frames)
+    PASS shotgun: the dot rides the kick with its window (up 56.3 x0.001 ndc)
+    PASS shotgun: and comes back to the aim (0.1)
+    PASS m4 in hand
+    PASS m4 rmr fitted
+    PASS m4: at rest the dot is on the sight line (0.0, -0.0 x0.001 ndc)
+    INFO m4 frame 0: dot y 38.8, window y 25.0, half-height 39.6 x0.001 ndc
+    INFO m4 frame 1: dot y 35.8, window y 22.1, half-height 39.2 x0.001 ndc
+    INFO m4 frame 2: dot y 32.5, window y 19.0, half-height 38.8 x0.001 ndc
+    INFO m4 frame 8: dot y 15.2, window y 5.1, half-height 37.0 x0.001 ndc
+    INFO m4 frame 16: dot y 0.6, window y 0.2, half-height 36.5 x0.001 ndc
+    INFO m4 frame 24: dot y -0.4, window y -0.1, half-height 36.4 x0.001 ndc
+    INFO m4 frame 32: dot y -0.1, window y -0.0, half-height 36.4 x0.001 ndc
+    PASS m4: a round fired down the sights
+    PASS m4: every frame of the kick the dot stays in its window, within 0.4 of its half-height of the centre (worst 0.35 over 36 frames)
+    PASS m4: the dot rides the kick with its window (up 38.8 x0.001 ndc)
+    PASS m4: and comes back to the aim (0.0)
+    PASS the pump shotgun in hand (note 12)
+    PASS the view gun has its slide release and trigger
+    PASS X starts the change
+    INFO note 12: 86 unload frames; paddle travel per shell (gun mm): 0:2.00 1:0.00 2:0.00 3:0.00
+    PASS the unload took the shells out one by one (4)
+    PASS the first shell: the action release pressed (2.00 mm)
+    PASS the other shells: the release left alone (0.00, 0.00, 0.00 mm)
+    PASS the trigger and the index never move through the unload (index 0.000, trigger 0.0000 rad)
+    PASS the pistol in hand (GT-20101)
+    INFO GT-20101 rack (u: round/gun view mm, slide shape gun mm): 0.65:0.0/0.0/0.0 0.66:0.0/0.0/0.0 0.67:0.0/0.0/0.0 0.68:0.0/0.0/0.0 0.69:0.0/0.0/0.0 0.70:0.0/0.0/0.0 0.71:0.0/0.0/0.0 0.72:0.0/0.0/0.9 0.76:0.0/0.0/0.9 0.84:0.0/0.0/0.9 0.88:0.0/0.0/0.9 0.91:0.0/0.0/0.0 0.93:0.0/0.0/0.0 0.95:0.0/0.0/0.0 0.97:0.0/0.0/0.0 0.98:0.0/0.0/0.0
+    PASS GT-20101: the support hand never in the .45 live round (worst 0.00 mm)
+    PASS GT-20101: nor in any closed part of the pistol from the seat to the hold (worst 0.00 mm)
+    PASS GT-20101: never inside the slide's outer shape (worst 0.87 gun mm)
+    PASS GT-20101: on the slide while it racks (4 frames, farthest 0.52 mm)
+    PASS no page errors ()
+1 checks: 29 pass, 0 fail (real renderer)

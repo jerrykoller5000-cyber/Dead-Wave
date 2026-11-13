@@ -1,0 +1,218 @@
+{
+  "setup": {
+    "count": 1,
+    "meshes": 1,
+    "camera": {
+      "x": 5,
+      "y": -198.95,
+      "z": -635,
+      "tx": 8,
+      "ty": -198.95,
+      "tz": -635,
+      "fov": 60
+    }
+  },
+  "records": [
+    {
+      "file": "noon-clean.png",
+      "marked": false,
+      "light": {
+        "key": "noon",
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "ground": 9272162,
+        "moon": 0,
+        "taskLamp": 0
+      },
+      "camera": {
+        "x": 5,
+        "y": -198.95,
+        "z": -635,
+        "tx": 8,
+        "ty": -198.95,
+        "tz": -635,
+        "fov": 60
+      },
+      "count": 1
+    },
+    {
+      "file": "noon-marked.png",
+      "marked": true,
+      "light": {
+        "key": "noon",
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "ground": 9272162,
+        "moon": 0,
+        "taskLamp": 0
+      },
+      "camera": {
+        "x": 5,
+        "y": -198.95,
+        "z": -635,
+        "tx": 8,
+        "ty": -198.95,
+        "tz": -635,
+        "fov": 60
+      },
+      "count": 1
+    },
+    {
+      "file": "overcast-clean.png",
+      "marked": false,
+      "light": {
+        "key": "overcast",
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "ground": 8158850,
+        "moon": 0,
+        "taskLamp": 0
+      },
+      "camera": {
+        "x": 5,
+        "y": -198.95,
+        "z": -635,
+        "tx": 8,
+        "ty": -198.95,
+        "tz": -635,
+        "fov": 60
+      },
+      "count": 1
+    },
+    {
+      "file": "overcast-marked.png",
+      "marked": true,
+      "light": {
+        "key": "overcast",
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "ground": 8158850,
+        "moon": 0,
+        "taskLamp": 0
+      },
+      "camera": {
+        "x": 5,
+        "y": -198.95,
+        "z": -635,
+        "tx": 8,
+        "ty": -198.95,
+        "tz": -635,
+        "fov": 60
+      },
+      "count": 1
+    },
+    {
+      "file": "dusk-clean.png",
+      "marked": false,
+      "light": {
+        "key": "dusk",
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "ground": 4863016,
+        "moon": 0,
+        "taskLamp": 0
+      },
+      "camera": {
+        "x": 5,
+        "y": -198.95,
+        "z": -635,
+        "tx": 8,
+        "ty": -198.95,
+        "tz": -635,
+        "fov": 60
+      },
+      "count": 1
+    },
+    {
+      "file": "dusk-marked.png",
+      "marked": true,
+      "light": {
+        "key": "dusk",
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "ground": 4863016,
+        "moon": 0,
+        "taskLamp": 0
+      },
+      "camera": {
+        "x": 5,
+        "y": -198.95,
+        "z": -635,
+        "tx": 8,
+        "ty": -198.95,
+        "tz": -635,
+        "fov": 60
+      },
+      "count": 1
+    },
+    {
+      "file": "night-clean.png",
+      "marked": false,
+      "light": {
+        "key": "night",
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "ground": 1382172,
+        "moon": 0,
+        "taskLamp": 7.868668376939028
+      },
+      "camera": {
+        "x": 5,
+        "y": -198.95,
+        "z": -635,
+        "tx": 8,
+        "ty": -198.95,
+        "tz": -635,
+        "fov": 60
+      },
+      "count": 1
+    },
+    {
+      "file": "night-marked.png",
+      "marked": true,
+      "light": {
+        "key": "night",
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "ground": 1382172,
+        "moon": 0,
+        "taskLamp": 7.868668376939028
+      },
+      "camera": {
+        "x": 5,
+        "y": -198.95,
+        "z": -635,
+        "tx": 8,
+        "ty": -198.95,
+        "tz": -635,
+        "fov": 60
+      },
+      "count": 1
+    }
+  ],
+  "errors": []
+}

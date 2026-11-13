@@ -1,0 +1,13 @@
+ const records=[];
+ for(const [pass,version]of ['before','after','after','before'].entries()){
+ const setup=await page.evaluate(`(async()=>{const R=surfaceFinal,{T,G,H,st,tg,hit}=R;st.char.dispose();st.impacts.dispose();st.char=R[${JSON.stringify(version)}].createTrainingChar(G,tg);st.impacts=R[${JSON.stringify(version)}].createTrainingImpacts(G,tg);
+ const old=Math.random;let seed=77;Math.random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;};let elapsed;
+ try{const t=performance.now();for(let n=0;n<64;n++)st.impacts.add(hit,{weapon:'m4'});st.char.add({...hit,size:.85},.94);elapsed=performance.now()-t;}finally{Math.random=old;}
+ await R.lights.select('noon');await H.render();return{impacts:st.impacts.count(),scorch:st.char.count(),insertMs:elapsed,camera:R.camera,light:'noon'};})()`);
+ assert.equal(setup.impacts,64);assert.equal(setup.scorch,1);await new Promise(r=>setTimeout(r,2000));await page.evaluate('TT.resetPerf()');const windows=[];
+ for(let n=0;n<6;n++){await new Promise(r=>setTimeout(r,1000));windows.push(await page.evaluate(`(()=>{const R=surfaceFinal,T=TT,i=T.renderer.info.render;return{...T.perfSnapshot(),draws:i.drawCalls??i.calls??0,triangles:i.triangles,impacts:R.st.impacts.count(),scorch:R.st.char.count()};})()`));}
+ const usable=windows.filter(w=>w.fps>0);assert(usable.length>=4,'native FPS samples');assert(windows.every(w=>w.impacts===64&&w.scorch===1),'fixture did not stay full');const fps=usable.reduce((s,w)=>s+w.fps,0)/usable.length;
+ records.push({pass,version,setup,windows,fps});console.log('RUNTIME '+JSON.stringify({pass,version,fps,insertMs:setup.insertMs,windows:usable.length}));
+ }
+ await writeFile(new URL('records.json',dir),JSON.stringify({mode:'Same native game page, A/B/B/A original/production factories, 64 coincident confirmed-prop impacts + one .85m scorch, warmed fixed camera/noon. Steady mark rendering, not continuous construction or shot/flash load; insertion time separate.',setup,records,errors:page.errors},null,2));assert.deepEqual(page.errors,[]);const mean=v=>{const r=records.filter(r=>r.version===v);return r.reduce((s,r)=>s+r.fps,0)/r.length;};const before=mean('before'),after=mean('after');assert(after>=before*.95,'steady-mark FPS regressed over5%');console.log('PASS matched steady prop-mark rendering '+JSON.stringify({before,after}));
+ }finally{await browser.close();await server.close();}

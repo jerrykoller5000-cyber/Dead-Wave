@@ -1,0 +1,9 @@
+{
+  "at": "2026-11-13T04:01:59.867Z",
+  "before": "12bc7b0682d16c8e9dea0ef029101a67",
+  "after": "abd6cd4c2b40d10e7ed71f0cbe7412b6",
+  "scope": "offhand flash material opacity-visible gate and warm-array registration only",
+  "lineEndings": "CRLF",
+  "a": "      if (m.userData.laser?.geometry) m.userData.laser.geometry = m.userData.laser.geometry.clone();",
+  "b": "      if (m.userData.flash?.material) {\r\n        const fm = m.userData.flash.material; let opacity = fm.opacity;\r\n        Object.defineProperty(fm, 'opacity', { configurable: true, enumerable: true, get() { return opacity; }, set(v) { opacity = v; this.visible = v > 0 || !!gunEffects.warm; } });\r\n        fm.opacity = opacity;\r\n        (gunEffects.mats ||= []).push(fm);\r\n      }\r\n      if (m.userData.laser?.geometry) m.userData.laser.geometry = m.userData.laser.geometry.clone();"
+}

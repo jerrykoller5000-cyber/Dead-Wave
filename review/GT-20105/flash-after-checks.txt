@@ -1,0 +1,18 @@
+ok    tcb317    7 pass   0 fail  31.9s  (real renderer)
+    INFO the eye: unlit flash spheres drawn 0
+ok    t283      3 pass   0 fail  36.1s  (real renderer)
+ok    t38      33 pass   0 fail  65.2s  (real renderer)
+    INFO minigun cold meshes 28, equipped draws 27
+    INFO m4 cold meshes 37, equipped draws 32
+    INFO ak cold meshes 24, equipped draws 19
+    INFO aa12 cold meshes 27, equipped draws 25
+    INFO pistol cold meshes 22, equipped draws 17
+    INFO uzi cold meshes 28, equipped draws 23
+    INFO shotgun cold meshes 26, equipped draws 20
+    INFO revolver cold meshes 26, equipped draws 21
+    INFO sniper cold meshes 36, equipped draws 32
+    INFO launcher cold meshes 26, equipped draws 22
+    INFO flamer cold meshes 19, equipped draws 18
+    INFO chainsaw cold meshes 13, equipped draws 12
+    INFO twelve cold guns: 312 attached meshes; equipped individually: 268 actual draws
+3 checks: 43 pass, 0 fail (real renderer)

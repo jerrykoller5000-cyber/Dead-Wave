@@ -1,0 +1,40 @@
+{
+  "tests": [
+    "tcb317",
+    "t283",
+    "t38"
+  ],
+  "rows": [
+    {
+      "test": "tcb317",
+      "pass": 7,
+      "fail": 0
+    },
+    {
+      "test": "t283",
+      "pass": 3,
+      "fail": 0
+    },
+    {
+      "test": "t38",
+      "pass": 33,
+      "fail": 0
+    }
+  ],
+  "start": {
+    "index.html": "07a6d655039a8cb313241326bb4908f52d3a7df669d5a3b7b94e0704362942e7",
+    "studio/weapon-effects.js": "302f01982e0d5078f377c791b7678c01c58079be6946aff0d418e96651b1cfce",
+    "studio/weapon-sidearms.js": "281ac598e70bcc35f7aa524e6cfc6946a0637212155d86b36ac1b5bbe6ba4808",
+    "studio/weapon-heavy.js": "2b4233d40941179d61152e7894e02396a3f100fa2f9211153260239eccf372cb",
+    "game/viewmodel.js": "b3f72e6175a36c8c19898e4ee2cb65d9ae67ea6670cbfdb181543bbee8ef40a4"
+  },
+  "end": {
+    "index.html": "07a6d655039a8cb313241326bb4908f52d3a7df669d5a3b7b94e0704362942e7",
+    "studio/weapon-effects.js": "302f01982e0d5078f377c791b7678c01c58079be6946aff0d418e96651b1cfce",
+    "studio/weapon-sidearms.js": "281ac598e70bcc35f7aa524e6cfc6946a0637212155d86b36ac1b5bbe6ba4808",
+    "studio/weapon-heavy.js": "2b4233d40941179d61152e7894e02396a3f100fa2f9211153260239eccf372cb",
+    "game/viewmodel.js": "b3f72e6175a36c8c19898e4ee2cb65d9ae67ea6670cbfdb181543bbee8ef40a4"
+  },
+  "changed": [],
+  "exit": 0
+}

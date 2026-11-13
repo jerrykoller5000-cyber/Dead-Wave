@@ -1,0 +1,14 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>KR-7 Armory UI contract fixture</title>
+<link rel="stylesheet" href="/ui/armory.css"><style>
+:root{--font-hud:monospace;--accent-2:#ddc362;--accent-2-ink:#111}body{margin:0;background:#101812;color:#e8e2c8;font:14px monospace}#cif{display:block;padding:16px}.card{max-width:1160px;margin:auto}.modes{display:flex}button{font:inherit;color:inherit;background:#263325;border:1px solid #778366;padding:8px}#armoryPanel[hidden]{display:none}
+</style><div id="cif" class="show armory-only"><div class="card"><div class="modes"></div></div></div>
+<script type="module">
+import{mountArmory}from'/ui/armory.js';
+import{text}from'/ui/strings.js';
+const changes=[];let current='wood',accept=true;
+window.fixture={changes,get current(){return current},reject(v){accept=!v}};
+window.armoryFixture=mountArmory({getOwned:()=>[{id:'ak',kind:'ak',loaded:30},{id:'m4',kind:'m4',loaded:30}],
+ getFurniture:kind=>kind==='ak'?{current,list:['wood','synthetic'].map(key=>({key,name:text('armory.furniture.'+key)}))}:null,
+ onFurniture:(kind,key)=>{changes.push({kind,key,accepted:accept});if(!accept)return false;current=key;return true;}});
+armoryFixture.open();armoryFixture.bench('ak');window.fixtureReady=true;
+</script></html>

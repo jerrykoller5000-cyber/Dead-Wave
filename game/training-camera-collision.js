@@ -166,7 +166,7 @@ export function createTrainingMarineFade(marine){
   };
 }
 
-export function trainingCameraContact(from,to,boxes,margin=CAMERA_MARGIN,extra=null,raised=true){
+export function trainingCameraContact(from,to,boxes,margin=CAMERA_MARGIN,extra=null,raised=true,skip=null){
   const dx=to.x-from.x,dy=to.y-from.y,dz=to.z-from.z;
   const length=Math.hypot(dx,dy,dz);
   if(length<1e-6)return null;
@@ -183,7 +183,8 @@ export function trainingCameraContact(from,to,boxes,margin=CAMERA_MARGIN,extra=n
       b.maxX<rayMinX||b.minX>rayMaxX||
       b.maxY<rayMinY||b.minY>rayMaxY||b.maxZ<rayMinZ||b.minZ>rayMaxZ||
       !Number.isFinite(b.minX)||!Number.isFinite(b.maxX)||
-      !Number.isFinite(b.minY)||!Number.isFinite(b.maxY)||!Number.isFinite(b.minZ)||!Number.isFinite(b.maxZ))continue;
+      !Number.isFinite(b.minY)||!Number.isFinite(b.maxY)||!Number.isFinite(b.minZ)||!Number.isFinite(b.maxZ)||
+      (skip&&skip(b,to)))continue;
     const minX=b.minX-margin,maxX=b.maxX+margin,minY=b.minY-margin,maxY=b.maxY+margin,minZ=b.minZ-margin,maxZ=b.maxZ+margin;
     // The head can start inside a high fixture. Its own collider handles that;
     // this ray should only stop at a face the camera moves into from outside.
@@ -214,11 +215,27 @@ export function createTrainingCameraCollision(THREE,tg,stations,armoryCopy,raise
     visit(armoryCopy);
     if(!bounds.isEmpty())extra.push({name:'armory',minX:bounds.min.x,maxX:bounds.max.x,minY:bounds.min.y,maxY:bounds.max.y,minZ:bounds.min.z,maxZ:bounds.max.z});
   }
+  // CB-327 (J151 note 1, Jerry: "It gets stuck on things"): the overhead eye
+  // sits ~12 m out, past the room's walls. The walls are planes facing into
+  // their room, so from behind one the eye sees through it (that is how the
+  // overhead view always worked), and the cutaway and the perimeter fade what
+  // stands between the eye and the marine. Neither is an obstacle for this
+  // query; props, stations and ceilings over enclosed rooms still are. The
+  // firing line (wire on 7.5 cm posts, see-through for the aim cursor already)
+  // and the perimeter's wire fence are seen through from an eye above them; a
+  // low eye (the station and close framings) still stops at them. The bullet
+  // and laser queries keep every solid (they never call this).
+  const seeThrough=(b,eye)=>{
+    if((b.firingFence||b.firingFrame||b.perimeterFence)&&eye.y>b.maxY)return true;
+    const f=b.wall&&b.surface;
+    if(f&&(eye.x-f.x)*f.nx+(eye.z-f.z)*f.nz< -.01)return true;
+    return !!tg.cutaway?.ignoreSolid?.(b);
+  };
   return {diveSolids:extra,boxes:extra,
     pull(from,eye){
       // The down-facing range ceiling is a bullet solid, but the overhead
       // third-person eye must keep its existing view into the room.
-      const hit=trainingCameraContact(from,eye,tg.solids,CAMERA_MARGIN,extra,raisedFence());
+      const hit=trainingCameraContact(from,eye,tg.solids,CAMERA_MARGIN,extra,raisedFence(),seeThrough);
       if(!hit)return null;
       eye.x=from.x+(eye.x-from.x)*hit.t;
       eye.y=from.y+(eye.y-from.y)*hit.t;

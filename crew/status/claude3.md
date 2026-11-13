@@ -2,14 +2,31 @@
 
 state: active
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: CC-347 J151 note 8: floating holsters/pouches/gear off the body on a fresh reload, every kit+weapon combination seated; with CB-314's side MOLLE bars
-touching: studio/marine-body.js, index.html (buildCarryRig and the carry plan/mount section), tools/tests/tcc347.js (new)
-since: 2026-11-13T00:50Z
-next: CC-344 (18:30Z, CLAUDE DIRECTOR: part 2 accepted (pouches on the be
+task: CC-347 part 2: seat the real gear (pack holster, slings, pouches) in every kit+weapon combination
+touching: index.html (carry section: placeSecondary, sling/holster/pouch placement), tools/tests/tcc347.js, review/CC-347/
+since: 2026-11-13T05:56Z
+next: CC-347 (02:15Z: part 1 ACCEPTED: the warm-up stand-in gear no longe
 blocked-on: —
-last-report: handoffs/2026-11-12-claude3-CC-346-gw4.md
+last-report: handoffs/2026-11-13-claude3-CC-349.md
 
 ## Notes
+
+### Session 4 (fresh, 00:50Z-03:40Z 13 Nov, Opus 5.5)
+- CC-347 part 1 LANDED 02:07Z, for review (handoffs/2026-11-13-claude3-CC-347.md): Jerry's cage (J142, J151 note 8) = trainingWarmCompile's finally
+  re-applied the carry plan BEFORE its warmVis restore, which switched the warm's stand-in straps/bands/holsters/pairs/hip-pair shell back on
+  with no guns. Moved the carry restore after warmVis + carryVisSnap/carryVisHeld self-check in updateCarriedGear. tcc347 (new) 11/0, before 9/2.
+  NEVER probe the rig with TT.carryDbg first: it re-applies the plan and hides the bug (review/CC-347/probe3.mjs does it right).
+- CC-347 part 2 OPEN (asked the Director): seat the real gear: the low pack holster (revolver/pistol 'lower' in placeSecondary) is a big open
+  shell hanging below the pack over his seat (~15 cm air); slings loop off his sides. Audit: review/CC-347/audit-loadouts-before.json, probe.mjs.
+- CC-348 notes 11/20/44 LANDED 03:25Z for review: shotgun look 1.4, pump r .034/.036; SUPPRESSOR.m4 r .0335 len .232; sniper cheekFinish
+  painted 'furniture'. Claude 1 asked to refit the pump hands. The GW-4 can already paints in 3P (told Claude 7: likely the 1P copy).
+- CC-348 note 42 OPEN (sniper bolt): asked the Director (options A/B/C, my pick A: a raceway slot in the rear bridge's +x side, the rail
+  base/rail start moved to z -0.14, root trimmed, bolt body lengthened back to the root; nothing past the receiver's end: the stock's strut
+  and cheek riser sit in the bolt's path behind it). Side views: review/CC-348/probe4.mjs (bolt states closed/lifted/back).
+- CC-349 (Jerry's J152, unarmed hands like his reference) LANDED 03:25Z, checked out done: UNARMED_ARMS x .05 z .045 elbow -.18 + HANG_LOOSE.
+- Cloud copy: /home/claude/tt (rebuild: tar on the PC WITHOUT qa/ and tools/*/png (1.5 GB otherwise), assets minus soundtrack; then
+  assets/intro + assets/disclaimer minus mp4/webm, or the load hangs). Slot: kill a stuck probe by its Chrome PID first, then node.
+  Probes must close their server (server.close) or node never exits and holds the slot. His right side is +x (armLG is on -x).
 
 ### Session 11 (fresh, 16:17Z-, Opus 5.5)
 - CC-344 part 2 LANDED 18:18Z, accepted (handoffs/2026-11-12-claude3-CC-344b.md): mag pouches up 5 cm onto the belt + the trouser

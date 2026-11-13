@@ -1,0 +1,44 @@
+[
+  {
+    "gun": "pistol",
+    "writes": [
+      {
+        "visible": true,
+        "opacity": 0
+      },
+      {
+        "visible": false,
+        "opacity": 0
+      }
+    ],
+    "final": false
+  },
+  {
+    "gun": "uzi",
+    "writes": [
+      {
+        "visible": true,
+        "opacity": 0
+      },
+      {
+        "visible": false,
+        "opacity": 0
+      }
+    ],
+    "final": false
+  },
+  {
+    "gun": "revolver",
+    "writes": [
+      {
+        "visible": true,
+        "opacity": 0
+      },
+      {
+        "visible": false,
+        "opacity": 0
+      }
+    ],
+    "final": false
+  }
+]

@@ -17,7 +17,7 @@
 // where the view gun's muzzle appears (the laser leaves from there).
 import { VM, VM_POSES, VM_RELOADS, VM_SOCKETS, VM_BLADES, VM_GRENADE, VM_HANDS, VM_TRIGGER, VM_CONTROLS, VM_SELECT, VM_LIGHT } from './viewmodel-poses.js';
 import { SIGHT } from './sight-points.js';
-import { buildViewArm, wristSpacePoint, HAND_SCALE } from '../studio/fp-arms.js';
+import { buildViewArm, wristSpacePoint, HAND_SCALE, UPPER_ARM_LEN } from '../studio/fp-arms.js';
 import { copyPose, lerpPose, HAND_POSES } from '../studio/marine-hand.js';
 import { ITEM_POSES, gripPose } from '../studio/hand-grips.js';
 import { handContact } from '../studio/hand-contacts.js';   // CL-334 h
@@ -210,6 +210,8 @@ export function createViewmodel(ctx) {
     // AG-168 (defect 2): the guns slung on his back and holstered under his arms poked into the view (looking down, and
     // over the slide in the reload); out of the eye too.
     for (const g of (ctx.stowed ? ctx.stowed() : [])) if (g) walkArm(g);
+    // CH-1 (J151 note 10): and the pack's second-gun holsters (the carry rig's pairs), which ctx.stowed does not list.
+    for (const g of carryPairs()) walkArm(g);
     // GP-20002: only the radio cluster on the carrier leaves the eye; its vest and shadow stay.
     for (const o of (ud.gearParts && ud.gearParts.vest) || []) if (o.userData.vmEyeRadio) add(o);
     const rig = ud.rigSkin;
@@ -226,6 +228,21 @@ export function createViewmodel(ctx) {
   // MU-11 (finding 1): his gun's nodes are counted once every 15th frame (it was twice a frame), for both the eye-hide's
   // stamp and the copy's rebuild.
   let nodeCount = 0, nodeCountFor = null, nodeAge = 0, stowCount = 0, stowAge = 99;
+  // CH-1 (J151 note 10, Jerry: "Floating random red dot off to left of screen using shotgun"): the count alone missed a copy
+  // re-made with as many parts (a camo or a laser at the workbench: the new copy stayed in the eye) and lagged up to 15
+  // frames behind an optic fitted to a slung gun. The stamp also carries which copies hang on him and which optic is on the
+  // gun in his hand, read every frame (a few ids, no traversal).
+  function carryPairs() { const r = marine.userData && marine.userData.carry; return r && r.pairs ? r.pairs.map((p) => p && p.g).filter(Boolean) : []; }
+  function idsOf(g, h) { for (const c of g.children) { h = (h * 31 + c.id) | 0; for (const k of c.children) h = (h * 31 + k.id) | 0; } return h; }   // the copies and their parts, two levels
+  function stowedIds(gunSrc) {   // a number: no string or closure built each frame
+    let h = 7;
+    const st = ctx.stowed ? ctx.stowed() : null;
+    if (st) for (const g of st) if (g) h = idsOf(g, h);
+    const r = marine.userData && marine.userData.carry;
+    if (r && r.pairs) for (const p of r.pairs) if (p && p.g) h = idsOf(p.g, h);
+    const opt = gunSrc && gunSrc.userData && gunSrc.userData.fittedOptic;
+    return (h * 31 + (opt ? opt.id : 0)) | 0;
+  }
   function stowedNodes() {
     if (++stowAge < 15) return stowCount;
     stowAge = 0; stowCount = 0;
@@ -239,7 +256,7 @@ export function createViewmodel(ctx) {
   }
   function setEyeHide(on, gunSrc, gunSrc2 = null) {
     const rig = marine.userData.rigSkin;
-    const stamp = on ? (gunSrc ? gunSrc.uuid : '-') + '|' + (gunSrc2 ? gunSrc2.uuid : '-') + '|' + (rig ? rig.bakes : 0) + '|' + gunNodes(gunSrc) + '|' + stowedNodes() : '';
+    const stamp = on ? (gunSrc ? gunSrc.uuid : '-') + '|' + (gunSrc2 ? gunSrc2.uuid : '-') + '|' + (rig ? rig.bakes : 0) + '|' + gunNodes(gunSrc) + '|' + stowedNodes() + '|' + stowedIds(gunSrc) : '';
     if (stamp === hideStamp && on === hideOn) return;
     const next = on ? eyeHideSet(gunSrc, gunSrc2) : new Set();
     for (const o of hidden) if (!next.has(o)) o.userData.vmEyeHide = false;
@@ -422,11 +439,13 @@ export function createViewmodel(ctx) {
       loadRound: map.get(direct(ud.loadRound)) || null,   // GP-20039: the loose round for the support fingers
       stock: map.get(ud.fpStock) || null,
       flash: map.get(ud.flash) || null,
+      barrel: map.get(direct(ud.barrelAssembly)) || null,   // CE-11 (GT-20104): the pistol's tilting barrel
       nodes: countNodes(src), s: 1, foot: null, magBase: null };
     // CE-2 (J130): the gun's controls (ChatGPT 2's userData.controls: a name per control) as the copy's own nodes, for the hand
     gun.ctrls = {};
     for (const [k, nm] of Object.entries(ud.controls || {})) { const o = nm && src.getObjectByName(nm), c = o && map.get(o); if (c) gun.ctrls[k] = c; }
     gun.workBase = gun.work ? gun.work.position.clone() : null;
+    gun.barrelBase = gun.barrel ? { x: gun.barrel.position.x, y: gun.barrel.position.y, z: gun.barrel.position.z, rx: gun.barrel.rotation.x } : null;   // CE-11
     gun.pumpBase = gun.pump ? gun.pump.position.clone() : null;
     gun.boltBase = gun.bolt ? gun.bolt.position.clone() : null;   // GB-301: exposed like the shotgun's pump
     gun.shellBase = gun.shell ? { pos: gun.shell.position.clone(), quat: gun.shell.quaternion.clone() } : null;
@@ -670,7 +689,11 @@ export function createViewmodel(ctx) {
     if (R && R.perRound && st.reloadU != null && st.rounds && st.rounds.need) R = perRoundOf(R, st.rounds.need);
     return R && st.reloadU != null && st.reloadEmpty === false ? tacticalOf(R) : R; };
   const POSES = { mag: gripPose(ITEM_POSES.mag), pouch: gripPose(ITEM_POSES.pouch), cup: gripPose(ITEM_POSES.cup), pinch: gripPose(ITEM_POSES.pinch), open: copyPose(HAND_POSES.open) };
-  const fingerPose = (name) => (name === 'fore' ? sockets.poseL : POSES[name] || sockets.poseL);
+  // CE-9 (GT-20101): a reload may name its own finger poses (R.poses: { name: ITEM_POSES-style entry }), the pistol's rack
+  // grip that keeps its fingers off the round in the open port and its thumb on the slide's side
+  const _rPoses = new WeakMap();
+  const fingerPose = (name, R) => { if (name === 'fore') return sockets.poseL; const e = R && R.poses && R.poses[name];
+    if (e) { let p = _rPoses.get(e); if (!p) _rPoses.set(e, p = gripPose(e)); return p; } return POSES[name] || sockets.poseL; };
   const _ka = F(), _kb = F(), _pa = copyPose(HAND_POSES.relaxed);
   function reloadHand(R, u, out) {
     const K = R.hand;
@@ -681,7 +704,7 @@ export function createViewmodel(ctx) {
     placeFrame(K[i][1], R, u, _ka); placeFrame(K[j][1], R, u, _kb);
     rockNow = 0;
     lerpF(_ka, _kb, t, out);
-    lerpPose(fingerPose(K[i][2]), fingerPose(K[j][2]), t, _pa);
+    lerpPose(fingerPose(K[i][2], R), fingerPose(K[j][2], R), t, _pa);
     info.handPlace = t < 0.5 ? K[i][1] : K[j][1];
     return _pa;
   }
@@ -1003,7 +1026,7 @@ export function createViewmodel(ctx) {
   // axis or a slide (m) along it, from the part's rest, k of the way (0..1) by what drives it: turns (the selector per
   // st.fireMode, or fixed), ready (the gun up: a safety off, a grip safety squeezed, a switch armed), fire (the trigger
   // held), reload (beats [in, held, out, home] of the authored reload, or a list of them; the empty one only with empty)
-  // or unload (beats of an ammo change's unload, S.unloadW). A part the
+  // or unload (beats of an ammo change's unload, S.unloadW; first: on its first shell only, CE-10). A part the
   // gun's own action already moves (the view's work, pump or the launcher's latch) is never in a row.
   const _ctlP = V3(), _ctlQ = Q(), _ctlA = V3(), ctlAng = {};
   const ctlAxis = (a, out) => (Array.isArray(a) ? out.set(a[0], a[1], a[2]).normalize() : out.copy(a === 'y' ? AX_Y : a === 'z' ? AX_Z : AX_X));
@@ -1037,7 +1060,7 @@ export function createViewmodel(ctx) {
         else if (R.ready) k = Math.max(k, smooth(S.raise));
         if (R.fire && st.fireHeld && S.raise > 0.98) k = Math.max(k, 1);
         if (R.reload && !(R.empty && st.reloadEmpty === false)) for (const b of (Array.isArray(R.reload[0]) ? R.reload : [R.reload])) k = Math.max(k, beats(ub, b));
-        if (R.unload && S.unloadW) k = Math.max(k, beats(clamp(S.unloadW.u, 0, 1), R.unload));
+        if (R.unload && S.unloadW && !(R.first && (S.unloadW.unloaded | 0) > 0)) k = Math.max(k, beats(clamp(S.unloadW.u, 0, 1), R.unload));   // CE-10 (J151 note 12): first, the first shell's only
         want = k * (R.turn != null ? R.turn : R.slide || 0);
       }
       const id = name; let a = ctlAng[id];
@@ -1113,7 +1136,7 @@ export function createViewmodel(ctx) {
   // drawn, nothing of the glove in it: Claude 5's solve-light). Null when there is no press to show.
   const LIGHT_RELAX = { f: VM_LIGHT.curl, t: HAND_POSES.relaxed.t };
   const _lpFull = copyPose(HAND_POSES.relaxed), _lpPose = copyPose(HAND_POSES.relaxed), _lpGi = F(), _lpH = F(), _lpW = F(), _lpM = M4(), _lpM2 = M4(),
-    _lpC = V3(), _lpA = V3(), _lpPad = V3(), _lpPiv = V3(), _lpQ = Q(), _lpV = V3(), _lpHold = V3();
+    _lpC = V3(), _lpA = V3(), _lpPad = V3(), _lpPiv = V3(), _lpQ = Q(), _lpV = V3(), _lpHold = V3(), _lpZ = V3();
   function lightTimes() { const T0 = VM_LIGHT.times, t1 = T0.reach, t2 = t1 + T0.press, t3 = t2 + T0.hold, t4 = t3 + T0.lift; return { t1, t2, t3, t4, t5: t4 + T0.back, at: t1 + T0.press * 0.5 }; }
   function lightRest(sw) {
     const r = sw.userData.restPosition || sw.userData.vmLightRest || (sw.userData.vmLightRest = sw.position.toArray());
@@ -1158,7 +1181,21 @@ export function createViewmodel(ctx) {
     const padG = _lpPad.sub(_lpV.fromArray(Lw)).multiplyScalar(_lpH.s).applyQuaternion(_lpH.q).add(_lpH.p);
     _lpH.p.add(_lpV.copy(_lpC).addScaledVector(_lpA, -(VM_LIGHT.face + gap) + ls.travel * press).sub(padG));
     mul(G, _lpH, _lpW);
-    lerpF(WL, _lpW, k, WL);
+    // CE-9 (13 Nov): off the hold first: E.release (gun units) along the hold's palm normal, quick out and late in, and with
+    // E.ease 2 the hand heads for the switch and turns only once it is out (k squared): heading straight off the hold it
+    // turned its fingers through the fore-end or the pump
+    _lpZ.set(0, 0, 1).applyQuaternion(WL.q);
+    lerpF(WL, _lpW, E.ease === 2 ? k * k : k, WL);
+    if (E.release && k > 0 && k < 1) WL.p.addScaledVector(_lpZ, E.release * Math.sqrt(4 * k * (1 - k)) * G.s);
+    // CE-9 (tce4; J151 notes 17 and 46, the arm and the thumb through the GW-4 and the sniper working the light): on the way
+    // to the switch and back the hand arcs out from the gun along the switch's outward axis (E.lift gun units at the
+    // middle of the way, VM_LIGHT.lift by default) instead of cutting straight through the light and the fore-end
+    // (E.arc [x, y, z]: the way out in the gun's own axes instead, for a gun whose light sits where outward runs into it)
+    { const arc = E.arc || (E.lift != null ? E.lift : VM_LIGHT.lift || 0), w = 4 * k * (1 - k);
+      if (arc && k > 0 && k < 1) {
+        if (Array.isArray(arc)) _lpV.set(arc[0], arc[1], arc[2]); else _lpV.copy(_lpA).multiplyScalar(-arc);
+        WL.p.add(_lpV.multiplyScalar(w * G.s).applyQuaternion(G.q));
+      } }
     // the eye copy's pad in by the thumb (the switch's node; studio/weapon-light-switch.js moves the pad's vertices)
     if (press > 0) { sw.position.x += ls.axis[0] * ls.travel * press; sw.position.y += ls.axis[1] * ls.travel * press; sw.position.z += ls.axis[2] * ls.travel * press; }
     info.light = { t, k, press, gap };
@@ -1317,7 +1354,15 @@ export function createViewmodel(ctx) {
     // stays visible for too long when transitioning to scope": it was 82%, the scope's eyepiece already centred and the
     // glass's ring and reticle over it from about 60%).
     root.visible = active && !(gun && ((gun.key === 'sniper' && (st.ads || 0) >= SNIPER_GLASS) || (st.opticGlass && (st.ads || 0) >= 0.88)));   // CL-323: a magnified optic's glass too (full at 88%)
-    setEyeHide(active, active ? gun.src : null, active && gun2 ? gun2.src : null);
+    // CG-1 (J151 note 4, Jerry 13 Nov: "Camo resize glitch is persistent in 1st person on arms and all weapons"): between
+    // guns (the old one down, the new one not up yet: a change of gun, a draw) the eye stays first person (index.html
+    // st.eye), so his body's arms and the gun in his hand stay out of the eye's pass. They used to come back into it for
+    // those frames, drawn at the world's field of view and his body's own size: the sleeves', gloves' and gun's camo
+    // jumped to another size and back on every change of gun.
+    const eyeOn = active || !!(st && st.eye);
+    const hideGun = active ? gun.src : eyeOn && st.weapon ? weaponMeshes[st.weapon] || null : null;
+    const hideGun2 = active ? (gun2 ? gun2.src : null) : eyeOn && st.weapon && ctx.offhand ? ctx.offhand(st.weapon) || null : null;
+    setEyeHide(eyeOn, hideGun, hideGun2);
     if (!active) { S.camQ = null; S.lastPlace = null; if (blade) blade.root.visible = false; return; }
     syncArmMaterials();
     if (gunNodes(gun.src) !== gun.nodes) buildGun(gun.key, !!gun2);
@@ -1369,7 +1414,24 @@ export function createViewmodel(ctx) {
       // CE-2 (J103): through a reload the view's slide or handle is the view's own: his body's rack (mirrored from his gun
       // by mirrorParts) moved it with no hand on it in a tactical reload and doubled the empty reload's (0.196 for 0.07)
       if (gun.work && gun.workBase && ur != null && !AK) gun.work.position.z = gun.workBase.z;
-      if (gun.work && rk && ur != null) { const back = smooth((ur - rk[0]) / (rk[1] - rk[0])) * (1 - smooth((ur - rk[2]) / 0.03)); gun.work.position.z -= rk[3] * back; } }
+      if (gun.work && rk && ur != null) {
+        // CE-11 (J151 note 2, Jerry 13 Nov: "The chamber and barrel on reload need to look more realistic"): on an empty
+        // reload with Rr.lockBack the slide is locked back from the start (the last round fired it there), the support hand
+        // pulls it the last few mm off the stop over [0]-[1] and lets it run home at [2]
+        const lock = Rr.lockBack && !Rr.tactical;
+        const back = lock ? (ur < rk[2] ? 1 + Rr.lockBack * smooth((ur - rk[0]) / (rk[1] - rk[0])) : 1 - smooth((ur - rk[2]) / 0.03))
+          : smooth((ur - rk[0]) / (rk[1] - rk[0])) * (1 - smooth((ur - rk[2]) / 0.03));
+        gun.work.position.z -= rk[3] * back; } }
+    // CE-11 (J151 note 2; ChatGPT 2's GT-20104 pistol: a hollow slide over a barrel on its rear chamber datum): the view's
+    // barrel follows its slide as a Browning tilting barrel does: back with it its first P.barrel.joint, then unlocked over
+    // the next P.barrel.unlock its chamber drops P.barrel.drop and it tilts P.barrel.tilt (rad about x), the hood leaving
+    // the port; home with it. On every shot's kick and through the reload's rack.
+    { const B = P.barrel, br = gun.barrel, bb = gun.barrelBase;
+      if (B && br && bb && gun.work && gun.workBase) {
+        const s = Math.max(0, gun.workBase.z - gun.work.position.z), j = Math.min(s, B.joint), u2 = clamp((s - B.joint) / B.unlock, 0, 1);
+        br.position.set(bb.x, bb.y - B.drop * u2, bb.z - j); br.rotation.x = bb.rx + B.tilt * u2;
+        info.barrel = { s, j, u: u2 };
+      } }
     // CE-3 (J133): an ammo change's unload works the forend back and home once a shell (R.unload.pump); the support hand
     // rides it as on a shot. The view's own stroke while his gun's forend is at rest (index.html may stroke its own: then
     // the mirror carries it and this stands aside).
@@ -1550,7 +1612,7 @@ export function createViewmodel(ctx) {
       a.root.updateMatrix();
       _sh.set(VM_SHOULDER[0] * sx * MX, VM_SHOULDER[1], VM_SHOULDER[2]).applyMatrix4(_shm.copy(a.root.matrix).invert());
       const len = _sh.length();
-      if (len > 1e-4) { a.upper.quaternion.setFromUnitVectors(AX_Y, _sh.multiplyScalar(1 / len)); a.upper.scale.set(1, Math.max(1, len / 0.34), 1); }
+      if (len > 1e-4) { a.upper.quaternion.setFromUnitVectors(AX_Y, _sh.multiplyScalar(1 / len)); a.upper.scale.set(1, Math.max(1, len / UPPER_ARM_LEN), 1); }   // CG-1: no stretch (the sleeve runs past the shoulder)
     }
     // CE-2 (J103: "Trigger finger needs to be in actual trigger guard when firing ... Finger needs to physically pull the
     // trigger for each shot"; J112): on a gun with VM_TRIGGER the firing hand's index lies in the guard with its pad on the
@@ -1956,16 +2018,31 @@ export function createViewmodel(ctx) {
   // CC-342 (J109): where a red dot's dot is drawn (ndc, the screen's centre 0, 0; y up): along the optic's own line from the
   // view gun's dot (its RMR, or the ACOG's RMR on top), so it rides the gun's kick and sway as the window round it does.
   // null without a fitted optic's line.
-  const _odA = V3(), _odB = V3(), _odD = V3(), _odN = { x: 0, y: 0, d: 0 };
+  // CE-10 (J151 note 14, Jerry 13 Nov: "The red dot appears to slide while firing the shotgun ADS"): the line's point 400 m
+  // out swings with the gun's whole turn while the window, a hand's length from the eye, moves a fraction of it: on the
+  // shotgun's kick the dot rose 0.24 ndc with its window at 0.04 (half-height 0.03), out of the housing and up the screen.
+  // The dot is drawn on its window (the RMR's glass, its centre on the line) and keeps only a short drift toward where the
+  // line points, eased to at most VM_DOT.drift of the window's half-height: it rides the kick and sway with the housing
+  // round it and never leaves it.
+  const _odA = V3(), _odB = V3(), _odD = V3(), _odN = { x: 0, y: 0, d: 0 }, _odW = { x: 0, y: 0, d: 0 }, _odH = { x: 0, y: 0, d: 0 };
+  const VM_DOT = { drift: 0.35, glassHalf: 0.008, eyeToDot: 0.046 };   // the RMR's glass half-height and its eye-to-dot, in the optic's units (studio/weapon-optics.js rmr)
   function opticDotOffset(out = { x: 0, y: 0 }) {
     const m = gun && gun.src && gun.src.userData.fittedOptic, L = m && m.userData.line;
     if (!L || !info.active) return null;
     const top = L.topDot && L.topEye && S.opticTop > 0.5, e = top ? L.topEye : L.eye, d = top ? L.topDot : L.dot;
     _odD.set(d[0] - e[0], d[1] - e[1], d[2] - e[2]);
-    if (_odD.lengthSq() < 1e-10) _odD.set(0, 0, 1); else _odD.normalize();
+    const len = _odD.length();
+    if (len < 1e-5) _odD.set(0, 0, 1); else _odD.multiplyScalar(1 / len);
     _odA.set(d[0], d[1], d[2]).addScaledVector(_odD, 400 / Math.max(1e-3, gun.s));   // 400 m ahead along its line
     viewPoint(_odA, _odB); ndc(_odB, _odN);
-    out.x = _odN.x; out.y = _odN.y; return out;
+    viewPoint(_odA.set(d[0], d[1], d[2]), _odB); ndc(_odB, _odW);   // the window's centre
+    const up = (len > 1e-5 ? len / VM_DOT.eyeToDot : 1) * VM_DOT.glassHalf;   // the glass's half-height in gun units
+    viewPoint(_odA.set(d[0], d[1] + up, d[2]), _odB); ndc(_odB, _odH);
+    const cap = Math.max(1e-4, Math.abs(_odH.y - _odW.y) * VM_DOT.drift), dx = _odN.x - _odW.x, dy = _odN.y - _odW.y, r = Math.hypot(dx, dy);
+    const k = r > 1e-9 ? cap * Math.tanh(r / cap) / r : 1;   // the drift eased toward the cap, any way it points
+    out.x = _odW.x + dx * k; out.y = _odW.y + dy * k;
+    out.win = Math.abs(_odH.y - _odW.y);   // CE-10: the window's half-height (ndc), for tce10
+    return out;
   }
   // AG-302 / AG-304: pre-build first-person gun copies and arms for Training blackout compilation, then restore hidden state.
   // Passing `onlyKeys` (e.g. ['pistol']) warms only the issued weapon during blackout so entry stays ~5 s, while `warmBgGun`

@@ -37,6 +37,7 @@ import { buildFiringLine } from './training-firing-line.js';
 import { isTrainingBorderCell, trainingBorderPaintRect } from '../game/training-perimeter.js';
 import { dressTrainingProps } from './training-props.js';   // GP-168
 import { bakeStatic } from './bake.js';   // CL-117
+import { markLineMesh, markLineRoot } from './training-exact.js';   // CH-1: propSolids names the line queries' surfaces
 import { dressTrainingWear } from './training-wear.js';   // GB-159
 import { dressBuildWear } from './training-build-wear.js';   // GB-162
 
@@ -115,17 +116,28 @@ export function clampToRects(rects, x, z) {
 // every visible mesh not under a skipped object, at least `minH` tall, its top no higher than `maxTop` over the floor,
 // no longer than `maxLen` (the walls, bands and floors are their own solids, or not solids at all). A box inside
 // another is left out. Taken before the bake (bakeStatic merges the meshes).
-export function propSolids(T, root, floorY, { skip = () => false, maxTop = 3.2, minH = 0.15, maxLen = 8, minLen = 0.08 } = {}) {
+export function propSolids(T, root, floorY, { skip = null, maxTop = 3.2, minH = 0.15, maxLen = 8, minLen = 0.08 } = {}) {
+  // CH-1: a whole copy (no skip: the HQ's station copies) is a root of the exact layer, so a piece added to it later
+  // (the Armory's rack) is a surface too; the room's own walk names only its meshes (later children of the room, the
+  // cutaway shells, the fences, the dummy, are not props).
+  if (!skip) markLineRoot(root);
+  skip = skip || (() => false);
   root.updateMatrixWorld(true);
   const b = new T.Box3(), found = [];
   const walk = (o, blocked) => {
     const stop = blocked || skip(o);
     if (!stop && o.isMesh && o.visible !== false && o.geometry) {
+      // CH-1 (J151 notes 31, 45): every still mesh walked here, whatever its size, is a surface for the line queries'
+      // exact layer (world/training-exact.js); its box below stays the broad solid for everything else.
+      markLineMesh(o);
       b.setFromObject(o);
       if (!b.isEmpty()) {
         const sx = b.max.x - b.min.x, sy = b.max.y - b.min.y, sz = b.max.z - b.min.z, len = Math.max(sx, sz);
-        if (sy >= minH && b.max.y - floorY <= maxTop && len <= maxLen && len >= minLen)
-          found.push({ minX: b.min.x, maxX: b.max.x, minY: b.min.y, maxY: b.max.y, minZ: b.min.z, maxZ: b.max.z, prop: true });
+        if (sy >= minH && b.max.y - floorY <= maxTop && len <= maxLen && len >= minLen) {
+          const box = { minX: b.min.x, maxX: b.max.x, minY: b.min.y, maxY: b.max.y, minZ: b.min.z, maxZ: b.max.z, prop: true };
+          Object.defineProperty(box, 'mesh', { value: o, enumerable: false, writable: true, configurable: true });   // CH-1: the mesh it came from
+          found.push(box);
+        }
       }
     }
     for (const c of o.children) walk(c, stop);
@@ -249,7 +261,9 @@ export function buildTrainingGround(T, opts = {}) {
   const hazard = std({ color: 0xffffff, map: hazardTex, roughness: 0.55 });
   const lampMat = std({ color: 0xffffff, emissive: 0xf4fbff, emissiveIntensity: 0.8, roughness: 0.3 });
   const buildLampMat = std({ color: 0xffffff, emissive: 0xf4fbff, emissiveIntensity: 0.8, roughness: 0.3 });
-  const band = std({ color: 0x2f6e8e, roughness: 0.6 });
+  // CJ-1: the band is paint: 1 mm off the tile and a polygonOffset step up, like the floor paint, so a bullet mark
+  // (2.2 mm off the wall, GT-20105) lies over it instead of behind it.
+  const band = std({ color: 0x2f6e8e, roughness: 0.6, polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -1 });
 
   // --- the dark box it all sits in (the world never shows) and the floors
   const voidMat = keep(new T.MeshBasicMaterial({ color: 0x0b0d0f, side: T.BackSide }));   // unlit: it fills the screen behind everything (CL-116)
@@ -274,10 +288,11 @@ export function buildTrainingGround(T, opts = {}) {
   // --- the walls: tiled planes facing in (the camera looks through the near ones from outside), a blue band at
   // waist height, a lamp strip along the top. Each wall is also a solid for rounds.
   const solids = [];
-  const wall = (x0, z0, x1, z1, nx, nz, h = H) => {   // a wall from (x0,z0) to (x1,z1), facing (nx,nz) into its room, h tall
+  const wall = (x0, z0, x1, z1, nx, nz, h = H, inset = 0) => {   // inset (CJ-1): the faces stand that far into the room; the solid stays on the line.
+    // a wall from (x0,z0) to (x1,z1), facing (nx,nz) into its room, h tall
     const len = Math.hypot(x1 - x0, z1 - z0);
     if (len < 0.01) return;
-    const cx = (x0 + x1) / 2, cz = (z0 + z1) / 2, yaw = Math.atan2(nx, nz);
+    const cx = (x0 + x1) / 2 + nx * inset, cz = (z0 + z1) / 2 + nz * inset, yaw = Math.atan2(nx, nz);
     const m = add(tileUv(new T.PlaneGeometry(len, Math.min(h, H)), len, Math.min(h, H)), wallMat(len), cx, Math.min(h, H) / 2, cz); m.rotation.y = yaw; m.receiveShadow = true;
     if (h > H) {   // The siding laps the tile and sits proud of it. A shared edge on one plane flickered above the light.
       const lap = 0.16;
@@ -286,18 +301,21 @@ export function buildTrainingGround(T, opts = {}) {
       up.rotation.y = yaw; up.receiveShadow = true;
       const trimZ0 = nx !== 0 && (Math.abs(Math.min(z0, z1) - B.minZ) < 0.01) ? 0.056 : 0;
       const trimZ1 = nx !== 0 && (Math.abs(Math.max(z0, z1) - B.maxZ) < 0.01 || Math.abs(Math.max(z0, z1) - (B.maxZ + 7)) < 0.01) ? 0.056 : 0;
-      const lLen = len - trimZ0 - trimZ1, lCz = nx !== 0 ? (Math.min(z0, z1) + trimZ0 + Math.max(z0, z1) - trimZ1) / 2 : cz;
-      const ledge = add(new T.BoxGeometry(lLen, 0.08, 0.056), steel, cx + nx * 0.028, H - 0.04, lCz + nz * 0.028);
+      // CJ-1: a ledge running to x = -8 ended in the range wall's own plane (its end face fought the tile at the top
+      // corners, seen from the range); it stops 3 mm short of it.
+      const trimX1 = nz !== 0 && Math.abs(Math.max(x0, x1) - B.maxX) < 0.01 ? 0.003 : 0;
+      const lLen = len - trimZ0 - trimZ1 - trimX1, lCz = nx !== 0 ? (Math.min(z0, z1) + trimZ0 + Math.max(z0, z1) - trimZ1) / 2 : cz;
+      const ledge = add(new T.BoxGeometry(lLen, 0.08, 0.056), steel, cx + nx * 0.028 - trimX1 / 2, H - 0.04, lCz + nz * 0.028);
       ledge.rotation.y = yaw; ledge.receiveShadow = true;
     }
-    const b = add(new T.PlaneGeometry(len, 0.16), band, cx + nx * 0.004, 1.05, cz + nz * 0.004); b.rotation.y = yaw;
+    const b = add(new T.PlaneGeometry(len, 0.16), band, cx + nx * 0.001, 1.05, cz + nz * 0.001); b.rotation.y = yaw;
     const roomLamp = cx + nx * .1 < B.maxX ? buildLampMat : lampMat;
     const l = add(new T.PlaneGeometry(len, 0.1), roomLamp, cx + nx * 0.01, h - 0.25, cz + nz * 0.01); l.rotation.y = yaw;   // a plane: unseen from outside
     if (h > H) { const l2 = add(new T.PlaneGeometry(len, 0.1), roomLamp, cx + nx * 0.01, H - 0.25, cz + nz * 0.01); l2.rotation.y = yaw; }   // CL-143: and one at the range's height
     const th = 0.3;
     solids.push({ minX: Math.min(x0, x1) - (nx < 0 ? th : 0) + O.x, maxX: Math.max(x0, x1) + (nx > 0 ? th : 0) + O.x,
       minY: O.y - 1, maxY: O.y + h, minZ: Math.min(z0, z1) - (nz < 0 ? th : 0) + O.z, maxZ: Math.max(z0, z1) + (nz > 0 ? th : 0) + O.z, wall: true,
-      surface: { x:cx+O.x, z:cz+O.z, nx, nz } });
+      surface: { x:cx-nx*inset+O.x, z:cz-nz*inset+O.z, nx, nz } });
   };
   // The range: back (behind him), far end, his left (+x, the terminals); his right (-x) has the doorway.
   wall(R.minX, R.minZ, R.maxX, R.minZ, 0, 1);
@@ -307,8 +325,11 @@ export function buildTrainingGround(T, opts = {}) {
   wall(R.minX, D.maxZ, R.minX, R.maxZ, 1, 0);
   // The build room: its east wall is the range's right wall (the other face), with the same doorway.
   const HB = TRAINING.HANGAR_H;
-  wall(B.maxX, B.minZ, B.maxX, D.minZ, -1, 0, HB);
-  wall(B.maxX, D.maxZ, B.maxX, B.maxZ, -1, 0, HB);
+  // CJ-1 (J151 note 63): this face and the range's are back to back on x = -8, and what stands flush on the range side
+  // (the firing bench's ends, the range console, its yellow box) puts a face on that same plane: seen from the build
+  // room it fought the tile through the wall. The build-room face stands 4 mm into its room, so the wall always wins.
+  wall(B.maxX, B.minZ, B.maxX, D.minZ, -1, 0, HB, 0.004);
+  wall(B.maxX, D.maxZ, B.maxX, B.maxZ, -1, 0, HB, 0.004);
   wall(B.minX, B.minZ, B.maxX, B.minZ, 0, 1, HB);
   // Split the far wall around the containment opening and enclose its holding passage.
   const gateX = (B.minX + B.maxX) / 2, gateHalfWidth = 3.3, gateHeight = 6.3;
@@ -324,7 +345,8 @@ export function buildTrainingGround(T, opts = {}) {
   wall(gateX - 3.3, B.maxZ, gateX - 3.3, B.maxZ + 7, 1, 0, gateHeight);
   wall(gateX + 3.3, B.maxZ, gateX + 3.3, B.maxZ + 7, -1, 0, gateHeight);
   wall(gateX - 3.3, B.maxZ + 7, gateX + 3.3, B.maxZ + 7, 0, -1, gateHeight);
-  const passageFloor = box(6.6,.04,7.03,steel,gateX,-.02,B.maxZ+3.485); passageFloor.userData.isFloorSlab = true;
+  // CJ-1: the slab starts at the build floor's edge; it ran 3 cm under it on the same plane and flickered there.
+  const passageFloor = box(6.6,.04,7.0,steel,gateX,-.02,B.maxZ+3.5); passageFloor.userData.isFloorSlab = true;
   const passageRoof = box(6.6,.12,7.03,steel,gateX,gateHeight+.06,B.maxZ+3.485); passageRoof.userData.isRoofSlab = true;
   wall(B.minX, B.minZ, B.minX, B.maxZ, 1, 0, HB);
   // Over the doorway, the wall above the opening (both faces), and a hazard-striped frame.
@@ -361,22 +383,41 @@ export function buildTrainingGround(T, opts = {}) {
   bakeStatic(T, shutter);
   const doorLamp = std({ color: 0x51db8b, emissive: 0x51db8b, emissiveIntensity: .8, roughness: .4 });
   // CL-146: the keypad beside the door, one each side; it is what opens and shuts it (index.html trainingActionTarget).
-  const keypadTex = keep(canvasTex(T, 64, 80, (c, w, h) => {
-    c.fillStyle = '#2a2f33'; c.fillRect(0, 0, w, h);
+  // J151 note 59: raised sealed keys, legible legends and an inset rubber face.
+  // One atlas and baked meshes keep this close-up detail to four draws per pad.
+  const keypadTex = keep(canvasTex(T, 384, 512, (c, w, h) => {
+    const legends = ['1','2','3','4','5','6','7','8','9','×','0','✓'];
+    c.textAlign = 'center'; c.textBaseline = 'middle'; c.font = 'bold 82px monospace';
     for (let r = 0; r < 4; r++) for (let k = 0; k < 3; k++) {
-      c.fillStyle = r === 3 && k !== 1 ? (k ? '#3f9a5c' : '#b8433a') : '#c9ced1';
-      c.fillRect(6 + k * 19, 6 + r * 18.5, 14, 13);
+      c.fillStyle = r === 3 && k !== 1 ? (k ? '#355b43' : '#713e37') : '#454c4e';
+      c.fillRect(k * w / 3, r * h / 4, w / 3, h / 4);
+      c.fillStyle = '#e1e2d9'; c.fillText(legends[r * 3 + k], (k + .5) * w / 3, (r + .51) * h / 4);
     }
   }, [1, 1]));
-  const keypadFace = std({ color: 0xffffff, map: keypadTex, roughness: .5 });
+  // CJ-1: the legends lie 0.2 mm off their keys: a polygonOffset step toward the eye keeps them from flickering.
+  const keypadFace = std({ color: 0xffffff, map: keypadTex, roughness: .8, polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -1 });
+  const keypadRubber = std({ color: 0x202729, roughness: .9 });
   const keypads = [];
   for (const side of [-1, 1]) {
     // AG-278 (Jerry's J104): keypad mounted flush on the yellow-and-black striped door trim post (z = D.minZ, face at D.x + side * .25)
     const kz = D.minZ;
-    box(.025, .08, .14, doorLamp, D.x + side * (.25 + .0125), 1.42, kz);
-    box(.04, .16, .14, steelLight, D.x + side * (.25 + .02), 1.28, kz);
-    const face = add(new T.PlaneGeometry(.13, .15), keypadFace, D.x + side * (.25 + .04 + .001), 1.28, kz);
-    face.rotation.y = side * Math.PI / 2; (face.userData || (face.userData = {})).isDecal = true;
+    const pad = new T.Group(); pad.name = 'training-security-keypad-' + side; g.add(pad);
+    box(.025, .08, .14, doorLamp, D.x + side * (.25 + .0125), 1.42, kz, pad);
+    box(.04, .16, .14, steelLight, D.x + side * (.25 + .02), 1.28, kz, pad);
+    box(.002, .145, .125, keypadRubber, D.x + side * .291, 1.28, kz, pad);
+    for (let r = 0; r < 4; r++) for (let k = 0; k < 3; k++) {
+      const ky = 1.28 + .051 - r * .034, kZ = kz - side * (k - 1) * .039;
+      box(.003, .025, .033, keypadRubber, D.x + side * .2935, ky, kZ, pad);
+      const geo = new T.PlaneGeometry(.030, .022), uv = geo.attributes.uv;
+      if (uv) for (let i = 0; i < uv.count; i++) uv.setXY(i, (k + uv.getX(i)) / 3, (3 - r + uv.getY(i)) / 4);
+      const face = add(geo, keypadFace, D.x + side * .2952, ky, kZ, pad);
+      face.rotation.y = side * Math.PI / 2; face.userData.isDecal = true;
+    }
+    bakeStatic(T, pad);
+    pad.traverse(o => { if (o.geometry && o.userData.baked) keep(o.geometry); });
+    // Keep the existing post/keypad cutaway together.
+    for (const mesh of [...pad.children]) g.add(mesh);
+    g.remove(pad);
     keypads.push({ side, x: O.x + D.x + side * (.25 + .04), y: O.y + 1.28, z: O.z + kz, front: W(D.x + side * 1.0, kz) });
   }
   const doorSolid = { minX: O.x+D.x-.18, maxX: O.x+D.x+.18, minY: O.y, maxY: O.y+3,
@@ -396,7 +437,10 @@ export function buildTrainingGround(T, opts = {}) {
   // --- signs
   const sign = (text, w, h, x, y, z, yaw, o = {}) => {
     const tex = keep(textTex(T, text, o));
-    const m = add(new T.PlaneGeometry(w, h), std({ color: 0xffffff, map: tex, transparent: !o.bg, roughness: 0.7 }), x, y, z);
+    // CJ-1 (J151 note 63): a sign is a plate laid on a face (the gate frame's and the infirmary's labels sit 0.3 mm
+    // proud of theirs): one polygonOffset step toward the eye, so the depth buffer never picks between the two.
+    const m = add(new T.PlaneGeometry(w, h), std({ color: 0xffffff, map: tex, transparent: !o.bg, roughness: 0.7,
+      polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -1 }), x, y, z);
     m.rotation.y = yaw; return m;
   };
   {
@@ -699,7 +743,8 @@ export function buildTrainingGround(T, opts = {}) {
     const paint = add(geo, std({ color: 0xffffff, map: stripeTex, roughness: 0.62, polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -1 }), 0, 0, 0);
     paint.receiveShadow = true; paint.name = 'training-no-build-paint'; (paint.userData || (paint.userData = {})).isDecal = true;
     // the outer edge: a yellow line along every side of a zone square that meets a buildable square
-    const edgeMat = floorPaintMaterial(std({ color: 0xf2c418, roughness: 0.55 }));
+    // CJ-1: the edge lies on the stripe paint (both on the floor plane): a polygonOffset step above it, not the same one.
+    const edgeMat = std({ color: 0xf2c418, roughness: 0.55, polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2 });
     for (const [gx, gz] of paintCells) {
       const rect=trainingBorderPaintRect(paintGrid,gx,gz,isTrainingBorderCell(paintGrid,gx,gz)?medicalPaint:null,inset);
       if(!rect)continue;

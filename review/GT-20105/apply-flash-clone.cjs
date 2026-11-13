@@ -1,0 +1,7 @@
+const fs=require('fs'),crypto=require('crypto'),assert=require('assert/strict'),file='index.html';
+const buf=fs.readFileSync(file),src=buf.toString('utf8'),hash=x=>crypto.createHash('md5').update(x).digest('hex'),before=hash(buf),eol=src.includes('\r\n')?'\r\n':'\n';
+const a="      if (m.userData.laser?.geometry) m.userData.laser.geometry = m.userData.laser.geometry.clone();";
+const b=["      if (m.userData.flash?.material) {","        const fm = m.userData.flash.material; let opacity = fm.opacity;","        Object.defineProperty(fm, 'opacity', { configurable: true, enumerable: true, get() { return opacity; }, set(v) { opacity = v; this.visible = v > 0 || !!gunEffects.warm; } });","        fm.opacity = opacity;","        (gunEffects.mats ||= []).push(fm);","      }",a].join(eol);
+assert.equal(src.split(a).length,2);const out=src.replace(a,()=>b);
+assert.equal(hash(fs.readFileSync(file)),before,'concurrent index write');const tmp=file+'.gt20105-'+crypto.randomUUID()+'.tmp';fs.writeFileSync(tmp,out,{flag:'wx'});assert.equal(hash(fs.readFileSync(file)),before);fs.renameSync(tmp,file);
+const after=hash(Buffer.from(out,'utf8'));fs.writeFileSync('review/GT-20105/flash-clone-change.json',JSON.stringify({at:new Date().toISOString(),before,after,scope:'offhand flash material opacity-visible gate and warm-array registration only',lineEndings:'CRLF',a,b},null,2),{flag:'wx'});console.log('PASS clone gate '+before+' -> '+after);

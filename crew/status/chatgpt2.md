@@ -1,68 +1,24 @@
 # ChatGPT 2
 
-state: active
+state: idle
 model: GPT-6.1 Sol (Medium effort)
-task: GT-20104 J151 pistol separable slide/barrel mechanism, then revolver scale/grip/hammer/cylinder
-touching: studio/weapon-sidearms.js, review/GT-20104
-since: 2026-11-13T00:51Z
-next: GT-20104 J151 P3 (D-179), notes 2, 7: the pistol's slide locks back a
+task: —
+touching: —
+since: 2026-11-13T06:10Z
+next: GT-20079 (17:15Z, UN-PARKED (J149): each modeler does camo-per-part o
 blocked-on: —
-last-report: handoffs/2026-11-13-chatgpt2-GT-20103.md
+last-report: handoffs/2026-11-13-chatgpt2-GT-20105.md
 
 ## Notes
 
 ### Where things stand
 
-context nearly full, needs a new session
-
-GT-20103 ACTIVE: Director00:11Z split confirmed: C2 #3 owns CB-325 index.html makeRunePistol fix in cloud; I own native four-light before/after and unchanged t173 after RESUME. Root cause: markPaintSurface clones gunPoly/tagged weaponFinishRole=frame; old FUR identity-only rune swap misses clone. NO sidearms/model edit needed, NO index loan to me. C2 notified to let me capture BEFORE before landing after RESUME. PAUSE since23:04Z: no PC edits/game runs until Jerry releases MANUAL-GAME or DirectorRESUME. Catalog weapon.rune-pistol exists; native camera recipe ready. Prior J149 components accepted, final13 GT20099 151/3 (C5 lightpress, C6 native chainsaw6.4mm, C2 spider). GT20101 .45 caliber accepted; C5 owns75%reloadring2.248mm. GT79/77 fleet umbrellas Director-owned; no hidden/proportion work. No git; escalated slot only for games. Standby2.5min repeat, heartbeat<=15min.
+GT-20104 waits only on Claude 5: live pistol barrel/slide coupling (CE-11 ETA ~06:15Z), then the revolver index rest. Claude 1's refit is landed: native tcl334b 4/1, hand overlap 0, remaining index contact 2.6 mm. Run review/GT-20104/live-integration.mjs through the slot after landing; syntax passes, game run pending. Final pistol stroke .07, not .045; no candidate pose overrides in this check. GT-20101 is DONE: native tce10 29/0, round and closed-gun contact 0.00 mm; 13 Nov closure report. GT-20105 is DONE: final handoff handoffs/2026-11-13-chatgpt2-GT-20105.md. Impacts, scorch and muzzle flash are all accepted by the Director; next commit pending. Original flash gates 43/0, clone lit/rest/warm and paint-band four lights pass. Matched runtime repeat: old59.99/new60.03 fps, both90draws and GPU~.162ms, no >50ms hitches; first unprofiled run's358.6ms hitch retained/unattributed. Receipts runtime-pair/ and runtime-profile/ under review/GT-20105. All production loans OUT; no git. Director confirmed no new gun before freeze, GT-20101 closed, integration receipts then standby. He closes fleet umbrellas GT-20079/77. Keep running standby2.5 minutes and heartbeat at least every15 minutes.
 
 Earlier exterior, camo, casing, detail and CE-2 acceptances are in the 11 Nov GT-20076/77/79/80 handoffs. The KR-7 laminate and D-152 budget were accepted on GT-20082 and GT-20081. Keep previous test expectations and the crew slot.
 
-### Who you are (D-142, Jerry 10 Nov 2026)
-You are **ChatGPT 2**, the crew's second ChatGPT, on the model named in this card’s header in Codex. You take the weapons from ChatGPT (who
-keeps the zombies, the words and the Armory). Claude leads and is in charge: he writes your cards, reviews your work, sends
-Jerry your sheets and, under D-81, answers your questions:
-`node crew/crew.mjs request chatgpt2 claude "<the question>" "<the choices and your pick>"`. Only Jerry's own files,
-money, accounts and publishing go to Jerry (`crew.mjs ask`).
-
-### Your lane
-- Every weapon's model (D-122's first round, from its manual): `studio/weapon-*.js`, `studio/frag-grenade.js`, the
-  katana's builder, the optics (`studio/weapon-optics.js`) and the attachments; and `WEAPON_HOLD` / `VM_SOCKETS` entries
-  only where a grip or a sight moves.
-- The hands on the guns are Claude's: `studio/marine-hand.js`, `studio/hand-contacts.js`, `game/viewmodel.js`,
-  `game/viewmodel-fit.js` (each gun's hands fitted to its own shape, CL-334). Anything you change that a hand touches (a
-  grip, a fore-end, a handguard, a trigger guard, a pump, a handle, the laser-light module) moves the fit: say so in your
-  handoff, with the part and how far, and Claude refits.
-- Not yours: zombies, words, UI and the Armory (ChatGPT); the marine's body and head (Claude 3); the `index.html` shell,
-  `core/*`, `tools/*` (Claude 2); buildables and props (Antigravity). Ask their owner with `crew.mjs request`.
-
-### Your queue (the board, under ChatGPT 2)
-GT-20075 (Jerry's model notes J107-J123, first round), GT-20076 (J128: no part through another, nothing floating, with a
-check), GT-20078 (room for the hands, when Claude sends the numbers), then GT-20077 (J129: another fidelity pass on every
-weapon, when Claude says). The notes in Jerry's words: `docs/jerry/2026-11-09-playtest-notes.md` (J101-J129).
-
-### Jerry's rules for this work
-- D-122, the manual pass: every weapon from its operating manual, at real proportions (`docs/fps/manual-pass.md`,
-  `docs/fps/manuals/`, `docs/fps/fidelity.md`); D-119: a first-person weapon is finished only when the crew agrees.
-- J126/J128 (D-138, D-140, AGENTS rule 24): no part of a gun through another or hanging off it; nothing floating. J129: "yet
-  another Fidelity Pass on all weapons. They are getting closer but are still subpar for first-person."
-- Rule 19, the art direction and the asset principles: never judge a model from code or numbers; render it and look, from
-  several angles, in the four lights, at the eye in first person. `tools/gunshot/` and `tools/gunsheet.mjs` picture a gun;
-  the inspector builds what the game builds (`index.html?inspect`, `node tools/camera.mjs check <id>`).
-- No logos or markings copied onto models. Reference photos and models are to look at only: never copied, traced,
-  imported or shipped.
-
-### How you work
-- The repo is `C:\Users\Zero\Desktop\Tiny Trek` on Jerry's PC. Every file UTF-8 without BOM (AGENTS rule 4; in PowerShell
-  never Set-Content/Out-File without -Encoding UTF8); keep a file's line endings (index.html is CRLF, the studio files LF).
-- Crew: `node crew/crew.mjs me chatgpt2` each session; check in with `--model "<actual model this session>"` and `--touch` your
-  files; out with `--report handoffs/YYYY-MM-DD-chatgpt2-<task>.md`. Rule 22: a card is one line, a handoff is short.
-- Game checks only through the queue: `node crew/crew.mjs slot run chatgpt2 <task> --checks "<what>" -- <command>`, one at
-  a time. The slot is the only gate: Jerry's own hold goes first when he plays; don't wait on a guess that he is playing
-  (ask Claude). Never close his windows. New tests: `tgtNNN.js` (tgt20076 for GT-20076).
-- No git, ever (rule 6): Claude writes the commit jobs and Antigravity runs `Claude Commit.bat`. Write "ready to commit"
-  and your files in the handoff.
-- Never push, never enter passwords or PINs, complete CAPTCHAs or change system or security settings. Don't open, list or
-  read anything outside the Tiny Trek folder (Jerry's Desktop has private papers). Deleting his files needs his OK; kill
-  processes by PID only. Your own files only; never revert anyone's work; never weaken a test (`--review` to change one).
+### Working rules
+Read AGENTS.md every session. Claude leads; ask through crew.mjs request chatgpt2 claude with choices and a pick, then continue. Hands are Claude 1's (claude4), motion Claude 5's (claude5); other gun modelers' named jobs stay theirs.
+No git. All game launches through crew slot run, one browser per lease; speed checks --exclusive. No tests weakened. UTF-8/no BOM, preserve line endings and fresh hashes; stay inside Tiny Trek.
+Native looks: four lights, eye/hip/rack as needed, before/after same camera; docs/art-direction.md, docs/asset-principles.md and docs/fps/manual-pass.md govern models. References look-only, no logos or copied assets.
+Keep running: next named card, otherwise crew standby chatgpt2 --minutes 2.5 repeatedly. Heartbeat note at least every15minutes and read/reply to WAITING/NEW. Update this brief before context fills; history belongs in the named handoffs.

@@ -1,6 +1,7 @@
 // t334 - GP-20045 (J20): the selected camo covers the eligible whole gun,
 // including its fitted suppressor, with one root-space projection and follows
-// the live first-person copy. Excluded rubber, lenses, glow and bore stay bare.
+// the live first-person copy. Excluded rubber, lenses, glow and bore stay bare. The AK is checked bare (all its coat
+// taken) and then with an ACOG fitted for the minima (t334 AK card, Claude 2, Director OK).
 (async () => {
   const T = window.TT, out = [];
   const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
@@ -9,6 +10,18 @@
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
   try {
     const F = T.getGunFurniture();
+    T.dressGuns({ guns: { m4: 'multicam', ak: 'multicam' } });
+    // t334 AK card (CLAUDE DIRECTOR OK 12 Nov 07:33Z, --review): the bare AK (no rail until an optic is fitted, its static
+    // pieces batched by finish) is checked whole first: every triangle its maker marks for the coat (weaponFinishRole) takes
+    // the camo. Then an ACOG goes on through the Armory path, so the minima and UV checks below see the rail as before.
+    const coatShare = (root, id, mapOf) => { let marked = 0, coated = 0;
+      root.traverse((o) => { if (!o.isMesh || !o.geometry?.attributes?.position || !o.material?.userData?.weaponFinishRole) return;
+        const g = o.geometry, n = (g.index ? g.index.count : g.attributes.position.count) / 3 * (o.isInstancedMesh ? o.count : 1);
+        marked += n; if (mapOf(o) && mapOf(o) === F[id][0].map) coated += n; });
+      return [coated, marked]; };
+    { const [c, m] = coatShare(T.weaponMeshes.ak, 'ak', (o) => o.material.userData.gunPaintId === 'ak' && o.material.map);
+      ok(m >= 1000 && c === m, 'ak bare: every triangle marked for the coat carries the camo (' + c + ' of ' + m + ')'); }
+    ok(T.opticDbg.grant('ak', 'acog') && T.opticDbg.fit('ak', 'acog') !== false && T.opticDbg.fitted().ak === 'acog', 'ak: an ACOG fitted through the Armory path before the minima');
     T.dressGuns({ guns: { m4: 'multicam', ak: 'multicam' } });
     for (const id of ['m4', 'ak']) {
       const gun = T.weaponMeshes[id], mats = F[id], can = gun.userData.suppressor;
@@ -66,6 +79,13 @@
         ok(painted.length >= 12 && painted.every(([src, dst]) => !!src.material.map && dst.material.map === src.material.map), id + ': first-person copy mirrors the whole-gun camo (' + painted.length + ')');
         const can = copy.getObjectByName('suppressor');
         ok(!!can && can.visible && meshes(can).some((o) => o.material.map === F[id][0].map), id + ': first-person fitted can carries camo');
+        if (id === 'ak') {   // t334 AK card: the eye copy too, every marked triangle (the bare gun's and the ACOG's rail) coated
+          let m = 0, c = 0;
+          for (const [src, dst] of vm.gun.pairs) { if (!src.isMesh || !dst.isMesh || !src.material?.userData?.weaponFinishRole || !src.geometry?.attributes?.position) continue;
+            const g = src.geometry, n = (g.index ? g.index.count : g.attributes.position.count) / 3 * (src.isInstancedMesh ? src.count : 1);
+            m += n; if (dst.material.map && dst.material.map === F.ak[0].map) c += n; }
+          ok(m >= 1000 && c === m, 'ak eye: every triangle marked for the coat carries the camo (' + c + ' of ' + m + ')');
+        }
       }
     }
     T.carryDbg({ loadout: { primary: ['m4', 'ak'], secondary: ['uzi', null] }, inHand: null, vest: true });

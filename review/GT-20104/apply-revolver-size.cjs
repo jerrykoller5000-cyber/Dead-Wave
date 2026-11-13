@@ -1,0 +1,16 @@
+const fs=require('fs'),path=require('path'),crypto=require('crypto'),assert=require('assert/strict');
+const target=path.resolve('index.html'),base=fs.readFileSync(target,'utf8'),digest=s=>crypto.createHash('md5').update(s).digest('hex'),before=digest(base);
+assert(!base.startsWith('\uFEFF'));assert(base.includes('\r\n'));
+const a=base.indexOf('    const WEAPON_SIZE = {'),b=base.indexOf('    const weaponSizeFactor',a);assert(a>=0&&b>a);
+const section=base.slice(a,b),matches=section.match(/revolver:\s*\{\s*len:\s*0\.484,\s*m:\s*0\.27,\s*look:\s*1\.4\s*\}/g);
+assert.equal(matches?.length,1,'Fresh revolver row must still be the approved baseline');
+const old=matches[0],nextRow=old.replace('1.4','1.0'),next=base.slice(0,a)+section.replace(old,nextRow)+base.slice(b);
+assert.equal(next.replace(nextRow,old),base,'Only the approved size value may change');assert(next.includes('revolver.scale.setScalar(1.08);'),'Legacy base left untouched per Director');
+const temporary=path.resolve('review/GT-20104/index-size-'+process.pid+'-'+Date.now()+'.tmp');
+assert.equal(digest(fs.readFileSync(target,'utf8')),before,'index changed before staging');
+fs.writeFileSync(temporary,next,{encoding:'utf8',flag:'wx'});
+assert.equal(digest(fs.readFileSync(target,'utf8')),before,'index changed before atomic save');
+fs.renameSync(temporary,target);
+const proof={at:new Date().toISOString(),file:target,beforeMd5:before,afterMd5:digest(fs.readFileSync(target,'utf8')),oldRow:old,newRow:nextRow,legacyBase:1.08,onlyApprovedValueChanged:true,drawnNominalMetres:.27*1.08};
+fs.writeFileSync('review/GT-20104/revolver-size-change.json',JSON.stringify(proof,null,2)+'\n',{encoding:'utf8',flag:'wx'});
+console.log(JSON.stringify(proof));

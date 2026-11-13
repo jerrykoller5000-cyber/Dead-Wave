@@ -1,0 +1,15 @@
+const fs=require('fs'),path=require('path'),crypto=require('crypto'),assert=require('assert/strict');
+const target=path.resolve('index.html'),src=fs.readFileSync(target,'utf8'),hash=s=>crypto.createHash('md5').update(s).digest('hex'),before=hash(src);
+assert(!src.startsWith('\uFEFF'));assert(src.includes('\r\n'));
+const first='revolver.scale.setScalar(1.08);',nextFirst='revolver.scale.setScalar(1.0);';assert.equal(src.split(first).length,2);
+const a=src.indexOf('    const WEAPON_SIZE = {'),b=src.indexOf('    const weaponSizeFactor',a),section=src.slice(a,b);
+const matches=section.match(/revolver:\s*\{\s*len:\s*0\.484,\s*m:\s*0\.27,\s*look:\s*1\.0\s*\}/g);assert.equal(matches?.length,1);
+const row=matches[0],nextRow=row.replace('look: 1.0','look: 1.08');assert.notEqual(row,nextRow);
+const next=(src.slice(0,a)+section.replace(row,nextRow)+src.slice(b)).replace(first,nextFirst);
+assert.equal(next.replace(nextRow,row).replace(nextFirst,first),src,'Only two approved factors may change');
+assert.equal((src.match(/\r\n/g)||[]).length,(next.match(/\r\n/g)||[]).length);
+const tmp=path.resolve('review/GT-20104/index-normalize-'+process.pid+'-'+Date.now()+'.tmp');assert.equal(hash(fs.readFileSync(target,'utf8')),before);
+fs.writeFileSync(tmp,next,{encoding:'utf8',flag:'wx'});assert.equal(hash(fs.readFileSync(target,'utf8')),before,'Index changed before save');fs.renameSync(tmp,target);
+const result={at:new Date().toISOString(),beforeMd5:before,afterMd5:hash(fs.readFileSync(target,'utf8')),oldBase:1.08,newBase:1.0,oldRow:row,newRow:nextRow,beforeComposite:1.08*1,afterComposite:1*1.08,onlyTwoApprovedValuesChanged:true,CRLFPreserved:true};
+assert.equal(result.beforeComposite,result.afterComposite);
+fs.writeFileSync('review/GT-20104/revolver-size-normalization.json',JSON.stringify(result,null,2)+'\n',{encoding:'utf8',flag:'wx'});console.log(JSON.stringify(result));

@@ -10,7 +10,7 @@
 // page. The numbers are proposals for Jerry to change (docs/ammo.md); they are all here, in one place.
 //
 //   the pump shotgun (12 gauge, 2 3/4")    pellets x damage   spread   reach   a pack        hull
-//   birdshot  #4 shot, the issued round        7 x 9 = 63       0.14     22 m    20 for $20    red
+//   birdshot  #4 shot, the issued round       18 x 3.5 = 63     0.16     22 m    20 for $20    red
 //   buckshot  00 buck, a little more           8 x 10 = 80      0.12     26 m    20 for $30    blue (one band)
 //   slug      1 oz rifled slug, the most        1 x 100          0.02     44 m    20 for $40    ivory (two bands)
 //
@@ -19,6 +19,8 @@
 // Birdshot is the shell the game always had (the same sheet, the 12ga pack, the same reserve); buckshot and slug are
 // counted on their own. The hulls' colours are ChatGPT 2's art (GT-20080, studio/weapon-casings.js); hullHex is the same colour
 // for anything drawn without that geometry.
+// CB-327 (J151 note 13, Jerry 13 Nov: "Birdshot needs more pellets hitting the target than buck. Right now both have 8."):
+// birdshot is many small pellets, 18 of 3.5 in a looser pattern (was 7 of 9), the same 63 a shell, so its effect stays x1.00.
 
 export const AMMO_TYPES = Object.freeze({
   shotgun: Object.freeze({
@@ -26,7 +28,7 @@ export const AMMO_TYPES = Object.freeze({
     order: Object.freeze(['birdshot', 'buckshot', 'slug']),
     types: Object.freeze({
       birdshot: Object.freeze({ id: 'birdshot', name: 'Birdshot', tag: 'BIRDSHOT', real: '12 ga 2 3/4" #4 shot',
-        pellets: 7, damage: 9, spread: 0.14, range: 22, pack: 20, price: 20, hull: 'red', hullHex: 0xa8261c }),
+        pellets: 18, damage: 3.5, spread: 0.16, range: 22, pack: 20, price: 20, hull: 'red', hullHex: 0xa8261c }),
       buckshot: Object.freeze({ id: 'buckshot', name: 'Buckshot', tag: 'BUCKSHOT', real: '12 ga 2 3/4" 00 buck',
         pellets: 8, damage: 10, spread: 0.12, range: 26, pack: 20, price: 30, hull: 'blue', hullHex: 0x2c4f9c }),
       slug: Object.freeze({ id: 'slug', name: 'Slug', tag: 'SLUG', real: '12 ga 2 3/4" 1 oz rifled slug',

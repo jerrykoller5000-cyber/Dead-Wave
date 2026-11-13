@@ -120,3 +120,10 @@ test('cancel stops where it is: rounds moved stay moved', () => {
 test('the table is frozen: nothing changes the numbers at run time', () => {
   assert.ok(Object.isFrozen(AMMO_TYPES) && Object.isFrozen(AMMO_TYPES.shotgun.types.slug));
 });
+
+test('J151 note 13 (CB-327): birdshot is more pellets than buck, the same 63 a shell, effect order kept', () => {
+  const T = AMMO_TYPES.shotgun.types;
+  assert.ok(T.birdshot.pellets > T.buckshot.pellets, 'birdshot ' + T.birdshot.pellets + ' vs buck ' + T.buckshot.pellets);
+  assert.equal(T.birdshot.pellets * T.birdshot.damage, 63);
+  assert.ok(typeEffect('shotgun', 'slug') > typeEffect('shotgun', 'buckshot') && typeEffect('shotgun', 'buckshot') > typeEffect('shotgun', 'birdshot'));
+});

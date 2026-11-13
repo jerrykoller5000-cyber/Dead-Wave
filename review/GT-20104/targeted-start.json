@@ -1,0 +1,13 @@
+{
+  "at": "2026-11-13T01:34:49.214Z",
+  "files": {
+    "studio/weapon-sidearms.js": "dcff9acfcf1820151151dfb3895b33f6b35a6c87f986c20a5202e52beceafd5d",
+    "studio/weapon-pistol-action.js": "24d7aee3e7706a31b7e4a71c68a8b362b552c411924dc45f6c169d25c5118f8c",
+    "studio/hand-contacts.js": "408214a453687001e61f53d85729f631265fcd958a04e149a45f50a69a273156",
+    "studio/marine-hand.js": "f3b92570fe48bb259917c8463a1cb09010be22580f0677a5af90f38eff11a587",
+    "game/viewmodel.js": "f49f012333fbe88c0b75da120879516c948dc9e936ee5d13f4ef0e7ee53d28c4",
+    "game/viewmodel-poses.js": "30075cb5e09af3aac877d0587b973f60ea844fdeb6c53dbc99f189bc49ba2798",
+    "game/viewmodel-fit.js": "9d7f4fd135269beaa68a7df199bbe411c2c08490bf0f7dd06bbd2d55084ce968",
+    "index.html": "25c9e6b5f534a00e2c7243aac98fc66c0236eba42126f6568880d188db766a17"
+  }
+}

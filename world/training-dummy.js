@@ -770,12 +770,13 @@ function buildMarksAtlasTexture(THREE) {
 }
 
 const MARK_PRESETS = {
-  knife:    { cell: 0, width: 0.180, height: 0.064, impulse: 2.35, orientToSlash: true },
-  machete:  { cell: 1, width: 0.245, height: 0.088, impulse: 3.85, orientToSlash: true },
-  katana:   { cell: 2, width: 0.320, height: 0.068, impulse: 4.15, orientToSlash: true },
-  chainsaw: { cell: 3, width: 0.275, height: 0.106, impulse: 1.25, orientToSlash: true },
+  // J151 note 19: readable weighted recoil; the existing spring and stops stay fixed.
+  knife:    { cell: 0, width: 0.180, height: 0.064, impulse: 3.50, orientToSlash: true },
+  machete:  { cell: 1, width: 0.245, height: 0.088, impulse: 5.00, orientToSlash: true },
+  katana:   { cell: 2, width: 0.320, height: 0.068, impulse: 5.50, orientToSlash: true },
+  chainsaw: { cell: 3, width: 0.275, height: 0.106, impulse: 1.60, orientToSlash: true },
   scorch:   { cell: 4, width: 0.220, height: 0.165, impulse: 0.20, orientToSlash: false },
-  bullet:   { cell: 5, width: 0.082, height: 0.082, impulse: 1.05, orientToSlash: false }
+  bullet:   { cell: 5, width: 0.082, height: 0.082, impulse: 2.50, orientToSlash: false }
 };
 
 export function normalizeDummyHitKind(raw) {

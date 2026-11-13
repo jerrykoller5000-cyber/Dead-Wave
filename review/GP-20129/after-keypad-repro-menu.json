@@ -1,0 +1,34 @@
+{
+  "phase": "after-keypad-repro",
+  "at": "2026-11-13T01:28:12.309Z",
+  "layout": {
+    "restock": {
+      "x": 40.59375,
+      "y": 197.203125,
+      "width": 1183.796875,
+      "height": 60.515625,
+      "top": 197.203125,
+      "right": 1224.390625,
+      "bottom": 257.71875,
+      "left": 40.59375
+    },
+    "machete": {
+      "x": 40.59375,
+      "y": 309.71875,
+      "width": 1183.796875,
+      "height": 60.515625,
+      "top": 309.71875,
+      "right": 1224.390625,
+      "bottom": 370.234375,
+      "left": 40.59375
+    },
+    "scrollHeight": 1271,
+    "viewport": 720
+  },
+  "purchase": {
+    "macheteOwned": true,
+    "restockFull": true,
+    "restockText": "FULL"
+  },
+  "errors": []
+}

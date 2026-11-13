@@ -1,0 +1,756 @@
+{
+  "phase": "before",
+  "frames": [
+    {
+      "name": "before-reaction-bullet-eye-noon-0.png",
+      "kind": "bullet",
+      "view": "eye",
+      "light": "noon",
+      "t": 0,
+      "state": {
+        "hits": 1,
+        "damage": 26,
+        "byKind": {
+          "knife": 0,
+          "machete": 0,
+          "katana": 0,
+          "chainsaw": 0,
+          "scorch": 0,
+          "bullet": 1
+        },
+        "markCount": 0,
+        "tiltX": 0,
+        "tiltZ": 0,
+        "twistY": 0,
+        "tiltRad": 0,
+        "angularSpeed": 0.9399999999999977
+      }
+    },
+    {
+      "name": "before-reaction-bullet-eye-noon-0.06.png",
+      "kind": "bullet",
+      "view": "eye",
+      "light": "noon",
+      "t": 0.06,
+      "state": {
+        "hits": 1,
+        "damage": 26,
+        "byKind": {
+          "knife": 0,
+          "machete": 0,
+          "katana": 0,
+          "chainsaw": 0,
+          "scorch": 0,
+          "bullet": 1
+        },
+        "markCount": 0,
+        "tiltX": -0.041523857093687666,
+        "tiltZ": 9.220148443331337e-18,
+        "twistY": -2.4967831938289506e-18,
+        "tiltRad": 0.041523857093687666,
+        "angularSpeed": 0.4521775020123114
+      }
+    },
+    {
+      "name": "before-reaction-bullet-eye-noon-0.12.png",
+      "kind": "bullet",
+      "view": "eye",
+      "light": "noon",
+      "t": 0.12,
+      "state": {
+        "hits": 1,
+        "damage": 26,
+        "byKind": {
+          "knife": 0,
+          "machete": 0,
+          "katana": 0,
+          "chainsaw": 0,
+          "scorch": 0,
+          "bullet": 1
+        },
+        "markCount": 0,
+        "tiltX": -0.04823724978307637,
+        "tiltZ": 1.0710821070753245e-17,
+        "twistY": -1.55155071703329e-18,
+        "tiltRad": 0.04823724978307637,
+        "angularSpeed": 0.13693932905681844
+      }
+    },
+    {
+      "name": "before-reaction-bullet-eye-noon-0.24.png",
+      "kind": "bullet",
+      "view": "eye",
+      "light": "noon",
+      "t": 0.24,
+      "state": {
+        "hits": 1,
+        "damage": 26,
+        "byKind": {
+          "knife": 0,
+          "machete": 0,
+          "katana": 0,
+          "chainsaw": 0,
+          "scorch": 0,
+          "bullet": 1
+        },
+        "markCount": 0,
+        "tiltX": -0.006371427229676998,
+        "tiltZ": 1.4147410420222157e-18,
+        "twistY": 8.6209359128344e-19,
+        "tiltRad": 0.006371427229676998,
+        "angularSpeed": 0.5021395722676215
+      }
+    },
+    {
+      "name": "before-reaction-bullet-eye-noon-0.42.png",
+      "kind": "bullet",
+      "view": "eye",
+      "light": "noon",
+      "t": 0.42,
+      "state": {
+        "hits": 1,
+        "damage": 26,
+        "byKind": {
+          "knife": 0,
+          "machete": 0,
+          "katana": 0,
+          "chainsaw": 0,
+          "scorch": 0,
+          "bullet": 1
+        },
+        "markCount": 0,
+        "tiltX": 0.024746226129788027,
+        "tiltZ": -5.494766004374269e-18,
+        "twistY": 2.0227764467167568e-19,
+        "tiltRad": 0.024746226129788027,
+        "angularSpeed": 0.0908499229340905
+      }
+    },
+    {
+      "name": "before-reaction-bullet-eye-noon-1.4.png",
+      "kind": "bullet",
+      "view": "eye",
+      "light": "noon",
+      "t": 1.4,
+      "state": {
+        "hits": 1,
+        "damage": 26,
+        "byKind": {
+          "knife": 0,
+          "machete": 0,
+          "katana": 0,
+          "chainsaw": 0,
+          "scorch": 0,
+          "bullet": 1
+        },
+        "markCount": 0,
+        "tiltX": 0.01178469409324471,
+        "tiltZ": -2.616727744096872e-18,
+        "twistY": -3.226425388792715e-19,
+        "tiltRad": 0.01178469409324471,
+        "angularSpeed": 0.24944071268083007
+      }
+    },
+    {
+      "name": "before-reaction-bullet-approach-noon-0.png",
+      "kind": "bullet",
+      "view": "approach",
+      "light": "noon",
+      "t": 0,
+      "state": {
+        "hits": 1,
+        "damage": 26,
+        "byKind": {
+          "knife": 0,
+          "machete": 0,
+          "katana": 0,
+          "chainsaw": 0,
+          "scorch": 0,
+          "bullet": 1
+        },
+        "markCount": 0,
+        "tiltX": 0,
+        "tiltZ": 0,
+        "twistY": 0,
+        "tiltRad": 0,
+        "angularSpeed": 0.9399999999999977
+      }
+    },
+    {
+      "name": "before-reaction-bullet-approach-noon-0.06.png",
+      "kind": "bullet",
+      "view": "approach",
+      "light": "noon",
+      "t": 0.06,
+      "state": {
+        "hits": 1,
+        "damage": 26,
+        "byKind": {
+          "knife": 0,
+          "machete": 0,
+          "katana": 0,
+          "chainsaw": 0,
+          "scorch": 0,
+          "bullet": 1
+        },
+        "markCount": 0,
+        "tiltX": -0.041523857093687666,
+        "tiltZ": 9.220148443331337e-18,
+        "twistY": -2.4967831938289506e-18,
+        "tiltRad": 0.041523857093687666,
+        "angularSpeed": 0.4521775020123114
+      }
+    },
+    {
+      "name": "before-reaction-bullet-approach-noon-0.12.png",
+      "kind": "bullet",
+      "view": "approach",
+      "light": "noon",
+      "t": 0.12,
+      "state": {
+        "hits": 1,
+        "damage": 26,
+        "byKind": {
+          "knife": 0,
+          "machete": 0,
+          "katana": 0,
+          "chainsaw": 0,
+          "scorch": 0,
+          "bullet": 1
+        },
+        "markCount": 0,
+        "tiltX": -0.04823724978307637,
+        "tiltZ": 1.0710821070753245e-17,
+        "twistY": -1.55155071703329e-18,
+        "tiltRad": 0.04823724978307637,
+        "angularSpeed": 0.13693932905681844
+      }
+    },
+    {
+      "name": "before-reaction-bullet-approach-noon-0.24.png",
+      "kind": "bullet",
+      "view": "approach",
+      "light": "noon",
+      "t": 0.24,
+      "state": {
+        "hits": 1,
+        "damage": 26,
+        "byKind": {
+          "knife": 0,
+          "machete": 0,
+          "katana": 0,
+          "chainsaw": 0,
+          "scorch": 0,
+          "bullet": 1
+        },
+        "markCount": 0,
+        "tiltX": -0.006371427229676998,
+        "tiltZ": 1.4147410420222157e-18,
+        "twistY": 8.6209359128344e-19,
+        "tiltRad": 0.006371427229676998,
+        "angularSpeed": 0.5021395722676215
+      }
+    },
+    {
+      "name": "before-reaction-bullet-approach-noon-0.42.png",
+      "kind": "bullet",
+      "view": "approach",
+      "light": "noon",
+      "t": 0.42,
+      "state": {
+        "hits": 1,
+        "damage": 26,
+        "byKind": {
+          "knife": 0,
+          "machete": 0,
+          "katana": 0,
+          "chainsaw": 0,
+          "scorch": 0,
+          "bullet": 1
+        },
+        "markCount": 0,
+        "tiltX": 0.024746226129788027,
+        "tiltZ": -5.494766004374269e-18,
+        "twistY": 2.0227764467167568e-19,
+        "tiltRad": 0.024746226129788027,
+        "angularSpeed": 0.0908499229340905
+      }
+    },
+    {
+      "name": "before-reaction-bullet-approach-noon-1.4.png",
+      "kind": "bullet",
+      "view": "approach",
+      "light": "noon",
+      "t": 1.4,
+      "state": {
+        "hits": 1,
+        "damage": 26,
+        "byKind": {
+          "knife": 0,
+          "machete": 0,
+          "katana": 0,
+          "chainsaw": 0,
+          "scorch": 0,
+          "bullet": 1
+        },
+        "markCount": 0,
+        "tiltX": 0.01178469409324471,
+        "tiltZ": -2.616727744096872e-18,
+        "twistY": -3.226425388792715e-19,
+        "tiltRad": 0.01178469409324471,
+        "angularSpeed": 0.24944071268083007
+      }
+    },
+    {
+      "name": "before-reaction-knife-eye-noon-0.png",
+      "kind": "knife",
+      "view": "eye",
+      "light": "noon",
+      "t": 0,
+      "state": {
+        "hits": 1,
+        "damage": 26,
+        "byKind": {
+          "knife": 1,
+          "machete": 0,
+          "katana": 0,
+          "chainsaw": 0,
+          "scorch": 0,
+          "bullet": 0
+        },
+        "markCount": 0,
+        "tiltX": 0,
+        "tiltZ": 0,
+        "twistY": 0,
+        "tiltRad": 0,
+        "angularSpeed": 2.103809523809519
+      }
+    },
+    {
+      "name": "before-reaction-knife-eye-noon-0.06.png",
+      "kind": "knife",
+      "view": "eye",
+      "light": "noon",
+      "t": 0.06,
+      "state": {
+        "hits": 1,
+        "damage": 26,
+        "byKind": {
+          "knife": 1,
+          "machete": 0,
+          "katana": 0,
+          "chainsaw": 0,
+          "scorch": 0,
+          "bullet": 0
+        },
+        "markCount": 0,
+        "tiltX": -0.09293434682872956,
+        "tiltZ": 2.063557032555109e-17,
+        "twistY": -5.588038576664793e-18,
+        "tiltRad": 0.09293434682872956,
+        "angularSpeed": 1.0120163140275544
+      }
+    },
+    {
+      "name": "before-reaction-knife-eye-noon-0.12.png",
+      "kind": "knife",
+      "view": "eye",
+      "light": "noon",
+      "t": 0.12,
+      "state": {
+        "hits": 1,
+        "damage": 26,
+        "byKind": {
+          "knife": 1,
+          "machete": 0,
+          "katana": 0,
+          "chainsaw": 0,
+          "scorch": 0,
+          "bullet": 0
+        },
+        "markCount": 0,
+        "tiltX": -0.10795955903831381,
+        "tiltZ": 2.3971837634542982e-17,
+        "twistY": -3.472518271455459e-18,
+        "tiltRad": 0.10795955903831381,
+        "angularSpeed": 0.30648326027002226
+      }
+    },
+    {
+      "name": "before-reaction-knife-eye-noon-0.24.png",
+      "kind": "knife",
+      "view": "eye",
+      "light": "noon",
+      "t": 0.24,
+      "state": {
+        "hits": 1,
+        "damage": 26,
+        "byKind": {
+          "knife": 1,
+          "machete": 0,
+          "katana": 0,
+          "chainsaw": 0,
+          "scorch": 0,
+          "bullet": 0
+        },
+        "markCount": 0,
+        "tiltX": -0.014259860942610468,
+        "tiltZ": 3.166325189287826e-18,
+        "twistY": 1.9294475614438896e-18,
+        "tiltRad": 0.014259860942610468,
+        "angularSpeed": 1.1238361855513435
+      }
+    },
+    {
+      "name": "before-reaction-knife-eye-noon-0.42.png",
+      "kind": "knife",
+      "view": "eye",
+      "light": "noon",
+      "t": 0.42,
+      "state": {
+        "hits": 1,
+        "damage": 26,
+        "byKind": {
+          "knife": 1,
+          "machete": 0,
+          "katana": 0,
+          "chainsaw": 0,
+          "scorch": 0,
+          "bullet": 0
+        },
+        "markCount": 0,
+        "tiltX": 0.05538441086190653,
+        "tiltZ": -1.2297809628837648e-17,
+        "twistY": 4.527166333127981e-19,
+        "tiltRad": 0.05538441086190653,
+        "angularSpeed": 0.20333077990010778
+      }
+    },
+    {
+      "name": "before-reaction-knife-eye-noon-1.4.png",
+      "kind": "knife",
+      "view": "eye",
+      "light": "noon",
+      "t": 1.4,
+      "state": {
+        "hits": 1,
+        "damage": 26,
+        "byKind": {
+          "knife": 1,
+          "machete": 0,
+          "katana": 0,
+          "chainsaw": 0,
+          "scorch": 0,
+          "bullet": 0
+        },
+        "markCount": 0,
+        "tiltX": 0.026375267732500072,
+        "tiltZ": -5.856485903454905e-18,
+        "twistY": -7.221047298726549e-19,
+        "tiltRad": 0.026375267732500072,
+        "angularSpeed": 0.5582720712380481
+      }
+    },
+    {
+      "name": "before-reaction-knife-approach-noon-0.png",
+      "kind": "knife",
+      "view": "approach",
+      "light": "noon",
+      "t": 0,
+      "state": {
+        "hits": 1,
+        "damage": 26,
+        "byKind": {
+          "knife": 1,
+          "machete": 0,
+          "katana": 0,
+          "chainsaw": 0,
+          "scorch": 0,
+          "bullet": 0
+        },
+        "markCount": 0,
+        "tiltX": 0,
+        "tiltZ": 0,
+        "twistY": 0,
+        "tiltRad": 0,
+        "angularSpeed": 2.103809523809519
+      }
+    },
+    {
+      "name": "before-reaction-knife-approach-noon-0.06.png",
+      "kind": "knife",
+      "view": "approach",
+      "light": "noon",
+      "t": 0.06,
+      "state": {
+        "hits": 1,
+        "damage": 26,
+        "byKind": {
+          "knife": 1,
+          "machete": 0,
+          "katana": 0,
+          "chainsaw": 0,
+          "scorch": 0,
+          "bullet": 0
+        },
+        "markCount": 0,
+        "tiltX": -0.09293434682872956,
+        "tiltZ": 2.063557032555109e-17,
+        "twistY": -5.588038576664793e-18,
+        "tiltRad": 0.09293434682872956,
+        "angularSpeed": 1.0120163140275544
+      }
+    },
+    {
+      "name": "before-reaction-knife-approach-noon-0.12.png",
+      "kind": "knife",
+      "view": "approach",
+      "light": "noon",
+      "t": 0.12,
+      "state": {
+        "hits": 1,
+        "damage": 26,
+        "byKind": {
+          "knife": 1,
+          "machete": 0,
+          "katana": 0,
+          "chainsaw": 0,
+          "scorch": 0,
+          "bullet": 0
+        },
+        "markCount": 0,
+        "tiltX": -0.10795955903831381,
+        "tiltZ": 2.3971837634542982e-17,
+        "twistY": -3.472518271455459e-18,
+        "tiltRad": 0.10795955903831381,
+        "angularSpeed": 0.30648326027002226
+      }
+    },
+    {
+      "name": "before-reaction-knife-approach-noon-0.24.png",
+      "kind": "knife",
+      "view": "approach",
+      "light": "noon",
+      "t": 0.24,
+      "state": {
+        "hits": 1,
+        "damage": 26,
+        "byKind": {
+          "knife": 1,
+          "machete": 0,
+          "katana": 0,
+          "chainsaw": 0,
+          "scorch": 0,
+          "bullet": 0
+        },
+        "markCount": 0,
+        "tiltX": -0.014259860942610468,
+        "tiltZ": 3.166325189287826e-18,
+        "twistY": 1.9294475614438896e-18,
+        "tiltRad": 0.014259860942610468,
+        "angularSpeed": 1.1238361855513435
+      }
+    },
+    {
+      "name": "before-reaction-knife-approach-noon-0.42.png",
+      "kind": "knife",
+      "view": "approach",
+      "light": "noon",
+      "t": 0.42,
+      "state": {
+        "hits": 1,
+        "damage": 26,
+        "byKind": {
+          "knife": 1,
+          "machete": 0,
+          "katana": 0,
+          "chainsaw": 0,
+          "scorch": 0,
+          "bullet": 0
+        },
+        "markCount": 0,
+        "tiltX": 0.05538441086190653,
+        "tiltZ": -1.2297809628837648e-17,
+        "twistY": 4.527166333127981e-19,
+        "tiltRad": 0.05538441086190653,
+        "angularSpeed": 0.20333077990010778
+      }
+    },
+    {
+      "name": "before-reaction-knife-approach-noon-1.4.png",
+      "kind": "knife",
+      "view": "approach",
+      "light": "noon",
+      "t": 1.4,
+      "state": {
+        "hits": 1,
+        "damage": 26,
+        "byKind": {
+          "knife": 1,
+          "machete": 0,
+          "katana": 0,
+          "chainsaw": 0,
+          "scorch": 0,
+          "bullet": 0
+        },
+        "markCount": 0,
+        "tiltX": 0.026375267732500072,
+        "tiltZ": -5.856485903454905e-18,
+        "twistY": -7.221047298726549e-19,
+        "tiltRad": 0.026375267732500072,
+        "angularSpeed": 0.5582720712380481
+      }
+    },
+    {
+      "name": "before-reaction-bullet-eye-overcast-0.12.png",
+      "kind": "bullet",
+      "view": "eye",
+      "light": "overcast",
+      "t": 0.12,
+      "state": {
+        "hits": 1,
+        "damage": 26,
+        "byKind": {
+          "knife": 0,
+          "machete": 0,
+          "katana": 0,
+          "chainsaw": 0,
+          "scorch": 0,
+          "bullet": 1
+        },
+        "markCount": 0,
+        "tiltX": -0.04968997946212286,
+        "tiltZ": 1.1033391858399991e-17,
+        "twistY": -2.0864068125990373e-18,
+        "tiltRad": 0.04968997946212286,
+        "angularSpeed": 0.0476255317633775
+      }
+    },
+    {
+      "name": "before-reaction-knife-eye-overcast-0.12.png",
+      "kind": "knife",
+      "view": "eye",
+      "light": "overcast",
+      "t": 0.12,
+      "state": {
+        "hits": 1,
+        "damage": 26,
+        "byKind": {
+          "knife": 1,
+          "machete": 0,
+          "katana": 0,
+          "chainsaw": 0,
+          "scorch": 0,
+          "bullet": 0
+        },
+        "markCount": 0,
+        "tiltX": -0.11121090641522738,
+        "tiltZ": 2.4693781778323793e-17,
+        "twistY": -4.669577152007369e-18,
+        "tiltRad": 0.11121090641522738,
+        "angularSpeed": 0.10659047585136894
+      }
+    },
+    {
+      "name": "before-reaction-bullet-eye-dusk-0.12.png",
+      "kind": "bullet",
+      "view": "eye",
+      "light": "dusk",
+      "t": 0.12,
+      "state": {
+        "hits": 1,
+        "damage": 26,
+        "byKind": {
+          "knife": 0,
+          "machete": 0,
+          "katana": 0,
+          "chainsaw": 0,
+          "scorch": 0,
+          "bullet": 1
+        },
+        "markCount": 0,
+        "tiltX": -0.04968997946212286,
+        "tiltZ": 1.1033391858399991e-17,
+        "twistY": -2.0864068125990373e-18,
+        "tiltRad": 0.04968997946212286,
+        "angularSpeed": 0.0476255317633775
+      }
+    },
+    {
+      "name": "before-reaction-knife-eye-dusk-0.12.png",
+      "kind": "knife",
+      "view": "eye",
+      "light": "dusk",
+      "t": 0.12,
+      "state": {
+        "hits": 1,
+        "damage": 26,
+        "byKind": {
+          "knife": 1,
+          "machete": 0,
+          "katana": 0,
+          "chainsaw": 0,
+          "scorch": 0,
+          "bullet": 0
+        },
+        "markCount": 0,
+        "tiltX": -0.11121090641522738,
+        "tiltZ": 2.4693781778323793e-17,
+        "twistY": -4.669577152007369e-18,
+        "tiltRad": 0.11121090641522738,
+        "angularSpeed": 0.10659047585136894
+      }
+    },
+    {
+      "name": "before-reaction-bullet-eye-night-0.12.png",
+      "kind": "bullet",
+      "view": "eye",
+      "light": "night",
+      "t": 0.12,
+      "state": {
+        "hits": 1,
+        "damage": 26,
+        "byKind": {
+          "knife": 0,
+          "machete": 0,
+          "katana": 0,
+          "chainsaw": 0,
+          "scorch": 0,
+          "bullet": 1
+        },
+        "markCount": 0,
+        "tiltX": -0.04968997946212286,
+        "tiltZ": 1.1033391858399991e-17,
+        "twistY": -2.0864068125990373e-18,
+        "tiltRad": 0.04968997946212286,
+        "angularSpeed": 0.0476255317633775
+      }
+    },
+    {
+      "name": "before-reaction-knife-eye-night-0.12.png",
+      "kind": "knife",
+      "view": "eye",
+      "light": "night",
+      "t": 0.12,
+      "state": {
+        "hits": 1,
+        "damage": 26,
+        "byKind": {
+          "knife": 1,
+          "machete": 0,
+          "katana": 0,
+          "chainsaw": 0,
+          "scorch": 0,
+          "bullet": 0
+        },
+        "markCount": 0,
+        "tiltX": -0.11121090641522738,
+        "tiltZ": 2.4693781778323793e-17,
+        "twistY": -4.669577152007369e-18,
+        "tiltRad": 0.11121090641522738,
+        "angularSpeed": 0.10659047585136894
+      }
+    }
+  ],
+  "errors": []
+}

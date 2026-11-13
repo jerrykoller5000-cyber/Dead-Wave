@@ -177,7 +177,7 @@ export function dressTrainingWear(T, { R, B, bedAt, add, box, std, texture, lamp
     });
     for (let k = 0; k < 25; k++) { c.fillStyle = 'rgba(196,200,202,0.85)'; flake(r() * w, r() * h, 1 + r() * 3); }   // strays along it
   });
-  decal('wear-line-chips', RW, 0.27, chipTex, 0, 0.0015, 0, 0, -Math.PI / 2);
+  decal('wear-line-chips', RW, 0.27, chipTex, 0, 0.0015, 0, 0, -Math.PI / 2).renderOrder = 1.05;   // CJ-1: over the floor sheet in a fixed order
 
   // ---------- (2) the walls
   // Where the side walls' features go (range local): vents with corner bolts, a conduit's brackets with two bolts.

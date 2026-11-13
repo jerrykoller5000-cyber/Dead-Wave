@@ -1,0 +1,123 @@
+{
+  "synced": true,
+  "mainThread": "CrRendererMain",
+  "events": 931,
+  "totalMs": 27.3,
+  "perFrameMs": 0.02,
+  "byName": {
+    "V8.GC_HEAP_EXTERNAL_PROLOGUE": {
+      "n": 14,
+      "ms": 0.3
+    },
+    "V8.GC_HEAP_PROLOGUE": {
+      "n": 13,
+      "ms": 0
+    },
+    "V8.GC_TIME_TO_SAFEPOINT": {
+      "n": 14,
+      "ms": 0
+    },
+    "V8.GC_SCAVENGER": {
+      "n": 14,
+      "ms": 24.2
+    },
+    "V8.GC_HEAP_PROLOGUE_SAFEPOINT": {
+      "n": 14,
+      "ms": 0
+    },
+    "V8.GC_SCAVENGER_SCAVENGE": {
+      "n": 14,
+      "ms": 23.7
+    },
+    "V8.GC_SCAVENGER_SCAVENGE_WEAK_GLOBAL_HANDLES_IDENTIFY": {
+      "n": 14,
+      "ms": 3.9
+    },
+    "V8.GC_SCAVENGER_TRACED_HANDLES_COMPUTE_WEAKNESS_PARALLEL": {
+      "n": 14,
+      "ms": 3.4
+    },
+    "V8.GC_SCAVENGER_SCAVENGE_COLLECT_OLD_TO_NEW_PAGES": {
+      "n": 14,
+      "ms": 2.5
+    },
+    "V8.GC_SCAVENGER_SCAVENGE_PARALLEL_PHASE": {
+      "n": 14,
+      "ms": 7.6
+    },
+    "Parallel scavenge started": {
+      "n": 13,
+      "ms": 0
+    },
+    "V8.GC_SCAVENGER_SCAVENGE_ROOTS": {
+      "n": 14,
+      "ms": 2.2
+    },
+    "V8.GC_SCAVENGER_SCAVENGE_WEAK_GLOBAL_HANDLES_PROCESS": {
+      "n": 14,
+      "ms": 3.8
+    },
+    "V8.GC_SCAVENGER_TRACED_HANDLES_RESET_PARALLEL": {
+      "n": 14,
+      "ms": 3.3
+    },
+    "V8.GC_SCAVENGER_SCAVENGE_FINALIZE": {
+      "n": 14,
+      "ms": 1
+    },
+    "V8.GC_SCAVENGER_SCAVENGE_RESTORE_AND_QUARANTINE_PINNED": {
+      "n": 14,
+      "ms": 0.2
+    },
+    "V8.GC_SCAVENGER_FREE_REMEMBERED_SET": {
+      "n": 14,
+      "ms": 1.4
+    },
+    "V8.GC_SCAVENGER_SWEEP_ARRAY_BUFFERS": {
+      "n": 13,
+      "ms": 0.2
+    },
+    "V8.GC_SCAVENGER_RESIZE_NEW_SPACE": {
+      "n": 14,
+      "ms": 0
+    },
+    "V8.GC_HEAP_EPILOGUE_SAFEPOINT": {
+      "n": 14,
+      "ms": 0.1
+    },
+    "V8.GC_HEAP_EPILOGUE": {
+      "n": 14,
+      "ms": 0.1
+    },
+    "V8.GC_HEAP_DUMP_STATISTICS": {
+      "n": 14,
+      "ms": 0
+    },
+    "V8.GC_HEAP_EXTERNAL_EPILOGUE": {
+      "n": 14,
+      "ms": 0
+    },
+    "V8.GCDeoptMarkedAllocationSites": {
+      "n": 5,
+      "ms": 2.6
+    },
+    "V8.GC_SCAVENGER_COMPLETE_SWEEP_ARRAY_BUFFERS": {
+      "n": 2,
+      "ms": 0
+    },
+    "V8.GC_SCAVENGER_SCAVENGE_PARALLEL": {
+      "n": 12,
+      "ms": 0.6
+    }
+  },
+  "spikesWithGc": "0/1",
+  "spikes": [
+    {
+      "frame": 357,
+      "ms": 26.8,
+      "wallMs": 27.7,
+      "gcMs": 0,
+      "names": {}
+    }
+  ]
+}

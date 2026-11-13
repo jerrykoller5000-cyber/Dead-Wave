@@ -1,4 +1,6 @@
 import { TRAINING, segmentBox } from './training.js';
+import { exactLayer, exactTrace } from './training-exact.js';
+import { createImpactAtlas, impactAppearance, impactUV, createSurfaceMarkBatch } from '../studio/weapon-effects.js';
 export const IMPACT_LIFE = 20, IMPACT_FADE = 4;
 
 // One surface query for the reticle and the rounds. Training is below the world;
@@ -11,13 +13,17 @@ export function trainingFloorHit(tg, origin, direction) {
   return {distance, x, y:tg.floorY, z};
 }
 
+const _exact={solid:null,nx:0,ny:0,nz:0}, TRAINING_ROOMS=[TRAINING.RANGE,TRAINING.BUILD];
 export function traceTraining(tg, a, b, opts) {
   const d={x:b.x-a.x,y:b.y-a.y,z:b.z-a.z};
   // The range walls face inward. From outside, the camera looks through the near one;
   // that face is not an aim surface. A round fired from inside still hits it.
   const glass=opts&&opts.throughGlass;
   let hitSolid=null, fraction=Infinity;
+  // CH-1 (J151 notes 31, 45): a prop mesh's box is only its broad phase here; its drawn triangles decide (exactTrace).
+  const exact=tg.group&&tg.group.traverse?exactLayer(tg):null;
   for(const solid of tg.solids) {
+    if(exact&&solid.mesh&&exact.meshes.has(solid.mesh))continue;
     if(glass && (solid.firingFence||solid.firingFrame||tg.cutaway?.ignoreSolid(solid)))continue;
     if(solid.target!=null && (opts?.ignoreTargets?.has(solid.target)||tg.targets[solid.target].state!=='up'))continue;
     if(glass&&solid.wall&&solid.surface&&d.x*solid.surface.nx+d.z*solid.surface.nz>1e-6)continue;
@@ -30,10 +36,30 @@ export function traceTraining(tg, a, b, opts) {
       if(t<0||t>1)continue;
       const x=a.x+d.x*t,y=a.y+d.y*t;
       if(x<solid.minX||x>solid.maxX||y<solid.minY||y>solid.maxY)continue;
+    }else if(solid.wall&&solid.surface&&exact){
+      // CH-1 (J151 notes 31, 45; ChatGPT 2's GT-20105 find): a wall's box runs 0.3 m into the room in front of its drawn
+      // face (surface), so a line from the room stopped 30 cm short of the wall: the laser's dot hung in the air there, and
+      // a station seated on the wall (the CIF, the kiosk, the Armory) was masked by it. From the room the line meets the
+      // face itself; from outside, the box as before.
+      const S=solid.surface,dn=d.x*S.nx+d.z*S.nz;
+      if(dn<-1e-9){
+        t=((S.x-a.x)*S.nx+(S.z-a.z)*S.nz)/dn;
+        if(t<0||t>1)t=null;
+        else{const x=a.x+d.x*t,y=a.y+d.y*t,z=a.z+d.z*t;if(x<solid.minX-1e-6||x>solid.maxX+1e-6||y<solid.minY||y>solid.maxY||z<solid.minZ-1e-6||z>solid.maxZ+1e-6)t=null;}
+      }else t=segmentBox(a,b,solid);
     }else t=segmentBox(a,b,solid);
     // CL-144: a plate is hit only on its silhouette; through the cut-away corners the round goes on
     if(t!==null && solid.target!=null && tg.onPlate && !tg.onPlate(solid.target,{x:a.x+d.x*t,y:a.y+d.y*t,z:a.z+d.z*t}))continue;
     if(t!==null && t<fraction){fraction=t;hitSolid=solid;}
+  }
+  let exactHit=false;
+  if(exact){
+    // A drawn face within 2 mm of a solid's face is that solid (the backstop, a column): its flags and surface stand.
+    const len=Math.hypot(d.x,d.y,d.z)||1,tie=.002/len;
+    let outside=!!glass;   // a camera outside the rooms looks through the shell's pieces as through its walls
+    if(outside)for(let i=0;i<TRAINING_ROOMS.length;i++){const r=TRAINING_ROOMS[i];if(a.x>=tg.origin.x+r.minX&&a.x<=tg.origin.x+r.maxX&&a.z>=tg.origin.z+r.minZ&&a.z<=tg.origin.z+r.maxZ){outside=false;break;}}
+    const t=exactTrace(exact,a,b,Math.min(fraction,1),_exact,outside);
+    if(t!==null&&t<fraction-tie){fraction=t;hitSolid=_exact.solid;exactHit=true;}
   }
   const floor=trainingFloorHit(tg,a,d);
   if(floor && floor.distance<=1 && floor.distance<fraction){fraction=floor.distance;hitSolid={floor:true};}
@@ -41,7 +67,9 @@ export function traceTraining(tg, a, b, opts) {
   const hit={solid:hitSolid,t:fraction};
   hit.point={x:a.x+d.x*fraction,y:a.y+d.y*fraction,z:a.z+d.z*fraction};
   hit.normal={x:0,y:0,z:0};
-  if(hit.solid.floor)hit.normal.y=1;
+  if(exactHit&&hitSolid===_exact.solid){hit.normal.x=_exact.nx;hit.normal.y=_exact.ny;hit.normal.z=_exact.nz;hit.exact=true;}   // CH-1: the face's own normal
+  else if(hit.solid.floor)hit.normal.y=1;
+  else if(exact&&hit.solid.wall&&hit.solid.surface&&d.x*hit.solid.surface.nx+d.z*hit.solid.surface.nz<-1e-9){hit.normal.x=hit.solid.surface.nx;hit.normal.z=hit.solid.surface.nz;}   // CH-1: the face met
   else if(hit.solid.target!=null)hit.normal.z=d.z>0?-1:1;
   else {
     let nearest=Infinity;
@@ -64,17 +92,7 @@ export function traceTraining(tg, a, b, opts) {
 // Fixed-size pools: one static batch and one small batch per moving target.
 // Marks inherit the target hinge, so they fall/rise with its plate.
 export function createTrainingImpacts(T,tg) {
-  let map=null;
-  if(typeof document!=='undefined'){
-    const cv=document.createElement('canvas');cv.width=cv.height=64;
-    const c=cv.getContext('2d');
-    const rim=c.createRadialGradient(32,32,3,32,32,30);
-    rim.addColorStop(0,'#080a0b');rim.addColorStop(.23,'#111416');rim.addColorStop(.31,'#a0a09a');rim.addColorStop(.48,'#666962');rim.addColorStop(1,'rgba(70,72,66,0)');
-    c.fillStyle=rim;c.fillRect(0,0,64,64);
-    c.strokeStyle='#444843';c.lineWidth=1.5;
-    for(let i=0;i<7;i++){const a=i*2.4;c.beginPath();c.moveTo(32+Math.cos(a)*8,32+Math.sin(a)*8);c.lineTo(32+Math.cos(a)*21,32+Math.sin(a)*21);c.stroke();}
-    map=new T.CanvasTexture(cv);map.colorSpace=T.SRGBColorSpace;
-  }
+  const map=createImpactAtlas(T);
   const mat=new T.MeshBasicMaterial({map,transparent:true,vertexColors:true,depthWrite:false,side:T.DoubleSide,forceSinglePass:true,polygonOffset:true,polygonOffsetFactor:-3,polygonOffsetUnits:-3});
   mat.name='training-impact-mark';
   const corners=[[-.5,-.5],[.5,-.5],[-.5,.5],[.5,-.5],[.5,.5],[-.5,.5]];
@@ -89,10 +107,12 @@ export function createTrainingImpacts(T,tg) {
     geo.setAttribute('normal',new T.Float32BufferAttribute(normals,3));
     const colors=new T.Float32BufferAttribute(new Float32Array(capacity*24).fill(1),4);colors.setUsage(T.DynamicDrawUsage);geo.setAttribute('color',colors);
     const mesh=new T.Mesh(geo,mat);mesh.name='training-impact-marks';mesh.renderOrder=1.1;mesh.frustumCulled=false;mesh.visible=false;mesh.raycast=()=>{};parent.add(mesh);
-    return{mesh,parent,capacity,next:0,count:0,positions,colors,life:new Float32Array(capacity)};
+    return{mesh,parent,capacity,next:0,count:0,positions,uvs:geo.attributes.uv,colors,life:new Float32Array(capacity)};
   };
   const batches=[make(tg.group,128),...tg.targets.map(t=>make(t.pivot,16))];
-  const pos=new T.Vector3(),normal=new T.Vector3(),q=new T.Quaternion(),parentQ=new T.Quaternion(),vertex=new T.Vector3(),front=new T.Vector3(0,0,1);
+  const projected=createSurfaceMarkBatch(T,tg.group,mat,{capacity:64,maxTriangles:32,life:IMPACT_LIFE,fade:IMPACT_FADE,name:'training-impact-projected-marks',order:1.1});
+  let sequence=0;
+  const pos=new T.Vector3(),normal=new T.Vector3(),q=new T.Quaternion(),rollQ=new T.Quaternion(),parentQ=new T.Quaternion(),vertex=new T.Vector3(),front=new T.Vector3(0,0,1);
   return {
     // Prime the actual meshes (including each hinged target) while the range is
     // blacked out. Restore draw ranges before play; no artificial hits or ammo use.
@@ -106,8 +126,13 @@ export function createTrainingImpacts(T,tg) {
       }
       return()=>batches.forEach((b,i)=>{b.mesh.geometry.setDrawRange(0,ranges[i]);b.mesh.visible=visible[i];});
     },
-    add(hit){
-      const target=hit.solid.target, batch=batches[target==null?0:target+1];
+    add(hit,shot={}){
+      const target=hit.solid.target, batch=batches[target==null?0:target+1],look=impactAppearance(sequence++,target!=null,shot);
+      if(hit.exact){
+        const p=hit.point,r=Math.hypot(look.width,look.height)*.5+.08;
+        const banks=exactLayer(tg).parts.filter(b=>b.solid===hit.solid&&b.minX<=p.x+r&&b.maxX>=p.x-r&&b.minY<=p.y+r&&b.maxY>=p.y-r&&b.minZ<=p.z+r&&b.maxZ>=p.z-r).map(b=>b.tri);
+        projected.add(hit,banks,look);return;
+      }
       pos.set(hit.point.x,hit.point.y,hit.point.z);normal.set(hit.normal.x,hit.normal.y,hit.normal.z);
       const s=hit.solid.surface;
       if(s){if(s.nx)pos.x=s.x;if(s.nz)pos.z=s.z;normal.set(s.nx,0,s.nz);}
@@ -115,9 +140,9 @@ export function createTrainingImpacts(T,tg) {
       const lift=hit.solid.floor?.0017:(target!=null?.0018:.0022);
       pos.addScaledVector(normal,lift);
       batch.parent.updateWorldMatrix(true,false);batch.parent.worldToLocal(pos);
-      q.setFromUnitVectors(front,normal);batch.parent.getWorldQuaternion(parentQ);q.premultiply(parentQ.invert());
-      const size=target==null?.12:.06;
-      corners.forEach(([x,y],i)=>{vertex.set(x*size,y*size,0).applyQuaternion(q).add(pos);batch.positions.setXYZ(batch.next*6+i,vertex.x,vertex.y,vertex.z);});
+      q.setFromUnitVectors(front,normal);q.multiply(rollQ.setFromAxisAngle(front,look.roll));batch.parent.getWorldQuaternion(parentQ);q.premultiply(parentQ.invert());
+      corners.forEach(([x,y],i)=>{vertex.set(x*look.width,y*look.height,0).applyQuaternion(q).add(pos);batch.positions.setXYZ(batch.next*6+i,vertex.x,vertex.y,vertex.z);batch.uvs.setXY(batch.next*6+i,...impactUV(look.cell,x,y));});
+      batch.uvs.needsUpdate=true;
       batch.life[batch.next]=IMPACT_LIFE;
       for(let i=0;i<6;i++)batch.colors.setW(batch.next*6+i,1);
       batch.colors.needsUpdate=true;
@@ -126,6 +151,7 @@ export function createTrainingImpacts(T,tg) {
     },
     update(dt){
       if(!(dt>0))return;
+      projected.update(dt);
       for(const b of batches){let dirty=false,alive=0;
         for(let j=0;j<b.capacity;j++)if(b.life[j]>0){
           b.life[j]=Math.max(0,b.life[j]-dt);if(b.life[j]>0)alive++;
@@ -135,9 +161,9 @@ export function createTrainingImpacts(T,tg) {
         if(!alive){b.mesh.geometry.setDrawRange(0,0);b.mesh.visible=false;b.count=0;b.next=0;}
       }
     },
-    clear(){for(const b of batches){b.mesh.geometry.setDrawRange(0,0);b.mesh.visible=false;b.count=0;b.next=0;b.life.fill(0);}},
-    count:()=>batches.reduce((n,b)=>n+b.life.reduce((a,t)=>a+(t>0?1:0),0),0),
-    dispose(){for(const b of batches){b.mesh.removeFromParent();b.mesh.geometry.dispose();}mat.dispose();map?.dispose();}
+    clear(){projected.clear();sequence=0;for(const b of batches){b.mesh.geometry.setDrawRange(0,0);b.mesh.visible=false;b.count=0;b.next=0;b.life.fill(0);}},
+    count:()=>projected.count()+batches.reduce((n,b)=>n+b.life.reduce((a,t)=>a+(t>0?1:0),0),0),
+    dispose(){projected.dispose();for(const b of batches){b.mesh.removeFromParent();b.mesh.geometry.dispose();}mat.dispose();map?.dispose();}
   };
 }
 
@@ -216,6 +242,8 @@ export function createTrainingChar(T, tg) {
   };
   const batches = [make(tg.group, 256), ...tg.targets.map(t => make(t.pivot, 24))];
   const pos = new T.Vector3(), normal = new T.Vector3(), q = new T.Quaternion(), rotZ = new T.Quaternion(), parentQ = new T.Quaternion(), vertex = new T.Vector3(), front = new T.Vector3(0, 0, 1);
+  const projected=createSurfaceMarkBatch(T,tg.group,mat,{capacity:96,maxTriangles:64,life:CHAR_LIFE,fade:CHAR_FADE,name:'training-char-projected-marks',order:1.2,mergeDistance:.16,
+    uv:(cell,x,y)=>[(cell%2)*.5+.035+(x+.5)*.43,(cell>>1)*.5+.035+(y+.5)*.43]});
   let seq = 0;
   return {
     prepareWarmup() {
@@ -230,6 +258,15 @@ export function createTrainingChar(T, tg) {
     },
     add(hit, strength = 0.82) {
       const target = hit.solid?.target;
+      if(hit.exact){
+        const p=hit.point,n=hit.normal,isWall=Math.abs(n.y)<.45;
+        const base=hit.size||(.46+Math.random()*.24);
+        const look={cell:isWall?2+(seq++&1):seq++&1,roll:isWall?(Math.random()-.5)*.9:Math.random()*6.283,
+          width:base*(isWall?.88+Math.random()*.22:.95+Math.random()*.25),height:base*(isWall?1.05+Math.random()*.30:.95+Math.random()*.25)};
+        const r=Math.hypot(look.width,look.height)*.5+.08;
+        const banks=exactLayer(tg).parts.filter(b=>b.solid===hit.solid&&b.minX<=p.x+r&&b.maxX>=p.x-r&&b.minY<=p.y+r&&b.maxY>=p.y-r&&b.minZ<=p.z+r&&b.maxZ>=p.z-r).map(b=>b.tri);
+        projected.add(hit,banks,look,Math.max(.45,Math.min(1,strength)));return;
+      }
       if (target != null) {
         const tObj = tg.targets[target];
         if (!tObj || tObj.state === 'wrecked') return;
@@ -288,6 +325,7 @@ export function createTrainingChar(T, tg) {
     },
     update(dt) {
       if (!(dt > 0)) return;
+      projected.update(dt);
       for (const b of batches) {
         let dirty = false, alive = 0;
         for (let j = 0; j < b.capacity; j++) if (b.life[j] > 0) {
@@ -307,8 +345,8 @@ export function createTrainingChar(T, tg) {
       if (!b) return;
       b.mesh.geometry.setDrawRange(0, 0); b.mesh.visible = false; b.count = 0; b.next = 0; b.life.fill(0); b.alpha.fill(0);
     },
-    clear() { for (const b of batches) { b.mesh.geometry.setDrawRange(0, 0); b.mesh.visible = false; b.count = 0; b.next = 0; b.life.fill(0); b.alpha.fill(0); } },
-    count: () => batches.reduce((n, b) => n + b.life.reduce((a, t) => a + (t > 0 ? 1 : 0), 0), 0),
-    dispose() { for (const b of batches) { b.mesh.removeFromParent(); b.mesh.geometry.dispose(); } mat.dispose(); map?.dispose(); }
+    clear() { projected.clear();for (const b of batches) { b.mesh.geometry.setDrawRange(0, 0); b.mesh.visible = false; b.count = 0; b.next = 0; b.life.fill(0); b.alpha.fill(0); } },
+    count: () => projected.count()+batches.reduce((n, b) => n + b.life.reduce((a, t) => a + (t > 0 ? 1 : 0), 0), 0),
+    dispose() { projected.dispose();for (const b of batches) { b.mesh.removeFromParent(); b.mesh.geometry.dispose(); } mat.dispose(); map?.dispose(); }
   };
 }

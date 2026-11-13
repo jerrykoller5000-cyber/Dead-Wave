@@ -1,22 +1,24 @@
 # ChatGPT
 
-state: active
+state: blocked
 model: GPT-6.1 Sol (Medium, per D-175)
-task: GP-20129 J151 workbench Training dummy Armory icons keypads furniture
-touching: review/GP-20129, handoffs/2026-11-13-chatgpt-GP-20129.md
-since: 2026-11-13T00:52Z
+task: GP-20129 KR7 adapter verified and OUT; refresh own-model icons against current C6/C3 models and finish evidence
+touching: —
+since: 2026-11-13T04:27Z
 next: —
-blocked-on: —
-last-report: handoffs/2026-11-12-chatgpt-GP-20127.md
+blocked-on: All assigned notes implemented/tested; Director disposition requested for C2 ordinary3P aim follow-up, deferred after his J151 cards. Files/loans released.
+last-report: handoffs/2026-11-13-chatgpt-GP-20129.md
 
 ## Notes
 
-GP-20127 DONE22:35Z:3fresh pistolshots max83.5ms,Uzi66.8ms,revolver no gap>50;0errors/0gaps>100.717ms not reproduced. Device hooks prove firstshot creates eye-flash+spent-case pipelines (pistol/Uzi2, revolver flash1),geom+1. Live top round unchanged. C2/Director have exact material IDs and warmup request. Invalid holstered/short-trigger attempts rejected and preserved. Handoff handoffs/2026-11-12-chatgpt-GP-20127.md. No gamecode edits.
+GP-20130 HELD BY DIRECTOR: design review/GP-20130/design.md goes to Jerry; build after tomorrow's playtest, no owner integration until Jerry approves. Own unwired game/training-integrity.js +test8/0 already prepared (idempotent damage, physical cover surfaces, obstruction/deployment, travel30/60/120Hz, visitreset). Handoff2026-11-13-chatgpt-GP-20130.md. GP-20131 urgent follow-up is now DONE, handoff2026-11-13-chatgpt-GP-20131.md.
 
-GP-20126 ACCEPTED22:18Z:48clean exclusive no-shot trials,10144frames,16gaps>50ms,0errors; renderer/GPU/GC paths separated and sent C2. Profiler startup600ms excluded. Handoff handoffs/2026-11-12-chatgpt-GP-20126.md.
+GP-20129 ALL SIX NOTES IMPLEMENTED: C6 API landed, approved index adapter integrated/OUT. Native furniture/carry/eye identity/camo/Training isolation/restore/profile+fresh-load pass0errors; wardrobe4/0, preview3/0, latest12icons/full+carried wheels0errors. Handoff2026-11-13-chatgpt-GP-20129.md. Director disposition requested for C2-owned ordinary3P aim follow-up; do not repeat blind shots.
 
-GP-20125 ACCEPTED21:37Z: side MOLLE8→1mm seated on carrier; sleeve contact cleared. Separate belt0.9mm parked afterJ149. Only loaned side bars in studio/marine-body.js changed. Handoff handoffs/2026-11-12-chatgpt-GP-20125.md.
+GP-20129 validation: UI3/0,dummy6/0,CL1461/0; final4light30frames0errors. Eye pistol+6blade actions bothviews hit;bothdoorEpass. 3Pcursor-shot misses despite canvas input; aim turns away. C2 received mouseMoved100ms and pin-aim failing repro; no further blind retakes, await diagnosis. Failed receipts retained. Exclusive20s1142frames median16.7ms,p9516.9,0over50. Old UIextractor2fail; spawn1fail proven identical with original keypad block in memory; no expectations changed.
 
-GP-20124 DONE21:33Z: initial/final5080QA,12guns eye/hip,45drills,blades confirmed currentCE-9,Watchman/deathwake pass,0errors; framegaps handed C2, no blanket clipping/performance acceptance. Evidence review/GP-20124/repeat/ and handoff.
+Loans OUT: index icon import+12entries and furniture adapter6blocks (4fa1bed2->069f0b5a, exact reverse proof), C2 notified. C10 keypad/flicker and C8 eye-hide/ballistics preserved. Latesticons refreshed5of12 from live ownmodels; originalsheet inearly-icons. No files held.
 
-Earlier GP-20122/23 complete; details in their2026-11-12handoffs. GP-20111 accepted per board. No git. Queue empty; standby.
+GP-20131 DONE/review: all6shotgun drills max18, Eighteen on Steel copy; stableids/config-separated old records. Unit35/0; native7->18/base14->36, duplicates/19th rejected,accuracy100,errors0. Same-view before/after review/GP-20131. GP30 remains Director-held; no git.
+
+Prior GP-20124/25/26/27 accepted/done, evidence in their2026-11-12handoffs. GP-20127:717ms cold shot not reproduced, GPU first-shot pipelines handed C2. GP-20123 was WORLD UV audit only, no camo code changed; CG-1 has exact limits.

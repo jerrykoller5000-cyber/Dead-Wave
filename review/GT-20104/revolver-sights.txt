@@ -1,0 +1,34 @@
+FAIL  t188    117 pass   5 fail  67.5s  (real renderer)
+    FAIL revolver: model scale 0.554 = 1.08 x 0.554
+    FAIL uzi: measured 0.453 m long next to him (m x look 0.470)
+    FAIL ak: measured 1.003 m long next to him (m x look 1.188)
+    FAIL launcher: measured 0.842 m long next to him (m x look 0.900)
+    FAIL flamer: measured 1.100 m long next to him (m x look 0.997)
+ok    t277     46 pass   0 fail  40.8s  (real renderer)
+    INFO minigun muzzle 0.000,0.000,0.791 box -0.231,-0.183,-0.397 / 0.215,0.266,0.784
+    INFO minigun dir 1 rearTop -0.000,0.266,0.003 frontTop -0.000,0.076,0.741
+    INFO m4 muzzle 0.000,0.020,0.980 box -0.053,-0.278,-0.569 / 0.053,0.170,0.978
+    INFO m4 dir 1 rearTop 0.000,0.170,0.046 frontTop 0.000,0.138,0.673
+    INFO ak muzzle 0.000,-0.005,0.855 box -0.031,-0.311,-0.515 / 0.059,0.084,0.829
+    INFO ak dir 1 rearTop -0.005,0.074,0.214 frontTop 0.000,0.084,0.723
+    INFO aa12 muzzle 0.000,0.015,0.980 box -0.155,-0.415,-0.580 / 0.155,0.180,0.976
+    INFO aa12 dir 1 rearTop 0.000,0.180,-0.120 frontTop -0.014,0.175,0.750
+    INFO pistol muzzle 0.000,0.050,0.320 box -0.028,-0.182,-0.100 / 0.028,0.092,0.311
+    INFO pistol dir 1 rearTop 0.000,0.074,0.038 frontTop -0.002,0.092,0.287
+    INFO uzi muzzle 0.000,0.030,0.480 box -0.054,-0.327,-0.157 / 0.065,0.158,0.479
+    INFO uzi dir 1 rearTop -0.014,0.150,0.190 frontTop -0.001,0.067,0.354
+    INFO shotgun muzzle 0.000,0.030,0.970 box -0.030,-0.199,-0.497 / 0.030,0.060,0.952
+    INFO shotgun dir 1 rearTop 0.000,0.056,-0.021 frontTop 0.000,0.060,0.910
+    INFO revolver muzzle 0.000,0.083,0.350 box -0.050,-0.151,-0.145 / 0.046,0.124,0.333
+    INFO revolver dir 1 rearTop -0.015,0.115,0.064 frontTop -0.002,0.124,0.326
+    INFO sniper muzzle 0.000,0.040,1.220 box -0.037,-0.203,-0.640 / 0.147,0.182,1.205
+    INFO sniper dir 1 rearTop 0.014,0.182,-0.125 frontTop -0.000,0.064,1.133
+    INFO sniper scope axis: ocular 0.000,0.139,-0.290, objective -0.000,0.139,0.044, tube section centre 0.000,0.139,-0.122 (0.00 mm off the lens line)
+    INFO launcher muzzle 0.000,0.040,0.720 box -0.156,-0.188,-0.428 / 0.112,0.192,0.682
+    INFO launcher dir 1 rearTop -0.010,0.192,-0.085 frontTop -0.013,0.174,0.638
+    INFO flamer muzzle 0.000,0.050,0.998 box -0.085,-0.175,-0.191 / 0.178,0.112,1.015
+    INFO flamer dir 1 rearTop 0.013,0.100,0.401 frontTop 0.000,0.112,1.007
+    INFO chainsaw muzzle 0.000,0.040,0.696 box -0.198,-0.109,-0.504 / 0.218,0.265,0.703
+    INFO chainsaw dir 1 rearTop 0.014,0.265,-0.030 frontTop -0.010,0.090,0.654
+    INFO sniper aimed: eye 1.00 mm off the scope's centre line (worst 1.00 of 12 frames); the line runs 0.001 deg off the view, -0.0, -0.0 px from the centre at 1280x720
+2 checks: 163 pass, 5 fail (real renderer)

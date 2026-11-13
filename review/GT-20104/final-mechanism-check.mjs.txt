@@ -1,0 +1,34 @@
+CANONICAL CLOSURE {"slide":[{"closed":true,"faces":1296}],"chamber":[{"closed":true,"faces":160}]}
+POSE 0 slidePenetrating undefined framePenetrating undefined gaps 0.6406249999999999 2.859375
+POSE 0.002 slidePenetrating undefined framePenetrating undefined gaps 0.6406249999999999 2.859375
+POSE 0.004 slidePenetrating undefined framePenetrating undefined gaps 0.6406249999999999 2.859375
+POSE 0.005 slidePenetrating undefined framePenetrating undefined gaps 0.6406249999999999 2.3203125000000004
+POSE 0.006 slidePenetrating undefined framePenetrating undefined gaps 0.6406249999999999 2.2968750000000004
+POSE 0.0065 slidePenetrating undefined framePenetrating undefined gaps 0.78125 2.2890625000000004
+POSE 0.007 slidePenetrating undefined framePenetrating undefined gaps 0.5937500000000001 2.2812500000000004
+POSE 0.0075 slidePenetrating undefined framePenetrating undefined gaps 0.5546875000000001 2.2734375000000004
+POSE 0.008 slidePenetrating undefined framePenetrating undefined gaps 0.4375 2.2656250000000004
+POSE 0.01 slidePenetrating undefined framePenetrating undefined gaps 0.4921875 2.2656250000000004
+POSE 0.02 slidePenetrating undefined framePenetrating undefined gaps 0.7890625 2.2656250000000004
+POSE 0.04 slidePenetrating undefined framePenetrating undefined gaps 0.8281250000000001 2.2656250000000004
+POSE 0.06 slidePenetrating undefined framePenetrating undefined gaps 0.8281250000000001 2.2656250000000004
+POSE 0.08 slidePenetrating undefined framePenetrating undefined gaps 0.8281250000000001 2.2656250000000004
+POSE 0.1 slidePenetrating undefined framePenetrating undefined gaps 0.8281250000000001 2.2656250000000004
+POSE 0.13 slidePenetrating undefined framePenetrating undefined gaps 0.2578125 2.2656250000000004
+PASS pistol: every small part touches a bigger one (35 small)
+PASS revolver: every small part touches a bigger one (40 small)
+PASS uzi: every small part touches a bigger one (83 small)
+PASS m4: every small part touches a bigger one (61 small)
+PASS ak: every small part touches a bigger one (66 small)
+PASS aa12: every small part touches a bigger one (115 small)
+PASS shotgun: every small part touches a bigger one (32 small)
+PASS sniper: every small part touches a bigger one (67 small)
+PASS minigun: every small part touches a bigger one (67 small)
+PASS launcher: every small part touches a bigger one (56 small)
+PASS flamer: every small part touches a bigger one (58 small)
+PASS chainsaw: every small part touches a bigger one (133 small)
+PASS m240: every small part touches a bigger one (47 small)
+PASS mortar: every small part touches a bigger one (7 small)
+PASS checked all 14 guns (14)
+PASS no floating hardware across the set (0)
+PASS native pistol candidate envelope and original t333

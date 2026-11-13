@@ -131,6 +131,10 @@
 #cif .armory-finish-more { margin-top:8px; padding:4px 8px; border:1px solid #cbdcb740; border-radius:2px; background:transparent; color:#cfd8c0;
   font:10px var(--font-hud); letter-spacing:.06em; text-transform:uppercase; cursor:pointer; }
 #cif .armory-finish-more:hover { border-color:#9fd36a; color:#9fd36a; }
+#cif .armory-furniture-choices { display:flex; flex-wrap:wrap; gap:6px; }
+#cif .armory-furniture-choices button { flex:1; min-width:100px; min-height:36px; padding:7px; border:1px solid #798566; background:#263325; color:#e8e2c8; font:12px var(--font-hud); cursor:pointer; }
+#cif .armory-furniture-choices button[aria-pressed="true"] { border-color:#ddc362; background:#41472a; }
+#cif .armory-furniture-choices button:focus-visible { outline:2px solid #f1d596; outline-offset:2px; }
 
 #cif .armory-actions { display:flex; gap:8px; margin:16px 18px 0; }
 #cif .armory-actions button { flex:1; min-width:0; padding:11px; border:0; border-radius:2px; background:var(--accent-2); color:var(--accent-2-ink);
@@ -228,7 +232,7 @@
 }
 
 /* GP-20071: purchasing is part of the Armory panel, sharing its one scroll and Done action. */
-#cif #armoryPanel .armory-catalogue { margin:14px 14px 0; padding-top:10px; border-top:1px solid #cbdcb744; }
+#cif #armoryPanel .armory-catalogue { margin:0 14px 8px; padding:12px 0; border-bottom:1px solid #cbdcb744; }
 #cif #armoryPanel #shop.armory-inline { display:block; position:static; inset:auto; background:none; z-index:auto; }
 #cif #armoryPanel #shop.armory-inline .card { box-sizing:border-box; width:100%; max-height:none; overflow:visible;
   padding:0; clip-path:none; box-shadow:none; background:transparent; border:0; }

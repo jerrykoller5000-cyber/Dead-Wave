@@ -1,0 +1,289 @@
+{
+  "mode": "Profiler repeat only; initial unprofiled 358.6ms after hitch remains unexplained and retained in runtime-pair/records.json",
+  "phases": [
+    {
+      "pass": 0,
+      "version": "before",
+      "fps": 60.00100009995038,
+      "insert64AndScorchMs": 0.7000000029802322,
+      "draws": [
+        90
+      ],
+      "triangles": [
+        148761
+      ],
+      "worstMs": 17.599999994039536,
+      "hitches": 0,
+      "frames": 364,
+      "cpuPhases": [
+        {
+          "k": "r:render",
+          "avg": 4.238,
+          "max": 6.5
+        },
+        {
+          "k": "effects",
+          "avg": 0.322,
+          "max": 0.6
+        }
+      ],
+      "gpuMeanMs": 0.16159224242424233,
+      "newPipelines": 0,
+      "nodeBuilds": 0,
+      "newRenderObjects": 0,
+      "spikes": [],
+      "gcSpikes": []
+    },
+    {
+      "pass": 1,
+      "version": "after",
+      "fps": 60.00400100019064,
+      "insert64AndScorchMs": 4.700000002980232,
+      "draws": [
+        90
+      ],
+      "triangles": [
+        150743
+      ],
+      "worstMs": 21.299999997019768,
+      "hitches": 0,
+      "frames": 365,
+      "cpuPhases": [
+        {
+          "k": "r:render",
+          "avg": 5.593,
+          "max": 11.2
+        },
+        {
+          "k": "effects",
+          "avg": 0.358,
+          "max": 0.8
+        }
+      ],
+      "gpuMeanMs": 0.16177128323699425,
+      "newPipelines": 0,
+      "nodeBuilds": 0,
+      "newRenderObjects": 0,
+      "spikes": [],
+      "gcSpikes": []
+    },
+    {
+      "pass": 2,
+      "version": "after",
+      "fps": 60.046873952421144,
+      "insert64AndScorchMs": 2.2999999970197678,
+      "draws": [
+        90
+      ],
+      "triangles": [
+        150743
+      ],
+      "worstMs": 21,
+      "hitches": 0,
+      "frames": 365,
+      "cpuPhases": [
+        {
+          "k": "r:render",
+          "avg": 5.851,
+          "max": 10.8
+        },
+        {
+          "k": "effects",
+          "avg": 0.362,
+          "max": 1
+        }
+      ],
+      "gpuMeanMs": 0.16163676190476195,
+      "newPipelines": 0,
+      "nodeBuilds": 0,
+      "newRenderObjects": 0,
+      "spikes": [],
+      "gcSpikes": []
+    },
+    {
+      "pass": 3,
+      "version": "before",
+      "fps": 59.98015125273137,
+      "insert64AndScorchMs": 0.3999999910593033,
+      "draws": [
+        90
+      ],
+      "triangles": [
+        148761
+      ],
+      "worstMs": 27.69999998807907,
+      "hitches": 0,
+      "frames": 364,
+      "cpuPhases": [
+        {
+          "k": "r:render",
+          "avg": 5.999,
+          "max": 12.1
+        },
+        {
+          "k": "effects",
+          "avg": 0.4,
+          "max": 0.9
+        }
+      ],
+      "gpuMeanMs": 0.16251855118110228,
+      "newPipelines": 0,
+      "nodeBuilds": 0,
+      "newRenderObjects": 0,
+      "spikes": [
+        {
+          "frame": 357,
+          "ms": 26.8,
+          "top": [
+            "m:idle 8.4",
+            "r:render 7.9",
+            "m:pose 3.6",
+            "r:matrices 2.9"
+          ],
+          "heapMB": 873.1,
+          "freedMB": -0.1,
+          "newPipelines": 0,
+          "newTextures": 0,
+          "newGeometries": 0,
+          "newBuilds": 0,
+          "sunShadow": 0,
+          "newRenderObjects": 0,
+          "t0": 65687.2,
+          "t1": 65714.9
+        }
+      ],
+      "gcSpikes": [
+        {
+          "frame": 357,
+          "ms": 26.8,
+          "wallMs": 27.7,
+          "gcMs": 0,
+          "names": {}
+        }
+      ]
+    }
+  ],
+  "gc": {
+    "synced": true,
+    "mainThread": "CrRendererMain",
+    "events": 931,
+    "totalMs": 27.3,
+    "perFrameMs": 0.02,
+    "byName": {
+      "V8.GC_HEAP_EXTERNAL_PROLOGUE": {
+        "n": 14,
+        "ms": 0.3
+      },
+      "V8.GC_HEAP_PROLOGUE": {
+        "n": 13,
+        "ms": 0
+      },
+      "V8.GC_TIME_TO_SAFEPOINT": {
+        "n": 14,
+        "ms": 0
+      },
+      "V8.GC_SCAVENGER": {
+        "n": 14,
+        "ms": 24.2
+      },
+      "V8.GC_HEAP_PROLOGUE_SAFEPOINT": {
+        "n": 14,
+        "ms": 0
+      },
+      "V8.GC_SCAVENGER_SCAVENGE": {
+        "n": 14,
+        "ms": 23.7
+      },
+      "V8.GC_SCAVENGER_SCAVENGE_WEAK_GLOBAL_HANDLES_IDENTIFY": {
+        "n": 14,
+        "ms": 3.9
+      },
+      "V8.GC_SCAVENGER_TRACED_HANDLES_COMPUTE_WEAKNESS_PARALLEL": {
+        "n": 14,
+        "ms": 3.4
+      },
+      "V8.GC_SCAVENGER_SCAVENGE_COLLECT_OLD_TO_NEW_PAGES": {
+        "n": 14,
+        "ms": 2.5
+      },
+      "V8.GC_SCAVENGER_SCAVENGE_PARALLEL_PHASE": {
+        "n": 14,
+        "ms": 7.6
+      },
+      "Parallel scavenge started": {
+        "n": 13,
+        "ms": 0
+      },
+      "V8.GC_SCAVENGER_SCAVENGE_ROOTS": {
+        "n": 14,
+        "ms": 2.2
+      },
+      "V8.GC_SCAVENGER_SCAVENGE_WEAK_GLOBAL_HANDLES_PROCESS": {
+        "n": 14,
+        "ms": 3.8
+      },
+      "V8.GC_SCAVENGER_TRACED_HANDLES_RESET_PARALLEL": {
+        "n": 14,
+        "ms": 3.3
+      },
+      "V8.GC_SCAVENGER_SCAVENGE_FINALIZE": {
+        "n": 14,
+        "ms": 1
+      },
+      "V8.GC_SCAVENGER_SCAVENGE_RESTORE_AND_QUARANTINE_PINNED": {
+        "n": 14,
+        "ms": 0.2
+      },
+      "V8.GC_SCAVENGER_FREE_REMEMBERED_SET": {
+        "n": 14,
+        "ms": 1.4
+      },
+      "V8.GC_SCAVENGER_SWEEP_ARRAY_BUFFERS": {
+        "n": 13,
+        "ms": 0.2
+      },
+      "V8.GC_SCAVENGER_RESIZE_NEW_SPACE": {
+        "n": 14,
+        "ms": 0
+      },
+      "V8.GC_HEAP_EPILOGUE_SAFEPOINT": {
+        "n": 14,
+        "ms": 0.1
+      },
+      "V8.GC_HEAP_EPILOGUE": {
+        "n": 14,
+        "ms": 0.1
+      },
+      "V8.GC_HEAP_DUMP_STATISTICS": {
+        "n": 14,
+        "ms": 0
+      },
+      "V8.GC_HEAP_EXTERNAL_EPILOGUE": {
+        "n": 14,
+        "ms": 0
+      },
+      "V8.GCDeoptMarkedAllocationSites": {
+        "n": 5,
+        "ms": 2.6
+      },
+      "V8.GC_SCAVENGER_COMPLETE_SWEEP_ARRAY_BUFFERS": {
+        "n": 2,
+        "ms": 0
+      },
+      "V8.GC_SCAVENGER_SCAVENGE_PARALLEL": {
+        "n": 12,
+        "ms": 0.6
+      }
+    },
+    "spikesWithGc": "0/1",
+    "spikes": [
+      {
+        "frame": 357,
+        "ms": 26.8,
+        "wallMs": 27.7,
+        "gcMs": 0,
+        "names": {}
+      }
+    ]
+  }
+}

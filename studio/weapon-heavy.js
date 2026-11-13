@@ -695,12 +695,22 @@ export function makeLauncherModel(ctx) {
   // chambers parallel to the barrel, circular faces front/rear — not sideways.
   const drumHinge = new THREE.Group();
   drumHinge.position.set(-0.14, -0.02, 0.12);
-  // J80: a fixed bracket reaches from the receiver's left wall to the hinge pin.
-  // The long swinging arm below stays parented to drumHinge, so the open cylinder
-  // remains visibly attached instead of hovering off the frame.
-  K.box(0.084, 0.026, 0.052, gunDark, -0.107, -0.02, 0.12, 0, 0, 0, null, 0.005);
-  K.cyl(0.016, 0.016, 0.15, gunDark, -0.14, -0.02, 0.12, null, 12);
-  K.box(0.14, 0.024, 0.038, gunMid, 0.07, 0, 0, 0, 0, 0, drumHinge, 0.004);
+  // CI-1 (J151 note 56): a revolver-style crane. The arm that swings the drum no longer runs into the drum's side to
+  // its axle (the old arm ended at the drum's centre and the fixed bracket sat 47 mm inside the drum). The crane arm
+  // runs IN FRONT of the drum's front face, from a sleeve on the hinge pin to the front spring housing, the hub the
+  // axle hangs from; the drum turns on that axle. The pin is held by two fixed knuckles: a rear lug off the
+  // receiver's left wall behind the drum and a front lug off the barrel ahead of the crane. Same pivot and swing.
+  const hingeLugs = [
+    K.box(0.07, 0.026, 0.036, gunDark, -0.107, -0.02, 0.022, 0, 0, 0, null, 0.005),   // rear lug, behind the drum
+    K.box(0.13, 0.022, 0.014, gunDark, -0.14 + 0.065 * 0.9191, -0.02 + 0.065 * 0.3939, 0.210, 0, 0, Math.atan2(0.06, 0.14), null, 0.004)   // front lug, barrel to pin
+  ];
+  for (const z of [0.022, 0.210]) hingeLugs.push(K.cyl(0.021, 0.021, z < 0.1 ? 0.036 : 0.014, gunDark, -0.14, -0.02, z, null, 14));   // fixed knuckles
+  hingeLugs.push(K.cyl(0.0125, 0.0125, 0.213, gunDark, -0.14, -0.02, 0.1105, null, 10));   // the hinge pin through all three knuckles
+  K.cyl(0.021, 0.021, 0.097, gunMid, 0, 0, 0.0315, drumHinge, 14);   // crane sleeve on the pin (turns with the drum)
+  K.box(0.12, 0.020, 0.012, gunMid, 0.06, -0.004, 0.074, 0, 0, 0, drumHinge, 0.004);   // crane arm ahead of the drum face, into the front housing (the hub)
+  // The fixed lugs, knuckles and pin, for tci1 (none inside the drum at any swing). Not enumerable: finishGun keeps every
+  // enumerable userData object out of its merge, and these merge into the gun's batches like the rest of the frame.
+  Object.defineProperty(gun.userData, 'hingeFixed', { value: hingeLugs, enumerable: false });
   const drumLatch = new THREE.Group();
   drumLatch.position.set(-0.076, 0.057, 0.043);
   K.box(0.031, 0.011, 0.064, gunDark, 0, 0, 0, 0, 0, 0, drumLatch, 0.003);
@@ -708,7 +718,7 @@ export function makeLauncherModel(ctx) {
   heads(THREE, drumLatch, gunAccent, 'slot', [{ x: 0, y: 0.0055, z: 0.014, axis: 'y', side: 1, r: 0.0035, turn: 0.4 }]);   // CF-1 (a)
   gun.add(drumLatch);
   // CF-1 (a): the hinge pin's two heads, proud of the bracket at each end.
-  pinEnds(THREE, gun, gunAccent, [{ x: -0.14, y: -0.02, z: 0.12, axis: 'z', span: 0.150, r: 0.011 }]);
+  pinEnds(THREE, gun, gunAccent, [{ x: -0.14, y: -0.02, z: 0.1105, axis: 'z', span: 0.213, r: 0.014 }]);   // CI-1: the pin's span through the new knuckles
   const drum = new THREE.Group();
   drum.position.set(0.14, 0, 0);
   K.cyl(0.018, 0.018, 0.14, gunMid, 0, 0, 0, drum, 8);
@@ -1053,6 +1063,13 @@ export function makeFlamerModel(ctx) {
   tankEnamel.color.setHex(0x913d32);
   tankEnamel.roughness = .63;
   tankEnamel.metalness = .13;
+  // CI-1 (J151 note 52: "The tank needs to be able to take camo"): the two tank shells take the gun's coat; the
+  // valves, gauge, straps, brass and hoses keep their own finish.
+  tankEnamel.userData.weaponFinishRole = 'tank';
+  // CI-1 (J151 note 50): tritium. The dial's strokes and the needle are self-lit green paint: pale green by day, a
+  // green glow in the dark (an emissive the bloom picks up at night; daylight washes it out like the real thing).
+  const tritium = new THREE.MeshStandardMaterial({ color: 0xb8e6b0, emissive: 0x3dff6e, emissiveIntensity: .85, roughness: .5, metalness: 0 });
+  tritium.name = 'flamer gauge tritium';
   const shroudSteel = gunMid.clone();
   shroudSteel.name = 'flamer satin shroud';
   shroudSteel.color.setHex(0x626b69);
@@ -1163,14 +1180,26 @@ export function makeFlamerModel(ctx) {
     const major = i % 2 === 0;
     const inner = major ? .0155 : .018;
     rod(THREE, K, [inner * Math.sin(a), .044 + inner * Math.cos(a), -.1835],
-      [.020 * Math.sin(a), .044 + .020 * Math.cos(a), -.1835], major ? .0008 : .0005, gunDark);
+      [.020 * Math.sin(a), .044 + .020 * Math.cos(a), -.1835], major ? .0009 : .0006, tritium);   // CI-1 (note 50): tritium strokes
   }
   const needle = K.group(0, 0.044, -0.184);
-  rod(THREE, K, [0,0,0], [0,0.015,0], 0.0013, tankEnamel, needle);
+  rod(THREE, K, [0,0,0], [0,0.015,0], 0.0013, tritium, needle);   // CI-1 (note 50): a tritium needle
   K.cyl(0.0024, 0.0024, 0.002, gunDark, 0, 0, -0.001, needle, 10);
   needle.rotation.z = 3 * Math.PI / 4;
   needle.name = 'fuel-gauge-needle';
   gun.userData.fuelNeedle = needle;
+  // CI-1 (J151 note 50: "The flamethrower gauge needs to show how much fuel is left in the tank"): the needle reads the
+  // tank. Seen from behind (the shooter's side) it sweeps from FULL at the lower right (rotation.z +3PI/4, its old rest)
+  // to EMPTY at the lower left (-3PI/4) across the twelve-o'clock stroke; index.html calls this every frame the flamer
+  // is in hand with fuel left / the tank's size. It eases so a refill sweeps the needle up instead of snapping.
+  gun.userData.gaugeFull = 3 * Math.PI / 4;
+  gun.userData.gaugeEmpty = -3 * Math.PI / 4;
+  gun.userData.setFuelGauge = (fraction, dt = 1) => {
+    const f = Math.max(0, Math.min(1, Number.isFinite(fraction) ? fraction : 1));
+    const want = gun.userData.gaugeEmpty + (gun.userData.gaugeFull - gun.userData.gaugeEmpty) * f;
+    needle.rotation.z += (want - needle.rotation.z) * Math.min(1, Math.max(0, dt) * 8);
+    return needle.rotation.z;
+  };
   gun.userData.mag = tanks;
   gun.userData.baseMagPos = tanks.position.clone();
   gun.userData.baseMagRot = tanks.rotation.clone();
@@ -1247,6 +1276,33 @@ export function makeFlamerModel(ctx) {
   bindModelArtwork(gun, 'controls', 'igniter', igniter);
   bindModelArtwork(gun, 'controls', 'valve', valve);
   return finishGun(gun);
+}
+
+// CI-1 (J151 note 36): the running chain's blur band. A closed belt over the links' racetrack path (straights at y=+-R
+// from z=-L to L, half-circle caps round z=+-L: index.html sampleChainsawChainPath, SAW_CHAIN_L/_R), as thick and wide
+// as a link, so a chain at speed reads as a smeared steel band instead of links crawling.
+function chainsawBlurBand(T, L, R) {
+  return geometry(T, 'chainsaw-blur-band-' + L + '-' + R, (quad) => {
+    const out = 0.0068, inn = 0.0052, half = 0.0175, total = 4 * L + 2 * Math.PI * R;
+    const at = (s) => {   // position (y, z) and outward normal on the path at arc length s
+      s = ((s % total) + total) % total;
+      if (s < 2 * L) return [R, -L + s, 1, 0];
+      if ((s -= 2 * L) < Math.PI * R) { const a = s / R; return [R * Math.cos(a), L + R * Math.sin(a), Math.cos(a), Math.sin(a)]; }
+      if ((s -= Math.PI * R) < 2 * L) return [-R, L - s, -1, 0];
+      s -= 2 * L; const a = Math.PI + s / R; return [R * Math.cos(a), -L + R * Math.sin(a), Math.cos(a), Math.sin(a)];
+    };
+    const marks = [];
+    for (const [s0, len, n] of [[0, 2 * L, 6], [2 * L, Math.PI * R, 14], [2 * L + Math.PI * R, 2 * L, 6], [4 * L + Math.PI * R, Math.PI * R, 14]])
+      for (let i = 0; i < n; i++) marks.push(s0 + len * i / n);
+    for (let i = 0; i < marks.length; i++) {
+      const [ya, za, nya, nza] = at(marks[i]), [yb, zb, nyb, nzb] = at(marks[(i + 1) % marks.length]);
+      const P = (y, z, ny, nz, r, x) => [x, y + ny * r, z + nz * r];
+      quad(P(ya, za, nya, nza, out, -half), P(ya, za, nya, nza, out, half), P(yb, zb, nyb, nzb, out, half), P(yb, zb, nyb, nzb, out, -half), [0, nya, nza], [0, nya, nza], [0, nyb, nzb], [0, nyb, nzb]);
+      quad(P(ya, za, nya, nza, -inn, -half), P(yb, zb, nyb, nzb, -inn, -half), P(yb, zb, nyb, nzb, -inn, half), P(ya, za, nya, nza, -inn, half), [0, -nya, -nza], [0, -nyb, -nzb], [0, -nyb, -nzb], [0, -nya, -nza]);
+      for (const x of [-half, half])
+        quad(P(ya, za, nya, nza, -inn, x), P(ya, za, nya, nza, out, x), P(yb, zb, nyb, nzb, out, x), P(yb, zb, nyb, nzb, -inn, x), [Math.sign(x), 0, 0]);
+    }
+  });
 }
 
 const sawCoverMaps = new WeakMap();
@@ -1451,12 +1507,14 @@ export function makeChainsawModel(ctx) {
   const { THREE, gunKit, gunArc, gunBand, gripOutline, finishGun, gunBody, gunDark, gunMid, gunAccent, gunPoly, gunRubber, steelMat, hazardYellow, bladeMat, layoutChainsawChain } = ctx;
   const gun = new THREE.Group();
   const K = gunKit(gun), W = sharedDetail(ctx);
-  // Engine body (glows when the saw runs hot) under a moulded top cover with vents.
+  // Engine body under a moulded top cover with vents. CF-8 (J151 note 34, Jerry: "The chainsaw glows when the trigger
+  // is pulled"): the enamel no longer glows; the game's heat (userData.heatMat) warms only the exhaust shield, dark enough
+  // that a running saw shows nothing and an overheated one (1.2) a dull red on the muffler.
   const bodyMat = gunBody.clone();
   bodyMat.name = 'chainsaw motor enamel';
   bodyMat.color.setHex(0x985632);
   bodyMat.roughness = .69;
-  bodyMat.emissive = new THREE.Color(0xff6611);
+  bodyMat.emissive = new THREE.Color(0x000000);
   bodyMat.emissiveIntensity = 0;
   const coverMat = bodyMat.clone();
   coverMat.name = 'chainsaw moulded covers';
@@ -1512,8 +1570,19 @@ export function makeChainsawModel(ctx) {
   const ventHousing = K.box(0.05, 0.09, 0.1, gunDark, 0.14, 0.02, 0.05, 0, 0, 0, null, 0.012);
   trimPanelBack(THREE, ventHousing, 1, .1435);
   for (let i = 0; i < 3; i++) K.box(0.006, 0.05, 0.012, gunRubber, 0.166, 0.02, 0.025 + i * 0.022);
-  K.box(0.005, 0.038, 0.068, steelMat, 0.17, 0.018, 0.05, 0, 0, 0, null, 0.004);
+  const exhaustMat = steelMat.clone();
+  exhaustMat.name = 'chainsaw exhaust shield';
+  exhaustMat.emissive = new THREE.Color(0x3a0c02);
+  exhaustMat.emissiveIntensity = 0;
+  K.box(0.005, 0.038, 0.068, exhaustMat, 0.17, 0.018, 0.05, 0, 0, 0, null, 0.004);
   for (const z of [0.026, 0.074]) bolt(K, gunDark, gunAccent, 0.172, 0.032, z, 0.005);
+  // CI-1 (J151 note 35): where the exhaust leaves the muffler (its slotted outer plate, the saw's right side); index.html
+  // puffs the running engine's fumes from here. A bare point, nothing drawn.
+  const exhaustPort = new THREE.Object3D();
+  exhaustPort.name = 'chainsaw-exhaust-port';
+  exhaustPort.position.set(0.176, 0.016, 0.05);
+  gun.add(exhaustPort);
+  gun.userData.exhaustPort = exhaustPort;
   // Circular recoil-starter cover and radial breathing slots, clear of the animated pull handle.
   K.cyl(0.063, 0.063, 0.012, gunMid, 0.15, 0.047, -0.085, null, 16, 'x');
   K.cyl(0.051, 0.051, 0.010, coverMat, 0.161, 0.047, -0.085, null, 16, 'x');
@@ -1685,6 +1754,21 @@ export function makeChainsawModel(ctx) {
   chainInst.frustumCulled = false;
   chainGroup.add(chainInst);
   gun.userData.chainInst = chainInst;
+  // CI-1 (note 36): the blur band, shown only while the chain runs (index.html advanceChainsawChain sets .visible).
+  const blurFinish = steelMat.clone();
+  blurFinish.name = 'chainsaw chain blur';
+  blurFinish.color.setHex(0x5c6166);
+  blurFinish.roughness = .42;
+  blurFinish.transparent = true;
+  blurFinish.opacity = .62;
+  blurFinish.depthWrite = false;
+  const chainBlur = new THREE.Mesh(chainsawBlurBand(THREE, 0.40, 0.055), blurFinish);
+  chainBlur.name = 'chainsaw-chain-blur';
+  chainBlur.castShadow = false; chainBlur.receiveShadow = false;
+  chainBlur.renderOrder = 1;
+  chainBlur.visible = false;
+  chainGroup.add(chainBlur);
+  gun.userData.chainBlur = chainBlur;
   bar.add(chainGroup);
   gun.userData.bladeSpin = chainGroup; // kept for callers; rotation is never used for chain motion
   gun.userData.chainGroup = chainGroup;
@@ -1698,7 +1782,7 @@ export function makeChainsawModel(ctx) {
     chainInst.setMatrixAt(i, chainTeeth[i].matrix);
   }
   chainInst.instanceMatrix.needsUpdate = true;
-  gun.userData.heatMat = bodyMat;
+  gun.userData.heatMat = exhaustMat;   // CF-8: the heat shows on the muffler's shield only (see bodyMat)
   gun.userData.flash = null;
   gun.userData.flashLight = null;
   gun.userData.laser = null;
@@ -1987,6 +2071,22 @@ export function makeM240Model(ctx, folded = false) {
   const trigger = addTriggerArtwork(g, K, [[-0.098, 0.8183], [-0.1027, 0.8056], [-0.102, 0.7979], [-0.0973, 0.7913], [-0.1027, 0.7867], [-0.11, 0.7941], [-0.1133, 0.8064], [-0.11, 0.8217]], 0.011, gunAccent, { bevel: 0.002 }).parent;
   pinEnds(THREE, g, gunAccent, [{ x: 0, y: trigger.position.y - 0.002, z: trigger.position.z, axis: 'x', span: 0.071, r: 0.0026 }]);   // the trigger pin's two ends
   const barrel = K.lathe([[0, 0.2], [0.024, 0.2], [0.024, 0.24], [0.019, 0.25], [0.019, 0.72], [0, 0.72]], gunAccent, { y: 0.875, seg: 12 });
+  // CI-1 (J151 note 60, the Watchman in first person): the front sight the gunner's eye lines up through the rear leaf's
+  // aperture: a clamp round the barrel near the muzzle with its tall post, the post's top level with the aperture's centre
+  // (y 0.952), so the line is parallel to the bore. sightEye/sightFront name that line for the first-person camera.
+  const frontSight = K.group(0, 0.875, 0.655); frontSight.name = 'm240-front-sight';
+  K.cyl(0.0235, 0.0235, 0.026, gunDark, 0, 0, 0, frontSight, 14);   // the clamp band round the barrel
+  K.box(0.016, 0.044, 0.022, gunDark, 0, 0.038, 0, 0, 0, 0, frontSight, 0.003);   // its upright
+  K.box(0.0035, 0.022, 0.006, gunDark, 0, 0.066, 0.003, 0, 0, 0, frontSight, 0.0008);   // the post, its top at y 0.952 (0.875 + 0.066 + 0.011)
+  for (const sx of [-1, 1]) K.box(0.003, 0.029, 0.014, gunDark, sx * 0.0065, 0.0725, 0.003, 0, 0, 0, frontSight, 0.0008);   // the post's guard ears, standing on the upright's top (tgt20076: were 1 mm off its sides)
+  const sightEye = new THREE.Object3D(); sightEye.name = 'm240-sight-eye'; sightEye.position.set(0, 0.952, -0.20); g.add(sightEye);
+  const sightFront = new THREE.Object3D(); sightFront.name = 'm240-sight-front'; sightFront.position.set(0, 0.952, 0.658); g.add(sightFront);
+  g.userData.sightEye = sightEye; g.userData.sightFront = sightFront;
+  // The Watchman carries an ACOG on its feed cover (index.html makeM240Mesh), right in that iron line, so the first-person
+  // camera sits at the gunner's eye above and behind the optic (gunnerEye): the ACOG and the receiver low in the view,
+  // the world over them, the gun swinging onto where he looks.
+  const gunnerEye = new THREE.Object3D(); gunnerEye.name = 'm240-gunner-eye'; gunnerEye.position.set(0, 1.10, -0.34); g.add(gunnerEye);
+  g.userData.gunnerEye = gunnerEye;
   painted.push(part(THREE, ventTube(THREE, 0.028, 0.003, 0.24, 8, 7, 0.52, 0.56, 6), gunBody, g, 0, 0.875, 0.227));   // GB-189: 10-point holes (were 16)
   K.rail(0.205, 0.039, 0.875, 0.355, null, 0.026, 1); // right handguard rail for standard PEQ-16
   K.box(0.014, 0.014, 0.085, gunDark, 0.057, 0.875, 0.42, 0, 0, 0, null, 0.002); // PEQ mount shelf

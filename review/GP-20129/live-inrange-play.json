@@ -1,0 +1,35 @@
+{
+  "at": "2026-11-13T01:42:00.457Z",
+  "actions": [
+    {
+      "first": true,
+      "kind": "bullet",
+      "state": {
+        "hits": 0,
+        "damage": 0,
+        "byKind": {
+          "knife": 0,
+          "machete": 0,
+          "katana": 0,
+          "chainsaw": 0,
+          "scorch": 0,
+          "bullet": 0
+        },
+        "markCount": 0,
+        "tiltX": 0,
+        "tiltZ": 0,
+        "twistY": 0,
+        "tiltRad": 0,
+        "angularSpeed": 0
+      },
+      "name": "live-inrange-eye-bullet.png"
+    }
+  ],
+  "idle": {
+    "frames": 1142,
+    "median": 16.69999999999709,
+    "p95": 16.900000000001455,
+    "over50": 0
+  },
+  "failure": "Error: real input missed dummy: bullet first=true\n    at file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/GP-20129/play.mjs:24:32"
+}

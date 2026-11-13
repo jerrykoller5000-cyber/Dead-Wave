@@ -1,0 +1,1 @@
+First matched-runtime attempt: AssertionError native FPS samples. Review fixture retained TT.flightHold(true)/inspection held clock from the surface screenshot script; zero FPS samples are not a production regression. Corrected only the review harness to normal game clock; native FPS sample threshold and comparisons unchanged.

@@ -1,0 +1,65 @@
+GRANT claude10 CJ-1: starting one game-test command
+check-players: 316 player.position reads, all in the allowed places
+           FAIL no coplanar overlapping faces left to the depth buffer (z-fighting): 24 pairs, 467.04 m², each below
+           FAIL z-fight: (unnamed ) × training-no-build-paint (depth, 4210682 cm², 0.0 mm apart, offsets [[-1,-1],[-1,-1]], at -44.00,0.00,-12.00)
+           FAIL z-fight: training-no-build-paint × (unnamed ) (depth, 142900 cm², 0.0 mm apart, offsets [[-1,-1],[-1,-1]], at -39.97,0.00,24.03)
+           FAIL z-fight: (unnamed ) × (unnamed ) (depth, 142900 cm², 0.0 mm apart, offsets [[-1,-1],[-1,-1]], at -44.00,0.00,-12.00)
+           FAIL z-fight: (unnamed ) × (unnamed ) (depth, 67600 cm², 0.0 mm apart, offsets [[-1,-1],[-1,-1]], at -44.00,0.00,28.00)
+           FAIL z-fight: training-gate-frame × training-gate-frame (depth, 30996 cm², 0.3 mm apart, offsets [[0,0],[0,0]], at -23.95,7.55,27.34)
+           FAIL z-fight: training-cutaway-east × training-cutaway-east (depth, 29510 cm², 0.0 mm apart, offsets [[0,0],[0,0]], at -8.00,6.00,-9.50)
+           FAIL z-fight: training-cutaway-south × training-cutaway-south (depth, 17280 cm², 0.3 mm apart, offsets [[0,0],[0,0]], at -42.87,2.59,-11.81)
+           FAIL z-fight: training-cutaway-east × training-cutaway-east (depth, 8464 cm², 0.0 mm apart, offsets [[0,0],[0,0]], at -8.00,6.00,-6.50)
+           FAIL z-fight: training-gate-leaf--1 × training-gate-leaf--1 (depth, 6930 cm², 0.3 mm apart, offsets [[0,0],[0,0]], at -26.16,5.36,27.61)
+           FAIL z-fight: training-firing-bench × training-cutaway-east (depth, 4965 cm², 0.0 mm apart, offsets [[0,0],[0,0]], at -8.00,0.08,0.18)
+           FAIL z-fight: training-cutaway-north × training-build-floor (depth, 1980 cm², 0.0 mm apart, offsets [[0,0],[0,0]], at -29.30,-0.00,27.97)
+           FAIL z-fight: (unnamed ) × training-cutaway-east (depth, 1260 cm², 0.4 mm apart, offsets [[0,0],[0,0]], at -8.00,1.61,-6.10)
+           FAIL z-fight: training-cutaway-east × training-cutaway-east (depth, 972 cm², 0.0 mm apart, offsets [[0,0],[0,0]], at -8.00,6.00,-6.50)
+           FAIL z-fight: training-cutaway-south × (unnamed ) (depth, 962 cm², 0.3 mm apart, offsets [[0,0],[0,0]], at -38.50,1.06,-10.85)
+           FAIL z-fight: armory-wall-surround<training-armory × training-armory (depth, 864 cm², 0.0 mm apart, offsets [[0,0],[0,0]], at 8.00,3.94,-4.49)
+           FAIL z-fight: training-firing-bench × training-cutaway-east (depth, 536 cm², 0.0 mm apart, offsets [[0,0],[0,0]], at -8.00,0.79,0.18)
+           FAIL z-fight: training-firing-bench × training-cutaway-east (depth, 448 cm², 0.0 mm apart, offsets [[0,0],[0,0]], at -8.00,0.86,0.18)
+           FAIL z-fight: training-cutaway-east × training-range-console (depth, 440 cm², 0.0 mm apart, offsets [[0,0],[0,0]], at -8.00,6.00,-6.50)
+           FAIL z-fight: range-drill-monitor × range-drill-monitor (depth, 350 cm², 0.0 mm apart, offsets [[0,0],[0,0]], at 1.77,4.04,0.66)
+           FAIL z-fight: training-cutaway-east × training-cutaway-east (depth, 158 cm², 0.2 mm apart, offsets [[0,0],[0,0]], at -7.70,1.34,-9.44)
+           FAIL z-fight: training-firing-bench × training-cutaway-east (depth, 153 cm², 0.0 mm apart, offsets [[0,0],[0,0]], at -8.00,0.86,0.16)
+           FAIL z-fight: training-cutaway-east × training-cutaway-south (depth, 45 cm², 0.0 mm apart, offsets [[0,0],[0,0]], at -8.00,6.00,-9.50)
+           FAIL z-fight: training-cutaway-east × training-cutaway-north (depth, 45 cm², 0.0 mm apart, offsets [[0,0],[0,0]], at -8.00,6.00,30.00)
+           FAIL z-fight: training-firing-bench × training-cutaway-east (depth, 4 cm², 0.0 mm apart, offsets [[0,0],[0,0]], at -8.00,0.87,0.18)
+           FAIL no coplanar blended layers in a camera-dependent order: 1 pairs, each below
+           FAIL blend order: (unnamed ) × (unnamed ) (blend order, 43200 cm², 0.5 mm apart, offsets [[-2,-2],[-2,-2]], at -8.00,0.00,-12.00)
+FAIL  t337     4 pass  27 fail  65.5s
+           recovering browser after t337: 27 fail
+
+1 checks: 4 pass, 27 fail
+
+by owner:
+  unassigned
+    t337   27 fail  FAIL no coplanar overlapping faces left to the depth buffer (z-fighting): 24 pairs, 467.04 m², e
+           FAIL no coplanar overlapping faces left to the depth buffer (z-fighting): 24 pairs, 467.04 m², each below
+           FAIL z-fight: (unnamed ) × training-no-build-paint (depth, 4210682 cm², 0.0 mm apart, offsets [[-1,-1],[-1,-1]], at -44.00,0.00,-12.00)
+           FAIL z-fight: training-no-build-paint × (unnamed ) (depth, 142900 cm², 0.0 mm apart, offsets [[-1,-1],[-1,-1]], at -39.97,0.00,24.03)
+           FAIL z-fight: (unnamed ) × (unnamed ) (depth, 142900 cm², 0.0 mm apart, offsets [[-1,-1],[-1,-1]], at -44.00,0.00,-12.00)
+           FAIL z-fight: (unnamed ) × (unnamed ) (depth, 67600 cm², 0.0 mm apart, offsets [[-1,-1],[-1,-1]], at -44.00,0.00,28.00)
+           FAIL z-fight: training-gate-frame × training-gate-frame (depth, 30996 cm², 0.3 mm apart, offsets [[0,0],[0,0]], at -23.95,7.55,27.34)
+           FAIL z-fight: training-cutaway-east × training-cutaway-east (depth, 29510 cm², 0.0 mm apart, offsets [[0,0],[0,0]], at -8.00,6.00,-9.50)
+           FAIL z-fight: training-cutaway-south × training-cutaway-south (depth, 17280 cm², 0.3 mm apart, offsets [[0,0],[0,0]], at -42.87,2.59,-11.81)
+           FAIL z-fight: training-cutaway-east × training-cutaway-east (depth, 8464 cm², 0.0 mm apart, offsets [[0,0],[0,0]], at -8.00,6.00,-6.50)
+           FAIL z-fight: training-gate-leaf--1 × training-gate-leaf--1 (depth, 6930 cm², 0.3 mm apart, offsets [[0,0],[0,0]], at -26.16,5.36,27.61)
+           FAIL z-fight: training-firing-bench × training-cutaway-east (depth, 4965 cm², 0.0 mm apart, offsets [[0,0],[0,0]], at -8.00,0.08,0.18)
+           FAIL z-fight: training-cutaway-north × training-build-floor (depth, 1980 cm², 0.0 mm apart, offsets [[0,0],[0,0]], at -29.30,-0.00,27.97)
+           FAIL z-fight: (unnamed ) × training-cutaway-east (depth, 1260 cm², 0.4 mm apart, offsets [[0,0],[0,0]], at -8.00,1.61,-6.10)
+           FAIL z-fight: training-cutaway-east × training-cutaway-east (depth, 972 cm², 0.0 mm apart, offsets [[0,0],[0,0]], at -8.00,6.00,-6.50)
+           FAIL z-fight: training-cutaway-south × (unnamed ) (depth, 962 cm², 0.3 mm apart, offsets [[0,0],[0,0]], at -38.50,1.06,-10.85)
+           FAIL z-fight: armory-wall-surround<training-armory × training-armory (depth, 864 cm², 0.0 mm apart, offsets [[0,0],[0,0]], at 8.00,3.94,-4.49)
+           FAIL z-fight: training-firing-bench × training-cutaway-east (depth, 536 cm², 0.0 mm apart, offsets [[0,0],[0,0]], at -8.00,0.79,0.18)
+           FAIL z-fight: training-firing-bench × training-cutaway-east (depth, 448 cm², 0.0 mm apart, offsets [[0,0],[0,0]], at -8.00,0.86,0.18)
+           FAIL z-fight: training-cutaway-east × training-range-console (depth, 440 cm², 0.0 mm apart, offsets [[0,0],[0,0]], at -8.00,6.00,-6.50)
+           FAIL z-fight: range-drill-monitor × range-drill-monitor (depth, 350 cm², 0.0 mm apart, offsets [[0,0],[0,0]], at 1.77,4.04,0.66)
+           FAIL z-fight: training-cutaway-east × training-cutaway-east (depth, 158 cm², 0.2 mm apart, offsets [[0,0],[0,0]], at -7.70,1.34,-9.44)
+           FAIL z-fight: training-firing-bench × training-cutaway-east (depth, 153 cm², 0.0 mm apart, offsets [[0,0],[0,0]], at -8.00,0.86,0.16)
+           FAIL z-fight: training-cutaway-east × training-cutaway-south (depth, 45 cm², 0.0 mm apart, offsets [[0,0],[0,0]], at -8.00,6.00,-9.50)
+           FAIL z-fight: training-cutaway-east × training-cutaway-north (depth, 45 cm², 0.0 mm apart, offsets [[0,0],[0,0]], at -8.00,6.00,30.00)
+           FAIL z-fight: training-firing-bench × training-cutaway-east (depth, 4 cm², 0.0 mm apart, offsets [[0,0],[0,0]], at -8.00,0.87,0.18)
+           FAIL no coplanar blended layers in a camera-dependent order: 1 pairs, each below
+           FAIL blend order: (unnamed ) × (unnamed ) (blend order, 43200 cm², 0.5 mm apart, offsets [[-2,-2],[-2,-2]], at -8.00,0.00,-12.00)
+fatal: not a git repository (or any of the parent directories): .git

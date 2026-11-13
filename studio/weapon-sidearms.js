@@ -3,6 +3,7 @@
 // Millimetre-scale knurl teeth do not need the rounded box helper's subdivisions.
 // Same centre line as gripOutline. u runs down the grip, v+ is the front strap.
 import { weaponDetail } from './weapon-detail.js';
+import { pistolChamberGeometry, pistolSlideShellGeometry } from './weapon-pistol-action.js';
 import { gunDetail } from './gun-detail.js';
 import { waspGripTrimGeometry } from './weapon-wasp-trim.js';
 import { clipArtworkProfile, clipArtworkUnderside, fitCollarFaces, profileEdgeSplits as frameEdgeSplits, splitArtworkRows, trimPanelBack } from './weapon-longarms.js';
@@ -486,7 +487,11 @@ export function makePistolModel(ctx) {
   // port and the rear sight stay where they were, so the GB-145 rack grab and the hand anchors are unchanged.
   // GB-172: a lower, narrower slide. The front face stays at local z 0.26 so it still meets the crown.
   // The lower edge meets the top of the separate frame artwork in the resting pose.
-  K.slab([[-0.14, -0.044], [0.252, -0.044], [0.26, -0.034], [0.26, 0.012], [0.254, 0.020], [0.242, 0.024], [-0.126, 0.024], [-0.134, 0.018], [-0.14, 0.010]], 0.046, slideSteel, { bevel: 0.006, segs: 3, parent: slide });
+  // J151: a real hollow slide with an open underside, bored muzzle and open
+  // top/right ejection port. The resting sight, grab and muzzle datums stay put.
+  const slideShell = new THREE.Mesh(pistolSlideShellGeometry(THREE), slideSteel);
+  slideShell.name = 'pistol slide shell';
+  slideShell.castShadow = slideShell.receiveShadow = true; slide.add(slideShell);
   const plateOutline = [[-.015, .008], [.015, .008], [.019, .003], [.019, -.023],
     [.014, -.030], [-.014, -.030], [-.019, -.023], [-.019, .003]];
   K.slab(plateOutline, .002, rearPlate, {ry:Math.PI / 2, z:-.141, bevel:.0005, parent:slide});
@@ -515,13 +520,8 @@ export function makePistolModel(ctx) {
   const markBottom = 0.034, markTop = 0.038, ink = 0.0002;
   K.slab([[markZ(markBottom) - ink, markBottom], [markZ(markBottom), markBottom],
     [markZ(markTop), markTop], [markZ(markTop) - ink, markTop]], 0.004, sightDotMat, {parent:slide, bevel:0});
-  K.slab([[-.011, .002], [.05, .002], [.05, .016], [.043, .020], [-.011, .020]], .0014, gunRubber, { x: .0233, bevel: .001, parent: slide });
-  K.slab([[-.007, .006], [.044, .006], [.047, .010], [.042, .016], [-.007, .016]],
-    .0006, bareSteel, {x:.0243, bevel:.0002, parent:slide});
-  K.box(.002, .003, .055, gunMid, .0242, .004, .019, 0, 0, 0, slide);
-  K.box(0.0021, 0.006, 0.039, gunDark, 0.02405, 0.004, -0.0305, 0, 0, 0, slide);
-  for (const sx of [-1, 1]) K.box(0.003, 0.001, 0.054, gunDark, sx * 0.0145, 0.0245, 0.022, 0, 0, 0, slide);   // GB-180: the ejection port's edges
-  K.box(0.026, 0.001, 0.003, gunDark, 0, 0.0245, -0.006, 0, 0, 0, slide);
+  // The ejection opening is cut through the shell; no dark pad or metal decal
+  // bridges it. Its solid rear lip carries the extractor below.
   // Barrel hood lives on the frame (below), not the slide — otherwise reload rack
   // peels a gunAccent chunk off the muzzle and reads as the barrel detaching.
   // Frame: the dust cover with an accessory rail, the trigger guard, trigger, controls.
@@ -613,23 +613,25 @@ export function makePistolModel(ctx) {
   gun.userData.baseSlidePos = slide.position.clone();
   gun.userData.baseMagPos = mag.position.clone();
   gun.userData.baseMagRot = mag.rotation.clone();
-  // Barrel + compensator locked to the frame group (receiver). Slide is a sibling
-  // that racks over them on reload. Barrel is lengthened rearward into the dust
-  // cover so a racked slide never leaves the muzzle floating off the gun body
-  // (see kickPistolRecoil / slideKick). Reload slide travel is 0.13 — barrel must
-  // stay continuous through that full rack (no floating stub in the ejection window).
+  // The lower rails and recoil guide stay on the frame. The barrel and chamber
+  // form one independently named action node; the motion owner supplies its tilt.
   const frame = K.group(0, 0, 0);
-  // The continuous polymer shell above already draws the fixed lower outline.
-  K.box(0.034, 0.014, 0.18, gunDark, 0, 0.028, 0.08, 0, 0, 0, frame, 0.004);
-  K.box(0.022, 0.014, 0.06, gunAccent, 0.0, 0.042, 0.09, 0, 0, 0, frame, 0.004);
-  // GB-180: the barrel hood shows in the ejection port, flush with the slide's top, sitting on the barrel.
-  const barrelPanel = K.box(0.026, 0.014, 0.05, bareSteel, 0, 0.068, 0.072, 0, 0, 0, frame, 0.003);
-  fitPistolTopPanel(THREE, barrelPanel, slide.position.y + .024);
-  // GB-154: the barrel runs to its crown 1.5 mm proud of the slide's new front face; the compensator that stood out
-  // in front of the short slide is gone (the slide is the front of the gun now, like a real pistol).
-  const barrel = K.lathe([[0, -0.02], [0.0145, -0.02], [0.0145, 0.311], [0, 0.311]], gunAccent, { y: 0.05, seg: 12, parent: frame });
-  const bore = K.disc(0.0065, gunRubber, 0, 0.05, 0.3115, 0, frame, 10);   // the bore at the crown
-  K.cyl(0.009, 0.009, 0.003, bareSteel, 0, 0.017, 0.309, frame, 16);  // recoil spring guide beneath the barrel
+  for (const sx of [-1, 1]) {
+    K.box(.003, .029, .18, gunDark, sx*.019, .0205, .08, 0, 0, 0, frame, .0005).name = 'pistol frame rail';
+  }
+  K.box(.020, .004, .032, gunAccent, 0, .008, .060, 0, 0, 0, frame, .0005).name = 'pistol locking block';
+  const barrelGroup = K.group(0, .05, .075);
+  barrelGroup.name = 'pistol-barrel';
+  const barrelPanel = new THREE.Mesh(pistolChamberGeometry(THREE), bareSteel);
+  barrelPanel.name = 'pistol chamber and hood';
+  barrelPanel.castShadow = barrelPanel.receiveShadow = true; frame.add(barrelPanel);
+  const barrel = K.lathe([[.0065,.097],[.0145,.097],[.0145,.307],
+    [.0136,.3082],[.0065,.3082],[.0065,.097]], gunAccent, {y:.05, seg:24, parent:frame});
+  barrel.name = 'pistol barrel tube';
+  const bore = K.disc(.0065, gunRubber, 0, .05, .0471, 0, frame, 24);
+  bore.name = 'pistol bore depth';
+  K.cyl(.0035,.0035,.276,bareSteel,0,.017,.171,frame,16).name = 'pistol recoil guide rod';
+  K.cyl(.009,.009,.003,bareSteel,0,.017,.309,frame,24).name = 'pistol recoil guide cap';
   // D-123: the weapon light is the kiosk's combined laser/light unit, already mounted by attachLaserLight below.
   // The Glock frame's own accessory rail stays in place for that purchase.
   gun.userData.frame = frame;
@@ -653,8 +655,15 @@ export function makePistolModel(ctx) {
   K.slab([[0.028, -0.026], [0.046, -0.026], [0.044, -0.038], [0.026, -0.036]], 0.026, gunPoly, { bevel: 0.002 });
   K.slab([[0.018, -0.020], [0.040, -0.022], [0.048, -0.034], [0.040, -0.048], [0.022, -0.044], [0.012, -0.030]], 0.036, gunPoly, { bevel: 0.006, segs: 3 });   // GB-316 (J23): web from guard into the front strap
   // Muzzle crown: recessed ring at the barrel tip (sits on the barrel; bore disc stays).
-  const crown = K.cyl(0.0136, 0.0122, 0.0032, bareSteel, 0, 0.05, 0.3098, frame, 20);
-  const innerCrown = K.cyl(0.0108, 0.0108, 0.0015, gunDark, 0, 0.05, 0.3108, frame, 14);
+  const crown = K.lathe([[.0065,.3082],[.0136,.3082],[.0122,.3114],
+    [.0108,.3114],[.0108,.3105],[.0065,.3105],[.0065,.3082]], bareSteel, {y:.05,seg:24,parent:frame});
+  crown.name = 'pistol muzzle crown';
+  const innerCrown = K.lathe([[.0065,.3105],[.0108,.3105],[.0108,.3114],
+    [.0065,.3114],[.0065,.3105]], gunDark, {y:.05,seg:24,parent:frame});
+  innerCrown.name = 'pistol crown recess';
+  for(const part of [barrel,barrelPanel,crown,innerCrown,bore]) {
+    part.position.sub(barrelGroup.position); barrelGroup.add(part);
+  }
   // Slide-stop lever (left): a recognisable paddle over the existing stop post, sunk into the frame face.
   const slideStop = K.slab([[-0.014, -0.003], [0.020, -0.003], [0.022, 0.003], [0.016, 0.007], [-0.012, 0.005]], 0.0020, rearPlate, { x: -0.0228, y: 0.004, z: 0.055, bevel: 0.0007 });
   D.screw(gun, -0.0226, 0.004, 0.040, { axis: 'x', side: -1, r: 0.0022, head: 0.0011, kind: 'slot' });
@@ -664,10 +673,10 @@ export function makePistolModel(ctx) {
   }
   for (const side of [-1,1]) W.fasteners(takedown,ctx.gunMetal,'pin',[{x:side*.0236,axis:'x',side,r:.0013}]);
   // Extractor claw in the port's right wall (attached to the slide).
-  const extractor = K.slab([[0.000, -0.003], [0.011, -0.001], [0.013, 0.003], [0.001, 0.005]], 0.00035, gunMid, { x: 0.024175, y: 0.010, z: -0.004, parent: slide, bevel: 0.0001 });
+  const extractor = K.slab([[-.008,-.003],[.004,-.001],[.006,.003],[-.007,.005]], .00035, gunMid, {x:.023175,y:.010,z:-.004,parent:slide,bevel:.0001});
   // Panel lines on the slide top and the dust-cover seam (yardstick: no bare >3 cm face).
   // The longitudinal graphic ends on either side of the transverse dark band.
-  for (const [start, end] of [[-0.05, -0.0075], [-0.0045, 0.15]]) {
+  for (const [start, end] of [[-0.05, -0.0118], [0.0508, 0.15]]) {
     D.groove(slide, { x: 0, y: 0.024, z: (start + end) / 2, axis: 'y', side: 1, along: 'z', len: end - start, w: 0.0007 });
   }
   D.groove(gun, { x: 0, y: 0.012, z: 0.14, axis: 'y', side: 1, along: 'z', len: 0.14, w: 0.0007 });
@@ -689,7 +698,8 @@ export function makePistolModel(ctx) {
   gunEffects(gun, new THREE.Vector3(0, 0.05, 0.32), 0.045, 2.5, 6, 0.005);
   gun.userData.laser.position.set(0, 0.05, 3.3);
   gun.userData.laserBaseZ = 0.3;
-  gun.userData.barrelAssembly = null;
+  gun.userData.barrelAssembly = barrelGroup;
+  gun.userData.baseBarrelRotX = 0;
   gunSuppressor(gun, K, 'pistol');   // CL-95
   attachLaserLight(gun, 'pistol', ctx);
   // The armory paints the exterior coating. Bare metal, sight dots, controls,
@@ -716,7 +726,7 @@ export function makePistolModel(ctx) {
   bindModelArtwork(gun, 'controls', 'slideStop', groupArtwork(THREE, slideStop));
   bindModelArtwork(gun, 'controls', 'takedown', takedown);
   bindModelArtwork(gun, 'controls', 'extractor', extractor);
-  bindModelArtwork(gun, 'heatParts', 'barrel', groupArtwork(THREE, barrel, barrelPanel, crown, innerCrown, bore));
+  bindModelArtwork(gun, 'heatParts', 'barrel', barrelGroup);
   bindModelArtwork(gun, 'heatParts', 'suppressor', can);
   return finishGun(gun);
 }
@@ -734,24 +744,61 @@ export function makePistolModel(ctx) {
 // grip's palm (VM_SOCKETS.revolver) and every part the reloads drive are where they were.
 const revolverRim = {rearScale:.88, frontScale:.86, rearBevel:.005, frontBevel:.007};
 
-function revolverCylinder(T, parent, mat, R, z0, z1, depth) {
-  const p = [], uv = [], ix = [], n = 72;
-  const rings = [[z0, R * revolverRim.rearScale, 0], [z0 + revolverRim.rearBevel, R, 0],
-    [z0 + .013, R, 1], [z1 - .016, R, 1], [z1 - revolverRim.frontBevel, R, 0], [z1, R * revolverRim.frontScale, 0]];
-  for (const [z, r, fade] of rings) for (let j = 0; j <= n; j++) {
-    const a = j / n * Math.PI * 2, radius = r - depth * fade * Math.max(0, Math.cos(6 * a)) ** 4;
-    p.push(Math.cos(a) * radius, Math.sin(a) * radius, z); uv.push(j / n, (z - z0) / (z1 - z0));
+const revolverCylinderSkins = new WeakMap();
+function revolverCylinder(T, parent, mat, R, z0, z1, depth, circle) {
+  let cache=revolverCylinderSkins.get(T);
+  if(!cache){cache=new Map();revolverCylinderSkins.set(T,cache);}
+  const key=[R,z0,z1,depth,circle].join('|');
+  let geometry=cache.get(key);
+  if(!geometry){
+    const p=[],uv=[],ix=[],n=72;
+    const rings=[[z0,R*revolverRim.rearScale,0],[z0+revolverRim.rearBevel,R,0],
+      [z0+.013,R,1],[z1-.016,R,1],[z1-revolverRim.frontBevel,R,0],[z1,R*revolverRim.frontScale,0]];
+    for(const [z,r,fade]of rings)for(let j=0;j<=n;j++){
+      const angle=j/n*Math.PI*2,radius=r-depth*fade*Math.max(0,Math.cos(6*angle))**4;
+      p.push(Math.cos(angle)*radius,Math.sin(angle)*radius,z);uv.push(j/n,(z-z0)/(z1-z0));
+    }
+    for(let row=0;row+1<rings.length;row++)for(let j=0;j<n;j++){
+      const a=row*(n+1)+j,b=a+n+1;ix.push(a,a+1,b,a+1,b+1,b);
+    }
+    const bores=Array.from({length:6},(_,i)=>{
+      const angle=Math.PI/6+i*Math.PI/3;
+      return {x:Math.cos(angle)*circle,y:Math.sin(angle)*circle,profile:[[z0,.0096],[z0+.002,.0085],[z1-.002,.0085],[z1,.0092]]};
+    });
+    bores.push({x:0,y:0,profile:[[z0,.0048],[z1,.0048]]});
+    const holes=[[],[]],segments=24;
+    for(const bore of bores){
+      const start=p.length/3;
+      for(const [z,r]of bore.profile)for(let j=0;j<=segments;j++){
+        const angle=j/segments*Math.PI*2;
+        p.push(bore.x+r*Math.cos(angle),bore.y+r*Math.sin(angle),z);uv.push(j/segments,(z-z0)/(z1-z0));
+      }
+      for(let row=0;row+1<bore.profile.length;row++)for(let j=0;j<segments;j++){
+        const a=start+row*(segments+1)+j,b=a+segments+1;ix.push(a,b,a+1,a+1,b,b+1);
+      }
+      for(const [end,row]of [[0,0],[1,bore.profile.length-1]]){
+        const radius=bore.profile[row][1];
+        holes[end].push(Array.from({length:segments},(_,j)=>{
+          const angle=j/segments*Math.PI*2;return [bore.x+radius*Math.cos(angle),bore.y+radius*Math.sin(angle)];
+        }));
+      }
+    }
+    for(const [end,row]of [[0,0],[1,rings.length-1]]){
+      const z=rings[row][0],radius=rings[row][1],outer=Array.from({length:n},(_,j)=>[radius*Math.cos(j/n*Math.PI*2),radius*Math.sin(j/n*Math.PI*2)]);
+      const all=[...outer,...holes[end].flat()],offset=p.length/3;
+      for(const [x,y]of all){p.push(x,y,z);uv.push(.5+x/(2*R),.5+y/(2*R));}
+      const faces=T.ShapeUtils.triangulateShape(outer.map(q=>new T.Vector2(...q)),holes[end].map(h=>h.map(q=>new T.Vector2(...q))));
+      for(const face of faces){
+        const [a,b,c]=face.map(i=>all[i]),normal=(b[0]-a[0])*(c[1]-a[1])-(b[1]-a[1])*(c[0]-a[0]);
+        ix.push(...(normal*(end?1:-1)>0?face:[face[0],face[2],face[1]]).map(i=>offset+i));
+      }
+    }
+    geometry=new T.BufferGeometry();geometry.setAttribute('position',new T.Float32BufferAttribute(p,3));
+    geometry.setAttribute('uv',new T.Float32BufferAttribute(uv,2));geometry.setIndex(ix);geometry.computeVertexNormals();
+    geometry.computeBoundingSphere();geometry.userData.shared=true;cache.set(key,geometry);
   }
-  for (let row = 0; row + 1 < rings.length; row++) for (let j = 0; j < n; j++) {
-    const a = row * (n + 1) + j, b = a + n + 1; ix.push(a, a + 1, b, a + 1, b + 1, b);
-  }
-  for (const row of [0, rings.length - 1]) {
-    const center = p.length / 3; p.push(0, 0, rings[row][0]); uv.push(.5, .5);
-    for (let j = 0; j < n; j++) { const a = row * (n + 1) + j; ix.push(center, ...(row === 0 ? [a + 1, a] : [a, a + 1])); }
-  }
-  const geo = new T.BufferGeometry(); geo.setAttribute('position', new T.Float32BufferAttribute(p, 3)); geo.setAttribute('uv', new T.Float32BufferAttribute(uv, 2)); geo.setIndex(ix); geo.computeVertexNormals();
-  const mesh = new T.Mesh(geo, mat); mesh.castShadow = mesh.receiveShadow = true; parent.add(mesh);
-  return mesh;
+  const mesh=new T.Mesh(geometry,mat);mesh.name='revolver cylinder';
+  mesh.castShadow=mesh.receiveShadow=true;parent.add(mesh);return mesh;
 }
 
 // The grip occupies fewer UVs than the longarm furniture. Sample a finer,
@@ -777,6 +824,58 @@ function addRevolverSightMarker(T, gun) {
   dot.position.set(0, centreY, .312 + (centreY - .117) * revolverPostSlope - .00009);
   gun.add(dot);
 }
+const revolverThumbSkins = new WeakMap();
+function seatRevolverHammer(T, patch, supports) {
+  let geometry=revolverThumbSkins.get(T);
+  if(!geometry) {
+    const faces=[];
+    for(const mesh of supports) {
+      mesh.updateMatrix();
+      const p=mesh.geometry.attributes.position,ix=mesh.geometry.index,count=ix?ix.count:p.count;
+      for(let i=0;i<count;i+=3) {
+        const tri=[0,1,2].map(k=>new T.Vector3().fromBufferAttribute(p,ix?ix.getX(i+k):i+k).applyMatrix4(mesh.matrix).toArray());
+        const [a,b,c]=tri,det=(b[0]-a[0])*(c[2]-a[2])-(b[2]-a[2])*(c[0]-a[0]);
+        if(Math.abs(det)>1e-14)faces.push({tri,det});
+      }
+    }
+    const roof=(x,z)=>{
+      let height=-Infinity;
+      for(const {tri:[a,b,c],det}of faces) {
+        const u=((x-a[0])*(c[2]-a[2])-(z-a[2])*(c[0]-a[0]))/det;
+        const v=((b[0]-a[0])*(z-a[2])-(b[2]-a[2])*(x-a[0]))/det;
+        if(u>=-1e-7&&v>=-1e-7&&u+v<=1+1e-7)height=Math.max(height,a[1]+u*(b[1]-a[1])+v*(c[1]-a[1]));
+      }
+      if(!Number.isFinite(height))throw Error('Hammer serration has no supporting metal');
+      return height;
+    };
+    const xSplit=splitArtworkRows(T,patch.geometry,[-.00575,-.00325,0,.00325,.00575],0);
+    geometry=splitArtworkRows(T,xSplit,[-.038,-.030,-.020,-.010].map(z=>z-patch.position.z),2);xSplit.dispose();
+    const p=geometry.attributes.position,n=geometry.attributes.normal,normal=new T.Vector3(),epsilon=.000002;
+    for(let i=0;i<p.count;i++) {
+      const x=p.getX(i)+patch.position.x,z=p.getZ(i)+patch.position.z,height=roof(x,z);
+      const dx=(roof(x+epsilon,z)-roof(x-epsilon,z))/(2*epsilon),dz=(roof(x,z+epsilon)-roof(x,z-epsilon))/(2*epsilon);
+      p.setY(i,p.getY(i)+height-patch.position.y);
+      normal.fromBufferAttribute(n,i);normal.set(normal.x-normal.y*dx,normal.y,normal.z-normal.y*dz).normalize();
+      n.setXYZ(i,normal.x,normal.y,normal.z);
+    }
+    const cleanPosition=[],cleanNormal=[];
+    for(let i=0;i<p.count;i+=3){
+      const a=new T.Vector3().fromBufferAttribute(p,i),b=new T.Vector3().fromBufferAttribute(p,i+1),c=new T.Vector3().fromBufferAttribute(p,i+2);
+      if(b.sub(a).cross(c.sub(a)).lengthSq()<4e-30)continue;
+      for(let j=i;j<i+3;j++){
+        cleanPosition.push(p.getX(j),p.getY(j),p.getZ(j));cleanNormal.push(n.getX(j),n.getY(j),n.getZ(j));
+      }
+    }
+    geometry.dispose();geometry=new T.BufferGeometry();
+    geometry.setAttribute('position',new T.Float32BufferAttribute(cleanPosition,3));
+    geometry.setAttribute('normal',new T.Float32BufferAttribute(cleanNormal,3));
+    const uv=new Float32Array(cleanPosition.length/3*2);boxProjectUV(cleanPosition,uv);
+    geometry.setAttribute('uv',new T.BufferAttribute(uv,2));geometry.computeBoundingSphere();
+    geometry.userData.shared=true;revolverThumbSkins.set(T,geometry);
+  }
+  patch.geometry=geometry;
+}
+
 const revolverJointSkins = new WeakMap();
 function seatRevolverBridge(T, shield, bridge) {
   let skins = revolverJointSkins.get(T);
@@ -1000,7 +1099,7 @@ export function makeRevolverModel(ctx) {
   // --- Cylinder (blued): fluted between the chambers, the stop notches over them; the chambers' mouths; the ejector rod
   // with its knurled head on the cylinder's axis (it swings out with it).
   const cylinder = K.group(0, CY, CZ);
-  revolverCylinder(THREE, cylinder, blued, CR, -CH, CH, 0.0058);
+  revolverCylinder(THREE, cylinder, blued, CR, -CH, CH, 0.0058, RC);
   const liveArt = roundGeometry(THREE, 'revolver'), emptyArt = spentCaseGeometry(THREE, 'revolver');
   liveArt.computeBoundingBox();
   emptyArt.computeBoundingBox();
@@ -1030,8 +1129,7 @@ export function makeRevolverModel(ctx) {
   for (let i = 0; i < 6; i++) {
     const a = Math.PI / 6 + i * Math.PI / 3;   // a chamber at the top, on the bore (y 0.083)
     const rx = Math.cos(a) * RC, ry = Math.sin(a) * RC;
-    K.disc(0.0088, gunDark, rx, ry, -CH - 0.0005, Math.PI, cylinder, 16);
-    K.disc(0.0092, gunDark, rx, ry, CH + 0.0005, 0, cylinder, 16);
+    // The mouths are actual counterbored openings, not black discs on a solid cap.
     const round = new THREE.Group(); round.name = `chamber-round-${i}`;
     round.position.set(rx, ry, 0);
     for (const layer of chamberLayers) {
@@ -1136,11 +1234,14 @@ export function makeRevolverModel(ctx) {
   K.box(0.016, 0.022, 0.026, gunDark, 0, 0.093, -0.069, 0, 0, 0, null, 0.001);   // the slot's floor
   for (const sx of [-1, 1]) K.box(0.004, 0.024, 0.028, blued, sx * 0.0105, 0.094, -0.069, 0, 0, 0, null, 0.0008);   // its cheeks
   const hammer = K.group(0, 0.085, -0.08);
-  K.slab([[0.013, -0.028], [0.015, -0.006], [0.012, 0.007], [0.005, 0.014], [-0.006, 0.018], [-0.020, 0.0190], [-0.030, 0.0185], [-0.038, 0.014],
+  const hammerBody = K.slab([[0.013, -0.028], [0.015, -0.006], [0.012, 0.007], [0.005, 0.014], [-0.006, 0.018], [-0.020, 0.0190], [-0.030, 0.0185], [-0.038, 0.014],
     [-0.041, 0.007], [-0.036, 0.002], [-0.026, 0.003], [-0.016, 0.000], [-0.011, -0.010], [-0.008, -0.028]], 0.0135, caseCol, { bevel: 0.0035, segs: 3, parent: hammer });
   const spur = K.slab([[-.008,.016],[-.038,.015],[-.040,.008],[-.010,.010]], .0175, caseCol, { bevel: .003, segs: 2, parent: hammer });
+  hammerBody.name = 'revolver hammer body'; spur.name = 'revolver hammer spur';
   fitCollarFaces(THREE, spur, .0135 / 2);
-  W.serrations(hammer, gunDark, {x:0,y:.0164,z:-.024,axis:'y',along:'z',count:6,pitch:.0048,w:.016,depth:.0005});
+  const thumbPatch = W.serrations(hammer, gunDark, {x:0,y:0,z:-.024,axis:'y',along:'z',count:6,pitch:.0048,w:.012,depth:.0005});
+  thumbPatch.name = 'revolver hammer thumb serrations';
+  seatRevolverHammer(THREE,thumbPatch,[hammerBody,spur]);
   K.cyl(0.0019, 0.0019, 0.009, nickel, 0, 0.004, 0.019, hammer, 8, 'z');   // the firing pin
   gun.userData.hammer = hammer;
   gun.userData.baseHammerRot = hammer.rotation.clone();
@@ -1160,11 +1261,12 @@ export function makeRevolverModel(ctx) {
   // J78: keep the upper palm and trigger reach where the hands meet it, but shorten the
   // oversized lower target stock. The cylinder/frame now read as the dominant mass.
   const RK = 0.27, sh = ([z, y]) => [z + Math.min(0, y) * RK, y < -0.07 ? -0.07 + (y + 0.07) * 0.72 : y];
-  const gripWidth = .066, palmInset = .004;
+  const gripWidth = .066, palmInset = .004, lowerSlim = .004;
   const stock = K.slab([[.014, -.006], [.010, -.030], [.004, -.060], [-.002, -.090], [-.006, -.118], [-.006, -.140], [-.002, -.158], [-.006, -.172], [-.018, -.180],
     [-.045, -.183], [-.075, -.181], [-.094, -.174], [-.102, -.160], [-.100, -.135], [-.094, -.105], [-.088, -.075], [-.084, -.045], [-.084, -.015],
     [-.086, .010], [-.082, .026], [-.072, .032], [-.060, .020], [-.042, .005], [-.017, -.002]].map(sh), gripWidth, walnut, { bevel: .010, segs: 4 });
-  // Seat the painted crown under the frame while tapering into the glove's lower contact.
+  stock.name = 'revolver walnut grip';
+  // J151: the lower stock narrows on both faces; its upper seam stays on the frame.
   const stockSource = stock.geometry;
   stock.geometry = splitArtworkRows(THREE, stockSource, [-.022, .006]);
   stockSource.dispose();
@@ -1172,14 +1274,15 @@ export function makeRevolverModel(ctx) {
   const faceNormal = new THREE.Vector3();
   for (let i = 0; i < woodVertices.count; i++) {
     const x = woodVertices.getX(i), y = woodVertices.getY(i);
-    if (x <= 0 || y >= .006) continue;
-    const t = Math.max(0, (y + .022) / .028);
-    const side = Math.min(1, x / .020), inset = palmInset * (1 - t * t * (3 - 2 * t));
-    woodVertices.setX(i, x - side * inset);
+    if (Math.abs(x) < 1e-10 || y >= .006) continue;
+    const t = Math.max(0, (y + .022) / .028), sx = Math.sign(x);
+    const cut = lowerSlim + (sx > 0 ? palmInset : 0);
+    const side = Math.min(1, Math.abs(x) / .020), inset = cut * (1 - t * t * (3 - 2 * t));
+    woodVertices.setX(i, x - sx * side * inset);
     if (t > 0 || side < 1) {
       faceNormal.fromBufferAttribute(woodNormals, i);
       if (side < 1) faceNormal.x /= 1 - inset / .020;
-      faceNormal.y -= faceNormal.x * side * palmInset * 6 * t * (1 - t) / .028;
+      faceNormal.y -= faceNormal.x * sx * side * cut * 6 * t * (1 - t) / .028;
       faceNormal.normalize();
       woodNormals.setXYZ(i, faceNormal.x, faceNormal.y, faceNormal.z);
     }
@@ -1191,7 +1294,7 @@ export function makeRevolverModel(ctx) {
   const med = sh([-.058, -.031]), scr = sh([-.046, -.074]);
   for (const sx of [-1, 1]) {
     // Move the artwork together on the firing glove's side, including its inset trim.
-    const faceX = distance => sx * distance - (sx > 0 ? palmInset : 0);
+    const faceX = distance => sx * distance - (sx > 0 ? palmInset : 0) - sx * lowerSlim;
     const inset = K.slab(panel, .0012, walnutDark, { x: faceX(.0329), bevel: .0004 });
     trimSlabBack(inset, 0, faceX(gripWidth / 2) - inset.position.x, sx);
     checkeredPanel(THREE, gun, walnut, panel, faceX(.0336), .0042, .0013);

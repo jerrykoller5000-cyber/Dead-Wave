@@ -1,0 +1,426 @@
+{
+  "start": {
+    "studio/weapon-effects.js": "302f01982e0d5078f377c791b7678c01c58079be6946aff0d418e96651b1cfce",
+    "world/training-ballistics.js": "eadc9d04d5fd50ad9f6f23c0a080ea2ad58485ff62e0002f1a6b1b0da4719bdc",
+    "world/training.js": "3954998a1df7470e239cb63d884bdd854cc2fe75a6202a62f7e132120dd237da",
+    "game/viewmodel.js": "f0e5e2db60969620eb204c377dadb53c88ff7adc4291428afaed1d306bbfac22",
+    "index.html": "20cedebecce677d41502f266ab825f10bab94fff9cf7e0d5ed9772c02c026c2b"
+  },
+  "end": {
+    "studio/weapon-effects.js": "302f01982e0d5078f377c791b7678c01c58079be6946aff0d418e96651b1cfce",
+    "world/training-ballistics.js": "eadc9d04d5fd50ad9f6f23c0a080ea2ad58485ff62e0002f1a6b1b0da4719bdc",
+    "world/training.js": "3954998a1df7470e239cb63d884bdd854cc2fe75a6202a62f7e132120dd237da",
+    "game/viewmodel.js": "f0e5e2db60969620eb204c377dadb53c88ff7adc4291428afaed1d306bbfac22",
+    "index.html": "20cedebecce677d41502f266ab825f10bab94fff9cf7e0d5ed9772c02c026c2b"
+  },
+  "mode": "Same native game page, A/B/B/A original/production factories, 64 coincident confirmed-prop impacts + one .85m scorch, warmed fixed camera/noon. Steady mark rendering, not continuous construction or shot/flash load; insertion time separate.",
+  "setup": {
+    "hit": {
+      "solid": {
+        "minX": 7.337499986767769,
+        "maxX": 7.521499993920326,
+        "minY": -199.25200000208616,
+        "maxY": -199.01799999791382,
+        "minZ": -651.097000000149,
+        "maxZ": -651.0229999998511,
+        "prop": true,
+        "exactOnly": true
+      },
+      "t": 0.8333333333333339,
+      "point": {
+        "x": 7.339499986767769,
+        "y": -199.0291999980807,
+        "z": -651.0922000001372
+      },
+      "normal": {
+        "x": -1,
+        "y": 0,
+        "z": 0
+      },
+      "exact": true
+    },
+    "trialCount": 1,
+    "clippedArea": 0.016100000360608102,
+    "unclippedArea": 0.7224999999999999,
+    "camera": {
+      "x": 5.839499986767769,
+      "y": -198.82919999808072,
+      "z": -650.8422000001372,
+      "tx": 7.339499986767769,
+      "ty": -199.0291999980807,
+      "tz": -651.0922000001372,
+      "fov": 60
+    }
+  },
+  "records": [
+    {
+      "pass": 0,
+      "version": "before",
+      "setup": {
+        "impacts": 64,
+        "scorch": 1,
+        "insertMs": 0.5,
+        "camera": {
+          "position": [
+            5.839499986767769,
+            -198.82919999808072,
+            -650.8422000001372
+          ],
+          "direction": [
+            0.9779720499582136,
+            -0.1303962733277544,
+            -0.1629953416597022
+          ],
+          "fov": 60
+        },
+        "light": "noon"
+      },
+      "windows": [
+        {
+          "fps": 60.00600060059656,
+          "low": 57.471264348129,
+          "worst": 17.400000005960464,
+          "hitches": 0,
+          "frames": 60,
+          "draws": 90,
+          "triangles": 148761,
+          "impacts": 64,
+          "scorch": 1
+        },
+        {
+          "fps": 59.99999999999999,
+          "low": 59.17159761226685,
+          "worst": 16.900000005960464,
+          "hitches": 0,
+          "frames": 60,
+          "draws": 90,
+          "triangles": 148761,
+          "impacts": 64,
+          "scorch": 1
+        },
+        {
+          "fps": 59.99999999999999,
+          "low": 59.17159761226685,
+          "worst": 16.900000005960464,
+          "hitches": 0,
+          "frames": 60,
+          "draws": 90,
+          "triangles": 148761,
+          "impacts": 64,
+          "scorch": 1
+        },
+        {
+          "fps": 59.99400060029756,
+          "low": 59.17159761226685,
+          "worst": 16.900000005960464,
+          "hitches": 0,
+          "frames": 60,
+          "draws": 90,
+          "triangles": 148761,
+          "impacts": 64,
+          "scorch": 1
+        },
+        {
+          "fps": 59.99999999999999,
+          "low": 59.17159766443996,
+          "worst": 16.899999991059303,
+          "hitches": 0,
+          "frames": 60,
+          "draws": 90,
+          "triangles": 148761,
+          "impacts": 64,
+          "scorch": 1
+        },
+        {
+          "fps": 59.99999999999999,
+          "low": 59.52380948157267,
+          "worst": 16.80000001192093,
+          "hitches": 0,
+          "frames": 60,
+          "draws": 90,
+          "triangles": 148761,
+          "impacts": 64,
+          "scorch": 1
+        }
+      ],
+      "fps": 60.00000020014901
+    },
+    {
+      "pass": 1,
+      "version": "after",
+      "setup": {
+        "impacts": 64,
+        "scorch": 1,
+        "insertMs": 4.0999999940395355,
+        "camera": {
+          "position": [
+            5.839499986767769,
+            -198.82919999808072,
+            -650.8422000001372
+          ],
+          "direction": [
+            0.9779720499582136,
+            -0.1303962733277544,
+            -0.1629953416597022
+          ],
+          "fov": 60
+        },
+        "light": "noon"
+      },
+      "windows": [
+        {
+          "fps": 59.9760095958042,
+          "low": 58.4795321331668,
+          "worst": 17.100000008940697,
+          "hitches": 0,
+          "frames": 60,
+          "draws": 90,
+          "triangles": 150743,
+          "impacts": 64,
+          "scorch": 1
+        },
+        {
+          "fps": 59.99999999999999,
+          "low": 59.17159761226685,
+          "worst": 16.900000005960464,
+          "hitches": 0,
+          "frames": 60,
+          "draws": 90,
+          "triangles": 150743,
+          "impacts": 64,
+          "scorch": 1
+        },
+        {
+          "fps": 59.99999999999999,
+          "low": 59.17159761226685,
+          "worst": 16.900000005960464,
+          "hitches": 0,
+          "frames": 60,
+          "draws": 90,
+          "triangles": 150743,
+          "impacts": 64,
+          "scorch": 1
+        },
+        {
+          "fps": 60.00600059970231,
+          "low": 58.8235294117647,
+          "worst": 17,
+          "hitches": 0,
+          "frames": 60,
+          "draws": 90,
+          "triangles": 150743,
+          "impacts": 64,
+          "scorch": 1
+        },
+        {
+          "fps": 60.012002399764555,
+          "low": 59.52380948157267,
+          "worst": 16.80000001192093,
+          "hitches": 0,
+          "frames": 60,
+          "draws": 90,
+          "triangles": 150743,
+          "impacts": 64,
+          "scorch": 1
+        },
+        {
+          "fps": 39.9920015995609,
+          "low": 2.7886224204547343,
+          "worst": 358.6000000089407,
+          "hitches": 1,
+          "frames": 40,
+          "draws": 90,
+          "triangles": 150743,
+          "impacts": 64,
+          "scorch": 1
+        }
+      ],
+      "fps": 56.66433569913866
+    },
+    {
+      "pass": 2,
+      "version": "after",
+      "setup": {
+        "impacts": 64,
+        "scorch": 1,
+        "insertMs": 2.2000000029802322,
+        "camera": {
+          "position": [
+            5.839499986767769,
+            -198.82919999808072,
+            -650.8422000001372
+          ],
+          "direction": [
+            0.9779720499582136,
+            -0.1303962733277544,
+            -0.1629953416597022
+          ],
+          "fov": 60
+        },
+        "light": "noon"
+      },
+      "windows": [
+        {
+          "fps": 59.99999999999999,
+          "low": 58.47953218412662,
+          "worst": 17.099999994039536,
+          "hitches": 0,
+          "frames": 60,
+          "draws": 90,
+          "triangles": 150743,
+          "impacts": 64,
+          "scorch": 1
+        },
+        {
+          "fps": 59.99999999999999,
+          "low": 58.47953218412662,
+          "worst": 17.099999994039536,
+          "hitches": 0,
+          "frames": 60,
+          "draws": 90,
+          "triangles": 150743,
+          "impacts": 64,
+          "scorch": 1
+        },
+        {
+          "fps": 59.988002400235075,
+          "low": 57.47126439734673,
+          "worst": 17.399999991059303,
+          "hitches": 0,
+          "frames": 60,
+          "draws": 90,
+          "triangles": 150743,
+          "impacts": 64,
+          "scorch": 1
+        },
+        {
+          "fps": 59.99400059940368,
+          "low": 50.761421312117726,
+          "worst": 19.700000002980232,
+          "hitches": 0,
+          "frames": 60,
+          "draws": 90,
+          "triangles": 150743,
+          "impacts": 64,
+          "scorch": 1
+        },
+        {
+          "fps": 59.98800239934135,
+          "low": 58.8235294117647,
+          "worst": 17,
+          "hitches": 0,
+          "frames": 60,
+          "draws": 90,
+          "triangles": 150743,
+          "impacts": 64,
+          "scorch": 1
+        },
+        {
+          "fps": 59.99999999999999,
+          "low": 58.8235294117647,
+          "worst": 17,
+          "hitches": 0,
+          "frames": 60,
+          "draws": 90,
+          "triangles": 150743,
+          "impacts": 64,
+          "scorch": 1
+        }
+      ],
+      "fps": 59.99500089983002
+    },
+    {
+      "pass": 3,
+      "version": "before",
+      "setup": {
+        "impacts": 64,
+        "scorch": 1,
+        "insertMs": 0.4000000059604645,
+        "camera": {
+          "position": [
+            5.839499986767769,
+            -198.82919999808072,
+            -650.8422000001372
+          ],
+          "direction": [
+            0.9779720499582136,
+            -0.1303962733277544,
+            -0.1629953416597022
+          ],
+          "fov": 60
+        },
+        "light": "noon"
+      },
+      "windows": [
+        {
+          "fps": 59.99999999999999,
+          "low": 53.76344087744382,
+          "worst": 18.599999994039536,
+          "hitches": 0,
+          "frames": 60,
+          "draws": 90,
+          "triangles": 148761,
+          "impacts": 64,
+          "scorch": 1
+        },
+        {
+          "fps": 60.00600059970231,
+          "low": 54.34782611336453,
+          "worst": 18.399999991059303,
+          "hitches": 0,
+          "frames": 60,
+          "draws": 90,
+          "triangles": 148761,
+          "impacts": 64,
+          "scorch": 1
+        },
+        {
+          "fps": 59.99400059940368,
+          "low": 58.139534873647136,
+          "worst": 17.200000002980232,
+          "hitches": 0,
+          "frames": 60,
+          "draws": 90,
+          "triangles": 148761,
+          "impacts": 64,
+          "scorch": 1
+        },
+        {
+          "fps": 60.00600060059656,
+          "low": 57.803468218050156,
+          "worst": 17.299999997019768,
+          "hitches": 0,
+          "frames": 60,
+          "draws": 90,
+          "triangles": 148761,
+          "impacts": 64,
+          "scorch": 1
+        },
+        {
+          "fps": 59.99999999999999,
+          "low": 44.84304930338247,
+          "worst": 22.30000001192093,
+          "hitches": 0,
+          "frames": 60,
+          "draws": 90,
+          "triangles": 148761,
+          "impacts": 64,
+          "scorch": 1
+        },
+        {
+          "fps": 60.01800540144157,
+          "low": 48.78048780487805,
+          "worst": 20.5,
+          "hitches": 0,
+          "frames": 60,
+          "draws": 90,
+          "triangles": 148761,
+          "impacts": 64,
+          "scorch": 1
+        }
+      ],
+      "fps": 60.00400120019068
+    }
+  ],
+  "errors": []
+}

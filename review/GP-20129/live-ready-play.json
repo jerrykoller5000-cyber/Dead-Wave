@@ -1,0 +1,387 @@
+{
+  "at": "2026-11-13T01:48:52.994Z",
+  "actions": [
+    {
+      "first": true,
+      "kind": "bullet",
+      "state": {
+        "hits": 1,
+        "damage": 24,
+        "byKind": {
+          "knife": 0,
+          "machete": 0,
+          "katana": 0,
+          "chainsaw": 0,
+          "scorch": 0,
+          "bullet": 1
+        },
+        "markCount": 1,
+        "tiltX": -0.029912868307744974,
+        "tiltZ": 0.0000186963272176598,
+        "twistY": 0.000007640879057788746,
+        "tiltRad": 0.029912874150591837,
+        "angularSpeed": 0.24758347387397442
+      },
+      "name": "live-ready-eye-bullet.png",
+      "setup": {
+        "position": [
+          -5.45,
+          -200,
+          -642.1
+        ],
+        "direction": [
+          -0.995730009087898,
+          0.09231331666259496,
+          0.000023844621216099246
+        ],
+        "knifeCd": 0,
+        "ammo": 11,
+        "unarmed": false,
+        "swap": {
+          "swapT": 0,
+          "swapDur": 0.28,
+          "fireCooldown": -0.4874999999999999
+        }
+      }
+    },
+    {
+      "first": true,
+      "kind": "knife",
+      "state": {
+        "hits": 1,
+        "damage": 26,
+        "byKind": {
+          "knife": 1,
+          "machete": 0,
+          "katana": 0,
+          "chainsaw": 0,
+          "scorch": 0,
+          "bullet": 0
+        },
+        "markCount": 1,
+        "tiltX": 0.07513540061096961,
+        "tiltZ": -1.6683410344546704e-17,
+        "twistY": 6.66559457714752e-20,
+        "tiltRad": 0.07513540061096961,
+        "angularSpeed": 0.009615117198585196
+      },
+      "name": "live-ready-eye-knife.png",
+      "setup": {
+        "position": [
+          -5.65,
+          -200,
+          -642.1
+        ],
+        "direction": [
+          -0.6970903502132039,
+          0.12899035132748163,
+          0.7052847176169676
+        ],
+        "knifeCd": -0.007800000011920886,
+        "ammo": 11,
+        "unarmed": false,
+        "swap": {
+          "swapT": 0,
+          "swapDur": 0.28,
+          "fireCooldown": -2.901900000005962
+        }
+      }
+    },
+    {
+      "first": true,
+      "kind": "machete",
+      "state": {
+        "hits": 1,
+        "damage": 69,
+        "byKind": {
+          "knife": 0,
+          "machete": 1,
+          "katana": 0,
+          "chainsaw": 0,
+          "scorch": 0,
+          "bullet": 0
+        },
+        "markCount": 1,
+        "tiltX": 0.08385391602003198,
+        "tiltZ": -1.8619309654084754e-17,
+        "twistY": -1.207342649161958e-18,
+        "tiltRad": 0.08385391602003198,
+        "angularSpeed": 0.7945412802129121
+      },
+      "name": "live-ready-eye-machete.png",
+      "setup": {
+        "position": [
+          -5.65,
+          -200,
+          -642.1
+        ],
+        "direction": [
+          -0.723040424995347,
+          0.11147204514041123,
+          0.6817525408641775
+        ],
+        "knifeCd": -0.008499999999999917,
+        "ammo": 11,
+        "unarmed": false,
+        "swap": {
+          "swapT": 0,
+          "swapDur": 0.28,
+          "fireCooldown": -5.340200000002981
+        }
+      }
+    },
+    {
+      "first": true,
+      "kind": "katana",
+      "state": {
+        "hits": 1,
+        "damage": 240,
+        "byKind": {
+          "knife": 0,
+          "machete": 0,
+          "katana": 1,
+          "chainsaw": 0,
+          "scorch": 0,
+          "bullet": 0
+        },
+        "markCount": 1,
+        "tiltX": 0.11312616410225176,
+        "tiltZ": -2.5119054414768752e-17,
+        "twistY": -6.33528093239191e-19,
+        "tiltRad": 0.11312616410225176,
+        "angularSpeed": 0.38805583156493123
+      },
+      "name": "live-ready-eye-katana.png",
+      "setup": {
+        "position": [
+          -5.65,
+          -200,
+          -642.1
+        ],
+        "direction": [
+          -0.7134580082079545,
+          0.13376872222163586,
+          0.6878107294009954
+        ],
+        "knifeCd": -0.016499999999999963,
+        "ammo": 11,
+        "unarmed": false,
+        "swap": {
+          "swapT": 0,
+          "swapDur": 0.28,
+          "fireCooldown": -7.834799999997022
+        }
+      }
+    },
+    {
+      "first": false,
+      "kind": "bullet",
+      "state": {
+        "hits": 0,
+        "damage": 0,
+        "byKind": {
+          "knife": 0,
+          "machete": 0,
+          "katana": 0,
+          "chainsaw": 0,
+          "scorch": 0,
+          "bullet": 0
+        },
+        "markCount": 0,
+        "tiltX": 0,
+        "tiltZ": 0,
+        "twistY": 0,
+        "tiltRad": 0,
+        "angularSpeed": 0
+      },
+      "name": "live-ready-third-bullet.png",
+      "setup": {
+        "position": [
+          -5.45,
+          -200,
+          -642.1
+        ],
+        "direction": [
+          -0.997271479996573,
+          -0.006087681498033844,
+          -0.07356993488799188
+        ],
+        "knifeCd": -0.016499999999999963,
+        "ammo": 11,
+        "unarmed": false,
+        "swap": {
+          "swapT": 0,
+          "swapDur": 0.28,
+          "fireCooldown": -10.852399999991063
+        }
+      }
+    },
+    {
+      "first": false,
+      "kind": "knife",
+      "state": {
+        "hits": 1,
+        "damage": 26,
+        "byKind": {
+          "knife": 1,
+          "machete": 0,
+          "katana": 0,
+          "chainsaw": 0,
+          "scorch": 0,
+          "bullet": 0
+        },
+        "markCount": 1,
+        "tiltX": 0.07145327892989269,
+        "tiltZ": -1.5865815090586085e-17,
+        "twistY": -4.5964506372244715e-19,
+        "tiltRad": 0.07145327892989269,
+        "angularSpeed": 0.28041065561760403
+      },
+      "name": "live-ready-third-knife.png",
+      "setup": {
+        "position": [
+          -5.65,
+          -200,
+          -642.1
+        ],
+        "direction": [
+          -0.9967551669458052,
+          -0.010981053534357736,
+          -0.07974053943958052
+        ],
+        "knifeCd": -0.0023000000119207872,
+        "ammo": 11,
+        "unarmed": false,
+        "swap": {
+          "swapT": 0,
+          "swapDur": 0.28,
+          "fireCooldown": -13.300100000023852
+        }
+      }
+    },
+    {
+      "first": false,
+      "kind": "machete",
+      "state": {
+        "hits": 1,
+        "damage": 69,
+        "byKind": {
+          "knife": 0,
+          "machete": 1,
+          "katana": 0,
+          "chainsaw": 0,
+          "scorch": 0,
+          "bullet": 0
+        },
+        "markCount": 1,
+        "tiltX": 0.0897050737042672,
+        "tiltZ": -1.9918527650434824e-17,
+        "twistY": -1.1144400901779146e-18,
+        "tiltRad": 0.0897050737042672,
+        "angularSpeed": 0.6794858602615097
+      },
+      "name": "live-ready-third-machete.png",
+      "setup": {
+        "position": [
+          -5.65,
+          -200,
+          -642.1
+        ],
+        "direction": [
+          -0.9966691662565003,
+          -0.01098140892952365,
+          -0.08080830211986396
+        ],
+        "knifeCd": -0.007499999999999986,
+        "ammo": 11,
+        "unarmed": false,
+        "swap": {
+          "swapT": 0,
+          "swapDur": 0.28,
+          "fireCooldown": -15.772600000008953
+        }
+      }
+    },
+    {
+      "first": false,
+      "kind": "katana",
+      "state": {
+        "hits": 1,
+        "damage": 240,
+        "byKind": {
+          "knife": 0,
+          "machete": 0,
+          "katana": 1,
+          "chainsaw": 0,
+          "scorch": 0,
+          "bullet": 0
+        },
+        "markCount": 1,
+        "tiltX": 0.09502049245708918,
+        "tiltZ": -2.1098787707416285e-17,
+        "twistY": -1.2512281018892785e-18,
+        "tiltRad": 0.09502049245708918,
+        "angularSpeed": 0.8100460223562199
+      },
+      "name": "live-ready-third-katana.png",
+      "setup": {
+        "position": [
+          -5.65,
+          -200,
+          -642.1
+        ],
+        "direction": [
+          -0.9965683714798939,
+          -0.010775877593070577,
+          -0.08206924776072559
+        ],
+        "knifeCd": -0.009200000002980217,
+        "ammo": 11,
+        "unarmed": false,
+        "swap": {
+          "swapT": 0,
+          "swapDur": 0.28,
+          "fireCooldown": -18.331000000014924
+        }
+      }
+    }
+  ],
+  "failures": [
+    "real input missed dummy: bullet first=false"
+  ],
+  "idleReference": "live-inrange-play.json (exclusive20s,1142frames,median16.7ms,p9516.9ms,0over50ms)",
+  "doors": [
+    {
+      "side": 1,
+      "before": {
+        "open": true,
+        "locked": false,
+        "amount": 1,
+        "blocked": false
+      },
+      "after": {
+        "open": false,
+        "locked": false,
+        "amount": 0,
+        "blocked": true
+      }
+    },
+    {
+      "side": -1,
+      "before": {
+        "open": false,
+        "locked": false,
+        "amount": 0,
+        "blocked": true
+      },
+      "after": {
+        "open": true,
+        "locked": false,
+        "amount": 1,
+        "blocked": false
+      }
+    }
+  ],
+  "errors": [],
+  "failure": "Error: real input missed dummy: bullet first=false\n    at file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/GP-20129/play.mjs:38:34"
+}

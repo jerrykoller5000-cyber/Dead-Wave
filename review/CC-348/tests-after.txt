@@ -1,0 +1,18 @@
+ok    tcb291   3 pass   0 fail  194.0s
+FAIL  tcc344   5 pass   2 fail  116.3s
+           FAIL shotgun (86 pieces, 0 unsupported groups, 0 missing host contacts, 84 other intersection pairs, 9 bounded detail seats, 0 detail seat breaches)
+           FAIL shotgun-equipped (121 pieces, 0 unsupported groups, 0 missing host contacts, 128 other intersection pairs, 9 bounded detail seats, 0 detail seat breaches)
+           FAIL shotgun-prism (159 pieces, 2 unsupported groups, 0 missing host contacts, 157 other intersection pairs, 9 bounded detail seats, 0 detail seat breaches)
+           FAIL shotgun-rmr (153 pieces, 7 unsupported groups, 4 missing host contacts, 147 other intersection pairs, 9 bounded detail seats, 0 detail seat breaches)
+FAIL  tgt20076  34 pass  75 fail  122.6s
+ok    t38     33 pass   0 fail  235.2s
+ok    t189     8 pass   0 fail  190.5s
+           FAIL shotgun: the can is in proportion to the barrel (3.87x its radius)
+FAIL  t217    54 pass   1 fail  29.3s
+6 checks: 137 pass, 78 fail
+           FAIL shotgun (86 pieces, 0 unsupported groups, 0 missing host contacts, 84 other intersection pairs, 9 bounded detail seats, 0 detail seat breaches)
+           FAIL shotgun-equipped (121 pieces, 0 unsupported groups, 0 missing host contacts, 128 other intersection pairs, 9 bounded detail seats, 0 detail seat breaches)
+           FAIL shotgun-prism (159 pieces, 2 unsupported groups, 0 missing host contacts, 157 other intersection pairs, 9 bounded detail seats, 0 detail seat breaches)
+           FAIL shotgun-rmr (153 pieces, 7 unsupported groups, 4 missing host contacts, 147 other intersection pairs, 9 bounded detail seats, 0 detail seat breaches)
+    t217   1 fail  FAIL shotgun: the can is in proportion to the barrel (3.87x its radius)
+           FAIL shotgun: the can is in proportion to the barrel (3.87x its radius)

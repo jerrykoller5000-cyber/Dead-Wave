@@ -1,0 +1,21 @@
+{
+  "at": "2026-11-13T03:39:30.554Z",
+  "before": "39dad71eca6fd92027e607ce1ff54eda",
+  "after": "a9e4c338c7c7ddc5569b716c69a59b21",
+  "edits": [
+    [
+      "    import { makePistolModel, makeRevolverModel, makeUziModel, makeKnifeModel } from './studio/weapon-sidearms.js';",
+      "    import { makePistolModel, makeRevolverModel, makeUziModel, makeKnifeModel } from './studio/weapon-sidearms.js';\n    import { createMuzzleFlashGeometry, createMuzzleFlashTexture } from './studio/weapon-effects.js';"
+    ],
+    [
+      "      const flash = new THREE.Mesh(new THREE.SphereGeometry(flashR, 6, 6), glowMat(new THREE.MeshBasicMaterial({ color: flashCol, transparent: true, opacity: 0, depthWrite: false })));",
+      "      const flash = new THREE.Mesh(createMuzzleFlashGeometry(THREE, flashR), glowMat(new THREE.MeshBasicMaterial({ map: createMuzzleFlashTexture(THREE), color: 0xffffff, transparent: true, opacity: 0, depthWrite: false, side: THREE.DoubleSide, forceSinglePass: true }), 1.5));"
+    ],
+    [
+      "        flash.scale.setScalar((1.2 + Math.random() * 0.6) * (gun.userData.suppressed ? 0.35 : 1) / (gun.userData.sizeK || 1));   // CL-95: a can smothers it; GB-130: same flash at any gun size",
+      "        const burstScale = (1.2 + Math.random() * 0.6) * (gun.userData.suppressed ? 0.35 : 1) / (gun.userData.sizeK || 1);\n        const phase = (gun.userData.shots | 0) % 3;\n        flash.scale.set(burstScale * (.9 + phase * .08), burstScale * (1.06 - phase * .06), burstScale * (.88 + ((gun.userData.shots * 7) % 5) * .06));\n        flash.rotation.z = ((gun.userData.shots | 0) * 2.3999632297) % (Math.PI * 2);   // varied gas tongues; no extra RNG draws"
+    ]
+  ],
+  "scope": "import,flash mesh construction,shot scale/roll only; existing light/timer/warmup/visibility setter preserved",
+  "lineEndings": "CRLF"
+}

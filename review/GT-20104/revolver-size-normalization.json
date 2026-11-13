@@ -1,0 +1,13 @@
+{
+  "at": "2026-11-13T02:28:24.549Z",
+  "beforeMd5": "292f188db96ecf93746b68ba0dd20b34",
+  "afterMd5": "4bcdaeb12a63cf29e54f549bd96a39cf",
+  "oldBase": 1.08,
+  "newBase": 1,
+  "oldRow": "revolver: { len: 0.484, m: 0.27,  look: 1.0 }",
+  "newRow": "revolver: { len: 0.484, m: 0.27,  look: 1.08 }",
+  "beforeComposite": 1.08,
+  "afterComposite": 1.08,
+  "onlyTwoApprovedValuesChanged": true,
+  "CRLFPreserved": true
+}

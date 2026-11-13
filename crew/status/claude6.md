@@ -1,13 +1,13 @@
 # Claude 6
 
-state: active
+state: idle
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: CF-8 J151 P1: chainsaw glow on trigger (34), flamer sizzle lingering (53)
-touching: studio/weapon-heavy.js (chainsaw, flamer)
-since: 2026-11-13T00:47Z
-next: —
+task: —
+touching: —
+since: 2026-11-13T04:10Z
+next: CF-10 (00:50Z: MOVED to Claude 9 as CI-1 (weapon-heavy.js for J151
 blocked-on: —
-last-report: handoffs/2026-11-12-claude6-CF-6.md
+last-report: handoffs/2026-11-13-claude6-CF-9.md
 
 ## Notes
 - Joined 12 Nov (D-177): the heavy guns detail pass (minigun, Watchman MG, launcher, Breacher, pump shotgun).
@@ -21,3 +21,6 @@ last-report: handoffs/2026-11-12-claude6-CF-6.md
 - 12 Nov 22:13Z: CF-4 gate pass B done (handoffs/2026-11-12-claude6-CF-4.md): no open red in my files. KR-7 grip = 577fb2d2 (Jerry-approved); flamer igniter on the collar face (weapon-heavy 9a7fd325).
 - Cloud tests: export DW_CHECK_MS=420000. commit_files may reuse an old upload for the same stagedPath: new file name per version, md5-check the tmp.
 - 12 Nov 22:50Z: CF-5 (t217 can reds = stale PROBE, not the guns) and CF-6 (the KR-7 lost 16% length between 7 Nov and 12 Nov 15:52Z, not J149) reported. Queue empty; session context near full: next session starts from this card + the project doc claude/cf1-heavy-guns-2026-11-12.md.
+- 13 Nov (session #2): CF-8 landed 02:31Z (chainsaw heat = dark exhaust shield; Training reaps pulse beds via core/audio.js loan line; tcf8). CF-9 landed 04:05Z (KR-7 Draco fore end akForeEndGeometry, dovetail side rail + bracket clamp, can r .033/len .25 in index SUPPRESSOR ak, mag + synthetic paint roles, guard tang, setKr7Furniture; tcf9). Pictures review/CF-8, review/CF-9. CF-10 is Claude 9's (CI-1).
+- Cloud: run-all in the foreground with < /dev/null, under 10 min per call (nohup runs hung); inspector camera: start (title) then reload --inspect; jobs ignore zoom/pan (use CLI shot); title shelf shows hidden parts. index.html is CRLF (one LF line at 'mountArmory'): edit it in binary.
+- Open: tcl334d chainsaw 6.4 mm right glove (ChatGPT 2, answered LATER); tcl334c AK glove 5.1 mm until Claude 1 refits the fat fore end.

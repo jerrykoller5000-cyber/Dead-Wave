@@ -1,0 +1,77 @@
+{
+  "phase": "after",
+  "scope": "Native game UI and KR-7 copies",
+  "initial": {
+    "buttons": 2,
+    "state": {
+      "ak": "wood"
+    },
+    "copy": [
+      true,
+      false
+    ],
+    "stored": null
+  },
+  "synthetic": {
+    "state": {
+      "ak": "synthetic"
+    },
+    "copy": [
+      false,
+      true
+    ],
+    "stored": null,
+    "pressed": "true"
+  },
+  "paint": {
+    "finish": "m81",
+    "syntheticPaint": [
+      true
+    ]
+  },
+  "eye": {
+    "uuid": "321a5e2b-bacd-41eb-bec6-02424ca5a46c",
+    "wood": false,
+    "synthetic": true
+  },
+  "eyeWood": {
+    "uuid": "321a5e2b-bacd-41eb-bec6-02424ca5a46c",
+    "wood": true,
+    "synthetic": false,
+    "finish": "m81",
+    "state": {
+      "ak": "wood"
+    },
+    "source": true
+  },
+  "leave": {
+    "state": {
+      "ak": "wood"
+    },
+    "copy": [
+      true,
+      false
+    ]
+  },
+  "persist": {
+    "training": false,
+    "phase": "prep",
+    "state": {
+      "ak": "synthetic"
+    },
+    "stored": {
+      "ak": "synthetic"
+    }
+  },
+  "firstPageErrors": [],
+  "reload": {
+    "state": {
+      "ak": "synthetic"
+    },
+    "copy": [
+      false,
+      true
+    ]
+  },
+  "errors": []
+}

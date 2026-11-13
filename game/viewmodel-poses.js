@@ -91,6 +91,9 @@ export const VM_POSES = Object.freeze({
     slideKick: 0.055,
     // CE-1: the slide back and home on each shot (the 0.28 s interval leaves room)
     action: { slide: { travel: 0.055, t: [0.018, 0.018, 0.075] } },
+    // CE-11 (J151 note 2; GT-20104's model contract): the barrel's Browning tilt under its slide (game/viewmodel.js): back
+    // with it its first 4 gun mm, then over the next 4 unlocked, the chamber 10 mm down and 0.05 rad tilted
+    barrel: { joint: 0.004, unlock: 0.004, drop: 0.010, tilt: -0.05 },
     elbows: { r: [0.36, -0.75, 0.06], l: [-0.34, -0.75, 0.06] },   // AG-168: low and wide, so the forearms leave the view down its corners
     // CL-293 (Jerry, 3 Nov: "elbow flared in the wrong direction... looks inverted": elbowFollow ran the forearms out flat
     // from the sides, elbows up): each elbow hangs below and behind its wrist, so the forearms come up from the bottom corners.
@@ -619,19 +622,33 @@ export const VM_RELOADS = Object.freeze({
     ],
     hand: [
       [0.00, 'fore', 'fore'], [0.10, 'well', 'mag'], [0.17, 'below', 'mag'], [0.31, 'pouch', 'mag'], [0.36, 'pouch', 'pouch'],
-      [0.50, 'below', 'mag'], [0.60, 'well', 'mag'], [0.64, 'well', 'cup'], [0.71, 'work', 'pinch'], [0.89, 'work', 'pinch'],
-      [0.93, 'work', 'open'], [1.00, 'fore', 'fore']
+      [0.50, 'below', 'mag'], [0.60, 'well', 'mag'], [0.64, 'well', 'cup'], [0.655, 'low', 'open'], [0.675, 'side', 'open'], [0.695, 'over', 'open'], [0.715, 'work', 'rack'],
+      [0.89, 'work', 'rack'], [0.925, 'work', 'open'], [0.94, 'over', 'open'], [0.955, 'side', 'open'], [0.975, 'low', 'open'], [1.00, 'fore', 'fore']
     ],
+    // CE-9 (GT-20101, ChatGPT 2's witness: the support ring finger 2.2 mm into the .45 live round at 75%; and, measured
+    // against the slide's whole outer shape, the palm and the pinch's curled fingers went right through the slide all
+    // through the rack): the overhand rack grip, the fingers laid along the slide's right side behind the port, the thumb
+    // along its left, the palm on the top of its rear serrations (was 'pinch', a shell's grip, palm 17 mm into the slide)
+    poses: { rack: { f: [0.45, 0.45, 0.45, 0.45], t: [0.3, 0, 0.2] } },
     mag: { grab: 0.10, swapOut: 0.305, swapIn: 0.375, seat: 0.60 },
     elbowL: [-0.28, -0.30, 0.04],   // CE-3: the support elbow low and out to the left as the hand leaves the hold
     rack: [0.72, 0.76, 0.89, 0.07],   // AG-168: the slide back over [0], [1], forward at [2]; travel (gun units)
     tacticalRack: true,   // CE-2 (J103, CLAUDE DIRECTOR 11 Nov): racked by the support hand with rounds left too
+    // CE-11 (J151 note 2): an empty reload starts with the slide locked back (the last round fired it there); the hand
+    // pulls it this much of its travel further off the stop and lets it go. The travel stays 0.07 (46 game mm): the slide
+    // must clear the .45 round (32.4 mm) to feed it
+    lockBack: 0.08,
     places: {
       // gun-local (the model's own units): palm normal (z) and the forearm's way (y) as directions
       well: { z: [0, 0.955, 0.296], y: [-0.55, -0.45, -0.7] },       // the support forearm toward its own side, the gun's -x
       below: { drop: 0.13 },
-      work: { z: [0.15, -1, 0.05], y: [-0.7, -0.2, -0.68], grab: [0, -0.012, 0.01] },   // AG-168: the forearm down, not up over the slide
-      pouch: { at: [-0.24, -0.46, -0.24], z: [0.25, 0.9, 0.3], y: [-0.4, -0.6, 0.65] }   // view space, out of sight
+      work: { z: [0.15, -1, 0.05], y: [-0.7, -0.2, -0.68], grab: [0, 0.032, -0.06] },   // AG-168: the forearm down, not up over the slide; CE-9 (GT-20101): the palm on the slide's top over its rear serrations, the fingers behind the port (was [0, -0.012, 0.01]: 17 mm into it)
+      pouch: { at: [-0.24, -0.46, -0.24], z: [0.25, 0.9, 0.3], y: [-0.4, -0.6, 0.65] },   // view space, out of sight
+      // CE-9 (GT-20101): on the way up to the rack and back down to the hold the hand goes round the slide's left side, open
+      // (it went straight through the slide from under the grip to its top, and back)
+      side: { part: 'work', at: [-0.09, 0.02, -0.07], z: [1, 0, 0], y: [-0.6, -0.35, -0.7] },
+      low: { part: 'work', at: [-0.09, -0.09, -0.08], z: [1, 0.3, 0], y: [-0.5, -0.6, -0.6] },   // out to the left, level with the grip
+      over: { part: 'work', at: [-0.02, 0.075, -0.1], z: [0.15, -1, 0.05], y: [-0.7, -0.2, -0.68] }   // above the rear sight, palm down, then onto the slide
     }
   },
   ...VM_STAGE2_RELOADS,
@@ -699,16 +716,22 @@ export const VM_LIGHT = Object.freeze({
   // curl: the fingers' loose fist the rest of the hand eases toward (o) while a digit presses
   curl: [[0.85, 1.05, 0.65, 0.02], [0.95, 1.15, 0.7, 0], [1.0, 1.2, 0.75, -0.03], [1.05, 1.25, 0.8, -0.06]],
   elbowUp: 0.3,
-  pistol: { k: 15, fi: -1, pad: [0, -0.0138, 0.009], r: [0.4906, -0.429, 0.1204], v: [0, 0.0051, -0.17, -0.3, -0.1, -0.1], o: 1 },   // the pistol: the thumb's pad
-  revolver: { k: 15, fi: -1, pad: [0, -0.0254, 0], r: [-0.2054, -0.5304, 0.2436], v: [0, 0.2131, 0.7499, 0.9432, 0.5273, 0.7729], o: 1 },   // the revolver: the thumb's tip
-  uzi: { k: 6, fi: 1, pad: [0, -0.021, 0], r: [0.0288, 0.0276, -0.0489], v: [1.2595, 1.1558, 0, 0.04], o: 1 },   // the Wasp: the middle finger's tip
-  shotgun: { k: 3, fi: 0, pad: [0, -0.0202, 0], r: [-0.2384, 1.3166, 0.0476], v: [1.4069, 0.8004, 0.6906, -0.08], o: 1 },   // the pump gun: the index finger's tip
-  aa12: { k: 15, fi: -1, pad: [0, -0.0138, 0.009], r: [-0.0572, 0.4507, -0.1727], v: [0, -0.6, 0.4171, -0.3, -0.1, 0.2213], o: 1 },   // the Breacher: the thumb's pad
-  m4: { k: 15, fi: -1, pad: [0, -0.0138, 0.009], r: [-1.0148, 1.0393, 0.463], v: [0.5704, 0.2843, 0.5415, 0.3252, 0.451, 0.532], o: 1 },   // the GW-4: the thumb's pad
-  ak: { k: 15, fi: -1, pad: [0, -0.0254, 0], r: [0.3096, 0.1447, -0.7025], v: [0.1287, 1, -0.17, -0.3, 0.2212, -0.1], o: 0.673 },   // the KR-7: the thumb's tip
-  sniper: { k: 15, fi: -1, pad: [0, -0.0254, 0], r: [-0.8455, 0.1155, 0.0035], v: [0.442, -0.6, 1.3, 0.3351, 0.3385, 0.2845], o: 1 },   // the sniper: the thumb's tip
-  launcher: { k: 3, fi: 0, pad: [0, -0.0106, 0.0085], r: [-0.906, 0.5725, 0.9886], v: [0.2766, 0.6497, 0.12, 0.3], o: 1 },   // the launcher: the index finger's pad
-  minigun: { k: 3, fi: 0, pad: [0, -0.0202, 0], r: [0.2808, -1.2729, 0.067], v: [-0.2, 0, 0.3136, 0.1295], o: 1 }   // the rotary gun: the index finger's tip
+  // CE-9 (13 Nov; tce4 now measures the whole press, ChatGPT 2's GT-20100 and J151 notes 17, 46: the support glove cut
+  // through the light module, the fore-end and the pump on the way to the switch and back, 5-17 mm on most guns): each row's
+  // arc [x, y, z] (gun units) is the way out round the gun at the middle of the reach and of the way back (solved in the
+  // cloud per gun, nothing of the glove or sleeve in the gun at any sample); r re-solved where the press itself went in
+  // (the pistol's index in its guard: r[0] .4906 -> .3406; the KR-7's thumb: r[1] .1447 -> .2947, o .673 -> .273; the
+  // rotary gun: r[1] -1.2729 -> -1.4229; the revolver part way, -.5304 -> -.3804, until its refit, GT-20104)
+  pistol: { k: 15, fi: -1, pad: [0, -0.0138, 0.009], r: [0.3406, -0.429, 0.1204], v: [0, 0.0051, -0.17, -0.3, -0.1, -0.1], o: 1, arc: [-0.15, -0.15, 0.05] },   // the pistol: the thumb's pad
+  revolver: { k: 15, fi: -1, pad: [0, -0.0254, 0], r: [-0.2054, -0.3804, 0.2436], v: [0, 0.2131, 0.7499, 0.9432, 0.5273, 0.7729], o: 1, arc: [-0.15, -0.15, 0.05] },   // the revolver: the thumb's tip
+  uzi: { k: 6, fi: 1, pad: [0, -0.021, 0], r: [0.0288, 0.0276, -0.0489], v: [1.2595, 1.1558, 0, 0.04], o: 1, arc: [0.05, -0.15, 0.05] },   // the Wasp: the middle finger's tip
+  shotgun: { k: 3, fi: 0, pad: [0, -0.0202, 0], r: [-0.2384, 1.3166, 0.0476], v: [1.4069, 0.8004, 0.6906, -0.08], o: 1, arc: [0.15, -0.15, 0.15] },   // the pump gun: the index finger's tip
+  aa12: { k: 15, fi: -1, pad: [0, -0.0138, 0.009], r: [-0.0572, 0.4507, -0.1727], v: [0, -0.6, 0.4171, -0.3, -0.1, 0.2213], o: 1, arc: [0, -0.1, 0.1] },   // the Breacher: the thumb's pad
+  m4: { k: 15, fi: -1, pad: [0, -0.0138, 0.009], r: [-1.0148, 1.0393, 0.463], v: [0.5704, 0.2843, 0.5415, 0.3252, 0.451, 0.532], o: 1, arc: [0.2, -0.2, 0.1] },   // the GW-4: the thumb's pad
+  ak: { k: 15, fi: -1, pad: [0, -0.0254, 0], r: [0.3096, 0.2947, -0.7025], v: [0.1287, 1, -0.17, -0.3, 0.2212, -0.1], o: 0.273, arc: [0.2, -0.2, 0.1] },   // the KR-7: the thumb's tip
+  sniper: { k: 15, fi: -1, pad: [0, -0.0254, 0], r: [-0.8455, 0.1155, 0.0035], v: [0.442, -0.6, 1.3, 0.3351, 0.3385, 0.2845], o: 1, arc: [0.2, -0.2, 0.1] },   // the sniper: the thumb's tip
+  launcher: { k: 3, fi: 0, pad: [0, -0.0106, 0.0085], r: [-0.906, 0.5725, 0.9886], v: [0.2766, 0.6497, 0.12, 0.3], o: 1, arc: [0.2, -0.1, 0.2] },   // the launcher: the index finger's pad
+  minigun: { k: 3, fi: 0, pad: [0, -0.0202, 0], r: [0.2808, -1.4229, 0.067], v: [-0.2, 0, 0.3136, 0.1295], o: 1 }   // the rotary gun: the index finger's tip
 });
 
 // CE-2 (J110: "Fire selection. Needs animation and manual manipulation by player fingers for each weapon"; J130): a gun's
@@ -749,7 +772,10 @@ export const VM_CONTROLS = Object.freeze({
   },
   shotgun: {
     safety: { axis: 'x', slide: -0.004, ready: true, time: 0.1 },   // the cross-bolt pushed across to fire as the gun comes up
-    slideRelease: { axis: 'y', slide: 0.002, unload: [0.0, 0.03, 0.30, 0.34] }   // the action release pressed up to free the forend for the unload's first stroke (pump .04-.34)
+    // CE-10 (J151 note 12, Jerry 13 Nov: "The trigger gets pulled each time the player ejects rounds to switch shotgun ammo
+    // types"): the paddle sits right behind the trigger and was pressed on every shell's stroke; first: once, for the first
+    // shell's stroke only (st.ammoSwitch.unloaded 0), as the action is unlocked once and then runs free
+    slideRelease: { axis: 'y', slide: 0.002, unload: [0.0, 0.03, 0.30, 0.34], first: true }   // the action release pressed up to free the forend for the unload's first stroke (pump .04-.34)
   },
   aa12: {
     selector: { axis: 'x', turns: { semi: 0, auto: 1.5708 }, time: 0.12 },   // the thumb lever forward on semi, a quarter turn down for auto

@@ -2,44 +2,56 @@
 
 state: active
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: CB-325 t173: the ending's rune pistol takes the rune finish on its J149 per-part coat
-touching: index.html (makeRunePistol)
-since: 2026-11-13T00:46Z
+task: CB-331 CE-11 ask (Claude 5): the third-person pistol's barrel follows its slide (GT-20104 contract)
+touching: index.html (applyPistolFireSlide + pistolBarrelFollow, the pistol rack and slide resets), tools/tests/tcb333.js (new)
+since: 2026-11-13T06:06Z
 next: CB-315 (15:05Z, CLAUDE DIRECTOR: vendor half bar met (899.7 to 449.
 blocked-on: —
-last-report: handoffs/2026-11-12-claude2-CB-324.md
+last-report: handoffs/2026-11-13-claude2-CB-326-D.md
 
 ## Notes
 
-### Where things stand (claude2, session 16:19Z-22:xxZ, Opus 5.5)
-- Landed today, out for review (ready to commit): CB-316 studio/weapon-detail.js (+test; merge paths; carryGunCopy instance loop;
-  fakethree InstancedMesh clone, getMatrixAt returns nothing), CB-313 build floor boards to 0.25, CB-317 muzzle flash hides itself
-  at opacity 0, CB-318 the live top round out of the ext-mag stretch (tcb318), CB-321 t38 budgets + one per J149 control
-  (J149_CONTROLS in t38.js: add each modeler's new control names as their guns land).
-- weapon-detail.js API FROZEN (Director): changes only after a request to Claude 3, Claude 6, ChatGPT 2.
-- J149 gate pass A reported 22:0xZ (Claude outputs/j149-gate/gate-a.log): 41/53 green, no new red from tonight. ChatGPT 2 runs 13
-  sidearm/eye-hand tests on the PC slot (its reds come back to me); Claude 6 runs pass B (long/heavy guns) on the newer tree.
-- Mine still red: t228 (support fist along the forend 50-90 deg; shotgun anchor 1.6 cm; walking firing hand 1 cm), t242 (ext
-  mag 3.2 mm out of the grip; red before CB-318 too: gunExtLook or the pistol mag), tcb248 flaky once in the cloud.
-- CB-314 handed to Claude 3 (the carrier's side MOLLE bars, studio/marine-body.js ~402; ChatGPT's GP-20125 diagnosis).
-- GP-20124 (first-use eye-draw hitches on the 5080: Breacher 1450 ms) is mine, LATER: the Training blackout's warm (AG-304/309,
-  viewmodel.prepareWarmup) should cover every gun's eye copy and J149's new materials.
-- Also landed late (for review): CB-322 t217 probes (KR-7 0.78, pump 0.92; the pump can is really 3.87x its barrel: Director's
-  call), CB-323 fakethree MeshBasicMaterial flag (t277 46/0), CB-324 the unlit flash compiles in the Training warm again
-  (setFlashWarm; CB-317 had made its pipeline build at the first shot). ChatGPT reruns GP-20127's first-shot probe on the 5080.
-- Overnight suite progress (00:2xZ 13 Nov): chunks 1-5 of 16 done (100 tests, from t0 to ~t18x in name order): all green except the
-  cloud's missing gh music (t106, t106b, t172, t178) and t173 11/1 "its furniture is the rune finish" (new tonight; likely the
-  pistol's J149 paint roles, ChatGPT 2). Chunks 6-16 (211 tests) still to run: a fresh session reruns them on the current tree.
-- Overnight suite: 311 tests in 16 chunks on the 20:21Z tree (+ tonight's index.html and fakethree); chunk 1 green except the
-  cloud's gh music (t106, t106b); chunk 2 restarted ~22:4xZ. A fresh session: rebuild a cloud copy and run the chunks after the
-  last reported one (the 311 = every t*.js minus gate pass A's 53, ChatGPT 2's 13 and Claude 6's pass B list).
-- GP-20124 next (mine): the spent case's first-shot pipeline (no material until a case flies) and the first eye draw's CPU build
-  per gun (ChatGPT's GP-20126/20127 data: pipelines 0 at the first eye draw, so CPU/GC).
-- Open asks to me: t242 (ext mag 3.2 mm out of the grip: asked ChatGPT 2 whether it's the GT-20080 top round or the test).
-- Cloud recipe: tar the PC tree (exclude gh-*, pk-*, assets/soundtrack, assets/disclaimer, assets/intro, ui/audio,
-  tools/tests/test-*.html, __pycache__), tar assets/intro/*.js *.css separately, stage, unpack; run-all with
-  CHROME=/usr/bin/google-chrome CHROME_ARGS=--no-sandbox DW_CHECK_MS=420000, nohup'd; one instance at a time. crew.mjs reply can
-  fail with EINVAL when requests.md is busy on Windows: retry after ~30 s.
+### index.html loans held tonight (Claude 2 #4 keeps this list; IN/OUT in crew/LOG.md, md5-guarded writes)
+- Claude 8 (CH-1, notes 30/31): gunEffects laser beam material/renderOrder; m240LaserBeam/laserImpacts setup (renderOrder); updateLasers; laserStop. Lent 01:2xZ.
+- Claude 9 (CI-1, Director 01:15Z): WEAPON_STATS launcher line; advanceChainsawChain; one call each in the chainsaw running branch and sawCutTick; the per-frame flamer needle line; spawnFlameBlob/updateFlameStream drawing parts (+ notes 33, 38 chainsaw logic).
+- ChatGPT (GP-20129, Director 01:03Z): armoryPreview/armoryPics rendering; the scoped weapon-icons import + 12 WHEEL_ICONS weapon entries.
+- Claude 7 (CG-1, 02:09Z): updateViewmodel base/st.hands block (one st.eye line).
+- Claude 6 (CF-8 note 53, Director 01:38Z): core/audio.js updateMusic's training branch (pulseBeds call).
+- ChatGPT 2 (GT-20104): WEAPON_SIZE.revolver look: OUT 02:06Z. Claude 9 landed its hunks 01:58Z (40582fe8 -> 3f3b7d89).
+- Claude 10 (CJ-1 flicker): none asked yet.
+- Claude 3 (CC-347): buildCarryRig / carry plan-mount section (its own IN 00:50Z, FYI to me).
+- Mine (#4): Training 3P camera call (~69142) + pull() in game/training-camera-collision.js (ChatGPT's, lent).
+
+### Where things stand (claude2 #4, from 01:24Z, Opus 5.5)
+- Landed tonight, out for review (ready to commit): CB-327 note 1 Training 3P camera (index.html + game/training-camera-collision.js pull(), tcb330; 02:21Z + 02:56Z), CB-328 note 37 chainsaw held-wall pull skips the dummy/trees (index.html, tcb331; 03:04Z), CB-330 t188 BASE.revolver 1.0 (--review), CB-326 (D) case warm (index.html setFlashWarm/setCaseWarm, tcb332; 04:00Z). CB-326 (B) PARKED until after the playtest (Director).
+- Pictures asked of Antigravity: review/CB-327 (3P near walls), review/CB-328 (saw at the dummy).
+- Suite CB-243: cloud tree /home/claude/suite = PC tree 03:17Z (index de1df61b). Runner /home/claude/probe/runchunks.sh (10 a chunk, list /home/claude/probe/suite/list.txt = all t*.js after t207 lexically, 287), progress in /home/claude/probe/suite/progress.txt; touch /home/claude/probe/HOLD to pause between chunks. Reds so far: t209 12/1 (maimed hop arms, zombie motion; red on 3d2b9 too per #3), t224 timed out (180 s).
+- Open lead for ChatGPT GP-20129 (3P cursor shots miss the dummy): weaponAimPoint adds AIM_CHEST on ground aims; told it LATER.
+- Claude 5 FYI: fakethree lacks getMaxScaleOnAxis, Quaternion.dot, Box3.setFromObject/distanceToPoint (permissive stubs): add them (my file) when there's a slot.
+- Final gate before ~15:00Z with the Director: the tests of everything landed tonight on a fresh PC tree.
+
+### Where things stand (claude2 #3, session 23:01Z-01:2xZ, Opus 5.5)
+- Landed tonight, out for review (ready to commit): CB-325 rune pistol finish (index.html makeRunePistol; t173 12/0 cloud+native,
+  pictures review/GT-20103), CB-327 note 13 birdshot 18 x 3.5 spread 0.16 (index.html WEAPON_STATS.shotgun, combat/ammo-types.js +
+  test, tcb248 --review), CB-329 t334 AK card (29/0, --review).
+- CB-327 still open: note 1 (Training 3P camera: walls' tall solids catch the overhead eye, 33% of spots/yaws, 21% pulled under half;
+  fix = collide only with what the cutaway doesn't fade, ease the release; needs a loan of game/training-camera-collision.js pull()
+  from ChatGPT/Director: asked 01:0xZ) and note 12 (no trigger pull in FP; the shotgun's slide-lock paddle behind the trigger is
+  pressed on EVERY unloaded shell: Claude 5's VM_CONTROLS row, press on the first shell only; asked the Director). Then CB-328.
+- GP-20124 / CB-326 (approved AFTER CB-327/328): (B) compile a new gun copy's multi-instance parts (revolver rounds, launcher inserts,
+  chainsaw chain: three keys InstancedMesh count>1 by uuid) in an idle slice when the copy is made; (D) one spent case per caliber in
+  the Training warm. Proof: per-gun first draw/shot gaps; no visible hitch at purchase. The 'warm at count 2' idea was measured and
+  rejected (copies made after the entry). Numbers: Claude outputs/cb326/*.json. Cloud first eye draws: 0 node builds on 11/12 guns.
+- Suite CB-243 (cloud, tree 3d2b9a623 = PC code at 23:02Z): chunks 1-5 done, chunk 6 (t207..) running 01:09Z, 16 chunks of the
+  312 (all t*.js minus gate A, ChatGPT 2's 13 and Claude 6's pass B; lexical order, 20 a chunk). Reds so far: t14 flaky (random
+  site, 2 of 4 red on this tree, 0 of 3 on da92ba276), t164 once (guardian head column; green on da92ba276 rerun), t173 (fixed:
+  CB-325), t209 12/1 in chunk 6 ('arms out for balance' on the maimed hop: zombie motion; not yet checked on da92ba276), t106/t106b/t172/t178 (the cloud has no gh music). Nothing new from da92ba276 -> 3d2b9a623 (only index.html flash warm +
+  TP flex cap, fakethree flag, t217). My cloud restarted once (00:2xZ): check processes; runner = /home/claude/runchunks2.sh,
+  side jobs /home/claude/probe/queue.sh (jobs/*.sh, HOLD file between chunks). A fresh session rebuilds the cloud copy anyway.
+- CE-9b (Claude 5) not landed yet: then rerun tce9 tcl334 tcl334b/c/d t240 tcb295 in the cloud on a fresh copy of the PC tree, tell the Director.
+- The PC device shell has no Chrome: browser tests only in the cloud (or ask ChatGPT 2/Antigravity for native runs).
+- Lent to Claude 8 (CH-1, 01:2xZ): gunEffects' laser lines, m240LaserBeam/laserImpacts setup, updateLasers, laserStop.
+- LATER: ChatGPT 2's camera --inspect black PNGs on the 5080 (tools lane, review/GT-20104).
 
 ### Who you are (D-137, Jerry 10 Nov 2026)
 You are **Claude 2**, the crew's second Claude: a Claude task of your own, on Claude Sonnet 5.5 (Extra). You took

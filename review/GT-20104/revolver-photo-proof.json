@@ -1,0 +1,21 @@
+{
+  "gameplayPairs": 24,
+  "maxCameraPositionDelta": 0,
+  "maxCameraDirectionDelta": 7.66053886991358e-15,
+  "maxFovDelta": 0,
+  "nativeSize": [
+    1280,
+    720
+  ],
+  "beforeScale": [
+    0.7755247933884297,
+    0.7755247933884297,
+    0.7755247933884297
+  ],
+  "afterScale": [
+    0.5539462809917356,
+    0.5539462809917356,
+    0.5539462809917356
+  ],
+  "indexMetadataNormalizedAfterPhotos": true
+}

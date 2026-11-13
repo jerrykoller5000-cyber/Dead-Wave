@@ -1,0 +1,35 @@
+{
+  "start": {
+    "studio/weapon-casings.js": "bbb863711356d6296ef16c2f334b90bbd4eab760aff60f5d5e2474785ce39de2",
+    "studio/weapon-sidearms.js": "281ac598e70bcc35f7aa524e6cfc6946a0637212155d86b36ac1b5bbe6ba4808",
+    "studio/weapon-pistol-action.js": "24d7aee3e7706a31b7e4a71c68a8b362b552c411924dc45f6c169d25c5118f8c",
+    "studio/hand-contacts.js": "a2bc5ee2aba5090a8bb3cbe2bacff71f887642f91cb9d5bf6b0a417d1117bf2f",
+    "studio/hand-grips.js": "a5831642a623d266168dbdaeab4af27adaa04f32a80e53176d16e180e885f2bf",
+    "game/viewmodel.js": "f0e5e2db60969620eb204c377dadb53c88ff7adc4291428afaed1d306bbfac22",
+    "game/viewmodel-poses.js": "889572ec1e0786e5fd1f80152a472fefbae624275257d3d3a84ad86092e80d27",
+    "game/viewmodel-fit.js": "094131796bdfb0d0bf941cb93bf2c8bff4a0a5972adde438bbe54c56ffaed77f",
+    "tools/tests/tce10.js": "76c83c84abc5d34a0b4f2ad05661d78129b3c410eb776eff3a007f058f354d20",
+    "tools/tests/tce10-contact.js": "de6f1a3ceda6da5f636a70471f76b65ed391466858af92eb2d789a9cc750528c"
+  },
+  "end": {
+    "studio/weapon-casings.js": "bbb863711356d6296ef16c2f334b90bbd4eab760aff60f5d5e2474785ce39de2",
+    "studio/weapon-sidearms.js": "281ac598e70bcc35f7aa524e6cfc6946a0637212155d86b36ac1b5bbe6ba4808",
+    "studio/weapon-pistol-action.js": "24d7aee3e7706a31b7e4a71c68a8b362b552c411924dc45f6c169d25c5118f8c",
+    "studio/hand-contacts.js": "a2bc5ee2aba5090a8bb3cbe2bacff71f887642f91cb9d5bf6b0a417d1117bf2f",
+    "studio/hand-grips.js": "a5831642a623d266168dbdaeab4af27adaa04f32a80e53176d16e180e885f2bf",
+    "game/viewmodel.js": "f0e5e2db60969620eb204c377dadb53c88ff7adc4291428afaed1d306bbfac22",
+    "game/viewmodel-poses.js": "889572ec1e0786e5fd1f80152a472fefbae624275257d3d3a84ad86092e80d27",
+    "game/viewmodel-fit.js": "094131796bdfb0d0bf941cb93bf2c8bff4a0a5972adde438bbe54c56ffaed77f",
+    "tools/tests/tce10.js": "76c83c84abc5d34a0b4f2ad05661d78129b3c410eb776eff3a007f058f354d20",
+    "tools/tests/tce10-contact.js": "de6f1a3ceda6da5f636a70471f76b65ed391466858af92eb2d789a9cc750528c"
+  },
+  "changed": [],
+  "rows": [
+    {
+      "test": "tce10",
+      "pass": 29,
+      "fail": 0
+    }
+  ],
+  "exit": 0
+}

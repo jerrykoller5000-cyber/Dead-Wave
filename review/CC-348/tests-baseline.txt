@@ -1,0 +1,8 @@
+           INFO stand unarmed (mm in, first frame): armL 0.9, armR 0.0, legL 0.0, legR 0.0, legL<legR 0.0, legR<legL 0.0
+           FAIL the armL out of his kit in every stance (worst 1.4 mm, stand unarmed)
+           FAIL the armR out of his kit in every stance (worst 3.6 mm, jump)
+FAIL  tcc344   5 pass   2 fail  115.9s
+FAIL  tgt20076  34 pass  75 fail  128.2s
+    tcc344 2 fail  FAIL the armL out of his kit in every stance (worst 1.4 mm, stand unarmed)
+           FAIL the armL out of his kit in every stance (worst 1.4 mm, stand unarmed)
+           FAIL the armR out of his kit in every stance (worst 3.6 mm, jump)

@@ -2,10 +2,10 @@
 import { buildTrainingDummy } from '../world/training-dummy.js';
 import { bladeColumn } from '../combat/saw-blade.js';
 
-// Behind the bench, between lanes 4 and 5, with walking room on all sides.
-// Related practice equipment stays close (world-design rules 1 and 8) while
-// the firing paths and the wall terminals retain their negative space (rule 4).
-export const TRAINING_DUMMY_SPOT = Object.freeze({ x: -5.0, z: -2.8, yaw: 0 });
+// J151 note 19: between the range console and bench, facing into the room.
+// The weighted base clears the inner wall by .53 m (1.74 ft); the console and
+// bench keep their approach space (world-design rules 1, 4 and 8).
+export const TRAINING_DUMMY_SPOT = Object.freeze({ x: -6.85, z: -2.1, yaw: Math.PI / 2 });
 // The saw uses the same forgiving upright-column rule as it does on zombies.
 // Its practice column is wider than the walk collider; marks still project to
 // the actual sculpted surface, while a direct chain contact takes precedence.

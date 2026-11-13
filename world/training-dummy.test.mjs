@@ -4,6 +4,27 @@ import assert from 'node:assert/strict';
 import * as THREE from '../vendor/three/three.core.js';
 import { buildTrainingDummy, DUMMY_SPEC, RECOMMENDED_DUMMY_SPOT, normalizeDummyHitKind } from './training-dummy.js';
 
+test('GP-20129: single shot and knife impacts read clearly, retain the planted base and settle', () => {
+  for (const kind of ['bullet', 'knife']) for (const rate of [30, 60, 120]) {
+    const d = buildTrainingDummy(THREE, {x:-6.85, yaw:Math.PI/2});
+    try {
+      const base = d.baseGroup.matrix.clone();
+      d.strike({kind, point:{x:-6.71,y:1.28,z:0},direction:{x:-1,y:0,z:0},addMark:false});
+      let peak=0;
+      for(let i=0;i<rate*4;i++){
+        d.update(1/rate);d.group.updateMatrixWorld(true);
+        const s=d.state();peak=Math.max(peak,s.tiltRad);
+        assert(s.tiltRad<=.360001,'existing mechanical stop is respected');
+        const box=new THREE.Box3();d.group.traverseVisible(o=>{if(o.isMesh)box.expandByObject(o);});
+        assert(box.min.x>=-7.7,'recoil clears the wall at the new placement');
+      }
+      assert(peak>(kind==='bullet'?.09:.15),`${kind} has a readable peak, got ${peak}`);
+      assert(d.state().tiltRad<.002,'spring settles after the hit');
+      assert.deepEqual(d.baseGroup.matrix.elements,base.elements,'weighted base stays planted');
+    }finally{d.dispose();}
+  }
+});
+
 test('buildTrainingDummy builds expected baked hierarchy, human scale, flush floor seating, and draw budget', () => {
   const dummy = buildTrainingDummy(THREE, { x: 2, y: 0, z: -3, yaw: 0.5 });
   assert.equal(dummy.group.name, 'training-melee-dummy');

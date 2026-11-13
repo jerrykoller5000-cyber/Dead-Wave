@@ -1,0 +1,58 @@
+{
+  "at": "2026-11-13T01:38:53.610Z",
+  "actions": [
+    {
+      "first": true,
+      "kind": "bullet",
+      "state": {
+        "hits": 1,
+        "damage": 24,
+        "byKind": {
+          "knife": 0,
+          "machete": 0,
+          "katana": 0,
+          "chainsaw": 0,
+          "scorch": 0,
+          "bullet": 1
+        },
+        "markCount": 1,
+        "tiltX": 0.04977826373601863,
+        "tiltZ": -0.021607808896201047,
+        "twistY": -0.0006849031664290912,
+        "tiltRad": 0.054265762188210095,
+        "angularSpeed": 0.13500368763448084
+      },
+      "name": "live-eye-bullet.png"
+    },
+    {
+      "first": true,
+      "kind": "knife",
+      "state": {
+        "hits": 0,
+        "damage": 0,
+        "byKind": {
+          "knife": 0,
+          "machete": 0,
+          "katana": 0,
+          "chainsaw": 0,
+          "scorch": 0,
+          "bullet": 0
+        },
+        "markCount": 0,
+        "tiltX": 0,
+        "tiltZ": 0,
+        "twistY": 0,
+        "tiltRad": 0,
+        "angularSpeed": 0
+      },
+      "name": "live-eye-knife.png"
+    }
+  ],
+  "idle": {
+    "frames": 1128,
+    "median": 16.69999999999709,
+    "p95": 33.19999999999709,
+    "over50": 2
+  },
+  "failure": "Error: real input missed dummy: knife first=true\n    at file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/GP-20129/play.mjs:24:32"
+}

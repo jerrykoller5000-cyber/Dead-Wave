@@ -1,0 +1,1754 @@
+{
+  "mode": "same native game page: original visual factory vs production visual factory; live projectile path",
+  "sources": {
+    "world/training-ballistics.js": "dc9b1035d73a548b406d2128fafb63a9340b547b508a68d0b4f03fcd700d8908",
+    "studio/weapon-effects.js": "302f01982e0d5078f377c791b7678c01c58079be6946aff0d418e96651b1cfce"
+  },
+  "records": [
+    {
+      "version": "before",
+      "light": "noon",
+      "distance": 5,
+      "file": "before-5m-noon.png",
+      "actualLight": {
+        "key": "noon",
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "ground": 9272162,
+        "moon": 0,
+        "taskLamp": 0
+      },
+      "camera": {
+        "x": 3,
+        "y": -198.35,
+        "z": -635,
+        "tx": 4,
+        "ty": -198.35,
+        "tz": -635,
+        "fov": 60
+      },
+      "marks": 20,
+      "receipts": [
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        }
+      ]
+    },
+    {
+      "version": "before",
+      "light": "overcast",
+      "distance": 5,
+      "file": "before-5m-overcast.png",
+      "actualLight": {
+        "key": "overcast",
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "ground": 8158850,
+        "moon": 0,
+        "taskLamp": 0
+      },
+      "camera": {
+        "x": 3,
+        "y": -198.35,
+        "z": -635,
+        "tx": 4,
+        "ty": -198.35,
+        "tz": -635,
+        "fov": 60
+      },
+      "marks": 20,
+      "receipts": [
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        }
+      ]
+    },
+    {
+      "version": "before",
+      "light": "dusk",
+      "distance": 5,
+      "file": "before-5m-dusk.png",
+      "actualLight": {
+        "key": "dusk",
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "ground": 4863016,
+        "moon": 0,
+        "taskLamp": 0
+      },
+      "camera": {
+        "x": 3,
+        "y": -198.35,
+        "z": -635,
+        "tx": 4,
+        "ty": -198.35,
+        "tz": -635,
+        "fov": 60
+      },
+      "marks": 20,
+      "receipts": [
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        }
+      ]
+    },
+    {
+      "version": "before",
+      "light": "night",
+      "distance": 5,
+      "file": "before-5m-night.png",
+      "actualLight": {
+        "key": "night",
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "ground": 1382172,
+        "moon": 0,
+        "taskLamp": 13.801772581284226
+      },
+      "camera": {
+        "x": 3,
+        "y": -198.35,
+        "z": -635,
+        "tx": 4,
+        "ty": -198.35,
+        "tz": -635,
+        "fov": 60
+      },
+      "marks": 20,
+      "receipts": [
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        }
+      ]
+    },
+    {
+      "version": "before",
+      "light": "noon",
+      "distance": 10,
+      "file": "before-10m-noon.png",
+      "actualLight": {
+        "key": "noon",
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "ground": 9272162,
+        "moon": 0,
+        "taskLamp": 0
+      },
+      "camera": {
+        "x": -2,
+        "y": -198.35,
+        "z": -635,
+        "tx": -1,
+        "ty": -198.35,
+        "tz": -635,
+        "fov": 60
+      },
+      "marks": 20,
+      "receipts": [
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        }
+      ]
+    },
+    {
+      "version": "before",
+      "light": "overcast",
+      "distance": 10,
+      "file": "before-10m-overcast.png",
+      "actualLight": {
+        "key": "overcast",
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "ground": 8158850,
+        "moon": 0,
+        "taskLamp": 0
+      },
+      "camera": {
+        "x": -2,
+        "y": -198.35,
+        "z": -635,
+        "tx": -1,
+        "ty": -198.35,
+        "tz": -635,
+        "fov": 60
+      },
+      "marks": 20,
+      "receipts": [
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        }
+      ]
+    },
+    {
+      "version": "before",
+      "light": "dusk",
+      "distance": 10,
+      "file": "before-10m-dusk.png",
+      "actualLight": {
+        "key": "dusk",
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "ground": 4863016,
+        "moon": 0,
+        "taskLamp": 0
+      },
+      "camera": {
+        "x": -2,
+        "y": -198.35,
+        "z": -635,
+        "tx": -1,
+        "ty": -198.35,
+        "tz": -635,
+        "fov": 60
+      },
+      "marks": 20,
+      "receipts": [
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        }
+      ]
+    },
+    {
+      "version": "before",
+      "light": "night",
+      "distance": 10,
+      "file": "before-10m-night.png",
+      "actualLight": {
+        "key": "night",
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "ground": 1382172,
+        "moon": 0,
+        "taskLamp": 29.584747177162935
+      },
+      "camera": {
+        "x": -2,
+        "y": -198.35,
+        "z": -635,
+        "tx": -1,
+        "ty": -198.35,
+        "tz": -635,
+        "fov": 60
+      },
+      "marks": 20,
+      "receipts": [
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        }
+      ]
+    },
+    {
+      "version": "after",
+      "light": "noon",
+      "distance": 5,
+      "file": "after-5m-noon.png",
+      "actualLight": {
+        "key": "noon",
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "ground": 9272162,
+        "moon": 0,
+        "taskLamp": 0
+      },
+      "camera": {
+        "x": 3,
+        "y": -198.35,
+        "z": -635,
+        "tx": 4,
+        "ty": -198.35,
+        "tz": -635,
+        "fov": 60
+      },
+      "marks": 20,
+      "receipts": [
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        }
+      ]
+    },
+    {
+      "version": "after",
+      "light": "overcast",
+      "distance": 5,
+      "file": "after-5m-overcast.png",
+      "actualLight": {
+        "key": "overcast",
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "ground": 8158850,
+        "moon": 0,
+        "taskLamp": 0
+      },
+      "camera": {
+        "x": 3,
+        "y": -198.35,
+        "z": -635,
+        "tx": 4,
+        "ty": -198.35,
+        "tz": -635,
+        "fov": 60
+      },
+      "marks": 20,
+      "receipts": [
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        }
+      ]
+    },
+    {
+      "version": "after",
+      "light": "dusk",
+      "distance": 5,
+      "file": "after-5m-dusk.png",
+      "actualLight": {
+        "key": "dusk",
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "ground": 4863016,
+        "moon": 0,
+        "taskLamp": 0
+      },
+      "camera": {
+        "x": 3,
+        "y": -198.35,
+        "z": -635,
+        "tx": 4,
+        "ty": -198.35,
+        "tz": -635,
+        "fov": 60
+      },
+      "marks": 20,
+      "receipts": [
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        }
+      ]
+    },
+    {
+      "version": "after",
+      "light": "night",
+      "distance": 5,
+      "file": "after-5m-night.png",
+      "actualLight": {
+        "key": "night",
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "ground": 1382172,
+        "moon": 0,
+        "taskLamp": 13.801772581284226
+      },
+      "camera": {
+        "x": 3,
+        "y": -198.35,
+        "z": -635,
+        "tx": 4,
+        "ty": -198.35,
+        "tz": -635,
+        "fov": 60
+      },
+      "marks": 20,
+      "receipts": [
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        }
+      ]
+    },
+    {
+      "version": "after",
+      "light": "noon",
+      "distance": 10,
+      "file": "after-10m-noon.png",
+      "actualLight": {
+        "key": "noon",
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "ground": 9272162,
+        "moon": 0,
+        "taskLamp": 0
+      },
+      "camera": {
+        "x": -2,
+        "y": -198.35,
+        "z": -635,
+        "tx": -1,
+        "ty": -198.35,
+        "tz": -635,
+        "fov": 60
+      },
+      "marks": 20,
+      "receipts": [
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        }
+      ]
+    },
+    {
+      "version": "after",
+      "light": "overcast",
+      "distance": 10,
+      "file": "after-10m-overcast.png",
+      "actualLight": {
+        "key": "overcast",
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "ground": 8158850,
+        "moon": 0,
+        "taskLamp": 0
+      },
+      "camera": {
+        "x": -2,
+        "y": -198.35,
+        "z": -635,
+        "tx": -1,
+        "ty": -198.35,
+        "tz": -635,
+        "fov": 60
+      },
+      "marks": 20,
+      "receipts": [
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        }
+      ]
+    },
+    {
+      "version": "after",
+      "light": "dusk",
+      "distance": 10,
+      "file": "after-10m-dusk.png",
+      "actualLight": {
+        "key": "dusk",
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "ground": 4863016,
+        "moon": 0,
+        "taskLamp": 0
+      },
+      "camera": {
+        "x": -2,
+        "y": -198.35,
+        "z": -635,
+        "tx": -1,
+        "ty": -198.35,
+        "tz": -635,
+        "fov": 60
+      },
+      "marks": 20,
+      "receipts": [
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        }
+      ]
+    },
+    {
+      "version": "after",
+      "light": "night",
+      "distance": 10,
+      "file": "after-10m-night.png",
+      "actualLight": {
+        "key": "night",
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "ground": 1382172,
+        "moon": 0,
+        "taskLamp": 29.584747177162935
+      },
+      "camera": {
+        "x": -2,
+        "y": -198.35,
+        "z": -635,
+        "tx": -1,
+        "ty": -198.35,
+        "tz": -635,
+        "fov": 60
+      },
+      "marks": 20,
+      "receipts": [
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "pistol",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "m4",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 1
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        },
+        {
+          "weapon": "shotgun",
+          "pellets": 8
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

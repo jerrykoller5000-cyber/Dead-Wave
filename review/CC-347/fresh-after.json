@@ -1,0 +1,269 @@
+{
+ "afterWarm": {
+  "bandolier": false,
+  "belt40": false,
+  "harness": false,
+  "straps": [
+   false,
+   false
+  ],
+  "slungGuns": [
+   false,
+   false
+  ],
+  "holsters": [
+   {
+    "g": false,
+    "gun": false,
+    "shell": false
+   },
+   {
+    "g": false,
+    "gun": false,
+    "shell": false
+   }
+  ],
+  "pairs": [
+   {
+    "g": false,
+    "gun": false,
+    "shell": false
+   },
+   {
+    "g": false,
+    "gun": false,
+    "shell": false
+   }
+  ],
+  "hip": {
+   "g": true,
+   "gun": true
+  },
+  "hipPair": {
+   "g": false,
+   "gun": false
+  },
+  "plan": {
+   "primary": [
+    null,
+    null
+   ],
+   "secondary": [
+    null,
+    null
+   ],
+   "paired": [
+    null,
+    null
+   ],
+   "hip": "pistol",
+   "hipPair": null,
+   "hipPairOn": false,
+   "pairOn": [
+    false,
+    false
+   ],
+   "holsterOn": [
+    false,
+    false
+   ],
+   "packPair": -1,
+   "secondaryKinds": [
+    null,
+    null
+   ],
+   "mags": 1,
+   "grenades": 0,
+   "shells": 0,
+   "rounds40": 0,
+   "boxes": 0,
+   "tanks": 0,
+   "bandolier": false,
+   "belt40": false,
+   "vest": false,
+   "cans": [],
+   "looks": [
+    "pistol|||"
+   ]
+  },
+  "strayNoGun": []
+ },
+ "after3p": {
+  "bandolier": false,
+  "belt40": false,
+  "harness": false,
+  "straps": [
+   false,
+   false
+  ],
+  "slungGuns": [
+   false,
+   false
+  ],
+  "holsters": [
+   {
+    "g": false,
+    "gun": false,
+    "shell": false
+   },
+   {
+    "g": false,
+    "gun": false,
+    "shell": false
+   }
+  ],
+  "pairs": [
+   {
+    "g": false,
+    "gun": false,
+    "shell": false
+   },
+   {
+    "g": false,
+    "gun": false,
+    "shell": false
+   }
+  ],
+  "hip": {
+   "g": true,
+   "gun": true
+  },
+  "hipPair": {
+   "g": false,
+   "gun": false
+  },
+  "plan": {
+   "primary": [
+    null,
+    null
+   ],
+   "secondary": [
+    null,
+    null
+   ],
+   "paired": [
+    null,
+    null
+   ],
+   "hip": "pistol",
+   "hipPair": null,
+   "hipPairOn": false,
+   "pairOn": [
+    false,
+    false
+   ],
+   "holsterOn": [
+    false,
+    false
+   ],
+   "packPair": -1,
+   "secondaryKinds": [
+    null,
+    null
+   ],
+   "mags": 1,
+   "grenades": 0,
+   "shells": 0,
+   "rounds40": 0,
+   "boxes": 0,
+   "tanks": 0,
+   "bandolier": false,
+   "belt40": false,
+   "vest": false,
+   "cans": [],
+   "looks": [
+    "pistol|||"
+   ]
+  },
+  "strayNoGun": []
+ },
+ "end": {
+  "bandolier": false,
+  "belt40": false,
+  "harness": false,
+  "straps": [
+   false,
+   false
+  ],
+  "slungGuns": [
+   false,
+   false
+  ],
+  "holsters": [
+   {
+    "g": false,
+    "gun": false,
+    "shell": false
+   },
+   {
+    "g": false,
+    "gun": false,
+    "shell": false
+   }
+  ],
+  "pairs": [
+   {
+    "g": false,
+    "gun": false,
+    "shell": false
+   },
+   {
+    "g": false,
+    "gun": false,
+    "shell": false
+   }
+  ],
+  "hip": {
+   "g": true,
+   "gun": true
+  },
+  "hipPair": {
+   "g": false,
+   "gun": false
+  },
+  "plan": {
+   "primary": [
+    null,
+    null
+   ],
+   "secondary": [
+    null,
+    null
+   ],
+   "paired": [
+    null,
+    null
+   ],
+   "hip": "pistol",
+   "hipPair": null,
+   "hipPairOn": false,
+   "pairOn": [
+    false,
+    false
+   ],
+   "holsterOn": [
+    false,
+    false
+   ],
+   "packPair": -1,
+   "secondaryKinds": [
+    null,
+    null
+   ],
+   "mags": 1,
+   "grenades": 0,
+   "shells": 0,
+   "rounds40": 0,
+   "boxes": 0,
+   "tanks": 0,
+   "bandolier": false,
+   "belt40": false,
+   "vest": false,
+   "cans": [],
+   "looks": [
+    "pistol|||"
+   ]
+  },
+  "strayNoGun": []
+ }
+}

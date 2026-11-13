@@ -6,6 +6,8 @@
 //   travel along its axis (studio/weapon-light-switch.js compresses the pad from it); nothing of the glove (or its pads) more
 //   than half a millimetre inside any closed part of the gun (J126 rule 2, as tcl334c measures it), nor the sleeve deeper than
 //   it is on the hold (J126 rule 3);
+// - on the way there and back (CE-9, 13 Nov; J151 notes 17 and 46, the arm and the thumb through the GW-4 and the sniper
+//   working the light) the same: the glove no deeper than half a millimetre, the sleeve no deeper than on the hold;
 // - the hand goes home: no press shown after 'total', the support wrist back on the gun where it was before the key (under 1 mm);
 // - a second 2 during a press changes nothing more (CLAUDE DIRECTOR, 11 Nov); 2 again after it turns the light off the same way;
 // - third person: 2 changes the light at once, as before.
@@ -35,7 +37,8 @@
   // how far the arm's meshes (keys) go into those parts at most (view world units, as tcl334c), and where
   const clipOf = (V, A, mks, parts0) => {
     V.root.updateMatrixWorld(true);
-    const GI = V.gun.root.matrixWorld.clone().invert(), gs = V.gun.root.matrixWorld.getMaxScaleOnAxis();
+    // CE-10 (13 Nov): the scale read off the matrix itself: the suite's fakethree has no getMaxScaleOnAxis (its permissive stub returned an object, every depth became NaN and nothing ever counted)
+    const GI = V.gun.root.matrixWorld.clone().invert(), gs = (() => { const e = V.gun.root.matrixWorld.elements; return Math.max(Math.hypot(e[0], e[1], e[2]), Math.hypot(e[4], e[5], e[6]), Math.hypot(e[8], e[9], e[10])); })();
     let worst = 0, where = '';
     for (const mk of mks) {
       const mm = A.meshes[mk]; if (!mm || !vis(mm) || !mm.geometry || !mm.geometry.attributes.position) continue;
@@ -77,13 +80,17 @@
       const inGun = () => { const Fr = V.frame, W = V.wrists.l; return W.p.clone().sub(Fr.p).applyQuaternion(Fr.q.clone().invert()).multiplyScalar(1 / Fr.s); };
       const w0 = inGun(), parts = partsOf(V), sleeve0 = clipOf(V, V.arms.l, ['fore', 'cuff', 'roll', 'upper'], parts);
       key2();
-      let t = 0, early = false, onAt = null, fullPress = null, maxPress = 0;
+      let t = 0, early = false, onAt = null, fullPress = null, maxPress = 0, wayG = 0, wayS = 0, wayAt = '';
+      const way = [0.05, 0.11, 0.14, 0.35, 0.41, 0.47].filter((x) => x < lp.total);   // CE-9 (13 Nov; J151 notes 17, 46): the reach and the way back too
       while (t < lp.total + 0.06) {
         T.stepFrame(dt); t += dt;
         const L = V.info.light, on = lightOn();
         if (on && onAt == null) onAt = t;
         if (on && t < lp.at - 0.02) early = true;
         if (L && L.press > maxPress) maxPress = L.press;
+        if (way.length && t >= way[0] - 1e-9) { way.shift(); V.root.updateMatrixWorld(true);
+          const g = clipOf(V, V.arms.l, ['glove', 'glovePads', 'bare', 'bareNails'], parts), s = clipOf(V, V.arms.l, ['fore', 'cuff', 'roll', 'upper'], parts);
+          if (g.worst > wayG) { wayG = g.worst; wayAt = t.toFixed(2) + ' s ' + g.where; } wayS = Math.max(wayS, s.worst); }
         if (L && L.press > 0.999 && !fullPress) {
           // the press: the pad on the switch, the node in, nothing of the glove in the gun
           V.root.updateMatrixWorld(true);
@@ -100,8 +107,8 @@
       }
       const home2 = inGun().distanceTo(w0) * 1000;
       const fp = fullPress || {};
-      const good = !early && onAt != null && Math.abs(onAt - lp.at) < 0.02 && fullPress && fp.gapMm < 1.5 && Math.abs(fp.intoMm - ls.travel * 1000) < 0.05 && fp.worstMm <= 0.5 && fp.sleeveMm <= Math.max(0.5, sleeve0.worst * 1000 + 0.05) && V.info.light == null && home2 < 1;
-      out.push('INFO ' + k + ': light on at ' + (onAt == null ? '-' : onAt.toFixed(3)) + ' s (press at ' + lp.at.toFixed(3) + '), pad off the switch ' + (fp.gapMm != null ? fp.gapMm.toFixed(2) : '-') + ' mm, switch in ' + (fp.intoMm != null ? fp.intoMm.toFixed(2) : '-') + ' mm, glove into the gun ' + (fp.worstMm != null ? fp.worstMm.toFixed(2) : '-') + ' mm ' + (fp.where || '') + ', sleeve into the gun ' + (fp.sleeveMm != null ? fp.sleeveMm.toFixed(2) : '-') + ' mm (on the hold ' + (sleeve0.worst * 1000).toFixed(2) + ') ' + (fp.sleeveWhere || '') + ', hand home ' + home2.toFixed(2) + ' mm');
+      const good = !early && onAt != null && Math.abs(onAt - lp.at) < 0.02 && fullPress && fp.gapMm < 1.5 && Math.abs(fp.intoMm - ls.travel * 1000) < 0.05 && fp.worstMm <= 0.5 && fp.sleeveMm <= Math.max(0.5, sleeve0.worst * 1000 + 0.05) && wayG * 1000 <= 0.5 && wayS * 1000 <= Math.max(0.5, sleeve0.worst * 1000 + 0.05) && V.info.light == null && home2 < 1;
+      out.push('INFO ' + k + ': light on at ' + (onAt == null ? '-' : onAt.toFixed(3)) + ' s (press at ' + lp.at.toFixed(3) + '), pad off the switch ' + (fp.gapMm != null ? fp.gapMm.toFixed(2) : '-') + ' mm, switch in ' + (fp.intoMm != null ? fp.intoMm.toFixed(2) : '-') + ' mm, glove into the gun ' + (fp.worstMm != null ? fp.worstMm.toFixed(2) : '-') + ' mm ' + (fp.where || '') + ', sleeve into the gun ' + (fp.sleeveMm != null ? fp.sleeveMm.toFixed(2) : '-') + ' mm (on the hold ' + (sleeve0.worst * 1000).toFixed(2) + ') ' + (fp.sleeveWhere || '') + ', on the way glove ' + (wayG * 1000).toFixed(2) + ' mm ' + wayAt + ' and sleeve ' + (wayS * 1000).toFixed(2) + ' mm, hand home ' + home2.toFixed(2) + ' mm');
       if (!good) bad.push(k);
       // a second 2 during the press changes nothing more; 2 again after it turns the light off the same way
       key2(); for (let i = 0; i < 6; i++) T.stepFrame(dt); key2();

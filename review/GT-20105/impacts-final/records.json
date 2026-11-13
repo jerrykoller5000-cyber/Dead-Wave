@@ -1,0 +1,210 @@
+{
+  "mode": "same native game page: original visual factory vs production visual factory; live projectile path",
+  "sources": {
+    "world/training-ballistics.js": "5f57d06348d86436a43d17938296eb6329e5e282acee288761a799c2b49cc39b",
+    "studio/weapon-effects.js": "7f88f9d68b6b0d62c73b0254b550eb5a771dd1aba303889d1e5885a2012e1ec9"
+  },
+  "records": [
+    {
+      "version": "before",
+      "light": "noon",
+      "file": "before-noon.png",
+      "actualLight": {
+        "key": "noon",
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "ground": 9272162,
+        "moon": 0
+      },
+      "camera": {
+        "x": 5.7,
+        "y": -198.45,
+        "z": -624,
+        "tx": 6.7,
+        "ty": -198.45,
+        "tz": -624,
+        "fov": 46
+      },
+      "marks": 8
+    },
+    {
+      "version": "before",
+      "light": "overcast",
+      "file": "before-overcast.png",
+      "actualLight": {
+        "key": "overcast",
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "ground": 8158850,
+        "moon": 0
+      },
+      "camera": {
+        "x": 5.7,
+        "y": -198.45,
+        "z": -624,
+        "tx": 6.7,
+        "ty": -198.45,
+        "tz": -624,
+        "fov": 46
+      },
+      "marks": 8
+    },
+    {
+      "version": "before",
+      "light": "dusk",
+      "file": "before-dusk.png",
+      "actualLight": {
+        "key": "dusk",
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "ground": 4863016,
+        "moon": 0
+      },
+      "camera": {
+        "x": 5.7,
+        "y": -198.45,
+        "z": -624,
+        "tx": 6.7,
+        "ty": -198.45,
+        "tz": -624,
+        "fov": 46
+      },
+      "marks": 8
+    },
+    {
+      "version": "before",
+      "light": "night",
+      "file": "before-night.png",
+      "actualLight": {
+        "key": "night",
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "ground": 1382172,
+        "moon": 0
+      },
+      "camera": {
+        "x": 5.7,
+        "y": -198.45,
+        "z": -624,
+        "tx": 6.7,
+        "ty": -198.45,
+        "tz": -624,
+        "fov": 46
+      },
+      "marks": 8
+    },
+    {
+      "version": "after",
+      "light": "noon",
+      "file": "after-noon.png",
+      "actualLight": {
+        "key": "noon",
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "ground": 9272162,
+        "moon": 0
+      },
+      "camera": {
+        "x": 5.7,
+        "y": -198.45,
+        "z": -624,
+        "tx": 6.7,
+        "ty": -198.45,
+        "tz": -624,
+        "fov": 46
+      },
+      "marks": 8
+    },
+    {
+      "version": "after",
+      "light": "overcast",
+      "file": "after-overcast.png",
+      "actualLight": {
+        "key": "overcast",
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "ground": 8158850,
+        "moon": 0
+      },
+      "camera": {
+        "x": 5.7,
+        "y": -198.45,
+        "z": -624,
+        "tx": 6.7,
+        "ty": -198.45,
+        "tz": -624,
+        "fov": 46
+      },
+      "marks": 8
+    },
+    {
+      "version": "after",
+      "light": "dusk",
+      "file": "after-dusk.png",
+      "actualLight": {
+        "key": "dusk",
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "ground": 4863016,
+        "moon": 0
+      },
+      "camera": {
+        "x": 5.7,
+        "y": -198.45,
+        "z": -624,
+        "tx": 6.7,
+        "ty": -198.45,
+        "tz": -624,
+        "fov": 46
+      },
+      "marks": 8
+    },
+    {
+      "version": "after",
+      "light": "night",
+      "file": "after-night.png",
+      "actualLight": {
+        "key": "night",
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "ground": 1382172,
+        "moon": 0
+      },
+      "camera": {
+        "x": 5.7,
+        "y": -198.45,
+        "z": -624,
+        "tx": 6.7,
+        "ty": -198.45,
+        "tz": -624,
+        "fov": 46
+      },
+      "marks": 8
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,9 @@
+{
+  "phase": "before",
+  "scope": "UI fixture, not model/persistence proof",
+  "before": {
+    "buttons": 0,
+    "current": "wood"
+  },
+  "errors": []
+}

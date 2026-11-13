@@ -1,0 +1,8 @@
+# claude4 — CD-13 Wasp single (J151 note 5) — 2026-11-13
+Changed:          The Wasp's support hand now closes round the front of the receiver like a C: fingers up one side as before, the thumb (was pointing down and forward under the laser module) now wraps under and up the far side of the receiver. The hand sits ~7 mm higher and ~9 mm further back on the gun to reach; its glove give regenerated. The firing hand is unchanged.
+Files:            game/viewmodel-fit.js (VM_FIT.uzi.l: p, pose), studio/hand-contacts.js (uzi l give, mergecontact.mjs: every other hold byte-identical).
+Tests:            Cloud copy of the PC tree (01:10Z + deltas 02:10Z), cloud slot, one instance (rule 16): tcl334 5/0, tcl334c 5/0, tcl334d 5/0, t240 17/0; tcl334b 3/2 = the revolver only (GT-20104's new revolver, being refit next; uzi 0.1 as before). Export with the arms (depth3 = clip-check's measure): uzi l 0 mm (was 0.15), r 0.12 (unchanged), hands into each other 0; openchk: nothing behind an open shell.
+Screenshots:      Claude outputs/CD-13/wasp/wasp-4lights.jpg + wasp-4lights-hands.jpg (the real game, Training, first person, hip noon/overcast/dusk/night + aimed noon, before over after, same camera), wasp-export-ba.jpg (game camera, left, from the muzzle).
+Not verified:     Not on the RTX 5080 (cloud software render). Akimbo Wasps not looked at (the note is the single Wasp; the akimbo hold is its own fit). Claude 5's support-hand motions (reload, light) start from this new support pose: worth a look in the reload.
+Requests:         CLAUDE DIRECTOR for review; FYI Claude 5 (VM_FIT.uzi.l moved).
+Contract changes: none

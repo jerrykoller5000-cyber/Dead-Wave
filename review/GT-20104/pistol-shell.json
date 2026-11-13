@@ -1,0 +1,71 @@
+{
+  "shots": [
+    {
+      "target": "weapon.pistol",
+      "view": "side",
+      "pre": "await DWInspect.light('noon')",
+      "settle": 1400,
+      "size": "1280x720",
+      "out": "review/GT-20104/shell-prototype/side-noon.png"
+    },
+    {
+      "target": "weapon.pistol",
+      "view": "threeR",
+      "pre": "await DWInspect.light('noon')",
+      "settle": 1400,
+      "size": "1280x720",
+      "out": "review/GT-20104/shell-prototype/threeR-noon.png"
+    },
+    {
+      "target": "weapon.pistol",
+      "view": "side",
+      "pre": "await DWInspect.light('overcast')",
+      "settle": 1400,
+      "size": "1280x720",
+      "out": "review/GT-20104/shell-prototype/side-overcast.png"
+    },
+    {
+      "target": "weapon.pistol",
+      "view": "threeR",
+      "pre": "await DWInspect.light('overcast')",
+      "settle": 1400,
+      "size": "1280x720",
+      "out": "review/GT-20104/shell-prototype/threeR-overcast.png"
+    },
+    {
+      "target": "weapon.pistol",
+      "view": "side",
+      "pre": "await DWInspect.light('dusk')",
+      "settle": 1400,
+      "size": "1280x720",
+      "out": "review/GT-20104/shell-prototype/side-dusk.png"
+    },
+    {
+      "target": "weapon.pistol",
+      "view": "threeR",
+      "pre": "await DWInspect.light('dusk')",
+      "settle": 1400,
+      "size": "1280x720",
+      "out": "review/GT-20104/shell-prototype/threeR-dusk.png"
+    },
+    {
+      "target": "weapon.pistol",
+      "view": "side",
+      "pre": "await DWInspect.light('night')",
+      "settle": 1400,
+      "size": "1280x720",
+      "out": "review/GT-20104/shell-prototype/side-night.png"
+    },
+    {
+      "target": "weapon.pistol",
+      "view": "threeR",
+      "pre": "await DWInspect.light('night')",
+      "settle": 1400,
+      "size": "1280x720",
+      "out": "review/GT-20104/shell-prototype/threeR-night.png"
+    }
+  ],
+  "out": "review/GT-20104/shell-prototype",
+  "cols": 2,
+  "tile": 480
+}

@@ -3,7 +3,7 @@
 //  with X (the change itself is tcb294's). Checked here: no workbench lists a fitted load; packs of slugs and buckshot are bought
 //  and counted; with each type in the tube the gun fires that type's sheet; the Breacher has none. Then fired for real from a
 //  standing player at a shambler on a level field with the random numbers pinned to the cone's middle (so every pellet flies true):
-//  birdshot lands 7 pellets, buckshot 8, the slug 1; on a body slug > buckshot > birdshot (x1.59, x1.27, x1.00 of Jerry's hit
+//  birdshot lands 18 pellets (CB-327, J151 note 13: more than buck; was 7), buckshot 8, the slug 1; on a body slug > buckshot > birdshot (x1.59, x1.27, x1.00 of Jerry's hit
 //  sheet's shell); at the cone's edge the slug (a tight cone) still hits; and the reach is the sheet's: birdshot stops short of
 //  25 m, buckshot reaches it, the slug reaches 40 m. A new run: birdshot, nothing else carried.
 (async () => {
@@ -27,7 +27,7 @@
 
     // ---- the types (CB-294, J133: these replaced CB-248's fitted 3.5-inch loads; --review) ------------------------------------
     const B = D.base;
-    ok(B.pellets === 7 && B.damage === 9 && B.range === 22 && Math.abs(B.spread - 0.14) < 1e-9, 'birdshot, the issued shell: ' + B.pellets + ' pellets of ' + B.damage + ', spread ' + B.spread + ', ' + B.range + ' m');
+    ok(B.pellets === 18 && B.damage === 3.5 && B.pellets * B.damage === 63 && B.range === 22 && Math.abs(B.spread - 0.16) < 1e-9, 'birdshot, the issued shell: ' + B.pellets + ' pellets of ' + B.damage + ', spread ' + B.spread + ', ' + B.range + ' m');
     ok(D.fitted() === 'birdshot' && JSON.stringify(D.stats()) === JSON.stringify(B), 'it is what the pump fires with to begin with');
     ok(D.mods('shotgun').length === 0 && T.armoryDbg.mods('aa12').every((m) => !m.id.startsWith('load:')) && T.armoryDbg.mods('m4').every((m) => !m.id.startsWith('load:')), 'no workbench lists a fitted load any more');
     const bank0 = T.getBank();
@@ -99,10 +99,11 @@
     D.clear();   const std = await pull(0, 0, 'issued');
     D.fit('buckshot'); const buck = await pull(0, 0, 'buckshot');
     D.fit('slug'); const slug = await pull(0, 0, 'slug');
-    ok(std.fired && std.air.length === 7, 'the issued shell: seven pellets leave (' + std.air.length + ')');
+    ok(std.fired && std.air.length === 18, 'the issued shell: eighteen pellets of birdshot leave (' + std.air.length + ')');
+    ok(std.air.length > buck.air.length, 'J151 note 13: birdshot puts more pellets in the air than buckshot (' + std.air.length + ' vs ' + buck.air.length + ')');
     ok(buck.fired && buck.air.length === 8, 'buckshot: eight leave (' + buck.air.length + ')');
     ok(slug.fired && slug.air.length === 1, 'the slug: one leaves (' + slug.air.length + ')');
-    ok(std.air[0] && std.air[0].base === 9 && std.air[0].dmg === 9 && buck.air[0] && buck.air[0].dmg === 10 && slug.air[0] && slug.air[0].dmg === 100, 'each carries its sheet\'s damage: 9, 10, 100');
+    ok(std.air[0] && std.air[0].base === 3.5 && std.air[0].dmg === 3.5 && buck.air[0] && buck.air[0].dmg === 10 && slug.air[0] && slug.air[0].dmg === 100, 'each carries its sheet\'s damage: 3.5, 10, 100 (' + [std, buck, slug].map((x) => x.air[0] && x.air[0].dmg).join(', ') + ')');   // CB-327: birdshot 18 x 3.5 (was 9)
 
     // ... and on a body: those very pellets, with the tags the game put on them, through the game's own damage rules. Jerry's hit
     // sheet scores a whole shell as 270% of a shambler (24): the issued shell must take that, buckshot a shell of 80 over 63 of it
@@ -134,8 +135,8 @@
     D.fit('slug'); const eSlug = await pull(0, 0.99, 'slug edge');
     const mid = std.air[0] && std.air[0].dir;
     const aS = mid && eStd.air[0] ? ang(mid, eStd.air[0].dir) : 0, aB = mid && eBuck.air[0] ? ang(mid, eBuck.air[0].dir) : 0, aG = mid && eSlug.air[0] ? ang(mid, eSlug.air[0].dir) : 0;
-    ok(aS > 0.08 && aS < 0.16, 'the issued shell leaves the aim by ' + aS.toFixed(3) + ' rad at the edge (spread 0.14)');
-    ok(aS > 0 && Math.abs(aB / aS - 0.12 / 0.14) < 0.1, 'buckshot ' + aB.toFixed(3) + ' rad, a seventh tighter than birdshot (' + (aB / aS).toFixed(2) + ' of it)');
+    ok(aS > B.spread * 0.57 && aS < B.spread * 1.01, 'the issued shell leaves the aim by ' + aS.toFixed(3) + ' rad at the edge (spread ' + B.spread + ')');   // CB-327: the sheet's spread (0.14 then, 0.16 now)
+    ok(aS > 0 && Math.abs(aB / aS - 0.12 / B.spread) < 0.1, 'buckshot ' + aB.toFixed(3) + ' rad, tighter than birdshot by the sheets (' + (aB / aS).toFixed(2) + ' of it, ' + (0.12 / B.spread).toFixed(2) + ')');
     ok(aS > 0 && aG / aS > 0.08 && aG / aS < 0.25, 'the slug ' + aG.toFixed(3) + ' rad, a few times tighter than the shell\'s cone (' + (aG / aS).toFixed(2) + ' of it)');
 
     // the reach: what is in the air flies the sheet's range, and a real body feels it
@@ -145,7 +146,7 @@
     const far0 = await pull(24, 0, 'issued');
     D.fit('buckshot'); const far1 = await pull(24, 0, 'buckshot');
     D.fit('slug'); const far2 = await pull(38, 0, 'slug');
-    ok(near0.n > 0, 'a body 16 m out feels the shell (' + near0.n + ' of 7 land): the aim is true');
+    ok(near0.n > 0, 'a body 16 m out feels the shell (' + near0.n + ' of ' + B.pellets + ' land): the aim is true');
     ok(far0.n === 0, 'a body 24 m out is beyond it (' + far0.n + ' land)');
     ok(far1.n > 0, 'and within buckshot (' + far1.n + ' of 8 land)');
     ok(far2.n === 1, 'the slug reaches a body 38 m out (' + far2.n + ' lands)');

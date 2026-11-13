@@ -60,3 +60,24 @@ test('a pick, a boot colour, a reset and a gun stay on the profile', () => {
   assert.equal(reset.guns.m4, 'multicam');
   assert.equal(resetTab(w, 'guns').guns.m4, undefined);
 });
+
+test('KR-7 furniture survives serialization and unrelated appearance edits; old and malformed saves use wood', () => {
+  const old = defaultWardrobe(); delete old.furniture;
+  assert.equal(normalizeWardrobe(old).furniture.ak, 'wood');
+  const raw = { ...old, furniture: { ak: 'synthetic', pistol: 'synthetic' } };
+  let w = normalizeWardrobe(JSON.parse(JSON.stringify(raw)));
+  assert.deepEqual(w.furniture, { ak: 'synthetic' });
+  w = withGun(w, 'ak', 'marpat');
+  w = withItem(w, 'shirt', { sleeves: 'rolled' });
+  w = withBody(w, 'eyes', 'green');
+  w = resetTab(w, 'body');
+  assert.equal(w.furniture.ak, 'synthetic');
+  assert.equal(w.guns.ak, 'marpat');
+  const reset = resetTab(w, 'guns');
+  assert.equal(reset.furniture.ak, 'wood');
+  assert.deepEqual(reset.guns, {});
+  assert.equal(w.furniture.ak, 'synthetic', 'reset never mutates the saved source');
+  for (const furniture of [null, {}, { ak: 'metal' }, { ak: 1 }, 'synthetic'])
+    assert.equal(normalizeWardrobe({ ...old, furniture }).furniture.ak, 'wood');
+  assert.equal(raw.furniture.ak, 'synthetic');
+});

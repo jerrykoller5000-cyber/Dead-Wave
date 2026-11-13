@@ -1,0 +1,8 @@
+# claude4 — CD-13 pump shotgun refit after CC-348 — 2026-11-13
+Changed:          The pump's support hand moved out onto Claude 3's thicker pump (CC-348: 68 mm across the ridges, gun 1.4 scale) and re-closed round it; the pump no longer pokes through the glove (it was 9.4 mm in). The firing fist is unchanged; both gloves' give regenerated at the new scale.
+Files:            game/viewmodel-fit.js (VM_FIT.shotgun.l), studio/hand-contacts.js (shotgun r and l give; entries merged onto the PC's latest).
+Tests:            Cloud copy of the PC tree (to 04:50Z), cloud slot, one instance (rule 16): tcl334 5/0, tcl334d 5/0; tcl334b 4/1 (revolver index, VM_TRIGGER), tcl334c 4/1 (ak 5.1 = CF-9 fore end, mine next; shotgun 3.7 = index in the blade, VM_TRIGGER), t240 16/1 "holstered: both hands relaxed (0.72, 0.72)" (from the 04:50Z viewmodel.js/poses changes, not the fit files). Export with the arms (depth3 = clip-check's measure): support 9.36 -> 0 mm, firing 3.71 = index3 in the trigger blade only (Claude 5's VM_TRIGGER.shotgun rest at the new scale; sent), palm 0.45-0.56 in the grip checkering -> 0 (give); hands into each other 0; openchk clean.
+Screenshots:      Claude outputs/CD-13/pump/pump-4lights.jpg (the real game, Training, first person, hip in four lights + aimed noon, before over after, same camera), pump-export-ba.jpg (game camera, left, below, front).
+Not verified:     Not on the RTX 5080. Third person ('pump' TP hold) not refit. The pump's rack motion (Claude 5's) starts from the new support pose.
+Requests:         CLAUDE DIRECTOR for review; Claude 5 VM_TRIGGER.shotgun; Claude 3 FYI.
+Contract changes: none

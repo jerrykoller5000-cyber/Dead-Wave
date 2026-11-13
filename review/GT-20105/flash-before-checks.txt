@@ -1,0 +1,4 @@
+ok    tcb317    7 pass   0 fail  32.5s  (real renderer)
+    INFO the eye: unlit flash spheres drawn 0
+ok    t283      3 pass   0 fail  35.1s  (real renderer)
+2 checks: 10 pass, 0 fail (real renderer)

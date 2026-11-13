@@ -1,0 +1,12 @@
+{
+  "at": "2026-11-13T02:34:21.956Z",
+  "files": {
+    "studio/weapon-sidearms.js": "281ac598e70bcc35f7aa524e6cfc6946a0637212155d86b36ac1b5bbe6ba4808",
+    "studio/weapon-pistol-action.js": "24d7aee3e7706a31b7e4a71c68a8b362b552c411924dc45f6c169d25c5118f8c",
+    "studio/hand-contacts.js": "637552e719455a76ab51dc66fa35527048b34fcda1c95776d64158026489a08d",
+    "game/viewmodel.js": "096a3e46ce290128b8270e010fd9af2d52df6019192e0addc4aea2223d8cba95",
+    "game/viewmodel-poses.js": "824790eecd8eb73b8add7bdf12c53902cce641c2614538a5039bf99ae2352d09",
+    "game/viewmodel-fit.js": "6ee905bcaec8cee14d4c05611279453b4ad65932abab91ab76994c62ae420bc6",
+    "index.html": "83635119e4fdc892320bfc13235322ee0c7da199c78b1fa56f2525b674bfc3c6"
+  }
+}

@@ -1,0 +1,12 @@
+const fs=require('fs'),crypto=require('crypto'),assert=require('assert/strict'),file='index.html';
+const buf=fs.readFileSync(file),src=buf.toString('utf8'),hash=x=>crypto.createHash('md5').update(x).digest('hex'),before=hash(buf),eol=src.includes('\r\n')?'\r\n':'\n';
+const edits=[
+ ["    import { makePistolModel, makeRevolverModel, makeUziModel, makeKnifeModel } from './studio/weapon-sidearms.js';","    import { makePistolModel, makeRevolverModel, makeUziModel, makeKnifeModel } from './studio/weapon-sidearms.js';\n    import { createMuzzleFlashGeometry, createMuzzleFlashTexture } from './studio/weapon-effects.js';"],
+ ["      const flash = new THREE.Mesh(new THREE.SphereGeometry(flashR, 6, 6), glowMat(new THREE.MeshBasicMaterial({ color: flashCol, transparent: true, opacity: 0, depthWrite: false })));","      const flash = new THREE.Mesh(createMuzzleFlashGeometry(THREE, flashR), glowMat(new THREE.MeshBasicMaterial({ map: createMuzzleFlashTexture(THREE), color: 0xffffff, transparent: true, opacity: 0, depthWrite: false, side: THREE.DoubleSide, forceSinglePass: true }), 1.5));"],
+ ["        flash.scale.setScalar((1.2 + Math.random() * 0.6) * (gun.userData.suppressed ? 0.35 : 1) / (gun.userData.sizeK || 1));   // CL-95: a can smothers it; GB-130: same flash at any gun size","        const burstScale = (1.2 + Math.random() * 0.6) * (gun.userData.suppressed ? 0.35 : 1) / (gun.userData.sizeK || 1);\n        const phase = (gun.userData.shots | 0) % 3;\n        flash.scale.set(burstScale * (.9 + phase * .08), burstScale * (1.06 - phase * .06), burstScale * (.88 + ((gun.userData.shots * 7) % 5) * .06));\n        flash.rotation.z = ((gun.userData.shots | 0) * 2.3999632297) % (Math.PI * 2);   // varied gas tongues; no extra RNG draws"]
+];
+let out=src;for(let [a,b]of edits){a=a.replace(/\r?\n/g,eol);b=b.replace(/\r?\n/g,eol);assert.equal(out.split(a).length,2,'unique flash anchor');out=out.replace(a,()=>b);}
+assert.equal(hash(fs.readFileSync(file)),before,'concurrent index write');
+const tmp=file+'.gt20105-'+crypto.randomUUID()+'.tmp';fs.writeFileSync(tmp,out,{flag:'wx'});assert.equal(hash(fs.readFileSync(file)),before);fs.renameSync(tmp,file);
+const after=hash(Buffer.from(out,'utf8'));fs.writeFileSync('review/GT-20105/flash-change.json',JSON.stringify({at:new Date().toISOString(),before,after,edits,scope:'import,flash mesh construction,shot scale/roll only; existing light/timer/warmup/visibility setter preserved',lineEndings:'CRLF'},null,2),{flag:'wx'});
+console.log('PASS three flash anchors '+before+' -> '+after);

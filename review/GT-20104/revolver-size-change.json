@@ -1,0 +1,11 @@
+{
+  "at": "2026-11-13T02:05:28.456Z",
+  "file": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\index.html",
+  "beforeMd5": "2533ff26aa9edbfae11b51aedbc9db95",
+  "afterMd5": "f10d53d1e391d3149a436cf5fc62d762",
+  "oldRow": "revolver: { len: 0.484, m: 0.27,  look: 1.4 }",
+  "newRow": "revolver: { len: 0.484, m: 0.27,  look: 1.0 }",
+  "legacyBase": 1.08,
+  "onlyApprovedValueChanged": true,
+  "drawnNominalMetres": 0.2916
+}

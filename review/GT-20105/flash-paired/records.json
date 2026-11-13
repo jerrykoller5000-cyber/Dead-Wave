@@ -1,0 +1,1160 @@
+{
+  "phase": "paired",
+  "sourceStart": {
+    "index.html": "f66d94d7ee7b8bd69465c395325e1c05aa852f03a56b56dadc7dcb65109116ff",
+    "studio/weapon-effects.js": "302f01982e0d5078f377c791b7678c01c58079be6946aff0d418e96651b1cfce",
+    "game/viewmodel.js": "b3f72e6175a36c8c19898e4ee2cb65d9ae67ea6670cbfdb181543bbee8ef40a4"
+  },
+  "sourceEnd": {
+    "index.html": "f66d94d7ee7b8bd69465c395325e1c05aa852f03a56b56dadc7dcb65109116ff",
+    "studio/weapon-effects.js": "302f01982e0d5078f377c791b7678c01c58079be6946aff0d418e96651b1cfce",
+    "game/viewmodel.js": "b3f72e6175a36c8c19898e4ee2cb65d9ae67ea6670cbfdb181543bbee8ef40a4"
+  },
+  "mode": "same native live-fired pose/camera/light: original sphere geometry/color/scalar reconstructed from original parameters, versus actual production gas plume; native45ms fade verified",
+  "records": [
+    {
+      "file": "before-pistol-hip-noon.png",
+      "version": "before",
+      "gun": "pistol",
+      "view": "hip",
+      "light": "noon",
+      "actualLight": {
+        "key": "noon",
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "ground": 9272162,
+        "moon": 0,
+        "taskLamp": 0
+      },
+      "shots": 1,
+      "steps": 1,
+      "flashT": 0.03666666666666667,
+      "opacity": 0.8148148148148149,
+      "visible": true,
+      "triangles": 8,
+      "map": true,
+      "scale": [
+        2.31947907370555,
+        2.3668153813321937,
+        2.3668153813321937
+      ],
+      "roll": 2.3999632297,
+      "depthWrite": false,
+      "suppressed": false,
+      "eyeFlash": {
+        "opacity": 0.8148148148148149,
+        "visible": true,
+        "triangles": 8
+      },
+      "camera": {
+        "x": 0.0018845711863818,
+        "y": -198.5811986198069,
+        "z": -640.5501551081617,
+        "tx": 0.0018845711863818,
+        "ty": -198.6611133137761,
+        "tz": -639.5533534018591,
+        "fov": 59.99999999999999
+      },
+      "legacyConstruction": true
+    },
+    {
+      "file": "after-pistol-hip-noon.png",
+      "version": "after",
+      "gun": "pistol",
+      "view": "hip",
+      "light": "noon",
+      "actualLight": {
+        "key": "noon",
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "ground": 9272162,
+        "moon": 0,
+        "taskLamp": 0
+      },
+      "shots": 1,
+      "steps": 1,
+      "flashT": 0.03666666666666667,
+      "opacity": 0.8148148148148149,
+      "visible": true,
+      "triangles": 8,
+      "map": true,
+      "scale": [
+        2.31947907370555,
+        2.3668153813321937,
+        2.3668153813321937
+      ],
+      "roll": 2.3999632297,
+      "depthWrite": false,
+      "suppressed": false,
+      "eyeFlash": {
+        "opacity": 0.8148148148148149,
+        "visible": true,
+        "triangles": 8
+      },
+      "camera": {
+        "x": 0.0018845711863818,
+        "y": -198.5811986198069,
+        "z": -640.5501551081617,
+        "tx": 0.0018845711863818,
+        "ty": -198.6611133137761,
+        "tz": -639.5533534018591,
+        "fov": 59.99999999999999
+      },
+      "legacyConstruction": false
+    },
+    {
+      "file": "before-pistol-hip-overcast.png",
+      "version": "before",
+      "gun": "pistol",
+      "view": "hip",
+      "light": "overcast",
+      "actualLight": {
+        "key": "overcast",
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "ground": 8158850,
+        "moon": 0,
+        "taskLamp": 0
+      },
+      "shots": 1,
+      "steps": 1,
+      "flashT": 0.03666666666666667,
+      "opacity": 0.8148148148148149,
+      "visible": true,
+      "triangles": 8,
+      "map": true,
+      "scale": [
+        2.31947907370555,
+        2.3668153813321937,
+        2.3668153813321937
+      ],
+      "roll": 2.3999632297,
+      "depthWrite": false,
+      "suppressed": false,
+      "eyeFlash": {
+        "opacity": 0.8148148148148149,
+        "visible": true,
+        "triangles": 8
+      },
+      "camera": {
+        "x": -0.0029292855317005137,
+        "y": -198.5763176862983,
+        "z": -640.561038081741,
+        "tx": -0.0029292855317005137,
+        "ty": -198.65623238026748,
+        "tz": -639.5642363754384,
+        "fov": 59.99999999999999
+      },
+      "legacyConstruction": true
+    },
+    {
+      "file": "after-pistol-hip-overcast.png",
+      "version": "after",
+      "gun": "pistol",
+      "view": "hip",
+      "light": "overcast",
+      "actualLight": {
+        "key": "overcast",
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "ground": 8158850,
+        "moon": 0,
+        "taskLamp": 0
+      },
+      "shots": 1,
+      "steps": 1,
+      "flashT": 0.03666666666666667,
+      "opacity": 0.8148148148148149,
+      "visible": true,
+      "triangles": 8,
+      "map": true,
+      "scale": [
+        2.31947907370555,
+        2.3668153813321937,
+        2.3668153813321937
+      ],
+      "roll": 2.3999632297,
+      "depthWrite": false,
+      "suppressed": false,
+      "eyeFlash": {
+        "opacity": 0.8148148148148149,
+        "visible": true,
+        "triangles": 8
+      },
+      "camera": {
+        "x": -0.0029292855317005137,
+        "y": -198.5763176862983,
+        "z": -640.561038081741,
+        "tx": -0.0029292855317005137,
+        "ty": -198.65623238026748,
+        "tz": -639.5642363754384,
+        "fov": 59.99999999999999
+      },
+      "legacyConstruction": false
+    },
+    {
+      "file": "before-pistol-hip-dusk.png",
+      "version": "before",
+      "gun": "pistol",
+      "view": "hip",
+      "light": "dusk",
+      "actualLight": {
+        "key": "dusk",
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "ground": 4863016,
+        "moon": 0,
+        "taskLamp": 0
+      },
+      "shots": 1,
+      "steps": 1,
+      "flashT": 0.03666666666666667,
+      "opacity": 0.8148148148148149,
+      "visible": true,
+      "triangles": 8,
+      "map": true,
+      "scale": [
+        2.31947907370555,
+        2.3668153813321937,
+        2.3668153813321937
+      ],
+      "roll": 2.3999632297,
+      "depthWrite": false,
+      "suppressed": false,
+      "eyeFlash": {
+        "opacity": 0.8148148148148149,
+        "visible": true,
+        "triangles": 8
+      },
+      "camera": {
+        "x": -0.006750289294156612,
+        "y": -198.57994653797468,
+        "z": -640.5557198510155,
+        "tx": -0.006750289294156612,
+        "ty": -198.65986123194386,
+        "tz": -639.558918144713,
+        "fov": 59.99999999999999
+      },
+      "legacyConstruction": true
+    },
+    {
+      "file": "after-pistol-hip-dusk.png",
+      "version": "after",
+      "gun": "pistol",
+      "view": "hip",
+      "light": "dusk",
+      "actualLight": {
+        "key": "dusk",
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "ground": 4863016,
+        "moon": 0,
+        "taskLamp": 0
+      },
+      "shots": 1,
+      "steps": 1,
+      "flashT": 0.03666666666666667,
+      "opacity": 0.8148148148148149,
+      "visible": true,
+      "triangles": 8,
+      "map": true,
+      "scale": [
+        2.31947907370555,
+        2.3668153813321937,
+        2.3668153813321937
+      ],
+      "roll": 2.3999632297,
+      "depthWrite": false,
+      "suppressed": false,
+      "eyeFlash": {
+        "opacity": 0.8148148148148149,
+        "visible": true,
+        "triangles": 8
+      },
+      "camera": {
+        "x": -0.006750289294156612,
+        "y": -198.57994653797468,
+        "z": -640.5557198510155,
+        "tx": -0.006750289294156612,
+        "ty": -198.65986123194386,
+        "tz": -639.558918144713,
+        "fov": 59.99999999999999
+      },
+      "legacyConstruction": false
+    },
+    {
+      "file": "before-pistol-hip-night.png",
+      "version": "before",
+      "gun": "pistol",
+      "view": "hip",
+      "light": "night",
+      "actualLight": {
+        "key": "night",
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "ground": 1382172,
+        "moon": 0,
+        "taskLamp": 7.868668376938867
+      },
+      "shots": 1,
+      "steps": 1,
+      "flashT": 0.03666666666666667,
+      "opacity": 0.8148148148148149,
+      "visible": true,
+      "triangles": 8,
+      "map": true,
+      "scale": [
+        2.31947907370555,
+        2.3668153813321937,
+        2.3668153813321937
+      ],
+      "roll": 2.3999632297,
+      "depthWrite": false,
+      "suppressed": false,
+      "eyeFlash": {
+        "opacity": 0.8148148148148149,
+        "visible": true,
+        "triangles": 8
+      },
+      "camera": {
+        "x": -0.004031540006827725,
+        "y": -198.57658595113693,
+        "z": -640.5611166785046,
+        "tx": -0.004031540006827725,
+        "ty": -198.65650064510612,
+        "tz": -639.564314972202,
+        "fov": 59.99999999999999
+      },
+      "legacyConstruction": true
+    },
+    {
+      "file": "after-pistol-hip-night.png",
+      "version": "after",
+      "gun": "pistol",
+      "view": "hip",
+      "light": "night",
+      "actualLight": {
+        "key": "night",
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "ground": 1382172,
+        "moon": 0,
+        "taskLamp": 7.868668376938867
+      },
+      "shots": 1,
+      "steps": 1,
+      "flashT": 0.03666666666666667,
+      "opacity": 0.8148148148148149,
+      "visible": true,
+      "triangles": 8,
+      "map": true,
+      "scale": [
+        2.31947907370555,
+        2.3668153813321937,
+        2.3668153813321937
+      ],
+      "roll": 2.3999632297,
+      "depthWrite": false,
+      "suppressed": false,
+      "eyeFlash": {
+        "opacity": 0.8148148148148149,
+        "visible": true,
+        "triangles": 8
+      },
+      "camera": {
+        "x": -0.004031540006827725,
+        "y": -198.57658595113693,
+        "z": -640.5611166785046,
+        "tx": -0.004031540006827725,
+        "ty": -198.65650064510612,
+        "tz": -639.564314972202,
+        "fov": 59.99999999999999
+      },
+      "legacyConstruction": false
+    },
+    {
+      "file": "before-pistol-held-right-noon.png",
+      "version": "before",
+      "gun": "pistol",
+      "view": "held-right",
+      "light": "noon",
+      "actualLight": {
+        "key": "noon",
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "ground": 9272162,
+        "moon": 0,
+        "taskLamp": 0
+      },
+      "shots": 1,
+      "steps": 1,
+      "flashT": 0.03666666666666667,
+      "opacity": 0.8148148148148149,
+      "visible": true,
+      "triangles": 8,
+      "map": true,
+      "scale": [
+        2.31947907370555,
+        2.3668153813321937,
+        2.3668153813321937
+      ],
+      "roll": 2.3999632297,
+      "depthWrite": false,
+      "suppressed": false,
+      "eyeFlash": null,
+      "camera": {
+        "x": 0.7487874374127865,
+        "y": -198.74885915156534,
+        "z": -639.9941877961376,
+        "tx": -0.2140482715233939,
+        "ty": -198.91936410032693,
+        "tz": -640.2036524949418,
+        "fov": 34
+      },
+      "legacyConstruction": true
+    },
+    {
+      "file": "after-pistol-held-right-noon.png",
+      "version": "after",
+      "gun": "pistol",
+      "view": "held-right",
+      "light": "noon",
+      "actualLight": {
+        "key": "noon",
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "ground": 9272162,
+        "moon": 0,
+        "taskLamp": 0
+      },
+      "shots": 1,
+      "steps": 1,
+      "flashT": 0.03666666666666667,
+      "opacity": 0.8148148148148149,
+      "visible": true,
+      "triangles": 8,
+      "map": true,
+      "scale": [
+        2.31947907370555,
+        2.3668153813321937,
+        2.3668153813321937
+      ],
+      "roll": 2.3999632297,
+      "depthWrite": false,
+      "suppressed": false,
+      "eyeFlash": null,
+      "camera": {
+        "x": 0.7487874374127865,
+        "y": -198.74885915156534,
+        "z": -639.9941877961376,
+        "tx": -0.2140482715233939,
+        "ty": -198.91936410032693,
+        "tz": -640.2036524949418,
+        "fov": 34
+      },
+      "legacyConstruction": false
+    },
+    {
+      "file": "before-pistol-held-right-overcast.png",
+      "version": "before",
+      "gun": "pistol",
+      "view": "held-right",
+      "light": "overcast",
+      "actualLight": {
+        "key": "overcast",
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "ground": 8158850,
+        "moon": 0,
+        "taskLamp": 0
+      },
+      "shots": 1,
+      "steps": 1,
+      "flashT": 0.03666666666666667,
+      "opacity": 0.8148148148148149,
+      "visible": true,
+      "triangles": 8,
+      "map": true,
+      "scale": [
+        2.31947907370555,
+        2.3668153813321937,
+        2.3668153813321937
+      ],
+      "roll": 2.3999632297,
+      "depthWrite": false,
+      "suppressed": false,
+      "eyeFlash": null,
+      "camera": {
+        "x": 1.0209989673447273,
+        "y": -198.75076761851247,
+        "z": -640.6161013705388,
+        "tx": 0.13669242332163822,
+        "ty": -198.92151051818846,
+        "tz": -640.1815340012988,
+        "fov": 34
+      },
+      "legacyConstruction": true
+    },
+    {
+      "file": "after-pistol-held-right-overcast.png",
+      "version": "after",
+      "gun": "pistol",
+      "view": "held-right",
+      "light": "overcast",
+      "actualLight": {
+        "key": "overcast",
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "ground": 8158850,
+        "moon": 0,
+        "taskLamp": 0
+      },
+      "shots": 1,
+      "steps": 1,
+      "flashT": 0.03666666666666667,
+      "opacity": 0.8148148148148149,
+      "visible": true,
+      "triangles": 8,
+      "map": true,
+      "scale": [
+        2.31947907370555,
+        2.3668153813321937,
+        2.3668153813321937
+      ],
+      "roll": 2.3999632297,
+      "depthWrite": false,
+      "suppressed": false,
+      "eyeFlash": null,
+      "camera": {
+        "x": 1.0209989673447273,
+        "y": -198.75076761851247,
+        "z": -640.6161013705388,
+        "tx": 0.13669242332163822,
+        "ty": -198.92151051818846,
+        "tz": -640.1815340012988,
+        "fov": 34
+      },
+      "legacyConstruction": false
+    },
+    {
+      "file": "before-pistol-held-right-dusk.png",
+      "version": "before",
+      "gun": "pistol",
+      "view": "held-right",
+      "light": "dusk",
+      "actualLight": {
+        "key": "dusk",
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "ground": 4863016,
+        "moon": 0,
+        "taskLamp": 0
+      },
+      "shots": 1,
+      "steps": 1,
+      "flashT": 0.03666666666666667,
+      "opacity": 0.8148148148148149,
+      "visible": true,
+      "triangles": 8,
+      "map": true,
+      "scale": [
+        2.31947907370555,
+        2.3668153813321937,
+        2.3668153813321937
+      ],
+      "roll": 2.3999632297,
+      "depthWrite": false,
+      "suppressed": false,
+      "eyeFlash": null,
+      "camera": {
+        "x": 0.9978099064067644,
+        "y": -198.75020038243377,
+        "z": -640.8967362695433,
+        "tx": 0.2648735236614741,
+        "ty": -198.9208695002735,
+        "tz": -640.2381952221788,
+        "fov": 34
+      },
+      "legacyConstruction": true
+    },
+    {
+      "file": "after-pistol-held-right-dusk.png",
+      "version": "after",
+      "gun": "pistol",
+      "view": "held-right",
+      "light": "dusk",
+      "actualLight": {
+        "key": "dusk",
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "ground": 4863016,
+        "moon": 0,
+        "taskLamp": 0
+      },
+      "shots": 1,
+      "steps": 1,
+      "flashT": 0.03666666666666667,
+      "opacity": 0.8148148148148149,
+      "visible": true,
+      "triangles": 8,
+      "map": true,
+      "scale": [
+        2.31947907370555,
+        2.3668153813321937,
+        2.3668153813321937
+      ],
+      "roll": 2.3999632297,
+      "depthWrite": false,
+      "suppressed": false,
+      "eyeFlash": null,
+      "camera": {
+        "x": 0.9978099064067644,
+        "y": -198.75020038243377,
+        "z": -640.8967362695433,
+        "tx": 0.2648735236614741,
+        "ty": -198.9208695002735,
+        "tz": -640.2381952221788,
+        "fov": 34
+      },
+      "legacyConstruction": false
+    },
+    {
+      "file": "before-pistol-held-right-night.png",
+      "version": "before",
+      "gun": "pistol",
+      "view": "held-right",
+      "light": "night",
+      "actualLight": {
+        "key": "night",
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "ground": 1382172,
+        "moon": 0,
+        "taskLamp": 7.868668376939031
+      },
+      "shots": 1,
+      "steps": 1,
+      "flashT": 0.03666666666666667,
+      "opacity": 0.8148148148148149,
+      "visible": true,
+      "triangles": 8,
+      "map": true,
+      "scale": [
+        1.9589737060026544,
+        1.9989527612271984,
+        1.9989527612271984
+      ],
+      "roll": 2.3999632297,
+      "depthWrite": false,
+      "suppressed": false,
+      "eyeFlash": null,
+      "camera": {
+        "x": 0.9895706327688112,
+        "y": -198.74794365118905,
+        "z": -640.8813062049045,
+        "tx": 0.2534373309912714,
+        "ty": -198.9183291951659,
+        "tz": -640.2262668714154,
+        "fov": 34
+      },
+      "legacyConstruction": true
+    },
+    {
+      "file": "after-pistol-held-right-night.png",
+      "version": "after",
+      "gun": "pistol",
+      "view": "held-right",
+      "light": "night",
+      "actualLight": {
+        "key": "night",
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "ground": 1382172,
+        "moon": 0,
+        "taskLamp": 7.868668376939031
+      },
+      "shots": 1,
+      "steps": 1,
+      "flashT": 0.03666666666666667,
+      "opacity": 0.8148148148148149,
+      "visible": true,
+      "triangles": 8,
+      "map": true,
+      "scale": [
+        1.9589737060026544,
+        1.9989527612271984,
+        1.9989527612271984
+      ],
+      "roll": 2.3999632297,
+      "depthWrite": false,
+      "suppressed": false,
+      "eyeFlash": null,
+      "camera": {
+        "x": 0.9895706327688112,
+        "y": -198.74794365118905,
+        "z": -640.8813062049045,
+        "tx": 0.2534373309912714,
+        "ty": -198.9183291951659,
+        "tz": -640.2262668714154,
+        "fov": 34
+      },
+      "legacyConstruction": false
+    },
+    {
+      "file": "before-m4-hip-noon.png",
+      "version": "before",
+      "gun": "m4",
+      "view": "hip",
+      "light": "noon",
+      "actualLight": {
+        "key": "noon",
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "ground": 9272162,
+        "moon": 0,
+        "taskLamp": 0
+      },
+      "shots": 1,
+      "steps": 1,
+      "flashT": 0.03666666666666667,
+      "opacity": 0.8148148148148149,
+      "visible": true,
+      "triangles": 8,
+      "map": true,
+      "scale": [
+        1.90944717304087,
+        1.9484154826947653,
+        1.9484154826947653
+      ],
+      "roll": 2.3999632297,
+      "depthWrite": false,
+      "suppressed": false,
+      "eyeFlash": {
+        "opacity": 0.8148148148148149,
+        "visible": true,
+        "triangles": 8
+      },
+      "camera": {
+        "x": 0.000886733647425114,
+        "y": -198.5804438127141,
+        "z": -640.5536361375663,
+        "tx": 0.000886733647425114,
+        "ty": -198.66035850668328,
+        "tz": -639.5568344312637,
+        "fov": 59.99999999999999
+      },
+      "legacyConstruction": true
+    },
+    {
+      "file": "after-m4-hip-noon.png",
+      "version": "after",
+      "gun": "m4",
+      "view": "hip",
+      "light": "noon",
+      "actualLight": {
+        "key": "noon",
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "ground": 9272162,
+        "moon": 0,
+        "taskLamp": 0
+      },
+      "shots": 1,
+      "steps": 1,
+      "flashT": 0.03666666666666667,
+      "opacity": 0.8148148148148149,
+      "visible": true,
+      "triangles": 8,
+      "map": true,
+      "scale": [
+        1.90944717304087,
+        1.9484154826947653,
+        1.9484154826947653
+      ],
+      "roll": 2.3999632297,
+      "depthWrite": false,
+      "suppressed": false,
+      "eyeFlash": {
+        "opacity": 0.8148148148148149,
+        "visible": true,
+        "triangles": 8
+      },
+      "camera": {
+        "x": 0.000886733647425114,
+        "y": -198.5804438127141,
+        "z": -640.5536361375663,
+        "tx": 0.000886733647425114,
+        "ty": -198.66035850668328,
+        "tz": -639.5568344312637,
+        "fov": 59.99999999999999
+      },
+      "legacyConstruction": false
+    },
+    {
+      "file": "before-m4-hip-overcast.png",
+      "version": "before",
+      "gun": "m4",
+      "view": "hip",
+      "light": "overcast",
+      "actualLight": {
+        "key": "overcast",
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "ground": 8158850,
+        "moon": 0,
+        "taskLamp": 0
+      },
+      "shots": 1,
+      "steps": 1,
+      "flashT": 0.03666666666666667,
+      "opacity": 0.8148148148148149,
+      "visible": true,
+      "triangles": 8,
+      "map": true,
+      "scale": [
+        1.90944717304087,
+        1.9484154826947653,
+        1.9484154826947653
+      ],
+      "roll": 2.3999632297,
+      "depthWrite": false,
+      "suppressed": false,
+      "eyeFlash": {
+        "opacity": 0.8148148148148149,
+        "visible": true,
+        "triangles": 8
+      },
+      "camera": {
+        "x": 0.00310142050715471,
+        "y": -198.57813414938084,
+        "z": -640.555020168718,
+        "tx": 0.00310142050715471,
+        "ty": -198.65804884335003,
+        "tz": -639.5582184624154,
+        "fov": 59.99999999999999
+      },
+      "legacyConstruction": true
+    },
+    {
+      "file": "after-m4-hip-overcast.png",
+      "version": "after",
+      "gun": "m4",
+      "view": "hip",
+      "light": "overcast",
+      "actualLight": {
+        "key": "overcast",
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "ground": 8158850,
+        "moon": 0,
+        "taskLamp": 0
+      },
+      "shots": 1,
+      "steps": 1,
+      "flashT": 0.03666666666666667,
+      "opacity": 0.8148148148148149,
+      "visible": true,
+      "triangles": 8,
+      "map": true,
+      "scale": [
+        1.90944717304087,
+        1.9484154826947653,
+        1.9484154826947653
+      ],
+      "roll": 2.3999632297,
+      "depthWrite": false,
+      "suppressed": false,
+      "eyeFlash": {
+        "opacity": 0.8148148148148149,
+        "visible": true,
+        "triangles": 8
+      },
+      "camera": {
+        "x": 0.00310142050715471,
+        "y": -198.57813414938084,
+        "z": -640.555020168718,
+        "tx": 0.00310142050715471,
+        "ty": -198.65804884335003,
+        "tz": -639.5582184624154,
+        "fov": 59.99999999999999
+      },
+      "legacyConstruction": false
+    },
+    {
+      "file": "before-m4-hip-dusk.png",
+      "version": "before",
+      "gun": "m4",
+      "view": "hip",
+      "light": "dusk",
+      "actualLight": {
+        "key": "dusk",
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "ground": 4863016,
+        "moon": 0,
+        "taskLamp": 0
+      },
+      "shots": 1,
+      "steps": 1,
+      "flashT": 0.03666666666666667,
+      "opacity": 0.8148148148148149,
+      "visible": true,
+      "triangles": 8,
+      "map": true,
+      "scale": [
+        1.90944717304087,
+        1.9484154826947653,
+        1.9484154826947653
+      ],
+      "roll": 2.3999632297,
+      "depthWrite": false,
+      "suppressed": false,
+      "eyeFlash": {
+        "opacity": 0.8148148148148149,
+        "visible": true,
+        "triangles": 8
+      },
+      "camera": {
+        "x": 0.002926665542838783,
+        "y": -198.58095700182201,
+        "z": -640.5498598377052,
+        "tx": 0.002926665542838783,
+        "ty": -198.6608716957912,
+        "tz": -639.5530581314026,
+        "fov": 59.99999999999999
+      },
+      "legacyConstruction": true
+    },
+    {
+      "file": "after-m4-hip-dusk.png",
+      "version": "after",
+      "gun": "m4",
+      "view": "hip",
+      "light": "dusk",
+      "actualLight": {
+        "key": "dusk",
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "ground": 4863016,
+        "moon": 0,
+        "taskLamp": 0
+      },
+      "shots": 1,
+      "steps": 1,
+      "flashT": 0.03666666666666667,
+      "opacity": 0.8148148148148149,
+      "visible": true,
+      "triangles": 8,
+      "map": true,
+      "scale": [
+        1.90944717304087,
+        1.9484154826947653,
+        1.9484154826947653
+      ],
+      "roll": 2.3999632297,
+      "depthWrite": false,
+      "suppressed": false,
+      "eyeFlash": {
+        "opacity": 0.8148148148148149,
+        "visible": true,
+        "triangles": 8
+      },
+      "camera": {
+        "x": 0.002926665542838783,
+        "y": -198.58095700182201,
+        "z": -640.5498598377052,
+        "tx": 0.002926665542838783,
+        "ty": -198.6608716957912,
+        "tz": -639.5530581314026,
+        "fov": 59.99999999999999
+      },
+      "legacyConstruction": false
+    },
+    {
+      "file": "before-m4-hip-night.png",
+      "version": "before",
+      "gun": "m4",
+      "view": "hip",
+      "light": "night",
+      "actualLight": {
+        "key": "night",
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "ground": 1382172,
+        "moon": 0,
+        "taskLamp": 7.868668376938867
+      },
+      "shots": 1,
+      "steps": 1,
+      "flashT": 0.03666666666666667,
+      "opacity": 0.8148148148148149,
+      "visible": true,
+      "triangles": 8,
+      "map": true,
+      "scale": [
+        1.6126710723077713,
+        1.6455827268446646,
+        1.6455827268446646
+      ],
+      "roll": 2.3999632297,
+      "depthWrite": false,
+      "suppressed": false,
+      "eyeFlash": {
+        "opacity": 0.8148148148148149,
+        "visible": true,
+        "triangles": 8
+      },
+      "camera": {
+        "x": -0.008286996894961278,
+        "y": -198.5781739024848,
+        "z": -640.5558196153735,
+        "tx": -0.008286996894961278,
+        "ty": -198.65808859645398,
+        "tz": -639.5590179090709,
+        "fov": 59.99999999999999
+      },
+      "legacyConstruction": true
+    },
+    {
+      "file": "after-m4-hip-night.png",
+      "version": "after",
+      "gun": "m4",
+      "view": "hip",
+      "light": "night",
+      "actualLight": {
+        "key": "night",
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "ground": 1382172,
+        "moon": 0,
+        "taskLamp": 7.868668376938867
+      },
+      "shots": 1,
+      "steps": 1,
+      "flashT": 0.03666666666666667,
+      "opacity": 0.8148148148148149,
+      "visible": true,
+      "triangles": 8,
+      "map": true,
+      "scale": [
+        1.6126710723077713,
+        1.6455827268446646,
+        1.6455827268446646
+      ],
+      "roll": 2.3999632297,
+      "depthWrite": false,
+      "suppressed": false,
+      "eyeFlash": {
+        "opacity": 0.8148148148148149,
+        "visible": true,
+        "triangles": 8
+      },
+      "camera": {
+        "x": -0.008286996894961278,
+        "y": -198.5781739024848,
+        "z": -640.5558196153735,
+        "tx": -0.008286996894961278,
+        "ty": -198.65808859645398,
+        "tz": -639.5590179090709,
+        "fov": 59.99999999999999
+      },
+      "legacyConstruction": false
+    }
+  ],
+  "offhand": [
+    {
+      "gun": "pistol",
+      "setter": false,
+      "litVisible": false,
+      "litOpacity": 0.8,
+      "restVisible": false
+    },
+    {
+      "gun": "uzi",
+      "setter": false,
+      "litVisible": false,
+      "litOpacity": 0.8,
+      "restVisible": false
+    },
+    {
+      "gun": "revolver",
+      "setter": false,
+      "litVisible": false,
+      "litOpacity": 0.8,
+      "restVisible": false
+    }
+  ],
+  "errors": []
+}

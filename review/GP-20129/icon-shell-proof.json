@@ -1,0 +1,35 @@
+{
+  "at": "2026-11-13T01:32:42.954Z",
+  "beforeMd5": "3940a34f52b20121733aa588987e53aa",
+  "afterMd5": "40582fe8bb3b4df014fa5528013a5fa4",
+  "importsAdded": 1,
+  "weaponEntries": [
+    "pistol",
+    "uzi",
+    "revolver",
+    "m4",
+    "ak",
+    "shotgun",
+    "aa12",
+    "sniper",
+    "launcher",
+    "minigun",
+    "flamer",
+    "chainsaw"
+  ],
+  "allOtherBytesPreserved": true,
+  "oldEntries": {
+    "pistol": "      pistol: '<rect x=\"2.5\" y=\"8\" width=\"13\" height=\"3.4\" rx=\".5\"/><path d=\"M5.6 11.4h4.3L8.2 18.4H4.1z\"/><rect x=\"15.2\" y=\"8.7\" width=\"5\" height=\"2\" rx=\".4\"/>',",
+    "uzi": "      uzi: '<rect x=\"5\" y=\"6.8\" width=\"8.4\" height=\"4.2\" rx=\".5\"/><rect x=\"13.2\" y=\"7.9\" width=\"6.4\" height=\"1.9\" rx=\".4\"/><rect x=\"6.6\" y=\"11\" width=\"3.2\" height=\"6.6\" rx=\".4\"/><path d=\"M10.8 11h2.9l1.4 3.2h-2.9z\"/>',",
+    "revolver": "      revolver: '<rect x=\"3.4\" y=\"8.4\" width=\"12\" height=\"2.6\" rx=\".5\"/><circle cx=\"9.4\" cy=\"11.4\" r=\"2.9\"/><path d=\"M5.6 12.6h3.6L7.6 18.4H4z\"/><rect x=\"15\" y=\"8.8\" width=\"4.6\" height=\"1.9\" rx=\".4\"/>',",
+    "m4": "      m4: '<rect x=\"2.6\" y=\"8.4\" width=\"16.8\" height=\"2.4\" rx=\".4\"/><rect x=\"6.4\" y=\"6.4\" width=\"6.4\" height=\"2\" rx=\".4\"/><path d=\"M9.2 10.8h3.2l.8 5.4h-3.2z\"/><path d=\"M2.6 10.8h3l-1.4 4.2H1.2z\"/>',",
+    "ak": "      ak: '<rect x=\"2.6\" y=\"8\" width=\"16.4\" height=\"2.6\" rx=\".4\"/><path d=\"M8.8 10.6h3.4l1 5.6h-3.4z\"/><path d=\"M11.4 13.2h3.2l.7 4.2h-3.2z\" opacity=\".85\"/><rect x=\"2.6\" y=\"10.6\" width=\"3.2\" height=\"1.9\" rx=\".3\"/><path d=\"M2.6 10.6h3.2l-1.3 4h-3z\"/><rect x=\"13.6\" y=\"6.4\" width=\"5.6\" height=\"1.5\" rx=\".3\"/><rect x=\"18.4\" y=\"7.6\" width=\"3\" height=\"3.4\" rx=\".4\"/>',",
+    "shotgun": "      shotgun: '<rect x=\"2\" y=\"8.6\" width=\"17.5\" height=\"2.2\" rx=\".4\"/><rect x=\"8.2\" y=\"10.8\" width=\"4.6\" height=\"1.9\" rx=\".3\"/><path d=\"M2 10.8h3.4l-1.7 4.6H.6z\"/><rect x=\"17\" y=\"7.4\" width=\"2\" height=\"3.2\" rx=\".3\"/>',",
+    "aa12": "      aa12: '<rect x=\"3\" y=\"7\" width=\"13.4\" height=\"4.2\" rx=\".6\"/><rect x=\"6.6\" y=\"5.4\" width=\"6.4\" height=\"1.6\" rx=\".4\"/><circle cx=\"10.4\" cy=\"15.4\" r=\"3.6\"/><rect x=\"9.2\" y=\"10.8\" width=\"2.4\" height=\"2.4\"/><path d=\"M4.6 11.2h3.2l-1.2 5h-3z\"/><rect x=\"16.4\" y=\"8\" width=\"5\" height=\"2.2\" rx=\".5\"/>',",
+    "sniper": "      sniper: '<rect x=\"1.6\" y=\"9.2\" width=\"19\" height=\"2\" rx=\".4\"/><rect x=\"7.4\" y=\"5.6\" width=\"7.6\" height=\"2.4\" rx=\".6\"/><rect x=\"9.6\" y=\"8\" width=\"1.6\" height=\"1.4\"/><path d=\"M4.6 11.2h3.2l-1.4 5.4H2.8z\"/><rect x=\"18.4\" y=\"8.2\" width=\"1.8\" height=\"4\" rx=\".3\"/>',",
+    "launcher": "      launcher: '<rect x=\"2.4\" y=\"8\" width=\"15\" height=\"4.4\" rx=\"2.2\"/><circle cx=\"19.2\" cy=\"10.2\" r=\"2.6\"/><path d=\"M6.4 12.4h3.4L8.4 18h-3.4z\"/><rect x=\"11.6\" y=\"5.8\" width=\"4.4\" height=\"2.2\" rx=\".5\"/>',",
+    "minigun": "      minigun: '<rect x=\"6.4\" y=\"6.6\" width=\"4.6\" height=\"10.8\" rx=\"1\"/><rect x=\"11\" y=\"7.6\" width=\"9.6\" height=\"1.7\" rx=\".4\"/><rect x=\"11\" y=\"11\" width=\"9.6\" height=\"1.7\" rx=\".4\"/><rect x=\"11\" y=\"14.4\" width=\"9.6\" height=\"1.7\" rx=\".4\"/><circle cx=\"4.6\" cy=\"12\" r=\"3\"/>',",
+    "flamer": "      flamer: '<rect x=\"2.6\" y=\"6.6\" width=\"5.2\" height=\"9.4\" rx=\"2.4\"/><rect x=\"7.8\" y=\"9.6\" width=\"7.6\" height=\"2.4\" rx=\".5\"/><path d=\"M15.4 8.4c3 1 4.6 2.2 5.6 3.8-1.6-.6-2.8-.7-4-.4 1.2-1.2 1-2.4-1.6-3.4z\"/><path d=\"M6 16h3.4l-1 2.6H5.4z\"/>',",
+    "chainsaw": "      chainsaw: '<rect x=\"2.4\" y=\"7.6\" width=\"7.4\" height=\"6\" rx=\"1.2\"/><path d=\"M9.8 8.8h9.4a1.6 1.6 0 0 1 0 3.2H9.8z\"/><path d=\"M10.6 7.8h1.6v1h-1.6zm2.6 0h1.6v1h-1.6zm2.6 0h1.6v1h-1.6z\"/><path d=\"M4.6 13.6h3.6l-.8 3.8H4z\"/>',"
+  }
+}

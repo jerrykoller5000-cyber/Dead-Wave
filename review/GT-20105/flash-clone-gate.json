@@ -1,0 +1,26 @@
+{
+  "rows": [
+    {
+      "gun": "pistol",
+      "setter": true,
+      "litVisible": true,
+      "litOpacity": 0.8,
+      "restVisible": false
+    },
+    {
+      "gun": "uzi",
+      "setter": true,
+      "litVisible": true,
+      "litOpacity": 0.8,
+      "restVisible": false
+    },
+    {
+      "gun": "revolver",
+      "setter": true,
+      "litVisible": true,
+      "litOpacity": 0.8,
+      "restVisible": false
+    }
+  ],
+  "errors": []
+}

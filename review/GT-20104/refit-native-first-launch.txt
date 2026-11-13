@@ -1,0 +1,10 @@
+file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/cdp.mjs:51
+  throw new Error('Chrome did not open its debugging port: ' + url);
+        ^
+
+Error: Chrome did not open its debugging port: http://127.0.0.1:1719/json/version
+    at fetchJson (file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/cdp.mjs:51:9)
+    at async launch (file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/cdp.mjs:308:21)
+    at async file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/realtest.mjs:17:17
+
+Node.js v24.13.0

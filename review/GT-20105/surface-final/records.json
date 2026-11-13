@@ -1,0 +1,274 @@
+{
+  "mode": "production char constructors, fixed seeded footprint, exact native prop edge",
+  "setup": {
+    "hit": {
+      "solid": {
+        "minX": 7.337499986767769,
+        "maxX": 7.521499993920326,
+        "minY": -199.25200000208616,
+        "maxY": -199.01799999791382,
+        "minZ": -651.097000000149,
+        "maxZ": -651.0229999998511,
+        "prop": true,
+        "exactOnly": true
+      },
+      "t": 0.8333333333333339,
+      "point": {
+        "x": 7.339499986767769,
+        "y": -199.0291999980807,
+        "z": -651.0922000001372
+      },
+      "normal": {
+        "x": -1,
+        "y": 0,
+        "z": 0
+      },
+      "exact": true
+    },
+    "trialCount": 1,
+    "clippedArea": 0.016100000360608102,
+    "unclippedArea": 0.7224999999999999,
+    "camera": {
+      "x": 5.839499986767769,
+      "y": -198.82919999808072,
+      "z": -650.8422000001372,
+      "tx": 7.339499986767769,
+      "ty": -199.0291999980807,
+      "tz": -651.0922000001372,
+      "fov": 60
+    }
+  },
+  "geometry": [
+    {
+      "version": "before",
+      "marks": 1,
+      "vertices": 6,
+      "maxDistance": 0.6420054698816591
+    },
+    {
+      "version": "after",
+      "marks": 1,
+      "vertices": 6,
+      "maxDistance": 0.0012002355467245066
+    }
+  ],
+  "records": [
+    {
+      "version": "before",
+      "light": "noon",
+      "file": "before-noon.png",
+      "actualLight": {
+        "key": "noon",
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "ground": 9272162,
+        "moon": 0,
+        "taskLamp": 0
+      },
+      "position": [
+        5.839499986767769,
+        -198.82919999808072,
+        -650.8422000001372
+      ],
+      "direction": [
+        0.9779720499582136,
+        -0.1303962733277544,
+        -0.1629953416597022
+      ],
+      "fov": 60
+    },
+    {
+      "version": "before",
+      "light": "overcast",
+      "file": "before-overcast.png",
+      "actualLight": {
+        "key": "overcast",
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "ground": 8158850,
+        "moon": 0,
+        "taskLamp": 0
+      },
+      "position": [
+        5.839499986767769,
+        -198.82919999808072,
+        -650.8422000001372
+      ],
+      "direction": [
+        0.9779720499582136,
+        -0.1303962733277544,
+        -0.1629953416597022
+      ],
+      "fov": 60
+    },
+    {
+      "version": "before",
+      "light": "dusk",
+      "file": "before-dusk.png",
+      "actualLight": {
+        "key": "dusk",
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "ground": 4863016,
+        "moon": 0,
+        "taskLamp": 0
+      },
+      "position": [
+        5.839499986767769,
+        -198.82919999808072,
+        -650.8422000001372
+      ],
+      "direction": [
+        0.9779720499582136,
+        -0.1303962733277544,
+        -0.1629953416597022
+      ],
+      "fov": 60
+    },
+    {
+      "version": "before",
+      "light": "night",
+      "file": "before-night.png",
+      "actualLight": {
+        "key": "night",
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "ground": 1382172,
+        "moon": 0,
+        "taskLamp": 3.7619165715770095
+      },
+      "position": [
+        5.839499986767769,
+        -198.82919999808072,
+        -650.8422000001372
+      ],
+      "direction": [
+        0.9779720499582136,
+        -0.1303962733277544,
+        -0.1629953416597022
+      ],
+      "fov": 60
+    },
+    {
+      "version": "after",
+      "light": "noon",
+      "file": "after-noon.png",
+      "actualLight": {
+        "key": "noon",
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "ground": 9272162,
+        "moon": 0,
+        "taskLamp": 0
+      },
+      "position": [
+        5.839499986767769,
+        -198.82919999808072,
+        -650.8422000001372
+      ],
+      "direction": [
+        0.9779720499582136,
+        -0.1303962733277544,
+        -0.1629953416597022
+      ],
+      "fov": 60
+    },
+    {
+      "version": "after",
+      "light": "overcast",
+      "file": "after-overcast.png",
+      "actualLight": {
+        "key": "overcast",
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "ground": 8158850,
+        "moon": 0,
+        "taskLamp": 0
+      },
+      "position": [
+        5.839499986767769,
+        -198.82919999808072,
+        -650.8422000001372
+      ],
+      "direction": [
+        0.9779720499582136,
+        -0.1303962733277544,
+        -0.1629953416597022
+      ],
+      "fov": 60
+    },
+    {
+      "version": "after",
+      "light": "dusk",
+      "file": "after-dusk.png",
+      "actualLight": {
+        "key": "dusk",
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "ground": 4863016,
+        "moon": 0,
+        "taskLamp": 0
+      },
+      "position": [
+        5.839499986767769,
+        -198.82919999808072,
+        -650.8422000001372
+      ],
+      "direction": [
+        0.9779720499582136,
+        -0.1303962733277544,
+        -0.1629953416597022
+      ],
+      "fov": 60
+    },
+    {
+      "version": "after",
+      "light": "night",
+      "file": "after-night.png",
+      "actualLight": {
+        "key": "night",
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "ground": 1382172,
+        "moon": 0,
+        "taskLamp": 3.7619165715770095
+      },
+      "position": [
+        5.839499986767769,
+        -198.82919999808072,
+        -650.8422000001372
+      ],
+      "direction": [
+        0.9779720499582136,
+        -0.1303962733277544,
+        -0.1629953416597022
+      ],
+      "fov": 60
+    }
+  ],
+  "errors": []
+}

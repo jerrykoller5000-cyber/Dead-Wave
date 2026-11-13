@@ -1,0 +1,42 @@
+[
+  {
+    "light": "noon",
+    "changedCenterPixelsAbove8": 2116,
+    "differenceBounds": [
+      603,
+      321,
+      679,
+      394
+    ]
+  },
+  {
+    "light": "overcast",
+    "changedCenterPixelsAbove8": 2064,
+    "differenceBounds": [
+      602,
+      321,
+      680,
+      394
+    ]
+  },
+  {
+    "light": "dusk",
+    "changedCenterPixelsAbove8": 2245,
+    "differenceBounds": [
+      602,
+      321,
+      680,
+      394
+    ]
+  },
+  {
+    "light": "night",
+    "changedCenterPixelsAbove8": 1421,
+    "differenceBounds": [
+      603,
+      321,
+      679,
+      394
+    ]
+  }
+]

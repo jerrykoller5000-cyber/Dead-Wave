@@ -1,0 +1,4 @@
+ok    tcc347  11 pass   0 fail  56.6s
+ok    t150    13 pass   0 fail  76.9s
+ok    t189     8 pass   0 fail  191.2s
+ERROR t224     0 pass   0 fail  208.0s  — time limit: check still running after 180s

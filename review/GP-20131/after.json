@@ -1,0 +1,68 @@
+{
+  "phase": "after",
+  "at": "2026-11-13T02:26:14.819Z",
+  "copy": "1LearnEighteen on SteelPlace as many of the eighteen pellets as possible on each close plate.",
+  "start": {
+    "ok": true,
+    "id": "1794536806617-1"
+  },
+  "callbacks": {
+    "accepted": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "duplicates": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    "nineteenth": false,
+    "stats": {
+      "base": 36,
+      "bonuses": 44,
+      "deductions": 0,
+      "shots": 1,
+      "units": 1,
+      "attackSeconds": 0,
+      "contactSeconds": 0,
+      "cleared": 1,
+      "missed": 0,
+      "draws": 0,
+      "reloads": 0
+    },
+    "efficiency": 100,
+    "state": "ACTIVE"
+  },
+  "errors": []
+}

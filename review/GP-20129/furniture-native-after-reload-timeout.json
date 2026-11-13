@@ -1,0 +1,46 @@
+{
+  "phase": "after",
+  "scope": "Native game UI and KR-7 copies",
+  "initial": {
+    "buttons": 2,
+    "state": {
+      "ak": "wood"
+    },
+    "copy": [
+      true,
+      false
+    ],
+    "stored": null
+  },
+  "synthetic": {
+    "state": {
+      "ak": "synthetic"
+    },
+    "copy": [
+      false,
+      true
+    ],
+    "stored": null,
+    "pressed": "true"
+  },
+  "leave": {
+    "state": {
+      "ak": "wood"
+    },
+    "copy": [
+      true,
+      false
+    ]
+  },
+  "persist": {
+    "training": false,
+    "phase": "prep",
+    "state": {
+      "ak": "synthetic"
+    },
+    "stored": {
+      "ak": "synthetic"
+    }
+  },
+  "failure": "Error: CDP timeout: Page.navigate\n    at Timeout._onTimeout (file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/cdp.mjs:88:18)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"
+}

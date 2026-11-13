@@ -1,0 +1,26 @@
+[
+  {
+    "light": "noon",
+    "cameraMaxDelta": 0.0,
+    "beforeMarks": 8,
+    "afterMarks": 8
+  },
+  {
+    "light": "overcast",
+    "cameraMaxDelta": 0.0,
+    "beforeMarks": 8,
+    "afterMarks": 8
+  },
+  {
+    "light": "dusk",
+    "cameraMaxDelta": 0.0,
+    "beforeMarks": 8,
+    "afterMarks": 8
+  },
+  {
+    "light": "night",
+    "cameraMaxDelta": 0.0,
+    "beforeMarks": 8,
+    "afterMarks": 8
+  }
+]

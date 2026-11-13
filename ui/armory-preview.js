@@ -15,7 +15,7 @@ export function createArmoryPreview({doc=document, render, labels}) {
   const clampZoom=value=>Math.max(1,Math.min(2.5,value));
   function schedule() {
     if(!active||disposed||!kind)return;
-    dirty=true;revision++;
+    dirty=true;
     if(!busy&&!frame)frame=host.requestAnimationFrame(draw);
   }
   async function draw() {
@@ -89,6 +89,9 @@ export function createArmoryPreview({doc=document, render, labels}) {
     element,
     show(next,label) {
       if(disposed)return;
+      // A changed gun or fit invalidates pending artwork. Pointer angles do not:
+      // present each completed angle while the next requested angle is rendering.
+      revision++;
       if(kind!==next){kind=next;yaw=0;pitch=0;zoom=zoomTo=1;picture.hidden=true;picture.removeAttribute('src');}
       active=true;stage.dataset.ready='false';stage.setAttribute('aria-label',label);stage.setAttribute('role','group');
       for(const b of buttons)b.disabled=true;schedule();

@@ -9,6 +9,8 @@ import { wristTransition } from '../ui/marine-kit-fit.js';
 import { boxProjectUV } from '../core/geometry.js';
 
 export const HAND_SCALE = 1.18;   // studio/marine-body.js GB-169
+// CG-1: the view's upper sleeve's length from the elbow (m); game/viewmodel.js stretches it only past this (never in play).
+export const UPPER_ARM_LEN = 1.1;
 // The arm's layout for a side (+1 his right, -1 his left), as marine-body.js arm() has it.
 export function armLayout(side) {
   const ox = side < 0 ? 0.02 : -0.01, oz = side < 0 ? 0.04 : 0.03, gz = side < 0 ? 0.08 : 0.07;
@@ -169,9 +171,13 @@ export function buildViewArm(T, side, mats) {
   meshes.roll = mesh(bodyCamoUV(T, loftRings(T, toRings([[0.13, 0.068, 0.072, 0, 0], [0.11, 0.064, 0.068, 0, 0], [0.075, 0.066, 0.07, 0, 0]], 0.7), 26, { caps: 'first' }).geo), mats.uniform, 'vm-rolled-sleeve', rolled);
   // CL-293 (Jerry, 3 Nov: "the arms looking weird and skinny"; the sleeve ran on straight 0.42 m past the elbow, one long
   // tube): the upper arm is its own piece from the elbow, turned each frame toward his shoulder (game/viewmodel.js), so
-  // the arm bends at the elbow and leaves the view toward him. Along +y from the elbow, 0.34 m, the upper arm's girth.
+  // the arm bends at the elbow and leaves the view toward him. Along +y from the elbow, the upper arm's girth.
   const upper = new T.Group(); upper.name = 'vm-upper-arm'; root.add(upper);
-  const UP = [[0.34, 0.074, 0.078, 0, 0], [0.24, 0.076, 0.08, 0, 0], [0.12, 0.074, 0.078, 0, 0], [0.03, 0.07, 0.074, 0, 0], [-0.03, 0.066, 0.07, 0, 0]];
+  // CG-1 (J151 note 4: "Camo resize glitch is persistent in 1st person on arms"): the view stretched this piece along its
+  // length to reach his shoulder (up to 2.5 times on the long guns' support arm, changing every frame through a reload or
+  // the aim), and the camo stretched with it. It now runs UPPER_ARM_LEN, past his shoulder, so it is never stretched: the
+  // part past the shoulder is behind the eye, out of the view.
+  const UP = [[UPPER_ARM_LEN, 0.074, 0.078, 0, 0], [0.62, 0.074, 0.078, 0, 0], [0.34, 0.074, 0.078, 0, 0], [0.24, 0.076, 0.08, 0, 0], [0.12, 0.074, 0.078, 0, 0], [0.03, 0.07, 0.074, 0, 0], [-0.03, 0.066, 0.07, 0, 0]];
   meshes.upper = mesh(bodyCamoUV(T, loftRings(T, toRings(UP, 0.72), 26, { caps: 'first' }).geo), mats.uniform, 'vm-upper-sleeve', upper);
   const wrist = new T.Group(); wrist.name = 'vm-wrist'; wrist.position.set(L.wrist[0], L.wrist[1], L.wrist[2]); root.add(wrist);
   const builds = [], parts = { sleeve, rolled };

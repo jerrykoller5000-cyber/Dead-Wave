@@ -5,6 +5,21 @@ import * as FakeThree from '../tools/tests/fakethree.mjs';
 import { buildTrainingGround, TRAINING } from '../world/training.js';
 import { DUMMY_SPEC } from '../world/training-dummy.js';
 import { createTrainingDummyExercise, TRAINING_DUMMY_SPOT, TRAINING_DUMMY_SAW_RADIUS } from './training-dummy.js';
+import { rangeConsolePlacement } from '../ui/range-targets.js';
+import { FIRING_LINE } from '../world/training-firing-line.js';
+
+test('GP-20129: dummy faces the room between the console and bench, one to two feet clear of the wall', () => {
+  const tg = buildTrainingGround(FakeThree);
+  try {
+    const s = TRAINING_DUMMY_SPOT, console = rangeConsolePlacement(tg);
+    const wallGap = s.x - DUMMY_SPEC.baseRadius - (TRAINING.RANGE.minX + .3);
+    assert(wallGap >= .3048 && wallGap <= .6096, 'base clears the inner wall by one to two feet');
+    assert(s.z - DUMMY_SPEC.baseRadius > console.z + .675 + .72, 'console approach remains clear');
+    assert(s.z + DUMMY_SPEC.baseRadius < FIRING_LINE.front - .72, 'bench approach remains clear');
+    assert(Math.abs(Math.sin(s.yaw) - 1) < 1e-9 && Math.abs(Math.cos(s.yaw)) < 1e-9,
+      'dummy front (+Z locally) faces +X into the room');
+  } finally { tg.dispose(); }
+});
 
 test('GP-20101: dummy joins the range without blocking its targets, stations, or walking space', () => {
   const tg = buildTrainingGround(FakeThree);

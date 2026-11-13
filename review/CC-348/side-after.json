@@ -1,0 +1,137 @@
+[
+ {
+  "diag": [
+   {
+    "n": "",
+    "mat": "gunPaint:m4",
+    "role": "suppressor shell",
+    "map": true,
+    "inFur": true,
+    "uv": true
+   },
+   {
+    "n": "",
+    "mat": "gunPaint:m4",
+    "role": "suppressor shell",
+    "map": true,
+    "inFur": true,
+    "uv": true
+   },
+   {
+    "n": "",
+    "mat": "fold-static",
+    "map": false,
+    "inFur": false,
+    "uv": false
+   }
+  ]
+ },
+ {
+  "id": "m4-can-camo-left",
+  "size": [
+   3.754,
+   0.302,
+   0.117
+  ],
+  "ws": 0.6740955727336523
+ },
+ {
+  "id": "m4-can-issue-left",
+  "size": [
+   3.754,
+   0.302,
+   0.117
+  ],
+  "ws": 0.6740955727336524
+ },
+ {
+  "id": "m4-can-camo-right",
+  "size": [
+   3.754,
+   0.302,
+   0.117
+  ],
+  "ws": 0.6740955727336523
+ },
+ {
+  "id": "sniper-camo-left",
+  "size": [
+   4.948,
+   0.278,
+   0.146
+  ],
+  "ws": 0.7233191680486358
+ },
+ {
+  "id": "sniper-issue-left",
+  "size": [
+   4.948,
+   0.278,
+   0.146
+  ],
+  "ws": 0.7233191680486359
+ },
+ {
+  "id": "sniper-bolt-closed",
+  "size": [
+   4.948,
+   0.278,
+   0.146
+  ],
+  "ws": 0.7233191680486358
+ },
+ {
+  "id": "sniper-bolt-lifted",
+  "size": [
+   4.948,
+   0.286,
+   0.113
+  ],
+  "ws": 0.7233191680486359
+ },
+ {
+  "id": "sniper-bolt-back",
+  "size": [
+   4.948,
+   0.286,
+   0.113
+  ],
+  "ws": 0.7233191680486359
+ },
+ {
+  "id": "sniper-bolt-back-top",
+  "size": [
+   4.948,
+   0.286,
+   0.113
+  ],
+  "ws": 0.7233191680486359
+ },
+ {
+  "id": "shotgun-issue-left",
+  "size": [
+   4.441,
+   0.265,
+   0.142
+  ],
+  "ws": 0.8887072028423653
+ },
+ {
+  "id": "shotgun-issue-right",
+  "size": [
+   4.441,
+   0.265,
+   0.142
+  ],
+  "ws": 0.8887072028423652
+ },
+ {
+  "id": "shotgun-pump-close",
+  "size": [
+   4.441,
+   0.265,
+   0.142
+  ],
+  "ws": 0.8887072028423652
+ }
+]

@@ -13,7 +13,7 @@ export function createRangeMonitor(T,tg){
   box(.12,.08,.0525,steel,x,.63,-.10125);
   for(const y of [-.63,.63])box(.05,.05,.04,steel,x,y,.09);
  }
- for(const y of [-.67,.67])box(3.5,.06,.04,steel,0,y,.09);
+ for(const y of [-.669,.669])box(3.5,.06,.04,steel,0,y,.09); // CJ-1: rails 1 mm inside the box's top and bottom, not on their planes (they flickered)
  const cv=document.createElement('canvas');cv.width=1024;cv.height=400;const c=cv.getContext('2d'),tex=keep(new T.CanvasTexture(cv));tex.colorSpace=T.SRGBColorSpace;
  const mat=keep(new T.MeshBasicMaterial({map:tex,toneMapped:false})),screen=new T.Mesh(keep(new T.PlaneGeometry(3.35,1.25)),mat);screen.name='range-monitor-screen';screen.position.z=.084;g.add(screen);
  bakeStatic(T,g);g.traverse(o=>{if(o.geometry)keep(o.geometry);});

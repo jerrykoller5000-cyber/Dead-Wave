@@ -1,0 +1,102 @@
+{
+  "at": "2026-11-13T01:57:21.099Z",
+  "actions": [
+    {
+      "first": false,
+      "kind": "bullet",
+      "state": {
+        "hits": 0,
+        "damage": 0,
+        "byKind": {
+          "knife": 0,
+          "machete": 0,
+          "katana": 0,
+          "chainsaw": 0,
+          "scorch": 0,
+          "bullet": 0
+        },
+        "markCount": 0,
+        "tiltX": 0,
+        "tiltZ": 0,
+        "twistY": 0,
+        "tiltRad": 0,
+        "angularSpeed": 0
+      },
+      "name": "live-third-range-third-bullet.png",
+      "setup": {
+        "position": [
+          -3.8,
+          -200,
+          -642.1
+        ],
+        "direction": [
+          -0.28728843629022205,
+          -0.12651278869007648,
+          0.9494524046374201
+        ],
+        "knifeCd": 0,
+        "ammo": 11,
+        "unarmed": false,
+        "swap": {
+          "swapT": 0,
+          "swapDur": 0.28,
+          "fireCooldown": -0.5552999999970197
+        }
+      }
+    }
+  ],
+  "failures": [
+    "real input missed dummy: bullet first=false"
+  ],
+  "idleReference": "live-inrange-play.json (exclusive20s,1142frames,median16.7ms,p9516.9ms,0over50ms)",
+  "pointer": {
+    "x": 654.9571932759294,
+    "y": 334.35374486161646,
+    "hit": "CANVAS",
+    "id": ""
+  },
+  "doors": [
+    {
+      "side": 1,
+      "before": {
+        "open": true,
+        "locked": false,
+        "amount": 1,
+        "blocked": false
+      },
+      "after": {
+        "open": false,
+        "locked": false,
+        "amount": 0,
+        "blocked": true
+      }
+    },
+    {
+      "side": -1,
+      "before": {
+        "open": false,
+        "locked": false,
+        "amount": 0,
+        "blocked": true
+      },
+      "after": {
+        "open": true,
+        "locked": false,
+        "amount": 1,
+        "blocked": false
+      }
+    }
+  ],
+  "errors": [],
+  "inputWitness": [
+    {
+      "target": "CANVAS",
+      "id": "",
+      "canvas": true,
+      "button": 0,
+      "x": 654,
+      "y": 334
+    }
+  ],
+  "failure": "Error: real input missed dummy: bullet first=false\n    at file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/GP-20129/play.mjs:41:34"
+}
