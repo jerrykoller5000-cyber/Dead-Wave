@@ -1,0 +1,23 @@
+[
+  {
+    "view": "eye",
+    "pixels": 921600,
+    "anyDifference": 7,
+    "over16": 0,
+    "over32": 0,
+    "bbox": [
+      563,
+      35,
+      944,
+      66
+    ]
+  },
+  {
+    "view": "3p",
+    "pixels": 921600,
+    "anyDifference": 0,
+    "over16": 0,
+    "over32": 0,
+    "bbox": null
+  }
+]

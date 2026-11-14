@@ -1,0 +1,19 @@
+{
+  "when": "2026-11-14T07:19:19.855Z",
+  "ourLandedSha": "dc9f65367d6650b4384cf13d5e62ccb342b0481d9a40a7b27a2fdeb452068444",
+  "currentSha": "ae4530128eca75ca8b3fb20765f24eba4b66442625aa2d4765067ea8a5ad167a",
+  "currentMd5": "a2d366674513434e0abf0dd622c625f2",
+  "functions": [
+    {
+      "name": "rollForearm",
+      "landedExact": true,
+      "oldPresent": false
+    },
+    {
+      "name": "holdHand",
+      "landedExact": true,
+      "oldPresent": false
+    }
+  ],
+  "scope": "Concurrent C3 carry changes after our verified save; exact approved matrix functions still present. No other-root-change attribution claim."
+}

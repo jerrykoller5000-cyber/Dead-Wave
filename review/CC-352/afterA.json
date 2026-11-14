@@ -1,0 +1,157 @@
+{
+"C0/stand":{"s0(m4@) vs gun:s1":{"n":240,"mm":7.7,"at":[0.001,-198.793,-641.154,"s0:? in s1:?"],"f":0}}
+,
+"C0/walk":{"s0(m4@) vs gun:s1":{"n":240,"mm":7.7,"at":[0.032,-198.784,-641.144,"s0:? in s1:?"],"f":0}}
+,
+"C0/run":{"s0(m4@) vs gun:s1":{"n":240,"mm":7.7,"at":[-0.023,-198.713,-641.053,"s0:? in s1:?"],"f":0}}
+,
+"C0/crouch":{"s0(m4@) vs gun:s1":{"n":240,"mm":7.7,"at":[-0.001,-198.853,-641.008,"s0:? in s1:?"],"f":0}}
+,
+"C0/crouchwalk":{"s0(m4@) vs gun:s1":{"n":234,"mm":7.7,"at":[0.008,-198.844,-641.008,"s0:? in s1:?"],"f":0}}
+,
+"C0/aim":{"s0(m4@) vs gun:s1":{"n":240,"mm":7.7,"at":[0.019,-198.79,-641.154,"s0:? in s1:?"],"f":3}}
+,
+"C1/stand":{"s0(minigun@) vs gun:s1":{"n":2537,"mm":24.7,"at":[0.033,-198.966,-641.207,"s0:? in s1:?"],"f":0}}
+,
+"C1/walk":{"s0(minigun@) vs gun:s1":{"n":2542,"mm":24.7,"at":[-0.022,-198.945,-641.2,"s0:? in s1:?"],"f":8}}
+,
+"C1/run":{"s0(minigun@) vs gun:s1":{"n":2539,"mm":24.6,"at":[0.041,-198.887,-641.148,"s0:? in s1:?"],"f":3}}
+,
+"C1/crouch":{"s0(minigun@) vs gun:s1":{"n":716,"mm":24.7,"at":[0.01,-198.996,-641.115,"s0:? in s1:?"],"f":0}}
+,
+"C1/crouchwalk":{"s0(minigun@) vs gun:s1":{"n":184,"mm":19.7,"at":[0.007,-198.926,-641.09,"s0:? in s1:?"],"f":4}}
+,
+"C1/aim":{"s0(minigun@) vs gun:s1":{"n":2495,"mm":24.7,"at":[0.03,-198.97,-641.208,"s0:? in s1:?"],"f":9}}
+,
+"C2/stand":{}
+,
+"C2/walk":{}
+,
+"C2/run":{}
+,
+"C2/crouch":{}
+,
+"C2/crouchwalk":{}
+,
+"C2/aim":{}
+,
+"C3/stand":{"s0(aa12@) vs gun:s1":{"n":53,"mm":4.1,"at":[0.03,-199.163,-641.259,"s0:?<magazineBody in s1:?"],"f":0}}
+,
+"C3/walk":{"s0(aa12@) vs gun:s1":{"n":53,"mm":4.1,"at":[-0.015,-199.133,-641.259,"s0:?<magazineBody in s1:?"],"f":0}}
+,
+"C3/run":{"s0(aa12@) vs gun:s1":{"n":53,"mm":4.1,"at":[0.035,-199.033,-641.251,"s0:?<magazineBody in s1:?"],"f":0}}
+,
+"C3/crouch":{"s0(aa12@) vs gun:s1":{"n":53,"mm":4.1,"at":[0.02,-199.162,-641.232,"s0:?<magazineBody in s1:?"],"f":0}}
+,
+"C3/crouchwalk":{"s0(aa12@) vs gun:s1":{"n":53,"mm":4.1,"at":[0.008,-199.159,-641.235,"s0:?<magazineBody in s1:?"],"f":0}}
+,
+"C3/aim":{"s0(aa12@) vs gun:s1":{"n":53,"mm":4.1,"at":[0.016,-199.168,-641.259,"s0:?<magazineBody in s1:?"],"f":0}}
+,
+"C4/stand":{}
+,
+"C4/walk":{"h1(revolver@thigh+) vs leg":{"n":18,"mm":12.5,"at":[0.219,-199.171,-640.702,"leg:live-trouser-leg<live-trouser-leg-live in h1:?"],"f":0},"h1(revolver@thigh+) vs leg<":{"n":10088,"mm":28,"at":[0.192,-199.224,-640.616,"h1:? in leg:live-trouser-leg<live-trouser-leg-live"],"f":16},"p1(revolver@thigh-) vs leg":{"n":29,"mm":13.7,"at":[-0.218,-199.158,-640.678,"leg:live-trouser-leg<live-trouser-leg-live in p1:?"],"f":4},"p1(revolver@thigh-) vs leg<":{"n":8795,"mm":24.6,"at":[-0.199,-199.185,-640.65,"p1:? in leg:live-trouser-leg<live-trouser-leg-live"],"f":8}}
+,
+"C4/run":{"h1(revolver@thigh+) vs leg":{"n":10,"mm":6.2,"at":[0.214,-199.185,-640.7,"leg:live-trouser-leg<live-trouser-leg-live in h1:?"],"f":3},"h1(revolver@thigh+) vs leg<":{"n":5346,"mm":25.4,"at":[0.189,-199.261,-640.72,"h1:? in leg:live-trouser-leg<live-trouser-leg-live"],"f":3},"p1(revolver@thigh-) vs leg":{"n":11,"mm":5.7,"at":[-0.193,-199.259,-640.752,"leg:live-trouser-leg<live-trouser-leg-live in p1:?"],"f":9},"p1(revolver@thigh-) vs leg<":{"n":6029,"mm":25.7,"at":[-0.2,-199.255,-640.651,"p1:? in leg:live-trouser-leg<live-trouser-leg-live"],"f":9}}
+,
+"C4/crouch":{}
+,
+"C4/crouchwalk":{}
+,
+"C4/aim":{}
+,
+"C5/stand":{"h0(uzi@pack+) vs gun:s0":{"n":4435,"mm":30,"at":[0.081,-198.864,-641.045,"h0:? in s0:?"],"f":0},"s0(chainsaw@) vs gun:s1":{"n":1135,"mm":10.5,"at":[-0.071,-198.938,-641.208,"s1:?<magazineBody in s0:?"],"f":0}}
+,
+"C5/walk":{"h0(uzi@pack+) vs gun:s0":{"n":4425,"mm":30,"at":[0.133,-198.854,-641.025,"h0:? in s0:?"],"f":0},"s0(chainsaw@) vs gun:s1":{"n":55,"mm":10.5,"at":[-0.083,-198.917,-641.199,"s1:?<magazineBody in s0:?"],"f":8}}
+,
+"C5/run":{"h0(uzi@pack+) vs gun:s0":{"n":4425,"mm":30,"at":[0.105,-198.831,-640.946,"h0:? in s0:?"],"f":0},"s0(chainsaw@) vs gun:s1":{"n":45,"mm":10.5,"at":[-0.016,-198.854,-641.147,"s1:?<magazineBody in s0:?"],"f":0},"hip(pistol@hip+) vs arm":{"n":6,"mm":2,"at":[0.278,-199.081,-640.746,"arm:? in hip:?"],"f":6},"hip(pistol@hip+) vs arm<":{"n":16,"mm":4.2,"at":[0.279,-199.085,-640.744,"hip:? in arm:?"],"f":6}}
+,
+"C5/crouch":{"h0(uzi@pack+) vs gun:s0":{"n":4402,"mm":30,"at":[0.082,-198.956,-640.925,"h0:? in s0:?"],"f":0},"s0(chainsaw@) vs gun:s1":{"n":302,"mm":10.5,"at":[-0.045,-198.969,-641.108,"s1:?<magazineBody in s0:?"],"f":0}}
+,
+"C5/crouchwalk":{"h0(uzi@pack+) vs gun:s0":{"n":4414,"mm":30,"at":[0.097,-198.953,-640.929,"h0:? in s0:?"],"f":0},"s0(chainsaw@) vs gun:s1":{"n":45,"mm":10.5,"at":[-0.054,-198.961,-641.108,"s1:?<magazineBody in s0:?"],"f":16}}
+,
+"C5/aim":{"h0(uzi@pack+) vs gun:s0":{"n":4447,"mm":30,"at":[0.078,-198.852,-641.044,"h0:? in s0:?"],"f":0},"s0(chainsaw@) vs gun:s1":{"n":1175,"mm":10.5,"at":[-0.069,-198.942,-641.21,"s1:?<magazineBody in s0:?"],"f":0}}
+,
+"C6/stand":{}
+,
+"C6/walk":{}
+,
+"C6/run":{}
+,
+"C6/crouch":{}
+,
+"C6/crouchwalk":{}
+,
+"C6/aim":{}
+,
+"C7/stand":{}
+,
+"C7/walk":{}
+,
+"C7/run":{}
+,
+"C7/crouch":{}
+,
+"C7/crouchwalk":{}
+,
+"C7/aim":{}
+,
+"C8/stand":{"h0(uzi@pack+) vs gun:s1":{"n":204,"mm":4.3,"at":[0.07,-199.179,-641.043,"h0:? in s1:?"],"f":0}}
+,
+"C8/walk":{"h0(uzi@pack+) vs gun:s1":{"n":204,"mm":4.3,"at":[0.025,-199.165,-641.044,"h0:? in s1:?"],"f":0}}
+,
+"C8/run":{"h0(uzi@pack+) vs gun:s1":{"n":204,"mm":4.3,"at":[0.04,-199.111,-641.036,"h0:? in s1:?"],"f":6}}
+,
+"C8/crouch":{"h0(uzi@pack+) vs gun:s1":{"n":204,"mm":4.3,"at":[0.061,-199.252,-641.037,"h0:? in s1:?"],"f":0}}
+,
+"C8/crouchwalk":{"h0(uzi@pack+) vs gun:s1":{"n":204,"mm":4.3,"at":[0.072,-199.245,-641.036,"h0:? in s1:?"],"f":0}}
+,
+"C8/aim":{"h0(uzi@pack+) vs gun:s1":{"n":204,"mm":4.3,"at":[0.07,-199.179,-641.042,"h0:? in s1:?"],"f":6}}
+,
+"C9/stand":{"s0(launcher@) vs gun:s1":{"n":2282,"mm":30,"at":[-0.046,-199.048,-641.196,"s0:?<controls-drumLatch in s1:?"],"f":0}}
+,
+"C9/walk":{"s0(launcher@) vs gun:s1":{"n":2373,"mm":30,"at":[0.009,-199.013,-641.193,"s0:?<controls-drumLatch in s1:?"],"f":8}}
+,
+"C9/run":{"s0(launcher@) vs gun:s1":{"n":2539,"mm":30,"at":[-0.043,-198.897,-641.15,"s0:?<controls-drumLatch in s1:?"],"f":6}}
+,
+"C9/crouch":{"s0(launcher@) vs gun:s1":{"n":2008,"mm":30,"at":[-0.054,-199.075,-641.131,"s0:?<controls-drumLatch in s1:?"],"f":0}}
+,
+"C9/crouchwalk":{"s0(launcher@) vs gun:s1":{"n":1665,"mm":30,"at":[-0.059,-199.068,-641.133,"s0:?<controls-drumLatch in s1:?"],"f":0}}
+,
+"C9/aim":{"s0(launcher@) vs gun:s1":{"n":1771,"mm":30,"at":[-0.053,-199.045,-641.196,"s0:?<controls-drumLatch in s1:?"],"f":6}}
+,
+"C10/stand":{"h1(revolver@thigh+) vs arm":{"n":3,"mm":4.6,"at":[0.261,-199.368,-640.581,"arm:gb152-hand in h1:?"],"f":6},"h1(revolver@thigh+) vs arm<":{"n":1678,"mm":17.3,"at":[0.255,-199.345,-640.57,"h1:? in arm:gb152-hand"],"f":12},"p1(revolver@thigh-) vs arm":{"n":7,"mm":5.8,"at":[-0.252,-199.379,-640.573,"arm:gb152-hand in p1:?"],"f":9},"p1(revolver@thigh-) vs arm<":{"n":480,"mm":9.9,"at":[-0.254,-199.349,-640.564,"p1:? in arm:gb152-hand"],"f":0}}
+,
+"C10/walk":{"p1(revolver@thigh-) vs leg":{"n":15,"mm":9.7,"at":[-0.199,-199.15,-640.734,"leg:live-trouser-leg<live-trouser-leg-live in p1:?"],"f":4},"p1(revolver@thigh-) vs leg<":{"n":9122,"mm":26.3,"at":[-0.191,-199.206,-640.614,"p1:? in leg:live-trouser-leg<live-trouser-leg-live"],"f":4},"h1(revolver@thigh+) vs arm":{"n":7,"mm":6.5,"at":[0.29,-199.375,-640.548,"arm:gb152-hand in h1:?"],"f":4},"h1(revolver@thigh+) vs arm<":{"n":1614,"mm":11.7,"at":[0.298,-199.298,-640.554,"h1:? in arm:gb152-hand"],"f":4},"p1(revolver@thigh-) vs arm":{"n":6,"mm":2.7,"at":[-0.213,-199.27,-640.553,"arm:? in p1:?"],"f":4},"p1(revolver@thigh-) vs arm<":{"n":1633,"mm":12.6,"at":[-0.21,-199.104,-640.618,"p1:?<controls-hammer in arm:?"],"f":4},"h1(revolver@thigh+) vs leg":{"n":17,"mm":14.1,"at":[0.212,-199.169,-640.721,"leg:live-trouser-leg<live-trouser-leg-live in h1:?"],"f":16},"h1(revolver@thigh+) vs leg<":{"n":11172,"mm":27.4,"at":[0.196,-199.245,-640.623,"h1:? in leg:live-trouser-leg<live-trouser-leg-live"],"f":12}}
+,
+"C10/run":{"h1(revolver@thigh+) vs leg":{"n":17,"mm":12.6,"at":[0.222,-199.214,-640.647,"leg:live-trouser-leg<live-trouser-leg-live in h1:?"],"f":12},"h1(revolver@thigh+) vs leg<":{"n":5266,"mm":23.6,"at":[0.202,-199.251,-640.666,"h1:? in leg:live-trouser-leg<live-trouser-leg-live"],"f":0},"h1(revolver@thigh+) vs arm":{"n":33,"mm":9.4,"at":[0.232,-199.167,-640.66,"arm:? in h1:?"],"f":3},"h1(revolver@thigh+) vs arm<":{"n":3684,"mm":17.4,"at":[0.216,-199.202,-640.603,"h1:? in arm:gb152-hand"],"f":3},"hip(pistol@hip+) vs arm<":{"n":279,"mm":11.6,"at":[0.275,-199.083,-640.742,"hip:? in arm:?"],"f":6},"p1(revolver@thigh-) vs leg":{"n":17,"mm":10.4,"at":[-0.202,-199.227,-640.736,"leg:live-trouser-leg<live-trouser-leg-live in p1:?"],"f":6},"p1(revolver@thigh-) vs leg<":{"n":7611,"mm":24.1,"at":[-0.199,-199.249,-640.635,"p1:? in leg:live-trouser-leg<live-trouser-leg-live"],"f":6},"p1(revolver@thigh-) vs arm":{"n":12,"mm":4.3,"at":[-0.209,-199.168,-640.591,"arm:gb152-hand in p1:?"],"f":9},"p1(revolver@thigh-) vs arm<":{"n":2423,"mm":11,"at":[-0.197,-199.173,-640.611,"p1:? in arm:gb152-hand"],"f":9},"hipPair(pistol@hip-) vs arm<":{"n":492,"mm":10.7,"at":[-0.263,-199.067,-640.74,"hipPair:? in arm:?"],"f":12}}
+,
+"C10/crouch":{"h1(revolver@thigh+) vs arm":{"n":79,"mm":8,"at":[0.248,-199.347,-640.621,"arm:? in h1:?"],"f":0},"h1(revolver@thigh+) vs arm<":{"n":6148,"mm":22.6,"at":[0.257,-199.317,-640.636,"h1:?<controls-hammer in arm:?"],"f":0},"p1(revolver@thigh-) vs arm":{"n":48,"mm":6.4,"at":[-0.262,-199.332,-640.646,"arm:? in p1:?"],"f":12},"p1(revolver@thigh-) vs arm<":{"n":4363,"mm":15.4,"at":[-0.263,-199.321,-640.637,"p1:? in arm:?"],"f":0}}
+,
+"C10/crouchwalk":{"h1(revolver@thigh+) vs arm":{"n":113,"mm":10,"at":[0.25,-199.335,-640.634,"arm:? in h1:?"],"f":8},"h1(revolver@thigh+) vs arm<":{"n":6820,"mm":27.8,"at":[0.255,-199.305,-640.638,"h1:? in arm:?"],"f":0},"p1(revolver@thigh-) vs arm":{"n":62,"mm":6.1,"at":[-0.268,-199.32,-640.656,"arm:? in p1:?"],"f":16},"p1(revolver@thigh-) vs arm<":{"n":4777,"mm":14.4,"at":[-0.267,-199.319,-640.636,"p1:? in arm:?"],"f":16}}
+,
+"C10/aim":{"h1(revolver@thigh+) vs arm":{"n":18,"mm":7.6,"at":[0.256,-199.364,-640.583,"arm:gb152-hand in h1:?"],"f":6},"h1(revolver@thigh+) vs arm<":{"n":1731,"mm":18.9,"at":[0.261,-199.333,-640.572,"h1:? in arm:gb152-hand"],"f":9},"p1(revolver@thigh-) vs arm":{"n":4,"mm":2.1,"at":[-0.256,-199.363,-640.569,"arm:gb152-hand in p1:?"],"f":0},"p1(revolver@thigh-) vs arm<":{"n":37,"mm":8.4,"at":[-0.259,-199.278,-640.571,"p1:? in arm:?"],"f":6}}
+,
+"C11/stand":{}
+,
+"C11/walk":{}
+,
+"C11/run":{}
+,
+"C11/crouch":{}
+,
+"C11/crouchwalk":{}
+,
+"C11/aim":{}
+,
+"C12/stand":{}
+,
+"C12/walk":{}
+,
+"C12/run":{}
+,
+"C12/crouch":{}
+,
+"C12/crouchwalk":{}
+,
+"C12/aim":{}
+}

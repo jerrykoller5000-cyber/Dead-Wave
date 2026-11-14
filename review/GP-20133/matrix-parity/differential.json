@@ -1,0 +1,270 @@
+{
+  "navigation": "Canonical tools/bench early dismissForTesting; separate loader-ready and actual menu times",
+  "scope": "REVIEW ONLY differential baseline/sparse intermediate propagation; preserves original boundary result. Double solves/counter increments; NOT timing acceptance.",
+  "frameSampling": "production-tick-start-wall-clock",
+  "environment": "outdoor",
+  "sourceSha256": "798ae744e736f203dc587b48ee4e4e588497ec52261fca18321f72a0c57e710c",
+  "moduleHashes": {
+    "core/body-limits.js": "fd2562bd882ef767155cc819301ede35e68d008621dd0f683232c593d91459eb",
+    "game/viewmodel.js": "f3eb743fb200945a3bed23accbd93dfcb5cf983e616769049c357d3199b7363e",
+    "game/tp-fit.js": "d2dbf1e163f856b672a1a91d1638a949749e3bde1727bda8ceaf1f18c3b08e07",
+    "studio/fp-arms.js": "fff7808db158e072d0c5697a0a57e0c87de7fa81847558fc8670f6f7e5f190d8",
+    "world/training-ballistics.js": "eadc9d04d5fd50ad9f6f23c0a080ea2ad58485ff62e0002f1a6b1b0da4719bdc"
+  },
+  "rows": [
+    {
+      "weapon": "pistol",
+      "setup": {
+        "weapon": "pistol",
+        "pair": true,
+        "ammo": 24,
+        "magSize": 12,
+        "auto": true,
+        "loadout": {
+          "primary": [
+            null,
+            null
+          ],
+          "secondary": [
+            null,
+            "pistol:second"
+          ],
+          "hip": "pistol:base"
+        },
+        "position": [
+          42,
+          -7.5467963358017105,
+          -20
+        ]
+      },
+      "parity": {
+        "calls": 122,
+        "failed": [],
+        "maxLocal": 0,
+        "maxWorld": 0,
+        "maxReturn": 0
+      }
+    },
+    {
+      "weapon": "ak",
+      "setup": {
+        "weapon": "ak",
+        "pair": false,
+        "ammo": 30,
+        "magSize": 30,
+        "auto": true,
+        "loadout": {
+          "primary": [
+            "ak",
+            null
+          ],
+          "secondary": [
+            null,
+            null
+          ],
+          "hip": "pistol:base"
+        },
+        "position": [
+          42,
+          -7.5467963358017105,
+          -20
+        ]
+      },
+      "parity": {
+        "calls": 314,
+        "failed": [],
+        "maxLocal": 0,
+        "maxWorld": 0,
+        "maxReturn": 0
+      }
+    },
+    {
+      "weapon": "uzi",
+      "setup": {
+        "weapon": "uzi",
+        "pair": false,
+        "ammo": 32,
+        "magSize": 32,
+        "auto": true,
+        "loadout": {
+          "primary": [
+            null,
+            null
+          ],
+          "secondary": [
+            "uzi",
+            null
+          ],
+          "hip": "pistol:base"
+        },
+        "position": [
+          42,
+          -7.5467963358017105,
+          -20
+        ]
+      },
+      "parity": {
+        "calls": 444,
+        "failed": [],
+        "maxLocal": 0,
+        "maxWorld": 0,
+        "maxReturn": 0
+      }
+    },
+    {
+      "weapon": "minigun",
+      "setup": {
+        "weapon": "minigun",
+        "pair": false,
+        "ammo": 300,
+        "magSize": 300,
+        "auto": true,
+        "loadout": {
+          "primary": [
+            "minigun",
+            null
+          ],
+          "secondary": [
+            null,
+            null
+          ],
+          "hip": "pistol:base"
+        },
+        "position": [
+          42,
+          -7.5467963358017105,
+          -20
+        ]
+      },
+      "parity": {
+        "calls": 580,
+        "failed": [],
+        "maxLocal": 0,
+        "maxWorld": 0,
+        "maxReturn": 0
+      }
+    },
+    {
+      "weapon": "shotgun",
+      "setup": {
+        "weapon": "shotgun",
+        "pair": false,
+        "ammo": 8,
+        "magSize": 8,
+        "auto": false,
+        "loadout": {
+          "primary": [
+            "shotgun",
+            null
+          ],
+          "secondary": [
+            null,
+            null
+          ],
+          "hip": "pistol:base"
+        },
+        "position": [
+          42,
+          -7.5467963358017105,
+          -20
+        ]
+      },
+      "parity": {
+        "calls": 754,
+        "failed": [
+          {
+            "weapon": "shotgun",
+            "call": 583,
+            "local": 0,
+            "world": 0.979437218611932,
+            "scalar": 0
+          },
+          {
+            "weapon": "shotgun",
+            "call": 586,
+            "local": 0,
+            "world": 0.9794515913703303,
+            "scalar": 0
+          },
+          {
+            "weapon": "shotgun",
+            "call": 589,
+            "local": 0,
+            "world": 0.979455051445965,
+            "scalar": 0
+          },
+          {
+            "weapon": "shotgun",
+            "call": 592,
+            "local": 0,
+            "world": 0.9794678924303383,
+            "scalar": 0
+          },
+          {
+            "weapon": "shotgun",
+            "call": 595,
+            "local": 0,
+            "world": 0.9794851399554454,
+            "scalar": 0
+          },
+          {
+            "weapon": "shotgun",
+            "call": 598,
+            "local": 0,
+            "world": 0.9795313385563693,
+            "scalar": 0
+          },
+          {
+            "weapon": "shotgun",
+            "call": 601,
+            "local": 0,
+            "world": 0.9795384875895445,
+            "scalar": 0
+          },
+          {
+            "weapon": "shotgun",
+            "call": 604,
+            "local": 0,
+            "world": 0.9795241833988928,
+            "scalar": 0
+          },
+          {
+            "weapon": "shotgun",
+            "call": 607,
+            "local": 0,
+            "world": 0.9795535473188107,
+            "scalar": 0
+          },
+          {
+            "weapon": "shotgun",
+            "call": 610,
+            "local": 0,
+            "world": 0.9795747061618149,
+            "scalar": 0
+          }
+        ],
+        "maxLocal": 0,
+        "maxWorld": 0.9808837272383063,
+        "maxReturn": 0
+      }
+    }
+  ],
+  "readyWallMs": 13860,
+  "loadMarks": [
+    "terrain+water+sky built 0ms",
+    "rocks 61ms",
+    "trees 234ms",
+    "player+weapons+zombie types 1357ms",
+    "foliage scattered 2500ms",
+    "POIs+minimap+foliage chunks 4130ms",
+    "contact shading + rest of setup 4365ms",
+    "post + pools + compile + warm frame 10837ms",
+    "ready 10841ms"
+  ],
+  "menuWallMs": 20152,
+  "graphics": "high",
+  "instrumentation": {
+    "prof": false,
+    "gpuTimestamps": false
+  }
+}

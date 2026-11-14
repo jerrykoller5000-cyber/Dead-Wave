@@ -1,0 +1,9 @@
+{
+  "before": "ae4530128eca75ca8b3fb20765f24eba4b66442625aa2d4765067ea8a5ad167a",
+  "after": "a95f671f3e01e896412b4826a3d8e5430781b75376175aa8d0e72fc91048a3e9",
+  "oldBubble": "      updatePitBubbles(dt);",
+  "newBubble": "      if (!training.active) updatePitBubbles(dt);   // GP-20133: outdoor water waits while Training is indoors",
+  "oldTimer": "      sinkholeRippleT -= dt;\r\n      if (sinkholeRippleT <= 0 && !pitSignal.silenced) {",
+  "newTimer": "      if (!training.active) sinkholeRippleT -= dt;\r\n      if (!training.active && sinkholeRippleT <= 0 && !pitSignal.silenced) {",
+  "scope": "Director loan: only outdoor lake emission gating, no outdoor clock or motion change"
+}

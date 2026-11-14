@@ -1,0 +1,84 @@
+[
+  {
+    "test": "tcb291",
+    "exit": 0,
+    "result": {
+      "source": "070e4ab5b8394d9623bc5376254c904849275cc0d14205a48d43a1fead403151",
+      "end": "070e4ab5b8394d9623bc5376254c904849275cc0d14205a48d43a1fead403151",
+      "sourceUnchanged": true,
+      "rows": [
+        {
+          "sparse": false,
+          "completed": true,
+          "pass": 3,
+          "fail": [],
+          "errors": []
+        },
+        {
+          "sparse": true,
+          "completed": true,
+          "pass": 3,
+          "fail": [],
+          "errors": []
+        }
+      ],
+      "failure": null
+    }
+  },
+  {
+    "test": "t218",
+    "exit": 0,
+    "result": {
+      "source": "070e4ab5b8394d9623bc5376254c904849275cc0d14205a48d43a1fead403151",
+      "end": "070e4ab5b8394d9623bc5376254c904849275cc0d14205a48d43a1fead403151",
+      "sourceUnchanged": true,
+      "rows": [
+        {
+          "sparse": false,
+          "completed": true,
+          "pass": 34,
+          "fail": [
+            "FAIL aa12: every visible magazine is seated or in the palm (or the clip's falling empty): in midair at u 0.52 (well 0.036, palm 0.074)"
+          ],
+          "errors": []
+        },
+        {
+          "sparse": true,
+          "completed": true,
+          "pass": 34,
+          "fail": [
+            "FAIL aa12: every visible magazine is seated or in the palm (or the clip's falling empty): in midair at u 0.52 (well 0.036, palm 0.072)"
+          ],
+          "errors": []
+        }
+      ],
+      "failure": null
+    }
+  },
+  {
+    "test": "t262",
+    "exit": 0,
+    "result": {
+      "source": "070e4ab5b8394d9623bc5376254c904849275cc0d14205a48d43a1fead403151",
+      "end": "070e4ab5b8394d9623bc5376254c904849275cc0d14205a48d43a1fead403151",
+      "sourceUnchanged": true,
+      "rows": [
+        {
+          "sparse": false,
+          "completed": true,
+          "pass": 32,
+          "fail": [],
+          "errors": []
+        },
+        {
+          "sparse": true,
+          "completed": true,
+          "pass": 32,
+          "fail": [],
+          "errors": []
+        }
+      ],
+      "failure": null
+    }
+  }
+]

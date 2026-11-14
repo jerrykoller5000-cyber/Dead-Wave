@@ -1,0 +1,685 @@
+{
+  "scope": "Diagnostic hooks count actual ShadowNode callbacks and synchronous renderer.render(scene,shadowCamera) CPU submission spans; includes hook overhead, excludes GPU completion and pass setup outside nested renderer.render. NOT frame-time budget acceptance. Each gun original full mag and preceding idle; scene/effects retained. No PNG before/between either phase. Anonymous same ancestry strings aggregate meshes, not unique objects. Every fixture source/modules stable and zero errors.",
+  "rows": [
+    {
+      "weapon": "pistol",
+      "fire": false,
+      "frames": 251,
+      "sourceStable": true,
+      "modulesStable": true,
+      "errors": [],
+      "lights": [
+        {
+          "name": "",
+          "type": "DirectionalLight",
+          "id": 219,
+          "castShadow": true,
+          "intensity": 1.73,
+          "map": [
+            2048,
+            2048
+          ],
+          "visible": true
+        }
+      ],
+      "passes": [
+        {
+          "light": "DirectionalLight#219",
+          "passes": 251,
+          "cpuMsPerPass": 5.251394422643213,
+          "cpuMsPerFrame": 5.251394422643213,
+          "maxMs": 9.5
+        }
+      ],
+      "casterCallsPerFrame": 128.29482071713147,
+      "casterTrianglesPerFrame": 60056.21513944223,
+      "topCasterGroups": [
+        {
+          "key": "DirectionalLight#219 :: Mesh < Group < Group < Group < Group",
+          "callsPerFrame": 14.816733067729084,
+          "cpuMsPerFrame": 0.42390438261260077,
+          "trianglesPerFrame": 24695.075697211156
+        },
+        {
+          "key": "DirectionalLight#219 :: target-plate < Group < Group < training-ground < Scene",
+          "callsPerFrame": 5,
+          "cpuMsPerFrame": 0.2760956188834521,
+          "trianglesPerFrame": 10
+        },
+        {
+          "key": "DirectionalLight#219 :: Mesh < training-cutaway-rangeSouth < training-ground < Scene",
+          "callsPerFrame": 5,
+          "cpuMsPerFrame": 0.23904382588853873,
+          "trianglesPerFrame": 420
+        },
+        {
+          "key": "DirectionalLight#219 :: Mesh < training-cutaway-east < training-ground < Scene",
+          "callsPerFrame": 8,
+          "cpuMsPerFrame": 0.2235059757156676,
+          "trianglesPerFrame": 1404
+        },
+        {
+          "key": "DirectionalLight#219 :: Mesh < training-ground < Scene",
+          "callsPerFrame": 7,
+          "cpuMsPerFrame": 0.19362549929029912,
+          "trianglesPerFrame": 3212
+        },
+        {
+          "key": "DirectionalLight#219 :: live-sleeve < live-sleeve-live < Group < Group < Group",
+          "callsPerFrame": 2,
+          "cpuMsPerFrame": 0.17768924229173547,
+          "trianglesPerFrame": 3492
+        },
+        {
+          "key": "DirectionalLight#219 :: Mesh < laserLightUnit < Group < Group < Group",
+          "callsPerFrame": 6,
+          "cpuMsPerFrame": 0.1741035867972203,
+          "trianglesPerFrame": 1288
+        },
+        {
+          "key": "DirectionalLight#219 :: Mesh < training-range-console < training-ground < Scene",
+          "callsPerFrame": 5,
+          "cpuMsPerFrame": 0.16095617461014552,
+          "trianglesPerFrame": 956
+        }
+      ],
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "weapon": "pistol",
+      "fire": true,
+      "frames": 44,
+      "sourceStable": true,
+      "modulesStable": true,
+      "errors": [],
+      "lights": [
+        {
+          "name": "",
+          "type": "DirectionalLight",
+          "id": 219,
+          "castShadow": true,
+          "intensity": 1.73,
+          "map": [
+            2048,
+            2048
+          ],
+          "visible": true
+        }
+      ],
+      "passes": [
+        {
+          "light": "DirectionalLight#219",
+          "passes": 44,
+          "cpuMsPerPass": 4.931818182495507,
+          "cpuMsPerFrame": 4.931818182495507,
+          "maxMs": 7.300000011920929
+        }
+      ],
+      "casterCallsPerFrame": 126,
+      "casterTrianglesPerFrame": 55898,
+      "topCasterGroups": [
+        {
+          "key": "DirectionalLight#219 :: Mesh < Group < Group < Group < Group",
+          "callsPerFrame": 13,
+          "cpuMsPerFrame": 0.3477272763848305,
+          "trianglesPerFrame": 24256
+        },
+        {
+          "key": "DirectionalLight#219 :: target-plate < Group < Group < training-ground < Scene",
+          "callsPerFrame": 5,
+          "cpuMsPerFrame": 0.25681818344376306,
+          "trianglesPerFrame": 10
+        },
+        {
+          "key": "DirectionalLight#219 :: Mesh < training-cutaway-rangeSouth < training-ground < Scene",
+          "callsPerFrame": 5,
+          "cpuMsPerFrame": 0.2181818187236786,
+          "trianglesPerFrame": 420
+        },
+        {
+          "key": "DirectionalLight#219 :: Mesh < training-cutaway-east < training-ground < Scene",
+          "callsPerFrame": 8,
+          "cpuMsPerFrame": 0.1840909096327695,
+          "trianglesPerFrame": 1404
+        },
+        {
+          "key": "DirectionalLight#219 :: Mesh < training-range-console < training-ground < Scene",
+          "callsPerFrame": 5,
+          "cpuMsPerFrame": 0.1704545413905924,
+          "trianglesPerFrame": 956
+        },
+        {
+          "key": "DirectionalLight#219 :: Mesh < training-ground < Scene",
+          "callsPerFrame": 7,
+          "cpuMsPerFrame": 0.15909090367230502,
+          "trianglesPerFrame": 3212
+        },
+        {
+          "key": "DirectionalLight#219 :: Mesh < laserLightUnit < Group < Group < Group",
+          "callsPerFrame": 6,
+          "cpuMsPerFrame": 0.14090908792885867,
+          "trianglesPerFrame": 1288
+        },
+        {
+          "key": "DirectionalLight#219 :: Mesh < training-firing-bench < training-ground < Scene",
+          "callsPerFrame": 5,
+          "cpuMsPerFrame": 0.13636363636363635,
+          "trianglesPerFrame": 456
+        }
+      ],
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "weapon": "ak",
+      "fire": false,
+      "frames": 249,
+      "sourceStable": true,
+      "modulesStable": true,
+      "errors": [],
+      "lights": [
+        {
+          "name": "",
+          "type": "DirectionalLight",
+          "id": 219,
+          "castShadow": true,
+          "intensity": 1.73,
+          "map": [
+            2048,
+            2048
+          ],
+          "visible": true
+        }
+      ],
+      "passes": [
+        {
+          "light": "DirectionalLight#219",
+          "passes": 249,
+          "cpuMsPerPass": 5.764658634801466,
+          "cpuMsPerFrame": 5.764658634801466,
+          "maxMs": 10
+        }
+      ],
+      "casterCallsPerFrame": 124.36144578313252,
+      "casterTrianglesPerFrame": 54374.93975903615,
+      "topCasterGroups": [
+        {
+          "key": "DirectionalLight#219 :: Mesh < Group < Group < Group < Group",
+          "callsPerFrame": 11.036144578313253,
+          "cpuMsPerFrame": 0.32730923778560744,
+          "trianglesPerFrame": 8455.156626506025
+        },
+        {
+          "key": "DirectionalLight#219 :: target-plate < Group < Group < training-ground < Scene",
+          "callsPerFrame": 5,
+          "cpuMsPerFrame": 0.2650602403654152,
+          "trianglesPerFrame": 10
+        },
+        {
+          "key": "DirectionalLight#219 :: Mesh < training-cutaway-rangeSouth < training-ground < Scene",
+          "callsPerFrame": 5,
+          "cpuMsPerFrame": 0.20281124426179142,
+          "trianglesPerFrame": 420
+        },
+        {
+          "key": "DirectionalLight#219 :: Mesh < training-cutaway-east < training-ground < Scene",
+          "callsPerFrame": 8,
+          "cpuMsPerFrame": 0.20200803265514145,
+          "trianglesPerFrame": 1404
+        },
+        {
+          "key": "DirectionalLight#219 :: Mesh < training-ground < Scene",
+          "callsPerFrame": 7,
+          "cpuMsPerFrame": 0.16224899624724942,
+          "trianglesPerFrame": 3212
+        },
+        {
+          "key": "DirectionalLight#219 :: Mesh < training-range-console < training-ground < Scene",
+          "callsPerFrame": 5,
+          "cpuMsPerFrame": 0.15381526169049214,
+          "trianglesPerFrame": 956
+        },
+        {
+          "key": "DirectionalLight#219 :: Mesh < training-gate-frame < training-ground < Scene",
+          "callsPerFrame": 6,
+          "cpuMsPerFrame": 0.14257028088512191,
+          "trianglesPerFrame": 1284
+        },
+        {
+          "key": "DirectionalLight#219 :: Mesh < training-firing-bench < training-ground < Scene",
+          "callsPerFrame": 5,
+          "cpuMsPerFrame": 0.14136546299639477,
+          "trianglesPerFrame": 456
+        }
+      ],
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "weapon": "ak",
+      "fire": true,
+      "frames": 199,
+      "sourceStable": true,
+      "modulesStable": true,
+      "errors": [],
+      "lights": [
+        {
+          "name": "",
+          "type": "DirectionalLight",
+          "id": 219,
+          "castShadow": true,
+          "intensity": 1.73,
+          "map": [
+            2048,
+            2048
+          ],
+          "visible": true
+        }
+      ],
+      "passes": [
+        {
+          "light": "DirectionalLight#219",
+          "passes": 199,
+          "cpuMsPerPass": 5.071356782811371,
+          "cpuMsPerFrame": 5.071356782811371,
+          "maxMs": 9.299999982118607
+        }
+      ],
+      "casterCallsPerFrame": 118,
+      "casterTrianglesPerFrame": 42848,
+      "topCasterGroups": [
+        {
+          "key": "DirectionalLight#219 :: target-plate < Group < Group < training-ground < Scene",
+          "callsPerFrame": 5,
+          "cpuMsPerFrame": 0.22562813983490718,
+          "trianglesPerFrame": 10
+        },
+        {
+          "key": "DirectionalLight#219 :: Mesh < training-cutaway-rangeSouth < training-ground < Scene",
+          "callsPerFrame": 5,
+          "cpuMsPerFrame": 0.2100502504176231,
+          "trianglesPerFrame": 420
+        },
+        {
+          "key": "DirectionalLight#219 :: Mesh < training-cutaway-east < training-ground < Scene",
+          "callsPerFrame": 8,
+          "cpuMsPerFrame": 0.20201005243775833,
+          "trianglesPerFrame": 1404
+        },
+        {
+          "key": "DirectionalLight#219 :: Mesh < Group < Group < Group < Group",
+          "callsPerFrame": 6,
+          "cpuMsPerFrame": 0.15427135822161958,
+          "trianglesPerFrame": 7238
+        },
+        {
+          "key": "DirectionalLight#219 :: Mesh < training-ground < Scene",
+          "callsPerFrame": 7,
+          "cpuMsPerFrame": 0.14673366933012727,
+          "trianglesPerFrame": 3212
+        },
+        {
+          "key": "DirectionalLight#219 :: Mesh < training-gate-frame < training-ground < Scene",
+          "callsPerFrame": 6,
+          "cpuMsPerFrame": 0.12864321530164785,
+          "trianglesPerFrame": 1284
+        },
+        {
+          "key": "DirectionalLight#219 :: Mesh < training-range-console < training-ground < Scene",
+          "callsPerFrame": 5,
+          "cpuMsPerFrame": 0.12814070426639002,
+          "trianglesPerFrame": 956
+        },
+        {
+          "key": "DirectionalLight#219 :: target-lower-stem < Group < Group < training-ground < Scene",
+          "callsPerFrame": 5,
+          "cpuMsPerFrame": 0.11708542779462422,
+          "trianglesPerFrame": 60
+        }
+      ],
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "weapon": "minigun",
+      "fire": false,
+      "frames": 250,
+      "sourceStable": true,
+      "modulesStable": true,
+      "errors": [],
+      "lights": [
+        {
+          "name": "",
+          "type": "DirectionalLight",
+          "id": 219,
+          "castShadow": true,
+          "intensity": 1.73,
+          "map": [
+            2048,
+            2048
+          ],
+          "visible": true
+        }
+      ],
+      "passes": [
+        {
+          "light": "DirectionalLight#219",
+          "passes": 250,
+          "cpuMsPerPass": 6.257199999928474,
+          "cpuMsPerFrame": 6.257199999928474,
+          "maxMs": 10.700000017881393
+        }
+      ],
+      "casterCallsPerFrame": 126.936,
+      "casterTrianglesPerFrame": 53106.032,
+      "topCasterGroups": [
+        {
+          "key": "DirectionalLight#219 :: Mesh < Group < Group < Group < Group",
+          "callsPerFrame": 16.116,
+          "cpuMsPerFrame": 0.46440000033378603,
+          "trianglesPerFrame": 16021.088
+        },
+        {
+          "key": "DirectionalLight#219 :: target-plate < Group < Group < training-ground < Scene",
+          "callsPerFrame": 5,
+          "cpuMsPerFrame": 0.262,
+          "trianglesPerFrame": 10
+        },
+        {
+          "key": "DirectionalLight#219 :: Mesh < training-cutaway-east < training-ground < Scene",
+          "callsPerFrame": 8,
+          "cpuMsPerFrame": 0.2255999995470047,
+          "trianglesPerFrame": 1404
+        },
+        {
+          "key": "DirectionalLight#219 :: Mesh < training-cutaway-rangeSouth < training-ground < Scene",
+          "callsPerFrame": 5,
+          "cpuMsPerFrame": 0.20919999969005584,
+          "trianglesPerFrame": 420
+        },
+        {
+          "key": "DirectionalLight#219 :: Mesh < training-ground < Scene",
+          "callsPerFrame": 7,
+          "cpuMsPerFrame": 0.17999999976158143,
+          "trianglesPerFrame": 3212
+        },
+        {
+          "key": "DirectionalLight#219 :: live-trouser-leg < live-trouser-leg-live < Group < Group < Group",
+          "callsPerFrame": 2,
+          "cpuMsPerFrame": 0.17039999854564666,
+          "trianglesPerFrame": 3444
+        },
+        {
+          "key": "DirectionalLight#219 :: Mesh < training-range-console < training-ground < Scene",
+          "callsPerFrame": 5,
+          "cpuMsPerFrame": 0.16880000054836272,
+          "trianglesPerFrame": 956
+        },
+        {
+          "key": "DirectionalLight#219 :: Mesh < minigun-default-reflex < Group < Group < Group",
+          "callsPerFrame": 5,
+          "cpuMsPerFrame": 0.16839999866485594,
+          "trianglesPerFrame": 1240
+        }
+      ],
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "weapon": "minigun",
+      "fire": true,
+      "frames": 1174,
+      "sourceStable": true,
+      "modulesStable": true,
+      "errors": [],
+      "lights": [
+        {
+          "name": "",
+          "type": "DirectionalLight",
+          "id": 219,
+          "castShadow": true,
+          "intensity": 1.73,
+          "map": [
+            2048,
+            2048
+          ],
+          "visible": true
+        }
+      ],
+      "passes": [
+        {
+          "light": "DirectionalLight#219",
+          "passes": 1174,
+          "cpuMsPerPass": 5.445144804134279,
+          "cpuMsPerFrame": 5.445144804134279,
+          "maxMs": 11
+        }
+      ],
+      "casterCallsPerFrame": 123,
+      "casterTrianglesPerFrame": 45974,
+      "topCasterGroups": [
+        {
+          "key": "DirectionalLight#219 :: Mesh < Group < Group < Group < Group",
+          "callsPerFrame": 13,
+          "cpuMsPerFrame": 0.31754684785866455,
+          "trianglesPerFrame": 15268
+        },
+        {
+          "key": "DirectionalLight#219 :: target-plate < Group < Group < training-ground < Scene",
+          "callsPerFrame": 5,
+          "cpuMsPerFrame": 0.2266609881206509,
+          "trianglesPerFrame": 10
+        },
+        {
+          "key": "DirectionalLight#219 :: Mesh < training-cutaway-east < training-ground < Scene",
+          "callsPerFrame": 8,
+          "cpuMsPerFrame": 0.1962521291977299,
+          "trianglesPerFrame": 1404
+        },
+        {
+          "key": "DirectionalLight#219 :: Mesh < training-cutaway-rangeSouth < training-ground < Scene",
+          "callsPerFrame": 5,
+          "cpuMsPerFrame": 0.19599659273835626,
+          "trianglesPerFrame": 420
+        },
+        {
+          "key": "DirectionalLight#219 :: Mesh < training-ground < Scene",
+          "callsPerFrame": 7,
+          "cpuMsPerFrame": 0.15281090300269995,
+          "trianglesPerFrame": 3212
+        },
+        {
+          "key": "DirectionalLight#219 :: live-trouser-leg < live-trouser-leg-live < Group < Group < Group",
+          "callsPerFrame": 2,
+          "cpuMsPerFrame": 0.14957410604827856,
+          "trianglesPerFrame": 3444
+        },
+        {
+          "key": "DirectionalLight#219 :: live-sleeve < live-sleeve-live < Group < Group < Group",
+          "callsPerFrame": 2,
+          "cpuMsPerFrame": 0.14923339031217858,
+          "trianglesPerFrame": 3492
+        },
+        {
+          "key": "DirectionalLight#219 :: Mesh < minigun-default-reflex < Group < Group < Group",
+          "callsPerFrame": 5,
+          "cpuMsPerFrame": 0.14693356014699302,
+          "trianglesPerFrame": 1240
+        }
+      ],
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "weapon": "uzi",
+      "fire": false,
+      "frames": 238,
+      "sourceStable": true,
+      "modulesStable": true,
+      "errors": [],
+      "lights": [
+        {
+          "name": "",
+          "type": "DirectionalLight",
+          "id": 219,
+          "castShadow": true,
+          "intensity": 1.73,
+          "map": [
+            2048,
+            2048
+          ],
+          "visible": true
+        }
+      ],
+      "passes": [
+        {
+          "light": "DirectionalLight#219",
+          "passes": 238,
+          "cpuMsPerPass": 6.40546218512439,
+          "cpuMsPerFrame": 6.40546218512439,
+          "maxMs": 14.5
+        }
+      ],
+      "casterCallsPerFrame": 164.11764705882354,
+      "casterTrianglesPerFrame": 86895.17647058824,
+      "topCasterGroups": [
+        {
+          "key": "DirectionalLight#219 :: Mesh < Group < Group < Group < Group",
+          "callsPerFrame": 30.676470588235293,
+          "cpuMsPerFrame": 0.8558823518893298,
+          "trianglesPerFrame": 46541.17647058824
+        },
+        {
+          "key": "DirectionalLight#219 :: Mesh < laserLightUnit < Group < Group < Group",
+          "callsPerFrame": 14,
+          "cpuMsPerFrame": 0.38823529364181164,
+          "trianglesPerFrame": 2984
+        },
+        {
+          "key": "DirectionalLight#219 :: target-plate < Group < Group < training-ground < Scene",
+          "callsPerFrame": 5,
+          "cpuMsPerFrame": 0.28403361454731274,
+          "trianglesPerFrame": 10
+        },
+        {
+          "key": "DirectionalLight#219 :: Mesh < training-cutaway-rangeSouth < training-ground < Scene",
+          "callsPerFrame": 5,
+          "cpuMsPerFrame": 0.23277310864264225,
+          "trianglesPerFrame": 420
+        },
+        {
+          "key": "DirectionalLight#219 :: Mesh < training-cutaway-east < training-ground < Scene",
+          "callsPerFrame": 8,
+          "cpuMsPerFrame": 0.22731092522124283,
+          "trianglesPerFrame": 1404
+        },
+        {
+          "key": "DirectionalLight#219 :: Mesh < training-ground < Scene",
+          "callsPerFrame": 7,
+          "cpuMsPerFrame": 0.1810924392037031,
+          "trianglesPerFrame": 3212
+        },
+        {
+          "key": "DirectionalLight#219 :: live-sleeve < live-sleeve-live < Group < Group < Group",
+          "callsPerFrame": 2,
+          "cpuMsPerFrame": 0.1777310936140413,
+          "trianglesPerFrame": 3492
+        },
+        {
+          "key": "DirectionalLight#219 :: Mesh < training-range-console < training-ground < Scene",
+          "callsPerFrame": 5,
+          "cpuMsPerFrame": 0.16680672188766865,
+          "trianglesPerFrame": 956
+        }
+      ],
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "weapon": "uzi",
+      "fire": true,
+      "frames": 128,
+      "sourceStable": true,
+      "modulesStable": true,
+      "errors": [],
+      "lights": [
+        {
+          "name": "",
+          "type": "DirectionalLight",
+          "id": 219,
+          "castShadow": true,
+          "intensity": 1.73,
+          "map": [
+            2048,
+            2048
+          ],
+          "visible": true
+        }
+      ],
+      "passes": [
+        {
+          "light": "DirectionalLight#219",
+          "passes": 128,
+          "cpuMsPerPass": 5.967968750512227,
+          "cpuMsPerFrame": 5.967968750512227,
+          "maxMs": 10
+        }
+      ],
+      "casterCallsPerFrame": 162,
+      "casterTrianglesPerFrame": 83058,
+      "topCasterGroups": [
+        {
+          "key": "DirectionalLight#219 :: Mesh < Group < Group < Group < Group",
+          "callsPerFrame": 29,
+          "cpuMsPerFrame": 0.7164062466472387,
+          "trianglesPerFrame": 46136
+        },
+        {
+          "key": "DirectionalLight#219 :: Mesh < laserLightUnit < Group < Group < Group",
+          "callsPerFrame": 14,
+          "cpuMsPerFrame": 0.3531250017695129,
+          "trianglesPerFrame": 2984
+        },
+        {
+          "key": "DirectionalLight#219 :: Mesh < training-cutaway-rangeSouth < training-ground < Scene",
+          "callsPerFrame": 5,
+          "cpuMsPerFrame": 0.23906250018626451,
+          "trianglesPerFrame": 420
+        },
+        {
+          "key": "DirectionalLight#219 :: target-plate < Group < Group < training-ground < Scene",
+          "callsPerFrame": 5,
+          "cpuMsPerFrame": 0.23828124906867743,
+          "trianglesPerFrame": 10
+        },
+        {
+          "key": "DirectionalLight#219 :: Mesh < training-cutaway-east < training-ground < Scene",
+          "callsPerFrame": 8,
+          "cpuMsPerFrame": 0.2250000003259629,
+          "trianglesPerFrame": 1404
+        },
+        {
+          "key": "DirectionalLight#219 :: Mesh < training-gate-frame < training-ground < Scene",
+          "callsPerFrame": 6,
+          "cpuMsPerFrame": 0.15625000116415322,
+          "trianglesPerFrame": 1284
+        },
+        {
+          "key": "DirectionalLight#219 :: Mesh < training-range-console < training-ground < Scene",
+          "callsPerFrame": 5,
+          "cpuMsPerFrame": 0.15546875074505806,
+          "trianglesPerFrame": 956
+        },
+        {
+          "key": "DirectionalLight#219 :: live-sleeve < live-sleeve-live < Group < Group < Group",
+          "callsPerFrame": 2,
+          "cpuMsPerFrame": 0.1539062501396984,
+          "trianglesPerFrame": 3492
+        }
+      ],
+      "builds": 0,
+      "pipes": 0
+    }
+  ]
+}

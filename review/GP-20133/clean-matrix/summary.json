@@ -1,0 +1,873 @@
+{
+  "protocol": "No screenshot before or between timed phases; final capture only after all timing. Raw production tick clock, profiler and GPU query off. Corrected sun-target source798ae744. Partial outdoor minigun retained but condition not accepted.",
+  "rows": [
+    {
+      "env": "training",
+      "weapon": "pistol",
+      "indexHash": "798ae744e736f203dc587b48ee4e4e588497ec52261fca18321f72a0c57e710c",
+      "indexUnchanged": true,
+      "modulesUnchanged": true,
+      "menuMs": 23314,
+      "errors": [],
+      "failure": null,
+      "complete": true,
+      "phases": [
+        {
+          "pass": 0,
+          "fire": false,
+          "ammo": [
+            24,
+            24
+          ],
+          "n": 207,
+          "mean": 21.779227053197687,
+          "p50": 19.900000005960464,
+          "p95": 33,
+          "p99": 43.79999998211861,
+          "worst": 65.09999999403954,
+          "builders": 0,
+          "pipelines": 0
+        },
+        {
+          "pass": 0,
+          "fire": true,
+          "ammo": [
+            24,
+            0
+          ],
+          "n": 31,
+          "mean": 28.2774193556078,
+          "p50": 27.299999982118607,
+          "p95": 40.599999994039536,
+          "p99": 43.900000005960464,
+          "worst": 43.900000005960464,
+          "builders": 0,
+          "pipelines": 0,
+          "overIdlePercent": 29.836652542983757,
+          "within10": false
+        },
+        {
+          "pass": 1,
+          "fire": false,
+          "ammo": [
+            24,
+            24
+          ],
+          "n": 238,
+          "mean": 18.91386554621849,
+          "p50": 17.400000005960464,
+          "p95": 28.100000023841858,
+          "p99": 37.39999997615814,
+          "worst": 46.599999994039536,
+          "builders": 0,
+          "pipelines": 0
+        },
+        {
+          "pass": 1,
+          "fire": true,
+          "ammo": [
+            24,
+            0
+          ],
+          "n": 39,
+          "mean": 22.743589743589745,
+          "p50": 22.099999994039536,
+          "p95": 27.69999998807907,
+          "p99": 41.69999998807907,
+          "worst": 41.69999998807907,
+          "builders": 0,
+          "pipelines": 0,
+          "overIdlePercent": 20.24823634287145,
+          "within10": false
+        },
+        {
+          "pass": 2,
+          "fire": false,
+          "ammo": [
+            24,
+            24
+          ],
+          "n": 251,
+          "mean": 17.976494023880637,
+          "p50": 17.099999994039536,
+          "p95": 23.69999998807907,
+          "p99": 27.099999994039536,
+          "worst": 30.30000001192093,
+          "builders": 0,
+          "pipelines": 0
+        },
+        {
+          "pass": 2,
+          "fire": true,
+          "ammo": [
+            24,
+            0
+          ],
+          "n": 46,
+          "mean": 19.91521739117477,
+          "p50": 19.599999994039536,
+          "p95": 24.600000023841858,
+          "p99": 27.799999982118607,
+          "worst": 27.799999982118607,
+          "builders": 0,
+          "pipelines": 0,
+          "overIdlePercent": 10.784769069645407,
+          "within10": false
+        }
+      ]
+    },
+    {
+      "env": "training",
+      "weapon": "ak",
+      "indexHash": "798ae744e736f203dc587b48ee4e4e588497ec52261fca18321f72a0c57e710c",
+      "indexUnchanged": true,
+      "modulesUnchanged": true,
+      "menuMs": 19976,
+      "errors": [],
+      "failure": null,
+      "complete": true,
+      "phases": [
+        {
+          "pass": 0,
+          "fire": false,
+          "ammo": [
+            30,
+            30
+          ],
+          "n": 270,
+          "mean": 16.67555555557763,
+          "p50": 16.69999998807907,
+          "p95": 19.399999976158142,
+          "p99": 22.400000005960464,
+          "worst": 28.900000005960464,
+          "builders": 0,
+          "pipelines": 0
+        },
+        {
+          "pass": 0,
+          "fire": true,
+          "ammo": [
+            30,
+            0
+          ],
+          "n": 170,
+          "mean": 20.374117647023763,
+          "p50": 19.600000023841858,
+          "p95": 28.400000005960464,
+          "p99": 32.5,
+          "worst": 33,
+          "builders": 0,
+          "pipelines": 0,
+          "overIdlePercent": 22.17954345880271,
+          "within10": false
+        },
+        {
+          "pass": 1,
+          "fire": false,
+          "ammo": [
+            30,
+            30
+          ],
+          "n": 267,
+          "mean": 16.89325842696629,
+          "p50": 16.600000023841858,
+          "p95": 20.80000001192093,
+          "p99": 24.399999976158142,
+          "worst": 30.299999982118607,
+          "builders": 0,
+          "pipelines": 0
+        },
+        {
+          "pass": 1,
+          "fire": true,
+          "ammo": [
+            30,
+            0
+          ],
+          "n": 190,
+          "mean": 18.227894736904847,
+          "p50": 17.69999998807907,
+          "p95": 24.200000017881393,
+          "p99": 29.200000017881393,
+          "worst": 29.700000017881393,
+          "builders": 0,
+          "pipelines": 0,
+          "overIdlePercent": 7.900407820720412,
+          "within10": true
+        },
+        {
+          "pass": 2,
+          "fire": false,
+          "ammo": [
+            30,
+            30
+          ],
+          "n": 270,
+          "mean": 16.666666666666668,
+          "p50": 16.600000023841858,
+          "p95": 19.400000005960464,
+          "p99": 23,
+          "worst": 23.5,
+          "builders": 0,
+          "pipelines": 0
+        },
+        {
+          "pass": 2,
+          "fire": true,
+          "ammo": [
+            30,
+            0
+          ],
+          "n": 204,
+          "mean": 16.760784313667056,
+          "p50": 16.599999994039536,
+          "p95": 20.100000023841858,
+          "p99": 22,
+          "worst": 25.69999998807907,
+          "builders": 0,
+          "pipelines": 0,
+          "overIdlePercent": 0.5647058820023254,
+          "within10": true
+        }
+      ]
+    },
+    {
+      "env": "training",
+      "weapon": "uzi",
+      "indexHash": "798ae744e736f203dc587b48ee4e4e588497ec52261fca18321f72a0c57e710c",
+      "indexUnchanged": true,
+      "modulesUnchanged": true,
+      "menuMs": 19330,
+      "errors": [],
+      "failure": null,
+      "complete": true,
+      "phases": [
+        {
+          "pass": 0,
+          "fire": false,
+          "ammo": [
+            32,
+            32
+          ],
+          "n": 271,
+          "mean": 16.640959409550106,
+          "p50": 16.69999998807907,
+          "p95": 16.899999976158142,
+          "p99": 20.19999998807907,
+          "worst": 26.30000001192093,
+          "builders": 0,
+          "pipelines": 0
+        },
+        {
+          "pass": 0,
+          "fire": true,
+          "ammo": [
+            32,
+            0
+          ],
+          "n": 141,
+          "mean": 18.197163120440557,
+          "p50": 17.400000005960464,
+          "p95": 24,
+          "p99": 25.69999998807907,
+          "worst": 29.80000001192093,
+          "builders": 0,
+          "pipelines": 0,
+          "overIdlePercent": 9.351646576322747,
+          "within10": true
+        },
+        {
+          "pass": 1,
+          "fire": false,
+          "ammo": [
+            32,
+            32
+          ],
+          "n": 269,
+          "mean": 16.746468401531306,
+          "p50": 16.600000023841858,
+          "p95": 20.099999994039536,
+          "p99": 23.900000005960464,
+          "worst": 30.80000001192093,
+          "builders": 0,
+          "pipelines": 0
+        },
+        {
+          "pass": 1,
+          "fire": true,
+          "ammo": [
+            32,
+            0
+          ],
+          "n": 147,
+          "mean": 17.314965986475652,
+          "p50": 16.799999982118607,
+          "p95": 21.799999982118607,
+          "p99": 23.900000005960464,
+          "worst": 25.599999994039536,
+          "builders": 0,
+          "pipelines": 0,
+          "overIdlePercent": 3.394731183396038,
+          "within10": true
+        },
+        {
+          "pass": 2,
+          "fire": false,
+          "ammo": [
+            32,
+            32
+          ],
+          "n": 265,
+          "mean": 16.99811320754717,
+          "p50": 16.69999998807907,
+          "p95": 20.599999994039536,
+          "p99": 23.899999976158142,
+          "worst": 28.099999994039536,
+          "builders": 0,
+          "pipelines": 0
+        },
+        {
+          "pass": 2,
+          "fire": true,
+          "ammo": [
+            32,
+            0
+          ],
+          "n": 151,
+          "mean": 16.980132450331126,
+          "p50": 16.69999998807907,
+          "p95": 21.099999994039536,
+          "p99": 25.400000005960464,
+          "worst": 25.600000023841858,
+          "builders": 0,
+          "pipelines": 0,
+          "overIdlePercent": -0.10578090048288802,
+          "within10": true
+        }
+      ]
+    },
+    {
+      "env": "training",
+      "weapon": "minigun",
+      "indexHash": "798ae744e736f203dc587b48ee4e4e588497ec52261fca18321f72a0c57e710c",
+      "indexUnchanged": true,
+      "modulesUnchanged": true,
+      "menuMs": 20734,
+      "errors": [],
+      "failure": null,
+      "complete": true,
+      "phases": [
+        {
+          "pass": 0,
+          "fire": false,
+          "ammo": [
+            300,
+            300
+          ],
+          "n": 271,
+          "mean": 16.656088560929597,
+          "p50": 16.69999998807907,
+          "p95": 16.900000005960464,
+          "p99": 19.799999982118607,
+          "worst": 27.400000005960464,
+          "builders": 0,
+          "pipelines": 0
+        },
+        {
+          "pass": 0,
+          "fire": true,
+          "ammo": [
+            300,
+            0
+          ],
+          "n": 1159,
+          "mean": 17.207679033639412,
+          "p50": 16.69999998807907,
+          "p95": 21.099999994039536,
+          "p99": 24.599999994039536,
+          "worst": 31,
+          "builders": 0,
+          "pipelines": 0,
+          "overIdlePercent": 3.311644691921778,
+          "within10": true
+        },
+        {
+          "pass": 1,
+          "fire": false,
+          "ammo": [
+            300,
+            300
+          ],
+          "n": 270,
+          "mean": 16.66592592597008,
+          "p50": 16.69999998807907,
+          "p95": 17.799999982118607,
+          "p99": 21.5,
+          "worst": 22.69999998807907,
+          "builders": 0,
+          "pipelines": 0
+        },
+        {
+          "pass": 1,
+          "fire": true,
+          "ammo": [
+            300,
+            0
+          ],
+          "n": 1186,
+          "mean": 16.865261382814403,
+          "p50": 16.69999998807907,
+          "p95": 19.69999998807907,
+          "p99": 21.80000001192093,
+          "worst": 25.5,
+          "builders": 0,
+          "pipelines": 0,
+          "overIdlePercent": 1.196065899547194,
+          "within10": true
+        },
+        {
+          "pass": 2,
+          "fire": false,
+          "ammo": [
+            300,
+            300
+          ],
+          "n": 269,
+          "mean": 16.72788104093651,
+          "p50": 16.69999998807907,
+          "p95": 16.900000005960464,
+          "p99": 20.400000005960464,
+          "worst": 24.099999994039536,
+          "builders": 0,
+          "pipelines": 0
+        },
+        {
+          "pass": 2,
+          "fire": true,
+          "ammo": [
+            300,
+            0
+          ],
+          "n": 1151,
+          "mean": 17.376889661174562,
+          "p50": 16.80000001192093,
+          "p95": 21.5,
+          "p99": 26,
+          "worst": 34.5,
+          "builders": 0,
+          "pipelines": 0,
+          "overIdlePercent": 3.8798017432680076,
+          "within10": true
+        }
+      ]
+    },
+    {
+      "env": "outdoor",
+      "weapon": "pistol",
+      "indexHash": "798ae744e736f203dc587b48ee4e4e588497ec52261fca18321f72a0c57e710c",
+      "indexUnchanged": true,
+      "modulesUnchanged": true,
+      "menuMs": 19209,
+      "errors": [],
+      "failure": null,
+      "complete": true,
+      "phases": [
+        {
+          "pass": 0,
+          "fire": false,
+          "ammo": [
+            24,
+            24
+          ],
+          "n": 265,
+          "mean": 17.037735849056602,
+          "p50": 16.69999998807907,
+          "p95": 20.5,
+          "p99": 22.900000005960464,
+          "worst": 26.799999982118607,
+          "builders": 0,
+          "pipelines": 0
+        },
+        {
+          "pass": 0,
+          "fire": true,
+          "ammo": [
+            24,
+            0
+          ],
+          "n": 28,
+          "mean": 28.18928571364709,
+          "p50": 27.099999994039536,
+          "p95": 41.599999994039536,
+          "p99": 44.80000001192093,
+          "worst": 44.80000001192093,
+          "builders": 0,
+          "pipelines": 0,
+          "overIdlePercent": 65.45206454300066,
+          "within10": false
+        },
+        {
+          "pass": 1,
+          "fire": false,
+          "ammo": [
+            24,
+            24
+          ],
+          "n": 228,
+          "mean": 19.828508771955967,
+          "p50": 18.80000001192093,
+          "p95": 28.80000001192093,
+          "p99": 37.20000001788139,
+          "worst": 44.400000005960464,
+          "builders": 0,
+          "pipelines": 0
+        },
+        {
+          "pass": 1,
+          "fire": true,
+          "ammo": [
+            24,
+            0
+          ],
+          "n": 26,
+          "mean": 29.28461538369839,
+          "p50": 28.299999982118607,
+          "p95": 44.5,
+          "p99": 44.89999997615814,
+          "worst": 44.89999997615814,
+          "builders": 0,
+          "pipelines": 0,
+          "overIdlePercent": 47.68944916884759,
+          "within10": false
+        },
+        {
+          "pass": 2,
+          "fire": false,
+          "ammo": [
+            24,
+            24
+          ],
+          "n": 225,
+          "mean": 20.051999999947018,
+          "p50": 19.400000005960464,
+          "p95": 25.30000001192093,
+          "p99": 30,
+          "worst": 36.19999998807907,
+          "builders": 0,
+          "pipelines": 0
+        },
+        {
+          "pass": 2,
+          "fire": true,
+          "ammo": [
+            24,
+            0
+          ],
+          "n": 31,
+          "mean": 25.70967741935484,
+          "p50": 25.599999994039536,
+          "p95": 32.19999998807907,
+          "p99": 34.099999994039536,
+          "worst": 34.099999994039536,
+          "builders": 0,
+          "pipelines": 0,
+          "overIdlePercent": 28.2150280242508,
+          "within10": false
+        }
+      ]
+    },
+    {
+      "env": "outdoor",
+      "weapon": "ak",
+      "indexHash": "798ae744e736f203dc587b48ee4e4e588497ec52261fca18321f72a0c57e710c",
+      "indexUnchanged": true,
+      "modulesUnchanged": true,
+      "menuMs": 20045,
+      "errors": [],
+      "failure": null,
+      "complete": true,
+      "phases": [
+        {
+          "pass": 0,
+          "fire": false,
+          "ammo": [
+            30,
+            30
+          ],
+          "n": 251,
+          "mean": 17.978884462222634,
+          "p50": 16.80000001192093,
+          "p95": 23.5,
+          "p99": 29.100000023841858,
+          "worst": 82,
+          "builders": 0,
+          "pipelines": 0
+        },
+        {
+          "pass": 0,
+          "fire": true,
+          "ammo": [
+            30,
+            0
+          ],
+          "n": 158,
+          "mean": 22.451265822860258,
+          "p50": 21.5,
+          "p95": 31.400000005960464,
+          "p99": 38.900000005960464,
+          "worst": 46.80000001192093,
+          "builders": 0,
+          "pipelines": 0,
+          "overIdlePercent": 24.87574448812453,
+          "within10": false
+        },
+        {
+          "pass": 1,
+          "fire": false,
+          "ammo": [
+            30,
+            30
+          ],
+          "n": 242,
+          "mean": 18.59586776866893,
+          "p50": 18.19999998807907,
+          "p95": 23.599999994039536,
+          "p99": 26.600000023841858,
+          "worst": 31.400000005960464,
+          "builders": 0,
+          "pipelines": 0
+        },
+        {
+          "pass": 1,
+          "fire": true,
+          "ammo": [
+            30,
+            0
+          ],
+          "n": 168,
+          "mean": 20.717261904761905,
+          "p50": 20.5,
+          "p95": 25.100000023841858,
+          "p99": 27.900000005960464,
+          "worst": 30.80000001192093,
+          "builders": 0,
+          "pipelines": 0,
+          "overIdlePercent": 11.407879226089058,
+          "within10": false
+        },
+        {
+          "pass": 2,
+          "fire": false,
+          "ammo": [
+            30,
+            30
+          ],
+          "n": 250,
+          "mean": 18.034799999952316,
+          "p50": 17.400000005960464,
+          "p95": 22.599999994039536,
+          "p99": 29.600000023841858,
+          "worst": 32.099999994039536,
+          "builders": 0,
+          "pipelines": 0
+        },
+        {
+          "pass": 2,
+          "fire": true,
+          "ammo": [
+            30,
+            0
+          ],
+          "n": 191,
+          "mean": 18.204712042009643,
+          "p50": 17.69999998807907,
+          "p95": 22.80000001192093,
+          "p99": 26.099999994039536,
+          "worst": 26.399999976158142,
+          "builders": 0,
+          "pipelines": 0,
+          "overIdlePercent": 0.9421343295061613,
+          "within10": true
+        }
+      ]
+    },
+    {
+      "env": "outdoor",
+      "weapon": "uzi",
+      "indexHash": "798ae744e736f203dc587b48ee4e4e588497ec52261fca18321f72a0c57e710c",
+      "indexUnchanged": true,
+      "modulesUnchanged": true,
+      "menuMs": 20261,
+      "errors": [],
+      "failure": null,
+      "complete": true,
+      "phases": [
+        {
+          "pass": 0,
+          "fire": false,
+          "ammo": [
+            32,
+            32
+          ],
+          "n": 255,
+          "mean": 17.66784313718478,
+          "p50": 17.19999998807907,
+          "p95": 21.299999982118607,
+          "p99": 25.69999998807907,
+          "worst": 29.80000001192093,
+          "builders": 0,
+          "pipelines": 0
+        },
+        {
+          "pass": 0,
+          "fire": true,
+          "ammo": [
+            32,
+            0
+          ],
+          "n": 113,
+          "mean": 23.036283185787962,
+          "p50": 22.5,
+          "p95": 30.400000005960464,
+          "p99": 32.80000001192093,
+          "worst": 33.30000001192093,
+          "builders": 0,
+          "pipelines": 0,
+          "overIdlePercent": 30.385373058381138,
+          "within10": false
+        },
+        {
+          "pass": 1,
+          "fire": false,
+          "ammo": [
+            32,
+            32
+          ],
+          "n": 241,
+          "mean": 18.704149377543896,
+          "p50": 18.599999994039536,
+          "p95": 23.400000005960464,
+          "p99": 25.799999982118607,
+          "worst": 29.400000005960464,
+          "builders": 0,
+          "pipelines": 0
+        },
+        {
+          "pass": 1,
+          "fire": true,
+          "ammo": [
+            32,
+            0
+          ],
+          "n": 125,
+          "mean": 19.659200000047683,
+          "p50": 19.19999998807907,
+          "p95": 25.19999998807907,
+          "p99": 29.69999998807907,
+          "worst": 37.5,
+          "builders": 0,
+          "pipelines": 0,
+          "overIdlePercent": 5.106089580584805,
+          "within10": true
+        },
+        {
+          "pass": 2,
+          "fire": false,
+          "ammo": [
+            32,
+            32
+          ],
+          "n": 249,
+          "mean": 18.07389558223357,
+          "p50": 17.599999994039536,
+          "p95": 23.399999976158142,
+          "p99": 28.799999982118607,
+          "worst": 31.19999998807907,
+          "builders": 0,
+          "pipelines": 0
+        },
+        {
+          "pass": 2,
+          "fire": true,
+          "ammo": [
+            32,
+            0
+          ],
+          "n": 132,
+          "mean": 18.78863636359121,
+          "p50": 18.5,
+          "p95": 22.899999976158142,
+          "p99": 24.5,
+          "worst": 25,
+          "builders": 0,
+          "pipelines": 0,
+          "overIdlePercent": 3.954547474868808,
+          "within10": true
+        }
+      ]
+    },
+    {
+      "env": "outdoor",
+      "weapon": "minigun",
+      "indexHash": "798ae744e736f203dc587b48ee4e4e588497ec52261fca18321f72a0c57e710c",
+      "indexUnchanged": false,
+      "modulesUnchanged": null,
+      "menuMs": 22246,
+      "errors": [],
+      "failure": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert(await page.waitFor('__gp.done',{timeout:60000}))\n\n    at file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/GP-20133/game-clock-clean.mjs:23:76",
+      "complete": false,
+      "phases": [
+        {
+          "pass": 0,
+          "fire": false,
+          "ammo": [
+            300,
+            300
+          ],
+          "n": 241,
+          "mean": 18.7452282157429,
+          "p50": 17.899999976158142,
+          "p95": 26.30000001192093,
+          "p99": 28.599999994039536,
+          "worst": 31.099999994039536,
+          "builders": 0,
+          "pipelines": 0
+        },
+        {
+          "pass": 0,
+          "fire": true,
+          "ammo": [
+            300,
+            0
+          ],
+          "n": 828,
+          "mean": 24.07222222223662,
+          "p50": 23,
+          "p95": 33.599999994039536,
+          "p99": 40.099999994039536,
+          "worst": 49.400000005960464,
+          "builders": 0,
+          "pipelines": 0,
+          "overIdlePercent": 28.41786691089694,
+          "within10": false
+        },
+        {
+          "pass": 1,
+          "fire": false,
+          "ammo": [
+            300,
+            300
+          ],
+          "n": 262,
+          "mean": 17.209923664122137,
+          "p50": 16.69999998807907,
+          "p95": 20.900000005960464,
+          "p99": 25.599999994039536,
+          "worst": 30.700000017881393,
+          "builders": 0,
+          "pipelines": 0
+        }
+      ]
+    }
+  ]
+}

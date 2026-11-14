@@ -1,0 +1,1805 @@
+{
+  "scope": "CPU sampling diagnostics, not acceptance. Each inclusive function key counted once per sample, including recursion; inclusive values for different functions still overlap and must not be added. Matrix caller rows partition updateMatrixWorld self samples only. Profiler overhead and postphase polling retained.",
+  "rows": [
+    {
+      "file": "cpu-pistol-0-fire.json",
+      "windowMs": 1180.4919999999986,
+      "self": [
+        {
+          "name": "(program) :0",
+          "ms": 282.8380000000002,
+          "percent": 23.95933221063764
+        },
+        {
+          "name": "updateMatrixWorld three.core.js:13980",
+          "ms": 142.466,
+          "percent": 12.06835793889329
+        },
+        {
+          "name": "updateProjectiles index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:60940",
+          "ms": 62.16399999999996,
+          "percent": 5.265939964015007
+        },
+        {
+          "name": "writeBuffer :0",
+          "ms": 48.28900000000001,
+          "percent": 4.090582570656986
+        },
+        {
+          "name": "_renderObjectDirect three.webgpu.js:52263",
+          "ms": 32.998,
+          "percent": 2.795275190344368
+        },
+        {
+          "name": "updateByType three.webgpu.js:52796",
+          "ms": 31.435000000000002,
+          "percent": 2.6628727683033886
+        },
+        {
+          "name": "multiplyMatrices three.core.js:11564",
+          "ms": 21.207,
+          "percent": 1.7964543597076497
+        },
+        {
+          "name": "updateWorldMatrix three.core.js:14027",
+          "ms": 18.854000000000003,
+          "percent": 1.5971306878826816
+        },
+        {
+          "name": "_projectObject three.webgpu.js:51929",
+          "ms": 18.765,
+          "percent": 1.589591458476637
+        },
+        {
+          "name": "setBindGroup :0",
+          "ms": 16.375,
+          "percent": 1.3871335002693808
+        },
+        {
+          "name": "intersectsObject three.core.js:26138",
+          "ms": 15.974,
+          "percent": 1.3531646127207995
+        },
+        {
+          "name": "set three.webgpu.js:3074",
+          "ms": 13.955999999999998,
+          "percent": 1.1822189392219526
+        },
+        {
+          "name": "updateForRender three.webgpu.js:27628",
+          "ms": 12.725999999999999,
+          "percent": 1.0780250946215657
+        },
+        {
+          "name": "setVertexBuffer :0",
+          "ms": 12.671,
+          "percent": 1.0733660202695159
+        },
+        {
+          "name": "_update three.webgpu.js:27681",
+          "ms": 12.564,
+          "percent": 1.06430200289371
+        },
+        {
+          "name": "update three.webgpu.js:14947",
+          "ms": 12.254,
+          "percent": 1.0380417656367018
+        },
+        {
+          "name": "getBoundingClientRect :0",
+          "ms": 11.642999999999999,
+          "percent": 0.9862836851075665
+        },
+        {
+          "name": "get three.webgpu.js:26002",
+          "ms": 10.917000000000002,
+          "percent": 0.924783903660509
+        },
+        {
+          "name": "tick index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:68750",
+          "ms": 10.813,
+          "percent": 0.9159740176129963
+        },
+        {
+          "name": "sceneCull index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:2342",
+          "ms": 10.119,
+          "percent": 0.857184970334404
+        },
+        {
+          "name": "updateForRender three.webgpu.js:47227",
+          "ms": 9.552,
+          "percent": 0.8091541492869084
+        },
+        {
+          "name": "bend marine-cloth.js:64",
+          "ms": 9.507,
+          "percent": 0.805342179362504
+        },
+        {
+          "name": "shoulderAngles body-limits.js:193",
+          "ms": 9.336,
+          "percent": 0.7908566936497673
+        },
+        {
+          "name": "submit :0",
+          "ms": 9.232,
+          "percent": 0.7820468076022549
+        },
+        {
+          "name": "getForRender three.webgpu.js:27168",
+          "ms": 9.186,
+          "percent": 0.778150127235086
+        }
+      ],
+      "inclusiveUniquePerSample": [
+        {
+          "name": "(root) :0",
+          "ms": 1180.4919999999986,
+          "percent": 100
+        },
+        {
+          "name": "update three.webgpu.js:24925",
+          "ms": 892.178,
+          "percent": 75.57679340478386
+        },
+        {
+          "name": "tick index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:68750",
+          "ms": 888.9559999999999,
+          "percent": 75.3038563581965
+        },
+        {
+          "name": "renderFrame index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:2526",
+          "ms": 477.60199999999986,
+          "percent": 40.45787688523094
+        },
+        {
+          "name": "_renderScene three.webgpu.js:50617",
+          "ms": 410.5770000000001,
+          "percent": 34.78015945893751
+        },
+        {
+          "name": "render three.webgpu.js:70670",
+          "ms": 410.5770000000001,
+          "percent": 34.78015945893751
+        },
+        {
+          "name": "updateBeforeNode three.webgpu.js:45477",
+          "ms": 409.0140000000001,
+          "percent": 34.64775703689653
+        },
+        {
+          "name": "updateBefore three.webgpu.js:47168",
+          "ms": 409.0140000000001,
+          "percent": 34.64775703689653
+        },
+        {
+          "name": "_renderObjectDirect three.webgpu.js:52263",
+          "ms": 409.0140000000001,
+          "percent": 34.64775703689653
+        },
+        {
+          "name": "renderObject three.webgpu.js:52154",
+          "ms": 409.0140000000001,
+          "percent": 34.64775703689653
+        },
+        {
+          "name": "filter viewmodel.js:190",
+          "ms": 409.0140000000001,
+          "percent": 34.64775703689653
+        },
+        {
+          "name": "_renderObjects three.webgpu.js:52128",
+          "ms": 409.0140000000001,
+          "percent": 34.64775703689653
+        },
+        {
+          "name": "updateBefore three.webgpu.js:33703",
+          "ms": 385.57800000000003,
+          "percent": 32.66248310026671
+        },
+        {
+          "name": "(program) :0",
+          "ms": 282.8380000000002,
+          "percent": 23.95933221063764
+        },
+        {
+          "name": "updateMatrixWorld three.core.js:13980",
+          "ms": 159.01600000000002,
+          "percent": 13.470315766646467
+        },
+        {
+          "name": "holdWeapon index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:56333",
+          "ms": 153.03599999999997,
+          "percent": 12.9637473189145
+        },
+        {
+          "name": "holdHand index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:55884",
+          "ms": 104.97899999999997,
+          "percent": 8.892817570978888
+        },
+        {
+          "name": "holdDiveHand index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:56275",
+          "ms": 104.97899999999997,
+          "percent": 8.892817570978888
+        },
+        {
+          "name": "updateForRender three.webgpu.js:27628",
+          "ms": 99.47999999999999,
+          "percent": 8.42699484621667
+        },
+        {
+          "name": "SNp.updateShadow index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:2492",
+          "ms": 97.88099999999999,
+          "percent": 8.291542848236167
+        },
+        {
+          "name": "updateBefore three.webgpu.js:38235",
+          "ms": 97.88099999999999,
+          "percent": 8.291542848236167
+        },
+        {
+          "name": "_update three.webgpu.js:27681",
+          "ms": 83.448,
+          "percent": 7.068917027815528
+        },
+        {
+          "name": "(anonymous) three.webgpu.js:38138",
+          "ms": 76.939,
+          "percent": 6.517536755861123
+        },
+        {
+          "name": "updateProjectiles index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:60940",
+          "ms": 70.701,
+          "percent": 5.989113013895908
+        },
+        {
+          "name": "updateWorldAnimations index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:68334",
+          "ms": 51.89600000000001,
+          "percent": 4.39613313770869
+        }
+      ],
+      "matrixSelfNearestCaller": [
+        {
+          "name": "holdHand <- holdDiveHand <- holdWeapon <- tick",
+          "ms": 35.913,
+          "percent": 3.042206131003009
+        },
+        {
+          "name": "holdWeapon <- tick <- update <- (root)",
+          "ms": 35.489000000000004,
+          "percent": 3.0062889032708435
+        },
+        {
+          "name": "updateSceneMatrices <- renderFrame <- tick <- update",
+          "ms": 35.357,
+          "percent": 2.9951071248259233
+        },
+        {
+          "name": "rollForearm <- holdHand <- holdDiveHand <- holdWeapon",
+          "ms": 31.019999999999992,
+          "percent": 2.627717934556103
+        },
+        {
+          "name": "place <- renderFrame <- tick <- update",
+          "ms": 1.568,
+          "percent": 0.13282597425480241
+        },
+        {
+          "name": "place <- update <- updateViewmodel <- tick",
+          "ms": 1.564,
+          "percent": 0.13248713248374422
+        },
+        {
+          "name": "pointWorld <- muzzleWorld <- getMuzzleWorld <- updateShotLos",
+          "ms": 1.555,
+          "percent": 0.13172473849886335
+        }
+      ]
+    },
+    {
+      "file": "cpu-pistol-0-idle.json",
+      "windowMs": 5297.771000000009,
+      "self": [
+        {
+          "name": "(program) :0",
+          "ms": 806.7680000000003,
+          "percent": 15.228442301488663
+        },
+        {
+          "name": "updateMatrixWorld three.core.js:13980",
+          "ms": 565.8060000000002,
+          "percent": 10.680076583151653
+        },
+        {
+          "name": "writeBuffer :0",
+          "ms": 208.10999999999987,
+          "percent": 3.928255864589079
+        },
+        {
+          "name": "_renderObjectDirect three.webgpu.js:52263",
+          "ms": 168.65300000000002,
+          "percent": 3.18347093522917
+        },
+        {
+          "name": "updateByType three.webgpu.js:52796",
+          "ms": 160.75500000000002,
+          "percent": 3.0343893686608907
+        },
+        {
+          "name": "updateWorldMatrix three.core.js:14027",
+          "ms": 154.616,
+          "percent": 2.9185104452419663
+        },
+        {
+          "name": "updateForRender three.webgpu.js:47227",
+          "ms": 150.00399999999996,
+          "percent": 2.8314549647389384
+        },
+        {
+          "name": "_projectObject three.webgpu.js:51929",
+          "ms": 147.90800000000002,
+          "percent": 2.7918911557332273
+        },
+        {
+          "name": "multiplyMatrices three.core.js:11564",
+          "ms": 125.85100000000001,
+          "percent": 2.375546243882565
+        },
+        {
+          "name": "sceneCull index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:2342",
+          "ms": 116.28799999999995,
+          "percent": 2.195036365294003
+        },
+        {
+          "name": "needsRenderUpdate three.webgpu.js:69618",
+          "ms": 86.192,
+          "percent": 1.6269483901814525
+        },
+        {
+          "name": "setVertexBuffer :0",
+          "ms": 82.74800000000002,
+          "percent": 1.561939917750312
+        },
+        {
+          "name": "draw three.webgpu.js:69345",
+          "ms": 82.24400000000001,
+          "percent": 1.5524264827603889
+        },
+        {
+          "name": "update three.webgpu.js:14947",
+          "ms": 80.42099999999999,
+          "percent": 1.5180157843742181
+        },
+        {
+          "name": "toArray three.core.js:12264",
+          "ms": 74.881,
+          "percent": 1.413443502937365
+        },
+        {
+          "name": "setBindGroup :0",
+          "ms": 72.29199999999999,
+          "percent": 1.3645738934355576
+        },
+        {
+          "name": "get three.webgpu.js:26002",
+          "ms": 67.90199999999999,
+          "percent": 1.2817088545352353
+        },
+        {
+          "name": "bend marine-cloth.js:64",
+          "ms": 64.861,
+          "percent": 1.2243073549234178
+        },
+        {
+          "name": "_update three.webgpu.js:27681",
+          "ms": 62.698000000000015,
+          "percent": 1.1834788630916646
+        },
+        {
+          "name": "intersectsObject three.core.js:26138",
+          "ms": 59.302,
+          "percent": 1.1193764320881348
+        },
+        {
+          "name": "consider index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:20026",
+          "ms": 57.923,
+          "percent": 1.0933466169073731
+        },
+        {
+          "name": "set three.webgpu.js:3074",
+          "ms": 57.539000000000016,
+          "percent": 1.0860982854864796
+        },
+        {
+          "name": "querySelector :0",
+          "ms": 52.035,
+          "percent": 0.9822055351203348
+        },
+        {
+          "name": "shoulderAngles body-limits.js:193",
+          "ms": 51.702000000000005,
+          "percent": 0.9759198727162787
+        },
+        {
+          "name": "tick index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:68750",
+          "ms": 51.44400000000001,
+          "percent": 0.9710499000428656
+        }
+      ],
+      "inclusiveUniquePerSample": [
+        {
+          "name": "(root) :0",
+          "ms": 5297.771000000009,
+          "percent": 100
+        },
+        {
+          "name": "update three.webgpu.js:24925",
+          "ms": 4474.9240000000045,
+          "percent": 84.4680526961244
+        },
+        {
+          "name": "tick index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:68750",
+          "ms": 4448.480000000005,
+          "percent": 83.96889937296267
+        },
+        {
+          "name": "renderFrame index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:2526",
+          "ms": 2809.195999999999,
+          "percent": 53.02599904752385
+        },
+        {
+          "name": "render three.webgpu.js:70670",
+          "ms": 2385.792999999998,
+          "percent": 45.03390199387618
+        },
+        {
+          "name": "_renderScene three.webgpu.js:50617",
+          "ms": 2382.872999999998,
+          "percent": 44.978784473696464
+        },
+        {
+          "name": "_renderObjectDirect three.webgpu.js:52263",
+          "ms": 2369.405999999997,
+          "percent": 44.72458322566214
+        },
+        {
+          "name": "renderObject three.webgpu.js:52154",
+          "ms": 2369.405999999997,
+          "percent": 44.72458322566214
+        },
+        {
+          "name": "filter viewmodel.js:190",
+          "ms": 2369.405999999997,
+          "percent": 44.72458322566214
+        },
+        {
+          "name": "_renderObjects three.webgpu.js:52128",
+          "ms": 2369.405999999997,
+          "percent": 44.72458322566214
+        },
+        {
+          "name": "updateBeforeNode three.webgpu.js:45477",
+          "ms": 2356.9209999999966,
+          "percent": 44.4889180751677
+        },
+        {
+          "name": "updateBefore three.webgpu.js:47168",
+          "ms": 2356.9209999999966,
+          "percent": 44.4889180751677
+        },
+        {
+          "name": "updateBefore three.webgpu.js:33703",
+          "ms": 2195.2009999999987,
+          "percent": 41.43631349863924
+        },
+        {
+          "name": "(program) :0",
+          "ms": 806.7680000000003,
+          "percent": 15.228442301488663
+        },
+        {
+          "name": "updateMatrixWorld three.core.js:13980",
+          "ms": 659.3780000000002,
+          "percent": 12.44632884282841
+        },
+        {
+          "name": "holdWeapon index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:56333",
+          "ms": 591.1390000000001,
+          "percent": 11.158258822436816
+        },
+        {
+          "name": "updateBefore three.webgpu.js:38235",
+          "ms": 526.4780000000002,
+          "percent": 9.937726640128448
+        },
+        {
+          "name": "SNp.updateShadow index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:2492",
+          "ms": 522.1710000000003,
+          "percent": 9.856428297863372
+        },
+        {
+          "name": "updateForRender three.webgpu.js:27628",
+          "ms": 491.7950000000002,
+          "percent": 9.283055081089753
+        },
+        {
+          "name": "holdHand index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:55884",
+          "ms": 463.02500000000003,
+          "percent": 8.739996500414971
+        },
+        {
+          "name": "holdDiveHand index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:56275",
+          "ms": 463.02500000000003,
+          "percent": 8.739996500414971
+        },
+        {
+          "name": "_update three.webgpu.js:27681",
+          "ms": 437.7630000000003,
+          "percent": 8.263154447408157
+        },
+        {
+          "name": "(anonymous) three.webgpu.js:38138",
+          "ms": 407.1290000000003,
+          "percent": 7.684911257961124
+        },
+        {
+          "name": "updateForRender three.webgpu.js:47227",
+          "ms": 380.32700000000034,
+          "percent": 7.179000375818428
+        },
+        {
+          "name": "draw three.webgpu.js:69345",
+          "ms": 315.93100000000015,
+          "percent": 5.963470297224996
+        }
+      ],
+      "matrixSelfNearestCaller": [
+        {
+          "name": "updateSceneMatrices <- renderFrame <- tick <- update",
+          "ms": 177.18400000000003,
+          "percent": 3.3445009231240785
+        },
+        {
+          "name": "rollForearm <- holdHand <- holdDiveHand <- holdWeapon",
+          "ms": 135.22299999999998,
+          "percent": 2.552450832623754
+        },
+        {
+          "name": "holdHand <- holdDiveHand <- holdWeapon <- tick",
+          "ms": 124.76500000000006,
+          "percent": 2.3550470565828507
+        },
+        {
+          "name": "holdWeapon <- tick <- update <- (root)",
+          "ms": 101.96499999999997,
+          "percent": 1.9246773784672802
+        },
+        {
+          "name": "place <- update <- updateViewmodel <- tick",
+          "ms": 14.226,
+          "percent": 0.2685280281084248
+        },
+        {
+          "name": "place <- renderFrame <- tick <- update",
+          "ms": 7.917,
+          "percent": 0.14944020796670876
+        },
+        {
+          "name": "_renderScene <- updateBefore <- updateBeforeNode <- updateBefore",
+          "ms": 1.588,
+          "percent": 0.02997487056348788
+        },
+        {
+          "name": "updateBootsYank <- updateLightning <- updateWorldAnimations <- tick",
+          "ms": 1.571,
+          "percent": 0.029653980891208725
+        },
+        {
+          "name": "sceneCull <- renderFrame <- tick <- update",
+          "ms": 1.367,
+          "percent": 0.025803304823858893
+        }
+      ]
+    },
+    {
+      "file": "cpu-pistol-1-fire.json",
+      "windowMs": 1189.9590000000003,
+      "self": [
+        {
+          "name": "(program) :0",
+          "ms": 333.40799999999996,
+          "percent": 28.018444332955998
+        },
+        {
+          "name": "updateMatrixWorld three.core.js:13980",
+          "ms": 158.63899999999998,
+          "percent": 13.331467722837504
+        },
+        {
+          "name": "writeBuffer :0",
+          "ms": 38.092999999999996,
+          "percent": 3.2012027305142436
+        },
+        {
+          "name": "updateByType three.webgpu.js:52796",
+          "ms": 34.194,
+          "percent": 2.8735443826215854
+        },
+        {
+          "name": "_renderObjectDirect three.webgpu.js:52263",
+          "ms": 29.908999999999995,
+          "percent": 2.5134479423240625
+        },
+        {
+          "name": "updateForRender three.webgpu.js:47227",
+          "ms": 28.19,
+          "percent": 2.368989183660949
+        },
+        {
+          "name": "updateProjectiles index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:60940",
+          "ms": 27.668000000000003,
+          "percent": 2.3251221260564434
+        },
+        {
+          "name": "multiplyMatrices three.core.js:11564",
+          "ms": 23.502999999999997,
+          "percent": 1.9751100668174275
+        },
+        {
+          "name": "_projectObject three.webgpu.js:51929",
+          "ms": 23.239,
+          "percent": 1.9529244284887122
+        },
+        {
+          "name": "shoulderAngles body-limits.js:193",
+          "ms": 23.106,
+          "percent": 1.9417475728155338
+        },
+        {
+          "name": "sceneCull index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:2342",
+          "ms": 18.974999999999994,
+          "percent": 1.5945927548764278
+        },
+        {
+          "name": "setVertexBuffer :0",
+          "ms": 18.900000000000002,
+          "percent": 1.5882900167148615
+        },
+        {
+          "name": "updateWorldMatrix three.core.js:14027",
+          "ms": 17.849,
+          "percent": 1.4999676459441036
+        },
+        {
+          "name": "update three.webgpu.js:14947",
+          "ms": 15.845,
+          "percent": 1.3315584822670357
+        },
+        {
+          "name": "bend marine-cloth.js:64",
+          "ms": 14.528999999999998,
+          "percent": 1.2209664366587416
+        },
+        {
+          "name": "updateForRender three.webgpu.js:27628",
+          "ms": 12.943999999999999,
+          "percent": 1.0877685701776276
+        },
+        {
+          "name": "needsRenderUpdate three.webgpu.js:69618",
+          "ms": 11.084,
+          "percent": 0.9314606637707682
+        },
+        {
+          "name": "get three.webgpu.js:26002",
+          "ms": 10.996999999999998,
+          "percent": 0.9241494875033506
+        },
+        {
+          "name": "draw three.webgpu.js:69345",
+          "ms": 10.915999999999999,
+          "percent": 0.9173425302888584
+        },
+        {
+          "name": "getBoundingClientRect :0",
+          "ms": 9.698,
+          "percent": 0.8149860625450119
+        },
+        {
+          "name": "setBindGroup :0",
+          "ms": 9.39,
+          "percent": 0.789102817828177
+        },
+        {
+          "name": "querySelector :0",
+          "ms": 9.282,
+          "percent": 0.7800268748755208
+        },
+        {
+          "name": "set three.webgpu.js:3074",
+          "ms": 8.001,
+          "percent": 0.6723761070759579
+        },
+        {
+          "name": "(anonymous) three.webgpu.js:4101",
+          "ms": 7.934,
+          "percent": 0.6667456609849581
+        },
+        {
+          "name": "updateAttributes three.webgpu.js:26528",
+          "ms": 7.932,
+          "percent": 0.6665775879673164
+        }
+      ],
+      "inclusiveUniquePerSample": [
+        {
+          "name": "(root) :0",
+          "ms": 1189.9590000000003,
+          "percent": 100
+        },
+        {
+          "name": "update three.webgpu.js:24925",
+          "ms": 852.6750000000011,
+          "percent": 71.65583015885429
+        },
+        {
+          "name": "tick index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:68750",
+          "ms": 845.7620000000011,
+          "percent": 71.07488577337547
+        },
+        {
+          "name": "renderFrame index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:2526",
+          "ms": 490.85300000000007,
+          "percent": 41.24957246426137
+        },
+        {
+          "name": "_renderScene three.webgpu.js:50617",
+          "ms": 413.81600000000014,
+          "percent": 34.77565193422631
+        },
+        {
+          "name": "render three.webgpu.js:70670",
+          "ms": 413.81600000000014,
+          "percent": 34.77565193422631
+        },
+        {
+          "name": "updateBeforeNode three.webgpu.js:45477",
+          "ms": 410.5710000000002,
+          "percent": 34.50295346310252
+        },
+        {
+          "name": "updateBefore three.webgpu.js:47168",
+          "ms": 410.5710000000002,
+          "percent": 34.50295346310252
+        },
+        {
+          "name": "_renderObjectDirect three.webgpu.js:52263",
+          "ms": 410.5710000000002,
+          "percent": 34.50295346310252
+        },
+        {
+          "name": "renderObject three.webgpu.js:52154",
+          "ms": 410.5710000000002,
+          "percent": 34.50295346310252
+        },
+        {
+          "name": "filter viewmodel.js:190",
+          "ms": 410.5710000000002,
+          "percent": 34.50295346310252
+        },
+        {
+          "name": "_renderObjects three.webgpu.js:52128",
+          "ms": 410.5710000000002,
+          "percent": 34.50295346310252
+        },
+        {
+          "name": "updateBefore three.webgpu.js:33703",
+          "ms": 384.3800000000001,
+          "percent": 32.30195326057453
+        },
+        {
+          "name": "(program) :0",
+          "ms": 333.40799999999996,
+          "percent": 28.018444332955998
+        },
+        {
+          "name": "updateMatrixWorld three.core.js:13980",
+          "ms": 179.30999999999997,
+          "percent": 15.068586396674164
+        },
+        {
+          "name": "holdWeapon index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:56333",
+          "ms": 168.67299999999992,
+          "percent": 14.174690052346332
+        },
+        {
+          "name": "holdHand index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:55884",
+          "ms": 119.592,
+          "percent": 10.050094162908133
+        },
+        {
+          "name": "holdDiveHand index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:56275",
+          "ms": 119.592,
+          "percent": 10.050094162908133
+        },
+        {
+          "name": "updateForRender three.webgpu.js:27628",
+          "ms": 103.15100000000001,
+          "percent": 8.668449921383845
+        },
+        {
+          "name": "SNp.updateShadow index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:2492",
+          "ms": 96.76899999999999,
+          "percent": 8.13212892208891
+        },
+        {
+          "name": "updateBefore three.webgpu.js:38235",
+          "ms": 96.76899999999999,
+          "percent": 8.13212892208891
+        },
+        {
+          "name": "_update three.webgpu.js:27681",
+          "ms": 88.48,
+          "percent": 7.435550300472536
+        },
+        {
+          "name": "(anonymous) three.webgpu.js:38138",
+          "ms": 74.837,
+          "percent": 6.289040210629105
+        },
+        {
+          "name": "updateForRender three.webgpu.js:47227",
+          "ms": 67.81800000000001,
+          "percent": 5.699187955215264
+        },
+        {
+          "name": "updateWorldAnimations index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:68334",
+          "ms": 51.36599999999999,
+          "percent": 4.316619312093945
+        }
+      ],
+      "matrixSelfNearestCaller": [
+        {
+          "name": "rollForearm <- holdHand <- holdDiveHand <- holdWeapon",
+          "ms": 42.23000000000002,
+          "percent": 3.548861767506276
+        },
+        {
+          "name": "holdWeapon <- tick <- update <- (root)",
+          "ms": 41.709,
+          "percent": 3.5050787464105904
+        },
+        {
+          "name": "updateSceneMatrices <- renderFrame <- tick <- update",
+          "ms": 41.288,
+          "percent": 3.4696993761969934
+        },
+        {
+          "name": "holdHand <- holdDiveHand <- holdWeapon <- tick",
+          "ms": 28.909000000000002,
+          "percent": 2.4294114335031707
+        },
+        {
+          "name": "place <- update <- updateViewmodel <- tick",
+          "ms": 4.641,
+          "percent": 0.3900134374377604
+        },
+        {
+          "name": "place <- renderFrame <- tick <- update",
+          "ms": 3.1420000000000003,
+          "percent": 0.2640427107152431
+        },
+        {
+          "name": "_renderScene <- updateBefore <- updateBeforeNode <- updateBefore",
+          "ms": 1.563,
+          "percent": 0.13134906328705437
+        }
+      ]
+    },
+    {
+      "file": "cpu-pistol-1-idle.json",
+      "windowMs": 4997.801000000002,
+      "self": [
+        {
+          "name": "updateMatrixWorld three.core.js:13980",
+          "ms": 626.551,
+          "percent": 12.536533567462966
+        },
+        {
+          "name": "(program) :0",
+          "ms": 422.15199999999965,
+          "percent": 8.446754882797444
+        },
+        {
+          "name": "_renderObjectDirect three.webgpu.js:52263",
+          "ms": 188.07999999999984,
+          "percent": 3.7632550795839963
+        },
+        {
+          "name": "writeBuffer :0",
+          "ms": 175.02600000000004,
+          "percent": 3.502060206078632
+        },
+        {
+          "name": "updateWorldMatrix three.core.js:14027",
+          "ms": 164.55700000000002,
+          "percent": 3.292588080237687
+        },
+        {
+          "name": "updateByType three.webgpu.js:52796",
+          "ms": 163.44599999999994,
+          "percent": 3.270358303581913
+        },
+        {
+          "name": "_projectObject three.webgpu.js:51929",
+          "ms": 157.94700000000006,
+          "percent": 3.1603299130957794
+        },
+        {
+          "name": "multiplyMatrices three.core.js:11564",
+          "ms": 142.4339999999999,
+          "percent": 2.849933400709629
+        },
+        {
+          "name": "updateForRender three.webgpu.js:47227",
+          "ms": 141.683,
+          "percent": 2.834906792007123
+        },
+        {
+          "name": "sceneCull index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:2342",
+          "ms": 106.04000000000002,
+          "percent": 2.1217331382341946
+        },
+        {
+          "name": "setVertexBuffer :0",
+          "ms": 105.65699999999998,
+          "percent": 2.114069767883914
+        },
+        {
+          "name": "intersectsObject three.core.js:26138",
+          "ms": 86.00999999999998,
+          "percent": 1.7209568768344308
+        },
+        {
+          "name": "setBindGroup :0",
+          "ms": 77.38000000000001,
+          "percent": 1.5482809339547527
+        },
+        {
+          "name": "get three.webgpu.js:26002",
+          "ms": 76.524,
+          "percent": 1.531153401265876
+        },
+        {
+          "name": "needsRenderUpdate three.webgpu.js:69618",
+          "ms": 69.44200000000001,
+          "percent": 1.389451080585241
+        },
+        {
+          "name": "update three.webgpu.js:14947",
+          "ms": 66.221,
+          "percent": 1.3250027362033818
+        },
+        {
+          "name": "_update three.webgpu.js:27681",
+          "ms": 63.531000000000006,
+          "percent": 1.2711790645525898
+        },
+        {
+          "name": "updateTreeBatchesInner index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:20009",
+          "ms": 59.467,
+          "percent": 1.1898633018801663
+        },
+        {
+          "name": "update three.webgpu.js:12293",
+          "ms": 58.17900000000001,
+          "percent": 1.1640919676473709
+        },
+        {
+          "name": "updateAttributes three.webgpu.js:26528",
+          "ms": 56.283,
+          "percent": 1.126155283093504
+        },
+        {
+          "name": "draw three.webgpu.js:69345",
+          "ms": 54.516,
+          "percent": 1.0907997337228907
+        },
+        {
+          "name": "set three.webgpu.js:3074",
+          "ms": 48.200999999999986,
+          "percent": 0.9644441625426855
+        },
+        {
+          "name": "updateForRender three.webgpu.js:27628",
+          "ms": 47.83800000000001,
+          "percent": 0.9571809681898097
+        },
+        {
+          "name": "toArray three.core.js:12264",
+          "ms": 46.749,
+          "percent": 0.9353913851311804
+        },
+        {
+          "name": "sameState marine-skin.js:65",
+          "ms": 44.936,
+          "percent": 0.8991154309665388
+        }
+      ],
+      "inclusiveUniquePerSample": [
+        {
+          "name": "(root) :0",
+          "ms": 4997.801000000002,
+          "percent": 100
+        },
+        {
+          "name": "update three.webgpu.js:24925",
+          "ms": 4561.639999999992,
+          "percent": 91.27294183982094
+        },
+        {
+          "name": "tick index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:68750",
+          "ms": 4542.824999999993,
+          "percent": 90.89647627026349
+        },
+        {
+          "name": "renderFrame index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:2526",
+          "ms": 2866.5779999999972,
+          "percent": 57.35678551426909
+        },
+        {
+          "name": "_renderScene three.webgpu.js:50617",
+          "ms": 2432.1239999999966,
+          "percent": 48.663882375468646
+        },
+        {
+          "name": "render three.webgpu.js:70670",
+          "ms": 2432.1239999999966,
+          "percent": 48.663882375468646
+        },
+        {
+          "name": "_renderObjectDirect three.webgpu.js:52263",
+          "ms": 2413.328999999996,
+          "percent": 48.28781698190855
+        },
+        {
+          "name": "renderObject three.webgpu.js:52154",
+          "ms": 2413.328999999996,
+          "percent": 48.28781698190855
+        },
+        {
+          "name": "filter viewmodel.js:190",
+          "ms": 2413.328999999996,
+          "percent": 48.28781698190855
+        },
+        {
+          "name": "_renderObjects three.webgpu.js:52128",
+          "ms": 2413.328999999996,
+          "percent": 48.28781698190855
+        },
+        {
+          "name": "updateBeforeNode three.webgpu.js:45477",
+          "ms": 2405.4779999999964,
+          "percent": 48.130727894127745
+        },
+        {
+          "name": "updateBefore three.webgpu.js:47168",
+          "ms": 2405.4779999999964,
+          "percent": 48.130727894127745
+        },
+        {
+          "name": "updateBefore three.webgpu.js:33703",
+          "ms": 2236.907999999998,
+          "percent": 44.757844500011046
+        },
+        {
+          "name": "updateMatrixWorld three.core.js:13980",
+          "ms": 729.8730000000002,
+          "percent": 14.603882787650006
+        },
+        {
+          "name": "holdWeapon index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:56333",
+          "ms": 625.9810000000003,
+          "percent": 12.525128551536968
+        },
+        {
+          "name": "updateBefore three.webgpu.js:38235",
+          "ms": 575.8090000000001,
+          "percent": 11.521247044450146
+        },
+        {
+          "name": "SNp.updateShadow index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:2492",
+          "ms": 572.671,
+          "percent": 11.458459430457511
+        },
+        {
+          "name": "updateForRender three.webgpu.js:27628",
+          "ms": 513.258,
+          "percent": 10.269676603770334
+        },
+        {
+          "name": "holdDiveHand index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:56275",
+          "ms": 456.75600000000037,
+          "percent": 9.139139393505266
+        },
+        {
+          "name": "holdHand index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:55884",
+          "ms": 455.20100000000036,
+          "percent": 9.108025709707132
+        },
+        {
+          "name": "_update three.webgpu.js:27681",
+          "ms": 428.755,
+          "percent": 8.578872988340269
+        },
+        {
+          "name": "(program) :0",
+          "ms": 422.15199999999965,
+          "percent": 8.446754882797444
+        },
+        {
+          "name": "(anonymous) three.webgpu.js:38138",
+          "ms": 411.28799999999984,
+          "percent": 8.22937928100778
+        },
+        {
+          "name": "updateForRender three.webgpu.js:47227",
+          "ms": 382.7269999999997,
+          "percent": 7.657907947915484
+        },
+        {
+          "name": "updateWorldAnimations index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:68334",
+          "ms": 333.40499999999986,
+          "percent": 6.671033920718326
+        }
+      ],
+      "matrixSelfNearestCaller": [
+        {
+          "name": "updateSceneMatrices <- renderFrame <- tick <- update",
+          "ms": 200.447,
+          "percent": 4.010703907578551
+        },
+        {
+          "name": "holdHand <- holdDiveHand <- holdWeapon <- tick",
+          "ms": 149.01299999999998,
+          "percent": 2.9815712950555637
+        },
+        {
+          "name": "holdWeapon <- tick <- update <- (root)",
+          "ms": 134.031,
+          "percent": 2.681799455400484
+        },
+        {
+          "name": "rollForearm <- holdHand <- holdDiveHand <- holdWeapon",
+          "ms": 128.00400000000005,
+          "percent": 2.5612064185828927
+        },
+        {
+          "name": "place <- update <- updateViewmodel <- tick",
+          "ms": 14.892999999999999,
+          "percent": 0.2979910564666339
+        },
+        {
+          "name": "place <- renderFrame <- tick <- update",
+          "ms": 4.638,
+          "percent": 0.09280081379790828
+        },
+        {
+          "name": "_renderScene <- updateBefore <- updateBeforeNode <- updateBefore",
+          "ms": 1.642,
+          "percent": 0.03285444938684032
+        },
+        {
+          "name": "updateBirds <- updateWorldAnimations <- tick <- update",
+          "ms": 1.572,
+          "percent": 0.03145383339592752
+        }
+      ]
+    },
+    {
+      "file": "cpu-pistol-2-fire.json",
+      "windowMs": 1327.3249999999996,
+      "self": [
+        {
+          "name": "(program) :0",
+          "ms": 375.2270000000002,
+          "percent": 28.26941404704954
+        },
+        {
+          "name": "updateMatrixWorld three.core.js:13980",
+          "ms": 161.814,
+          "percent": 12.190985628990642
+        },
+        {
+          "name": "writeBuffer :0",
+          "ms": 41.72999999999999,
+          "percent": 3.1439172772305204
+        },
+        {
+          "name": "updateByType three.webgpu.js:52796",
+          "ms": 34.486000000000004,
+          "percent": 2.598157949258849
+        },
+        {
+          "name": "_projectObject three.webgpu.js:51929",
+          "ms": 31.773,
+          "percent": 2.393761889514626
+        },
+        {
+          "name": "updateForRender three.webgpu.js:47227",
+          "ms": 26.809,
+          "percent": 2.0197766183866053
+        },
+        {
+          "name": "get three.webgpu.js:26002",
+          "ms": 25.356,
+          "percent": 1.9103083268980854
+        },
+        {
+          "name": "multiplyMatrices three.core.js:11564",
+          "ms": 25.249,
+          "percent": 1.902247000546212
+        },
+        {
+          "name": "updateWorldMatrix three.core.js:14027",
+          "ms": 23.246,
+          "percent": 1.7513419848190914
+        },
+        {
+          "name": "_renderObjectDirect three.webgpu.js:52263",
+          "ms": 22.36,
+          "percent": 1.6845911890456373
+        },
+        {
+          "name": "updateProjectiles index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:60940",
+          "ms": 17.514,
+          "percent": 1.3194959787542617
+        },
+        {
+          "name": "sceneCull index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:2342",
+          "ms": 17.221,
+          "percent": 1.2974215056598801
+        },
+        {
+          "name": "set three.webgpu.js:3074",
+          "ms": 17.106,
+          "percent": 1.2887574633190821
+        },
+        {
+          "name": "_update three.webgpu.js:27681",
+          "ms": 15.853,
+          "percent": 1.194357071553689
+        },
+        {
+          "name": "setVertexBuffer :0",
+          "ms": 15.526000000000002,
+          "percent": 1.1697210555063762
+        },
+        {
+          "name": "getBoundingClientRect :0",
+          "ms": 15.346,
+          "percent": 1.1561599457555614
+        },
+        {
+          "name": "updateForRender three.webgpu.js:27628",
+          "ms": 15.046000000000003,
+          "percent": 1.1335580961708707
+        },
+        {
+          "name": "shoulderAngles body-limits.js:193",
+          "ms": 14.071,
+          "percent": 1.0601020850206244
+        },
+        {
+          "name": "setBindGroup :0",
+          "ms": 12.94,
+          "percent": 0.9748931120863393
+        },
+        {
+          "name": "intersectsObject three.core.js:26138",
+          "ms": 12.337,
+          "percent": 0.9294633944211105
+        },
+        {
+          "name": "getForRender three.webgpu.js:27168",
+          "ms": 11.168,
+          "percent": 0.841391520539431
+        },
+        {
+          "name": "querySelector :0",
+          "ms": 11.009,
+          "percent": 0.8294125402595449
+        },
+        {
+          "name": "bend marine-cloth.js:64",
+          "ms": 10.848,
+          "percent": 0.8172828809824274
+        },
+        {
+          "name": "needsRenderUpdate three.webgpu.js:69618",
+          "ms": 9.397,
+          "percent": 0.7079652684911384
+        },
+        {
+          "name": "updateSceneMatrices index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:2501",
+          "ms": 9.273,
+          "percent": 0.6986231706627994
+        }
+      ],
+      "inclusiveUniquePerSample": [
+        {
+          "name": "(root) :0",
+          "ms": 1327.3249999999996,
+          "percent": 100.00000000000001
+        },
+        {
+          "name": "update three.webgpu.js:24925",
+          "ms": 948.8409999999992,
+          "percent": 71.48520520595932
+        },
+        {
+          "name": "tick index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:68750",
+          "ms": 947.2379999999991,
+          "percent": 71.36443598967844
+        },
+        {
+          "name": "renderFrame index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:2526",
+          "ms": 541.6610000000001,
+          "percent": 40.80846815964441
+        },
+        {
+          "name": "_renderScene three.webgpu.js:50617",
+          "ms": 458.11800000000034,
+          "percent": 34.5143804267983
+        },
+        {
+          "name": "render three.webgpu.js:70670",
+          "ms": 458.11800000000034,
+          "percent": 34.5143804267983
+        },
+        {
+          "name": "_renderObjectDirect three.webgpu.js:52263",
+          "ms": 456.66800000000035,
+          "percent": 34.40513815380562
+        },
+        {
+          "name": "renderObject three.webgpu.js:52154",
+          "ms": 456.66800000000035,
+          "percent": 34.40513815380562
+        },
+        {
+          "name": "filter viewmodel.js:190",
+          "ms": 456.66800000000035,
+          "percent": 34.40513815380562
+        },
+        {
+          "name": "_renderObjects three.webgpu.js:52128",
+          "ms": 456.66800000000035,
+          "percent": 34.40513815380562
+        },
+        {
+          "name": "updateBefore three.webgpu.js:47168",
+          "ms": 455.30200000000036,
+          "percent": 34.302224398696666
+        },
+        {
+          "name": "updateBeforeNode three.webgpu.js:45477",
+          "ms": 453.7390000000004,
+          "percent": 34.184468762360424
+        },
+        {
+          "name": "updateBefore three.webgpu.js:33703",
+          "ms": 433.2370000000002,
+          "percent": 32.639858361742625
+        },
+        {
+          "name": "(program) :0",
+          "ms": 375.2270000000002,
+          "percent": 28.26941404704954
+        },
+        {
+          "name": "holdWeapon index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:56333",
+          "ms": 195.33799999999997,
+          "percent": 14.716666980581245
+        },
+        {
+          "name": "updateMatrixWorld three.core.js:13980",
+          "ms": 183.94399999999993,
+          "percent": 13.85824873335468
+        },
+        {
+          "name": "holdHand index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:55884",
+          "ms": 143.18799999999996,
+          "percent": 10.787712127775789
+        },
+        {
+          "name": "holdDiveHand index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:56275",
+          "ms": 143.18799999999996,
+          "percent": 10.787712127775789
+        },
+        {
+          "name": "SNp.updateShadow index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:2492",
+          "ms": 110.42499999999997,
+          "percent": 8.319364134631684
+        },
+        {
+          "name": "updateBefore three.webgpu.js:38235",
+          "ms": 110.42499999999997,
+          "percent": 8.319364134631684
+        },
+        {
+          "name": "updateForRender three.webgpu.js:27628",
+          "ms": 109.50299999999999,
+          "percent": 8.249901116908068
+        },
+        {
+          "name": "_update three.webgpu.js:27681",
+          "ms": 89.553,
+          "percent": 6.746878119526116
+        },
+        {
+          "name": "(anonymous) three.webgpu.js:38138",
+          "ms": 76.50699999999999,
+          "percent": 5.763999020586519
+        },
+        {
+          "name": "updateForRender three.webgpu.js:47227",
+          "ms": 69.44200000000001,
+          "percent": 5.231725462867047
+        },
+        {
+          "name": "_projectObject three.webgpu.js:51929",
+          "ms": 55.298999999999985,
+          "percent": 4.166198933946095
+        }
+      ],
+      "matrixSelfNearestCaller": [
+        {
+          "name": "holdHand <- holdDiveHand <- holdWeapon <- tick",
+          "ms": 45.870000000000005,
+          "percent": 3.455822801499257
+        },
+        {
+          "name": "holdWeapon <- tick <- update <- (root)",
+          "ms": 42.775999999999996,
+          "percent": 3.2227223927824764
+        },
+        {
+          "name": "rollForearm <- holdHand <- holdDiveHand <- holdWeapon",
+          "ms": 37.467999999999996,
+          "percent": 2.822820334130677
+        },
+        {
+          "name": "updateSceneMatrices <- renderFrame <- tick <- update",
+          "ms": 37.278,
+          "percent": 2.808505829393706
+        },
+        {
+          "name": "_renderScene <- SNp.updateShadow <- updateBefore <- updateBeforeNode",
+          "ms": 1.576,
+          "percent": 0.1187350498182435
+        }
+      ]
+    },
+    {
+      "file": "cpu-pistol-2-idle.json",
+      "windowMs": 5052.493000000008,
+      "self": [
+        {
+          "name": "updateMatrixWorld three.core.js:13980",
+          "ms": 668.279,
+          "percent": 13.226717978629539
+        },
+        {
+          "name": "(program) :0",
+          "ms": 458.37800000000004,
+          "percent": 9.072313410429254
+        },
+        {
+          "name": "_renderObjectDirect three.webgpu.js:52263",
+          "ms": 194.81699999999998,
+          "percent": 3.855858879962816
+        },
+        {
+          "name": "writeBuffer :0",
+          "ms": 184.68399999999994,
+          "percent": 3.655304421005624
+        },
+        {
+          "name": "updateWorldMatrix three.core.js:14027",
+          "ms": 181.51799999999994,
+          "percent": 3.5926422856993505
+        },
+        {
+          "name": "updateByType three.webgpu.js:52796",
+          "ms": 172.13799999999995,
+          "percent": 3.406991360502621
+        },
+        {
+          "name": "multiplyMatrices three.core.js:11564",
+          "ms": 162.83399999999995,
+          "percent": 3.222844643228594
+        },
+        {
+          "name": "_projectObject three.webgpu.js:51929",
+          "ms": 161.6979999999999,
+          "percent": 3.2003606932260897
+        },
+        {
+          "name": "updateForRender three.webgpu.js:47227",
+          "ms": 131.70400000000004,
+          "percent": 2.6067131612057617
+        },
+        {
+          "name": "sceneCull index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:2342",
+          "ms": 116.43699999999995,
+          "percent": 2.3045454986280984
+        },
+        {
+          "name": "update three.webgpu.js:14947",
+          "ms": 92.65899999999999,
+          "percent": 1.8339263409172433
+        },
+        {
+          "name": "intersectsObject three.core.js:26138",
+          "ms": 84.979,
+          "percent": 1.6819221718862325
+        },
+        {
+          "name": "get three.webgpu.js:26002",
+          "ms": 81.76299999999998,
+          "percent": 1.6182704261044965
+        },
+        {
+          "name": "needsRenderUpdate three.webgpu.js:69618",
+          "ms": 78.5,
+          "percent": 1.5536884464758265
+        },
+        {
+          "name": "setVertexBuffer :0",
+          "ms": 75.849,
+          "percent": 1.501219299066815
+        },
+        {
+          "name": "updateAttributes three.webgpu.js:26528",
+          "ms": 67.85699999999999,
+          "percent": 1.343039960668919
+        },
+        {
+          "name": "setBindGroup :0",
+          "ms": 64.38000000000001,
+          "percent": 1.2742224482052704
+        },
+        {
+          "name": "_update three.webgpu.js:27681",
+          "ms": 64.032,
+          "percent": 1.2673347592960524
+        },
+        {
+          "name": "draw three.webgpu.js:69345",
+          "ms": 61.17,
+          "percent": 1.2106894556805898
+        },
+        {
+          "name": "toArray three.core.js:12264",
+          "ms": 60.477,
+          "percent": 1.1969734544906823
+        },
+        {
+          "name": "set three.webgpu.js:3074",
+          "ms": 54.707,
+          "percent": 1.0827724056223318
+        },
+        {
+          "name": "updateTreeBatchesInner index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:20009",
+          "ms": 48.73500000000001,
+          "percent": 0.9645733304331137
+        },
+        {
+          "name": "updateForRender three.webgpu.js:27628",
+          "ms": 47.6,
+          "percent": 0.942109172640119
+        },
+        {
+          "name": "bend marine-cloth.js:64",
+          "ms": 45.96999999999999,
+          "percent": 0.9098478711400475
+        },
+        {
+          "name": "querySelector :0",
+          "ms": 44.72599999999999,
+          "percent": 0.8852263625105453
+        }
+      ],
+      "inclusiveUniquePerSample": [
+        {
+          "name": "(root) :0",
+          "ms": 5052.493000000008,
+          "percent": 100
+        },
+        {
+          "name": "update three.webgpu.js:24925",
+          "ms": 4584.279000000014,
+          "percent": 90.73301041683793
+        },
+        {
+          "name": "tick index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:68750",
+          "ms": 4559.904000000014,
+          "percent": 90.25057531005005
+        },
+        {
+          "name": "renderFrame index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:2526",
+          "ms": 2928.354000000009,
+          "percent": 57.95859588523932
+        },
+        {
+          "name": "_renderScene three.webgpu.js:50617",
+          "ms": 2451.7530000000024,
+          "percent": 48.525609040922944
+        },
+        {
+          "name": "render three.webgpu.js:70670",
+          "ms": 2451.6300000000024,
+          "percent": 48.5231745991533
+        },
+        {
+          "name": "_renderObjectDirect three.webgpu.js:52263",
+          "ms": 2431.1400000000017,
+          "percent": 48.117632226308835
+        },
+        {
+          "name": "renderObject three.webgpu.js:52154",
+          "ms": 2431.1400000000017,
+          "percent": 48.117632226308835
+        },
+        {
+          "name": "filter viewmodel.js:190",
+          "ms": 2431.1400000000017,
+          "percent": 48.117632226308835
+        },
+        {
+          "name": "_renderObjects three.webgpu.js:52128",
+          "ms": 2431.1400000000017,
+          "percent": 48.117632226308835
+        },
+        {
+          "name": "updateBeforeNode three.webgpu.js:45477",
+          "ms": 2420.0150000000012,
+          "percent": 47.89744389551846
+        },
+        {
+          "name": "updateBefore three.webgpu.js:47168",
+          "ms": 2420.0150000000012,
+          "percent": 47.89744389551846
+        },
+        {
+          "name": "updateBefore three.webgpu.js:33703",
+          "ms": 2271.1110000000012,
+          "percent": 44.950304730753665
+        },
+        {
+          "name": "updateMatrixWorld three.core.js:13980",
+          "ms": 782.4549999999995,
+          "percent": 15.486513291557221
+        },
+        {
+          "name": "holdWeapon index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:56333",
+          "ms": 593.448,
+          "percent": 11.745647148843137
+        },
+        {
+          "name": "updateBefore three.webgpu.js:38235",
+          "ms": 574.2910000000007,
+          "percent": 11.366487791274523
+        },
+        {
+          "name": "SNp.updateShadow index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:2492",
+          "ms": 572.7920000000007,
+          "percent": 11.336819269220161
+        },
+        {
+          "name": "updateForRender three.webgpu.js:27628",
+          "ms": 556.5780000000004,
+          "percent": 11.015908384237239
+        },
+        {
+          "name": "_update three.webgpu.js:27681",
+          "ms": 481.53500000000037,
+          "percent": 9.530641606034875
+        },
+        {
+          "name": "(program) :0",
+          "ms": 458.37800000000004,
+          "percent": 9.072313410429254
+        },
+        {
+          "name": "holdDiveHand index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:56275",
+          "ms": 419.0699999999998,
+          "percent": 8.294321239039801
+        },
+        {
+          "name": "holdHand index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:55884",
+          "ms": 417.58099999999985,
+          "percent": 8.264850639080533
+        },
+        {
+          "name": "(anonymous) three.webgpu.js:38138",
+          "ms": 394.3060000000003,
+          "percent": 7.804186962752838
+        },
+        {
+          "name": "updateForRender three.webgpu.js:47227",
+          "ms": 363.1049999999999,
+          "percent": 7.186650233854839
+        },
+        {
+          "name": "updateWorldAnimations index.html?debug=1&__gameTestToken=c3fd21e7-ae46-4acb-abf1-59564744c103:68334",
+          "ms": 316.15800000000013,
+          "percent": 6.257465374024262
+        }
+      ],
+      "matrixSelfNearestCaller": [
+        {
+          "name": "updateSceneMatrices <- renderFrame <- tick <- update",
+          "ms": 237.755,
+          "percent": 4.70569677187083
+        },
+        {
+          "name": "holdWeapon <- tick <- update <- (root)",
+          "ms": 141.83799999999997,
+          "percent": 2.807287412372461
+        },
+        {
+          "name": "holdHand <- holdDiveHand <- holdWeapon <- tick",
+          "ms": 138.514,
+          "percent": 2.741498107963728
+        },
+        {
+          "name": "rollForearm <- holdHand <- holdDiveHand <- holdWeapon",
+          "ms": 111.65199999999999,
+          "percent": 2.209839776126356
+        },
+        {
+          "name": "place <- update <- updateViewmodel <- tick",
+          "ms": 21.421,
+          "percent": 0.4239689198975628
+        },
+        {
+          "name": "updateBootsYank <- updateLightning <- updateWorldAnimations <- tick",
+          "ms": 6.765000000000001,
+          "percent": 0.13389429733005054
+        },
+        {
+          "name": "place <- renderFrame <- tick <- update",
+          "ms": 6.039,
+          "percent": 0.11952515322633778
+        },
+        {
+          "name": "_renderScene <- updateBefore <- updateBeforeNode <- updateBefore",
+          "ms": 4.547,
+          "percent": 0.08999517663854245
+        },
+        {
+          "name": "(root)",
+          "ms": 1.673,
+          "percent": 0.03311236650896889
+        },
+        {
+          "name": "_renderScene <- render <- renderFrame <- tick",
+          "ms": 1.598,
+          "percent": 0.03162795079577543
+        },
+        {
+          "name": "wildlifeInstance <- flushBugInstances <- updateBugs <- updateWorldAnimations",
+          "ms": 1.574,
+          "percent": 0.031152937767553516
+        },
+        {
+          "name": "pointWorld <- getMuzzleWorld <- updateShotLos <- updateMouseAimBody",
+          "ms": 1.256,
+          "percent": 0.024859015143613224
+        }
+      ]
+    }
+  ]
+}

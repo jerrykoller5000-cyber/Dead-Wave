@@ -1,0 +1,375 @@
+{
+  "navigation": "Canonical tools/bench early dismissForTesting; separate loader-ready and actual menu times",
+  "scope": "DIAGNOSTIC stalled-clock state polling; not final acceptance. Actual production perfSamples raw tick-start intervals: first+2steady full magazines, including interval after final shot. No independent rAF observer, screenshot, CPU/builtin PROF or GPU timestamp query in measured phases. One capture AFTER ALL phases, no readback between phases; rare actual cache-miss journals only. All phases retained. Screenshot ABBA correction; numeric budget and effects unchanged.",
+  "frameSampling": "production-tick-start-wall-clock",
+  "environment": "outdoor",
+  "sourceSha256": "798ae744e736f203dc587b48ee4e4e588497ec52261fca18321f72a0c57e710c",
+  "moduleHashes": {
+    "core/body-limits.js": "fd2562bd882ef767155cc819301ede35e68d008621dd0f683232c593d91459eb",
+    "game/viewmodel.js": "f3eb743fb200945a3bed23accbd93dfcb5cf983e616769049c357d3199b7363e",
+    "game/tp-fit.js": "d2dbf1e163f856b672a1a91d1638a949749e3bde1727bda8ceaf1f18c3b08e07",
+    "studio/fp-arms.js": "fff7808db158e072d0c5697a0a57e0c87de7fa81847558fc8670f6f7e5f190d8",
+    "world/training-ballistics.js": "eadc9d04d5fd50ad9f6f23c0a080ea2ad58485ff62e0002f1a6b1b0da4719bdc"
+  },
+  "rows": [],
+  "readyWallMs": 12594,
+  "loadMarks": [
+    "terrain+water+sky built 0ms",
+    "rocks 58ms",
+    "trees 208ms",
+    "player+weapons+zombie types 1174ms",
+    "foliage scattered 2196ms",
+    "POIs+minimap+foliage chunks 3649ms",
+    "contact shading + rest of setup 3840ms",
+    "post + pools + compile + warm frame 9794ms",
+    "ready 9798ms"
+  ],
+  "menuWallMs": 18600,
+  "graphics": "high",
+  "instrumentation": {
+    "prof": false,
+    "gpuTimestamps": false
+  },
+  "lastPhaseStates": {
+    "pass": 0,
+    "fire": false,
+    "states": [
+      {
+        "wall": 27,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 1049,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 2060,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 3080,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 4101,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 5119,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 6142,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 7151,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 8168,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 9203,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 10218,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 11222,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 12247,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 13279,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 14288,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 15297,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 16311,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 17329,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 18364,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 19379,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 20380,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 21398,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 22416,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 23432,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 24448,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 25464,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 26476,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 27486,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 28495,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 29519,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 30535,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 31551,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 32555,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 33568,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 34571,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 35585,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 36607,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 37622,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 38641,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 39663,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 40687,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 41707,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 42727,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 43738,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 44759,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 45789,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 46812,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 47825,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 48842,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 49861,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 50870,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 51871,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 52885,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 53892,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 54920,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 55934,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 56944,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 57957,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      },
+      {
+        "wall": 58990,
+        "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+        "socket": 1
+      }
+    ]
+  },
+  "failure": "AssertionError [ERR_ASSERTION]: phase must finish in original60second wall limit\n    at file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/GP-20133/clock-stall-diagnostic.mjs:23:966",
+  "errors": [],
+  "console": [
+    {
+      "type": "warning",
+      "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift renderer: WebGPU."
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift warm-up: 286 shader variants compiled, 38 bodies pooled, 5 warm frames, lights visible 24/24, shadows true | post 5ms pools 5070ms compile 759ms warm frame 114ms | fire-hot:229 fire-cold:229 fire-resources:100/8 fire-pool-falling-leaves:231 fire-leaf-resources:1 fire-clean:231 load:286"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift load: terrain+water+sky built 0ms | rocks 58ms | trees 208ms | player+weapons+zombie types 1174ms | foliage scattered 2196ms | POIs+minimap+foliage chunks 3649ms | contact shading + rest of setup 3840ms | post + pools + compile + warm frame 9794ms | ready 9798ms"
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift first minute: 305 variants after 13 warm frames | fire-hot:229 fire-cold:229 fire-resources:100/8 fire-pool-falling-leaves:231 fire-leaf-resources:1 fire-clean:231 load:286 a-fresh:286 a-flash:289 a-faded:290 a-kill-generic:299 a-kill-melee:302 a-kill-explosive:302 a-fx:305 a-corpse:305"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift pre-roll: 372 shader variants compiled after 35 warm frames | fire-hot:229 fire-cold:229 fire-resources:100/8 fire-pool-falling-leaves:231 fire-leaf-resources:1 fire-clean:231 load:286 a-fresh:286 a-flash:289 a-faded:290 a-kill-generic:299 a-kill-melee:302 a-kill-explosive:302 a-fx:305 a-corpse:305 fresh:361 burning:363 flash:363 faded:363 tree-fade:363 kill-explosive:363 kill-chainsaw:363 kill-pellet:363 kill-generic:363 kill-melee:363 kill-explosive:365 kill-chainsaw:365 kill-pellet:365 kill-generic:366 kill-melee:366 kill-explosive:366 kill-chainsaw:366 kill-pellet:366 kill-generic:366 effects:371 corpses:371 corpses2:371"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift title: menu up after 35 warm frames, 372 variants | fire-hot:229 fire-cold:229 fire-resources:100/8 fire-pool-falling-leaves:231 fire-leaf-resources:1 fire-clean:231 load:286 a-fresh:286 a-flash:289 a-faded:290 a-kill-generic:299 a-kill-melee:302 a-kill-explosive:302 a-fx:305 a-corpse:305 fresh:361 burning:363 flash:363 faded:363 tree-fade:363 kill-explosive:363 kill-chainsaw:363 kill-pellet:363 kill-generic:363 kill-melee:363 kill-explosive:365 kill-chainsaw:365 kill-pellet:365 kill-generic:366 kill-melee:366 kill-explosive:366 kill-chainsaw:366 kill-pellet:366 kill-generic:366 effects:371 corpses:371 corpses2:371"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift opening perf: {\"toMenu\":18.5,\"segments\":{\"boot\":{\"at\":0,\"seconds\":0.55,\"frames\":10,\"over50\":3,\"over100\":1,\"worst\":117},\"loading\":{\"at\":0.55,\"seconds\":17.95,\"frames\":328,\"over50\":51,\"over100\":22,\"worst\":3400},\"menu\":{\"at\":18.5,\"seconds\":6.01,\"frames\":310,\"over50\":5,\"over100\":1,\"worst\":400}},\"videos\":{\"caracal@loading\":{\"frames\":4,\"dropped\":0}},\"loafOver100\":25,\"gpuGateWait\":0,\"order\":\"boot > loading > menu\",\"liveRollTicks\":76,\"renderer\":\"WebGPU / high\"}"
+    }
+  ],
+  "socket": 1
+}

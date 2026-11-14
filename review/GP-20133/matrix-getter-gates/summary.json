@@ -1,0 +1,171 @@
+{
+  "scope": "Director gates COMPLETE; exact patch remains unlanded pending C5 overlap coordination/owner application. All original assertion text/bars retained.",
+  "rows": [
+    {
+      "test": "t187",
+      "stableSource": true,
+      "stableModules": true,
+      "results": [
+        {
+          "candidate": false,
+          "pass": 99,
+          "fail": [],
+          "errors": [],
+          "gpuErrors": []
+        },
+        {
+          "candidate": true,
+          "pass": 99,
+          "fail": [],
+          "errors": [],
+          "gpuErrors": []
+        }
+      ]
+    },
+    {
+      "test": "tcb291",
+      "stableSource": true,
+      "stableModules": true,
+      "results": [
+        {
+          "candidate": false,
+          "pass": 3,
+          "fail": [],
+          "errors": [],
+          "gpuErrors": []
+        },
+        {
+          "candidate": true,
+          "pass": 3,
+          "fail": [],
+          "errors": [],
+          "gpuErrors": []
+        }
+      ]
+    },
+    {
+      "test": "t218",
+      "stableSource": true,
+      "stableModules": true,
+      "results": [
+        {
+          "candidate": false,
+          "pass": 34,
+          "fail": [
+            "FAIL aa12: every visible magazine is seated or in the palm (or the clip's falling empty): in midair at u 0.52 (well 0.036, palm 0.070)"
+          ],
+          "errors": [],
+          "gpuErrors": []
+        },
+        {
+          "candidate": true,
+          "pass": 34,
+          "fail": [
+            "FAIL aa12: every visible magazine is seated or in the palm (or the clip's falling empty): in midair at u 0.52 (well 0.035, palm 0.076)"
+          ],
+          "errors": [],
+          "gpuErrors": []
+        }
+      ]
+    },
+    {
+      "test": "t262",
+      "stableSource": true,
+      "stableModules": true,
+      "results": [
+        {
+          "candidate": false,
+          "pass": 32,
+          "fail": [],
+          "errors": [],
+          "gpuErrors": []
+        },
+        {
+          "candidate": true,
+          "pass": 32,
+          "fail": [],
+          "errors": [],
+          "gpuErrors": []
+        }
+      ]
+    },
+    {
+      "test": "t229-1",
+      "stableSource": true,
+      "stableModules": true,
+      "results": [
+        {
+          "candidate": false,
+          "pass": 74,
+          "fail": [
+            "FAIL pistol: no pop leaving or rejoining the grip (2.81 m/s at most)",
+            "FAIL revolver aiming down: firing wrist nearly straight, gun in line with the forearm (0.77 rad)"
+          ],
+          "errors": [],
+          "gpuErrors": []
+        },
+        {
+          "candidate": true,
+          "pass": 74,
+          "fail": [
+            "FAIL pistol: no pop leaving or rejoining the grip (3.12 m/s at most)",
+            "FAIL revolver aiming down: firing wrist nearly straight, gun in line with the forearm (0.78 rad)"
+          ],
+          "errors": [],
+          "gpuErrors": []
+        }
+      ]
+    },
+    {
+      "test": "t229-2",
+      "stableSource": true,
+      "stableModules": true,
+      "results": [
+        {
+          "candidate": false,
+          "pass": 75,
+          "fail": [
+            "FAIL revolver aiming down: firing wrist nearly straight, gun in line with the forearm (0.78 rad)"
+          ],
+          "errors": [],
+          "gpuErrors": []
+        },
+        {
+          "candidate": true,
+          "pass": 74,
+          "fail": [
+            "FAIL pistol: no pop leaving or rejoining the grip (2.56 m/s at most)",
+            "FAIL revolver aiming down: firing wrist nearly straight, gun in line with the forearm (0.78 rad)"
+          ],
+          "errors": [],
+          "gpuErrors": []
+        }
+      ]
+    },
+    {
+      "test": "t229-3",
+      "stableSource": true,
+      "stableModules": true,
+      "results": [
+        {
+          "candidate": false,
+          "pass": 75,
+          "fail": [
+            "FAIL revolver aiming down: firing wrist nearly straight, gun in line with the forearm (0.77 rad)"
+          ],
+          "errors": [],
+          "gpuErrors": []
+        },
+        {
+          "candidate": true,
+          "pass": 75,
+          "fail": [
+            "FAIL revolver aiming down: firing wrist nearly straight, gun in line with the forearm (0.78 rad)"
+          ],
+          "errors": [],
+          "gpuErrors": []
+        }
+      ]
+    }
+  ]
+}

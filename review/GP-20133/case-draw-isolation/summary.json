@@ -1,0 +1,164 @@
+{
+  "scope": "DIAGNOSTIC ONLY; hides rendering of cases while preserving spawning, physics, RNG, audio/lifetimes. NOT acceptance or proposed production behavior. All12 magazines retained; no screenshots until entire batch finished. Legacy field draws is INVALID as draw count: captured renderer.info.render.calls is cumulative renderer invocation count; do not use it for draw conclusions. Actual visibility0off/24on verified.",
+  "sourceStable": true,
+  "modulesStable": true,
+  "errors": [],
+  "rows": [
+    {
+      "pass": 0,
+      "hideCases": false,
+      "idle": 16.779925650601935,
+      "fire": 18.111627907253975,
+      "percentOverIdle": 7.936282224255686,
+      "cases": 24,
+      "visible": 24,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 1,
+      "hideCases": true,
+      "idle": 16.8610486891609,
+      "fire": 17.83695652173913,
+      "percentOverIdle": 5.787942675271385,
+      "cases": 24,
+      "visible": 0,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 2,
+      "hideCases": true,
+      "idle": 16.75947955394766,
+      "fire": 17.578723404001682,
+      "percentOverIdle": 4.888241591374776,
+      "cases": 24,
+      "visible": 0,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 3,
+      "hideCases": false,
+      "idle": 17.120532319346307,
+      "fire": 17.944444444444443,
+      "percentOverIdle": 4.81242118953924,
+      "cases": 24,
+      "visible": 24,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 4,
+      "hideCases": false,
+      "idle": 16.791044776119403,
+      "fire": 17.110869565087818,
+      "percentOverIdle": 1.9047342987452254,
+      "cases": 24,
+      "visible": 24,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 5,
+      "hideCases": true,
+      "idle": 16.852808988719396,
+      "fire": 16.841304347566936,
+      "percentOverIdle": -0.06826542186623152,
+      "cases": 24,
+      "visible": 0,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 6,
+      "hideCases": true,
+      "idle": 16.728624535315983,
+      "fire": 18.086363636634566,
+      "percentOverIdle": 8.116262627882186,
+      "cases": 24,
+      "visible": 0,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 7,
+      "hideCases": false,
+      "idle": 16.865168539325843,
+      "fire": 17.469565217261728,
+      "percentOverIdle": 3.5836978238703354,
+      "cases": 24,
+      "visible": 24,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 8,
+      "hideCases": false,
+      "idle": 16.81455223885045,
+      "fire": 17.104347826346107,
+      "percentOverIdle": 1.7234808478936214,
+      "cases": 24,
+      "visible": 24,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 9,
+      "hideCases": true,
+      "idle": 17.376447876447877,
+      "fire": 20.466666666361,
+      "percentOverIdle": 17.783949929730003,
+      "cases": 24,
+      "visible": 0,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 10,
+      "hideCases": true,
+      "idle": 16.66703703701496,
+      "fire": 17.63777777751287,
+      "percentOverIdle": 5.824315013772652,
+      "cases": 24,
+      "visible": 0,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 11,
+      "hideCases": false,
+      "idle": 16.85655430707146,
+      "fire": 17.456521739130434,
+      "percentOverIdle": 3.559253101965698,
+      "cases": 24,
+      "visible": 24,
+      "builds": 0,
+      "pipes": 0
+    }
+  ],
+  "blocks": [
+    {
+      "block": 0,
+      "on": 18.02803617584921,
+      "off": 17.707839962870406,
+      "offPercentVsOn": -1.776101455841017
+    },
+    {
+      "block": 1,
+      "on": 17.29021739117477,
+      "off": 17.463833992100753,
+      "offPercentVsOn": 1.0041319724215736
+    },
+    {
+      "block": 2,
+      "on": 17.28043478273827,
+      "off": 19.052222221936937,
+      "offPercentVsOn": 10.253141552714506
+    }
+  ],
+  "on": 17.53289611658742,
+  "off": 18.07463205896936,
+  "offPercentVsOn": 3.089825769682264,
+  "conclusion": "No repeatable gain from hiding case meshes; do not propose casing batching from these timing data."
+}

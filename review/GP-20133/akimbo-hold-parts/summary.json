@@ -1,0 +1,272 @@
+{
+  "scope": "DIAGNOSTIC ONLY additional direct timers, all original animation/solves/clamps/effects/rate retained, 2warmmags each mode thenABBAx1; no acceptance/GPU claim. Method timing includes normal matrix work, no counter hook in this run.",
+  "source": "a95f671f3e01e896412b4826a3d8e5430781b75376175aa8d0e72fc91048a3e9",
+  "end": "a95f671f3e01e896412b4826a3d8e5430781b75376175aa8d0e72fc91048a3e9",
+  "sourceStable": true,
+  "modulesStable": true,
+  "errors": [],
+  "modes": [
+    {
+      "pair": false,
+      "phases": [
+        {
+          "fire": false,
+          "frames": 523,
+          "holdCalls": 523,
+          "parts": {
+            "holdWeapon": {
+              "calls": 523,
+              "totalMsPerFrame": 1.5030592738100492,
+              "selfMsPerFrame": 0.4585086045142114,
+              "totalMsPerCall": 1.5030592738100492,
+              "callsPerHold": 1
+            },
+            "hold.playerFullMatrix": {
+              "calls": 523,
+              "totalMsPerFrame": 0.5021032499537641,
+              "selfMsPerFrame": 0.5021032499537641,
+              "totalMsPerCall": 0.5021032499537641,
+              "callsPerHold": 1
+            },
+            "poseHands": {
+              "calls": 523,
+              "totalMsPerFrame": 0.00898661588391656,
+              "selfMsPerFrame": 0.00898661588391656,
+              "totalMsPerCall": 0.00898661588391656,
+              "callsPerHold": 1
+            },
+            "shoulderRoll": {
+              "calls": 523,
+              "totalMsPerFrame": 0.00038240915502690446,
+              "selfMsPerFrame": 0.00038240915502690446,
+              "totalMsPerCall": 0.00038240915502690446,
+              "callsPerHold": 1
+            },
+            "cheekWeldReset": {
+              "calls": 523,
+              "totalMsPerFrame": 0.00019120457751345223,
+              "selfMsPerFrame": 0.00019120457751345223,
+              "totalMsPerCall": 0.00019120457751345223,
+              "callsPerHold": 1
+            },
+            "restWrists": {
+              "calls": 1046,
+              "totalMsPerFrame": 0.0013384322705277977,
+              "selfMsPerFrame": 0.0013384322705277977,
+              "totalMsPerCall": 0.0006692161352638989,
+              "callsPerHold": 2
+            },
+            "holdHand": {
+              "calls": 1046,
+              "totalMsPerFrame": 0.5307839390880519,
+              "selfMsPerFrame": 0.28929254304382584,
+              "totalMsPerCall": 0.26539196954402594,
+              "callsPerHold": 2
+            },
+            "holdShoulderIK": {
+              "calls": 3495,
+              "totalMsPerFrame": 0.21032504837098132,
+              "selfMsPerFrame": 0.21032504837098132,
+              "totalMsPerCall": 0.03147353370472768,
+              "callsPerHold": 6.682600382409178
+            }
+          }
+        },
+        {
+          "fire": true,
+          "frames": 70,
+          "holdCalls": 94,
+          "parts": {
+            "holdWeapon": {
+              "calls": 94,
+              "totalMsPerFrame": 2.1314285704067775,
+              "selfMsPerFrame": 0.5642857125827244,
+              "totalMsPerCall": 1.5872340417922812,
+              "callsPerHold": 1
+            },
+            "hold.playerFullMatrix": {
+              "calls": 94,
+              "totalMsPerFrame": 0.7971428547586713,
+              "selfMsPerFrame": 0.7971428547586713,
+              "totalMsPerCall": 0.5936170195011382,
+              "callsPerHold": 1
+            },
+            "poseHands": {
+              "calls": 94,
+              "totalMsPerFrame": 0.012857143368039812,
+              "selfMsPerFrame": 0.012857143368039812,
+              "totalMsPerCall": 0.009574468465561562,
+              "callsPerHold": 1
+            },
+            "shoulderRoll": {
+              "calls": 94,
+              "totalMsPerFrame": 0.001428571343421936,
+              "selfMsPerFrame": 0.001428571343421936,
+              "totalMsPerCall": 0.001063829723824846,
+              "callsPerHold": 1
+            },
+            "cheekWeldReset": {
+              "calls": 94,
+              "totalMsPerFrame": 0.001428571343421936,
+              "selfMsPerFrame": 0.001428571343421936,
+              "totalMsPerCall": 0.001063829723824846,
+              "callsPerHold": 1
+            },
+            "restWrists": {
+              "calls": 164,
+              "totalMsPerFrame": 0.004285714881760733,
+              "selfMsPerFrame": 0.004285714881760733,
+              "totalMsPerCall": 0.001829268547092996,
+              "callsPerHold": 1.7446808510638299
+            },
+            "holdHand": {
+              "calls": 188,
+              "totalMsPerFrame": 0.7500000025544847,
+              "selfMsPerFrame": 0.4171428582498005,
+              "totalMsPerCall": 0.27925532010007414,
+              "callsPerHold": 2
+            },
+            "holdShoulderIK": {
+              "calls": 732,
+              "totalMsPerFrame": 0.29000000187328884,
+              "selfMsPerFrame": 0.29000000187328884,
+              "totalMsPerCall": 0.02773224061629811,
+              "callsPerHold": 7.787234042553192
+            }
+          }
+        }
+      ]
+    },
+    {
+      "pair": true,
+      "phases": [
+        {
+          "fire": false,
+          "frames": 524,
+          "holdCalls": 524,
+          "parts": {
+            "holdWeapon": {
+              "calls": 524,
+              "totalMsPerFrame": 1.8793893129429744,
+              "selfMsPerFrame": 0.4225190836964673,
+              "totalMsPerCall": 1.8793893129429744,
+              "callsPerHold": 1
+            },
+            "hold.playerFullMatrix": {
+              "calls": 524,
+              "totalMsPerFrame": 0.49293893143420914,
+              "selfMsPerFrame": 0.49293893143420914,
+              "totalMsPerCall": 0.49293893143420914,
+              "callsPerHold": 1
+            },
+            "poseHands": {
+              "calls": 524,
+              "totalMsPerFrame": 0.012213740412515538,
+              "selfMsPerFrame": 0.012213740412515538,
+              "totalMsPerCall": 0.012213740412515538,
+              "callsPerHold": 1
+            },
+            "shoulderRoll": {
+              "calls": 524,
+              "totalMsPerFrame": 0.0009541984732824427,
+              "selfMsPerFrame": 0.0009541984732824427,
+              "totalMsPerCall": 0.0009541984732824427,
+              "callsPerHold": 1
+            },
+            "cheekWeldReset": {
+              "calls": 524,
+              "totalMsPerFrame": 0.00038167936656311266,
+              "selfMsPerFrame": 0.00038167936656311266,
+              "totalMsPerCall": 0.00038167936656311266,
+              "callsPerHold": 1
+            },
+            "restWrists": {
+              "calls": 1048,
+              "totalMsPerFrame": 0.0040076335764113276,
+              "selfMsPerFrame": 0.0040076335764113276,
+              "totalMsPerCall": 0.0020038167882056638,
+              "callsPerHold": 2
+            },
+            "holdHand": {
+              "calls": 1048,
+              "totalMsPerFrame": 0.9452290078269616,
+              "selfMsPerFrame": 0.3664122137973327,
+              "totalMsPerCall": 0.4726145039134808,
+              "callsPerHold": 2
+            },
+            "holdShoulderIK": {
+              "calls": 4192,
+              "totalMsPerFrame": 0.5274809158144106,
+              "selfMsPerFrame": 0.5274809158144106,
+              "totalMsPerCall": 0.06593511447680132,
+              "callsPerHold": 8
+            }
+          }
+        },
+        {
+          "fire": true,
+          "frames": 94,
+          "holdCalls": 142,
+          "parts": {
+            "holdWeapon": {
+              "calls": 142,
+              "totalMsPerFrame": 2.4361702118148196,
+              "selfMsPerFrame": 0.5382978722770163,
+              "totalMsPerCall": 1.6126760557084017,
+              "callsPerHold": 1
+            },
+            "hold.playerFullMatrix": {
+              "calls": 142,
+              "totalMsPerFrame": 0.6138297880583621,
+              "selfMsPerFrame": 0.6138297880583621,
+              "totalMsPerCall": 0.40633802871469044,
+              "callsPerHold": 1
+            },
+            "poseHands": {
+              "calls": 142,
+              "totalMsPerFrame": 0.012765957319990117,
+              "selfMsPerFrame": 0.012765957319990117,
+              "totalMsPerCall": 0.00845070414140191,
+              "callsPerHold": 1
+            },
+            "shoulderRoll": {
+              "calls": 142,
+              "totalMsPerFrame": 0,
+              "selfMsPerFrame": 0,
+              "totalMsPerCall": 0,
+              "callsPerHold": 1
+            },
+            "cheekWeldReset": {
+              "calls": 142,
+              "totalMsPerFrame": 0,
+              "selfMsPerFrame": 0,
+              "totalMsPerCall": 0,
+              "callsPerHold": 1
+            },
+            "restWrists": {
+              "calls": 236,
+              "totalMsPerFrame": 0.004255318895299384,
+              "selfMsPerFrame": 0.004255318895299384,
+              "totalMsPerCall": 0.0016949151532124665,
+              "callsPerHold": 1.6619718309859155
+            },
+            "holdHand": {
+              "calls": 284,
+              "totalMsPerFrame": 1.2680851049879764,
+              "selfMsPerFrame": 0.4521276589403761,
+              "totalMsPerCall": 0.4197183093974288,
+              "callsPerHold": 2
+            },
+            "holdShoulderIK": {
+              "calls": 1136,
+              "totalMsPerFrame": 0.7585106374735527,
+              "selfMsPerFrame": 0.7585106374735527,
+              "totalMsPerCall": 0.06276408443883272,
+              "callsPerHold": 8
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

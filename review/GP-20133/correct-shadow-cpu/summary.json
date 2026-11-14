@@ -1,0 +1,5283 @@
+{
+  "scope": "Diagnostic CPU+phase profiling, NOT acceptance. Historical inclusive aggregation counts recursive function appearances repeatedly: use unique-stack-summary.json for inclusive percentages. Self samples and phase timing retain their original values. Profiler overhead and postphase polling retained.",
+  "indexHash": "798ae744e736f203dc587b48ee4e4e588497ec52261fca18321f72a0c57e710c",
+  "sourceUnchanged": true,
+  "modulesUnchanged": true,
+  "errors": [],
+  "rows": [
+    {
+      "pass": 0,
+      "fire": false,
+      "before": {
+        "phase": "prep",
+        "day": 1,
+        "ammo": 24,
+        "zombies": 2,
+        "paused": false,
+        "warmPending": false,
+        "showPerf": true,
+        "flightHold": false,
+        "hidden": false,
+        "focus": true,
+        "now": 31617.19999998808
+      },
+      "after": {
+        "phase": "prep",
+        "day": 1,
+        "ammo": 24,
+        "zombies": 2,
+        "paused": false,
+        "warmPending": false,
+        "showPerf": true,
+        "flightHold": false,
+        "hidden": false,
+        "focus": true,
+        "now": 37016.80000001192
+      },
+      "profileWindowMs": 5297.771000000009,
+      "self": [
+        {
+          "name": "(program) :0",
+          "ms": 806.7680000000003,
+          "percent": 15.228442301488663
+        },
+        {
+          "name": "updateMatrixWorld three/three.core.js:13980",
+          "ms": 565.8060000000002,
+          "percent": 10.680076583151653
+        },
+        {
+          "name": "writeBuffer :0",
+          "ms": 208.10999999999987,
+          "percent": 3.928255864589079
+        },
+        {
+          "name": "_renderObjectDirect three/three.webgpu.js:52263",
+          "ms": 168.65300000000002,
+          "percent": 3.18347093522917
+        },
+        {
+          "name": "updateByType three/three.webgpu.js:52796",
+          "ms": 160.75500000000002,
+          "percent": 3.0343893686608907
+        },
+        {
+          "name": "updateWorldMatrix three/three.core.js:14027",
+          "ms": 154.616,
+          "percent": 2.9185104452419663
+        },
+        {
+          "name": "updateForRender three/three.webgpu.js:47227",
+          "ms": 150.00399999999996,
+          "percent": 2.8314549647389384
+        },
+        {
+          "name": "_projectObject three/three.webgpu.js:51929",
+          "ms": 147.90800000000002,
+          "percent": 2.7918911557332273
+        },
+        {
+          "name": "multiplyMatrices three/three.core.js:11564",
+          "ms": 125.85100000000001,
+          "percent": 2.375546243882565
+        },
+        {
+          "name": "sceneCull 127.0.0.1:18535/index.html:2342",
+          "ms": 116.28799999999995,
+          "percent": 2.195036365294003
+        },
+        {
+          "name": "needsRenderUpdate three/three.webgpu.js:69618",
+          "ms": 86.192,
+          "percent": 1.6269483901814525
+        },
+        {
+          "name": "setVertexBuffer :0",
+          "ms": 82.74800000000002,
+          "percent": 1.561939917750312
+        },
+        {
+          "name": "draw three/three.webgpu.js:69345",
+          "ms": 82.24400000000001,
+          "percent": 1.5524264827603889
+        },
+        {
+          "name": "update three/three.webgpu.js:14947",
+          "ms": 80.42099999999999,
+          "percent": 1.5180157843742181
+        },
+        {
+          "name": "toArray three/three.core.js:12264",
+          "ms": 74.881,
+          "percent": 1.413443502937365
+        },
+        {
+          "name": "setBindGroup :0",
+          "ms": 72.29199999999999,
+          "percent": 1.3645738934355576
+        },
+        {
+          "name": "get three/three.webgpu.js:26002",
+          "ms": 67.90199999999999,
+          "percent": 1.2817088545352353
+        },
+        {
+          "name": "bend studio/marine-cloth.js:64",
+          "ms": 64.861,
+          "percent": 1.2243073549234178
+        }
+      ],
+      "inclusive": [
+        {
+          "name": "(root) :0",
+          "ms": 5297.771000000009,
+          "percent": 100
+        },
+        {
+          "name": "_renderScene three/three.webgpu.js:50617",
+          "ms": 5243.571999999995,
+          "percent": 98.97694709718458
+        },
+        {
+          "name": "_renderObjects three/three.webgpu.js:52128",
+          "ms": 4851.926999999997,
+          "percent": 91.58430970308058
+        },
+        {
+          "name": "renderObject three/three.webgpu.js:52154",
+          "ms": 4705.861000000007,
+          "percent": 88.82718788713214
+        },
+        {
+          "name": "_renderObjectDirect three/three.webgpu.js:52263",
+          "ms": 4683.938000000007,
+          "percent": 88.41337234093356
+        },
+        {
+          "name": "update three/three.webgpu.js:24925",
+          "ms": 4474.9240000000045,
+          "percent": 84.4680526961244
+        },
+        {
+          "name": "tick 127.0.0.1:18535/index.html:68750",
+          "ms": 4448.480000000005,
+          "percent": 83.96889937296267
+        },
+        {
+          "name": "filter game/viewmodel.js:190",
+          "ms": 4361.241000000004,
+          "percent": 82.3221879541414
+        },
+        {
+          "name": "updateMatrixWorld three/three.core.js:13980",
+          "ms": 3720.916000000007,
+          "percent": 70.23550093048568
+        },
+        {
+          "name": "updateBefore three/three.webgpu.js:47168",
+          "ms": 2889.8179999999975,
+          "percent": 54.54780888037616
+        },
+        {
+          "name": "updateBeforeNode three/three.webgpu.js:45477",
+          "ms": 2883.398999999998,
+          "percent": 54.42664471529617
+        },
+        {
+          "name": "renderFrame 127.0.0.1:18535/index.html:2526",
+          "ms": 2809.195999999999,
+          "percent": 53.02599904752385
+        },
+        {
+          "name": "render three/three.webgpu.js:70670",
+          "ms": 2385.792999999998,
+          "percent": 45.03390199387618
+        },
+        {
+          "name": "updateBefore three/three.webgpu.js:33703",
+          "ms": 2195.2009999999987,
+          "percent": 41.43631349863924
+        },
+        {
+          "name": "updateWorldMatrix three/three.core.js:14027",
+          "ms": 1155.7999999999963,
+          "percent": 21.81672254236724
+        },
+        {
+          "name": "_projectObject three/three.webgpu.js:51929",
+          "ms": 1027.7440000000015,
+          "percent": 19.39955502040386
+        },
+        {
+          "name": "(program) :0",
+          "ms": 806.7680000000003,
+          "percent": 15.228442301488663
+        },
+        {
+          "name": "holdWeapon 127.0.0.1:18535/index.html:56333",
+          "ms": 591.1390000000001,
+          "percent": 11.158258822436816
+        }
+      ],
+      "phases": {
+        "frames": 249,
+        "phases": [
+          {
+            "k": "r:render",
+            "avg": 9.658,
+            "max": 20.5
+          },
+          {
+            "k": "m:hold",
+            "avg": 2.389,
+            "max": 5
+          },
+          {
+            "k": "r:matrices",
+            "avg": 1.057,
+            "max": 2.5
+          },
+          {
+            "k": "m:pose",
+            "avg": 0.869,
+            "max": 3.3
+          },
+          {
+            "k": "w:treeFall+leaves+batches",
+            "avg": 0.476,
+            "max": 1.3
+          },
+          {
+            "k": "r:cull",
+            "avg": 0.457,
+            "max": 1.9
+          },
+          {
+            "k": "viewmodel",
+            "avg": 0.396,
+            "max": 1.1
+          },
+          {
+            "k": "aim+climb",
+            "avg": 0.352,
+            "max": 1.1
+          },
+          {
+            "k": "zombies",
+            "avg": 0.346,
+            "max": 10.9
+          },
+          {
+            "k": "w:minimap",
+            "avg": 0.235,
+            "max": 1.6
+          },
+          {
+            "k": "waves",
+            "avg": 0.198,
+            "max": 0.8
+          },
+          {
+            "k": "effects",
+            "avg": 0.193,
+            "max": 0.9
+          },
+          {
+            "k": "w:stairs+roof+birds+bugs+wildlife",
+            "avg": 0.167,
+            "max": 0.5
+          },
+          {
+            "k": "r:rigSkin",
+            "avg": 0.159,
+            "max": 1.3
+          },
+          {
+            "k": "w:treeFade+sway",
+            "avg": 0.152,
+            "max": 1.2
+          },
+          {
+            "k": "drops+hud",
+            "avg": 0.147,
+            "max": 1.2
+          },
+          {
+            "k": "hud+audio",
+            "avg": 0.133,
+            "max": 0.5
+          },
+          {
+            "k": "w:wind",
+            "avg": 0.091,
+            "max": 0.8
+          },
+          {
+            "k": "daynight",
+            "avg": 0.074,
+            "max": 0.2
+          },
+          {
+            "k": "m:reload+knife",
+            "avg": 0.071,
+            "max": 0.2
+          },
+          {
+            "k": "w:weather+lightning+clouds",
+            "avg": 0.056,
+            "max": 0.4
+          },
+          {
+            "k": "marine",
+            "avg": 0.051,
+            "max": 12
+          },
+          {
+            "k": "camera",
+            "avg": 0.043,
+            "max": 0.2
+          },
+          {
+            "k": "w:motes+flame+ripples+life",
+            "avg": 0.04,
+            "max": 0.4
+          },
+          {
+            "k": "idle+gear",
+            "avg": 0.039,
+            "max": 0.2
+          },
+          {
+            "k": "tree+deck coll",
+            "avg": 0.039,
+            "max": 0.4
+          },
+          {
+            "k": "move",
+            "avg": 0.027,
+            "max": 0.1
+          },
+          {
+            "k": "w:banner..normals",
+            "avg": 0.02,
+            "max": 0.2
+          },
+          {
+            "k": "m:reticle+ghost",
+            "avg": 0.018,
+            "max": 0.2
+          },
+          {
+            "k": "r:lightPool",
+            "avg": 0.018,
+            "max": 1.1
+          },
+          {
+            "k": "m:mortar+carry",
+            "avg": 0.014,
+            "max": 0.1
+          },
+          {
+            "k": "fires+smoke",
+            "avg": 0.014,
+            "max": 0.3
+          },
+          {
+            "k": "combat misc",
+            "avg": 0.012,
+            "max": 0.1
+          },
+          {
+            "k": "ground+clamp",
+            "avg": 0.012,
+            "max": 0.1
+          },
+          {
+            "k": "turrets",
+            "avg": 0.01,
+            "max": 0.1
+          },
+          {
+            "k": "jump+guns",
+            "avg": 0.01,
+            "max": 0.1
+          },
+          {
+            "k": "m:hush+roof+kills",
+            "avg": 0.009,
+            "max": 0.1
+          },
+          {
+            "k": "m:idle",
+            "avg": 0.009,
+            "max": 0.1
+          },
+          {
+            "k": "w:doors+traps+shadowLOD",
+            "avg": 0.009,
+            "max": 0.2
+          },
+          {
+            "k": "m:lasers",
+            "avg": 0.008,
+            "max": 0.1
+          },
+          {
+            "k": "m:fire",
+            "avg": 0.006,
+            "max": 0.1
+          },
+          {
+            "k": "w:foliageCull",
+            "avg": 0.006,
+            "max": 0.1
+          },
+          {
+            "k": "m:hold2+arms",
+            "avg": 0.004,
+            "max": 0.1
+          },
+          {
+            "k": "projectiles",
+            "avg": 0.002,
+            "max": 0.1
+          },
+          {
+            "k": "w:water",
+            "avg": 0.002,
+            "max": 0.1
+          },
+          {
+            "k": "w:rest",
+            "avg": 0.002,
+            "max": 0.1
+          },
+          {
+            "k": "after render",
+            "avg": 0.002,
+            "max": 0.1
+          }
+        ],
+        "spikes": [
+          {
+            "frame": 1,
+            "ms": 24.1,
+            "top": [
+              "r:render 13.2",
+              "m:hold 3.6",
+              "r:matrices 1.3",
+              "m:pose 1.2"
+            ],
+            "heapMB": 785.8,
+            "freedMB": -2
+          },
+          {
+            "frame": 2,
+            "ms": 24.5,
+            "top": [
+              "r:render 12.3",
+              "m:hold 3.0",
+              "w:minimap 1.2",
+              "w:treeFall+leaves+batches 1.1"
+            ],
+            "heapMB": 787.7,
+            "freedMB": -1.8
+          },
+          {
+            "frame": 10,
+            "ms": 24.9,
+            "top": [
+              "r:render 12.7",
+              "m:hold 3.7",
+              "r:matrices 1.5",
+              "m:pose 1.3"
+            ],
+            "heapMB": 794.9,
+            "freedMB": -0.9
+          },
+          {
+            "frame": 11,
+            "ms": 47.1,
+            "top": [
+              "r:render 13.4",
+              "marine 12.0",
+              "zombies 10.9",
+              "m:hold 3.4"
+            ],
+            "heapMB": 779.7,
+            "freedMB": 15.2
+          },
+          {
+            "frame": 61,
+            "ms": 25.1,
+            "top": [
+              "r:render 10.8",
+              "m:hold 4.0",
+              "w:minimap 1.6",
+              "m:pose 1.2"
+            ],
+            "heapMB": 780.5,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 68,
+            "ms": 31.1,
+            "top": [
+              "r:render 14.9",
+              "m:hold 3.9",
+              "m:pose 3.3",
+              "r:matrices 2.0"
+            ],
+            "heapMB": 785,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 69,
+            "ms": 36.1,
+            "top": [
+              "r:render 20.5",
+              "m:hold 3.6",
+              "r:matrices 2.5",
+              "m:pose 1.5"
+            ],
+            "heapMB": 785.7,
+            "freedMB": -0.7
+          },
+          {
+            "frame": 103,
+            "ms": 24.7,
+            "top": [
+              "r:render 11.5",
+              "m:hold 4.9",
+              "m:pose 2.2",
+              "r:matrices 1.2"
+            ],
+            "heapMB": 807.8,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 104,
+            "ms": 26.2,
+            "top": [
+              "r:render 12.6",
+              "m:hold 3.5",
+              "r:matrices 1.9",
+              "w:treeFall+leaves+batches 1.3"
+            ],
+            "heapMB": 774.8,
+            "freedMB": 33
+          },
+          {
+            "frame": 107,
+            "ms": 24.8,
+            "top": [
+              "r:render 10.8",
+              "m:hold 3.5",
+              "r:matrices 1.8",
+              "m:pose 1.4"
+            ],
+            "heapMB": 776.7,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 109,
+            "ms": 27.8,
+            "top": [
+              "r:render 16.0",
+              "m:hold 3.1",
+              "r:matrices 1.7",
+              "m:pose 1.1"
+            ],
+            "heapMB": 778,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 200,
+            "ms": 27,
+            "top": [
+              "r:render 12.2",
+              "m:hold 3.5",
+              "m:pose 2.4",
+              "r:matrices 1.8"
+            ],
+            "heapMB": 802.4,
+            "freedMB": -0.6
+          }
+        ]
+      }
+    },
+    {
+      "pass": 0,
+      "fire": true,
+      "before": {
+        "phase": "prep",
+        "day": 1,
+        "ammo": 24,
+        "zombies": 2,
+        "paused": false,
+        "warmPending": false,
+        "showPerf": true,
+        "flightHold": false,
+        "hidden": false,
+        "focus": true,
+        "now": 38831
+      },
+      "after": {
+        "phase": "prep",
+        "day": 1,
+        "ammo": 0,
+        "zombies": 2,
+        "paused": false,
+        "warmPending": false,
+        "showPerf": true,
+        "flightHold": false,
+        "hidden": false,
+        "focus": true,
+        "now": 40098.90000000596
+      },
+      "profileWindowMs": 1180.4919999999986,
+      "self": [
+        {
+          "name": "(program) :0",
+          "ms": 282.8380000000002,
+          "percent": 23.95933221063764
+        },
+        {
+          "name": "updateMatrixWorld three/three.core.js:13980",
+          "ms": 142.466,
+          "percent": 12.06835793889329
+        },
+        {
+          "name": "updateProjectiles 127.0.0.1:18535/index.html:60940",
+          "ms": 62.16399999999996,
+          "percent": 5.265939964015007
+        },
+        {
+          "name": "writeBuffer :0",
+          "ms": 48.28900000000001,
+          "percent": 4.090582570656986
+        },
+        {
+          "name": "_renderObjectDirect three/three.webgpu.js:52263",
+          "ms": 32.998,
+          "percent": 2.795275190344368
+        },
+        {
+          "name": "updateByType three/three.webgpu.js:52796",
+          "ms": 31.435000000000002,
+          "percent": 2.6628727683033886
+        },
+        {
+          "name": "multiplyMatrices three/three.core.js:11564",
+          "ms": 21.207,
+          "percent": 1.7964543597076497
+        },
+        {
+          "name": "updateWorldMatrix three/three.core.js:14027",
+          "ms": 18.854000000000003,
+          "percent": 1.5971306878826816
+        },
+        {
+          "name": "_projectObject three/three.webgpu.js:51929",
+          "ms": 18.765,
+          "percent": 1.589591458476637
+        },
+        {
+          "name": "setBindGroup :0",
+          "ms": 16.375,
+          "percent": 1.3871335002693808
+        },
+        {
+          "name": "intersectsObject three/three.core.js:26138",
+          "ms": 15.974,
+          "percent": 1.3531646127207995
+        },
+        {
+          "name": "set three/three.webgpu.js:3074",
+          "ms": 13.955999999999998,
+          "percent": 1.1822189392219526
+        },
+        {
+          "name": "updateForRender three/three.webgpu.js:27628",
+          "ms": 12.725999999999999,
+          "percent": 1.0780250946215657
+        },
+        {
+          "name": "setVertexBuffer :0",
+          "ms": 12.671,
+          "percent": 1.0733660202695159
+        },
+        {
+          "name": "_update three/three.webgpu.js:27681",
+          "ms": 12.564,
+          "percent": 1.06430200289371
+        },
+        {
+          "name": "update three/three.webgpu.js:14947",
+          "ms": 12.254,
+          "percent": 1.0380417656367018
+        },
+        {
+          "name": "getBoundingClientRect :0",
+          "ms": 11.642999999999999,
+          "percent": 0.9862836851075665
+        },
+        {
+          "name": "get three/three.webgpu.js:26002",
+          "ms": 10.917000000000002,
+          "percent": 0.924783903660509
+        }
+      ],
+      "inclusive": [
+        {
+          "name": "(root) :0",
+          "ms": 1180.4919999999986,
+          "percent": 100
+        },
+        {
+          "name": "updateMatrixWorld three/three.core.js:13980",
+          "ms": 915.5979999999987,
+          "percent": 77.56071197432934
+        },
+        {
+          "name": "_renderScene three/three.webgpu.js:50617",
+          "ms": 907.9730000000017,
+          "percent": 76.91479484824994
+        },
+        {
+          "name": "update three/three.webgpu.js:24925",
+          "ms": 892.178,
+          "percent": 75.57679340478386
+        },
+        {
+          "name": "tick 127.0.0.1:18535/index.html:68750",
+          "ms": 888.9559999999999,
+          "percent": 75.3038563581965
+        },
+        {
+          "name": "_renderObjects three/three.webgpu.js:52128",
+          "ms": 846.9330000000015,
+          "percent": 71.74406942190227
+        },
+        {
+          "name": "renderObject three/three.webgpu.js:52154",
+          "ms": 821.7510000000015,
+          "percent": 69.61089105220556
+        },
+        {
+          "name": "_renderObjectDirect three/three.webgpu.js:52263",
+          "ms": 813.9180000000014,
+          "percent": 68.94735415403089
+        },
+        {
+          "name": "filter game/viewmodel.js:190",
+          "ms": 757.5110000000011,
+          "percent": 64.16909220901132
+        },
+        {
+          "name": "updateBeforeNode three/three.webgpu.js:45477",
+          "ms": 506.895,
+          "percent": 42.93929988513269
+        },
+        {
+          "name": "updateBefore three/three.webgpu.js:47168",
+          "ms": 506.895,
+          "percent": 42.93929988513269
+        },
+        {
+          "name": "renderFrame 127.0.0.1:18535/index.html:2526",
+          "ms": 477.60199999999986,
+          "percent": 40.45787688523094
+        },
+        {
+          "name": "render three/three.webgpu.js:70670",
+          "ms": 410.5770000000001,
+          "percent": 34.78015945893751
+        },
+        {
+          "name": "updateBefore three/three.webgpu.js:33703",
+          "ms": 385.57800000000003,
+          "percent": 32.66248310026671
+        },
+        {
+          "name": "(program) :0",
+          "ms": 282.8380000000002,
+          "percent": 23.95933221063764
+        },
+        {
+          "name": "holdWeapon 127.0.0.1:18535/index.html:56333",
+          "ms": 153.03599999999997,
+          "percent": 12.9637473189145
+        },
+        {
+          "name": "updateWorldMatrix three/three.core.js:14027",
+          "ms": 125.01299999999998,
+          "percent": 10.58990658132373
+        },
+        {
+          "name": "_projectObject three/three.webgpu.js:51929",
+          "ms": 109.73600000000006,
+          "percent": 9.295785147209823
+        }
+      ],
+      "phases": {
+        "frames": 37,
+        "phases": [
+          {
+            "k": "r:render",
+            "avg": 11.63,
+            "max": 16.5
+          },
+          {
+            "k": "m:hold",
+            "avg": 2.603,
+            "max": 4.7
+          },
+          {
+            "k": "m:hold2+arms",
+            "avg": 1.643,
+            "max": 3.8
+          },
+          {
+            "k": "projectiles",
+            "avg": 1.546,
+            "max": 6
+          },
+          {
+            "k": "r:matrices",
+            "avg": 1.319,
+            "max": 2.6
+          },
+          {
+            "k": "m:pose",
+            "avg": 0.784,
+            "max": 1.9
+          },
+          {
+            "k": "w:treeFall+leaves+batches",
+            "avg": 0.605,
+            "max": 2.5
+          },
+          {
+            "k": "viewmodel",
+            "avg": 0.597,
+            "max": 1.9
+          },
+          {
+            "k": "r:cull",
+            "avg": 0.516,
+            "max": 1
+          },
+          {
+            "k": "m:fire",
+            "avg": 0.481,
+            "max": 4
+          },
+          {
+            "k": "aim+climb",
+            "avg": 0.47,
+            "max": 0.8
+          },
+          {
+            "k": "zombies",
+            "avg": 0.435,
+            "max": 4.3
+          },
+          {
+            "k": "w:minimap",
+            "avg": 0.395,
+            "max": 2.1
+          },
+          {
+            "k": "effects",
+            "avg": 0.289,
+            "max": 0.6
+          },
+          {
+            "k": "waves",
+            "avg": 0.214,
+            "max": 0.6
+          },
+          {
+            "k": "hud+audio",
+            "avg": 0.205,
+            "max": 0.7
+          },
+          {
+            "k": "w:stairs+roof+birds+bugs+wildlife",
+            "avg": 0.205,
+            "max": 0.5
+          },
+          {
+            "k": "drops+hud",
+            "avg": 0.162,
+            "max": 0.6
+          },
+          {
+            "k": "r:rigSkin",
+            "avg": 0.159,
+            "max": 0.3
+          },
+          {
+            "k": "w:treeFade+sway",
+            "avg": 0.138,
+            "max": 0.4
+          },
+          {
+            "k": "w:wind",
+            "avg": 0.127,
+            "max": 0.4
+          },
+          {
+            "k": "daynight",
+            "avg": 0.095,
+            "max": 0.2
+          },
+          {
+            "k": "m:reload+knife",
+            "avg": 0.084,
+            "max": 0.2
+          },
+          {
+            "k": "w:weather+lightning+clouds",
+            "avg": 0.059,
+            "max": 0.2
+          },
+          {
+            "k": "camera",
+            "avg": 0.059,
+            "max": 0.2
+          },
+          {
+            "k": "idle+gear",
+            "avg": 0.038,
+            "max": 0.1
+          },
+          {
+            "k": "move",
+            "avg": 0.038,
+            "max": 0.1
+          },
+          {
+            "k": "w:motes+flame+ripples+life",
+            "avg": 0.038,
+            "max": 0.1
+          },
+          {
+            "k": "tree+deck coll",
+            "avg": 0.035,
+            "max": 0.2
+          },
+          {
+            "k": "marine",
+            "avg": 0.027,
+            "max": 1
+          },
+          {
+            "k": "jump+guns",
+            "avg": 0.027,
+            "max": 0.2
+          },
+          {
+            "k": "m:hush+roof+kills",
+            "avg": 0.024,
+            "max": 0.1
+          },
+          {
+            "k": "w:banner..normals",
+            "avg": 0.022,
+            "max": 0.1
+          },
+          {
+            "k": "m:idle",
+            "avg": 0.016,
+            "max": 0.1
+          },
+          {
+            "k": "m:reticle+ghost",
+            "avg": 0.016,
+            "max": 0.1
+          },
+          {
+            "k": "ground+clamp",
+            "avg": 0.016,
+            "max": 0.1
+          },
+          {
+            "k": "fires+smoke",
+            "avg": 0.014,
+            "max": 0.1
+          },
+          {
+            "k": "combat misc",
+            "avg": 0.011,
+            "max": 0.1
+          },
+          {
+            "k": "w:foliageCull",
+            "avg": 0.011,
+            "max": 0.1
+          },
+          {
+            "k": "turrets",
+            "avg": 0.008,
+            "max": 0.1
+          },
+          {
+            "k": "w:doors+traps+shadowLOD",
+            "avg": 0.008,
+            "max": 0.1
+          },
+          {
+            "k": "after render",
+            "avg": 0.005,
+            "max": 0.1
+          },
+          {
+            "k": "m:mortar+carry",
+            "avg": 0.003,
+            "max": 0.1
+          },
+          {
+            "k": "m:lasers",
+            "avg": 0,
+            "max": 0
+          },
+          {
+            "k": "w:water",
+            "avg": 0,
+            "max": 0
+          },
+          {
+            "k": "w:rest",
+            "avg": 0,
+            "max": 0
+          },
+          {
+            "k": "r:lightPool",
+            "avg": 0,
+            "max": 0
+          }
+        ],
+        "spikes": [
+          {
+            "frame": 3,
+            "ms": 36.9,
+            "top": [
+              "r:render 15.2",
+              "m:fire 4.0",
+              "m:hold2+arms 3.8",
+              "m:hold 3.6"
+            ],
+            "heapMB": 783.6,
+            "freedMB": -1.3
+          },
+          {
+            "frame": 4,
+            "ms": 27.4,
+            "top": [
+              "r:render 13.2",
+              "m:hold 2.5",
+              "m:hold2+arms 2.4",
+              "m:pose 1.5"
+            ],
+            "heapMB": 785.3,
+            "freedMB": -1.7
+          },
+          {
+            "frame": 5,
+            "ms": 29.4,
+            "top": [
+              "r:render 10.5",
+              "m:hold2+arms 3.1",
+              "m:hold 2.8",
+              "m:pose 1.8"
+            ],
+            "heapMB": 787.4,
+            "freedMB": -2.1
+          },
+          {
+            "frame": 6,
+            "ms": 25,
+            "top": [
+              "r:render 11.0",
+              "m:hold 3.1",
+              "m:hold2+arms 2.5",
+              "projectiles 1.7"
+            ],
+            "heapMB": 794,
+            "freedMB": -6.6
+          },
+          {
+            "frame": 7,
+            "ms": 27.8,
+            "top": [
+              "r:render 11.5",
+              "zombies 2.7",
+              "m:hold 2.4",
+              "m:hold2+arms 1.8"
+            ],
+            "heapMB": 795.4,
+            "freedMB": -1.4
+          },
+          {
+            "frame": 8,
+            "ms": 25.4,
+            "top": [
+              "r:render 12.6",
+              "m:hold 2.8",
+              "m:hold2+arms 2.3",
+              "r:matrices 1.8"
+            ],
+            "heapMB": 796.9,
+            "freedMB": -1.5
+          },
+          {
+            "frame": 9,
+            "ms": 28.1,
+            "top": [
+              "r:render 13.0",
+              "m:hold 3.0",
+              "m:hold2+arms 2.8",
+              "r:matrices 1.3"
+            ],
+            "heapMB": 798.4,
+            "freedMB": -1.5
+          },
+          {
+            "frame": 10,
+            "ms": 25.3,
+            "top": [
+              "r:render 11.3",
+              "m:hold 2.4",
+              "projectiles 2.3",
+              "m:hold2+arms 1.8"
+            ],
+            "heapMB": 801.6,
+            "freedMB": -3.2
+          },
+          {
+            "frame": 18,
+            "ms": 25.2,
+            "top": [
+              "r:render 10.4",
+              "m:hold 4.0",
+              "m:hold2+arms 2.8",
+              "projectiles 1.2"
+            ],
+            "heapMB": 782.6,
+            "freedMB": -1.9
+          },
+          {
+            "frame": 23,
+            "ms": 27.5,
+            "top": [
+              "r:render 13.7",
+              "m:hold 3.4",
+              "m:hold2+arms 3.1",
+              "r:matrices 1.1"
+            ],
+            "heapMB": 790.6,
+            "freedMB": -2
+          },
+          {
+            "frame": 24,
+            "ms": 36.6,
+            "top": [
+              "r:render 14.5",
+              "m:hold 4.7",
+              "zombies 3.3",
+              "m:hold2+arms 3.0"
+            ],
+            "heapMB": 793.2,
+            "freedMB": -2.6
+          },
+          {
+            "frame": 25,
+            "ms": 31.8,
+            "top": [
+              "r:render 16.5",
+              "m:hold 2.7",
+              "m:hold2+arms 2.5",
+              "r:matrices 1.8"
+            ],
+            "heapMB": 794.6,
+            "freedMB": -1.4
+          },
+          {
+            "frame": 26,
+            "ms": 28.9,
+            "top": [
+              "r:render 12.3",
+              "m:hold 3.0",
+              "m:hold2+arms 2.5",
+              "projectiles 2.5"
+            ],
+            "heapMB": 798.4,
+            "freedMB": -3.8
+          },
+          {
+            "frame": 27,
+            "ms": 31.3,
+            "top": [
+              "r:render 13.3",
+              "projectiles 5.7",
+              "m:hold 2.5",
+              "m:hold2+arms 2.1"
+            ],
+            "heapMB": 805.3,
+            "freedMB": -6.9
+          },
+          {
+            "frame": 28,
+            "ms": 27.9,
+            "top": [
+              "r:render 11.1",
+              "projectiles 4.9",
+              "m:hold 2.2",
+              "m:hold2+arms 1.9"
+            ],
+            "heapMB": 810.1,
+            "freedMB": -4.8
+          },
+          {
+            "frame": 29,
+            "ms": 34.1,
+            "top": [
+              "r:render 13.6",
+              "projectiles 6.0",
+              "m:hold 2.5",
+              "m:hold2+arms 2.5"
+            ],
+            "heapMB": 783.4,
+            "freedMB": 26.7
+          },
+          {
+            "frame": 30,
+            "ms": 28.7,
+            "top": [
+              "r:render 12.1",
+              "projectiles 2.6",
+              "w:treeFall+leaves+batches 2.5",
+              "m:hold2+arms 2.3"
+            ],
+            "heapMB": 787.6,
+            "freedMB": -4.2
+          },
+          {
+            "frame": 31,
+            "ms": 24.6,
+            "top": [
+              "r:render 12.4",
+              "m:hold2+arms 2.2",
+              "m:hold 1.8",
+              "projectiles 1.0"
+            ],
+            "heapMB": 789.9,
+            "freedMB": -2.4
+          },
+          {
+            "frame": 32,
+            "ms": 26.4,
+            "top": [
+              "r:render 12.1",
+              "m:hold 3.3",
+              "w:minimap 2.1",
+              "projectiles 1.3"
+            ],
+            "heapMB": 792.1,
+            "freedMB": -2.2
+          },
+          {
+            "frame": 33,
+            "ms": 24.8,
+            "top": [
+              "r:render 13.8",
+              "m:hold 2.9",
+              "r:matrices 2.2",
+              "projectiles 0.8"
+            ],
+            "heapMB": 793.8,
+            "freedMB": -1.7
+          },
+          {
+            "frame": 34,
+            "ms": 25.6,
+            "top": [
+              "r:render 13.9",
+              "m:hold 3.1",
+              "r:matrices 1.3",
+              "w:minimap 1.0"
+            ],
+            "heapMB": 795.7,
+            "freedMB": -2
+          }
+        ]
+      }
+    },
+    {
+      "pass": 1,
+      "fire": false,
+      "before": {
+        "phase": "prep",
+        "day": 1,
+        "ammo": 24,
+        "zombies": 2,
+        "paused": false,
+        "warmPending": false,
+        "showPerf": true,
+        "flightHold": false,
+        "hidden": false,
+        "focus": true,
+        "now": 43728.30000001192
+      },
+      "after": {
+        "phase": "prep",
+        "day": 1,
+        "ammo": 24,
+        "zombies": 2,
+        "paused": false,
+        "warmPending": false,
+        "showPerf": true,
+        "flightHold": false,
+        "hidden": false,
+        "focus": true,
+        "now": 48826.30000001192
+      },
+      "profileWindowMs": 4997.801000000002,
+      "self": [
+        {
+          "name": "updateMatrixWorld three/three.core.js:13980",
+          "ms": 626.551,
+          "percent": 12.536533567462966
+        },
+        {
+          "name": "(program) :0",
+          "ms": 422.15199999999965,
+          "percent": 8.446754882797444
+        },
+        {
+          "name": "_renderObjectDirect three/three.webgpu.js:52263",
+          "ms": 188.07999999999984,
+          "percent": 3.7632550795839963
+        },
+        {
+          "name": "writeBuffer :0",
+          "ms": 175.02600000000004,
+          "percent": 3.502060206078632
+        },
+        {
+          "name": "updateWorldMatrix three/three.core.js:14027",
+          "ms": 164.55700000000002,
+          "percent": 3.292588080237687
+        },
+        {
+          "name": "updateByType three/three.webgpu.js:52796",
+          "ms": 163.44599999999994,
+          "percent": 3.270358303581913
+        },
+        {
+          "name": "_projectObject three/three.webgpu.js:51929",
+          "ms": 157.94700000000006,
+          "percent": 3.1603299130957794
+        },
+        {
+          "name": "multiplyMatrices three/three.core.js:11564",
+          "ms": 142.4339999999999,
+          "percent": 2.849933400709629
+        },
+        {
+          "name": "updateForRender three/three.webgpu.js:47227",
+          "ms": 141.683,
+          "percent": 2.834906792007123
+        },
+        {
+          "name": "sceneCull 127.0.0.1:18535/index.html:2342",
+          "ms": 106.04000000000002,
+          "percent": 2.1217331382341946
+        },
+        {
+          "name": "setVertexBuffer :0",
+          "ms": 105.65699999999998,
+          "percent": 2.114069767883914
+        },
+        {
+          "name": "intersectsObject three/three.core.js:26138",
+          "ms": 86.00999999999998,
+          "percent": 1.7209568768344308
+        },
+        {
+          "name": "setBindGroup :0",
+          "ms": 77.38000000000001,
+          "percent": 1.5482809339547527
+        },
+        {
+          "name": "get three/three.webgpu.js:26002",
+          "ms": 76.524,
+          "percent": 1.531153401265876
+        },
+        {
+          "name": "needsRenderUpdate three/three.webgpu.js:69618",
+          "ms": 69.44200000000001,
+          "percent": 1.389451080585241
+        },
+        {
+          "name": "update three/three.webgpu.js:14947",
+          "ms": 66.221,
+          "percent": 1.3250027362033818
+        },
+        {
+          "name": "_update three/three.webgpu.js:27681",
+          "ms": 63.531000000000006,
+          "percent": 1.2711790645525898
+        },
+        {
+          "name": "updateTreeBatchesInner 127.0.0.1:18535/index.html:20009",
+          "ms": 59.467,
+          "percent": 1.1898633018801663
+        }
+      ],
+      "inclusive": [
+        {
+          "name": "_renderScene three/three.webgpu.js:50617",
+          "ms": 5371.075000000024,
+          "percent": 107.46876476274309
+        },
+        {
+          "name": "(root) :0",
+          "ms": 4997.801000000002,
+          "percent": 100
+        },
+        {
+          "name": "_renderObjects three/three.webgpu.js:52128",
+          "ms": 4939.556000000009,
+          "percent": 98.83458745156132
+        },
+        {
+          "name": "renderObject three/three.webgpu.js:52154",
+          "ms": 4830.874000000012,
+          "percent": 96.65999106407017
+        },
+        {
+          "name": "_renderObjectDirect three/three.webgpu.js:52263",
+          "ms": 4806.4490000000105,
+          "percent": 96.17127612724093
+        },
+        {
+          "name": "update three/three.webgpu.js:24925",
+          "ms": 4561.639999999992,
+          "percent": 91.27294183982094
+        },
+        {
+          "name": "tick 127.0.0.1:18535/index.html:68750",
+          "ms": 4542.824999999993,
+          "percent": 90.89647627026349
+        },
+        {
+          "name": "filter game/viewmodel.js:190",
+          "ms": 4439.726000000001,
+          "percent": 88.83358901244765
+        },
+        {
+          "name": "updateMatrixWorld three/three.core.js:13980",
+          "ms": 4228.457999999976,
+          "percent": 84.60636988147336
+        },
+        {
+          "name": "updateBefore three/three.webgpu.js:47168",
+          "ms": 2984.7909999999993,
+          "percent": 59.722085773323066
+        },
+        {
+          "name": "updateBeforeNode three/three.webgpu.js:45477",
+          "ms": 2981.2869999999994,
+          "percent": 59.65197493857795
+        },
+        {
+          "name": "renderFrame 127.0.0.1:18535/index.html:2526",
+          "ms": 2866.5779999999972,
+          "percent": 57.35678551426909
+        },
+        {
+          "name": "render three/three.webgpu.js:70670",
+          "ms": 2432.1239999999966,
+          "percent": 48.663882375468646
+        },
+        {
+          "name": "updateBefore three/three.webgpu.js:33703",
+          "ms": 2236.907999999998,
+          "percent": 44.757844500011046
+        },
+        {
+          "name": "updateWorldMatrix three/three.core.js:14027",
+          "ms": 1239.6900000000037,
+          "percent": 24.80470911106711
+        },
+        {
+          "name": "_projectObject three/three.webgpu.js:51929",
+          "ms": 1099.0599999999981,
+          "percent": 21.990871585323177
+        },
+        {
+          "name": "holdWeapon 127.0.0.1:18535/index.html:56333",
+          "ms": 625.9810000000003,
+          "percent": 12.525128551536968
+        },
+        {
+          "name": "updateBefore three/three.webgpu.js:38235",
+          "ms": 575.8090000000001,
+          "percent": 11.521247044450146
+        }
+      ],
+      "phases": {
+        "frames": 192,
+        "phases": [
+          {
+            "k": "r:render",
+            "avg": 12.726,
+            "max": 24.8
+          },
+          {
+            "k": "m:hold",
+            "avg": 3.29,
+            "max": 8.3
+          },
+          {
+            "k": "r:matrices",
+            "avg": 1.493,
+            "max": 5.1
+          },
+          {
+            "k": "m:pose",
+            "avg": 1.21,
+            "max": 3.9
+          },
+          {
+            "k": "r:cull",
+            "avg": 0.631,
+            "max": 2.1
+          },
+          {
+            "k": "w:treeFall+leaves+batches",
+            "avg": 0.608,
+            "max": 2.1
+          },
+          {
+            "k": "viewmodel",
+            "avg": 0.477,
+            "max": 1.1
+          },
+          {
+            "k": "aim+climb",
+            "avg": 0.431,
+            "max": 1.4
+          },
+          {
+            "k": "zombies",
+            "avg": 0.426,
+            "max": 3.8
+          },
+          {
+            "k": "w:minimap",
+            "avg": 0.379,
+            "max": 1.7
+          },
+          {
+            "k": "waves",
+            "avg": 0.252,
+            "max": 1.1
+          },
+          {
+            "k": "effects",
+            "avg": 0.219,
+            "max": 0.4
+          },
+          {
+            "k": "w:treeFade+sway",
+            "avg": 0.214,
+            "max": 0.8
+          },
+          {
+            "k": "r:rigSkin",
+            "avg": 0.205,
+            "max": 1
+          },
+          {
+            "k": "w:stairs+roof+birds+bugs+wildlife",
+            "avg": 0.203,
+            "max": 0.6
+          },
+          {
+            "k": "drops+hud",
+            "avg": 0.178,
+            "max": 1.4
+          },
+          {
+            "k": "hud+audio",
+            "avg": 0.158,
+            "max": 0.3
+          },
+          {
+            "k": "w:wind",
+            "avg": 0.111,
+            "max": 0.3
+          },
+          {
+            "k": "daynight",
+            "avg": 0.093,
+            "max": 0.3
+          },
+          {
+            "k": "m:reload+knife",
+            "avg": 0.084,
+            "max": 1.1
+          },
+          {
+            "k": "camera",
+            "avg": 0.065,
+            "max": 0.3
+          },
+          {
+            "k": "w:weather+lightning+clouds",
+            "avg": 0.059,
+            "max": 0.2
+          },
+          {
+            "k": "w:motes+flame+ripples+life",
+            "avg": 0.055,
+            "max": 1.3
+          },
+          {
+            "k": "tree+deck coll",
+            "avg": 0.051,
+            "max": 0.3
+          },
+          {
+            "k": "idle+gear",
+            "avg": 0.036,
+            "max": 0.2
+          },
+          {
+            "k": "move",
+            "avg": 0.034,
+            "max": 0.2
+          },
+          {
+            "k": "w:banner..normals",
+            "avg": 0.029,
+            "max": 0.2
+          },
+          {
+            "k": "m:reticle+ghost",
+            "avg": 0.028,
+            "max": 0.2
+          },
+          {
+            "k": "combat misc",
+            "avg": 0.017,
+            "max": 0.2
+          },
+          {
+            "k": "fires+smoke",
+            "avg": 0.017,
+            "max": 0.1
+          },
+          {
+            "k": "r:lightPool",
+            "avg": 0.015,
+            "max": 0.7
+          },
+          {
+            "k": "w:doors+traps+shadowLOD",
+            "avg": 0.014,
+            "max": 0.1
+          },
+          {
+            "k": "jump+guns",
+            "avg": 0.013,
+            "max": 0.1
+          },
+          {
+            "k": "ground+clamp",
+            "avg": 0.013,
+            "max": 0.1
+          },
+          {
+            "k": "m:hush+roof+kills",
+            "avg": 0.012,
+            "max": 0.1
+          },
+          {
+            "k": "m:lasers",
+            "avg": 0.011,
+            "max": 0.1
+          },
+          {
+            "k": "m:idle",
+            "avg": 0.01,
+            "max": 0.1
+          },
+          {
+            "k": "w:foliageCull",
+            "avg": 0.01,
+            "max": 0.2
+          },
+          {
+            "k": "m:mortar+carry",
+            "avg": 0.008,
+            "max": 0.1
+          },
+          {
+            "k": "turrets",
+            "avg": 0.008,
+            "max": 0.1
+          },
+          {
+            "k": "m:fire",
+            "avg": 0.006,
+            "max": 0.1
+          },
+          {
+            "k": "m:hold2+arms",
+            "avg": 0.005,
+            "max": 0.3
+          },
+          {
+            "k": "marine",
+            "avg": 0.005,
+            "max": 0.1
+          },
+          {
+            "k": "after render",
+            "avg": 0.004,
+            "max": 0.1
+          },
+          {
+            "k": "projectiles",
+            "avg": 0.003,
+            "max": 0.1
+          },
+          {
+            "k": "w:water",
+            "avg": 0.002,
+            "max": 0.1
+          },
+          {
+            "k": "w:rest",
+            "avg": 0.001,
+            "max": 0.1
+          }
+        ],
+        "spikes": [
+          {
+            "frame": 4,
+            "ms": 25.3,
+            "top": [
+              "r:render 13.3",
+              "m:hold 3.7",
+              "r:matrices 1.6",
+              "m:pose 1.1"
+            ],
+            "heapMB": 793,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 6,
+            "ms": 26.1,
+            "top": [
+              "r:render 13.4",
+              "m:hold 3.5",
+              "m:pose 2.1",
+              "r:matrices 1.5"
+            ],
+            "heapMB": 794.1,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 8,
+            "ms": 27.7,
+            "top": [
+              "r:render 15.7",
+              "m:hold 3.2",
+              "r:matrices 1.8",
+              "m:pose 1.3"
+            ],
+            "heapMB": 795.2,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 12,
+            "ms": 27.5,
+            "top": [
+              "r:render 14.8",
+              "m:hold 4.2",
+              "r:matrices 1.4",
+              "m:pose 1.3"
+            ],
+            "heapMB": 797.5,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 13,
+            "ms": 28.8,
+            "top": [
+              "r:render 12.0",
+              "m:hold 4.3",
+              "r:matrices 2.4",
+              "m:pose 1.2"
+            ],
+            "heapMB": 798,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 14,
+            "ms": 25,
+            "top": [
+              "r:render 13.8",
+              "m:hold 3.6",
+              "r:matrices 1.7",
+              "w:minimap 1.1"
+            ],
+            "heapMB": 798.6,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 17,
+            "ms": 25.5,
+            "top": [
+              "r:render 12.4",
+              "zombies 3.0",
+              "m:hold 2.8",
+              "r:matrices 1.4"
+            ],
+            "heapMB": 800.3,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 24,
+            "ms": 26.2,
+            "top": [
+              "r:render 16.3",
+              "m:hold 2.4",
+              "r:matrices 1.8",
+              "m:pose 0.9"
+            ],
+            "heapMB": 804.3,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 25,
+            "ms": 24.1,
+            "top": [
+              "r:render 11.0",
+              "m:hold 4.6",
+              "m:pose 2.2",
+              "r:matrices 1.6"
+            ],
+            "heapMB": 804.9,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 26,
+            "ms": 25.8,
+            "top": [
+              "r:render 14.3",
+              "m:hold 4.2",
+              "r:matrices 1.3",
+              "r:cull 1.1"
+            ],
+            "heapMB": 805.4,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 28,
+            "ms": 27,
+            "top": [
+              "r:render 13.0",
+              "m:hold 3.9",
+              "w:minimap 1.5",
+              "r:matrices 1.5"
+            ],
+            "heapMB": 806.6,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 30,
+            "ms": 34.8,
+            "top": [
+              "r:render 24.8",
+              "m:hold 2.5",
+              "r:matrices 2.1",
+              "r:cull 1.2"
+            ],
+            "heapMB": 807.8,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 31,
+            "ms": 30,
+            "top": [
+              "r:render 15.6",
+              "m:hold 4.3",
+              "m:pose 2.4",
+              "r:matrices 1.3"
+            ],
+            "heapMB": 808.4,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 33,
+            "ms": 31.5,
+            "top": [
+              "r:render 11.7",
+              "m:hold 5.0",
+              "m:pose 3.9",
+              "zombies 3.8"
+            ],
+            "heapMB": 809.5,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 35,
+            "ms": 26.9,
+            "top": [
+              "r:render 16.6",
+              "m:hold 3.3",
+              "r:matrices 1.2",
+              "w:minimap 1.1"
+            ],
+            "heapMB": 810.6,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 36,
+            "ms": 29.9,
+            "top": [
+              "r:render 16.6",
+              "m:hold 3.5",
+              "r:matrices 3.2",
+              "m:pose 1.6"
+            ],
+            "heapMB": 811.2,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 38,
+            "ms": 25.7,
+            "top": [
+              "r:render 13.5",
+              "m:hold 3.3",
+              "m:pose 1.7",
+              "r:matrices 1.5"
+            ],
+            "heapMB": 812.3,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 39,
+            "ms": 28.5,
+            "top": [
+              "r:render 11.8",
+              "m:hold 4.9",
+              "r:matrices 1.5",
+              "m:pose 1.4"
+            ],
+            "heapMB": 812.9,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 45,
+            "ms": 27,
+            "top": [
+              "r:render 12.2",
+              "m:hold 4.9",
+              "r:matrices 1.6",
+              "w:treeFall+leaves+batches 1.2"
+            ],
+            "heapMB": 783.1,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 48,
+            "ms": 34.2,
+            "top": [
+              "r:render 21.0",
+              "m:hold 4.1",
+              "m:pose 2.0",
+              "r:matrices 1.8"
+            ],
+            "heapMB": 784.7,
+            "freedMB": -0.5
+          },
+          {
+            "frame": 49,
+            "ms": 26.4,
+            "top": [
+              "r:render 11.9",
+              "m:hold 3.4",
+              "zombies 3.3",
+              "r:matrices 1.5"
+            ],
+            "heapMB": 785.4,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 54,
+            "ms": 25.2,
+            "top": [
+              "r:render 12.6",
+              "m:hold 4.1",
+              "m:pose 2.5",
+              "w:minimap 0.9"
+            ],
+            "heapMB": 788.1,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 55,
+            "ms": 26.9,
+            "top": [
+              "r:render 14.4",
+              "m:hold 4.1",
+              "r:matrices 2.0",
+              "m:pose 1.5"
+            ],
+            "heapMB": 788.7,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 57,
+            "ms": 24.7,
+            "top": [
+              "r:render 13.7",
+              "m:hold 2.3",
+              "r:matrices 1.7",
+              "w:minimap 1.1"
+            ],
+            "heapMB": 789.8,
+            "freedMB": -0.5
+          },
+          {
+            "frame": 58,
+            "ms": 29.6,
+            "top": [
+              "r:render 17.6",
+              "m:hold 2.8",
+              "r:matrices 2.3",
+              "m:pose 1.8"
+            ],
+            "heapMB": 790.4,
+            "freedMB": -0.5
+          },
+          {
+            "frame": 59,
+            "ms": 26.8,
+            "top": [
+              "r:render 13.9",
+              "m:hold 4.2",
+              "m:pose 1.5",
+              "r:matrices 1.2"
+            ],
+            "heapMB": 790.9,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 62,
+            "ms": 28.7,
+            "top": [
+              "r:render 16.1",
+              "m:hold 3.8",
+              "r:matrices 1.7",
+              "m:pose 1.1"
+            ],
+            "heapMB": 792.6,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 80,
+            "ms": 30.5,
+            "top": [
+              "r:render 17.6",
+              "m:hold 3.6",
+              "r:matrices 1.9",
+              "w:minimap 1.2"
+            ],
+            "heapMB": 802.6,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 81,
+            "ms": 24.6,
+            "top": [
+              "r:render 13.4",
+              "m:hold 3.2",
+              "m:pose 2.6",
+              "r:matrices 1.6"
+            ],
+            "heapMB": 803.1,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 82,
+            "ms": 26.2,
+            "top": [
+              "r:render 11.6",
+              "m:hold 4.1",
+              "r:matrices 2.2",
+              "m:pose 1.6"
+            ],
+            "heapMB": 803.7,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 84,
+            "ms": 29.9,
+            "top": [
+              "r:render 16.3",
+              "m:hold 3.3",
+              "zombies 3.2",
+              "r:matrices 2.0"
+            ],
+            "heapMB": 804.8,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 90,
+            "ms": 25.2,
+            "top": [
+              "r:render 10.6",
+              "m:hold 4.8",
+              "r:matrices 1.5",
+              "m:pose 1.3"
+            ],
+            "heapMB": 808.2,
+            "freedMB": -0.5
+          },
+          {
+            "frame": 91,
+            "ms": 28.4,
+            "top": [
+              "r:render 14.7",
+              "m:hold 4.2",
+              "r:matrices 2.2",
+              "m:pose 1.3"
+            ],
+            "heapMB": 808.8,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 92,
+            "ms": 34,
+            "top": [
+              "r:render 20.4",
+              "m:hold 6.3",
+              "m:pose 1.6",
+              "r:matrices 1.3"
+            ],
+            "heapMB": 809.4,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 93,
+            "ms": 32.7,
+            "top": [
+              "r:render 16.1",
+              "m:hold 4.5",
+              "r:matrices 2.7",
+              "m:pose 1.7"
+            ],
+            "heapMB": 809.9,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 96,
+            "ms": 25.2,
+            "top": [
+              "r:render 13.8",
+              "m:hold 3.9",
+              "r:matrices 1.6",
+              "r:cull 0.8"
+            ],
+            "heapMB": 811.6,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 97,
+            "ms": 29,
+            "top": [
+              "r:render 19.1",
+              "m:hold 3.7",
+              "m:pose 1.4",
+              "r:matrices 1.0"
+            ],
+            "heapMB": 812.1,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 98,
+            "ms": 28,
+            "top": [
+              "r:render 12.7",
+              "m:hold 4.2",
+              "m:pose 2.0",
+              "w:minimap 1.4"
+            ],
+            "heapMB": 812.7,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 100,
+            "ms": 25.8,
+            "top": [
+              "r:render 10.5",
+              "m:hold 2.9",
+              "zombies 2.9",
+              "r:matrices 2.5"
+            ],
+            "heapMB": 813.8,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 101,
+            "ms": 39.4,
+            "top": [
+              "r:render 17.7",
+              "m:hold 8.3",
+              "r:matrices 2.6",
+              "m:pose 2.2"
+            ],
+            "heapMB": 781.1,
+            "freedMB": 32.7
+          },
+          {
+            "frame": 103,
+            "ms": 26.6,
+            "top": [
+              "r:render 15.8",
+              "m:hold 2.9",
+              "r:matrices 2.0",
+              "m:pose 0.8"
+            ],
+            "heapMB": 782.2,
+            "freedMB": -0.5
+          },
+          {
+            "frame": 104,
+            "ms": 30,
+            "top": [
+              "r:render 15.8",
+              "m:hold 4.0",
+              "r:matrices 2.2",
+              "m:pose 2.0"
+            ],
+            "heapMB": 782.8,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 105,
+            "ms": 26.9,
+            "top": [
+              "r:render 15.3",
+              "m:hold 3.5",
+              "m:pose 1.4",
+              "r:matrices 1.4"
+            ],
+            "heapMB": 783.4,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 106,
+            "ms": 27.1,
+            "top": [
+              "r:render 15.2",
+              "m:hold 3.5",
+              "r:matrices 1.9",
+              "m:pose 1.0"
+            ],
+            "heapMB": 783.9,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 112,
+            "ms": 24.1,
+            "top": [
+              "r:render 13.9",
+              "m:hold 2.4",
+              "m:pose 1.9",
+              "r:matrices 1.8"
+            ],
+            "heapMB": 787.2,
+            "freedMB": -0.5
+          },
+          {
+            "frame": 115,
+            "ms": 26.3,
+            "top": [
+              "r:render 11.8",
+              "m:hold 5.0",
+              "m:pose 2.5",
+              "r:matrices 1.1"
+            ],
+            "heapMB": 788.9,
+            "freedMB": -0.5
+          },
+          {
+            "frame": 120,
+            "ms": 28.4,
+            "top": [
+              "r:render 11.1",
+              "m:hold 7.0",
+              "r:matrices 2.4",
+              "m:pose 1.2"
+            ],
+            "heapMB": 791.6,
+            "freedMB": -0.5
+          },
+          {
+            "frame": 124,
+            "ms": 24.8,
+            "top": [
+              "r:render 12.7",
+              "m:hold 3.5",
+              "r:matrices 2.0",
+              "w:minimap 1.0"
+            ],
+            "heapMB": 793.8,
+            "freedMB": -0.5
+          },
+          {
+            "frame": 126,
+            "ms": 24.7,
+            "top": [
+              "r:render 11.8",
+              "m:hold 3.5",
+              "r:matrices 2.2",
+              "m:pose 1.8"
+            ],
+            "heapMB": 794.9,
+            "freedMB": -0.5
+          },
+          {
+            "frame": 130,
+            "ms": 24.2,
+            "top": [
+              "r:render 12.6",
+              "m:hold 3.9",
+              "m:pose 1.3",
+              "r:matrices 1.2"
+            ],
+            "heapMB": 797.1,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 132,
+            "ms": 26.9,
+            "top": [
+              "r:render 15.8",
+              "m:hold 2.1",
+              "w:treeFall+leaves+batches 2.1",
+              "r:matrices 2.0"
+            ],
+            "heapMB": 798.4,
+            "freedMB": -0.8
+          },
+          {
+            "frame": 133,
+            "ms": 25.4,
+            "top": [
+              "r:render 12.0",
+              "m:hold 3.8",
+              "zombies 2.9",
+              "r:matrices 1.5"
+            ],
+            "heapMB": 799,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 135,
+            "ms": 26.7,
+            "top": [
+              "r:render 11.6",
+              "m:hold 4.4",
+              "m:pose 2.0",
+              "r:matrices 2.0"
+            ],
+            "heapMB": 800.1,
+            "freedMB": -0.5
+          },
+          {
+            "frame": 136,
+            "ms": 29.8,
+            "top": [
+              "r:render 16.7",
+              "m:hold 3.3",
+              "r:matrices 1.5",
+              "m:pose 1.4"
+            ],
+            "heapMB": 800.7,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 140,
+            "ms": 24.2,
+            "top": [
+              "r:render 13.5",
+              "m:hold 2.8",
+              "r:matrices 1.5",
+              "m:pose 1.2"
+            ],
+            "heapMB": 802.9,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 147,
+            "ms": 31.4,
+            "top": [
+              "r:render 18.5",
+              "m:hold 4.2",
+              "r:matrices 1.9",
+              "m:pose 1.6"
+            ],
+            "heapMB": 806.8,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 150,
+            "ms": 26.2,
+            "top": [
+              "r:render 13.3",
+              "m:hold 3.4",
+              "zombies 3.4",
+              "r:matrices 1.3"
+            ],
+            "heapMB": 808.5,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 151,
+            "ms": 25.3,
+            "top": [
+              "r:render 13.3",
+              "m:hold 4.0",
+              "r:matrices 1.3",
+              "m:pose 1.1"
+            ],
+            "heapMB": 809.1,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 152,
+            "ms": 24.8,
+            "top": [
+              "r:render 11.3",
+              "m:hold 3.9",
+              "m:pose 2.2",
+              "r:matrices 1.7"
+            ],
+            "heapMB": 809.6,
+            "freedMB": -0.5
+          },
+          {
+            "frame": 153,
+            "ms": 38.2,
+            "top": [
+              "r:render 17.8",
+              "r:matrices 5.1",
+              "m:hold 4.7",
+              "r:cull 2.1"
+            ],
+            "heapMB": 810.2,
+            "freedMB": -0.5
+          }
+        ]
+      }
+    },
+    {
+      "pass": 1,
+      "fire": true,
+      "before": {
+        "phase": "prep",
+        "day": 1,
+        "ammo": 24,
+        "zombies": 2,
+        "paused": false,
+        "warmPending": false,
+        "showPerf": true,
+        "flightHold": false,
+        "hidden": false,
+        "focus": true,
+        "now": 50648.19999998808
+      },
+      "after": {
+        "phase": "prep",
+        "day": 1,
+        "ammo": 0,
+        "zombies": 2,
+        "paused": false,
+        "warmPending": false,
+        "showPerf": true,
+        "flightHold": false,
+        "hidden": false,
+        "focus": true,
+        "now": 51946.40000000596
+      },
+      "profileWindowMs": 1189.9590000000003,
+      "self": [
+        {
+          "name": "(program) :0",
+          "ms": 333.40799999999996,
+          "percent": 28.018444332955998
+        },
+        {
+          "name": "updateMatrixWorld three/three.core.js:13980",
+          "ms": 158.63899999999998,
+          "percent": 13.331467722837504
+        },
+        {
+          "name": "writeBuffer :0",
+          "ms": 38.092999999999996,
+          "percent": 3.2012027305142436
+        },
+        {
+          "name": "updateByType three/three.webgpu.js:52796",
+          "ms": 34.194,
+          "percent": 2.8735443826215854
+        },
+        {
+          "name": "_renderObjectDirect three/three.webgpu.js:52263",
+          "ms": 29.908999999999995,
+          "percent": 2.5134479423240625
+        },
+        {
+          "name": "updateForRender three/three.webgpu.js:47227",
+          "ms": 28.19,
+          "percent": 2.368989183660949
+        },
+        {
+          "name": "updateProjectiles 127.0.0.1:18535/index.html:60940",
+          "ms": 27.668000000000003,
+          "percent": 2.3251221260564434
+        },
+        {
+          "name": "multiplyMatrices three/three.core.js:11564",
+          "ms": 23.502999999999997,
+          "percent": 1.9751100668174275
+        },
+        {
+          "name": "_projectObject three/three.webgpu.js:51929",
+          "ms": 23.239,
+          "percent": 1.9529244284887122
+        },
+        {
+          "name": "shoulderAngles core/body-limits.js:193",
+          "ms": 23.106,
+          "percent": 1.9417475728155338
+        },
+        {
+          "name": "sceneCull 127.0.0.1:18535/index.html:2342",
+          "ms": 18.974999999999994,
+          "percent": 1.5945927548764278
+        },
+        {
+          "name": "setVertexBuffer :0",
+          "ms": 18.900000000000002,
+          "percent": 1.5882900167148615
+        },
+        {
+          "name": "updateWorldMatrix three/three.core.js:14027",
+          "ms": 17.849,
+          "percent": 1.4999676459441036
+        },
+        {
+          "name": "update three/three.webgpu.js:14947",
+          "ms": 15.845,
+          "percent": 1.3315584822670357
+        },
+        {
+          "name": "bend studio/marine-cloth.js:64",
+          "ms": 14.528999999999998,
+          "percent": 1.2209664366587416
+        },
+        {
+          "name": "updateForRender three/three.webgpu.js:27628",
+          "ms": 12.943999999999999,
+          "percent": 1.0877685701776276
+        },
+        {
+          "name": "needsRenderUpdate three/three.webgpu.js:69618",
+          "ms": 11.084,
+          "percent": 0.9314606637707682
+        },
+        {
+          "name": "get three/three.webgpu.js:26002",
+          "ms": 10.996999999999998,
+          "percent": 0.9241494875033506
+        }
+      ],
+      "inclusive": [
+        {
+          "name": "(root) :0",
+          "ms": 1189.9590000000003,
+          "percent": 100
+        },
+        {
+          "name": "updateMatrixWorld three/three.core.js:13980",
+          "ms": 987.1250000000013,
+          "percent": 82.95453876982326
+        },
+        {
+          "name": "_renderScene three/three.webgpu.js:50617",
+          "ms": 916.6690000000007,
+          "percent": 77.03366250433842
+        },
+        {
+          "name": "update three/three.webgpu.js:24925",
+          "ms": 852.6750000000011,
+          "percent": 71.65583015885429
+        },
+        {
+          "name": "_renderObjects three/three.webgpu.js:52128",
+          "ms": 849.0490000000007,
+          "percent": 71.3511137778697
+        },
+        {
+          "name": "tick 127.0.0.1:18535/index.html:68750",
+          "ms": 845.7620000000011,
+          "percent": 71.07488577337547
+        },
+        {
+          "name": "_renderObjectDirect three/three.webgpu.js:52263",
+          "ms": 830.0160000000008,
+          "percent": 69.75164690548166
+        },
+        {
+          "name": "renderObject three/three.webgpu.js:52154",
+          "ms": 829.9030000000008,
+          "percent": 69.7421507799849
+        },
+        {
+          "name": "filter game/viewmodel.js:190",
+          "ms": 757.3700000000006,
+          "percent": 63.64673068567912
+        },
+        {
+          "name": "updateBefore three/three.webgpu.js:47168",
+          "ms": 508.95300000000026,
+          "percent": 42.77063327391953
+        },
+        {
+          "name": "updateBeforeNode three/three.webgpu.js:45477",
+          "ms": 507.34000000000026,
+          "percent": 42.63508238519144
+        },
+        {
+          "name": "renderFrame 127.0.0.1:18535/index.html:2526",
+          "ms": 490.85300000000007,
+          "percent": 41.24957246426137
+        },
+        {
+          "name": "render three/three.webgpu.js:70670",
+          "ms": 413.81600000000014,
+          "percent": 34.77565193422631
+        },
+        {
+          "name": "updateBefore three/three.webgpu.js:33703",
+          "ms": 384.3800000000001,
+          "percent": 32.30195326057453
+        },
+        {
+          "name": "(program) :0",
+          "ms": 333.40799999999996,
+          "percent": 28.018444332955998
+        },
+        {
+          "name": "holdWeapon 127.0.0.1:18535/index.html:56333",
+          "ms": 168.67299999999992,
+          "percent": 14.174690052346332
+        },
+        {
+          "name": "updateWorldMatrix three/three.core.js:14027",
+          "ms": 154.83000000000013,
+          "percent": 13.011372660738738
+        },
+        {
+          "name": "_projectObject three/three.webgpu.js:51929",
+          "ms": 132.94599999999994,
+          "percent": 11.17231770170232
+        }
+      ],
+      "phases": {
+        "frames": 33,
+        "phases": [
+          {
+            "k": "r:render",
+            "avg": 13.127,
+            "max": 16.9
+          },
+          {
+            "k": "m:hold",
+            "avg": 3.209,
+            "max": 4.7
+          },
+          {
+            "k": "m:hold2+arms",
+            "avg": 2.079,
+            "max": 4.5
+          },
+          {
+            "k": "r:matrices",
+            "avg": 1.561,
+            "max": 2.4
+          },
+          {
+            "k": "m:pose",
+            "avg": 0.845,
+            "max": 1.6
+          },
+          {
+            "k": "projectiles",
+            "avg": 0.758,
+            "max": 2.2
+          },
+          {
+            "k": "r:cull",
+            "avg": 0.615,
+            "max": 1.1
+          },
+          {
+            "k": "viewmodel",
+            "avg": 0.536,
+            "max": 1.3
+          },
+          {
+            "k": "w:treeFall+leaves+batches",
+            "avg": 0.503,
+            "max": 1.2
+          },
+          {
+            "k": "aim+climb",
+            "avg": 0.482,
+            "max": 1.2
+          },
+          {
+            "k": "w:minimap",
+            "avg": 0.436,
+            "max": 1.1
+          },
+          {
+            "k": "m:fire",
+            "avg": 0.427,
+            "max": 0.9
+          },
+          {
+            "k": "zombies",
+            "avg": 0.388,
+            "max": 3.9
+          },
+          {
+            "k": "waves",
+            "avg": 0.261,
+            "max": 0.8
+          },
+          {
+            "k": "effects",
+            "avg": 0.242,
+            "max": 0.5
+          },
+          {
+            "k": "drops+hud",
+            "avg": 0.203,
+            "max": 0.7
+          },
+          {
+            "k": "w:stairs+roof+birds+bugs+wildlife",
+            "avg": 0.197,
+            "max": 0.5
+          },
+          {
+            "k": "r:rigSkin",
+            "avg": 0.197,
+            "max": 0.4
+          },
+          {
+            "k": "hud+audio",
+            "avg": 0.191,
+            "max": 0.5
+          },
+          {
+            "k": "w:treeFade+sway",
+            "avg": 0.139,
+            "max": 0.4
+          },
+          {
+            "k": "w:wind",
+            "avg": 0.112,
+            "max": 0.3
+          },
+          {
+            "k": "daynight",
+            "avg": 0.094,
+            "max": 0.2
+          },
+          {
+            "k": "m:reload+knife",
+            "avg": 0.073,
+            "max": 0.2
+          },
+          {
+            "k": "camera",
+            "avg": 0.058,
+            "max": 0.2
+          },
+          {
+            "k": "w:weather+lightning+clouds",
+            "avg": 0.052,
+            "max": 0.1
+          },
+          {
+            "k": "w:motes+flame+ripples+life",
+            "avg": 0.045,
+            "max": 0.1
+          },
+          {
+            "k": "jump+guns",
+            "avg": 0.036,
+            "max": 0.1
+          },
+          {
+            "k": "idle+gear",
+            "avg": 0.033,
+            "max": 0.1
+          },
+          {
+            "k": "m:reticle+ghost",
+            "avg": 0.03,
+            "max": 0.1
+          },
+          {
+            "k": "tree+deck coll",
+            "avg": 0.024,
+            "max": 0.1
+          },
+          {
+            "k": "move",
+            "avg": 0.021,
+            "max": 0.1
+          },
+          {
+            "k": "w:doors+traps+shadowLOD",
+            "avg": 0.021,
+            "max": 0.1
+          },
+          {
+            "k": "r:lightPool",
+            "avg": 0.021,
+            "max": 0.1
+          },
+          {
+            "k": "fires+smoke",
+            "avg": 0.018,
+            "max": 0.1
+          },
+          {
+            "k": "combat misc",
+            "avg": 0.012,
+            "max": 0.1
+          },
+          {
+            "k": "m:hush+roof+kills",
+            "avg": 0.009,
+            "max": 0.1
+          },
+          {
+            "k": "m:lasers",
+            "avg": 0.009,
+            "max": 0.1
+          },
+          {
+            "k": "w:banner..normals",
+            "avg": 0.009,
+            "max": 0.2
+          },
+          {
+            "k": "w:foliageCull",
+            "avg": 0.009,
+            "max": 0.1
+          },
+          {
+            "k": "ground+clamp",
+            "avg": 0.009,
+            "max": 0.1
+          },
+          {
+            "k": "m:mortar+carry",
+            "avg": 0.006,
+            "max": 0.1
+          },
+          {
+            "k": "m:idle",
+            "avg": 0.006,
+            "max": 0.1
+          },
+          {
+            "k": "turrets",
+            "avg": 0.006,
+            "max": 0.1
+          },
+          {
+            "k": "w:water",
+            "avg": 0.006,
+            "max": 0.1
+          },
+          {
+            "k": "marine",
+            "avg": 0.003,
+            "max": 0.1
+          },
+          {
+            "k": "after render",
+            "avg": 0.003,
+            "max": 0.1
+          },
+          {
+            "k": "w:rest",
+            "avg": 0,
+            "max": 0
+          }
+        ],
+        "spikes": [
+          {
+            "frame": 2,
+            "ms": 24.1,
+            "top": [
+              "r:render 13.5",
+              "m:hold 3.1",
+              "m:pose 1.4",
+              "r:matrices 1.4"
+            ],
+            "heapMB": 793.7,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 3,
+            "ms": 29.2,
+            "top": [
+              "r:render 12.2",
+              "m:hold2+arms 3.9",
+              "m:hold 2.8",
+              "r:matrices 1.7"
+            ],
+            "heapMB": 794.5,
+            "freedMB": -0.8
+          },
+          {
+            "frame": 4,
+            "ms": 27.5,
+            "top": [
+              "r:render 12.4",
+              "m:hold 3.2",
+              "m:hold2+arms 3.1",
+              "m:pose 1.5"
+            ],
+            "heapMB": 795.4,
+            "freedMB": -0.8
+          },
+          {
+            "frame": 5,
+            "ms": 29.1,
+            "top": [
+              "r:render 13.9",
+              "m:hold 3.1",
+              "m:hold2+arms 2.3",
+              "r:matrices 1.6"
+            ],
+            "heapMB": 796.3,
+            "freedMB": -0.9
+          },
+          {
+            "frame": 6,
+            "ms": 27.7,
+            "top": [
+              "r:render 14.7",
+              "m:hold 3.9",
+              "m:hold2+arms 2.1",
+              "r:matrices 1.6"
+            ],
+            "heapMB": 797.1,
+            "freedMB": -0.9
+          },
+          {
+            "frame": 7,
+            "ms": 29.2,
+            "top": [
+              "r:render 14.5",
+              "m:hold2+arms 3.2",
+              "m:hold 3.0",
+              "r:matrices 1.8"
+            ],
+            "heapMB": 798,
+            "freedMB": -0.9
+          },
+          {
+            "frame": 8,
+            "ms": 29.8,
+            "top": [
+              "r:render 15.5",
+              "m:hold 3.6",
+              "m:hold2+arms 2.3",
+              "r:matrices 1.2"
+            ],
+            "heapMB": 798.8,
+            "freedMB": -0.9
+          },
+          {
+            "frame": 9,
+            "ms": 26.5,
+            "top": [
+              "r:render 11.3",
+              "m:hold 4.3",
+              "m:hold2+arms 2.3",
+              "r:matrices 1.9"
+            ],
+            "heapMB": 799.8,
+            "freedMB": -1
+          },
+          {
+            "frame": 10,
+            "ms": 26.2,
+            "top": [
+              "r:render 11.2",
+              "m:hold 3.7",
+              "m:hold2+arms 2.3",
+              "m:pose 1.4"
+            ],
+            "heapMB": 800.7,
+            "freedMB": -0.9
+          },
+          {
+            "frame": 11,
+            "ms": 31.9,
+            "top": [
+              "r:render 12.7",
+              "zombies 3.9",
+              "m:hold 3.7",
+              "m:hold2+arms 3.4"
+            ],
+            "heapMB": 801.6,
+            "freedMB": -0.9
+          },
+          {
+            "frame": 12,
+            "ms": 29,
+            "top": [
+              "r:render 15.0",
+              "m:hold 3.3",
+              "m:hold2+arms 2.4",
+              "r:matrices 1.4"
+            ],
+            "heapMB": 802.5,
+            "freedMB": -0.9
+          },
+          {
+            "frame": 13,
+            "ms": 29.8,
+            "top": [
+              "r:render 10.4",
+              "m:hold 4.7",
+              "m:hold2+arms 4.5",
+              "projectiles 1.3"
+            ],
+            "heapMB": 803.3,
+            "freedMB": -0.9
+          },
+          {
+            "frame": 14,
+            "ms": 25.2,
+            "top": [
+              "r:render 13.3",
+              "m:hold 2.3",
+              "m:hold2+arms 2.1",
+              "r:matrices 1.2"
+            ],
+            "heapMB": 804.2,
+            "freedMB": -0.9
+          },
+          {
+            "frame": 15,
+            "ms": 25.9,
+            "top": [
+              "r:render 12.7",
+              "m:hold 2.8",
+              "m:hold2+arms 2.4",
+              "r:matrices 2.0"
+            ],
+            "heapMB": 805.1,
+            "freedMB": -0.9
+          },
+          {
+            "frame": 16,
+            "ms": 28.1,
+            "top": [
+              "r:render 14.0",
+              "m:hold2+arms 4.0",
+              "m:hold 3.8",
+              "r:matrices 1.3"
+            ],
+            "heapMB": 806,
+            "freedMB": -0.9
+          },
+          {
+            "frame": 17,
+            "ms": 26.1,
+            "top": [
+              "r:render 12.5",
+              "m:hold2+arms 2.7",
+              "m:hold 2.4",
+              "r:matrices 1.3"
+            ],
+            "heapMB": 806.9,
+            "freedMB": -0.9
+          },
+          {
+            "frame": 18,
+            "ms": 27.4,
+            "top": [
+              "r:render 13.0",
+              "m:hold2+arms 3.0",
+              "m:hold 2.8",
+              "r:matrices 2.0"
+            ],
+            "heapMB": 807.9,
+            "freedMB": -1
+          },
+          {
+            "frame": 19,
+            "ms": 30.4,
+            "top": [
+              "r:render 13.2",
+              "m:hold 3.8",
+              "m:hold2+arms 3.0",
+              "r:matrices 1.7"
+            ],
+            "heapMB": 808.8,
+            "freedMB": -0.9
+          },
+          {
+            "frame": 20,
+            "ms": 34.2,
+            "top": [
+              "r:render 16.9",
+              "m:hold2+arms 4.3",
+              "m:hold 3.2",
+              "r:matrices 2.0"
+            ],
+            "heapMB": 809.7,
+            "freedMB": -0.9
+          },
+          {
+            "frame": 21,
+            "ms": 27.3,
+            "top": [
+              "r:render 11.7",
+              "m:hold 4.0",
+              "m:hold2+arms 3.3",
+              "r:matrices 1.2"
+            ],
+            "heapMB": 810.6,
+            "freedMB": -0.9
+          },
+          {
+            "frame": 22,
+            "ms": 32.4,
+            "top": [
+              "r:render 15.4",
+              "m:hold2+arms 2.8",
+              "m:hold 2.7",
+              "r:matrices 2.0"
+            ],
+            "heapMB": 811.6,
+            "freedMB": -1.1
+          },
+          {
+            "frame": 23,
+            "ms": 28.7,
+            "top": [
+              "r:render 12.8",
+              "m:hold 2.7",
+              "m:hold2+arms 2.4",
+              "r:matrices 1.9"
+            ],
+            "heapMB": 812.6,
+            "freedMB": -0.9
+          },
+          {
+            "frame": 24,
+            "ms": 26.4,
+            "top": [
+              "r:render 13.2",
+              "m:hold 3.0",
+              "m:hold2+arms 2.3",
+              "r:matrices 2.3"
+            ],
+            "heapMB": 813.5,
+            "freedMB": -0.9
+          },
+          {
+            "frame": 25,
+            "ms": 28.2,
+            "top": [
+              "r:render 12.6",
+              "zombies 2.9",
+              "m:hold2+arms 2.5",
+              "m:hold 2.2"
+            ],
+            "heapMB": 814.4,
+            "freedMB": -0.9
+          },
+          {
+            "frame": 26,
+            "ms": 24.5,
+            "top": [
+              "r:render 11.4",
+              "m:hold 2.4",
+              "projectiles 2.2",
+              "m:hold2+arms 2.0"
+            ],
+            "heapMB": 782.1,
+            "freedMB": 32.3
+          },
+          {
+            "frame": 27,
+            "ms": 24.2,
+            "top": [
+              "r:render 12.8",
+              "m:hold 3.2",
+              "r:matrices 1.4",
+              "projectiles 1.2"
+            ],
+            "heapMB": 782.8,
+            "freedMB": -0.7
+          },
+          {
+            "frame": 30,
+            "ms": 26.5,
+            "top": [
+              "r:render 14.6",
+              "m:hold 3.2",
+              "r:matrices 1.8",
+              "projectiles 0.9"
+            ],
+            "heapMB": 784.9,
+            "freedMB": -0.7
+          },
+          {
+            "frame": 32,
+            "ms": 27.7,
+            "top": [
+              "r:render 15.5",
+              "m:hold 3.2",
+              "r:matrices 2.4",
+              "projectiles 1.0"
+            ],
+            "heapMB": 786.1,
+            "freedMB": -0.6
+          }
+        ]
+      }
+    },
+    {
+      "pass": 2,
+      "fire": false,
+      "before": {
+        "phase": "prep",
+        "day": 1,
+        "ammo": 24,
+        "zombies": 2,
+        "paused": false,
+        "warmPending": false,
+        "showPerf": true,
+        "flightHold": false,
+        "hidden": false,
+        "focus": true,
+        "now": 55590.30000001192
+      },
+      "after": {
+        "phase": "prep",
+        "day": 1,
+        "ammo": 24,
+        "zombies": 2,
+        "paused": false,
+        "warmPending": false,
+        "showPerf": true,
+        "flightHold": false,
+        "hidden": false,
+        "focus": true,
+        "now": 60743.5
+      },
+      "profileWindowMs": 5052.493000000008,
+      "self": [
+        {
+          "name": "updateMatrixWorld three/three.core.js:13980",
+          "ms": 668.279,
+          "percent": 13.226717978629539
+        },
+        {
+          "name": "(program) :0",
+          "ms": 458.37800000000004,
+          "percent": 9.072313410429254
+        },
+        {
+          "name": "_renderObjectDirect three/three.webgpu.js:52263",
+          "ms": 194.81699999999998,
+          "percent": 3.855858879962816
+        },
+        {
+          "name": "writeBuffer :0",
+          "ms": 184.68399999999994,
+          "percent": 3.655304421005624
+        },
+        {
+          "name": "updateWorldMatrix three/three.core.js:14027",
+          "ms": 181.51799999999994,
+          "percent": 3.5926422856993505
+        },
+        {
+          "name": "updateByType three/three.webgpu.js:52796",
+          "ms": 172.13799999999995,
+          "percent": 3.406991360502621
+        },
+        {
+          "name": "multiplyMatrices three/three.core.js:11564",
+          "ms": 162.83399999999995,
+          "percent": 3.222844643228594
+        },
+        {
+          "name": "_projectObject three/three.webgpu.js:51929",
+          "ms": 161.6979999999999,
+          "percent": 3.2003606932260897
+        },
+        {
+          "name": "updateForRender three/three.webgpu.js:47227",
+          "ms": 131.70400000000004,
+          "percent": 2.6067131612057617
+        },
+        {
+          "name": "sceneCull 127.0.0.1:18535/index.html:2342",
+          "ms": 116.43699999999995,
+          "percent": 2.3045454986280984
+        },
+        {
+          "name": "update three/three.webgpu.js:14947",
+          "ms": 92.65899999999999,
+          "percent": 1.8339263409172433
+        },
+        {
+          "name": "intersectsObject three/three.core.js:26138",
+          "ms": 84.979,
+          "percent": 1.6819221718862325
+        },
+        {
+          "name": "get three/three.webgpu.js:26002",
+          "ms": 81.76299999999998,
+          "percent": 1.6182704261044965
+        },
+        {
+          "name": "needsRenderUpdate three/three.webgpu.js:69618",
+          "ms": 78.5,
+          "percent": 1.5536884464758265
+        },
+        {
+          "name": "setVertexBuffer :0",
+          "ms": 75.849,
+          "percent": 1.501219299066815
+        },
+        {
+          "name": "updateAttributes three/three.webgpu.js:26528",
+          "ms": 67.85699999999999,
+          "percent": 1.343039960668919
+        },
+        {
+          "name": "setBindGroup :0",
+          "ms": 64.38000000000001,
+          "percent": 1.2742224482052704
+        },
+        {
+          "name": "_update three/three.webgpu.js:27681",
+          "ms": 64.032,
+          "percent": 1.2673347592960524
+        }
+      ],
+      "inclusive": [
+        {
+          "name": "_renderScene three/three.webgpu.js:50617",
+          "ms": 5392.541000000006,
+          "percent": 106.7303012592001
+        },
+        {
+          "name": "(root) :0",
+          "ms": 5052.493000000008,
+          "percent": 100
+        },
+        {
+          "name": "_renderObjects three/three.webgpu.js:52128",
+          "ms": 4970.264000000011,
+          "percent": 98.37250640426427
+        },
+        {
+          "name": "renderObject three/three.webgpu.js:52154",
+          "ms": 4842.272000000017,
+          "percent": 95.83926192475694
+        },
+        {
+          "name": "_renderObjectDirect three/three.webgpu.js:52263",
+          "ms": 4824.964000000017,
+          "percent": 95.49669836257091
+        },
+        {
+          "name": "update three/three.webgpu.js:24925",
+          "ms": 4584.279000000014,
+          "percent": 90.73301041683793
+        },
+        {
+          "name": "tick 127.0.0.1:18535/index.html:68750",
+          "ms": 4559.904000000014,
+          "percent": 90.25057531005005
+        },
+        {
+          "name": "updateMatrixWorld three/three.core.js:13980",
+          "ms": 4495.8830000000235,
+          "percent": 88.98345826505879
+        },
+        {
+          "name": "filter game/viewmodel.js:190",
+          "ms": 4487.846000000014,
+          "percent": 88.8243882772328
+        },
+        {
+          "name": "updateBefore three/three.webgpu.js:47168",
+          "ms": 2995.822000000007,
+          "percent": 59.2939366764091
+        },
+        {
+          "name": "updateBeforeNode three/three.webgpu.js:45477",
+          "ms": 2994.306000000007,
+          "percent": 59.26393168679308
+        },
+        {
+          "name": "renderFrame 127.0.0.1:18535/index.html:2526",
+          "ms": 2928.354000000009,
+          "percent": 57.95859588523932
+        },
+        {
+          "name": "render three/three.webgpu.js:70670",
+          "ms": 2451.6300000000024,
+          "percent": 48.5231745991533
+        },
+        {
+          "name": "updateBefore three/three.webgpu.js:33703",
+          "ms": 2271.1110000000012,
+          "percent": 44.950304730753665
+        },
+        {
+          "name": "updateWorldMatrix three/three.core.js:14027",
+          "ms": 1428.054999999999,
+          "percent": 28.264363750726556
+        },
+        {
+          "name": "_projectObject three/three.webgpu.js:51929",
+          "ms": 1133.6130000000005,
+          "percent": 22.43670599840512
+        },
+        {
+          "name": "holdWeapon 127.0.0.1:18535/index.html:56333",
+          "ms": 593.448,
+          "percent": 11.745647148843137
+        },
+        {
+          "name": "updateBefore three/three.webgpu.js:38235",
+          "ms": 574.2910000000007,
+          "percent": 11.366487791274523
+        }
+      ],
+      "phases": {
+        "frames": 186,
+        "phases": [
+          {
+            "k": "r:render",
+            "avg": 13.348,
+            "max": 22.5
+          },
+          {
+            "k": "m:hold",
+            "avg": 3.185,
+            "max": 6.8
+          },
+          {
+            "k": "r:matrices",
+            "avg": 1.677,
+            "max": 4.4
+          },
+          {
+            "k": "m:pose",
+            "avg": 1.275,
+            "max": 3.5
+          },
+          {
+            "k": "r:cull",
+            "avg": 0.663,
+            "max": 2.1
+          },
+          {
+            "k": "w:treeFall+leaves+batches",
+            "avg": 0.627,
+            "max": 1.7
+          },
+          {
+            "k": "aim+climb",
+            "avg": 0.466,
+            "max": 1.7
+          },
+          {
+            "k": "zombies",
+            "avg": 0.427,
+            "max": 4.3
+          },
+          {
+            "k": "viewmodel",
+            "avg": 0.422,
+            "max": 1.2
+          },
+          {
+            "k": "w:minimap",
+            "avg": 0.398,
+            "max": 1.6
+          },
+          {
+            "k": "waves",
+            "avg": 0.274,
+            "max": 0.8
+          },
+          {
+            "k": "w:treeFade+sway",
+            "avg": 0.228,
+            "max": 0.6
+          },
+          {
+            "k": "effects",
+            "avg": 0.223,
+            "max": 0.6
+          },
+          {
+            "k": "r:rigSkin",
+            "avg": 0.217,
+            "max": 0.7
+          },
+          {
+            "k": "w:stairs+roof+birds+bugs+wildlife",
+            "avg": 0.197,
+            "max": 0.5
+          },
+          {
+            "k": "hud+audio",
+            "avg": 0.186,
+            "max": 0.5
+          },
+          {
+            "k": "drops+hud",
+            "avg": 0.185,
+            "max": 0.9
+          },
+          {
+            "k": "w:wind",
+            "avg": 0.12,
+            "max": 0.4
+          },
+          {
+            "k": "daynight",
+            "avg": 0.094,
+            "max": 0.3
+          },
+          {
+            "k": "m:reload+knife",
+            "avg": 0.08,
+            "max": 0.4
+          },
+          {
+            "k": "tree+deck coll",
+            "avg": 0.063,
+            "max": 0.5
+          },
+          {
+            "k": "camera",
+            "avg": 0.061,
+            "max": 0.3
+          },
+          {
+            "k": "w:motes+flame+ripples+life",
+            "avg": 0.054,
+            "max": 0.2
+          },
+          {
+            "k": "w:weather+lightning+clouds",
+            "avg": 0.049,
+            "max": 0.2
+          },
+          {
+            "k": "move",
+            "avg": 0.038,
+            "max": 1
+          },
+          {
+            "k": "idle+gear",
+            "avg": 0.035,
+            "max": 0.3
+          },
+          {
+            "k": "r:lightPool",
+            "avg": 0.026,
+            "max": 2.1
+          },
+          {
+            "k": "m:reticle+ghost",
+            "avg": 0.024,
+            "max": 0.2
+          },
+          {
+            "k": "w:banner..normals",
+            "avg": 0.02,
+            "max": 0.1
+          },
+          {
+            "k": "jump+guns",
+            "avg": 0.019,
+            "max": 0.2
+          },
+          {
+            "k": "ground+clamp",
+            "avg": 0.019,
+            "max": 0.2
+          },
+          {
+            "k": "combat misc",
+            "avg": 0.017,
+            "max": 0.2
+          },
+          {
+            "k": "turrets",
+            "avg": 0.016,
+            "max": 0.1
+          },
+          {
+            "k": "fires+smoke",
+            "avg": 0.016,
+            "max": 0.1
+          },
+          {
+            "k": "m:hush+roof+kills",
+            "avg": 0.013,
+            "max": 0.1
+          },
+          {
+            "k": "w:doors+traps+shadowLOD",
+            "avg": 0.013,
+            "max": 0.2
+          },
+          {
+            "k": "m:mortar+carry",
+            "avg": 0.011,
+            "max": 0.2
+          },
+          {
+            "k": "m:idle",
+            "avg": 0.009,
+            "max": 0.1
+          },
+          {
+            "k": "m:lasers",
+            "avg": 0.008,
+            "max": 0.1
+          },
+          {
+            "k": "w:water",
+            "avg": 0.008,
+            "max": 0.1
+          },
+          {
+            "k": "m:fire",
+            "avg": 0.006,
+            "max": 0.1
+          },
+          {
+            "k": "w:foliageCull",
+            "avg": 0.006,
+            "max": 0.2
+          },
+          {
+            "k": "m:hold2+arms",
+            "avg": 0.005,
+            "max": 0.1
+          },
+          {
+            "k": "marine",
+            "avg": 0.004,
+            "max": 0.2
+          },
+          {
+            "k": "after render",
+            "avg": 0.004,
+            "max": 0.1
+          },
+          {
+            "k": "w:rest",
+            "avg": 0.003,
+            "max": 0.1
+          },
+          {
+            "k": "projectiles",
+            "avg": 0.002,
+            "max": 0.1
+          }
+        ],
+        "spikes": [
+          {
+            "frame": 1,
+            "ms": 24.2,
+            "top": [
+              "r:render 10.9",
+              "m:hold 3.9",
+              "r:matrices 1.7",
+              "m:pose 1.3"
+            ],
+            "heapMB": 806,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 7,
+            "ms": 28.9,
+            "top": [
+              "r:render 14.2",
+              "m:hold 5.3",
+              "r:matrices 2.8",
+              "m:pose 1.7"
+            ],
+            "heapMB": 809.2,
+            "freedMB": -0.5
+          },
+          {
+            "frame": 8,
+            "ms": 27.6,
+            "top": [
+              "r:render 14.8",
+              "m:hold 5.3",
+              "m:pose 2.0",
+              "r:matrices 1.3"
+            ],
+            "heapMB": 809.8,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 9,
+            "ms": 30.8,
+            "top": [
+              "r:render 14.6",
+              "r:matrices 4.4",
+              "zombies 2.9",
+              "m:hold 2.5"
+            ],
+            "heapMB": 810.4,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 10,
+            "ms": 26.2,
+            "top": [
+              "r:render 14.2",
+              "m:hold 4.4",
+              "r:matrices 1.7",
+              "m:pose 1.7"
+            ],
+            "heapMB": 810.9,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 11,
+            "ms": 24.5,
+            "top": [
+              "r:render 12.0",
+              "m:hold 2.4",
+              "r:matrices 2.3",
+              "m:pose 1.0"
+            ],
+            "heapMB": 811.5,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 12,
+            "ms": 24.7,
+            "top": [
+              "r:render 13.8",
+              "m:hold 3.2",
+              "r:matrices 1.7",
+              "m:pose 1.0"
+            ],
+            "heapMB": 812,
+            "freedMB": -0.5
+          },
+          {
+            "frame": 14,
+            "ms": 32.3,
+            "top": [
+              "r:render 20.1",
+              "r:matrices 4.0",
+              "m:hold 1.9",
+              "w:treeFall+leaves+batches 0.8"
+            ],
+            "heapMB": 813.1,
+            "freedMB": -0.5
+          },
+          {
+            "frame": 15,
+            "ms": 26.5,
+            "top": [
+              "r:render 14.7",
+              "m:hold 3.4",
+              "r:matrices 2.1",
+              "m:pose 1.5"
+            ],
+            "heapMB": 813.6,
+            "freedMB": -0.5
+          },
+          {
+            "frame": 16,
+            "ms": 24.7,
+            "top": [
+              "r:render 14.8",
+              "m:hold 2.9",
+              "r:matrices 1.5",
+              "m:pose 1.0"
+            ],
+            "heapMB": 814.2,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 17,
+            "ms": 35.4,
+            "top": [
+              "r:render 21.2",
+              "m:hold 4.9",
+              "r:matrices 1.9",
+              "r:cull 0.8"
+            ],
+            "heapMB": 814.7,
+            "freedMB": -0.5
+          },
+          {
+            "frame": 18,
+            "ms": 25.4,
+            "top": [
+              "r:render 11.2",
+              "m:hold 3.6",
+              "m:pose 3.0",
+              "r:matrices 1.6"
+            ],
+            "heapMB": 815.3,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 23,
+            "ms": 25.1,
+            "top": [
+              "r:render 14.0",
+              "m:hold 2.7",
+              "r:matrices 1.7",
+              "m:pose 1.1"
+            ],
+            "heapMB": 784.9,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 26,
+            "ms": 26.6,
+            "top": [
+              "r:render 14.3",
+              "m:hold 3.4",
+              "r:matrices 1.6",
+              "m:pose 1.2"
+            ],
+            "heapMB": 786.7,
+            "freedMB": -0.5
+          },
+          {
+            "frame": 27,
+            "ms": 26.7,
+            "top": [
+              "r:render 11.6",
+              "m:hold 3.7",
+              "m:pose 3.2",
+              "aim+climb 1.7"
+            ],
+            "heapMB": 787.3,
+            "freedMB": -0.5
+          },
+          {
+            "frame": 29,
+            "ms": 26,
+            "top": [
+              "r:render 12.8",
+              "r:matrices 2.5",
+              "m:hold 2.4",
+              "w:minimap 1.1"
+            ],
+            "heapMB": 788.4,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 30,
+            "ms": 28.6,
+            "top": [
+              "r:render 17.4",
+              "m:hold 2.9",
+              "r:matrices 1.9",
+              "m:pose 1.4"
+            ],
+            "heapMB": 788.9,
+            "freedMB": -0.5
+          },
+          {
+            "frame": 31,
+            "ms": 26.3,
+            "top": [
+              "r:render 10.1",
+              "m:hold 6.8",
+              "m:pose 3.5",
+              "r:matrices 1.1"
+            ],
+            "heapMB": 789.5,
+            "freedMB": -0.5
+          },
+          {
+            "frame": 36,
+            "ms": 27.3,
+            "top": [
+              "r:render 12.6",
+              "m:hold 4.8",
+              "r:matrices 2.1",
+              "m:pose 1.9"
+            ],
+            "heapMB": 792.2,
+            "freedMB": -0.5
+          },
+          {
+            "frame": 37,
+            "ms": 31.5,
+            "top": [
+              "r:render 19.4",
+              "m:hold 3.7",
+              "m:pose 1.7",
+              "r:matrices 1.2"
+            ],
+            "heapMB": 792.7,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 39,
+            "ms": 24.4,
+            "top": [
+              "r:render 10.6",
+              "m:hold 4.7",
+              "r:matrices 1.9",
+              "m:pose 0.9"
+            ],
+            "heapMB": 793.8,
+            "freedMB": -0.5
+          },
+          {
+            "frame": 40,
+            "ms": 28.7,
+            "top": [
+              "r:render 16.3",
+              "m:hold 3.7",
+              "m:pose 1.9",
+              "r:matrices 1.7"
+            ],
+            "heapMB": 794.4,
+            "freedMB": -0.5
+          },
+          {
+            "frame": 41,
+            "ms": 37.9,
+            "top": [
+              "r:render 20.2",
+              "zombies 4.3",
+              "r:matrices 2.7",
+              "m:hold 2.2"
+            ],
+            "heapMB": 794.9,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 42,
+            "ms": 24.1,
+            "top": [
+              "r:render 13.7",
+              "m:hold 2.8",
+              "m:pose 2.0",
+              "r:matrices 1.4"
+            ],
+            "heapMB": 795.5,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 44,
+            "ms": 29.5,
+            "top": [
+              "r:render 15.9",
+              "m:hold 3.6",
+              "r:matrices 2.5",
+              "m:pose 1.5"
+            ],
+            "heapMB": 796.6,
+            "freedMB": -0.5
+          },
+          {
+            "frame": 45,
+            "ms": 38.2,
+            "top": [
+              "r:render 21.4",
+              "m:hold 3.5",
+              "r:matrices 3.2",
+              "m:pose 2.2"
+            ],
+            "heapMB": 797.1,
+            "freedMB": -0.5
+          },
+          {
+            "frame": 46,
+            "ms": 27.6,
+            "top": [
+              "r:render 11.1",
+              "m:hold 4.5",
+              "m:pose 1.7",
+              "r:matrices 1.6"
+            ],
+            "heapMB": 797.7,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 49,
+            "ms": 26.9,
+            "top": [
+              "r:render 15.3",
+              "m:hold 2.9",
+              "m:pose 1.9",
+              "r:matrices 1.5"
+            ],
+            "heapMB": 799.3,
+            "freedMB": -0.5
+          },
+          {
+            "frame": 50,
+            "ms": 30.8,
+            "top": [
+              "r:render 16.2",
+              "m:hold 3.3",
+              "r:matrices 2.7",
+              "m:pose 1.8"
+            ],
+            "heapMB": 799.9,
+            "freedMB": -0.5
+          },
+          {
+            "frame": 51,
+            "ms": 28.8,
+            "top": [
+              "r:render 16.6",
+              "r:matrices 3.2",
+              "m:hold 2.6",
+              "w:minimap 1.1"
+            ],
+            "heapMB": 800.6,
+            "freedMB": -0.7
+          },
+          {
+            "frame": 52,
+            "ms": 26.7,
+            "top": [
+              "r:render 16.2",
+              "m:pose 3.1",
+              "m:hold 1.9",
+              "r:matrices 1.9"
+            ],
+            "heapMB": 801.1,
+            "freedMB": -0.5
+          },
+          {
+            "frame": 55,
+            "ms": 26.2,
+            "top": [
+              "r:render 12.7",
+              "m:hold 5.0",
+              "r:matrices 1.5",
+              "r:cull 1.3"
+            ],
+            "heapMB": 802.7,
+            "freedMB": -0.5
+          },
+          {
+            "frame": 56,
+            "ms": 28.8,
+            "top": [
+              "r:render 13.4",
+              "m:hold 3.7",
+              "zombies 3.1",
+              "r:matrices 2.0"
+            ],
+            "heapMB": 803.3,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 57,
+            "ms": 29.9,
+            "top": [
+              "r:render 18.2",
+              "m:hold 3.8",
+              "r:matrices 1.6",
+              "m:pose 1.4"
+            ],
+            "heapMB": 803.8,
+            "freedMB": -0.5
+          },
+          {
+            "frame": 58,
+            "ms": 28.4,
+            "top": [
+              "r:render 16.2",
+              "m:hold 5.0",
+              "r:matrices 1.5",
+              "m:pose 0.9"
+            ],
+            "heapMB": 804.4,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 60,
+            "ms": 26.9,
+            "top": [
+              "r:render 15.5",
+              "m:hold 3.5",
+              "m:pose 1.9",
+              "r:matrices 1.5"
+            ],
+            "heapMB": 805.5,
+            "freedMB": -0.5
+          },
+          {
+            "frame": 61,
+            "ms": 36.7,
+            "top": [
+              "r:render 18.3",
+              "m:hold 2.9",
+              "r:lightPool 2.1",
+              "m:pose 1.9"
+            ],
+            "heapMB": 806,
+            "freedMB": -0.5
+          },
+          {
+            "frame": 62,
+            "ms": 29.9,
+            "top": [
+              "r:render 16.7",
+              "m:hold 3.0",
+              "m:pose 2.6",
+              "r:matrices 2.6"
+            ],
+            "heapMB": 806.6,
+            "freedMB": -0.5
+          },
+          {
+            "frame": 63,
+            "ms": 24.4,
+            "top": [
+              "r:render 13.6",
+              "m:hold 2.9",
+              "r:matrices 2.3",
+              "w:minimap 1.0"
+            ],
+            "heapMB": 807.1,
+            "freedMB": -0.5
+          },
+          {
+            "frame": 65,
+            "ms": 26.7,
+            "top": [
+              "r:render 13.7",
+              "m:hold 3.3",
+              "r:matrices 2.4",
+              "w:minimap 1.5"
+            ],
+            "heapMB": 808.2,
+            "freedMB": -0.5
+          },
+          {
+            "frame": 66,
+            "ms": 25.1,
+            "top": [
+              "r:render 15.4",
+              "m:hold 2.8",
+              "r:matrices 1.4",
+              "m:pose 1.0"
+            ],
+            "heapMB": 808.8,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 69,
+            "ms": 27.8,
+            "top": [
+              "r:render 14.1",
+              "m:hold 3.4",
+              "r:matrices 2.6",
+              "m:pose 2.1"
+            ],
+            "heapMB": 810.4,
+            "freedMB": -0.5
+          },
+          {
+            "frame": 72,
+            "ms": 28.7,
+            "top": [
+              "r:render 17.4",
+              "r:matrices 2.1",
+              "m:hold 1.8",
+              "r:cull 1.6"
+            ],
+            "heapMB": 812,
+            "freedMB": -0.5
+          },
+          {
+            "frame": 73,
+            "ms": 28.2,
+            "top": [
+              "r:render 17.0",
+              "r:matrices 2.4",
+              "m:hold 2.1",
+              "m:pose 1.3"
+            ],
+            "heapMB": 812.6,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 74,
+            "ms": 25.5,
+            "top": [
+              "r:render 11.3",
+              "m:hold 4.2",
+              "m:pose 2.9",
+              "r:matrices 1.4"
+            ],
+            "heapMB": 813.1,
+            "freedMB": -0.5
+          },
+          {
+            "frame": 75,
+            "ms": 30.2,
+            "top": [
+              "r:render 13.3",
+              "m:hold 3.8",
+              "r:matrices 3.6",
+              "w:minimap 1.4"
+            ],
+            "heapMB": 813.7,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 76,
+            "ms": 29.8,
+            "top": [
+              "r:render 18.0",
+              "m:hold 4.2",
+              "r:matrices 1.3",
+              "m:pose 0.7"
+            ],
+            "heapMB": 814.2,
+            "freedMB": -0.5
+          },
+          {
+            "frame": 77,
+            "ms": 24.1,
+            "top": [
+              "r:render 12.9",
+              "m:hold 3.0",
+              "r:matrices 2.1",
+              "m:pose 1.0"
+            ],
+            "heapMB": 814.8,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 78,
+            "ms": 26.1,
+            "top": [
+              "r:render 15.6",
+              "m:hold 3.5",
+              "r:matrices 1.6",
+              "m:pose 1.2"
+            ],
+            "heapMB": 815.3,
+            "freedMB": -0.5
+          },
+          {
+            "frame": 79,
+            "ms": 38.3,
+            "top": [
+              "r:render 22.5",
+              "m:hold 4.5",
+              "r:matrices 3.0",
+              "r:cull 1.5"
+            ],
+            "heapMB": 782.7,
+            "freedMB": 32.6
+          },
+          {
+            "frame": 80,
+            "ms": 24.3,
+            "top": [
+              "r:render 11.7",
+              "m:hold 3.9",
+              "r:matrices 2.0",
+              "m:pose 1.1"
+            ],
+            "heapMB": 783.2,
+            "freedMB": -0.5
+          },
+          {
+            "frame": 81,
+            "ms": 24.8,
+            "top": [
+              "r:render 14.4",
+              "m:hold 2.9",
+              "r:matrices 2.7",
+              "m:pose 1.4"
+            ],
+            "heapMB": 783.8,
+            "freedMB": -0.5
+          },
+          {
+            "frame": 82,
+            "ms": 25.4,
+            "top": [
+              "r:render 12.7",
+              "m:hold 3.5",
+              "r:matrices 1.6",
+              "w:minimap 1.1"
+            ],
+            "heapMB": 784.3,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 84,
+            "ms": 25.6,
+            "top": [
+              "r:render 12.5",
+              "m:hold 4.2",
+              "r:matrices 2.3",
+              "m:pose 0.9"
+            ],
+            "heapMB": 785.4,
+            "freedMB": -0.5
+          },
+          {
+            "frame": 86,
+            "ms": 26.6,
+            "top": [
+              "r:render 13.2",
+              "m:hold 2.8",
+              "zombies 2.7",
+              "r:matrices 1.9"
+            ],
+            "heapMB": 786.5,
+            "freedMB": -0.5
+          },
+          {
+            "frame": 88,
+            "ms": 30.9,
+            "top": [
+              "r:render 16.5",
+              "m:hold 4.4",
+              "r:matrices 1.8",
+              "m:pose 1.7"
+            ],
+            "heapMB": 787.6,
+            "freedMB": -0.5
+          },
+          {
+            "frame": 89,
+            "ms": 26.3,
+            "top": [
+              "r:render 15.8",
+              "m:hold 2.4",
+              "r:matrices 1.9",
+              "m:pose 1.2"
+            ],
+            "heapMB": 788.1,
+            "freedMB": -0.5
+          },
+          {
+            "frame": 90,
+            "ms": 26.5,
+            "top": [
+              "r:render 12.3",
+              "m:hold 3.9",
+              "w:minimap 1.6",
+              "m:pose 1.5"
+            ],
+            "heapMB": 788.7,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 92,
+            "ms": 28.4,
+            "top": [
+              "r:render 15.6",
+              "m:hold 3.3",
+              "r:matrices 1.7",
+              "m:pose 1.6"
+            ],
+            "heapMB": 789.8,
+            "freedMB": -0.5
+          },
+          {
+            "frame": 95,
+            "ms": 26.8,
+            "top": [
+              "r:render 13.9",
+              "m:hold 3.2",
+              "m:pose 1.8",
+              "w:minimap 1.5"
+            ],
+            "heapMB": 791.4,
+            "freedMB": -0.5
+          }
+        ]
+      }
+    },
+    {
+      "pass": 2,
+      "fire": true,
+      "before": {
+        "phase": "prep",
+        "day": 1,
+        "ammo": 24,
+        "zombies": 2,
+        "paused": false,
+        "warmPending": false,
+        "showPerf": true,
+        "flightHold": false,
+        "hidden": false,
+        "focus": true,
+        "now": 62557.30000001192
+      },
+      "after": {
+        "phase": "prep",
+        "day": 1,
+        "ammo": 0,
+        "zombies": 2,
+        "paused": false,
+        "warmPending": false,
+        "showPerf": true,
+        "flightHold": false,
+        "hidden": false,
+        "focus": true,
+        "now": 63989.09999999404
+      },
+      "profileWindowMs": 1327.3249999999996,
+      "self": [
+        {
+          "name": "(program) :0",
+          "ms": 375.2270000000002,
+          "percent": 28.26941404704954
+        },
+        {
+          "name": "updateMatrixWorld three/three.core.js:13980",
+          "ms": 161.814,
+          "percent": 12.190985628990642
+        },
+        {
+          "name": "writeBuffer :0",
+          "ms": 41.72999999999999,
+          "percent": 3.1439172772305204
+        },
+        {
+          "name": "updateByType three/three.webgpu.js:52796",
+          "ms": 34.486000000000004,
+          "percent": 2.598157949258849
+        },
+        {
+          "name": "_projectObject three/three.webgpu.js:51929",
+          "ms": 31.773,
+          "percent": 2.393761889514626
+        },
+        {
+          "name": "updateForRender three/three.webgpu.js:47227",
+          "ms": 26.809,
+          "percent": 2.0197766183866053
+        },
+        {
+          "name": "get three/three.webgpu.js:26002",
+          "ms": 25.356,
+          "percent": 1.9103083268980854
+        },
+        {
+          "name": "multiplyMatrices three/three.core.js:11564",
+          "ms": 25.249,
+          "percent": 1.902247000546212
+        },
+        {
+          "name": "updateWorldMatrix three/three.core.js:14027",
+          "ms": 23.246,
+          "percent": 1.7513419848190914
+        },
+        {
+          "name": "_renderObjectDirect three/three.webgpu.js:52263",
+          "ms": 22.36,
+          "percent": 1.6845911890456373
+        },
+        {
+          "name": "updateProjectiles 127.0.0.1:18535/index.html:60940",
+          "ms": 17.514,
+          "percent": 1.3194959787542617
+        },
+        {
+          "name": "sceneCull 127.0.0.1:18535/index.html:2342",
+          "ms": 17.221,
+          "percent": 1.2974215056598801
+        },
+        {
+          "name": "set three/three.webgpu.js:3074",
+          "ms": 17.106,
+          "percent": 1.2887574633190821
+        },
+        {
+          "name": "_update three/three.webgpu.js:27681",
+          "ms": 15.853,
+          "percent": 1.194357071553689
+        },
+        {
+          "name": "setVertexBuffer :0",
+          "ms": 15.526000000000002,
+          "percent": 1.1697210555063762
+        },
+        {
+          "name": "getBoundingClientRect :0",
+          "ms": 15.346,
+          "percent": 1.1561599457555614
+        },
+        {
+          "name": "updateForRender three/three.webgpu.js:27628",
+          "ms": 15.046000000000003,
+          "percent": 1.1335580961708707
+        },
+        {
+          "name": "shoulderAngles core/body-limits.js:193",
+          "ms": 14.071,
+          "percent": 1.0601020850206244
+        }
+      ],
+      "inclusive": [
+        {
+          "name": "(root) :0",
+          "ms": 1327.3249999999996,
+          "percent": 100.00000000000001
+        },
+        {
+          "name": "updateMatrixWorld three/three.core.js:13980",
+          "ms": 1057.2959999999998,
+          "percent": 79.65615052831824
+        },
+        {
+          "name": "_renderScene three/three.webgpu.js:50617",
+          "ms": 1017.1189999999989,
+          "percent": 76.62923549243774
+        },
+        {
+          "name": "update three/three.webgpu.js:24925",
+          "ms": 948.8409999999992,
+          "percent": 71.48520520595932
+        },
+        {
+          "name": "tick 127.0.0.1:18535/index.html:68750",
+          "ms": 947.2379999999991,
+          "percent": 71.36443598967844
+        },
+        {
+          "name": "_renderObjects three/three.webgpu.js:52128",
+          "ms": 944.0709999999987,
+          "percent": 71.12583579756269
+        },
+        {
+          "name": "renderObject three/three.webgpu.js:52154",
+          "ms": 919.3339999999988,
+          "percent": 69.26216262030769
+        },
+        {
+          "name": "_renderObjectDirect three/three.webgpu.js:52263",
+          "ms": 914.6619999999988,
+          "percent": 68.91017648277544
+        },
+        {
+          "name": "filter game/viewmodel.js:190",
+          "ms": 853.3999999999994,
+          "percent": 64.29472811858435
+        },
+        {
+          "name": "updateBefore three/three.webgpu.js:47168",
+          "ms": 565.7269999999996,
+          "percent": 42.62158853332829
+        },
+        {
+          "name": "updateBeforeNode three/three.webgpu.js:45477",
+          "ms": 564.1639999999998,
+          "percent": 42.503832896992066
+        },
+        {
+          "name": "renderFrame 127.0.0.1:18535/index.html:2526",
+          "ms": 541.6610000000001,
+          "percent": 40.80846815964441
+        },
+        {
+          "name": "render three/three.webgpu.js:70670",
+          "ms": 458.11800000000034,
+          "percent": 34.5143804267983
+        },
+        {
+          "name": "updateBefore three/three.webgpu.js:33703",
+          "ms": 433.2370000000002,
+          "percent": 32.639858361742625
+        },
+        {
+          "name": "(program) :0",
+          "ms": 375.2270000000002,
+          "percent": 28.26941404704954
+        },
+        {
+          "name": "_projectObject three/three.webgpu.js:51929",
+          "ms": 204.54999999999993,
+          "percent": 15.41069444182849
+        },
+        {
+          "name": "holdWeapon 127.0.0.1:18535/index.html:56333",
+          "ms": 195.33799999999997,
+          "percent": 14.716666980581245
+        },
+        {
+          "name": "updateWorldMatrix three/three.core.js:14027",
+          "ms": 163.57200000000006,
+          "percent": 12.323432467556938
+        }
+      ],
+      "phases": {
+        "frames": 32,
+        "phases": [
+          {
+            "k": "r:render",
+            "avg": 15.084,
+            "max": 22.3
+          },
+          {
+            "k": "m:hold",
+            "avg": 3.784,
+            "max": 6.3
+          },
+          {
+            "k": "m:hold2+arms",
+            "avg": 2.356,
+            "max": 4.9
+          },
+          {
+            "k": "r:matrices",
+            "avg": 1.706,
+            "max": 2.5
+          },
+          {
+            "k": "m:pose",
+            "avg": 0.928,
+            "max": 1.8
+          },
+          {
+            "k": "projectiles",
+            "avg": 0.747,
+            "max": 1.8
+          },
+          {
+            "k": "r:cull",
+            "avg": 0.659,
+            "max": 1.4
+          },
+          {
+            "k": "viewmodel",
+            "avg": 0.597,
+            "max": 1.2
+          },
+          {
+            "k": "w:minimap",
+            "avg": 0.581,
+            "max": 2
+          },
+          {
+            "k": "aim+climb",
+            "avg": 0.553,
+            "max": 0.8
+          },
+          {
+            "k": "zombies",
+            "avg": 0.547,
+            "max": 3.7
+          },
+          {
+            "k": "w:treeFall+leaves+batches",
+            "avg": 0.525,
+            "max": 1
+          },
+          {
+            "k": "m:fire",
+            "avg": 0.441,
+            "max": 0.9
+          },
+          {
+            "k": "waves",
+            "avg": 0.291,
+            "max": 0.6
+          },
+          {
+            "k": "effects",
+            "avg": 0.275,
+            "max": 0.8
+          },
+          {
+            "k": "r:rigSkin",
+            "avg": 0.241,
+            "max": 0.8
+          },
+          {
+            "k": "hud+audio",
+            "avg": 0.219,
+            "max": 0.5
+          },
+          {
+            "k": "drops+hud",
+            "avg": 0.219,
+            "max": 0.5
+          },
+          {
+            "k": "w:stairs+roof+birds+bugs+wildlife",
+            "avg": 0.166,
+            "max": 0.4
+          },
+          {
+            "k": "w:treeFade+sway",
+            "avg": 0.166,
+            "max": 0.4
+          },
+          {
+            "k": "w:wind",
+            "avg": 0.128,
+            "max": 0.3
+          },
+          {
+            "k": "daynight",
+            "avg": 0.109,
+            "max": 0.4
+          },
+          {
+            "k": "m:reload+knife",
+            "avg": 0.103,
+            "max": 0.4
+          },
+          {
+            "k": "w:motes+flame+ripples+life",
+            "avg": 0.056,
+            "max": 0.2
+          },
+          {
+            "k": "camera",
+            "avg": 0.056,
+            "max": 0.1
+          },
+          {
+            "k": "w:weather+lightning+clouds",
+            "avg": 0.047,
+            "max": 0.1
+          },
+          {
+            "k": "idle+gear",
+            "avg": 0.037,
+            "max": 0.2
+          },
+          {
+            "k": "move",
+            "avg": 0.037,
+            "max": 0.1
+          },
+          {
+            "k": "tree+deck coll",
+            "avg": 0.028,
+            "max": 0.1
+          },
+          {
+            "k": "r:lightPool",
+            "avg": 0.028,
+            "max": 0.7
+          },
+          {
+            "k": "w:banner..normals",
+            "avg": 0.022,
+            "max": 0.1
+          },
+          {
+            "k": "m:hush+roof+kills",
+            "avg": 0.019,
+            "max": 0.1
+          },
+          {
+            "k": "m:reticle+ghost",
+            "avg": 0.019,
+            "max": 0.1
+          },
+          {
+            "k": "ground+clamp",
+            "avg": 0.016,
+            "max": 0.1
+          },
+          {
+            "k": "fires+smoke",
+            "avg": 0.016,
+            "max": 0.1
+          },
+          {
+            "k": "w:foliageCull",
+            "avg": 0.013,
+            "max": 0.2
+          },
+          {
+            "k": "m:idle",
+            "avg": 0.012,
+            "max": 0.1
+          },
+          {
+            "k": "m:lasers",
+            "avg": 0.012,
+            "max": 0.1
+          },
+          {
+            "k": "w:doors+traps+shadowLOD",
+            "avg": 0.012,
+            "max": 0.1
+          },
+          {
+            "k": "m:mortar+carry",
+            "avg": 0.009,
+            "max": 0.1
+          },
+          {
+            "k": "turrets",
+            "avg": 0.009,
+            "max": 0.1
+          },
+          {
+            "k": "jump+guns",
+            "avg": 0.009,
+            "max": 0.1
+          },
+          {
+            "k": "combat misc",
+            "avg": 0.006,
+            "max": 0.1
+          },
+          {
+            "k": "w:water",
+            "avg": 0.006,
+            "max": 0.1
+          },
+          {
+            "k": "after render",
+            "avg": 0.006,
+            "max": 0.1
+          },
+          {
+            "k": "marine",
+            "avg": 0.003,
+            "max": 0.1
+          },
+          {
+            "k": "w:rest",
+            "avg": 0,
+            "max": 0
+          }
+        ],
+        "spikes": [
+          {
+            "frame": 2,
+            "ms": 37.2,
+            "top": [
+              "r:render 22.3",
+              "m:hold 5.5",
+              "m:pose 1.6",
+              "r:matrices 1.6"
+            ],
+            "heapMB": 802.2,
+            "freedMB": -0.5
+          },
+          {
+            "frame": 3,
+            "ms": 27.8,
+            "top": [
+              "r:render 12.9",
+              "m:hold 3.1",
+              "m:hold2+arms 2.7",
+              "r:matrices 1.7"
+            ],
+            "heapMB": 803.2,
+            "freedMB": -1
+          },
+          {
+            "frame": 4,
+            "ms": 25.9,
+            "top": [
+              "r:render 14.5",
+              "m:hold 3.3",
+              "m:hold2+arms 2.0",
+              "r:matrices 0.9"
+            ],
+            "heapMB": 804,
+            "freedMB": -0.8
+          },
+          {
+            "frame": 5,
+            "ms": 33.4,
+            "top": [
+              "r:render 13.2",
+              "m:hold 5.9",
+              "m:hold2+arms 3.7",
+              "zombies 2.9"
+            ],
+            "heapMB": 804.9,
+            "freedMB": -0.9
+          },
+          {
+            "frame": 6,
+            "ms": 30.7,
+            "top": [
+              "r:render 13.1",
+              "m:hold 3.9",
+              "m:hold2+arms 2.6",
+              "r:matrices 1.7"
+            ],
+            "heapMB": 805.7,
+            "freedMB": -0.8
+          },
+          {
+            "frame": 7,
+            "ms": 27.8,
+            "top": [
+              "r:render 14.8",
+              "m:hold 2.8",
+              "m:hold2+arms 2.3",
+              "r:matrices 1.8"
+            ],
+            "heapMB": 806.6,
+            "freedMB": -0.8
+          },
+          {
+            "frame": 8,
+            "ms": 29.8,
+            "top": [
+              "r:render 14.0",
+              "m:hold 3.2",
+              "m:hold2+arms 3.0",
+              "r:matrices 1.7"
+            ],
+            "heapMB": 807.4,
+            "freedMB": -0.8
+          },
+          {
+            "frame": 9,
+            "ms": 30.5,
+            "top": [
+              "r:render 17.0",
+              "m:hold 2.8",
+              "m:hold2+arms 2.7",
+              "r:matrices 1.5"
+            ],
+            "heapMB": 808.3,
+            "freedMB": -0.9
+          },
+          {
+            "frame": 10,
+            "ms": 32.1,
+            "top": [
+              "r:render 15.0",
+              "m:hold 4.1",
+              "m:hold2+arms 2.5",
+              "r:matrices 1.8"
+            ],
+            "heapMB": 809.2,
+            "freedMB": -0.9
+          },
+          {
+            "frame": 11,
+            "ms": 31.4,
+            "top": [
+              "r:render 16.7",
+              "m:hold 4.2",
+              "m:hold2+arms 2.8",
+              "r:matrices 1.3"
+            ],
+            "heapMB": 810,
+            "freedMB": -0.9
+          },
+          {
+            "frame": 12,
+            "ms": 34.9,
+            "top": [
+              "r:render 15.7",
+              "m:hold 6.3",
+              "m:hold2+arms 3.5",
+              "r:matrices 2.0"
+            ],
+            "heapMB": 810.9,
+            "freedMB": -0.9
+          },
+          {
+            "frame": 13,
+            "ms": 34.3,
+            "top": [
+              "r:render 17.4",
+              "m:hold 4.2",
+              "m:hold2+arms 3.5",
+              "r:matrices 1.7"
+            ],
+            "heapMB": 811.7,
+            "freedMB": -0.9
+          },
+          {
+            "frame": 14,
+            "ms": 33.5,
+            "top": [
+              "r:render 15.5",
+              "m:hold 4.0",
+              "m:hold2+arms 3.7",
+              "r:matrices 1.8"
+            ],
+            "heapMB": 812.6,
+            "freedMB": -0.9
+          },
+          {
+            "frame": 15,
+            "ms": 33.3,
+            "top": [
+              "r:render 18.3",
+              "m:hold 3.4",
+              "r:matrices 2.3",
+              "m:hold2+arms 2.2"
+            ],
+            "heapMB": 813.5,
+            "freedMB": -0.9
+          },
+          {
+            "frame": 16,
+            "ms": 34.7,
+            "top": [
+              "r:render 13.0",
+              "m:hold 5.0",
+              "m:hold2+arms 4.1",
+              "w:minimap 1.9"
+            ],
+            "heapMB": 814.3,
+            "freedMB": -0.9
+          },
+          {
+            "frame": 17,
+            "ms": 32.9,
+            "top": [
+              "r:render 12.1",
+              "m:hold2+arms 3.9",
+              "m:hold 3.7",
+              "zombies 3.6"
+            ],
+            "heapMB": 815.2,
+            "freedMB": -0.9
+          },
+          {
+            "frame": 18,
+            "ms": 27.7,
+            "top": [
+              "r:render 13.8",
+              "m:hold 3.1",
+              "m:hold2+arms 2.1",
+              "r:matrices 2.1"
+            ],
+            "heapMB": 816.1,
+            "freedMB": -0.9
+          },
+          {
+            "frame": 19,
+            "ms": 34.9,
+            "top": [
+              "r:render 18.1",
+              "m:hold 5.4",
+              "m:hold2+arms 2.7",
+              "r:matrices 2.0"
+            ],
+            "heapMB": 783.8,
+            "freedMB": 32.3
+          },
+          {
+            "frame": 20,
+            "ms": 35.7,
+            "top": [
+              "r:render 15.3",
+              "m:hold2+arms 4.4",
+              "m:hold 3.0",
+              "w:minimap 2.0"
+            ],
+            "heapMB": 784.7,
+            "freedMB": -0.9
+          },
+          {
+            "frame": 21,
+            "ms": 39.4,
+            "top": [
+              "r:render 17.4",
+              "m:hold 5.8",
+              "m:hold2+arms 3.7",
+              "r:matrices 2.5"
+            ],
+            "heapMB": 785.6,
+            "freedMB": -0.9
+          },
+          {
+            "frame": 22,
+            "ms": 31.2,
+            "top": [
+              "r:render 15.8",
+              "m:hold 3.6",
+              "m:hold2+arms 2.5",
+              "r:matrices 1.7"
+            ],
+            "heapMB": 786.5,
+            "freedMB": -0.9
+          },
+          {
+            "frame": 23,
+            "ms": 31.4,
+            "top": [
+              "r:render 12.9",
+              "m:hold2+arms 4.9",
+              "m:hold 3.1",
+              "r:matrices 1.7"
+            ],
+            "heapMB": 787.4,
+            "freedMB": -0.9
+          },
+          {
+            "frame": 24,
+            "ms": 39.9,
+            "top": [
+              "r:render 21.1",
+              "m:hold 4.0",
+              "m:hold2+arms 3.6",
+              "r:matrices 2.0"
+            ],
+            "heapMB": 788.3,
+            "freedMB": -0.9
+          },
+          {
+            "frame": 25,
+            "ms": 36.3,
+            "top": [
+              "r:render 17.0",
+              "m:hold 3.8",
+              "m:hold2+arms 3.5",
+              "r:matrices 1.6"
+            ],
+            "heapMB": 789.4,
+            "freedMB": -1.1
+          },
+          {
+            "frame": 26,
+            "ms": 27.8,
+            "top": [
+              "r:render 14.2",
+              "m:hold2+arms 2.8",
+              "m:hold 2.4",
+              "m:pose 1.3"
+            ],
+            "heapMB": 790.2,
+            "freedMB": -0.9
+          },
+          {
+            "frame": 27,
+            "ms": 27.6,
+            "top": [
+              "r:render 16.7",
+              "m:hold 2.3",
+              "r:matrices 1.6",
+              "m:pose 0.9"
+            ],
+            "heapMB": 790.9,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 28,
+            "ms": 30.6,
+            "top": [
+              "r:render 15.8",
+              "m:hold 5.1",
+              "r:matrices 2.3",
+              "projectiles 1.1"
+            ],
+            "heapMB": 791.5,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 29,
+            "ms": 29,
+            "top": [
+              "r:render 11.9",
+              "m:hold 3.9",
+              "zombies 3.7",
+              "r:matrices 1.8"
+            ],
+            "heapMB": 792.1,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 30,
+            "ms": 24.2,
+            "top": [
+              "r:render 14.0",
+              "r:matrices 2.3",
+              "m:hold 1.8",
+              "r:cull 0.7"
+            ],
+            "heapMB": 792.8,
+            "freedMB": -0.6
+          },
+          {
+            "frame": 31,
+            "ms": 26.3,
+            "top": [
+              "r:render 13.9",
+              "m:hold 3.1",
+              "r:matrices 1.5",
+              "m:pose 0.8"
+            ],
+            "heapMB": 793.4,
+            "freedMB": -0.6
+          }
+        ]
+      }
+    }
+  ]
+}

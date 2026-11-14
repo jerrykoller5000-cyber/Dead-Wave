@@ -1,0 +1,2222 @@
+{
+  "navigation": "Canonical tools/bench early dismissForTesting; separate loader-ready and actual menu times",
+  "scope": "REVIEW ONLY differential baseline/sparse intermediate propagation; preserves original boundary result. Double solves/counter increments; NOT timing acceptance.",
+  "frameSampling": "production-tick-start-wall-clock",
+  "environment": "outdoor",
+  "sourceSha256": "798ae744e736f203dc587b48ee4e4e588497ec52261fca18321f72a0c57e710c",
+  "moduleHashes": {
+    "core/body-limits.js": "fd2562bd882ef767155cc819301ede35e68d008621dd0f683232c593d91459eb",
+    "game/viewmodel.js": "f3eb743fb200945a3bed23accbd93dfcb5cf983e616769049c357d3199b7363e",
+    "game/tp-fit.js": "d2dbf1e163f856b672a1a91d1638a949749e3bde1727bda8ceaf1f18c3b08e07",
+    "studio/fp-arms.js": "fff7808db158e072d0c5697a0a57e0c87de7fa81847558fc8670f6f7e5f190d8",
+    "world/training-ballistics.js": "eadc9d04d5fd50ad9f6f23c0a080ea2ad58485ff62e0002f1a6b1b0da4719bdc"
+  },
+  "rows": [
+    {
+      "weapon": "pistol",
+      "setup": {
+        "weapon": "pistol",
+        "pair": true,
+        "ammo": 24,
+        "magSize": 12,
+        "auto": true,
+        "loadout": {
+          "primary": [
+            null,
+            null
+          ],
+          "secondary": [
+            null,
+            "pistol:second"
+          ],
+          "hip": "pistol:base"
+        },
+        "position": [
+          42,
+          -7.5467963358017105,
+          -20
+        ]
+      },
+      "parity": {
+        "calls": 106,
+        "failed": [],
+        "maxLocal": 0,
+        "maxWorld": 0,
+        "maxReturn": 0
+      }
+    },
+    {
+      "weapon": "ak",
+      "setup": {
+        "weapon": "ak",
+        "pair": false,
+        "ammo": 30,
+        "magSize": 30,
+        "auto": true,
+        "loadout": {
+          "primary": [
+            "ak",
+            null
+          ],
+          "secondary": [
+            null,
+            null
+          ],
+          "hip": "pistol:base"
+        },
+        "position": [
+          42,
+          -7.5467963358017105,
+          -20
+        ]
+      },
+      "parity": {
+        "calls": 265,
+        "failed": [],
+        "maxLocal": 0,
+        "maxWorld": 0,
+        "maxReturn": 0
+      }
+    },
+    {
+      "weapon": "uzi",
+      "setup": {
+        "weapon": "uzi",
+        "pair": false,
+        "ammo": 32,
+        "magSize": 32,
+        "auto": true,
+        "loadout": {
+          "primary": [
+            null,
+            null
+          ],
+          "secondary": [
+            "uzi",
+            null
+          ],
+          "hip": "pistol:base"
+        },
+        "position": [
+          42,
+          -7.5467963358017105,
+          -20
+        ]
+      },
+      "parity": {
+        "calls": 399,
+        "failed": [],
+        "maxLocal": 0,
+        "maxWorld": 0,
+        "maxReturn": 0
+      }
+    },
+    {
+      "weapon": "minigun",
+      "setup": {
+        "weapon": "minigun",
+        "pair": false,
+        "ammo": 300,
+        "magSize": 300,
+        "auto": true,
+        "loadout": {
+          "primary": [
+            "minigun",
+            null
+          ],
+          "secondary": [
+            null,
+            null
+          ],
+          "hip": "pistol:base"
+        },
+        "position": [
+          42,
+          -7.5467963358017105,
+          -20
+        ]
+      },
+      "parity": {
+        "calls": 511,
+        "failed": [],
+        "maxLocal": 0,
+        "maxWorld": 0,
+        "maxReturn": 0
+      }
+    },
+    {
+      "weapon": "shotgun",
+      "setup": {
+        "weapon": "shotgun",
+        "pair": false,
+        "ammo": 8,
+        "magSize": 8,
+        "auto": false,
+        "loadout": {
+          "primary": [
+            "shotgun",
+            null
+          ],
+          "secondary": [
+            null,
+            null
+          ],
+          "hip": "pistol:base"
+        },
+        "position": [
+          42,
+          -7.5467963358017105,
+          -20
+        ]
+      },
+      "parity": {
+        "calls": 673,
+        "failed": [
+          {
+            "weapon": "shotgun",
+            "call": 514,
+            "local": 0,
+            "world": 0.9796243328814729,
+            "scalar": 0,
+            "k": 1,
+            "a": 0,
+            "wr": true,
+            "nodes": [
+              {
+                "i": 4,
+                "name": "",
+                "type": "Group",
+                "diff": 0.14972024279180207
+              },
+              {
+                "i": 5,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.14972024279180207
+              },
+              {
+                "i": 6,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.14972024279180207
+              },
+              {
+                "i": 7,
+                "name": "",
+                "type": "Group",
+                "diff": 0.14972024279180207
+              },
+              {
+                "i": 8,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.02268204072099156
+              },
+              {
+                "i": 9,
+                "name": "wrist-continuous-skin",
+                "type": "Mesh",
+                "diff": 0.14972024279180207
+              }
+            ]
+          },
+          {
+            "weapon": "shotgun",
+            "call": 517,
+            "local": 0,
+            "world": 0.9796593364098544,
+            "scalar": 0,
+            "k": 1,
+            "a": 0,
+            "wr": true,
+            "nodes": [
+              {
+                "i": 4,
+                "name": "",
+                "type": "Group",
+                "diff": 0.14970561802598187
+              },
+              {
+                "i": 5,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.14970561802598187
+              },
+              {
+                "i": 6,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.14970561802598187
+              },
+              {
+                "i": 7,
+                "name": "",
+                "type": "Group",
+                "diff": 0.14970561802598187
+              },
+              {
+                "i": 8,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.0226702544351447
+              },
+              {
+                "i": 9,
+                "name": "wrist-continuous-skin",
+                "type": "Mesh",
+                "diff": 0.14970561802598187
+              }
+            ]
+          },
+          {
+            "weapon": "shotgun",
+            "call": 520,
+            "local": 0,
+            "world": 0.9797065155482558,
+            "scalar": 0,
+            "k": 1,
+            "a": 0,
+            "wr": true,
+            "nodes": [
+              {
+                "i": 4,
+                "name": "",
+                "type": "Group",
+                "diff": 0.14969069990155387
+              },
+              {
+                "i": 5,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.14969069990155387
+              },
+              {
+                "i": 6,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.14969069990155387
+              },
+              {
+                "i": 7,
+                "name": "",
+                "type": "Group",
+                "diff": 0.14969069990155387
+              },
+              {
+                "i": 8,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.022658094895854575
+              },
+              {
+                "i": 9,
+                "name": "wrist-continuous-skin",
+                "type": "Mesh",
+                "diff": 0.14969069990155387
+              }
+            ]
+          },
+          {
+            "weapon": "shotgun",
+            "call": 523,
+            "local": 0,
+            "world": 0.979722847783836,
+            "scalar": 0,
+            "k": 1,
+            "a": 0,
+            "wr": true,
+            "nodes": [
+              {
+                "i": 4,
+                "name": "",
+                "type": "Group",
+                "diff": 0.1497117360625702
+              },
+              {
+                "i": 5,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.1497117360625702
+              },
+              {
+                "i": 6,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.1497117360625702
+              },
+              {
+                "i": 7,
+                "name": "",
+                "type": "Group",
+                "diff": 0.1497117360625702
+              },
+              {
+                "i": 8,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.022672910614939035
+              },
+              {
+                "i": 9,
+                "name": "wrist-continuous-skin",
+                "type": "Mesh",
+                "diff": 0.1497117360625702
+              }
+            ]
+          },
+          {
+            "weapon": "shotgun",
+            "call": 526,
+            "local": 0,
+            "world": 0.9797797179621053,
+            "scalar": 0,
+            "k": 1,
+            "a": 0,
+            "wr": true,
+            "nodes": [
+              {
+                "i": 4,
+                "name": "",
+                "type": "Group",
+                "diff": 0.14968086626656424
+              },
+              {
+                "i": 5,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.14968086626656424
+              },
+              {
+                "i": 6,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.14968086626656424
+              },
+              {
+                "i": 7,
+                "name": "",
+                "type": "Group",
+                "diff": 0.14968086626656424
+              },
+              {
+                "i": 8,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.022649009051256996
+              },
+              {
+                "i": 9,
+                "name": "wrist-continuous-skin",
+                "type": "Mesh",
+                "diff": 0.14968086626656424
+              }
+            ]
+          },
+          {
+            "weapon": "shotgun",
+            "call": 529,
+            "local": 0,
+            "world": 0.9798118260828419,
+            "scalar": 0,
+            "k": 1,
+            "a": 0,
+            "wr": true,
+            "nodes": [
+              {
+                "i": 4,
+                "name": "",
+                "type": "Group",
+                "diff": 0.1496968582445733
+              },
+              {
+                "i": 5,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.1496968582445733
+              },
+              {
+                "i": 6,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.1496968582445733
+              },
+              {
+                "i": 7,
+                "name": "",
+                "type": "Group",
+                "diff": 0.1496968582445733
+              },
+              {
+                "i": 8,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.022660228174723684
+              },
+              {
+                "i": 9,
+                "name": "wrist-continuous-skin",
+                "type": "Mesh",
+                "diff": 0.1496968582445733
+              }
+            ]
+          },
+          {
+            "weapon": "shotgun",
+            "call": 532,
+            "local": 0,
+            "world": 0.979851932430144,
+            "scalar": 0,
+            "k": 1,
+            "a": 0,
+            "wr": true,
+            "nodes": [
+              {
+                "i": 4,
+                "name": "",
+                "type": "Group",
+                "diff": 0.14969905578136183
+              },
+              {
+                "i": 5,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.14969905578136183
+              },
+              {
+                "i": 6,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.14969905578136183
+              },
+              {
+                "i": 7,
+                "name": "",
+                "type": "Group",
+                "diff": 0.14969905578136183
+              },
+              {
+                "i": 8,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.022661201780931783
+              },
+              {
+                "i": 9,
+                "name": "wrist-continuous-skin",
+                "type": "Mesh",
+                "diff": 0.14969905578136183
+              }
+            ]
+          },
+          {
+            "weapon": "shotgun",
+            "call": 535,
+            "local": 0,
+            "world": 0.9799030439227002,
+            "scalar": 0,
+            "k": 1,
+            "a": 0,
+            "wr": true,
+            "nodes": [
+              {
+                "i": 4,
+                "name": "",
+                "type": "Group",
+                "diff": 0.1496836588135127
+              },
+              {
+                "i": 5,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.1496836588135127
+              },
+              {
+                "i": 6,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.1496836588135127
+              },
+              {
+                "i": 7,
+                "name": "",
+                "type": "Group",
+                "diff": 0.1496836588135127
+              },
+              {
+                "i": 8,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.022649094422392047
+              },
+              {
+                "i": 9,
+                "name": "wrist-continuous-skin",
+                "type": "Mesh",
+                "diff": 0.1496836588135127
+              }
+            ]
+          },
+          {
+            "weapon": "shotgun",
+            "call": 538,
+            "local": 0,
+            "world": 0.9799271040380679,
+            "scalar": 0,
+            "k": 1,
+            "a": 0,
+            "wr": true,
+            "nodes": [
+              {
+                "i": 4,
+                "name": "",
+                "type": "Group",
+                "diff": 0.1497103824520537
+              },
+              {
+                "i": 5,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.1497103824520537
+              },
+              {
+                "i": 6,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.1497103824520537
+              },
+              {
+                "i": 7,
+                "name": "",
+                "type": "Group",
+                "diff": 0.1497103824520537
+              },
+              {
+                "i": 8,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.02266849272702398
+              },
+              {
+                "i": 9,
+                "name": "wrist-continuous-skin",
+                "type": "Mesh",
+                "diff": 0.1497103824520537
+              }
+            ]
+          },
+          {
+            "weapon": "shotgun",
+            "call": 541,
+            "local": 0,
+            "world": 0.9799834815362691,
+            "scalar": 0,
+            "k": 1,
+            "a": 0,
+            "wr": true,
+            "nodes": [
+              {
+                "i": 4,
+                "name": "",
+                "type": "Group",
+                "diff": 0.14968644478507614
+              },
+              {
+                "i": 5,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.14968644478507614
+              },
+              {
+                "i": 6,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.14968644478507614
+              },
+              {
+                "i": 7,
+                "name": "",
+                "type": "Group",
+                "diff": 0.14968644478507614
+              },
+              {
+                "i": 8,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.022650262697175627
+              },
+              {
+                "i": 9,
+                "name": "wrist-continuous-skin",
+                "type": "Mesh",
+                "diff": 0.14968644478507614
+              }
+            ]
+          }
+        ],
+        "maxLocal": 0,
+        "maxWorld": 0.9809139017424687,
+        "maxReturn": 0
+      }
+    },
+    {
+      "weapon": "sniper",
+      "setup": {
+        "weapon": "sniper",
+        "pair": false,
+        "ammo": 5,
+        "magSize": 5,
+        "auto": false,
+        "loadout": {
+          "primary": [
+            "sniper",
+            null
+          ],
+          "secondary": [
+            null,
+            null
+          ],
+          "hip": "pistol:base"
+        },
+        "position": [
+          42,
+          -7.5467963358017105,
+          -20
+        ]
+      },
+      "parity": {
+        "calls": 823,
+        "failed": [
+          {
+            "weapon": "shotgun",
+            "call": 514,
+            "local": 0,
+            "world": 0.9796243328814729,
+            "scalar": 0,
+            "k": 1,
+            "a": 0,
+            "wr": true,
+            "nodes": [
+              {
+                "i": 4,
+                "name": "",
+                "type": "Group",
+                "diff": 0.14972024279180207
+              },
+              {
+                "i": 5,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.14972024279180207
+              },
+              {
+                "i": 6,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.14972024279180207
+              },
+              {
+                "i": 7,
+                "name": "",
+                "type": "Group",
+                "diff": 0.14972024279180207
+              },
+              {
+                "i": 8,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.02268204072099156
+              },
+              {
+                "i": 9,
+                "name": "wrist-continuous-skin",
+                "type": "Mesh",
+                "diff": 0.14972024279180207
+              }
+            ]
+          },
+          {
+            "weapon": "shotgun",
+            "call": 517,
+            "local": 0,
+            "world": 0.9796593364098544,
+            "scalar": 0,
+            "k": 1,
+            "a": 0,
+            "wr": true,
+            "nodes": [
+              {
+                "i": 4,
+                "name": "",
+                "type": "Group",
+                "diff": 0.14970561802598187
+              },
+              {
+                "i": 5,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.14970561802598187
+              },
+              {
+                "i": 6,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.14970561802598187
+              },
+              {
+                "i": 7,
+                "name": "",
+                "type": "Group",
+                "diff": 0.14970561802598187
+              },
+              {
+                "i": 8,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.0226702544351447
+              },
+              {
+                "i": 9,
+                "name": "wrist-continuous-skin",
+                "type": "Mesh",
+                "diff": 0.14970561802598187
+              }
+            ]
+          },
+          {
+            "weapon": "shotgun",
+            "call": 520,
+            "local": 0,
+            "world": 0.9797065155482558,
+            "scalar": 0,
+            "k": 1,
+            "a": 0,
+            "wr": true,
+            "nodes": [
+              {
+                "i": 4,
+                "name": "",
+                "type": "Group",
+                "diff": 0.14969069990155387
+              },
+              {
+                "i": 5,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.14969069990155387
+              },
+              {
+                "i": 6,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.14969069990155387
+              },
+              {
+                "i": 7,
+                "name": "",
+                "type": "Group",
+                "diff": 0.14969069990155387
+              },
+              {
+                "i": 8,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.022658094895854575
+              },
+              {
+                "i": 9,
+                "name": "wrist-continuous-skin",
+                "type": "Mesh",
+                "diff": 0.14969069990155387
+              }
+            ]
+          },
+          {
+            "weapon": "shotgun",
+            "call": 523,
+            "local": 0,
+            "world": 0.979722847783836,
+            "scalar": 0,
+            "k": 1,
+            "a": 0,
+            "wr": true,
+            "nodes": [
+              {
+                "i": 4,
+                "name": "",
+                "type": "Group",
+                "diff": 0.1497117360625702
+              },
+              {
+                "i": 5,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.1497117360625702
+              },
+              {
+                "i": 6,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.1497117360625702
+              },
+              {
+                "i": 7,
+                "name": "",
+                "type": "Group",
+                "diff": 0.1497117360625702
+              },
+              {
+                "i": 8,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.022672910614939035
+              },
+              {
+                "i": 9,
+                "name": "wrist-continuous-skin",
+                "type": "Mesh",
+                "diff": 0.1497117360625702
+              }
+            ]
+          },
+          {
+            "weapon": "shotgun",
+            "call": 526,
+            "local": 0,
+            "world": 0.9797797179621053,
+            "scalar": 0,
+            "k": 1,
+            "a": 0,
+            "wr": true,
+            "nodes": [
+              {
+                "i": 4,
+                "name": "",
+                "type": "Group",
+                "diff": 0.14968086626656424
+              },
+              {
+                "i": 5,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.14968086626656424
+              },
+              {
+                "i": 6,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.14968086626656424
+              },
+              {
+                "i": 7,
+                "name": "",
+                "type": "Group",
+                "diff": 0.14968086626656424
+              },
+              {
+                "i": 8,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.022649009051256996
+              },
+              {
+                "i": 9,
+                "name": "wrist-continuous-skin",
+                "type": "Mesh",
+                "diff": 0.14968086626656424
+              }
+            ]
+          },
+          {
+            "weapon": "shotgun",
+            "call": 529,
+            "local": 0,
+            "world": 0.9798118260828419,
+            "scalar": 0,
+            "k": 1,
+            "a": 0,
+            "wr": true,
+            "nodes": [
+              {
+                "i": 4,
+                "name": "",
+                "type": "Group",
+                "diff": 0.1496968582445733
+              },
+              {
+                "i": 5,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.1496968582445733
+              },
+              {
+                "i": 6,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.1496968582445733
+              },
+              {
+                "i": 7,
+                "name": "",
+                "type": "Group",
+                "diff": 0.1496968582445733
+              },
+              {
+                "i": 8,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.022660228174723684
+              },
+              {
+                "i": 9,
+                "name": "wrist-continuous-skin",
+                "type": "Mesh",
+                "diff": 0.1496968582445733
+              }
+            ]
+          },
+          {
+            "weapon": "shotgun",
+            "call": 532,
+            "local": 0,
+            "world": 0.979851932430144,
+            "scalar": 0,
+            "k": 1,
+            "a": 0,
+            "wr": true,
+            "nodes": [
+              {
+                "i": 4,
+                "name": "",
+                "type": "Group",
+                "diff": 0.14969905578136183
+              },
+              {
+                "i": 5,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.14969905578136183
+              },
+              {
+                "i": 6,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.14969905578136183
+              },
+              {
+                "i": 7,
+                "name": "",
+                "type": "Group",
+                "diff": 0.14969905578136183
+              },
+              {
+                "i": 8,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.022661201780931783
+              },
+              {
+                "i": 9,
+                "name": "wrist-continuous-skin",
+                "type": "Mesh",
+                "diff": 0.14969905578136183
+              }
+            ]
+          },
+          {
+            "weapon": "shotgun",
+            "call": 535,
+            "local": 0,
+            "world": 0.9799030439227002,
+            "scalar": 0,
+            "k": 1,
+            "a": 0,
+            "wr": true,
+            "nodes": [
+              {
+                "i": 4,
+                "name": "",
+                "type": "Group",
+                "diff": 0.1496836588135127
+              },
+              {
+                "i": 5,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.1496836588135127
+              },
+              {
+                "i": 6,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.1496836588135127
+              },
+              {
+                "i": 7,
+                "name": "",
+                "type": "Group",
+                "diff": 0.1496836588135127
+              },
+              {
+                "i": 8,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.022649094422392047
+              },
+              {
+                "i": 9,
+                "name": "wrist-continuous-skin",
+                "type": "Mesh",
+                "diff": 0.1496836588135127
+              }
+            ]
+          },
+          {
+            "weapon": "shotgun",
+            "call": 538,
+            "local": 0,
+            "world": 0.9799271040380679,
+            "scalar": 0,
+            "k": 1,
+            "a": 0,
+            "wr": true,
+            "nodes": [
+              {
+                "i": 4,
+                "name": "",
+                "type": "Group",
+                "diff": 0.1497103824520537
+              },
+              {
+                "i": 5,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.1497103824520537
+              },
+              {
+                "i": 6,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.1497103824520537
+              },
+              {
+                "i": 7,
+                "name": "",
+                "type": "Group",
+                "diff": 0.1497103824520537
+              },
+              {
+                "i": 8,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.02266849272702398
+              },
+              {
+                "i": 9,
+                "name": "wrist-continuous-skin",
+                "type": "Mesh",
+                "diff": 0.1497103824520537
+              }
+            ]
+          },
+          {
+            "weapon": "shotgun",
+            "call": 541,
+            "local": 0,
+            "world": 0.9799834815362691,
+            "scalar": 0,
+            "k": 1,
+            "a": 0,
+            "wr": true,
+            "nodes": [
+              {
+                "i": 4,
+                "name": "",
+                "type": "Group",
+                "diff": 0.14968644478507614
+              },
+              {
+                "i": 5,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.14968644478507614
+              },
+              {
+                "i": 6,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.14968644478507614
+              },
+              {
+                "i": 7,
+                "name": "",
+                "type": "Group",
+                "diff": 0.14968644478507614
+              },
+              {
+                "i": 8,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.022650262697175627
+              },
+              {
+                "i": 9,
+                "name": "wrist-continuous-skin",
+                "type": "Mesh",
+                "diff": 0.14968644478507614
+              }
+            ]
+          }
+        ],
+        "maxLocal": 0,
+        "maxWorld": 0.9809139017424687,
+        "maxReturn": 0
+      }
+    },
+    {
+      "weapon": "revolver",
+      "setup": {
+        "weapon": "revolver",
+        "pair": false,
+        "ammo": 6,
+        "magSize": 6,
+        "auto": false,
+        "loadout": {
+          "primary": [
+            null,
+            null
+          ],
+          "secondary": [
+            "revolver",
+            null
+          ],
+          "hip": "pistol:base"
+        },
+        "position": [
+          42,
+          -7.5467963358017105,
+          -20
+        ]
+      },
+      "parity": {
+        "calls": 913,
+        "failed": [
+          {
+            "weapon": "shotgun",
+            "call": 514,
+            "local": 0,
+            "world": 0.9796243328814729,
+            "scalar": 0,
+            "k": 1,
+            "a": 0,
+            "wr": true,
+            "nodes": [
+              {
+                "i": 4,
+                "name": "",
+                "type": "Group",
+                "diff": 0.14972024279180207
+              },
+              {
+                "i": 5,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.14972024279180207
+              },
+              {
+                "i": 6,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.14972024279180207
+              },
+              {
+                "i": 7,
+                "name": "",
+                "type": "Group",
+                "diff": 0.14972024279180207
+              },
+              {
+                "i": 8,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.02268204072099156
+              },
+              {
+                "i": 9,
+                "name": "wrist-continuous-skin",
+                "type": "Mesh",
+                "diff": 0.14972024279180207
+              }
+            ]
+          },
+          {
+            "weapon": "shotgun",
+            "call": 517,
+            "local": 0,
+            "world": 0.9796593364098544,
+            "scalar": 0,
+            "k": 1,
+            "a": 0,
+            "wr": true,
+            "nodes": [
+              {
+                "i": 4,
+                "name": "",
+                "type": "Group",
+                "diff": 0.14970561802598187
+              },
+              {
+                "i": 5,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.14970561802598187
+              },
+              {
+                "i": 6,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.14970561802598187
+              },
+              {
+                "i": 7,
+                "name": "",
+                "type": "Group",
+                "diff": 0.14970561802598187
+              },
+              {
+                "i": 8,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.0226702544351447
+              },
+              {
+                "i": 9,
+                "name": "wrist-continuous-skin",
+                "type": "Mesh",
+                "diff": 0.14970561802598187
+              }
+            ]
+          },
+          {
+            "weapon": "shotgun",
+            "call": 520,
+            "local": 0,
+            "world": 0.9797065155482558,
+            "scalar": 0,
+            "k": 1,
+            "a": 0,
+            "wr": true,
+            "nodes": [
+              {
+                "i": 4,
+                "name": "",
+                "type": "Group",
+                "diff": 0.14969069990155387
+              },
+              {
+                "i": 5,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.14969069990155387
+              },
+              {
+                "i": 6,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.14969069990155387
+              },
+              {
+                "i": 7,
+                "name": "",
+                "type": "Group",
+                "diff": 0.14969069990155387
+              },
+              {
+                "i": 8,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.022658094895854575
+              },
+              {
+                "i": 9,
+                "name": "wrist-continuous-skin",
+                "type": "Mesh",
+                "diff": 0.14969069990155387
+              }
+            ]
+          },
+          {
+            "weapon": "shotgun",
+            "call": 523,
+            "local": 0,
+            "world": 0.979722847783836,
+            "scalar": 0,
+            "k": 1,
+            "a": 0,
+            "wr": true,
+            "nodes": [
+              {
+                "i": 4,
+                "name": "",
+                "type": "Group",
+                "diff": 0.1497117360625702
+              },
+              {
+                "i": 5,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.1497117360625702
+              },
+              {
+                "i": 6,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.1497117360625702
+              },
+              {
+                "i": 7,
+                "name": "",
+                "type": "Group",
+                "diff": 0.1497117360625702
+              },
+              {
+                "i": 8,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.022672910614939035
+              },
+              {
+                "i": 9,
+                "name": "wrist-continuous-skin",
+                "type": "Mesh",
+                "diff": 0.1497117360625702
+              }
+            ]
+          },
+          {
+            "weapon": "shotgun",
+            "call": 526,
+            "local": 0,
+            "world": 0.9797797179621053,
+            "scalar": 0,
+            "k": 1,
+            "a": 0,
+            "wr": true,
+            "nodes": [
+              {
+                "i": 4,
+                "name": "",
+                "type": "Group",
+                "diff": 0.14968086626656424
+              },
+              {
+                "i": 5,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.14968086626656424
+              },
+              {
+                "i": 6,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.14968086626656424
+              },
+              {
+                "i": 7,
+                "name": "",
+                "type": "Group",
+                "diff": 0.14968086626656424
+              },
+              {
+                "i": 8,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.022649009051256996
+              },
+              {
+                "i": 9,
+                "name": "wrist-continuous-skin",
+                "type": "Mesh",
+                "diff": 0.14968086626656424
+              }
+            ]
+          },
+          {
+            "weapon": "shotgun",
+            "call": 529,
+            "local": 0,
+            "world": 0.9798118260828419,
+            "scalar": 0,
+            "k": 1,
+            "a": 0,
+            "wr": true,
+            "nodes": [
+              {
+                "i": 4,
+                "name": "",
+                "type": "Group",
+                "diff": 0.1496968582445733
+              },
+              {
+                "i": 5,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.1496968582445733
+              },
+              {
+                "i": 6,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.1496968582445733
+              },
+              {
+                "i": 7,
+                "name": "",
+                "type": "Group",
+                "diff": 0.1496968582445733
+              },
+              {
+                "i": 8,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.022660228174723684
+              },
+              {
+                "i": 9,
+                "name": "wrist-continuous-skin",
+                "type": "Mesh",
+                "diff": 0.1496968582445733
+              }
+            ]
+          },
+          {
+            "weapon": "shotgun",
+            "call": 532,
+            "local": 0,
+            "world": 0.979851932430144,
+            "scalar": 0,
+            "k": 1,
+            "a": 0,
+            "wr": true,
+            "nodes": [
+              {
+                "i": 4,
+                "name": "",
+                "type": "Group",
+                "diff": 0.14969905578136183
+              },
+              {
+                "i": 5,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.14969905578136183
+              },
+              {
+                "i": 6,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.14969905578136183
+              },
+              {
+                "i": 7,
+                "name": "",
+                "type": "Group",
+                "diff": 0.14969905578136183
+              },
+              {
+                "i": 8,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.022661201780931783
+              },
+              {
+                "i": 9,
+                "name": "wrist-continuous-skin",
+                "type": "Mesh",
+                "diff": 0.14969905578136183
+              }
+            ]
+          },
+          {
+            "weapon": "shotgun",
+            "call": 535,
+            "local": 0,
+            "world": 0.9799030439227002,
+            "scalar": 0,
+            "k": 1,
+            "a": 0,
+            "wr": true,
+            "nodes": [
+              {
+                "i": 4,
+                "name": "",
+                "type": "Group",
+                "diff": 0.1496836588135127
+              },
+              {
+                "i": 5,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.1496836588135127
+              },
+              {
+                "i": 6,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.1496836588135127
+              },
+              {
+                "i": 7,
+                "name": "",
+                "type": "Group",
+                "diff": 0.1496836588135127
+              },
+              {
+                "i": 8,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.022649094422392047
+              },
+              {
+                "i": 9,
+                "name": "wrist-continuous-skin",
+                "type": "Mesh",
+                "diff": 0.1496836588135127
+              }
+            ]
+          },
+          {
+            "weapon": "shotgun",
+            "call": 538,
+            "local": 0,
+            "world": 0.9799271040380679,
+            "scalar": 0,
+            "k": 1,
+            "a": 0,
+            "wr": true,
+            "nodes": [
+              {
+                "i": 4,
+                "name": "",
+                "type": "Group",
+                "diff": 0.1497103824520537
+              },
+              {
+                "i": 5,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.1497103824520537
+              },
+              {
+                "i": 6,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.1497103824520537
+              },
+              {
+                "i": 7,
+                "name": "",
+                "type": "Group",
+                "diff": 0.1497103824520537
+              },
+              {
+                "i": 8,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.02266849272702398
+              },
+              {
+                "i": 9,
+                "name": "wrist-continuous-skin",
+                "type": "Mesh",
+                "diff": 0.1497103824520537
+              }
+            ]
+          },
+          {
+            "weapon": "shotgun",
+            "call": 541,
+            "local": 0,
+            "world": 0.9799834815362691,
+            "scalar": 0,
+            "k": 1,
+            "a": 0,
+            "wr": true,
+            "nodes": [
+              {
+                "i": 4,
+                "name": "",
+                "type": "Group",
+                "diff": 0.14968644478507614
+              },
+              {
+                "i": 5,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.14968644478507614
+              },
+              {
+                "i": 6,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.14968644478507614
+              },
+              {
+                "i": 7,
+                "name": "",
+                "type": "Group",
+                "diff": 0.14968644478507614
+              },
+              {
+                "i": 8,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.022650262697175627
+              },
+              {
+                "i": 9,
+                "name": "wrist-continuous-skin",
+                "type": "Mesh",
+                "diff": 0.14968644478507614
+              }
+            ]
+          }
+        ],
+        "maxLocal": 0,
+        "maxWorld": 0.9809139017424687,
+        "maxReturn": 0
+      }
+    },
+    {
+      "weapon": "chainsaw",
+      "setup": {
+        "weapon": "chainsaw",
+        "pair": false,
+        "ammo": null,
+        "magSize": null,
+        "auto": true,
+        "loadout": {
+          "primary": [
+            "chainsaw",
+            null
+          ],
+          "secondary": [
+            null,
+            null
+          ],
+          "hip": "pistol:base"
+        },
+        "position": [
+          42,
+          -7.5467963358017105,
+          -20
+        ]
+      },
+      "parity": {
+        "calls": 993,
+        "failed": [
+          {
+            "weapon": "shotgun",
+            "call": 514,
+            "local": 0,
+            "world": 0.9796243328814729,
+            "scalar": 0,
+            "k": 1,
+            "a": 0,
+            "wr": true,
+            "nodes": [
+              {
+                "i": 4,
+                "name": "",
+                "type": "Group",
+                "diff": 0.14972024279180207
+              },
+              {
+                "i": 5,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.14972024279180207
+              },
+              {
+                "i": 6,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.14972024279180207
+              },
+              {
+                "i": 7,
+                "name": "",
+                "type": "Group",
+                "diff": 0.14972024279180207
+              },
+              {
+                "i": 8,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.02268204072099156
+              },
+              {
+                "i": 9,
+                "name": "wrist-continuous-skin",
+                "type": "Mesh",
+                "diff": 0.14972024279180207
+              }
+            ]
+          },
+          {
+            "weapon": "shotgun",
+            "call": 517,
+            "local": 0,
+            "world": 0.9796593364098544,
+            "scalar": 0,
+            "k": 1,
+            "a": 0,
+            "wr": true,
+            "nodes": [
+              {
+                "i": 4,
+                "name": "",
+                "type": "Group",
+                "diff": 0.14970561802598187
+              },
+              {
+                "i": 5,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.14970561802598187
+              },
+              {
+                "i": 6,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.14970561802598187
+              },
+              {
+                "i": 7,
+                "name": "",
+                "type": "Group",
+                "diff": 0.14970561802598187
+              },
+              {
+                "i": 8,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.0226702544351447
+              },
+              {
+                "i": 9,
+                "name": "wrist-continuous-skin",
+                "type": "Mesh",
+                "diff": 0.14970561802598187
+              }
+            ]
+          },
+          {
+            "weapon": "shotgun",
+            "call": 520,
+            "local": 0,
+            "world": 0.9797065155482558,
+            "scalar": 0,
+            "k": 1,
+            "a": 0,
+            "wr": true,
+            "nodes": [
+              {
+                "i": 4,
+                "name": "",
+                "type": "Group",
+                "diff": 0.14969069990155387
+              },
+              {
+                "i": 5,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.14969069990155387
+              },
+              {
+                "i": 6,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.14969069990155387
+              },
+              {
+                "i": 7,
+                "name": "",
+                "type": "Group",
+                "diff": 0.14969069990155387
+              },
+              {
+                "i": 8,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.022658094895854575
+              },
+              {
+                "i": 9,
+                "name": "wrist-continuous-skin",
+                "type": "Mesh",
+                "diff": 0.14969069990155387
+              }
+            ]
+          },
+          {
+            "weapon": "shotgun",
+            "call": 523,
+            "local": 0,
+            "world": 0.979722847783836,
+            "scalar": 0,
+            "k": 1,
+            "a": 0,
+            "wr": true,
+            "nodes": [
+              {
+                "i": 4,
+                "name": "",
+                "type": "Group",
+                "diff": 0.1497117360625702
+              },
+              {
+                "i": 5,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.1497117360625702
+              },
+              {
+                "i": 6,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.1497117360625702
+              },
+              {
+                "i": 7,
+                "name": "",
+                "type": "Group",
+                "diff": 0.1497117360625702
+              },
+              {
+                "i": 8,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.022672910614939035
+              },
+              {
+                "i": 9,
+                "name": "wrist-continuous-skin",
+                "type": "Mesh",
+                "diff": 0.1497117360625702
+              }
+            ]
+          },
+          {
+            "weapon": "shotgun",
+            "call": 526,
+            "local": 0,
+            "world": 0.9797797179621053,
+            "scalar": 0,
+            "k": 1,
+            "a": 0,
+            "wr": true,
+            "nodes": [
+              {
+                "i": 4,
+                "name": "",
+                "type": "Group",
+                "diff": 0.14968086626656424
+              },
+              {
+                "i": 5,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.14968086626656424
+              },
+              {
+                "i": 6,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.14968086626656424
+              },
+              {
+                "i": 7,
+                "name": "",
+                "type": "Group",
+                "diff": 0.14968086626656424
+              },
+              {
+                "i": 8,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.022649009051256996
+              },
+              {
+                "i": 9,
+                "name": "wrist-continuous-skin",
+                "type": "Mesh",
+                "diff": 0.14968086626656424
+              }
+            ]
+          },
+          {
+            "weapon": "shotgun",
+            "call": 529,
+            "local": 0,
+            "world": 0.9798118260828419,
+            "scalar": 0,
+            "k": 1,
+            "a": 0,
+            "wr": true,
+            "nodes": [
+              {
+                "i": 4,
+                "name": "",
+                "type": "Group",
+                "diff": 0.1496968582445733
+              },
+              {
+                "i": 5,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.1496968582445733
+              },
+              {
+                "i": 6,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.1496968582445733
+              },
+              {
+                "i": 7,
+                "name": "",
+                "type": "Group",
+                "diff": 0.1496968582445733
+              },
+              {
+                "i": 8,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.022660228174723684
+              },
+              {
+                "i": 9,
+                "name": "wrist-continuous-skin",
+                "type": "Mesh",
+                "diff": 0.1496968582445733
+              }
+            ]
+          },
+          {
+            "weapon": "shotgun",
+            "call": 532,
+            "local": 0,
+            "world": 0.979851932430144,
+            "scalar": 0,
+            "k": 1,
+            "a": 0,
+            "wr": true,
+            "nodes": [
+              {
+                "i": 4,
+                "name": "",
+                "type": "Group",
+                "diff": 0.14969905578136183
+              },
+              {
+                "i": 5,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.14969905578136183
+              },
+              {
+                "i": 6,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.14969905578136183
+              },
+              {
+                "i": 7,
+                "name": "",
+                "type": "Group",
+                "diff": 0.14969905578136183
+              },
+              {
+                "i": 8,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.022661201780931783
+              },
+              {
+                "i": 9,
+                "name": "wrist-continuous-skin",
+                "type": "Mesh",
+                "diff": 0.14969905578136183
+              }
+            ]
+          },
+          {
+            "weapon": "shotgun",
+            "call": 535,
+            "local": 0,
+            "world": 0.9799030439227002,
+            "scalar": 0,
+            "k": 1,
+            "a": 0,
+            "wr": true,
+            "nodes": [
+              {
+                "i": 4,
+                "name": "",
+                "type": "Group",
+                "diff": 0.1496836588135127
+              },
+              {
+                "i": 5,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.1496836588135127
+              },
+              {
+                "i": 6,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.1496836588135127
+              },
+              {
+                "i": 7,
+                "name": "",
+                "type": "Group",
+                "diff": 0.1496836588135127
+              },
+              {
+                "i": 8,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.022649094422392047
+              },
+              {
+                "i": 9,
+                "name": "wrist-continuous-skin",
+                "type": "Mesh",
+                "diff": 0.1496836588135127
+              }
+            ]
+          },
+          {
+            "weapon": "shotgun",
+            "call": 538,
+            "local": 0,
+            "world": 0.9799271040380679,
+            "scalar": 0,
+            "k": 1,
+            "a": 0,
+            "wr": true,
+            "nodes": [
+              {
+                "i": 4,
+                "name": "",
+                "type": "Group",
+                "diff": 0.1497103824520537
+              },
+              {
+                "i": 5,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.1497103824520537
+              },
+              {
+                "i": 6,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.1497103824520537
+              },
+              {
+                "i": 7,
+                "name": "",
+                "type": "Group",
+                "diff": 0.1497103824520537
+              },
+              {
+                "i": 8,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.02266849272702398
+              },
+              {
+                "i": 9,
+                "name": "wrist-continuous-skin",
+                "type": "Mesh",
+                "diff": 0.1497103824520537
+              }
+            ]
+          },
+          {
+            "weapon": "shotgun",
+            "call": 541,
+            "local": 0,
+            "world": 0.9799834815362691,
+            "scalar": 0,
+            "k": 1,
+            "a": 0,
+            "wr": true,
+            "nodes": [
+              {
+                "i": 4,
+                "name": "",
+                "type": "Group",
+                "diff": 0.14968644478507614
+              },
+              {
+                "i": 5,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.14968644478507614
+              },
+              {
+                "i": 6,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.14968644478507614
+              },
+              {
+                "i": 7,
+                "name": "",
+                "type": "Group",
+                "diff": 0.14968644478507614
+              },
+              {
+                "i": 8,
+                "name": "",
+                "type": "Mesh",
+                "diff": 0.022650262697175627
+              },
+              {
+                "i": 9,
+                "name": "wrist-continuous-skin",
+                "type": "Mesh",
+                "diff": 0.14968644478507614
+              }
+            ]
+          }
+        ],
+        "maxLocal": 0,
+        "maxWorld": 1.9568178219338144,
+        "maxReturn": 0
+      }
+    }
+  ],
+  "readyWallMs": 12648,
+  "loadMarks": [
+    "terrain+water+sky built 0ms",
+    "rocks 55ms",
+    "trees 205ms",
+    "player+weapons+zombie types 1170ms",
+    "foliage scattered 2200ms",
+    "POIs+minimap+foliage chunks 3623ms",
+    "contact shading + rest of setup 3800ms",
+    "post + pools + compile + warm frame 9910ms",
+    "ready 9913ms"
+  ],
+  "menuWallMs": 18692,
+  "graphics": "high",
+  "instrumentation": {
+    "prof": false,
+    "gpuTimestamps": false
+  }
+}

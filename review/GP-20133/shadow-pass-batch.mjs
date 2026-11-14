@@ -1,0 +1,2 @@
+import {spawn} from 'node:child_process';
+for(const weapon of ['ak','minigun','uzi']){const exit=await new Promise((resolve,reject)=>{const p=spawn(process.execPath,['crew/crew.mjs','slot','run','chatgpt','GP-20133','--checks','Diagnostic actual shadow submissions '+weapon+' Training, no acceptance claim','--exclusive','--','node','review/GP-20133/shadow-pass-current.mjs',weapon,'training'],{stdio:'inherit',windowsHide:true});p.once('error',reject);p.once('exit',resolve);});if(exit!==0){process.exitCode=exit||1;break;}}

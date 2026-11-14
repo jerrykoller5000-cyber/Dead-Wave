@@ -1,0 +1,2065 @@
+{
+  "navigation": "Canonical tools/bench early dismissForTesting; separate loader-ready and actual menu times",
+  "scope": "REVIEW ONLY matrix primitive: original full player matrix walk versus skipping invisible WORLD source-gun roots during this explicitly scoped walk. No solver/pose changes. All local transforms and effectively visible world matrices must match exactly; deferred cold matrices are intentionally excluded UNTIL ordinary cold getter/explicit updateMatrixWorld outside scope must recover exact original world/local matrices. Alternating unhooked CPU timing, no FPS acceptance or production loan claim. Cold FP cache is NOT the target.",
+  "frameSampling": "production-tick-start-wall-clock",
+  "environment": "training",
+  "sourceSha256": "a95f671f3e01e896412b4826a3d8e5430781b75376175aa8d0e72fc91048a3e9",
+  "moduleHashes": {
+    "core/body-limits.js": "fd2562bd882ef767155cc819301ede35e68d008621dd0f683232c593d91459eb",
+    "game/viewmodel.js": "f3eb743fb200945a3bed23accbd93dfcb5cf983e616769049c357d3199b7363e",
+    "game/tp-fit.js": "d2dbf1e163f856b672a1a91d1638a949749e3bde1727bda8ceaf1f18c3b08e07",
+    "studio/fp-arms.js": "fff7808db158e072d0c5697a0a57e0c87de7fa81847558fc8670f6f7e5f190d8",
+    "world/training-ballistics.js": "eadc9d04d5fd50ad9f6f23c0a080ea2ad58485ff62e0002f1a6b1b0da4719bdc",
+    "studio/marine-carry.js": "105255868cfd0e9088e1bfc540cb4c2d4293faf5e836aac671ffe1cd8b1436ce",
+    "studio/marine-body.js": "78895440e70b0cc5a348fe5a670c789ca74fd1cf69be830f21fd1a3801cb7095",
+    "studio/marine-hand.js": "f3b92570fe48bb259917c8463a1cb09010be22580f0677a5af90f38eff11a587",
+    "game/viewmodel-fit.js": "6a19e05a29cb4ea85fe285b8d08f9b0d53e345c4a7dbbe835581491e0a452a1c",
+    "game/viewmodel-poses.js": "32b2d326f6c62e0aa9cee908f1099a02931f6442d7ccc06825570a4ddfe83344"
+  },
+  "rows": [],
+  "readyWallMs": 20636,
+  "loadMarks": [
+    "terrain+water+sky built 0ms",
+    "rocks 66ms",
+    "trees 281ms",
+    "player+weapons+zombie types 1739ms",
+    "foliage scattered 3451ms",
+    "POIs+minimap+foliage chunks 5900ms",
+    "contact shading + rest of setup 6185ms",
+    "post + pools + compile + warm frame 17168ms",
+    "ready 17172ms"
+  ],
+  "menuWallMs": 31687,
+  "graphics": "high",
+  "instrumentation": {
+    "prof": false,
+    "gpuTimestamps": false
+  },
+  "matrixProbes": [
+    {
+      "first": true,
+      "pitch": 0,
+      "result": {
+        "trials": 16,
+        "nodes": 1700,
+        "coldNodes": 810,
+        "maxLocal": 0,
+        "maxVisibleWorld": 0,
+        "maxColdGetterWorld": 0,
+        "maxExplicitColdRefresh": 0,
+        "originalMs": 8.40000000409782,
+        "candidateMs": 4.599999995902181,
+        "samples": [
+          {
+            "originalMs": 0.7999999988824129,
+            "candidateMs": 0.3999999985098839
+          },
+          {
+            "originalMs": 0.19999999925494194,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.599999999627471,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.2000000011175871,
+            "candidateMs": 0.30000000074505806
+          },
+          {
+            "originalMs": 1,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.09999999962747097
+          },
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.2000000011175871
+          },
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.6999999992549419
+          },
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.6000000014901161,
+            "candidateMs": 0.7000000011175871
+          },
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.09999999962747097
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 1.599999999627471,
+            "candidateMs": 0.5
+          },
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.2000000011175871
+          }
+        ]
+      }
+    },
+    {
+      "first": true,
+      "pitch": 0.4,
+      "result": {
+        "trials": 16,
+        "nodes": 1700,
+        "coldNodes": 810,
+        "maxLocal": 0,
+        "maxVisibleWorld": 0,
+        "maxColdGetterWorld": 0,
+        "maxExplicitColdRefresh": 0,
+        "originalMs": 10.400000002235174,
+        "candidateMs": 5.600000005215406,
+        "samples": [
+          {
+            "originalMs": 0.5,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.3999999985098839,
+            "candidateMs": 0.2000000011175871
+          },
+          {
+            "originalMs": 0.7000000011175871,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.2999999988824129
+          },
+          {
+            "originalMs": 0.6999999992549419,
+            "candidateMs": 0.2000000011175871
+          },
+          {
+            "originalMs": 0.7000000011175871,
+            "candidateMs": 0.40000000037252903
+          },
+          {
+            "originalMs": 1.099999999627471,
+            "candidateMs": 0.30000000074505806
+          },
+          {
+            "originalMs": 0.5,
+            "candidateMs": 0.30000000074505806
+          },
+          {
+            "originalMs": 0.5,
+            "candidateMs": 0.09999999962747097
+          },
+          {
+            "originalMs": 0.2999999988824129,
+            "candidateMs": 0.30000000074505806
+          },
+          {
+            "originalMs": 1.5,
+            "candidateMs": 0.7999999988824129
+          },
+          {
+            "originalMs": 0.900000000372529,
+            "candidateMs": 0.7000000011175871
+          },
+          {
+            "originalMs": 1.1000000014901161,
+            "candidateMs": 0.6000000014901161
+          },
+          {
+            "originalMs": 0.2000000011175871,
+            "candidateMs": 0.2000000011175871
+          },
+          {
+            "originalMs": 0.599999999627471,
+            "candidateMs": 0.40000000037252903
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.40000000037252903
+          }
+        ]
+      }
+    },
+    {
+      "first": true,
+      "pitch": -0.4,
+      "result": {
+        "trials": 16,
+        "nodes": 1700,
+        "coldNodes": 810,
+        "maxLocal": 0,
+        "maxVisibleWorld": 0,
+        "maxColdGetterWorld": 0,
+        "maxExplicitColdRefresh": 0,
+        "originalMs": 6.299999998882413,
+        "candidateMs": 3.399999998509884,
+        "samples": [
+          {
+            "originalMs": 0.3999999985098839,
+            "candidateMs": 0.09999999962747097
+          },
+          {
+            "originalMs": 0.19999999925494194,
+            "candidateMs": 0.2000000011175871
+          },
+          {
+            "originalMs": 0.2999999988824129,
+            "candidateMs": 0.09999999962747097
+          },
+          {
+            "originalMs": 0.2000000011175871,
+            "candidateMs": 0.30000000074505806
+          },
+          {
+            "originalMs": 0.5,
+            "candidateMs": 0.3999999985098839
+          },
+          {
+            "originalMs": 0.2000000011175871,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.2999999988824129,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.2999999988824129,
+            "candidateMs": 0.09999999962747097
+          },
+          {
+            "originalMs": 0.8000000007450581,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.2000000011175871
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.2999999988824129
+          },
+          {
+            "originalMs": 0.19999999925494194,
+            "candidateMs": 0.09999999962747097
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.10000000149011612
+          },
+          {
+            "originalMs": 1.099999999627471,
+            "candidateMs": 0.2000000011175871
+          },
+          {
+            "originalMs": 0.5,
+            "candidateMs": 0.5
+          }
+        ]
+      }
+    },
+    {
+      "first": false,
+      "pitch": 0,
+      "result": {
+        "trials": 16,
+        "nodes": 1700,
+        "coldNodes": 810,
+        "maxLocal": 0,
+        "maxVisibleWorld": 0,
+        "maxColdGetterWorld": 0,
+        "maxExplicitColdRefresh": 0,
+        "originalMs": 6.500000007450581,
+        "candidateMs": 4.399999998509884,
+        "samples": [
+          {
+            "originalMs": 0.5,
+            "candidateMs": 0.09999999962747097
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.09999999962747097
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.2000000011175871
+          },
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.599999999627471,
+            "candidateMs": 0.40000000037252903
+          },
+          {
+            "originalMs": 0.5,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.2000000011175871,
+            "candidateMs": 0.2999999988824129
+          },
+          {
+            "originalMs": 0.7000000011175871,
+            "candidateMs": 0.30000000074505806
+          },
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.5,
+            "candidateMs": 1
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.2000000011175871
+          },
+          {
+            "originalMs": 0.5,
+            "candidateMs": 0.40000000037252903
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.2000000011175871
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.19999999925494194
+          }
+        ]
+      }
+    },
+    {
+      "first": false,
+      "pitch": 0.4,
+      "result": {
+        "trials": 16,
+        "nodes": 1700,
+        "coldNodes": 810,
+        "maxLocal": 0,
+        "maxVisibleWorld": 0,
+        "maxColdGetterWorld": 0,
+        "maxExplicitColdRefresh": 0,
+        "originalMs": 7.000000001862645,
+        "candidateMs": 4.299999998882413,
+        "samples": [
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.2000000011175871,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.2999999988824129,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.2999999988824129,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.10000000149011612
+          },
+          {
+            "originalMs": 0.19999999925494194,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.10000000149011612,
+            "candidateMs": 0.2000000011175871
+          },
+          {
+            "originalMs": 0.09999999962747097,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.19999999925494194,
+            "candidateMs": 0.40000000037252903
+          },
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.2000000011175871
+          },
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.2000000011175871
+          },
+          {
+            "originalMs": 1.699999999254942,
+            "candidateMs": 0.8000000007450581
+          },
+          {
+            "originalMs": 1.200000001117587,
+            "candidateMs": 0.5
+          },
+          {
+            "originalMs": 0.5,
+            "candidateMs": 0.2999999988824129
+          }
+        ]
+      }
+    },
+    {
+      "first": false,
+      "pitch": -0.4,
+      "result": {
+        "trials": 16,
+        "nodes": 1700,
+        "coldNodes": 810,
+        "maxLocal": 0,
+        "maxVisibleWorld": 0,
+        "maxColdGetterWorld": 0,
+        "maxExplicitColdRefresh": 0,
+        "originalMs": 10.400000002235174,
+        "candidateMs": 4.50000000372529,
+        "samples": [
+          {
+            "originalMs": 0.5,
+            "candidateMs": 0.2000000011175871
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.09999999962747097
+          },
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.30000000074505806
+          },
+          {
+            "originalMs": 0.599999999627471,
+            "candidateMs": 0.2000000011175871
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.09999999962747097
+          },
+          {
+            "originalMs": 1.300000000745058,
+            "candidateMs": 0.2000000011175871
+          },
+          {
+            "originalMs": 0.7999999988824129,
+            "candidateMs": 0.2000000011175871
+          },
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.09999999962747097
+          },
+          {
+            "originalMs": 1.099999999627471,
+            "candidateMs": 0.2000000011175871
+          },
+          {
+            "originalMs": 0.5,
+            "candidateMs": 0.09999999962747097
+          },
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.30000000074505806
+          },
+          {
+            "originalMs": 0.5,
+            "candidateMs": 0.2000000011175871
+          },
+          {
+            "originalMs": 1,
+            "candidateMs": 1.3999999985098839
+          },
+          {
+            "originalMs": 1.400000000372529,
+            "candidateMs": 0.5
+          },
+          {
+            "originalMs": 0.5,
+            "candidateMs": 0.19999999925494194
+          }
+        ]
+      }
+    }
+  ],
+  "openingPerf": {
+    "v": 1,
+    "at": "2026-11-14T13:20:00.042Z",
+    "url": "/index.html?debug=1&__gameTestToken=7a810a08-ed16-454f-805b-d32357951597",
+    "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36",
+    "cores": 24,
+    "mem": 32,
+    "screen": [
+      2560,
+      1440,
+      1
+    ],
+    "marks": [
+      [
+        220,
+        "gate-mode",
+        "all"
+      ],
+      [
+        220,
+        "gate-compile"
+      ],
+      [
+        220,
+        "gate-warm"
+      ],
+      [
+        423,
+        "phase-loading"
+      ],
+      [
+        677,
+        "phase-loading"
+      ],
+      [
+        793,
+        "module-start"
+      ],
+      [
+        1046,
+        "renderer",
+        "WebGPU / high"
+      ],
+      [
+        8208,
+        "gpu-gate-wait"
+      ],
+      [
+        8208,
+        "gpu-gate-open"
+      ],
+      [
+        8216,
+        "post-done"
+      ],
+      [
+        17391,
+        "pools-done"
+      ],
+      [
+        18975,
+        "compile-async-done"
+      ],
+      [
+        18975,
+        "warm-gate-open"
+      ],
+      [
+        19181,
+        "warm-load-done"
+      ],
+      [
+        19188,
+        "loop-start"
+      ],
+      [
+        19206,
+        "warm-setA"
+      ],
+      [
+        20614,
+        "warm-setA-done"
+      ],
+      [
+        20634,
+        "phase-loading"
+      ],
+      [
+        20801,
+        "warm-fight"
+      ],
+      [
+        28307,
+        "warm-live"
+      ],
+      [
+        30840,
+        "warm-live-end",
+        78
+      ],
+      [
+        30843,
+        "warm-done"
+      ],
+      [
+        30850,
+        "menu-camera"
+      ],
+      [
+        31001,
+        "title-release"
+      ],
+      [
+        31001,
+        "opening-ready"
+      ],
+      [
+        31363,
+        "phase-menu"
+      ],
+      [
+        31363,
+        "opening-complete"
+      ]
+    ],
+    "segments": [
+      [
+        0,
+        "boot"
+      ],
+      [
+        793,
+        "loading"
+      ],
+      [
+        31364,
+        "menu"
+      ]
+    ],
+    "load": [
+      [
+        793,
+        "terrain",
+        "begin"
+      ],
+      [
+        2014,
+        "terrain",
+        "end"
+      ],
+      [
+        2014,
+        "rocks",
+        "begin"
+      ],
+      [
+        2080,
+        "rocks",
+        "end"
+      ],
+      [
+        2080,
+        "trees",
+        "begin"
+      ],
+      [
+        2294,
+        "trees",
+        "end"
+      ],
+      [
+        2295,
+        "actors",
+        "begin"
+      ],
+      [
+        3752,
+        "actors",
+        "end"
+      ],
+      [
+        3753,
+        "foliage",
+        "begin"
+      ],
+      [
+        5464,
+        "foliage",
+        "end"
+      ],
+      [
+        5464,
+        "pois",
+        "begin"
+      ],
+      [
+        7913,
+        "pois",
+        "end"
+      ],
+      [
+        7913,
+        "setup",
+        "begin"
+      ],
+      [
+        8198,
+        "setup",
+        "end"
+      ],
+      [
+        8198,
+        "compile",
+        "begin"
+      ],
+      [
+        19181,
+        "compile",
+        "end"
+      ],
+      [
+        19181,
+        "loop",
+        "begin"
+      ],
+      [
+        19186,
+        "loop",
+        "end"
+      ],
+      [
+        19186,
+        "warmup",
+        "begin"
+      ],
+      [
+        20614,
+        "warmup",
+        "end"
+      ]
+    ],
+    "loaf": [
+      [
+        107,
+        183,
+        66,
+        "boot",
+        ""
+      ],
+      [
+        335,
+        151,
+        28,
+        "boot",
+        ""
+      ],
+      [
+        500,
+        130,
+        0,
+        "boot",
+        ""
+      ],
+      [
+        811,
+        112,
+        61,
+        "loading",
+        "IdleRequestCallback @ heron.js:25359 111ms"
+      ],
+      [
+        924,
+        56,
+        0,
+        "loading",
+        ""
+      ],
+      [
+        999,
+        1016,
+        921,
+        "loading",
+        ""
+      ],
+      [
+        2016,
+        65,
+        14,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 63ms"
+      ],
+      [
+        2082,
+        215,
+        165,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 213ms"
+      ],
+      [
+        2297,
+        1491,
+        1404,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 1452ms"
+      ],
+      [
+        3789,
+        695,
+        643,
+        "loading",
+        "warmDressView @ index.html?debug=1&__gameTestToken=7a810:1725706 693ms"
+      ],
+      [
+        4484,
+        983,
+        882,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 883ms"
+      ],
+      [
+        5467,
+        2468,
+        2397,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 2445ms"
+      ],
+      [
+        7935,
+        267,
+        214,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 262ms"
+      ],
+      [
+        8208,
+        484,
+        426,
+        "loading",
+        "import.then @ index.html?debug=1&__gameTestToken=7a810:64728 476ms"
+      ],
+      [
+        8874,
+        71,
+        4,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 54ms"
+      ],
+      [
+        8952,
+        60,
+        3,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 53ms"
+      ],
+      [
+        9012,
+        59,
+        0,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 37ms"
+      ],
+      [
+        9115,
+        86,
+        10,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 60ms"
+      ],
+      [
+        9242,
+        51,
+        0,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 26ms"
+      ],
+      [
+        9315,
+        63,
+        13,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 62ms"
+      ],
+      [
+        9431,
+        60,
+        10,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 60ms"
+      ],
+      [
+        9537,
+        56,
+        0,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 44ms"
+      ],
+      [
+        9600,
+        94,
+        43,
+        "loading",
+        "import.then @ index.html?debug=1&__gameTestToken=7a810:4177726 93ms"
+      ],
+      [
+        9753,
+        6351,
+        6288,
+        "loading",
+        "check @ viewmodel.js:157480 6338ms"
+      ],
+      [
+        16684,
+        82,
+        0,
+        "loading",
+        ""
+      ],
+      [
+        16164,
+        513,
+        0,
+        "loading",
+        ""
+      ],
+      [
+        17002,
+        213,
+        0,
+        "loading",
+        ""
+      ],
+      [
+        17239,
+        105,
+        0,
+        "loading",
+        ""
+      ],
+      [
+        17407,
+        53,
+        3,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 52ms"
+      ],
+      [
+        17461,
+        632,
+        563,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 613ms"
+      ],
+      [
+        18176,
+        261,
+        0,
+        "loading",
+        ""
+      ],
+      [
+        18437,
+        72,
+        21,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 69ms"
+      ],
+      [
+        18580,
+        67,
+        17,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 66ms"
+      ],
+      [
+        18652,
+        72,
+        22,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 71ms"
+      ],
+      [
+        18818,
+        131,
+        0,
+        "loading",
+        ""
+      ],
+      [
+        18966,
+        216,
+        157,
+        "loading",
+        ""
+      ],
+      [
+        19187,
+        353,
+        292,
+        "loading",
+        "update @ three.webgpu.js:600902 340ms"
+      ],
+      [
+        19541,
+        143,
+        89,
+        "loading",
+        "update @ three.webgpu.js:600902 137ms"
+      ],
+      [
+        19684,
+        109,
+        57,
+        "loading",
+        "update @ three.webgpu.js:600902 106ms"
+      ],
+      [
+        19793,
+        213,
+        163,
+        "loading",
+        "update @ three.webgpu.js:600902 211ms"
+      ],
+      [
+        20006,
+        365,
+        110,
+        "loading",
+        "update @ three.webgpu.js:600902 158ms"
+      ],
+      [
+        20371,
+        94,
+        43,
+        "loading",
+        "update @ three.webgpu.js:600902 92ms"
+      ],
+      [
+        20465,
+        113,
+        63,
+        "loading",
+        "update @ three.webgpu.js:600902 112ms"
+      ],
+      [
+        20579,
+        51,
+        1,
+        "loading",
+        "update @ three.webgpu.js:600902 49ms"
+      ],
+      [
+        20631,
+        112,
+        0,
+        "loading",
+        "update @ three.webgpu.js:600902 41ms"
+      ],
+      [
+        20743,
+        57,
+        7,
+        "loading",
+        "update @ three.webgpu.js:600902 49ms"
+      ],
+      [
+        20800,
+        259,
+        208,
+        "loading",
+        "update @ three.webgpu.js:600902 258ms"
+      ],
+      [
+        21061,
+        162,
+        112,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 162ms"
+      ],
+      [
+        21230,
+        228,
+        178,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 227ms"
+      ],
+      [
+        21458,
+        87,
+        36,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 86ms"
+      ],
+      [
+        21599,
+        167,
+        116,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 166ms"
+      ],
+      [
+        21767,
+        69,
+        5,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 55ms"
+      ],
+      [
+        21836,
+        136,
+        79,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 128ms"
+      ],
+      [
+        21999,
+        74,
+        7,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 57ms"
+      ],
+      [
+        22099,
+        84,
+        19,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 69ms"
+      ],
+      [
+        22215,
+        371,
+        321,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 371ms"
+      ],
+      [
+        22809,
+        132,
+        0,
+        "loading",
+        ""
+      ],
+      [
+        22988,
+        291,
+        230,
+        "loading",
+        "run @ loader.js:8002 278ms"
+      ],
+      [
+        23644,
+        98,
+        6,
+        "loading",
+        "run @ loader.js:8002 55ms"
+      ],
+      [
+        23775,
+        131,
+        81,
+        "loading",
+        "run @ loader.js:8002 73ms"
+      ],
+      [
+        23940,
+        128,
+        77,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 65ms"
+      ],
+      [
+        24102,
+        138,
+        88,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 71ms"
+      ],
+      [
+        24278,
+        149,
+        99,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 75ms"
+      ],
+      [
+        24473,
+        140,
+        90,
+        "loading",
+        "run @ loader.js:8002 80ms"
+      ],
+      [
+        24663,
+        140,
+        86,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 70ms"
+      ],
+      [
+        24848,
+        125,
+        73,
+        "loading",
+        "run @ loader.js:8002 62ms"
+      ],
+      [
+        25029,
+        122,
+        72,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 61ms"
+      ],
+      [
+        25151,
+        61,
+        11,
+        "loading",
+        "update @ three.webgpu.js:600902 61ms"
+      ],
+      [
+        25246,
+        114,
+        54,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 104ms"
+      ],
+      [
+        25497,
+        111,
+        11,
+        "loading",
+        "run @ loader.js:8002 60ms"
+      ],
+      [
+        25707,
+        148,
+        98,
+        "loading",
+        "run @ loader.js:8002 88ms"
+      ],
+      [
+        25912,
+        147,
+        97,
+        "loading",
+        "run @ loader.js:8002 74ms"
+      ],
+      [
+        26136,
+        158,
+        108,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 87ms"
+      ],
+      [
+        26400,
+        148,
+        98,
+        "loading",
+        "run @ loader.js:8002 83ms"
+      ],
+      [
+        26649,
+        154,
+        104,
+        "loading",
+        "run @ loader.js:8002 83ms"
+      ],
+      [
+        26907,
+        154,
+        104,
+        "loading",
+        "run @ loader.js:8002 95ms"
+      ],
+      [
+        27124,
+        167,
+        113,
+        "loading",
+        "run @ loader.js:8002 83ms"
+      ],
+      [
+        27390,
+        189,
+        138,
+        "loading",
+        "run @ loader.js:8002 120ms"
+      ],
+      [
+        27579,
+        50,
+        0,
+        "loading",
+        "update @ three.webgpu.js:600902 50ms"
+      ],
+      [
+        27694,
+        56,
+        6,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 56ms"
+      ],
+      [
+        27797,
+        151,
+        24,
+        "loading",
+        "run @ loader.js:8002 73ms"
+      ],
+      [
+        27984,
+        154,
+        104,
+        "loading",
+        "run @ loader.js:8002 90ms"
+      ],
+      [
+        28172,
+        129,
+        79,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 65ms"
+      ],
+      [
+        28301,
+        76,
+        25,
+        "loading",
+        "update @ three.webgpu.js:600902 75ms"
+      ],
+      [
+        28410,
+        52,
+        2,
+        "loading",
+        "update @ three.webgpu.js:600902 51ms"
+      ],
+      [
+        29367,
+        67,
+        17,
+        "loading",
+        "update @ three.webgpu.js:600902 67ms"
+      ],
+      [
+        29995,
+        51,
+        1,
+        "loading",
+        "update @ three.webgpu.js:600902 51ms"
+      ],
+      [
+        30450,
+        54,
+        4,
+        "loading",
+        "update @ three.webgpu.js:600902 54ms"
+      ],
+      [
+        30505,
+        54,
+        4,
+        "loading",
+        "update @ three.webgpu.js:600902 53ms"
+      ],
+      [
+        31362,
+        50,
+        0,
+        "menu",
+        "update @ three.webgpu.js:600902 43ms"
+      ]
+    ],
+    "gaps": [
+      [
+        222,
+        60,
+        "boot"
+      ],
+      [
+        282,
+        200,
+        "boot"
+      ],
+      [
+        499,
+        117,
+        "boot"
+      ],
+      [
+        815,
+        150,
+        "loading"
+      ],
+      [
+        1032,
+        967,
+        "loading"
+      ],
+      [
+        1999,
+        67,
+        "loading"
+      ],
+      [
+        2065,
+        217,
+        "loading"
+      ],
+      [
+        2282,
+        1500,
+        "loading"
+      ],
+      [
+        3782,
+        700,
+        "loading"
+      ],
+      [
+        4482,
+        983,
+        "loading"
+      ],
+      [
+        5466,
+        2467,
+        "loading"
+      ],
+      [
+        7932,
+        267,
+        "loading"
+      ],
+      [
+        8215,
+        467,
+        "loading"
+      ],
+      [
+        8715,
+        50,
+        "loading"
+      ],
+      [
+        8865,
+        67,
+        "loading"
+      ],
+      [
+        8999,
+        67,
+        "loading"
+      ],
+      [
+        9099,
+        100,
+        "loading"
+      ],
+      [
+        9232,
+        50,
+        "loading"
+      ],
+      [
+        9299,
+        67,
+        "loading"
+      ],
+      [
+        9432,
+        50,
+        "loading"
+      ],
+      [
+        9616,
+        67,
+        "loading"
+      ],
+      [
+        9765,
+        6333,
+        "loading"
+      ],
+      [
+        16165,
+        500,
+        "loading"
+      ],
+      [
+        16682,
+        67,
+        "loading"
+      ],
+      [
+        17015,
+        183,
+        "loading"
+      ],
+      [
+        17249,
+        83,
+        "loading"
+      ],
+      [
+        17399,
+        217,
+        "loading"
+      ],
+      [
+        17615,
+        467,
+        "loading"
+      ],
+      [
+        18182,
+        250,
+        "loading"
+      ],
+      [
+        18432,
+        67,
+        "loading"
+      ],
+      [
+        18582,
+        50,
+        "loading"
+      ],
+      [
+        18665,
+        50,
+        "loading"
+      ],
+      [
+        18832,
+        100,
+        "loading"
+      ],
+      [
+        18982,
+        200,
+        "loading"
+      ],
+      [
+        19199,
+        333,
+        "loading"
+      ],
+      [
+        19532,
+        150,
+        "loading"
+      ],
+      [
+        19682,
+        100,
+        "loading"
+      ],
+      [
+        19782,
+        417,
+        "loading"
+      ],
+      [
+        20199,
+        150,
+        "loading"
+      ],
+      [
+        20349,
+        100,
+        "loading"
+      ],
+      [
+        20449,
+        117,
+        "loading"
+      ],
+      [
+        20565,
+        133,
+        "loading"
+      ],
+      [
+        20732,
+        67,
+        "loading"
+      ],
+      [
+        20799,
+        250,
+        "loading"
+      ],
+      [
+        21065,
+        150,
+        "loading"
+      ],
+      [
+        21232,
+        217,
+        "loading"
+      ],
+      [
+        21449,
+        83,
+        "loading"
+      ],
+      [
+        21615,
+        150,
+        "loading"
+      ],
+      [
+        21849,
+        117,
+        "loading"
+      ],
+      [
+        22115,
+        67,
+        "loading"
+      ],
+      [
+        22215,
+        367,
+        "loading"
+      ],
+      [
+        22815,
+        117,
+        "loading"
+      ],
+      [
+        22999,
+        267,
+        "loading"
+      ],
+      [
+        23649,
+        83,
+        "loading"
+      ],
+      [
+        23782,
+        117,
+        "loading"
+      ],
+      [
+        23949,
+        117,
+        "loading"
+      ],
+      [
+        24099,
+        133,
+        "loading"
+      ],
+      [
+        24282,
+        133,
+        "loading"
+      ],
+      [
+        24465,
+        133,
+        "loading"
+      ],
+      [
+        24665,
+        133,
+        "loading"
+      ],
+      [
+        24849,
+        117,
+        "loading"
+      ],
+      [
+        25032,
+        116,
+        "loading"
+      ],
+      [
+        25149,
+        50,
+        "loading"
+      ],
+      [
+        25249,
+        100,
+        "loading"
+      ],
+      [
+        25499,
+        100,
+        "loading"
+      ],
+      [
+        25699,
+        150,
+        "loading"
+      ],
+      [
+        25915,
+        133,
+        "loading"
+      ],
+      [
+        26132,
+        150,
+        "loading"
+      ],
+      [
+        26399,
+        133,
+        "loading"
+      ],
+      [
+        26649,
+        150,
+        "loading"
+      ],
+      [
+        26899,
+        150,
+        "loading"
+      ],
+      [
+        27115,
+        167,
+        "loading"
+      ],
+      [
+        27383,
+        183,
+        "loading"
+      ],
+      [
+        27565,
+        50,
+        "loading"
+      ],
+      [
+        27682,
+        66,
+        "loading"
+      ],
+      [
+        27799,
+        134,
+        "loading"
+      ],
+      [
+        27982,
+        150,
+        "loading"
+      ],
+      [
+        28182,
+        117,
+        "loading"
+      ],
+      [
+        28299,
+        67,
+        "loading"
+      ],
+      [
+        28398,
+        50,
+        "loading"
+      ],
+      [
+        28482,
+        50,
+        "loading"
+      ],
+      [
+        29365,
+        67,
+        "loading"
+      ],
+      [
+        29482,
+        50,
+        "loading"
+      ],
+      [
+        29632,
+        50,
+        "loading"
+      ],
+      [
+        29832,
+        50,
+        "loading"
+      ],
+      [
+        30065,
+        50,
+        "loading"
+      ],
+      [
+        30449,
+        50,
+        "loading"
+      ],
+      [
+        31599,
+        67,
+        "menu"
+      ],
+      [
+        31665,
+        150,
+        "menu"
+      ],
+      [
+        31815,
+        13350,
+        "menu"
+      ]
+    ],
+    "drops": [],
+    "stats": {
+      "boot": {
+        "ms": 793.4000000003725,
+        "frames": 12,
+        "over33": 3,
+        "over50": 3,
+        "over100": 2,
+        "worst": 200
+      },
+      "loading": {
+        "ms": 30570.400000000373,
+        "frames": 404,
+        "over33": 160,
+        "over50": 84,
+        "over100": 51,
+        "worst": 6333
+      },
+      "menu": {
+        "ms": 14013.599999999627,
+        "frames": 10,
+        "over33": 9,
+        "over50": 3,
+        "over100": 2,
+        "worst": 13350
+      }
+    },
+    "videos": {
+      "caracal@boot": {
+        "frames": 4,
+        "dropped": 0
+      }
+    },
+    "summary": {
+      "toMenu": 31.36,
+      "segments": {
+        "boot": {
+          "at": 0,
+          "seconds": 0.79,
+          "frames": 12,
+          "over50": 3,
+          "over100": 2,
+          "worst": 200
+        },
+        "loading": {
+          "at": 0.79,
+          "seconds": 30.57,
+          "frames": 404,
+          "over50": 84,
+          "over100": 51,
+          "worst": 6333
+        },
+        "menu": {
+          "at": 31.36,
+          "seconds": 14.01,
+          "frames": 10,
+          "over50": 3,
+          "over100": 2,
+          "worst": 13350
+        }
+      },
+      "videos": {
+        "caracal@boot": {
+          "frames": 4,
+          "dropped": 0
+        }
+      },
+      "loafOver100": 56,
+      "gpuGateWait": 0,
+      "order": "boot > loading > menu",
+      "liveRollTicks": 78,
+      "renderer": "WebGPU / high"
+    }
+  },
+  "warmTrace": [
+    "fire-hot:227",
+    "fire-cold:227",
+    "fire-resources:100/8",
+    "fire-pool-falling-leaves:229",
+    "fire-leaf-resources:1",
+    "fire-clean:229",
+    "load:282",
+    "a-fresh:282",
+    "a-flash:285",
+    "a-faded:286",
+    "a-kill-generic:291",
+    "a-kill-melee:296",
+    "a-kill-explosive:298",
+    "a-fx:301",
+    "a-corpse:301",
+    "fresh:358",
+    "burning:360",
+    "flash:360",
+    "faded:360",
+    "tree-fade:360",
+    "kill-explosive:360",
+    "kill-chainsaw:360",
+    "kill-pellet:360",
+    "kill-generic:360",
+    "kill-melee:360",
+    "kill-explosive:362",
+    "kill-chainsaw:362",
+    "kill-pellet:362",
+    "kill-generic:363",
+    "kill-melee:363",
+    "kill-explosive:363",
+    "kill-chainsaw:363",
+    "kill-pellet:363",
+    "kill-generic:363",
+    "effects:368",
+    "corpses:368",
+    "corpses2:368",
+    "training-staged:649",
+    "training-fire-hot:643",
+    "training-fire-cold:650",
+    "training-fire-resources:100/8",
+    "training-clean:650"
+  ],
+  "warmLogs": [
+    {
+      "type": "info",
+      "text": "Grave Shift warm-up: 282 shader variants compiled, 38 bodies pooled, 5 warm frames, lights visible 24/24, shadows true | post 8ms pools 9175ms compile 1584ms warm frame 205ms | fire-hot:227 fire-cold:227 fire-resources:100/8 fire-pool-falling-leaves:229 fire-leaf-resources:1 fire-clean:229 load:282"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift load: terrain+water+sky built 0ms | rocks 66ms | trees 281ms | player+weapons+zombie types 1739ms | foliage scattered 3451ms | POIs+minimap+foliage chunks 5900ms | contact shading + rest of setup 6185ms | post + pools + compile + warm frame 17168ms | ready 17172ms"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift first minute: 301 variants after 13 warm frames | fire-hot:227 fire-cold:227 fire-resources:100/8 fire-pool-falling-leaves:229 fire-leaf-resources:1 fire-clean:229 load:282 a-fresh:282 a-flash:285 a-faded:286 a-kill-generic:291 a-kill-melee:296 a-kill-explosive:298 a-fx:301 a-corpse:301"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift pre-roll: 369 shader variants compiled after 35 warm frames | fire-hot:227 fire-cold:227 fire-resources:100/8 fire-pool-falling-leaves:229 fire-leaf-resources:1 fire-clean:229 load:282 a-fresh:282 a-flash:285 a-faded:286 a-kill-generic:291 a-kill-melee:296 a-kill-explosive:298 a-fx:301 a-corpse:301 fresh:358 burning:360 flash:360 faded:360 tree-fade:360 kill-explosive:360 kill-chainsaw:360 kill-pellet:360 kill-generic:360 kill-melee:360 kill-explosive:362 kill-chainsaw:362 kill-pellet:362 kill-generic:363 kill-melee:363 kill-explosive:363 kill-chainsaw:363 kill-pellet:363 kill-generic:363 effects:368 corpses:368 corpses2:368"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift title: menu up after 35 warm frames, 369 variants | fire-hot:227 fire-cold:227 fire-resources:100/8 fire-pool-falling-leaves:229 fire-leaf-resources:1 fire-clean:229 load:282 a-fresh:282 a-flash:285 a-faded:286 a-kill-generic:291 a-kill-melee:296 a-kill-explosive:298 a-fx:301 a-corpse:301 fresh:358 burning:360 flash:360 faded:360 tree-fade:360 kill-explosive:360 kill-chainsaw:360 kill-pellet:360 kill-generic:360 kill-melee:360 kill-explosive:362 kill-chainsaw:362 kill-pellet:362 kill-generic:363 kill-melee:363 kill-explosive:363 kill-chainsaw:363 kill-pellet:363 kill-generic:363 effects:368 corpses:368 corpses2:368"
+    }
+  ],
+  "endModuleHashes": {
+    "core/body-limits.js": "fd2562bd882ef767155cc819301ede35e68d008621dd0f683232c593d91459eb",
+    "game/viewmodel.js": "f3eb743fb200945a3bed23accbd93dfcb5cf983e616769049c357d3199b7363e",
+    "game/tp-fit.js": "d2dbf1e163f856b672a1a91d1638a949749e3bde1727bda8ceaf1f18c3b08e07",
+    "studio/fp-arms.js": "fff7808db158e072d0c5697a0a57e0c87de7fa81847558fc8670f6f7e5f190d8",
+    "world/training-ballistics.js": "eadc9d04d5fd50ad9f6f23c0a080ea2ad58485ff62e0002f1a6b1b0da4719bdc",
+    "studio/marine-carry.js": "105255868cfd0e9088e1bfc540cb4c2d4293faf5e836aac671ffe1cd8b1436ce",
+    "studio/marine-body.js": "78895440e70b0cc5a348fe5a670c789ca74fd1cf69be830f21fd1a3801cb7095",
+    "studio/marine-hand.js": "f3b92570fe48bb259917c8463a1cb09010be22580f0677a5af90f38eff11a587",
+    "game/viewmodel-fit.js": "6a19e05a29cb4ea85fe285b8d08f9b0d53e345c4a7dbbe835581491e0a452a1c",
+    "game/viewmodel-poses.js": "32b2d326f6c62e0aa9cee908f1099a02931f6442d7ccc06825570a4ddfe83344"
+  },
+  "endSourceSha256": "a95f671f3e01e896412b4826a3d8e5430781b75376175aa8d0e72fc91048a3e9",
+  "errors": [
+    "TypeError: Failed to execute 'setPipeline' on 'GPURenderPassEncoder': parameter 1 is not of type 'GPURenderPipeline'.\n    at WebGPUBackend.draw (http://127.0.0.1:47575/vendor/three/three.webgpu.js:69362:19)\n    at WebGPURenderer._renderObjectDirect (http://127.0.0.1:47575/vendor/three/three.webgpu.js:52298:16)\n    at WebGPURenderer.renderObject (http://127.0.0.1:47575/vendor/three/three.webgpu.js:52219:9)\n    at WebGPURenderer._renderObjects (http://127.0.0.1:47575/vendor/three/three.webgpu.js:52134:9)\n    at WebGPURenderer._renderScene (http://127.0.0.1:47575/vendor/three/three.webgpu.js:50817:64)",
+    "TypeError: Failed to execute 'setPipeline' on 'GPURenderPassEncoder': parameter 1 is not of type 'GPURenderPipeline'.\n    at WebGPUBackend.draw (http://127.0.0.1:47575/vendor/three/three.webgpu.js:69362:19)\n    at WebGPURenderer._renderObjectDirect (http://127.0.0.1:47575/vendor/three/three.webgpu.js:52298:16)\n    at WebGPURenderer.renderObject (http://127.0.0.1:47575/vendor/three/three.webgpu.js:52219:9)\n    at WebGPURenderer._renderObjects (http://127.0.0.1:47575/vendor/three/three.webgpu.js:52134:9)\n    at WebGPURenderer._renderScene (http://127.0.0.1:47575/vendor/three/three.webgpu.js:50817:64)",
+    "TypeError: Failed to execute 'setPipeline' on 'GPURenderPassEncoder': parameter 1 is not of type 'GPURenderPipeline'.\n    at WebGPUBackend.draw (http://127.0.0.1:47575/vendor/three/three.webgpu.js:69362:19)\n    at WebGPURenderer._renderObjectDirect (http://127.0.0.1:47575/vendor/three/three.webgpu.js:52298:16)\n    at WebGPURenderer.renderObject (http://127.0.0.1:47575/vendor/three/three.webgpu.js:52219:9)\n    at WebGPURenderer._renderObjects (http://127.0.0.1:47575/vendor/three/three.webgpu.js:52134:9)\n    at WebGPURenderer._renderScene (http://127.0.0.1:47575/vendor/three/three.webgpu.js:50817:64)",
+    "TypeError: Failed to execute 'setPipeline' on 'GPURenderPassEncoder': parameter 1 is not of type 'GPURenderPipeline'.\n    at WebGPUBackend.draw (http://127.0.0.1:47575/vendor/three/three.webgpu.js:69362:19)\n    at WebGPURenderer._renderObjectDirect (http://127.0.0.1:47575/vendor/three/three.webgpu.js:52298:16)\n    at WebGPURenderer.renderObject (http://127.0.0.1:47575/vendor/three/three.webgpu.js:52219:9)\n    at WebGPURenderer._renderObjects (http://127.0.0.1:47575/vendor/three/three.webgpu.js:52134:9)\n    at WebGPURenderer._renderScene (http://127.0.0.1:47575/vendor/three/three.webgpu.js:50817:64)"
+  ],
+  "failure": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n4 !== 0\n\n    at file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/GP-20133/world-cache-matrix-probe.mjs:23:606",
+  "console": [
+    {
+      "type": "warning",
+      "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift renderer: WebGPU."
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift warm-up: 282 shader variants compiled, 38 bodies pooled, 5 warm frames, lights visible 24/24, shadows true | post 8ms pools 9175ms compile 1584ms warm frame 205ms | fire-hot:227 fire-cold:227 fire-resources:100/8 fire-pool-falling-leaves:229 fire-leaf-resources:1 fire-clean:229 load:282"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift load: terrain+water+sky built 0ms | rocks 66ms | trees 281ms | player+weapons+zombie types 1739ms | foliage scattered 3451ms | POIs+minimap+foliage chunks 5900ms | contact shading + rest of setup 6185ms | post + pools + compile + warm frame 17168ms | ready 17172ms"
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift first minute: 301 variants after 13 warm frames | fire-hot:227 fire-cold:227 fire-resources:100/8 fire-pool-falling-leaves:229 fire-leaf-resources:1 fire-clean:229 load:282 a-fresh:282 a-flash:285 a-faded:286 a-kill-generic:291 a-kill-melee:296 a-kill-explosive:298 a-fx:301 a-corpse:301"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift pre-roll: 369 shader variants compiled after 35 warm frames | fire-hot:227 fire-cold:227 fire-resources:100/8 fire-pool-falling-leaves:229 fire-leaf-resources:1 fire-clean:229 load:282 a-fresh:282 a-flash:285 a-faded:286 a-kill-generic:291 a-kill-melee:296 a-kill-explosive:298 a-fx:301 a-corpse:301 fresh:358 burning:360 flash:360 faded:360 tree-fade:360 kill-explosive:360 kill-chainsaw:360 kill-pellet:360 kill-generic:360 kill-melee:360 kill-explosive:362 kill-chainsaw:362 kill-pellet:362 kill-generic:363 kill-melee:363 kill-explosive:363 kill-chainsaw:363 kill-pellet:363 kill-generic:363 effects:368 corpses:368 corpses2:368"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift title: menu up after 35 warm frames, 369 variants | fire-hot:227 fire-cold:227 fire-resources:100/8 fire-pool-falling-leaves:229 fire-leaf-resources:1 fire-clean:229 load:282 a-fresh:282 a-flash:285 a-faded:286 a-kill-generic:291 a-kill-melee:296 a-kill-explosive:298 a-fx:301 a-corpse:301 fresh:358 burning:360 flash:360 faded:360 tree-fade:360 kill-explosive:360 kill-chainsaw:360 kill-pellet:360 kill-generic:360 kill-melee:360 kill-explosive:362 kill-chainsaw:362 kill-pellet:362 kill-generic:363 kill-melee:363 kill-explosive:363 kill-chainsaw:363 kill-pellet:363 kill-generic:363 effects:368 corpses:368 corpses2:368"
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift opening perf: {\"toMenu\":31.36,\"segments\":{\"boot\":{\"at\":0,\"seconds\":0.79,\"frames\":12,\"over50\":3,\"over100\":2,\"worst\":200},\"loading\":{\"at\":0.79,\"seconds\":30.57,\"frames\":404,\"over50\":84,\"over100\":51,\"worst\":6333},\"menu\":{\"at\":31.36,\"seconds\":14.01,\"frames\":10,\"over50\":3,\"over100\":2,\"worst\":13350}},\"videos\":{\"caracal@boot\":{\"frames\":4,\"dropped\":0}},\"loafOver100\":56,\"gpuGateWait\":0,\"order\":\"boot > loading > menu\",\"liveRollTicks\":78,\"renderer\":\"WebGPU / high\"}"
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "Grave Shift: a render target (output) was left bound before the frame; drawing to the canvas."
+    }
+  ]
+}

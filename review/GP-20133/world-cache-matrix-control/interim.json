@@ -1,0 +1,538 @@
+{
+  "navigation": "Canonical tools/bench early dismissForTesting; separate loader-ready and actual menu times",
+  "scope": "CONTROL ORIGINAL/ORIGINAL: no cache method overrides or skipping at all; same snapshots, getters and first/third-person pose switches to investigate4setPipeline errors in review prototype. Not a fix or acceptance. Prior scope text describes intended probe only: original full player matrix walk versus skipping invisible WORLD source-gun roots during this explicitly scoped walk. No solver/pose changes. All local transforms and effectively visible world matrices must match exactly; deferred cold matrices are intentionally excluded UNTIL ordinary cold getter/explicit updateMatrixWorld outside scope must recover exact original world/local matrices. Alternating unhooked CPU timing, no FPS acceptance or production loan claim. Cold FP cache is NOT the target.",
+  "frameSampling": "production-tick-start-wall-clock",
+  "environment": "training",
+  "sourceSha256": "a95f671f3e01e896412b4826a3d8e5430781b75376175aa8d0e72fc91048a3e9",
+  "moduleHashes": {
+    "core/body-limits.js": "fd2562bd882ef767155cc819301ede35e68d008621dd0f683232c593d91459eb",
+    "game/viewmodel.js": "f3eb743fb200945a3bed23accbd93dfcb5cf983e616769049c357d3199b7363e",
+    "game/tp-fit.js": "d2dbf1e163f856b672a1a91d1638a949749e3bde1727bda8ceaf1f18c3b08e07",
+    "studio/fp-arms.js": "fff7808db158e072d0c5697a0a57e0c87de7fa81847558fc8670f6f7e5f190d8",
+    "world/training-ballistics.js": "eadc9d04d5fd50ad9f6f23c0a080ea2ad58485ff62e0002f1a6b1b0da4719bdc",
+    "studio/marine-carry.js": "105255868cfd0e9088e1bfc540cb4c2d4293faf5e836aac671ffe1cd8b1436ce",
+    "studio/marine-body.js": "78895440e70b0cc5a348fe5a670c789ca74fd1cf69be830f21fd1a3801cb7095",
+    "studio/marine-hand.js": "f3b92570fe48bb259917c8463a1cb09010be22580f0677a5af90f38eff11a587",
+    "game/viewmodel-fit.js": "6a19e05a29cb4ea85fe285b8d08f9b0d53e345c4a7dbbe835581491e0a452a1c",
+    "game/viewmodel-poses.js": "32b2d326f6c62e0aa9cee908f1099a02931f6442d7ccc06825570a4ddfe83344"
+  },
+  "rows": [],
+  "readyWallMs": 12161,
+  "loadMarks": [
+    "terrain+water+sky built 0ms",
+    "rocks 55ms",
+    "trees 209ms",
+    "player+weapons+zombie types 1179ms",
+    "foliage scattered 2204ms",
+    "POIs+minimap+foliage chunks 3652ms",
+    "contact shading + rest of setup 3839ms",
+    "post + pools + compile + warm frame 9735ms",
+    "ready 9738ms"
+  ],
+  "menuWallMs": 18504,
+  "graphics": "high",
+  "instrumentation": {
+    "prof": false,
+    "gpuTimestamps": false
+  },
+  "matrixProbes": [
+    {
+      "first": true,
+      "pitch": 0,
+      "result": {
+        "trials": 16,
+        "nodes": 1694,
+        "coldNodes": 810,
+        "maxLocal": 0,
+        "maxVisibleWorld": 0,
+        "maxColdGetterWorld": 0,
+        "maxExplicitColdRefresh": 0,
+        "originalMs": 6.5000000055879354,
+        "candidateMs": 7.499999998137355,
+        "samples": [
+          {
+            "originalMs": 0.8000000007450581,
+            "candidateMs": 0.599999999627471
+          },
+          {
+            "originalMs": 0.7000000011175871,
+            "candidateMs": 1
+          },
+          {
+            "originalMs": 0.8000000007450581,
+            "candidateMs": 0.5
+          },
+          {
+            "originalMs": 0.5,
+            "candidateMs": 0.7999999988824129
+          },
+          {
+            "originalMs": 0.900000000372529,
+            "candidateMs": 0.7999999988824129
+          },
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.5
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.40000000037252903
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.40000000037252903
+          },
+          {
+            "originalMs": 0.2999999988824129,
+            "candidateMs": 0.2999999988824129
+          },
+          {
+            "originalMs": 0.2000000011175871,
+            "candidateMs": 0.30000000074505806
+          },
+          {
+            "originalMs": 0.3999999985098839,
+            "candidateMs": 0.3999999985098839
+          },
+          {
+            "originalMs": 0.2000000011175871,
+            "candidateMs": 0.40000000037252903
+          },
+          {
+            "originalMs": 0.2000000011175871,
+            "candidateMs": 0.40000000037252903
+          },
+          {
+            "originalMs": 0.09999999962747097,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.2000000011175871,
+            "candidateMs": 0.2000000011175871
+          },
+          {
+            "originalMs": 0.19999999925494194,
+            "candidateMs": 0.30000000074505806
+          }
+        ]
+      },
+      "errorsAtPose": [],
+      "errorsAfterProbe": []
+    },
+    {
+      "first": true,
+      "pitch": 0.4,
+      "result": {
+        "trials": 16,
+        "nodes": 1694,
+        "coldNodes": 810,
+        "maxLocal": 0,
+        "maxVisibleWorld": 0,
+        "maxColdGetterWorld": 0,
+        "maxExplicitColdRefresh": 0,
+        "originalMs": 5.000000001862645,
+        "candidateMs": 5.199999999254942,
+        "samples": [
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.2999999988824129
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.30000000074505806
+          },
+          {
+            "originalMs": 0.09999999962747097,
+            "candidateMs": 0.5
+          },
+          {
+            "originalMs": 0.19999999925494194,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.19999999925494194,
+            "candidateMs": 0.5
+          },
+          {
+            "originalMs": 0.2999999988824129,
+            "candidateMs": 0.30000000074505806
+          },
+          {
+            "originalMs": 0.2999999988824129,
+            "candidateMs": 0.2999999988824129
+          },
+          {
+            "originalMs": 0.5,
+            "candidateMs": 0.5
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.30000000074505806
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.2000000011175871
+          },
+          {
+            "originalMs": 0.2000000011175871,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.40000000037252903
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.30000000074505806
+          },
+          {
+            "originalMs": 0.5,
+            "candidateMs": 0.40000000037252903
+          },
+          {
+            "originalMs": 0.5,
+            "candidateMs": 0.2999999988824129
+          }
+        ]
+      },
+      "errorsAtPose": [],
+      "errorsAfterProbe": []
+    },
+    {
+      "first": true,
+      "pitch": -0.4,
+      "result": {
+        "trials": 16,
+        "nodes": 1694,
+        "coldNodes": 810,
+        "maxLocal": 0,
+        "maxVisibleWorld": 0,
+        "maxColdGetterWorld": 0,
+        "maxExplicitColdRefresh": 0,
+        "originalMs": 4.900000000372529,
+        "candidateMs": 4.299999995157123,
+        "samples": [
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.40000000037252903
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.2999999988824129
+          },
+          {
+            "originalMs": 0.8999999985098839,
+            "candidateMs": 0.3999999985098839
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.2999999988824129
+          },
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.2999999988824129
+          },
+          {
+            "originalMs": 0.5,
+            "candidateMs": 0.2999999988824129
+          },
+          {
+            "originalMs": 0.19999999925494194,
+            "candidateMs": 0.09999999962747097
+          },
+          {
+            "originalMs": 0.5,
+            "candidateMs": 0.40000000037252903
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.19999999925494194,
+            "candidateMs": 0.2000000011175871
+          },
+          {
+            "originalMs": 0,
+            "candidateMs": 0.09999999962747097
+          },
+          {
+            "originalMs": 0.2999999988824129,
+            "candidateMs": 0.2999999988824129
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.10000000149011612
+          },
+          {
+            "originalMs": 0.2000000011175871,
+            "candidateMs": 0.5
+          },
+          {
+            "originalMs": 0.09999999962747097,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.09999999962747097,
+            "candidateMs": 0.2000000011175871
+          }
+        ]
+      },
+      "errorsAtPose": [],
+      "errorsAfterProbe": []
+    },
+    {
+      "first": false,
+      "pitch": 0,
+      "result": {
+        "trials": 16,
+        "nodes": 1694,
+        "coldNodes": 810,
+        "maxLocal": 0,
+        "maxVisibleWorld": 0,
+        "maxColdGetterWorld": 0,
+        "maxExplicitColdRefresh": 0,
+        "originalMs": 6.600000001490116,
+        "candidateMs": 5.099999997764826,
+        "samples": [
+          {
+            "originalMs": 0.2999999988824129,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.30000000074505806
+          },
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.30000000074505806
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.6999999992549419,
+            "candidateMs": 0.40000000037252903
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.10000000149011612
+          },
+          {
+            "originalMs": 1,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.2999999988824129,
+            "candidateMs": 0.5
+          },
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.3999999985098839
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.5
+          },
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.30000000074505806
+          },
+          {
+            "originalMs": 0.3999999985098839,
+            "candidateMs": 0.599999999627471
+          },
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.3999999985098839
+          },
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.30000000074505806
+          }
+        ]
+      },
+      "errorsAtPose": [],
+      "errorsAfterProbe": []
+    },
+    {
+      "first": false,
+      "pitch": 0.4,
+      "result": {
+        "trials": 16,
+        "nodes": 1694,
+        "coldNodes": 810,
+        "maxLocal": 0,
+        "maxVisibleWorld": 0,
+        "maxColdGetterWorld": 0,
+        "maxExplicitColdRefresh": 0,
+        "originalMs": 8.399999994784594,
+        "candidateMs": 8.599999997764826,
+        "samples": [
+          {
+            "originalMs": 0.19999999925494194,
+            "candidateMs": 0.2000000011175871
+          },
+          {
+            "originalMs": 0.19999999925494194,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.5,
+            "candidateMs": 0.40000000037252903
+          },
+          {
+            "originalMs": 0.599999999627471,
+            "candidateMs": 0.2999999988824129
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.09999999962747097
+          },
+          {
+            "originalMs": 0.7999999988824129,
+            "candidateMs": 0.30000000074505806
+          },
+          {
+            "originalMs": 0.8000000007450581,
+            "candidateMs": 0.5
+          },
+          {
+            "originalMs": 0.2999999988824129,
+            "candidateMs": 0.40000000037252903
+          },
+          {
+            "originalMs": 0.3999999985098839,
+            "candidateMs": 0.40000000037252903
+          },
+          {
+            "originalMs": 0.599999999627471,
+            "candidateMs": 0.900000000372529
+          },
+          {
+            "originalMs": 0.599999999627471,
+            "candidateMs": 0.7999999988824129
+          },
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 1.400000000372529
+          },
+          {
+            "originalMs": 0.5,
+            "candidateMs": 0.3999999985098839
+          },
+          {
+            "originalMs": 0.3999999985098839,
+            "candidateMs": 0.599999999627471
+          },
+          {
+            "originalMs": 0.6000000014901161,
+            "candidateMs": 1
+          },
+          {
+            "originalMs": 1.199999999254942,
+            "candidateMs": 0.6999999992549419
+          }
+        ]
+      },
+      "errorsAtPose": [],
+      "errorsAfterProbe": []
+    },
+    {
+      "first": false,
+      "pitch": -0.4,
+      "result": {
+        "trials": 16,
+        "nodes": 1694,
+        "coldNodes": 810,
+        "maxLocal": 0,
+        "maxVisibleWorld": 0,
+        "maxColdGetterWorld": 0,
+        "maxExplicitColdRefresh": 0,
+        "originalMs": 5.700000001117587,
+        "candidateMs": 4.799999997019768,
+        "samples": [
+          {
+            "originalMs": 0.2000000011175871,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.19999999925494194,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.2000000011175871,
+            "candidateMs": 0.09999999962747097
+          },
+          {
+            "originalMs": 0.09999999962747097,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.19999999925494194,
+            "candidateMs": 0.30000000074505806
+          },
+          {
+            "originalMs": 1,
+            "candidateMs": 0.2999999988824129
+          },
+          {
+            "originalMs": 0.5,
+            "candidateMs": 0.30000000074505806
+          },
+          {
+            "originalMs": 0.19999999925494194,
+            "candidateMs": 0.30000000074505806
+          },
+          {
+            "originalMs": 0.2999999988824129,
+            "candidateMs": 0.2999999988824129
+          },
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.3999999985098839
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.30000000074505806
+          },
+          {
+            "originalMs": 0.7000000011175871,
+            "candidateMs": 0.7999999988824129
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.30000000074505806
+          },
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.2999999988824129
+          },
+          {
+            "originalMs": 0.599999999627471,
+            "candidateMs": 0.30000000074505806
+          },
+          {
+            "originalMs": 0.09999999962747097,
+            "candidateMs": 0.2000000011175871
+          }
+        ]
+      },
+      "errorsAtPose": [],
+      "errorsAfterProbe": []
+    }
+  ]
+}

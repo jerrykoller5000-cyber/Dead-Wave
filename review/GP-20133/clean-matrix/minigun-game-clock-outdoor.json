@@ -1530,5 +1530,6 @@
     "prof": false,
     "gpuTimestamps": false
   },
+  "failure": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert(await page.waitFor('__gp.done',{timeout:60000}))\n\n    at file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/GP-20133/game-clock-clean.mjs:23:76",
   "errors": []
 }

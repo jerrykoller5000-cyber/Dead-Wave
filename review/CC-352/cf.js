@@ -1,0 +1,15 @@
+window.__CF=[
+ {loadout:{primary:['m4','shotgun'],secondary:['revolver','uzi']},inHand:'pistol',akimbo:false,vest:true,grenades:3},
+ {loadout:{primary:['minigun','flamer'],secondary:['pistol','revolver']},inHand:'m4',akimbo:false,vest:false,grenades:0},
+ {loadout:{primary:['sniper','launcher'],secondary:['uzi',null]},inHand:'sniper',akimbo:false,vest:false,grenades:2},
+ {loadout:{primary:['aa12','chainsaw'],secondary:['pistol','uzi']},inHand:'pistol',akimbo:true,vest:true,grenades:3,dualOwned:{pistol:true,uzi:true}},
+ {loadout:{primary:['m4','ak'],secondary:['uzi','revolver']},inHand:'uzi',akimbo:true,vest:true,grenades:4,dualOwned:{pistol:true,uzi:true,revolver:true}},
+ {loadout:{primary:['chainsaw','minigun'],secondary:['uzi','revolver']},inHand:null,akimbo:false,vest:true,grenades:2},
+ {loadout:{primary:['ak','sniper'],secondary:['revolver','pistol']},inHand:'revolver',akimbo:true,vest:false,grenades:0,dualOwned:{pistol:true,revolver:true}},
+ {loadout:{primary:['shotgun',null],secondary:['uzi',null]},inHand:'uzi',akimbo:false,vest:true,grenades:1},
+ {loadout:{primary:['m4','chainsaw'],secondary:['uzi',null]},inHand:'m4',akimbo:false,vest:true,grenades:3},
+ {loadout:{primary:['launcher','flamer'],secondary:['revolver','uzi']},inHand:'revolver',akimbo:false,vest:false,grenades:2},
+ {loadout:{primary:[null,null],secondary:['uzi','revolver']},inHand:null,akimbo:false,vest:false,grenades:0,dualOwned:{pistol:true,uzi:true,revolver:true}},
+ {loadout:{primary:['aa12','m4'],secondary:['pistol','revolver']},inHand:'aa12',akimbo:false,vest:true,grenades:4,dualOwned:{pistol:true,revolver:true}},
+ {loadout:{primary:['sniper','chainsaw'],secondary:['uzi','pistol']},inHand:'pistol',akimbo:true,vest:true,grenades:2,dualOwned:{pistol:true,uzi:true}},
+]; window.__CF.length

@@ -1,0 +1,60 @@
+{
+ "C0": {
+  "seats": "m4 z-0.385 off0.027 on:gun | shotgun z-0.388 off0.089 on:gun",
+  "pack": "uzi@pack+ z-0.309"
+ },
+ "C1": {
+  "s0(minigun@) vs gun:s1": "19.6 [0.054,-198.836,-641.156,\"s0:? in s1:?\"]",
+  "seats": "minigun z-0.606 off0.183 on:gun | flamer z-0.393 off0.000 on:body",
+  "pack": "revolver@pack+ z-0.315"
+ },
+ "C2": {
+  "seats": "sniper z-0.475 off0.076 on:gun | launcher z-0.546 off0.148 on:gun",
+  "pack": "uzi@pack+ z-0.300"
+ },
+ "C3": {
+  "s0(aa12@) vs gun:s1": "29.8 [0.01,-198.853,-641.3,\"s0:?<magazineBody in s1:?\"]",
+  "seats": "aa12 z-0.529 off0.124 on:gun | chainsaw z-0.710 off0.285 on:gun",
+  "pack": "uzi@pack+ z-0.309 | uzi@pack- z-0.365"
+ },
+ "C4": {
+  "seats": "m4 z-0.500 off0.149 on:gun | ak z-0.492 off0.201 on:gun",
+  "pack": "uzi@pack+ z-0.309 | uzi@pack- z-0.365"
+ },
+ "C5": {
+  "h0(uzi@pack+) vs gun:s0": "29.9 [0.077,-198.908,-641.055,\"h0:? in s0:?\"]",
+  "seats": "chainsaw z-0.458 off0.033 on:gun | minigun z-0.689 off0.241 on:gun",
+  "pack": "uzi@pack+ z-0.309"
+ },
+ "C6": {
+  "seats": "ak z-0.417 off0.054 on:gun | sniper z-0.432 off0.079 on:gun",
+  "pack": "pistol@pack- z-0.323 | revolver@pack+ z-0.315"
+ },
+ "C7": {
+  "seats": "shotgun z-0.422 off0.045 on:gun | -",
+  "pack": "uzi@pack+ z-0.309"
+ },
+ "C8": {
+  "s0(m4@) vs gun:s1": "14.8 [0.029,-198.813,-641.118,\"s0:?<m4-default-holo in s1:?\"]",
+  "seats": "m4 z-0.459 off0.064 on:gun | chainsaw z-0.548 off0.119 on:gun",
+  "pack": "uzi@pack+ z-0.309"
+ },
+ "C9": {
+  "s0(launcher@) vs gun:s1": "8.1 [0.041,-198.935,-641.227,\"s0:? in s1:?\"]",
+  "seats": "launcher z-0.639 off0.235 on:gun | flamer z-0.613 off0.081 on:gun",
+  "pack": "uzi@pack+ z-0.300"
+ },
+ "C10": {
+  "seats": "- | -",
+  "pack": "uzi@pack+ z-0.300 | uzi@pack- z-0.397"
+ },
+ "C11": {
+  "seats": "aa12 z-0.396 off0.000 on:body | m4 z-0.334 off0.098 on:gun",
+  "pack": "revolver@pack+ z-0.311 | revolver@pack- z-0.302"
+ },
+ "C12": {
+  "s0(sniper@) vs gun:s1": "2.3 [-0.013,-198.951,-641.184,\"s1:? in s0:?\"]",
+  "seats": "sniper z-0.547 off0.149 on:gun | chainsaw z-0.751 off0.198 on:gun",
+  "pack": "uzi@pack+ z-0.309 | uzi@pack- z-0.365"
+ }
+}

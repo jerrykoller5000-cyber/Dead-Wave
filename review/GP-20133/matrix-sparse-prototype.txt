@@ -1,0 +1,61 @@
+    function gpSparseRoll(elbowG, hand, wantW, sign, w) {
+      if (w <= 0.001) return 0;
+      const a = _rl.a.copy(hand).normalize();
+      const d = _rl.d.copy(wantW).applyQuaternion(elbowG.getWorldQuaternion(_rl.q).invert());
+      const c = _rl.c.set(sign, 0, 0);
+      c.addScaledVector(a, -c.dot(a)); d.addScaledVector(a, -d.dot(a));
+      if (c.lengthSq() < 1e-6 || d.lengthSq() < 1e-6) return 0;
+      c.normalize(); d.normalize();
+      let ang = Math.atan2(_rl.e.crossVectors(c, d).dot(a), c.dot(d));
+      ang = Math.max(-HANDS.rollMax, Math.min(HANDS.rollMax, ang)) * w;
+      elbowG.quaternion.multiply(_rl.m.setFromAxisAngle(a, ang));
+      elbowG.updateWorldMatrix(true, false);
+      return ang;
+    }
+    function gpSparseHold(armG, elbowG, hand, anchorW, channelW, sign, pole, k, a, rollK = k) {
+      sign = -sign;   // GB-152: the fingered hands' index finger is on the other edge of the channel from the mitt's
+      const wr = wristOf(elbowG);
+      if (!wr || a <= 0.001) {
+        if (wr) wr.quaternion.identity();
+        solveArmIK(armG, elbowG, hand, anchorW, pole, k);
+        const r = gpSparseRoll(elbowG, hand, channelW, sign, rollK);
+        if (elbowG === marine.userData.elbowRG) { wristTurnR = 0; gripAR = 0; } else { wristTurnL = 0; gripAL = 0; }
+        return r;
+      }
+      const g = _wr.g.copy(hand).lerp(wr.userData.grip, a).sub(wr.position);   // the grip point, wrist space
+      _wr.qa.copy(armG.quaternion); _wr.qe.copy(elbowG.quaternion);
+      let roll = 0, turn = 0, need = 0;
+      // The wrist's first aim: where the fist, turned as the forearm holds it now, puts the grip point on the anchor.
+      wr.updateWorldMatrix(true, false); wr.getWorldQuaternion(_wr.q);
+      // CD-9: a wanted frame (tpWant) aims the wrist so that frame puts the grip point on the anchor
+      // (as far as the hold has come in, k * a of the way; the passes below settle it)
+      const t = _tpW.el === elbowG ? _wr.t.copy(g).multiply(wr.getWorldScale(_wr.c)).applyQuaternion(_tpW.t.copy(_wr.q).slerp(_tpW.q, Math.min(1, k * a))).negate().add(anchorW) : _wr.t.copy(g).applyQuaternion(_wr.q).negate().add(anchorW);
+      for (let i = 0; i < WRIST.passes; i++) {
+        // From the pose as it came, so a blend in (k < 1) stays a blend; each pass moves the wrist's aim by what the
+        // last one missed.
+        armG.quaternion.copy(_wr.qa); elbowG.quaternion.copy(_wr.qe);
+        solveArmIK(armG, elbowG, wr.position, t, pole, k);
+        armG.updateWorldMatrix(true, false);
+        roll = gpSparseRoll(elbowG, wr.position, channelW, sign, rollK);
+        // The rest of the turn at the wrist: the least that lays the channel along the grip.
+        const d = _wr.d.copy(channelW).applyQuaternion(elbowG.getWorldQuaternion(_wr.e).invert()).normalize();
+        // CD-9: a wanted frame (TP_FIT) is the whole turn, k * a of the way from the forearm as the first pass leaves it and then
+        // fixed in the world, so the passes close on it (limitWrist holds it inside the table)
+        const want = _tpW.el === elbowG;
+        if (want) { if (i === 0) _tpW.t.copy(elbowG.getWorldQuaternion(_wr.e)).slerp(_tpW.q, Math.min(1, k * a)); _wr.q.copy(elbowG.getWorldQuaternion(_wr.e).invert()).multiply(_tpW.t); tpCapFlex(_wr.q, elbowG); } else
+        _wr.q.setFromUnitVectors(_wr.c.set(sign, 0, 0), d);
+        const ang = 2 * Math.acos(Math.min(1, Math.abs(_wr.q.w)));
+        const s = want ? 1 : (ang > WRIST.max ? WRIST.max / ang : 1) * k * a;
+        wr.quaternion.copy(_wr.id).slerp(_wr.q, s);
+        limitWrist(elbowG, wr, roll);   // CB-289: inside the table before the arm reaches to make up what it misses
+        turn = ang * s; need = ang;
+        wr.updateWorldMatrix(true, false);
+        const miss = _wr.d.copy(anchorW).sub(wr.localToWorld(_wr.c.copy(g)));
+        if (miss.lengthSq() < 1e-6 || k < 0.999) break;   // a blend in from the pose stays a blend
+        t.add(miss);
+      }
+      wr.updateWorldMatrix(true, false);
+      if (elbowG === marine.userData.elbowRG) { wristTurnR = turn; wristNeedR = need; gripAR = a; } else { wristTurnL = turn; wristNeedL = need; gripAL = a; }
+      armG.updateMatrixWorld(true);
+      return roll;
+    }

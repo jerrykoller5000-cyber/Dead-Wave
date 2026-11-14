@@ -1,0 +1,267 @@
+{
+  "scope": "Diagnostic GPU timestamp queries and builtin CPU-phase overhead, not acceptance. Raw frame clock includes wall scheduling; builtin phase reports include postphase polling. Timestamp render scope may differ from total GPU frame; low query times alone do not identify a driver/OS cause.",
+  "source": "070e4ab5b8394d9623bc5376254c904849275cc0d14205a48d43a1fead403151",
+  "end": "070e4ab5b8394d9623bc5376254c904849275cc0d14205a48d43a1fead403151",
+  "sourceUnchanged": true,
+  "errors": [],
+  "rows": [
+    {
+      "pass": 0,
+      "fire": false,
+      "wallFrameMean": 18.52469135802469,
+      "gpuSamples": 95,
+      "gpuMean": 2.833688252631579,
+      "drawPeak": 555,
+      "triangles": 1811016,
+      "topCpu": [
+        {
+          "k": "r:render",
+          "avg": 8.729,
+          "max": 19.2
+        },
+        {
+          "k": "m:hold",
+          "avg": 2.479,
+          "max": 4.2
+        },
+        {
+          "k": "r:matrices",
+          "avg": 1.038,
+          "max": 4.1
+        },
+        {
+          "k": "m:pose",
+          "avg": 0.783,
+          "max": 1.6
+        },
+        {
+          "k": "w:treeFall+leaves+batches",
+          "avg": 0.467,
+          "max": 1.1
+        },
+        {
+          "k": "r:cull",
+          "avg": 0.422,
+          "max": 0.9
+        }
+      ],
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 0,
+      "fire": true,
+      "wallFrameMean": 24.98285714302744,
+      "gpuSamples": 12,
+      "gpuMean": 2.796008,
+      "drawPeak": 592,
+      "triangles": 1800511,
+      "topCpu": [
+        {
+          "k": "r:render",
+          "avg": 10.977,
+          "max": 16.3
+        },
+        {
+          "k": "m:hold",
+          "avg": 2.521,
+          "max": 5.7
+        },
+        {
+          "k": "projectiles",
+          "avg": 1.408,
+          "max": 5
+        },
+        {
+          "k": "r:matrices",
+          "avg": 1.25,
+          "max": 2.5
+        },
+        {
+          "k": "m:hold2+arms",
+          "avg": 1.235,
+          "max": 3.6
+        },
+        {
+          "k": "m:pose",
+          "avg": 0.688,
+          "max": 1.3
+        }
+      ],
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 1,
+      "fire": false,
+      "wallFrameMean": 19.44267241374172,
+      "gpuSamples": 79,
+      "gpuMean": 2.4595276962025316,
+      "drawPeak": 533,
+      "triangles": 1789693,
+      "topCpu": [
+        {
+          "k": "r:render",
+          "avg": 9.995,
+          "max": 17.5
+        },
+        {
+          "k": "m:hold",
+          "avg": 2.343,
+          "max": 6.1
+        },
+        {
+          "k": "r:matrices",
+          "avg": 1.247,
+          "max": 3.3
+        },
+        {
+          "k": "m:pose",
+          "avg": 0.845,
+          "max": 3.6
+        },
+        {
+          "k": "w:treeFall+leaves+batches",
+          "avg": 0.587,
+          "max": 1.7
+        },
+        {
+          "k": "r:cull",
+          "avg": 0.538,
+          "max": 1.6
+        }
+      ],
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 1,
+      "fire": true,
+      "wallFrameMean": 26.352941176470587,
+      "gpuSamples": 12,
+      "gpuMean": 3.5496693333333336,
+      "drawPeak": 574,
+      "triangles": 1795019,
+      "topCpu": [
+        {
+          "k": "r:render",
+          "avg": 11.736,
+          "max": 22.8
+        },
+        {
+          "k": "m:hold",
+          "avg": 2.509,
+          "max": 6.1
+        },
+        {
+          "k": "r:matrices",
+          "avg": 1.519,
+          "max": 3.4
+        },
+        {
+          "k": "m:hold2+arms",
+          "avg": 1.449,
+          "max": 6.9
+        },
+        {
+          "k": "m:pose",
+          "avg": 0.764,
+          "max": 1.6
+        },
+        {
+          "k": "projectiles",
+          "avg": 0.67,
+          "max": 2.4
+        }
+      ],
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 2,
+      "fire": false,
+      "wallFrameMean": 22.990862944101924,
+      "gpuSamples": 67,
+      "gpuMean": 0.43004131343283564,
+      "drawPeak": 532,
+      "triangles": 1785252,
+      "topCpu": [
+        {
+          "k": "r:render",
+          "avg": 11.55,
+          "max": 19.4
+        },
+        {
+          "k": "m:hold",
+          "avg": 2.579,
+          "max": 6.1
+        },
+        {
+          "k": "r:matrices",
+          "avg": 1.659,
+          "max": 4.6
+        },
+        {
+          "k": "m:pose",
+          "avg": 1.217,
+          "max": 7.1
+        },
+        {
+          "k": "w:treeFall+leaves+batches",
+          "avg": 0.749,
+          "max": 2
+        },
+        {
+          "k": "r:cull",
+          "avg": 0.68,
+          "max": 2
+        }
+      ],
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 2,
+      "fire": true,
+      "wallFrameMean": 47.375,
+      "gpuSamples": 8,
+      "gpuMean": 2.323792,
+      "drawPeak": 576,
+      "triangles": 1792385,
+      "topCpu": [
+        {
+          "k": "r:render",
+          "avg": 19.714,
+          "max": 28.2
+        },
+        {
+          "k": "m:hold",
+          "avg": 4.3,
+          "max": 8
+        },
+        {
+          "k": "r:matrices",
+          "avg": 3.279,
+          "max": 5.4
+        },
+        {
+          "k": "m:hold2+arms",
+          "avg": 3.079,
+          "max": 5.4
+        },
+        {
+          "k": "m:pose",
+          "avg": 1.636,
+          "max": 2.6
+        },
+        {
+          "k": "projectiles",
+          "avg": 1.179,
+          "max": 3.1
+        }
+      ],
+      "builds": 0,
+      "pipes": 0
+    }
+  ]
+}

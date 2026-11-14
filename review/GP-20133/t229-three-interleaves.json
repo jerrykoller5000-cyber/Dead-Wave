@@ -1,0 +1,160 @@
+{
+  "scope": "Three fresh-page unchanged original/V1 pairs interleaved in order A/B A/B A/B, separate queued leases, every literal failure retained. Identity removes terminal measured-value parentheses only; thresholds and official test source untouched.",
+  "rows": [
+    {
+      "run": 1,
+      "exit": 0,
+      "result": {
+        "source": "070e4ab5b8394d9623bc5376254c904849275cc0d14205a48d43a1fead403151",
+        "end": "070e4ab5b8394d9623bc5376254c904849275cc0d14205a48d43a1fead403151",
+        "testHash": "aaee7e006497082809f34177e5ce1d501b1b86bc83dfe9f4ee52d8e741ca8ea8",
+        "sourceUnchanged": true,
+        "moduleHashes": {
+          "core/body-limits.js": "fd2562bd882ef767155cc819301ede35e68d008621dd0f683232c593d91459eb",
+          "game/viewmodel.js": "f3eb743fb200945a3bed23accbd93dfcb5cf983e616769049c357d3199b7363e",
+          "game/tp-fit.js": "d2dbf1e163f856b672a1a91d1638a949749e3bde1727bda8ceaf1f18c3b08e07",
+          "studio/fp-arms.js": "fff7808db158e072d0c5697a0a57e0c87de7fa81847558fc8670f6f7e5f190d8",
+          "world/training-ballistics.js": "eadc9d04d5fd50ad9f6f23c0a080ea2ad58485ff62e0002f1a6b1b0da4719bdc"
+        },
+        "endModuleHashes": {
+          "core/body-limits.js": "fd2562bd882ef767155cc819301ede35e68d008621dd0f683232c593d91459eb",
+          "game/viewmodel.js": "f3eb743fb200945a3bed23accbd93dfcb5cf983e616769049c357d3199b7363e",
+          "game/tp-fit.js": "d2dbf1e163f856b672a1a91d1638a949749e3bde1727bda8ceaf1f18c3b08e07",
+          "studio/fp-arms.js": "fff7808db158e072d0c5697a0a57e0c87de7fa81847558fc8670f6f7e5f190d8",
+          "world/training-ballistics.js": "eadc9d04d5fd50ad9f6f23c0a080ea2ad58485ff62e0002f1a6b1b0da4719bdc"
+        },
+        "rows": [
+          {
+            "sparse": false,
+            "completed": true,
+            "evaluatorFailure": null,
+            "pass": 74,
+            "fail": [
+              "FAIL pistol: no pop leaving or rejoining the grip (2.68 m/s at most)",
+              "FAIL revolver aiming down: firing wrist nearly straight, gun in line with the forearm (0.78 rad)"
+            ],
+            "errors": []
+          },
+          {
+            "sparse": true,
+            "completed": true,
+            "evaluatorFailure": null,
+            "pass": 75,
+            "fail": [
+              "FAIL revolver aiming down: firing wrist nearly straight, gun in line with the forearm (0.78 rad)"
+            ],
+            "errors": []
+          }
+        ],
+        "failure": null
+      }
+    },
+    {
+      "run": 2,
+      "exit": 0,
+      "result": {
+        "source": "070e4ab5b8394d9623bc5376254c904849275cc0d14205a48d43a1fead403151",
+        "end": "070e4ab5b8394d9623bc5376254c904849275cc0d14205a48d43a1fead403151",
+        "testHash": "aaee7e006497082809f34177e5ce1d501b1b86bc83dfe9f4ee52d8e741ca8ea8",
+        "sourceUnchanged": true,
+        "moduleHashes": {
+          "core/body-limits.js": "fd2562bd882ef767155cc819301ede35e68d008621dd0f683232c593d91459eb",
+          "game/viewmodel.js": "f3eb743fb200945a3bed23accbd93dfcb5cf983e616769049c357d3199b7363e",
+          "game/tp-fit.js": "d2dbf1e163f856b672a1a91d1638a949749e3bde1727bda8ceaf1f18c3b08e07",
+          "studio/fp-arms.js": "fff7808db158e072d0c5697a0a57e0c87de7fa81847558fc8670f6f7e5f190d8",
+          "world/training-ballistics.js": "eadc9d04d5fd50ad9f6f23c0a080ea2ad58485ff62e0002f1a6b1b0da4719bdc"
+        },
+        "endModuleHashes": {
+          "core/body-limits.js": "fd2562bd882ef767155cc819301ede35e68d008621dd0f683232c593d91459eb",
+          "game/viewmodel.js": "f3eb743fb200945a3bed23accbd93dfcb5cf983e616769049c357d3199b7363e",
+          "game/tp-fit.js": "d2dbf1e163f856b672a1a91d1638a949749e3bde1727bda8ceaf1f18c3b08e07",
+          "studio/fp-arms.js": "fff7808db158e072d0c5697a0a57e0c87de7fa81847558fc8670f6f7e5f190d8",
+          "world/training-ballistics.js": "eadc9d04d5fd50ad9f6f23c0a080ea2ad58485ff62e0002f1a6b1b0da4719bdc"
+        },
+        "rows": [
+          {
+            "sparse": false,
+            "completed": true,
+            "evaluatorFailure": null,
+            "pass": 75,
+            "fail": [
+              "FAIL revolver aiming down: firing wrist nearly straight, gun in line with the forearm (0.78 rad)"
+            ],
+            "errors": []
+          },
+          {
+            "sparse": true,
+            "completed": true,
+            "evaluatorFailure": null,
+            "pass": 74,
+            "fail": [
+              "FAIL pistol: no pop leaving or rejoining the grip (1.91 m/s at most)",
+              "FAIL revolver aiming down: firing wrist nearly straight, gun in line with the forearm (0.78 rad)"
+            ],
+            "errors": []
+          }
+        ],
+        "failure": null
+      }
+    },
+    {
+      "run": 3,
+      "exit": 0,
+      "result": {
+        "source": "070e4ab5b8394d9623bc5376254c904849275cc0d14205a48d43a1fead403151",
+        "end": "070e4ab5b8394d9623bc5376254c904849275cc0d14205a48d43a1fead403151",
+        "testHash": "aaee7e006497082809f34177e5ce1d501b1b86bc83dfe9f4ee52d8e741ca8ea8",
+        "sourceUnchanged": true,
+        "moduleHashes": {
+          "core/body-limits.js": "fd2562bd882ef767155cc819301ede35e68d008621dd0f683232c593d91459eb",
+          "game/viewmodel.js": "f3eb743fb200945a3bed23accbd93dfcb5cf983e616769049c357d3199b7363e",
+          "game/tp-fit.js": "d2dbf1e163f856b672a1a91d1638a949749e3bde1727bda8ceaf1f18c3b08e07",
+          "studio/fp-arms.js": "fff7808db158e072d0c5697a0a57e0c87de7fa81847558fc8670f6f7e5f190d8",
+          "world/training-ballistics.js": "eadc9d04d5fd50ad9f6f23c0a080ea2ad58485ff62e0002f1a6b1b0da4719bdc"
+        },
+        "endModuleHashes": {
+          "core/body-limits.js": "fd2562bd882ef767155cc819301ede35e68d008621dd0f683232c593d91459eb",
+          "game/viewmodel.js": "f3eb743fb200945a3bed23accbd93dfcb5cf983e616769049c357d3199b7363e",
+          "game/tp-fit.js": "d2dbf1e163f856b672a1a91d1638a949749e3bde1727bda8ceaf1f18c3b08e07",
+          "studio/fp-arms.js": "fff7808db158e072d0c5697a0a57e0c87de7fa81847558fc8670f6f7e5f190d8",
+          "world/training-ballistics.js": "eadc9d04d5fd50ad9f6f23c0a080ea2ad58485ff62e0002f1a6b1b0da4719bdc"
+        },
+        "rows": [
+          {
+            "sparse": false,
+            "completed": true,
+            "evaluatorFailure": null,
+            "pass": 75,
+            "fail": [
+              "FAIL revolver aiming down: firing wrist nearly straight, gun in line with the forearm (0.78 rad)"
+            ],
+            "errors": []
+          },
+          {
+            "sparse": true,
+            "completed": true,
+            "evaluatorFailure": null,
+            "pass": 75,
+            "fail": [
+              "FAIL revolver aiming down: firing wrist nearly straight, gun in line with the forearm (0.78 rad)"
+            ],
+            "errors": []
+          }
+        ],
+        "failure": null
+      }
+    }
+  ],
+  "originalFailingRows": [
+    "FAIL pistol: no pop leaving or rejoining the grip",
+    "FAIL revolver aiming down: firing wrist nearly straight, gun in line with the forearm"
+  ],
+  "candidateFailingRows": [
+    "FAIL revolver aiming down: firing wrist nearly straight, gun in line with the forearm",
+    "FAIL pistol: no pop leaving or rejoining the grip"
+  ],
+  "novelCandidateRows": [],
+  "missingCandidateRows": [],
+  "sameFailingRowIdentities": true,
+  "complete": true
+}

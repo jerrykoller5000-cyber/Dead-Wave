@@ -1,0 +1,133 @@
+{
+  "scope": "Look-only matched lighting deltas on one immutable current index snapshot; BEFORE reproduces only C7 pre-D183 hemisphere/default-grade/Training-fill settings. No archived whole index served, no production write. Timings before every PNG, raw production clock, profiler/query off, both variants warmed; 12 interleaved phases, not full GP33 acceptance.",
+  "timingSource": {
+    "file": "../native-receipts.json",
+    "sourceSha256": "070e4ab5b8394d9623bc5376254c904849275cc0d14205a48d43a1fead403151",
+    "scope": "All twelve valid timing phases precede every screenshot in that browser. Initial Training photo fixture rejected: unset lightsOff boolean toggled first scene, and Training clock forced noon. Corrected photos here; no repeated timing claim."
+  },
+  "frames": 36,
+  "matched_camera_pairs": 18,
+  "sourceSha256": "070e4ab5b8394d9623bc5376254c904849275cc0d14205a48d43a1fead403151",
+  "endSourceSha256": "070e4ab5b8394d9623bc5376254c904849275cc0d14205a48d43a1fead403151",
+  "diskSourceUnchanged": true,
+  "trainingErrors": [],
+  "outdoorErrors": [],
+  "timings": [
+    {
+      "pass": 0,
+      "after": false,
+      "n": 258,
+      "mean": 17.49302325576775,
+      "p95": 25,
+      "max": 49.599999994039536
+    },
+    {
+      "pass": 1,
+      "after": true,
+      "n": 258,
+      "mean": 17.49728682163612,
+      "p95": 23.900000005960464,
+      "max": 26.80000001192093
+    },
+    {
+      "pass": 2,
+      "after": true,
+      "n": 254,
+      "mean": 17.76771653543307,
+      "p95": 25.600000023841858,
+      "max": 31.200000017881393
+    },
+    {
+      "pass": 3,
+      "after": false,
+      "n": 255,
+      "mean": 17.716862745144788,
+      "p95": 24.5,
+      "max": 27.80000001192093
+    },
+    {
+      "pass": 4,
+      "after": false,
+      "n": 246,
+      "mean": 18.323983739910087,
+      "p95": 26.19999998807907,
+      "max": 35.69999998807907
+    },
+    {
+      "pass": 5,
+      "after": true,
+      "n": 239,
+      "mean": 18.897907949765855,
+      "p95": 26.099999994039536,
+      "max": 32.79999998211861
+    },
+    {
+      "pass": 6,
+      "after": true,
+      "n": 239,
+      "mean": 18.879079497883012,
+      "p95": 27.69999998807907,
+      "max": 43.80000001192093
+    },
+    {
+      "pass": 7,
+      "after": false,
+      "n": 260,
+      "mean": 17.320384615430466,
+      "p95": 23.299999982118607,
+      "max": 29.5
+    },
+    {
+      "pass": 8,
+      "after": false,
+      "n": 249,
+      "mean": 18.087148594329634,
+      "p95": 25.099999994039536,
+      "max": 32
+    },
+    {
+      "pass": 9,
+      "after": true,
+      "n": 246,
+      "mean": 18.333333333333332,
+      "p95": 26.599999994039536,
+      "max": 38.70000001788139
+    },
+    {
+      "pass": 10,
+      "after": true,
+      "n": 226,
+      "mean": 19.93982300887593,
+      "p95": 28.599999994039536,
+      "max": 36
+    },
+    {
+      "pass": 11,
+      "after": false,
+      "n": 231,
+      "mean": 19.54415584410424,
+      "p95": 27.599999994039536,
+      "max": 35.20000001788139
+    }
+  ],
+  "blocks": [
+    {
+      "block": 0,
+      "beforeMean": 17.604943000456267,
+      "afterMean": 17.632501678534595,
+      "afterPercent": 0.15653943371254364
+    },
+    {
+      "block": 1,
+      "beforeMean": 17.822184177670277,
+      "afterMean": 18.888493723824432,
+      "afterPercent": 5.9830463849102955
+    },
+    {
+      "block": 2,
+      "beforeMean": 18.815652219216936,
+      "afterMean": 19.13657817110463,
+      "afterPercent": 1.7056328855819647
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+CC-352 sweep: worst depth (mm) over stand/walk/run/crouch/crouch-walk/aim x 5 frames; config, gun@station, into what
+configs: see cf.js (C0..C12). "arm"/"leg" = his vertices inside the gun; "(its verts in them)" = the gun's vertices inside him
+C0   m4@                  gun:s1                       before   0.0             after   7.7 stand
+C1   minigun@             gun:s1                       before  30.0 stand       after  24.7 stand
+C2   uzi@pack+            gun:hip                      before  22.2 run         after   0.0 
+C3   aa12@                gun:s1                       before  30.0 stand       after   4.1 stand
+C4   revolver@thigh+      leg                          before  13.4 run         after  12.5 walk
+C4   revolver@thigh-      leg                          before  13.4 walk        after  13.7 walk
+C5   chainsaw@            gun:s1                       before   0.0             after  10.5 stand
+C5   pistol@hip+          arm                          before   0.0             after   2.0 run
+C5   pistol@hip+          arm (its verts in them)      before   0.0             after   4.2 run
+C5   uzi@pack+            gun:hip                      before  24.7 walk        after   0.0 
+C5   uzi@pack+            gun:s0                       before   7.3 stand       after  30.0 stand
+C8   uzi@pack+            gun:hip                      before  14.8 run         after   0.0 
+C8   uzi@pack+            gun:s1                       before   0.0             after   4.3 stand
+C9   launcher@            gun:s1                       before  27.3 walk        after  30.0 stand
+C9   uzi@pack+            gun:hip                      before  17.4 run         after   0.0 
+C10  pistol@hip+          arm (its verts in them)      before   0.0             after  11.6 run
+C10  pistol@hip-          arm (its verts in them)      before   0.0             after  10.7 run
+C10  pistol@hip-          gun:p0                       before  21.5 walk        after   0.0 
+C10  revolver@thigh+      arm                          before  11.5 run         after  10.0 crouchwalk
+C10  revolver@thigh+      arm (its verts in them)      before  30.0 walk        after  27.8 crouchwalk
+C10  revolver@thigh+      leg                          before   7.6 run         after  14.1 walk
+C10  revolver@thigh-      arm                          before   8.5 stand       after   6.4 crouch
+C10  revolver@thigh-      arm (its verts in them)      before  30.0 stand       after  15.4 crouch
+C10  revolver@thigh-      leg                          before  10.5 walk        after  10.4 run
+C10  uzi@pack+            gun:hip                      before  24.1 walk        after   0.0 
+C11  pistol@hip-          gun:p1                       before   8.9 run         after   0.0 
+C11  revolver@pack+       gun:hip                      before   2.3 run         after   0.0 
+C12  sniper@              gun:s1                       before  27.2 stand       after   0.0 

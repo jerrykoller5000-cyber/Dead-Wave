@@ -2,57 +2,55 @@
 
 state: active
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: CD-14 part 2: J153 8 revolver reload unspin first, then 17/16 sniper, 28, 22/24, 18, J151 46, pistol high grip; landing one gun at a time
-touching: game/viewmodel.js game/viewmodel-poses.js game/viewmodel-fit.js studio/hand-contacts.js
-since: 2026-11-14T04:57Z
-next: CD-14 (02:40Z, CLAUDE DIRECTOR: part 1 ACCEPTED (1, 3, 6 thumbs, 7
+task: CD-14 CD-14 part 2 (#5, fresh): #16 sniper trigger (fist refit + guard-front loan) first, eye sheet early; then 28, 22/24, 18, 46, pistol high grip, tcl334b/c, tce4, #8
+touching: game/viewmodel-fit.js, game/hand-contacts.js, tools/handfit; loans: studio/weapon-longarms.js (makeSniperModel guard front + blade), index.html (VM_TRIGGER.sniper row)
+since: 2026-11-14T13:33Z
+next: CD-14 (06:18Z: part 1 accepted; #8 revolver NOT shipped (fails at
 blocked-on: —
-last-report: handoffs/2026-11-14-claude4-CD-14-part2-interim.md
+last-report: handoffs/2026-11-14-claude4-CD-14-part2-s8.md
 
 ## Notes
 
-### Session #7 (14 Nov, 02:36-04:45Z): CD-14 part 2, nothing landed yet (no PC game files touched); #8 solved in the cloud, not robust
-- Cloud kit rebuilt from a fresh code tar `_DELETE ME/claude4-pc-code-0240.tgz` (+ -img-2245, -assets-2300) -> /home/claude/gs, ln -s gs gs306,
-  ln -s gs/tools/handfit /home/claude/handfit-work, `sh tools/handfit/hand/mkmod.sh`, mkdir /home/claude/look/v (view.html + vendor link).
-  Tools (Claude outputs/CD-14/tools/ + this session's claude4-cd14p2-tools.tgz -> /home/claude/fp): eye.mjs page kept up by eyekeep.sh
-  (VW=640 VH=360); jobs by j_var.py (mutates VM_RELOADS[key] live in the page, starts a reload, holds beats, exports), j_vshot.py (same,
-  four-light shots), j_tune.py (info.tune variants); clipchk.mjs (tcl334b's way), tshift.py (rigid moves off the gun's bodies, closed
-  filled + small open as hulls, with a contact target), viasearch.py, idxtrig.mjs (firing index tip vs trigger), rigid.js (in-page place move).
-- CLOUD LIMITS (cost me 6 page crashes): the bash cgroup is 6.27 GB; the eye page grows 3.6 -> 5.4 GB over ~3 batches and OOMs. Batches
-  <= 8 exports; no python tools while a batch runs. Before startReload call T.grantAllWeapons() (the reserve runs dry after ~10 reloads and
-  startReload silently does nothing: check the export's info.place is not 'fore' at every beat).
-- #8 (revolver reload, VM_RELOADS.cylinder): before = 9-16 mm of the support glove in the frame/grip at part (.08, .82), catch (.27-.31),
-  loader (.46-.76) and both fore legs. Solved (empty reload, cloud): part + catch moved (cylinder-local, `local: true`), ejector 12 mm left
-  / 8 fwd, loader a root-space side hold (palm on the cylinder's left, fingers forward, pose 'open'), part's .08 pose 'cup', a root-space
-  via 'under' (VM_FIT.revolver.l.p + [-0.08, -0.03, 0], the fit's basis) at .04 and .885 -> every middle beat 0-2 mm (the 2.3 mm firing index
-  in the guard is note 9, Claude 5's). Values: tools tgz var11s.json (patch r5s) / v7-dump.json. NOT ROBUST: gun.cylinder carries the
-  chamber turn (viewmodel.js cylinderTurn, s*60 deg about z, s = 1 - live rounds) so cylinder-local places turn with it (the original 'at's
-  too): a reload with rounds left put catch/part 3.8-4.2 mm into the cylinder. NEXT: add `unspin` to placeFrame (after partMatrix:
-  _pm.multiply(rotZ(-gun.cylSpin*PI/3)) when place.unspin), re-solve in the unspun frame, check empty AND tactical (j_var2.py
-  window.__AMMO), sheet, land, tell Claude 5. Still clipping at u .02 and .92-.98 (12-15 mm, the cup round the firing hand): the reload's
-  elbowL [-0.28,-0.30,0.04] holds the support elbow low-left while the hand is back on the fore cup (clamped wrist): Claude 5's elbow blend.
-- #16 sniper fist: VM_FIT.sniper.r sits right and low: p x +0.037 (grip half-width .024), basis x [0.61,0.73,0.31] vs the grip's axis
-  [0, 0.945, 0.326] (centre [0,-0.1075,-0.121] gun); index MCP 6 cm gun right of centre, its tip 27 mm right / 20 behind the blade. A rigid
-  move can't fix it (the fist's fingers hit the guard, tshift): needs a regrip solve (tools/handfit gun/ pipeline) at p ~[0.004,-0.12,-0.12].
-- Not started: 17, 28, 22/24, 18, J151 46, the pistol high grip (last).
+### Session #9 (14 Nov, 06:42Z-): CD-14 part 2. #17 LANDED ~08:50Z (VM_FIT.sniper.l), sent to the Director (sheet below)
+- #17: the support hand wraps the fore end (palm under, thumb up the near plate, finger pads on the far plate, tips under its top).
+  Sheet Claude outputs/CD-14/cd14-17-sniper-support-eye.jpg. Webbing ~2 gun-mm (thumb up and webbing touching fight each other).
+  Cloud tcl334c: sniper 0.5 (as before), shotgun 3.7 (item 4); t240 holstered 0.72 is red on the baseline too.
+- Gun space is MIRRORED (gunMw det < 0): +x is the gun's RIGHT, +z the muzzle, +y up. VM_FIT basis: x the grip channel, y toward
+  the elbow; canonical hand: fingers -y, palm +z, the left hand mirrored in x (side -1).
+- Method that worked (tools in Claude outputs/CD-14/claude4-cd14p2-s9-tools.tgz, w/ = /home/claude/fp/w): eye page export ->
+  fitx.sh (fit8's loop, any touch list, GG=gungrip3k.mjs: KOALL keep-out for every bone, C2G/THUP thumb-up term) -> handsearch.mjs
+  (random search of hand move, thumb, finger curls, index; scores pen/keep-out/self/gaps/thumb up+forward; T0 a thumb start) ->
+  c4/applyoff.py -> posechk3.py (matches the gate's depth) -> tune live in the eye page (jb.py: info.tune[key][side]={basis,p},
+  tune[key].poseL) -> sheet (mksheet.py) -> putl.py (one hand's object replaced, nothing else; setfit.py REFORMATS other lines).
+- Eye page: eye.mjs with DSF=2 (deviceScaleFactor), CLIP=440,280,360,260 for the long guns' support hand; it OOMs every 2-3
+  batches (restart ~6 min): batches of 4 shots, exports in their own batch. Stop it (touch e1/STOPALL e1/queue/stop, kill PIDs)
+  before the suite tests. Tests: CHROME=/opt/pw-browsers/chromium-1243/chrome-linux64/chrome CHROME_ARGS=--no-sandbox
+  DW_CHECK_MS=600000 node tools/tests/run-all.mjs <t> --jobs 1 --agent claude4 --task CD-14 --checks "..." --all-fails
+- Cloud kit: _DELETE ME/claude4-pc-code-0240.tgz + -img-2245 + -assets-2300 + claude4-delta-0645.tgz -> /home/claude/gs; ln -s gs gs306;
+  ln -s gs/tools/handfit handfit-work; sh tools/handfit/hand/mkmod.sh; pip trimesh rtree scipy; mkdir /home/claude/look/v + view.html
+  + vendor symlink; /home/claude/work/posedlabels.mjs (diag.py). Asked Claude 5 for his wrap tool (07:0xZ): no answer yet.
+- NEXT: #16 sniper trigger: move the blade (studio/weapon-longarms.js makeSniperModel, addTriggerArtwork points [z,y] builder units,
+  z -0.044..-0.059, y -0.048..-0.081; guard z -0.03..-0.082) to where the index pad lands; FYI ChatGPT 2 + Claude 5 (VM_TRIGGER.sniper);
+  keep GT-20106's component checks green. Then 28, 22/24, 18, J151 46, the pistol high grip; tcl334b/c reds; tce4; #8 last.
 
-### Session #6 (13-14 Nov, 22:40Z-): CD-14 part 1 LANDED ~00:50Z (handoffs/2026-11-14-claude4-CD-14-part1.md), rest open
-- LANDED: pistol.r + revolver.r firing thumbs (the "hook over the back" was the FIRING thumb), VM_FIT.uzi.pair (pair-only firing
-  pose, game/viewmodel.js gripP reads VM_FIT[key].pair when AK), hand-contacts pistol/revolver r pose.t (+ thumb pushes dropped),
-  VM.akimbo.revolver.at (J153 7), the paired pistol rack (!AK). Director accepted the direction (a) 23:2xZ.
-- OPEN, in this order: 8 revolver reload (support hand 10-16 mm through the gun at most u, cloud exports ex/a22),
-  17 sniper support (webbing/thumb) + 16 (sniper fist sits ~3 cm low/right: no index pose or blade move reaches; refit the fist,
-  then ChatGPT 2's blade if needed, then Claude 5's row), 28 Breacher support paddle, 22 flamer (blade target sent to ChatGPT 2:
-  back ~29, lower ~8-25 gun-mm), 24 flamer ext tank vs arm, 18 chainsaw rear hand, J151 46; LAST (Director): the pistol HIGH GRIP
-  (raise VM_FIT.pistol.r ~12 mm along the grip, thumbs forward under the slide; send Claude 5 new trigger-rest values).
-- Known pre-existing pair clips (not mine to land in part 1): index tips 2.6-3 mm in the Wasp/revolver guards (note 9, Claude 5),
-  the Wasp pair thumb ROOT 1.7 mm in the safety (the pair's hand place).
-- Cloud kit (rebuild after a restart): tars _DELETE ME/claude4-pc-code-2245.tgz, -img-2245, -assets-2300 -> /home/claude/gs (+ ln -s
-  gs gs306); pip trimesh rtree scipy. Tools (cloud only, copy to tools/handfit/c4 later): fp/eye.mjs (real game Training, queued jobs:
-  [{js, shot, clip, light}]; run through tools/game-test-slot.mjs; eyeloop.sh restarts after an OOM; VW/VH 960x540 since the cloud
-  box limits bash to 6.2 GB), export_body.js (the g9 export as a job), tsolve.mjs (thumb solve vs gun+other hand, capsules: margin
-  .0015+ or it clips), idxpad/idxlay.mjs (index reach), clipchk.mjs (tcl334b's closed-body method on an export), fixcontact.mjs.
-- The PC's VM has no Chrome: crew slot runs of tests fail there; run them in the cloud.
+### Session #8 (14 Nov, 04:56-06:40Z): CD-14 part 2, NOTHING landed (no PC game files touched); out of context
+- #8 revolver reload: the placeFrame `unspin` works (cloud, 7 lines: _tools tgz e8_vm.py_; the cylinder's spin read from its own quaternion
+  vs gun.magBase, Euler XYZ z, taken out of _pm for places with unspin:true). With session 7's places (fixed values: final8.json; rigid()
+  had baked whatever spin the page had into the locals, so never re-run r5s, use the literals) the support glove is 0-1.6 mm at every
+  middle beat for empty and tactical 1/3/5 live. BUT the eye sheet (Claude outputs/CD-14/cd14-8-revolver-s7places-eye.jpg) fails D-181:
+  those places turned the forearm UP and back (y ~[-.12,+.43,-.90]): at .08 the sleeve fills the view, at .29 it covers the left third,
+  the .60 loader side-hold is an open hand in the air. Original places: 11-16 mm in the frame (exports c04); tshift +-21 mm/.2 rad from
+  them leaves 3.6 mm. Sent to the Director (request 06:05Z): needs the arm path (elbowL, Claude 5) + places solved together.
+- #16 sniper fist: transplant of the GW-4 r fit onto the sniper grip (grips: m4 c[0,-.101,-.112] ax[0,.93,.36], sniper c[0,-.108,-.121]
+  ax[0,.95,.33], tops y -.050/-.052; hand-to-gun scale m4 1.7505, sniper 1.6314) = basis x[.31749,.9442,.08771] y[-.39311,.21523,-.89395]
+  p[.0127,-.14316,-.13138] (+12 mm up the grip: p[.0127,-.13182,-.12744]). The fist then sits round the grip like the GW-4's, but the
+  index can't put its pad on the blade: from the MCP (x .063, z -.084) the finger reaches forward past the blade into the magazine
+  (tip +22 mm fwd) or wraps across it (tip 21 mm left, 4.7 mm in the receiver); ring/pinky 3.7-4.4 mm in the grip with the m4 curls.
+  No hand-only answer found; the J153 plan (ChatGPT 2 moves the blade forward, then Claude 5's VM_TRIGGER.sniper) still stands.
+- #17 sniper support: palm 12 mm under the fore end floor (y -.041), thumb 1-2 cm off its left side. Moving up 10/14 mm puts the
+  finger bases 3.2 mm into the right side (body 16); more MCP curl drives the tips into the barrel. Needs a real wrap (c4/wrap.js, fit8.sh).
+- Not started: 28, 22/24, 18, J151 46, the pistol high grip.
+- Older sessions (#6, #7): handoffs/2026-11-14-claude4-CD-14-part1.md and Claude outputs/CD-14/claude4-session7-notes.md.
 
 ### Who you are (D-145, Jerry 10 Nov 2026)
 You are **Claude 1** on the board (agent `claude4`, task ids `CD-`; Jerry named you, D-146), the crew's fourth Claude: a Claude task of your own on Claude Opus 5.5 (High). Jerry made CLAUDE DIRECTOR (agent `claude`) the game
@@ -102,6 +100,4 @@ KR-7, then the rest. For each gun: fit, test (tcl334b/c/d), then ask Antigravity
 - Heavy work (exports, distance fields, fits, strips) in your own cloud copy of the repo, one game instance at a time. On
   the PC, game tests only through the slot: `node crew/crew.mjs slot run claude4 <task> --checks "<what>" -- <command>`.
 - No git, ever (rule 6): Claude writes the commit jobs. Never push, never enter passwords or PINs, complete CAPTCHAs or
-  change system settings. Stay inside the Tiny Trek folder (Jerry's Desktop has private papers: never open them).
-  Deleting his files needs his OK; kill processes by PID only. Your own files only; never revert anyone's work; never
-  weaken a test (`--review` to change one).
+  change system settings. Stay inside the Tiny Trek folder (Jerry's Desktop has pri

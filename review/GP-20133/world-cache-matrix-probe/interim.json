@@ -1,0 +1,526 @@
+{
+  "navigation": "Canonical tools/bench early dismissForTesting; separate loader-ready and actual menu times",
+  "scope": "REVIEW ONLY matrix primitive: original full player matrix walk versus skipping invisible WORLD source-gun roots during this explicitly scoped walk. No solver/pose changes. All local transforms and effectively visible world matrices must match exactly; deferred cold matrices are intentionally excluded UNTIL ordinary cold getter/explicit updateMatrixWorld outside scope must recover exact original world/local matrices. Alternating unhooked CPU timing, no FPS acceptance or production loan claim. Cold FP cache is NOT the target.",
+  "frameSampling": "production-tick-start-wall-clock",
+  "environment": "training",
+  "sourceSha256": "a95f671f3e01e896412b4826a3d8e5430781b75376175aa8d0e72fc91048a3e9",
+  "moduleHashes": {
+    "core/body-limits.js": "fd2562bd882ef767155cc819301ede35e68d008621dd0f683232c593d91459eb",
+    "game/viewmodel.js": "f3eb743fb200945a3bed23accbd93dfcb5cf983e616769049c357d3199b7363e",
+    "game/tp-fit.js": "d2dbf1e163f856b672a1a91d1638a949749e3bde1727bda8ceaf1f18c3b08e07",
+    "studio/fp-arms.js": "fff7808db158e072d0c5697a0a57e0c87de7fa81847558fc8670f6f7e5f190d8",
+    "world/training-ballistics.js": "eadc9d04d5fd50ad9f6f23c0a080ea2ad58485ff62e0002f1a6b1b0da4719bdc",
+    "studio/marine-carry.js": "105255868cfd0e9088e1bfc540cb4c2d4293faf5e836aac671ffe1cd8b1436ce",
+    "studio/marine-body.js": "78895440e70b0cc5a348fe5a670c789ca74fd1cf69be830f21fd1a3801cb7095",
+    "studio/marine-hand.js": "f3b92570fe48bb259917c8463a1cb09010be22580f0677a5af90f38eff11a587",
+    "game/viewmodel-fit.js": "6a19e05a29cb4ea85fe285b8d08f9b0d53e345c4a7dbbe835581491e0a452a1c",
+    "game/viewmodel-poses.js": "32b2d326f6c62e0aa9cee908f1099a02931f6442d7ccc06825570a4ddfe83344"
+  },
+  "rows": [],
+  "readyWallMs": 20636,
+  "loadMarks": [
+    "terrain+water+sky built 0ms",
+    "rocks 66ms",
+    "trees 281ms",
+    "player+weapons+zombie types 1739ms",
+    "foliage scattered 3451ms",
+    "POIs+minimap+foliage chunks 5900ms",
+    "contact shading + rest of setup 6185ms",
+    "post + pools + compile + warm frame 17168ms",
+    "ready 17172ms"
+  ],
+  "menuWallMs": 31687,
+  "graphics": "high",
+  "instrumentation": {
+    "prof": false,
+    "gpuTimestamps": false
+  },
+  "matrixProbes": [
+    {
+      "first": true,
+      "pitch": 0,
+      "result": {
+        "trials": 16,
+        "nodes": 1700,
+        "coldNodes": 810,
+        "maxLocal": 0,
+        "maxVisibleWorld": 0,
+        "maxColdGetterWorld": 0,
+        "maxExplicitColdRefresh": 0,
+        "originalMs": 8.40000000409782,
+        "candidateMs": 4.599999995902181,
+        "samples": [
+          {
+            "originalMs": 0.7999999988824129,
+            "candidateMs": 0.3999999985098839
+          },
+          {
+            "originalMs": 0.19999999925494194,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.599999999627471,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.2000000011175871,
+            "candidateMs": 0.30000000074505806
+          },
+          {
+            "originalMs": 1,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.09999999962747097
+          },
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.2000000011175871
+          },
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.6999999992549419
+          },
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.6000000014901161,
+            "candidateMs": 0.7000000011175871
+          },
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.09999999962747097
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 1.599999999627471,
+            "candidateMs": 0.5
+          },
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.2000000011175871
+          }
+        ]
+      }
+    },
+    {
+      "first": true,
+      "pitch": 0.4,
+      "result": {
+        "trials": 16,
+        "nodes": 1700,
+        "coldNodes": 810,
+        "maxLocal": 0,
+        "maxVisibleWorld": 0,
+        "maxColdGetterWorld": 0,
+        "maxExplicitColdRefresh": 0,
+        "originalMs": 10.400000002235174,
+        "candidateMs": 5.600000005215406,
+        "samples": [
+          {
+            "originalMs": 0.5,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.3999999985098839,
+            "candidateMs": 0.2000000011175871
+          },
+          {
+            "originalMs": 0.7000000011175871,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.2999999988824129
+          },
+          {
+            "originalMs": 0.6999999992549419,
+            "candidateMs": 0.2000000011175871
+          },
+          {
+            "originalMs": 0.7000000011175871,
+            "candidateMs": 0.40000000037252903
+          },
+          {
+            "originalMs": 1.099999999627471,
+            "candidateMs": 0.30000000074505806
+          },
+          {
+            "originalMs": 0.5,
+            "candidateMs": 0.30000000074505806
+          },
+          {
+            "originalMs": 0.5,
+            "candidateMs": 0.09999999962747097
+          },
+          {
+            "originalMs": 0.2999999988824129,
+            "candidateMs": 0.30000000074505806
+          },
+          {
+            "originalMs": 1.5,
+            "candidateMs": 0.7999999988824129
+          },
+          {
+            "originalMs": 0.900000000372529,
+            "candidateMs": 0.7000000011175871
+          },
+          {
+            "originalMs": 1.1000000014901161,
+            "candidateMs": 0.6000000014901161
+          },
+          {
+            "originalMs": 0.2000000011175871,
+            "candidateMs": 0.2000000011175871
+          },
+          {
+            "originalMs": 0.599999999627471,
+            "candidateMs": 0.40000000037252903
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.40000000037252903
+          }
+        ]
+      }
+    },
+    {
+      "first": true,
+      "pitch": -0.4,
+      "result": {
+        "trials": 16,
+        "nodes": 1700,
+        "coldNodes": 810,
+        "maxLocal": 0,
+        "maxVisibleWorld": 0,
+        "maxColdGetterWorld": 0,
+        "maxExplicitColdRefresh": 0,
+        "originalMs": 6.299999998882413,
+        "candidateMs": 3.399999998509884,
+        "samples": [
+          {
+            "originalMs": 0.3999999985098839,
+            "candidateMs": 0.09999999962747097
+          },
+          {
+            "originalMs": 0.19999999925494194,
+            "candidateMs": 0.2000000011175871
+          },
+          {
+            "originalMs": 0.2999999988824129,
+            "candidateMs": 0.09999999962747097
+          },
+          {
+            "originalMs": 0.2000000011175871,
+            "candidateMs": 0.30000000074505806
+          },
+          {
+            "originalMs": 0.5,
+            "candidateMs": 0.3999999985098839
+          },
+          {
+            "originalMs": 0.2000000011175871,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.2999999988824129,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.2999999988824129,
+            "candidateMs": 0.09999999962747097
+          },
+          {
+            "originalMs": 0.8000000007450581,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.2000000011175871
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.2999999988824129
+          },
+          {
+            "originalMs": 0.19999999925494194,
+            "candidateMs": 0.09999999962747097
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.10000000149011612
+          },
+          {
+            "originalMs": 1.099999999627471,
+            "candidateMs": 0.2000000011175871
+          },
+          {
+            "originalMs": 0.5,
+            "candidateMs": 0.5
+          }
+        ]
+      }
+    },
+    {
+      "first": false,
+      "pitch": 0,
+      "result": {
+        "trials": 16,
+        "nodes": 1700,
+        "coldNodes": 810,
+        "maxLocal": 0,
+        "maxVisibleWorld": 0,
+        "maxColdGetterWorld": 0,
+        "maxExplicitColdRefresh": 0,
+        "originalMs": 6.500000007450581,
+        "candidateMs": 4.399999998509884,
+        "samples": [
+          {
+            "originalMs": 0.5,
+            "candidateMs": 0.09999999962747097
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.09999999962747097
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.2000000011175871
+          },
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.599999999627471,
+            "candidateMs": 0.40000000037252903
+          },
+          {
+            "originalMs": 0.5,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.2000000011175871,
+            "candidateMs": 0.2999999988824129
+          },
+          {
+            "originalMs": 0.7000000011175871,
+            "candidateMs": 0.30000000074505806
+          },
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.5,
+            "candidateMs": 1
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.2000000011175871
+          },
+          {
+            "originalMs": 0.5,
+            "candidateMs": 0.40000000037252903
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.2000000011175871
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.19999999925494194
+          }
+        ]
+      }
+    },
+    {
+      "first": false,
+      "pitch": 0.4,
+      "result": {
+        "trials": 16,
+        "nodes": 1700,
+        "coldNodes": 810,
+        "maxLocal": 0,
+        "maxVisibleWorld": 0,
+        "maxColdGetterWorld": 0,
+        "maxExplicitColdRefresh": 0,
+        "originalMs": 7.000000001862645,
+        "candidateMs": 4.299999998882413,
+        "samples": [
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.2000000011175871,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.2999999988824129,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.2999999988824129,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.10000000149011612
+          },
+          {
+            "originalMs": 0.19999999925494194,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.10000000149011612,
+            "candidateMs": 0.2000000011175871
+          },
+          {
+            "originalMs": 0.09999999962747097,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.19999999925494194,
+            "candidateMs": 0.40000000037252903
+          },
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.2000000011175871
+          },
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.2000000011175871
+          },
+          {
+            "originalMs": 1.699999999254942,
+            "candidateMs": 0.8000000007450581
+          },
+          {
+            "originalMs": 1.200000001117587,
+            "candidateMs": 0.5
+          },
+          {
+            "originalMs": 0.5,
+            "candidateMs": 0.2999999988824129
+          }
+        ]
+      }
+    },
+    {
+      "first": false,
+      "pitch": -0.4,
+      "result": {
+        "trials": 16,
+        "nodes": 1700,
+        "coldNodes": 810,
+        "maxLocal": 0,
+        "maxVisibleWorld": 0,
+        "maxColdGetterWorld": 0,
+        "maxExplicitColdRefresh": 0,
+        "originalMs": 10.400000002235174,
+        "candidateMs": 4.50000000372529,
+        "samples": [
+          {
+            "originalMs": 0.5,
+            "candidateMs": 0.2000000011175871
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.19999999925494194
+          },
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.09999999962747097
+          },
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.30000000074505806
+          },
+          {
+            "originalMs": 0.599999999627471,
+            "candidateMs": 0.2000000011175871
+          },
+          {
+            "originalMs": 0.30000000074505806,
+            "candidateMs": 0.09999999962747097
+          },
+          {
+            "originalMs": 1.300000000745058,
+            "candidateMs": 0.2000000011175871
+          },
+          {
+            "originalMs": 0.7999999988824129,
+            "candidateMs": 0.2000000011175871
+          },
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.09999999962747097
+          },
+          {
+            "originalMs": 1.099999999627471,
+            "candidateMs": 0.2000000011175871
+          },
+          {
+            "originalMs": 0.5,
+            "candidateMs": 0.09999999962747097
+          },
+          {
+            "originalMs": 0.40000000037252903,
+            "candidateMs": 0.30000000074505806
+          },
+          {
+            "originalMs": 0.5,
+            "candidateMs": 0.2000000011175871
+          },
+          {
+            "originalMs": 1,
+            "candidateMs": 1.3999999985098839
+          },
+          {
+            "originalMs": 1.400000000372529,
+            "candidateMs": 0.5
+          },
+          {
+            "originalMs": 0.5,
+            "candidateMs": 0.19999999925494194
+          }
+        ]
+      }
+    }
+  ]
+}

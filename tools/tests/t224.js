@@ -35,7 +35,10 @@
     const rayHit = (t, o, d, far) => { let best = Infinity; for (let i = 0; i < t.length; i += 9) { const e1x = t[i + 3] - t[i], e1y = t[i + 4] - t[i + 1], e1z = t[i + 5] - t[i + 2], e2x = t[i + 6] - t[i], e2y = t[i + 7] - t[i + 1], e2z = t[i + 8] - t[i + 2]; const px = d.y * e2z - d.z * e2y, py = d.z * e2x - d.x * e2z, pz = d.x * e2y - d.y * e2x, det = e1x * px + e1y * py + e1z * pz; if (Math.abs(det) < 1e-12) continue; const inv = 1 / det, sx = o.x - t[i], sy = o.y - t[i + 1], sz = o.z - t[i + 2], u = (sx * px + sy * py + sz * pz) * inv; if (u < 0 || u > 1) continue; const qx = sy * e1z - sz * e1y, qy = sz * e1x - sx * e1z, qz = sx * e1y - sy * e1x, v = (d.x * qx + d.y * qy + d.z * qz) * inv; if (v < 0 || u + v > 1) continue; const tt = (e2x * qx + e2y * qy + e2z * qz) * inv; if (tt > 0 && tt < far && tt < best) best = tt; } return best; };
     // CC-350 (J153 notes 20, 38, D-181): the handguns ride by station (rig.placeStation), vertical, muzzle down, the flat of the gun
     // on him, the grip back, never on its side: the base pistol on the belt at 4 o'clock on the gun hand's side ('hip+', just
-    // behind the hip bone), the next at 8 o'clock ('hip-'), a third and an Uzi flat on the pack's sides ('pack+'/'pack-'). (The
+    // behind the hip bone), the next at 8 o'clock ('hip-'), a third and an Uzi flat on the pack's back face, low corner on its
+    // side ('pack+'/'pack-'; CC-352: they were on its sides, where his upper sleeve brushed them running and crouching), the grip
+    // in toward his spine, the whole gun in from his arm's swing back (|x| <= .17; the sleeve reaches |x| .19) and behind the pack
+    // (z <= -.2: a long gun's muzzle tips in under the pack's bottom, still 8 cm behind his seat). (The
     // GB-148 / CL-160 / CC-347 rows here measured the pack and small-of-the-back holsters this replaced; the seating against his
     // body and the legs and arms through them are tcc347's.)
     const SCEN = [['m4', 'ak', 'uzi', 'revolver'], ['ak', 'm4', 'revolver', 'pistol'], ['minigun', 'm4', 'uzi', 'revolver'], ['shotgun', 'aa12', 'revolver', null]];
@@ -57,8 +60,11 @@
           ok(barrel.y < -0.95 && Math.abs(flat.dot(n)) > 0.9 && grip.z < -0.25, tag + ': vertical, muzzle down (' + barrel.y.toFixed(2) + '), its flat on his hip (' + Math.abs(flat.dot(n)).toFixed(2) + '), the grip back (' + grip.z.toFixed(2) + ')');
         } else if (sp.station.startsWith('pack')) {
           seen++; onPack++;
-          ok(Math.abs(P.x) >= 0.13 && Math.abs(P.x) <= 0.22 && P.z <= -0.15 && P.z >= -0.32, tag + ': on the pack\'s side (x ' + P.x.toFixed(3) + ', z ' + P.z.toFixed(3) + ')');
-          ok(barrel.y < -0.95 && Math.abs(flat.x) > 0.9 && grip.z < -0.9, tag + ': vertical, muzzle down (' + barrel.y.toFixed(2) + '), its flat on the pack (' + Math.abs(flat.x).toFixed(2) + '), the grip back (' + grip.z.toFixed(2) + ')');
+          const hinv = new THREE.Matrix4().copy(home.matrixWorld).invert(), bb = new THREE.Box3(), q = V(); sp.gun.updateMatrixWorld(true);
+          sp.gun.traverseVisible((o) => { const pa = o.isMesh && o.geometry && o.geometry.attributes.position; if (!pa) return; for (let i = 0; i < pa.count; i += 3) bb.expandByPoint(q.fromBufferAttribute(pa, i).applyMatrix4(o.matrixWorld).applyMatrix4(hinv)); });
+          const outer = side > 0 ? bb.max.x : -bb.min.x;
+          ok(outer <= 0.17 && outer >= 0.1 && P.x * side > 0 && bb.max.z <= -0.2 && bb.min.z >= -0.45, tag + ': on the pack\'s back face, low corner on its side, in from his arm\'s swing (outer edge |x| ' + outer.toFixed(3) + ', z ' + bb.min.z.toFixed(3) + '..' + bb.max.z.toFixed(3) + ')');
+          ok(barrel.y < -0.95 && Math.abs(flat.z) > 0.9 && grip.x * side < -0.9, tag + ': vertical, muzzle down (' + barrel.y.toFixed(2) + '), its flat on the pack\'s face (' + Math.abs(flat.z).toFixed(2) + '), the grip in toward his spine (' + (grip.x * side).toFixed(2) + ')');
         }
         // never on its side: whatever the station, the barrel stands upright
         ok(Math.abs(barrel.y) > 0.95, tag + ': upright, not on its side (barrel ' + barrel.y.toFixed(2) + ')');
@@ -75,7 +81,7 @@
       }
     }
     ok(seen >= 9, 'handguns checked at their stations: ' + seen);
-    ok(onPack >= 1, 'and one on the pack\'s side: ' + onPack);
+    ok(onPack >= 1, 'and one on the pack\'s back face: ' + onPack);
     // The wheel's tick.
     const A = T.AudioSys || window.AudioSys;
     const G = await import(new URL('../../core/gunsynth.js', location.href).href);

@@ -1,0 +1,3151 @@
+{
+  "navigation": "Canonical tools/bench early dismissForTesting; separate loader-ready and actual menu times",
+  "scope": "DIAGNOSTIC ONLY: actual current Training shadow lights/maps, caster calls/triangles and synchronous CPU submission spans per light. Hooks and timers add overhead; no FPS acceptance or GPU-time claim. One original full magazine vs preceding idle, effects/populations retained; no PNG before or between phases.",
+  "frameSampling": "production-tick-start-wall-clock",
+  "environment": "training",
+  "sourceSha256": "a95f671f3e01e896412b4826a3d8e5430781b75376175aa8d0e72fc91048a3e9",
+  "moduleHashes": {
+    "core/body-limits.js": "fd2562bd882ef767155cc819301ede35e68d008621dd0f683232c593d91459eb",
+    "game/viewmodel.js": "f3eb743fb200945a3bed23accbd93dfcb5cf983e616769049c357d3199b7363e",
+    "game/tp-fit.js": "d2dbf1e163f856b672a1a91d1638a949749e3bde1727bda8ceaf1f18c3b08e07",
+    "studio/fp-arms.js": "fff7808db158e072d0c5697a0a57e0c87de7fa81847558fc8670f6f7e5f190d8",
+    "world/training-ballistics.js": "eadc9d04d5fd50ad9f6f23c0a080ea2ad58485ff62e0002f1a6b1b0da4719bdc",
+    "studio/marine-carry.js": "105255868cfd0e9088e1bfc540cb4c2d4293faf5e836aac671ffe1cd8b1436ce",
+    "studio/marine-body.js": "78895440e70b0cc5a348fe5a670c789ca74fd1cf69be830f21fd1a3801cb7095",
+    "studio/marine-hand.js": "f3b92570fe48bb259917c8463a1cb09010be22580f0677a5af90f38eff11a587",
+    "game/viewmodel-fit.js": "9f52ae65294fcfa7840fcaf22b30351cf5d56c61308dbf3ce605836ae5a7e499",
+    "game/viewmodel-poses.js": "32b2d326f6c62e0aa9cee908f1099a02931f6442d7ccc06825570a4ddfe83344"
+  },
+  "rows": [
+    {
+      "pass": 0,
+      "weapon": "uzi",
+      "pair": false,
+      "fire": false,
+      "setup": {
+        "weapon": "uzi",
+        "pair": false,
+        "ammo": 32,
+        "magSize": 32,
+        "auto": true,
+        "loadout": {
+          "primary": [
+            null,
+            null
+          ],
+          "secondary": [
+            "uzi",
+            null
+          ],
+          "hip": "pistol:base"
+        },
+        "position": [
+          0,
+          -200,
+          -640.6700000000001
+        ]
+      },
+      "beforeState": {
+        "phase": "prep",
+        "day": 1,
+        "reloading": false,
+        "paused": false,
+        "warmPending": false,
+        "flightHold": false,
+        "hidden": false,
+        "focus": true,
+        "zombies": 0,
+        "heat": 0,
+        "casings": 0,
+        "projectiles": 0,
+        "training": true,
+        "lightsOff": false,
+        "targetHidden": false,
+        "targetLocal": [
+          -1.3076663519098238e-13,
+          -199.99869031556784,
+          -640.6743656147739
+        ],
+        "targetWorld": [
+          -1.3076663519098238e-13,
+          -199.99869031556784,
+          -640.6743656147739
+        ]
+      },
+      "afterState": {
+        "phase": "prep",
+        "day": 1,
+        "reloading": false,
+        "paused": false,
+        "warmPending": false,
+        "flightHold": false,
+        "hidden": false,
+        "focus": true,
+        "zombies": 0,
+        "heat": 0,
+        "casings": 0,
+        "projectiles": 0,
+        "training": true,
+        "lightsOff": false,
+        "targetHidden": false,
+        "targetLocal": [
+          -1.3076663519098238e-13,
+          -199.99869031556784,
+          -640.6743656147739
+        ],
+        "targetWorld": [
+          -1.3076663519098238e-13,
+          -199.99869031556784,
+          -640.6743656147739
+        ]
+      },
+      "elapsed": 4509.800000011921,
+      "frames": [
+        21.399999976158142,
+        19.600000023841858,
+        21.899999976158142,
+        18.400000005960464,
+        18.400000005960464,
+        18.400000005960464,
+        21.900000005960464,
+        30.399999976158142,
+        19.100000023841858,
+        18.399999976158142,
+        19.100000023841858,
+        19.69999998807907,
+        19.900000005960464,
+        23.299999982118607,
+        19,
+        21.100000023841858,
+        19.299999982118607,
+        22,
+        21.700000017881393,
+        23.299999982118607,
+        25.700000017881393,
+        42,
+        22.5,
+        19.099999994039536,
+        20.099999994039536,
+        27.900000005960464,
+        31.099999994039536,
+        19.400000005960464,
+        20.19999998807907,
+        23,
+        21.200000017881393,
+        18.19999998807907,
+        18.69999998807907,
+        19.400000005960464,
+        19.5,
+        19,
+        21.5,
+        19.099999994039536,
+        18.80000001192093,
+        20.900000005960464,
+        23.299999982118607,
+        21.200000017881393,
+        19.099999994039536,
+        18.5,
+        18.400000005960464,
+        19.799999982118607,
+        24.400000005960464,
+        18.80000001192093,
+        20.099999994039536,
+        19.099999994039536,
+        22.700000017881393,
+        17.69999998807907,
+        19.80000001192093,
+        19.399999976158142,
+        18.100000023841858,
+        17.69999998807907,
+        18.19999998807907,
+        18.30000001192093,
+        18.099999994039536,
+        15.900000005960464,
+        24.900000005960464,
+        20.69999998807907,
+        24.30000001192093,
+        26.299999982118607,
+        33.5,
+        22.30000001192093,
+        17.19999998807907,
+        15.400000005960464,
+        16.400000005960464,
+        25.400000005960464,
+        26.299999982118607,
+        18.30000001192093,
+        18.19999998807907,
+        17.5,
+        17,
+        23.80000001192093,
+        25.900000005960464,
+        29.599999994039536,
+        22.5,
+        23.099999994039536,
+        22.200000017881393,
+        21.599999994039536,
+        27.400000005960464,
+        24.5,
+        25,
+        24.899999976158142,
+        22.400000005960464,
+        20.900000005960464,
+        20.19999998807907,
+        19.400000005960464,
+        19,
+        20.30000001192093,
+        18.799999982118607,
+        20.600000023841858,
+        17.299999982118607,
+        18.400000005960464,
+        18.599999994039536,
+        18.900000005960464,
+        18.400000005960464,
+        19.900000005960464,
+        18.899999976158142,
+        22.900000005960464,
+        24.099999994039536,
+        22.600000023841858,
+        21.599999994039536,
+        20.5,
+        21.299999982118607,
+        22.100000023841858,
+        16.899999976158142,
+        14.800000011920929,
+        16,
+        16.099999994039536,
+        17.5,
+        19.400000005960464,
+        17.400000005960464,
+        12.5,
+        16.400000005960464,
+        16.799999982118607,
+        16.599999994039536,
+        22.400000005960464,
+        15,
+        14.5,
+        19.400000005960464,
+        17,
+        13.800000011920929,
+        14.5,
+        16.69999998807907,
+        16.80000001192093,
+        21.599999994039536,
+        22.599999994039536,
+        14.400000005960464,
+        10.599999994039536,
+        14,
+        16.69999998807907,
+        17.100000023841858,
+        16.299999982118607,
+        21.599999994039536,
+        18.100000023841858,
+        18.69999998807907,
+        18,
+        17.900000005960464,
+        18.099999994039536,
+        17.599999994039536,
+        17.700000017881393,
+        12.899999976158142,
+        11.900000005960464,
+        10.900000005960464,
+        16.69999998807907,
+        16.5,
+        20.900000005960464,
+        19.700000017881393,
+        18.299999982118607,
+        19.200000017881393,
+        19.099999994039536,
+        18.599999994039536,
+        18.599999994039536,
+        19.700000017881393,
+        19,
+        15.799999982118607,
+        11.900000005960464,
+        15.900000005960464,
+        17.19999998807907,
+        16.099999994039536,
+        16.700000017881393,
+        21.5,
+        21.19999998807907,
+        12.099999994039536,
+        11.800000011920929,
+        16.69999998807907,
+        16.700000017881393,
+        16.599999994039536,
+        16.69999998807907,
+        16.600000023841858,
+        16.799999982118607,
+        16.599999994039536,
+        16.700000017881393,
+        16.5,
+        20.19999998807907,
+        15.800000011920929,
+        17.599999994039536,
+        13.099999994039536,
+        16.700000017881393,
+        16.69999998807907,
+        16.80000001192093,
+        16.5,
+        16.599999994039536,
+        17,
+        16.5,
+        16.69999998807907,
+        16.700000017881393,
+        16.69999998807907,
+        17.900000005960464,
+        15.299999982118607,
+        19.400000005960464,
+        18.900000005960464,
+        18.69999998807907,
+        11.5,
+        14.900000005960464,
+        16.599999994039536,
+        16.700000017881393,
+        16.69999998807907,
+        16.599999994039536,
+        16.700000017881393,
+        16.69999998807907,
+        16.599999994039536,
+        21.30000001192093,
+        19,
+        20.5,
+        17.400000005960464,
+        20.69999998807907,
+        20.400000005960464,
+        18.5,
+        19.900000005960464,
+        18.400000005960464,
+        14.699999988079071,
+        13.099999994039536,
+        15.900000005960464,
+        13.5,
+        16.69999998807907,
+        16.600000023841858,
+        18.599999994039536,
+        14.699999988079071,
+        16.700000017881393,
+        16.69999998807907,
+        16.80000001192093,
+        16.5,
+        16.799999982118607,
+        16.599999994039536,
+        16.600000023841858,
+        16.69999998807907,
+        18.400000005960464,
+        22,
+        20.799999982118607,
+        19.5,
+        20.200000017881393,
+        19.69999998807907,
+        19.099999994039536,
+        12.800000011920929
+      ],
+      "startAmmo": 32,
+      "endAmmo": 32,
+      "ammo": 32,
+      "stats": {},
+      "phaseTicks": 239,
+      "firstTick": 36852.70000001788,
+      "projectiles": 0,
+      "casings": 0,
+      "shadowCalls": {
+        "DirectionalLight#219 :: Mesh < training-cutaway-rangeSouth < training-ground < Scene": {
+          "calls": 1190,
+          "cpuSpanMs": 55.39999985694885,
+          "triangles": 99960
+        },
+        "DirectionalLight#219 :: Mesh < training-cutaway-east < training-ground < Scene": {
+          "calls": 1904,
+          "cpuSpanMs": 54.10000020265579,
+          "triangles": 334152
+        },
+        "DirectionalLight#219 :: Mesh < training-cutaway-south < training-ground < Scene": {
+          "calls": 476,
+          "cpuSpanMs": 14.599999964237213,
+          "triangles": 12376
+        },
+        "DirectionalLight#219 :: Mesh < training-cutaway-north < training-ground < Scene": {
+          "calls": 238,
+          "cpuSpanMs": 5.099999964237213,
+          "triangles": 19992
+        },
+        "DirectionalLight#219 :: Mesh < training-cutaway-west < training-ground < Scene": {
+          "calls": 476,
+          "cpuSpanMs": 13.500000149011612,
+          "triangles": 77112
+        },
+        "DirectionalLight#219 :: Mesh < training-security-shutter < training-ground < Scene": {
+          "calls": 714,
+          "cpuSpanMs": 19.69999998807907,
+          "triangles": 59976
+        },
+        "DirectionalLight#219 :: training-gate-beacon < training-gate-frame < training-ground < Scene": {
+          "calls": 476,
+          "cpuSpanMs": 13.399999856948853,
+          "triangles": 59024
+        },
+        "DirectionalLight#219 :: Mesh < training-gate-frame < training-ground < Scene": {
+          "calls": 1428,
+          "cpuSpanMs": 38.59999969601631,
+          "triangles": 305592
+        },
+        "DirectionalLight#219 :: Mesh < training-gate-leaf--1 < training-ground < Scene": {
+          "calls": 1190,
+          "cpuSpanMs": 31.59999993443489,
+          "triangles": 135184
+        },
+        "DirectionalLight#219 :: Mesh < training-gate-leaf-1 < training-ground < Scene": {
+          "calls": 952,
+          "cpuSpanMs": 26.100000262260437,
+          "triangles": 69496
+        },
+        "DirectionalLight#219 :: Mesh < training-wear-locker-door < training-ground < Scene": {
+          "calls": 238,
+          "cpuSpanMs": 6.200000137090683,
+          "triangles": 2856
+        },
+        "DirectionalLight#219 :: Mesh < controls-selector < Group < Group < Group": {
+          "calls": 238,
+          "cpuSpanMs": 9.09999993443489,
+          "triangles": 99008
+        },
+        "DirectionalLight#219 :: controls-safety < Group < Group < Group < Group": {
+          "calls": 238,
+          "cpuSpanMs": 6.599999874830246,
+          "triangles": 10472
+        },
+        "DirectionalLight#219 :: Mesh < Group < magazineBody < Group < Group": {
+          "calls": 476,
+          "cpuSpanMs": 13.79999989271164,
+          "triangles": 87584
+        },
+        "DirectionalLight#219 :: Mesh < recoil-bolt < Group < Group < Group": {
+          "calls": 476,
+          "cpuSpanMs": 14.700000196695328,
+          "triangles": 30464
+        },
+        "DirectionalLight#219 :: Mesh < controls-trigger < Group < Group < Group": {
+          "calls": 714,
+          "cpuSpanMs": 20.000000178813934,
+          "triangles": 92344
+        },
+        "DirectionalLight#219 :: Mesh < laserLightUnit < Group < Group < Group": {
+          "calls": 3332,
+          "cpuSpanMs": 92.39999988675117,
+          "triangles": 710192
+        },
+        "DirectionalLight#219 :: Mesh < Group < Group < Group < Group": {
+          "calls": 7301,
+          "cpuSpanMs": 203.6999997496605,
+          "triangles": 11076800
+        },
+        "DirectionalLight#219 :: thigh-pad-strap < Group < Group < Group < Group": {
+          "calls": 42,
+          "cpuSpanMs": 1.899999976158142,
+          "triangles": 2016
+        },
+        "DirectionalLight#219 :: calf-pad-strap < Group < Group < Group < Group": {
+          "calls": 42,
+          "cpuSpanMs": 1.1000000536441803,
+          "triangles": 2016
+        },
+        "DirectionalLight#219 :: marine-flexible-shirt < marine-waist-live < Group < Group < Group": {
+          "calls": 238,
+          "cpuSpanMs": 26.599999874830246,
+          "triangles": 533120
+        },
+        "DirectionalLight#219 :: live-sleeve < live-sleeve-live < Group < Group < Group": {
+          "calls": 476,
+          "cpuSpanMs": 42.30000028014183,
+          "triangles": 831096
+        },
+        "DirectionalLight#219 :: live-seat < live-seat-live < Group < Group < Group": {
+          "calls": 238,
+          "cpuSpanMs": 7.599999934434891,
+          "triangles": 146608
+        },
+        "DirectionalLight#219 :: live-trouser-leg < live-trouser-leg-live < Group < Group < Group": {
+          "calls": 476,
+          "cpuSpanMs": 12.899999976158142,
+          "triangles": 819672
+        },
+        "DirectionalLight#219 :: pistol magazine top round < Group < Group < Group < Group": {
+          "calls": 476,
+          "cpuSpanMs": 17.500000059604645,
+          "triangles": 304640
+        },
+        "DirectionalLight#219 :: magazine top round < Group < Group < Group < Group": {
+          "calls": 238,
+          "cpuSpanMs": 8.999999970197678,
+          "triangles": 152320
+        },
+        "DirectionalLight#219 :: Mesh < training-armory < training-ground < Scene": {
+          "calls": 714,
+          "cpuSpanMs": 23.700000017881393,
+          "triangles": 34272
+        },
+        "DirectionalLight#219 :: Mesh < work < Group < Group < Group": {
+          "calls": 476,
+          "cpuSpanMs": 13.299999982118607,
+          "triangles": 167552
+        },
+        "DirectionalLight#219 :: Mesh < controls-magRelease < Group < Group < Group": {
+          "calls": 476,
+          "cpuSpanMs": 14.599999845027924,
+          "triangles": 226576
+        },
+        "DirectionalLight#219 :: Mesh < magazineBody < Group < Group < Group": {
+          "calls": 476,
+          "cpuSpanMs": 14.699999988079071,
+          "triangles": 350336
+        },
+        "DirectionalLight#219 :: railClamp < laserLightUnit < Group < Group < Group": {
+          "calls": 476,
+          "cpuSpanMs": 13.399999797344208,
+          "triangles": 5712
+        },
+        "DirectionalLight#219 :: moduleShell < laserLightUnit < Group < Group < Group": {
+          "calls": 476,
+          "cpuSpanMs": 12.100000262260437,
+          "triangles": 5712
+        },
+        "DirectionalLight#219 :: Mesh < training-kiosk < training-ground < Scene": {
+          "calls": 952,
+          "cpuSpanMs": 24.69999986886978,
+          "triangles": 57120
+        },
+        "DirectionalLight#219 :: Mesh < pistol-barrel < Group < Group < Group": {
+          "calls": 476,
+          "cpuSpanMs": 15.700000047683716,
+          "triangles": 430304
+        },
+        "DirectionalLight#219 :: heatParts-barrel < Group < Group < Group < Group": {
+          "calls": 476,
+          "cpuSpanMs": 14.500000059604645,
+          "triangles": 68544
+        },
+        "DirectionalLight#219 :: marine-shadow < Group < Group < Group < Scene": {
+          "calls": 21,
+          "cpuSpanMs": 4.299999982118607,
+          "triangles": 812784
+        },
+        "DirectionalLight#219 :: Mesh < training-firing-bench < training-ground < Scene": {
+          "calls": 1190,
+          "cpuSpanMs": 36.09999957680702,
+          "triangles": 108528
+        },
+        "DirectionalLight#219 :: Mesh < training-ground < Scene": {
+          "calls": 1666,
+          "cpuSpanMs": 43.10000053048134,
+          "triangles": 764456
+        },
+        "DirectionalLight#219 :: Mesh < training-light-switch-lever < Group < training-ground < Scene": {
+          "calls": 476,
+          "cpuSpanMs": 15.500000149011612,
+          "triangles": 5712
+        },
+        "DirectionalLight#219 :: target-lower-stem < Group < Group < training-ground < Scene": {
+          "calls": 1190,
+          "cpuSpanMs": 32.800000071525574,
+          "triangles": 14280
+        },
+        "DirectionalLight#219 :: Mesh < Group < Group < training-ground < Scene": {
+          "calls": 1190,
+          "cpuSpanMs": 34.90000006556511,
+          "triangles": 14280
+        },
+        "DirectionalLight#219 :: Mesh < Group < training-ground < Scene": {
+          "calls": 714,
+          "cpuSpanMs": 21.299999564886093,
+          "triangles": 8568
+        },
+        "DirectionalLight#219 :: Mesh < training-dummy-pivot < training-melee-dummy < Scene": {
+          "calls": 476,
+          "cpuSpanMs": 12.100000202655792,
+          "triangles": 739704
+        },
+        "DirectionalLight#219 :: Mesh < training-dummy-base < training-melee-dummy < Scene": {
+          "calls": 476,
+          "cpuSpanMs": 12.299999862909317,
+          "triangles": 562632
+        },
+        "DirectionalLight#219 :: Mesh < training-range-console < training-ground < Scene": {
+          "calls": 1190,
+          "cpuSpanMs": 39.69999980926514,
+          "triangles": 227528
+        },
+        "DirectionalLight#219 :: target-plate < Group < Group < training-ground < Scene": {
+          "calls": 1190,
+          "cpuSpanMs": 67.60000026226044,
+          "triangles": 2380
+        }
+      },
+      "shadowPasses": {
+        "DirectionalLight#219": {
+          "calls": 238,
+          "cpuMs": 1524.5000000596046,
+          "maxMs": 14.5
+        }
+      },
+      "shadowLights": [
+        {
+          "name": "",
+          "type": "DirectionalLight",
+          "id": 219,
+          "castShadow": true,
+          "intensity": 1.73,
+          "map": [
+            2048,
+            2048
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "DirectionalLight",
+          "id": 222,
+          "castShadow": false,
+          "intensity": 0.05,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "PointLight",
+          "id": 226,
+          "castShadow": false,
+          "intensity": 0,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "SpotLight",
+          "id": 6457,
+          "castShadow": false,
+          "intensity": 0,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "PointLight",
+          "id": 10418,
+          "castShadow": false,
+          "intensity": 0,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "chapel-light",
+          "type": "PointLight",
+          "id": 6454,
+          "castShadow": false,
+          "intensity": 0,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "PointLight",
+          "id": 11572,
+          "castShadow": false,
+          "intensity": 0,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "PointLight",
+          "id": 47181,
+          "castShadow": false,
+          "intensity": 0,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "PointLight",
+          "id": 48162,
+          "castShadow": false,
+          "intensity": 0,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "PointLight",
+          "id": 48958,
+          "castShadow": false,
+          "intensity": 0,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "PointLight",
+          "id": 49633,
+          "castShadow": false,
+          "intensity": 0,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "PointLight",
+          "id": 51707,
+          "castShadow": false,
+          "intensity": 0,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "PointLight",
+          "id": 71714,
+          "castShadow": false,
+          "intensity": 1.35,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "PointLight",
+          "id": 72094,
+          "castShadow": false,
+          "intensity": 0.9,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "PointLight",
+          "id": 72560,
+          "castShadow": false,
+          "intensity": 0,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "PointLight",
+          "id": 72562,
+          "castShadow": false,
+          "intensity": 0,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "PointLight",
+          "id": 72564,
+          "castShadow": false,
+          "intensity": 0,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "PointLight",
+          "id": 72566,
+          "castShadow": false,
+          "intensity": 0,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "light-pool-0",
+          "type": "PointLight",
+          "id": 79297,
+          "castShadow": false,
+          "intensity": 1.8,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "light-pool-1",
+          "type": "PointLight",
+          "id": 79299,
+          "castShadow": false,
+          "intensity": 1.8,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "light-pool-2",
+          "type": "PointLight",
+          "id": 79301,
+          "castShadow": false,
+          "intensity": 1.8,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "light-pool-3",
+          "type": "PointLight",
+          "id": 79303,
+          "castShadow": false,
+          "intensity": 0.9,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "PointLight",
+          "id": 86322,
+          "castShadow": false,
+          "intensity": 0.9,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "PointLight",
+          "id": 86398,
+          "castShadow": false,
+          "intensity": 1.8,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "PointLight",
+          "id": 86400,
+          "castShadow": false,
+          "intensity": 1.8,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "PointLight",
+          "id": 86402,
+          "castShadow": false,
+          "intensity": 1.8,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "PointLight",
+          "id": 86404,
+          "castShadow": false,
+          "intensity": 1.8,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "SpotLight",
+          "id": 86628,
+          "castShadow": false,
+          "intensity": 0,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "SpotLight",
+          "id": 86631,
+          "castShadow": false,
+          "intensity": 0,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "PointLight",
+          "id": 86634,
+          "castShadow": false,
+          "intensity": 0,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "SpotLight",
+          "id": 86636,
+          "castShadow": false,
+          "intensity": 0,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "PointLight",
+          "id": 86639,
+          "castShadow": false,
+          "intensity": 0,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "SpotLight",
+          "id": 86641,
+          "castShadow": false,
+          "intensity": 0,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "PointLight",
+          "id": 86644,
+          "castShadow": false,
+          "intensity": 0,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        }
+      ],
+      "prof": {
+        "rep": {
+          "frames": 238,
+          "phases": [],
+          "spikes": []
+        },
+        "pipes": {
+          "made": 0,
+          "first": []
+        },
+        "builds": {
+          "made": 0,
+          "first": []
+        },
+        "gpu": []
+      }
+    },
+    {
+      "pass": 0,
+      "weapon": "uzi",
+      "pair": false,
+      "fire": true,
+      "setup": {
+        "weapon": "uzi",
+        "pair": false,
+        "ammo": 32,
+        "magSize": 32,
+        "auto": true,
+        "loadout": {
+          "primary": [
+            null,
+            null
+          ],
+          "secondary": [
+            "uzi",
+            null
+          ],
+          "hip": "pistol:base"
+        },
+        "position": [
+          0,
+          -200,
+          -640.6700000000001
+        ]
+      },
+      "beforeState": {
+        "phase": "prep",
+        "day": 1,
+        "reloading": false,
+        "paused": false,
+        "warmPending": false,
+        "flightHold": false,
+        "hidden": false,
+        "focus": true,
+        "zombies": 0,
+        "heat": 0,
+        "casings": 0,
+        "projectiles": 0,
+        "training": true,
+        "lightsOff": false,
+        "targetHidden": false,
+        "targetLocal": [
+          -1.3076663519098238e-13,
+          -199.99869031556784,
+          -640.6743656147739
+        ],
+        "targetWorld": [
+          -1.3076663519098238e-13,
+          -199.99869031556784,
+          -640.6743656147739
+        ]
+      },
+      "afterState": {
+        "phase": "prep",
+        "day": 1,
+        "reloading": false,
+        "paused": false,
+        "warmPending": false,
+        "flightHold": false,
+        "hidden": false,
+        "focus": true,
+        "zombies": 0,
+        "heat": 0.17753120342318313,
+        "casings": 22,
+        "projectiles": 2,
+        "training": true,
+        "lightsOff": false,
+        "targetHidden": false,
+        "targetLocal": [
+          -1.3076663519098238e-13,
+          -199.99869031556784,
+          -640.6743656147739
+        ],
+        "targetWorld": [
+          -1.3076663519098238e-13,
+          -199.99869031556784,
+          -640.6743656147739
+        ]
+      },
+      "elapsed": 2504.300000011921,
+      "frames": [
+        26.799999982118607,
+        15.300000011920929,
+        15.199999988079071,
+        15.400000005960464,
+        19.19999998807907,
+        15.5,
+        15,
+        13.900000005960464,
+        13.5,
+        16,
+        14.800000011920929,
+        19.599999994039536,
+        24.30000001192093,
+        24.899999976158142,
+        16.900000005960464,
+        20,
+        18.099999994039536,
+        17,
+        15.900000005960464,
+        16.900000005960464,
+        20.80000001192093,
+        19.399999976158142,
+        20.200000017881393,
+        27.69999998807907,
+        17.900000005960464,
+        18.099999994039536,
+        20.80000001192093,
+        18.299999982118607,
+        16.30000001192093,
+        18.30000001192093,
+        18.19999998807907,
+        16.900000005960464,
+        25.599999994039536,
+        19.69999998807907,
+        26.900000005960464,
+        23,
+        19.599999994039536,
+        21.200000017881393,
+        23.19999998807907,
+        17.599999994039536,
+        17.5,
+        18.5,
+        17.30000001192093,
+        17.30000001192093,
+        20.399999976158142,
+        28.80000001192093,
+        32.400000005960464,
+        23.69999998807907,
+        18.099999994039536,
+        18.700000017881393,
+        23.299999982118607,
+        23.900000005960464,
+        20.599999994039536,
+        21.30000001192093,
+        24.69999998807907,
+        19.100000023841858,
+        23.599999994039536,
+        34.900000005960464,
+        19,
+        20.399999976158142,
+        21.80000001192093,
+        16.5,
+        19.900000005960464,
+        19.099999994039536,
+        18.19999998807907,
+        19.100000023841858,
+        14.899999976158142,
+        16.400000005960464,
+        20.30000001192093,
+        22.299999982118607,
+        15.700000017881393,
+        16.299999982118607,
+        17.700000017881393,
+        19.099999994039536,
+        23.099999994039536,
+        24,
+        23.200000017881393,
+        18.599999994039536,
+        21,
+        20.099999994039536,
+        20.099999994039536,
+        28.700000017881393,
+        34.5,
+        20.599999994039536,
+        20.69999998807907,
+        22.099999994039536,
+        18,
+        14.900000005960464,
+        28.400000005960464,
+        17.69999998807907,
+        15.200000017881393,
+        18.69999998807907,
+        20.700000017881393,
+        21.399999976158142,
+        16.400000005960464,
+        17.599999994039536,
+        19.900000005960464,
+        15.900000005960464,
+        14.599999994039536,
+        17.30000001192093,
+        19.799999982118607,
+        20.600000023841858,
+        21.69999998807907,
+        17.400000005960464,
+        21.400000005960464,
+        20.299999982118607,
+        22.599999994039536,
+        18.80000001192093,
+        14.099999994039536,
+        19.700000017881393,
+        15.399999976158142,
+        14.700000017881393,
+        15.5,
+        16.099999994039536,
+        21.69999998807907,
+        15.400000005960464,
+        14.300000011920929,
+        20.69999998807907,
+        23.5,
+        15.5,
+        15.800000011920929,
+        17.900000005960464,
+        19.5,
+        17.5,
+        13.899999976158142,
+        15.200000017881393,
+        18.900000005960464,
+        18.099999994039536
+      ],
+      "startAmmo": 32,
+      "endAmmo": 0,
+      "ammo": 0,
+      "stats": {},
+      "phaseTicks": 129,
+      "firstTick": 43279.70000001788,
+      "projectiles": 2,
+      "casings": 22,
+      "shadowCalls": {
+        "DirectionalLight#219 :: Mesh < training-cutaway-rangeSouth < training-ground < Scene": {
+          "calls": 640,
+          "cpuSpanMs": 30.600000023841858,
+          "triangles": 53760
+        },
+        "DirectionalLight#219 :: Mesh < training-cutaway-east < training-ground < Scene": {
+          "calls": 1024,
+          "cpuSpanMs": 28.80000004172325,
+          "triangles": 179712
+        },
+        "DirectionalLight#219 :: Mesh < training-cutaway-south < training-ground < Scene": {
+          "calls": 256,
+          "cpuSpanMs": 6.599999934434891,
+          "triangles": 6656
+        },
+        "DirectionalLight#219 :: Mesh < training-cutaway-north < training-ground < Scene": {
+          "calls": 128,
+          "cpuSpanMs": 3.300000011920929,
+          "triangles": 10752
+        },
+        "DirectionalLight#219 :: Mesh < training-cutaway-west < training-ground < Scene": {
+          "calls": 256,
+          "cpuSpanMs": 6.199999928474426,
+          "triangles": 41472
+        },
+        "DirectionalLight#219 :: Mesh < training-security-shutter < training-ground < Scene": {
+          "calls": 384,
+          "cpuSpanMs": 8.90000006556511,
+          "triangles": 32256
+        },
+        "DirectionalLight#219 :: training-gate-beacon < training-gate-frame < training-ground < Scene": {
+          "calls": 256,
+          "cpuSpanMs": 7.099999964237213,
+          "triangles": 31744
+        },
+        "DirectionalLight#219 :: Mesh < training-gate-frame < training-ground < Scene": {
+          "calls": 768,
+          "cpuSpanMs": 20.000000149011612,
+          "triangles": 164352
+        },
+        "DirectionalLight#219 :: Mesh < training-gate-leaf--1 < training-ground < Scene": {
+          "calls": 640,
+          "cpuSpanMs": 14.999999910593033,
+          "triangles": 72704
+        },
+        "DirectionalLight#219 :: Mesh < training-gate-leaf-1 < training-ground < Scene": {
+          "calls": 512,
+          "cpuSpanMs": 13.200000047683716,
+          "triangles": 37376
+        },
+        "DirectionalLight#219 :: Mesh < training-wear-locker-door < training-ground < Scene": {
+          "calls": 128,
+          "cpuSpanMs": 3.199999988079071,
+          "triangles": 1536
+        },
+        "DirectionalLight#219 :: Mesh < controls-selector < Group < Group < Group": {
+          "calls": 128,
+          "cpuSpanMs": 4.799999982118607,
+          "triangles": 53248
+        },
+        "DirectionalLight#219 :: controls-safety < Group < Group < Group < Group": {
+          "calls": 128,
+          "cpuSpanMs": 3.999999910593033,
+          "triangles": 5632
+        },
+        "DirectionalLight#219 :: Mesh < Group < magazineBody < Group < Group": {
+          "calls": 256,
+          "cpuSpanMs": 5.799999922513962,
+          "triangles": 47104
+        },
+        "DirectionalLight#219 :: Mesh < recoil-bolt < Group < Group < Group": {
+          "calls": 256,
+          "cpuSpanMs": 7.100000083446503,
+          "triangles": 16384
+        },
+        "DirectionalLight#219 :: Mesh < controls-trigger < Group < Group < Group": {
+          "calls": 384,
+          "cpuSpanMs": 9.400000035762787,
+          "triangles": 49664
+        },
+        "DirectionalLight#219 :: Mesh < laserLightUnit < Group < Group < Group": {
+          "calls": 1792,
+          "cpuSpanMs": 45.20000022649765,
+          "triangles": 381952
+        },
+        "DirectionalLight#219 :: Mesh < Group < Group < Group < Group": {
+          "calls": 3712,
+          "cpuSpanMs": 91.69999957084656,
+          "triangles": 5905408
+        },
+        "DirectionalLight#219 :: marine-flexible-shirt < marine-waist-live < Group < Group < Group": {
+          "calls": 128,
+          "cpuSpanMs": 12.000000059604645,
+          "triangles": 286720
+        },
+        "DirectionalLight#219 :: live-sleeve < live-sleeve-live < Group < Group < Group": {
+          "calls": 256,
+          "cpuSpanMs": 19.700000017881393,
+          "triangles": 446976
+        },
+        "DirectionalLight#219 :: live-seat < live-seat-live < Group < Group < Group": {
+          "calls": 128,
+          "cpuSpanMs": 6.700000017881393,
+          "triangles": 78848
+        },
+        "DirectionalLight#219 :: live-trouser-leg < live-trouser-leg-live < Group < Group < Group": {
+          "calls": 256,
+          "cpuSpanMs": 17.900000005960464,
+          "triangles": 440832
+        },
+        "DirectionalLight#219 :: pistol magazine top round < Group < Group < Group < Group": {
+          "calls": 256,
+          "cpuSpanMs": 8.100000113248825,
+          "triangles": 163840
+        },
+        "DirectionalLight#219 :: magazine top round < Group < Group < Group < Group": {
+          "calls": 128,
+          "cpuSpanMs": 4.099999934434891,
+          "triangles": 81920
+        },
+        "DirectionalLight#219 :: Mesh < training-armory < training-ground < Scene": {
+          "calls": 384,
+          "cpuSpanMs": 11.800000131130219,
+          "triangles": 18432
+        },
+        "DirectionalLight#219 :: Mesh < work < Group < Group < Group": {
+          "calls": 256,
+          "cpuSpanMs": 7.000000059604645,
+          "triangles": 90112
+        },
+        "DirectionalLight#219 :: Mesh < controls-magRelease < Group < Group < Group": {
+          "calls": 256,
+          "cpuSpanMs": 7.300000041723251,
+          "triangles": 121856
+        },
+        "DirectionalLight#219 :: Mesh < magazineBody < Group < Group < Group": {
+          "calls": 256,
+          "cpuSpanMs": 6.0999999940395355,
+          "triangles": 188416
+        },
+        "DirectionalLight#219 :: railClamp < laserLightUnit < Group < Group < Group": {
+          "calls": 256,
+          "cpuSpanMs": 5.799999982118607,
+          "triangles": 3072
+        },
+        "DirectionalLight#219 :: moduleShell < laserLightUnit < Group < Group < Group": {
+          "calls": 256,
+          "cpuSpanMs": 6.000000059604645,
+          "triangles": 3072
+        },
+        "DirectionalLight#219 :: Mesh < training-kiosk < training-ground < Scene": {
+          "calls": 512,
+          "cpuSpanMs": 11.399999797344208,
+          "triangles": 30720
+        },
+        "DirectionalLight#219 :: Mesh < pistol-barrel < Group < Group < Group": {
+          "calls": 256,
+          "cpuSpanMs": 7.10000017285347,
+          "triangles": 231424
+        },
+        "DirectionalLight#219 :: heatParts-barrel < Group < Group < Group < Group": {
+          "calls": 256,
+          "cpuSpanMs": 7.699999988079071,
+          "triangles": 36864
+        },
+        "DirectionalLight#219 :: Mesh < training-firing-bench < training-ground < Scene": {
+          "calls": 640,
+          "cpuSpanMs": 16.19999995827675,
+          "triangles": 58368
+        },
+        "DirectionalLight#219 :: Mesh < training-ground < Scene": {
+          "calls": 896,
+          "cpuSpanMs": 19.19999998807907,
+          "triangles": 411136
+        },
+        "DirectionalLight#219 :: Mesh < training-light-switch-lever < Group < training-ground < Scene": {
+          "calls": 256,
+          "cpuSpanMs": 5.799999952316284,
+          "triangles": 3072
+        },
+        "DirectionalLight#219 :: target-lower-stem < Group < Group < training-ground < Scene": {
+          "calls": 640,
+          "cpuSpanMs": 14.70000010728836,
+          "triangles": 7680
+        },
+        "DirectionalLight#219 :: Mesh < Group < Group < training-ground < Scene": {
+          "calls": 640,
+          "cpuSpanMs": 14.299999952316284,
+          "triangles": 7680
+        },
+        "DirectionalLight#219 :: Mesh < Group < training-ground < Scene": {
+          "calls": 384,
+          "cpuSpanMs": 9.800000011920929,
+          "triangles": 4608
+        },
+        "DirectionalLight#219 :: Mesh < training-dummy-pivot < training-melee-dummy < Scene": {
+          "calls": 256,
+          "cpuSpanMs": 5.699999809265137,
+          "triangles": 397824
+        },
+        "DirectionalLight#219 :: Mesh < training-dummy-base < training-melee-dummy < Scene": {
+          "calls": 256,
+          "cpuSpanMs": 5.39999994635582,
+          "triangles": 302592
+        },
+        "DirectionalLight#219 :: Mesh < training-range-console < training-ground < Scene": {
+          "calls": 640,
+          "cpuSpanMs": 19.90000009536743,
+          "triangles": 122368
+        },
+        "DirectionalLight#219 :: target-plate < Group < Group < training-ground < Scene": {
+          "calls": 640,
+          "cpuSpanMs": 30.49999988079071,
+          "triangles": 1280
+        }
+      },
+      "shadowPasses": {
+        "DirectionalLight#219": {
+          "calls": 128,
+          "cpuMs": 763.9000000655651,
+          "maxMs": 10
+        }
+      },
+      "shadowLights": [
+        {
+          "name": "",
+          "type": "DirectionalLight",
+          "id": 219,
+          "castShadow": true,
+          "intensity": 1.73,
+          "map": [
+            2048,
+            2048
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "DirectionalLight",
+          "id": 222,
+          "castShadow": false,
+          "intensity": 0.05,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "PointLight",
+          "id": 226,
+          "castShadow": false,
+          "intensity": 0,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "SpotLight",
+          "id": 6457,
+          "castShadow": false,
+          "intensity": 0,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "PointLight",
+          "id": 10418,
+          "castShadow": false,
+          "intensity": 0,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "chapel-light",
+          "type": "PointLight",
+          "id": 6454,
+          "castShadow": false,
+          "intensity": 0,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "PointLight",
+          "id": 11572,
+          "castShadow": false,
+          "intensity": 0,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "PointLight",
+          "id": 47181,
+          "castShadow": false,
+          "intensity": 0,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "PointLight",
+          "id": 48162,
+          "castShadow": false,
+          "intensity": 0,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "PointLight",
+          "id": 48958,
+          "castShadow": false,
+          "intensity": 0,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "PointLight",
+          "id": 49633,
+          "castShadow": false,
+          "intensity": 0,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "PointLight",
+          "id": 51707,
+          "castShadow": false,
+          "intensity": 0,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "PointLight",
+          "id": 71714,
+          "castShadow": false,
+          "intensity": 1.35,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "PointLight",
+          "id": 72094,
+          "castShadow": false,
+          "intensity": 0.9,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "PointLight",
+          "id": 72560,
+          "castShadow": false,
+          "intensity": 0,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "PointLight",
+          "id": 72562,
+          "castShadow": false,
+          "intensity": 0,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "PointLight",
+          "id": 72564,
+          "castShadow": false,
+          "intensity": 0,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "PointLight",
+          "id": 72566,
+          "castShadow": false,
+          "intensity": 0,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "light-pool-0",
+          "type": "PointLight",
+          "id": 79297,
+          "castShadow": false,
+          "intensity": 1.8,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "light-pool-1",
+          "type": "PointLight",
+          "id": 79299,
+          "castShadow": false,
+          "intensity": 1.8,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "light-pool-2",
+          "type": "PointLight",
+          "id": 79301,
+          "castShadow": false,
+          "intensity": 1.8,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "light-pool-3",
+          "type": "PointLight",
+          "id": 79303,
+          "castShadow": false,
+          "intensity": 0.9,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "PointLight",
+          "id": 86322,
+          "castShadow": false,
+          "intensity": 0.9,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "PointLight",
+          "id": 86398,
+          "castShadow": false,
+          "intensity": 1.8,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "PointLight",
+          "id": 86400,
+          "castShadow": false,
+          "intensity": 1.8,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "PointLight",
+          "id": 86402,
+          "castShadow": false,
+          "intensity": 1.8,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "PointLight",
+          "id": 86404,
+          "castShadow": false,
+          "intensity": 1.8,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "SpotLight",
+          "id": 86628,
+          "castShadow": false,
+          "intensity": 0,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "SpotLight",
+          "id": 86631,
+          "castShadow": false,
+          "intensity": 0,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "PointLight",
+          "id": 86634,
+          "castShadow": false,
+          "intensity": 0,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "SpotLight",
+          "id": 86636,
+          "castShadow": false,
+          "intensity": 0,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "PointLight",
+          "id": 86639,
+          "castShadow": false,
+          "intensity": 0,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "SpotLight",
+          "id": 86641,
+          "castShadow": false,
+          "intensity": 0,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        },
+        {
+          "name": "",
+          "type": "PointLight",
+          "id": 86644,
+          "castShadow": false,
+          "intensity": 0,
+          "map": [
+            512,
+            512
+          ],
+          "visible": true
+        }
+      ],
+      "prof": {
+        "rep": {
+          "frames": 128,
+          "phases": [],
+          "spikes": []
+        },
+        "pipes": {
+          "made": 0,
+          "first": []
+        },
+        "builds": {
+          "made": 0,
+          "first": []
+        },
+        "gpu": []
+      }
+    }
+  ],
+  "readyWallMs": 13246,
+  "loadMarks": [
+    "terrain+water+sky built 0ms",
+    "rocks 58ms",
+    "trees 227ms",
+    "player+weapons+zombie types 1272ms",
+    "foliage scattered 2419ms",
+    "POIs+minimap+foliage chunks 3958ms",
+    "contact shading + rest of setup 4173ms",
+    "post + pools + compile + warm frame 10503ms",
+    "ready 10507ms"
+  ],
+  "menuWallMs": 19908,
+  "graphics": "high",
+  "instrumentation": {
+    "prof": false,
+    "gpuTimestamps": false
+  },
+  "openingPerf": {
+    "v": 1,
+    "at": "2026-11-14T07:44:27.972Z",
+    "url": "/index.html?debug=1&__gameTestToken=8c886f0d-a30e-4b8b-8cbd-9f7bbc3e0f60",
+    "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36",
+    "cores": 24,
+    "mem": 32,
+    "screen": [
+      2560,
+      1440,
+      1
+    ],
+    "marks": [
+      [
+        121,
+        "gate-mode",
+        "all"
+      ],
+      [
+        121,
+        "gate-compile"
+      ],
+      [
+        121,
+        "gate-warm"
+      ],
+      [
+        331,
+        "phase-loading"
+      ],
+      [
+        595,
+        "module-start"
+      ],
+      [
+        600,
+        "phase-loading"
+      ],
+      [
+        1022,
+        "renderer",
+        "WebGPU / high"
+      ],
+      [
+        6026,
+        "gpu-gate-wait"
+      ],
+      [
+        6026,
+        "gpu-gate-open"
+      ],
+      [
+        6034,
+        "post-done"
+      ],
+      [
+        11411,
+        "pools-done"
+      ],
+      [
+        12225,
+        "compile-async-done"
+      ],
+      [
+        12225,
+        "warm-gate-open"
+      ],
+      [
+        12347,
+        "warm-load-done"
+      ],
+      [
+        12354,
+        "loop-start"
+      ],
+      [
+        12365,
+        "warm-setA"
+      ],
+      [
+        13192,
+        "warm-setA-done"
+      ],
+      [
+        13244,
+        "phase-loading"
+      ],
+      [
+        13299,
+        "warm-fight"
+      ],
+      [
+        17705,
+        "warm-live"
+      ],
+      [
+        19134,
+        "warm-live-end",
+        75
+      ],
+      [
+        19136,
+        "warm-done"
+      ],
+      [
+        19139,
+        "menu-camera"
+      ],
+      [
+        19260,
+        "title-release"
+      ],
+      [
+        19260,
+        "opening-ready"
+      ],
+      [
+        19625,
+        "phase-menu"
+      ],
+      [
+        19625,
+        "opening-complete"
+      ]
+    ],
+    "segments": [
+      [
+        0,
+        "boot"
+      ],
+      [
+        596,
+        "loading"
+      ],
+      [
+        19626,
+        "menu"
+      ]
+    ],
+    "load": [
+      [
+        596,
+        "terrain",
+        "begin"
+      ],
+      [
+        1845,
+        "terrain",
+        "end"
+      ],
+      [
+        1845,
+        "rocks",
+        "begin"
+      ],
+      [
+        1902,
+        "rocks",
+        "end"
+      ],
+      [
+        1903,
+        "trees",
+        "begin"
+      ],
+      [
+        2071,
+        "trees",
+        "end"
+      ],
+      [
+        2072,
+        "actors",
+        "begin"
+      ],
+      [
+        3117,
+        "actors",
+        "end"
+      ],
+      [
+        3117,
+        "foliage",
+        "begin"
+      ],
+      [
+        4264,
+        "foliage",
+        "end"
+      ],
+      [
+        4264,
+        "pois",
+        "begin"
+      ],
+      [
+        5803,
+        "pois",
+        "end"
+      ],
+      [
+        5803,
+        "setup",
+        "begin"
+      ],
+      [
+        6017,
+        "setup",
+        "end"
+      ],
+      [
+        6018,
+        "compile",
+        "begin"
+      ],
+      [
+        12348,
+        "compile",
+        "end"
+      ],
+      [
+        12348,
+        "loop",
+        "begin"
+      ],
+      [
+        12352,
+        "loop",
+        "end"
+      ],
+      [
+        12352,
+        "warmup",
+        "begin"
+      ],
+      [
+        13192,
+        "warmup",
+        "end"
+      ]
+    ],
+    "loaf": [
+      [
+        58,
+        146,
+        29,
+        "boot",
+        ""
+      ],
+      [
+        205,
+        66,
+        12,
+        "boot",
+        ""
+      ],
+      [
+        271,
+        54,
+        0,
+        "boot",
+        ""
+      ],
+      [
+        338,
+        69,
+        0,
+        "loading",
+        ""
+      ],
+      [
+        406,
+        60,
+        0,
+        "loading",
+        ""
+      ],
+      [
+        545,
+        54,
+        0,
+        "loading",
+        "http://127.0.0.1:51528/index.html?debug=1&__gameTestToken=8c @ index.html?debug=1&__gameTestToken=8c886:0 35ms"
+      ],
+      [
+        615,
+        363,
+        58,
+        "loading",
+        "IdleRequestCallback @ heron.js:25359 108ms"
+      ],
+      [
+        1021,
+        825,
+        775,
+        "loading",
+        ""
+      ],
+      [
+        1847,
+        58,
+        7,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 56ms"
+      ],
+      [
+        1904,
+        169,
+        118,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 167ms"
+      ],
+      [
+        2073,
+        1068,
+        993,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 1041ms"
+      ],
+      [
+        3141,
+        482,
+        430,
+        "loading",
+        "warmDressView @ index.html?debug=1&__gameTestToken=8c886:1725706 480ms"
+      ],
+      [
+        3623,
+        642,
+        542,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 567ms"
+      ],
+      [
+        4265,
+        1555,
+        1488,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 1537ms"
+      ],
+      [
+        5820,
+        200,
+        148,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 197ms"
+      ],
+      [
+        6029,
+        347,
+        292,
+        "loading",
+        "import.then @ index.html?debug=1&__gameTestToken=8c886:64728 341ms"
+      ],
+      [
+        6494,
+        56,
+        5,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 55ms"
+      ],
+      [
+        6641,
+        73,
+        7,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 57ms"
+      ],
+      [
+        6744,
+        57,
+        0,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 42ms"
+      ],
+      [
+        6801,
+        53,
+        0,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 45ms"
+      ],
+      [
+        6981,
+        50,
+        0,
+        "loading",
+        "import.then @ index.html?debug=1&__gameTestToken=8c886:4177726 48ms"
+      ],
+      [
+        7067,
+        3579,
+        3529,
+        "loading",
+        "check @ viewmodel.js:157480 3579ms"
+      ],
+      [
+        10945,
+        67,
+        0,
+        "loading",
+        ""
+      ],
+      [
+        10662,
+        279,
+        0,
+        "loading",
+        ""
+      ],
+      [
+        11181,
+        121,
+        0,
+        "loading",
+        ""
+      ],
+      [
+        11471,
+        88,
+        38,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 87ms"
+      ],
+      [
+        11592,
+        102,
+        52,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 101ms"
+      ],
+      [
+        11694,
+        109,
+        59,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 108ms"
+      ],
+      [
+        11924,
+        55,
+        0,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 50ms"
+      ],
+      [
+        11979,
+        59,
+        5,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 54ms"
+      ],
+      [
+        12051,
+        54,
+        0,
+        "loading",
+        ""
+      ],
+      [
+        12145,
+        80,
+        0,
+        "loading",
+        ""
+      ],
+      [
+        12225,
+        124,
+        74,
+        "loading",
+        ""
+      ],
+      [
+        12353,
+        218,
+        161,
+        "loading",
+        "update @ three.webgpu.js:600902 209ms"
+      ],
+      [
+        12572,
+        96,
+        43,
+        "loading",
+        "update @ three.webgpu.js:600902 92ms"
+      ],
+      [
+        12667,
+        60,
+        9,
+        "loading",
+        "update @ three.webgpu.js:600902 58ms"
+      ],
+      [
+        12727,
+        165,
+        115,
+        "loading",
+        "update @ three.webgpu.js:600902 165ms"
+      ],
+      [
+        12893,
+        84,
+        32,
+        "loading",
+        "update @ three.webgpu.js:600902 81ms"
+      ],
+      [
+        12977,
+        134,
+        0,
+        "loading",
+        "update @ three.webgpu.js:600902 37ms"
+      ],
+      [
+        13110,
+        63,
+        13,
+        "loading",
+        "update @ three.webgpu.js:600902 62ms"
+      ],
+      [
+        13199,
+        84,
+        0,
+        "loading",
+        "update @ three.webgpu.js:600902 19ms"
+      ],
+      [
+        13299,
+        143,
+        93,
+        "loading",
+        "update @ three.webgpu.js:600902 142ms"
+      ],
+      [
+        13443,
+        120,
+        70,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 119ms"
+      ],
+      [
+        13563,
+        73,
+        23,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 72ms"
+      ],
+      [
+        13694,
+        323,
+        271,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 321ms"
+      ],
+      [
+        14054,
+        62,
+        9,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 58ms"
+      ],
+      [
+        14184,
+        51,
+        0,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 48ms"
+      ],
+      [
+        14284,
+        193,
+        139,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 188ms"
+      ],
+      [
+        14630,
+        84,
+        0,
+        "loading",
+        ""
+      ],
+      [
+        14752,
+        174,
+        115,
+        "loading",
+        "run @ loader.js:8002 165ms"
+      ],
+      [
+        15178,
+        80,
+        0,
+        "loading",
+        "run @ loader.js:8002 43ms"
+      ],
+      [
+        15278,
+        78,
+        28,
+        "loading",
+        "run @ loader.js:8002 39ms"
+      ],
+      [
+        15361,
+        91,
+        28,
+        "loading",
+        "run @ loader.js:8002 40ms"
+      ],
+      [
+        15461,
+        93,
+        30,
+        "loading",
+        "run @ loader.js:8002 41ms"
+      ],
+      [
+        15577,
+        83,
+        33,
+        "loading",
+        "run @ loader.js:8002 44ms"
+      ],
+      [
+        15682,
+        82,
+        32,
+        "loading",
+        "run @ loader.js:8002 42ms"
+      ],
+      [
+        15802,
+        80,
+        30,
+        "loading",
+        "run @ loader.js:8002 40ms"
+      ],
+      [
+        15913,
+        78,
+        28,
+        "loading",
+        "run @ loader.js:8002 41ms"
+      ],
+      [
+        16025,
+        82,
+        30,
+        "loading",
+        "run @ loader.js:8002 41ms"
+      ],
+      [
+        16300,
+        72,
+        0,
+        "loading",
+        "run @ loader.js:8002 44ms"
+      ],
+      [
+        16406,
+        81,
+        27,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 40ms"
+      ],
+      [
+        16518,
+        73,
+        23,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 37ms"
+      ],
+      [
+        16614,
+        97,
+        46,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 58ms"
+      ],
+      [
+        16753,
+        82,
+        28,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 41ms"
+      ],
+      [
+        16873,
+        80,
+        30,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 40ms"
+      ],
+      [
+        16985,
+        74,
+        24,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 38ms"
+      ],
+      [
+        17090,
+        79,
+        27,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 38ms"
+      ],
+      [
+        17206,
+        79,
+        29,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 40ms"
+      ],
+      [
+        17408,
+        84,
+        0,
+        "loading",
+        "run @ loader.js:8002 43ms"
+      ],
+      [
+        17515,
+        82,
+        32,
+        "loading",
+        "run @ loader.js:8002 42ms"
+      ],
+      [
+        17617,
+        86,
+        36,
+        "loading",
+        "run @ loader.js:8002 43ms"
+      ],
+      [
+        17702,
+        64,
+        14,
+        "loading",
+        "update @ three.webgpu.js:600902 61ms"
+      ]
+    ],
+    "gaps": [
+      [
+        123,
+        71,
+        "boot"
+      ],
+      [
+        194,
+        117,
+        "boot"
+      ],
+      [
+        327,
+        67,
+        "boot"
+      ],
+      [
+        394,
+        66,
+        "boot"
+      ],
+      [
+        460,
+        50,
+        "boot"
+      ],
+      [
+        610,
+        367,
+        "loading"
+      ],
+      [
+        1027,
+        817,
+        "loading"
+      ],
+      [
+        1894,
+        167,
+        "loading"
+      ],
+      [
+        2060,
+        1067,
+        "loading"
+      ],
+      [
+        3127,
+        483,
+        "loading"
+      ],
+      [
+        3610,
+        650,
+        "loading"
+      ],
+      [
+        4260,
+        1550,
+        "loading"
+      ],
+      [
+        5810,
+        200,
+        "loading"
+      ],
+      [
+        6044,
+        317,
+        "loading"
+      ],
+      [
+        6544,
+        50,
+        "loading"
+      ],
+      [
+        6627,
+        83,
+        "loading"
+      ],
+      [
+        6794,
+        50,
+        "loading"
+      ],
+      [
+        6860,
+        50,
+        "loading"
+      ],
+      [
+        7077,
+        3567,
+        "loading"
+      ],
+      [
+        10677,
+        250,
+        "loading"
+      ],
+      [
+        10944,
+        67,
+        "loading"
+      ],
+      [
+        11194,
+        100,
+        "loading"
+      ],
+      [
+        11444,
+        100,
+        "loading"
+      ],
+      [
+        11594,
+        100,
+        "loading"
+      ],
+      [
+        11694,
+        100,
+        "loading"
+      ],
+      [
+        12227,
+        117,
+        "loading"
+      ],
+      [
+        12360,
+        200,
+        "loading"
+      ],
+      [
+        12560,
+        100,
+        "loading"
+      ],
+      [
+        12660,
+        50,
+        "loading"
+      ],
+      [
+        12711,
+        167,
+        "loading"
+      ],
+      [
+        12877,
+        183,
+        "loading"
+      ],
+      [
+        13094,
+        67,
+        "loading"
+      ],
+      [
+        13160,
+        100,
+        "loading"
+      ],
+      [
+        13293,
+        134,
+        "loading"
+      ],
+      [
+        13444,
+        117,
+        "loading"
+      ],
+      [
+        13560,
+        67,
+        "loading"
+      ],
+      [
+        13710,
+        300,
+        "loading"
+      ],
+      [
+        14294,
+        167,
+        "loading"
+      ],
+      [
+        14644,
+        67,
+        "loading"
+      ],
+      [
+        14760,
+        150,
+        "loading"
+      ],
+      [
+        15377,
+        67,
+        "loading"
+      ],
+      [
+        15477,
+        67,
+        "loading"
+      ],
+      [
+        15593,
+        67,
+        "loading"
+      ],
+      [
+        15693,
+        67,
+        "loading"
+      ],
+      [
+        15810,
+        67,
+        "loading"
+      ],
+      [
+        16027,
+        67,
+        "loading"
+      ],
+      [
+        16410,
+        67,
+        "loading"
+      ],
+      [
+        16627,
+        83,
+        "loading"
+      ],
+      [
+        16760,
+        67,
+        "loading"
+      ],
+      [
+        16877,
+        67,
+        "loading"
+      ],
+      [
+        17093,
+        67,
+        "loading"
+      ],
+      [
+        17210,
+        67,
+        "loading"
+      ],
+      [
+        17410,
+        67,
+        "loading"
+      ],
+      [
+        17527,
+        67,
+        "loading"
+      ],
+      [
+        17627,
+        67,
+        "loading"
+      ],
+      [
+        17694,
+        67,
+        "loading"
+      ],
+      [
+        19760,
+        100,
+        "menu"
+      ],
+      [
+        19910,
+        9300,
+        "menu"
+      ]
+    ],
+    "drops": [],
+    "stats": {
+      "boot": {
+        "ms": 595.9000000059605,
+        "frames": 8,
+        "over33": 5,
+        "over50": 5,
+        "over100": 1,
+        "worst": 117
+      },
+      "loading": {
+        "ms": 19029.80000001192,
+        "frames": 348,
+        "over33": 93,
+        "over50": 51,
+        "over100": 21,
+        "worst": 3567
+      },
+      "menu": {
+        "ms": 9734.399999976158,
+        "frames": 11,
+        "over33": 5,
+        "over50": 2,
+        "over100": 1,
+        "worst": 9300
+      }
+    },
+    "videos": {
+      "caracal@loading": {
+        "frames": 4,
+        "dropped": 0
+      }
+    },
+    "summary": {
+      "toMenu": 19.63,
+      "segments": {
+        "boot": {
+          "at": 0,
+          "seconds": 0.6,
+          "frames": 8,
+          "over50": 5,
+          "over100": 1,
+          "worst": 117
+        },
+        "loading": {
+          "at": 0.6,
+          "seconds": 19.03,
+          "frames": 348,
+          "over50": 51,
+          "over100": 21,
+          "worst": 3567
+        },
+        "menu": {
+          "at": 19.63,
+          "seconds": 9.73,
+          "frames": 11,
+          "over50": 2,
+          "over100": 1,
+          "worst": 9300
+        }
+      },
+      "videos": {
+        "caracal@loading": {
+          "frames": 4,
+          "dropped": 0
+        }
+      },
+      "loafOver100": 24,
+      "gpuGateWait": 0,
+      "order": "boot > loading > menu",
+      "liveRollTicks": 75,
+      "renderer": "WebGPU / high"
+    }
+  },
+  "warmTrace": [
+    "fire-hot:229",
+    "fire-cold:229",
+    "fire-resources:100/8",
+    "fire-pool-falling-leaves:231",
+    "fire-leaf-resources:1",
+    "fire-clean:231",
+    "load:284",
+    "a-fresh:284",
+    "a-flash:287",
+    "a-faded:288",
+    "a-kill-generic:297",
+    "a-kill-melee:300",
+    "a-kill-explosive:300",
+    "a-fx:303",
+    "a-corpse:303",
+    "fresh:361",
+    "burning:363",
+    "flash:363",
+    "faded:363",
+    "tree-fade:363",
+    "kill-explosive:363",
+    "kill-chainsaw:363",
+    "kill-pellet:363",
+    "kill-generic:363",
+    "kill-melee:363",
+    "kill-explosive:365",
+    "kill-chainsaw:365",
+    "kill-pellet:365",
+    "kill-generic:366",
+    "kill-melee:366",
+    "kill-explosive:366",
+    "kill-chainsaw:366",
+    "kill-pellet:366",
+    "kill-generic:366",
+    "effects:371",
+    "corpses:371",
+    "corpses2:371",
+    "training-staged:653",
+    "training-fire-hot:650",
+    "training-fire-cold:650",
+    "training-fire-resources:100/8",
+    "training-clean:650"
+  ],
+  "warmLogs": [
+    {
+      "type": "info",
+      "text": "Grave Shift warm-up: 284 shader variants compiled, 38 bodies pooled, 5 warm frames, lights visible 24/24, shadows true | post 9ms pools 5376ms compile 815ms warm frame 122ms | fire-hot:229 fire-cold:229 fire-resources:100/8 fire-pool-falling-leaves:231 fire-leaf-resources:1 fire-clean:231 load:284"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift load: terrain+water+sky built 0ms | rocks 58ms | trees 227ms | player+weapons+zombie types 1272ms | foliage scattered 2419ms | POIs+minimap+foliage chunks 3958ms | contact shading + rest of setup 4173ms | post + pools + compile + warm frame 10503ms | ready 10507ms"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift first minute: 303 variants after 13 warm frames | fire-hot:229 fire-cold:229 fire-resources:100/8 fire-pool-falling-leaves:231 fire-leaf-resources:1 fire-clean:231 load:284 a-fresh:284 a-flash:287 a-faded:288 a-kill-generic:297 a-kill-melee:300 a-kill-explosive:300 a-fx:303 a-corpse:303"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift pre-roll: 373 shader variants compiled after 35 warm frames | fire-hot:229 fire-cold:229 fire-resources:100/8 fire-pool-falling-leaves:231 fire-leaf-resources:1 fire-clean:231 load:284 a-fresh:284 a-flash:287 a-faded:288 a-kill-generic:297 a-kill-melee:300 a-kill-explosive:300 a-fx:303 a-corpse:303 fresh:361 burning:363 flash:363 faded:363 tree-fade:363 kill-explosive:363 kill-chainsaw:363 kill-pellet:363 kill-generic:363 kill-melee:363 kill-explosive:365 kill-chainsaw:365 kill-pellet:365 kill-generic:366 kill-melee:366 kill-explosive:366 kill-chainsaw:366 kill-pellet:366 kill-generic:366 effects:371 corpses:371 corpses2:371"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift title: menu up after 35 warm frames, 373 variants | fire-hot:229 fire-cold:229 fire-resources:100/8 fire-pool-falling-leaves:231 fire-leaf-resources:1 fire-clean:231 load:284 a-fresh:284 a-flash:287 a-faded:288 a-kill-generic:297 a-kill-melee:300 a-kill-explosive:300 a-fx:303 a-corpse:303 fresh:361 burning:363 flash:363 faded:363 tree-fade:363 kill-explosive:363 kill-chainsaw:363 kill-pellet:363 kill-generic:363 kill-melee:363 kill-explosive:365 kill-chainsaw:365 kill-pellet:365 kill-generic:366 kill-melee:366 kill-explosive:366 kill-chainsaw:366 kill-pellet:366 kill-generic:366 effects:371 corpses:371 corpses2:371"
+    }
+  ],
+  "endModuleHashes": {
+    "core/body-limits.js": "fd2562bd882ef767155cc819301ede35e68d008621dd0f683232c593d91459eb",
+    "game/viewmodel.js": "f3eb743fb200945a3bed23accbd93dfcb5cf983e616769049c357d3199b7363e",
+    "game/tp-fit.js": "d2dbf1e163f856b672a1a91d1638a949749e3bde1727bda8ceaf1f18c3b08e07",
+    "studio/fp-arms.js": "fff7808db158e072d0c5697a0a57e0c87de7fa81847558fc8670f6f7e5f190d8",
+    "world/training-ballistics.js": "eadc9d04d5fd50ad9f6f23c0a080ea2ad58485ff62e0002f1a6b1b0da4719bdc",
+    "studio/marine-carry.js": "105255868cfd0e9088e1bfc540cb4c2d4293faf5e836aac671ffe1cd8b1436ce",
+    "studio/marine-body.js": "78895440e70b0cc5a348fe5a670c789ca74fd1cf69be830f21fd1a3801cb7095",
+    "studio/marine-hand.js": "f3b92570fe48bb259917c8463a1cb09010be22580f0677a5af90f38eff11a587",
+    "game/viewmodel-fit.js": "9f52ae65294fcfa7840fcaf22b30351cf5d56c61308dbf3ce605836ae5a7e499",
+    "game/viewmodel-poses.js": "32b2d326f6c62e0aa9cee908f1099a02931f6442d7ccc06825570a4ddfe83344"
+  },
+  "endSourceSha256": "a95f671f3e01e896412b4826a3d8e5430781b75376175aa8d0e72fc91048a3e9",
+  "errors": [],
+  "console": [
+    {
+      "type": "warning",
+      "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift renderer: WebGPU."
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift warm-up: 284 shader variants compiled, 38 bodies pooled, 5 warm frames, lights visible 24/24, shadows true | post 9ms pools 5376ms compile 815ms warm frame 122ms | fire-hot:229 fire-cold:229 fire-resources:100/8 fire-pool-falling-leaves:231 fire-leaf-resources:1 fire-clean:231 load:284"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift load: terrain+water+sky built 0ms | rocks 58ms | trees 227ms | player+weapons+zombie types 1272ms | foliage scattered 2419ms | POIs+minimap+foliage chunks 3958ms | contact shading + rest of setup 4173ms | post + pools + compile + warm frame 10503ms | ready 10507ms"
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift first minute: 303 variants after 13 warm frames | fire-hot:229 fire-cold:229 fire-resources:100/8 fire-pool-falling-leaves:231 fire-leaf-resources:1 fire-clean:231 load:284 a-fresh:284 a-flash:287 a-faded:288 a-kill-generic:297 a-kill-melee:300 a-kill-explosive:300 a-fx:303 a-corpse:303"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift pre-roll: 373 shader variants compiled after 35 warm frames | fire-hot:229 fire-cold:229 fire-resources:100/8 fire-pool-falling-leaves:231 fire-leaf-resources:1 fire-clean:231 load:284 a-fresh:284 a-flash:287 a-faded:288 a-kill-generic:297 a-kill-melee:300 a-kill-explosive:300 a-fx:303 a-corpse:303 fresh:361 burning:363 flash:363 faded:363 tree-fade:363 kill-explosive:363 kill-chainsaw:363 kill-pellet:363 kill-generic:363 kill-melee:363 kill-explosive:365 kill-chainsaw:365 kill-pellet:365 kill-generic:366 kill-melee:366 kill-explosive:366 kill-chainsaw:366 kill-pellet:366 kill-generic:366 effects:371 corpses:371 corpses2:371"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift title: menu up after 35 warm frames, 373 variants | fire-hot:229 fire-cold:229 fire-resources:100/8 fire-pool-falling-leaves:231 fire-leaf-resources:1 fire-clean:231 load:284 a-fresh:284 a-flash:287 a-faded:288 a-kill-generic:297 a-kill-melee:300 a-kill-explosive:300 a-fx:303 a-corpse:303 fresh:361 burning:363 flash:363 faded:363 tree-fade:363 kill-explosive:363 kill-chainsaw:363 kill-pellet:363 kill-generic:363 kill-melee:363 kill-explosive:365 kill-chainsaw:365 kill-pellet:365 kill-generic:366 kill-melee:366 kill-explosive:366 kill-chainsaw:366 kill-pellet:366 kill-generic:366 effects:371 corpses:371 corpses2:371"
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift opening perf: {\"toMenu\":19.63,\"segments\":{\"boot\":{\"at\":0,\"seconds\":0.6,\"frames\":8,\"over50\":5,\"over100\":1,\"worst\":117},\"loading\":{\"at\":0.6,\"seconds\":19.03,\"frames\":348,\"over50\":51,\"over100\":21,\"worst\":3567},\"menu\":{\"at\":19.63,\"seconds\":9.73,\"frames\":11,\"over50\":2,\"over100\":1,\"worst\":9300}},\"videos\":{\"caracal@loading\":{\"frames\":4,\"dropped\":0}},\"loafOver100\":24,\"gpuGateWait\":0,\"order\":\"boot > loading > menu\",\"liveRollTicks\":75,\"renderer\":\"WebGPU / high\"}"
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    }
+  ]
+}

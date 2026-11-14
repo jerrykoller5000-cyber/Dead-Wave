@@ -1,0 +1,611 @@
+[
+  {
+    "weapon": "minigun",
+    "environment": "training",
+    "exit": 0,
+    "summary": {
+      "source": "a95f671f3e01e896412b4826a3d8e5430781b75376175aa8d0e72fc91048a3e9",
+      "end": "a95f671f3e01e896412b4826a3d8e5430781b75376175aa8d0e72fc91048a3e9",
+      "sourceUnchanged": true,
+      "modulesUnchanged": true,
+      "menuWallMs": 19348,
+      "errors": [],
+      "failure": null,
+      "magazines": [
+        {
+          "pass": 0,
+          "idleMs": 17.71450980387482,
+          "fireMs": 17.858460161151264,
+          "firePercentOverIdle": 0.8126127048966314,
+          "before": {
+            "phase": "prep",
+            "day": 1,
+            "reloading": false,
+            "paused": false,
+            "warmPending": false,
+            "flightHold": false,
+            "hidden": false,
+            "focus": true,
+            "zombies": 0,
+            "heat": 0,
+            "casings": 0,
+            "projectiles": 0,
+            "training": true,
+            "lightsOff": false,
+            "targetHidden": false,
+            "targetLocal": [
+              -1.3076663519098238e-13,
+              -199.99869031556784,
+              -640.6743656147739
+            ],
+            "targetWorld": [
+              -1.3076663519098238e-13,
+              -199.99869031556784,
+              -640.6743656147739
+            ]
+          },
+          "after": {
+            "phase": "prep",
+            "day": 1,
+            "reloading": false,
+            "paused": false,
+            "warmPending": false,
+            "flightHold": false,
+            "hidden": false,
+            "focus": true,
+            "zombies": 0,
+            "heat": 0.9830835983317031,
+            "casings": 28,
+            "projectiles": 2,
+            "training": true,
+            "lightsOff": false,
+            "targetHidden": false,
+            "targetLocal": [
+              -1.3076663519098238e-13,
+              -199.99869031556784,
+              -640.6743656147739
+            ],
+            "targetWorld": [
+              -1.3076663519098238e-13,
+              -199.99869031556784,
+              -640.6743656147739
+            ]
+          },
+          "builds": 0,
+          "pipes": 0
+        },
+        {
+          "pass": 1,
+          "idleMs": 17.24176245219863,
+          "fireMs": 17.330675909899345,
+          "firePercentOverIdle": 0.5156865949593081,
+          "before": {
+            "phase": "prep",
+            "day": 1,
+            "reloading": false,
+            "paused": false,
+            "warmPending": false,
+            "flightHold": false,
+            "hidden": false,
+            "focus": true,
+            "zombies": 0,
+            "heat": 0.4509775729657766,
+            "casings": 0,
+            "projectiles": 0,
+            "training": true,
+            "lightsOff": false,
+            "targetHidden": false,
+            "targetLocal": [
+              -1.3076663519098238e-13,
+              -199.99869031556784,
+              -640.6743656147739
+            ],
+            "targetWorld": [
+              -1.3076663519098238e-13,
+              -199.99869031556784,
+              -640.6743656147739
+            ]
+          },
+          "after": {
+            "phase": "prep",
+            "day": 1,
+            "reloading": false,
+            "paused": false,
+            "warmPending": false,
+            "flightHold": false,
+            "hidden": false,
+            "focus": true,
+            "zombies": 0,
+            "heat": 0.9879313378768949,
+            "casings": 28,
+            "projectiles": 2,
+            "training": true,
+            "lightsOff": false,
+            "targetHidden": false,
+            "targetLocal": [
+              -1.3076663519098238e-13,
+              -199.99869031556784,
+              -640.6743656147739
+            ],
+            "targetWorld": [
+              -1.3076663519098238e-13,
+              -199.99869031556784,
+              -640.6743656147739
+            ]
+          },
+          "builds": 0,
+          "pipes": 0
+        },
+        {
+          "pass": 2,
+          "idleMs": 16.855805243445694,
+          "fireMs": 17.67367491165551,
+          "firePercentOverIdle": 4.85215423646308,
+          "before": {
+            "phase": "prep",
+            "day": 1,
+            "reloading": false,
+            "paused": false,
+            "warmPending": false,
+            "flightHold": false,
+            "hidden": false,
+            "focus": true,
+            "zombies": 0,
+            "heat": 0.4444226726206607,
+            "casings": 0,
+            "projectiles": 0,
+            "training": true,
+            "lightsOff": false,
+            "targetHidden": false,
+            "targetLocal": [
+              -1.3076663519098238e-13,
+              -199.99869031556784,
+              -640.6743656147739
+            ],
+            "targetWorld": [
+              -1.3076663519098238e-13,
+              -199.99869031556784,
+              -640.6743656147739
+            ]
+          },
+          "after": {
+            "phase": "prep",
+            "day": 1,
+            "reloading": false,
+            "paused": false,
+            "warmPending": false,
+            "flightHold": false,
+            "hidden": false,
+            "focus": true,
+            "zombies": 0,
+            "heat": 0.9870991622874717,
+            "casings": 31,
+            "projectiles": 2,
+            "training": true,
+            "lightsOff": false,
+            "targetHidden": false,
+            "targetLocal": [
+              -1.3076663519098238e-13,
+              -199.99869031556784,
+              -640.6743656147739
+            ],
+            "targetWorld": [
+              -1.3076663519098238e-13,
+              -199.99869031556784,
+              -640.6743656147739
+            ]
+          },
+          "builds": 0,
+          "pipes": 0
+        }
+      ],
+      "allWithin10Percent": true
+    }
+  },
+  {
+    "weapon": "minigun",
+    "environment": "outdoor",
+    "exit": 0,
+    "summary": {
+      "source": "a95f671f3e01e896412b4826a3d8e5430781b75376175aa8d0e72fc91048a3e9",
+      "end": "a95f671f3e01e896412b4826a3d8e5430781b75376175aa8d0e72fc91048a3e9",
+      "sourceUnchanged": true,
+      "modulesUnchanged": true,
+      "menuWallMs": 20830,
+      "errors": [],
+      "failure": null,
+      "magazines": [
+        {
+          "pass": 0,
+          "idleMs": 17.155513308007453,
+          "fireMs": 17.281542461010364,
+          "firePercentOverIdle": 0.7346277009623758,
+          "before": {
+            "phase": "prep",
+            "day": 1,
+            "reloading": false,
+            "paused": false,
+            "warmPending": false,
+            "flightHold": false,
+            "hidden": false,
+            "focus": true,
+            "zombies": 3,
+            "heat": 0,
+            "casings": 0,
+            "projectiles": 0,
+            "training": false,
+            "lightsOff": false,
+            "targetHidden": false,
+            "targetLocal": [
+              42.00507119954679,
+              -7.555506271497672,
+              -19.996542640507744
+            ],
+            "targetWorld": [
+              42.00507119954679,
+              -7.555506271497672,
+              -19.996542640507744
+            ]
+          },
+          "after": {
+            "phase": "prep",
+            "day": 1,
+            "reloading": false,
+            "paused": false,
+            "warmPending": false,
+            "flightHold": false,
+            "hidden": false,
+            "focus": true,
+            "zombies": 1,
+            "heat": 0.9936680334581529,
+            "casings": 28,
+            "projectiles": 2,
+            "training": false,
+            "lightsOff": false,
+            "targetHidden": false,
+            "targetLocal": [
+              41.99821761431092,
+              -7.543646433446196,
+              -20.003201550111854
+            ],
+            "targetWorld": [
+              41.99821761431092,
+              -7.543646433446196,
+              -20.003201550111854
+            ]
+          },
+          "builds": 0,
+          "pipes": 0
+        },
+        {
+          "pass": 1,
+          "idleMs": 17.351923076923075,
+          "fireMs": 16.941285956001725,
+          "firePercentOverIdle": -2.3665222528992835,
+          "before": {
+            "phase": "prep",
+            "day": 1,
+            "reloading": false,
+            "paused": false,
+            "warmPending": false,
+            "flightHold": false,
+            "hidden": false,
+            "focus": true,
+            "zombies": 1,
+            "heat": 0.4531904960492046,
+            "casings": 0,
+            "projectiles": 0,
+            "training": false,
+            "lightsOff": false,
+            "targetHidden": false,
+            "targetLocal": [
+              42.004699722127974,
+              -7.548682577610367,
+              -20.005453120000098
+            ],
+            "targetWorld": [
+              42.004699722127974,
+              -7.548682577610367,
+              -20.005453120000098
+            ]
+          },
+          "after": {
+            "phase": "prep",
+            "day": 1,
+            "reloading": false,
+            "paused": false,
+            "warmPending": false,
+            "flightHold": false,
+            "hidden": false,
+            "focus": true,
+            "zombies": 0,
+            "heat": 0.9804345758057857,
+            "casings": 29,
+            "projectiles": 0,
+            "training": false,
+            "lightsOff": false,
+            "targetHidden": false,
+            "targetLocal": [
+              42.00866264233678,
+              -7.5495868252342175,
+              -20.007503652373337
+            ],
+            "targetWorld": [
+              42.00866264233678,
+              -7.5495868252342175,
+              -20.007503652373337
+            ]
+          },
+          "builds": 0,
+          "pipes": 0
+        },
+        {
+          "pass": 2,
+          "idleMs": 16.917669172909925,
+          "fireMs": 16.88295358650795,
+          "firePercentOverIdle": -0.20520312844021227,
+          "before": {
+            "phase": "prep",
+            "day": 1,
+            "reloading": false,
+            "paused": false,
+            "warmPending": false,
+            "flightHold": false,
+            "hidden": false,
+            "focus": true,
+            "zombies": 0,
+            "heat": 0.44800965554147454,
+            "casings": 0,
+            "projectiles": 0,
+            "training": false,
+            "lightsOff": false,
+            "targetHidden": false,
+            "targetLocal": [
+              42.00177554943259,
+              -7.547628928759929,
+              -20.000304820695273
+            ],
+            "targetWorld": [
+              42.00177554943259,
+              -7.547628928759929,
+              -20.000304820695273
+            ]
+          },
+          "after": {
+            "phase": "prep",
+            "day": 1,
+            "reloading": false,
+            "paused": false,
+            "warmPending": false,
+            "flightHold": false,
+            "hidden": false,
+            "focus": true,
+            "zombies": 0,
+            "heat": 0.9867654467486937,
+            "casings": 28,
+            "projectiles": 0,
+            "training": false,
+            "lightsOff": false,
+            "targetHidden": false,
+            "targetLocal": [
+              42.00944854392787,
+              -7.5518386295731945,
+              -19.994371652573058
+            ],
+            "targetWorld": [
+              42.00944854392787,
+              -7.5518386295731945,
+              -19.994371652573058
+            ]
+          },
+          "builds": 0,
+          "pipes": 0
+        }
+      ],
+      "allWithin10Percent": true
+    }
+  },
+  {
+    "weapon": "uzi",
+    "environment": "training",
+    "exit": 0,
+    "summary": {
+      "source": "a95f671f3e01e896412b4826a3d8e5430781b75376175aa8d0e72fc91048a3e9",
+      "end": "a95f671f3e01e896412b4826a3d8e5430781b75376175aa8d0e72fc91048a3e9",
+      "sourceUnchanged": true,
+      "modulesUnchanged": true,
+      "menuWallMs": 21034,
+      "errors": [],
+      "failure": null,
+      "magazines": [
+        {
+          "pass": 0,
+          "idleMs": 17.441472868240158,
+          "fireMs": 17.12945205463122,
+          "firePercentOverIdle": -1.7889590860019067,
+          "before": {
+            "phase": "prep",
+            "day": 1,
+            "reloading": false,
+            "paused": false,
+            "warmPending": false,
+            "flightHold": false,
+            "hidden": false,
+            "focus": true,
+            "zombies": 0,
+            "heat": 0,
+            "casings": 0,
+            "projectiles": 0,
+            "training": true,
+            "lightsOff": false,
+            "targetHidden": false,
+            "targetLocal": [
+              -1.3076663519098238e-13,
+              -199.99869031556784,
+              -640.6743656147739
+            ],
+            "targetWorld": [
+              -1.3076663519098238e-13,
+              -199.99869031556784,
+              -640.6743656147739
+            ]
+          },
+          "after": {
+            "phase": "prep",
+            "day": 1,
+            "reloading": false,
+            "paused": false,
+            "warmPending": false,
+            "flightHold": false,
+            "hidden": false,
+            "focus": true,
+            "zombies": 0,
+            "heat": 0.17895192339018662,
+            "casings": 22,
+            "projectiles": 2,
+            "training": true,
+            "lightsOff": false,
+            "targetHidden": false,
+            "targetLocal": [
+              -1.3076663519098238e-13,
+              -199.99869031556784,
+              -640.6743656147739
+            ],
+            "targetWorld": [
+              -1.3076663519098238e-13,
+              -199.99869031556784,
+              -640.6743656147739
+            ]
+          },
+          "builds": 0,
+          "pipes": 0
+        },
+        {
+          "pass": 1,
+          "idleMs": 16.91348314608974,
+          "fireMs": 17.147297297176475,
+          "firePercentOverIdle": 1.3824127713208068,
+          "before": {
+            "phase": "prep",
+            "day": 1,
+            "reloading": false,
+            "paused": false,
+            "warmPending": false,
+            "flightHold": false,
+            "hidden": false,
+            "focus": true,
+            "zombies": 0,
+            "heat": 0,
+            "casings": 0,
+            "projectiles": 0,
+            "training": true,
+            "lightsOff": false,
+            "targetHidden": false,
+            "targetLocal": [
+              -1.3076663519098238e-13,
+              -199.99869031556784,
+              -640.6743656147739
+            ],
+            "targetWorld": [
+              -1.3076663519098238e-13,
+              -199.99869031556784,
+              -640.6743656147739
+            ]
+          },
+          "after": {
+            "phase": "prep",
+            "day": 1,
+            "reloading": false,
+            "paused": false,
+            "warmPending": false,
+            "flightHold": false,
+            "hidden": false,
+            "focus": true,
+            "zombies": 0,
+            "heat": 0.1803853583283679,
+            "casings": 24,
+            "projectiles": 3,
+            "training": true,
+            "lightsOff": false,
+            "targetHidden": false,
+            "targetLocal": [
+              -1.3076663519098238e-13,
+              -199.99869031556784,
+              -640.6743656147739
+            ],
+            "targetWorld": [
+              -1.3076663519098238e-13,
+              -199.99869031556784,
+              -640.6743656147739
+            ]
+          },
+          "builds": 0,
+          "pipes": 0
+        },
+        {
+          "pass": 2,
+          "idleMs": 17.246360153188196,
+          "fireMs": 16.815032679855435,
+          "firePercentOverIdle": -2.5009768409192445,
+          "before": {
+            "phase": "prep",
+            "day": 1,
+            "reloading": false,
+            "paused": false,
+            "warmPending": false,
+            "flightHold": false,
+            "hidden": false,
+            "focus": true,
+            "zombies": 0,
+            "heat": 0,
+            "casings": 0,
+            "projectiles": 0,
+            "training": true,
+            "lightsOff": false,
+            "targetHidden": false,
+            "targetLocal": [
+              -1.3076663519098238e-13,
+              -199.99869031556784,
+              -640.6743656147739
+            ],
+            "targetWorld": [
+              -1.3076663519098238e-13,
+              -199.99869031556784,
+              -640.6743656147739
+            ]
+          },
+          "after": {
+            "phase": "prep",
+            "day": 1,
+            "reloading": false,
+            "paused": false,
+            "warmPending": false,
+            "flightHold": false,
+            "hidden": false,
+            "focus": true,
+            "zombies": 0,
+            "heat": 0.17842862927913086,
+            "casings": 25,
+            "projectiles": 3,
+            "training": true,
+            "lightsOff": false,
+            "targetHidden": false,
+            "targetLocal": [
+              -1.3076663519098238e-13,
+              -199.99869031556784,
+              -640.6743656147739
+            ],
+            "targetWorld": [
+              -1.3076663519098238e-13,
+              -199.99869031556784,
+              -640.6743656147739
+            ]
+          },
+          "builds": 0,
+          "pipes": 0
+        }
+      ],
+      "allWithin10Percent": true
+    }
+  }
+]

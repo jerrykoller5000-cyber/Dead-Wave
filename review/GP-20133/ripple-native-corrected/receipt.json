@@ -1,0 +1,356 @@
+{
+  "navigation": "Canonical tools/bench early dismissForTesting; separate loader-ready and actual menu times",
+  "scope": "Review-only narrow emission guard A/B on immutable source: baseline and candidate real 30s Training phases. No FPS acceptance claim. Existing motion unchanged; no imported reference, authored pose or timing change. Matched paused four-light proof after observations; QA pins light as in accepted GP143. Outdoors parity separately checked with deterministic original-source execution.",
+  "frameSampling": "production-tick-start-wall-clock",
+  "environment": "training",
+  "sourceSha256": "ae4530128eca75ca8b3fb20765f24eba4b66442625aa2d4765067ea8a5ad167a",
+  "moduleHashes": {
+    "core/body-limits.js": "fd2562bd882ef767155cc819301ede35e68d008621dd0f683232c593d91459eb",
+    "game/viewmodel.js": "f3eb743fb200945a3bed23accbd93dfcb5cf983e616769049c357d3199b7363e",
+    "game/tp-fit.js": "d2dbf1e163f856b672a1a91d1638a949749e3bde1727bda8ceaf1f18c3b08e07",
+    "studio/fp-arms.js": "fff7808db158e072d0c5697a0a57e0c87de7fa81847558fc8670f6f7e5f190d8",
+    "world/training-ballistics.js": "eadc9d04d5fd50ad9f6f23c0a080ea2ad58485ff62e0002f1a6b1b0da4719bdc",
+    "studio/marine-carry.js": "105255868cfd0e9088e1bfc540cb4c2d4293faf5e836aac671ffe1cd8b1436ce",
+    "studio/marine-body.js": "78895440e70b0cc5a348fe5a670c789ca74fd1cf69be830f21fd1a3801cb7095",
+    "studio/marine-hand.js": "f3b92570fe48bb259917c8463a1cb09010be22580f0677a5af90f38eff11a587",
+    "game/viewmodel-fit.js": "9f52ae65294fcfa7840fcaf22b30351cf5d56c61308dbf3ce605836ae5a7e499",
+    "game/viewmodel-poses.js": "32b2d326f6c62e0aa9cee908f1099a02931f6442d7ccc06825570a4ddfe83344"
+  },
+  "rows": [
+    {
+      "candidate": false,
+      "before": {
+        "rings": 1,
+        "timer": 2.55864333575964,
+        "training": true,
+        "paused": false,
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "camera": [
+          0,
+          -190.0917269092057,
+          -648.9972956965489
+        ],
+        "targetHidden": false
+      },
+      "after": {
+        "rings": 10,
+        "timer": 1.4329833373874434,
+        "training": true,
+        "paused": false,
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "camera": [
+          0,
+          -190.0917269092057,
+          -649.0304805121658
+        ],
+        "targetHidden": false
+      }
+    },
+    {
+      "candidate": true,
+      "before": {
+        "rings": 10,
+        "timer": 1.4329833373874434,
+        "training": true,
+        "paused": false,
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "camera": [
+          0,
+          -190.0917269092057,
+          -649.0304805121658
+        ],
+        "targetHidden": false
+      },
+      "after": {
+        "rings": 10,
+        "timer": 1.4329833373874434,
+        "training": true,
+        "paused": false,
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "camera": [
+          0,
+          -190.0917269092057,
+          -649.0304805121658
+        ],
+        "targetHidden": false
+      }
+    }
+  ],
+  "readyWallMs": 12595,
+  "loadMarks": [
+    "terrain+water+sky built 0ms",
+    "rocks 54ms",
+    "trees 203ms",
+    "player+weapons+zombie types 1170ms",
+    "foliage scattered 2207ms",
+    "POIs+minimap+foliage chunks 3664ms",
+    "contact shading + rest of setup 3861ms",
+    "post + pools + compile + warm frame 9794ms",
+    "ready 9798ms"
+  ],
+  "menuWallMs": 18473,
+  "graphics": "high",
+  "observationSource": "../ripple-native/receipt.json",
+  "shots": [
+    {
+      "light": "noon",
+      "candidate": false,
+      "file": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\review\\GP-20133\\ripple-native-corrected\\noon-before.png",
+      "state": {
+        "rings": 1,
+        "timer": 1.6564973178803928,
+        "training": true,
+        "paused": false,
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "camera": [
+          0.0009834588886144745,
+          -198.57701431613535,
+          -640.5602186868683
+        ],
+        "targetHidden": false,
+        "worldTime": 0.5,
+        "rain": false
+      }
+    },
+    {
+      "light": "noon",
+      "candidate": true,
+      "file": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\review\\GP-20133\\ripple-native-corrected\\noon-after.png",
+      "state": {
+        "rings": 1,
+        "timer": 1.6564973178803928,
+        "training": true,
+        "paused": false,
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "camera": [
+          0.0009834588886144745,
+          -198.57701431613535,
+          -640.5602186868683
+        ],
+        "targetHidden": false,
+        "worldTime": 0.5,
+        "rain": false
+      }
+    },
+    {
+      "light": "overcast",
+      "candidate": false,
+      "file": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\review\\GP-20133\\ripple-native-corrected\\overcast-before.png",
+      "state": {
+        "rings": 1,
+        "timer": 1.6564973178803928,
+        "training": true,
+        "paused": false,
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "camera": [
+          0.0009834588886144745,
+          -198.57701431613535,
+          -640.5602186868683
+        ],
+        "targetHidden": false,
+        "worldTime": 0.5,
+        "rain": true
+      }
+    },
+    {
+      "light": "overcast",
+      "candidate": true,
+      "file": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\review\\GP-20133\\ripple-native-corrected\\overcast-after.png",
+      "state": {
+        "rings": 1,
+        "timer": 1.6564973178803928,
+        "training": true,
+        "paused": false,
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "camera": [
+          0.0009834588886144745,
+          -198.57701431613535,
+          -640.5602186868683
+        ],
+        "targetHidden": false,
+        "worldTime": 0.5,
+        "rain": true
+      }
+    },
+    {
+      "light": "dusk",
+      "candidate": false,
+      "file": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\review\\GP-20133\\ripple-native-corrected\\dusk-before.png",
+      "state": {
+        "rings": 1,
+        "timer": 1.6564973178803928,
+        "training": true,
+        "paused": false,
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "camera": [
+          0.0009834588886144745,
+          -198.57701431613535,
+          -640.5602186868683
+        ],
+        "targetHidden": false,
+        "worldTime": 0.71,
+        "rain": false
+      }
+    },
+    {
+      "light": "dusk",
+      "candidate": true,
+      "file": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\review\\GP-20133\\ripple-native-corrected\\dusk-after.png",
+      "state": {
+        "rings": 1,
+        "timer": 1.6564973178803928,
+        "training": true,
+        "paused": false,
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "camera": [
+          0.0009834588886144745,
+          -198.57701431613535,
+          -640.5602186868683
+        ],
+        "targetHidden": false,
+        "worldTime": 0.71,
+        "rain": false
+      }
+    },
+    {
+      "light": "night",
+      "candidate": false,
+      "file": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\review\\GP-20133\\ripple-native-corrected\\night-before.png",
+      "state": {
+        "rings": 1,
+        "timer": 1.6564973178803928,
+        "training": true,
+        "paused": false,
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "camera": [
+          0.0009834588886144745,
+          -198.57701431613535,
+          -640.5602186868683
+        ],
+        "targetHidden": false,
+        "worldTime": 0,
+        "rain": false
+      }
+    },
+    {
+      "light": "night",
+      "candidate": true,
+      "file": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\review\\GP-20133\\ripple-native-corrected\\night-after.png",
+      "state": {
+        "rings": 1,
+        "timer": 1.6564973178803928,
+        "training": true,
+        "paused": false,
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "camera": [
+          0.0009834588886144745,
+          -198.57701431613535,
+          -640.5602186868683
+        ],
+        "targetHidden": false,
+        "worldTime": 0,
+        "rain": false
+      }
+    }
+  ],
+  "endSourceSha256": "ae4530128eca75ca8b3fb20765f24eba4b66442625aa2d4765067ea8a5ad167a",
+  "console": [
+    {
+      "type": "warning",
+      "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift renderer: WebGPU."
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift warm-up: 286 shader variants compiled, 38 bodies pooled, 5 warm frames, lights visible 24/24, shadows true | post 5ms pools 5014ms compile 795ms warm frame 111ms | fire-hot:229 fire-cold:229 fire-resources:100/8 fire-pool-falling-leaves:231 fire-leaf-resources:1 fire-clean:231 load:286"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift load: terrain+water+sky built 0ms | rocks 54ms | trees 203ms | player+weapons+zombie types 1170ms | foliage scattered 2207ms | POIs+minimap+foliage chunks 3664ms | contact shading + rest of setup 3861ms | post + pools + compile + warm frame 9794ms | ready 9798ms"
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift first minute: 305 variants after 13 warm frames | fire-hot:229 fire-cold:229 fire-resources:100/8 fire-pool-falling-leaves:231 fire-leaf-resources:1 fire-clean:231 load:286 a-fresh:286 a-flash:289 a-faded:290 a-kill-generic:297 a-kill-melee:300 a-kill-explosive:302 a-fx:305 a-corpse:305"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift pre-roll: 372 shader variants compiled after 35 warm frames | fire-hot:229 fire-cold:229 fire-resources:100/8 fire-pool-falling-leaves:231 fire-leaf-resources:1 fire-clean:231 load:286 a-fresh:286 a-flash:289 a-faded:290 a-kill-generic:297 a-kill-melee:300 a-kill-explosive:302 a-fx:305 a-corpse:305 fresh:361 burning:363 flash:363 faded:363 tree-fade:363 kill-explosive:363 kill-chainsaw:363 kill-pellet:363 kill-generic:363 kill-melee:363 kill-explosive:365 kill-chainsaw:365 kill-pellet:365 kill-generic:366 kill-melee:366 kill-explosive:366 kill-chainsaw:366 kill-pellet:366 kill-generic:366 effects:371 corpses:371 corpses2:371"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift title: menu up after 35 warm frames, 372 variants | fire-hot:229 fire-cold:229 fire-resources:100/8 fire-pool-falling-leaves:231 fire-leaf-resources:1 fire-clean:231 load:286 a-fresh:286 a-flash:289 a-faded:290 a-kill-generic:297 a-kill-melee:300 a-kill-explosive:302 a-fx:305 a-corpse:305 fresh:361 burning:363 flash:363 faded:363 tree-fade:363 kill-explosive:363 kill-chainsaw:363 kill-pellet:363 kill-generic:363 kill-melee:363 kill-explosive:365 kill-chainsaw:365 kill-pellet:365 kill-generic:366 kill-melee:366 kill-explosive:366 kill-chainsaw:366 kill-pellet:366 kill-generic:366 effects:371 corpses:371 corpses2:371"
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift opening perf: {\"toMenu\":18.42,\"segments\":{\"boot\":{\"at\":0,\"seconds\":0.46,\"frames\":7,\"over50\":3,\"over100\":1,\"worst\":100},\"loading\":{\"at\":0.46,\"seconds\":17.97,\"frames\":342,\"over50\":53,\"over100\":20,\"worst\":3300},\"menu\":{\"at\":18.42,\"seconds\":7.84,\"frames\":4,\"over50\":1,\"over100\":1,\"worst\":7667}},\"videos\":{\"caracal@loading\":{\"frames\":4,\"dropped\":0}},\"loafOver100\":24,\"gpuGateWait\":0,\"order\":\"boot > loading > menu\",\"liveRollTicks\":76,\"renderer\":\"WebGPU / high\"}"
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    }
+  ],
+  "errors": []
+}

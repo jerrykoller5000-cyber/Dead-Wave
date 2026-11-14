@@ -1,0 +1,130 @@
+{
+  "when": "2026-11-14T08:19:02.682Z",
+  "status": "DRY RUN",
+  "variant": "Director07:57 exact four redundant getter-refresh deletions, no frame gate required",
+  "before": "a95f671f3e01e896412b4826a3d8e5430781b75376175aa8d0e72fc91048a3e9",
+  "after": "50dbd73ed64475e719e27395291baa403bce67cab80657362380ab0275ba5bda",
+  "bareLF": 0,
+  "parity": {
+    "timing": {
+      "original": {
+        "n": 3215,
+        "sum": 1031.5999998748302,
+        "median": 0.20000001788139343,
+        "p95": 0.699999988079071
+      },
+      "candidate": {
+        "n": 3215,
+        "sum": 934.7999992370605,
+        "median": 0.20000001788139343,
+        "p95": 0.699999988079071
+      }
+    },
+    "matrixCalls": {
+      "original": 0,
+      "candidate": 0
+    },
+    "calls": 3215,
+    "failed": [],
+    "maxLocal": 0,
+    "maxWorld": 0,
+    "maxReturn": 0
+  },
+  "results": [
+    {
+      "name": "t187",
+      "source": "a95f671f3e01e896412b4826a3d8e5430781b75376175aa8d0e72fc91048a3e9",
+      "end": "a95f671f3e01e896412b4826a3d8e5430781b75376175aa8d0e72fc91048a3e9",
+      "rows": [
+        {
+          "sparse": false,
+          "pass": 99,
+          "fail": []
+        },
+        {
+          "sparse": true,
+          "pass": 99,
+          "fail": []
+        }
+      ]
+    },
+    {
+      "name": "tcb291",
+      "source": "a95f671f3e01e896412b4826a3d8e5430781b75376175aa8d0e72fc91048a3e9",
+      "end": "a95f671f3e01e896412b4826a3d8e5430781b75376175aa8d0e72fc91048a3e9",
+      "rows": [
+        {
+          "sparse": false,
+          "pass": 3,
+          "fail": []
+        },
+        {
+          "sparse": true,
+          "pass": 3,
+          "fail": []
+        }
+      ]
+    },
+    {
+      "name": "t218",
+      "source": "a95f671f3e01e896412b4826a3d8e5430781b75376175aa8d0e72fc91048a3e9",
+      "end": "a95f671f3e01e896412b4826a3d8e5430781b75376175aa8d0e72fc91048a3e9",
+      "rows": [
+        {
+          "sparse": false,
+          "pass": 34,
+          "fail": [
+            "FAIL aa12: every visible magazine is seated or in the palm (or the clip's falling empty): in midair at u 0.52 (well 0.036, palm 0.070)"
+          ]
+        },
+        {
+          "sparse": true,
+          "pass": 34,
+          "fail": [
+            "FAIL aa12: every visible magazine is seated or in the palm (or the clip's falling empty): in midair at u 0.52 (well 0.035, palm 0.076)"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "t262",
+      "source": "a95f671f3e01e896412b4826a3d8e5430781b75376175aa8d0e72fc91048a3e9",
+      "end": "a95f671f3e01e896412b4826a3d8e5430781b75376175aa8d0e72fc91048a3e9",
+      "rows": [
+        {
+          "sparse": false,
+          "pass": 32,
+          "fail": []
+        },
+        {
+          "sparse": true,
+          "pass": 32,
+          "fail": []
+        }
+      ]
+    }
+  ],
+  "t229": {
+    "original": [
+      "FAIL pistol: no pop leaving or rejoining the grip",
+      "FAIL revolver aiming down: firing wrist nearly straight, gun in line with the forearm"
+    ],
+    "candidate": [
+      "FAIL pistol: no pop leaving or rejoining the grip",
+      "FAIL revolver aiming down: firing wrist nearly straight, gun in line with the forearm"
+    ],
+    "novel": []
+  },
+  "functions": [
+    {
+      "name": "rollForearm",
+      "oldSha": "509f2c129997766654e329e22f544892085fe5e48c1b2b4f33458225b771e679",
+      "newSha": "7602972e24aa517bf6d9ba532f252402354e230b8b539d9070a8534e5d4c0cf3"
+    },
+    {
+      "name": "holdHand",
+      "oldSha": "3ec6ed708e45a3c60b67b1a23bdb7af7ae7b959055621c5a0daa04d88662036a",
+      "newSha": "145d9a0e2180df231949cf8593f6ff15eb3090bd40ad372bb1e9fa598c559a76"
+    }
+  ]
+}

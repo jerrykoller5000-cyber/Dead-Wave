@@ -1,0 +1,389 @@
+{
+  "caveat": "Historical GP42 had a frozen hidden sun target and no real sun shadows; its zero flags are not a valid shadow-stability baseline. Both variants in this current rerun keep C2 target fix; before is old continuous follow formula, not the historical missing-shadow state. No performance timing.",
+  "rows": [
+    {
+      "view": "jerryA",
+      "light": "noon",
+      "kind": "still",
+      "region": "full",
+      "historicalMissingShadow32": 435,
+      "currentLive32": 0
+    },
+    {
+      "view": "jerryA",
+      "light": "noon",
+      "kind": "still",
+      "region": "lower-half",
+      "historicalMissingShadow32": 29,
+      "currentLive32": 0
+    },
+    {
+      "view": "jerryA",
+      "light": "noon",
+      "kind": "walk-fixed",
+      "region": "full",
+      "historicalMissingShadow32": 0,
+      "currentLive32": 0
+    },
+    {
+      "view": "jerryA",
+      "light": "noon",
+      "kind": "walk-fixed",
+      "region": "lower-half",
+      "historicalMissingShadow32": 0,
+      "currentLive32": 0
+    },
+    {
+      "view": "jerryA",
+      "light": "noon",
+      "kind": "walk-follow",
+      "region": "full",
+      "historicalMissingShadow32": 133545,
+      "currentLive32": 166538
+    },
+    {
+      "view": "jerryA",
+      "light": "noon",
+      "kind": "walk-follow",
+      "region": "lower-half",
+      "historicalMissingShadow32": 39405,
+      "currentLive32": 69225
+    },
+    {
+      "view": "jerryB",
+      "light": "noon",
+      "kind": "still",
+      "region": "full",
+      "historicalMissingShadow32": 0,
+      "currentLive32": 0
+    },
+    {
+      "view": "jerryB",
+      "light": "noon",
+      "kind": "still",
+      "region": "lower-half",
+      "historicalMissingShadow32": 0,
+      "currentLive32": 0
+    },
+    {
+      "view": "jerryB",
+      "light": "noon",
+      "kind": "walk-fixed",
+      "region": "full",
+      "historicalMissingShadow32": 0,
+      "currentLive32": 0
+    },
+    {
+      "view": "jerryB",
+      "light": "noon",
+      "kind": "walk-fixed",
+      "region": "lower-half",
+      "historicalMissingShadow32": 0,
+      "currentLive32": 0
+    },
+    {
+      "view": "jerryB",
+      "light": "noon",
+      "kind": "walk-follow",
+      "region": "full",
+      "historicalMissingShadow32": 128700,
+      "currentLive32": 162981
+    },
+    {
+      "view": "jerryB",
+      "light": "noon",
+      "kind": "walk-follow",
+      "region": "lower-half",
+      "historicalMissingShadow32": 31370,
+      "currentLive32": 60995
+    },
+    {
+      "view": "jerryA",
+      "light": "overcast",
+      "kind": "still",
+      "region": "full",
+      "historicalMissingShadow32": 0,
+      "currentLive32": 0
+    },
+    {
+      "view": "jerryA",
+      "light": "overcast",
+      "kind": "still",
+      "region": "lower-half",
+      "historicalMissingShadow32": 0,
+      "currentLive32": 0
+    },
+    {
+      "view": "jerryA",
+      "light": "overcast",
+      "kind": "walk-fixed",
+      "region": "full",
+      "historicalMissingShadow32": 0,
+      "currentLive32": 0
+    },
+    {
+      "view": "jerryA",
+      "light": "overcast",
+      "kind": "walk-fixed",
+      "region": "lower-half",
+      "historicalMissingShadow32": 0,
+      "currentLive32": 0
+    },
+    {
+      "view": "jerryA",
+      "light": "overcast",
+      "kind": "walk-follow",
+      "region": "full",
+      "historicalMissingShadow32": 127111,
+      "currentLive32": 143334
+    },
+    {
+      "view": "jerryA",
+      "light": "overcast",
+      "kind": "walk-follow",
+      "region": "lower-half",
+      "historicalMissingShadow32": 38593,
+      "currentLive32": 49053
+    },
+    {
+      "view": "jerryB",
+      "light": "overcast",
+      "kind": "still",
+      "region": "full",
+      "historicalMissingShadow32": 0,
+      "currentLive32": 0
+    },
+    {
+      "view": "jerryB",
+      "light": "overcast",
+      "kind": "still",
+      "region": "lower-half",
+      "historicalMissingShadow32": 0,
+      "currentLive32": 0
+    },
+    {
+      "view": "jerryB",
+      "light": "overcast",
+      "kind": "walk-fixed",
+      "region": "full",
+      "historicalMissingShadow32": 0,
+      "currentLive32": 0
+    },
+    {
+      "view": "jerryB",
+      "light": "overcast",
+      "kind": "walk-fixed",
+      "region": "lower-half",
+      "historicalMissingShadow32": 0,
+      "currentLive32": 0
+    },
+    {
+      "view": "jerryB",
+      "light": "overcast",
+      "kind": "walk-follow",
+      "region": "full",
+      "historicalMissingShadow32": 124109,
+      "currentLive32": 138679
+    },
+    {
+      "view": "jerryB",
+      "light": "overcast",
+      "kind": "walk-follow",
+      "region": "lower-half",
+      "historicalMissingShadow32": 30876,
+      "currentLive32": 40525
+    },
+    {
+      "view": "jerryA",
+      "light": "dusk",
+      "kind": "still",
+      "region": "full",
+      "historicalMissingShadow32": 0,
+      "currentLive32": 0
+    },
+    {
+      "view": "jerryA",
+      "light": "dusk",
+      "kind": "still",
+      "region": "lower-half",
+      "historicalMissingShadow32": 0,
+      "currentLive32": 0
+    },
+    {
+      "view": "jerryA",
+      "light": "dusk",
+      "kind": "walk-fixed",
+      "region": "full",
+      "historicalMissingShadow32": 0,
+      "currentLive32": 0
+    },
+    {
+      "view": "jerryA",
+      "light": "dusk",
+      "kind": "walk-fixed",
+      "region": "lower-half",
+      "historicalMissingShadow32": 0,
+      "currentLive32": 0
+    },
+    {
+      "view": "jerryA",
+      "light": "dusk",
+      "kind": "walk-follow",
+      "region": "full",
+      "historicalMissingShadow32": 97952,
+      "currentLive32": 116331
+    },
+    {
+      "view": "jerryA",
+      "light": "dusk",
+      "kind": "walk-follow",
+      "region": "lower-half",
+      "historicalMissingShadow32": 32568,
+      "currentLive32": 36736
+    },
+    {
+      "view": "jerryB",
+      "light": "dusk",
+      "kind": "still",
+      "region": "full",
+      "historicalMissingShadow32": 0,
+      "currentLive32": 0
+    },
+    {
+      "view": "jerryB",
+      "light": "dusk",
+      "kind": "still",
+      "region": "lower-half",
+      "historicalMissingShadow32": 0,
+      "currentLive32": 0
+    },
+    {
+      "view": "jerryB",
+      "light": "dusk",
+      "kind": "walk-fixed",
+      "region": "full",
+      "historicalMissingShadow32": 0,
+      "currentLive32": 0
+    },
+    {
+      "view": "jerryB",
+      "light": "dusk",
+      "kind": "walk-fixed",
+      "region": "lower-half",
+      "historicalMissingShadow32": 0,
+      "currentLive32": 0
+    },
+    {
+      "view": "jerryB",
+      "light": "dusk",
+      "kind": "walk-follow",
+      "region": "full",
+      "historicalMissingShadow32": 95512,
+      "currentLive32": 114184
+    },
+    {
+      "view": "jerryB",
+      "light": "dusk",
+      "kind": "walk-follow",
+      "region": "lower-half",
+      "historicalMissingShadow32": 27549,
+      "currentLive32": 31877
+    },
+    {
+      "view": "jerryA",
+      "light": "night",
+      "kind": "still",
+      "region": "full",
+      "historicalMissingShadow32": 0,
+      "currentLive32": 0
+    },
+    {
+      "view": "jerryA",
+      "light": "night",
+      "kind": "still",
+      "region": "lower-half",
+      "historicalMissingShadow32": 0,
+      "currentLive32": 0
+    },
+    {
+      "view": "jerryA",
+      "light": "night",
+      "kind": "walk-fixed",
+      "region": "full",
+      "historicalMissingShadow32": 0,
+      "currentLive32": 0
+    },
+    {
+      "view": "jerryA",
+      "light": "night",
+      "kind": "walk-fixed",
+      "region": "lower-half",
+      "historicalMissingShadow32": 0,
+      "currentLive32": 0
+    },
+    {
+      "view": "jerryA",
+      "light": "night",
+      "kind": "walk-follow",
+      "region": "full",
+      "historicalMissingShadow32": 113962,
+      "currentLive32": 120790
+    },
+    {
+      "view": "jerryA",
+      "light": "night",
+      "kind": "walk-follow",
+      "region": "lower-half",
+      "historicalMissingShadow32": 35445,
+      "currentLive32": 37583
+    },
+    {
+      "view": "jerryB",
+      "light": "night",
+      "kind": "still",
+      "region": "full",
+      "historicalMissingShadow32": 0,
+      "currentLive32": 0
+    },
+    {
+      "view": "jerryB",
+      "light": "night",
+      "kind": "still",
+      "region": "lower-half",
+      "historicalMissingShadow32": 0,
+      "currentLive32": 0
+    },
+    {
+      "view": "jerryB",
+      "light": "night",
+      "kind": "walk-fixed",
+      "region": "full",
+      "historicalMissingShadow32": 0,
+      "currentLive32": 0
+    },
+    {
+      "view": "jerryB",
+      "light": "night",
+      "kind": "walk-fixed",
+      "region": "lower-half",
+      "historicalMissingShadow32": 0,
+      "currentLive32": 0
+    },
+    {
+      "view": "jerryB",
+      "light": "night",
+      "kind": "walk-follow",
+      "region": "full",
+      "historicalMissingShadow32": 111723,
+      "currentLive32": 118711
+    },
+    {
+      "view": "jerryB",
+      "light": "night",
+      "kind": "walk-follow",
+      "region": "lower-half",
+      "historicalMissingShadow32": 29481,
+      "currentLive32": 31612
+    }
+  ]
+}

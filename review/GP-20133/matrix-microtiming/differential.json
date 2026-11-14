@@ -1,0 +1,484 @@
+{
+  "navigation": "Canonical tools/bench early dismissForTesting; separate loader-ready and actual menu times",
+  "scope": "REVIEW ONLY differential baseline/sparse intermediate propagation; preserves original boundary result. Double solves/counter increments; NOT timing acceptance.",
+  "frameSampling": "production-tick-start-wall-clock",
+  "environment": "outdoor",
+  "sourceSha256": "798ae744e736f203dc587b48ee4e4e588497ec52261fca18321f72a0c57e710c",
+  "moduleHashes": {
+    "core/body-limits.js": "fd2562bd882ef767155cc819301ede35e68d008621dd0f683232c593d91459eb",
+    "game/viewmodel.js": "f3eb743fb200945a3bed23accbd93dfcb5cf983e616769049c357d3199b7363e",
+    "game/tp-fit.js": "d2dbf1e163f856b672a1a91d1638a949749e3bde1727bda8ceaf1f18c3b08e07",
+    "studio/fp-arms.js": "fff7808db158e072d0c5697a0a57e0c87de7fa81847558fc8670f6f7e5f190d8",
+    "world/training-ballistics.js": "eadc9d04d5fd50ad9f6f23c0a080ea2ad58485ff62e0002f1a6b1b0da4719bdc"
+  },
+  "rows": [
+    {
+      "weapon": "pistol",
+      "setup": {
+        "weapon": "pistol",
+        "pair": true,
+        "ammo": 24,
+        "magSize": 12,
+        "auto": true,
+        "loadout": {
+          "primary": [
+            null,
+            null
+          ],
+          "secondary": [
+            null,
+            "pistol:second"
+          ],
+          "hip": "pistol:base"
+        },
+        "position": [
+          42,
+          -7.5467963358017105,
+          -20
+        ]
+      },
+      "parity": {
+        "timing": {
+          "original": {
+            "n": 484,
+            "sum": 559.4999999403954,
+            "median": 1,
+            "p95": 2.0999999940395355
+          },
+          "candidate": {
+            "n": 484,
+            "sum": 233.2999999821186,
+            "median": 0.4000000059604645,
+            "p95": 0.699999988079071
+          }
+        },
+        "matrixCalls": {
+          "original": 1909864,
+          "candidate": 236918
+        },
+        "calls": 484,
+        "failed": [],
+        "maxLocal": 0,
+        "maxWorld": 0,
+        "maxReturn": 0
+      }
+    },
+    {
+      "weapon": "ak",
+      "setup": {
+        "weapon": "ak",
+        "pair": false,
+        "ammo": 30,
+        "magSize": 30,
+        "auto": true,
+        "loadout": {
+          "primary": [
+            "ak",
+            null
+          ],
+          "secondary": [
+            null,
+            null
+          ],
+          "hip": "pistol:base"
+        },
+        "position": [
+          42,
+          -7.5467963358017105,
+          -20
+        ]
+      },
+      "parity": {
+        "timing": {
+          "original": {
+            "n": 978,
+            "sum": 992.0999998450279,
+            "median": 0.9000000059604645,
+            "p95": 2.0999999940395355
+          },
+          "candidate": {
+            "n": 978,
+            "sum": 362.4000002145767,
+            "median": 0.30000001192092896,
+            "p95": 0.699999988079071
+          }
+        },
+        "matrixCalls": {
+          "original": 3548070,
+          "candidate": 441946
+        },
+        "calls": 978,
+        "failed": [],
+        "maxLocal": 0,
+        "maxWorld": 0,
+        "maxReturn": 0
+      }
+    },
+    {
+      "weapon": "uzi",
+      "setup": {
+        "weapon": "uzi",
+        "pair": false,
+        "ammo": 32,
+        "magSize": 32,
+        "auto": true,
+        "loadout": {
+          "primary": [
+            null,
+            null
+          ],
+          "secondary": [
+            "uzi",
+            null
+          ],
+          "hip": "pistol:base"
+        },
+        "position": [
+          42,
+          -7.5467963358017105,
+          -20
+        ]
+      },
+      "parity": {
+        "timing": {
+          "original": {
+            "n": 1442,
+            "sum": 1372.4999996125698,
+            "median": 0.800000011920929,
+            "p95": 2
+          },
+          "candidate": {
+            "n": 1442,
+            "sum": 490.8000006079674,
+            "median": 0.30000001192092896,
+            "p95": 0.699999988079071
+          }
+        },
+        "matrixCalls": {
+          "original": 5182006,
+          "candidate": 659288
+        },
+        "calls": 1442,
+        "failed": [],
+        "maxLocal": 0,
+        "maxWorld": 0,
+        "maxReturn": 0
+      }
+    },
+    {
+      "weapon": "minigun",
+      "setup": {
+        "weapon": "minigun",
+        "pair": false,
+        "ammo": 300,
+        "magSize": 300,
+        "auto": true,
+        "loadout": {
+          "primary": [
+            "minigun",
+            null
+          ],
+          "secondary": [
+            null,
+            null
+          ],
+          "hip": "pistol:base"
+        },
+        "position": [
+          42,
+          -7.5467963358017105,
+          -20
+        ]
+      },
+      "parity": {
+        "timing": {
+          "original": {
+            "n": 1826,
+            "sum": 1735.4999996125698,
+            "median": 0.800000011920929,
+            "p95": 2
+          },
+          "candidate": {
+            "n": 1826,
+            "sum": 591.000000834465,
+            "median": 0.29999998211860657,
+            "p95": 0.6000000238418579
+          }
+        },
+        "matrixCalls": {
+          "original": 6568973,
+          "candidate": 834212
+        },
+        "calls": 1826,
+        "failed": [],
+        "maxLocal": 0,
+        "maxWorld": 0,
+        "maxReturn": 0
+      }
+    },
+    {
+      "weapon": "shotgun",
+      "setup": {
+        "weapon": "shotgun",
+        "pair": false,
+        "ammo": 8,
+        "magSize": 8,
+        "auto": false,
+        "loadout": {
+          "primary": [
+            "shotgun",
+            null
+          ],
+          "secondary": [
+            null,
+            null
+          ],
+          "hip": "pistol:base"
+        },
+        "position": [
+          42,
+          -7.5467963358017105,
+          -20
+        ]
+      },
+      "parity": {
+        "timing": {
+          "original": {
+            "n": 2240,
+            "sum": 2002.8999993801117,
+            "median": 0.7000000178813934,
+            "p95": 2
+          },
+          "candidate": {
+            "n": 2240,
+            "sum": 672.3000012040138,
+            "median": 0.29999998211860657,
+            "p95": 0.6000000238418579
+          }
+        },
+        "matrixCalls": {
+          "original": 7693556,
+          "candidate": 1001714
+        },
+        "calls": 2240,
+        "failed": [],
+        "maxLocal": 0,
+        "maxWorld": 0,
+        "maxReturn": 0
+      }
+    },
+    {
+      "weapon": "sniper",
+      "setup": {
+        "weapon": "sniper",
+        "pair": false,
+        "ammo": 5,
+        "magSize": 5,
+        "auto": false,
+        "loadout": {
+          "primary": [
+            "sniper",
+            null
+          ],
+          "secondary": [
+            null,
+            null
+          ],
+          "hip": "pistol:base"
+        },
+        "position": [
+          42,
+          -7.5467963358017105,
+          -20
+        ]
+      },
+      "parity": {
+        "timing": {
+          "original": {
+            "n": 2668,
+            "sum": 2397.199999600649,
+            "median": 0.699999988079071,
+            "p95": 2
+          },
+          "candidate": {
+            "n": 2668,
+            "sum": 779.8000008165836,
+            "median": 0.20000001788139343,
+            "p95": 0.6000000238418579
+          }
+        },
+        "matrixCalls": {
+          "original": 9112276,
+          "candidate": 1178400
+        },
+        "calls": 2668,
+        "failed": [],
+        "maxLocal": 0,
+        "maxWorld": 0,
+        "maxReturn": 0
+      }
+    },
+    {
+      "weapon": "revolver",
+      "setup": {
+        "weapon": "revolver",
+        "pair": false,
+        "ammo": 6,
+        "magSize": 6,
+        "auto": false,
+        "loadout": {
+          "primary": [
+            null,
+            null
+          ],
+          "secondary": [
+            "revolver",
+            null
+          ],
+          "hip": "pistol:base"
+        },
+        "position": [
+          42,
+          -7.5467963358017105,
+          -20
+        ]
+      },
+      "parity": {
+        "timing": {
+          "original": {
+            "n": 3008,
+            "sum": 2716.9999996721745,
+            "median": 0.699999988079071,
+            "p95": 2.0999999940395355
+          },
+          "candidate": {
+            "n": 3008,
+            "sum": 886.0000007748604,
+            "median": 0.20000001788139343,
+            "p95": 0.6000000238418579
+          }
+        },
+        "matrixCalls": {
+          "original": 10125790,
+          "candidate": 1335044
+        },
+        "calls": 3008,
+        "failed": [],
+        "maxLocal": 0,
+        "maxWorld": 0,
+        "maxReturn": 0
+      }
+    },
+    {
+      "weapon": "chainsaw",
+      "setup": {
+        "weapon": "chainsaw",
+        "pair": false,
+        "ammo": null,
+        "magSize": null,
+        "auto": true,
+        "loadout": {
+          "primary": [
+            "chainsaw",
+            null
+          ],
+          "secondary": [
+            null,
+            null
+          ],
+          "hip": "pistol:base"
+        },
+        "position": [
+          42,
+          -7.5467963358017105,
+          -20
+        ]
+      },
+      "parity": {
+        "timing": {
+          "original": {
+            "n": 3180,
+            "sum": 2953.0999999940395,
+            "median": 0.699999988079071,
+            "p95": 2.199999988079071
+          },
+          "candidate": {
+            "n": 3180,
+            "sum": 965.7000006735325,
+            "median": 0.20000001788139343,
+            "p95": 0.699999988079071
+          }
+        },
+        "matrixCalls": {
+          "original": 10683597,
+          "candidate": 1422355
+        },
+        "calls": 3180,
+        "failed": [],
+        "maxLocal": 0,
+        "maxWorld": 0,
+        "maxReturn": 0
+      }
+    }
+  ],
+  "readyWallMs": 12808,
+  "loadMarks": [
+    "terrain+water+sky built 0ms",
+    "rocks 55ms",
+    "trees 223ms",
+    "player+weapons+zombie types 1225ms",
+    "foliage scattered 2273ms",
+    "POIs+minimap+foliage chunks 3798ms",
+    "contact shading + rest of setup 4003ms",
+    "post + pools + compile + warm frame 10004ms",
+    "ready 10007ms"
+  ],
+  "menuWallMs": 18808,
+  "graphics": "high",
+  "instrumentation": {
+    "prof": false,
+    "gpuTimestamps": false
+  },
+  "reloads": [
+    {
+      "weapon": "pistol",
+      "started": true,
+      "ammo": 3
+    },
+    {
+      "weapon": "ak",
+      "started": true,
+      "ammo": 22
+    },
+    {
+      "weapon": "uzi",
+      "started": true,
+      "ammo": 21
+    },
+    {
+      "weapon": "minigun",
+      "started": true,
+      "ammo": 286
+    },
+    {
+      "weapon": "shotgun",
+      "started": true,
+      "ammo": 7
+    },
+    {
+      "weapon": "sniper",
+      "started": true,
+      "ammo": 4
+    },
+    {
+      "weapon": "revolver",
+      "started": true,
+      "ammo": 4
+    },
+    {
+      "weapon": "chainsaw",
+      "started": false,
+      "ammo": null
+    }
+  ]
+}

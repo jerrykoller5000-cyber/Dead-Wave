@@ -1,0 +1,24 @@
+{
+  "source": "ae4530128eca75ca8b3fb20765f24eba4b66442625aa2d4765067ea8a5ad167a",
+  "cases": [
+    {
+      "outdoor": true,
+      "silenced": false,
+      "events": 4016,
+      "equal": true
+    },
+    {
+      "outdoor": true,
+      "silenced": true,
+      "events": 4000,
+      "equal": true
+    },
+    {
+      "training": true,
+      "baselineEvents": 4016,
+      "candidateEvents": 3000,
+      "otherServicesUnchanged": true,
+      "timerPaused": true
+    }
+  ]
+}

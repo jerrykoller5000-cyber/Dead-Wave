@@ -1,0 +1,21 @@
+{
+  "file": "vendor/three/three.core.js",
+  "sha256": "184ab436f412615e5dc3e07993d9c76c53038ba6758d2711fb0453a0532091f0",
+  "methods": [
+    {
+      "name": "getWorldQuaternion( target )",
+      "text": "getWorldQuaternion( target ) {\n\n\t\tthis.updateWorldMatrix( true, false );\n\n\t\tthis.matrixWorld.decompose( _position$3, target, _scale$2 );\n\n\t\treturn target;\n\n\t}"
+    },
+    {
+      "name": "localToWorld( vector )",
+      "text": "localToWorld( vector ) {\n\n\t\tthis.updateWorldMatrix( true, false );\n\n\t\treturn vector.applyMatrix4( this.matrixWorld );\n\n\t}"
+    }
+  ],
+  "sites": [
+    "initial wrist refresh immediately before wrist world quaternion getter",
+    "arm refresh before roll begins with elbow world quaternion getter",
+    "optional false elbow refresh immediately before caller elbow world quaternion getter",
+    "wrist refresh immediately before localToWorld"
+  ],
+  "scope": "Source inspection only; not runtime parity or approval"
+}

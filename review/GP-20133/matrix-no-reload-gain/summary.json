@@ -1,0 +1,402 @@
+{
+  "scope": "REVISED proposal sparse outside reload only, original traversal during reload. Director landing gate: warmed BOTH matrix builds first with two complete pair magazines each, then ABBA x3 twelve full magazines in Training with real sun shadows. Profiler and GPU queries off, no screenshots before/between timing phases, original shot solves and all effects intact. Warm results retained separately. This is an attributable candidate comparison, not full GP33 acceptance.",
+  "source": "070e4ab5b8394d9623bc5376254c904849275cc0d14205a48d43a1fead403151",
+  "end": "070e4ab5b8394d9623bc5376254c904849275cc0d14205a48d43a1fead403151",
+  "sourceUnchanged": true,
+  "modulesUnchanged": true,
+  "errors": [],
+  "blocks": [
+    {
+      "block": 0,
+      "originalFire": 18.822550504714854,
+      "candidateFire": 22.474801587088713,
+      "gainPercent": -19.403592948038618,
+      "originalIdle": 17.286229363219583,
+      "candidateIdle": 17.980697544702632
+    },
+    {
+      "block": 1,
+      "originalFire": 20.97317460349628,
+      "candidateFire": 19.914299183076167,
+      "gainPercent": 5.048713132076799,
+      "originalIdle": 17.38903825577406,
+      "candidateIdle": 17.452671007333606
+    },
+    {
+      "block": 2,
+      "originalFire": 19.20501835987136,
+      "candidateFire": 18.39643939400863,
+      "gainPercent": 4.21024833567587,
+      "originalIdle": 17.283575581395873,
+      "candidateIdle": 17.269892836148625
+    }
+  ],
+  "allPhaseMean": {
+    "originalFire": 19.66691448936083,
+    "candidateFire": 20.26184672139117,
+    "gainPercent": -3.0250410269093253
+  },
+  "rows": [
+    {
+      "pass": 0,
+      "sparse": false,
+      "fire": false,
+      "mean": 16.983396226392603,
+      "frames": 265,
+      "elapsed": 4500.699999988079,
+      "ammo": [
+        24,
+        24
+      ],
+      "reloading": false,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 0,
+      "sparse": false,
+      "fire": true,
+      "mean": 19.529545454139058,
+      "frames": 44,
+      "elapsed": 860.4000000059605,
+      "ammo": [
+        24,
+        0
+      ],
+      "reloading": false,
+      "builds": 2,
+      "pipes": 1
+    },
+    {
+      "pass": 1,
+      "sparse": true,
+      "fire": false,
+      "mean": 17.587109375046566,
+      "frames": 256,
+      "elapsed": 4502.5,
+      "ammo": [
+        24,
+        24
+      ],
+      "reloading": false,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 1,
+      "sparse": true,
+      "fire": true,
+      "mean": 20.685714285288537,
+      "frames": 42,
+      "elapsed": 869.4000000059605,
+      "ammo": [
+        24,
+        0
+      ],
+      "reloading": false,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 2,
+      "sparse": true,
+      "fire": false,
+      "mean": 18.3742857143587,
+      "frames": 245,
+      "elapsed": 4501.800000011921,
+      "ammo": [
+        24,
+        24
+      ],
+      "reloading": false,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 2,
+      "sparse": true,
+      "fire": true,
+      "mean": 24.26388888888889,
+      "frames": 36,
+      "elapsed": 873.7000000178814,
+      "ammo": [
+        24,
+        0
+      ],
+      "reloading": false,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 3,
+      "sparse": false,
+      "fire": false,
+      "mean": 17.589062500046566,
+      "frames": 256,
+      "elapsed": 4503,
+      "ammo": [
+        24,
+        24
+      ],
+      "reloading": false,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 3,
+      "sparse": false,
+      "fire": true,
+      "mean": 18.115555555290648,
+      "frames": 45,
+      "elapsed": 815.3000000119209,
+      "ammo": [
+        24,
+        0
+      ],
+      "reloading": false,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 4,
+      "sparse": false,
+      "fire": false,
+      "mean": 17.863095238095237,
+      "frames": 252,
+      "elapsed": 4501.5999999940395,
+      "ammo": [
+        24,
+        24
+      ],
+      "reloading": false,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 4,
+      "sparse": false,
+      "fire": true,
+      "mean": 17.497777777910233,
+      "frames": 45,
+      "elapsed": 787.5999999940395,
+      "ammo": [
+        24,
+        0
+      ],
+      "reloading": false,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 5,
+      "sparse": true,
+      "fire": false,
+      "mean": 17.233969465694354,
+      "frames": 262,
+      "elapsed": 4515.4000000059605,
+      "ammo": [
+        24,
+        24
+      ],
+      "reloading": false,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 5,
+      "sparse": true,
+      "fire": true,
+      "mean": 21.2216216221049,
+      "frames": 37,
+      "elapsed": 785.5,
+      "ammo": [
+        24,
+        0
+      ],
+      "reloading": false,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 6,
+      "sparse": true,
+      "fire": false,
+      "mean": 17.671372548972858,
+      "frames": 255,
+      "elapsed": 4508.5999999940395,
+      "ammo": [
+        24,
+        24
+      ],
+      "reloading": false,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 6,
+      "sparse": true,
+      "fire": true,
+      "mean": 18.60697674404743,
+      "frames": 43,
+      "elapsed": 800.2000000178814,
+      "ammo": [
+        24,
+        0
+      ],
+      "reloading": false,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 7,
+      "sparse": false,
+      "fire": false,
+      "mean": 16.914981273452888,
+      "frames": 267,
+      "elapsed": 4516.4000000059605,
+      "ammo": [
+        24,
+        24
+      ],
+      "reloading": false,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 7,
+      "sparse": false,
+      "fire": true,
+      "mean": 24.448571429082325,
+      "frames": 35,
+      "elapsed": 855.8000000119209,
+      "ammo": [
+        24,
+        0
+      ],
+      "reloading": false,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 8,
+      "sparse": false,
+      "fire": false,
+      "mean": 17.112499999954846,
+      "frames": 264,
+      "elapsed": 4517.799999982119,
+      "ammo": [
+        24,
+        24
+      ],
+      "reloading": false,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 8,
+      "sparse": false,
+      "fire": true,
+      "mean": 20.626315789787395,
+      "frames": 38,
+      "elapsed": 784,
+      "ammo": [
+        24,
+        0
+      ],
+      "reloading": false,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 9,
+      "sparse": true,
+      "fire": false,
+      "mean": 17.36192307690015,
+      "frames": 260,
+      "elapsed": 4514.299999982119,
+      "ammo": [
+        24,
+        24
+      ],
+      "reloading": false,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 9,
+      "sparse": true,
+      "fire": true,
+      "mean": 17.51333333320088,
+      "frames": 45,
+      "elapsed": 788.3000000119209,
+      "ammo": [
+        24,
+        0
+      ],
+      "reloading": false,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 10,
+      "sparse": true,
+      "fire": false,
+      "mean": 17.177862595397098,
+      "frames": 262,
+      "elapsed": 4501.0999999940395,
+      "ammo": [
+        24,
+        24
+      ],
+      "reloading": false,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 10,
+      "sparse": true,
+      "fire": true,
+      "mean": 19.279545454816386,
+      "frames": 44,
+      "elapsed": 848.3000000119209,
+      "ammo": [
+        24,
+        0
+      ],
+      "reloading": false,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 11,
+      "sparse": false,
+      "fire": false,
+      "mean": 17.454651162836903,
+      "frames": 258,
+      "elapsed": 4503.4000000059605,
+      "ammo": [
+        24,
+        24
+      ],
+      "reloading": false,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 11,
+      "sparse": false,
+      "fire": true,
+      "mean": 17.783720929955326,
+      "frames": 43,
+      "elapsed": 764.7999999821186,
+      "ammo": [
+        24,
+        0
+      ],
+      "reloading": false,
+      "builds": 0,
+      "pipes": 0
+    }
+  ],
+  "warmMagazines": 4
+}

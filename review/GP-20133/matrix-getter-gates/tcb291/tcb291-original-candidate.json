@@ -1,0 +1,117 @@
+{
+  "navigation": "Canonical tools/bench early dismissForTesting; separate loader-ready and actual menu times",
+  "scope": "Original unchanged native targeted regression, fresh page per variant, one browser/lease. Immutable index and first-read JS module snapshots shared between original/candidate; outputs/failures retained, no test weakening or FPS claim.",
+  "frameSampling": "production-tick-start-wall-clock",
+  "environment": "training",
+  "sourceSha256": "a95f671f3e01e896412b4826a3d8e5430781b75376175aa8d0e72fc91048a3e9",
+  "moduleHashes": {
+    "core/body-limits.js": "fd2562bd882ef767155cc819301ede35e68d008621dd0f683232c593d91459eb",
+    "game/viewmodel.js": "f3eb743fb200945a3bed23accbd93dfcb5cf983e616769049c357d3199b7363e",
+    "game/tp-fit.js": "d2dbf1e163f856b672a1a91d1638a949749e3bde1727bda8ceaf1f18c3b08e07",
+    "studio/fp-arms.js": "fff7808db158e072d0c5697a0a57e0c87de7fa81847558fc8670f6f7e5f190d8",
+    "world/training-ballistics.js": "eadc9d04d5fd50ad9f6f23c0a080ea2ad58485ff62e0002f1a6b1b0da4719bdc",
+    "studio/marine-carry.js": "105255868cfd0e9088e1bfc540cb4c2d4293faf5e836aac671ffe1cd8b1436ce",
+    "studio/marine-body.js": "78895440e70b0cc5a348fe5a670c789ca74fd1cf69be830f21fd1a3801cb7095",
+    "studio/marine-hand.js": "f3b92570fe48bb259917c8463a1cb09010be22580f0677a5af90f38eff11a587",
+    "game/viewmodel-fit.js": "9f52ae65294fcfa7840fcaf22b30351cf5d56c61308dbf3ce605836ae5a7e499",
+    "game/viewmodel-poses.js": "32b2d326f6c62e0aa9cee908f1099a02931f6442d7ccc06825570a4ddfe83344"
+  },
+  "rows": [
+    {
+      "sparse": false,
+      "completed": true,
+      "done": true,
+      "output": "INFO the arm IK held the shoulder 37817 times (12664 with no swing inside the table: the least bad kept)\nINFO held after the pose: {\"ankle\":121,\"shoulder\":600,\"gunKept\":564}\nPASS 661 body samples over 11 hands and gun classes\nPASS every joint inside the table\nINFO worst: launcher jumping shoulderR 0 deg past (back 4, across 43, turn -90)\nINFO worst: sniper jumping shoulderR 0 deg past (back 5, across 47, turn -90)\nINFO worst: aa12 sprinting shoulderR 0 deg past (back 4, across 43, turn -90)\nINFO worst: m4 walking shoulderR 0 deg past (back 5, across 45, turn -90)\nINFO worst: hands blade shoulderL 0 deg past (back -34, across 50, turn 90)\nPASS no page errors",
+      "errors": [],
+      "console": [
+        {
+          "type": "warning",
+          "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift renderer: WebGPU."
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift warm-up: 286 shader variants compiled, 38 bodies pooled, 5 warm frames, lights visible 24/24, shadows true | post 4ms pools 5165ms compile 828ms warm frame 112ms | fire-hot:229 fire-cold:229 fire-resources:100/8 fire-pool-falling-leaves:231 fire-leaf-resources:1 fire-clean:231 load:286"
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift load: terrain+water+sky built 0ms | rocks 54ms | trees 220ms | player+weapons+zombie types 1241ms | foliage scattered 2318ms | POIs+minimap+foliage chunks 3826ms | contact shading + rest of setup 4010ms | post + pools + compile + warm frame 10126ms | ready 10131ms"
+        },
+        {
+          "type": "warning",
+          "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift first minute: 305 variants after 13 warm frames | fire-hot:229 fire-cold:229 fire-resources:100/8 fire-pool-falling-leaves:231 fire-leaf-resources:1 fire-clean:231 load:286 a-fresh:286 a-flash:289 a-faded:290 a-kill-generic:297 a-kill-melee:300 a-kill-explosive:302 a-fx:305 a-corpse:305"
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift pre-roll: 372 shader variants compiled after 35 warm frames | fire-hot:229 fire-cold:229 fire-resources:100/8 fire-pool-falling-leaves:231 fire-leaf-resources:1 fire-clean:231 load:286 a-fresh:286 a-flash:289 a-faded:290 a-kill-generic:297 a-kill-melee:300 a-kill-explosive:302 a-fx:305 a-corpse:305 fresh:361 burning:363 flash:363 faded:363 tree-fade:363 kill-explosive:363 kill-chainsaw:363 kill-pellet:363 kill-generic:363 kill-melee:363 kill-explosive:365 kill-chainsaw:365 kill-pellet:365 kill-generic:366 kill-melee:366 kill-explosive:366 kill-chainsaw:366 kill-pellet:366 kill-generic:366 effects:371 corpses:371 corpses2:371"
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift title: menu up after 35 warm frames, 373 variants | fire-hot:229 fire-cold:229 fire-resources:100/8 fire-pool-falling-leaves:231 fire-leaf-resources:1 fire-clean:231 load:286 a-fresh:286 a-flash:289 a-faded:290 a-kill-generic:297 a-kill-melee:300 a-kill-explosive:302 a-fx:305 a-corpse:305 fresh:361 burning:363 flash:363 faded:363 tree-fade:363 kill-explosive:363 kill-chainsaw:363 kill-pellet:363 kill-generic:363 kill-melee:363 kill-explosive:365 kill-chainsaw:365 kill-pellet:365 kill-generic:366 kill-melee:366 kill-explosive:366 kill-chainsaw:366 kill-pellet:366 kill-generic:366 effects:371 corpses:371 corpses2:371"
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift opening perf: {\"toMenu\":18.8,\"segments\":{\"boot\":{\"at\":0,\"seconds\":0.46,\"frames\":5,\"over50\":3,\"over100\":1,\"worst\":117},\"loading\":{\"at\":0.46,\"seconds\":18.34,\"frames\":340,\"over50\":47,\"over100\":20,\"worst\":3417},\"menu\":{\"at\":18.8,\"seconds\":6.01,\"frames\":305,\"over50\":4,\"over100\":1,\"worst\":433}},\"videos\":{\"caracal@loading\":{\"frames\":4,\"dropped\":0}},\"loafOver100\":28,\"gpuGateWait\":0,\"order\":\"boot > loading > menu\",\"liveRollTicks\":75,\"renderer\":\"WebGPU / high\"}"
+        }
+      ],
+      "pass": 3,
+      "fail": []
+    },
+    {
+      "sparse": true,
+      "completed": true,
+      "done": true,
+      "output": "INFO the arm IK held the shoulder 38107 times (12764 with no swing inside the table: the least bad kept)\nINFO held after the pose: {\"ankle\":113,\"shoulder\":596,\"gunKept\":557}\nPASS 680 body samples over 11 hands and gun classes\nPASS every joint inside the table\nINFO worst: sniper sprinting shoulderR 0 deg past (back 8, across 48, turn -90)\nINFO worst: m4 sprinting shoulderR 0 deg past (back 7, across 44, turn -90)\nINFO worst: launcher walking shoulderR 0 deg past (back 6, across 45, turn -90)\nINFO worst: aa12 standing shoulderR 0 deg past (back 5, across 50, turn -85)\nINFO worst: pistol blade shoulderL 0 deg past (back -18, across 50, turn -90)\nPASS no page errors",
+      "errors": [],
+      "console": [
+        {
+          "type": "warning",
+          "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift renderer: WebGPU."
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift warm-up: 282 shader variants compiled, 38 bodies pooled, 5 warm frames, lights visible 24/24, shadows true | post 6ms pools 6873ms compile 938ms warm frame 142ms | fire-hot:227 fire-cold:227 fire-resources:100/8 fire-pool-falling-leaves:229 fire-leaf-resources:1 fire-clean:229 load:282"
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift load: terrain+water+sky built 0ms | rocks 70ms | trees 257ms | player+weapons+zombie types 1428ms | foliage scattered 2872ms | POIs+minimap+foliage chunks 4830ms | contact shading + rest of setup 5056ms | post + pools + compile + warm frame 13024ms | ready 13028ms"
+        },
+        {
+          "type": "warning",
+          "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift first minute: 301 variants after 13 warm frames | fire-hot:227 fire-cold:227 fire-resources:100/8 fire-pool-falling-leaves:229 fire-leaf-resources:1 fire-clean:229 load:282 a-fresh:282 a-flash:285 a-faded:286 a-kill-generic:293 a-kill-melee:296 a-kill-explosive:298 a-fx:301 a-corpse:301"
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift pre-roll: 370 shader variants compiled after 35 warm frames | fire-hot:227 fire-cold:227 fire-resources:100/8 fire-pool-falling-leaves:229 fire-leaf-resources:1 fire-clean:229 load:282 a-fresh:282 a-flash:285 a-faded:286 a-kill-generic:293 a-kill-melee:296 a-kill-explosive:298 a-fx:301 a-corpse:301 fresh:359 burning:361 flash:361 faded:361 tree-fade:361 kill-explosive:361 kill-chainsaw:361 kill-pellet:361 kill-generic:361 kill-melee:361 kill-explosive:363 kill-chainsaw:363 kill-pellet:363 kill-generic:364 kill-melee:364 kill-explosive:364 kill-chainsaw:364 kill-pellet:364 kill-generic:364 effects:369 corpses:369 corpses2:369"
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift title: menu up after 35 warm frames, 370 variants | fire-hot:227 fire-cold:227 fire-resources:100/8 fire-pool-falling-leaves:229 fire-leaf-resources:1 fire-clean:229 load:282 a-fresh:282 a-flash:285 a-faded:286 a-kill-generic:293 a-kill-melee:296 a-kill-explosive:298 a-fx:301 a-corpse:301 fresh:359 burning:361 flash:361 faded:361 tree-fade:361 kill-explosive:361 kill-chainsaw:361 kill-pellet:361 kill-generic:361 kill-melee:361 kill-explosive:363 kill-chainsaw:363 kill-pellet:363 kill-generic:364 kill-melee:364 kill-explosive:364 kill-chainsaw:364 kill-pellet:364 kill-generic:364 effects:369 corpses:369 corpses2:369"
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift opening perf: {\"toMenu\":22.7,\"segments\":{\"boot\":{\"at\":0,\"seconds\":0.74,\"frames\":16,\"over50\":1,\"over100\":0,\"worst\":50},\"loading\":{\"at\":0.74,\"seconds\":21.96,\"frames\":363,\"over50\":45,\"over100\":25,\"worst\":4517},\"menu\":{\"at\":22.7,\"seconds\":6.03,\"frames\":309,\"over50\":5,\"over100\":3,\"worst\":383}},\"videos\":{\"caracal@boot\":{\"frames\":5,\"dropped\":0}},\"loafOver100\":30,\"gpuGateWait\":0,\"order\":\"boot > loading > menu\",\"liveRollTicks\":76,\"renderer\":\"WebGPU / high\"}"
+        }
+      ],
+      "pass": 3,
+      "fail": []
+    }
+  ],
+  "testName": "tcb291",
+  "testHash": "fa57d51955f00d1be8f32c7999c72550389681f65268b7a8ef2bc8681770faab"
+}

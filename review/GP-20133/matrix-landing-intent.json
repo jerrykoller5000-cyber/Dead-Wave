@@ -1,0 +1,110 @@
+{
+  "when": "2026-11-14T07:09:27.353Z",
+  "status": "intent-only until verified",
+  "variant": "V1 exact original proposal, Director final order",
+  "before": "070e4ab5b8394d9623bc5376254c904849275cc0d14205a48d43a1fead403151",
+  "after": "dc9f65367d6650b4384cf13d5e62ccb342b0481d9a40a7b27a2fdeb452068444",
+  "bareLFBefore": 0,
+  "bareLFAfter": 0,
+  "functions": [
+    {
+      "name": "rollForearm",
+      "oldSha": "0c519f9aae24481da64bf8dc90a15be57795981dc87c419b788bc565847cebae",
+      "newSha": "509f2c129997766654e329e22f544892085fe5e48c1b2b4f33458225b771e679"
+    },
+    {
+      "name": "holdHand",
+      "oldSha": "c159c3016b2379db62bea9561cc3d3168c812d7d2125a528887272e813d97c8f",
+      "newSha": "3ec6ed708e45a3c60b67b1a23bdb7af7ae7b959055621c5a0daa04d88662036a"
+    }
+  ],
+  "checks": [
+    {
+      "name": "t187",
+      "rows": [
+        {
+          "sparse": false,
+          "pass": 99,
+          "fail": []
+        },
+        {
+          "sparse": true,
+          "pass": 99,
+          "fail": []
+        }
+      ]
+    },
+    {
+      "name": "tcb291",
+      "rows": [
+        {
+          "sparse": false,
+          "pass": 3,
+          "fail": []
+        },
+        {
+          "sparse": true,
+          "pass": 3,
+          "fail": []
+        }
+      ]
+    },
+    {
+      "name": "t218",
+      "rows": [
+        {
+          "sparse": false,
+          "pass": 34,
+          "fail": [
+            "FAIL aa12: every visible magazine is seated or in the palm (or the clip's falling empty): in midair at u 0.52 (well 0.036, palm 0.074)"
+          ]
+        },
+        {
+          "sparse": true,
+          "pass": 34,
+          "fail": [
+            "FAIL aa12: every visible magazine is seated or in the palm (or the clip's falling empty): in midair at u 0.52 (well 0.036, palm 0.072)"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "t262",
+      "rows": [
+        {
+          "sparse": false,
+          "pass": 32,
+          "fail": []
+        },
+        {
+          "sparse": true,
+          "pass": 32,
+          "fail": []
+        }
+      ]
+    }
+  ],
+  "t229": {
+    "original": [
+      "FAIL pistol: no pop leaving or rejoining the grip",
+      "FAIL revolver aiming down: firing wrist nearly straight, gun in line with the forearm"
+    ],
+    "candidate": [
+      "FAIL revolver aiming down: firing wrist nearly straight, gun in line with the forearm",
+      "FAIL pistol: no pop leaving or rejoining the grip"
+    ],
+    "novel": []
+  },
+  "parity": {
+    "calls": 4210,
+    "failed": [],
+    "maxLocal": 0,
+    "maxWorld": 0,
+    "maxReturn": 0
+  },
+  "gain": {
+    "originalFire": 22.709106934797678,
+    "candidateFire": 19.415319360475497,
+    "gainPercent": 14.50425850641901
+  }
+}

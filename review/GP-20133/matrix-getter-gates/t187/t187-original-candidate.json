@@ -1,0 +1,117 @@
+{
+  "navigation": "Canonical tools/bench early dismissForTesting; separate loader-ready and actual menu times",
+  "scope": "Original unchanged native targeted regression, fresh page per variant, one browser/lease. Immutable index and first-read JS module snapshots shared between original/candidate; outputs/failures retained, no test weakening or FPS claim.",
+  "frameSampling": "production-tick-start-wall-clock",
+  "environment": "training",
+  "sourceSha256": "a95f671f3e01e896412b4826a3d8e5430781b75376175aa8d0e72fc91048a3e9",
+  "moduleHashes": {
+    "core/body-limits.js": "fd2562bd882ef767155cc819301ede35e68d008621dd0f683232c593d91459eb",
+    "game/viewmodel.js": "f3eb743fb200945a3bed23accbd93dfcb5cf983e616769049c357d3199b7363e",
+    "game/tp-fit.js": "d2dbf1e163f856b672a1a91d1638a949749e3bde1727bda8ceaf1f18c3b08e07",
+    "studio/fp-arms.js": "fff7808db158e072d0c5697a0a57e0c87de7fa81847558fc8670f6f7e5f190d8",
+    "world/training-ballistics.js": "eadc9d04d5fd50ad9f6f23c0a080ea2ad58485ff62e0002f1a6b1b0da4719bdc",
+    "studio/marine-carry.js": "105255868cfd0e9088e1bfc540cb4c2d4293faf5e836aac671ffe1cd8b1436ce",
+    "studio/marine-body.js": "78895440e70b0cc5a348fe5a670c789ca74fd1cf69be830f21fd1a3801cb7095",
+    "studio/marine-hand.js": "f3b92570fe48bb259917c8463a1cb09010be22580f0677a5af90f38eff11a587",
+    "game/viewmodel-fit.js": "9f52ae65294fcfa7840fcaf22b30351cf5d56c61308dbf3ce605836ae5a7e499",
+    "game/viewmodel-poses.js": "32b2d326f6c62e0aa9cee908f1099a02931f6442d7ccc06825570a4ddfe83344"
+  },
+  "rows": [
+    {
+      "sparse": false,
+      "completed": true,
+      "done": true,
+      "output": "PASS TT.getShoulderDbg is exported\nPASS m4: shouldered (roll 1.00)\nPASS m4: butt in the shoulder pocket (0.160, 0.290, 0.150) vs (0.160, 0.290, 0.150) (0.000 m)\nPASS m4: butt just inside and in front of the gun-side shoulder joint (0.060 m)\nPASS m4: firing hand on the grip (0.009 m)\nPASS m4: support hand on the forend (0.001 m)\nPASS m4: barrel on the aim, ahead (0.00 deg)\nPASS m4: not zoomed, the head keeps its pose (bend 0.000)\nPASS m4: barrel follows the aim up and to the side (0.12 deg)\nPASS m4: butt stays in the shoulder aiming up (0.019 m)\nPASS m4: RMB zoom all the way in (1.00)\nPASS m4: zoomed, the head bends down onto the stock (0.50 rad)\nPASS m4: zoomed, the eye comes to the sight line (0.233 -> 0.093 m)\nPASS m4: zoomed, still shouldered (butt 0.000)\nPASS m4: zoomed, on the aim (0.00 deg)\nPASS m4: zoomed, both hands still on (0.009/0.001)\nPASS m4: zoom let go, the head comes back up (bend 0.001)\nPASS ak: shouldered (roll 1.00)\nPASS ak: butt in the shoulder pocket (0.118, 0.291, 0.188) vs (0.160, 0.290, 0.150) (0.057 m)\nPASS ak: butt just inside and in front of the gun-side shoulder joint (0.113 m)\nPASS ak: firing hand on the grip (0.009 m)\nPASS ak: support hand on the forend (0.001 m)\nPASS ak: barrel on the aim, ahead (0.00 deg)\nPASS ak: not zoomed, the head keeps its pose (bend 0.000)\nPASS ak: barrel follows the aim up and to the side (0.03 deg)\nPASS ak: butt stays in the shoulder aiming up (0.057 m)\nPASS ak: RMB zoom all the way in (1.00)\nPASS ak: zoomed, the head bends down onto the stock (0.50 rad)\nPASS ak: zoomed, the eye comes to the sight line (0.252 -> 0.104 m)\nPASS ak: zoomed, still shouldered (butt 0.057)\nPASS ak: zoomed, on the aim (0.00 deg)\nPASS ak: zoomed, both hands still on (0.008/0.000)\nPASS ak: zoom let go, the head comes back up (bend 0.001)\nPASS aa12: shouldered (roll 1.00)\nPASS aa12: butt in the shoulder pocket (0.164, 0.278, 0.146) vs (0.160, 0.290, 0.150) (0.013 m)\nPASS aa12: butt just inside and in front of the gun-side shoulder joint (0.061 m)\nPASS aa12: firing hand on the grip (0.006 m)\nPASS aa12: support hand on the forend (0.001 m)\nPASS aa12: barrel on the aim, ahead (0.00 deg)\nPASS aa12: not zoomed, the head keeps its pose (bend 0.000)\nPASS aa12: barrel follows the aim up and to the side (0.11 deg)\nPASS aa12: butt stays in the shoulder aiming up (0.020 m)\nPASS aa12: RMB zoom all the way in (1.00)\nPASS aa12: zoomed, the head bends down onto the stock (0.50 rad)\nPASS aa12: zoomed, the eye comes to the sight line (0.228 -> 0.078 m)\nPASS aa12: zoomed, still shouldered (butt 0.013)\nPASS aa12: zoomed, on the aim (0.00 deg)\nPASS aa12: zoomed, both hands still on (0.006/0.001)\nPASS aa12: zoom let go, the head comes back up (bend 0.001)\nPASS shotgun: shouldered (roll 1.00)\nPASS shotgun: butt in the shoulder pocket (0.161, 0.288, 0.150) vs (0.160, 0.290, 0.150) (0.002 m)\nPASS shotgun: butt just inside and in front of the gun-side shoulder joint (0.060 m)\nPASS shotgun: firing hand on the grip (0.001 m)\nPASS shotgun: support hand on the forend (0.051 m)\nPASS shotgun: barrel on the aim, ahead (0.00 deg)\nPASS shotgun: not zoomed, the head keeps its pose (bend 0.000)\nPASS shotgun: barrel follows the aim up and to the side (0.00 deg)\nPASS shotgun: butt stays in the shoulder aiming up (0.002 m)\nPASS shotgun: RMB zoom all the way in (1.00)\nPASS shotgun: zoomed, the head bends down onto the stock (0.50 rad)\nPASS shotgun: zoomed, the eye comes to the sight line (0.208 -> 0.063 m)\nPASS shotgun: zoomed, still shouldered (butt 0.002)\nPASS shotgun: zoomed, on the aim (0.00 deg)\nPASS shotgun: zoomed, both hands still on (0.003/0.059)\nPASS shotgun: zoom let go, the head comes back up (bend 0.001)\nPASS sniper: shouldered (roll 1.00)\nPASS sniper: butt in the shoulder pocket (0.170, 0.287, 0.141) vs (0.160, 0.290, 0.150) (0.013 m)\nPASS sniper: butt just inside and in front of the gun-side shoulder joint (0.050 m)\nPASS sniper: firing hand on the grip (0.001 m)\nPASS sniper: support hand on the forend (0.001 m)\nPASS sniper: barrel on the aim, ahead (0.00 deg)\nPASS sniper: not zoomed, the head keeps its pose (bend 0.000)\nPASS sniper: barrel follows the aim up and to the side (0.00 deg)\nPASS sniper: butt stays in the shoulder aiming up (0.013 m)\nPASS sniper: RMB zoom all the way in (1.00)\nPASS sniper: zoomed, the head bends down onto the stock (0.50 rad)\nPASS sniper: zoomed, the eye comes to the sight line (0.218 -> 0.064 m)\nPASS sniper: zoomed, still shouldered (butt 0.013)\nPASS sniper: zoomed, on the aim (0.00 deg)\nPASS sniper: zoomed, both hands still on (0.002/0.001)\nPASS sniper: zoom let go, the head comes back up (bend 0.000)\nPASS launcher: shouldered (roll 1.00)\nPASS launcher: butt in the shoulder pocket (0.121, 0.290, 0.186) vs (0.160, 0.290, 0.150) (0.053 m)\nPASS launcher: butt just inside and in front of the gun-side shoulder joint (0.110 m)\nPASS launcher: firing hand on the grip (0.007 m)\nPASS launcher: support hand on the forend (0.001 m)\nPASS launcher: barrel on the aim, ahead (0.00 deg)\nPASS launcher: not zoomed, the head keeps its pose (bend 0.000)\nPASS launcher: barrel follows the aim up and to the side (0.06 deg)\nPASS launcher: butt stays in the shoulder aiming up (0.054 m)\nPASS launcher: RMB zoom all the way in (1.00)\nPASS launcher: zoomed, the head bends down onto the stock (0.50 rad)\nPASS launcher: zoomed, the eye comes to the sight line (0.235 -> 0.087 m)\nPASS launcher: zoomed, still shouldered (butt 0.053)\nPASS launcher: zoomed, on the aim (0.00 deg)\nPASS launcher: zoomed, both hands still on (0.009/0.001)\nPASS launcher: zoom let go, the head comes back up (bend 0.001)\nPASS pistol: not shouldered (roll 0.000)\nPASS pistol: the shoulders are back ((0.235, 0.335, 0.020))",
+      "errors": [],
+      "console": [
+        {
+          "type": "warning",
+          "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift renderer: WebGPU."
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift warm-up: 282 shader variants compiled, 38 bodies pooled, 5 warm frames, lights visible 24/24, shadows true | post 6ms pools 5112ms compile 717ms warm frame 102ms | fire-hot:228 fire-cold:228 fire-resources:100/8 fire-pool-falling-leaves:230 fire-leaf-resources:1 fire-clean:230 load:282"
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift load: terrain+water+sky built 0ms | rocks 55ms | trees 212ms | player+weapons+zombie types 1224ms | foliage scattered 2252ms | POIs+minimap+foliage chunks 3733ms | contact shading + rest of setup 3922ms | post + pools + compile + warm frame 9868ms | ready 9872ms"
+        },
+        {
+          "type": "warning",
+          "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift first minute: 301 variants after 13 warm frames | fire-hot:228 fire-cold:228 fire-resources:100/8 fire-pool-falling-leaves:230 fire-leaf-resources:1 fire-clean:230 load:282 a-fresh:282 a-flash:285 a-faded:286 a-kill-generic:295 a-kill-melee:298 a-kill-explosive:298 a-fx:301 a-corpse:301"
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift pre-roll: 371 shader variants compiled after 35 warm frames | fire-hot:228 fire-cold:228 fire-resources:100/8 fire-pool-falling-leaves:230 fire-leaf-resources:1 fire-clean:230 load:282 a-fresh:282 a-flash:285 a-faded:286 a-kill-generic:295 a-kill-melee:298 a-kill-explosive:298 a-fx:301 a-corpse:301 fresh:359 burning:360 flash:360 faded:360 tree-fade:360 kill-explosive:360 kill-chainsaw:360 kill-pellet:360 kill-generic:360 kill-melee:360 kill-explosive:362 kill-chainsaw:362 kill-pellet:362 kill-generic:363 kill-melee:363 kill-explosive:363 kill-chainsaw:363 kill-pellet:363 kill-generic:363 effects:369 corpses:369 corpses2:369"
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift title: menu up after 35 warm frames, 371 variants | fire-hot:228 fire-cold:228 fire-resources:100/8 fire-pool-falling-leaves:230 fire-leaf-resources:1 fire-clean:230 load:282 a-fresh:282 a-flash:285 a-faded:286 a-kill-generic:295 a-kill-melee:298 a-kill-explosive:298 a-fx:301 a-corpse:301 fresh:359 burning:360 flash:360 faded:360 tree-fade:360 kill-explosive:360 kill-chainsaw:360 kill-pellet:360 kill-generic:360 kill-melee:360 kill-explosive:362 kill-chainsaw:362 kill-pellet:362 kill-generic:363 kill-melee:363 kill-explosive:363 kill-chainsaw:363 kill-pellet:363 kill-generic:363 effects:369 corpses:369 corpses2:369"
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift opening perf: {\"toMenu\":19.11,\"segments\":{\"boot\":{\"at\":0,\"seconds\":0.48,\"frames\":7,\"over50\":3,\"over100\":1,\"worst\":100},\"loading\":{\"at\":0.48,\"seconds\":18.63,\"frames\":351,\"over50\":59,\"over100\":21,\"worst\":3317},\"menu\":{\"at\":19.11,\"seconds\":6.01,\"frames\":296,\"over50\":4,\"over100\":2,\"worst\":400}},\"videos\":{\"caracal@loading\":{\"frames\":4,\"dropped\":0}},\"loafOver100\":27,\"gpuGateWait\":0,\"order\":\"boot > loading > menu\",\"liveRollTicks\":82,\"renderer\":\"WebGPU / high\"}"
+        }
+      ],
+      "pass": 99,
+      "fail": []
+    },
+    {
+      "sparse": true,
+      "completed": true,
+      "done": true,
+      "output": "PASS TT.getShoulderDbg is exported\nPASS m4: shouldered (roll 1.00)\nPASS m4: butt in the shoulder pocket (0.160, 0.290, 0.150) vs (0.160, 0.290, 0.150) (0.000 m)\nPASS m4: butt just inside and in front of the gun-side shoulder joint (0.060 m)\nPASS m4: firing hand on the grip (0.009 m)\nPASS m4: support hand on the forend (0.001 m)\nPASS m4: barrel on the aim, ahead (0.00 deg)\nPASS m4: not zoomed, the head keeps its pose (bend 0.000)\nPASS m4: barrel follows the aim up and to the side (0.12 deg)\nPASS m4: butt stays in the shoulder aiming up (0.019 m)\nPASS m4: RMB zoom all the way in (1.00)\nPASS m4: zoomed, the head bends down onto the stock (0.50 rad)\nPASS m4: zoomed, the eye comes to the sight line (0.233 -> 0.093 m)\nPASS m4: zoomed, still shouldered (butt 0.000)\nPASS m4: zoomed, on the aim (0.00 deg)\nPASS m4: zoomed, both hands still on (0.009/0.001)\nPASS m4: zoom let go, the head comes back up (bend 0.001)\nPASS ak: shouldered (roll 1.00)\nPASS ak: butt in the shoulder pocket (0.118, 0.291, 0.188) vs (0.160, 0.290, 0.150) (0.057 m)\nPASS ak: butt just inside and in front of the gun-side shoulder joint (0.113 m)\nPASS ak: firing hand on the grip (0.009 m)\nPASS ak: support hand on the forend (0.001 m)\nPASS ak: barrel on the aim, ahead (0.00 deg)\nPASS ak: not zoomed, the head keeps its pose (bend 0.000)\nPASS ak: barrel follows the aim up and to the side (0.03 deg)\nPASS ak: butt stays in the shoulder aiming up (0.057 m)\nPASS ak: RMB zoom all the way in (1.00)\nPASS ak: zoomed, the head bends down onto the stock (0.50 rad)\nPASS ak: zoomed, the eye comes to the sight line (0.253 -> 0.104 m)\nPASS ak: zoomed, still shouldered (butt 0.057)\nPASS ak: zoomed, on the aim (0.00 deg)\nPASS ak: zoomed, both hands still on (0.008/0.000)\nPASS ak: zoom let go, the head comes back up (bend 0.001)\nPASS aa12: shouldered (roll 1.00)\nPASS aa12: butt in the shoulder pocket (0.164, 0.278, 0.146) vs (0.160, 0.290, 0.150) (0.013 m)\nPASS aa12: butt just inside and in front of the gun-side shoulder joint (0.061 m)\nPASS aa12: firing hand on the grip (0.006 m)\nPASS aa12: support hand on the forend (0.001 m)\nPASS aa12: barrel on the aim, ahead (0.00 deg)\nPASS aa12: not zoomed, the head keeps its pose (bend 0.000)\nPASS aa12: barrel follows the aim up and to the side (0.11 deg)\nPASS aa12: butt stays in the shoulder aiming up (0.021 m)\nPASS aa12: RMB zoom all the way in (1.00)\nPASS aa12: zoomed, the head bends down onto the stock (0.50 rad)\nPASS aa12: zoomed, the eye comes to the sight line (0.228 -> 0.078 m)\nPASS aa12: zoomed, still shouldered (butt 0.013)\nPASS aa12: zoomed, on the aim (0.00 deg)\nPASS aa12: zoomed, both hands still on (0.006/0.001)\nPASS aa12: zoom let go, the head comes back up (bend 0.001)\nPASS shotgun: shouldered (roll 1.00)\nPASS shotgun: butt in the shoulder pocket (0.161, 0.288, 0.150) vs (0.160, 0.290, 0.150) (0.002 m)\nPASS shotgun: butt just inside and in front of the gun-side shoulder joint (0.060 m)\nPASS shotgun: firing hand on the grip (0.001 m)\nPASS shotgun: support hand on the forend (0.051 m)\nPASS shotgun: barrel on the aim, ahead (0.00 deg)\nPASS shotgun: not zoomed, the head keeps its pose (bend 0.000)\nPASS shotgun: barrel follows the aim up and to the side (0.00 deg)\nPASS shotgun: butt stays in the shoulder aiming up (0.002 m)\nPASS shotgun: RMB zoom all the way in (1.00)\nPASS shotgun: zoomed, the head bends down onto the stock (0.50 rad)\nPASS shotgun: zoomed, the eye comes to the sight line (0.208 -> 0.063 m)\nPASS shotgun: zoomed, still shouldered (butt 0.002)\nPASS shotgun: zoomed, on the aim (0.00 deg)\nPASS shotgun: zoomed, both hands still on (0.003/0.059)\nPASS shotgun: zoom let go, the head comes back up (bend 0.001)\nPASS sniper: shouldered (roll 1.00)\nPASS sniper: butt in the shoulder pocket (0.170, 0.287, 0.141) vs (0.160, 0.290, 0.150) (0.013 m)\nPASS sniper: butt just inside and in front of the gun-side shoulder joint (0.050 m)\nPASS sniper: firing hand on the grip (0.001 m)\nPASS sniper: support hand on the forend (0.001 m)\nPASS sniper: barrel on the aim, ahead (0.00 deg)\nPASS sniper: not zoomed, the head keeps its pose (bend 0.000)\nPASS sniper: barrel follows the aim up and to the side (0.00 deg)\nPASS sniper: butt stays in the shoulder aiming up (0.013 m)\nPASS sniper: RMB zoom all the way in (1.00)\nPASS sniper: zoomed, the head bends down onto the stock (0.50 rad)\nPASS sniper: zoomed, the eye comes to the sight line (0.218 -> 0.064 m)\nPASS sniper: zoomed, still shouldered (butt 0.013)\nPASS sniper: zoomed, on the aim (0.00 deg)\nPASS sniper: zoomed, both hands still on (0.002/0.001)\nPASS sniper: zoom let go, the head comes back up (bend 0.000)\nPASS launcher: shouldered (roll 1.00)\nPASS launcher: butt in the shoulder pocket (0.121, 0.290, 0.186) vs (0.160, 0.290, 0.150) (0.053 m)\nPASS launcher: butt just inside and in front of the gun-side shoulder joint (0.110 m)\nPASS launcher: firing hand on the grip (0.007 m)\nPASS launcher: support hand on the forend (0.001 m)\nPASS launcher: barrel on the aim, ahead (0.00 deg)\nPASS launcher: not zoomed, the head keeps its pose (bend 0.000)\nPASS launcher: barrel follows the aim up and to the side (0.06 deg)\nPASS launcher: butt stays in the shoulder aiming up (0.054 m)\nPASS launcher: RMB zoom all the way in (1.00)\nPASS launcher: zoomed, the head bends down onto the stock (0.50 rad)\nPASS launcher: zoomed, the eye comes to the sight line (0.235 -> 0.087 m)\nPASS launcher: zoomed, still shouldered (butt 0.053)\nPASS launcher: zoomed, on the aim (0.00 deg)\nPASS launcher: zoomed, both hands still on (0.009/0.001)\nPASS launcher: zoom let go, the head comes back up (bend 0.001)\nPASS pistol: not shouldered (roll 0.000)\nPASS pistol: the shoulders are back ((0.235, 0.335, 0.020))",
+      "errors": [],
+      "console": [
+        {
+          "type": "warning",
+          "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift renderer: WebGPU."
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift warm-up: 284 shader variants compiled, 38 bodies pooled, 5 warm frames, lights visible 24/24, shadows true | post 6ms pools 6917ms compile 947ms warm frame 120ms | fire-hot:229 fire-cold:229 fire-resources:100/8 fire-pool-falling-leaves:231 fire-leaf-resources:1 fire-clean:231 load:284"
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift load: terrain+water+sky built 0ms | rocks 71ms | trees 266ms | player+weapons+zombie types 1477ms | foliage scattered 2965ms | POIs+minimap+foliage chunks 4810ms | contact shading + rest of setup 5032ms | post + pools + compile + warm frame 13031ms | ready 13034ms"
+        },
+        {
+          "type": "warning",
+          "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift first minute: 303 variants after 13 warm frames | fire-hot:229 fire-cold:229 fire-resources:100/8 fire-pool-falling-leaves:231 fire-leaf-resources:1 fire-clean:231 load:284 a-fresh:284 a-flash:287 a-faded:288 a-kill-generic:295 a-kill-melee:298 a-kill-explosive:300 a-fx:303 a-corpse:303"
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift pre-roll: 370 shader variants compiled after 35 warm frames | fire-hot:229 fire-cold:229 fire-resources:100/8 fire-pool-falling-leaves:231 fire-leaf-resources:1 fire-clean:231 load:284 a-fresh:284 a-flash:287 a-faded:288 a-kill-generic:295 a-kill-melee:298 a-kill-explosive:300 a-fx:303 a-corpse:303 fresh:359 burning:361 flash:361 faded:361 tree-fade:361 kill-explosive:361 kill-chainsaw:361 kill-pellet:361 kill-generic:361 kill-melee:361 kill-explosive:363 kill-chainsaw:363 kill-pellet:363 kill-generic:364 kill-melee:364 kill-explosive:364 kill-chainsaw:364 kill-pellet:364 kill-generic:364 effects:369 corpses:369 corpses2:369"
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift title: menu up after 35 warm frames, 370 variants | fire-hot:229 fire-cold:229 fire-resources:100/8 fire-pool-falling-leaves:231 fire-leaf-resources:1 fire-clean:231 load:284 a-fresh:284 a-flash:287 a-faded:288 a-kill-generic:295 a-kill-melee:298 a-kill-explosive:300 a-fx:303 a-corpse:303 fresh:359 burning:361 flash:361 faded:361 tree-fade:361 kill-explosive:361 kill-chainsaw:361 kill-pellet:361 kill-generic:361 kill-melee:361 kill-explosive:363 kill-chainsaw:363 kill-pellet:363 kill-generic:364 kill-melee:364 kill-explosive:364 kill-chainsaw:364 kill-pellet:364 kill-generic:364 effects:369 corpses:369 corpses2:369"
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift opening perf: {\"toMenu\":22.77,\"segments\":{\"boot\":{\"at\":0,\"seconds\":0.71,\"frames\":16,\"over50\":1,\"over100\":0,\"worst\":83},\"loading\":{\"at\":0.71,\"seconds\":22.07,\"frames\":351,\"over50\":53,\"over100\":24,\"worst\":4567},\"menu\":{\"at\":22.77,\"seconds\":6.01,\"frames\":313,\"over50\":6,\"over100\":2,\"worst\":383}},\"videos\":{\"caracal@boot\":{\"frames\":4,\"dropped\":0}},\"loafOver100\":31,\"gpuGateWait\":0,\"order\":\"boot > loading > menu\",\"liveRollTicks\":75,\"renderer\":\"WebGPU / high\"}"
+        }
+      ],
+      "pass": 99,
+      "fail": []
+    }
+  ],
+  "testName": "t187",
+  "testHash": "a9c946bd3f3b3a30478354ebb25bd73cd4f50d91737fa1a37eaf6b6f621bdd6f"
+}

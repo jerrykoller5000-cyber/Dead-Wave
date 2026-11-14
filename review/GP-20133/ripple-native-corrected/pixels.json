@@ -1,0 +1,18 @@
+[
+  {
+    "light": "noon",
+    "identical": true
+  },
+  {
+    "light": "overcast",
+    "identical": true
+  },
+  {
+    "light": "dusk",
+    "identical": true
+  },
+  {
+    "light": "night",
+    "identical": true
+  }
+]

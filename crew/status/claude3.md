@@ -2,35 +2,26 @@
 
 state: active
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: CC-352 pack handgun stations to the pack's back-face low corners (Director's pick b), re-sweep
+task: CC-352 CC-352 stack fix: rebuild the final patches on the current tree (#5, fresh)
 touching: studio/marine-carry.js, index.html (carry part)
-since: 2026-11-14T04:06Z
+since: 2026-11-14T13:32Z
 next: CC-348 J151 P3 (D-179), notes 11, 20, 42, 44 (the pump and the snip
 blocked-on: —
-last-report: handoffs/2026-11-14-claude3-CC-351.md
+last-report: handoffs/2026-11-14-claude3-CC-352.md
 
 ## Notes
 
-### Session 13 (fresh, 00:53Z- 14 Nov, Opus 5.5): CC-350 p2, KR-7 stud, CC-351
-- Cloud tree /home/claude/tt from repo5 (00:58Z PC); repl: review/CC-350/repl.mjs through the cloud slot
-  (node tools/game-test-slot.mjs run claude3 CC-350 -- node review/CC-350/repl.mjs). In-page module swap for quick looks:
-  await import('/studio/marine-carry.js?v=<new>') then re-seat (probe reseat.js); index uses the boot-time module.
-- Director picked (b) for two bulky slung guns: tight stack (PAIR_CARRY.mode 'stack'); the saw lies on its BOTTOM (CARRY_FACE).
-  Bulky+thin: thin first flat on the pack, the bulky one on it. Pair limits: lowest .66 (mid-thigh), slide to the tightest air.
-- tcc347 strap rows fixed (FRONT_NB 2 cm, no chest lift over the shoulder, strap above the 40 mm bandolier: BAND_ABOVE).
-- tcc347's 10 holster rows (pistol shell lowest third 4.2) were red on the untouched tree too (the bigger pistol, GT-20106):
-  HIP_FIT y .87 / splay .1 / n [.36,-.933] in index (patch review/CC-350p2/cc350p2_pairs.py, md5-free exact-text patch).
-- KR-7 front ring on GT-20106's stud (+x only: SLING_STUD_SIDE/SLING_WRAP, the strap wraps the handguard top when +x faces out).
-- CC-351: PGB shoulder patch + right placeholder and the chest flag patch (shirt + carrier) removed in marine-body.js.
-
-- 03:00Z LANDED + checked out: CC-350 p2 (handoffs/2026-11-14-claude3-CC-350p2.md) and CC-351 (…-CC-351.md); review request sent
-  with the 4-light sheets (review/CC-350/sheet-cc350p2-*.jpg, review/CC-351/sheet-cc351-patches.jpg).
-- CC-352 (IN, open): note-20 3P clipping sweep. Probe = cloud /home/claude/sweep*.js (gun triangles hashed vs sleeve/arm/hand/leg/
-  seat/boot/held-gun vertices, 6 stances x 5 frames; rebuild it if the cloud box is gone). Result: all clear except the pack-side
-  handgun stations (Uzi first) brushed by the sleeve in run/crouch; moving them 2-3.5 cm back / 5-8 cm down didn't clear it.
-  Asked the Director (a) thigh first, (b) pack BACK-face low corners [my pick], (c) leave. Do his pick, then re-sweep with
-  CE-12 part 2 when Claude 5 lands it.
-- Pending reviews: CC-350 p2 + CC-351 (Director). Open on tgt20076: flamer slot2 rear ring 1 pair (pre-existing).
+### Session 14 (fresh, 04:06Z- 14 Nov, Opus 5.5): CC-352
+- CC-352 OPEN, waiting on the Director's pick (request sent ~07:05Z). Built (b): pack+/pack- on the pack's BACK face, low
+  corner, grip in, |x|<=.165; slung guns seated after them (seatOnBack opt.hinge/noSlide). NOT landed: patches in
+  review/CC-352/cc352-{index,carry,t224}.json (python3 review/CC-352/apply.py <file> <json>; checked on index c6d64279).
+  Trade-off: slung guns ride 4.5-6 cm higher over them; Uzi 30 mm into the saw stack (C5). Options (1)-(4) in the request.
+- Follow-up I offered: seatOnBack's under-map is vertex-sampled -> stacked guns sink 25-30 mm (C1/C3/C9/C12, C5): rasterise.
+- Probes: review/CC-352 lib2.js (triangle clip sweep, both ways + ray parity), sweep.js/runsweep.sh/cf.js (13 configs x 6
+  stances, one repl call per config+stance: a whole config overruns the 170 s CDP limit), modeBefore.js/modeB.js.
+- Cloud rebuild recipe: stage _DELETE ME/repo5-claude3.tgz + a delta tgz (find -newer repo5, code dirs) -> /home/claude/tt;
+  repl = node tools/game-test-slot.mjs run claude3 <id> -- node review/CC-350/repl.mjs (boot ~5 min), /home/claude/rq.sh.
+- tcc347 runs ~144 s of its 180 s limit in the cloud: keep the pack seat search light (every 6th point).
 
 ### This VM's quirks (session 3)
 - The PC mount refuses writing over some existing files (EINVAL on open with O_CREAT, sometimes on ftruncate): crew.mjs fails

@@ -289,11 +289,11 @@ export function seatOnBack(T, spot, side, tp, vest, P = BACK_CARRY, under = null
     // Alone (or the first of a pair), only slid up its length when it would reach below `lowest`.
     let bestScore = -Infinity;
     // (a pair's first gun: the slide up its length and across that lies tightest on the pack)
-    const slides = map.size ? [-0.3, -0.25, -0.2, -0.15, -0.1, -0.05, 0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3] : opt.pair ? [0, 0.03, 0.06, 0.09, 0.12, 0.15, 0.18, 0.21, 0.24, 0.27, 0.3] : [0, 0.03, 0.06, 0.09, 0.12, 0.15, 0.18, 0.21, 0.24];
-    search: for (const a of slides) for (const c of (map.size ? [-0.08, -0.04, 0, 0.04, 0.08] : opt.pair ? [-0.06, -0.03, 0, 0.03, 0.06] : [0])) {
+    const slides = map.size && !opt.noSlide ? [-0.3, -0.25, -0.2, -0.15, -0.1, -0.05, 0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3] : opt.pair ? [0, 0.03, 0.06, 0.09, 0.12, 0.15, 0.18, 0.21, 0.24, 0.27, 0.3] : [0, 0.03, 0.06, 0.09, 0.12, 0.15, 0.18, 0.21, 0.24];
+    search: for (const a of slides) for (const c of (map.size && !opt.noSlide ? [-0.08, -0.04, 0, 0.04, 0.08] : opt.pair ? [-0.06, -0.03, 0, 0.03, 0.06] : [0])) {
       const ox = ax.x * a + ac.x * c, oy = ax.y * a + ac.y * c;
       if (!fits(oy)) continue;   // not down to his knees, not over his head
-      if (!map.size && !opt.pair) { best = { ox, oy, a, c }; break search; }
+      if ((!map.size || opt.noSlide) && !opt.pair) { best = { ox, oy, a, c }; break search; }   // CC-352: noSlide, over handguns only
       const d = depth(ox, oy, few);
       const score = opt.pair ? -air(ox, oy, d.dz) - 0.5 * d.off - 2 * Math.max(0, d.off - PAIR_CARRY.maxOff) - 0.01 * (Math.abs(a) + Math.abs(c)) - 0.002 * inArm(few, ox, oy, d.dz)
         : d.dz - 0.1 * (Math.abs(a) + Math.abs(c));
@@ -301,13 +301,37 @@ export function seatOnBack(T, spot, side, tp, vest, P = BACK_CARRY, under = null
     }
     if (!best) best = { ox: 0, oy: 0, a: 0, c: 0 };
   }
-  const d = depth(best.ox, best.oy), ox = best.ox, oy = best.oy;
-  let dz = d.dz; const on = d.on;
+  const ox = best.ox, oy = best.oy;
   spot.g.position.x += ox; spot.g.position.y += oy;
   for (const p of pts) { p.x += ox; p.y += oy; }
+  // CC-352: over a handgun on the pack's back face (opt.hinge), the gun tips about its across axis instead of lifting whole: it
+  // rests on the handgun at one end and on the pack at the other (a lift of the whole gun left it the handgun's depth, 5-8 cm,
+  // off the pack end to end). The tip (dz per metre along its length, its middle the pivot) with the least air under it.
+  let hinge = 0;
+  if (opt.hinge && map.size) {
+    const lim = (p) => { let L = Infinity; const s = surfaceZ(table, p.x, p.y + tp); if (s !== null) L = s - P.clear; const u = map.get(key(p.x, p.y)); if (u !== undefined) L = Math.min(L, u - P.clear); return L; };
+    const c0 = new T.Vector3(); for (const p of pts) c0.add(p); c0.divideScalar(pts.length);
+    const L = pts.map(lim), t = pts.map((p) => (p.x - c0.x) * ax.x + (p.y - c0.y) * ax.y + (p.z - c0.z) * ax.z);
+    let bestAir = Infinity;
+    for (let k = -0.3; k <= 0.3001; k += 0.01) {
+      let dzk = Infinity; for (let i = 0; i < pts.length; i++) if (Number.isFinite(L[i])) dzk = Math.min(dzk, L[i] - pts[i].z - k * t[i]);
+      if (!Number.isFinite(dzk)) continue;
+      let sum = 0, n = 0; for (let i = 0; i < pts.length; i += 4) if (Number.isFinite(L[i])) { sum += Math.min(0.3, Math.max(0, L[i] - (pts[i].z + dzk + k * t[i]))); n++; }
+      const a = n ? sum / n : 0; if (a < bestAir - 1e-6) { bestAir = a; hinge = k; }
+    }
+    if (hinge) {
+      const n = new T.Vector3().crossVectors(ax, new T.Vector3(0, 0, 1)).normalize(), phi = Math.atan(hinge / Math.max(0.5, 1 - ax.z * ax.z));
+      const q = new T.Quaternion().setFromAxisAngle(n, phi);
+      spot.g.quaternion.premultiply(q);
+      spot.g.position.sub(c0).applyQuaternion(q).add(c0);
+      for (const p of pts) p.sub(c0).applyQuaternion(q).add(c0);
+    }
+  }
+  const d = depth(0, 0);
+  let dz = d.dz; const on = d.on;
   if (Number.isFinite(dz)) { spot.g.position.z += dz; for (const p of pts) p.z += dz; }
   spot.g.updateMatrix();
-  return { dz, z: spot.g.position.z, on, off: d.off, air: air(0, 0, 0, pts), upright, slide: [best.a, best.c], arm: inArm(pts, 0, 0, 0), n: pts.length, pts };
+  return { dz, z: spot.g.position.z, on, off: d.off, air: air(0, 0, 0, pts), upright, slide: [best.a, best.c], hinge, arm: inArm(pts, 0, 0, 0), n: pts.length, pts };
 }
 
 // Flat webbing along a path (the strap). Width turns with the path; uv runs along it.

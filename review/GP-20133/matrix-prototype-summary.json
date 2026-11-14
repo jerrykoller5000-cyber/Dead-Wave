@@ -1,0 +1,91 @@
+{
+  "status": "Review-only proposed optimization; production unchanged and C5 named loan pending",
+  "sourceSha256": "c4ae96e5da91c023368c2d01f5f54cb9c378266ca12c1df55284414f80d18060",
+  "sourceUnchanged": false,
+  "modulesUnchanged": true,
+  "exactProposalUnhooked": {
+    "calls": 3888,
+    "failed": [],
+    "maxLocal": 0,
+    "maxWorld": 0,
+    "maxReturn": 0,
+    "originalMs": 2718.5999998152256,
+    "candidateMs": 964.7000005841255,
+    "reductionPercent": 64.51482378247285,
+    "scope": "Alternating-order same-input solver CPU, no matrix-counter hook; not game frame acceptance",
+    "errors": [],
+    "reloads": [
+      {
+        "weapon": "pistol",
+        "started": true,
+        "ammo": 0
+      },
+      {
+        "weapon": "ak",
+        "started": true,
+        "ammo": 22
+      },
+      {
+        "weapon": "uzi",
+        "started": true,
+        "ammo": 21
+      },
+      {
+        "weapon": "minigun",
+        "started": true,
+        "ammo": 286
+      },
+      {
+        "weapon": "shotgun",
+        "started": true,
+        "ammo": 7
+      },
+      {
+        "weapon": "sniper",
+        "started": true,
+        "ammo": 4
+      },
+      {
+        "weapon": "revolver",
+        "started": true,
+        "ammo": 4
+      },
+      {
+        "weapon": "chainsaw",
+        "started": false,
+        "ammo": null
+      }
+    ]
+  },
+  "separateWorkCountProbe": {
+    "calls": 3180,
+    "original": 10683597,
+    "candidate": 1422355,
+    "reductionPercent": 86.68655322734469,
+    "scope": "Count-hook CPU timings are instrumented; use unhooked probe for solver CPU"
+  },
+  "t229": {
+    "testHash": "aaee7e006497082809f34177e5ce1d501b1b86bc83dfe9f4ee52d8e741ca8ea8",
+    "rows": [
+      {
+        "sparse": false,
+        "pass": 75,
+        "fail": [
+          "FAIL revolver aiming down: firing wrist nearly straight, gun in line with the forearm (0.78 rad)"
+        ]
+      },
+      {
+        "sparse": true,
+        "pass": 75,
+        "fail": [
+          "FAIL revolver aiming down: firing wrist nearly straight, gun in line with the forearm (0.76 rad)"
+        ]
+      }
+    ],
+    "errors": []
+  },
+  "wholeFrame": "Same-page ABBA pair fire32.52 ->31.27 ->24.32 ->19.60ms, last original fastest. Warm-up drift prevents an attributable whole-frame FPS gain. Clean current-tree budgets still fail; no acceptance.",
+  "rejected": "Broad sparse fallback changed stale descendant matrix values on a=0 shotgun despite equal local pose. Retained original fallback, no production landing; original failed receipts preserved.",
+  "endSourceSha256": "070e4ab5b8394d9623bc5376254c904849275cc0d14205a48d43a1fead403151",
+  "snapshotCaveat": "Proxy serves one immutable index snapshot throughout each browser. Concurrent on-disk index edits detected in counter-free run: start c4ae96e5, end070e4ab5; tracked five modules unchanged. This is isolated same-input solver evidence, not a stable current whole-tree FPS acceptance. Exact old two-function proposal bodies still match disk at audit."
+}

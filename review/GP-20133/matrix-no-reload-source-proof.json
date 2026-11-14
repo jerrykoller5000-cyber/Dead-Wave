@@ -1,0 +1,5 @@
+{
+  "scope": "Static true-reload branch projection only; not native test acceptance. Removing the new matrix-selection conditionals with reloading=true yields the original holdHand statements byte-equivalent after line-comment/whitespace removal. rollForearm child flag is true, so its original recursive call executes.",
+  "identical": true,
+  "nonReloadingV1ProjectionIdentical": true
+}

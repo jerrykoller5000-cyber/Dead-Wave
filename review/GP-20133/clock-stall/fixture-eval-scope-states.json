@@ -1,0 +1,301 @@
+{
+  "pass": 0,
+  "fire": false,
+  "states": [
+    {
+      "wall": 27,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 1049,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 2060,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 3080,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 4101,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 5119,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 6142,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 7151,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 8168,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 9203,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 10218,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 11222,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 12247,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 13279,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 14288,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 15297,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 16311,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 17329,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 18364,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 19379,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 20380,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 21398,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 22416,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 23432,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 24448,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 25464,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 26476,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 27486,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 28495,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 29519,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 30535,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 31551,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 32555,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 33568,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 34571,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 35585,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 36607,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 37622,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 38641,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 39663,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 40687,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 41707,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 42727,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 43738,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 44759,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 45789,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 46812,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 47825,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 48842,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 49861,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 50870,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 51871,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 52885,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 53892,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 54920,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 55934,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 56944,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 57957,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    },
+    {
+      "wall": 58990,
+      "error": "Error: evaluate failed: ReferenceError: ammoByWeapon is not defined\n    at <anonymous>:1:82",
+      "socket": 1
+    }
+  ]
+}

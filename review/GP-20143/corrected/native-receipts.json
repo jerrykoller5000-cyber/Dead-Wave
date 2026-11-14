@@ -1,0 +1,6815 @@
+{
+  "scope": "Look-only matched lighting deltas on one immutable current index snapshot; BEFORE reproduces only C7 pre-D183 hemisphere/default-grade/Training-fill settings. No archived whole index served, no production write. Timings before every PNG, raw production clock, profiler/query off, both variants warmed; 12 interleaved phases, not full GP33 acceptance.",
+  "sourceSha256": "070e4ab5b8394d9623bc5376254c904849275cc0d14205a48d43a1fead403151",
+  "archivedLightingReferenceSha256": "798ae744e736f203dc587b48ee4e4e588497ec52261fca18321f72a0c57e710c",
+  "recipeSha256": "e41e99280e38c91421d329bc544b799a308fd898a34c167f9bc8bc6f54701259",
+  "frames": [
+    {
+      "environment": "training",
+      "label": "noon",
+      "first": true,
+      "after": false,
+      "file": "training-noon-eye-before.png",
+      "state": {
+        "after": false,
+        "training": true,
+        "worldTime": 0.5,
+        "rain": false,
+        "hemi": {
+          "sky": "ddeeff",
+          "ground": "445566",
+          "intensity": 0.6799999999999999
+        },
+        "sun": 1.73,
+        "picture": {
+          "brightness": 1,
+          "vibrancy": 1,
+          "fpFov": 60,
+          "exposure": 1,
+          "graded": true,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            0.06564899350891076,
+            -198.57787724830376,
+            -640.5767131661916
+          ],
+          "quaternion": [
+            0,
+            0.955336489125606,
+            0,
+            -0.2955202066613397
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "first": true,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ],
+          "world": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      }
+    },
+    {
+      "environment": "training",
+      "label": "noon",
+      "first": true,
+      "after": true,
+      "file": "training-noon-eye-after.png",
+      "state": {
+        "after": true,
+        "training": true,
+        "worldTime": 0.5,
+        "rain": false,
+        "hemi": {
+          "sky": "f3f1ea",
+          "ground": "8c877c",
+          "intensity": 1.15
+        },
+        "sun": 1.73,
+        "picture": {
+          "brightness": 1.05,
+          "vibrancy": 1.15,
+          "fpFov": 60,
+          "exposure": 1.05,
+          "graded": false,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            0.06564899350891076,
+            -198.57787724830376,
+            -640.5767131661916
+          ],
+          "quaternion": [
+            0,
+            0.955336489125606,
+            0,
+            -0.2955202066613397
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "first": true,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ],
+          "world": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      }
+    },
+    {
+      "environment": "training",
+      "label": "noon",
+      "first": false,
+      "after": false,
+      "file": "training-noon-3p-before.png",
+      "state": {
+        "after": false,
+        "training": true,
+        "worldTime": 0.5,
+        "rain": false,
+        "hemi": {
+          "sky": "ddeeff",
+          "ground": "445566",
+          "intensity": 0.6799999999999999
+        },
+        "sun": 1.73,
+        "picture": {
+          "brightness": 1,
+          "vibrancy": 1,
+          "fpFov": 60,
+          "exposure": 1,
+          "graded": true,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            -0.0017249956273725463,
+            -190.0982348762188,
+            -649.0254102112503
+          ],
+          "quaternion": [
+            0.0006290144840550325,
+            0.9215215854160668,
+            0.3883237615743341,
+            -0.001492698830084608
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "first": false,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ],
+          "world": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      }
+    },
+    {
+      "environment": "training",
+      "label": "noon",
+      "first": false,
+      "after": true,
+      "file": "training-noon-3p-after.png",
+      "state": {
+        "after": true,
+        "training": true,
+        "worldTime": 0.5,
+        "rain": false,
+        "hemi": {
+          "sky": "f3f1ea",
+          "ground": "8c877c",
+          "intensity": 1.15
+        },
+        "sun": 1.73,
+        "picture": {
+          "brightness": 1.05,
+          "vibrancy": 1.15,
+          "fpFov": 60,
+          "exposure": 1.05,
+          "graded": false,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            -0.0017249956273725463,
+            -190.0982348762188,
+            -649.0254102112503
+          ],
+          "quaternion": [
+            0.0006290144840550325,
+            0.9215215854160668,
+            0.3883237615743341,
+            -0.001492698830084608
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "first": false,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ],
+          "world": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      }
+    },
+    {
+      "environment": "training",
+      "label": "overcast",
+      "first": true,
+      "after": false,
+      "file": "training-overcast-eye-before.png",
+      "state": {
+        "after": false,
+        "training": true,
+        "worldTime": 0.5,
+        "rain": true,
+        "hemi": {
+          "sky": "ddeeff",
+          "ground": "445566",
+          "intensity": 0.5983999999999999
+        },
+        "sun": 1.1245,
+        "picture": {
+          "brightness": 1,
+          "vibrancy": 1,
+          "fpFov": 60,
+          "exposure": 1,
+          "graded": true,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            0.06909943981376337,
+            -198.5815324643869,
+            -640.5719266940737
+          ],
+          "quaternion": [
+            0,
+            0.955336489125606,
+            0,
+            -0.2955202066613397
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "first": true,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ],
+          "world": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      }
+    },
+    {
+      "environment": "training",
+      "label": "overcast",
+      "first": true,
+      "after": true,
+      "file": "training-overcast-eye-after.png",
+      "state": {
+        "after": true,
+        "training": true,
+        "worldTime": 0.5,
+        "rain": true,
+        "hemi": {
+          "sky": "f3f1ea",
+          "ground": "8c877c",
+          "intensity": 1.012
+        },
+        "sun": 1.1245,
+        "picture": {
+          "brightness": 1.05,
+          "vibrancy": 1.15,
+          "fpFov": 60,
+          "exposure": 1.05,
+          "graded": false,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            0.06909943981376337,
+            -198.5815324643869,
+            -640.5719266940737
+          ],
+          "quaternion": [
+            0,
+            0.955336489125606,
+            0,
+            -0.2955202066613397
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "first": true,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ],
+          "world": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      }
+    },
+    {
+      "environment": "training",
+      "label": "overcast",
+      "first": false,
+      "after": false,
+      "file": "training-overcast-3p-before.png",
+      "state": {
+        "after": false,
+        "training": true,
+        "worldTime": 0.5,
+        "rain": true,
+        "hemi": {
+          "sky": "ddeeff",
+          "ground": "445566",
+          "intensity": 0.5983999999999999
+        },
+        "sun": 1.1245,
+        "picture": {
+          "brightness": 1,
+          "vibrancy": 1,
+          "fpFov": 60,
+          "exposure": 1,
+          "graded": true,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            -0.0016089885528195746,
+            -190.09779721121694,
+            -649.0257511922767
+          ],
+          "quaternion": [
+            0.0005869796701261304,
+            0.9214907382277793,
+            0.388397393630904,
+            -0.0013926363524036488
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "first": false,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ],
+          "world": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      }
+    },
+    {
+      "environment": "training",
+      "label": "overcast",
+      "first": false,
+      "after": true,
+      "file": "training-overcast-3p-after.png",
+      "state": {
+        "after": true,
+        "training": true,
+        "worldTime": 0.5,
+        "rain": true,
+        "hemi": {
+          "sky": "f3f1ea",
+          "ground": "8c877c",
+          "intensity": 1.012
+        },
+        "sun": 1.1245,
+        "picture": {
+          "brightness": 1.05,
+          "vibrancy": 1.15,
+          "fpFov": 60,
+          "exposure": 1.05,
+          "graded": false,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            -0.0016089885528195746,
+            -190.09779721121694,
+            -649.0257511922767
+          ],
+          "quaternion": [
+            0.0005869796701261304,
+            0.9214907382277793,
+            0.388397393630904,
+            -0.0013926363524036488
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "first": false,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ],
+          "world": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      }
+    },
+    {
+      "environment": "training",
+      "label": "dusk",
+      "first": true,
+      "after": false,
+      "file": "training-dusk-eye-before.png",
+      "state": {
+        "after": false,
+        "training": true,
+        "worldTime": 0.71,
+        "rain": false,
+        "hemi": {
+          "sky": "ddeeff",
+          "ground": "445566",
+          "intensity": 0.30099028863580496
+        },
+        "sun": 0.548136941214642,
+        "picture": {
+          "brightness": 1,
+          "vibrancy": 1,
+          "fpFov": 60,
+          "exposure": 1,
+          "graded": true,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            0.059343582071444925,
+            -198.57645801900878,
+            -640.5794329258144
+          ],
+          "quaternion": [
+            0,
+            0.955336489125606,
+            0,
+            -0.2955202066613397
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "first": true,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            -0.0020226500583333897,
+            -199.99467234452231,
+            -640.6827459473486
+          ],
+          "world": [
+            -0.0020226500583333897,
+            -199.99467234452231,
+            -640.6827459473486
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      }
+    },
+    {
+      "environment": "training",
+      "label": "dusk",
+      "first": true,
+      "after": true,
+      "file": "training-dusk-eye-after.png",
+      "state": {
+        "after": true,
+        "training": true,
+        "worldTime": 0.71,
+        "rain": false,
+        "hemi": {
+          "sky": "f3f1ea",
+          "ground": "8c877c",
+          "intensity": 0.30099028863580496
+        },
+        "sun": 0.548136941214642,
+        "picture": {
+          "brightness": 1.05,
+          "vibrancy": 1.15,
+          "fpFov": 60,
+          "exposure": 1.05,
+          "graded": false,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            0.059343582071444925,
+            -198.57645801900878,
+            -640.5794329258144
+          ],
+          "quaternion": [
+            0,
+            0.955336489125606,
+            0,
+            -0.2955202066613397
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "first": true,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            -0.0020226500583333897,
+            -199.99467234452231,
+            -640.6827459473486
+          ],
+          "world": [
+            -0.0020226500583333897,
+            -199.99467234452231,
+            -640.6827459473486
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      }
+    },
+    {
+      "environment": "training",
+      "label": "dusk",
+      "first": false,
+      "after": false,
+      "file": "training-dusk-3p-before.png",
+      "state": {
+        "after": false,
+        "training": true,
+        "worldTime": 0.71,
+        "rain": false,
+        "hemi": {
+          "sky": "ddeeff",
+          "ground": "445566",
+          "intensity": 0.30099028863580496
+        },
+        "sun": 0.548136941214642,
+        "picture": {
+          "brightness": 1,
+          "vibrancy": 1,
+          "fpFov": 60,
+          "exposure": 1,
+          "graded": true,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            -0.0015823249629807724,
+            -190.09769661631668,
+            -649.0258295648952
+          ],
+          "quaternion": [
+            0.0005773127779265487,
+            0.9214836455709222,
+            0.38841431714890245,
+            -0.001369630983593457
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "first": false,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            -0.0020226500583333897,
+            -199.99467234452231,
+            -640.6827459473486
+          ],
+          "world": [
+            -0.0020226500583333897,
+            -199.99467234452231,
+            -640.6827459473486
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      }
+    },
+    {
+      "environment": "training",
+      "label": "dusk",
+      "first": false,
+      "after": true,
+      "file": "training-dusk-3p-after.png",
+      "state": {
+        "after": true,
+        "training": true,
+        "worldTime": 0.71,
+        "rain": false,
+        "hemi": {
+          "sky": "f3f1ea",
+          "ground": "8c877c",
+          "intensity": 0.30099028863580496
+        },
+        "sun": 0.548136941214642,
+        "picture": {
+          "brightness": 1.05,
+          "vibrancy": 1.15,
+          "fpFov": 60,
+          "exposure": 1.05,
+          "graded": false,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            -0.0015823249629807724,
+            -190.09769661631668,
+            -649.0258295648952
+          ],
+          "quaternion": [
+            0.0005773127779265487,
+            0.9214836455709222,
+            0.38841431714890245,
+            -0.001369630983593457
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "first": false,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            -0.0020226500583333897,
+            -199.99467234452231,
+            -640.6827459473486
+          ],
+          "world": [
+            -0.0020226500583333897,
+            -199.99467234452231,
+            -640.6827459473486
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      }
+    },
+    {
+      "environment": "training",
+      "label": "night",
+      "first": true,
+      "after": false,
+      "file": "training-night-eye-before.png",
+      "state": {
+        "after": false,
+        "training": true,
+        "worldTime": 0,
+        "rain": false,
+        "hemi": {
+          "sky": "ddeeff",
+          "ground": "445566",
+          "intensity": 0.15
+        },
+        "sun": 0.025,
+        "picture": {
+          "brightness": 1,
+          "vibrancy": 1,
+          "fpFov": 60,
+          "exposure": 1,
+          "graded": true,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            0.05872269738546871,
+            -198.58001275812202,
+            -640.5721853081116
+          ],
+          "quaternion": [
+            0,
+            0.955336489125606,
+            0,
+            -0.2955202066613397
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "first": true,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            -1.307649504556958e-13,
+            -200.00333302553378,
+            -640.6661114702107
+          ],
+          "world": [
+            -1.307649504556958e-13,
+            -200.00333302553378,
+            -640.6661114702107
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      }
+    },
+    {
+      "environment": "training",
+      "label": "night",
+      "first": true,
+      "after": true,
+      "file": "training-night-eye-after.png",
+      "state": {
+        "after": true,
+        "training": true,
+        "worldTime": 0,
+        "rain": false,
+        "hemi": {
+          "sky": "f3f1ea",
+          "ground": "8c877c",
+          "intensity": 0.15
+        },
+        "sun": 0.025,
+        "picture": {
+          "brightness": 1.05,
+          "vibrancy": 1.15,
+          "fpFov": 60,
+          "exposure": 1.05,
+          "graded": false,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            0.05872269738546871,
+            -198.58001275812202,
+            -640.5721853081116
+          ],
+          "quaternion": [
+            0,
+            0.955336489125606,
+            0,
+            -0.2955202066613397
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "first": true,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            -1.307649504556958e-13,
+            -200.00333302553378,
+            -640.6661114702107
+          ],
+          "world": [
+            -1.307649504556958e-13,
+            -200.00333302553378,
+            -640.6661114702107
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      }
+    },
+    {
+      "environment": "training",
+      "label": "night",
+      "first": false,
+      "after": false,
+      "file": "training-night-3p-before.png",
+      "state": {
+        "after": false,
+        "training": true,
+        "worldTime": 0,
+        "rain": false,
+        "hemi": {
+          "sky": "ddeeff",
+          "ground": "445566",
+          "intensity": 0.15
+        },
+        "sun": 0.025,
+        "picture": {
+          "brightness": 1,
+          "vibrancy": 1,
+          "fpFov": 60,
+          "exposure": 1,
+          "graded": true,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            -0.001545734654884024,
+            -190.09755857044902,
+            -649.0259371152388
+          ],
+          "quaternion": [
+            0.0005640436519015594,
+            0.921473910771943,
+            0.3884375409577515,
+            -0.0013380568430185517
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "first": false,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            -1.307649504556958e-13,
+            -200.00333302553378,
+            -640.6661114702107
+          ],
+          "world": [
+            -1.307649504556958e-13,
+            -200.00333302553378,
+            -640.6661114702107
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      }
+    },
+    {
+      "environment": "training",
+      "label": "night",
+      "first": false,
+      "after": true,
+      "file": "training-night-3p-after.png",
+      "state": {
+        "after": true,
+        "training": true,
+        "worldTime": 0,
+        "rain": false,
+        "hemi": {
+          "sky": "f3f1ea",
+          "ground": "8c877c",
+          "intensity": 0.15
+        },
+        "sun": 0.025,
+        "picture": {
+          "brightness": 1.05,
+          "vibrancy": 1.15,
+          "fpFov": 60,
+          "exposure": 1.05,
+          "graded": false,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            -0.001545734654884024,
+            -190.09755857044902,
+            -649.0259371152388
+          ],
+          "quaternion": [
+            0.0005640436519015594,
+            0.921473910771943,
+            0.3884375409577515,
+            -0.0013380568430185517
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "first": false,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            -1.307649504556958e-13,
+            -200.00333302553378,
+            -640.6661114702107
+          ],
+          "world": [
+            -1.307649504556958e-13,
+            -200.00333302553378,
+            -640.6661114702107
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      }
+    },
+    {
+      "environment": "training",
+      "label": "lights-off",
+      "first": true,
+      "after": false,
+      "file": "training-lights-off-eye-before.png",
+      "state": {
+        "after": false,
+        "training": true,
+        "lightsOff": true,
+        "worldTime": 0,
+        "rain": false,
+        "hemi": {
+          "sky": "ddeeff",
+          "ground": "445566",
+          "intensity": 0.15
+        },
+        "sun": 0.025,
+        "picture": {
+          "brightness": 1,
+          "vibrancy": 1,
+          "fpFov": 60,
+          "exposure": 1,
+          "graded": true,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            0.05928368133950979,
+            -198.577611704129,
+            -640.5758411560631
+          ],
+          "quaternion": [
+            0,
+            0.955336489125606,
+            0,
+            -0.2955202066613397
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "first": true,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            -1.307649504556958e-13,
+            -200.00333302553378,
+            -640.6661114702107
+          ],
+          "world": [
+            -1.307649504556958e-13,
+            -200.00333302553378,
+            -640.6661114702107
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      }
+    },
+    {
+      "environment": "training",
+      "label": "lights-off",
+      "first": true,
+      "after": true,
+      "file": "training-lights-off-eye-after.png",
+      "state": {
+        "after": true,
+        "training": true,
+        "lightsOff": true,
+        "worldTime": 0,
+        "rain": false,
+        "hemi": {
+          "sky": "f3f1ea",
+          "ground": "8c877c",
+          "intensity": 0.15
+        },
+        "sun": 0.025,
+        "picture": {
+          "brightness": 1.05,
+          "vibrancy": 1.15,
+          "fpFov": 60,
+          "exposure": 1.05,
+          "graded": false,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            0.05928368133950979,
+            -198.577611704129,
+            -640.5758411560631
+          ],
+          "quaternion": [
+            0,
+            0.955336489125606,
+            0,
+            -0.2955202066613397
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "first": true,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            -1.307649504556958e-13,
+            -200.00333302553378,
+            -640.6661114702107
+          ],
+          "world": [
+            -1.307649504556958e-13,
+            -200.00333302553378,
+            -640.6661114702107
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      }
+    },
+    {
+      "environment": "training",
+      "label": "lights-off",
+      "first": false,
+      "after": false,
+      "file": "training-lights-off-3p-before.png",
+      "state": {
+        "after": false,
+        "training": true,
+        "lightsOff": true,
+        "worldTime": 0,
+        "rain": false,
+        "hemi": {
+          "sky": "ddeeff",
+          "ground": "445566",
+          "intensity": 0.15
+        },
+        "sun": 0.025,
+        "picture": {
+          "brightness": 1,
+          "vibrancy": 1,
+          "fpFov": 60,
+          "exposure": 1,
+          "graded": true,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            -0.0017462593925907733,
+            -190.09831509896281,
+            -649.0253477104052
+          ],
+          "quaternion": [
+            0.0006367151873245572,
+            0.9215272376232316,
+            0.38831026471830105,
+            -0.0015110349662108844
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "first": false,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            -1.307649504556958e-13,
+            -200.00333302553378,
+            -640.6661114702107
+          ],
+          "world": [
+            -1.307649504556958e-13,
+            -200.00333302553378,
+            -640.6661114702107
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      }
+    },
+    {
+      "environment": "training",
+      "label": "lights-off",
+      "first": false,
+      "after": true,
+      "file": "training-lights-off-3p-after.png",
+      "state": {
+        "after": true,
+        "training": true,
+        "lightsOff": true,
+        "worldTime": 0,
+        "rain": false,
+        "hemi": {
+          "sky": "f3f1ea",
+          "ground": "8c877c",
+          "intensity": 0.15
+        },
+        "sun": 0.025,
+        "picture": {
+          "brightness": 1.05,
+          "vibrancy": 1.15,
+          "fpFov": 60,
+          "exposure": 1.05,
+          "graded": false,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            -0.0017462593925907733,
+            -190.09831509896281,
+            -649.0253477104052
+          ],
+          "quaternion": [
+            0.0006367151873245572,
+            0.9215272376232316,
+            0.38831026471830105,
+            -0.0015110349662108844
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "first": false,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            -1.307649504556958e-13,
+            -200.00333302553378,
+            -640.6661114702107
+          ],
+          "world": [
+            -1.307649504556958e-13,
+            -200.00333302553378,
+            -640.6661114702107
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      }
+    },
+    {
+      "environment": "outdoor",
+      "label": "noon",
+      "first": true,
+      "after": false,
+      "file": "outdoor-noon-eye-before.png",
+      "state": {
+        "after": false,
+        "training": false,
+        "worldTime": 0.5,
+        "rain": false,
+        "hemi": {
+          "sky": "ddeeff",
+          "ground": "445566",
+          "intensity": 0.6799999999999999
+        },
+        "sun": 1.73,
+        "picture": {
+          "brightness": 1,
+          "vibrancy": 1,
+          "fpFov": 60,
+          "exposure": 1,
+          "graded": true,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            42.06382341059695,
+            -6.123485451133167,
+            -19.906853610619752
+          ],
+          "quaternion": [
+            0,
+            0.9553364891256061,
+            0,
+            -0.2955202066613395
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          42,
+          -7.5467963358017105,
+          -20
+        ],
+        "first": true,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            42.00195312499999,
+            -7.543339464456265,
+            -20.01152290448482
+          ],
+          "world": [
+            42.00195312499999,
+            -7.543339464456265,
+            -20.01152290448482
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      }
+    },
+    {
+      "environment": "outdoor",
+      "label": "noon",
+      "first": true,
+      "after": true,
+      "file": "outdoor-noon-eye-after.png",
+      "state": {
+        "after": true,
+        "training": false,
+        "worldTime": 0.5,
+        "rain": false,
+        "hemi": {
+          "sky": "f3f1ea",
+          "ground": "8c877c",
+          "intensity": 0.6799999999999999
+        },
+        "sun": 1.73,
+        "picture": {
+          "brightness": 1.05,
+          "vibrancy": 1.15,
+          "fpFov": 60,
+          "exposure": 1.05,
+          "graded": false,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            42.06382341059695,
+            -6.123485451133167,
+            -19.906853610619752
+          ],
+          "quaternion": [
+            0,
+            0.9553364891256061,
+            0,
+            -0.2955202066613395
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          42,
+          -7.5467963358017105,
+          -20
+        ],
+        "first": true,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            42.00195312499999,
+            -7.543339464456265,
+            -20.01152290448482
+          ],
+          "world": [
+            42.00195312499999,
+            -7.543339464456265,
+            -20.01152290448482
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      }
+    },
+    {
+      "environment": "outdoor",
+      "label": "noon",
+      "first": false,
+      "after": false,
+      "file": "outdoor-noon-3p-before.png",
+      "state": {
+        "after": false,
+        "training": false,
+        "worldTime": 0.5,
+        "rain": false,
+        "hemi": {
+          "sky": "ddeeff",
+          "ground": "445566",
+          "intensity": 0.6799999999999999
+        },
+        "sun": 1.73,
+        "picture": {
+          "brightness": 1,
+          "vibrancy": 1,
+          "fpFov": 60,
+          "exposure": 1,
+          "graded": true,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            41.99848157619689,
+            2.287181020090959,
+            -28.42604189856086
+          ],
+          "quaternion": [
+            0.0005388765996671704,
+            0.9246110016902435,
+            0.38091008671109433,
+            -0.001308054708941323
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          42,
+          -7.5467963358017105,
+          -20
+        ],
+        "first": false,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            42.00195312499999,
+            -7.543339464456265,
+            -20.01152290448482
+          ],
+          "world": [
+            42.00195312499999,
+            -7.543339464456265,
+            -20.01152290448482
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      }
+    },
+    {
+      "environment": "outdoor",
+      "label": "noon",
+      "first": false,
+      "after": true,
+      "file": "outdoor-noon-3p-after.png",
+      "state": {
+        "after": true,
+        "training": false,
+        "worldTime": 0.5,
+        "rain": false,
+        "hemi": {
+          "sky": "f3f1ea",
+          "ground": "8c877c",
+          "intensity": 0.6799999999999999
+        },
+        "sun": 1.73,
+        "picture": {
+          "brightness": 1.05,
+          "vibrancy": 1.15,
+          "fpFov": 60,
+          "exposure": 1.05,
+          "graded": false,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            41.99848157619689,
+            2.287181020090959,
+            -28.42604189856086
+          ],
+          "quaternion": [
+            0.0005388765996671704,
+            0.9246110016902435,
+            0.38091008671109433,
+            -0.001308054708941323
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          42,
+          -7.5467963358017105,
+          -20
+        ],
+        "first": false,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            42.00195312499999,
+            -7.543339464456265,
+            -20.01152290448482
+          ],
+          "world": [
+            42.00195312499999,
+            -7.543339464456265,
+            -20.01152290448482
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      }
+    },
+    {
+      "environment": "outdoor",
+      "label": "overcast",
+      "first": true,
+      "after": false,
+      "file": "outdoor-overcast-eye-before.png",
+      "state": {
+        "after": false,
+        "training": false,
+        "worldTime": 0.5,
+        "rain": true,
+        "hemi": {
+          "sky": "ddeeff",
+          "ground": "445566",
+          "intensity": 0.5983999999999999
+        },
+        "sun": 1.1245,
+        "picture": {
+          "brightness": 1,
+          "vibrancy": 1,
+          "fpFov": 60,
+          "exposure": 1,
+          "graded": true,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            42.06834823991703,
+            -6.12548132305,
+            -19.902190247364558
+          ],
+          "quaternion": [
+            2.1872889178493576e-18,
+            0.9553364891256061,
+            7.070910443278722e-18,
+            -0.2955202066613395
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          42,
+          -7.5467963358017105,
+          -20
+        ],
+        "first": true,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            42.00195312499999,
+            -7.543339464456265,
+            -20.01152290448482
+          ],
+          "world": [
+            42.00195312499999,
+            -7.543339464456265,
+            -20.01152290448482
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      }
+    },
+    {
+      "environment": "outdoor",
+      "label": "overcast",
+      "first": true,
+      "after": true,
+      "file": "outdoor-overcast-eye-after.png",
+      "state": {
+        "after": true,
+        "training": false,
+        "worldTime": 0.5,
+        "rain": true,
+        "hemi": {
+          "sky": "f3f1ea",
+          "ground": "8c877c",
+          "intensity": 0.5983999999999999
+        },
+        "sun": 1.1245,
+        "picture": {
+          "brightness": 1.05,
+          "vibrancy": 1.15,
+          "fpFov": 60,
+          "exposure": 1.05,
+          "graded": false,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            42.06834823991703,
+            -6.12548132305,
+            -19.902190247364558
+          ],
+          "quaternion": [
+            2.1872889178493576e-18,
+            0.9553364891256061,
+            7.070910443278722e-18,
+            -0.2955202066613395
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          42,
+          -7.5467963358017105,
+          -20
+        ],
+        "first": true,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            42.00195312499999,
+            -7.543339464456265,
+            -20.01152290448482
+          ],
+          "world": [
+            42.00195312499999,
+            -7.543339464456265,
+            -20.01152290448482
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      }
+    },
+    {
+      "environment": "outdoor",
+      "label": "overcast",
+      "first": false,
+      "after": false,
+      "file": "outdoor-overcast-3p-before.png",
+      "state": {
+        "after": false,
+        "training": false,
+        "worldTime": 0.5,
+        "rain": true,
+        "hemi": {
+          "sky": "ddeeff",
+          "ground": "445566",
+          "intensity": 0.5983999999999999
+        },
+        "sun": 1.1245,
+        "picture": {
+          "brightness": 1,
+          "vibrancy": 1,
+          "fpFov": 60,
+          "exposure": 1,
+          "graded": true,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            41.99851089666332,
+            2.2863577793082537,
+            -28.427073933335958
+          ],
+          "quaternion": [
+            0.0005283422582264472,
+            0.9246421518795491,
+            0.3808345655185769,
+            -0.0012827814668297816
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          42,
+          -7.5467963358017105,
+          -20
+        ],
+        "first": false,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            42.00195312499999,
+            -7.543339464456265,
+            -20.01152290448482
+          ],
+          "world": [
+            42.00195312499999,
+            -7.543339464456265,
+            -20.01152290448482
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      }
+    },
+    {
+      "environment": "outdoor",
+      "label": "overcast",
+      "first": false,
+      "after": true,
+      "file": "outdoor-overcast-3p-after.png",
+      "state": {
+        "after": true,
+        "training": false,
+        "worldTime": 0.5,
+        "rain": true,
+        "hemi": {
+          "sky": "f3f1ea",
+          "ground": "8c877c",
+          "intensity": 0.5983999999999999
+        },
+        "sun": 1.1245,
+        "picture": {
+          "brightness": 1.05,
+          "vibrancy": 1.15,
+          "fpFov": 60,
+          "exposure": 1.05,
+          "graded": false,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            41.99851089666332,
+            2.2863577793082537,
+            -28.427073933335958
+          ],
+          "quaternion": [
+            0.0005283422582264472,
+            0.9246421518795491,
+            0.3808345655185769,
+            -0.0012827814668297816
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          42,
+          -7.5467963358017105,
+          -20
+        ],
+        "first": false,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            42.00195312499999,
+            -7.543339464456265,
+            -20.01152290448482
+          ],
+          "world": [
+            42.00195312499999,
+            -7.543339464456265,
+            -20.01152290448482
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      }
+    },
+    {
+      "environment": "outdoor",
+      "label": "dusk",
+      "first": true,
+      "after": false,
+      "file": "outdoor-dusk-eye-before.png",
+      "state": {
+        "after": false,
+        "training": false,
+        "worldTime": 0.71,
+        "rain": false,
+        "hemi": {
+          "sky": "ddeeff",
+          "ground": "445566",
+          "intensity": 0.30099028863580496
+        },
+        "sun": 0.548136941214642,
+        "picture": {
+          "brightness": 1,
+          "vibrancy": 1,
+          "fpFov": 60,
+          "exposure": 1,
+          "graded": true,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            42.05997450108532,
+            -6.1241006372995965,
+            -19.899936309580188
+          ],
+          "quaternion": [
+            0,
+            0.9553364891256061,
+            0,
+            -0.2955202066613395
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          42,
+          -7.5467963358017105,
+          -20
+        ],
+        "first": true,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            42.0059999719782,
+            -7.532618562207288,
+            -19.99716916310907
+          ],
+          "world": [
+            42.0059999719782,
+            -7.532618562207288,
+            -19.99716916310907
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      }
+    },
+    {
+      "environment": "outdoor",
+      "label": "dusk",
+      "first": true,
+      "after": true,
+      "file": "outdoor-dusk-eye-after.png",
+      "state": {
+        "after": true,
+        "training": false,
+        "worldTime": 0.71,
+        "rain": false,
+        "hemi": {
+          "sky": "f3f1ea",
+          "ground": "8c877c",
+          "intensity": 0.30099028863580496
+        },
+        "sun": 0.548136941214642,
+        "picture": {
+          "brightness": 1.05,
+          "vibrancy": 1.15,
+          "fpFov": 60,
+          "exposure": 1.05,
+          "graded": false,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            42.05997450108532,
+            -6.1241006372995965,
+            -19.899936309580188
+          ],
+          "quaternion": [
+            0,
+            0.9553364891256061,
+            0,
+            -0.2955202066613395
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          42,
+          -7.5467963358017105,
+          -20
+        ],
+        "first": true,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            42.0059999719782,
+            -7.532618562207288,
+            -19.99716916310907
+          ],
+          "world": [
+            42.0059999719782,
+            -7.532618562207288,
+            -19.99716916310907
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      }
+    },
+    {
+      "environment": "outdoor",
+      "label": "dusk",
+      "first": false,
+      "after": false,
+      "file": "outdoor-dusk-3p-before.png",
+      "state": {
+        "after": false,
+        "training": false,
+        "worldTime": 0.71,
+        "rain": false,
+        "hemi": {
+          "sky": "ddeeff",
+          "ground": "445566",
+          "intensity": 0.30099028863580496
+        },
+        "sun": 0.548136941214642,
+        "picture": {
+          "brightness": 1,
+          "vibrancy": 1,
+          "fpFov": 60,
+          "exposure": 1,
+          "graded": true,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            41.99880111097327,
+            2.287403410926152,
+            -28.427976942077372
+          ],
+          "quaternion": [
+            0.0004258503928405602,
+            0.9245686507283762,
+            0.381013859183882,
+            -0.00103336903272783
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          42,
+          -7.5467963358017105,
+          -20
+        ],
+        "first": false,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            42.0059999719782,
+            -7.532618562207288,
+            -19.99716916310907
+          ],
+          "world": [
+            42.0059999719782,
+            -7.532618562207288,
+            -19.99716916310907
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      }
+    },
+    {
+      "environment": "outdoor",
+      "label": "dusk",
+      "first": false,
+      "after": true,
+      "file": "outdoor-dusk-3p-after.png",
+      "state": {
+        "after": true,
+        "training": false,
+        "worldTime": 0.71,
+        "rain": false,
+        "hemi": {
+          "sky": "f3f1ea",
+          "ground": "8c877c",
+          "intensity": 0.30099028863580496
+        },
+        "sun": 0.548136941214642,
+        "picture": {
+          "brightness": 1.05,
+          "vibrancy": 1.15,
+          "fpFov": 60,
+          "exposure": 1.05,
+          "graded": false,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            41.99880111097327,
+            2.287403410926152,
+            -28.427976942077372
+          ],
+          "quaternion": [
+            0.0004258503928405602,
+            0.9245686507283762,
+            0.381013859183882,
+            -0.00103336903272783
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          42,
+          -7.5467963358017105,
+          -20
+        ],
+        "first": false,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            42.0059999719782,
+            -7.532618562207288,
+            -19.99716916310907
+          ],
+          "world": [
+            42.0059999719782,
+            -7.532618562207288,
+            -19.99716916310907
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      }
+    },
+    {
+      "environment": "outdoor",
+      "label": "night",
+      "first": true,
+      "after": false,
+      "file": "outdoor-night-eye-before.png",
+      "state": {
+        "after": false,
+        "training": false,
+        "worldTime": 0,
+        "rain": false,
+        "hemi": {
+          "sky": "ddeeff",
+          "ground": "445566",
+          "intensity": 0.15
+        },
+        "sun": 0.025,
+        "picture": {
+          "brightness": 1,
+          "vibrancy": 1,
+          "fpFov": 60,
+          "exposure": 1,
+          "graded": true,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            42.06093115303305,
+            -6.125504236747339,
+            -19.900214951317086
+          ],
+          "quaternion": [
+            2.1872889178493576e-18,
+            0.9553364891256061,
+            7.070910443278722e-18,
+            -0.2955202066613395
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          42,
+          -7.5467963358017105,
+          -20
+        ],
+        "first": true,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            42.00195312499999,
+            -7.555892101737959,
+            -19.989388273074375
+          ],
+          "world": [
+            42.00195312499999,
+            -7.555892101737959,
+            -19.989388273074375
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      }
+    },
+    {
+      "environment": "outdoor",
+      "label": "night",
+      "first": true,
+      "after": true,
+      "file": "outdoor-night-eye-after.png",
+      "state": {
+        "after": true,
+        "training": false,
+        "worldTime": 0,
+        "rain": false,
+        "hemi": {
+          "sky": "f3f1ea",
+          "ground": "8c877c",
+          "intensity": 0.15
+        },
+        "sun": 0.025,
+        "picture": {
+          "brightness": 1.05,
+          "vibrancy": 1.15,
+          "fpFov": 60,
+          "exposure": 1.05,
+          "graded": false,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            42.06093115303305,
+            -6.125504236747339,
+            -19.900214951317086
+          ],
+          "quaternion": [
+            2.1872889178493576e-18,
+            0.9553364891256061,
+            7.070910443278722e-18,
+            -0.2955202066613395
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          42,
+          -7.5467963358017105,
+          -20
+        ],
+        "first": true,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            42.00195312499999,
+            -7.555892101737959,
+            -19.989388273074375
+          ],
+          "world": [
+            42.00195312499999,
+            -7.555892101737959,
+            -19.989388273074375
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      }
+    },
+    {
+      "environment": "outdoor",
+      "label": "night",
+      "first": false,
+      "after": false,
+      "file": "outdoor-night-3p-before.png",
+      "state": {
+        "after": false,
+        "training": false,
+        "worldTime": 0,
+        "rain": false,
+        "hemi": {
+          "sky": "ddeeff",
+          "ground": "445566",
+          "intensity": 0.15
+        },
+        "sun": 0.025,
+        "picture": {
+          "brightness": 1,
+          "vibrancy": 1,
+          "fpFov": 60,
+          "exposure": 1,
+          "graded": true,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            41.99863942106342,
+            2.28679700566126,
+            -28.427497985549692
+          ],
+          "quaternion": [
+            0.00048297671103761147,
+            0.9246106061962767,
+            0.38091156350974853,
+            -0.0011723597610334587
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          42,
+          -7.5467963358017105,
+          -20
+        ],
+        "first": false,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            42.00195312499999,
+            -7.555892101737959,
+            -19.989388273074375
+          ],
+          "world": [
+            42.00195312499999,
+            -7.555892101737959,
+            -19.989388273074375
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      }
+    },
+    {
+      "environment": "outdoor",
+      "label": "night",
+      "first": false,
+      "after": true,
+      "file": "outdoor-night-3p-after.png",
+      "state": {
+        "after": true,
+        "training": false,
+        "worldTime": 0,
+        "rain": false,
+        "hemi": {
+          "sky": "f3f1ea",
+          "ground": "8c877c",
+          "intensity": 0.15
+        },
+        "sun": 0.025,
+        "picture": {
+          "brightness": 1.05,
+          "vibrancy": 1.15,
+          "fpFov": 60,
+          "exposure": 1.05,
+          "graded": false,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            41.99863942106342,
+            2.28679700566126,
+            -28.427497985549692
+          ],
+          "quaternion": [
+            0.00048297671103761147,
+            0.9246106061962767,
+            0.38091156350974853,
+            -0.0011723597610334587
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          42,
+          -7.5467963358017105,
+          -20
+        ],
+        "first": false,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            42.00195312499999,
+            -7.555892101737959,
+            -19.989388273074375
+          ],
+          "world": [
+            42.00195312499999,
+            -7.555892101737959,
+            -19.989388273074375
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      }
+    }
+  ],
+  "timings": [
+    {
+      "pass": 0,
+      "after": false,
+      "frames": [
+        29.69999998807907,
+        49.599999994039536,
+        28.900000005960464,
+        15.800000011920929,
+        15.400000005960464,
+        12.699999988079071,
+        16.69999998807907,
+        16.600000023841858,
+        31.299999982118607,
+        21.900000005960464,
+        15.599999994039536,
+        14.5,
+        16.80000001192093,
+        16.69999998807907,
+        24.5,
+        20.599999994039536,
+        27.400000005960464,
+        20.400000005960464,
+        13.199999988079071,
+        15,
+        15.100000023841858,
+        15.099999994039536,
+        17,
+        15.5,
+        16.099999994039536,
+        16.599999994039536,
+        22.599999994039536,
+        14.300000011920929,
+        13.099999994039536,
+        22.5,
+        13.5,
+        14.200000017881393,
+        22.299999982118607,
+        25.700000017881393,
+        26.399999976158142,
+        13.5,
+        16.100000023841858,
+        13.099999994039536,
+        16.299999982118607,
+        23,
+        15.300000011920929,
+        14.800000011920929,
+        16.899999976158142,
+        19.200000017881393,
+        21.799999982118607,
+        14.600000023841858,
+        17.899999976158142,
+        21.200000017881393,
+        26.5,
+        17.69999998807907,
+        14.800000011920929,
+        15.699999988079071,
+        11.800000011920929,
+        15.099999994039536,
+        16.69999998807907,
+        23.80000001192093,
+        26.19999998807907,
+        23.600000023841858,
+        21.599999994039536,
+        22.299999982118607,
+        15.800000011920929,
+        16.80000001192093,
+        16.599999994039536,
+        16.69999998807907,
+        16.900000005960464,
+        16.400000005960464,
+        16.599999994039536,
+        17,
+        16.400000005960464,
+        16.69999998807907,
+        16.700000017881393,
+        16.799999982118607,
+        16.599999994039536,
+        24.600000023841858,
+        25.19999998807907,
+        17.19999998807907,
+        16.200000017881393,
+        16.799999982118607,
+        17.200000017881393,
+        16.099999994039536,
+        16.69999998807907,
+        31.5,
+        15.700000017881393,
+        13,
+        16,
+        13.799999982118607,
+        12,
+        17.900000005960464,
+        17.900000005960464,
+        13.800000011920929,
+        15.5,
+        16.19999998807907,
+        24.30000001192093,
+        14.099999994039536,
+        12.799999982118607,
+        15.400000005960464,
+        16.700000017881393,
+        16.599999994039536,
+        16.799999982118607,
+        18.600000023841858,
+        15.799999982118607,
+        22.5,
+        17.5,
+        15.900000005960464,
+        14.699999988079071,
+        16.100000023841858,
+        15.099999994039536,
+        14.5,
+        15.799999982118607,
+        16.80000001192093,
+        16.599999994039536,
+        17,
+        16.5,
+        19.599999994039536,
+        16.900000005960464,
+        13.400000005960464,
+        20.69999998807907,
+        13.400000005960464,
+        15.900000005960464,
+        22.400000005960464,
+        25,
+        13.699999988079071,
+        12.400000005960464,
+        13.400000005960464,
+        13.099999994039536,
+        23.69999998807907,
+        23.100000023841858,
+        24,
+        20.599999994039536,
+        14.900000005960464,
+        15.399999976158142,
+        17.80000001192093,
+        15.400000005960464,
+        14.199999988079071,
+        16.200000017881393,
+        21.799999982118607,
+        13.700000017881393,
+        12.699999988079071,
+        16.400000005960464,
+        16.599999994039536,
+        16.69999998807907,
+        17.700000017881393,
+        15.900000005960464,
+        17.299999982118607,
+        25.80000001192093,
+        15.099999994039536,
+        12.900000005960464,
+        12.5,
+        20.099999994039536,
+        12.900000005960464,
+        16.5,
+        16.69999998807907,
+        16.599999994039536,
+        21.700000017881393,
+        11.699999988079071,
+        16.599999994039536,
+        23.700000017881393,
+        11.799999982118607,
+        17.400000005960464,
+        21.400000005960464,
+        17.30000001192093,
+        13,
+        14.5,
+        14.199999988079071,
+        21.400000005960464,
+        13.199999988079071,
+        15.599999994039536,
+        22,
+        19.400000005960464,
+        23.30000001192093,
+        14.099999994039536,
+        13.900000005960464,
+        17.400000005960464,
+        14.5,
+        15,
+        15.5,
+        17.099999994039536,
+        19.799999982118607,
+        17.200000017881393,
+        19.299999982118607,
+        18.80000001192093,
+        16.900000005960464,
+        15.5,
+        14.5,
+        16.400000005960464,
+        19.5,
+        14.699999988079071,
+        16.099999994039536,
+        16.30000001192093,
+        17.799999982118607,
+        15,
+        17.600000023841858,
+        15.599999994039536,
+        13.400000005960464,
+        13.599999994039536,
+        17.599999994039536,
+        16.19999998807907,
+        16.600000023841858,
+        15.599999994039536,
+        14.599999994039536,
+        19.400000005960464,
+        13.199999988079071,
+        16.5,
+        16.80000001192093,
+        16.5,
+        17.400000005960464,
+        17.5,
+        20.899999976158142,
+        16.5,
+        17.600000023841858,
+        18.19999998807907,
+        13.800000011920929,
+        16.299999982118607,
+        16.80000001192093,
+        16.19999998807907,
+        16.5,
+        18.900000005960464,
+        15.199999988079071,
+        18,
+        17.5,
+        15.5,
+        20.30000001192093,
+        21.19999998807907,
+        14.600000023841858,
+        12.399999976158142,
+        10.600000023841858,
+        14.899999976158142,
+        23.600000023841858,
+        23.5,
+        19.299999982118607,
+        16.700000017881393,
+        23.599999994039536,
+        20.400000005960464,
+        13.799999982118607,
+        13,
+        12.5,
+        16.80000001192093,
+        16.69999998807907,
+        19.200000017881393,
+        14.599999994039536,
+        16.19999998807907,
+        22.5,
+        13.400000005960464,
+        14,
+        16.80000001192093,
+        16.69999998807907,
+        21.099999994039536,
+        21.200000017881393,
+        22.799999982118607,
+        14.599999994039536,
+        13.700000017881393,
+        14.299999982118607,
+        12.200000017881393,
+        13.299999982118607,
+        16.600000023841858,
+        21,
+        20,
+        20.299999982118607
+      ],
+      "before": {
+        "after": false,
+        "training": true,
+        "worldTime": 0.5,
+        "rain": false,
+        "hemi": {
+          "sky": "ddeeff",
+          "ground": "445566",
+          "intensity": 0.6799999999999999
+        },
+        "sun": 1.73,
+        "picture": {
+          "brightness": 1,
+          "vibrancy": 1,
+          "fpFov": 60,
+          "exposure": 1,
+          "graded": false,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            0.05925765775508359,
+            -198.583569686501,
+            -640.5709337194991
+          ],
+          "quaternion": [
+            0,
+            0.955336489125606,
+            0,
+            -0.2955202066613397
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "first": true,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ],
+          "world": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      },
+      "state": {
+        "after": false,
+        "training": true,
+        "worldTime": 0.5,
+        "rain": false,
+        "hemi": {
+          "sky": "ddeeff",
+          "ground": "445566",
+          "intensity": 0.6799999999999999
+        },
+        "sun": 1.73,
+        "picture": {
+          "brightness": 1,
+          "vibrancy": 1,
+          "fpFov": 60,
+          "exposure": 1,
+          "graded": false,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            0.06581665772174206,
+            -198.5808797855211,
+            -640.5776520735419
+          ],
+          "quaternion": [
+            0,
+            0.955336489125606,
+            0,
+            -0.2955202066613397
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "first": true,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ],
+          "world": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      }
+    },
+    {
+      "pass": 1,
+      "after": true,
+      "frames": [
+        21.19999998807907,
+        21.30000001192093,
+        22.299999982118607,
+        21.80000001192093,
+        21,
+        14.400000005960464,
+        11.899999976158142,
+        11.700000017881393,
+        14.099999994039536,
+        16.900000005960464,
+        22.19999998807907,
+        21.400000005960464,
+        21.099999994039536,
+        21.80000001192093,
+        23.400000005960464,
+        23.399999976158142,
+        18.30000001192093,
+        18.5,
+        17.19999998807907,
+        20.100000023841858,
+        20.599999994039536,
+        14.099999994039536,
+        13.599999994039536,
+        13,
+        14.400000005960464,
+        16.69999998807907,
+        23.600000023841858,
+        13.899999976158142,
+        17.100000023841858,
+        16.19999998807907,
+        18.599999994039536,
+        18.400000005960464,
+        16.599999994039536,
+        16.400000005960464,
+        17.30000001192093,
+        18.5,
+        14.899999976158142,
+        12.400000005960464,
+        13.200000017881393,
+        16.19999998807907,
+        16.69999998807907,
+        17.5,
+        15.800000011920929,
+        17,
+        16.30000001192093,
+        16.599999994039536,
+        16.799999982118607,
+        18.700000017881393,
+        20.099999994039536,
+        17.400000005960464,
+        16.900000005960464,
+        21.599999994039536,
+        12.699999988079071,
+        12.300000011920929,
+        14.5,
+        15.799999982118607,
+        18.100000023841858,
+        15.299999982118607,
+        24.200000017881393,
+        26.099999994039536,
+        25.099999994039536,
+        19.69999998807907,
+        16.5,
+        15,
+        15.800000011920929,
+        13.300000011920929,
+        11.5,
+        15.899999976158142,
+        20.600000023841858,
+        20.299999982118607,
+        22.400000005960464,
+        24.400000005960464,
+        23,
+        24.19999998807907,
+        24.599999994039536,
+        19.600000023841858,
+        15.899999976158142,
+        17.100000023841858,
+        20.799999982118607,
+        19,
+        18.900000005960464,
+        17.69999998807907,
+        17.900000005960464,
+        22.900000005960464,
+        15.699999988079071,
+        15,
+        25,
+        20.200000017881393,
+        18.19999998807907,
+        23.900000005960464,
+        20.69999998807907,
+        26.80000001192093,
+        22.19999998807907,
+        18.80000001192093,
+        19.900000005960464,
+        16.799999982118607,
+        17.100000023841858,
+        19.099999994039536,
+        17,
+        16.799999982118607,
+        18,
+        17,
+        15.5,
+        13,
+        15.5,
+        19.700000017881393,
+        15.5,
+        13.599999994039536,
+        14.099999994039536,
+        15.700000017881393,
+        21.799999982118607,
+        22.200000017881393,
+        17.399999976158142,
+        16,
+        16.700000017881393,
+        15.199999988079071,
+        15,
+        13.400000005960464,
+        16.5,
+        16.19999998807907,
+        16.80000001192093,
+        13.699999988079071,
+        17.30000001192093,
+        15.900000005960464,
+        17.099999994039536,
+        17.099999994039536,
+        19.80000001192093,
+        16.5,
+        14.900000005960464,
+        14.199999988079071,
+        16.400000005960464,
+        18.799999982118607,
+        15,
+        16.100000023841858,
+        19.5,
+        23.5,
+        22.299999982118607,
+        20.599999994039536,
+        18.100000023841858,
+        18.69999998807907,
+        15.599999994039536,
+        16.099999994039536,
+        22,
+        12.100000023841858,
+        11.5,
+        16.599999994039536,
+        16.799999982118607,
+        20.600000023841858,
+        18.799999982118607,
+        11.400000005960464,
+        15.900000005960464,
+        16.599999994039536,
+        16.900000005960464,
+        18.19999998807907,
+        17.400000005960464,
+        17,
+        16,
+        14.5,
+        19.599999994039536,
+        13.700000017881393,
+        19.5,
+        13.899999976158142,
+        22.30000001192093,
+        14.300000011920929,
+        13.399999976158142,
+        20.700000017881393,
+        24.19999998807907,
+        19.200000017881393,
+        12.5,
+        10.799999982118607,
+        12.5,
+        16.700000017881393,
+        18.19999998807907,
+        21.19999998807907,
+        19.900000005960464,
+        20.599999994039536,
+        13.100000023841858,
+        12.799999982118607,
+        18.700000017881393,
+        21.899999976158142,
+        16,
+        15.200000017881393,
+        14.900000005960464,
+        13.899999976158142,
+        16.80000001192093,
+        14.900000005960464,
+        17.5,
+        14.699999988079071,
+        19,
+        20.5,
+        15.599999994039536,
+        13.5,
+        12.800000011920929,
+        15.099999994039536,
+        18.80000001192093,
+        14.400000005960464,
+        16.69999998807907,
+        24.400000005960464,
+        18.900000005960464,
+        13.799999982118607,
+        17,
+        18.5,
+        26.200000017881393,
+        22.69999998807907,
+        18.30000001192093,
+        15.299999982118607,
+        20,
+        21.200000017881393,
+        16.099999994039536,
+        15,
+        14,
+        14.299999982118607,
+        14,
+        13.200000017881393,
+        21.5,
+        15.799999982118607,
+        13.800000011920929,
+        17.69999998807907,
+        14,
+        14.400000005960464,
+        17.30000001192093,
+        19.299999982118607,
+        16,
+        14.100000023841858,
+        23.099999994039536,
+        20,
+        14.199999988079071,
+        13.599999994039536,
+        18.400000005960464,
+        20.200000017881393,
+        21.19999998807907,
+        18.900000005960464,
+        15.799999982118607,
+        13.900000005960464,
+        13.5,
+        13.099999994039536,
+        12.400000005960464,
+        18.30000001192093,
+        18.299999982118607,
+        17.5,
+        12.800000011920929,
+        18.19999998807907,
+        17.30000001192093,
+        20.599999994039536,
+        24.700000017881393,
+        18.899999976158142,
+        14.900000005960464,
+        16.700000017881393,
+        20.899999976158142,
+        15,
+        14.5,
+        22.80000001192093,
+        17.69999998807907,
+        15.100000023841858,
+        16.099999994039536,
+        14.599999994039536,
+        14.199999988079071,
+        20.400000005960464
+      ],
+      "before": {
+        "after": true,
+        "training": true,
+        "worldTime": 0.5,
+        "rain": false,
+        "hemi": {
+          "sky": "f3f1ea",
+          "ground": "8c877c",
+          "intensity": 1.15
+        },
+        "sun": 1.73,
+        "picture": {
+          "brightness": 1.05,
+          "vibrancy": 1.15,
+          "fpFov": 60,
+          "exposure": 1.05,
+          "graded": true,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            0.06976489784037511,
+            -198.58238395507945,
+            -640.5764214929101
+          ],
+          "quaternion": [
+            0,
+            0.955336489125606,
+            0,
+            -0.2955202066613397
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "first": true,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ],
+          "world": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      },
+      "state": {
+        "after": true,
+        "training": true,
+        "worldTime": 0.5,
+        "rain": false,
+        "hemi": {
+          "sky": "f3f1ea",
+          "ground": "8c877c",
+          "intensity": 1.15
+        },
+        "sun": 1.73,
+        "picture": {
+          "brightness": 1.05,
+          "vibrancy": 1.15,
+          "fpFov": 60,
+          "exposure": 1.05,
+          "graded": true,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            0.0698904548543313,
+            -198.5797639320765,
+            -640.5856323542534
+          ],
+          "quaternion": [
+            0,
+            0.955336489125606,
+            0,
+            -0.2955202066613397
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "first": true,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ],
+          "world": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      }
+    },
+    {
+      "pass": 2,
+      "after": true,
+      "frames": [
+        13.099999994039536,
+        16.599999994039536,
+        16.600000023841858,
+        16.69999998807907,
+        23.599999994039536,
+        22.30000001192093,
+        21.69999998807907,
+        15.800000011920929,
+        19.69999998807907,
+        13.599999994039536,
+        27.30000001192093,
+        13.800000011920929,
+        12.699999988079071,
+        12.800000011920929,
+        16.799999982118607,
+        16.599999994039536,
+        22,
+        29.400000005960464,
+        15.200000017881393,
+        20.099999994039536,
+        21.299999982118607,
+        21.30000001192093,
+        18.599999994039536,
+        17,
+        17.200000017881393,
+        18.099999994039536,
+        19.099999994039536,
+        14.5,
+        18.099999994039536,
+        17.5,
+        17,
+        17.700000017881393,
+        15.599999994039536,
+        16.799999982118607,
+        15,
+        15.300000011920929,
+        20.599999994039536,
+        17,
+        17.099999994039536,
+        19.400000005960464,
+        31.200000017881393,
+        20.899999976158142,
+        14.600000023841858,
+        12.899999976158142,
+        12.800000011920929,
+        16.80000001192093,
+        16.69999998807907,
+        22.19999998807907,
+        18.5,
+        12.5,
+        14.400000005960464,
+        17.30000001192093,
+        14.799999982118607,
+        20.900000005960464,
+        24.599999994039536,
+        13.900000005960464,
+        12.200000017881393,
+        12.599999994039536,
+        18.099999994039536,
+        17.30000001192093,
+        13.799999982118607,
+        22.700000017881393,
+        15.799999982118607,
+        18,
+        16.900000005960464,
+        24.599999994039536,
+        19.80000001192093,
+        15.5,
+        16.69999998807907,
+        25.80000001192093,
+        14.299999982118607,
+        13,
+        16.30000001192093,
+        13.900000005960464,
+        16.69999998807907,
+        16.700000017881393,
+        20.799999982118607,
+        17.30000001192093,
+        13,
+        15.599999994039536,
+        16.69999998807907,
+        16.900000005960464,
+        20.700000017881393,
+        18.19999998807907,
+        12.800000011920929,
+        14.699999988079071,
+        19.5,
+        14.699999988079071,
+        15.800000011920929,
+        16.599999994039536,
+        21.900000005960464,
+        13.300000011920929,
+        16.5,
+        15,
+        16.69999998807907,
+        16.80000001192093,
+        16.5,
+        30.19999998807907,
+        22.900000005960464,
+        20.299999982118607,
+        22.80000001192093,
+        23.19999998807907,
+        26.5,
+        25.600000023841858,
+        20.69999998807907,
+        17.69999998807907,
+        21.900000005960464,
+        22.700000017881393,
+        20.399999976158142,
+        21,
+        18.80000001192093,
+        16.80000001192093,
+        12.899999976158142,
+        11.200000017881393,
+        15.799999982118607,
+        12.100000023841858,
+        16.5,
+        16.69999998807907,
+        26.099999994039536,
+        13.200000017881393,
+        11.5,
+        16.19999998807907,
+        26,
+        16.099999994039536,
+        13.5,
+        14.599999994039536,
+        12.800000011920929,
+        20.099999994039536,
+        15.099999994039536,
+        14.800000011920929,
+        16.5,
+        16.69999998807907,
+        16.700000017881393,
+        18.69999998807907,
+        15.400000005960464,
+        18.599999994039536,
+        14,
+        21.5,
+        20.099999994039536,
+        22,
+        18.80000001192093,
+        18.400000005960464,
+        15.900000005960464,
+        16.799999982118607,
+        16.5,
+        16.599999994039536,
+        16.700000017881393,
+        16.69999998807907,
+        21.099999994039536,
+        21.900000005960464,
+        20.5,
+        15.099999994039536,
+        13.600000023841858,
+        13.099999994039536,
+        18,
+        19.19999998807907,
+        15.5,
+        15.300000011920929,
+        17,
+        11.799999982118607,
+        16.5,
+        15.300000011920929,
+        16.19999998807907,
+        22.30000001192093,
+        19.900000005960464,
+        20.900000005960464,
+        14.5,
+        12.799999982118607,
+        13.700000017881393,
+        13.299999982118607,
+        15.800000011920929,
+        20.900000005960464,
+        12.5,
+        16.69999998807907,
+        17,
+        16.19999998807907,
+        22.5,
+        20.600000023841858,
+        12.599999994039536,
+        17.5,
+        19.5,
+        24.299999982118607,
+        16.30000001192093,
+        18.30000001192093,
+        15.099999994039536,
+        17.400000005960464,
+        16,
+        22.19999998807907,
+        16,
+        11.900000005960464,
+        16.5,
+        16.900000005960464,
+        16.399999976158142,
+        16.80000001192093,
+        16.599999994039536,
+        16.599999994039536,
+        16.600000023841858,
+        16.799999982118607,
+        16.700000017881393,
+        17.5,
+        15.799999982118607,
+        17.099999994039536,
+        26,
+        20.400000005960464,
+        16.5,
+        13.900000005960464,
+        14.699999988079071,
+        19.5,
+        12.300000011920929,
+        13.199999988079071,
+        13,
+        16.80000001192093,
+        16.5,
+        19.599999994039536,
+        19.400000005960464,
+        23.19999998807907,
+        28.30000001192093,
+        24.400000005960464,
+        27.599999994039536,
+        21.80000001192093,
+        21.599999994039536,
+        21.799999982118607,
+        26.200000017881393,
+        16.099999994039536,
+        16.80000001192093,
+        20.599999994039536,
+        21.799999982118607,
+        25.100000023841858,
+        15.699999988079071,
+        16.80000001192093,
+        21.599999994039536,
+        20.799999982118607,
+        16,
+        21.600000023841858,
+        14.899999976158142,
+        20,
+        16.900000005960464,
+        15.400000005960464,
+        14.199999988079071,
+        13.400000005960464,
+        13,
+        15.300000011920929,
+        13.400000005960464,
+        22.099999994039536,
+        20.400000005960464,
+        19.69999998807907,
+        23.80000001192093,
+        18.599999994039536,
+        14.400000005960464,
+        14.399999976158142,
+        16.700000017881393,
+        16.69999998807907,
+        16.700000017881393,
+        16.69999998807907
+      ],
+      "before": {
+        "after": true,
+        "training": true,
+        "worldTime": 0.5,
+        "rain": false,
+        "hemi": {
+          "sky": "f3f1ea",
+          "ground": "8c877c",
+          "intensity": 1.15
+        },
+        "sun": 1.73,
+        "picture": {
+          "brightness": 1.05,
+          "vibrancy": 1.15,
+          "fpFov": 60,
+          "exposure": 1.05,
+          "graded": true,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            0.06710782485609254,
+            -198.5791171757731,
+            -640.5863747798905
+          ],
+          "quaternion": [
+            0,
+            0.955336489125606,
+            0,
+            -0.2955202066613397
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "first": true,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ],
+          "world": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      },
+      "state": {
+        "after": true,
+        "training": true,
+        "worldTime": 0.5,
+        "rain": false,
+        "hemi": {
+          "sky": "f3f1ea",
+          "ground": "8c877c",
+          "intensity": 1.15
+        },
+        "sun": 1.73,
+        "picture": {
+          "brightness": 1.05,
+          "vibrancy": 1.15,
+          "fpFov": 60,
+          "exposure": 1.05,
+          "graded": true,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            0.05801159350982939,
+            -198.5830803758795,
+            -640.5689389919517
+          ],
+          "quaternion": [
+            0,
+            0.955336489125606,
+            0,
+            -0.2955202066613397
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "first": true,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ],
+          "world": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      }
+    },
+    {
+      "pass": 3,
+      "after": false,
+      "frames": [
+        19.900000005960464,
+        20.69999998807907,
+        12.599999994039536,
+        15.800000011920929,
+        19.599999994039536,
+        19.200000017881393,
+        18.5,
+        20,
+        19.599999994039536,
+        19.19999998807907,
+        20.099999994039536,
+        19.700000017881393,
+        20.19999998807907,
+        21.80000001192093,
+        21.19999998807907,
+        22.200000017881393,
+        14.5,
+        13.599999994039536,
+        14,
+        20.5,
+        14.599999994039536,
+        17.599999994039536,
+        21.099999994039536,
+        15.100000023841858,
+        14.699999988079071,
+        14.099999994039536,
+        15.5,
+        16.700000017881393,
+        16.69999998807907,
+        22.80000001192093,
+        24.5,
+        25.599999994039536,
+        24,
+        26.299999982118607,
+        17.80000001192093,
+        15.099999994039536,
+        15.599999994039536,
+        15.900000005960464,
+        14.800000011920929,
+        14.400000005960464,
+        16.69999998807907,
+        25.400000005960464,
+        18.19999998807907,
+        15,
+        16.700000017881393,
+        12.899999976158142,
+        13.900000005960464,
+        16.200000017881393,
+        15.199999988079071,
+        16.400000005960464,
+        16.799999982118607,
+        23.100000023841858,
+        12.899999976158142,
+        15.900000005960464,
+        14.700000017881393,
+        16.5,
+        20,
+        20.5,
+        20.099999994039536,
+        21.400000005960464,
+        23.099999994039536,
+        16.900000005960464,
+        12.299999982118607,
+        15.700000017881393,
+        16.899999976158142,
+        16.700000017881393,
+        16.5,
+        25.5,
+        21.799999982118607,
+        20.900000005960464,
+        20.099999994039536,
+        22.5,
+        22.30000001192093,
+        19.80000001192093,
+        14.099999994039536,
+        16.299999982118607,
+        24.700000017881393,
+        16.099999994039536,
+        12.800000011920929,
+        13.099999994039536,
+        21.900000005960464,
+        13.399999976158142,
+        14.800000011920929,
+        16.69999998807907,
+        16.5,
+        16.80000001192093,
+        16.599999994039536,
+        16.599999994039536,
+        16.700000017881393,
+        16.599999994039536,
+        16.80000001192093,
+        23.099999994039536,
+        20,
+        19.19999998807907,
+        18.30000001192093,
+        18.5,
+        16.400000005960464,
+        21.799999982118607,
+        21.80000001192093,
+        22.400000005960464,
+        24.099999994039536,
+        22.400000005960464,
+        13.799999982118607,
+        13.700000017881393,
+        14,
+        18.69999998807907,
+        11.599999994039536,
+        22.30000001192093,
+        22.299999982118607,
+        22.400000005960464,
+        16.400000005960464,
+        19,
+        14.599999994039536,
+        16.80000001192093,
+        16.299999982118607,
+        16.600000023841858,
+        16.69999998807907,
+        16.69999998807907,
+        16.700000017881393,
+        21,
+        14.5,
+        17.69999998807907,
+        21.200000017881393,
+        13.799999982118607,
+        12.300000011920929,
+        16.19999998807907,
+        16.599999994039536,
+        20.900000005960464,
+        15.700000017881393,
+        13.399999976158142,
+        16.700000017881393,
+        18.599999994039536,
+        16.400000005960464,
+        19.5,
+        23.19999998807907,
+        21,
+        18.400000005960464,
+        16.19999998807907,
+        16.700000017881393,
+        21.5,
+        13.199999988079071,
+        15.300000011920929,
+        16.599999994039536,
+        16.69999998807907,
+        16.700000017881393,
+        16.799999982118607,
+        16.5,
+        16.80000001192093,
+        17,
+        16.19999998807907,
+        16.700000017881393,
+        23.799999982118607,
+        21.400000005960464,
+        22.200000017881393,
+        20.69999998807907,
+        14.900000005960464,
+        14,
+        16.299999982118607,
+        16.700000017881393,
+        16.5,
+        23,
+        15.699999988079071,
+        21.200000017881393,
+        14.399999976158142,
+        13.900000005960464,
+        14.300000011920929,
+        14.5,
+        22.5,
+        15,
+        13.199999988079071,
+        15.800000011920929,
+        22.099999994039536,
+        26.19999998807907,
+        24.100000023841858,
+        13.899999976158142,
+        14.300000011920929,
+        20.69999998807907,
+        15.900000005960464,
+        13.5,
+        17,
+        15.700000017881393,
+        16.799999982118607,
+        16.400000005960464,
+        17,
+        25.19999998807907,
+        18.400000005960464,
+        14.800000011920929,
+        11.799999982118607,
+        13.5,
+        15.900000005960464,
+        16.700000017881393,
+        16.69999998807907,
+        16.900000005960464,
+        16.5,
+        16.69999998807907,
+        21,
+        13.300000011920929,
+        15.699999988079071,
+        16.599999994039536,
+        16.80000001192093,
+        16.599999994039536,
+        17,
+        16.200000017881393,
+        16.69999998807907,
+        16.69999998807907,
+        16.600000023841858,
+        16.799999982118607,
+        16.599999994039536,
+        16.700000017881393,
+        16.599999994039536,
+        16.69999998807907,
+        16.600000023841858,
+        16.799999982118607,
+        16.599999994039536,
+        16.700000017881393,
+        16.599999994039536,
+        16.69999998807907,
+        16.700000017881393,
+        17.099999994039536,
+        17.80000001192093,
+        15,
+        16.799999982118607,
+        16.599999994039536,
+        16.600000023841858,
+        16.799999982118607,
+        27.599999994039536,
+        27.5,
+        12.900000005960464,
+        15.200000017881393,
+        16.799999982118607,
+        16.599999994039536,
+        22.100000023841858,
+        14.699999988079071,
+        15.5,
+        14.300000011920929,
+        16.69999998807907,
+        22,
+        14.699999988079071,
+        15.5,
+        15.800000011920929,
+        21,
+        11.300000011920929,
+        16.299999982118607,
+        24.099999994039536,
+        26.30000001192093,
+        27.80000001192093,
+        19.299999982118607,
+        13.900000005960464,
+        13.099999994039536,
+        12,
+        13.599999994039536,
+        17.700000017881393,
+        15.699999988079071,
+        23.400000005960464,
+        25.30000001192093
+      ],
+      "before": {
+        "after": false,
+        "training": true,
+        "worldTime": 0.5,
+        "rain": false,
+        "hemi": {
+          "sky": "ddeeff",
+          "ground": "445566",
+          "intensity": 0.6799999999999999
+        },
+        "sun": 1.73,
+        "picture": {
+          "brightness": 1,
+          "vibrancy": 1,
+          "fpFov": 60,
+          "exposure": 1,
+          "graded": false,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            0.057042945299094996,
+            -198.58227798704655,
+            -640.5678179093891
+          ],
+          "quaternion": [
+            0,
+            0.955336489125606,
+            0,
+            -0.2955202066613397
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "first": true,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ],
+          "world": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      },
+      "state": {
+        "after": false,
+        "training": true,
+        "worldTime": 0.5,
+        "rain": false,
+        "hemi": {
+          "sky": "ddeeff",
+          "ground": "445566",
+          "intensity": 0.6799999999999999
+        },
+        "sun": 1.73,
+        "picture": {
+          "brightness": 1,
+          "vibrancy": 1,
+          "fpFov": 60,
+          "exposure": 1,
+          "graded": false,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            0.06494104930246009,
+            -198.58418944140973,
+            -640.5705533143646
+          ],
+          "quaternion": [
+            0,
+            0.955336489125606,
+            0,
+            -0.2955202066613397
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "first": true,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ],
+          "world": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      }
+    },
+    {
+      "pass": 4,
+      "after": false,
+      "frames": [
+        21.30000001192093,
+        13.599999994039536,
+        15.200000017881393,
+        21.19999998807907,
+        13.199999988079071,
+        15.600000023841858,
+        16.799999982118607,
+        16.80000001192093,
+        18.799999982118607,
+        14.400000005960464,
+        16.5,
+        16.80000001192093,
+        20.5,
+        13.900000005960464,
+        15.5,
+        23.599999994039536,
+        20.5,
+        15.900000005960464,
+        15.099999994039536,
+        13.299999982118607,
+        16.100000023841858,
+        13.699999988079071,
+        20.30000001192093,
+        18.19999998807907,
+        19.80000001192093,
+        18.799999982118607,
+        16.900000005960464,
+        20.30000001192093,
+        27.399999976158142,
+        18.30000001192093,
+        16.69999998807907,
+        17.400000005960464,
+        27.700000017881393,
+        22.399999976158142,
+        23.200000017881393,
+        22.19999998807907,
+        19.700000017881393,
+        19.599999994039536,
+        18,
+        15.5,
+        15,
+        23.19999998807907,
+        26.700000017881393,
+        28.399999976158142,
+        20.400000005960464,
+        15.599999994039536,
+        13.5,
+        12.100000023841858,
+        14.5,
+        16.69999998807907,
+        16.69999998807907,
+        18.700000017881393,
+        15.299999982118607,
+        17.100000023841858,
+        24.299999982118607,
+        19.80000001192093,
+        16.099999994039536,
+        16.400000005960464,
+        19.799999982118607,
+        19.80000001192093,
+        24.80000001192093,
+        21.899999976158142,
+        22.5,
+        23.80000001192093,
+        17.099999994039536,
+        13.400000005960464,
+        11.900000005960464,
+        13.799999982118607,
+        16.700000017881393,
+        24.799999982118607,
+        20.100000023841858,
+        16.599999994039536,
+        17.400000005960464,
+        17.899999976158142,
+        18.30000001192093,
+        24.599999994039536,
+        18.200000017881393,
+        15.199999988079071,
+        12.900000005960464,
+        14,
+        16.69999998807907,
+        24.099999994039536,
+        15.800000011920929,
+        13.599999994039536,
+        13.599999994039536,
+        16.30000001192093,
+        24.30000001192093,
+        22.399999976158142,
+        17.30000001192093,
+        13.5,
+        14.699999988079071,
+        13.5,
+        12.700000017881393,
+        14.799999982118607,
+        23.600000023841858,
+        19.19999998807907,
+        19.5,
+        18.5,
+        14.5,
+        12.099999994039536,
+        12.5,
+        13.599999994039536,
+        16.600000023841858,
+        16.599999994039536,
+        22.19999998807907,
+        17.700000017881393,
+        14.899999976158142,
+        16.5,
+        24.5,
+        13.800000011920929,
+        12.699999988079071,
+        12.200000017881393,
+        18.299999982118607,
+        14.100000023841858,
+        16.399999976158142,
+        16.700000017881393,
+        17,
+        16.299999982118607,
+        16.600000023841858,
+        16.799999982118607,
+        16.599999994039536,
+        22.100000023841858,
+        14.099999994039536,
+        16.19999998807907,
+        26.700000017881393,
+        14.199999988079071,
+        11.5,
+        17.5,
+        15.599999994039536,
+        12.200000017881393,
+        25.299999982118607,
+        22.80000001192093,
+        25.900000005960464,
+        14.5,
+        13.799999982118607,
+        15.700000017881393,
+        15.399999976158142,
+        22.100000023841858,
+        15,
+        14.199999988079071,
+        15.400000005960464,
+        16.5,
+        24.5,
+        27.099999994039536,
+        25,
+        29.599999994039536,
+        22.599999994039536,
+        19.30000001192093,
+        25,
+        15.599999994039536,
+        13.800000011920929,
+        14.199999988079071,
+        16.599999994039536,
+        16.80000001192093,
+        18.69999998807907,
+        14.600000023841858,
+        19.69999998807907,
+        24.099999994039536,
+        20.099999994039536,
+        19.200000017881393,
+        13.799999982118607,
+        11.600000023841858,
+        12.099999994039536,
+        12.699999988079071,
+        16.700000017881393,
+        19.19999998807907,
+        17.30000001192093,
+        14.599999994039536,
+        17,
+        25.099999994039536,
+        22.69999998807907,
+        22.30000001192093,
+        19.19999998807907,
+        23.900000005960464,
+        24,
+        27.5,
+        28.200000017881393,
+        23.099999994039536,
+        21.099999994039536,
+        18.80000001192093,
+        19.099999994039536,
+        19.599999994039536,
+        25,
+        21.5,
+        22.30000001192093,
+        21.5,
+        13.599999994039536,
+        16.599999994039536,
+        22.80000001192093,
+        19.899999976158142,
+        16.5,
+        13.200000017881393,
+        15.799999982118607,
+        14.5,
+        18.600000023841858,
+        17.19999998807907,
+        13.5,
+        16.5,
+        17.599999994039536,
+        18,
+        19.700000017881393,
+        20.299999982118607,
+        17.80000001192093,
+        17.799999982118607,
+        17.5,
+        13.600000023841858,
+        20.299999982118607,
+        21.400000005960464,
+        35.69999998807907,
+        14.600000023841858,
+        16.299999982118607,
+        15.900000005960464,
+        17.599999994039536,
+        28.599999994039536,
+        21.400000005960464,
+        14.599999994039536,
+        19.400000005960464,
+        17.5,
+        17,
+        17,
+        14.900000005960464,
+        19.69999998807907,
+        13.400000005960464,
+        14.099999994039536,
+        26.100000023841858,
+        24.899999976158142,
+        18.700000017881393,
+        24.299999982118607,
+        16.100000023841858,
+        17.099999994039536,
+        17.599999994039536,
+        15.800000011920929,
+        16.799999982118607,
+        13.900000005960464,
+        19.400000005960464,
+        33.099999994039536,
+        26.19999998807907,
+        15,
+        15,
+        16.80000001192093,
+        16.69999998807907,
+        19.80000001192093,
+        18.599999994039536,
+        19.700000017881393,
+        16.899999976158142,
+        15.700000017881393
+      ],
+      "before": {
+        "after": false,
+        "training": true,
+        "worldTime": 0.5,
+        "rain": false,
+        "hemi": {
+          "sky": "ddeeff",
+          "ground": "445566",
+          "intensity": 0.6799999999999999
+        },
+        "sun": 1.73,
+        "picture": {
+          "brightness": 1,
+          "vibrancy": 1,
+          "fpFov": 60,
+          "exposure": 1,
+          "graded": false,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            0.06526231872573482,
+            -198.58364844812584,
+            -640.5746200378721
+          ],
+          "quaternion": [
+            0,
+            0.955336489125606,
+            0,
+            -0.2955202066613397
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "first": true,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ],
+          "world": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      },
+      "state": {
+        "after": false,
+        "training": true,
+        "worldTime": 0.5,
+        "rain": false,
+        "hemi": {
+          "sky": "ddeeff",
+          "ground": "445566",
+          "intensity": 0.6799999999999999
+        },
+        "sun": 1.73,
+        "picture": {
+          "brightness": 1,
+          "vibrancy": 1,
+          "fpFov": 60,
+          "exposure": 1,
+          "graded": false,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            0.06680753774858404,
+            -198.580726153019,
+            -640.5815968455756
+          ],
+          "quaternion": [
+            0,
+            0.955336489125606,
+            0,
+            -0.2955202066613397
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "first": true,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ],
+          "world": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      }
+    },
+    {
+      "pass": 5,
+      "after": true,
+      "frames": [
+        12.699999988079071,
+        13.900000005960464,
+        22.400000005960464,
+        15,
+        14.299999982118607,
+        18.700000017881393,
+        15.099999994039536,
+        14.5,
+        19.69999998807907,
+        13.700000017881393,
+        25.299999982118607,
+        22.200000017881393,
+        26.099999994039536,
+        23,
+        18.900000005960464,
+        18,
+        18,
+        20.599999994039536,
+        21.599999994039536,
+        24.099999994039536,
+        17.700000017881393,
+        19.399999976158142,
+        15.400000005960464,
+        15.5,
+        14.200000017881393,
+        16.599999994039536,
+        22.400000005960464,
+        17.19999998807907,
+        16.599999994039536,
+        18.900000005960464,
+        18.599999994039536,
+        20.80000001192093,
+        20.799999982118607,
+        17,
+        18,
+        15.200000017881393,
+        15.099999994039536,
+        16,
+        17.099999994039536,
+        19.599999994039536,
+        17.200000017881393,
+        14.900000005960464,
+        14.5,
+        16.69999998807907,
+        16.80000001192093,
+        16.69999998807907,
+        19.599999994039536,
+        16.5,
+        27.200000017881393,
+        31.69999998807907,
+        17.099999994039536,
+        13.200000017881393,
+        12.799999982118607,
+        13.5,
+        19.30000001192093,
+        20.19999998807907,
+        17.599999994039536,
+        19.600000023841858,
+        19.399999976158142,
+        22.200000017881393,
+        17.599999994039536,
+        15.900000005960464,
+        18.299999982118607,
+        21.30000001192093,
+        18.400000005960464,
+        18.599999994039536,
+        16.30000001192093,
+        24.299999982118607,
+        24.200000017881393,
+        24.799999982118607,
+        24.30000001192093,
+        24.5,
+        20.69999998807907,
+        25.30000001192093,
+        32.79999998211861,
+        26.5,
+        23.100000023841858,
+        21.899999976158142,
+        20.600000023841858,
+        19.799999982118607,
+        26.700000017881393,
+        28.69999998807907,
+        21.5,
+        19.900000005960464,
+        19.900000005960464,
+        16.599999994039536,
+        17.799999982118607,
+        18.700000017881393,
+        15.099999994039536,
+        15.900000005960464,
+        14.299999982118607,
+        21.600000023841858,
+        20,
+        21.899999976158142,
+        16.400000005960464,
+        12.900000005960464,
+        16.30000001192093,
+        22.799999982118607,
+        21.900000005960464,
+        16.900000005960464,
+        13.5,
+        13.599999994039536,
+        13.800000011920929,
+        14.099999994039536,
+        21.099999994039536,
+        14.099999994039536,
+        15.099999994039536,
+        16.600000023841858,
+        25,
+        21.69999998807907,
+        26.80000001192093,
+        27.799999982118607,
+        23,
+        17.400000005960464,
+        14.800000011920929,
+        15,
+        14.399999976158142,
+        20.30000001192093,
+        24.099999994039536,
+        24.099999994039536,
+        27.100000023841858,
+        15.099999994039536,
+        14.400000005960464,
+        21.099999994039536,
+        18.099999994039536,
+        16.30000001192093,
+        23.299999982118607,
+        14.900000005960464,
+        14.5,
+        15.300000011920929,
+        22.69999998807907,
+        16.400000005960464,
+        13.199999988079071,
+        15.900000005960464,
+        20.5,
+        20.400000005960464,
+        19.299999982118607,
+        20.600000023841858,
+        16.799999982118607,
+        16.30000001192093,
+        18.299999982118607,
+        18,
+        24.600000023841858,
+        15.799999982118607,
+        16.900000005960464,
+        21,
+        20.5,
+        20.69999998807907,
+        18.600000023841858,
+        15.399999976158142,
+        16.100000023841858,
+        13.299999982118607,
+        16.5,
+        14.099999994039536,
+        16.80000001192093,
+        16.5,
+        16.80000001192093,
+        19.799999982118607,
+        20.5,
+        17.80000001192093,
+        17.69999998807907,
+        17.400000005960464,
+        20.30000001192093,
+        25.799999982118607,
+        21.5,
+        18.900000005960464,
+        21.400000005960464,
+        20.799999982118607,
+        21.700000017881393,
+        17.799999982118607,
+        21.400000005960464,
+        21.099999994039536,
+        16.200000017881393,
+        16.400000005960464,
+        15.699999988079071,
+        24.19999998807907,
+        17.200000017881393,
+        15.5,
+        16.5,
+        15.799999982118607,
+        16.900000005960464,
+        15.5,
+        12.900000005960464,
+        13.099999994039536,
+        16.700000017881393,
+        16.799999982118607,
+        16.5,
+        20,
+        18.099999994039536,
+        20.600000023841858,
+        21.69999998807907,
+        22.400000005960464,
+        16.69999998807907,
+        16.900000005960464,
+        18.19999998807907,
+        19.400000005960464,
+        18.700000017881393,
+        17.599999994039536,
+        17.099999994039536,
+        20.69999998807907,
+        15.5,
+        17.400000005960464,
+        17.599999994039536,
+        17.100000023841858,
+        20.099999994039536,
+        17.400000005960464,
+        20.599999994039536,
+        17.299999982118607,
+        18.700000017881393,
+        19.69999998807907,
+        18.599999994039536,
+        20.200000017881393,
+        19.400000005960464,
+        22.399999976158142,
+        20.200000017881393,
+        19.69999998807907,
+        18,
+        15.400000005960464,
+        23.80000001192093,
+        18.099999994039536,
+        22.099999994039536,
+        26.900000005960464,
+        22,
+        16.799999982118607,
+        18.900000005960464,
+        19.900000005960464,
+        16.900000005960464,
+        22,
+        27.799999982118607,
+        19,
+        14.100000023841858,
+        15.099999994039536,
+        16.900000005960464,
+        20.19999998807907,
+        20.900000005960464,
+        22.799999982118607,
+        19.600000023841858,
+        16.899999976158142,
+        22.700000017881393
+      ],
+      "before": {
+        "after": true,
+        "training": true,
+        "worldTime": 0.5,
+        "rain": false,
+        "hemi": {
+          "sky": "f3f1ea",
+          "ground": "8c877c",
+          "intensity": 1.15
+        },
+        "sun": 1.73,
+        "picture": {
+          "brightness": 1.05,
+          "vibrancy": 1.15,
+          "fpFov": 60,
+          "exposure": 1.05,
+          "graded": true,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            0.06923183595781254,
+            -198.58302224466607,
+            -640.5752818616638
+          ],
+          "quaternion": [
+            0,
+            0.955336489125606,
+            0,
+            -0.2955202066613397
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "first": true,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ],
+          "world": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      },
+      "state": {
+        "after": true,
+        "training": true,
+        "worldTime": 0.5,
+        "rain": false,
+        "hemi": {
+          "sky": "f3f1ea",
+          "ground": "8c877c",
+          "intensity": 1.15
+        },
+        "sun": 1.73,
+        "picture": {
+          "brightness": 1.05,
+          "vibrancy": 1.15,
+          "fpFov": 60,
+          "exposure": 1.05,
+          "graded": true,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            0.05972329614163096,
+            -198.58034328695467,
+            -640.5740838928386
+          ],
+          "quaternion": [
+            0,
+            0.955336489125606,
+            0,
+            -0.2955202066613397
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "first": true,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ],
+          "world": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      }
+    },
+    {
+      "pass": 6,
+      "after": true,
+      "frames": [
+        15.599999994039536,
+        19.400000005960464,
+        25.099999994039536,
+        17.5,
+        18.599999994039536,
+        18.099999994039536,
+        21.400000005960464,
+        21.099999994039536,
+        23,
+        21.600000023841858,
+        19.5,
+        19.299999982118607,
+        18.599999994039536,
+        17.5,
+        15.300000011920929,
+        15.300000011920929,
+        23.899999976158142,
+        19.700000017881393,
+        16.799999982118607,
+        16.30000001192093,
+        19.69999998807907,
+        17,
+        25.100000023841858,
+        16.19999998807907,
+        18.5,
+        22.599999994039536,
+        24.200000017881393,
+        27.099999994039536,
+        30.799999982118607,
+        22.80000001192093,
+        24.80000001192093,
+        27.399999976158142,
+        25.600000023841858,
+        30.099999994039536,
+        27.599999994039536,
+        19.900000005960464,
+        16.900000005960464,
+        16.799999982118607,
+        14.800000011920929,
+        16,
+        15.099999994039536,
+        17.599999994039536,
+        23.30000001192093,
+        15.799999982118607,
+        14.800000011920929,
+        17.30000001192093,
+        17.5,
+        20.5,
+        31,
+        22.399999976158142,
+        17,
+        19,
+        19.5,
+        15.5,
+        16.5,
+        16.400000005960464,
+        20.700000017881393,
+        20.299999982118607,
+        18.80000001192093,
+        18.19999998807907,
+        28.599999994039536,
+        20.900000005960464,
+        21.5,
+        16.80000001192093,
+        17.400000005960464,
+        16.799999982118607,
+        22.200000017881393,
+        20.599999994039536,
+        17.799999982118607,
+        14.800000011920929,
+        15,
+        15.099999994039536,
+        15.099999994039536,
+        17.30000001192093,
+        26.19999998807907,
+        30,
+        21.400000005960464,
+        17.30000001192093,
+        18.5,
+        16.5,
+        18,
+        20.099999994039536,
+        18.5,
+        17.80000001192093,
+        15.699999988079071,
+        13.699999988079071,
+        16.200000017881393,
+        14.900000005960464,
+        20.099999994039536,
+        18.299999982118607,
+        14.700000017881393,
+        17.900000005960464,
+        14.299999982118607,
+        13.5,
+        18.099999994039536,
+        18.30000001192093,
+        18.30000001192093,
+        17.799999982118607,
+        15.599999994039536,
+        17.900000005960464,
+        16.30000001192093,
+        17.69999998807907,
+        28.200000017881393,
+        19.5,
+        14.199999988079071,
+        12.400000005960464,
+        15.900000005960464,
+        30.099999994039536,
+        25,
+        18.799999982118607,
+        20.600000023841858,
+        19.19999998807907,
+        19.30000001192093,
+        21.899999976158142,
+        26.400000005960464,
+        22.30000001192093,
+        21.400000005960464,
+        37.599999994039536,
+        27.299999982118607,
+        22.400000005960464,
+        21.900000005960464,
+        21.69999998807907,
+        21.600000023841858,
+        25,
+        32.89999997615814,
+        43.80000001192093,
+        27.69999998807907,
+        19.5,
+        21.80000001192093,
+        19.900000005960464,
+        18.799999982118607,
+        19.200000017881393,
+        19.400000005960464,
+        19.399999976158142,
+        20.400000005960464,
+        24.200000017881393,
+        27.799999982118607,
+        23.900000005960464,
+        16.400000005960464,
+        14.400000005960464,
+        16.599999994039536,
+        19.799999982118607,
+        14.100000023841858,
+        13,
+        14.899999976158142,
+        15.400000005960464,
+        16.30000001192093,
+        18.099999994039536,
+        24.400000005960464,
+        19.19999998807907,
+        13.5,
+        12.300000011920929,
+        14.5,
+        13.400000005960464,
+        18.399999976158142,
+        14.100000023841858,
+        16.899999976158142,
+        18.5,
+        17.100000023841858,
+        14.5,
+        16.399999976158142,
+        24,
+        22.200000017881393,
+        14.799999982118607,
+        14.800000011920929,
+        14.099999994039536,
+        12.800000011920929,
+        14,
+        16.900000005960464,
+        18.099999994039536,
+        19.400000005960464,
+        13.299999982118607,
+        15.700000017881393,
+        24.099999994039536,
+        20.5,
+        14.900000005960464,
+        17.599999994039536,
+        19.5,
+        15.199999988079071,
+        15.900000005960464,
+        17.400000005960464,
+        15.799999982118607,
+        12.800000011920929,
+        15.099999994039536,
+        16,
+        15.5,
+        16.900000005960464,
+        16.400000005960464,
+        15.400000005960464,
+        14.199999988079071,
+        18.599999994039536,
+        19.099999994039536,
+        14.900000005960464,
+        16.400000005960464,
+        19.099999994039536,
+        15.599999994039536,
+        16,
+        13.800000011920929,
+        23.30000001192093,
+        16.299999982118607,
+        13.599999994039536,
+        13.800000011920929,
+        22.30000001192093,
+        15.299999982118607,
+        18.5,
+        17.700000017881393,
+        19.899999976158142,
+        15.800000011920929,
+        17.80000001192093,
+        16.799999982118607,
+        14,
+        15.400000005960464,
+        17.599999994039536,
+        21.599999994039536,
+        16.900000005960464,
+        14.800000011920929,
+        12.5,
+        13.900000005960464,
+        17.099999994039536,
+        16.099999994039536,
+        16.5,
+        18.5,
+        12.5,
+        14.800000011920929,
+        16.69999998807907,
+        23.599999994039536,
+        27.400000005960464,
+        24.30000001192093,
+        24.599999994039536,
+        22.900000005960464,
+        23.099999994039536,
+        14.199999988079071,
+        15.200000017881393,
+        13.899999976158142,
+        14.400000005960464,
+        15.5,
+        14.200000017881393,
+        16.799999982118607,
+        23.400000005960464
+      ],
+      "before": {
+        "after": true,
+        "training": true,
+        "worldTime": 0.5,
+        "rain": false,
+        "hemi": {
+          "sky": "f3f1ea",
+          "ground": "8c877c",
+          "intensity": 1.15
+        },
+        "sun": 1.73,
+        "picture": {
+          "brightness": 1.05,
+          "vibrancy": 1.15,
+          "fpFov": 60,
+          "exposure": 1.05,
+          "graded": true,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            0.05820502012090366,
+            -198.57975086259404,
+            -640.5771588687888
+          ],
+          "quaternion": [
+            0,
+            0.955336489125606,
+            0,
+            -0.2955202066613397
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "first": true,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ],
+          "world": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      },
+      "state": {
+        "after": true,
+        "training": true,
+        "worldTime": 0.5,
+        "rain": false,
+        "hemi": {
+          "sky": "f3f1ea",
+          "ground": "8c877c",
+          "intensity": 1.15
+        },
+        "sun": 1.73,
+        "picture": {
+          "brightness": 1.05,
+          "vibrancy": 1.15,
+          "fpFov": 60,
+          "exposure": 1.05,
+          "graded": true,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            0.06871948736759237,
+            -198.5815072069472,
+            -640.58197447931
+          ],
+          "quaternion": [
+            0,
+            0.955336489125606,
+            0,
+            -0.2955202066613397
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "first": true,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ],
+          "world": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      }
+    },
+    {
+      "pass": 7,
+      "after": false,
+      "frames": [
+        13.5,
+        20.400000005960464,
+        17.5,
+        22.400000005960464,
+        27.899999976158142,
+        26.30000001192093,
+        17.400000005960464,
+        14.799999982118607,
+        14.900000005960464,
+        14.099999994039536,
+        14.400000005960464,
+        14.400000005960464,
+        16.19999998807907,
+        16.400000005960464,
+        18.30000001192093,
+        18,
+        15.400000005960464,
+        15.599999994039536,
+        19.099999994039536,
+        17.099999994039536,
+        18.80000001192093,
+        17.19999998807907,
+        15.800000011920929,
+        15,
+        17.099999994039536,
+        22.80000001192093,
+        14.199999988079071,
+        15.199999988079071,
+        17,
+        13.800000011920929,
+        15,
+        22.400000005960464,
+        22.099999994039536,
+        18.900000005960464,
+        19.599999994039536,
+        22,
+        22.900000005960464,
+        23,
+        21.19999998807907,
+        18.700000017881393,
+        15.5,
+        13.399999976158142,
+        15.300000011920929,
+        15,
+        21,
+        21.30000001192093,
+        16.5,
+        14.599999994039536,
+        16.69999998807907,
+        15,
+        12.599999994039536,
+        15,
+        14.300000011920929,
+        14.099999994039536,
+        16.30000001192093,
+        16.69999998807907,
+        16.700000017881393,
+        28.69999998807907,
+        18,
+        13.300000011920929,
+        13.199999988079071,
+        19.5,
+        16,
+        21.400000005960464,
+        17.5,
+        19.799999982118607,
+        20.80000001192093,
+        18.80000001192093,
+        20.099999994039536,
+        15.599999994039536,
+        18.80000001192093,
+        14.399999976158142,
+        13.300000011920929,
+        14.900000005960464,
+        14.299999982118607,
+        14.900000005960464,
+        18.700000017881393,
+        16.899999976158142,
+        17.900000005960464,
+        16.700000017881393,
+        15.799999982118607,
+        18,
+        17.200000017881393,
+        13.899999976158142,
+        14.900000005960464,
+        19.200000017881393,
+        14.199999988079071,
+        22.30000001192093,
+        16.19999998807907,
+        17.099999994039536,
+        16.099999994039536,
+        15,
+        18.30000001192093,
+        18.30000001192093,
+        13.799999982118607,
+        15.099999994039536,
+        20.5,
+        16.80000001192093,
+        13,
+        14.300000011920929,
+        16.399999976158142,
+        16.700000017881393,
+        17.5,
+        15.900000005960464,
+        16.69999998807907,
+        16.5,
+        16.80000001192093,
+        18.299999982118607,
+        18.5,
+        13.099999994039536,
+        16.700000017881393,
+        24.19999998807907,
+        15.200000017881393,
+        16.399999976158142,
+        11.400000005960464,
+        19.400000005960464,
+        25.599999994039536,
+        23.80000001192093,
+        16.400000005960464,
+        16.399999976158142,
+        14.900000005960464,
+        16.30000001192093,
+        16.69999998807907,
+        18.5,
+        17.400000005960464,
+        20.69999998807907,
+        26.200000017881393,
+        29.5,
+        18.099999994039536,
+        17.099999994039536,
+        16.700000017881393,
+        17,
+        16.399999976158142,
+        19,
+        16.900000005960464,
+        22.80000001192093,
+        23,
+        18.900000005960464,
+        14.399999976158142,
+        14.200000017881393,
+        13.900000005960464,
+        13.399999976158142,
+        21.30000001192093,
+        18.099999994039536,
+        15,
+        20.099999994039536,
+        18.900000005960464,
+        15.599999994039536,
+        17.400000005960464,
+        18.80000001192093,
+        15.599999994039536,
+        15.300000011920929,
+        23.099999994039536,
+        15.299999982118607,
+        14.700000017881393,
+        22,
+        22.099999994039536,
+        13.900000005960464,
+        13.599999994039536,
+        17.400000005960464,
+        14,
+        15.099999994039536,
+        15.800000011920929,
+        16.299999982118607,
+        16.5,
+        17.30000001192093,
+        16.099999994039536,
+        24.19999998807907,
+        22.100000023841858,
+        29.099999994039536,
+        23.299999982118607,
+        21.5,
+        18.200000017881393,
+        13,
+        15.199999988079071,
+        16.599999994039536,
+        16.600000023841858,
+        16.799999982118607,
+        16.599999994039536,
+        16.700000017881393,
+        23.19999998807907,
+        12.900000005960464,
+        13.900000005960464,
+        21.299999982118607,
+        15.100000023841858,
+        13.699999988079071,
+        16.599999994039536,
+        16.700000017881393,
+        23.899999976158142,
+        17.100000023841858,
+        17,
+        14.799999982118607,
+        15.400000005960464,
+        14.699999988079071,
+        13.700000017881393,
+        16.799999982118607,
+        16.600000023841858,
+        16.599999994039536,
+        16.599999994039536,
+        16.69999998807907,
+        16.600000023841858,
+        16.69999998807907,
+        19.69999998807907,
+        13.700000017881393,
+        20,
+        13.900000005960464,
+        19.5,
+        21.899999976158142,
+        14.100000023841858,
+        14.699999988079071,
+        14.300000011920929,
+        14.899999976158142,
+        25.100000023841858,
+        19.5,
+        19.69999998807907,
+        14.5,
+        16.69999998807907,
+        13.5,
+        16.900000005960464,
+        17.200000017881393,
+        18.099999994039536,
+        17.19999998807907,
+        14.599999994039536,
+        13.700000017881393,
+        17.5,
+        15.599999994039536,
+        14.900000005960464,
+        21.400000005960464,
+        13.5,
+        15.299999982118607,
+        12.800000011920929,
+        15.699999988079071,
+        19.400000005960464,
+        17.19999998807907,
+        16.700000017881393,
+        16.599999994039536,
+        16.900000005960464,
+        20.5,
+        19.599999994039536,
+        17.099999994039536,
+        16.5,
+        16.400000005960464,
+        13.699999988079071,
+        13.5,
+        15.200000017881393,
+        16.599999994039536,
+        15.699999988079071,
+        19.100000023841858,
+        16.399999976158142,
+        16.100000023841858,
+        15.599999994039536,
+        22.5,
+        13.400000005960464,
+        13.899999976158142,
+        15.300000011920929,
+        19,
+        23.19999998807907,
+        17,
+        16.30000001192093,
+        13.800000011920929
+      ],
+      "before": {
+        "after": false,
+        "training": true,
+        "worldTime": 0.5,
+        "rain": false,
+        "hemi": {
+          "sky": "ddeeff",
+          "ground": "445566",
+          "intensity": 0.6799999999999999
+        },
+        "sun": 1.73,
+        "picture": {
+          "brightness": 1,
+          "vibrancy": 1,
+          "fpFov": 60,
+          "exposure": 1,
+          "graded": false,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            0.06996846857534426,
+            -198.58076885010303,
+            -640.5821239010943
+          ],
+          "quaternion": [
+            0,
+            0.955336489125606,
+            0,
+            -0.2955202066613397
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "first": true,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ],
+          "world": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      },
+      "state": {
+        "after": false,
+        "training": true,
+        "worldTime": 0.5,
+        "rain": false,
+        "hemi": {
+          "sky": "ddeeff",
+          "ground": "445566",
+          "intensity": 0.6799999999999999
+        },
+        "sun": 1.73,
+        "picture": {
+          "brightness": 1,
+          "vibrancy": 1,
+          "fpFov": 60,
+          "exposure": 1,
+          "graded": false,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            0.0686355245201699,
+            -198.58488320838651,
+            -640.5700018912895
+          ],
+          "quaternion": [
+            0,
+            0.955336489125606,
+            0,
+            -0.2955202066613397
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "first": true,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ],
+          "world": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      }
+    },
+    {
+      "pass": 8,
+      "after": false,
+      "frames": [
+        18.5,
+        26.5,
+        21.799999982118607,
+        15.099999994039536,
+        12.900000005960464,
+        15.599999994039536,
+        18.900000005960464,
+        18.599999994039536,
+        18,
+        18.600000023841858,
+        17.799999982118607,
+        15.800000011920929,
+        14.699999988079071,
+        15.400000005960464,
+        18.599999994039536,
+        18.099999994039536,
+        16.400000005960464,
+        16.5,
+        16.099999994039536,
+        14.700000017881393,
+        14.199999988079071,
+        16.599999994039536,
+        18.700000017881393,
+        17.69999998807907,
+        19.900000005960464,
+        13.900000005960464,
+        19.5,
+        14.900000005960464,
+        15.599999994039536,
+        15.199999988079071,
+        14,
+        17.700000017881393,
+        20.299999982118607,
+        19.30000001192093,
+        16.900000005960464,
+        16.5,
+        17.799999982118607,
+        15.700000017881393,
+        16,
+        16.69999998807907,
+        17.69999998807907,
+        19.200000017881393,
+        16,
+        17.19999998807907,
+        18.599999994039536,
+        13.800000011920929,
+        13.800000011920929,
+        14.199999988079071,
+        15.900000005960464,
+        15.599999994039536,
+        14.300000011920929,
+        15.899999976158142,
+        17.100000023841858,
+        15.099999994039536,
+        16.69999998807907,
+        16.700000017881393,
+        16.799999982118607,
+        23.200000017881393,
+        14.5,
+        16.799999982118607,
+        16.700000017881393,
+        17,
+        13.199999988079071,
+        15.400000005960464,
+        16.900000005960464,
+        26.599999994039536,
+        13.5,
+        13.099999994039536,
+        18.69999998807907,
+        16.900000005960464,
+        23.30000001192093,
+        25.19999998807907,
+        23.5,
+        19,
+        19.5,
+        22.599999994039536,
+        18.400000005960464,
+        15.099999994039536,
+        15.100000023841858,
+        16.299999982118607,
+        12.800000011920929,
+        16.69999998807907,
+        16.700000017881393,
+        19.299999982118607,
+        20.700000017881393,
+        19.19999998807907,
+        12.699999988079071,
+        14.300000011920929,
+        14.199999988079071,
+        16.30000001192093,
+        18,
+        15.099999994039536,
+        16.900000005960464,
+        23.900000005960464,
+        25.5,
+        14.599999994039536,
+        13.599999994039536,
+        17.200000017881393,
+        21.69999998807907,
+        24,
+        23.5,
+        22.900000005960464,
+        26.099999994039536,
+        24.5,
+        22.5,
+        25.099999994039536,
+        21.900000005960464,
+        21.30000001192093,
+        28.299999982118607,
+        15.599999994039536,
+        13.400000005960464,
+        14.300000011920929,
+        17,
+        17.5,
+        15.400000005960464,
+        25.399999976158142,
+        18,
+        15.600000023841858,
+        16.5,
+        14.899999976158142,
+        17.5,
+        19.200000017881393,
+        20.599999994039536,
+        15.800000011920929,
+        15.899999976158142,
+        16.900000005960464,
+        18.400000005960464,
+        16.19999998807907,
+        17,
+        15.900000005960464,
+        15.099999994039536,
+        15.600000023841858,
+        23.599999994039536,
+        20,
+        17,
+        16.400000005960464,
+        18,
+        16.299999982118607,
+        17.700000017881393,
+        18.899999976158142,
+        15.600000023841858,
+        19.099999994039536,
+        13,
+        14.599999994039536,
+        22.19999998807907,
+        22.900000005960464,
+        21.599999994039536,
+        15.700000017881393,
+        16.5,
+        19.299999982118607,
+        14.900000005960464,
+        15.400000005960464,
+        16.30000001192093,
+        15,
+        19.5,
+        17,
+        12.899999976158142,
+        16.30000001192093,
+        16.5,
+        16.599999994039536,
+        22.30000001192093,
+        16.099999994039536,
+        15.800000011920929,
+        12.399999976158142,
+        16.900000005960464,
+        26.099999994039536,
+        22.5,
+        15.200000017881393,
+        14.199999988079071,
+        14.700000017881393,
+        13.299999982118607,
+        14.900000005960464,
+        15.900000005960464,
+        13.400000005960464,
+        23.5,
+        13.599999994039536,
+        12.799999982118607,
+        24.600000023841858,
+        22.19999998807907,
+        18,
+        17.5,
+        19.69999998807907,
+        19.80000001192093,
+        19.900000005960464,
+        16.5,
+        17,
+        17.099999994039536,
+        16.30000001192093,
+        13.399999976158142,
+        13.5,
+        14.400000005960464,
+        16.700000017881393,
+        16.5,
+        16.69999998807907,
+        16.5,
+        19.5,
+        17.19999998807907,
+        13.5,
+        16.700000017881393,
+        16.599999994039536,
+        23.400000005960464,
+        14.599999994039536,
+        15.900000005960464,
+        16.5,
+        21.599999994039536,
+        22.5,
+        19.19999998807907,
+        17,
+        16.700000017881393,
+        15.900000005960464,
+        18.399999976158142,
+        16.600000023841858,
+        17.099999994039536,
+        22.5,
+        23.5,
+        23.799999982118607,
+        18,
+        17.100000023841858,
+        19.5,
+        20.799999982118607,
+        16.900000005960464,
+        19.30000001192093,
+        19.799999982118607,
+        22.200000017881393,
+        30.69999998807907,
+        22.099999994039536,
+        28.400000005960464,
+        27.19999998807907,
+        17.100000023841858,
+        18.799999982118607,
+        24,
+        20.900000005960464,
+        24.900000005960464,
+        32,
+        20.5,
+        23.799999982118607,
+        18.600000023841858,
+        24,
+        21.299999982118607,
+        16.30000001192093,
+        16.900000005960464,
+        15.399999976158142,
+        18.30000001192093,
+        17.69999998807907,
+        16.200000017881393,
+        18.400000005960464,
+        19.5,
+        21.19999998807907,
+        20.5
+      ],
+      "before": {
+        "after": false,
+        "training": true,
+        "worldTime": 0.5,
+        "rain": false,
+        "hemi": {
+          "sky": "ddeeff",
+          "ground": "445566",
+          "intensity": 0.6799999999999999
+        },
+        "sun": 1.73,
+        "picture": {
+          "brightness": 1,
+          "vibrancy": 1,
+          "fpFov": 60,
+          "exposure": 1,
+          "graded": false,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            0.06442378248740341,
+            -198.58376632589486,
+            -640.5713761143854
+          ],
+          "quaternion": [
+            0,
+            0.955336489125606,
+            0,
+            -0.2955202066613397
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "first": true,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ],
+          "world": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      },
+      "state": {
+        "after": false,
+        "training": true,
+        "worldTime": 0.5,
+        "rain": false,
+        "hemi": {
+          "sky": "ddeeff",
+          "ground": "445566",
+          "intensity": 0.6799999999999999
+        },
+        "sun": 1.73,
+        "picture": {
+          "brightness": 1,
+          "vibrancy": 1,
+          "fpFov": 60,
+          "exposure": 1,
+          "graded": false,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            0.05490567888470821,
+            -198.58169854670444,
+            -640.5725188365037
+          ],
+          "quaternion": [
+            0,
+            0.955336489125606,
+            0,
+            -0.2955202066613397
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "first": true,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ],
+          "world": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      }
+    },
+    {
+      "pass": 9,
+      "after": true,
+      "frames": [
+        26.900000005960464,
+        18.099999994039536,
+        15.300000011920929,
+        17.19999998807907,
+        19.400000005960464,
+        19.700000017881393,
+        19.599999994039536,
+        17.5,
+        15.900000005960464,
+        15.5,
+        14.899999976158142,
+        16.5,
+        16.80000001192093,
+        27.599999994039536,
+        35.20000001788139,
+        24.299999982118607,
+        19.30000001192093,
+        19.900000005960464,
+        19.69999998807907,
+        17.5,
+        22.599999994039536,
+        18.700000017881393,
+        25.69999998807907,
+        27.099999994039536,
+        20.900000005960464,
+        20.099999994039536,
+        23.400000005960464,
+        15.900000005960464,
+        18.400000005960464,
+        18,
+        27.299999982118607,
+        19,
+        24.200000017881393,
+        27.099999994039536,
+        25.19999998807907,
+        15.599999994039536,
+        17.200000017881393,
+        18.599999994039536,
+        20.5,
+        19.5,
+        20.599999994039536,
+        19.099999994039536,
+        18.80000001192093,
+        18.19999998807907,
+        23.900000005960464,
+        16.200000017881393,
+        18.099999994039536,
+        17.299999982118607,
+        22.600000023841858,
+        17.799999982118607,
+        18.700000017881393,
+        16.899999976158142,
+        18.600000023841858,
+        18.299999982118607,
+        16.700000017881393,
+        18.19999998807907,
+        22.599999994039536,
+        17.80000001192093,
+        18.099999994039536,
+        18,
+        17.599999994039536,
+        17.30000001192093,
+        20.599999994039536,
+        18.900000005960464,
+        18,
+        18.099999994039536,
+        21.19999998807907,
+        14.900000005960464,
+        15.200000017881393,
+        13.399999976158142,
+        13.600000023841858,
+        17,
+        16.399999976158142,
+        16.5,
+        18.80000001192093,
+        16.400000005960464,
+        19.69999998807907,
+        24.599999994039536,
+        16.600000023841858,
+        16.099999994039536,
+        16.900000005960464,
+        16.399999976158142,
+        20.80000001192093,
+        17.900000005960464,
+        16.099999994039536,
+        17.80000001192093,
+        15,
+        20.299999982118607,
+        25.700000017881393,
+        20.299999982118607,
+        17.5,
+        16.599999994039536,
+        17.100000023841858,
+        17.799999982118607,
+        17.700000017881393,
+        19.69999998807907,
+        18.599999994039536,
+        16.30000001192093,
+        16.69999998807907,
+        14.700000017881393,
+        16.399999976158142,
+        16.400000005960464,
+        14.800000011920929,
+        15.900000005960464,
+        14.299999982118607,
+        17.099999994039536,
+        14.100000023841858,
+        15.599999994039536,
+        23.19999998807907,
+        16.5,
+        15.900000005960464,
+        14.5,
+        17,
+        16.099999994039536,
+        16.80000001192093,
+        16.099999994039536,
+        15.099999994039536,
+        16,
+        15.800000011920929,
+        17.19999998807907,
+        18.200000017881393,
+        22,
+        16.69999998807907,
+        17.5,
+        15.199999988079071,
+        18,
+        15.200000017881393,
+        13.199999988079071,
+        13.200000017881393,
+        16.799999982118607,
+        16.599999994039536,
+        24.400000005960464,
+        14.400000005960464,
+        13.699999988079071,
+        17.5,
+        14,
+        16.30000001192093,
+        17.19999998807907,
+        17.30000001192093,
+        20.69999998807907,
+        18.200000017881393,
+        15,
+        15.5,
+        15.099999994039536,
+        16.80000001192093,
+        15.699999988079071,
+        17.30000001192093,
+        14.199999988079071,
+        17,
+        16.80000001192093,
+        16.299999982118607,
+        28,
+        20.700000017881393,
+        16.099999994039536,
+        17.69999998807907,
+        19.400000005960464,
+        15.699999988079071,
+        15.800000011920929,
+        16.599999994039536,
+        16.80000001192093,
+        16.69999998807907,
+        18.80000001192093,
+        14.900000005960464,
+        16.399999976158142,
+        16.5,
+        16.700000017881393,
+        19.299999982118607,
+        17,
+        16.200000017881393,
+        16.900000005960464,
+        17.399999976158142,
+        14.700000017881393,
+        15,
+        17.599999994039536,
+        15.800000011920929,
+        24.899999976158142,
+        24.100000023841858,
+        26.899999976158142,
+        15.400000005960464,
+        20.599999994039536,
+        25.5,
+        15,
+        14.100000023841858,
+        17,
+        26.5,
+        16.5,
+        17.19999998807907,
+        15.300000011920929,
+        18.599999994039536,
+        16.400000005960464,
+        18.5,
+        28.799999982118607,
+        16.700000017881393,
+        16.099999994039536,
+        14.199999988079071,
+        20.200000017881393,
+        22.299999982118607,
+        15,
+        14.599999994039536,
+        15.200000017881393,
+        13.199999988079071,
+        24,
+        21.30000001192093,
+        21,
+        14.599999994039536,
+        15.5,
+        16.30000001192093,
+        17.69999998807907,
+        14.099999994039536,
+        22.400000005960464,
+        24.599999994039536,
+        38.70000001788139,
+        20.799999982118607,
+        14.900000005960464,
+        18.5,
+        13.5,
+        13.199999988079071,
+        20.80000001192093,
+        16.599999994039536,
+        17.80000001192093,
+        21.099999994039536,
+        27.900000005960464,
+        20.799999982118607,
+        19.5,
+        16.400000005960464,
+        17.900000005960464,
+        13.300000011920929,
+        16.69999998807907,
+        16.30000001192093,
+        15.399999976158142,
+        14.700000017881393,
+        14,
+        14.799999982118607,
+        16.400000005960464,
+        20.80000001192093,
+        18.400000005960464,
+        16.5,
+        14.5,
+        13,
+        25.5,
+        22.69999998807907,
+        26.599999994039536,
+        28.700000017881393,
+        20.299999982118607,
+        19.700000017881393,
+        16.399999976158142
+      ],
+      "before": {
+        "after": true,
+        "training": true,
+        "worldTime": 0.5,
+        "rain": false,
+        "hemi": {
+          "sky": "f3f1ea",
+          "ground": "8c877c",
+          "intensity": 1.15
+        },
+        "sun": 1.73,
+        "picture": {
+          "brightness": 1.05,
+          "vibrancy": 1.15,
+          "fpFov": 60,
+          "exposure": 1.05,
+          "graded": true,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            0.05813454467868286,
+            -198.58333155479178,
+            -640.569922924657
+          ],
+          "quaternion": [
+            0,
+            0.955336489125606,
+            0,
+            -0.2955202066613397
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "first": true,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ],
+          "world": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      },
+      "state": {
+        "after": true,
+        "training": true,
+        "worldTime": 0.5,
+        "rain": false,
+        "hemi": {
+          "sky": "f3f1ea",
+          "ground": "8c877c",
+          "intensity": 1.15
+        },
+        "sun": 1.73,
+        "picture": {
+          "brightness": 1.05,
+          "vibrancy": 1.15,
+          "fpFov": 60,
+          "exposure": 1.05,
+          "graded": true,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            0.06774929476548008,
+            -198.58060032551217,
+            -640.5785165766478
+          ],
+          "quaternion": [
+            0,
+            0.955336489125606,
+            0,
+            -0.2955202066613397
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "first": true,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ],
+          "world": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      }
+    },
+    {
+      "pass": 10,
+      "after": true,
+      "frames": [
+        22.600000023841858,
+        25.399999976158142,
+        27.30000001192093,
+        18.19999998807907,
+        17.100000023841858,
+        28.599999994039536,
+        19,
+        18.5,
+        13.599999994039536,
+        15.900000005960464,
+        22.599999994039536,
+        13.599999994039536,
+        14.700000017881393,
+        15.899999976158142,
+        36,
+        20.200000017881393,
+        19,
+        20.69999998807907,
+        22.5,
+        20.400000005960464,
+        19,
+        20,
+        15.599999994039536,
+        16.30000001192093,
+        15,
+        21.400000005960464,
+        19.599999994039536,
+        20,
+        21.69999998807907,
+        21.599999994039536,
+        19.80000001192093,
+        24.80000001192093,
+        20.599999994039536,
+        20.799999982118607,
+        22.400000005960464,
+        18.700000017881393,
+        14.699999988079071,
+        21.599999994039536,
+        22,
+        27.30000001192093,
+        24.5,
+        25.5,
+        27.400000005960464,
+        27.599999994039536,
+        23.900000005960464,
+        23.799999982118607,
+        20.099999994039536,
+        29.200000017881393,
+        25.5,
+        20.19999998807907,
+        18.900000005960464,
+        19.19999998807907,
+        21,
+        27.600000023841858,
+        23.799999982118607,
+        22.30000001192093,
+        20.400000005960464,
+        15.299999982118607,
+        17.900000005960464,
+        18.400000005960464,
+        17.900000005960464,
+        14.599999994039536,
+        18,
+        17.099999994039536,
+        24.099999994039536,
+        22.200000017881393,
+        14.699999988079071,
+        15.099999994039536,
+        16.200000017881393,
+        19.399999976158142,
+        21.80000001192093,
+        22,
+        18.400000005960464,
+        18.69999998807907,
+        21.5,
+        35.70000001788139,
+        17.5,
+        15.099999994039536,
+        13.699999988079071,
+        15,
+        16.599999994039536,
+        15.100000023841858,
+        17.399999976158142,
+        19.600000023841858,
+        19.399999976158142,
+        26.80000001192093,
+        31.400000005960464,
+        19.69999998807907,
+        21.30000001192093,
+        18.099999994039536,
+        17,
+        22.30000001192093,
+        18.899999976158142,
+        20.30000001192093,
+        18.099999994039536,
+        18.400000005960464,
+        18.599999994039536,
+        21.099999994039536,
+        21,
+        18.600000023841858,
+        18.799999982118607,
+        17.80000001192093,
+        23.69999998807907,
+        25.80000001192093,
+        23,
+        17.299999982118607,
+        17.600000023841858,
+        16.899999976158142,
+        22.600000023841858,
+        17.19999998807907,
+        14.699999988079071,
+        17.700000017881393,
+        19.69999998807907,
+        16.30000001192093,
+        16,
+        18.19999998807907,
+        15.700000017881393,
+        14.299999982118607,
+        17,
+        18.599999994039536,
+        22.5,
+        16.700000017881393,
+        20.299999982118607,
+        17.700000017881393,
+        19.799999982118607,
+        22.100000023841858,
+        20.899999976158142,
+        23.900000005960464,
+        23.30000001192093,
+        25.69999998807907,
+        15.099999994039536,
+        24.80000001192093,
+        25.599999994039536,
+        28.700000017881393,
+        29.899999976158142,
+        22,
+        16.600000023841858,
+        17.799999982118607,
+        15.099999994039536,
+        16.80000001192093,
+        24.400000005960464,
+        18.299999982118607,
+        17.900000005960464,
+        16.900000005960464,
+        16.099999994039536,
+        21.30000001192093,
+        19.799999982118607,
+        19.600000023841858,
+        20.399999976158142,
+        18.700000017881393,
+        16.900000005960464,
+        16.299999982118607,
+        15.099999994039536,
+        14.900000005960464,
+        15.099999994039536,
+        20.30000001192093,
+        22.099999994039536,
+        15.200000017881393,
+        15.099999994039536,
+        17.5,
+        17,
+        19,
+        16.599999994039536,
+        16.400000005960464,
+        15.900000005960464,
+        16,
+        18.5,
+        14.5,
+        15.799999982118607,
+        29.200000017881393,
+        17,
+        15.799999982118607,
+        14,
+        13.300000011920929,
+        15.400000005960464,
+        21.799999982118607,
+        18,
+        14.400000005960464,
+        17,
+        13.5,
+        16.30000001192093,
+        26,
+        19.19999998807907,
+        19.400000005960464,
+        27.900000005960464,
+        24.399999976158142,
+        20.30000001192093,
+        17.900000005960464,
+        17.599999994039536,
+        17.400000005960464,
+        18.5,
+        20.5,
+        20.099999994039536,
+        30.900000005960464,
+        32.19999998807907,
+        31,
+        18.30000001192093,
+        25.299999982118607,
+        24.400000005960464,
+        21.599999994039536,
+        21.700000017881393,
+        20.599999994039536,
+        30.5,
+        23.5,
+        17,
+        19.599999994039536,
+        16.900000005960464,
+        16.400000005960464,
+        26,
+        27.400000005960464,
+        15.5,
+        14.599999994039536,
+        16.5,
+        21.099999994039536,
+        24.400000005960464,
+        22.900000005960464,
+        18.69999998807907,
+        24.19999998807907,
+        21,
+        20.80000001192093,
+        17.900000005960464,
+        15.199999988079071,
+        15.099999994039536,
+        15.5,
+        18,
+        15.400000005960464
+      ],
+      "before": {
+        "after": true,
+        "training": true,
+        "worldTime": 0.5,
+        "rain": false,
+        "hemi": {
+          "sky": "f3f1ea",
+          "ground": "8c877c",
+          "intensity": 1.15
+        },
+        "sun": 1.73,
+        "picture": {
+          "brightness": 1.05,
+          "vibrancy": 1.15,
+          "fpFov": 60,
+          "exposure": 1.05,
+          "graded": true,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            0.06886665518702048,
+            -198.5812592243806,
+            -640.5790731050807
+          ],
+          "quaternion": [
+            0,
+            0.955336489125606,
+            0,
+            -0.2955202066613397
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "first": true,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ],
+          "world": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      },
+      "state": {
+        "after": true,
+        "training": true,
+        "worldTime": 0.5,
+        "rain": false,
+        "hemi": {
+          "sky": "f3f1ea",
+          "ground": "8c877c",
+          "intensity": 1.15
+        },
+        "sun": 1.73,
+        "picture": {
+          "brightness": 1.05,
+          "vibrancy": 1.15,
+          "fpFov": 60,
+          "exposure": 1.05,
+          "graded": true,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            0.06498064545127645,
+            -198.5802680594575,
+            -640.5824952155397
+          ],
+          "quaternion": [
+            0,
+            0.955336489125606,
+            0,
+            -0.2955202066613397
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "first": true,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ],
+          "world": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      }
+    },
+    {
+      "pass": 11,
+      "after": false,
+      "frames": [
+        17.69999998807907,
+        17.5,
+        23.400000005960464,
+        21.5,
+        15,
+        24.5,
+        18.5,
+        19,
+        24.299999982118607,
+        35.20000001788139,
+        23.599999994039536,
+        16.19999998807907,
+        17.200000017881393,
+        22.69999998807907,
+        15.800000011920929,
+        18.69999998807907,
+        18.5,
+        18.599999994039536,
+        18.200000017881393,
+        16.400000005960464,
+        17.299999982118607,
+        20.80000001192093,
+        15.699999988079071,
+        17.700000017881393,
+        14.399999976158142,
+        12.200000017881393,
+        20.900000005960464,
+        25.5,
+        24.19999998807907,
+        20.5,
+        14.199999988079071,
+        18.100000023841858,
+        22.5,
+        19.19999998807907,
+        21.099999994039536,
+        21.200000017881393,
+        16.299999982118607,
+        14.200000017881393,
+        16.19999998807907,
+        19.30000001192093,
+        20.69999998807907,
+        19.5,
+        15.900000005960464,
+        15.799999982118607,
+        17.200000017881393,
+        23.299999982118607,
+        30.80000001192093,
+        26,
+        18.5,
+        27.599999994039536,
+        21.200000017881393,
+        26.099999994039536,
+        18.400000005960464,
+        14.699999988079071,
+        19.400000005960464,
+        19.900000005960464,
+        23.899999976158142,
+        19.200000017881393,
+        21.19999998807907,
+        26.200000017881393,
+        20.19999998807907,
+        20,
+        24.900000005960464,
+        21.099999994039536,
+        17.5,
+        17.400000005960464,
+        16.900000005960464,
+        20.899999976158142,
+        18.5,
+        15.400000005960464,
+        16.80000001192093,
+        16.19999998807907,
+        19.200000017881393,
+        18.599999994039536,
+        19.19999998807907,
+        19.099999994039536,
+        19.400000005960464,
+        19,
+        23.5,
+        18.80000001192093,
+        23.400000005960464,
+        22.799999982118607,
+        19.599999994039536,
+        15.600000023841858,
+        14.599999994039536,
+        14.900000005960464,
+        24.299999982118607,
+        18.30000001192093,
+        22.900000005960464,
+        17.299999982118607,
+        16.80000001192093,
+        15.900000005960464,
+        17.299999982118607,
+        17.599999994039536,
+        22.900000005960464,
+        20.80000001192093,
+        24.299999982118607,
+        27.5,
+        30.30000001192093,
+        19.69999998807907,
+        16.700000017881393,
+        16.69999998807907,
+        22,
+        14.200000017881393,
+        16.69999998807907,
+        27.599999994039536,
+        32.599999994039536,
+        16.400000005960464,
+        14,
+        13.800000011920929,
+        22.900000005960464,
+        20.099999994039536,
+        15.799999982118607,
+        13.600000023841858,
+        15.099999994039536,
+        14.599999994039536,
+        13,
+        14.099999994039536,
+        16.599999994039536,
+        23.600000023841858,
+        18.69999998807907,
+        23.69999998807907,
+        22.400000005960464,
+        15.900000005960464,
+        13.800000011920929,
+        15.299999982118607,
+        16.5,
+        16.599999994039536,
+        16.80000001192093,
+        16.599999994039536,
+        16.700000017881393,
+        17.599999994039536,
+        17.599999994039536,
+        16.69999998807907,
+        14.600000023841858,
+        22.899999976158142,
+        22,
+        16.200000017881393,
+        26.19999998807907,
+        22,
+        20.700000017881393,
+        24.399999976158142,
+        25.30000001192093,
+        18,
+        17.30000001192093,
+        17.299999982118607,
+        16.599999994039536,
+        19.100000023841858,
+        17.599999994039536,
+        16.19999998807907,
+        15.599999994039536,
+        22.700000017881393,
+        16.19999998807907,
+        22.400000005960464,
+        15.800000011920929,
+        18.299999982118607,
+        21,
+        19.400000005960464,
+        19.400000005960464,
+        17.599999994039536,
+        19,
+        26.400000005960464,
+        18.400000005960464,
+        13.899999976158142,
+        17.200000017881393,
+        18.69999998807907,
+        15.400000005960464,
+        22.19999998807907,
+        16.900000005960464,
+        17.900000005960464,
+        16.30000001192093,
+        14.799999982118607,
+        17.80000001192093,
+        19.099999994039536,
+        15.400000005960464,
+        18.69999998807907,
+        15.5,
+        19.099999994039536,
+        16.100000023841858,
+        12.699999988079071,
+        15.199999988079071,
+        28.400000005960464,
+        33.20000001788139,
+        26.899999976158142,
+        18.600000023841858,
+        19.099999994039536,
+        17.19999998807907,
+        18.099999994039536,
+        15,
+        16.80000001192093,
+        28.599999994039536,
+        16.400000005960464,
+        16.19999998807907,
+        14.300000011920929,
+        16.099999994039536,
+        14.099999994039536,
+        14.100000023841858,
+        16.299999982118607,
+        13.700000017881393,
+        23.19999998807907,
+        17.099999994039536,
+        13.900000005960464,
+        14.300000011920929,
+        14.799999982118607,
+        24.900000005960464,
+        19.69999998807907,
+        17.400000005960464,
+        24.700000017881393,
+        18.299999982118607,
+        21.5,
+        19,
+        24.700000017881393,
+        32,
+        19.799999982118607,
+        34,
+        26.5,
+        24.400000005960464,
+        27.30000001192093,
+        25.19999998807907,
+        24.80000001192093,
+        26.19999998807907,
+        24.30000001192093,
+        29,
+        27.899999976158142,
+        21.100000023841858,
+        17.099999994039536,
+        23.799999982118607,
+        18.600000023841858,
+        16.399999976158142,
+        16.400000005960464,
+        17.900000005960464
+      ],
+      "before": {
+        "after": false,
+        "training": true,
+        "worldTime": 0.5,
+        "rain": false,
+        "hemi": {
+          "sky": "ddeeff",
+          "ground": "445566",
+          "intensity": 0.6799999999999999
+        },
+        "sun": 1.73,
+        "picture": {
+          "brightness": 1,
+          "vibrancy": 1,
+          "fpFov": 60,
+          "exposure": 1,
+          "graded": false,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            0.06360296674267221,
+            -198.5794709419023,
+            -640.5829539938014
+          ],
+          "quaternion": [
+            0,
+            0.955336489125606,
+            0,
+            -0.2955202066613397
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "first": true,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ],
+          "world": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      },
+      "state": {
+        "after": false,
+        "training": true,
+        "worldTime": 0.5,
+        "rain": false,
+        "hemi": {
+          "sky": "ddeeff",
+          "ground": "445566",
+          "intensity": 0.6799999999999999
+        },
+        "sun": 1.73,
+        "picture": {
+          "brightness": 1,
+          "vibrancy": 1,
+          "fpFov": 60,
+          "exposure": 1,
+          "graded": false,
+          "pictureOnly": false
+        },
+        "camera": {
+          "position": [
+            0.0666616824801945,
+            -198.5841758410195,
+            -640.5709157168384
+          ],
+          "quaternion": [
+            0,
+            0.955336489125606,
+            0,
+            -0.2955202066613397
+          ],
+          "fov": 59.99999999999999
+        },
+        "player": [
+          0,
+          -200,
+          -640.6700000000001
+        ],
+        "first": true,
+        "zombies": 0,
+        "shadow": {
+          "targetHidden": false,
+          "local": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ],
+          "world": [
+            -1.3076663519098238e-13,
+            -199.99869031556784,
+            -640.6743656147739
+          ]
+        },
+        "prof": false,
+        "gpuQueries": false,
+        "backend": "WebGPU"
+      }
+    }
+  ],
+  "timingSource": {
+    "file": "../native-receipts.json",
+    "sourceSha256": "070e4ab5b8394d9623bc5376254c904849275cc0d14205a48d43a1fead403151",
+    "scope": "All twelve valid timing phases precede every screenshot in that browser. Initial Training photo fixture rejected: unset lightsOff boolean toggled first scene, and Training clock forced noon. Corrected photos here; no repeated timing claim."
+  },
+  "trainingErrors": [],
+  "trainingConsole": [
+    {
+      "type": "warning",
+      "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift renderer: WebGPU."
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift warm-up: 282 shader variants compiled, 38 bodies pooled, 5 warm frames, lights visible 24/24, shadows true | post 7ms pools 5581ms compile 959ms warm frame 126ms | fire-hot:227 fire-cold:227 fire-resources:100/8 fire-pool-falling-leaves:229 fire-leaf-resources:1 fire-clean:229 load:282"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift load: terrain+water+sky built 0ms | rocks 72ms | trees 271ms | player+weapons+zombie types 1382ms | foliage scattered 2510ms | POIs+minimap+foliage chunks 4084ms | contact shading + rest of setup 4327ms | post + pools + compile + warm frame 11011ms | ready 11016ms"
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift first minute: 302 variants after 13 warm frames | fire-hot:227 fire-cold:227 fire-resources:100/8 fire-pool-falling-leaves:229 fire-leaf-resources:1 fire-clean:229 load:282 a-fresh:282 a-flash:285 a-faded:286 a-kill-generic:293 a-kill-melee:296 a-kill-explosive:298 a-fx:302 a-corpse:302"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift pre-roll: 371 shader variants compiled after 35 warm frames | fire-hot:227 fire-cold:227 fire-resources:100/8 fire-pool-falling-leaves:229 fire-leaf-resources:1 fire-clean:229 load:282 a-fresh:282 a-flash:285 a-faded:286 a-kill-generic:293 a-kill-melee:296 a-kill-explosive:298 a-fx:302 a-corpse:302 fresh:360 burning:362 flash:362 faded:362 tree-fade:362 kill-explosive:362 kill-chainsaw:362 kill-pellet:362 kill-generic:362 kill-melee:362 kill-explosive:364 kill-chainsaw:364 kill-pellet:364 kill-generic:365 kill-melee:365 kill-explosive:365 kill-chainsaw:365 kill-pellet:365 kill-generic:365 effects:370 corpses:370 corpses2:370"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift title: menu up after 35 warm frames, 371 variants | fire-hot:227 fire-cold:227 fire-resources:100/8 fire-pool-falling-leaves:229 fire-leaf-resources:1 fire-clean:229 load:282 a-fresh:282 a-flash:285 a-faded:286 a-kill-generic:293 a-kill-melee:296 a-kill-explosive:298 a-fx:302 a-corpse:302 fresh:360 burning:362 flash:362 faded:362 tree-fade:362 kill-explosive:362 kill-chainsaw:362 kill-pellet:362 kill-generic:362 kill-melee:362 kill-explosive:364 kill-chainsaw:364 kill-pellet:364 kill-generic:365 kill-melee:365 kill-explosive:365 kill-chainsaw:365 kill-pellet:365 kill-generic:365 effects:370 corpses:370 corpses2:370"
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift opening perf: {\"toMenu\":21.71,\"segments\":{\"boot\":{\"at\":0,\"seconds\":0.58,\"frames\":8,\"over50\":4,\"over100\":1,\"worst\":133},\"loading\":{\"at\":0.58,\"seconds\":21.13,\"frames\":351,\"over50\":67,\"over100\":30,\"worst\":3650},\"menu\":{\"at\":21.71,\"seconds\":8.77,\"frames\":4,\"over50\":1,\"over100\":1,\"worst\":8550}},\"videos\":{\"caracal@loading\":{\"frames\":4,\"dropped\":0}},\"loafOver100\":38,\"gpuGateWait\":0,\"order\":\"boot > loading > menu\",\"liveRollTicks\":75,\"renderer\":\"WebGPU / high\"}"
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    }
+  ],
+  "outdoorErrors": [],
+  "outdoorConsole": [
+    {
+      "type": "warning",
+      "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift renderer: WebGPU."
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift warm-up: 284 shader variants compiled, 38 bodies pooled, 5 warm frames, lights visible 24/24, shadows true | post 9ms pools 12147ms compile 1586ms warm frame 173ms | fire-hot:228 fire-cold:228 fire-resources:100/8 fire-pool-falling-leaves:230 fire-leaf-resources:1 fire-clean:230 load:284"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift load: terrain+water+sky built 0ms | rocks 142ms | trees 576ms | player+weapons+zombie types 2674ms | foliage scattered 5439ms | POIs+minimap+foliage chunks 9040ms | contact shading + rest of setup 9538ms | post + pools + compile + warm frame 23469ms | ready 23474ms"
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift first minute: 304 variants after 13 warm frames | fire-hot:228 fire-cold:228 fire-resources:100/8 fire-pool-falling-leaves:230 fire-leaf-resources:1 fire-clean:230 load:284 a-fresh:284 a-flash:287 a-faded:288 a-kill-generic:294 a-kill-melee:299 a-kill-explosive:301 a-fx:304 a-corpse:304"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift pre-roll: 372 shader variants compiled after 35 warm frames | fire-hot:228 fire-cold:228 fire-resources:100/8 fire-pool-falling-leaves:230 fire-leaf-resources:1 fire-clean:230 load:284 a-fresh:284 a-flash:287 a-faded:288 a-kill-generic:294 a-kill-melee:299 a-kill-explosive:301 a-fx:304 a-corpse:304 fresh:361 burning:363 flash:363 faded:363 tree-fade:363 kill-explosive:363 kill-chainsaw:363 kill-pellet:363 kill-generic:363 kill-melee:363 kill-explosive:365 kill-chainsaw:365 kill-pellet:365 kill-generic:366 kill-melee:366 kill-explosive:366 kill-chainsaw:366 kill-pellet:366 kill-generic:366 effects:371 corpses:371 corpses2:371"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift title: menu up after 35 warm frames, 372 variants | fire-hot:228 fire-cold:228 fire-resources:100/8 fire-pool-falling-leaves:230 fire-leaf-resources:1 fire-clean:230 load:284 a-fresh:284 a-flash:287 a-faded:288 a-kill-generic:294 a-kill-melee:299 a-kill-explosive:301 a-fx:304 a-corpse:304 fresh:361 burning:363 flash:363 faded:363 tree-fade:363 kill-explosive:363 kill-chainsaw:363 kill-pellet:363 kill-generic:363 kill-melee:363 kill-explosive:365 kill-chainsaw:365 kill-pellet:365 kill-generic:366 kill-melee:366 kill-explosive:366 kill-chainsaw:366 kill-pellet:366 kill-generic:366 effects:371 corpses:371 corpses2:371"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift opening perf: {\"toMenu\":37.64,\"segments\":{\"boot\":{\"at\":0,\"seconds\":1.32,\"frames\":45,\"over50\":3,\"over100\":2,\"worst\":183},\"loading\":{\"at\":1.32,\"seconds\":36.33,\"frames\":406,\"over50\":80,\"over100\":51,\"worst\":8550},\"menu\":{\"at\":37.64,\"seconds\":6.03,\"frames\":240,\"over50\":6,\"over100\":4,\"worst\":450}},\"videos\":{\"caracal@boot\":{\"frames\":4,\"dropped\":0}},\"loafOver100\":64,\"gpuGateWait\":0,\"order\":\"boot > loading > menu\",\"liveRollTicks\":76,\"renderer\":\"WebGPU / high\"}"
+    }
+  ],
+  "endSourceSha256": "070e4ab5b8394d9623bc5376254c904849275cc0d14205a48d43a1fead403151"
+}

@@ -24,8 +24,10 @@
     ok(label('settings.brightness') === 'Brightness' && label('settings.vibrancy') === 'Vibrancy' && label('settings.fpFov') === 'First-person FOV', 'the labels are the CU-159 words');
     document.getElementById('menuSettingsBtn').click();
     ok(view.classList.contains('on'), 'settings opens from the title');
-    const start = T.pictureDbg();
-    ok(start.brightness === 1 && start.vibrancy === 1 && start.fpFov === 60 && start.exposure === 1 && start.graded === false, 'today is exposure 1, vibrancy 1, first-person 60, and the frame is not graded');
+    // CG-6 (D-183, J153 note 40, Jerry's lighting option 2): with nothing saved the game's own picture grade is on,
+    // brightness 1.05 and vibrancy 1.15 (was 1/1, ungraded). A saved 1/1 still takes the grade off (the last rows).
+    ok(await until(() => { const p = T.pictureDbg(); return near(p.brightness, 1.05) && near(p.vibrancy, 1.15) && p.fpFov === 60 && near(p.exposure, 1.05) && p.graded === true; }, 3000),
+      'with nothing saved: exposure 1.05, vibrancy 1.15, first-person 60, and the frame is graded (' + JSON.stringify(T.pictureDbg()) + ')');
     setRange('brightSet', 1.35);
     setRange('vibrancySet', 1.6);
     ok(await until(() => { const p = T.pictureDbg(); return near(p.exposure, 1.35) && near(p.vibrancy, 1.6) && p.graded; }, 3000), 'brightness and vibrancy change the exposure and grade the frame (' + JSON.stringify(T.pictureDbg()) + ')');

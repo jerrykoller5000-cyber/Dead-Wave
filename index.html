@@ -1415,7 +1415,7 @@
     import { webbingGeometry, bandolierFit } from './ui/marine-webbing.js';
     import { clearCarryPack, fitCarryHolster } from './ui/marine-kit-fit.js';
     import { fitWeaponSling } from './ui/weapon-sling.js';   // GP-156
-    import { BACK_CARRY, PAIR_CARRY, carryOrder, seatOnBack, fitBackSling } from './studio/marine-carry.js';   // CC-350: the slung guns flat on his back
+    import { BACK_CARRY, PAIR_CARRY, carryOrder, seatOnBack, fitBackSling, SURFACE as CARRY_SURFACE, surfaceZ as carrySurfaceZ } from './studio/marine-carry.js';   // CC-350: the slung guns flat on his back (CC-352: his back's surface, for the pack's handguns)
     import { hasText as dwHasText } from './ui/strings.js';   // CL-92: a line that may not be written yet falls back
     import { LIGHTNING, BOOTS_HEX, stormTimes, rollStrike, strikeTarget, boltPoints, buildBoltGeometry, buildInsulatedBoots, MAST_PERCH, mastStrikeFinds, buildWornBoots, buildMastPerchParts } from './world/lightning.js';   // CL-178: the mast's perch
     import * as History from './world/history-props.js';   // CL-108, CL-109: the valley's history in things
@@ -2104,12 +2104,12 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       return r;
     }
     function readBrightnessVibrancy() {
-      brightness = 1; vibrancy = 1;
+      brightness = 1.05; vibrancy = 1.15;   // CG-6 J153 40 (D-183, C2): the game's picture grade by default
       try {
         const b = localStorage.getItem('tt_brightness');
         const v = localStorage.getItem('tt_vibrancy');
-        const bb = b == null ? 1 : snapPicture(b, BRIGHT_MIN, BRIGHT_MAX, 0.05);
-        const vv = v == null ? 1 : snapPicture(v, VIBRANT_MIN, VIBRANT_MAX, 0.05);
+        const bb = b == null ? 1.05 : snapPicture(b, BRIGHT_MIN, BRIGHT_MAX, 0.05);
+        const vv = v == null ? 1.15 : snapPicture(v, VIBRANT_MIN, VIBRANT_MAX, 0.05);
         if (bb != null) brightness = bb;
         if (vv != null) vibrancy = vv;
       } catch (_) {}
@@ -2558,7 +2558,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       }
     }
 
-    const hemi = new THREE.HemisphereLight(0xddeeff, 0x445566, 1.1);
+    const hemi = new THREE.HemisphereLight(0xf3f1ea, 0x8c877c, 1.1);   // CG-6 J153 40 (D-183, C2): neutral sky/ground, no blue-grey cast
     scene.add(hemi);
     const sun = new THREE.DirectionalLight(0xfff2d6, 1.35);
     sun.position.set(18, 28, 10);
@@ -2928,6 +2928,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         // is what made the new landform read flat.
         sun.intensity = 0.18 + visualFactor * 1.55;
         hemi.intensity = 0.18 + visualFactor * 0.5;
+        if (training.active && !training.lightsOff) hemi.intensity = Math.max(hemi.intensity, 1.15);   // CG-6 J153 40 (C2): the room's lights as an indoor fill
         moon.intensity = 0.05;
         ambientFill.intensity = 0.04;
         // Wide enough to show the ridgeline; haze still stacks up over distance.
@@ -24372,17 +24373,24 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       // on the first where both are thin. Seated only when what is slung or the carrier changes (an ammo count does not re-seat).
       // CC-350 p2 (D-182): with a bulky gun, a thin one goes on first, flat on the pack, the bulky one on it; two bulky: the
       // longer across the pack, the other straight on it, tight (marine-carry.js carryOrder, PAIR_CARRY.mode); nothing below mid-thigh.
-      {let under=null,prev='';rig.slings.forEach((s)=>fitCarriedGun(s,'sling'));
+      // CC-352: the handguns on the pack's back face first (pack+ then pack-, the second on the first), then the slung guns over
+      // them: a first gun lies where it would alone, tipped about its across axis to rest on them (marine-carry seatOnBack hinge).
+      rig.packPts=[];
+      const onPack=rig.holsters.concat(rig.pairs).filter((h)=>h.station&&h.station.startsWith('pack')).sort((a,b)=>a.station<b.station?-1:1);
+      for(const h of onPack)station(h,'holster');
+      const packPts=rig.packPts.slice(),packSig=onPack.map((h)=>h.station+':'+(h.kind||h.fitKind)+':'+(h.g.visible?1:0)+':'+gunLookKey(h.kind||h.fitKind)).join(',');
+      {let under=packPts.length?packPts:null,prev=packSig;rig.slings.forEach((s)=>fitCarriedGun(s,'sling'));
        const ord=carryOrder(rig.slings.map((s)=>s.gun?s.kind:null));
        (ord.first?[1,0]:[0,1]).forEach((i)=>{const s=rig.slings[i];if(!s)return;
         if(!s.gun){s.sling.visible=false;s.sling.userData.signature=null;s.seatKey=null;s.seat=null;return;}
         const side=i?-1:1,tp=s.sling.userData.torsoPivotY||0.865,key=s.token+'|'+!!rig.slingVest+'|'+prev+'|'+(ord.bulky?(ord.upright===i?'u':'b')+PAIR_CARRY.mode:'');
-        if(s.seatKey!==key||!s.seat){s.seat=seatOnBack(THREE,s,side,tp,!!rig.slingVest,BACK_CARRY,under,ord.bulky?{lowest:PAIR_CARRY.lowest,pair:true,upright:ord.upright===i}:{});s.seatKey=key;}
+        const hinge=packPts.length>0,first=under===packPts||!under;
+        if(s.seatKey!==key||!s.seat){s.seat=seatOnBack(THREE,s,side,tp,!!rig.slingVest,BACK_CARRY,under,ord.bulky?{lowest:PAIR_CARRY.lowest,pair:true,upright:ord.upright===i,hinge}:{hinge,noSlide:hinge&&first});s.seatKey=key;}
         else s.gun.position.set(0,0,0);
-        under=s.seat&&s.seat.pts;prev=s.seatKey;
+        under=s.seat&&s.seat.pts?(packPts.length?s.seat.pts.concat(packPts):s.seat.pts):under;prev=s.seatKey;
         const band=side>0?!!rig.bandolier?.visible:!!rig.belt40?.visible;
         fitBackSling(THREE,s,side,tp,!!rig.slingVest,carryMats.mag,(band?.012:0)+(i?.007:0));});}
-      for(const h of rig.holsters.concat(rig.pairs))station(h,'holster');
+      for(const h of rig.holsters.concat(rig.pairs))if(!onPack.includes(h))station(h,'holster');
       for(const h of [rig.hip,rig.hipPair])station(h,'hip');
     }
     gunFurniture = registerGunFurniture(weaponMeshes);   // CL-97 part 2, before the offhand copies are cloned
@@ -25113,6 +25121,20 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       // on the pack) and the small-of-the-back row are gone.
       const PACK_SIDE = { x: 0.127, y: 1.075, z: -0.215, clear: 0.004 };   // the pack's side face (x .122-.13 at z -.2/-.24, y .95-1.2)
       rig.packSide = PACK_SIDE;
+      // CC-352 (note 20's sweep): on the pack's sides his upper sleeve brushed those guns running, crouching and crouch-walking
+      // (his arm swings back to z -.33 at |x| .19-.30, y .8-1.24). The CLAUDE DIRECTOR's (b): the pack's BACK face, low corner on
+      // its side, where a pouch would sit: flat on the face, muzzle down, the grip in toward his spine, the gun's top at `top`
+      // (its lower end hangs from there: a pistol on the pack's lower half, the long Uzi down past it), its outer edge no further
+      // out than xMax (in from his arm's swing), `clear` off the pack and off the gun seated there before it (the second of two
+      // rests on the first's grip); the slung guns lie over them (fitCarriedGuns). `strap`: the pack strap they clip to.
+      // The face leans: it stands out to z -.31 under the top pocket and comes in to -.26 over the bedroll, and below the pack his
+      // seat is 15-20 cm further in. So each gun is tried at a few heights (`tops`, its top: a pistol sits on the face's lower
+      // half, the long Uzi from the pack's top down past its bottom), muzzle tipped in (`pitch`, rad, <= 17 deg: still upright)
+      // and turned along the corner (`yaw`); the least air between its near face and the pack (or his seat below it; per 2 cm
+      // cell, capped at 25 cm) wins, the lowest preferred (`perUp`: air per metre higher), nothing below `lowest` (mid-thigh).
+      const PACK_BACK = { tops: [1.1, 1.13, 1.16, 1.19, 1.22, 1.25], pitch: [0, 0.1, 0.2, 0.3], yaw: [0, 0.15, 0.3], perUp: 0.1, xMax: 0.165, clear: 0.004, shell: 0.008, strap: 1.1, strapW: 0.25, lowest: 0.66 };
+      rig.packBack = PACK_BACK;
+      const packBackZ = (x, y) => carrySurfaceZ((rig.slingVest ? CARRY_SURFACE.vest : CARRY_SURFACE.shirt).back, x, y);   // marine heights
       // the hip at 4 o'clock (lowerBody frame): just behind the hip bone, where his side (x .21, z -.06) turns into his seat
       // (x .11, z -.11): the point on it, its outward normal [x, z] (+x side; mirrored), the gun's middle height, the air left
       // It rides high (the grip over the belt) with the muzzle splayed out 7 deg, so its lower end clears his thigh as it swings
@@ -25151,13 +25173,16 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           spot.gunRoll = 0; if (spot.gun) spot.gun.rotation.z = 0;
           return;
         }
-        // the pack's side: the flat of the gun on it, muzzle down, the slide forward and the grip back, seated by its bounds
+        // CC-352: the pack's back face, low corner on its side (PACK_BACK): the flat of the gun on it, muzzle down, the slide out
+        // toward his side and the grip in toward his spine; seated by rig.seatStation
         spot.onHips = false;
         if (spot.g.parent !== torso) torso.add(spot.g);
-        spot.g.quaternion.setFromRotationMatrix(_sm.makeBasis(_sv.set(1, 0, 0), new THREE.Vector3(0, 0, 1), new THREE.Vector3(0, -1, 0)));
+        spot.g.quaternion.setFromRotationMatrix(_sm.makeBasis(_sv.set(0, 0, -side), new THREE.Vector3(side, 0, 0), new THREE.Vector3(0, -1, 0)));
         spot.g.scale.setScalar(0.8);
-        spot.g.position.copy(T(side * (PACK_SIDE.x + 0.04), PACK_SIDE.y, PACK_SIDE.z));
+        spot.g.position.copy(T(side * (PACK_BACK.xMax - 0.04), PACK_BACK.tops[0] - 0.1, -0.33));
         spot.gunRoll = 0; if (spot.gun) spot.gun.rotation.z = 0;
+        const zs = packBackZ(0, PACK_BACK.strap);   // the strap they clip to, across the pack's face behind them
+        rig.harness.position.copy(T(0, PACK_BACK.strap, (zs !== null ? zs : -0.29) - 0.007)); rig.harness.scale.set(PACK_BACK.strapW / 0.5, 1, 1);
       };
       // after the gun is sized (fitCarriedGuns): slide a pack-side gun in until its inner face is PACK_SIDE.clear off the pack
       rig.seatStation = (spot) => {
@@ -25173,14 +25198,49 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           spot.g.updateMatrix();
           return;
         }
+        // CC-352: the pack's back face: for each turn and height (PACK_BACK.yaw, tops) its outer edge in to xMax, then back onto
+        // the pack (his back's surface table, the pack on it) and onto the pack gun seated before it (rig.packPts, its back-most z
+        // per 1.5 cm cell); the one with the least air between its near face and what is under it (per 2 cm cell, capped at 25 cm; searched on every 6th point)
         spot.g.updateMatrix(); spot.gun.updateMatrixWorld(true); torso.updateMatrixWorld(true);
-        _si.copy(torso.matrixWorld).invert(); _sb.makeEmpty();
+        _si.copy(torso.matrixWorld).invert();
+        const pts0 = [];
         spot.gun.traverseVisible((o) => { const P = o.geometry && o.geometry.attributes && o.geometry.attributes.position; if (!o.isMesh || !P) return;
-          _sm.multiplyMatrices(_si, o.matrixWorld); for (let i = 0; i < P.count; i += 2) _sb.expandByPoint(_sv.fromBufferAttribute(P, i).applyMatrix4(_sm)); });
-        if (_sb.isEmpty()) return;
-        const inner = side > 0 ? _sb.min.x : -_sb.max.x;
-        spot.g.position.x += side * (PACK_SIDE.x + PACK_SIDE.clear - inner);
-        spot.g.updateMatrix();
+          _sm.multiplyMatrices(_si, o.matrixWorld); for (let i = 0; i < P.count; i += 2) pts0.push(_sv.fromBufferAttribute(P, i).applyMatrix4(_sm).clone()); });
+        if (!pts0.length) return;
+        const cell = 0.015, key = (x, y) => Math.round(x / cell) + ',' + Math.round(y / cell), under = new Map();
+        for (const q of rig.packPts || []) { const k = key(q.x, q.y), z = under.get(k); if (z === undefined || q.z < z) under.set(k, q.z); }
+        const g0 = spot.g.position.clone(), q0 = spot.g.quaternion.clone(), up = new THREE.Vector3(0, 1, 0), across = new THREE.Vector3(1, 0, 0), rq = new THREE.Quaternion(), pq = new THREE.Quaternion();
+        const lim = (x, y) => { let L = Infinity; const s = packBackZ(x, y + tp); if (s !== null) L = s - PACK_BACK.clear; const u = under.get(key(x, y)); if (u !== undefined) L = Math.min(L, u - PACK_BACK.clear); return L; };
+        const few = pts0.filter((_, i) => i % 6 === 0), fp = new Float32Array(few.length * 3), v3 = new THREE.Vector3();   // the search on every 6th point
+        let best = null;
+        for (const yaw of PACK_BACK.yaw) for (const pitch of PACK_BACK.pitch) {
+          rq.setFromAxisAngle(up, -side * yaw).multiply(pq.setFromAxisAngle(across, -pitch));
+          let top = -Infinity, low = Infinity, out = -Infinity;
+          for (let i = 0; i < few.length; i++) { v3.copy(few[i]).sub(g0).applyQuaternion(rq).add(g0); fp[3 * i] = v3.x; fp[3 * i + 1] = v3.y; fp[3 * i + 2] = v3.z; top = Math.max(top, v3.y); low = Math.min(low, v3.y); out = Math.max(out, side * v3.x); }
+          for (const t of PACK_BACK.tops) {
+            const dx = side * (PACK_BACK.xMax - out), dy = t - tp - top;
+            if (low + dy + tp < PACK_BACK.lowest - 1e-6 && t !== PACK_BACK.tops[PACK_BACK.tops.length - 1]) continue;
+            let dz = Infinity; const near = new Map();
+            for (let i = 0; i < fp.length; i += 3) { const x = fp[i] + dx, y = fp[i + 1] + dy, z = fp[i + 2], L = lim(x, y); if (Number.isFinite(L)) dz = Math.min(dz, L - z);
+              const k = Math.round(x / 0.02) + ',' + Math.round(y / 0.02), n = near.get(k); if (n === undefined || z > n[0]) near.set(k, [z, L]); }
+            if (!Number.isFinite(dz)) continue;
+            let sum = 0, n = 0; for (const [z, L] of near.values()) if (Number.isFinite(L)) { sum += Math.min(0.25, Math.max(0, L - z - dz)); n++; }
+            const air = n ? sum / n : 0, score = air + 0.01 * (yaw + pitch) + PACK_BACK.perUp * (t - PACK_BACK.tops[0]);
+            if (!best || score < best.score) best = { score, air, yaw, pitch, top: t, dx, dy };
+          }
+        }
+        if (!best) return;
+        // the winner on all its points: the exact seat
+        rq.setFromAxisAngle(up, -side * best.yaw).multiply(pq.setFromAxisAngle(across, -best.pitch));
+        const pts = pts0.map((p) => p.clone().sub(g0).applyQuaternion(rq).add(g0));
+        let dzB = Infinity; for (const p of pts) { const L = lim(p.x + best.dx, p.y + best.dy); if (Number.isFinite(L)) dzB = Math.min(dzB, L - p.z); }
+        if (!Number.isFinite(dzB)) dzB = 0;
+        spot.g.quaternion.copy(q0).premultiply(rq);
+        spot.g.position.copy(g0).add(_sv.set(best.dx, best.dy, dzB));
+        spot.g.updateMatrix(); spot.packSeat = { yaw: best.yaw, pitch: best.pitch, top: best.top, air: +best.air.toFixed(4) };
+        const dx = best.dx, dy = best.dy, dz = dzB;
+        // what the slung guns (and a second pack gun) lie on: its points, its holster shell's wall taken in
+        if (spot.g.visible && rig.packPts) for (const p of pts) rig.packPts.push(new THREE.Vector3(p.x + dx, p.y + dy, p.z + dz - PACK_BACK.shell));
       };
       const harness = addCast(new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.032, 0.014), leatherMat));
       harness.position.copy(T(0, 0.95, -0.19));
@@ -52671,12 +52731,12 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       AudioSys.caveScreech(Math.max(0.45, s.v), s.pan);
     });
     function checkScriptedKillTriggers(dt) {
-      updatePitBubbles(dt);
+      if (!training.active) updatePitBubbles(dt);   // GP-20133: outdoor water waits while Training is indoors
       updatePitSignal(dt);   // CL-80
       updateFirstPeople(dt);   // CL-107
       updateWorldVoices(dt);
-      sinkholeRippleT -= dt;
-      if (sinkholeRippleT <= 0 && !pitSignal.silenced) {   // CL-80: a silenced lake lies flat
+      if (!training.active) sinkholeRippleT -= dt;
+      if (!training.active && sinkholeRippleT <= 0 && !pitSignal.silenced) {   // CL-80: a silenced lake lies flat
         // The tell: the water over the hole never sits quite still.
         sinkholeRippleT = 2.2 + Math.random() * 1.6;
         spawnRipple(LAKE_HOLE.x + (Math.random() - 0.5) * (LAKE_HOLE.r * 0.7), LAKE.level + 0.02, LAKE_HOLE.z + (Math.random() - 0.5) * (LAKE_HOLE.r * 0.7), 1.4, 1.6);
@@ -55306,7 +55366,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       m4:       { twist: 0.8, hold: [-0.24, -0.12, 0.28], grip: [0, -0.106, -0.116], trig: [0, -0.078, -0.029], fore: [0, -0.01, 0.29], sh: { butt: [0, -0.003, -0.569], eye: [0, 0.134, -0.20] } },   // CL-322: fore on GP-20055's quad rail (was [0, 0, 0.36], the old tube)   // GB-317 (CL-318): grip followed the A2 4 cm back (cz -0.12, z -0.116); trig on the new blade (z -0.029)   // CD-11: fore z 0.43 -> 0.32, still on the handguard (t195: from 0.43 the support arm was straight along the gun, the fist 57 deg off the forend)
       ak:       { twist: 0.8, hold: [-0.24, -0.12, 0.28], grip: [0, -0.123, -0.126], trig: [0, -0.052, -0.026], fore: [0, -0.02, 0.30], sh: { butt: [0, -0.078, -0.597], eye: [0, 0.074, -0.30] } },   // GB-317 (CL-318): palm u 0.42 on cz -0.13 / h 0.165 (z -0.126, y -0.123 = VM_SOCKETS.ak); trig on the new blade; GB-311: cover 2.6 cm lower (SIGHT.ak 0.074)
       aa12:     { twist: 0.8, hold: [-0.24, -0.13, 0.203], grip: [0, -0.145, -0.166], trig: [0, -0.104, -0.086], fore: [0, -0.035, 0.26], sh: { butt: [0, -0.005, -0.572], eye: [0, 0.16, -0.30] } },   // GB-173: the grip moved 70 mm back on the model; hold -0.057 (x0.82) keeps the gun where it was; GB-188: fore 20 mm lower, the fist round the underside of GB-180's box handguard
-      shotgun:  { twist: 0.8, hold: [-0.24, -0.12, 0.24], grip: [0, -0.088, -0.056], trig: [0, -0.058, 0.023], fore: 'pump', pumpDy: -0.015, sh: { butt: [0, -0.02, -0.496], eye: [0, 0.08, -0.28] } },
+      shotgun:  { twist: 0.8, hold: [-0.24, -0.12, 0.24], grip: [0, -0.088, -0.056], trig: [0, -0.058, 0.023], fore: 'pump', pumpDy: -0.015, sh: { butt: [0, -0.11, -0.496], eye: [0, 0.08, -0.28] } },   // CE-12 (t187): butt at the pad's middle (GT-20106's stock, y -.2..-.03)
       sniper:   { twist: 0.8, hold: [-0.24, -0.12, 0.28], grip: [0, -0.088, -0.117], trig: [0, -0.064, -0.052], fore: [0, -0.005, 0.20], sh: { butt: [0, -0.018, -0.622], eye: [0, 0.15, -0.40] } },
       launcher: { twist: 0.8, hold: [-0.24, -0.14, 0.26], grip: [0, -0.088, -0.046], trig: [0, -0.074, 0.014], fore: [0, -0.075, 0.42], sh: { butt: [0, 0.008, -0.504], eye: [0, 0.19, -0.18] } },
       minigun:  { twist: 1.0, hold: [-0.3, -0.25, 0.34], grip: [0, -0.0119, -0.364], fore: [-0.2128, 0.0084, 0.112] },   // CL-322: GP-20063's 0.70 rotary gun (the grip and peg scaled; AG-261: the hand 10 cm off the peg).   // GB-275: onto GP-20022's rear grip (0,-0.017,-0.52) and GP-20024's -X side peg (-0.304,0.012,0.16); was the top carry handle (grip [0,0.2,-0.28], fore [0,0.14,-0.05], twist 0.6, hold [-0.3,-0.3,0.2]). The grip is 0.5 m behind the old one, so the hold moves with it: twist 1.0 and hold 0.34 forward keep the housing out of his belly (31 cm in, now ~6) with the left fist round the peg
@@ -55684,7 +55744,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       return out.set(0, 0, 1);
     }
     // Turn elbowG about its hand point's line so that its +x (times sign) lies along wantW (world), by w (0..1).
-    function rollForearm(elbowG, hand, wantW, sign, w) {
+    function rollForearm(elbowG, hand, wantW, sign, w, updateChildren = true) {
       if (w <= 0.001) return 0;
       const a = _rl.a.copy(hand).normalize();
       const d = _rl.d.copy(wantW).applyQuaternion(elbowG.getWorldQuaternion(_rl.q).invert());
@@ -55695,7 +55755,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       let ang = Math.atan2(_rl.e.crossVectors(c, d).dot(a), c.dot(d));
       ang = Math.max(-HANDS.rollMax, Math.min(HANDS.rollMax, ang)) * w;
       elbowG.quaternion.multiply(_rl.m.setFromAxisAngle(a, ang));
-      elbowG.updateMatrixWorld(true);
+      if (updateChildren) elbowG.updateMatrixWorld(true);
+      else elbowG.updateWorldMatrix(true, false);
       return ang;
     }
 
@@ -55895,7 +55956,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       _wr.qa.copy(armG.quaternion); _wr.qe.copy(elbowG.quaternion);
       let roll = 0, turn = 0, need = 0;
       // The wrist's first aim: where the fist, turned as the forearm holds it now, puts the grip point on the anchor.
-      wr.updateMatrixWorld(true); wr.getWorldQuaternion(_wr.q);
+      wr.updateWorldMatrix(true, false); wr.getWorldQuaternion(_wr.q);
       // CD-9: a wanted frame (tpWant) aims the wrist so that frame puts the grip point on the anchor
       // (as far as the hold has come in, k * a of the way; the passes below settle it)
       const t = _tpW.el === elbowG ? _wr.t.copy(g).multiply(wr.getWorldScale(_wr.c)).applyQuaternion(_tpW.t.copy(_wr.q).slerp(_tpW.q, Math.min(1, k * a))).negate().add(anchorW) : _wr.t.copy(g).applyQuaternion(_wr.q).negate().add(anchorW);
@@ -55904,8 +55965,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         // last one missed.
         armG.quaternion.copy(_wr.qa); elbowG.quaternion.copy(_wr.qe);
         solveArmIK(armG, elbowG, wr.position, t, pole, k);
-        armG.updateMatrixWorld(true);
-        roll = rollForearm(elbowG, wr.position, channelW, sign, rollK);
+        armG.updateWorldMatrix(true, false);
+        roll = rollForearm(elbowG, wr.position, channelW, sign, rollK, false);
         // The rest of the turn at the wrist: the least that lays the channel along the grip.
         const d = _wr.d.copy(channelW).applyQuaternion(elbowG.getWorldQuaternion(_wr.e).invert()).normalize();
         // CD-9: a wanted frame (TP_FIT) is the whole turn, k * a of the way from the forearm as the first pass leaves it and then
@@ -55918,12 +55979,12 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         wr.quaternion.copy(_wr.id).slerp(_wr.q, s);
         limitWrist(elbowG, wr, roll);   // CB-289: inside the table before the arm reaches to make up what it misses
         turn = ang * s; need = ang;
-        wr.updateMatrixWorld(true);
+        wr.updateWorldMatrix(true, false);
         const miss = _wr.d.copy(anchorW).sub(wr.localToWorld(_wr.c.copy(g)));
         if (miss.lengthSq() < 1e-6 || k < 0.999) break;   // a blend in from the pose stays a blend
         t.add(miss);
       }
-      wr.updateMatrixWorld(true);
+      armG.updateMatrixWorld(true);   // Flush the final pose once; intermediate passes need only the arm/wrist frames.
       if (elbowG === marine.userData.elbowRG) { wristTurnR = turn; wristNeedR = need; gripAR = a; } else { wristTurnL = turn; wristNeedL = need; gripAL = a; }
       return roll;
     }

@@ -1,0 +1,117 @@
+{
+  "navigation": "Canonical tools/bench early dismissForTesting; separate loader-ready and actual menu times",
+  "scope": "REVISED review-only proposal: sparse outside reloads, every original recursive update during reload; original unchanged native targeted regression, fresh page per variant, one browser/lease. Immutable index and first-read JS module snapshots shared between original/candidate; outputs/failures retained, no test weakening or FPS claim.",
+  "frameSampling": "production-tick-start-wall-clock",
+  "environment": "outdoor",
+  "sourceSha256": "070e4ab5b8394d9623bc5376254c904849275cc0d14205a48d43a1fead403151",
+  "moduleHashes": {
+    "core/body-limits.js": "fd2562bd882ef767155cc819301ede35e68d008621dd0f683232c593d91459eb",
+    "game/viewmodel.js": "f3eb743fb200945a3bed23accbd93dfcb5cf983e616769049c357d3199b7363e",
+    "game/tp-fit.js": "d2dbf1e163f856b672a1a91d1638a949749e3bde1727bda8ceaf1f18c3b08e07",
+    "studio/fp-arms.js": "fff7808db158e072d0c5697a0a57e0c87de7fa81847558fc8670f6f7e5f190d8",
+    "world/training-ballistics.js": "eadc9d04d5fd50ad9f6f23c0a080ea2ad58485ff62e0002f1a6b1b0da4719bdc"
+  },
+  "rows": [
+    {
+      "sparse": false,
+      "completed": true,
+      "done": true,
+      "output": "PASS pistol: fingered hands, thumbs on the index edge, not mirrored\nPASS pistol: firing fist on the grip (0.000 m)\nPASS pistol: firing thumb over on the support side, high (-0.061,0.066,-0.026)\nPASS pistol: support fist closed (wrist turned onto the grip, a 1.00)\nPASS pistol: support fist round its anchor (0.000 m)\nPASS pistol: support fist on the support side round the firing fingers (-0.038,-0.007,0.002, 0.039 m from the firing fist)\nPASS pistol: support hand on the firing fingers, no air (gloves 0.002 m apart; palm to firing fingertips 0.038 m)\nPASS pistol: the support thumb forward along the frame on the support side, under the slide (-0.023,0.062,0.044; its underside at 0.070)\nPASS pistol: firing wrist nearly straight, gun in line with the forearm (0.64 rad)\nPASS pistol: the gun where the hold puts it (0.0000 m off)\nPASS pistol aiming up: firing fist on the grip (0.000 m)\nPASS pistol aiming up: firing thumb over on the support side, high (-0.061,0.066,-0.026)\nPASS pistol aiming up: support fist closed (wrist turned onto the grip, a 1.00)\nPASS pistol aiming up: support fist round its anchor (0.000 m)\nPASS pistol aiming up: support fist on the support side round the firing fingers (-0.038,-0.007,0.002, 0.039 m from the firing fist)\nPASS pistol aiming up: support hand on the firing fingers, no air (gloves 0.002 m apart; palm to firing fingertips 0.038 m)\nPASS pistol aiming up: the support thumb forward along the frame on the support side, under the slide (-0.023,0.062,0.044; its underside at 0.070)\nPASS pistol aiming up: firing wrist nearly straight, gun in line with the forearm (0.61 rad)\nPASS pistol aiming up: the gun where the hold puts it (0.0000 m off)\nPASS pistol aiming down: firing fist on the grip (0.000 m)\nPASS pistol aiming down: firing thumb over on the support side, high (-0.061,0.066,-0.026)\nPASS pistol aiming down: support fist closed (wrist turned onto the grip, a 1.00)\nPASS pistol aiming down: support fist round its anchor (0.000 m)\nPASS pistol aiming down: support fist on the support side round the firing fingers (-0.038,-0.007,0.002, 0.039 m from the firing fist)\nPASS pistol aiming down: support hand on the firing fingers, no air (gloves 0.002 m apart; palm to firing fingertips 0.038 m)\nPASS pistol aiming down: the support thumb forward along the frame on the support side, under the slide (-0.023,0.062,0.044; its underside at 0.070)\nPASS pistol aiming down: firing wrist nearly straight, gun in line with the forearm (0.65 rad)\nPASS pistol aiming down: the gun where the hold puts it (0.0000 m off)\nPASS pistol: firing, the support fist stays round the firing hand (worst 0.000 m)\nPASS pistol: the reload takes the support hand off the grip (0.212 m at most)\nPASS pistol: the support fist closes again after the reload (a 1.00)\nPASS pistol: and back round the firing hand (0.000 m)\nFAIL pistol: no pop leaving or rejoining the grip (2.24 m/s at most)\nPASS revolver: fingered hands, thumbs on the index edge, not mirrored\nPASS revolver: firing fist on the grip (0.000 m)\nPASS revolver: firing thumb over on the support side, high (-0.040,0.088,-0.007)\nPASS revolver: support fist closed (wrist turned onto the grip, a 1.00)\nPASS revolver: support fist round its anchor (0.000 m)\nPASS revolver: support fist on the support side round the firing fingers (-0.019,-0.021,0.019, 0.034 m from the firing fist)\nPASS revolver: support hand on the firing fingers, no air (gloves 0.003 m apart; palm to firing fingertips 0.068 m)\nPASS revolver: the support thumb forward along the frame on the support side, under the cylinder (-0.029,0.018,0.046; its underside at 0.067)\nPASS revolver: the support thumb behind the cylinder gap (tip 0.046, the cylinder's front 0.177)\nPASS revolver: firing wrist nearly straight, gun in line with the forearm (0.64 rad)\nPASS revolver: the gun where the hold puts it (0.0000 m off)\nPASS revolver aiming up: firing fist on the grip (0.000 m)\nPASS revolver aiming up: firing thumb over on the support side, high (-0.040,0.088,-0.007)\nPASS revolver aiming up: support fist closed (wrist turned onto the grip, a 1.00)\nPASS revolver aiming up: support fist round its anchor (0.000 m)\nPASS revolver aiming up: support fist on the support side round the firing fingers (-0.019,-0.021,0.019, 0.034 m from the firing fist)\nPASS revolver aiming up: support hand on the firing fingers, no air (gloves 0.003 m apart; palm to firing fingertips 0.068 m)\nPASS revolver aiming up: the support thumb forward along the frame on the support side, under the cylinder (-0.029,0.018,0.046; its underside at 0.067)\nPASS revolver aiming up: the support thumb behind the cylinder gap (tip 0.046, the cylinder's front 0.177)\nPASS revolver aiming up: firing wrist nearly straight, gun in line with the forearm (0.61 rad)\nPASS revolver aiming up: the gun where the hold puts it (0.0000 m off)\nPASS revolver aiming down: firing fist on the grip (0.000 m)\nPASS revolver aiming down: firing thumb over on the support side, high (-0.040,0.088,-0.007)\nPASS revolver aiming down: support fist closed (wrist turned onto the grip, a 1.00)\nPASS revolver aiming down: support fist round its anchor (0.000 m)\nPASS revolver aiming down: support fist on the support side round the firing fingers (-0.019,-0.021,0.019, 0.034 m from the firing fist)\nPASS revolver aiming down: support hand on the firing fingers, no air (gloves 0.003 m apart; palm to firing fingertips 0.068 m)\nPASS revolver aiming down: the support thumb forward along the frame on the support side, under the cylinder (-0.029,0.018,0.046; its underside at 0.067)\nPASS revolver aiming down: the support thumb behind the cylinder gap (tip 0.046, the cylinder's front 0.177)\nFAIL revolver aiming down: firing wrist nearly straight, gun in line with the forearm (0.78 rad)\nPASS revolver aiming down: the gun where the hold puts it (0.0016 m off)\nPASS revolver: firing, the support fist stays round the firing hand (worst 0.001 m)\nPASS revolver: the reload takes the support hand off the grip (0.283 m at most)\nPASS revolver: the support fist closes again after the reload (a 1.00)\nPASS revolver: and back round the firing hand (0.000 m)\nPASS revolver: no pop leaving or rejoining the grip (0.85 m/s at most)\nPASS m4: the same fingered hands (not mirrored)\nPASS akimbo: both pistols in his hands (the pair carried)\nPASS akimbo: hands not mirrored\nPASS akimbo: right fist on its grip (0.002)\nPASS akimbo: left fist on its own grip (0.001)\nPASS akimbo: wrists firm, guns in line with the forearms (0.69, 0.80 rad bore to forearm; wrist turn incl. roll 0.91, 0.91)\nPASS no errors",
+      "errors": [],
+      "console": [
+        {
+          "type": "warning",
+          "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift renderer: WebGPU."
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift warm-up: 286 shader variants compiled, 38 bodies pooled, 5 warm frames, lights visible 24/24, shadows true | post 6ms pools 6246ms compile 1008ms warm frame 133ms | fire-hot:230 fire-cold:230 fire-resources:100/8 fire-pool-falling-leaves:232 fire-leaf-resources:1 fire-clean:232 load:286"
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift load: terrain+water+sky built 0ms | rocks 57ms | trees 222ms | player+weapons+zombie types 1292ms | foliage scattered 2417ms | POIs+minimap+foliage chunks 4008ms | contact shading + rest of setup 4233ms | post + pools + compile + warm frame 11634ms | ready 11638ms"
+        },
+        {
+          "type": "warning",
+          "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift first minute: 306 variants after 13 warm frames | fire-hot:230 fire-cold:230 fire-resources:100/8 fire-pool-falling-leaves:232 fire-leaf-resources:1 fire-clean:232 load:286 a-fresh:286 a-flash:289 a-faded:290 a-kill-generic:297 a-kill-melee:301 a-kill-explosive:303 a-fx:306 a-corpse:306"
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift pre-roll: 373 shader variants compiled after 35 warm frames | fire-hot:230 fire-cold:230 fire-resources:100/8 fire-pool-falling-leaves:232 fire-leaf-resources:1 fire-clean:232 load:286 a-fresh:286 a-flash:289 a-faded:290 a-kill-generic:297 a-kill-melee:301 a-kill-explosive:303 a-fx:306 a-corpse:306 fresh:362 burning:364 flash:364 faded:364 tree-fade:364 kill-explosive:364 kill-chainsaw:364 kill-pellet:364 kill-generic:364 kill-melee:364 kill-explosive:366 kill-chainsaw:366 kill-pellet:366 kill-generic:367 kill-melee:367 kill-explosive:367 kill-chainsaw:367 kill-pellet:367 kill-generic:367 effects:372 corpses:372 corpses2:372"
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift title: menu up after 35 warm frames, 373 variants | fire-hot:230 fire-cold:230 fire-resources:100/8 fire-pool-falling-leaves:232 fire-leaf-resources:1 fire-clean:232 load:286 a-fresh:286 a-flash:289 a-faded:290 a-kill-generic:297 a-kill-melee:301 a-kill-explosive:303 a-fx:306 a-corpse:306 fresh:362 burning:364 flash:364 faded:364 tree-fade:364 kill-explosive:364 kill-chainsaw:364 kill-pellet:364 kill-generic:364 kill-melee:364 kill-explosive:366 kill-chainsaw:366 kill-pellet:366 kill-generic:367 kill-melee:367 kill-explosive:367 kill-chainsaw:367 kill-pellet:367 kill-generic:367 effects:372 corpses:372 corpses2:372"
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift opening perf: {\"toMenu\":23.23,\"segments\":{\"boot\":{\"at\":0,\"seconds\":0.51,\"frames\":5,\"over50\":2,\"over100\":1,\"worst\":133},\"loading\":{\"at\":0.51,\"seconds\":22.72,\"frames\":351,\"over50\":63,\"over100\":39,\"worst\":4183},\"menu\":{\"at\":23.23,\"seconds\":6.07,\"frames\":167,\"over50\":9,\"over100\":3,\"worst\":517}},\"videos\":{\"caracal@loading\":{\"frames\":4,\"dropped\":0}},\"loafOver100\":48,\"gpuGateWait\":0,\"order\":\"boot > loading > menu\",\"liveRollTicks\":76,\"renderer\":\"WebGPU / high\"}"
+        }
+      ],
+      "pass": 74,
+      "fail": [
+        "FAIL pistol: no pop leaving or rejoining the grip (2.24 m/s at most)",
+        "FAIL revolver aiming down: firing wrist nearly straight, gun in line with the forearm (0.78 rad)"
+      ]
+    },
+    {
+      "sparse": true,
+      "completed": true,
+      "done": true,
+      "output": "PASS pistol: fingered hands, thumbs on the index edge, not mirrored\nPASS pistol: firing fist on the grip (0.000 m)\nPASS pistol: firing thumb over on the support side, high (-0.061,0.066,-0.026)\nPASS pistol: support fist closed (wrist turned onto the grip, a 1.00)\nPASS pistol: support fist round its anchor (0.000 m)\nPASS pistol: support fist on the support side round the firing fingers (-0.038,-0.007,0.002, 0.039 m from the firing fist)\nPASS pistol: support hand on the firing fingers, no air (gloves 0.002 m apart; palm to firing fingertips 0.038 m)\nPASS pistol: the support thumb forward along the frame on the support side, under the slide (-0.023,0.062,0.044; its underside at 0.070)\nPASS pistol: firing wrist nearly straight, gun in line with the forearm (0.64 rad)\nPASS pistol: the gun where the hold puts it (0.0000 m off)\nPASS pistol aiming up: firing fist on the grip (0.000 m)\nPASS pistol aiming up: firing thumb over on the support side, high (-0.061,0.066,-0.026)\nPASS pistol aiming up: support fist closed (wrist turned onto the grip, a 1.00)\nPASS pistol aiming up: support fist round its anchor (0.000 m)\nPASS pistol aiming up: support fist on the support side round the firing fingers (-0.038,-0.007,0.002, 0.039 m from the firing fist)\nPASS pistol aiming up: support hand on the firing fingers, no air (gloves 0.002 m apart; palm to firing fingertips 0.038 m)\nPASS pistol aiming up: the support thumb forward along the frame on the support side, under the slide (-0.023,0.062,0.044; its underside at 0.070)\nPASS pistol aiming up: firing wrist nearly straight, gun in line with the forearm (0.61 rad)\nPASS pistol aiming up: the gun where the hold puts it (0.0000 m off)\nPASS pistol aiming down: firing fist on the grip (0.000 m)\nPASS pistol aiming down: firing thumb over on the support side, high (-0.061,0.066,-0.026)\nPASS pistol aiming down: support fist closed (wrist turned onto the grip, a 1.00)\nPASS pistol aiming down: support fist round its anchor (0.000 m)\nPASS pistol aiming down: support fist on the support side round the firing fingers (-0.038,-0.007,0.002, 0.039 m from the firing fist)\nPASS pistol aiming down: support hand on the firing fingers, no air (gloves 0.002 m apart; palm to firing fingertips 0.038 m)\nPASS pistol aiming down: the support thumb forward along the frame on the support side, under the slide (-0.023,0.062,0.044; its underside at 0.070)\nPASS pistol aiming down: firing wrist nearly straight, gun in line with the forearm (0.65 rad)\nPASS pistol aiming down: the gun where the hold puts it (0.0000 m off)\nPASS pistol: firing, the support fist stays round the firing hand (worst 0.000 m)\nPASS pistol: the reload takes the support hand off the grip (0.213 m at most)\nPASS pistol: the support fist closes again after the reload (a 1.00)\nPASS pistol: and back round the firing hand (0.000 m)\nPASS pistol: no pop leaving or rejoining the grip (0.84 m/s at most)\nPASS revolver: fingered hands, thumbs on the index edge, not mirrored\nPASS revolver: firing fist on the grip (0.000 m)\nPASS revolver: firing thumb over on the support side, high (-0.040,0.088,-0.007)\nPASS revolver: support fist closed (wrist turned onto the grip, a 1.00)\nPASS revolver: support fist round its anchor (0.000 m)\nPASS revolver: support fist on the support side round the firing fingers (-0.019,-0.021,0.019, 0.034 m from the firing fist)\nPASS revolver: support hand on the firing fingers, no air (gloves 0.003 m apart; palm to firing fingertips 0.068 m)\nPASS revolver: the support thumb forward along the frame on the support side, under the cylinder (-0.029,0.018,0.046; its underside at 0.067)\nPASS revolver: the support thumb behind the cylinder gap (tip 0.046, the cylinder's front 0.177)\nPASS revolver: firing wrist nearly straight, gun in line with the forearm (0.64 rad)\nPASS revolver: the gun where the hold puts it (0.0000 m off)\nPASS revolver aiming up: firing fist on the grip (0.000 m)\nPASS revolver aiming up: firing thumb over on the support side, high (-0.040,0.088,-0.007)\nPASS revolver aiming up: support fist closed (wrist turned onto the grip, a 1.00)\nPASS revolver aiming up: support fist round its anchor (0.000 m)\nPASS revolver aiming up: support fist on the support side round the firing fingers (-0.019,-0.021,0.019, 0.034 m from the firing fist)\nPASS revolver aiming up: support hand on the firing fingers, no air (gloves 0.003 m apart; palm to firing fingertips 0.068 m)\nPASS revolver aiming up: the support thumb forward along the frame on the support side, under the cylinder (-0.029,0.018,0.046; its underside at 0.067)\nPASS revolver aiming up: the support thumb behind the cylinder gap (tip 0.046, the cylinder's front 0.177)\nPASS revolver aiming up: firing wrist nearly straight, gun in line with the forearm (0.61 rad)\nPASS revolver aiming up: the gun where the hold puts it (0.0000 m off)\nPASS revolver aiming down: firing fist on the grip (0.000 m)\nPASS revolver aiming down: firing thumb over on the support side, high (-0.040,0.088,-0.007)\nPASS revolver aiming down: support fist closed (wrist turned onto the grip, a 1.00)\nPASS revolver aiming down: support fist round its anchor (0.000 m)\nPASS revolver aiming down: support fist on the support side round the firing fingers (-0.019,-0.021,0.019, 0.034 m from the firing fist)\nPASS revolver aiming down: support hand on the firing fingers, no air (gloves 0.003 m apart; palm to firing fingertips 0.068 m)\nPASS revolver aiming down: the support thumb forward along the frame on the support side, under the cylinder (-0.029,0.018,0.046; its underside at 0.067)\nPASS revolver aiming down: the support thumb behind the cylinder gap (tip 0.046, the cylinder's front 0.177)\nFAIL revolver aiming down: firing wrist nearly straight, gun in line with the forearm (0.78 rad)\nPASS revolver aiming down: the gun where the hold puts it (0.0016 m off)\nPASS revolver: firing, the support fist stays round the firing hand (worst 0.001 m)\nPASS revolver: the reload takes the support hand off the grip (0.284 m at most)\nPASS revolver: the support fist closes again after the reload (a 1.00)\nPASS revolver: and back round the firing hand (0.000 m)\nPASS revolver: no pop leaving or rejoining the grip (0.87 m/s at most)\nPASS m4: the same fingered hands (not mirrored)\nPASS akimbo: both pistols in his hands (the pair carried)\nPASS akimbo: hands not mirrored\nPASS akimbo: right fist on its grip (0.002)\nPASS akimbo: left fist on its own grip (0.001)\nPASS akimbo: wrists firm, guns in line with the forearms (0.68, 0.80 rad bore to forearm; wrist turn incl. roll 0.91, 0.91)\nPASS no errors",
+      "errors": [],
+      "console": [
+        {
+          "type": "warning",
+          "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift renderer: WebGPU."
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift warm-up: 282 shader variants compiled, 38 bodies pooled, 5 warm frames, lights visible 24/24, shadows true | post 6ms pools 6611ms compile 970ms warm frame 132ms | fire-hot:227 fire-cold:227 fire-resources:100/8 fire-pool-falling-leaves:229 fire-leaf-resources:1 fire-clean:229 load:282"
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift load: terrain+water+sky built 0ms | rocks 79ms | trees 294ms | player+weapons+zombie types 1572ms | foliage scattered 3154ms | POIs+minimap+foliage chunks 5052ms | contact shading + rest of setup 5278ms | post + pools + compile + warm frame 13007ms | ready 13012ms"
+        },
+        {
+          "type": "warning",
+          "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift first minute: 301 variants after 13 warm frames | fire-hot:227 fire-cold:227 fire-resources:100/8 fire-pool-falling-leaves:229 fire-leaf-resources:1 fire-clean:229 load:282 a-fresh:282 a-flash:285 a-faded:286 a-kill-generic:293 a-kill-melee:296 a-kill-explosive:298 a-fx:301 a-corpse:301"
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift pre-roll: 370 shader variants compiled after 35 warm frames | fire-hot:227 fire-cold:227 fire-resources:100/8 fire-pool-falling-leaves:229 fire-leaf-resources:1 fire-clean:229 load:282 a-fresh:282 a-flash:285 a-faded:286 a-kill-generic:293 a-kill-melee:296 a-kill-explosive:298 a-fx:301 a-corpse:301 fresh:359 burning:361 flash:361 faded:361 tree-fade:361 kill-explosive:361 kill-chainsaw:361 kill-pellet:361 kill-generic:361 kill-melee:361 kill-explosive:363 kill-chainsaw:363 kill-pellet:363 kill-generic:364 kill-melee:364 kill-explosive:364 kill-chainsaw:364 kill-pellet:364 kill-generic:364 effects:369 corpses:369 corpses2:369"
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift title: menu up after 35 warm frames, 370 variants | fire-hot:227 fire-cold:227 fire-resources:100/8 fire-pool-falling-leaves:229 fire-leaf-resources:1 fire-clean:229 load:282 a-fresh:282 a-flash:285 a-faded:286 a-kill-generic:293 a-kill-melee:296 a-kill-explosive:298 a-fx:301 a-corpse:301 fresh:359 burning:361 flash:361 faded:361 tree-fade:361 kill-explosive:361 kill-chainsaw:361 kill-pellet:361 kill-generic:361 kill-melee:361 kill-explosive:363 kill-chainsaw:363 kill-pellet:363 kill-generic:364 kill-melee:364 kill-explosive:364 kill-chainsaw:364 kill-pellet:364 kill-generic:364 effects:369 corpses:369 corpses2:369"
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift opening perf: {\"toMenu\":22.58,\"segments\":{\"boot\":{\"at\":0,\"seconds\":0.5,\"frames\":17,\"over50\":1,\"over100\":0,\"worst\":50},\"loading\":{\"at\":0.5,\"seconds\":22.08,\"frames\":370,\"over50\":54,\"over100\":24,\"worst\":4283},\"menu\":{\"at\":22.58,\"seconds\":6.04,\"frames\":315,\"over50\":5,\"over100\":2,\"worst\":333}},\"videos\":{\"caracal@boot\":{\"frames\":4,\"dropped\":0}},\"loafOver100\":25,\"gpuGateWait\":0,\"order\":\"boot > loading > menu\",\"liveRollTicks\":76,\"renderer\":\"WebGPU / high\"}"
+        }
+      ],
+      "pass": 75,
+      "fail": [
+        "FAIL revolver aiming down: firing wrist nearly straight, gun in line with the forearm (0.78 rad)"
+      ]
+    }
+  ],
+  "testName": "t229",
+  "testHash": "aaee7e006497082809f34177e5ce1d501b1b86bc83dfe9f4ee52d8e741ca8ea8"
+}

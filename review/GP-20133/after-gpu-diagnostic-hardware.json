@@ -1,0 +1,8 @@
+{
+  "when": "2026-11-14T05:42:07.959Z",
+  "scope": "Read-only after-run hardware snapshot, not evidence of conditions during timed phases",
+  "cpuBusy": 0.03574437472639971,
+  "maxCore": 0.325187969924812,
+  "freeGB": 44.07335662841797,
+  "gpu": "NVIDIA GeForce RTX 5080, 36, 1, 697, 405, 21.35"
+}

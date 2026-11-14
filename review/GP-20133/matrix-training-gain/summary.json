@@ -1,0 +1,258 @@
+{
+  "scope": "Director landing gate: warmed BOTH matrix builds first with two complete pair magazines each, then ABBA x3 twelve full magazines in Training with real sun shadows. Profiler and GPU queries off, no screenshots before/between timing phases, original shot solves and all effects intact. Warm results retained separately. This is an attributable candidate comparison, not full GP33 acceptance.",
+  "source": "070e4ab5b8394d9623bc5376254c904849275cc0d14205a48d43a1fead403151",
+  "end": "070e4ab5b8394d9623bc5376254c904849275cc0d14205a48d43a1fead403151",
+  "sourceUnchanged": true,
+  "modulesUnchanged": true,
+  "errors": [],
+  "blocks": [
+    {
+      "block": 0,
+      "originalFire": 26.256250000514445,
+      "candidateFire": 22.65465542561541,
+      "gainPercent": 13.717094310225065,
+      "originalIdle": 19.78451467860774,
+      "candidateIdle": 17.56456818181818
+    },
+    {
+      "block": 1,
+      "originalFire": 23.423798076736812,
+      "candidateFire": 17.561956521933496,
+      "gainPercent": 25.025154057424036,
+      "originalIdle": 21.888407036665548,
+      "candidateIdle": 17.334451693095218
+    },
+    {
+      "block": 2,
+      "originalFire": 18.44727272714178,
+      "candidateFire": 18.029346133877592,
+      "gainPercent": 2.265519675704064,
+      "originalIdle": 17.527185568895867,
+      "candidateIdle": 17.12942807348828
+    }
+  ],
+  "allPhaseMean": {
+    "originalFire": 22.709106934797678,
+    "candidateFire": 19.415319360475497,
+    "gainPercent": 14.50425850641901
+  },
+  "rows": [
+    {
+      "pass": 0,
+      "sparse": false,
+      "fire": false,
+      "mean": 16.92631578949609,
+      "frames": 266,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 0,
+      "sparse": false,
+      "fire": true,
+      "mean": 20.400000000283832,
+      "frames": 42,
+      "builds": 4,
+      "pipes": 2
+    },
+    {
+      "pass": 1,
+      "sparse": true,
+      "fire": false,
+      "mean": 17.051136363636363,
+      "frames": 264,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 1,
+      "sparse": true,
+      "fire": true,
+      "mean": 17.993181818588212,
+      "frames": 44,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 2,
+      "sparse": true,
+      "fire": false,
+      "mean": 18.078,
+      "frames": 250,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 2,
+      "sparse": true,
+      "fire": true,
+      "mean": 27.31612903264261,
+      "frames": 31,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 3,
+      "sparse": false,
+      "fire": false,
+      "mean": 22.642713567719387,
+      "frames": 199,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 3,
+      "sparse": false,
+      "fire": true,
+      "mean": 32.11250000074506,
+      "frames": 24,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 4,
+      "sparse": false,
+      "fire": false,
+      "mean": 24.932044198829168,
+      "frames": 181,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 4,
+      "sparse": false,
+      "fire": true,
+      "mean": 25.19374999962747,
+      "frames": 32,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 5,
+      "sparse": true,
+      "fire": false,
+      "mean": 17.27701149429855,
+      "frames": 261,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 5,
+      "sparse": true,
+      "fire": true,
+      "mean": 17.210869565606117,
+      "frames": 46,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 6,
+      "sparse": true,
+      "fire": false,
+      "mean": 17.39189189189189,
+      "frames": 259,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 6,
+      "sparse": true,
+      "fire": true,
+      "mean": 17.91304347826087,
+      "frames": 46,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 7,
+      "sparse": false,
+      "fire": false,
+      "mean": 18.844769874501928,
+      "frames": 239,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 7,
+      "sparse": false,
+      "fire": true,
+      "mean": 21.653846153846153,
+      "frames": 39,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 8,
+      "sparse": false,
+      "fire": false,
+      "mean": 17.169847328244273,
+      "frames": 262,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 8,
+      "sparse": false,
+      "fire": true,
+      "mean": 19.339999999602636,
+      "frames": 45,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 9,
+      "sparse": true,
+      "fire": false,
+      "mean": 17.120833333243024,
+      "frames": 264,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 9,
+      "sparse": true,
+      "fire": true,
+      "mean": 19.2097560974156,
+      "frames": 41,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 10,
+      "sparse": true,
+      "fire": false,
+      "mean": 17.13802281373354,
+      "frames": 263,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 10,
+      "sparse": true,
+      "fire": true,
+      "mean": 16.848936170339584,
+      "frames": 47,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 11,
+      "sparse": false,
+      "fire": false,
+      "mean": 17.884523809547463,
+      "frames": 252,
+      "builds": 0,
+      "pipes": 0
+    },
+    {
+      "pass": 11,
+      "sparse": false,
+      "fire": true,
+      "mean": 17.55454545468092,
+      "frames": 44,
+      "builds": 0,
+      "pipes": 0
+    }
+  ],
+  "warmMagazines": 4
+}

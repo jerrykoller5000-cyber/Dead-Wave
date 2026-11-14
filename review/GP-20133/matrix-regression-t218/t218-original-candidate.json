@@ -1,0 +1,116 @@
+{
+  "navigation": "Canonical tools/bench early dismissForTesting; separate loader-ready and actual menu times",
+  "scope": "Original unchanged native targeted regression, fresh page per variant, one browser/lease. Immutable index and first-read JS module snapshots shared between original/candidate; outputs/failures retained, no test weakening or FPS claim.",
+  "frameSampling": "production-tick-start-wall-clock",
+  "environment": "outdoor",
+  "sourceSha256": "070e4ab5b8394d9623bc5376254c904849275cc0d14205a48d43a1fead403151",
+  "moduleHashes": {
+    "core/body-limits.js": "fd2562bd882ef767155cc819301ede35e68d008621dd0f683232c593d91459eb",
+    "game/viewmodel.js": "f3eb743fb200945a3bed23accbd93dfcb5cf983e616769049c357d3199b7363e",
+    "game/tp-fit.js": "d2dbf1e163f856b672a1a91d1638a949749e3bde1727bda8ceaf1f18c3b08e07",
+    "studio/fp-arms.js": "fff7808db158e072d0c5697a0a57e0c87de7fa81847558fc8670f6f7e5f190d8",
+    "world/training-ballistics.js": "eadc9d04d5fd50ad9f6f23c0a080ea2ad58485ff62e0002f1a6b1b0da4719bdc"
+  },
+  "rows": [
+    {
+      "sparse": false,
+      "completed": true,
+      "done": true,
+      "output": "PASS TT.reloadClipDbg.hold is exported\nPASS pistol: every visible magazine is seated or in the palm\nPASS pistol: hidden only while the hand is at the pouch\nPASS pistol: the magazine rides in the palm between the well and the pouch (13 beats)\nPASS pistol: the support hand is on the well as the magazine goes home (0.016 m)\nPASS pistol: and at the pouch when it stows the empty (0.016 m)\nPASS pistol: the slide has a grab point\nPASS pistol: the hand on the slide as it racks (0.016 m; 0.253 m from that shoulder)\nPASS pistol: the firing hand stays on the grip (0.027 m)\nPASS pistol: seated after the reload\nPASS uzi: every visible magazine is seated or in the palm\nPASS uzi: hidden only while the hand is at the pouch\nPASS uzi: the magazine rides in the palm between the well and the pouch (11 beats)\nPASS uzi: the support hand is on the well as the magazine goes home (0.016 m)\nPASS uzi: and at the pouch when it stows the empty (0.016 m)\nPASS uzi: the firing hand stays on the grip (0.000 m)\nPASS uzi: seated after the reload\nPASS sniper: every visible magazine is seated or in the palm\nPASS sniper: hidden only while the hand is at the pouch\nPASS sniper: the magazine rides in the palm between the well and the pouch (11 beats)\nPASS sniper: the support hand is on the well as the magazine goes home (0.016 m)\nPASS sniper: and at the pouch when it stows the empty (0.016 m)\nPASS sniper: the bolt has a grab point\nPASS sniper: the hand on the bolt as it cycles (0.015 m; 0.289 m from that shoulder)\nPASS sniper: the firing hand stays on the grip (0.003 m)\nPASS sniper: seated after the reload\nPASS m4: every visible magazine is seated or in the palm (or the clip's falling empty)\nPASS m4: the firing hand stays on the grip (0.004 m)\nPASS m4: seated after the reload\nPASS ak: every visible magazine is seated or in the palm (or the clip's falling empty)\nPASS ak: the firing hand stays on the grip (0.005 m)\nPASS ak: seated after the reload\nFAIL aa12: every visible magazine is seated or in the palm (or the clip's falling empty): in midair at u 0.52 (well 0.036, palm 0.074)\nPASS aa12: the firing hand stays on the grip (0.002 m)\nPASS aa12: seated after the reload",
+      "errors": [],
+      "console": [
+        {
+          "type": "warning",
+          "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift renderer: WebGPU."
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift warm-up: 284 shader variants compiled, 38 bodies pooled, 5 warm frames, lights visible 24/24, shadows true | post 5ms pools 5763ms compile 930ms warm frame 126ms | fire-hot:228 fire-cold:228 fire-resources:100/8 fire-pool-falling-leaves:230 fire-leaf-resources:1 fire-clean:230 load:284"
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift load: terrain+water+sky built 0ms | rocks 63ms | trees 233ms | player+weapons+zombie types 1274ms | foliage scattered 2353ms | POIs+minimap+foliage chunks 3892ms | contact shading + rest of setup 4098ms | post + pools + compile + warm frame 10931ms | ready 10935ms"
+        },
+        {
+          "type": "warning",
+          "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift first minute: 303 variants after 13 warm frames | fire-hot:228 fire-cold:228 fire-resources:100/8 fire-pool-falling-leaves:230 fire-leaf-resources:1 fire-clean:230 load:284 a-fresh:284 a-flash:287 a-faded:288 a-kill-generic:295 a-kill-melee:298 a-kill-explosive:300 a-fx:303 a-corpse:303"
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift pre-roll: 373 shader variants compiled after 35 warm frames | fire-hot:228 fire-cold:228 fire-resources:100/8 fire-pool-falling-leaves:230 fire-leaf-resources:1 fire-clean:230 load:284 a-fresh:284 a-flash:287 a-faded:288 a-kill-generic:295 a-kill-melee:298 a-kill-explosive:300 a-fx:303 a-corpse:303 fresh:361 burning:362 flash:362 faded:362 tree-fade:362 kill-explosive:362 kill-chainsaw:362 kill-pellet:362 kill-generic:362 kill-melee:362 kill-explosive:364 kill-chainsaw:364 kill-pellet:364 kill-generic:365 kill-melee:365 kill-explosive:365 kill-chainsaw:365 kill-pellet:365 kill-generic:365 effects:371 corpses:371 corpses2:371"
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift title: menu up after 35 warm frames, 373 variants | fire-hot:228 fire-cold:228 fire-resources:100/8 fire-pool-falling-leaves:230 fire-leaf-resources:1 fire-clean:230 load:284 a-fresh:284 a-flash:287 a-faded:288 a-kill-generic:295 a-kill-melee:298 a-kill-explosive:300 a-fx:303 a-corpse:303 fresh:361 burning:362 flash:362 faded:362 tree-fade:362 kill-explosive:362 kill-chainsaw:362 kill-pellet:362 kill-generic:362 kill-melee:362 kill-explosive:364 kill-chainsaw:364 kill-pellet:364 kill-generic:365 kill-melee:365 kill-explosive:365 kill-chainsaw:365 kill-pellet:365 kill-generic:365 effects:371 corpses:371 corpses2:371"
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift opening perf: {\"toMenu\":20.33,\"segments\":{\"boot\":{\"at\":0,\"seconds\":0.52,\"frames\":5,\"over50\":3,\"over100\":1,\"worst\":150},\"loading\":{\"at\":0.52,\"seconds\":19.82,\"frames\":353,\"over50\":56,\"over100\":22,\"worst\":3817},\"menu\":{\"at\":20.33,\"seconds\":6.02,\"frames\":308,\"over50\":5,\"over100\":2,\"worst\":400}},\"videos\":{\"caracal@loading\":{\"frames\":4,\"dropped\":0}},\"loafOver100\":29,\"gpuGateWait\":0,\"order\":\"boot > loading > menu\",\"liveRollTicks\":77,\"renderer\":\"WebGPU / high\"}"
+        }
+      ],
+      "pass": 34,
+      "fail": [
+        "FAIL aa12: every visible magazine is seated or in the palm (or the clip's falling empty): in midair at u 0.52 (well 0.036, palm 0.074)"
+      ]
+    },
+    {
+      "sparse": true,
+      "completed": true,
+      "done": true,
+      "output": "PASS TT.reloadClipDbg.hold is exported\nPASS pistol: every visible magazine is seated or in the palm\nPASS pistol: hidden only while the hand is at the pouch\nPASS pistol: the magazine rides in the palm between the well and the pouch (13 beats)\nPASS pistol: the support hand is on the well as the magazine goes home (0.016 m)\nPASS pistol: and at the pouch when it stows the empty (0.016 m)\nPASS pistol: the slide has a grab point\nPASS pistol: the hand on the slide as it racks (0.016 m; 0.253 m from that shoulder)\nPASS pistol: the firing hand stays on the grip (0.027 m)\nPASS pistol: seated after the reload\nPASS uzi: every visible magazine is seated or in the palm\nPASS uzi: hidden only while the hand is at the pouch\nPASS uzi: the magazine rides in the palm between the well and the pouch (11 beats)\nPASS uzi: the support hand is on the well as the magazine goes home (0.016 m)\nPASS uzi: and at the pouch when it stows the empty (0.016 m)\nPASS uzi: the firing hand stays on the grip (0.001 m)\nPASS uzi: seated after the reload\nPASS sniper: every visible magazine is seated or in the palm\nPASS sniper: hidden only while the hand is at the pouch\nPASS sniper: the magazine rides in the palm between the well and the pouch (11 beats)\nPASS sniper: the support hand is on the well as the magazine goes home (0.016 m)\nPASS sniper: and at the pouch when it stows the empty (0.016 m)\nPASS sniper: the bolt has a grab point\nPASS sniper: the hand on the bolt as it cycles (0.015 m; 0.289 m from that shoulder)\nPASS sniper: the firing hand stays on the grip (0.003 m)\nPASS sniper: seated after the reload\nPASS m4: every visible magazine is seated or in the palm (or the clip's falling empty)\nPASS m4: the firing hand stays on the grip (0.004 m)\nPASS m4: seated after the reload\nPASS ak: every visible magazine is seated or in the palm (or the clip's falling empty)\nPASS ak: the firing hand stays on the grip (0.005 m)\nPASS ak: seated after the reload\nFAIL aa12: every visible magazine is seated or in the palm (or the clip's falling empty): in midair at u 0.52 (well 0.036, palm 0.072)\nPASS aa12: the firing hand stays on the grip (0.002 m)\nPASS aa12: seated after the reload",
+      "errors": [],
+      "console": [
+        {
+          "type": "warning",
+          "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift renderer: WebGPU."
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift warm-up: 284 shader variants compiled, 38 bodies pooled, 5 warm frames, lights visible 24/24, shadows true | post 12ms pools 6604ms compile 1018ms warm frame 132ms | fire-hot:228 fire-cold:228 fire-resources:100/8 fire-pool-falling-leaves:230 fire-leaf-resources:1 fire-clean:230 load:284"
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift load: terrain+water+sky built 0ms | rocks 78ms | trees 301ms | player+weapons+zombie types 1557ms | foliage scattered 3138ms | POIs+minimap+foliage chunks 5010ms | contact shading + rest of setup 5274ms | post + pools + compile + warm frame 13053ms | ready 13056ms"
+        },
+        {
+          "type": "warning",
+          "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift first minute: 303 variants after 13 warm frames | fire-hot:228 fire-cold:228 fire-resources:100/8 fire-pool-falling-leaves:230 fire-leaf-resources:1 fire-clean:230 load:284 a-fresh:284 a-flash:287 a-faded:288 a-kill-generic:295 a-kill-melee:298 a-kill-explosive:300 a-fx:303 a-corpse:303"
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift pre-roll: 370 shader variants compiled after 35 warm frames | fire-hot:228 fire-cold:228 fire-resources:100/8 fire-pool-falling-leaves:230 fire-leaf-resources:1 fire-clean:230 load:284 a-fresh:284 a-flash:287 a-faded:288 a-kill-generic:295 a-kill-melee:298 a-kill-explosive:300 a-fx:303 a-corpse:303 fresh:359 burning:361 flash:361 faded:361 tree-fade:361 kill-explosive:361 kill-chainsaw:361 kill-pellet:361 kill-generic:361 kill-melee:361 kill-explosive:363 kill-chainsaw:363 kill-pellet:363 kill-generic:364 kill-melee:364 kill-explosive:364 kill-chainsaw:364 kill-pellet:364 kill-generic:364 effects:369 corpses:369 corpses2:369"
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift title: menu up after 35 warm frames, 370 variants | fire-hot:228 fire-cold:228 fire-resources:100/8 fire-pool-falling-leaves:230 fire-leaf-resources:1 fire-clean:230 load:284 a-fresh:284 a-flash:287 a-faded:288 a-kill-generic:295 a-kill-melee:298 a-kill-explosive:300 a-fx:303 a-corpse:303 fresh:359 burning:361 flash:361 faded:361 tree-fade:361 kill-explosive:361 kill-chainsaw:361 kill-pellet:361 kill-generic:361 kill-melee:361 kill-explosive:363 kill-chainsaw:363 kill-pellet:363 kill-generic:364 kill-melee:364 kill-explosive:364 kill-chainsaw:364 kill-pellet:364 kill-generic:364 effects:369 corpses:369 corpses2:369"
+        },
+        {
+          "type": "info",
+          "text": "Grave Shift opening perf: {\"toMenu\":23.07,\"segments\":{\"boot\":{\"at\":0,\"seconds\":0.67,\"frames\":16,\"over50\":0,\"over100\":0,\"worst\":50},\"loading\":{\"at\":0.67,\"seconds\":22.4,\"frames\":361,\"over50\":51,\"over100\":26,\"worst\":4283},\"menu\":{\"at\":23.07,\"seconds\":6.03,\"frames\":300,\"over50\":7,\"over100\":2,\"worst\":417}},\"videos\":{\"caracal@boot\":{\"frames\":4,\"dropped\":0}},\"loafOver100\":33,\"gpuGateWait\":0,\"order\":\"boot > loading > menu\",\"liveRollTicks\":77,\"renderer\":\"WebGPU / high\"}"
+        }
+      ],
+      "pass": 34,
+      "fail": [
+        "FAIL aa12: every visible magazine is seated or in the palm (or the clip's falling empty): in midair at u 0.52 (well 0.036, palm 0.072)"
+      ]
+    }
+  ],
+  "testName": "t218",
+  "testHash": "6f9d16cb4c04d4dd46603d4e74701a7d96c5bd453526b93ab54df4e0e8a77444"
+}

@@ -1,0 +1,224 @@
+function tryFire(dt) {
+      if (fireLight.on) return;
+      sprayHeat = Math.max(0, sprayHeat - dt * (fireHeld ? 2.4 : 9));
+      // GB-52: the saw cools whenever it is not running, whatever is in your hands.
+      if (!sawCutting && sawHeat > 0) {
+        sawHeat = Math.max(0, sawHeat - dt * SAW_COOL);
+        if (sawOverheat && sawHeat <= SAW_RESTART_HEAT) { sawOverheat = false; updateAmmoHud(); }
+        else if (currentWeapon === 'chainsaw') { sawHudT -= dt; if (sawHudT <= 0) { sawHudT = 0.25; updateAmmoHud(); } }
+      }
+      sawCutting = false;
+      const st = WEAPON_STATS[currentWeapon];
+      // The shotgun can be fired after any shell. The MGL must first close and
+      // latch its swung-out cylinder, even though rounds appear in the HUD as loaded.
+      if (reloading && currentWeapon === 'shotgun' && mouseFireHeld && ammoByWeapon.shotgun > 0) {
+        reloading = false; reloadTimer = 0; reloadWeapon = null; reloadRoundTime = 0;
+        resetReloadAnim(); updateAmmoHud();
+      }
+      const ammo = ammoByWeapon[currentWeapon];
+      fireHeld = mouseFireHeld && gameStarted && !gameOver && !won && !placeMode && !buildMode && !uiBlocksFire() && !playerSwimming && !mortarMounted && !mortarCarried && !fuelCarried() && !unarmed && (!vault || vaultCanFire(currentWeapon,unarmed)) && !onAnyLadder();   // CL-179; GB-197: hands full with the can
+      const edge = fireHeld && !prevMouseFireHeld;
+      prevMouseFireHeld = fireHeld;
+
+      if (st.melee) {
+        barrelSpinVel = Math.max(0, barrelSpinVel - SPIN_DECEL * dt);
+        const gun = getActiveGun();
+        // The saw runs on gas bought at the kiosk. Dry tank: it just won't start.
+        if (fireHeld && sawFuel <= 0) {
+          if (edge) { AudioSys.chainsawDryPull(); flashNoAmmo(); }
+          fireHeld = false;
+        }
+        // GB-52: overheated, it will not start until it has cooled.
+        if (fireHeld && sawOverheat) {
+          if (edge) AudioSys.chainsawDryPull();
+          fireHeld = false;
+        }
+        if (sawStart.phase !== 'ready') fireHeld = false;   // GP-188: hands back before the chain can bite.
+        if (!fireHeld && sawCutHoldT > 0) { sawCutHoldT = Math.max(0, sawCutHoldT - dt); return; }   // GB-265: a held cut (sawCutTick) runs it
+        if (!fireHeld || won || gameOver || !gameStarted) {
+          AudioSys.chainsawStop();
+          if (gun.userData.heatMat) gun.userData.heatMat.emissiveIntensity = 0;
+          if (sawHudRunning) { sawHudRunning = false; updateAmmoHud(); }
+          // Idle chain crawl/wobble while equipped (path travel, not rigid spin)
+          if (gun.userData.chainTeeth && currentWeapon === 'chainsaw' && gameStarted && !won && !gameOver && sawEngineCaught()) {   // CI-1 (note 38)
+            advanceChainsawChain(gun, Math.sin(performance.now() * 0.008) * dt * 0.6);
+          } else if (gun.userData.chainBlur) gun.userData.chainBlur.visible = false;   // CI-1 (note 36): no blur on a still chain
+          return;
+        }
+        if(rangeFeature&&!rangeFeature.canAttack('chainsaw',dt))return;
+        AudioSys.chainsawStart();
+        AudioSys.chainsawSetRev(1);
+        if (gun.userData.heatMat) {
+          gun.userData.heatMat.emissiveIntensity = 0.22 + sawHeat * 0.9 + Math.sin(performance.now() * 0.02) * 0.06;   // GB-52: glows hotter
+        }
+        // GP-188: the mount is already seated by holdWeapon; do not overwrite it after IK.
+        fireCooldown -= dt;
+        // GB-52: gas and heat (see SAW_BITE_FUEL). biting = the chain was in a body in the last 0.3 s.
+        sawCutting = true;
+        if(rangeFeature?.owns()){const p=localPlayer.position;const hits=trainingBladeHits(training.tg,sawBladeWorld(),{x:p.x,y:p.y+.9,z:p.z},traceTraining,Infinity);rangeFeature.saw(dt,hits);}
+        sawBiteT = Math.max(0, sawBiteT - dt);
+        const biting = sawBiteT > 0;
+        sawFuel = Math.max(0, sawFuel - dt * (1 + (biting ? SAW_BITE_FUEL : 0)));
+        sawHeat = Math.min(1, sawHeat + dt * (biting ? SAW_HEAT_BITE : SAW_HEAT_RUN));
+        if (sawHeat >= 1) { sawOverheatStop(gun); return; }   // GB-265: shared with sawCutTick
+        if (fireCooldown <= 0) {
+          fireCooldown = st.interval;
+          chainsawTick();
+          updateAmmoHud(); // fuel readout ticks down while cutting
+        } else {
+          advanceChainsawChain(gun, dt * 28);
+        }
+        if (!sawHudRunning) { sawHudRunning = true; updateAmmoHud(); }
+        return;
+      }
+
+      if (autoReloadDue(ammo, dt)) startReload();   // GB-229: empty with something to load
+      if (st.flamer) {
+        barrelSpinVel = Math.max(0, barrelSpinVel - SPIN_DECEL * dt);
+        const gun = getActiveGun();
+        if (gun.userData.pilot) gun.userData.pilot.emissiveIntensity = 1.2 + Math.sin(performance.now() * 0.02) * 0.5;
+        if (gun.userData.setFuelGauge) gun.userData.setFuelGauge(ammoByWeapon.flamer / magSize('flamer'), dt);   // CI-1 (J151 note 50): the gauge reads the tank
+        // Count stream time only while the trigger is live. A reload or idle used
+        // to bank negative cooldown, then spend a fresh can in one catch-up loop.
+        if (reloading || won || gameOver || !gameStarted) { fireCooldown = 0; flamerOn = false; return; }
+        if (ammo <= 0) { fireCooldown = 0; if (fireHeld && edge) { AudioSys.emptyClick(); if (reserveOf('flamer') <= 0) flashNoAmmo(); else startReload(); } flamerOn = false; return; }
+        if (!fireHeld) { fireCooldown = Math.max(0, fireCooldown - dt); flamerOn = false; return; }
+        fireCooldown -= dt;
+        flamerOn = true;
+        while (fireCooldown <= 0 && ammoByWeapon.flamer > 0) {
+          if(rangeFeature&&!rangeFeature.canAttack('flamer',.5)){flamerOn=false;break;}
+          fireCooldown += st.interval;
+          useMagazineRound(magazineStore, 'flamer', 0, 0.5);
+          syncMagazine('flamer');
+          rangeShotPacket=rangeFeature?.attack('flamer',{units:.5,seconds:st.interval})||null;
+          flamerTick(st);
+          if (barrelHeat) barrelHeat.addShot('flamer', false, 1.0);   // AG-290
+        }
+        updateAmmoHud();
+        return;
+      }
+
+      if (st.spin) {
+        if (!fireHeld || reloading || ammo <= 0 || won || gameOver || !gameStarted) {
+          const wasSpinning = barrelSpinVel > SPIN_MAX * 0.2;
+          barrelSpinVel = Math.max(0, barrelSpinVel - SPIN_DECEL * dt);
+          if (wasSpinning && barrelSpinVel <= SPIN_MAX * 0.2) AudioSys.noteSpin(false);
+          if (fireHeld && !reloading && ammo <= 0) AudioSys.emptyClick();
+          return;
+        }
+        const prevSpin = barrelSpinVel;
+        barrelSpinVel = Math.min(SPIN_MAX, barrelSpinVel + SPIN_ACCEL * dt);
+        if (prevSpin < SPIN_MAX * 0.25 && barrelSpinVel >= SPIN_MAX * 0.25) AudioSys.noteSpin(true);
+        fireCooldown -= dt;
+        if (barrelSpinVel < SPIN_MAX * 0.35) return;
+        while (fireCooldown <= 0 && ammoByWeapon.minigun > 0) {
+          if(rangeFeature&&!rangeFeature.canAttack('minigun'))break;
+          fireCooldown += st.interval;
+          if (!streakSavesRound()) { useMagazineRound(magazineStore, 'minigun'); syncMagazine('minigun'); }
+          beginWeaponShot();
+          heardShot('minigun');   // GB-105
+          spawnProjectile(false, null, aimDirWithSpread(), st.damage, projectileLifeFor(st), null, st.speed);
+          tagPlayerHit('minigun', st.damage, 1);
+          spawnCasing('minigun');
+          kickMinigunRecoil();
+          triggerMuzzleFlash();
+          AudioSys.fireWeapon('minigun');
+          if (barrelHeat) barrelHeat.addShot('minigun', false);   // AG-290
+          updateAmmoHud();
+          if (ammoByWeapon.minigun <= 0) { fireHeld = false; updateAmmoHud(); break; }
+        }
+      } else {
+        // Auto (M4/pistol) or semi (shotgun/revolver/sniper/launcher)
+        barrelSpinVel = Math.max(0, barrelSpinVel - SPIN_DECEL * dt);
+        fireCooldown -= dt;
+        if (reloading || won || gameOver || !gameStarted) return;
+        if (currentWeapon === 'shotgun' && shotgunPumping) return;
+        // GB-301: the sniper's shot cadence waits for the bolt (J18).
+        if (currentWeapon === 'sniper') {
+          const _bs = weaponMeshes.sniper && weaponMeshes.sniper.userData.boltCycle;
+          if (_bs && _bs.active) return;
+        }
+        if (currentWeapon !== 'revolver' || !fireHeld || ammo <= 0) revolverPullT = -1;   // J118: let go before the break, no shot
+        if (ammo <= 0) {
+          if (fireHeld && edge) AudioSys.emptyClick();
+          return;
+        }
+        if (!fireHeld) return;
+        let canShoot = weaponIsAuto(currentWeapon) ? (fireCooldown <= 0) : (edge && fireCooldown <= 0);
+        if (currentWeapon === 'revolver') {   // J118: the pull starts on the click (or, held, when the gun is ready again); the shot at the break
+          if (revolverPullT < 0) { if (fireCooldown > 0) return; revolverPullT = dt; } else revolverPullT += dt;   // the click's frame counts
+          if (revolverPullT < REVOLVER_PULL) return;
+          revolverPullT = -1; revolverPullShots++; canShoot = true;
+        }
+        if (canShoot) {
+          if(rangeFeature&&!rangeFeature.canAttack(currentWeapon))return;
+          if (isMagazineWeapon(currentWeapon)) {
+            const hand = chooseMagazineHand(magazineStore, currentWeapon, akimboHand, akimboOn());
+            if (hand < 0) return;
+            akimboHand = hand;
+          }
+          // Two guns alternate, so the pair puts rounds out twice as fast.
+          fireCooldown = akimboOn() ? shotInterval(currentWeapon) * 0.5 : shotInterval(currentWeapon);
+          if (!streakSavesRound()) {
+            if (isMagazineWeapon(currentWeapon)) { useMagazineRound(magazineStore, currentWeapon, akimboHand); syncMagazine(currentWeapon); }
+            else ammoByWeapon[currentWeapon] -= 1;
+          }
+          beginWeaponShot();
+          skillState().fired = true;   // GB-101: a shot since the last reload
+          heardShot(currentWeapon);   // GB-105: the hearing rule
+          if (st.explosive) {
+            fireLauncherShell();
+            // Launcher keeps brass in the drum until reload eject - no per-shot casing
+          } else if (st.pellets) {
+            const n = st.pellets;
+            curShotId = ++shotSeq;   // GB-65 (P-6): one pull, one hit
+            for (let i = 0; i < n; i++) {
+              spawnProjectile(false, null, aimDirWithSpread(st.spread || 0.14), st.damage * suppressedDamageMul(currentWeapon), projectileLifeFor(st), null, st.speed, 'pellet');
+              tagPlayerHit(currentWeapon, shellHitBase(currentWeapon, st), n);   // CB-248
+            }
+            curShotId = 0;
+            if (currentWeapon === 'shotgun') shotgunChamber.type = ammoLoaded.shotgun;   // CB-294: the hull the pump throws is this type's
+            // Pump shotgun: red hull ejects on pump-back - no gold brass here.
+            // The AA-12 has no pump to work, so it throws its hull on the shot.
+            if (currentWeapon === 'aa12') { spawnCasing('aa12'); if (weaponMeshes.aa12) weaponMeshes.aa12.userData.strokeT = 0; }   // CL-322: the constant-recoil stroke (updateAa12Stroke)
+          } else {
+            // One-handed and unsupported: the pair throws a noticeably wider group.
+            const spr = akimboOn() ? (st.spread || 0) * 2.0 + 0.028 : (st.spread || 0);
+            spawnProjectile(false, null, aimDirWithSpread(spr), st.damage * suppressedDamageMul(currentWeapon), projectileLifeFor(st), null, st.speed, 'bullet', st.pierce || 0);
+            tagPlayerHit(currentWeapon, st.damage, 1);
+            // Revolver keeps brass in the cylinder until reload eject
+            if (currentWeapon !== 'revolver') spawnCasing(currentWeapon);
+          }
+          if (currentWeapon === 'revolver') {
+            revolverSpent = Math.min(magSize('revolver'), revolverSpent + 1);
+          }
+          if (currentWeapon === 'launcher') {
+            launcherSpent = Math.min(6, (launcherSpent | 0) + 1);   // GB-133: one case per shot
+          }
+          triggerMuzzleFlash();
+          // The magazine choice above can skip an empty hand. Charge the gun that actually fired.
+          if (barrelHeat) barrelHeat.addShot(currentWeapon, !!suppressor[currentWeapon], 1, akimboOn() ? akimboHand : 0);
+          if (akimboOn()) akimboHand ^= 1;
+          AudioSys.fireWeapon(currentWeapon, { suppressed: !!suppressor[currentWeapon], hand: akimboOn() ? akimboHand : -1 });   // CL-134: the can, and a pair each to its side
+          if (currentWeapon === 'pistol') kickPistolRecoil();
+          if (currentWeapon === 'sniper') kickSniperRecoil();
+          if (currentWeapon === 'uzi') kickUziRecoil();
+          if (currentWeapon === 'm4' || currentWeapon === 'ak') kickM4Recoil();
+          if (currentWeapon === 'aa12') kickShotgunRecoil();
+          if (currentWeapon === 'revolver') kickRevolverRecoil();
+          if (currentWeapon === 'launcher') kickLauncherRecoil();
+          if (currentWeapon === 'shotgun') {
+            kickShotgunRecoil();
+            startShotgunPump();
+          }
+          updateAmmoHud();
+        }
+      }
+    }
+
+    // GB-134 (Jerry's playthrough 1): hold G and an arc grows from a short lob (a tap) to the longest throw at 3 s;
+    // letting go throws it. The arc is the flight updateGrenades will fly (game/arcs.js), to where the ground first
+    // takes it, so a rise in the terrain cuts it short there. A thrown grenade only meets the ground in flight, so
+    // that is all its arc checks. The 40 mm launcher draws none: the round flies the cursor (Jerry, 2026-10-09).
+    let grenadeCharging = false, grenadeChargeT = 0, lastGrenadeThrow = null;
+    const ARC_DOTS = 18, ARC_COL = { '': [0xffd24a, 0xff7a3a], clear: [0x7cf09a, 0x4ade80] };
